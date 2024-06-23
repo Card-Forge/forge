@@ -223,6 +223,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesSaddledThisTurn = 0;
     private CardCollection saddledByThisTurn;
 
+    private boolean visitedThisTurn = false;
+
     private int classLevel = 1;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
@@ -6613,6 +6615,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         crewedByThisTurn = crew;
     }
 
+    public final void visitAttraction(Player visitor) {
+        this.visitedThisTurn = true;
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+        runParams.put(AbilityKey.Player, visitor);
+        game.getTriggerHandler().runTrigger(TriggerType.VisitAttraction, runParams, false);
+    }
+    public final boolean wasVisitedThisTurn() {
+        return this.visitedThisTurn;
+    }
+
     public final int getClassLevel() {
         return classLevel;
     }
@@ -7123,6 +7136,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetExertedThisTurn();
         resetCrewed();
         resetSaddled();
+        visitedThisTurn = false;
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

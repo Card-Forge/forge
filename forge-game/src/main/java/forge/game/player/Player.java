@@ -165,8 +165,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollection currentPlanes = new CardCollection();
     private CardCollection planeswalkedToThisTurn = new CardCollection();
 
-    private int attractionsVisitedThisTurn = 0; //TODO: Is "number of attractions you visited this turn" supposed to mean unique ones or just total visits?
-
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
 
@@ -1954,12 +1952,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> getPlaneswalkedToThisTurn() {
         return planeswalkedToThisTurn;
     }
-    public final void incrementAttractionsVisitedThisTurn() {
-        this.attractionsVisitedThisTurn++;
-    }
-    public final int getAttractionsVisitedThisTurn() {
-        return attractionsVisitedThisTurn;
-    }
 
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
@@ -2542,8 +2534,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
-
-        attractionsVisitedThisTurn = 0;
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
@@ -3841,14 +3831,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void visitAttractions(int light) {
         CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
-        if(attractions.isEmpty())
-            return;
         for (Card c : attractions) {
-            incrementAttractionsVisitedThisTurn();
-
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
-            runParams.put(AbilityKey.Card, c);
-            game.getTriggerHandler().runTrigger(TriggerType.VisitAttraction, runParams, false);
+            c.visitAttraction(this);
         }
     }
     public void rollToVisitAttractions() {
