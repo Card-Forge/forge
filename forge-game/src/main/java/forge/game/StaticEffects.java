@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,25 +38,13 @@ public class StaticEffects {
 
     // **************** StaticAbility system **************************
     private final Map<StaticAbility, StaticEffect> staticEffects = Maps.newHashMap();
-    //Global rule changes
-    private final Set<GlobalRuleChange> ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
 
     public final void clearStaticEffects(final Set<Card> affectedCards) {
-        ruleChanges.clear();
-
         // remove all static effects
         for (final StaticEffect se : staticEffects.values()) {
             Iterables.addAll(affectedCards, se.remove());
         }
         this.staticEffects.clear();
-    }
-
-    public void setGlobalRuleChange(final GlobalRuleChange change) {
-        this.ruleChanges.add(change);
-    }
-
-    public boolean getGlobalRuleChange(final GlobalRuleChange change) {
-        return this.ruleChanges.contains(change);
     }
 
     /**

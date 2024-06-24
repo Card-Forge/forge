@@ -175,6 +175,10 @@ public class PlayerProperty {
             if (!source.getDamageHistory().hasAttackedThisTurn(player)) {
                 return false;
             }
+        } else if (property.equals("Attacking")) {
+            if (game.getCombat() == null || !player.equals(game.getCombat().getAttackingPlayer())) {
+                return false;
+            }
         } else if (property.equals("Defending")) {
             if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
