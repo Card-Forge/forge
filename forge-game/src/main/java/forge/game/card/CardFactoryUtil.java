@@ -2721,6 +2721,13 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Blitz);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
+        } else if (keyword.equals("Cipher")) {
+            String dbStr = "DB$ Encode";
+
+            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
+            final SpellAbility origSA = card.getFirstSpellAbility();
+
+            origSA.appendSubAbility(newSA);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
             final int level = Integer.valueOf(k[1]);
