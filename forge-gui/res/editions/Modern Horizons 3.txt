@@ -3,6 +3,12 @@ Code=MH3
 Date=2024-06-07
 Name=Modern Horizons 3
 Type=Draft
+Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet("MH3 new to modern"), 1 Land, 1 Any, 1 Any+
+# This isn't the right ratios yet. But it's a start
+ChanceReplaceCommonWith=.0156F fromsheet("MH3 special guests")
+BoosterBox=36
+BoosterCovers=3
+ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
 
 [cards]
@@ -535,6 +541,62 @@ ScryfallCode=MH3
 [promo]
 495 R Powerbalance @Liiga Smilshkalne
 496 R Flusterstorm @Andrew Mar
+
+[new to modern]
+1 Angel of the Ruins|MH3
+1 Decree of Justice|MH3
+1 Distinguished Conjurer|MH3
+1 Orim's Chant|MH3
+1 Recruiter of the Guard|MH3
+1 Sevinne's Reclamation|MH3
+1 Deep Analysis|MH3
+1 Estrid's Invocation|MH3
+1 Kappa Cannoneer|MH3
+1 Reef Worm|MH3
+1 Shrieking Drake|MH3
+1 Buried Alive|MH3
+1 K'rrik, Son of Yawgmoth|MH3
+1 Nadier's Nightblade|MH3
+1 Ophiomancer|MH3
+1 Toxic Deluge|MH3
+1 Victimize|MH3
+1 Cursed Mirror|MH3
+1 Fledgling Dragon|MH3
+1 Laelia, the Blade Reforged|MH3
+1 Meltdown|MH3
+1 Meteoric Mace|MH3
+1 Annoyed Altisaur|MH3
+1 Branching Evolution|MH3
+1 Priest of Titania|MH3
+1 Sylvan Safekeeper|MH3
+1 Wirewood Symbiote|MH3
+1 Breya, Etherium Shaper|MH3
+1 Kaalia of the Vast|MH3
+1 Emerald Medallion|MH3
+1 Jet Medallion|MH3
+1 Junk Diver|MH3
+1 Pearl Medallion|MH3
+1 Ruby Medallion|MH3
+1 Sapphire Medallion|MH3
+1 Urza's Incubator|MH3
+1 Worn Powerstone|MH3
+1 Barbarian Ring|MH3
+1 Cephalid Coliseum|MH3
+1 Deserted Temple|MH3
+1 Nesting Grounds|MH3
+1 Phyrexian Tower|MH3
+
+[special guests]
+1 Thought-Knot Seer|SPG
+1 Prismatic Ending|SPG
+1 Dismember|SPG
+1 Persist|SPG
+1 Expressive Iteration|SPG
+1 Solitude|SPG
+1 Subtlety|SPG
+1 Grief|SPG
+1 Fury|SPG
+1 Endurance|SPG
 
 [tokens]
 b_0_0_phyrexian_germ

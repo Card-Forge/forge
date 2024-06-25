@@ -1,4 +1,5 @@
 Name:Evie Frye
+ManaCost:1 B
 Types:Legendary Creature Human Assassin
 PT:2/1
 K:Partner:Jacob Frye

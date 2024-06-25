@@ -1,4 +1,5 @@
 Name:Desmond Miles
+ManaCost:1 B
 Types:Legendary Creature Human Assassin
 PT:1/3
 K:Menace
