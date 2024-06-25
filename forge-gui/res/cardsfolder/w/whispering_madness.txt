@@ -7,8 +7,7 @@ SVar:MadnessDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | Re
 SVar:MadnessSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ MadnessCleanUp
 SVar:MadnessCleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:MadnessDraw:DB$ Draw | Defined$ Player | NumCards$ MaxDiscard | SubAbility$ MadnessReset
-SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0 | SubAbility$ Cipher
-SVar:Cipher:DB$ Encode | Defined$ Self
+SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0
 SVar:NumDiscard:Count$RememberedSize/Minus.1
 SVar:MaxDiscard:Number$0
 AI:RemoveDeck:All

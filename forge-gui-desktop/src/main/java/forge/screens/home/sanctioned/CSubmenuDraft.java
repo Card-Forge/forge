@@ -174,7 +174,7 @@ public enum CSubmenuDraft implements ICDoc {
                 throw new IllegalStateException("Draft: Computer deck is null!");
             }
 
-            aiMap.put(aiIndex, aiDeck);
+            aiMap.put(aiIndex + 1, aiDeck);
         } else {
             final int numOpponents = Integer.parseInt(duelType);
 
