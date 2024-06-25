@@ -1981,7 +1981,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Prize")) {
             final String[] k = keyword.split(":");
 
-            SpellAbility sa = AbilityFactory.getAbility(card, k[1]); //Is this the right thing?
+            SpellAbility sa = AbilityFactory.getAbility(card, k[1]);
             String descStr = "Prize — " + sa.getDescription();
 
             final String trigStr = "Mode$ ClaimPrize | Static$ True | TriggerZones$ Battlefield | ValidCard$ Card.Self" +

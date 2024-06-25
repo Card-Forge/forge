@@ -107,7 +107,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * ItemManager Constructor.
      * 
      * @param genericType0 the class of item that this table will contain
-     * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
@@ -754,7 +753,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     /**
-     * Programmatically method to set this ItemManager's advanced search filter value.
+     * Programmatic method to set this ItemManager's advanced search filter value.
      * Other filters will be cleared.
      */
     public void applyAdvancedSearchFilter(String[] filterStrings, boolean joinAnd) {
