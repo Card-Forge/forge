@@ -7,10 +7,10 @@ T:Mode$ Attacks | ValidCard$ Card.Self | CheckSVar$ X | TriggerZones$ Battlefiel
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Assassin
 T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ RememberCrew | Static$ True
-SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberPumped$ True
+SVar:RememberCrew:DB$ PumpAll | ValidCards$ Assassin.TriggeredCrew | RememberPumped$ True
 T:Mode$ Phase | Phase$ End of Turn | Static$ True | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Card.Assassin
+SVar:X:Remembered$Amount
 K:Crew:1
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Assassin
