@@ -1,0 +1,9 @@
+Name:Templar Knight
+ManaCost:1 W
+Types:Creature Human Knight
+PT:3/1
+K:Vigilance
+K:A deck can have any number of cards named CARDNAME.
+A:AB$ ChangeZone | Cost$ W tapXType<5/Creature.attacking+namedTemplar Knight/attacking creatures named Templar Knight> | StackDescription$ SpellDescription | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.Legendary+YouOwn | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary artifact card, put it onto the battlefield, then shuffle.
+DeckHints:Type$Artifact & Type$Legendary
+Oracle:Vigilance\n{W}, Tap five untapped attacking creatures you control named Templar Knight: Search your library for a legendary artifact card, put it onto the battlefield, then shuffle.\nA deck can have any number of cards named Templar Knight.
