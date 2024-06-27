@@ -4,7 +4,7 @@ Types:Legendary Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all creature cards from your graveyard.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBChooseCard
 A:AB$ Dig | Cost$ T | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Exile the top three cards of your library.
-A:AB$ ChooseCard | Cost$ 4 T | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | SorcerySpeed$ True | SubAbility$ DBChangeZone | SpellDescription$ Put a creature card exiled with Yggdrasil onto the battlefield under your control. It gains haste until end of turn. Activate only as a sorcery.
+A:AB$ ChooseCard | Cost$ 4 T | Choices$ Creature.ExiledWithSource | ChoiceZone$ Exile | SorcerySpeed$ True | SubAbility$ DBChangeZone | SpellDescription$ Put a creature card exiled with NICKNAME onto the battlefield under your control. It gains haste until end of turn. Activate only as a sorcery.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBPump | SubAbility$ DBCleanMinus
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste
 SVar:DBCleanMinus:DB$ Cleanup | ClearChosenCard$ True
