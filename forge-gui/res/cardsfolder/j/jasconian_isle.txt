@@ -1,5 +1,6 @@
 Name:Jasconian Isle
 ManaCost:no cost
+Colors:blue
 Types:Land Creature Island Fish
 PT:3/4
 K:CARDNAME enters the battlefield tapped.

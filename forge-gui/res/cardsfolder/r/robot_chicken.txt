@@ -1,6 +1,7 @@
 Name:Robot Chicken
 ManaCost:4
-Types:Artifact Creature Chicken Construct
+Types:Artifact Creature Bird Construct
+# Departure from Oracle justified by https://magic.wizards.com/en/news/announcements/oracle-changes-2020-04-10, deeming it more fun that older funny Chicken cards have the Bird creature type instead.
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, put a 0/1 colorless Egg artifact creature token onto the battlefield.
 SVar:TrigToken:DB$ Token | TokenScript$ c_0_1_a_egg
