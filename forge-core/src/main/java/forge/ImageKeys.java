@@ -66,7 +66,7 @@ public final class ImageKeys {
 
     // image file extensions for various formats in order of likelihood
     // the last, empty, string is for keys that come in with an extension already in place
-    private static final String[] FILE_EXTENSIONS = { ".jpg", ".png", "webp", "" };
+    private static final String[] FILE_EXTENSIONS = { ".jpg", ".png", ".webp", "" };
 
     public static String getTokenKey(String tokenName) {
         return ImageKeys.TOKEN_PREFIX + tokenName;
