@@ -16,4 +16,3 @@ ScryfallCode=FDN
 405 R Anthem of Champions @Ryan Pancoast
 462 R Nine-Lives Familiar @Bram Sels
 477 R Anthem of Champions @Chris Rallis
-.

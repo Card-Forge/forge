@@ -35,4 +35,3 @@ ScryfallCode=DSK
 405 M Overlord of the Hauntwoods @Aogachou
 406 M The Wandering Rescuer @Vance Kelly
 417 R Twitching Doll @John Tedrick
-.
