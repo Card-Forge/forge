@@ -1416,7 +1416,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
-                List<DeckType> deckTypes = Arrays.asList(
+                List<DeckType> deckTypes = Lists.newArrayList(
                         DeckType.CUSTOM_DECK,
                         DeckType.PRECONSTRUCTED_DECK,
                         DeckType.QUEST_OPPONENT_DECK,
