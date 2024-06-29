@@ -3,12 +3,14 @@ package forge.gamemodes.limited;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.card.CardEdition;
 import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -24,6 +26,9 @@ public class LimitedPlayer {
     protected Queue<DraftPack> packQueue;
     protected Queue<DraftPack> unopenedPacks;
     protected List<PaperCard> removedFromCardPool = new ArrayList<>();
+
+    protected List<Integer> archdemonFavors;
+    protected int dealBrokers = 0;
 
     private static final int AgentAcquisitionsCanDraftAll = 1;
     private static final int AgentAcquisitionsIsDraftingAll = 1 << 1;
@@ -41,6 +46,8 @@ public class LimitedPlayer {
     private static final int LeovoldsOperativeExtraDraft = 1 << 13;
     private static final int LeovoldsOperativeSkipNext = 1 << 14;
     private static final int SpyNextCardDrafted = 1 << 15;
+    private static final int CanalDredgerLastPick = 1 << 16;
+    private static final int ArchdemonOfPalianoCurse = 1 << 17;
 
     private int playerFlags = 0;
 
@@ -57,6 +64,7 @@ public class LimitedPlayer {
 
         packQueue = new LinkedList<>();
         unopenedPacks = new LinkedList<>();
+        archdemonFavors = new ArrayList<>();
         this.draft = draft;
     }
 
@@ -87,8 +95,6 @@ public class LimitedPlayer {
 
     public PaperCard chooseCard() {
         // A non-AI LimitedPlayer chooses cards via the UI instead of this function
-        // TODO Archdemon of Paliano random draft while active
-
         return null;
     }
 
@@ -295,8 +301,6 @@ public class LimitedPlayer {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
                     playerFlags |= SpyNextCardDrafted;
                 } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
-                    // Note who passed it to you.
-                    // If you receive last card from Canal Dredger, we need to figure out who last had the pack?
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
                     addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
@@ -304,6 +308,8 @@ public class LimitedPlayer {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
+                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it’s drafted this draft round.)")) {
+                    addSingleBoosterPack();
                 }
 
                 addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
@@ -337,11 +343,15 @@ public class LimitedPlayer {
                 playerFlags |= LeovoldsOperativeExtraDraft;
             } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
+            } else if (Iterables.contains(draftActions, "Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.")) {
+                playerFlags |= CanalDredgerLastPick;
+            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
+                playerFlags |= ArchdemonOfPalianoCurse;
+                archdemonFavors.add(3);
+            } else if (Iterables.contains(draftActions, "Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.")) {
+                dealBrokers++;
             }
         }
-
-        // TODO Lore Seeker
-        // This adds a pack and MIGHT screw up all of our assumptions about pack passing. Do this last probably
 
         return true;
     }
@@ -354,7 +364,12 @@ public class LimitedPlayer {
     }
 
     public DraftPack nextChoice() {
-        return packQueue.peek();
+        DraftPack pack = packQueue.peek();
+        if (pack != null) {
+            adjustPackNumber(pack);
+        }
+
+        return pack;
     }
 
     public void newPack() {
@@ -363,9 +378,9 @@ public class LimitedPlayer {
         packQueue.add(unopenedPacks.poll());
         playerFlags &= ~AgentAcquisitionsSkipDraftRound;
     }
-    public void adjustPackNumber(int adjust, int numPacks) {
-        // I shouldn't need this since DraftPack has this info
-        currentPack = (currentPack + adjust + numPacks) % numPacks;
+
+    public void adjustPackNumber(DraftPack pack) {
+        currentPack = pack.getId();
     }
 
     public DraftPack passPack() {
@@ -384,6 +399,10 @@ public class LimitedPlayer {
         }
 
         return skipping;
+    }
+
+    public boolean hasCanalDredger() {
+        return (playerFlags & CanalDredgerLastPick) != CanalDredgerLastPick;
     }
 
     public void receiveUnopenedPack(DraftPack pack) {
@@ -669,11 +688,110 @@ public class LimitedPlayer {
         pack.resetAwaitingGuess();
     }
 
-
-    /*
-    public void addSingleBoosterPack(boolean random) {
-        // TODO Lore Seeker
-        // Generate booster pack then, insert it "before" the pack we're currently drafting from
+    public boolean hasArchdemonCurse() {
+        return (playerFlags & ArchdemonOfPalianoCurse) == ArchdemonOfPalianoCurse;
     }
-    */
+
+    public boolean hasBrokers() {
+        return dealBrokers > 0;
+    }
+
+    public void reduceArchdemonOfPalianoCurse() {
+        if (hasArchdemonCurse()) {
+            archdemonFavors.replaceAll(integer -> integer - 1);
+            archdemonFavors.removeIf(integer -> integer <= 0);
+            if (archdemonFavors.isEmpty()) {
+                playerFlags &= ~ArchdemonOfPalianoCurse;
+            }
+        }
+    }
+
+    public PaperCard pickFromArchdemonCurse(DraftPack chooseFrom) {
+        Collections.shuffle(chooseFrom);
+        reduceArchdemonOfPalianoCurse();
+        return chooseFrom.get(0);
+    }
+
+    public void addSingleBoosterPack() {
+        // if this is just a normal draft, allow picking a pack from any set
+        // If this is adventure or quest or whatever then we should limit it to something
+        List<CardEdition> possibleEditions = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getEditions(), CardEdition.Predicates.CAN_MAKE_BOOSTER));
+        CardEdition edition = chooseEdition(possibleEditions);
+        if (edition == null) {
+            addLog(name() + " chose not to add a booster pack to the draft.");
+            return;
+        }
+
+        packQueue.add(draft.addBooster(edition));
+        addLog(name() + " added " + edition.getName() + " to be drafted this round");
+    }
+
+    protected CardEdition chooseEdition(List<CardEdition> possibleEditions) {
+        return SGuiChoose.oneOrNone("Choose a booster pack to add to the draft", possibleEditions);
+    }
+
+    public void activateBrokers(List<LimitedPlayer> players) {
+        while(dealBrokers > 0) {
+            dealBrokers--;
+            addLog(name() + " activated Deal Broker.");
+
+            PaperCard exchangeCard = chooseExchangeCard(null);
+            Map<PaperCard, LimitedPlayer> offers = new HashMap<>();
+            for(LimitedPlayer player : players) {
+                if (player == this) {
+                    continue;
+                }
+
+                PaperCard offer = player.chooseExchangeCard(exchangeCard);
+                if (offer == null) {
+                    continue;
+                }
+
+                addLog(player.name() + " offered " + offer.getName() + " to " + name() + " for " + exchangeCard.getName());
+                offers.put(offer, player);
+            }
+
+            PaperCard exchangeOffer = chooseCardToExchange(exchangeCard, offers);
+            if (exchangeOffer == null) {
+                addLog(name() + " chose not to accept any offers.");
+                continue;
+            }
+            exchangeAcceptedOffer(exchangeCard, offers.get(exchangeOffer), exchangeOffer);
+        }
+    }
+
+    protected PaperCard chooseExchangeCard(PaperCard offer) {
+        // Choose a card in your deck to trade for offer
+        List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
+
+        if (offer == null) {
+            return SGuiChoose.oneOrNone("Choose a card to offer for trade: ", deckCards);
+        }
+
+        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getName() + ": ", deckCards);
+    }
+
+    protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
+        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet());
+    }
+
+    protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {
+        addLog(name() + " accepted the offer of " + exchangeCard + " for " + offer + " from " + player.name() + ".");
+
+        player.getDeck().removeCardName(offer.getName());
+        player.getDeck().get(DeckSection.Sideboard).add(exchangeCard);
+        deck.removeCardName(exchangeCard.getName());
+        deck.get(DeckSection.Sideboard).add(offer);
+
+        // Exchange noted information
+        player.getDraftNotes().getOrDefault(offer.getName(), Lists.newArrayList()).forEach(note -> {
+            List<String> noteList = noted.computeIfAbsent(offer.getName(), k -> Lists.newArrayList());
+            noteList.add(note);
+        });
+
+        this.getDraftNotes().getOrDefault(exchangeCard.getName(), Lists.newArrayList()).forEach(note -> {
+            List<String> noteList = player.getDraftNotes().computeIfAbsent(exchangeCard.getName(), k -> Lists.newArrayList());
+            noteList.add(note);
+        });
+    }
 }

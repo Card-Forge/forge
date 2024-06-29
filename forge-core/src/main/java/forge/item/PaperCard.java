@@ -193,6 +193,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
     }
 
+    public static PaperCard FAKE_CARD = new PaperCard(CardRules.getUnsupportedCardNamed("Fake Card"), "Fake Edition", CardRarity.Common);
+
     // Want this class to be a key for HashTable
     @Override
     public boolean equals(final Object obj) {
