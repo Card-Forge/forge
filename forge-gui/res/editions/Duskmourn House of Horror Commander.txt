@@ -1,0 +1,10 @@
+[metadata]
+Code=DSC
+Date=2024-09-27
+Name=Duskmourn: House of Horror Commander
+Type=Commander
+ScryfallCode=DSC
+
+[cards]
+338 C I Will Savor Your Agony @Michael Walsh
+357 C Time Bends to My Will @Eli Minaya
