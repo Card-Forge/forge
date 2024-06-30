@@ -340,6 +340,8 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+
+    REV("REV", 255, 108, 111),
     
     RIBBON("RIBBON", 233, 245, 232),
 
