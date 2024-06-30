@@ -1,0 +1,11 @@
+Name:Fear of Missing Out
+ManaCost:1 R
+Types:Enchantment Creature Nightmare
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard a card, then draw a card.
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstAttack$ True | Delirium$ True | TriggerDescription$ Delirium — Whenever CARDNAME attacks for the first time each turn, if there are four or more card types among cards in your graveyard, untap target creature. After this phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+Oracle:When Fear of Missing Out enters, discard a card, then draw a card.\nDelirium — Whenever Fear of Missing Out attacks for the first time each turn, if there are four or more card types among cards in your graveyard, untap target creature. After this phase, there is an additional combat phase.

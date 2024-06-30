@@ -1,0 +1,12 @@
+Name:Cursed Recording
+ManaCost:2 R R
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a time counter on CARDNAME. Then if there are seven or more time counters on it, remove those counters and it deals 20 damage to you.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Count$CardCounters.TIME | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ DBRemoveCounter
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ TIME | CounterNum$ All | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 20 | Defined$ You
+A:AB$ DelayedTrigger | Cost$ T | AILogic$ SpellCopy | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ThisTurn$ True | Execute$ EffTrigCopy | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:BuffedBy:Instant,Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, put a time counter on Cursed Recording. Then if there are seven or more time counters on it, remove those counters and it deals 20 damage to you.\n{T}: When you next cast an instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
