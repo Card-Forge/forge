@@ -1,12 +1,11 @@
 package forge.game.zone;
 
+import com.google.common.base.Function;
+import forge.util.Localizer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.base.Function;
-
-import forge.util.Localizer;
 
 /**
  * The Enum Zone.
@@ -26,6 +25,8 @@ public enum ZoneType {
     SchemeDeck(true, "lblSchemeDeckZone"),
     PlanarDeck(true, "lblPlanarDeckZone"),
     Subgame(true, "lblSubgameZone"),
+    // ExtraHand is used for Backup Plan for temporary extra hands
+    ExtraHand(true, "lblHandZone"),
     None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);

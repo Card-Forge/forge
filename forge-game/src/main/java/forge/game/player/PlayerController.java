@@ -1,20 +1,9 @@
 package forge.game.player;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.Lists;
-import forge.game.*;
-import forge.game.mana.ManaCostBeingPaid;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-
 import forge.LobbyPlayer;
 import forge.card.ColorSet;
 import forge.card.ICardFace;
@@ -22,12 +11,9 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.game.*;
 import forge.game.GameOutcome.AnteResult;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardView;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
@@ -35,18 +21,23 @@ import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.ITriggerEvent;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A prototype for player controller class
@@ -192,6 +183,7 @@ public abstract class PlayerController {
     public abstract CardCollectionView chooseCardsToDelve(int genericAmount, CardCollection grave);
     public abstract CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid);
     public abstract List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand);
+    public abstract PlayerZone chooseStartingHand(List<PlayerZone> zones);
     public abstract Mana chooseManaFromPool(List<Mana> manaChoices);
 
     public abstract String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional);

@@ -156,6 +156,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
+    private List<PlayerZone> extraZones = null;
+
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
     private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
@@ -1198,9 +1200,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView drawCards(final int n) {
-        return drawCards(n, null, AbilityKey.newMap());
+        return drawCards(n, null, AbilityKey.newMap(), this.getZone(ZoneType.Hand));
     }
+
+    public final CardCollectionView drawCards(final int n, PlayerZone zone) {
+        return drawCards(n, null, AbilityKey.newMap(), zone);
+    }
+
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return drawCards(n, cause, params, this.getZone(ZoneType.Hand));
+    }
+
+    public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params, PlayerZone zone) {
         final CardCollection drawn = new CardCollection();
         if (n <= 0) {
             return drawn;
@@ -1225,7 +1236,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (gameStarted && !canDraw()) {
                 return drawn;
             }
-            drawn.addAll(doDraw(toReveal, cause, params));
+            drawn.addAll(doDraw(toReveal, cause, params, zone));
         }
 
         // reveal multiple drawn cards when playing with the top of the library revealed
@@ -1240,7 +1251,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * @return a CardCollectionView of cards actually drawn
      */
-    private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params) {
+    private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
         final CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
@@ -1275,7 +1286,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c, cause, params);
+            c = game.getAction().moveTo(hand, c, cause, params);
             drawn.add(c);
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
@@ -1340,6 +1351,15 @@ public class Player extends GameEntity implements Comparable<Player> {
             updateZoneForView(zone);
         }
     }
+
+    public final List<PlayerZone> getExtraZones() {
+        return extraZones;
+    }
+
+    public void resetExtraZones(ZoneType type) {
+        extraZones.removeIf(z -> z.getZoneType().equals(type));
+    }
+
 
     public final CardCollectionView getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
@@ -2964,6 +2984,15 @@ public class Player extends GameEntity implements Comparable<Player> {
                     continue;
                 }
             }
+
+            if (Objects.equals(conspire.getName(), "Backup Plan")) {
+                PlayerZone hand = new PlayerZone(ZoneType.ExtraHand, this);
+                if (this.extraZones == null) {
+                    this.extraZones = new ArrayList<>();
+                }
+                this.extraZones.add(hand);
+            }
+
             com.add(conspire);
         }
 

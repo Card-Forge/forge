@@ -224,7 +224,7 @@ ScryfallCode=CNS
 1 Advantageous Proclamation|CNS
 1 Aether Searcher|CNS
 1 Agent of Acquisitions|CNS
-#1 Backup Plan|CNS
+1 Backup Plan|CNS
 1 Brago's Favor|CNS
 #1 Canal Dredger|CNS
 1 Cogwork Grinder|CNS

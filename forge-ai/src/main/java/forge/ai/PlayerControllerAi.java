@@ -36,6 +36,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -851,6 +852,22 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         return brains.chooseSaToActivateFromOpeningHand(usableFromOpeningHand);
+    }
+
+    @Override
+    public PlayerZone chooseStartingHand(List<PlayerZone> zones) {
+        // Rate all the hands using the AI's hand evaluation function
+        int bestScore = Integer.MIN_VALUE;
+        PlayerZone bestZone = null;
+        for (PlayerZone zone : zones) {
+            int score = ComputerUtil.scoreHand(zone.getCards(), this.player, 0);
+            if (score > bestScore) {
+                bestScore = score;
+                bestZone = zone;
+            }
+        }
+
+        return bestZone;
     }
 
     @Override
