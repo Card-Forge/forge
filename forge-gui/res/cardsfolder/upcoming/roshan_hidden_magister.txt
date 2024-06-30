@@ -1,0 +1,10 @@
+Name:Roshan, Hidden Magister
+ManaCost:3 B
+Types:Legendary Creature Human Assassin
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+other | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ Assassin | Description$ Other creatures you control are Assassins in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+S:Mode$ Continuous | Affected$ Creature.faceDown+YouCtrl | AddKeyword$ Menace | Description$ Face-down creatures you control have menace.
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent you control is turned face up, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Other creatures you control are Assassins in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\nFace-down creatures you control have menace.\nWhenever a permanent you control is turned face up, you draw a card and you lose 1 life.

@@ -1,0 +1,10 @@
+Name:Twitching Doll
+ManaCost:1 G
+Types:Artifact Creature Spider Toy
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPutCounter | SpellDescription$ Add one mana of any color. Put a nest counter on CARDNAME.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ NEST
+A:AB$ Token | Cost$ T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ X | TokenScript$ g_2_2_spider_reach | SorcerySpeed$ True | SpellDescription$ Create a 2/2 green Spider creature token with reach for each counter on CARDNAME. Activate only as a sorcery.
+SVar:X:Count$CardCounters.ALL
+DeckHas:Ability$Token
+Oracle:{T}: Add one mana of any color. Put a nest counter on Twitching Doll.\n{T}, Sacrifice Twitching Doll: Create a 2/2 green Spider creature token with reach for each counter on Twitching Doll. Activate only as a sorcery.
