@@ -31,6 +31,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.event.*;
+import forge.game.extrahands.BackupPlanService;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
@@ -2074,7 +2075,10 @@ public class GameAction {
                     p1.drawCards(p1.getStartingHandSize());
                 }
 
-                // If pl has Backup Plan as a Conspiracy draw that many extra hands
+                BackupPlanService backupPlans = new BackupPlanService(p1);
+                if (backupPlans.initializeExtraHands()) {
+                    backupPlans.chooseHand();
+                }
             }
 
             // Choose starting hand for each player with multiple hands

@@ -205,6 +205,7 @@ public enum CSubmenuDraft implements ICDoc {
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
         human.setId(0);
+        human.assignConspiracies();
         for(Map.Entry<Integer, Deck> aiDeck : aiMap.entrySet()) {
             RegisteredPlayer aiPlayer = new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
             aiPlayer.setId(aiDeck.getKey());
