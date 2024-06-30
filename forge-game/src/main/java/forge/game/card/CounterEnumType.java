@@ -341,6 +341,8 @@ public enum CounterEnumType {
 
     REJECTION("REJECT", 212, 235, 242),
     
+    REVIVAL("REVIVL", 130, 230, 50),
+    
     RIBBON("RIBBON", 233, 245, 232),
 
     RITUAL("RITUAL", 155, 17, 30),
