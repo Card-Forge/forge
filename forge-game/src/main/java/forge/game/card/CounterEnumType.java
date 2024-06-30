@@ -287,6 +287,8 @@ public enum CounterEnumType {
 
     NET("NET", 0, 221, 251),
 
+    NEST("NEST", 80, 80, 50),
+
     OIL("OIL", 99, 102, 106),
 
     OMEN("OMEN", 255, 178, 120),
@@ -340,6 +342,8 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+
+    REV("REV", 255, 108, 111),
     
     RIBBON("RIBBON", 233, 245, 232),
 
