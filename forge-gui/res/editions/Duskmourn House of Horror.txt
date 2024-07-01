@@ -9,11 +9,14 @@ ScryfallCode=DSK
 18 R Leyline of Hope @Sergey Glushakov
 35 R Toby, Beastie Befriender @Jehan Choo
 41 M The Wandering Rescuer @Anna Pavleeva
+86 R Come Back Wrong @David Auden Nash
+94 R Doomsday Excruciator @Denys Tsiperko
 95 R Enduring Tenacity @Isis
 111 U Nowhere to Run @Jodie Muir
 128 R Chainsaw @J.P. Targete
 131 R Cursed Recording @Kim Sokol
 136 R Fear of Missing Out @John Stanko
+157 M Screaming Nemesis @Liiga Smilshkalne
 194 M Overlord of the Hauntwoods @Tiffany Turrill
 272 L Plains @Dan Mumford
 273 L Island @Dan Mumford
