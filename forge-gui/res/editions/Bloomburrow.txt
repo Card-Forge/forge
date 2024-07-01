@@ -27,6 +27,7 @@ ScryfallCode=BLB
 297 R Salvation Swan @Serena Malyon
 336 R Mabel, Heir to Cragflame @David Petersen
 342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
 351 R Mabel, Heir to Cragflame @Airi Yoshihisa
 379 M Bria, Riptide Rogue @Borja Pindado
 380 M Byrke, Long Ear of the Law @Manuel Castañón

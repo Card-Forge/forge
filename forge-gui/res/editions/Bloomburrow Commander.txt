@@ -6,3 +6,4 @@ Type=Commander
 ScryfallCode=BLC
 
 [cards]
+93 M Jace, the Mind Sculptor @TAPIOCA
