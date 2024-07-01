@@ -1358,6 +1358,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public void resetExtraZones(ZoneType type) {
         extraZones.removeIf(z -> z.getZoneType().equals(type));
+        if (extraZones.isEmpty()) {
+            extraZones = null;
+        }
     }
 
 
