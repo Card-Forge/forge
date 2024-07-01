@@ -33,6 +33,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
@@ -3835,67 +3836,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
     public void rollToVisitAttractions() {
-        //Essentially a retread of RollDiceEffect.rollDiceForPlayer, but without the parts that require a spell ability.
-        int amount = 1, sides = 6, ignore = 0;
-        Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
-
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Number, amount);
-        repParams.put(AbilityKey.Ignore, ignore);
-        repParams.put(AbilityKey.IgnoreChosen, ignoreChosenMap);
-
-        if(getGame().getReplacementHandler().run(ReplacementType.RollDice, repParams) == ReplacementResult.Updated) {
-            amount = (int) repParams.get(AbilityKey.Number);
-            ignore = (int) repParams.get(AbilityKey.Ignore);
-            //noinspection unchecked
-            ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
-        }
-        if (amount == 0)
-            return;
-        int total = 0;
-        List<Integer> naturalRolls = new ArrayList<>();
-
-        for (int i = 0; i < amount; i++) {
-            int roll = MyRandom.getRandom().nextInt(sides) + 1;
-            // Play the die roll sound
-            getGame().fireEvent(new GameEventRollDie());
-            roll();
-            naturalRolls.add(roll);
-            total += roll;
-        }
-
-        naturalRolls.sort(null);
-
-        List<Integer> ignored = new ArrayList<>();
-        // Ignore the lowest rolls
-        if (ignore > 0) {
-            for (int i = ignore - 1; i >= 0; --i) {
-                total -= naturalRolls.get(i);
-                ignored.add(naturalRolls.get(i));
-                naturalRolls.remove(i);
-            }
-        }
-        // Player chooses to ignore rolls
-        for (Player chooser : ignoreChosenMap.keySet()) {
-            for (int ig = 0; ig < ignoreChosenMap.get(chooser); ig++) {
-                Integer ign = chooser.getController().chooseRollToIgnore(naturalRolls);
-                total -= ign;
-                ignored.add(ign);
-                naturalRolls.remove(ign);
-            }
-        }
-
-        StringBuilder sb = new StringBuilder();
-        String rollResults = StringUtils.join(naturalRolls, ", ");
-        String resultMessage = "lblAttractionRollResult";
-        sb.append(Localizer.getInstance().getMessage(resultMessage, this, rollResults));
-        if (!ignored.isEmpty()) {
-            sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
-                    StringUtils.join(ignored, ", ")));
-        }
-        getGame().getAction().notifyOfValue(null, this, sb.toString(), null);
-
-        this.visitAttractions(total);
+        this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
     }
 
     public void addDeclaresAttackers(long ts, Player p) {
