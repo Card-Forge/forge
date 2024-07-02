@@ -38,7 +38,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {
-                            callback.run(((PickerTab)tabPages[0]).list.getSelectedItem());
+                            callback.run(((PickerTab) tabPages.get(0)).list.getSelectedItem());
                         }
                         else {
                             callback.run(null);

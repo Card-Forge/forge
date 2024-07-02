@@ -33,6 +33,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
@@ -78,7 +79,8 @@ import java.util.Map.Entry;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.Junkyard,
+            ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -2999,6 +3001,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             com.add(conspire);
         }
 
+        // Attractions
+        PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+        for (IPaperCard cp : registeredPlayer.getAttractions()) {
+            attractionDeck.add(Card.fromPaperCard(cp, this));
+        }
+        if (!attractionDeck.isEmpty())
+            attractionDeck.shuffle();
+
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
         if (adventureItemCards != null) {
@@ -3848,6 +3858,16 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public void visitAttractions(int light) {
+        CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
+        for (Card c : attractions) {
+            c.visitAttraction(this);
+        }
+    }
+    public void rollToVisitAttractions() {
+        this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
     }
 
     public void addDeclaresAttackers(long ts, Player p) {

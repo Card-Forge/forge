@@ -60,16 +60,16 @@ public class FSideboardDialog extends FDialog {
                     new SideboardPage(sideboard),
                     new MainDeckPage(main)
             }, false);
-            ((SideboardPage)tabPages[0]).parent = this;
-            ((MainDeckPage)tabPages[1]).parent = this;
+            ((SideboardPage) tabPages.get(0)).parent = this;
+            ((MainDeckPage) tabPages.get(1)).parent = this;
         }
 
         private SideboardPage getSideboardPage() {
-            return ((SideboardPage)tabPages[0]);
+            return ((SideboardPage) tabPages.get(0));
         }
 
         private MainDeckPage getMainDeckPage() {
-            return ((MainDeckPage)tabPages[1]);
+            return ((MainDeckPage) tabPages.get(1));
         }
 
         @Override

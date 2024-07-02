@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.Forge;
 import forge.Graphics;
@@ -81,6 +82,7 @@ public class FDeckImportDialog extends FDialog {
             supportedSections.add(DeckSection.Sideboard);
             if (editorType != FDeckEditor.EditorType.Constructed)
                 supportedSections.add(DeckSection.Commander);
+            supportedSections.addAll(Lists.newArrayList(FDeckEditor.getExtraSections(editorType)));
             controller.setAllowedSections(supportedSections);
         }
 

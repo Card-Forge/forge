@@ -223,6 +223,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private int timesSaddledThisTurn = 0;
     private CardCollection saddledByThisTurn;
 
+    private boolean visitedThisTurn = false;
+
     private int classLevel = 1;
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
@@ -249,6 +251,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean isImmutable = false;
     private boolean isEmblem = false;
     private boolean isBoon = false;
+    private boolean isAttractionCard = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -262,8 +265,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Table<Long, Long, Pair<Integer,Integer>> newPTCharacterDefining = TreeBasedTable.create(); // Layer 7a
     private Table<Long, Long, Pair<Integer,Integer>> newPT = TreeBasedTable.create(); // Layer 7b
     private Table<Long, Long, Pair<Integer,Integer>> boostPT = TreeBasedTable.create(); // Layer 7c
-
-    private String oracleText = "";
 
     private final Map<Card, Integer> assignedDamageMap = Maps.newTreeMap();
     private Map<Integer, Integer> damage = Maps.newHashMap();
@@ -2504,7 +2505,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")
                         || keyword.equals("For Mirrodin") || keyword.startsWith("Craft")
-                        || keyword.startsWith("Landwalk")) {
+                        || keyword.startsWith("Landwalk") || keyword.startsWith("Visit")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Read ahead")) {
                     sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
@@ -3496,7 +3497,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCopiedPermanent(final Card c) {
         if (copiedPermanent == c) { return; }
         copiedPermanent = c;
-        currentState.getView().updateOracleText(this);
+        if(c != null)
+            currentState.setOracleText(c.getOracleText());
+        //Could fetch the card rules oracle text in an "else" clause here,
+        //but CardRules isn't aware of the card's state. May be better to
+        //just stash the original oracle text if this comes up.
     }
 
     public final boolean isCopiedSpell() {
@@ -4234,6 +4239,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setBaseDefense(final int n) {
         currentState.setBaseDefense(Integer.toString(n));
     }
+
+    public final Set<Integer> getAttractionLights() {
+        return currentState.getAttractionLights();
+    }
+    public final void setAttractionLights(Set<Integer> attractionLights) {
+        currentState.setAttractionLights(attractionLights);
+    }
+
 
     public final int getBasePower() {
         return currentState.getBasePower();
@@ -5473,6 +5486,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean isEquipment()  { return getType().isEquipment(); }
     public final boolean isFortification()  { return getType().isFortification(); }
+    public final boolean isAttraction()     { return getType().isAttraction(); }
     public final boolean isCurse()          { return getType().hasSubtype("Curse"); }
     public final boolean isAura()           { return getType().isAura(); }
     public final boolean isShrine()           { return getType().hasSubtype("Shrine"); }
@@ -5847,6 +5861,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setBoon(final boolean isBoon0) {
         isBoon = isBoon0;
         view.updateBoon(this);
+    }
+
+    /**
+     * @return true if this is physically an Attraction card with an Astrotorium card back. False otherwise.
+     */
+    public final boolean isAttractionCard() {
+        return this.isAttractionCard;
+    }
+    public final void setAttractionCard(boolean isAttractionCard) {
+        this.isAttractionCard = isAttractionCard;
     }
 
     /*
@@ -6605,6 +6629,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         crewedByThisTurn = crew;
     }
 
+    public final void visitAttraction(Player visitor) {
+        this.visitedThisTurn = true;
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
+        runParams.put(AbilityKey.Player, visitor);
+        game.getTriggerHandler().runTrigger(TriggerType.VisitAttraction, runParams, false);
+    }
+    public final boolean wasVisitedThisTurn() {
+        return this.visitedThisTurn;
+    }
+
     public final int getClassLevel() {
         return classLevel;
     }
@@ -7115,6 +7150,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         resetExertedThisTurn();
         resetCrewed();
         resetSaddled();
+        visitedThisTurn = false;
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }
@@ -7253,7 +7289,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setRules(CardRules r) {
         cardRules = r;
         currentState.getView().updateRulesText(r, getType());
-        currentState.getView().updateOracleText(this);
     }
 
     public boolean isCommander() {
@@ -7582,15 +7617,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public String getOracleText() {
-        CardRules rules = cardRules;
-        if (copiedPermanent != null) { //return oracle text of copied permanent if applicable
-            rules = copiedPermanent.getRules();
-        }
-        return rules != null ? rules.getOracleText() : oracleText;
+        return currentState.getOracleText();
     }
-    public void setOracleText(final String oracleText0) {
-        oracleText = oracleText0;
-        currentState.getView().updateOracleText(this);
+    public void setOracleText(final String oracleText) {
+        currentState.setOracleText(oracleText);
     }
 
     @Override

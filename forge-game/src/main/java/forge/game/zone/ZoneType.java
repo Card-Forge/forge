@@ -24,6 +24,8 @@ public enum ZoneType {
     Merged(false, "lblBattlefieldZone"),
     SchemeDeck(true, "lblSchemeDeckZone"),
     PlanarDeck(true, "lblPlanarDeckZone"),
+    AttractionDeck(true, "lblAttractionDeckZone"),
+    Junkyard(false, "lblJunkyardZone"),
     Subgame(true, "lblSubgameZone"),
     // ExtraHand is used for Backup Plan for temporary extra hands
     ExtraHand(true, "lblHandZone"),

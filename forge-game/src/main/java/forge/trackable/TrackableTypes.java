@@ -559,6 +559,34 @@ public class TrackableTypes {
             }
         }
     };
+
+    public static final TrackableType<Set<Integer>> IntegerSetType = new TrackableType<Set<Integer>>() {
+        @Override
+        public Set<Integer> getDefaultValue() {
+            return null;
+        }
+
+        @Override
+        public Set<Integer> deserialize(TrackableDeserializer td, Set<Integer> oldValue) {
+            int size = td.readInt();
+            if (size > 0) {
+                Set<Integer> set = Sets.newHashSet();
+                for (int i = 0; i < size; i++) {
+                    set.add(td.readInt());
+                }
+                return set;
+            }
+            return null;
+        }
+
+        @Override
+        public void serialize(TrackableSerializer ts, Set<Integer> value) {
+            ts.write(value.size());
+            for (int i : value) {
+                ts.write(i);
+            }
+        }
+    };
     public static final TrackableType<Map<Integer, Integer>> IntegerMapType = new TrackableType<Map<Integer, Integer>>() {
         @Override
         public Map<Integer, Integer> getDefaultValue() {

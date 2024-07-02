@@ -43,8 +43,8 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
     public QuestSpellShopScreen() {
         super("", QuestMenu.getMenu(), new SpellShopBasePage[] { new SpellShopPage(), new InventoryPage() }, true);
-        spellShopPage = ((SpellShopPage)tabPages[0]);
-        inventoryPage = ((InventoryPage)tabPages[1]);
+        spellShopPage = ((SpellShopPage) tabPages.get(0));
+        inventoryPage = ((InventoryPage) tabPages.get(1));
 
         btnBuySellMultiple.setVisible(false); //hide unless in multi-select mode
         btnBuySellMultiple.setCommand(event -> {
