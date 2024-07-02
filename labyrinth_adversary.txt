@@ -1,0 +1,9 @@
+Name:Labyrinth Adversary
+ManaCost:3 R
+Types:Creature Minotaur
+PT:4/3
+K:Trample
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {1}{R}. When you do, target creature can't block this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 R | Execute$ TrigPump | TriggerDescription$ When you do, target creature can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't block.
+Oracle:Trample (This creature can deal excess combat damage to the player it's attacking.)\nWhenever you attack, you may pay {1}{R}. When you do, target creature can't block this turn.

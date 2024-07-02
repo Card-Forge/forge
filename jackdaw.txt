@@ -1,0 +1,8 @@
+Name:Jackdaw
+ManaCost:1 U R
+Types:Legendary Artifact Vehicle
+PT:4/4
+T:Mode$ DamageDone | CombatDamage$ True | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigDiscard | Whenever CARDNAME deals combat damage to a player, you may discard your hand. If you do, draw a card for each artifact you control.
+SVar:TrigDiscard:AB$ Draw | NumCards$ Count$Valid Artifact.YouCtrl | Cost$ Discard<0/Hand>
+K:Crew:3
+Oracle:Whenever Jackdaw deals combat damage to a player, you may discard your hand. If you do, draw a card for each artifact you control.\nCrew 3

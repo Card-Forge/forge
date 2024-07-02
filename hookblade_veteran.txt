@@ -1,0 +1,6 @@
+Name:Hookblade Veteran
+ManaCost:U
+Types:Creature Human Assassin
+PT:1/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has flying. (It can't be blocked except by creatures with flying or reach.)
+Oracle:As long as it's your turn, Hookblade Veteran has flying. (It can't be blocked except by creatures with flying or reach.)

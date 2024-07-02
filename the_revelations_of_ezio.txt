@@ -1,0 +1,11 @@
+Name:The Revelations of Ezio
+ManaCost:2 B
+Types:Enchantment Saga
+K:Chapter:3:DBDestroy,DBEffect,DBChangeZone
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+tapped | TgtPrompt$ Select target tapped creature an opponent controls | SpellDescription$ Destroy target tapped creature an opponent controls.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigAttack | SpellDescription$ Whenever an Assassin you control attacks this turn, put a +1/+1 counter on it.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Assassin.YouCtrl | Execute$ TrigPutCounter | TriggerDescription$ Whenever an Assassin you control attacks this turn, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 1
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target Assassin creature card in your graveyard | ValidTgts$ Creature.Assassin+YouOwn | WithCountersType$ P1P1 | SpellDescription$ Return target Assassin creature card from your graveyard to the battlefield with an additional +1/+1 counter on it.
+DeckHas:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Destroy target tapped creature an opponent controls.\nII — Whenever an Assassin you control attacks this turn, put a +1/+1 counter on it.\nIII — Return target Assassin creature card from your graveyard to the battlefield with an additional +1/+1 counter on it.
