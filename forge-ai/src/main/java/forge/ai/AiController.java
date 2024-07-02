@@ -1718,6 +1718,16 @@ public class AiController {
             hostCard = game.getCardState(hostCard);
         }
 
+        if (effect.hasParam("CommanderMoveReplacement")) {
+            // AI Logic for commander movement
+            if (affected instanceof Card && ((Card)affected).isRealCommander()) {
+                if (Objects.equals(ZoneType.Hand, ((EnumMap<?, ?>)sa.getReplacingObjects().get(AbilityKey.OriginalParams)).get(AbilityKey.Destination))) {
+                    // If the commander is being moved to your hand, don't replace
+                    return false;
+                }
+            }
+        }
+
         if (effect.hasParam("AILogic") && effect.getParam("AILogic").equalsIgnoreCase("ProtectFriendly")) {
             final Player controller = hostCard.getController();
             if (affected instanceof Player) {
@@ -1759,7 +1769,9 @@ public class AiController {
             return Expressions.compare(left, comparator, compareTo);
         } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
-        } else return sa != null && doTrigger(sa, false);
+        }
+
+        return sa != null && doTrigger(sa, false);
     }
 
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
