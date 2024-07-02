@@ -33,7 +33,7 @@ import forge.game.mana.ManaRefundService;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerView;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
@@ -70,7 +70,7 @@ public class HumanPlay {
         Card source = sa.getHostCard();
         sa.setActivatingPlayer(p);
 
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             if (sa.canPlay()) {
                 sa.resolve();
             }

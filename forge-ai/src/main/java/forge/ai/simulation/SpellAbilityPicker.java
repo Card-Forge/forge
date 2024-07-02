@@ -24,7 +24,7 @@ import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
@@ -136,7 +136,7 @@ public class SpellAbilityPicker {
 
     private static boolean isSorcerySpeed(SpellAbility sa, Player player) {
         // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             return true;
         }
         if (sa.isSpell()) {
@@ -334,7 +334,7 @@ public class SpellAbilityPicker {
             return AiPlayDecision.CantPlaySa;
         }
 
-        if (sa instanceof LandAbility) {
+        if (sa.isLandAbility()) {
             return AiPlayDecision.WillPlay;
         }
         if (!sa.canPlay()) {
