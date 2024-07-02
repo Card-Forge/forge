@@ -92,7 +92,11 @@ public class StaticData {
             if (!loadNonLegalCards) {
                 for (CardEdition e : editions) {
                     if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
+                        List<CardEdition.CardInSet> eternalCards = e.getFunnyEternalCards();
+
                         for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                            if (eternalCards.contains(cis))
+                                continue;
                             funnyCards.add(cis.name);
                         }
                     }
