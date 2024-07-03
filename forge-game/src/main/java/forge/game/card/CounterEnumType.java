@@ -276,7 +276,7 @@ public enum CounterEnumType {
     MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
-    
+
     MINING("MINNG", 184, 201, 207),
 
     MIRE("MIRE", 153, 209, 199),
