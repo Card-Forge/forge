@@ -1,20 +1,33 @@
 [metadata]
 Code=BLB
-Date=2024-07-26
+Date=2024-08-02
 Name=Bloomburrow
 Type=Expansion
 ScryfallCode=BLB
 
 [cards]
+7 C Carrot Cake @Forrest Imel
+28 R Salvation Swan @Christina Kraus
+64 C Pearl of Wisdom @Julie Dillon
+93 C Early Winter @Andrew Mar
+144 C Might of the Meek @Danny Schwartz
 183 M Lumra, Bellow of the Woods @Matt Stewart
+195 C Sunshower Druid @Tuan Duong Chu
 224 R Mabel, Heir to Cragflame @Aurore Folny
+255 U Lilypad Village @Alexander Forssberg
+256 U Lupinflower Village @Alayna Danner
+257 U Mudflat Village @Samuele Bandini
+258 U Oakhollow Village @Julian Kok Joon Wen
+259 U Rockface Village @Thomas Stoop
 274 L Mountain @Andrew Theophilopoulos
 275 L Mountain @Andrew Theophilopoulos
 276 L Mountain @Andrew Theophilopoulos
 277 L Mountain @Andrew Theophilopoulos
 293 M Lumra, Bellow of the Woods @Allen Douglas
+297 R Salvation Swan @Serena Malyon
 336 R Mabel, Heir to Cragflame @David Petersen
 342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
 351 R Mabel, Heir to Cragflame @Airi Yoshihisa
 379 M Bria, Riptide Rogue @Borja Pindado
 380 M Byrke, Long Ear of the Law @Manuel Castañón

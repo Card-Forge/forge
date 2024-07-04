@@ -1,0 +1,18 @@
+[metadata]
+Code=FDN
+Date=2024-11-15
+Name=Foundations
+Type=Collector_Edition
+ScryfallCode=FDN
+
+[cards]
+66 R Nine-Lives Familiar @Bram Sels
+116 R Anthem of Champions @Chris Rallis
+140 R Day of Judgment @Vincent Proce
+161 M Omniscience @Jason Chan
+227 C Llanowar Elves @Kev Walker
+379 M Omniscience @Dominik Mayer
+385 R Nine-Lives Familiar @Xabi Gaztelua
+405 R Anthem of Champions @Ryan Pancoast
+462 R Nine-Lives Familiar @Bram Sels
+477 R Anthem of Champions @Chris Rallis
