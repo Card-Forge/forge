@@ -583,6 +583,7 @@ public class CardView extends GameEntityView {
         case Graveyard:
         case Flashback:
         case Stack:
+        case Junkyard:
             //cards in these zones are visible to all
             return true;
         case Exile:
@@ -605,6 +606,7 @@ public class CardView extends GameEntityView {
             return true;
         case Library:
         case PlanarDeck:
+        case AttractionDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             break;
         case SchemeDeck:
@@ -806,6 +808,12 @@ public class CardView extends GameEntityView {
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        Set<Integer> attractionLights = get(TrackableProperty.AttractionLights);
+        if (attractionLights != null && !attractionLights.isEmpty()) {
+            sb.append("\r\n\r\nLights: ");
+            sb.append(StringUtils.join(attractionLights, ", "));
         }
 
         sb.append(getRemembered());
@@ -1022,6 +1030,8 @@ public class CardView extends GameEntityView {
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
         currentState.getView().setOriginalColors(c); //set original Colors
+
+        currentStateView.updateAttractionLights(currentState);
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1301,8 +1311,8 @@ public class CardView extends GameEntityView {
         public String getOracleText() {
             return get(TrackableProperty.OracleText);
         }
-        void updateOracleText(Card c) {
-            set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n\r\n").trim());
+        void setOracleText(String oracleText) {
+            set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
         }
 
         public String getRulesText() {
@@ -1430,6 +1440,13 @@ public class CardView extends GameEntityView {
                 }
             }
             updateDefense("0");
+        }
+
+        public Set<Integer> getAttractionLights() {
+            return get(TrackableProperty.AttractionLights);
+        }
+        void updateAttractionLights(CardState c) {
+            set(TrackableProperty.AttractionLights, c.getAttractionLights());
         }
 
         public String getSetCode() {
@@ -1717,6 +1734,9 @@ public class CardView extends GameEntityView {
             if (!getType().isEnchantment() || getType().getCoreTypes() == null)
                 return false;
             return Iterables.size(getType().getCoreTypes()) > 1;
+        }
+        public boolean isAttraction() {
+            return getType().isAttraction();
         }
     }
 

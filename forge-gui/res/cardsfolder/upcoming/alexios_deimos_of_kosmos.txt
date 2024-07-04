@@ -1,0 +1,13 @@
+Name:Alexios, Deimos of Kosmos
+ManaCost:3 R
+Types:Legendary Creature Human Berserker
+PT:4/4
+K:Trample
+S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.CardOwner | Description$ CARDNAME attacks each combat if able, can't be sacrificed, and can't attack its owner.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Secondary$ True | Description$ CARDNAME attacks each combat if able, can't be sacrificed, and can't attack its owner.
+S:Mode$ CantSacrifice | ValidCard$ Card.Self | Secondary$ True | Description$ CARDNAME attacks each combat if able, can't be sacrificed, and can't attack its owner.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigControl | TriggerDescription$ At the beginning of each player's upkeep, that player gains control of NICKNAME, untaps it, and puts a +1/+1 counter on it. It gains haste until end of turn.
+SVar:TrigControl:DB$ GainControl | Defined$ Self | NewController$ TriggeredPlayer | Untap$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | Placer$ TriggeredPlayer | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Haste
+Oracle:Trample\nAlexios, Deimos of Kosmos attacks each combat if able, can't be sacrificed, and can't attack its owner.\nAt the beginning of each player's upkeep, that player gains control of Alexios, untaps it, and puts a +1/+1 counter on it. It gains haste until end of turn.

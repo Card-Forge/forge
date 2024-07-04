@@ -1947,6 +1947,10 @@ public class CardProperty {
             }
         } else if (property.equals("SaddledThisTurn")) {
             if (!hasTimestampMatch(card, source.getSaddledByThisTurn())) return false;
+        } else if (property.equals("VisitedThisTurn")) {
+            if (!card.wasVisitedThisTurn()) {
+                return false;
+            }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
                 return false;

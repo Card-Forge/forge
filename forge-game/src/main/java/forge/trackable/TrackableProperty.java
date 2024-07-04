@@ -126,6 +126,7 @@ public enum TrackableProperty {
     Toughness(TrackableTypes.IntegerType),
     Loyalty(TrackableTypes.StringType),
     Defense(TrackableTypes.StringType),
+    AttractionLights(TrackableTypes.IntegerSetType),
     ChangedColorWords(TrackableTypes.StringMapType),
     HasChangedColors(TrackableTypes.BooleanType),
     ChangedTypes(TrackableTypes.StringMapType),

@@ -17,10 +17,7 @@
  */
 package forge.game.phase;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
@@ -280,11 +277,15 @@ public class PhaseHandler implements java.io.Serializable {
                             playerTurn.setSchemeInMotion(null);
                         }
                         GameEntityCounterTable table = new GameEntityCounterTable();
-                        // all Saga get Lore counter at the begin of pre combat
+                        // all Sagas get a Lore counter at the beginning of pre combat
                         for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
                             if (c.isSaga()) {
                                 c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                             }
+                        }
+                        // roll for attractions if we have any
+                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
+                            playerTurn.rollToVisitAttractions();
                         }
                         table.replaceCounterEffect(game, null, false);
                     }

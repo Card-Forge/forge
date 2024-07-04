@@ -60,7 +60,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                 FThreads.invokeInBackgroundThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (getSelectedPage() == tabPages[0]) {
+                        if (getSelectedPage() == tabPages.get(0)) {
                             int value = 0;
                             for (PaperCard card : cards) {
                                 value += ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
@@ -143,7 +143,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         String caption;
         CQPref baseValuePref;
         Collection<PaperCard> cards;
-        if (getSelectedPage() == tabPages[0]) {
+        if (getSelectedPage() == tabPages.get(0)) {
             caption = Forge.getLocalizer().getMessage("lblExile");
             baseValuePref = CQPref.AETHER_BASE_EXILE_VALUE;
             cards = getCollectionTab().list.getSelectedItems();
@@ -172,11 +172,11 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
     }
 
     private CollectionTab getCollectionTab() {
-        return (CollectionTab)tabPages[0];
+        return (CollectionTab) tabPages.get(0);
     }
 
     private CollectionTab getExileTab() {
-        return (CollectionTab)tabPages[1];
+        return (CollectionTab) tabPages.get(1);
     }
 
     @Override

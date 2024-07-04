@@ -13,7 +13,8 @@ public enum DeckSection {
     Planes(10, Validators.PLANES_VALIDATOR),
     Schemes(20, Validators.SCHEME_VALIDATOR),
     Conspiracy(0, Validators.CONSPIRACY_VALIDATOR),
-    Dungeon(0, Validators.DUNGEON_VALIDATOR);
+    Dungeon(0, Validators.DUNGEON_VALIDATOR),
+    Attractions(0, Validators.ATTRACTION_VALIDATOR);
 
     private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
     private Function<PaperCard, Boolean> fnValidator;
@@ -40,10 +41,10 @@ public enum DeckSection {
             return Avatar;
         if (DeckSection.Planes.validate(card))
             return Planes;
-        if (DeckSection.Commander.validate(card))
-            return Commander;
         if (DeckSection.Dungeon.validate(card))
             return Dungeon;
+        if (DeckSection.Attractions.validate(card))
+            return Attractions;
         return Main;  // default
     }
 
@@ -117,6 +118,11 @@ public enum DeckSection {
                 CardType t = card.getRules().getType();
                 return (t.isCreature() && t.hasSubtype("Avatar")) || t.isVanguard();
             }
+        };
+
+        static final Function<PaperCard, Boolean> ATTRACTION_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isAttraction();
         };
 
     }

@@ -43,6 +43,7 @@ public enum TriggerType {
     ChangesZone(TriggerChangesZone.class),
     ChangesZoneAll(TriggerChangesZoneAll.class),
     ChaosEnsues(TriggerChaosEnsues.class),
+    ClaimPrize(TriggerClaimPrize.class),
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
     CommitCrime(TriggerCommitCrime.class),
@@ -138,6 +139,7 @@ public enum TriggerType {
     Unattach(TriggerUnattach.class),
     UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),
+    VisitAttraction(TriggerVisitAttraction.class),
     Vote(TriggerVote.class);
 
     private final Constructor<? extends Trigger> constructor;

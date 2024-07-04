@@ -113,6 +113,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Conspiracy);
+        allSections.add(DeckSection.Attractions);
 
         this.getCbxSection().removeAllItems();
         for (DeckSection section : allSections) {
@@ -220,6 +221,10 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
             case Conspiracy:
                 this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
                 this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Conspiracy));
+                break;
+            case Attractions:
+                this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Attractions));
                 break;
             case Main:
                 this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);
