@@ -3127,7 +3127,14 @@ public class CardFactoryUtil {
                 newSA.putParam("Secondary", "True");
             }
             newSA.putParam("PrecostDesc", "Freerunning");
-            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+            StringBuilder costDesc = new StringBuilder();
+            if (!freerunningCost.isOnlyManaCost()) {
+                costDesc.append("—");
+            } else {
+                costDesc.append(" ");
+            }
+            costDesc.append(freerunningCost.toSimpleString());
+            newSA.putParam("CostDesc", costDesc.toString());
 
             // makes new SpellDescription
             final StringBuilder sb = new StringBuilder();
