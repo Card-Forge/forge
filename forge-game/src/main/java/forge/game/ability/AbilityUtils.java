@@ -1665,6 +1665,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("Freerunning")) {
+                    return doXMath(calculateAmount(c, sq[sa.isFreerunning() ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 // Count$Madness.<True>.<False>
                 if (sq[0].startsWith("Madness")) {
                     return doXMath(calculateAmount(c, sq[sa.isMadness() ? 1 : 2], ctb), expr, c, ctb);
