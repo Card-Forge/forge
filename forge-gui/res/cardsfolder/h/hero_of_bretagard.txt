@@ -1,4 +1,4 @@
-Name:Hero of Bretagard 2
+Name:Hero of Bretagard
 ManaCost:2 W
 Types:Creature Human Warrior
 PT:1/1
