@@ -1,4 +1,4 @@
-Name:Tarmogoyf Nest 
+Name:Tarmogoyf Nest
 ManaCost:2 G
 Types:Kindred Enchantment Lhurgoyf Aura
 K:Enchant land
