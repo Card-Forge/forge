@@ -6,7 +6,7 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+modified+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another modified creature you control dies, put two +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
 AlternateMode:Adventure
-Oracle: Lifelink\nWhenever another modified creature you control dies, put two +1/+1 counters on Ondu Knotmaster.
+Oracle:Lifelink\nWhenever another modified creature you control dies, put two +1/+1 counters on Ondu Knotmaster.
 
 ALTERNATE
 

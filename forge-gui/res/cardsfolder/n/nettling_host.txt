@@ -9,4 +9,4 @@ SVar:SacMe:1
 SVar:DiscardMe:1
 DeckHas:Ability$Graveyard|Token & Type$Artifact|Germ
 DeckNeeds:Keyword$Toxic|Infect
-Oracle:Toxic 2\nCorrupted - Exile Nettling Host from your graveyard: Conjure a card named Nettlecyst into your hand. Activate only if an opponent has three or more poison counters.
+Oracle:Toxic 2\nCorrupted — Exile Nettling Host from your graveyard: Conjure a card named Nettlecyst into your hand. Activate only if an opponent has three or more poison counters.

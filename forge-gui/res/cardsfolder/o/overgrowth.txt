@@ -5,6 +5,6 @@ K:Enchant land
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds an additional {G}{G}.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 2 | Defined$ TriggeredCardController
-#TODO: Mana prediction for lands that produce additional mana (Overgrowth, Mana Flare, etc.)
+# TODO: Mana prediction for lands that produce additional mana (Overgrowth, Mana Flare, etc.)
 AI:RemoveDeck:Random
 Oracle:Enchant land\nWhenever enchanted land is tapped for mana, its controller adds an additional {G}{G}.
