@@ -11,5 +11,5 @@ SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ DrainLife | OneOff$ True |
 SVar:DrainLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ GainLife
 SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
+# AFLifeLost will be set by LoseLife
 Oracle:You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.\nFlying, lifelink
