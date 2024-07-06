@@ -584,21 +584,20 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
-            if (property.substring(10).equals("Targeted")) {
-                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
-                    if (!card.hasCardAttachment(c)) {
-                        return false;
-                    }
-                }
-            } else if (property.substring(10).equals("Enchanted")) {
+            String prop = property.substring(10);
+            if (prop.equals("Enchanted")) {
                 if (source.getEnchantingCard() == null ||
                         !card.hasCardAttachment(source.getEnchantingCard())) {
                     return false;
                 }
-            } else {
-                if (!card.hasCardAttachment(source)) {
-                    return false;
+            } else if (!StringUtils.isBlank(prop)) {
+                for (final Card c : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
+                    if (!card.hasCardAttachment(c)) {
+                        return false;
+                    }
                 }
+            } else if (!card.hasCardAttachment(source)) {
+                return false;
             }
         } else if (property.startsWith("FortifiedBy")) {
             if (!card.hasCardAttachment(source)) {
