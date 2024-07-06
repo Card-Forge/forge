@@ -5,5 +5,5 @@ A:SP$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLi
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | StackDescription$ You gain life equal to the life lost this way.
 SVar:X:Count$xPaid
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
+# AFLifeLost will be set by LoseLife
 Oracle:Each opponent loses X life. You gain life equal to the life lost this way.

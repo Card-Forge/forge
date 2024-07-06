@@ -2,8 +2,8 @@ Name:Fell the Profane
 ManaCost:2 B B
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
-Oracle:Destroy target creature or planeswalker.
 AlternateMode:Modal
+Oracle:Destroy target creature or planeswalker.
 
 ALTERNATE
 
