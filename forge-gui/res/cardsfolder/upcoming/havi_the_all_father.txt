@@ -1,5 +1,5 @@
 Name:Havi, the All-Father
-ManaCost:3 R W
+ManaCost:3 R G W
 Types:Legendary Creature God Warrior
 PT:6/6
 S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Historic+YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as there are four or more historic cards in your graveyard. (Artifacts, legendaries, and Sagas are historic.)
