@@ -59,7 +59,7 @@ public class CardTranslation {
             try {
                 if (name.endsWith(" Token")) {
                     return translateTokenName(name);
-                } else if (name.startsWith("Emblem - ") || name.contains("'s Effect") || name.contains("'s Boon")) {
+                } else if (name.startsWith("Emblem — ") || name.contains("'s Effect") || name.contains("'s Boon")) {
                     return translateEffectNames(name);
                 } else if (knownEffectNames.contains(name)) {
                     return translateKnownEffectNames(name);
@@ -173,8 +173,8 @@ public class CardTranslation {
                 }
                 translatedEffectNames.put(name, fname);
                 return fname;
-            } else if (finalname.startsWith("Emblem - ")) {
-                String []s = finalname.split(" - ");
+            } else if (finalname.startsWith("Emblem — ")) {
+                String []s = finalname.split(" — ");
                 try {
                     fname = translatednames.get(s[1].endsWith(" ") ? s[1].substring(0, s[1].lastIndexOf(" ")) : s[1]);
                     if (fname == null || fname.isEmpty())
