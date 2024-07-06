@@ -137,6 +137,14 @@ ScryfallCode=M3C
 141 M Omo, Queen of Vesuva @Chun Lo
 142 M Satya, Aetherflux Genius @Cosmin Podar
 143 M Ulalek, Fused Atrocity @Cosmin Podar
+144 M Disa the Restless @Jana Schirmer
+145 M Omo, Queen of Vesuva @Alex Brock
+146 M Satya, Aetherflux Genius @Aaron Miller
+147 M Ulalek, Fused Atrocity @Alex Konstad
+148 M Disa the Restless @Jana Schirmer
+149 M Omo, Queen of Vesuva @Alex Brock
+150 M Satya, Aetherflux Genius @Aaron Miller
+151 M Ulalek, Fused Atrocity @Alex Konstad
 152 M All Is Dust @Jason Felix
 153 U Artisan of Kozilek @Jason Felix
 154 R Elder Deep-Fiend @Jason Felix

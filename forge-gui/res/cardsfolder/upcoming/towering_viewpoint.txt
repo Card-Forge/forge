@@ -1,4 +1,4 @@
-Name:Towering Viewpoing
+Name:Towering Viewpoint
 ManaCost:2
 Types:Artifact Creature Wall
 PT:0/4

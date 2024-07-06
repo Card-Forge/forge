@@ -1,0 +1,9 @@
+[metadata]
+Code=PLG24
+Date=2024-08-06
+Name=Love Your LGS 2024
+Type=Promo
+ScryfallCode=PLG24
+
+[cards]
+1 R Sakura-Tribe Elder @Victor Adame Minguez
