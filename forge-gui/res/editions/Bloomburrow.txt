@@ -16,7 +16,7 @@ ScryfallCode=BLB
 195 C Sunshower Druid @Tuan Duong Chu
 218 M Hugs, Grisly Guardian @Steve Prescott
 224 R Mabel, Heir to Cragflame @Aurore Folny
-230 M Ral, Crakling Wit @Rudy Siswanto
+230 M Ral, Crackling Wit @Rudy Siswanto
 255 U Lilypad Village @Alexander Forssberg
 256 U Lupinflower Village @Alayna Danner
 257 U Mudflat Village @Samuele Bandini
