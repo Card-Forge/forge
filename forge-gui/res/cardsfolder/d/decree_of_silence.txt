@@ -9,6 +9,6 @@ SVar:DBSac:DB$ Sacrifice | ConditionCheckSVar$ DecreeX | ConditionSVarCompare$ G
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigCounter | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may counter target spell.
 SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card
 SVar:DecreeX:Count$Valid Card.Self+counters_GE3_DEPLETION
-#TODO: The AI currently won't use cycling to counter the spell. That could be improved.
+# TODO: The AI currently won't use cycling to counter the spell. That could be improved.
 AI:RemoveDeck:Random
 Oracle:Whenever an opponent casts a spell, counter that spell and put a depletion counter on Decree of Silence. If there are three or more depletion counters on Decree of Silence, sacrifice it.\nCycling {4}{U}{U} ({4}{U}{U}, Discard this card: Draw a card.)\nWhen you cycle Decree of Silence, you may counter target spell.
