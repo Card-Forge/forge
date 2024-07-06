@@ -1,0 +1,7 @@
+Name:Tranquilize
+ManaCost:1 U
+Types:Sorcery
+A:SP$ Tap | ValidTgts$ Creature.OppCtrl | SubAbility$ DBCounter | TgtPrompt$ Select target creature an opponent controls. | SpellDescription$ Tap target creature an opponent controls and put three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3
+DeckHas:Ability$Counters
+Oracle:Tap target creature an opponent controls and put three stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
