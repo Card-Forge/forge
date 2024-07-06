@@ -147,7 +147,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     }
                 }
 
-                if (clone) {
+                if (clone || prototype.getCopiedPermanent() != null) {
                     tok.setCopiedPermanent(prototype);
                 }
 
