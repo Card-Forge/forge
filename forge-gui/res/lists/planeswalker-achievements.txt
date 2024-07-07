@@ -6,6 +6,7 @@ Ajani, Adversary of Tyrants|Ajani's House of Cats|Here, kitty, kitty, kitty...
 Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Inspiring Leader|Ajani's Leap of Faith|Cats from above!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
+Ajani, Nacatl Pariah|Ajani's Vengeance|There can only be one. For you, that is.
 Ajani, Sleeper Agent|Ajani's Progress|Every step brings us closer to perfection.
 Ajani, Strength of the Pride|Ajani's Obliteration|A defiant roar... then silence.
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
@@ -76,6 +77,7 @@ Gideon, Battle-Forged|Gideon's First Steps|I still have a long road ahead of me.
 Gideon, Champion of Justice|Gideon's Aftermath|Gideon stands alone!
 Gideon, Martial Paragon|Gideon's Alpha Strike|Geronimo!
 Gideon, the Oathsworn|Gideon's Ultimate Sacrifice|Follow me to oblivion.
+Grist, Voracious Larva|Grist's Graveyard Assault|Cockroaches would be preferable.
 Grist, the Hunger Tide|Grist's Vengeance of the Dead|Bzzzzz!
 Huatli, Dinosaur Knight|Huatli's Dino Thunder|Victory is ours forever more!
 Huatli, Radiant Champion|Huatli's Herd|Seize. Release. Feast.
@@ -159,6 +161,7 @@ Quintorius Kand|Quintorius's Archeological Dig|The past is still alive.
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
+Ral, Monsoon Mage|Ral's Bolt of Inspiration|There's always more ideas.
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
 Rowan, Scholar of Sparks|Rowan's Twin Magic|Of course I haven't copied my answers, professor!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
@@ -174,6 +177,7 @@ Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a gloriou
 Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
 Sivitri, Dragon Master|Sivitri's Dragon Cleansing|Nothing can withstand a dragon's breath, except another dragon.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
+Sorin of House Markov|Sorin's Unwilling Conversion|Home is where the blood is.
 Sorin the Mirthless|Sorin's Unlucky Strike|Not very funny when it happens to you, is it?
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!
 Sorin, Imperious Bloodlord|Sorin's Progeny|Welcome to your new life. You serve me now.
@@ -182,6 +186,7 @@ Sorin, Solemn Visitor|Sorin's Abyss|Don't get so close to the edge!
 Sorin, Vampire Lord|Sorin's Siring Party|Go forth and multiply.
 Tamiyo, Compleated Sage|Tamiyo's Final Entry|I will support my family. Whatever it takes.
 Tamiyo, Field Researcher|Tamiyo's Omniscience|I know exactly how your story ends...
+Tamiyo, Inquisitive Student|Tamiyo's Well of Knowledge|I don't know everything, but half of everything is also good.
 Tamiyo, the Moon Sage|Tamiyo's Recycling|Wash, rinse, repeat!
 Teferi, Hero of Dominaria|Teferi's Oblivion|Don't worry. It's just a phase.
 Teferi, Master of Time|Teferi's Prolonged Afternoon|Defeating me will be quite a stretch.
