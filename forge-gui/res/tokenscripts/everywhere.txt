@@ -1,0 +1,4 @@
+Name:Everywhere
+ManaCost:no cost
+Types:Land Plains Island Swamp Mountain Forest
+Oracle:

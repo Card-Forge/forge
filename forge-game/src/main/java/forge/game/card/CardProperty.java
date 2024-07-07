@@ -1882,6 +1882,14 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isEvoke();
+        } else if (property.equals("impended")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isImpending();
         } else if (property.equals("prowled")) {
             if (card.getCastSA() == null) {
                 return false;
