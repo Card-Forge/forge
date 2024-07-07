@@ -1,0 +1,9 @@
+Name:Ezio, Brash Novice
+ManaCost:1 RW
+Types:Legendary Creature Human
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GT1 | AddKeyword$ First Strike | AddType$ Assassin | Description$ As long as NICKNAME has two or more counters on it, it has first strike and is an Assassin in addition to its other types.
+SVar:X:Count$CardCounters.ALL
+Oracle:Whenever Ezio, Brash Novice attacks, put a +1/+1 counter on it.\nAs long as Ezio has two or more counters on it, it has first strike and is an Assassin in addition to its other types.

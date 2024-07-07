@@ -7,13 +7,16 @@ ScryfallCode=BLB
 
 [cards]
 7 C Carrot Cake @Forrest Imel
+24 U Parting Gust @Nils Hamm
 28 R Salvation Swan @Christina Kraus
 64 C Pearl of Wisdom @Julie Dillon
 93 C Early Winter @Andrew Mar
 144 C Might of the Meek @Danny Schwartz
 183 M Lumra, Bellow of the Woods @Matt Stewart
 195 C Sunshower Druid @Tuan Duong Chu
+218 M Hugs, Grisly Guardian @Steve Prescott
 224 R Mabel, Heir to Cragflame @Aurore Folny
+230 M Ral, Crackling Wit @Rudy Siswanto
 255 U Lilypad Village @Alexander Forssberg
 256 U Lupinflower Village @Alayna Danner
 257 U Mudflat Village @Samuele Bandini
@@ -25,7 +28,9 @@ ScryfallCode=BLB
 277 L Mountain @Andrew Theophilopoulos
 293 M Lumra, Bellow of the Woods @Allen Douglas
 297 R Salvation Swan @Serena Malyon
+333 M Hugs, Grisly Guardian @Chuck Lukacs
 336 R Mabel, Heir to Cragflame @David Petersen
+337 R Three Tree City @Andrew Mar
 342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
 343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
 351 R Mabel, Heir to Cragflame @Airi Yoshihisa
