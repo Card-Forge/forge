@@ -6,4 +6,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.t
 SVar:TrigCharm:DB$ Charm | Choices$ DBUntap,DBTap
 SVar:DBUntap:DB$ Untap | Defined$ TriggeredCard | SpellDescription$ Untap that land.
 SVar:DBTap:DB$ Tap | ValidTgts$ Permanent.OppCtrl+nonLand | TgtPrompt$ Select target nonland permanent an opponent controls | SpellDescription$ Tap target nonland permanent an opponent controls.
-Oracle:Whenever a land enters the battlefield tapped and under your control, choose one -\n• Untap that land.\n• Tap target nonland permanent an opponent controls.
+Oracle:Whenever a land enters the battlefield tapped and under your control, choose one —\n• Untap that land.\n• Tap target nonland permanent an opponent controls.

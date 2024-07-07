@@ -7,5 +7,5 @@ T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | Trigg
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
+# AFLifeLost will be set by LoseLife
 Oracle:Tormented Hero enters the battlefield tapped.\nHeroic — Whenever you cast a spell that targets Tormented Hero, each opponent loses 1 life. You gain life equal to the life lost this way.
