@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 PT:3/3
 K:Vigilance
 K:ETBReplacement:Other:ChoosePlayer
-SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at the hand: | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
+SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at their hand | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
 SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBNameCard
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
 SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
