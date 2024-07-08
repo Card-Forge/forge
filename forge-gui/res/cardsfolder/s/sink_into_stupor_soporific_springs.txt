@@ -1,9 +1,9 @@
-Name:Sink into Stupor 
+Name:Sink into Stupor
 ManaCost:1 U U
-Types:Instant 
+Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl,Card.inZoneStack+OppCtrl | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or nonland permanent an opponent controls to its owner's hand.
-Oracle:Return target spell or nonland permanent an opponent controls to its owner's hand.
 AlternateMode:Modal
+Oracle:Return target spell or nonland permanent an opponent controls to its owner's hand.
 
 ALTERNATE
 

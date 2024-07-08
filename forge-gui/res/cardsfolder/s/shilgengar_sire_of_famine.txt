@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Legendary Creature Elder Demon
 PT:6/6
 K:Flying
-A:AB$ Token | Cost$ Sac<1/Creature.Other/another creature> | TokenScript$ c_a_blood_draw | TokenAmount$ X | SpellDescription$  Create a Blood token. If you sacrificed an Angel this way, create a number of Blood tokens equal to its toughness instead.
+A:AB$ Token | Cost$ Sac<1/Creature.Other/another creature> | TokenScript$ c_a_blood_draw | TokenAmount$ X | SpellDescription$ Create a Blood token. If you sacrificed an Angel this way, create a number of Blood tokens equal to its toughness instead.
 SVar:X:Count$Compare AngelSac EQ1.SacT.1
 SVar:SacT:Sacrificed$CardToughness
 SVar:AngelSac:Sacrificed$Valid Card.Angel

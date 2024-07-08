@@ -5,7 +5,7 @@ A:SP$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescripti
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBUnspeakable
 SVar:DBUnspeakable:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Unspeakable | ChangeNum$ 1 | ConditionCheckSVar$ PeerReachTotal | ConditionSVarCompare$ EQ2 | ShuffleNonMandatory$ True
 SVar:PeerReachTotal:SVar$Peer/Plus.Reach
-#Max returns any number lower than or equally to the number following the period.
+# Max returns any number lower than or equally to the number following the period.
 SVar:Peer:Count$ThisTurnCast_Card.YouCtrl+namedPeer Through Depths/LimitMax.1
 SVar:Reach:Count$ThisTurnCast_Card.YouCtrl+namedReach Through Mists/LimitMax.1
 DeckHints:Name$Peer Through Depths|Reach Through Mists|Sift Through Sands|The Unspeakable
