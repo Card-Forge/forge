@@ -155,6 +155,27 @@ public class LimitedPlayerAI extends LimitedPlayer {
     }
 
     @Override
+    protected boolean revealWithSmuggler(PaperCard bestPick) {
+        // Note a name we haven't noted yet
+        List<String> notedNames = getDraftNotes().getOrDefault("Smuggler Captain", null);
+        if (!notedNames.isEmpty() && notedNames.contains(bestPick.getName())) {
+            return false;
+        }
+
+        if (bestPick.getRules().getType().isConspiracy()) {
+            return false;
+        }
+
+        if (currentPack == 3) {
+            // If we're already on the last pack, we may not get a better choice
+            return true;
+        }
+
+        // If we're on the first two packs get the bombiest of cards available.
+        return draftedThisRound < 3;
+    }
+
+    @Override
     public boolean handleWhispergearSneak() {
         // Always choose the next pack I will open
         // What do I do with this information? Great question. I have no idea.
