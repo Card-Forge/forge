@@ -1,5 +1,4 @@
 Name:Island
 ManaCost:no cost
 Types:Basic Land Island
-SVar:PicCount:4
 Oracle:({T}: Add {U}.)

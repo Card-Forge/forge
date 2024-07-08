@@ -2,5 +2,5 @@ Name:Inheritance
 ManaCost:W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever a creature dies, you may pay {3}. If you do, draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 3 | Defined$ You | NumCards$ 1
+SVar:TrigDraw:AB$ Draw | Cost$ 3 | Defined$ You | NumCards$ 1
 Oracle:Whenever a creature dies, you may pay {3}. If you do, draw a card.
