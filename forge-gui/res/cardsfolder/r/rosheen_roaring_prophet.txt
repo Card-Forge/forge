@@ -1,4 +1,4 @@
-Name:Rosheen, Roaring Prophet 
+Name:Rosheen, Roaring Prophet
 ManaCost:2 R G
 Types:Legendary Creature Giant Shaman
 PT:4/4

@@ -1,4 +1,4 @@
-Name:Razorfield Ripper 
+Name:Razorfield Ripper
 ManaCost:2 W
 Types:Artifact Creature Equipment Rhino
 PT:2/2
