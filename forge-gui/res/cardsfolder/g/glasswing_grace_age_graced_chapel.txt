@@ -5,14 +5,12 @@ K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Lifelink & Flying | Description$ Enchanted creature gets +2/+2 and has flying and lifelink.
 DeckHas:Ability$LifeGain
-Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and lifelink.
-
 AlternateMode:Modal
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and has flying and lifelink.
 
 ALTERNATE
 
 Name:Age-Graced Chapel
-
 ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
