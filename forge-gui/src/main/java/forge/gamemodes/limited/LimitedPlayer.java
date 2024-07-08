@@ -48,13 +48,14 @@ public class LimitedPlayer {
     private static final int SpyNextCardDrafted = 1 << 15;
     private static final int CanalDredgerLastPick = 1 << 16;
     private static final int ArchdemonOfPalianoCurse = 1 << 17;
+    private static final int SmugglerCaptainActive = 1 << 18;
 
     private int playerFlags = 0;
 
     private final List<PaperCard> faceUp = Lists.newArrayList();
     private final List<PaperCard> revealed = Lists.newArrayList();
     private final Map<String, List<String>> noted = new HashMap<>();
-    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder", "Aether Searcher");
+    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder", "Aether Searcher", "Smuggler Captain");
 
     IBoosterDraft draft;
 
@@ -165,6 +166,15 @@ public class LimitedPlayer {
             playerFlags &= ~SearcherNoteNext;
             List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
             note.add(String.valueOf(bestPick.getName()));
+        }
+
+        if ((playerFlags & SmugglerCaptainActive) == SmugglerCaptainActive) {
+            if (revealWithSmuggler(bestPick)) {
+                addLog(name() + " revealed " + bestPick.getName() + " for Smuggler Captain.");
+                playerFlags &= ~SmugglerCaptainActive;
+                List<String> note = noted.computeIfAbsent("Smuggler Captain", k -> Lists.newArrayList());
+                note.add(String.valueOf(bestPick.getName()));
+            }
         }
 
         if ((playerFlags & WhispergearBoosterPeek) == WhispergearBoosterPeek) {
@@ -330,6 +340,8 @@ public class LimitedPlayer {
                 playerFlags |= GrinderRemoveFromPool;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
                 playerFlags |= NobleBanneretActive;
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may reveal it, note its name, then turn CARDNAME face down.")) {
+                playerFlags |= SmugglerCaptainActive;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
                 playerFlags |= PalianoVanguardActive;
             } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.")) {
@@ -427,6 +439,10 @@ public class LimitedPlayer {
 
     protected boolean revealWithVanguard(PaperCard bestPick) {
         return SGuiChoose.one("Reveal this " + bestPick + " for Paliano Vanguard?", Lists.newArrayList("Yes", "No")).equals("Yes");
+    }
+
+    protected boolean revealWithSmuggler(PaperCard bestPick) {
+        return SGuiChoose.one("Reveal this " + bestPick + " for Smuggler Captain?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
     public String name() {

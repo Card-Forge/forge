@@ -2115,8 +2115,7 @@ public class CardProperty {
                     (colors.contains("black") && card.getColor().hasBlack()) ||
                     (colors.contains("red") && card.getColor().hasRed()) ||
                     (colors.contains("green") && card.getColor().hasGreen());
-        } else if (property.equals("NotedName")) {
-            // Should Noble Banneret be hardcoded here or part of the property?
+        } else if (property.equals("NotedNameNobleBanneret")) {
             String names = sourceController.getDraftNotes().get("Noble Banneret");
             if (names == null || names.isEmpty()) {
                 return false;
@@ -2126,6 +2125,14 @@ public class CardProperty {
             return nameList.contains(card.getName());
         } else if (property.equals("NotedNameAetherSearcher")) {
             String names = sourceController.getDraftNotes().get("Aether Searcher");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedNameSmugglerCaptain")) {
+            String names = sourceController.getDraftNotes().get("Smuggler Captain");
             if (names == null || names.isEmpty()) {
                 return false;
             }
