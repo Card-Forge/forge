@@ -1,0 +1,7 @@
+Name:Come Back Wrong
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature | RememberDestroyed$ True | SubAbility$ DBReturn | SpellDescription$ Destroy target creature. If a creature card is put into a graveyard this way, return it to the battlefield under your control. Sacrifice it at the beginning of your next end step.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | GainControl$ True | AtEOT$ YourSacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Destroy target creature. If a creature card is put into a graveyard this way, return it to the battlefield under your control. Sacrifice it at the beginning of your next end step.
