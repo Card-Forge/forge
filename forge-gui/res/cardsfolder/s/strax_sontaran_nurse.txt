@@ -4,7 +4,7 @@ Types:Legendary Creature Alien Cleric
 PT:5/5
 K:Vigilance
 K:Trample
-A:AB$ ChoosePlayer | Cost$ 2 T Sac<1/Artifact> | Defined$ You | Choices$ Player | PrecostDesc$ Grenades! - | Random$ True | SubAbility$ DBImmediateTrig | SpellDescription$ Choose a player at random. When you do, NICKNAME fights another target creature that player controls.
+A:AB$ ChoosePlayer | Cost$ 2 T Sac<1/Artifact> | Defined$ You | Choices$ Player | PrecostDesc$ Grenades! — | Random$ True | SubAbility$ DBImmediateTrig | SpellDescription$ Choose a player at random. When you do, NICKNAME fights another target creature that player controls.
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigFight | RememberObjects$ ChosenPlayer | SubAbility$ DBCleanup | TriggerDescription$ When you do, NICKNAME fights another target creature that player controls.
 SVar:TrigFight:DB$ Fight | Defined$ Self | ValidTgts$ Creature.Other+ControlledBy DelayTriggerRemembered | TgtPrompt$ Choose another target creature controlled by the chosen player
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True

@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Creature Djinn Monk
 PT:4/5
 K:Prowess
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target creature to its owner's hand if its power is less than Sage-Eye Avengers's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target creature to its owner's hand if its power is less than CARDNAME's power.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:Y:Count$CardPower
 SVar:X:Targeted$Valid Creature.powerLTY

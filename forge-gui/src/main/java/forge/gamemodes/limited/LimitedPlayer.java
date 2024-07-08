@@ -306,9 +306,9 @@ public class LimitedPlayer {
                     addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
-                } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
+                } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
-                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it’s drafted this draft round.)")) {
+                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it's drafted this draft round.)")) {
                     addSingleBoosterPack();
                 }
 
@@ -322,10 +322,10 @@ public class LimitedPlayer {
                 showRevealedCard(bestPick);
             }
 
-            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)") &&
+            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn't in your card pool.)") &&
                     bestPick.getName().equals("Animus of Predation")) {
                 playerFlags |= AnimusRemoveFromPool;
-            } else if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face down. (Those cards aren’t in your card pool.)") &&
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face down. (Those cards aren't in your card pool.)") &&
                     bestPick.getName().equals("Cogwork Grinder")) {
                 playerFlags |= GrinderRemoveFromPool;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
@@ -341,11 +341,11 @@ public class LimitedPlayer {
                 playerFlags |= CogworkLibrarianExtraDraft;
             } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)")) {
                 playerFlags |= LeovoldsOperativeExtraDraft;
-            } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
+            } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can't draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
             } else if (Iterables.contains(draftActions, "Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.")) {
                 playerFlags |= CanalDredgerLastPick;
-            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
+            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can't look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
                 playerFlags |= ArchdemonOfPalianoCurse;
                 archdemonFavors.add(3);
             } else if (Iterables.contains(draftActions, "Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.")) {

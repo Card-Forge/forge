@@ -1,5 +1,4 @@
 Name:Mountain
 ManaCost:no cost
 Types:Basic Land Mountain
-SVar:PicCount:4
 Oracle:({T}: Add {R}.)

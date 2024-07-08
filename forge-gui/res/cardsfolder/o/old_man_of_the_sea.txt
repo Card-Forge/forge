@@ -5,6 +5,6 @@ PT:2/3
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ GainControl | Cost$ T | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power less than or equal to CARDNAME's power | LoseControl$ Untap,LeavesPlay,LoseControl,StaticCommandCheck | StaticCommandCheckSVar$ Y | StaticCommandSVarCompare$ GTX | SpellDescription$ Gain control of target creature with power less than or equal to CARDNAME's power for as long as CARDNAME remains tapped and that creature's power remains less than or equal to CARDNAME's power.
 SVar:X:Count$CardPower
-# the hostcard of SVar Y is the controlled card
+# The hostcard of SVar Y is the controlled card
 SVar:Y:Count$CardPower
 Oracle:You may choose not to untap Old Man of the Sea during your untap step.\n{T}: Gain control of target creature with power less than or equal to Old Man of the Sea's power for as long as Old Man of the Sea remains tapped and that creature's power remains less than or equal to Old Man of the Sea's power.
