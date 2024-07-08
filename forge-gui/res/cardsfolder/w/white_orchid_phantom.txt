@@ -1,6 +1,6 @@
 Name:White Orchid Phantom
 ManaCost:W W
-Types:Creature Spirit Knight 
+Types:Creature Spirit Knight
 PT:2/2
 K:Flying
 K:First Strike

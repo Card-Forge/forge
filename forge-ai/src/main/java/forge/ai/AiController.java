@@ -212,10 +212,16 @@ public class AiController {
     }
 
     public boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
-        // for xPaid stuff
-        card.setCastSA(sa);
+        boolean reset = false;
+        if (card.getCastSA() == null) {
+            // for xPaid stuff
+            card.setCastSA(sa);
+            reset = true;
+        }
         boolean result = checkETBEffectsPreparedCard(card, sa, api);
-        card.setCastSA(null);
+        if (reset) {
+            card.setCastSA(null);
+        }
         return result;
     }
 

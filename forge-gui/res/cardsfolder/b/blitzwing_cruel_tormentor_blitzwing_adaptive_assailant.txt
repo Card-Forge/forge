@@ -8,7 +8,7 @@ SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | SubAbilit
 SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionCheckSVar$ AFLifeLost | ConditionSVarCompare$ EQ0
 SVar:X:TargetedPlayer$LifeLostThisTurn
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
+# AFLifeLost will be set by LoseLife
 AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {3}{B} (You may cast this card converted for {3}{B}.)\nAt the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing.
 

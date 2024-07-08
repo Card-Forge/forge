@@ -244,11 +244,11 @@ public class GameAction {
                 game.addChangeZoneLKIInfo(lastKnownInfo);
             }
 
-            // CR 707.12 casting of a card copy, don't copy it again
+            copied = new CardCopyService(c).copyCard(false);
+
+            // CR 707.12 casting of a card copy
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
-                copied = c;
-            } else {
-                copied = new CardCopyService(c).copyCard(false);
+                copied.setCopiedPermanent(c.getCopiedPermanent());
             }
 
             copied.setGameTimestamp(c.getGameTimestamp());

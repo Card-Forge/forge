@@ -41,7 +41,7 @@ SVar:DBGainLife3M:DB$ GainLife | Defined$ You | LifeAmount$ 4
 SVar:Destroy4M:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife4M | SpellDescription$ Destroy target creature. You gain life equal to its toughness.
 SVar:DBGainLife4M:DB$ GainLife | Defined$ You | LifeAmount$ X4M
 SVar:X4M:Targeted$CardToughness
-SVar:Effect5M:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
+SVar:Effect5M:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (5M) | StaticAbilities$ STPump5M | Duration$ Permanent | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
 SVar:STPump5M:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
 SVar:ChangeZone6M:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.
 SVar:Draw7M:DB$ Draw | NumCards$ 3 | SubAbility$ DBChangeZone7M | SpellDescription$ Draw three cards, then put a card from your hand on top of your library.
@@ -70,8 +70,8 @@ SVar:DBDiscard20M:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 A:AB$ GenericChoice | Cost$ SubCounter<6/LOYALTY> | AtRandom$ Urza | ShowChoice$ Description | Choices$ DealDamage1U,Effect2U,DestroyAll3U,Token4U,LifeGain5U,Damage6U,Effect7U,Effect8U,Token9U,Shuffle10U,Destroy11U,Effect12U,Effect13U,ControlPlayer14U,ExileLibrary15U,Token16U,Raise17U,LifeDraw18U,FlipTurns19U | Planeswalker$ True | Ultimate$ True | ShowChoice$ Description | StackDescription$ SpellDescription | SpellDescription$ Head to AskUrza.com and click -6.
 SVar:DealDamage1U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | SubAbility$ DBDiscard1U | SpellDescription$ NICKNAME deals 7 damage to target player or planeswalker. That player or that planeswalker's controller discards seven cards, then sacrifices seven permanents.
 SVar:DBDiscard1U:DB$ Discard | Defined$ TargetedOrController | NumCards$ 7 | Mode$ TgtChoose | SubAbility$ DBSac1U
-SVar:DBSac1U:DB$Sacrifice | Defined$ TargetedOrController | SacValid$ Permanent | Amount$ 7
-SVar:Effect2U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (2U) | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
+SVar:DBSac1U:DB$ Sacrifice | Defined$ TargetedOrController | SacValid$ Permanent | Amount$ 7
+SVar:Effect2U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (2U) | ReplacementEffects$ RPreventDamage | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."
 SVar:RPreventDamage:Event$ DamageDone | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ PreventDmg | PreventionEffect$ True | Description$ If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.
 SVar:PreventDmg:DB$ ReplaceDamage | Amount$ ShieldAmount
 SVar:ShieldAmount:ReplaceCount$DamageAmount/Minus.1
@@ -82,9 +82,9 @@ SVar:LifeGain5U:DB$ GainLife | LifeAmount$ 100 | SpellDescription$ You gain 100 
 SVar:Damage6U:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 10 | SubAbility$ DmgAll6U | DamageMap$ True | SpellDescription$ NICKNAME deals 10 damage to target player or planeswalker and each creature that player or that planeswalker's controller controls.
 SVar:DmgAll6U:DB$ DamageAll | NumDmg$ 10 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve6U
 SVar:DBDamageResolve6U:DB$ DamageResolve
-SVar:Effect7U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (7U) | StaticAbilities$ ST7U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
+SVar:Effect7U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (7U) | StaticAbilities$ ST7U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."
 SVar:ST7U:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Double Strike & Trample & Hexproof & Haste | Description$ Creatures you control have double strike, trample, hexproof and haste.
-SVar:Effect8U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (8U) | StaticAbilities$ STIndestructible8U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
+SVar:Effect8U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (8U) | StaticAbilities$ STIndestructible8U | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
 SVar:STIndestructible8U:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.
 SVar:Token9U:DB$ Token | TokenAmount$ Lands | TokenScript$ g_6_6_wurm | SpellDescription$ Create a 6/6 green Wurm creature token for each land you control.
 SVar:Lands:Count$Valid Land.YouCtrl
@@ -92,10 +92,10 @@ SVar:Shuffle10U:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Hand,Graveyard | 
 SVar:DBDraw10U:DB$ Draw | Defined$ You | NumCards$ 7
 SVar:Destroy11U:DB$ Destroy | ValidTgts$ Creature,Planeswalker.Other | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select up to three target creatures and/or other planeswalkers | RememberTargets$ True | SubAbility$ DBChangeZoneAll11U | SpellDescription$ Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
 SVar:DBChangeZoneAll11U:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
-SVar:Effect12U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (12U) | Triggers$ TrigSpellCast12U | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
+SVar:Effect12U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (12U) | Triggers$ TrigSpellCast12U | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a spell, exile target permanent."
 SVar:TrigSpellCast12U:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast12U | TriggerDescription$ Whenever you cast a spell, exile target permanent.
 SVar:EffSpellCast12U:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent
-SVar:Effect13U:DB$ Effect | Name$ Emblem - Urza, Academy Headmaster (13U) | Triggers$ TrigFight13U | Duration$ Permanent | AILogic$ Always | SubAbility$ DBToken13U | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
+SVar:Effect13U:DB$ Effect | Name$ Emblem — Urza, Academy Headmaster (13U) | Triggers$ TrigFight13U | Duration$ Permanent | AILogic$ Always | SubAbility$ DBToken13U | SpellDescription$ You get an emblem with "Whenever a creature enters the battlefield under your control, you may have it fight target creature." Then create three 8/8 blue Octopus creature tokens.
 SVar:TrigFight13U:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | Execute$ DBFight13U | OptionalDecider$ You | TriggerZones$ Command | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may have it fight target creature.
 SVar:DBFight13U:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature | TgtPrompt$ Choose target creature
 SVar:DBToken13U:DB$ Token | TokenAmount$ 3 | TokenScript$ u_8_8_octopus

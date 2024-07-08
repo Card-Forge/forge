@@ -22,7 +22,7 @@ ManaCost:5 B R
 Types:Legendary Planeswalker Tibalt
 Loyalty:5
 K:ETBReplacement:Other:Emblem
-SVar:Emblem:DB$ Effect | Name$ Emblem - Tibalt, Cosmic Impostor | Image$ emblem_tibalt_cosmic_impostor | StaticAbilities$ PlayExile | Duration$ Permanent | SpellDescription$ As NICKNAME enters the battlefield, you get an emblem with "You may play cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells."
+SVar:Emblem:DB$ Effect | Name$ Emblem — Tibalt, Cosmic Impostor | Image$ emblem_tibalt_cosmic_impostor | StaticAbilities$ PlayExile | Duration$ Permanent | SpellDescription$ As NICKNAME enters the battlefield, you get an emblem with "You may play cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells."
 SVar:PlayExile:Mode$ Continuous | MayPlayIgnoreType$ True | MayPlayIgnoreColor$ True | MayPlay$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | Description$ You may play cards exiled with EFFECTSOURCE, and you may spend mana as though it were mana of any color to cast those spells.
 A:AB$ Dig | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | StackDescription$ SpellDescription | SpellDescription$ Exile the top card of each player's library.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or creature.
