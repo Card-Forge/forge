@@ -106,7 +106,7 @@ public enum Keyword {
     HEXPROOF("Hexproof", Hexproof.class, true, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters the battlefield, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
-    IMPENDING("Impending", KeywordWithCostAndAmount.class, false, "If you cast this spell for its impending cost, it enters with {%2$d:time counter} and isn’t a creature until the last is removed. At the beginning of your end step, remove a time counter from it."),
+    IMPENDING("Impending", KeywordWithCostAndAmount.class, false, "If you cast this spell for its impending cost, it enters with {%2$d:time counter} and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it."),
     IMPROVISE("Improvise", SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
     INDESTRUCTIBLE("Indestructible", SimpleKeyword.class, true, "Effects that say \"destroy\" don't destroy this."),
     INFECT("Infect", SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
