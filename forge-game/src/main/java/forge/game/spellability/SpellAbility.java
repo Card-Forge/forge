@@ -1553,6 +1553,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Freerunning);
     }
 
+    public final boolean isImpending() {
+        return isAlternativeCost(AlternativeCost.Impending);
+    }
+
     public final boolean isMadness() {
         return isAlternativeCost(AlternativeCost.Madness);
     }

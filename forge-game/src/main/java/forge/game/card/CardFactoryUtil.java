@@ -1427,6 +1427,16 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Impending")) {
+            // Remove Time counter trigger
+            final String endTrig = "Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
+                    " | Secondary$ True | TriggerDescription$ At the beginning of your end step, remove a time counter from it.";
+
+            final String remove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
+            final Trigger parsedEndTrig = TriggerHandler.parseTrigger(endTrig, card, intrinsic);
+            parsedEndTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
+
+            inst.addTrigger(parsedEndTrig);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
@@ -2330,6 +2340,21 @@ public class CardFactoryUtil {
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Impending")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+            final Cost cost = new Cost(k[2], false);
+
+            StringBuilder desc = new StringBuilder();
+            desc.append("Impending ");
+            desc.append(m).append("—").append(cost.toSimpleString());
+
+            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + m
+                    + " | ETB$ True | SpellDescription$ " + desc;
+
+            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
+
+            inst.addReplacement(re);
         } else if (keyword.equals("Jump-start")) {
             StringBuilder sb = new StringBuilder();
             sb.append("Event$ Moved | ValidCard$ Card.Self | Origin$ Stack | ExcludeDestination$ Exile ");
@@ -3165,6 +3190,26 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
+        } else if (keyword.startsWith("Impending")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[2], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
+
+            newSA.putParam("PrecostDesc", "Impending");
+            StringBuilder costDesc = new StringBuilder();
+            costDesc.append(k[1]).append("—").append(cost.toSimpleString());
+            newSA.putParam("CostDesc", costDesc.toString());
+
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription());
+            sb.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Impending);
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Level up")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3952,6 +3997,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Horsemanship")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
                     " | Description$ Horsemanship (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Impending")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_TIME | RemoveType$ Creature | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
