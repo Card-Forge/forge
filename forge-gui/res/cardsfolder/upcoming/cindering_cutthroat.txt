@@ -1,4 +1,4 @@
-Name:Cindering Cutthroar
+Name:Cindering Cutthroat
 ManaCost:2 BR
 Types:Creature Lizard Assassin
 PT:3/2
