@@ -1,0 +1,7 @@
+Name:Ruthless Negotiation
+ManaCost:B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | StackDescription$ SpellDescription | SubAbility$ DBDraw | SpellDescription$ Target opponent exiles a card from their hand. If this spell was cast from a graveyard, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard | ConditionCompare$ EQ1
+K:Flashback:4 B
+Oracle:Target opponent exiles a card from their hand. If this spell was cast from a graveyard, draw a card.\nFlashback {4}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)
