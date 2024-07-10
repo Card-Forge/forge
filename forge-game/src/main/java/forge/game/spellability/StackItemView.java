@@ -67,9 +67,9 @@ public class StackItemView extends TrackableObject implements IHasCardView {
             if (cost == OptionalCost.Kicker1 || cost == OptionalCost.Kicker2)
                 kicked = true;
             if (cost == OptionalCost.Entwine)
-                offspring = true;
-            if (cost == OptionalCost.Offspring)
                 entwined = true;
+            if (cost == OptionalCost.Offspring)
+                offspring = true;
             if (cost == OptionalCost.Buyback)
                 buyback = true;
             if (cost == OptionalCost.Retrace)
