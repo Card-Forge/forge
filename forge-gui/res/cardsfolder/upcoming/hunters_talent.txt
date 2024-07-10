@@ -1,0 +1,15 @@
+Name:Hunter's Talent
+ManaCost:1 G
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHit | TriggerDescription$ When CARDNAME enters, target creature you control deals damage equal to its power to target creature you don't control.
+SVar:TrigHit:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
+K:Class:2:1 G:AddTrigger$ TriggerAttackersDeclared
+SVar:TriggerAttackersDeclared:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever you attack, target attacking creature gets +1/+0 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ 1 | KW$ Trample
+K:Class:3:3 G:AddTrigger$ TriggerEndStep
+SVar:TriggerEndStep:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.powerGE4+YouCtrl | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control a creature with power 4 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:ParentTargeted$CardPower
+SVar:PlayMain1:ALWAYS
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Hunter's Talent enters, target creature you control deals damage equal to its power to target creature you don't control.\n{1}{G}: Level 2\nWhenever you attack, target attacking creature gets +1/+0 and gains trample until end of turn.\n{3}{G}: Level 3\nAt the beginning of your end step, if you control a creature with power 4 or greater, draw a card.
