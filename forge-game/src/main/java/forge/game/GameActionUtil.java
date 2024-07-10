@@ -433,6 +433,10 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Offspring")) {
+                String[] k = keyword.split(":");
+                final Cost cost = new Cost(k[1], false);
+                costs.add(new OptionalCostValue(OptionalCost.Offspring, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
                 int numKickers = sCosts.length;
