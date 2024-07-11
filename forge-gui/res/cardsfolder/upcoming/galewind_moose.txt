@@ -1,0 +1,9 @@
+Name:Galewind Moose
+ManaCost:4 G G
+Types:Creature Elemental Elk
+PT:6/6
+K:Flash
+K:Vigilance
+K:Reach
+K:Trample
+Oracle:Flash\nVigilance, reach, trample
