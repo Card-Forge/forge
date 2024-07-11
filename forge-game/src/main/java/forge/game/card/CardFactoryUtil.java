@@ -3921,6 +3921,15 @@ public class CardFactoryUtil {
                     descAdded = true;
                 }
             }
+            if (mapParams.containsKey("AddReplacementEffects")) {
+                for (String s : mapParams.get("AddReplacementEffects").split(" & ")) {
+                    if (descAdded) {
+                        desc.append("\r\n");
+                    }
+                    desc.append(AbilityFactory.getMapParams(state.getSVar(s)).get("Description"));
+                    descAdded = true;
+                }
+            }
 
             String effect = "Mode$ Continuous | Affected$ Card.Self | ClassLevel$ " + level + " | " + params;
             if (descAdded) {
