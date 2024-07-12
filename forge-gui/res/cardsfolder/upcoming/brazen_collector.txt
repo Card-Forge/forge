@@ -1,0 +1,8 @@
+Name:Brazen Collector
+ManaCost:1 R
+Types:Creature Raccoon Rogue
+PT:2/1
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ Whenever CARDNAME attacks, add {R}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ R | PersistentMana$ True
+Oracle:First strike\nWhenever Brazen Collector attacks, add {R}. Until end of turn, you don't lose this mana as steps and phases end.

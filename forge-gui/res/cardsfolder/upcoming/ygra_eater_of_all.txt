@@ -1,0 +1,10 @@
+Name:Ygra, Eater of All
+ManaCost:3 B G
+Types:Legendary Creature Elemental Cat
+PT:6/6
+K:Ward:Sac<1/Food>
+S:Mode$ Continuous | Affected$ Creature.Other | AffectedZone$ Battlefield | AddType$ Artifact & Food | AddAbility$ FoodSac | Description$ Other creatures are Food artifacts in addition to their other types and have "{2}, {T}, Sacrifice this permanent: You gain 3 life."
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this permanent> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Food | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a Food is put into a graveyard from the battlefield, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Ward—Sacrifice a Food.\nOther creatures are Food artifacts in addition to their other types and have "{2}, {T}, Sacrifice this permanent: You gain 3 life."\nWhenever a Food is put into a graveyard from the battlefield, put two +1/+1 counters on Ygra, Eater of All.

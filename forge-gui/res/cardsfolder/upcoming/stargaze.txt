@@ -1,0 +1,10 @@
+Name:Stargaze
+ManaCost:X B B
+Types:Sorcery
+A:SP$ Dig | DigNum$ Y | ChangeNum$ X | DestinationZone2$ Graveyard | SubAbility$ DBLoseLife | SpellDescription$ Look at twice X cards from the top of your library. Put X cards from among them into your hand and the rest into your graveyard. You lose X life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+SVar:X:Count$xPaid
+SVar:Y:Count$xPaid/Twice
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Delirium
+Oracle:Look at twice X cards from the top of your library. Put X cards from among them into your hand and the rest into your graveyard. You lose X life.
