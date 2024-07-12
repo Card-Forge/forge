@@ -61,19 +61,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return lastStateGraveyard;
     }
     public void setLastStateBattlefield(CardCollectionView lastState) {
-        if (lastState == null) {
-            lastStateBattlefield = CardCollection.EMPTY;
-        } else {
-            // store it in a new object, it might be from Game which can also refresh itself
-            lastStateBattlefield = new CardCollection(lastState);
-        }
+        // store it in a new object, it might be from Game which can also refresh itself
+        lastStateBattlefield = lastState == null ? CardCollection.EMPTY : new CardCollection(lastState);
     }
     public void setLastStateGraveyard(CardCollectionView lastState) {
-        if (lastState == null) {
-            lastStateGraveyard = CardCollection.EMPTY;
-        } else {
-            lastStateGraveyard = new CardCollection(lastState);
-        }
+        lastStateGraveyard = lastState == null ? CardCollection.EMPTY : new CardCollection(lastState);
     }
 
     /**
