@@ -613,10 +613,6 @@ public class GameAction {
         }
 
         game.getTriggerHandler().clearActiveTriggers(copied, null);
-        // register all LTB trigger from last state battlefield
-        for (Card lki : lastBattlefield) {
-            game.getTriggerHandler().registerActiveLTBTrigger(lki);
-        }
         game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         // play the change zone sound
@@ -1438,6 +1434,8 @@ public class GameAction {
             }
             setHoldCheckingStaticAbilities(false);
 
+            table.triggerChangesZoneAll(game, null);
+
             // important to collect first otherwise if a static fires it will mess up registered ones from LKI
             game.getTriggerHandler().collectTriggerForWaiting();
             if (game.getTriggerHandler().runWaitingTriggers()) {
@@ -1447,8 +1445,6 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
-
-            table.triggerChangesZoneAll(game, null);
 
             for (final Card c : cardsToUpdateLKI) {
                 game.updateLastStateForCard(c);
