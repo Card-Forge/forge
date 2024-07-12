@@ -5,8 +5,6 @@ package forge.game.card;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -34,8 +32,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
-        setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
+        setLastStateBattlefield(lastStateBattlefield);
+        setLastStateGraveyard(lastStateGraveyard);
     }
 
     public CardZoneTable(CardZoneTable cardZoneTable) {
@@ -63,11 +61,19 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         return lastStateGraveyard;
     }
     public void setLastStateBattlefield(CardCollectionView lastState) {
-        // store it in a new object, it might be from Game which can also refresh itself
-        this.lastStateBattlefield = new CardCollection(lastState);
+        if (lastState == null) {
+            lastStateBattlefield = CardCollection.EMPTY;
+        } else {
+            // store it in a new object, it might be from Game which can also refresh itself
+            lastStateBattlefield = new CardCollection(lastState);
+        }
     }
     public void setLastStateGraveyard(CardCollectionView lastState) {
-        this.lastStateGraveyard = new CardCollection(lastState);
+        if (lastState == null) {
+            lastStateGraveyard = CardCollection.EMPTY;
+        } else {
+            lastStateGraveyard = new CardCollection(lastState);
+        }
     }
 
     /**
@@ -101,6 +107,14 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         if (cause != null && cause.getReplacingObject(AbilityKey.InternalTriggerTable) == this) {
             // will be handled by original "cause" instead
             return;
+        }
+        // this should still refresh for empty battlefield
+        if (lastStateBattlefield != CardCollection.EMPTY) {
+            game.getTriggerHandler().resetActiveTriggers(false);
+            // register all LTB trigger from last state battlefield
+            for (Card lki : lastStateBattlefield) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
         }
         if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
