@@ -16,6 +16,11 @@ public enum DeckSection {
     Dungeon(0, Validators.DUNGEON_VALIDATOR),
     Attractions(0, Validators.ATTRACTION_VALIDATOR);
 
+    /**
+     * Array of DeckSections that contain nontraditional cards.
+     */
+    public static final DeckSection[] NONTRADITIONAL_SECTIONS = new DeckSection[]{Avatar, Planes, Schemes, Conspiracy, Dungeon, Attractions};
+
     private final int typicalSize; // Rules enforcement is done in DeckFormat class, this is for reference only
     private Function<PaperCard, Boolean> fnValidator;
 
