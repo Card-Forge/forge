@@ -103,7 +103,6 @@ ScryfallCode=M3C
 106 R Aether Refinery @Daniel Ljunggren
 107 R Blaster Hulk @Lie Setiawan
 108 R Filigree Racer @Gaboleps
-109 R Hideous Taskmaster @Helge C. Balzer
 110 R Overclocked Electromancer @Brent Hollowell
 111 R Pyrogoyf @Xabi Gaztelua
 112 R Sawhorn Nemesis @Monztre
