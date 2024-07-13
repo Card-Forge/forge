@@ -1,0 +1,8 @@
+Name:Nettle Guard
+ManaCost:1 W
+Types:Creature Mouse Soldier
+PT:3/1
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPump | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, it gets +0/+2 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ 2
+A:AB$ Destroy | Cost$ 1 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+Oracle:Valiant — Whenever Nettle Guard becomes the target of a spell or ability you control for the first time each turn, it gets +0/+2 until end of turn.\n{1}, Sacrifice Nettle Guard: Destroy target artifact or enchantment.

@@ -1,0 +1,10 @@
+Name:Waterspout Warden
+ManaCost:2 U
+Types:Creature Frog Soldier
+PT:3/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Creature.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPump | TriggerDescription$ Celebration — Whenever CARDNAME attacks, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl+Other
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Waterspout Warden attacks, if another creature entered the battlefield under your control this turn, Waterspout Warden gains flying until end of turn.

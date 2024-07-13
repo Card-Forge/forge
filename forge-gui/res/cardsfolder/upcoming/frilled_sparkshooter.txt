@@ -1,0 +1,10 @@
+Name:Frilled Sparkshooter
+ManaCost:3 R
+Types:Creature Lizard Archer
+PT:3/3
+K:Menace
+K:Reach
+K:etbCounter:P1P1:1:CheckSVar$ X:CARDNAME enters with a +1/+1 counter on it if an opponent lost life this turn.
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$Counters
+Oracle:Menace, reach\nFrilled Sparkshooter enters with a +1/+1 counter on it if an opponent lost life this turn.

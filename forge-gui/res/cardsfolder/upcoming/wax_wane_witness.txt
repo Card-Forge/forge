@@ -1,0 +1,11 @@
+Name:Wax-Wane Witness
+ManaCost:3 W
+Types:Creature Bat Cleric
+PT:2/4
+K:Flying
+K:Vigilance
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigPump | TriggerDescription$ Whenever you gain or lose life during your turn, CARDNAME gets +1/+0 until end of turn.
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever you gain or lose life during your turn, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1
+SVar:X:TriggerCount$LifeAmount
+Oracle:Flying, vigilance\nWhenever you gain or lose life during your turn, Wax-Wane Witness gets +1/+0 until end of turn.
