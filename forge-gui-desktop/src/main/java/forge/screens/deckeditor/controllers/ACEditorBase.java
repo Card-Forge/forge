@@ -214,7 +214,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         Iterable<Entry<String,Integer>> cardsByName = null;
         if (deck != null) {
-            final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
+            final CardPool allCards = deck.getAllCardsInASinglePool();
             cardsByName = Aggregates.groupSumBy(allCards, pc -> pc.getRules().getNormalizedName());
         }
 
