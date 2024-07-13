@@ -191,6 +191,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (sa.hasParam("RememberTokens")) {
                     host.addRemembered(moved);
                 }
+                // used for some reflexive trigger
+                if (sa.hasParam("RememberOriginalTokens") && moved.getRules().getNormalizedName().equals(sa.getParam("TokenScript"))) {
+                    host.addRemembered(moved);
+                }
                 if (sa.hasParam("ImprintTokens")) {
                     host.addImprintedCard(moved);
                 }
