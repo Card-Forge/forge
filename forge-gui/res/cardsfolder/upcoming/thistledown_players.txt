@@ -1,4 +1,4 @@
-Name:Thistledown Player
+Name:Thistledown Players
 ManaCost:2 W
 Types:Creature Mouse Bard
 PT:3/3
