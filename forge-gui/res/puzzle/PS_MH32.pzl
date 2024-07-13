@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Modern Horizons 3 #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/06/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. The highest mana value among cards in exile is 4. Remember that your solution must satisfy all possible opponent decisions. The back side of Legion Leadership is Legion Stronghold.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Legion Leadership;Emperor of Bones;Hideous Taskmaster;Breathe Your Last;Swamp;Flare of Duplication
+p0battlefield=Psychic Frog;Smoldering Marsh;Smoldering Marsh;Smoldering Marsh;Temple of Epiphany;Temple of Epiphany;Temple of Epiphany
+p1life=21
+p1battlefield=Ulamog, the Defiler|Counters:P1P1=4;Forest;Forest;Forest;Forest;Forest;Forest;T:c_0_1_eldrazi_spawn_sac;T:c_0_1_eldrazi_spawn_sac;T:c_0_1_eldrazi_spawn_sac
