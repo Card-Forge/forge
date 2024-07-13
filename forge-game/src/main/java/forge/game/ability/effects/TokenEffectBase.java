@@ -73,6 +73,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         long timestamp = game.getNextTimestamp();
+        Set<Card> originalTokens = Sets.newHashSet(tokenTable.columnKeySet());
 
         // support PlayerCollection for affected
         Set<Player> toRemove = Sets.newHashSet();
@@ -192,7 +193,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     host.addRemembered(moved);
                 }
                 // used for some reflexive trigger
-                if (sa.hasParam("RememberOriginalTokens") && moved.getRules().getNormalizedName().equals(sa.getParam("TokenScript"))) {
+                if (sa.hasParam("RememberOriginalTokens") && originalTokens.contains(prototype)) {
                     host.addRemembered(moved);
                 }
                 if (sa.hasParam("ImprintTokens")) {
