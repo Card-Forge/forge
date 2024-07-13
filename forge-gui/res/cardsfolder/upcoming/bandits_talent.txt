@@ -2,7 +2,7 @@ Name:Bandit's Talent
 ManaCost:1 B
 Types:Enchantment Class
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each opponent discards two cards unless they discard a nonland card.
-SVar:TrigDiscard:DB$ Discard | Defined$ Player.IsRemembered | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Card.nonLand
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Card.nonLand
 K:Class:2:B:AddTrigger$ TriggerUpkeep
 SVar:TriggerUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ X | SVarCompare$ LE1 | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2
