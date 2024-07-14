@@ -1602,14 +1602,14 @@ public class CardFactoryUtil {
                 costDesc = "—" + costDesc;
             }
 
-            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield " +
-                    "| ValidCard$ Card.Self+linkedCastSA | Secondary$ True " +
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+wasCast | CheckSVar$ Offspring | Secondary$ True " +
                     "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            trigger.setSVar("Offspring", "0");
 
             inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {

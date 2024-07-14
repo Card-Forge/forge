@@ -12,7 +12,6 @@ public enum OptionalCost {
     Kicker2("Kicker", ""),
     Retrace("Retrace", ""),
     Jumpstart("Jump-start", ""),
-    Offspring("Offspring", ""),
     ReduceW("(to reduce white mana)", "W"),
     ReduceU("(to reduce blue mana)", "U"),
     ReduceB("(to reduce black mana)", "B"),

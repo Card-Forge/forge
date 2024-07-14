@@ -808,10 +808,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isOptionalCostPaid(OptionalCost.Jumpstart);
     }
 
-    public boolean isOffspring() {
-        return isOptionalCostPaid(OptionalCost.Offspring);
-    }
-
     public boolean isOptionalCostPaid(OptionalCost cost) {
         SpellAbility saRoot = getRootAbility();
         return saRoot.optionalCosts.contains(cost);

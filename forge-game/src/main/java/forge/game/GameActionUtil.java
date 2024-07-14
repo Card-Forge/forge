@@ -433,10 +433,6 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
-            } else if (keyword.startsWith("Offspring")) {
-                String[] k = keyword.split(":");
-                final Cost cost = new Cost(k[1], false);
-                costs.add(new OptionalCostValue(OptionalCost.Offspring, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
                 int numKickers = sCosts.length;
@@ -608,6 +604,24 @@ public final class GameActionUtil {
 
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
                     tr.setSVar("Conspire", v ? "1" : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
+            } else if (o.startsWith("Offspring")) {
+                String[] k = o.split(":");
+                final Cost cost = new Cost(k[1], false);
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String str = "Pay for Offspring? " + cost.toSimpleString();
+
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                    tr.setSVar("Offspring", v ? "1" : "0");
 
                     if (v) {
                         if (result == null) {

@@ -490,6 +490,18 @@ public class GameAction {
                     ki.setHostCard(copied);
                     copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), 0, true);
                 }
+                // TODO hot fix for non-intrinsic offspring
+                Multimap<Long, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
+                for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
+                    if (!kw.isIntrinsic()) {
+                        addKw.put(kw.getStaticId(), kw);
+                    }
+                }
+                if (!addKw.isEmpty()) {
+                    for (Map.Entry<Long, Collection<KeywordInterface>> e : addKw.asMap().entrySet()) {
+                        copied.addChangedCardKeywordsInternal(e.getValue(), null, false, copied.getGameTimestamp(), e.getKey(), true);
+                    }
+                }
 
                 // 607.2q linked ability can find cards exiled as cost while it was a spell
                 copied.addExiledCards(c.getExiledCards());

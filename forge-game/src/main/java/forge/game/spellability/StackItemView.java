@@ -55,7 +55,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         String OptionalCostString = "";
         boolean kicked = false;
         boolean entwined = false;
-        boolean offspring = false;
         boolean buyback = false;
         boolean retraced = false;
         boolean jumpstart = false;
@@ -68,8 +67,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
                 kicked = true;
             if (cost == OptionalCost.Entwine)
                 entwined = true;
-            if (cost == OptionalCost.Offspring)
-                offspring = true;
             if (cost == OptionalCost.Buyback)
                 buyback = true;
             if (cost == OptionalCost.Retrace)
@@ -88,8 +85,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
                 OptionalCostString += "Kicked";
             if (entwined)
                 OptionalCostString += OptionalCostString.equals("") ? "Entwined" : ", Entwined";
-            if (offspring)
-                OptionalCostString += OptionalCostString.equals("") ? "Offspring" : ", Offspring";
             if (buyback)
                 OptionalCostString += OptionalCostString.equals("") ? "Buyback" : ", Buyback";
             if (retraced)
