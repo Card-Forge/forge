@@ -1,0 +1,9 @@
+Name:Polliwallop
+ManaCost:3 G
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each Frog you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to twice its power to target creature you don't control.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ Y | DamageSource$ ParentTarget
+SVar:X:Count$Valid Frog.YouCtrl
+SVar:Y:ParentTargeted$CardPower/Twice
+Oracle:This spell costs {1} less to cast for each Frog you control.\nTarget creature you control deals damage equal to twice its power to target creature you don't control.
