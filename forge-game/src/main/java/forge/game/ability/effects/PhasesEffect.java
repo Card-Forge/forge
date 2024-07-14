@@ -96,7 +96,7 @@ public class PhasesEffect extends SpellAbilityEffect {
             }
         } else { // just phase out
             for (final Card tgtC : tgtCards) {
-                if (!tgtC.isPhasedOut()) {
+                if (!tgtC.isPhasedOut() && !StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
                     tgtC.phase(false);
                     if (tgtC.isPhasedOut()) {
                         if (sa.hasParam("RememberAffected")) {
