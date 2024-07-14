@@ -5586,14 +5586,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (isPhasedOut() && StaticAbilityCantPhase.cantPhaseIn(this)) {
-            return false;
-        }
-
-        if (!isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(this)) {
-            return false;
-        }
-
         if (isPhasedOut() && fromUntapStep && wontPhaseInNormal) {
             return false;
         }
