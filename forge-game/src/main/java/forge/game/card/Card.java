@@ -5570,6 +5570,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // CR 702.26g
         if (!getAllAttachedCards().isEmpty()) {
             for (final Card eq : getAllAttachedCards()) {
+                if (!eq.isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(eq)) {
+                    continue;
+                }
                 if (eq.isPhasedOut() == phasingIn) {
                     eq.phase(fromUntapStep, false);
                 }
