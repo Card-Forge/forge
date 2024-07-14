@@ -1,4 +1,4 @@
-Name:Bayleen, the Haymaker
+Name:Baylen, the Haymaker
 ManaCost:R G W
 Types:Legendary Creature Rabbit Warrior
 PT:4/3
