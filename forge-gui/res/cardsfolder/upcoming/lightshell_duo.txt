@@ -1,0 +1,8 @@
+Name:Lightshell Duo
+ManaCost:3 U
+Types:Creature Rat Otter
+PT:3/4
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 2
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets+1/+1 until end of turn.)\nWhen Lightshell Duo enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

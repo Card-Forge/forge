@@ -1,0 +1,5 @@
+Name:Overprotect
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +3 | NumDef$ +3 | KW$ Trample & Hexproof & Indestructible | SpellDescription$ Target creature you control gets +3/+3 and gains trample, hexproof, and indestructible until end of turn.
+Oracle:Target creature you control gets +3/+3 and gains trample, hexproof, and indestructible until end of turn.
