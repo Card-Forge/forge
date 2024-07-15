@@ -1,0 +1,9 @@
+Name:Pileated Provisioner
+ManaCost:4 W
+Types:Creature Bird Scout
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on target creature you control without flying.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+withoutFlying | TgtPrompt$ Select target creature you control without flying | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Pileated Provisioner enters, put a +1/+1 counter on target creature you control without flying.

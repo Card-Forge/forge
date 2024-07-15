@@ -1,0 +1,8 @@
+Name:Splash Portal
+ManaCost:U
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | StackDescription$ Exile {c:Targeted}, | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBDraw | StackDescription$ then return it to the battlefield under its owner's control.
+SVar:TrigDraw:DB$ Draw | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Bird,Frog,Otter,Rat | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile target creature you control, then return it to the battlefield under its owner's control. If that creature is a Bird, Frog, Otter, or Rat, draw a card.
