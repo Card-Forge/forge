@@ -1,4 +1,4 @@
-Name:Moonstine Harbinger
+Name:Moonstone Harbinger
 ManaCost:2 B
 Types:Creature Bat Warrior
 PT:1/3
