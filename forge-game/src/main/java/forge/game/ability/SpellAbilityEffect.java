@@ -661,6 +661,7 @@ public abstract class SpellAbilityEffect {
         boolean combatChanged = false;
         final Combat combat = game.getCombat();
 
+        // CR 506.3b
         if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(c.getController())) {
             String attacking = sa.getParam(attackingParam);
 
@@ -690,7 +691,7 @@ public abstract class SpellAbilityEffect {
         }
         if (sa.hasParam(blockingParam)) {
             final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
-            if (attacker != null) {
+            if (attacker != null && combat.getDefenderPlayerByAttacker(attacker).equals(c.getController())) {
                 final boolean wasBlocked = combat.isBlocked(attacker);
                 combat.addBlocker(attacker, c);
                 combat.orderAttackersForDamageAssignment(c);
