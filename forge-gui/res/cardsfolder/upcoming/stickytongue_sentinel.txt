@@ -1,0 +1,8 @@
+Name:Stickytongue Sentinel
+ManaCost:2 G
+Types:Creature Frog Warrior
+PT:3/3
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters, return up to one other target permanent you control to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target permanent you control
+Oracle:Reach\nWhen Stickytongue Sentinel enters, return up to one other target permanent you control to its owner's hand.
