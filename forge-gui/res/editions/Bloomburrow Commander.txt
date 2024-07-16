@@ -19,6 +19,9 @@ ScryfallCode=BLC
 95 M Chatterfang, Squirrel General @Yoshimo
 96 R Nissa, Who Shakes the World @Ryota Murayama
 100 M Tamiyo, Field Researcher @Justin Gerard
+101 M Bello, Bard of the Brambles @O-G Osahune
+102 M Hazel of the Rootbloom @TAPIOCA
 103 M Ms. Bumbleflower @KIYA
+104 M Zinnia, Valley's Voice @Lē Yamamura
 209 M Chatterfang, Squirrel General @Jason A. Engle
 356 M Flubs, the Fool @Adam Rex
