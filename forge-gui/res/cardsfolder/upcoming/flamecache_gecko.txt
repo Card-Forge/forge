@@ -1,0 +1,10 @@
+Name:Flamecache Gecko
+ManaCost:1 R
+Types:Creature Lizard Warlock
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, if an opponent lost life this turn, add {B}{R}.
+SVar:TrigMana:DB$ Mana | Produced$ B R
+A:AB$ Draw | Cost$ 1 R Discard<1/Card> | Defined$ You | SpellDescription$ Draw a card.
+SVar:X:Count$LifeOppsLostThisTurn
+DeckHints:Ability$Discard
+Oracle:When Flamecache Gecko enters, if an opponent lost life this turn, add {B}{R}.\n{1}{R}, Discard a card: Draw a card.
