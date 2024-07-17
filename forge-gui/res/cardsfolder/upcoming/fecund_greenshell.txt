@@ -1,0 +1,9 @@
+Name:Fecund Greenshell
+ManaCost:3 G G
+Types:Creature Elemental Turtle
+PT:4/6
+K:Reach
+S:Mode$ Continuous | IsPresent$ Land.YouCtrl | PresentCompare$ GE10 | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ As long as you control ten or more lands, creatures you control get +2/+2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+powerLTtoughness+YouCtrl | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME or another creature you control with toughness greater than its power enters, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. Otherwise, put it into your hand.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Land | Optional$ True | Tapped$ True | DestinationZone$ Battlefield | DestinationZone2$ Hand
+Oracle:Reach\nAs long as you control ten or more lands, creatures you control get +2/+2.\nWhenever Fecund Greenshell or another creature you control with toughness greater than its power enters, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. Otherwise, put it into your hand.

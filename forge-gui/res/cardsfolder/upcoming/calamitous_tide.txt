@@ -1,0 +1,7 @@
+Name:Calamitous Tide
+ManaCost:4 U U
+Types:Sorcery
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return up to two target creatures to their owners' hands.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Return up to two target creatures to their owners' hands. Draw two cards, then discard a card.

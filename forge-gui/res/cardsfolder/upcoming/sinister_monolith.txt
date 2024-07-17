@@ -1,0 +1,9 @@
+Name:Sinister Monolith
+ManaCost:3 B
+Types:Artifact
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Draw | Cost$ T PayLife<2> Sac<1/CARDNAME> | NumCards$ 2 | SorcerySpeed$ True | SpellDescription$ Draw two cards. Activate only as a sorcery.
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life.\n{T}, Pay 2 life, Sacrifice Sinister Monolith: Draw two cards. Activate only as a sorcery.

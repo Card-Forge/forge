@@ -1,0 +1,9 @@
+Name:Jackdaw Savior
+ManaCost:2 W
+Types:Creature Bird Cleric
+PT:3/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+YouCtrl+withFlying | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME or another creature you control with flying dies, return another target creature card with lesser mana value from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.cmcLTX+YouOwn+NotDefinedTriggeredCard | TgtPrompt$ Select another target creature card with lesser mana value in your graveyard | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggeredCard$CardManaCost
+Oracle:Flying\nWhenever Jackdaw Savior or another creature you control with flying dies, return another target creature card with lesser mana value from your graveyard to the battlefield.

@@ -255,11 +255,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             fromTopGrave = true;
         }
         boolean totalCMC = false;
+        boolean totalCMCgreater = false;
         String totalM = "";
         if (type.contains("+withTotalCMCEQ")) {
             totalCMC = true;
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
+        }
+        if (type.contains("+withTotalCMCGE")) {
+            totalCMC = true;
+            totalCMCgreater = true;
+            totalM = type.split("withTotalCMCGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
         }
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
@@ -298,7 +305,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) != total) {
+            int sum = CardLists.getTotalCMC(inp.getSelected());
+            if (inp.hasCancelled() || (sum != total && !totalCMCgreater) || (sum < total && totalCMCgreater)) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());

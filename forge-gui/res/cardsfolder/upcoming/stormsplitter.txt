@@ -1,0 +1,8 @@
+Name:Stormsplitter
+ManaCost:3 R
+Types:Creature Otter Wizard
+PT:1/4
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a token that's a copy of CARDNAME. Exile that token at the beginning of the next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1 | AtEOT$ Exile
+Oracle:Haste\nWhenever you cast an instant or sorcery spell, create a token that's a copy of Stormsplitter. Exile that token at the beginning of the next end step.
