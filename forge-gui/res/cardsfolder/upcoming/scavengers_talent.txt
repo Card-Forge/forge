@@ -1,0 +1,13 @@
+Name:Scavenger's Talent
+ManaCost:B
+Types:Enchantment Class
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control die, create a Food token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+K:Class:2:1 B:AddTrigger$ TriggerSacrifice
+SVar:TriggerSacrifice:Mode$ Sacrificed | ValidCard$ Permanent | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a permanent, target player mills two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player
+K:Class:3:2 B:AddTrigger$ TriggerEnd
+SVar:TriggerEnd:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your end step, you may sacrifice three other nonland permanents. If you do, return a creature card from your graveyard to the battlefield with a finality counter on it.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ Sac<3/Permanent.Other+nonLand/other nonland permanent> | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ChangeType$ Creature.YouOwn | ChangeTypeDesc$ creature | ChangeNum$ 1 | Hidden$ True | Mandatory$ True
+DeckHas:Ability$Token|Graveyard
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever one or more creatures you control die, create a Food token. This ability triggers only once each turn.\n{1}{B}: Level 2\nWhenever you sacrifice a permanent, target player mills two cards.\n{2}{B}: Level 3\nAt the beginning of your end step, you may sacrifice three other nonland permanents. If you do, return a creature card from your graveyard to the battlefield with a finality counter on it.
