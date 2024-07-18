@@ -3,7 +3,7 @@ ManaCost:X 1 W
 Types:Creature Rabbit Warrior
 PT:1/2
 K:Ravenous
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a number of 1/1 white Rabbit creature tokens equal to CARDNAME's power.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$CardPower
