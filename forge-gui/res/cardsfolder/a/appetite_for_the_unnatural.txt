@@ -1,6 +1,6 @@
 Name:Appetite for the Unnatural
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ NaturalLife | SpellDescription$ Destroy target artifact or enchantment. You gain 2 life.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ NaturalLife | SpellDescription$ Destroy target artifact or enchantment. You gain 2 life.
 SVar:NaturalLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target artifact or enchantment. You gain 2 life.

@@ -23,12 +23,11 @@ public final class CardPlayOption {
     private final boolean withFlash;
     private final boolean grantsZonePermissions;
     private final Cost altManaCost;
-    private final boolean altIsAdditional;
 
-    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean altIsAdditional, final boolean withFlash, final boolean grantZonePermissions) {
-        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, altIsAdditional, withFlash, grantZonePermissions);
+    public CardPlayOption(final Player player, final StaticAbility sta, final boolean withoutManaCost, final Cost altManaCost, final boolean withFlash, final boolean grantZonePermissions) {
+        this(player, sta, withoutManaCost ? PayManaCost.NO : PayManaCost.YES, altManaCost, withFlash, grantZonePermissions);
     }
-    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean altIsAdditional, final boolean withFlash,
+    private CardPlayOption(final Player player, final StaticAbility sta, final PayManaCost payManaCost, final Cost altManaCost, final boolean withFlash,
                            final boolean grantZonePermissions) {
         this.player = player;
         this.sta = sta;
@@ -36,7 +35,6 @@ public final class CardPlayOption {
         this.withFlash = withFlash;
         this.grantsZonePermissions = grantZonePermissions;
         this.altManaCost = altManaCost;
-        this.altIsAdditional = altIsAdditional;
     }
 
 
@@ -102,14 +100,9 @@ public final class CardPlayOption {
         switch (getPayManaCost()) {
             case YES:
                 if (altManaCost != null) {
-                    if (altIsAdditional) {
-                        String desc = sta.getParam("Description");
-                        sb.append(" (").append(desc, desc.indexOf("by "), desc.indexOf("."));
-                    } else {
-                        String insteadCost = getFormattedAltManaCost();
-                        insteadCost = insteadCost.replace("Pay ","");
-                        sb.append(" (by paying ").append(insteadCost).append(" instead of paying its mana cost");
-                    }
+                    String insteadCost = getFormattedAltManaCost();
+                    insteadCost = insteadCost.replace("Pay ","");
+                    sb.append(" (by paying ").append(insteadCost).append(" instead of paying its mana cost");
                     if (isWithFlash()) {
                         sb.append(" and as though it has flash");
                     }
@@ -119,6 +112,10 @@ public final class CardPlayOption {
                     sb.append(" (may spend mana as though it were mana of any type to cast it)");
                 } else if (isIgnoreManaCostColor()) {
                     sb.append(" (may spend mana as though it were mana of any color to cast it)");
+                }
+                if (sta.hasParam("RaiseCost")) {
+                    String desc = sta.getParam("Description");
+                    sb.append(" (").append(desc, desc.indexOf("by ") + desc.indexOf("pay "), desc.indexOf(".")).append(")");
                 }
                 break;
             case NO:

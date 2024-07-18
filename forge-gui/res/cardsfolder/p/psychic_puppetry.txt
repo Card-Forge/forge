@@ -2,7 +2,7 @@ Name:Psychic Puppetry
 ManaCost:1 U
 Types:Instant Arcane
 K:Splice:Arcane:U
-A:SP$ TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ You may tap or untap target permanent.
+A:SP$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ You may tap or untap target permanent.
 AI:RemoveDeck:All
 DeckHints:Type$Arcane
 Oracle:You may tap or untap target permanent.\nSplice onto Arcane {U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

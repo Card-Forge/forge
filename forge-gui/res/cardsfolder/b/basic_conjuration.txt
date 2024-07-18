@@ -1,6 +1,6 @@
 Name:Basic Conjuration
 ManaCost:1 G G
 Types:Sorcery Lesson
-A:SP$ Dig | Cost$ 1 G G | DigNum$ 6 | ChangeNum$ 1 | ChangeValid$ Creature | Optional$ True | ForceRevealToController$ True | RestRandomOrder$ True | SubAbility$ DBGainLife | SpellDescription$ Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. You gain 3 life.
+A:SP$ Dig | DigNum$ 6 | ChangeNum$ 1 | ChangeValid$ Creature | Optional$ True | ForceRevealToController$ True | RestRandomOrder$ True | SubAbility$ DBGainLife | SpellDescription$ Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. You gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. You gain 3 life.

@@ -1,7 +1,7 @@
 Name:Return of the Nightstalkers
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 B B | SubAbility$ DBDestroy | ChangeType$ Permanent.Nightstalker+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.
+A:SP$ ChangeZoneAll | SubAbility$ DBDestroy | ChangeType$ Permanent.Nightstalker+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Swamp.YouCtrl
 AI:RemoveDeck:Random
 Oracle:Return all Nightstalker permanent cards from your graveyard to the battlefield. Then destroy all Swamps you control.

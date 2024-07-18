@@ -1,6 +1,6 @@
 Name:King Harald's Revenge
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample & HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Until end of turn, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | KW$ Trample & HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Until end of turn, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Until end of turn, target creature gets +1/+1 for each creature you control and gains trample. It must be blocked this turn if able.

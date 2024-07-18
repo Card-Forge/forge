@@ -1,7 +1,7 @@
 Name:Expanded Anatomy
 ManaCost:3
 Types:Sorcery Lesson
-A:SP$ PutCounter | Cost$ 3 | CounterNum$ 2 | CounterType$ P1P1 | ValidTgts$ Creature | SubAbility$ DBPump | TgtPrompt$ Select target creatures | SpellDescription$ Put two +1/+1 counters on target creature. It gains vigilance until end of turn.
+A:SP$ PutCounter | CounterNum$ 2 | CounterType$ P1P1 | ValidTgts$ Creature | SubAbility$ DBPump | TgtPrompt$ Select target creatures | SpellDescription$ Put two +1/+1 counters on target creature. It gains vigilance until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Vigilance
 DeckHas:Ability$Counters
 Oracle:Put two +1/+1 counters on target creature. It gains vigilance until end of turn.

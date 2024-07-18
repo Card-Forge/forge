@@ -2,7 +2,7 @@ Name:Spoils of War
 ManaCost:X B
 Types:Sorcery
 Text:X is the number of artifact and/or creature cards in an opponent's graveyard as you cast this spell.
-A:SP$ PutCounter | Cost$ X B | AnnounceType$ Opponent | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
+A:SP$ PutCounter | AnnounceType$ Opponent | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X | SpellDescription$ Distribute X +1/+1 counters among any number of target creatures.
 SVar:X:Count$LastStateGraveyardWithFallback Creature.ChosenCtrl,Artifact.ChosenCtrl
 AI:RemoveDeck:All
 Oracle:X is the number of artifact and/or creature cards in an opponent's graveyard as you cast this spell.\nDistribute X +1/+1 counters among any number of target creatures.

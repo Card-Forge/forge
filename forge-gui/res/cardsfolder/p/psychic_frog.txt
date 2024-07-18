@@ -1,0 +1,10 @@
+Name:Psychic Frog
+ManaCost:U B
+Types:Creature Frog
+PT:1/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Planeswalker | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or planeswalker, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ PutCounter | Cost$ Discard<1/Card> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+A:AB$ Pump | Cost$ ExileFromGrave<3/Card> | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
+DeckHas:Ability$Counters|Graveyard
+Oracle:Whenever Psychic Frog deals combat damage to a player or planeswalker, draw a card.\nDiscard a card: Put a +1/+1 counter on Psychic Frog.\nExile three cards from your graveyard: Psychic Frog gains flying until end of turn.

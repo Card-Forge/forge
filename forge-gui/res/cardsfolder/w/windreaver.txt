@@ -3,8 +3,8 @@ ManaCost:3 W U
 Types:Creature Elemental
 PT:1/3
 K:Flying
-A:AB$ Pump | Cost$ W | Defined$ Self | KW$ Vigilance | SpellDescription$ Windreaver gains vigilance until end of turn.
-A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ Windreaver gets +0/+1 until end of turn.
+A:AB$ Pump | Cost$ W | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
+A:AB$ Pump | Cost$ W | Defined$ Self | NumDef$ +1 | SpellDescription$ CARDNAME gets +0/+1 until end of turn.
 A:AB$ Pump | Cost$ U | Defined$ Self | AILogic$ SwitchPT | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch CARDNAME's power and toughness until end of turn.
 A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 Oracle:Flying\n{W}: Windreaver gains vigilance until end of turn.\n{W}: Windreaver gets +0/+1 until end of turn.\n{U}: Switch Windreaver's power and toughness until end of turn.\n{U}: Return Windreaver to its owner's hand.

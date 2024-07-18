@@ -1,7 +1,5 @@
 [metadata]
 Name=earth_elemental
-[Avatar]
-
 [Main]
 1 Boiling Earth|BFZ|1
 2 Brighthearth Banneret|MOR|1
@@ -29,12 +27,4 @@ Name=earth_elemental
 2 Wall of Resurgence|OGW|1
 2 Wildfire Awakener|MOC|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

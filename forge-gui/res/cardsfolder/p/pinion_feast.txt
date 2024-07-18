@@ -1,7 +1,7 @@
 Name:Pinion Feast
 ManaCost:4 G
 Types:Instant
-A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBBolster | SpellDescription$ Destroy target creature with flying. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SubAbility$ DBBolster | SpellDescription$ Destroy target creature with flying. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)
 SVar:DBBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 2 | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Destroy target creature with flying. Bolster 2. (Choose a creature with the least toughness among creatures you control and put two +1/+1 counters on it.)

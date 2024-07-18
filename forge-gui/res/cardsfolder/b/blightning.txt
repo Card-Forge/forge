@@ -1,7 +1,7 @@
 Name:Blightning
 ManaCost:1 B R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 B R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBDiscard | SpellDescription$ Blightning deals 3 damage to target player or planeswalker. That player or that planeswalker's controller discards two cards.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker. That player or that planeswalker's controller discards two cards.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBDiscard2
 SVar:DBDiscard2:DB$ Discard | Defined$ TargetedController | NumCards$ 2 | Mode$ TgtChoose
 Oracle:Blightning deals 3 damage to target player or planeswalker. That player or that planeswalker's controller discards two cards.

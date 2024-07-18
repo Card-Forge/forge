@@ -53,12 +53,31 @@ public class DeckSerializer {
         if (!d.getTags().isEmpty()) {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.TAGS,"=", StringUtils.join(d.getTags(), DeckFileHeader.TAGS_SEPARATOR)));
         }
+        if (!d.getAiHints().isEmpty()) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.AI_HINTS, "=", StringUtils.join(d.getAiHints(), " | ")));
+        }
+        if (!d.getDraftNotes().isEmpty()) {
+            String sb = serializeDraftNotes(d.getDraftNotes());
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.DRAFT_NOTES, "=", sb));
+        }
     
         for(Entry<DeckSection, CardPool> s : d) {
             out.add(TextUtil.enclosedBracket(s.getKey().toString()));
-            out.add(s.getValue().toCardList(System.getProperty("line.separator")));
+            out.add(s.getValue().toCardList(System.lineSeparator()));
         }
         return out;
+    }
+
+    public static String serializeDraftNotes(final Map<String, String> draftNotes) {
+        StringBuilder sb = new StringBuilder();
+        for(String key : draftNotes.keySet()) {
+            if (sb.length() > 0) {
+                sb.append(" | ");
+            }
+
+            sb.append(key).append(":").append(draftNotes.get(key));
+        }
+        return sb.toString();
     }
 
     public static Deck fromFile(final File deckFile) {
@@ -77,7 +96,9 @@ public class DeckSerializer {
 
         Deck d = new Deck(dh.getName());
         d.setComment(dh.getComment());
+        d.setAiHints(dh.getAiHints());
         d.getTags().addAll(dh.getTags());
+        d.setDraftNotes(dh.getDraftNotes());
         d.setDeferredSections(sections);
         return d;
     }

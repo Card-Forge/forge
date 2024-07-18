@@ -1,6 +1,6 @@
 Name:Stubborn Denial
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 1 | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ EQ0 | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target noncreature spell unless its controller pays {1}. Ferocious — If you control a creature with power 4 or greater, counter that spell instead.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | UnlessCost$ 1 | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ EQ0 | StackDescription$ SpellDescription | SubAbility$ DBCounter | SpellDescription$ Counter target noncreature spell unless its controller pays {1}. Ferocious — If you control a creature with power 4 or greater, counter that spell instead.
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | StackDescription$ None
 Oracle:Counter target noncreature spell unless its controller pays {1}.\nFerocious — If you control a creature with power 4 or greater, counter that spell instead.

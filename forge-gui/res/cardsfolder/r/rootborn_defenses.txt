@@ -1,7 +1,7 @@
 Name:Rootborn Defenses
 ManaCost:2 W
 Types:Instant
-A:SP$ CopyPermanent | Cost$ 2 W | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SubAbility$ DBPumpAll | StackDescription$ SpellDescription | SpellDescription$ Populate. Creatures you control gain indestructible until end of turn. (To populate, create a token that's a copy of a creature token you control.)
+A:SP$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SubAbility$ DBPumpAll | StackDescription$ SpellDescription | SpellDescription$ Populate. Creatures you control gain indestructible until end of turn. (To populate, create a token that's a copy of a creature token you control.)
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible
 DeckHints:Ability$Token
 Oracle:Populate. Creatures you control gain indestructible until end of turn. (To populate, create a token that's a copy of a creature token you control.)

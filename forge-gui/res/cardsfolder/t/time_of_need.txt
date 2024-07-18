@@ -1,7 +1,7 @@
 Name:Time of Need
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.Legendary | ChangeNum$ 1 | SpellDescription$ Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary
 Oracle:Search your library for a legendary creature card, reveal it, put it into your hand, then shuffle.

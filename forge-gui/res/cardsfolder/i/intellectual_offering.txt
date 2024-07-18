@@ -1,7 +1,7 @@
 Name:Intellectual Offering
 ManaCost:4 U
 Types:Instant
-A:SP$ ChoosePlayer | Cost$ 4 U | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBDraw | SpellDescription$ Choose an opponent. You and that player each draw three cards. Choose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls.
+A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBDraw | SpellDescription$ Choose an opponent. You and that player each draw three cards. Choose an opponent. Untap all nonland permanents you control and all nonland permanents that player controls.
 SVar:DBDraw:DB$ Draw | Defined$ .Chosen,You | NumCards$ 3 | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBUntap
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Permanent.nonLand+YouCtrl,Permanent.nonLand+ChosenCtrl

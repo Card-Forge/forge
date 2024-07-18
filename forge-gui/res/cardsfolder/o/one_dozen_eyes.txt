@@ -2,7 +2,7 @@ Name:One Dozen Eyes
 ManaCost:5 G
 Types:Sorcery
 K:Entwine:G G G
-A:SP$ Charm | Cost$ 5 G | Choices$ DBToken,DBToken2 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBToken,DBToken2 | CharmNum$ 1
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_5_beast | TokenOwner$ You | SpellDescription$ Create a 5/5 green Beast creature token.
 SVar:DBToken2:DB$ Token | TokenAmount$ 5 | TokenScript$ g_1_1_insect | TokenOwner$ You | SpellDescription$ Create five 1/1 green Insect creature tokens.
 DeckHas:Ability$Token

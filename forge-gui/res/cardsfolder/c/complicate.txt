@@ -2,7 +2,7 @@ Name:Complicate
 ManaCost:2 U
 Types:Instant
 K:Cycling:2 U
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cycle CARDNAME, you may counter target spell unless its controller pays {1}.
 SVar:TrigExile:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1
 Oracle:Counter target spell unless its controller pays {3}.\nCycling {2}{U} ({2}{U}, Discard this card: Draw a card.)\nWhen you cycle Complicate, you may counter target spell unless its controller pays {1}.

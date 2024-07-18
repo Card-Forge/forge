@@ -1,5 +1,5 @@
 Name:Vraska, Swarm's Eminence
-ManaCost:2 B/G B/G
+ManaCost:2 BG BG
 Types:Legendary Planeswalker Vraska
 Loyalty:5
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withDeathtouch+inZoneBattlefield | ValidTarget$ Player,Planeswalker | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control with deathtouch deals damage to a player or planeswalker, put a +1/+1 counter on that creature.

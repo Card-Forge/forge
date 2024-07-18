@@ -2,7 +2,7 @@ Name:Journey of Discovery
 ManaCost:2 G
 Types:Sorcery
 K:Entwine:2 G
-A:SP$ Charm | Cost$ 2 G | Choices$ DBChangeZone,DBEffect | CharmNum$ 1
+A:SP$ Charm | Choices$ DBChangeZone,DBEffect | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, reveal them, put them into your hand, then shuffle.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ JourneyOfDis | AILogic$ Always | SpellDescription$ You may play up to two additional lands this turn.
 SVar:JourneyOfDis:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 2 | EffectZone$ Command | Description$ You may play two additional lands this turn.

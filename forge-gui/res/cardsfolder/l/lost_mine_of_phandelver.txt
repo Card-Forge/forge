@@ -5,7 +5,7 @@ K:Dungeon:DBEntrance,DBGoblinLair,DBMineTunnels,DBStoreroom,DBDarkPool,DBFungiCa
 SVar:DBEntrance:DB$ Scry | ScryNum$ 1 | RoomName$ Cave Entrance | SpellDescription$ Scry 1. | NextRoom$ DBGoblinLair,DBMineTunnels
 SVar:DBGoblinLair:DB$ Token | TokenScript$ r_1_1_goblin | TokenOwner$ You | RoomName$ Goblin Lair | SpellDescription$ Create a 1/1 red Goblin creature token. | NextRoom$ DBStoreroom,DBDarkPool
 SVar:DBMineTunnels:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | RoomName$ Mine Tunnels | SpellDescription$ Create a Treasure token. | NextRoom$ DBDarkPool,DBFungiCavern
-SVar:DBStoreroom:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterType$ P1P1 | CounterNum$ 1 | RoomName$ Storeroom | SpellDescription$ Put a +1/+1 counter on target creature. | NextRoom$ DBTempleDumathoin
+SVar:DBStoreroom:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | RoomName$ Storeroom | SpellDescription$ Put a +1/+1 counter on target creature. | NextRoom$ DBTempleDumathoin
 SVar:DBDarkPool:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | RoomName$ Dark Pool | SpellDescription$ Each opponent loses 1 life and you gain 1 life. | NextRoom$ DBTempleDumathoin
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:DBFungiCavern:DB$ Pump | ValidTgts$ Creature | NumAtt$ -4 | Duration$ UntilYourNextTurn | IsCurse$ True | RoomName$ Fungi Cavern | SpellDescription$ Target creature gets -4/-0 until your next turn. | NextRoom$ DBTempleDumathoin

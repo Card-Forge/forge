@@ -1,7 +1,7 @@
 Name:Gitaxian Probe
 ManaCost:UP
 Types:Sorcery
-A:SP$ RevealHand | Cost$ UP | ValidTgts$ Player | TgtPrompt$ Select target player | Look$ True | SubAbility$ DBDraw | AIPhyrexianPayment$ Never | SpellDescription$ Look at target player's hand.
+A:SP$ RevealHand | ValidTgts$ Player | TgtPrompt$ Select target player | Look$ True | SubAbility$ DBDraw | AIPhyrexianPayment$ Never | SpellDescription$ Look at target player's hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:({U/P} can be paid with either {U} or 2 life.)\nLook at target player's hand.\nDraw a card.

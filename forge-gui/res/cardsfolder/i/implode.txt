@@ -1,6 +1,6 @@
 Name:Implode
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land. | SubAbility$ DBDraw
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Destroy target land.\nDraw a card.

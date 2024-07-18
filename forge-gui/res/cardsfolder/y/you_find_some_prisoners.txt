@@ -1,7 +1,7 @@
 Name:You Find Some Prisoners
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ BreakTheirChains,InterrogateThem
+A:SP$ Charm | Choices$ BreakTheirChains,InterrogateThem
 SVar:BreakTheirChains:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Break Their Chains — Destroy target artifact.
 SVar:InterrogateThem:DB$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Interrogate Them — Exile the top three cards of target opponent's library. Choose one of them. Until the end of your next turn, you may play that card, and you may spend mana as though it were mana of any color to cast it.
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect

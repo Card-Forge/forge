@@ -1,0 +1,16 @@
+Name:Vault 112: Sadistic Simulation
+ManaCost:2 U R
+Types:Enchantment Saga
+K:Chapter:3:DBTap,DBTap,DBChooseNumber
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SpellDescription$ Tap up to one target creature and put a stun counter on it. You get {E}{E} (two energy counters).
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBEnergy
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBShuffle | SpellDescription$ Pay any amount of {E}. If you paid one or more {E} this way, shuffle your library, then exile that many cards from the top. You may play one of those cards without paying its mana cost.
+SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBExile | ConditionCheckSVar$ X
+SVar:DBExile:DB$ Dig | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Max:Count$YourCountersEnergy
+SVar:X:Count$ChosenNumber
+DeckHas:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI, II — Tap up to one target creature and put a stun counter on it. You get {E}{E} (two energy counters).\nIII — Pay any amount of {E}. If you paid one or more {E} this way, shuffle your library, then exile that many cards from the top. You may play one of those cards without paying its mana cost.

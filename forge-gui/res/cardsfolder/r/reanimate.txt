@@ -1,7 +1,7 @@
 Name:Reanimate
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBLoseLifeYou | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its mana value.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | ChangeNum$ 1 | SubAbility$ DBLoseLifeYou | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its mana value.
 SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. You lose life equal to its mana value.

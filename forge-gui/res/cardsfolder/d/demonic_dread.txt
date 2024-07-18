@@ -1,6 +1,6 @@
 Name:Demonic Dread
 ManaCost:1 B R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
 K:Cascade
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nTarget creature can't block this turn.

@@ -5,6 +5,6 @@ PT:3/1
 # Make Svars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | NewName$ Sakashima the Impostor | AddTypes$ Legendary | AddAbilities$ ReturnSakashima | AddSVars$ TrigReturnSak | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has "{2}{U}{U}: Return this creature to its owner's hand at the beginning of the next end step."
-SVar:ReturnSakashima:AB$ DelayedTrigger | Cost$ 2 U U | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturnSak | SpellDescription$ Return CARDNAME to it's owners hand at the beginning of the next end step.
+SVar:ReturnSakashima:AB$ DelayedTrigger | Cost$ 2 U U | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturnSak | SpellDescription$ Return CARDNAME to its owner's hand at the beginning of the next end step.
 SVar:TrigReturnSak:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 Oracle:You may have Sakashima the Impostor enter the battlefield as a copy of any creature on the battlefield, except its name is Sakashima the Impostor, it's legendary in addition to its other types, and it has "{2}{U}{U}: Return this creature to its owner's hand at the beginning of the next end step."

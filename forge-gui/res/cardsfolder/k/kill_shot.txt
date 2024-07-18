@@ -1,5 +1,5 @@
 Name:Kill Shot
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
+A:SP$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SpellDescription$ Destroy target attacking creature.
 Oracle:Destroy target attacking creature.

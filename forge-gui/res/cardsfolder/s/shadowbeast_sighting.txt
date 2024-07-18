@@ -1,7 +1,7 @@
 Name:Shadowbeast Sighting
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
+A:SP$ Token | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
 K:Flashback:6 G
 DeckHas:Ability$Token|Graveyard
 Oracle:Create a 4/4 green Beast creature token.\nFlashback {6}{G}

@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Goblin | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | Reorder$ True
 SVar:X:Count$InYourLibrary.Goblin
 DeckNeeds:Type$Goblin
-#TODO: The AI generally is able to use this card, but will basically place all of its goblins on top of the library in no specific order, which is not very smart. Might need some improvement before RemoveDeck is removed. Currently adding a restriction to at least only play it if the AI has enough lands out on the battlefield already.
+# TODO: The AI generally is able to use this card, but will basically place all of its goblins on top of the library in no specific order, which is not very smart. Might need some improvement before RemoveDeck is removed. Currently adding a restriction to at least only play it if the AI has enough lands out on the battlefield already.
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield

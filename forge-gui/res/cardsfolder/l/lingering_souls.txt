@@ -2,6 +2,6 @@ Name:Lingering Souls
 ManaCost:2 W
 Types:Sorcery
 K:Flashback:1 B
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create two 1/1 white Spirit creature tokens with flying.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Spirit creature tokens with flying.\nFlashback {1}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

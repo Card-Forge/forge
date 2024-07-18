@@ -1,5 +1,5 @@
 Name:Lyev Decree
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | Duration$ UntilYourNextTurn | SpellDescription$ Detain up to two target creatures your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature your opponent controls to detain. | Duration$ UntilYourNextTurn | SpellDescription$ Detain up to two target creatures your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
 Oracle:Detain up to two target creatures your opponents control. (Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)

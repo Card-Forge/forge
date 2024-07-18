@@ -1,6 +1,6 @@
 Name:Yare
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | NumAtt$ 3 | CanBlockAmount$ 2 | SpellDescription$ Target creature defending player controls gets +3/+0 until end of turn. That creature can block up to two additional creatures this turn.
+A:SP$ Pump | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls | NumAtt$ 3 | CanBlockAmount$ 2 | SpellDescription$ Target creature defending player controls gets +3/+0 until end of turn. That creature can block up to two additional creatures this turn.
 AI:RemoveDeck:All
 Oracle:Target creature defending player controls gets +3/+0 until end of turn. That creature can block up to two additional creatures this turn.

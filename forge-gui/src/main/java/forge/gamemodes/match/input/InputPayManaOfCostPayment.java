@@ -8,7 +8,6 @@ import forge.card.mana.ManaCostShard;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
-import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.localinstance.properties.ForgePreferences;
@@ -29,7 +28,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
         // TODO this introduces a small risk for illegal payments if the human "wastes" enough mana for abilities like Doubling Cube
         if (spellAbility.getPayCosts().isMandatory()) {
             List<Mana> refund = new ArrayList<>();
-            mandatory = ManaPool.payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, payer, true, refund);
+            mandatory = payer.getManaPool().payManaCostFromPool(new ManaCostBeingPaid(cost), spellAbility, true, refund);
             payer.getManaPool().refundMana(refund);
         }
 

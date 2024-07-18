@@ -1,7 +1,7 @@
 Name:Trostani's Judgment
 ManaCost:5 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 5 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCopy | SpellDescription$ Exile target creature, then populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCopy | SpellDescription$ Exile target creature, then populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHints:Ability$Token
 Oracle:Exile target creature, then populate. (Create a token that's a copy of a creature token you control.)

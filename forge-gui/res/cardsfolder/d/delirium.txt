@@ -1,7 +1,7 @@
 Name:Delirium
 ManaCost:1 B R
 Types:Instant
-A:SP$ Tap | Cost$ 1 B R | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature current opponent controls | OpponentTurn$ True | SubAbility$ DBDamage | SpellDescription$ Cast this spell only during an opponent's turn. Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
+A:SP$ Tap | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature current opponent controls | OpponentTurn$ True | SubAbility$ DBDamage | SpellDescription$ Cast this spell only during an opponent's turn. Tap target creature that player controls. That creature deals damage equal to its power to the player. Prevent all combat damage that would be dealt to and dealt by the creature this turn.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ X | DamageSource$ Targeted | SubAbility$ DBPump
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by EFFECTSOURCE this turn.

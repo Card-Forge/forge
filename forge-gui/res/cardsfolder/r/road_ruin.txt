@@ -1,7 +1,7 @@
 Name:Road
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 AlternateMode:Split
 Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 
@@ -11,6 +11,6 @@ Name:Ruin
 ManaCost:1 R R
 Types:Sorcery
 K:Aftermath
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of lands you control.
 SVar:X:Count$TypeYouCtrl.Land
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nRuin deals damage to target creature equal to the number of lands you control.

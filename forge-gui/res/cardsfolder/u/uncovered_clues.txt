@@ -1,6 +1,6 @@
 Name:Uncovered Clues
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Instant,Sorcery | SpellDescription$ Look at the top four cards of your library. You may reveal up to two instant and/or sorcery cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 4 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Instant,Sorcery | SpellDescription$ Look at the top four cards of your library. You may reveal up to two instant and/or sorcery cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
 DeckHints:Type$Instant|Sorcery
 Oracle:Look at the top four cards of your library. You may reveal up to two instant and/or sorcery cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.

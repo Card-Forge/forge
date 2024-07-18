@@ -1,6 +1,6 @@
 Name:Moment of Silence
 ManaCost:W
 Types:Instant
-A:SP$ SkipPhase | Cost$ W | ValidTgts$ Player | TgtPrompt$ Select target player | Phase$ Combat | Duration$ NextThisTurn | SpellDescription$ Target player skips their next combat phase this turn.
+A:SP$ SkipPhase | ValidTgts$ Player | TgtPrompt$ Select target player | Phase$ Combat | Duration$ NextThisTurn | SpellDescription$ Target player skips their next combat phase this turn.
 AI:RemoveDeck:All
 Oracle:Target player skips their next combat phase this turn.

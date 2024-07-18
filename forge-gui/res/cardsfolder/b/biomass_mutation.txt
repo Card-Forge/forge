@@ -1,7 +1,7 @@
 Name:Biomass Mutation
 ManaCost:X GU GU
 Types:Instant
-A:SP$ AnimateAll | Cost$ X GU GU | Power$ X | Toughness$ X | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control have base power and toughness X/X until end of turn.
+A:SP$ AnimateAll | Power$ X | Toughness$ X | ValidCards$ Creature.YouCtrl | SpellDescription$ Creatures you control have base power and toughness X/X until end of turn.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Creatures you control have base power and toughness X/X until end of turn.

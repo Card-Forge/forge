@@ -1,5 +1,5 @@
 Name:Fireborn Knight
-ManaCost:R/W R/W R/W R/W
+ManaCost:RW RW RW RW
 Types:Creature Human Knight
 PT:2/3
 K:Double Strike

@@ -1,7 +1,7 @@
 Name:Deadly Visit
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Subability$ DBSurveil | SpellDescription$ Destroy target creature. Surveil 2 (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | Subability$ DBSurveil | SpellDescription$ Destroy target creature. Surveil 2 (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:DBSurveil:DB$ Surveil | Amount$ 2
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Destroy target creature.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

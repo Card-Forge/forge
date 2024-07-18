@@ -2,7 +2,7 @@ Name:Dismantling Blow
 ManaCost:2 W
 Types:Instant
 K:Kicker:2 U
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If CARDNAME was kicked, draw two cards.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment. If CARDNAME was kicked, draw two cards.
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | Condition$ Kicked | ConditionDescription$ If it was kicked,
 DeckHints:Color$Blue
 Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nDestroy target artifact or enchantment. If this spell was kicked, draw two cards.

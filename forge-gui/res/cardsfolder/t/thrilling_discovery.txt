@@ -1,7 +1,7 @@
 Name:Thrilling Discovery
 ManaCost:R W
 Types:Sorcery
-A:SP$ GainLife | Cost$ R W | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life.
+A:SP$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life.
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | UnlessCost$ Discard<2/Card> | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ {p:You} may discard two cards. If they do, they draw three cards. | SpellDescription$ Then you may discard two cards. If you do, draw three cards.
 DeckHas:Ability$Discard|LifeGain
 Oracle:You gain 2 life. Then you may discard two cards. If you do, draw three cards.

@@ -1,5 +1,5 @@
 Name:Inspiring Roar
 ManaCost:3 W
 Types:Sorcery
-A:SP$ PutCounterAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+A:SP$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
 Oracle:Put a +1/+1 counter on each creature you control.

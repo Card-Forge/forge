@@ -1,7 +1,7 @@
 Name:Insidious Will
 ManaCost:2 U U
 Types:Instant
-A:SP$ Charm | Cost$ 2 U U | Choices$ DBCounter,DBChangeTargets,DBCopySpellAbility | Defined$ You
+A:SP$ Charm | Choices$ DBCounter,DBChangeTargets,DBCopySpellAbility | Defined$ You
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
 SVar:DBChangeTargets:DB$ ChangeTargets | TargetType$ Spell | Optional$ True | ValidTgts$ Card | SpellDescription$ You may choose new targets for target spell.
 SVar:DBCopySpellAbility:DB$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.

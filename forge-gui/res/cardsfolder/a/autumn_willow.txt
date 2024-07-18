@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Legendary Creature Avatar
 PT:4/4
 K:Shroud
-A:AB$ Effect | Cost$ G | StaticAbilities$ STLoseAB | RememberObjects$ TargetedPlayer | Duration$ UntilHostLeavesPlayOrEOT | ValidTgts$ Player | TgtPrompt$ Select target player to be able to target CARDNAME | StackDescription$ Until end of turn, {p:Targeted} can target CARDNAME as though it didn't have shroud. | SpellDescription$ Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud.
+A:AB$ Effect | Cost$ G | StaticAbilities$ STLoseAB | RememberObjects$ TargetedPlayer | Duration$ UntilHostLeavesPlayOrEOT | ValidTgts$ Player | TgtPrompt$ Select target player to be able to target CARDNAME | StackDescription$ Until end of turn, {p:Targeted} can target CARDNAME as though it didn't have shroud. | SpellDescription$ Until end of turn, CARDNAME can be the target of spells and abilities controlled by target player as though it didn't have shroud.
 SVar:STLoseAB:Mode$ IgnoreShroud | Activator$ Player.IsRemembered | ValidEntity$ Card.EffectSource | Description$ Until end of turn, EFFECTSOURCE can be the target of spells and abilities controlled by target player as though it didn't have shroud.
 AI:RemoveDeck:All
 Oracle:Shroud (This creature can't be the target of spells or abilities.)\n{G}: Until end of turn, Autumn Willow can be the target of spells and abilities controlled by target player as though it didn't have shroud.

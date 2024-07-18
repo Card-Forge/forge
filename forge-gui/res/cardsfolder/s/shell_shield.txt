@@ -2,6 +2,6 @@ Name:Shell Shield
 ManaCost:U
 Types:Instant
 K:Kicker:1
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumDef$ 3 | SubAbility$ Kicked | SpellDescription$ Target creature gets +0/+3 until end of turn. If CARDNAME was kicked, that creature also gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
-SVar:Kicked:DB$ Pump | Defined$ Targeted | KW$ Hexproof | Condition$ Kicked | ConditionDescription$ If Shell Shield was kicked,
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumDef$ 3 | SubAbility$ Kicked | SpellDescription$ Target creature gets +0/+3 until end of turn. If CARDNAME was kicked, that creature also gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:Kicked:DB$ Pump | Defined$ Targeted | KW$ Hexproof | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked,
 Oracle:Kicker {1} (You may pay an additional {1} as you cast this spell.)\nTarget creature you control gets +0/+3 until end of turn. If this spell was kicked, that creature also gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

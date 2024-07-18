@@ -1,0 +1,6 @@
+Name:Molten Duplication
+ManaCost:1 R
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | NumCopies$ 1 | AddTypes$ Artifact | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact
+Oracle:Create a token that's a copy of target artifact or creature you control, except it's an artifact in addition to its other types. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.

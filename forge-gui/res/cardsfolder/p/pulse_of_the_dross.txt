@@ -1,7 +1,7 @@
 Name:Pulse of the Dross
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | RevealNumber$ 3 | NumCards$ 1 | SubAbility$ ReturnDross | SpellDescription$ Target player reveals three cards from their hand and you choose one of them. That player discards that card. Then if that player has more cards in hand than you, return CARDNAME to its owner's hand.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | RevealNumber$ 3 | NumCards$ 1 | SubAbility$ ReturnDross | SpellDescription$ Target player reveals three cards from their hand and you choose one of them. That player discards that card. Then if that player has more cards in hand than you, return CARDNAME to its owner's hand.
 SVar:ReturnDross:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | Defined$ Parent | Origin$ Stack | Destination$ Hand
 SVar:X:Count$InTargetedHand
 SVar:Y:Count$InYourHand

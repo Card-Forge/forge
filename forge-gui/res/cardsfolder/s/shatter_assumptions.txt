@@ -1,7 +1,7 @@
 Name:Shatter Assumptions
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 B B | Choices$ DBDiscardColorless,DBDiscardMulticolor
+A:SP$ Charm | Choices$ DBDiscardColorless,DBDiscardMulticolor
 SVar:DBDiscardColorless:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+Colorless | SpellDescription$ Target opponent reveals their hand and discards all colorless nonland cards.
 SVar:DBDiscardMulticolor:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealDiscardAll | DiscardValid$ Card.MultiColor | SpellDescription$ Target opponent reveals their hand and discards all multicolored cards.
 Oracle:Choose one —\n• Target opponent reveals their hand and discards all colorless nonland cards.\n• Target opponent reveals their hand and discards all multicolored cards.

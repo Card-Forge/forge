@@ -1,6 +1,6 @@
 Name:Sarkhan's Rage
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to any target. If you control no Dragons, CARDNAME deals 2 damage to you.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 5 damage to any target. If you control no Dragons, CARDNAME deals 2 damage to you.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | ConditionPresent$ Dragon.YouCtrl | ConditionCompare$ EQ0 | NumDmg$ 2
 Oracle:Sarkhan's Rage deals 5 damage to any target. If you control no Dragons, Sarkhan's Rage deals 2 damage to you.

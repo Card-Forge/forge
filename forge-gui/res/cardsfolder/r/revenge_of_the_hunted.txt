@@ -2,5 +2,5 @@ Name:Revenge of the Hunted
 ManaCost:4 G G
 Types:Sorcery
 K:Miracle:G
-A:SP$ Pump | Cost$ 4 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | KW$ Trample & HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +6 | NumDef$ +6 | KW$ Trample & HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.
 Oracle:Until end of turn, target creature gets +6/+6 and gains trample, and all creatures able to block it this turn do so.\nMiracle {G} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

@@ -1,5 +1,5 @@
 Name:Lava Coil
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 4 damage to target creature. If that creature would die this turn, exile it instead.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 4 damage to target creature. If that creature would die this turn, exile it instead.
 Oracle:Lava Coil deals 4 damage to target creature. If that creature would die this turn, exile it instead.

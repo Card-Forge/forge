@@ -1,7 +1,7 @@
 Name:Shamble Back
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 Oracle:Exile target creature card from a graveyard. Create a 2/2 black Zombie creature token. You gain 2 life.

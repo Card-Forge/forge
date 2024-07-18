@@ -1,6 +1,6 @@
 Name:Douse in Gloom
 ManaCost:2 B
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ Douse in Gloom deals 2 damage to target creature and you gain 2 life.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to target creature and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Douse in Gloom deals 2 damage to target creature and you gain 2 life.

@@ -1,7 +1,7 @@
 Name:Heaven's Gate
 ManaCost:W
 Types:Instant
-A:SP$ Animate | Cost$ W | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ White | OverwriteColors$ True | SpellDescription$ One or more target creatures become white until end of turn.
+A:SP$ Animate | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ White | OverwriteColors$ True | SpellDescription$ One or more target creatures become white until end of turn.
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

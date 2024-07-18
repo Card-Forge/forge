@@ -1,6 +1,6 @@
 Name:Redeem
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | KW$ Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all damage that would be dealt this turn to up to two target creatures.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | KW$ Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Prevent all damage that would be dealt this turn to up to two target creatures.
 AI:RemoveDeck:All
 Oracle:Prevent all damage that would be dealt this turn to up to two target creatures.

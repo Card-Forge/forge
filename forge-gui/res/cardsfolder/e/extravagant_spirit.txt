@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Spirit
 PT:4/4
 K:Flying
-K:UpkeepCost:X:{1} for each card in your hand
-SVar:X:Count$InYourHand
+K:UpkeepCost:Y:{1} for each card in your hand
+SVar:Y:Count$InYourHand
 AI:RemoveDeck:All
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.

@@ -1,6 +1,6 @@
 Name:Beacon of Destruction
 ManaCost:3 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBShuffle | SpellDescription$ CARDNAME deals 5 damage to any target. Shuffle CARDNAME into its owner's library.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBShuffle | SpellDescription$ CARDNAME deals 5 damage to any target. Shuffle CARDNAME into its owner's library.
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Beacon of Destruction deals 5 damage to any target. Shuffle Beacon of Destruction into its owner's library.

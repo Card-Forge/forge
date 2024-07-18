@@ -1,7 +1,7 @@
 Name:Outrageous Robbery
 ManaCost:X B B
 Types:Instant
-A:SP$ Dig | Cost$ X B B | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top X cards of their library face down. You may look at and play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any type to cast it.
+A:SP$ Dig | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target opponent exiles the top X cards of their library face down. You may look at and play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any type to cast it.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STLookPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STLookPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any type to cast spells this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

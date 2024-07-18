@@ -2,5 +2,5 @@ Name:Direct Current
 ManaCost:1 R R
 Types:Sorcery
 K:Jump-start
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Direct Current deals 2 damage to any target.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

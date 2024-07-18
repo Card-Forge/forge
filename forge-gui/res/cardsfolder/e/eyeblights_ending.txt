@@ -1,5 +1,5 @@
 Name:Eyeblight's Ending
 ManaCost:2 B
-Types:Tribal Instant Elf
+Types:Kindred Instant Elf
 A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonElf | TgtPrompt$ Select target non-Elf creature | SpellDescription$ Destroy target non-Elf creature.
 Oracle:Destroy target non-Elf creature.

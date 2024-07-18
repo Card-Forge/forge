@@ -1,6 +1,6 @@
 Name:Rallying Roar
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | AILogic$ UntapCombatTrick | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+1 until end of turn. Untap them.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | AILogic$ UntapCombatTrick | SubAbility$ DBUntapAll | SpellDescription$ Creatures you control get +1/+1 until end of turn. Untap them.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 Oracle:Creatures you control get +1/+1 until end of turn. Untap them.

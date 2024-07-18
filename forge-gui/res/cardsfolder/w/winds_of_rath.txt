@@ -1,5 +1,5 @@
 Name:Winds of Rath
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature.unenchanted | NoRegen$ True | SpellDescription$ Destroy all creatures that aren't enchanted. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature.unenchanted | NoRegen$ True | SpellDescription$ Destroy all creatures that aren't enchanted. They can't be regenerated.
 Oracle:Destroy all creatures that aren't enchanted. They can't be regenerated.

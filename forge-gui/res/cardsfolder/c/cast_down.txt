@@ -1,5 +1,5 @@
 Name:Cast Down
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature | SpellDescription$ Destroy target nonlegendary creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Select target nonlegendary creature | SpellDescription$ Destroy target nonlegendary creature.
 Oracle:Destroy target nonlegendary creature.

@@ -1,7 +1,7 @@
 Name:Trap Essence
 ManaCost:G U R
 Types:Instant
-A:SP$ Counter | Cost$ G U R | TargetType$ Spell | ValidTgts$ Card.Creature | TgtPrompt$ Select target creature Spell | SpellDescription$ Counter target creature spell. Put two +1/+1 counters on up to one target creature. | SubAbility$ DBPutcounter
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.Creature | TgtPrompt$ Select target creature Spell | SpellDescription$ Counter target creature spell. Put two +1/+1 counters on up to one target creature. | SubAbility$ DBPutcounter
 SVar:DBPutcounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | ValidTgts$ Creature
 DeckHas:Ability$Counters
 Oracle:Counter target creature spell. Put two +1/+1 counters on up to one target creature.

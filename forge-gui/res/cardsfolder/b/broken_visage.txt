@@ -1,7 +1,7 @@
 Name:Broken Visage
 ManaCost:4 B
 Types:Instant
-A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature.attacking+nonArtifact | TgtPrompt$ Select target nonartifact attacking creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target nonartifact attacking creature. It can't be regenerated. Create a black Spirit creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness. Sacrifice the token at the beginning of the next end step.
+A:SP$ Destroy | ValidTgts$ Creature.attacking+nonArtifact | TgtPrompt$ Select target nonartifact attacking creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target nonartifact attacking creature. It can't be regenerated. Create a black Spirit creature token. Its power is equal to that creature's power and its toughness is equal to that creature's toughness. Sacrifice the token at the beginning of the next end step.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_spirit | TokenOwner$ You | TokenPower$ dX | TokenToughness$ dY | AtEOT$ Sacrifice
 SVar:dX:Targeted$CardPower
 SVar:dY:Targeted$CardToughness

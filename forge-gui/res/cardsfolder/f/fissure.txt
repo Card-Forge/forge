@@ -1,5 +1,5 @@
 Name:Fissure
 ManaCost:3 R R
 Types:Instant
-A:SP$ Destroy | Cost$ 3 R R | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | NoRegen$ True | SpellDescription$ Destroy target creature or land. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature,Land | TgtPrompt$ Select target creature or land | NoRegen$ True | SpellDescription$ Destroy target creature or land. It can't be regenerated.
 Oracle:Destroy target creature or land. It can't be regenerated.

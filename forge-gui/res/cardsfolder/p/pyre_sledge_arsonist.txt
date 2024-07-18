@@ -1,6 +1,6 @@
 Name:Pyre-Sledge Arsonist
 ManaCost:2 R
-Types:Creature Viashino Shaman
+Types:Creature Lizard Shaman
 PT:2/2
 A:AB$ DealDamage | Cost$ 1 T | NumDmg$ X | ValidTgts$ Any | SpellDescription$ CARDNAME deals X damage to any target, where X is the number of permanents you've sacrificed this turn.
 SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent

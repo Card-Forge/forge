@@ -1,7 +1,7 @@
 Name:Defend the Campus
 ManaCost:3 W
 Types:Instant
-A:SP$ Charm | Cost$ 3 W | Choices$ DBPump,DBDestroy
+A:SP$ Charm | Choices$ DBPump,DBDestroy
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
 Oracle:Choose one —\n• Creatures you control get +1/+1 until end of turn.\n• Destroy target creature with power 4 or greater.

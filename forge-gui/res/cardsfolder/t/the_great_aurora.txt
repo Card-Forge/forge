@@ -1,7 +1,7 @@
 Name:The Great Aurora
 ManaCost:6 G G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 G G G | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile CARDNAME.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SubAbility$ RepeatLands | StackDescription$ SpellDescription | SpellDescription$ Each player shuffles all cards from their hand and all permanents they own into their library, then draws that many cards. Each player may put any number of land cards from their hand onto the battlefield. Exile CARDNAME.
 # ChangeType is fine being "Card" because if it's on the battlefield, it has to be a permanent
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.RememberedPlayerOwn | Origin$ Hand,Battlefield | Destination$ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ Remembered$Amount | SubAbility$ DBCleanup

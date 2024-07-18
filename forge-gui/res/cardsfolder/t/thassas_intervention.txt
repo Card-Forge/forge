@@ -1,7 +1,7 @@
 Name:Thassa's Intervention
 ManaCost:X U U
 Types:Instant
-A:SP$ Charm | Cost$ X U U | Choices$ DBDig,DBCounter
+A:SP$ Charm | Choices$ DBDig,DBCounter
 SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 2 | DestinationZone$ Hand | LibraryPosition$ 0 | RestRandomOrder$ True | Optional$ True | SpellDescription$ Look at the top X cards of your library. Put up to two of them into your hand and the rest on the bottom of your library in a random order.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | UnlessCost$ XX | UnlessPayer$ TargetedController | SpellDescription$ Counter target spell unless its controller pays twice {X}.
 SVar:X:Count$xPaid

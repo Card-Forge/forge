@@ -1,5 +1,5 @@
 Name:Nourish
 ManaCost:G G
 Types:Instant
-A:SP$ GainLife | Cost$ G G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+A:SP$ GainLife | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 Oracle:You gain 6 life.

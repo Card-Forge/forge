@@ -1,6 +1,6 @@
 Name:Into Thin Air
 ManaCost:5 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 5 U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
 K:Affinity:Artifact
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nReturn target artifact to its owner's hand.

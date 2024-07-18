@@ -2,8 +2,8 @@ Name:Vigorous Charge
 ManaCost:G
 Types:Instant
 K:Kicker:W
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | KW$ Trample | SubAbility$ VigorousPumping | SpellDescription$ Target creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
-SVar:VigorousPumping:DB$ Effect | TgtPrompt$ Select target creature | Triggers$ TrigDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | Condition$ Kicked | ConditionDescription$ If Vigorous Charge was kicked,
+A:SP$ Pump | ValidTgts$ Creature | KW$ Trample | SubAbility$ VigorousPumping | SpellDescription$ Target creature gains trample until end of turn. Whenever that creature deals combat damage this turn, if this spell was kicked, you gain life equal to that damage.
+SVar:VigorousPumping:DB$ Effect | TgtPrompt$ Select target creature | Triggers$ TrigDamage | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked,
 SVar:TrigDamage:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.IsRemembered | Execute$ VigorousLife | TriggerDescription$ Whenever the targeted creature deals combat damage this turn, you gain life equal to that damage.
 SVar:VigorousLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount

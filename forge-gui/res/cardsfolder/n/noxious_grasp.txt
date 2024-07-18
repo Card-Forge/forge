@@ -1,7 +1,7 @@
 Name:Noxious Grasp
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.White,Planeswalker.White,Creature.Green,Planeswalker.Green | TgtPrompt$ Select target creature or planeswalker that's green or white | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature or planeswalker that's green or white. You gain 1 life.
+A:SP$ Destroy | ValidTgts$ Creature.White,Planeswalker.White,Creature.Green,Planeswalker.Green | TgtPrompt$ Select target creature or planeswalker that's green or white | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature or planeswalker that's green or white. You gain 1 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
 AI:RemoveDeck:Random
 DeckHas:Ability$LifeGain

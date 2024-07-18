@@ -11,5 +11,5 @@ ALTERNATE
 Name:Mesmeric Glare
 ManaCost:2 U
 Types:Instant Adventure
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 3 or less | ValidTgts$ Card.cmcLE3 | SpellDescription$ Counter target spell with mana value 3 or less. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell with mana value 3 or less | ValidTgts$ Card.cmcLE3 | SpellDescription$ Counter target spell with mana value 3 or less. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Counter target spell with mana value 3 or less. (Then exile this card. You may cast the creature later from exile.)

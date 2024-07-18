@@ -1,6 +1,6 @@
 Name:Dark Nourishment
 ManaCost:4 B
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 B | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBDrain | SpellDescription$ CARDNAME deals 3 damage to any target. You gain 3 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBDrain | SpellDescription$ CARDNAME deals 3 damage to any target. You gain 3 life.
 SVar:DBDrain:DB$ GainLife | LifeAmount$ 3
 Oracle:Dark Nourishment deals 3 damage to any target. You gain 3 life.

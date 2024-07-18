@@ -1,7 +1,7 @@
 Name:Berserk
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | KW$ Trample | ActivationPhases$ Upkeep->Declare Blockers | ActivationFirstCombat$ True | SubAbility$ DelTrig | AILogic$ Berserk | SpellDescription$ Cast CARDNAME only before the combat damage step. Target creature gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | KW$ Trample | ActivationPhases$ Upkeep->Declare Blockers | ActivationFirstCombat$ True | SubAbility$ DelTrig | AILogic$ Berserk | SpellDescription$ Cast CARDNAME only before the combat damage step. Target creature gains trample and gets +X/+0 until end of turn, where X is its power. At the beginning of the next end step, destroy that creature if it attacked this turn.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigDestroy | RememberObjects$ Targeted | TriggerDescription$ At the beginning of the next end step, destroy that creature if it attacked this turn. | AILogic$ Always
 SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Card.attackedThisTurn | ConditionCompare$ GE1
 SVar:X:Targeted$CardPower

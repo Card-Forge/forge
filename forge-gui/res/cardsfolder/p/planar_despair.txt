@@ -1,7 +1,7 @@
 Name:Planar Despair
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Domain — All creatures get -1/-1 until end of turn for each basic land type among lands you control.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Domain — All creatures get -1/-1 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 Oracle:Domain — All creatures get -1/-1 until end of turn for each basic land type among lands you control.

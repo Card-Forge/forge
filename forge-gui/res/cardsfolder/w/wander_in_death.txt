@@ -1,7 +1,7 @@
 Name:Wander in Death
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 K:Cycling:2
 DeckHints:Ability$Graveyard
 Oracle:Return up to two target creature cards from your graveyard to your hand.\nCycling {2} ({2}, Discard this card: Draw a card.)

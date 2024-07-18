@@ -4,7 +4,7 @@ Types:Artifact Creature Myr
 PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ X | Description$ CARDNAME can't attack or block unless you pay {1} for each +1/+1 counter on it.
-S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ X
-SVar:X:Count$CardCounters.P1P1
+S:Mode$ CantAttackUnless | ValidCard$ Card.Self | Cost$ Y | Description$ CARDNAME can't attack or block unless you pay {1} for each +1/+1 counter on it.
+S:Mode$ CantBlockUnless | ValidCard$ Card.Self | Cost$ Y
+SVar:Y:Count$CardCounters.P1P1
 Oracle:At the beginning of your upkeep, put a +1/+1 counter on Myr Prototype.\nMyr Prototype can't attack or block unless you pay {1} for each +1/+1 counter on it.

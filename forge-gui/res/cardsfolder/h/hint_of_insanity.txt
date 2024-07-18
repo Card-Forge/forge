@@ -1,7 +1,7 @@
 Name:Hint of Insanity
 ManaCost:2 B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 B | ValidTgts$ Player | IsCurse$ True | RememberRevealed$ True | RememberTargets$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.
+A:SP$ RevealHand | ValidTgts$ Player | IsCurse$ True | RememberRevealed$ True | RememberTargets$ True | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Target player reveals their hand. That player discards all nonland cards with the same name as another card in their hand.
 SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Card.IsRemembered+nonLand | Zone$ Hand | RepeatSubAbility$ DBDiscard | UseImprinted$ True | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ Remembered | DefinedCards$ ValidHand Card.sharesNameWith Imprinted+RememberedPlayerCtrl+IsNotImprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

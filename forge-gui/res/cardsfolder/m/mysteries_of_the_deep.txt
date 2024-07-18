@@ -1,6 +1,6 @@
 Name:Mysteries of the Deep
 ManaCost:4 U
 Types:Instant
-A:SP$ Draw | Cost$ 4 U | NumCards$ X | SpellDescription$ Draw two cards. Landfall — If you had a land enter the battlefield under your control this turn, draw three cards instead.
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw two cards. Landfall — If you had a land enter the battlefield under your control this turn, draw three cards instead.
 SVar:X:Count$Landfall.3.2
 Oracle:Draw two cards.\nLandfall — If you had a land enter the battlefield under your control this turn, draw three cards instead.

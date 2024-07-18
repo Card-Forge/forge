@@ -1,7 +1,7 @@
 Name:Defensive Maneuvers
 ManaCost:3 W
 Types:Instant
-A:SP$ ChooseType | Cost$ 3 W | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +0/+4 until end of turn.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll | SpellDescription$ Creatures of the creature type of your choice get +0/+4 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumDef$ 4
 AI:RemoveDeck:All
 Oracle:Creatures of the creature type of your choice get +0/+4 until end of turn.

@@ -1,7 +1,7 @@
 Name:False Memories
 ManaCost:1 U
 Types:Instant
-A:SP$ Mill | Cost$ 1 U | NumCards$ 7 | SubAbility$ DelTrig | SpellDescription$ Mill seven cards. At the beginning of the next end step, exile seven cards from your graveyard.
+A:SP$ Mill | NumCards$ 7 | SubAbility$ DelTrig | SpellDescription$ Mill seven cards. At the beginning of the next end step, exile seven cards from your graveyard.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigExile | TriggerDescription$ At the beginning of the next end step, exile seven cards from your graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouCtrl | ChangeNum$ 7 | Hidden$ True
 AI:RemoveDeck:Random

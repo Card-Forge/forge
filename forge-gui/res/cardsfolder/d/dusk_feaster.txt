@@ -3,7 +3,7 @@ ManaCost:5 B B
 Types:Creature Vampire
 PT:4/5
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE4 | Description$ Delirium — This spell costs {2} less to cast if there are four or more card types among cards in your graveyard.
-SVar:X:Count$CardControllerTypes.Graveyard
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
 K:Flying
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium

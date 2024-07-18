@@ -2,6 +2,6 @@ Name:Rite of Replication
 ManaCost:2 U U
 Types:Sorcery
 K:Kicker:5
-A:SP$ CopyPermanent | Cost$ 2 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumCopies$ X | SpellDescription$ Create a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead.
+A:SP$ CopyPermanent | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumCopies$ X | SpellDescription$ Create a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead.
 SVar:X:Count$Kicked.5.1
 Oracle:Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a token that's a copy of target creature. If this spell was kicked, create five of those tokens instead.

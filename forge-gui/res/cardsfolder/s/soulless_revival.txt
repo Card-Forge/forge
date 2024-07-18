@@ -2,6 +2,6 @@ Name:Soulless Revival
 ManaCost:1 B
 Types:Instant Arcane
 K:Splice:Arcane:1 B
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 DeckHints:Type$Arcane
 Oracle:Return target creature card from your graveyard to your hand.\nSplice onto Arcane {1}{B} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

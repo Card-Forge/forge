@@ -1,6 +1,6 @@
 Name:Call the Cavalry
 ManaCost:3 W
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create two 2/2 white Knight creature tokens with vigilance.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create two 2/2 white Knight creature tokens with vigilance.
 DeckHas:Ability$Token
 Oracle:Create two 2/2 white Knight creature tokens with vigilance.

@@ -2,7 +2,7 @@ Name:Tooth and Nail
 ManaCost:5 G G
 Types:Sorcery
 K:Entwine:2
-A:SP$ Charm | Cost$ 5 G G | Choices$ DBSearch,DBChangeZone | CharmNum$ 1
+A:SP$ Charm | Choices$ DBSearch,DBChangeZone | CharmNum$ 1
 SVar:DBSearch:DB$ ChangeZone | Cost$ 5 G G | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 2 | Reveal$ True | Shuffle$ True | SpellDescription$ Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 2 | SpellDescription$ Put up to two creature cards from your hand onto the battlefield.
 Oracle:Choose one —\n• Search your library for up to two creature cards, reveal them, put them into your hand, then shuffle.\n• Put up to two creature cards from your hand onto the battlefield.\nEntwine {2} (Choose both if you pay the entwine cost.)

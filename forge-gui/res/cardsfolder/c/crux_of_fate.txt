@@ -1,7 +1,7 @@
 Name:Crux of Fate
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 B B | Choices$ DBDestroyAll,DBDestroyAll2
+A:SP$ Charm | Choices$ DBDestroyAll,DBDestroyAll2
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.Dragon | SpellDescription$ Destroy all Dragon creatures.
 SVar:DBDestroyAll2:DB$ DestroyAll | ValidCards$ Creature.nonDragon | SpellDescription$ Destroy all non-Dragon creatures.
 Oracle:Choose one —\n• Destroy all Dragon creatures.\n• Destroy all non-Dragon creatures.

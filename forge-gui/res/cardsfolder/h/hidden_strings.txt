@@ -2,9 +2,8 @@ Name:Hidden Strings
 ManaCost:1 U
 Types:Sorcery
 K:Cipher
-A:SP$ TapOrUntap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBTapOrUntap | SpellDescription$ You may tap or untap target permanent, then you may tap or untap another target permanent.
-SVar:DBTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent (2) | TargetUnique$ True | SubAbility$ Cipher
-SVar:Cipher:DB$ Encode | Defined$ Self
+A:SP$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBTapOrUntap | SpellDescription$ You may tap or untap target permanent, then you may tap or untap another target permanent.
+SVar:DBTapOrUntap:DB$ TapOrUntap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent (2) | TargetUnique$ True
 AI:RemoveDeck:All
 DeckNeeds:Type$Creature
 Oracle:You may tap or untap target permanent, then you may tap or untap another target permanent.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)

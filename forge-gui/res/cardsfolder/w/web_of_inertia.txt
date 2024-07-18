@@ -2,6 +2,6 @@ Name:Web of Inertia
 ManaCost:2 U
 Types:Enchantment
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ Player.Opponent | Execute$ TrigCantAttack | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn.
-SVar:TrigCantAttack:DB$ Effect | Name$ Web of Inertia Effect | StaticAbilities$ STCantAttack | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ TriggeredPlayer | UnlessAI$ WillAttack | SpellDescription$ Creatures they control can't attack you this turn.
+SVar:TrigCantAttack:DB$ Effect | StaticAbilities$ STCantAttack | UnlessCost$ ExileFromGrave<1/Card> | UnlessPayer$ TriggeredPlayer | UnlessAI$ WillAttack | SpellDescription$ Creatures they control can't attack you this turn.
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you.
 Oracle:At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn.

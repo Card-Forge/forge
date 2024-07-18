@@ -1,7 +1,7 @@
 Name:Rally the Troops
 ManaCost:W
 Types:Instant
-A:SP$ UntapAll | Cost$ W | ValidCards$ Creature.YouCtrl | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Untap all creatures you control.
+A:SP$ UntapAll | ValidCards$ Creature.YouCtrl | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Untap all creatures you control.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nUntap all creatures you control.

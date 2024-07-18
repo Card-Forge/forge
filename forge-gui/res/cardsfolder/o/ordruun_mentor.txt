@@ -1,0 +1,9 @@
+Name:Ordruun Mentor
+ManaCost:2 RW
+Types:Creature Minotaur Soldier
+PT:3/2
+K:Mentor
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player, target creature that's attacking that player gains first strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking TriggeredAttackedTarget | TgtPrompt$ Select target attacking creature that's attacking that player | KW$ First Strike
+DeckHas:Ability$Counters
+Oracle:Mentor (Whenever this creature attacks, put a +1/+1 counter on target attacking creature with lesser power.)\nWhenever you attack a player, target creature that's attacking that player gains first strike until end of turn.

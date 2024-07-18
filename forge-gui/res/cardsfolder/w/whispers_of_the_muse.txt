@@ -1,6 +1,6 @@
 Name:Whispers of the Muse
 ManaCost:U
 Types:Instant
-A:SP$ Draw | Cost$ U | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
 K:Buyback:5
 Oracle:Buyback {5} (You may pay an additional {5} as you cast this spell. If you do, put this card into your hand as it resolves.)\nDraw a card.

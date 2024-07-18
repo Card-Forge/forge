@@ -1,7 +1,7 @@
 Name:Sweep Away
 ManaCost:2 U
 Types:Instant
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.
+A:SP$ Pump | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBDefaultAction | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. If that creature is attacking, you may put it on top of its owner's library instead.
 SVar:DBDefaultAction:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ DBTopLibChoice,DBHandChoice | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:DBTopLibChoice:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ If that creature is attacking, you may put it on top of its owner's library instead.

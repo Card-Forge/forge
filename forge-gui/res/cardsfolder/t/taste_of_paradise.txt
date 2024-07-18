@@ -1,10 +1,9 @@
 Name:Taste of Paradise
 ManaCost:3 G
 Types:Sorcery
-Text:As an additional cost to cast this spell, you may pay {1}{G} any number of times.
-K:Multikicker:1 G:Generic
-A:SP$ GainLife | LifeAmount$ Y | SpellDescription$ You gain 3 life plus an additional 3 life for each additional {1}{G} you paid.
-SVar:Y:SVar$X/Plus.3
-SVar:X:Count$TimesPseudokicked/Times.3
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ 1 G | Amount$ PseudoKicker | EffectZone$ All | Description$ As an additional cost to cast this spell, you may pay {1}{G} any number of times.
+A:SP$ GainLife | LifeAmount$ SVar$X/Times.3 | Announce$ PseudoKicker | SpellDescription$ You gain 3 life plus an additional 3 life for each additional {1}{G} you paid.
+SVar:X:SVar$PseudoKicker/Plus.1
+SVar:PseudoKicker:Number$0
 DeckHas:Ability$LifeGain
 Oracle:As an additional cost to cast this spell, you may pay {1}{G} any number of times.\nYou gain 3 life plus an additional 3 life for each additional {1}{G} you paid.

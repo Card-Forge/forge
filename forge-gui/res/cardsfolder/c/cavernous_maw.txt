@@ -2,7 +2,7 @@ Name:Cavernous Maw
 ManaCost:no cost
 Types:Land Cave
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Animate | Cost$ 2 | CheckSVar$ X | SVarCompare$ GE3 | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | RemoveCreatureTypes$ True | SpellDescription$ CARDNAME becomes a 3/3 Elemental creature until end of turn. It's still a Cave land. Activate only if the number of other Caves you control plus the number of Cave cards in your graveyard is three or greater.
+A:AB$ Animate | Cost$ 2 | CheckSVar$ X | SVarCompare$ GE3 | Defined$ Self | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | SpellDescription$ CARDNAME becomes a 3/3 Elemental creature until end of turn. It's still a Cave land. Activate only if the number of other Caves you control plus the number of Cave cards in your graveyard is three or greater.
 SVar:X:Count$ValidGraveyard,Battlefield Cave.YouOwn+Other
 DeckHas:Type$Elemental
 DeckHints:Type$Cave & Ability$Graveyard|Mill

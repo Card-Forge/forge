@@ -2,6 +2,6 @@ Name:Forbid
 ManaCost:1 U U
 Types:Instant
 K:Buyback:Discard<2/Card>
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Graveyard | SpellDescription$ Counter target spell.
 AI:RemoveDeck:All
 Oracle:Buyback—Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nCounter target spell.

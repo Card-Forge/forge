@@ -1,7 +1,7 @@
 Name:Grapple with the Past
 ManaCost:1 G
 Types:Instant
-A:SP$ Mill | Cost$ 1 G | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then you may return a creature or land card from your graveyard to your hand.
+A:SP$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards, then you may return a creature or land card from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouCtrl,Land.YouCtrl | ChangeNum$ 1 | Hidden$ True
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard

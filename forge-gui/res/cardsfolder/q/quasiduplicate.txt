@@ -2,5 +2,5 @@ Name:Quasiduplicate
 ManaCost:1 U U
 Types:Sorcery
 K:Jump-start
-A:SP$ CopyPermanent | Cost$ 1 U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
 Oracle:Create a token that's a copy of target creature you control.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

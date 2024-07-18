@@ -1,6 +1,6 @@
 Name:Wake the Reflections
 ManaCost:W
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ W | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SpellDescription$ Populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | SpellDescription$ Populate. (Create a token that's a copy of a creature token you control.)
 DeckNeeds:Ability$Token
 Oracle:Populate. (Create a token that's a copy of a creature token you control.)

@@ -2,7 +2,7 @@ Name:Thaumatog
 ManaCost:1 G W
 Types:Creature Atog
 PT:1/2
-A:AB$ Pump | Cost$ Sac<1/Enchantment> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Thaumatog gets +1/+1 until end of turn.
-A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Thaumatog gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Enchantment> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Land> | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 AI:RemoveDeck:All
 Oracle:Sacrifice a land: Thaumatog gets +1/+1 until end of turn.\nSacrifice an enchantment: Thaumatog gets +1/+1 until end of turn.

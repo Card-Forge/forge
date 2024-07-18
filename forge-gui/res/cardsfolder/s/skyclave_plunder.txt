@@ -1,7 +1,7 @@
 Name:Skyclave Plunder
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 4 U | DigNum$ X | ChangeNum$ 3 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top X cards of your library, where X is three plus the number of creatures in your party. Put three of those cards into your hand and the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ X | ChangeNum$ 3 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top X cards of your library, where X is three plus the number of creatures in your party. Put three of those cards into your hand and the rest on the bottom of your library in a random order.
 SVar:X:Count$Party/Plus.3
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard

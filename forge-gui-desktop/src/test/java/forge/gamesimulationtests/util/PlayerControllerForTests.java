@@ -3,6 +3,7 @@ package forge.gamesimulationtests.util;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
 import forge.ai.ComputerUtil;
@@ -37,6 +38,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gamesimulationtests.util.card.CardSpecification;
 import forge.gamesimulationtests.util.card.CardSpecificationHandler;
@@ -51,9 +53,11 @@ import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import com.google.common.collect.Lists;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Default harmless implementation for tests.
@@ -164,6 +168,18 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return chooseItems(sourceList, max);
+    }
+
+    @Override
+    public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
+        // For now, don't change anything for assists in tests
+        // "True" here means don't rewind spell
+        return true;
+    }
+
+    @Override
+    public Player choosePlayerToAssistPayment(FCollectionView<Player> optionList, SpellAbility sa, String title, int max) {
+        return Iterables.getFirst(optionList, null);
     }
 
     @Override
@@ -296,6 +312,11 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         return usableFromOpeningHand;
+    }
+
+    @Override
+    public PlayerZone chooseStartingHand(List<PlayerZone> zones) {
+        return zones.get(0);
     }
 
     @Override
@@ -529,7 +550,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleReplacers, null);
     }

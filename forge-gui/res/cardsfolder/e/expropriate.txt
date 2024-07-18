@@ -1,7 +1,7 @@
 Name:Expropriate
 ManaCost:7 U U
 Types:Sorcery
-A:SP$ Vote | Cost$ 7 U U | Defined$ Player | VoteType$ Time,Money | VoteTime$ DBTime | VoteMoney$ DBMoney | EachVote$ True | SubAbility$ DBChange | SpellDescription$ Council's dilemma — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile CARDNAME.
+A:SP$ Vote | Defined$ Player | VoteType$ Time,Money | VoteTime$ DBTime | VoteMoney$ DBMoney | EachVote$ True | SubAbility$ DBChange | SpellDescription$ Council's dilemma — Starting with you, each player votes for time or money. For each time vote, take an extra turn after this one. For each money vote, choose a permanent owned by the voter and gain control of it. Exile CARDNAME.
 SVar:DBTime:DB$ AddTurn | Defined$ You | NumTurns$ 1
 SVar:DBMoney:DB$ ChooseCard | Defined$ You | Choices$ Permanent.RememberedPlayerOwn | Mandatory$ True | SubAbility$ DBControl
 SVar:DBControl:DB$ GainControl | Defined$ ChosenCard | NewController$ You

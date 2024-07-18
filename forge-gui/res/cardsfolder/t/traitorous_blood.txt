@@ -1,6 +1,6 @@
 Name:Traitorous Blood
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 1 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste & Trample
 Oracle:Gain control of target creature until end of turn. Untap it. It gains trample and haste until end of turn.

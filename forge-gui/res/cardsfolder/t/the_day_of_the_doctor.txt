@@ -9,7 +9,7 @@ SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsNotIm
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | MinAmount$ 0 | Amount$ 3 | Choices$ Doctor | ChoiceTitle$ Choose up to three Doctors | SubAbility$ DBGenericChoice | SpellDescription$ Choose up to three Doctors. You may exile all other creatures. If you do, CARDNAME deals 13 damage to you.
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ DBExileAll,DBCleanupBis
-SVar:DBExileAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDamage | SpellDescription$ Exile all other creatures. If you do, The Day of the Doctor deals 13 damage to you.
+SVar:DBExileAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDamage | SpellDescription$ Exile all other creatures. If you do, CARDNAME deals 13 damage to you.
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 13 | SubAbility$ DBCleanupBis
 SVar:DBCleanupBis:DB$ Cleanup | ClearChosenCard$ True | SpellDescription$ Don't exile all other creatures.
 DeckNeeds:Type$Doctor|Legendary

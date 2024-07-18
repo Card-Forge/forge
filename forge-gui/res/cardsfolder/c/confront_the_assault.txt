@@ -1,5 +1,5 @@
 Name:Confront the Assault
 ManaCost:4 W
 Types:Instant
-A:SP$ Token | Cost$ 4 W | IsPresent$ Creature.attackingYou | TokenAmount$ 3 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Cast this spell only if a creature is attacking you. Create three 1/1 white Spirit creature tokens with flying.
+A:SP$ Token | IsPresent$ Creature.attackingYou | TokenAmount$ 3 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Cast this spell only if a creature is attacking you. Create three 1/1 white Spirit creature tokens with flying.
 Oracle:Cast this spell only if a creature is attacking you.\nCreate three 1/1 white Spirit creature tokens with flying.

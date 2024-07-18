@@ -1,0 +1,35 @@
+[metadata]
+Name=Kojak 2
+Title=Kojak
+Difficulty=medium
+Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
+Icon=Kojak.jpg
+Deck Type=constructed
+[main]
+22 Island|M12
+1 Sapphire Medallion
+4 Briarberry Cohort
+2 Deepchannel Mentor
+3 Faerie Swarm
+2 Inundate
+2 Merrow Levitator
+1 Sunken City
+2 Flow of Ideas
+1 Invisibility
+2 Boomerang
+2 Eye of Nowhere
+2 Counterspell
+1 Muddle the Mixture
+1 Tidings
+2 Concentrate
+1 Kami of the Crescent Moon
+1 Thalakos Seer
+1 Dandân
+1 Manta Ray
+1 Serpent of the Endless Sea
+1 Amnesia
+1 Arcanis the Omnipotent
+1 Sphinx of Magosi
+1 Spire Golem
+1 Harbor Serpent
+[sideboard]

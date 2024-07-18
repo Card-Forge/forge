@@ -1,0 +1,16 @@
+Name:Generous Plunderer
+ManaCost:1 R
+Types:Creature Human Rogue
+PT:2/2
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTreasure | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | RememberOriginalTokens$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigToken | TriggerAmount$ Remembered$Amount | SubAbility$ DBCleanup | SpellDescription$ When you do, target opponent creates a tapped Treasure token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ c_a_treasure_sac | TokenTapped$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME attacks, it deals damage to defending player equal to the number of artifacts they control.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredDefendingPlayer | NumDmg$ X
+SVar:X:Count$Valid Artifact.ControlledBy TriggeredDefendingPlayer
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+Oracle:Menace\nAt the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.\nWhenever Generous Plunderer attacks, it deals damage to defending player equal to the number of artifacts they control.

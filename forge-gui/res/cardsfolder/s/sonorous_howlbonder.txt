@@ -1,5 +1,5 @@
 Name:Sonorous Howlbonder
-ManaCost:1 B/R B/R
+ManaCost:1 BR BR
 Types:Creature Human Warrior
 PT:2/2
 K:Menace

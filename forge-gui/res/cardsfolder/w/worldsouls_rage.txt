@@ -1,7 +1,7 @@
 Name:Worldsoul's Rage
 ManaCost:X R G
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R G | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBChangeZone | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBChangeZone | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ X | Tapped$ True | SpellDescription$ Put up to X land cards from your hand and/or graveyard onto the battlefield tapped.
 SVar:X:Count$xPaid
 DeckHints:Ability$Graveyard|Mill

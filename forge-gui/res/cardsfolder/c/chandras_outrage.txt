@@ -1,6 +1,6 @@
 Name:Chandra's Outrage
 ManaCost:2 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature and 2 damage to that creature's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 Oracle:Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.

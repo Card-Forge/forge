@@ -1,7 +1,7 @@
 Name:Season's Beatings
 ManaCost:R R R R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ R R R R | ValidTgts$ Player | TgtPrompt$ Select target player | RepeatCards$ Creature.TargetedPlayerCtrl | RepeatSubAbility$ DBChooseVictim | DamageMap$ True | SpellDescription$ Family gathering — Each creature target player controls deals damage equal to its power to another random creature that player controls.
+A:SP$ RepeatEach | ValidTgts$ Player | TgtPrompt$ Select target player | RepeatCards$ Creature.TargetedPlayerCtrl | RepeatSubAbility$ DBChooseVictim | DamageMap$ True | SpellDescription$ Family gathering — Each creature target player controls deals damage equal to its power to another random creature that player controls.
 SVar:DBChooseVictim:DB$ ChooseCard | AtRandom$ True | Choices$ Creature.TargetedPlayerCtrl+IsNotRemembered | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | DamageSource$ Remembered | NumDmg$ X | Defined$ ChosenCard | StackDescription$ None
 SVar:X:Remembered$CardPower

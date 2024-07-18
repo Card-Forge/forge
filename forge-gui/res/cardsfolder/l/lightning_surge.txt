@@ -2,7 +2,7 @@ Name:Lightning Surge
 ManaCost:3 R R
 Types:Sorcery
 K:Flashback:5 R R
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDamage | ConditionCheckSVar$ X | ConditionSVarCompare$ LT7 | SpellDescription$ CARDNAME deals 4 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SubAbility$ DBDamage | ConditionCheckSVar$ X | ConditionSVarCompare$ LT7 | SpellDescription$ CARDNAME deals 4 damage to any target.
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 6 | NoPrevention$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | SpellDescription$ Threshold — If seven or more cards are in your graveyard, instead CARDNAME deals 6 damage to that permanent or player and the damage can't be prevented.
 SVar:X:Count$InYourYard
 Oracle:Lightning Surge deals 4 damage to any target.\nThreshold — If seven or more cards are in your graveyard, instead Lightning Surge deals 6 damage to that permanent or player and the damage can't be prevented.\nFlashback {5}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

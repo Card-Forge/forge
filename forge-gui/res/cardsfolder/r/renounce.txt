@@ -1,7 +1,7 @@
 Name:Renounce
 ManaCost:1 W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 W | Defined$ You | Amount$ SacX | SacValid$ Permanent | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Permanent | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of permanents. You gain 2 life for each permanent sacrificed this way.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ LifeX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Permanent.YouCtrl

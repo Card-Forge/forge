@@ -1,7 +1,7 @@
 Name:Divine Deflection
 ManaCost:X W
 Types:Instant
-A:SP$ StoreSVar | Cost$ X W | SVar$ ShieldAmount | Type$ Calculate | Expression$ X | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, CARDNAME deals that much damage to any target.
+A:SP$ StoreSVar | SVar$ ShieldAmount | Type$ Calculate | Expression$ X | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, CARDNAME deals that much damage to any target.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to deal prevented damage to | ReplacementEffects$ ReDamage | RememberObjects$ Targeted
 SVar:ReDamage:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Permanent.YouCtrl | ReplaceWith$ PreventDamage | PreventionEffect$ NextN | Description$ Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, EFFECTSOURCE deals that much damage to any target.
 SVar:PreventDamage:DB$ ReplaceDamage | Amount$ ShieldAmount | DivideShield$ True | SubAbility$ DBDealDamage

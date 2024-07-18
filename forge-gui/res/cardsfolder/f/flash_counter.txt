@@ -1,5 +1,5 @@
 Name:Flash Counter
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Instant spell | ValidTgts$ Instant | SpellDescription$ Counter target instant spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Instant spell | ValidTgts$ Instant | SpellDescription$ Counter target instant spell.
 Oracle:Counter target instant spell.

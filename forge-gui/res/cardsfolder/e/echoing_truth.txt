@@ -1,6 +1,6 @@
 Name:Echoing Truth
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBChangeZoneAll | SpellDescription$ Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
+A:SP$ Pump | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBChangeZoneAll | SpellDescription$ Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ TargetedCard.Self,Permanent.NotDefinedTargeted+sharesNameWith Targeted
 Oracle:Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.

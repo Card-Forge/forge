@@ -7,6 +7,7 @@ public interface ICardRawAbilites
     Iterable<String> getKeywords();
     Iterable<String> getReplacements();
     Iterable<String> getTriggers();
+    Iterable<String> getDraftActions();
     Iterable<String> getStaticAbilities();
     Iterable<String> getAbilities();
     

@@ -1,11 +1,8 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,14 +42,18 @@ final class CardFace implements ICardFace, Cloneable {
     private String toughness = null;
     private String initialLoyalty = "";
     private String defense = "";
+    private Set<Integer> attractionLights = null;
 
     private String nonAbilityText = null;
     private List<String> keywords = null;
     private List<String> abilities = null;
     private List<String> staticAbilities = null;
     private List<String> triggers = null;
+    private List<String> draftActions = null;
     private List<String> replacements = null;
     private Map<String, String> variables = null;
+
+    private Map<String, CardFace> functionalVariants = null;
 
 
 
@@ -64,6 +65,7 @@ final class CardFace implements ICardFace, Cloneable {
     @Override public String getToughness()          { return toughness; }
     @Override public String getInitialLoyalty()              { return initialLoyalty; }
     @Override public String getDefense()              { return defense; }
+    @Override public Set<Integer> getAttractionLights()   { return attractionLights; }
     @Override public String getName()               { return this.name; }
     @Override public CardType getType()             { return this.type; }
     @Override public ManaCost getManaCost()         { return this.manaCost; }
@@ -74,26 +76,38 @@ final class CardFace implements ICardFace, Cloneable {
     @Override public Iterable<String> getAbilities()  { return abilities; }
     @Override public Iterable<String> getStaticAbilities() { return staticAbilities; }
     @Override public Iterable<String> getTriggers()   { return triggers; }
+    @Override public Iterable<String> getDraftActions()   { return draftActions; }
     @Override public Iterable<String> getReplacements() { return replacements; }
     @Override public String getNonAbilityText()       { return nonAbilityText; }
-    @Override public Iterable<Entry<String, String>> getVariables() { return variables.entrySet(); }
+    @Override public Iterable<Entry<String, String>> getVariables() {
+        if (variables == null)
+            return null;
+        return variables.entrySet();
+    }
 
     @Override public String getAltName()              { return this.altName; }
-    
-    public CardFace(String name0) { 
+
+    public CardFace(String name0) {
         this.name = name0; 
         if ( StringUtils.isBlank(name0) )
             throw new RuntimeException("Card name is empty");
     }
     // Here come setters to allow parser supply values
-    void setName(String name)             { this.name = name; }
+    void setName(String name)                { this.name = name; }
     void setAltName(String name)             { this.altName = name; }
     void setType(CardType type0)             { this.type = type0; }
     void setManaCost(ManaCost manaCost0)     { this.manaCost = manaCost0; }
     void setColor(ColorSet color0)           { this.color = color0; }
     void setOracleText(String text)          { this.oracleText = text; }
-    void setInitialLoyalty(String value)        { this.initialLoyalty = value; }
-    void setDefense(String value)        { this.defense = value; }
+    void setInitialLoyalty(String value)     { this.initialLoyalty = value; }
+    void setDefense(String value)            { this.defense = value; }
+    void setAttractionLights(String value) {
+        if (value == null) {
+            this.attractionLights = null;
+            return;
+        }
+        this.attractionLights = Arrays.stream(value.split(" ")).map(Integer::parseInt).collect(Collectors.toSet());
+    }
 
     void setPtText(String value) {
         final String[] k = value.split("/");
@@ -125,9 +139,31 @@ final class CardFace implements ICardFace, Cloneable {
     void addKeyword(String value)            { if (null == this.keywords) { this.keywords = new ArrayList<>(); } this.keywords.add(value); }
     void addAbility(String value)            { if (null == this.abilities) { this.abilities = new ArrayList<>(); } this.abilities.add(value);}
     void addTrigger(String value)            { if (null == this.triggers) { this.triggers = new ArrayList<>(); } this.triggers.add(value);}
+    void addDraftAction(String value)        { if (null == this.draftActions) { this.draftActions = new ArrayList<>(); } this.draftActions.add(value);}
     void addStaticAbility(String value)      { if (null == this.staticAbilities) { this.staticAbilities = new ArrayList<>(); } this.staticAbilities.add(value);}
     void addReplacementEffect(String value)  { if (null == this.replacements) { this.replacements = new ArrayList<>(); } this.replacements.add(value);}
     void addSVar(String key, String value)   { if (null == this.variables) { this.variables = new TreeMap<>(String.CASE_INSENSITIVE_ORDER); } this.variables.put(key, value); }
+
+
+    //Functional variant methods. Used for Attractions and some Un-cards,
+    //when cards with the same name can have different logic.
+    public boolean hasFunctionalVariants() {
+        return this.functionalVariants != null;
+    }
+    @Override public ICardFace getFunctionalVariant(String variant) {
+        if(this.functionalVariants == null)
+            return null;
+        return this.functionalVariants.get(variant);
+    }
+    CardFace getOrCreateFunctionalVariant(String variant) {
+        if (this.functionalVariants == null) {
+            this.functionalVariants = new HashMap<>();
+        }
+        if (!this.functionalVariants.containsKey(variant)) {
+            this.functionalVariants.put(variant, new CardFace(this.name));
+        }
+        return this.functionalVariants.get(variant);
+    }
 
     
     void assignMissingFields() { // Most scripts do not specify color explicitly
@@ -142,6 +178,7 @@ final class CardFace implements ICardFace, Cloneable {
         if ( replacements == null ) replacements = emptyList;
         if ( variables == null ) variables = emptyMap;
         if ( null == nonAbilityText ) nonAbilityText = "";
+        //Not assigning attractionLightVariants here. Too rarely used. Will test for it downstream.
     }
 
 

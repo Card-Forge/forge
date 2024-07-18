@@ -1,5 +1,5 @@
 Name:Adamant Will
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Indestructible | SpellDescription$ Target creature gets +2/+2 and gains indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Indestructible | SpellDescription$ Target creature gets +2/+2 and gains indestructible until end of turn.
 Oracle:Target creature gets +2/+2 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

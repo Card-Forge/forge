@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Dinosaur
 PT:4/4
 K:Trample
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ValidTarget$ Player | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ If Charging Tuskodon would deal combat damage to a player, it deals double that damage instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.Self | ValidTarget$ Player | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ If CARDNAME would deal combat damage to a player, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 Oracle:Trample\nIf Charging Tuskodon would deal combat damage to a player, it deals double that damage to that player instead.

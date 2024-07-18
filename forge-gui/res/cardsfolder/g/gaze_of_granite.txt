@@ -1,7 +1,7 @@
 Name:Gaze of Granite
 ManaCost:X B B G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ X B B G | ValidCards$ Permanent.nonLand+cmcLEX | SpellDescription$ Destroy each nonland permanent with mana value X or less.
+A:SP$ DestroyAll | ValidCards$ Permanent.nonLand+cmcLEX | SpellDescription$ Destroy each nonland permanent with mana value X or less.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Destroy each nonland permanent with mana value X or less.

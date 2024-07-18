@@ -1,0 +1,11 @@
+Name:Sandstorm Salvager
+ManaCost:2 G
+Types:Creature Human Artificer
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Golem artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_3_3_a_golem | TokenOwner$ You
+A:AB$ PutCounterAll | Cost$ 2 T | ValidCards$ Creature.token+YouCtrl | SubAbility$ DBPumpAll | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature token you control.
+SVar:DBPumpAll:DB$ PumpAll | KW$ Trample | ValidCards$ Creature.token+YouCtrl | SpellDescription$ They gain trample until end of turn.
+DeckHas:Ability$Token|Counters & Type$Golem
+DeckHints:Ability$Token
+Oracle:When Sandstorm Salvager enters the battlefield, create a 3/3 colorless Golem artifact creature token.\n{2}, {T}: Put a +1/+1 counter on each creature token you control. They gain trample until end of turn.

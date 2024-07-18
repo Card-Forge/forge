@@ -1,0 +1,12 @@
+Name:Wastescape Battlemage
+ManaCost:1 C
+Types:Creature Eldrazi Wizard
+PT:2/2
+K:Kicker:G:1 U
+T:Mode$ SpellCast | ValidCard$ Card.Self+kicked 1 | Execute$ TrigExile | TriggerDescription$ When you cast this spell, if it was kicked with its {G} kicker, exile target artifact or enchantment an opponent controls.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls | Origin$ Battlefield | Destination$ Exile
+T:Mode$ SpellCast | ValidCard$ Card.Self+kicked 2 | Execute$ TrigReturn | TriggerDescription$ When you cast this spell, if it was kicked with its {1}{U} kicker, return target creature an opponent controls to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
+SVar:PlayMain1:TRUE
+DeckHints:Color$Blue|Green
+Oracle:Kicker {G} and/or {1}{U}\nWhen you cast this spell, if it was kicked with its {G} kicker, exile target artifact or enchantment an opponent controls.\nWhen you cast this spell, if it was kicked with its {1}{U} kicker, return target creature an opponent controls to its owner's hand.

@@ -1,7 +1,7 @@
 Name:Mana Clash
 ManaCost:R
 Types:Sorcery
-A:SP$ Repeat | Cost$ R | ValidTgts$ Opponent | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ ResetCheck | StackDescription$ SpellDescription | SpellDescription$ You and target opponent each flip a coin. CARDNAME deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
+A:SP$ Repeat | ValidTgts$ Opponent | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ ResetCheck | StackDescription$ SpellDescription | SpellDescription$ You and target opponent each flip a coin. CARDNAME deals 1 damage to each player whose coin comes up tails. Repeat this process until both players' coins come up heads on the same flip.
 SVar:ResetCheck:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 0 | SubAbility$ RepeatClash
 SVar:RepeatClash:DB$ RepeatEach | RepeatPlayers$ TargetedAndYou | RepeatSubAbility$ FlipClash | SubAbility$ ClashDamage
 SVar:FlipClash:DB$ FlipACoin | Flipper$ Remembered | NoCall$ True | TailsSubAbility$ ClashTails | RememberResult$ True

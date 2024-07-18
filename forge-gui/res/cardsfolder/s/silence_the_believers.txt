@@ -2,7 +2,7 @@ Name:Silence the Believers
 ManaCost:2 B B
 Types:Instant
 K:Strive:2 B
-A:SP$ Pump | Cost$ 2 B B | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | IsCurse$ True | RememberTargets$ True | SubAbility$ DBExile | StackDescription$ Exile {c:Targeted} and all Auras attached to them. | SpellDescription$ Exile any number of target creatures and all Auras attached to them.
+A:SP$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ MaxTgts | IsCurse$ True | RememberTargets$ True | SubAbility$ DBExile | StackDescription$ Exile {c:Targeted} and all Auras attached to them. | SpellDescription$ Exile any number of target creatures and all Auras attached to them.
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Exile | UseAllOriginZones$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTgts:Count$Valid Creature

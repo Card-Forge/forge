@@ -1,6 +1,6 @@
 Name:Defend the Hearth
 ManaCost:1 G
 Types:Instant
-A:SP$ Effect | Cost$ 1 G | Name$ Defend the Hearth Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt to players this turn.
+A:SP$ Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt to players this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Player | Description$ Prevent all combat damage that would be dealt to players this turn.
 Oracle:Prevent all combat damage that would be dealt to players this turn.

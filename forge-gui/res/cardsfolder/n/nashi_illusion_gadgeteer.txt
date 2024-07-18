@@ -1,0 +1,12 @@
+Name:Nashi, Illusion Gadgeteer
+ManaCost:1 B G U
+Types:Legendary Creature Rat Rogue
+PT:4/4
+K:Menace
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When NICKNAME enters the battlefield, secretly choose a card in your graveyard and conjure a duplicate of it into your hand. If the duplicate isn't a land card, it perpetually gains flash.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Card.YouOwn | Secretly$ True | Amount$ 1 | ChoiceTitle$ Secretly choose a creature in your graveyard | SubAbility$ DBConjure | Mandatory$ True
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | PumpZone$ Hand | KW$ Flash | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+Oracle:Menace, Ward {2}\nWhen Nashi enters the battlefield, secretly choose a card in your graveyard and conjure a duplicate of it into your hand. If the duplicate isn't a land card, it perpetually gains flash.

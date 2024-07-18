@@ -1,6 +1,6 @@
 Name:Renegade's Getaway
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ Indestructible | SubAbility$ DBToken | SpellDescription$ Target permanent gains indestructible until end of turn. Create a 1/1 colorless Servo artifact creature token. (Effects that say "destroy" don't destroy a permanent with indestructible, and if it's a creature, it can't be destroyed by damage.)
+A:SP$ Pump | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | KW$ Indestructible | SubAbility$ DBToken | SpellDescription$ Target permanent gains indestructible until end of turn. Create a 1/1 colorless Servo artifact creature token. (Effects that say "destroy" don't destroy a permanent with indestructible, and if it's a creature, it can't be destroyed by damage.)
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You
 Oracle:Target permanent gains indestructible until end of turn. Create a 1/1 colorless Servo artifact creature token. (Effects that say "destroy" don't destroy a permanent with indestructible, and if it's a creature, it can't be destroyed by damage.)

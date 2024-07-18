@@ -1,8 +1,8 @@
 Name:Rhonas's Last Stand
 ManaCost:G G
 Types:Sorcery
-A:SP$ Token | Cost$ G G | TokenAmount$ 1 | TokenScript$ g_5_4_snake | TokenOwner$ You | SubAbility$ DBNoUntap | SpellDescription$ Create a 5/4 green Snake creature token.
-SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | Name$ Rhonas's Last Stand Effect | SpellDescription$ Lands you control don't untap during your next untap step.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_5_4_snake | TokenOwner$ You | SubAbility$ DBNoUntap | SpellDescription$ Create a 5/4 green Snake creature token.
+SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | SpellDescription$ Lands you control don't untap during your next untap step.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

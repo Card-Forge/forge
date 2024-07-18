@@ -1,7 +1,7 @@
 Name:Vision Charm
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1
+A:SP$ Charm | Choices$ MillOpp,ChangeType,PhaseArtifact | CharmNum$ 1
 SVar:MillOpp:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
 SVar:ChangeType:DB$ ChooseType | Defined$ You | Type$ Land | SubAbility$ ChooseType2 | SpellDescription$ Choose a land type and a basic land type. Each land of the first chosen type becomes the second chosen type until end of turn.
 SVar:ChooseType2:DB$ ChooseType | Defined$ You | Type$ Basic Land | ChooseType2$ True | AILogic$ MostNeededType | SubAbility$ EffChangeType

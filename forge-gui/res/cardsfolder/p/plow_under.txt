@@ -1,5 +1,5 @@
 Name:Plow Under
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G G | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target Land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put two target lands on top of their owners' libraries.
+A:SP$ ChangeZone | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Land | TgtPrompt$ Select target Land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put two target lands on top of their owners' libraries.
 Oracle:Put two target lands on top of their owners' libraries.

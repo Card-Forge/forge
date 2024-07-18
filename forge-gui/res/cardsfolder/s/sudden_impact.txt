@@ -1,6 +1,6 @@
 Name:Sudden Impact
 ManaCost:3 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards in that player's hand.
+A:SP$ DealDamage | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards in that player's hand.
 SVar:X:TargetedPlayer$CardsInHand
 Oracle:Sudden Impact deals damage to target player equal to the number of cards in that player's hand.

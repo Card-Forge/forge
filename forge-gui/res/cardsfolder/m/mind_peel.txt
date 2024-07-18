@@ -1,6 +1,6 @@
 Name:Mind Peel
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 K:Buyback:2 B B
 Oracle:Buyback {2}{B}{B} (You may pay an additional {2}{B}{B} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget player discards a card.

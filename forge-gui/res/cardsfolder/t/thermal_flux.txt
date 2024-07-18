@@ -1,7 +1,7 @@
 Name:Thermal Flux
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ ChooseFreeze,ChooseThaw | Defined$ You
+A:SP$ Charm | Choices$ ChooseFreeze,ChooseThaw | Defined$ You
 SVar:ChooseFreeze:DB$ Animate | ValidTgts$ Permanent.nonSnow | TgtPrompt$ Select target nonsnow permanent | Types$ Snow | SubAbility$ DelTrigSlowtrip | SpellDescription$ Target nonsnow permanent becomes snow until end of turn. Draw a card at the beginning of the next turn's upkeep.
 SVar:ChooseThaw:DB$ Animate | ValidTgts$ Permanent.Snow | TgtPrompt$ Select target snow permanent | RemoveTypes$ Snow | SubAbility$ DelTrigSlowtrip | SpellDescription$ Target snow permanent isn't snow until end of turn. Draw a card at the beginning of the next turn's upkeep.
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.

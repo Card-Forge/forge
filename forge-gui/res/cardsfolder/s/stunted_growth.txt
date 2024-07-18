@@ -1,5 +1,5 @@
 Name:Stunted Growth
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Player | Mandatory$ True | ChangeType$ Card | ChangeNum$ 3 | IsCurse$ True | Chooser$ Targeted | SpellDescription$ Target player chooses three cards from their hand and puts them on top of their library in any order.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Player | Mandatory$ True | ChangeType$ Card | ChangeNum$ 3 | IsCurse$ True | Chooser$ Targeted | SpellDescription$ Target player chooses three cards from their hand and puts them on top of their library in any order.
 Oracle:Target player chooses three cards from their hand and puts them on top of their library in any order.

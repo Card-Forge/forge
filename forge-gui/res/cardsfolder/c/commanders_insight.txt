@@ -1,7 +1,7 @@
 Name:Commander's Insight
 ManaCost:X U U U
 Types:Instant
-A:SP$ Draw | Cost$ X U U U | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose target player | SpellDescription$ Target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game.
+A:SP$ Draw | NumCards$ Z | ValidTgts$ Player | TgtPrompt$ Choose target player | SpellDescription$ Target player draws X cards plus an additional card for each time they've cast a commander from the command zone this game.
 SVar:X:Count$xPaid
 SVar:Y:TargetedPlayer$TotalCommanderCastFromCommandZone
 SVar:Z:SVar$Y/Plus.X

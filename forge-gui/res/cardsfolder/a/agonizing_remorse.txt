@@ -1,7 +1,7 @@
 Name:Agonizing Remorse
 ManaCost:1 B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 1 B | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. Exile that card. You lose 1 life.
+A:SP$ RevealHand | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. Exile that card. You lose 1 life.
 SVar:ExileCard:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | IsCurse$ True | Mandatory$ True | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ You
 Oracle:Target opponent reveals their hand. You choose a nonland card from it or a card from their graveyard. Exile that card. You lose 1 life.

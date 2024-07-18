@@ -2,7 +2,7 @@ Name:Intervention Pact
 ManaCost:0
 Colors:white
 Types:Instant
-A:SP$ ChooseSource | Cost$ 0 | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way. At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way. At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ GainLifeInstead | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ ExileEffect

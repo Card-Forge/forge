@@ -2,5 +2,5 @@ Name:Lurking Skirge
 ManaCost:1 B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.OppOwn | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is an enchantment, CARDNAME becomes a 3/2 Phyrexian Imp creature with flying.
-SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Phyrexian,Imp | Keywords$ Flying | RemoveCardTypes$ True | Duration$ Permanent
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Phyrexian,Imp | Keywords$ Flying | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Duration$ Permanent
 Oracle:When a creature is put into an opponent's graveyard from the battlefield, if Lurking Skirge is an enchantment, Lurking Skirge becomes a 3/2 Phyrexian Imp creature with flying.

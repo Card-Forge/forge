@@ -1,7 +1,7 @@
 Name:Don't Blink
 ManaCost:1 U
 Types:Instant
-A:SP$ Effect | ReplacementEffects$ ReplaceETB | Name$ Don't Blink's Effect | SpellDescription$ Until end of turn, if one or more creatures would enter the battlefield from exile or after being cast from exile, their owners shuffle them into their libraries instead.
+A:SP$ Effect | ReplacementEffects$ ReplaceETB | SpellDescription$ Until end of turn, if one or more creatures would enter the battlefield from exile or after being cast from exile, their owners shuffle them into their libraries instead.
 SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | Origin$ Stack,Exile | ValidCard$ Creature.wasCastFromExile,Creature.wasNotCast | ReplaceWith$ DBShuffle | Description$ If one or more creatures would enter the battlefield from exile or after being cast from exile, their owners shuffle them into their libraries instead.
 SVar:DBShuffle:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | Shuffle$ True
 K:Cycling:2

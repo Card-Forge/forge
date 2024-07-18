@@ -1,6 +1,6 @@
 Name:Disorder
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.White | ValidPlayers$ Player.controlsCreature.White_GE1 | NumDmg$ 2 | SpellDescription$ Disorder deals 2 damage to each white creature and each player who controls a white creature.
+A:SP$ DamageAll | ValidCards$ Creature.White | ValidPlayers$ Player.controlsCreature.White_GE1 | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each white creature and each player who controls a white creature.
 AI:RemoveDeck:Random
 Oracle:Disorder deals 2 damage to each white creature and each player who controls a white creature.

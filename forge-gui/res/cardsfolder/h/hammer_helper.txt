@@ -1,7 +1,7 @@
 Name:Hammer Helper
 ManaCost:3 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBRoll | SpellDescription$ Gain control of target creature until end of turn. Untap that creature.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | LoseControl$ EOT | SubAbility$ DBRoll | SpellDescription$ Gain control of target creature until end of turn. Untap that creature.
 SVar:DBRoll:DB$ RollDice | ResultSVar$ X | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ X | KW$ Haste | SpellDescription$ Until end of turn, it gains haste and gets +X/+0, where X is the result.
 Oracle:Gain control of target creature until end of turn. Untap that creature and roll a six-sided die. Until end of turn, it gains haste and gets +X/+0, where X is the result.

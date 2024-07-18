@@ -1,6 +1,6 @@
 Name:Songs of the Damned
 ManaCost:B
 Types:Instant
-A:SP$ Mana | Cost$ B | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each creature card in your graveyard.
+A:SP$ Mana | Produced$ B | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B} for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 Oracle:Add {B} for each creature card in your graveyard.

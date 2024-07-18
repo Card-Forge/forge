@@ -1,7 +1,7 @@
 Name:Immolating Gyre
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 4 R R | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature and planeswalker you don't control, where X is the number of instant and sorcery cards in your graveyard.
+A:SP$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature and planeswalker you don't control, where X is the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckNeeds:Type$Instant|Sorcery
 Oracle:Immolating Gyre deals X damage to each creature and planeswalker you don't control, where X is the number of instant and sorcery cards in your graveyard.

@@ -1,6 +1,6 @@
 Name:Mindstab
 ManaCost:5 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 5 B | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Target player discards three cards.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 3 | Mode$ TgtChoose | SpellDescription$ Target player discards three cards.
 K:Suspend:4:B
 Oracle:Target player discards three cards.\nSuspend 4—{B} (Rather than cast this card from your hand, you may pay {B} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

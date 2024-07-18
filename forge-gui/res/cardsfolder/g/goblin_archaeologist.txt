@@ -2,7 +2,7 @@ Name:Goblin Archaeologist
 ManaCost:1 R
 Types:Creature Goblin Artificer
 PT:1/2
-A:AB$ FlipACoin | Cost$ R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | WinSubAbility$ DBDestroy | LoseSubAbility$ DBSacSelf | SpellDescription$ Flip a coin. If you win the flip, destroy target artifact and untap Goblin Archaeologist. If you lose the flip, sacrifice Goblin Archaeologist.
+A:AB$ FlipACoin | Cost$ R T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | WinSubAbility$ DBDestroy | LoseSubAbility$ DBSacSelf | SpellDescription$ Flip a coin. If you win the flip, destroy target artifact and untap CARDNAME. If you lose the flip, sacrifice CARDNAME.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | SubAbility$ DBUntapSelf
 SVar:DBUntapSelf:DB$ Untap | Defined$ Self
 SVar:DBSacSelf:DB$ Sacrifice

@@ -1,0 +1,7 @@
+Name:Agent of Acquisitions
+ManaCost:2
+Types:Artifact Creature Construct
+PT:2/1
+Draft:Draft CARDNAME face up.
+Draft:Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can't draft cards for the rest of this draft round. (You may look at booster packs passed to you.)
+Oracle:Draft Agent of Acquisitions face up.\nInstead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn Agent of Acquisitions face down and you can't draft cards for the rest of this draft round. (You may look at booster packs passed to you.)

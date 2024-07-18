@@ -1,5 +1,5 @@
 Name:Ambush
 ManaCost:3 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 R | ValidCards$ Creature.blocking | KW$ First Strike | SpellDescription$ Blocking creatures gain first strike until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.blocking | KW$ First Strike | SpellDescription$ Blocking creatures gain first strike until end of turn.
 Oracle:Blocking creatures gain first strike until end of turn.

@@ -1,7 +1,7 @@
 Name:Dead Reckoning
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B B | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ You may put target creature card from your graveyard on top of your library. If you do, CARDNAME deals damage equal to that card's power to target creature.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Library | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ You may put target creature card from your graveyard on top of your library. If you do, CARDNAME deals damage equal to that card's power to target creature.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ Y | ConditionSVarCompare$ GT0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower

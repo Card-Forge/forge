@@ -1,6 +1,6 @@
 Name:Aspect of Hydra
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is your devotion to green.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is your devotion to green.
 SVar:X:Count$Devotion.Green
 Oracle:Target creature gets +X/+X until end of turn, where X is your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

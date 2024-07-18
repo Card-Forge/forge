@@ -1,7 +1,7 @@
 Name:Dead
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ Dead deals 2 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 AlternateMode:Split
 Oracle:Dead deals 2 damage to target creature.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Gone
 ManaCost:2 R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature you don't control to its owner's hand.
 Oracle:Return target creature you don't control to its owner's hand.

@@ -1,6 +1,6 @@
 Name:Memory Sluice
 ManaCost:UB
 Types:Sorcery
-A:SP$ Mill | Cost$ UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
+A:SP$ Mill | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills four cards.
 K:Conspire
 Oracle:Target player mills four cards.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

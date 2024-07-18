@@ -1,7 +1,7 @@
 Name:Flux
 ManaCost:2 U
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ DBFluxDiscard | SubAbility$ DBDraw | SpellDescription$ Each player discards any number of cards, then draws that many cards. Draw a card.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBFluxDiscard | SubAbility$ DBDraw | SpellDescription$ Each player discards any number of cards, then draws that many cards. Draw a card.
 SVar:DBFluxDiscard:DB$ Discard | Defined$ Player.IsRemembered | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBFluxDraw
 SVar:DBFluxDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanTheFlux
 SVar:CleanTheFlux:DB$ Cleanup | ClearRemembered$ True

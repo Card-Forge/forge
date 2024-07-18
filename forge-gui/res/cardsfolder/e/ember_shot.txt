@@ -1,6 +1,6 @@
 Name:Ember Shot
 ManaCost:6 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 6 R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ Ember Shot deals 3 damage to any target. | SubAbility$ DBDraw
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Ember Shot deals 3 damage to any target.\nDraw a card.

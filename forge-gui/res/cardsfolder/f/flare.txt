@@ -1,7 +1,7 @@
 Name:Flare
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ Flare deals 1 damage to any target. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Flare deals 1 damage to any target.\nDraw a card at the beginning of the next turn's upkeep.

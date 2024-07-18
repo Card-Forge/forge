@@ -2,5 +2,5 @@ Name:Spell Shrivel
 ManaCost:2 U
 Types:Instant
 K:Devoid
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | UnlessCost$ 4 | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell unless its controller pays {4}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | UnlessCost$ 4 | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell unless its controller pays {4}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 Oracle:Devoid (This card has no color.)\nCounter target spell unless its controller pays {4}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

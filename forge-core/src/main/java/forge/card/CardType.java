@@ -60,7 +60,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         Planeswalker(true, "planeswalkers"),
         Scheme(false, "schemes"),
         Sorcery(false, "sorceries"),
-        Tribal(false, "tribals"),
+        Kindred(false, "kindreds"),
         Vanguard(false, "vanguards");
 
         public final boolean isPermanent;
@@ -235,7 +235,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public boolean setCreatureTypes(Collection<String> ctypes) {
         // if it isn't a creature then this has no effect
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature() && !isKindred()) {
             return false;
         }
         boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
@@ -274,7 +274,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public Set<String> getCreatureTypes() {
         final Set<String> creatureTypes = Sets.newHashSet();
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature() && !isKindred()) {
             return creatureTypes;
         }
         if (hasAllCreatureTypes()) { // it should return list of all creature types
@@ -334,7 +334,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean hasAllCreatureTypes() {
-        if (!isCreature() && !isTribal()) { return false; }
+        if (!isCreature() && !isKindred()) { return false; }
         return this.allCreatureTypes;
     }
 
@@ -348,7 +348,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean hasCreatureType(String creatureType) {
-        if (!isCreature() && !isTribal()) { return false; }
+        if (!isCreature() && !isKindred()) { return false; }
 
         creatureType = toMixedCase(creatureType);
         if (!isACreatureType(creatureType)) { return false; }
@@ -381,6 +381,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     @Override
     public boolean hasABasicLandType() {
         return Iterables.any(this.subtypes, Predicates.IS_BASIC_LAND_TYPE);
+    }
+    @Override
+    public boolean hasANonBasicLandType() {
+        return !Collections.disjoint(this.subtypes, getNonBasicTypes());
     }
 
     @Override
@@ -479,8 +483,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public boolean isTribal() {
-        return coreTypes.contains(CoreType.Tribal);
+    public boolean isKindred() {
+        return coreTypes.contains(CoreType.Kindred);
     }
 
     @Override
@@ -496,6 +500,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public final boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
     public final boolean isFortification()  { return hasSubtype("Fortification"); }
+    public boolean isAttraction() {
+        return hasSubtype("Attraction");
+    }
 
     @Override
     public boolean isSaga() {
@@ -509,10 +516,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean isOutlaw() {
-        if (subtypes.isEmpty()) {
+        if (!isCreature() && !isKindred()) {
             return false;
         }
-        return !Collections.disjoint(subtypes, Constant.OUTLAW_TYPES);
+        return !Collections.disjoint(getCreatureTypes(), Constant.OUTLAW_TYPES);
     }
 
     @Override
@@ -618,13 +625,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (this.incomplete) {
             return;
         }
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature() && !isKindred()) {
             allCreatureTypes = false;
         }
         if (subtypes.isEmpty()) {
             return;
         }
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature() && !isKindred()) {
             Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
         }
         if (!isLand()) {
@@ -691,10 +698,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (ctOther == null) {
             return false;
         }
-        if (!isCreature() && !isTribal()) {
+        if (!isCreature() && !isKindred()) {
             return false;
         }
-        if (!ctOther.isCreature() && !ctOther.isTribal()) {
+        if (!ctOther.isCreature() && !ctOther.isKindred()) {
             return false;
         }
 
@@ -958,6 +965,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     public static Collection<String> getBasicTypes() {
         return Collections.unmodifiableCollection(Constant.BASIC_TYPES);
+    }
+    public static Collection<String> getNonBasicTypes() {
+        return Collections.unmodifiableCollection(Constant.LAND_TYPES);
     }
 
     public static Collection<String> getAllCreatureTypes() {

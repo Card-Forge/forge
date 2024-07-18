@@ -1,6 +1,6 @@
 Name:Captured Sunlight
 ManaCost:2 G W
 Types:Sorcery
-A:SP$ GainLife | Cost$ 2 G W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+A:SP$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 K:Cascade
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nYou gain 4 life.

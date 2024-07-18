@@ -1,6 +1,6 @@
 Name:Scattershot
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature.
 K:Storm
 Oracle:Scattershot deals 1 damage to target creature.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

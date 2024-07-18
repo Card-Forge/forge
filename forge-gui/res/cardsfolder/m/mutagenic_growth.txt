@@ -1,5 +1,5 @@
 Name:Mutagenic Growth
 ManaCost:GP
 Types:Instant
-A:SP$ Pump | Cost$ GP | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 Oracle:({G/P} can be paid with either {G} or 2 life.)\nTarget creature gets +2/+2 until end of turn.

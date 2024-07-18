@@ -1,5 +1,5 @@
 Name:Act of Aggression
 ManaCost:3 RP RP
 Types:Instant
-A:SP$ GainControl | Cost$ 3 RP RP | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nGain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.

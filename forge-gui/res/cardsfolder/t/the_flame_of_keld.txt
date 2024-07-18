@@ -4,7 +4,7 @@ Types:Enchantment Saga
 K:Chapter:3:TrigDiscard,TrigDraw,TrigEffect
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SpellDescription$ Discard your hand.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
-SVar:TrigEffect:DB$ Effect | Name$ The Flame of Keld Effect | ReplacementEffects$ FlameOfKeldDamageEvent | SpellDescription$ If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 instead.
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ FlameOfKeldDamageEvent | SpellDescription$ If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 instead.
 SVar:FlameOfKeldDamageEvent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.RedSource | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus2 | Description$ If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 instead.
 SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Plus.2

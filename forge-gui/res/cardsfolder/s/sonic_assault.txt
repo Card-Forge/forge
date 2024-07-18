@@ -2,6 +2,6 @@ Name:Sonic Assault
 ManaCost:1 U R
 Types:Instant
 K:Jump-start
-A:SP$ Tap | Cost$ 1 U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Tap target creature. CARDNAME deals 2 damage to that creature's controller.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Tap target creature. CARDNAME deals 2 damage to that creature's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 Oracle:Tap target creature. Sonic Assault deals 2 damage to that creature's controller.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

@@ -1,7 +1,7 @@
 Name:Kaervek's Torch
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 S:Mode$ RaiseCost | ValidTarget$ Spell.Self | Activator$ Player | Type$ Spell | Amount$ 2 | EffectZone$ Stack | Description$ As long as CARDNAME is on the stack, spells that target it cost {2} more to cast.
 SVar:X:Count$xPaid
 Oracle:As long as Kaervek's Torch is on the stack, spells that target it cost {2} more to cast.\nKaervek's Torch deals X damage to any target.

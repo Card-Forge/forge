@@ -1,7 +1,7 @@
 Name:Dromar's Charm
 ManaCost:W U B
 Types:Instant
-A:SP$ Charm | Cost$ W U B | Choices$ DBGainLife,DBCounter,DBPump | Defined$ You
+A:SP$ Charm | Choices$ DBGainLife,DBCounter,DBPump | Defined$ You
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | Defined$ You | SpellDescription$ You gain 5 life.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.

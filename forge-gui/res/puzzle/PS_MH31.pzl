@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Modern Horizons 3 #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/06/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Assume both graveyards start empty. You have an additional copy of each card in your battlefield in your deck. Remember that your solution must satisfy all possible opponent decisions. The back side of Revitalizing Repast is Old-Growth Grove.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Sarpadian Simulacrum;Reckless Pyrosurfer;Kozilek's Return;Revitalizing Repast;Wither and Bloom;Fangs of Kalonia
+p0library=Temperamental Oozewagg;Nethergoyf;Nethergoyf;Forest;Forest;Temple of Malice;Temple of Malice;Temple of Malice;Twisted Landscape
+p0battlefield=Temperamental Oozewagg;Nethergoyf;Nethergoyf;Forest;Forest;Temple of Malice;Temple of Malice;Temple of Malice;Twisted Landscape
+p1life=10
+p1battlefield=T:b_1_1_snake_deathtouch;Ophiomancer;Horrid Shadowspinner
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle

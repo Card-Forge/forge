@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="79">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1f/cipkkNBLqqqqqqqqqr446Chj1w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzdWVFuwjAMzRc02jF2lgGatF1zjO06OwHQ7RiLRS2MsdsR6hdpliK1H+3Le36xXXWVU1rduNZlUTxVPFuzdl1KH2Udy/XjQ0rPIEzCW6Zz7Mv9ZxeL25f13p3wiCsHgvNmyGtLzhxv5f4HlGMUpvSxjOhzxPouL2HDc6v1RelMPpZc+Tr6DJHO3/nay4gzxLx1IGo09YOXYSE5M672dSRn9rTkSn6mvEd7+mtxiYvIbZ/b+VljI3qCzDFSZ84xWmevRkdztmoVRXSNXju4kVp7GkdqPYUZxdnLaxQ28TxknyvVjDnrlzfDSbztUKcsLWr8PZVLXRf7PA9n76xwWL61nrnV32MesnqApU9Nr7B0G3uXtc9ab+l3je1f7/Oe+YPeRc9uhW//uk9UX9ScUfOH5a0Ws0CruafVnIfS2aob//mb2IoWc0/k99JYr4zkOjX3RPnZw22lceT87s0j0WfHwkXU5Lnmx5rcvmYs7mbAROP2+dR7JC6q3zJnDuRsIXFb9XnaA+K/Bi15hlH51bjIeVmep3s0/gXhfjeM
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEsKgCAURR1lBbXkNtNv0s7aRAQJISSJ6e15PZMcVAde96mpVOGPaJC3BnkL8ekVLlcoLxtn/6JqPYG8jDD1E9uaxPRtDQvAOQKcbNhZTtHLLof03hq69/fOHzmb27jyeG4N9Jo5YQ98jy8+NUYiPcsFN8i9vE+fS8fUGLEHYUE/jHPEztGW2M/2v5SScsYRF1R22+ua+9xkg1rz2OoslQM/UAn5
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../../../obj/door_up.tx" x="216" y="958">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21.tmx"/>
+    <property name="teleportObjectId" value="65"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../obj/door_down.tx" x="223.333" y="17.3333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../obj/enemy.tx" x="82.0833" y="509.5">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../obj/manashards.tx" x="118" y="530"/>
+  <object id="70" template="../../../obj/manashards.tx" x="105.333" y="472.667"/>
+  <object id="71" template="../../../obj/enemy.tx" x="222" y="39.3333">
+   <properties>
+    <property name="enemy" value="Evil Wall"/>
+   </properties>
+  </object>
+  <object id="72" template="../../../obj/enemy.tx" x="230.667" y="398.667">
+   <properties>
+    <property name="enemy" value="Gorgon"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="73,74,73,76"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../obj/waypoint.tx" x="206" y="346.667"/>
+  <object id="74" template="../../../obj/waypoint.tx" x="208" y="92.6667"/>
+  <object id="75" template="../../../obj/waypoint.tx" x="252.667" y="435.333"/>
+  <object id="76" template="../../../obj/waypoint.tx" x="294.667" y="522.667"/>
+  <object id="77" template="../../../obj/waypoint.tx" x="272.667" y="754.667"/>
+ </objectgroup>
+</map>

@@ -1,6 +1,6 @@
 Name:Extract
 ManaCost:U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ U | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Search target player's library for a card and exile it. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | SpellDescription$ Search target player's library for a card and exile it. Then that player shuffles.
 AI:RemoveDeck:All
 Oracle:Search target player's library for a card and exile it. Then that player shuffles.

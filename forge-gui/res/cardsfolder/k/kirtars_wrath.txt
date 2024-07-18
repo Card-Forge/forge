@@ -1,7 +1,7 @@
 Name:Kirtar's Wrath
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature | NoRegen$ True | SubAbility$ ThreshToken | SpellDescription$ Destroy all creatures. They can't be regenerated. Threshold — If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SubAbility$ ThreshToken | SpellDescription$ Destroy all creatures. They can't be regenerated. Threshold — If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.
 SVar:ThreshToken:DB$ Token | Condition$ Threshold | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHas:Ability$Token
 Oracle:Destroy all creatures. They can't be regenerated.\nThreshold — If seven or more cards are in your graveyard, instead destroy all creatures, then create two 1/1 white Spirit creature tokens with flying. Creatures destroyed this way can't be regenerated.

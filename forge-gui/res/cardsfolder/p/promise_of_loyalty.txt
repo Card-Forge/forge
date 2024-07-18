@@ -1,7 +1,7 @@
 Name:Promise of Loyalty
 ManaCost:4 W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 W | RepeatPlayers$ Player | RepeatSubAbility$ DBPutCounter | SubAbility$ DBEffect | SpellDescription$ Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBPutCounter | SubAbility$ DBEffect | SpellDescription$ Each player puts a vow counter on a creature they control and sacrifices the rest. Each of those creatures can't attack you or planeswalkers you control for as long as it has a vow counter on it.
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.ControlledBy Player.IsRemembered | ChoiceTitle$ Choose a creature you control | Chooser$ Player.IsRemembered | Placer$ Player.IsRemembered | CounterType$ VOW | CounterNum$ 1 | RememberCards$ True | SubAbility$ SacAllOthers
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered+ControlledBy Player.IsRemembered
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ VowStatic | ForgetOnMoved$ Battlefield | ForgetCounter$ VOW | Duration$ Permanent | SubAbility$ DBCleanup

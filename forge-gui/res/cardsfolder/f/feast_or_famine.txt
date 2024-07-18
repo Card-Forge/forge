@@ -1,7 +1,7 @@
 Name:Feast or Famine
 ManaCost:3 B
 Types:Instant
-A:SP$ Charm | Cost$ 3 B | Choices$ DBToken,DBDestroy
+A:SP$ Charm | Choices$ DBToken,DBDestroy
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonblack, nonartifact creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature and it can't be regenerated.
 Oracle:Choose one —\n• Create a 2/2 black Zombie creature token.\n• Destroy target nonartifact, nonblack creature. It can't be regenerated.

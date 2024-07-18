@@ -1,0 +1,10 @@
+Name:Nuka-Nuke Launcher
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddKeyword$ Intimidate | Description$ Equipped creature gets +3/+0 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigEffect | TriggerDescription$ Whenever equipped creature attacks, until the end of defending player's next turn, that player gets two rad counters whenever they cast a spell.
+SVar:TrigEffect:DB$ Effect | Duration$ UntilTheEndOfYourNextTurn | Triggers$ CastTrig | EffectOwner$ TriggeredDefendingPlayer
+SVar:CastTrig:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigRadiation | TriggerDescription$ When you cast a spell, you get two rad counters
+SVar:TrigRadiation:DB$ Radiation | Defined$ You | Num$ 2
+K:Equip:3
+Oracle:Equipped creature gets +3/+0 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nWhenever equipped creature attacks, until the end of defending player's next turn, that player gets two rad counters whenever they cast a spell.\nEquip {3}

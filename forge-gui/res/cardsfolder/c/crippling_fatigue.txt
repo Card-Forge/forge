@@ -2,5 +2,5 @@ Name:Crippling Fatigue
 ManaCost:1 B B
 Types:Sorcery
 K:Flashback:1 B PayLife<3>
-A:SP$ Pump | Cost$ 1 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 Oracle:Target creature gets -2/-2 until end of turn.\nFlashback—{1}{B}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

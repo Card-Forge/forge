@@ -1,5 +1,5 @@
 Name:Second Sunrise
 ManaCost:1 W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W W | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Artifact.ThisTurnEnteredFrom_Battlefield,Creature.ThisTurnEnteredFrom_Battlefield,Enchantment.ThisTurnEnteredFrom_Battlefield,Land.ThisTurnEnteredFrom_Battlefield | SpellDescription$ Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Artifact.ThisTurnEnteredFrom_Battlefield,Creature.ThisTurnEnteredFrom_Battlefield,Enchantment.ThisTurnEnteredFrom_Battlefield,Land.ThisTurnEnteredFrom_Battlefield | SpellDescription$ Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.
 Oracle:Each player returns to the battlefield all artifact, creature, enchantment, and land cards in their graveyard that were put there from the battlefield this turn.

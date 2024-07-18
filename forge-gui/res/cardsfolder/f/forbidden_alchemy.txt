@@ -2,7 +2,7 @@ Name:Forbidden Alchemy
 ManaCost:2 U
 Types:Instant
 K:Flashback:6 B
-A:SP$ Dig | Cost$ 2 U | DigNum$ 4 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 4 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
 AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
 DeckHints:Color$Black

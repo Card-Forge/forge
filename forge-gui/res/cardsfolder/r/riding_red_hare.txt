@@ -1,5 +1,5 @@
 Name:Riding Red Hare
 ManaCost:2 W
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Horsemanship | SpellDescription$ Target creature gets +3/+3 and gains horsemanship until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Horsemanship | SpellDescription$ Target creature gets +3/+3 and gains horsemanship until end of turn.
 Oracle:Target creature gets +3/+3 and gains horsemanship until end of turn. (It can't be blocked except by creatures with horsemanship.)

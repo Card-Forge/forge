@@ -1,6 +1,6 @@
 Name:Time Wipe
 ManaCost:2 W W U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 W W U | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBDestroy | SpellDescription$ Return a creature you control to your hand, then destroy all creatures.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBDestroy | SpellDescription$ Return a creature you control to your hand, then destroy all creatures.
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 Oracle:Return a creature you control to its owner's hand, then destroy all creatures.

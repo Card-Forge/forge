@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.Card;
 import forge.game.phase.ExtraPhase;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -20,8 +23,11 @@ public class AddPhaseEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        boolean isTopsy = sa.getActivatingPlayer().getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
-        PhaseHandler phaseHandler = sa.getActivatingPlayer().getGame().getPhaseHandler();
+        final Card host = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
+        boolean isTopsy = activator.getAmountOfKeyword("The phases of your turn are reversed.") % 2 == 1;
+        PhaseHandler phaseHandler = activator.getGame().getPhaseHandler();
+
         PhaseType currentPhase = phaseHandler.getPhase();
 
         // Check for World at War - may need to be moved to SpellAbilityCondition later?
@@ -39,36 +45,36 @@ public class AddPhaseEffect extends SpellAbilityEffect {
             afterPhase = currentPhase;
         }
 
-        // The original next phase following afterPhase
-        PhaseType nextPhase = PhaseType.getNext(afterPhase, isTopsy);
-        List<PhaseType> extraPhaseList = new ArrayList<>();
+        PhaseType nextPhase = PhaseType.getNext(afterPhase, isTopsy); // The original next phase following afterPhase
+        PhaseType followingExtra = PhaseType.smartValueOf(sa.getParam("FollowedBy"));
+        final String extra = sa.getParam("ExtraPhase");
 
-        // Insert ExtraPhase
-        String extra = sa.getParam("ExtraPhase");
-        if (extra.equals("Beginning")) {
-            extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(0));
-        } else if (extra.equals("Combat")) {
-            extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(2));
-        } else { // Currently no effect will add End Phase
-            extraPhaseList.add(PhaseType.smartValueOf(extra));
-        }
+        int num = sa.hasParam("NumPhases") ? AbilityUtils.calculateAmount(host, sa.getParam("NumPhases"), sa) : 1;
+        for(int n = num; n > 0; n--) {
+            List<PhaseType> extraPhaseList = new ArrayList<>();
 
-        // Insert FollowedBy
-        if (sa.hasParam("FollowedBy")) {
-            // Currently all FollowedBy are Main2 phase, which has no step
-            PhaseType followingExtra = PhaseType.smartValueOf(sa.getParam("FollowedBy"));
-            extraPhaseList.add(followingExtra);
-        }
+            // Insert ExtraPhase
+            if (extra.equals("Beginning")) {
+                extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(0));
+            } else if (extra.equals("Combat")) {
+                extraPhaseList.addAll(PhaseType.PHASE_GROUPS.get(2));
+            } else { // Currently no effect will add End Phase
+                extraPhaseList.add(PhaseType.smartValueOf(extra));
+            }
 
-        ExtraPhase extraPhase = phaseHandler.addExtraPhase(afterPhase, extraPhaseList, nextPhase);
+            // Insert FollowedBy (Currently all FollowedBy are Main2 phase, which has no step)
+            if (followingExtra != null) extraPhaseList.add(followingExtra);
 
-        if (sa.hasParam("ExtraPhaseDelayedTrigger")) {
-            final Trigger delTrig = TriggerHandler.parseTrigger(sa.getSVar(sa.getParam("ExtraPhaseDelayedTrigger")), sa.getHostCard(), true);
-            SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraPhaseDelayedTriggerExcute")), sa.getHostCard());
-            overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
-            delTrig.setOverridingAbility(overridingSA);
-            delTrig.setSpawningAbility(sa.copy(sa.getHostCard(), true));
-            extraPhase.addTrigger(delTrig);
+            ExtraPhase extraPhase = phaseHandler.addExtraPhase(afterPhase, extraPhaseList, nextPhase);
+
+            if (sa.hasParam("ExtraPhaseDelayedTrigger")) {
+                final Trigger delTrig = TriggerHandler.parseTrigger(sa.getSVar(sa.getParam("ExtraPhaseDelayedTrigger")), host, true);
+                SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraPhaseDelayedTriggerExcute")), host);
+                overridingSA.setActivatingPlayer(activator);
+                delTrig.setOverridingAbility(overridingSA);
+                delTrig.setSpawningAbility(sa.copy(host, true));
+                extraPhase.addTrigger(delTrig);
+            }
         }
     }
 }

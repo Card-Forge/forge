@@ -1,6 +1,6 @@
 Name:Disturbed Burial
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to your hand.
 K:Buyback:3
 Oracle:Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nReturn target creature card from your graveyard to your hand.

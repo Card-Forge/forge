@@ -2,7 +2,7 @@ Name:Borrowed Hostility
 ManaCost:R
 Types:Instant
 K:Escalate:3
-A:SP$ Charm | Cost$ R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpPower,DBPumpKW
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPumpPower,DBPumpKW
 SVar:DBPumpPower:DB$ Pump | ValidTgts$ Creature | NumAtt$ +3 | TgtPrompt$ Select target creature (for +3/+0) | SpellDescription$ Target creature gets +3/+0 until end of turn.
 SVar:DBPumpKW:DB$ Pump | ValidTgts$ Creature | KW$ First Strike | TgtPrompt$ Select target creature (for First strike) | SpellDescription$ Target creature gains first strike until end of turn.
 Oracle:Escalate {3} (Pay this cost for each mode chosen beyond the first.)\nChoose one or both —\n• Target creature gets +3/+0 until end of turn.\n• Target creature gains first strike until end of turn.

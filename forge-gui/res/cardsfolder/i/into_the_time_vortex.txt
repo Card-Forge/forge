@@ -1,7 +1,7 @@
 Name:Into the Time Vortex
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 R | StackDescription$ None
+A:SP$ Pump | StackDescription$ None
 K:Cascade
 K:Rebound
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

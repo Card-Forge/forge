@@ -1,0 +1,11 @@
+Name:Hidden Blade
+ManaCost:2
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control. If that creature is an Assassin, it gains deathtouch until end of turn.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Assassin | KW$ Deathtouch
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ First Strike | Description$ Equipped creature gets +1/+0 and has first strike.
+K:Equip:2
+DeckHints:Type$Assassin
+Oracle:Flash\nWhen Hidden Blade enters the battlefield, attach it to target creature you control. If that creature is an Assassin, it gains deathtouch until end of turn.\nEquipped creature gets +1/+0 and has first strike.\nEquip {2}

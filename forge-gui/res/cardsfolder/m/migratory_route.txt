@@ -1,7 +1,7 @@
 Name:Migratory Route
 ManaCost:3 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 3 W U | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
 K:TypeCycling:Basic:2
 DeckHas:Ability$Token
 Oracle:Create four 1/1 white Bird creature tokens with flying.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

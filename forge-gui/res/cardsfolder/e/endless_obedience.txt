@@ -2,5 +2,5 @@ Name:Endless Obedience
 ManaCost:4 B B
 Types:Sorcery
 K:Convoke
-A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPut target creature card from a graveyard onto the battlefield under your control.

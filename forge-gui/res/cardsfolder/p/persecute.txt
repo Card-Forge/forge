@@ -1,6 +1,6 @@
 Name:Persecute
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChooseColor | Cost$ 2 B B | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard | SpellDescription$ Choose a color. Target player reveals their hand and discards all cards of that color.
+A:SP$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBRevealDiscard | SpellDescription$ Choose a color. Target player reveals their hand and discards all cards of that color.
 SVar:DBRevealDiscard:DB$ Discard | Mode$ RevealDiscardAll | DiscardValid$ Card.ChosenColor | ValidTgts$ Player | TgtPrompt$ Select target player
 Oracle:Choose a color. Target player reveals their hand and discards all cards of that color.

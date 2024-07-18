@@ -1,7 +1,7 @@
 Name:Doomsday
 ManaCost:B B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B B B | Origin$ Graveyard,Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 5 | SubAbility$ DBChangeZone | RememberChanged$ True | Mandatory$ True | SpellDescription$ Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.
+A:SP$ ChangeZone | Origin$ Graveyard,Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 5 | SubAbility$ DBChangeZone | RememberChanged$ True | Mandatory$ True | SpellDescription$ Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up.
 SVar:DBChangeZone:DB$ ChangeZoneAll | Defined$ You | Origin$ Graveyard,Library | Destination$ Exile | ChangeType$ Card.IsNotRemembered | SubAbility$ DBDig
 SVar:DBDig:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBCleanup

@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 PT:1/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Dinosaur card, reveal it, then shuffle and put that card on top.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Dinosaur | ChangeNum$ 1 | ShuffleNonMandatory$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dinosaur.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ Whenever a Dinosaur enters the battlefield under your control, you may have Forerunner of the Empire deal 1 damage to each creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dinosaur.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDamageAll | TriggerDescription$ Whenever a Dinosaur enters the battlefield under your control, you may have CARDNAME deal 1 damage to each creature.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature | ValidDescription$ each creature. | NumDmg$ 1
 DeckHints:Type$Dinosaur
 Oracle:When Forerunner of the Empire enters the battlefield, you may search your library for a Dinosaur card, reveal it, then shuffle and put that card on top.\nWhenever a Dinosaur enters the battlefield under your control, you may have Forerunner of the Empire deal 1 damage to each creature.

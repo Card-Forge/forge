@@ -3,5 +3,5 @@ ManaCost:1 B
 Types:Creature Wall
 PT:0/2
 K:Defender
-A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.blockedBySourceLKI | TgtPrompt$ Select target creature Wall of Corpses is blocking | SpellDescription$ Destroy target creature CARDNAME is blocking.
+A:AB$ Destroy | Cost$ B Sac<1/CARDNAME> | ValidTgts$ Creature.blockedBySourceLKI | TgtPrompt$ Select target creature CARDNAME is blocking | SpellDescription$ Destroy target creature CARDNAME is blocking.
 Oracle:Defender (This creature can't attack.)\n{B}, Sacrifice Wall of Corpses: Destroy target creature Wall of Corpses is blocking.

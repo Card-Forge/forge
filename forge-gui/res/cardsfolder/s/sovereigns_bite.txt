@@ -1,6 +1,6 @@
 Name:Sovereign's Bite
 ManaCost:1 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 1 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Target player loses 3 life and you gain 3 life.

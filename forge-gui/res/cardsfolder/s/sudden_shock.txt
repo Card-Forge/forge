@@ -2,5 +2,5 @@ Name:Sudden Shock
 ManaCost:1 R
 Types:Instant
 K:Split second
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nSudden Shock deals 2 damage to any target.

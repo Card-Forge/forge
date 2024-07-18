@@ -1,9 +1,0 @@
-Name:Nightkin Ambusher
-ManaCost:2 U B
-Types:Creature Mutant Warrior
-PT:4/4
-K:Ward:2
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRadiation | TriggerDescription$ When CARDNAME enters the battlefield, target player gets four rad counters.
-SVar:TrigRadiation:DB$ Radiation | ValidTgts$ Player | Num$ 4
-S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidDefender$ Player.Condition Counters.RAD | Description$ CARDNAME can't be blocked as long as defending player has a rad counter.
-Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Nightkin Ambusher enters the battlefield, target player gets four rad counters.\nNightkin Ambusher can’t be blocked as long as defending player has a rad counter.

@@ -1,7 +1,7 @@
 Name:Shade's Breath
 ManaCost:1 B
 Types:Instant
-A:SP$ AnimateAll | Cost$ 1 B | ValidCards$ Creature.YouCtrl | Colors$ Black | OverwriteColors$ True | Types$ Shade | RemoveCreatureTypes$ True | Abilities$ ABPump | SpellDescription$ Until end of turn, each creature you control becomes black, its creature type becomes Shade, and it gains "{B}: This creature gets +1/+1 until end of turn."
+A:SP$ AnimateAll | ValidCards$ Creature.YouCtrl | Colors$ Black | OverwriteColors$ True | Types$ Shade | RemoveCreatureTypes$ True | Abilities$ ABPump | SpellDescription$ Until end of turn, each creature you control becomes black, its creature type becomes Shade, and it gains "{B}: This creature gets +1/+1 until end of turn."
 SVar:ABPump:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 AI:RemoveDeck:All
 Oracle:Until end of turn, each creature you control becomes a black Shade and gains "{B}: This creature gets +1/+1 until end of turn."

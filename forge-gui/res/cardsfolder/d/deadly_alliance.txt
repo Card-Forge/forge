@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
-A:SP$ Destroy | Cost$ 4 B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard
 Oracle:This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)\nDestroy target creature or planeswalker.

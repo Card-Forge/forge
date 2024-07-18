@@ -1,0 +1,9 @@
+Name:Phantom Interference
+ManaCost:U
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBToken,DBCounter | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBToken:DB$ Token | SpreeCost$ 3 | TokenScript$ w_2_2_spirit_flying | SpellDescription$ Create a 2/2 white Spirit creature token with flying.
+SVar:DBCounter:DB$ Counter | SpreeCost$ 1 | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 2 | SpellDescription$ Counter target spell unless its controller pays {2}.
+DeckHas:Ability$Token & Type$Spirit & Color$White
+Oracle:Spree (Choose one or more additional costs.)\n+ {3} — Create a 2/2 white Spirit creature token with flying.\n+ {1} — Counter target spell unless its controller pays {2}.

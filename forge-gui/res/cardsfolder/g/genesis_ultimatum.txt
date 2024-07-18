@@ -1,6 +1,6 @@
 Name:Genesis Ultimatum
 ManaCost:G G U U U R R
 Types:Sorcery
-A:SP$ Dig | Cost$ G G U U U R R | DigNum$ 5 | AnyNumber$ True | ChangeValid$ Permanent | DestinationZone$ Battlefield | DestinationZone2$ Hand | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile CARDNAME.
+A:SP$ Dig | DigNum$ 5 | AnyNumber$ True | ChangeValid$ Permanent | DestinationZone$ Battlefield | DestinationZone2$ Hand | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 Oracle:Look at the top five cards of your library. Put any number of permanent cards from among them onto the battlefield and the rest into your hand. Exile Genesis Ultimatum.

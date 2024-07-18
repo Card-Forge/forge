@@ -1,7 +1,7 @@
 Name:Lifecraft Awakening
 ManaCost:X G
 Types:Instant
-A:SP$ PutCounter | Cost$ X G | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAnimate | SpellDescription$ Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
+A:SP$ PutCounter | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBAnimate | SpellDescription$ Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted.nonCreature+nonVehicle | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature,Construct | Duration$ Permanent
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

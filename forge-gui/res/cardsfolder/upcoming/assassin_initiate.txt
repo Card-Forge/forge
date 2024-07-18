@@ -1,0 +1,6 @@
+Name:Assassin Initiate
+ManaCost:B
+Types:Creature Human Assassin
+PT:1/1
+A:AB$ Pump | Cost$ 1 | KWChoice$ Flying,Deathtouch,Lifelink | SpellDescription$ CARDNAME gains your choice of flying, deathtouch, or lifelink until end of turn.
+Oracle:{1}: Assassin Initiate gains your choice of flying, deathtouch, or lifelink until end of turn.

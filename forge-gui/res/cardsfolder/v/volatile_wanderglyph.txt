@@ -2,7 +2,7 @@ Name:Volatile Wanderglyph
 ManaCost:1 R
 Types:Artifact Creature Golem
 PT:2/2
-T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever Volatile Wanderglyph becomes tapped, you may discard a card. If you do, draw a card.
+T:Mode$ Taps | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes tapped, you may discard a card. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
 DeckHas:Ability$Discard
 Oracle:Whenever Volatile Wanderglyph becomes tapped, you may discard a card. If you do, draw a card.

@@ -1,7 +1,7 @@
 Name:Psychic Spiral
 ManaCost:4 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 4 U | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBMill | SpellDescription$ Shuffle all cards from your graveyard into your library. Target player mills that many cards.
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | RememberChanged$ True | SubAbility$ DBMill | SpellDescription$ Shuffle all cards from your graveyard into your library. Target player mills that many cards.
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player to mill | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

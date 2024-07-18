@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Insect
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Feeder Mandibles — When Canoptek Scarab Swarm enters the battlefield, exile target player's graveyard. For each artifact or land card exiled this way, create a 1/1 colorless Insect artifact creature token with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Feeder Mandibles — When CARDNAME enters the battlefield, exile target player's graveyard. For each artifact or land card exiled this way, create a 1/1 colorless Insect artifact creature token with flying.
 SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBToken | RememberChanged$ True
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_insect_flying | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Creature Angel
 PT:5/5
 K:Flying
-R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ If you would lose the game, instead exile Exquisite Archangel and your life total becomes equal to your starting life total.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ If you would lose the game, instead exile CARDNAME and your life total becomes equal to your starting life total.
 SVar:ExileSetLife:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$YourStartingLife

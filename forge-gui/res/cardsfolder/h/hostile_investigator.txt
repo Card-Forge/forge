@@ -1,0 +1,11 @@
+Name:Hostile Investigator
+ManaCost:3 B
+Types:Creature Ogre Rogue Detective
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card.
+SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ DiscardedAll | ValidPlayer$ Player | ActivationLimit$ 1 | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever one or more players discard one or more cards, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigInvestigate:DB$ Investigate
+DeckHas:Ability$Discard|Token|Sacrifice & Type$Artifact|Clue
+DeckHints:Ability$Discard
+Oracle:When Hostile Investigator enters the battlefield, target opponent discards a card.\nWhenever one or more players discard one or more cards, investigate. This ability triggers only once each turn. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

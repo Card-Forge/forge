@@ -1,6 +1,6 @@
 Name:Restock
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return two target cards from your graveyard to your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBChange | SpellDescription$ Return two target cards from your graveyard to your hand. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Return two target cards from your graveyard to your hand. Exile Restock.

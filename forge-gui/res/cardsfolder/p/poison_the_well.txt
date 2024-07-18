@@ -1,6 +1,6 @@
 Name:Poison the Well
 ManaCost:2 BR BR
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 BR BR | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 2 damage to that land's controller.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 2 damage to that land's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 Oracle:Destroy target land. Poison the Well deals 2 damage to that land's controller.

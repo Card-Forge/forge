@@ -1,5 +1,5 @@
 Name:Death Stroke
 ManaCost:B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Destroy target tapped creature.
 Oracle:Destroy target tapped creature.

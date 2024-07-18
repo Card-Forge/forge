@@ -2,5 +2,5 @@ Name:Coastal Breach
 ManaCost:6 U
 Types:Sorcery
 K:Undaunted
-A:SP$ ChangeZoneAll | Cost$ 6 U | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nonland permanents to their owners' hands.
 Oracle:Undaunted (This spell costs {1} less to cast for each opponent.)\nReturn all nonland permanents to their owners' hands.

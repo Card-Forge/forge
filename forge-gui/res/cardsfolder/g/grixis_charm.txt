@@ -1,7 +1,7 @@
 Name:Grixis Charm
 ManaCost:U B R
 Types:Instant
-A:SP$ Charm | Cost$ U B R | Choices$ DBChangeZone,DBPump,DBPumpAll | CharmNum$ 1
+A:SP$ Charm | Choices$ DBChangeZone,DBPump,DBPumpAll | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ 0 | SpellDescription$ Creatures you control get +2/+0 until end of turn.

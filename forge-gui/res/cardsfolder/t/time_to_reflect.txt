@@ -1,6 +1,6 @@
 Name:Time to Reflect
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.blockedValidThisTurn Zombie,Creature.blockedByValidThisTurn Zombie | TgtPrompt$ Select target creature that blocked or was blocked by a Zombie this turn | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that blocked or was blocked by a Zombie this turn.
+A:SP$ ChangeZone | ValidTgts$ Creature.blockedValidThisTurn Zombie,Creature.blockedByValidThisTurn Zombie | TgtPrompt$ Select target creature that blocked or was blocked by a Zombie this turn | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that blocked or was blocked by a Zombie this turn.
 DeckHints:Type$Zombie
 Oracle:Exile target creature that blocked or was blocked by a Zombie this turn.

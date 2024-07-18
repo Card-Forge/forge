@@ -1,5 +1,5 @@
 Name:Lash of Thorns
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +2/+1 and gains deathtouch until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +1 | KW$ Deathtouch | SpellDescription$ Target creature gets +2/+1 and gains deathtouch until end of turn.
 Oracle:Target creature gets +2/+1 and gains deathtouch until end of turn.

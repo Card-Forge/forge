@@ -1,5 +1,5 @@
 Name:Reap What Is Sown
 ManaCost:1 G W
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 G W | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each of up to three target creatures.
+A:SP$ PutCounter | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 3 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each of up to three target creatures.
 Oracle:Put a +1/+1 counter on each of up to three target creatures.

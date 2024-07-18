@@ -1,7 +1,7 @@
 Name:Primal Command
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 G G | Choices$ DBGain,DBChange,DBChangeAll,DBSearch | CharmNum$ 2
+A:SP$ Charm | Choices$ DBGain,DBChange,DBChangeAll,DBSearch | CharmNum$ 2
 SVar:DBGain:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain life | LifeAmount$ 7 | SpellDescription$ Target player gains 7 life.
 SVar:DBChange:DB$ ChangeZone | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target noncreature permanent on top of its owner's library.
 SVar:DBChangeAll:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player to shuffle graveyard into library | Origin$ Graveyard | Destination$ Library | Shuffle$ True | ChangeType$ Card | SpellDescription$ Target player shuffles their graveyard into their library.

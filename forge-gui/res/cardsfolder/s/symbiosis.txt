@@ -1,5 +1,5 @@
 Name:Symbiosis
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | TargetMin$ 2 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Two target creatures each get +2/+2 until end of turn.
+A:SP$ Pump | TargetMin$ 2 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Two target creatures each get +2/+2 until end of turn.
 Oracle:Two target creatures each get +2/+2 until end of turn.

@@ -1,0 +1,6 @@
+Name:Thunder Salvo
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is 2 plus the number of other spells you've cast this turn.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+Other/Plus.2
+Oracle:Thunder Salvo deals X damage to target creature, where X is 2 plus the number of other spells you've cast this turn.

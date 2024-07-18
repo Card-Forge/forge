@@ -1,7 +1,7 @@
 Name:Titan's Revenge
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R | NumDmg$ X | ValidTgts$ Any | SubAbility$ DBClash | SpellDescription$ CARDNAME deals X damage to any target. Clash with an opponent. If you win, return CARDNAME to it's owner's hand.
+A:SP$ DealDamage | NumDmg$ X | ValidTgts$ Any | SubAbility$ DBClash | SpellDescription$ CARDNAME deals X damage to any target. Clash with an opponent. If you win, return CARDNAME to it's owner's hand.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand
 SVar:X:Count$xPaid

@@ -1,5 +1,5 @@
 Name:Mending Touch
 ManaCost:G
 Types:Instant
-A:SP$ Regenerate | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 Oracle:Regenerate target creature.

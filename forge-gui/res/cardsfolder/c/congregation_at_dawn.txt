@@ -1,5 +1,5 @@
 Name:Congregation at Dawn
 ManaCost:G G W
 Types:Instant
-A:SP$ ChangeZone | Cost$ G G W | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 3 | Reorder$ True | SpellDescription$ Search your library for up to three creature cards, reveal them, then shuffle and put those cards on top in any order.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 3 | Reorder$ True | SpellDescription$ Search your library for up to three creature cards, reveal them, then shuffle and put those cards on top in any order.
 Oracle:Search your library for up to three creature cards, reveal them, then shuffle and put those cards on top in any order.

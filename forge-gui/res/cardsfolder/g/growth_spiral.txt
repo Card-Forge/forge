@@ -1,6 +1,6 @@
 Name:Growth Spiral
 ManaCost:G U
 Types:Instant
-A:SP$ Draw | Cost$ G U | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBChangeZone | SpellDescription$ Draw a card.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ You may put a land card from your hand onto the battlefield.
 Oracle:Draw a card. You may put a land card from your hand onto the battlefield.

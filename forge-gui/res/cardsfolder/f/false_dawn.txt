@@ -1,7 +1,7 @@
 Name:False Dawn
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Effect | Cost$ 1 W | ReplacementEffects$ FDRep | StaticAbilities$ FDManaConvertion | SubAbility$ DBDraw | SpellDescription$ Until end of turn, spells and abilities you control that would add colored mana instead add that much white mana. Until end of turn, you may spend white mana as though it were mana of any color. Draw a card.
+A:SP$ Effect | ReplacementEffects$ FDRep | StaticAbilities$ FDManaConvertion | SubAbility$ DBDraw | SpellDescription$ Until end of turn, spells and abilities you control that would add colored mana instead add that much white mana. Until end of turn, you may spend white mana as though it were mana of any color. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:FDRep:Event$ ProduceMana | ValidSA$ SpellAbility.YouCtrl | ReplaceWith$ ProduceW | Description$ Spells and abilities you control that would add colored mana add that much white mana instead.
 SVar:ProduceW:DB$ ReplaceMana | ReplaceColor$ White

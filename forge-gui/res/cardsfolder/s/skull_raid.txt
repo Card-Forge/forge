@@ -1,7 +1,7 @@
 Name:Skull Raid
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target opponent discards two cards. If fewer than two cards were discarded this way, you draw cards equal to the difference.
+A:SP$ Discard | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target opponent discards two cards. If fewer than two cards were discarded this way, you draw cards equal to the difference.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Number$2/Minus.Y

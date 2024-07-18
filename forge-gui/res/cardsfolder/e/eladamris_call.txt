@@ -1,5 +1,5 @@
 Name:Eladamri's Call
 ManaCost:G W
 Types:Instant
-A:SP$ ChangeZone | Cost$ G W | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal that card, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal that card, put it into your hand, then shuffle.
 Oracle:Search your library for a creature card, reveal that card, put it into your hand, then shuffle.

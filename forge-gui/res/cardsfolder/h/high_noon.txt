@@ -1,0 +1,7 @@
+Name:High Noon
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player | NumLimitEachTurn$ 1 | Description$ Each player can't cast more than one spell each turn.
+A:AB$ DealDamage | Cost$ 4 R Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ It deals 5 damage to any target.
+DeckHas:Ability$Sacrifice
+Oracle:Each player can't cast more than one spell each turn.\n{4}{R}, Sacrifice High Noon: It deals 5 damage to any target.

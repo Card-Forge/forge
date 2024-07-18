@@ -1,6 +1,6 @@
 Name:Morsel Theft
 ManaCost:2 B B
-Types:Tribal Sorcery Rogue
+Types:Kindred Sorcery Rogue
 K:Prowl:1 B
 A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 3 life and you gain 3 life. If CARDNAME's prowl cost was paid, draw a card.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ DBDraw

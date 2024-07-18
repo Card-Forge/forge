@@ -1,6 +1,6 @@
 Name:Gods Willing
 ManaCost:W
 Types:Instant
-A:SP$ Protection | Cost$ W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBScry | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SubAbility$ DBScry | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Target creature you control gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)\nScry 1.

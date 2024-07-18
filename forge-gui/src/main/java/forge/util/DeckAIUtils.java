@@ -33,6 +33,7 @@ public class DeckAIUtils {
         case Schemes: return localizer.getMessage("lblSchemeDeck");
         case Conspiracy: return /* TODO localise */ "Conspiracy";
         case Dungeon: return /* TODO localise */ "Dungeon";
+        case Attractions: return /* TODO localize */ "Attractions";
         default: return /* TODO better handling */ "UNKNOWN";
     }
   }

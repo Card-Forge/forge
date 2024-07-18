@@ -1,7 +1,7 @@
 Name:Necromantic Selection
 ManaCost:4 B B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 B B B | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ TrigImprint | SpellDescription$ Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile CARDNAME.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ TrigImprint | SpellDescription$ Destroy all creatures, then return a creature card put into a graveyard this way to the battlefield under your control. It's a black Zombie in addition to its other colors and types. Exile CARDNAME.
 SVar:TrigImprint:DB$ Pump | ImprintCards$ Remembered | SubAbility$ DBClearRemember | StackDescription$ None
 SVar:DBClearRemember:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | ChangeType$ Creature.nonToken+IsImprinted | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | AnimateSubAbility$ DBZombify | SubAbility$ DBCleanup

@@ -14,5 +14,5 @@ ALTERNATE
 Name:Train Troops
 ManaCost:4 W
 Types:Sorcery Adventure
-A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_2_2_knight_vigilance | SpellDescription$Create two 2/2 white Knight creature tokens with vigilance. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_2_2_knight_vigilance | SpellDescription$ Create two 2/2 white Knight creature tokens with vigilance. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Create two 2/2 white Knight creature tokens with vigilance. (Then exile this card. You may cast the creature later from exile.)

@@ -1,5 +1,5 @@
 Name:Switcheroo
 ManaCost:4 U
 Types:Sorcery
-A:SP$ ExchangeControl | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target creatures.
+A:SP$ ExchangeControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target creatures.
 Oracle:Exchange control of two target creatures.

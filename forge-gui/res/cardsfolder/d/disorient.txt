@@ -1,5 +1,5 @@
 Name:Disorient
 ManaCost:3 U
 Types:Instant
-A:SP$ Pump | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -7 | IsCurse$ True | SpellDescription$ Target creature gets -7/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -7 | IsCurse$ True | SpellDescription$ Target creature gets -7/-0 until end of turn.
 Oracle:Target creature gets -7/-0 until end of turn.

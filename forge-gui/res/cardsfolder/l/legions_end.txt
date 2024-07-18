@@ -1,7 +1,7 @@
 Name:Legion's End
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature.OppCtrl+cmcLE2 | TgtPrompt$ Select target creature an opponent controls with mana value 2 or less | SubAbility$ DBExileAll | StackDescription$ SpellDescription | SpellDescription$ Exile target creature an opponent controls with mana value 2 or less and all other creatures that player controls with the same name as that creature. Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl+cmcLE2 | TgtPrompt$ Select target creature an opponent controls with mana value 2 or less | SubAbility$ DBExileAll | StackDescription$ SpellDescription | SpellDescription$ Exile target creature an opponent controls with mana value 2 or less and all other creatures that player controls with the same name as that creature. Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.
 SVar:DBExileAll:DB$ ChangeZoneAll | Defined$ TargetedController | ChangeType$ TargetedCard.Self,Creature.NotDefinedTargeted+sharesNameWith Targeted | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZoneAll | StackDescription$ None
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Defined$ TargetedController | ChangeType$ Targeted.sameName | Origin$ Graveyard,Hand | Destination$ Exile | StackDescription$ None
 Oracle:Exile target creature an opponent controls with mana value 2 or less and all other creatures that player controls with the same name as that creature. Then that player reveals their hand and exiles all cards with that name from their hand and graveyard.

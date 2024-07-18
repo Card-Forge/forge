@@ -1,6 +1,6 @@
 Name:Hurricane
 ManaCost:X G
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature with flying and each player.
 SVar:X:Count$xPaid
 Oracle:Hurricane deals X damage to each creature with flying and each player.

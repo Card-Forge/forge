@@ -1,7 +1,7 @@
 Name:Deflecting Palm
 ManaCost:R W
 Types:Instant
-A:SP$ ChooseSource | Cost$ R W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, CARDNAME deals that much damage to that source's controller.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, CARDNAME deals that much damage to that source's controller.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ You | ReplaceWith$ DamageControllerInstead | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:DamageControllerInstead:DB$ DealDamage | Defined$ ChosenCardController | DamageSource$ EffectSource | NumDmg$ X | SubAbility$ ExileEffect

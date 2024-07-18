@@ -1,7 +1,7 @@
 Name:Mandate of Peace
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | StaticAbilities$ STCantBeCast | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBEndCombatPhase | SpellDescription$ Cast CARDNAME only during combat. Your opponents can't cast spells this turn.
+A:SP$ Effect | StaticAbilities$ STCantBeCast | ActivationPhases$ BeginCombat->EndCombat | SubAbility$ DBEndCombatPhase | SpellDescription$ Cast CARDNAME only during combat. Your opponents can't cast spells this turn.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 SVar:DBEndCombatPhase:DB$ EndCombatPhase | SpellDescription$ End the combat phase. (Remove all attackers and blockers from combat. Exile all spells and abilities from the stack, including this spell.)
 AI:RemoveDeck:All

@@ -1,5 +1,5 @@
 Name:Morale
 ManaCost:1 W W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.attacking | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Attacking creatures get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Attacking creatures get +1/+1 until end of turn.
 Oracle:Attacking creatures get +1/+1 until end of turn.

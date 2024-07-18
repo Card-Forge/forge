@@ -1,7 +1,7 @@
 Name:Monomania
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 3 B B | ValidTgts$ Player | Mandatory$ True | Choices$ Card | SubAbility$ DBDiscard | RememberChosen$ True | AILogic$ AtLeast2 | TargetControls$ True | ChoiceZone$ Hand | SpellDescription$ Target player chooses a card in their hand and discards the rest.
+A:SP$ ChooseCard | ValidTgts$ Player | Mandatory$ True | Choices$ Card | SubAbility$ DBDiscard | RememberChosen$ True | AILogic$ AtLeast2 | TargetControls$ True | ChoiceZone$ Hand | SpellDescription$ Target player chooses a card in their hand and discards the rest.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ NotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target player chooses a card in their hand and discards the rest.

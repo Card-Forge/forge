@@ -1,7 +1,7 @@
 Name:Peel from Reality
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return target creature you control and target creature you don't control to their owner's hands.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return target creature you control and target creature you don't control to their owner's hands.
 SVar:DBBounce:DB$ ChangeZone | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | Origin$ Battlefield | Destination$ Hand
 AI:RemoveDeck:All
 Oracle:Return target creature you control and target creature you don't control to their owners' hands.

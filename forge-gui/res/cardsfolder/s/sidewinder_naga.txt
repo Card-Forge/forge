@@ -1,6 +1,6 @@
 Name:Sidewinder Naga
 ManaCost:2 G
-Types:Creature Naga Warrior
+Types:Creature Snake Warrior
 PT:3/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddKeyword$ Trample | Condition$ Desert | Description$ As long as you control a Desert or there is a Desert card in your graveyard, CARDNAME gets +1/+0 and has trample.
 DeckHints:Type$Desert

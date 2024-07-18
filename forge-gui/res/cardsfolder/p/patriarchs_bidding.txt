@@ -1,7 +1,7 @@
 Name:Patriarch's Bidding
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseType | SubAbility$ DBBidding | StackDescription$ SpellDescription | SpellDescription$ Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseType | SubAbility$ DBBidding | StackDescription$ SpellDescription | SpellDescription$ Each player chooses a creature type. Each player returns all creature cards of a type chosen this way from their graveyard to the battlefield.
 SVar:DBChooseType:DB$ ChooseType | Defined$ Player.IsRemembered | Type$ Creature | AILogic$ MostProminentInComputerGraveyard | SubAbility$ DBRemember
 SVar:DBRemember:DB$ PumpAll | ValidCards$ Creature.ChosenType | RememberPumped$ True | PumpZone$ Graveyard
 SVar:DBBidding:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup

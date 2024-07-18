@@ -6,4 +6,4 @@ SVar:ExileAllArtifacts:DB$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Battle
 SVar:ExileAllCreatures:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all creatures.
 SVar:ExileAllEnchantments:DB$ ChangeZoneAll | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile all enchantments.
 SVar:ExileAllGraveyards:DB$ ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all graveyards.
-Oracle:Choose one or more — \n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all graveyards.
+Oracle:Choose one or more —\n• Exile all artifacts.\n• Exile all creatures.\n• Exile all enchantments.\n• Exile all graveyards.

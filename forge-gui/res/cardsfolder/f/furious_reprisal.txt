@@ -1,5 +1,5 @@
 Name:Furious Reprisal
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each of two targets.
+A:SP$ DealDamage | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each of two targets.
 Oracle:Furious Reprisal deals 2 damage to each of two targets.

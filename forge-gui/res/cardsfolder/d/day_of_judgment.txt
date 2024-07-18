@@ -1,5 +1,5 @@
 Name:Day of Judgment
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+A:SP$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 Oracle:Destroy all creatures.

@@ -1,6 +1,6 @@
 Name:Sea God's Revenge
 ManaCost:5 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 U | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return up to three target creatures your opponents control to their owners' hands. Scry 1.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return up to three target creatures your opponents control to their owners' hands. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Return up to three target creatures your opponents control to their owners' hands. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

@@ -1,7 +1,7 @@
 Name:Pure
 ManaCost:1 R G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 R G | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent | SpellDescription$ Destroy target multicolored permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.MultiColor | TgtPrompt$ Select target multicolored permanent | SpellDescription$ Destroy target multicolored permanent.
 AlternateMode:Split
 Oracle:Destroy target multicolored permanent.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Simple
 ManaCost:1 G W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 1 G W | ValidCards$ Aura,Equipment | SpellDescription$ Destroy all Auras and Equipment.
+A:SP$ DestroyAll | ValidCards$ Aura,Equipment | SpellDescription$ Destroy all Auras and Equipment.
 Oracle:Destroy all Auras and Equipment.

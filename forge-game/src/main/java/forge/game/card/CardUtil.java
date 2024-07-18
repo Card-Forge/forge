@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -36,6 +37,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -55,7 +57,7 @@ public final class CardUtil {
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu",
             "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
-            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl",
+            "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "Freerunning",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
             "etbCounter", "Reflect", "Ward").build();
@@ -136,6 +138,14 @@ public final class CardUtil {
 
     public static List<Card> getLastTurnCast(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         return CardLists.getValidCardsAsList(src.getGame().getStack().getSpellsCastLastTurn(), valid, controller, src, ctb);
+    }
+
+    public static List<SpellAbility> getThisTurnActivated(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return Lists.newArrayList(Iterables.filter(src.getGame().getStack().getAbilityActivatedThisTurn(), SpellAbilityPredicates.isValid(valid.split(","), controller, src, ctb)));
+    }
+
+    public static List<Card> getCastSinceBeginningOfYourLastTurn(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
+        return CardLists.getValidCardsAsList(controller.getSpellsCastSinceBegOfYourLastTurn(), valid, controller, src, ctb);
     }
 
     public static CardCollection getRadiance(final SpellAbility sa) {

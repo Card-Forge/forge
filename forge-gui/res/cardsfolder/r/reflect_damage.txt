@@ -1,7 +1,7 @@
 Name:Reflect Damage
 ManaCost:3 R W
 Types:Instant
-A:SP$ ChooseSource | Cost$ 3 W R | Choices$ Card,Emblem | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
+A:SP$ ChooseSource | Choices$ Card,Emblem | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | SubAbility$ DBCleanup
 SVar:SelflessDamage:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ ReplacedSourceController | Description$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player | SubAbility$ ExileEffect

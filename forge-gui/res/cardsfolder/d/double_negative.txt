@@ -1,5 +1,5 @@
 Name:Double Negative
 ManaCost:U U R
 Types:Instant
-A:SP$ Counter | Cost$ U U R | TargetType$ Spell | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Counter up to two target spells.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Counter up to two target spells.
 Oracle:Counter up to two target spells.

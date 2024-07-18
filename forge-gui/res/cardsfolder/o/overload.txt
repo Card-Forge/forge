@@ -2,7 +2,7 @@ Name:Overload
 ManaCost:R
 Types:Instant
 K:Kicker:2
-A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact | AITgts$ Artifact.cmcLEX | TgtPrompt$ Select target artifact with mana value 2 or less (5 or less if kicked) | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | SpellDescription$ Destroy target artifact if its mana value is 2 or less. If this spell was kicked, destroy that artifact if its mana value is 5 or less instead.
+A:SP$ Destroy | ValidTgts$ Artifact | AITgts$ Artifact.cmcLEX | TgtPrompt$ Select target artifact with mana value 2 or less (5 or less if kicked) | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | SpellDescription$ Destroy target artifact if its mana value is 2 or less. If this spell was kicked, destroy that artifact if its mana value is 5 or less instead.
 SVar:X:Count$Kicked.5.2
 SVar:Y:Targeted$CardManaCost
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nDestroy target artifact if its mana value is 2 or less. If this spell was kicked, destroy that artifact if its mana value is 5 or less instead.

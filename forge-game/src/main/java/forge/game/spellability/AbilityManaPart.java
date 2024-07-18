@@ -17,13 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -32,10 +26,12 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
+import forge.game.cost.Cost;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
@@ -46,9 +42,13 @@ import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.ZoneType;
 import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -389,10 +389,20 @@ public class AbilityManaPart implements java.io.Serializable {
             }
 
             if (restriction.startsWith("CostContains")) {
-                if (restriction.endsWith("X") && sa.costHasManaX()) {
+                Game game = sa.getHostCard().getGame();
+                Cost payment = sa.getPayCosts();
+                if (game.getStack().isResolving() && sa.hasParam("UnlessCost")) {
+                    payment = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
+                }
+                if (payment.hasNoManaCost()) {
+                    continue;
+                }
+                // TODO Thassa's Intervention with "twice {X}" is tricky
+                // TODO Volcano Hellion can't be handled without refactor to just have it passed down directly
+                if (restriction.endsWith("X") && payment.getCostMana().getAmountOfX() > 0) {
                     return true;
                 }
-                if (restriction.endsWith("C") && sa.getPayCosts().hasManaCost() && sa.getPayCosts().getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
+                if (restriction.endsWith("C") && payment.getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
                     return true;
                 }
                 continue;
@@ -651,6 +661,28 @@ public class AbilityManaPart implements java.io.Serializable {
         if (origProduced.contains("Chosen")) {
             origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
+        if (origProduced.contains("NotedColors")) {
+            // Should only be used for Paliano, the High City
+            if (sa.getActivatingPlayer() == null) {
+                return "";
+            }
+
+            String colors = sa.getActivatingPlayer().getDraftNotes().get("Paliano, the High City");
+            if (colors == null) {
+                return "";
+            }
+            // Colors here is an comma separated color list, potentially with duplicates
+            // We need to remove duplicates and convert to single letters
+            StringBuilder sb = new StringBuilder();
+            for (String color : colors.split(",")) {
+                String shortColor = MagicColor.toShortString(color);
+                if (sb.indexOf(shortColor) == -1) {
+                    sb.append(shortColor).append(" ");
+                }
+            }
+            origProduced = origProduced.replace("NotedColors", sb.toString().trim());
+        }
+
         if (!origProduced.contains("ColorIdentity")) {
             return TextUtil.fastReplace(origProduced, "Combo ", "");
         }

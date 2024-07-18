@@ -1,5 +1,5 @@
 Name:Mending Hands
 ManaCost:W
 Types:Instant
-A:SP$ PreventDamage | Cost$ W | ValidTgts$ Any | Amount$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt to any target this turn.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ 4 | SpellDescription$ Prevent the next 4 damage that would be dealt to any target this turn.
 Oracle:Prevent the next 4 damage that would be dealt to any target this turn.

@@ -1,0 +1,15 @@
+Name:Prairie Dog
+ManaCost:1 W
+Types:Creature Squirrel
+PT:2/2
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT1 | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you haven't cast a spell from your hand this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Effect | Cost$ 4 W | ReplacementEffects$ CountersAdded | SpellDescription$ Until end of turn, if you would put one or more +1/+1 counters on a creature you control, put that many plus one +1/+1 counters on it instead.
+SVar:CountersAdded:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Creature.YouCtrl+inZoneBattlefield | ValidCounterType$ P1P1 | ReplaceWith$ AddOneMoreCounters | Description$ If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.
+SVar:AddOneMoreCounters:DB$ ReplaceCounter | ValidCounterType$ P1P1 | ChooseCounter$ True | Amount$ Y
+SVar:Y:ReplaceCount$CounterNum/Plus.1
+SVar:X:Count$ThisTurnCast_Card.wasCastFromYourHandByYou
+DeckHas:Ability$LifeGain|Counters
+DeckHints:Type$Counters
+Oracle:Lifelink\nAt the beginning of your end step, if you haven't cast a spell from your hand this turn, put a +1/+1 counter on Prairie Dog.\n{4}{W}: Until end of turn, if you would put one or more +1/+1 counters on a creature you control, put that many plus one +1/+1 counters on it instead.

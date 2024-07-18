@@ -1,7 +1,7 @@
 Name:Library of Lat-Nam
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 U | Chooser$ Opponent | Choices$ DelTrigSlowDraw,Tutor
+A:SP$ Charm | Chooser$ Opponent | Choices$ DelTrigSlowDraw,Tutor
 SVar:DelTrigSlowDraw:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowThree | SpellDescription$ You draw three cards at the beginning of the next turn's upkeep.
 SVar:DrawSlowThree:DB$ Draw | NumCards$ 3 | Defined$ You
 SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ You search your library for a card, put that card into your hand, then shuffle.

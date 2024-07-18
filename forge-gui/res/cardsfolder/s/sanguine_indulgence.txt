@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE3 | Description$ CARDNAME costs {3} less to cast if you've gained 3 or more life this turn.
 SVar:X:Count$LifeYouGainedThisTurn
-A:SP$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 DeckHints:Ability$LifeGain
 Oracle:This spell costs {3} less to cast if you've gained 3 or more life this turn.\nReturn up to two target creature cards from your graveyard to your hand.

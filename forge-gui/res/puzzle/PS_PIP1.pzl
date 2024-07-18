@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Fallout #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/03/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions. Your opponent has three energy counters and can activate Synth Eradicator.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Young Deathclaws;Lethal Scheme;Winding Constrictor
+p0battlefield=Jason Bright, Glowing Prophet;Hancock, Ghoulish Mayor;Feral Ghoul;Temple of Mystery;Temple of Mystery;Temple of Mystery;Temple of Mystery;Temple of Malady;Temple of Malady
+p1life=10
+p1battlefield=T:c_1_1_a_thopter_flying;Whirler Rogue;Synth Eradicator
+p1counters=ENERGY=3

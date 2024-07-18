@@ -1,7 +1,7 @@
 Name:Burning of Xinye
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ Sacrifice | Defined$ You | Cost$ 4 R R | SacValid$ Land.withoutIndestructible | Amount$ 4 | SubAbility$ DBSac | Destroy$ True | SpellDescription$ You destroy four lands you control, then target opponent destroys four lands they control. Then CARDNAME deals 4 damage to each creature.
+A:SP$ Sacrifice | Defined$ You | SacValid$ Land.withoutIndestructible | Amount$ 4 | SubAbility$ DBSac | Destroy$ True | SpellDescription$ You destroy four lands you control, then target opponent destroys four lands they control. Then CARDNAME deals 4 damage to each creature.
 SVar:DBSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Land.withoutIndestructible | Amount$ 4 | Destroy$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature
 AI:RemoveDeck:Random

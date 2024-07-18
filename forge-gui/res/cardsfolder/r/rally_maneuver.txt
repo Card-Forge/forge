@@ -1,7 +1,7 @@
 Name:Rally Maneuver
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+0 and first strike | TargetUnique$ True | NumAtt$ +2 | KW$ First Strike | SubAbility$ DBPumpOther | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn. Up to one other target creature gets +0/+2 and gains lifelink until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +2/+0 and first strike | TargetUnique$ True | NumAtt$ +2 | KW$ First Strike | SubAbility$ DBPumpOther | SpellDescription$ Target creature gets +2/+0 and gains first strike until end of turn. Up to one other target creature gets +0/+2 and gains lifelink until end of turn.
 SVar:DBPumpOther:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get +0/+2 and lifelink | TargetUnique$ True | NumDef$ +2 | KW$ Lifelink
 DeckHas:Ability$LifeGain
 Oracle:Target creature gets +2/+0 and gains first strike until end of turn. Up to one other target creature gets +0/+2 and gains lifelink until end of turn.

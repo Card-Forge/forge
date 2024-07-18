@@ -1,7 +1,7 @@
 Name:Swallowing Plague
 ManaCost:X B B
 Types:Sorcery Arcane
-A:SP$ DealDamage | Cost$ X B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$xPaid
 Oracle:Swallowing Plague deals X damage to target creature and you gain X life.

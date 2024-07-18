@@ -1,7 +1,7 @@
 Name:Engineered Might
 ManaCost:3 G W
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 G W | Choices$ DBPump,DBPumpAll | CharmNum$ 1
+A:SP$ Charm | Choices$ DBPump,DBPumpAll | CharmNum$ 1
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ 5 | NumDef$ 5 | KW$ Trample | SpellDescription$ Target creature gets +5/+5 and gains trample until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance | SpellDescription$ Creatures you control get +2/+2 and gain vigilance until end of turn.
 Oracle:Choose one —\n• Target creature gets +5/+5 and gains trample until end of turn.\n• Creatures you control get +2/+2 and gain vigilance until end of turn.

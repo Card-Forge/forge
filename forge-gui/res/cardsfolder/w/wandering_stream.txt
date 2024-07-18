@@ -1,7 +1,7 @@
 Name:Wandering Stream
 ManaCost:2 G
 Types:Sorcery
-A:SP$ GainLife | Cost$ 2 G | LifeAmount$ X | SpellDescription$ Domain — You gain 2 life for each basic land type among lands you control.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ Domain — You gain 2 life for each basic land type among lands you control.
 SVar:X:Count$Domain/Times.2
 AI:RemoveDeck:Random
 Oracle:Domain — You gain 2 life for each basic land type among lands you control.

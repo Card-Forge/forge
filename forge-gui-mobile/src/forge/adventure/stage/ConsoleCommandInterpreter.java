@@ -39,7 +39,7 @@ public class ConsoleCommandInterpreter {
     public String complete(String text) {
         String[] words = splitOnSpace(text);
         Command currentCommand = root;
-        String completionString = "";
+        StringBuilder completionString = new StringBuilder();
         for (String name : words) {
             if (!currentCommand.children.containsKey(name)) {
                 for (String key : currentCommand.children.keySet()) {
@@ -49,7 +49,7 @@ public class ConsoleCommandInterpreter {
                 }
                 break;
             }
-            completionString += name + " ";
+            completionString.append(name).append(" ");
             currentCommand = currentCommand.children.get(name);
         }
         return text;

@@ -1,7 +1,7 @@
 Name:Luminesce
 ManaCost:W
 Types:Instant
-A:SP$ Effect | Cost$ W | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that black sources and red sources would deal this turn.
+A:SP$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that black sources and red sources would deal this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidSource$ Card.BlackSource,Card.RedSource | Description$ Prevent all damage that black sources and red sources would deal this turn.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

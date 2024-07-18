@@ -2,5 +2,5 @@ Name:Devouring Light
 ManaCost:1 W W
 Types:Instant
 K:Convoke
-A:SP$ ChangeZone | Cost$ 1 W W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking or blocking creature.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking or blocking creature.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nExile target attacking or blocking creature.

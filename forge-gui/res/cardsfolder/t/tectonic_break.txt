@@ -1,7 +1,7 @@
 Name:Tectonic Break
 ManaCost:X R R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ X R R | Amount$ X | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices X lands.
+A:SP$ Sacrifice | Amount$ X | SacValid$ Land | Defined$ Player | SpellDescription$ Each player sacrifices X lands.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Each player sacrifices X lands.

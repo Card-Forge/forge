@@ -1,6 +1,6 @@
 Name:Cackling Flames
 ManaCost:3 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to any target. Hellbent — CARDNAME deals 5 damage to that permanent or player instead if you have no cards in hand.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals 3 damage to any target. Hellbent — CARDNAME deals 5 damage to that permanent or player instead if you have no cards in hand.
 SVar:X:Count$Hellbent.5.3
 Oracle:Cackling Flames deals 3 damage to any target.\nHellbent — Cackling Flames deals 5 damage instead if you have no cards in hand.

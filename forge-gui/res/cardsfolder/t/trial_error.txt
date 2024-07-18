@@ -1,7 +1,7 @@
 Name:Trial
 ManaCost:W U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ChangeType$ Creature.blockingRemembered,Creature.isBlockedByRemembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | UseAllOriginZones$ True | SpellDescription$ Return all creatures blocking or blocked by target creature to their owner's hand.
+A:SP$ ChangeZoneAll | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberTargets$ True | ChangeType$ Creature.blockingRemembered,Creature.isBlockedByRemembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | UseAllOriginZones$ True | SpellDescription$ Return all creatures blocking or blocked by target creature to their owner's hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AlternateMode:Split
@@ -12,5 +12,5 @@ ALTERNATE
 Name:Error
 ManaCost:U B
 Types:Instant
-A:SP$ Counter | Cost$ U B | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
 Oracle:Counter target multicolored spell.

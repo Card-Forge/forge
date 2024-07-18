@@ -1,7 +1,7 @@
 Name:Sudden Demise
 ManaCost:X R
 Types:Sorcery
-A:SP$ ChooseColor | Cost$ X R | AILogic$ MostProminentHumanCreatures | SubAbility$ DBDmg | SpellDescription$ Choose a color. CARDNAME deals X damage to each creature of the chosen color.
+A:SP$ ChooseColor | AILogic$ MostProminentHumanCreatures | SubAbility$ DBDmg | SpellDescription$ Choose a color. CARDNAME deals X damage to each creature of the chosen color.
 SVar:DBDmg:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.ChosenColor | ValidDescription$ each creature of the chosen color.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

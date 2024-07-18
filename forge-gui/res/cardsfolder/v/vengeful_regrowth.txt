@@ -1,0 +1,10 @@
+Name:Vengeful Regrowth
+ManaCost:4 G G
+Types:Sorcery
+K:Flashback:6 G G
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target land card in your graveyard | ValidTgts$ Land.YouCtrl | RememberChanged$ True | Tapped$ True | SubAbility$ DBToken | SpellDescription$ Return up to three target land cards from your graveyard to the battlefield tapped. Create that many 4/2 green Plant Warrior creature tokens with reach.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenOwner$ You | TokenScript$ g_4_2_plant_warrior_reach | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Ability$Graveyard|Token & Type$Plant|Warrior
+Oracle:Return up to three target land cards from your graveyard to the battlefield tapped. Create that many 4/2 green Plant Warrior creature tokens with reach.\nFlashback {6}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

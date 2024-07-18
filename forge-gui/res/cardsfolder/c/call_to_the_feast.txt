@@ -1,6 +1,6 @@
 Name:Call to the Feast
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ Token | Cost$ 2 W B | TokenAmount$ 3 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create three 1/1 white Vampire creature tokens with lifelink.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_vampire_lifelink | TokenOwner$ You | SpellDescription$ Create three 1/1 white Vampire creature tokens with lifelink.
 DeckHas:Ability$Token
 Oracle:Create three 1/1 white Vampire creature tokens with lifelink.

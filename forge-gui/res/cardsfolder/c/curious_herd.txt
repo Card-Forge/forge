@@ -1,7 +1,7 @@
 Name:Curious Herd
 ManaCost:3 G
 Types:Instant
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Choices$ Player | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Choose target opponent. You create X 3/3 green Beast creature tokens, where X is the number of artifacts that player controls.
+A:SP$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Choices$ Player | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Choose target opponent. You create X 3/3 green Beast creature tokens, where X is the number of artifacts that player controls.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_3_3_beast | TokenOwner$ You
 SVar:X:TargetedPlayer$Valid Artifact.YouCtrl
 DeckHas:Ability$Token

@@ -44,9 +44,7 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -189,6 +187,8 @@ public class CardFactory {
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
+
+        c.setAttractionCard(cardRules.getType().isAttraction());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -346,9 +346,9 @@ public class CardFactory {
             card.setColor(combinedColor);
             card.setType(new CardType(rules.getType()));
 
-            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
-            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
-            //card.setText(combinedText);
+            // Combined text based on Oracle text -  might not be necessary
+            String combinedText = String.format("(%s) %s\r\n\r\n(%s) %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            card.getState(CardStateName.Original).setOracleText(combinedText);
         }
         return card;
     }
@@ -370,6 +370,9 @@ public class CardFactory {
 
         // keywords not before variables
         c.addIntrinsicKeywords(face.getKeywords(), false);
+        if (face.getDraftActions() != null) {
+            face.getDraftActions().forEach(c::addDraftAction);
+        }
 
         c.setManaCost(face.getManaCost());
         c.setText(face.getNonAbilityText());
@@ -377,7 +380,7 @@ public class CardFactory {
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
         c.getCurrentState().setBaseDefense(face.getDefense());
 
-        c.setOracleText(face.getOracleText());
+        c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -392,6 +395,8 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        c.setAttractionLights(face.getAttractionLights());
 
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
@@ -409,6 +414,73 @@ public class CardFactory {
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+
+        if (face.hasFunctionalVariants()) {
+            applyFunctionalVariant(c, face);
+        }
+    }
+
+    private static void applyFunctionalVariant(Card c, ICardFace originalFace) {
+        String variantName = c.getPaperCard().getFunctionalVariant();
+        if (IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName))
+            return;
+        ICardFace variant = originalFace.getFunctionalVariant(variantName);
+        if (variant == null) {
+            System.out.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", originalFace.getName(), variantName);
+            return;
+        }
+
+        if (variant.getVariables() != null)
+            for (Entry<String, String> v : variant.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+        if (variant.getReplacements() != null)
+            for (String r : variant.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+        if (variant.getStaticAbilities() != null)
+            for (String s : variant.getStaticAbilities())
+                c.addStaticAbility(s);
+        if (variant.getTriggers() != null)
+            for (String t : variant.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
+
+        if (variant.getKeywords() != null)
+            c.addIntrinsicKeywords(variant.getKeywords(), false);
+
+        if (variant.getManaCost() != ManaCost.NO_COST)
+            c.setManaCost(variant.getManaCost());
+        if (variant.getNonAbilityText() != null)
+            c.setText(variant.getNonAbilityText());
+
+        if (!"".equals(variant.getInitialLoyalty()))
+            c.getCurrentState().setBaseLoyalty(variant.getInitialLoyalty());
+        if (!"".equals(variant.getDefense()))
+            c.getCurrentState().setBaseDefense(variant.getDefense());
+
+        if (variant.getOracleText() != null)
+            c.getCurrentState().setOracleText(variant.getOracleText());
+
+        if (variant.getType() != null) {
+            for(String type : variant.getType())
+                c.addType(type);
+        }
+
+        if (variant.getColor() != null)
+            c.setColor(variant.getColor().getColor());
+
+        if (variant.getIntPower() != Integer.MAX_VALUE) {
+            c.setBasePower(variant.getIntPower());
+            c.setBasePowerString(variant.getPower());
+        }
+        if (variant.getIntToughness() != Integer.MAX_VALUE) {
+            c.setBaseToughness(variant.getIntToughness());
+            c.setBaseToughnessString(variant.getToughness());
+        }
+
+        if (variant.getAttractionLights() != null)
+            c.setAttractionLights(variant.getAttractionLights());
+
+        if (variant.getAbilities() != null)
+            CardFactoryUtil.addAbilityFactoryAbilities(c, variant.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
@@ -571,6 +643,12 @@ public class CardFactory {
         for (Map.Entry<CardStateName, CardState> e : result.entrySet()) {
             final CardState originalState = out.getState(e.getKey());
             final CardState state = e.getValue();
+
+            // has Embalm Condition for extra changes of Vizier of Many Faces
+            if (sa.hasParam("Embalm") && !out.isEmbalmed()) {
+                continue;
+            }
+
             // update the names for the states
             if (sa.hasParam("KeepName")) {
                 state.setName(originalState.getName());
@@ -638,7 +716,6 @@ public class CardFactory {
                 state.setBaseLoyalty(String.valueOf(AbilityUtils.calculateAmount(host, sa.getParam("SetLoyalty"), sa)));
             }
 
-            // Planning a Vizier of Many Faces rework; always might come in handy
             if (sa.hasParam("RemoveCost")) {
                 state.setManaCost(ManaCost.NO_COST);
             }
@@ -696,6 +773,11 @@ public class CardFactory {
             if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
+                // Aurora Shifter
+                if (root.isTrigger() && root.getTrigger().getSpawningAbility() != null) {
+                    root = root.getTrigger().getSpawningAbility();
+                }
+
                 if (root.isTrigger()) {
                     state.addTrigger(root.getTrigger().copy(out, false));
                 } else if (root.isReplacementAbility()) {
@@ -706,34 +788,20 @@ public class CardFactory {
             }
 
             // Special Rules for Embalm and Eternalize
-            if (sa.hasParam("Embalm") && out.isEmbalmed()) {
-                state.addType("Zombie");
-                state.setColor(MagicColor.WHITE);
-                state.setManaCost(ManaCost.NO_COST);
-
-                if (sa.isIntrinsic()) {
-                    String name = TextUtil.fastReplace(
-                            TextUtil.fastReplace(host.getName(), ",", ""),
-                            " ", "_").toLowerCase();
-                    String set = host.getSetCode().toLowerCase();
-                    state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
-                }
+            if (sa.isEmbalm() && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("embalm_" + name + "_" + set));
             }
 
-            if (sa.hasParam("Eternalize") && out.isEternalized()) {
-                state.addType("Zombie");
-                state.setColor(MagicColor.BLACK);
-                state.setManaCost(ManaCost.NO_COST);
-                state.setBasePower(4);
-                state.setBaseToughness(4);
-
-                if (sa.isIntrinsic()) {
-                    String name = TextUtil.fastReplace(
-                        TextUtil.fastReplace(host.getName(), ",", ""),
-                            " ", "_").toLowerCase();
-                    String set = host.getSetCode().toLowerCase();
-                    state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
-                }
+            if (sa.isEternalize() && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                    TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
             if (sa.hasParam("GainTextOf") && originalState != null) {
@@ -748,35 +816,28 @@ public class CardFactory {
                     continue;
                 }
 
-                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetPower"))
-                        state.removeStaticAbility(sta);
+                if (sa.hasParam("SetPower") && sta.hasParam("SetPower"))
+                    state.removeStaticAbility(sta);
+
+                if (sa.hasParam("SetToughness") && sta.hasParam("SetToughness"))
+                    state.removeStaticAbility(sta);
+
+                // currently only Changeling and similar should be affected by that
+                // other cards using AddType$ ChosenType should not
+                if (sa.hasParam("SetCreatureTypes") && sta.hasParam("AddAllCreatureTypes")) {
+                    state.removeStaticAbility(sta);
                 }
-                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetToughness"))
-                        state.removeStaticAbility(sta);
-                }
-                if (sa.hasParam("SetCreatureTypes")) {
-                    // currently only Changeling and similar should be affected by that
-                    // other cards using AddType$ ChosenType should not
-                    if (sta.hasParam("AddAllCreatureTypes")) {
-                        state.removeStaticAbility(sta);
-                    }
-                }
-                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
-                    if (sta.hasParam("SetColor")) {
-                        state.removeStaticAbility(sta);
-                    }
+                if ((sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) && sta.hasParam("SetColor")) {
+                    state.removeStaticAbility(sta);
                 }
             }
 
             // remove some keywords
             if (sa.hasParam("SetCreatureTypes")) {
-                state.removeIntrinsicKeyword("Changeling");
+                state.removeIntrinsicKeyword(Keyword.CHANGELING);
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")
-                    || sa.hasParam("SetColorByManaCost")) {
-                state.removeIntrinsicKeyword("Devoid");
+            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
+                state.removeIntrinsicKeyword(Keyword.DEVOID);
             }
         }
         return result;

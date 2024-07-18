@@ -1,5 +1,5 @@
 Name:Venomous Vines
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 G G | ValidTgts$ Permanent.enchanted | TgtPrompt$ Select target enchanted permanent | SpellDescription$ Destroy target enchanted permanent.
+A:SP$ Destroy | ValidTgts$ Permanent.enchanted | TgtPrompt$ Select target enchanted permanent | SpellDescription$ Destroy target enchanted permanent.
 Oracle:Destroy target enchanted permanent.

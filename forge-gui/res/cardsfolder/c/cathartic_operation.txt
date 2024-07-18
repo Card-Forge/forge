@@ -1,0 +1,7 @@
+Name:Cathartic Operation
+ManaCost:3 U B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creature cards in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBSeek | SpellDescription$ Return up to two target creature cards from your graveyard to your hand, then seek two noncreature, nonland cards.
+SVar:DBSeek:DB$ Seek | Num$ 2 | Type$ Card.nonCreature+nonLand
+DeckHas:Ability$Graveyard
+Oracle:Return up to two target creature cards from your graveyard to your hand, then seek two noncreature, nonland cards.

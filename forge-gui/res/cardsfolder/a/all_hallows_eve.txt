@@ -1,7 +1,7 @@
 Name:All Hallow's Eve
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ Exile CARDNAME with two scream counters on it.
+A:SP$ ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter | SpellDescription$ Exile CARDNAME with two scream counters on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ SCREAM | CounterNum$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE1_SCREAM | PresentZone$ Exile | Execute$ TrigRemoveCounter | TriggerZones$ Exile | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is exiled with a scream counter on it, remove a scream counter from it. If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield.

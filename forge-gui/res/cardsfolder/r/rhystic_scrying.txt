@@ -1,6 +1,6 @@
 Name:Rhystic Scrying
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U U | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards. Then if any player pays {2}, discard three cards.
+A:SP$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard | SpellDescription$ Draw three cards. Then if any player pays {2}, discard three cards.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose | UnlessPayer$ Player | UnlessCost$ 2 | UnlessSwitched$ True
 Oracle:Draw three cards. Then if any player pays {2}, discard three cards.

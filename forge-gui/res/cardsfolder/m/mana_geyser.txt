@@ -1,6 +1,6 @@
 Name:Mana Geyser
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Mana | Cost$ 3 R R | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each tapped land your opponents control.
+A:SP$ Mana | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each tapped land your opponents control.
 SVar:X:Count$Valid Land.tapped+OppCtrl
 Oracle:Add {R} for each tapped land your opponents control.

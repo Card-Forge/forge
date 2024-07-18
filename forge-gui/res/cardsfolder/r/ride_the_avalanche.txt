@@ -1,7 +1,7 @@
 Name:Ride the Avalanche
 ManaCost:G U
 Types:Instant
-A:SP$ Effect | Cost$ G U | StaticAbilities$ QuickenStA | Triggers$ TrigCounters | SpellDescription$ The next spell you cast this turn can be cast as though it had flash. When you cast your next spell this turn, put X +1/+1 counters on up to one target creature, where X is the mana value of that spell.
+A:SP$ Effect | StaticAbilities$ QuickenStA | Triggers$ TrigCounters | SpellDescription$ The next spell you cast this turn can be cast as though it had flash. When you cast your next spell this turn, put X +1/+1 counters on up to one target creature, where X is the mana value of that spell.
 SVar:QuickenStA:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | EffectZone$ Command | Caster$ You
 SVar:TrigCounters:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | OneOff$ True | Execute$ PutCounter | TriggerDescription$ When you cast your next spell this turn, put X +1/+1 counters on up to one target creature, where X is the mana value of that spell
 SVar:PutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature | ValidTgts$ Creature

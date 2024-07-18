@@ -1,5 +1,5 @@
 Name:Flatten
 ManaCost:3 B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
 Oracle:Target creature gets -4/-4 until end of turn.

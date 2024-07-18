@@ -532,6 +532,10 @@ public final class CardPredicates {
         };
     }
 
+    public static Predicate<Card> isAttractionWithLight(int light) {
+        return c -> c.isAttraction() && c.getAttractionLights().contains(light);
+    }
+
     public static class Presets {
 
         /**
@@ -565,6 +569,13 @@ public final class CardPredicates {
             @Override
             public boolean apply(Card c) {
                 return c.canTap();
+            }
+        };
+
+        public static final Predicate<Card> CAN_CREW = new Predicate<Card>() {
+            @Override
+            public boolean apply(Card c) {
+                return c.canCrew();
             }
         };
         /**
@@ -761,6 +772,7 @@ public final class CardPredicates {
                 return c.canBeDestroyed();
             }
         };
+        public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
     }
 
     public static class Accessors {

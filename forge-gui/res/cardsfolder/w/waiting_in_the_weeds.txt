@@ -1,7 +1,7 @@
 Name:Waiting in the Weeds
 ManaCost:1 G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 G G | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | ChangeZoneTable$ True | SpellDescription$ Each player creates a 1/1 green Cat creature token for each untapped Forest they control.
+A:SP$ RepeatEach | RepeatSubAbility$ DBToken | RepeatPlayers$ Player | ChangeZoneTable$ True | SpellDescription$ Each player creates a 1/1 green Cat creature token for each untapped Forest they control.
 SVar:DBToken:DB$ Token | TokenAmount$ CountForest | TokenScript$ g_1_1_cat | TokenOwner$ Player.IsRemembered
 SVar:CountForest:Count$Valid Forest.untapped+RememberedPlayerCtrl
 AI:RemoveDeck:All

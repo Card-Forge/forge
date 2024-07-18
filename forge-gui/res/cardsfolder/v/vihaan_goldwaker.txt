@@ -1,0 +1,10 @@
+Name:Vihaan, Goldwaker
+ManaCost:R W B
+Types:Legendary Creature Dwarf Warlock
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.Outlaw+Other+YouCtrl | AddKeyword$ Haste & Vigilance | Description$ Other outlaws you control have vigilance and haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimateAll | TriggerDescription$ At the beginning of combat on your turn, you may have Treasures you control become 3/3 Construct Assassin artifact creatures in addition to their other types until end of turn.
+SVar:TrigAnimateAll:DB$ AnimateAll | ValidCards$ Artifact.Treasure+YouCtrl | Power$ 3 | Toughness$ 3 | Types$ Artifact,Creature,Construct,Assassin
+DeckHints:Type$Assassin|Mercenary|Pirates|Rogues|Warlock
+DeckNeeds:Type$Treasure
+Oracle:Other outlaws you control have vigilance and haste. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)\nAt the beginning of combat on your turn, you may have Treasures you control become 3/3 Construct Assassin artifact creatures in addition to their other types until end of turn.

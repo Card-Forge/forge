@@ -1,7 +1,7 @@
 Name:Destructive Tampering
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 R | Choices$ DBDestroy,CantBlockEffect
+A:SP$ Charm | Choices$ DBDestroy,CantBlockEffect
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
 SVar:CantBlockEffect:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Creatures without flying can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.

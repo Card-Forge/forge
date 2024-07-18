@@ -7,5 +7,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn+withCycling,Instant.YouOwn+withTypeCycling,Sorcery.YouOwn+withCycling,Sorcery.YouOwn+withTypeCycling | TgtPrompt$ Select target instant or sorcery card with a cycling ability from your graveyard
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Graveyard | CheckSVar$ YouCycled | SVarCompare$ GE2 | Execute$ TrigReturn | TriggerDescription$ At the beginning of each end step, if you cycled two or more cards this turn, return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
-SVar:YouCycled:Count$YouCycledThisTurn
+SVar:YouCycled:Count$ThisTurnActivated_Activated.Cycling+YouCtrl
 Oracle:Flying\nWhen Spellpyre Phoenix enters the battlefield, you may return target instant or sorcery card with a cycling ability from your graveyard to your hand.\nAt the beginning of each end step, if you cycled two or more cards this turn, return Spellpyre Phoenix from your graveyard to your hand.

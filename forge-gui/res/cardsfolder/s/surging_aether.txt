@@ -2,5 +2,5 @@ Name:Surging Aether
 ManaCost:3 U
 Types:Instant
 K:Ripple:4
-A:SP$ ChangeZone | Cost$ 3 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 Oracle:Ripple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast spells with the same name as this spell from among those cards without paying their mana costs. Put the rest on the bottom of your library.)\nReturn target permanent to its owner's hand.

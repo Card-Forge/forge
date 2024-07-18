@@ -1,7 +1,7 @@
 Name:Lorehold Command
 ManaCost:3 W R
 Types:Instant
-A:SP$ Charm | Cost$ 3 W R | Choices$ DBSpirit,DBIndestructible,DBHelix,DBSacrifice | CharmNum$ 2
+A:SP$ Charm | Choices$ DBSpirit,DBIndestructible,DBHelix,DBSacrifice | CharmNum$ 2
 SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ You | SpellDescription$ Create a 3/2 red and white Spirit token.
 SVar:DBIndestructible:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | KW$ Indestructible & Haste | SpellDescription$ Creatures you control get +1/+0 and gain indestructible and haste until end of turn.
 SVar:DBHelix:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target. Target player gains 3 life.

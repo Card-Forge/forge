@@ -6,4 +6,4 @@ A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a ca
 K:Unearth:U
 DeckHas:Ability$Sacrifice|Graveyard
 DeckHints:Color$Blue
-Oracle:\n{2}, Sacrifice Combat Courier: Draw a card.\nUnearth {U} ({U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+Oracle:{2}, Sacrifice Combat Courier: Draw a card.\nUnearth {U} ({U}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

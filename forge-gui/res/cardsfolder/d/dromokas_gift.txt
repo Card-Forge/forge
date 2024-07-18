@@ -1,6 +1,6 @@
 Name:Dromoka's Gift
 ManaCost:4 G
 Types:Instant
-A:SP$ PutCounter | Cost$ 4 G | Bolster$ True | CounterNum$ 4 | CounterType$ P1P1 | SpellDescription$ Bolster 4. (Choose a creature with the least toughness among creatures you control and put four +1/+1 counters on it.)
+A:SP$ PutCounter | Bolster$ True | CounterNum$ 4 | CounterType$ P1P1 | SpellDescription$ Bolster 4. (Choose a creature with the least toughness among creatures you control and put four +1/+1 counters on it.)
 DeckHas:Ability$Counters
 Oracle:Bolster 4. (Choose a creature with the least toughness among creatures you control and put four +1/+1 counters on it.)

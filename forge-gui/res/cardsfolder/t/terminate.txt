@@ -1,5 +1,5 @@
 Name:Terminate
 ManaCost:B R
 Types:Instant
-A:SP$ Destroy | Cost$ B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated.
 Oracle:Destroy target creature. It can't be regenerated.

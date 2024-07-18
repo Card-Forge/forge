@@ -2,6 +2,6 @@ Name:Cast into the Fire
 ManaCost:1 R
 Types:Instant
 A:SP$ Charm | Choices$ DBDmg,DBDestroy
-SVar:DBDmg:DB$ DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumDmg$ 1 | SpellDescription$ Cast into the Fire deals 1 damage to each of up to two target creatures.
+SVar:DBDmg:DB$ DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each of up to two target creatures.
 SVar:DBDestroy:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
 Oracle:Choose one —\n• Cast into the Fire deals 1 damage to each of up to two target creatures.\n• Exile target artifact.

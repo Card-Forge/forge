@@ -1,5 +1,5 @@
 Name:Fight to the Death
 ManaCost:R W
 Types:Instant
-A:SP$ DestroyAll | Cost$ R W | ValidCards$ Creature.blocked,Creature.blocking | SpellDescription$ Destroy all blocking creatures and all blocked creatures.
+A:SP$ DestroyAll | ValidCards$ Creature.blocked,Creature.blocking | SpellDescription$ Destroy all blocking creatures and all blocked creatures.
 Oracle:Destroy all blocking creatures and all blocked creatures.

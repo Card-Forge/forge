@@ -1,6 +1,6 @@
 Name:Viashino Branchrider
 ManaCost:R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:1/1
 K:Haste
 K:Kicker:2 G

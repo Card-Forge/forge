@@ -1,0 +1,6 @@
+Name:Sandstorm Verge
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Pump | Cost$ 3 T | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SorcerySpeed$ True | StackDescription$ {c:Targeted} can't block this turn. | SpellDescription$ Target creature can't block this turn. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{3}, {T}: Target creature can't block this turn. Activate only as a sorcery.

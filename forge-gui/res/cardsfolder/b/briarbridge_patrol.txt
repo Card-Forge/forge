@@ -2,7 +2,7 @@ Name:Briarbridge Patrol
 ManaCost:3 G
 Types:Creature Human Warrior
 PT:3/3
-T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever Briarbridge Patrol deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDealtOnce | ValidSource$ Card.Self | ValidTarget$ Creature | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME deals damage to one or more creatures, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ ClueResearch | SVarCompare$ GE3 | Execute$ TrigCheatCreature | TriggerDescription$ At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
 SVar:TrigCheatCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ You may put a creature card from your hand onto the battlefield.

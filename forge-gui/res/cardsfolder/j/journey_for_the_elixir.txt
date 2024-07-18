@@ -1,7 +1,7 @@
 Name:Journey for the Elixir
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch1 | SpellDescription$ Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch1 | SpellDescription$ Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle.
 SVar:DBSearch1:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedJiang Yanggu | ChangeNum$ 1
 DeckNeeds:Name$Jiang Yanggu
 Oracle:Search your library and graveyard for a basic land card and a card named Jiang Yanggu, reveal them, put them into your hand, then shuffle.

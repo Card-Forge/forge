@@ -3,5 +3,5 @@ ManaCost:B B B B
 Types:Sorcery
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast this spell, any player may pay half their life, rounded up. If a player does, counter CARDNAME.
 SVar:TrigCounter:DB$ Counter | UnlessCost$ LifeTotalHalfUp | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True | UnlessAI$ Never
-A:SP$ AddTurn | Cost$ B B B B | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+A:SP$ AddTurn | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 Oracle:When you cast this spell, any player may pay half their life, rounded up. If a player does, counter Temporal Extortion.\nTake an extra turn after this one.

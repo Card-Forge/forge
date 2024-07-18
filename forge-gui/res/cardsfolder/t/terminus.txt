@@ -2,5 +2,5 @@ Name:Terminus
 ManaCost:4 W W
 Types:Sorcery
 K:Miracle:W
-A:SP$ ChangeZoneAll | Cost$ 4 W W | ChangeType$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put all creatures on the bottom of their owners' libraries.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put all creatures on the bottom of their owners' libraries.
 Oracle:Put all creatures on the bottom of their owners' libraries.\nMiracle {W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

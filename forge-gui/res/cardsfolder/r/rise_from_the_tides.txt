@@ -1,7 +1,7 @@
 Name:Rise from the Tides
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Token | Cost$ 5 U | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token for each instant and sorcery card in your graveyard.
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SpellDescription$ Create a tapped 2/2 black Zombie creature token for each instant and sorcery card in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Ability$Graveyard|Discard

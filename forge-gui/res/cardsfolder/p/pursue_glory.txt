@@ -1,6 +1,6 @@
 Name:Pursue Glory
 ManaCost:3 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 R | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 2 | SpellDescription$ Attacking creatures get +2/+0 until end of turn
 K:Cycling:2
 Oracle:Attacking creatures get +2/+0 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

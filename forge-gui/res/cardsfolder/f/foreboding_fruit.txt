@@ -1,7 +1,7 @@
 Name:Foreboding Fruit
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | AIManaPref$ B | SpellDescription$ Target player draws two cards and loses 2 life. Adamant — If at least three black mana was spent to cast this spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | AIManaPref$ B | SpellDescription$ Target player draws two cards and loses 2 life. Adamant — If at least three black mana was spent to cast this spell, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Targeted | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_food_sac | TokenOwner$ You
 SVar:X:Count$Adamant.Black.1.0

@@ -1,7 +1,7 @@
 Name:Consecrate
 ManaCost:1 WB
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 WB | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard. | SubAbility$ DBDraw
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AlternateMode:Split
 Oracle:Exile target card from a graveyard.\nDraw a card.
@@ -11,7 +11,7 @@ ALTERNATE
 Name:Consume
 ManaCost:2 W B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 2 W B | ValidTgts$ Player | SacValid$ Creature.greatestPowerControlledByTargeted | SubAbility$ DBGainLife | SacMessage$ the creature with the highest power | RememberSacrificed$ True | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.greatestPowerControlledByTargeted | SubAbility$ DBGainLife | SacMessage$ the creature with the highest power | RememberSacrificed$ True | SpellDescription$ Target player sacrifices a creature with the greatest power among creatures they control. You gain life equal to its power.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower

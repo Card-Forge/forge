@@ -4,9 +4,9 @@ Types:Artifact
 A:AB$ Pump | Cost$ 3 T | NumAtt$ +2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ RuneDelay | SpellDescription$ Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
 SVar:RuneDelay:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | Origin$ Battlefield | ValidCard$ Card.IsTriggerRemembered | ThisTurn$ True | SubAbility$ RuneswordEffect | Execute$ RuneswordSac | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice CARDNAME.
 SVar:RuneswordSac:DB$ SacrificeAll | Defined$ Self
-SVar:RuneswordEffect:DB$ Effect | Name$ Runesword Effect | ReplacementEffects$ RuneswordRep | StaticAbilities$ NoRegen | RememberObjects$ Targeted | AILogic$ CantRegenerate
+SVar:RuneswordEffect:DB$ Effect | ReplacementEffects$ RuneswordRep | StaticAbilities$ NoRegen | RememberObjects$ Targeted | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Creature.DamagedBy Remembered | Description$ If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn.
-SVar:RuneswordRep:Event$ Moved | ValidLKI$ Creature.DamagedBy Remembered | Destination$ Graveyard | ReplaceWith$ RuneswordExile | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:RuneswordRep:Event$ Moved | ValidLKI$ Creature.DamagedBy Remembered | Destination$ Graveyard | ReplaceWith$ RuneswordExile | Description$ If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
 SVar:RuneswordExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 DeckHas:Ability$Sacrifice
 Oracle:{3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.

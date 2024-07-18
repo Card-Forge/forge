@@ -3,9 +3,9 @@ ManaCost:G
 Types:Creature Bird
 PT:1/1
 A:AB$ Pump | Cost$ G G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse | KW$ HIDDEN Damage that would be dealt to CARDNAME can't be redirected. | SubAbility$ DBEffect | StackDescription$ {c:Targeted} can't be regenerated this turn. Damage that would be dealt to that card this turn can't be prevented or dealt instead to another permanent or player. | SpellDescription$ Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.
-SVar:DBEffect:DB$ Effect | Name$ Whippoorwill Effect | EffectOwner$ TargetedOwner | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen,NoPrevent | SubAbility$ DBDelayedTrigger | AILogic$ CantRegenerate
+SVar:DBEffect:DB$ Effect | EffectOwner$ TargetedOwner | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen,NoPrevent | SubAbility$ DBDelayedTrigger | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 SVar:NoPrevent:Mode$ CantPreventDamage | Affected$ Creature.IsRemembered | Description$ Damage that would be dealt to that creature this turn can't be prevented.
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigExile | TriggerDescription$ When the creature dies this turn, exile the creature.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredCard | Origin$ Graveyard | Destination$ Exile
-Oracle:{G}{G},{T}: Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.
+Oracle:{G}{G}, {T}: Target creature can't be regenerated this turn. Damage that would be dealt to that creature this turn can't be prevented or dealt instead to another permanent or player. When the creature dies this turn, exile the creature.

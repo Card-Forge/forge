@@ -1,5 +1,5 @@
 Name:Refurbish
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to the battlefield.
 Oracle:Return target artifact card from your graveyard to the battlefield.

@@ -2,4 +2,4 @@ Name:The Stasis Coffin
 ManaCost:3
 Types:Legendary Artifact
 A:AB$ Pump | Cost$ 2 T Exile<1/CARDNAME> | Defined$ You | Duration$ UntilYourNextTurn | KW$ Protection from everything | SpellDescription$ You gain protection from everything until your next turn.
-Oracle:{2},{T}, Exile The Stasis Coffin: You gain protection from everything until your next turn.
+Oracle:{2}, {T}, Exile The Stasis Coffin: You gain protection from everything until your next turn.

@@ -1,7 +1,7 @@
 Name:Suffer the Past
 ManaCost:X B
 Types:Instant
-A:SP$ Pump | Cost$ X B | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBExileTargets | SpellDescription$ Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life. | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBExileTargets | SpellDescription$ Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life. | StackDescription$ None
 SVar:DBExileTargets:DB$ ChangeZone | TargetMin$ X | TargetMax$ X | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetsWithDefinedController$ ParentTarget | TgtPrompt$ Select target card targeted player owns | RememberChanged$ True | SubAbility$ DBSyphonLife
 SVar:DBSyphonLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ Y | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SubAbility$ DBCleanup

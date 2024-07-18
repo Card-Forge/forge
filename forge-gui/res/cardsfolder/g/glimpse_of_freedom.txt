@@ -1,7 +1,7 @@
 Name:Glimpse of Freedom
 ManaCost:1 U
 Types:Instant
-A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 K:Escape:2 U ExileFromGrave<5/Card.Other/other>
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
 Oracle:Draw a card.\nEscape—{2}{U}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Land
 K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-A:AB$ Animate | Cost$ 1 W | Defined$ Self | Power$ 1 | Toughness$ 5 | Types$ Creature,Soldier | Colors$ White | SpellDescription$ CARDNAME becomes a 1/5 white Soldier creature until end of turn. It's still a land.
+A:AB$ Animate | Cost$ 1 W | Defined$ Self | Power$ 1 | Toughness$ 5 | Types$ Creature,Soldier | Colors$ White | OverwriteColors$ True | SpellDescription$ CARDNAME becomes a 1/5 white Soldier creature until end of turn. It's still a land.
 Oracle:Forbidding Watchtower enters the battlefield tapped.\n{T}: Add {W}.\n{1}{W}: Forbidding Watchtower becomes a 1/5 white Soldier creature until end of turn. It's still a land.

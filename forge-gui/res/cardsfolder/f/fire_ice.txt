@@ -1,7 +1,7 @@
 Name:Fire
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Fire deals 2 damage divided as you choose among one or two targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two targets.
 AlternateMode:Split
 Oracle:Fire deals 2 damage divided as you choose among one or two targets.
 
@@ -10,6 +10,6 @@ ALTERNATE
 Name:Ice
 ManaCost:1 U
 Types:Instant
-A:SP$ Tap | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDraw | SpellDescription$ Tap target permanent. Draw a card.
+A:SP$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDraw | SpellDescription$ Tap target permanent. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Tap target permanent.\nDraw a card.

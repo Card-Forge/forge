@@ -1,5 +1,5 @@
 Name:Hideous Visage
 ManaCost:2 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | KW$ Intimidate | SpellDescription$ Creatures you control gain intimidate until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Intimidate | SpellDescription$ Creatures you control gain intimidate until end of turn.
 Oracle:Creatures you control gain intimidate until end of turn. (Each of those creatures can't be blocked except by artifact creatures and/or creatures that share a color with it.)

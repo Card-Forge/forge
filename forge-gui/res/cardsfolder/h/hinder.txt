@@ -1,5 +1,5 @@
 Name:Hinder
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | DestinationChoice$ BottomOfLibrary,TopOfLibrary | SpellDescription$ Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | DestinationChoice$ BottomOfLibrary,TopOfLibrary | SpellDescription$ Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.
 Oracle:Counter target spell. If that spell is countered this way, put that card on the top or bottom of its owner's library instead of into that player's graveyard.

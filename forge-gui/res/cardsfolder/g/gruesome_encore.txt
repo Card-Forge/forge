@@ -1,7 +1,7 @@
 Name:Gruesome Encore
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature in an opponent's graveyard | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature in an opponent's graveyard | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | LeaveBattlefield$ Exile | Defined$ Remembered | Duration$ Permanent | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Put target creature card from an opponent's graveyard onto the battlefield under your control. It gains haste. Exile it at the beginning of the next end step. If that creature would leave the battlefield, exile it instead of putting it anywhere else.

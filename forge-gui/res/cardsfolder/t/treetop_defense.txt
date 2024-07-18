@@ -1,7 +1,7 @@
 Name:Treetop Defense
 ManaCost:1 G
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 G | ValidCards$ Creature.YouCtrl | KW$ Reach | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Creatures you control gain reach until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Reach | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Creatures you control gain reach until end of turn.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nCreatures you control gain reach until end of turn. (They can block creatures with flying.)

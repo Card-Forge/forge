@@ -1,7 +1,7 @@
 Name:Dawn Charm
 ManaCost:1 W
 Types:Instant
-A:SP$ Charm | Cost$ 1 W | Choices$ DBFog,DBRegen,DBCounter
+A:SP$ Charm | Choices$ DBFog,DBRegen,DBCounter
 SVar:DBFog:DB$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn.
 SVar:DBRegen:DB$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TargetValidTargeting$ You | TgtPrompt$ Select target spell that is targeting you | ValidTgts$ Card | SpellDescription$ Counter target spell that targets you.

@@ -1,7 +1,7 @@
 Name:Doomfall
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 B | Choices$ DBChangeZone1,DBChangeZone2 | Defined$ You
+A:SP$ Charm | Choices$ DBChangeZone1,DBChangeZone2 | Defined$ You
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | SpellDescription$ Target opponent exiles a creature they control.
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ValidTgts$ Opponent | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. Exile that card.
 Oracle:Choose one —\n• Target opponent exiles a creature they control.\n• Target opponent reveals their hand. You choose a nonland card from it. Exile that card.

@@ -1,7 +1,7 @@
 Name:Irencrag Feat
 ManaCost:1 R R R
 Types:Sorcery
-A:SP$ Mana | Cost$ 1 R R R | Produced$ R | Amount$ 7 | SubAbility$ DBEffect | SpellDescription$ Add seven {R}. You can cast only one more spell this turn.
+A:SP$ Mana | Produced$ R | Amount$ 7 | SubAbility$ DBEffect | SpellDescription$ Add seven {R}. You can cast only one more spell this turn.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | Triggers$ StaticRem
 SVar:STCantBeCast:Mode$ CantBeCast | Caster$ You | EffectZone$ Command | CheckSVar$ NumCount | SVarCompare$ GE1 | Description$ You can cast only one more spell this turn.
 SVar:NumCount:Remembered$Amount

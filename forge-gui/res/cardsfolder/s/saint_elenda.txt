@@ -1,0 +1,15 @@
+Name:Saint Elenda
+ManaCost:4 W W W
+Types:Legendary Creature Vampire Cleric
+PT:4/7
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMakeCard | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card of your choice from CARDNAME's spellbook into your hand. You may cast that card this turn without paying its mana cost.
+SVar:TrigMakeCard:DB$ MakeCard | Conjure$ True | Spellbook$ Faith's Fetters,Ritual of Rejuvenation,Invoke the Divine,Inspiring Cleric | Zone$ Hand | SubAbility$ DBEffect | RememberMade$ True
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Hand | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you gained life this turn, create an X/X white Avatar creature token, where X is the amount of life you gained this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_x_x_avatar | TokenOwner$ You | TokenPower$ X | TokenToughness$ X
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Token
+Oracle:Lifelink\nWhen Saint Elenda enters the battlefield, conjure a card of your choice from Saint Elenda's spellbook into your hand. You may cast that card this turn without paying its mana cost.\nAt the beginning of your end step, if you gained life this turn, create an X/X white Avatar creature token, where X is the amount of life you gained this turn.

@@ -1,7 +1,7 @@
 Name:Snakeskin Veil
 ManaCost:G
 Types:Instant
-A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Hexproof
 DeckHas:Ability$Counters
 Oracle:Put a +1/+1 counter on target creature you control. It gains hexproof until end of turn.

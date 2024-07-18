@@ -1,7 +1,7 @@
 Name:Pulse of the Tangle
 ManaCost:1 G G
 Types:Sorcery
-A:SP$ Token | Cost$ 1 G G | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SubAbility$ DBBounce | SpellDescription$ Create a 3/3 green Beast creature token. Then if an opponent controls more creatures than you, return CARDNAME to its owner's hand.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SubAbility$ DBBounce | SpellDescription$ Create a 3/3 green Beast creature token. Then if an opponent controls more creatures than you, return CARDNAME to its owner's hand.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPresent$ Creature.OppCtrl | ConditionCompare$ GTX | Defined$ Parent
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Create a 3/3 green Beast creature token. Then if an opponent controls more creatures than you, return Pulse of the Tangle to its owner's hand.

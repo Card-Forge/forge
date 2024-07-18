@@ -1,7 +1,7 @@
 Name:Kindle
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.
 SVar:X:Count$NamedInAllYards.Kindle/Plus.2
 DeckHints:Name$Kindle
 Oracle:Kindle deals X damage to any target, where X is 2 plus the number of cards named Kindle in all graveyards.

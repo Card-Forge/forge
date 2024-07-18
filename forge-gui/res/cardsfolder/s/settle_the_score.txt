@@ -1,6 +1,6 @@
 Name:Settle the Score
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutLoyalty | SpellDescription$ Exile target creature. Put two loyalty counters on a planeswalker you control.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutLoyalty | SpellDescription$ Exile target creature. Put two loyalty counters on a planeswalker you control.
 SVar:DBPutLoyalty:DB$ PutCounter | Choices$ Planeswalker.YouCtrl | CounterType$ LOYALTY | CounterNum$ 2
 Oracle:Exile target creature. Put two loyalty counters on a planeswalker you control.

@@ -1,5 +1,5 @@
 Name:Unnatural Speed
 ManaCost:R
 Types:Instant Arcane
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 Oracle:Target creature gains haste until end of turn.

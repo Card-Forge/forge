@@ -1,7 +1,7 @@
 Name:Consume Spirit
 ManaCost:X 1 B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X 1 B | XColor$ Black | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Spend only black mana on X. Consume Spirit deals X damage to any target and you gain X life.
+A:SP$ DealDamage | XColor$ Black | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Spend only black mana on X. CARDNAME deals X damage to any target and you gain X life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$xPaid
 Oracle:Spend only black mana on X.\nConsume Spirit deals X damage to any target and you gain X life.

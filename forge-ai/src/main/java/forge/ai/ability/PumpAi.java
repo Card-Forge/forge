@@ -348,7 +348,7 @@ public class PumpAi extends PumpAiBase {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return true;
                     } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
-                        if (game.getPhaseHandler().isPreCombatMain() && isSorcerySpeed(sa, ai) ||
+                        if (game.getPhaseHandler().is(PhaseType.MAIN1) && isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
                             Card pumped = ComputerUtilCard.getPumpedCreature(ai, sa, card, 0, 0, keywords);
@@ -424,6 +424,10 @@ public class PumpAi extends PumpAiBase {
                 for (Card c : list) {
                     if (c.isCreature() && c.getController() == ai
                             && c.getNetToughness() - c.getTempToughnessBoost() + defense <= 0) {
+                        canDieToPump.add(c);
+                    }
+                    // Also, don't pump itself if the SA involves a sacrifice self cost
+                    if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
                         canDieToPump.add(c);
                     }
                 }

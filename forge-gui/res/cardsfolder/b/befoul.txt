@@ -1,5 +1,5 @@
 Name:Befoul
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Land,Creature.nonBlack | TgtPrompt$ Select target land or nonblack creature | NoRegen$ True | SpellDescription$ Destroy target land or nonblack creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Land,Creature.nonBlack | TgtPrompt$ Select target land or nonblack creature | NoRegen$ True | SpellDescription$ Destroy target land or nonblack creature. It can't be regenerated.
 Oracle:Destroy target land or nonblack creature. It can't be regenerated.

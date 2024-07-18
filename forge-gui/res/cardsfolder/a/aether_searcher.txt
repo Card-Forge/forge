@@ -1,0 +1,17 @@
+Name:Aether Searcher
+ManaCost:7
+PT:6/4
+Types:Artifact Creature Construct
+Draft:Reveal CARDNAME as you draft it.
+Draft:Reveal the next card you draft and note its name.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearchHand | TriggerDescription$ When CARDNAME enters the battlefield, you may search your hand and/or library for a card with a name noted as you drafted cards named Aether Searcher. You may cast it without paying its mana cost. If you searched your library this way, shuffle.
+SVar:TrigSearchHand:DB$ ChangeZone | Origin$ Hand | Destination$ Hand | ChangeType$ Card.NotedNameAetherSearcher | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TrigBranch
+# Branch to casting the found spell
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ CastFromHand | FalseSubAbility$ SearchLibrary
+SVar:CastFromHand:DB$ Play | ValidZone$ Hand | Valid$ Card.IsRemembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+# Or search the library
+SVar:SearchLibrary:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Card.NotedNameAetherSearcher | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ CastFromLibrary
+SVar:CastFromLibrary:DB$ Play | ValidZone$ Library | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Valid$ Card.IsRemembered | Controller$ You | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+Oracle:Reveal Aether Searcher as you draft it. Reveal the next card you draft and note its name.\nWhen Aether Searcher enters the battlefield, you may search your hand and/or library for a card with a name noted as you drafted cards named Aether Searcher. You may cast it without paying its mana cost. If you searched your library this way, shuffle.

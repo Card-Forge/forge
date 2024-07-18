@@ -1,7 +1,7 @@
 Name:Evolution Charm
 ManaCost:1 G
 Types:Instant
-A:SP$ Charm | Cost$ 1 G | Choices$ SearchLand,Return,DoPump | CharmNum$ 1
+A:SP$ Charm | Choices$ SearchLand,Return,DoPump | CharmNum$ 1
 SVar:SearchLand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | PrecostDesc$ Choose one — | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 SVar:Return:DB$ ChangeZone | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target creature card from your graveyard to your hand.
 SVar:DoPump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains flying until end of turn.

@@ -1,6 +1,6 @@
 Name:Steal Strength
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
 SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get -1/-1 | TargetUnique$ True | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 Oracle:Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.

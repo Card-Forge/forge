@@ -1,0 +1,5 @@
+Name:Haystack
+ManaCost:1 W
+Types:Artifact
+A:AB$ Phases | Cost$ 2 T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)
+Oracle:{2}, {T}: Target creature you control phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)

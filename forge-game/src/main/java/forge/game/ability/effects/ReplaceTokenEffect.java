@@ -129,6 +129,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     final Card token;
                     if (script.equals("Chosen")) {
                         token = CopyPermanentEffect.getProtoType(sa, chosen, pe.getKey());
+                        token.setCopiedPermanent(token);
                     } else {
                         token = TokenInfo.getProtoType(script, sa, pe.getKey());
                     }

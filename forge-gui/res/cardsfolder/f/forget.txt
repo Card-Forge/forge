@@ -1,7 +1,7 @@
 Name:Forget
 ManaCost:U U
 Types:Sorcery
-A:SP$ Discard | Cost$ U U | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target player discards two cards, then draws as many cards as they discarded this way.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target player discards two cards, then draws as many cards as they discarded this way.
 SVar:DBDraw:DB$ Draw | Defined$ Targeted | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

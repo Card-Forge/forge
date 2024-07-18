@@ -1,7 +1,7 @@
 Name:Caress of Phyrexia
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 B B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards, loses 3 life, and gets three poison counters.
+A:SP$ Draw | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards, loses 3 life, and gets three poison counters.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted | SubAbility$ DBPoison
 SVar:DBPoison:DB$ Poison | Num$ 3 | Defined$ Targeted
 Oracle:Target player draws three cards, loses 3 life, and gets three poison counters.

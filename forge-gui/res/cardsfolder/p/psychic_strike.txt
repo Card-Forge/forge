@@ -1,6 +1,6 @@
 Name:Psychic Strike
 ManaCost:1 U B
 Types:Instant
-A:SP$ Counter | Cost$ 1 U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller mills two cards.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBMill | Destination$ Graveyard | SpellDescription$ Counter target spell. Its controller mills two cards.
 SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ TargetedController
 Oracle:Counter target spell. Its controller mills two cards.

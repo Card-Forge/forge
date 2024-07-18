@@ -2,5 +2,5 @@ Name:Death Rattle
 ManaCost:5 B
 Types:Instant
 K:Delve
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target non-green creature. | NoRegen$ True | SpellDescription$ Destroy target non-green creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target non-green creature. | NoRegen$ True | SpellDescription$ Destroy target non-green creature. It can't be regenerated.
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDestroy target nongreen creature. It can't be regenerated.

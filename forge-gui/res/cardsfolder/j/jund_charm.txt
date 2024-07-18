@@ -1,7 +1,7 @@
 Name:Jund Charm
 ManaCost:B R G
 Types:Instant
-A:SP$ Charm | Cost$ B R G | Choices$ DBChangeZone,DBDmg,DBPutCounter | CharmNum$ 1
+A:SP$ Charm | Choices$ DBChangeZone,DBDmg,DBPutCounter | CharmNum$ 1
 SVar:DBChangeZone:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all cards from target player's graveyard.
 SVar:DBDmg:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Creature | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature.

@@ -1,7 +1,7 @@
 Name:Rage of Purphoros
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DBPump | SpellDescription$ CARDNAME deals 4 damage to target creature. It can't be regenerated this turn. Scry 1.
 SVar:DBPump:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | SubAbility$ DBScry | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 SVar:DBScry:DB$ Scry | ScryNum$ 1

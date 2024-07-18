@@ -11,5 +11,5 @@ ALTERNATE
 Name:Cast Off
 ManaCost:3 W W
 Types:Sorcery Adventure
-A:SP$ DestroyAll | Cost$ 3 W W | ValidCards$ Creature.nonGiant | SpellDescription$ Destroy all non-Giant creatures. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ DestroyAll | ValidCards$ Creature.nonGiant | SpellDescription$ Destroy all non-Giant creatures. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Destroy all non-Giant creatures. (Then exile this card. You may cast the creature later from exile.)

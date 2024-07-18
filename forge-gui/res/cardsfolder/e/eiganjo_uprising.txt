@@ -1,7 +1,7 @@
 Name:Eiganjo Uprising
 ManaCost:X W R
 Types:Sorcery
-A:SP$ Token | Cost$ X W R | TokenAmount$ X | TokenScript$ w_2_2_samurai_vigilance | PumpKeywords$ Menace & Haste | PumpDuration$ EOT | SubAbility$ DBTokenOpp | SpellDescription$ Create X 2/2 white Samurai creature tokens with vigilance. They gain menace and haste until end of turn. Each opponent creates X minus one 2/2 white Samurai creature tokens with vigilance.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_2_2_samurai_vigilance | PumpKeywords$ Menace & Haste | PumpDuration$ EOT | SubAbility$ DBTokenOpp | SpellDescription$ Create X 2/2 white Samurai creature tokens with vigilance. They gain menace and haste until end of turn. Each opponent creates X minus one 2/2 white Samurai creature tokens with vigilance.
 SVar:X:Count$xPaid
 SVar:DBTokenOpp:DB$ Token | TokenAmount$ Y | TokenOwner$ Opponent | TokenScript$ w_2_2_samurai_vigilance
 SVar:Y:SVar$X/Minus.1

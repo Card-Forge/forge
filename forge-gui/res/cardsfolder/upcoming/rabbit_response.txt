@@ -1,0 +1,6 @@
+Name:Rabbit Response
+ManaCost:2 W W
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBScry | SpellDescription$ Creatures you control get +2/+1 until end of turn. If you control a Rabbit, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and rest on top in any order.)
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | ConditionPresent$ Rabbit.YouCtrl
+Oracle:Creatures you control get +2/+1 until end of turn. If you control a Rabbit, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and rest on top in any order.)

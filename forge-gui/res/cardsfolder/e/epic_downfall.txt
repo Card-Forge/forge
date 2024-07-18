@@ -1,5 +1,5 @@
 Name:Epic Downfall
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature.cmcGE3 | TgtPrompt$ Choose target creature with mana value 3 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with mana value 3 or greater.
+A:SP$ ChangeZone | ValidTgts$ Creature.cmcGE3 | TgtPrompt$ Choose target creature with mana value 3 or greater | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with mana value 3 or greater.
 Oracle:Exile target creature with mana value 3 or greater.

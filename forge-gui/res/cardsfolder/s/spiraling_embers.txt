@@ -1,6 +1,6 @@
 Name:Spiraling Embers
 ManaCost:3 R
 Types:Sorcery Arcane
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of cards in your hand.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 Oracle:Spiraling Embers deals damage to any target equal to the number of cards in your hand.

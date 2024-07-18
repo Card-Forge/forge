@@ -1,0 +1,8 @@
+Name:Unfathomable Truths
+ManaCost:4 U
+Types:Instant
+K:Devoid
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards and create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}." | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac
+DeckHas:Ability$Token|Sacrifice & Type$Eldrazi|Spawn
+Oracle:Devoid (This card has no color.)\nDraw three cards and create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."

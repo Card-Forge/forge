@@ -1,7 +1,7 @@
 Name:Davriel's Shadowfugue
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Target player discards two cards and loses 2 life.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Target player discards two cards and loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 2
 DeckHas:Ability$Discard
 Oracle:Target player discards two cards and loses 2 life.

@@ -2,5 +2,5 @@ Name:Supreme Verdict
 ManaCost:1 W W U
 Types:Sorcery
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DestroyAll | Cost$ 1 W W U | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+A:SP$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
 Oracle:This spell can't be countered.\nDestroy all creatures.

@@ -303,11 +303,11 @@ public class AdventureEventData implements Serializable {
     public static Predicate<CardEdition> selectSetPool() {
         final int rollD100 = MyRandom.getRandom().nextInt(100);
         Predicate<CardEdition> rolledFilter;
-        if (rollD100 < 40) {
+        if (rollD100 < 30) {
             rolledFilter = filterStandard;
-        } else if (rollD100 < 70) {
+        } else if (rollD100 < 60) {
             rolledFilter = filterPioneer;
-        } else if (rollD100 < 90) {
+        } else if (rollD100 < 80) {
             rolledFilter = filterModern;
         } else {
             rolledFilter = filterVintage;
@@ -350,7 +350,7 @@ public class AdventureEventData implements Serializable {
                     for (Pair<String, Integer> slot : slots) {
                         boosterSize += slot.getRight();
                     }
-                    isOkay = boosterSize == 15;
+                    isOkay = boosterSize > 11;
                 }
                 for (PrintSheet ps : c.getPrintSheetsBySection()) {
                     //exclude block with sets containing P9 cards..
@@ -599,7 +599,7 @@ public class AdventureEventData implements Serializable {
             } else {
                 description += "\n";
             }
-            description += String.format("Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n");
+            description += "Prizes\n3 round wins: 500 gold\n2 round wins: 200 gold\n1 round win: 100 gold\n";
             description += "Finishing event will award an unsellable copy of each card in your Jumpstart deck.";
         }
         return description;

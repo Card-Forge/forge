@@ -1,7 +1,7 @@
 Name:Cemetery Recruitment
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDraw | RememberTargets$ True | SpellDescription$ Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDraw | RememberTargets$ True | SpellDescription$ Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Zombie | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Zombie

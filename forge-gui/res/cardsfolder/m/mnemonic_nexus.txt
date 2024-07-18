@@ -1,6 +1,6 @@
 Name:Mnemonic Nexus
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 U | Defined$ Player | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Each player shuffles their graveyard into their library.
+A:SP$ ChangeZoneAll | Defined$ Player | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True | SpellDescription$ Each player shuffles their graveyard into their library.
 AI:RemoveDeck:All
 Oracle:Each player shuffles their graveyard into their library.

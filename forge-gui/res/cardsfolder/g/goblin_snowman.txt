@@ -4,5 +4,5 @@ Types:Creature Goblin
 PT:1/1
 T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigPrevent | TriggerDescription$ Whenever CARDNAME blocks, prevent all combat damage that would be dealt to and dealt by it this turn.
 SVar:TrigPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all combat damage that would be dealt to and dealt by CARDNAME.
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.blockedBySource | TgtPrompt$ Select target creature Goblin Snowman is blocking | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature it's blocking.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.blockedBySource | TgtPrompt$ Select target creature CARDNAME is blocking | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature it's blocking.
 Oracle:Whenever Goblin Snowman blocks, prevent all combat damage that would be dealt to and dealt by it this turn.\n{T}: Goblin Snowman deals 1 damage to target creature it's blocking.

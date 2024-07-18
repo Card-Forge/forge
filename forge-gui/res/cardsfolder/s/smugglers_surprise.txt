@@ -1,0 +1,13 @@
+Name:Smuggler's Surprise
+ManaCost:G
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBMill,DBPutBattlefield,DBPumpAll | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBMill:DB$ Mill | SpreeCost$ 2 | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill four cards. You may put up to two creature and/or land cards from among the milled cards into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Creature.IsRemembered,Land.IsRemembered | SelectPrompt$ You may select up to two creature and/or land cards | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBPutBattlefield:DB$ ChangeZone | SpreeCost$ 4 G | Origin$ Hand | Destination$ Battlefield | ChangeNum$ 2 | ChangeType$ Creature | SelectPrompt$ You may select up to two creature cards | SpellDescription$ You may put up to two creature cards from your hand onto the battlefield.
+SVar:DBPumpAll:DB$ PumpAll | SpreeCost$ 1 | ValidCards$ Creature.YouCtrl+powerGE4 | KW$ Hexproof & Indestructible | SpellDescription$ Creatures you control with power 4 or greater gain hexproof and indestructible until end of turn.
+DeckHas:Ability$Mill|Graveyard
+DeckHints:Ability$Discard|Sacrifice
+Oracle:Spree (Choose one or more additional costs.)\n+ {2} — Mill four cards. You may put up to two creature and/or land cards from among the milled cards into your hand.\n+ {4}{G} — You may put up to two creature cards from your hand onto the battlefield.\n+ {1} — Creatures you control with power 4 or greater gain hexproof and indestructible until end of turn.

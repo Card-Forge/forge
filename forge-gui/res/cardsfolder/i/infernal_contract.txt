@@ -1,7 +1,7 @@
 Name:Infernal Contract
 ManaCost:B B B
 Types:Sorcery
-A:SP$ Draw | Cost$ B B B | NumCards$ 4 | SubAbility$ DBLoseLife | SpellDescription$ Draw four cards. You lose half your life, rounded up.
+A:SP$ Draw | NumCards$ 4 | SubAbility$ DBLoseLife | SpellDescription$ Draw four cards. You lose half your life, rounded up.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$YourLifeTotal/HalfUp
 Oracle:Draw four cards. You lose half your life, rounded up.

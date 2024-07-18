@@ -2,5 +2,5 @@ Name:Oblivion Strike
 ManaCost:3 B
 Types:Sorcery
 K:Devoid
-A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
 Oracle:Devoid (This card has no color.)\nExile target creature.

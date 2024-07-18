@@ -1,5 +1,5 @@
 Name:Counsel of the Soratami
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 Oracle:Draw two cards.

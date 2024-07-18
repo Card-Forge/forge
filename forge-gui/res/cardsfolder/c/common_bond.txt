@@ -1,6 +1,6 @@
 Name:Common Bond
 ManaCost:1 G W
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 G W | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutOneMore | SpellDescription$ Put a +1/+1 counter on target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ PutOneMore | SpellDescription$ Put a +1/+1 counter on target creature.
 SVar:PutOneMore:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
 Oracle:Put a +1/+1 counter on target creature.\nPut a +1/+1 counter on target creature.

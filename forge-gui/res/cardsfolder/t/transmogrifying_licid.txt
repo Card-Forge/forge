@@ -2,7 +2,7 @@ Name:Transmogrifying Licid
 ManaCost:3
 Types:Artifact Creature Licid
 PT:2/2
-A:AB$ Animate | Cost$ 1 T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | Duration$ Permanent | RevertCost$ 1 | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {1} to end this effect.
+A:AB$ Animate | Cost$ 1 T | Defined$ Self | RemoveThisAbility$ True | Duration$ Permanent | RevertCost$ 1 | Keywords$ Enchant creature | Abilities$ SPAttach | Types$ Enchantment,Aura | RemoveCardTypes$ True | RemoveEnchantmentTypes$ True | SubAbility$ DBAttach | SpellDescription$ CARDNAME loses this ability and becomes an Aura enchantment with enchant creature. Attach it to target creature. You may pay {1} to end this effect.
 SVar:DBAttach:DB$ Attach | ValidTgts$ Creature | AILogic$ Pump
 SVar:SPAttach:SP$ Attach | Cost$ 0 | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddType$ Artifact | Description$ Enchanted creature gets +1/+1 and is an artifact in addition to its other types.

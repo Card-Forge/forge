@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import forge.assets.FSkinImage.SourceFile;
 import forge.card.CardFaceSymbols;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -232,13 +231,15 @@ public class FSkin {
         Forge.getAssets().sleeves().clear();
 
         // Grab and test various sprite files.
-        final FileHandle f1 = getDefaultSkinFile(SourceFile.ICONS.getFilename());
-        final FileHandle f2 = getSkinFile(SourceFile.ICONS.getFilename());
-        final FileHandle f3 = getDefaultSkinFile(SourceFile.FOILS.getFilename());
+        final FileHandle f1 = getDefaultSkinFile(ForgeConstants.SPRITE_ICONS_FILE);
+        final FileHandle f2 = getSkinFile(ForgeConstants.SPRITE_ICONS_FILE);
+        final FileHandle f3 = getDefaultSkinFile(ForgeConstants.SPRITE_FOILS_FILE);
         final FileHandle f4 = getDefaultSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
         final FileHandle f5 = getSkinFile(ForgeConstants.SPRITE_AVATARS_FILE);
-        final FileHandle f6 = getDefaultSkinFile(SourceFile.OLD_FOILS.getFilename());
+        final FileHandle f6 = getDefaultSkinFile(ForgeConstants.SPRITE_OLD_FOILS_FILE);
         final FileHandle f7 = getDefaultSkinFile(ForgeConstants.SPRITE_MANAICONS_FILE);
+        //final FileHandle f7b = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        //final FileHandle f7c = getDefaultSkinFile(ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
         final FileHandle f8 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f9 = getDefaultSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
         final FileHandle f10 = getDefaultSkinFile(ForgeConstants.SPRITE_BORDER_FILE);
@@ -248,7 +249,6 @@ public class FSkin {
         final FileHandle f12b = getDefaultSkinFile(ForgeConstants.SPRITE_START_FILE);
         final FileHandle f13 = getDefaultSkinFile(ForgeConstants.SPRITE_DECKBOX_FILE);
         final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
-        final FileHandle f18 = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
         final FileHandle f19 = getDefaultSkinFile(ForgeConstants.SPRITE_CURSOR_FILE);
         final FileHandle f20 = getSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f21 = getSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
@@ -331,6 +331,11 @@ public class FSkin {
                 } else {
                     image.load(preferredIcons);
                 }
+            }
+            for (FSkinProp prop : FSkinProp.MANA_IMG.values()) {
+                FSkinImageImpl image = new FSkinImageImpl(prop);
+                image.load(preferredIcons);
+                FSkin.getImages().put(prop, image);
             }
 
             //assemble avatar textures
@@ -441,10 +446,7 @@ public class FSkin {
             int crackCount = 0;
             for (int j = 0; j < 4; j++) {
                 int x = j * 200;
-                for(int i = 0; i < 4; i++) {
-                    int y = i * 279;
-                    Forge.getAssets().cracks().put(crackCount++, new TextureRegion(Forge.getAssets().getTexture(f17), x, y, 200, 279));
-                }
+                Forge.getAssets().cracks().put(crackCount++, new TextureRegion(Forge.getAssets().getTexture(f17), x, 0, 200, 279));
             }
 
             //borders
@@ -560,7 +562,7 @@ public class FSkin {
         return allSkins;
     }
 
-    public static Map<FSkinProp, FSkinImage> getImages() {
+    public static Map<FSkinProp, FSkinImageInterface> getImages() {
         return Forge.getAssets().images();
     }
 

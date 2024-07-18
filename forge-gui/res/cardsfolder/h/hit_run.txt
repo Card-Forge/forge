@@ -1,7 +1,7 @@
 Name:Hit
 ManaCost:1 B R
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 B R | ValidTgts$ Player | SacValid$ Creature,Artifact | SacMessage$ Creature or Artifact | RememberSacrificed$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's mana value.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature,Artifact | SacMessage$ Creature or Artifact | RememberSacrificed$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact or creature. CARDNAME deals damage to that player equal to that permanent's mana value.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
@@ -13,6 +13,6 @@ ALTERNATE
 Name:Run
 ManaCost:3 R G
 Types:Instant
-A:SP$ PumpAll | Cost$ 3 R G | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +Y | SpellDescription$ Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
+A:SP$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +Y | SpellDescription$ Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.
 SVar:Y:Count$Valid Creature.attacking/Minus.1
 Oracle:Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.

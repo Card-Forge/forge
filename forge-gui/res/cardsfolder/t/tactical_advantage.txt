@@ -1,5 +1,5 @@
 Name:Tactical Advantage
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature.blocking+YouCtrl,Creature.blocked+YouCtrl | TgtPrompt$ Select target blocking or blocked creature you control | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target blocking or blocked creature you control gets +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.blocking+YouCtrl,Creature.blocked+YouCtrl | TgtPrompt$ Select target blocking or blocked creature you control | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target blocking or blocked creature you control gets +2/+2 until end of turn.
 Oracle:Target blocking or blocked creature you control gets +2/+2 until end of turn.

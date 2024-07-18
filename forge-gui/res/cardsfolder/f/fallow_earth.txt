@@ -1,5 +1,5 @@
 Name:Fallow Earth
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target land on top of its owner's library.
 Oracle:Put target land on top of its owner's library.

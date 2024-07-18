@@ -1,6 +1,6 @@
 Name:Battle Hymn
 ManaCost:1 R
 Types:Instant
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each creature you control.
+A:SP$ Mana | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each creature you control.
 SVar:X:Count$Valid Creature.YouCtrl
 Oracle:Add {R} for each creature you control.

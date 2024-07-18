@@ -1,7 +1,7 @@
 Name:Biomantic Mastery
 ManaCost:4 GU GU GU
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 GU GU GU | Defined$ You | ValidTgts$ Player | NumCards$ X | SubAbility$ DBDraw | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
+A:SP$ Draw | Defined$ You | ValidTgts$ Player | NumCards$ X | SubAbility$ DBDraw | SpellDescription$ Draw a card for each creature target player controls, then draw a card for each creature another target player controls.
 SVar:DBDraw:DB$ Draw | Defined$ You | ValidTgts$ Player | TargetUnique$ True | NumCards$ X
 SVar:X:ThisTargetedPlayer$Valid Creature.YouCtrl
 Oracle:Draw a card for each creature target player controls, then draw a card for each creature another target player controls.

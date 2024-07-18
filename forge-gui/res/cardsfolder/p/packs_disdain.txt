@@ -1,7 +1,7 @@
 Name:Pack's Disdain
 ManaCost:1 B
 Types:Instant
-A:SP$ ChooseType | Cost$ 1 B | Defined$ You | Type$ Creature | SubAbility$ DBPump | SpellDescription$ Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBPump | SpellDescription$ Choose a creature type. Target creature gets -1/-1 until end of turn for each permanent of the chosen type you control.
 SVar:DBPump:DB$ Pump | NumAtt$ -X | NumDef$ -X | ValidTgts$ Creature | TgtPrompt$ Select target creature.
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 AI:RemoveDeck:All

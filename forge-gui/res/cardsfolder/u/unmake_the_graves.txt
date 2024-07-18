@@ -2,5 +2,5 @@ Name:Unmake the Graves
 ManaCost:4 B
 Types:Instant
 K:Convoke
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nReturn up to two target creature cards from your graveyard to your hand.

@@ -1,7 +1,7 @@
 Name:Desertion
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCounter | SpellDescription$ Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCounter | SpellDescription$ Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.
 SVar:DBCounter:DB$ Counter | Defined$ Targeted | Destination$ Battlefield | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Targeted$Valid Artifact,Creature
 Oracle:Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.

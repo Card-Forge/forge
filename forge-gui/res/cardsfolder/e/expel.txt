@@ -1,5 +1,5 @@
 Name:Expel
 ManaCost:2 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Exile target tapped creature.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | SpellDescription$ Exile target tapped creature.
 Oracle:Exile target tapped creature.

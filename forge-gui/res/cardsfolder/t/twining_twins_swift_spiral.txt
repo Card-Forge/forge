@@ -13,7 +13,8 @@ ALTERNATE
 Name:Swift Spiral
 ManaCost:1 W
 Types:Instant Adventure
-A:SP$ ChangeZone | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ Return CARDNAME to the battlefield.
+A:SP$ ChangeZone | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | StackDescription$ REP target nontoken creature_{c:Targeted} | SpellDescription$ Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return it to the battlefield under its owner's control at the beginning of the next end step.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.

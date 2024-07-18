@@ -2,7 +2,7 @@ Name:Ethereal Usher
 ManaCost:5 U
 Types:Creature Spirit
 PT:2/3
-A:AB$ Effect | Cost$ U T | ValidTgts$ Creature | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+A:AB$ Effect | Cost$ U T | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 K:Transmute:1 U U
 DeckHas:Ability$Discard

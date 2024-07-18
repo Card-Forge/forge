@@ -1,7 +1,7 @@
 Name:Spite
 ManaCost:3 U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target noncreature spell.
 AlternateMode:Split
 Oracle:Counter target noncreature spell.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Malice
 ManaCost:3 B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonblack creature. It can't be regenerated.
 Oracle:Destroy target nonblack creature. It can't be regenerated.

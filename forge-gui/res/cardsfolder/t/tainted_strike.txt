@@ -1,5 +1,5 @@
 Name:Tainted Strike
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Infect | SpellDescription$ Target creature gets +1/+0 and gains infect until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Infect | SpellDescription$ Target creature gets +1/+0 and gains infect until end of turn.
 Oracle:Target creature gets +1/+0 and gains infect until end of turn. (It deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

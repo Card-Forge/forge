@@ -1,7 +1,7 @@
 Name:Collision
 ManaCost:1 RG
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 RG | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature with flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature with flying.
 AlternateMode:Split
 Oracle:Collision deals 6 damage to target creature with flying.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Colossus
 ManaCost:R G
 Types:Instant
-A:SP$ Pump | Cost$ R G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +4/+2 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +2 | KW$ Trample | SpellDescription$ Target creature gets +4/+2 and gains trample until end of turn.
 Oracle:Target creature gets +4/+2 and gains trample until end of turn.

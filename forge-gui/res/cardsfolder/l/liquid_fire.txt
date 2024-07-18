@@ -1,7 +1,7 @@
 Name:Liquid Fire
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R R | CostDesc$ As an additional cost to cast this spell, choose a number between 0 and 5. | AnnounceType$ ChooseNumber | Min$ 0 | Max$ 5 | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
+A:SP$ DealDamage | CostDesc$ As an additional cost to cast this spell, choose a number between 0 and 5. | AnnounceType$ ChooseNumber | Min$ 0 | Max$ 5 | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals X damage to target creature and 5 minus X damage to that creature's controller, where X is the chosen number.
 SVar:DBDmg:DB$ DealDamage | Defined$ TargetedController | NumDmg$ Y
 SVar:X:Count$ChosenNumber
 SVar:Y:SVar$X/NMinus.5

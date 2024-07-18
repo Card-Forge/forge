@@ -1,7 +1,7 @@
 Name:Ghastly Discovery
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 K:Conspire
 Oracle:Draw two cards, then discard a card.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it.)

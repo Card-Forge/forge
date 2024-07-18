@@ -1,7 +1,7 @@
 Name:Abeyance
 ManaCost:1 W
 Types:Instant
-A:SP$ Effect | Cost$ 1 W | ValidTgts$ Player | StaticAbilities$ STCantBeCast,STCantBeActivated | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
+A:SP$ Effect | ValidTgts$ Player | StaticAbilities$ STCantBeCast,STCantBeActivated | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
 SVar:STCantBeCast:Mode$ CantBeCast | ValidCard$ Instant,Sorcery | Caster$ Player.IsRemembered | EffectZone$ Command | Description$ Target player can't cast instant or sorcery spells, and that player can't activate abilities that aren't mana abilities.
 SVar:STCantBeActivated:Mode$ CantBeActivated | ValidCard$ Card | ValidSA$ Activated.nonManaAbility | Activator$ Player.IsRemembered | EffectZone$ Command
 SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.

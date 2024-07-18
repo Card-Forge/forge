@@ -1,6 +1,6 @@
 Name:Study Break
 ManaCost:1 W
 Types:Instant
-A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures. | SubAbility$ DBLearn
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SpellDescription$ Tap up to two target creatures. | SubAbility$ DBLearn
 SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
 Oracle:Tap up to two target creatures.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

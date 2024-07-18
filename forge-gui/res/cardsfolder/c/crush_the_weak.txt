@@ -1,7 +1,7 @@
 Name:Crush the Weak
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 2 R | ValidCards$ Creature | NumDmg$ 2 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 2 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead. | StackDescription$ SpellDescription
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 2 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead. | StackDescription$ SpellDescription
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Foretell:R
 Oracle:Crush the Weak deals 2 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.\nForetell {R} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

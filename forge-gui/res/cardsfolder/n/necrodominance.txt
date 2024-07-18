@@ -1,0 +1,12 @@
+Name:Necrodominance
+ManaCost:B B B
+Types:Legendary Enchantment
+R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<X> | NumCards$ X
+SVar:X:Count$xPaid
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 5 | Description$ Your maximum hand size is five.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.YouCtrl,Card.token+YouCtrl | ReplaceWith$ Exile | Description$ If a card or token would be put into your graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+AI:RemoveDeck:All
+Oracle:Skip your draw step.\nAt the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.\nYour maximum hand size is five.\nIf a card or token would be put into your graveyard from anywhere, exile it instead.

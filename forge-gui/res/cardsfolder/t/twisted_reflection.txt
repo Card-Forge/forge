@@ -2,7 +2,7 @@ Name:Twisted Reflection
 ManaCost:1 U
 Types:Instant
 K:Entwine:B
-A:SP$ Charm | Cost$ 1 U | Choices$ DBCurse,DBSwitch
+A:SP$ Charm | Choices$ DBCurse,DBSwitch
 SVar:DBCurse:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -6/-0 | NumAtt$ -6 | IsCurse$ True | SpellDescription$ Target creature gets -6/-0 until end of turn.
 SVar:DBSwitch:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn.
 Oracle:Choose one —\n• Target creature gets -6/-0 until end of turn.\n• Switch target creature's power and toughness until end of turn.\nEntwine {B} (Choose both if you pay the entwine cost.)

@@ -1,7 +1,7 @@
 Name:Decoy Gambit
 ManaCost:2 U
 Types:Instant
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one target creature each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBRepeat | SpellDescription$ For each opponent, choose up to one target creature that player controls, then return that creature to its owner's hand unless its controller has you draw a card.
+A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose up to one target creature each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBRepeat | SpellDescription$ For each opponent, choose up to one target creature that player controls, then return that creature to its owner's hand unless its controller has you draw a card.
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ Targeted | RepeatSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | UnlessCost$ Draw<1/Player.YouActivator> | UnlessPayer$ RememberedController
 SVar:OneEach:PlayerCountOpponents$Amount

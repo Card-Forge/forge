@@ -1,7 +1,7 @@
 Name:Trumpeting Herd
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
 K:Rebound
 DeckHas:Ability$Token
 Oracle:Create a 3/3 green Elephant creature token.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

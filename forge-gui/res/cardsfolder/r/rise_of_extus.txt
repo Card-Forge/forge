@@ -1,5 +1,5 @@
 Name:Rise of Extus
-ManaCost:4 W/B W/B
+ManaCost:4 WB WB
 Types:Sorcery
 A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBExile | SpellDescription$ Exile target creature.
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select up to one target instant or sorcery card from a graveyard | SubAbility$ DBLearn | SpellDescription$ Exile up to one target instant or sorcery card from a graveyard.

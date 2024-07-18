@@ -1,6 +1,6 @@
 Name:Hapatra's Mark
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBRemoveCounter | SpellDescription$ Target creature you control gains hexproof until end of turn. Remove all -1/-1 counters from it. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBRemoveCounter | SpellDescription$ Target creature you control gains hexproof until end of turn. Remove all -1/-1 counters from it. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Targeted | CounterType$ M1M1 | CounterNum$ All
 Oracle:Target creature you control gains hexproof until end of turn. Remove all -1/-1 counters from it. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

@@ -1,5 +1,5 @@
 Name:Stampede
 ManaCost:1 G G
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 G G | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ Trample | SpellDescription$ Attacking creatures get +1/+0 and gain trample until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ +1 | KW$ Trample | SpellDescription$ Attacking creatures get +1/+0 and gain trample until end of turn.
 Oracle:Attacking creatures get +1/+0 and gain trample until end of turn.

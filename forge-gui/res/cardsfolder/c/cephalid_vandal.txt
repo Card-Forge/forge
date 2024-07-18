@@ -1,6 +1,6 @@
 Name:Cephalid Vandal
 ManaCost:1 U
-Types:Creature Cephalid Rogue
+Types:Creature Octopus Rogue
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a shred counter on CARDNAME. Then mill a card for each shred counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SHRED | CounterNum$ 1 | SubAbility$ DBMill

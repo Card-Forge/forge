@@ -1,6 +1,6 @@
 Name:Echoing Courage
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.Creature+Other+sameName | NumAtt$ +2 | NumDef$ +2
 Oracle:Target creature and all other creatures with the same name as that creature get +2/+2 until end of turn.

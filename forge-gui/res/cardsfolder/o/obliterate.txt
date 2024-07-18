@@ -1,6 +1,6 @@
 Name:Obliterate
 ManaCost:6 R R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 6 R R | ValidCards$ Artifact,Creature,Land | NoRegen$ True | SpellDescription$ Destroy all artifacts, creatures, and lands. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Artifact,Creature,Land | NoRegen$ True | SpellDescription$ Destroy all artifacts, creatures, and lands. They can't be regenerated.
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 Oracle:This spell can't be countered.\nDestroy all artifacts, creatures, and lands. They can't be regenerated.

@@ -1,7 +1,7 @@
 Name:Bounty of Might
 ManaCost:4 G G
 Types:Instant
-A:SP$ Pump | Cost$ 4 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBPump | SpellDescription$ Target creature gets +3/+3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBPump | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | NumAtt$ 3 | NumDef$ 3 | SubAbility$ DBPump2 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | NumAtt$ 3 | NumDef$ 3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 Oracle:Target creature gets +3/+3 until end of turn.\nTarget creature gets +3/+3 until end of turn.\nTarget creature gets +3/+3 until end of turn.

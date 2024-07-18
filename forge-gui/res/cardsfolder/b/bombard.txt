@@ -1,5 +1,5 @@
 Name:Bombard
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
 Oracle:Bombard deals 4 damage to target creature.

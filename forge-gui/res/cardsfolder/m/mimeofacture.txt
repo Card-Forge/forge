@@ -2,6 +2,6 @@ Name:Mimeofacture
 ManaCost:3 U
 Types:Sorcery
 K:Replicate:3 U
-A:SP$ Pump | Cost$ 3 U | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Choose target permanent an opponent controls | IsCurse$ True | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles.
+A:SP$ Pump | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Choose target permanent an opponent controls | IsCurse$ True | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Choose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ TargetedController | Chooser$ You | ChangeType$ Targeted.sameName | ChangeNum$ 1 | GainControl$ True | Shuffle$ True
 Oracle:Replicate {3}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nChoose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles.

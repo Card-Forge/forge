@@ -1,7 +1,7 @@
 Name:Cleansing
 ManaCost:W W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ W W W | RepeatSubAbility$ DBSac | RepeatCards$ Land | SpellDescription$ For each land, destroy that land unless any player pays 1 life.
+A:SP$ RepeatEach | RepeatSubAbility$ DBSac | RepeatCards$ Land | SpellDescription$ For each land, destroy that land unless any player pays 1 life.
 SVar:DBSac:DB$ Destroy | UnlessCost$ PayLife<1> | UnlessPayer$ Player | UnlessAI$ DefinedRememberedController | Defined$ Remembered | StackDescription$ Destroy {c:Remembered}
 AI:RemoveDeck:All
 Oracle:For each land, destroy that land unless any player pays 1 life.

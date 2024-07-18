@@ -1,7 +1,7 @@
 Name:Commune with Lava
 ManaCost:X R R
 Types:Instant
-A:SP$ Dig | Cost$ X R R | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile the top X cards of your library. Until the end of your next turn, you may play those cards.
+A:SP$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile the top X cards of your library. Until the end of your next turn, you may play those cards.
 SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STCommuned | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STCommuned:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.

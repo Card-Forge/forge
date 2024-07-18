@@ -1,7 +1,7 @@
 Name:Spore Cloud
 ManaCost:1 G G
 Types:Instant
-A:SP$ Fog | Cost$ 1 G G | SubAbility$ DBTapAll | SpellDescription$ Tap all blocking creatures. Prevent all combat damage that would be dealt this turn. Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.
+A:SP$ Fog | SubAbility$ DBTapAll | SpellDescription$ Tap all blocking creatures. Prevent all combat damage that would be dealt this turn. Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.blocking | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking,Creature.blocking | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 Oracle:Tap all blocking creatures. Prevent all combat damage that would be dealt this turn. Each attacking creature and each blocking creature doesn't untap during its controller's next untap step.

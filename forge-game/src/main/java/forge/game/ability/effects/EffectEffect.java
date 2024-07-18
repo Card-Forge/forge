@@ -149,7 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = ImageKeys.getTokenKey(
             TextUtil.fastReplace(
                 TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " - ", "_"),
+                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
                     " ", "_").toLowerCase());
         } else { // use host image
@@ -232,10 +232,8 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved")) && !"False".equalsIgnoreCase(sa.getParam("ForgetOnCast"))) {
-                        addForgetOnCastTrigger(eff);
+                        addForgetOnCastTrigger(eff, "Card.IsRemembered");
                     }
-                } else if (sa.hasParam("ForgetOnCast")) {
-                    addForgetOnCastTrigger(eff);
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
                 }
@@ -245,6 +243,8 @@ public class EffectEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ForgetCounter")) {
                     addForgetCounterTrigger(eff, sa.getParam("ForgetCounter"));
                 }
+            } else if (sa.hasParam("ForgetOnCast")) {
+                addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
             }
 
             // Set Imprinted
@@ -289,8 +289,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // chosen number
             if (sa.hasParam("SetChosenNumber")) {
-                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard,
-                        sa.getParam("SetChosenNumber"), sa));
+                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
             }

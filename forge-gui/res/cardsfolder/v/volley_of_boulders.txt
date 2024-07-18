@@ -2,5 +2,5 @@ Name:Volley of Boulders
 ManaCost:8 R
 Types:Sorcery
 K:Flashback:R R R R R R
-A:SP$ DealDamage | Cost$ 8 R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 6 | TargetMin$ 0 | TargetMax$ 6 | DividedAsYouChoose$ 6 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 6 | TargetMin$ 0 | TargetMax$ 6 | DividedAsYouChoose$ 6 | SpellDescription$ CARDNAME deals 6 damage divided as you choose among any number of targets.
 Oracle:Volley of Boulders deals 6 damage divided as you choose among any number of targets.\nFlashback {R}{R}{R}{R}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

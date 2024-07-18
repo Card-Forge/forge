@@ -2,7 +2,7 @@ Name:Candles' Glow
 ManaCost:1 W
 Types:Instant Arcane
 K:Splice:Arcane:1 W
-A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Any | Amount$ 3 | PreventionSubAbility$ GlowOfLife | ShieldEffectTarget$ You | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ 3 | PreventionSubAbility$ GlowOfLife | ShieldEffectTarget$ You | SpellDescription$ Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.
 SVar:GlowOfLife:DB$ GainLife | Defined$ ShieldEffectTarget | LifeAmount$ PreventedDamage | SpellDescription$ You gain life equal to the damage prevented this way.
 DeckHints:Type$Arcane
 Oracle:Prevent the next 3 damage that would be dealt to any target this turn. You gain life equal to the damage prevented this way.\nSplice onto Arcane {1}{W} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

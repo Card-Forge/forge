@@ -1,7 +1,7 @@
 Name:Corrupt
 ManaCost:5 B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 5 B | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals damage to any target equal to the number of Swamps you control. You gain life equal to the damage dealt this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | StackDescription$ You gain life equal to the damage dealt this way.
 SVar:X:Count$TypeYouCtrl.Swamp
 SVar:Y:Count$TotalDamageDoneByThisTurn

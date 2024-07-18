@@ -1,6 +1,6 @@
 Name:Lunar Frenzy
 ManaCost:X R
 Types:Instant
-A:SP$ Pump | Cost$ X R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumAtt$ +X | KW$ First Strike & Trample | StackDescription$ {c:Targeted} gets +X/+0 and gains first strike and trample until end of turn. | SpellDescription$ Target creature you control gets +X/+0 and gains first strike and trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | NumAtt$ +X | KW$ First Strike & Trample | StackDescription$ {c:Targeted} gets +X/+0 and gains first strike and trample until end of turn. | SpellDescription$ Target creature you control gets +X/+0 and gains first strike and trample until end of turn.
 SVar:X:Count$xPaid
 Oracle:Target creature you control gets +X/+0 and gains first strike and trample until end of turn.

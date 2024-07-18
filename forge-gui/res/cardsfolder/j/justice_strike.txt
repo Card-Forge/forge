@@ -1,6 +1,6 @@
 Name:Justice Strike
 ManaCost:R W
 Types:Instant
-A:SP$ DealDamage | Cost$ R W | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 Oracle:Target creature deals damage to itself equal to its power.

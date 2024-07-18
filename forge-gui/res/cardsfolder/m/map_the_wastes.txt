@@ -1,7 +1,7 @@
 Name:Map the Wastes
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBBolster | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBBolster | SpellDescription$ Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:DBBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

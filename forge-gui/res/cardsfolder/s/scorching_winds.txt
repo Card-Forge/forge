@@ -2,6 +2,6 @@ Name:Scorching Winds
 ManaCost:R
 Types:Instant
 Text:Cast this spell only during the declare attackers step and only if you've been attacked this step.\r\n
-A:SP$ DamageAll | Cost$ R | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | CheckSVar$ X | CheckSVar$ X | SVarCompare$ GE1 | ActivationPhases$ Declare Attackers | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.attacking | ValidDescription$ each attacking creature. | CheckSVar$ X | SVarCompare$ GE1 | ActivationPhases$ Declare Attackers | SpellDescription$ CARDNAME deals 1 damage to each attacking creature.
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 Oracle:Cast this spell only during the declare attackers step and only if you've been attacked this step.\nScorching Winds deals 1 damage to each attacking creature.

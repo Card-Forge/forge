@@ -1,7 +1,7 @@
 Name:Brush with Death
 ManaCost:2 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target opponent loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 K:Buyback:2 B B
 Oracle:Buyback {2}{B}{B} (You may pay an additional {2}{B}{B} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget opponent loses 2 life. You gain 2 life.

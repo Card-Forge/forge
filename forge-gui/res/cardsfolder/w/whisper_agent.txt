@@ -1,5 +1,5 @@
 Name:Whisper Agent
-ManaCost:1 U/B U/B
+ManaCost:1 UB UB
 Types:Creature Human Rogue
 PT:3/2
 K:Flash

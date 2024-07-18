@@ -307,6 +307,7 @@ public class CardCopyService {
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
+        newCopy.setExcessDamageReceivedThisTurn(copyFrom.getExcessDamageThisTurn());
 
         // these are LKI already
         newCopy.getBlockedThisTurn().addAll(copyFrom.getBlockedThisTurn());
@@ -391,6 +392,10 @@ public class CardCopyService {
         newCopy.setDiscarded(copyFrom.wasDiscarded());
         newCopy.setMilled(copyFrom.wasMilled());
         newCopy.setSurveilled(copyFrom.wasSurveilled());
+
+        newCopy.getAbilityActivatedThisTurn().putAll(copyFrom.getAbilityActivatedThisTurn());
+        newCopy.getAbilityActivatedThisGame().putAll(copyFrom.getAbilityActivatedThisGame());
+        newCopy.getAbilityResolvedThisTurn().putAll(copyFrom.getAbilityResolvedThisTurn());
 
         if (copyFrom.getGame().getCombat() != null && copyFrom.isPermanent()) {
             newCopy.setCombatLKI(copyFrom.getGame().getCombat().saveLKI(newCopy));

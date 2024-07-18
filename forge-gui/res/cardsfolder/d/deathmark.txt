@@ -1,5 +1,5 @@
 Name:Deathmark
 ManaCost:B
 Types:Sorcery
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | SpellDescription$ Destroy target green or white creature.
+A:SP$ Destroy | ValidTgts$ Creature.Green,Creature.White | TgtPrompt$ Select target green or white creature | SpellDescription$ Destroy target green or white creature.
 Oracle:Destroy target green or white creature.

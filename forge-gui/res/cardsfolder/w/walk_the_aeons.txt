@@ -2,6 +2,6 @@ Name:Walk the Aeons
 ManaCost:4 U U
 Types:Sorcery
 K:Buyback:Sac<3/Island>
-A:SP$ AddTurn | Cost$ 4 U U | ValidTgts$ Player | TgtPrompt$ Select target player | NumTurns$ 1 | SpellDescription$ Target player takes an extra turn after this one.
+A:SP$ AddTurn | ValidTgts$ Player | TgtPrompt$ Select target player | NumTurns$ 1 | SpellDescription$ Target player takes an extra turn after this one.
 AI:RemoveDeck:All
 Oracle:Buyback—Sacrifice three Islands. (You may sacrifice three Islands in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget player takes an extra turn after this one.

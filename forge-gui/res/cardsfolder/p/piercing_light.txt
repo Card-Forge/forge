@@ -1,6 +1,6 @@
 Name:Piercing Light
 ManaCost:W
 Types:Instant
-A:SP$ DealDamage | Cost$ W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature. Scry 1.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Piercing Light deals 2 damage to target attacking or blocking creature. Scry 1.

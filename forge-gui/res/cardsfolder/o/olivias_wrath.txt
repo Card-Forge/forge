@@ -1,7 +1,7 @@
 Name:Olivia's Wrath
 ManaCost:4 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 4 B | ValidCards$ Creature.nonVampire | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Each non-Vampire creature gets -X/-X until end of turn, where X is the number of Vampires you control.
+A:SP$ PumpAll | ValidCards$ Creature.nonVampire | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Each non-Vampire creature gets -X/-X until end of turn, where X is the number of Vampires you control.
 SVar:X:Count$Valid Vampire.YouCtrl
 DeckHints:Type$Vampire
 Oracle:Each non-Vampire creature gets -X/-X until end of turn, where X is the number of Vampires you control.

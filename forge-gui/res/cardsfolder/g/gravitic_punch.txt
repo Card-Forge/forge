@@ -2,7 +2,7 @@ Name:Gravitic Punch
 ManaCost:3 R
 Types:Sorcery
 K:Jump-start
-A:SP$ Pump | Cost$ 3 R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target player.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target player.
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Player | TargetUnique$ True | AILogic$ PowerDmg | NumDmg$ X | TgtPrompt$ Select target player | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to target player.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

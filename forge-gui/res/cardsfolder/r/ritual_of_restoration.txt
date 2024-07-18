@@ -1,5 +1,5 @@
 Name:Ritual of Restoration
 ManaCost:W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ W | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SpellDescription$ Return target artifact card from your graveyard to your hand.
 Oracle:Return target artifact card from your graveyard to your hand.

@@ -1,7 +1,7 @@
 Name:Swirling Torrent
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Charm | Cost$ 5 U | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBSubmerge,DBUnsummon
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBSubmerge,DBUnsummon
 SVar:DBSubmerge:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature to put on top of owner's library | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target creature on top of its owner's library.
 SVar:DBUnsummon:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature to return to owner's hand | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 Oracle:Choose one or both —\n• Put target creature on top of its owner's library.\n• Return target creature to its owner's hand.

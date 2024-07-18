@@ -2,7 +2,7 @@ Name:Booby Trap
 ManaCost:6
 Types:Artifact
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDesc$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent and a card name other than a basic land card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | ValidCards$ Card.nonBasic | ValidDescription$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent and a card name other than a basic land card name.
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player.Chosen | ReplaceWith$ RevealedDraw | Description$ The chosen player reveals each card they draw.
 SVar:RevealedDraw:DB$ Draw | Defined$ Player.Chosen | NumCards$ 1 | SubAbility$ TrigReveal | RememberDrawn$ True

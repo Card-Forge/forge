@@ -1,7 +1,7 @@
 Name:Repudiate
 ManaCost:GU GU
 Types:Instant
-A:SP$ Counter | Cost$ GU GU | TgtPrompt$ Select target Activated or Triggered Ability | ValidTgts$ Card,Emblem | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.
+A:SP$ Counter | TgtPrompt$ Select target Activated or Triggered Ability | ValidTgts$ Card,Emblem | TargetType$ Activated,Triggered | SpellDescription$ Counter target activated or triggered ability.
 AI:RemoveDeck:All
 AlternateMode:Split
 Oracle:Counter target activated or triggered ability. (Mana abilities can't be targeted.)
@@ -11,6 +11,6 @@ ALTERNATE
 Name:Replicate
 ManaCost:1 G U
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 1 G U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
 DeckHas:Ability$Token
 Oracle:Create a token that's a copy of target creature you control.

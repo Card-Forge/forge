@@ -1,6 +1,6 @@
 Name:Claws of Wirewood
 ManaCost:3 G
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 G | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature with flying and each player.
+A:SP$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 3 damage to each creature with flying and each player.
 K:Cycling:2
 Oracle:Claws of Wirewood deals 3 damage to each creature with flying and each player.\nCycling {2} ({2}, Discard this card: Draw a card.)

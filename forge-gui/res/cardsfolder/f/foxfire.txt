@@ -1,7 +1,7 @@
 Name:Foxfire
 ManaCost:2 G
 Types:Instant
-A:SP$ Untap | Cost$ 2 G | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature.
+A:SP$ Untap | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBPump | SpellDescription$ Untap target attacking creature.
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DelTrigSlowtrip | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn.
 SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by that creature this turn. | Secondary$ True

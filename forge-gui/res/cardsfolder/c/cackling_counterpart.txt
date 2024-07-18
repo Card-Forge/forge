@@ -2,5 +2,5 @@ Name:Cackling Counterpart
 ManaCost:1 U U
 Types:Instant
 K:Flashback:5 U U
-A:SP$ CopyPermanent | Cost$ 1 U U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a token that's a copy of target creature you control.
 Oracle:Create a token that's a copy of target creature you control.\nFlashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

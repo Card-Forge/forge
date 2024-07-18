@@ -1,6 +1,6 @@
 Name:Repay in Kind
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ SetLife | Cost$ 5 B B | Defined$ Player | LifeAmount$ X | SpellDescription$ Each player's life total becomes the lowest life total among all players.
+A:SP$ SetLife | Defined$ Player | LifeAmount$ X | SpellDescription$ Each player's life total becomes the lowest life total among all players.
 SVar:X:PlayerCountPlayers$LowestLifeTotal
 Oracle:Each player's life total becomes the lowest life total among all players.

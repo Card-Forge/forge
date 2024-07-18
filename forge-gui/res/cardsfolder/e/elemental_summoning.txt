@@ -1,6 +1,6 @@
 Name:Elemental Summoning
 ManaCost:3 UR UR
 Types:Sorcery Lesson
-A:SP$ Token | Cost$ 3 UR UR | TokenScript$ ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create a 4/4 blue and red Elemental creature token.
+A:SP$ Token | TokenScript$ ur_4_4_elemental | TokenOwner$ You | SpellDescription$ Create a 4/4 blue and red Elemental creature token.
 DeckHas:Ability$Token
 Oracle:Create a 4/4 blue and red Elemental creature token.

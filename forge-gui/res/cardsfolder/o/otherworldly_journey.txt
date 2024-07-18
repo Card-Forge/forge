@@ -1,7 +1,7 @@
 Name:Otherworldly Journey
 ManaCost:1 W
 Types:Instant Arcane
-A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | RememberChanged$ True | TgtPrompt$ Select target creature | SubAbility$ DelTrig | SpellDescription$ Exile target creature. At end of turn, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | RememberChanged$ True | TgtPrompt$ Select target creature | SubAbility$ DelTrig | SpellDescription$ Exile target creature. At end of turn, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled card to the battlefield with a +1/+1 counter on it. | SubAbility$ DBCleanup
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield | WithCountersType$ P1P1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

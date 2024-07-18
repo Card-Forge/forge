@@ -1,7 +1,7 @@
 Name:Dark Deal
 ManaCost:2 B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 B | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then draws that many cards minus one.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDiscard | SpellDescription$ Each player discards all the cards in their hand, then draws that many cards minus one.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | SubAbility$ CleanDrawn
 SVar:CleanDrawn:DB$ Cleanup | ClearRemembered$ True

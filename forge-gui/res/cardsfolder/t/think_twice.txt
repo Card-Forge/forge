@@ -2,5 +2,5 @@ Name:Think Twice
 ManaCost:1 U
 Types:Instant
 K:Flashback:2 U
-A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Draw a card.\nFlashback {2}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,7 +1,7 @@
 Name:Rites of Initiation
 ManaCost:R
 Types:Instant
-A:SP$ ChooseNumber | Cost$ R | Defined$ You | Min$ 0 | Max$ MaxChoice | ListTitle$ Discard how many cards? | SubAbility$ DBDiscard | SpellDescription$ Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
+A:SP$ ChooseNumber | Defined$ You | Min$ 0 | Max$ MaxChoice | ListTitle$ Discard how many cards? | SubAbility$ DBDiscard | SpellDescription$ Discard any number of cards at random. Creatures you control get +1/+0 until end of turn for each card discarded this way.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ ChosenInitiation | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

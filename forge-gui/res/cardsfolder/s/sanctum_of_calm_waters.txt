@@ -1,7 +1,7 @@
 Name:Sanctum of Calm Waters
 ManaCost:3 U
 Types:Legendary Enchantment Shrine
-T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control. If you do, discard a card.
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control. If you do, discard a card.
 SVar:TrigDraw:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<X/You>
 SVar:X:Count$TypeYouCtrl.Shrine
 DeckHints:Type$Shrine

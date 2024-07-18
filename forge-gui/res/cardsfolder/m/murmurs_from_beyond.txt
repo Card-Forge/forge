@@ -1,5 +1,5 @@
 Name:Murmurs from Beyond
 ManaCost:2 U
 Types:Instant Arcane
-A:SP$ Dig | Cost$ 2 U | DigNum$ 3 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone$ Graveyard | DestinationZone2$ Hand | Choser$ Player.Opponent | SpellDescription$ Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand.
+A:SP$ Dig | DigNum$ 3 | Reveal$ True | ChangeNum$ 1 | ChangeValid$ Card | DestinationZone$ Graveyard | DestinationZone2$ Hand | Choser$ Player.Opponent | SpellDescription$ Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand.
 Oracle:Reveal the top three cards of your library. An opponent chooses one of them. Put that card into your graveyard and the rest into your hand.

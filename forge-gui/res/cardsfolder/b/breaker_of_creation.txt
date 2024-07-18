@@ -1,0 +1,11 @@
+Name:Breaker of Creation
+ManaCost:6 C C
+Types:Creature Eldrazi
+PT:8/4
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When you cast this spell, you gain 1 life for each colorless permanent you control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ Count$Valid Permanent.Colorless+YouCtrl
+K:Hexproof:Card.nonColorless:each color
+K:Annihilator:2
+DeckHas:Ability$LifeGain
+DeckHints:Color$Colorless
+Oracle:When you cast this spell, you gain 1 life for each colorless permanent you control.\nHexproof from each color\nAnnihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents.)

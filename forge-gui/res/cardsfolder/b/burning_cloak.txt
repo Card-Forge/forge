@@ -1,7 +1,7 @@
 Name:Burning Cloak
 ManaCost:R
 Types:Sorcery
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SubAbility$ DBDealDamage | SpellDescription$ Target creature gets +2/+0 until end of turn. CARDNAME deals 2 damage to that creature.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SubAbility$ DBDealDamage | SpellDescription$ Target creature gets +2/+0 until end of turn. CARDNAME deals 2 damage to that creature.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ 2
 AI:RemoveDeck:All
 Oracle:Target creature gets +2/+0 until end of turn. Burning Cloak deals 2 damage to that creature.

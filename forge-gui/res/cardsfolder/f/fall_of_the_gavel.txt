@@ -1,6 +1,6 @@
 Name:Fall of the Gavel
 ManaCost:3 W U
 Types:Instant
-A:SP$ Counter | Cost$ 3 W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 5 life. | SubAbility$ DBGainLife
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell. You gain 5 life. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5
 Oracle:Counter target spell. You gain 5 life.

@@ -2,6 +2,6 @@ Name:Crazed Armodon
 ManaCost:2 G G
 Types:Creature Elephant
 PT:3/3
-A:AB$ Pump | Cost$ G | Defined$ Self | NumAtt$ +3 | KW$ Trample | ActivationLimit$ 1 | AtEOT$ Destroy | SpellDescription$ CARDNAME gets +3/+0 and gains trample until end of turn. Destroy Crazed Armodon at the beginning of the next end step. Activate only once each turn.
+A:AB$ Pump | Cost$ G | Defined$ Self | NumAtt$ +3 | KW$ Trample | ActivationLimit$ 1 | AtEOT$ Destroy | SpellDescription$ CARDNAME gets +3/+0 and gains trample until end of turn. Destroy CARDNAME at the beginning of the next end step. Activate only once each turn.
 AI:RemoveDeck:All
 Oracle:{G}: Crazed Armodon gets +3/+0 and gains trample until end of turn. Destroy Crazed Armodon at the beginning of the next end step. Activate only once each turn.

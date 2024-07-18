@@ -1,7 +1,7 @@
 Name:Fissure Vent
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 R R | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DestroyArtifact,DestroyLand
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DestroyArtifact,DestroyLand
 SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DestroyLand:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 Oracle:Choose one or both —\n• Destroy target artifact.\n• Destroy target nonbasic land.

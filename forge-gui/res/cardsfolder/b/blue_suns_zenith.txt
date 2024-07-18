@@ -1,7 +1,7 @@
 Name:Blue Sun's Zenith
 ManaCost:X U U U
 Types:Instant
-A:SP$ Draw | Cost$ X U U U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBShuffle | SpellDescription$ Target player draws X cards. Shuffle CARDNAME into its owner's library.
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBShuffle | SpellDescription$ Target player draws X cards. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Target player draws X cards. Shuffle Blue Sun's Zenith into its owner's library.

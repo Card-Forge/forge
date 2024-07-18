@@ -2,7 +2,7 @@ Name:Savage Alliance
 ManaCost:2 R
 Types:Instant
 K:Escalate:1
-A:SP$ Charm | Cost$ 2 R | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBPumpAll,DBDamage1,DBDamage2
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBPumpAll,DBDamage1,DBDamage2
 SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player to grant trample to each creature controlled | ValidCards$ Creature | KW$ Trample | SpellDescription$ Creatures target player controls gain trample until end of turn.
 SVar:DBDamage1:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal 2 damage | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature.
 SVar:DBDamage2:DB$ DamageAll | NumDmg$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to deal 1 damage to each creature controlled | ValidCards$ Creature | ValidDescription$ each creature the opponent controls. | SpellDescription$ CARDNAME deals 1 damage to each creature target opponent controls.

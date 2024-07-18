@@ -1,7 +1,7 @@
 Name:Temper
 ManaCost:X 1 W
 Types:Instant
-A:SP$ PreventDamage | Cost$ X 1 W | ValidTgts$ Creature | Amount$ X | PreventionSubAbility$ EvenTemper | ShieldEffectTarget$ Targeted | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
+A:SP$ PreventDamage | ValidTgts$ Creature | Amount$ X | PreventionSubAbility$ EvenTemper | ShieldEffectTarget$ Targeted | TgtPrompt$ Select target creature | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
 SVar:EvenTemper:DB$ PutCounter | Defined$ ShieldEffectTarget | CounterType$ P1P1 | CounterNum$ PreventedDamage | SpellDescription$ Put a +1/+1 counter on this creature for each 1 damage prevented this way.
 SVar:X:Count$xPaid
 Oracle:Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.

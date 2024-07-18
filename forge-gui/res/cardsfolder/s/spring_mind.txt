@@ -1,7 +1,7 @@
 Name:Spring
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 AlternateMode:Split
 Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 
@@ -11,5 +11,5 @@ Name:Mind
 ManaCost:4 U U
 Types:Instant
 K:Aftermath
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nDraw two cards.

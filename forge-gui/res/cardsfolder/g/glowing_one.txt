@@ -1,0 +1,11 @@
+Name:Glowing One
+ManaCost:2 G
+Types:Creature Zombie Mutant
+PT:2/2
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigRadiation | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, they get four rad counters.
+SVar:TrigRadiation:DB$ Radiation | Defined$ TriggeredTarget | Num$ 4
+T:Mode$ Milled | ValidPlayer$ Player | ValidCard$ Card.nonLand | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player mills a nonland card, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$LifeLink
+Oracle:Deathtouch\nWhenever Glowing One deals combat damage to a player, they get four rad counters.\nWhenever a player mills a nonland card, you gain 1 life.

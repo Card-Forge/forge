@@ -2,5 +2,5 @@ Name:Scorching Missile
 ManaCost:3 R
 Types:Sorcery
 K:Flashback:9 R
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
 Oracle:Scorching Missile deals 4 damage to target player or planeswalker.\nFlashback {9}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

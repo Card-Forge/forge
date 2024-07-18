@@ -1,6 +1,6 @@
 Name:Drain the Well
 ManaCost:2 BG BG
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 BG BG | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGainLife | SpellDescription$ Destroy target land. You gain 2 life.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGainLife | SpellDescription$ Destroy target land. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target land. You gain 2 life.

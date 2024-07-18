@@ -1,5 +1,5 @@
 Name:Guan Yu's 1,000-Li March
 ManaCost:4 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 W W | ValidCards$ Creature.tapped | SpellDescription$ Destroy all tapped creatures.
+A:SP$ DestroyAll | ValidCards$ Creature.tapped | SpellDescription$ Destroy all tapped creatures.
 Oracle:Destroy all tapped creatures.

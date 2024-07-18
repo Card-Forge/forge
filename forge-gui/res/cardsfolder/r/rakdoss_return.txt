@@ -1,7 +1,7 @@
 Name:Rakdos's Return
 ManaCost:X B R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X B R | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | SubAbility$ DBDiscardOpp | SpellDescription$ CARDNAME deals X damage to target opponent or planeswalker. That player or that planeswalker's controller discards X cards.
+A:SP$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ X | SubAbility$ DBDiscardOpp | SpellDescription$ CARDNAME deals X damage to target opponent or planeswalker. That player or that planeswalker's controller discards X cards.
 SVar:DBDiscardOpp:DB$ Discard | Defined$ TargetedOrController | NumCards$ X | Mode$ TgtChoose
 SVar:X:Count$xPaid
 Oracle:Rakdos's Return deals X damage to target opponent or planeswalker. That player or that planeswalker's controller discards X cards.

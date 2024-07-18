@@ -1,6 +1,6 @@
 Name:Piety
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.blocking | NumDef$ +3 | SpellDescription$ Blocking creatures get +0/+3 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.blocking | NumDef$ +3 | SpellDescription$ Blocking creatures get +0/+3 until end of turn.
 AI:RemoveDeck:All
 Oracle:Blocking creatures get +0/+3 until end of turn.

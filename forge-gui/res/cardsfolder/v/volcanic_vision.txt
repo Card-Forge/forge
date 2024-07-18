@@ -1,7 +1,7 @@
 Name:Volcanic Vision
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 R R | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBDamage | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. CARDNAME deals damage equal to that card's mana value to each creature your opponents control. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBDamage | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. CARDNAME deals damage equal to that card's mana value to each creature your opponents control. Exile CARDNAME.
 SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature.OppCtrl | ValidDescription$ each creature your opponents control. | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

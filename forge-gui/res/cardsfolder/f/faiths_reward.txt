@@ -1,5 +1,5 @@
 Name:Faith's Reward
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Permanent.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Permanent.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.
 Oracle:Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn.

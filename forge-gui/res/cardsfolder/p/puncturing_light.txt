@@ -1,5 +1,5 @@
 Name:Puncturing Light
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.powerLE3+attacking,Creature.powerLE3+blocking | TgtPrompt$ Select target attacking or blocking creature with power 3 or less | SpellDescription$ Destroy target attacking or blocking creature with power 3 or less.
+A:SP$ Destroy | ValidTgts$ Creature.powerLE3+attacking,Creature.powerLE3+blocking | TgtPrompt$ Select target attacking or blocking creature with power 3 or less | SpellDescription$ Destroy target attacking or blocking creature with power 3 or less.
 Oracle:Destroy target attacking or blocking creature with power 3 or less.

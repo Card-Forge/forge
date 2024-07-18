@@ -1,5 +1,5 @@
 Name:Miscast
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | UnlessCost$ 3 | TgtPrompt$ Select target instant or sorcery spell | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {3}.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | UnlessCost$ 3 | TgtPrompt$ Select target instant or sorcery spell | SpellDescription$ Counter target instant or sorcery spell unless its controller pays {3}.
 Oracle:Counter target instant or sorcery spell unless its controller pays {3}.

@@ -7,4 +7,4 @@ A:AB$ Mana | Cost$ 1 T | Produced$ U B R | RestrictValid$ Spell.Instant,Spell.So
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, return up to one target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target instant or sorcery
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Haste\n{1},{T}: Add {U}{B}{R}. Spend this mana only to cast instant and/or sorcery spells.\nWhen Cormela, Glamour Thief dies, return up to one target instant or sorcery card from your graveyard to your hand.
+Oracle:Haste\n{1}, {T}: Add {U}{B}{R}. Spend this mana only to cast instant and/or sorcery spells.\nWhen Cormela, Glamour Thief dies, return up to one target instant or sorcery card from your graveyard to your hand.

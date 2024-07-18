@@ -11,6 +11,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -30,6 +31,7 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +70,41 @@ public class EffectAi extends SpellAbilityAi {
                     }
                     randomReturn = true;
                 }
+            } else if (logic.equals("RestrictBlocking")) {
+                if (!phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
+                        || phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                    return false;
+                }
+
+                if (sa.getPayCosts().getTotalMana().countX() > 0 && sa.getHostCard().getSVar("X").equals("Count$xPaid")) {
+                    // Set PayX here to half the remaining mana to allow for Main 2 and other combat shenanigans.
+                    final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai, sa.isTrigger()) / 2;
+                    if (xPay == 0) { return false; }
+                    sa.setXManaCostPaid(xPay);
+                }
+
+                Player opp = ai.getStrongestOpponent();
+                List<Card> possibleAttackers = ai.getCreaturesInPlay();
+                List<Card> possibleBlockers = opp.getCreaturesInPlay();
+                possibleBlockers = CardLists.filter(possibleBlockers, Presets.UNTAPPED);
+                final Combat combat = game.getCombat();
+                int oppLife = opp.getLife();
+                int potentialDmg = 0;
+                List<Card> currentAttackers = new ArrayList<>();
+
+                if (possibleBlockers.isEmpty()) { return false; }
+
+                for (final Card creat : possibleAttackers) {
+                    if (CombatUtil.canAttack(creat, opp) && possibleBlockers.size() > 1) {
+                        potentialDmg += creat.getCurrentPower();
+                        if (potentialDmg >= oppLife) { return true; }
+                    }
+                    if (combat != null && combat.isAttacking(creat)) {
+                        currentAttackers.add(creat);
+                    }
+                }
+
+                return currentAttackers.size() > possibleBlockers.size();
             } else if (logic.equals("Fog")) {
                 FogAi fogAi = new FogAi();
                 if (!fogAi.canPlayAI(ai, sa)) {

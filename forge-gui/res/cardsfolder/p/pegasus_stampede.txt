@@ -2,5 +2,5 @@ Name:Pegasus Stampede
 ManaCost:1 W
 Types:Sorcery
 K:Buyback:Sac<1/Land>
-A:SP$ Token | Cost$ 1 W | TokenAmount$ 1 | TokenScript$ w_1_1_pegasus_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Pegasus creature token with flying.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_pegasus_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white Pegasus creature token with flying.
 Oracle:Buyback—Sacrifice a land. (You may sacrifice a land in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreate a 1/1 white Pegasus creature token with flying.

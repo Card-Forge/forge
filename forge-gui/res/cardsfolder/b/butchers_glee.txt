@@ -1,6 +1,6 @@
 Name:Butcher's Glee
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Lifelink | SubAbility$ DBRegen | SpellDescription$ Target creature gets +3/+0 and gains lifelink until end of turn. Regenerate it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Lifelink | SubAbility$ DBRegen | SpellDescription$ Target creature gets +3/+0 and gains lifelink until end of turn. Regenerate it.
 SVar:DBRegen:DB$ Regenerate | Defined$ ParentTarget
 Oracle:Target creature gets +3/+0 and gains lifelink until end of turn. Regenerate it. (Damage dealt by a creature with lifelink also causes its controller to gain that much life.)

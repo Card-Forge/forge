@@ -1,5 +1,5 @@
 Name:Temporal Spring
 ManaCost:1 G U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target permanent on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target permanent on top of its owner's library.
 Oracle:Put target permanent on top of its owner's library.

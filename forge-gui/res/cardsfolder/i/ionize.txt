@@ -1,6 +1,6 @@
 Name:Ionize
 ManaCost:1 U R
 Types:Instant
-A:SP$ Counter | Cost$ 1 U R | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDealDamage | SpellDescription$ Counter target spell. CARDNAME deals 2 damage to that spell's controller.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDealDamage | SpellDescription$ Counter target spell. CARDNAME deals 2 damage to that spell's controller.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TargetedController
 Oracle:Counter target spell. Ionize deals 2 damage to that spell's controller.

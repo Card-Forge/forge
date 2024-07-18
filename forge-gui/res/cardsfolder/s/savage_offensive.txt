@@ -2,7 +2,7 @@ Name:Savage Offensive
 ManaCost:1 R
 Types:Sorcery
 K:Kicker:G
-A:SP$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl | KW$ First Strike | NumAtt$ X | NumDef$ X | SpellDescription$ Creatures you control gain first strike until end of turn. If this spell was kicked, they get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | NumAtt$ X | NumDef$ X | SpellDescription$ Creatures you control gain first strike until end of turn. If this spell was kicked, they get +1/+1 until end of turn.
 SVar:X:Count$Kicked.1.0
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green

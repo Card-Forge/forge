@@ -1,5 +1,5 @@
 Name:Wrangle
 ManaCost:1 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 1 R | ValidTgts$ Creature.powerLE4 | TgtPrompt$ Select target creature with power 4 or less | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature with power 4 or less until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature.powerLE4 | TgtPrompt$ Select target creature with power 4 or less | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature with power 4 or less until end of turn. Untap that creature. It gains haste until end of turn.
 Oracle:Gain control of target creature with power 4 or less until end of turn. Untap that creature. It gains haste until end of turn.

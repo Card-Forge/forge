@@ -1,7 +1,7 @@
 Name:Confront the Unknown
 ManaCost:G
 Types:Instant
-A:SP$ Investigate | Cost$ G | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") | StackDescription$ Investigate.
+A:SP$ Investigate | SubAbility$ DBPump | SpellDescription$ Investigate, then target creature gets +1/+1 until end of turn for each Clue you control. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.") | StackDescription$ Investigate.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X
 SVar:X:Count$Valid Clue.YouCtrl
 DeckHints:Ability$Investigate

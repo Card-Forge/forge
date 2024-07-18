@@ -1,0 +1,6 @@
+Name:Raccoon Rallier
+ManaCost:1 R
+Types:Creature Raccoon Bard
+PT:2/2
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Haste | SorcerySpeed$ True | SpellDescription$ Target creature you control gains haste until end of turn. Activate only as a sorcery.
+Oracle:{T}: Target creature you control gains haste until end of turn. Activate only as a sorcery.

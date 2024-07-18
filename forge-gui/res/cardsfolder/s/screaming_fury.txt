@@ -1,5 +1,5 @@
 Name:Screaming Fury
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | KW$ Haste | SpellDescription$ Target creature gets +5/+0 and gains haste until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +5 | KW$ Haste | SpellDescription$ Target creature gets +5/+0 and gains haste until end of turn.
 Oracle:Target creature gets +5/+0 and gains haste until end of turn.

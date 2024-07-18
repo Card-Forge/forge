@@ -1,7 +1,7 @@
 Name:Search Warrant
 ManaCost:W U
 Types:Sorcery
-A:SP$ RevealHand | Cost$ W U | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGainLife | SpellDescription$ Target player reveals their hand. You gain life equal to the number of cards in that player's hand.
+A:SP$ RevealHand | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBGainLife | SpellDescription$ Target player reveals their hand. You gain life equal to the number of cards in that player's hand.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$InTargetedHand
 AI:RemoveDeck:All

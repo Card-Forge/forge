@@ -1,7 +1,7 @@
 Name:Revive the Fallen
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBClash | SpellDescription$ Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand
 Oracle:Return target creature card from a graveyard to its owner's hand. Clash with an opponent. If you win, return Revive the Fallen to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

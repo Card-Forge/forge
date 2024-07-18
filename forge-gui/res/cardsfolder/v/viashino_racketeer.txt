@@ -1,6 +1,6 @@
 Name:Viashino Racketeer
 ManaCost:2 R
-Types:Creature Viashino Rogue
+Types:Creature Lizard Rogue
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card>

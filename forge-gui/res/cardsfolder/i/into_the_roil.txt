@@ -2,6 +2,6 @@ Name:Into the Roil
 ManaCost:1 U
 Types:Instant
 K:Kicker:1 U
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card.
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | Condition$ Kicked | ConditionDescription$ If Into the Roil was kicked,
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent to its owner's hand. If this spell was kicked, draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked,
 Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nReturn target nonland permanent to its owner's hand. If this spell was kicked, draw a card.

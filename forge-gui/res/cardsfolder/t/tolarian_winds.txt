@@ -1,7 +1,7 @@
 Name:Tolarian Winds
 ManaCost:1 U
 Types:Instant
-A:SP$ Discard | Cost$ 1 U | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards.
+A:SP$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard all the cards in your hand, then draw that many cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

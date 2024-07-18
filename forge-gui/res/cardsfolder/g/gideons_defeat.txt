@@ -1,7 +1,7 @@
 Name:Gideon's Defeat
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W | ValidTgts$ Creature.White+attacking,Creature.White+blocking | TgtPrompt$ Select target white creature that's attacking or blocking | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life.
+A:SP$ ChangeZone | ValidTgts$ Creature.White+attacking,Creature.White+blocking | TgtPrompt$ Select target white creature that's attacking or blocking | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | ConditionDefined$ Targeted | ConditionPresent$ Planeswalker.Gideon
 AI:RemoveDeck:Random
 Oracle:Exile target white creature that's attacking or blocking. If it was a Gideon planeswalker, you gain 5 life.

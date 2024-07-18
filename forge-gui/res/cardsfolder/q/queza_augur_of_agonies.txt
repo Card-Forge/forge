@@ -1,6 +1,6 @@
 Name:Queza, Augur of Agonies
 ManaCost:1 W U B
-Types:Legendary Creature Cephalid Advisor
+Types:Legendary Creature Octopus Advisor
 PT:3/4
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you draw a card, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife

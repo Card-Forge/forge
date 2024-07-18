@@ -1,6 +1,6 @@
 Name:Mine Excavation
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment in a graveyard to return | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact or enchantment card from a graveyard to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment in a graveyard to return | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact or enchantment card from a graveyard to its owner's hand.
 K:Conspire
 Oracle:Return target artifact or enchantment card from a graveyard to its owner's hand.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

@@ -1,7 +1,7 @@
 Name:Reverberation
 ManaCost:2 U U
 Types:Instant
-A:SP$ Effect | Cost$ 2 U U | ValidTgts$ Sorcery | AILogic$ Prevent | TgtZone$ Stack | TgtPrompt$ Select target sorcery spell to redirect damage from | RememberObjects$ TargetedSource | ExileOnMoved$ Stack | ReplacementEffects$ SelflessDamage | StackDescription$ SpellDescription | SpellDescription$ All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead.
+A:SP$ Effect | ValidTgts$ Sorcery | AILogic$ Prevent | TgtZone$ Stack | TgtPrompt$ Select target sorcery spell to redirect damage from | RememberObjects$ TargetedSource | ExileOnMoved$ Stack | ReplacementEffects$ SelflessDamage | StackDescription$ SpellDescription | SpellDescription$ All damage that would be dealt this turn by target sorcery spell is dealt to that spell's controller instead.
 SVar:SelflessDamage:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ SelflessDmg | DamageTarget$ ReplacedSourceController | Description$ The next time a source of your choice would deal damage this turn, that damage is dealt to that source's controller instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player
 AI:RemoveDeck:All

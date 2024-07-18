@@ -1,6 +1,6 @@
 Name:Melt Terrain
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 2 damage to that land's controller.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 2 damage to that land's controller.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TargetedController
 Oracle:Destroy target land. Melt Terrain deals 2 damage to that land's controller.

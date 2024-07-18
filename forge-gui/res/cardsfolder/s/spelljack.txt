@@ -1,8 +1,8 @@
 Name:Spelljack
 ManaCost:3 U U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | Destination$ Exile | SubAbility$ DBEffect | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled. (If it has X in its mana cost, X is 0.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | RememberCountered$ True | Destination$ Exile | SubAbility$ DBEffect | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled. (If it has X in its mana cost, X is 0.)
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Play | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled with Spelljack.
+SVar:Play:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play cards exiled with EFFECTSOURCE.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard. You may play it without paying its mana cost for as long as it remains exiled. (If it has X in its mana cost, X is 0.)

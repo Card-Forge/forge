@@ -1,7 +1,7 @@
 Name:Steel Sabotage
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ DBCounter,DBChangeZone | CharmNum$ 1
+A:SP$ Charm | Choices$ DBCounter,DBChangeZone | CharmNum$ 1
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Artifact spell | ValidTgts$ Artifact | SpellDescription$ Counter target artifact spell.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact to its owner's hand.
 Oracle:Choose one —\n• Counter target artifact spell.\n• Return target artifact to its owner's hand.

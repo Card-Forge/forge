@@ -1,6 +1,6 @@
 Name:Overwhelming Stampede
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 Oracle:Until end of turn, creatures you control gain trample and get +X/+X, where X is the greatest power among creatures you control.

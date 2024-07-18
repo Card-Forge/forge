@@ -1,7 +1,7 @@
 Name:Fractal Summoning
 ManaCost:X GU GU
 Types:Sorcery Lesson
-A:SP$ Token | Cost$ X GU GU | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. | SubAbility$ DBCounters
+A:SP$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it. | SubAbility$ DBCounters
 SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

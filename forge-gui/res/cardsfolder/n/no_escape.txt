@@ -1,6 +1,6 @@
 Name:No Escape
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | Destination$ Exile | SubAbility$ DBScry | SpellDescription$ Counter target creature or planeswalker spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | Destination$ Exile | SubAbility$ DBScry | SpellDescription$ Counter target creature or planeswalker spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
 Oracle:Counter target creature or planeswalker spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.\nScry 1.

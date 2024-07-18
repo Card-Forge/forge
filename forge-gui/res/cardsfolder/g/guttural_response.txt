@@ -1,5 +1,5 @@
 Name:Guttural Response
 ManaCost:RG
 Types:Instant
-A:SP$ Counter | Cost$ RG | TargetType$ Spell | TgtPrompt$ Select target Blue Instant spell | ValidTgts$ Instant.Blue | SpellDescription$ Counter target blue instant spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Blue Instant spell | ValidTgts$ Instant.Blue | SpellDescription$ Counter target blue instant spell.
 Oracle:Counter target blue instant spell.

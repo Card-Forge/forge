@@ -2,6 +2,6 @@ Name:Unnatural Endurance
 ManaCost:B
 Types:Instant
 K:Devoid
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn. Regenerate it. | SubAbility$ DBRegen
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn. Regenerate it. | SubAbility$ DBRegen
 SVar:DBRegen:DB$ Regenerate | Defined$ ParentTarget
 Oracle:Devoid (This card has no color.)\nTarget creature gets +2/+0 until end of turn. Regenerate it.

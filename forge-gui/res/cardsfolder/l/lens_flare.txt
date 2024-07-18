@@ -2,5 +2,5 @@ Name:Lens Flare
 ManaCost:4 W
 Types:Instant
 K:Affinity:Artifact
-A:SP$ DealDamage | Cost$ 4 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nLens Flare deals 5 damage to target attacking or blocking creature.

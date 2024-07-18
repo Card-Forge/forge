@@ -1,6 +1,6 @@
 Name:Yamabushi's Storm
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature | NumDmg$ 1 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 1 | RememberDamaged$ True | ReplaceDyingDefined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Yamabushi's Storm deals 1 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.

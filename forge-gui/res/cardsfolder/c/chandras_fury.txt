@@ -1,7 +1,7 @@
 Name:Chandra's Fury
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 4 | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker and 1 damage to each creature that player or that planeswalker's controller controls.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select a player or planeswalker | NumDmg$ 4 | SubAbility$ DmgAll | DamageMap$ True | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker and 1 damage to each creature that player or that planeswalker's controller controls.
 SVar:DmgAll:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.ControlledBy TargetedOrController | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Chandra's Fury deals 4 damage to target player or planeswalker and 1 damage to each creature that player or that planeswalker's controller controls.

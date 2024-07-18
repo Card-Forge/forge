@@ -6,6 +6,6 @@ K:Cycling:1 R
 K:Kicker:2 R
 K:Flashback:3 R
 K:Buyback:4 R
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+A:SP$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ You | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked, create a 1/1 red Goblin creature token.
 Oracle:Madness {R}, cycling {1}{R}, kicker {2}{R}, flashback {3}{R}, buyback {4}{R}\nBlast from the Past deals 2 damage to any target. If this spell was kicked, create a 1/1 red Goblin creature token.

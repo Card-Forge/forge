@@ -1,0 +1,7 @@
+Name:Early Winter
+ManaCost:4 B
+Types:Instant
+A:SP$ Charm | Choices$ DBChangeZone1,DBChangeZone2 | Defined$ You
+SVar:DBChangeZone1:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Mandatory$ True | ChangeType$ Enchantment | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | Chooser$ Targeted | TgtPrompt$ Select target opponent | SpellDescription$ Target opponent exiles an enchantment they control.
+Oracle:Choose one —\n• Exile target creature.\n• Target opponent exiles an enchantment they control.

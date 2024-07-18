@@ -1,5 +1,5 @@
 Name:Leaf Arrow
 ManaCost:G
 Types:Instant
-A:SP$ DealDamage | Cost$ G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature with flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature with flying.
 Oracle:Leaf Arrow deals 3 damage to target creature with flying.

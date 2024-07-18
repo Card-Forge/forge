@@ -1,5 +1,5 @@
 Name:Make a Wish
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | Hidden$ True | AtRandom$ True | SpellDescription$ Return two cards at random from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | Hidden$ True | AtRandom$ True | SpellDescription$ Return two cards at random from your graveyard to your hand.
 Oracle:Return two cards at random from your graveyard to your hand.

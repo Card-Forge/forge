@@ -1,6 +1,6 @@
 Name:Forsake the Worldly
 ManaCost:2 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
 K:Cycling:2
 Oracle:Exile target artifact or enchantment.\nCycling {2} ({2}, Discard this card: Draw a card.)

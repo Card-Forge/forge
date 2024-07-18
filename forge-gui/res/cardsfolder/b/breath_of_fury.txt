@@ -2,7 +2,7 @@ Name:Breath of Fury
 ManaCost:2 R R
 Types:Enchantment Aura
 K:Enchant creature you control
-A:SP$ Attach | Cost$ 2 R R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to attach Breath of Fury to | AILogic$ Pump
+A:SP$ Attach | Cost$ 2 R R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to attach CARDNAME to | AILogic$ Pump
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature deals combat damage to a player, sacrifice it and attach CARDNAME to a creature you control. If you do, untap all creatures you control and after this phase, there is an additional combat phase.
 SVar:TrigSacrifice:DB$ SacrificeAll | ValidCards$ Card.EnchantedBy | SubAbility$ StillFurious
 SVar:StillFurious:DB$ Attach | Object$ Self | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control to attach Breath of Fury to | RememberAttached$ True | SubAbility$ CatchBreath

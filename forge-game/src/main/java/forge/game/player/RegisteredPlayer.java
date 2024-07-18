@@ -1,13 +1,7 @@
 package forge.game.player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -15,6 +9,11 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class RegisteredPlayer {
     private final Deck originalDeck; // never return or modify this instance (it's a reference to game resources)
@@ -33,16 +32,26 @@ public class RegisteredPlayer {
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
+    private Iterable<PaperCard> attractions = null;
     private List<PaperCard> commanders = Lists.newArrayList();
     private List<PaperCard> vanguardAvatars = null;
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
+    private Integer id = null;
     private boolean randomFoil = false;
     private boolean enableETBCountersEffect = false;
     
     public RegisteredPlayer(Deck deck0) {
         originalDeck = deck0;
         restoreDeck();
+    }
+
+    public final Integer getId() {
+        return id;
+    }
+
+    public final void setId(Integer id0) {
+        id = id0;
     }
 
     public final Deck getDeck() {
@@ -223,8 +232,18 @@ public class RegisteredPlayer {
         }
     }
 
+    public Iterable<PaperCard> getAttractions() {
+        return attractions;
+    }
+    private void assignAttractions() {
+        attractions = currentDeck.has(DeckSection.Attractions)
+                ? currentDeck.get(DeckSection.Attractions).toFlatList()
+                : EmptyList;
+    }
+
     public void restoreDeck() {
         currentDeck = (Deck) originalDeck.copyTo(originalDeck.getName());
+        assignAttractions();
     }
 
     public boolean useRandomFoil() {

@@ -2,5 +2,5 @@ Name:Hour of Reckoning
 ManaCost:4 W W W
 Types:Sorcery
 K:Convoke
-A:SP$ DestroyAll | Cost$ 4 W W W | ValidCards$ Creature.nonToken | SpellDescription$ Destroy all nontoken creatures.
+A:SP$ DestroyAll | ValidCards$ Creature.nonToken | SpellDescription$ Destroy all nontoken creatures.
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDestroy all nontoken creatures.

@@ -1,7 +1,7 @@
 Name:Archdruid's Charm
 ManaCost:G G G
 Types:Instant
-A:SP$ Charm | Cost$ G G G | Choices$ DBTutor,DBPutCounter,DBAntiquate
+A:SP$ Charm | Choices$ DBTutor,DBPutCounter,DBAntiquate
 SVar:DBTutor:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Creature,Land | ChangeNum$ 1 | Reveal$ True | Shuffle$ False | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a creature or land card and reveal it. Put it into the battlefield tapped if it's a land card. Otherwise, put it into your hand. Then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ForgetChanged$ True | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBShuffle

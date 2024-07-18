@@ -4,6 +4,6 @@ Types:Sorcery
 K:Cascade
 SVar:PlayMain1:TRUE
 K:Retrace
-A:SP$ Pump | Cost$ 3 R | StackDescription$ None
+A:SP$ Pump | StackDescription$ None
 AI:RemoveDeck:All
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

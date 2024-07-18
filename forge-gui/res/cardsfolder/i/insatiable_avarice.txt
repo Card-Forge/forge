@@ -1,0 +1,9 @@
+Name:Insatiable Avarice
+ManaCost:B
+Types:Sorcery
+K:Spree
+A:SP$ Charm | Choices$ DBTutor,DBDraw | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBTutor:DB$ ChangeZone | SpreeCost$ 2 | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, then shuffle and put that card on top.
+SVar:DBDraw:DB$ Draw | SpreeCost$ B B | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws three cards and loses 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3 | Defined$ Targeted
+Oracle:Spree (Choose one or more additional costs.)\n+{2} — Search your library for a card, then shuffle and put that card on top.\n+{B}{B} — Target player draws three cards and loses 3 life.

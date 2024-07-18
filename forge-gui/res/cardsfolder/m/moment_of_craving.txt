@@ -1,6 +1,6 @@
 Name:Moment of Craving
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -2/-2 until end of turn. You gain 2 life.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -2/-2 until end of turn. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Target creature gets -2/-2 until end of turn. You gain 2 life.

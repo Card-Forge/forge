@@ -1,6 +1,6 @@
 Name:Wash Out
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChooseColor | Cost$ 3 U | Defined$ You | AILogic$ MostProminentHumanCreatures | SubAbility$ DBWash | AILogic$ MostExcessOpponentControls | SpellDescription$ Return all permanents of the color of your choice to their owners' hands.
+A:SP$ ChooseColor | Defined$ You | AILogic$ MostProminentHumanCreatures | SubAbility$ DBWash | AILogic$ MostExcessOpponentControls | SpellDescription$ Return all permanents of the color of your choice to their owners' hands.
 SVar:DBWash:DB$ ChangeZoneAll | ChangeType$ Permanent.ChosenColor | Origin$ Battlefield | Destination$ Hand
 Oracle:Return all permanents of the color of your choice to their owners' hands.

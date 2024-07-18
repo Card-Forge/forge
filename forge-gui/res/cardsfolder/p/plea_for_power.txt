@@ -1,7 +1,7 @@
 Name:Plea for Power
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Vote | Cost$ 3 U | Defined$ Player | VoteTime$ DBAddTurn | VoteKnowledge$ DBDrawThree | Tied$ DBDrawThree | VoteType$ Time,Knowledge | AILogic$ Always | SpellDescription$ Will of the Council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.
+A:SP$ Vote | Defined$ Player | VoteTime$ DBAddTurn | VoteKnowledge$ DBDrawThree | Tied$ DBDrawThree | VoteType$ Time,Knowledge | AILogic$ Always | SpellDescription$ Will of the Council — Starting with you, each player votes for time or knowledge. If time gets more votes, take an extra turn after this one. If knowledge gets more votes or the vote is tied, draw three cards.
 SVar:DBAddTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ You
 SVar:DBDrawThree:DB$ Draw | Defined$ You | NumCards$ 3
 SVar:NeedsToPlayVar:Z LE6

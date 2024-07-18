@@ -1,5 +1,5 @@
 Name:Wind Sail
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 U | TargetMin$ 1 | TargetMax$ 2 | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ One or two target creatures gain flying until end of turn.
+A:SP$ Pump | TargetMin$ 1 | TargetMax$ 2 | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ One or two target creatures gain flying until end of turn.
 Oracle:One or two target creatures gain flying until end of turn.

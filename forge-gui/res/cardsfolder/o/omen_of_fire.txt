@@ -1,7 +1,7 @@
 Name:Omen of Fire
 ManaCost:3 R R
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 R R | ChangeType$ Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all Islands to their owners' hands. Each player sacrifices a Plains or a white permanent for each white permanent they control. | SubAbility$ DBSac
+A:SP$ ChangeZoneAll | ChangeType$ Island | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all Islands to their owners' hands. Each player sacrifices a Plains or a white permanent for each white permanent they control. | SubAbility$ DBSac
 SVar:DBSac:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSacEach
 SVar:DBSacEach:DB$ Sacrifice | Defined$ Player.IsRemembered | Amount$ OppX | SacValid$ Plains,Permanent.White
 SVar:OppX:Count$Valid Permanent.White+RememberedPlayerCtrl

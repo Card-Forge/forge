@@ -1,0 +1,11 @@
+Name:Oltec Matterweaver
+ManaCost:2 W
+Types:Creature Human Artificer
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBCopy | CharmNum$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_gnome | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Gnome artifact creature token.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Artifact.token+YouCtrl | NumCopies$ 1 | TgtPrompt$ Select target artifact token you control | SpellDescription$ Create a token that's a copy of target artifact token you control.
+DeckHas:Ability$Token
+DeckHints:Ability$Token
+Oracle:Whenever you cast a creature spell, choose one —\n• Create a 1/1 colorless Gnome artifact creature token.\n• Create a token that's a copy of target artifact token you control.

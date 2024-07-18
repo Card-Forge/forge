@@ -1,7 +1,7 @@
 Name:Dream Salvage
 ManaCost:UB
 Types:Instant
-A:SP$ Draw | Cost$ UB | NumCards$ X | Defined$ You | ValidTgts$ Opponent | SpellDescription$ Draw cards equal to the number of cards target opponent discarded this turn.
+A:SP$ Draw | NumCards$ X | Defined$ You | ValidTgts$ Opponent | SpellDescription$ Draw cards equal to the number of cards target opponent discarded this turn.
 SVar:X:TargetedPlayer$CardsDiscardedThisTurn
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

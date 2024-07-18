@@ -1,7 +1,7 @@
 Name:Appeal
 ManaCost:G
 Types:Sorcery
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | KW$ Trample | SpellDescription$ Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
 SVar:X:Count$TypeYouCtrl.Creature
 AlternateMode:Split
 Oracle:Until end of turn, target creature gains trample and gets +X/+X, where X is the number of creatures you control.
@@ -12,6 +12,6 @@ Name:Authority
 ManaCost:1 W
 Types:Sorcery
 K:Aftermath
-A:SP$ Tap | Cost$ 1 W | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature your opponent controls | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPumpAll | SpellDescription$ Tap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature your opponent controls | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPumpAll | SpellDescription$ Tap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTap up to two target creatures your opponents control. Creatures you control gain vigilance until end of turn.

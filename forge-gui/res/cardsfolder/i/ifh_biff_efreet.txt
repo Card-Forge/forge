@@ -3,5 +3,5 @@ ManaCost:2 G G
 Types:Creature Efreet
 PT:3/3
 K:Flying
-A:AB$ DamageAll | Cost$ G | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | Activator$ Player | SpellDescription$ Ifh-Bíff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability.
+A:AB$ DamageAll | Cost$ G | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | ValidDescription$ each creature with flying and each player. | Activator$ Player | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player. Any player may activate this ability.
 Oracle:Flying\n{G}: Ifh-Bíff Efreet deals 1 damage to each creature with flying and each player. Any player may activate this ability.

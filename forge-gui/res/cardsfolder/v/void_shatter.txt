@@ -2,5 +2,5 @@ Name:Void Shatter
 ManaCost:1 U U
 Types:Instant
 K:Devoid
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Exile | SpellDescription$ Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 Oracle:Devoid (This card has no color.)\nCounter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

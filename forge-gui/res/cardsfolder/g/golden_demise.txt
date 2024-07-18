@@ -2,7 +2,7 @@ Name:Golden Demise
 ManaCost:1 B B
 Types:Sorcery
 K:Ascend
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBPumpAll | SpellDescription$ All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBPumpAll | SpellDescription$ All creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:X:Count$Blessing.1.0
 Oracle:Ascend (If you control ten or more permanents, you get the city's blessing for the rest of the game.)\nAll creatures get -2/-2 until end of turn. If you have the city's blessing, instead only creatures your opponents control get -2/-2 until end of turn.

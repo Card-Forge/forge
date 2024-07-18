@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="76">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -59,33 +59,20 @@
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="54" template="../../obj/enemy.tx" x="192.13" y="236.494">
-   <properties>
-    <property name="enemy" value="Cephalid"/>
-    <property name="threatRange" type="int" value="40"/>
-   </properties>
-  </object>
   <object id="56" template="../../obj/manashards.tx" x="345.926" y="92.0841"/>
   <object id="57" template="../../obj/manashards.tx" x="377.001" y="321.309"/>
-  <object id="61" template="../../obj/enemy.tx" x="271.884" y="112.971">
+  <object id="61" template="../../obj/enemy.tx" x="358.247" y="199.334">
    <properties>
-    <property name="enemy" value="Cephalid"/>
+    <property name="enemy" value="Jellyfish"/>
     <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="67,62,66"/>
+    <property name="waypoints" value="67,65,66"/>
    </properties>
   </object>
-  <object id="62" template="../../obj/waypoint.tx" x="184.08" y="132.945"/>
+  <object id="62" template="../../obj/waypoint.tx" x="324.117" y="128.506"/>
   <object id="65" template="../../obj/waypoint.tx" x="261.376" y="274.226"/>
   <object id="66" template="../../obj/waypoint.tx" x="53.9813" y="255.436"/>
   <object id="67" template="../../obj/waypoint.tx" x="411.612" y="135.255"/>
   <object id="68" template="../../obj/waypoint.tx" x="358.033" y="289.427"/>
-  <object id="69" template="../../obj/enemy.tx" x="114.808" y="160.022">
-   <properties>
-    <property name="enemy" value="Cephalid"/>
-    <property name="threatRange" type="int" value="40"/>
-    <property name="waypoints" value="65,67,66"/>
-   </properties>
-  </object>
   <object id="70" template="../../obj/booster.tx" x="207.333" y="90.3333">
    <properties>
     <property name="reward">[
@@ -118,9 +105,34 @@
     <property name="waypoints" value="73,75,68,75,73"/>
    </properties>
   </object>
-  <object id="72" template="../../obj/waypoint.tx" x="189" y="104"/>
+  <object id="72" template="../../obj/waypoint.tx" x="157.926" y="130.635"/>
   <object id="73" template="../../obj/waypoint.tx" x="286.333" y="373.333"/>
   <object id="74" template="../../obj/waypoint.tx" x="194.667" y="358"/>
   <object id="75" template="../../obj/waypoint.tx" x="363.333" y="344.333"/>
+  <object id="76" template="../../obj/enemy.tx" x="187.325" y="228.489">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/enemy.tx" x="112.666" y="348.751">
+   <properties>
+    <property name="enemy" value="Walking Brain"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="234.946" y="129.616">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="62,72"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="122.755" y="154.637">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

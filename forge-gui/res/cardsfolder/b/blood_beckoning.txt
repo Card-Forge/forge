@@ -2,7 +2,7 @@ Name:Blood Beckoning
 ManaCost:B
 Types:Sorcery
 K:Kicker:3
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | SpellDescription$ Return target creature card from your graveyard to your hand. If this spell was kicked, instead return two target creature cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouOwn | TargetMin$ X | TargetMax$ X | SpellDescription$ Return target creature card from your graveyard to your hand. If this spell was kicked, instead return two target creature cards from your graveyard to your hand.
 SVar:X:Count$Kicked.2.1
 DeckHas:Ability$Graveyard
 Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nReturn target creature card from your graveyard to your hand. If this spell was kicked, instead return two target creature cards from your graveyard to your hand.

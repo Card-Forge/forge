@@ -1,5 +1,5 @@
 Name:Feed the Serpent
 ManaCost:2 B B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Card.Creature,Card.Planeswalker | SpellDescription$ Exile target creature or planeswalker.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Card.Creature,Card.Planeswalker | SpellDescription$ Exile target creature or planeswalker.
 Oracle:Exile target creature or planeswalker.

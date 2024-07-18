@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Baal 3
-Title=Baal, Lord of Destruction
-Difficulty=hard
-Description=BGR destruction and deathtouch theme
-Icon=Baal2 3.jpg
-Deck Type=constructed
 [Main]
 2 Archetype of Finality
 2 Ashenmoor Liege

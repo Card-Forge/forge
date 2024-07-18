@@ -2,5 +2,5 @@ Name:Beast Attack
 ManaCost:2 G G G
 Types:Instant
 K:Flashback:2 G G G
-A:SP$ Token | Cost$ 2 G G G | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
 Oracle:Create a 4/4 green Beast creature token.\nFlashback {2}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

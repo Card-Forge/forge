@@ -62,3 +62,5 @@ ScryfallCode=PMEI
 59 R Goro-Goro, Disciple of Ryusei @Mike Jordana
 60 C Talruum Champion @Pete Venters
 61 C Shield Wall @Scott Kirschner
+62 R Raiyuu, Storm's Edge @Heonhwa Choe
+63 R Snuff Out @Mike Ploog

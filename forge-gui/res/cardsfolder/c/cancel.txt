@@ -1,5 +1,5 @@
 Name:Cancel
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 Oracle:Counter target spell.

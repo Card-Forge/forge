@@ -10,5 +10,5 @@ ALTERNATE
 Name:Battle Display
 ManaCost:R
 Types:Sorcery Adventure
-A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Destroy target artifact. (Then exile this card. You may cast the creature later from exile.)

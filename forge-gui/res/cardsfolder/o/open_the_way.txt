@@ -1,7 +1,7 @@
 Name:Open the Way
 ManaCost:X G G
 Types:Sorcery
-A:SP$ DigUntil | Amount$ X | Cost$ X G G | Valid$ Card.Land | ValidDescription$ land | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | XMaxLimit$ Y | SpellDescription$ X can't be greater than the number of players in the game. Reveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.
+A:SP$ DigUntil | Amount$ X | Valid$ Card.Land | ValidDescription$ land | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | XMaxLimit$ Y | SpellDescription$ X can't be greater than the number of players in the game. Reveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.
 SVar:Y:PlayerCountPlayers$Amount
 SVar:X:Count$xPaid
 Oracle:X can't be greater than the number of players in the game.\nReveal cards from the top of your library until you reveal X land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order.

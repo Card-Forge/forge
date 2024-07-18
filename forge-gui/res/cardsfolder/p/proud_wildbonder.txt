@@ -1,5 +1,5 @@
 Name:Proud Wildbonder
-ManaCost:2 R/G R/G
+ManaCost:2 RG RG
 Types:Creature Human Warrior
 PT:4/3
 K:Trample

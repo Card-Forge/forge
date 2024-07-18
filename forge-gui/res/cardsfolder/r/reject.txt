@@ -1,5 +1,5 @@
 Name:Reject
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | UnlessCost$ 3 | Destination$ Exile | SpellDescription$ Counter target spell unless its controller pays {3}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or planeswalker spell | ValidTgts$ Creature,Planeswalker | UnlessCost$ 3 | Destination$ Exile | SpellDescription$ Counter target spell unless its controller pays {3}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 Oracle:Counter target creature or planeswalker spell unless its controller pays {3}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

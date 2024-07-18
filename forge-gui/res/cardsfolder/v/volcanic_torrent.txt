@@ -2,6 +2,6 @@ Name:Volcanic Torrent
 ManaCost:4 R
 Types:Sorcery
 K:Cascade
-A:SP$ DamageAll | Cost$ 4 R | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | NumDmg$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn.
+A:SP$ DamageAll | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | NumDmg$ X | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn.
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nVolcanic Torrent deals X damage to each creature and planeswalker your opponents control, where X is the number of spells you've cast this turn.

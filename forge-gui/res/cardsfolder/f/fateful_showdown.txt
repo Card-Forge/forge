@@ -1,7 +1,7 @@
 Name:Fateful Showdown
 ManaCost:2 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals damage to any target equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals damage to any target equal to the number of cards in your hand. Discard all the cards in your hand, then draw that many cards.
 SVar:DBDiscard:DB$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

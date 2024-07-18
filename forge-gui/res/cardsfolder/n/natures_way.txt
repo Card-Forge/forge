@@ -1,7 +1,7 @@
 Name:Nature's Way
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | KW$ Vigilance & Trample | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control gains vigilance and trample until end of turn. It deals damage equal to its power to target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | KW$ Vigilance & Trample | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control gains vigilance and trample until end of turn. It deals damage equal to its power to target creature you don't control.
 SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control gains vigilance and trample until end of turn. It deals damage equal to its power to target creature you don't control.

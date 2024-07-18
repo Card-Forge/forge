@@ -1,5 +1,5 @@
 Name:Hydroform
 ManaCost:G U
 Types:Instant
-A:SP$ Animate | Cost$ G U | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Keywords$ Flying | SpellDescription$ Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
+A:SP$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Power$ 3 | Toughness$ 3 | Types$ Creature,Elemental | Keywords$ Flying | SpellDescription$ Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
 Oracle:Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.

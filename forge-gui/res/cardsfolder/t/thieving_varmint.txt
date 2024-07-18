@@ -1,0 +1,8 @@
+Name:Thieving Varmint
+ManaCost:1 B
+Types:Creature Varmint
+PT:2/1
+K:Deathtouch
+K:Lifelink
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | Amount$ 2 | RestrictValid$ Spell.YouDontOwn | SpellDescription$ Add two mana of any one color. Spend this mana only to cast spells you don't own.
+Oracle:Deathtouch, lifelink\n{T}, Pay 1 life: Add two mana of any one color. Spend this mana only to cast spells you don't own.

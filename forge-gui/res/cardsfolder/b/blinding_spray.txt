@@ -1,6 +1,6 @@
 Name:Blinding Spray
 ManaCost:4 U
 Types:Instant
-A:SP$ PumpAll | Cost$ 4 U | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | SubAbility$ DBDraw | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | NumDef$ 0 | SubAbility$ DBDraw | SpellDescription$ Creatures your opponents control get -4/-0 until end of turn.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Creatures your opponents control get -4/-0 until end of turn.\nDraw a card.

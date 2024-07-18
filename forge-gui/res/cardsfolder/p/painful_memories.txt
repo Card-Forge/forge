@@ -1,5 +1,5 @@
 Name:Painful Memories
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | StackDescription$ SpellDescription | Mandatory$ True | SpellDescription$ Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | StackDescription$ SpellDescription | Mandatory$ True | SpellDescription$ Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.
 Oracle:Look at target opponent's hand and choose a card from it. Put that card on top of that player's library.

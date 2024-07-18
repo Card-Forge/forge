@@ -1,6 +1,6 @@
 Name:Flay
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 1 | Mode$ Random | SubAbility$ DBDiscard | SpellDescription$ Target player discards a card at random. Then that player discards another card at random unless they pay {1}.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ Random | SubAbility$ DBDiscard | SpellDescription$ Target player discards a card at random. Then that player discards another card at random unless they pay {1}.
 SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ Random | UnlessCost$ 1 | UnlessPayer$ Targeted
 Oracle:Target player discards a card at random. Then that player discards another card at random unless they pay {1}.

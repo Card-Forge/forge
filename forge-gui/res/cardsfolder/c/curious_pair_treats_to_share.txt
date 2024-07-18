@@ -10,6 +10,6 @@ ALTERNATE
 Name:Treats to Share
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
 DeckHas:Ability$Token|LifeGain
 Oracle:Create a Food token. (Then exile this card. You may cast the creature later from exile. A Food token is an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

@@ -1,6 +1,6 @@
 Name:Sun's Bounty
 ManaCost:1 W
 Types:Instant
-A:SP$ GainLife | Cost$ 1 W | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
+A:SP$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 K:Recover:1 W
 Oracle:You gain 4 life.\nRecover {1}{W} (When a creature is put into your graveyard from the battlefield, you may pay {1}{W}. If you do, return this card from your graveyard to your hand. Otherwise, exile this card.)

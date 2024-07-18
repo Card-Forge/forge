@@ -1,7 +1,7 @@
 Name:Burn from Within
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBDebuff | StackDescription$ CARDNAME deals X damage to {p:Targeted}{c:Targeted}. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead. | SpellDescription$ CARDNAME deals X damage to any target. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | RememberDamaged$ True | ReplaceDyingDefined$ Remembered.Creature | SubAbility$ DBDebuff | StackDescription$ CARDNAME deals X damage to {p:Targeted}{c:Targeted}. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead. | SpellDescription$ CARDNAME deals X damage to any target. If a creature is dealt damage this way, it loses indestructible until end of turn. If that creature would die this turn, exile it instead.
 SVar:DBDebuff:DB$ Debuff | Defined$ Remembered.Creature | Keywords$ Indestructible | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

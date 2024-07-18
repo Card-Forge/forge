@@ -1,7 +1,7 @@
 Name:Blinkmoth Infusion
 ManaCost:12 U U
 Types:Instant
-A:SP$ UntapAll | Cost$ 12 U U | ValidCards$ Artifact | SpellDescription$ Untap all artifacts.
+A:SP$ UntapAll | ValidCards$ Artifact | SpellDescription$ Untap all artifacts.
 K:Affinity:Artifact
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

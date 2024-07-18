@@ -5,6 +5,6 @@ PT:3/3
 K:Defender
 A:AB$ Debuff | Cost$ 3 | Keywords$ Defender | Defined$ Self | SubAbility$ Flight | SpellDescription$ Until end of turn, CARDNAME loses defender and gains flying.
 SVar:Flight:DB$ Pump | Defined$ Self | KW$ Flying
-#The AI currently won't understand that this ability is actually a good thing to do.
+# The AI currently won't understand that this ability is actually a good thing to do.
 AI:RemoveDeck:All
 Oracle:Defender (This creature can't attack.)\n{3}: Until end of turn, Gargoyle Sentinel loses defender and gains flying.

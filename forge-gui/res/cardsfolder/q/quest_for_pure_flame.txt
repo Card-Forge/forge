@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment
 T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ Whenever a source you control deals damage to an opponent, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
-A:AB$ Effect | Name$ Pure Flame Effect | Cost$ SubCounter<4/QUEST> Sac<1/CARDNAME> | ReplacementEffects$ DamageEvent | SpellDescription$ If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.
+A:AB$ Effect | Cost$ SubCounter<4/QUEST> Sac<1/CARDNAME> | ReplacementEffects$ DamageEvent | SpellDescription$ If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice

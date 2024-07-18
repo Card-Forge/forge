@@ -1,0 +1,12 @@
+Name:Lost Jitte
+ManaCost:1
+Types:Legendary Artifact Equipment
+K:Equip:1
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.EquippedBy | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage, put a charge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 1
+A:AB$ Charm | Cost$ SubCounter<1/CHARGE> | Choices$ DBUntap,DBCantBlock,DBPutCounter
+SVar:DBUntap:DB$ Untap | ValidTgts$ Land | SpellDescription$ Untap target land.
+SVar:DBCantBlock:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on equipped creature.
+DeckHas:Ability$Counters
+Oracle:Whenever equipped creature deals combat damage, put a charge counter on Lost Jitte.\nRemove a charge counter from Lost Jitte: Choose one —\n• Untap target land.\n• Target creature can't block this turn.\n• Put a +1/+1 counter on equipped creature.\nEquip {1}

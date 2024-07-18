@@ -1,6 +1,6 @@
 Name:Spore Swarm
 ManaCost:3 G
 Types:Instant
-A:SP$ Token | Cost$ 3 G | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create three 1/1 green Saproling creature tokens.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create three 1/1 green Saproling creature tokens.
 DeckHas:Ability$Token
 Oracle:Create three 1/1 green Saproling creature tokens.

@@ -2,6 +2,6 @@ Name:Thunderheads
 ManaCost:2 U
 Types:Instant
 K:Replicate:2 U
-A:SP$ Token | Cost$ 2 U | TokenScript$ u_3_3_weird_defender_flying | AtEOT$ Exile | SpellDescription$ Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.
+A:SP$ Token | TokenScript$ u_3_3_weird_defender_flying | AtEOT$ Exile | SpellDescription$ Create a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.
 AI:RemoveDeck:All
 Oracle:Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nCreate a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.

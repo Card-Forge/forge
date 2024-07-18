@@ -1,5 +1,5 @@
 Name:Stave Off
 ManaCost:W
 Types:Instant
-A:SP$ Protection | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
+A:SP$ Protection | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature gains protection from the color of your choice until end of turn.
 Oracle:Target creature gains protection from the color of your choice until end of turn.

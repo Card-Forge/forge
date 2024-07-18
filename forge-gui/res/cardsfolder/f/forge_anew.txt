@@ -4,8 +4,8 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Equipment card from your graveyard to the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Equipment+YouCtrl
 S:Mode$ CastWithFlash | ValidSA$ Activated.Equip | Caster$ You | Condition$ PlayerTurn | Description$ As long as it's your turn, you may activate equip abilities any time you could cast an instant.
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You may pay 0 rather than pay equip costs. | CheckSVar$ X | SVarCompare$ LT1 | Condition$ PlayerTurn | Description$ You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.
-SVar:X:Count$YouEquippedThisTurn
+S:Mode$ AlternativeCost | ValidSA$ Activated.Equip | ValidPlayer$ You | Cost$ 0 | CheckSVar$ X | SVarCompare$ LT1 | Condition$ PlayerTurn | Description$ You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.
+SVar:X:Count$ThisTurnActivated_Activated.Equip+YouCtrl
 DeckHas:Ability$Graveyard
 DeckNeeds:Type$Equipment
 Oracle:When Forge Anew enters the battlefield, return target Equipment card from your graveyard to the battlefield.\nAs long as it's your turn, you may activate equip abilities any time you could cast an instant.\nYou may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.

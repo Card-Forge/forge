@@ -1,0 +1,9 @@
+Name:Vampire Charmseeker
+ManaCost:6 U B
+Types:Creature Vampire Wizard
+PT:3/4
+K:Assist
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant, sorcery, or creature card from a graveyard to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant,Sorcery,Creature
+Oracle:Assist (Another player can pay up to {6} of this spell's cost.)\nFlying\nWhen Vampire Charmseeker enters the battlefield, return target instant, sorcery, or creature card from a graveyard to its owner's hand.

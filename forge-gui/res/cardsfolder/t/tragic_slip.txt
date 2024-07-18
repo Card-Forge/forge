@@ -1,6 +1,6 @@
 Name:Tragic Slip
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn. Morbid — that creature gets -13/-13 instead if a creature died this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn. Morbid — that creature gets -13/-13 instead if a creature died this turn.
 SVar:X:Count$Morbid.13.1
 Oracle:Target creature gets -1/-1 until end of turn.\nMorbid — That creature gets -13/-13 until end of turn instead if a creature died this turn.

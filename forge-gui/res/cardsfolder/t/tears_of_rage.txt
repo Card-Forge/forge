@@ -2,7 +2,7 @@ Name:Tears of Rage
 ManaCost:2 R R
 Types:Instant
 Text:Cast this spell only during the declare attackers step.\r\n
-A:SP$ PumpAll | Cost$ 2 R R | ActivationPhases$ Declare Attackers | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | AtEOT$ Sacrifice | SpellDescription$ Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
+A:SP$ PumpAll | ActivationPhases$ Declare Attackers | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +X | AtEOT$ Sacrifice | SpellDescription$ Attacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 AI:RemoveDeck:All
 Oracle:Cast this spell only during the declare attackers step.\nAttacking creatures you control get +X/+0 until end of turn, where X is the number of attacking creatures. Sacrifice those creatures at the beginning of the next end step.

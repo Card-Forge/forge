@@ -71,4 +71,21 @@ public class ExploreAi extends SpellAbilityAi {
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return shouldPutInGraveyard((Card)params.get("RevealedCard"), player);
     }
+
+    @Override
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (sa.usesTargeting()) {
+            CardCollection list = CardLists.getValidCards(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield),
+                    sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+
+            if (!list.isEmpty()) {
+                sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(list));
+                return true;
+            }
+
+            return false;
+        }
+
+        return canPlayAI(aiPlayer, sa) || mandatory;
+    }
 }

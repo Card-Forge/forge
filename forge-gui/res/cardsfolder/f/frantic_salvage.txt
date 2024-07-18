@@ -1,7 +1,7 @@
 Name:Frantic Salvage
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Put any number of target artifact cards from your graveyard on top of your library.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Put any number of target artifact cards from your graveyard on top of your library.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Artifact
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Force Void
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}. Draw a card at the beginning of the next turn's upkeep. | SubAbility$ DelTrigSlowtrip
 SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Counter target spell unless its controller pays {1}.\nDraw a card at the beginning of the next turn's upkeep.

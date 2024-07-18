@@ -1,6 +1,6 @@
 Name:Cephalid Sage
 ManaCost:3 U
-Types:Creature Cephalid
+Types:Creature Octopus
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | Threshold$ True | TriggerDescription$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, draw three cards, then discard two cards."
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBDiscard

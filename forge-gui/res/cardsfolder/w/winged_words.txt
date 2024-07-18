@@ -2,5 +2,5 @@ Name:Winged Words
 ManaCost:2 U
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Creature.YouCtrl+withFlying | Description$ This spell costs {1} less to cast if you control a creature with flying.
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 Oracle:This spell costs {1} less to cast if you control a creature with flying.\nDraw two cards.

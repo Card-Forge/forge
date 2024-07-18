@@ -2,6 +2,6 @@ Name:Devil's Play
 ManaCost:X R
 Types:Sorcery
 K:Flashback:X R R R
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 Oracle:Devil's Play deals X damage to any target.\nFlashback {X}{R}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

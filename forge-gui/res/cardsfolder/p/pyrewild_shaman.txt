@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Goblin Shaman
 PT:3/1
 A:AB$ Pump | Cost$ 1 R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush — | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +3/+1 until end of turn.
-T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Graveyard | ValidTarget$ Player | Execute$ TrigChange | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return CARDNAME to your hand.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Graveyard | ValidTarget$ Player | Execute$ TrigChange | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | PresentPlayer$ You | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, if CARDNAME is in your graveyard, you may pay {3}. If you do, return CARDNAME to your hand.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 3 | Origin$ Graveyard | Destination$ Hand
 Oracle:Bloodrush — {1}{R}, Discard Pyrewild Shaman: Target attacking creature gets +3/+1 until end of turn.\nWhenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.

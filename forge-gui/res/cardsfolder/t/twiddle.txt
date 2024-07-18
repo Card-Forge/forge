@@ -1,6 +1,6 @@
 Name:Twiddle
 ManaCost:U
 Types:Instant
-A:SP$ TapOrUntap | Cost$ U | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
+A:SP$ TapOrUntap | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SpellDescription$ You may tap or untap target artifact, creature, or land.
 AI:RemoveDeck:All
 Oracle:You may tap or untap target artifact, creature, or land.

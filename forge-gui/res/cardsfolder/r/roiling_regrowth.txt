@@ -1,7 +1,7 @@
 Name:Roiling Regrowth
 ManaCost:2 G
 Types:Instant
-A:SP$ Sacrifice | Cost$ 2 G | Defined$ You | SacValid$ Land | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+A:SP$ Sacrifice | Defined$ You | SacValid$ Land | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | StackDescription$ None
 SVar:AIPreference:SacCost$Land.Basic+tapped
 Oracle:Sacrifice a land. Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.

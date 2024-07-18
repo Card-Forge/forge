@@ -1,6 +1,6 @@
 Name:Order of Sacred Dusk
 ManaCost:6 W B
-Types:Creature — Vampire Knight
+Types:Creature Vampire Knight
 PT:5/5
 K:Convoke
 K:Flying

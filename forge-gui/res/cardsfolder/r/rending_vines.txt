@@ -1,7 +1,7 @@
 Name:Rending Vines
 ManaCost:1 G G
 Types:Instant Arcane
-A:SP$ Destroy | Cost$ 1 G G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | AITgts$ Card.cmcLTX | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment if its mana value is less than or equal to the number of cards in your hand.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | ConditionCheckSVar$ Y | ConditionSVarCompare$ LEX | AITgts$ Card.cmcLTX | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact or enchantment if its mana value is less than or equal to the number of cards in your hand.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:Y:Targeted$CardManaCost
 SVar:X:Count$InYourHand

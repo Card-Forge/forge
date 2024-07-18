@@ -1,0 +1,9 @@
+Name:Lilysplash Mentor
+ManaCost:2 G U
+Types:Creature Frog Druid
+PT:4/4
+K:Reach
+A:AB$ ChangeZone | Cost$ 1 G U | ValidTgts$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select another target creature you control | RememberChanged$ True | SorcerySpeed$ True | SubAbility$ DBReturn | SpellDescription$ Exile another target creature you control, then return it to the battlefield under its owner's control with a +1/+1 counter on it. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | WithCountersType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reach\n{1}{G}{U}: Exile another target creature you control, then return it to the battlefield under its owner's control with a +1/+1 counter on it. Activate only as a sorcery.

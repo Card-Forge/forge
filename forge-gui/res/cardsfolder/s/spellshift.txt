@@ -1,7 +1,7 @@
 Name:Spellshift
 ManaCost:3 U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | SubAbility$ DBDig | SpellDescription$ Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target Instant or Sorcery Spell | SubAbility$ DBDig | SpellDescription$ Counter target instant or sorcery spell. Its controller reveals cards from the top of their library until they reveal an instant or sorcery card. That player may cast that card without paying its mana cost. Then the player shuffles.
 SVar:DBDig:DB$ DigUntil | Defined$ TargetedController | Valid$ Instant,Sorcery | ValidDescription$ Sorcery or Instant | NoMoveRevealed$ True | RememberFound$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Controller$ TargetedController | WithoutManaCost$ True | Optional$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ TargetedController | SubAbility$ DBCleanup

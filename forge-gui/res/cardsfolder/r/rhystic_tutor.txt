@@ -1,7 +1,7 @@
 Name:Rhystic Tutor
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | UnlessCost$ 2 | UnlessPayer$ Player | Mandatory$ True | SpellDescription$ Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | UnlessCost$ 2 | UnlessPayer$ Player | Mandatory$ True | SpellDescription$ Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle.
 SVar:NeedsToPlayVar:Z LE1
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+inZoneBattlefield+untapped
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Tempt with Vengeance
 ManaCost:X R
 Types:Sorcery
-A:SP$ Token | Cost$ X R | TokenAmount$ X | TokenScript$ r_1_1_elemental_haste | TokenOwner$ You | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Tempting offer — Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste.
+A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental_haste | TokenOwner$ You | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Tempting offer — Create X 1/1 red Elemental creature tokens with haste. Each opponent may create X 1/1 red Elemental creature tokens with haste. For each opponent who does, create X 1/1 red Elemental creature tokens with haste.
 SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBTokenOpp | RepeatPlayers$ Player.Opponent | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to create X 1/1 red Elemental creature tokens with haste? | SubAbility$ DBToken | ChangeZoneTable$ True
 SVar:DBTokenOpp:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental_haste | TokenOwner$ Player.IsRemembered | SubAbility$ DBCount
 SVar:DBCount:DB$ StoreSVar | SVar$ Y | Type$ CountSVar | Expression$ Y/Plus.1

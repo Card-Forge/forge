@@ -1,6 +1,6 @@
 Name:Burst of Speed
 ManaCost:R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ R | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | SpellDescription$ Creatures you control gain haste until end of turn.
 AI:RemoveDeck:All
 Oracle:Creatures you control gain haste until end of turn. (They can attack and {T} even if they just came under your control.)

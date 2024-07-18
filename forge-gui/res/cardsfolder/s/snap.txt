@@ -1,7 +1,7 @@
 Name:Snap
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Untap up to two lands. | SubAbility$ DBUntap
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand. Untap up to two lands. | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 2
 SVar:FreeSpellAI:True
 Oracle:Return target creature to its owner's hand. Untap up to two lands.

@@ -5,7 +5,7 @@ PT:2/2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it.
 SVar:TrigSac:DB$ Sacrifice | ValidCard$ Card.Self
 S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.nonSpirit | Description$ CARDNAME can't be blocked except by Spirits.
-A:AB$ Effect | Cost$ 3 U | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | RememberObjects$ Targeted | Name$ Departed Deckhand Effect | StaticAbilities$ EffModeCantBlockBy | SpellDescription$ Another target creature you control can't be blocked this turn except by Spirits.
-SVar:EffModeCantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.nonSpirit | EffectZone$ Command | Description$ Remembered creature can't be blocked except by Spirits.
+A:AB$ Effect | Cost$ 3 U | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | RememberObjects$ Targeted | StaticAbilities$ EffModeCantBlockBy | SpellDescription$ Another target creature you control can't be blocked this turn except by Spirits.
+SVar:EffModeCantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.nonSpirit | EffectZone$ Command | Description$ This creature can't be blocked except by Spirits.
 SVar:Targeting:Dies
 Oracle:When Departed Deckhand becomes the target of a spell, sacrifice it.\nDeparted Deckhand can't be blocked except by Spirits.\n{3}{U}: Another target creature you control can't be blocked this turn except by Spirits.

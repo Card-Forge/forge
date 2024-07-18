@@ -1,7 +1,7 @@
 Name:Crush Contraband
 ManaCost:3 W
 Types:Instant
-A:SP$ Charm | Cost$ 3 W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ExileArtifact,ExileEnchantment
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ ExileArtifact,ExileEnchantment
 SVar:ExileArtifact:DB$ ChangeZone | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact.
 SVar:ExileEnchantment:DB$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 Oracle:Choose one or both —\n• Exile target artifact.\n• Exile target enchantment.

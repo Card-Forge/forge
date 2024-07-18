@@ -1,5 +1,5 @@
 Name:Deny Existence
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Creature | Destination$ Exile | SpellDescription$ Counter target creature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Creature | Destination$ Exile | SpellDescription$ Counter target creature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
 Oracle:Counter target creature spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.

@@ -1,5 +1,5 @@
 Name:Sizzle
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each opponent.
 Oracle:Sizzle deals 3 damage to each opponent.

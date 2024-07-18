@@ -1,7 +1,7 @@
 Name:Prepare
 ManaCost:1 W
 Types:Instant
-A:SP$ Untap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | KW$ Lifelink
 AlternateMode:Split
 Oracle:Untap target creature. It gets +2/+2 and gains lifelink until end of turn.
@@ -12,6 +12,6 @@ Name:Fight
 ManaCost:3 G
 Types:Sorcery
 K:Aftermath
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature an opponent controls.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature an opponent controls.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nTarget creature you control fights target creature an opponent controls.

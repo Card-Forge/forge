@@ -1,7 +1,7 @@
 Name:Traverse the Ulvenwald
 ManaCost:G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Delirium — If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. Delirium — If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, reveal it, put it into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land,Creature | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1
 SVar:X:Count$Delirium.1.0
 DeckHints:Ability$Graveyard|Discard

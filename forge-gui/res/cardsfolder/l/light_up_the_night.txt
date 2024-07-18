@@ -1,7 +1,7 @@
 Name:Light Up the Night
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ Z | SpellDescription$ CARDNAME deals X damage to any target. It deals X plus 1 damage instead if that target is a creature or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ Z | SpellDescription$ CARDNAME deals X damage to any target. It deals X plus 1 damage instead if that target is a creature or planeswalker.
 SVar:X:Count$xPaid
 SVar:Y:Targeted$Valid Creature,Planeswalker
 SVar:Z:SVar$X/Plus.Y

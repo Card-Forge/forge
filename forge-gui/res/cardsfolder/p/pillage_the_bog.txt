@@ -1,0 +1,7 @@
+Name:Pillage the Bog
+ManaCost:B G
+Types:Sorcery
+A:SP$ Dig | DigNum$ X | ChangeNum$ 1 | RestRandomOrder$ True | SpellDescription$ Look at the top X cards of your library, where X is twice the number of lands you control. Put one of them into your hand and the rest on the bottom of your library in a random order.
+SVar:X:Count$Valid Land.YouCtrl/Twice
+K:Plot:1 B G
+Oracle:Look at the top X cards of your library, where X is twice the number of lands you control. Put one of them into your hand and the rest on the bottom of your library in a random order.\nPlot {1}{B}{G} (You may pay {1}{B}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

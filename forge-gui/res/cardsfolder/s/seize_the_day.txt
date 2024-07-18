@@ -2,6 +2,6 @@ Name:Seize the Day
 ManaCost:3 R
 Types:Sorcery
 K:Flashback:2 R
-A:SP$ Untap | Cost$ 3 R | ValidTgts$ Creature | SubAbility$ DBAddCombat | SpellDescription$ Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
+A:SP$ Untap | ValidTgts$ Creature | SubAbility$ DBAddCombat | SpellDescription$ Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
 Oracle:Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,7 +1,7 @@
 Name:Essence Capture
 ManaCost:U U
 Types:Instant
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Counter target creature spell. Put a +1/+1 counter on up to one target creature you control.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Counter target creature spell. Put a +1/+1 counter on up to one target creature you control.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl
 DeckHas:Ability$Counters
 Oracle:Counter target creature spell. Put a +1/+1 counter on up to one target creature you control.

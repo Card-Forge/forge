@@ -1,5 +1,5 @@
 Name:Riding the Dilu Horse
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Horsemanship | Duration$ Permanent | SpellDescription$ Target creature gets +2/+2 and gains horsemanship. (It can't be blocked except by creatures with horsemanship. This effect lasts indefinitely.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | KW$ Horsemanship | Duration$ Permanent | SpellDescription$ Target creature gets +2/+2 and gains horsemanship. (It can't be blocked except by creatures with horsemanship. This effect lasts indefinitely.)
 Oracle:Target creature gets +2/+2 and gains horsemanship. (It can't be blocked except by creatures with horsemanship. This effect lasts indefinitely.)

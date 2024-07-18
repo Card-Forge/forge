@@ -1,7 +1,7 @@
 Name:Wanderer's Strike
 ManaCost:4 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBProliferate | SpellDescription$ Exile target creature, then proliferate.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBProliferate | SpellDescription$ Exile target creature, then proliferate.
 SVar:DBProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters

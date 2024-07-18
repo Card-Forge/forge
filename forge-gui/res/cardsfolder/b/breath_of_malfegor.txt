@@ -1,5 +1,5 @@
 Name:Breath of Malfegor
 ManaCost:3 B R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 B R | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ Breath of Malfegor deals 5 damage to each opponent.
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to each opponent.
 Oracle:Breath of Malfegor deals 5 damage to each opponent.

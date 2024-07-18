@@ -1,6 +1,6 @@
 Name:Ground Rift
 ManaCost:R
 Types:Sorcery
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature without flying can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without flying | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature without flying can't block this turn.
 K:Storm
 Oracle:Target creature without flying can't block this turn.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

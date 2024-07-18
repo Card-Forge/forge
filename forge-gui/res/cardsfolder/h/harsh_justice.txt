@@ -1,7 +1,7 @@
 Name:Harsh Justice
 ManaCost:2 W
 Types:Instant
-A:SP$ Effect | Cost$ 2 W | Name$ Harsh Justice Effect | Triggers$ TrigDamage | AILogic$ Fog | CheckSVar$ Y | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
+A:SP$ Effect | Triggers$ TrigDamage | AILogic$ Fog | CheckSVar$ Y | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.attacking | ValidTarget$ You | Execute$ TrigDealDamage | CombatDamage$ True | TriggerDescription$ This turn, whenever an attacking creature deals combat damage to you, it deals that much damage to its controller.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X | DamageSource$ TriggeredSource
 SVar:X:TriggerCount$DamageAmount

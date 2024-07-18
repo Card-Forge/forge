@@ -1,0 +1,7 @@
+Name:Badlands Revival
+ManaCost:3 B G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBReturn | SpellDescription$ Return up to one target creature card from your graveyard to the battlefield.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target permanent card in your graveyard | ValidTgts$ Card.Permanent+YouOwn | SpellDescription$ Return up to one target permanent card from your graveyard to your hand.
+DeckHints:Ability$Graveyard
+Oracle:Return up to one target creature card from your graveyard to the battlefield. Return up to one target permanent card from your graveyard to your hand.

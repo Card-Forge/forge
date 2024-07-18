@@ -1,7 +1,7 @@
 Name:Kick in the Door
 ManaCost:R
 Types:Sorcery
-A:SP$ PutCounter | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains haste until end of turn and can't be blocked by Walls this turn. Venture into the dungeon. (Enter the first room or advance to the next room.)
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. That creature gains haste until end of turn and can't be blocked by Walls this turn. Venture into the dungeon. (Enter the first room or advance to the next room.)
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ FasterThanLime | ForgetOnMoved$ Battlefield | SubAbility$ DBVenture
 SVar:DBVenture:DB$ Venture

@@ -101,7 +101,7 @@ public class CostRemoveCounter extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter.is(CounterEnumType.LOYALTY)) {
+        if (this.counter.is(CounterEnumType.LOYALTY) && payCostFromSource()) {
             sb.append("-").append(this.getAmount());
         } else {
             sb.append("Remove ");
@@ -179,7 +179,7 @@ public class CostRemoveCounter extends CostPart {
         // for this cost, the list should be only one
         for (Card c : decision.cards) {
             removed += toRemove;
-            c.subtractCounter(counter, toRemove);
+            c.subtractCounter(counter, toRemove, ai);
             c.getGame().updateLastStateForCard(c);
         }
 

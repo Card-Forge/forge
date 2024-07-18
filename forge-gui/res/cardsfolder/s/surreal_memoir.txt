@@ -2,6 +2,6 @@ Name:Surreal Memoir
 ManaCost:3 R
 Types:Sorcery
 K:Rebound
-A:SP$ ChangeZone | Cost$ 3 R | ChangeType$ Instant.YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand | SpellDescription$ Return an instant card at random from your graveyard to your hand.
+A:SP$ ChangeZone | ChangeType$ Instant.YouCtrl | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Hand | SpellDescription$ Return an instant card at random from your graveyard to your hand.
 AI:RemoveDeck:All
 Oracle:Return an instant card at random from your graveyard to your hand.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

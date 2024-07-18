@@ -1,6 +1,6 @@
 Name:Jund Sojourners
 ManaCost:B R G
-Types:Creature Viashino Shaman
+Types:Creature Lizard Shaman
 PT:3/2
 K:Cycling:2 R
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME or it dies, you may have it deal 1 damage to any target.

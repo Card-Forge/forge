@@ -2,6 +2,6 @@ Name:Canopy Claws
 ManaCost:G
 Types:Instant
 K:Flashback:G
-A:SP$ Debuff | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
+A:SP$ Debuff | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.
 AI:RemoveDeck:All
 Oracle:Target creature loses flying until end of turn.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

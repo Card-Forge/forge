@@ -1,7 +1,7 @@
 Name:Rancid Earth
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBRancidDamage | SpellDescription$ Destroy target land. Threshold — If seven or more cards are in your graveyard, instead destroy that land and CARDNAME deals 1 damage to each creature and each player.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBRancidDamage | SpellDescription$ Destroy target land. Threshold — If seven or more cards are in your graveyard, instead destroy that land and CARDNAME deals 1 damage to each creature and each player.
 SVar:DBRancidDamage:DB$ DamageAll | NumDmg$ RancidX | ValidCards$ Creature | ValidPlayers$ Player
 SVar:RancidX:Count$Threshold.1.0
 Oracle:Destroy target land.\nThreshold — If seven or more cards are in your graveyard, instead destroy that land and Rancid Earth deals 1 damage to each creature and each player.

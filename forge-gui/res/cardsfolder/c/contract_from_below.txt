@@ -2,7 +2,7 @@ Name:Contract from Below
 ManaCost:B
 Types:Sorcery
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:SP$ Discard | Cost$ B | Mode$ Hand | Defined$ You | SubAbility$ DBAnte | SpellDescription$ Discard your hand, ante the top card of your library, then draw seven cards.
+A:SP$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBAnte | SpellDescription$ Discard your hand, ante the top card of your library, then draw seven cards.
 SVar:DBAnte:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Ante | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7
 AI:RemoveDeck:All

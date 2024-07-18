@@ -1,7 +1,7 @@
 Name:Steeling Stance
 ManaCost:1 W W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 A:AB$ Pump | Cost$ W Reveal<1/CARDNAME> | TgtPrompt$ Choose target creature | ValidTgts$ Creature | NumAtt$ +1 | NumDef$ +1 | Forecast$ True | SpellDescription$ Target creature gets +1/+1 until end of turn. (Activate only during your upkeep and only once each turn.)
 AI:RemoveDeck:All
 Oracle:Creatures you control get +1/+1 until end of turn.\nForecast — {W}, Reveal Steeling Stance from your hand: Target creature gets +1/+1 until end of turn. (Activate only during your upkeep and only once each turn.)

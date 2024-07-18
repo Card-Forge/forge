@@ -1,6 +1,6 @@
 Name:Aim High
 ManaCost:1 G
 Types:Instant
-A:SP$ Untap | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 and gains reach until end of turn.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 and gains reach until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2 | KW$ Reach
 Oracle:Untap target creature. It gets +2/+2 and gains reach until end of turn. (It can block creatures with flying.)

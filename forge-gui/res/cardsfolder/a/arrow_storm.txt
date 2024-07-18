@@ -1,7 +1,7 @@
 Name:Arrow Storm
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ 4 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals 4 damage to any target. Raid — If you attacked this turn, instead CARDNAME deals 5 damage to that permanent or player and the damage can't be prevented.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ EQ0 | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals 4 damage to any target. Raid — If you attacked this turn, instead CARDNAME deals 5 damage to that permanent or player and the damage can't be prevented.
 SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ 5 | NoPrevention$ True | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | StackDescription$ Raid — If you attacked this turn, instead CARDNAME deals 5 damage to {Targeted} and the damage can't be prevented.
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Arrow Storm deals 4 damage to any target.\nRaid — If you attacked this turn, instead Arrow Storm deals 5 damage to that permanent or player and the damage can't be prevented.

@@ -1,0 +1,9 @@
+Name:Loan Shark
+ManaCost:3 U
+Types:Creature Shark Rogue
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you've cast two or more spells this turn, draw a card.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+SVar:TrigDraw:DB$ Draw
+K:Plot:3 U
+Oracle:When Loan Shark enters the battlefield, if you've cast two or more spells this turn, draw a card.\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

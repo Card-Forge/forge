@@ -1,5 +1,5 @@
 Name:Searing Flesh
 ManaCost:6 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 6 R | ValidTgts$ Opponent,Planeswalker | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target opponent or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Opponent,Planeswalker | NumDmg$ 7 | SpellDescription$ CARDNAME deals 7 damage to target opponent or planeswalker.
 Oracle:Searing Flesh deals 7 damage to target opponent or planeswalker.

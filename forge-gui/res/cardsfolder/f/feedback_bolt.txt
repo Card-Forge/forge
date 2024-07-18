@@ -1,7 +1,7 @@
 Name:Feedback Bolt
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player or planeswalker equal to the number of artifacts you control.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player or planeswalker equal to the number of artifacts you control.
 SVar:X:Count$TypeYouCtrl.Artifact
 AI:RemoveDeck:Random
 Oracle:Feedback Bolt deals damage to target player or planeswalker equal to the number of artifacts you control.

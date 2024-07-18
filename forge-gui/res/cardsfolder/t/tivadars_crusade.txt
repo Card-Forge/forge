@@ -1,6 +1,6 @@
 Name:Tivadar's Crusade
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Goblin | SpellDescription$ Destroy all Goblins.
+A:SP$ DestroyAll | ValidCards$ Goblin | SpellDescription$ Destroy all Goblins.
 AI:RemoveDeck:Random
 Oracle:Destroy all Goblins.

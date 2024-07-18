@@ -1,6 +1,6 @@
 Name:Elvish Promenade
 ManaCost:3 G
-Types:Tribal Sorcery Elf
+Types:Kindred Sorcery Elf
 A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create a 1/1 green Elf Warrior creature token for each Elf you control.
 SVar:X:Count$Valid Elf.YouCtrl
 AI:RemoveDeck:Random

@@ -1,6 +1,6 @@
 Name:Blatant Thievery
 ManaCost:4 U U U
 Types:Sorcery
-A:SP$ GainControl | Cost$ 4 U U U | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, gain control of target permanent that player controls.
+A:SP$ GainControl | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select target permanent an opponent controls to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsForEachPlayer$ True | SpellDescription$ For each opponent, gain control of target permanent that player controls.
 SVar:OneEach:PlayerCountOpponents$Amount
 Oracle:For each opponent, gain control of target permanent that player controls.

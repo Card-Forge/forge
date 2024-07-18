@@ -1,7 +1,7 @@
 Name:Viridescent Wisps
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +0 | SubAbility$ DBDraw | SpellDescription$ Target creature becomes green and gets +1/+0 until end of turn. Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +0 | SubAbility$ DBDraw | SpellDescription$ Target creature becomes green and gets +1/+0 until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBGreen | NumCards$ 1
 SVar:DBGreen:DB$ Animate | Colors$ Green | OverwriteColors$ True | Defined$ Targeted
 Oracle:Target creature becomes green and gets +1/+0 until end of turn.\nDraw a card.

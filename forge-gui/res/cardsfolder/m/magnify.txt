@@ -1,5 +1,5 @@
 Name:Magnify
 ManaCost:G
 Types:Instant
-A:SP$ PumpAll | Cost$ G | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ All creatures get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ All creatures get +1/+1 until end of turn.
 Oracle:All creatures get +1/+1 until end of turn.

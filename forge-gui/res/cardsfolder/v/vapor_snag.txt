@@ -1,6 +1,6 @@
 Name:Vapor Snag
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDrain | SpellDescription$ Return target creature to its owner's hand. Its controller loses 1 life.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDrain | SpellDescription$ Return target creature to its owner's hand. Its controller loses 1 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 1
 Oracle:Return target creature to its owner's hand. Its controller loses 1 life.

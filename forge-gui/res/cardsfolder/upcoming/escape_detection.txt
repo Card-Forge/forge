@@ -1,0 +1,7 @@
+Name:Escape Detection
+ManaCost:1 U U
+Types:Instant
+K:Freerunning:Return<1/Creature.Blue/blue creature>
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:Freerunning—Return a blue creature you control to its owner's hand. (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nReturn target creature to its owner's hand.\nDraw a card.

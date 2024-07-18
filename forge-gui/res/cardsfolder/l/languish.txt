@@ -1,5 +1,5 @@
 Name:Languish
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B B | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ All creatures get -4/-4 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ All creatures get -4/-4 until end of turn.
 Oracle:All creatures get -4/-4 until end of turn.

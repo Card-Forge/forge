@@ -1,5 +1,5 @@
 Name:Anticipate
 ManaCost:1 U
 Types:Instant
-A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.

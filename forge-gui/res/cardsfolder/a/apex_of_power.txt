@@ -1,7 +1,7 @@
 Name:Apex of Power
 ManaCost:7 R R R
 Types:Sorcery
-A:SP$ Dig | Cost$ 7 R R R | DestinationZone$ Exile | DigNum$ 7 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top seven cards from your library. Until end of turn, you may cast nonland cards exiled this way. If this spell was cast from your hand, add ten mana of any one color.
+A:SP$ Dig | DestinationZone$ Exile | DigNum$ 7 | ChangeNum$ All | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top seven cards from your library. Until end of turn, you may cast nonland cards exiled this way. If this spell was cast from your hand, add ten mana of any one color.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ EffSModeContinuous | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
 SVar:EffSModeContinuous:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | Description$ You may cast nonland cards exiled this way.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBMana

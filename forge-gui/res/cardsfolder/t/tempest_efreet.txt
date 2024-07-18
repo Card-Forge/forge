@@ -3,7 +3,7 @@ ManaCost:1 R R R
 Types:Creature Efreet
 PT:3/3
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | SubAbility$ Choice | RememberObjects$ Targeted | StackDescription$ SpellDescription | SpellDescription$ Target opponent may pay 10 life. If that player doesn't, they reveal a card at random from their hand. Exchange ownership of the revealed card and Tempest Efreet. Put the revealed card into your hand and Tempest Efreet from anywhere into that player's graveyard. This change in ownership is permanent.
+A:AB$ Pump | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Opponent | SubAbility$ Choice | RememberObjects$ Targeted | StackDescription$ SpellDescription | SpellDescription$ Target opponent may pay 10 life. If that player doesn't, they reveal a card at random from their hand. Exchange ownership of the revealed card and CARDNAME. Put the revealed card into your hand and CARDNAME from anywhere into that player's graveyard. This change in ownership is permanent.
 SVar:Choice:DB$ GenericChoice | Choices$ RevealCard | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ LT10 | SubAbility$ Choice2 | StackDescription$ None
 SVar:Choice2:DB$ GenericChoice | Choices$ PayLife,RevealCard | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | StackDescription$ None
 SVar:X:PlayerCountRemembered$LifeTotal

@@ -1,0 +1,7 @@
+Name:Peerless Ropemaster
+ManaCost:4 U
+Types:Creature Human Rogue
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target tapped creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.tapped | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose up to one target tapped creature
+Oracle:When Peerless Ropemaster enters the battlefield, return up to one target tapped creature to its owner's hand.

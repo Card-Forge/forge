@@ -1,6 +1,6 @@
 Name:Grapeshot
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 K:Storm
 Oracle:Grapeshot deals 1 damage to any target.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

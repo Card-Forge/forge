@@ -1,7 +1,7 @@
 Name:See the Unwritten
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ Dig | Cost$ 4 G G | DigNum$ 8 | Reveal$ True | ChangeNum$ X | ChangeValid$ Creature | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard. Ferocious — If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
+A:SP$ Dig | DigNum$ 8 | Reveal$ True | ChangeNum$ X | ChangeValid$ Creature | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | SpellDescription$ Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard. Ferocious — If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$Valid Creature.YouCtrl+powerGE4
 Oracle:Reveal the top eight cards of your library. You may put a creature card from among them onto the battlefield. Put the rest into your graveyard.\nFerocious — If you control a creature with power 4 or greater, you may put two creature cards onto the battlefield instead of one.

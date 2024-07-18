@@ -1,7 +1,7 @@
 Name:Exhaustion
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | RememberObjects$ Targeted | Duration$ Permanent | AILogic$ KeepOppCreatsLandsTapped | SpellDescription$ Creatures and lands target opponent controls don't untap during their next untap step.
+A:SP$ Effect | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | RememberObjects$ Targeted | Duration$ Permanent | AILogic$ KeepOppCreatsLandsTapped | SpellDescription$ Creatures and lands target opponent controls don't untap during their next untap step.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl,Land.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

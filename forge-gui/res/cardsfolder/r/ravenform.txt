@@ -1,7 +1,7 @@
 Name:Ravenform
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.
+A:SP$ ChangeZone | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target artifact or creature. Its controller creates a 1/1 blue Bird creature token with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_bird_flying | TokenOwner$ TargetedController
 K:Foretell:U
 DeckHas:Ability$Token

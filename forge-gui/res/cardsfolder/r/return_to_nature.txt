@@ -1,7 +1,7 @@
 Name:Return to Nature
 ManaCost:1 G
 Types:Instant
-A:SP$ Charm | Cost$ 1 G | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBExile
+A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyEnchantment,DBExile
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | Tgtprompt$ Select target artifact | SpellDescription$ Destroy target artifact
 SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | Tgtprompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TgtPrompt$ Select target card from a graveyard. | SpellDescription$ Exile target card fom a graveyard.

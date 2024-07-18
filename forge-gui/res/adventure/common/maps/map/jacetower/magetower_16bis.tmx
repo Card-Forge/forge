@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="92">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2IA0D3ZxWRzio2Dwgl08mDiKl4Ehmhe7GDZ9o2Bwg71kxtEeCuIWPW0QSlfY0uEoGHoAvQ7AVVdQC2BLN5SmIwCfVx1o
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzt1O0JgCAQBmDprzZBtUU0TM1SrWVfU7RQRQVSV753RPSjgxdR0YcD0Rql7AuJD0HOFKFSrblOHj7n7vuL2c3jXTWAzekXMVEbdTkmYiOuxPTZiJvMGYNzlnLnqbPu7kXCfhNhr3v97rfdwdDvJQvod3VML3Tjza41r89SryZ1L+ef5Nh3JvefRG2fyXVdu9LX8ZkSlzpDhXvHBAmT38o=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbTYqd1LKbHDupYfdlHPrQxYlVRywwozCeTEbtHdT2gtLFDEbs4vj4IDCNkfx0BQLXcNiND4DsvE6FsoMUu6llJyl2U9tOZLunM0LSG4iGYRMonxZ20goAANB3Jg8=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF2IAIG3ZxMRziwwnc5xloF1AXmDERJ26CQx0u8VEweIATmWk2iJ18O69RmK6uD/N0NdzKERCYzgjBhMQGOwAA5jQIDw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="88" template="../../obj/door_up.tx" x="208.5" y="79.5">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_9.tmx"/>
+    <property name="teleportObjectId" value="85"/>
+   </properties>
+  </object>
+  <object id="90" template="../../obj/door_left.tx" x="273.5" y="226">
+   <properties>
+    <property name="teleport" value="maps/map/magetower_9B.tmx"/>
+    <property name="teleportObjectId" value="88"/>
+   </properties>
+  </object>
+  <object id="91" template="../../obj/enemy.tx" x="278.5" y="107.5">
+   <properties>
+    <property name="enemy" value="Blue Wiz1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

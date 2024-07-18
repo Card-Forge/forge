@@ -2,7 +2,7 @@ Name:Counterpoint
 ManaCost:3 U B
 Types:Instant
 A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | RememberCounteredCMC$ True | SubAbility$ DBPlay | SpellDescription$ Counter target spell.
-SVar:DBPlay:DB$ Play | ValidZone$ Graveyard | Valid$ Creature.YouCtrl+cmcLEX,Instant.YouCtrl+cmcLEX,Sorcery.YouCtrl+cmcLEX,Planeswalker.YouCtrl+cmcLEX | ValidSA$ Spell | Controller$ You | Optional$ True | Amount$ 1 | AILogic$ ReplaySpell | SubAbility$ DBCleanup | SpellDescription$ You may cast a creature, instant, sorcery, or planeswalker spell from your graveyard with mana value less than or equal to that spell's mana value without paying its mana cost.
+SVar:DBPlay:DB$ Play | ValidZone$ Graveyard | Valid$ Creature.YouCtrl+cmcLEX,Instant.YouCtrl+cmcLEX,Sorcery.YouCtrl+cmcLEX,Planeswalker.YouCtrl+cmcLEX | ValidSA$ Spell | Controller$ You | Optional$ True | Amount$ 1 | WithoutManaCost$ True | AILogic$ ReplaySpell | SubAbility$ DBCleanup | SpellDescription$ You may cast a creature, instant, sorcery, or planeswalker spell from your graveyard with mana value less than or equal to that spell's mana value without paying its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
 DeckHints:Ability$Graveyard|Mill

@@ -1,0 +1,10 @@
+Name:Warped Tusker
+ManaCost:7
+Types:Creature Eldrazi Trilobite
+PT:6/8
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When you cast or cycle CARDNAME, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+K:Cycling:2 G
+Oracle:Reach\nWhen you cast or cycle Warped Tusker, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."\nCycling {2}{G} ({2}{G}, Discard this card: Draw a card.)

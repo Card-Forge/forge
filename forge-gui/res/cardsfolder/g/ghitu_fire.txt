@@ -2,6 +2,6 @@ Name:Ghitu Fire
 ManaCost:X R
 Types:Sorcery
 K:MayFlashCost:2
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 Oracle:You may cast Ghitu Fire as though it had flash if you pay {2} more to cast it. (You may cast it any time you could cast an instant.)\nGhitu Fire deals X damage to any target.

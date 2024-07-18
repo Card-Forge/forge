@@ -1,7 +1,7 @@
 Name:Awakening of Vitu-Ghazi
 ManaCost:3 G G
 Types:Instant
-A:SP$ PutCounter | Cost$ 3 G G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | CounterType$ P1P1 | CounterNum$ 9 | SubAbility$ DBAnimate | SpellDescription$ Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.
+A:SP$ PutCounter | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | CounterType$ P1P1 | CounterNum$ 9 | SubAbility$ DBAnimate | SpellDescription$ Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$ Legendary,Creature,Elemental | Keywords$ Haste | Name$ Vitu-Ghazi | Duration$ Permanent
 DeckHas:Ability$Counters
 Oracle:Put nine +1/+1 counters on target land you control. It becomes a legendary 0/0 Elemental creature with haste named Vitu-Ghazi. It's still a land.

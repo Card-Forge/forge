@@ -1,7 +1,7 @@
 Name:Valorous Stance
 ManaCost:1 W
 Types:Instant
-A:SP$ Charm | Cost$ 1 W | Choices$ DBIndestructible,DBDestroy
+A:SP$ Charm | Choices$ DBIndestructible,DBDestroy
 SVar:DBIndestructible:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose target creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Choose target creature with toughness 4 or greater | SpellDescription$ Destroy target creature with toughness 4 or greater.
 Oracle:Choose one —\n• Target creature gains indestructible until end of turn.\n• Destroy target creature with toughness 4 or greater.

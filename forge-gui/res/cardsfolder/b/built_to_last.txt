@@ -1,6 +1,6 @@
 Name:Built to Last
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's an artifact creature, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's an artifact creature, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Indestructible | ConditionDefined$ Targeted | ConditionPresent$ Artifact
 Oracle:Target creature gets +2/+2 until end of turn. If it's an artifact creature, it gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

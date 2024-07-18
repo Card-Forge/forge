@@ -2,7 +2,7 @@ Name:Kaya's Guile
 ManaCost:1 W B
 Types:Instant
 K:Entwine:3
-A:SP$ Charm | Cost$ 1 W B | Choices$ DBSac,DBExile,DBSpirit,DBGain | CharmNum$ 2
+A:SP$ Charm | Choices$ DBSac,DBExile,DBSpirit,DBGain | CharmNum$ 2
 SVar:DBSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.OppOwn | Origin$ Graveyard | Destination$ Exile | SpellDescription$ Exile all cards from each opponent's graveyard.
 SVar:DBSpirit:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.

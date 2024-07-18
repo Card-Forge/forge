@@ -1,7 +1,7 @@
 Name:Vampiric Tutor
 ManaCost:B
 Types:Instant
-A:SP$ ChangeZone | Cost$ B | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, then shuffle and put that card on top. You lose 2 life. | SubAbility$ DBLoseLife
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | SpellDescription$ Search your library for a card, then shuffle and put that card on top. You lose 2 life. | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2
 AI:RemoveDeck:All
 Oracle:Search your library for a card, then shuffle and put that card on top. You lose 2 life.

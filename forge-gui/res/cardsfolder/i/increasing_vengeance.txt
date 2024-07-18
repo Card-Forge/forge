@@ -2,6 +2,6 @@ Name:Increasing Vengeance
 ManaCost:R R
 Types:Instant
 K:Flashback:3 R R
-A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | Amount$ X | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
+A:SP$ CopySpellAbility | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | Amount$ X | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
 SVar:X:Count$wasCastFromGraveyard.2.1
 Oracle:Copy target instant or sorcery spell you control. If this spell was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.\nFlashback {3}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

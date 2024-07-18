@@ -1,7 +1,7 @@
 Name:Strength of Solidarity
 ManaCost:G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Choose target creature you control. Put a +1/+1 counter on it for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Choose target creature you control. Put a +1/+1 counter on it for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
 DeckHas:Ability$Party|Counters
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard
 SVar:X:Count$Party

@@ -1,7 +1,7 @@
 Name:Wolf Strike
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +X | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ {c:ThisTargetedCard} gets +2/+0 until end of turn if it's night. | SpellDescription$ Target creature you control gets +2/+0 until end of turn if it's night. Then it deals damage equal to its power to target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +X | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | StackDescription$ {c:ThisTargetedCard} gets +2/+0 until end of turn if it's night. | SpellDescription$ Target creature you control gets +2/+0 until end of turn if it's night. Then it deals damage equal to its power to target creature you don't control.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ Y | DamageSource$ ParentTarget | StackDescription$ Then it deals damage equal to its power to {c:ThisTargetedCard}.
 SVar:X:Count$Night.2.0
 SVar:Y:ParentTargeted$CardPower

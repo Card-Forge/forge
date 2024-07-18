@@ -1,5 +1,5 @@
 Name:Acquire
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Artifact | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles.
 Oracle:Search target opponent's library for an artifact card and put that card onto the battlefield under your control. Then that player shuffles.

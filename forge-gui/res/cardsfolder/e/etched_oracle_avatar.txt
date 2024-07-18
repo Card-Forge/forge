@@ -2,6 +2,6 @@ Name:Etched Oracle Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:+1/-4
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AddKeyword$ Alternative Cost:W U B R G | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
+S:Mode$ AlternativeCost | ValidSA$ Spell | ValidPlayer$ You | Cost$ W U B R G | EffectZone$ Command | Description$ You may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
 AI:RemoveDeck:Random
 Oracle:Hand +1, life -4\nYou may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.

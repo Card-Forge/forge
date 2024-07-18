@@ -1,7 +1,7 @@
 Name:Planar Overlay
 ManaCost:2 U
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ ChooseMountain | StackDescription$ SpellDescription | SubAbility$ DBChangeZone | SpellDescription$ Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseMountain | StackDescription$ SpellDescription | SubAbility$ DBChangeZone | SpellDescription$ Each player chooses a land they control of each basic land type. Return those lands to their owners' hands.
 SVar:ChooseMountain:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Mountain.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChooseSwamp | AILogic$ WorstCard
 SVar:ChooseSwamp:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Swamp.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChooseIsland | AILogic$ WorstCard
 SVar:ChooseIsland:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Island.RememberedPlayerCtrl | Mandatory$ True | RememberChosen$ True | SubAbility$ ChoosePlains | AILogic$ WorstCard

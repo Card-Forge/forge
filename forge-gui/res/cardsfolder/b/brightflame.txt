@@ -1,7 +1,7 @@
 Name:Brightflame
 ManaCost:X R R W W
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R W W | ValidTgts$ Creature | Radiance$ True | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Radiance — Brightflame deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
+A:SP$ DealDamage | ValidTgts$ Creature | Radiance$ True | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ Radiance — CARDNAME deals X damage to target creature and each other creature that shares a color with it. You gain life equal to the damage dealt this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$TotalDamageDoneByThisTurn

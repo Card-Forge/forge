@@ -1,6 +1,6 @@
 Name:Barge In
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target attacking creature gets +2/+2 until end of turn. Each attacking non-Human creature gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target attacking creature gets +2/+2 until end of turn. Each attacking non-Human creature gains trample until end of turn.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.nonHuman+attacking | KW$ Trample
 Oracle:Target attacking creature gets +2/+2 until end of turn. Each attacking non-Human creature gains trample until end of turn.

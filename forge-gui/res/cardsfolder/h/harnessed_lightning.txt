@@ -1,8 +1,8 @@
 Name:Harnessed Lightning
 ManaCost:1 R
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 R | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Harnessed Lightning deals that much damage to that creature.
-SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ Pay Energy for Damage | SubAbility$ DBDealDamage
+A:SP$ PutCounter | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. CARDNAME deals that much damage to that creature.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ CARDNAME deals that much damage to that creature.
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber

@@ -1,6 +1,6 @@
 Name:Ulcerate
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBLoseLife | SpellDescription$ Target creature gets -3/-3 until end of turn. You lose 3 life.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SubAbility$ DBLoseLife | SpellDescription$ Target creature gets -3/-3 until end of turn. You lose 3 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
 Oracle:Target creature gets -3/-3 until end of turn. You lose 3 life.

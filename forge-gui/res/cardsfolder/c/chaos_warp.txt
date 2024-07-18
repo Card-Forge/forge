@@ -1,6 +1,6 @@
 Name:Chaos Warp
 ManaCost:2 R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 R | Origin$ Battlefield | Destination$ Library | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDig | Shuffle$ True | SpellDescription$ The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SubAbility$ DBDig | Shuffle$ True | SpellDescription$ The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield.
 SVar:DBDig:DB$ Dig | Defined$ TargetedOwner | DigNum$ 1 | Reveal$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | ChangeNum$ All | ChangeValid$ Permanent
 Oracle:The owner of target permanent shuffles it into their library, then reveals the top card of their library. If it's a permanent card, they put it onto the battlefield.

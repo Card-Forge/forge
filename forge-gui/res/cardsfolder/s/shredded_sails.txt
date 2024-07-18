@@ -1,7 +1,7 @@
 Name:Shredded Sails
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | CharmNum$ 1 | Choices$ DestArt,DmgFly
+A:SP$ Charm | CharmNum$ 1 | Choices$ DestArt,DmgFly
 SVar:DestArt:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 SVar:DmgFly:DB$ DealDamage | ValidTgts$ Creature.withFlying | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature with flying.
 K:Cycling:2

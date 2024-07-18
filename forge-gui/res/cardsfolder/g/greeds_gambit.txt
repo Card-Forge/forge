@@ -1,0 +1,18 @@
+Name:Greed's Gambit
+ManaCost:3 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you draw three cards, gain 6 life, and create three 2/1 black Bat creature tokens with flying.
+SVar:TrigDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 6 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ b_2_1_bat_flying | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ At the beginning of your end step, you discard a card, lose 2 life, and sacrifice a creature.
+SVar:TrigDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBSacrifice
+SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDiscardThree | TriggerDescription$ When CARDNAME leaves the battlefield, you discard three cards, lose 6 life, and sacrifice three creatures.
+SVar:TrigDiscardThree:DB$ Discard | NumCards$ 3 | Mode$ TgtChoose | SubAbility$ DBLoseLifeThree
+SVar:DBLoseLifeThree:DB$ LoseLife | Defined$ You | LifeAmount$ 6 | SubAbility$ DBSacrificeThree
+SVar:DBSacrificeThree:DB$ Sacrifice | SacValid$ Creature | SacMessage$ three creatures | Amount$ 3
+DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Bat
+DeckHints:Ability$Discard
+Oracle:When Greed's Gambit enters the battlefield, you draw three cards, gain 6 life, and create three 2/1 black Bat creature tokens with flying.\nAt the beginning of your end step, you discard a card, lose 2 life, and sacrifice a creature.\nWhen Greed's Gambit leaves the battlefield, you discard three cards, lose 6 life, and sacrifice three creatures.

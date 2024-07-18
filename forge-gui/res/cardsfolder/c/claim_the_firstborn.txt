@@ -1,5 +1,5 @@
 Name:Claim the Firstborn
 ManaCost:R
 Types:Sorcery
-A:SP$ GainControl | Cost$ R | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature with mana value 3 or less until end of turn. Untap that creature. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature with mana value 3 or less until end of turn. Untap that creature. It gains haste until end of turn.
 Oracle:Gain control of target creature with mana value 3 or less until end of turn. Untap that creature. It gains haste until end of turn.

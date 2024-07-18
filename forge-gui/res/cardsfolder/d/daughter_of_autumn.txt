@@ -2,7 +2,7 @@ Name:Daughter of Autumn
 ManaCost:2 G G
 Types:Legendary Creature Avatar
 PT:2/4
-A:AB$ Effect | Cost$ W | Name$ Daughter of Autumn's Effect | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature to redirect damage from | ReplacementEffects$ DamageEvent | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to target white creature this turn is dealt to CARDNAME instead.
+A:AB$ Effect | Cost$ W | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature to redirect damage from | ReplacementEffects$ DamageEvent | Duration$ UntilHostLeavesPlayOrEOT | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ The next 1 damage that would be dealt to target white creature this turn is dealt to CARDNAME instead.
 SVar:DamageEvent:Event$ DamageDone | ValidTarget$ Creature.IsRemembered | ReplaceWith$ DamageEventDmg | DamageTarget$ EffectSource | Description$ The next 1 damage that would be dealt to target white creature this turn is dealt to EFFECTSOURCE instead.
 SVar:DamageEventDmg:DB$ ReplaceSplitDamage | DamageTarget$ EffectSource
 AI:RemoveDeck:All

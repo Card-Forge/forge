@@ -10,5 +10,5 @@ ALTERNATE
 Name:Usher to Safety
 ManaCost:W
 Types:Instant Adventure
-A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SpellDescription$ Return target permanent you control to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SpellDescription$ Return target permanent you control to its owner's hand. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Return target permanent you control to its owner's hand. (Then exile this card. You may cast the creature later from exile.)

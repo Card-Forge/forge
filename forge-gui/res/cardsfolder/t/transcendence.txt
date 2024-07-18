@@ -7,5 +7,6 @@ T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigL
 SVar:TrigLoseGame:DB$ LosesGame | Defined$ You
 SVar:TrigLifeGain:DB$ GainLife | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount/Times.2
+SVar:AICastPreference:NeverCastIfLifeAbove$ 5
 AI:RemoveDeck:Random
 Oracle:You don't lose the game for having 0 or less life.\nWhen you have 20 or more life, you lose the game.\nWhenever you lose life, you gain 2 life for each 1 life you lost. (Damage dealt to you causes you to lose life.)

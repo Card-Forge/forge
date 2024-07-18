@@ -1,0 +1,11 @@
+Name:Harvestrite Host
+ManaCost:2 W
+Types:Creature Rabbit Citizen
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rabbit.Other+YouCtrl | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another Rabbit you control enters, target creature you control gets +1/+0 until end of turn. Then draw a card if this is the second time this ability has resolved this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2
+SVar:Resolved:Count$ResolvedThisTurn
+SVar:PlayMain1:TRUE
+DeckHints:Type$Rabbit
+Oracle:Whenever Harvestrite Host or another Rabbit you control enters, target creature you control gets +1/+0 until end of turn. Then draw a card if this is the second time this ability has resolved this turn.

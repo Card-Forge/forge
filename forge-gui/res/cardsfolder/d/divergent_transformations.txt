@@ -2,7 +2,7 @@ Name:Divergent Transformations
 ManaCost:6 R
 Types:Instant
 K:Undaunted
-A:SP$ ChangeZone | Cost$ 6 R | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBTransform | SpellDescription$ Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library.
+A:SP$ ChangeZone | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBTransform | SpellDescription$ Exile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library.
 SVar:DBTransform:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBReveal | SubAbility$ DBCleanRemembered
 SVar:DBReveal:DB$ DigUntil | Defined$ ImprintedController | Amount$ 1 | Valid$ Creature | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ 0 | FoundDestination$ Battlefield | Shuffle$ True
 SVar:DBCleanRemembered:DB$ Cleanup | ClearRemembered$ True

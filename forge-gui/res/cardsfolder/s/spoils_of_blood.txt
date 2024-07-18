@@ -1,6 +1,6 @@
 Name:Spoils of Blood
 ManaCost:B
 Types:Instant
-A:SP$ Token | Cost$ B | TokenAmount$ 1 | TokenScript$ b_x_x_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X black Horror creature token, where X is the number of creatures that died this turn.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_horror | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X black Horror creature token, where X is the number of creatures that died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 Oracle:Create an X/X black Horror creature token, where X is the number of creatures that died this turn.

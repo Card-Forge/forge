@@ -1,6 +1,6 @@
 Name:Anguished Unmaking
 ManaCost:1 W B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W B | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBLoseLife | SpellDescription$ Exile target nonland permanent. You lose 3 life.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBLoseLife | SpellDescription$ Exile target nonland permanent. You lose 3 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
 Oracle:Exile target nonland permanent. You lose 3 life.

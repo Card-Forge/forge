@@ -1,5 +1,5 @@
 Name:Ashen Powder
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.OppCtrl | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.OppCtrl | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control.
 Oracle:Put target creature card from an opponent's graveyard onto the battlefield under your control.

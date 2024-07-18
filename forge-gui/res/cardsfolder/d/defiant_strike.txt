@@ -1,6 +1,6 @@
 Name:Defiant Strike
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +1/+0 until end of turn. Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | SubAbility$ DBDraw | SpellDescription$ Target creature gets +1/+0 until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Target creature gets +1/+0 until end of turn.\nDraw a card.

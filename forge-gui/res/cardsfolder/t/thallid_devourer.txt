@@ -5,7 +5,7 @@ PT:2/2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a spore counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ SPORE | CounterNum$ 1 | SpellDescription$ Put a spore counter on CARDNAME.
 A:AB$ Token | Cost$ SubCounter<3/SPORE> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
-A:AB$ Pump | Cost$ Sac<1/Saproling> | Defined$ Self | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Thallid Devourer gets +1/+2 until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Saproling> | Defined$ Self | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ CARDNAME gets +1/+2 until end of turn.
 DeckHints:Type$Fungus
 DeckHas:Ability$Counters|Token|Sacrifice
 Oracle:At the beginning of your upkeep, put a spore counter on Thallid Devourer.\nRemove three spore counters from Thallid Devourer: Create a 1/1 green Saproling creature token.\nSacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.

@@ -1,6 +1,6 @@
 Name:Cauldron Haze
 ManaCost:1 WB
 Types:Instant
-A:SP$ Pump | Cost$ 1 WB | ValidTgts$ Creature | KW$ Persist | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target creature | SpellDescription$ Choose any number of target creatures. Each of those creatures gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
+A:SP$ Pump | ValidTgts$ Creature | KW$ Persist | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Select target creature | SpellDescription$ Choose any number of target creatures. Each of those creatures gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)
 SVar:X:Count$Valid Creature
 Oracle:Choose any number of target creatures. Each of those creatures gains persist until end of turn. (When it dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)

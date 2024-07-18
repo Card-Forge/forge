@@ -1,6 +1,6 @@
 Name:Wind Shear
 ManaCost:2 G
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.withFlying+attacking | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBDebuff | IsCurse$ True | SpellDescription$ Attacking creatures with flying get -2/-2 and lose flying until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.withFlying+attacking | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBDebuff | IsCurse$ True | SpellDescription$ Attacking creatures with flying get -2/-2 and lose flying until end of turn.
 SVar:DBDebuff:DB$ AnimateAll | ValidCards$ Creature.withFlying+attacking | RemoveKeywords$ Flying
 Oracle:Attacking creatures with flying get -2/-2 and lose flying until end of turn.

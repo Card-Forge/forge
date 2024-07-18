@@ -2,7 +2,7 @@ Name:Undying Flames
 ManaCost:4 R R
 Types:Sorcery
 K:Epic
-A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ UndyingDamage | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. Undying Flames deals damage to any target equal to that card's mana value.
+A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ UndyingDamage | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. CARDNAME deals damage to any target equal to that card's mana value.
 SVar:UndyingDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ FlameX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:FlameX:Remembered$CardManaCost

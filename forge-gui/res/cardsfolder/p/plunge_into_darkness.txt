@@ -2,13 +2,13 @@ Name:Plunge into Darkness
 ManaCost:1 B
 Types:Instant
 K:Entwine:B
-A:SP$ Charm | Cost$ 1 B | Choices$ DBSac,DBChooseNumber | CharmNum$ 1
+A:SP$ Charm | Choices$ DBSac,DBChooseNumber | CharmNum$ 1
 SVar:DBSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBGainLife | SpellDescription$ Sacrifice any number of creatures, then you gain 3 life for each sacrificed creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ GainLifeX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl
 SVar:GainLifeX:Count$RememberedSize/Thrice
-SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ You | ListTitle$ Pay X life? | Max$ LifeAmountX | AILogic$ DigACard | SubAbility$ DBDig | SpellDescription$ Pay X life, then look at the top X cards of your library. Put one of those cards into your hand, and exile the rest.
+SVar:DBChooseNumber:DB$ ChooseNumber | Defined$ You | ListTitle$ amount of life to pay | Max$ LifeAmountX | AILogic$ DigACard | SubAbility$ DBDig | SpellDescription$ Pay X life, then look at the top X cards of your library. Put one of those cards into your hand, and exile the rest.
 SVar:DBDig:DB$ Dig | DigNum$ Y | DestinationZone2$ Exile | UnlessCost$ PayLife<Y> | UnlessSwitched$ True | UnlessPayer$ You
 SVar:Y:Count$ChosenNumber
 SVar:LifeAmountX:Count$YourLifeTotal/LimitMin.0

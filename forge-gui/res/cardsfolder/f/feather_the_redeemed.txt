@@ -4,7 +4,7 @@ Types:Legendary Creature Angel
 PT:3/4
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Instant.YouCtrl,Sorcery.YouCtrl | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl+inZoneBattlefield | Execute$ DelayedBuyback | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell that targets a creature you control, exile that card instead of putting it into your graveyard as it resolves. If you do, return it to your hand at the beginning of the next end step.
-SVar:DelayedBuyback:DB$ Effect | ReplacementEffects$ MoveToExileReplace | RememberObjects$ TriggeredCard | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.inZoneStack | ExileOnMoved$ Stack | SpellDescription$ Put that card into your hand instead of into your graveyard as it resolves.
+SVar:DelayedBuyback:DB$ Effect | ReplacementEffects$ MoveToExileReplace | RememberObjects$ TriggeredCard | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.inZoneStack | ExileOnMoved$ Stack
 SVar:MoveToExileReplace:Event$ Moved | ValidCard$ Card.IsRemembered+YouOwn | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ ReplaceExile | Description$ Exile that card instead of putting it into your graveyard as it resolves. If you do, return it to your hand at the beginning of the next end step.
 SVar:ReplaceExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ If you do, return it to your hand at the beginning of the next end step.

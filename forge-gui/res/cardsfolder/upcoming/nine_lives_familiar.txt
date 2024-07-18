@@ -1,0 +1,10 @@
+Name:Nine-Lives Familiar
+ManaCost:1 B B
+Types:Creature Cat
+PT:1/1
+K:etbCounter:REVIVAL:8:ValidCard$ Card.Self+wasCastByYou:This creature enters with eight revival counters on it if you cast it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_REVIVAL | TriggerZones$ Battlefield | Execute$ TrigDelayTrigger | TriggerDescription$ When this creature dies, if it had a revival counter on it, return it to the battlefield with one fewer revival counter on it at the beginning of the next end step.
+SVar:TrigDelayTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigReturn | RememberObjects$ TriggeredNewCardLKICopy | TriggerDescription$ Return this creature to the battlefield with one fewer revival counter on it at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | WithCountersType$ REVIVAL | WithCountersAmount$ X
+SVar:X:Spawner>TriggeredCard$CardCounters.REVIVAL/Minus.1
+Oracle:This creature enters with eight revival counters on it if you cast it.\nWhen this creature dies, if it had a revival counter on it, return it to the battlefield with one fewer revival counter on it at the beginning of the next end step.

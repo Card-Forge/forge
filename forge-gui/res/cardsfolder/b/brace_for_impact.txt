@@ -1,7 +1,7 @@
 Name:Brace for Impact
 ManaCost:4 W
 Types:Instant
-A:SP$ Effect | Cost$ 4 W | ValidTgts$ Creature.MultiColor | TgtPrompt$ Select target multicolored creature | Name$ Brace Effect | ExileOnMoved$ Battlefield | ReplacementEffects$ BraceReplace | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
+A:SP$ Effect | ValidTgts$ Creature.MultiColor | TgtPrompt$ Select target multicolored creature | ExileOnMoved$ Battlefield | ReplacementEffects$ BraceReplace | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
 SVar:BraceReplace:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ ImpactCounters | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to targeted multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
 SVar:ImpactCounters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ReplaceCount$DamageAmount

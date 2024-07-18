@@ -1,7 +1,7 @@
 Name:Mind Drain
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target opponent discards two cards, mills a card, and loses 1 life. You gain 1 life. (To mill a card, a player puts the top card of their library into their graveyard.)
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBMill | SpellDescription$ Target opponent discards two cards, mills a card, and loses 1 life. You gain 1 life. (To mill a card, a player puts the top card of their library into their graveyard.)
 SVar:DBMill:DB$ Mill | Defined$ Targeted | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1

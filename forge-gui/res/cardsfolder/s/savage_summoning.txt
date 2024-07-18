@@ -2,7 +2,7 @@ Name:Savage Summoning
 ManaCost:G
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ Effect | Cost$ G | StaticAbilities$ STFlash | Triggers$ SpellCastTrig | SpellDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
+A:SP$ Effect | StaticAbilities$ STFlash | Triggers$ SpellCastTrig | SpellDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:STFlash:Mode$ CastWithFlash | ValidCard$ Card.Creature | ValidSA$ Spell | Caster$ You
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ SavageSummon | OneOff$ True | Static$ True | TriggerDescription$ The next creature spell you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it.
 SVar:SavageSummon:DB$ Effect | ReplacementEffects$ AntiMagic,ETBCounters | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack

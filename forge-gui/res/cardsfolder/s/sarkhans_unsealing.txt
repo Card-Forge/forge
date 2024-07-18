@@ -1,8 +1,8 @@
 Name:Sarkhan's Unsealing
 ManaCost:3 R
 Types:Enchantment
-T:Mode$ SpellCast | ValidCard$ Creature.powerGE4+powerLE6 | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with power 4, 5, or 6, Sarkhan's Unsealing deals 4 damage to any target.
+T:Mode$ SpellCast | ValidCard$ Creature.powerGE4+powerLE6 | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with power 4, 5, or 6, CARDNAME deals 4 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to any target.
-T:Mode$ SpellCast | ValidCard$ Creature.powerGE7 | ValidActivatingPlayer$ You | Execute$ TrigDamageAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with power 7 or greater, Sarkhan's Unsealing deals 4 damage to each opponent and each creature and planeswalker they control.
+T:Mode$ SpellCast | ValidCard$ Creature.powerGE7 | ValidActivatingPlayer$ You | Execute$ TrigDamageAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with power 7 or greater, CARDNAME deals 4 damage to each opponent and each creature and planeswalker they control.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | ValidPlayers$ Player.Opponent | NumDmg$ 4 | ValidDescription$ each opponent and each creature and planeswalker they control.
 Oracle:Whenever you cast a creature spell with power 4, 5, or 6, Sarkhan's Unsealing deals 4 damage to any target.\nWhenever you cast a creature spell with power 7 or greater, Sarkhan's Unsealing deals 4 damage to each opponent and each creature and planeswalker they control.

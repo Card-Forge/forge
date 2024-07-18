@@ -1,5 +1,5 @@
 Name:Glare of Heresy
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.White | TgtPrompt$ Select target white permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target white permanent.
+A:SP$ ChangeZone | ValidTgts$ Permanent.White | TgtPrompt$ Select target white permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target white permanent.
 Oracle:Exile target white permanent.

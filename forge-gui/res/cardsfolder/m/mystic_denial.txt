@@ -1,5 +1,5 @@
 Name:Mystic Denial
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target Creatire or Sorcery spell | ValidTgts$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creatire or Sorcery spell | ValidTgts$ Creature,Sorcery | SpellDescription$ Counter target creature or sorcery spell.
 Oracle:Counter target creature or sorcery spell.

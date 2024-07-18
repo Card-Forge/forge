@@ -1,5 +1,5 @@
 Name:Mortal's Ardor
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | SpellDescription$ Target creature gets +1/+1 and gains lifelink until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Lifelink | SpellDescription$ Target creature gets +1/+1 and gains lifelink until end of turn.
 Oracle:Target creature gets +1/+1 and gains lifelink until end of turn. (Damage dealt by the creature also causes its controller to gain that much life.)

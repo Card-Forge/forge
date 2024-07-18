@@ -1,0 +1,7 @@
+Name:Strix Serenade
+ManaCost:U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target artifact, creature, or planeswalker spell | ValidTgts$ Artifact,Creature,Planeswalker | SubAbility$ DBToken | SpellDescription$ Counter target artifact, creature, or planeswalker spell.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ TargetedController | TokenScript$ u_2_2_bird_flying | SpellDescription$ Its controller creates a 2/2 blue Bird creature token with flying.
+DeckHas:Ability$Token & Type$Bird
+Oracle:Counter target artifact, creature, or planeswalker spell. Its controller creates a 2/2 blue Bird creature token with flying.

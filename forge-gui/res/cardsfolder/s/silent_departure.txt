@@ -2,5 +2,5 @@ Name:Silent Departure
 ManaCost:U
 Types:Sorcery
 K:Flashback:4 U
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 Oracle:Return target creature to its owner's hand.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

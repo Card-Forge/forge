@@ -1,6 +1,6 @@
 Name:Dispense Justice
 ManaCost:2 W
 Types:Instant
-A:SP$ Sacrifice | Cost$ 2 W | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ Attacking Creature | Amount$ X | SpellDescription$ Target player sacrifices an attacking creature. Metalcraft — That player sacrifices two attacking creatures instead if you control three or more artifacts.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.attacking | SacMessage$ Attacking Creature | Amount$ X | SpellDescription$ Target player sacrifices an attacking creature. Metalcraft — That player sacrifices two attacking creatures instead if you control three or more artifacts.
 SVar:X:Count$Metalcraft.2.1
 Oracle:Target player sacrifices an attacking creature.\nMetalcraft — That player sacrifices two attacking creatures instead if you control three or more artifacts.

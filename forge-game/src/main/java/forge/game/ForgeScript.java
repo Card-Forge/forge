@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.card.CounterEnumType;
 import forge.game.cost.Cost;
+import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
@@ -18,6 +19,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -135,12 +137,6 @@ public class ForgeScript {
                 }
             }
             return found;
-        } else if (property.startsWith("HasSubtype")) {
-            final String subType = property.substring(11);
-            return cardState.getTypeWithChanges().hasSubtype(subType);
-        } else if (property.startsWith("HasNoSubtype")) {
-            final String subType = property.substring(13);
-            return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
                 if (sa.isActivatedAbility() && sa.getPayCosts().hasTapCost()) {
@@ -213,18 +209,26 @@ public class ForgeScript {
             return sa.isBargained();
         } else if (property.equals("Backup")) {
             return sa.isBackup();
+        } else if (property.equals("Bestow")) {
+            return sa.isBestow();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
             return sa.isBuyback();
         } else if (property.equals("Craft")) {
             return sa.isCraft();
+        } else if (property.equals("Crew")) {
+            return sa.isCrew();
         } else if (property.equals("Cycling")) {
             return sa.isCycling();
         } else if (property.equals("Dash")) {
             return sa.isDash();
         } else if (property.equals("Disturb")) {
             return sa.isDisturb();
+        } else if (property.equals("Embalm")) {
+            return sa.isEmbalm();
+        } else if (property.equals("Eternalize")) {
+            return sa.isEternalize();
         } else if (property.equals("Flashback")) {
             return sa.isFlashback();
         } else if (property.equals("Jumpstart")) {
@@ -244,7 +248,7 @@ public class ForgeScript {
         } else if (property.equals("isCastFaceDown")) {
             return sa.isCastFaceDown();
         } else if (property.equals("Modular")) {
-            return sa.hasParam("Modular");
+            return sa.isKeyword(Keyword.MODULAR);
         } else if (property.equals("Equip")) {
             return sa.isEquip();
         } else if (property.equals("Boast")) {
@@ -259,14 +263,16 @@ public class ForgeScript {
             return sa.isForetold();
         } else if (property.equals("Plotting")) {
             return sa.isPlotting();
+        } else if (property.equals("Outlast")) {
+            return sa.isOutlast();
         } else if (property.equals("Modal")) {
             return sa.getApi() == ApiType.Charm;
         } else if (property.equals("ClassLevelUp")) {
             return sa.getApi() == ApiType.ClassLevelUp;
         } else if (property.equals("Daybound")) {
-            return sa.hasParam("Daybound");
+            return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
-            return sa.hasParam("Nightbound");
+            return sa.isKeyword(Keyword.NIGHTBOUND);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
         } else if (property.equals("ChapterNotLore")) {
@@ -338,7 +344,7 @@ public class ForgeScript {
             String unescaped = k[1].replace("~", "+");
             boolean found = false;
             for (GameObject o : AbilityUtils.getDefinedObjects(source, unescaped, spellAbility)) {
-                if (sa.isTargeting(o)) {
+                if (sa.getRootAbility().isTargeting(o)) {
                     found = true;
                     break;
                 }
@@ -379,6 +385,43 @@ public class ForgeScript {
             if (sa.isManaAbilityFor(paidFor, colorCanUse)) {
                 return false;
             }
+        } else if(property.equals("NamedSpell")) {
+            boolean found = false;
+            for (String name : source.getNamedCards()) {
+                if (sa.cardState.getName().equals(name)) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        } else if (property.equals("otherAbility")) {
+            if (sa.equals(spellAbility)) {
+                return false;
+            }
+            if (spellAbility instanceof SpellAbility) {
+                SpellAbility sourceSpell = (SpellAbility) spellAbility;
+                if (sa.getRootAbility().equals(sourceSpell.getRootAbility())) {
+                    return false;
+                }
+            }
+        } else if (property.equals("CouldCastTiming")) {
+            Card host = sa.getHostCard();
+            Game game = host.getGame();
+            if (game.getStack().isSplitSecondOnStack()) {
+                return false;
+            }
+            // Adapted from SpellAbility.canCastTiming, to determine if the SA could be cast at the current timing (assuming the controller had priority).
+
+            if (sourceController.canCastSorcery() || sa.getRestrictions().isInstantSpeed()) {
+                return true;
+            }
+            if (sa.isSpell()) {
+                return host.isInstant() || host.hasKeyword(Keyword.FLASH) || StaticAbilityCastWithFlash.anyWithFlash(sa, host, sourceController);
+            }
+            if (sa.isActivatedAbility()) {
+                return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
+            }
+            return true;
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);
         }

@@ -67,11 +67,7 @@ public class CostTapType extends CostPartWithList {
         if (!canTapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
-
-        if (ability.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
+        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         return typeList.size();
     }
@@ -169,11 +165,7 @@ public class CostTapType extends CostPartWithList {
         if (!canTapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
-
-        if (ability.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
+        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         if (sameType) {
             for (final Card card : typeList) {
@@ -186,7 +178,7 @@ public class CostTapType extends CostPartWithList {
 
         if (totalPower) {
             final int i = Integer.parseInt(totalP);
-            return CardLists.getTotalPower(typeList, true, ability.hasParam("Crew")) >= i;
+            return CardLists.getTotalPower(typeList, true, ability.isCrew()) >= i;
         }
 
         final int amount = this.getAbilityAmount(ability);

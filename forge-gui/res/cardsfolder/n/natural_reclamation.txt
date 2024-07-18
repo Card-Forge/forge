@@ -2,5 +2,5 @@ Name:Natural Reclamation
 ManaCost:4 G
 Types:Instant
 K:Cascade
-A:SP$ Destroy | Cost$ 4 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nDestroy target artifact or enchantment.

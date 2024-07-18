@@ -1,6 +1,6 @@
 Name:Divine Smite
 ManaCost:1 W
 Types:Instant
-A:SP$ Phases | Cost$ 1 W | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | IsCurse$ True | ConditionDefined$ Targeted | ConditionPresent$ Card.Black | ConditionCompare$ EQ0 | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Target creature or planeswalker an opponent controls phases out. If that permanent is black, exile it instead. (If it phases out, treat it and anything attached to it as though they don't exist until its controller's next turn.)
+A:SP$ Phases | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | IsCurse$ True | ConditionDefined$ Targeted | ConditionPresent$ Card.Black | ConditionCompare$ EQ0 | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Target creature or planeswalker an opponent controls phases out. If that permanent is black, exile it instead. (If it phases out, treat it and anything attached to it as though they don't exist until its controller's next turn.)
 SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.Black | ConditionCompare$ EQ1 | StackDescription$ None
 Oracle:Target creature or planeswalker an opponent controls phases out. If that permanent is black, exile it instead. (If it phases out, treat it and anything attached to it as though they don't exist until its controller's next turn.)

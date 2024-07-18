@@ -1,5 +1,5 @@
 Name:Tyrannize
 ManaCost:3 BR BR
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 BR BR | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ Hand | UnlessCost$ PayLife<7> | UnlessPayer$ Targeted | SpellDescription$ Target player discards their hand unless they pay 7 life.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ Hand | UnlessCost$ PayLife<7> | UnlessPayer$ Targeted | SpellDescription$ Target player discards their hand unless they pay 7 life.
 Oracle:Target player discards their hand unless they pay 7 life.

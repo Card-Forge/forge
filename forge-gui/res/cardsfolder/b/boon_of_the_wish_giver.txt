@@ -1,6 +1,6 @@
 Name:Boon of the Wish-Giver
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 4 | SpellDescription$ Draw four cards.
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
 K:Cycling:1
 Oracle:Draw four cards.\nCycling {1} ({1}, Discard this card: Draw a card.)

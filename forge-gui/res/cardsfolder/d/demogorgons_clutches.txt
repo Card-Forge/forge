@@ -1,7 +1,7 @@
 Name:Demogorgon's Clutches
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBMill | SpellDescription$ Target opponent discards two cards, mills two cards, and loses 2 life. (To mill a card, a player puts the top card of their library into their graveyard.)
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBMill | SpellDescription$ Target opponent discards two cards, mills two cards, and loses 2 life. (To mill a card, a player puts the top card of their library into their graveyard.)
 SVar:DBMill:DB$ Mill | NumCards$ 2 | Defined$ ParentTarget | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ 2
 Oracle:Target opponent discards two cards, mills two cards, and loses 2 life. (To mill a card, a player puts the top card of their library into their graveyard.)

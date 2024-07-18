@@ -1,6 +1,6 @@
 Name:Quiet Speculation
 ManaCost:1 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Graveyard | ValidTgts$ Player | ChangeType$ Card.withFlashback | ChangeNum$ 3 | SpellDescription$ Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Graveyard | ValidTgts$ Player | ChangeType$ Card.withFlashback | ChangeNum$ 3 | SpellDescription$ Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles.
 AI:RemoveDeck:All
 Oracle:Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles.

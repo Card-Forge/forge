@@ -2,5 +2,5 @@ Name:That Which Was Taken
 ManaCost:5
 Types:Legendary Artifact
 S:Mode$ Continuous | Affected$ Permanent.counters_GE1_DIVINITY | AddKeyword$ Indestructible | Description$ Each permanent with a divinity counter on it has indestructible.
-A:AB$ PutCounter | Cost$ 4 T | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent other than That Which Was Taken | CounterType$ DIVINITY | CounterNum$ 1 | SpellDescription$ Put a divinity counter on target permanent other than CARDNAME.
+A:AB$ PutCounter | Cost$ 4 T | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent other than CARDNAME | CounterType$ DIVINITY | CounterNum$ 1 | SpellDescription$ Put a divinity counter on target permanent other than CARDNAME.
 Oracle:{4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.\nEach permanent with a divinity counter on it has indestructible.

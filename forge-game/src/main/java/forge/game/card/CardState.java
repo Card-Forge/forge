@@ -20,6 +20,7 @@ package forge.game.card;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -57,6 +58,7 @@ public class CardState extends GameObject implements IHasSVars {
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
+    private String oracleText = "";
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -64,6 +66,7 @@ public class CardState extends GameObject implements IHasSVars {
     private String baseLoyalty = "";
     private String baseDefense = "";
     private KeywordCollection intrinsicKeywords = new KeywordCollection();
+    private Set<Integer> attractionLights = null;
 
     private final FCollection<SpellAbility> nonManaAbilities = new FCollection<>();
     private final FCollection<SpellAbility> manaAbilities = new FCollection<>();
@@ -192,6 +195,15 @@ public class CardState extends GameObject implements IHasSVars {
         view.updateColors(card);
     }
 
+    public String getOracleText() {
+        return oracleText;
+    }
+    public void setOracleText(final String oracleText) {
+        this.oracleText = oracleText;
+        view.setOracleText(oracleText);
+    }
+
+
     public final int getBasePower() {
         return basePower;
     }
@@ -238,6 +250,15 @@ public class CardState extends GameObject implements IHasSVars {
     public final void setBaseDefense(final String string) {
         baseDefense = string;
         view.updateDefense(this);
+    }
+
+    public Set<Integer> getAttractionLights() {
+        return this.attractionLights;
+    }
+
+    public final void setAttractionLights(Set<Integer> attractionLights) {
+        this.attractionLights = attractionLights;
+        view.updateAttractionLights(this);
     }
 
     public final Collection<KeywordInterface> getCachedKeywords() {
@@ -311,6 +332,9 @@ public class CardState extends GameObject implements IHasSVars {
     }
     public final boolean removeIntrinsicKeyword(final KeywordInterface s) {
         return intrinsicKeywords.remove(s);
+    }
+    public final boolean removeIntrinsicKeyword(final Keyword k) {
+        return intrinsicKeywords.removeAll(k);
     }
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
@@ -581,10 +605,12 @@ public class CardState extends GameObject implements IHasSVars {
         setType(source.type);
         setManaCost(source.getManaCost());
         setColor(source.getColor());
+        setOracleText(source.getOracleText());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         setBaseLoyalty(source.getBaseLoyalty());
         setBaseDefense(source.getBaseDefense());
+        setAttractionLights(source.getAttractionLights());
         setSVars(source.getSVars());
 
         manaAbilities.clear();

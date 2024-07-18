@@ -1,5 +1,5 @@
 Name:Ob Nixilis's Cruelty
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | ReplaceDyingDefined$ Targeted | SpellDescription$ Target creature gets -5/-5 until end of turn. If that creature would die this turn, exile it instead.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | ReplaceDyingDefined$ Targeted | SpellDescription$ Target creature gets -5/-5 until end of turn. If that creature would die this turn, exile it instead.
 Oracle:Target creature gets -5/-5 until end of turn. If that creature would die this turn, exile it instead.

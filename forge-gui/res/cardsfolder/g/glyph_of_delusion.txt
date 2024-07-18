@@ -1,7 +1,7 @@
 Name:Glyph of Delusion
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Wall.blockedThisTurn | TgtPrompt$ Select target Wall that blocked this turn | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains "This creature doesn't untap during your untap step if it has a glyph counter on it" and "At the beginning of your upkeep, remove a glyph counter from this creature."
+A:SP$ Pump | ValidTgts$ Wall.blockedThisTurn | TgtPrompt$ Select target Wall that blocked this turn | SubAbility$ DBPutCounter | StackDescription$ SpellDescription | SpellDescription$ Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains "This creature doesn't untap during your untap step if it has a glyph counter on it" and "At the beginning of your upkeep, remove a glyph counter from this creature."
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ GLYPH | CounterNum$ X | ValidTgts$ Creature.blockedByValidThisTurn ParentTarget | TgtPrompt$ Select target creature blocked by target Wall this turn to put counters on | SubAbility$ Delude | IsCurse$ True
 SVar:X:Targeted$CardPower
 SVar:Delude:DB$ Animate | Defined$ ParentTarget | staticAbilities$ Delusional | Triggers$ TrigGlyphUpkeep | Duration$ Permanent | StackDescription$ None

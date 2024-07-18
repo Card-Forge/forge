@@ -7,7 +7,7 @@ SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ EQ11 | LifeTotal$ You | LifeAmount$ GEW | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
 SVar:TrigWin:DB$ WinsGame | Defined$ You
 SVar:X:Count$ColorsCtrl Permanent/LimitMax.5
-SVar:Y:Count$CardControllerTypes.Battlefield,Graveyard/LimitMax.6
+SVar:Y:Count$ValidBattlefield,Graveyard Card.YouCtrl$CardTypes/LimitMax.6
 SVar:Z:SVar$X/Plus.Y
 SVar:W:Count$YourStartingLife
 DeckHas:Ability$LifeGain

@@ -1,6 +1,6 @@
 Name:Structural Distortion
 ManaCost:3 R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDealDamage | SpellDescription$ Exile target artifact or land. CARDNAME deals 2 damage to that permanent's controller.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDealDamage | SpellDescription$ Exile target artifact or land. CARDNAME deals 2 damage to that permanent's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 Oracle:Exile target artifact or land. Structural Distortion deals 2 damage to that permanent's controller.

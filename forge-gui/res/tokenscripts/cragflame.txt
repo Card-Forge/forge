@@ -1,0 +1,6 @@
+Name:Cragflame
+ManaCost:no cost
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance & Trample & Haste | Description$ Equipped creature gets +1/+1 and has vigilance, trample, and haste.
+Oracle:Equipped creature gets +1/+1 and has vigilance, trample, and haste.\nEquip {2}

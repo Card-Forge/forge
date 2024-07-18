@@ -2,5 +2,5 @@ Name:Chainer's Edict
 ManaCost:1 B
 Types:Sorcery
 K:Flashback:5 B B
-A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SpellDescription$ Target player sacrifices a creature.
 Oracle:Target player sacrifices a creature.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

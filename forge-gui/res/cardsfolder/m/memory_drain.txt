@@ -1,6 +1,6 @@
 Name:Memory Drain
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBScry | SpellDescription$ Counter target spell. Scry 2.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBScry | SpellDescription$ Counter target spell. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Counter target spell. Scry 2.

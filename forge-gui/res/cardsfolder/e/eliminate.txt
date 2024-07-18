@@ -1,5 +1,5 @@
 Name:Eliminate
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.cmcLE3,Planeswalker.cmcLE3 | TgtPrompt$ Select target creature or planeswalker with mana value 3 or less | SpellDescription$ Destroy target creature or planeswalker with mana value 3 or less.
+A:SP$ Destroy | ValidTgts$ Creature.cmcLE3,Planeswalker.cmcLE3 | TgtPrompt$ Select target creature or planeswalker with mana value 3 or less | SpellDescription$ Destroy target creature or planeswalker with mana value 3 or less.
 Oracle:Destroy target creature or planeswalker with mana value 3 or less.

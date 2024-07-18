@@ -101,7 +101,6 @@ public class CardStorageReader {
         }
 
         this.charset = Charset.forName(CardStorageReader.DEFAULT_CHARSET_NAME);
-
     } // CardReader()
 
     private List<CardRules> loadCardsInRange(final List<File> files, final int from, final int to) {

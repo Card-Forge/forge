@@ -3,7 +3,7 @@ ManaCost:4 W U
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
 SVar:X:Count$Party
-A:SP$ GainLife | Cost$ 4 W U | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw three cards.
+A:SP$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ You gain 3 life and draw three cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
 DeckHas:Ability$Party
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard

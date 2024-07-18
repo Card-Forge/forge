@@ -17,7 +17,7 @@ ManaCost:no cost
 Colors:green
 Types:Creature Fungus Horror
 PT:3/3
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on Deathbonnet Hulk.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on CARDNAME.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | RememberChanged$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

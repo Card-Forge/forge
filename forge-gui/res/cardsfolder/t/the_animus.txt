@@ -1,0 +1,10 @@
+Name:The Animus
+ManaCost:2
+Types:Legendary Artifact
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, exile up to one target legendary creature card from a graveyard with a memory counter on it.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.Legendary | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target legendary creature card from a graveyard | Origin$ Graveyard | Destination$ Exile | WithCountersType$ MEMORY
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.Legendary+counters_GE1_MEMORY | TgtZone$ Exile | SorcerySpeed$ True | TgtPrompt$ Select target creature card in exile with a memory counter on it | SubAbility$ DBClone | StackDescription$ SpellDescription | SpellDescription$ Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it. Activate only as a sorcery.
+SVar:DBClone:DB$ Clone | Defined$ ParentTarget | ValidTgts$ Creature.Legendary+YouCtrl | CloneTarget$ ThisTargetedCard | TgtPrompt$ Select target legendary creature you control | Duration$ UntilYourNextTurn
+DeckHas:Ability$Counters|Graveyard
+DeckHints:Ability$Sacrifice|Discard|Mill & Type$Legendary
+Oracle:At the beginning of your end step, exile up to one target legendary creature card from a graveyard with a memory counter on it.\n{T}: Until your next turn, target legendary creature you control becomes a copy of target creature card in exile with a memory counter on it. Activate only as a sorcery.

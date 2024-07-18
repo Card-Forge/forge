@@ -1,0 +1,11 @@
+Name:Titans' Vanguard
+ManaCost:3 R G
+Types:Creature Eldrazi
+PT:5/5
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, put a +1/+1 counter on each colorless creature you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, put a +1/+1 counter on each colorless creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.Colorless+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+K:Trample
+DeckHas:Ability$Counters
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell and whenever Titans' Vanguard attacks, put a +1/+1 counter on each colorless creature you control.\nTrample

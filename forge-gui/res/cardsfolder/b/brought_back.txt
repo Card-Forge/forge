@@ -1,5 +1,5 @@
 Name:Brought Back
 ManaCost:W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ W W | ValidTgts$ Permanent.YouOwn+ThisTurnEnteredFrom_Battlefield | TgtPrompt$ Select up to two target permanent cards in your graveyard that were put there from the battlefield this turn | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Choose up to two target permanent cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield tapped.
+A:SP$ ChangeZone | ValidTgts$ Permanent.YouOwn+ThisTurnEnteredFrom_Battlefield | TgtPrompt$ Select up to two target permanent cards in your graveyard that were put there from the battlefield this turn | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Choose up to two target permanent cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield tapped.
 Oracle:Choose up to two target permanent cards in your graveyard that were put there from the battlefield this turn. Return them to the battlefield tapped.

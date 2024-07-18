@@ -1,6 +1,6 @@
 Name:Eye Gouge
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it. | SubAbility$ DBDestroy
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it. | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ParentTarget | ConditionDefined$ ParentTarget | ConditionPresent$ Cyclops
 Oracle:Target creature gets -1/-1 until end of turn. If it's a Cyclops, destroy it.

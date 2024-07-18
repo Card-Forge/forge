@@ -1,7 +1,7 @@
 Name:Shrewd Negotiation
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 U | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Choose target artifact you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact you control and target artifact or creature you don't control.
+A:SP$ Pump | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Choose target artifact you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact you control and target artifact or creature you don't control.
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Artifact.YouDontCtrl,Creature.YouDontCtrl | TgtPrompt$ Choose target artifact or creature you don't control
 AI:RemoveDeck:All
 Oracle:Exchange control of target artifact you control and target artifact or creature you don't control.

@@ -1,6 +1,6 @@
 Name:Voyage's End
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target creature to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBScry | SpellDescription$ Return target creature to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Return target creature to its owner's hand. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

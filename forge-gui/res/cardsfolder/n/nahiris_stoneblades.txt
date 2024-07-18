@@ -1,5 +1,5 @@
 Name:Nahiri's Stoneblades
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +2/+0 until end of turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SpellDescription$ Up to two target creatures each get +2/+0 until end of turn.
 Oracle:Up to two target creatures each get +2/+0 until end of turn.

@@ -1,5 +1,5 @@
 Name:Run Afoul
 ManaCost:G
 Types:Instant
-A:SP$ Sacrifice | Cost$ G | ValidTgts$ Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | SpellDescription$ Target opponent sacrifices a creature with flying.
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature.withFlying | SacMessage$ creature with flying | SpellDescription$ Target opponent sacrifices a creature with flying.
 Oracle:Target opponent sacrifices a creature with flying.

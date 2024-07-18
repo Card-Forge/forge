@@ -1,7 +1,7 @@
 Name:A-Minsc & Boo, Timeless Heroes
 ManaCost:3 R G
 Types:Legendary Planeswalker Minsc
-Loyalty: 3
+Loyalty:3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | IsPresent$ Creature.YouCtrl+namedBoo | PresentCompare$ EQ0 | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, if you don't control a creature named Boo, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | IsPresent$ Creature.YouCtrl+namedBoo | PresentCompare$ EQ0 | TriggerDescription$ When CARDNAME enters the battlefield and at the beginning of your upkeep, if you don't control a creature named Boo, create Boo, a legendary 1/1 red Hamster creature token with trample and haste.
 SVar:TrigToken:DB$ Token | TokenScript$ boo

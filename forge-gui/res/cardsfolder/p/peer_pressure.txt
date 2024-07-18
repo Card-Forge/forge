@@ -1,7 +1,7 @@
 Name:Peer Pressure
 ManaCost:3 U
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 3 U | Defined$ You | Type$ Creature | SubAbility$ ApplyPressure | SpellDescription$ Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type. (This effect lasts indefinitely.)
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ ApplyPressure | SpellDescription$ Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type. (This effect lasts indefinitely.)
 SVar:ApplyPressure:DB$ GainControl | AllValid$ Creature.ChosenType | NewController$ You | ConditionCheckSVar$ YourPeerGroup | ConditionSVarCompare$ GTY
 SVar:YourPeerGroup:Count$Valid Creature.ChosenType+YouCtrl
 SVar:Y:PlayerCountOther$HighestValid Creature.ChosenType+YouCtrl

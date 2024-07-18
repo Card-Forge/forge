@@ -1,5 +1,5 @@
 Name:Conflux
 ManaCost:3 W U B R G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W U B R G | Origin$ Library | Destination$ Hand | ChangeType$ EACH Card.White & Card.Blue & Card.Black & Card.Red & Card.Green | SpellDescription$ Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ EACH Card.White & Card.Blue & Card.Black & Card.Red & Card.Green | SpellDescription$ Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards, put them into your hand, then shuffle.
 Oracle:Search your library for a white card, a blue card, a black card, a red card, and a green card. Reveal those cards, put them into your hand, then shuffle.

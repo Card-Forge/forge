@@ -5,7 +5,7 @@ PT:8/8
 K:Haste
 K:Trample
 K:Cycling:1 R
-T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When you cycle CARDNAME, shuffle it into your library from your graveyard. If you've cycled a card named CARDNAME four or more times this game, put it onto the battlefield from your graveyard instead. (Do this before you draw.)
+T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When you cycle CARDNAME, shuffle it into your library from your graveyard. If you've cycled a card named Yidaro, Wandering Monster four or more times this game, put it onto the battlefield from your graveyard instead. (Do this before you draw.)
 SVar:DBEffect:DB$ Effect | Duration$ Permanent | Name$ Wandering Effect | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE4 | TrueSubAbility$ DBChangeZone1 | FalseSubAbility$ DBChangeZone2
 SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ TriggeredCardLKICopy

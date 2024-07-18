@@ -7,7 +7,7 @@ SVar:Y:Count$InYourHand
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get an amount of {E} (energy counters) equal to the number of artifact creatures you control.
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ X
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | SpellDescription$ Whenever CARDNAME attacks, you may pay {E}{E}{E}. If you do, draw a card.
-SVar:TrigDraw:AB$ Draw | Cost$ PayEnergy<3> 
+SVar:TrigDraw:AB$ Draw | Cost$ PayEnergy<3>
 SVar:HasAttackEffect:TRUE
 SVar:X:Count$Valid Artifact.Creature+YouCtrl
 DeckHas:Ability$Counters

@@ -1,0 +1,8 @@
+Name:Resolute Rejection
+ManaCost:1 W
+Types:Instant
+A:SP$ Animate | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | RemoveAllAbilities$ True | Duration$ Perpetual | SubAbility$ DBDealDamage | StackDescription$ REP Target creature_{c:Targeted} | SpellDescription$ Target tapped creature perpetually loses all abilities, then CARDNAME deals 4 damage to it.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 4 | Defined$ Targeted | StackDescription$ SpellDescription
+K:Cycling:2
+DeckHas:Ability$Discard
+Oracle:Target tapped creature perpetually loses all abilities, then Resolute Rejection deals 4 damage to it.\nCycling {2}

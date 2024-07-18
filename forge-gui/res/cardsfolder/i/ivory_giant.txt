@@ -3,6 +3,6 @@ ManaCost:5 W W
 Types:Creature Giant
 PT:3/4
 K:Suspend:5:W
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When Ivory Giant enters the battlefield, tap all nonwhite creatures.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all nonwhite creatures.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.nonWhite
 Oracle:When Ivory Giant enters the battlefield, tap all nonwhite creatures.\nSuspend 5—{W} (Rather than cast this card from your hand, you may pay {W} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)

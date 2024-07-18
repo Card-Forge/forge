@@ -1,7 +1,7 @@
 Name:New Frontiers
 ManaCost:X G
 Types:Sorcery
-A:SP$ ChangeZone | Optional$ True | Cost$ X G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ X | Tapped$ True | ShuffleNonMandatory$ True | SpellDescription$ Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Player | ChangeNum$ X | Optional$ True | Tapped$ True | ShuffleNonMandatory$ True | SpellDescription$ Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Each player may search their library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched their library this way shuffles.

@@ -2,10 +2,7 @@ package forge.ai;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.ai.ability.ProtectAi;
 import forge.card.CardStateName;
@@ -31,6 +28,7 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.*;
@@ -38,6 +36,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -104,8 +103,128 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        // AI does not know how to sideboard
-        return null;
+        if (!brains.getGame().getRules().getAISideboardingEnabled()
+            || !deck.has(DeckSection.Sideboard)) {
+            return null;
+        }
+
+        Map<PaperCard, PaperCard> sideboardPlan = Maps.newHashMap();
+        List<PaperCard> main = deck.get(DeckSection.Main).toFlatList();
+        List<PaperCard> sideboard = deck.get(DeckSection.Sideboard).toFlatList();
+
+        // Predefined sideboard plan from deck metadata (AI hints)
+        boolean definedSideboardPlan = false;
+        String sideboardAiHint = deck.getAiHint("SideboardingPlan");
+        if (!sideboardAiHint.isEmpty()) {
+            for (String element : sideboardAiHint.split(";")) {
+                String[] cardPair = element.split("->");
+                PaperCard src = null, tgt = null;
+                for (PaperCard cMain : main) {
+                    if (cMain.getCardName().equals(cardPair[0].trim())) {
+                        src = cMain;
+                        break;
+                    }
+                }
+                for (PaperCard cSide : sideboard) {
+                    if (cSide.getCardName().equals(cardPair[1].trim())) {
+                        tgt = cSide;
+                        break;
+                    }
+                }
+                if (src != null && tgt != null) {
+                    sideboardPlan.put(src, tgt);
+                }
+            }
+            if (!sideboardPlan.isEmpty()) {
+                definedSideboardPlan = true;
+            }
+        }
+
+        boolean sbLimitedFormats = getAi().getBooleanProperty(AiProps.SIDEBOARDING_IN_LIMITED_FORMATS);
+        boolean sbSharedTypesOnly = getAi().getBooleanProperty(AiProps.SIDEBOARDING_SHARED_TYPE_ONLY);
+        boolean sbPlaneswalkerException = getAi().getBooleanProperty(AiProps.SIDEBOARDING_PLANESWALKER_EQ_CREATURE);
+        int sbChanceOnWin = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_ON_WIN);
+        int sbChancePerCard = getAi().getIntProperty(AiProps.SIDEBOARDING_CHANCE_PER_CARD);
+
+        if (!sbLimitedFormats && gameType.isCardPoolLimited()) {
+            return null;
+        }
+
+        GameOutcome lastOutcome = brains.getGame().getMatch().getLastOutcome();
+        if (lastOutcome.getWinningPlayer().getPlayer().equals(player.getLobbyPlayer())
+            && MyRandom.getRandom().nextInt(100) > sbChanceOnWin) {
+            return null;
+        }
+
+        // Devise a sideboarding plan
+        if (!definedSideboardPlan) {
+            List<PaperCard> processed = Lists.newArrayList();
+            for (PaperCard cSide : sideboard) {
+                if (processed.contains(cSide)) {
+                    continue;
+                } else if (cSide.getRules().getAiHints().getRemAIDecks()) {
+                    continue; // don't sideboard in anything that we don't know how to play
+                } else if (cSide.getRules().getType().isLand()) {
+                    continue; // don't know how to sideboard lands efficiently yet
+                }
+
+                for (PaperCard cMain : main) {
+                    if (processed.contains(cMain)) {
+                        continue;
+                    } else if (cMain.getName().equals(cSide.getName())) {
+                        continue;
+                    } else if (cMain.getRules().getType().isLand()) {
+                        continue; // don't know how to sideboard lands efficiently yet
+                    }
+
+                    if (sbSharedTypesOnly) {
+                        if (!cMain.getRules().getType().sharesCardTypeWith(cSide.getRules().getType())) {
+                            continue; // Only equivalent types allowed
+                        }
+                    } else {
+                        if ((cMain.getRules().getType().isCreature() && !cSide.getRules().getType().isCreature())
+                                || (cSide.getRules().getType().isCreature()) && !cMain.getRules().getType().isCreature()) {
+                            if (!(sbPlaneswalkerException && (cMain.getRules().getType().isPlaneswalker() || cSide.getRules().getType().isPlaneswalker()))) {
+                                continue; // Creature exception: only trade a creature for another creature unless planeswalkers are allowed as a replacement
+                            }
+                        }
+                    }
+
+                    if (!Card.fromPaperCard(cMain, player).getManaAbilities().isEmpty()) {
+                        processed.add(cMain);
+                        continue; // Mana Ability exception: Don't sideboard out cards that produce mana, can screw up the mana base
+                    }
+
+                    // Try not to screw up the mana curve or color distribution too much
+                    if (cSide.getRules().getColor().hasNoColorsExcept(cMain.getRules().getColor())
+                            && cMain.getRules().getManaCost().getCMC() == cSide.getRules().getManaCost().getCMC()) {
+                        sideboardPlan.put(cMain, cSide);
+                        processed.add(cSide);
+                        processed.add(cMain);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Make changes according to the sideboarding plan suggested above
+        for (Map.Entry<PaperCard, PaperCard> ent : sideboardPlan.entrySet()) {
+            if (!definedSideboardPlan && MyRandom.getRandom().nextInt(100) < sbChancePerCard) {
+                continue;
+            }
+            long inMain = main.stream().filter(pc -> pc.getCardName().equals(ent.getKey().getName())).count();
+            long inSide = sideboard.stream().filter(pc -> pc.getCardName().equals(ent.getValue().getName())).count();
+            while (inMain-- > 0 && inSide-- > 0) {
+                sideboard.remove(ent.getValue());
+                sideboard.add(ent.getKey());
+                main.add(ent.getValue());
+                main.remove(ent.getKey());
+            }
+        }
+
+        // Return the new Main. It's important to make sure that the overall content of the deck (Main+Sideboard)
+        // does not change above, or the AI may cheat (sneak some cards in or remove them from the deck altogether).
+        return main;
     }
 
     @Override
@@ -115,7 +234,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<GameEntity, Integer> divideShield(Card effectSource, Map<GameEntity, Integer> affected, int shieldAmount) {
-        // TODO: AI current can't use this so this is not implemented.
+        // TODO: AI currently can't use this so this is not implemented.
         return new HashMap<>();
     }
 
@@ -181,6 +300,44 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional, params);
+    }
+
+    @Override
+    public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
+        int toPay = getAi().attemptToAssist(sa, max, requested);
+
+        if (toPay == 0) {
+            return true;
+        } else {
+            ManaCost manaCost = ManaCost.get(toPay);
+            ManaCostBeingPaid assistCost = new ManaCostBeingPaid(manaCost);
+            if (ComputerUtilMana.canPayManaCost(assistCost, sa, player, false)) {
+                ComputerUtilMana.payManaCost(assistCost, sa, player, false);
+                cost.decreaseGenericMana(toPay);
+                return true;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Player choosePlayerToAssistPayment(FCollectionView<Player> optionList, SpellAbility sa, String title, int max) {
+        //        if (optionList.size() == 1) {
+        //            return null;
+        //        }
+        //return optionList.getFirst();
+
+        // AI is dumb and will request assistance even if they can't afford with assistance.
+        // For now, just never try to use Assist.
+
+        // Ideally, it would do something like
+        // Verify we actually want to play this. Including: "Would play with assistance" and "would play without assistance"
+        // Find an ally/player that might be helpful to pay for an effect
+        // If noone seems likely, just return null
+        // If player fails to assist, don't try to request assistance until next turn
+        // If player fails to assist, maybe still cast it anyway?
+
+        return null;
     }
 
     @Override
@@ -698,6 +855,22 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public PlayerZone chooseStartingHand(List<PlayerZone> zones) {
+        // Rate all the hands using the AI's hand evaluation function
+        int bestScore = Integer.MIN_VALUE;
+        PlayerZone bestZone = null;
+        for (PlayerZone zone : zones) {
+            int score = ComputerUtil.scoreHand(zone.getCards(), this.player, 0);
+            if (score > bestScore) {
+                bestScore = score;
+                bestZone = zone;
+            }
+        }
+
+        return bestZone;
+    }
+
+    @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         return brains.chooseNumber(sa, title, min, max);
     }
@@ -810,8 +983,7 @@ public class PlayerControllerAi extends PlayerController {
      * forge.game.player.PlayerController.BinaryChoiceType, java.util.Map)
      */
     @Override
-    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice,
-            Map<String, Object> params) {
+    public boolean chooseBinary(SpellAbility sa, String question, BinaryChoiceType kindOfChoice, Map<String, Object> params) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
@@ -975,7 +1147,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers) {
         return brains.chooseSingleReplacementEffect(possibleReplacers);
     }
 

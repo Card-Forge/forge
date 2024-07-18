@@ -1,6 +1,6 @@
 Name:Springsage Ritual
 ManaCost:3 G
 Types:Instant
-A:SP$ Destroy | Cost$ 3 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment. You gain 4 life.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment. You gain 4 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
 Oracle:Destroy target artifact or enchantment. You gain 4 life.

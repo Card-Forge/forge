@@ -1,7 +1,7 @@
 Name:Shadow of Doubt
 ManaCost:UB UB
 Types:Instant
-A:SP$ Effect | Cost$ UB UB | StaticAbilities$ STCantSearch | SubAbility$ DBDraw | SpellDescription$ Players can't search libraries this turn. Draw a card.
+A:SP$ Effect | StaticAbilities$ STCantSearch | SubAbility$ DBDraw | SpellDescription$ Players can't search libraries this turn. Draw a card.
 SVar:STCantSearch:Mode$ Continuous | Affected$ Player | EffectZone$ Command | AddKeyword$ CantSearchLibrary | Description$ Players can't search libraries.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All

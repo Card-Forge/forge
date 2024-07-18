@@ -1,0 +1,9 @@
+Name:Indebted Spirit
+ManaCost:W
+Types:Enchantment Creature Spirit
+PT:1/1
+K:Bestow:2 W
+K:Afterlife:1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Afterlife:1 | Description$ Enchanted creature gets +1/+1 and has afterlife 1.
+DeckHas:Ability$Token
+Oracle:Bestow {2}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nAfterlife 1 (When this permanent is put into a graveyard from the battlefield, create a 1/1 white and black Spirit creature token with flying.)\nEnchanted creature gets +1/+1 and has afterlife 1.

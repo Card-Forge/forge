@@ -1,7 +1,5 @@
 [metadata]
 Name=dog
-[Avatar]
-
 [Main]
 4 Affa Guard Hound|JMP|1
 4 Akroan Mastiff|JOU|1
@@ -16,12 +14,4 @@ Name=dog
 2 Thraben Purebloods|ISD|1
 4 Trusty Retriever|JMP|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

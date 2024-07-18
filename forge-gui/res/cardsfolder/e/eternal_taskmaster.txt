@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Zombie
 PT:2/3
 K:CARDNAME enters the battlefield tapped.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever Eternal Taskmaster attacks, you may pay {2}{B}. If you do, return target creature card from your graveyard to your hand.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may pay {2}{B}. If you do, return target creature card from your graveyard to your hand.
 SVar:TrigChange:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature card in your graveyard
 DeckHints:Ability$Graveyard
 Oracle:Eternal Taskmaster enters the battlefield tapped.\nWhenever Eternal Taskmaster attacks, you may pay {2}{B}. If you do, return target creature card from your graveyard to your hand.

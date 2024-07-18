@@ -2,6 +2,6 @@ Name:Seething Pathblazer
 ManaCost:2 R
 Types:Creature Elemental Warrior
 PT:2/2
-A:AB$ Pump | Cost$ Sac<1/Elemental> | Defined$ Self | NumAtt$ +2 | KW$ First Strike | SpellDescription$ Seething Pathblazer gets +2/+0 and gains first strike until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Elemental> | Defined$ Self | NumAtt$ +2 | KW$ First Strike | SpellDescription$ CARDNAME gets +2/+0 and gains first strike until end of turn.
 AI:RemoveDeck:Random
 Oracle:Sacrifice an Elemental: Seething Pathblazer gets +2/+0 and gains first strike until end of turn.

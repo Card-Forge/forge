@@ -2,5 +2,5 @@ Name:Savage Conception
 ManaCost:3 G G
 Types:Sorcery
 K:Retrace
-A:SP$ Token | Cost$ 3 G G | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Create a 3/3 green Beast creature token.
 Oracle:Create a 3/3 green Beast creature token.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

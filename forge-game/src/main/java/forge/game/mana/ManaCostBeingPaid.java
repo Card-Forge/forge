@@ -300,7 +300,7 @@ public class ManaCostBeingPaid {
                 for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
                     final ManaCostShard eShard = e.getKey();
                     sc = e.getValue();
-                    if (eShard != ManaCostShard.COLORED_X && eShard.isOfKind(shard.getShard()) && !eShard.isMonoColor()) {
+                    if (eShard != ManaCostShard.COLORED_X && eShard.isOfKind(shard.getShard()) && eShard.isMultiColor()) {
                         if (otherSubtract >= sc.totalCount) {
                             otherSubtract -= sc.totalCount;
                             sc.xCount = sc.totalCount = 0;
@@ -321,6 +321,26 @@ public class ManaCostBeingPaid {
                     final ManaCostShard eShard = e.getKey();
                     sc = e.getValue();
                     if (eShard.isOfKind(shard.getShard()) && eShard.isOr2Generic()) {
+                        if (otherSubtract >= sc.totalCount) {
+                            otherSubtract -= sc.totalCount;
+                            sc.xCount = sc.totalCount = 0;
+                            toRemove.add(eShard);
+                        } else {
+                            sc.totalCount -= otherSubtract;
+                            if (sc.xCount > sc.totalCount) {
+                                sc.xCount = sc.totalCount;
+                            }
+                            // nothing more left in otherSubtract
+                            return;
+                        }
+                    }
+                }
+
+                // try to remove colorless hybrid shards with colored shard
+                for (Entry<ManaCostShard, ShardCount> e : unpaidShards.entrySet()) {
+                    final ManaCostShard eShard = e.getKey();
+                    sc = e.getValue();
+                    if (eShard.isOfKind(shard.getShard()) && eShard.isColorless()) {
                         if (otherSubtract >= sc.totalCount) {
                             otherSubtract -= sc.totalCount;
                             sc.xCount = sc.totalCount = 0;

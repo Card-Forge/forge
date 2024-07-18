@@ -1,7 +1,7 @@
 Name:Wild Ricochet
 ManaCost:2 R R
 Types:Instant
-A:SP$ ChangeTargets | Cost$ 2 R R | TargetType$ Spell | Optional$ True | ValidTgts$ Instant,Sorcery | SubAbility$ DBCopy | SpellDescription$ You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
+A:SP$ ChangeTargets | TargetType$ Spell | Optional$ True | ValidTgts$ Instant,Sorcery | SubAbility$ DBCopy | SpellDescription$ You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Targeted | Controller$ You | MayChooseTarget$ True
 AI:RemoveDeck:All
 Oracle:You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.

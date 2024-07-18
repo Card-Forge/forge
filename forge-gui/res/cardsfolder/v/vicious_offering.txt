@@ -2,6 +2,6 @@ Name:Vicious Offering
 ManaCost:1 B
 Types:Instant
 K:Kicker:Sac<1/Creature>
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.
 SVar:X:Count$Kicked.5.2
 Oracle:Kicker—Sacrifice a creature. (You may sacrifice a creature in addition to any other costs as you cast this spell.)\nTarget creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -5/-5 until end of turn instead.

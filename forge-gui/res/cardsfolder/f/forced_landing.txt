@@ -1,5 +1,5 @@
 Name:Forced Landing
 ManaCost:1 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target creature with flying on the bottom of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target creature with flying on the bottom of its owner's library.
 Oracle:Put target creature with flying on the bottom of its owner's library.

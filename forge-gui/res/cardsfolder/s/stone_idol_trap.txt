@@ -1,7 +1,7 @@
 Name:Stone Idol Trap
 ManaCost:5 R
 Types:Instant Trap
-A:SP$ Token | Cost$ 5 R | TokenAmount$ 1 | TokenScript$ c_6_12_a_construct_trample | TokenOwner$ You | AtEOT$ YourExile | SpellDescription$ Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_6_12_a_construct_trample | TokenOwner$ You | AtEOT$ YourExile | SpellDescription$ Create a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each attacking creature.
 SVar:X:Count$Valid Creature.attacking
 Oracle:This spell costs {1} less to cast for each attacking creature.\nCreate a 6/12 colorless Construct artifact creature token with trample. Exile it at the beginning of your next end step.

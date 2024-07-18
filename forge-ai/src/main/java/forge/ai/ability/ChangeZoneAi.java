@@ -17,11 +17,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostDiscard;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPutCounter;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1356,14 +1352,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         aiPermanents = ComputerUtil.getSafeTargets(ai, sa, aiPermanents);
         if (!game.getStack().isEmpty()) {
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, sa);
-
-            final List<Card> threatenedTargets = new ArrayList<>();
-
-            for (final Card c : aiPermanents) {
-                if (objects.contains(c)) {
-                    threatenedTargets.add(c);
-                }
-            }
+            final List<Card> threatenedTargets = Lists.newArrayList(aiPermanents);
+            threatenedTargets.retainAll(objects);
 
             if (!threatenedTargets.isEmpty()) {
                 // Choose "best" of the remaining to save
@@ -1902,9 +1892,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
         Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>)sa.getReplacingObject(AbilityKey.OriginalParams);
         SpellAbility causeSa = (SpellAbility)originalParams.get(AbilityKey.Cause);
         SpellAbility causeSub = null;
+        ZoneType destination = (ZoneType)originalParams.get(AbilityKey.Destination);
+
+        if (Objects.equals(ZoneType.Hand, destination)) {
+            // If the commander is being moved to your hand, don't replace since its easier to cast it again
+            return false;
+        }
 
         // Squee, the Immortal: easier to recast it (the call below has to be "contains" since SA is an intrinsic effect)
-        if (sa.getHostCard().getName().contains("Squee, the Immortal")) {
+        if (sa.getHostCard().getName().contains("Squee, the Immortal") &&
+                (destination == ZoneType.Graveyard || destination == ZoneType.Exile)) {
             return false;
         }
 

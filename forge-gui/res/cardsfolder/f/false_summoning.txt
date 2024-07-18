@@ -1,5 +1,5 @@
 Name:False Summoning
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SpellDescription$ Counter target creature spell.
 Oracle:Counter target creature spell.

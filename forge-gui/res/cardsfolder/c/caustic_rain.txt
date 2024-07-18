@@ -1,5 +1,5 @@
 Name:Caustic Rain
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B B | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land.
+A:SP$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target land.
 Oracle:Exile target land.

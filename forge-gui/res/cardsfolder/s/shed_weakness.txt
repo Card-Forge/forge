@@ -1,6 +1,6 @@
 Name:Shed Weakness
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBRemoveCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. You may remove a -1/-1 counter from it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBRemoveCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. You may remove a -1/-1 counter from it.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Targeted | Optional$ True | CounterType$ M1M1 | CounterNum$ 1
 Oracle:Target creature gets +2/+2 until end of turn. You may remove a -1/-1 counter from it.

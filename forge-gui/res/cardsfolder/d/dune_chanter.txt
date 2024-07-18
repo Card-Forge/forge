@@ -1,0 +1,14 @@
+Name:Dune Chanter
+ManaCost:2 G
+Types:Creature Plant Druid
+PT:2/3
+K:Reach
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ Desert | Description$ Lands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.
+S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Mill | Cost$ T | NumCards$ 2 | Defined$ You | RememberMilled$ True | SubAbility$ DBGainLife | SpellDescription$ Mill two cards. You gain 1 life for each land card milled this way.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.Land
+DeckHas:Ability$Graveyard|LifeGain & Type$Desert
+Oracle:Reach\nLands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.\nLands you control have "{T}: Add one mana of any color."\n{T}: Mill two cards. You gain 1 life for each land card milled this way.

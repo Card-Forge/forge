@@ -1,5 +1,5 @@
 Name:Walk the Plank
 ManaCost:B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature.nonMerfolk | TgtPrompt$ Select target non-Merfolk creature | SpellDescription$ Destroy target non-Merfolk creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonMerfolk | TgtPrompt$ Select target non-Merfolk creature | SpellDescription$ Destroy target non-Merfolk creature.
 Oracle:Destroy target non-Merfolk creature.

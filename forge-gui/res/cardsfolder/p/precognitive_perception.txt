@@ -1,6 +1,6 @@
 Name:Precognitive Perception
 ManaCost:3 U U
 Types:Instant
-A:SP$ Scry | Cost$ 3 U U | ScryNum$ 3 | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBDraw | SpellDescription$ Draw three cards.
+A:SP$ Scry | ScryNum$ 3 | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBDraw | SpellDescription$ Draw three cards.
 SVar:DBDraw:DB$ Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Addendum — If you cast this spell during your main phase, instead scry 3, then draw three cards.
 Oracle:Draw three cards.\nAddendum — If you cast this spell during your main phase, instead scry 3, then draw three cards.

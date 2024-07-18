@@ -1,5 +1,5 @@
 Name:Blinding Radiance
 ManaCost:2 W
 Types:Sorcery
-A:SP$ TapAll | Cost$ 2 W | ValidCards$ Creature.OppCtrl+toughnessLE2 | SpellDescription$ Tap all creatures your opponents control with toughness 2 or less.
+A:SP$ TapAll | ValidCards$ Creature.OppCtrl+toughnessLE2 | SpellDescription$ Tap all creatures your opponents control with toughness 2 or less.
 Oracle:Tap all creatures your opponents control with toughness 2 or less.

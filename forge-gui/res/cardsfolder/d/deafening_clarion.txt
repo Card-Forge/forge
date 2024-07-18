@@ -1,7 +1,7 @@
 Name:Deafening Clarion
 ManaCost:1 R W
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 R W | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDamage,TrigPumpAll
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBDamage,TrigPumpAll
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each creature.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink | SpellDescription$ Creatures you control gain lifelink until end of turn.
 Oracle:Choose one or both —\n• Deafening Clarion deals 3 damage to each creature.\n• Creatures you control gain lifelink until end of turn.

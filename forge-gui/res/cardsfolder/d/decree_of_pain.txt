@@ -2,7 +2,7 @@ Name:Decree of Pain
 ManaCost:6 B B
 Types:Sorcery
 K:Cycling:3 B B
-A:SP$ DestroyAll | Cost$ 6 B B | ValidCards$ Creature | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBDraw | SpellDescription$ Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBDraw | SpellDescription$ Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way.
 SVar:DBDraw:DB$ Draw | NumCards$ DecreeX | SubAbility$ DBCleanup
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When you cycle CARDNAME, all creatures get -2/-2 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -2 | NumDef$ -2 | ValidCards$ Creature

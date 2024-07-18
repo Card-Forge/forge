@@ -1,7 +1,7 @@
 Name:Grave Upheaval
 ManaCost:4 B R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | TgtPrompt$ Select target creature card | GainControl$ True | SubAbility$ DBPump | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. It gains haste.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | TgtPrompt$ Select target creature card | GainControl$ True | SubAbility$ DBPump | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control. It gains haste.
 SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent
 K:TypeCycling:Basic:2
 Oracle:Put target creature card from a graveyard onto the battlefield under your control. It gains haste.\nBasic landcycling {2} ({2}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)

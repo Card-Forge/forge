@@ -1,6 +1,6 @@
 Name:Sanctified Charge
 ManaCost:4 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Creatures you control get +2/+1 until end of turn. White creatures you control also gain first strike until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBPump | SpellDescription$ Creatures you control get +2/+1 until end of turn. White creatures you control also gain first strike until end of turn.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl+White | KW$ First Strike
 Oracle:Creatures you control get +2/+1 until end of turn. White creatures you control also gain first strike until end of turn. (They deal combat damage before creatures without first strike.)

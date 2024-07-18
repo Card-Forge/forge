@@ -1,0 +1,9 @@
+Name:Valley Questcaller
+ManaCost:1 W
+Types:Creature Rabbit Warrior
+PT:2/3
+T:Mode$ ChangesZoneAll | ValidCards$ Rabbit.Other+YouCtrl,Bat.Other+YouCtrl,Bird.Other+YouCtrl,Mouse.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever one or more other Rabbits, Bats, Birds, and/or Mice you control enter, scry 1.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1
+S:Mode$ Continuous | Affected$ Rabbit.Other+YouCtrl,Bat.Other+YouCtrl,Bird.Other+YouCtrl,Mouse.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Rabbits, Bats, Birds, and Mice you control get +1/+1.
+DeckHints:Type$Rabbit|Bat|Bird|Mouse
+Oracle:Whenever one or more other Rabbits, Bats, Birds, and/or Mice you control enter, scry 1.\nOther Rabbits, Bats, Birds, and Mice you control get +1/+1.

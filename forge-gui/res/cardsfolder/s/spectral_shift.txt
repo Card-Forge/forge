@@ -2,7 +2,7 @@ Name:Spectral Shift
 ManaCost:1 U
 Types:Instant
 K:Entwine:2
-A:SP$ Charm | Cost$ 1 U | Choices$ DBBasicLand,DBColor
+A:SP$ Charm | Choices$ DBBasicLand,DBColor
 SVar:DBBasicLand:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeTypeWord$ ChooseBasicLandType ChooseBasicLandType | Duration$ Permanent | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one basic land type with another. (This effect lasts indefinitely.)
 SVar:DBColor:DB$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | ChangeColorWord$ Choose Choose | Duration$ Permanent | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another. (This effect lasts indefinitely.)
 AI:RemoveDeck:Random

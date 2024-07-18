@@ -5,7 +5,7 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 T:Mode$ Attacks | ValidCard$ Creature.Artifact+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an artifact creature you control attacks, you may pay {E}. If you do, put your choice of a +1/+1, first strike, or trample counter on that creature.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<1> | CounterType$ P1P1,First Strike,Trample | CounterNum$ 1 | Defined$ TriggeredAttackerLKICopy 
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<1> | CounterType$ P1P1,First Strike,Trample | CounterNum$ 1 | Defined$ TriggeredAttackerLKICopy
 DeckHas:Ability$Counters
 DeckHints:Type$Artifact
 Oracle:When Assaultron Dominator enters the battlefield, you get {E}{E} (two energy counters).\nWhenever an artifact creature you control attacks, you may pay {E}. If you do, put your choice of a +1/+1, first strike, or trample counter on that creature.

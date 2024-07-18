@@ -1,6 +1,6 @@
 Name:Blaze
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 Oracle:Blaze deals X damage to any target.

@@ -1,8 +1,8 @@
 Name:Red Elemental Blast
 ManaCost:R
 Types:Instant
-A:SP$ Charm | Cost$ R | Choices$ DBCounter,DBDestroy | CharmNum$ 1
-SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.Blue | SpellDescription$ Counter target blue spell.
+A:SP$ Charm | Choices$ DBCounter,DBDestroy | CharmNum$ 1
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.Blue | TgtPrompt$ Select target blue spell | SpellDescription$ Counter target blue spell.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Blue | TgtPrompt$ Select target blue permanent | SpellDescription$ Destroy target blue permanent.
 AI:RemoveDeck:Random
 Oracle:Choose one —\n• Counter target blue spell.\n• Destroy target blue permanent.

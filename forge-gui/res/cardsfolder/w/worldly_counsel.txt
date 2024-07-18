@@ -1,6 +1,6 @@
 Name:Worldly Counsel
 ManaCost:1 U
 Types:Instant
-A:SP$ Dig | Cost$ 1 U | DigNum$ X | SpellDescription$ Domain — Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ X | SpellDescription$ Domain — Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:X:Count$Domain
 Oracle:Domain — Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put one of those cards into your hand and the rest on the bottom of your library in any order.

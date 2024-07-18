@@ -1,5 +1,5 @@
 Name:Purge
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | ValidTgts$ Creature.Artifact,Creature.Black | TgtPrompt$ Select target artifact creature or black creature | NoRegen$ True | SpellDescription$ Destroy target artifact creature or black creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature.Artifact,Creature.Black | TgtPrompt$ Select target artifact creature or black creature | NoRegen$ True | SpellDescription$ Destroy target artifact creature or black creature. It can't be regenerated.
 Oracle:Destroy target artifact creature or black creature. It can't be regenerated.

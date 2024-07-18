@@ -1,7 +1,7 @@
 Name:Nissa's Encouragement
 ManaCost:4 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedForest | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch1 | SpellDescription$ Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedForest | ChangeNum$ 1 | Shuffle$ False | SubAbility$ DBSearch1 | SpellDescription$ Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle.
 SVar:DBSearch1:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedBrambleweft Behemoth | ChangeNum$ 1 | SubAbility$ DBSearch2
 SVar:DBSearch2:DB$ ChangeZone | Origin$ Library,Graveyard | Destination$ Hand | ChangeType$ Card.namedNissa; Genesis Mage | ChangeNum$ 1
 DeckNeeds:Name$Forest|Brambleweft Behemoth|Nissa, Genesis Mage

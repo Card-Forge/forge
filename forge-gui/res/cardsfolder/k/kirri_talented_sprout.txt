@@ -1,0 +1,9 @@
+Name:Kirri, Talented Sprout
+ManaCost:1 R G W
+Types:Legendary Creature Plant Druid
+PT:0/3
+S:Mode$ Continuous | Affected$ Plant.Other+YouCtrl,Treefolk.Other+YouCtrl | AddPower$ 2 | Description$ Other Plants and Treefolk you control get +2/+0.
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your postcombat main phase, return target Plant, Treefolk, or land card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Plant.YouOwn,Treefolk.YouOwn,Land.YouOwn | TgtPrompt$ Select target Plant, Treefolk, or land card from your graveyard
+DeckNeeds:Ability$Graveyard & Type$Plant|Treefolk
+Oracle:Other Plants and Treefolk you control get +2/+0.\nAt the beginning of your postcombat main phase, return target Plant, Treefolk, or land card from your graveyard to your hand.

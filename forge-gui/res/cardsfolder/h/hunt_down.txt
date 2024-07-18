@@ -1,7 +1,7 @@
 Name:Hunt Down
 ManaCost:G
 Types:Sorcery
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature to attack | StackDescription$ None | SubAbility$ DBMustBlock | SpellDescription$ Target creature blocks target creature this turn if able.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to attack | StackDescription$ None | SubAbility$ DBMustBlock | SpellDescription$ Target creature blocks target creature this turn if able.
 SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature to block
 AI:RemoveDeck:All
 Oracle:Target creature blocks target creature this turn if able.

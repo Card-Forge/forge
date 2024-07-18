@@ -1,7 +1,7 @@
 Name:Read the Tides
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Charm | Cost$ 5 U | Choices$ DBDraw,DBReturn
+A:SP$ Charm | Choices$ DBDraw,DBReturn
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:DBReturn:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
 Oracle:Choose one —\n• Draw three cards.\n• Return up to two target creatures to their owners' hands.

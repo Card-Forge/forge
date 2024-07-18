@@ -1,6 +1,6 @@
 Name:Countersquall
 ManaCost:U B
 Types:Instant
-A:SP$ Counter | Cost$ U B | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBDrain | SpellDescription$ Counter target noncreature spell. Its controller loses 2 life.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SubAbility$ DBDrain | SpellDescription$ Counter target noncreature spell. Its controller loses 2 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
 Oracle:Counter target noncreature spell. Its controller loses 2 life.

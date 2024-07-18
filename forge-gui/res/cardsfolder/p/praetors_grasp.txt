@@ -1,7 +1,7 @@
 Name:Praetor's Grasp
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B B | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a card and exile it face down. Then that player shuffles. You may look at and play that card for as long as it remains exiled.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | ValidTgts$ Opponent | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a card and exile it face down. Then that player shuffles. You may look at and play that card for as long as it remains exiled.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play a card as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

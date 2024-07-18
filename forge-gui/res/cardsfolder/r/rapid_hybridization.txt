@@ -1,6 +1,6 @@
 Name:Rapid Hybridization
 ManaCost:U
 Types:Instant
-A:SP$ Destroy | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select a creature | AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select a creature | AILogic$ Pongify | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_frog_lizard | TokenOwner$ TargetedController
 Oracle:Destroy target creature. It can't be regenerated. That creature's controller creates a 3/3 green Frog Lizard creature token.

@@ -1,7 +1,7 @@
 Name:Crimson Wisps
 ManaCost:R
 Types:Instant
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBDraw | SpellDescription$ Target creature becomes red and gains haste until end of turn. Draw a card.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SubAbility$ DBDraw | SpellDescription$ Target creature becomes red and gains haste until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBColor | NumCards$ 1
 SVar:DBColor:DB$ Animate | Colors$ Red | OverwriteColors$ True | Defined$ Targeted
 Oracle:Target creature becomes red and gains haste until end of turn.\nDraw a card.

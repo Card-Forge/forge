@@ -1,5 +1,5 @@
 Name:Dramatic Reversal
 ManaCost:1 U
 Types:Instant
-A:SP$ UntapAll | Cost$ 1 U | ValidCards$ Permanent.nonLand+YouCtrl | SpellDescription$ Untap all nonland permanents you control.
+A:SP$ UntapAll | ValidCards$ Permanent.nonLand+YouCtrl | SpellDescription$ Untap all nonland permanents you control.
 Oracle:Untap all nonland permanents you control.

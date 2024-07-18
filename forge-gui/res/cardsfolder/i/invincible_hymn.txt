@@ -1,6 +1,6 @@
 Name:Invincible Hymn
 ManaCost:6 W W
 Types:Sorcery
-A:SP$ SetLife | Cost$ 6 W W | Defined$ You | LifeAmount$ X | SpellDescription$ Count the number of cards in your library. Your life total becomes that number.
+A:SP$ SetLife | Defined$ You | LifeAmount$ X | SpellDescription$ Count the number of cards in your library. Your life total becomes that number.
 SVar:X:Count$InYourLibrary.Card
 Oracle:Count the number of cards in your library. Your life total becomes that number.

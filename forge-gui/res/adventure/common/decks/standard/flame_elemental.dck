@@ -1,7 +1,5 @@
 [metadata]
 Name=flame_elemental
-[Avatar]
-
 [Main]
 2 Arc Runner|M11|1
 2 Ashenmoor Liege|SHM|1
@@ -32,12 +30,4 @@ Name=flame_elemental
 1 Ramunap Ruins|HOU|1
 4 Spark Elemental|5DN|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -1,7 +1,7 @@
 Name:Survive the Night
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Indestructible | SubAbility$ DBInvestigate | SpellDescription$ Target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.) Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Indestructible | SubAbility$ DBInvestigate | SpellDescription$ Target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.) Investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate
 DeckHas:Ability$Investigate|Token
 Oracle:Target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)\nInvestigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

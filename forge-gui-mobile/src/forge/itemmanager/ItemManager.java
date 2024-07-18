@@ -107,7 +107,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * ItemManager Constructor.
      * 
      * @param genericType0 the class of item that this table will contain
-     * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
@@ -747,6 +746,33 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 config.setHideFilters(hideFilters0);
             }
         }
+    }
+
+    public void applyAdvancedSearchFilter(String filterString) {
+        applyAdvancedSearchFilter(new String[]{filterString}, false);
+    }
+
+    /**
+     * Programmatic method to set this ItemManager's advanced search filter value.
+     * Other filters will be cleared.
+     */
+    public void applyAdvancedSearchFilter(String[] filterStrings, boolean joinAnd) {
+        if(advancedSearchFilter == null) {
+            advancedSearchFilter = createAdvancedSearchFilter();
+            ItemManager.this.add(advancedSearchFilter.getWidget());
+        }
+        lockFiltering = true;
+        for (final ItemFilter<? extends T> filter : filters) {
+            filter.reset();
+        }
+        searchFilter.reset();
+        advancedSearchFilter.reset();
+        advancedSearchFilter.setFilterParts(filterStrings, joinAnd);
+        lockFiltering = false;
+
+        applyFilters();
+        advancedSearchFilter.refreshWidget();
+        revalidate();
     }
 
     //Refresh displayed items

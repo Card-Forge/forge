@@ -1,7 +1,7 @@
 Name:Manamorphose
 ManaCost:1 RG
 Types:Instant
-A:SP$ Mana | Cost$ 1 RG | Produced$ Combo Any | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Add two mana in any combination of colors. Draw a card.
+A:SP$ Mana | Produced$ Combo Any | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Add two mana in any combination of colors. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All
 Oracle:Add two mana in any combination of colors.\nDraw a card.

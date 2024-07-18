@@ -2,7 +2,7 @@ Name:Consuming Vapors
 ManaCost:3 B
 Types:Sorcery
 K:Rebound
-A:SP$ Sacrifice | Cost$ 3 B | SacValid$ Creature | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. You gain life equal to that creature's toughness.
+A:SP$ Sacrifice | SacValid$ Creature | ValidTgts$ Player | TgtPrompt$ Select target player | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBGainLife | SpellDescription$ Target player sacrifices a creature. You gain life equal to that creature's toughness.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardToughness

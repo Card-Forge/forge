@@ -1,6 +1,6 @@
 Name:Scrap
 ManaCost:2 R
 Types:Instant
-A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Cycling:2
 Oracle:Destroy target artifact.\nCycling {2} ({2}, Discard this card: Draw a card.)

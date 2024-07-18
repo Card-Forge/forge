@@ -1,6 +1,6 @@
 Name:Rejuvenate
 ManaCost:3 G
 Types:Sorcery
-A:SP$ GainLife | Cost$ 3 G | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+A:SP$ GainLife | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
 K:Cycling:2
 Oracle:You gain 6 life.\nCycling {2} ({2}, Discard this card: Draw a card.)

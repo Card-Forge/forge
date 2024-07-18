@@ -3,4 +3,5 @@ ManaCost:2 G G
 Types:Creature Human
 PT:2/2
 A:AB$ Token | Cost$ 2 G G | TokenAmount$ 1 | TokenScript$ wolves_of_the_hunt | TokenOwner$ You | SpellDescription$ Create a 1/1 green Wolf creature token named Wolves of the Hunt. It has "bands with other creatures named Wolves of the Hunt."
+DeckHas:Ability$Token & Type$Wolf & Keyword$Banding
 Oracle:{2}{G}{G}: Create a 1/1 green Wolf creature token named Wolves of the Hunt. It has "bands with other creatures named Wolves of the Hunt." (Any creatures named Wolves of the Hunt can attack in a band as long as at least one has "bands with other creatures named Wolves of the Hunt." Bands are blocked as a group. If at least two creatures named Wolves of the Hunt you control, one of which has "bands with other creatures named Wolves of the Hunt," are blocking or being blocked by the same creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)

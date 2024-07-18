@@ -1,6 +1,6 @@
 Name:Bathe in Light
 ManaCost:1 W
 Types:Instant
-A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Gains$ Choice | Choices$ AnyColor | Radiance$ True | SpellDescription$ Radiance — Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.
+A:SP$ Protection | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Gains$ Choice | Choices$ AnyColor | Radiance$ True | SpellDescription$ Radiance — Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.
 AI:RemoveDeck:All
 Oracle:Radiance — Choose a color. Target creature and each other creature that shares a color with it gain protection from the chosen color until end of turn.

@@ -163,7 +163,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append("\r\n");
             }
             for (AbilitySub sub : list) {
-                sb.append(spree ? "+" + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014" : "\u2022 ").append(sub.getParam("SpellDescription"));
+                sb.append(spree ? "+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 " : "\u2022 ").append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
             }
             sb.append("\r\n");
@@ -249,7 +249,7 @@ public class CharmEffect extends SpellAbilityEffect {
         return true;
     }
 
-    private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
+    public static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
         if (chosen == null) {
             return;
         }

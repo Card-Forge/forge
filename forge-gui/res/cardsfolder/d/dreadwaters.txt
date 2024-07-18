@@ -1,6 +1,6 @@
 Name:Dreadwaters
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Mill | Cost$ 3 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of lands you control.
+A:SP$ Mill | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 Oracle:Target player mills X cards, where X is the number of lands you control.

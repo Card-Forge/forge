@@ -1,5 +1,5 @@
 Name:Counterintelligence
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U U | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return one or two target creatures to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 1 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return one or two target creatures to their owners' hands.
 Oracle:Return one or two target creatures to their owners' hands.

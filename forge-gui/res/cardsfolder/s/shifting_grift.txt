@@ -1,0 +1,9 @@
+Name:Shifting Grift
+ManaCost:U U
+Types:Sorcery
+K:Spree
+A:SP$ Charm | Choices$ DBCreature,DBArtifact,DBEnchantment | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBCreature:DB$ ExchangeControl | SpreeCost$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target creatures.
+SVar:DBArtifact:DB$ ExchangeControl | SpreeCost$ 1 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target artifacts.
+SVar:DBEnchantment:DB$ ExchangeControl | SpreeCost$ 1 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 2 | TargetMax$ 2 | SpellDescription$ Exchange control of two target enchantments.
+Oracle:Spree (Choose one or more additional costs.)\n+{2} — Exchange control of two target creatures.\n+{1} — Exchange control of two target artifacts.\n+{1} — Exchange control of two target enchantments.

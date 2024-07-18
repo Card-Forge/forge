@@ -1,6 +1,6 @@
 Name:Memory Plunder
 ManaCost:UB UB UB UB
 Types:Instant
-A:SP$ Play | Cost$ UB UB UB UB | TgtZone$ Graveyard | WithoutManaCost$ True | ValidSA$ Spell | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True | SpellDescription$ You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
+A:SP$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidSA$ Spell | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True | SpellDescription$ You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
 AI:RemoveDeck:All
 Oracle:You may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.

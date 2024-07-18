@@ -1,6 +1,6 @@
 Name:Second Thoughts
 ManaCost:4 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature. | SubAbility$ DBDraw
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Exile target attacking creature.\nDraw a card.

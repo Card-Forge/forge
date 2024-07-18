@@ -6,5 +6,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 T:Mode$ SpellCast | IsPresent$ Card.Self+IsSolved | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Solved – Whenever you cast an instant or sorcery spell, draw a card.
 SVar:TrigDraw:DB$ Draw
-DeckNeed:Type$Instant|Sorcery
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nTo solve – You've cast four or more instant and sorcery spells this turn. (If unsolved, solve at the beginning of your end step.)\nSolved – Whenever you cast an instant or sorcery spell, draw a card.

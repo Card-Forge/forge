@@ -1,6 +1,6 @@
 Name:Riptide
 ManaCost:U
 Types:Instant
-A:SP$ TapAll | Cost$ U | ValidCards$ Creature.Blue | SpellDescription$ Tap all blue creatures.
+A:SP$ TapAll | ValidCards$ Creature.Blue | SpellDescription$ Tap all blue creatures.
 AI:RemoveDeck:Random
 Oracle:Tap all blue creatures.

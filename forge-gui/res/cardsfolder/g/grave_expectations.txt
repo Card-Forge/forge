@@ -1,0 +1,9 @@
+Name:Grave Expectations
+ManaCost:B
+Types:Instant
+A:SP$ Charm | Choices$ DBHeist,DBExile
+SVar:DBHeist:DB$ Heist | ValidTgts$ Opponent | SpellDescription$ Heist target opponent's library.
+SVar:DBExile:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select up to three target cards from your opponents' graveyards | ValidTgts$ Card.OppOwn | SubAbility$ DBGainLife | SpellDescription$ Exile up to three target cards from your opponents' graveyards.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+DeckHas:Ability$LifeGain
+Oracle:Choose one —\n• Heist target opponent's library.\n• Exile up to three target cards from your opponents' graveyards. You gain 3 life.

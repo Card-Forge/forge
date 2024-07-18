@@ -1,7 +1,7 @@
 Name:Landslide
 ManaCost:R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ R | Defined$ You | Amount$ SacX | SacValid$ Mountain | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDamage | SpellDescription$ Sacrifice any number of Mountains. CARDNAME deals that much damage to target player or planeswalker.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Mountain | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDamage | SpellDescription$ Sacrifice any number of Mountains. CARDNAME deals that much damage to target player or planeswalker.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ DmgX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Mountain.YouCtrl

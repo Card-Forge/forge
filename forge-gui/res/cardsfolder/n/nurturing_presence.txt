@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddTrigger$ NurturingChangeZone | AddSVar$ NurturingPump | Description$ Enchanted creature has "Whenever a creature enters the battlefield under your control, this creature gets +1/+1 until end of turn."
-SVar:NurturingChangeZone:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ NurturingPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+SVar:NurturingChangeZone:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ NurturingPump | TriggerDescription$ Whenever a creature enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
 SVar:NurturingPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying

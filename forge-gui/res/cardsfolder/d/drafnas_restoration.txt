@@ -1,7 +1,7 @@
 Name:Drafna's Restoration
 ManaCost:U
 Types:Sorcery
-A:SP$ Pump | Cost$ U | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Put any number of target artifact cards from target player's graveyard on top of their library in any order.
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBChangeZone | IsCurse$ True | SpellDescription$ Put any number of target artifact cards from target player's graveyard on top of their library in any order.
 SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsWithDefinedController$ ParentTarget | Origin$ Graveyard | Destination$ Library | TgtPrompt$ Choose target artifact card | ValidTgts$ Artifact | Chooser$ You
 SVar:X:Count$InAllYards
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Atarka's Command
 ManaCost:R G
 Types:Instant
-A:SP$ Charm | Cost$ R G | Choices$ DBNoLife,DBDamage,DBLand,DBPumpAll | CharmNum$ 2
+A:SP$ Charm | Choices$ DBNoLife,DBDamage,DBLand,DBPumpAll | CharmNum$ 2
 SVar:DBNoLife:DB$ Effect | StaticAbilities$ STCantGain | AILogic$ NoGain | SpellDescription$ Your opponents can't gain life this turn.
 SVar:STCantGain:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life this turn.
 SVar:DBDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 3 | AILogic$ Good | SpellDescription$ CARDNAME deals 3 damage to each opponent.

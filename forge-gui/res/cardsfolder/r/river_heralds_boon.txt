@@ -1,6 +1,6 @@
 Name:River Heralds' Boon
 ManaCost:1 G
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Put a +1/+1 counter on target creature and a +1/+1 counter on up to one target Merfolk.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Put a +1/+1 counter on target creature and a +1/+1 counter on up to one target Merfolk.
 SVar:DBPutCounter:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Merfolk | TgtPrompt$ Select target Merfolk | CounterType$ P1P1 | CounterNum$ 1
 Oracle:Put a +1/+1 counter on target creature and a +1/+1 counter on up to one target Merfolk.

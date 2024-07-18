@@ -1,6 +1,6 @@
 Name:Miraculous Recovery
 ManaCost:4 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPutCounter | SpellDescription$ Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Targeted
 Oracle:Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.

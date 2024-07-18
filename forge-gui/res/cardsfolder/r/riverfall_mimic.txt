@@ -5,6 +5,6 @@ PT:2/1
 T:Mode$ SpellCast | ValidCard$ Card.Blue+Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever you cast a spell that's both blue and red, CARDNAME has base power and toughness 3/3 until end of turn and can't be blocked this turn.
 SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 3 | Toughness$ 3 | SubAbility$ DBUnblockable
 SVar:DBUnblockable:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ Self | StaticAbilities$ Unblockable
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:BuffedBy:Card.Blue+Red
 Oracle:Whenever you cast a spell that's both blue and red, Riverfall Mimic has base power and toughness 3/3 until end of turn and can't be blocked this turn.

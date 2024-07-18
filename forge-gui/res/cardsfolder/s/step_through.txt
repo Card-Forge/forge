@@ -2,5 +2,5 @@ Name:Step Through
 ManaCost:3 U U
 Types:Sorcery
 K:TypeCycling:Wizard:2
-A:SP$ ChangeZone | Cost$ 3 U U | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return two target creatures to their owners' hands.
 Oracle:Return two target creatures to their owners' hands.\nWizardcycling {2} ({2}, Discard this card: Search your library for a Wizard card, reveal it, put it into your hand, then shuffle.)

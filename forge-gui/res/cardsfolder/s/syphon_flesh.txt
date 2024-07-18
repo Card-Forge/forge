@@ -1,7 +1,7 @@
 Name:Syphon Flesh
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 B | Defined$ Player.Other | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.
+A:SP$ Sacrifice | Defined$ Player.Other | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Each other player sacrifices a creature. You create a 2/2 black Zombie creature token for each creature sacrificed this way.
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

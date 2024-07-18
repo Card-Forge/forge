@@ -2,7 +2,7 @@ Name:Malcator, Purity Overseer
 ManaCost:1 W U
 Types:Legendary Creature Phyrexian Elephant Wizard
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if three or more artifacts entered the battlefield under your control this turn, create a 3/3 colorless Phyrexian Golem artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 SVar:X:Count$ThisTurnEntered_Battlefield_Artifact.YouCtrl

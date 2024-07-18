@@ -1,8 +1,43 @@
 [metadata]
 Code=BLC
-Date=2024-07-26
+Date=2024-08-02
 Name=Bloomburrow Commander
 Type=Commander
 ScryfallCode=BLC
 
 [cards]
+1 M Bello, Bard of the Brambles @Slawomir Maniak
+2 M Hazel of the Rootbloom @Anna Pavleeva
+3 M Ms. Bumbleflower @Marta Nael
+4 M Zinnia, Valley's Voice @Aldo Domínguez
+73 M Karn, the Great Creator @Mike Burns
+74 M Luminous Broodmoth @Alex Horley-Orlandelli
+75 M Jace, the Mind Sculptor @Justin Gerard
+76 R Narset, Parter of Veils @Adam Vehige
+77 R Ink-Eyes, Servant of Oni @Alex Horley-Orlandelli
+78 M Liliana of the Dark Realms @Javier Charro
+79 R Marrow-Gnawer @Néstor Ossandón Leal
+80 R Ant Queen @Andrew Mar
+81 R Birds of Paradise @Javier Charro
+82 M Chatterfang, Squirrel General @Olivier Bernard
+83 R Gilded Goose @Narendra Bintara Adi
+84 R Nissa, Who Shakes the World @Adam Vehige
+85 R Squirrel Mob @Justin Gerard
+86 R Baleful Strix @Maxime Minard
+87 R Derevi, Empyrial Tactician @Nathaniel Himawan
+88 M The Gitrog Monster @Nils Hamm
+89 M Ishai, Ojutai Dragonspeaker @Maxime Minard
+90 R Kwain, Itinerant Meddler @Mike Burns
+91 M Kykar, Wind's Fury @Johan Grenier
+92 R Teferi, Time Raveler @Dmitry Burmak
+93 M Jace, the Mind Sculptor @TAPIOCA
+94 M Liliana of the Dark Realms @Yuzushio
+95 M Chatterfang, Squirrel General @Yoshimo
+96 R Nissa, Who Shakes the World @Ryota Murayama
+100 M Tamiyo, Field Researcher @Justin Gerard
+101 M Bello, Bard of the Brambles @O-G Osahune
+102 M Hazel of the Rootbloom @TAPIOCA
+103 M Ms. Bumbleflower @KIYA
+104 M Zinnia, Valley's Voice @Lē Yamamura
+209 M Chatterfang, Squirrel General @Jason A. Engle
+356 M Flubs, the Fool @Adam Rex

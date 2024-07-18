@@ -1,5 +1,5 @@
 Name:Tempest of Light
 ManaCost:2 W
 Types:Instant
-A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+A:SP$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 Oracle:Destroy all enchantments.

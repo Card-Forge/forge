@@ -4,5 +4,5 @@ Types:Artifact Creature Juggernaut
 PT:1/5
 K:Trample
 A:AB$ Pump | Cost$ 3 | Defined$ Self | KW$ Banding | SpellDescription$ CARDNAME gains banding until end of turn.
-A:AB$ PumpAll | Cost$ 3 | ValidCards$ Creature.attackersBandedWith | KW$ Trample | SpellDescription$ Attacking creatures banded with Urza's Engine gain trample until end of turn.
+A:AB$ PumpAll | Cost$ 3 | ValidCards$ Creature.attackersBandedWith | KW$ Trample | SpellDescription$ Attacking creatures banded with CARDNAME gain trample until end of turn.
 Oracle:Trample\n{3}: Urza's Engine gains banding until end of turn. (Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)\n{3}: Attacking creatures banded with Urza's Engine gain trample until end of turn.

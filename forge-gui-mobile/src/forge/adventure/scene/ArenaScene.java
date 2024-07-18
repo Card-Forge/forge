@@ -238,12 +238,18 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         arenaPlane.addActor(lost);
     }
 
+    boolean started = false;
+
     private void startRound() {
+        if (started)
+            return;
+        started = true;
         DuelScene duelScene = DuelScene.instance();
         EnemySprite enemy = enemies.get(enemies.size - 1);
         FThreads.invokeInEdtNowOrLater(() -> {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
-                duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy);
+                started = false;
+                duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy, true, null);
                 Forge.switchScene(duelScene);
             }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), enemy.getAtlasPath(), Current.player().getName(), enemy.getName()));
         });

@@ -1,7 +1,7 @@
 Name:Tempt with Reflections
 ManaCost:3 U
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 3 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | StackDescription$ SpellDescription | SubAbility$ DBRepeat | SpellDescription$ Tempting offer — Choose target creature you control. Create a token that's a copy of that creature. Each opponent may create a token that's a copy of that creature. For each opponent who does, create a token that's a copy of that creature.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | StackDescription$ SpellDescription | SubAbility$ DBRepeat | SpellDescription$ Tempting offer — Choose target creature you control. Create a token that's a copy of that creature. Each opponent may create a token that's a copy of that creature. For each opponent who does, create a token that's a copy of that creature.
 SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBCopyPermanent | RepeatPlayers$ Player.Opponent | SubAbility$ CopyAgain | ChangeZoneTable$ True | RepeatOptionalForEachPlayer$ True | RepeatOptionalMessage$ Do you want to create a token that's a copy of that creature?
 SVar:DBCopyPermanent:DB$ CopyPermanent | Defined$ ParentTarget | Controller$ Player.IsRemembered | SubAbility$ DBCount
 SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1

@@ -4,4 +4,4 @@ Types:Creature Goblin
 PT:2/2
 A:AB$ Draw | Cost$ R T Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card
 DeckHas:Ability$Discard
-Oracle:{R},{T}, Discard a card: Draw a card.
+Oracle:{R} ,{T}, Discard a card: Draw a card.

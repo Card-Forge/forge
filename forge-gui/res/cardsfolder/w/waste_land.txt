@@ -2,6 +2,7 @@ Name:Waste Land
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target land. | SubAbility$ DBToken | AILogic$ GhostQuarter | AITgts$ Land.nonBasic | SpellDescription$ Destroy target nonbasicland. That land's controller creates a Wastes land token. (It has {T}: Add {C}.)
+A:AB$ Destroy | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target land. | SubAbility$ DBToken | AILogic$ GhostQuarter | AITgts$ Land.nonBasic | SpellDescription$ Destroy target nonbasic land. That land's controller creates a Wastes land token. (It has {T}: Add {C}.)
 SVar:DBToken:DB$ Token | TokenScript$ c_l_wastes | TokenOwner$ TargetedController
+DeckHas:Ability$Mana.Colorless
 Oracle:{T}: Add {C}.\n{T}, Sacrifice Waste Land: Destroy target nonbasic land. That land's controller creates a Wastes token. (It's a land with {T}: Add {C}.)

@@ -1,5 +1,5 @@
 Name:Viashino Warrior
 ManaCost:3 R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:4/2
 Oracle:

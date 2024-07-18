@@ -1,7 +1,7 @@
 Name:Silundi Vision
 ManaCost:2 U
 Types:Instant
-A:SP$ Dig | Cost$ 2 U | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Instant,Sorcery | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top six cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Instant,Sorcery | RestRandomOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top six cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 DeckNeeds:Type$Instant|Sorcery
 AlternateMode:Modal
 Oracle:Look at the top six cards of your library. You may reveal an instant or sorcery card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

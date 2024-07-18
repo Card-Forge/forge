@@ -3,6 +3,6 @@ ManaCost:4 W W
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When Alabaster Dragon dies, shuffle it into its owner's library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, shuffle it into its owner's library.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy
 Oracle:Flying\nWhen Alabaster Dragon dies, shuffle it into its owner's library.

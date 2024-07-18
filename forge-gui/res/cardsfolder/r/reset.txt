@@ -1,6 +1,6 @@
 Name:Reset
 ManaCost:U U
 Types:Instant
-A:SP$ UntapAll | Cost$ U U | ValidCards$ Land.YouCtrl | OpponentTurn$ True | CheckSVar$ Count$FinishedUpkeepsThisTurn | SpellDescription$ Cast CARDNAME only during an opponent's turn after their upkeep step. Untap all lands you control.
+A:SP$ UntapAll | ValidCards$ Land.YouCtrl | OpponentTurn$ True | CheckSVar$ Count$FinishedUpkeepsThisTurn | SpellDescription$ Cast CARDNAME only during an opponent's turn after their upkeep step. Untap all lands you control.
 AI:RemoveDeck:All
 Oracle:Cast this spell only during an opponent's turn after their upkeep step.\nUntap all lands you control.

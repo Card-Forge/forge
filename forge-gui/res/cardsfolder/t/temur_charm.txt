@@ -1,7 +1,7 @@
 Name:Temur Charm
 ManaCost:G U R
 Types:Instant
-A:SP$ Charm | Cost$ G U R | Choices$ Pump,Counter,Effect | CharmNum$ 1
+A:SP$ Charm | Choices$ Pump,Counter,Effect | CharmNum$ 1
 SVar:Pump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | NumAtt$ +1 | NumDef$ +1 | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +1/+1 until end of turn. It fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | AILogic$ FightSub
 SVar:Counter:DB$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.

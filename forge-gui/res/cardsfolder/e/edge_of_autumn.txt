@@ -1,7 +1,7 @@
 Name:Edge of Autumn
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LE4 | ConditionDescription$ If you control four or fewer lands, | SpellDescription$ If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LE4 | ConditionDescription$ If you control four or fewer lands, | SpellDescription$ If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
 K:Cycling:Sac<1/Land>
 AI:RemoveDeck:All
 Oracle:If you control four or fewer lands, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nCycling—Sacrifice a land. (Sacrifice a land, Discard this card: Draw a card.)

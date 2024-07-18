@@ -1,6 +1,6 @@
 Name:Lay Bare
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBReveal | SpellDescription$ Counter target spell. Look at its controller's hand.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBReveal | SpellDescription$ Counter target spell. Look at its controller's hand.
 SVar:DBReveal:DB$ RevealHand | Defined$ TargetedController | Look$ True
 Oracle:Counter target spell. Look at its controller's hand.

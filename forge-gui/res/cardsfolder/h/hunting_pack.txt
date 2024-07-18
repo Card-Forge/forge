@@ -1,7 +1,7 @@
 Name:Hunting Pack
 ManaCost:5 G G
 Types:Instant
-A:SP$ Token | Cost$ 5 G G | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_beast | TokenOwner$ You | SpellDescription$ Create a 4/4 green Beast creature token.
 K:Storm
 DeckHas:Ability$Token
 Oracle:Create a 4/4 green Beast creature token.\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)

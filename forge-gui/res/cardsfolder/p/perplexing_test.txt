@@ -1,7 +1,7 @@
 Name:Perplexing Test
 ManaCost:3 U U
 Types:Instant
-A:SP$ Charm | Cost$ 3 U U | Choices$ DBBounceAllTokens,DBBounceAllNonTokens
+A:SP$ Charm | Choices$ DBBounceAllTokens,DBBounceAllNonTokens
 SVar:DBBounceAllTokens:DB$ ChangeZoneAll | ChangeType$ Creature.token | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all creature tokens to their owners' hands.
 SVar:DBBounceAllNonTokens:DB$ ChangeZoneAll | ChangeType$ Creature.nonToken | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all nontoken creatures to their owners' hands.
 Oracle:Choose one —\n• Return all creature tokens to their owners' hands.\n• Return all nontoken creatures to their owners' hands.

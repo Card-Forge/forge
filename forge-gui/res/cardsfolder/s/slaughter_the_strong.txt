@@ -1,7 +1,7 @@
 Name:Slaughter the Strong
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 W W | RepeatPlayers$ Player | RepeatSubAbility$ ChooseCrtr | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseCrtr | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.
 SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | WithTotalPower$ 4 | RememberChosen$ True | AILogic$ NegativePowerFirst
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

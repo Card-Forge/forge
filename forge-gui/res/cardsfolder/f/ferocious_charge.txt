@@ -1,6 +1,6 @@
 Name:Ferocious Charge
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SubAbility$ DBScry | SpellDescription$ Target creature gets +4/+4 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 4 | NumDef$ 4 | SubAbility$ DBScry | SpellDescription$ Target creature gets +4/+4 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Target creature gets +4/+4 until end of turn. Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

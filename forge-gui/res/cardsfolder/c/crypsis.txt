@@ -1,6 +1,6 @@
 Name:Crypsis
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection:Creature.OppCtrl:creatures your opponents control | SubAbility$ DBUntap | SpellDescription$ Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection:Creature.OppCtrl:creatures your opponents control | SubAbility$ DBUntap | SpellDescription$ Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ ParentTarget
 Oracle:Target creature you control gains protection from creatures your opponents control until end of turn. Untap it.

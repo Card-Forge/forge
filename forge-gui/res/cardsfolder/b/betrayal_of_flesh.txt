@@ -2,7 +2,7 @@ Name:Betrayal of Flesh
 ManaCost:5 B
 Types:Instant
 K:Entwine:Sac<3/Land>
-A:SP$ Charm | Cost$ 5 B | Choices$ DBDestroy,DBChange | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDestroy,DBChange | CharmNum$ 1
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
 SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 AI:RemoveDeck:All

@@ -1,5 +1,5 @@
 Name:Elite Headhunter
-ManaCost:B/R B/R B/R B/R
+ManaCost:BR BR BR BR
 Types:Creature Human Knight
 PT:2/3
 K:Menace

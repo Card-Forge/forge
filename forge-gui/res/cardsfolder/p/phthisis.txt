@@ -2,7 +2,7 @@ Name:Phthisis
 ManaCost:3 B B B B
 Types:Sorcery
 K:Suspend:5:1 B
-A:SP$ Destroy | Cost$ 3 B B B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses life equal to its power plus its toughness.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses life equal to its power plus its toughness.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ X
 SVar:X:Targeted$CardSumPT
 Oracle:Destroy target creature. Its controller loses life equal to its power plus its toughness.\nSuspend 5—{1}{B} (Rather than cast this card from your hand, you may pay {1}{B} and exile it with five time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

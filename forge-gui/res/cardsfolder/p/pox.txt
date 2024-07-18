@@ -1,7 +1,7 @@
 Name:Pox
 ManaCost:B B B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ B B B | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILifeThreshold$ 1 | SpellDescription$ Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures they control, then sacrifices a third of the lands they control. Round up each time.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILifeThreshold$ 1 | SpellDescription$ Each player loses a third of their life, then discards a third of the cards in their hand, then sacrifices a third of the creatures they control, then sacrifices a third of the lands they control. Round up each time.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ A | Defined$ Player.IsRemembered | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ C | Defined$ Player.IsRemembered | Mode$ TgtChoose | SubAbility$ DBCreature
 SVar:DBCreature:DB$ Sacrifice | SacValid$ Creature | Amount$ E | Defined$ Player.IsRemembered | SubAbility$ DBLand

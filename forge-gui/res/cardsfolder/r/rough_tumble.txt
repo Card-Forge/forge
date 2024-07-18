@@ -1,7 +1,7 @@
 Name:Rough
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | SpellDescription$ Rough deals 2 damage to each creature without flying.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature without flying.
 AlternateMode:Split
 Oracle:Rough deals 2 damage to each creature without flying.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Tumble
 ManaCost:5 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 5 R | ValidCards$ Creature.withFlying | NumDmg$ 6 | SpellDescription$ Tumble deals 6 damage to each creature with flying.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each creature with flying.
 Oracle:Tumble deals 6 damage to each creature with flying.

@@ -2,5 +2,5 @@ Name:Radical Idea
 ManaCost:1 U
 Types:Instant
 K:Jump-start
-A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)

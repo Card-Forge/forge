@@ -11,4 +11,4 @@ SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ Opponent
 SVar:ReviveCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target non-Dragon creature card in a graveyard | ValidTgts$ Creature.nonDragon | ChangeNum$ 1 | SubAbility$ DBReviveLife | SpellDescription$ Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
 SVar:DBReviveLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$Discard|Graveyard
-Oracle:Flying,menace\nWhen Junji, the Midnight Sky dies, choose one:\n• Each opponent discards two cards and loses 2 life.\n• Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.
+Oracle:Flying, menace\nWhen Junji, the Midnight Sky dies, choose one —\n• Each opponent discards two cards and loses 2 life.\n• Put target non-Dragon creature card from a graveyard onto the battlefield under your control. You lose 2 life.

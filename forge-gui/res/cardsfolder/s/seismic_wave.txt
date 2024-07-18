@@ -1,6 +1,6 @@
 Name:Seismic Wave
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 1 damage to each nonartifact creature target opponent controls.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 1 damage to each nonartifact creature target opponent controls.
 SVar:DBDamage:DB$ DamageAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1 | ValidCards$ Creature.nonArtifact | ValidDescription$ each nonartifact creature target opponent controls.
 Oracle:Seismic Wave deals 2 damage to any target and 1 damage to each nonartifact creature target opponent controls.

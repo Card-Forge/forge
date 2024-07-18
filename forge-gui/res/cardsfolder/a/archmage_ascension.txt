@@ -6,7 +6,7 @@ R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Tutor
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:Tutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ValidCard$ Card.YouOwn
 SVar:X:Count$YouDrewThisTurn
-#TODO: improve AI tutoring logic
+# TODO: improve AI tutoring logic
 AI:RemoveDeck:Random
 SVar:MaxQuestEffect:6
 Oracle:At the beginning of each end step, if you drew two or more cards this turn, you may put a quest counter on Archmage Ascension.\nAs long as Archmage Ascension has six or more quest counters on it, if you would draw a card, you may instead search your library for a card, put that card into your hand, then shuffle.

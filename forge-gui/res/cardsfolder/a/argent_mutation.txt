@@ -1,7 +1,7 @@
 Name:Argent Mutation
 ManaCost:2 U
 Types:Instant
-A:SP$ Animate | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SubAbility$ DBDraw | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn. Draw a card.
+A:SP$ Animate | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Types$ Artifact | SubAbility$ DBDraw | SpellDescription$ Target permanent becomes an artifact in addition to its other types until end of turn. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All
 Oracle:Target permanent becomes an artifact in addition to its other types until end of turn.\nDraw a card.

@@ -1,5 +1,5 @@
 Name:Vernadi Shieldmate
-ManaCost:1 G/W
+ManaCost:1 GW
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance

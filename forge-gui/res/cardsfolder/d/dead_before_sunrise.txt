@@ -1,0 +1,9 @@
+Name:Dead Before Sunrise
+ManaCost:3 R
+Types:Instant
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl+Outlaw | NumAtt$ +1 | SubAbility$ DBAnimateAll | SpellDescription$ Until end of turn, outlaw creatures you control get +1/+0 and gain "{T}: This creature deals damage equal to its power to target creature." (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl+Outlaw | Abilities$ Fight
+SVar:Fight:AB$ DealDamage | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ BrawlX | SpellDescription$ This creature deals damage equal to its power to target creature.
+SVar:BrawlX:Count$CardPower
+DeckHints:Type$Assassin|Mercenary|Pirate|Rogue|Warlock
+Oracle:Until end of turn, outlaw creatures you control get +1/+0 and gain "{T}: This creature deals damage equal to its power to target creature." (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)

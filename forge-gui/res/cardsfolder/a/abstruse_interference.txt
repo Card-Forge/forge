@@ -2,7 +2,7 @@ Name:Abstruse Interference
 ManaCost:2 U
 Types:Instant
 K:Devoid
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBToken | SpellDescription$ Counter target spell unless its controller pays {1}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBToken | SpellDescription$ Counter target spell unless its controller pays {1}.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ You create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}." ({C} represents colorless mana.)
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token

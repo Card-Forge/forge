@@ -1,0 +1,9 @@
+Name:Lotus Ring
+ManaCost:3
+Types:Artifact Equipment
+K:Indestructible
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddToughness$ 3 | AddPower$ 3 | AddKeyword$ Vigilance | AddAbility$ Damage | Description$ Equipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three mana of any one color."
+SVar:Damage:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ Any | Amount$ 3 | AILogic$ BlackLotus | SpellDescription$ Add three mana of any one color.
+DeckHas:Ability$Sacrifice
+K:Equip:3
+Oracle:Indestructible\nEquipped creature gets +3/+3 and has vigilance and "{T}, Sacrifice this creature: Add three mana of any one color."\nEquip {3}

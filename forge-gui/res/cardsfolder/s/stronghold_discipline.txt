@@ -1,7 +1,7 @@
 Name:Stronghold Discipline
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 B B | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILogic$ AllPlayerLoseLife | SpellDescription$ Each player loses 1 life for each creature they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | AILogic$ AllPlayerLoseLife | SpellDescription$ Each player loses 1 life for each creature they control.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:Random

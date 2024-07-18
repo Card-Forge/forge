@@ -1,6 +1,6 @@
 Name:Vizier of the Menagerie
 ManaCost:3 G
-Types:Creature Naga Cleric
+Types:Creature Snake Cleric
 PT:3/4
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
 S:Mode$ Continuous | Affected$ Creature.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast creature spells from the top of your library.

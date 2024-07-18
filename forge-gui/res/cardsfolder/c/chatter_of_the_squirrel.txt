@@ -2,5 +2,5 @@ Name:Chatter of the Squirrel
 ManaCost:G
 Types:Sorcery
 K:Flashback:1 G
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create a 1/1 green Squirrel creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | SpellDescription$ Create a 1/1 green Squirrel creature token.
 Oracle:Create a 1/1 green Squirrel creature token.\nFlashback {1}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

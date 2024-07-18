@@ -1,6 +1,7 @@
 Name:Lava Storm
 ManaCost:3 R R
 Types:Instant
-A:SP$ DamageAll | Cost$ 3 R R | ValidCards$ Creature.attacking | NumDmg$ 2 | ValidDescription$ each attacking creature | SpellDescription$ CARDNAME deals 2 damage to each attacking creature
-A:SP$ DamageAll | Cost$ 3 R R | ValidCards$ Creature.blocking | NumDmg$ 2 | ValidDescription$ each blocking creature | SpellDescription$ or CARDNAME deals 2 damage to each blocking creature.
+A:SP$ GenericChoice | Choices$ DBDmgAttackers,DBDmgBlockers | Defined$ You | AILogic$ BestOption | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 2 damage to each attacking creature or CARDNAME deals 2 damage to each blocking creature
+SVar:DBDmgAttackers:DB$ DamageAll | ValidCards$ Creature.attacking | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each attacking creature
+SVar:DBDmgBlockers:DB$ DamageAll | ValidCards$ Creature.blocking | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each blocking creature.
 Oracle:Lava Storm deals 2 damage to each attacking creature or Lava Storm deals 2 damage to each blocking creature.

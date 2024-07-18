@@ -1,7 +1,7 @@
 Name:Hull Breach
 ManaCost:R G
 Types:Sorcery
-A:SP$ Charm | Cost$ R G | Choices$ DBDestroy1,DBDestroy2,DBDestroy3 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDestroy1,DBDestroy2,DBDestroy3 | CharmNum$ 1
 SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBDestroy3:DB$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | SpellDescription$ Destroy target artifact and target enchantment. | StackDescription$ None

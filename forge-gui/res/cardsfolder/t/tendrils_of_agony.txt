@@ -2,6 +2,6 @@ Name:Tendrils of Agony
 ManaCost:2 B B
 Types:Sorcery
 K:Storm
-A:SP$ LoseLife | Cost$ 2 B B | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 2 life and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Target player loses 2 life and you gain 2 life.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

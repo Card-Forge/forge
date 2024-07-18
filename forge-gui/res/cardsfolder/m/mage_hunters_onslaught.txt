@@ -1,7 +1,7 @@
 Name:Mage Hunters' Onslaught
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBEffect | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBEffect | SpellDescription$ Destroy target creature or planeswalker.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigBlocking
 SVar:TrigBlocking:Mode$ AttackerBlocked | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature blocks this turn, its controller loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredBlockerController | LifeAmount$ 1

@@ -1,0 +1,9 @@
+Name:Iron-Fist Pulverizer
+ManaCost:4 R
+Types:Creature Giant Warrior
+PT:4/5
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ Whenever you cast your second spell each turn, CARDNAME deals 2 damage to target opponent. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 2 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+Oracle:Reach\nWhenever you cast your second spell each turn, Iron-Fist Pulverizer deals 2 damage to target opponent. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)

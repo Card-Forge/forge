@@ -1,7 +1,7 @@
 Name:Invigorating Surge
 ManaCost:2 G
 Types:Instant
-A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on that creature.
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on that creature.
 SVar:DBPump:DB$ MultiplyCounter | Defined$ Targeted | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Put a +1/+1 counter on target creature you control, then double the number of +1/+1 counters on that creature.

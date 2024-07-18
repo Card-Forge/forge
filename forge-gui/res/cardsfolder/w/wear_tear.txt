@@ -2,7 +2,7 @@ Name:Wear
 ManaCost:1 R
 Types:Instant
 K:Fuse
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 AlternateMode:Split
 Oracle:Destroy target artifact.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,5 +11,5 @@ ALTERNATE
 Name:Tear
 ManaCost:W
 Types:Instant
-A:SP$ Destroy | Cost$ W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+A:SP$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Destroy target enchantment.\nFuse (You may cast one or both halves of this card from your hand.)

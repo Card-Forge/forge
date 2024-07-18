@@ -1,5 +1,5 @@
 Name:Blazing Salvo
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | UnlessCost$ DamageYou<5> | UnlessPayer$ TargetedController | SpellDescription$ CARDNAME deals 3 damage to target creature unless that creature's controller has CARDNAME deal 5 damage to them.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | UnlessCost$ DamageYou<5> | UnlessPayer$ TargetedController | SpellDescription$ CARDNAME deals 3 damage to target creature unless that creature's controller has CARDNAME deal 5 damage to them.
 Oracle:Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to them.

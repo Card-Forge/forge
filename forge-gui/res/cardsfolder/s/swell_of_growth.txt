@@ -1,6 +1,6 @@
 Name:Swell of Growth
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn. You may put a land card from your hand onto the battlefield. | SubAbility$ DBChangeZone
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn. You may put a land card from your hand onto the battlefield. | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1
 Oracle:Target creature gets +2/+2 until end of turn. You may put a land card from your hand onto the battlefield.

@@ -69,7 +69,7 @@ public enum Keyword {
     DREDGE("Dredge", KeywordWithAmount.class, false, "If you would draw a card, instead you may put exactly {%d:card} from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card."),
     ECHO("Echo", KeywordWithCost.class, false, "At the beginning of your upkeep, if this permanent came under your control since the beginning of your last upkeep, sacrifice it unless you pay %s."),
     EMBALM("Embalm", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Create a token that's a copy of this card, except it's white, it has no mana cost, and it's a Zombie in addition to its other types. Embalm only as a sorcery."),
-    EMERGE("Emerge", KeywordWithCost.class, false, "You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value."),
+    EMERGE("Emerge", Emerge.class, false, "You may cast this spell by sacrificing {1:%2$s} and paying the emerge cost reduced by that %2$s's mana value."),
     ENCHANT("Enchant", KeywordWithType.class, false, "Target a %s as you cast this. This card enters the battlefield attached to that %s."),
     ENCORE("Encore", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery."),
     ENLIST("Enlist", SimpleKeyword.class, false, "As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature’s until end of turn."),
@@ -95,6 +95,7 @@ public enum Keyword {
     FOR_MIRRODIN("For Mirrodin", SimpleKeyword.class, false, "When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it."),
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
+    FREERUNNING("Freerunning", KeywordWithCost.class, false, "You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
     FRIENDS_FOREVER("Friends forever", Partner.class, true, "You can have two commanders if both have friends forever."),
     FUSE("Fuse", SimpleKeyword.class, true, "You may cast one or both halves of this card from your hand."),
@@ -105,6 +106,7 @@ public enum Keyword {
     HEXPROOF("Hexproof", Hexproof.class, true, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters the battlefield, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
+    IMPENDING("Impending", KeywordWithCostAndAmount.class, false, "If you cast this spell for its impending cost, it enters with {%2$d:time counter} and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it."),
     IMPROVISE("Improvise", SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
     INDESTRUCTIBLE("Indestructible", SimpleKeyword.class, true, "Effects that say \"destroy\" don't destroy this."),
     INFECT("Infect", SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
@@ -180,7 +182,6 @@ public enum Keyword {
     SUNBURST("Sunburst", SimpleKeyword.class, false, "This enters the battlefield with either a +1/+1 or charge counter on it for each color of mana spent to cast it based on whether it's a creature."),
     SURGE("Surge", KeywordWithCost.class, false, "You may cast this spell for its surge cost if you or a teammate has cast another spell this turn."),
     SUSPEND("Suspend", Suspend.class, false, "If you could begin to cast this card by putting it onto the stack from your hand, you may pay %s and exile it with {%d:time counter} on it. At the beginning of your upkeep, remove a time counter. When the last is removed, play it without paying its mana cost. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes."),
-    TOTEM_ARMOR("Totem armor", SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     TOXIC("Toxic", KeywordWithAmount.class, false, "Players dealt combat damage by this creature also get {%d:poison counter}."),
     TRAINING("Training", SimpleKeyword.class, false, "Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature."),
     TRAMPLE("Trample", Trample.class, true, "This creature can deal excess combat damage to the player or planeswalker it's attacking."),
@@ -188,6 +189,7 @@ public enum Keyword {
     TRANSMUTE("Transmute", KeywordWithCost.class, false, "%s, Discard this card: Search your library for a card with the same mana value as this card, reveal it, and put it into your hand, then shuffle. Transmute only as a sorcery."),
     TRIBUTE("Tribute", KeywordWithAmount.class, false, "As this creature enters the battlefield, an opponent of your choice may put {%d:+1/+1 counter} on it."),
     TYPECYCLING("TypeCycling", KeywordWithCostAndType.class, false, "%s, Discard this card: Search your library for a %s card, reveal it, put it into your hand, then shuffle."),
+    UMBRA_ARMOR("Umbra armor", SimpleKeyword.class, true, "If enchanted permanent would be destroyed, instead remove all damage marked on it and destroy this Aura."),
     UNDAUNTED("Undaunted", SimpleKeyword.class, false, "This spell costs {1} less to cast for each opponent."),
     UNDYING("Undying", SimpleKeyword.class, false, "When this creature dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it."),
     UNEARTH("Unearth", KeywordWithCost.class, false, "%s: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery."),
@@ -335,5 +337,9 @@ public enum Keyword {
             }
         }
         return result;
+    }
+
+    public boolean isMultipleRedundant() {
+        return isMultipleRedundant;
     }
 }

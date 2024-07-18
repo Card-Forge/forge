@@ -1,645 +1,455 @@
 package forge.assets;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import forge.Forge;
 import forge.Graphics;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
-import forge.util.ImageUtil;
 
 /** Properties of various components that make up the skin.
  * This interface allows all enums to be under the same roof.
  * It also enforces a getter for coordinate locations in sprites. */
-public enum FSkinImage implements FImage {
+public enum FSkinImage implements FSkinImageInterface {
     //Zones
-    HAND        (FSkinProp.IMG_ZONE_HAND, SourceFile.ICONS),
-    HDHAND      (FSkinProp.IMG_HDZONE_HAND, SourceFile.BUTTONS),
+    HAND        (FSkinProp.IMG_ZONE_HAND),
+    HDHAND      (FSkinProp.IMG_HDZONE_HAND),
 
-    LIBRARY     (FSkinProp.IMG_ZONE_LIBRARY, SourceFile.ICONS),
-    HDLIBRARY   (FSkinProp.IMG_HDZONE_LIBRARY, SourceFile.BUTTONS),
+    LIBRARY     (FSkinProp.IMG_ZONE_LIBRARY),
+    HDLIBRARY   (FSkinProp.IMG_HDZONE_LIBRARY),
 
-    EXILE       (FSkinProp.IMG_ZONE_EXILE, SourceFile.ICONS),
-    HDEXILE     (FSkinProp.IMG_HDZONE_EXILE, SourceFile.BUTTONS),
+    EXILE       (FSkinProp.IMG_ZONE_EXILE),
+    HDEXILE     (FSkinProp.IMG_HDZONE_EXILE),
 
-    FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK, SourceFile.ICONS),
-    HDFLASHBACK (FSkinProp.IMG_HDZONE_FLASHBACK, SourceFile.BUTTONS),
+    FLASHBACK   (FSkinProp.IMG_ZONE_FLASHBACK),
+    HDFLASHBACK (FSkinProp.IMG_HDZONE_FLASHBACK),
 
-    GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD, SourceFile.ICONS),
-    HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD, SourceFile.BUTTONS),
+    GRAVEYARD   (FSkinProp.IMG_ZONE_GRAVEYARD),
+    HDGRAVEYARD (FSkinProp.IMG_HDZONE_GRAVEYARD),
 
-    SIDEBOARD   (FSkinProp.IMG_ZONE_SIDEBOARD, SourceFile.ICONS),
+    SIDEBOARD   (FSkinProp.IMG_ZONE_SIDEBOARD),
 
-    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL, SourceFile.BUTTONS),
+    HDMANAPOOL   (FSkinProp.IMG_HDZONE_MANAPOOL),
 
-    POISON      (FSkinProp.IMG_ZONE_POISON, SourceFile.ICONS),
-
-    //Mana symbols
-    MANA_COLORLESS (FSkinProp.IMG_MANA_COLORLESS, SourceFile.MANAICONS),
-    MANA_B         (FSkinProp.IMG_MANA_B, SourceFile.MANAICONS),
-    MANA_R         (FSkinProp.IMG_MANA_R, SourceFile.MANAICONS),
-    MANA_U         (FSkinProp.IMG_MANA_U, SourceFile.MANAICONS),
-    MANA_G         (FSkinProp.IMG_MANA_G, SourceFile.MANAICONS),
-    MANA_W         (FSkinProp.IMG_MANA_W, SourceFile.MANAICONS),
-    MANA_2B        (FSkinProp.IMG_MANA_2B, SourceFile.MANAICONS),
-    MANA_2G        (FSkinProp.IMG_MANA_2G, SourceFile.MANAICONS),
-    MANA_2R        (FSkinProp.IMG_MANA_2R, SourceFile.MANAICONS),
-    MANA_2U        (FSkinProp.IMG_MANA_2U, SourceFile.MANAICONS),
-    MANA_2W        (FSkinProp.IMG_MANA_2W, SourceFile.MANAICONS),
-    MANA_HYBRID_BG (FSkinProp.IMG_MANA_HYBRID_BG, SourceFile.MANAICONS),
-    MANA_HYBRID_BR (FSkinProp.IMG_MANA_HYBRID_BR, SourceFile.MANAICONS),
-    MANA_HYBRID_GU (FSkinProp.IMG_MANA_HYBRID_GU, SourceFile.MANAICONS),
-    MANA_HYBRID_GW (FSkinProp.IMG_MANA_HYBRID_GW, SourceFile.MANAICONS),
-    MANA_HYBRID_RG (FSkinProp.IMG_MANA_HYBRID_RG, SourceFile.MANAICONS),
-    MANA_HYBRID_RW (FSkinProp.IMG_MANA_HYBRID_RW, SourceFile.MANAICONS),
-    MANA_HYBRID_UB (FSkinProp.IMG_MANA_HYBRID_UB, SourceFile.MANAICONS),
-    MANA_HYBRID_UR (FSkinProp.IMG_MANA_HYBRID_UR, SourceFile.MANAICONS),
-    MANA_HYBRID_WB (FSkinProp.IMG_MANA_HYBRID_WB, SourceFile.MANAICONS),
-    MANA_HYBRID_WU (FSkinProp.IMG_MANA_HYBRID_WU, SourceFile.MANAICONS),
-    MANA_PHRYX     (FSkinProp.IMG_MANA_PHRYX, SourceFile.MANAICONS),
-    MANA_PHRYX_U   (FSkinProp.IMG_MANA_PHRYX_U, SourceFile.MANAICONS),
-    MANA_PHRYX_W   (FSkinProp.IMG_MANA_PHRYX_W, SourceFile.MANAICONS),
-    MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.MANAICONS),
-    MANA_PHRYX_G   (FSkinProp.IMG_MANA_PHRYX_G, SourceFile.MANAICONS),
-    MANA_PHRYX_B   (FSkinProp.IMG_MANA_PHRYX_B, SourceFile.MANAICONS),
-    MANA_PHRYX_BG   (FSkinProp.IMG_MANA_PHRYX_BG, SourceFile.PHYREXIAN),
-    MANA_PHRYX_BR   (FSkinProp.IMG_MANA_PHRYX_BR, SourceFile.PHYREXIAN),
-    MANA_PHRYX_GU   (FSkinProp.IMG_MANA_PHRYX_GU, SourceFile.PHYREXIAN),
-    MANA_PHRYX_GW   (FSkinProp.IMG_MANA_PHRYX_GW, SourceFile.PHYREXIAN),
-    MANA_PHRYX_RG   (FSkinProp.IMG_MANA_PHRYX_RG, SourceFile.PHYREXIAN),
-    MANA_PHRYX_RW   (FSkinProp.IMG_MANA_PHRYX_RW, SourceFile.PHYREXIAN),
-    MANA_PHRYX_UB   (FSkinProp.IMG_MANA_PHRYX_UB, SourceFile.PHYREXIAN),
-    MANA_PHRYX_UR   (FSkinProp.IMG_MANA_PHRYX_UR, SourceFile.PHYREXIAN),
-    MANA_PHRYX_WB   (FSkinProp.IMG_MANA_PHRYX_WB, SourceFile.PHYREXIAN),
-    MANA_PHRYX_WU   (FSkinProp.IMG_MANA_PHRYX_WU, SourceFile.PHYREXIAN),
-    MANA_SNOW      (FSkinProp.IMG_MANA_SNOW, SourceFile.MANAICONS),
-    MANA_0         (FSkinProp.IMG_MANA_0, SourceFile.MANAICONS),
-    MANA_1         (FSkinProp.IMG_MANA_1, SourceFile.MANAICONS),
-    MANA_2         (FSkinProp.IMG_MANA_2, SourceFile.MANAICONS),
-    MANA_3         (FSkinProp.IMG_MANA_3, SourceFile.MANAICONS),
-    MANA_4         (FSkinProp.IMG_MANA_4, SourceFile.MANAICONS),
-    MANA_5         (FSkinProp.IMG_MANA_5, SourceFile.MANAICONS),
-    MANA_6         (FSkinProp.IMG_MANA_6, SourceFile.MANAICONS),
-    MANA_7         (FSkinProp.IMG_MANA_7, SourceFile.MANAICONS),
-    MANA_8         (FSkinProp.IMG_MANA_8, SourceFile.MANAICONS),
-    MANA_9         (FSkinProp.IMG_MANA_9, SourceFile.MANAICONS),
-    MANA_10        (FSkinProp.IMG_MANA_10, SourceFile.MANAICONS),
-    MANA_11        (FSkinProp.IMG_MANA_11, SourceFile.MANAICONS),
-    MANA_12        (FSkinProp.IMG_MANA_12, SourceFile.MANAICONS),
-    MANA_13        (FSkinProp.IMG_MANA_13, SourceFile.MANAICONS),
-    MANA_14        (FSkinProp.IMG_MANA_14, SourceFile.MANAICONS),
-    MANA_15        (FSkinProp.IMG_MANA_15, SourceFile.MANAICONS),
-    MANA_16        (FSkinProp.IMG_MANA_16, SourceFile.MANAICONS),
-    MANA_17        (FSkinProp.IMG_MANA_17, SourceFile.MANAICONS),
-    MANA_18        (FSkinProp.IMG_MANA_18, SourceFile.MANAICONS),
-    MANA_19        (FSkinProp.IMG_MANA_19, SourceFile.MANAICONS),
-    MANA_20        (FSkinProp.IMG_MANA_20, SourceFile.MANAICONS),
-    MANA_X         (FSkinProp.IMG_MANA_X, SourceFile.MANAICONS),
-    MANA_Y         (FSkinProp.IMG_MANA_Y, SourceFile.MANAICONS),
-    MANA_Z         (FSkinProp.IMG_MANA_Z, SourceFile.MANAICONS),
+    POISON      (FSkinProp.IMG_ZONE_POISON),
 
     //CMC ranges
-    CMC_LOW        (FSkinProp.IMG_CMC_LOW, SourceFile.MANAICONS),
-    CMC_LOW_MID    (FSkinProp.IMG_CMC_LOW_MID, SourceFile.MANAICONS),
-    CMC_MID_HIGH   (FSkinProp.IMG_CMC_MID_HIGH, SourceFile.MANAICONS),
-    CMC_HIGH       (FSkinProp.IMG_CMC_HIGH, SourceFile.MANAICONS),
+    CMC_LOW        (FSkinProp.IMG_CMC_LOW),
+    CMC_LOW_MID    (FSkinProp.IMG_CMC_LOW_MID),
+    CMC_MID_HIGH   (FSkinProp.IMG_CMC_MID_HIGH),
+    CMC_HIGH       (FSkinProp.IMG_CMC_HIGH),
 
     //Setlogo
-    SET_COMMON     (FSkinProp.IMG_SETLOGO_COMMON, SourceFile.SETLOGOS),
-    SET_UNCOMMON   (FSkinProp.IMG_SETLOGO_UNCOMMON, SourceFile.SETLOGOS),
-    SET_RARE       (FSkinProp.IMG_SETLOGO_RARE, SourceFile.SETLOGOS),
-    SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC, SourceFile.SETLOGOS),
-    SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL, SourceFile.SETLOGOS),
+    SET_COMMON     (FSkinProp.IMG_SETLOGO_COMMON),
+    SET_UNCOMMON   (FSkinProp.IMG_SETLOGO_UNCOMMON),
+    SET_RARE       (FSkinProp.IMG_SETLOGO_RARE),
+    SET_MYTHIC     (FSkinProp.IMG_SETLOGO_MYTHIC),
+    SET_SPECIAL    (FSkinProp.IMG_SETLOGO_SPECIAL),
 
     //Watermarks
-    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G, SourceFile.WATERMARKS),
-    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R, SourceFile.WATERMARKS),
-    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B, SourceFile.WATERMARKS),
-    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U, SourceFile.WATERMARKS),
-    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
-    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
+    WATERMARK_G    (FSkinProp.IMG_WATERMARK_G),
+    WATERMARK_R    (FSkinProp.IMG_WATERMARK_R),
+    WATERMARK_B    (FSkinProp.IMG_WATERMARK_B),
+    WATERMARK_U    (FSkinProp.IMG_WATERMARK_U),
+    WATERMARK_W    (FSkinProp.IMG_WATERMARK_W),
+    WATERMARK_C    (FSkinProp.IMG_WATERMARK_C),
 
     //draft ranks
-    DRAFTRANK_D (FSkinProp.IMG_DRAFTRANK_D, SourceFile.DRAFTRANKS),
-    DRAFTRANK_C (FSkinProp.IMG_DRAFTRANK_C, SourceFile.DRAFTRANKS),
-    DRAFTRANK_B (FSkinProp.IMG_DRAFTRANK_B, SourceFile.DRAFTRANKS),
-    DRAFTRANK_A (FSkinProp.IMG_DRAFTRANK_A, SourceFile.DRAFTRANKS),
-    DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S, SourceFile.DRAFTRANKS),
+    DRAFTRANK_D (FSkinProp.IMG_DRAFTRANK_D),
+    DRAFTRANK_C (FSkinProp.IMG_DRAFTRANK_C),
+    DRAFTRANK_B (FSkinProp.IMG_DRAFTRANK_B),
+    DRAFTRANK_A (FSkinProp.IMG_DRAFTRANK_A),
+    DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S),
 
     //Gameplay
-    TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
-    UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.MANAICONS),
-    CHAOS           (FSkinProp.IMG_CHAOS, SourceFile.ICONS),
-    SLASH           (FSkinProp.IMG_SLASH, SourceFile.ICONS),
-    ATTACK          (FSkinProp.IMG_ATTACK, SourceFile.ICONS),
-    DEFEND          (FSkinProp.IMG_DEFEND, SourceFile.ICONS),
-    SUMMONSICK      (FSkinProp.IMG_SUMMONSICK, SourceFile.ICONS),
-    PHASING         (FSkinProp.IMG_PHASING, SourceFile.ICONS),
-    COSTRESERVED    (FSkinProp.IMG_COSTRESERVED, SourceFile.ICONS),
-    COUNTERS1       (FSkinProp.IMG_COUNTERS1, SourceFile.ICONS),
-    COUNTERS2       (FSkinProp.IMG_COUNTERS2, SourceFile.ICONS),
-    COUNTERS3       (FSkinProp.IMG_COUNTERS3, SourceFile.ICONS),
-    COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI, SourceFile.ICONS),
-    ENERGY          (FSkinProp.IMG_ENERGY, SourceFile.ICONS),
-    TICKET          (FSkinProp.IMG_TICKET, SourceFile.ICONS),
-    RAD             (FSkinProp.IMG_RAD, SourceFile.ICONS),
+    CHAOS           (FSkinProp.IMG_CHAOS),
+    SLASH           (FSkinProp.IMG_SLASH),
+    ATTACK          (FSkinProp.IMG_ATTACK),
+    DEFEND          (FSkinProp.IMG_DEFEND),
+    SUMMONSICK      (FSkinProp.IMG_SUMMONSICK),
+    PHASING         (FSkinProp.IMG_PHASING),
+    COSTRESERVED    (FSkinProp.IMG_COSTRESERVED),
+    COUNTERS1       (FSkinProp.IMG_COUNTERS1),
+    COUNTERS2       (FSkinProp.IMG_COUNTERS2),
+    COUNTERS3       (FSkinProp.IMG_COUNTERS3),
+    COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI),
+    ENERGY          (FSkinProp.IMG_ENERGY),
+    TICKET          (FSkinProp.IMG_TICKET),
+    RAD             (FSkinProp.IMG_RAD),
 
     //Dock Icons
-    SHORTCUTS    (FSkinProp.ICO_SHORTCUTS, SourceFile.ICONS),
-    SETTINGS     (FSkinProp.ICO_SETTINGS, SourceFile.ICONS),
-    ENDTURN      (FSkinProp.ICO_ENDTURN, SourceFile.ICONS),
-    CONCEDE      (FSkinProp.ICO_CONCEDE, SourceFile.ICONS),
-    REVERTLAYOUT (FSkinProp.ICO_REVERTLAYOUT, SourceFile.ICONS),
-    OPENLAYOUT   (FSkinProp.ICO_OPENLAYOUT, SourceFile.ICONS),
-    SAVELAYOUT   (FSkinProp.ICO_SAVELAYOUT, SourceFile.ICONS),
-    DECKLIST     (FSkinProp.ICO_DECKLIST, SourceFile.ICONS),
-    ALPHASTRIKE  (FSkinProp.ICO_ALPHASTRIKE, SourceFile.ICONS),
-    ARCSOFF      (FSkinProp.ICO_ARCSOFF, SourceFile.ICONS),
-    ARCSON       (FSkinProp.ICO_ARCSON, SourceFile.ICONS),
-    ARCSHOVER    (FSkinProp.ICO_ARCSHOVER, SourceFile.ICONS),
+    SHORTCUTS    (FSkinProp.ICO_SHORTCUTS),
+    SETTINGS     (FSkinProp.ICO_SETTINGS),
+    ENDTURN      (FSkinProp.ICO_ENDTURN),
+    CONCEDE      (FSkinProp.ICO_CONCEDE),
+    REVERTLAYOUT (FSkinProp.ICO_REVERTLAYOUT),
+    OPENLAYOUT   (FSkinProp.ICO_OPENLAYOUT),
+    SAVELAYOUT   (FSkinProp.ICO_SAVELAYOUT),
+    DECKLIST     (FSkinProp.ICO_DECKLIST),
+    ALPHASTRIKE  (FSkinProp.ICO_ALPHASTRIKE),
+    ARCSOFF      (FSkinProp.ICO_ARCSOFF),
+    ARCSON       (FSkinProp.ICO_ARCSON),
+    ARCSHOVER    (FSkinProp.ICO_ARCSHOVER),
 
     //choice-search-misc
-    HDCHOICE     (FSkinProp.ICO_HDCHOICE, SourceFile.BUTTONS),
-    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD, SourceFile.BUTTONS),
-    HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE, SourceFile.BUTTONS),
-    HDIMPORT     (FSkinProp.ICO_HDIMPORT, SourceFile.BUTTONS),
-    HDEXPORT     (FSkinProp.ICO_HDEXPORT, SourceFile.BUTTONS),
-    HDYIELD      (FSkinProp.ICO_HDYIELD, SourceFile.BUTTONS),
-    BLANK        (FSkinProp.ICO_BLANK, SourceFile.ICONS),
+    HDCHOICE     (FSkinProp.ICO_HDCHOICE),
+    HDSIDEBOARD  (FSkinProp.ICO_HDSIDEBOARD),
+    HDPREFERENCE (FSkinProp.ICO_HDPREFERENCE),
+    HDIMPORT     (FSkinProp.ICO_HDIMPORT),
+    HDEXPORT     (FSkinProp.ICO_HDEXPORT),
+    HDYIELD      (FSkinProp.ICO_HDYIELD),
+    BLANK        (FSkinProp.ICO_BLANK),
 
     //Achievement Trophies
-    COMMON_TROPHY    (FSkinProp.IMG_COMMON_TROPHY, SourceFile.TROPHIES),
-    UNCOMMON_TROPHY  (FSkinProp.IMG_UNCOMMON_TROPHY, SourceFile.TROPHIES),
-    RARE_TROPHY      (FSkinProp.IMG_RARE_TROPHY, SourceFile.TROPHIES),
-    MYTHIC_TROPHY    (FSkinProp.IMG_MYTHIC_TROPHY, SourceFile.TROPHIES),
-    SPECIAL_TROPHY   (FSkinProp.IMG_SPECIAL_TROPHY, SourceFile.TROPHIES),
-    TROPHY_PLATE     (FSkinProp.IMG_TROPHY_PLATE, SourceFile.TROPHIES),
-    TROPHY_CASE_TOP  (FSkinProp.IMG_TROPHY_CASE_TOP, SourceFile.TROPHIES),
-    TROPHY_SHELF     (FSkinProp.IMG_TROPHY_SHELF, SourceFile.TROPHIES),
+    COMMON_TROPHY    (FSkinProp.IMG_COMMON_TROPHY),
+    UNCOMMON_TROPHY  (FSkinProp.IMG_UNCOMMON_TROPHY),
+    RARE_TROPHY      (FSkinProp.IMG_RARE_TROPHY),
+    MYTHIC_TROPHY    (FSkinProp.IMG_MYTHIC_TROPHY),
+    SPECIAL_TROPHY   (FSkinProp.IMG_SPECIAL_TROPHY),
+    TROPHY_PLATE     (FSkinProp.IMG_TROPHY_PLATE),
+    TROPHY_CASE_TOP  (FSkinProp.IMG_TROPHY_CASE_TOP),
+    TROPHY_SHELF     (FSkinProp.IMG_TROPHY_SHELF),
 
     //Planar Conquest Images
-    PLANE_MONITOR     (FSkinProp.IMG_PLANE_MONITOR, SourceFile.PLANAR_CONQUEST),
-    AETHER_SHARD      (FSkinProp.IMG_AETHER_SHARD, SourceFile.PLANAR_CONQUEST),
-    MULTIVERSE        (FSkinProp.IMG_MULTIVERSE, SourceFile.PLANAR_CONQUEST),
-    SPELLBOOK         (FSkinProp.IMG_SPELLBOOK, SourceFile.PLANAR_CONQUEST),
-    PW_BADGE_COMMON   (FSkinProp.IMG_PW_BADGE_COMMON, SourceFile.PLANAR_CONQUEST),
-    PW_BADGE_UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON, SourceFile.PLANAR_CONQUEST),
-    PW_BADGE_RARE     (FSkinProp.IMG_PW_BADGE_RARE, SourceFile.PLANAR_CONQUEST),
-    PW_BADGE_MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC, SourceFile.PLANAR_CONQUEST),
+    PLANE_MONITOR     (FSkinProp.IMG_PLANE_MONITOR),
+    AETHER_SHARD      (FSkinProp.IMG_AETHER_SHARD),
+    MULTIVERSE        (FSkinProp.IMG_MULTIVERSE),
+    SPELLBOOK         (FSkinProp.IMG_SPELLBOOK),
+    PW_BADGE_COMMON   (FSkinProp.IMG_PW_BADGE_COMMON),
+    PW_BADGE_UNCOMMON (FSkinProp.IMG_PW_BADGE_UNCOMMON),
+    PW_BADGE_RARE     (FSkinProp.IMG_PW_BADGE_RARE),
+    PW_BADGE_MYTHIC   (FSkinProp.IMG_PW_BADGE_MYTHIC),
 
     //Quest Icons
-    QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP, SourceFile.ICONS),
-    QUEST_GEAR        (FSkinProp.ICO_QUEST_GEAR, SourceFile.ICONS),
-    QUEST_GOLD        (FSkinProp.ICO_QUEST_GOLD, SourceFile.ICONS),
-    QUEST_ELIXIR      (FSkinProp.ICO_QUEST_ELIXIR, SourceFile.ICONS),
-    QUEST_BOOK        (FSkinProp.ICO_QUEST_BOOK, SourceFile.ICONS),
-    QUEST_BOTTLES     (FSkinProp.ICO_QUEST_BOTTLES, SourceFile.ICONS),
-    QUEST_BOX         (FSkinProp.ICO_QUEST_BOX, SourceFile.ICONS),
-    QUEST_COIN        (FSkinProp.ICO_QUEST_COIN, SourceFile.ICONS),
-    QUEST_CHARM       (FSkinProp.ICO_QUEST_CHARM, SourceFile.ICONS),
-    QUEST_FOX         (FSkinProp.ICO_QUEST_FOX, SourceFile.ICONS),
-    QUEST_LEAF        (FSkinProp.ICO_QUEST_LEAF, SourceFile.ICONS),
-    QUEST_LIFE        (FSkinProp.ICO_QUEST_LIFE, SourceFile.ICONS),
-    QUEST_COINSTACK   (FSkinProp.ICO_QUEST_COINSTACK, SourceFile.ICONS),
-    QUEST_MAP         (FSkinProp.ICO_QUEST_MAP, SourceFile.ICONS),
-    QUEST_NOTES       (FSkinProp.ICO_QUEST_NOTES, SourceFile.ICONS),
-    QUEST_HEART       (FSkinProp.ICO_QUEST_HEART, SourceFile.ICONS),
-    QUEST_BREW        (FSkinProp.ICO_QUEST_BREW, SourceFile.ICONS),
-    QUEST_STAKES      (FSkinProp.ICO_QUEST_STAKES, SourceFile.ICONS),
-    QUEST_MINUS       (FSkinProp.ICO_QUEST_MINUS, SourceFile.ICONS),
-    QUEST_PLUS        (FSkinProp.ICO_QUEST_PLUS, SourceFile.ICONS),
-    QUEST_PLUSPLUS    (FSkinProp.ICO_QUEST_PLUSPLUS, SourceFile.ICONS),
-    QUEST_BIG_ELIXIR  (FSkinProp.ICO_QUEST_BIG_ELIXIR, SourceFile.ICONS),
-    QUEST_BIG_BREW    (FSkinProp.ICO_QUEST_BIG_BREW, SourceFile.ICONS),
-    QUEST_BIG_BM      (FSkinProp.ICO_QUEST_BIG_BM, SourceFile.ICONS),
-    QUEST_BIG_STAKES  (FSkinProp.ICO_QUEST_BIG_STAKES, SourceFile.ICONS),
-    QUEST_BIG_HOUSE   (FSkinProp.ICO_QUEST_BIG_HOUSE, SourceFile.ICONS),
-    QUEST_BIG_COIN    (FSkinProp.ICO_QUEST_BIG_COIN, SourceFile.ICONS),
-    QUEST_BIG_BOOK    (FSkinProp.ICO_QUEST_BIG_BOOK, SourceFile.ICONS),
-    QUEST_BIG_MAP     (FSkinProp.ICO_QUEST_BIG_MAP, SourceFile.ICONS),
-    QUEST_BIG_ZEP     (FSkinProp.ICO_QUEST_BIG_ZEP, SourceFile.ICONS),
-    QUEST_BIG_CHARM   (FSkinProp.ICO_QUEST_BIG_CHARM, SourceFile.ICONS),
-    QUEST_BIG_BOOTS   (FSkinProp.ICO_QUEST_BIG_BOOTS, SourceFile.ICONS),
-    QUEST_BIG_SHIELD  (FSkinProp.ICO_QUEST_BIG_SHIELD, SourceFile.ICONS),
-    QUEST_BIG_ARMOR   (FSkinProp.ICO_QUEST_BIG_ARMOR, SourceFile.ICONS),
-    QUEST_BIG_AXE     (FSkinProp.ICO_QUEST_BIG_AXE, SourceFile.ICONS),
-    QUEST_BIG_SWORD   (FSkinProp.ICO_QUEST_BIG_SWORD, SourceFile.ICONS),
-    QUEST_BIG_BAG     (FSkinProp.ICO_QUEST_BIG_BAG, SourceFile.ICONS),
+    QUEST_ZEP         (FSkinProp.ICO_QUEST_ZEP),
+    QUEST_GEAR        (FSkinProp.ICO_QUEST_GEAR),
+    QUEST_GOLD        (FSkinProp.ICO_QUEST_GOLD),
+    QUEST_ELIXIR      (FSkinProp.ICO_QUEST_ELIXIR),
+    QUEST_BOOK        (FSkinProp.ICO_QUEST_BOOK),
+    QUEST_BOTTLES     (FSkinProp.ICO_QUEST_BOTTLES),
+    QUEST_BOX         (FSkinProp.ICO_QUEST_BOX),
+    QUEST_COIN        (FSkinProp.ICO_QUEST_COIN),
+    QUEST_CHARM       (FSkinProp.ICO_QUEST_CHARM),
+    QUEST_FOX         (FSkinProp.ICO_QUEST_FOX),
+    QUEST_LEAF        (FSkinProp.ICO_QUEST_LEAF),
+    QUEST_LIFE        (FSkinProp.ICO_QUEST_LIFE),
+    QUEST_COINSTACK   (FSkinProp.ICO_QUEST_COINSTACK),
+    QUEST_MAP         (FSkinProp.ICO_QUEST_MAP),
+    QUEST_NOTES       (FSkinProp.ICO_QUEST_NOTES),
+    QUEST_HEART       (FSkinProp.ICO_QUEST_HEART),
+    QUEST_BREW        (FSkinProp.ICO_QUEST_BREW),
+    QUEST_STAKES      (FSkinProp.ICO_QUEST_STAKES),
+    QUEST_MINUS       (FSkinProp.ICO_QUEST_MINUS),
+    QUEST_PLUS        (FSkinProp.ICO_QUEST_PLUS),
+    QUEST_PLUSPLUS    (FSkinProp.ICO_QUEST_PLUSPLUS),
+    QUEST_BIG_ELIXIR  (FSkinProp.ICO_QUEST_BIG_ELIXIR),
+    QUEST_BIG_BREW    (FSkinProp.ICO_QUEST_BIG_BREW),
+    QUEST_BIG_BM      (FSkinProp.ICO_QUEST_BIG_BM),
+    QUEST_BIG_STAKES  (FSkinProp.ICO_QUEST_BIG_STAKES),
+    QUEST_BIG_HOUSE   (FSkinProp.ICO_QUEST_BIG_HOUSE),
+    QUEST_BIG_COIN    (FSkinProp.ICO_QUEST_BIG_COIN),
+    QUEST_BIG_BOOK    (FSkinProp.ICO_QUEST_BIG_BOOK),
+    QUEST_BIG_MAP     (FSkinProp.ICO_QUEST_BIG_MAP),
+    QUEST_BIG_ZEP     (FSkinProp.ICO_QUEST_BIG_ZEP),
+    QUEST_BIG_CHARM   (FSkinProp.ICO_QUEST_BIG_CHARM),
+    QUEST_BIG_BOOTS   (FSkinProp.ICO_QUEST_BIG_BOOTS),
+    QUEST_BIG_SHIELD  (FSkinProp.ICO_QUEST_BIG_SHIELD),
+    QUEST_BIG_ARMOR   (FSkinProp.ICO_QUEST_BIG_ARMOR),
+    QUEST_BIG_AXE     (FSkinProp.ICO_QUEST_BIG_AXE),
+    QUEST_BIG_SWORD   (FSkinProp.ICO_QUEST_BIG_SWORD),
+    QUEST_BIG_BAG     (FSkinProp.ICO_QUEST_BIG_BAG),
 
     //adventure
-    MANASHARD         (FSkinProp.ICO_MANASHARD, SourceFile.ADVENTURE),
-    MENU_ADVLOGO      (FSkinProp.ICO_ADVLOGO, SourceFile.ADVENTURE),
-    ADV_DECKBOX       (FSkinProp.ICO_ADVDECKBOX, SourceFile.ADVENTURE),
-    ADV_FLIPICON      (FSkinProp.ICO_ADVFLIP, SourceFile.ADVENTURE),
+    MANASHARD         (FSkinProp.ICO_MANASHARD),
+    MENU_ADVLOGO      (FSkinProp.ICO_ADVLOGO),
+    ADV_DECKBOX       (FSkinProp.ICO_ADVDECKBOX),
+    ADV_FLIPICON      (FSkinProp.ICO_ADVFLIP),
 
     //menu icon
-    MENU_GALAXY       (FSkinProp.ICO_MENU_GALAXY, SourceFile.ICONS),
-    MENU_STATS        (FSkinProp.ICO_MENU_STATS, SourceFile.ICONS),
-    MENU_PUZZLE       (FSkinProp.ICO_MENU_PUZZLE, SourceFile.ICONS),
-    MENU_GAUNTLET     (FSkinProp.ICO_MENU_GAUNTLET, SourceFile.ICONS),
-    MENU_SEALED       (FSkinProp.ICO_MENU_SEALED, SourceFile.ICONS),
-    MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT, SourceFile.ICONS),
-    MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED, SourceFile.ICONS),
+    MENU_GALAXY       (FSkinProp.ICO_MENU_GALAXY),
+    MENU_STATS        (FSkinProp.ICO_MENU_STATS),
+    MENU_PUZZLE       (FSkinProp.ICO_MENU_PUZZLE),
+    MENU_GAUNTLET     (FSkinProp.ICO_MENU_GAUNTLET),
+    MENU_SEALED       (FSkinProp.ICO_MENU_SEALED),
+    MENU_DRAFT        (FSkinProp.ICO_MENU_DRAFT),
+    MENU_CONSTRUCTED  (FSkinProp.ICO_MENU_CONSTRUCTED),
 
     //Interface icons
-    QUESTION        (FSkinProp.ICO_QUESTION, SourceFile.ICONS),
-    INFORMATION     (FSkinProp.ICO_INFORMATION, SourceFile.ICONS),
-    WARNING         (FSkinProp.ICO_WARNING, SourceFile.ICONS),
-    ERROR           (FSkinProp.ICO_ERROR, SourceFile.ICONS),
+    QUESTION        (FSkinProp.ICO_QUESTION),
+    INFORMATION     (FSkinProp.ICO_INFORMATION),
+    WARNING         (FSkinProp.ICO_WARNING),
+    ERROR           (FSkinProp.ICO_ERROR),
 
-    DELETE          (FSkinProp.ICO_DELETE, SourceFile.ICONS),
-    HDDELETE        (FSkinProp.ICO_HDDELETE, SourceFile.BUTTONS),
+    DELETE          (FSkinProp.ICO_DELETE),
+    HDDELETE        (FSkinProp.ICO_HDDELETE),
 
-    DELETE_OVER     (FSkinProp.ICO_DELETE_OVER, SourceFile.ICONS),
+    DELETE_OVER     (FSkinProp.ICO_DELETE_OVER),
 
-    EDIT            (FSkinProp.ICO_EDIT, SourceFile.ICONS),
-    HDEDIT            (FSkinProp.ICO_HDEDIT, SourceFile.BUTTONS),
+    EDIT            (FSkinProp.ICO_EDIT),
+    HDEDIT            (FSkinProp.ICO_HDEDIT),
 
-    EDIT_OVER       (FSkinProp.ICO_EDIT_OVER, SourceFile.ICONS),
+    EDIT_OVER       (FSkinProp.ICO_EDIT_OVER),
 
-    OPEN            (FSkinProp.ICO_OPEN, SourceFile.ICONS),
-    HDOPEN          (FSkinProp.ICO_HDOPEN, SourceFile.BUTTONS),
+    OPEN            (FSkinProp.ICO_OPEN),
+    HDOPEN          (FSkinProp.ICO_HDOPEN),
 
-    MINUS           (FSkinProp.ICO_MINUS, SourceFile.ICONS),
-    HDMINUS         (FSkinProp.ICO_HDMINUS, SourceFile.BUTTONS),
+    MINUS           (FSkinProp.ICO_MINUS),
+    HDMINUS         (FSkinProp.ICO_HDMINUS),
 
-    NEW             (FSkinProp.ICO_NEW, SourceFile.ICONS),
+    NEW             (FSkinProp.ICO_NEW),
 
-    PLUS            (FSkinProp.ICO_PLUS, SourceFile.ICONS),
-    HDPLUS          (FSkinProp.ICO_HDPLUS, SourceFile.BUTTONS),
+    PLUS            (FSkinProp.ICO_PLUS),
+    HDPLUS          (FSkinProp.ICO_HDPLUS),
 
-    PRINT           (FSkinProp.ICO_PRINT, SourceFile.ICONS),
+    PRINT           (FSkinProp.ICO_PRINT),
 
-    SAVE            (FSkinProp.ICO_SAVE, SourceFile.ICONS),
-    HDSAVE          (FSkinProp.ICO_HDSAVE, SourceFile.BUTTONS),
-    SAVEAS          (FSkinProp.ICO_SAVEAS, SourceFile.ICONS),
-    HDSAVEAS        (FSkinProp.ICO_HDSAVEAS, SourceFile.BUTTONS),
+    SAVE            (FSkinProp.ICO_SAVE),
+    HDSAVE          (FSkinProp.ICO_HDSAVE),
+    SAVEAS          (FSkinProp.ICO_SAVEAS),
+    HDSAVEAS        (FSkinProp.ICO_HDSAVEAS),
 
-    CLOSE           (FSkinProp.ICO_CLOSE, SourceFile.ICONS),
-    LIST            (FSkinProp.ICO_LIST, SourceFile.ICONS),
-    CARD_IMAGE      (FSkinProp.ICO_CARD_IMAGE, SourceFile.ICONS),
+    CLOSE           (FSkinProp.ICO_CLOSE),
+    LIST            (FSkinProp.ICO_LIST),
+    CARD_IMAGE      (FSkinProp.ICO_CARD_IMAGE),
 
-    FOLDER          (FSkinProp.ICO_FOLDER, SourceFile.ICONS),
-    HDFOLDER        (FSkinProp.ICO_HDFOLDER, SourceFile.BUTTONS),
+    FOLDER          (FSkinProp.ICO_FOLDER),
+    HDFOLDER        (FSkinProp.ICO_HDFOLDER),
 
-    SEARCH          (FSkinProp.ICO_SEARCH, SourceFile.ICONS),
-    HDSEARCH        (FSkinProp.ICO_HDSEARCH, SourceFile.BUTTONS),
+    SEARCH          (FSkinProp.ICO_SEARCH),
+    HDSEARCH        (FSkinProp.ICO_HDSEARCH),
 
-    UNKNOWN         (FSkinProp.ICO_UNKNOWN, SourceFile.ICONS),
-    LOGO            (FSkinProp.ICO_LOGO, SourceFile.ICONS),
+    UNKNOWN         (FSkinProp.ICO_UNKNOWN),
+    LOGO            (FSkinProp.ICO_LOGO),
 
-    FLIPCARD        (FSkinProp.ICO_FLIPCARD, SourceFile.ICONS),
-    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD, SourceFile.BUTTONS),
+    FLIPCARD        (FSkinProp.ICO_FLIPCARD),
+    HDFLIPCARD        (FSkinProp.ICO_HDFLIPCARD),
 
-    FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
-    LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
+    FAVICON         (FSkinProp.ICO_FAVICON),
+    LOCK            (FSkinProp.ICO_LOCK),
     //reveal icons
-    SEE             (FSkinProp.ICO_SEE, SourceFile.ICONS),
-    UNSEE           (FSkinProp.ICO_UNSEE, SourceFile.ICONS),
+    SEE             (FSkinProp.ICO_SEE),
+    UNSEE           (FSkinProp.ICO_UNSEE),
 
     //Layout images
-    HANDLE  (FSkinProp.IMG_HANDLE, SourceFile.ICONS),
-    CUR_L   (FSkinProp.IMG_CUR_L, SourceFile.ICONS),
-    CUR_R   (FSkinProp.IMG_CUR_R, SourceFile.ICONS),
-    CUR_T   (FSkinProp.IMG_CUR_T, SourceFile.ICONS),
-    CUR_B   (FSkinProp.IMG_CUR_B, SourceFile.ICONS),
-    CUR_TAB (FSkinProp.IMG_CUR_TAB, SourceFile.ICONS),
+    HANDLE  (FSkinProp.IMG_HANDLE),
+    CUR_L   (FSkinProp.IMG_CUR_L),
+    CUR_R   (FSkinProp.IMG_CUR_R),
+    CUR_T   (FSkinProp.IMG_CUR_T),
+    CUR_B   (FSkinProp.IMG_CUR_B),
+    CUR_TAB (FSkinProp.IMG_CUR_TAB),
 
     //Editor images
-    STAR_OUTLINE    (FSkinProp.IMG_STAR_OUTLINE, SourceFile.ICONS),
-    HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE, SourceFile.BUTTONS),
-    STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
-    HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED, SourceFile.BUTTONS),
-    AI_ACTIVE       (FSkinProp.IMG_AI_ACTIVE, SourceFile.ICONS),
-    AI_INACTIVE     (FSkinProp.IMG_AI_INACTIVE, SourceFile.ICONS),
+    STAR_OUTLINE    (FSkinProp.IMG_STAR_OUTLINE),
+    HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE),
+    STAR_FILLED     (FSkinProp.IMG_STAR_FILLED),
+    HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED),
+    AI_ACTIVE       (FSkinProp.IMG_AI_ACTIVE),
+    AI_INACTIVE     (FSkinProp.IMG_AI_INACTIVE),
 
-    ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
-    CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),
-    ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT, SourceFile.MANAICONS),
-    INSTANT         (FSkinProp.IMG_INSTANT, SourceFile.MANAICONS),
-    LAND            (FSkinProp.IMG_LAND, SourceFile.MANAICONS),
-    LANDLOGO        (FSkinProp.IMG_LANDLOGO, SourceFile.MANAICONS),
-    MULTI           (FSkinProp.IMG_MULTI, SourceFile.ICONS),
-    HDMULTI         (FSkinProp.IMG_HDMULTI, SourceFile.MANAICONS),
-    PLANESWALKER    (FSkinProp.IMG_PLANESWALKER, SourceFile.MANAICONS),
-    PACK            (FSkinProp.IMG_PACK, SourceFile.ICONS),
-    SORCERY         (FSkinProp.IMG_SORCERY, SourceFile.MANAICONS),
-    BATTLE          (FSkinProp.IMG_BATTLE, SourceFile.MANAICONS),
-    COMMANDER       (FSkinProp.IMG_COMMANDER, SourceFile.ICONS),
+    ARTIFACT        (FSkinProp.IMG_ARTIFACT),
+    CREATURE        (FSkinProp.IMG_CREATURE),
+    ENCHANTMENT     (FSkinProp.IMG_ENCHANTMENT),
+    INSTANT         (FSkinProp.IMG_INSTANT),
+    LAND            (FSkinProp.IMG_LAND),
+    LANDLOGO        (FSkinProp.IMG_LANDLOGO),
+    MULTI           (FSkinProp.IMG_MULTI),
+    HDMULTI         (FSkinProp.IMG_HDMULTI),
+    PLANESWALKER    (FSkinProp.IMG_PLANESWALKER),
+    PACK            (FSkinProp.IMG_PACK),
+    SORCERY         (FSkinProp.IMG_SORCERY),
+    BATTLE          (FSkinProp.IMG_BATTLE),
+    COMMANDER       (FSkinProp.IMG_COMMANDER),
 
     //Buttons
-    BTN_START_UP        (FSkinProp.IMG_BTN_START_UP, SourceFile.ICONS),
-    BTN_START_OVER      (FSkinProp.IMG_BTN_START_OVER, SourceFile.ICONS),
-    BTN_START_DOWN      (FSkinProp.IMG_BTN_START_DOWN, SourceFile.ICONS),
-    BTN_UP_LEFT         (FSkinProp.IMG_BTN_UP_LEFT, SourceFile.ICONS),
-    BTN_UP_CENTER       (FSkinProp.IMG_BTN_UP_CENTER, SourceFile.ICONS),
-    BTN_UP_RIGHT        (FSkinProp.IMG_BTN_UP_RIGHT, SourceFile.ICONS),
-    BTN_OVER_LEFT       (FSkinProp.IMG_BTN_OVER_LEFT, SourceFile.ICONS),
-    BTN_OVER_CENTER     (FSkinProp.IMG_BTN_OVER_CENTER, SourceFile.ICONS),
-    BTN_OVER_RIGHT      (FSkinProp.IMG_BTN_OVER_RIGHT, SourceFile.ICONS),
-    BTN_DOWN_LEFT       (FSkinProp.IMG_BTN_DOWN_LEFT, SourceFile.ICONS),
-    BTN_DOWN_CENTER     (FSkinProp.IMG_BTN_DOWN_CENTER, SourceFile.ICONS),
-    BTN_DOWN_RIGHT      (FSkinProp.IMG_BTN_DOWN_RIGHT, SourceFile.ICONS),
-    BTN_FOCUS_LEFT      (FSkinProp.IMG_BTN_FOCUS_LEFT, SourceFile.ICONS),
-    BTN_FOCUS_CENTER    (FSkinProp.IMG_BTN_FOCUS_CENTER, SourceFile.ICONS),
-    BTN_FOCUS_RIGHT     (FSkinProp.IMG_BTN_FOCUS_RIGHT, SourceFile.ICONS),
-    BTN_TOGGLE_LEFT     (FSkinProp.IMG_BTN_TOGGLE_LEFT, SourceFile.ICONS),
-    BTN_TOGGLE_CENTER   (FSkinProp.IMG_BTN_TOGGLE_CENTER, SourceFile.ICONS),
-    BTN_TOGGLE_RIGHT    (FSkinProp.IMG_BTN_TOGGLE_RIGHT, SourceFile.ICONS),
-    BTN_DISABLED_LEFT   (FSkinProp.IMG_BTN_DISABLED_LEFT, SourceFile.ICONS),
-    BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER, SourceFile.ICONS),
-    BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT, SourceFile.ICONS),
+    BTN_START_UP        (FSkinProp.IMG_BTN_START_UP),
+    BTN_START_OVER      (FSkinProp.IMG_BTN_START_OVER),
+    BTN_START_DOWN      (FSkinProp.IMG_BTN_START_DOWN),
+    BTN_UP_LEFT         (FSkinProp.IMG_BTN_UP_LEFT),
+    BTN_UP_CENTER       (FSkinProp.IMG_BTN_UP_CENTER),
+    BTN_UP_RIGHT        (FSkinProp.IMG_BTN_UP_RIGHT),
+    BTN_OVER_LEFT       (FSkinProp.IMG_BTN_OVER_LEFT),
+    BTN_OVER_CENTER     (FSkinProp.IMG_BTN_OVER_CENTER),
+    BTN_OVER_RIGHT      (FSkinProp.IMG_BTN_OVER_RIGHT),
+    BTN_DOWN_LEFT       (FSkinProp.IMG_BTN_DOWN_LEFT),
+    BTN_DOWN_CENTER     (FSkinProp.IMG_BTN_DOWN_CENTER),
+    BTN_DOWN_RIGHT      (FSkinProp.IMG_BTN_DOWN_RIGHT),
+    BTN_FOCUS_LEFT      (FSkinProp.IMG_BTN_FOCUS_LEFT),
+    BTN_FOCUS_CENTER    (FSkinProp.IMG_BTN_FOCUS_CENTER),
+    BTN_FOCUS_RIGHT     (FSkinProp.IMG_BTN_FOCUS_RIGHT),
+    BTN_TOGGLE_LEFT     (FSkinProp.IMG_BTN_TOGGLE_LEFT),
+    BTN_TOGGLE_CENTER   (FSkinProp.IMG_BTN_TOGGLE_CENTER),
+    BTN_TOGGLE_RIGHT    (FSkinProp.IMG_BTN_TOGGLE_RIGHT),
+    BTN_DISABLED_LEFT   (FSkinProp.IMG_BTN_DISABLED_LEFT),
+    BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER),
+    BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT),
     //adv_buttons
-    ADV_BTN_UP_LEFT         (FSkinProp.IMG_ADV_BTN_UP_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_UP_CENTER       (FSkinProp.IMG_ADV_BTN_UP_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_UP_RIGHT        (FSkinProp.IMG_ADV_BTN_UP_RIGHT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_OVER_LEFT       (FSkinProp.IMG_ADV_BTN_OVER_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_OVER_CENTER     (FSkinProp.IMG_ADV_BTN_OVER_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_OVER_RIGHT      (FSkinProp.IMG_ADV_BTN_OVER_RIGHT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DOWN_LEFT       (FSkinProp.IMG_ADV_BTN_DOWN_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DOWN_CENTER     (FSkinProp.IMG_ADV_BTN_DOWN_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DOWN_RIGHT      (FSkinProp.IMG_ADV_BTN_DOWN_RIGHT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_FOCUS_LEFT      (FSkinProp.IMG_ADV_BTN_FOCUS_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_FOCUS_CENTER    (FSkinProp.IMG_ADV_BTN_FOCUS_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_FOCUS_RIGHT     (FSkinProp.IMG_ADV_BTN_FOCUS_RIGHT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_TOGGLE_LEFT     (FSkinProp.IMG_ADV_BTN_TOGGLE_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_TOGGLE_CENTER   (FSkinProp.IMG_ADV_BTN_TOGGLE_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_TOGGLE_RIGHT    (FSkinProp.IMG_ADV_BTN_TOGGLE_RIGHT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DISABLED_LEFT   (FSkinProp.IMG_ADV_BTN_DISABLED_LEFT, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DISABLED_CENTER (FSkinProp.IMG_ADV_BTN_DISABLED_CENTER, SourceFile.ADV_BUTTONS),
-    ADV_BTN_DISABLED_RIGHT  (FSkinProp.IMG_ADV_BTN_DISABLED_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_UP_LEFT         (FSkinProp.IMG_ADV_BTN_UP_LEFT),
+    ADV_BTN_UP_CENTER       (FSkinProp.IMG_ADV_BTN_UP_CENTER),
+    ADV_BTN_UP_RIGHT        (FSkinProp.IMG_ADV_BTN_UP_RIGHT),
+    ADV_BTN_OVER_LEFT       (FSkinProp.IMG_ADV_BTN_OVER_LEFT),
+    ADV_BTN_OVER_CENTER     (FSkinProp.IMG_ADV_BTN_OVER_CENTER),
+    ADV_BTN_OVER_RIGHT      (FSkinProp.IMG_ADV_BTN_OVER_RIGHT),
+    ADV_BTN_DOWN_LEFT       (FSkinProp.IMG_ADV_BTN_DOWN_LEFT),
+    ADV_BTN_DOWN_CENTER     (FSkinProp.IMG_ADV_BTN_DOWN_CENTER),
+    ADV_BTN_DOWN_RIGHT      (FSkinProp.IMG_ADV_BTN_DOWN_RIGHT),
+    ADV_BTN_FOCUS_LEFT      (FSkinProp.IMG_ADV_BTN_FOCUS_LEFT),
+    ADV_BTN_FOCUS_CENTER    (FSkinProp.IMG_ADV_BTN_FOCUS_CENTER),
+    ADV_BTN_FOCUS_RIGHT     (FSkinProp.IMG_ADV_BTN_FOCUS_RIGHT),
+    ADV_BTN_TOGGLE_LEFT     (FSkinProp.IMG_ADV_BTN_TOGGLE_LEFT),
+    ADV_BTN_TOGGLE_CENTER   (FSkinProp.IMG_ADV_BTN_TOGGLE_CENTER),
+    ADV_BTN_TOGGLE_RIGHT    (FSkinProp.IMG_ADV_BTN_TOGGLE_RIGHT),
+    ADV_BTN_DISABLED_LEFT   (FSkinProp.IMG_ADV_BTN_DISABLED_LEFT),
+    ADV_BTN_DISABLED_CENTER (FSkinProp.IMG_ADV_BTN_DISABLED_CENTER),
+    ADV_BTN_DISABLED_RIGHT  (FSkinProp.IMG_ADV_BTN_DISABLED_RIGHT),
     //Hdbuttons
-    HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP, SourceFile.BTNSTART),
-    HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER, SourceFile.BTNSTART),
-    HDBTN_START_DOWN      (FSkinProp.IMG_HDBTN_START_DOWN, SourceFile.BTNSTART),
-    HDBTN_UP_LEFT         (FSkinProp.IMG_HDBTN_UP_LEFT, SourceFile.BUTTONS),
-    HDBTN_UP_CENTER       (FSkinProp.IMG_HDBTN_UP_CENTER, SourceFile.BUTTONS),
-    HDBTN_UP_RIGHT        (FSkinProp.IMG_HDBTN_UP_RIGHT, SourceFile.BUTTONS),
-    HDBTN_OVER_LEFT       (FSkinProp.IMG_HDBTN_OVER_LEFT, SourceFile.BUTTONS),
-    HDBTN_OVER_CENTER     (FSkinProp.IMG_HDBTN_OVER_CENTER, SourceFile.BUTTONS),
-    HDBTN_OVER_RIGHT      (FSkinProp.IMG_HDBTN_OVER_RIGHT, SourceFile.BUTTONS),
-    HDBTN_DOWN_LEFT       (FSkinProp.IMG_HDBTN_DOWN_LEFT, SourceFile.BUTTONS),
-    HDBTN_DOWN_CENTER     (FSkinProp.IMG_HDBTN_DOWN_CENTER, SourceFile.BUTTONS),
-    HDBTN_DOWN_RIGHT      (FSkinProp.IMG_HDBTN_DOWN_RIGHT, SourceFile.BUTTONS),
-    HDBTN_FOCUS_LEFT       (FSkinProp.IMG_HDBTN_FOCUS_LEFT, SourceFile.BUTTONS),
-    HDBTN_FOCUS_CENTER     (FSkinProp.IMG_HDBTN_FOCUS_CENTER, SourceFile.BUTTONS),
-    HDBTN_FOCUS_RIGHT      (FSkinProp.IMG_HDBTN_FOCUS_RIGHT, SourceFile.BUTTONS),
-    HDBTN_TOGGLE_LEFT       (FSkinProp.IMG_HDBTN_TOGGLE_LEFT, SourceFile.BUTTONS),
-    HDBTN_TOGGLE_CENTER     (FSkinProp.IMG_HDBTN_TOGGLE_CENTER, SourceFile.BUTTONS),
-    HDBTN_TOGGLE_RIGHT      (FSkinProp.IMG_HDBTN_TOGGLE_RIGHT, SourceFile.BUTTONS),
-    HDBTN_DISABLED_LEFT       (FSkinProp.IMG_HDBTN_DISABLED_LEFT, SourceFile.BUTTONS),
-    HDBTN_DISABLED_CENTER     (FSkinProp.IMG_HDBTN_DISABLED_CENTER, SourceFile.BUTTONS),
-    HDBTN_DISABLED_RIGHT      (FSkinProp.IMG_HDBTN_DISABLED_RIGHT, SourceFile.BUTTONS),
+    HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP),
+    HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER),
+    HDBTN_START_DOWN      (FSkinProp.IMG_HDBTN_START_DOWN),
+    HDBTN_UP_LEFT         (FSkinProp.IMG_HDBTN_UP_LEFT),
+    HDBTN_UP_CENTER       (FSkinProp.IMG_HDBTN_UP_CENTER),
+    HDBTN_UP_RIGHT        (FSkinProp.IMG_HDBTN_UP_RIGHT),
+    HDBTN_OVER_LEFT       (FSkinProp.IMG_HDBTN_OVER_LEFT),
+    HDBTN_OVER_CENTER     (FSkinProp.IMG_HDBTN_OVER_CENTER),
+    HDBTN_OVER_RIGHT      (FSkinProp.IMG_HDBTN_OVER_RIGHT),
+    HDBTN_DOWN_LEFT       (FSkinProp.IMG_HDBTN_DOWN_LEFT),
+    HDBTN_DOWN_CENTER     (FSkinProp.IMG_HDBTN_DOWN_CENTER),
+    HDBTN_DOWN_RIGHT      (FSkinProp.IMG_HDBTN_DOWN_RIGHT),
+    HDBTN_FOCUS_LEFT       (FSkinProp.IMG_HDBTN_FOCUS_LEFT),
+    HDBTN_FOCUS_CENTER     (FSkinProp.IMG_HDBTN_FOCUS_CENTER),
+    HDBTN_FOCUS_RIGHT      (FSkinProp.IMG_HDBTN_FOCUS_RIGHT),
+    HDBTN_TOGGLE_LEFT       (FSkinProp.IMG_HDBTN_TOGGLE_LEFT),
+    HDBTN_TOGGLE_CENTER     (FSkinProp.IMG_HDBTN_TOGGLE_CENTER),
+    HDBTN_TOGGLE_RIGHT      (FSkinProp.IMG_HDBTN_TOGGLE_RIGHT),
+    HDBTN_DISABLED_LEFT       (FSkinProp.IMG_HDBTN_DISABLED_LEFT),
+    HDBTN_DISABLED_CENTER     (FSkinProp.IMG_HDBTN_DISABLED_CENTER),
+    HDBTN_DISABLED_RIGHT      (FSkinProp.IMG_HDBTN_DISABLED_RIGHT),
 
     //Foils
-    FOIL_01     (FSkinProp.FOIL_01, SourceFile.FOILS),
-    FOIL_02     (FSkinProp.FOIL_02, SourceFile.FOILS),
-    FOIL_03     (FSkinProp.FOIL_03, SourceFile.FOILS),
-    FOIL_04     (FSkinProp.FOIL_04, SourceFile.FOILS),
-    FOIL_05     (FSkinProp.FOIL_05, SourceFile.FOILS),
-    FOIL_06     (FSkinProp.FOIL_06, SourceFile.FOILS),
-    FOIL_07     (FSkinProp.FOIL_07, SourceFile.FOILS),
-    FOIL_08     (FSkinProp.FOIL_08, SourceFile.FOILS),
-    FOIL_09     (FSkinProp.FOIL_09, SourceFile.FOILS),
-    FOIL_10     (FSkinProp.FOIL_10, SourceFile.FOILS),
+    FOIL_01     (FSkinProp.FOIL_01),
+    FOIL_02     (FSkinProp.FOIL_02),
+    FOIL_03     (FSkinProp.FOIL_03),
+    FOIL_04     (FSkinProp.FOIL_04),
+    FOIL_05     (FSkinProp.FOIL_05),
+    FOIL_06     (FSkinProp.FOIL_06),
+    FOIL_07     (FSkinProp.FOIL_07),
+    FOIL_08     (FSkinProp.FOIL_08),
+    FOIL_09     (FSkinProp.FOIL_09),
+    FOIL_10     (FSkinProp.FOIL_10),
 
     //Old Foils
-    FOIL_11     (FSkinProp.FOIL_11, SourceFile.OLD_FOILS),
-    FOIL_12     (FSkinProp.FOIL_12, SourceFile.OLD_FOILS),
-    FOIL_13     (FSkinProp.FOIL_13, SourceFile.OLD_FOILS),
-    FOIL_14     (FSkinProp.FOIL_14, SourceFile.OLD_FOILS),
-    FOIL_15     (FSkinProp.FOIL_15, SourceFile.OLD_FOILS),
-    FOIL_16     (FSkinProp.FOIL_16, SourceFile.OLD_FOILS),
-    FOIL_17     (FSkinProp.FOIL_17, SourceFile.OLD_FOILS),
-    FOIL_18     (FSkinProp.FOIL_18, SourceFile.OLD_FOILS),
-    FOIL_19     (FSkinProp.FOIL_19, SourceFile.OLD_FOILS),
-    FOIL_20     (FSkinProp.FOIL_20, SourceFile.OLD_FOILS),
+    FOIL_11     (FSkinProp.FOIL_11),
+    FOIL_12     (FSkinProp.FOIL_12),
+    FOIL_13     (FSkinProp.FOIL_13),
+    FOIL_14     (FSkinProp.FOIL_14),
+    FOIL_15     (FSkinProp.FOIL_15),
+    FOIL_16     (FSkinProp.FOIL_16),
+    FOIL_17     (FSkinProp.FOIL_17),
+    FOIL_18     (FSkinProp.FOIL_18),
+    FOIL_19     (FSkinProp.FOIL_19),
+    FOIL_20     (FSkinProp.FOIL_20),
 
     //COMMANDER
-    IMG_ABILITY_COMMANDER      (FSkinProp.IMG_ABILITY_COMMANDER, SourceFile.ABILITIES),
-    IMG_ABILITY_RINGBEARER     (FSkinProp.IMG_ABILITY_RINGBEARER, SourceFile.MANAICONS),
-
+    IMG_ABILITY_COMMANDER      (FSkinProp.IMG_ABILITY_COMMANDER),
+    IMG_ABILITY_RINGBEARER     (FSkinProp.IMG_ABILITY_RINGBEARER),
+    //ANNIHILATOR
+    IMG_ABILITY_ANNIHILATOR    (FSkinProp.IMG_ABILITY_ANNIHILATOR),
     //TOXIC
-    IMG_ABILITY_TOXIC          (FSkinProp.IMG_ABILITY_TOXIC, SourceFile.ICONS),
+    IMG_ABILITY_TOXIC          (FSkinProp.IMG_ABILITY_TOXIC),
     //ABILITY ICONS
-    IMG_ABILITY_DEATHTOUCH     (FSkinProp.IMG_ABILITY_DEATHTOUCH, SourceFile.ABILITIES),
-    IMG_ABILITY_DEFENDER       (FSkinProp.IMG_ABILITY_DEFENDER, SourceFile.ABILITIES),
-    IMG_ABILITY_DOUBLE_STRIKE  (FSkinProp.IMG_ABILITY_DOUBLE_STRIKE, SourceFile.ABILITIES),
-    IMG_ABILITY_FIRST_STRIKE   (FSkinProp.IMG_ABILITY_FIRST_STRIKE, SourceFile.ABILITIES),
-    IMG_ABILITY_FEAR           (FSkinProp.IMG_ABILITY_FEAR, SourceFile.ABILITIES),
-    IMG_ABILITY_FLASH          (FSkinProp.IMG_ABILITY_FLASH, SourceFile.ABILITIES),
-    IMG_ABILITY_FLYING         (FSkinProp.IMG_ABILITY_FLYING, SourceFile.ABILITIES),
-    IMG_ABILITY_HASTE          (FSkinProp.IMG_ABILITY_HASTE, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF       (FSkinProp.IMG_ABILITY_HEXPROOF, SourceFile.ABILITIES),
-    IMG_ABILITY_HORSEMANSHIP   (FSkinProp.IMG_ABILITY_HORSEMANSHIP, SourceFile.ABILITIES),
-    IMG_ABILITY_INDESTRUCTIBLE (FSkinProp.IMG_ABILITY_INDESTRUCTIBLE, SourceFile.ABILITIES),
-    IMG_ABILITY_INTIMIDATE     (FSkinProp.IMG_ABILITY_INTIMIDATE, SourceFile.ABILITIES),
-    IMG_ABILITY_LANDWALK       (FSkinProp.IMG_ABILITY_LANDWALK, SourceFile.ABILITIES),
-    IMG_ABILITY_LIFELINK       (FSkinProp.IMG_ABILITY_LIFELINK, SourceFile.ABILITIES),
-    IMG_ABILITY_MENACE         (FSkinProp.IMG_ABILITY_MENACE, SourceFile.ABILITIES),
-    IMG_ABILITY_REACH          (FSkinProp.IMG_ABILITY_REACH, SourceFile.ABILITIES),
-    IMG_ABILITY_SHADOW         (FSkinProp.IMG_ABILITY_SHADOW, SourceFile.ABILITIES),
-    IMG_ABILITY_SHROUD         (FSkinProp.IMG_ABILITY_SHROUD, SourceFile.ABILITIES),
-    IMG_ABILITY_TRAMPLE        (FSkinProp.IMG_ABILITY_TRAMPLE, SourceFile.ABILITIES),
-    IMG_ABILITY_VIGILANCE      (FSkinProp.IMG_ABILITY_VIGILANCE, SourceFile.ABILITIES),
+    IMG_ABILITY_DEATHTOUCH     (FSkinProp.IMG_ABILITY_DEATHTOUCH),
+    IMG_ABILITY_DEFENDER       (FSkinProp.IMG_ABILITY_DEFENDER),
+    IMG_ABILITY_DOUBLE_STRIKE  (FSkinProp.IMG_ABILITY_DOUBLE_STRIKE),
+    IMG_ABILITY_EXALTED        (FSkinProp.IMG_ABILITY_EXALTED),
+    IMG_ABILITY_FIRST_STRIKE   (FSkinProp.IMG_ABILITY_FIRST_STRIKE),
+    IMG_ABILITY_FEAR           (FSkinProp.IMG_ABILITY_FEAR),
+    IMG_ABILITY_FLASH          (FSkinProp.IMG_ABILITY_FLASH),
+    IMG_ABILITY_FLYING         (FSkinProp.IMG_ABILITY_FLYING),
+    IMG_ABILITY_HASTE          (FSkinProp.IMG_ABILITY_HASTE),
+    IMG_ABILITY_HEXPROOF       (FSkinProp.IMG_ABILITY_HEXPROOF),
+    IMG_ABILITY_HORSEMANSHIP   (FSkinProp.IMG_ABILITY_HORSEMANSHIP),
+    IMG_ABILITY_INDESTRUCTIBLE (FSkinProp.IMG_ABILITY_INDESTRUCTIBLE),
+    IMG_ABILITY_INTIMIDATE     (FSkinProp.IMG_ABILITY_INTIMIDATE),
+    IMG_ABILITY_LANDWALK       (FSkinProp.IMG_ABILITY_LANDWALK),
+    IMG_ABILITY_LIFELINK       (FSkinProp.IMG_ABILITY_LIFELINK),
+    IMG_ABILITY_MENACE         (FSkinProp.IMG_ABILITY_MENACE),
+    IMG_ABILITY_REACH          (FSkinProp.IMG_ABILITY_REACH),
+    IMG_ABILITY_SHADOW         (FSkinProp.IMG_ABILITY_SHADOW),
+    IMG_ABILITY_SHROUD         (FSkinProp.IMG_ABILITY_SHROUD),
+    IMG_ABILITY_TRAMPLE        (FSkinProp.IMG_ABILITY_TRAMPLE),
+    IMG_ABILITY_WARD           (FSkinProp.IMG_ABILITY_WARD),
+    IMG_ABILITY_WITHER         (FSkinProp.IMG_ABILITY_WITHER),
+    IMG_ABILITY_VIGILANCE      (FSkinProp.IMG_ABILITY_VIGILANCE),
     //HEXPROOF FROM
-    IMG_ABILITY_HEXPROOF_R       (FSkinProp.IMG_ABILITY_HEXPROOF_R, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_G       (FSkinProp.IMG_ABILITY_HEXPROOF_G, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_B       (FSkinProp.IMG_ABILITY_HEXPROOF_B, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_U       (FSkinProp.IMG_ABILITY_HEXPROOF_U, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_W       (FSkinProp.IMG_ABILITY_HEXPROOF_W, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_C       (FSkinProp.IMG_ABILITY_HEXPROOF_C, SourceFile.ABILITIES),
-    IMG_ABILITY_HEXPROOF_UB      (FSkinProp.IMG_ABILITY_HEXPROOF_UB, SourceFile.ABILITIES),
+    IMG_ABILITY_HEXPROOF_R       (FSkinProp.IMG_ABILITY_HEXPROOF_R),
+    IMG_ABILITY_HEXPROOF_G       (FSkinProp.IMG_ABILITY_HEXPROOF_G),
+    IMG_ABILITY_HEXPROOF_B       (FSkinProp.IMG_ABILITY_HEXPROOF_B),
+    IMG_ABILITY_HEXPROOF_U       (FSkinProp.IMG_ABILITY_HEXPROOF_U),
+    IMG_ABILITY_HEXPROOF_W       (FSkinProp.IMG_ABILITY_HEXPROOF_W),
+    IMG_ABILITY_HEXPROOF_C       (FSkinProp.IMG_ABILITY_HEXPROOF_C),
+    IMG_ABILITY_HEXPROOF_UB      (FSkinProp.IMG_ABILITY_HEXPROOF_UB),
     //token icon
-    IMG_ABILITY_TOKEN            (FSkinProp.IMG_ABILITY_TOKEN, SourceFile.ABILITIES),
+    IMG_ABILITY_TOKEN            (FSkinProp.IMG_ABILITY_TOKEN),
     //border
-    IMG_BORDER_BLACK            (FSkinProp.IMG_BORDER_BLACK, SourceFile.BORDERS),
-    IMG_BORDER_WHITE            (FSkinProp.IMG_BORDER_WHITE, SourceFile.BORDERS),
+    IMG_BORDER_BLACK            (FSkinProp.IMG_BORDER_BLACK),
+    IMG_BORDER_WHITE            (FSkinProp.IMG_BORDER_WHITE),
     //PROTECT ICONS
-    IMG_ABILITY_PROTECT_ALL           (FSkinProp.IMG_ABILITY_PROTECT_ALL, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_B             (FSkinProp.IMG_ABILITY_PROTECT_B, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_BU            (FSkinProp.IMG_ABILITY_PROTECT_BU, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_BW            (FSkinProp.IMG_ABILITY_PROTECT_BW, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_COLOREDSPELLS (FSkinProp.IMG_ABILITY_PROTECT_COLOREDSPELLS, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_G             (FSkinProp.IMG_ABILITY_PROTECT_G, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_GB            (FSkinProp.IMG_ABILITY_PROTECT_GB, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_GU            (FSkinProp.IMG_ABILITY_PROTECT_GU, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_GW            (FSkinProp.IMG_ABILITY_PROTECT_GW, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_GENERIC       (FSkinProp.IMG_ABILITY_PROTECT_GENERIC, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_R             (FSkinProp.IMG_ABILITY_PROTECT_R, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_RB            (FSkinProp.IMG_ABILITY_PROTECT_RB, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_RG            (FSkinProp.IMG_ABILITY_PROTECT_RG, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_RU            (FSkinProp.IMG_ABILITY_PROTECT_RU, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_RW            (FSkinProp.IMG_ABILITY_PROTECT_RW, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_U             (FSkinProp.IMG_ABILITY_PROTECT_U, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_UW            (FSkinProp.IMG_ABILITY_PROTECT_UW, SourceFile.ABILITIES),
-    IMG_ABILITY_PROTECT_W             (FSkinProp.IMG_ABILITY_PROTECT_W, SourceFile.ABILITIES);
+    IMG_ABILITY_PROTECT_ALL           (FSkinProp.IMG_ABILITY_PROTECT_ALL),
+    IMG_ABILITY_PROTECT_B             (FSkinProp.IMG_ABILITY_PROTECT_B),
+    IMG_ABILITY_PROTECT_BU            (FSkinProp.IMG_ABILITY_PROTECT_BU),
+    IMG_ABILITY_PROTECT_BW            (FSkinProp.IMG_ABILITY_PROTECT_BW),
+    IMG_ABILITY_PROTECT_COLOREDSPELLS (FSkinProp.IMG_ABILITY_PROTECT_COLOREDSPELLS),
+    IMG_ABILITY_PROTECT_G             (FSkinProp.IMG_ABILITY_PROTECT_G),
+    IMG_ABILITY_PROTECT_GB            (FSkinProp.IMG_ABILITY_PROTECT_GB),
+    IMG_ABILITY_PROTECT_GU            (FSkinProp.IMG_ABILITY_PROTECT_GU),
+    IMG_ABILITY_PROTECT_GW            (FSkinProp.IMG_ABILITY_PROTECT_GW),
+    IMG_ABILITY_PROTECT_GENERIC       (FSkinProp.IMG_ABILITY_PROTECT_GENERIC),
+    IMG_ABILITY_PROTECT_R             (FSkinProp.IMG_ABILITY_PROTECT_R),
+    IMG_ABILITY_PROTECT_RB            (FSkinProp.IMG_ABILITY_PROTECT_RB),
+    IMG_ABILITY_PROTECT_RG            (FSkinProp.IMG_ABILITY_PROTECT_RG),
+    IMG_ABILITY_PROTECT_RU            (FSkinProp.IMG_ABILITY_PROTECT_RU),
+    IMG_ABILITY_PROTECT_RW            (FSkinProp.IMG_ABILITY_PROTECT_RW),
+    IMG_ABILITY_PROTECT_U             (FSkinProp.IMG_ABILITY_PROTECT_U),
+    IMG_ABILITY_PROTECT_UW            (FSkinProp.IMG_ABILITY_PROTECT_UW),
+    IMG_ABILITY_PROTECT_W             (FSkinProp.IMG_ABILITY_PROTECT_W);
 
-    public enum SourceFile {
-        ICONS(ForgeConstants.SPRITE_ICONS_FILE),
-        FOILS(ForgeConstants.SPRITE_FOILS_FILE),
-        OLD_FOILS(ForgeConstants.SPRITE_OLD_FOILS_FILE),
-        TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
-        ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
-        BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
-        ADV_BUTTONS(ForgeConstants.SPRITE_ADV_BUTTONS_FILE),
-        BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
-        BTNSTART(ForgeConstants.SPRITE_START_FILE),
-        MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
-        PHYREXIAN(ForgeConstants.SPRITE_PHYREXIAN_FILE),
-        SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
-        WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
-        DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
-        CRACKS(ForgeConstants.SPRITE_CRACKS_FILE),
-        PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE),
-        ADVENTURE(ForgeConstants.SPRITE_ADVENTURE_FILE);
+    private final FSkinImageImpl impl;
 
-
-        private final String filename;
-
-        SourceFile(String filename0) {
-            filename = filename0;
-        }
-
-        public String getFilename() {
-            return filename;
-        }
-    }
-
-    private final int x, y, w, h;
-    private final SourceFile sourceFile;
-    private TextureRegion textureRegion;
-
-    FSkinImage(FSkinProp skinProp, SourceFile sourceFile0) {
-        int[] coords = skinProp.getCoords();
-        x = coords[0];
-        y = coords[1];
-        w = coords[2];
-        h = coords[3];
-        sourceFile = sourceFile0;
+    FSkinImage(FSkinProp skinProp) {
+        impl = new FSkinImageImpl(skinProp);
         FSkin.getImages().put(skinProp, this);
     }
 
+    @Override
     public void load(Pixmap preferredIcons) {
-        String filename = sourceFile.getFilename();
-        boolean is2D = sourceFile == SourceFile.ADVENTURE;
-        FileHandle preferredFile = sourceFile == SourceFile.MANAICONS ? FSkin.getDefaultSkinFile(filename) : FSkin.getSkinFile(filename);
-        Texture texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
-        if (texture == null) {
-            if (preferredFile.exists()) {
-                try {
-                    texture = Forge.getAssets().getTexture(preferredFile, is2D, false);
-                }
-                catch (final Exception e) {
-                    System.err.println("Failed to load skin file: " + preferredFile);
-                    //e.printStackTrace();
-                }
-            }
-        }
-        if (texture != null) {
-            if (!(sourceFile == SourceFile.ICONS || sourceFile == SourceFile.MANAICONS)) { //just return region for preferred file if not icons file
-                textureRegion = new TextureRegion(texture, x, y, w, h);
-                return;
-            }
-
-            int fullWidth = texture.getWidth();
-            int fullHeight = texture.getHeight();
-
-            // Test if requested sub-image in inside bounds of preferred sprite.
-            // (Height and width of preferred sprite were set in loadFontAndImages.)
-            if (x + w <= fullWidth && y + h <= fullHeight) {
-                // Test if various points of requested sub-image are transparent.
-                // If any return true, image exists.
-                int x0 = 0, y0 = 0;
-                Color c;
-
-                // Center
-                x0 = (x + w / 2);
-                y0 = (y + h / 2);
-                c = new Color(preferredIcons.getPixel(x0, y0));
-                if (c.a != 0) {
-                    textureRegion = new TextureRegion(texture, x, y, w, h);
-                    return;
-                }
-
-                x0 += 2;
-                y0 += 2;
-                c = new Color(preferredIcons.getPixel(x0, y0));
-                if (c.a != 0) {
-                    textureRegion = new TextureRegion(texture, x, y, w, h);
-                    return;
-                }
-
-                x0 -= 4;
-                c = new Color(preferredIcons.getPixel(x0, y0));
-                if (c.a != 0) {
-                    textureRegion = new TextureRegion(texture, x, y, w, h);
-                    return;
-                }
-
-                y0 -= 4;
-                c = new Color(preferredIcons.getPixel(x0, y0));
-                if (c.a != 0) {
-                    textureRegion = new TextureRegion(texture, x, y, w, h);
-                    return;
-                }
-
-                x0 += 4;
-                c = new Color(preferredIcons.getPixel(x0, y0));
-                if (c.a != 0) {
-                    textureRegion = new TextureRegion(texture, x, y, w, h);
-                    return;
-                }
-            }
-        }
-
-        //use default file if can't use preferred file
-        FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
-        texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
-        if (texture == null) {
-            if (defaultFile.exists()) {
-                try {
-                    texture = Forge.getAssets().getTexture(defaultFile, is2D, false);
-                }
-                catch (final Exception e) {
-                    System.err.println("Failed to load skin file: " + defaultFile);
-                    //e.printStackTrace();
-                }
-            }
-        }
-        if (texture != null) {
-            textureRegion = new TextureRegion(texture, x, y, w, h);
-        }
+        impl.load(preferredIcons);
     }
 
     @Override
     public float getWidth() {
-        return w;
+        return impl.getWidth();
     }
 
     @Override
     public float getHeight() {
-        return h;
+        return impl.getHeight();
     }
 
+    @Override
     public TextureRegion getTextureRegion() {
-        return textureRegion;
+        return impl.getTextureRegion();
     }
 
+    @Override
     public float getNearestHQWidth(float baseWidth) {
-        return ImageUtil.getNearestHQSize(baseWidth, w);
+        return impl.getNearestHQWidth(baseWidth);
     }
 
+    @Override
     public float getNearestHQHeight(float baseHeight) {
-        return ImageUtil.getNearestHQSize(baseHeight, h);
+        return impl.getNearestHQHeight(baseHeight);
     }
 
     @Override
     public void draw(Graphics g, float x, float y, float w, float h) {
-        g.drawImage(textureRegion, x, y, w, h);
+        impl.draw(g, x, y, w, h);
     }
 }

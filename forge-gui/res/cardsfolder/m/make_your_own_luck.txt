@@ -1,0 +1,7 @@
+Name:Make Your Own Luck
+ManaCost:3 G U
+Types:Sorcery
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.nonLand | ChangeValidDesc$ nonland | DestinationZone$ Exile | DestinationZone2$ Hand | RememberChanged$ True | SubAbility$ DBPlot | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. You may exile a nonland card from among them.
+SVar:DBPlot:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Plotted | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you do, it becomes plotted. Put the rest into your hand. (You may cast it as a sorcery on a later turn without paying its mana cost.)
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Look at the top three cards of your library. You may exile a nonland card from among them. If you do, it becomes plotted. Put the rest into your hand. (You may cast it as a sorcery on a later turn without paying its mana cost.)

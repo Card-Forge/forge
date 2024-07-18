@@ -1,5 +1,5 @@
 Name:Oakhame Ranger
-ManaCost:G/W G/W G/W G/W
+ManaCost:GW GW GW GW
 Types:Creature Elf Knight Ranger
 PT:2/2
 A:AB$ PumpAll | Cost$ T | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
@@ -9,8 +9,8 @@ Oracle:{T}: Creatures you control get +1/+1 until end of turn.
 ALTERNATE
 
 Name:Bring Back
-ManaCost:G/W G/W G/W G/W
+ManaCost:GW GW GW GW
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ G/W G/W G/W G/W | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_human | TokenOwner$ You | SpellDescription$ Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
 Oracle:Create two 1/1 white Human creature tokens. (Then exile this card. You may cast the creature later from exile.)

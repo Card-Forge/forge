@@ -2,5 +2,5 @@ Name:Boiling Earth
 ManaCost:1 R
 Types:Sorcery
 K:Awaken:4:6 R
-A:SP$ DamageAll | Cost$ 1 R | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
+A:SP$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
 Oracle:Boiling Earth deals 1 damage to each creature your opponents control.\nAwaken 4—{6}{R} (If you cast this spell for {6}{R}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

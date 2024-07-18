@@ -1,7 +1,7 @@
 Name:Tail Slash
 ManaCost:2 R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ TailDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ TailDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature you don't control.
 SVar:TailDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to target creature you don't control.

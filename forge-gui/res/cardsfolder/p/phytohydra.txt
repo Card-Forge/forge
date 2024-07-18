@@ -2,7 +2,7 @@ Name:Phytohydra
 ManaCost:2 G W W
 Types:Creature Plant Hydra
 PT:1/1
-R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | Description$ If damage would be dealt to Phytohydra, put that many +1/+1 counters on it instead.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | ReplaceWith$ Counters | Description$ If damage would be dealt to CARDNAME, put that many +1/+1 counters on it instead.
 SVar:Counters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ReplaceCount$DamageAmount
 Oracle:If damage would be dealt to Phytohydra, put that many +1/+1 counters on it instead.

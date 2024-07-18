@@ -18,7 +18,7 @@ ALTERNATE
 
 Name:Ratchet, Rescue Racer
 ManaCost:no cost
-Colors:White
+Colors:white
 Types:Legendary Artifact Vehicle
 PT:1/4
 K:Living metal

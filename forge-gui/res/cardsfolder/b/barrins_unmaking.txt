@@ -1,6 +1,6 @@
 Name:Barrin's Unmaking
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | AITgts$ Card.SharesColorWith MostProminentColor | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | AITgts$ Card.SharesColorWith MostProminentColor | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.
 SVar:X:Targeted$Valid Card.SharesColorWith MostProminentColor
 Oracle:Return target permanent to its owner's hand if that permanent shares a color with the most common color among all permanents or a color tied for most common.

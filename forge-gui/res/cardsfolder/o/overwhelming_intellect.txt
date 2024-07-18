@@ -1,7 +1,7 @@
 Name:Overwhelming Intellect
 ManaCost:4 U U
 Types:Instant
-A:SP$ Counter | Cost$ 4 U U | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | RememberCounteredCMC$ True | SpellDescription$ Counter target creature spell. Draw cards equal to that spell's mana value.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDraw | RememberCounteredCMC$ True | SpellDescription$ Counter target creature spell. Draw cards equal to that spell's mana value.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

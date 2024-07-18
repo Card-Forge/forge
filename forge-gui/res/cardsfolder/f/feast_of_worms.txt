@@ -1,7 +1,7 @@
 Name:Feast of Worms
 ManaCost:3 G G
 Types:Sorcery Arcane
-A:SP$ Destroy | Cost$ 3 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBSacrifice | AlwaysRemember$ True | RememberLKI$ True | SpellDescription$ Destroy target land. If that land was legendary, its controller sacrifices another land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBSacrifice | AlwaysRemember$ True | RememberLKI$ True | SpellDescription$ Destroy target land. If that land was legendary, its controller sacrifices another land.
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ RememberedController | SacValid$ Land | ConditionDefined$ RememberedLKI | ConditionPresent$ Land.Legendary | ConditionCompare$ EQ1 | ConditionDescription$ If that land was legendary, | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random

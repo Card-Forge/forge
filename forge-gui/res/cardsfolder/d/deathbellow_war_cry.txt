@@ -1,6 +1,6 @@
 Name:Deathbellow War Cry
 ManaCost:5 R R R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 R R R | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Minotaur | ChangeNum$ 4 | DifferentNames$ True | SpellDescription$ Search your library for up to four Minotaur creature cards with different names, put them onto the battlefield, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Minotaur | ChangeNum$ 4 | DifferentNames$ True | SpellDescription$ Search your library for up to four Minotaur creature cards with different names, put them onto the battlefield, then shuffle.
 DeckNeeds:Type$Minotaur
 Oracle:Search your library for up to four Minotaur creature cards with different names, put them onto the battlefield, then shuffle.

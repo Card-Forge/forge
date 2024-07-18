@@ -1,5 +1,5 @@
 Name:Rebuff the Wicked
 ManaCost:W
 Types:Instant
-A:SP$ Counter | Cost$ W | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a permanent you control.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a permanent you control.
 Oracle:Counter target spell that targets a permanent you control.

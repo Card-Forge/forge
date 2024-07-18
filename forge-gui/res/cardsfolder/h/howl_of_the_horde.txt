@@ -1,7 +1,7 @@
 Name:Howl of the Horde
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DelayedTrigger | Cost$ 2 R | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SubAbility$ DBEffect | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell.
+A:SP$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SubAbility$ DBEffect | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell.
 SVar:DBEffect:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | SpellDescription$ Raid — If you attacked this turn, when you cast your next instant or sorcery spell this turn, copy that spell an additional time. You may choose new targets for the copy.
 SVar:RaidTest:Count$AttackersDeclared
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True

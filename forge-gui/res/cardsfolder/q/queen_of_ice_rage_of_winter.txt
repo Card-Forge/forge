@@ -14,6 +14,6 @@ ALTERNATE
 Name:Rage of Winter
 ManaCost:1 U
 Types:Sorcery Adventure
-A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step. (Then exile this card. You may cast the creature later from exile.)
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True
 Oracle:Tap target creature. It doesn't untap during its controller's next untap step. (Then exile this card. You may cast the creature later from exile.)

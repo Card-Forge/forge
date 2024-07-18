@@ -1,5 +1,5 @@
 Name:Withstand Death
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
 Oracle:Target creature gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)

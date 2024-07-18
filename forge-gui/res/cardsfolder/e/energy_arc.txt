@@ -1,7 +1,7 @@
 Name:Energy Arc
 ManaCost:W U
 Types:Instant
-A:SP$ Untap | Cost$ W U | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Choose any number of target creatures | ValidTgts$ Creature | SpellDescription$ Untap any number of target creatures. Prevent all combat damage that would be dealt to and dealt by those creatures this turn. | SubAbility$ DBPump
+A:SP$ Untap | TargetMin$ 0 | TargetMax$ MaxTgts | TgtPrompt$ Choose any number of target creatures | ValidTgts$ Creature | SpellDescription$ Untap any number of target creatures. Prevent all combat damage that would be dealt to and dealt by those creatures this turn. | SubAbility$ DBPump
 SVar:DBPump:DB$ Effect | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by those creatures this turn.
 SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by those creatures this turn. | Secondary$ True

@@ -1,5 +1,5 @@
 Name:Volcanic Rush
 ManaCost:4 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 4 R | ValidCards$ Creature.attacking | NumAtt$ 2 | KW$ Trample | SpellDescription$ Attacking creatures get +2/+0 and gain trample until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.attacking | NumAtt$ 2 | KW$ Trample | SpellDescription$ Attacking creatures get +2/+0 and gain trample until end of turn.
 Oracle:Attacking creatures get +2/+0 and gain trample until end of turn.

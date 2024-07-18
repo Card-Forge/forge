@@ -1,5 +1,5 @@
 Name:Rain of Tears
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 Oracle:Destroy target land.

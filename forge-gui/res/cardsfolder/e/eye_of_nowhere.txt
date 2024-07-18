@@ -1,5 +1,5 @@
 Name:Eye of Nowhere
 ManaCost:U U
 Types:Sorcery Arcane
-A:SP$ ChangeZone | Cost$ U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 Oracle:Return target permanent to its owner's hand.

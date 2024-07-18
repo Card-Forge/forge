@@ -1,7 +1,7 @@
 Name:Piety Charm
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ DetroyAura,PumpSoldier,PumpVigilance | CharmNum$ 1
+A:SP$ Charm | Choices$ DetroyAura,PumpSoldier,PumpVigilance | CharmNum$ 1
 SVar:DetroyAura:DB$ Destroy | ValidTgts$ Aura.AttachedTo Creature | TgtPrompt$ Select target Aura attached to a creature | SpellDescription$ Destroy target Aura attached to a creature.
 SVar:PumpSoldier:DB$ Pump | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target Soldier creature | SpellDescription$ Target Soldier creature gets +2/+2 until end of turn.
 SVar:PumpVigilance:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance | SpellDescription$ Creatures you control gain vigilance until end of turn.

@@ -1,7 +1,7 @@
 Name:Moonlight Hunt
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SubAbility$ WolfStrike | SpellDescription$ Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.
+A:SP$ Pump | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | SubAbility$ WolfStrike | SpellDescription$ Choose target creature you don't control. Each creature you control that's a Wolf or a Werewolf deals damage equal to its power to that creature.
 SVar:WolfStrike:DB$ EachDamage | DefinedDamagers$ Valid Creature.Wolf+YouCtrl,Creature.Werewolf+YouCtrl | Defined$ Targeted | NumDmg$ Count$CardPower | StackDescription$ None
 AI:RemoveDeck:Random
 DeckHints:Type$Wolf|Werewolf

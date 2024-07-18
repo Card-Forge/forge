@@ -1,5 +1,5 @@
 Name:Sick and Tired
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Two target creatures each get -1/-1 until end of turn.
+A:SP$ Pump | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Two target creatures each get -1/-1 until end of turn.
 Oracle:Two target creatures each get -1/-1 until end of turn.

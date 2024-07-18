@@ -1,7 +1,7 @@
 Name:Nightcreep
 ManaCost:B B
 Types:Instant
-A:SP$ AnimateAll | Cost$ B B | ValidCards$ Creature | Colors$ Black | OverwriteColors$ True | SubAbility$ AnimateSwamp | SpellDescription$ Until end of turn, all creatures become black and all lands become Swamps.
+A:SP$ AnimateAll | ValidCards$ Creature | Colors$ Black | OverwriteColors$ True | SubAbility$ AnimateSwamp | SpellDescription$ Until end of turn, all creatures become black and all lands become Swamps.
 SVar:AnimateSwamp:DB$ AnimateAll | ValidCards$ Land | Types$ Swamp | RemoveLandTypes$ True | RemoveIntrinsicAbilities$ True
 AI:RemoveDeck:Random
 Oracle:Until end of turn, all creatures become black and all lands become Swamps.

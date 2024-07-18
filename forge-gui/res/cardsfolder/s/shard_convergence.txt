@@ -1,7 +1,7 @@
 Name:Shard Convergence
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Hand | ChangeType$ EACH Plains & Island & Swamp & Mountain | SpellDescription$ Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ EACH Plains & Island & Swamp & Mountain | SpellDescription$ Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Blue|Black|Red
 Oracle:Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards, put them into your hand, then shuffle.

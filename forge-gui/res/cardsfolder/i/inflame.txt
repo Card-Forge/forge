@@ -1,5 +1,5 @@
 Name:Inflame
 ManaCost:R
 Types:Instant
-A:SP$ DamageAll | Cost$ R | NumDmg$ 2 | ValidCards$ Creature.wasDealtDamageThisTurn | ValidDescription$ each creature dealt damage this turn. | SpellDescription$ CARDNAME deals 2 damage to each creature dealt damage this turn.
+A:SP$ DamageAll | NumDmg$ 2 | ValidCards$ Creature.wasDealtDamageThisTurn | ValidDescription$ each creature dealt damage this turn. | SpellDescription$ CARDNAME deals 2 damage to each creature dealt damage this turn.
 Oracle:Inflame deals 2 damage to each creature dealt damage this turn.

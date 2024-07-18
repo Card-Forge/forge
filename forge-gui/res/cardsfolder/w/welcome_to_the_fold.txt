@@ -2,7 +2,7 @@ Name:Welcome to the Fold
 ManaCost:2 U U
 Types:Sorcery
 K:Madness:X U U
-A:SP$ GainControl | Cost$ 2 U U | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SpellDescription$ Gain control of target creature if its toughness is 2 or less. If CARDNAME's madness cost was paid, instead gain control of that creature if its toughness is X or less.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SpellDescription$ Gain control of target creature if its toughness is 2 or less. If CARDNAME's madness cost was paid, instead gain control of that creature if its toughness is X or less.
 SVar:Y:Count$Madness.X.2
 SVar:X:Count$xPaid
 SVar:Z:Targeted$Valid Creature.toughnessLEY

@@ -1,6 +1,6 @@
 Name:Aura Extraction
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target enchantment on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target enchantment on top of its owner's library.
 K:Cycling:2
 Oracle:Put target enchantment on top of its owner's library.\nCycling {2} ({2}, Discard this card: Draw a card.)

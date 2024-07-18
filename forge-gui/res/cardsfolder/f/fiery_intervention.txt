@@ -1,7 +1,7 @@
 Name:Fiery Intervention
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 R | Choices$ DBDmg,DBDestroy
+A:SP$ Charm | Choices$ DBDmg,DBDestroy
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Fiery Intervention deals 5 damage to target creature.\n• Destroy target artifact.

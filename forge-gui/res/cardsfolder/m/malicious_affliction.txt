@@ -1,7 +1,7 @@
 Name:Malicious Affliction
 ManaCost:B B
 Types:Instant
-A:SP$ Destroy | Cost$ B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SpellDescription$ Destroy target nonblack creature.
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | CheckSVar$ Morbid | SVarCompare$ GE1 | OptionalDecider$ You | TriggerDescription$ Morbid — When you cast this spell, if a creature died this turn, you may copy CARDNAME and may choose a new target for the copy.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature

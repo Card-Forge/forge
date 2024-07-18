@@ -1,0 +1,6 @@
+Name:Huddle Up
+ManaCost:2 U
+Types:Sorcery
+K:Assist
+A:SP$ Draw | NumCards$ 1 | ValidTgts$ Player | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target player | SpellDescription$ Two target players each draw a card.
+Oracle:Assist (Another player can pay up to {2} of this spell's cost.)\nTwo target players each draw a card.

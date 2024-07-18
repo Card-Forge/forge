@@ -2,5 +2,5 @@ Name:Rescind
 ManaCost:1 U U
 Types:Instant
 K:Cycling:2
-A:SP$ ChangeZone | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 Oracle:Return target permanent to its owner's hand.\nCycling {2} ({2}, Discard this card: Draw a card.)

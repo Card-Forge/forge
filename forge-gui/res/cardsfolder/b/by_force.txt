@@ -1,6 +1,6 @@
 Name:By Force
 ManaCost:X R
 Types:Sorcery
-A:SP$ Destroy | Cost$ X R | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | SpellDescription$ Destroy X target artifacts.
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Artifact | TgtPrompt$ Select X target artifacts | SpellDescription$ Destroy X target artifacts.
 SVar:X:Count$xPaid
 Oracle:Destroy X target artifacts.

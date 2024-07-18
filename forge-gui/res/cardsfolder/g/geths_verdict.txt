@@ -1,6 +1,6 @@
 Name:Geth's Verdict
 ManaCost:B B
 Types:Instant
-A:SP$ Sacrifice | Cost$ B B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBDrain | SpellDescription$ Target player sacrifices a creature and loses 1 life.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | SubAbility$ DBDrain | SpellDescription$ Target player sacrifices a creature and loses 1 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1
 Oracle:Target player sacrifices a creature and loses 1 life.

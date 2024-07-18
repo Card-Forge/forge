@@ -3,6 +3,6 @@ ManaCost:no cost
 Colors:blue
 Types:Instant Arcane
 K:Splice:Arcane:1 U
-A:SP$ Draw | Cost$ 0 | NumCards$ 1 | ActivationLimit$ 0 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 Oracle:(Nonexistent mana costs can't be paid.)\nDraw a card.\nSplice onto Arcane {1}{U} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

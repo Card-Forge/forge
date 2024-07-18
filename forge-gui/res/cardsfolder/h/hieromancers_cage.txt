@@ -1,7 +1,7 @@
 Name:Hieromancer's Cage
 ManaCost:3 W
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until Hieromancer's Cage leaves the battlefield.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE

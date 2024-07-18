@@ -2,5 +2,5 @@ Name:Shattering Spree
 ManaCost:R
 Types:Sorcery
 K:Replicate:R
-A:SP$ Destroy | Cost$ R | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Replicate {R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nDestroy target artifact.

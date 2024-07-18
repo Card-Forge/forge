@@ -1,7 +1,7 @@
 Name:Molder
 ManaCost:X G
 Types:Instant
-A:SP$ Destroy | Cost$ X G | ValidTgts$ Artifact.cmcEQX,Enchantment.cmcEQX | TgtPrompt$ Select target artifact or enchantment | NoRegen$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with mana value X. It can't be regenerated. You gain X life.
+A:SP$ Destroy | ValidTgts$ Artifact.cmcEQX,Enchantment.cmcEQX | TgtPrompt$ Select target artifact or enchantment | NoRegen$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or enchantment with mana value X. It can't be regenerated. You gain X life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$xPaid
 Oracle:Destroy target artifact or enchantment with mana value X. It can't be regenerated. You gain X life.

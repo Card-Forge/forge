@@ -1,7 +1,7 @@
 Name:Forever Young
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library. Draw a card. | SubAbility$ DBDraw
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library. Draw a card. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:X:Count$TypeInYourYard.Creature
 Oracle:Put any number of target creature cards from your graveyard on top of your library.\nDraw a card.

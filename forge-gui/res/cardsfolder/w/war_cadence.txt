@@ -1,11 +1,9 @@
 Name:War Cadence
 ManaCost:2 R
 Types:Enchantment
-A:AB$ StoreSVar | Cost$ X R | SVar$ PaidNum | Type$ Count | Expression$ xPaid | SubAbility$ CadenceEffect | AILogic$ RestrictBlocking | SpellDescription$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
-SVar:CadenceEffect:DB$ Effect | StaticAbilities$ CadenceStaticAb | Stackable$ False | RememberObjects$ Valid Creature.blocking
-SVar:CadenceStaticAb:Mode$ CantBlockUnless | ValidCard$ Card.IsNotRemembered | Cost$ PaidNum | EffectZone$ Command | Description$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
+A:AB$ Effect | Cost$ X R | StaticAbilities$ CadenceStaticAb | Stackable$ False | SetChosenNumber$ X | AILogic$ RestrictBlocking | SpellDescription$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
+SVar:CadenceStaticAb:Mode$ CantBlockUnless | Cost$ XChosen | EffectZone$ Command | Description$ This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.
 SVar:X:Count$xPaid
-SVar:PaidNum:Number$0
+SVar:XChosen:Count$ChosenNumber
 SVar:NonStackingEffect:True
-AI:RemoveDeck:All
 Oracle:{X}{R}: This turn, creatures can't block unless their controller pays {X} for each blocking creature they control.

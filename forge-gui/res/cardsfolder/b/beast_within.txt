@@ -1,7 +1,7 @@
 Name:Beast Within
 ManaCost:2 G
 Types:Instant
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AITgts$ Card.cmcGE4 | SubAbility$ DBToken | SpellDescription$ Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
+A:SP$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AITgts$ Card.cmcGE4 | SubAbility$ DBToken | SpellDescription$ Destroy target permanent. Its controller creates a 3/3 green Beast creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_beast | TokenOwner$ TargetedController
 DeckHas:Ability$Token
 AI:RemoveDeck:All

@@ -2,5 +2,5 @@ Name:Wipe Away
 ManaCost:1 U U
 Types:Instant
 K:Split second
-A:SP$ ChangeZone | Cost$ 1 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nReturn target permanent to its owner's hand.

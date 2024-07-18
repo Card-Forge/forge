@@ -1,0 +1,11 @@
+Name:Jason Bright, Glowing Prophet
+ManaCost:2 U
+Types:Legendary Creature Zombie Mutant Advisor
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Zombie.YouCtrl+powerNOTbasePower,Mutant.YouCtrl+powerNOTbasePower | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Zombie or Mutant you control dies, if its power was different from its base power, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ PutCounter | Cost$ 2 Sac<1/Creature> | PrecostDesc$ Come Fly With Me — | CounterNum$ 1 | CounterType$ P1P1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains flying until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Flying
+DeckHas:Ability$Counters
+DeckHints:Type$Zombie|Mutant
+Oracle:Whenever a Zombie or Mutant you control dies, if its power was different from its base power, draw a card.\nCome Fly With Me — {2}, Sacrifice a creature: Put a +1/+1 counter on target creature you control. It gains flying until end of turn.

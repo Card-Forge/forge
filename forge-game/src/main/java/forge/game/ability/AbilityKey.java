@@ -117,6 +117,7 @@ public enum AbilityKey {
     ReplacementResult("ReplacementResult"),
     ReplacementResultMap("ReplacementResultMap"),
     Result("Result"),
+    RolledToVisitAttractions("RolledToVisitAttractions"),
     RoomName("RoomName"),
     Scheme("Scheme"),
     ScryBottom("ScryBottom"),

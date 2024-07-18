@@ -1,6 +1,6 @@
 Name:Volcanic Geyser
 ManaCost:X R R
 Types:Instant
-A:SP$ DealDamage | Cost$ X R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target.
 SVar:X:Count$xPaid
 Oracle:Volcanic Geyser deals X damage to any target.

@@ -1,10 +1,10 @@
 Name:Single Combat
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 W W | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses a creature or planeswalker they control, then sacrifices the rest. Players can't cast creature or planeswalker spells until the end of your next turn.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ SacAllOthers | SpellDescription$ Each player chooses a creature or planeswalker they control, then sacrifices the rest. Players can't cast creature or planeswalker spells until the end of your next turn.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature,Planeswalker | TargetControls$ True | Mandatory$ True | RememberChosen$ True
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered,Planeswalker.IsNotRemembered | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Single Combat Effect | StaticAbilities$ STCantBeCast | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantBeCast | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Creature,Planeswalker | Description$ Players can't cast creature or planeswalker spells.
 AI:RemoveDeck:All

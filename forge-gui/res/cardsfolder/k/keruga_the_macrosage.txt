@@ -1,5 +1,5 @@
 Name:Keruga, the Macrosage
-ManaCost:3 G/U G/U
+ManaCost:3 GU GU
 Types:Legendary Creature Dinosaur Hippo
 PT:5/4
 K:Companion:Card.cmcGE3,Land:Your starting deck contains only cards with mana value 3 or greater and land cards.

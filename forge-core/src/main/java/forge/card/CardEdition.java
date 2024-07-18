@@ -141,7 +141,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
-        REBALANCED("rebalanced");
+        REBALANCED("rebalanced"),
+        ETERNAL("eternal");
 
         private final String name;
 
@@ -166,12 +167,14 @@ public final class CardEdition implements Comparable<CardEdition> {
         public final String collectorNumber;
         public final String name;
         public final String artistName;
+        public final String functionalVariantName;
 
-        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName, final String functionalVariantName) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
             this.artistName = artistName;
+            this.functionalVariantName = functionalVariantName;
         }
 
         public String toString() {
@@ -188,6 +191,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             if (artistName != null) {
                 sb.append(" @");
                 sb.append(artistName);
+            }
+            if (functionalVariantName != null) {
+                sb.append(" $");
+                sb.append(functionalVariantName);
             }
             return sb.toString();
         }
@@ -377,6 +384,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<CardInSet> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<CardInSet> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
+    public List<CardInSet> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
     public List<CardInSet> getAllCardsInSet() {
         return cardsInSet;
     }
@@ -567,9 +575,11 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * cnum - grouping #2
                     * rarity - grouping #4
                     * name - grouping #5
+                    * artist name - grouping #7
+                    * functional variant name - grouping #9
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@]*)( @(.*))?$"
+                    "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
@@ -595,7 +605,8 @@ public final class CardEdition implements Comparable<CardEdition> {
                         CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                         String cardName = matcher.group(5);
                         String artistName = matcher.group(7);
-                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName);
+                        String functionalVariantName = matcher.group(9);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName, functionalVariantName);
 
                         cardMap.put(sectionName, cis);
                     }

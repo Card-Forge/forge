@@ -1,0 +1,8 @@
+Name:Nightshade Dryad
+ManaCost:1 G
+Types:Creature Dryad
+PT:1/2
+K:Deathtouch
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:Deathtouch\n{T}: Add {C}.\n{T}: Add one mana of any color.

@@ -1,6 +1,6 @@
 Name:Bond of Passion
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 4 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBDamage | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. CARDNAME deals 2 damage to any target.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBDamage | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. CARDNAME deals 2 damage to any target.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | TargetUnique$ True | TgtPrompt$ Select any target.
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Bond of Passion deals 2 damage to any other target.

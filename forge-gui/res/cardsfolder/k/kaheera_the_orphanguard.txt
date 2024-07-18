@@ -1,5 +1,5 @@
 Name:Kaheera, the Orphanguard
-ManaCost:1 G/W G/W
+ManaCost:1 GW GW
 Types:Legendary Creature Cat Beast
 PT:3/2
 K:Companion:Creature.Cat,Creature.Elemental,Creature.Nightmare,Creature.Dinosaur,Creature.Beast,Card.nonCreature:Each creature card in your starting deck is a Cat, Elemental, Nightmare, Dinosaur, or Beast card.

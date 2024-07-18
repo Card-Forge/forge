@@ -1,11 +1,11 @@
 Name:Semester's End
 ManaCost:3 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile any number of target creatures and/or planeswalkers you control. At the beginning of the next end step, return each of them to the battlefield under its owner's control. Each of them enters the battlefield with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl,Planeswalker.YouCtrl | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile any number of target creatures and/or planeswalkers you control. At the beginning of the next end step, return each of them to the battlefield under its owner's control. Each of them enters the battlefield with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return each of them to the battlefield under its owner's control. Each of them enters the battlefield with an additional +1/+1 counter on it if it's a creature and an additional loyalty counter on it if it's a planeswalker. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | AnimateSubAbility$ DBConditionEffect
-SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Remembered | Name$ Semester's End Effect | ReplacementEffects$ ETBCreatPlans
+SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Remembered | ReplacementEffects$ ETBCreatPlans
 SVar:ETBCreatPlans:Event$ Moved | ValidCard$ Creature.IsRemembered,Planeswalker.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ It enters with an additional +1/+1 counter on it if it's a creature, it enters with an additional loyalty counter on it if it's a planeswalker.
 SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedNewCard.Creature | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SubAbility$ DBPutLOYALTY
 SVar:DBPutLOYALTY:DB$ PutCounter | Defined$ ReplacedNewCard.Planeswalker | CounterType$ LOYALTY | ETB$ True | CounterNum$ 1 | SubAbility$ DBExile

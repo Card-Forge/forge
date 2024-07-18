@@ -19,24 +19,23 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
-
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
-import forge.card.MagicColor;
 import forge.card.CardType.Supertype;
+import forge.card.MagicColor;
 import forge.deck.DeckSection;
-import forge.game.ability.*;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
+import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.event.*;
+import forge.game.extrahands.BackupPlanService;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mulligan.MulliganService;
-import forge.game.player.GameLossReason;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerPredicates;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -56,7 +55,6 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
@@ -117,7 +115,7 @@ public class GameAction {
 
         // Rule 111.8: A token that has left the battlefield can't move to another zone
         if (!c.isSpell() && c.isToken() && !fromBattlefield && zoneFrom != null && !zoneFrom.is(ZoneType.Stack)
-                && (cause == null || !(cause instanceof SpellPermanent) || !cause.isCastFromPlayEffect())) {
+                && (cause == null || !(cause instanceof SpellPermanent || cause.isCastFaceDown()) || !cause.isCastFromPlayEffect())) {
             return c;
         }
 
@@ -156,6 +154,16 @@ public class GameAction {
                 }
                 return c;
             }
+        }
+
+        //717.6. If a card with an Astrotorium card back would be put into a zone other than the battlefield, exile,
+        //or the command zone from anywhere, instead its owner puts it into the junkyard.
+        if (c.isAttractionCard() && !toBattlefield && !zoneTo.is(ZoneType.AttractionDeck)
+                && !zoneTo.is(ZoneType.Junkyard) && !zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Command)) {
+            //This should technically be a replacement effect, but with the "can apply more than once to the same event"
+            //clause, this seems sufficient for now.
+            //TODO: Figure out what on earth happens if you animate an attraction, mutate a creature/commander/token onto it, and it dies...
+            return moveToJunkyard(c, cause, params);
         }
 
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
@@ -236,11 +244,11 @@ public class GameAction {
                 game.addChangeZoneLKIInfo(lastKnownInfo);
             }
 
-            // CR 707.12 casting of a card copy, don't copy it again
+            copied = new CardCopyService(c).copyCard(false);
+
+            // CR 707.12 casting of a card copy
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
-                copied = c;
-            } else {
-                copied = new CardCopyService(c).copyCard(false);
+                copied.setCopiedPermanent(c.getCopiedPermanent());
             }
 
             copied.setGameTimestamp(c.getGameTimestamp());
@@ -449,7 +457,8 @@ public class GameAction {
                 }
                 game.getCombat().removeFromCombat(c);
             }
-            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck) || zoneFrom.is(ZoneType.SchemeDeck))
+            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck)
+                    || zoneFrom.is(ZoneType.SchemeDeck) || zoneFrom.is(ZoneType.AttractionDeck))
                     && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
             }
@@ -509,7 +518,7 @@ public class GameAction {
                 if (card.isRealCommander()) {
                     card.setMoveToCommandZone(true);
                 }
-                // 723.3e & 903.9a
+                // 727.3e & 903.9a
                 if (wasToken && !card.isRealToken() || card.isRealCommander()) {
                     Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(card);
                     repParams.put(AbilityKey.CardLKI, card);
@@ -604,10 +613,6 @@ public class GameAction {
         }
 
         game.getTriggerHandler().clearActiveTriggers(copied, null);
-        // register all LTB trigger from last state battlefield
-        for (Card lki : lastBattlefield) {
-            game.getTriggerHandler().registerActiveLTBTrigger(lki);
-        }
         game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         // play the change zone sound
@@ -756,6 +761,8 @@ public class GameAction {
             case Stack:         return moveToStack(c, cause, params);
             case PlanarDeck:    return moveToVariantDeck(c, ZoneType.PlanarDeck, libPosition, cause, params);
             case SchemeDeck:    return moveToVariantDeck(c, ZoneType.SchemeDeck, libPosition, cause, params);
+            case AttractionDeck: return moveToVariantDeck(c, ZoneType.AttractionDeck, libPosition, cause, params);
+            case Junkyard:      return moveToJunkyard(c, cause, params);
             default: // sideboard will also get there
                 return moveTo(c.getOwner().getZone(name), c, cause);
         }
@@ -900,6 +907,11 @@ public class GameAction {
             deckPosition = deck.size();
         }
         return changeZone(game.getZoneOf(c), deck, c, deckPosition, cause, params);
+    }
+    
+    public final Card moveToJunkyard(Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone junkyard = c.getOwner().getZone(ZoneType.Junkyard);
+        return moveTo(junkyard, c, cause, params);
     }
 
     public final CardCollection exile(final CardCollection cards, SpellAbility cause, Map<AbilityKey, Object> params) {
@@ -1318,7 +1330,7 @@ public class GameAction {
                 final CounterType dreamType = CounterType.get(CounterEnumType.DREAM);
 
                 if (c.getCounters(dreamType) > 7 && c.hasKeyword("CARDNAME can't have more than seven dream counters on it.")) {
-                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7);
+                    c.subtractCounter(dreamType,  c.getCounters(dreamType) - 7, null);
                     checkAgainCard = true;
                 }
 
@@ -1330,7 +1342,7 @@ public class GameAction {
                         c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), counterTable);
                         counterTable.replaceCounterEffect(game, null, false);
                     } else if (loyal > beeble) {
-                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble);
+                        c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble, null);
                     }
                     // Only check again if counters actually changed
                     if (c.getCounters(CounterEnumType.LOYALTY) != loyal) {
@@ -1422,6 +1434,8 @@ public class GameAction {
             }
             setHoldCheckingStaticAbilities(false);
 
+            table.triggerChangesZoneAll(game, null);
+
             // important to collect first otherwise if a static fires it will mess up registered ones from LKI
             game.getTriggerHandler().collectTriggerForWaiting();
             if (game.getTriggerHandler().runWaitingTriggers()) {
@@ -1431,8 +1445,6 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
-
-            table.triggerChangesZoneAll(game, null);
 
             for (final Card c : cardsToUpdateLKI) {
                 game.updateLastStateForCard(c);
@@ -1633,8 +1645,8 @@ public class GameAction {
             // N +1/+1 and N -1/-1 counters are removed from it, where N is the
             // smaller of the number of +1/+1 and -1/-1 counters on it.
             // This should fire remove counters trigger
-            c.subtractCounter(p1p1, remove);
-            c.subtractCounter(m1m1, remove);
+            c.subtractCounter(p1p1, remove, null);
+            c.subtractCounter(m1m1, remove, null);
             checkAgain = true;
         }
         return checkAgain;
@@ -2077,7 +2089,10 @@ public class GameAction {
                     p1.drawCards(p1.getStartingHandSize());
                 }
 
-                // If pl has Backup Plan as a Conspiracy draw that many extra hands
+                BackupPlanService backupPlans = new BackupPlanService(p1);
+                if (backupPlans.initializeExtraHands()) {
+                    backupPlans.chooseHand();
+                }
             }
 
             // Choose starting hand for each player with multiple hands
@@ -2197,7 +2212,8 @@ public class GameAction {
 
             for (Card c : ploys) {
                 if (!cmc.isEmpty()) {
-                    chosen = takesAction.getController().chooseNumber(c.getSpellPermanent(), "Emissary's Ploy", cmc, c.getOwner());
+                    SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseNumber, c, takesAction);
+                    chosen = takesAction.getController().chooseNumber(sa, "Emissary's Ploy", cmc, c.getOwner());
                     cmc.remove((Object)chosen);
                 }
 

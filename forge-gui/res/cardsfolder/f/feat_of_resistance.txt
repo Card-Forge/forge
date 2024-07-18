@@ -1,7 +1,7 @@
 Name:Feat of Resistance
 ManaCost:1 W
 Types:Instant
-A:SP$ PutCounter | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBProtection | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBProtection | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature you control. It gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)
 SVar:DBProtection:DB$ Protection | Cost$ W | Defined$ Targeted | Gains$ Choice | Choices$ AnyColor
 DeckHas:Ability$Counters
 Oracle:Put a +1/+1 counter on target creature you control. It gains protection from the color of your choice until end of turn. (It can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of that color.)

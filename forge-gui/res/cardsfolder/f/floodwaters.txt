@@ -1,6 +1,6 @@
 Name:Floodwaters
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 U U | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return up to two target creatures to their owners' hands.
 K:Cycling:2
 Oracle:Return up to two target creatures to their owners' hands.\nCycling {2} ({2}, Discard this card: Draw a card.)

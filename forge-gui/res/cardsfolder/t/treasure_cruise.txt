@@ -2,6 +2,6 @@ Name:Treasure Cruise
 ManaCost:7 U
 Types:Sorcery
 K:Delve
-A:SP$ Draw | Cost$ 7 U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 DeckHints:Ability$Graveyard
 Oracle:Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)\nDraw three cards.

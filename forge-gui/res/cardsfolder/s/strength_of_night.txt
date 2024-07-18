@@ -2,8 +2,8 @@ Name:Strength of Night
 ManaCost:2 G
 Types:Instant
 K:Kicker:B
-A:SP$ PumpAll | Cost$ 2 G | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPumpYourZombies | SpellDescription$ Creatures you control get +1/+1 until end of turn. If this spell was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.
-SVar:DBPumpYourZombies:DB$ PumpAll | ValidCards$ Creature.Zombie+YouCtrl | NumAtt$ 2 | NumDef$ 2 | Condition$ Kicked | ConditionDescription$ If Strength of Night was kicked,
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPumpYourZombies | SpellDescription$ Creatures you control get +1/+1 until end of turn. If this spell was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.
+SVar:DBPumpYourZombies:DB$ PumpAll | ValidCards$ Creature.Zombie+YouCtrl | NumAtt$ 2 | NumDef$ 2 | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked,
 DeckNeeds:Color$Black & Type$Zombie
 SVar:NeedsToPlayKicked:Creature.Zombie+YouCtrl
 Oracle:Kicker {B} (You may pay an additional {B} as you cast this spell.)\nCreatures you control get +1/+1 until end of turn. If this spell was kicked, Zombie creatures you control get an additional +2/+2 until end of turn.

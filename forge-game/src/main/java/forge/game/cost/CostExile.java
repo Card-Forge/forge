@@ -195,11 +195,24 @@ public class CostExile extends CostPartWithList {
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
         }
+        boolean totalCMCgreater = false;
+        if (type.contains("+withTotalCMCGE")) {
+            totalCMCgreater = true;
+            totalM = type.split("withTotalCMCGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
+        }
 
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
             sharedType = true;
             type = TextUtil.fastReplace(type, "+withSharedCardType", "");
+        }
+
+        int nTypes = -1;
+        if (type.contains("+withTypesGE")) {
+            String num = type.split("withTypesGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTypesGE", num), "");
+            nTypes = Integer.parseInt(num);
         }
 
         if (!type.contains("X") || ability.getXManaCostPaid() != null) {
@@ -208,6 +221,10 @@ public class CostExile extends CostPartWithList {
 
         int amount = this.getAbilityAmount(ability);
 
+        if (nTypes > -1) {
+            if (CardFactoryUtil.getCardTypesFromList(list) < nTypes) return false;
+        }
+        
         if (sharedType) { // will need more logic if cost ever wants more than 2 that share a type
             if (list.size() < amount) return false;
             for (int i = 0; i < list.size(); i++) {
@@ -221,12 +238,12 @@ public class CostExile extends CostPartWithList {
             return false;
         }
 
-        if (totalCMC) {
+        if (totalCMC || totalCMCgreater) {
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }
             int i = AbilityUtils.calculateAmount(source, totalM, ability);
-            return CardLists.cmcCanSumTo(i, list);
+            return totalCMCgreater ? CardLists.getTotalCMC(list) >= i : CardLists.cmcCanSumTo(i, list);
         }
 
         // for Craft: do not count the source card twice (it will be sacrificed)

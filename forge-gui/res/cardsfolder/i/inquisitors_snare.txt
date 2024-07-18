@@ -1,7 +1,7 @@
 Name:Inquisitor's Snare
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.attacking,Creature.blocking | IsCurse$ True | KW$ Prevent all damage that would be dealt by CARDNAME. | SubAbility$ DBDestroy | SpellDescription$ Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
+A:SP$ Pump | ValidTgts$ Creature.attacking,Creature.blocking | IsCurse$ True | KW$ Prevent all damage that would be dealt by CARDNAME. | SubAbility$ DBDestroy | SpellDescription$ Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card.Black,Card.Red | ConditionCompare$ GE1
 AI:RemoveDeck:All
 Oracle:Prevent all damage target attacking or blocking creature would deal this turn. If that creature is black or red, destroy it.

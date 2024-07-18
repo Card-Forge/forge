@@ -1,7 +1,7 @@
 Name:Twisted Justice
 ManaCost:4 U B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 U B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Target player sacrifices a creature. You draw cards equal to that creature's power.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Target player sacrifices a creature. You draw cards equal to that creature's power.
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:RememberedLKI$CardPower
 Oracle:Target player sacrifices a creature. You draw cards equal to that creature's power.

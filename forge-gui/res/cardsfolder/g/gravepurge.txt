@@ -1,7 +1,7 @@
 Name:Gravepurge
 ManaCost:2 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Library | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDraw | SpellDescription$ Put any number of target creature cards from your graveyard on top of your library.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:All

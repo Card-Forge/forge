@@ -1,7 +1,7 @@
 Name:Crackle with Power
 ManaCost:X X X R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X X X R R | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y | SpellDescription$ CARDNAME deals five times X damage to each of up to X targets.
+A:SP$ DealDamage | ValidTgts$ Any | TargetMin$ 0 | TargetMax$ X | NumDmg$ Y | SpellDescription$ CARDNAME deals five times X damage to each of up to X targets.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.5
 Oracle:Crackle with Power deals five times X damage to each of up to X targets.

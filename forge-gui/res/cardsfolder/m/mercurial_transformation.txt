@@ -1,7 +1,7 @@
 Name:Mercurial Transformation
 ManaCost:1 U
 Types:Sorcery Lesson
-A:SP$ Animate | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RemoveAllAbilities$ True | SubAbility$ DBChoose | SpellDescription$ Until end of turn, target nonland permanent loses all abilities and becomes your choice of a blue Frog creature with base power and toughness 1/1 or a blue Octopus creature with base power and toughness 4/4.
+A:SP$ Animate | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RemoveAllAbilities$ True | SubAbility$ DBChoose | SpellDescription$ Until end of turn, target nonland permanent loses all abilities and becomes your choice of a blue Frog creature with base power and toughness 1/1 or a blue Octopus creature with base power and toughness 4/4.
 SVar:DBChoose:DB$ GenericChoice | Defined$ You | Choices$ DBFrog,DBOctopus | StackDescription$ None
 SVar:DBFrog:DB$ Animate | Power$ 1 | Toughness$ 1 | Colors$ Blue | OverwriteColors$ True | Types$ Creature,Frog | RemoveCardTypes$ True | RemoveCreatureTypes$ True | IsCurse$ True | Defined$ Targeted | SpellDescription$ Until end of turn, target nonland permanent loses all abilities and becomes a blue Frog with base power and toughness 1/1.
 SVar:DBOctopus:DB$ Animate | Power$ 4 | Toughness$ 4 | Colors$ Blue | OverwriteColors$ True | Types$ Creature,Octopus | RemoveCardTypes$ True | RemoveCreatureTypes$ True | IsCurse$ True | Defined$ Targeted | SpellDescription$ Until end of turn, target nonland permanent loses all abilities and becomes a blue Octopus with base power and toughness 4/4.

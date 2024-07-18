@@ -1,6 +1,6 @@
 Name:Tangle
 ManaCost:1 G
 Types:Instant
-A:SP$ Fog | Cost$ 1 G | SubAbility$ DBPumpAll | SpellDescription$ Prevent all combat damage that would be dealt this turn. Each attacking creature doesn't untap during its controller's next untap step.
+A:SP$ Fog | SubAbility$ DBPumpAll | SpellDescription$ Prevent all combat damage that would be dealt this turn. Each attacking creature doesn't untap during its controller's next untap step.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 Oracle:Prevent all combat damage that would be dealt this turn.\nEach attacking creature doesn't untap during its controller's next untap step.

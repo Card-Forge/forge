@@ -355,7 +355,7 @@ public class ComputerUtilCost {
                 final CostSacrifice sac = (CostSacrifice) part;
                 final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
 
-                final String type = sac.getType();
+                String type = sac.getType();
 
                 if (type.equals("CARDNAME")) {
                     if (!important) {
@@ -381,8 +381,24 @@ public class ComputerUtilCost {
                     continue;
                 }
 
-                final CardCollection sacList = new CardCollection();
+                boolean differentNames = false;
+                if (type.contains("+WithDifferentNames")) {
+                    type = type.replace("+WithDifferentNames", "");
+                    differentNames = true;
+                }
+
                 CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sourceAbility);
+                if (differentNames) {
+                    final Set<Card> uniqueNameCards = Sets.newHashSet();
+                    for (final Card card : typeList) {
+                        // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                        if (!card.hasNoName()) {
+                            uniqueNameCards.add(card);
+                        }
+                    }
+                    typeList.clear();
+                    typeList.addAll(uniqueNameCards);
+                }
 
                 // don't sacrifice the card we're pumping
                 typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);
@@ -393,7 +409,6 @@ public class ComputerUtilCost {
                     if (prefCard == null) {
                         return false;
                     }
-                    sacList.add(prefCard);
                     typeList.remove(prefCard);
                     count++;
                 }
@@ -451,7 +466,7 @@ public class ComputerUtilCost {
                  * - block against evasive (flyers, intimidate, etc.)
                  * - break board stall by racing with evasive vehicle
                  */
-                if (sa.hasParam("Crew")) {
+                if (sa.isCrew()) {
                     Card vehicle = AnimateAi.becomeAnimated(source, sa);
                     final int vehicleValue = ComputerUtilCard.evaluateCreature(vehicle);
                     String totalP = type.split("withTotalPowerGE")[1];

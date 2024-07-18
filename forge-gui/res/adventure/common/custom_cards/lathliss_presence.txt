@@ -1,6 +1,6 @@
 Name:Lathliss' Presence
 ManaCost:no cost
-Colors:Red
+Colors:red
 Types:Enchantment
 T:Mode$ ExcessDamage | ValidTarget$ Creature.OppCtrl,Planeswalker.OppCtrl | CombatDamage$ False | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever a creature or planeswalker an opponent controls is dealt excess noncombat damage, Lathliss' Presence deals damage equal to the excess to that permanent's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredTargetController | NumDmg$ X

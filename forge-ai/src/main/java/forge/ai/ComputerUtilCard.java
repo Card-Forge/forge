@@ -1379,6 +1379,10 @@ public class ComputerUtilCard {
             return false;
         }
 
+        if (sa.getHostCard().equals(c) && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts())) {
+            return false;
+        }
+
         /* -- currently disabled until better conditions are devised and the spell prediction is made smarter --
         // Determine if some mana sources need to be held for the future spell to cast in Main 2 before determining whether to pump.
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();

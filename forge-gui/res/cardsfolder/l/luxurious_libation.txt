@@ -1,7 +1,7 @@
 Name:Luxurious Libation
 ManaCost:X G
 Types:Instant
-A:SP$ Pump | Cost$ X G | ValidTgts$ Creature | NumAtt$ +X | NumDef$ +X | SubAbility$ DBToken | SpellDescription$ Target creature gets +X/+X until end of turn. Create a 1/1 green and white Citizen creature token.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +X | NumDef$ +X | SubAbility$ DBToken | SpellDescription$ Target creature gets +X/+X until end of turn. Create a 1/1 green and white Citizen creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_1_1_citizen | TokenOwner$ You
 SVar:X:Count$xPaid
 DeckHas:Ability$Token & Type$Citizen

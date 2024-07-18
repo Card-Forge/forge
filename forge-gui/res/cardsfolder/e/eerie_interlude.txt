@@ -1,7 +1,7 @@
 Name:Eerie Interlude
 ManaCost:2 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile any number of target creatures you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled permanent to the battlefield. | SubAbility$ DBCleanup
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

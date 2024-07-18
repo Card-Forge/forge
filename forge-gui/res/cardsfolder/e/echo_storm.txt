@@ -4,6 +4,6 @@ Types:Sorcery
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it for each time you've cast your commander from the command zone this game.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | MayChooseTarget$ True
 SVar:X:Count$TotalCommanderCastFromCommandZone
-A:SP$ CopyPermanent | Cost$ 3 U U | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Create a token that's a copy of target artifact.
+A:SP$ CopyPermanent | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Create a token that's a copy of target artifact.
 DeckHas:Ability$Token
 Oracle:When you cast this spell, copy it for each time you've cast your commander from the command zone this game. You may choose new targets for the copies.\nCreate a token that's a copy of target artifact.

@@ -1,5 +1,5 @@
 Name:Seismic Shudder
 ManaCost:1 R
 Types:Instant
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying.
 Oracle:Seismic Shudder deals 1 damage to each creature without flying.

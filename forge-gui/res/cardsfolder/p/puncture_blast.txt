@@ -2,5 +2,5 @@ Name:Puncture Blast
 ManaCost:2 R
 Types:Instant
 K:Wither
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ Puncture Blast deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 Oracle:Wither (This deals damage to creatures in the form of -1/-1 counters.)\nPuncture Blast deals 3 damage to any target.

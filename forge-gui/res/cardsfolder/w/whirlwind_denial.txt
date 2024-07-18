@@ -1,6 +1,6 @@
 Name:Whirlwind Denial
 ManaCost:2 U
 Types:Instant
-A:SP$ RepeatEach | Cost$ 2 U | RepeatSpellAbilities$ Spell.OppCtrl,Activated.OppCtrl,Triggered.OppCtrl | RepeatSubAbility$ DBCounterUnless | SpellDescription$ For each spell and ability your opponents control, counter it unless its controller pays {4}.
+A:SP$ RepeatEach | RepeatSpellAbilities$ Spell.OppCtrl,Activated.OppCtrl,Triggered.OppCtrl | RepeatSubAbility$ DBCounterUnless | SpellDescription$ For each spell and ability your opponents control, counter it unless its controller pays {4}.
 SVar:DBCounterUnless:DB$ Counter | Defined$ Remembered | UnlessCost$ 4 | UnlessPayer$ RememberedController | StackDescription$ Counter {c:Remembered}
 Oracle:For each spell and ability your opponents control, counter it unless its controller pays {4}.

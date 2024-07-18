@@ -1,7 +1,7 @@
 Name:Spelltwine
 ManaCost:5 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 5 U | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ TgtOpp | SpellDescription$ Exile target instant or sorcery card from your graveyard and target instant or sorcery from your opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana cost.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ TgtOpp | SpellDescription$ Exile target instant or sorcery card from your graveyard and target instant or sorcery from your opponent's graveyard. Copy those cards. Cast the copies if able without paying their mana cost.
 SVar:TgtOpp:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your opponent's graveyard | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | RememberChanged$ True | SubAbility$ CopyYou
 SVar:CopyYou:DB$ Play | Defined$ Remembered | Amount$ All | CopyCard$ True | WithoutManaCost$ True | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self | SubAbility$ DBCleanup

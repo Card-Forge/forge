@@ -1,7 +1,7 @@
 Name:Energy Bolt
 ManaCost:X R W
 Types:Sorcery
-A:SP$ Charm | Cost$ X R W | Choices$ DBDmg,DBGainLife
+A:SP$ Charm | Choices$ DBDmg,DBGainLife
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target player or planeswalker.
 SVar:DBGainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ X | SpellDescription$ Target player gains X life.
 SVar:X:Count$xPaid

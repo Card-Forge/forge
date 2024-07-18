@@ -1,7 +1,7 @@
 Name:Death of a Thousand Stings
 ManaCost:4 B
 Types:Instant Arcane
-A:SP$ LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
+A:SP$ LoseLife | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | SVarCompare$ GTY | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return CARDNAME from your graveyard to your hand.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:X:Count$InYourHand

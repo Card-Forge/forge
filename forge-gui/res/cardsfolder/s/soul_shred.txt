@@ -1,6 +1,6 @@
 Name:Soul Shred
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 B B | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target nonblack creature. You gain 3 life.
+A:SP$ DealDamage | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target nonblack creature. You gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Soul Shred deals 3 damage to target nonblack creature. You gain 3 life.

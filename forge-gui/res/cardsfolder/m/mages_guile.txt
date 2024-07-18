@@ -1,6 +1,6 @@
 Name:Mage's Guile
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | KW$ Shroud | SpellDescription$ Target creature gains shroud until end of turn. | TgtPrompt$ Select target creature.
+A:SP$ Pump | ValidTgts$ Creature | KW$ Shroud | SpellDescription$ Target creature gains shroud until end of turn. | TgtPrompt$ Select target creature.
 K:Cycling:U
 Oracle:Target creature gains shroud until end of turn. (It can't be the target of spells or abilities.)\nCycling {U} ({U}, Discard this card: Draw a card.)

@@ -1,7 +1,7 @@
 Name:Fortunate Few
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 W W | StartingWithActivator$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll | SpellDescription$ Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents.
+A:SP$ RepeatEach | StartingWithActivator$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBDestroyAll | SpellDescription$ Choose a nonland permanent you don't control, then each other player chooses a nonland permanent they don't control that hasn't been chosen this way. Destroy all other nonland permanents.
 SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Permanent.nonLand+nonRememberedPlayerCtrl+IsNotRemembered | RememberChosen$ True | ChoiceZone$ Battlefield | AILogic$ WorstCard
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

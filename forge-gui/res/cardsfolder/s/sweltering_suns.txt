@@ -1,6 +1,6 @@
 Name:Sweltering Suns
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 1 R R | ValidCards$ Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each creature.
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to each creature.
 K:Cycling:3
 Oracle:Sweltering Suns deals 3 damage to each creature.\nCycling {3} ({3}, Discard this card: Draw a card.)

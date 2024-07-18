@@ -1,7 +1,7 @@
 Name:Damnable Pact
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Draw | Cost$ X B B | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws X cards and loses X life.
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws X cards and loses X life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Targeted
 SVar:X:Count$xPaid
 Oracle:Target player draws X cards and loses X life.

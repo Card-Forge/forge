@@ -1,5 +1,5 @@
 Name:Extinguish
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target sorcery spell | ValidTgts$ Sorcery | SpellDescription$ Counter target sorcery spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target sorcery spell | ValidTgts$ Sorcery | SpellDescription$ Counter target sorcery spell.
 Oracle:Counter target sorcery spell.

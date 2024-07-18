@@ -1,5 +1,5 @@
 Name:Coercion
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a card from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a card from it. That player discards that card.
 Oracle:Target opponent reveals their hand. You choose a card from it. That player discards that card.

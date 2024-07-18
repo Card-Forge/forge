@@ -1,6 +1,6 @@
 Name:War Flare
 ManaCost:2 R W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R W | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBUntapAll | AILogic$ UntapCombatTrick | SpellDescription$ Creatures you control get +2/+1 until end of turn. Untap those creatures.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SubAbility$ DBUntapAll | AILogic$ UntapCombatTrick | SpellDescription$ Creatures you control get +2/+1 until end of turn. Untap those creatures.
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 Oracle:Creatures you control get +2/+1 until end of turn. Untap those creatures.

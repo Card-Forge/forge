@@ -107,7 +107,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
         } else {
             CardCollectionView choosenToSacrifice = null;
             for (final Player p : getTargetPlayers(sa)) {
-                CardCollectionView battlefield = p.getCardsIn(ZoneType.Battlefield);
+                CardCollection battlefield = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
+                battlefield.removeIf(c -> !zoneMovements.getLastStateBattlefield().contains(c));
+
                 if (sacEachValid) { // Sacrifice maximum permanents in any combination of types specified by SacValid
                     String [] validArray = valid.split(" & ");
                     String [] msgArray = msg.split(" & ");

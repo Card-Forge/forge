@@ -1,0 +1,11 @@
+Name:Shay Cormac
+ManaCost:W B
+Types:Legendary Creature Human Knight Rogue
+PT:1/1
+T:Mode$ BecomesTarget | ValidTarget$ Creature.OppCtrl+inZoneBattlefield | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounterTriggered | TriggerDescription$ Whenever a creature an opponent controls becomes the target of a spell or ability you control, put a bounty counter on that creature.
+SVar:TrigPutCounterTriggered:DB$ PutCounter | Defined$ TriggeredTargetLKICopy | CounterType$ BOUNTY | CounterNum$ 1
+A:AB$ AnimateAll | Cost$ 1 | ValidCards$ Permanent.OppCtrl | RemoveKeywords$ Hexproof & Indestructible & Protection & Shroud & Ward | SpellDescription$ Permanents your opponents control lose hexproof, indestructible, protection, shroud, and ward until end of turn.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+counters_GE1_BOUNTY | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature with a bounty counter on it dies, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counters
+Oracle:{1}: Permanents your opponents control lose hexproof, indestructible, protection, shroud, and ward until end of turn.\nWhenever a creature an opponent controls becomes the target of a spell or ability you control, put a bounty counter on that creature.\nWhenever a creature with a bounty counter on it dies, put two +1/+1 counters on Shay Cormac.

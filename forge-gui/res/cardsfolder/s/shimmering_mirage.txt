@@ -1,7 +1,7 @@
 Name:Shimmering Mirage
 ManaCost:1 U
 Types:Instant
-A:SP$ ChooseType | Cost$ 1 U | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn. Draw a card.
+A:SP$ ChooseType | Defined$ You | Type$ Basic Land | SubAbility$ DBAnimate | SpellDescription$ Target land becomes the basic land type of your choice until end of turn. Draw a card.
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ ChosenType | RemoveLandTypes$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All

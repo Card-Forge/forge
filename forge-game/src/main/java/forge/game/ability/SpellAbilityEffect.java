@@ -84,9 +84,11 @@ public abstract class SpellAbilityEffect {
                     String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc,
                             sa.getHostCard().getName());
 
-                    int idx = spellDesc.indexOf("(");
-                    if (idx > 0) { //trim reminder text from StackDesc
-                        spellDesc = spellDesc.substring(0, spellDesc.indexOf("(") - 1);
+                    //trim reminder text from StackDesc
+                    int idxL = spellDesc.indexOf(" (");
+                    int idxR = spellDesc.indexOf(")");
+                    if (idxL > 0 && idxR > idxL) {
+                        spellDesc = spellDesc.replace(spellDesc.substring(idxL, idxR + 1), "");
                     }
 
                     if (reps != null) {
@@ -471,8 +473,8 @@ public abstract class SpellAbilityEffect {
         card.addTrigger(parsedTrigger2);
     }
 
-    protected static void addForgetOnCastTrigger(final Card card) {
-        String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
+    protected static void addForgetOnCastTrigger(final Card card, String valid) {
+        String trig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ " + valid;
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
@@ -659,6 +661,7 @@ public abstract class SpellAbilityEffect {
         boolean combatChanged = false;
         final Combat combat = game.getCombat();
 
+        // CR 506.3b
         if (sa.hasParam(attackingParam) && combat.getAttackingPlayer().equals(c.getController())) {
             String attacking = sa.getParam(attackingParam);
 
@@ -688,7 +691,7 @@ public abstract class SpellAbilityEffect {
         }
         if (sa.hasParam(blockingParam)) {
             final Card attacker = Iterables.getFirst(AbilityUtils.getDefinedCards(host, sa.getParam(blockingParam), sa), null);
-            if (attacker != null) {
+            if (attacker != null && combat.getDefenderPlayerByAttacker(attacker).equals(c.getController())) {
                 final boolean wasBlocked = combat.isBlocked(attacker);
                 combat.addBlocker(attacker, c);
                 combat.orderAttackersForDamageAssignment(c);

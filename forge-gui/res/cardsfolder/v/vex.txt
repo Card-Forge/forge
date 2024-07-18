@@ -1,6 +1,6 @@
 Name:Vex
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. That spell's controller may draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. That spell's controller may draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1 | OptionalDecider$ TargetedController
 Oracle:Counter target spell. That spell's controller may draw a card.

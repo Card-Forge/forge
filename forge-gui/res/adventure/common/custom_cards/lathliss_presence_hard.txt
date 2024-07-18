@@ -1,6 +1,6 @@
 Name:Lathliss' Presence (Hard Mode)
 ManaCost:no cost
-Colors:Red
+Colors:red
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | Execute$ TrigDamage | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to each creature and planeswalker you don't control.
 SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | ValidDescription$ each creature and each planeswalker | NumDmg$ 1

@@ -7,4 +7,4 @@ T:Mode$ MilledOnce | ValidPlayer$ Player | ValidCard$ Creature | TriggerZones$ B
 SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_horror
 A:AB$ Mill | Cost$ 1 T | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Select a player | SpellDescription$ Target player mills three cards.
 DeckHas:Ability$Mill|Token
-Oracle:Hive Mind — Whenever a player mills one or more creature cards, you create a 1/1 black Horror creature token.\n{1},{T}: Target player mills three cards.\nChoose a Background (You can have a Background as a second commander.)
+Oracle:Hive Mind — Whenever a player mills one or more creature cards, you create a 1/1 black Horror creature token.\n{1}, {T}: Target player mills three cards.\nChoose a Background (You can have a Background as a second commander.)

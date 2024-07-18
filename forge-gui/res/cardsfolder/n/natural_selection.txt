@@ -1,5 +1,5 @@
 Name:Natural Selection
 ManaCost:G
 Types:Instant
-A:SP$ RearrangeTopOfLibrary | Cost$ G | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle their library.
+A:SP$ RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3 | MayShuffle$ True | SpellDescription$ Look at the top 3 cards of target player's library and put them back in any order. You may have that player shuffle their library.
 Oracle:Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle.

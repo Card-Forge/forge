@@ -1,5 +1,5 @@
 Name:Harmonize
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 G G | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 Oracle:Draw three cards.

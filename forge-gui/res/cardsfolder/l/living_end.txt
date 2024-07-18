@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:black
 Types:Sorcery
 K:Suspend:3:2 B B
-A:SP$ ChangeZoneAll | Cost$ 0 | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | AILogic$ LivingDeath | SubAbility$ SacAll | SpellDescription$ Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | AILogic$ LivingDeath | SubAbility$ SacAll | SpellDescription$ Each player exiles all creature cards from their graveyard, then sacrifices all creatures they control, then puts all cards they exiled this way onto the battlefield.
 SVar:SacAll:DB$ SacrificeAll | ValidCards$ Creature | SubAbility$ ReturnAll
 SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

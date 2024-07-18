@@ -11,5 +11,5 @@ ALTERNATE
 Name:Seasonal Ritual
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Mana | Cost$ G | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:SP$ Mana | Produced$ Any | SpellDescription$ Add one mana of any color.
 Oracle:Add one mana of any color. (Then exile this card. You may cast the creature later from exile.)

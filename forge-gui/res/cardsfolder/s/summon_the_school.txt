@@ -1,6 +1,6 @@
 Name:Summon the School
 ManaCost:3 W
-Types:Tribal Sorcery Merfolk
+Types:Kindred Sorcery Merfolk
 A:SP$ Token | Cost$ 3 W | TokenAmount$ 2 | TokenScript$ u_1_1_merfolk_wizard | TokenOwner$ You | SpellDescription$ Create two 1/1 blue Merfolk Wizard creature tokens.
 A:AB$ ChangeZone | Cost$ tapXType<4/Merfolk> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Insult
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 R | Name$ Insult Effect | StaticAbilities$ STCantPrevent | ReplacementEffects$ InsultDamageEvent | SpellDescription$ Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
+A:SP$ Effect | StaticAbilities$ STCantPrevent | ReplacementEffects$ InsultDamageEvent | SpellDescription$ Damage can't be prevented this turn. If a source you control would deal damage this turn, it deals double that damage instead.
 SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented.
 SVar:InsultDamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ReplaceWith$ DmgTwice | Description$ If a source you control would deal damage this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
@@ -15,6 +15,6 @@ Name:Injury
 ManaCost:2 R
 Types:Sorcery
 K:Aftermath
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature and 2 damage to target player or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature and 2 damage to target player or planeswalker.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nInjury deals 2 damage to target creature and 2 damage to target player or planeswalker.

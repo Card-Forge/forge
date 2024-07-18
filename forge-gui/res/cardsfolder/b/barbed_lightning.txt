@@ -2,7 +2,7 @@ Name:Barbed Lightning
 ManaCost:2 R
 Types:Instant
 K:Entwine:2
-A:SP$ Charm | Cost$ 2 R | Choices$ DBDmgC,DBDmgP | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDmgC,DBDmgP | CharmNum$ 1
 SVar:DBDmgC:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature.
 SVar:DBDmgP:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
 Oracle:Choose one —\n• Barbed Lightning deals 3 damage to target creature.\n• Barbed Lightning deals 3 damage to target player or planeswalker.\nEntwine {2} (Choose both if you pay the entwine cost.)

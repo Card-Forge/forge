@@ -11,6 +11,6 @@ ALTERNATE
 Name:Heart's Desire
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | SpellDescription$ Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | SpellDescription$ Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
 Oracle:Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)

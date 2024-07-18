@@ -1,0 +1,9 @@
+Name:Rattleback Apothecary
+ManaCost:2 B
+Types:Creature Gorgon Warlock
+PT:3/2
+K:Deathtouch
+T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you commit a crime, target creature you control gains your choice of menace or lifelink until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
+SVar:TrigPump:DB$ Pump | KWChoice$ Menace,Lifelink | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch\nWhenever you commit a crime, target creature you control gains your choice of menace or lifelink until end of turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

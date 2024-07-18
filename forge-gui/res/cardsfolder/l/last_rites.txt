@@ -1,7 +1,7 @@
 Name:Last Rites
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLastRitesDiscard | AILogic$ DiscardUncastableAndExcess | SpellDescription$ Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
+A:SP$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLastRitesDiscard | AILogic$ DiscardUncastableAndExcess | SpellDescription$ Discard any number of cards. Target player reveals their hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
 SVar:DBLastRitesDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ X | DiscardValid$ Card.nonLand | ValidTgts$ Opponent
 SVar:DBLastRitesCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

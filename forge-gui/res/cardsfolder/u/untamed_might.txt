@@ -1,6 +1,6 @@
 Name:Untamed Might
 ManaCost:X G
 Types:Instant
-A:SP$ Pump | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn.
 SVar:X:Count$xPaid
 Oracle:Target creature gets +X/+X until end of turn.

@@ -1,7 +1,7 @@
 Name:Contentious Plan
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Proliferate | Cost$ 1 U | SubAbility$ DBDraw | SpellDescription$ Proliferate.
+A:SP$ Proliferate | SubAbility$ DBDraw | SpellDescription$ Proliferate.
 SVar:DBDraw:DB$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters

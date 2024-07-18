@@ -1,7 +1,7 @@
 Name:Sideswipe
 ManaCost:1 R
 Types:Instant
-A:SP$ ChangeTargets | Cost$ 1 R | TargetType$ Spell | Optional$ True | ValidTgts$ Card.Arcane | SpellDescription$ You may change any targets of target Arcane spell.
+A:SP$ ChangeTargets | TargetType$ Spell | Optional$ True | ValidTgts$ Card.Arcane | SpellDescription$ You may change any targets of target Arcane spell.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:You may change any targets of target Arcane spell.

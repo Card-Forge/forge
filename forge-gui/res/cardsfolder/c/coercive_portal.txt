@@ -4,6 +4,6 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigVote | TriggerZones$ Battlefield | TriggerDescription$ Will of the Council — At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice CARDNAME and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.
 SVar:TrigVote:DB$ Vote | Defined$ Player | VoteCarnage$ DBDestroyAll | VoteHomage$ DBDraw | Tied$ DBDraw | VoteType$ Carnage,Homage | AILogic$ CarnageOrHomage
 SVar:DBDestroyAll:DB$ Sacrifice | SacValid$ Self | SubAbility$ DBDestroy
-SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ValidDesc$ all nonland permanents
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Permanent.nonLand | ValidDescription$ all nonland permanents
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You
 Oracle:Will of the council — At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.

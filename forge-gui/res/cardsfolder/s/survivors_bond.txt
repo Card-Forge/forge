@@ -1,7 +1,7 @@
 Name:Survivors' Bond
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 G | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Human,NonHuman
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ Human,NonHuman
 SVar:Human:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target Human creature card in your graveyard | ValidTgts$ Creature.Human+YouOwn | SpellDescription$ Return target Human creature card from your graveyard to your hand.
 SVar:NonHuman:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target non-Human creature card in your graveyard | ValidTgts$ Creature.nonHuman+YouOwn | SpellDescription$ Return target non-Human creature card from your graveyard to your hand.
 Oracle:Choose one or both —\n• Return target Human creature card from your graveyard to your hand.\n• Return target non-Human creature card from your graveyard to your hand.

@@ -1,7 +1,7 @@
 Name:Nissa's Pilgrimage
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic+Forest | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBBattlefield | Shuffle$ False | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand. Then shuffle. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Land.Basic+Forest | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBBattlefield | Shuffle$ False | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic Forest cards, reveal those cards, and put one onto the battlefield tapped and the rest into your hand. Then shuffle. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, search your library for up to three basic Forest cards instead of two.
 SVar:DBBattlefield:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | SubAbility$ DBHand | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | ForgetChanged$ True | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card to go to the battlefield | Shuffle$ False | StackDescription$ None
 SVar:DBHand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ Remembered | NoLooking$ True | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

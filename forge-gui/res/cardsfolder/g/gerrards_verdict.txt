@@ -1,7 +1,7 @@
 Name:Gerrard's Verdict
 ManaCost:W B
 Types:Sorcery
-A:SP$ Discard | Cost$ W B | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBGainLife1 | SpellDescription$ Target player discards two cards. You gain 3 life for each land card discarded this way.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ TgtChoose | NumCards$ 2 | RememberDiscarded$ True | SubAbility$ DBGainLife1 | SpellDescription$ Target player discards two cards. You gain 3 life for each land card discarded this way.
 SVar:DBGainLife1:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:X:Remembered$Valid Land/Times.3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

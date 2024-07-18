@@ -1,6 +1,6 @@
 Name:Soothing of Sméagol
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ TrigTempt | SpellDescription$ Return target nontoken creature to its owner's hand. The Ring tempts you.
+A:SP$ ChangeZone | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ TrigTempt | SpellDescription$ Return target nontoken creature to its owner's hand. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 Oracle:Return target nontoken creature to its owner's hand. The Ring tempts you.

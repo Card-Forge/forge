@@ -6,7 +6,7 @@ K:Flying
 K:Trample
 K:Protection:Instant:instants
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each card type among cards in your graveyard.
-SVar:X:Count$CardControllerTypes.Graveyard
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigControlPlayer | TriggerDescription$ When you cast CARDNAME, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
 SVar:TrigControlPlayer:DB$ ControlPlayer | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | DelayedTriggerDefinedPlayer$ Targeted | RememberObjects$ Targeted | Phase$ Cleanup | Execute$ DBAddTurn | Static$ True

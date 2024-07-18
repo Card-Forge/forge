@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Human
 PT:2/2
 K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigEffect | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose target artifact card in your graveyard. You may cast that card this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Silas Renn, Seeker Adept Effect | ValidTgts$ Artifact.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target artifact card in your graveyard | StaticAbilities$ STPlay | RememberObjects$ Targeted | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target artifact card in your graveyard this turn.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Artifact.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target artifact card in your graveyard | StaticAbilities$ STPlay | RememberObjects$ Targeted | ExileOnMoved$ Graveyard | SpellDescription$ You may cast target artifact card in your graveyard this turn.
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Graveyard | Description$ Until end of turn, you may cast an artifact card in a graveyard.
 K:Partner
 Oracle:Deathtouch\nWhenever Silas Renn, Seeker Adept deals combat damage to a player, choose target artifact card in your graveyard. You may cast that card this turn.\nPartner (You can have two commanders if both have partner.)

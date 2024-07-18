@@ -1,7 +1,7 @@
 Name:Lightning Storm
 ManaCost:1 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target, where X is 3 plus the number of charge counters on CARDNAME.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to any target, where X is 3 plus the number of charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE/Plus.3
 A:AB$ PutCounter | Cost$ Discard<1/Land> | CounterType$ CHARGE | CounterNum$ 2 | Defined$ Self | ActivationZone$ Stack | SubAbility$ DBChangeTarget | Activator$ Player | SpellDescription$ Put two charge counters on CARDNAME. You may choose a new target for it. Any player may activate this ability but only if CARDNAME is on the stack.
 SVar:DBChangeTarget:DB$ ChangeTargets | Defined$ SourceFirstSpell | Optional$ True

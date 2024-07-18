@@ -1,6 +1,6 @@
 Name:Shivan Sand-Mage
 ManaCost:2 R R
-Types:Creature Viashino Shaman
+Types:Creature Lizard Shaman
 PT:3/2
 K:Suspend:4:R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY

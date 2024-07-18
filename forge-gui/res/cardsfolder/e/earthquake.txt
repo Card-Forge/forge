@@ -1,6 +1,6 @@
 Name:Earthquake
 ManaCost:X R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying and each player.
 SVar:X:Count$xPaid
 Oracle:Earthquake deals X damage to each creature without flying and each player.

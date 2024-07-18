@@ -29,7 +29,7 @@ public class PermanentAi extends SpellAbilityAi {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Card card = sa.getHostCard();
 
-        if (card.hasKeyword("MayFlashSac") && !ai.couldCastSorcery(sa)) {
+        if (card.hasKeyword("MayFlashSac") && !ai.canCastSorcery()) {
             // AiPlayDecision.AnotherTime
             return false;
         }
@@ -153,8 +153,7 @@ public class PermanentAi extends SpellAbilityAi {
             return false;
         }
 
-        if (sa.hasParam("Announce") && sa.getParam("Announce").startsWith("Multikicker")) {
-            // String announce = sa.getParam("Announce");
+        if (sa.isAnnouncing("Multikicker")) {
             ManaCost mkCost = sa.getMultiKickerManaCost();
             ManaCost mCost = sa.getPayCosts().getTotalMana();
             boolean isZeroCost = mCost.isZero();
@@ -264,8 +263,18 @@ public class PermanentAi extends SpellAbilityAi {
                     if (ai.getLife() < Integer.parseInt(value)) {
                         dontCast = true;
                     }
+                } else if (param.equals("NeverCastIfLifeAbove")) {
+                    // Do not cast this spell if AI life is below a certain threshold
+                    if (ai.getLife() > Integer.parseInt(value)) {
+                        dontCast = true;
+                    }
                 } else if (param.equals("AlwaysCastIfLifeBelow")) {
                     if (ai.getLife() < Integer.parseInt(value)) {
+                        dontCast = false;
+                        break; // disregard other preferences, always cast as a last resort
+                    }
+                } else if (param.equals("AlwaysCastIfLifeAbove")) {
+                    if (ai.getLife() > Integer.parseInt(value)) {
                         dontCast = false;
                         break; // disregard other preferences, always cast as a last resort
                     }

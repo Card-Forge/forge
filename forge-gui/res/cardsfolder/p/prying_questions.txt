@@ -1,6 +1,6 @@
 Name:Prying Questions
 ManaCost:2 B
 Types:Sorcery
-A:SP$ LoseLife | Cost$ 2 B | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBChangeZone | SpellDescription$ Target opponent loses 3 life and puts a card from their hand on top of their library.
+A:SP$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBChangeZone | SpellDescription$ Target opponent loses 3 life and puts a card from their hand on top of their library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | DefinedPlayer$ ParentTarget | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | IsCurse$ True
 Oracle:Target opponent loses 3 life and puts a card from their hand on top of their library.

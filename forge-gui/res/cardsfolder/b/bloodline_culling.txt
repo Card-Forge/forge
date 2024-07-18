@@ -1,7 +1,7 @@
 Name:Bloodline Culling
 ManaCost:1 B B
 Types:Instant
-A:SP$ Charm | Cost$ 1 B B | Choices$ CharmCreature,CharmToken | Defined$ You
+A:SP$ Charm | Choices$ CharmCreature,CharmToken | Defined$ You
 SVar:CharmCreature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | IsCurse$ True | SpellDescription$ Target creature gets -5/-5 until end of turn.
 SVar:CharmToken:DB$ PumpAll | ValidCards$ Creature.token | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Creature tokens get -2/-2 until end of turn.
 Oracle:Choose one —\n• Target creature gets -5/-5 until end of turn.\n• Creature tokens get -2/-2 until end of turn.

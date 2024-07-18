@@ -6,4 +6,4 @@ A:AB$ Animate | Cost$ 3 | CheckSVar$ CountAll | SVarCompare$ GE9 | Power$ 9 | To
 SVar:CountAll:Count$DifferentCardNames_Land.YouCtrl+inZoneBattlefield+Basic,Land.YouCtrl+inZoneBattlefield+Sphere,Land.YouCtrl+inZoneBattlefield+Locus
 DeckNeeds:Type$Locus|Sphere
 DeckHas:Type$Phyrexian|Construct|Artifact
-Oracle:{3},{T}: Search your library for a basic, Sphere, or Locus land card, reveal it, put it into your hand, then shuffle.\n{3}: Monument to Perfection becomes a 9/9 Phyrexian Construct artifact creature, loses all abilities, and gains indestructible and toxic 9. Activate only if there are nine or more lands with different names among the basic, Sphere, and Locus lands you control.
+Oracle:{3}, {T}: Search your library for a basic, Sphere, or Locus land card, reveal it, put it into your hand, then shuffle.\n{3}: Monument to Perfection becomes a 9/9 Phyrexian Construct artifact creature, loses all abilities, and gains indestructible and toxic 9. Activate only if there are nine or more lands with different names among the basic, Sphere, and Locus lands you control.

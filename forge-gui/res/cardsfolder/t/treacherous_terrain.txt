@@ -1,7 +1,7 @@
 Name:Treacherous Terrain
 ManaCost:6 R G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 R G | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DmgOpp | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each opponent equal to the number of lands that player controls.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DmgOpp | DamageMap$ True | SpellDescription$ CARDNAME deals damage to each opponent equal to the number of lands that player controls.
 SVar:DmgOpp:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Land.RememberedPlayerCtrl
 K:TypeCycling:Basic:2

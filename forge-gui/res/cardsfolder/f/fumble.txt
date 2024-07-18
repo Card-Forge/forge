@@ -1,7 +1,7 @@
 Name:Fumble
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ GainControl | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.
+A:SP$ ChangeZone | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ GainControl | StackDescription$ SpellDescription | SpellDescription$ Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.
 SVar:GainControl:DB$ GainControl | Defined$ AttachedTo Targeted.Aura,Equipment | NewController$ You | SubAbility$ DBAttach | StackDescription$ None
 SVar:DBAttach:DB$ Attach | Object$ AttachedTo Targeted.Aura,Equipment | Choices$ Creature | StackDescription$ None
 Oracle:Return target creature to its owner's hand. Gain control of all Auras and Equipment that were attached to it, then attach them to another creature.

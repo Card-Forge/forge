@@ -1,5 +1,5 @@
 Name:Breath of Life
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
 Oracle:Return target creature card from your graveyard to the battlefield.

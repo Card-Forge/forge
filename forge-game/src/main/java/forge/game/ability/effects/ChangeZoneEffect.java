@@ -4,6 +4,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
+import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -877,14 +879,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
-            final String choose = sa.getParam("Chooser");
-            if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
-                chooser = sa.getTargets().getFirstTargetedPlayer();
-            } else {
-                final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
-                if (!choosers.isEmpty()) {
-                    chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
-                }
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            if (!choosers.isEmpty()) {
+                chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }
         }
 
@@ -1052,7 +1049,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             "While you're searching your library, you may cast CARDNAME from your library.");
                     decider.getController().tempShowCards(canCastWhileSearching);
                     for (final Card tgtCard : canCastWhileSearching) {
-                        List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, decider);
+                        List<SpellAbility> sas = AbilityUtils.getSpellsFromPlayEffect(tgtCard, decider, CardStateName.Original, true);
                         if (sas.isEmpty()) {
                             continue;
                         }

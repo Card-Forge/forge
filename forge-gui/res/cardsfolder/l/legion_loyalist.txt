@@ -5,6 +5,6 @@ PT:1/1
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | PresentCompare$ GE2 | TriggerDescription$ Battalion — Whenever CARDNAME and at least two other creatures attack, creatures you control gain first strike and trample until end of turn and can't be blocked by creature tokens this turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike & Trample | SubAbility$ TrigEffect
-SVar:TrigEffect:DB$ Effect | Name$ Legion Loyalist Effect | StaticAbilities$ KWPump
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.YouCtrl | ValidBlocker$ Creature.token | EffectZone$ Command | Description$ Creatures you control can't be blocked by creature tokens this turn
 Oracle:Haste\nBattalion — Whenever Legion Loyalist and at least two other creatures attack, creatures you control gain first strike and trample until end of turn and can't be blocked by creature tokens this turn.

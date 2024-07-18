@@ -1,7 +1,7 @@
 Name:Sevinne's Reclamation
 ManaCost:2 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 W | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card with mana value 3 or less from your graveyard | ValidTgts$ Permanent.cmcLE3+YouCtrl | SubAbility$ DBCpoy | SpellDescription$ Return target permanent card with mana value 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target permanent card with mana value 3 or less from your graveyard | ValidTgts$ Permanent.cmcLE3+YouCtrl | SubAbility$ DBCpoy | SpellDescription$ Return target permanent card with mana value 3 or less from your graveyard to the battlefield. If this spell was cast from a graveyard, you may copy this spell and may choose a new target for the copy.
 SVar:DBCpoy:DB$ CopySpellAbility | Defined$ Parent | Optional$ True | MayChooseTarget$ True | ConditionDefined$ Self | ConditionPresent$ Card.wasCastFromGraveyard
 AI:RemoveDeck:Random
 K:Flashback:4 W

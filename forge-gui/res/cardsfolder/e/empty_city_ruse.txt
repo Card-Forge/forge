@@ -1,6 +1,6 @@
 Name:Empty City Ruse
 ManaCost:W
 Types:Sorcery
-A:SP$ SkipPhase | Cost$ W | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Phase$ Combat | Start$ FromNext | Duration$ UntilTheEndOfTargetedNextTurn | SpellDescription$ Target opponent skips all combat phases of their next turn.
+A:SP$ SkipPhase | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Phase$ Combat | Start$ FromNext | Duration$ UntilTheEndOfTargetedNextTurn | SpellDescription$ Target opponent skips all combat phases of their next turn.
 AI:RemoveDeck:All
 Oracle:Target opponent skips all combat phases of their next turn.

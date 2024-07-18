@@ -31,7 +31,7 @@ Types:Legendary Creature Human Warlock
 PT:5/5
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. When you do, instant or sorcery card from your graveyard to your hand.
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | Execute$ TrigReturn | TriggerDescription$ When you do, return target instant or sorcery card from your graveyard to your hand.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | Select target instant or sorcery card
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtPrompt$ Select target instant or sorcery card
 DeckHas:Ability$Sacrifice|Graveyard
 DeckHints:Type$Artifact|Instant|Sorcery
 Oracle:When this creature specializes, you may sacrifice another creature or an artifact. When you do, return target instant or sorcery card from your graveyard to your hand.

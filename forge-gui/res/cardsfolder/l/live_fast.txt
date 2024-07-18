@@ -1,7 +1,7 @@
 Name:Live Fast
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 B | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards, lose 2 life, and get {E}{E} (two energy counters).
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBLoseLife | SpellDescription$ You draw two cards, lose 2 life, and get {E}{E} (two energy counters).
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Subability$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 Oracle:You draw two cards, lose 2 life, and get {E}{E} (two energy counters).

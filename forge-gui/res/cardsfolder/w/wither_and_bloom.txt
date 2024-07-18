@@ -1,0 +1,7 @@
+Name:Wither and Bloom
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+A:AB$ PutCounter | Cost$ 1 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature you control. Activate only as a sorcery.
+DeckHas:Ability$Counters|Graveyard
+Oracle:Target creature gets -3/-3 until end of turn.\n{1}{B}, Exile Wither and Bloom from your graveyard: Put a +1/+1 counter on target creature you control. Activate only as a sorcery.

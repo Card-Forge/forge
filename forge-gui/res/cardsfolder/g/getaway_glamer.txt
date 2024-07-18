@@ -1,0 +1,11 @@
+Name:Getaway Glamer
+ManaCost:W
+Types:Instant
+K:Spree
+A:SP$ Charm | Choices$ DBExile,DBDestroy | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBExile:DB$ ChangeZone | SpreeCost$ 1 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.nonToken | TgtPrompt$ Select target nontoken creature | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDestroy:DB$ Destroy | SpreeCost$ 2 | ValidTgts$ Creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.greatestPower | SpellDescription$ Destroy target creature if no other creature has greater power.
+Oracle:Spree (Choose one or more additional costs.)\n+ {1} — Exile target nontoken creature. Return it to the battlefield under its owner's control at the beginning of the next end step.\n+ {2} — Destroy target creature if no other creature has greater power.

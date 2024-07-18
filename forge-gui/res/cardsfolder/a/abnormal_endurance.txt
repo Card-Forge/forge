@@ -1,7 +1,7 @@
 Name:Abnormal Endurance
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." | SubAbility$ DBAnimate
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control." | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Triggers$ AbnormalEnduranceChangeZone | Defined$ ParentTarget
 SVar:AbnormalEnduranceChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ AbnormalEnduranceTrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
 SVar:AbnormalEnduranceTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy

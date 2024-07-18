@@ -1,7 +1,7 @@
 Name:Fungal Rebirth
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Return target permanent card from your graveyard to your hand. If a creature died this turn, create two 1/1 green Saproling creature tokens.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Return target permanent card from your graveyard to your hand. If a creature died this turn, create two 1/1 green Saproling creature tokens.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_saproling | TokenOwner$ You | ConditionCheckSVar$ Morbid | ConditionSVarCompare$ GE1
 SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 DeckHints:Type$Fungus

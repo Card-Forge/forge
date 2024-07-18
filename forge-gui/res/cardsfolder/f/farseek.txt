@@ -1,7 +1,7 @@
 Name:Farseek
 ManaCost:1 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.
 AI:RemoveDeck:Random
 DeckNeeds:Color$White|Blue|Black|Red
 Oracle:Search your library for a Plains, Island, Swamp, or Mountain card, put it onto the battlefield tapped, then shuffle.

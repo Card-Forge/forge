@@ -1,7 +1,7 @@
 Name:Word of Blasting
 ManaCost:1 R
 Types:Instant
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SubAbility$ DBDamage | SpellDescription$ Destroy target Wall. It can't be regenerated. CARDNAME deals damage equal to that Wall's mana value to the Wall's controller.
+A:SP$ Destroy | ValidTgts$ Wall | TgtPrompt$ Select target Wall | SubAbility$ DBDamage | SpellDescription$ Destroy target Wall. It can't be regenerated. CARDNAME deals damage equal to that Wall's mana value to the Wall's controller.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ TargetedController
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:Random

@@ -1,7 +1,7 @@
 Name:Aether Snap
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ RemoveCounterAll | Cost$ 3 B B | ValidCards$ Permanent | AllCounterTypes$ True | StackDescription$ SpellDescription | SubAbility$ DBRemove | SpellDescription$ Remove all counters from all permanents and exile all tokens.
+A:SP$ RemoveCounterAll | ValidCards$ Permanent | AllCounterTypes$ True | StackDescription$ SpellDescription | SubAbility$ DBRemove | SpellDescription$ Remove all counters from all permanents and exile all tokens.
 SVar:DBRemove:DB$ ChangeZoneAll | ChangeType$ Card.token | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

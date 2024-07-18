@@ -1,7 +1,7 @@
 Name:Growth Charm
 ManaCost:1 G G
 Types:Instant
-A:SP$ Charm | Cost$ 1 G G | Choices$ DBRamp,DBGiant,DBRegrow | Defined$ You
+A:SP$ Charm | Choices$ DBRamp,DBGiant,DBRegrow | Defined$ You
 SVar:DBRamp:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle.
 SVar:DBGiant:DB$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
 SVar:DBRegrow:DB$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | SpellDescription$ Return target card from your graveyard to your hand.

@@ -1,5 +1,5 @@
 Name:Shape the Sands
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +5 | KW$ Reach | SpellDescription$ Target creature gets +0/+5 and gains reach until end of turn. (It can block creatures with flying.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +5 | KW$ Reach | SpellDescription$ Target creature gets +0/+5 and gains reach until end of turn. (It can block creatures with flying.)
 Oracle:Target creature gets +0/+5 and gains reach until end of turn. (It can block creatures with flying.)

@@ -1,5 +1,5 @@
 Name:Aetherize
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 U | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all attacking creatures to their owner's hand.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.attacking | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all attacking creatures to their owner's hand.
 Oracle:Return all attacking creatures to their owner's hand.

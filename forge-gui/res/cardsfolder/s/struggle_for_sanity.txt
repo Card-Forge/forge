@@ -1,7 +1,7 @@
 Name:Struggle for Sanity
 ManaCost:2 B B
 Types:Sorcery
-A:SP$ RevealHand | Cost$ 2 B B | ValidTgts$ Opponent | RememberTargets$ True | RememberRevealed$ True | SubAbility$ DBRepeatChoose | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards they exiled this way to their hand and puts the rest into their graveyard.
+A:SP$ RevealHand | ValidTgts$ Opponent | RememberTargets$ True | RememberRevealed$ True | SubAbility$ DBRepeatChoose | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals their hand. That player exiles a card from it, then you exile a card from it. Repeat this process until all cards in that hand have been exiled. That player returns the cards they exiled this way to their hand and puts the rest into their graveyard.
 SVar:DBRepeatChoose:DB$ Repeat | RepeatSubAbility$ DBOppChoose | RepeatCheckSVar$ X | RepeatSVarCompare$ GE1 | SubAbility$ DBReturn | StackDescription$ None
 SVar:DBOppChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.IsRemembered | ChoiceZone$ Hand | Amount$ 1 | Mandatory$ True | SubAbility$ DBExileOpp
 SVar:DBExileOpp:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Hand | Destination$ Exile | Imprint$ True | SubAbility$ DBYouChoose

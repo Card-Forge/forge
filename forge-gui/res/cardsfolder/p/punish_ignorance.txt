@@ -1,7 +1,7 @@
 Name:Punish Ignorance
 ManaCost:W U U B
 Types:Instant
-A:SP$ Counter | Cost$ W U U B | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDrain | SpellDescription$ Counter target spell. Its controller loses 3 life and you gain 3 life.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDrain | SpellDescription$ Counter target spell. Its controller loses 3 life and you gain 3 life.
 SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | SubAbility$ DBGain
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Counter target spell. Its controller loses 3 life and you gain 3 life.

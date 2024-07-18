@@ -1,7 +1,7 @@
 Name:Research the Deep
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SubAbility$ DBClash | SpellDescription$ Draw a card. Clash with an opponent. If you win, return CARDNAME to it's owners hand.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBClash | SpellDescription$ Draw a card. Clash with an opponent. If you win, return CARDNAME to its owner's hand.
 SVar:DBClash:DB$ Clash | WinSubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand
 Oracle:Draw a card. Clash with an opponent. If you win, return Research the Deep to its owner's hand. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

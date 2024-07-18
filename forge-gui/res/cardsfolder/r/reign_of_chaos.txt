@@ -1,7 +1,7 @@
 Name:Reign of Chaos
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 R R | Choices$ DBDestroy1,DBDestroy2 | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDestroy1,DBDestroy2 | CharmNum$ 1
 SVar:DBDestroy1:DB$ Pump | ValidTgts$ Plains | TgtPrompt$ Select target Plains | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroyWhite | SpellDescription$ Destroy target Plains and target white creature. | StackDescription$ None
 SVar:DBDestroy2:DB$ Pump | ValidTgts$ Island | TgtPrompt$ Select target Island | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroyBlue | SpellDescription$ Destroy target Island and target blue creature. | StackDescription$ None
 SVar:DBDestroyWhite:DB$ Pump | ValidTgts$ Creature.White | TgtPrompt$ Select target white creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None

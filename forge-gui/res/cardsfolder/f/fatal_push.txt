@@ -1,6 +1,6 @@
 Name:Fatal Push
 ManaCost:B
 Types:Instant
-A:SP$ Destroy | Cost$ B | AILogic$ FatalPush | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.cmcLEX | ConditionCompare$ EQ1 | SpellDescription$ Destroy target creature if it has mana value 2 or less. Revolt — Destroy that creature if it has mana value 4 or less instead if a permanent you controlled left the battlefield this turn.
+A:SP$ Destroy | AILogic$ FatalPush | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionDefined$ Targeted | ConditionPresent$ Creature.cmcLEX | ConditionCompare$ EQ1 | SpellDescription$ Destroy target creature if it has mana value 2 or less. Revolt — Destroy that creature if it has mana value 4 or less instead if a permanent you controlled left the battlefield this turn.
 SVar:X:Count$Revolt.4.2
 Oracle:Destroy target creature if it has mana value 2 or less.\nRevolt — Destroy that creature if it has mana value 4 or less instead if a permanent you controlled left the battlefield this turn.

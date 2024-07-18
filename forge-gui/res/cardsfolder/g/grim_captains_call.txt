@@ -1,7 +1,7 @@
 Name:Grim Captain's Call
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Pirate.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneVampire | SpellDescription$ Return a Pirate card from your graveyard to your hand, then do the same for Vampire, Dinosaur, and Merfolk. | StackDescription$ SpellDescription
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Pirate.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneVampire | SpellDescription$ Return a Pirate card from your graveyard to your hand, then do the same for Vampire, Dinosaur, and Merfolk. | StackDescription$ SpellDescription
 SVar:DBChangeZoneVampire:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Vampire.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneDinosaur
 SVar:DBChangeZoneDinosaur:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Dinosaur.YouCtrl | ChangeNum$ 1 | Hidden$ True | SubAbility$ DBChangeZoneMerfolk
 SVar:DBChangeZoneMerfolk:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Merfolk.YouCtrl | ChangeNum$ 1 | Hidden$ True

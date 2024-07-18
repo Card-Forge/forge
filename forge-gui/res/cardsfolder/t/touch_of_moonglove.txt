@@ -1,7 +1,7 @@
 Name:Touch of Moonglove
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Deathtouch | SubAbility$ DBMoonglove | SpellDescription$ Target creature you control gets +1/+0 and gains deathtouch until end of turn. Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | KW$ Deathtouch | SubAbility$ DBMoonglove | SpellDescription$ Target creature you control gets +1/+0 and gains deathtouch until end of turn. Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life. (Any amount of damage a creature with deathtouch deals to a creature is enough to destroy it.)
 SVar:DBMoonglove:DB$ Effect | Triggers$ MoongloveTrigger | RememberObjects$ Targeted | StackDescription$ Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life.
 SVar:MoongloveTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy Remembered | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature dealt damage by that creature dies this turn, its controller loses 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ TriggeredCardController

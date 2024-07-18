@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Bobblehead
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 A:AB$ RollDice | Cost$ 1 T | Amount$ X | Sides$ 6 | MaxRollsResults$ True | EvenOddResults$ True | SubAbility$ DBCreateTreasure | StackDescription$ SpellDescription | SpellDescription$ Roll X six-sided dice, where X is the number of Bobbleheads you control. Create a tapped Treasure token for each even result. If you rolled 6 exactly seven times, you win the game.
-SVar:DBCreateTreasure:DB$ Token | TokenScript$ c_a_treasure_sac  | TokenTapped$ True | TokenAmount$ Y | SubAbility$ DBWinGame
+SVar:DBCreateTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | TokenTapped$ True | TokenAmount$ Y | SubAbility$ DBWinGame
 SVar:DBWinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ MaxRolls | ConditionSVarCompare$ EQ7
 SVar:Y:SVar$EvenResults
 SVar:X:Count$Valid Card.Bobblehead+YouCtrl

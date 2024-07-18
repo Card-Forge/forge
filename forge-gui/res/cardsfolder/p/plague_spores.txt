@@ -1,7 +1,7 @@
 Name:Plague Spores
 ManaCost:4 B R
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 B R | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select nonblack creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBLand | SpellDescription$ Destroy target nonblack creature and target land. They can't be regenerated. | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select nonblack creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBLand | SpellDescription$ Destroy target nonblack creature and target land. They can't be regenerated. | StackDescription$ None
 SVar:DBLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | NoRegen$ True
 Oracle:Destroy target nonblack creature and target land. They can't be regenerated.

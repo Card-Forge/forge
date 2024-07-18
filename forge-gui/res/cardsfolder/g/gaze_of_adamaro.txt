@@ -1,6 +1,6 @@
 Name:Gaze of Adamaro
 ManaCost:2 R R
 Types:Instant Arcane
-A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards in that player's hand.
+A:SP$ DealDamage | ValidTgts$ Player | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of cards in that player's hand.
 SVar:X:TargetedPlayer$CardsInHand
 Oracle:Gaze of Adamaro deals damage to target player equal to the number of cards in that player's hand.

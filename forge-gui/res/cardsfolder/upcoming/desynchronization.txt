@@ -1,0 +1,5 @@
+Name:Desynchronization
+ManaCost:2 U U
+Types:Instant
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand+!Historic | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each nonland permanent that's not historic to its owner's hand. (Artifacts, legendaries, and Sagas are historic.)
+Oracle:Return each nonland permanent that's not historic to its owner's hand. (Artifacts, legendaries, and Sagas are historic.)

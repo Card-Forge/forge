@@ -1,0 +1,8 @@
+Name:Vinereap Mentor
+ManaCost:B G
+Types:Creature Squirrel Druid
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters or dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters or dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+Oracle:When Vinereap Mentor enters or dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")

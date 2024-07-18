@@ -5,6 +5,6 @@ PT:5/4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCantAttack | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of combat on your turn, you may have CARDNAME gain "CARDNAME can't attack" until end of combat. If you do, attacking doesn't cause creatures you control to tap this combat if CARDNAME is untapped.
 SVar:TrigCantAttack:DB$ Pump | Defined$ Self | KW$ CARDNAME can't attack. | Duration$ UntilEndOfCombat | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STVigilance | Duration$ UntilEndOfCombat
-SVar:STVigilance:Mode$ AttackVigilance | ValidCard$ Creature.YouCtrl | IsPresent$ Card.EffectSource+untapped | Description$ Attacking doesn't cause creatures you control to tap this combat if Johan is untapped.
+SVar:STVigilance:Mode$ AttackVigilance | ValidCard$ Creature.YouCtrl | IsPresent$ Card.EffectSource+untapped | Description$ Attacking doesn't cause creatures you control to tap this combat if EFFECTSOURCE is untapped.
 AI:RemoveDeck:All
 Oracle:At the beginning of combat on your turn, you may have Johan gain "Johan can't attack" until end of combat. If you do, attacking doesn't cause creatures you control to tap this combat if Johan is untapped.

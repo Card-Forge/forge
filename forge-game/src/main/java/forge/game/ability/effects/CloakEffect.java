@@ -17,6 +17,9 @@ public class CloakEffect extends ManifestBaseEffect {
     @Override
     protected Card internalEffect(Card c, Player p, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         final Card source = sa.getHostCard();
+        if (sa.hasParam("Tapped")) {
+            c.setTapped(true);
+        }
         Card rem = c.cloak(p, sa, moveParams);
         if (rem != null && sa.hasParam("RememberCloaked") && rem.isCloaked()) {
             source.addRemembered(rem);

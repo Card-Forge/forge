@@ -1,7 +1,7 @@
 Name:Fury Charm
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | CharmNum$ 1 | Choices$ Bash,Buff,LoseTime
+A:SP$ Charm | CharmNum$ 1 | Choices$ Bash,Buff,LoseTime
 SVar:Bash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:Buff:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Trample | SpellDescription$ Target creature gets +1/+1 and gains trample until end of turn.
 SVar:LoseTime:DB$ RemoveCounter | ValidTgts$ Permanent.inZoneBattlefield,Card.suspended | AITgts$ Permanent.counters_GE1_TIME+YouDontCtrl,Card.suspended+YouCtrl | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ 2 | TgtZone$ Battlefield,Exile | SpellDescription$ Remove two time counters from target permanent or suspended card.

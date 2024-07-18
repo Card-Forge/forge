@@ -1,6 +1,6 @@
 Name:Advent of the Wurm
 ManaCost:1 G G W
 Types:Instant
-A:SP$ Token | Cost$ 1 G G W | TokenScript$ g_5_5_wurm_trample | TokenOwner$ You | SpellDescription$ Create a 5/5 green Wurm creature token with trample.
+A:SP$ Token | TokenScript$ g_5_5_wurm_trample | TokenOwner$ You | SpellDescription$ Create a 5/5 green Wurm creature token with trample.
 DeckHas:Ability$Token
 Oracle:Create a 5/5 green Wurm creature token with trample.

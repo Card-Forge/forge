@@ -1,6 +1,6 @@
 Name:Spare from Evil
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | KW$ Protection:Creature.nonHuman:non-Human creatures. | SpellDescription$ Creatures you control gain protection from non-Human creatures until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection:Creature.nonHuman:non-Human creatures. | SpellDescription$ Creatures you control gain protection from non-Human creatures until end of turn.
 AI:RemoveDeck:All
 Oracle:Creatures you control gain protection from non-Human creatures until end of turn.

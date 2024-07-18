@@ -2,7 +2,7 @@ Name:Ready
 ManaCost:1 G W
 Types:Instant
 K:Fuse
-A:SP$ PumpAll | Cost$ 1 G W | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBUnTapAll | SpellDescription$ Creatures you control gain indestructible until end of turn. Untap each creature you control.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBUnTapAll | SpellDescription$ Creatures you control gain indestructible until end of turn. Untap each creature you control.
 SVar:DBUnTapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl
 AlternateMode:Split
 Oracle:Creatures you control gain indestructible until end of turn. Untap each creature you control.\nFuse (You may cast one or both halves of this card from your hand.)
@@ -12,5 +12,5 @@ ALTERNATE
 Name:Willing
 ManaCost:1 W B
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W B | ValidCards$ Creature.YouCtrl | KW$ Deathtouch & Lifelink | SpellDescription$ Creatures you control gain deathtouch and lifelink until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch & Lifelink | SpellDescription$ Creatures you control gain deathtouch and lifelink until end of turn.
 Oracle:Creatures you control gain deathtouch and lifelink until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)

@@ -1,6 +1,6 @@
 Name:Seismic Shift
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBPump | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBPump | SpellDescription$ Destroy target land.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures can't block this turn.
 Oracle:Destroy target land. Up to two target creatures can't block this turn.

@@ -1,6 +1,6 @@
 Name:Goblin Lore
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Draw | Cost$ 1 R | NumCards$ 4 | SpellDescription$ Draw four cards, then discard three cards at random. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards, then discard three cards at random. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ Random
 Oracle:Draw four cards, then discard three cards at random.

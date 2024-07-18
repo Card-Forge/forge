@@ -1,5 +1,5 @@
 Name:Chaplain's Blessing
 ManaCost:W
 Types:Sorcery
-A:SP$ GainLife | Cost$ W | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
+A:SP$ GainLife | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
 Oracle:You gain 5 life.

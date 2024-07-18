@@ -2,7 +2,7 @@ Name:Down
 ManaCost:3 B
 Types:Sorcery
 K:Fuse
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SpellDescription$ Target player discards two cards.
 AlternateMode:Split
 Oracle:Target player discards two cards.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,5 +11,5 @@ ALTERNATE
 Name:Dirty
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
+A:SP$ ChangeZone | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target card from your graveyard to your hand.
 Oracle:Return target card from your graveyard to your hand.\nFuse (You may cast one or both halves of this card from your hand.)

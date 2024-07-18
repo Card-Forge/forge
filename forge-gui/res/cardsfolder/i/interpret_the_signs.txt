@@ -1,7 +1,7 @@
 Name:Interpret the Signs
 ManaCost:5 U
 Types:Sorcery
-A:SP$ Scry | Cost$ 5 U | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value.
+A:SP$ Scry | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value.
 SVar:DBReveal:DB$ PeekAndReveal | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | NumCardsDesc$ cards equal to that card's mana value
 SVar:X:Count$TopOfLibraryCMC

@@ -2,5 +2,5 @@ Name:Volcanic Spray
 ManaCost:1 R
 Types:Sorcery
 K:Flashback:1 R
-A:SP$ DamageAll | Cost$ 1 R | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | ValidDescription$ each creature without flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature without flying and each player.
 Oracle:Volcanic Spray deals 1 damage to each creature without flying and each player.\nFlashback {1}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

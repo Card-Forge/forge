@@ -1,6 +1,6 @@
 Name:Violent Outburst
 ManaCost:1 R G
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 R G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
 K:Cascade
 Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nCreatures you control get +1/+0 until end of turn.

@@ -2,5 +2,5 @@ Name:Train of Thought
 ManaCost:1 U
 Types:Sorcery
 K:Replicate:1 U
-A:SP$ Draw | Cost$ 1 U | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Replicate {1}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nDraw a card.

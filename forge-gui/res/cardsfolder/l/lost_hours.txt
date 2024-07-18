@@ -1,5 +1,5 @@
 Name:Lost Hours
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Library | LibraryPosition$ 2 | ValidTgts$ Player | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 2 | ValidTgts$ Player | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.
 Oracle:Target player reveals their hand. You choose a nonland card from it. That player puts that card into their library third from the top.

@@ -1,7 +1,7 @@
 Name:Cosmotronic Wave
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 R | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SubAbility$ OppCantBlock | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control. Creatures your opponents control can't block this turn.
+A:SP$ DamageAll | ValidCards$ Creature.OppCtrl | NumDmg$ 1 | SubAbility$ OppCantBlock | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control. Creatures your opponents control can't block this turn.
 SVar:OppCantBlock:DB$ Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures your opponents control can't block this turn.
 SVar:KWPump:Mode$ CantBlockBy | ValidBlocker$ Creature.OppCtrl | Description$ Creatures your opponents control can't block this turn.
 Oracle:Cosmotronic Wave deals 1 damage to each creature your opponents control. Creatures your opponents control can't block this turn.

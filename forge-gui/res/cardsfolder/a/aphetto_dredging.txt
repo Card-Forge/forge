@@ -1,6 +1,6 @@
 Name:Aphetto Dredging
 ManaCost:3 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B | AnnounceType$ CreatureType | ValidTgts$ Creature.YouCtrl+ChosenType | TargetMin$ 0 | TargetMax$ 3 | AILogic$ MostProminentInComputerGraveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card with the chosen type in your graveyard | SpellDescription$ Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.
+A:SP$ ChangeZone | AnnounceType$ CreatureType | ValidTgts$ Creature.YouCtrl+ChosenType | TargetMin$ 0 | TargetMax$ 3 | AILogic$ MostProminentInComputerGraveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card with the chosen type in your graveyard | SpellDescription$ Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.
 AI:RemoveDeck:All
 Oracle:Return up to three target creature cards of the creature type of your choice from your graveyard to your hand.

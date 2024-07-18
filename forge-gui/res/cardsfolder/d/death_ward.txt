@@ -1,6 +1,6 @@
 Name:Death Ward
 ManaCost:W
 Types:Instant
-A:SP$ Regenerate | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 DeckHas:Keyword$Regenerate
 Oracle:Regenerate target creature.

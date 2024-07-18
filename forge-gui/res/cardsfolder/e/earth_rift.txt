@@ -2,5 +2,5 @@ Name:Earth Rift
 ManaCost:3 R
 Types:Sorcery
 K:Flashback:5 R R
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land. | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land. | SpellDescription$ Destroy target land.
 Oracle:Destroy target land.\nFlashback {5}{R}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,6 +1,6 @@
 Name:Rend Spirit
 ManaCost:2 B
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.Spirit | TgtPrompt$ Select target Spirit | SpellDescription$ Destroy target Spirit.
+A:SP$ Destroy | ValidTgts$ Creature.Spirit | TgtPrompt$ Select target Spirit | SpellDescription$ Destroy target Spirit.
 AI:RemoveDeck:Random
 Oracle:Destroy target Spirit.

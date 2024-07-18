@@ -1,5 +1,5 @@
 Name:Excoriate
 ManaCost:3 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target tapped creature.
+A:SP$ ChangeZone | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target tapped creature.
 Oracle:Exile target tapped creature.

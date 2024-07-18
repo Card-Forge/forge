@@ -1,0 +1,7 @@
+Name:Mourner's Surprise
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up one target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBToken | SpellDescription$ Return up to one target creature card from your graveyard to your hand.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You | SpellDescription$ Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+DeckHas:Ability$Token|Graveyard & Type$Mercenary
+Oracle:Return up to one target creature card from your graveyard to your hand. Create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

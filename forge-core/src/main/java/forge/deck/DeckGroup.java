@@ -26,7 +26,8 @@ import java.util.List;
 import com.google.common.base.Function;
 
 /**
- * TODO: Write javadoc for this type.
+ * Related decks usually pertaining to a limited experience like draft or sealed
+ * This file represents a human player deck and all opposing AI decks
  * 
  */
 public class DeckGroup extends DeckBase {

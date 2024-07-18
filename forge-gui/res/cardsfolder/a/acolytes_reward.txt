@@ -1,7 +1,7 @@
 Name:Acolyte's Reward
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Any | TgtPrompt$ Select any target to damage with shield effect | IsCurse$ True | SubAbility$ AcolytesPrevention | StackDescription$ SpellDescription | AILogic$ Never | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, CARDNAME deals that much damage to any target.
+A:SP$ Pump | ValidTgts$ Any | TgtPrompt$ Select any target to damage with shield effect | IsCurse$ True | SubAbility$ AcolytesPrevention | StackDescription$ SpellDescription | AILogic$ Never | SpellDescription$ Prevent the next X damage that would be dealt to target creature this turn, where X is your devotion to white. If damage is prevented this way, CARDNAME deals that much damage to any target.
 SVar:AcolytesPrevention:DB$ PreventDamage | ValidTgts$ Creature | TgtPrompt$ Select a creature to prevent damage to | Amount$ X | PreventionSubAbility$ AcolytesRetribution | ShieldEffectTarget$ ParentTarget | StackDescription$ none
 SVar:AcolytesRetribution:DB$ DealDamage | Defined$ ShieldEffectTarget | NumDmg$ PreventedDamage | SpellDescription$ CARDNAME deals damage to target creature or player for each damage prevented this way.
 SVar:X:Count$Devotion.White

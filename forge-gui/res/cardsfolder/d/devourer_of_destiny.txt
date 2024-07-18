@@ -1,0 +1,12 @@
+Name:Devourer of Destiny
+ManaCost:5 C C
+Types:Creature Eldrazi
+PT:6/6
+K:MayEffectFromOpeningHand:RevealCard
+SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ TrigEffect | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the top four cards of your library. You may put one of those cards back on top of your library. Exile the rest.
+SVar:TrigEffect:DB$ Effect | Triggers$ UpkeepTrig | Duration$ Permanent
+SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDig | OneOff$ True | TriggerDescription$ At the beginning of your first upkeep, look at the top four cards of your library. You may put one of those cards back on top of your library. Exile the rest.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | DestinationZone$ Library | DestinationZone2$ Exile | ChangeNum$ 1 | LibraryPosition$ 0 | Optional$ True
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When you cast this spell, exile target permanent that's one or more colors.
+SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Permanent.nonColorless | TgtPrompt$ Select target permanent that's one or more colors | Origin$ Battlefield | Destination$ Exile
+Oracle:You may reveal this card from your opening hand. If you do, at the beginning of your first upkeep, look at the top four cards of your library. You may put one of those cards back on top of your library. Exile the rest.\nWhen you cast this spell, exile target permanent that's one or more colors.

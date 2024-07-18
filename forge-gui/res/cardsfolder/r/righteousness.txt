@@ -1,6 +1,6 @@
 Name:Righteousness
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | TgtPrompt$ Select target blocking creature | SpellDescription$ Target blocking creature gets +7/+7 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | TgtPrompt$ Select target blocking creature | SpellDescription$ Target blocking creature gets +7/+7 until end of turn.
 AI:RemoveDeck:All
 Oracle:Target blocking creature gets +7/+7 until end of turn.

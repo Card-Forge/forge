@@ -1,6 +1,6 @@
 Name:Pop Quiz
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | Defined$ You | NumCards$ 1 | SubAbility$ DBLearn | SpellDescription$ Draw a card.
+A:SP$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLearn | SpellDescription$ Draw a card.
 SVar:DBLearn:DB$ Learn | SpellDescription$ Learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
 Oracle:Draw a card.\nLearn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

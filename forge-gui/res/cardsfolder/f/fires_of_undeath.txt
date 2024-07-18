@@ -1,6 +1,6 @@
 Name:Fires of Undeath
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 K:Flashback:5 B
 Oracle:Fires of Undeath deals 2 damage to any target.\nFlashback {5}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

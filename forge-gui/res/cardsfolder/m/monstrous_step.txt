@@ -1,7 +1,7 @@
 Name:Monstrous Step
 ManaCost:4 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +7 | NumDef$ +7 | SubAbility$ DBMustBlock | SpellDescription$ Target creature gets +7/+7 until end of turn. Up to one other target creature blocks it this turn if able.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +7 | NumDef$ +7 | SubAbility$ DBMustBlock | SpellDescription$ Target creature gets +7/+7 until end of turn. Up to one other target creature blocks it this turn if able.
 SVar:DBMustBlock:DB$ MustBlock | DefinedAttacker$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature to block
 K:Cycling:2
 Oracle:Target creature gets +7/+7 until end of turn. Up to one other target creature blocks it this turn if able.\nCycling {2} ({2}, Discard this card: Draw a card.)

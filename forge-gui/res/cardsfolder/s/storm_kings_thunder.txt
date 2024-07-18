@@ -1,7 +1,7 @@
 Name:Storm King's Thunder
 ManaCost:X R R R
 Types:Instant
-A:SP$ DelayedTrigger | Cost$ X R R R | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell X times. You may choose new targets for the copies.
+A:SP$ DelayedTrigger | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell X times. You may choose new targets for the copies.
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | MayChooseTarget$ True
 SVar:X:Count$xPaid
 DeckNeeds:Type$Instant|Sorcery

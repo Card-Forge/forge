@@ -7,4 +7,4 @@ SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Va
 SVar:DBDig:DB$ Dig | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionZone$ Exile | DigNum$ 3 | DestinationZone2$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
-Oracle: When Corpse Appraiser enters the battlefield, exile up to one target creature card from a graveyard. If a card is put into exile this way, look at the top three cards of your library, then put one of those cards into your hand and the rest into your graveyard.
+Oracle:When Corpse Appraiser enters the battlefield, exile up to one target creature card from a graveyard. If a card is put into exile this way, look at the top three cards of your library, then put one of those cards into your hand and the rest into your graveyard.

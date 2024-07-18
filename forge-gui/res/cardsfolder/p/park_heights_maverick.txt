@@ -4,8 +4,8 @@ Types:Creature Human Soldier
 PT:2/2
 K:Dethrone
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ Whenever Park Heights Maverick deals combat damage to a player or dies, proliferate.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | Secondary$ True | TriggerDescription$ Whenever Park Heights Maverick deals combat damage to a player or dies, proliferate.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or dies, proliferate.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | Secondary$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or dies, proliferate.
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate|Counters
 DeckHints:Ability$Counters

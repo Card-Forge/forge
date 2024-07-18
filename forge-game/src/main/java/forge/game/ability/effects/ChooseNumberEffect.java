@@ -31,7 +31,7 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
-        sb.append("chooses a number.");
+        sb.append(" chooses a number.");
 
         return sb.toString();
     }

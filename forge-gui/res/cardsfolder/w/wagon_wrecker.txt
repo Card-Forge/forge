@@ -1,0 +1,12 @@
+Name:Wagon Wrecker
+ManaCost:1 R
+Types:Creature Ogre Mercenary
+PT:2/1
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRandom | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, a random nonland card in that player's hand perpetually gains "When you cast this spell, you lose 2 life."
+SVar:TrigRandom:DB$ ChooseCard | Choices$ Card.nonLand+OwnedBy TriggeredTarget | ChoiceZone$ Hand | AtRandom$ True | Amount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Triggers$ CastSpellLoseLife | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:CastSpellLoseLife:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When you cast this spell, you lose 2 life.
+SVar:TrigDrain:DB$ LoseLife | LifeAmount$ 2
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Menace\nWhenever Wagon Wrecker deals combat damage to a player, a random nonland card in that player's hand perpetually gains "When you cast this spell, you lose 2 life."

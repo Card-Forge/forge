@@ -1,4 +1,5 @@
 Name:Death Ring
+ManaCost:no cost
 Types:Artifact
 A:AB$ RepeatEach | Cost$ PayShards<2> | ActivationZone$ Command | SorcerySpeed$ True | IsPresent$ Creature.YouCtrl | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseRandom | SubAbility$ DBPutCounter | SpellDescription$ For each player, put a -1/-1 counter on a random creature with the lowest toughness that player controls. Then if your creature has power less than one, sacrifice it.
 SVar:DBChooseRandom:DB$ ChooseCard | AtRandom$ True | Choices$ Creature.leastToughnessControlledByRememberedPlayer | RevealTitle$ Randomly chosen creature: | Reveal$ True | RememberChosen$ True

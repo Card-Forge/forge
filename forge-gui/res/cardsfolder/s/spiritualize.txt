@@ -2,7 +2,7 @@ Name:Spiritualize
 ManaCost:2 W
 Types:Instant
 A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ TrigDamage | RememberObjects$ Targeted | SubAbility$ DBDraw | SpellDescription$ Until end of turn, whenever target creature deals damage, you gain that much life. Draw a card.
-SVar:TrigDamage:Mode$ DamageDoneOnce | ValidSource$ Creature.IsRemembered | Execute$ TrigGainLife | TriggerDescription$ Whenever the targeted creature of Spiritualize deals damage, you gain that much life.
+SVar:TrigDamage:Mode$ DamageDoneOnce | ValidSource$ Creature.IsRemembered | Execute$ TrigGainLife | TriggerDescription$ Whenever this creature deals damage, you gain that much life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | Defined$ You
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:X:TriggerCount$DamageAmount

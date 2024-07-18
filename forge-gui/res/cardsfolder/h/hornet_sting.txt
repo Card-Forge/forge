@@ -1,5 +1,5 @@
 Name:Hornet Sting
 ManaCost:G
 Types:Instant
-A:SP$ DealDamage | Cost$ G | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ Hornet Sting deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:Hornet Sting deals 1 damage to any target.

@@ -1,6 +1,6 @@
 Name:Mystic Speculation
 ManaCost:U
 Types:Sorcery
-A:SP$ Scry | Cost$ U | ScryNum$ 3 | SpellDescription$ Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+A:SP$ Scry | ScryNum$ 3 | SpellDescription$ Scry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 K:Buyback:2
 Oracle:Buyback {2} (You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)\nScry 3. (Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

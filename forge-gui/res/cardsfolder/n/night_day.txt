@@ -1,7 +1,7 @@
 Name:Night
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Target creature gets -1/-1 until end of turn.
 AlternateMode:Split
 Oracle:Target creature gets -1/-1 until end of turn.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Day
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures target player controls get +1/+1 until end of turn.
+A:SP$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures target player controls get +1/+1 until end of turn.
 Oracle:Creatures target player controls get +1/+1 until end of turn.

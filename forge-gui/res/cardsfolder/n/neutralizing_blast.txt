@@ -1,5 +1,5 @@
 Name:Neutralizing Blast
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target multicolored spell | ValidTgts$ Card.MultiColor | SpellDescription$ Counter target multicolored spell.
 Oracle:Counter target multicolored spell.

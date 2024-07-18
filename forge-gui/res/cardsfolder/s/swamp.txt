@@ -1,5 +1,4 @@
 Name:Swamp
 ManaCost:no cost
 Types:Basic Land Swamp
-SVar:PicCount:4
 Oracle:({T}: Add {B}.)

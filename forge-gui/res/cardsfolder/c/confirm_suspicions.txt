@@ -1,7 +1,7 @@
 Name:Confirm Suspicions
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBInvestigate | SpellDescription$ Counter target spell. Investigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBInvestigate | SpellDescription$ Counter target spell. Investigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBInvestigate:DB$ Investigate | Num$ 3
 DeckHas:Ability$Investigate|Token
 Oracle:Counter target spell.\nInvestigate three times. (To investigate, create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

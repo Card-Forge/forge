@@ -1,6 +1,6 @@
 Name:Dark Betrayal
 ManaCost:B
 Types:Instant
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
+A:SP$ Destroy | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 AI:RemoveDeck:Random
 Oracle:Destroy target black creature.

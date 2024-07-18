@@ -1,5 +1,5 @@
 Name:Obosh, the Preypiercer
-ManaCost:3 B/R B/R
+ManaCost:3 BR BR
 Types:Legendary Creature Hellion Horror
 PT:3/5
 K:Companion:Card.cmcM21,Land:Your starting deck contains only cards with odd mana value and land cards.

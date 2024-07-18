@@ -1,6 +1,6 @@
 Name:Fateful End
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBScry | SpellDescription$ CARDNAME deals 3 damage to any target. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Fateful End deals 3 damage to any target. Scry 1.

@@ -1,7 +1,7 @@
 Name:Worst Fears
 ManaCost:7 B
 Types:Sorcery
-A:SP$ ControlPlayer | Cost$ 7 B | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChange | SpellDescription$ You control target player during that player's next turn. Exile CARDNAME. (You see all cards that player could see and make all decisions for that player.)
+A:SP$ ControlPlayer | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBChange | SpellDescription$ You control target player during that player's next turn. Exile CARDNAME. (You see all cards that player could see and make all decisions for that player.)
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 AI:RemoveDeck:All
 Oracle:You control target player during that player's next turn. Exile Worst Fears. (You see all cards that player could see and make all decisions for the player.)

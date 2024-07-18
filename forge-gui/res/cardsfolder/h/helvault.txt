@@ -4,6 +4,6 @@ Types:Legendary Artifact
 A:AB$ ChangeZone | Cost$ 1 T | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | SpellDescription$ Exile target creature you control.
 A:AB$ ChangeZone | Cost$ 7 T | ValidTgts$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you don't control | IsCurse$ True | SpellDescription$ Exile target creature you don't control.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | Destination$ Battlefield
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
 AI:RemoveDeck:All
 Oracle:{1}, {T}: Exile target creature you control.\n{7}, {T}: Exile target creature you don't control.\nWhen Helvault is put into a graveyard from the battlefield, return all cards exiled with it to the battlefield under their owners' control.

@@ -12,5 +12,5 @@ ALTERNATE
 Name:Granted
 ManaCost:3 U
 Types:Sorcery Adventure
-A:SP$ ChangeZone | Cost$ 3 U | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.nonCreature+YouOwn | ChangeTypeDesc$ noncreature card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SpellDescription$ You may reveal a noncreature card you own from outside the game and put it into your hand.
+A:SP$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.nonCreature+YouOwn | ChangeTypeDesc$ noncreature card they own | ChangeNum$ 1 | Reveal$ True | Hidden$ True | SpellDescription$ You may reveal a noncreature card you own from outside the game and put it into your hand.
 Oracle:You may reveal a noncreature card you own from outside the game and put it into your hand.

@@ -2,5 +2,5 @@ Name:Deep Analysis
 ManaCost:3 U
 Types:Sorcery
 K:Flashback:1 U PayLife<3>
-A:SP$ Draw | Cost$ 3 U | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | SpellDescription$ Target player draws two cards.
+A:SP$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | SpellDescription$ Target player draws two cards.
 Oracle:Target player draws two cards.\nFlashback—{1}{U}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

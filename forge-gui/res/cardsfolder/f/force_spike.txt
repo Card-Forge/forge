@@ -1,5 +1,5 @@
 Name:Force Spike
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SpellDescription$ Counter target spell unless its controller pays {1}.
 Oracle:Counter target spell unless its controller pays {1}.

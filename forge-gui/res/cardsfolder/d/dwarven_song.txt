@@ -1,7 +1,7 @@
 Name:Dwarven Song
 ManaCost:R
 Types:Instant
-A:SP$ Animate | Cost$ R | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Red | OverwriteColors$ True | SpellDescription$ One or more target creatures become red until end of turn.
+A:SP$ Animate | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ MaxTgts | TgtPrompt$ Select target creatures | Colors$ Red | OverwriteColors$ True | SpellDescription$ One or more target creatures become red until end of turn.
 SVar:MaxTgts:Count$Valid Creature
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

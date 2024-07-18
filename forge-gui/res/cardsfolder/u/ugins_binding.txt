@@ -1,0 +1,9 @@
+Name:Ugin's Binding
+ManaCost:2 U
+Types:Instant
+K:Devoid
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent you don't control to its owner's hand.
+T:Mode$ SpellCast | ValidCard$ Card.Colorless+cmcGE7+YouCtrl | TriggerZones$ Graveyard | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever you cast a colorless spell with mana value 7 or greater, you may exile CARDNAME from your graveyard. When you do, return each nonland permanent you don't control to its owner's hand.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/CARDNAME> | Execute$ TrigBounceAll | TriggerDescription$ When you do, return each nonland permanent you don't control to its owner's hand.
+SVar:TrigBounceAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+YouDontCtrl | Origin$ Battlefield | Destination$ Hand
+Oracle:Devoid\nReturn target nonland permanent you don't control to its owner's hand.\nWhenever you cast a colorless spell with mana value 7 or greater, you may exile Ugin's Binding from your graveyard. When you do, return each nonland permanent you don't control to its owner's hand.

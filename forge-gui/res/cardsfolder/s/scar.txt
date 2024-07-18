@@ -1,5 +1,5 @@
 Name:Scar
 ManaCost:BR
 Types:Instant
-A:SP$ PutCounter | Cost$ BR | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature.
 Oracle:Put a -1/-1 counter on target creature.

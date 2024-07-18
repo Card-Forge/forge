@@ -1,8 +1,9 @@
 package forge.card;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
-import forge.assets.FSkinImage;
+import forge.localinstance.skin.FSkinProp;
 
 public class ColorSetImage implements FImage {
     private final ColorSet colorSet;
@@ -15,12 +16,12 @@ public class ColorSetImage implements FImage {
 
     @Override
     public float getWidth() {
-        return FSkinImage.MANA_W.getWidth() * shardCount;
+        return Forge.getAssets().images().get(FSkinProp.IMG_MANA_W).getWidth() * shardCount;
     }
 
     @Override
     public float getHeight() {
-        return FSkinImage.MANA_W.getHeight();
+        return Forge.getAssets().images().get(FSkinProp.IMG_MANA_W).getHeight();
     }
 
     @Override

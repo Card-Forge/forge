@@ -1,7 +1,7 @@
 Name:Ignorant Bliss
 ManaCost:1 R
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 R | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DelayedReturn | SpellDescription$ Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouCtrl | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | RememberChanged$ True | SubAbility$ DelayedReturn | SpellDescription$ Exile all cards from your hand face down. At the beginning of the next end step, return those cards to your hand, then draw a card.
 SVar:DelayedReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ ReturnAll | RememberObjects$ RememberedLKI | TriggerDescription$ Return exiled cards to your hand, then draw a card. | SubAbility$ DBCleanup
 SVar:ReturnAll:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ DelayTriggerRememberedLKI | SubAbility$ YouDraw
 SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ 1

@@ -1,7 +1,7 @@
 Name:Saheeli's Artistry
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ Charm | Cost$ 4 U U | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCopy1,DBCopy2
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBCopy1,DBCopy2
 SVar:DBCopy1:DB$ CopyPermanent | ValidTgts$ Artifact | TgtPrompt$ Select target artifact. | SpellDescription$ Create a token that's a copy of target artifact.
 SVar:DBCopy2:DB$ CopyPermanent | ValidTgts$ Creature | TgtPrompt$ Select target creature. | AddTypes$ Artifact | SpellDescription$ Create a token that's a copy of target creature, except it's an artifact in addition to its other types.
 Oracle:Choose one or both —\n• Create a token that's a copy of target artifact.\n• Create a token that's a copy of target creature, except it's an artifact in addition to its other types.

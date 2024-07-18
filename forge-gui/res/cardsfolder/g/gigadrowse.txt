@@ -1,6 +1,6 @@
 Name:Gigadrowse
 ManaCost:U
 Types:Instant
-A:SP$ Tap | Cost$ U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
+A:SP$ Tap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Tap target permanent.
 K:Replicate:U
 Oracle:Replicate {U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTap target permanent.

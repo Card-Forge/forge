@@ -1,7 +1,7 @@
 Name:Erratic Explosion
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DigUntil | Cost$ 2 R | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose any target. Reveal cards from the top of your library until you reveal a nonland card. Erratic Explosion deals damage equal to that card's mana value to that permanent or player. Put the revealed cards on the bottom of your library in any order.
+A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RememberFound$ True | SubAbility$ Damage | SpellDescription$ Choose any target. Reveal cards from the top of your library until you reveal a nonland card. CARDNAME deals damage equal to that card's mana value to that permanent or player. Put the revealed cards on the bottom of your library in any order.
 SVar:Damage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost

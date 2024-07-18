@@ -30,7 +30,7 @@ ManaCost:1 U B
 Types:Legendary Creature Elf Cleric
 PT:3/4
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigTargetC | TriggerDescription$ When this creature specializes, conjure a duplicate of target creature card exiled with this creature into your hand. The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell." If it has mana value 3 or less, you may put it onto the battlefield.
-SVar:TrigTargetC:DB$ Pump | TgtPrompt$ Select up to one target creature card exiled with this creature | ValidTgts$ Creature | ValidTgts$ Creature.ExiledWithSource | TgtZone$ Exile | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBConjure
+SVar:TrigTargetC:DB$ Pump | TgtPrompt$ Select up to one target creature card exiled with this creature | ValidTgts$ Creature.ExiledWithSource | TgtZone$ Exile | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | TgtPrompt$ Select up to one target instant or sorcery card exiled with this creature | ValidTgts$ Instant.ExiledWithSource,Sorcery.ExiledWithSource | TgtZone$ Exile | TargetMin$ 0 | TargetMax$ 1 | Conjure$ True | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Viconia, Disciple of Arcana's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The duplicates perpetually gain "You may spend mana as though it were mana of any color to cast this spell."

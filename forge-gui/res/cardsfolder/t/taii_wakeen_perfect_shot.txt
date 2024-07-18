@@ -1,0 +1,12 @@
+Name:Taii Wakeen, Perfect Shot
+ManaCost:R W
+Types:Legendary Creature Human Mercenary
+PT:2/3
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Creature | DamageAmount$ EQTargetToughness | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a source you control deals noncombat damage to a creature equal to that creature's toughness, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Effect | Cost$ X T | ReplacementEffects$ RepDamage | SetChosenNumber$ X | SpellDescription$ If a source you control would deal noncombat damage to a permanent or player this turn, it deals that much damage plus X instead.
+SVar:X:Count$xPaid
+SVar:RepDamage:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | IsCombat$ False | ReplaceWith$ DmgPlusX | Description$ If a source you control would deal noncombat damage to a permanent or player this turn, it deals that much damage plus X instead.
+SVar:DmgPlusX:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ ReplaceCount$DamageAmount/Plus.Y
+SVar:Y:Count$ChosenNumber
+Oracle:Whenever a source you control deals noncombat damage to a creature equal to that creature's toughness, draw a card.\n{X}, {T}: If a source you control would deal noncombat damage to a permanent or player this turn, it deals that much damage plus X instead.

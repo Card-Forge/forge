@@ -1,7 +1,7 @@
 Name:View from Above
 ManaCost:1 U
 Types:Instant
-A:SP$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ DBBounce | SpellDescription$ Target creature gains flying until end of turn. If you control a white permanent, return CARDNAME to its owner's hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SubAbility$ DBBounce | SpellDescription$ Target creature gains flying until end of turn. If you control a white permanent, return CARDNAME to its owner's hand.
 SVar:DBBounce:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | ConditionPresent$ Permanent.White+YouCtrl | ConditionCompare$ GE1 | Defined$ Parent
 DeckHints:Color$White
 Oracle:Target creature gains flying until end of turn. If you control a white permanent, return View from Above to its owner's hand.

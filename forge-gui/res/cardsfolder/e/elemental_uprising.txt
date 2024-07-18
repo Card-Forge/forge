@@ -1,5 +1,5 @@
 Name:Elemental Uprising
 ManaCost:1 G
 Types:Instant
-A:SP$ Animate | Cost$ 1 G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | HiddenKeywords$ CARDNAME must be blocked if able. | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
+A:SP$ Animate | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Haste | HiddenKeywords$ CARDNAME must be blocked if able. | SpellDescription$ Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.
 Oracle:Target land you control becomes a 4/4 Elemental creature with haste until end of turn. It's still a land. It must be blocked this turn if able.

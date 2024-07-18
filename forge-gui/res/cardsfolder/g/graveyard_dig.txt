@@ -1,6 +1,9 @@
 Name:Graveyard Dig
 ManaCost:1 BG
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 BG | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl+Black,Creature.YouCtrl+Green | SpellDescription$ Return two target black or green creature cards from your graveyard to your hand.
-A:SP$ ChangeZone | Cost$ 2 BG BG | Origin$ Graveyard | Destination$ Hand | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return two target creature cards from your graveyard to your hand.
-Oracle:Return up to two target black or green creature cards from your graveyard to your hand.\nYou may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ 2 BG BG | Description$ You may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ X | TgtPrompt$ Choose up to two target black or green creature cards in your graveyard | ValidTgts$ Creature.YouCtrl+Black,Creature.YouCtrl+Green | SubAbility$ DBReturnAnyTwo | StackDescription$ SpellDescription | SpellDescription$ Return up to two target [black or green] creature cards from your graveyard to your hand.
+SVar:DBReturnAnyTwo:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ Y | TgtPrompt$ Choose up to two target creature cards in your graveyard | ValidTgts$ Creature.YouCtrl | StackDescription$ None
+SVar:X:Count$AltCost.0.2
+SVar:Y:Count$AltCost.2.0
+Oracle:Return up to two target [black or green] creature cards from your graveyard to your hand.\nYou may cast this spell for {2}{B/G}{B/G}. If you do, ignore the bracketed text.

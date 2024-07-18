@@ -1,7 +1,7 @@
 Name:Kindle the Carnage
 ManaCost:1 R R
 Types:Sorcery
-A:SP$ Repeat | Cost$ 1 R R | RepeatSubAbility$ DBDiscard | RepeatOptional$ True | StackDescription$ SpellDescription | SpellDescription$ Discard a card at random. If you do, CARDNAME deals damage equal to that card's mana value to each creature. You may repeat this process any number of times.
+A:SP$ Repeat | RepeatSubAbility$ DBDiscard | RepeatOptional$ True | StackDescription$ SpellDescription | SpellDescription$ Discard a card at random. If you do, CARDNAME deals damage equal to that card's mana value to each creature. You may repeat this process any number of times.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBDmgAll
 SVar:DBDmgAll:DB$ DamageAll | ValidCards$ Creature | NumDmg$ X | ConditionCheckSVar$ Y | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

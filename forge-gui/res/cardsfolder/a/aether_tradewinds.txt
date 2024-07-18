@@ -1,7 +1,7 @@
 Name:Aether Tradewinds
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ DBChange | SpellDescription$ Return target permanent you control and target permanent you don't control to their owners' hands.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ DBChange | SpellDescription$ Return target permanent you control and target permanent you don't control to their owners' hands.
 SVar:DBChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouDontCtrl | TgtPrompt$ Select target permanent you don't control
 AI:RemoveDeck:All
 Oracle:Return target permanent you control and target permanent you don't control to their owners' hands.

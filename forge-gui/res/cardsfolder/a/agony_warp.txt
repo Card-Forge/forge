@@ -1,6 +1,6 @@
 Name:Agony Warp
 ManaCost:U B
 Types:Instant
-A:SP$ Pump | Cost$ U B | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -3/-0 | NumAtt$ -3 | IsCurse$ True | SubAbility$ DBPump | SpellDescription$ Target creature gets -3/-0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -3/-0 | NumAtt$ -3 | IsCurse$ True | SubAbility$ DBPump | SpellDescription$ Target creature gets -3/-0 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -0/-3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -0/-3 until end of turn.
 Oracle:Target creature gets -3/-0 until end of turn.\nTarget creature gets -0/-3 until end of turn.

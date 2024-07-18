@@ -1,0 +1,11 @@
+Name:Prairie Survivalist
+ManaCost:1 W
+Types:Creature Human Scout
+PT:0/1
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control perpetually gets +1/+0. Then choose a creature card in your hand. It perpetually gets +1/+0.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | Duration$ Perpetual | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | ChoiceDesc$ creature | Mandatory$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | NumAtt$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ It perpetually gets +1/+0.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Flying\nAt the beginning of combat on your turn, target creature you control perpetually gets +1/+0. Then choose a creature card in your hand. It perpetually gets +1/+0.

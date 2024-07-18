@@ -1,5 +1,5 @@
 Name:Daemogoth Titan
-ManaCost:B/G B/G B/G B/G
+ManaCost:BG BG BG BG
 Types:Creature Demon
 PT:11/10
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a creature.

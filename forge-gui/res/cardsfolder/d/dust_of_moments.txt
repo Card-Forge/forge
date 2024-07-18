@@ -1,7 +1,7 @@
 Name:Dust of Moments
 ManaCost:2 W
 Types:Instant
-A:SP$ Charm | Cost$ 2 W | CharmNum$ 1 | Choices$ LoseTime,GainTime
+A:SP$ Charm | CharmNum$ 1 | Choices$ LoseTime,GainTime
 SVar:LoseTime:DB$ RemoveCounterAll | ValidCards$ Permanent | CounterType$ TIME | CounterNum$ 2 | SubAbility$ QuickenTime | SpellDescription$ Remove two time counters from each permanent and each suspended card.
 SVar:QuickenTime:DB$ RemoveCounterAll | ValidCards$ Card.suspended | CounterType$ TIME | CounterNum$ 2 | ValidZone$ Exile
 SVar:GainTime:DB$ PutCounterAll | ValidCards$ Permanent.counters_GE1_TIME | CounterType$ TIME | CounterNum$ 2 | SubAbility$ SlowTime | SpellDescription$ Put two time counters on each permanent with a time counter on it and each suspended card.

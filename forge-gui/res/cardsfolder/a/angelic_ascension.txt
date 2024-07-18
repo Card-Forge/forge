@@ -1,7 +1,7 @@
 Name:Angelic Ascension
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target creature or planeswalker. Its controller creates a 4/4 white Angel creature token with flying.
+A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBToken | AILogic$ Pongify | SpellDescription$ Exile target creature or planeswalker. Its controller creates a 4/4 white Angel creature token with flying.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ TargetedController
 DeckHas:Ability$Token
 Oracle:Exile target creature or planeswalker. Its controller creates a 4/4 white Angel creature token with flying.

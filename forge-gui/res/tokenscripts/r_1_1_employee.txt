@@ -1,0 +1,6 @@
+Name:Employee Token
+ManaCost:no cost
+Types:Creature Employee
+Colors:red
+PT:1/1
+Oracle:

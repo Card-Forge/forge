@@ -1,6 +1,6 @@
 Name:Call to Heel
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Its controller draws a card.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Its controller draws a card.
 SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1
 Oracle:Return target creature to its owner's hand. Its controller draws a card.

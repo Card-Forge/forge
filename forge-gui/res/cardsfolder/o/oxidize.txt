@@ -1,5 +1,5 @@
 Name:Oxidize
 ManaCost:G
 Types:Instant
-A:SP$ Destroy | Cost$ G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SpellDescription$ Destroy target artifact. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | NoRegen$ True | SpellDescription$ Destroy target artifact. It can't be regenerated.
 Oracle:Destroy target artifact. It can't be regenerated.

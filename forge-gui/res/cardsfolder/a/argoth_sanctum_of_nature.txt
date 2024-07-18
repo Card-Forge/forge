@@ -10,4 +10,4 @@ DeckHas:Ability$Token & Type$Bear
 DeckNeeds:Name$Titania, Voice of Gaea
 MeldPair:Titania, Voice of Gaea
 AlternateMode:Meld
-Oracle:Argoth, Sanctum of Nature enters the battlefield tapped unless you control a legendary green creature.\n{T}: Add {G}.\n{2}{G}{G},{T}:Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.
+Oracle:Argoth, Sanctum of Nature enters the battlefield tapped unless you control a legendary green creature.\n{T}: Add {G}.\n{2}{G}{G}, {T}:Create a 2/2 green Bear creature token, then mill three cards. Activate only as a sorcery.

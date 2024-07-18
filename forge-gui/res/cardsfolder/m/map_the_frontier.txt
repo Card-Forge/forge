@@ -1,0 +1,6 @@
+Name:Map the Frontier
+ManaCost:3 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic,Desert | SelectPrompt$ Select up to two basic land cards and or Desert cards | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, then shuffle.
+DeckHints:Type$Desert
+Oracle:Search your library for up to two basic land cards and/or Desert cards, put them onto the battlefield tapped, then shuffle.

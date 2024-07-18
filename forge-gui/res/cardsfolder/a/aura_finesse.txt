@@ -1,7 +1,7 @@
 Name:Aura Finesse
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Aura.YouCtrl | TgtPrompt$ Select target aura you control | SubAbility$ FinesseAttach | StackDescription$ None | SpellDescription$ Attach target Aura you control to target creature. Draw a card.
+A:SP$ Pump | ValidTgts$ Aura.YouCtrl | TgtPrompt$ Select target aura you control | SubAbility$ FinesseAttach | StackDescription$ None | SpellDescription$ Attach target Aura you control to target creature. Draw a card.
 SVar:FinesseAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:All

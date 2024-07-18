@@ -1,0 +1,8 @@
+Name:Felix Five-Boots
+ManaCost:2 B G U
+Types:Legendary Creature Ooze Rogue
+PT:5/4
+K:Menace
+K:Ward:2
+S:Mode$ Panharmonicon | ValidMode$ DamageDone,DamageDoneOnce,DamageDealtOnce,DamageAll | ValidSource$ Creature.YouCtrl | CombatDamage$ True | ValidTarget$ Player | ValidCard$ Permanent.YouCtrl | Description$ If a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Menace, ward {2}\nIf a creature you control dealing combat damage to a player causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

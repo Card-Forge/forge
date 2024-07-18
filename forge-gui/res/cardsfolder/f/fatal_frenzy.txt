@@ -1,6 +1,6 @@
 Name:Fatal Frenzy
 ManaCost:2 R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Trample | AtEOT$ Sacrifice | AILogic$ Berserk | SpellDescription$ Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ Trample | AtEOT$ Sacrifice | AILogic$ Berserk | SpellDescription$ Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.
 SVar:X:Targeted$CardPower
 Oracle:Until end of turn, target creature you control gains trample and gets +X/+0, where X is its power. Sacrifice it at the beginning of the next end step.

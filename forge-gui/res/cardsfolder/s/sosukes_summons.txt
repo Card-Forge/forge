@@ -1,7 +1,7 @@
 Name:Sosuke's Summons
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 2 | TokenScript$ g_1_1_snake | TokenOwner$ You | SpellDescription$ Create two 1/1 green Snake creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_snake | TokenOwner$ You | SpellDescription$ Create two 1/1 green Snake creature tokens.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Snake+nonToken+YouCtrl | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever a nontoken Snake enters the battlefield under your control, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand
 DeckHints:Type$Snake

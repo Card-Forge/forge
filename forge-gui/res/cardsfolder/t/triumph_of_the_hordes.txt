@@ -1,5 +1,5 @@
 Name:Triumph of the Hordes
 ManaCost:2 G G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample & Infect | SpellDescription$ Until end of turn, creatures you control get +1/+1 and gain trample and infect. (Creatures with infect deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample & Infect | SpellDescription$ Until end of turn, creatures you control get +1/+1 and gain trample and infect. (Creatures with infect deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
 Oracle:Until end of turn, creatures you control get +1/+1 and gain trample and infect. (Creatures with infect deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

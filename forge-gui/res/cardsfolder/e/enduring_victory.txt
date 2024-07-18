@@ -1,7 +1,7 @@
 Name:Enduring Victory
 ManaCost:4 W
 Types:Instant
-A:SP$ Destroy | Cost$ 4 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SubAbility$ DBBolster | SpellDescription$ Destroy target attacking or blocking creature. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+A:SP$ Destroy | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | SubAbility$ DBBolster | SpellDescription$ Destroy target attacking or blocking creature. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:DBBolster:DB$ PutCounter | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Destroy target attacking or blocking creature. Bolster 1. (Choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

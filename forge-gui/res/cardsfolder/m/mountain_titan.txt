@@ -2,8 +2,8 @@ Name:Mountain Titan
 ManaCost:2 B R
 Types:Creature Giant
 PT:2/2
-A:AB$ Effect | Cost$ 1 R R | Name$ Mountain Titan Effect | Triggers$ TrigSpellCast | RememberObjects$ Self | SpellDescription$ Until end of turn, whenever you cast a black spell, put a +1/+1 counter on CARDNAME.
-SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on Mountain Titan.
+A:AB$ Effect | Cost$ 1 R R | Triggers$ TrigSpellCast | RememberObjects$ Self | SpellDescription$ Until end of turn, whenever you cast a black spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.Black | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Command | TriggerDescription$ Whenever you cast a black spell, put a +1/+1 counter on EFFECTSOURCE.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Black
 AI:RemoveDeck:All

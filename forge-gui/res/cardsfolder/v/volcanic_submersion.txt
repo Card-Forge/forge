@@ -1,6 +1,6 @@
 Name:Volcanic Submersion
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 R | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
+A:SP$ Destroy | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land.
 K:Cycling:2
 Oracle:Destroy target artifact or land.\nCycling {2} ({2}, Discard this card: Draw a card.)

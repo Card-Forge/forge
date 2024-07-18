@@ -2,5 +2,5 @@ Name:Deadly Allure
 ManaCost:B
 Types:Sorcery
 K:Flashback:G
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch & HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Target creature gains deathtouch until end of turn and must be blocked this turn if able.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch & HIDDEN CARDNAME must be blocked if able. | SpellDescription$ Target creature gains deathtouch until end of turn and must be blocked this turn if able.
 Oracle:Target creature gains deathtouch until end of turn and must be blocked this turn if able.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

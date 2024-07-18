@@ -1,0 +1,32 @@
+Name:Sorin of House Markov
+ManaCost:1 B
+Types:Legendary Creature Human Noble
+PT:1/4
+K:Lifelink
+K:Extort
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ LifeGained | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your postcombat main phase, if you gained 3 or more life this turn, exile CARDNAME, then return him to the battlefield transformed under his owner's control.
+SVar:TrigTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:DoubleFaced
+SVar:LifeGained:Count$LifeYouGainedThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nAt the beginning of your postcombat main phase, if you gained 3 or more life this turn, exile Sorin of House Markov, then return him to the battlefield transformed under his owner's control.
+
+ALTERNATE
+
+Name:Sorin, Ravenous Neonate
+ManaCost:no cost
+Types:Legendary Planeswalker Sorin
+Colors:white,black
+Loyalty:3
+K:Extort
+A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
+A:AB$ DealDamage | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the amount of life you gained this turn to any target.
+A:AB$ GainControl | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAnimate | SpellDescription$ Gain control of target creature. It becomes a Vampire in addition to its other types. Put a lifelink counter on it if you control a white permanent other than that creature or NICKNAME.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Vampire | Duration$ Permanent | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Lifelink | CounterNum$ 1 | ConditionPresent$ Permanent.White+YouCtrl+Other+NotDefinedTargeted
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+Oracle:[+2]: Create a Food token.\n[-1]: Sorin, Ravenous Neonate deals damage equal to the amount of life you gained this turn to any target.\n[-6]: Gain control of target creature. It becomes a Vampire in addition to its other types. Put a lifelink counter on it if you control a white permanent other than that creature or Sorin.

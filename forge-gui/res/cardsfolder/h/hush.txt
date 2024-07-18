@@ -1,6 +1,6 @@
 Name:Hush
 ManaCost:3 G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
+A:SP$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
 K:Cycling:2
 Oracle:Destroy all enchantments.\nCycling {2} ({2}, Discard this card: Draw a card.)

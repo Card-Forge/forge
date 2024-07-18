@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Prince Valiant 3
-Title=Prince Valiant
-Difficulty=hard
-Description=GW Knight of the Reliquary deck with Terravore and Worm Harvest
-Icon=Prince Valiant.jpg
-Deck Type=constructed
 [main]
 4 Savannah
 2 Forest
@@ -34,4 +28,3 @@ Deck Type=constructed
 1 Courser of Kruphix
 2 Valorous Stance
 1 Naturalize
-[sideboard]

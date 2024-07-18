@@ -1,7 +1,7 @@
 Name:Punish the Enemy
 ManaCost:4 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | DamageMap$ True | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker and 3 damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | DamageMap$ True | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker and 3 damage to target creature.
 SVar:DB1:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Punish the Enemy deals 3 damage to target player or planeswalker and 3 damage to target creature.

@@ -1,5 +1,5 @@
 Name:Retribution of the Meek
 ManaCost:2 W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 W | ValidCards$ Creature.powerGE4 | NoRegen$ True | SpellDescription$ Destroy all creatures with power 4 or greater. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature.powerGE4 | NoRegen$ True | SpellDescription$ Destroy all creatures with power 4 or greater. They can't be regenerated.
 Oracle:Destroy all creatures with power 4 or greater. They can't be regenerated.

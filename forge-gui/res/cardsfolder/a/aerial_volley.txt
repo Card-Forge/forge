@@ -1,5 +1,5 @@
 Name:Aerial Volley
 ManaCost:G
 Types:Instant
-A:SP$ DealDamage | Cost$ G | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures with flying.
+A:SP$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three target creatures with flying.
 Oracle:Aerial Volley deals 3 damage divided as you choose among one, two, or three target creatures with flying.

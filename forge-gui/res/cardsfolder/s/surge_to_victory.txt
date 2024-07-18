@@ -1,7 +1,7 @@
 Name:Surge to Victory
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 R R | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile target instant or sorcery card from your graveyard. Creatures you control get +X/+0 until end of turn, where X is that card's mana value. Whenever a creature you control deals combat damage to a player this turn, copy the exiled card. You may cast the copy without paying its mana cost.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Exile target instant or sorcery card from your graveyard. Creatures you control get +X/+0 until end of turn, where X is that card's mana value. Whenever a creature you control deals combat damage to a player this turn, copy the exiled card. You may cast the copy without paying its mana cost.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +X | SubAbility$ DBEffect
 SVar:X:Remembered$CardManaCost
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ TrigDamage | SubAbility$ DBCleanup

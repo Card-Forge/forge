@@ -3,6 +3,6 @@ ManaCost:3 U U U
 Types:Instant
 S:Mode$ ReduceCost | Condition$ PlayerTurn | ValidCard$ Card.Self | Amount$ 2 | Color$ U | Type$ Spell | EffectZone$ All | Description$ As long as it's your turn, CARDNAME costs {2}{U}{U} less to cast.
 S:Mode$ ReduceCost | Condition$ PlayerTurn | ValidCard$ Card.Self | Amount$ 2 | Type$ Spell | EffectZone$ All | Secondary$ True | Description$ As long as it's your turn, CARDNAME costs {2}{U}{U} less to cast.
-A:SP$ EndTurn | Cost$ 3 U U U | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+A:SP$ EndTurn | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
 AI:RemoveDeck:All
 Oracle:As long as it's your turn, this spell costs {2}{U}{U} less to cast.\nEnd the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

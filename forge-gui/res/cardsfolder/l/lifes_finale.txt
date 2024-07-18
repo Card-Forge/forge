@@ -1,6 +1,6 @@
 Name:Life's Finale
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 4 B B | ValidCards$ Creature | SubAbility$ DBSearch | SpellDescription$ Destroy all creatures, then search target opponent's library for up to three creature cards and put them into their graveyard. Then that player shuffles.
+A:SP$ DestroyAll | ValidCards$ Creature | SubAbility$ DBSearch | SpellDescription$ Destroy all creatures, then search target opponent's library for up to three creature cards and put them into their graveyard. Then that player shuffles.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ValidTgts$ Opponent | ChangeType$ Creature | ChangeNum$ 3 | IsCurse$ True
 Oracle:Destroy all creatures, then search target opponent's library for up to three creature cards and put them into their graveyard. Then that player shuffles.

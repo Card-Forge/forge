@@ -1,0 +1,11 @@
+Name:Prosperity Tycoon
+ManaCost:3 W
+Types:Creature Human Noble
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
+A:AB$ Pump | Cost$ 2 Sac<1/Card.token/token> | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBTap:DB$ Tap | Defined$ Self
+DeckHas:Ability$Token|Sacrifice & Type$Mercenary
+DeckHints:Type$Token
+Oracle:When Prosperity Tycoon enters the battlefield, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."\n{2}, Sacrifice a token: Prosperity Tycoon gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it.)

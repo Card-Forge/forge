@@ -1,6 +1,6 @@
 Name:Divine Retribution
 ManaCost:1 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking creature equal to the number of attacking creatures.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target attacking creature equal to the number of attacking creatures.
 SVar:X:Count$Valid Creature.attacking
 Oracle:Divine Retribution deals damage to target attacking creature equal to the number of attacking creatures.

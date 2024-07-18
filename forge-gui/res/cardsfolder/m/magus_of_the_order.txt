@@ -2,7 +2,7 @@ Name:Magus of the Order
 ManaCost:2 G G
 Types:Creature Human Wizard
 PT:3/3
-A:AB$ ChangeZone | Cost$ G T Sac<1/CARDNAME> Sac<1/Creature.Green+Other/another green creature> | CostDesc$ {G}, {T}, Sacrifice Magus of the Order and another green creature: | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | StackDescription$ {p:You} searches their library for a green creature card, puts it onto the battlefield, then shuffles their library. | SpellDescription$ Search your library for a green creature card, put it onto the battlefield, then shuffle.
+A:AB$ ChangeZone | Cost$ G T Sac<1/CARDNAME> Sac<1/Creature.Green+Other/another green creature> | CostDesc$ {G}, {T}, Sacrifice CARDNAME and another green creature: | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green | ChangeNum$ 1 | StackDescription$ {p:You} searches their library for a green creature card, puts it onto the battlefield, then shuffles their library. | SpellDescription$ Search your library for a green creature card, put it onto the battlefield, then shuffle.
 SVar:AIPreference:SacCost$Creature.Green
 DeckNeeds:Type$Creature
 DeckHas:Ability$Sacrifice

@@ -13,5 +13,5 @@ ScryfallCode=PAL99
 5 R Mountain @John Avon
 6 R Rewind @Dermot Power
 7 R Plains @Rob Alexander
+8 R Karn, Silver Golem @Mark Zug
 9 R Swamp @John Avon
-3† R Island @Donato Giancola

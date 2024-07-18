@@ -2,7 +2,7 @@ Name:Flash of Defiance
 ManaCost:1 R
 Types:Sorcery
 K:Flashback:1 R PayLife<3>
-A:SP$ Effect | Cost$ 1 R | Name$ Flash of Defiance Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Green creatures and white creatures can't block this turn.
+A:SP$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Green creatures and white creatures can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.Green,Creature.White | AddHiddenKeyword$ CARDNAME can't block. | Description$ Green creatures and white creatures can't block this turn.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

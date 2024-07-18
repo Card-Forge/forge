@@ -1,6 +1,6 @@
 Name:Volatile Claws
 ManaCost:2 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, creatures you control get +2/+0 and gain all creature types.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, creatures you control get +2/+0 and gain all creature types.
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Creature.YouCtrl | AddAllCreatureTypes$ True
 Oracle:Until end of turn, creatures you control get +2/+0 and gain all creature types.

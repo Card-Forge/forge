@@ -1,7 +1,7 @@
 Name:Fiery Confluence
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 2 R R | Choices$ DBDamageCreatures,DBDamageOpponents,DBDestroy | CharmNum$ 3 | CanRepeatModes$ True
+A:SP$ Charm | Choices$ DBDamageCreatures,DBDamageOpponents,DBDestroy | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBDamageCreatures:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature | SpellDescription$ CARDNAME deals 1 damage to each creature.
 SVar:DBDamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | AILogic$ Good | SpellDescription$ CARDNAME deals 2 damage to each opponent.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.

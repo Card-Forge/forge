@@ -2,7 +2,7 @@ Name:Resounding Silence
 ManaCost:3 W
 Types:Instant
 K:Cycling:5 G W U
-A:SP$ ChangeZone | Cost$ 3 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When you cycle CARDNAME, exile up to two target attacking creatures.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | TargetMin$ 0 | TargetMax$ 2 | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:All

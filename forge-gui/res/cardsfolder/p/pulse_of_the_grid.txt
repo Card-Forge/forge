@@ -1,7 +1,7 @@
 Name:Pulse of the Grid
 ManaCost:1 U U
 Types:Instant
-A:SP$ Draw | Cost$ 1 U U | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return CARDNAME to its owner's hand.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card. Then if an opponent has more cards in hand than you, return CARDNAME to its owner's hand.
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ TrigReturn
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Hand | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY
 SVar:Y:Count$CardsInYourHand

@@ -1,7 +1,7 @@
 Name:Undercity Uprising
 ManaCost:2 B G
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B G | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SubAbility$ DBPump | SpellDescription$ Creatures you control gain deathtouch until end of turn. Target creature you control fights target creature you don't control.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SubAbility$ DBPump | SpellDescription$ Creatures you control gain deathtouch until end of turn. Target creature you control fights target creature you don't control.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control to fight | StackDescription$ None | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control to fight
 Oracle:Creatures you control gain deathtouch until end of turn. Then target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)

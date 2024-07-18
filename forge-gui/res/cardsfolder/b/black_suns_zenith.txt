@@ -1,7 +1,7 @@
 Name:Black Sun's Zenith
 ManaCost:X B B
 Types:Sorcery
-A:SP$ PutCounterAll | Cost$ X B B | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ X | SubAbility$ DBShuffle | IsCurse$ True | SpellDescription$ Put X -1/-1 counters on each creature. Shuffle CARDNAME into its owner's library.
+A:SP$ PutCounterAll | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ X | SubAbility$ DBShuffle | IsCurse$ True | SpellDescription$ Put X -1/-1 counters on each creature. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 AI:RemoveDeck:All

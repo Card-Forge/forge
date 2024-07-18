@@ -1,6 +1,6 @@
 Name:Baral's Expertise
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 U U | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBPlay | SpellDescription$ Return up to three target artifacts and/or creatures to their owners' hands. You may cast a spell with mana value 4 or less from your hand without paying its mana cost.
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBPlay | SpellDescription$ Return up to three target artifacts and/or creatures to their owners' hands. You may cast a spell with mana value 4 or less from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+YouOwn | ValidSA$ Spell.cmcLE4 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 Oracle:Return up to three target artifacts and/or creatures to their owners' hands.\nYou may cast a spell with mana value 4 or less from your hand without paying its mana cost.

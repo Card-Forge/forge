@@ -1,6 +1,6 @@
 Name:Hubris
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 U | ValidTgts$ Creature | ChangeType$ TargetedCard.Self,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Hand | UseAllOriginZones$ True | StackDescription$ Return {c:Targeted} and all Auras attached to it to their owners' hands. | SpellDescription$ Return target creature and all Auras attached to it to their owners' hands.
+A:SP$ ChangeZoneAll | ValidTgts$ Creature | ChangeType$ TargetedCard.Self,Aura.AttachedTo Targeted | Origin$ Battlefield | Destination$ Hand | UseAllOriginZones$ True | StackDescription$ Return {c:Targeted} and all Auras attached to it to their owners' hands. | SpellDescription$ Return target creature and all Auras attached to it to their owners' hands.
 AI:RemoveDeck:All
 Oracle:Return target creature and all Auras attached to it to their owners' hands.

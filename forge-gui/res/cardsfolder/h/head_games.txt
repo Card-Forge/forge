@@ -1,7 +1,7 @@
 Name:Head Games
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B | ValidTgts$ Opponent | Origin$ Hand | Destination$ Library | ChangeType$ Card | RememberChanged$ True | IsCurse$ True | SubAbility$ HeadChange | SpellDescription$ Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. The player puts those cards into their hand, then shuffles.
+A:SP$ ChangeZoneAll | ValidTgts$ Opponent | Origin$ Hand | Destination$ Library | ChangeType$ Card | RememberChanged$ True | IsCurse$ True | SubAbility$ HeadChange | SpellDescription$ Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. The player puts those cards into their hand, then shuffles.
 SVar:HeadChange:DB$ ChangeZone | DefinedPlayer$ Targeted | Origin$ Library | Destination$ Hand | ChangeNum$ X | ChangeType$ Card | Chooser$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

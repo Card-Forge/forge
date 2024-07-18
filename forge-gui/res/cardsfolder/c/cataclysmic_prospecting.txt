@@ -1,0 +1,10 @@
+Name:Cataclysmic Prospecting
+ManaCost:X R R
+Types:Sorcery
+A:SP$ DamageAll | ValidCards$ Creature | NumDmg$ X | SubAbility$ DBTreasure | SpellDescription$ CARDNAME deals X damage to each creature.
+SVar:DBTreasure:DB$ Token | TokenTapped$ True | TokenScript$ c_a_treasure_sac | TokenAmount$ Y | SpellDescription$ For each mana from a Desert spent to cast this spell, create a tapped Treasure token.
+SVar:X:Count$xPaid
+SVar:Y:Count$CastTotalManaSpent Desert
+DeckHas:Ability$Token & Type$Treasure|Artifact
+DeckNeeds:Type$Desert
+Oracle:Cataclysmic Prospecting deals X damage to each creature. For each mana from a Desert spent to cast this spell, create a tapped Treasure token.

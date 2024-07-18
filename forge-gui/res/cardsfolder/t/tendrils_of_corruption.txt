@@ -1,7 +1,7 @@
 Name:Tendrils of Corruption
 ManaCost:3 B
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life, where X is the number of Swamps you control.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals X damage to target creature and you gain X life, where X is the number of Swamps you control.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$TypeYouCtrl.Swamp
 Oracle:Tendrils of Corruption deals X damage to target creature and you gain X life, where X is the number of Swamps you control.

@@ -1,6 +1,6 @@
 Name:Keep Safe
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SubAbility$ DBDraw | SpellDescription$ Counter target spell that targets a permanent you control.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Permanent.YouCtrl+inRealZoneBattlefield | SubAbility$ DBDraw | SpellDescription$ Counter target spell that targets a permanent you control.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Counter target spell that targets a permanent you control.\nDraw a card.

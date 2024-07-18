@@ -1,6 +1,6 @@
 Name:Unexpectedly Absent
 ManaCost:X W W
 Types:Instant
-A:SP$ ChangeZone | Cost$ X W W | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ X | SpellDescription$ Put target nonland permanent into its owner's library just beneath the top X cards of that library.
 SVar:X:Count$xPaid
 Oracle:Put target nonland permanent into its owner's library just beneath the top X cards of that library.

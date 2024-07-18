@@ -4,7 +4,7 @@ Types:Creature Plant Skeleton
 PT:3/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigEffect | TriggerDescription$ Delirium — When CARDNAME enters the battlefield, if there are four or more card types among cards in your graveyard, creatures with power 2 or less can't block this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Mournwillow Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures with power 2 or less can't block this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures with power 2 or less can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.powerLE2 | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures with power 2 or less can't block this turn.
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Graveyard|Discard

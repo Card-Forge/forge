@@ -1,7 +1,7 @@
 Name:Worldfire
 ManaCost:6 R R R
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 6 R R R | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ ExileAllHand | SpellDescription$ Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | SubAbility$ ExileAllHand | SpellDescription$ Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1.
 SVar:ExileAllHand:DB$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ChangeType$ Card | SubAbility$ ExileAllGrave
 SVar:ExileAllGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ SetAllLife
 SVar:SetAllLife:DB$ SetLife | Defined$ Player | LifeAmount$ 1

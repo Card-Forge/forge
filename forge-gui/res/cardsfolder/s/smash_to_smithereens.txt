@@ -1,6 +1,6 @@
 Name:Smash to Smithereens
 ManaCost:1 R
 Types:Instant
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDealDamage | SpellDescription$ Destroy target artifact. CARDNAME deals 3 damage to that artifact's controller.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDealDamage | SpellDescription$ Destroy target artifact. CARDNAME deals 3 damage to that artifact's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 Oracle:Destroy target artifact. Smash to Smithereens deals 3 damage to that artifact's controller.

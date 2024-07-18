@@ -1,7 +1,7 @@
 Name:Arm-Mounted Anchor
 ManaCost:3
 Types:Artifact Equipment
-K:Equip:2:::ReduceCost$ Y: This ability costs {2} less to activate if you have one or fewer cards in hand.
+K:Equip:2:::ReduceCost$ Y:This ability costs {2} less to activate if you have one or fewer cards in hand
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +2/+2 and has menace.
 SVar:X:Count$InYourHand
 SVar:Y:Count$Compare X LE1.2.0

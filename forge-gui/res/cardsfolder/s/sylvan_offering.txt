@@ -1,7 +1,7 @@
 Name:Sylvan Offering
 ManaCost:X G
 Types:Sorcery
-A:SP$ ChoosePlayer | Cost$ X G | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Choose an opponent. You and that player each create an X/X green Treefolk creature token. Choose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens.
+A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken | SpellDescription$ Choose an opponent. You and that player each create an X/X green Treefolk creature token. Choose an opponent. You and that player each create X 1/1 green Elf Warrior creature tokens.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_treefolk | TokenOwner$ .Chosen,You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBChoose
 SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBToken2
 SVar:DBToken2:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_elf_warrior | TokenOwner$ .Chosen,You

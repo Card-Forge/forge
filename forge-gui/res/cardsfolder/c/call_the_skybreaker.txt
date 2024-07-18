@@ -2,5 +2,5 @@ Name:Call the Skybreaker
 ManaCost:5 UR UR
 Types:Sorcery
 K:Retrace
-A:SP$ Token | Cost$ 5 UR UR | TokenAmount$ 1 | TokenScript$ ur_5_5_elemental_flying | TokenOwner$ You | SpellDescription$ Create a 5/5 blue and red Elemental creature token with flying.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ ur_5_5_elemental_flying | TokenOwner$ You | SpellDescription$ Create a 5/5 blue and red Elemental creature token with flying.
 Oracle:Create a 5/5 blue and red Elemental creature token with flying.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

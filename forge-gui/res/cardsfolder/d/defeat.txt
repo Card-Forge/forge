@@ -1,5 +1,5 @@
 Name:Defeat
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Destroy target creature with power 2 or less.
+A:SP$ Destroy | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Destroy target creature with power 2 or less.
 Oracle:Destroy target creature with power 2 or less.

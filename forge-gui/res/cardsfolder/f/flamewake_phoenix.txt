@@ -5,6 +5,6 @@ PT:2/2
 K:Flying
 K:Haste
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouCtrl+powerGE4 | Execute$ TrigReturn | TriggerDescription$ Ferocious — At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Creature.YouCtrl+powerGE4 | Execute$ TrigReturn | TriggerDescription$ Ferocious — At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return CARDNAME from your graveyard to the battlefield.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 Oracle:Flying, haste\nFlamewake Phoenix attacks each combat if able.\nFerocious — At the beginning of combat on your turn, if you control a creature with power 4 or greater, you may pay {R}. If you do, return Flamewake Phoenix from your graveyard to the battlefield.

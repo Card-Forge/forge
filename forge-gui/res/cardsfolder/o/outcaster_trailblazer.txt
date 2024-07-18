@@ -1,0 +1,10 @@
+Name:Outcaster Trailblazer
+ManaCost:2 G
+Types:Creature Human Druid
+PT:4/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add one mana of any color.
+SVar:TrigMana:DB$ Mana | Produced$ Any | Amount$ 1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerGE4+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature with power 4 or greater enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+K:Plot:2 G
+Oracle:When Outcaster Trailblazer enters the battlefield, add one mana of any color.\nWhenever another creature with power 4 or greater enters the battlefield under your control, draw a card.\nPlot {2}{G} (You may pay {2}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

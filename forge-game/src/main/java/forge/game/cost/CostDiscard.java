@@ -153,7 +153,9 @@ public class CostDiscard extends CostPartWithList {
         else if (type.equals("DifferentNames")) {
             Set<String> cardNames = Sets.newHashSet();
             for (Card c : handList) {
-                cardNames.add(c.getName());
+                if (!c.hasNoName()) {
+                    cardNames.add(c.getName());
+                }
             }
             return cardNames.size() >= amount;
         }

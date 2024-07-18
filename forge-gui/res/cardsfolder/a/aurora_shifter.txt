@@ -1,0 +1,11 @@
+Name:Aurora Shifter
+ManaCost:1 U
+Types:Creature Shapeshifter
+PT:1/3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get that many {E}.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ TriggerCount$DamageAmount
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of combat on your turn, you may pay {E}{E}. When you do, CARDNAME becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}."
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<2> | Execute$ TrigCopy | TriggerDescription$ When you do, CARDNAME becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}."
+SVar:TrigCopy:DB$ Clone | AddTriggers$ TrigDamage | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control to copy | AddSVars$ TrigDamage,TrigEnergy | GainThisAbility$ True
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigEnergy | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, you get that many {E}.
+Oracle:Whenever Aurora Shifter deals combat damage to a player, you get that many {E}.\nAt the beginning of combat on your turn, you may pay {E}{E}. When you do, Aurora Shifter becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}."

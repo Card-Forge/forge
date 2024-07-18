@@ -1,6 +1,6 @@
 Name:Barkshell Blessing
 ManaCost:GW
 Types:Instant
-A:SP$ Pump | Cost$ GW | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 K:Conspire
 Oracle:Target creature gets +2/+2 until end of turn.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

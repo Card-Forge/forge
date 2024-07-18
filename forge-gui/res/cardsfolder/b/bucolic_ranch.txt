@@ -1,0 +1,11 @@
+Name:Bucolic Ranch
+ManaCost:no cost
+Types:Land Desert
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | RestrictValid$ Spell.Mount | SpellDescription$ Add one mana of any color. Spend this mana only to cast a Mount spell.
+A:AB$ PeekAndReveal | Cost$ 3 T | PeekAmount$ 1 | RevealValid$ Card.Mount | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone | SpellDescription$ Look at the top card of your library. If it's a Mount card, you may reveal it and put it into your hand. If you don't put it into your hand, you may put it on the bottom of your library.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Optional$ True | Defined$ TopOfLibrary | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Desert
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a Mount spell.\n{3}, {T}: Look at the top card of your library. If it's a Mount card, you may reveal it and put it into your hand. If you don't put it into your hand, you may put it on the bottom of your library.

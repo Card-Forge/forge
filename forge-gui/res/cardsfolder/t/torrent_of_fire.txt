@@ -1,6 +1,6 @@
 Name:Torrent of Fire
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the highest mana value among permanents you control.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the highest mana value among permanents you control.
 SVar:X:Count$Valid Permanent.YouCtrl$GreatestCMC
 Oracle:Torrent of Fire deals damage to any target equal to the highest mana value among permanents you control.

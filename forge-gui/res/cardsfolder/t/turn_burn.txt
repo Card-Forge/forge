@@ -2,7 +2,7 @@ Name:Turn
 ManaCost:2 U
 Types:Instant
 K:Fuse
-A:SP$ Animate | Cost$ 2 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Red | OverwriteColors$ True | Types$ Weird | RemoveCreatureTypes$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 0 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Red | OverwriteColors$ True | Types$ Weird | RemoveCreatureTypes$ True | IsCurse$ True | SpellDescription$ Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.
 AlternateMode:Split
 Oracle:Until end of turn, target creature loses all abilities and becomes a red Weird with base power and toughness 0/1.\nFuse (You may cast one or both halves of this card from your hand.)
 
@@ -11,5 +11,5 @@ ALTERNATE
 Name:Burn
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
 Oracle:Burn deals 2 damage to any target.\nFuse (You may cast one or both halves of this card from your hand.)

@@ -1,6 +1,6 @@
 Name:Inner Fire
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Mana | Cost$ 3 R | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each card in your hand.
+A:SP$ Mana | Produced$ R | Amount$ X | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R} for each card in your hand.
 SVar:X:Count$CardsInYourHand
 Oracle:Add {R} for each card in your hand.

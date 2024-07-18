@@ -1,7 +1,7 @@
 Name:Scale Blessing
 ManaCost:3 W
 Types:Instant
-A:SP$ PutCounter | Cost$ 3 W | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1 | SubAbility$ DBCounters | SpellDescription$ Bolster 1, then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. (To bolster 1, choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
+A:SP$ PutCounter | Bolster$ True | CounterNum$ 1 | CounterType$ P1P1 | SubAbility$ DBCounters | SpellDescription$ Bolster 1, then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. (To bolster 1, choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)
 SVar:DBCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Bolster 1, then put a +1/+1 counter on each creature you control with a +1/+1 counter on it. (To bolster 1, choose a creature with the least toughness among creatures you control and put a +1/+1 counter on it.)

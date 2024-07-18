@@ -2,5 +2,5 @@ Name:Feeling of Dread
 ManaCost:1 W
 Types:Instant
 K:Flashback:1 U
-A:SP$ Tap | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Tap up to two target creatures.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Tap up to two target creatures.
 Oracle:Tap up to two target creatures.\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

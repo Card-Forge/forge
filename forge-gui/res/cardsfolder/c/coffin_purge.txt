@@ -2,6 +2,6 @@ Name:Coffin Purge
 ManaCost:B
 Types:Instant
 K:Flashback:B
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 AI:RemoveDeck:Random
 Oracle:Exile target card from a graveyard.\nFlashback {B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

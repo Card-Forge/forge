@@ -1,5 +1,5 @@
 Name:Duress
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
 Oracle:Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.

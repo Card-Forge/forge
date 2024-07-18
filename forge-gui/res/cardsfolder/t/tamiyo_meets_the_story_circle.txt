@@ -1,0 +1,12 @@
+Name:Tamiyo Meets the Story Circle
+ManaCost:1 U
+Types:Enchantment Saga
+K:Chapter:3:DBShrink,DBDiscard,DBShuffle
+SVar:DBShrink:DB$ Effect | Triggers$ TrigAttack | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -2/-0 until end of turn.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Command | Execute$ TamiyoPump | TriggerDescription$ Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -2/-0 until end of turn.
+SVar:TamiyoPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ -2
+SVar:DBDiscard:DB$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBInvestigate | SpellDescription$ Discard any number of cards, then investigate twice for each card discarded this way.
+SVar:DBInvestigate:DB$ Investigate | Num$ Remembered$Amount/Times.2 | Defined$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to three target cards from your graveyard | TargetMin$ 0 | TargetMax$ 3 | Shuffle$ True | SpellDescription$ Shuffle up to three target cards from your graveyard into your library.
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -2/-0 until end of turn.\nII — Discard any number of cards, then investigate twice for each card discarded this way.\nIII — Shuffle up to three target cards from your graveyard into your library.

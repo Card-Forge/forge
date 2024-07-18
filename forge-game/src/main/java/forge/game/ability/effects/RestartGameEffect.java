@@ -44,8 +44,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
         trigHandler.suppressMode(TriggerType.Shuffled);
 
         game.getPhaseHandler().restart();
-        game.getPhaseHandler().setPlayerDeclaresAttackers(null);
-        game.getPhaseHandler().setPlayerDeclaresBlockers(null);
         game.getUntap().clearCommands();
         game.getUpkeep().clearCommands();
         game.getEndOfCombat().clearCommands();

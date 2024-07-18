@@ -1,5 +1,5 @@
 Name:Mire in Misery
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 1 B | SacValid$ Creature,Enchantment | SacMessage$ Creature or Enchantment | Defined$ Player.Opponent | SpellDescription$ Each opponent sacrifices a creature or enchantment.
+A:SP$ Sacrifice | SacValid$ Creature,Enchantment | SacMessage$ Creature or Enchantment | Defined$ Player.Opponent | SpellDescription$ Each opponent sacrifices a creature or enchantment.
 Oracle:Each opponent sacrifices a creature or enchantment.

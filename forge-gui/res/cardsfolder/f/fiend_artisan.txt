@@ -1,9 +1,9 @@
 Name:Fiend Artisan
-ManaCost:B/G B/G
+ManaCost:BG BG
 Types:Creature Nightmare
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Y | AddToughness$ Y | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
-A:AB$ ChangeZone | Cost$ X BG T Sac<1/Creature.Other/another creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLEX | ChangeNum$ 1 | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle. Activate only as a sorcery.
+A:AB$ ChangeZone | Cost$ X BG T Sac<1/Creature.Other/another creature> | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.cmcLEX | ChangeNum$ 1 | SorcerySpeed$ True | StackDescription$ SpellDescription | SpellDescription$ Search your library for a creature card with mana value X or less, put it onto the battlefield, then shuffle. Activate only as a sorcery.
 SVar:Y:Count$TypeInYourYard.Creature
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

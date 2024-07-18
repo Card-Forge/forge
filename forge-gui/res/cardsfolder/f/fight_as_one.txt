@@ -1,7 +1,7 @@
 Name:Fight as One
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ Human,NonHuman | MinCharmNum$ 1 | CharmNum$ 2
+A:SP$ Charm | Choices$ Human,NonHuman | MinCharmNum$ 1 | CharmNum$ 2
 SVar:Human:DB$ Pump | ValidTgts$ Creature.Human+YouCtrl | TgtPrompt$ Select target Human creature you control | NumAtt$ 1 | NumDef$ 1 | KW$ Indestructible | SpellDescription$ Target Human creature you control gets +1/+1 and gains indestructible until end of turn.
 SVar:NonHuman:DB$ Pump | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature you control | NumAtt$ 1 | NumDef$ 1 | KW$ Indestructible | SpellDescription$ Target non-Human creature you control gets +1/+1 and gains indestructible until end of turn.
 Oracle:Choose one or both —\n• Target Human creature you control gets +1/+1 and gains indestructible until end of turn.\n• Target non-Human creature you control gets +1/+1 and gains indestructible until end of turn.

@@ -2,5 +2,5 @@ Name:Desperate Ritual
 ManaCost:1 R
 Types:Instant Arcane
 K:Splice:Arcane:1 R
-A:SP$ Mana | Cost$ 1 R | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
+A:SP$ Mana | Produced$ R | Amount$ 3 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}.
 Oracle:Add {R}{R}{R}.\nSplice onto Arcane {1}{R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

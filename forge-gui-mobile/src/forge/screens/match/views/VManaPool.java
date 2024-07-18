@@ -10,10 +10,11 @@ import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
+import forge.assets.FSkinImageInterface;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
+import forge.localinstance.skin.FSkinProp;
 import forge.player.GamePlayerUtil;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
@@ -33,16 +34,16 @@ public class VManaPool extends VDisplayArea {
     public VManaPool(PlayerView player0) {
         player = player0;
 
-        addManaLabel(FSkinImage.MANA_COLORLESS, (byte)ManaAtom.COLORLESS);
-        addManaLabel(FSkinImage.MANA_W, MagicColor.WHITE);
-        addManaLabel(FSkinImage.MANA_U, MagicColor.BLUE);
-        addManaLabel(FSkinImage.MANA_B, MagicColor.BLACK);
-        addManaLabel(FSkinImage.MANA_R, MagicColor.RED);
-        addManaLabel(FSkinImage.MANA_G, MagicColor.GREEN);
+        addManaLabel(FSkinProp.IMG_MANA_COLORLESS, (byte)ManaAtom.COLORLESS);
+        addManaLabel(FSkinProp.IMG_MANA_W, MagicColor.WHITE);
+        addManaLabel(FSkinProp.IMG_MANA_U, MagicColor.BLUE);
+        addManaLabel(FSkinProp.IMG_MANA_B, MagicColor.BLACK);
+        addManaLabel(FSkinProp.IMG_MANA_R, MagicColor.RED);
+        addManaLabel(FSkinProp.IMG_MANA_G, MagicColor.GREEN);
     }
 
-    private void addManaLabel(FSkinImage image, byte colorCode) {
-        manaLabels.add(add(new ManaLabel(image, colorCode)));
+    private void addManaLabel(FSkinProp prop, byte colorCode) {
+        manaLabels.add(add(new ManaLabel(Forge.getAssets().images().get(prop), colorCode)));
     }
 
     @Override
@@ -95,11 +96,11 @@ public class VManaPool extends VDisplayArea {
     }
 
     public class ManaLabel extends FDisplayObject {
-        private final FSkinImage image;
+        private final FSkinImageInterface image;
         private final byte colorCode;
         private String text = "0";
 
-        private ManaLabel(FSkinImage image0, byte colorCode0) {
+        private ManaLabel(FSkinImageInterface image0, byte colorCode0) {
             image = image0;
             colorCode = colorCode0;
         }

@@ -1,7 +1,7 @@
 Name:Roar of Challenge
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SubAbility$ DBPump | SpellDescription$ All creatures able to block target creature this turn do so. Ferocious — That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SubAbility$ DBPump | SpellDescription$ All creatures able to block target creature this turn do so. Ferocious — That creature gains indestructible until end of turn if you control a creature with power 4 or greater.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | ConditionDescription$ If you control a creature with power 4 or greater.
 AI:RemoveDeck:All
 Oracle:All creatures able to block target creature this turn do so.\nFerocious — That creature gains indestructible until end of turn if you control a creature with power 4 or greater.

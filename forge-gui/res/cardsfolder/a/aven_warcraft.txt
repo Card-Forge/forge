@@ -1,7 +1,7 @@
 Name:Aven Warcraft
 ManaCost:2 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 W | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SubAbility$ ChooseColor | SpellDescription$ Creatures you control get +0/+2 until end of turn. Threshold — If seven or more cards are in your graveyard, choose a color. Creatures you control also gain protection from the chosen color until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +2 | SubAbility$ ChooseColor | SpellDescription$ Creatures you control get +0/+2 until end of turn. Threshold — If seven or more cards are in your graveyard, choose a color. Creatures you control also gain protection from the chosen color until end of turn.
 SVar:ChooseColor:DB$ ProtectionAll | Condition$ Threshold | ValidCards$ Creature.YouCtrl | Gains$ Choice | Choices$ AnyColor
 DeckHints:Ability$Graveyard
 Oracle:Creatures you control get +0/+2 until end of turn.\nThreshold — If seven or more cards are in your graveyard, choose a color. Creatures you control also gain protection from the chosen color until end of turn.

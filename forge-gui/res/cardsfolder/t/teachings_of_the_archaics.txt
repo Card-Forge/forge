@@ -1,7 +1,7 @@
 Name:Teachings of the Archaics
 ManaCost:2 U
 Types:Sorcery Lesson
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | ConditionCheckSVar$ Opp | ConditionSVarCompare$ GTMe | SpellDescription$ If an opponent has more cards in hand than you, draw two cards. Draw three cards instead if an opponent has at least four more cards in hand than you.
+A:SP$ Draw | NumCards$ X | ConditionCheckSVar$ Opp | ConditionSVarCompare$ GTMe | SpellDescription$ If an opponent has more cards in hand than you, draw two cards. Draw three cards instead if an opponent has at least four more cards in hand than you.
 SVar:Opp:PlayerCountOpponents$HighestCardsInHand
 SVar:Me:Count$CardsInYourHand
 SVar:MePlus:SVar$Me/Plus.4

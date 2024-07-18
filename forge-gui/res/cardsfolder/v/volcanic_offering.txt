@@ -1,7 +1,7 @@
 Name:Volcanic Offering
 ManaCost:4 R
 Types:Instant
-A:SP$ Pump | Cost$ 4 R | ValidTgts$ Land.nonBasic+YouDontCtrl | TgtPrompt$ Select target nonbasic land you don't control | AILogic$ Destroy | IsCurse$ True | RememberTargets$ True | SubAbility$ DBDestroyLand | SpellDescription$ Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.
+A:SP$ Pump | ValidTgts$ Land.nonBasic+YouDontCtrl | TgtPrompt$ Select target nonbasic land you don't control | AILogic$ Destroy | IsCurse$ True | RememberTargets$ True | SubAbility$ DBDestroyLand | SpellDescription$ Destroy target nonbasic land you don't control and target nonbasic land of an opponent's choice you don't control.
 SVar:DBDestroyLand:DB$ Pump | TargetingPlayer$ Player.Opponent | ValidTgts$ Land.nonBasic+YouDontCtrl | TgtPrompt$ Select target nonbasic land the caster of this spell don't control | AILogic$ Destroy | IsCurse$ True | RememberTargets$ True | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | AILogic$ Always | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumDmg$ 7 | DamageMap$ True | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 7 damage to target creature you don't control and 7 damage to target creature of an opponent's choice you don't control.

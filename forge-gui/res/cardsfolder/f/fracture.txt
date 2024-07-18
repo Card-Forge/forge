@@ -1,5 +1,5 @@
 Name:Fracture
 ManaCost:W B
 Types:Instant
-A:SP$ Destroy | Cost$ W B | ValidTgts$ Artifact,Enchantment,Planeswalker | TgtPrompt$ Select target artifact, enchantment, or planeswalker | SpellDescription$ Destroy target artifact, enchantment, or planeswalker.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment,Planeswalker | TgtPrompt$ Select target artifact, enchantment, or planeswalker | SpellDescription$ Destroy target artifact, enchantment, or planeswalker.
 Oracle:Destroy target artifact, enchantment, or planeswalker.

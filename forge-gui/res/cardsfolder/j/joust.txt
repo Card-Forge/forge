@@ -1,7 +1,7 @@
 Name:Joust
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +1 | AILogic$ Fight | ConditionDefined$ ThisTargetedCard | ConditionPresent$ Knight | SubAbility$ DBFight | SpellDescription$ Choose target creature you control and target creature you don't control. The creature you control gets +2/+1 until end of turn if it's a Knight. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +1 | AILogic$ Fight | ConditionDefined$ ThisTargetedCard | ConditionPresent$ Knight | SubAbility$ DBFight | SpellDescription$ Choose target creature you control and target creature you don't control. The creature you control gets +2/+1 until end of turn if it's a Knight. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | AILogic$ Always | TgtPrompt$ Choose target creature you don't control
 DeckHints:Type$Knight
 Oracle:Choose target creature you control and target creature you don't control. The creature you control gets +2/+1 until end of turn if it's a Knight. Then those creatures fight each other. (Each deals damage equal to its power to the other.)

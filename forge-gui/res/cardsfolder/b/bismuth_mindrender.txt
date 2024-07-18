@@ -1,0 +1,11 @@
+Name:Bismuth Mindrender
+ManaCost:3 B
+Types:Creature Eldrazi
+PT:4/3
+K:Devoid
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDigUntil | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to that spell's mana value rather than paying its mana cost.
+SVar:TrigDigUntil:DB$ DigUntil | Defined$ TriggeredTarget | Valid$ Card.nonLand | ValidDescription$ nonland card | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidZone$ Exile | Valid$ Card.nonLand+IsRemembered | ValidSA$ Spell | PlayCost$ PayLife<ConvertedManaCost> | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Devoid\nMenace\nWhenever Bismuth Mindrender deals combat damage to a player, that player exiles cards from the top of their library until they exile a nonland card. You may cast that card by paying life equal to that spell's mana value rather than paying its mana cost.

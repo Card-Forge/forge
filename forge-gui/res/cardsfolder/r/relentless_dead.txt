@@ -3,9 +3,9 @@ ManaCost:B B
 Types:Creature Zombie
 PT:2/2
 K:Menace
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When Relentless Dead dies, you may pay {B}. If you do, return it to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, you may pay {B}. If you do, return it to its owner's hand.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ B | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Hand
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When Relentless Dead dies, you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield.
 SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Zombie+Other | TargetsWithDefinedController$ TriggeredCardController | Cost$ X
 SVar:X:Targeted$CardManaCost
 DeckHints:Type$Zombie

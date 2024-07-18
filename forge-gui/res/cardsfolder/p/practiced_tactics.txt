@@ -1,7 +1,7 @@
 Name:Practiced Tactics
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Choose target attacking or blocking creature | SubAbility$ DBDamage | StackDescription$ SpellDescription | SpellDescription$ Choose target attacking or blocking creature. CARDNAME deals damage to that creature equal to twice the number of creatures in your party.
+A:SP$ Pump | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Choose target attacking or blocking creature | SubAbility$ DBDamage | StackDescription$ SpellDescription | SpellDescription$ Choose target attacking or blocking creature. CARDNAME deals damage to that creature equal to twice the number of creatures in your party.
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:X:Count$Party/Twice
 DeckHas:Ability$Party

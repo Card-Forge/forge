@@ -1,6 +1,6 @@
 Name:Mammoth Growth
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SpellDescription$ Target creature gets +4/+4 until end of turn.
 K:Foretell:G
 Oracle:Target creature gets +4/+4 until end of turn.\nForetell {G} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

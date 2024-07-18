@@ -1,6 +1,6 @@
 Name:Without Weakness
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Indestructible | SpellDescription$ Target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)
 K:Cycling:2
 Oracle:Target creature you control gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it's still put into its owner's graveyard.)\nCycling {2} ({2}, Discard this card: Draw a card.)

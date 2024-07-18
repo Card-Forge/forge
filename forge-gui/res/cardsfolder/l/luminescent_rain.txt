@@ -1,7 +1,7 @@
 Name:Luminescent Rain
 ManaCost:2 G
 Types:Instant
-A:SP$ ChooseType | Cost$ 2 G | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBGainlife | SpellDescription$ Choose a creature type. You gain 2 life for each permanent you control of that type.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBGainlife | SpellDescription$ Choose a creature type. You gain 2 life for each permanent you control of that type.
 SVar:DBGainlife:DB$ Gainlife | LifeAmount$ X | StackDescription$ You gain 2 life for each permanent you control of that type.
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl/Times.2
 SVar:NeedsToPlay:Creature

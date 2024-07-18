@@ -2,7 +2,7 @@ Name:Leonin Vanguard
 ManaCost:W
 Types:Creature Cat Soldier
 PT:1/1
-T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | TriggerDescription$ At the beginning of combat on your turn, if you control three or more creatures, Leonin Vanguard gets +1/+1 until end of turn and you gain 1 life.
+T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | TriggerDescription$ At the beginning of combat on your turn, if you control three or more creatures, CARDNAME gets +1/+1 until end of turn and you gain 1 life.
 SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
 DeckHas:Ability$LifeGain

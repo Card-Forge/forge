@@ -1,6 +1,6 @@
 Name:Sylvan Awakening
 ManaCost:2 G
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ 2 G | Power$ 2 | Toughness$ 2 | Types$ Creature,Elemental | Keywords$ Reach & Indestructible & Haste | ValidCards$ Land.YouCtrl | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, all lands you control become 2/2 Elemental creatures with reach, indestructible, and haste. They're still lands.
+A:SP$ AnimateAll | Power$ 2 | Toughness$ 2 | Types$ Creature,Elemental | Keywords$ Reach & Indestructible & Haste | ValidCards$ Land.YouCtrl | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, all lands you control become 2/2 Elemental creatures with reach, indestructible, and haste. They're still lands.
 AI:RemoveDeck:All
 Oracle:Until your next turn, all lands you control become 2/2 Elemental creatures with reach, indestructible, and haste. They're still lands.

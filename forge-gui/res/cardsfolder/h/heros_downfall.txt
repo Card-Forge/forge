@@ -1,5 +1,5 @@
 Name:Hero's Downfall
 ManaCost:1 B B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 Oracle:Destroy target creature or planeswalker.

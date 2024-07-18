@@ -1,6 +1,6 @@
 Name:Cryoclasm
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Plains,Island | TgtPrompt$ Choose target plains or island. | SubAbility$ DBDealDamage | SpellDescription$ Destroy target Plains or Island. CARDNAME deals 3 damage to that land's controller.
+A:SP$ Destroy | ValidTgts$ Plains,Island | TgtPrompt$ Choose target plains or island. | SubAbility$ DBDealDamage | SpellDescription$ Destroy target Plains or Island. CARDNAME deals 3 damage to that land's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 Oracle:Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.

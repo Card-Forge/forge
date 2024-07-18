@@ -2,6 +2,6 @@ Name:Splicer's Skill
 ManaCost:2 W
 Types:Sorcery
 K:Splice:Instant,Sorcery:3 W
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Phyrexian Golem artifact creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You | SpellDescription$ Create a 3/3 colorless Phyrexian Golem artifact creature token.
 AI:RemoveDeck:Random
 Oracle:Create a 3/3 colorless Phyrexian Golem artifact creature token.\nSplice onto instant or sorcery {3}{W} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

@@ -1,7 +1,5 @@
 [metadata]
 Name=pyromancer
-[Avatar]
-
 [Main]
 2 Delayed Blast Fireball|CLB|2
 2 Efreet Flamepainter|STX|1
@@ -21,12 +19,4 @@ Name=pyromancer
 3 Shock|DDN|1
 4 Young Pyromancer|EMA|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

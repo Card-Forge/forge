@@ -1,5 +1,5 @@
 Name:Huatli, the Sun's Heart
-ManaCost:2 G/W
+ManaCost:2 GW
 Types:Legendary Planeswalker Huatli
 Loyalty:7
 S:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.

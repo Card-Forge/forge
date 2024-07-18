@@ -2,7 +2,7 @@ Name:Collective Defiance
 ManaCost:1 R R
 Types:Sorcery
 K:Escalate:1
-A:SP$ Charm | Cost$ 1 R R | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBWheel,DBDamage1,DBDamage2
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 3 | Choices$ DBWheel,DBDamage1,DBDamage2
 SVar:DBWheel:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player (to Discard hand and draw) | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Target player discards all cards in their hand, then draws that many cards.
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ ParentTarget | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

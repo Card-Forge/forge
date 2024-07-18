@@ -2,7 +2,7 @@ Name:Traitor's Clutch
 ManaCost:4 B
 Types:Instant
 K:Flashback:1 B
-A:SP$ Pump | Cost$ 4 B | ValidTgts$ Creature | NumAtt$ +1 | KW$ Shadow | SubAbility$ DBAnimate | SpellDescription$ Target creature gets +1/+0, becomes black, and gains shadow until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | KW$ Shadow | SubAbility$ DBAnimate | SpellDescription$ Target creature gets +1/+0, becomes black, and gains shadow until end of turn.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Colors$ Black | OverwriteColors$ True
 SVar:DiscardMe:1
 Oracle:Target creature gets +1/+0, becomes black, and gains shadow until end of turn. (It can block or be blocked by only creatures with shadow.)\nFlashback {1}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

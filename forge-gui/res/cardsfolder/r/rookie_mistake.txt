@@ -1,6 +1,6 @@
 Name:Rookie Mistake
 ManaCost:U
 Types:Instant
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select creature get +0/+2 | NumDef$ 2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +0/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select creature get +0/+2 | NumDef$ 2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +0/+2 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select creature get -2/-0 | NumAtt$ -2 | SpellDescription$ Target creature gets -2/-0 until end of turn.
 Oracle:Until end of turn, target creature gets +0/+2 and another target creature gets -2/-0.

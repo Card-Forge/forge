@@ -1,6 +1,6 @@
 Name:Traitorous Greed
 ManaCost:3 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ AddMana | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Add two mana of any one color.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ AddMana | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Add two mana of any one color.
 SVar:AddMana:DB$ Mana | Produced$ Any | Amount$ 2
 Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Add two mana of any one color. (The creature can attack and {T} this turn.)

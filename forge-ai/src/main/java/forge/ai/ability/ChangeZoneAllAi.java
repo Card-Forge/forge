@@ -3,7 +3,6 @@ package forge.ai.ability;
 import java.util.Collections;
 import java.util.Map;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.ai.AiController;
@@ -73,11 +72,6 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
 
         CardCollectionView oppType = ai.getOpponents().getCardsIn(origin);
         CardCollectionView computerType = ai.getCardsIn(origin);
-
-        // remove cards that won't be seen in AI's own library if it can't be searched
-        if (!ai.canSearchLibraryWith(sa, ai)) {
-            computerType = CardLists.filter(computerType, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
-        }
 
         // Ugin AI: always try to sweep before considering +1
         if (sourceName.equals("Ugin, the Spirit Dragon")) {

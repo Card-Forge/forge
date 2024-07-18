@@ -1,6 +1,6 @@
 Name:Disallow
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SpellDescription$ Counter target spell, activated ability, or triggered ability.
+A:SP$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SpellDescription$ Counter target spell, activated ability, or triggered ability.
 AI:RemoveDeck:All
 Oracle:Counter target spell, activated ability, or triggered ability. (Mana abilities can't be targeted.)

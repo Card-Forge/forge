@@ -1,6 +1,6 @@
 Name:Chain of Plasma
 ManaCost:1 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBCopy1 | SpellDescription$ CARDNAME deals 3 damage to any target. Then that player or that permanent's controller may discard a card. If the player does, they may copy this spell and may choose a new target for that copy.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBCopy1 | SpellDescription$ CARDNAME deals 3 damage to any target. Then that player or that permanent's controller may discard a card. If the player does, they may copy this spell and may choose a new target for that copy.
 SVar:DBCopy1:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedOrController | UnlessPayer$ TargetedOrController | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | StackDescription$ None | MayChooseTarget$ True
 Oracle:Chain of Plasma deals 3 damage to any target. Then that player or that permanent's controller may discard a card. If the player does, they may copy this spell and may choose a new target for that copy.

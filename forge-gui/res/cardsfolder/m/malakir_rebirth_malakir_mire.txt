@@ -1,7 +1,7 @@
 Name:Malakir Rebirth
 ManaCost:B
 Types:Instant
-A:SP$ LoseLife | Cost$ B | Defined$ You | LifeAmount$ 2 | SubAbility$ DBAnimate | SpellDescription$ Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
+A:SP$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBAnimate | SpellDescription$ Choose target creature. You lose 2 life. Until end of turn, that creature gains "When this creature dies, return it to the battlefield tapped under its owner's control."
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Choose target creature | Triggers$ TrigDies | StackDescription$ Until end of turn, {c:Targeted} gains "When this creature dies, return it to the battlefield tapped under its owner's control."
 SVar:TrigDies:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield tapped under its owner's control.
 SVar:TrigReturn:DB$ ChangeZone | DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True

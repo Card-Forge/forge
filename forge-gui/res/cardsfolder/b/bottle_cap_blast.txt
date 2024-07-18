@@ -2,7 +2,7 @@ Name:Bottle-Cap Blast
 ManaCost:4 R
 Types:Instant
 K:Improvise
-A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | ExcessSVar$ Excess | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 5 damage to any target. 
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | ExcessSVar$ Excess | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 5 damage to any target.
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ Excess | TokenTapped$ True | SpellDescription$ If excess damage was dealt to a permanent this way, create that many tapped Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
 DeckHas:Ability$Token & Type$Treasure
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nBottle-Cap Blast deals 5 damage to any target. If excess damage was dealt to a permanent this way, create that many tapped Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")

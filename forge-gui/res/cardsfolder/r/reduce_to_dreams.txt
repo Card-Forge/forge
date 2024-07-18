@@ -1,6 +1,6 @@
 Name:Reduce to Dreams
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 U U | ChangeType$ Artifact,Enchantment | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts and enchantments to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Artifact,Enchantment | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts and enchantments to their owners' hands.
 AI:RemoveDeck:Random
 Oracle:Return all artifacts and enchantments to their owners' hands.

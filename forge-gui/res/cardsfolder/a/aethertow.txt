@@ -1,6 +1,6 @@
 Name:Aethertow
 ManaCost:3 WU
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 WU | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
 K:Conspire
 Oracle:Put target attacking or blocking creature on top of its owner's library.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

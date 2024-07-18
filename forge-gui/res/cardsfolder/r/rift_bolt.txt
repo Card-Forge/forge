@@ -1,6 +1,6 @@
 Name:Rift Bolt
 ManaCost:2 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 K:Suspend:1:R
 Oracle:Rift Bolt deals 3 damage to any target.\nSuspend 1—{R} (Rather than cast this card from your hand, you may pay {R} and exile it with a time counter on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

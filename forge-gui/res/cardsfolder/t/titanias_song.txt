@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Artifact & Creature | RemoveCardTypes$ True | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its mana value.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigEffect | Static$ True | TriggerDescription$ If CARDNAME leaves the battlefield, this effect continues until end of turn.
-SVar:TrigEffect:DB$ Effect | Name$ Titania's Song Effect | StaticAbilities$ KWAnimateAll
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWAnimateAll
 SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact loses all abilities and is an artifact creature with power and toughness each equal to its mana value.
 SVar:AffectedX:Count$CardManaCost
 SVar:NonStackingEffect:True

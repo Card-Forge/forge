@@ -2,7 +2,7 @@ Name:Faithless Looting
 ManaCost:R
 Types:Sorcery
 K:Flashback:2 R
-A:SP$ Draw | Cost$ R | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 AI:RemoveDeck:All
 Oracle:Draw two cards, then discard two cards.\nFlashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

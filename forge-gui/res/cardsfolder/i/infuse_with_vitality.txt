@@ -1,7 +1,7 @@
 Name:Infuse with Vitality
 ManaCost:B G
 Types:Instant
-A:SP$ Pump | Cost$ B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | StackDescription$ Until end of turn, {c:Targeted} gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ Until end of turn, target creature gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control." | SubAbility$ DBAnimate
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | StackDescription$ Until end of turn, {c:Targeted} gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control." | SpellDescription$ Until end of turn, target creature gains deathtouch and "When this creature dies, return it to the battlefield tapped under its owner's control." | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Triggers$ DiesTrigger | Defined$ ParentTarget | SubAbility$ DBGainLife | StackDescription$ None
 SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy

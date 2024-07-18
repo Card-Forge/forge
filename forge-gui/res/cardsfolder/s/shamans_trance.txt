@@ -1,7 +1,7 @@
 Name:Shaman's Trance
 ManaCost:2 R
 Types:Instant
-A:SP$ Effect | Cost$ 2 R | StaticAbilities$ STCantPlayLand,STCantCastSpell,STTrance | SpellDescription$ Other players can't play lands or cast spells from their graveyards this turn. You may play lands and cast spells from other players' graveyards this turn as though those cards were in your graveyard.
+A:SP$ Effect | StaticAbilities$ STCantPlayLand,STCantCastSpell,STTrance | SpellDescription$ Other players can't play lands or cast spells from their graveyards this turn. You may play lands and cast spells from other players' graveyards this turn as though those cards were in your graveyard.
 SVar:STCantPlayLand:Mode$ CantPlayLand | ValidCard$ Land | Origin$ Graveyard | Player$ Player.Other | EffectZone$ Command | Description$ Other players can't play lands from their graveyards this turn.
 SVar:STCantCastSpell:Mode$ CantBeCast | ValidCard$ Card | Origin$ Graveyard | Caster$ Player.Other | EffectZone$ Command | Description$ Other players cast spells from their graveyards this turn.
 SVar:STTrance:Mode$ Continuous | Affected$ You | AddKeyword$ Shaman's Trance | Description$ You may play lands and cast spells from other players' graveyards this turn as though those cards were in your graveyard.

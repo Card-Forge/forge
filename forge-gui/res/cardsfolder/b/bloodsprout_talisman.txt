@@ -6,4 +6,4 @@ A:AB$ ChooseCard | Cost$ T PayLife<1> | Mandatory$ True | ChoiceZone$ Hand | Cho
 SVar:DBAnimate:DB$ Animate | Duration$ Perpetual | Defined$ ChosenCard | staticAbilities$ ReduceCost | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This spell costs {1} less to cast."
 SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | SubAbility$ DBCleanup | Description$ This spell costs {1} less to cast.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:Bloodsprout Talisman enters the battlefield tapped.\n{T), pay 1 life: Choose a nonland card in your hand. It perpetually gains "This spell costs {1} less to cast."
+Oracle:Bloodsprout Talisman enters the battlefield tapped.\n{T}, pay 1 life: Choose a nonland card in your hand. It perpetually gains "This spell costs {1} less to cast."

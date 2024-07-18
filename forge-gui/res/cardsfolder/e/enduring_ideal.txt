@@ -2,6 +2,6 @@ Name:Enduring Ideal
 ManaCost:5 W W
 Types:Sorcery
 K:Epic
-A:SP$ ChangeZone | Cost$ 5 W W | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card, put it onto the battlefield, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card, put it onto the battlefield, then shuffle.
 AI:RemoveDeck:Random
 Oracle:Search your library for an enchantment card, put it onto the battlefield, then shuffle.\nEpic (For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy this spell except for its epic ability.)

@@ -1,0 +1,7 @@
+Name:Contaminated Landscape
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Plains+Basic,Land.Island+Basic,Land.Swamp+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle.
+K:Cycling:W U B
+Oracle:{T}: Add {C}.\n{T}, Sacrifice Contaminated Landscape: Search your library for a basic Plains, Island, or Swamp card, put it onto the battlefield tapped, then shuffle.\nCycling {W}{U}{B} ({W}{U}{B}, Discard this card: Draw a card.)

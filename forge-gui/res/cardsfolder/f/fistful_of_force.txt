@@ -1,7 +1,7 @@
 Name:Fistful of Force
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBClash | SpellDescription$ Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SubAbility$ DBClash | SpellDescription$ Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn.
 SVar:DBClash:DB$ Clash | WinSubAbility$ AdditionalPump
 SVar:AdditionalPump:DB$ Pump | Defined$ Targeted | NumAtt$ 2 | NumDef$ 2 | KW$ Trample
 Oracle:Target creature gets +2/+2 until end of turn. Clash with an opponent. If you win, that creature gets an additional +2/+2 and gains trample until end of turn. (Each clashing player reveals the top card of their library, then puts that card on the top or bottom. A player wins if their card had a higher mana value.)

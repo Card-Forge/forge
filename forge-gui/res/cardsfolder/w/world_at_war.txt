@@ -1,7 +1,7 @@
 Name:World at War
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ AddPhase | Cost$ 3 R R | ExtraPhase$ Combat | AfterPhase$ Main2 | FollowedBy$ Main2 | BeforeFirstPostCombatMainEnd$ True | ExtraPhaseDelayedTrigger$ DelTrigUntap | ExtraPhaseDelayedTriggerExcute$ TrigUntapAll | SpellDescription$ After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
+A:SP$ AddPhase | ExtraPhase$ Combat | AfterPhase$ Main2 | FollowedBy$ Main2 | BeforeFirstPostCombatMainEnd$ True | ExtraPhaseDelayedTrigger$ DelTrigUntap | ExtraPhaseDelayedTriggerExcute$ TrigUntapAll | SpellDescription$ After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
 SVar:DelTrigUntap:Mode$ Phase | Phase$ BeginCombat | TriggerDescription$ At the beginning of that combat, untap all creatures that attacked this turn.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.attackedThisTurn
 K:Rebound

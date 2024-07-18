@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Dog
 PT:3/1
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ CARDNAME gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible
 SVar:BuffedBy:Card.nonLand+nonCreature
 Oracle:Whenever you cast a noncreature spell, Cathar's Companion gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

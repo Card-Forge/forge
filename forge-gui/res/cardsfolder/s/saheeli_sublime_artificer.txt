@@ -1,5 +1,5 @@
 Name:Saheeli, Sublime Artificer
-ManaCost:1 U/R U/R
+ManaCost:1 UR UR
 Types:Legendary Planeswalker Saheeli
 Loyalty:5
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.

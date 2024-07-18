@@ -1,5 +1,5 @@
 Name:Celestial Flare
 ManaCost:W W
 Types:Instant
-A:SP$ Sacrifice | Cost$ W W | ValidTgts$ Player | SacValid$ Creature.attacking,Creature.blocking | SacMessage$ attacking or blocking Creature | SpellDescription$ Target player sacrifices an attacking or blocking creature.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.attacking,Creature.blocking | SacMessage$ attacking or blocking Creature | SpellDescription$ Target player sacrifices an attacking or blocking creature.
 Oracle:Target player sacrifices an attacking or blocking creature.

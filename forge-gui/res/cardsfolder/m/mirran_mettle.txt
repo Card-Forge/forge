@@ -1,6 +1,6 @@
 Name:Mirran Mettle
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +2/+2 until end of turn. Metalcraft — That creature gets +4/+4 until end of turn instead if you control three or more artifacts.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +2/+2 until end of turn. Metalcraft — That creature gets +4/+4 until end of turn instead if you control three or more artifacts.
 SVar:X:Count$Metalcraft.4.2
 Oracle:Target creature gets +2/+2 until end of turn.\nMetalcraft — That creature gets +4/+4 until end of turn instead if you control three or more artifacts.

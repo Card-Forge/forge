@@ -1,5 +1,5 @@
 Name:Silk Net
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Target creature gets +1/+1 and gains reach until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | KW$ Reach | SpellDescription$ Target creature gets +1/+1 and gains reach until end of turn.
 Oracle:Target creature gets +1/+1 and gains reach until end of turn. (It can block creatures with flying.)

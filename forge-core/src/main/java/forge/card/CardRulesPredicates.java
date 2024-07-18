@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.util.CardTranslation;
 import forge.util.ComparableOp;
@@ -186,7 +187,7 @@ public final class CardRulesPredicates {
         return new Predicate<CardRules>() {
             @Override
             public boolean apply(final CardRules card) {
-                return card.hasStartOfKeyword(keyword);
+                return Iterables.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
             }
         };
     }
@@ -353,6 +354,10 @@ public final class CardRulesPredicates {
                 return rules.getColorIdentity().hasNoColorsExcept(colormask);
             }
         };
+    }
+
+    public static Predicate<CardRules> canBePartnerCommanderWith(final CardRules commander) {
+        return (rules) -> rules.canBePartnerCommanders(commander);
     }
 
     private static class LeafString extends PredicateString<CardRules> {
@@ -653,6 +658,9 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
         public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
         public static final Predicate<CardRules> IS_DUNGEON = CardRulesPredicates.coreType(true, CardType.CoreType.Dungeon);
+        public static final Predicate<CardRules> IS_ATTRACTION = Predicates.and(Presets.IS_ARTIFACT,
+                CardRulesPredicates.subType("Attraction")
+        );
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
         public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Predicates.and(Presets.IS_LEGENDARY,
                 Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));

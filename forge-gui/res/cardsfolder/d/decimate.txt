@@ -1,7 +1,7 @@
 Name:Decimate
 ManaCost:2 R G
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DestroyCreature | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land. | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DestroyCreature | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Destroy target artifact, target creature, target enchantment, and target land. | StackDescription$ None
 SVar:DestroyCreature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | StackDescription$ None
 SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
 SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None

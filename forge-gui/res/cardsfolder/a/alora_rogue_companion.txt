@@ -40,7 +40,7 @@ SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresen
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBChooseCard
 SVar:DBChooseCard:DB$ ChooseCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Choices$ Creature.OppCtrl | Mandatory$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPerpetual
-SVar:DBPerpetual:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | StaticAbilities$ PerpetualDebuff | Name$ Alora, Cheerful Thief's Perpetual Effect | Duration$ Permanent | SubAbility$ DBClearChosen
+SVar:DBPerpetual:DB$ Effect | Name$ Alora, Cheerful Thief's Perpetual Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | StaticAbilities$ PerpetualDebuff | Duration$ Permanent | SubAbility$ DBClearChosen
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ -1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen creature perpetually gets -1/-0.
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
 Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, a creature of your choice an opponent controls perpetually gets -1/-0.
@@ -86,7 +86,7 @@ SVar:TrigUnblockable:DB$ Effect | TgtPrompt$ Select up to one target attacking c
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, it perpetually gets +1/+1.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBPerpetual
-SVar:DBPerpetual:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | StaticAbilities$ PerpetualP1P1 | Name$ Alora, Cheerful Scout's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBPerpetual:DB$ Effect | Name$ Alora, Cheerful Scout's Perpetual Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ That creature perpetually gets +1/+1.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, it perpetually gets +1/+1.

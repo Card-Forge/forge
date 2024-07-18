@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Creature Angel Knight
 PT:4/3
 K:Flying
-K:Double Team
+K:Double team
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it."
 SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
 SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, flying counter, and lifelink counter on it.

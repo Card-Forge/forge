@@ -1,20 +1,366 @@
 [metadata]
 Code=BLB
-Date=2024-07-26
+Date=2024-08-02
 Name=Bloomburrow
 Type=Expansion
 ScryfallCode=BLB
 
 [cards]
+1 C Banishing Light @Zoltan Boros
+2 M Beza, the Bounding Spring @Martin Wittfooth
+3 C Brave-Kin Duo @Devin Platts
+4 U Brightblade Stoat @Lius Lasahido
+5 U Builder's Talent @Ovidio Cartagena
+7 C Carrot Cake @Forrest Imel
+9 R Dawn's Truce @Justin Gerard
+10 U Dewdrop Cure @Chris Rallis
+11 U Driftgloom Coyote @Betty Jiang
+13 U Feather of Flight @Borja Pindado
+14 U Flowerfoot Swordmaster @Aaron Miller
+15 U Harvestrite Host @Julie Dillon
+16 U Hop to It @Eelis Kyttanen
+18 R Jackdaw Savior @Alessandra Pisano
+20 C Lifecreed Duo @Lorenzo Mastroianni
+21 U Mabel's Mettle @Johan Grenier
+22 U Mouse Trapper @Jakub Kasper
+23 C Nettle Guard @Rob Rey
+24 U Parting Gust @Nils Hamm
+25 C Pileated Provisioner @Eelis Kyttanen
+26 C Rabbit Response @Rovina Cai
+27 U Repel Calamity @Ryan Pancoast
+28 R Salvation Swan @Christina Kraus
+29 M Season of the Burrow @Serena Malyon
+30 U Seasoned Warrenguard @Dave Kendall
+31 U Shrike Force @Néstor Ossandón Leal
+33 U Star Charter @Valera Lutfullina
+34 R Starfall Invocation @Rob Rey
+35 C Thistledown Players @John Thacker
+36 R Valley Questcaller @Steve Prescott
+37 C Warren Elder @Kaitlyn McCulley
+38 M Warren Warleader @Zack Stella
+39 C Wax-Wane Witness @Mila Pesic
+40 R Whiskervale Forerunner @Ryan Pancoast
+42 C Bellowing Crier @Jeff Miracola
+43 U Calamitous Tide @Samuele Bandini
+44 U Daring Waverider @Wisnu Tan
+47 R Dour Port-Mage @Ryan Pancoast
+48 U Eddymurk Crab @PINDURSKI
+49 M Eluge, the Shoreless Sea @Chase Stone
+50 C Finch Formation @Rhonda Libbey
+51 U Gossip's Talent @Andrea Sipl
+52 U Into the Flood Maw @Danny Schwartz
+53 R Kitnap @Irina Nordsol
+54 M Kitsa, Otterball Elite @Zoltan Boros
+55 U Knightfisher @Jakob Eirich
+56 C Lightshell Duo @Mariah Tekulve
+57 U Long River Lurker @Valera Lutfullina
+58 U Long River's Pull @Raph Lomotan
+59 C Mind Spiral @Filip Burburan
+60 U Mindwhisker @Alexander Mokhov
+61 R Mockingbird @Aurore Folny
+62 C Nightwhorl Hermit @Valera Lutfullina
+63 U Otterball Antics @Rhonda Libbey
+64 C Pearl of Wisdom @Julie Dillon
+65 U Plumecreed Escort @Manuel Castañón
+66 R Portent of Calamity @Sam Guay
+67 C Run Away Together @Omar Rayyan
+68 M Season of Weaving @Wylie Beckert
+70 U Shoreline Looter @PINDURSKI
+72 U Spellgyre @Alix Branwyn
+73 U Splash Lasher @Brian Valeza
+74 U Splash Portal @Caio Monteiro
+75 R Stormchaser's Talent @Christina Kraus
+76 U Sugar Coat @Gaboleps
+77 C Thought Shucker @Dave Kendall
+78 R Thundertrap Trainer @Matt Stewart
+79 R Valley Floodcaller @Victor Adame Minguez
+80 C Waterspout Warden @J.P. Targete
+81 R Wishing Well @Steven Belledin
+83 U Bandit's Talent @Volkan Baǵa
+85 U Bonecache Overseer @Mila Pesic
+87 U Consumed by Greed @Mathias Kollros
+88 R Cruelclaw's Heist @Brian Valeza
+90 R Darkstar Augur @Aurore Folny
+91 C Diresight @Alix Branwyn
+92 U Downwind Ambusher @Aaron Miller
+93 C Early Winter @Andrew Mar
+94 U Feed the Cycle @Donato Giancola
+95 U Fell @A. M. Sartor
+96 C Glidedive Duo @Manuel Castañón
+97 U Hazel's Nocturne @Dominik Mayer
+98 U Huskburster Swarm @John Tedrick
+99 R Iridescent Vinelasher @Aaron Miller
+100 M Maha, Its Feathers Night @Alessandra Pisano
+101 U Moonstone Harbinger @Kevin Sidharta
+102 C Nocturnal Hunger @Sam Guay
+103 R Osteomancer Adept @Daniel Zrom
+104 U Persistent Marshstalker @Greg Staples
+107 M Rottenmouth Viper @Andrea Piparo
+108 U Ruthless Negotiation @Rhonda Libbey
+110 C Scales of Shale @Yohann Schepacz
+111 R Scavenger's Talent @Chris Seaman
+112 M Season of Loss @Dominik Mayer
+113 U Sinister Monolith @Adam Paquette
+114 U Stargaze @Serena Malyon
+115 C Starlit Soothsayer @Kaitlyn McCulley
+116 U Starscape Cleric @Omar Rayyan
+117 C Thornplate Intimidator @Daren Bader
+118 U Thought-Stalker Warlock @Daniel Ljunggren
+119 R Valley Rotcaller @Valera Lutfullina
+120 R Wick, the Whorled Mind @Andrea Piparo
+121 U Wick's Patrol @Dmitry Burmak
+122 C Agate Assault @Slawomir Maniak
+123 C Alania's Pathmaker @Jason Kang
+124 R Artist's Talent @Lars Grant-West
+125 U Blacksmith's Talent @Vincent Christiaens
+126 U Blooming Blast @Jakob Eirich
+127 U Brambleguard Captain @Quintin Gleim
+128 U Brazen Collector @Aldo Domínguez
+129 R Byway Barterer @Ryan Pancoast
+130 C Conduct Electricity @Chris Seaman
+131 U Coruscation Mage @Gaboleps
+133 R Emberheart Challenger @Chris Rahn
+134 R Festival of Embers @Greg Staples
+136 C Frilled Sparkshooter @Danny Schwartz
+137 U Harnesser of Storms @Bram Sels
+138 U Heartfire Hero @Jakub Kasper
+139 R Hearthborn Battler @Zoltan Boros
+140 R Hired Claw @Quintin Gleim
+141 U Hoarder's Overflow @Andrea Radeck
+142 C Kindlespark Duo @Daren Bader
+143 R Manifold Mouse @Randy Vargas
+144 C Might of the Meek @Danny Schwartz
+145 U Playful Shove @Zoltan Boros
+146 U Quaketusk Boar @Andrew Mar
+149 U Reptilian Recruiter @Joshua Cairos
+152 M Season of the Bold @Eli Minaya
+153 C Steampath Charger @Ilse Gort
+154 M Stormsplitter @Lius Lasahido
+155 R Sunspine Lynx @Martin Wittfooth
+156 C Take Out the Trash @Fiona Hsieh
+157 U Teapot Slinger @Wisnu Tan
+159 U Valley Rally @Sidharth Chaturvedi
+160 C War Squeak @Zoltan Boros
+161 C Whiskerquill Scribe @Matt Stewart
+162 U Wildfire Howl @Manuel Castañón
+163 C Bakersbane Duo @Raluca Marinescu
+164 U Bark-Knuckle Boxer @Filip Burburan
+165 U Brambleguard Veteran @Jakob Eirich
+166 U Bushy Bodyguard @Andrea Piparo
+167 C Cache Grab @Loïc Canavaggia
+168 U Clifftop Lookout @John Thacker
+169 U Curious Forager @Mariah Tekulve
+170 C Druid of the Spade @Andrey Kuzinskiy
+171 R Fecund Greenshell @Kisung Koh
+172 R For the Common Good @Serena Malyon
+173 U Galewind Moose @Valera Lutfullina
+174 U Hazardroot Herbalist @Josiah "Jo" Cameron
+177 U Hivespine Wolverine @Lars Grant-West
+178 U Honored Dreyleader @Aurore Folny
+179 U Hunter's Talent @Kisung Koh
+180 R Innkeeper's Talent @Alix Branwyn
+181 R Keen-Eyed Curator @PINDURSKI
+182 C Longstalk Brawl @Serena Malyon
 183 M Lumra, Bellow of the Woods @Matt Stewart
+184 R Mistbreath Elder @Jason Kang
+185 U Overprotect @Pavel Kolomeyets
+186 U Pawpatch Formation @Julia Griffin
+187 R Pawpatch Recruit @Johan Grenier
+188 U Peerless Recycling @Jeff Miracola
+189 C Polliwallop @Martin Wittfooth
+190 C Rust-Shield Rampager @Ralph Horsley
+192 M Season of Gathering @A. M. Sartor
+193 C Stickytongue Sentinel @Lorenzo Mastroianni
+195 C Sunshower Druid @Tuan Duong Chu
+196 R Tender Wildguide @Jakob Eirich
+197 R Thornvault Forager @Mark Behm
+199 U Three Tree Scribe @Caio Monteiro
+200 C Treeguard Duo @Mila Pesic
+201 C Treetop Sentries @Iris Compiet
+202 R Valley Mightcaller @Matt Stewart
+203 U Wear Down @Iris Compiet
+204 R Alania, Divergent Storm @Joshua Raphael
+205 R Baylen, the Haymaker @Ryan Pancoast
+206 U Burrowguard Mentor @Dmitry Burmak
+207 R Camellia, the Seedmiser @Steve Prescott
+208 C Cindering Cutthroat @Wayne Reynolds
+209 R Clement, the Worrywort @Ekaterina Burmak
+210 C Corpseberry Cultivator @Izzy
+211 R Dreamdew Entrancer @Zoltan Boros
+212 R Finneas, Ace Archer @Victor Adame Minguez
+213 U Fireglass Mentor @Henry Peters
+214 R Gev, Scaled Scorch @Mark Zug
+215 M Glarb, Calamity's Augur @Bram Sels
+216 C Head of the Homestead @Omar Rayyan
+217 M Helga, Skittish Seer @Andrea Piparo
+218 M Hugs, Grisly Guardian @Steve Prescott
+219 M The Infamous Cruelclaw @Christina Kraus
+220 C Junkblade Bruiser @Omar Rayyan
+221 R Kastral, the Windcrested @Jesper Ejsing
+222 U Lilysplash Mentor @Aldo Domínguez
+223 R Lunar Convocation @Pavel Kolomeyets
 224 R Mabel, Heir to Cragflame @Aurore Folny
+225 C Mind Drill Assailant @Tuan Duong Chu
+226 C Moonrise Cleric @Simon Dominic
+227 R Muerra, Trash Tactician @Volkan Baǵa
+228 U Plumecreed Mentor @Henry Peters
+229 C Pond Prophet @Simon Dominic
+230 M Ral, Crackling Wit @Rudy Siswanto
+231 U Seedglaive Mentor @Vincent Christiaens
+232 C Seedpod Squire @Christina Kraus
+233 U Starseer Mentor @Taras Susak
+234 U Stormcatch Mentor @Manuel Castañón
+235 C Tempest Angler @Raluca Marinescu
+236 U Tidecaller Mentor @Irina Nordsol
+237 C Veteran Guardmouse @Campbell White
+238 U Vinereap Mentor @Valera Lutfullina
+239 R Vren, the Relentless @Kevin Sidharta
+240 U Wandertale Mentor @Jakub Kasper
+241 M Ygra, Eater of All @Chris Rahn
+242 R Zoraline, Cosmos Caller @Justin Gerard
+243 C Barkform Harvester @Zezhou Chen
+244 C Bumbleflower's Sharepot @J.P. Targete
+245 C Fountainport Bell @Néstor Ossandón Leal
+246 U Heirloom Epic @Fiona Hsieh
+247 U Patchwork Banner @Sarah Finnigan
+249 U Starforged Sword @Mark Poole
+251 C Three Tree Mascot @Gina Matarazzo
+252 R Fabled Passage @Adam Paquette
+253 R Fountainport @Leon Tukker
+254 C Hidden Grotto @Fiona Hsieh
+255 U Lilypad Village @Alexander Forssberg
+256 U Lupinflower Village @Alayna Danner
+257 U Mudflat Village @Samuele Bandini
+258 U Oakhollow Village @Julian Kok Joon Wen
+259 U Rockface Village @Thomas Stoop
+260 R Three Tree City @Grady Frederick
+261 C Uncharted Haven @Adam Paquette
+262 L Plains @Carlos Palma Cruchaga
+263 L Plains @Carlos Palma Cruchaga
+264 L Plains @Carlos Palma Cruchaga
+265 L Plains @Carlos Palma Cruchaga
+266 L Island @Rob Rey
+267 L Island @Rob Rey
+268 L Island @Rob Rey
+269 L Island @Rob Rey
+270 L Swamp @John Thacker
+271 L Swamp @John Thacker
+272 L Swamp @John Thacker
+273 L Swamp @John Thacker
 274 L Mountain @Andrew Theophilopoulos
 275 L Mountain @Andrew Theophilopoulos
 276 L Mountain @Andrew Theophilopoulos
 277 L Mountain @Andrew Theophilopoulos
+278 L Forest @David Robert Hovey
+279 L Forest @David Robert Hovey
+280 L Forest @David Robert Hovey
+281 L Forest @David Robert Hovey
+282 M Season of the Burrow @Edgar Sánchez Hidalgo
+283 M Season of Weaving @Andrea Sipl
+284 M Season of Loss @Anna Pavleeva
+285 M Season of the Bold @Yeong-Hao Han
+286 M Season of Gathering @Irina Nordsol
+287 M Beza, the Bounding Spring @Yeong-Hao Han
+288 M Eluge, the Shoreless Sea @Antonio José Manzanedo
+289 M Maha, Its Feathers Night @Jeff Carpenter
+290 M Rottenmouth Viper @Filip Burburan
+292 R Sunspine Lynx @Crystal Sully
 293 M Lumra, Bellow of the Woods @Allen Douglas
+294 M Ygra, Eater of All @Ilse Gort
+295 R Dawn's Truce @Mariah Tekulve
+296 R Jackdaw Savior @Serena Malyon
+297 R Salvation Swan @Serena Malyon
+298 R Starfall Invocation @Iain McCaig
+299 R Valley Questcaller @Cory Godbey
+300 M Warren Warleader @Iain McCaig
+301 R Whiskervale Forerunner @Chuck Grieb
+303 R Dour Port-Mage @Iain McCaig
+304 M Kitsa, Otterball Elite @David Petersen
+305 R Mockingbird @Mariah Tekulve
+306 R Portent of Calamity @Justine Mara Andersen
+307 R Thundertrap Trainer @Iain McCaig
+308 R Valley Floodcaller @Iris Compiet
+310 R Cruelclaw's Heist @Iris Compiet
+311 R Darkstar Augur @Ellie Livingston
+312 R Osteomancer Adept @Justine Mara Andersen
+313 R Valley Rotcaller @A. M. Sartor
+314 R Wick, the Whorled Mind @Audrey Benjaminsen
+315 R Emberheart Challenger @Cory Godbey
+316 R Festival of Embers @Cory Godbey
+317 R Hired Claw @Ellie Livingston
+318 R Manifold Mouse @Chuck Grieb
+319 M Stormsplitter @Serena Malyon
+321 R For the Common Good @Ellie Livingston
+322 R Keen-Eyed Curator @Mariah Tekulve
+323 R Mistbreath Elder @Ellie Livingston
+325 R Tender Wildguide @Ellie Livingston
+326 R Valley Mightcaller @Justine Mara Andersen
+327 R Alania, Divergent Storm @Cory Godbey
+328 R Camellia, the Seedmiser @David Petersen
+329 R Clement, the Worrywort @Cory Godbey
+330 R Finneas, Ace Archer @Cory Godbey
+331 M Glarb, Calamity's Augur @Chuck Grieb
+332 M Helga, Skittish Seer @David Petersen
+333 M Hugs, Grisly Guardian @Chuck Lukacs
+334 M The Infamous Cruelclaw @Iain McCaig
+335 R Kastral, the Windcrested @Chuck Grieb
 336 R Mabel, Heir to Cragflame @David Petersen
+337 R Three Tree City @Andrew Mar
+338 R Three Tree City @Andrew Mar
+339 R Three Tree City @Andrew Mar
+340 R Three Tree City @Andrew Mar
+341 M Ral, Crackling Wit @Scott M. Fischer
 342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+344 R Alania, Divergent Storm @Issei Murakami
+345 R Baylen, the Haymaker @Kemonomichi
+346 R Camellia, the Seedmiser @M I N A T O
+347 R Clement, the Worrywort @Issei Murakami
+348 R Finneas, Ace Archer @O-G Osahune
+349 R Gev, Scaled Scorch @Taro Yamazaki
+350 R Kastral, the Windcrested @Noki
 351 R Mabel, Heir to Cragflame @Airi Yoshihisa
+352 R Muerra, Trash Tactician @Taro Yamazaki
+353 M Ral, Crackling Wit @Atsushi Furusawa
+354 R Vren, the Relentless @MAMEZAWA
+355 R Zoraline, Cosmos Caller @Taro Yamazaki
+357 R Kitnap @Irina Nordsol
+358 R Wishing Well @Steven Belledin
+359 R Iridescent Vinelasher @Aaron Miller
+360 R Byway Barterer @Ryan Pancoast
+361 R Hearthborn Battler @Zoltan Boros
+362 R Fecund Greenshell @Kisung Koh
+363 R Pawpatch Recruit @Johan Grenier
+364 R Thornvault Forager @Mark Behm
+365 R Dreamdew Entrancer @Zoltan Boros
+366 R Lunar Convocation @Pavel Kolomeyets
+367 R Fabled Passage @Adam Paquette
+369 L Plains @Piotr Dura
+370 L Plains @Julian Kok Joon Wen
+371 L Island @Alexander Forssberg
+372 L Island @Lorenzo Lanfranconi
+373 L Swamp @Piotr Dura
+374 L Swamp @Thomas Stoop
+375 L Mountain @Samuele Bandini
+376 L Mountain @Adam Paquette
+377 L Forest @Alayna Danner
+378 L Forest @Donato Giancola
 379 M Bria, Riptide Rogue @Borja Pindado
 380 M Byrke, Long Ear of the Law @Manuel Castañón
+381 U Hop to It @Eelis Kyttanen
+382 U Shoreline Looter @PINDURSKI
+383 U Fell @A. M. Sartor
+384 U Wear Down @Iris Compiet
+385 U Stormcatch Mentor @Manuel Castañón
+386 R Thundertrap Trainer @Jesper Ejsing
+387 R Serra Redeemer @Joshua Raphael
+388 C Charmed Sleep @Titus Lunter
+389 R Mind Spring @Mark Zug
+390 C Thieving Otter @Jakub Kasper
+391 C Flame Lash @Viktor Titov
+392 R Colossification @Johan Grenier
+393 C Giant Growth @Dmitry Burmak
+394 C Rabid Bite @John Thacker
+395 R Sword of Vengeance @Dan Murayama Scott
+396 C Blossoming Sands @Sam Burley
+397 C Swiftwater Cliffs @Eytan Zana

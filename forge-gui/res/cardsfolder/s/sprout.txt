@@ -1,7 +1,7 @@
 Name:Sprout
 ManaCost:G
 Types:Instant
-A:SP$ Token | TokenAmount$ 1 | Cost$ G | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:SP$ Token | TokenScript$ g_1_1_saproling | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
 DeckHints:Type$Fungus
 DeckHas:Ability$Token
 Oracle:Create a 1/1 green Saproling creature token.

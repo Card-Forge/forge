@@ -1,6 +1,6 @@
 Name:Master's Call
 ManaCost:2 W
 Types:Instant
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 2 | TokenScript$ c_1_1_a_myr | TokenOwner$ You | SpellDescription$ Create two 1/1 colorless Myr artifact creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_myr | TokenOwner$ You | SpellDescription$ Create two 1/1 colorless Myr artifact creature tokens.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 colorless Myr artifact creature tokens.

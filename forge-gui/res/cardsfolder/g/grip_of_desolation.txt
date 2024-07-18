@@ -2,6 +2,6 @@ Name:Grip of Desolation
 ManaCost:4 B B
 Types:Instant
 K:Devoid
-A:SP$ ChangeZone | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZone | SpellDescription$ Exile target creature and target land.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChangeZone | SpellDescription$ Exile target creature and target land.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Land | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target land
 Oracle:Devoid (This card has no color.)\nExile target creature and target land.

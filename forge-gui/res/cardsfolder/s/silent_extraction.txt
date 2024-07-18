@@ -1,0 +1,8 @@
+Name:Silent Extraction
+ManaCost:G U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | UnlessCost$ 2 | SubAbility$ DBSeek | SpellDescription$ Choose target spell. Counter that spell unless its controller pays {2}.
+SVar:DBSeek:DB$ Seek | Type$ Card.cmcEQX | Condition$ Threshold | SpellDescription$ Threshold — If seven or more cards are in your graveyard, seek a creature card with the same mana value as the chosen spell.
+SVar:X:Targeted$CardManaCost
+DeckHints:Ability$Graveyard|Mill
+Oracle:Choose target spell. Counter that spell unless its controller pays {2}.\nThreshold — If seven or more cards are in your graveyard, seek a creature card with the same mana value as the chosen spell.

@@ -1,5 +1,5 @@
 Name:Peace and Quiet
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | Cost$ 1 W | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy two target enchantments.
+A:SP$ Destroy | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy two target enchantments.
 Oracle:Destroy two target enchantments.

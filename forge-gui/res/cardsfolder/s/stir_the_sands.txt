@@ -1,7 +1,7 @@
 Name:Stir the Sands
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Token | Cost$ 4 B B | TokenAmount$ 3 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create three 2/2 black Zombie creature tokens.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create three 2/2 black Zombie creature tokens.
 K:Cycling:3 B
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cycle CARDNAME, create a 2/2 black Zombie creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You

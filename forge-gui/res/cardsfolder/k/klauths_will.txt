@@ -1,7 +1,7 @@
 Name:Klauth's Will
 ManaCost:X R R G
 Types:Instant
-A:SP$ Charm | Cost$ X R R G | MinCharmNum$ 1 | CharmNum$ Y | Choices$ DBDamage,DBDestroy | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Y | Choices$ DBDamage,DBDestroy | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ Breathe Flame — CARDNAME deals X damage to each creature without flying.
 SVar:DBDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to X target artifacts and/or enchantments | SpellDescription$ Smash Relics — Destroy up to X target artifacts and/or enchantments.
 SVar:X:Count$xPaid

@@ -1,6 +1,6 @@
 Name:Temporal Fissure
 ManaCost:4 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent to its owner's hand.
 K:Storm
 Oracle:Return target permanent to its owner's hand.\nStorm (When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies.)

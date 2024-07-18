@@ -1,0 +1,6 @@
+Name:Out of Bounds
+ManaCost:3 U
+Types:Instant
+K:Assist
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+Oracle:Assist (Another player can pay up to {3} of this spell's cost.)\nCounter target spell.

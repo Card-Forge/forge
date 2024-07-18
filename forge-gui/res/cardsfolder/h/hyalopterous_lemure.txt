@@ -2,5 +2,5 @@ Name:Hyalopterous Lemure
 ManaCost:4 B
 Types:Creature Spirit
 PT:4/3
-A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ -1 | KW$ Flying | SpellDescription$ Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.
+A:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ -1 | KW$ Flying | SpellDescription$ CARDNAME gets -1/-0 and gains flying until end of turn.
 Oracle:{0}: Hyalopterous Lemure gets -1/-0 and gains flying until end of turn.

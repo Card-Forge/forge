@@ -1,6 +1,6 @@
 Name:Spire Barrage
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of Mountains you control.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SpellDescription$ CARDNAME deals damage to any target equal to the number of Mountains you control.
 SVar:X:Count$TypeYouCtrl.Mountain
 Oracle:Spire Barrage deals damage to any target equal to the number of Mountains you control.

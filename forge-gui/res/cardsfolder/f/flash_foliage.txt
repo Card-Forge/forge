@@ -1,7 +1,7 @@
 Name:Flash Foliage
 ManaCost:2 G
 Types:Instant
-A:SP$ Token | Cost$ 2 G | ValidTgts$ Creature.attackingYou | TgtPrompt$ Select target creature attacking you | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | TokenBlocking$ Targeted | ActivationPhases$ Declare Blockers->EndCombat | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Cast this spell only during combat after blockers are declared. Create a 1/1 green Saproling creature token that's blocking target creature attacking you. Draw a card.
+A:SP$ Token | ValidTgts$ Creature.attackingYou | TgtPrompt$ Select target creature attacking you | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | TokenBlocking$ Targeted | ActivationPhases$ Declare Blockers->EndCombat | SubAbility$ DBDraw | StackDescription$ SpellDescription | SpellDescription$ Cast this spell only during combat after blockers are declared. Create a 1/1 green Saproling creature token that's blocking target creature attacking you. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 DeckHas:Ability$Token
 Oracle:Cast this spell only during combat after blockers are declared.\nCreate a 1/1 green Saproling creature token that's blocking target creature attacking you.\nDraw a card.

@@ -1,7 +1,7 @@
 Name:Gaze of the Gorgon
 ManaCost:3 BG
 Types:Instant
-A:SP$ Regenerate | Cost$ 3 BG | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ TrigGorgonEffect | SpellDescription$ Regenerate target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ TrigGorgonEffect | SpellDescription$ Regenerate target creature. At this turn's next end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigGorgonEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ThisTurn$ True | RememberObjects$ Targeted | Execute$ TrigRem | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigRem:DB$ Pump | RememberObjects$ DelayTriggerRemembered | SubAbility$ TrigGorgonDestroy
 SVar:TrigGorgonDestroy:DB$ DestroyAll | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered | SubAbility$ DBCleanup

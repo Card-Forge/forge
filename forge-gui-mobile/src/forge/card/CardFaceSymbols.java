@@ -17,82 +17,27 @@
  */
 package forge.card;
 
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinImageInterface;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.error.BugReporter;
+import forge.localinstance.skin.FSkinProp;
 
 
 public class CardFaceSymbols {
     public static final float FONT_SIZE_FACTOR = 0.85f;
 
     public static void loadImages() {
-        for (int i = 0; i <= 20; i++) {
-            Forge.getAssets().manaImages().put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            Forge.getAssets().manaImages().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
         }
-        Forge.getAssets().manaImages().put("X", FSkinImage.MANA_X);
-        Forge.getAssets().manaImages().put("Y", FSkinImage.MANA_Y);
-        Forge.getAssets().manaImages().put("Z", FSkinImage.MANA_Z);
 
-        Forge.getAssets().manaImages().put("C", FSkinImage.MANA_COLORLESS);
-        Forge.getAssets().manaImages().put("B", FSkinImage.MANA_B);
-        Forge.getAssets().manaImages().put("BG", FSkinImage.MANA_HYBRID_BG);
-        Forge.getAssets().manaImages().put("BR", FSkinImage.MANA_HYBRID_BR);
-        Forge.getAssets().manaImages().put("G", FSkinImage.MANA_G);
-        Forge.getAssets().manaImages().put("GU", FSkinImage.MANA_HYBRID_GU);
-        Forge.getAssets().manaImages().put("GW", FSkinImage.MANA_HYBRID_GW);
-        Forge.getAssets().manaImages().put("R", FSkinImage.MANA_R);
-        Forge.getAssets().manaImages().put("RG", FSkinImage.MANA_HYBRID_RG);
-        Forge.getAssets().manaImages().put("RW", FSkinImage.MANA_HYBRID_RW);
-        Forge.getAssets().manaImages().put("U", FSkinImage.MANA_U);
-        Forge.getAssets().manaImages().put("UB", FSkinImage.MANA_HYBRID_UB);
-        Forge.getAssets().manaImages().put("UR", FSkinImage.MANA_HYBRID_UR);
-        Forge.getAssets().manaImages().put("W", FSkinImage.MANA_W);
-        Forge.getAssets().manaImages().put("WB", FSkinImage.MANA_HYBRID_WB);
-        Forge.getAssets().manaImages().put("WU", FSkinImage.MANA_HYBRID_WU);
-        Forge.getAssets().manaImages().put("P", FSkinImage.MANA_PHRYX);
-        Forge.getAssets().manaImages().put("PW", FSkinImage.MANA_PHRYX_W);
-        Forge.getAssets().manaImages().put("PR", FSkinImage.MANA_PHRYX_R);
-        Forge.getAssets().manaImages().put("PU", FSkinImage.MANA_PHRYX_U);
-        Forge.getAssets().manaImages().put("PB", FSkinImage.MANA_PHRYX_B);
-        Forge.getAssets().manaImages().put("PG", FSkinImage.MANA_PHRYX_G);
-        Forge.getAssets().manaImages().put("WP", FSkinImage.MANA_PHRYX_W);
-        Forge.getAssets().manaImages().put("RP", FSkinImage.MANA_PHRYX_R);
-        Forge.getAssets().manaImages().put("UP", FSkinImage.MANA_PHRYX_U);
-        Forge.getAssets().manaImages().put("BP", FSkinImage.MANA_PHRYX_B);
-        Forge.getAssets().manaImages().put("GP", FSkinImage.MANA_PHRYX_G);
-        Forge.getAssets().manaImages().put("PBG", FSkinImage.MANA_PHRYX_BG);
-        Forge.getAssets().manaImages().put("PBR", FSkinImage.MANA_PHRYX_BR);
-        Forge.getAssets().manaImages().put("PGU", FSkinImage.MANA_PHRYX_GU);
-        Forge.getAssets().manaImages().put("PGW", FSkinImage.MANA_PHRYX_GW);
-        Forge.getAssets().manaImages().put("PRG", FSkinImage.MANA_PHRYX_RG);
-        Forge.getAssets().manaImages().put("PRW", FSkinImage.MANA_PHRYX_RW);
-        Forge.getAssets().manaImages().put("PUB", FSkinImage.MANA_PHRYX_UB);
-        Forge.getAssets().manaImages().put("PUR", FSkinImage.MANA_PHRYX_UR);
-        Forge.getAssets().manaImages().put("PWB", FSkinImage.MANA_PHRYX_WB);
-        Forge.getAssets().manaImages().put("PWU", FSkinImage.MANA_PHRYX_WU);
-        Forge.getAssets().manaImages().put("BGP", FSkinImage.MANA_PHRYX_BG);
-        Forge.getAssets().manaImages().put("BRP", FSkinImage.MANA_PHRYX_BR);
-        Forge.getAssets().manaImages().put("GUP", FSkinImage.MANA_PHRYX_GU);
-        Forge.getAssets().manaImages().put("GWP", FSkinImage.MANA_PHRYX_GW);
-        Forge.getAssets().manaImages().put("RGP", FSkinImage.MANA_PHRYX_RG);
-        Forge.getAssets().manaImages().put("RWP", FSkinImage.MANA_PHRYX_RW);
-        Forge.getAssets().manaImages().put("UBP", FSkinImage.MANA_PHRYX_UB);
-        Forge.getAssets().manaImages().put("URP", FSkinImage.MANA_PHRYX_UR);
-        Forge.getAssets().manaImages().put("WBP", FSkinImage.MANA_PHRYX_WB);
-        Forge.getAssets().manaImages().put("WUP", FSkinImage.MANA_PHRYX_WU);
-        Forge.getAssets().manaImages().put("2W", FSkinImage.MANA_2W);
-        Forge.getAssets().manaImages().put("2U", FSkinImage.MANA_2U);
-        Forge.getAssets().manaImages().put("2R", FSkinImage.MANA_2R);
-        Forge.getAssets().manaImages().put("2G", FSkinImage.MANA_2G);
-        Forge.getAssets().manaImages().put("2B", FSkinImage.MANA_2B);
-
-        Forge.getAssets().manaImages().put("S", FSkinImage.MANA_SNOW);
-        Forge.getAssets().manaImages().put("T", FSkinImage.TAP);
         Forge.getAssets().manaImages().put("E", FSkinImage.ENERGY);
         Forge.getAssets().manaImages().put("TK", FSkinImage.TICKET);
         Forge.getAssets().manaImages().put("slash", FSkinImage.SLASH);
@@ -130,10 +75,12 @@ public class CardFaceSymbols {
 
         Forge.getAssets().manaImages().put("commander", FSkinImage.IMG_ABILITY_COMMANDER);
         Forge.getAssets().manaImages().put("ringbearer", FSkinImage.IMG_ABILITY_RINGBEARER);
+        Forge.getAssets().manaImages().put("annihilator", FSkinImage.IMG_ABILITY_ANNIHILATOR);
         Forge.getAssets().manaImages().put("toxic", FSkinImage.IMG_ABILITY_TOXIC);
         Forge.getAssets().manaImages().put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
         Forge.getAssets().manaImages().put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
         Forge.getAssets().manaImages().put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
+        Forge.getAssets().manaImages().put("exalted", FSkinImage.IMG_ABILITY_EXALTED);
         Forge.getAssets().manaImages().put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
         Forge.getAssets().manaImages().put("fear", FSkinImage.IMG_ABILITY_FEAR);
         Forge.getAssets().manaImages().put("flash", FSkinImage.IMG_ABILITY_FLASH);
@@ -150,6 +97,8 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("shadow", FSkinImage.IMG_ABILITY_SHADOW);
         Forge.getAssets().manaImages().put("shroud", FSkinImage.IMG_ABILITY_SHROUD);
         Forge.getAssets().manaImages().put("trample", FSkinImage.IMG_ABILITY_TRAMPLE);
+        Forge.getAssets().manaImages().put("ward", FSkinImage.IMG_ABILITY_WARD);
+        Forge.getAssets().manaImages().put("wither", FSkinImage.IMG_ABILITY_WITHER);
         Forge.getAssets().manaImages().put("vigilance", FSkinImage.IMG_ABILITY_VIGILANCE);
         //hexproof from
         Forge.getAssets().manaImages().put("hexproofR", FSkinImage.IMG_ABILITY_HEXPROOF_R);
@@ -243,7 +192,7 @@ public class CardFaceSymbols {
         StringTokenizer tok = new StringTokenizer(s, " ");
         while (tok.hasMoreTokens()) {
             String symbol = tok.nextToken();
-            FSkinImage image = Forge.getAssets().manaImages().get(symbol);
+            FSkinImageInterface image = Forge.getAssets().manaImages().get(symbol);
             if (image == null) {
                 BugReporter.reportBug("Symbol not recognized \"" + symbol + "\" in string: " + s);
                 continue;

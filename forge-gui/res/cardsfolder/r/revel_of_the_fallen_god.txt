@@ -1,5 +1,5 @@
 Name:Revel of the Fallen God
 ManaCost:3 R R G G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 R R G G | TokenAmount$ 4 | TokenScript$ rg_2_2_satyr_haste | TokenOwner$ You | SpellDescription$ Create four 2/2 red and green Satyr creature tokens with haste.
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ rg_2_2_satyr_haste | TokenOwner$ You | SpellDescription$ Create four 2/2 red and green Satyr creature tokens with haste.
 Oracle:Create four 2/2 red and green Satyr creature tokens with haste.

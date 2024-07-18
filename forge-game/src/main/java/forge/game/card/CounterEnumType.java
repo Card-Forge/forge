@@ -79,7 +79,7 @@ public enum CounterEnumType {
 
     CHORUS("CHRUS", 0, 192, 246),
 
-    COIN("COIN",255,215,0),
+    COIN("COIN", 255, 215, 0),
 
     COLLECTION("CLLCT", 255, 215, 0),
 
@@ -145,6 +145,8 @@ public enum CounterEnumType {
 
     EYESTALK("EYES", 184, 202, 201),
 
+    EVERYTHING("EVRY", 255, 255, 255),
+
     FADE("FADE", 159, 209, 192),
 
     FATE("FATE", 255, 164, 226),
@@ -163,7 +165,7 @@ public enum CounterEnumType {
 
     FLOOD("FLOOD", 0, 203, 255),
 
-    FORESHADOW("FRSHD",144,99, 207),
+    FORESHADOW("FRSHD", 144, 99, 207),
 
     FUNGUS("FNGUS", 121, 219, 151),
 
@@ -241,6 +243,8 @@ public enum CounterEnumType {
 
     LEVEL("LEVEL", 60, 222, 185),
 
+    LOOT("LOOT", 255, 215, 0),
+
     LORE("LORE", 209, 198, 161),
 
     LUCK("LUCK", 185, 174, 255),
@@ -267,6 +271,8 @@ public enum CounterEnumType {
 
     MATRIX("MATRX", 183, 174, 255),
 
+    MEMORY("MEMRY", 174, 183, 255),
+
     MINE("MINE", 255, 100, 127),
 
     MINING("MINNG", 184, 201, 207),
@@ -280,6 +286,8 @@ public enum CounterEnumType {
     NECRODERMIS("NECRO", 80, 209, 250),
 
     NET("NET", 0, 221, 251),
+
+    NEST("NEST", 80, 80, 50),
 
     OIL("OIL", 99, 102, 106),
 
@@ -334,6 +342,10 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+
+    REV("REV", 255, 108, 111),
+    
+    REVIVAL("REVIVL", 130, 230, 50),
     
     RIBBON("RIBBON", 233, 245, 232),
 
@@ -384,6 +396,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    SUPPLY("SPPLY", 70, 105, 60),
 
     TAKEOVER("TKVR", 63, 49, 191),
 
@@ -445,6 +459,7 @@ public enum CounterEnumType {
     FIRSTSTRIKE("First Strike"),
     DOUBLESTRIKE("Double Strike"),
     DEATHTOUCH("Deathtouch"),
+    HASTE("Haste"),
     HEXPROOF("Hexproof"),
     INDESTRUCTIBLE("Indestructible"),
     LIFELINK("Lifelink"),
@@ -453,6 +468,7 @@ public enum CounterEnumType {
     TRAMPLE("Trample"),
     VIGILANCE("Vigilance")
     SHADOW("Shadow")
+    EXALTED("Exalted")
 //*/
     ;
 

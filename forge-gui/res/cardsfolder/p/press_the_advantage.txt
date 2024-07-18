@@ -1,5 +1,5 @@
 Name:Press the Advantage
 ManaCost:2 G G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G G | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to two target creatures each get +2/+2 and gain trample until end of turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | KW$ Trample | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Up to two target creatures each get +2/+2 and gain trample until end of turn.
 Oracle:Up to two target creatures each get +2/+2 and gain trample until end of turn.

@@ -1,6 +1,6 @@
 Name:Coax from the Blind Eternities
 ManaCost:2 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 U | Origin$ Sideboard,Exile | Destination$ Hand | ChangeType$ Card.Eldrazi+YouOwn | ChangeNum$ 1 | Hidden$ True | Reveal$ True | StackDescription$ {p:You} may reveal an Eldrazi card they own from outside the game or in exile and put it into their hand. | SpellDescription$ You may reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card you own in exile. Put that card into your hand.
+A:SP$ ChangeZone | Origin$ Sideboard,Exile | Destination$ Hand | ChangeType$ Card.Eldrazi+YouOwn | ChangeNum$ 1 | Hidden$ True | Reveal$ True | StackDescription$ {p:You} may reveal an Eldrazi card they own from outside the game or in exile and put it into their hand. | SpellDescription$ You may reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card you own in exile. Put that card into your hand.
 AI:RemoveDeck:Random
 Oracle:You may reveal an Eldrazi card you own from outside the game or choose a face-up Eldrazi card you own in exile. Put that card into your hand.

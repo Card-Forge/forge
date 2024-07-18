@@ -1,7 +1,7 @@
 Name:Barrel Down Sokenzan
 ManaCost:2 R
 Types:Instant Arcane
-A:SP$ ChangeZone | Cost$ 2 R | Origin$ Battlefield | Destination$ Hand | ChangeType$ Mountain.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBDamage | SpellDescription$ Sweep — Return any number of Mountains you control to their owner's hand. CARDNAME deals damage to target creature equal to twice the number of Mountains returned this way.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Mountain.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ DBDamage | SpellDescription$ Sweep — Return any number of Mountains you control to their owner's hand. CARDNAME deals damage to target creature equal to twice the number of Mountains returned this way.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ Y
 SVar:X:Count$Valid Mountain.YouCtrl
 SVar:Y:Remembered$Amount/Twice

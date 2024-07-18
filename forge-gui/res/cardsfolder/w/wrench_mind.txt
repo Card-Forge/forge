@@ -1,5 +1,5 @@
 Name:Wrench Mind
 ManaCost:B B
 Types:Sorcery
-A:SP$ Discard | Cost$ B B | ValidTgts$ Player | NumCards$ 2 | UnlessType$ Artifact | Mode$ TgtChoose | SpellDescription$ Target player discards two cards unless they discard an artifact card.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | UnlessType$ Artifact | Mode$ TgtChoose | SpellDescription$ Target player discards two cards unless they discard an artifact card.
 Oracle:Target player discards two cards unless they discard an artifact card.

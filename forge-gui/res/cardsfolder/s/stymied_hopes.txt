@@ -1,6 +1,6 @@
 Name:Stymied Hopes
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBScry | SpellDescription$ Counter target spell unless its controller pays {1}. Scry 1.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBScry | SpellDescription$ Counter target spell unless its controller pays {1}. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Counter target spell unless its controller pays {1}. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

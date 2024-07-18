@@ -2,7 +2,7 @@ Name:Darkpact
 ManaCost:B B B
 Types:Sorcery
 K:Remove CARDNAME from your deck before playing if you're not playing for ante.
-A:SP$ GainOwnership | Cost$ B B B | ValidTgts$ Card | TgtZone$ Ante | SubAbility$ ExchangeAnte | SpellDescription$ You own target card in the ante. Exchange that card with the top card of your library. | StackDescription$ You own target card ({c:Targeted}) in the ante. Exchange that card with the top card of your library.
+A:SP$ GainOwnership | ValidTgts$ Card | TgtZone$ Ante | SubAbility$ ExchangeAnte | SpellDescription$ You own target card in the ante. Exchange that card with the top card of your library. | StackDescription$ You own target card ({c:Targeted}) in the ante. Exchange that card with the top card of your library.
 SVar:ExchangeAnte:DB$ ExchangeZone | Zone1$ Ante | Zone2$ Library | Object$ ParentTarget | ValidExchange$ Card.TopLibrary | Mandatory$ True | StackDescription$
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

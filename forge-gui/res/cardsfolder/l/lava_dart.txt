@@ -2,5 +2,5 @@ Name:Lava Dart
 ManaCost:R
 Types:Instant
 K:Flashback:Sac<1/Mountain>
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:Lava Dart deals 1 damage to any target.\nFlashback—Sacrifice a Mountain. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

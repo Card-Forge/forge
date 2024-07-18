@@ -1,6 +1,6 @@
 Name:Mitotic Manipulation
 ManaCost:1 U U
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 U U | DigNum$ 7 | ChangeValid$ Permanent.sharesNameWith Battlefield | ChangeNum$ 1 | Optional$ True | DestinationZone$ Battlefield | SpellDescription$ Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 7 | ChangeValid$ Permanent.sharesNameWith Battlefield | ChangeNum$ 1 | Optional$ True | DestinationZone$ Battlefield | SpellDescription$ Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.
 AI:RemoveDeck:All
 Oracle:Look at the top seven cards of your library. You may put one of those cards onto the battlefield if it has the same name as a permanent. Put the rest on the bottom of your library in any order.

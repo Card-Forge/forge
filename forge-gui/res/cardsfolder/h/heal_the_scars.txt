@@ -1,7 +1,7 @@
 Name:Heal the Scars
 ManaCost:3 G
 Types:Instant
-A:SP$ Regenerate | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Regenerate target creature. You gain life equal to that creature's toughness.
+A:SP$ Regenerate | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ Regenerate target creature. You gain life equal to that creature's toughness.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardToughness
 Oracle:Regenerate target creature. You gain life equal to that creature's toughness.

@@ -1,5 +1,5 @@
 Name:Skyshroud Claim
 ManaCost:3 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | SpellDescription$ Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.
 Oracle:Search your library for up to two Forest cards, put them onto the battlefield, then shuffle.

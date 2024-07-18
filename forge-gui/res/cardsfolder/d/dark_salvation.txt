@@ -1,7 +1,7 @@
 Name:Dark Salvation
 ManaCost:X X B
 Types:Sorcery
-A:SP$ Token | Cost$ X X B | ValidTgts$ Player | TgtPrompt$ Select target player. | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ TargetedPlayer | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Target player creates X 2/2 black Zombie creature tokens, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
+A:SP$ Token | ValidTgts$ Player | TgtPrompt$ Select target player. | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ TargetedPlayer | SubAbility$ DBPump | StackDescription$ SpellDescription | SpellDescription$ Target player creates X 2/2 black Zombie creature tokens, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
 SVar:DBPump:DB$ Pump | NumAtt$ -Y | NumDef$ -Y | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature. | IsCurse$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Zombie.TargetedPlayerCtrl

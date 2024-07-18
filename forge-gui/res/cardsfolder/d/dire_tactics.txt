@@ -1,7 +1,7 @@
 Name:Dire Tactics
 ManaCost:W B
 Types:Instant
-A:SP$ ChangeZone | Cost$ W B | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ Exile target creature. If you don't control a Human, you lose life equal to that creature's toughness.
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ Exile target creature. If you don't control a Human, you lose life equal to that creature's toughness.
 SVar:DBLoseLife:DB$ LoseLife | ConditionPresent$ Human.YouCtrl | ConditionCompare$ EQ0 | Defined$ You | LifeAmount$ X | StackDescription$ None
 SVar:X:Targeted$CardToughness
 Oracle:Exile target creature. If you don't control a Human, you lose life equal to that creature's toughness.

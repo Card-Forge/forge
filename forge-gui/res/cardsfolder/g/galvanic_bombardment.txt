@@ -1,7 +1,7 @@
 Name:Galvanic Bombardment
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard.
 SVar:X:Count$ValidGraveyard Card.YouOwn+namedGalvanic Bombardment/Plus.2
 DeckHints:Name$Galvanic Bombardment
 Oracle:Galvanic Bombardment deals X damage to target creature, where X is 2 plus the number of cards named Galvanic Bombardment in your graveyard.

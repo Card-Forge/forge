@@ -2,5 +2,5 @@ Name:Defy Gravity
 ManaCost:U
 Types:Instant
 K:Flashback:U
-A:SP$ Pump | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
 Oracle:Target creature gains flying until end of turn.\nFlashback {U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

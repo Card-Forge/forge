@@ -1,7 +1,7 @@
 Name:Aethersnatch
 ManaCost:4 U U
 Types:Instant
-A:SP$ ControlSpell | Cost$ 4 U U | ValidTgts$ Card | TargetType$ Spell | Mode$ Gain | SubAbility$ DBChooseTargets | SpellDescription$ Gain control of target spell. You may choose new targets for it. (If that spell becomes a permanent, it enters the battlefield under your control.)
+A:SP$ ControlSpell | ValidTgts$ Card | TargetType$ Spell | Mode$ Gain | SubAbility$ DBChooseTargets | SpellDescription$ Gain control of target spell. You may choose new targets for it. (If that spell becomes a permanent, it enters the battlefield under your control.)
 SVar:DBChooseTargets:DB$ ChangeTargets | Defined$ Targeted | Optional$ True
 AI:RemoveDeck:All
 Oracle:Gain control of target spell. You may choose new targets for it. (If that spell becomes a permanent, it enters the battlefield under your control.)

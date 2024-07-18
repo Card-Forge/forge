@@ -1,7 +1,7 @@
 Name:Diplomacy of the Wastes
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SubAbility$ DBLoseLife | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. If you control a Warrior, that player loses 2 life.
+A:SP$ Discard | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SubAbility$ DBLoseLife | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. If you control a Warrior, that player loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ 2 | ConditionPresent$ Warrior.YouCtrl
 DeckHints:Type$Warrior
 Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card. If you control a Warrior, that player loses 2 life.

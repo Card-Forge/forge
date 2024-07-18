@@ -1,0 +1,11 @@
+Name:Eriette, the Beguiler
+ManaCost:1 W U B
+Types:Legendary Creature Human Warlock
+PT:4/4
+K:Lifelink
+T:Mode$ Attached | ValidSource$ Aura.YouCtrl | TargetRelativeToSource$ Permanent.nonLand+OppCtrl+cmcLEX | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever an Aura you control becomes attached to a nonland permanent an opponent controls with mana value less than or equal to that Aura's mana value, gain control of that permanent for as long as that Aura is attached to it.
+SVar:TrigGainControl:DB$ GainControl | NewController$ You | Defined$ TriggeredTarget | Duration$ UntilSourceUnattached
+SVar:X:Count$CardManaCost
+DeckHas:Ability$LifeGain
+DeckNeeds:Type$Aura
+Oracle:Lifelink\nWhenever an Aura you control becomes attached to a nonland permanent an opponent controls with mana value less than or equal to that Aura's mana value, gain control of that permanent for as long as that Aura is attached to it.

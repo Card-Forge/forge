@@ -2,6 +2,6 @@ Name:Juzám Djinn
 ManaCost:2 B B
 Types:Creature Djinn
 PT:5/5
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, Juzám Djinn deals 1 damage to you.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 Oracle:At the beginning of your upkeep, Juzám Djinn deals 1 damage to you.

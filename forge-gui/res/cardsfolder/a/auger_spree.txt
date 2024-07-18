@@ -1,5 +1,5 @@
 Name:Auger Spree
 ManaCost:1 B R
 Types:Instant
-A:SP$ Pump | Cost$ 1 B R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets +4/-4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets +4/-4 until end of turn.
 Oracle:Target creature gets +4/-4 until end of turn.

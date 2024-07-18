@@ -2,5 +2,5 @@ Name:Magic Missile
 ManaCost:1 R R
 Types:Sorcery
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
 Oracle:This spell can't be countered.\nMagic Missile deals 3 damage divided as you choose among one, two, or three targets.

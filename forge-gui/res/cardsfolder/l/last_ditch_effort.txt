@@ -1,7 +1,7 @@
 Name:Last-Ditch Effort
 ManaCost:R
 Types:Instant
-A:SP$ Sacrifice | Cost$ R | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDamage | SpellDescription$ Sacrifice any number of creatures. CARDNAME deals that much damage to any target.
+A:SP$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBDamage | SpellDescription$ Sacrifice any number of creatures. CARDNAME deals that much damage to any target.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ DmgX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:SacX:Count$Valid Creature.YouCtrl

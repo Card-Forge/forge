@@ -1,5 +1,5 @@
 Name:Upheaval
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all permanents to their owners' hands.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all permanents to their owners' hands.
 Oracle:Return all permanents to their owners' hands.

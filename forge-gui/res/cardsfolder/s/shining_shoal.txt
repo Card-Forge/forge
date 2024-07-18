@@ -1,8 +1,8 @@
 Name:Shining Shoal
 ManaCost:X W W
 Types:Instant Arcane
-SVar:AltCost:Cost$ ExileFromHand<1/Card.White+Other+cmcEQX/white card> | Announce$ X | Description$ You may exile a white card with mana value X from your hand rather than pay this spell's mana cost.
-A:SP$ ChooseSource | Cost$ X W W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBStoreSVar | StackDescription$ SpellDescription | SpellDescription$ The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ ExileFromHand<1/Card.White+Other+cmcEQX/white card> | Announce$ X | Description$ You may exile a white card with mana value X from your hand rather than pay this spell's mana cost.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBStoreSVar | StackDescription$ SpellDescription | SpellDescription$ The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ ShieldAmount | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to redirect damage to | ReplacementEffects$ ReDamage | RememberObjects$ Targeted | SubAbility$ DBCleanup
 SVar:ReDamage:Event$ DamageDone | ActiveZones$ Command | ValidTarget$ You,Creature.YouCtrl | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SplitDamage | DamageTarget$ Remembered | Description$ The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to any target instead.

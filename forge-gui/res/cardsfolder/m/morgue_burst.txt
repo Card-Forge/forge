@@ -1,7 +1,7 @@
 Name:Morgue Burst
 ManaCost:4 B R
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B R | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBDmg | SpellDescription$ Return target creature card from your graveyard to your hand. CARDNAME deals damage to any target equal to the power of the card returned this way.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | RememberChanged$ True | SubAbility$ DBDmg | SpellDescription$ Return target creature card from your graveyard to your hand. CARDNAME deals damage to any target equal to the power of the card returned this way.
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Choose any target | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower

@@ -1,7 +1,7 @@
 Name:Snow Day
 ManaCost:4 U U
 Types:Instant
-A:SP$ Tap | Cost$ 4 U U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SubAbility$ TrigPump | StackDescription$ SpellDescription | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | ValidTgts$ Creature | SubAbility$ TrigPump | StackDescription$ SpellDescription | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.
 SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ Draw | StackDescription$ None
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ Discard
 SVar:Discard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose

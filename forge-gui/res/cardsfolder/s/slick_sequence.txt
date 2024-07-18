@@ -1,0 +1,7 @@
+Name:Slick Sequence
+ManaCost:U R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ TrigDraw | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:TrigDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | StackDescription$ SpellDescription | SpellDescription$ If you've cast another spell this turn, draw a card.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:Slick Sequence deals 2 damage to any target. If you've cast another spell this turn, draw a card.

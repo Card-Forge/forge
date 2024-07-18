@@ -1,0 +1,10 @@
+Name:Memory Vessel
+ManaCost:3 R R
+Types:Artifact
+A:AB$ Dig | Cost$ T Exile<1/CARDNAME> | Defined$ Player | DigNum$ 7 | ChangeNum$ All | DestinationZone$ Exile | SorcerySpeed$ True | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Each player exiles the top seven cards of their library. Until your next turn, players may play cards they exiled from their library this way, and they can't play cards from their hand. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay,NoLand,NoCast | RememberObjects$ Remembered | Duration$ UntilYourNextTurn | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ CardOwner | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, each player may play the card they exiled this way.
+SVar:NoLand:Mode$ CantPlayLand | Player$ Player | Origin$ Hand | Description$ Players can't play lands from their hand.
+SVar:NoCast:Mode$ CantBeCast | ValidCard$ Card.nonLand | Caster$ Player | Origin$ Hand | Description$ Players can't cast spells from their hand.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}, Exile Memory Vessel: Each player exiles the top seven cards of their library. Until your next turn, players may play cards they exiled from their library this way, and they can't play cards from their hand. Activate only as a sorcery.

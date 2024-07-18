@@ -1,7 +1,7 @@
 Name:Arterial Flow
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B B | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards two cards. If you control a Vampire, each opponent loses 2 life and you gain 2 life.
+A:SP$ Discard | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBLoseLife | SpellDescription$ Each opponent discards two cards. If you control a Vampire, each opponent loses 2 life and you gain 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | ConditionPresent$ Vampire.YouCtrl | ConditionCompare$ GE1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | ConditionPresent$ Vampire.YouCtrl | ConditionCompare$ GE1 | LifeAmount$ 2
 DeckHints:Type$Vampire

@@ -996,10 +996,7 @@ public class FCardImageRenderer {
                     }
                     pieces.add(new TextPiece(subtext.substring(parsed, sbMatcher.start()), isReminder));
                 }
-                String symbol = sbMatcher.group(1) != null ? sbMatcher.group(1) :
-                    // switch position of "P" and mana color for phyrexian mana symbol.
-                    "P".equals(sbMatcher.group(3)) ? sbMatcher.group(3) + sbMatcher.group(2) :
-                    sbMatcher.group(2) + sbMatcher.group(3);
+                String symbol = sbMatcher.group(1) != null ? sbMatcher.group(1) : sbMatcher.group(2) + sbMatcher.group(3);
                 symbols.add(symbol);
                 parsed = sbMatcher.end();
             }

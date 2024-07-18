@@ -1,7 +1,7 @@
 Name:Containment Breach
 ManaCost:2 G
 Types:Sorcery Lesson
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ TrigToken | SpellDescription$ Destroy target artifact or enchantment. If its mana value is 2 or less, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ TrigToken | SpellDescription$ Destroy target artifact or enchantment. If its mana value is 2 or less, create a 1/1 black and green Pest creature token with "When this creature dies, you gain 1 life."
 SVar:TrigToken:DB$ Token | TokenScript$ bg_1_1_pest_lifegain | ConditionCheckSVar$ X | ConditionSVarCompare$ LE2
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Token|LifeGain

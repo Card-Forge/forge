@@ -1,5 +1,5 @@
 Name:Hold the Line
 ManaCost:1 W W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W W | ValidCards$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Blocking creatures get +7/+7 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.blocking | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Blocking creatures get +7/+7 until end of turn.
 Oracle:Blocking creatures get +7/+7 until end of turn.

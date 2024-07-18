@@ -2,6 +2,6 @@ Name:Wicked Reward
 ManaCost:1 B
 Types:Instant
 A:SP$ Pump | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ +4 | NumDef$ +2 | SpellDescription$ Target creature gets +4/+2 until end of turn.
-SVar:AIPreference:SacCost$Creature.namedBrood of Cockroaches,Creature.token
+SVar:AIPreference:SacCost$Creature.token
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nTarget creature gets +4/+2 until end of turn.

@@ -942,7 +942,7 @@ public class CardImageRenderer {
     }
 
     public static Color[] drawCardBackgroundTexture(CardStateView state, Graphics g, List<DetailColors> backColors, float x, float y, float w, float h) {
-        boolean isHybrid = state.getManaCost().hasHybrid();
+        boolean isHybrid = state.getManaCost().hasMultiColor();
         boolean isPW = state.isPlaneswalker();
         boolean isNyx = state.isNyx();
         Color[] colors = new Color[backColors.size()];

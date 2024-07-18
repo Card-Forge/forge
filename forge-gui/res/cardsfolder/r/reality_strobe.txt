@@ -2,6 +2,6 @@ Name:Reality Strobe
 ManaCost:4 U U
 Types:Sorcery
 K:Suspend:3:2 U
-A:SP$ ChangeZone | Cost$ 4 U U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChange | SpellDescription$ Return target permanent to its owner's hand. Exile CARDNAME with three time counters on it.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChange | SpellDescription$ Return target permanent to its owner's hand. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3
 Oracle:Return target permanent to its owner's hand. Exile Reality Strobe with three time counters on it.\nSuspend 3—{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

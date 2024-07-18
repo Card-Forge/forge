@@ -1,6 +1,6 @@
 Name:Alarum
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature.notattacking | TgtPrompt$ Select target nonattacking creature | NumAtt$ 1 | NumDef$ 3 | SubAbility$ DBUntap | SpellDescription$ Untap target nonattacking creature. It gets +1/+3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.notattacking | TgtPrompt$ Select target nonattacking creature | NumAtt$ 1 | NumDef$ 3 | SubAbility$ DBUntap | SpellDescription$ Untap target nonattacking creature. It gets +1/+3 until end of turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 Oracle:Untap target nonattacking creature. It gets +1/+3 until end of turn.

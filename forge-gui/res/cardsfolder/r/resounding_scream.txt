@@ -2,7 +2,7 @@ Name:Resounding Scream
 ManaCost:2 B
 Types:Sorcery
 K:Cycling:5 U B R
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random.
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When you cycle CARDNAME, target player discards two cards at random.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 2 | Mode$ Random
 AI:RemoveDeck:All

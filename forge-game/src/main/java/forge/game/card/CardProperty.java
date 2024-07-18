@@ -9,7 +9,10 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.game.*;
+import forge.game.CardTraitBase;
+import forge.game.EvenOdd;
+import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
@@ -305,7 +308,7 @@ public class CardProperty {
                 return false;
             }
             SpellAbility sp = (SpellAbility)spellAbility;
-            if (!sp.isTargeting(card)) {
+            if (!sp.getRootAbility().isTargeting(card)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
@@ -581,21 +584,20 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
-            if (property.substring(10).equals("Targeted")) {
-                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
-                    if (!card.hasCardAttachment(c)) {
-                        return false;
-                    }
-                }
-            } else if (property.substring(10).equals("Enchanted")) {
+            String prop = property.substring(10);
+            if (prop.equals("Enchanted")) {
                 if (source.getEnchantingCard() == null ||
                         !card.hasCardAttachment(source.getEnchantingCard())) {
                     return false;
                 }
-            } else {
-                if (!card.hasCardAttachment(source)) {
-                    return false;
+            } else if (!StringUtils.isBlank(prop)) {
+                for (final Card c : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
+                    if (!card.hasCardAttachment(c)) {
+                        return false;
+                    }
                 }
+            } else if (!card.hasCardAttachment(source)) {
+                return false;
             }
         } else if (property.startsWith("FortifiedBy")) {
             if (!card.hasCardAttachment(source)) {
@@ -607,9 +609,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeTargetedBy")) {
             final String def = property.substring(15);
-            final SpellAbility targetingSA = AbilityUtils.getDefinedSpellAbilities(source, def, spellAbility).get(0);
-            if (!targetingSA.canTarget(card)) {
-                return false;
+            SpellAbility targetingSA = AbilityUtils.getDefinedSpellAbilities(source, def, spellAbility).get(0);
+            while (targetingSA != null) {
+                if (targetingSA.usesTargeting() && !targetingSA.canTarget(card)) {
+                    return false;
+                }
+                targetingSA = targetingSA.getSubAbility();
             }
         } else if (property.startsWith("HauntedBy")) {
             if (!card.isHauntedBy(source)) {
@@ -1092,6 +1097,10 @@ public class CardProperty {
             }
         } else if (property.equals("hasABasicLandType")) {
             if (!card.hasABasicLandType()) {
+                return false;
+            }
+        } else if (property.equals("hasANonBasicLandType")) {
+            if (!card.hasANonBasicLandType()) {
                 return false;
             }
         } else if (property.startsWith("hasKeyword")) {
@@ -1807,6 +1816,13 @@ public class CardProperty {
         } else if (property.equals("couldAttackButNotAttacking")) {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) return false;
             return CombatUtil.couldAttackButNotAttacking(combat, card);
+        } else if (property.equals("linkedCastSA")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
@@ -1820,10 +1836,6 @@ public class CardProperty {
                 String s = property.split("kicked ")[1];
                 if ("1".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
                 if ("2".equals(s) && !card.isOptionalCostPaid(OptionalCost.Kicker2)) return false;
-            }
-        } else if (property.startsWith("pseudokicked")) {
-            if (property.equals("pseudokicked")) {
-                if (!card.isOptionalCostPaid(OptionalCost.Generic)) return false;
             }
         } else if (property.equals("bargained")) {
             if (card.getCastSA() == null) {
@@ -1861,9 +1873,6 @@ public class CardProperty {
             if (card.getCastSA() == null) {
                 return false;
             }
-            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
-                return false;
-            }
             return card.getCastSA().isEscape();
         } else if (property.equals("evoked")) {
             if (card.getCastSA() == null) {
@@ -1873,6 +1882,14 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isEvoke();
+        } else if (property.equals("impended")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isImpending();
         } else if (property.equals("prowled")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1937,6 +1954,10 @@ public class CardProperty {
             }
         } else if (property.equals("SaddledThisTurn")) {
             if (!hasTimestampMatch(card, source.getSaddledByThisTurn())) return false;
+        } else if (property.equals("VisitedThisTurn")) {
+            if (!card.wasVisitedThisTurn()) {
+                return false;
+            }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
                 return false;
@@ -2091,6 +2112,53 @@ public class CardProperty {
                 }
             }
             return false;
+        } else if (property.equals("NotedColor")) {
+            // Should Regicide be hardcoded here or part of the property?
+            String colors = sourceController.getDraftNotes().get("Regicide");
+            if (colors == null) {
+                return false;
+            }
+            return (colors.contains("white") && card.getColor().hasWhite()) ||
+                    (colors.contains("blue") && card.getColor().hasBlue()) ||
+                    (colors.contains("black") && card.getColor().hasBlack()) ||
+                    (colors.contains("red") && card.getColor().hasRed()) ||
+                    (colors.contains("green") && card.getColor().hasGreen());
+        } else if (property.equals("NotedNameNobleBanneret")) {
+            String names = sourceController.getDraftNotes().get("Noble Banneret");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedNameAetherSearcher")) {
+            String names = sourceController.getDraftNotes().get("Aether Searcher");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedNameSmugglerCaptain")) {
+            String names = sourceController.getDraftNotes().get("Smuggler Captain");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedGuessPhantasm")) {
+            String names = sourceController.getDraftNotes().get("Spire Phantasm");
+            return names != null && !names.isEmpty();
+        } else if (property.equals("NotedTypes")) {
+            // Should Paliano Vanguard be hardcoded here or part of the property?
+            String types = sourceController.getDraftNotes().get("Paliano Vanguard");
+            if (types == null || types.isEmpty()) {
+                return false;
+            }
+            List<String> typeList = Lists.newArrayList(types.split(","));
+
+            return Iterables.any(card.getType().getCreatureTypes(), typeList::contains);
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
@@ -2192,13 +2260,16 @@ public class CardProperty {
     }
 
     private static boolean hasTimestampMatch (final Card card, final CardCollection coll) {
+        if (coll == null) {
+            return false;
+        }
         boolean match = false;
-            for (Card c : coll) {
-                if (c.equalsWithGameTimestamp(card)) {
-                    match = true;
-                    break;
-                }
+        for (Card c : coll) {
+            if (c.equalsWithGameTimestamp(card)) {
+                match = true;
+                break;
             }
+        }
         return match;
     }
 }

@@ -2,6 +2,6 @@ Name:Everdream
 ManaCost:1 U
 Types:Instant
 K:Splice:Instant,Sorcery:2 U
-A:SP$ Draw | Cost$ 1 U | NumCards$ 1 | SpellDescription$ Draw a card.
+A:SP$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:Random
 Oracle:Draw a card.\nSplice onto instant or sorcery {2}{U} (As you cast an instant or sorcery spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

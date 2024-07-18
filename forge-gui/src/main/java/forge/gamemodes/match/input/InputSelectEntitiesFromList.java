@@ -5,11 +5,13 @@ import java.util.Collection;
 import java.util.List;
 
 import forge.game.GameEntity;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CardView;
 import forge.game.cost.CostExile;
 import forge.game.cost.CostTapType;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
@@ -31,15 +33,15 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     protected Iterable<PlayerZoneUpdate> zonesShown; // want to hide these zones when input done
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0) {
-        this(controller, min, max, validChoices0, null, 0);
+        this(controller, min, max, validChoices0, null, "", 0);
     }
 
     public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0) {
-        this(controller, min, max, validChoices0, sa0, 0);
+        this(controller, min, max, validChoices0, sa0, "", 0);
     }
 
-    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0, final int tally0) {
-        super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()), sa0, tally0);
+    public InputSelectEntitiesFromList(final PlayerControllerHuman controller, final int min, final int max, final FCollectionView<T> validChoices0, final SpellAbility sa0, final String tallyType0, final int tally0) {
+        super(controller, Math.min(min, validChoices0.size()), Math.min(max, validChoices0.size()), sa0, tallyType0, tally0);
         validChoices = validChoices0;
         if (min > validChoices.size()) { // pfps does this really do anything useful??
             System.out.println(String.format("Trying to choose at least %d things from a list with only %d things!", min, validChoices.size()));
@@ -130,13 +132,27 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 ? String.format(message, selected.size())
                         : String.format(message, max - selected.size()));
 
-        if (sa != null && sa.hasParam("Crew") && sa.getPayCosts().hasSpecificCostType(CostTapType.class)) {
-            msg.append("\nCrewing: ").
-            append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true)).
-            append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().getCostPartByType(CostTapType.class).getType(), "Creature.Other+withTotalPowerGE", ""));
-        } else if (sa != null && sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
-            msg.append("\n").append(Localizer.getInstance().getMessage("lblCMC")).append(": ");
-            msg.append(CardLists.getTotalCMC((FCollection<Card>)getSelected())).append(" / ").append(tally);
+        if (sa != null) {
+            if (sa.getPayCosts().hasSpecificCostType(CostTapType.class) &&
+                (sa.isCrew() || sa.isKeyword(Keyword.SADDLE))) {
+                msg.append((sa.isCrew())  ? "\nCrewing: " : "\nSaddling: ");
+                msg.append(CardLists.getTotalPower((FCollection<Card>)getSelected(), true, true));
+                msg.append(" / ").append(TextUtil.fastReplace(sa.getPayCosts().
+                    getCostPartByType(CostTapType.class).getType(), 
+                    "Creature.Other+withTotalPowerGE", ""));
+    
+            }
+            else if (sa.getPayCosts().hasSpecificCostType(CostExile.class) && tally > 0) {
+                msg.append("\n");
+                if (tallyType.equals("CMC")) {
+                    msg.append(Localizer.getInstance().getMessage("lblCMC")).append(": ");
+                    msg.append(CardLists.getTotalCMC((FCollection<Card>)getSelected())).append(" / ").append(tally);
+                } else if (tallyType.equals("Types")) {
+                    msg.append(Localizer.getInstance().getMessage("lblTypes")).append(": ");
+                    msg.append(AbilityUtils.countCardTypesFromList((FCollection<Card>)getSelected(), false));
+                    msg.append(" / ").append(tally);
+                }
+            }
         }
 
         return msg.toString();

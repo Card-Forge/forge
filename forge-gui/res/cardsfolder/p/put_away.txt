@@ -1,6 +1,6 @@
 Name:Put Away
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. You may shuffle up to one target card from your graveyard into your library.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBChangeZone | SpellDescription$ Counter target spell. You may shuffle up to one target card from your graveyard into your library.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouCtrl | TgtPrompt$ Select target card from your graveyard | TargetMin$ 0 | TargetMax$ 1 | Shuffle$ True
 Oracle:Counter target spell. You may shuffle up to one target card from your graveyard into your library.

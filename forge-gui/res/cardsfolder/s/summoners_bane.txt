@@ -1,6 +1,6 @@
 Name:Summoner's Bane
 ManaCost:2 U U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U U | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Counter target creature spell. Create a 2/2 blue Illusion creature token.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature spell | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Counter target creature spell. Create a 2/2 blue Illusion creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_2_2_illusion | TokenOwner$ You
 Oracle:Counter target creature spell. Create a 2/2 blue Illusion creature token.

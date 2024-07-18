@@ -1,7 +1,7 @@
 Name:Rush of Ice
 ManaCost:U
 Types:Sorcery
-A:SP$ Tap | Cost$ U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 K:Awaken:3:4 U
 Oracle:Tap target creature. It doesn't untap during its controller's next untap step.\nAwaken 3—{4}{U} (If you cast this spell for {4}{U}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

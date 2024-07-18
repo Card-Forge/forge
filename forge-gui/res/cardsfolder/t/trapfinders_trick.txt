@@ -1,6 +1,6 @@
 Name:Trapfinder's Trick
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 U | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.Trap | SpellDescription$ Target player reveals their hand and discards all Trap cards.
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.Trap | SpellDescription$ Target player reveals their hand and discards all Trap cards.
 AI:RemoveDeck:Random
 Oracle:Target player reveals their hand and discards all Trap cards.

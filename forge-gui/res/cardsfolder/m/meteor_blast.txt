@@ -1,6 +1,6 @@
 Name:Meteor Blast
 ManaCost:X R R R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ X R R R | ValidTgts$ Any | TgtPrompt$ Select X targets | TargetMin$ X | TargetMax$ X | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to each of X targets.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select X targets | TargetMin$ X | TargetMax$ X | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to each of X targets.
 SVar:X:Count$xPaid
 Oracle:Meteor Blast deals 4 damage to each of X targets.

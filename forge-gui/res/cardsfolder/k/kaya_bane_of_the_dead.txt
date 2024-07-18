@@ -1,5 +1,5 @@
 Name:Kaya, Bane of the Dead
-ManaCost:3 W/B W/B W/B
+ManaCost:3 WB WB WB
 Types:Legendary Planeswalker Kaya
 Loyalty:7
 S:Mode$ IgnoreHexproof | Activator$ You | ValidEntity$ Permanent.OppCtrl,Opponent | Description$ Your opponents and permanents your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.

@@ -1,7 +1,7 @@
 Name:You See a Guard Approach
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ DistractTheGuard,Hide
+A:SP$ Charm | Choices$ DistractTheGuard,Hide
 SVar:DistractTheGuard:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Distract the Guard — Tap target creature.
 SVar:Hide:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SpellDescription$ Hide — Target creature you control gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
 Oracle:Choose one —\n• Distract the Guard — Tap target creature.\n• Hide — Target creature you control gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)

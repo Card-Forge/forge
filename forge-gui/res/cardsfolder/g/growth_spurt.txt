@@ -1,6 +1,6 @@
 Name:Growth Spurt
 ManaCost:1 G
 Types:Instant
-A:SP$ RollDice | Cost$ 1 G | ResultSVar$ X | AILogic$ Combat | SubAbility$ DBPump
+A:SP$ RollDice | ResultSVar$ X | AILogic$ Combat | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ X | NumDef$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the result.
 Oracle:Roll a six-sided die. Target creature gets +X/+X until end of turn, where X is the result.

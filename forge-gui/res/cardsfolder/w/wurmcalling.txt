@@ -2,6 +2,6 @@ Name:Wurmcalling
 ManaCost:X G
 Types:Sorcery
 K:Buyback:2 G
-A:SP$ Token | Cost$ X G | TokenAmount$ 1 | TokenScript$ g_x_x_wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Wurm creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_wurm | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Wurm creature token.
 SVar:X:Count$xPaid
 Oracle:Buyback {2}{G} (You may pay an additional {2}{G} as you cast this spell. If you do, put this card into your hand as it resolves.)\nCreate an X/X green Wurm creature token.

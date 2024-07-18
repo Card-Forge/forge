@@ -1,7 +1,7 @@
 Name:Sudden Storm
 ManaCost:3 U
 Types:Instant
-A:SP$ Tap | Cost$ 3 U | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap steps. Scry 1.
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ TrigPump | SpellDescription$ Tap up to two target creatures. Those creatures don't untap during their controller's next untap steps. Scry 1.
 SVar:TrigPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Tap up to two target creatures. Those creatures don't untap during their controllers' next untap steps. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

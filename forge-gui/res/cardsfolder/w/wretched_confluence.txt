@@ -1,7 +1,7 @@
 Name:Wretched Confluence
 ManaCost:3 B B
 Types:Instant
-A:SP$ Charm | Cost$ 3 B B | Choices$ DBDraw,DBPump,DBChangeZone | CharmNum$ 3 | CanRepeatModes$ True
+A:SP$ Charm | Choices$ DBDraw,DBPump,DBChangeZone | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBDraw:DB$ Draw | ValidTgts$ Player | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ Target player draws a card and loses 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Targeted
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.

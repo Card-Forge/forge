@@ -1,6 +1,6 @@
 Name:Crush Underfoot
 ManaCost:1 R
-Types:Tribal Instant Giant
+Types:Kindred Instant Giant
 A:SP$ ChooseCard | Cost$ 1 R | Defined$ You | Mandatory$ True | Choices$ Creature.Giant+YouCtrl | ChoiceTitle$ Choose a Giant creature you control | SubAbility$ DBDmg | SpellDescription$ Choose a Giant creature you control. It deals damage equal to its power to target creature.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ X | DamageSource$ ChosenCard | ValidTgts$ Creature
 SVar:X:Count$Valid Card.ChosenCard$CardPower

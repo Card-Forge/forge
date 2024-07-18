@@ -1,7 +1,7 @@
 Name:Inspired Ultimatum
 ManaCost:U U R R R W W
 Types:Sorcery
-A:SP$ GainLife | Cost$ U U R R R W W | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDamage | SpellDescription$ Target player gains 5 life, CARDNAME deals 5 damage to any target, then you draw five cards.
+A:SP$ GainLife | LifeAmount$ 5 | ValidTgts$ Player | TgtPrompt$ Choose a player | SubAbility$ DBDamage | SpellDescription$ Target player gains 5 life, CARDNAME deals 5 damage to any target, then you draw five cards.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 5
 Oracle:Target player gains 5 life, Inspired Ultimatum deals 5 damage to any target, then you draw five cards.

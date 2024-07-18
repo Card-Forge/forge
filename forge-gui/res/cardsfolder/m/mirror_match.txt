@@ -1,7 +1,7 @@
 Name:Mirror Match
 ManaCost:4 U U
 Types:Instant
-A:SP$ RepeatEach | Cost$ 4 U U | RepeatCards$ Creature.attackingYouOrYourPW | UseImprinted$ True | RepeatSubAbility$ DBCloneAndBlock | SubAbility$ DelTrig | ActivationPhases$ Declare Blockers | ChangeZoneTable$ True | SpellDescription$ Cast this spell only during the declare blockers step. For each creature attacking you or a planeswalker you control, create a token that's a copy of that creature and that's blocking that creature. Exile those tokens at end of combat.
+A:SP$ RepeatEach | RepeatCards$ Creature.attackingYouOrYourPW | UseImprinted$ True | RepeatSubAbility$ DBCloneAndBlock | SubAbility$ DelTrig | ActivationPhases$ Declare Blockers | ChangeZoneTable$ True | SpellDescription$ Cast this spell only during the declare blockers step. For each creature attacking you or a planeswalker you control, create a token that's a copy of that creature and that's blocking that creature. Exile those tokens at end of combat.
 SVar:DBCloneAndBlock:DB$ CopyPermanent | Defined$ Imprinted | TokenBlocking$ Imprinted | RememberTokens$ True
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigExile | RememberObjects$ Remembered | TriggerDescription$ At end of combat, exile those tokens. | SubAbility$ DBCleanup
 SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile

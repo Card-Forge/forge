@@ -2,7 +2,7 @@ Name:Endling
 ManaCost:2 B B
 Types:Creature Zombie Shapeshifter
 PT:3/3
-A:AB$ Pump | Cost$ B | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains gains menace until end of turn.
+A:AB$ Pump | Cost$ B | KW$ Menace | Defined$ Self | SpellDescription$ CARDNAME gains menace until end of turn.
 A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 A:AB$ Pump | Cost$ B | Defined$ Self | KW$ Undying | SpellDescription$ CARDNAME gains undying until end of turn.
 A:AB$ Pump | Cost$ 1 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.

@@ -1,5 +1,5 @@
 Name:Brilliant Plan
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 Oracle:Draw three cards.

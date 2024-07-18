@@ -1,5 +1,5 @@
 Name:Intervene
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a creature.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | TargetValidTargeting$ Creature.inRealZoneBattlefield | SpellDescription$ Counter target spell that targets a creature.
 Oracle:Counter target spell that targets a creature.

@@ -1,5 +1,5 @@
 Name:Shattered Dreams
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Artifact | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose an artifact card from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Artifact | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose an artifact card from it. That player discards that card.
 Oracle:Target opponent reveals their hand. You choose an artifact card from it. That player discards that card.

@@ -1,7 +1,7 @@
 Name:Seasons Past
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 G G | ChangeType$ Card.YouOwn | Hidden$ True | Origin$ Graveyard | Destination$ Hand | DifferentCMC$ True | ChangeNum$ X | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Return any number of cards with different mana values from your graveyard to your hand. Put CARDNAME on the bottom of its owner's library.
+A:SP$ ChangeZone | ChangeType$ Card.YouOwn | Hidden$ True | Origin$ Graveyard | Destination$ Hand | DifferentCMC$ True | ChangeNum$ X | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Return any number of cards with different mana values from your graveyard to your hand. Put CARDNAME on the bottom of its owner's library.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Parent | Origin$ Stack | Destination$ Library | LibraryPosition$ -1
 SVar:X:Count$ValidGraveyard Card.YouOwn
 AI:RemoveDeck:Random

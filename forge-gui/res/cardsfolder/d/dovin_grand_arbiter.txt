@@ -2,7 +2,7 @@ Name:Dovin, Grand Arbiter
 ManaCost:1 W U
 Types:Legendary Planeswalker Dovin
 Loyalty:3
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Name$ Dovin, Grand Arbiter Effect | Triggers$ TrigDamage | RememberObjects$ Self | SpellDescription$ Until end of turn, whenever a creature you control deals combat damage to a player, put a loyalty counter on CARDNAME.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Triggers$ TrigDamage | RememberObjects$ Self | SpellDescription$ Until end of turn, whenever a creature you control deals combat damage to a player, put a loyalty counter on CARDNAME.
 SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Until end of turn, whenever a creature you control deals combat damage to a player, put a loyalty counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ LOYALTY | CounterNum$ 1
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | SubAbility$ DBGainLife | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.

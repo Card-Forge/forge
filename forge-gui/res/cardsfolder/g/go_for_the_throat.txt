@@ -1,5 +1,5 @@
 Name:Go for the Throat
 ManaCost:1 B
 Types:Instant
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | SpellDescription$ Destroy target nonartifact creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonArtifact | TgtPrompt$ Select target nonartifact creature | SpellDescription$ Destroy target nonartifact creature.
 Oracle:Destroy target nonartifact creature.

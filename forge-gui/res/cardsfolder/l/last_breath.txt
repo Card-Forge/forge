@@ -1,6 +1,6 @@
 Name:Last Breath
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 2 or less. Its controller gains 4 life. | SubAbility$ DBGainLife
+A:SP$ ChangeZone | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with power 2 or less. Its controller gains 4 life. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ 4
 Oracle:Exile target creature with power 2 or less. Its controller gains 4 life.

@@ -1,0 +1,12 @@
+Name:Shepherd of the Clouds
+ManaCost:4 W
+Types:Creature Pegasus
+PT:4/3
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent card with mana value 3 or less from your graveyard to your hand. Return that card to the battlefield instead if you control a Mount.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.YouCtrl+cmcLE3 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | TgtPrompt$ Select target permanent card with mana value 3 in your graveyard | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$Valid Permanent.Mount+YouCtrl
+DeckHints:Type$Mount
+Oracle:Flying, vigilance\nWhen Shepherd of the Clouds enters the battlefield, return target permanent card with mana value 3 or less from your graveyard to your hand. Return that card to the battlefield instead if you control a Mount.

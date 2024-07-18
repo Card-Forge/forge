@@ -1,0 +1,7 @@
+Name:Treasure Dredger
+ManaCost:1 B
+Types:Creature Human Rogue
+PT:2/2
+A:AB$ Token | Cost$ 1 T PayLife<1> | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Token & Type$Artifact|Treasure
+Oracle:{1}, {T}, Pay 1 life: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

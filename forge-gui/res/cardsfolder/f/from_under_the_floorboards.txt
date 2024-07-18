@@ -2,7 +2,7 @@ Name:From Under the Floorboards
 ManaCost:3 B B
 Types:Sorcery
 K:Madness:X B B
-A:SP$ Token | Cost$ 3 B B | TokenAmount$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBGainLife | SpellDescription$ Create three tapped 2/2 black Zombie creature tokens and you gain 3 life. If CARDNAME's madness cost was paid, instead create X of those tokens and you gain X life.
+A:SP$ Token | TokenAmount$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBGainLife | SpellDescription$ Create three tapped 2/2 black Zombie creature tokens and you gain 3 life. If CARDNAME's madness cost was paid, instead create X of those tokens and you gain X life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y
 SVar:X:Count$xPaid
 SVar:Y:Count$Madness.X.3

@@ -1,7 +1,7 @@
 Name:Malevolent Whispers
 ManaCost:3 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | SubAbility$ DBPump | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gets +2/+0 and gains haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ 2 | KW$ Haste
 K:Madness:3 R
 DeckHints:Ability$Discard

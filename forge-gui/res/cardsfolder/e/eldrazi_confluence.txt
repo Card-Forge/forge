@@ -1,0 +1,11 @@
+Name:Eldrazi Confluence
+ManaCost:2 C C
+Types:Instant
+A:SP$ Charm | Choices$ DBSpatialContortion,DBEldraziDisplacer,DBEldraziScion | CharmNum$ 3 | CanRepeatModes$ True
+SVar:DBSpatialContortion:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets +3/-3 until end of turn.
+SVar:DBEldraziDisplacer:DB$ ChangeZone | TargetMin$ 1 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | RememberChanged$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | SpellDescription$ Exile target nonland permanent, then return it to the battlefield tapped under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Tapped$ True | SubAbility$ DBCleanup | Destination$ Battlefield
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBEldraziScion:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
+DeckHas:Ability$Token
+Oracle:Choose three. You may choose the same mode more than once.\n• Target creature gets +3/-3 until end of turn.\n• Exile target nonland permanent, then return it to the battlefield tapped under its owner's control.\n• Create a 1/1 colorless Eldrazi Scion creature token with "Sacrifice this creature: Add {C}."

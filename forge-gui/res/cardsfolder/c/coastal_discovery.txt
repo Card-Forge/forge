@@ -1,6 +1,6 @@
 Name:Coastal Discovery
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | NumCards$ 2 | SpellDescription$ Draw two cards.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 K:Awaken:4:5 U
 Oracle:Draw two cards.\nAwaken 4—{5}{U} (If you cast this spell for {5}{U}, also put four +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

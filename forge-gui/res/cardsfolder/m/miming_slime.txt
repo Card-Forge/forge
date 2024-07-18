@@ -1,7 +1,7 @@
 Name:Miming Slime
 ManaCost:2 G
 Types:Sorcery
-A:SP$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token, where X is the greatest power among creatures you control.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X green Ooze creature token, where X is the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 SVar:NeedsToPlay:Creature.YouCtrl
 DeckHas:Ability$Token & Type$Ooze

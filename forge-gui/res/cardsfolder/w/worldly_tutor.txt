@@ -1,5 +1,5 @@
 Name:Worldly Tutor
 ManaCost:G
 Types:Instant
-A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, then shuffle and put the card on top.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Creature | ChangeNum$ 1 | SpellDescription$ Search your library for a creature card, reveal it, then shuffle and put the card on top.
 Oracle:Search your library for a creature card, reveal it, then shuffle and put the card on top.

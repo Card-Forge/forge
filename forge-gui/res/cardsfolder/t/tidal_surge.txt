@@ -1,5 +1,5 @@
 Name:Tidal Surge
 ManaCost:1 U
 Types:Sorcery
-A:SP$ Tap | Cost$ 1 U | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature without flying | ValidTgts$ Creature.withoutFlying | SpellDescription$ Tap up to three target creatures without flying.
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Choose target creature without flying | ValidTgts$ Creature.withoutFlying | SpellDescription$ Tap up to three target creatures without flying.
 Oracle:Tap up to three target creatures without flying.

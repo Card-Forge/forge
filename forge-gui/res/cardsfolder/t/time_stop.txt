@@ -1,6 +1,6 @@
 Name:Time Stop
 ManaCost:4 U U
 Types:Instant
-A:SP$ EndTurn | Cost$ 4 U U | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+A:SP$ EndTurn | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
 AI:RemoveDeck:All
 Oracle:End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

@@ -1,7 +1,7 @@
 Name:Shamanic Revelation
 ManaCost:3 G G
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 G G | NumCards$ X | SubAbility$ DBGainLife | SpellDescription$ Draw a card for each each creature you control. Ferocious — You gain 4 life for each creature you control with power 4 or greater.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBGainLife | SpellDescription$ Draw a card for each creature you control. Ferocious — You gain 4 life for each creature you control with power 4 or greater.
 SVar:X:Count$TypeYouCtrl.Creature
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y
 SVar:Y:Count$Valid Creature.YouCtrl+powerGE4/Times.4

@@ -1,7 +1,7 @@
 Name:Dusk
 ManaCost:2 W W
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.powerGE3 | SpellDescription$ Destroy all creatures with power 3 or greater.
+A:SP$ DestroyAll | ValidCards$ Creature.powerGE3 | SpellDescription$ Destroy all creatures with power 3 or greater.
 SVar:NeedsToPlayVar:Y GTZ
 SVar:Y:Count$Valid Creature.OppCtrl+powerGE3
 SVar:Z:Count$Valid Creature.YouCtrl+powerGE3
@@ -14,7 +14,7 @@ Name:Dawn
 ManaCost:3 W W
 Types:Sorcery
 K:Aftermath
-A:SP$ ChangeZoneAll | Cost$ 3 W W | ChangeType$ Creature.powerLE2+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all creature cards with power 2 or less from your graveyard to your hand.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.powerLE2+YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all creature cards with power 2 or less from your graveyard to your hand.
 SVar:SplitNeedsToPlayVar:ZZ GE1
 SVar:ZZ:Count$ValidGraveyard Creature.YouCtrl+powerLE2
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nReturn all creature cards with power 2 or less from your graveyard to your hand.

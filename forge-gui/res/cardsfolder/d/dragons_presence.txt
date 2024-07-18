@@ -1,5 +1,5 @@
 Name:Dragon's Presence
 ManaCost:2 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
 Oracle:Dragon's Presence deals 5 damage to target attacking or blocking creature.

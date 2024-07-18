@@ -1,7 +1,7 @@
 Name:Oust
 ManaCost:W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ W | Origin$ Battlefield | Destination$ Library | ValidTgts$ Creature | LibraryPosition$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put target creature into its owner's library second from the top. Its controller gains 3 life.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Creature | LibraryPosition$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put target creature into its owner's library second from the top. Its controller gains 3 life.
 # Library Position is zero indexed. So 1 is second from the top
 SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ 3
 Oracle:Put target creature into its owner's library second from the top. Its controller gains 3 life.

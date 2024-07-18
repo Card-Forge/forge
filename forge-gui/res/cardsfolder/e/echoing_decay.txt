@@ -1,7 +1,7 @@
 Name:Echoing Decay
 ManaCost:1 B
 Types:Instant
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | SubAbility$ DBPumpAll | SpellDescription$ Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Targeted.sameName+Other | NumAtt$ -2 | NumDef$ -2
 AI:RemoveDeck:All
 Oracle:Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.

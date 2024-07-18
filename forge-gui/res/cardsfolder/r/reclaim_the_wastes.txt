@@ -2,6 +2,6 @@ Name:Reclaim the Wastes
 ManaCost:G
 Types:Sorcery
 K:Kicker:3
-A:SP$ ChangeZone | Cost$ G | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ X | SpellDescription$ Search your library for a basic land card, reveal that card, put it into your hand, then shuffle. If this spell was kicked, search your library for two basic land cards instead of one.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ X | SpellDescription$ Search your library for a basic land card, reveal that card, put it into your hand, then shuffle. If this spell was kicked, search your library for two basic land cards instead of one.
 SVar:X:Count$Kicked.2.1
 Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nSearch your library for a basic land card, reveal it, put it into your hand, then shuffle. If this spell was kicked, search your library for two basic land cards instead of one.

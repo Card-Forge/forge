@@ -1,6 +1,6 @@
 Name:Rest for the Weary
 ManaCost:1 W
 Types:Instant
-A:SP$ GainLife | Cost$ 1 W | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player gains 4 life. Landfall — If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
+A:SP$ GainLife | LifeAmount$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Target player gains 4 life. Landfall — If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.
 SVar:X:Count$Landfall.8.4
 Oracle:Target player gains 4 life.\nLandfall — If you had a land enter the battlefield under your control this turn, that player gains 8 life instead.

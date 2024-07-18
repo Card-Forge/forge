@@ -1,5 +1,5 @@
 Name:Vitalizing Wind
 ManaCost:8 G
 Types:Instant
-A:SP$ PumpAll | Cost$ 8 G | ValidCards$ Creature.YouCtrl | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Creatures you control get +7/+7 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +7 | NumDef$ +7 | SpellDescription$ Creatures you control get +7/+7 until end of turn.
 Oracle:Creatures you control get +7/+7 until end of turn.

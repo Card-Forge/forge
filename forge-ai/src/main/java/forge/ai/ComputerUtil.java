@@ -19,16 +19,13 @@ package forge.ai;
 
 import java.util.*;
 
+import com.google.common.collect.*;
 import forge.game.card.*;
 import forge.game.cost.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
@@ -87,7 +84,6 @@ public class ComputerUtil {
         return handlePlayingSpellAbility(ai, sa, game, null);
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
-        game.getStack().freezeStack(sa);
         final Card source = sa.getHostCard();
         source.setSplitStateToPlayAbility(sa);
 
@@ -129,6 +125,7 @@ public class ComputerUtil {
 
         // Remember the now-forgotten kicker cost? Why is this needed?
         sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
+        game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
         if (cost == null) {
@@ -308,8 +305,8 @@ public class ComputerUtil {
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
 
         // do this after card got added to stack
-        if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+        if (!newSA.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
             return false;
         }
         
@@ -373,7 +370,8 @@ public class ComputerUtil {
                                 if (c.isCreature()) {
                                     if (ComputerUtilCard.isUselessCreature(ai, c) || ComputerUtilCard.evaluateCreature(c) <= threshold) {
                                         continue;
-                                    } else if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                                    }
+                                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
                                         continue;
                                     }
                                     toRemove.add(c);
@@ -617,9 +615,26 @@ public class ComputerUtil {
         return -1;
     }
 
-    public static CardCollection chooseSacrificeType(final Player ai, final String type, final SpellAbility ability, final Card target, final boolean effect, final int amount, final CardCollectionView exclude) {
+    public static CardCollection chooseSacrificeType(final Player ai, String type, final SpellAbility ability, final Card target, final boolean effect, final int amount, final CardCollectionView exclude) {
         final Card source = ability.getHostCard();
+        boolean differentNames = false;
+        if (type.contains("+WithDifferentNames")) {
+            differentNames = true;
+            type = type.replace("+WithDifferentNames", "");
+        }
+
         CardCollection typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, ability);
+        if (differentNames) {
+            final Set<Card> uniqueNameCards = Sets.newHashSet();
+            for (final Card card : typeList) {
+                // CR 201.2b Those objects have different names only if each of them has at least one name and no two objects in that group have a name in common
+                if (!card.hasNoName()) {
+                    uniqueNameCards.add(card);
+                }
+            }
+            typeList.clear();
+            typeList.addAll(uniqueNameCards);
+        }
 
         if (exclude != null) {
             typeList.removeAll(exclude);
@@ -791,11 +806,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        if (sa.hasParam("Crew")) {
-            typeList = CardLists.getNotKeyword(typeList, "CARDNAME can't crew Vehicles.");
-        }
-
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, sa.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -817,7 +828,7 @@ public class ComputerUtil {
                 tapList.clear();
             }
             tapList.add(next);
-            totalPower = CardLists.getTotalPower(tapList, true, sa.hasParam("Crew"));
+            totalPower = CardLists.getTotalPower(tapList, true, sa.isCrew());
             if (totalPower >= amount) {
                 break;
             }
@@ -1269,7 +1280,6 @@ public class ComputerUtil {
             if (cardState.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
-
         } // BuffedBy
 
         // there's a good chance AI will attack weak target
@@ -1709,7 +1719,6 @@ public class ComputerUtil {
                     }
                 }
             }
-
         }
 
         return damage;
@@ -1748,6 +1757,9 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
+                spell = spell.getOriginalAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
@@ -1759,6 +1771,9 @@ public class ComputerUtil {
             }
         }
 
+        // align threatened with resolve order
+        // matters if stack contains multiple activations (e.g. Temur Sabertooth)
+        Collections.reverse(objects);
         return objects;
     }
 
@@ -1865,7 +1880,7 @@ public class ComputerUtil {
                     }
 
                     // don't use it on creatures that can't be regenerated
-                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) &&
+                    if ((saviourApi == ApiType.Regenerate) &&
                             (!c.canBeShielded() || noRegen)) {
                         continue;
                     }
@@ -1974,7 +1989,7 @@ public class ComputerUtil {
         }
         // Destroy => regeneration/bounce/shroud
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
+                && ((saviourApi == ApiType.Regenerate
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
@@ -2115,7 +2130,6 @@ public class ComputerUtil {
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
         return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
     }
-
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
         final Game game = ai.getGame();
 

@@ -1,7 +1,7 @@
 Name:Access Denied
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBToken | RememberCounteredCMC$ True | SpellDescription$ Counter target spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBToken | RememberCounteredCMC$ True | SpellDescription$ Counter target spell.
 SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenAmount$ X | SubAbility$ DBCleanup | SpellDescription$ Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell's mana value.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber

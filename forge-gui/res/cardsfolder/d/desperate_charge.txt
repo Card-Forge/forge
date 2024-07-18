@@ -1,5 +1,5 @@
 Name:Desperate Charge
 ManaCost:2 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn.
 Oracle:Creatures you control get +2/+0 until end of turn.

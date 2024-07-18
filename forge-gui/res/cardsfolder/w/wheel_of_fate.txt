@@ -3,7 +3,7 @@ ManaCost:no cost
 Colors:red
 Types:Sorcery
 K:Suspend:4:1 R
-A:SP$ Discard | Cost$ 0 | Mode$ Hand | Defined$ Player | SubAbility$ DBDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
+A:SP$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBDraw | SpellDescription$ Each player discards their hand, then draws seven cards.
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
 SVar:NeedsToPlayVar:Y LE3
 SVar:Y:Count$InYourHand

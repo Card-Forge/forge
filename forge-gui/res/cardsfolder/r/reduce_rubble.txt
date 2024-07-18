@@ -1,7 +1,7 @@
 Name:Reduce
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 3 | SpellDescription$ Counter target spell unless its controller pays {3}.
 AlternateMode:Split
 Oracle:Counter target spell unless its controller pays {3}.
 
@@ -11,5 +11,5 @@ Name:Rubble
 ManaCost:2 R
 Types:Sorcery
 K:Aftermath
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target land | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Up to three target lands don't untap during their controller's next untap step.
+A:SP$ Pump | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select target land | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | IsCurse$ True | SpellDescription$ Up to three target lands don't untap during their controller's next untap step.
 Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nUp to three target lands don't untap during their controller's next untap step.

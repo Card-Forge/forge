@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Outlaws of Thunder Junction #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/04/latest-3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Remember that your solution must satisfy all possible blocking decisions. Assume that any cards you draw are not relevant to the solution.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=3
+p0hand=Curse of the Werefox;Thunder Salvo;Slickshot Show-Off;Return the Favor
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p0battlefield=Hellspur Brute;Illuminator Virtuoso;Mountain;Mountain;Mountain;Jetmir's Garden;Jetmir's Garden;Jetmir's Garden
+p1life=9
+p1battlefield=Desperate Bloodseeker;Terror of the Peaks

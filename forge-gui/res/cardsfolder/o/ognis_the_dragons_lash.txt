@@ -1,6 +1,6 @@
 Name:Ognis, the Dragon's Lash
 ManaCost:1 BR R RG
-Types:Legendary Creature Viashino Warrior
+Types:Legendary Creature Lizard Warrior
 PT:3/3
 K:Haste
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+withHaste | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control with haste attacks, create a tapped Treasure token.

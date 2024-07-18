@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Artifact
 S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
 A:AB$ Play | Cost$ T | ValidSA$ Spell | SorcerySpeed$ True | TgtPrompt$ Choose target nonland permanent card in your graveyard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | TgtZone$ Graveyard | ValidTgts$ Permanent.nonLand+YouOwn | RememberPlayed$ True | Optional$ True | SubAbility$ DBEffect | AILogic$ NeedsChosenCard | SpellDescription$ Choose target nonland permanent card in your graveyard. If you haven't cast a spell this turn, you may cast that card. If you do, you can't cast additional spells this turn. Activate only as a sorcery.
-SVar:DBEffect:DB$ Effect | Name$ Conduit of Worlds's Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | StaticAbilities$ STCantBeCast | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | StaticAbilities$ STCantBeCast | SubAbility$ DBCleanup
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ You | Description$ You can't cast additional spells this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Spell.YouCtrl

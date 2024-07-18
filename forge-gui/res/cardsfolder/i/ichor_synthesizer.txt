@@ -5,7 +5,7 @@ PT:1/3
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ OIL
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE4_OIL | AddPower$ 2 | Description$ As long as CARDNAME has four or more oil counters on it, it gets +2/+0 and can't be blocked.
-S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+counters_GE4_OIL | Secondary$ True | Description$ Description$ As long as CARDNAME has four or more oil counters on it, it gets +2/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+counters_GE4_OIL | Secondary$ True | Description$ As long as CARDNAME has four or more oil counters on it, it gets +2/+0 and can't be blocked.
 SVar:BuffedBy:Card.nonCreature
 DeckHas:Ability$Counters
 Oracle:Whenever you cast a noncreature spell, put an oil counter on Ichor Synthesizer.\nAs long as Ichor Synthesizer has four or more oil counters on it, it gets +2/+0 and can't be blocked.

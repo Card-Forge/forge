@@ -1,7 +1,7 @@
 Name:Extinction Event
 ManaCost:3 B
 Types:Sorcery
-A:SP$ GenericChoice | Cost$ 3 B | Choices$ Odd,Even | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose odd or even. Exile each creature with mana value of the chosen quality. (Zero is even.)
+A:SP$ GenericChoice | Choices$ Odd,Even | Defined$ You | StackDescription$ SpellDescription | SpellDescription$ Choose odd or even. Exile each creature with mana value of the chosen quality. (Zero is even.)
 SVar:Odd:DB$ ChangeZoneAll | ChangeType$ Creature.cmcOdd | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Odd
 SVar:Even:DB$ ChangeZoneAll | ChangeType$ Creature.cmcEven | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Even
 Oracle:Choose odd or even. Exile each creature with mana value of the chosen quality. (Zero is even.)

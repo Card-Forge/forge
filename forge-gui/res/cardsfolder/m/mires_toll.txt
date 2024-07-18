@@ -1,6 +1,6 @@
 Name:Mire's Toll
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ X | NumCards$ 1 | SpellDescription$ Target player reveals a number of cards from their hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | RevealNumber$ X | NumCards$ 1 | SpellDescription$ Target player reveals a number of cards from their hand equal to the number of Swamps you control. You choose one of them. That player discards that card.
 SVar:X:Count$TypeYouCtrl.Swamp
 Oracle:Target player reveals a number of cards from their hand equal to the number of Swamps you control. You choose one of them. That player discards that card.

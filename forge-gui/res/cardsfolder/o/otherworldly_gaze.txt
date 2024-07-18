@@ -2,6 +2,6 @@ Name:Otherworldly Gaze
 ManaCost:U
 Types:Instant
 K:Flashback:1 U
-A:SP$ Surveil | Cost$ U | Amount$ 3 | SpellDescription$ Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Surveil | Amount$ 3 | SpellDescription$ Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nFlashback {1}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

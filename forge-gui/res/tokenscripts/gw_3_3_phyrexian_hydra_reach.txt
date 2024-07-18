@@ -1,4 +1,4 @@
-Name:Phyrexian Hydra token
+Name:Phyrexian Hydra Token
 ManaCost:no cost
 Types:Creature Phyrexian Hydra
 Colors:white,green

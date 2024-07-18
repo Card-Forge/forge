@@ -1,7 +1,7 @@
 Name:Searing Rays
 ManaCost:2 R
 Types:Sorcery
-A:SP$ ChooseColor | Cost$ 2 R | Defined$ You | SubAbility$ DBDmgEach | AILogic$ MostProminentHumanCreatures | SpellDescription$ Choose a color. CARDNAME deals damage to each player equal to the number of creatures of that color that player controls.
+A:SP$ ChooseColor | Defined$ You | SubAbility$ DBDmgEach | AILogic$ MostProminentHumanCreatures | SpellDescription$ Choose a color. CARDNAME deals damage to each player equal to the number of creatures of that color that player controls.
 SVar:DBDmgEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDmg | DamageMap$ True
 SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl+ChosenColor

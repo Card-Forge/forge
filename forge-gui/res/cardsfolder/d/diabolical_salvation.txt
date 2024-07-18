@@ -2,7 +2,7 @@ Name:Diabolical Salvation
 ManaCost:2 R R R R
 Types:Instant
 K:Split second
-A:SP$ Token | Cost$ 2 R R R R | TokenAmount$ 4 | TokenScript$ r_4_4_devil_haste_treasure | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create four 4/4 red Devil creature tokens with haste and "When this creature dies, create a colorless Treasure artifact token with '{T}, Sacrifice this artifact: Add one mana of any color.'" Sacrifice the Devil tokens at the beginning of the next end step.
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ r_4_4_devil_haste_treasure | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create four 4/4 red Devil creature tokens with haste and "When this creature dies, create a colorless Treasure artifact token with '{T}, Sacrifice this artifact: Add one mana of any color.'" Sacrifice the Devil tokens at the beginning of the next end step.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
 Oracle:Split second\nCreate four 4/4 red Devil creature tokens with haste and "When this creature dies, create a colorless Treasure artifact token with '{T}, Sacrifice this artifact: Add one mana of any color.'" Sacrifice the Devil tokens at the beginning of the next end step.

@@ -1,0 +1,7 @@
+Name:Trickster's Elk
+ManaCost:2 G
+Types:Enchantment Creature Elk
+PT:3/3
+K:Bestow:1 G
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 3 | SetToughness$ 3 | SetColor$ Green | RemoveAllAbilities$ True | AddType$ Creature & Elk | RemoveCardTypes$ True | RemoveCreatureTypes$ True | Description$ Enchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3.
+Oracle:Bestow {1}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)\nEnchanted creature loses all abilities and is a green Elk creature with base power and toughness 3/3.

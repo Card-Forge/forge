@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon
 PT:4/3
 K:Flying
 K:Haste
-A:AB$ Pump | Cost$ Discard<1/Card.namedTarox Bladewing> | NumAtt$ +X | NumDef$ +X | CostDesc$ Grandeur — Discard another card named Tarox Bladewing: | SpellDescription$ Tarox Bladewing gets +X/+X until end of turn, where X is its power.
+A:AB$ Pump | Cost$ Discard<1/Card.namedTarox Bladewing> | NumAtt$ +X | NumDef$ +X | CostDesc$ Grandeur — Discard another card named Tarox Bladewing: | SpellDescription$ CARDNAME gets +X/+X until end of turn, where X is its power.
 SVar:X:Count$CardPower
 DeckHints:Name$Tarox Bladewing
 Oracle:Flying, haste\nGrandeur — Discard another card named Tarox Bladewing: Tarox Bladewing gets +X/+X until end of turn, where X is its power.

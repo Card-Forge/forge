@@ -1,6 +1,6 @@
 Name:Electrolyze
 ManaCost:1 U R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 U R | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two targets. Draw a card.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 2 damage divided as you choose among one or two targets. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Electrolyze deals 2 damage divided as you choose among one or two targets.\nDraw a card.

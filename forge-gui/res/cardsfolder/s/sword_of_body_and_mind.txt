@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddSVar$ SwordOfBodyAndMindCE | AddKeyword$ Protection from green & Protection from blue | Description$ Equipped creature gets +2/+2 and has protection from green and from blue.
-T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you you create a 2/2 green Wolf creature token and that player mills ten cards.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, you create a 2/2 green Wolf creature token and that player mills ten cards.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ 10
 SVar:SwordOfBodyAndMindCE:SVar:MustBeBlocked:AttackingPlayerConservative

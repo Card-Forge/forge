@@ -1,7 +1,7 @@
 Name:Al-abara's Carpet
 ManaCost:5
 Types:Artifact
-A:AB$ Effect | Cost$ 5 T | Name$ Al-abara's Carpet Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
+A:AB$ Effect | Cost$ 5 T | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | ValidSource$ Creature.attacking+withoutFlying | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures without flying.
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True

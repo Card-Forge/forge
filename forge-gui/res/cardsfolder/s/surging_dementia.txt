@@ -1,6 +1,6 @@
 Name:Surging Dementia
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 K:Ripple:4
 Oracle:Ripple 4 (When you cast this spell, you may reveal the top four cards of your library. You may cast spells with the same name as this spell from among those cards without paying their mana costs. Put the rest on the bottom of your library.)\nTarget player discards a card.

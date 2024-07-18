@@ -1,6 +1,6 @@
 Name:Unbreakable Bond
 ManaCost:4 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | WithCountersType$ Lifelink | SpellDescription$ Return target creature card from your graveyard to the battlefield with a lifelink counter on it.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | WithCountersType$ Lifelink | SpellDescription$ Return target creature card from your graveyard to the battlefield with a lifelink counter on it.
 DeckHas:Ability$Counters
 Oracle:Return target creature card from your graveyard to the battlefield with a lifelink counter on it.

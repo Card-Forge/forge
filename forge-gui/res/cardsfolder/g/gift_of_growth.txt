@@ -2,7 +2,7 @@ Name:Gift of Growth
 ManaCost:1 G
 Types:Instant
 K:Kicker:2
-A:SP$ Untap | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead.
+A:SP$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump | SpellDescription$ Untap target creature. It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Kicked.4.2
 Oracle:Kicker {2} (You may pay an additional {2} as you cast this spell.)\nUntap target creature. It gets +2/+2 until end of turn. If this spell was kicked, that creature gets +4/+4 until end of turn instead.

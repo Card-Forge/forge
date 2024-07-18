@@ -1,0 +1,9 @@
+Name:The Wandering Rescuer
+ManaCost:3 W W
+Types:Legendary Creature Human Samurai Noble
+PT:3/4
+K:Flash
+K:Convoke
+K:Double Strike
+S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl+Other | AddKeyword$ Hexproof | Description$ Other tapped creatures you control have hexproof.
+Oracle:Flash\nConvoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nDouble strike\nOther tapped creatures you control have hexproof.

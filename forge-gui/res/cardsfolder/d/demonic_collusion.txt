@@ -2,6 +2,6 @@ Name:Demonic Collusion
 ManaCost:3 B B
 Types:Sorcery
 K:Buyback:Discard<2/Card>
-A:SP$ ChangeZone | Cost$ 3 B B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Shuffle$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Hidden$ True | Shuffle$ True | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle.
 AI:RemoveDeck:All
 Oracle:Buyback—Discard two cards. (You may discard two cards in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)\nSearch your library for a card, put that card into your hand, then shuffle.

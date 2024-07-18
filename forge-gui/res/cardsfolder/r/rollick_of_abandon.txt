@@ -1,6 +1,6 @@
 Name:Rollick of Abandon
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 R R | ValidCards$ Creature | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ All creatures get +2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ All creatures get +2/-2 until end of turn.
 AI:RemoveDeck:All
 Oracle:All creatures get +2/-2 until end of turn.

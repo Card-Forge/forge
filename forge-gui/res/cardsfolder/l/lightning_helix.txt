@@ -1,6 +1,6 @@
 Name:Lightning Helix
 ManaCost:R W
 Types:Instant
-A:SP$ DealDamage | Cost$ R W | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target and you gain 3 life.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to any target and you gain 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Lightning Helix deals 3 damage to any target and you gain 3 life.

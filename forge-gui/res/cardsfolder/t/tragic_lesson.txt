@@ -1,6 +1,6 @@
 Name:Tragic Lesson
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards. Then discard a card unless you return a land you control to its owner's hand. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards. Then discard a card unless you return a land you control to its owner's hand. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | UnlessCost$ Return<1/Land> | UnlessPayer$ You
 Oracle:Draw two cards. Then discard a card unless you return a land you control to its owner's hand.

@@ -2,6 +2,6 @@ Name:Increasing Savagery
 ManaCost:2 G G
 Types:Sorcery
 K:Flashback:5 G G
-A:SP$ PutCounter | Cost$ 2 G G | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead.
+A:SP$ PutCounter | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead.
 SVar:X:Count$wasCastFromGraveyard.10.5
 Oracle:Put five +1/+1 counters on target creature. If this spell was cast from a graveyard, put ten +1/+1 counters on that creature instead.\nFlashback {5}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -1,7 +1,7 @@
 Name:Grisly Ritual
 ManaCost:5 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBToken | SpellDescription$ Destroy target creature or planeswalker.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_blood_draw | SpellDescription$ Create two Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
 DeckHas:Ability$Token|Sacrifice & Type$Blood
 Oracle:Destroy target creature or planeswalker. Create two Blood tokens. (They're artifacts with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

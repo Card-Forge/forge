@@ -2,7 +2,7 @@ Name:Kaseto, Orochi Archmage
 ManaCost:1 G U
 Types:Legendary Creature Snake Wizard
 PT:2/2
-A:AB$ Effect | Cost$ G U | ValidTgts$ Creature | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | AITgts$ Snake | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
+A:AB$ Effect | Cost$ G U | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump | AITgts$ Snake | SubAbility$ DBPump | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted.Snake | NumAtt$ +2 | NumDef$ +2 | StackDescription$ SpellDescription | SpellDescription$ If that creature is a Snake, it gets +2/+2 until end of turn.
 DeckHints:Type$Snake

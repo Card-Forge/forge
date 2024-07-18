@@ -2,7 +2,7 @@ Name:Spirit Flare
 ManaCost:3 W
 Types:Instant
 K:Flashback:1 W PayLife<3>
-A:SP$ Tap | Cost$ 3 W | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | SubAbility$ SpiritDmg | SpellDescription$ Tap target untapped creature you control. If you do, it deals damage equal to its power to target attacking or blocking creature an opponent controls.
+A:SP$ Tap | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | SubAbility$ SpiritDmg | SpellDescription$ Tap target untapped creature you control. If you do, it deals damage equal to its power to target attacking or blocking creature an opponent controls.
 SVar:SpiritDmg:DB$ DealDamage | ValidTgts$ Creature.attacking+OppCtrl,Creature.blocking+OppCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target attacking or blocking creature an opponent controls | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Tap target untapped creature you control. If you do, it deals damage equal to its power to target attacking or blocking creature an opponent controls.\nFlashback—{1}{W}, Pay 3 life. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

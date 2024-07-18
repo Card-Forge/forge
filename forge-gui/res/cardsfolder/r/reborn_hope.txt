@@ -1,6 +1,6 @@
 Name:Reborn Hope
 ManaCost:G W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ G W | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target multicolored card in your graveyard | ValidTgts$ Card.MultiColor+YouCtrl | SpellDescription$ Return target multicolored card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target multicolored card in your graveyard | ValidTgts$ Card.MultiColor+YouCtrl | SpellDescription$ Return target multicolored card from your graveyard to your hand.
 AI:RemoveDeck:Random
 Oracle:Return target multicolored card from your graveyard to your hand.

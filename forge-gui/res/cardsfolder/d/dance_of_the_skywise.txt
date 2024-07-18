@@ -1,6 +1,6 @@
 Name:Dance of the Skywise
 ManaCost:1 U
 Types:Instant
-A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 4 | Toughness$ 4 | Keywords$ Flying | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Dragon,Illusion | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Power$ 4 | Toughness$ 4 | Keywords$ Flying | RemoveAllAbilities$ True | Colors$ Blue | OverwriteColors$ True | Types$ Dragon,Illusion | RemoveCreatureTypes$ True | SpellDescription$ Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.
 AI:RemoveDeck:All
 Oracle:Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.

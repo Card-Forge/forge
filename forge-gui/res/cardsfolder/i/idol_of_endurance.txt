@@ -4,7 +4,7 @@ Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, exile all creature cards with mana value 3 or less from your graveyard until CARDNAME leaves the battlefield.
 SVar:TrigChange:DB$ ChangeZoneAll | ChangeType$ Creature.cmcLE3+YouOwn | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | Duration$ UntilHostLeavesPlay
 A:AB$ Effect | Cost$ 1 W T | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Triggers$ TrigSpellCast | SpellDescription$ Until end of turn, you may cast a creature spell from among cards exiled with CARDNAME without paying its mana cost.
-SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+Creature | AffectedZone$ Exile | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ Until end of turn, you may cast a creature spell from among cards exiled with CARDNAME without paying its mana cost.
+SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered+Creature | AffectedZone$ Exile | MayPlay$ True | MayPlayWithoutManaCost$ True | Description$ Until end of turn, you may cast a creature spell from among cards exiled with EFFECTSOURCE without paying its mana cost.
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 AI:RemoveDeck:All

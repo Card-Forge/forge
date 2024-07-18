@@ -1,5 +1,5 @@
 Name:Lurrus of the Dream-Den
-ManaCost:1 W/B W/B
+ManaCost:1 WB WB
 Types:Legendary Creature Cat Nightmare
 PT:3/2
 K:Companion:Permanent.cmcLE2,Instant,Sorcery:Each permanent card in your starting deck has mana value 2 or less.

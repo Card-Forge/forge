@@ -1,7 +1,7 @@
 Name:Green Sun's Zenith
 ManaCost:X G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X G | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green+cmcLEX | ChangeNum$ 1 | SubAbility$ DBShuffle | StackDescription$ Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. | SpellDescription$ Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle CARDNAME into its owner's library.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature.Green+cmcLEX | ChangeNum$ 1 | SubAbility$ DBShuffle | StackDescription$ Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. | SpellDescription$ Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBShuffle:DB$ ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True | Defined$ Parent
 Oracle:Search your library for a green creature card with mana value X or less, put it onto the battlefield, then shuffle. Shuffle Green Sun's Zenith into its owner's library.

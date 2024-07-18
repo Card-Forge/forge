@@ -1,7 +1,7 @@
 Name:Respite
 ManaCost:1 G
 Types:Instant
-A:SP$ Fog | Cost$ 1 G | SubAbility$ DBGainLife | SpellDescription$ Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
+A:SP$ Fog | SubAbility$ DBGainLife | SpellDescription$ Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.attacking
 Oracle:Prevent all combat damage that would be dealt this turn. You gain 1 life for each attacking creature.

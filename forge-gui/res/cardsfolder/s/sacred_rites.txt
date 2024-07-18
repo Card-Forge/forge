@@ -1,7 +1,7 @@
 Name:Sacred Rites
 ManaCost:W
 Types:Instant
-A:SP$ Discard | Cost$ W | Defined$ You | AnyNumber$ True | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBPumpAll | SpellDescription$ Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
+A:SP$ Discard | Defined$ You | AnyNumber$ True | Mode$ TgtChoose | Optional$ True | RememberDiscarded$ True | SubAbility$ DBPumpAll | SpellDescription$ Discard any number of cards. Creatures you control get +0/+1 until end of turn for each card discarded this way.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumDef$ +X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

@@ -2,7 +2,7 @@ Name:Light Up the Stage
 ManaCost:2 R
 Types:Sorcery
 K:Spectacle:R
-A:SP$ Dig | Cost$ 2 R | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
+A:SP$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | ForgetOnMoved$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:StaticMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.

@@ -1,5 +1,5 @@
 Name:Burning Fields
 ManaCost:4 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target opponent or planeswalker.
+A:SP$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target opponent or planeswalker.
 Oracle:Burning Fields deals 5 damage to target opponent or planeswalker.

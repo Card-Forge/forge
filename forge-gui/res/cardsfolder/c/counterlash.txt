@@ -1,6 +1,6 @@
 Name:Counterlash
 ManaCost:4 U U
 Types:Instant
-A:SP$ Counter | Cost$ 4 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBPlay | SpellDescription$ Counter target spell. You may cast a spell that shares a card type with it from your hand without paying its mana cost.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBPlay | SpellDescription$ Counter target spell. You may cast a spell that shares a card type with it from your hand without paying its mana cost.
 SVar:DBPlay:DB$ Play | Valid$ Targeted.sharesCardTypeWith+YouCtrl | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Optional$ True
 Oracle:Counter target spell. You may cast a spell that shares a card type with it from your hand without paying its mana cost.

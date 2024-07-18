@@ -1,7 +1,7 @@
 Name:Essence Backlash
 ManaCost:2 U R
 Types:Instant
-A:SP$ Counter | Cost$ 2 U R | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDamage | SpellDescription$ Counter target creature spell. CARDNAME deals damage equal to that spell's power to its controller.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target Creature spell | ValidTgts$ Creature | SubAbility$ DBDamage | SpellDescription$ Counter target creature spell. CARDNAME deals damage equal to that spell's power to its controller.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ Backlash | Defined$ TargetedController
 SVar:Backlash:Targeted$CardPower
 Oracle:Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.

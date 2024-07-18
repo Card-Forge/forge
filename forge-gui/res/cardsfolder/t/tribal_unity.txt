@@ -1,7 +1,7 @@
 Name:Tribal Unity
 ManaCost:X 2 G
 Types:Instant
-A:SP$ ChooseType | Cost$ X 2 G | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ TribalPump | SpellDescription$ Creatures of the creature type of your choice get +X/+X until end of turn.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ TribalPump | SpellDescription$ Creatures of the creature type of your choice get +X/+X until end of turn.
 SVar:TribalPump:DB$ PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

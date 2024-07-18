@@ -117,6 +117,10 @@ public class Match {
         return gameOutcomes.values();
     }
 
+    public GameOutcome getLastOutcome() {
+        return lastOutcome;
+    }
+
     public boolean isMatchOver() {
         int[] victories = new int[players.size()];
         for (GameOutcome go : getOutcomes()) {
@@ -284,6 +288,7 @@ public class Match {
             }
 
             Deck myDeck = psc.getDeck();
+            player.setDraftNotes(myDeck.getDraftNotes());
 
             Set<PaperCard> myRemovedAnteCards = null;
             if (!rules.useAnte()) {

@@ -10,6 +10,6 @@ ALTERNATE
 Name:Oaken Boon
 ManaCost:3 G
 Types:Sorcery Adventure
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Counters
 Oracle:Put two +1/+1 counters on target creature. (Then exile this card. You may cast the creature later from exile.)

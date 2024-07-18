@@ -22,7 +22,6 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     @Override
     public void setHostCard(final Card c) {
         super.setHostCard(c);
-
         if (overridingAbility != null) {
             overridingAbility.setHostCard(c);
         }

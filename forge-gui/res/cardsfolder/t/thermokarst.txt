@@ -1,6 +1,6 @@
 Name:Thermokarst
 ManaCost:1 G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 G G | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGainLife | SpellDescription$ Destroy target land. If that land was a snow land, you gain 1 life.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBGainLife | SpellDescription$ Destroy target land. If that land was a snow land, you gain 1 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Land.Snow | ConditionCompare$ EQ1 | ConditionDescription$ If that land was a snow land,
 Oracle:Destroy target land. If that land was a snow land, you gain 1 life.

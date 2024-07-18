@@ -5,4 +5,4 @@ A:AB$ Scry | Cost$ 5 T | ScryNum$ 1 | SubAbility$ DBDraw | ReduceCost$ X | Spell
 SVar:DBDraw:DB$ Draw
 SVar:X:Count$Valid Creature.YouCtrl+Legendary
 DeckHints:Type$Creature & Type$Legendary
-Oracle:{5},{T}: Scry 1, then draw a card. This ability costs {1} less to activate for each legendary creature you control.
+Oracle:{5}, {T}: Scry 1, then draw a card. This ability costs {1} less to activate for each legendary creature you control.

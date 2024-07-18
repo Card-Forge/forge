@@ -1,6 +1,6 @@
 Name:Identity Crisis
 ManaCost:2 W W B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 2 W W B B | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile all cards from target player's hand and graveyard.
+A:SP$ ChangeZoneAll | Origin$ Hand | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile all cards from target player's hand and graveyard.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Defined$ Targeted | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
 Oracle:Exile all cards from target player's hand and graveyard.

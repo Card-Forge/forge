@@ -1,6 +1,6 @@
 Name:Cut the Tethers
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 2 U U | RepeatSubAbility$ DBReturn | RepeatCards$ Creature.Spirit | SpellDescription$ For each Spirit, return it to its owner's hand unless that player pays {3}.
+A:SP$ RepeatEach | RepeatSubAbility$ DBReturn | RepeatCards$ Creature.Spirit | SpellDescription$ For each Spirit, return it to its owner's hand unless that player pays {3}.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | UnlessCost$ 3 | UnlessPayer$ RememberedController | ShowCurrentCard$ Remembered
 Oracle:For each Spirit, return it to its owner's hand unless that player pays {3}.

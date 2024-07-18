@@ -1,0 +1,8 @@
+Name:Noble Banneret
+ManaCost:2 W W
+Types:Creature Human Knight
+PT:3/3
+Draft:Draft CARDNAME face up.
+Draft:As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.
+S:Mode$ Continuous | Affected$ Card.Self,Creature.NotedNameNobleBanneret+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | IsPresent$ Creature.NotedNameNobleBanneret+YouCtrl | PresentCompare$ GE1 | Description$ As long as you control one or more creatures with a name you noted for cards named Noble Banneret, CARDNAME and those creatures get +1/+1 and have lifelink.
+Oracle:Draft Noble Banneret face up.\nAs you draft a creature card, you may reveal it, note its name, then turn Noble Banneret face down.\nAs long as you control one or more creatures with a name you noted for cards named Noble Banneret, Noble Banneret and those creatures get +1/+1 and have lifelink.

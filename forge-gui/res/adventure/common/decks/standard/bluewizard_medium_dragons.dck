@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Keiga's Forged Alliance 2
-Title=Keiga, the Tide Star
-Difficulty=medium
-Description=Mono-blue dragons and artifacts theme deck
-Icon=Keiga, the Tide Star 2.jpg
-Deck Type=constructed
 [Main]
 2 Belltoll Dragon
 1 Clockwork Dragon

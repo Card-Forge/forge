@@ -1,7 +1,7 @@
 Name:Evil Boros Charm
 ManaCost:BR WB
 Types:Instant
-A:SP$ Charm | Cost$ R W | Choices$ DBDmg,PumpAll,Token
+A:SP$ Charm | Choices$ DBDmg,PumpAll,Token
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 2 damage to any target and you gain 2 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+unblocked | NumAtt$ +1 | SpellDescription$ Unblocked attacking creatures get +1/+0 until end of turn.

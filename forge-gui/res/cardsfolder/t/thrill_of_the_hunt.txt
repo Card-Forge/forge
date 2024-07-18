@@ -2,5 +2,5 @@ Name:Thrill of the Hunt
 ManaCost:G
 Types:Instant
 K:Flashback:W
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature gets +1/+2 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +2 | SpellDescription$ Target creature gets +1/+2 until end of turn.
 Oracle:Target creature gets +1/+2 until end of turn.\nFlashback {W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

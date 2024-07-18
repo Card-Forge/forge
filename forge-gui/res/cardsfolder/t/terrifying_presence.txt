@@ -1,7 +1,7 @@
 Name:Terrifying Presence
 ManaCost:1 G
 Types:Instant
-A:SP$ Effect | Cost$ 1 G | Name$ Terrifying Presence Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt this turn by creatures other than target creature.
+A:SP$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt this turn by creatures other than target creature.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidSource$ Creature.IsNotRemembered | Description$ Prevent all damage that would be dealt this turn by creatures other than target creature.
 AI:RemoveDeck:All
 Oracle:Prevent all combat damage that would be dealt by creatures other than target creature this turn.

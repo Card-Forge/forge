@@ -1,7 +1,7 @@
 Name:Deadshot
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Tap | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature to tap | SubAbility$ DBDamage | SpellDescription$ Tap target creature. It deals damage equal to its power to another target creature.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature to tap | SubAbility$ DBDamage | SpellDescription$ Tap target creature. It deals damage equal to its power to another target creature.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select another target creature to be dealt damage | DamageSource$ ParentTarget | NumDmg$ X | TargetUnique$ True
 SVar:X:ParentTargeted$CardPower
 AI:RemoveDeck:All

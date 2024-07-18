@@ -1,5 +1,5 @@
 Name:Whisk Away
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target attacking or blocking creature on top of its owner's library.
 Oracle:Put target attacking or blocking creature on top of its owner's library.

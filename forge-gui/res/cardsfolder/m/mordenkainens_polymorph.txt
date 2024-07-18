@@ -1,5 +1,5 @@
 Name:Mordenkainen's Polymorph
 ManaCost:1 U
 Types:Instant
-A:SP$ Animate | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Dragon | RemoveCreatureTypes$ True | Power$ 4 | Toughness$ 4 | Keywords$ Flying | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, target creature becomes a Dragon with base power and toughness 4/4 and gains flying.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Dragon | RemoveCreatureTypes$ True | Power$ 4 | Toughness$ 4 | Keywords$ Flying | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, target creature becomes a Dragon with base power and toughness 4/4 and gains flying.
 Oracle:Until end of turn, target creature becomes a Dragon with base power and toughness 4/4 and gains flying. (It loses all other creature types.)

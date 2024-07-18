@@ -1,5 +1,5 @@
 Name:Time Walk
 ManaCost:1 U
 Types:Sorcery
-A:SP$ AddTurn | Cost$ 1 U | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
+A:SP$ AddTurn | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 Oracle:Take an extra turn after this one.

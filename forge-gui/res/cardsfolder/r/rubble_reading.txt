@@ -1,6 +1,6 @@
 Name:Rubble Reading
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBScry | SpellDescription$ Destroy target land. Scry 2.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBScry | SpellDescription$ Destroy target land. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Destroy target land. Scry 2.

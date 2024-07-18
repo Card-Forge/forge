@@ -1,7 +1,7 @@
 Name:Peak Eruption
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R | ValidTgts$ Mountain | TgtPrompt$ Choose target mountain | SubAbility$ DBDealDamage | SpellDescription$ Destroy target Mountain. CARDNAME deals 3 damage to that land's controller.
+A:SP$ Destroy | ValidTgts$ Mountain | TgtPrompt$ Choose target mountain | SubAbility$ DBDealDamage | SpellDescription$ Destroy target Mountain. CARDNAME deals 3 damage to that land's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3
 AI:RemoveDeck:Random
 Oracle:Destroy target Mountain. Peak Eruption deals 3 damage to that land's controller.

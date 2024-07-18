@@ -1,7 +1,7 @@
 Name:Mephitic Vapors
 ManaCost:2 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | Subability$ DBSurveil | SpellDescription$ All creatures get -1/-1 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | Subability$ DBSurveil | SpellDescription$ All creatures get -1/-1 until end of turn.
 SVar:DBSurveil:DB$ Surveil | Amount$ 2
 DeckHas:Ability$Surveil|Graveyard
 Oracle:All creatures get -1/-1 until end of turn.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

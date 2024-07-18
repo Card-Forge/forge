@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party. (Your party consists of up to one each of Cleric, Rogue, Warrior, and Wizard.)
 SVar:X:Count$Party
-A:SP$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBPartyReturn | SpellDescription$ Return target creature card and up to one target Cleric, Rogue, Warrior, or Wizard card from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBPartyReturn | SpellDescription$ Return target creature card and up to one target Cleric, Rogue, Warrior, or Wizard card from your graveyard to the battlefield.
 SVar:DBPartyReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.Cleric+YouOwn,Creature.Rogue+YouOwn,Creature.Warrior+YouOwn,Creature.Wizard+YouOwn | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target Cleric, Rogue, Warrior, or Wizard creature card in your graveyard
 DeckHas:Ability$Party|Graveyard
 DeckHints:Type$Cleric|Rogue|Warrior|Wizard

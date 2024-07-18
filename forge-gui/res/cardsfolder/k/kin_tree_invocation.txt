@@ -1,7 +1,7 @@
 Name:Kin-Tree Invocation
 ManaCost:B G
 Types:Sorcery
-A:SP$ Token | Cost$ B G | TokenAmount$ 1 | TokenScript$ bg_x_x_spirit_warrior | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ bg_x_x_spirit_warrior | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SpellDescription$ Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestToughness
 SVar:NeedsToPlay:Creature.YouCtrl
 Oracle:Create an X/X black and green Spirit Warrior creature token, where X is the greatest toughness among creatures you control.

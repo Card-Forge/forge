@@ -1,5 +1,5 @@
 Name:Fresh-Faced Recruit
-ManaCost:1 R/W
+ManaCost:1 RW
 Types:Creature Human Soldier
 PT:2/1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.

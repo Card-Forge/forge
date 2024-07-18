@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:3/3
 K:MayEffectFromOpeningDeck:DBReveal
 SVar:DBReveal:DB$ Reveal | RevealDefined$ Self | SubAbility$ DBExile | SpellDescription$ Before you shuffle your deck to start the game, you may reveal this card from your deck and exile an instant or sorcery card you drafted that isn't in your deck.
-SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | Optional$ True | RememberChanged$ True | SubAbility$ DBPump | ConditionGameTypes$ Draft,QuestDraft | SelectPrompt$ Exile with Arcane Savant
+SVar:DBExile:DB$ ChangeZone | Origin$ Sideboard | Destination$ Exile | ChangeType$ Instant.YouOwn,Sorcery.YouOwn | Optional$ True | RememberChanged$ True | SubAbility$ DBPump | ConditionGameTypes$ Draft,QuestDraft | SelectPrompt$ Exile with CARDNAME
 SVar:DBPump:DB$ Pump | NoteCards$ Remembered | NoteCardsFor$ ArcaneSavant | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When CARDNAME enters the battlefield, copy a card you exiled with cards named Arcane Savant. You may cast the copy without paying its mana cost.

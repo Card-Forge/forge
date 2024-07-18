@@ -1,6 +1,6 @@
 Name:Wings of the Cosmos
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | KW$ Flying | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+3 and gains flying until end of turn. Untap it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | KW$ Flying | SubAbility$ DBUntap | SpellDescription$ Target creature gets +1/+3 and gains flying until end of turn. Untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | ConditionDefined$ Targeted
 Oracle:Target creature gets +1/+3 and gains flying until end of turn. Untap it.

@@ -5,5 +5,5 @@ PT:3/1
 S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigEffect | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, it can't be blocked this turn and you scry 1. (An exerted creature won't untap during your next untap step. To scry 1, look at the top card of your library. You may put that card on the bottom.)
 SVar:TrigEffect:DB$ Effect | StaticAbilities$ Unblockable | SubAbility$ DBScry | SpellDescription$ When you do, it can't be blocked this turn and you scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
-SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ This creature can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.EffectSource | Description$ EFFECTSOURCE can't be blocked this turn.
 Oracle:You may exert Clockwork Droid as it attacks. When you do, it can't be blocked this turn and you scry 1. (An exerted creature won't untap during your next untap step. To scry 1, look at the top card of your library. You may put that card on the bottom.)

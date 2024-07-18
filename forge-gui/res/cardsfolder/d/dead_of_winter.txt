@@ -1,7 +1,7 @@
 Name:Dead of Winter
 ManaCost:2 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 2 B | ValidCards$ Creature.nonSnow | NumAtt$ -X | NumDef$ -X | SpellDescription$ All nonsnow creatures get -X/-X until end of turn, where X is the number of snow permanents you control.
+A:SP$ PumpAll | ValidCards$ Creature.nonSnow | NumAtt$ -X | NumDef$ -X | SpellDescription$ All nonsnow creatures get -X/-X until end of turn, where X is the number of snow permanents you control.
 SVar:X:Count$Valid Permanent.Snow+YouCtrl
 AI:RemoveDeck:Random
 DeckNeeds:Type$Snow

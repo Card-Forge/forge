@@ -1,7 +1,7 @@
 Name:Torment of Venom
 ManaCost:2 B B
 Types:Instant
-A:SP$ PutCounter | Cost$ 2 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 3 | IsCurse$ True | RememberTargets$ True | SubAbility$ DBGenericChoice | SpellDescription$ Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 3 | IsCurse$ True | RememberTargets$ True | SubAbility$ DBGenericChoice | SpellDescription$ Put three -1/-1 counters on target creature. Its controller loses 3 life unless they sacrifice another nonland permanent or discards a card.
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ PaySac,PayDiscard | Defined$ TargetedController | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost | SubAbility$ DBCleanup
 SVar:PaySac:DB$ LoseLife | LifeAmount$ 3 | Defined$ TargetedController | UnlessCost$ Sac<1/Permanent.IsNotRemembered+nonland/another nonland permanent> | UnlessPayer$ TargetedController | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you sacrifice another nonland permanent
 SVar:PayDiscard:DB$ LoseLife | LifeAmount$ 3 | Defined$ TargetedController | UnlessCost$ Discard<1/Card> | UnlessPayer$ TargetedController | UnlessAI$ LifeLE3 | SpellDescription$ You lose 3 life unless you discard a card

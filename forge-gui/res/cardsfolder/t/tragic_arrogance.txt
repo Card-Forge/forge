@@ -1,7 +1,7 @@
 Name:Tragic Arrogance
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 W W | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseArtf | SubAbility$ SacAllOthers | SpellDescription$ For each player, you choose from among the permanents that player controls an artifact, a creature, an enchantment, and a planeswalker. Then each player sacrifices all other nonland permanents they control.
 SVar:ChooseArtf:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Artifact.RememberedPlayerCtrl | ChoiceTitle$ Choose an artifact to keep | SubAbility$ ChooseCrtr | RememberChosen$ True | Mandatory$ True
 SVar:ChooseCrtr:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature to keep | SubAbility$ ChooseEnch | RememberChosen$ True | Mandatory$ True
 SVar:ChooseEnch:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Enchantment.RememberedPlayerCtrl | ChoiceTitle$ Choose an enchantment to keep | SubAbility$ ChoosePW | RememberChosen$ True | Mandatory$ True

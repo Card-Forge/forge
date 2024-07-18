@@ -1,7 +1,7 @@
 Name:Char
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ 4 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to any target and 2 damage to you.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 4 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to any target and 2 damage to you.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Char deals 4 damage to any target and 2 damage to you.

@@ -2,5 +2,5 @@ Name:Reap the Seagraf
 ManaCost:2 B
 Types:Sorcery
 K:Flashback:4 U
-A:SP$ Token | Cost$ 2 B | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create a 2/2 black Zombie creature token.
 Oracle:Create a 2/2 black Zombie creature token.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

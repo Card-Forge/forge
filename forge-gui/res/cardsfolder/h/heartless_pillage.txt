@@ -1,7 +1,7 @@
 Name:Heartless Pillage
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBTreasure | SpellDescription$ Target opponent discards two cards. Raid — If you attacked this turn, create a Treasure token.
+A:SP$ Discard | ValidTgts$ Opponent | Mode$ TgtChoose | NumCards$ 2 | TgtPrompt$ Select target opponent | SubAbility$ DBTreasure | SpellDescription$ Target opponent discards two cards. Raid — If you attacked this turn, create a Treasure token.
 SVar:DBTreasure:DB$ Token | ConditionCheckSVar$ RaidTest | ConditionSVarCompare$ GE1 | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:RaidTest:Count$AttackersDeclared
 Oracle:Target opponent discards two cards.\nRaid — If you attacked this turn, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

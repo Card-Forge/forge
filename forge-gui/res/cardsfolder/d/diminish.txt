@@ -1,6 +1,6 @@
 Name:Diminish
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | IsCurse$ True | SpellDescription$ Target creature has base power and toughness 1/1 until end of turn.
 AI:RemoveDeck:All
 Oracle:Target creature has base power and toughness 1/1 until end of turn.

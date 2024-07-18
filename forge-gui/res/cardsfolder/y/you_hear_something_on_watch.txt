@@ -1,7 +1,7 @@
 Name:You Hear Something on Watch
 ManaCost:1 W
 Types:Instant
-A:SP$ Charm | Cost$ 1 W | Choices$ RouseTheParty,SetOffTraps
+A:SP$ Charm | Choices$ RouseTheParty,SetOffTraps
 SVar:RouseTheParty:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Rouse the Party — Creatures you control get +1/+1 until end of turn.
 SVar:SetOffTraps:DB$ DealDamage | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumDmg$ 5 | SpellDescription$ Set Off Traps — This spell deals 5 damage to target attacking creature.
 Oracle:Choose one —\n• Rouse the Party — Creatures you control get +1/+1 until end of turn.\n• Set Off Traps — This spell deals 5 damage to target attacking creature.

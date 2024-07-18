@@ -1,7 +1,7 @@
 Name:Barreling Attack
 ManaCost:2 R R
 Types:Instant
-A:SP$ Pump | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBEffect | SpellDescription$ Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBEffect | SpellDescription$ Target creature gains trample until end of turn. When that creature becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | Triggers$ TrigBounce | ForgetOnMoved$ Battlefield
 SVar:TrigBounce:Mode$ AttackerBlocked | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Execute$ ABBarrelingPump | TriggerDescription$ When CARDNAME becomes blocked this turn, it gets +1/+1 until end of turn for each creature blocking it.
 SVar:ABBarrelingPump:DB$ Pump | Defined$ RememberedLKI | NumAtt$ +BarrelingX | NumDef$ +BarrelingX

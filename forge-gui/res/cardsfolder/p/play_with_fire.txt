@@ -1,7 +1,7 @@
 Name:Play with Fire
 ManaCost:R
 Types:Instant
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 2 | RememberDamaged$ True | SubAbility$ DBScry | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 2 damage to any target. If a player is dealt damage this way, scry 1.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | RememberDamaged$ True | SubAbility$ DBScry | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 2 damage to any target. If a player is dealt damage this way, scry 1.
 SVar:DBScry:DB$ Scry | Defined$ You | ScryNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Player | ConditionCompare$ GE1 | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Play with Fire deals 2 damage to any target. If a player is dealt damage this way, scry 1.

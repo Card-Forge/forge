@@ -1,7 +1,7 @@
 Name:Glorious End
 ManaCost:2 R
 Types:Instant
-A:SP$ EndTurn | Cost$ 2 R | SubAbility$ DelayedLoss | SpellDescription$ End the turn. At the beginning of your next end step, you lose the game.
+A:SP$ EndTurn | SubAbility$ DelayedLoss | SpellDescription$ End the turn. At the beginning of your next end step, you lose the game.
 SVar:DelayedLoss:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ Lose the game.
 SVar:TrigLoseGame:DB$ LosesGame | Defined$ SourceController
 AI:RemoveDeck:All

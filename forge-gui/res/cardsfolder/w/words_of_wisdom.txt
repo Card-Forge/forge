@@ -1,6 +1,6 @@
 Name:Words of Wisdom
 ManaCost:1 U
 Types:Instant
-A:SP$ Draw | Cost$ 1 U | NumCards$ 2 | SubAbility$ DBDraw | SpellDescription$ You draw two cards, then each other player draws a card.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDraw | SpellDescription$ You draw two cards, then each other player draws a card.
 SVar:DBDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 1
 Oracle:You draw two cards, then each other player draws a card.

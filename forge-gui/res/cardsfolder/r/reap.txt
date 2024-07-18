@@ -1,7 +1,7 @@
 Name:Reap
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | TgtPrompt$ Select target Opponent | ValidTgts$ Opponent | SubAbility$ GraveReap | StackDescription$ Select target opponent. | SpellDescription$ Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast this spell.
+A:SP$ Pump | TgtPrompt$ Select target Opponent | ValidTgts$ Opponent | SubAbility$ GraveReap | StackDescription$ Select target opponent. | SpellDescription$ Return up to X target cards from your graveyard to your hand, where X is the number of black permanents target opponent controls as you cast this spell.
 SVar:GraveReap:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ NrBlackAtCasting | TgtPrompt$ Choose target card in your graveyard | ValidTgts$ Card.YouCtrl
 SVar:NrBlackAtCasting:Count$LastStateBattlefieldWithFallback Permanent.Black+TargetedPlayerCtrl
 AI:RemoveDeck:Random

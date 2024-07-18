@@ -1,7 +1,5 @@
 [metadata]
 Name=white_dwarf
-[Avatar]
-
 [Main]
 2 Aerial Modification|AER|1
 2 Aerial Responder|KLD|1
@@ -44,12 +42,4 @@ Name=white_dwarf
 1 Toolcraft Exemplar|KLD|1
 1 Warchanter Skald|KHM|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -4,6 +4,7 @@ Types:Legendary Creature Human Soldier
 PT:3/4
 K:First Strike
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | PresentCompare$ GE3 | NoResolvingCheck$ True | Execute$ TrigOdricEffect | TriggerDescription$ Whenever CARDNAME and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.
-SVar:TrigOdricEffect:DB$ DeclareCombatants | DeclareBlockers$ True
+SVar:TrigOdricEffect:DB$ Effect | StaticAbilities$ DeclareCombatants | Duration$ UntilEndOfCombat
+SVar:DeclareCombatants:Mode$ Continuous | Affected$ Player | DeclaresBlockers$ You | Description$ You choose which creatures block this combat and how those creatures block.
 AI:RemoveDeck:All
 Oracle:First strike (This creature deals combat damage before creatures without first strike.)\nWhenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.

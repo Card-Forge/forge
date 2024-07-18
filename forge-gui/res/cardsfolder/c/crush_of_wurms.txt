@@ -2,5 +2,5 @@ Name:Crush of Wurms
 ManaCost:6 G G G
 Types:Sorcery
 K:Flashback:9 G G G
-A:SP$ Token | Cost$ 6 G G G | TokenAmount$ 3 | TokenScript$ g_6_6_wurm | TokenOwner$ You | SpellDescription$ Create three 6/6 green Wurm creature tokens.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ g_6_6_wurm | TokenOwner$ You | SpellDescription$ Create three 6/6 green Wurm creature tokens.
 Oracle:Create three 6/6 green Wurm creature tokens.\nFlashback {9}{G}{G}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

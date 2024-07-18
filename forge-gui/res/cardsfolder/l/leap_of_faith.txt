@@ -1,5 +1,5 @@
 Name:Leap of Faith
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying & Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying & Prevent all damage that would be dealt to CARDNAME. | SpellDescription$ Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
 Oracle:Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.

@@ -1,6 +1,6 @@
 Name:Harmonic Convergence
 ManaCost:2 G
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 G | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put all enchantments on top of their owners' libraries.
+A:SP$ ChangeZoneAll | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put all enchantments on top of their owners' libraries.
 AI:RemoveDeck:All
 Oracle:Put all enchantments on top of their owners' libraries.

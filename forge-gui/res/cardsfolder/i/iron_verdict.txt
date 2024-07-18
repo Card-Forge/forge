@@ -1,6 +1,6 @@
 Name:Iron Verdict
 ManaCost:2 W
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 W | ValidTgts$ Creature.tapped | NumDmg$ 5 | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 5 damage to target tapped creature.
+A:SP$ DealDamage | ValidTgts$ Creature.tapped | NumDmg$ 5 | TgtPrompt$ Select target tapped creature | SpellDescription$ CARDNAME deals 5 damage to target tapped creature.
 K:Foretell:W
 Oracle:Iron Verdict deals 5 damage to target tapped creature.\nForetell {W} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

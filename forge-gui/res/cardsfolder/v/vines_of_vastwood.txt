@@ -2,7 +2,7 @@ Name:Vines of Vastwood
 ManaCost:G
 Types:Instant
 K:Kicker:G
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | SubAbility$ DBEffect | SpellDescription$ Target creature can't be the target of spells or abilities your opponents control this turn. If this spell was kicked, that creature gets +4/+4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | SubAbility$ DBEffect | SpellDescription$ Target creature can't be the target of spells or abilities your opponents control this turn. If this spell was kicked, that creature gets +4/+4 until end of turn.
 SVar:DBEffect:DB$ Effect | Defined$ Targeted | AILogic$ Always | StaticAbilities$ STCantTarget | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:STCantTarget:Mode$ CantTarget | EffectZone$ Command | ValidCard$ Card.IsRemembered | Activator$ Player.Opponent | Description$ Target creature can't be the target of spells or abilities your opponents control this turn.
 SVar:X:Count$Kicked.4.0

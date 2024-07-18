@@ -3,6 +3,6 @@ ManaCost:2 U
 Types:Legendary Creature Human Monk
 PT:3/2
 K:Prowess
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {RW}{RW}. If you do, target creature gains double strike until end of turn.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a noncreature spell, you may pay {R/W}{R/W}. If you do, target creature gains double strike until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ RW RW | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike
 Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever you cast a noncreature spell, you may pay {R/W}{R/W}. If you do, target creature gains double strike until end of turn.

@@ -2,5 +2,5 @@ Name:Sea Spirit
 ManaCost:4 U
 Types:Creature Elemental Spirit
 PT:2/3
-A:AB$ Pump | Cost$ U | NumAtt$ +1 | SpellDescription$ Sea Spirit gets +1/+0 until end of turn.
+A:AB$ Pump | Cost$ U | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 Oracle:{U}: Sea Spirit gets +1/+0 until end of turn.

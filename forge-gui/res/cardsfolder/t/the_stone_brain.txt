@@ -10,4 +10,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | Clea
 SVar:X:Remembered$Amount
 SVar:Y:SVar$X/NMinus.4
 SVar:Z:Imprinted$Amount
-Oracle:{2},{T}, Exile The Stone Brain: Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
+Oracle:{2}, {T}, Exile The Stone Brain: Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.

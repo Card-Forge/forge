@@ -1,7 +1,7 @@
 Name:Orcish Cannonade
 ManaCost:1 R R
 Types:Instant
-A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Any | NumDmg$ 2 | DamageMap$ True | AILogic$ SelfDamage | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to you. Draw a card.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | DamageMap$ True | AILogic$ SelfDamage | SubAbility$ DB1 | SpellDescription$ CARDNAME deals 2 damage to any target and 3 damage to you. Draw a card.
 SVar:DB1:DB$ DealDamage | NumDmg$ 3 | Defined$ You | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve | SubAbility$ DB2
 SVar:DB2:DB$ Draw | NumCards$ 1

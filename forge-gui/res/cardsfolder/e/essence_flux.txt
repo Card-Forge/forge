@@ -1,7 +1,7 @@
 Name:Essence Flux
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under your control.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

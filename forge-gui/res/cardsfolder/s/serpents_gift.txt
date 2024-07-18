@@ -1,5 +1,5 @@
 Name:Serpent's Gift
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn.
 Oracle:Target creature gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)

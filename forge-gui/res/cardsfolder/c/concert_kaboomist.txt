@@ -1,0 +1,10 @@
+Name:Concert Kaboomist
+ManaCost:1 R R
+Types:Creature Goblin Artificer
+PT:4/2
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, it deals X damage to target opponent, where X is the number of noncreature spells you've cast since the beginning of your last turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is turned face up, it deals X damage to target opponent, where X is the number of noncreature spells you've cast since the beginning of your last turn.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ Count$CastSinceBeginningOfYourLastTurn_Card.nonCreature+YouCtrl
+K:Disguise:R
+Oracle:Trample\nWhen Concert Kaboomist enters the battlefield or is turned face up, it deals X damage to target opponent, where X is the number of noncreature spells you've cast since the beginning of your last turn.\nDisguise {R}

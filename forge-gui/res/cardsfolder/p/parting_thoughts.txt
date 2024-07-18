@@ -1,7 +1,7 @@
 Name:Parting Thoughts
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDestroyed$ True | SpellDescription$ Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature. | SubAbility$ DBDraw
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDestroyed$ True | SpellDescription$ Destroy target creature. You draw X cards and you lose X life, where X is the number of counters on that creature. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

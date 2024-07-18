@@ -1,7 +1,7 @@
 Name:Demoralize
 ManaCost:2 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 2 R | ValidCards$ Creature | KW$ Menace | SubAbility$ DBEffect2 | SpellDescription$ All creatures gain menace until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | KW$ Menace | SubAbility$ DBEffect2 | SpellDescription$ All creatures gain menace until end of turn.
 SVar:DBEffect2:DB$ Effect | StaticAbilities$ KWPump2 | Condition$ Threshold | SpellDescription$ Threshold — If seven or more cards are in your graveyard, creatures can't block this turn.
 SVar:KWPump2:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't block. | Description$ Threshold — If seven or more cards are in your graveyard, creatures can't block this turn.
 AI:RemoveDeck:All

@@ -13,7 +13,7 @@ ALTERNATE
 Name:Revel in Silence
 ManaCost:W W
 Types:Instant
-A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast,STCantBeActivated | AILogic$ BeginningOfOppTurn | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn. Exile CARDNAME.
+A:SP$ Effect | StaticAbilities$ STCantBeCast,STCantBeActivated | AILogic$ BeginningOfOppTurn | SubAbility$ DBChange | StackDescription$ SpellDescription | SpellDescription$ Your opponents can't cast spells or activate planeswalkers' loyalty abilities this turn. Exile CARDNAME.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 SVar:STCantBeActivated:Mode$ CantBeActivated | Activator$ Opponent | EffectZone$ Command | ValidCard$ Planeswalker | ValidSA$ Activated.Loyalty | Description$ Your opponents can't activate planeswalkers' loyalty abilities.

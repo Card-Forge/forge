@@ -1,7 +1,7 @@
 Name:Macabre Mockery
 ManaCost:2 B R
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B R | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPump | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control. It gets +2/+0 and gains haste until end of turn. Sacrifice it at the beginning of the next end step.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | TgtPrompt$ Choose target creature card in an opponent's graveyard | ValidTgts$ Creature.OppCtrl | SubAbility$ DBPump | SpellDescription$ Put target creature card from an opponent's graveyard onto the battlefield under your control. It gets +2/+0 and gains haste until end of turn. Sacrifice it at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | KW$ Haste | AtEOT$ Sacrifice
 SVar:PlayMain1:TRUE
 Oracle:Put target creature card from an opponent's graveyard onto the battlefield under your control. It gets +2/+0 and gains haste until end of turn. Sacrifice it at the beginning of the next end step.

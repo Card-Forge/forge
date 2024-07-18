@@ -1,6 +1,6 @@
 Name:Piracy
 ManaCost:U U
 Types:Sorcery
-A:SP$ Effect | Cost$ U U | StaticAbilities$ STPiracy | AINoRecursiveCheck$ True | SpellDescription$ Until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.
+A:SP$ Effect | StaticAbilities$ STPiracy | AINoRecursiveCheck$ True | SpellDescription$ Until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.
 SVar:STPiracy:Mode$ Continuous | Affected$ You | AddKeyword$ Piracy | Description$ Until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.
 Oracle:Until end of turn, you may tap lands you don't control for mana. Spend this mana only to cast spells.

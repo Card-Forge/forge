@@ -1,7 +1,7 @@
 Name:Brokers' Safeguard
 ManaCost:W U
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Creature.nonArtifact+YouCtrl | TgtPrompt$ Select target nonartifact creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBAnimate | SpellDescription$ Exile target target nonartifact creature you control.
+A:SP$ ChangeZone | ValidTgts$ Creature.nonArtifact+YouCtrl | TgtPrompt$ Select target nonartifact creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBAnimate | SpellDescription$ Exile target nonartifact creature you control.
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Replacements$ ETBAddCounter | Duration$ Perpetual | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ It perpetually gains "This creature enters the battlefield with an additional shield counter on it."
 SVar:ETBAddCounter:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ ETBAddExtraCounter | ReplacementResult$ Updated | Description$ This creature enters the battlefield with an additional shield counter on it.
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD

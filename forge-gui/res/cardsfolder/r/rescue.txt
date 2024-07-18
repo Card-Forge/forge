@@ -1,5 +1,5 @@
 Name:Rescue
 ManaCost:U
 Types:Instant
-A:SP$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | SpellDescription$ Return target permanent you control to its owner's hand.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent | SpellDescription$ Return target permanent you control to its owner's hand.
 Oracle:Return target permanent you control to its owner's hand.

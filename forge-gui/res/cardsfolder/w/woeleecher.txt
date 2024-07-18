@@ -3,7 +3,7 @@ ManaCost:5 W
 Types:Creature Elemental
 PT:3/5
 A:AB$ RemoveCounter | Cost$ W T | ValidTgts$ Creature | AITgts$ Creature.counters_GE1_M1M1 | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | RememberRemoved$ True | SubAbility$ DBGainLife | SpellDescription$ Remove a -1/-1 counter from target creature. If you do, you gain 2 life.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditonSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 DeckHas:Ability$LifeGain

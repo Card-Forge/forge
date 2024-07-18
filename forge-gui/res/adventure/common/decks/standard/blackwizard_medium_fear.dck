@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Ratbert 2
-Title=Ratbert
-Difficulty=medium
-Description=Mono B Fear deck with Thran Lens
-Icon=Ratbert.jpg
-Deck Type=constructed
 [main]
 23 Swamp|M11
 4 Thran Lens
@@ -28,4 +22,3 @@ Deck Type=constructed
 2 Wrench Mind
 2 Death Stroke
 1 Grasp of Darkness
-[sideboard]

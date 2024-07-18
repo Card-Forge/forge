@@ -1,7 +1,7 @@
 Name:Dregs of Sorrow
 ManaCost:X 4 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ X 4 B | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select X target nonblack creatures | SubAbility$ DBDraw | SpellDescription$ Destroy X target nonblack creatures. Draw X cards.
+A:SP$ Destroy | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select X target nonblack creatures | SubAbility$ DBDraw | SpellDescription$ Destroy X target nonblack creatures. Draw X cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

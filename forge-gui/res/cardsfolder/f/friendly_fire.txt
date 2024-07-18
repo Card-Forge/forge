@@ -1,7 +1,7 @@
 Name:Friendly Fire
 ManaCost:3 R
 Types:Instant
-A:SP$ Pump | Cost$ 3 R | ValidTgts$ Creature | IsCurse$ True | StackDescription$ None | SubAbility$ DBReveal | SpellDescription$ Target creature's controller reveals a card at random from their hand. Friendly fire deals damage to that creature and that player equal to the revealed card's mana value.
+A:SP$ Pump | ValidTgts$ Creature | IsCurse$ True | StackDescription$ None | SubAbility$ DBReveal | SpellDescription$ Target creature's controller reveals a card at random from their hand. Friendly fire deals damage to that creature and that player equal to the revealed card's mana value.
 SVar:DBReveal:DB$ Reveal | Defined$ TargetedController | Random$ True | RememberRevealed$ True | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DamageAll | NumDmg$ X | ValidPlayers$ TargetedController | ValidCards$ Targeted.Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

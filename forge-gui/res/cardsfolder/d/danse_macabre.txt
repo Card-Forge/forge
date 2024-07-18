@@ -1,7 +1,7 @@
 Name:Danse Macabre
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 3 B B | SacValid$ Creature.nonToken | Defined$ Player | RememberSacrificed$ True | SubAbility$ RollD20 | SacMessage$ nontoken creature | StackDescription$ SpellDescription | SpellDescription$ Each player sacrifices a nontoken creature.
+A:SP$ Sacrifice | SacValid$ Creature.nonToken | Defined$ Player | RememberSacrificed$ True | SubAbility$ RollD20 | SacMessage$ nontoken creature | StackDescription$ SpellDescription | SpellDescription$ Each player sacrifices a nontoken creature.
 SVar:RollD20:DB$ RollDice | Sides$ 20 | Modifier$ Y | ResultSubAbilities$ 1-14:ChooseOne,Else:ChooseTwo | StackDescription$ SpellDescription | SpellDescription$ Roll a d20 and add the toughness of the creature you sacrificed this way.
 SVar:ChooseOne:DB$ ChangeZone | ChangeType$ Creature.IsRemembered | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup | Mandatory$ True | StackDescription$ SpellDescription | SpellDescription$ 1—14 VERT Return a creature card put into a graveyard this way to the battlefield under your control.
 SVar:ChooseTwo:DB$ ChangeZone | ChangeType$ Creature.IsRemembered | ChangeNum$ 2 | Hidden$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ 15+ VERT Return up to two creature cards put into graveyards this way to the battlefield under your control.

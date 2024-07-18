@@ -1,0 +1,10 @@
+Name:Runecarved Obelisk
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SubAbility$ DBPutCounter | SpellDescription$ Add {C}{C}.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ CHARGE | CounterNum$ 2 | SpellDescription$ Put two charge counters on CARDNAME.
+A:AB$ Seek | Cost$ T Sac<1/CARDNAME> | Type$ Card.cmcEQY | SpellDescription$ Seek a card with the highest mana value among cards in your library with mana value X or less, where X is the number of charge counters on CARDNAME.
+SVar:Y:Count$ValidLibrary Card.YouOwn+cmcLEX$GreatestCMC
+SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{T}: Add {C}{C}. Put two charge counters on Runecarved Obelisk.\n{T}, Sacrifice Runecarved Obelisk: Seek a card with the highest mana value among cards in your library with mana value X or less, where X is the number of charge counters on Runecarved Obelisk.

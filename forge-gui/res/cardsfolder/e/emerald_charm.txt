@@ -1,7 +1,7 @@
 Name:Emerald Charm
 ManaCost:G
 Types:Instant
-A:SP$ Charm | Cost$ G | Choices$ DBUntap,DBDestroy,DBDebuff | Defined$ You
+A:SP$ Charm | Choices$ DBUntap,DBDestroy,DBDebuff | Defined$ You
 SVar:DBUntap:DB$ Untap | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Untap target permanent.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment.nonAura | TgtPrompt$ Select target non-Aura enchantment | SpellDescription$ Destroy target non-Aura enchantment.
 SVar:DBDebuff:DB$ Debuff | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Flying | SpellDescription$ Target creature loses flying until end of turn.

@@ -1,7 +1,7 @@
 Name:Aura Barbs
 ManaCost:2 R
 Types:Instant Arcane
-A:SP$ DealDamage | Cost$ 2 R | NumDmg$ 2 | DamageSource$ Valid Enchantment | Defined$ CardController | RelativeTarget$ True | SubAbility$ DBAuraDmg | StackDescription$ SpellDescription | SpellDescription$ Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to.
+A:SP$ DealDamage | NumDmg$ 2 | DamageSource$ Valid Enchantment | Defined$ CardController | RelativeTarget$ True | SubAbility$ DBAuraDmg | StackDescription$ SpellDescription | SpellDescription$ Each enchantment deals 2 damage to its controller, then each Aura attached to a creature deals 2 damage to the creature it's attached to.
 SVar:DBAuraDmg:DB$ DealDamage | NumDmg$ 2 | DamageSource$ Valid Aura.AttachedTo Creature | Defined$ Enchanted | RelativeTarget$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

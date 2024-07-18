@@ -1,7 +1,7 @@
 Name:Verdant Rebirth
 ManaCost:1 G
 Types:Instant
-A:SP$ Animate | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ VerdantRebirthChangeZone | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target creature gains "When this creature dies, return it to its owner's hand." Draw a card.
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Triggers$ VerdantRebirthChangeZone | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target creature gains "When this creature dies, return it to its owner's hand." Draw a card.
 SVar:VerdantRebirthChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ VerdantRebirthTrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to its owner's hand.
 SVar:VerdantRebirthTrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ TriggeredNewCardLKICopy
 SVar:DBDraw:DB$ Draw | NumCards$ 1

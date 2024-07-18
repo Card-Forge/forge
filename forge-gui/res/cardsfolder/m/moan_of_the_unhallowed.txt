@@ -2,5 +2,5 @@ Name:Moan of the Unhallowed
 ManaCost:2 B B
 Types:Sorcery
 K:Flashback:5 B B
-A:SP$ Token | Cost$ 2 B B | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create two 2/2 black Zombie creature tokens.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create two 2/2 black Zombie creature tokens.
 Oracle:Create two 2/2 black Zombie creature tokens.\nFlashback {5}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

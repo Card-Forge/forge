@@ -1,0 +1,14 @@
+Name:Sphinx of the Revelation
+ManaCost:3 W U
+Types:Artifact Creature Sphinx
+PT:4/5
+K:Flying
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever you gain life, you get that many {E} (energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ LifeX
+A:AB$ Draw | Cost$ W U U T PayEnergy<X> | NumCards$ X | SpellDescription$ Draw X cards.
+SVar:LifeX:TriggerCount$LifeAmount
+SVar:X:Count$xPaid
+DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Flying, lifelink\nWhenever you gain life, you get that many {E} (energy counters).\n{W}{U}{U}, {T}, Pay X {E}: Draw X cards.

@@ -1,6 +1,6 @@
 Name:Whack
 ManaCost:3 B
 Types:Sorcery
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Creature.White | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a a white creature.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | ValidTarget$ Creature.White | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a white creature.
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
 Oracle:This spell costs {3} less to cast if it targets a white creature.\nTarget creature gets -4/-4 until end of turn.

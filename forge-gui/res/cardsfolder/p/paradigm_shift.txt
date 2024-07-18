@@ -1,7 +1,7 @@
 Name:Paradigm Shift
 ManaCost:1 U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 1 U | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | SubAbility$ DBShuffle | SpellDescription$ Exile all cards from your library. Then shuffle your graveyard into your library.
+A:SP$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile | SubAbility$ DBShuffle | SpellDescription$ Exile all cards from your library. Then shuffle your graveyard into your library.
 SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 AI:RemoveDeck:All
 Oracle:Exile all cards from your library. Then shuffle your graveyard into your library.

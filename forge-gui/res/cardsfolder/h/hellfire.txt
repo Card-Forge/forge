@@ -1,7 +1,7 @@
 Name:Hellfire
 ManaCost:2 B B B
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 B B B | ValidCards$ Creature.nonBlack | RememberDestroyed$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all nonblack creatures. CARDNAME deals X plus 3 damage to you, where X is the number of creatures that died this way.
+A:SP$ DestroyAll | ValidCards$ Creature.nonBlack | RememberDestroyed$ True | SubAbility$ DBDealDamage | SpellDescription$ Destroy all nonblack creatures. CARDNAME deals X plus 3 damage to you, where X is the number of creatures that died this way.
 SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ You
 SVar:X:Remembered$Amount/Plus.3
 # Remember Destroyed still isn't quite right since Hellfire cares about Replacement effects too

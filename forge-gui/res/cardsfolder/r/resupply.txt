@@ -1,6 +1,6 @@
 Name:Resupply
 ManaCost:5 W
 Types:Instant
-A:SP$ GainLife | Cost$ 5 W | LifeAmount$ 6 | SpellDescription$ You gain 6 life. | SubAbility$ DBDraw
+A:SP$ GainLife | LifeAmount$ 6 | SpellDescription$ You gain 6 life. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:You gain 6 life.\nDraw a card.

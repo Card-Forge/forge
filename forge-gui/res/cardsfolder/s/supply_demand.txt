@@ -1,7 +1,7 @@
 Name:Supply
 ManaCost:X G W
 Types:Sorcery
-A:SP$ Token | Cost$ X G W | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create X 1/1 green Saproling creature tokens.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create X 1/1 green Saproling creature tokens.
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
 AlternateMode:Split
@@ -12,5 +12,5 @@ ALTERNATE
 Name:Demand
 ManaCost:1 W U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W U | Origin$ Library | Destination$ Hand | ChangeType$ Card.MultiColor | ChangeNum$ 1 | SpellDescription$ Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.MultiColor | ChangeNum$ 1 | SpellDescription$ Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.
 Oracle:Search your library for a multicolored card, reveal it, put it into your hand, then shuffle.

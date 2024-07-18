@@ -47,6 +47,26 @@ public class AiProfileUtil {
     public static final String AI_PROFILE_RANDOM_MATCH = "Random (Every Match)";
     public static final String AI_PROFILE_RANDOM_DUEL = "Random (Every Game)";
 
+    public enum AISideboardingMode {
+        Off,
+        AI,
+        HumanForAI;
+
+        public static AISideboardingMode normalizedValueOf(String value) {
+            return valueOf(value.replace(" ", ""));
+        }
+    }
+
+    private static AISideboardingMode aiSideboardingMode = AISideboardingMode.Off;
+
+    public static AISideboardingMode getAISideboardingMode() {
+        return aiSideboardingMode;
+    }
+
+    public static void setAiSideboardingMode(AISideboardingMode mode) {
+        aiSideboardingMode = mode;
+    }
+
     /** Builds an AI profile file name with full relative 
      * path based on the profile name. 
      * @param profileName the name of the profile.

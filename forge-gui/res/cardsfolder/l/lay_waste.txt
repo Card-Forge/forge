@@ -1,6 +1,6 @@
 Name:Lay Waste
 ManaCost:3 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 K:Cycling:2
 Oracle:Destroy target land.\nCycling {2} ({2}, Discard this card: Draw a card.)

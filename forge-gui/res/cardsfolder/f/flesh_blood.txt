@@ -2,7 +2,7 @@ Name:Flesh
 ManaCost:3 B G
 Types:Sorcery
 K:Fuse
-A:SP$ ChangeZone | Cost$ 3 B G | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target creature card in a graveyard | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ParentTargeted$CardPower
 DeckHas:Ability$Counters
@@ -14,7 +14,7 @@ ALTERNATE
 Name:Blood
 ManaCost:R G
 Types:Sorcery
-A:SP$ Pump | Cost$ R G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ BloodDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to any target.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ BloodDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to any target.
 SVar:BloodDamage:DB$ DealDamage | ValidTgts$ Any | AILogic$ PowerDmg | NumDmg$ Y | DamageSource$ ParentTarget
 SVar:Y:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to any target.\nFuse (You may cast one or both halves of this card from your hand.)

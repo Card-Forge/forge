@@ -1,7 +1,7 @@
 Name:Full Flowering
 ManaCost:X X G
 Types:Sorcery
-A:SP$ Repeat | Cost$ X X G | RepeatSubAbility$ DBPopulate | MaxRepeat$ X | StackDescription$ SpellDescription | SpellDescription$ Populate X times. (To populate, create a token that's a copy of a creature token you control. Do this X times.)
+A:SP$ Repeat | RepeatSubAbility$ DBPopulate | MaxRepeat$ X | StackDescription$ SpellDescription | SpellDescription$ Populate X times. (To populate, create a token that's a copy of a creature token you control. Do this X times.)
 SVar:X:Count$xPaid
 SVar:DBPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckNeeds:Ability$Token

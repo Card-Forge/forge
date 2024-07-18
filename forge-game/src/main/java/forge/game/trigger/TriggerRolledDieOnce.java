@@ -21,6 +21,10 @@ public class TriggerRolledDieOnce extends Trigger {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
+        if (hasParam("RolledToVisitAttractions")) {
+            if (!(boolean) runParams.getOrDefault(AbilityKey.RolledToVisitAttractions, false))
+                return false;
+        }
         return true;
     }
 

@@ -1,5 +1,5 @@
 Name:Consume the Meek
 ManaCost:3 B B
 Types:Instant
-A:SP$ DestroyAll | Cost$ 3 B B | ValidCards$ Creature.cmcLE3 | NoRegen$ True | SpellDescription$ Destroy each creature with mana value 3 or less. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Creature.cmcLE3 | NoRegen$ True | SpellDescription$ Destroy each creature with mana value 3 or less. They can't be regenerated.
 Oracle:Destroy each creature with mana value 3 or less. They can't be regenerated.

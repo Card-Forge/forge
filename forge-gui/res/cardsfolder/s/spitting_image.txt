@@ -2,5 +2,5 @@ Name:Spitting Image
 ManaCost:4 GU GU
 Types:Sorcery
 K:Retrace
-A:SP$ CopyPermanent | Cost$ 4 GU GU | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Create a token that's a copy of target creature.
+A:SP$ CopyPermanent | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Create a token that's a copy of target creature.
 Oracle:Create a token that's a copy of target creature.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

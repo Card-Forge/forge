@@ -1,7 +1,7 @@
 Name:Plow Through Reito
 ManaCost:1 W
 Types:Instant Arcane
-A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Hand | ChangeType$ Plains.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ ReitoPump | SpellDescription$ Sweep — Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Plains.YouCtrl | ChangeNum$ X | Hidden$ True | RememberChanged$ True | SubAbility$ ReitoPump | SpellDescription$ Sweep — Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
 SVar:ReitoPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ Y | NumDef$ Y
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:Y:Remembered$Amount

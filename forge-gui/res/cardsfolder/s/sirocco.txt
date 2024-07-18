@@ -1,7 +1,7 @@
 Name:Sirocco
 ManaCost:1 R
 Types:Instant
-A:SP$ RevealHand | Cost$ 1 R | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBRepeatDiscard | SpellDescription$ Target player reveals their hand. For each blue instant card revealed this way, that player discards that card unless they pay 4 life.
+A:SP$ RevealHand | RememberRevealed$ True | ValidTgts$ Player | TgtPrompt$ Select target Player | SubAbility$ DBRepeatDiscard | SpellDescription$ Target player reveals their hand. For each blue instant card revealed this way, that player discards that card unless they pay 4 life.
 SVar:DBRepeatDiscard:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered+Instant+Blue | Zone$ Hand | RepeatSubAbility$ DBDiscard | SubAbility$ DBCleanup
 SVar:DBDiscard:DB$ Discard | DefinedCards$ Imprinted | Mode$ Defined | UnlessCost$ PayLife<4> | UnlessPayer$ Targeted | StackDescription$ Discard {c:Imprinted}
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

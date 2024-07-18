@@ -1,6 +1,6 @@
 Name:Dissenter's Deliverance
 ManaCost:1 G
 Types:Instant
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 K:Cycling:G
 Oracle:Destroy target artifact.\nCycling {G} ({G}, Discard this card: Draw a card.)

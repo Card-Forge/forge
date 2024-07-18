@@ -1,6 +1,6 @@
 Name:Lost in the Mist
 ManaCost:3 U U
 Types:Instant
-A:SP$ Counter | Cost$ 3 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBReturn | SpellDescription$ Counter target spell. Return target permanent to its owner's hand.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBReturn | SpellDescription$ Counter target spell. Return target permanent to its owner's hand.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select target permanent | ValidTgts$ Permanent
 Oracle:Counter target spell. Return target permanent to its owner's hand.

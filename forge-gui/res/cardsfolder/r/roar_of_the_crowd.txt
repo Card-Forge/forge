@@ -1,7 +1,7 @@
 Name:Roar of the Crowd
 ManaCost:3 R
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 3 R | Defined$ You | Type$ Creature | SubAbility$ DBDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to any target equal to the number of permanents you control of the chosen type.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDamage | SpellDescription$ Choose a creature type. CARDNAME deals damage to any target equal to the number of permanents you control of the chosen type.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
 SVar:X:Count$Valid Permanent.ChosenType+YouCtrl
 AI:RemoveDeck:All

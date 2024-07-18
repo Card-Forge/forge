@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Dinosaur
 PT:5/5
 K:Trample
-T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Dinosaur.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dinosaur you control is dealt damage, it deals that much damage to any target that isn't a Dinosaur.
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Dinosaur.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dinosaur you control is dealt damage, it deals that much damage to any target that isn't a Dinosaur.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any.nonDinosaur | TgtPrompt$ Select any target that isn't a Dinosaur
 SVar:X:TriggerCount$DamageAmount
 DeckHints:Type$Dinosaur

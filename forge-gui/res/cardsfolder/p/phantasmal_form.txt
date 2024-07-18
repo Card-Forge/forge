@@ -1,7 +1,7 @@
 Name:Phantasmal Form
 ManaCost:2 U
 Types:Instant
-A:SP$ Animate | Cost$ 2 U | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | Power$ 3 | Toughness$ 3 | Keywords$ Flying | Colors$ Blue | Types$ Illusion | SubAbility$ DBDraw | SpellDescription$ Until end of turn, up to two target creatures each have base power and toughness 3/3, gain flying, and become blue Illusions in addition to their other colors and types.
+A:SP$ Animate | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | Power$ 3 | Toughness$ 3 | Keywords$ Flying | Colors$ Blue | Types$ Illusion | SubAbility$ DBDraw | SpellDescription$ Until end of turn, up to two target creatures each have base power and toughness 3/3, gain flying, and become blue Illusions in addition to their other colors and types.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:Until end of turn, up to two target creatures each have base power and toughness 3/3, gain flying, and become blue Illusions in addition to their other colors and types.\nDraw a card.

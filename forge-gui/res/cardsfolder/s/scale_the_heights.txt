@@ -1,7 +1,7 @@
 Name:Scale the Heights
 ManaCost:2 G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on up to one target creature.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on up to one target creature.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBEffect | SpellDescription$ You gain 2 life.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ LandPlay | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ You may play an additional land this turn.
 SVar:LandPlay:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.

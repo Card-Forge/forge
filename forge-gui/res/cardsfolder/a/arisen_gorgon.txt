@@ -2,5 +2,5 @@ Name:Arisen Gorgon
 ManaCost:1 B B
 Types:Creature Zombie Gorgon
 PT:3/3
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Planeswalker.Liliana+YouCtrl | Description$ Arisen Gorgon has deathtouch as long as you control a Liliana planeswalker.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Deathtouch | IsPresent$ Planeswalker.Liliana+YouCtrl | Description$ CARDNAME has deathtouch as long as you control a Liliana planeswalker.
 Oracle:Arisen Gorgon has deathtouch as long as you control a Liliana planeswalker. (Any amount of damage this deals to a creature is enough to destroy it.)

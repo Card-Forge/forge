@@ -1,7 +1,7 @@
 Name:Funeral Charm
 ManaCost:B
 Types:Instant
-A:SP$ Charm | Cost$ B | Choices$ DBDiscard,DBPump,DBPump2
+A:SP$ Charm | Choices$ DBDiscard,DBPump,DBPump2
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Choose a player | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ Target player discards a card.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ -1 | SpellDescription$ Target creature gets +2/-1 until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Landwalk:Swamp | SpellDescription$ Target creature gains swampwalk until end of turn.

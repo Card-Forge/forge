@@ -1,5 +1,5 @@
 Name:Fists of the Anvil
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | SpellDescription$ Target creature gets +4/+0 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | SpellDescription$ Target creature gets +4/+0 until end of turn.
 Oracle:Target creature gets +4/+0 until end of turn.

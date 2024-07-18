@@ -1,5 +1,5 @@
 Name:Unsubstantiate
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or creature to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Creature,Card.inZoneStack | TgtZone$ Stack,Battlefield | Origin$ Battlefield,Stack | Fizzle$ True | Destination$ Hand | SpellDescription$ Return target spell or creature to its owner's hand.
 Oracle:Return target spell or creature to its owner's hand.

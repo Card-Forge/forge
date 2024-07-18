@@ -1,7 +1,7 @@
 Name:Reap the Past
 ManaCost:X R G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X R G | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeNum$ X | Hidden$ True | AtRandom$ True | SubAbility$ DBExile | SpellDescription$ Return X cards at random from your graveyard to your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeNum$ X | Hidden$ True | AtRandom$ True | SubAbility$ DBExile | SpellDescription$ Return X cards at random from your graveyard to your hand. Exile CARDNAME.
 SVar:X:Count$xPaid
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Return X cards at random from your graveyard to your hand. Exile Reap the Past.

@@ -1,7 +1,7 @@
 Name:Hunter's Prowess
 ManaCost:4 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 G | ValidTgts$ Creature | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +3/+3 and gains trample and "Whenever this creature deals combat damage to a player, draw that many cards." | StackDescription$ SpellDescription
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 3 | NumDef$ 3 | KW$ Trample | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +3/+3 and gains trample and "Whenever this creature deals combat damage to a player, draw that many cards." | StackDescription$ SpellDescription
 SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Triggers$ HunterProwessTrig | StackDescription$ None
 SVar:HunterProwessTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ HunterProwessX | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw that many cards.
 SVar:HunterProwessX:DB$ Draw | Defined$ You | NumCards$ HunterProwessY

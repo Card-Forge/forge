@@ -1,7 +1,7 @@
 Name:Divergent Growth
 ManaCost:G
 Types:Instant
-A:SP$ AnimateAll | Cost$ G | ValidCards$ Land.YouCtrl | Abilities$ ABMana | SpellDescription$ Until end of turn, lands you control gain "{T}: Add one mana of any color."
+A:SP$ AnimateAll | ValidCards$ Land.YouCtrl | Abilities$ ABMana | SpellDescription$ Until end of turn, lands you control gain "{T}: Add one mana of any color."
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 AI:RemoveDeck:All
 Oracle:Until end of turn, lands you control gain "{T}: Add one mana of any color."

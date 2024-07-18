@@ -1,7 +1,7 @@
 Name:Invigorated Rampage
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ DBPumpOne,DBPumpTwo
+A:SP$ Charm | Choices$ DBPumpOne,DBPumpTwo
 SVar:DBPumpOne:DB$ Pump | ValidTgts$ Creature | NumAtt$ +4 | KW$ Trample | TgtPrompt$ Select target creature | SpellDescription$ Target creature gets +4/+0 and gains trample until end of turn.
 SVar:DBPumpTwo:DB$ Pump | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Creature | NumAtt$ +2 | KW$ Trample | TgtPrompt$ Select target creature | SpellDescription$ Two target creatures each get +2/+0 and gain trample until end of turn.
 Oracle:Choose one —\n• Target creature gets +4/+0 and gains trample until end of turn.\n• Two target creatures each get +2/+0 and gain trample until end of turn.

@@ -1,7 +1,7 @@
 Name:Retraction Helix
 ManaCost:U
 Types:Instant
-A:SP$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Abilities$ ABChangeZone | SpellDescription$ Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
+A:SP$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Abilities$ ABChangeZone | SpellDescription$ Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."
 SVar:ABChangeZone:AB$ ChangeZone | Cost$ T | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
 AI:RemoveDeck:All
 Oracle:Until end of turn, target creature gains "{T}: Return target nonland permanent to its owner's hand."

@@ -2,7 +2,7 @@ Name:Krazy Kow
 ManaCost:3 R
 Types:Creature Cow
 PT:3/3
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice Krazy Kow and it deals 3 damage to each creature and each player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice CARDNAME and it deals 3 damage to each creature and each player.
 SVar:TrigRoll:DB$ RollDice | ResultSubAbilities$ 1:DBSac
 SVar:DBSac:DB$ Sacrifice | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature | ValidPlayers$ Player | NumDmg$ 3

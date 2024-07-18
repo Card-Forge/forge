@@ -1,6 +1,6 @@
 Name:Unearth
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 3 or less in your graveyard | ValidTgts$ Creature.cmcLE3+YouCtrl | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card with mana value 3 or less in your graveyard | ValidTgts$ Creature.cmcLE3+YouCtrl | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield.
 K:Cycling:2
 Oracle:Return target creature card with mana value 3 or less from your graveyard to the battlefield.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,7 +1,7 @@
 Name:Glyph of Reincarnation
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Wall | TgtPrompt$ Select target Wall | AILogic$ Pump | ActivationPhases$ Main2->Cleanup | SubAbility$ DBDestroyAll | StackDescription$ None | SpellDescription$ Cast this spell only after combat.
+A:SP$ Pump | ValidTgts$ Wall | TgtPrompt$ Select target Wall | AILogic$ Pump | ActivationPhases$ Main2->Cleanup | SubAbility$ DBDestroyAll | StackDescription$ None | SpellDescription$ Cast this spell only after combat.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.blockedByValidThisTurn ParentTarget | NoRegen$ True | RememberDestroyed$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Destroy all creatures that were blocked by target Wall this turn. They can't be regenerated.
 SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.OwnedBy Player.Active | ChoiceTitle$ Choose creatures to put on the battlefield | ChoiceZone$ Graveyard | Amount$ X | Mandatory$ True | AILogic$ WorstCard | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall onto the battlefield under its owner's control.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup

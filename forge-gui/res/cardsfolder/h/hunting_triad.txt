@@ -1,6 +1,6 @@
 Name:Hunting Triad
 ManaCost:3 G
-Types:Tribal Sorcery Elf
+Types:Kindred Sorcery Elf
 A:SP$ Token | Cost$ 3 G | TokenAmount$ 3 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | SpellDescription$ Create three 1/1 green Elf Warrior creature tokens.
 K:Reinforce:3:3 G
 DeckHas:Ability$Counters|Token

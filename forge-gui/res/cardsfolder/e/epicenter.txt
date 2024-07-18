@@ -1,7 +1,7 @@
 Name:Epicenter
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 R | ConditionCheckSVar$ X | ConditionSVarCompare$ LE6 | ValidTgts$ Player | SacValid$ Land | SacMessage$ Land | SubAbility$ DBWasteLand | SpellDescription$ Target player sacrifices a Land. Threshold — Each player sacrifices all lands they control instead if seven or more cards are in your graveyard
+A:SP$ Sacrifice | ConditionCheckSVar$ X | ConditionSVarCompare$ LE6 | ValidTgts$ Player | SacValid$ Land | SacMessage$ Land | SubAbility$ DBWasteLand | SpellDescription$ Target player sacrifices a Land. Threshold — Each player sacrifices all lands they control instead if seven or more cards are in your graveyard
 SVar:DBWasteLand:DB$ SacrificeAll | Condition$ Threshold | ValidCards$ Land
 SVar:X:Count$InYourYard
 Oracle:Target player sacrifices a land.\nThreshold — Each player sacrifices all lands they control instead if seven or more cards are in your graveyard.

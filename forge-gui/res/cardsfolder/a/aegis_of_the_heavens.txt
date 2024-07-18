@@ -1,5 +1,5 @@
 Name:Aegis of the Heavens
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 7 | SpellDescription$ Target creature gets +1/+7 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 7 | SpellDescription$ Target creature gets +1/+7 until end of turn.
 Oracle:Target creature gets +1/+7 until end of turn.

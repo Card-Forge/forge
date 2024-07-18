@@ -1,0 +1,8 @@
+Name:Poison-Blade Mentor
+ManaCost:1 B
+Types:Creature Human Assassin
+PT:2/1
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target Assassin you control gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Assassin.Other+YouCtrl | TgtPrompt$ Select another target attacking creature | KW$ Deathtouch
+Oracle:Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)\nWhenever Poison-Blade Mentor attacks, another target Assassin you control gains deathtouch until end of turn.

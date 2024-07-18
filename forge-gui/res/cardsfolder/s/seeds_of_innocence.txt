@@ -1,7 +1,7 @@
 Name:Seeds of Innocence
 ManaCost:1 G G
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 1 G G | ValidCards$ Artifact | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value.
+A:SP$ DestroyAll | ValidCards$ Artifact | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainLife | SubAbility$ DBCleanup
 SVar:DBGainLife:DB$ GainLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:RememberedLKI$FilterControlledByRemembered_CardManaCost

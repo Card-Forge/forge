@@ -1,7 +1,7 @@
 Name:Biogenic Upgrade
 ManaCost:4 G G
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 4 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SubAbility$ DBPump | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures, then double the number of +1/+1 counters on each of those creatures.
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature to distribute counters to | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SubAbility$ DBPump | SpellDescription$ Distribute three +1/+1 counters among one, two, or three target creatures, then double the number of +1/+1 counters on each of those creatures.
 SVar:DBPump:DB$ MultiplyCounter | Defined$ Targeted | CounterType$ P1P1
 DeckHas:Ability$Counters
 Oracle:Distribute three +1/+1 counters among one, two, or three target creatures, then double the number of +1/+1 counters on each of those creatures.

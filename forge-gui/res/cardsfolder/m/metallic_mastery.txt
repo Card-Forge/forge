@@ -1,6 +1,6 @@
 Name:Metallic Mastery
 ManaCost:2 R
 Types:Sorcery
-A:SP$ GainControl | Cost$ 2 R | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact until end of turn. Untap that artifact. It gains haste until end of turn.
+A:SP$ GainControl | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target artifact until end of turn. Untap that artifact. It gains haste until end of turn.
 SVar:PlayMain1:TRUE
 Oracle:Gain control of target artifact until end of turn. Untap that artifact. It gains haste until end of turn.

@@ -1,7 +1,7 @@
 Name:Martyr's Cry
 ManaCost:W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ W W | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | ChangeType$ Creature.White | SubAbility$ DBRepeat | SpellDescription$ Exile all white creatures. For each creature exiled this way, its controller draws a card.
+A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | ChangeType$ Creature.White | SubAbility$ DBRepeat | SpellDescription$ Exile all white creatures. For each creature exiled this way, its controller draws a card.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ RememberedController | RepeatSubAbility$ DBDraw | SubAbility$ DBCleanup
 SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

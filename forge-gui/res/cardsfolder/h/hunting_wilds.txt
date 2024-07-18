@@ -2,7 +2,7 @@ Name:Hunting Wilds
 ManaCost:3 G
 Types:Sorcery
 K:Kicker:3 G
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | Tapped$ True | RememberChanged$ True | SubAbility$ DBUntap | SpellDescription$ Search your library for up to two Forest cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ 2 | Tapped$ True | RememberChanged$ True | SubAbility$ DBUntap | SpellDescription$ Search your library for up to two Forest cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands.
 SVar:DBUntap:DB$ Untap | Defined$ Remembered | SubAbility$ DBAnimate | Condition$ Kicked | ConditionDescription$ If it was kicked,
 SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 3 | Toughness$ 3 | Colors$ Green | Types$ Creature | Keywords$ Haste | Condition$ Kicked | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

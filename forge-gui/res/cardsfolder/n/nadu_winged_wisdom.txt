@@ -1,0 +1,9 @@
+Name:Nadu, Winged Wisdom
+ManaCost:1 G U
+Types:Legendary Creature Bird Wizard
+PT:3/4
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddTrigger$ NaduTrigger | AddSVar$ NaduDig | Description$ Creatures you control have "Whenever this creature becomes the target of a spell or ability, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand. This ability triggers only twice each turn."
+SVar:NaduTrigger:Mode$ BecomesTarget | ActivationLimit$ 2 | Execute$ NaduDig | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature becomes the target of a spell or ability, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand. This ability triggers only twice each turn.
+SVar:NaduDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Land | DestinationZone$ Battlefield | DestinationZone2$ Hand
+Oracle:Flying\nCreatures you control have "Whenever this creature becomes the target of a spell or ability, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand. This ability triggers only twice each turn."

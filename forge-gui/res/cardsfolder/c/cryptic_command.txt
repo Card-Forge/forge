@@ -1,7 +1,7 @@
 Name:Cryptic Command
 ManaCost:1 U U U
 Types:Instant
-A:SP$ Charm | Cost$ 1 U U U | Choices$ DBCounter,DBReturn,DBTapAll,DBDraw | CharmNum$ 2
+A:SP$ Charm | Choices$ DBCounter,DBReturn,DBTapAll,DBDraw | CharmNum$ 2
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:DBReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Good | SpellDescription$ Return target permanent to its owner's hand.
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl | AILogic$ AtLeast3 | SpellDescription$ Tap all creatures your opponents control.

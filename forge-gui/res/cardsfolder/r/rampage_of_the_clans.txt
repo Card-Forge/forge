@@ -1,7 +1,7 @@
 Name:Rampage of the Clans
 ManaCost:3 G
 Types:Instant
-A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all artifacts and enchantments. For each permanent destroyed this way, its controller creates a 3/3 green Centaur creature token.
+A:SP$ DestroyAll | ValidCards$ Artifact,Enchantment | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all artifacts and enchantments. For each permanent destroyed this way, its controller creates a 3/3 green Centaur creature token.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ ImprintedController | TokenScript$ g_3_3_centaur
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ true

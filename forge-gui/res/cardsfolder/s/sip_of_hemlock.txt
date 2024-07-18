@@ -1,6 +1,6 @@
 Name:Sip of Hemlock
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses 2 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. Its controller loses 2 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
 Oracle:Destroy target creature. Its controller loses 2 life.

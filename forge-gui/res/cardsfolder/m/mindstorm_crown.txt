@@ -1,7 +1,7 @@
 Name:Mindstorm Crown
 ManaCost:3
 Types:Artifact
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, Mindstorm Crown deals 1 damage to you.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, CARDNAME deals 1 damage to you.
 SVar:TrigDraw:DB$ Draw | Defined$ You.NoCardsInHandAtBeginningOfTurn | NumCards$ 1 | SubAbility$ DBPain
 SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You.CardsInHandAtBeginningOfTurn
 AI:RemoveDeck:Random

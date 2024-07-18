@@ -1,5 +1,5 @@
 Name:Strangling Spores
 ManaCost:3 B
 Types:Instant
-A:SP$ Pump | Cost$ 3 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
 Oracle:Target creature gets -3/-3 until end of turn.

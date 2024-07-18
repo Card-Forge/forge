@@ -1,7 +1,7 @@
 Name:Mana Short
 ManaCost:2 U
 Types:Instant
-A:SP$ TapAll | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SubAbility$ DrainMana | SpellDescription$ Tap all lands target player controls and that player loses all unspent mana.
+A:SP$ TapAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land | SubAbility$ DrainMana | SpellDescription$ Tap all lands target player controls and that player loses all unspent mana.
 SVar:DrainMana:DB$ DrainMana | Defined$ Targeted
 AI:RemoveDeck:All
 Oracle:Tap all lands target player controls and that player loses all unspent mana.

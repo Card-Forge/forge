@@ -2,6 +2,6 @@ Name:Ghirapur Guide
 ManaCost:2 G
 Types:Creature Elf Scout
 PT:3/2
-A:AB$ Effect | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | RememberObjects$ Targeted | Name$ Ghirapur Guide's Effect | StaticAbilities$ KWPump | SpellDescription$ Target creature you control can't be blocked by creatures with power 2 or less this turn.
+A:AB$ Effect | Cost$ 2 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature | RememberObjects$ Targeted | StaticAbilities$ KWPump | SpellDescription$ Target creature you control can't be blocked by creatures with power 2 or less this turn.
 SVar:KWPump:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.powerLE2 | EffectZone$ Command | Description$ Remembered creature can't be blocked by creatures with power 2 or less this turn.
 Oracle:{2}{G}: Target creature you control can't be blocked by creatures with power 2 or less this turn.

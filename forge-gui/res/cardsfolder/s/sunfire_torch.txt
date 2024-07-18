@@ -2,8 +2,8 @@ Name:Sunfire Torch
 ManaCost:R
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 1 | AddTrigger$ TrigAttack | Description$ Equipped creature gets +1/+0 and has "Whenever this creature attacks, you may sacrifice CARDNAME. When you do, this creature deals 2 damage to any target."
-SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever this creature attacks, you may sacrifice Sunfire Torch. When you do, this creature deals 2 damage to any target.
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/OriginalHost/Sunfire Torch> | Execute$ TrigDamage | SpellDescription$ When you do, this creature deals 2 damage to any target.
+SVar:TrigAttack:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice ORIGINALHOST. When you do, CARDNAME deals 2 damage to any target.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/OriginalHost/Sunfire Torch> | Execute$ TrigDamage | SpellDescription$ When you do, CARDNAME deals 2 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Any
 K:Equip:1
 DeckHas:Ability$Sacrifice

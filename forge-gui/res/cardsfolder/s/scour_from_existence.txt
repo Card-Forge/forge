@@ -1,5 +1,5 @@
 Name:Scour from Existence
 ManaCost:7
 Types:Instant
-A:SP$ ChangeZone | Cost$ 7 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent.
+A:SP$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent.
 Oracle:Exile target permanent.

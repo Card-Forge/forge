@@ -1,7 +1,7 @@
 Name:Traverse the Outlands
 ManaCost:4 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | Tapped$ True | SpellDescription$ Search your library for up to X basic land cards, where X is the greatest power among creatures you control. Put those cards onto the battlefield tapped, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | Tapped$ True | SpellDescription$ Search your library for up to X basic land cards, where X is the greatest power among creatures you control. Put those cards onto the battlefield tapped, then shuffle.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
 SVar:NeedsToPlay:Creature.YouCtrl+powerGE2
 Oracle:Search your library for up to X basic land cards, where X is the greatest power among creatures you control. Put those cards onto the battlefield tapped, then shuffle.

@@ -1,7 +1,7 @@
 Name:Incendiary Command
 ManaCost:3 R R
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 R R | Choices$ DBDamageP,DBDamageC,DBDestroy,DBDiscard | CharmNum$ 2
+A:SP$ Charm | Choices$ DBDamageP,DBDamageC,DBDestroy,DBDiscard | CharmNum$ 2
 SVar:DBDamageP:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player or planeswalker.
 SVar:DBDamageC:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.

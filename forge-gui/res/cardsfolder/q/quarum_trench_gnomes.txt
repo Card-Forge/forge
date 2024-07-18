@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Gnome
 PT:1/1
 A:AB$ Effect | Cost$ T | ValidTgts$ Plains | IsCurse$ True | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | Duration$ Permanent | ReplacementEffects$ QuarumReplacement | StackDescription$ REP target Plains_{c:Targeted} | SpellDescription$ If target Plains is tapped for mana, it produces colorless mana instead of white mana. (This effect lasts indefinitely.)
-SVar:QuarumReplacement:Event$ ProduceMana | ValidCard$ Card.IsRemembered | ReplaceWith$ QuarumProduce | Description$ If this is tapped for mana, it produces colorless mana instead of white mana.
+SVar:QuarumReplacement:Event$ ProduceMana | ValidCard$ Card.IsRemembered | ReplaceWith$ QuarumProduce | Description$ If this permanent is tapped for mana, it produces colorless mana instead of white mana.
 SVar:QuarumProduce:DB$ ReplaceMana | ReplaceColor$ C | ReplaceOnly$ W
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

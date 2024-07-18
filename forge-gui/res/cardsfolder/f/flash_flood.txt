@@ -1,7 +1,7 @@
 Name:Flash Flood
 ManaCost:U
 Types:Instant
-A:SP$ Charm | Cost$ U | Choices$ DBDestroy,DBChangeZone
+A:SP$ Charm | Choices$ DBDestroy,DBChangeZone
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.Red | TgtPrompt$ Select target red permanent | SpellDescription$ Destroy target red permanent.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Mountain | TgtPrompt$ Select target Mountain | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target Mountain to its owner's hand.
 AI:RemoveDeck:Random

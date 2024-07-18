@@ -7,7 +7,7 @@ A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ At the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from CARDNAME.
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigRemoveCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from CARDNAME.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ ORE | CounterNum$ 1
-T:Mode$ CounterRemoved | ValidCard$ Card.Self | CounterType$ ORE | NewCounterAmount$ 0 | Execute$ DBDamage | TriggerDescription$ When the last ore counter is removed from Orcish Mine, destroy enchanted land and Orcish Mine deals 2 damage to that land's controller.
+T:Mode$ CounterRemoved | ValidCard$ Card.Self | CounterType$ ORE | NewCounterAmount$ 0 | Execute$ DBDamage | TriggerDescription$ When the last ore counter is removed from CARDNAME, destroy enchanted land and CARDNAME deals 2 damage to that land's controller.
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ EnchantedController | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ Enchanted
 SVar:NonStackingAttachEffect:True

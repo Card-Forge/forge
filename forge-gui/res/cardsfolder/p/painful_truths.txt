@@ -1,7 +1,7 @@
 Name:Painful Truths
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 2 B | NumCards$ X | SpellDescription$ Converge — You draw X cards and you lose X life, where X is the number of colors of mana spent to cast this spell. | SubAbility$ DB1
+A:SP$ Draw | NumCards$ X | SpellDescription$ Converge — You draw X cards and you lose X life, where X is the number of colors of mana spent to cast this spell. | SubAbility$ DB1
 SVar:DB1:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Converge
 Oracle:Converge — You draw X cards and you lose X life, where X is the number of colors of mana spent to cast this spell.

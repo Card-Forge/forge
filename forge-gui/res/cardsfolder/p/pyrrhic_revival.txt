@@ -1,6 +1,6 @@
 Name:Pyrrhic Revival
 ManaCost:3 WB WB WB
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 WB WB WB | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ M1M1 | Defined$ ValidGraveyard Creature | AILogic$ ReanimateAll | SpellDescription$ Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ M1M1 | Defined$ ValidGraveyard Creature | AILogic$ ReanimateAll | SpellDescription$ Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.
 SVar:IsReanimatorCard:TRUE
 Oracle:Each player returns each creature card from their graveyard to the battlefield with an additional -1/-1 counter on it.

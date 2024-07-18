@@ -4,9 +4,9 @@ Types:Creature Human Monk
 PT:2/2
 K:Lifelink
 S:Mode$ Continuous | AddKeyword$ Lifelink | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | AffectedZone$ Stack | Description$ Instant and sorcery spells you control have lifelink.
-A:AB$ Effect | Cost$ 2 UR UR | Name$ Soulfire Grand Master effect | Triggers$ SpellCastTrig | SpellDescription$ The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.
+A:AB$ Effect | Cost$ 2 UR UR | Triggers$ SpellCastTrig | SpellDescription$ The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery.YouOwn+wasCastFromYourHand,Instant.YouOwn+wasCastFromYourHand | ValidActivatingPlayer$ You | Execute$ Buybacked | Static$ True | TriggerDescription$ The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of into your graveyard as it resolves.
-SVar:Buybacked:DB$ Effect | ReplacementEffects$ MoveToHandReplace | RememberObjects$ TriggeredCard | SubAbility$ ExileSelf | SpellDescription$ Put that card into your hand instead of into your graveyard as it resolves.
+SVar:Buybacked:DB$ Effect | ReplacementEffects$ MoveToHandReplace | RememberObjects$ TriggeredCard | SubAbility$ ExileSelf
 SVar:MoveToHandReplace:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Graveyard | Fizzle$ False | ReplaceWith$ ReplaceHand | Description$ Put that card into your hand instead of into your graveyard as it resolves.
 SVar:ReplaceHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Stack | Destination$ Hand | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

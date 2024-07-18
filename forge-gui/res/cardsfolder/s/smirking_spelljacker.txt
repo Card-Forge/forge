@@ -1,0 +1,12 @@
+Name:Smirking Spelljacker
+ManaCost:4 U
+Types:Creature Djinn Wizard Rogue
+PT:3/3
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target spell an opponent controls.
+SVar:TrigExile:DB$ ChangeZone | TargetType$ Spell.OppCtrl | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell an opponent controls
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | IsPresent$ Card.ExiledWithSource | PresentZone$ Exile | TriggerDescription$ Whenever CARDNAME attacks, if a card is exiled with it, you may cast the exiled card without paying its mana cost.
+SVar:TrigPlay:DB$ Play | Defined$ ExiledWithSource | Amount$ All | Controller$ You | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Flash\nFlying\nWhen Smirking Spelljacker enters the battlefield, exile target spell an opponent controls.\nWhenever Smirking Spelljacker attacks, if a card is exiled with it, you may cast the exiled card without paying its mana cost.

@@ -6,4 +6,4 @@ K:Prototype:4 U U:6:6
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 3 | SpellDescription$ Untap CARDNAME.
 DeckHints:Color$Blue
-Oracle:\nPrototype {4}{U}{U} — 6/6 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nDepth Charge Colossus doesn't untap during your untap step.\n{3}: Untap Depth Charge Colossus.
+Oracle:Prototype {4}{U}{U} — 6/6 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nDepth Charge Colossus doesn't untap during your untap step.\n{3}: Untap Depth Charge Colossus.

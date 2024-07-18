@@ -1,7 +1,7 @@
 Name:Mind Burst
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 1 B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.
 SVar:X:Count$NamedInAllYards.Mind Burst/Plus.1
 DeckHints:Name$Mind Burst
 Oracle:Target player discards X cards, where X is one plus the number of cards named Mind Burst in all graveyards.

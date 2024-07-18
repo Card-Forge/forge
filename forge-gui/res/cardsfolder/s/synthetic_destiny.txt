@@ -1,7 +1,7 @@
 Name:Synthetic Destiny
 ManaCost:4 U U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDestiny | SpellDescription$ Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBDestiny | SpellDescription$ Exile all creatures you control. At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library.
 SVar:DBDestiny:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DBMassReveal | RememberObjects$ Remembered | TriggerDescription$ At the beginning of the next end step, reveal cards from the top of your library until you reveal that many creature cards, put all creature cards revealed this way onto the battlefield, then shuffle the rest of the revealed cards into your library. | StackDescription$ None
 SVar:DBMassReveal:DB$ DigUntil | ConditionCheckSVar$ MassX | ConditionSVarCompare$ GT0 | Amount$ MassX | Valid$ Creature.YouOwn | ValidDescription$ creature | RevealedDestination$ Library | RevealedLibraryPosition$ 0 | FoundDestination$ Battlefield | SubAbility$ DBMassShuffle
 SVar:DBMassShuffle:DB$ Shuffle | ConditionCheckSVar$ MassX | ConditionSVarCompare$ GT0 | SubAbility$ DBMassCleanup

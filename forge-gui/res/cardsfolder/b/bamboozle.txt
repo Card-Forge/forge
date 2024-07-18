@@ -1,6 +1,6 @@
 Name:Bamboozle
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U | ValidTgts$ Player | DigNum$ 4 | ChangeNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | Reveal$ True | SpellDescription$ Target player reveals the top four cards of their library. You choose two of those cards and put them into that player's graveyard. Put the rest on top of their library in any order.
+A:SP$ Dig | ValidTgts$ Player | DigNum$ 4 | ChangeNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | Reveal$ True | SpellDescription$ Target player reveals the top four cards of their library. You choose two of those cards and put them into that player's graveyard. Put the rest on top of their library in any order.
 AI:RemoveDeck:All
 Oracle:Target player reveals the top four cards of their library. You choose two of those cards and put them into that player's graveyard. Put the rest on top of their library in any order.

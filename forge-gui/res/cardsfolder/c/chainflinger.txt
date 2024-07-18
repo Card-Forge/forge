@@ -2,6 +2,6 @@ Name:Chainflinger
 ManaCost:3 R
 Types:Creature Beast
 PT:2/2
-A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ Chainflinger deals 1 damage to any target.
+A:AB$ DealDamage | Cost$ 1 R T | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 A:AB$ DealDamage | Cost$ 2 R T | ValidTgts$ Any | NumDmg$ 2 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ CARDNAME deals 2 damage to any target. Activate only if seven or more cards are in your graveyard.
 Oracle:{1}{R}, {T}: Chainflinger deals 1 damage to any target.\nThreshold — {2}{R}, {T}: Chainflinger deals 2 damage to any target. Activate only if seven or more cards are in your graveyard.

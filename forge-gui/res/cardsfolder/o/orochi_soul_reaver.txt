@@ -1,0 +1,10 @@
+Name:Orochi Soul-Reaver
+ManaCost:5 B
+Types:Creature Snake Ninja Rogue
+PT:5/4
+K:Ninjutsu:3 B
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTreasure | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, create a Treasure token and manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBManifest
+SVar:DBManifest:DB$ Manifest | Amount$ 1 | Defined$ ValidLibrary Card.TopLibrary+ControlledBy TriggeredTarget
+DeckHas:Ability$Token & Type$Treasure
+Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token and manifest the top card of that player's library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

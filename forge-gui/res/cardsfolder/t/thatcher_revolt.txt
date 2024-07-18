@@ -1,6 +1,6 @@
 Name:Thatcher Revolt
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R | TokenAmount$ 3 | TokenScript$ r_1_1_human_haste | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step.
+A:SP$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_human_haste | TokenOwner$ You | AtEOT$ Sacrifice | SpellDescription$ Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step.
 SVar:PlayMain1:TRUE
 Oracle:Create three 1/1 red Human creature tokens with haste. Sacrifice those tokens at the beginning of the next end step.

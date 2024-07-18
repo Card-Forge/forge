@@ -10,5 +10,5 @@ ALTERNATE
 Name:Shield's Might
 ManaCost:1 G
 Types:Instant Adventure
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Target creature gets +2/+2 until end of turn. (Then exile this card. You may cast the creature later from exile.)

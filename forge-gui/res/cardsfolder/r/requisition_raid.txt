@@ -1,0 +1,10 @@
+Name:Requisition Raid
+ManaCost:W
+Types:Sorcery
+K:Spree
+A:SP$ Charm | Choices$ DBArtifact,DBEnchantment,DBPutCounterAll | MinCharmNum$ 1 | CharmNum$ 3 | Spree$ True
+SVar:DBArtifact:DB$ Destroy | SpreeCost$ 1 | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBEnchantment:DB$ Destroy | SpreeCost$ 1 | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBPutCounterAll:DB$ PutCounterAll | SpreeCost$ 1 | ValidTgts$ Player | ValidCards$ Creature | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on each creature target player controls.
+DeckHas:Ability$Counters
+Oracle:Spree (Choose one or more additional costs.)\n+ {1} — Destroy target artifact.\n+ {1} — Destroy target enchantment.\n+ {1} — Put a +1/+1 counter on each creature target player controls.

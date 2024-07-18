@@ -1,7 +1,7 @@
 Name:Telekinesis
 ManaCost:U U
 Types:Instant
-A:SP$ Tap | Cost$ U U | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Tap target creature.
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBEffect | SpellDescription$ Tap target creature.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBPump | SpellDescription$ Prevent all combat damage that would be dealt by that creature this turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next two untap steps. | Duration$ Permanent | SpellDescription$ It doesn't untap during its controller's next two untap steps. | StackDescription$ SpellDescription
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by that creature this turn.

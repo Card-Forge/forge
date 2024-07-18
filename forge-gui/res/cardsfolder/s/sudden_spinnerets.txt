@@ -1,7 +1,7 @@
 Name:Sudden Spinnerets
 ManaCost:G
 Types:Instant
-A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +1/+3 until end of turn. Put a reach counter on it. Untap it.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +1/+3 until end of turn. Put a reach counter on it. Untap it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Reach | CounterNum$ 1 | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 DeckHas:Ability$Counters

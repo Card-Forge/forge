@@ -1,7 +1,7 @@
 Name:Ruinous Intrusion
 ManaCost:3 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target artifact or enchantment | ValidTgts$ Artifact,Enchantment | SubAbility$ DBPutCounter | SpellDescription$ Exile target artifact or enchantment. Put X +1/+1 counters on target creature you control, where X is the mana value of the permanent exiled this way.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target artifact or enchantment | ValidTgts$ Artifact,Enchantment | SubAbility$ DBPutCounter | SpellDescription$ Exile target artifact or enchantment. Put X +1/+1 counters on target creature you control, where X is the mana value of the permanent exiled this way.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to put counters | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ParentTargeted$CardManaCost
 DeckHas:Ability$Counters

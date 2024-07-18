@@ -3,5 +3,5 @@ ManaCost:no cost
 Colors:blue
 Types:Sorcery
 K:Suspend:3:1 U U
-A:SP$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ValidTgts$ Opponent | ChangeType$ Creature | ChangeNum$ 1 | GainControl$ True | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Search target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.
 Oracle:Suspend 3—{1}{U}{U} (Rather than cast this card from your hand, pay {1}{U}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nSearch target opponent's library for a creature card and put that card onto the battlefield under your control. Then that player shuffles.

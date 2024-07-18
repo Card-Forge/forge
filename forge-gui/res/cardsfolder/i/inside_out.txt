@@ -1,7 +1,7 @@
 Name:Inside Out
 ManaCost:1 UR
 Types:Instant
-A:SP$ Pump | Cost$ 1 UR | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn. | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched | SpellDescription$ Switch target creature's power and toughness until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All
 Oracle:Switch target creature's power and toughness until end of turn.\nDraw a card.

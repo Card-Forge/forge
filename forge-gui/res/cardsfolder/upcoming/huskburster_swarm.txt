@@ -1,0 +1,9 @@
+Name:Huskburster Swarm
+ManaCost:7 B
+Types:Creature Elemental Insect
+PT:6/6
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card you own in exile and in your graveyard.
+K:Menace
+K:Deathtouch
+SVar:X:Count$ValidGraveyard,Exile Creature.YouOwn
+Oracle:This spell costs {1} less to cast for each creature card you own in exile and in your graveyard.\nMenace, deathtouch

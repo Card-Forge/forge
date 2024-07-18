@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.mana.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -32,10 +33,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
-import forge.game.mana.Mana;
-import forge.game.mana.ManaConversionMatrix;
-import forge.game.mana.ManaCostBeingPaid;
-import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -135,8 +132,7 @@ public class CostPayment extends ManaConversionMatrix {
             }
         }
 
-        // Move this to CostMana
-        this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability);
+        new ManaRefundService(this.ability).refundManaPaid();
     }
 
     public boolean payCost(final CostDecisionMakerBase decisionMaker) {

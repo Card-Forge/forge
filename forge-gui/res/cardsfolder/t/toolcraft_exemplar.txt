@@ -2,7 +2,7 @@ Name:Toolcraft Exemplar
 ManaCost:W
 Types:Creature Dwarf Artificer
 PT:1/1
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you control an artifact, Toolcraft Exemplar gets +2/+1 until end of turn. If you control three or more artifacts, it also gains first strike until end of turn.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | IsPresent$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, if you control an artifact, CARDNAME gets +2/+1 until end of turn. If you control three or more artifacts, it also gains first strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE3 | KW$ First Strike
 Oracle:At the beginning of combat on your turn, if you control an artifact, Toolcraft Exemplar gets +2/+1 until end of turn. If you control three or more artifacts, it also gains first strike until end of turn.

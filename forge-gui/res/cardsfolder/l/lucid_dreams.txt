@@ -2,6 +2,6 @@ Name:Lucid Dreams
 ManaCost:3 U U
 Types:Sorcery
 A:SP$ Draw | NumCards$ X | SpellDescription$ Draw X cards, where X is the number of card types among cards in your graveyard.
-SVar:X:Count$CardControllerTypes.Graveyard
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
 DeckHints:Ability$Discard|Graveyard
 Oracle:Draw X cards, where X is the number of card types among cards in your graveyard.

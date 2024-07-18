@@ -1,7 +1,7 @@
 Name:Heartless Act
 ManaCost:1 B
 Types:Instant
-A:SP$ Charm | Cost$ 1 B | Choices$ Destroy,Remove | CharmNum$ 1
+A:SP$ Charm | Choices$ Destroy,Remove | CharmNum$ 1
 SVar:Destroy:DB$ Destroy | ValidTgts$ Creature.NoCounters | TgtPrompt$ Select target creature with no counters on it | SpellDescription$ Destroy target creature with no counters on it.
 SVar:Remove:DB$ RemoveCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ Any | CounterNum$ 3 | UpTo$ True | SpellDescription$ Remove up to three counters from target creature.
 Oracle:Choose one —\n• Destroy target creature with no counters on it.\n• Remove up to three counters from target creature.

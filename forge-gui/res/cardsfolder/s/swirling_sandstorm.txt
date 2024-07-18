@@ -1,6 +1,6 @@
 Name:Swirling Sandstorm
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ 3 R | NumDmg$ X | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying | SpellDescription$ Threshold — CARDNAME deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
+A:SP$ DamageAll | NumDmg$ X | ValidCards$ Creature.withoutFlying | ValidDescription$ each creature without flying | SpellDescription$ Threshold — CARDNAME deals 5 damage to each creature without flying if seven or more cards are in your graveyard.
 SVar:X:Count$Threshold.5.0
 Oracle:Threshold — Swirling Sandstorm deals 5 damage to each creature without flying if seven or more cards are in your graveyard.

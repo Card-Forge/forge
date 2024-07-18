@@ -1,5 +1,5 @@
 Name:Ransack the Lab
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 B | DigNum$ 3 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
+A:SP$ Dig | DigNum$ 3 | DestinationZone2$ Graveyard | NoReveal$ True | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.
 Oracle:Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard.

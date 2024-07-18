@@ -1,6 +1,6 @@
 Name:Amass the Components
 ManaCost:3 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 U | NumCards$ 3 | SubAbility$ ChangeZoneDB | SpellDescription$ Draw three cards, then put a card from your hand on the bottom of your library.
+A:SP$ Draw | NumCards$ 3 | SubAbility$ ChangeZoneDB | SpellDescription$ Draw three cards, then put a card from your hand on the bottom of your library.
 SVar:ChangeZoneDB:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | Mandatory$ True
 Oracle:Draw three cards, then put a card from your hand on the bottom of your library.

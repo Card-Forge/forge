@@ -1,7 +1,7 @@
 Name:Unexpected Results
 ManaCost:2 G U
 Types:Sorcery
-A:SP$ Shuffle | Cost$ 2 G U | Defined$ You | SubAbility$ RevealCard | SpellDescription$ Shuffle your libary, then reveal the top card. If it's a nonland card, you may cast it without paying it's mana cost. If it's a land card, you may put it onto the battlefield and return CARDNAME to its owner's hand.
+A:SP$ Shuffle | Defined$ You | SubAbility$ RevealCard | SpellDescription$ Shuffle your libary, then reveal the top card. If it's a nonland card, you may cast it without paying its mana cost. If it's a land card, you may put it onto the battlefield and return CARDNAME to its owner's hand.
 SVar:RevealCard:DB$ PeekAndReveal | NoPeek$ True | RememberRevealed$ True | SubAbility$ CastCard
 SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ MoveLand
 SVar:MoveLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | Optional$ True | Imprint$ True | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ MoveSelf

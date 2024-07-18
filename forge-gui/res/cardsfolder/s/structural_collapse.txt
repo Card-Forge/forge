@@ -1,6 +1,6 @@
 Name:Structural Collapse
 ManaCost:5 R
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 5 R | ValidTgts$ Player | SacValid$ Artifact & Land | Amount$ 1 | SacEachValid$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact and a land. CARDNAME deals 2 damage to that player.
+A:SP$ Sacrifice | ValidTgts$ Player | SacValid$ Artifact & Land | Amount$ 1 | SacEachValid$ True | SubAbility$ DBDmg | SpellDescription$ Target player sacrifices an artifact and a land. CARDNAME deals 2 damage to that player.
 SVar:DBDmg:DB$ DealDamage | NumDmg$ 2 | Defined$ Targeted
 Oracle:Target player sacrifices an artifact and a land. Structural Collapse deals 2 damage to that player.

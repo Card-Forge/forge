@@ -1,6 +1,6 @@
 Name:Swift Kick
 ManaCost:3 R
 Types:Instant
-A:SP$ Pump | Cost$ 3 R | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBSwiftKick | NumAtt$ 1 | StackDescription$ None | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It fights target creature you don't control.
+A:SP$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBSwiftKick | NumAtt$ 1 | StackDescription$ None | SpellDescription$ Target creature you control gets +1/+0 until end of turn. It fights target creature you don't control.
 SVar:DBSwiftKick:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
 Oracle:Target creature you control gets +1/+0 until end of turn. It fights target creature you don't control.

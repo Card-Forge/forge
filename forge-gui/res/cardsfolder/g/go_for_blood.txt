@@ -1,7 +1,7 @@
 Name:Go for Blood
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 R | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | StackDescription$ None | SpellDescription$ Target creature you control fights target creature you don't control.
+A:SP$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | StackDescription$ None | SpellDescription$ Target creature you control fights target creature you don't control.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 K:Cycling:1
 Oracle:Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)\nCycling {1} ({1}, Discard this card: Draw a card.)

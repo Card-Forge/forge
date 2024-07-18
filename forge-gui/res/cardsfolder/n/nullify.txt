@@ -1,5 +1,5 @@
 Name:Nullify
 ManaCost:U U
 Types:Instant
-A:SP$ Counter | Cost$ U U | TargetType$ Spell | TgtPrompt$ Select target creature or Aura spell | ValidTgts$ Creature,Aura | SpellDescription$ Counter target creature or Aura spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or Aura spell | ValidTgts$ Creature,Aura | SpellDescription$ Counter target creature or Aura spell.
 Oracle:Counter target creature or Aura spell.

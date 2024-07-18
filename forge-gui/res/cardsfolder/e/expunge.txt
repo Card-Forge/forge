@@ -1,6 +1,6 @@
 Name:Expunge
 ManaCost:2 B
 Types:Instant
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature. It can't be regenerated.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack+nonArtifact | TgtPrompt$ Select target nonartifact, nonblack creature | NoRegen$ True | SpellDescription$ Destroy target nonartifact, nonblack creature. It can't be regenerated.
 K:Cycling:2
 Oracle:Destroy target nonartifact, nonblack creature. It can't be regenerated.\nCycling {2} ({2}, Discard this card: Draw a card.)

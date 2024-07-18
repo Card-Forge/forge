@@ -1,5 +1,5 @@
 Name:Wit's End
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ Discard | Cost$ 5 B B | Mode$ Hand | ValidTgts$ Player | SpellDescription$ Target player discards their hand.
+A:SP$ Discard | Mode$ Hand | ValidTgts$ Player | SpellDescription$ Target player discards their hand.
 Oracle:Target player discards their hand.

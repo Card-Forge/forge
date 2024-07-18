@@ -1,0 +1,9 @@
+Name:Lassoed by the Law
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_mercenary_tappump | TokenOwner$ You
+DeckHas:Ability$Token & Type$Mercenary
+Oracle:When Lassoed by the Law enters the battlefield, exile target nonland permanent an opponent controls until Lassoed by the Law leaves the battlefield.\nWhen Lassoed by the Law enters the battlefield, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery."

@@ -1,0 +1,10 @@
+Name:Rictus Robber
+ManaCost:3 B
+Types:Creature Zombie Rogue
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | CheckSVar$ Morbid | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You
+SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+DeckHas:Ability$Token & Type$Zombie|Rogue & Color$Blue
+K:Plot:2 B
+Oracle:When Rictus Robber enters the battlefield, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token.\nPlot {2}{B} (You may pay {2}{B} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

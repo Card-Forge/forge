@@ -1,6 +1,6 @@
 Name:Psychotic Haze
 ManaCost:2 B B
 Types:Instant
-A:SP$ DamageAll | Cost$ 2 B B | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+A:SP$ DamageAll | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Player | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
 K:Madness:1 B
 Oracle:Psychotic Haze deals 1 damage to each creature and each player.\nMadness {1}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

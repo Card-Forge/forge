@@ -7,6 +7,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -156,8 +157,27 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (type.equals("All")) {
             return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
-        }
-        else if (type.contains("FromTopGrave")) {
+        } else if (type.contains("FromTopGrave")) {
+            return null;
+        } else if (type.contains("+withTotalCMCGE")) {
+            String strAmount = type.split("withTotalCMCGE")[1];
+            int amount = AbilityUtils.calculateAmount(source, strAmount, ability);
+            String typeCleaned = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", strAmount), "");
+            CardCollection valid = CardLists.getValidCards(player.getGame().getCardsIn(cost.getFrom().get(0)), typeCleaned, player, source, ability);
+            CardCollection chosen = new CardCollection();
+
+            CardLists.sortByCmcDesc(valid);
+            Collections.reverse(valid);
+
+            int totalCMC = 0;
+            for (Card card : valid) {
+                totalCMC += card.getCMC();
+                chosen.add(card);
+                if (totalCMC >= amount) {
+                    return PaymentDecision.card(chosen);
+                }
+            }
+
             return null;
         }
 

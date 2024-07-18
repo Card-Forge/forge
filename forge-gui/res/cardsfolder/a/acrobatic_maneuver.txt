@@ -1,7 +1,7 @@
 Name:Acrobatic Maneuver
 ManaCost:2 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control. Draw a card.
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control. Draw a card.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

@@ -1,7 +1,7 @@
 Name:In Oketra's Name
 ManaCost:1 W
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Zombie.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Zombies you control get +2/+1 until end of turn. Other creatures you control get +1/+1 until end of turn. | SubAbility$ DBPumpAll
+A:SP$ PumpAll | ValidCards$ Zombie.YouCtrl | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ Zombies you control get +2/+1 until end of turn. Other creatures you control get +1/+1 until end of turn. | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.nonZombie+YouCtrl | NumAtt$ +1 | NumDef$ +1
 DeckHints:Type$Zombie
 Oracle:Zombies you control get +2/+1 until end of turn. Other creatures you control get +1/+1 until end of turn.

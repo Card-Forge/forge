@@ -2,6 +2,6 @@ Name:Consign to Dust
 ManaCost:2 G
 Types:Instant
 K:Strive:2 G
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Destroy any number of target artifacts and/or enchantments.
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | TargetMin$ 0 | TargetMax$ MaxTargets | SpellDescription$ Destroy any number of target artifacts and/or enchantments.
 SVar:MaxTargets:Count$Valid Artifact,Enchantment
 Oracle:Strive — This spell costs {2}{G} more to cast for each target beyond the first.\nDestroy any number of target artifacts and/or enchantments.

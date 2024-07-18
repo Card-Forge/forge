@@ -1,0 +1,9 @@
+Name:Worldwalker Helm
+ManaCost:2 U
+Types:Artifact
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Artifact | ReplaceWith$ DBReplace | Description$ If you would create one or more artifact tokens, instead create those tokens plus an additional Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")
+SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Artifact | TokenScript$ c_a_map_sac_explore
+A:AB$ CopyPermanent | Cost$ 1 U T | ValidTgts$ Artifact.YouCtrl+token | TgtPrompt$ Select target artifact token you control to copy | SpellDescription$ Create a token that's a copy of target artifact token you control.
+DeckHas:Ability$Sacrifice|Token & Type$Artifact|Map
+DeckHints:Type$Artifact & Ability$Token
+Oracle:If you would create one or more artifact tokens, instead create those tokens plus an additional Map token. (It's an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")\n{1}{U}, {T}: Create a token that's a copy of target artifact token you control.

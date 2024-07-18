@@ -1,7 +1,7 @@
 Name:Celestine Reef
 ManaCost:no cost
 Types:Plane Luvion
-S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.withoutFlying+withoutIslandwalk | Description$ Creatures without flying or islandwalk can't attack.
+S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.withoutFlying+!hasKeywordLandwalk:Island | Description$ Creatures without flying or islandwalk can't attack.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, until a player planeswalks, you can't lose the game and your opponents can't win the game.
 SVar:RolledChaos:DB$ Effect | StaticAbilities$ STCantlose,STCantWin | Triggers$ TrigPlaneswalk | Duration$ Permanent
 SVar:STCantlose:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't lose the game. | Description$ Until a player planeswalks, you can't lose the game and your opponents can't win the game.

@@ -1,7 +1,7 @@
 Name:Dimir Charm
 ManaCost:U B
 Types:Instant
-A:SP$ Charm | Cost$ U B | Choices$ CounterSorcery,DBDestroy,DBDig | CharmNum$ 1
+A:SP$ Charm | Choices$ CounterSorcery,DBDestroy,DBDig | CharmNum$ 1
 SVar:CounterSorcery:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target Sorcery spell | ValidTgts$ Sorcery | SpellDescription$ Counter target sorcery spell.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | SpellDescription$ Destroy target creature with power 2 or less.
 SVar:DBDig:DB$ Dig | DigNum$ 3 | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | DestinationZone2$ Graveyard | SpellDescription$ Look at the top three cards of target player's library, then put one back and the rest into that player's graveyard.

@@ -2,7 +2,7 @@ Name:Grip of the Roil
 ManaCost:2 U
 Types:Instant
 K:Surge:1 U
-A:SP$ Tap | Cost$ 2 U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Surge {1}{U} (You may cast this spell for its surge cost if you or a teammate has cast another spell this turn.)\nTap target creature. It doesn't untap during its controller's next untap step.\nDraw a card.

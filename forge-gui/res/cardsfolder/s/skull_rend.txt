@@ -1,6 +1,6 @@
 Name:Skull Rend
 ManaCost:3 B R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 B R | Defined$ Player.Opponent | NumDmg$ 2 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 2 damage to each opponent. Those players each discard two cards at random.
+A:SP$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2 | SubAbility$ DBDiscard | SpellDescription$ CARDNAME deals 2 damage to each opponent. Those players each discard two cards at random.
 SVar:DBDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 2 | Mode$ Random
 Oracle:Skull Rend deals 2 damage to each opponent. Those players each discard two cards at random.

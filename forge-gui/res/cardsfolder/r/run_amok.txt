@@ -1,5 +1,5 @@
 Name:Run Amok
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Target attacking creature gets +3/+3 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | KW$ Trample | SpellDescription$ Target attacking creature gets +3/+3 and gains trample until end of turn.
 Oracle:Target attacking creature gets +3/+3 and gains trample until end of turn.

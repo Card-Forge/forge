@@ -1,7 +1,7 @@
 Name:Orzhov Charm
 ManaCost:W B
 Types:Instant
-A:SP$ Charm | Cost$ W B | Choices$ ReturnAll,DBDestroy,DBZombify | CharmNum$ 1
+A:SP$ Charm | Choices$ ReturnAll,DBDestroy,DBZombify | CharmNum$ 1
 SVar:ReturnAll:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | StackDescription$ None | SubAbility$ DBChangeZoneAll | RememberObjects$ Targeted | SpellDescription$ Return target creature you control and all Auras you control attached to it to their owners' hands.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.IsRemembered,Aura.AttachedTo Creature.IsRemembered+YouCtrl | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

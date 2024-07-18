@@ -1,0 +1,8 @@
+Name:Paliano Vanguard
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+Draft:Draft CARDNAME face up.
+Draft:As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.
+S:Mode$ Continuous | Affected$ Creature.Other+NotedTypes+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other creatures you control of a type you noted for cards named Paliano Vanguard get +1/+1.
+Oracle:Draft Paliano Vanguard face up.\nAs you draft a creature card, you may reveal it, note its creature types, then turn Paliano Vanguard face down.\nOther creatures you control of a type you noted for cards named Paliano Vanguard get +1/+1.

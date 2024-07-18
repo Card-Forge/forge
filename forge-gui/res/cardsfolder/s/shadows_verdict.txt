@@ -1,7 +1,7 @@
 Name:Shadows' Verdict
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 3 B B | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.cmcLE3,Planeswalker.cmcLE3 | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile all creatures and planeswalkers with mana value 3 or less from the battlefield and all creature and planeswalker cards with mana value 3 or less from all graveyards.
+A:SP$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.cmcLE3,Planeswalker.cmcLE3 | SubAbility$ DBChangeZoneAll | SpellDescription$ Exile all creatures and planeswalkers with mana value 3 or less from the battlefield and all creature and planeswalker cards with mana value 3 or less from all graveyards.
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Creature.cmcLE3,Planeswalker.cmcLE3
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Comp GE2

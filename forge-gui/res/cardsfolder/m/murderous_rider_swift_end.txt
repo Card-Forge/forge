@@ -13,6 +13,6 @@ ALTERNATE
 Name:Swift End
 ManaCost:1 B B
 Types:Instant Adventure
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature or planeswalker. You lose 2 life. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature or planeswalker. You lose 2 life. (Then exile this card. You may cast the creature later from exile.)
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
 Oracle:Destroy target creature or planeswalker. You lose 2 life. (Then exile this card. You may cast the creature later from exile.)

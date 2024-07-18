@@ -2,6 +2,6 @@ Name:Conqueror's Pledge
 ManaCost:2 W W W
 Types:Sorcery
 K:Kicker:6
-A:SP$ Token | Cost$ 2 W W W | TokenAmount$ WasKicked | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | SpellDescription$ Create six 1/1 white Kor Soldier creature tokens. If CARDNAME was kicked, create twelve of those tokens instead.
+A:SP$ Token | TokenAmount$ WasKicked | TokenScript$ w_1_1_kor_soldier | TokenOwner$ You | SpellDescription$ Create six 1/1 white Kor Soldier creature tokens. If CARDNAME was kicked, create twelve of those tokens instead.
 SVar:WasKicked:Count$Kicked.12.6
 Oracle:Kicker {6} (You may pay an additional {6} as you cast this spell.)\nCreate six 1/1 white Kor Soldier creature tokens. If this spell was kicked, create twelve of those tokens instead.

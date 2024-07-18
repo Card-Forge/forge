@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Elemental
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creatures without flying can't block this turn.
-SVar:TrigEffect:DB$ Effect | Name$ Seismic Elemental Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures without flying can't block this turn.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures without flying can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.withoutFlying | AddHiddenKeyword$ CARDNAME can't block. | Description$ Creatures without flying can't block this turn.
 SVar:PlayMain1:TRUE
 Oracle:When Seismic Elemental enters the battlefield, creatures without flying can't block this turn.

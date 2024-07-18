@@ -1,6 +1,6 @@
 Name:Icequake
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land. If that land was a snow land, Icequake deals 1 damage to that land's controller.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDamage | SpellDescription$ Destroy target land. If that land was a snow land, CARDNAME deals 1 damage to that land's controller.
 SVar:DBDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Land.Snow | ConditionCompare$ EQ1 | ConditionDescription$ If that land was a snow land,
 Oracle:Destroy target land. If that land was a snow land, Icequake deals 1 damage to that land's controller.

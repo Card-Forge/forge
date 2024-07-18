@@ -47,7 +47,7 @@ ManaCost:4 R R R
 Types:Legendary Creature Goblin Shaman
 PT:5/4
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it has double strike and haste. Sacrifice it at the beginning of your next end step.
-SVar:TrigCopy:DB$ CopyPermanent  | Choices$ Card | Defined$ ExiledWith | AddKeywords$ Double Strike & Haste | AtEOTTrig$ You_Sacrifice
+SVar:TrigCopy:DB$ CopyPermanent | Choices$ Card | Defined$ ExiledWith | AddKeywords$ Double Strike & Haste | AtEOTTrig$ You_Sacrifice
 Oracle:When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it has double strike and haste. Sacrifice it at the beginning of your next end step.
 
 SPECIALIZE:GREEN

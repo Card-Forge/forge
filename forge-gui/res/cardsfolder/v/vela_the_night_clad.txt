@@ -4,6 +4,6 @@ Types:Legendary Creature Human Wizard
 PT:4/4
 K:Intimidate
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Intimidate | Description$ Other creatures you control have Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.).
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ Whenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME or another creature you control leaves the battlefield, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 Oracle:Intimidate (This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)\nOther creatures you control have intimidate.\nWhenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.

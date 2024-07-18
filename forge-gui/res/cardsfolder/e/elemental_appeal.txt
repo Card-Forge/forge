@@ -2,7 +2,7 @@ Name:Elemental Appeal
 ManaCost:R R R R
 Types:Sorcery
 K:Kicker:5
-A:SP$ Token | Cost$ R R R R | TokenScript$ r_7_1_elemental_trample_haste | RememberTokens$ True | AtEOT$ Exile | TokenOwner$ You | SubAbility$ KickerPump | SpellDescription$ Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step. If this spell was kicked, that creature gets +7/+0 until end of turn.
+A:SP$ Token | TokenScript$ r_7_1_elemental_trample_haste | RememberTokens$ True | AtEOT$ Exile | TokenOwner$ You | SubAbility$ KickerPump | SpellDescription$ Create a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step. If this spell was kicked, that creature gets +7/+0 until end of turn.
 SVar:KickerPump:DB$ Pump | Defined$ Remembered | NumAtt$ +7 | Condition$ Kicked | ConditionDescription$ If it was kicked, | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Kicker {5} (You may pay an additional {5} as you cast this spell.)\nCreate a 7/1 red Elemental creature token with trample and haste. Exile it at the beginning of the next end step. If this spell was kicked, that creature gets +7/+0 until end of turn.

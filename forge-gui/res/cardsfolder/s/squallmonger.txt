@@ -2,6 +2,6 @@ Name:Squallmonger
 ManaCost:3 G
 Types:Creature Monger
 PT:3/3
-A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | Activator$ Player | ValidDescription$ each creature with flying and and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player. Any player may activate this ability.
+A:AB$ DamageAll | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature.withFlying | ValidPlayers$ Player | Activator$ Player | ValidDescription$ each creature with flying and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature with flying and each player. Any player may activate this ability.
 AI:RemoveDeck:All
 Oracle:{2}: Squallmonger deals 1 damage to each creature with flying and each player. Any player may activate this ability.

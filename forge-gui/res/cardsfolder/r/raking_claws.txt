@@ -1,6 +1,6 @@
 Name:Raking Claws
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Double Strike | SpellDescription$ Target creature gains double strike until end of turn.
 K:Cycling:2
 Oracle:Target creature gains double strike until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

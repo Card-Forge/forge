@@ -1,0 +1,7 @@
+Name:Daring Thunder-Thief
+ManaCost:3 U
+Types:Creature Turtle Rogue
+PT:4/4
+K:Flash
+K:CARDNAME enters the battlefield tapped.
+Oracle:Flash\nDaring Thunder-Thief enters the battlefield tapped.

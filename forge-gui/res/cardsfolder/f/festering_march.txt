@@ -2,6 +2,6 @@ Name:Festering March
 ManaCost:3 B B
 Types:Sorcery
 K:Suspend:3:2 B
-A:SP$ PumpAll | Cost$ 3 B B | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBChange | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn. Exile CARDNAME with three time counters on it.
+A:SP$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBChange | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3
 Oracle:Creatures your opponents control get -1/-1 until end of turn. Exile Festering March with three time counters on it.\nSuspend 3—{2}{B} (Rather than cast this card from your hand, you may pay {2}{B} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

@@ -1,7 +1,7 @@
 Name:Virtus's Maneuver
 ManaCost:2 B
 Types:Sorcery
-A:SP$ AssignGroup | Cost$ 2 B | Defined$ Player | Choices$ FriendRepeat,DBSacrifice | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.
+A:SP$ AssignGroup | Defined$ Player | Choices$ FriendRepeat,DBSacrifice | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend returns a creature card from their graveyard to their hand. Each foe sacrifices a creature they control.
 SVar:FriendRepeat:DB$ RepeatEach | RepeatPlayers$ Remembered | RepeatSubAbility$ PlayChoose | ClearRememberedBeforeLoop$ True | SubAbility$ ReturnAll | StackDescription$ SpellDescription | SpellDescription$ Each friend returns a creature card from their graveyard to their hand.
 SVar:PlayChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl | Amount$ 1 | Mandatory$ True | ChoiceZone$ Graveyard | ChoiceTitle$ Choose a creature in your graveyard | RememberChosen$ True
 SVar:ReturnAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup

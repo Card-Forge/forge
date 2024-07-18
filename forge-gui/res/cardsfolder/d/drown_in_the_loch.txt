@@ -1,7 +1,7 @@
 Name:Drown in the Loch
 ManaCost:U B
 Types:Instant
-A:SP$ Charm | Cost$ U B | Choices$ DBCounter,DBDestroy
+A:SP$ Charm | Choices$ DBCounter,DBDestroy
 SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TargetsWithControllerProperty$ cmcLECardsInGraveyard | TgtPrompt$ Select target spell with mana value less than or equal to the number of cards in its controller's graveyard. | SpellDescription$ Counter target spell with mana value less than or equal to the number of cards in its controller's graveyard.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetsWithControllerProperty$ cmcLECardsInGraveyard | TgtPrompt$ Select target creature with mana value less than or equal to the number of cards in its controller's graveyard. | SpellDescription$ Destroy target creature with mana value less than or equal to the number of cards in its controller's graveyard.
 Oracle:Choose one —\n• Counter target spell with mana value less than or equal to the number of cards in its controller's graveyard.\n• Destroy target creature with mana value less than or equal to the number of cards in its controller's graveyard.

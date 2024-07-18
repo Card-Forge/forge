@@ -1,5 +1,5 @@
 Name:Blood Frenzy
 ManaCost:1 R
 Types:Instant
-A:SP$ Pump | Cost$ 1 R | ActivationPhases$ Upkeep->Declare Blockers | ActivationFirstCombat$ True | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumAtt$ +4 | NumDef$ +0 | AtEOT$ Destroy | SpellDescription$ Cast CARDNAME only before the combat damage step. Target attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.
+A:SP$ Pump | ActivationPhases$ Upkeep->Declare Blockers | ActivationFirstCombat$ True | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumAtt$ +4 | NumDef$ +0 | AtEOT$ Destroy | SpellDescription$ Cast CARDNAME only before the combat damage step. Target attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.
 Oracle:Cast this spell only before the combat damage step.\nTarget attacking or blocking creature gets +4/+0 until end of turn. Destroy that creature at the beginning of the next end step.

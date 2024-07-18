@@ -1,7 +1,7 @@
 Name:Life
 ManaCost:G
 Types:Sorcery
-A:SP$ AnimateAll | Cost$ G | Power$ 1 | Toughness$ 1 | Types$ Creature | ValidCards$ Land.YouCtrl | SpellDescription$ All lands you control become 1/1 creatures until end of turn. They're still lands.
+A:SP$ AnimateAll | Power$ 1 | Toughness$ 1 | Types$ Creature | ValidCards$ Land.YouCtrl | SpellDescription$ All lands you control become 1/1 creatures until end of turn. They're still lands.
 AlternateMode:Split
 Oracle:All lands you control become 1/1 creatures until end of turn. They're still lands.
 
@@ -10,7 +10,7 @@ ALTERNATE
 Name:Death
 ManaCost:1 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | GainControl$ True | SubAbility$ DBLoseLifeYou | SpellDescription$ Return target creature card from your graveyard to the battlefield. You lose life equal to its mana value.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | GainControl$ True | SubAbility$ DBLoseLifeYou | SpellDescription$ Return target creature card from your graveyard to the battlefield. You lose life equal to its mana value.
 SVar:DBLoseLifeYou:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 Oracle:Return target creature card from your graveyard to the battlefield. You lose life equal to its mana value.

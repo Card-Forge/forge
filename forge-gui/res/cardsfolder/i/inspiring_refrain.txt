@@ -2,6 +2,6 @@ Name:Inspiring Refrain
 ManaCost:4 U U
 Types:Sorcery
 K:Suspend:3:2 U
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 2 | SubAbility$ DBChange | SpellDescription$ Draw two cards. Exile CARDNAME with three time counters on it.
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBChange | SpellDescription$ Draw two cards. Exile CARDNAME with three time counters on it.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3
 Oracle:Draw two cards. Exile Inspiring Refrain with three time counters on it.\nSuspend 3—{2}{U} (Rather than cast this card from your hand, you may pay {2}{U} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)

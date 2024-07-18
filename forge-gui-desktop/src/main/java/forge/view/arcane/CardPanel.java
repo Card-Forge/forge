@@ -575,6 +575,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     CardFaceSymbols.drawAbilitySymbol("firststrike", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
+                if (card.getCurrentState().hasAnnihilator()) {
+                    CardFaceSymbols.drawAbilitySymbol("annihilator", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (card.getCurrentState().hasExalted()) {
+                    CardFaceSymbols.drawAbilitySymbol("exalted", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
                 if (card.getCurrentState().hasDeathtouch()) {
                     CardFaceSymbols.drawAbilitySymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
@@ -662,6 +670,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 }
                 if (card.getCurrentState().hasLifelink()) {
                     CardFaceSymbols.drawAbilitySymbol("lifelink", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (card.getCurrentState().hasWard()) {
+                    CardFaceSymbols.drawAbilitySymbol("ward", g, abiX, abiY, abiScale, abiScale);
+                    abiY += abiSpace;
+                }
+                if (card.getCurrentState().hasWither()) {
+                    CardFaceSymbols.drawAbilitySymbol("wither", g, abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
                 if (card.getCurrentState().hasDefender()) {

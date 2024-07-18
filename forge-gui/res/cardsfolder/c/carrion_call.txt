@@ -1,5 +1,5 @@
 Name:Carrion Call
 ManaCost:3 G
 Types:Instant
-A:SP$ Token | Cost$ 3 G | TokenAmount$ 2 | TokenScript$ g_1_1_phyrexian_insect_infect | TokenOwner$ You | SpellDescription$ Create two 1/1 green Insect creature tokens with infect.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_phyrexian_insect_infect | TokenOwner$ You | SpellDescription$ Create two 1/1 green Insect creature tokens with infect.
 Oracle:Create two 1/1 green Phyrexian Insect creature tokens with infect. (They deal damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

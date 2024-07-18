@@ -1,6 +1,6 @@
 Name:Bloodscent
 ManaCost:3 G
 Types:Instant
-A:SP$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ All creatures able to block target creature this turn do so.
 AI:RemoveDeck:All
 Oracle:All creatures able to block target creature this turn do so.

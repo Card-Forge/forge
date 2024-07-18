@@ -2,5 +2,5 @@ Name:Vacuumelt
 ManaCost:2 U
 Types:Sorcery
 K:Replicate:2 U
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to it's owners hand.
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 Oracle:Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nReturn target creature to its owner's hand.

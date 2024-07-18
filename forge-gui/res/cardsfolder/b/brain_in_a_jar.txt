@@ -1,7 +1,7 @@
 Name:Brain in a Jar
 ManaCost:2
 Types:Artifact
-A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBCast | SpellDescription$ Put a charge counter on Brain in a Jar, then you may cast an instant or sorcery spell with mana value equal to the number of charge counters on Brain in a Jar from your hand without paying its mana cost.
+A:AB$ PutCounter | Cost$ 1 T | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBCast | SpellDescription$ Put a charge counter on CARDNAME, then you may cast an instant or sorcery spell with mana value equal to the number of charge counters on CARDNAME from your hand without paying its mana cost.
 SVar:DBCast:DB$ Play | ValidZone$ Hand | Valid$ Card.YouOwn | ValidSA$ Instant.cmcEQY,Sorcery.cmcEQY | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1
 A:AB$ Scry | Cost$ 3 T SubCounter<X/CHARGE> | ScryNum$ X | AILogic$ BrainJar | SpellDescription$ Scry X.
 SVar:X:Count$xPaid

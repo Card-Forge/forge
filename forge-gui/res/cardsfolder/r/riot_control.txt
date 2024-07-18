@@ -1,7 +1,7 @@
 Name:Riot Control
 ManaCost:2 W
 Types:Instant
-A:SP$ GainLife | Cost$ 2 W | Defined$ You | LifeAmount$ X | SubAbility$ DBEffect | SpellDescription$ You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBEffect | SpellDescription$ You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You | Description$ Prevent all damage that would be dealt to you this turn.
 SVar:X:Count$Valid Creature.OppCtrl

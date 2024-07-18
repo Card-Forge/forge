@@ -1,5 +1,5 @@
 Name:Chill to the Bone
 ManaCost:3 B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Creature.nonSnow | TgtPrompt$ Select target nonsnow creature | SpellDescription$ Destroy target nonsnow creature.
+A:SP$ Destroy | ValidTgts$ Creature.nonSnow | TgtPrompt$ Select target nonsnow creature | SpellDescription$ Destroy target nonsnow creature.
 Oracle:Destroy target nonsnow creature.

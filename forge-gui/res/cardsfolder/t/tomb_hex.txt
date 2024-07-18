@@ -1,6 +1,6 @@
 Name:Tomb Hex
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Landfall — If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Landfall — If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
 SVar:X:Count$Landfall.4.2
 Oracle:Target creature gets -2/-2 until end of turn.\nLandfall — If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.

@@ -1,7 +1,7 @@
 Name:Heroic Reinforcements
 ManaCost:2 R W
 Types:Sorcery
-A:SP$ Token | Cost$ 2 R W | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SubAbility$ TrigPump | SpellDescription$ Create two 1/1 white Soldier creature tokens. Until end of turn, creatures you control get +1/+1 and gain haste.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SubAbility$ TrigPump | SpellDescription$ Create two 1/1 white Soldier creature tokens. Until end of turn, creatures you control get +1/+1 and gain haste.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste | NumAtt$ +1 | NumDef$ +1
 DeckHas:Ability$Token
 SVar:PlayMain1:TRUE

@@ -1,7 +1,7 @@
 Name:Leave
 ManaCost:1 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target permanents you own to your hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | TargetMin$ 0 | TargetMax$ X | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return any number of target permanents you own to your hand.
 SVar:X:Count$Valid Permanent.YouOwn
 AlternateMode:Split
 Oracle:Return any number of target permanents you own to your hand.
@@ -12,7 +12,7 @@ Name:Chance
 ManaCost:3 R
 Types:Sorcery
 K:Aftermath
-A:SP$ Discard | Cost$ 3 R | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard any number of cards, then draw that many cards.
+A:SP$ Discard | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard any number of cards, then draw that many cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount

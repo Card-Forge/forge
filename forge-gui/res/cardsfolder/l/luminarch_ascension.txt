@@ -2,7 +2,7 @@ Name:Luminarch Ascension
 ManaCost:1 W
 Types:Enchantment
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPut | OptionalDecider$ You | CheckSVar$ X | SVarCompare$ EQ0 | TriggerDescription$ At the beginning of each opponent's end step, if you didn't lose life this turn, you may put a quest counter on CARDNAME. (Damage causes loss of life.)
-A:AB$ Token | Cost$ 1 W | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | IsPresent$ Card.Self+counters_GE4_QUEST | SpellDescription$ Create a 4/4 white Angel creature token with flying. Activate only if Luminarch Ascension has four or more quest counters on it.
+A:AB$ Token | Cost$ 1 W | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | IsPresent$ Card.Self+counters_GE4_QUEST | SpellDescription$ Create a 4/4 white Angel creature token with flying. Activate only if CARDNAME has four or more quest counters on it.
 SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:X:Count$LifeYouLostThisTurn
 DeckHas:Ability$Counters

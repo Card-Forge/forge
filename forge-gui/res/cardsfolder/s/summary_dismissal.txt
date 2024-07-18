@@ -1,7 +1,7 @@
 Name:Summary Dismissal
 ManaCost:2 U U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 2 U U | ChangeType$ Card.Other | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBCounter | SpellDescription$ Exile all other spells and counter all abilities.
+A:SP$ ChangeZoneAll | ChangeType$ Card.Other | Origin$ Stack | Destination$ Exile | Fizzle$ True | SubAbility$ DBCounter | SpellDescription$ Exile all other spells and counter all abilities.
 SVar:DBCounter:DB$ Counter | Defined$ ValidStack Activated,Triggered
 AI:RemoveDeck:All
 Oracle:Exile all other spells and counter all abilities.

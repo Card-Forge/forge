@@ -1,10 +1,11 @@
 Name:Torrent of Lava
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X R R | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each creature without flying. | StackDescription$ SpellDescription
 SVar:X:Count$xPaid
-S:Mode$ Continuous | Affected$ Creature | AddAbility$ TOPrevent | AddSVar$ DBPrevent & DBReplace | EffectZone$ Stack | Description$ As long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn."
-SVar:TOPrevent:AB$ Effect | Cost$ T | RememberObjects$ Self | ImprintCards$ OriginalHost | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn. | StackDescription$ SpellDescription
-SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn.
-SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
+S:Mode$ Continuous | Affected$ Creature | AddAbility$ TOPrevent | AddSVar$ DBPrevent & DBReplace | EffectZone$ Stack | Description$ As long as CARDNAME is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by CARDNAME this turn."
+SVar:TOPrevent:AB$ Effect | Cost$ T | RememberObjects$ Self | ImprintCards$ OriginalHost | ReplacementEffects$ DBPrevent | ForgetOnMoved$ Battlefield | SpellDescription$ Prevent the next 1 damage that would be dealt to CARDNAME by ORIGINALHOST this turn. | StackDescription$ SpellDescription
+SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.IsImprinted | ValidTarget$ Card.IsRemembered | ReplaceWith$ DBReplace | PreventionEffect$ True | Description$ Prevent the next 1 damage that would be dealt to EFFECTSOURCE by ORIGINALHOST this turn.
+SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1 | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 Oracle:Torrent of Lava deals X damage to each creature without flying.\nAs long as Torrent of Lava is on the stack, each creature has "{T}: Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn."

@@ -1,7 +1,7 @@
 Name:Spin into Myth
 ManaCost:4 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ ChooseP | SpellDescription$ Put target creature on top of its owner's library, then fateseal 2. (To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SubAbility$ ChooseP | SpellDescription$ Put target creature on top of its owner's library, then fateseal 2. (To fateseal 2, look at the top two cards of an opponent's library, then put any number of them on the bottom of that player's library and the rest on top in any order.)
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | Defined$ ChosenPlayer | DigNum$ 2 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition$ -1 | LibraryPosition2$ 0 | SubAbility$ DBCleanupChosen
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True

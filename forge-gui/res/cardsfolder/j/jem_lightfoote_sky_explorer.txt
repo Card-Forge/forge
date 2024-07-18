@@ -1,0 +1,10 @@
+Name:Jem Lightfoote, Sky Explorer
+ManaCost:2 W U
+Types:Legendary Creature Human Scout
+PT:3/3
+K:Flying
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LT1 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:X:Count$ThisTurnCast_Card.wasCastFromYourHandByYou
+Oracle:Flying, vigilance\nAt the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card.

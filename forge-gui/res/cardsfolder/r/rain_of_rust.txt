@@ -2,7 +2,7 @@ Name:Rain of Rust
 ManaCost:3 R R
 Types:Instant
 K:Entwine:3 R
-A:SP$ Charm | Cost$ 3 R R | Choices$ DBDestroyArtifact,DBDestroyLand | CharmNum$ 1
+A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyLand | CharmNum$ 1
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
 SVar:DBDestroyLand:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
 AI:RemoveDeck:All

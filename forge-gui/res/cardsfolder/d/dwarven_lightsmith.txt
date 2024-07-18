@@ -1,0 +1,9 @@
+Name:Dwarven Lightsmith
+ManaCost:5 W
+Types:Creature Dwarf Cleric
+PT:3/4
+K:Assist
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures your team controls get +1/+1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YourTeamCtrl | NumAtt$ +1 | NumDef$ +1
+SVar:PlayMain1:ALWAYS
+Oracle:Assist (Another player can pay up to {5} of this spell's cost.)\nWhen Dwarven Lightsmith enters the battlefield, creatures your team controls get +1/+1 until end of turn.

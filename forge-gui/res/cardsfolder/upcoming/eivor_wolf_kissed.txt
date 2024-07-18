@@ -1,0 +1,14 @@
+Name:Eivor, Wolf-Kissed
+ManaCost:3 R G W
+Types:Legendary Creature Human Assassin Warrior
+PT:7/6
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you mill that many cards. You may put a Saga card and/or a land card from among them onto the battlefield.
+SVar:TrigMill:DB$ Mill | NumCards$ X | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ EACH Saga.YouOwn+IsRemembered & Land.YouOwn+IsRemembered | Optional$ True | SelectPrompt$ You may select a Saga card and/or a land card. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Mill
+DeckHints:Type$Saga
+Oracle:Trample, haste\nWhenever Eivor, Wolf-Kissed deals combat damage to a player, you mill that many cards. You may put a Saga card and/or a land card from among them onto the battlefield.

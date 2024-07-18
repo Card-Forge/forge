@@ -1,7 +1,7 @@
 Name:Crushing Canopy
 ManaCost:2 G
 Types:Instant
-A:SP$ Charm | Cost$ 2 G | Choices$ DBDestroy,DBDestroy2
+A:SP$ Charm | Choices$ DBDestroy,DBDestroy2
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
 SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Choose one —\n• Destroy target creature with flying.\n• Destroy target enchantment.

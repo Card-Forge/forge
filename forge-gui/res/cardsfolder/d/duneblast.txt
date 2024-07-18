@@ -1,6 +1,6 @@
 Name:Duneblast
 ManaCost:4 W B G
 Types:Sorcery
-A:SP$ ChooseCard | Cost$ 4 W G B | Defined$ You | Amount$ 1 | Choices$ Creature | ChoiceTitle$ Choose a creature | AILogic$ Duneblast | SubAbility$ DBDestroyAll | SpellDescription$ Choose up to one creature. Destroy the rest.
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature | ChoiceTitle$ Choose a creature | AILogic$ Duneblast | SubAbility$ DBDestroyAll | SpellDescription$ Choose up to one creature. Destroy the rest.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard
 Oracle:Choose up to one creature. Destroy the rest.

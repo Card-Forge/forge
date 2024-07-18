@@ -1,7 +1,7 @@
 Name:Fiery Encore
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Discard | Cost$ 4 R | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card.
+A:SP$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | RememberDiscarded$ True | SpellDescription$ Discard a card, then draw a card.
 SVar:DBDraw:DB$ Draw | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | Execute$ TrigDealDamage | RememberObjects$ RememberedCard | SubAbility$ DBCleanup | SpellDescription$ When you discard a nonland card this way, CARDNAME deals damage equal to that card's mana value to target creature or planeswalker.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X

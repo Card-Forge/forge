@@ -3,5 +3,5 @@ ManaCost:3 W
 Types:Creature Bird Soldier
 PT:2/2
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, Battlewise Aven gets +1/+1 and has first strike.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has first strike.
 Oracle:Flying\nThreshold — As long as seven or more cards are in your graveyard, Battlewise Aven gets +1/+1 and has first strike.

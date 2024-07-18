@@ -1,7 +1,7 @@
 Name:Prying Eyes
 ManaCost:4 U U
 Types:Instant
-A:SP$ Draw | Cost$ 4 U U | NumCards$ 4 | SpellDescription$ Draw four cards, then discard two cards. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards, then discard two cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
 DeckHas:Ability$Discard
 Oracle:Draw four cards, then discard two cards.

@@ -1,7 +1,7 @@
 Name:Pestilent Haze
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 B B | Choices$ DBPumpAll,DBRemoveCounters
+A:SP$ Charm | Choices$ DBPumpAll,DBRemoveCounters
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 SVar:DBRemoveCounters:DB$ RemoveCounterAll | ValidCards$ Planeswalker | CounterType$ LOYALTY | CounterNum$ 2 | SpellDescription$ Remove two loyalty counters from each planeswalker.
 Oracle:Choose one —\n• All creatures get -2/-2 until end of turn.\n• Remove two loyalty counters from each planeswalker.

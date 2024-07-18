@@ -13,5 +13,5 @@ ALTERNATE
 Name:Petty Theft
 ManaCost:1 U
 Types:Instant Adventure
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent an opponent controls to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent an opponent controls to its owner's hand.
 Oracle:Return target nonland permanent an opponent controls to its owner's hand.

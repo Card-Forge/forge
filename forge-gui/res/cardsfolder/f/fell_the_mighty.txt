@@ -1,6 +1,6 @@
 Name:Fell the Mighty
 ManaCost:4 W
 Types:Sorcery
-A:SP$ DestroyAll | ValidCards$ Creature.powerGTX | Cost$ 4 W | ValidTgts$ Creature | AILogic$ FellTheMighty | SpellDescription$ Destroy all creatures with power greater than target creature's power.
+A:SP$ DestroyAll | ValidCards$ Creature.powerGTX | ValidTgts$ Creature | AILogic$ FellTheMighty | SpellDescription$ Destroy all creatures with power greater than target creature's power.
 SVar:X:Targeted$CardPower
 Oracle:Destroy all creatures with power greater than target creature's power.

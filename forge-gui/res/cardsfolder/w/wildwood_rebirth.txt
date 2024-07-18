@@ -1,5 +1,5 @@
 Name:Wildwood Rebirth
 ManaCost:1 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
 Oracle:Return target creature card from your graveyard to your hand.

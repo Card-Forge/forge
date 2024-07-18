@@ -1,7 +1,7 @@
 Name:Manifold Insights
 ManaCost:2 U
 Types:Sorcery
-A:SP$ PeekAndReveal | Cost$ 2 U | PeekAmount$ 10 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ ChooseNonLand | SpellDescription$ Reveal the top ten cards of your library. Starting with the next opponent in turn order, each opponent chooses a different nonland card from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order.
+A:SP$ PeekAndReveal | PeekAmount$ 10 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ ChooseNonLand | SpellDescription$ Reveal the top ten cards of your library. Starting with the next opponent in turn order, each opponent chooses a different nonland card from among them. Put the chosen cards into your hand and the rest on the bottom of your library in a random order.
 SVar:ChooseNonLand:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ OpponentsChoose | SubAbility$ ShipToBottom
 SVar:OpponentsChoose:DB$ ChooseCard | ChoiceZone$ Library | Choices$ Card.nonLand+IsRemembered | Defined$ Player.IsRemembered | ForgetChosen$ True | SubAbility$ ChosenToHand
 SVar:ChosenToHand:DB$ ChangeZone | Origin$ Library | Destination$ Hand | Defined$ ChosenCard

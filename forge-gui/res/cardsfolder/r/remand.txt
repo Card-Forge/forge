@@ -1,6 +1,6 @@
 Name:Remand
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Hand | SubAbility$ DBDraw | AITgts$ Card.cmcGE2 | SpellDescription$ Counter target spell. If that spell is countered this way, put it into it's owner's hand instead of into that player's graveyard. Draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | Destination$ Hand | SubAbility$ DBDraw | AITgts$ Card.cmcGE2 | SpellDescription$ Counter target spell. If that spell is countered this way, put it into it's owner's hand instead of into that player's graveyard. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target spell. If that spell is countered this way, put it into its owner's hand instead of into that player's graveyard.\nDraw a card.

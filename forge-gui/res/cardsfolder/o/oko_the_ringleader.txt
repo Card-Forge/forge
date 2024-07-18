@@ -1,0 +1,12 @@
+Name:Oko, the Ringleader
+ManaCost:2 G U
+Types:Legendary Planeswalker Oko
+Loyalty:3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigClone | TriggerDescription$ At the beginning of combat on your turn, CARDNAME becomes a copy of up to one target creature you control until end of turn, except he has hexproof.
+SVar:TrigClone:DB$ Clone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilEndOfTurn | AddKeywords$ Hexproof
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | NumCards$ Count$CommittedCrimeThisTurn.1.2 | StackDescription$ SpellDescription | SpellDescription$ If you've committed a crime this turn, discard a card. Otherwise, discard two cards.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_3_3_elk | SpellDescription$ Create a 3/3 green Elk creature token.
+A:AB$ CopyPermanent | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Valid Permanent.Other+YouCtrl+nonLand | StackDescription$ SpellDescription | SpellDescription$ For each other nonland permanent you control, create a token that's a copy of that permanent.
+DeckHas:Ability$Discard|Token & Type$Elk
+Oracle:At the beginning of combat on your turn, Oko, the Ringleader becomes a copy of up to one target creature you control until end of turn, except he has hexproof.\n[+1]: Draw two cards. If you've committed a crime this turn, discard a card. Otherwise, discard two cards.\n[-1]: Create a 3/3 green Elk creature token.\n[-5]: For each other nonland permanent you control, create a token that's a copy of that permanent.

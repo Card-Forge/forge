@@ -1,6 +1,6 @@
 Name:Aftershock
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 2 R R | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DBPain | SpellDescription$ Destroy target artifact, creature or land. CARDNAME deals 3 damage to you.
+A:SP$ Destroy | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land | SubAbility$ DBPain | SpellDescription$ Destroy target artifact, creature or land. CARDNAME deals 3 damage to you.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 3 | Defined$ You
 Oracle:Destroy target artifact, creature, or land. Aftershock deals 3 damage to you.

@@ -1,7 +1,7 @@
 Name:Syphon Mind
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 3 B | Defined$ Player.Other | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Each other player discards a card. You draw a card for each card discarded this way.
+A:SP$ Discard | Defined$ Player.Other | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Each other player discards a card. You draw a card for each card discarded this way.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

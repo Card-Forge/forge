@@ -1,7 +1,7 @@
 Name:Finale of Glory
 ManaCost:X W W
 Types:Sorcery
-A:SP$ Token | Cost$ X W W | TokenAmount$ X | TokenScript$ w_2_2_soldier_vigilance | TokenOwner$ You | SubAbility$ DBAngels | SpellDescription$ Create X 2/2 white Soldier creature tokens with vigilance. If X is 10 or more, also create X 4/4 white Angel creature tokens with flying and vigilance.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_2_2_soldier_vigilance | TokenOwner$ You | SubAbility$ DBAngels | SpellDescription$ Create X 2/2 white Soldier creature tokens with vigilance. If X is 10 or more, also create X 4/4 white Angel creature tokens with flying and vigilance.
 SVar:DBAngels:DB$ Token | TokenAmount$ X | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
 SVar:X:Count$xPaid
 DeckHas:Ability$Token

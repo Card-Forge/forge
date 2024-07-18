@@ -1,7 +1,7 @@
 Name:Soul's Majesty
 ManaCost:4 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 G | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDraw | SpellDescription$ Draw cards equal to the power of target creature you control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDraw | SpellDescription$ Draw cards equal to the power of target creature you control.
 SVar:DBDraw:DB$ Draw | NumCards$ X
 SVar:X:Targeted$CardPower
 Oracle:Draw cards equal to the power of target creature you control.

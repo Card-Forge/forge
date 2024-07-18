@@ -1,5 +1,5 @@
 Name:Blessed Wind
 ManaCost:7 W W
 Types:Sorcery
-A:SP$ SetLife | Cost$ 7 W W | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 20 | SpellDescription$ Target player's life total becomes 20.
+A:SP$ SetLife | ValidTgts$ Player | TgtPrompt$ Select target player | LifeAmount$ 20 | SpellDescription$ Target player's life total becomes 20.
 Oracle:Target player's life total becomes 20.

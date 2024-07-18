@@ -1,6 +1,6 @@
 Name:Mind Sludge
 ManaCost:4 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 4 B | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a card for each Swamp you control.
+A:SP$ Discard | ValidTgts$ Player | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Target player discards a card for each Swamp you control.
 SVar:X:Count$TypeYouCtrl.Swamp
 Oracle:Target player discards a card for each Swamp you control.

@@ -29,6 +29,9 @@
 	"Adept White Wizard",
 	"Adventurer",
 	"Aether Channeler",
+	"Angelic Page",
+	"Angelic Overseer",
+	"Human Looter",
 	"Apprentice White Wizard",
 	"Archer",
 	"Armored Knight",
@@ -107,6 +110,7 @@
 	"CaveW6",
 	"OrthodoxyBasilica",
 	"Nahiri Encampment",
+	"KorEncampment",
 	"MageTower White",
 	"UnhallowedAbbey"
 ],

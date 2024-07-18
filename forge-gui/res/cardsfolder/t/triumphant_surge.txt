@@ -1,6 +1,6 @@
 Name:Triumphant Surge
 ManaCost:3 W
 Types:Instant
-A:SP$ Destroy | Cost$ 3 W | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ NaturalLife | SpellDescription$ Destroy target creature with power 4 or greater. You gain 3 life.
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | SubAbility$ NaturalLife | SpellDescription$ Destroy target creature with power 4 or greater. You gain 3 life.
 SVar:NaturalLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Destroy target creature with power 4 or greater. You gain 3 life.

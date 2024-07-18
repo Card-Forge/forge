@@ -1,6 +1,6 @@
 Name:Ral's Outburst
 ManaCost:2 U R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 U R | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 3 damage to any target. Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 3 damage to any target. Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
 SVar:DBDig:DB$ Dig | DigNum$ 2 | DestinationZone2$ Graveyard | NoReveal$ True
 Oracle:Ral's Outburst deals 3 damage to any target. Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.

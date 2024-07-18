@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Instant
 K:Kicker:8 R
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Any | NumDmg$ X | SubAbility$ Kicked | SpellDescription$ CARDNAME deals 3 damage to any target. If this spell was kicked, instead it deals 10 damage to that permanent or player and the damage can't be prevented.
-SVar:Kicked:DB$ DealDamage | Defined$ Targeted | NumDmg$ 10 | NoPrevention$ True | Condition$ Kicked | ConditionDescription$ If Urza's Rage was kicked,
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ Kicked | SpellDescription$ CARDNAME deals 3 damage to any target. If this spell was kicked, instead it deals 10 damage to that permanent or player and the damage can't be prevented.
+SVar:Kicked:DB$ DealDamage | Defined$ Targeted | NumDmg$ 10 | NoPrevention$ True | Condition$ Kicked | ConditionDescription$ If CARDNAME was kicked,
 SVar:X:Count$Kicked.0.3
 SVar:Y:Count$Kicked.10.0
 Oracle:Kicker {8}{R} (You may pay an additional {8}{R} as you cast this spell.)\nThis spell can't be countered.\nUrza's Rage deals 3 damage to any target. If this spell was kicked, instead it deals 10 damage to that permanent or player and the damage can't be prevented.

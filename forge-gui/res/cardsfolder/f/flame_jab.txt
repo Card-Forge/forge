@@ -2,5 +2,5 @@ Name:Flame Jab
 ManaCost:R
 Types:Sorcery
 K:Retrace
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:Flame Jab deals 1 damage to any target.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)

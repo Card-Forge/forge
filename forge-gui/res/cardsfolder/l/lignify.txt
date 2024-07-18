@@ -1,6 +1,6 @@
 Name:Lignify
 ManaCost:1 G
-Types:Tribal Enchantment Treefolk Aura
+Types:Kindred Enchantment Treefolk Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | SetPower$ 0 | SetToughness$ 4 | AddType$ Treefolk | RemoveCreatureTypes$ True | RemoveAllAbilities$ True | Description$ Enchanted creature is a Treefolk with base power and toughness 0/4 and loses all abilities.

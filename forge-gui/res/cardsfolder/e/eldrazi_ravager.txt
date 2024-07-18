@@ -1,0 +1,10 @@
+Name:Eldrazi Ravager
+ManaCost:5 C
+Types:Creature Eldrazi
+PT:6/6
+K:Annihilator:1
+A:AB$ ChangeZone | Cost$ Sac<2/Eldrazi> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+K:Cycling:2
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckHas:Ability$Discard|Sacrifice
+Oracle:Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)\nSacrifice two Eldrazi: Return Eldrazi Ravager from your graveyard to your hand.\nCycling {2} ({2}, Discard this card: Draw a card.)

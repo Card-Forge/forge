@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Legendary Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage1 | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature an opponent controls.
 SVar:TrigDealDamage1:DB$ DealDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumDmg$ 3
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDealDamage2 | TriggerDescription$ At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDealDamage2 | TriggerDescription$ At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDealDamage2:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2
 SVar:X:Count$ThisTurnEntered_Battlefield_Planeswalker.YouCtrl
 Oracle:When Oath of Chandra enters the battlefield, it deals 3 damage to target creature an opponent controls.\nAt the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, Oath of Chandra deals 2 damage to each opponent.

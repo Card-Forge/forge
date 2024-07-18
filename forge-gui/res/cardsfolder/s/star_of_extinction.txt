@@ -1,6 +1,6 @@
 Name:Star of Extinction
 ManaCost:5 R R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 5 R R | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 20 damage to each creature and each planeswalker.
+A:SP$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDealDamage | SpellDescription$ Destroy target land. CARDNAME deals 20 damage to each creature and each planeswalker.
 SVar:DBDealDamage:DB$ DamageAll | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | NumDmg$ 20
 Oracle:Destroy target land. Star of Extinction deals 20 damage to each creature and each planeswalker.

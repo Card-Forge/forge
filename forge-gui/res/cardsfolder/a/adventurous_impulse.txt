@@ -1,5 +1,5 @@
 Name:Adventurous Impulse
 ManaCost:G
 Types:Sorcery
-A:SP$ Dig | Cost$ G | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | SpellDescription$ Look at the top three cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 Oracle:Look at the top three cards of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

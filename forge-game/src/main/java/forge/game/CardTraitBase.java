@@ -156,6 +156,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.keyword = kw;
     }
 
+    public boolean isEmbalm() {
+        return isKeyword(Keyword.EMBALM);
+    }
+    public boolean isEternalize() {
+        return isKeyword(Keyword.ETERNALIZE);
+    }
+
     /**
      * <p>
      * isSecondary.

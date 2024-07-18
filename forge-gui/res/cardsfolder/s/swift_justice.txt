@@ -1,5 +1,5 @@
 Name:Swift Justice
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ First Strike & Lifelink | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
+A:SP$ Pump | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ First Strike & Lifelink | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.
 Oracle:Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.

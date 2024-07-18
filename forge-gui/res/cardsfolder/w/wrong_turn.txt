@@ -1,6 +1,6 @@
 Name:Wrong Turn
 ManaCost:2 U
 Types:Instant
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl | AILogic$ DonateTargetPlayer | StackDescription$ None | SpellDescription$ Target opponent gains control of target creature. (If an attacking or blocking creature changes controllers, it's removed from combat.)
+A:SP$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGainControl | AILogic$ DonateTargetPlayer | StackDescription$ None | SpellDescription$ Target opponent gains control of target creature. (If an attacking or blocking creature changes controllers, it's removed from combat.)
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | NewController$ ParentTarget | StackDescription$ {p:ParentTarget} gains control of {c:Targeted}.
 Oracle:Target opponent gains control of target creature. (If an attacking or blocking creature changes controllers, it's removed from combat.)

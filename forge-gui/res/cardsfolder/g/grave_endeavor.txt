@@ -1,7 +1,7 @@
 Name:Grave Endeavor
 ManaCost:5 B B
 Types:Instant
-A:SP$ RollDice | Cost$ 5 B B | Amount$ 2 | Sides$ 10 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Roll two d10 and choose one result. Return a creature card from your graveyard to the battlefield with a number of +1/+1 counters on it equal to that result. Then each opponent loses X life and you gain X life, where X is the other result.
+A:SP$ RollDice | Amount$ 2 | Sides$ 10 | ChosenSVar$ X | OtherSVar$ Y | SubAbility$ DBChangeZone | StackDescription$ SpellDescription | SpellDescription$ Roll two d10 and choose one result. Return a creature card from your graveyard to the battlefield with a number of +1/+1 counters on it equal to that result. Then each opponent loses X life and you gain X life, where X is the other result.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Mandatory$ True | SelectPrompt$ Choose a creature card to return to the battlefield | Hidden$ True | RememberChanged$ True | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ Y | SubAbility$ DBGainLife

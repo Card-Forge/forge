@@ -1,0 +1,11 @@
+Name:Sapphire Collector
+ManaCost:2 R
+Types:Creature Human Mercenary
+PT:3/3
+K:Prowess
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl+nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConjure | GameActivationLimit$ 1 | ActivatorThisTurnCast$ EQ2 | TriggerDescription$ When you cast your second noncreature spell in a turn, conjure a card named Mox Sapphire into your hand. This ability triggers only once.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mox Sapphire | Zone$ Hand
+A:AB$ Pump | Cost$ 2 U | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | KW$ Flashback | PumpZone$ Graveyard | AILogic$ ReplaySpell | SpellDescription$ Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+DeckHas:Type$Artifact & Ability$Graveyard
+DeckHints:Ability$Graveyard & Type$Instant|Sorcery
+Oracle:Prowess\nWhen you cast your second noncreature spell in a turn, conjure a card named Mox Sapphire into your hand. This ability triggers only once.\n{2}{U}: Target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.

@@ -4,5 +4,5 @@ Types:Creature Spirit
 PT:3/2
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return up to one target non-Spirit creature to its owner's hand.
-SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.nonSpirit | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target target non-spirit creature | Origin$ Battlefield | Destination$ Hand
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.nonSpirit | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target non-Spirit creature | Origin$ Battlefield | Destination$ Hand
 Oracle:Flying\nWhen Roaming Ghostlight enters the battlefield, return up to one target non-Spirit creature to its owner's hand.

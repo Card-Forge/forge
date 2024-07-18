@@ -1,7 +1,7 @@
 Name:Eat to Extinction
 ManaCost:3 B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ TrigSurveil | SpellDescription$ Exile target creature or planeswalker. Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+A:SP$ ChangeZone | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Exile | SubAbility$ TrigSurveil | SpellDescription$ Exile target creature or planeswalker. Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
 SVar:TrigSurveil:DB$ Surveil | Amount$ 1
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Exile target creature or planeswalker. Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

@@ -1,6 +1,6 @@
 Name:Karametra's Blessing
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's an enchanted creature or an enchantment creature, it also gains hexproof and indestructible until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it's an enchanted creature or an enchantment creature, it also gains hexproof and indestructible until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ Hexproof & Indestructible | ConditionDefined$ Targeted | ConditionPresent$ Creature.enchanted,Creature.Enchantment
 Oracle:Target creature gets +2/+2 until end of turn. If it's an enchanted creature or enchantment creature, it also gains hexproof and indestructible until end of turn. (It can't be the target of spells or abilities your opponents control. Damage and effects that say "destroy" don't destroy it.)

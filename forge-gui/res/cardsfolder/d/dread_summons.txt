@@ -1,7 +1,7 @@
 Name:Dread Summons
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Mill | Cost$ X B B | NumCards$ X | Defined$ Player | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
+A:SP$ Mill | NumCards$ X | Defined$ Player | RememberMilled$ True | SubAbility$ DBToken | SpellDescription$ Each player mills X cards. For each creature card put into a graveyard this way, you create a tapped 2/2 black Zombie creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenTapped$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid

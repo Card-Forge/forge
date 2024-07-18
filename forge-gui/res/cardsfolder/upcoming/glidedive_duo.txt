@@ -1,0 +1,10 @@
+Name:Glidedive Duo
+ManaCost:4 B
+Types:Creature Bat Lizard
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters, each opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhen Glidedive Duo enters, each opponent loses 2 life and you gain 2 life.

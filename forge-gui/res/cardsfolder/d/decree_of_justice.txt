@@ -2,7 +2,7 @@ Name:Decree of Justice
 ManaCost:X X 2 W W
 Types:Sorcery
 K:Cycling:2 W
-A:SP$ Token | Cost$ X X 2 W W | TokenAmount$ X | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SpellDescription$ Create X 4/4 white Angel creature tokens with flying.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SpellDescription$ Create X 4/4 white Angel creature tokens with flying.
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may pay {X}. If you do, create X 1/1 white Soldier creature tokens.
 SVar:TrigToken:AB$ Token | Cost$ X | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You
 SVar:X:Count$xPaid

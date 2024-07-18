@@ -1,0 +1,7 @@
+Name:Territory Forge
+ManaCost:4 R
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, exile target artifact or land.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact,Land | TgtPrompt$ Select target artifact or land | Mandatory$ True | Origin$ Battlefield | Destination$ Exile
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.ExiledWithSource | GainsAbilitiesOfZones$ Exile | Description$ CARDNAME has all activated abilities of the exiled card.
+Oracle:When Territory Forge enters the battlefield, if you cast it, exile target artifact or land.\nTerritory Forge has all activated abilities of the exiled card.

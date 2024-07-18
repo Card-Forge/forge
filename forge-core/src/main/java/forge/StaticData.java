@@ -92,7 +92,11 @@ public class StaticData {
             if (!loadNonLegalCards) {
                 for (CardEdition e : editions) {
                     if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
+                        List<CardEdition.CardInSet> eternalCards = e.getFunnyEternalCards();
+
                         for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                            if (eternalCards.contains(cis))
+                                continue;
                             funnyCards.add(cis.name);
                         }
                     }
@@ -139,7 +143,7 @@ public class StaticData {
             variantCards.initialize(false, false, enableUnknownCards);
         }
 
-        if (this.tokenReader != null){
+        if (this.tokenReader != null) {
             final Map<String, CardRules> tokens = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
             for (CardRules card : this.tokenReader.loadCards()) {

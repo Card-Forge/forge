@@ -1,6 +1,6 @@
 Name:Kadena's Silencer
 ManaCost:1 U
-Types:Creature Naga Wizard
+Types:Creature Snake Wizard
 PT:2/1
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, counter all abilities your opponents control.
 SVar:TrigCounter:DB$ Counter | Defined$ ValidStack Activated.OppCtrl,Triggered.OppCtrl

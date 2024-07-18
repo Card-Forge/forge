@@ -1,6 +1,6 @@
 Name:Drawn from Dreams
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U U | DigNum$ 7 | ChangeNum$ 2 | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in a random order.
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ 2 | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in a random order.
 AI:RemoveDeck:All
 Oracle:Look at the top seven cards of your library. Put two of them into your hand and the rest on the bottom of your library in a random order.

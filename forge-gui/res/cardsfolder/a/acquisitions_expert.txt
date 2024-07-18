@@ -2,7 +2,7 @@ Name:Acquisitions Expert
 ManaCost:1 B
 Types:Creature Human Rogue
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals a number of cards from their hand equal to the number of creatures in your your party. You choose one of those cards. That player discards that card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals a number of cards from their hand equal to the number of creatures in your party. You choose one of those cards. That player discards that card.
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | RevealNumber$ X | Mode$ RevealYouChoose
 SVar:X:Count$Party
 DeckHas:Ability$Party

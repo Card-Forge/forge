@@ -1,6 +1,6 @@
 Name:Incite Hysteria
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | Radiance$ True | KW$ CARDNAME can't block. | SpellDescription$ Radiance — Until end of turn, target creature and each other creature that shares a color with it gain "This creature can't block."
+A:SP$ Pump | ValidTgts$ Creature | Radiance$ True | KW$ CARDNAME can't block. | SpellDescription$ Radiance — Until end of turn, target creature and each other creature that shares a color with it gain "This creature can't block."
 AI:RemoveDeck:All
 Oracle:Radiance — Until end of turn, target creature and each other creature that shares a color with it gain "This creature can't block."

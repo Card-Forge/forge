@@ -1,0 +1,9 @@
+Name:Plan the Heist
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ Surveil | Amount$ 3 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBDraw | SpellDescription$ Surveil 3 if you have no cards in hand. Then draw three cards. (To surveil 3, look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+SVar:X:Count$CardsInYourHand
+K:Plot:3 U
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Surveil 3 if you have no cards in hand. Then draw three cards. (To surveil 3, look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)\nPlot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)

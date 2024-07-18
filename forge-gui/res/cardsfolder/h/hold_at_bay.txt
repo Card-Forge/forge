@@ -1,5 +1,5 @@
 Name:Hold at Bay
 ManaCost:1 W
 Types:Instant
-A:SP$ PreventDamage | Cost$ 1 W | ValidTgts$ Any | Amount$ 7 | SpellDescription$ Prevent the next 7 damage that would be dealt to any target this turn.
+A:SP$ PreventDamage | ValidTgts$ Any | Amount$ 7 | SpellDescription$ Prevent the next 7 damage that would be dealt to any target this turn.
 Oracle:Prevent the next 7 damage that would be dealt to any target this turn.

@@ -1,7 +1,7 @@
 Name:Defiant Stand
 ManaCost:1 W
 Types:Instant
-A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBUntap | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Target creature gets +1/+3 until end of turn. Untap that creature.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +3 | SubAbility$ DBUntap | CheckSVar$ X | ActivationPhases$ Declare Attackers | SpellDescription$ Cast this spell only during the declare attackers step and only if you've been attacked this step. Target creature gets +1/+3 until end of turn. Untap that creature.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
 SVar:X:PlayerCountPropertyYou$HasPropertyBeenAttackedThisCombat
 AI:RemoveDeck:All

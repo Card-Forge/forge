@@ -1,7 +1,7 @@
 Name:Political Trickery
 ManaCost:2 U
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 U | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
+A:SP$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
 AI:RemoveDeck:All
 Oracle:Exchange control of target land you control and target land an opponent controls. (This effect lasts indefinitely.)

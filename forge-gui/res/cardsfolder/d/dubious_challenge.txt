@@ -1,7 +1,7 @@
 Name:Dubious Challenge
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 3 G | DigNum$ 10 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ OpponentChooses | SpellDescription$ Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control. | StackDescription$ SpellDescription
+A:SP$ Dig | DigNum$ 10 | ChangeNum$ 2 | Optional$ True | ChangeValid$ Creature | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ OpponentChooses | SpellDescription$ Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control. | StackDescription$ SpellDescription
 SVar:OpponentChooses:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | GainControl$ Targeted | DefinedPlayer$ You | Chooser$ Targeted | ValidTgts$ Opponent | ChangeType$ Card.IsRemembered | Hidden$ True | SubAbility$ YouGetTheRest
 SVar:YouGetTheRest:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered
 Oracle:Look at the top ten cards of your library, exile up to two creature cards from among them, then shuffle. Target opponent may choose one of the exiled cards and put it onto the battlefield under their control. Put the rest onto the battlefield under your control.

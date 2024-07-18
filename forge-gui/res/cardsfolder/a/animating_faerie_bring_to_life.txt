@@ -11,7 +11,7 @@ ALTERNATE
 Name:Bring to Life
 ManaCost:2 U
 Types:Sorcery Adventure
-A:SP$ Animate | Cost$ 2 U | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select noncreature artifact | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature | Duration$ Permanent | SubAbility$ DBPutCounter | SpellDescription$ Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.
+A:SP$ Animate | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select noncreature artifact | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature | Duration$ Permanent | SubAbility$ DBPutCounter | SpellDescription$ Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 4
 DeckHas:Ability$Counters
 Oracle:Target noncreature artifact you control becomes a 0/0 artifact creature. Put four +1/+1 counters on it.

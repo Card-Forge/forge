@@ -1,9 +1,9 @@
 Name:Honorable Passage
 ManaCost:1 W
 Types:Instant
-A:SP$ ChooseSource | Cost$ 1 W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, CARDNAME deals that much damage to the source's controller.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Any | TgtPrompt$ Select any target to prevent damage to | ReplacementEffects$ RepDmg | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
-SVar:RepDmg:Event$ DamageDone | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ DealDamage | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, Honorable Passage deals that much damage to the source's controller.
+SVar:RepDmg:Event$ DamageDone | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ DealDamage | PreventionEffect$ True | Description$ The next time a source of your choice would deal damage to any target this turn, prevent that damage. If damage from a red source is prevented this way, EFFECTSOURCE deals that much damage to the source's controller.
 SVar:DealDamage:DB$ DealDamage | Defined$ ReplacedSourceController | DamageSource$ EffectSource | NumDmg$ X | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.RedSource | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

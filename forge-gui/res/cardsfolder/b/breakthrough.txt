@@ -1,7 +1,7 @@
 Name:Breakthrough
 ManaCost:X U
 Types:Sorcery
-A:SP$ Draw | Cost$ X U | NumCards$ 4 | SubAbility$ DBBreakthroughDiscard | SpellDescription$ Draw four cards, then choose X cards in your hand and discard the rest from it.
+A:SP$ Draw | NumCards$ 4 | SubAbility$ DBBreakthroughDiscard | SpellDescription$ Draw four cards, then choose X cards in your hand and discard the rest from it.
 SVar:DBBreakthroughDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ BreakthroughZ
 SVar:X:Count$xPaid
 SVar:BreakthroughY:Count$InYourHand

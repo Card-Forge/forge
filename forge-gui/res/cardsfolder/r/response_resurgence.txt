@@ -1,7 +1,7 @@
 Name:Response
-ManaCost:R/W R/W
+ManaCost:RW RW
 Types:Instant
-A:SP$ DealDamage | Cost$ R/W R/W | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
+A:SP$ DealDamage | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target attacking or blocking creature.
 AlternateMode:Split
 Oracle:Response deals 5 damage to target attacking or blocking creature.
 
@@ -10,6 +10,6 @@ ALTERNATE
 Name:Resurgence
 ManaCost:3 R W
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 R W | ValidCards$ Creature.YouCtrl | KW$ First Strike & Vigilance | SubAbility$ DBAddCombat | SpellDescription$ Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike & Vigilance | SubAbility$ DBAddCombat | SpellDescription$ Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
 Oracle:Creatures you control gain first strike and vigilance until end of turn. After this main phase, there is an additional combat phase followed by an additional main phase.

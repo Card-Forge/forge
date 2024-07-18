@@ -1,5 +1,5 @@
 Name:Safewright Quest
 ManaCost:GW
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ GW | Origin$ Library | Destination$ Hand | ChangeType$ Forest,Plains | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Forest,Plains | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle.
 Oracle:Search your library for a Forest or Plains card, reveal it, put it into your hand, then shuffle.

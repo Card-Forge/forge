@@ -1,4 +1,4 @@
-Name:Wibbly-Wobbly, Timey-Wimey
+Name:Wibbly-wobbly, Timey-wimey
 ManaCost:1 U
 Types:Sorcery
 A:SP$ TimeTravel | SubAbility$ DBDraw | SpellDescription$ Time travel. (For each suspended card you own and each permanent you control with a time counter on it, you may add or remove a time counter.)

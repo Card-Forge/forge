@@ -1,6 +1,6 @@
 Name:Spirit Summoning
 ManaCost:1 RW RW
 Types:Sorcery Lesson
-A:SP$ Token | Cost$ 1 RW RW | TokenScript$ rw_3_2_spirit | TokenOwner$ You | SpellDescription$ Create a 3/2 red and white Spirit creature token.
+A:SP$ Token | TokenScript$ rw_3_2_spirit | TokenOwner$ You | SpellDescription$ Create a 3/2 red and white Spirit creature token.
 DeckHas:Ability$Token
 Oracle:Create a 3/2 red and white Spirit creature token.

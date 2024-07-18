@@ -1,29 +1,11 @@
 package forge.game.card;
 
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.SpellAbility;
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-
 import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.ColorSet;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.game.Direction;
 import forge.game.EvenOdd;
@@ -33,13 +15,19 @@ import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.spellability.AbilityManaPart;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.IPaperCard;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class CardView extends GameEntityView {
     private static final long serialVersionUID = -3624090829028979255L;
@@ -338,8 +326,28 @@ public class CardView extends GameEntityView {
     void updateDamage(Card c) {
         set(TrackableProperty.Damage, c.getDamage());
         updateLethalDamage(c);
-        //update CrackOverlay (currently 16 overlays)
-        set(TrackableProperty.CrackOverlay, c.getDamage() > 0 ? MyRandom.getRandom().nextInt(16) : 0);
+        //get crackoverlay by level of damage light 0, medium 1, heavy 2, max 3
+        int randCrackLevel = 0;
+        if (c.getDamage() > 0) {
+            switch (c.getDamage()) {
+                case 1:
+                case 2:
+                    randCrackLevel = 0;
+                    break;
+                case 3:
+                case 4:
+                    randCrackLevel = 1;
+                    break;
+                case 5:
+                case 6:
+                    randCrackLevel = 2;
+                    break;
+                default:
+                    randCrackLevel = 3;
+                    break;
+            }
+        }
+        set(TrackableProperty.CrackOverlay, randCrackLevel);
     }
 
     public int getAssignedDamage() {
@@ -515,6 +523,11 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Sector, c.getSector());
     }
 
+    public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
+    void updateDraftAction(Card c) {
+        set(TrackableProperty.DraftAction, c.getDraftActions());
+    }
+
     public List<String> getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
@@ -570,6 +583,7 @@ public class CardView extends GameEntityView {
         case Graveyard:
         case Flashback:
         case Stack:
+        case Junkyard:
             //cards in these zones are visible to all
             return true;
         case Exile:
@@ -592,6 +606,7 @@ public class CardView extends GameEntityView {
             return true;
         case Library:
         case PlanarDeck:
+        case AttractionDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             break;
         case SchemeDeck:
@@ -793,6 +808,12 @@ public class CardView extends GameEntityView {
         if (!nonAbilityText.isEmpty()) {
             sb.append("\r\n \r\nNon ability features: \r\n");
             sb.append(nonAbilityText.replaceAll("CARDNAME", getName()));
+        }
+
+        Set<Integer> attractionLights = get(TrackableProperty.AttractionLights);
+        if (attractionLights != null && !attractionLights.isEmpty()) {
+            sb.append("\r\n\r\nLights: ");
+            sb.append(StringUtils.join(attractionLights, ", "));
         }
 
         sb.append(getRemembered());
@@ -1009,6 +1030,8 @@ public class CardView extends GameEntityView {
         }
         currentState.getView().updateKeywords(c, currentState); //update keywords even if state doesn't change
         currentState.getView().setOriginalColors(c); //set original Colors
+
+        currentStateView.updateAttractionLights(currentState);
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1288,8 +1311,8 @@ public class CardView extends GameEntityView {
         public String getOracleText() {
             return get(TrackableProperty.OracleText);
         }
-        void updateOracleText(Card c) {
-            set(TrackableProperty.OracleText, c.getOracleText().replace("\\n", "\r\n\r\n").trim());
+        void setOracleText(String oracleText) {
+            set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
         }
 
         public String getRulesText() {
@@ -1419,6 +1442,13 @@ public class CardView extends GameEntityView {
             updateDefense("0");
         }
 
+        public Set<Integer> getAttractionLights() {
+            return get(TrackableProperty.AttractionLights);
+        }
+        void updateAttractionLights(CardState c) {
+            set(TrackableProperty.AttractionLights, c.getAttractionLights());
+        }
+
         public String getSetCode() {
             return get(TrackableProperty.SetCode);
         }
@@ -1456,6 +1486,7 @@ public class CardView extends GameEntityView {
         public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
+        public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
         public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
         public boolean hasToxic() { return get(TrackableProperty.HasToxic); }
         public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
@@ -1463,11 +1494,14 @@ public class CardView extends GameEntityView {
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
         public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
+        public boolean hasExalted() { return get(TrackableProperty.HasExalted); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }
         public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
         public boolean hasHorsemanship() { return get(TrackableProperty.HasHorsemanship); }
+        public boolean hasWard() { return get(TrackableProperty.HasWard); }
+        public boolean hasWither() { return get(TrackableProperty.HasWither); }
         public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
         public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
         public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
@@ -1530,6 +1564,7 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
+            set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state));
             set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
             set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
             set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
@@ -1537,11 +1572,14 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
                     "you choose among defending player and/or any number of creatures they control."));
             set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
+            set(TrackableProperty.HasExalted, c.hasKeyword(Keyword.EXALTED, state));
             set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
             set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
             set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
             set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
             set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
+            set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state));
+            set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
             set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
             set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
             set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));
@@ -1696,6 +1734,9 @@ public class CardView extends GameEntityView {
             if (!getType().isEnchantment() || getType().getCoreTypes() == null)
                 return false;
             return Iterables.size(getType().getCoreTypes()) > 1;
+        }
+        public boolean isAttraction() {
+            return getType().isAttraction();
         }
     }
 

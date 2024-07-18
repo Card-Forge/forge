@@ -21,7 +21,10 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.controllers.CEditorTokenViewer;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
-import forge.toolbox.*;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FComboBoxPanel;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -123,8 +126,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRandomArtInPools(), FPref.UI_RANDOM_ART_IN_POOLS));
         lstControls.add(Pair.of(view.getCbEnforceDeckLegality(), FPref.ENFORCE_DECK_LEGALITY));
         lstControls.add(Pair.of(view.getCbPerformanceMode(), FPref.PERFORMANCE_MODE));
-        lstControls.add(Pair.of(view.getCbSideboardForAI(), FPref.MATCH_SIDEBOARD_FOR_AI));
-        lstControls.add(Pair.of(view.getCbExperimentalRestore(), FPref.MATCH_EXPERIMENTAL_RESTORE));
         lstControls.add(Pair.of(view.getCbFilteredHands(), FPref.FILTERED_HANDS));
         lstControls.add(Pair.of(view.getCbCloneImgSource(), FPref.UI_CLONE_MODE_SOURCE));
         lstControls.add(Pair.of(view.getCbRemoveSmall(), FPref.DECKGEN_NOSMALL));
@@ -267,6 +268,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeAutoUpdaterComboBox();
         initializeMulliganRuleComboBox();
         initializeAiProfilesComboBox();
+        initializeAiSideboardingModeComboBox();
         initializeSoundSetsComboBox();
         initializeMusicSetsComboBox();
         initializeStackAdditionsComboBox();
@@ -472,6 +474,21 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(AiProfileUtil.getProfilesArray(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeAiSideboardingModeComboBox() {
+        final FPref userSetting = FPref.MATCH_AI_SIDEBOARDING_MODE;
+        final FComboBoxPanel<String> panel = this.view.getAiSideboardingModeComboBoxPanel();
+        final FComboBox<String> comboBox = createComboBox(new String[] {"Off", "AI", "Human For AI"}, userSetting);
+        final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem()));
+                System.out.println(AiProfileUtil.getAISideboardingMode());
+            }
+        });
     }
 
     private void initializeSoundSetsComboBox() {

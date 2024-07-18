@@ -2,7 +2,7 @@ Name:Wandering Goblins
 ManaCost:2 R
 Types:Creature Goblin Warrior
 PT:0/3
-A:AB$ Pump | Cost$ 3 | Defined$ Self | NumAtt$ +X | PrecostDesc$ Domain — | SpellDescription$ Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
+A:AB$ Pump | Cost$ 3 | Defined$ Self | NumAtt$ +X | PrecostDesc$ Domain — | SpellDescription$ CARDNAME gets +1/+0 until end of turn for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 Oracle:Domain — {3}: Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.

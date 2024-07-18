@@ -1,5 +1,5 @@
 Name:Jace's Ingenuity
 ManaCost:3 U U
 Types:Instant
-A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 Oracle:Draw three cards.

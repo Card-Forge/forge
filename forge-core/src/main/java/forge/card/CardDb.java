@@ -37,6 +37,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -272,7 +273,22 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         artIds.put(key, artIdx);
-        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName));
+        addCard(new PaperCard(cr, e.getCode(), cis.rarity, artIdx, false, cis.collectorNumber, cis.artistName, cis.functionalVariantName));
+    }
+
+    private boolean addFromSetByName(String cardName, CardEdition ed, CardRules cr) {
+        List<CardInSet> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
+        if (cr.hasFunctionalVariants()) {
+            cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.functionalVariantName)
+                    || cr.getSupportedFunctionalVariants().contains(c.functionalVariantName)
+            ).collect(Collectors.toList());
+        }
+        if (cardsInSet.isEmpty())
+            return false;
+        for (CardInSet cis : cardsInSet) {
+            addSetCard(ed, cis, cr);
+        }
+        return true;
     }
 
     public void loadCard(String cardName, String setCode, CardRules cr) {
@@ -285,18 +301,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (ed == null || ed.equals(CardEdition.UNKNOWN)) {
             // look for all possible editions
             for (CardEdition e : editions) {
-                List<CardInSet> cardsInSet = e.getCardInSet(cardName);  // empty collection if not present
-                for (CardInSet cis : cardsInSet) {
-                    addSetCard(e, cis, cr);
-                    reIndexNecessary = true;
-                }
+                reIndexNecessary |= addFromSetByName(cardName, e, cr);
             }
         } else {
-            List<CardInSet> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
-            for (CardInSet cis : cardsInSet) {
-                addSetCard(ed, cis, cr);
-                reIndexNecessary = true;
-            }
+            reIndexNecessary |= addFromSetByName(cardName, ed, cr);
         }
 
         if (reIndexNecessary)
@@ -324,11 +332,20 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
             for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
                 CardRules cr = rulesByName.get(cis.name);
-                if (cr != null) {
-                    addSetCard(e, cis, cr);
-                } else {
+                if (cr == null) {
                     missingCards.add(cis.name);
+                    continue;
                 }
+                if (cr.hasFunctionalVariants()) {
+                    if (StringUtils.isNotEmpty(cis.functionalVariantName)
+                        && !cr.getSupportedFunctionalVariants().contains(cis.functionalVariantName)) {
+                        //Supported card, unsupported variant.
+                        //Could note the card as missing but since these are often un-cards,
+                        //it's likely absent because it does something out of scope.
+                        continue;
+                    }
+                }
+                addSetCard(e, cis, cr);
             }
             if (isCoreExpSet && logMissingPerEdition) {
                 if (missingCards.isEmpty()) {
@@ -432,6 +449,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (paperCard.getRules().getSplitType() == CardSplitType.Split) {
             //also include main part for split cards
             allCardsByName.put(paperCard.getRules().getMainPart().getName(), paperCard);
+        } else if (paperCard.getRules().getSplitType() == CardSplitType.Specialize) {
+            //also include specialize faces
+            for (ICardFace face : paperCard.getRules().getSpecializeParts().values()) allCardsByName.put(face.getName(), paperCard);
         }
     }
 
@@ -868,14 +888,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public int getArtCount(String cardName, String setCode) {
+        return getArtCount(cardName, setCode, null);
+    }
+    public int getArtCount(String cardName, String setCode, String functionalVariantName) {
         if (cardName == null || setCode == null)
             return 0;
-        Collection<PaperCard> cardsInSet = getAllCards(cardName, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return card.getEdition().equalsIgnoreCase(setCode);
-            }
-        });
+        Predicate<PaperCard> predicate = card -> card.getEdition().equalsIgnoreCase(setCode);
+        if(functionalVariantName != null && !functionalVariantName.equals(IPaperCard.NO_FUNCTIONAL_VARIANT)) {
+            predicate = Predicates.and(predicate, card -> functionalVariantName.equals(card.getFunctionalVariant()));
+        }
+        Collection<PaperCard> cardsInSet = getAllCards(cardName, predicate);
         return cardsInSet.size();
     }
 
@@ -1139,7 +1161,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         if (!hasBadSetInfo) {
-            int artCount = getArtCount(card.getName(), card.getEdition());
+            int artCount = getArtCount(card.getName(), card.getEdition(), card.getFunctionalVariant());
             sb.append(CardDb.NameSetSeparator).append(card.getEdition());
             if (artCount >= IPaperCard.DEFAULT_ART_INDEX) {
                 sb.append(CardDb.NameSetSeparator).append(card.getArtIndex()); // indexes start at 1 to match image file name conventions
@@ -1226,7 +1248,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     int artIdx = IPaperCard.DEFAULT_ART_INDEX;
                     for (CardInSet cis : e.getCardInSet(cardName))
                         paperCards.add(new PaperCard(rules, e.getCode(), cis.rarity, artIdx++, false,
-                                                     cis.collectorNumber, cis.artistName));
+                                                     cis.collectorNumber, cis.artistName, cis.functionalVariantName));
                 }
             } else {
                 String lastEdition = null;
@@ -1246,7 +1268,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     int cardInSetIndex = Math.max(artIdx-1, 0); // make sure doesn't go below zero
                     CardInSet cds = cardsInSet.get(cardInSetIndex);  // use ArtIndex to get the right Coll. Number
                     paperCards.add(new PaperCard(rules, lastEdition, tuple.getValue(), artIdx++, false,
-                                                 cds.collectorNumber, cds.artistName));
+                                                 cds.collectorNumber, cds.artistName, cds.functionalVariantName));
                 }
             }
             if (paperCards.isEmpty()) {

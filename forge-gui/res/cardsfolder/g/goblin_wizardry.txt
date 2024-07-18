@@ -1,6 +1,6 @@
 Name:Goblin Wizardry
 ManaCost:3 R
 Types:Instant
-A:SP$ Token | Cost$ 3 R | TokenAmount$ 2 | TokenScript$ r_1_1_goblin_wizard_prowess | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin Wizard creature tokens with prowess.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_goblin_wizard_prowess | TokenOwner$ You | SpellDescription$ Create two 1/1 red Goblin Wizard creature tokens with prowess.
 DeckHas:Ability$Token
 Oracle:Create two 1/1 red Goblin Wizard creature tokens with prowess. (Whenever you cast a noncreature spell, they get +1/+1 until end of turn.)

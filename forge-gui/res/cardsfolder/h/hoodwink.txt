@@ -1,5 +1,5 @@
 Name:Hoodwink
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment, or land | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact, enchantment, or land to its owner's hand.
+A:SP$ ChangeZone | ValidTgts$ Artifact,Enchantment,Land | TgtPrompt$ Select target artifact, enchantment, or land | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact, enchantment, or land to its owner's hand.
 Oracle:Return target artifact, enchantment, or land to its owner's hand.

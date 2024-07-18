@@ -1,7 +1,7 @@
 Name:Once and Future
 ManaCost:3 G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard to return to your hand | ValidTgts$ Card.YouOwn | SubAbility$ DBPump | AIManaPref$ G | StackDescription$ SpellDescription | SpellDescription$ Return target card from your graveyard to your hand. Put up to one other target card from your graveyard on top of your library. Exile CARDNAME. Adamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard to return to your hand | ValidTgts$ Card.YouOwn | SubAbility$ DBPump | AIManaPref$ G | StackDescription$ SpellDescription | SpellDescription$ Return target card from your graveyard to your hand. Put up to one other target card from your graveyard on top of your library. Exile CARDNAME. Adamant — If at least three green mana was spent to cast this spell, instead return those cards to your hand and exile CARDNAME.
 SVar:DBPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | TgtZone$ Graveyard | TgtPrompt$ Select up to one target card in your graveyard to put on top of your library | ValidTgts$ Card.YouOwn | TargetUnique$ True | RememberObjects$ ThisTargetedCard | SubAbility$ DBReturn | StackDescription$ None
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Hidden$ True | Defined$ Remembered | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBReturn2
 SVar:DBReturn2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Defined$ Remembered | ConditionCheckSVar$ X | SubAbility$ DBExile

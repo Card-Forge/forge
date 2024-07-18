@@ -1,6 +1,6 @@
 Name:Ranger's Firebrand
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ TrigTempt | SpellDescription$ CARDNAME deals 2 damage to any target. The Ring tempts you.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ TrigTempt | SpellDescription$ CARDNAME deals 2 damage to any target. The Ring tempts you.
 SVar:TrigTempt:DB$ RingTemptsYou
 Oracle:Ranger's Firebrand deals 2 damage to any target. The Ring tempts you.

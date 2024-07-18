@@ -1,6 +1,6 @@
 Name:Kindred Dominance
 ManaCost:5 B B
 Types:Sorcery
-A:SP$ ChooseType | Cost$ 5 B B | Defined$ You | Type$ Creature | SubAbility$ DBDestroyOther | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Destroy all creatures that aren't of the chosen type.
+A:SP$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDestroyOther | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type. Destroy all creatures that aren't of the chosen type.
 SVar:DBDestroyOther:DB$ DestroyAll | ValidCards$ Creature.IsNotChosenType | Zone$ Battlefield
 Oracle:Choose a creature type. Destroy all creatures that aren't of the chosen type.

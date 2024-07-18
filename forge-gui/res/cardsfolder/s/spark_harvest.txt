@@ -3,5 +3,5 @@ ManaCost:B
 Types:Sorcery
 K:AlternateAdditionalCost:Sac<1/Creature>:3 B
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
-A:SP$ Destroy | Cost$ B | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
 Oracle:As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.\nDestroy target creature or planeswalker.

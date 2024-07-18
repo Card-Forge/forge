@@ -1,0 +1,10 @@
+Name:Petrifying Meddler
+ManaCost:4 U
+Types:Creature Eldrazi
+PT:4/5
+K:Devoid
+K:Reach
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast this spell, tap up to one target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell, tap up to one target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nReach

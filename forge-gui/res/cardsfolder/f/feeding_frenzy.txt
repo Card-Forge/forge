@@ -1,7 +1,7 @@
 Name:Feeding Frenzy
 ManaCost:2 B
 Types:Instant
-A:SP$ Pump | Cost$ 2 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.
 SVar:X:Count$Valid Zombie
 AI:RemoveDeck:Random
 Oracle:Target creature gets -X/-X until end of turn, where X is the number of Zombies on the battlefield.

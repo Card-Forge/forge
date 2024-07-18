@@ -1,6 +1,6 @@
 Name:Jabari's Influence
 ManaCost:3 W W
 Types:Instant
-A:SP$ GainControl | Cost$ 3 W W | ValidTgts$ Creature.nonBlack+nonArtifact+attackedYouThisTurn | TgtPrompt$ Select target nonartifact, nonblack creature that attacked you this turn | ActivationPhases$ Main2->Cleanup | SubAbility$ DBPutCounter | SpellDescription$ Cast this spell only after combat. Gain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.
+A:SP$ GainControl | ValidTgts$ Creature.nonBlack+nonArtifact+attackedYouThisTurn | TgtPrompt$ Select target nonartifact, nonblack creature that attacked you this turn | ActivationPhases$ Main2->Cleanup | SubAbility$ DBPutCounter | SpellDescription$ Cast this spell only after combat. Gain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ M1M0 | CounterNum$ 1
 Oracle:Cast this spell only after combat.\nGain control of target nonartifact, nonblack creature that attacked you this turn and put a -1/-0 counter on it.

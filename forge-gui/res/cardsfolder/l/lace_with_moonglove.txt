@@ -1,6 +1,6 @@
 Name:Lace with Moonglove
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn. | SubAbility$ DBDraw
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SpellDescription$ Target creature gains deathtouch until end of turn. | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target creature gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy that creature.)\nDraw a card.

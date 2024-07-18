@@ -1,6 +1,6 @@
 Name:Runeboggle
 ManaCost:2 U
 Types:Instant
-A:SP$ Counter | Cost$ 2 U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays {1}. Draw a card
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 1 | SubAbility$ DBDraw | SpellDescription$ Counter target spell unless its controller pays {1}. Draw a card
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 Oracle:Counter target spell unless its controller pays {1}.\nDraw a card.

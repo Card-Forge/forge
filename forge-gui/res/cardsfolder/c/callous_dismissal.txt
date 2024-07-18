@@ -1,7 +1,7 @@
 Name:Callous Dismissal
 ManaCost:1 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBAmass | SpellDescription$ Return target nonland permanent to its owner's hand. Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBAmass | SpellDescription$ Return target nonland permanent to its owner's hand. Amass Zombies 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Type$ Zombie | Num$ 1
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass|Counters|Token

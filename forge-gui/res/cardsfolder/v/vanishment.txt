@@ -2,5 +2,5 @@ Name:Vanishment
 ManaCost:4 U
 Types:Instant
 K:Miracle:U
-A:SP$ ChangeZone | Cost$ 4 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put target nonland permanent on top of its owner's library.
 Oracle:Put target nonland permanent on top of its owner's library.\nMiracle {U} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

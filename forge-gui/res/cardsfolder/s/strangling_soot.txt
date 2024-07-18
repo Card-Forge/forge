@@ -2,5 +2,5 @@ Name:Strangling Soot
 ManaCost:2 B
 Types:Instant
 K:Flashback:5 R
-A:SP$ Destroy | Cost$ 2 B | ValidTgts$ Creature.toughnessLE3 | TgtPrompt$ Select target creature with toughness 3 or less | SpellDescription$ Destroy target creature with toughness 3 or less.
+A:SP$ Destroy | ValidTgts$ Creature.toughnessLE3 | TgtPrompt$ Select target creature with toughness 3 or less | SpellDescription$ Destroy target creature with toughness 3 or less.
 Oracle:Destroy target creature with toughness 3 or less.\nFlashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

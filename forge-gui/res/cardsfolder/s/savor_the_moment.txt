@@ -1,5 +1,5 @@
 Name:Savor the Moment
 ManaCost:1 U U
 Types:Sorcery
-A:SP$ AddTurn | Cost$ 1 U U | NumTurns$ 1 | SkipUntap$ True | SpellDescription$ Take an extra turn after this one. Skip the untap step of that turn.
+A:SP$ AddTurn | NumTurns$ 1 | SkipUntap$ True | SpellDescription$ Take an extra turn after this one. Skip the untap step of that turn.
 Oracle:Take an extra turn after this one. Skip the untap step of that turn.

@@ -1,7 +1,7 @@
 Name:Life Goes On
 ManaCost:G
 Types:Instant
-A:SP$ GainLife | Cost$ G | LifeAmount$ X | SpellDescription$ You gain 4 life. If a creature died this turn, you gain 8 life instead.
+A:SP$ GainLife | LifeAmount$ X | SpellDescription$ You gain 4 life. If a creature died this turn, you gain 8 life instead.
 SVar:X:Count$Morbid.8.4
 DeckHas:Ability$LifeGain
 Oracle:You gain 4 life. If a creature died this turn, you gain 8 life instead.

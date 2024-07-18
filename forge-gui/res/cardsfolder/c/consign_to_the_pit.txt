@@ -1,6 +1,6 @@
 Name:Consign to the Pit
 ManaCost:5 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Destroy target creature. CARDNAME deals 2 damage to that creature's controller.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDealDamage | SpellDescription$ Destroy target creature. CARDNAME deals 2 damage to that creature's controller.
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
 Oracle:Destroy target creature. Consign to the Pit deals 2 damage to that creature's controller.

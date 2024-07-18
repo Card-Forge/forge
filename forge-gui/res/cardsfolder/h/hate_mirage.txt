@@ -1,5 +1,5 @@
 Name:Hate Mirage
 ManaCost:3 R
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 3 R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to two target creatures you don't control | TargetMin$ 0 | TargetMax$ 2 | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ BeforeCombat | SpellDescription$ Choose up to two target creatures you don't control. For each of those creatures, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select up to two target creatures you don't control | TargetMin$ 0 | TargetMax$ 2 | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ BeforeCombat | SpellDescription$ Choose up to two target creatures you don't control. For each of those creatures, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.
 Oracle:Choose up to two target creatures you don't control. For each of those creatures, create a token that's a copy of that creature. Those tokens gain haste. Exile them at the beginning of the next end step.

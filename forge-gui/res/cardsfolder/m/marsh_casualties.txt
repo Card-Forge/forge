@@ -2,7 +2,7 @@ Name:Marsh Casualties
 ManaCost:B B
 Types:Sorcery
 K:Kicker:3
-A:SP$ PumpAll | Cost$ B B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Creatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead.
+A:SP$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SpellDescription$ Creatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead.
 SVar:X:Count$Kicked.2.1
 SVar:NeedsToPlayKicked:Creature.OppCtrl+toughnessEQ2
 Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nCreatures target player controls get -1/-1 until end of turn. If this spell was kicked, those creatures get -2/-2 until end of turn instead.

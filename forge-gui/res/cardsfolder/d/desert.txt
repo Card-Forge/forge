@@ -2,5 +2,5 @@ Name:Desert
 ManaCost:no cost
 Types:Land Desert
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ 1 | ActivationPhases$ EndCombat | SpellDescription$ Desert deals 1 damage to target attacking creature. Activate only during the end of combat step.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking Creature | NumDmg$ 1 | ActivationPhases$ EndCombat | SpellDescription$ CARDNAME deals 1 damage to target attacking creature. Activate only during the end of combat step.
 Oracle:{T}: Add {C}.\n{T}: Desert deals 1 damage to target attacking creature. Activate only during the end of combat step.

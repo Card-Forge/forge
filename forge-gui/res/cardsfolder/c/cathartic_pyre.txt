@@ -1,7 +1,7 @@
 Name:Cathartic Pyre
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ DBDmg,DBDisc
+A:SP$ Charm | Choices$ DBDmg,DBDisc
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker.
 SVar:DBDisc:DB$ Discard | Mode$ TgtChoose | NumCards$ 2 | Optional$ True | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard up to two cards, then draw that many cards.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup

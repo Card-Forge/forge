@@ -1,7 +1,7 @@
 Name:Sleight of Mind
 ManaCost:U
 Types:Instant
-A:SP$ ChangeText | Cost$ U | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | Duration$ Permanent | ChangeColorWord$ Choose Choose | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another. (For example, you may change "target black spell" to "target blue spell." This effect lasts indefinitely.)
+A:SP$ ChangeText | ValidTgts$ Card | TgtZone$ Stack,Battlefield | TgtPrompt$ Choose target spell or permanent | Duration$ Permanent | ChangeColorWord$ Choose Choose | SpellDescription$ Change the text of target spell or permanent by replacing all instances of one color word with another. (For example, you may change "target black spell" to "target blue spell." This effect lasts indefinitely.)
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Change the text of target spell or permanent by replacing all instances of one color word with another. (For example, you may change "target black spell" to "target blue spell." This effect lasts indefinitely.)

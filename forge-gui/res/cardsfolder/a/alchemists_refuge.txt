@@ -2,7 +2,7 @@ Name:Alchemist's Refuge
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Effect | Cost$ G U T | Name$ Refuge Effect | StaticAbilities$ QuickSpell | SpellDescription$ You may cast spells this turn as though they had flash.
+A:AB$ Effect | Cost$ G U T | StaticAbilities$ QuickSpell | SpellDescription$ You may cast spells this turn as though they had flash.
 SVar:QuickSpell:Mode$ CastWithFlash | ValidCard$ Card | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ You may cast spells this turn as though they had flash.
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random

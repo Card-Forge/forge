@@ -4,7 +4,7 @@ Types:Creature Vampire Rogue
 PT:1/1
 K:Landwalk:Swamp
 K:Multikicker:1 B
-K:etbCounter:P1P1:XKicked:no condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+K:etbCounter:P1P1:XKicked:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each time it was kicked.
 SVar:XKicked:Count$TimesKicked
 DeckHas:Ability$Counters
 Oracle:Multikicker {1}{B} (You may pay an additional {1}{B} any number of times as you cast this spell.)\nSwampwalk (This creature can't be blocked as long as defending player controls a Swamp.)\nQuag Vampires enters the battlefield with a +1/+1 counter on it for each time it was kicked.

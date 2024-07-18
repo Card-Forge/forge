@@ -1,5 +1,5 @@
 Name:Asphyxiate
 ManaCost:1 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B B | ValidTgts$ Creature.untapped | TgtPrompt$ Select target untapped creature | SpellDescription$ Destroy target untapped creature.
+A:SP$ Destroy | ValidTgts$ Creature.untapped | TgtPrompt$ Select target untapped creature | SpellDescription$ Destroy target untapped creature.
 Oracle:Destroy target untapped creature.

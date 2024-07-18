@@ -1,5 +1,5 @@
 Name:Stern Scolding
 ManaCost:U
 Types:Instant
-A:SP$ Counter | Cost$ U | TargetType$ Spell | ValidTgts$ Creature.powerLE2,Creature.toughnessLE2 | TgtPrompt$ Select target creature spell with power or toughness 2 or less | SpellDescription$ Counter target creature spell with power or toughness 2 or less.
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Creature.powerLE2,Creature.toughnessLE2 | TgtPrompt$ Select target creature spell with power or toughness 2 or less | SpellDescription$ Counter target creature spell with power or toughness 2 or less.
 Oracle:Counter target creature spell with power or toughness 2 or less.

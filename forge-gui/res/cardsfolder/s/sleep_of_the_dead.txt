@@ -1,7 +1,7 @@
 Name:Sleep of the Dead
 ManaCost:U
 Types:Sorcery
-A:SP$ Tap | Cost$ U | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
+A:SP$ Tap | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature. It doesn't untap during its controller's next untap step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 K:Escape:2 U ExileFromGrave<3/Card.Other/other>
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard

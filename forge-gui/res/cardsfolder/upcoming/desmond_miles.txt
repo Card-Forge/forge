@@ -1,0 +1,14 @@
+Name:Desmond Miles
+ManaCost:1 B
+Types:Legendary Creature Human Assassin
+PT:1/3
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigSurveil | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, surveil X, where X is the amount of damage it dealt to that player.
+SVar:TrigSurveil:DB$ Surveil | Amount$ Z
+SVar:X:Count$Valid Assassin.YouCtrl+Other/Plus.Y
+SVar:Y:Count$ValidGraveyard Assassin.YouCtrl
+SVar:Z:TriggerCount$DamageAmount
+SVar:BuffedBy:Assassin
+DeckNeeds:Type$Assassin
+Oracle:Menace\nDesmond Miles gets +1/+0 for each other Assassin you control and each Assassin card in your graveyard.\nWhenever Desmond Miles deals combat damage to a player, surveil X, where X is the amount of damage it dealt to that player.

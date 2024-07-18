@@ -1,0 +1,7 @@
+Name:Izzet Polarizer
+ManaCost:U R
+Types:Creature Lizard Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME dies, conjure a card named Ionize or a card named Electrolyze into your hand. (Your choice is not revealed to other players.)
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Choices$ Ionize,Electrolyze | Zone$ Hand
+Oracle:When Izzet Polarizer dies, conjure a card named Ionize or a card named Electrolyze into your hand. (Your choice is not revealed to other players.)

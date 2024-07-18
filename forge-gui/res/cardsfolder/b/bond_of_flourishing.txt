@@ -1,6 +1,6 @@
 Name:Bond of Flourishing
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Dig | Cost$ 1 G | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SubAbility$ GainLife | SpellDescription$ Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order. You gain 3 life.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Permanent | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SubAbility$ GainLife | SpellDescription$ Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order. You gain 3 life.
 SVar:GainLife:DB$ GainLife | LifeAmount$ 3
 Oracle:Look at the top three cards of your library. You may reveal a permanent card from among them and put it into your hand. Put the rest on the bottom of your library in any order. You gain 3 life.

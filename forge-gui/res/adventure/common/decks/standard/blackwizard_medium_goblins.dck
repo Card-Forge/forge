@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Nelson Muntz 2
-Title=Nelson Muntz
-Difficulty=medium
-Description=Mono B Goblin Rogue deck
-Icon=Nelson Muntz.jpg
-Deck Type=constructed
 [main]
 4 Auntie's Snitch
 4 Frogtosser Banneret

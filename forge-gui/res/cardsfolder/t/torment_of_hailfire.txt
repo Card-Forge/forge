@@ -1,7 +1,7 @@
 Name:Torment of Hailfire
 ManaCost:X B B
 Types:Sorcery
-A:SP$ Repeat | Cost$ X B B | MaxRepeat$ X | RepeatSubAbility$ RepeatTorment | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Repeat the following process X times. Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
+A:SP$ Repeat | MaxRepeat$ X | RepeatSubAbility$ RepeatTorment | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Repeat the following process X times. Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
 SVar:RepeatTorment:DB$ GenericChoice | Defined$ Opponent | TempRemember$ Chooser | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
 SVar:Discard:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you discard a card
 SVar:SacNonland:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand/nonland permanent> | UnlessPayer$ Remembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent

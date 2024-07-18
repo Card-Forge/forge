@@ -11,5 +11,5 @@ ALTERNATE
 Name:Rider in Need
 ManaCost:2 W
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ 2 W | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Create a 2/2 white Knight creature token with vigilance. (Then exile this card. You may cast the creature later from exile.)

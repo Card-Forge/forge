@@ -1,0 +1,8 @@
+Name:Obeka, Splitter of Seconds
+ManaCost:1 U B R
+Types:Legendary Creature Ogre Warlock
+PT:2/5
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigAddPhase | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you get that many additional upkeep steps after this phase.
+SVar:TrigAddPhase:DB$ AddPhase | ConditionPlayerTurn$ True | NumPhases$ TriggerCount$DamageAmount | ExtraPhase$ Upkeep | AfterPhase$ EndCombat
+Oracle:Menace\nWhenever Obeka, Splitter of Seconds deals combat damage to a player, you get that many additional upkeep steps after this phase.

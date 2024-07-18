@@ -2,7 +2,7 @@ Name:Rude Awakening
 ManaCost:4 G
 Types:Sorcery
 K:Entwine:2 G
-A:SP$ Charm | Cost$ 4 G | Choices$ DBUntap,DBAnimate | CharmNum$ 1
+A:SP$ Charm | Choices$ DBUntap,DBAnimate | CharmNum$ 1
 SVar:DBUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl | SpellDescription$ Untap all lands you control.
 SVar:DBAnimate:DB$ AnimateAll | ValidCards$ Land.YouCtrl | Power$ 2 | Toughness$ 2 | Types$ Creature | SpellDescription$ Until end of turn, lands you control become 2/2 creatures that are still lands.
 AI:RemoveDeck:All

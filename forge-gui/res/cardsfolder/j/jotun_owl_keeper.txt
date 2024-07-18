@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Giant
 PT:3/3
 K:Cumulative upkeep:WU
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When Jötun Owl Keeper dies, create a 1/1 white Bird creature token with flying for each age counter on it.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Bird creature token with flying for each age counter on it.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_bird_flying | TokenOwner$ You
 SVar:X:TriggeredCard$CardCounters.AGE
 Oracle:Cumulative upkeep {W} or {U} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nWhen Jötun Owl Keeper dies, create a 1/1 white Bird creature token with flying for each age counter on it.

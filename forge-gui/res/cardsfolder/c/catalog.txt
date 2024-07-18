@@ -1,7 +1,7 @@
 Name:Catalog
 ManaCost:2 U
 Types:Instant
-A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium

@@ -1,6 +1,6 @@
 Name:Lich's Caress
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 3 life.
+A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLifeGain | SpellDescription$ Destroy target creature. You gain 3 life.
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ 3
 Oracle:Destroy target creature. You gain 3 life.

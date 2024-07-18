@@ -223,7 +223,6 @@ public class SFilterUtil {
             }
 
         };
-
     }
 
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {

@@ -1,7 +1,7 @@
 Name:Kamahl's Summons
 ManaCost:3 G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 3 G | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | StackDescription$ SpellDescription | SubAbility$ DBRepeatToken | SpellDescription$ Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | StackDescription$ SpellDescription | SubAbility$ DBRepeatToken | SpellDescription$ Each player may reveal any number of creature cards from their hand. Then each player creates a 2/2 green Bear creature token for each card they revealed this way.
 SVar:DBChoose:DB$ Reveal | Defined$ Player.IsRemembered | AnyNumber$ True | RevealValid$ Creature | RememberRevealed$ True
 SVar:DBRepeatToken:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_2_2_bear | TokenOwner$ Player.IsRemembered

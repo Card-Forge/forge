@@ -1,7 +1,7 @@
 Name:Entreat the Angels
 ManaCost:X X W W W
 Types:Sorcery
-A:SP$ Token | Cost$ X X W W W | TokenAmount$ X | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SpellDescription$ Create X 4/4 white Angel creature tokens with flying.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_4_4_angel_flying | TokenOwner$ You | SpellDescription$ Create X 4/4 white Angel creature tokens with flying.
 K:Miracle:X W W
 SVar:X:Count$xPaid
 Oracle:Create X 4/4 white Angel creature tokens with flying.\nMiracle {X}{W}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

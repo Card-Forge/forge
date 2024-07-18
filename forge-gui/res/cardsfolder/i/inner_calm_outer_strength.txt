@@ -1,6 +1,6 @@
 Name:Inner Calm, Outer Strength
 ManaCost:2 G
 Types:Instant Arcane
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.
 SVar:X:Count$CardsInYourHand
 Oracle:Target creature gets +X/+X until end of turn, where X is the number of cards in your hand.

@@ -1,7 +1,7 @@
 Name:Insatiable Appetite
 ManaCost:1 G
 Types:Instant
-A:SP$ Sacrifice | Cost$ 1 G | SacValid$ Food | Optional$ True | RememberSacrificed$ True | SubAbility$ DBPump | SpellDescription$ You may sacrifice a Food. If you do, target creature gets +5/+5 until end of turn. Otherwise, that creature gets +3/+3 until end of turn.
+A:SP$ Sacrifice | SacValid$ Food | Optional$ True | RememberSacrificed$ True | SubAbility$ DBPump | SpellDescription$ You may sacrifice a Food. If you do, target creature gets +5/+5 until end of turn. Otherwise, that creature gets +3/+3 until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target Creature | NumAtt$ +X | NumDef$ +X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Compare Y GE1.5.3

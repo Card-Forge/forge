@@ -1,6 +1,6 @@
 Name:Stitch in Time
 ManaCost:1 U R
 Types:Sorcery
-A:SP$ FlipACoin | Cost$ 1 U R | WinSubAbility$ DBAddTurn | SpellDescription$ Flip a coin. If you win the flip, take an extra turn after this one.
+A:SP$ FlipACoin | WinSubAbility$ DBAddTurn | SpellDescription$ Flip a coin. If you win the flip, take an extra turn after this one.
 SVar:DBAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1
 Oracle:Flip a coin. If you win the flip, take an extra turn after this one.

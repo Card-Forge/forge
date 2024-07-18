@@ -1,7 +1,7 @@
 Name:Tithe
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Opponent | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards, put them into your hand, then shuffle.
+A:SP$ Pump | ValidTgts$ Opponent | StackDescription$ None | SubAbility$ DBChangeZone | SpellDescription$ Search your library for a Plains card. If target opponent controls more lands than you, you may search your library for an additional Plains card. Reveal those cards, put them into your hand, then shuffle.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 1 | NoShuffle$ True | SubAbility$ DBOptionalSearch
 SVar:DBOptionalSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains | ChangeNum$ 1 | Optional$ True | NoShuffle$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | Defined$ You

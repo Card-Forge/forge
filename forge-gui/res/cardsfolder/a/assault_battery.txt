@@ -1,7 +1,7 @@
 Name:Assault
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | NumDmg$ 2 | ValidTgts$ Any | SpellDescription$ Assault deals 2 damage to any target.
+A:SP$ DealDamage | NumDmg$ 2 | ValidTgts$ Any | SpellDescription$ CARDNAME deals 2 damage to any target.
 AlternateMode:Split
 Oracle:Assault deals 2 damage to any target.
 
@@ -10,5 +10,5 @@ ALTERNATE
 Name:Battery
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
+A:SP$ Token | TokenScript$ g_3_3_elephant | TokenOwner$ You | SpellDescription$ Create a 3/3 green Elephant creature token.
 Oracle:Create a 3/3 green Elephant creature token.

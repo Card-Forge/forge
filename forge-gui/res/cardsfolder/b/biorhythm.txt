@@ -1,7 +1,7 @@
 Name:Biorhythm
 ManaCost:6 G G
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 6 G G | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures they control.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSetLife | SpellDescription$ Each player's life total becomes the number of creatures they control.
 SVar:DBSetLife:DB$ SetLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
 AI:RemoveDeck:All

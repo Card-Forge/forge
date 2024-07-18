@@ -2,6 +2,6 @@ Name:Nightbird's Clutches
 ManaCost:1 R
 Types:Sorcery
 K:Flashback:3 R
-A:SP$ Pump | Cost$ 1 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | SpellDescription$ Up to two target creatures can't block this turn.
 AI:RemoveDeck:All
 Oracle:Up to two target creatures can't block this turn.\nFlashback {3}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

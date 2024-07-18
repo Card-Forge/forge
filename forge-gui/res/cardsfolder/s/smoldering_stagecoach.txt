@@ -1,0 +1,16 @@
+Name:Smoldering Stagecoach
+ManaCost:3 R
+Types:Artifact Vehicle
+PT:*/5
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of instant and sorcery cards in your graveyard.
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInstantEffect | TriggerDescription$ Whenever CARDNAME attacks, the next instant spell and the next sorcery spell you cast this turn each have cascade.
+SVar:TrigInstantEffect:DB$ Effect | StaticAbilities$ CascadeInstant | ForgetOnCast$ Instant.YouCtrl | SubAbility$ DBSorceryEffect
+SVar:DBSorceryEffect:DB$ Effect | StaticAbilities$ CascadeSorcery | ForgetOnCast$ Sorcery.YouCtrl
+SVar:CascadeInstant:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Instant+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next instant spell you cast this turn has cascade.
+SVar:CascadeSorcery:Mode$ Continuous | EffectZone$ Command | Affected$ Card.Sorcery+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next sorcery spell you cast this turn has cascade.
+SVar:HasAttackEffect:TRUE
+K:Crew:2
+DeckHas:Keyword$Cascade
+DeckHints:Type$Instant|Sorcery
+Oracle:Smoldering Stagecoach's power is equal to the number of instant and sorcery cards in your graveyard.\nWhenever Smoldering Stagecoach attacks, the next instant spell and the next sorcery spell you cast this turn each have cascade.\nCrew 2

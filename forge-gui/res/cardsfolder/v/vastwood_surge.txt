@@ -2,7 +2,7 @@ Name:Vastwood Surge
 ManaCost:3 G
 Types:Sorcery
 K:Kicker:4
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBPutCounterAll | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, put two +1/+1 counters on each creature you control.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBPutCounterAll | StackDescription$ SpellDescription | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, put two +1/+1 counters on each creature you control.
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | Condition$ Kicked | StackDescription$ None
 DeckHas:Ability$Counters
 Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle. If this spell was kicked, put two +1/+1 counters on each creature you control.

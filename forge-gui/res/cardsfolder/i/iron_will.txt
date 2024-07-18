@@ -1,6 +1,6 @@
 Name:Iron Will
 ManaCost:W
 Types:Instant
-A:SP$ Pump | Cost$ W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +4 | SpellDescription$ Target creature gets +0/+4 until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +4 | SpellDescription$ Target creature gets +0/+4 until end of turn.
 K:Cycling:2
 Oracle:Target creature gets +0/+4 until end of turn.\nCycling {2} ({2}, Discard this card: Draw a card.)

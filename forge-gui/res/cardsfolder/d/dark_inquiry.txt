@@ -1,5 +1,5 @@
 Name:Dark Inquiry
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Discard | Cost$ 2 B | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
 Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.

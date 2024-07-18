@@ -1,5 +1,5 @@
 Name:Shatterstorm
 ManaCost:2 R R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 2 R R | ValidCards$ Artifact | NoRegen$ True | SpellDescription$ Destroy all artifacts. They can't be regenerated.
+A:SP$ DestroyAll | ValidCards$ Artifact | NoRegen$ True | SpellDescription$ Destroy all artifacts. They can't be regenerated.
 Oracle:Destroy all artifacts. They can't be regenerated.

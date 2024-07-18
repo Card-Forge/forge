@@ -1,7 +1,7 @@
 Name:Tropical Storm
 ManaCost:X G
 Types:Sorcery
-A:SP$ DamageAll | Cost$ X G | ValidCards$ Creature.withFlying | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals X damage to each creature with flying and 1 additional damage to each blue creature.
+A:SP$ DamageAll | ValidCards$ Creature.withFlying | NumDmg$ X | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals X damage to each creature with flying and 1 additional damage to each blue creature.
 SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature.Blue | NumDmg$ 1
 SVar:X:Count$xPaid
 AI:RemoveDeck:All

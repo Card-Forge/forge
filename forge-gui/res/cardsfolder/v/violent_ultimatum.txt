@@ -1,5 +1,5 @@
 Name:Violent Ultimatum
 ManaCost:B B R R R G G
 Types:Sorcery
-A:SP$ Destroy | Cost$ B B R R R G G | TargetMin$ 3 | TargetMax$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy three target permanents.
+A:SP$ Destroy | TargetMin$ 3 | TargetMax$ 3 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ Destroy three target permanents.
 Oracle:Destroy three target permanents.

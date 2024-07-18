@@ -1,7 +1,7 @@
 Name:Mission Briefing
 ManaCost:U U
 Types:Instant
-A:SP$ Surveil | Cost$ U U | Amount$ 2 | SubAbility$ DBChooseCard | SpellDescription$ Surveil 2, then choose an instant or sorcery card in your graveyard. You may cast it this turn. If that spell would be put into your graveyard this turn, exile it instead. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Surveil | Amount$ 2 | SubAbility$ DBChooseCard | SpellDescription$ Surveil 2, then choose an instant or sorcery card in your graveyard. You may cast it this turn. If that spell would be put into your graveyard this turn, exile it instead. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:DBChooseCard:DB$ ChooseCard | Choices$ Instant.YouCtrl,Sorcery.YouCtrl | ChoiceZone$ Graveyard | Mandatory$ True | SubAbility$ DBEffect | SpellDescription$ You may cast that card this turn. If that card would be put into your graveyard this turn, exile it instead.
 SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | StaticAbilities$ Play | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may play remembered card.

@@ -2,6 +2,6 @@ Name:Gnaw to the Bone
 ManaCost:2 G
 Types:Instant
 K:Flashback:2 G
-A:SP$ GainLife | Cost$ 2 G | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature card in your graveyard.
+A:SP$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain 2 life for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature/Times.2
 Oracle:You gain 2 life for each creature card in your graveyard.\nFlashback {2}{G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

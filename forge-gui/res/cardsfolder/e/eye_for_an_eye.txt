@@ -1,7 +1,7 @@
 Name:Eye for an Eye
 ManaCost:W W
 Types:Instant
-A:SP$ ChooseSource | Cost$ W W | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and CARDNAME deals that much damage to that source's controller.
+A:SP$ ChooseSource | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and CARDNAME deals that much damage to that source's controller.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | ImprintCards$ Self | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | Description$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and this card deals that much damage to that source's controller.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player | SubAbility$ EyeforEye

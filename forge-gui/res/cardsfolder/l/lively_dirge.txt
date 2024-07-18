@@ -1,0 +1,10 @@
+Name:Lively Dirge
+ManaCost:1 B
+Types:Sorcery
+K:Spree
+A:SP$ Charm | Choices$ DBChangeZone,DBReturn | MinCharmNum$ 1 | CharmNum$ 2 | Spree$ True
+SVar:DBChangeZone:DB$ ChangeZone | SpreeCost$ 1 | Origin$ Library | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card | Mandatory$ True | SpellDescription$ Search your library for a card, put it into your graveyard, then shuffle.
+SVar:DBReturn:DB$ ChangeZone | SpreeCost$ 2 | WithTotalCMC$ 4 | ChangeNum$ 2 | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | ChangeType$ Creature.YouOwn | SpellDescription$ Return up to two creature cards with total mana value 4 or less from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard
+Oracle:Spree (Choose one or more additional costs.)\n+ {1} — Search your library for a card, put it into your graveyard, then shuffle.\n+ {2} — Return up to two creature cards with total mana value 4 or less from your graveyard to the battlefield.

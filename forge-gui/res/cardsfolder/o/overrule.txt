@@ -1,7 +1,7 @@
 Name:Overrule
 ManaCost:X W U
 Types:Instant
-A:SP$ Counter | Cost$ X W U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBGainLife | SpellDescription$ Counter target spell unless its controller pays {X}. You gain X life.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SubAbility$ DBGainLife | SpellDescription$ Counter target spell unless its controller pays {X}. You gain X life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$xPaid
 Oracle:Counter target spell unless its controller pays {X}. You gain X life.

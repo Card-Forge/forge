@@ -1,7 +1,7 @@
 Name:Ivory Charm
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ PumpAll,Tap,Prevent | CharmNum$ 1
+A:SP$ Charm | Choices$ PumpAll,Tap,Prevent | CharmNum$ 1
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-0 until end of turn.
 SVar:Tap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 SVar:Prevent:DB$ PreventDamage | ValidTgts$ Any | Amount$ 1 | SpellDescription$ Prevent the next 1 damage that would be dealt to any target this turn.

@@ -1,7 +1,7 @@
 Name:Box of Free-Range Goblins
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ RollDice | Cost$ 4 R R | ResultSVar$ Result | SubAbility$ Tokens
+A:SP$ RollDice | ResultSVar$ Result | SubAbility$ Tokens
 SVar:Tokens:DB$ Token | TokenAmount$ Result | TokenScript$ r_1_1_goblin | SpellDescription$ Create a number of 1/1 red Goblin creature tokens equal to the result.
 DeckHas:Ability$Token
 Oracle:Roll a six-sided die. Create a number of 1/1 red Goblin creature tokens equal to the result.

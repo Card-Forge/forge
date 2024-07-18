@@ -1,5 +1,5 @@
 Name:Spoils of Victory
 ManaCost:2 G
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 2 G | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain,Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Plains,Island,Swamp,Mountain,Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle.
 Oracle:Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle.

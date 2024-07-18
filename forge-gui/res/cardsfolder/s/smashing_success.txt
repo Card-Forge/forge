@@ -1,7 +1,7 @@
 Name:Smashing Success
 ManaCost:3 R
 Types:Instant
-A:SP$ Destroy | Cost$ 3 R | ValidTgts$ Artifact,Land | SubAbility$ DBToken | RememberDestroyed$ True | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land. If an artifact is destroyed this way, create a Treasure token.
+A:SP$ Destroy | ValidTgts$ Artifact,Land | SubAbility$ DBToken | RememberDestroyed$ True | TgtPrompt$ Select target artifact or land | SpellDescription$ Destroy target artifact or land. If an artifact is destroyed this way, create a Treasure token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | ConditionDefined$ Remembered | ConditionPresent$ Artifact | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token

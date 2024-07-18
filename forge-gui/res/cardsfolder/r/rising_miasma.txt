@@ -1,6 +1,6 @@
 Name:Rising Miasma
 ManaCost:3 B
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 3 B | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ All creatures get -2/-2 until end of turn.
 K:Awaken:3:5 B B
 Oracle:All creatures get -2/-2 until end of turn.\nAwaken 3—{5}{B}{B} (If you cast this spell for {5}{B}{B}, also put three +1/+1 counters on target land you control and it becomes a 0/0 Elemental creature with haste. It's still a land.)

@@ -2,5 +2,5 @@ Name:Reverse Engineer
 ManaCost:3 U U
 Types:Sorcery
 K:Improvise
-A:SP$ Draw | Cost$ 3 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
 Oracle:Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)\nDraw three cards.

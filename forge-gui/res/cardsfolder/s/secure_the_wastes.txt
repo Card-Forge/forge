@@ -1,6 +1,6 @@
 Name:Secure the Wastes
 ManaCost:X W
 Types:Instant
-A:SP$ Token | Cost$ X W | TokenAmount$ X | TokenScript$ w_1_1_warrior | TokenOwner$ You | SpellDescription$ Create X 1/1 white Warrior creature tokens.
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_warrior | TokenOwner$ You | SpellDescription$ Create X 1/1 white Warrior creature tokens.
 SVar:X:Count$xPaid
 Oracle:Create X 1/1 white Warrior creature tokens.

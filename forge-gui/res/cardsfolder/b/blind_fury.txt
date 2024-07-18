@@ -1,7 +1,7 @@
 Name:Blind Fury
 ManaCost:2 R R
 Types:Instant
-A:SP$ AnimateAll | Cost$ 2 R R | ValidCards$ Creature | RemoveKeywords$ Trample | SubAbility$ BlindFuryEffect | SpellDescription$ All creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
+A:SP$ AnimateAll | ValidCards$ Creature | RemoveKeywords$ Trample | SubAbility$ BlindFuryEffect | SpellDescription$ All creatures lose trample until end of turn. If a creature would deal combat damage to a creature this turn, it deals double that damage to that creature instead.
 SVar:BlindFuryEffect:DB$ Effect | ReplacementEffects$ FuryCombatEvent
 SVar:FuryCombatEvent:Event$ DamageDone | ValidSource$ Creature | ValidTarget$ Creature | ReplaceWith$ DmgTwice | IsCombat$ True | Description$ If a creature would deal combat damage to a creature this turn, it deals double that damage instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X

@@ -1,6 +1,6 @@
 Name:Burn Trail
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target.
 K:Conspire
 Oracle:Burn Trail deals 3 damage to any target.\nConspire (As you cast this spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose a new target for the copy.)

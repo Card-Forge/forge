@@ -1,7 +1,7 @@
 Name:Reality Spasm
 ManaCost:X U U
 Types:Instant
-A:SP$ Charm | Cost$ X U U | Choices$ Tap,Untap
+A:SP$ Charm | Choices$ Tap,Untap
 SVar:Tap:DB$ Tap | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent | TgtPrompt$ Select X target permanents | SpellDescription$ Tap X target permanents
 SVar:Untap:DB$ Untap | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent | TgtPrompt$ Select X target permanents | SpellDescription$ Untap X target permanents.
 SVar:X:Count$xPaid

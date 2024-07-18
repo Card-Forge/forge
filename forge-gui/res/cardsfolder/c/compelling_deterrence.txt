@@ -1,7 +1,7 @@
 Name:Compelling Deterrence
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDiscard | SpellDescription$ Return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDiscard | SpellDescription$ Return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie.
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Zombie.YouCtrl | ConditionCompare$ GE1
 DeckHints:Type$Zombie
 Oracle:Return target nonland permanent to its owner's hand. Then that player discards a card if you control a Zombie.

@@ -6,7 +6,7 @@ SVar:DBForget:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ DamageDone | ValidSource$ Sorcery.IsNotRemembered | Execute$ TrigRememberPlayer | Static$ True
 SVar:TrigRememberPlayer:DB$ Pump | Defined$ TriggeredSourceController | RememberObjects$ TriggeredSourceController | SubAbility$ DBRememberSorcery
 SVar:DBRememberSorcery:DB$ Pump | Defined$ TriggeredSourceLKICopy | RememberObjects$ TriggeredSourceLKICopy
-A:SP$ ChoosePlayer | Cost$ 1 R | Defined$ You | Choices$ Player.IsRemembered | SubAbility$ DBChooseSpell | SpellDescription$ Choose a player who cast one or more sorcery spells this turn. CARDNAME deals damage to that player equal to half the damage dealt by one of those sorcery spells this turn, rounded down.
+A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.IsRemembered | SubAbility$ DBChooseSpell | SpellDescription$ Choose a player who cast one or more sorcery spells this turn. CARDNAME deals damage to that player equal to half the damage dealt by one of those sorcery spells this turn, rounded down.
 SVar:DBChooseSpell:DB$ ChooseCard | DefinedCards$ RememberedLKI.ControlledBy ChosenPlayer | Mandatory$ True | ChoiceTitle$ Choose a Sorcery | ImprintChosen$ True | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearChosenCard$ True | ClearChosenPlayer$ True

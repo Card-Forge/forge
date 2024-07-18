@@ -1,6 +1,6 @@
 Name:Savage Punch
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Pump | Cost$ 1 G | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | NumAtt$ +2 | NumDef$ +2 | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. Ferocious — The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
+A:SP$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | ConditionPresent$ Creature.YouCtrl+powerGE4 | ConditionCompare$ GE1 | NumAtt$ +2 | NumDef$ +2 | StackDescription$ None | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. Ferocious — The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control
 Oracle:Target creature you control fights target creature you don't control.\nFerocious — The creature you control gets +2/+2 until end of turn before it fights if you control a creature with power 4 or greater.

@@ -2,7 +2,7 @@ Name:Venom Connoisseur
 ManaCost:1 G
 Types:Creature Human Druid
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, Venom Connoisseur gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, CARDNAME gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Deathtouch | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | ConditionCheckSVar$ CreatureETBAmount | ConditionSVarCompare$ EQ2
 SVar:CreatureETBAmount:Count$ResolvedThisTurn

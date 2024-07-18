@@ -1,7 +1,7 @@
 Name:Exert Influence
 ManaCost:4 U
 Types:Sorcery
-A:SP$ GainControl | Cost$ 4 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SpellDescription$ Converge — Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell.
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SpellDescription$ Converge — Gain control of target creature if its power is less than or equal to the number of colors of mana spent to cast this spell.
 SVar:Y:Count$Converge
 SVar:X:Targeted$Valid Creature.powerLEY
 AI:RemoveDeck:All

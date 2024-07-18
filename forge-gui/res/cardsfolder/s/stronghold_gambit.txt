@@ -1,7 +1,7 @@
 Name:Stronghold Gambit
 ManaCost:1 R
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 1 R | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBReveal | SpellDescription$ Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield.
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCard | SubAbility$ DBReveal | SpellDescription$ Each player chooses a card in their hand. Then each player reveals their chosen card. The owner of each creature card revealed this way with the lowest mana value puts it onto the battlefield.
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Card.RememberedPlayerCtrl | ChoiceZone$ Hand | AILogic$ LowestCMCCreature | RememberChosen$ True | Mandatory$ True
 SVar:DBReveal:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRevealCard | SubAbility$ FilterCreature
 SVar:DBRevealCard:DB$ Reveal | Defined$ Player.IsRemembered | RevealDefined$ ValidHand Card.IsRemembered+RememberedPlayerCtrl

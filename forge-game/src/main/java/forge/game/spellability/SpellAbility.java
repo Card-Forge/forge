@@ -131,8 +131,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean aftermath = false;
 
-    private boolean blessing = false;
-
     /** The pay costs. */
     private Cost payCosts;
     private SpellAbilityRestriction restrictions;
@@ -562,11 +560,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isCycling() {
-        return isAlternativeCost(AlternativeCost.Cycling);
+        return isKeyword(Keyword.CYCLING) || isKeyword(Keyword.TYPECYCLING);
     }
 
     public boolean isBackup() {
-        return this.hasParam("Backup");
+        return this.isKeyword(Keyword.BACKUP);
     }
 
     public boolean isBoast() {
@@ -574,7 +572,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isNinjutsu() {
-        return this.hasParam("Ninjutsu");
+        return this.isKeyword(Keyword.NINJUTSU);
     }
 
     public boolean isCumulativeUpkeep() {
@@ -939,36 +937,38 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public String getCostDescription() {
         if (payCosts == null || (this instanceof AbilitySub)) { // SubAbilities don't have Costs or Cost
             return "";
-        } else {
-            StringBuilder sb = new StringBuilder();
-            // descriptors
-            if (hasParam("PrecostDesc")) {
-                sb.append(getParam("PrecostDesc")).append(" ");
-            }
-            if (hasParam("CostDesc")) {
-                sb.append(getParam("CostDesc")).append(" ");
-            } else {
-                if (hasParam("AlternateCost")) {
-                    Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
-                    boolean altOnlyMana = alternateCost.isOnlyManaCost();
-                    if (payCosts.isOnlyManaCost() && !altOnlyMana) {
-                        sb.append("Pay ");
-                    }
-                    sb.append(payCosts.toString());
-                    sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
-                            StringUtils.uncapitalize(alternateCost.toString()));
-                    sb.append(isEquip() && !altOnlyMana ? "." : "");
-                } else {
-                    sb.append(payCosts.toString());
-                }
-
-                if (payCosts.isAbility() && !isEquip()) {
-                    sb.append(": ");
-                }
-            }
-
-            return sb.toString();
         }
+
+        boolean equip = false;
+        StringBuilder sb = new StringBuilder();
+        // descriptors
+        if (hasParam("PrecostDesc")) {
+            equip = getParam("PrecostDesc").startsWith("Equip");
+            sb.append(getParam("PrecostDesc")).append(" ");
+        }
+        if (hasParam("CostDesc")) {
+            sb.append(getParam("CostDesc")).append(" ");
+        } else {
+            if (hasParam("AlternateCost")) {
+                Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
+                boolean altOnlyMana = alternateCost.isOnlyManaCost();
+                if (payCosts.isOnlyManaCost() && !altOnlyMana) {
+                    sb.append("Pay ");
+                }
+                sb.append(payCosts.toString());
+                sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
+                    StringUtils.uncapitalize(alternateCost.toString()));
+                sb.append(equip && !altOnlyMana ? "." : "");
+            } else {
+                sb.append(payCosts.toString());
+            }
+
+            if (payCosts.isAbility() && !equip) {
+                sb.append(": ");
+            }
+        }
+
+        return sb.toString();
     }
 
     public void rebuiltDescription() {
@@ -1126,21 +1126,17 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean isOutlast() {
-        return isAlternativeCost(AlternativeCost.Outlast);
+        return isKeyword(Keyword.OUTLAST);
     }
 
     public boolean isCraft() {
-        return hasParam("Craft");
+        return isKeyword(Keyword.CRAFT);
+    }
+    public boolean isCrew() {
+        return isKeyword(Keyword.CREW);
     }
     public boolean isEquip() {
-        return hasParam("Equip");
-    }
-
-    public boolean isBlessing() {
-        return blessing;
-    }
-    public void setBlessing(boolean blessing0) {
-        blessing = blessing0;
+        return isKeyword(Keyword.EQUIP);
     }
 
     public boolean isChapter() {
@@ -1551,6 +1547,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isEvoke() {
         return isAlternativeCost(AlternativeCost.Evoke);
+    }
+
+    public final boolean isFreerunning() {
+        return isAlternativeCost(AlternativeCost.Freerunning);
+    }
+
+    public final boolean isImpending() {
+        return isAlternativeCost(AlternativeCost.Impending);
     }
 
     public final boolean isMadness() {
@@ -2068,7 +2072,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getTargets().contains(o)) {
             return true;
         }
-        SpellAbility p = getParent();
+        SpellAbility p = getSubAbility();
         return p != null && p.isTargeting(o);
     }
 

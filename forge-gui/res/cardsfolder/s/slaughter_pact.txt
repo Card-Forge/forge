@@ -2,7 +2,7 @@ Name:Slaughter Pact
 ManaCost:0
 Colors:black
 Types:Instant
-A:SP$ Destroy | Cost$ 0 | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDelTrig | SpellDescription$ Destroy target nonblack creature. At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
+A:SP$ Destroy | ValidTgts$ Creature.nonBlack | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDelTrig | SpellDescription$ Destroy target nonblack creature. At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.
 SVar:TrigLoseGame:DB$ LosesGame | UnlessCost$ 2 B | UnlessPayer$ You | Defined$ You
 SVar:NeedsToPlayVar:NumLands GE3

@@ -1,7 +1,7 @@
 Name:Dream Fracture
 ManaCost:1 U U
 Types:Instant
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. Its controller draws a card. Draw a card.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBDraw | SpellDescription$ Counter target spell. Its controller draws a card. Draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1 | SubAbility$ DBDrawYou
 SVar:DBDrawYou:DB$ Draw | Defined$ You | NumCards$ 1
 Oracle:Counter target spell. Its controller draws a card.\nDraw a card.

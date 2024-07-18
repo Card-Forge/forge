@@ -1,5 +1,5 @@
 Name:Explosive Impact
 ManaCost:5 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 5 R | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to any target.
 Oracle:Explosive Impact deals 5 damage to any target.

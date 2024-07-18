@@ -2,7 +2,7 @@ Name:Healing Technique
 ManaCost:3 G
 Types:Sorcery
 K:Demonstrate
-A:SP$ ChangeZone | Cost$ 3 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn | SubAbility$ DBGainLife | SpellDescription$ Return target card from your graveyard to your hand. You gain life equal to that card's mana value. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouOwn | SubAbility$ DBGainLife | SpellDescription$ Return target card from your graveyard to your hand. You gain life equal to that card's mana value. Exile CARDNAME.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 SVar:X:Targeted$CardManaCost

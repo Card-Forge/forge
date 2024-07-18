@@ -2,7 +2,7 @@ Name:Farideh, Devil's Chosen
 ManaCost:2 U R
 Types:Legendary Creature Tiefling Warlock
 PT:3/3
-T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPump | TriggerDescription$ Dark One's Own Luck — Whenever you roll one or more dice, Farideh, Devil's Chosen gains flying and menace until end of turn. If any of those results was 10 or higher, draw a card.
+T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPump | TriggerDescription$ Dark One's Own Luck — Whenever you roll one or more dice, CARDNAME gains flying and menace until end of turn. If any of those results was 10 or higher, draw a card.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying & Menace | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionCheckSVar$ DiceResult | ConditionSVarCompare$ GE10
 SVar:DiceResult:TriggerCountMax$Result

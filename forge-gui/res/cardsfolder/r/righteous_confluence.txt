@@ -1,7 +1,7 @@
 Name:Righteous Confluence
 ManaCost:3 W W
 Types:Sorcery
-A:SP$ Charm | Cost$ 3 W W | Choices$ DBToken,DBChangeZone,DBGainLife | CharmNum$ 3 | CanRepeatModes$ True
+A:SP$ Charm | Choices$ DBToken,DBChangeZone,DBGainLife | CharmNum$ 3 | CanRepeatModes$ True
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_knight_vigilance | TokenOwner$ You | SpellDescription$ Create a 2/2 white Knight creature token with vigilance.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Enchantment | TgtPrompt$ Choose target enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target enchantment.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | SpellDescription$ You gain 5 life.

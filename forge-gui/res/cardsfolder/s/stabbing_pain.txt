@@ -1,6 +1,6 @@
 Name:Stabbing Pain
 ManaCost:B
 Types:Instant
-A:SP$ Pump | Cost$ B | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBTap | SpellDescription$ Target creature gets -1/-1 until end of turn. Tap that creature.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SubAbility$ DBTap | SpellDescription$ Target creature gets -1/-1 until end of turn. Tap that creature.
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 Oracle:Target creature gets -1/-1 until end of turn. Tap that creature.

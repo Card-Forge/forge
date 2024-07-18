@@ -2,6 +2,6 @@ Name:Chill of Foreboding
 ManaCost:2 U
 Types:Sorcery
 K:Flashback:7 U
-A:SP$ Mill | Cost$ 2 U | NumCards$ 5 | Defined$ Player | SpellDescription$ Each player mills five cards.
+A:SP$ Mill | NumCards$ 5 | Defined$ Player | SpellDescription$ Each player mills five cards.
 AI:RemoveDeck:Random
 Oracle:Each player mills five cards.\nFlashback {7}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

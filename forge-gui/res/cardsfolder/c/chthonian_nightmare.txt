@@ -1,0 +1,9 @@
+Name:Chthonian Nightmare
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+A:AB$ ChangeZone | Cost$ PayEnergy<X> Sac<1/Creature> Return<1/CARDNAME> | TgtPrompt$ Choose target creature card with mana value X in your graveyard | ValidTgts$ Creature.YouCtrl+cmcEQX | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | AILogic$ SacAndRetFromGrave | SpellDescription$ Return target creature card with mana value X from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:X:Count$xPaid
+SVar:AIPreference:SacCost$Creature
+Oracle:When Chthonian Nightmare enters the battlefield, you get {E}{E}{E} (three energy counters).\nPay X {E}, Sacrifice a creature, Return Chthonian Nightmare to its owner's hand: Return target creature card with mana value X from your graveyard to the battlefield. Activate only as a sorcery.

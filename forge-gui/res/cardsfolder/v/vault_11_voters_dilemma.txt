@@ -1,0 +1,12 @@
+Name:Vault 11: Voter's Dilemma
+ManaCost:2 W B
+Types:Enchantment Saga
+K:Chapter:3:DBToken,DBVote,DBVote
+SVar:DBToken:DB$ Token | TokenAmount$ OneEach | TokenScript$ w_1_1_human_soldier
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:DBVote:DB$ Vote | Defined$ Player | Secretly$ True | VoteCard$ Creature | VoteMessage$ for a creature | UpTo$ True | VoteSubAbility$ DBDestroyAll | SpellDescription$ Each player secretly votes for up to one creature, then those votes are revealed. If no creature got votes, each player draws a card. Otherwise, destroy each creature with the most votes or tied for most votes.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
+SVar:X:Remembered$Amount
+DeckHas:Ability$Token & Type$Soldier
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, you create a 1/1 white Human Soldier creature token.\nII, III — Each player secretly votes for up to one creature, then those votes are revealed. If no creature got votes, each player draws a card. Otherwise, destroy each creature with the most votes or tied for most votes.

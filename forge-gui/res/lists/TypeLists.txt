@@ -41,6 +41,7 @@ Basilisk:Basilisks
 Bat:Bats
 Bear:Bears
 Beast:Beasts
+Beaver:Beavers
 Beeble:Beebles
 Beholder:Beholders
 Berserker:Berserkers
@@ -58,7 +59,6 @@ Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
 Centaur:Centaurs
-Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
 Clamfolk:Clamfolk
@@ -188,7 +188,6 @@ Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
-Naga:Nagas
 Nautilus:Nautili
 Necron:Necrons
 Nephilim:Nephilims
@@ -221,6 +220,8 @@ Pilot:Pilots
 Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
+Porcupine:Porcupines
+Possum:Possums
 Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
@@ -256,6 +257,7 @@ Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons
+Skunk:Skunks
 Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
@@ -286,6 +288,7 @@ Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
 Time Lord:Time Lords
+Toy:Toys
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -294,12 +297,13 @@ Turtle:Turtles
 Tyranid:Tyranids
 Unicorn:Unicorns
 Vampire:Vampires
+Varmint:Varmints
 Vedalken:Vedalkens
-Viashino:Viashinos
 Volver:Volvers
 Wall:Walls
 Warlock:Warlocks
 Warrior:Warriors
+Weasel:Weasels
 Weird:Weirds
 Werewolf:Werewolves
 Whale:Whales
@@ -332,6 +336,7 @@ Saga
 Shrine
 Shard
 [ArtifactTypes]
+Attraction
 Blood
 Bobblehead:Bobbleheads
 Clue:Clues
@@ -364,6 +369,7 @@ Dack
 Dakkon
 Daretti
 Davriel
+Deb
 Dihada
 Domri
 Dovin
@@ -381,6 +387,7 @@ Guff
 Huatli
 Inzerva
 Jace
+Jared
 Jaya
 Jeska
 Kaito
@@ -411,6 +418,7 @@ Sorin
 Stone
 Szat
 Tamiyo
+Tasha
 Teferi
 Teyo
 Tezzeret

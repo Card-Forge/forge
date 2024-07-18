@@ -1,7 +1,7 @@
 Name:Essence Infusion
 ManaCost:1 B
 Types:Sorcery
-A:SP$ PutCounter | Cost$ 1 B | CounterNum$ 2 | CounterType$ P1P1 | ValidTgts$ Creature | SubAbility$ DBPump | TgtPrompt$ Select target creature | SpellDescription$ Put two +1/+1 counters on target creature. It gains lifelink until end of turn.
+A:SP$ PutCounter | CounterNum$ 2 | CounterType$ P1P1 | ValidTgts$ Creature | SubAbility$ DBPump | TgtPrompt$ Select target creature | SpellDescription$ Put two +1/+1 counters on target creature. It gains lifelink until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink
 DeckHas:Ability$Counters
 Oracle:Put two +1/+1 counters on target creature. It gains lifelink until end of turn.

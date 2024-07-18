@@ -1,5 +1,5 @@
 Name:Sangrite Surge
 ManaCost:4 R G
 Types:Sorcery
-A:SP$ Pump | Cost$ 4 R G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Double Strike | SpellDescription$ Target creature gets +3/+3 and gains double strike until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | KW$ Double Strike | SpellDescription$ Target creature gets +3/+3 and gains double strike until end of turn.
 Oracle:Target creature gets +3/+3 and gains double strike until end of turn.

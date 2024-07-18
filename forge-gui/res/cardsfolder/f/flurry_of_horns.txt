@@ -1,5 +1,5 @@
 Name:Flurry of Horns
 ManaCost:4 R
 Types:Sorcery
-A:SP$ Token | Cost$ 4 R | TokenAmount$ 2 | TokenScript$ r_2_3_minotaur_haste | TokenOwner$ You | SpellDescription$ Create two 2/3 red Minotaur creature tokens with haste.
+A:SP$ Token | TokenAmount$ 2 | TokenScript$ r_2_3_minotaur_haste | TokenOwner$ You | SpellDescription$ Create two 2/3 red Minotaur creature tokens with haste.
 Oracle:Create two 2/3 red Minotaur creature tokens with haste.

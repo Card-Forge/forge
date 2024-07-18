@@ -2,7 +2,7 @@ Name:Recurring Insight
 ManaCost:4 U U
 Types:Sorcery
 K:Rebound
-A:SP$ Pump | Cost$ 4 U U | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | StackDescription$ None | SpellDescription$ Draw cards equal to the number of cards in target opponent's hand.
+A:SP$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDraw | StackDescription$ None | SpellDescription$ Draw cards equal to the number of cards in target opponent's hand.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TargetedPlayer$CardsInHand
 AI:RemoveDeck:All

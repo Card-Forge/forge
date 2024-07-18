@@ -1,0 +1,10 @@
+Name:Scalestorm Summoner
+ManaCost:2 R
+Types:Creature Human Warlock
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 3/1 red Dinosaur creature token if you control a creature with power 4 or greater.
+SVar:TrigToken:DB$ Token | TokenScript$ r_3_1_dinosaur | ConditionPresent$ Creature.YouCtrl+powerGE4
+SVar:BuffedBy:Creature.powerGE4
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Dinosaur
+Oracle:Whenever Scalestorm Summoner attacks, create a 3/1 red Dinosaur creature token if you control a creature with power 4 or greater.

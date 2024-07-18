@@ -1,6 +1,6 @@
 Name:Distorting Wake
 ManaCost:X U U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ X U U U | Origin$ Battlefield | Destination$ Hand | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Return X target nonland permanents to their owners' hands.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TargetMin$ X | TargetMax$ X | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select X target nonland permanents | SpellDescription$ Return X target nonland permanents to their owners' hands.
 SVar:X:Count$xPaid
 Oracle:Return X target nonland permanents to their owners' hands.

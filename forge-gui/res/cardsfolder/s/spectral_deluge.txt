@@ -1,7 +1,7 @@
 Name:Spectral Deluge
 ManaCost:4 U U
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 4 U U | ChangeType$ Creature.toughnessLEX+OppCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.
+A:SP$ ChangeZoneAll | ChangeType$ Creature.toughnessLEX+OppCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.
 SVar:X:Count$Valid Island.YouCtrl
 K:Foretell:1 U U
 Oracle:Return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.\nForetell {1}{U}{U} (During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost.)

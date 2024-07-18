@@ -1,5 +1,5 @@
 Name:Fanatical Fever
 ManaCost:2 G G
 Types:Instant
-A:SP$ Pump | Cost$ 2 G G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Trample | SpellDescription$ Target creature gets +3/+0 and gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | KW$ Trample | SpellDescription$ Target creature gets +3/+0 and gains trample until end of turn.
 Oracle:Target creature gets +3/+0 and gains trample until end of turn.

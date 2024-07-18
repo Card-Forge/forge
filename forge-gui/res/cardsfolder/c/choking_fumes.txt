@@ -1,5 +1,5 @@
 Name:Choking Fumes
 ManaCost:2 W
 Types:Instant
-A:SP$ PutCounterAll | Cost$ 2 W | ValidCards$ Creature.attacking | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on each attacking creature.
+A:SP$ PutCounterAll | ValidCards$ Creature.attacking | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on each attacking creature.
 Oracle:Put a -1/-1 counter on each attacking creature.

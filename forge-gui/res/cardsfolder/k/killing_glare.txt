@@ -1,7 +1,7 @@
 Name:Killing Glare
 ManaCost:X B
 Types:Instant
-A:SP$ Destroy | Cost$ X B | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Destroy target creature with power X or less.
+A:SP$ Destroy | ValidTgts$ Creature.powerLEX | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Destroy target creature with power X or less.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Destroy target creature with power X or less.

@@ -1,6 +1,6 @@
 Name:Flood of Recollection
 ManaCost:U U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ U U | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SubAbility$ DBExile | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. Exile CARDNAME.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SubAbility$ DBExile | SpellDescription$ Return target instant or sorcery card from your graveyard to your hand. Exile CARDNAME.
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 Oracle:Return target instant or sorcery card from your graveyard to your hand. Exile Flood of Recollection.

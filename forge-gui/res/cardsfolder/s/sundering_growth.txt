@@ -1,7 +1,7 @@
 Name:Sundering Growth
 ManaCost:GW GW
 Types:Instant
-A:SP$ Destroy | Cost$ GW GW | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBCopy | SpellDescription$ Destroy target artifact or enchantment, then populate. (Create a token that's a copy of a creature token you control.)
+A:SP$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBCopy | SpellDescription$ Destroy target artifact or enchantment, then populate. (Create a token that's a copy of a creature token you control.)
 SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True
 DeckHints:Ability$Token
 Oracle:Destroy target artifact or enchantment, then populate. (Create a token that's a copy of a creature token you control.)

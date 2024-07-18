@@ -1,6 +1,6 @@
 Name:Spontaneous Generation
 ManaCost:3 G
 Types:Sorcery
-A:SP$ Token | Cost$ 3 G | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token for each card in your hand.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token for each card in your hand.
 SVar:X:Count$InYourHand
 Oracle:Create a 1/1 green Saproling creature token for each card in your hand.

@@ -1,7 +1,7 @@
 Name:Flamebreak
 ManaCost:R R R
 Types:Sorcery
-A:SP$ DamageAll | Cost$ R R R | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ 3 | RememberDamagedCreature$ True | SubAbility$ DBNoRegen | SpellDescription$ CARDNAME deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn. | StackDescription$ SpellDescription
+A:SP$ DamageAll | ValidCards$ Creature.withoutFlying | ValidPlayers$ Player | NumDmg$ 3 | RememberDamagedCreature$ True | SubAbility$ DBNoRegen | SpellDescription$ CARDNAME deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn. | StackDescription$ SpellDescription
 SVar:DBNoRegen:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature | StackDescription$ None | AILogic$ CantRegenerate
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.

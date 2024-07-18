@@ -1,7 +1,7 @@
 Name:Explosive Entry
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 R | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCounter | SpellDescription$ Destroy up to one target artifact. Put a +1/+1 counter on up to one target creature.
+A:SP$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCounter | SpellDescription$ Destroy up to one target artifact. Put a +1/+1 counter on up to one target creature.
 SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Destroy up to one target artifact. Put a +1/+1 counter on up to one target creature.

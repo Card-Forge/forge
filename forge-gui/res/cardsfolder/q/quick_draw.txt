@@ -1,0 +1,6 @@
+Name:Quick Draw
+ManaCost:R
+Types:Instant
+A:SP$ Pump | NumAtt$ +1 | NumDef$ +1 | KW$ First Strike | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBCurse | SpellDescription$ Target creature you control gets +1/+1 and gains first strike until end of turn.
+SVar:DBCurse:DB$ AnimateAll | ValidCards$ Creature.TargetedPlayerCtrl | ValidTgts$ Opponent | RemoveKeywords$ First Strike & Double Strike | SpellDescription$ Creatures target opponent controls lose first strike and double strike until end of turn.
+Oracle:Target creature you control gets +1/+1 and gains first strike until end of turn. Creatures target opponent controls lose first strike and double strike until end of turn.

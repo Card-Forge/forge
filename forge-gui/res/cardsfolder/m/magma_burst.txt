@@ -2,7 +2,7 @@ Name:Magma Burst
 ManaCost:3 R
 Types:Instant
 K:Kicker:Sac<2/Land>
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Any | TargetMin$ X | TargetMax$ X | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.
+A:SP$ DealDamage | ValidTgts$ Any | TargetMin$ X | TargetMax$ X | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target. If this spell was kicked, it deals 3 damage to another target.
 SVar:X:Count$Kicked.2.1
 SVar:NeedsToPlayKickedVar:Z GE2
 SVar:Z:Count$Valid Creature.OppCtrl/Plus.Z1

@@ -1,7 +1,7 @@
 Name:Quickchange
 ManaCost:1 U
 Types:Instant
-A:SP$ ChooseColor | Cost$ 1 U | Defined$ You | OrColors$ True | SubAbility$ Animate | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn. Draw a card.
+A:SP$ ChooseColor | Defined$ You | OrColors$ True | SubAbility$ Animate | SpellDescription$ Target creature becomes the color or colors of your choice until end of turn. Draw a card.
 SVar:Animate:DB$ Animate | ValidTgts$ Creature | TgtPrompt$ Select target creature | Colors$ ChosenColor | OverwriteColors$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:All

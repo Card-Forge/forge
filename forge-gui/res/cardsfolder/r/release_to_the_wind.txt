@@ -1,7 +1,7 @@
 Name:Release to the Wind
 ManaCost:2 U
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 U | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | SubAbility$ DBEffect | Destination$ Exile | SpellDescription$ Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | SubAbility$ DBEffect | Destination$ Exile | SpellDescription$ Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
 SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | EffectOwner$ TargetedOwner | StaticAbilities$ STPlay1,STPlay2 | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay1:Mode$ Continuous | MayLookAt$ You | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, its owner may cast it without paying its mana cost.
 SVar:STPlay2:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Secondary$ True

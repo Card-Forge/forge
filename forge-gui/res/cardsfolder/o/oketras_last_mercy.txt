@@ -1,7 +1,7 @@
 Name:Oketra's Last Mercy
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ SetLife | Cost$ 1 W W | Defined$ You | LifeAmount$ X | SubAbility$ DBNoUntap | SpellDescription$ Your life total becomes equal to your starting life total.
+A:SP$ SetLife | Defined$ You | LifeAmount$ X | SubAbility$ DBNoUntap | SpellDescription$ Your life total becomes equal to your starting life total.
 SVar:DBNoUntap:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | SpellDescription$ Lands you control don't untap during your next untap step.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.YouCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ You | TriggerZones$ Command | Static$ True | Execute$ ExileEffect

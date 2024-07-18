@@ -1,7 +1,7 @@
 Name:Unchecked Growth
 ManaCost:2 G
 Types:Instant Arcane
-A:SP$ Pump | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SubAbility$ DBTrample | SpellDescription$ Target creature gets +4/+4 until end of turn. If it's a Spirit, it gains trample until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +4 | NumDef$ +4 | SubAbility$ DBTrample | SpellDescription$ Target creature gets +4/+4 until end of turn. If it's a Spirit, it gains trample until end of turn.
 SVar:DBTrample:DB$ Pump | Defined$ Targeted | KW$ Trample | ConditionDefined$ Targeted | ConditionPresent$ Spirit | ConditionCompare$ GE1
 AI:RemoveDeck:Random
 DeckHints:Type$Spirit

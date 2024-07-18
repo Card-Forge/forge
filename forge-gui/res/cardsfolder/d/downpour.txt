@@ -1,5 +1,5 @@
 Name:Downpour
 ManaCost:1 U
 Types:Instant
-A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Tap up to three target creatures.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Tap up to three target creatures.
 Oracle:Tap up to three target creatures.

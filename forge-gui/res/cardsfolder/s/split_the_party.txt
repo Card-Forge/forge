@@ -1,7 +1,7 @@
 Name:Split the Party
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Pump | Cost$ 3 U U | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ ChooseCreature | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Choose target player. Return half the creatures they control to their owner's hand, rounded up.
+A:SP$ Pump | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ ChooseCreature | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Choose target player. Return half the creatures they control to their owner's hand, rounded up.
 SVar:ChooseCreature:DB$ ChooseCard | Choices$ Creature.TargetedPlayerCtrl | Mandatory$ True | Amount$ X | ChoiceTitle$ Choose half the creatures (rounded up) target player controls | SubAbility$ ReturnCreature
 SVar:ReturnCreature:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True

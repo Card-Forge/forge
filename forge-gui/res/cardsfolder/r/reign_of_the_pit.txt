@@ -1,7 +1,7 @@
 Name:Reign of the Pit
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Sacrifice | Cost$ 4 B B | SacValid$ Creature | Defined$ Player | SubAbility$ DBToken | RememberSacrificed$ True | SpellDescription$ Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way.
+A:SP$ Sacrifice | SacValid$ Creature | Defined$ Player | SubAbility$ DBToken | RememberSacrificed$ True | SpellDescription$ Each player sacrifices a creature. Create an X/X black Demon creature token with flying, where X is the total power of the creatures sacrificed this way.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_x_x_demon_flying | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower

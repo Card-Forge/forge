@@ -1,6 +1,6 @@
 Name:Ancient Craving
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Draw | Cost$ 3 B | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ DB
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ DB
 SVar:DB:DB$ LoseLife | LifeAmount$ 3
 Oracle:You draw three cards and you lose 3 life.

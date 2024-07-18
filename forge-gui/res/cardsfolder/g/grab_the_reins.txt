@@ -2,7 +2,7 @@ Name:Grab the Reins
 ManaCost:3 R
 Types:Instant
 K:Entwine:2 R
-A:SP$ Charm | Cost$ 3 R | Choices$ DBGainControl,DBSac | CharmNum$ 1
+A:SP$ Charm | Choices$ DBGainControl,DBSac | CharmNum$ 1
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain control of | LoseControl$ EOT | AddKWs$ Haste | SpellDescription$ Until end of turn, you gain control of target creature and it gains haste.
 SVar:DBSac:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | SubAbility$ GrabDmg | SpellDescription$ Sacrifice a creature, then CARDNAME deals damage equal to that creature's power to any target.
 SVar:GrabDmg:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target to deal the damage to | NumDmg$ X | SubAbility$ DBCleanup

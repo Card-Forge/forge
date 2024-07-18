@@ -1,5 +1,5 @@
 Name:Mystic Repeal
 ManaCost:G
 Types:Instant
-A:SP$ ChangeZone | Cost$ G | ValidTgts$ Enchantment | IsCurse$ True | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target enchantment on the bottom of its owner's library.
+A:SP$ ChangeZone | ValidTgts$ Enchantment | IsCurse$ True | TgtPrompt$ Select target enchantment | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target enchantment on the bottom of its owner's library.
 Oracle:Put target enchantment on the bottom of its owner's library.

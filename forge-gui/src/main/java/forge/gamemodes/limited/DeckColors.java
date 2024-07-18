@@ -17,11 +17,11 @@
  */
 package forge.gamemodes.limited;
 
-import java.util.List;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.IPaperCard;
+
+import java.util.List;
 
 public class DeckColors {
 
@@ -29,6 +29,13 @@ public class DeckColors {
     protected int colorMask;
 
     public int MAX_COLORS = 2;
+
+    DeckColors() {}
+
+    DeckColors(int max_col) {
+        // If we want to draft decks that are more than 2 colors, we can change the MAX_COLORS value here.
+        MAX_COLORS = max_col;
+    }
 
     public ColorSet getChosenColors() {
         if (null == chosen) {

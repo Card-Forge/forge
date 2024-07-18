@@ -1,5 +1,5 @@
 Name:A-Maelstrom Muse
-ManaCost:U U/R R
+ManaCost:U UR R
 Types:Creature Djinn Wizard
 PT:2/4
 K:Flying

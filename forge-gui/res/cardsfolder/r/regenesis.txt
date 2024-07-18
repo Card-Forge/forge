@@ -1,5 +1,5 @@
 Name:Regenesis
 ManaCost:3 G G
 Types:Instant
-A:SP$ ChangeZone | Cost$ 3 G G | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return up to two target permanent cards from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target permanent card in your graveyard | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Return up to two target permanent cards from your graveyard to your hand.
 Oracle:Return up to two target permanent cards from your graveyard to your hand.

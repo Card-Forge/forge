@@ -2,6 +2,6 @@ Name:Fry
 ManaCost:1 R
 Types:Instant
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.White,Planeswalker.White,Creature.Blue,Planeswalker.Blue | TgtPrompt$ Select target creature or planeswalker that's white or blue | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker that's white or blue.
+A:SP$ DealDamage | ValidTgts$ Creature.White,Planeswalker.White,Creature.Blue,Planeswalker.Blue | TgtPrompt$ Select target creature or planeswalker that's white or blue | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker that's white or blue.
 AI:RemoveDeck:Random
 Oracle:This spell can't be countered.\nFry deals 5 damage to target creature or planeswalker that's white or blue.

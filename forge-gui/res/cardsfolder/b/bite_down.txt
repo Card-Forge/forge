@@ -1,7 +1,7 @@
 Name:Bite Down
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker you don't control.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker you don't control.
 SVar:SoulsDamage:DB$ DealDamage | AILogic$ PowerDmg | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X | DamageSource$ ParentTarget
 SVar:X:ParentTargeted$CardPower
 Oracle:Target creature you control deals damage equal to its power to target creature or planeswalker you don't control.

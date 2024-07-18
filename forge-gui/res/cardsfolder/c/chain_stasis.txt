@@ -1,7 +1,7 @@
 Name:Chain Stasis
 ManaCost:U
 Types:Instant
-A:SP$ TapOrUntap | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBCopy | SpellDescription$ You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy.
+A:SP$ TapOrUntap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBCopy | SpellDescription$ You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy.
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ TargetedController | UnlessPayer$ TargetedController | UnlessCost$ 2 U | UnlessSwitched$ True | MayChooseTarget$ True | StackDescription$ Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy.
 AI:RemoveDeck:All
 Oracle:You may tap or untap target creature. Then that creature's controller may pay {2}{U}. If the player does, they may copy this spell and may choose a new target for that copy.

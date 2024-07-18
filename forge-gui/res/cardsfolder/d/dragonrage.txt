@@ -1,7 +1,7 @@
 Name:Dragonrage
 ManaCost:2 R
 Types:Instant
-A:SP$ Mana | Cost$ 2 R | Produced$ R | Amount$ X | SubAbility$ DBAnimateAll | SpellDescription$ Add {R} for each attacking creature you control. Until end of turn, attacking creatures you control gain "{R}: This creature gets +1/+0 until end of turn."
+A:SP$ Mana | Produced$ R | Amount$ X | SubAbility$ DBAnimateAll | SpellDescription$ Add {R} for each attacking creature you control. Until end of turn, attacking creatures you control gain "{R}: This creature gets +1/+0 until end of turn."
 SVar:X:Count$Valid Creature.YouCtrl+attacking
 SVar:DBAnimateAll:DB$ AnimateAll | ValidCards$ Creature.YouCtrl+attacking | Abilities$ DrAbs
 SVar:DrAbs:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ 1 | SpellDescription$ This creature gets +1/+0 until end of turn.

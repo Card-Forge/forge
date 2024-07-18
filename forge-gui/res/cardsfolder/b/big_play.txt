@@ -1,7 +1,7 @@
 Name:Big Play
 ManaCost:1 G
 Types:Instant
-A:SP$ Pump | Cost$ 1 G | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Reach | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 and gains reach until end of turn.
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ +2 | KW$ Reach | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 and gains reach until end of turn.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 Oracle:Target creature gets +2/+2 and gains reach until end of turn. Put a +1/+1 counter on it.

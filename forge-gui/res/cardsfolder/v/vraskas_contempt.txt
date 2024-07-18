@@ -1,6 +1,6 @@
 Name:Vraska's Contempt
 ManaCost:2 B B
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 B B | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Card.Creature,Card.Planeswalker | SubAbility$ DBGainLife | SpellDescription$ Exile target creature or planeswalker. You gain 2 life.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target creature or planeswalker | ValidTgts$ Card.Creature,Card.Planeswalker | SubAbility$ DBGainLife | SpellDescription$ Exile target creature or planeswalker. You gain 2 life.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 Oracle:Exile target creature or planeswalker. You gain 2 life.

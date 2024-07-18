@@ -1,6 +1,6 @@
 Name:Narrow Escape
 ManaCost:2 W
 Types:Instant
-A:SP$ ChangeZone | Cost$ 2 W | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | SubAbility$ DBGainLife | TgtPrompt$ Select target permanent you control | SpellDescription$ Return target permanent you control to its owner's hand. You gain 4 life.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouCtrl | SubAbility$ DBGainLife | TgtPrompt$ Select target permanent you control | SpellDescription$ Return target permanent you control to its owner's hand. You gain 4 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 Oracle:Return target permanent you control to its owner's hand. You gain 4 life.

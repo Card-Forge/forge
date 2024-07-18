@@ -1,0 +1,13 @@
+Name:Deb Thomas
+ManaCost:3 R
+Types:Legendary Planeswalker Deb
+Loyalty:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Employee.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an Employee enters the battlefield under your control, put a loyalty counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ 1
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ r_1_1_employee | SpellDescription$ Create a 1/1 red Employee creature token.
+A:AB$ PumpAll | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | ValidCards$ Employee.YouCtrl,Dog.YouCtrl | NumAtt$ +X | SpellDescription$ Employees and Dogs you control get +X/+0 until end of turn.
+SVar:PlayMain1:TRUE
+SVar:X:Count$xPaid
+DeckHas:Ability$Token
+DeckHints:Type$Employee|Dog
+Oracle:Whenever an Employee enters the battlefield under your control, put a loyalty counter on Deb Thomas.\n[+1]: Create a 1/1 red Employee creature token.\n[-X]: Employees and Dogs you control get +X/+0 until end of turn.

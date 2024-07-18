@@ -1,7 +1,7 @@
 Name:Midnight Charm
 ManaCost:B
 Types:Instant
-A:SP$ Charm | Cost$ B | Choices$ DBDamage,DBPump,DBTap
+A:SP$ Charm | Choices$ DBDamage,DBPump,DBTap
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage | NumDmg$ 1 | SubAbility$ DBGain | SpellDescription$ CARDNAME deals 1 damage to target creature and you gain 1 life.
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain First Strike | KW$ First Strike | SpellDescription$ Target creature gains first strike until end of turn.

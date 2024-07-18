@@ -1,7 +1,7 @@
 Name:Reckless Air Strike
 ManaCost:R
 Types:Sorcery
-A:SP$ Charm | Cost$ R | Choices$ DBDmg1,DBDestroy
+A:SP$ Charm | Choices$ DBDmg1,DBDestroy
 SVar:DBDmg1:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying. | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature with flying.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
 Oracle:Choose one —\n• Reckless Air Strike deals 3 damage to target creature with flying.\n• Destroy target artifact.

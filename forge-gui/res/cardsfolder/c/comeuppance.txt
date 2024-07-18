@@ -1,7 +1,7 @@
 Name:Comeuppance
 ManaCost:3 W
 Types:Instant
-A:SP$ Effect | Cost$ 3 W | ReplacementEffects$ RPrevent
+A:SP$ Effect | ReplacementEffects$ RPrevent | SpellDescription$ Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, CARDNAME deals that much damage to that creature. If damage from a noncreature source is prevented this way, CARDNAME deals that much damage to the source's controller.
 SVar:RPrevent:Event$ DamageDone | ValidSource$ Card.YouDontCtrl,Emblem.YouDontCtrl | ValidTarget$ You,Planeswalker.YouCtrl | ReplaceWith$ DamageCreature | PreventionEffect$ True | ExecuteMode$ PerSource | Description$ Prevent all damage that would be dealt to you and planeswalkers you control this turn by sources you don't control. If damage from a creature source is prevented this way, CARDNAME deals that much damage to that creature. If damage from a noncreature source is prevented this way, CARDNAME deals that much damage to the source's controller.
 SVar:DamageCreature:DB$ DealDamage | Defined$ ReplacedSource | DamageSource$ EffectSource | NumDmg$ X | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SubAbility$ DamageNonCreature
 SVar:DamageNonCreature:DB$ DealDamage | Defined$ ReplacedSourceController | DamageSource$ EffectSource | NumDmg$ X | ConditionDefined$ ReplacedSource | ConditionPresent$ Card.nonCreature | ConditionCompare$ GE1

@@ -1,0 +1,11 @@
+Name:Kambal, Profiteering Mayor
+ManaCost:1 W B
+Types:Legendary Creature Human Advisor
+PT:2/4
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+OppCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigCopy | TriggerDescription$ Whenever one or more tokens enter the battlefield under your opponents' control, for each of them, create a tapped token that's a copy of it. This ability triggers only once each turn.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCards | TokenTapped$ True | NumCopies$ 1
+T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever one or more tokens enter the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$Token|LifeGain
+Oracle:Whenever one or more tokens enter the battlefield under your opponents' control, for each of them, create a tapped token that's a copy of it. This ability triggers only once each turn.\nWhenever one or more tokens enter the battlefield under your control, each opponent loses 1 life and you gain 1 life.

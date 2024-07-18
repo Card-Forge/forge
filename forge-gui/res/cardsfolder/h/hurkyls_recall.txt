@@ -1,5 +1,5 @@
 Name:Hurkyl's Recall
 ManaCost:1 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 1 U | ValidTgts$ Player | ChangeType$ Artifact.TargetedPlayerOwn | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts target player owns to their hand.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | ChangeType$ Artifact.TargetedPlayerOwn | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts target player owns to their hand.
 Oracle:Return all artifacts target player owns to their hand.

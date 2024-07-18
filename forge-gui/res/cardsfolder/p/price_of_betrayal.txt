@@ -1,5 +1,5 @@
 Name:Price of Betrayal
 ManaCost:B
 Types:Sorcery
-A:SP$ RemoveCounter | Cost$ B | ValidTgts$ Artifact,Creature,Planeswalker,Opponent | TgtPrompt$ Select target artifact, creature, planeswalker, or opponent. | CounterType$ Any | CounterNum$ 5 | UpTo$ True | StackDescription$ SpellDescription | SpellDescription$ Remove up to five counters from target artifact, creature, planeswalker, or opponent.
+A:SP$ RemoveCounter | ValidTgts$ Artifact,Creature,Planeswalker,Opponent | TgtPrompt$ Select target artifact, creature, planeswalker, or opponent. | CounterType$ Any | CounterNum$ 5 | UpTo$ True | StackDescription$ SpellDescription | SpellDescription$ Remove up to five counters from target artifact, creature, planeswalker, or opponent.
 Oracle:Remove up to five counters from target artifact, creature, planeswalker, or opponent.

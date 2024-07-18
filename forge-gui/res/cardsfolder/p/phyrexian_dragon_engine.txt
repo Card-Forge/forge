@@ -3,9 +3,8 @@ ManaCost:3
 Types:Artifact Creature Phyrexian Dragon
 PT:2/2
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | ValidCard$ Card.Self+YouOwn | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield from your graveyard, you may discard your hand. If you do, draw three cards.
-SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self+YouOwn | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield from your graveyard, you may discard your hand. If you do, draw three cards.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | Defined$ You | NumCards$ 3
 K:Unearth:3 R R
 SVar:DiscardMe:2
 SVar:SacMe:1

@@ -1,7 +1,7 @@
 Name:Vitalizing Cascade
 ManaCost:X G W
 Types:Instant
-A:SP$ GainLife | Cost$ X G W | Defined$ You | LifeAmount$ Y | SpellDescription$ You gain X plus 3 life.
+A:SP$ GainLife | Defined$ You | LifeAmount$ Y | SpellDescription$ You gain X plus 3 life.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Plus.3
 Oracle:You gain X plus 3 life.

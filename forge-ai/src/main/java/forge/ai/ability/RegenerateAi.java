@@ -36,7 +36,6 @@ import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 
 /**
@@ -55,36 +54,8 @@ public class RegenerateAi extends SpellAbilityAi {
         final Combat combat = game.getCombat();
         final Card hostCard = sa.getHostCard();
         boolean chance = false;
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        if (tgt == null) {
-            // As far as I can tell these Defined Cards will only have one of them
-            final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
-            if (!game.getStack().isEmpty()) {
-                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
-
-                for (final Card c : list) {
-                    if (objects.contains(c)) {
-                        chance = true;
-                    }
-                }
-            } else {
-                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    boolean flag = false;
-
-                    for (final Card c : list) {
-                        if (c.getShieldCount() == 0) {
-                            flag = flag || ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat);
-                        }
-                    }
-
-                    chance = flag;
-                } else { // if nothing on the stack, and it's not declare
-                         // blockers. no need to regen
-                    return false;
-                }
-            }
-        } else {
+        if (sa.usesTargeting()) {
             sa.resetTargets();
             // filter AIs battlefield by what I can target
             List<Card> targetables = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
@@ -100,7 +71,7 @@ public class RegenerateAi extends SpellAbilityAi {
                 final List<Card> threatenedTargets = new ArrayList<>();
 
                 for (final Card c : targetables) {
-                    if (objects.contains(c) && c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c)) {
+                    if (objects.contains(c) && !ComputerUtil.canRegenerate(ai, c)) {
                         threatenedTargets.add(c);
                     }
                 }
@@ -110,23 +81,46 @@ public class RegenerateAi extends SpellAbilityAi {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(threatenedTargets));
                     chance = true;
                 }
-            } else {
-                if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-                    final CardCollection combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
-                    ComputerUtilCard.sortByEvaluateCreature(combatants);
+            } else if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                final CardCollection combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
+                ComputerUtilCard.sortByEvaluateCreature(combatants);
 
-                    for (final Card c : combatants) {
-                        if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
-                            sa.getTargets().add(c);
-                            chance = true;
-                            break;
-                        }
+                for (final Card c : combatants) {
+                    if (c.getShieldCount() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c, combat)) {
+                        sa.getTargets().add(c);
+                        chance = true;
+                        break;
                     }
                 }
             }
             if (sa.getTargets().isEmpty()) {
                 return false;
             }
+        } else {
+            final List<Card> list = AbilityUtils.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
+            if (list.isEmpty()) {
+                return false;
+            }
+            // when regenerating more than one is possible try for slightly more value
+            int numToSave = Math.min(2, list.size());
+            int saved = 0;
+
+            if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                for (final Card c : list) {
+                    if (c.getShieldCount() == 0 && ComputerUtil.predictCreatureWillDieThisTurn(ai, c, sa)) {
+                        saved++;
+                    }
+                    if (saved == numToSave) {
+                        break;
+                    }
+                }
+            } else {
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), sa, true);
+                objects.retainAll(list);
+                saved = objects.size();
+            }
+            // if nothing on the stack, and it's not declare blockers no need to regen
+            chance = saved >= numToSave;
         }
 
         return chance;

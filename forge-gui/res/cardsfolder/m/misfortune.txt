@@ -1,7 +1,7 @@
 Name:Misfortune
 ManaCost:1 B R G
 Types:Sorcery
-A:SP$ Charm | Cost$ 1 B R G | Chooser$ Opponent | Choices$ Fortune,Misfortune
+A:SP$ Charm | Chooser$ Opponent | Choices$ Fortune,Misfortune
 SVar:Fortune:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife | SpellDescription$ Put a +1/+1 counter on each creature you control. You gain 4 life. | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4
 SVar:Misfortune:DB$ PutCounterAll | ValidCards$ Creature.ControlledBy ChoosingPlayer | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You put a -1/-1 counter on each creature that player controls and CARDNAME deals 4 damage to that player. | SubAbility$ DBDamage

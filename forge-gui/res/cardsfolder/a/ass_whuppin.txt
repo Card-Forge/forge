@@ -1,5 +1,5 @@
 Name:Ass Whuppin'
 ManaCost:1 W B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 W B | ValidTgts$ Permanent.BorderColorSilver | TgtPrompt$ Select target silver-bordered permanent | SpellDescription$ Destroy target silver-bordered permanent in any game you can see from your seat.
+A:SP$ Destroy | ValidTgts$ Permanent.BorderColorSilver | TgtPrompt$ Select target silver-bordered permanent | SpellDescription$ Destroy target silver-bordered permanent in any game you can see from your seat.
 Oracle:Destroy target silver-bordered permanent in any game you can see from your seat.

@@ -1,7 +1,7 @@
 Name:Dimensional Breach
 ManaCost:5 W W
 Types:Sorcery
-A:SP$ ChangeZoneAll | Cost$ 5 W W | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile all permanents. For as long as any of those cards remain exiled, at the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigUpkeep | RememberObjects$ Remembered | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ BreachReturn | TriggerZones$ Command | TriggerDescription$ At the beginning of each player's upkeep, that player returns one of the exiled cards they own to the battlefield.

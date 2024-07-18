@@ -1,6 +1,6 @@
 Name:Vampiric Fury
 ManaCost:1 R
 Types:Instant
-A:SP$ PumpAll | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | KW$ First Strike | ValidCards$ Creature.Vampire+YouCtrl | SpellDescription$ Vampire creatures you control get +2/+0 and gain first strike until end of turn.
+A:SP$ PumpAll | NumAtt$ +2 | NumDef$ +0 | KW$ First Strike | ValidCards$ Creature.Vampire+YouCtrl | SpellDescription$ Vampire creatures you control get +2/+0 and gain first strike until end of turn.
 AI:RemoveDeck:Random
 Oracle:Vampire creatures you control get +2/+0 and gain first strike until end of turn.

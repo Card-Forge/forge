@@ -1,6 +1,6 @@
 Name:Unearthly Blizzard
 ManaCost:2 R
 Types:Sorcery Arcane
-A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 3 | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Up to three target creatures can't block this turn.
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 3 | KW$ CARDNAME can't block. | IsCurse$ True | SpellDescription$ Up to three target creatures can't block this turn.
 AI:RemoveDeck:All
 Oracle:Up to three target creatures can't block this turn.

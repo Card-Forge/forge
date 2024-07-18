@@ -114,6 +114,9 @@ MoxJet
 MoxRuby
   xy: 320, 32
   size: 16, 16
+LightBoots
+  xy: 144, 464
+  size: 16, 16
 MoxSapphire
   xy: 320, 48
   size: 16, 16
@@ -302,6 +305,9 @@ TravelersAmulet
   size: 16, 16
 RelicAmulet
   xy: 144, 800
+  size: 16, 16
+SorinAmulet
+  xy: 96, 800
   size: 16, 16
 AmuletofKroog
   xy: 128, 864

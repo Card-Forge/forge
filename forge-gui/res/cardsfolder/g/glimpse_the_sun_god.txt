@@ -1,7 +1,7 @@
 Name:Glimpse the Sun God
 ManaCost:X W
 Types:Instant
-A:SP$ Tap | Cost$ X W | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | SubAbility$ DBScry | SpellDescription$ Tap X target creatures. Scry 1.
+A:SP$ Tap | ValidTgts$ Creature | TgtPrompt$ Select X target creatures | TargetMin$ X | TargetMax$ X | SubAbility$ DBScry | SpellDescription$ Tap X target creatures. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 SVar:X:Count$xPaid
 Oracle:Tap X target creatures. Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

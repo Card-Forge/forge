@@ -1,7 +1,7 @@
 Name:Legerdemain
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Pump | Cost$ 2 U U | ValidTgts$ Artifact,Creature | TgtPrompt$ target artifact or creature | StackDescription$ None | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact or creature and another target permanent that shares one of those types with it. (This effect lasts indefinitely.)
+A:SP$ Pump | ValidTgts$ Artifact,Creature | TgtPrompt$ target artifact or creature | StackDescription$ None | SubAbility$ DBExchange | SpellDescription$ Exchange control of target artifact or creature and another target permanent that shares one of those types with it. (This effect lasts indefinitely.)
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Permanent | TgtPrompt$ Select target permanent that shares one of those types | TargetsWithSharedCardType$ ParentTarget | TargetsWithSharedTypes$ Artifact,Creature | TargetUnique$ True
 AI:RemoveDeck:All
 Oracle:Exchange control of target artifact or creature and another target permanent that shares one of those types with it. (This effect lasts indefinitely.)

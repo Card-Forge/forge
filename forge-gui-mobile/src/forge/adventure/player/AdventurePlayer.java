@@ -150,6 +150,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.enemyLifeFactor = difficultyData.enemyLifeFactor;
         this.difficultyData.sellFactor = difficultyData.sellFactor;
         this.difficultyData.shardSellRatio = difficultyData.shardSellRatio;
+        this.difficultyData.goldLoss = difficultyData.goldLoss;
+        this.difficultyData.lifeLoss = difficultyData.lifeLoss;
 
         gold = difficultyData.staringMoney;
         name = n;
@@ -187,6 +189,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.enemyLifeFactor = diff.enemyLifeFactor;
         this.difficultyData.sellFactor = diff.sellFactor;
         this.difficultyData.shardSellRatio = diff.shardSellRatio;
+        this.difficultyData.goldLoss = diff.goldLoss;
+        this.difficultyData.lifeLoss = diff.lifeLoss;
         resetToMaxLife();
     }
 

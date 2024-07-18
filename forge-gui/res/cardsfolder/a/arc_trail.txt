@@ -1,7 +1,7 @@
 Name:Arc Trail
 ManaCost:1 R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Any | TgtPrompt$ Select any target (2 damage) | NumDmg$ 2 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 1 damage to another target.
+A:SP$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target (2 damage) | NumDmg$ 2 | DamageMap$ True | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to any target and 1 damage to another target.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select any target (1 damage) | TargetUnique$ True | NumDmg$ 1 | SubAbility$ DBDamageResolve
 SVar:DBDamageResolve:DB$ DamageResolve
 Oracle:Arc Trail deals 2 damage to any target and 1 damage to another target.

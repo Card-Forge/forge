@@ -1,0 +1,8 @@
+Name:Tempest Angler
+ManaCost:1 UR UR
+Types:Creature Otter Wizard
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:nonCreature
+Oracle:Whenever you cast a noncreature spell, put a +1/+1 counter on Tempest Angler.

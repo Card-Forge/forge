@@ -1,6 +1,6 @@
 Name:Harsh Scrutiny
 ManaCost:B
 Types:Sorcery
-A:SP$ Discard | Cost$ B | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Creature | Mode$ RevealYouChoose | SubAbility$ DBScry | SpellDescription$ Target opponent reveals their hand. You choose a creature card from it. That player discards that card. Scry 1.
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Creature | Mode$ RevealYouChoose | SubAbility$ DBScry | SpellDescription$ Target opponent reveals their hand. You choose a creature card from it. That player discards that card. Scry 1.
 SVar:DBScry:DB$ Scry | ScryNum$ 1
 Oracle:Target opponent reveals their hand. You choose a creature card from it. That player discards that card. Scry 1.

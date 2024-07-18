@@ -1,7 +1,7 @@
 Name:Thunderbolt
 ManaCost:1 R
 Types:Instant
-A:SP$ Charm | Cost$ 1 R | Choices$ DBDmg,DBDmg2
+A:SP$ Charm | Choices$ DBDmg,DBDmg2
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player or planeswalker.
 SVar:DBDmg2:DB$ DealDamage | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with Flying | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature with flying.
 Oracle:Choose one —\n• Thunderbolt deals 3 damage to target player or planeswalker.\n• Thunderbolt deals 4 damage to target creature with flying.

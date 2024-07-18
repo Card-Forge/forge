@@ -1,6 +1,6 @@
 Name:Call to the Netherworld
 ManaCost:B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target black creature card in your graveyard | ValidTgts$ Creature.Black+YouCtrl | SpellDescription$ Return target black creature card from your graveyard to your hand.
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target black creature card in your graveyard | ValidTgts$ Creature.Black+YouCtrl | SpellDescription$ Return target black creature card from your graveyard to your hand.
 K:Madness:0
 Oracle:Return target black creature card from your graveyard to your hand.\nMadness {0} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

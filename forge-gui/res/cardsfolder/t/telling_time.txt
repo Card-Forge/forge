@@ -1,6 +1,6 @@
 Name:Telling Time
 ManaCost:1 U
 Types:Instant
-A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ 1 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBDig | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library. | StackDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.
+A:SP$ Dig | DigNum$ 3 | ChangeNum$ 1 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBDig | NoLooking$ True | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library. | StackDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.
 SVar:DBDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | NoLooking$ True | StackDescription$ None
 Oracle:Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.

@@ -1,6 +1,6 @@
 Name:Merchant Scroll
 ManaCost:1 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 U | Origin$ Library | Destination$ Hand | ChangeType$ Instant.Blue | ChangeNum$ 1 | SpellDescription$ Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant.Blue | ChangeNum$ 1 | SpellDescription$ Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.
 AI:RemoveDeck:All
 Oracle:Search your library for a blue instant card, reveal that card, put it into your hand, then shuffle.

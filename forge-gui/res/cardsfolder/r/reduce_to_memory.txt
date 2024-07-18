@@ -1,7 +1,7 @@
 Name:Reduce to Memory
 ManaCost:1 W W
 Types:Sorcery Lesson
-A:SP$ ChangeZone | Cost$ 1 W W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBToken | SpellDescription$ Exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token.
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBToken | SpellDescription$ Exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_spirit | TokenOwner$ TargetedController
 DeckHas:Ability$Token
 Oracle:Exile target nonland permanent. Its controller creates a 3/2 red and white Spirit creature token.

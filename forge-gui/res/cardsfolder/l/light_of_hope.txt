@@ -1,7 +1,7 @@
 Name:Light of Hope
 ManaCost:W
 Types:Instant
-A:SP$ Charm | Cost$ W | Choices$ DBGainLife,DBDestroy,DBPutCounter | Defined$ You
+A:SP$ Charm | Choices$ DBGainLife,DBDestroy,DBPutCounter | Defined$ You
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.

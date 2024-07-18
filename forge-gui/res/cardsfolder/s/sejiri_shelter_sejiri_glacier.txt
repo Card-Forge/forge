@@ -1,7 +1,7 @@
 Name:Sejiri Shelter
 ManaCost:1 W
 Types:Instant
-A:SP$ Protection | Cost$ 1 W | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
+A:SP$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | SpellDescription$ Target creature you control gains protection from the color of your choice until end of turn.
 AlternateMode:Modal
 Oracle:Target creature you control gains protection from the color of your choice until end of turn.
 

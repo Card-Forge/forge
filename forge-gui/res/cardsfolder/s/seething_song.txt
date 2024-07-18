@@ -1,5 +1,5 @@
 Name:Seething Song
 ManaCost:2 R
 Types:Instant
-A:SP$ Mana | Cost$ 2 R | Produced$ R | Amount$ 5 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}{R}{R}.
+A:SP$ Mana | Produced$ R | Amount$ 5 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {R}{R}{R}{R}{R}.
 Oracle:Add {R}{R}{R}{R}{R}.

@@ -1,5 +1,5 @@
 Name:Scorching Spear
 ManaCost:R
 Types:Sorcery
-A:SP$ DealDamage | Cost$ R | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ Scorching Spear deals 1 damage to any target.
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
 Oracle:Scorching Spear deals 1 damage to any target.

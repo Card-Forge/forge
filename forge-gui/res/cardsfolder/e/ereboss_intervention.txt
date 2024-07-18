@@ -1,7 +1,7 @@
 Name:Erebos's Intervention
 ManaCost:X B
 Types:Instant
-A:SP$ Charm | Cost$ X B | Choices$ DBPump,DBChangeZone
+A:SP$ Charm | Choices$ DBPump,DBChangeZone
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SpellDescription$ You gain X life.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ XX | TgtPrompt$ Select up to twice X target cards in graveyards | ValidTgts$ Card | SpellDescription$ Exile up to twice X target cards from graveyards.

@@ -2,5 +2,5 @@ Name:Nightmare Void
 ManaCost:3 B
 Types:Sorcery
 K:Dredge:2
-A:SP$ Discard | Cost$ 3 B | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a card from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a card from it. That player discards that card.
 Oracle:Target player reveals their hand. You choose a card from it. That player discards that card.\nDredge 2 (If you would draw a card, you may mill two cards instead. If you do, return this card from your graveyard to your hand.)

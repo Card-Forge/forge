@@ -1,6 +1,6 @@
 Name:Learn from the Past
 ManaCost:3 U
 Types:Instant
-A:SP$ ChangeZoneAll | Cost$ 3 U | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library. Draw a card.
+A:SP$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Library | ChangeType$ Card | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Target player shuffles their graveyard into their library. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Target player shuffles their graveyard into their library.\nDraw a card.

@@ -1,7 +1,7 @@
 Name:Allied Strategies
 ManaCost:4 U
 Types:Sorcery
-A:SP$ Draw | Cost$ 4 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Domain — Target player draws a card for each basic land type among lands they control.
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | SpellDescription$ Domain — Target player draws a card for each basic land type among lands they control.
 SVar:X:TargetedPlayer$DomainPlayer
 AI:RemoveDeck:Random
 Oracle:Domain — Target player draws a card for each basic land type among lands they control.

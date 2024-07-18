@@ -1,7 +1,7 @@
 Name:Ugin's Insight
 ManaCost:3 U U
 Types:Sorcery
-A:SP$ Scry | Cost$ 3 U U | ScryNum$ X | SubAbility$ DBDraw | SpellDescription$ Scry X, where X is the highest mana value among permanents you control, then draw three cards.
+A:SP$ Scry | ScryNum$ X | SubAbility$ DBDraw | SpellDescription$ Scry X, where X is the highest mana value among permanents you control, then draw three cards.
 SVar:X:Count$Valid Permanent.YouCtrl$GreatestCMC
 SVar:DBDraw:DB$ Draw | NumCards$ 3
 Oracle:Scry X, where X is the highest mana value among permanents you control, then draw three cards.

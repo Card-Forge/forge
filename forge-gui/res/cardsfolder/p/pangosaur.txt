@@ -2,7 +2,7 @@ Name:Pangosaur
 ManaCost:2 G G
 Types:Creature Dinosaur
 PT:6/6
-T:Mode$ LandPlayed | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a player plays a land, return Pangosaur to its owner's hand.
+T:Mode$ LandPlayed | ValidCard$ Land | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a player plays a land, return CARDNAME to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 AI:RemoveDeck:All
 Oracle:Whenever a player plays a land, return Pangosaur to its owner's hand.
