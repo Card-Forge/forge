@@ -100,7 +100,11 @@ public class TextRenderer {
                 lastSpaceIdx = text.length();
                 nextSpaceIdx = boundary.next();
             }
-            ch = fullText.charAt(i);
+            try {
+                ch = fullText.charAt(i);
+            } catch (StringIndexOutOfBoundsException e) {
+                ch = Character.MIN_VALUE;
+            }
             switch (ch) {
             case '\r':
                 continue; //skip '\r' character
@@ -231,53 +235,53 @@ public class TextRenderer {
                     }
                 }
                 if (inKeywordCount > 0) {
-                    inKeywordCount--;
-                    if (inKeywordCount == 0 && text.length() > 0) {
-                        String keyword, value;
-                        text.deleteCharAt(0); //trim leading '<'
-                        if (text.charAt(0) == '/') {
-                            keyword = text.substring(1);
-                            value = null;
-                        }
-                        else {
-                            int idx = text.indexOf(" ");
-                            if (idx != -1) {
-                                keyword = text.substring(0, idx);
-                                value = text.substring(idx + 1);
-                            }
-                            else {
-                                keyword = text.toString();
+                    try {
+                        inKeywordCount--;
+                        if (inKeywordCount == 0 && text.length() > 0) {
+                            String keyword, value;
+                            text.deleteCharAt(0); //trim leading '<'
+                            if (text.charAt(0) == '/') {
+                                keyword = text.substring(1);
                                 value = null;
-                            }
-                        }
-                        boolean validKeyword = true;
-                        switch (keyword) {
-                        case "clr":
-                            colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
-                            break;
-                        case "span":
-                            // <span style="color:gray;">
-                            if (value != null && value.contains("color:")) {
-                                int startIdx = value.indexOf(':') + 1;
-                                int endIdx = value.indexOf(';');
-                                String colorName = value.substring(startIdx, endIdx);
-                                if (colorName.equals("gray")) {
-                                    colorOverride = Color.GRAY;
-                                }
                             } else {
-                                colorOverride = null;
+                                int idx = text.indexOf(" ");
+                                if (idx != -1) {
+                                    keyword = text.substring(0, idx);
+                                    value = text.substring(idx + 1);
+                                } else {
+                                    keyword = text.toString();
+                                    value = null;
+                                }
                             }
-                            break;
-                        default:
-                            validKeyword = false;
-                            break;
+                            boolean validKeyword = true;
+                            switch (keyword) {
+                                case "clr":
+                                    colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
+                                    break;
+                                case "span":
+                                    // <span style="color:gray;">
+                                    if (value != null && value.contains("color:")) {
+                                        int startIdx = value.indexOf(':') + 1;
+                                        int endIdx = value.indexOf(';');
+                                        String colorName = value.substring(startIdx, endIdx);
+                                        if (colorName.equals("gray")) {
+                                            colorOverride = Color.GRAY;
+                                        }
+                                    } else {
+                                        colorOverride = null;
+                                    }
+                                    break;
+                                default:
+                                    validKeyword = false;
+                                    break;
+                            }
+                            if (validKeyword) {
+                                text.setLength(0);
+                                lastSpaceIdx = -1;
+                                continue; //skip '>' character
+                            }
                         }
-                        if (validKeyword) {
-                            text.setLength(0);
-                            lastSpaceIdx = -1;
-                            continue; //skip '>' character
-                        }
-                    }
+                    } catch (Exception e) {}
                 }
                 break;
             case '(':
@@ -415,26 +419,31 @@ public class TextRenderer {
                             }
                         }
                         if (lastPieceIdx >= 0) {
-                            Piece lastPiece = pieces.get(lastPieceIdx);
-                            lineWidths.add(lastPiece.x + lastPiece.w);
-                            x = 0;
-                            for (int j = lastPieceIdx + 1; j < pieces.size(); j++) {
-                                Piece piece = pieces.get(j);
-                                piece.x = x;
-                                piece.y += lineHeight;
-                                piece.lineNum++;
-                                x += piece.w;
-                            }
-                            y += lineHeight;
-                            totalHeight += lineHeight;
-                            lineNum++;
-                            if (totalHeight > height) {
-                                //try next font size down if out of space
-                                if (font.canShrink()) {
-                                    updatePieces(font.shrink());
-                                    return;
+                            try {
+                                Piece lastPiece = pieces.get(lastPieceIdx);
+                                lineWidths.add(lastPiece.x + lastPiece.w);
+                                x = 0;
+                                int size = pieces.size();
+                                for (int j = lastPieceIdx + 1; j < size; j++) {
+                                    Piece piece = pieces.get(j);
+                                    piece.x = x;
+                                    piece.y += lineHeight;
+                                    piece.lineNum++;
+                                    x += piece.w;
                                 }
-                                needClip = true;
+                                y += lineHeight;
+                                totalHeight += lineHeight;
+                                lineNum++;
+                                if (totalHeight > height) {
+                                    //try next font size down if out of space
+                                    if (font.canShrink()) {
+                                        updatePieces(font.shrink());
+                                        return;
+                                    }
+                                    needClip = true;
+                                }
+                            } catch (Exception e) {
+                                //e.printStackTrace();
                             }
                         } else {
                             if (font.canShrink()) {
@@ -483,7 +492,10 @@ public class TextRenderer {
 
     private void setProps(String text, FSkinFont skinFont, float w, float h, boolean wrap0) {
         boolean needUpdate = false;
-        if (!fullText.equals(text)) {
+        if (fullText == null) {
+            fullText = text;
+            needUpdate = true;
+        } else if (!fullText.equals(text)) {
             fullText = text;
             needUpdate = true;
         }
@@ -538,35 +550,40 @@ public class TextRenderer {
         if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
             g.startClip(x, y, w, h);
         }
-        if (height > totalHeight && centerVertically) {
-            y += (height - totalHeight) / 2;
-        }
-        float[] alignmentOffsets = new float[lineWidths.size()];
-        for (int i = 0; i < lineWidths.size(); i++) {
-            switch (horzAlignment) {
-            case Align.left:
-                alignmentOffsets[i] = 0;
-                break;
-            case Align.center:
-                alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
-                break;
-            case Align.right:
-                alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
-                break;
+        try {
+            if (height > totalHeight && centerVertically) {
+                y += (height - totalHeight) / 2;
             }
-        }
+            float[] alignmentOffsets = new float[lineWidths.size()];
+            int size = lineWidths.size();
+            for (int i = 0; i < size; i++) {
+                switch (horzAlignment) {
+                    case Align.left:
+                        alignmentOffsets[i] = 0;
+                        break;
+                    case Align.center:
+                        alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
+                        break;
+                    case Align.right:
+                        alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
+                        break;
+                }
+            }
 
-        visibleStartY -= y; //subtract y to make calculation quicker
-        float visibleEndY = visibleStartY + visibleHeight;
+            visibleStartY -= y; //subtract y to make calculation quicker
+            float visibleEndY = visibleStartY + visibleHeight;
 
-        for (Piece piece : pieces) {
-            if (piece.y + piece.h < visibleStartY) {
-                continue;
+            for (Piece piece : pieces) {
+                if (piece.y + piece.h < visibleStartY) {
+                    continue;
+                }
+                if (piece.y >= visibleEndY) {
+                    break;
+                }
+                piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
             }
-            if (piece.y >= visibleEndY) {
-                break;
-            }
-            piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
+        } catch (Exception e) {
+            //e.printStackTrace();
         }
         if (needClip) {
             g.endClip();
