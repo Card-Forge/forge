@@ -7,5 +7,5 @@ SVar:TrigToken:DB$ Token | TokenScript$ storm_crow | TokenAmount$ X | TokenOwner
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
-DeckHint:Type$Bird
+DeckHints:Type$Bird
 Oracle:Birds you control get +1/+1 and have vigilance.\nAt the beginning of your end step, for each spell you've cast this turn, create a 1/2 blue Bird creature token with flying named Storm Crow.
