@@ -1,0 +1,13 @@
+Name:Essence Channeler
+ManaCost:1 W
+Types:Creature Bat Cleric
+PT:2/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & Vigilance | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you've lost life this turn, CARDNAME has flying and vigilance.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter1 | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter2 | TriggerDescription$ When CARDNAME dies, put its counters on target creature you control.
+SVar:TrigPutCounter2:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
+SVar:X:PlayerCountPropertyYou$LifeLostThisTurn
+DeckHints:Ability$LifeGain
+DeckHas:Ability$Counters
+Oracle:As long as you've lost life this turn, Essence Channeler has flying and vigilance.\nWhenever you gain life, put a +1/+1 counter on Essence Channeler.\nWhen Essence Channeler dies, put its counters on target creature you control.
