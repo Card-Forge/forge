@@ -12,6 +12,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 
 public class CostForage extends CostPartWithList {
@@ -54,14 +55,22 @@ public class CostForage extends CostPartWithList {
                 result.add(newCard);
                 SpellAbilityEffect.handleExiledWith(newCard, ability);
             }
+            triggerForage(payer);
             return result;
         } else if (targetCards.size() == 1) {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, table);
-            return new CardCollection(game.getAction().sacrifice(targetCards.getFirst(), ability, effect, moveParams));
+            CardCollection result = new CardCollection(game.getAction().sacrifice(targetCards.getFirst(), ability, effect, moveParams));
+            triggerForage(payer);
+            return result;
         } else {
             return null;
         }
+    }
+
+    protected void triggerForage(Player payer) {
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(payer);
+        payer.getGame().getTriggerHandler().runTrigger(TriggerType.Forage, runParams, false);
     }
 
     public static final String HashLKIListKey = "Foraged";
