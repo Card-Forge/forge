@@ -265,6 +265,11 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostForage cost) {
+        return null;
+    }
+
+    @Override
     public PaymentDecision visit(CostRollDice cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
