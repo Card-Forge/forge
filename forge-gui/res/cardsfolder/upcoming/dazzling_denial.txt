@@ -1,0 +1,8 @@
+Name:Dazzling Denial
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ X | SpellDescription$ Counter target spell unless its controller pays {2}. If you control a Bird, counter that spell unless its controller pays {4} instead.
+SVar:X:Count$Compare Y GE1.4.2
+SVar:Y:Count$Valid Bird.YouCtrl
+DeckHints:Type$Bird
+Oracle:Counter target spell unless its controller pays {2}. If you control a Bird, counter that spell unless its controller pays {4} instead.

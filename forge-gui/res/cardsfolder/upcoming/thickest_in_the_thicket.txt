@@ -1,0 +1,13 @@
+Name:Thickest in the Thicket
+ManaCost:3 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put X +1/+1 counters on target creature, where X is that creature's power.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw two cards if you control the creature with the greatest power or tied for the greatest power.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GEZ
+SVar:X:Targeted$CardPower
+SVar:Y:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:Z:Count$Valid Creature.YouDontCtrl$GreatestPower
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When Thickest in the Thicket enters, put X +1/+1 counters on target creature, where X is that creature's power.\nAt the beginning of your end step, draw two cards if you control the creature with the greatest power or tied for the greatest power.
