@@ -1,0 +1,10 @@
+Name:Rootcast Apprenticeship
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Charm | Choices$ DBPutCounter,DBCopy,DBToken,DBSacrifice | CharmNum$ 3 | CanRepeatModes$ True
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | SpellDescription$ Create a token that's a copy of target token you control.
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Target player creates a 1/1 green Squirrel creature token.
+SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Artifact.nonToken | SpellDescription$ Target opponent sacrifices a nontoken artifact. | SacMessage$ nontoken artifact
+DeckHas:Ability$Counters|Token
+Oracle:Choose three. You may choose the same mode more than once.\n• Put three +1/+1 counters on target creature.\n• Create a token that's a copy of target token you control.\n• Target player creates a 1/1 green Squirrel creature token.\n• Target opponent sacrifices a nontoken artifact.

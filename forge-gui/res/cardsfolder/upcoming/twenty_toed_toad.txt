@@ -1,0 +1,17 @@
+Name:Twenty-Toed Toad
+ManaCost:3 U
+Types:Creature Frog Wizard
+PT:3/3
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ 20 | Description$ Your maximum hand size is eleven.
+T:Mode$ AttackersDeclared | Execute$ TrigPutCounter | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, put a +1/+1 counter on CARDNAME and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigWinGame | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you win the game if there are twenty or more counters on it or you have twenty or more cards in hand.
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:SVar$CounterWin/Plus.HandWin
+SVar:CounterWin:Count$Compare Y GE20.1.0
+SVar:Y:Count$CardCounters.ALL
+SVar:HandWin:Count$Compare Z GE20.1.0
+SVar:Z:Count$InYourHandSVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+Oracle:Your maximum hand size is twenty.\nWhenever you attack with two or more creatures, put a +1/+1 counter on Twenty-Toed Toad and draw a card.\nWhenever Twenty-Toed Toad attacks, you win the game if there are twenty or more counters on it or you have twenty or more cards in hand.
