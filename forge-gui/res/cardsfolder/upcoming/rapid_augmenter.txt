@@ -1,0 +1,13 @@
+Name:Rapid Augmenter
+ManaCost:1 U R
+Types:Creature Otter Artificer
+PT:1/3
+K:Haste
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl+basePowerEQ1 | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature you control with base power 1 enters, it gains haste until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | KW$ Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+wasNotCast+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control enters, if it wasn't cast, put a +1/+1 counter on CARDNAME and CARDNAME can't be blocked this turn.
+SVar:TrigPutCounter:DB$ PutCounter | CounterNum$ 1 | CounterType$ P1P1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever another creature you control with base power 1 enters, it gains haste until end of turn.\nWhenever another creature you control enters, if it wasn't cast, put a +1/+1 counter on Rapid Augmenter and Rapid Augmenter can't be blocked this turn.
