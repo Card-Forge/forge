@@ -14,9 +14,15 @@ public class GuiBase {
     private static int androidAPI = 0;
     private static int deviceRAM = 0;
     private static boolean usingAppDirectory = false;
+    private static ForgePreferences forgePrefs;
 
     public static IGuiBase getInterface() { return guiInterface; }
     public static void setInterface(IGuiBase i0) { guiInterface = i0; }
+    public static ForgePreferences getForgePrefs() {
+        if (forgePrefs == null)
+            forgePrefs = new ForgePreferences();
+        return forgePrefs;
+    }
 
     public static void setIsAndroid(boolean value) { isAndroidport = value; }
     public static boolean isAndroid() { return isAndroidport; }

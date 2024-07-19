@@ -123,7 +123,7 @@ public final class FModel {
         // Instantiate preferences: quest and regular
         // Preferences are initialized first so that the splash screen can be translated.
         try {
-            preferences = new ForgePreferences();
+            preferences = GuiBase.getForgePrefs();
             if (adjustPrefs != null) {
                 adjustPrefs.apply(preferences);
             }
