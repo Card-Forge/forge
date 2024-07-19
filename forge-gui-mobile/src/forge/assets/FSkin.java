@@ -102,7 +102,7 @@ public class FSkin {
                     FSkinFont.deleteCachedFiles();
                     //use default skin if valid
                     preferredDir = def;
-                    saveSkinName(GuiBase.getForgePrefs(), "Default");
+                    saveSkinName(FModel.getPreferences(), "Default");
                 } else {
                     useFallbackDir();
                 }
