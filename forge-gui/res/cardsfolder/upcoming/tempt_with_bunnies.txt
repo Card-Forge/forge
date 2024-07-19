@@ -8,7 +8,7 @@ SVar:DBDraw1:DB$ Draw | Defined$ Player.IsRemembered | SubAbility$ DBToken2
 SVar:DBToken2:DB$ Token | TokenScript$ w_1_1_rabbit | TokenAmount$ 1 | TokenOwner$ Player.IsRemembered | SubAbility$ DBCount
 SVar:DBCount:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ X/Plus.1
 SVar:DBDraw2:DB$ Draw | NumCards$ X | SubAbility$ DBToken3
-SVar:DBToken1:DB$ Token | TokenScript$ w_1_1_rabbit | TokenAmount$ X | TokenOwner$ You | SubAbility$ DBReset
+SVar:DBToken3:DB$ Token | TokenScript$ w_1_1_rabbit | TokenAmount$ X | TokenOwner$ You | SubAbility$ DBReset
 SVar:DBReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
 SVar:X:Number$0
 Oracle:Tempting offer — Draw a card and create a 1/1 white Rabbit creature token. Then each opponent may draw a card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you create a 1/1 white Rabbit creature token.
