@@ -1,4 +1,4 @@
-Name:Nighwhorl Hermit
+Name:Nightwhorl Hermit
 ManaCost:2 U
 Types:Creature Rat Rogue
 PT:1/4
