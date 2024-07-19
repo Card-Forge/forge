@@ -29,6 +29,7 @@ ScryfallCode=BLC
 21 R Agate Instigator @Quintin Gleim
 22 R Alchemist's Talent @Milivoj Ćeran
 23 R Calamity of Cinders @Xabi Gaztelua
+24 R Echoing Assault @Bram Sels
 25 R Prosperous Bandit @Yohann Schepacz
 26 R Pyreswipe Hawk @Jorge Jacinto
 27 R Bloodroot Apothecary @Alessandra Pisano
