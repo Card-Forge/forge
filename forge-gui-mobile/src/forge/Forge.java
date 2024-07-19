@@ -105,7 +105,6 @@ public class Forge implements ApplicationListener {
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
     public Assets assets;
-    private ForgePreferences forgePreferences;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
@@ -148,9 +147,7 @@ public class Forge implements ApplicationListener {
     }
 
     private ForgePreferences getForgePreferences() {
-        if (forgePreferences == null)
-            forgePreferences = new ForgePreferences();
-        return forgePreferences;
+        return GuiBase.getForgePrefs();
     }
     public static Localizer getLocalizer() {
         if (localizer == null)
