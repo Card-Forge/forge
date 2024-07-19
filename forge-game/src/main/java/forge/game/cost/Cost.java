@@ -553,6 +553,10 @@ public class Cost implements Serializable {
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
         }
 
+        if (parse.equals("Forage")) {
+            return new CostForage();
+        }
+
         // These won't show up with multiples
         if (parse.equals("Untap") || parse.equals("Q")) {
             return new CostUntap();

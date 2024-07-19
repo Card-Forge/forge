@@ -574,6 +574,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        if (!food.isEmpty() && confirmAction(cost, "Sacrifice Food")) {
+            // Sacrifice Food logic
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, food, ability);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", "Food", "%d"));
+            inp.setCancelAllowed(!mandatory);
+            inp.showAndWait();
+            if (inp.hasCancelled()) {
+                return null;
+            }
+
+            return PaymentDecision.card(inp.getSelected());
+        } // TODO add Exile Graveyard logic
         return null;
     }
 
