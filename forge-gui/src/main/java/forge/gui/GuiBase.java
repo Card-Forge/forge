@@ -1,6 +1,7 @@
 package forge.gui;
 
 import forge.gui.interfaces.IGuiBase;
+import forge.localinstance.properties.ForgePreferences;
 
 public class GuiBase {
     private static IGuiBase guiInterface;
