@@ -1,7 +1,7 @@
 Name:Alchemist's Talent
 ManaCost:3 R
 Types:Enchantment Class
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ WWhen CARDNAME enters, create two tapped Treasure tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two tapped Treasure tokens.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2 | TokenTapped$ True
 K:Class:2:1 R:AddStaticAbility$ SDoubleTreasure
 SVar:SDoubleTreasure:Mode$ Continuous | Affected$ Treasure.YouCtrl | AddAbility$ Mana | Description$ Treasures you control have "{T}, Sacrifice this artifact: Add two mana of any one color."
