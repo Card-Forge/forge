@@ -162,6 +162,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         updateAttachedCards();
     }
 
+    public final void clearAttachedCards() {
+        attachedCards.clear();
+    }
+
     public final boolean hasCardAttachments() {
         return !getAttachedCards().isEmpty();
     }
@@ -271,7 +275,6 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return tgt != null && isValid(tgt.getValidTgts(), aura.getController(), aura, sa);
     }
 
-    // Counters!
     public boolean hasCounters() {
         return !counters.isEmpty();
     }

@@ -63,6 +63,7 @@ public class CardCopyService {
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
             out.setAttachedCards(copyFrom.getAttachedCards());
             out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 
             out.setSpecialized(copyFrom.isSpecialized());
