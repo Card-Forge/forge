@@ -253,6 +253,7 @@ ScryfallCode=BLB
 245 C Fountainport Bell @Néstor Ossandón Leal
 246 U Heirloom Epic @Fiona Hsieh
 247 U Patchwork Banner @Sarah Finnigan
+248 U Short Bow @Zara Alfonso
 249 U Starforged Sword @Mark Poole
 250 U Tangle Tumbler @Victor Adame Minguez
 251 C Three Tree Mascot @Gina Matarazzo
@@ -286,6 +287,18 @@ ScryfallCode=BLB
 279 L Forest @David Robert Hovey
 280 L Forest @David Robert Hovey
 281 L Forest @David Robert Hovey
+369 L Plains @Piotr Dura
+370 L Plains @Julian Kok Joon Wen
+371 L Island @Alexander Forssberg
+372 L Island @Lorenzo Lanfranconi
+373 L Swamp @Piotr Dura
+374 L Swamp @Thomas Stoop
+375 L Mountain @Samuele Bandini
+376 L Mountain @Adam Paquette
+377 L Forest @Alayna Danner
+378 L Forest @Donato Giancola
+
+[borderless]
 282 M Season of the Burrow @Edgar Sánchez Hidalgo
 283 M Season of Weaving @Andrea Sipl
 284 M Season of Loss @Anna Pavleeva
@@ -299,6 +312,27 @@ ScryfallCode=BLB
 292 R Sunspine Lynx @Crystal Sully
 293 M Lumra, Bellow of the Woods @Allen Douglas
 294 M Ygra, Eater of All @Ilse Gort
+337 R Three Tree City @Andrew Mar
+338 R Three Tree City @Andrew Mar
+339 R Three Tree City @Andrew Mar
+340 R Three Tree City @Andrew Mar
+341 M Ral, Crackling Wit @Scott M. Fischer
+342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
+344 R Alania, Divergent Storm @Issei Murakami
+345 R Baylen, the Haymaker @Kemonomichi
+346 R Camellia, the Seedmiser @M I N A T O
+347 R Clement, the Worrywort @Issei Murakami
+348 R Finneas, Ace Archer @O-G Osahune
+349 R Gev, Scaled Scorch @Taro Yamazaki
+350 R Kastral, the Windcrested @Noki
+351 R Mabel, Heir to Cragflame @Airi Yoshihisa
+352 R Muerra, Trash Tactician @Taro Yamazaki
+353 M Ral, Crackling Wit @Atsushi Furusawa
+354 R Vren, the Relentless @MAMEZAWA
+355 R Zoraline, Cosmos Caller @Taro Yamazaki
+
+[showcase]
 295 R Dawn's Truce @Mariah Tekulve
 296 R Jackdaw Savior @Serena Malyon
 297 R Salvation Swan @Serena Malyon
@@ -341,25 +375,21 @@ ScryfallCode=BLB
 334 M The Infamous Cruelclaw @Iain McCaig
 335 R Kastral, the Windcrested @Chuck Grieb
 336 R Mabel, Heir to Cragflame @David Petersen
-337 R Three Tree City @Andrew Mar
-338 R Three Tree City @Andrew Mar
-339 R Three Tree City @Andrew Mar
-340 R Three Tree City @Andrew Mar
-341 M Ral, Crackling Wit @Scott M. Fischer
-342 M Lumra, Bellow of the Woods @Mitsuhiro Arita
-343 M Lumra, Bellow of the Woods @Mitsuhiro Arita
-344 R Alania, Divergent Storm @Issei Murakami
-345 R Baylen, the Haymaker @Kemonomichi
-346 R Camellia, the Seedmiser @M I N A T O
-347 R Clement, the Worrywort @Issei Murakami
-348 R Finneas, Ace Archer @O-G Osahune
-349 R Gev, Scaled Scorch @Taro Yamazaki
-350 R Kastral, the Windcrested @Noki
-351 R Mabel, Heir to Cragflame @Airi Yoshihisa
-352 R Muerra, Trash Tactician @Taro Yamazaki
-353 M Ral, Crackling Wit @Atsushi Furusawa
-354 R Vren, the Relentless @MAMEZAWA
-355 R Zoraline, Cosmos Caller @Taro Yamazaki
+379 M Bria, Riptide Rogue @Borja Pindado
+380 M Byrke, Long Ear of the Law @Manuel Castañón
+387 R Serra Redeemer @Joshua Raphael
+388 C Charmed Sleep @Titus Lunter
+389 R Mind Spring @Mark Zug
+390 C Thieving Otter @Jakub Kasper
+391 C Flame Lash @Viktor Titov
+392 R Colossification @Johan Grenier
+393 C Giant Growth @Dmitry Burmak
+394 C Rabid Bite @John Thacker
+395 R Sword of Vengeance @Dan Murayama Scott
+396 C Blossoming Sands @Sam Burley
+397 C Swiftwater Cliffs @Eytan Zana
+
+[extended art]
 356 R Essence Channeler @Wylie Beckert
 357 R Kitnap @Irina Nordsol
 358 R Wishing Well @Steven Belledin
@@ -373,32 +403,46 @@ ScryfallCode=BLB
 366 R Lunar Convocation @Pavel Kolomeyets
 367 R Fabled Passage @Adam Paquette
 368 R Fountainport @Leon Tukker
-369 L Plains @Piotr Dura
-370 L Plains @Julian Kok Joon Wen
-371 L Island @Alexander Forssberg
-372 L Island @Lorenzo Lanfranconi
-373 L Swamp @Piotr Dura
-374 L Swamp @Thomas Stoop
-375 L Mountain @Samuele Bandini
-376 L Mountain @Adam Paquette
-377 L Forest @Alayna Danner
-378 L Forest @Donato Giancola
-379 M Bria, Riptide Rogue @Borja Pindado
-380 M Byrke, Long Ear of the Law @Manuel Castañón
+
+[promo]
 381 U Hop to It @Eelis Kyttanen
 382 U Shoreline Looter @PINDURSKI
 383 U Fell @A. M. Sartor
 384 U Wear Down @Iris Compiet
 385 U Stormcatch Mentor @Manuel Castañón
+
+[bundle]
 386 R Thundertrap Trainer @Jesper Ejsing
-387 R Serra Redeemer @Joshua Raphael
-388 C Charmed Sleep @Titus Lunter
-389 R Mind Spring @Mark Zug
-390 C Thieving Otter @Jakub Kasper
-391 C Flame Lash @Viktor Titov
-392 R Colossification @Johan Grenier
-393 C Giant Growth @Dmitry Burmak
-394 C Rabid Bite @John Thacker
-395 R Sword of Vengeance @Dan Murayama Scott
-396 C Blossoming Sands @Sam Burley
-397 C Swiftwater Cliffs @Eytan Zana
+
+[tokens]
+b_1_1_bat_flying
+b_1_1_rat_relentless
+b_1_1_snail
+c_a_food_sac
+c_a_treasure_sac
+cragflame
+g_1_1_squirrel
+sword
+u_1_1_fish
+ur_1_1_otter_prowess
+w_0_4_wall_defender
+w_1_1_rabbit
+
+[other]
+offspring_bushy_bodyguard
+offspring_coruscation_mage
+offspring_darkstar_augur
+offspring_finch_formation
+offspring_flowerfoot_swordmaster
+offspring_intrepid_rabbit
+offspring_iridescent_vinelasher
+offspring_manifold_mouse
+offspring_pawpatch_recruit
+offspring_rust_shield_rampager
+offspring_splash_lasher
+offspring_starscape_cleric
+offspring_steampath_charger
+offspring_tender_wildguide
+offspring_thornplate_intimidator
+offspring_thundertrap_trainer
+offspring_warren_warleader
