@@ -83,6 +83,7 @@ public enum TriggerType {
     Fight(TriggerFight.class),
     FightOnce(TriggerFightOnce.class),
     FlippedCoin(TriggerFlippedCoin.class),
+    Forage(TriggerForage.class),
     Foretell(TriggerForetell.class),
     Immediate(TriggerImmediate.class),
     Investigated(TriggerInvestigated.class),

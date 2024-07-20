@@ -265,6 +265,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        CardCollection exile = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        if (!food.isEmpty()) {
+            final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+            CardCollectionView list = aic.chooseSacrificeType("Food", ability, isEffect(), 1, null);
+            return list == null ? null : PaymentDecision.card(list);
+        } else {
+            CardCollectionView chosen = ComputerUtil.chooseExileFromList(player, exile, source, 3, ability, isEffect());
+            return null == chosen ? null : PaymentDecision.card(chosen);
+        }
+    }
+
+    @Override
     public PaymentDecision visit(CostRollDice cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
