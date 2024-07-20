@@ -50,7 +50,7 @@ ScryfallCode=SPG
 36 M Notion Thief @Alix Branwyn
 37 M Desert @Lucas Graciano
 38 M Prismatic Vista @Sam Burley
-39 R Thought-Knot Seer @Antonio José Manzanedo
+39 M Thought-Knot Seer @Antonio José Manzanedo
 40 M Prismatic Ending @Dominik Mayer
 41 M Dismember @Martin de Diego Sádaba
 42 M Persist @Jarel Threat
@@ -65,3 +65,14 @@ ScryfallCode=SPG
 51 M Grief @Campbell White
 52 M Fury @Campbell White
 53 M Endurance @Campbell White
+54 M Swords to Plowshares @Izzy
+55 R Ledger Shredder @Volkan Baǵa
+56 M Rat Colony @Mark Zug
+57 M Relentless Rats @Mathias Kollros
+58 M Kindred Charge @Milivoj Ćeran
+59 M Sylvan Tutor @Scott M. Fischer
+60 M Toski, Bearer of Secrets @Lucas Graciano
+61 M Frogmite @Mike Sass
+62 M Sword of Fire and Ice @Volkan Baǵa
+63 M Secluded Courtyard @Dan Murayama Scott
+72 M Collected Company @Borja Pindado

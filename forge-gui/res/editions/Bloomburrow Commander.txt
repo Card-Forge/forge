@@ -10,6 +10,42 @@ ScryfallCode=BLC
 2 M Hazel of the Rootbloom @Anna Pavleeva
 3 M Ms. Bumbleflower @Marta Nael
 4 M Zinnia, Valley's Voice @Aldo Domínguez
+5 M Arthur, Marigold Knight @Steven Belledin
+6 M Mr. Foxglove @Anna Podedworna
+7 M The Odd Acorn Gang @Omar Rayyan
+8 M Wildsear, Scouring Maw @Campbell White
+9 R Jacked Rabbit @Scott Murphy
+10 R Murmuration @Xabi Gaztelua
+11 R Perch Protection @Edgar Sánchez Hidalgo
+12 R Steelburr Champion @Josiah "Jo" Cameron
+13 R Tempt with Bunnies @Ben Wootten
+14 R Fortune Teller's Talent @Jarel Threat
+15 R Pollywog Prodigy @Caroline Gariba
+16 R Twenty-Toed Toad @Steve Prescott
+17 R Hazel's Brewmaster @Simon Dominic
+18 R Insatiable Frugivore @Ben Wootten
+19 R Moonstone Eulogist @Yohann Schepacz
+20 R Swarmyard Massacre @Michael Phillippi
+21 R Agate Instigator @Quintin Gleim
+22 R Alchemist's Talent @Milivoj Ćeran
+23 R Calamity of Cinders @Xabi Gaztelua
+24 R Echoing Assault @Bram Sels
+25 R Prosperous Bandit @Yohann Schepacz
+26 R Pyreswipe Hawk @Jorge Jacinto
+27 R Bloodroot Apothecary @Alessandra Pisano
+28 R Brightcap Badger @Izzy
+29 R Communal Brewing @Andreia Ugrai
+30 R Evercoat Ursine @Allen Douglas
+31 R Gourmand's Talent @Fiona Hsieh
+32 R Rootcast Apprenticeship @Andreia Ugrai
+33 R Scurry of Squirrels @Izzy
+34 R Thickest in the Thicket @Michele Giorgi
+35 R Trailtracker Scout @Henry Peters
+36 R Fisher's Talent @Allen Douglas
+37 R Octomancer @Justin Gerard
+38 R Rapid Augmenter @Dave Kendall
+39 R Rolling Hamsphere @Henry Peters
+40 R Sword of the Squeak @Dave Kendall
 73 M Karn, the Great Creator @Mike Burns
 74 M Luminous Broodmoth @Alex Horley-Orlandelli
 75 M Jace, the Mind Sculptor @Justin Gerard
@@ -34,10 +70,43 @@ ScryfallCode=BLC
 94 M Liliana of the Dark Realms @Yuzushio
 95 M Chatterfang, Squirrel General @Yoshimo
 96 R Nissa, Who Shakes the World @Ryota Murayama
+97 M Elspeth, Sun's Champion @Leonardo Santanna
+98 R Domri, Anarch of Bolas @Edgar Sánchez Hidalgo
+99 M Garruk, Cursed Huntsman @Michele Giorgi
 100 M Tamiyo, Field Researcher @Justin Gerard
 101 M Bello, Bard of the Brambles @O-G Osahune
 102 M Hazel of the Rootbloom @TAPIOCA
 103 M Ms. Bumbleflower @KIYA
 104 M Zinnia, Valley's Voice @Lē Yamamura
+105 U Cut a Deal @Olena Richards
+106 U Generous Gift @Chris Seaman
+107 R Loyal Warhound @Filip Burburan
+108 U Martial Impetus @Alexander Mokhov
+109 U Swords to Plowshares @Liiga Smilshkalne
+110 U Chart a Course @Olena Richards
+111 U Rapid Hybridization @Mike Bierek
+112 U Wizard Class @Milivoj Ćeran
+113 R Saw in Half @Alexander Mokhov
+114 R Blasphemous Act @Justine Cruz
+115 R Chaos Warp @Xavier Ribeiro
+116 R Sunbird's Invocation @Jorge Jacinto
+117 R Warstorm Surge @Leonardo Santanna
+118 R Beastmaster Ascension @Justin Gerard
+119 U Farseek @Jakob Eirich
+120 U Harmonize @Danny Schwartz
+121 U Prosperous Innkeeper @Taras Susak
+122 R Rites of Flourishing @Julie Dillon
+123 R Second Harvest @Serena Malyon
+124 R Tempt with Discovery @Jakob Eirich
+125 R Casualties of War @Joshua Cairos
+126 R Maelstrom Pulse @Svetlin Velinov
+127 C Arcane Signet @Ioannis Fiore
+128 U Boros Signet @Ron Spears
+129 U Sol Ring @Volkan Baǵa
+130 C Command Tower @Zoltan Boros
+131 R Exotic Orchard @Ron Spears
+133 R Swarmyard @Volkan Baǵa
 209 M Chatterfang, Squirrel General @Jason A. Engle
+216 C Explore @Borja Pindado
+345 C Terramorphic Expanse @Alayna Danner
 356 M Flubs, the Fool @Adam Rex

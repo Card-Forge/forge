@@ -123,16 +123,16 @@ public class StaticAbilityPanharmonicon {
             }
 
             List<ZoneType> trigOrigin = null;
-            ZoneType trigDestination = null;
+            List<ZoneType> trigDestination = null;
             if (trigger.hasParam("Destination") && !trigger.getParam("Destination").equals("Any")) {
-                trigDestination = ZoneType.valueOf(trigger.getParam("Destination"));
+                trigDestination = ZoneType.listValueOf(trigger.getParam("Destination"));
             }
             if (trigger.hasParam("Origin") && !trigger.getParam("Origin").equals("Any")) {
                 trigOrigin = ZoneType.listValueOf(trigger.getParam("Origin"));
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {
