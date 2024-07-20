@@ -50,6 +50,8 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
             return new SetCodeRenderer();
         case COST:
             return new ManaCostRenderer();
+        case ATTRACTION_LIGHTS:
+            return new AttractionLightRenderer();
         case DECK_COLOR:
             return new ColorSetRenderer();
         case FAVORITE:
