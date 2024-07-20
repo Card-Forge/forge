@@ -4968,11 +4968,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean clearChangedCardTraits() {
         boolean changed = false;
-        if (changedCardTraitsByText.isEmpty()) {
+        if (!changedCardTraitsByText.isEmpty()) {
             changed = true;
         }
         changedCardTraitsByText.clear();
-        if (changedCardTraits.isEmpty()) {
+        if (!changedCardTraits.isEmpty()) {
             changed = true;
         }
         changedCardTraits.clear();

@@ -554,9 +554,11 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
-            unattachCardLeavingBattlefield(copied);
             game.addLeftBattlefieldThisTurn(lastKnownInfo);
+            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
+            unattachCardLeavingBattlefield(c);
+            copied.setEntityAttachedTo(null);
+            copied.clearAttachedCards();
             c.runLeavesPlayCommands();
         }
         if (fromGraveyard) {
