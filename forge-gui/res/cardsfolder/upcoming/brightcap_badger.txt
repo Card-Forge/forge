@@ -17,4 +17,4 @@ Name:Fungus Frolic
 ManaCost:2 G
 Types:Instant Adventure
 A:SP$ Token | TokenScript$ g_1_1_saproling | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 1/1 green Saproling creature tokens.
-Oracle:Create two 1/1 green Saproling creature tokens.
+Oracle:Create two 1/1 green Saproling creature tokens. (Then exile this card. You may cast the creature later from exile.)
