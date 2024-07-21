@@ -4,7 +4,6 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
@@ -14,24 +13,11 @@ import forge.Graphics;
 import forge.card.CardFaceSymbols;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.TextBounds;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
-    static {
-        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
-            Forge.getAssets().symbolLookup().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
-        }
-
-        Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
-        Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
-        Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
-        Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
-        Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);
-        Forge.getAssets().symbolLookup().put("M", FSkinImage.MANASHARD);
-    }
 
     public static String startColor(Color color) {
         return "<clr " + Color.rgba8888(color) + ">";

@@ -129,6 +129,18 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("protectU", FSkinImage.IMG_ABILITY_PROTECT_U);
         Forge.getAssets().manaImages().put("protectUW", FSkinImage.IMG_ABILITY_PROTECT_UW);
         Forge.getAssets().manaImages().put("protectW", FSkinImage.IMG_ABILITY_PROTECT_W);
+
+        // symbol lookup for text render
+        for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {
+            Forge.getAssets().symbolLookup().put(e.getKey(), Forge.getAssets().images().get(e.getValue()));
+        }
+
+        Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
+        Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
+        Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
+        Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
+        Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);
+        Forge.getAssets().symbolLookup().put("M", FSkinImage.MANASHARD);
     }
 
     public static void drawManaCost(Graphics g, ManaCost manaCost, float x, float y, final float imageSize) {
