@@ -613,6 +613,24 @@ public final class GameActionUtil {
                         reset = true;
                     }
                 }
+            } else if (o.startsWith("Offspring")) {
+                String[] k = o.split(":");
+                final Cost cost = new Cost(k[1], false);
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String str = "Pay for Offspring? " + cost.toSimpleString();
+
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                    tr.setSVar("Offspring", v ? "1" : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
             } else if (o.startsWith("Replicate")) {
                 Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
                 if (tr != null) {

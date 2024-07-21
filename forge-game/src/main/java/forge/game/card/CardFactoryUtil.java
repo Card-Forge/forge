@@ -1594,6 +1594,24 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Offspring")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            String costDesc = cost.toSimpleString();
+            if (!cost.isOnlyManaCost()) {
+                costDesc = "—" + costDesc;
+            }
+
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+linkedCastTrigger | CheckSVar$ Offspring | Secondary$ True " +
+                    "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            trigger.setSVar("Offspring", "0");
+
+            inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -1820,7 +1838,7 @@ public class CardFactoryUtil {
                     "ValidCard$ Card.Self+linkedCastSA | CheckSVar$ SquadAmount | Secondary$ True | " +
                     "TriggerDescription$ When this creature enters the battlefield, create that many tokens that " +
                     "are copies of it.";
-            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ SquadAmount";
+            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ SquadAmount";
 
             final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);

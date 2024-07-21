@@ -20,6 +20,7 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -1821,6 +1822,25 @@ public class CardProperty {
                 return false;
             }
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+        } else if (property.equals("linkedCastTrigger")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            List<Card> spellCast = game.getStack().getSpellsCastThisTurn();
+            int idx = spellCast.lastIndexOf(source);
+            if (idx == -1) {
+                return false;
+            }
+            boolean found = false;
+            for (KeywordInterface kw: spellCast.get(idx).getUnhiddenKeywords()) {
+                if (!Collections.disjoint(kw.getTriggers(), spellAbility.getKeyword().getTriggers())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.startsWith("kicked")) {
