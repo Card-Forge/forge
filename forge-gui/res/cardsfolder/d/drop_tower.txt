@@ -10,6 +10,6 @@ Variant:F:Lights:4 5 6
 K:Visit:TrigPump
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Flying | SubAbility$ DBAnimate | SpellDescription$ Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ DiceRolled
-SVar:DiceRolled:Mode$ RolledDie | Execute$ TrigRemove | ConditionPresent$ Card.Self+withFlying | ValidPlayer$ You | ValidResult$ EQ1 | Static$ True
+SVar:DiceRolled:Mode$ RolledDie | Execute$ TrigRemove | ValidPlayer$ You | ValidResult$ EQ1 | Static$ True
 SVar:TrigRemove:DB$ Debuff | Defined$ Self | TgtPrompt$ Select target creature | Keywords$ Flying
 Oracle:Visit — Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
