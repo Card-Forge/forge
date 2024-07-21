@@ -1,0 +1,10 @@
+Name:Pawpatch Recruit
+ManaCost:G
+Types:Creature Rabbit Warrior
+PT:2/1
+K:Offspring:2
+K:Trample
+T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Creature.YouCtrl+inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on target creature you control other than that creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+NotDefinedTriggeredTarget | TgtPrompt$ Select target creature you control other than that creature | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nTrample\nWhenever a creature you control becomes the target of a spell or ability an opponent controls, put a +1/+1 counter on target creature you control other than that creature.

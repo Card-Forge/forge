@@ -1,0 +1,9 @@
+Name:Manifold Mouse
+ManaCost:1 R
+Types:Creature Mouse Soldier
+PT:1/2
+K:Offspring:2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
+SVar:TrigPump:DB$ Pump | KWChoice$ Double Strike,Trample | ValidTgts$ Mouse.YouCtrl | TgtPrompt$ Select target Mouse you control
+SVar:PlayMain1:TRUE
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nAt the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
