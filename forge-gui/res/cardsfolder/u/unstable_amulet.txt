@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
-T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a spell from anywhere other than your hand, CARDNAME deals 1 damage to each opponent.
+T:Mode$ SpellCast | ValidCard$ Card.!wasCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a spell from anywhere other than your hand, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Opponent
 A:AB$ ChangeZone | Cost$ T PayEnergy<2> | Defined$ Imprinted | Origin$ Command | Destination$ Exile | SubAbility$ DBCleanup | StackDescription$ None | SpellDescription$ Exile the top card of your library.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | SubAbility$ DBExile

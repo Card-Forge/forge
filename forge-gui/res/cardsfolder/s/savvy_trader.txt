@@ -7,6 +7,6 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | MayPlay$ True | AffectedZone$ Exile | Description$ You may play that card for as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-S:Mode$ ReduceCost | ValidCard$ Card.wasNotCastFromYourHand | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast from anywhere other than your hand cost {1} less to cast.
+S:Mode$ ReduceCost | ValidCard$ Card.!wasCastFromYourHand | Activator$ You | Type$ Spell | Amount$ 1 | Description$ Spells you cast from anywhere other than your hand cost {1} less to cast.
 DeckHas:Ability$Graveyard
 Oracle:When Savvy Trader enters the battlefield, exile target permanent card from your graveyard. You may play that card for as long as it remains exiled.\nSpells you cast from anywhere other than your hand cost {1} less to cast.

@@ -235,6 +235,7 @@ public final class GameActionUtil {
                         stackCopy = CardCopyService.getLKICopy(source);
                     }
                     stackCopy.setLastKnownZone(game.getStackZone());
+                    stackCopy.setCastFrom(oldZone);
                     lkicheck = true;
 
                     stackCopy.clearStaticChangedCardKeywords(false);
