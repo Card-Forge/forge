@@ -271,6 +271,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
+            game.getAction().checkStaticAbilities();
+
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 addAbilityActivatedThisTurn(sp, source);
@@ -605,6 +608,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
+        game.getAction().checkStaticAbilities();
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)

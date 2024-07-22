@@ -548,10 +548,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                 AbilityKey.mapFromCard(gameCard), false);
                     }
                     if (sa.hasParam("Adapt")) {
-                        game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard),
-                                false);
+                        game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                     }
-
                     if (sa.isKeyword(Keyword.MENTOR)) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                         runParams.put(AbilityKey.Source, sa.getHostCard());
