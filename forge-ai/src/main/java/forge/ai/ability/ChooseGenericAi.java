@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ChooseGenericEffectAi extends SpellAbilityAi {
+public class ChooseGenericAi extends SpellAbilityAi {
 
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
