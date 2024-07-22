@@ -138,6 +138,10 @@ public class CardProperty {
             if (source.hasChosenCard(card)) {
                 return false;
             }
+        } else if (property.startsWith("ChosenMode")) {
+            if (!card.getChosenMode().equals(property.substring(10))) {
+                return false;
+            }
         } else if (property.equals("ChosenSector")) {
             if (!source.getChosenSector().equals(card.getSector())) {
                 return false;

@@ -3939,8 +3939,8 @@ public class CardFactoryUtil {
                     descAdded = true;
                 }
             }
-            if (mapParams.containsKey("AddReplacementEffects")) {
-                for (String s : mapParams.get("AddReplacementEffects").split(" & ")) {
+            if (mapParams.containsKey("AddReplacementEffect")) {
+                for (String s : mapParams.get("AddReplacementEffect").split(" & ")) {
                     if (descAdded) {
                         desc.append("\r\n");
                     }
