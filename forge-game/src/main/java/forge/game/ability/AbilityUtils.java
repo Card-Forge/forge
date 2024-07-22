@@ -1665,6 +1665,10 @@ public class AbilityUtils {
                     return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
+                if (sq[0].startsWith("Freerunning")) {
+                    return doXMath(calculateAmount(c, sq[sa.isFreerunning() ? 1 : 2], ctb), expr, c, ctb);
+                }
+
                 // Count$Madness.<True>.<False>
                 if (sq[0].startsWith("Madness")) {
                     return doXMath(calculateAmount(c, sq[sa.isMadness() ? 1 : 2], ctb), expr, c, ctb);
@@ -2210,10 +2214,10 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("Initiative")) {
-            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1: 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("StartingPlayer")) {
-            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("Blessing")) {
             return doXMath(calculateAmount(c, sq[player.hasBlessing() ? 1 : 2], ctb), expr, c, ctb);

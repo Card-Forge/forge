@@ -5,7 +5,7 @@ T:Mode$ Phase | TriggerZones$ Battlefield | Phase$ End of Turn | ValidPlayer$ Yo
 SVar:TrigPeek:DB$ PeekAndReveal | Defined$ You | NoReveal$ True | PeekAmount$ 7 | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature | Optional$ True | RememberSacrificed$ True | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card | ChangeValid$ Creature.cmcLEX | ChangeNum$ 1 | SubAbility$ DBDigBis | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True
-SVar:DBDigBis:DB$ Dig | DigNum$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | ChangeValid$ Card.cmcLEX | ChangeNum$ 0 | SubAbility$ DBCleanup | Optional$ True | DestinationZone$ Library | RestRandomOrder$ True 
+SVar:DBDigBis:DB$ Dig | DigNum$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | ChangeValid$ Card.cmcLEX | ChangeNum$ 0 | SubAbility$ DBCleanup | Optional$ True | DestinationZone$ Library | RestRandomOrder$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost/Plus.1
 DeckHas:Ability$Sacrifice

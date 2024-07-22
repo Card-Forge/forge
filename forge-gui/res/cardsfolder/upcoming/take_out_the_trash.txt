@@ -1,0 +1,7 @@
+Name:Take Out the Trash
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker. | NumDmg$ 3 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 3 damage to target creature or planeswalker. If you control a Raccoon, you may discard a card. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionPresent$ Raccoon.YouCtrl | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You
+DeckHints:Type$Raccoon
+Oracle:Take Out the Trash deals 3 damage to target creature or planeswalker. If you control a Raccoon, you may discard a card. If you do, draw a card.

@@ -1,6 +1,6 @@
 Name:Bismuth Mindrender
 ManaCost:3 B
-Types:Creature Eldrazi  
+Types:Creature Eldrazi
 PT:4/3
 K:Devoid
 K:Menace

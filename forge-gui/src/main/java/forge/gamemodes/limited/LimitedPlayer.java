@@ -48,13 +48,14 @@ public class LimitedPlayer {
     private static final int SpyNextCardDrafted = 1 << 15;
     private static final int CanalDredgerLastPick = 1 << 16;
     private static final int ArchdemonOfPalianoCurse = 1 << 17;
+    private static final int SmugglerCaptainActive = 1 << 18;
 
     private int playerFlags = 0;
 
     private final List<PaperCard> faceUp = Lists.newArrayList();
     private final List<PaperCard> revealed = Lists.newArrayList();
     private final Map<String, List<String>> noted = new HashMap<>();
-    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder", "Aether Searcher");
+    private final HashSet<String> semicolonDelimiter = Sets.newHashSet("Noble Banneret", "Cogwork Grinder", "Aether Searcher", "Smuggler Captain");
 
     IBoosterDraft draft;
 
@@ -165,6 +166,15 @@ public class LimitedPlayer {
             playerFlags &= ~SearcherNoteNext;
             List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
             note.add(String.valueOf(bestPick.getName()));
+        }
+
+        if ((playerFlags & SmugglerCaptainActive) == SmugglerCaptainActive) {
+            if (revealWithSmuggler(bestPick)) {
+                addLog(name() + " revealed " + bestPick.getName() + " for Smuggler Captain.");
+                playerFlags &= ~SmugglerCaptainActive;
+                List<String> note = noted.computeIfAbsent("Smuggler Captain", k -> Lists.newArrayList());
+                note.add(String.valueOf(bestPick.getName()));
+            }
         }
 
         if ((playerFlags & WhispergearBoosterPeek) == WhispergearBoosterPeek) {
@@ -306,9 +316,9 @@ public class LimitedPlayer {
                     addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
-                } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card’s name. Then that player reveals the drafted card.")) {
+                } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.")) {
                     chooseFrom.setAwaitingGuess(this, handleSpirePhantasm(chooseFrom));
-                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it’s drafted this draft round.)")) {
+                } else if (Iterables.contains(draftActions, "After you draft CARDNAME, you may add a booster pack to the draft. (Your next pick is from that booster pack. Pass it to the next player and it's drafted this draft round.)")) {
                     addSingleBoosterPack();
                 }
 
@@ -322,14 +332,16 @@ public class LimitedPlayer {
                 showRevealedCard(bestPick);
             }
 
-            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn’t in your card pool.)") &&
+            if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face up. (It isn't in your card pool.)") &&
                     bestPick.getName().equals("Animus of Predation")) {
                 playerFlags |= AnimusRemoveFromPool;
-            } else if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face down. (Those cards aren’t in your card pool.)") &&
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may remove it from the draft face down. (Those cards aren't in your card pool.)") &&
                     bestPick.getName().equals("Cogwork Grinder")) {
                 playerFlags |= GrinderRemoveFromPool;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its name, then turn CARDNAME face down.")) {
                 playerFlags |= NobleBanneretActive;
+            } else if (Iterables.contains(draftActions, "As you draft a card, you may reveal it, note its name, then turn CARDNAME face down.")) {
+                playerFlags |= SmugglerCaptainActive;
             } else if (Iterables.contains(draftActions, "As you draft a creature card, you may reveal it, note its creature types, then turn CARDNAME face down.")) {
                 playerFlags |= PalianoVanguardActive;
             } else if (Iterables.contains(draftActions, "During the draft, you may turn CARDNAME face down. If you do, look at any unopened booster pack in the draft or any booster pack not being looked at by another player.")) {
@@ -341,11 +353,11 @@ public class LimitedPlayer {
                 playerFlags |= CogworkLibrarianExtraDraft;
             } else if (Iterables.contains(draftActions, "As you draft a card, you may draft an additional card from that booster pack. If you do, turn CARDNAME face down, then pass the next booster pack without drafting a card from it. (You may look at that booster pack.)")) {
                 playerFlags |= LeovoldsOperativeExtraDraft;
-            } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can’t draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
+            } else if (Iterables.contains(draftActions, "Instead of drafting a card from a booster pack, you may draft each card in that booster pack, one at a time. If you do, turn CARDNAME face down and you can't draft cards for the rest of this draft round. (You may look at booster packs passed to you.)")) {
                 playerFlags |= AgentAcquisitionsCanDraftAll;
             } else if (Iterables.contains(draftActions, "Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.")) {
                 playerFlags |= CanalDredgerLastPick;
-            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can’t look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
+            } else if (Iterables.contains(draftActions, "As long as CARDNAME is face up during the draft, you can't look at booster packs and must draft cards at random. After you draft three cards this way, turn CARDNAME face down. (You may look at cards as you draft them.)")) {
                 playerFlags |= ArchdemonOfPalianoCurse;
                 archdemonFavors.add(3);
             } else if (Iterables.contains(draftActions, "Immediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.")) {
@@ -427,6 +439,10 @@ public class LimitedPlayer {
 
     protected boolean revealWithVanguard(PaperCard bestPick) {
         return SGuiChoose.one("Reveal this " + bestPick + " for Paliano Vanguard?", Lists.newArrayList("Yes", "No")).equals("Yes");
+    }
+
+    protected boolean revealWithSmuggler(PaperCard bestPick) {
+        return SGuiChoose.one("Reveal this " + bestPick + " for Smuggler Captain?", Lists.newArrayList("Yes", "No")).equals("Yes");
     }
 
     public String name() {

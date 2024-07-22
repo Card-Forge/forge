@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 S:Mode$ CantAttack | ValidCard$ Creature.powerGTX | Description$ Creatures with power greater than the number of cards in your hand can't attack.
 SVar:X:Count$InYourHand
-#NOTE: The AI will not play around this effect, so it's only good in properly designed decks that circumvent the necessity to worry about the detrimental effect.
+# NOTE: The AI will not play around this effect, so it's only good in properly designed decks that circumvent the necessity to worry about the detrimental effect.
 AI:RemoveDeck:Random
 SVar:PreferredHandSize:0
 Oracle:Creatures with power greater than the number of cards in your hand can't attack.

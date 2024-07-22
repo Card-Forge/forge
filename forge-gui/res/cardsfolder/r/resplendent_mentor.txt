@@ -3,6 +3,6 @@ ManaCost:4 W
 Types:Creature Kithkin Cleric
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.White+YouCtrl | AddAbility$ GainLife | Description$ White creatures you control have "{T}: You gain 1 life."
-SVar:GainLife:AB$GainLife | Cost$ T | LifeAmount$ 1 | Defined$ You | SpellDescription$ You gain 1 life.
+SVar:GainLife:AB$ GainLife | Cost$ T | LifeAmount$ 1 | Defined$ You | SpellDescription$ You gain 1 life.
 AI:RemoveDeck:Random
 Oracle:White creatures you control have "{T}: You gain 1 life."

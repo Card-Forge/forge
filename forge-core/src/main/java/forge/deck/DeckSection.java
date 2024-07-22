@@ -116,7 +116,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return (t.isCreature() && t.hasSubtype("Avatar")) || t.isVanguard();
+                return t.isVanguard();
             }
         };
 

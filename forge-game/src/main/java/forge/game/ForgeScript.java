@@ -137,12 +137,6 @@ public class ForgeScript {
                 }
             }
             return found;
-        } else if (property.startsWith("HasSubtype")) {
-            final String subType = property.substring(11);
-            return cardState.getTypeWithChanges().hasSubtype(subType);
-        } else if (property.startsWith("HasNoSubtype")) {
-            final String subType = property.substring(13);
-            return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
                 if (sa.isActivatedAbility() && sa.getPayCosts().hasTapCost()) {
@@ -243,8 +237,6 @@ public class ForgeScript {
             return sa.isKicked();
         } else if (property.equals("Loyalty")) {
             return sa.isPwAbility();
-        } else if (property.equals("nonLoyalty")) {
-            return !sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {

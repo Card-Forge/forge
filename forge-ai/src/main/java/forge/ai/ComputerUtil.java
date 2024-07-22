@@ -708,6 +708,11 @@ public class ComputerUtil {
             typeList = new CardCollection(ai.getCardsIn(cost.from));
         }
         typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
+
+        return chooseExileFromList(ai, typeList, activate, amount, sa, effect);
+    }
+
+    public static CardCollection chooseExileFromList(final Player ai, CardCollection typeList, final Card activate, final int amount, SpellAbility sa, final boolean effect) {
         typeList = CardLists.filter(typeList, CardPredicates.canExiledBy(sa, effect));
 
         // don't exile the card we're pumping

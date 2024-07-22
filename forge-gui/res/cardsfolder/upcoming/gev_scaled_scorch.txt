@@ -1,0 +1,10 @@
+Name:Gev, Scaled Scorch
+ManaCost:B R
+Types:Legendary Creature Lizard Mercenary
+PT:3/2
+K:Ward:PayLife<2>
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl+Other
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ PlayerCountRegisteredOpponents$HasPropertyLostLifeThisTurn | SpellDescription$ Other creatures you control enter with an additional +1/+1 counter on them for each opponent who lost life this turn.
+T:Mode$ SpellCast | ValidCard$ Lizard | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a Lizard spell, CARDNAME deals 1 damage to target opponent.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1
+Oracle:Ward—Pay 2 life.\nOther creatures you control enter with an additional +1/+1 counter on them for each opponent who lost life this turn.\nWhenever you cast a Lizard spell, Gev, Scaled Scorch deals 1 damage to target opponent.

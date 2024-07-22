@@ -244,11 +244,11 @@ public class GameAction {
                 game.addChangeZoneLKIInfo(lastKnownInfo);
             }
 
-            // CR 707.12 casting of a card copy, don't copy it again
+            copied = new CardCopyService(c).copyCard(false);
+
+            // CR 707.12 casting of a card copy
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
-                copied = c;
-            } else {
-                copied = new CardCopyService(c).copyCard(false);
+                copied.setCopiedPermanent(c.getCopiedPermanent());
             }
 
             copied.setGameTimestamp(c.getGameTimestamp());
@@ -490,6 +490,18 @@ public class GameAction {
                     ki.setHostCard(copied);
                     copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), 0, true);
                 }
+                // TODO hot fix for non-intrinsic offspring
+                Multimap<Long, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
+                for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
+                    if (!kw.isIntrinsic()) {
+                        addKw.put(kw.getStaticId(), kw);
+                    }
+                }
+                if (!addKw.isEmpty()) {
+                    for (Map.Entry<Long, Collection<KeywordInterface>> e : addKw.asMap().entrySet()) {
+                        copied.addChangedCardKeywordsInternal(e.getValue(), null, false, copied.getGameTimestamp(), e.getKey(), true);
+                    }
+                }
 
                 // 607.2q linked ability can find cards exiled as cost while it was a spell
                 copied.addExiledCards(c.getExiledCards());
@@ -554,9 +566,11 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
-            unattachCardLeavingBattlefield(copied);
             game.addLeftBattlefieldThisTurn(lastKnownInfo);
+            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
+            unattachCardLeavingBattlefield(c);
+            copied.setEntityAttachedTo(null);
+            copied.clearAttachedCards();
             c.runLeavesPlayCommands();
         }
         if (fromGraveyard) {
@@ -613,10 +627,6 @@ public class GameAction {
         }
 
         game.getTriggerHandler().clearActiveTriggers(copied, null);
-        // register all LTB trigger from last state battlefield
-        for (Card lki : lastBattlefield) {
-            game.getTriggerHandler().registerActiveLTBTrigger(lki);
-        }
         game.getTriggerHandler().registerActiveTrigger(copied, false);
 
         // play the change zone sound
@@ -1438,6 +1448,8 @@ public class GameAction {
             }
             setHoldCheckingStaticAbilities(false);
 
+            table.triggerChangesZoneAll(game, null);
+
             // important to collect first otherwise if a static fires it will mess up registered ones from LKI
             game.getTriggerHandler().collectTriggerForWaiting();
             if (game.getTriggerHandler().runWaitingTriggers()) {
@@ -1447,8 +1459,6 @@ public class GameAction {
             if (game.getCombat() != null) {
                 game.getCombat().removeAbsentCombatants();
             }
-
-            table.triggerChangesZoneAll(game, null);
 
             for (final Card c : cardsToUpdateLKI) {
                 game.updateLastStateForCard(c);

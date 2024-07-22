@@ -1,4 +1,4 @@
-Name:Vona de ledo, the Antifex
+Name:Vona de Iedo, the Antifex
 ManaCost:2 W B B
 Types:Legendary Creature Vampire Cleric Knight
 PT:4/2
@@ -10,4 +10,4 @@ SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ SpendAnyMana
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyType | Description$ Mana of any type can be spent to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Discard
-Oracle:Menace\nWhen Vona de ledo enters the battlefield, destroy target nonland, nontoken permanent an opponent controls. Then you may discard a card. If you do, conjure a duplicate of that permanent into your hand, and the duplicate perpetually gains "Mana of any type can be spent to cast this spell."
+Oracle:Menace\nWhen Vona de Iedo enters the battlefield, destroy target nonland, nontoken permanent an opponent controls. Then you may discard a card. If you do, conjure a duplicate of that permanent into your hand, and the duplicate perpetually gains "Mana of any type can be spent to cast this spell."

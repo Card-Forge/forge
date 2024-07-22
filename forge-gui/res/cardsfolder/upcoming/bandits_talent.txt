@@ -1,0 +1,14 @@
+Name:Bandit's Talent
+ManaCost:1 B
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each opponent discards two cards unless they discard a nonland card.
+SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Card.nonLand
+K:Class:2:B:AddTrigger$ TriggerUpkeep
+SVar:TriggerUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | CheckSVar$ X | SVarCompare$ LE1 | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2
+K:Class:3:3 B:AddTrigger$ TriggerDraw
+SVar:TriggerDraw:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card for each opponent who has one or fewer cards in hand.
+SVar:TrigDraw:DB$ Draw | NumCards$ Y | Defined$ TriggeredPlayer
+SVar:X:Count$ValidHand Card.ActivePlayerCtrl
+SVar:Y:PlayerCountOpponents$HasPropertyHasCardsInHand_Card_LE1
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Bandit's Talent enters, each opponent discards two cards unless they discard a nonland card.\n{B}: Level 2\nAt the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 2 life.\n{3}{B}: Level 3\nAt the beginning of your draw step, draw an additional card for each opponent who has one or fewer cards in hand.

@@ -1,5 +1,5 @@
 Name:Trickster's Elk
-ManaCost:1 G
+ManaCost:2 G
 Types:Enchantment Creature Elk
 PT:3/3
 K:Bestow:1 G

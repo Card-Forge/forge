@@ -12,6 +12,7 @@ public enum AlternativeCost {
     Flashback,
     Foretold,
     Freerunning,
+    Impending,
     Madness,
     MTMtE, // More Than Meets the Eye (Transformers Universes Beyond)
     Mutate,

@@ -1,5 +1,4 @@
 Name:Forest
 ManaCost:no cost
 Types:Basic Land Forest
-SVar:PicCount:4
 Oracle:({T}: Add {G}.)

@@ -38,7 +38,7 @@ jdk_version() {
 }
 v="$(jdk_version)"
 
-SHAREDPARAMS='-Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$'
+SHAREDPARAMS='-Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$ '"$@"
 cd $(dirname "${0}")
 
 if [[ $v -ge 17 ]]

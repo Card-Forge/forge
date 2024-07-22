@@ -149,7 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = ImageKeys.getTokenKey(
             TextUtil.fastReplace(
                 TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " - ", "_"),
+                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
                     " ", "_").toLowerCase());
         } else { // use host image

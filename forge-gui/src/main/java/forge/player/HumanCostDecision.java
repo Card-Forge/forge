@@ -255,11 +255,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             fromTopGrave = true;
         }
         boolean totalCMC = false;
+        boolean totalCMCgreater = false;
         String totalM = "";
         if (type.contains("+withTotalCMCEQ")) {
             totalCMC = true;
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
+        }
+        if (type.contains("+withTotalCMCGE")) {
+            totalCMC = true;
+            totalCMCgreater = true;
+            totalM = type.split("withTotalCMCGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
         }
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
@@ -298,7 +305,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) != total) {
+            int sum = CardLists.getTotalCMC(inp.getSelected());
+            if (inp.hasCancelled() || (sum != total && !totalCMCgreater) || (sum < total && totalCMCgreater)) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -562,6 +570,36 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         return PaymentDecision.number(c);
+    }
+
+    @Override
+    public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        CardCollection exile = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        if (!food.isEmpty() && confirmAction(cost, "Sacrifice Food")) {
+            // Sacrifice Food logic
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, food, ability);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", "Food", "%d"));
+            inp.setCancelAllowed(!mandatory);
+            inp.showAndWait();
+            if (inp.hasCancelled()) {
+                return null;
+            }
+
+            return PaymentDecision.card(inp.getSelected());
+        } if (exile.size() >= 3) {
+            // Sacrifice Food logic
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 3, 3, exile, ability);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectToExile", 3));
+            inp.setCancelAllowed(!mandatory);
+            inp.showAndWait();
+            if (inp.hasCancelled()) {
+                return null;
+            }
+
+            return PaymentDecision.card(inp.getSelected());
+        }
+        return null;
     }
 
     @Override

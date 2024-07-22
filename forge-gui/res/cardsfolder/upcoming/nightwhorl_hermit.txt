@@ -1,0 +1,8 @@
+Name:Nightwhorl Hermit
+ManaCost:2 U
+Types:Creature Rat Rogue
+PT:1/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +1/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | Condition$ Threshold
+Oracle:Vigilance\nThreshold — As long as seven or more cards are in your graveyard, Nightwhorl Hermit gets +1/+0 and can't be blocked.

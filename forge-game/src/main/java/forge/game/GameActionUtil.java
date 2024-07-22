@@ -235,6 +235,7 @@ public final class GameActionUtil {
                         stackCopy = CardCopyService.getLKICopy(source);
                     }
                     stackCopy.setLastKnownZone(game.getStackZone());
+                    stackCopy.setCastFrom(oldZone);
                     lkicheck = true;
 
                     stackCopy.clearStaticChangedCardKeywords(false);
@@ -604,6 +605,24 @@ public final class GameActionUtil {
 
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
                     tr.setSVar("Conspire", v ? "1" : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
+            } else if (o.startsWith("Offspring")) {
+                String[] k = o.split(":");
+                final Cost cost = new Cost(k[1], false);
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String str = "Pay for Offspring? " + cost.toSimpleString();
+
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                    tr.setSVar("Offspring", v ? "1" : "0");
 
                     if (v) {
                         if (result == null) {

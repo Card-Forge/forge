@@ -2,7 +2,7 @@
 Code=FDN
 Date=2024-11-15
 Name=Foundations
-Type=Collector_Edition
+Type=Core
 ScryfallCode=FDN
 
 [cards]

@@ -15,6 +15,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantPhase;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
@@ -68,9 +69,22 @@ public class PhasesEffect extends SpellAbilityEffect {
 
         CardCollection phasedOut = new CardCollection();
         if (phaseInOrOut) { // Time and Tide and Oubliette
+            CardCollection toPhase = new CardCollection();
             for (final Card tgtC : tgtCards) {
+                if (tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseIn(tgtC)) {
+                    continue;
+                }
+                if (!tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
+                    continue;
+                }
+                toPhase.add(tgtC);
+            }
+            for (final Card tgtC : toPhase) {
                 tgtC.phase(false);
-                if (!tgtC.isPhasedOut()) {
+                if (tgtC.isPhasedOut()) {
+                    phasedOut.add(tgtC);
+                    tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                } else {
                     // won't trigger tap or untap triggers when phase in
                     if (sa.hasParam("Tapped")) {
                         tgtC.setTapped(true);
@@ -78,14 +92,11 @@ public class PhasesEffect extends SpellAbilityEffect {
                         tgtC.setTapped(false);
                     }
                     tgtC.setWontPhaseInNormal(false);
-                } else {
-                    phasedOut.add(tgtC);
-                    tgtC.setWontPhaseInNormal(wontPhaseInNormal);
                 }
             }
         } else { // just phase out
             for (final Card tgtC : tgtCards) {
-                if (!tgtC.isPhasedOut()) {
+                if (!tgtC.isPhasedOut() && !StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
                     tgtC.phase(false);
                     if (tgtC.isPhasedOut()) {
                         if (sa.hasParam("RememberAffected")) {

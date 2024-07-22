@@ -141,7 +141,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
-        REBALANCED("rebalanced");
+        REBALANCED("rebalanced"),
+        ETERNAL("eternal");
 
         private final String name;
 
@@ -383,6 +384,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<CardInSet> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<CardInSet> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
+    public List<CardInSet> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
     public List<CardInSet> getAllCardsInSet() {
         return cardsInSet;
     }

@@ -1,4 +1,4 @@
-Name:Necrodominance 
+Name:Necrodominance
 ManaCost:B B B
 Types:Legendary Enchantment
 R:Event$ BeginPhase | ActiveZones$ Battlefield | ValidPlayer$ You | Phase$ Draw | Skip$ True | Description$ Skip your draw step.

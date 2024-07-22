@@ -1,0 +1,7 @@
+Name:Ravine Raider
+ManaCost:B
+Types:Creature Lizard Rogue
+PT:1/1
+K:Menace
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\n{1}{B}: Ravine Raider gets +1/+1 until end of turn.

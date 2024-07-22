@@ -2232,7 +2232,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Madness:")|| keyword.startsWith("Recover")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
                         || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")
-                        || keyword.startsWith("Level up") || keyword.startsWith("Plot")) {
+                        || keyword.startsWith("Level up") || keyword.startsWith("Plot")
+                        || keyword.startsWith("Offspring")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2494,7 +2495,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Bestow") || keyword.startsWith("Surge")
                         || keyword.startsWith("Transmute") || keyword.startsWith("Suspend")
                         || keyword.startsWith("Dash") || keyword.startsWith("Disturb")
-                        || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity")
+                        || keyword.equals("Undaunted") || keyword.startsWith("Monstrosity") || keyword.startsWith("Impending")
                         || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
                         || keyword.startsWith("Champion") || keyword.startsWith("Freerunning") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
@@ -4968,11 +4969,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public boolean clearChangedCardTraits() {
         boolean changed = false;
-        if (changedCardTraitsByText.isEmpty()) {
+        if (!changedCardTraitsByText.isEmpty()) {
             changed = true;
         }
         changedCardTraitsByText.clear();
-        if (changedCardTraits.isEmpty()) {
+        if (!changedCardTraits.isEmpty()) {
             changed = true;
         }
         changedCardTraits.clear();
@@ -5125,7 +5126,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void addChangedCardKeywordsInternal(
-        final List<KeywordInterface> keywords, final List<KeywordInterface> removeKeywords,
+        final Collection<KeywordInterface> keywords, final Collection<KeywordInterface> removeKeywords,
         final boolean removeAllKeywords,
         final long timestamp, final long staticId, final boolean updateView) {
         final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
@@ -5298,6 +5299,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 KeywordInterface newKw = Keyword.getInstance(newtxt);
                 addKeywords.add(newKw);
                 removeKeywords.add(kw);
+            } else if (oldtxt.startsWith("Class")) {
+                for (StaticAbility trait : kw.getStaticAbilities()) {
+                    trait.changeText();
+                }
+            } else if (oldtxt.startsWith("Chapter")) {
+                for (Trigger trait : kw.getTriggers()) {
+                    trait.changeText();
+                }
             }
         }
 
@@ -5570,6 +5579,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // CR 702.26g
         if (!getAllAttachedCards().isEmpty()) {
             for (final Card eq : getAllAttachedCards()) {
+                if (!eq.isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(eq)) {
+                    continue;
+                }
                 if (eq.isPhasedOut() == phasingIn) {
                     eq.phase(fromUntapStep, false);
                 }
@@ -5586,14 +5598,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (isPhasedOut() && StaticAbilityCantPhase.cantPhaseIn(this)) {
-            return false;
-        }
-
-        if (!isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(this)) {
-            return false;
-        }
-
         if (isPhasedOut() && fromUntapStep && wontPhaseInNormal) {
             return false;
         }

@@ -257,6 +257,7 @@ Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons
+Skunk:Skunks
 Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
@@ -302,6 +303,7 @@ Volver:Volvers
 Wall:Walls
 Warlock:Warlocks
 Warrior:Warriors
+Weasel:Weasels
 Weird:Weirds
 Werewolf:Werewolves
 Whale:Whales

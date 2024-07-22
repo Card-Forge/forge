@@ -74,11 +74,11 @@ public class TriggerChangesZoneAll extends Trigger {
     }
 
     private CardCollection filterCards(CardZoneTable table) {
-        ZoneType destination = null;
+        List<ZoneType> destination = null;
         List<ZoneType> origin = null;
 
         if (hasParam("Destination") && !getParam("Destination").equals("Any")) {
-            destination = ZoneType.valueOf(getParam("Destination"));
+            destination = ZoneType.listValueOf(getParam("Destination"));
         }
 
         if (hasParam("Origin") && !getParam("Origin").equals("Any")) {

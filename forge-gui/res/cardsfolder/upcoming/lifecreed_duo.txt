@@ -1,0 +1,8 @@
+Name:Lifecreed Duo
+ManaCost:1 W
+Types:Creature Bat Bird
+PT:1/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Flying\nWhenever another creature you control enters, you gain 1 life.

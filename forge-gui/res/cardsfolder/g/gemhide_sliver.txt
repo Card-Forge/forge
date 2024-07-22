@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ AnyMana | Description$ All Slivers have "{T}: Add one mana of any color."
-SVar:AnyMana:AB$Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
 SVar:PlayMain1:TRUE
 Oracle:All Slivers have "{T}: Add one mana of any color."

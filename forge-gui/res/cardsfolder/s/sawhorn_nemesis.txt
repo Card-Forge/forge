@@ -1,6 +1,6 @@
 Name:Sawhorn Nemesis
 ManaCost:3 R
-Types:Creature Dinosaur  
+Types:Creature Dinosaur
 PT:2/4
 K:ETBReplacement:Other:ChooseP
 SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose a player.

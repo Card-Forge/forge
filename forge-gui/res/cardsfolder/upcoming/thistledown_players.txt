@@ -1,0 +1,8 @@
+Name:Thistledown Players
+ManaCost:2 W
+Types:Creature Mouse Bard
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, untap target nonland permanent.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Thistledown Players attacks, untap target nonland permanent.

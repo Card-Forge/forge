@@ -5,8 +5,6 @@ package forge.game.card;
 
 import java.util.Map;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -34,8 +32,8 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
 
     public CardZoneTable(CardCollectionView lastStateBattlefield, CardCollectionView lastStateGraveyard) {
-        setLastStateBattlefield(ObjectUtils.firstNonNull(lastStateBattlefield, CardCollection.EMPTY));
-        setLastStateGraveyard(ObjectUtils.firstNonNull(lastStateGraveyard, CardCollection.EMPTY));
+        setLastStateBattlefield(lastStateBattlefield);
+        setLastStateGraveyard(lastStateGraveyard);
     }
 
     public CardZoneTable(CardZoneTable cardZoneTable) {
@@ -64,10 +62,10 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
     }
     public void setLastStateBattlefield(CardCollectionView lastState) {
         // store it in a new object, it might be from Game which can also refresh itself
-        this.lastStateBattlefield = new CardCollection(lastState);
+        lastStateBattlefield = lastState == null ? CardCollection.EMPTY : new CardCollection(lastState);
     }
     public void setLastStateGraveyard(CardCollectionView lastState) {
-        this.lastStateGraveyard = new CardCollection(lastState);
+        lastStateGraveyard = lastState == null ? CardCollection.EMPTY : new CardCollection(lastState);
     }
 
     /**
@@ -102,6 +100,14 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             // will be handled by original "cause" instead
             return;
         }
+        // this should still refresh for empty battlefield
+        if (lastStateBattlefield != CardCollection.EMPTY) {
+            game.getTriggerHandler().resetActiveTriggers(false);
+            // register all LTB trigger from last state battlefield
+            for (Card lki : lastStateBattlefield) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
+        }
         if (!isEmpty()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
@@ -124,9 +130,9 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
     }
 
-    public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
+    public CardCollection filterCards(Iterable<ZoneType> origin, Iterable<ZoneType> destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null && !containsColumn(destination)) {
+        if (destination != null && !Iterables.any(destination, d -> columnKeySet().contains(d))) {
             return allCards;
         }
         if (origin != null) {
@@ -141,9 +147,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                         lkiLookup = lastStateGraveyard;
                     }
                     if (destination != null) {
-                        if (row(z).containsKey(destination)) {
-                            for (Card c : row(z).get(destination)) {
-                                allCards.add(lkiLookup.get(c));
+                        for (ZoneType zt : destination) {
+                            if (row(z).containsKey(zt)) {
+                                for (Card c : row(z).get(zt)) {
+                                    allCards.add(lkiLookup.get(c));
+                                }
                             }
                         }
                     } else {
@@ -156,8 +164,10 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                 }
             }
         } else if (destination != null) {
-            for (CardCollection c : column(destination).values()) {
-                allCards.addAll(c);
+            for (ZoneType zt : destination) {
+                for (CardCollection c : column(zt).values()) {
+                    allCards.addAll(c);
+                }
             }
         } else {
             for (CardCollection c : values()) {

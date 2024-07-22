@@ -3,5 +3,5 @@ ManaCost:2 U U
 Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Tap | Description$ All Slivers have "{T}: Tap target permanent."
-SVar:Tap:AB$Tap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent. | SpellDescription$ Tap target permanent.
+SVar:Tap:AB$ Tap | Cost$ T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent. | SpellDescription$ Tap target permanent.
 Oracle:All Slivers have "{T}: Tap target permanent."

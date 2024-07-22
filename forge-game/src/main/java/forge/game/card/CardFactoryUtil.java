@@ -1427,6 +1427,16 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(abStr, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Impending")) {
+            // Remove Time counter trigger
+            final String endTrig = "Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
+                    " | Secondary$ True | TriggerDescription$ At the beginning of your end step, remove a time counter from it.";
+
+            final String remove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
+            final Trigger parsedEndTrig = TriggerHandler.parseTrigger(endTrig, card, intrinsic);
+            parsedEndTrig.setOverridingAbility(AbilityFactory.getAbility(remove, card));
+
+            inst.addTrigger(parsedEndTrig);
         } else if (keyword.equals("Living Weapon")) {
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
@@ -1584,6 +1594,24 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Offspring")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            String costDesc = cost.toSimpleString();
+            if (!cost.isOnlyManaCost()) {
+                costDesc = "—" + costDesc;
+            }
+
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+linkedCastTrigger | CheckSVar$ Offspring | Secondary$ True " +
+                    "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            trigger.setSVar("Offspring", "0");
+
+            inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -1810,7 +1838,7 @@ public class CardFactoryUtil {
                     "ValidCard$ Card.Self+linkedCastSA | CheckSVar$ SquadAmount | Secondary$ True | " +
                     "TriggerDescription$ When this creature enters the battlefield, create that many tokens that " +
                     "are copies of it.";
-            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ SquadAmount";
+            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ SquadAmount";
 
             final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);
@@ -2328,6 +2356,21 @@ public class CardFactoryUtil {
             sb.append(" (").append(inst.getReminderText()).append(")");
 
             final ReplacementEffect re = makeEtbCounter(sb.toString(), card, intrinsic);
+
+            inst.addReplacement(re);
+        } else if (keyword.startsWith("Impending")) {
+            final String[] k = keyword.split(":");
+            final String m = k[1];
+            final Cost cost = new Cost(k[2], false);
+
+            StringBuilder desc = new StringBuilder();
+            desc.append("Impending ");
+            desc.append(m).append("—").append(cost.toSimpleString());
+
+            final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + m
+                    + " | ETB$ True | SpellDescription$ " + desc;
+
+            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
 
             inst.addReplacement(re);
         } else if (keyword.equals("Jump-start")) {
@@ -3127,7 +3170,14 @@ public class CardFactoryUtil {
                 newSA.putParam("Secondary", "True");
             }
             newSA.putParam("PrecostDesc", "Freerunning");
-            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+            StringBuilder costDesc = new StringBuilder();
+            if (!freerunningCost.isOnlyManaCost()) {
+                costDesc.append("—");
+            } else {
+                costDesc.append(" ");
+            }
+            costDesc.append(freerunningCost.toSimpleString());
+            newSA.putParam("CostDesc", costDesc.toString());
 
             // makes new SpellDescription
             final StringBuilder sb = new StringBuilder();
@@ -3158,6 +3208,26 @@ public class CardFactoryUtil {
                 sa.setIntrinsic(intrinsic);
                 inst.addSpellAbility(sa);
             }
+        } else if (keyword.startsWith("Impending")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[2], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(cost);
+
+            newSA.putParam("PrecostDesc", "Impending");
+            StringBuilder costDesc = new StringBuilder();
+            costDesc.append(k[1]).append("—").append(cost.toSimpleString());
+            newSA.putParam("CostDesc", costDesc.toString());
+
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription());
+            sb.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Impending);
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Level up")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
@@ -3869,6 +3939,15 @@ public class CardFactoryUtil {
                     descAdded = true;
                 }
             }
+            if (mapParams.containsKey("AddReplacementEffects")) {
+                for (String s : mapParams.get("AddReplacementEffects").split(" & ")) {
+                    if (descAdded) {
+                        desc.append("\r\n");
+                    }
+                    desc.append(AbilityFactory.getMapParams(state.getSVar(s)).get("Description"));
+                    descAdded = true;
+                }
+            }
 
             String effect = "Mode$ Continuous | Affected$ Card.Self | ClassLevel$ " + level + " | " + params;
             if (descAdded) {
@@ -3945,6 +4024,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Horsemanship")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
                     " | Description$ Horsemanship (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Impending")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_TIME | RemoveType$ Creature | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +

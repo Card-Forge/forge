@@ -1,0 +1,8 @@
+Name:Quaketusk Boar
+ManaCost:3 R R
+Types:Creature Elemental Boar
+PT:5/5
+K:Reach
+K:Trample
+K:Haste
+Oracle:Reach, trample, haste

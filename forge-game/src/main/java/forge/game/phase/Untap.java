@@ -276,12 +276,22 @@ public class Untap extends Phase {
             }
         });
 
+        CardCollection toPhase = new CardCollection();
+        for (final Card tgtC : list) {
+            if (tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseIn(tgtC)) {
+                continue;
+            }
+            if (!tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
+                continue;
+            }
+            toPhase.add(tgtC);
+        }
         // If c has things attached to it, they phase out simultaneously, and
         // will phase back in with it
         // If c is attached to something, it will phase out on its own, and try
         // to attach back to that thing when it comes back
         CardCollection phasedOut = new CardCollection();
-        for (final Card c : list) {
+        for (final Card c : toPhase) {
             if (c.isPhasedOut() && c.isDirectlyPhasedOut()) {
                 c.phase(true);
             } else if (c.hasKeyword(Keyword.PHASING)) {

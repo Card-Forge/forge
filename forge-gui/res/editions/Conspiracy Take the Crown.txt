@@ -255,6 +255,7 @@ Noble Banneret
 Paliano Vanguard
 Pyretic Hunter
 Regicide
+Smuggler Captain
 Spire Phantasm
 Sovereign's Realm
 Summoner's Bond

@@ -195,6 +195,12 @@ public class CostExile extends CostPartWithList {
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
         }
+        boolean totalCMCgreater = false;
+        if (type.contains("+withTotalCMCGE")) {
+            totalCMCgreater = true;
+            totalM = type.split("withTotalCMCGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
+        }
 
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
@@ -232,12 +238,12 @@ public class CostExile extends CostPartWithList {
             return false;
         }
 
-        if (totalCMC) {
+        if (totalCMC || totalCMCgreater) {
             if (totalM.equals("X") && ability.getXManaCostPaid() == null) { // X hasn't yet been decided, let it pass
                 return true;
             }
             int i = AbilityUtils.calculateAmount(source, totalM, ability);
-            return CardLists.cmcCanSumTo(i, list);
+            return totalCMCgreater ? CardLists.getTotalCMC(list) >= i : CardLists.cmcCanSumTo(i, list);
         }
 
         // for Craft: do not count the source card twice (it will be sacrificed)

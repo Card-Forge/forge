@@ -1,4 +1,4 @@
-Name:Six 
+Name:Six
 ManaCost:2 G
 Types:Legendary Creature Treefolk
 PT:2/4

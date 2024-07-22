@@ -3,9 +3,6 @@ ManaCost:2 U
 Types:Creature Thalakos Illusion
 PT:2/1
 K:Shadow
-#
-# ChangeZone default to top of library for destination
-#
-A:AB$ ChangeZone | Cost$ U | Defined$ Self | Origin$ Battlefield | Destination$ Library | SpellDescription$ Put CARDNAME on top of its owner's library.
+A:AB$ ChangeZone | Cost$ U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | SpellDescription$ Put CARDNAME on top of its owner's library.
 AI:RemoveDeck:All
 Oracle:Shadow (This creature can block or be blocked by only creatures with shadow.)\n{U}: Put Thalakos Mistfolk on top of its owner's library.

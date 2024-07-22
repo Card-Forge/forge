@@ -1,0 +1,10 @@
+Name:Alania's Pathmaker
+ManaCost:3 R
+Types:Creature Otter Wizard
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Alania's Pathmaker enters, exile the top card of your library. Until the end of your next turn, you may play that card.

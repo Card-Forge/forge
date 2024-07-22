@@ -1,0 +1,7 @@
+Name:Psychic Whorl
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBSurveil | SpellDescription$ Target player discards two cards. Then if you control a Rat, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBSurveil:DB$ Surveil | Defined$ You | Amount$ 2 | ConditionPresent$ Rat.YouCtrl | ConditionCompare$ GE1
+DeckHas:Ability$Discard
+Oracle:Target player discards two cards. Then if you control a Rat, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
