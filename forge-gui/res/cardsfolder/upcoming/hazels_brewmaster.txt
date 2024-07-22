@@ -1,5 +1,5 @@
 Name:Hazel's Brewmaster
-ManaCost:3 G
+ManaCost:3 B
 Types:Creature Squirrel Warlock
 PT:3/4
 K:Menace
