@@ -18,7 +18,6 @@
 package forge.game.card;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -748,15 +747,18 @@ public class CardState extends GameObject implements IHasSVars {
         }
     }
 
+    public ImmutableList<CardTraitBase> getTraits() {
+        return ImmutableList.<CardTraitBase>builder()
+                .addAll(manaAbilities)
+                .addAll(nonManaAbilities)
+                .addAll(triggers)
+                .addAll(replacementEffects)
+                .addAll(staticAbilities)
+                .build();
+    }
+
     public void resetOriginalHost() {
-        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
-            .addAll(manaAbilities)
-            .addAll(nonManaAbilities)
-            .addAll(triggers)
-            .addAll(replacementEffects)
-            .addAll(staticAbilities)
-            .build();
-        for (final CardTraitBase ctb : allAbs) {
+        for (final CardTraitBase ctb : getTraits()) {
             if (ctb.isIntrinsic()) {
                 ctb.setCardState(this);
             }
@@ -764,14 +766,7 @@ public class CardState extends GameObject implements IHasSVars {
     }
 
     public void updateChangedText() {
-        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
-            .addAll(manaAbilities)
-            .addAll(nonManaAbilities)
-            .addAll(triggers)
-            .addAll(replacementEffects)
-            .addAll(staticAbilities)
-            .build();
-        for (final CardTraitBase ctb : allAbs) {
+        for (final CardTraitBase ctb : getTraits()) {
             if (ctb.isIntrinsic()) {
                 ctb.changeText();
             }
@@ -779,14 +774,7 @@ public class CardState extends GameObject implements IHasSVars {
     }
 
     public void changeTextIntrinsic(Map<String,String> colorMap, Map<String,String> typeMap) {
-        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
-            .addAll(manaAbilities)
-            .addAll(nonManaAbilities)
-            .addAll(triggers)
-            .addAll(replacementEffects)
-            .addAll(staticAbilities)
-            .build();
-        for (final CardTraitBase ctb : allAbs) {
+        for (final CardTraitBase ctb : getTraits()) {
             if (ctb.isIntrinsic()) {
                 ctb.changeTextIntrinsic(colorMap, typeMap);
             }
