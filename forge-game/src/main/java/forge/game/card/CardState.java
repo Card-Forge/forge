@@ -748,6 +748,21 @@ public class CardState extends GameObject implements IHasSVars {
         }
     }
 
+    public void resetOriginalHost() {
+        final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
+            .addAll(manaAbilities)
+            .addAll(nonManaAbilities)
+            .addAll(triggers)
+            .addAll(replacementEffects)
+            .addAll(staticAbilities)
+            .build();
+        for (final CardTraitBase ctb : allAbs) {
+            if (ctb.isIntrinsic()) {
+                ctb.setCardState(this);
+            }
+        }
+    }
+
     public void updateChangedText() {
         final List<CardTraitBase> allAbs = ImmutableList.<CardTraitBase>builder()
             .addAll(manaAbilities)

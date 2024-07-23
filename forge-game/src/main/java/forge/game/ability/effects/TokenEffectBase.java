@@ -114,6 +114,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = new CardCopyService(prototype).copyCard(true);
+                // disconnect from prototype
+                tok.getStates().forEach(cs -> tok.getState(cs).resetOriginalHost());
                 // Crafty Cutpurse would change under which control it does enter,
                 // but it shouldn't change who creates the token
                 tok.setOwner(creator);
