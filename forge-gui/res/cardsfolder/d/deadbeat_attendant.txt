@@ -1,0 +1,7 @@
+Name:Deadbeat Attendant
+ManaCost:1 B
+Types:Creature Vampire Employee
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+Oracle:When Deadbeat Attendant enters the battlefield, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)

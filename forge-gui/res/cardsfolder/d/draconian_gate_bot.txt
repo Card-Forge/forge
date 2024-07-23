@@ -1,0 +1,9 @@
+Name:Draconian Gate-Bot
+ManaCost:5
+Types:Artifact Creature Robot
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBOpenAttraction,DBDestroy
+SVar:DBOpenAttraction:DB$ OpenAttraction | SpellDescription$ Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Card.Attraction | TgtPrompt$ Select target Attraction | SpellDescription$ Destroy target Attraction. (It's put into its owner's junkyard.)
+Oracle:When Draconian Gate-Bot enters the battlefield, choose one —\n• Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\n• Destroy target Attraction. (It's put into its owner's junkyard.)
