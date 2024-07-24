@@ -237,8 +237,6 @@ public class ForgeScript {
             return sa.isKicked();
         } else if (property.equals("Loyalty")) {
             return sa.isPwAbility();
-        } else if (property.equals("nonLoyalty")) {
-            return !sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
@@ -273,6 +271,8 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
             return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("Ward")) {
+            return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
         } else if (property.equals("ChapterNotLore")) {

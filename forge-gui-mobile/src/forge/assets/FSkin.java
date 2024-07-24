@@ -16,7 +16,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.screens.LoadingOverlay;
 import forge.screens.SplashScreen;
 import forge.screens.TransitionScreen;
@@ -37,13 +36,16 @@ public class FSkin {
         return Forge.getAssets().getTexture(getSkinFile("hd_logo.png"), false);
     }
 
-    public static void changeSkin(final String skinName) {
-        final ForgePreferences prefs = FModel.getPreferences();
-        if (skinName.equals(prefs.getPref(FPref.UI_SKIN))) { return; }
-
-        //save skin preference
+    public static void saveSkinName(ForgePreferences prefs, String skinName) {
         prefs.setPref(FPref.UI_SKIN, skinName);
         prefs.save();
+    }
+
+    public static void changeSkin(final String skinName) {
+        if (skinName.equals(GuiBase.getForgePrefs().getPref(FPref.UI_SKIN))) { return; }
+
+        //save skin preference
+        saveSkinName(GuiBase.getForgePrefs(), skinName);
 
         Forge.setTransitionScreen(new TransitionScreen(() -> FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
             final LoadingOverlay loader = new LoadingOverlay(Forge.getLocalizer().getMessageorUseDefault("lblRestartInFewSeconds", "Forge will restart after a few seconds..."), true);
@@ -52,24 +54,58 @@ public class FSkin {
                 FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
                 FThreads.delayInEDT(2000, () -> {
                     Forge.clearTransitionScreen();
-                    FThreads.invokeInEdtLater(() -> {
-                        Forge.restart(true);
-                    });
+                    FThreads.invokeInEdtLater(() -> Forge.restart(true));
                 });
             });
         })), null, false, true));
     }
-    private static boolean isValidDirectory(FileHandle fileHandle) {
-        if (fileHandle == null)
-            return false;
-        if (!fileHandle.exists())
-            return false;
-        if (!fileHandle.isDirectory())
-            return false;
-        String[] lists = fileHandle.file().list();
-        if (lists == null)
-            return false;
-        return lists.length > 0;
+    public static boolean isThemeValid(FileHandle themeDir, String themeName, boolean silent) {
+        int missing = 0;
+        if (!themeDir.child("bg_splash.png").exists()) {
+            if (!silent)
+                System.err.println(themeDir + themeName + "/bg_splash.png not found.");
+            missing++;
+        }
+        if (!themeDir.child("bg_match.jpg").exists()) {
+            if (!silent)
+                System.err.println(themeDir + themeName + "/bg_match.jpg not found.");
+            missing++;
+        }
+        if (!themeDir.child("bg_texture.jpg").exists()) {
+            if (!silent)
+                System.err.println(themeDir + themeName + "/bg_texture.jpg not found.");
+            missing++;
+        }
+        if (!themeDir.child("sprite_icons.png").exists()) {
+            if (!silent)
+                System.err.println(themeDir + themeName + "/sprite_icons.png not found.");
+            missing++;
+        }
+        if (!themeDir.child("font1.ttf").exists()) {
+            if (!silent)
+                System.err.println(themeDir + themeName + "/font1.ttf not found.");
+            missing++;
+        }
+        return missing == 0;
+    }
+    private static void checkThemeDir(FileHandle themeDir, String themeName) {
+        if (themeDir == null || !themeDir.exists() || !themeDir.isDirectory()) {
+            System.err.println("Skin not found. Defaulting to fallback_skin.");
+            useFallbackDir();
+        } else {
+            if (!isThemeValid(themeDir, themeName, false)) {
+                System.err.println(themeName + " theme is missing some files to work properly.");
+                final FileHandle def = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
+                if (def.exists() && def.isDirectory() && isThemeValid(def, "", true)) {
+                    FSkinFont.deleteCachedFiles();
+                    //use default skin if valid
+                    preferredDir = def;
+                    saveSkinName(GuiBase.getForgePrefs(), "Default");
+                } else {
+                    useFallbackDir();
+                }
+            }
+        }
     }
     private static void useFallbackDir() {
         preferredDir = GuiBase.isAndroid() ? Gdx.files.internal("fallback_skin") : Gdx.files.classpath("fallback_skin");
@@ -97,12 +133,9 @@ public class FSkin {
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
         if(preferredDir == null)
         {
-            if (!isValidDirectory(dir)) {
-                final FileHandle def = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR);
-                if (def.exists() && def.isDirectory()) //if default skin exists
-                    preferredDir = def;
-                else //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
-                    useFallbackDir();
+            if (!dir.exists() || !dir.isDirectory()) {
+                //if skins directory doesn't exist, point to internal assets/skin directory instead for the sake of the splash screen
+                useFallbackDir();
             } else {
                 if (splashScreen != null) {
                     if (allSkins == null) { //initialize
@@ -123,11 +156,8 @@ public class FSkin {
                 }
             }
         }
-        //check preferredDir
-        if (!isValidDirectory(preferredDir)) {
-            useFallbackDir();
-        }
-
+        //check theme
+        checkThemeDir(preferredDir, preferredName);
 
         FSkinTexture.BG_TEXTURE.load(); //load background texture early for splash screen
 
@@ -543,6 +573,8 @@ public class FSkin {
             String skinName = skinFile.name();
             if (skinName.equalsIgnoreCase(".svn")) { continue; }
             if (skinName.equalsIgnoreCase(".DS_Store")) { continue; }
+            if (!skinFile.isDirectory()) { continue; }
+            if (!isThemeValid(skinFile, skinName, true)) { continue; }
             mySkins.add(skinName);
         }
 

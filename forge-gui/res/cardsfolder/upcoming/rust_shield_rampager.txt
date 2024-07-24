@@ -1,0 +1,7 @@
+Name:Rust-Shield Rampager
+ManaCost:3 G
+Types:Creature Raccoon Warrior
+PT:4/4
+K:Offspring:2
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ This creature can't be blocked by creatures with power 2 or less.
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nThis creature can't be blocked by creatures with power 2 or less.

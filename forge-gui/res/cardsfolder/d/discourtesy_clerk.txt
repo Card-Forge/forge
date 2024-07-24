@@ -1,0 +1,11 @@
+Name:Discourtesy Clerk
+ManaCost:3 B
+Types:Creature Vampire Employee
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+SVar:X:Count$Valid Attraction.YouCtrl
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control three or more Attractions, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+Oracle:When Discourtesy Clerk enters the battlefield, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\nAt the beginning of your end step, if you control three or more Attractions, you draw a card and you lose 1 life.

@@ -20,6 +20,7 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -135,6 +136,10 @@ public class CardProperty {
             }
         } else if (property.equals("nonChosenCard")) {
             if (source.hasChosenCard(card)) {
+                return false;
+            }
+        } else if (property.startsWith("ChosenMode")) {
+            if (!card.getChosenMode().equals(property.substring(10))) {
                 return false;
             }
         } else if (property.equals("ChosenSector")) {
@@ -1823,6 +1828,25 @@ public class CardProperty {
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
+        } else if (property.equals("linkedCastTrigger")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            List<Card> spellCast = game.getStack().getSpellsCastThisTurn();
+            int idx = spellCast.lastIndexOf(source);
+            if (idx == -1) {
+                return false;
+            }
+            boolean found = false;
+            for (KeywordInterface kw: spellCast.get(idx).getUnhiddenKeywords()) {
+                if (!Collections.disjoint(kw.getTriggers(), spellAbility.getKeyword().getTriggers())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
@@ -2030,37 +2054,16 @@ public class CardProperty {
                 strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
             }
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (card.getCastFrom() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
+            if (card.getCastFrom() == null || card.getCastSA() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
                     || (byYou && !sourceController.equals(card.getCastSA().getActivatingPlayer()))
                     || realZone != card.getCastFrom().getZoneType()) {
                 return false;
             }
-        } else if (property.startsWith("wasNotCastFrom")) {
-            boolean byYou = property.contains("ByYou");
-            String strZone = property.substring(14);
-            Player zoneOwner = null;
-            if (property.contains("Your")) {
-                strZone = strZone.substring(4);
-                zoneOwner = sourceController;
-            }
-            if (property.contains("Their")) {
-                strZone = strZone.substring(5);
-                zoneOwner = controller;
-            }
-            if (byYou) {
-                strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
-            }
-            final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (card.getCastFrom() != null && (zoneOwner == null || card.getCastFrom().getPlayer().equals(zoneOwner))
-                    && (!byYou || sourceController.equals(card.getCastSA().getActivatingPlayer()))
-                    && realZone == card.getCastFrom().getZoneType()) {
-                return false;
-            }
-        }  else if (property.startsWith("wasCast")) {
+        } else if (property.startsWith("wasCast")) {
             if (!card.wasCast()) {
                 return false;
             }
-            if (property.contains("ByYou") && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
+            if (property.contains("ByYou") && card.getCastSA() != null && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {

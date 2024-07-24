@@ -1,0 +1,10 @@
+Name:Fortune Teller's Talent
+ManaCost:U
+Types:Enchantment Class
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+K:Class:2:3 U:AddStaticAbility$ SFutureSight
+SVar:SFutureSight:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | CheckSVar$ X | SVarCompare$ GE1 | AffectedZone$ Library | MayPlay$ True | Description$ As long as you've cast a spell this turn, you may play cards from the top of your library.
+K:Class:3:2 U:AddStaticAbility$ SReduceCost
+SVar:SReduceCost:Mode$ ReduceCost | ValidCard$ Card.!wasCastFromYourHand | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells you cast from anywhere other than your hand cost {2} less to cast.
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+Oracle:(Gain the next level as a sorcery to add its ability.)\nYou may look at the top card of your library any time.\n{3}{U}: Level 2\nAs long as you've cast a spell this turn, you may play cards from the top of your library.\n{2}{U}: Level 3\nSpells you cast from anywhere other than your hand cost {2} less to cast.

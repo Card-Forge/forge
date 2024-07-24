@@ -130,9 +130,9 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
     }
 
-    public CardCollection filterCards(Iterable<ZoneType> origin, ZoneType destination, String valid, Card host, CardTraitBase sa) {
+    public CardCollection filterCards(Iterable<ZoneType> origin, Iterable<ZoneType> destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null && !containsColumn(destination)) {
+        if (destination != null && !Iterables.any(destination, d -> columnKeySet().contains(d))) {
             return allCards;
         }
         if (origin != null) {
@@ -147,9 +147,11 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                         lkiLookup = lastStateGraveyard;
                     }
                     if (destination != null) {
-                        if (row(z).containsKey(destination)) {
-                            for (Card c : row(z).get(destination)) {
-                                allCards.add(lkiLookup.get(c));
+                        for (ZoneType zt : destination) {
+                            if (row(z).containsKey(zt)) {
+                                for (Card c : row(z).get(zt)) {
+                                    allCards.add(lkiLookup.get(c));
+                                }
                             }
                         }
                     } else {
@@ -162,8 +164,10 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
                 }
             }
         } else if (destination != null) {
-            for (CardCollection c : column(destination).values()) {
-                allCards.addAll(c);
+            for (ZoneType zt : destination) {
+                for (CardCollection c : column(zt).values()) {
+                    allCards.addAll(c);
+                }
             }
         } else {
             for (CardCollection c : values()) {

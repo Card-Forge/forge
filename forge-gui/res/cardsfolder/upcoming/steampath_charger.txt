@@ -1,0 +1,8 @@
+Name:Steampath Charger
+ManaCost:1 R
+Types:Creature Lizard Warlock
+PT:2/1
+K:Offspring:2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature dies, it deals 1 damage to target player.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If do, when this creature enters, create a 1/1 token copy of it.)\nWhen this creature dies, it deals 1 damage to target player.

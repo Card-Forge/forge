@@ -1,0 +1,11 @@
+Name:Stormchaser's Talent
+ManaCost:U
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 blue and red Otter creature token with prowess.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ur_1_1_otter_prowess | TokenOwner$ You
+K:Class:2:3 U:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When this Class becomes level 2, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+K:Class:3:5 U:AddTrigger$ TriggerCast
+SVar:TriggerCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess.
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Stormchaser's Talent enters, create a 1/1 blue and red Otter creature token with prowess.\n{3}{U}: Level 2\nWhen this Class becomes level 2, return target instant or sorcery card from your graveyard to your hand.\n{5}{U}: Level 3\nWhenever you cast an instant or sorcery spell, create a 1/1 blue and red Otter creature token with prowess.

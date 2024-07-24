@@ -272,6 +272,8 @@ public enum CounterEnumType {
     MATRIX("MATRX", 183, 174, 255),
 
     MEMORY("MEMRY", 174, 183, 255),
+    
+    MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
 
@@ -396,6 +398,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    SUPPLY("SPPLY", 70, 105, 60),
 
     TAKEOVER("TKVR", 63, 49, 191),
 

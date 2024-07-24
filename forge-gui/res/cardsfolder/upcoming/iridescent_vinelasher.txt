@@ -1,0 +1,9 @@
+Name:Iridescent Vinelasher
+ManaCost:B
+Types:Creature Lizard Assassin
+PT:1/2
+K:Offspring:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Landfall — Whenever a land you control enters, this creature deals 1 damage to target opponent.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Opponent | NumDmg$ 1
+SVar:BuffedBy:Land
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nLandfall — Whenever a land you control enters, this creature deals 1 damage to target opponent.

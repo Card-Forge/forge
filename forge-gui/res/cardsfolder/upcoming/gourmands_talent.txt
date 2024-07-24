@@ -1,0 +1,13 @@
+Name:Gourmand's Talent
+ManaCost:G
+Types:Enchantment Class
+S:Mode$ Continuous | Affected$ Artifact.YouCtrl | Condition$ PlayerTurn | AddType$ Food | AddAbility$ FoodSac | Description$ During your turn, artifacts you control are Foods in addition to their other types and have "{2}, {T}, Sacrifice this artifact: You gain 3 life."
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this artifact> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+K:Class:2:2 G:AddTrigger$ TriggerRaccoon
+SVar:TriggerRaccoon:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigToken | TriggerDescription$ Whenever you gain life for the first time each turn, create a 3/3 green Raccoon creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_raccoon | TokenOwner$ You
+K:Class:3:3 G:AddTrigger$ TriggerCounters
+SVar:TriggerCounters:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounters | TriggerDescription$ Whenever you gain life for the first time each turn, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$LifeGain|Counters & Type$Food|Raccoon
+Oracle:(Gain the next level as a sorcery to add its ability.)\nDuring your turn, artifacts you control are Foods in addition to their other types and have "{2}, {T}, Sacrifice this artifact: You gain 3 life."\n{2}{G}: Level 2\nWhenever you gain life for the first time each turn, create a 3/3 green Raccoon creature token.\n{3}{G}: Level 3\nWhenever you gain life for the first time each turn, put a +1/+1 counter on each creature you control.
