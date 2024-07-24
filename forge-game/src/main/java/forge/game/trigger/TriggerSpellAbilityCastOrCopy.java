@@ -111,6 +111,24 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                     return false;
                 }
             }
+            if (hasParam("ActivatorThisTurnCastEach")) {
+                final String compare = getParam("ActivatorThisTurnCastEach");
+                final String valid = getParamOrDefault("ValidCard", "Card");
+                boolean found = false;
+                int right = Integer.parseInt(compare.substring(2));
+                for (String v : valid.split(",")) {
+                    List<Card> thisTurnCast = CardUtil.getThisTurnCast(v, getHostCard(), this, getHostCard().getController());
+                    thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
+                    int left = thisTurnCast.size();
+                    if (!Expressions.compare(left, compare, right)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    return false;
+                }
+            }
         }
         if (!matchesValidParam("ValidCard", cast)) {
             return false;
