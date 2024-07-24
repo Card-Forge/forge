@@ -20,6 +20,7 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -178,10 +179,6 @@ public class CardProperty {
             if (!card.isSplitCard()) {
                 return false;
             }
-        } else if (property.equals("NotSplit")) {
-            if (card.isSplitCard()) {
-                return false;
-            }
         } else if (property.equals("AdventureCard")) {
             if (!card.isAdventureCard()) {
                 return false;
@@ -324,10 +321,6 @@ public class CardProperty {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) {
                 return false;
             }
-        } else if (property.startsWith("NonActivePlayerCtrl")) {
-            if (game.getPhaseHandler().isPlayerTurn(controller)) {
-                return false;
-            }
         } else if (property.startsWith("YouOwn")) {
             if (!card.getOwner().equals(sourceController)) {
                 return false;
@@ -389,7 +382,6 @@ public class CardProperty {
                     if (!Expressions.compare(found.size(), parts[1].substring(0, 2), num)) {
                         return false;
                     }
-
                 } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
@@ -596,10 +588,15 @@ public class CardProperty {
                     return false;
                 }
             } else if (!StringUtils.isBlank(prop)) {
+                boolean found = false;
                 for (final Card c : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
-                    if (!card.hasCardAttachment(c)) {
-                        return false;
+                    if (card.hasCardAttachment(c)) {
+                        found = true;
+                        break;
                     }
+                }
+                if (!found) {
+                    return false;
                 }
             } else if (!card.hasCardAttachment(source)) {
                 return false;
@@ -633,19 +630,15 @@ public class CardProperty {
             if (!card.isMadness()) {
                 return false;
             }
-        } else if (property.contains("Paired")) {
-            if (property.contains("With")) { // PairedWith
-                if (!card.isPaired() || card.getPairedWith() != source) {
-                    return false;
-                }
-            } else if (property.startsWith("Not")) {  // NotPaired
-                if (card.isPaired()) {
-                    return false;
-                }
-            } else { // Paired
-                if (!card.isPaired()) {
-                    return false;
-                }
+        } else if (property.startsWith("Paired")) {
+            if (!card.isPaired()) {
+                return false;
+            }
+            if (property.endsWith("With") && card.getPairedWith() != source) {
+                return false;
+            }
+            if (property.endsWith("Soulbond") && !card.getPairedWith().hasKeyword(Keyword.SOULBOND)) {
+                return false;
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
             final CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Graveyard);
@@ -1074,11 +1067,6 @@ public class CardProperty {
                     }
                 }
             }
-        } else if (property.equals("NotThisTurnEntered")) {
-            // only check if it entered the Zone this turn
-            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
-                return false;
-            }
         } else if (property.equals("DiscardedThisTurn")) {
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
                 return false;
@@ -1161,10 +1149,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("DrawnThisTurn")) {
             if (!card.getDrawnThisTurn()) {
-                return false;
-            }
-        } else if (property.startsWith("notDrawnThisTurn")) {
-            if (card.getDrawnThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("FoughtThisTurn")) {
@@ -1252,11 +1236,8 @@ public class CardProperty {
             if (!card.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
-            final String v = property.split(" ")[1];
-            boolean found = card.getDamageHistory().getDamageDoneThisTurn(true, true, null, v, card, sourceController, spellAbility) > 0;
-
-            if (found == property.startsWith("not")) {
+        } else if (property.startsWith("dealtCombatDamageThisTurn")) {
+            if (card.getDamageHistory().getDamageDoneThisTurn(true, true, null, property.split(" ")[1], card, sourceController, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
@@ -1458,10 +1439,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("equipping")) {
             if (!card.isEquipping()) {
-                return false;
-            }
-        } else if (property.startsWith("notEquipping")) {
-            if (card.isEquipping()) {
                 return false;
             }
         } else if (property.startsWith("modified")) {
@@ -2262,7 +2239,7 @@ public class CardProperty {
         return true;
     }
 
-    private static boolean hasTimestampMatch (final Card card, final CardCollection coll) {
+    private static boolean hasTimestampMatch(final Card card, final CardCollection coll) {
         if (coll == null) {
             return false;
         }
