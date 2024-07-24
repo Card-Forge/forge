@@ -117,6 +117,9 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 boolean found = false;
                 int right = Integer.parseInt(compare.substring(2));
                 for (String v : valid.split(",")) {
+                    if (!cast.isValid(v, getHostCard().getController(), getHostCard(), this)) {
+                        continue;
+                    }
                     List<Card> thisTurnCast = CardUtil.getThisTurnCast(v, getHostCard(), this, getHostCard().getController());
                     thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
                     int left = thisTurnCast.size();
