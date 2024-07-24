@@ -120,7 +120,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                     List<Card> thisTurnCast = CardUtil.getThisTurnCast(v, getHostCard(), this, getHostCard().getController());
                     thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
                     int left = thisTurnCast.size();
-                    if (!Expressions.compare(left, compare, right)) {
+                    if (Expressions.compare(left, compare, right)) {
                         found = true;
                         break;
                     }
