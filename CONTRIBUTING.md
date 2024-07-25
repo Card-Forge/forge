@@ -1,12 +1,8 @@
-# Forge
+# Contributing to Forge
 
 [Official repo](https://github.com/Card-Forge/forge.git).
 
 Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wiki) (Somewhat outdated)
-
-[Discord channel](https://discord.gg/HcPJNyD66a)
-
-[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
 
 ## Requirements / Tools
 
@@ -28,9 +24,15 @@ Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wik
 
 - Go to the project location on your machine.  Run Maven to download all dependencies and build a snapshot.  Example for Windows & Linux: `mvn -U -B clean -P windows-linux install`
 
+## IntelliJ
+
+IntelliJ is the recommended IDE for Forge development. Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
+
+
 ## Eclipse
 
 Eclipse includes Maven integration so a separate install is not necessary.  For other IDEs, your mileage may vary.
+At this time, Eclipse is not the recommended IDE for Forge development.
 
 ### Project Setup
 
@@ -167,10 +169,6 @@ SNAPSHOT builds can be built via the Maven integration in Eclipse.
 2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
 
 The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desktop-[version]-SNAPSHOT
-
-## IntelliJ
-
-Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
 
 ## Card Scripting
 
