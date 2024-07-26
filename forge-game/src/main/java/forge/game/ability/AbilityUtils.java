@@ -1358,20 +1358,25 @@ public class AbilityUtils {
         Player controller = sa.getActivatingPlayer();
         Card source = sa.getHostCard();
         // do blessing there before condition checks
-        if (sa.isSpell() && !source.isPermanent() && source.hasKeyword(Keyword.ASCEND)) {
+
+        if (!sa.isSpell() || source.isPermanent()) {
+            return;
+        }
+
+        if (source.hasKeyword(Keyword.ASCEND)) {
             if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
                 controller.setBlessing(true);
             }
         }
 
-        if (sa.isSpell() && !(sa instanceof SpellPermanent) && sa.getHostCard().hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
             game.getAction().checkStaticAbilities();
-            String giftEffect = source.getSVar("GiftEffect");
-            if (StringUtils.isNotBlank(giftEffect)) {
-                AbilitySub giftAbility = (AbilitySub) AbilityFactory.getAbility(giftEffect, source);
+            // Is AdditionalAbility available from anything here?
+            AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
+            if (giftAbility != null) {
                 giftAbility.setActivatingPlayer(controller);
-
                 AbilityUtils.resolveApiAbility(giftAbility, game);
+                // Trigger "Give a gift" event. Is this the right spot?
             }
         }
     }

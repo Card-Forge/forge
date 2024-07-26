@@ -84,9 +84,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (value.equals("Hellbent")) {
                 this.setHellbent(true);
             }
-            if (value.equals("PromisedGift")) {
-                this.setPromisedGift(true);
-            }
             if (value.equals("Revolt")) {
                 this.setRevolt(true);
             }
@@ -274,7 +271,6 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isDesert() && !activator.hasDesert()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
 
-        if (this.isPromisedGift() && sa.getHostCard().getPromisedGift() == null) return false;
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;

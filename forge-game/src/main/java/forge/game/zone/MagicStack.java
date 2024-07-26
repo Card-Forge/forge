@@ -17,24 +17,9 @@
  */
 package forge.game.zone;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeSet;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -43,12 +28,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.PlayEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
-import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventZone;
+import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaRefundService;
@@ -61,6 +41,10 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.TextUtil;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * <p>
@@ -376,6 +360,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.SpellAbility, si.getSpellAbility());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
+
+        // TODO Gift trigger here?
 
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
