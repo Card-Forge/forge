@@ -17,12 +17,12 @@
  */
 package forge.game.spellability;
 
-import java.util.EnumSet;
-import java.util.Set;
-
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -89,6 +89,7 @@ public class SpellAbilityVariables implements Cloneable {
     private boolean threshold = false;
     private boolean metalcraft = false;
     private boolean delirium = false;
+    private boolean promisedGift = false;
     private boolean hellbent = false;
     private boolean revolt = false;
     private boolean desert = false;
@@ -343,6 +344,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
 
     public void setDesert(final boolean bDesert) { desert = bDesert; }
+    public void setPromisedGift(final boolean bGifted) { promisedGift = bGifted; }
 
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
     public void setSolved(final boolean bSolved) { solved = bSolved; }
@@ -528,6 +530,7 @@ public class SpellAbilityVariables implements Cloneable {
     public final boolean isMetalcraft() {   return this.metalcraft; }
 
     public final boolean isDelirium() {     return this.delirium;  }
+    public final boolean isPromisedGift() {     return this.promisedGift;  }
 
     public final boolean isHellbent() {     return this.hellbent;  }
 

@@ -149,6 +149,19 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPromiseGift cost) {
+        if (!cost.canPay(ability, player, isEffect())) {
+            return null;
+        }
+        List<Player> res = cost.getPotentialPlayers(player, ability);
+        // I should only choose one of these right?
+        // TODO Choose the "worst" player.
+        Collections.shuffle(res);
+
+        return PaymentDecision.players(res.subList(0, 1));
+    }
+
+    @Override
     public PaymentDecision visit(CostExile cost) {
         String type = cost.getType();
         if (cost.payCostFromSource()) {

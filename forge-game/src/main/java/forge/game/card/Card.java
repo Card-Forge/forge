@@ -295,6 +295,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private Player promisedGift;
     private Player protectingPlayer;
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
@@ -1886,6 +1887,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (chosenPlayer == p) { return; }
         chosenPlayer = p;
         view.updateChosenPlayer(this);
+    }
+
+    public final boolean hasPromisedGift() {
+        return promisedGift != null;
+    }
+    public final Player getPromisedGift() {
+        return promisedGift;
+    }
+    public final void setPromisedGift(final Player p) {
+        if (promisedGift == p) { return; }
+        promisedGift = p;
+        view.updatePromisedGift(this);
     }
 
     public final Player getProtectingPlayer() {
