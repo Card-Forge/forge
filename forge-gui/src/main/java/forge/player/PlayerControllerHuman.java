@@ -1720,10 +1720,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (trackerFrozen) {
             getGame().getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
-        final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
         final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
+        int chosenPawprint = 0;
         for (int i = 0; i < num; i++) {
+            if (sa.hasParam("Pawprint")) {
+                final int tmpPaw = chosenPawprint;
+                spellViewCache.values().removeIf(ab -> Integer.valueOf(ab.getParam("Pawprint")) > num - tmpPaw);
+            }
+            final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
+
             SpellAbilityView a;
             if (i < min) {
                 a = getGui().one(modeTitle, choices);
@@ -1734,10 +1740,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 break;
             }
 
+            AbilitySub sp = spellViewCache.get(a);
             if (!allowRepeat) {
-                choices.remove(a);
+                spellViewCache.remove(a);
             }
-            chosen.add(spellViewCache.get(a));
+            if (sp.hasParam("Pawprint")) {
+                chosenPawprint += AbilityUtils.calculateAmount(sp.getHostCard(), sp.getParam("Pawprint"), sp);
+            }
+            chosen.add(sp);
         }
         return chosen;
     }

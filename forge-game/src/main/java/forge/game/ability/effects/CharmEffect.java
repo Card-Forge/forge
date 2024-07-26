@@ -63,6 +63,7 @@ public class CharmEffect extends SpellAbilityEffect {
         List<AbilitySub> list = CharmEffect.makePossibleOptions(sa);
         String numParam = sa.getParamOrDefault("CharmNum", "1");
         boolean isX = numParam.equals("X");
+        boolean repeat = sa.hasParam("CanRepeatModes");
         int num = 0;
         boolean additionalDesc = sa.hasParam("AdditionalDescription");
         boolean optional = sa.hasParam("Optional");
@@ -76,12 +77,14 @@ public class CharmEffect extends SpellAbilityEffect {
                 sa.setActivatingPlayer(source.getController(), true);
             }
             if (!isX) {
-                num = Math.min(AbilityUtils.calculateAmount(source, numParam, sa), list.size());
+                num = AbilityUtils.calculateAmount(source, numParam, sa);
+                if (!repeat) {
+                    num = Math.min(num, list.size());
+                }
             }
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
 
-        boolean repeat = sa.hasParam("CanRepeatModes");
         boolean random = sa.hasParam("Random");
         boolean limit = sa.hasParam("ActivationLimit");
         boolean gameLimit = sa.hasParam("GameActivationLimit");
@@ -104,6 +107,10 @@ public class CharmEffect extends SpellAbilityEffect {
             } else {
                 sb.append(Lang.getNumeral(min)).append(" or ").append(list.size() == 2 ? "both" : "more");
             }
+        }
+
+        if (sa.hasParam("Pawprint")) {
+            sb.append("{P} worth of modes");
         }
 
         if (sa.hasParam("ChoiceRestriction")) {
@@ -163,7 +170,14 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append("\r\n");
             }
             for (AbilitySub sub : list) {
-                sb.append(spree ? "+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 " : "\u2022 ").append(sub.getParam("SpellDescription"));
+                if (spree) {
+                    sb.append("+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 ");
+                } else if (sub.hasParam("Pawprint")) {
+                    sb.append(StringUtils.repeat("{P}", Integer.valueOf(sub.getParam("Pawprint"))) + " \u2014 ");
+                } else {
+                    sb.append("\u2022 ");
+                }
+                sb.append(sub.getParam("SpellDescription"));
                 sb.append("\r\n");
             }
             sb.append("\r\n");
