@@ -1,0 +1,8 @@
+Name:Jolly Gerbils
+ManaCost:1 W
+Types:Creature Hamster Citizen
+PT:2/3
+T:Mode$ GiveGift | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you give a gift, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckNeeds:Keyword$Gift
+Oracle:Whenever you give a gift, draw a card.

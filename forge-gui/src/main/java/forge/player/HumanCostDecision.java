@@ -1,35 +1,17 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -41,6 +23,8 @@ import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
+
+import java.util.*;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
@@ -724,6 +708,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostPartMana cost) {
         // only interactive payment possible for now =(
         return new PaymentDecision(0);
+    }
+
+    @Override
+    public PaymentDecision visit(final CostPromiseGift cost) {
+        // TODO Parse the specific gift
+        PlayerCollection opponents = cost.getPotentialPlayers(player, ability);
+        Player giftee = controller.chooseSingleEntityForEffect(opponents, null, ability, "Choose an opponent to promise a gift", false, null, null);
+
+        if (giftee == null) {
+            return null;
+        }
+
+        return PaymentDecision.players(Lists.newArrayList(giftee));
     }
 
     @Override

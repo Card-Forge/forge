@@ -298,6 +298,7 @@ public class CardCopyService {
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
         newCopy.setSaddled(copyFrom.isSaddled());
+        newCopy.setPromisedGift(copyFrom.getPromisedGift());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
 

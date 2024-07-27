@@ -1,12 +1,12 @@
 package forge.game.ability;
 
-import java.util.Map;
-
 import forge.game.card.Card;
 import forge.game.cost.Cost;
 import forge.game.spellability.AbilityActivated;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.TargetRestrictions;
+
+import java.util.Map;
 
 public class AbilityApiBased extends AbilityActivated {
     private final SpellAbilityEffect effect;
@@ -30,7 +30,16 @@ public class AbilityApiBased extends AbilityActivated {
 
     @Override
     public String getStackDescription() {
-        return effect.getStackDescriptionWithSubs(mapParams, this);
+        StringBuilder sb = new StringBuilder();
+        if (this.hostCard.hasPromisedGift() && this.isSpell() && !this.hostCard.isPermanent()) {
+            sb.append("Gift a ").
+                    append(this.getAdditionalAbility("GiftAbility").getParam("GiftDescription")).
+                    append(" to ").append(this.hostCard.getPromisedGift()).
+                    append(". ");
+        }
+
+        sb.append(effect.getStackDescriptionWithSubs(mapParams, this));
+        return sb.toString();
     }
 
     /* (non-Javadoc)

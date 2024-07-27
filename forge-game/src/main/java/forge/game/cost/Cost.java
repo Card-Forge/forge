@@ -17,15 +17,8 @@
  */
 package forge.game.cost;
 
-import java.io.Serializable;
-import java.util.*;
-
-import forge.card.CardType;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
+import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -38,6 +31,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * <p>
@@ -470,6 +468,10 @@ public class Cost implements Serializable {
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             return new CostExile(splitStr[0], splitStr[1], description,
                     new ArrayList<>(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
+        }
+
+        if (parse.startsWith("PromiseGift")) {
+            return new CostPromiseGift();
         }
 
         if (parse.startsWith("Return<")) {
