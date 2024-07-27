@@ -965,7 +965,7 @@ public class PlayerControllerAi extends PlayerController {
                             break;
                     }
                 }
-                return defaultVal != null && defaultVal.booleanValue();
+                return defaultVal != null && defaultVal;
             case UntapTimeVault: return false; // TODO Should AI skip his turn for time vault?
             case LeftOrRight: return brains.chooseDirection(sa);
             case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even

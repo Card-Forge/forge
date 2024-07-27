@@ -37,7 +37,7 @@ public class GuiDialog {
         final FutureTask<Boolean> future = new FutureTask<>(confirmTask);
         FThreads.invokeInEdtAndWait(future);
         try {
-            return future.get().booleanValue();
+            return future.get();
         } catch (final InterruptedException | ExecutionException e) { // should be no exception here
             e.printStackTrace();
         }

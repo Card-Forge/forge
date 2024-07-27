@@ -107,7 +107,7 @@ public class AttackRequirement {
 
                     // only count violations if the forced creature can actually attack and has no cost incurred for doing so
                     if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue().intValue();
+                        violations += mustAttack.getValue();
                     }
                 }
             }

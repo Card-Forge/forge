@@ -126,7 +126,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             return 0;
         }
         final Integer boxed = items.get(item);
-        return boxed == null ? 0 : boxed.intValue();
+        return boxed == null ? 0 : boxed;
     }
 
     public final int countAll() {

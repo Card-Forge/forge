@@ -55,7 +55,7 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     public void add(final T item, final int amount) {
         if (amount <= 0) { return; } // throw an exception maybe?
         Integer cur = get(item);
-        int newVal = cur == null ? amount : amount + cur.intValue();
+        int newVal = cur == null ? amount : amount + cur;
         put(item, newVal);
     }
 
@@ -75,7 +75,7 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     public boolean substract(final T item, final int amount) {
         Integer cur = get(item);
         if (cur == null) { return false; }
-        int newVal = cur.intValue() - amount;
+        int newVal = cur - amount;
         if (newVal > 0) {
             put(item, newVal);
         } else {
@@ -95,7 +95,7 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     public int countAll() {
         int c = 0;
         for (java.util.Map.Entry<T, Integer> kv : this.entrySet()) {
-            c += kv.getValue().intValue();
+            c += kv.getValue();
         }
         return c;
     }
@@ -103,7 +103,7 @@ public class LinkedHashMapToAmount<T> extends LinkedHashMap<T, Integer> implemen
     @Override
     public int count(final T item) {
         Integer cur = get(item);
-        return cur == null ? 0 : cur.intValue();
+        return cur == null ? 0 : cur;
     }
     
 }

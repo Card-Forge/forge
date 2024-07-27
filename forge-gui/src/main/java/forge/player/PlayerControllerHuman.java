@@ -691,14 +691,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             for (int i = 0; i <= size; i++) {
                 choices.add(i + min);
             }
-            return getGui().one(title, choices.build()).intValue();
+            return getGui().one(title, choices.build());
         }
     }
 
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final List<Integer> choices,
                             final Player relatedPlayer) {
-        return getGui().one(title, choices).intValue();
+        return getGui().one(title, choices);
     }
 
     @Override
@@ -1171,7 +1171,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i <= cardsInGrave; i++) {
             cntChoice.add(i);
         }
-        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
+        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build());
 
         GameEntityViewMap<Card, CardView> gameCacheGrave = GameEntityView.getMap(grave);
         for (int i = 0; i < chosenAmount; i++) {
@@ -1638,7 +1638,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
 
-        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal, labels);
     }
 
     @Override
@@ -1781,7 +1781,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
         for (final Byte b : colors) {
-            colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
+            colorNamesBuilder.add(MagicColor.toLongString(b));
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
@@ -3246,7 +3246,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         Integer v = getGui().getInteger(prompt, 0, max, 9);
-        return v == null ? 0 : v.intValue();
+        return v == null ? 0 : v;
     }
 
     @Override

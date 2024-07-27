@@ -15,6 +15,6 @@ public class IntSpinner extends JSpinner {
     }
     public int intValue()
     {
-        return ((Integer)getValue()).intValue();
+        return (Integer) getValue();
     }
 }

@@ -753,9 +753,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     payableZone.add(p);
                 }
             }
-            return putFromSame(list, c.intValue(), payableZone, cost.from);
+            return putFromSame(list, c, payableZone, cost.from);
         } else {//Graveyard
-            return putFromMiscZone(ability, c.intValue(), list, cost.from);
+            return putFromMiscZone(ability, c, list, cost.from);
         }
     }
 

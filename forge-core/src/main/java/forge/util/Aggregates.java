@@ -213,8 +213,8 @@ public class Aggregates {
             U k = fnGetField.apply(kv.getKey());
             Integer v = kv.getValue();
             Integer sum = result.get(k);
-            int n = v == null ? 0 : v.intValue();
-            int s = sum == null ? 0 : sum.intValue();
+            int n = v == null ? 0 : v;
+            int s = sum == null ? 0 : sum;
             result.put(k, s + n);
         }
         return result.entrySet();

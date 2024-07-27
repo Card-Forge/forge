@@ -75,7 +75,7 @@ public class AttackConstraints {
             final MapToAmount<Card> causesToAttack = new LinkedHashMapToAmount<>();
             for (final Entry<Card, Integer> entry : attacksIfOtherAttacks.entrySet()) {
                 if (entry.getKey() != possibleAttacker) {
-                    causesToAttack.add(entry.getKey(), entry.getValue().intValue());
+                    causesToAttack.add(entry.getKey(), entry.getValue());
                 }
             }
 
@@ -224,7 +224,7 @@ public class AttackConstraints {
                 }
             }
             final Integer defMax = globalRestrictions.getDefenderMax().get(req.defender);
-            if (defMax != null && toDefender.count(req.defender) >= defMax.intValue()) {
+            if (defMax != null && toDefender.count(req.defender) >= defMax) {
                 // too many to this defender already
                 skip = true;
             } else if (null != CombatUtil.getAttackCost(req.attacker.getGame(), req.attacker, req.defender)) {
@@ -254,7 +254,7 @@ public class AttackConstraints {
                 final List<Attack> clonedReqs = deepClone(reqs);
                 for (final Entry<Card, Integer> causesToAttack : requirement.getCausesToAttack().entrySet()) {
                     for (final Attack a : findAll(reqs, causesToAttack.getKey())) {
-                        a.requirements += causesToAttack.getValue().intValue();
+                        a.requirements += causesToAttack.getValue();
                     }
                 }
                 // if maximum < no of possible attackers, try both with and without this creature

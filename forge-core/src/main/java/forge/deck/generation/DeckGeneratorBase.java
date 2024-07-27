@@ -267,9 +267,9 @@ public abstract class DeckGeneratorBase {
 
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
             Iterable<PaperCard> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), PaperCard.FN_GET_RULES));
-            int cmcCountForPool = (int) Math.ceil(pair.getRight().intValue() * desiredOverTotal);
+            int cmcCountForPool = (int) Math.ceil(pair.getRight() * desiredOverTotal);
             
-            int addOfThisCmc = Math.round(pair.getRight().intValue() * requestedOverTotal);
+            int addOfThisCmc = Math.round(pair.getRight() * requestedOverTotal);
             trace.append(String.format("Adding %d cards for cmc range from a pool with %d cards:%n", addOfThisCmc, cmcCountForPool));
 
             final List<PaperCard> curved = Aggregates.random(matchingCards, cmcCountForPool);
@@ -332,7 +332,7 @@ public abstract class DeckGeneratorBase {
 
     protected static void increment(Map<String, Integer> map, String key, int delta) {
         final Integer boxed = map.get(key);
-        map.put(key, boxed == null ? delta : boxed.intValue() + delta);
+        map.put(key, boxed == null ? delta : boxed + delta);
     }
 
     public static final Predicate<CardRules> AI_CAN_PLAY = Predicates.and(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);

@@ -2805,7 +2805,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public int getCommanderDamage(Card commander) {
         Integer damage = commanderDamage.get(commander);
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
     public void addCommanderDamage(Card commander, int damage) {
         commanderDamage.merge(commander, damage, Integer::sum);
