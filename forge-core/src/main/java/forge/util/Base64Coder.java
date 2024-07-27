@@ -63,7 +63,7 @@ public final class Base64Coder {
      * Constant.
      * <code>systemLineSeparator="System.getProperty(line.separator)"</code>
      */
-    private static final String SYSTEM_LINE_SEPARATOR = System.getProperty("line.separator");
+    private static final String SYSTEM_LINE_SEPARATOR = System.lineSeparator();
 
     // Mapping table from 6-bit nibbles to Base64 characters.
     /** Constant <code>map1=new char[64]</code>. */
