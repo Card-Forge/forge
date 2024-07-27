@@ -812,14 +812,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Grab players in turn order starting with the active player
         List<Player> players = game.getPlayersInTurnOrder(playerTurn);
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }
             result |= chooseOrderOfSimultaneousStackEntry(p, false);
         }
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }

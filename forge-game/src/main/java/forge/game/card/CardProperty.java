@@ -20,7 +20,6 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
@@ -635,9 +634,6 @@ public class CardProperty {
                 return false;
             }
             if (property.endsWith("With") && card.getPairedWith() != source) {
-                return false;
-            }
-            if (property.endsWith("Soulbond") && !card.getPairedWith().hasKeyword(Keyword.SOULBOND)) {
                 return false;
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
