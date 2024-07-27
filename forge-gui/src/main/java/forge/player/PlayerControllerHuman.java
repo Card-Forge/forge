@@ -689,7 +689,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
             int size = max - min;
             for (int i = 0; i <= size; i++) {
-                choices.add(Integer.valueOf(i + min));
+                choices.add(i + min);
             }
             return getGui().one(title, choices.build()).intValue();
         }
@@ -1169,7 +1169,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardCollection toExile = new CardCollection();
         final ImmutableList.Builder<Integer> cntChoice = ImmutableList.builder();
         for (int i = 0; i <= cardsInGrave; i++) {
-            cntChoice.add(Integer.valueOf(i));
+            cntChoice.add(i);
         }
         final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
 

@@ -43,7 +43,7 @@ public final class MapToAmountUtil {
                 maxElement = entry.getKey();
             }
         }
-        return Pair.of(maxElement, Integer.valueOf(max));
+        return Pair.of(maxElement, max);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class MapToAmountUtil {
                 minElement = entry.getKey();
             }
         }
-        return Pair.of(minElement, Integer.valueOf(min));
+        return Pair.of(minElement, min);
     }
 
     /**

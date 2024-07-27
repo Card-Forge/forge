@@ -1069,7 +1069,7 @@ public class QuestEventDraft implements IQuestEvent {
             if (standings[i].equals(HUMAN)) {
                 bracket.addTournamentPlayer(GamePlayerUtil.getGuiPlayer());
             } else {
-                int idx = Integer.valueOf(standings[i]) - 1;
+                int idx = Integer.parseInt(standings[i]) - 1;
                 bracket.addTournamentPlayer(GamePlayerUtil.createAiPlayer(aiNames[idx], aiIcons[idx]), idx);
             }
         }
@@ -1088,7 +1088,7 @@ public class QuestEventDraft implements IQuestEvent {
                 // Bracket now up to date!
                 break;
             } else {
-                int idx = standings[i].equals(HUMAN) ? -1 : Integer.valueOf(standings[i]) - 1;
+                int idx = standings[i].equals(HUMAN) ? -1 : Integer.parseInt(standings[i]) - 1;
                 pairing.setWinnerByIndex(idx);
                 bracket.reportMatchCompletion(pairing);
             }

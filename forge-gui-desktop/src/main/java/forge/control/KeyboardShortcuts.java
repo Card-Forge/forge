@@ -142,7 +142,7 @@ public class KeyboardShortcuts {
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
-                    int triggerID = Integer.valueOf(si.getSourceTrigger());
+                    int triggerID = si.getSourceTrigger();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                         matchUI.setShouldAlwaysAcceptTrigger(triggerID);
                     }
@@ -160,7 +160,7 @@ public class KeyboardShortcuts {
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
                     matchUI.setShouldAutoYield(si.getKey(), true);
-                    int triggerID = Integer.valueOf(si.getSourceTrigger());
+                    int triggerID = si.getSourceTrigger();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
                         matchUI.setShouldAlwaysDeclineTrigger(triggerID);
                     }
@@ -312,7 +312,7 @@ public class KeyboardShortcuts {
             if (s.equals("16"))      { inputEvents[0] = 16; }
             else if (s.equals("17")) { inputEvents[1] = 17; }
             else {
-                keyEvent = Integer.valueOf(s);
+                keyEvent = Integer.parseInt(s);
             }
         }
 

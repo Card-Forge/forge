@@ -121,7 +121,7 @@ public class AttackConstraints {
         final int globalMax = globalRestrictions.getMax();
         final int myMax = Ints.min(globalMax == -1 ? Integer.MAX_VALUE : globalMax, possibleAttackers.size());
         if (myMax == 0) {
-            return Pair.of(Collections.emptyMap(), Integer.valueOf(0));
+            return Pair.of(Collections.emptyMap(), 0);
         }
 
         final MapToAmount<Map<Card, GameEntity>> possible = new LinkedHashMapToAmount<>();
@@ -449,7 +449,7 @@ public class AttackConstraints {
     private final Function<Map<Card, GameEntity>, Integer> FN_COUNT_VIOLATIONS = new Function<Map<Card,GameEntity>, Integer>() {
         @Override
         public Integer apply(final Map<Card, GameEntity> input) {
-            return Integer.valueOf(countViolations(input));
+            return countViolations(input);
         }
     };
 }

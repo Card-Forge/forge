@@ -80,7 +80,7 @@ public class CField implements ICDoc {
                     if (ipm instanceof InputPayMana && ipm.getOwner().equals(player)) {
                         final int oldMana = player.getMana(colorCode);
                         controller.useMana(colorCode.byteValue());
-                        return Boolean.valueOf(oldMana != player.getMana(colorCode));
+                        return oldMana != player.getMana(colorCode);
                     }
                 }
                 return Boolean.FALSE;

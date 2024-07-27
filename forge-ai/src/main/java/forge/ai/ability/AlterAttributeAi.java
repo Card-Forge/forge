@@ -18,7 +18,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(Player aiPlayer, SpellAbility sa) {
         final Card source = sa.getHostCard();
-        boolean activate = Boolean.valueOf(sa.getParamOrDefault("Activate", "true"));
+        boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
 
         if (sa.usesTargeting()) {
@@ -91,7 +91,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        boolean activate = Boolean.valueOf(sa.getParamOrDefault("Activate", "true"));
+        boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
 
         for (String attr : attributes) {

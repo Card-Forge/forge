@@ -927,7 +927,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Chapter")) {
             final String[] k = keyword.split(":");
             final String[] abs = k[2].split(",");
-            if (abs.length != Integer.valueOf(k[1])) {
+            if (abs.length != Integer.parseInt(k[1])) {
                 throw new RuntimeException("Saga max differ from Ability amount");
             }
 
@@ -2789,7 +2789,7 @@ public class CardFactoryUtil {
             origSA.appendSubAbility(newSA);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
-            final int level = Integer.valueOf(k[1]);
+            final int level = Integer.parseInt(k[1]);
 
             final StringBuilder sbClass = new StringBuilder();
             sbClass.append("AB$ ClassLevelUp | Cost$ ").append(k[2]);

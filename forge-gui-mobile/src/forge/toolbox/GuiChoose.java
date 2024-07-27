@@ -153,7 +153,7 @@ public class GuiChoose {
 
         final Integer[] choices = new Integer[count];
         for (int i = 0; i < count; i++) {
-            choices[i] = Integer.valueOf(i + min);
+            choices[i] = i + min;
         }
         oneOrNone(message, choices, callback);
     }
@@ -170,7 +170,7 @@ public class GuiChoose {
 
         List<Object> choices = new ArrayList<>();
         for (int i = min; i <= cutoff; i++) {
-            choices.add(Integer.valueOf(i));
+            choices.add(i);
         }
         choices.add(Forge.getLocalizer().getMessage("lblOther") + "...");
 

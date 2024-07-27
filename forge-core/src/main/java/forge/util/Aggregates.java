@@ -215,7 +215,7 @@ public class Aggregates {
             Integer sum = result.get(k);
             int n = v == null ? 0 : v.intValue();
             int s = sum == null ? 0 : sum.intValue();
-            result.put(k, Integer.valueOf(s + n)); 
+            result.put(k, s + n);
         }
         return result.entrySet();
     }

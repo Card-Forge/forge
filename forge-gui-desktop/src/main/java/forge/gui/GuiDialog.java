@@ -31,7 +31,7 @@ public class GuiDialog {
                 final String questionToUse = StringUtils.isBlank(question) ? "Activate card's ability?" : question;
                 final List<String> opts = options == null ? defaultConfirmOptions : options;
                 final int answer = FOptionPane.showOptionDialog(questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1);
-                return Boolean.valueOf(answer == 0);
+                return answer == 0;
             }};
 
         final FutureTask<Boolean> future = new FutureTask<>(confirmTask);

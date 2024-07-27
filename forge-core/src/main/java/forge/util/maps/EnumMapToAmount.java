@@ -33,7 +33,7 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
         if (amount <= 0) { return; } // throw an exception maybe?
         Integer cur = get(item);
         int newVal = cur == null ? amount : amount + cur.intValue();
-        put(item, Integer.valueOf(newVal));
+        put(item, newVal);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
         if (cur == null) { return false; }
         int newVal = cur.intValue() - amount;
         if (newVal > 0) {
-            put(item, Integer.valueOf(newVal));
+            put(item, newVal);
         }
         else {
             remove(item);

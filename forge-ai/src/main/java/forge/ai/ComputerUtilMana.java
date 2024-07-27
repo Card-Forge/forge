@@ -491,7 +491,7 @@ public class ComputerUtilMana {
         if (!replaceAmount.isEmpty()) {
             int totalAmount = 1;
             for (SpellAbility saMana : replaceAmount) {
-                totalAmount *= Integer.valueOf(saMana.getParam("ReplaceAmount"));
+                totalAmount *= Integer.parseInt(saMana.getParam("ReplaceAmount"));
             }
             manaProduced = StringUtils.repeat(manaProduced, " ", totalAmount);
         }

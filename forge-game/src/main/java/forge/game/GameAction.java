@@ -2065,7 +2065,7 @@ public class GameAction {
         if (landCount == 0) {
             return 0;
         }
-        return Float.valueOf(landCount)/Float.valueOf(deck.size());
+        return ((float) landCount) / ((float) deck.size());
     }
 
     private float getHandScore(List<Card> hand, float landRatio) {
@@ -2514,7 +2514,7 @@ public class GameAction {
                     lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
-                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable)));
+                e.setValue(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable));
                 sum += e.getValue();
 
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
@@ -2648,7 +2648,7 @@ public class GameAction {
 
     private static void unanimateOnAbortedChange(final SpellAbility cause, final Card c) {
         if (cause.hasParam("AnimateSubAbility")) {
-            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+            long unanimateTimestamp = Long.parseLong(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
             c.removeChangedCardKeywords(unanimateTimestamp, 0);
             c.removeChangedCardTypes(unanimateTimestamp, 0);
             c.removeChangedName(unanimateTimestamp, 0);

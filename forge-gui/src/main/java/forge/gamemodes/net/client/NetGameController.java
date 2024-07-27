@@ -31,7 +31,7 @@ public class NetGameController implements IGameController {
 
     @Override
     public void useMana(final byte color) {
-        send(ProtocolMethod.useMana, Byte.valueOf(color));
+        send(ProtocolMethod.useMana, color);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class NetGameController implements IGameController {
 
     @Override
     public void reorderHand(final CardView card, final int index) {
-        send(ProtocolMethod.reorderHand, card, Integer.valueOf(index));
+        send(ProtocolMethod.reorderHand, card, index);
     }
 
     private IMacroSystem macros;

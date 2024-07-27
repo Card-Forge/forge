@@ -1996,7 +1996,7 @@ public class AiController {
                 break;
             case FlipOntoBattlefield:
                 if ("DamageCreatures".equals(sa.getParam("AILogic"))) {
-                    int maxToughness = Integer.valueOf(sa.getSubAbility().getParam("NumDmg"));
+                    int maxToughness = Integer.parseInt(sa.getSubAbility().getParam("NumDmg"));
                     CardCollectionView rightToughness = CardLists.filter(pool, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {

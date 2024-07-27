@@ -2902,7 +2902,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         try {
                             if (keyword.startsWith("etbCounter")) {
                                 final String[] p = keyword.split(":");
-                                c.addCounterInternal(CounterType.getType(p[1]), Integer.valueOf(p[2]), null, false, null, null);
+                                c.addCounterInternal(CounterType.getType(p[1]), Integer.parseInt(p[2]), null, false, null, null);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -3054,7 +3054,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
                 int generic = manaCost.getGenericCost();
                 if (generic > 0 || manaCost.getCMC() == 0) {
-                    if (!genericManaSymbols.add(Integer.valueOf(generic))) {
+                    if (!genericManaSymbols.add(generic)) {
                         return false;
                     }
                 }

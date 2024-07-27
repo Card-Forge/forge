@@ -90,7 +90,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         if (from != null) {
             for (final Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
-                    result.add((Tout) srcKey, Integer.valueOf(1));
+                    result.add((Tout) srcKey, 1);
                 }
             }
         }
