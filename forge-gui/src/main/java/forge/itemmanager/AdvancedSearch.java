@@ -822,7 +822,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
-                    return input.toLowerCase().indexOf(values.get(0).toLowerCase()) != -1;
+                    return input.toLowerCase().contains(values.get(0).toLowerCase());
                 }
                 return false;
             }

@@ -525,7 +525,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final boolean shouldAutoYield(final String key) {
-        String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
         boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
 
         return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
@@ -533,7 +533,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
         boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
 
         if (autoYield) {
