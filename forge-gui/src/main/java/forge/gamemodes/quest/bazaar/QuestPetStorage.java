@@ -76,11 +76,7 @@ public class QuestPetStorage {
                 this.addToMap(petCtrl);
             }
 
-        } catch (final SAXException e) {
-            e.printStackTrace();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final ParserConfigurationException e) {
+        } catch (final SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
     }

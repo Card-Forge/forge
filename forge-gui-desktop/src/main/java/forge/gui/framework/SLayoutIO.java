@@ -149,10 +149,7 @@ public final class SLayoutIO {
             writer.add(EF.createEndElement("", "", "layout"));
             writer.flush(); 
             writer.add(EF.createEndDocument());
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
+        } catch (FileNotFoundException | XMLStreamException e) {
             // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
             e.printStackTrace();
         } finally {
@@ -345,10 +342,7 @@ public final class SLayoutIO {
             }
             writer.flush(); 
             writer.add(EF.createEndDocument());
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-            e.printStackTrace();
-        } catch (XMLStreamException e) {
+        } catch (FileNotFoundException | XMLStreamException e) {
             // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
             e.printStackTrace();
         } finally {
