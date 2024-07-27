@@ -3,9 +3,9 @@ ManaCost:2 W
 Types:Creature Angel Soldier
 PT:2/2
 K:Flying
-A:AB$ SetState | Cost$ 4 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+A:AB$ SetState | Cost$ 4 BH | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/H} can be paid with either {B} or 2 life.)
 AlternateMode:DoubleFaced
-Oracle:Flying\n{4}{B/P}: Transform Seraph of New Capenna. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+Oracle:Flying\n{4}{B/H}: Transform Seraph of New Capenna. Activate only as a sorcery. ({B/H} can be paid with either {B} or 2 life.)
 
 ALTERNATE
 

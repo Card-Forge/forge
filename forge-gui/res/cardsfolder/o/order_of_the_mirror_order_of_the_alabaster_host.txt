@@ -2,9 +2,9 @@ Name:Order of the Mirror
 ManaCost:1 U
 Types:Creature Human Knight
 PT:2/1
-A:AB$ SetState | Cost$ 3 WP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+A:AB$ SetState | Cost$ 3 WH | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/H} can be paid with either {W} or 2 life.)
 AlternateMode:DoubleFaced
-Oracle:{3}{W/P}: Transform Order of the Mirror. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+Oracle:{3}{W/H}: Transform Order of the Mirror. Activate only as a sorcery. ({W/H} can be paid with either {W} or 2 life.)
 
 ALTERNATE
 

@@ -3,10 +3,10 @@ ManaCost:G G G
 Types:Legendary Creature Hydra
 PT:4/5
 K:Reach
-A:AB$ SetState | Cost$ 6 WP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+A:AB$ SetState | Cost$ 6 WH | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({W/H} can be paid with either {W} or 2 life.)
 DeckHints:Color$White
 AlternateMode:DoubleFaced
-Oracle:Reach\n{6}{W/P}: Transform Polukranos Reborn. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+Oracle:Reach\n{6}{W/H}: Transform Polukranos Reborn. Activate only as a sorcery. ({W/H} can be paid with either {W} or 2 life.)
 
 ALTERNATE
 

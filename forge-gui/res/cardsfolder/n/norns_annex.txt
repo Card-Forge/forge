@@ -1,5 +1,5 @@
 Name:Norn's Annex
-ManaCost:3 WP WP
+ManaCost:3 WH WH
 Types:Artifact
-S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ WP | Description$ Creatures can't attack you or planeswalkers you control unless their controller pays {W/P} for each of those creatures.
-Oracle:({W/P} can be paid with either {W} or 2 life.)\nCreatures can't attack you or planeswalkers you control unless their controller pays {W/P} for each of those creatures.
+S:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ You,Planeswalker.YouCtrl | Cost$ WH | Description$ Creatures can't attack you or planeswalkers you control unless their controller pays {W/H} for each of those creatures.
+Oracle:({W/H} can be paid with either {W} or 2 life.)\nCreatures can't attack you or planeswalkers you control unless their controller pays {W/H} for each of those creatures.

@@ -1,5 +1,5 @@
 Name:Apostle's Blessing
-ManaCost:1 WP
+ManaCost:1 WH
 Types:Instant
 A:SP$ Protection | ValidTgts$ Creature.YouCtrl,Artifact.YouCtrl | TgtPrompt$ Select target artifact or creature you control | Gains$ Choice | Choices$ AnyColor,Artifact | SpellDescription$ Target artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
-Oracle:({W/P} can be paid with either {W} or 2 life.)\nTarget artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.
+Oracle:({W/H} can be paid with either {W} or 2 life.)\nTarget artifact or creature you control gains protection from artifacts or from the color of your choice until end of turn.

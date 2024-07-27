@@ -95,11 +95,11 @@ public class CardReaderExperiments {
             }
         }
         
-        //convert {2W} and {PW} to {2/W} and {P/W}, and ensure not {W/2} or {W/P}
+        //convert {2W} and {PW} to {2/W} and {P/W}, and ensure not {W/2} or {W/H}
         for (int i = 0; i < lines.size(); i++) {
-            String newLine = lines.get(i).replaceAll("\\{([WUBRG2P])([WUBRG])\\}", "\\{$1/$2\\}")
+            String newLine = lines.get(i).replaceAll("\\{([WUBRG2H])([WUBRG])\\}", "\\{$1/$2\\}")
                     .replaceAll("\\{([WUBRG])/2\\}", "\\{2/$1\\}")
-                    .replaceAll("\\{([WUBRG])/P\\}", "\\{$1/P\\}");
+                    .replaceAll("\\{([WUBRG])/H\\}", "\\{$1/H\\}");
             if (!newLine.equals(lines.get(i))) {
                 updated = true;
                 lines.set(i, newLine);

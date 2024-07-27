@@ -2,9 +2,9 @@ Name:Pyretic Prankster
 ManaCost:1 R
 Types:Creature Devil
 PT:2/1
-A:AB$ SetState | Cost$ 3 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+A:AB$ SetState | Cost$ 3 BH | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/H} can be paid with either {B} or 2 life.)
 AlternateMode:DoubleFaced
-Oracle:{3}{B/P}: Transform Pyretic Prankster. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+Oracle:{3}{B/H}: Transform Pyretic Prankster. Activate only as a sorcery. ({B/H} can be paid with either {B} or 2 life.)
 
 ALTERNATE
 

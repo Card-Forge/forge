@@ -1,6 +1,6 @@
 Name:Slash Panther
-ManaCost:4 RP
+ManaCost:4 RH
 Types:Artifact Creature Phyrexian Cat
 PT:4/2
 K:Haste
-Oracle:({R/P} can be paid with either {R} or 2 life.)\nHaste
+Oracle:({R/H} can be paid with either {R} or 2 life.)\nHaste
