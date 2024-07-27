@@ -120,7 +120,7 @@ public class CardReaderExperiments {
             if (s.isEmpty()) { continue; }
             try {
                 String pattern = s.replaceAll("\\{([WUBRGSXYZ]|[0-9]+)\\}", "$1[ ]\\?")
-                        .replaceAll("\\{([WUBRG2P])/([WUBRG])\\}", "$1$2[ ]\\?")
+                        .replaceAll("\\{([WUBRG2H])/([WUBRG])\\}", "$1$2[ ]\\?")
                         .replaceAll("\\{C\\}", "Chaos");
                 if (pattern.length() != s.length()) {
                     pattern = "Description\\$(.*)" + pattern;
