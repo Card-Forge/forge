@@ -1229,9 +1229,9 @@ public class CardFactoryUtil {
             // Gift is a special keyword that is used to create a trigger for permanents when they enter the battlefield
             // On casting a Gift needs to be promised to an opponent
             final SpellAbility saGift = AbilityFactory.getAbility(card.getSVar("GiftAbility"), card);
+            card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
 
             if (!card.isPermanent()) {
-                card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
                 saGift.setKeyword(inst);
                 return;
             }
@@ -1239,7 +1239,7 @@ public class CardFactoryUtil {
             String giftDescription = saGift.getParamOrDefault("GiftDescription", "<missing description>");
             final StringBuilder sbTrig = new StringBuilder();
             sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
-            sbTrig.append("ValidCard$ Card.Self | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | TriggerDescription$ ");
+            sbTrig.append("ValidCard$ Card.Self+PromisedGift | Secondary$ True | TriggerDescription$ ");
             sbTrig.append("Gift a ").append(giftDescription).append(" to ").append(card.getPromisedGift());
 
             final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
