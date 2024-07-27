@@ -77,17 +77,16 @@ public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
 
         // then I add wild decks in constructed directory
         Iterable<DeckProxy> constructedDecks = DeckProxy.getAllConstructedDecks();
-        Iterator<DeckProxy> it = constructedDecks.iterator();
 
-        while(it.hasNext()) {
-            Deck currDeck = it.next().getDeck();
+        for (DeckProxy constructedDeck : constructedDecks) {
+            Deck currDeck = constructedDeck.getDeck();
             final QuestEventDuel newDeck = read(currDeck);
             String newKey = keySelector.apply(newDeck);
             if (result.containsKey(newKey)) {
                 System.err.println("StorageReaderFolder: an object with key " + newKey + " is already present - skipping new entry");
             } else {
-                result.put(newKey, newDeck);                       
-            }            
+                result.put(newKey, newDeck);
+            }
         }
         
         return result;

@@ -164,10 +164,7 @@ public class AiCardMemory {
         Set<Card> memorySet = getMemorySet(set);
 
         if (memorySet != null) {
-            Iterator<Card> it = memorySet.iterator();
-
-            while (it.hasNext()) {
-                Card c = it.next();
+            for (Card c : memorySet) {
                 if (c.getName().equals(cardName)) {
                     return true;
                 }
@@ -191,10 +188,7 @@ public class AiCardMemory {
         Set<Card> memorySet = getMemorySet(set);
 
         if (memorySet != null) {
-            Iterator<Card> it = memorySet.iterator();
-
-            while (it.hasNext()) {
-                Card c = it.next();
+            for (Card c : memorySet) {
                 if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
                     return true;
                 }
@@ -259,10 +253,7 @@ public class AiCardMemory {
         Set<Card> memorySet = getMemorySet(set);
 
         if (memorySet != null) {
-            Iterator<Card> it = memorySet.iterator();
-
-            while (it.hasNext()) {
-                Card c = it.next();
+            for (Card c : memorySet) {
                 if (c.getName().equals(cardName)) {
                     return forgetCard(c, set);
                 }
@@ -284,10 +275,7 @@ public class AiCardMemory {
         Set<Card> memorySet = getMemorySet(set);
 
         if (memorySet != null) {
-            Iterator<Card> it = memorySet.iterator();
-
-            while (it.hasNext()) {
-                Card c = it.next();
+            for (Card c : memorySet) {
                 if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
                     return forgetCard(c, set);
                 }

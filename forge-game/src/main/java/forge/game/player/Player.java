@@ -2222,8 +2222,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (incR.length > 1) {
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
-            for (int j = 0; j < exR.length; j++) {
-                if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
+            for (String s : exR) {
+                if (!hasProperty(s, sourceController, source, spellAbility)) {
                     return false;
                 }
             }
@@ -3544,11 +3544,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public String trimKeywords(String keywordTexts) {
         if (keywordTexts.contains("Protection:")) {
             List <String> lines = Arrays.asList(keywordTexts.split("\n"));
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).startsWith("Protection:")) {
-                    List<String> parts = Arrays.asList(lines.get(i).split(":"));
+            for (String line : lines) {
+                if (line.startsWith("Protection:")) {
+                    List<String> parts = Arrays.asList(line.split(":"));
                     if (parts.size() > 2) {
-                        keywordTexts = TextUtil.fastReplace(keywordTexts, lines.get(i), parts.get(2));
+                        keywordTexts = TextUtil.fastReplace(keywordTexts, line, parts.get(2));
                     }
                 }
             }

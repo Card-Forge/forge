@@ -79,10 +79,8 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
             btnPackOrDeck.setText(String.valueOf(count));
         }
 
-        Iterator<StatTypes> buttonMapStatsIterator = buttonMap.keySet().iterator();
-        while (buttonMapStatsIterator.hasNext()){
-            StatTypes statTypes = buttonMapStatsIterator.next();
-            if (statTypes.predicate != null){
+        for (StatTypes statTypes : buttonMap.keySet()) {
+            if (statTypes.predicate != null) {
                 int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES), PaperCard.class);
                 buttonMap.get(statTypes).setText(String.valueOf(count));
             }

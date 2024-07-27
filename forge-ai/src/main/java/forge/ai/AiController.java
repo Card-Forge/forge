@@ -2112,9 +2112,9 @@ public class AiController {
         }
 
         // add the rest of land to the end of the deck
-        for (int i = 0; i < land.size(); i++) {
-            if (!library.contains(land.get(i))) {
-                library.add(land.get(i));
+        for (Card card : land) {
+            if (!library.contains(card)) {
+                library.add(card);
             }
         }
 

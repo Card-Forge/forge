@@ -36,24 +36,24 @@ public class MulliganService {
 
         boolean firstMullFree = game.getPlayers().size() > 2 || game.getRules().hasAppliedVariant(GameType.Brawl);
 
-        for (int i = 0; i < whoCanMulligan.size(); i++) {
+        for (Player player : whoCanMulligan) {
             MulliganDefs.MulliganRule rule = StaticData.instance().getMulliganRule();
             switch (rule) {
                 case Original:
-                    mulligans.add(new OriginalMulligan(whoCanMulligan.get(i), firstMullFree));
+                    mulligans.add(new OriginalMulligan(player, firstMullFree));
                     break;
                 case Paris:
-                    mulligans.add(new ParisMulligan(whoCanMulligan.get(i), firstMullFree));
+                    mulligans.add(new ParisMulligan(player, firstMullFree));
                     break;
                 case Vancouver:
-                    mulligans.add(new VancouverMulligan(whoCanMulligan.get(i), firstMullFree));
+                    mulligans.add(new VancouverMulligan(player, firstMullFree));
                     break;
                 case London:
-                    mulligans.add(new LondonMulligan(whoCanMulligan.get(i), firstMullFree));
+                    mulligans.add(new LondonMulligan(player, firstMullFree));
                     break;
                 default:
                     // Default to Vancouver mulligan for now. Should ideally never get here.
-                    mulligans.add(new VancouverMulligan(whoCanMulligan.get(i), firstMullFree));
+                    mulligans.add(new VancouverMulligan(player, firstMullFree));
                     break;
             }
         }

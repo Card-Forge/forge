@@ -42,7 +42,7 @@ abstract class Model {
   static int randomIndice(double[] arr, double r) {
     double sum = 0;
 
-    for (int j = 0; j < arr.length; j++) sum += arr[j];
+    for (double v : arr) sum += v;
 
     for (int j = 0; j < arr.length; j++) arr[j] /= sum;
 
@@ -181,8 +181,7 @@ abstract class Model {
         int[] p = this.propagator[d][stack2];
         int[][] compat = this.compatible[i2];
 
-        for (int l = 0; l < p.length; l++) {
-          int t2 = p[l];
+        for (int t2 : p) {
           int[] comp = compat[t2];
 
           comp[d]--;

@@ -222,8 +222,7 @@ public class ComputerUtilMana {
                     for (int i = 0; i < preferredShardAmount && i < prefSortedAbilities.size(); i++) {
                         finalAbilities.add(prefSortedAbilities.get(i));
                     }
-                    for (int i = 0; i < otherSortedAbilities.size(); i++) {
-                        SpellAbility ab = otherSortedAbilities.get(i);
+                    for (SpellAbility ab : otherSortedAbilities) {
                         if (!finalAbilities.contains(ab))
                             finalAbilities.add(ab);
                     }

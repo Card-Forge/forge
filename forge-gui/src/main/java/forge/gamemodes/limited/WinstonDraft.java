@@ -39,9 +39,8 @@ public class WinstonDraft extends BoosterDraft {
 
     private void initializeWinstonDraft() {
         this.deck = new Stack<>();
-        for (int i = 0; i < this.product.size(); i++) {
-            final Supplier<List<PaperCard>> supply = this.product.get(i);
-            for(int j = 0; j < NUM_PLAYERS; j++) {
+        for (final Supplier<List<PaperCard>> supply : this.product) {
+            for (int j = 0; j < NUM_PLAYERS; j++) {
                 // Remove Basic Lands from draft for simplicity
                 for (final PaperCard paperCard : Iterables.filter(supply.get(), Predicates.not(PaperCard.Predicates.Presets.IS_BASIC_LAND))) {
                     this.deck.add(paperCard);

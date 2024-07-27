@@ -100,8 +100,7 @@ public class DeckGroup extends DeckBase {
         DeckGroup myClone = (DeckGroup) clone;
         myClone.setHumanDeck((Deck) humanDeck.copyTo(getName())); //human deck name should always match DeckGroup name
 
-        for (int i = 0; i < aiDecks.size(); i++) {
-            Deck src = aiDecks.get(i);
+        for (Deck src : aiDecks) {
             myClone.addAiDeck((Deck) src.copyTo(src.getName()));
         }
     }

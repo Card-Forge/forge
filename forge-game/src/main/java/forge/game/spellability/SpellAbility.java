@@ -827,9 +827,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public void setTriggeringObjectsFrom(final Map<AbilityKey, Object> runParams, final AbilityKey... types) {
-        int typesLength = types.length;
-        for (int i = 0; i < typesLength; i += 1) {
-            AbilityKey type = types[i];
+        for (AbilityKey type : types) {
             if (runParams.containsKey(type)) {
                 triggeringObjects.put(type, runParams.get(type));
             }
@@ -868,9 +866,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         replacingObjects = AbilityKey.newMap(repParams);
     }
     public void setReplacingObjectsFrom(final Map<AbilityKey, Object> repParams, final AbilityKey... types) {
-        int typesLength = types.length;
-        for (int i = 0; i < typesLength; i += 1) {
-            AbilityKey type = types[i];
+        for (AbilityKey type : types) {
             if (repParams.containsKey(type)) {
                 setReplacingObject(type, repParams.get(type));
             }
@@ -2210,8 +2206,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (incR.length > 1) {
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
-            for (int j = 0; j < exR.length; j++) {
-                if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
+            for (String s : exR) {
+                if (!hasProperty(s, sourceController, source, spellAbility)) {
                     return testFailed;
                 }
             }

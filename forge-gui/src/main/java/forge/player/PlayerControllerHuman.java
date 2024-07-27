@@ -362,17 +362,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vSource = CardView.get(sa.getHostCard());
         final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
         Integer maxAmount = different ? 1 : manaAmount;
-        Iterator<Byte> it = colorSet.iterator();
-        while (it.hasNext()) {
-            vAffected.put(it.next(), maxAmount);
+        for (Byte color : colorSet) {
+            vAffected.put(color, maxAmount);
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            it = colorSet.iterator();
-            while (it.hasNext()) {
-                Byte color = it.next();
+            for (Byte color : colorSet) {
                 if (vResult.containsKey(color)) {
                     result.put(color, vResult.get(color));
                 }
