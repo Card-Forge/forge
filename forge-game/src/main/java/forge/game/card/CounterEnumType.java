@@ -35,7 +35,7 @@ public enum CounterEnumType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
-    ACORN("ACORN", 139,69,19),
+    ACORN("ACORN", 139, 69, 19),
 
     AEGIS("AEGIS", 207, 207, 207),
 
@@ -52,9 +52,11 @@ public enum CounterEnumType {
     BLAZE("BLAZE", 255, 124, 82),
     
     BLESSING("BLESS", 251, 0, 94),
-
+    
+    BLIGHT("BLGHT", 130, 115, 160),
+    
     BLOOD("BLOOD", 255, 108, 111),
-
+    
     BLOODLINE("BLDLN", 224, 44, 44),
     
     BLOODSTAIN("BLDST", 224, 44, 44),
