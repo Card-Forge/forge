@@ -1,6 +1,6 @@
 [format]
-Name:Standard
-Order:101
+Name:Arena Standard (BLB)
+Type:Archived
 Subtype:Standard
-Type:Sanctioned
+Effective:2024-07-30
 Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB
