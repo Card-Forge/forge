@@ -94,8 +94,14 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             afterCardPicked(card);
         }
 
+        @Override
+        protected int getMaxMoveQuantity(boolean isAddMenu, boolean isAddSource) {
+            return 1;
+        }
+
         private void afterCardPicked(PaperCard card) {
             BoosterDraft draft = getDraft();
+            assert draft != null;
             draft.setChoice(card);
 
             if (draft.hasNextChoice()) {
