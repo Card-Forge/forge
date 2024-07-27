@@ -213,7 +213,7 @@ public enum ManaCostShard {
                 case 'B': atoms |= ManaAtom.BLACK;          break;
                 case 'R': atoms |= ManaAtom.RED;            break;
                 case 'G': atoms |= ManaAtom.GREEN;          break;
-                case 'P': atoms |= ManaAtom.OR_2_LIFE;      break;
+                case 'H': atoms |= ManaAtom.OR_2_LIFE;      break;
                 case 'S': atoms |= ManaAtom.IS_SNOW;        break;
                 case 'X': atoms |= ManaAtom.IS_X;           break;
                 case 'C': atoms |= ManaAtom.COLORLESS;      break;
