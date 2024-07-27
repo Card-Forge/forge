@@ -1357,12 +1357,12 @@ public class AbilityUtils {
     private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
         Player controller = sa.getActivatingPlayer();
         Card source = sa.getHostCard();
-        // do blessing there before condition checks
 
         if (!sa.isSpell() || source.isPermanent()) {
             return;
         }
 
+        // do blessing there before condition checks
         if (source.hasKeyword(Keyword.ASCEND)) {
             if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
                 controller.setBlessing(true);
@@ -1376,7 +1376,6 @@ public class AbilityUtils {
             if (giftAbility != null) {
                 giftAbility.setActivatingPlayer(controller);
                 AbilityUtils.resolveApiAbility(giftAbility, game);
-                // Trigger "Give a gift" event. Is this the right spot?
             }
         }
     }
@@ -1406,6 +1405,10 @@ public class AbilityUtils {
         bread.setData("Card", card.getName());
         bread.setData("SA", sa.toString());
         Sentry.addBreadcrumb(bread);
+
+        if (!sa.isWrapper() && sa.isKeyword(Keyword.GIFT)) {
+            game.getTriggerHandler().runTrigger(TriggerType.GiveGift, AbilityKey.mapFromPlayer(sa.getActivatingPlayer()), false);
+        }
 
         // check conditions
         if (sa.metConditions()) {

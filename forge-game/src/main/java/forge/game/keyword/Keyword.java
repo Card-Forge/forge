@@ -91,7 +91,7 @@ public enum Keyword {
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
     FRIENDS_FOREVER("Friends forever", Partner.class, true, "You can have two commanders if both have friends forever."),
     FUSE("Fuse", SimpleKeyword.class, true, "You may cast one or both halves of this card from your hand."),
-    GIFT("Gift", SimpleKeyword.class, true, "(You may promise an opponent a gift as you cast this spell. If you do, when it enters, they %s.)"),
+    GIFT("Gift", SimpleKeyword.class, true, "You may promise an opponent a gift as you cast this spell. If you do, when it enters, they %s."),
     GRAFT("Graft", KeywordWithAmount.class, false, "This permanent enters the battlefield with {%d:+1/+1 counter} on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this permanent onto it."),
     GRAVESTORM("Gravestorm", SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. If the spell has any targets, you may choose new targets for any of the copies."),
     HASTE("Haste", SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),

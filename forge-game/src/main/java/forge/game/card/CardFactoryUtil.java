@@ -1229,9 +1229,10 @@ public class CardFactoryUtil {
             // Gift is a special keyword that is used to create a trigger for permanents when they enter the battlefield
             // On casting a Gift needs to be promised to an opponent
             final SpellAbility saGift = AbilityFactory.getAbility(card.getSVar("GiftAbility"), card);
-            card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
 
             if (!card.isPermanent()) {
+                card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
+                saGift.setKeyword(inst);
                 return;
             }
 
