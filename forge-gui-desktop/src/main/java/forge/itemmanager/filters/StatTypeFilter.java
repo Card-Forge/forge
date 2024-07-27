@@ -1,7 +1,6 @@
 package forge.itemmanager.filters;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JPanel;
