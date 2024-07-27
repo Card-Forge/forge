@@ -120,7 +120,7 @@ public class GuiChoose {
             if (str == null) { return null; } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
-                final Integer val = Integer.valueOf(str);
+                final int val = Integer.parseInt(str);
                 if (val >= min && val <= max) {
                     return val;
                 }

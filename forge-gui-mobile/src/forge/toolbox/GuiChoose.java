@@ -210,7 +210,7 @@ public class GuiChoose {
                     return;
                 }
                 if (StringUtils.isNumeric(result)) {
-                    Integer val = Integer.valueOf(result);
+                    int val = Integer.parseInt(result);
                     if (val >= min && val <= max) {
                         callback.run(val);
                         return;

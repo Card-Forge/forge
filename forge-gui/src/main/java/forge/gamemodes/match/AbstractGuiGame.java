@@ -723,7 +723,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
-                final Integer val = Integer.valueOf(str);
+                final int val = Integer.parseInt(str);
                 if (val >= min && val <= max) {
                     return val;
                 }

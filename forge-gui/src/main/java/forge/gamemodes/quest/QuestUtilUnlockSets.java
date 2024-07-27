@@ -69,7 +69,7 @@ public class QuestUtilUnlockSets {
         final Map<String, Integer> mapPrices = prices.getPriceList();
         final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<>();
 
-        Double multiplier = 1d;
+        double multiplier = 1d;
         int j = 0;
         for (CardEdition ed : getUnlockableEditions(qData)) {
             j++;

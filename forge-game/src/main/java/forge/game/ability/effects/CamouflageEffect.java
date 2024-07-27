@@ -90,7 +90,7 @@ public class CamouflageEffect extends SpellAbilityEffect {
                 // Remove chosen creatures, unless it can block additional attackers
                 for (final Card blocker : blockers) {
                     int index = pool.indexOf(blocker);
-                    Integer blockedCount = blockedSoFar.get(index) + 1;
+                    int blockedCount = blockedSoFar.get(index) + 1;
                     if (!blocker.canBlockAny() && blocker.canBlockAdditional() < blockedCount) {
                         pool.remove(index);
                         blockedSoFar.remove(index);

@@ -404,7 +404,7 @@ public final class SLayoutIO {
         final FView view = FView.SINGLETON_INSTANCE;
         String defaultLayoutSerial = "";
         String userLayoutSerial = "";
-        Boolean resetLayout = false;
+        boolean resetLayout = false;
         FScreen screen = Singletons.getControl().getCurrentScreen();
         FAbsolutePositioner.SINGLETON_INSTANCE.hideAll();
         view.getPnlInsets().removeAll();

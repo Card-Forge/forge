@@ -1903,7 +1903,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
             // for the purpose of pre-ordering, no need for extra granularity
-            Integer idxAdditionalInfo = firstStr.indexOf(" [");
+            int idxAdditionalInfo = firstStr.indexOf(" [");
             StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;

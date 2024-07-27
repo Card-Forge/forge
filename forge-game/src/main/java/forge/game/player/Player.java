@@ -940,7 +940,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setCounters(final CounterType counterType, final Integer num, Player source, boolean fireEvents) {
-        Integer old = getCounters(counterType);
+        int old = getCounters(counterType);
         setCounters(counterType, num);
         view.updateCounters(this);
         if (fireEvents) {

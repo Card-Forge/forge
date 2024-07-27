@@ -52,7 +52,7 @@ public class TapAllAi extends SpellAbilityAi {
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParam("AILogic");
             if (logic.startsWith("AtLeast")) {
-                Integer num = AbilityUtils.calculateAmount(source, logic.substring(7), sa);
+                int num = AbilityUtils.calculateAmount(source, logic.substring(7), sa);
                 if (validTappables.size() < num) {
                     return false;
                 }
