@@ -2496,7 +2496,7 @@ public class GameSimulationTest extends SimulationTest {
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
-        SpellAbility transformSA = findSAWithPrefix(heliod, "{3}{U/P}: Transform");
+        SpellAbility transformSA = findSAWithPrefix(heliod, "{3}{U/H}: Transform");
 
         GameSimulator sim = createSimulator(game, p);
         AssertJUnit.assertNotNull(transformSA);
