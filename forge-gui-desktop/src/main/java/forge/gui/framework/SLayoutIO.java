@@ -131,10 +131,8 @@ public final class SLayoutIO {
         final FileLocation file = ForgeConstants.WINDOW_LAYOUT_FILE;
         final String fWriteTo = file.userPrefLoc;
         final XMLOutputFactory out = XMLOutputFactory.newInstance();
-        FileOutputStream fos = null;
         XMLEventWriter writer = null;
-        try {
-            fos = new FileOutputStream(fWriteTo);
+        try (FileOutputStream fos = new FileOutputStream(fWriteTo)) {
             writer = out.createXMLEventWriter(fos);
 
             writer.add(EF.createStartDocument());
@@ -147,17 +145,14 @@ public final class SLayoutIO {
             writer.add(EF.createAttribute(Property.max, window.isMaximized() ? "1" : "0"));
             writer.add(EF.createAttribute(Property.fs, window.isFullScreen() ? "1" : "0"));
             writer.add(EF.createEndElement("", "", "layout"));
-            writer.flush(); 
+            writer.flush();
             writer.add(EF.createEndDocument());
-        } catch (FileNotFoundException | XMLStreamException e) {
+        } catch (XMLStreamException | IOException e) {
             // TODO Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
             e.printStackTrace();
         } finally {
-            if (writer != null ) {
-                try { writer.close(); } catch (XMLStreamException e) {}
-            }
-            if ( fos != null ) {
-                try { fos.close(); } catch (IOException e) {}
+            if (writer != null) {
+                try { writer.close(); } catch (XMLStreamException ignored) {}
             }
         }
     }
