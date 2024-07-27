@@ -32,6 +32,7 @@
 package forge.util;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -89,9 +90,7 @@ public final class Base64Coder {
     private static byte[] map2 = new byte[128];
 
     static {
-        for (int i = 0; i < Base64Coder.map2.length; i++) {
-            Base64Coder.map2[i] = -1;
-        }
+        Arrays.fill(Base64Coder.map2, (byte) -1);
         for (int i = 0; i < 64; i++) {
             Base64Coder.map2[Base64Coder.map1[i]] = (byte) i;
         }

@@ -271,9 +271,7 @@ public class CardFactoryUtil {
     public static byte getMostProminentColors(final Iterable<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        Arrays.fill(map, 0);
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -309,9 +307,6 @@ public class CardFactoryUtil {
     public static int[] SortColorsFromList(final CardCollection list) {
         int cntColors = MagicColor.WUBRG.length;
         final int[] map = new int[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -339,10 +334,7 @@ public class CardFactoryUtil {
             colorRestrictions.add(MagicColor.fromName(col));
         }
         int cntColors = colorRestrictions.size();
-        final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        final int[] map = new int[cntColors];
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
