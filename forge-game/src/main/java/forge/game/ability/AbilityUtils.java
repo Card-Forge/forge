@@ -1156,6 +1156,13 @@ public class AbilityUtils {
             if (p != null) {
                 players.add(p);
             }
+        } else if (defined.equals("Promised")) {
+            if (card != null) {
+                final Player p = card.getPromisedGift();
+                if (p != null) {
+                    players.add(p);
+                }
+            }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
         } else if (defined.equals("SourceController")) {
@@ -1326,12 +1333,7 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers();
         }
 
-        // do blessing there before condition checks
-        if (sa.isSpell() && !sa.getHostCard().isPermanent() && sa.getHostCard().hasKeyword(Keyword.ASCEND)) {
-            if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
-                pl.setBlessing(true);
-            }
-        }
+        resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
         if (!sa.isWrapper()) {
@@ -1350,6 +1352,32 @@ public class AbilityUtils {
             return;
         }
         AbilityUtils.resolveApiAbility(sa, game);
+    }
+
+    private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
+        Player controller = sa.getActivatingPlayer();
+        Card source = sa.getHostCard();
+
+        if (!sa.isSpell() || source.isPermanent()) {
+            return;
+        }
+
+        // do blessing there before condition checks
+        if (source.hasKeyword(Keyword.ASCEND)) {
+            if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
+                controller.setBlessing(true);
+            }
+        }
+
+        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+            game.getAction().checkStaticAbilities();
+            // Is AdditionalAbility available from anything here?
+            AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
+            if (giftAbility != null) {
+                giftAbility.setActivatingPlayer(controller);
+                AbilityUtils.resolveApiAbility(giftAbility, game);
+            }
+        }
     }
 
     private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
@@ -1377,6 +1405,10 @@ public class AbilityUtils {
         bread.setData("Card", card.getName());
         bread.setData("SA", sa.toString());
         Sentry.addBreadcrumb(bread);
+
+        if (!sa.isWrapper() && sa.isKeyword(Keyword.GIFT)) {
+            game.getTriggerHandler().runTrigger(TriggerType.GiveGift, AbilityKey.mapFromPlayer(sa.getActivatingPlayer()), false);
+        }
 
         // check conditions
         if (sa.metConditions()) {

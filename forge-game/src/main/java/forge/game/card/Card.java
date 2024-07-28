@@ -295,6 +295,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private Player promisedGift;
     private Player protectingPlayer;
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
@@ -1888,6 +1889,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChosenPlayer(this);
     }
 
+    public final boolean hasPromisedGift() {
+        return promisedGift != null;
+    }
+    public final Player getPromisedGift() {
+        return promisedGift;
+    }
+    public final void setPromisedGift(final Player p) {
+        if (promisedGift == p) { return; }
+        promisedGift = p;
+        view.updatePromisedGift(this);
+    }
+
     public final Player getProtectingPlayer() {
         return protectingPlayer;
     }
@@ -2424,6 +2437,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(". ").append(k[3]);
                     }
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.equals("Gift")) {
+                    sbLong.append(keyword);
+                    if (inst.getHostCard() != null && inst.getHostCard().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbLong.append(" ").append(inst.getHostCard().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    }
+                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
@@ -3069,6 +3088,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbCost.append(cost.toSimpleString());
                     sbAfter.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
+                } else if (keyword.equals("Gift")) {
+                    sbBefore.append(keyword);
+                    if (state.getFirstAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbBefore.append(" ").append(state.getFirstAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    }
+                    sbBefore.append("\r\n");
                 } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
                         "playing for ante.")) {
                     sbBefore.append(keyword);

@@ -17,24 +17,16 @@
  */
 package forge.game;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.*;
-import forge.game.card.*;
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityAlternativeCost;
-import forge.util.Aggregates;
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -46,12 +38,21 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -434,6 +435,9 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Gift")) {
+              final Cost cost = new Cost("PromiseGift", false);
+              costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
                 int numKickers = sCosts.length;
