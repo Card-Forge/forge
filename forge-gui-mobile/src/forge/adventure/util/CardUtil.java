@@ -713,8 +713,18 @@ public class CardUtil {
 
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
-        if(path.endsWith(".dck"))
-            return DeckSerializer.fromFile(Config.instance().getFile(path).file());
+        if(path.endsWith(".dck")) {
+            FileHandle fileHandle = Config.instance().getFile(path);
+            Deck deck = null;
+            if (fileHandle != null) {
+                deck = DeckSerializer.fromFile(fileHandle.file());
+            }
+            if (deck == null) {
+                deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
+                System.err.println("Error loading Deck: " + path + "\nGenerating random deck: " + deck.getName());
+            }
+            return deck;
+        }
 
         if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
