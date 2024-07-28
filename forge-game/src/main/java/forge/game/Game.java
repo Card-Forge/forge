@@ -90,8 +90,9 @@ public class Game {
 
     private final Zone stackZone = new Zone(ZoneType.Stack, this);
 
+    // While these are false here, they're really set by the Match/Preferences
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
-    // While this is false here, its really set by the Match/Preferences
+    public boolean EXPERIMENTAL_LOOP = false;
 
     // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;

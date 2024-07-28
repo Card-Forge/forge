@@ -989,6 +989,13 @@ public class PhaseHandler implements java.io.Serializable {
         startFirstTurn(goesFirst, null);
     }
     public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
+
+        if (this.game.EXPERIMENTAL_LOOP) {
+            System.out.println("Hit feature flag for experimental loop");
+        } else {
+            System.out.println("No feature flag for experimental loop");
+        }
+
         StopWatch sw = new StopWatch();
 
         if (phase != null) {
