@@ -2295,11 +2295,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
-    public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
+    public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
 
-        final Card cpy = CardCopyService.getLKICopy(c);
         sacrificedThisTurn.add(cpy);
 
         // Run triggers

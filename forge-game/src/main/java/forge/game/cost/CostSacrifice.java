@@ -162,13 +162,17 @@ public class CostSacrifice extends CostPartWithList {
     }
 
     @Override
-    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
-        final Game game = targetCard.getGame();
+    protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) { return null; }
+    @Override
+    protected boolean canPayListAtOnce() { return true; }
+    @Override
+    protected CardCollectionView doListPayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
+        final Game game = ability.getHostCard().getGame();
         // no table there, it is already handled by CostPartWithList
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         AbilityKey.addCardZoneTableParams(moveParams, table);
 
-        return game.getAction().sacrifice(targetCard, ability, effect, moveParams);
+        return game.getAction().sacrifice(targetCards, ability, effect, moveParams);
     }
 
     /* (non-Javadoc)

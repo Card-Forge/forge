@@ -78,15 +78,13 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
-        for (Card sac : list) {
+        for (Card sac : game.getAction().sacrifice(list, sa, true, params)) {
             final Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
-            if (game.getAction().sacrifice(sac, sa, true, params) != null) {
-                if (remSacrificed) {
-                    host.addRemembered(lKICopy);
-                }
-                if (sa.hasParam("ImprintSacrificed")) {
-                    host.addImprintedCard(lKICopy);
-                }
+            if (remSacrificed) {
+                host.addRemembered(lKICopy);
+            }
+            if (sa.hasParam("ImprintSacrificed")) {
+                host.addImprintedCard(lKICopy);
             }
         }
 
