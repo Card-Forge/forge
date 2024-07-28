@@ -61,7 +61,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
-    private List<Integer> selectedIndices = new ArrayList<>();
+    private final List<Integer> selectedIndices = new ArrayList<>();
 
     public ItemListModel getListModel() {
         return listModel;
@@ -155,7 +155,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public void selectAll() {
         selectedIndices.clear();
-        IntStream.range(0, getCount()).forEach(i -> selectedIndices.add(i));
+        IntStream.range(0, getCount()).forEach(selectedIndices::add);
         onSelectionChange();
     }
 
