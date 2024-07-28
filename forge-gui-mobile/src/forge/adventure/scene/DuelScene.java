@@ -109,7 +109,7 @@ public class DuelScene extends ForgeScene {
             e.printStackTrace();
         }
         String enemyName = enemy.getName();
-        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
+        boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
             final FBufferedImage fb = new FBufferedImage(120, 120) {
@@ -131,19 +131,18 @@ public class DuelScene extends ForgeScene {
                     "Thought you could beat me?  Whew, talk about conceited.", "*Yawn* ... Huh? It's over already? But I just woke up!",
                     "Next time bring an army. It might give you a chance.", "The reason you lost is quite simple...",
                     "Is that all you can do?", "You need to learn more to stand a chance.", "You weren't that bad.", "You made an effort at least.",
-                    "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!");
+                    "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!",
+                    "Wanting something does not give you the right to have it.", "It takes skill to be this bad.",
+                    "You're impressing me with your ability to fail so effortlessly.", "No one's good at everything . . . but you're bad at everything",
+                    "I'd say you're really good if failing was the goal.", "It ain't getting easier, and you're not getting any better",
+                    "Uh... you okay there?", "Are you even trying?", "Lose again? Why am I not surprised!", "That's the spirit, Go out there and lose again. I'll be waiting.");
             String message = Aggregates.random(insult);
             boolean finalWinner = winner;
             FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, fb, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
-                    if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner);
-                        if (Config.instance().getSettingData().disableWinLose) {
-                            MatchController.writeMatchPreferences();
-                            exitDuelScene();
-                        }
-                    }
+                    afterGameEnd(enemyName, finalWinner);
+                    exitDuelScene();
                     fb.dispose();
                 }
             }));
@@ -375,7 +374,7 @@ public class DuelScene extends ForgeScene {
         //hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
-        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
+        boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         if (chaosBattle || showMessages) {
             final FBufferedImage fb = new FBufferedImage(120, 120) {
                 @Override
