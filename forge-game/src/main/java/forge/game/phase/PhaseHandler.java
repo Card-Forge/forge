@@ -1007,7 +1007,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void mainGameLoop() {
-        while (!game.isGameOver()) {
+        while (!game.isGameOver() && !(game.getAge() == GameStage.RestartedByKarn)) {
             mainLoopStep();
         }
     }
