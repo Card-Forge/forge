@@ -259,11 +259,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             return isLandscape ? new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR)
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             } : new DeckEditorPage[] {
                     new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION)
+                    new DeckSectionPage(DeckSection.Commander, ItemManagerConfig.COMMANDER_SECTION),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
         case PlanarConquest:
             return isLandscape ? new DeckEditorPage[] {
@@ -367,10 +369,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck,FEventHandler backButton) {
         super(backButton, getPages(editorType0));
 
-        if (editorType0 == EditorType.QuestCommander) //fix saving quest commander
-            editorType = EditorType.Quest;
-        else
-            editorType = editorType0;
+        editorType = editorType0;
 
         editorType.getController().editor = this;
 
@@ -486,6 +485,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                         defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
                                         break;
                                     case Quest:
+                                    case QuestCommander:
                                         defaultLandSet = FModel.getQuest().getDefaultLandSet();
                                         break;
                                     default:
@@ -1487,7 +1487,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             super.initialize();
             cardManager.setCaption(getItemManagerCaption());
 
-            if (!isVisible() && (parentScreen.getEditorType() != EditorType.Quest||parentScreen.getEditorType() != EditorType.QuestCommander)) {
+            if (!isVisible() && (parentScreen.getEditorType() != EditorType.Quest && parentScreen.getEditorType() != EditorType.QuestCommander)) {
                 //delay refreshing while hidden unless for quest inventory
                 needRefreshWhenShown = true;
                 //Throw in the all cards that might be requested by other pages.
@@ -1539,6 +1539,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         public void refresh() {
             Predicate<PaperCard> additionalFilter = null;
             final EditorType editorType = parentScreen.getEditorType();
+            Deck currentDeck = parentScreen.getDeck();
             switch (editorType) {
                 case Archenemy:
                     cardManager.setPool(FModel.getArchenemyCards(), true);
@@ -1547,28 +1548,40 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     cardManager.setPool(FModel.getPlanechaseCards(), true);
                     break;
                 case Quest:
-                    final ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
+                case QuestCommander:
+                    ItemPool<PaperCard> questPool = new ItemPool<>(PaperCard.class);
                     questPool.addAll(FModel.getQuest().getCards().getCardpool());
-                    // remove bottom cards that are in the deck from the card pool
-                    questPool.removeAll(parentScreen.getDeck().getMain());
-                    // remove sideboard cards from the catalog
-                    questPool.removeAll(parentScreen.getDeck().getOrCreate(DeckSection.Sideboard));
+                    // remove cards that are in the deck from the card pool
+                    questPool.removeAll(currentDeck.getAllCardsInASinglePool(true, true));
+                    if (editorType == EditorType.QuestCommander) {
+                        List<PaperCard> commanders = currentDeck.getCommanders();
+                        Predicate<PaperCard> filter;
+                        String label;
+                        if (commanders.isEmpty()) {
+                            filter = DeckFormat.Commander.isLegalCommanderPredicate();
+                            label = "lblCommanders";
+                        }
+                        else {
+                            filter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
+                            label = "lblCards";
+                        }
+                        cardManager.setCaption(Forge.getLocalizer().getMessage(label));
+                        questPool = editorType.applyCardFilter(questPool, filter);
+                    }
                     cardManager.setPool(questPool);
                     break;
                 case PlanarConquest:
-                    cardManager.setPool(ConquestUtil.getAvailablePool(parentScreen.getDeck()));
+                    cardManager.setPool(ConquestUtil.getAvailablePool(currentDeck));
                     break;
-                case QuestCommander:
                 case Commander:
                 case Oathbreaker:
                 case TinyLeaders:
                 case Brawl:
-                    final List<PaperCard> commanders = parentScreen.getDeck().getCommanders();
+                    final List<PaperCard> commanders = currentDeck.getCommanders();
                     if (commanders.isEmpty()) {
                         //if no commander set for deck, only show valid commanders
                         switch (editorType) {
                             case Commander:
-                            case QuestCommander:
                                 additionalFilter = DeckFormat.Commander.isLegalCommanderPredicate();
                                 cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommanders"));
                                 break;
@@ -1591,7 +1604,6 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                         //if a commander has been set, only show cards that match its color identity
                         switch (editorType) {
                             case Commander:
-                            case QuestCommander:
                                 additionalFilter = DeckFormat.Commander.isLegalCardForCommanderPredicate(commanders);
                                 break;
                             case Oathbreaker:

@@ -1,0 +1,7 @@
+Name:Oakhollow Village
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ G | RestrictValid$ Spell.Creature | SpellDescription$ Add {G}. Spend this mana only to cast a creature spell.
+A:AB$ PutCounterAll | Cost$ G T | ValidCards$ Frog.ThisTurnEntered+YouCtrl,Rabbit.ThisTurnEntered+YouCtrl,Raccoon.ThisTurnEntered+YouCtrl,Squirrel.ThisTurnEntered+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn.
+Oracle:{T}: Add {C}.\n{T}: Add {G}. Spend this mana only to cast a creature spell.\n {G}, {T}: Put a +1/+1 counter on each Frog, Rabbit, Raccoon, or Squirrel you control that entered the battlefield this turn.

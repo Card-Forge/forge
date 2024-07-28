@@ -1,0 +1,7 @@
+Name:Line Cutter
+ManaCost:3 B
+Types:Creature Human Rogue Guest
+PT:3/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, roll to visit your Attractions.
+SVar:TrigRollDice:DB$ RollDice | Sides$ 6 | ToVisitYourAttractions$ True
+Oracle:When Line Cutter enters the battlefield, roll to visit your Attractions.

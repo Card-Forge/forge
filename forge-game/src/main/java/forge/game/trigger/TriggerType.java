@@ -85,6 +85,7 @@ public enum TriggerType {
     FlippedCoin(TriggerFlippedCoin.class),
     Forage(TriggerForage.class),
     Foretell(TriggerForetell.class),
+    GiveGift(TriggerGiveGift.class),
     Immediate(TriggerImmediate.class),
     Investigated(TriggerInvestigated.class),
     LandPlayed(TriggerLandPlayed.class),

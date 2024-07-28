@@ -133,6 +133,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 }
 
                 ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
+                ((DeckController<Deck>)EditorType.QuestCommander.getController()).setRootFolder(FModel.getQuest().getMyDecks());
                 ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
                 if (reason == LaunchReason.StartQuestMode) {
                     if (QuestUtil.getCurrentDeck() == null) {

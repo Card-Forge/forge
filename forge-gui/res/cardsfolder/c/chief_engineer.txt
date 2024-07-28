@@ -2,6 +2,6 @@ Name:Chief Engineer
 ManaCost:1 U
 Types:Creature Vedalken Artificer
 PT:1/3
-S:Mode$ Continuous | Affected$ Card.Artifact+YouCtrl | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)
+S:Mode$ Continuous | Affected$ Card.Artifact+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)
 AI:RemoveDeck:Random
 Oracle:Artifact spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting an artifact spell pays for {1} or one mana of that creature's color.)

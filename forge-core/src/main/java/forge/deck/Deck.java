@@ -539,7 +539,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool getAllCardsInASinglePool() {
         return getAllCardsInASinglePool(true);
     }
+
     public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
+        return getAllCardsInASinglePool(includeCommander, false);
+    }
+
+    public CardPool getAllCardsInASinglePool(final boolean includeCommander, boolean includeExtras) {
         final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
         if (this.has(DeckSection.Sideboard)) {
@@ -547,6 +552,11 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         }
         if (includeCommander && this.has(DeckSection.Commander)) {
             allCards.addAll(this.get(DeckSection.Commander));
+        }
+        if (includeExtras) {
+            for (DeckSection section : DeckSection.NONTRADITIONAL_SECTIONS)
+                if (this.has(section))
+                    allCards.addAll(this.get(section));
         }
         // do not include schemes / avatars and any non-regular cards
         return allCards;

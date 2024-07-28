@@ -1,0 +1,7 @@
+Name:Mudflat Village
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ B | RestrictValid$ Spell.Creature | SpellDescription$ Add {B}. Spend this mana only to cast a creature spell.
+A:AB$ ChangeZone | Cost$ 1 B T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Bat.YouOwn,Lizard.YouOwn,Rat.YouOwn,Squirrel.YouOwn | TgtPrompt$ Select target Bat, Lizard, Rat, or Squirrel card in your graveyard | SpellDescription$ Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand.
+Oracle:{T}: Add {C}.\n{T}: Add {B}. Spend this mana only to cast a creature spell.\n{1}{B}, {T}, Sacrifice Mudflat Village: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand.

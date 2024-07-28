@@ -1,0 +1,15 @@
+Name:Osteomancer Adept
+ManaCost:1 B
+Types:Creature Squirrel Warlock
+PT:2/2
+K:Deathtouch
+A:AB$ Effect | Cost$ T | StaticAbilities$ MayCast | Triggers$ StaticCast | SpellDescription$ Until end of turn, you may cast creature spells from your graveyard by foraging in addition to paying their other costs. If you cast a spell this way, that creature enters with a finality counter on it. (To forage, exile three cards from your graveyard or sacrifice a Food. If a creature with a finality counter on it would die, exile it instead.)
+SVar:MayCast:Mode$ Continuous | Affected$ Creature.nonLand+YouOwn | MayPlay$ True | AffectedZone$ Graveyard | RaiseCost$ Forage | Description$ Until end of turn, you may cast creature spells from your graveyard by foraging in addition to paying their other costs. If you cast a spell this way, that creature enters with a finality counter on it. (To forage, exile three cards from your graveyard or sacrifice a Food. If a creature with a finality counter on it would die, exile it instead.)
+SVar:StaticCast:Mode$ SpellCast | ValidCard$ Card.CastSa Spell.MayPlaySource | Execute$ TrigEffect | Static$ True | TriggerZones$ Command
+SVar:TrigEffect:DB$ Effect | ReplacementEffects$ ReMoved | RememberObjects$ TriggeredCard
+SVar:ReMoved:Event$ Moved | Origin$ Stack | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ FINALITY | CounterNum$ 1 | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+DeckHas:Ability$Counters
+DeckHints:Ability$Graveyard & Type$Food
+Oracle:Deathtouch\n{T}: Until end of turn, you may cast creature spells from your graveyard by foraging in addition to paying their other costs. If you cast a spell this way, that creature enters with a finality counter on it. (To forage, exile three cards from your graveyard or sacrifice a Food. If a creature with a finality counter on it would die, exile it instead.)

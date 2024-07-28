@@ -1,0 +1,12 @@
+Name:Kitnap
+ManaCost:2 U U
+Types:Enchantment Aura
+K:Gift
+K:Enchant creature
+SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ GainControl | GiftAbility$ GiftAbility
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature. If the gift wasn't promised, put three stun counters on it.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBStun
+SVar:DBStun:DB$ PutCounter | Defined$ Enchanted | CounterType$ Stun | CounterNum$ 3 | ConditionDefined$ Self | ConditionPresent$ Card.PromisedGift | ConditionCompare$ EQ0
+Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, when it enters, they draw a card.)\nEnchant creature\nWhen Kitnap enters, tap enchanted creature. If the gift wasn't promised, put three stun counters on it.\nYou control enchanted creature.

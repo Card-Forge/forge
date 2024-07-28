@@ -1,0 +1,8 @@
+Name:Blooming Blast
+ManaCost:1 R
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ Promised | GiftDescription$ a Treasure
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature. If the gift was promised, CARDNAME also deals 3 damage to that creature's controller.
+SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 3 | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1
+Oracle:Gift a Treasure (You may promise an opponent a gift as you cast this spell. If you do, they create a Treasure token before its other effects. It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nBlooming Blast deals 2 damage to target creature. If the gift was promised, Blooming Blast also deals 3 damage to that creature's controller.

@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (BLB)
+Type:Archived
+Subtype:Arena
+Effective:2024-07-30
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB

@@ -17,40 +17,11 @@
  */
 package forge.game.card;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import forge.GameCommand;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.event.GameEventCardForetold;
-import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import com.google.common.collect.*;
+import forge.GameCommand;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -60,22 +31,15 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.cost.Cost;
-import forge.game.cost.CostCollectEvidence;
+import forge.game.cost.*;
+import forge.game.event.GameEventCardForetold;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.staticability.StaticAbilityPlotZone;
@@ -83,10 +47,16 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
-
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * <p>
@@ -1255,6 +1225,27 @@ public class CardFactoryUtil {
 
             saRebel.setIntrinsic(intrinsic);
             inst.addTrigger(etbTrigger);
+        } else if (keyword.equals("Gift")) {
+            // Gift is a special keyword that is used to create a trigger for permanents when they enter the battlefield
+            // On casting a Gift needs to be promised to an opponent
+            final SpellAbility saGift = AbilityFactory.getAbility(card.getSVar("GiftAbility"), card);
+            card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
+
+            if (!card.isPermanent()) {
+                saGift.setKeyword(inst);
+                return;
+            }
+
+            String giftDescription = saGift.getParamOrDefault("GiftDescription", "<missing description>");
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self+PromisedGift | Secondary$ True | TriggerDescription$ ");
+            sbTrig.append("Gift a ").append(giftDescription).append(" to ").append(card.getPromisedGift());
+
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
+            etbTrigger.setOverridingAbility(saGift);
+            saGift.setIntrinsic(intrinsic);
+            inst.addTrigger(etbTrigger);
         } else if (keyword.startsWith("Graft")) {
             final StringBuilder sb = new StringBuilder();
             sb.append("DB$ MoveCounter | Source$ Self | Defined$ TriggeredCardLKICopy");
@@ -1594,6 +1585,24 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(transformEff, card));
 
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Offspring")) {
+            final String[] k = keyword.split(":");
+            final Cost cost = new Cost(k[1], false);
+            String costDesc = cost.toSimpleString();
+            if (!cost.isOnlyManaCost()) {
+                costDesc = "—" + costDesc;
+            }
+
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+linkedCastTrigger | CheckSVar$ Offspring | Secondary$ True " +
+                    "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
+            trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+            trigger.setSVar("Offspring", "0");
+
+            inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -1782,20 +1791,20 @@ public class CardFactoryUtil {
             // Setup ETB trigger for card with Soulbond keyword
             final String actualTriggerSelf = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Card.Self | "
-                    + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
+                    + "IsPresent$ Creature.Other+YouCtrl+!Paired | Secondary$ True | "
                     + "TriggerDescription$ When CARDNAME enters the battlefield, "
                     + "you may pair CARDNAME with another unpaired creature you control";
-            final String abStringSelf = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Other+YouCtrl+NotPaired";
+            final String abStringSelf = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Other+YouCtrl+!Paired";
             final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, intrinsic);
             parsedTriggerSelf.setOverridingAbility(AbilityFactory.getAbility(abStringSelf, card));
 
             // Setup ETB trigger for other creatures you control
             final String actualTriggerOther = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | "
-                    + " IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
+                    + " IsPresent$ Creature.Self+!Paired | Secondary$ True | "
                     + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
                     + "you may pair it with CARDNAME";
-            final String abStringOther = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Self+NotPaired";
+            final String abStringOther = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Self+!Paired";
             final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, intrinsic);
             parsedTriggerOther.setOverridingAbility(AbilityFactory.getAbility(abStringOther, card));
 
@@ -1820,7 +1829,7 @@ public class CardFactoryUtil {
                     "ValidCard$ Card.Self+linkedCastSA | CheckSVar$ SquadAmount | Secondary$ True | " +
                     "TriggerDescription$ When this creature enters the battlefield, create that many tokens that " +
                     "are copies of it.";
-            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ SquadAmount";
+            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ SquadAmount";
 
             final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);
@@ -3921,8 +3930,8 @@ public class CardFactoryUtil {
                     descAdded = true;
                 }
             }
-            if (mapParams.containsKey("AddReplacementEffects")) {
-                for (String s : mapParams.get("AddReplacementEffects").split(" & ")) {
+            if (mapParams.containsKey("AddReplacementEffect")) {
+                for (String s : mapParams.get("AddReplacementEffect").split(" & ")) {
                     if (descAdded) {
                         desc.append("\r\n");
                     }

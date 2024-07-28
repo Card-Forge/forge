@@ -272,6 +272,8 @@ public enum CounterEnumType {
     MATRIX("MATRX", 183, 174, 255),
 
     MEMORY("MEMRY", 174, 183, 255),
+    
+    MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
 

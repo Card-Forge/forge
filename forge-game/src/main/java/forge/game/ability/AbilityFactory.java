@@ -17,14 +17,9 @@
  */
 package forge.game.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.CardTraitBase;
@@ -39,6 +34,10 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -64,7 +63,8 @@ public final class AbilityFactory {
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
             "RegenerationAbility", // for Regeneration Effect
-            "ReturnAbility" // for Delayed Trigger on Magpie
+            "ReturnAbility", // for Delayed Trigger on Magpie
+            "GiftAbility" // for Promise Gift
         );
 
     public enum AbilityRecordType {

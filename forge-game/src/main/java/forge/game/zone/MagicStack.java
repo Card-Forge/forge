@@ -17,24 +17,9 @@
  */
 package forge.game.zone;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeSet;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -43,12 +28,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.PlayEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
-import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventZone;
+import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaRefundService;
@@ -61,6 +41,10 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.TextUtil;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * <p>
@@ -271,6 +255,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
+            game.getAction().checkStaticAbilities();
+
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 addAbilityActivatedThisTurn(sp, source);
@@ -605,6 +592,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
+        game.getAction().checkStaticAbilities();
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)
@@ -808,14 +796,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Grab players in turn order starting with the active player
         List<Player> players = game.getPlayersInTurnOrder(playerTurn);
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }
             result |= chooseOrderOfSimultaneousStackEntry(p, false);
         }
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }

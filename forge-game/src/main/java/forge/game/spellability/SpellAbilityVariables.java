@@ -17,12 +17,12 @@
  */
 package forge.game.spellability;
 
-import java.util.EnumSet;
-import java.util.Set;
-
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -341,9 +341,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDelirium(boolean delirium) {  this.delirium = delirium; }
 
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
-
     public void setDesert(final boolean bDesert) { desert = bDesert; }
-
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
     public void setSolved(final boolean bSolved) { solved = bSolved; }
 

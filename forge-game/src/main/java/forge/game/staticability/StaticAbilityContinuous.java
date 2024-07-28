@@ -350,8 +350,8 @@ public final class StaticAbilityContinuous {
                 addAbilities = sVars;
             }
 
-            if (params.containsKey("AddReplacementEffects")) {
-                final String[] sVars = params.get("AddReplacementEffects").split(" & ");
+            if (params.containsKey("AddReplacementEffect")) {
+                final String[] sVars = params.get("AddReplacementEffect").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
                     sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
