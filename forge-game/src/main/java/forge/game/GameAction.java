@@ -1442,10 +1442,7 @@ public class GameAction {
                 sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
                 orderedSacrificeList = true;
             }
-            for (Card c : sacrificeList) {
-                c.updateWasDestroyed(true);
-                sacrifice(c, null, true, mapParams);
-            }
+            sacrifice(sacrificeList, null, true, mapParams);
             setHoldCheckingStaticAbilities(false);
 
             table.triggerChangesZoneAll(game, null);
@@ -1891,15 +1888,37 @@ public class GameAction {
         return true;
     }
 
-    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
-        if (!c.canBeSacrificedBy(source, effect)) {
-            return null;
+    public final CardCollection sacrifice(final Iterable<Card> list, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
+        Multimap<Player, Card> lki = MultimapBuilder.hashKeys().arrayListValues().build();
+        CardCollection result = new CardCollection();
+        for (Card c : list) {
+            if (c == null) {
+                continue;
+            }
+
+            if (!c.canBeSacrificedBy(source, effect)) {
+                continue;
+            }
+
+            Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
+            c.getController().addSacrificedThisTurn(lkiCopy, source);
+            lki.put(c.getController(), lkiCopy);
+
+            c.updateWasDestroyed(true);
+
+            Card changed = sacrificeDestroy(c, source, params);
+            if (changed != null) {
+                result.add(changed);
+            }
         }
-
-        c.getController().addSacrificedThisTurn(c, source);
-
-        c.updateWasDestroyed(true);
-        return sacrificeDestroy(c, source, params);
+        for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {
+            // Run triggers
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
+            runParams.put(AbilityKey.Cards, new CardCollection(e.getValue()));
+            runParams.put(AbilityKey.Cause, source);
+            game.getTriggerHandler().runTrigger(TriggerType.SacrificedOnce, runParams, false);
+        }
+        return result;
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, Map<AbilityKey, Object> params) {
