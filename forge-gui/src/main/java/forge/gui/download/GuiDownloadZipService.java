@@ -91,7 +91,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             if (url.getPath().endsWith(".php")) {
                 //ensure file can be downloaded if returned from PHP script
-                conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 4.01; Windows NT)");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             }
 
             conn.connect();
