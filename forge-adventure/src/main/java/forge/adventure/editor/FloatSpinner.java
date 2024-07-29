@@ -14,6 +14,6 @@ public class FloatSpinner extends JSpinner{
     }
     public float floatValue()
     {
-        return ((Float)getValue()).floatValue();
+        return (Float) getValue();
     }
 }

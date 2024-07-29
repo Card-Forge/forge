@@ -173,7 +173,7 @@ public class LDA {
             for (Integer w : testDataset.getWords(d)) {
                 double sum = 0.0;
                 for (int t = 0; t < getNumTopics(); ++t) {
-                     sum += getTheta(d, t) * getPhi(t, w.intValue()); 
+                     sum += getTheta(d, t) * getPhi(t, w);
                 }
                 loglikelihood += Math.log(sum);
             }

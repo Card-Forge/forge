@@ -107,8 +107,8 @@ public abstract class GameLobby implements IHasGameType {
 
         final int nSlots = getNumberOfSlots();
         final boolean triesToChangeArchenemy = event.getArchenemy() != null;
-        final boolean archenemyRemoved = triesToChangeArchenemy && !event.getArchenemy().booleanValue();
-        final boolean hasArchenemyChanged = triesToChangeArchenemy && slot.isArchenemy() != event.getArchenemy().booleanValue();
+        final boolean archenemyRemoved = triesToChangeArchenemy && !event.getArchenemy();
+        final boolean hasArchenemyChanged = triesToChangeArchenemy && slot.isArchenemy() != event.getArchenemy();
 
         final boolean changed = slot.apply(event) || hasArchenemyChanged;
 
@@ -191,7 +191,7 @@ public abstract class GameLobby implements IHasGameType {
         final int[] result = new int[sAvatars.length];
         for (int i = 0; i < sAvatars.length; i++) {
             final Integer val = Ints.tryParse(sAvatars[i]);
-            result[i] = val == null ? -1 : val.intValue();
+            result[i] = val == null ? -1 : val;
         }
         return result;
     }
@@ -200,7 +200,7 @@ public abstract class GameLobby implements IHasGameType {
         final int[] result = new int[sSleeves.length];
         for (int i = 0; i < sSleeves.length; i++) {
             final Integer val = Ints.tryParse(sSleeves[i]);
-            result[i] = val == null ? -1 : val.intValue();
+            result[i] = val == null ? -1 : val;
         }
         return result;
     }

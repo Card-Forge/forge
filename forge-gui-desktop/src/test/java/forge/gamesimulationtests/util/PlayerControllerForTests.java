@@ -649,7 +649,7 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public int chooseNumber(SpellAbility sa, String title, List<Integer> values, Player relatedPlayer) {
         // TODO Auto-generated method stub
-        return Iterables.getFirst(values, Integer.valueOf(0));
+        return Iterables.getFirst(values, 0);
     }
 
     @Override

@@ -34,8 +34,7 @@ public class EditorMainWindow extends JFrame {
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
         int var2 = var1.length;
 
-        for(int var3 = 0; var3 < var2; ++var3) {
-            UIManager.LookAndFeelInfo info = var1[var3];
+        for (UIManager.LookAndFeelInfo info : var1) {
             if ("Nimbus".equals(info.getName())) {
                 try {
                     UIManager.setLookAndFeel(info.getClassName());

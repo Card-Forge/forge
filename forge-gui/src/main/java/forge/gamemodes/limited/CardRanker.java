@@ -130,7 +130,7 @@ public class CardRanker {
     }
 
     public static double getRawScore(PaperCard card) {
-        Double rawScore;
+        double rawScore;
         if (MagicColor.Constant.BASIC_LANDS.contains(card.getName())) {
             rawScore = SCORE_UNPICKABLE;
         } else {

@@ -79,10 +79,7 @@ public class AltSoundSystem extends Thread {
         try {
             ByteArrayInputStream bis = new ByteArrayInputStream(AudioClip.getAudioClips(soundFile));
             audioInputStream = AudioSystem.getAudioInputStream(bis);
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            return;
-        } catch (IOException e) {
+        } catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
             return;
         }

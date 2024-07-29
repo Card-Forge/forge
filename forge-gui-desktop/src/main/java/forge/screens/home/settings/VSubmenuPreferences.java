@@ -603,7 +603,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
             for (final String s : codes) {
                 if (!s.isEmpty()) {
-                    displayText.add(KeyEvent.getKeyText(Integer.valueOf(s)));
+                    displayText.add(KeyEvent.getKeyText(Integer.parseInt(s)));
                 }
             }
 

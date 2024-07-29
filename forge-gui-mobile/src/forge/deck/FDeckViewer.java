@@ -83,7 +83,7 @@ public class FDeckViewer extends FScreen {
     };
 
     public static void copyDeckToClipboard(Deck deck) {
-        final String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
         final StringBuilder deckList = new StringBuilder();
         String dName = deck.getName();
         //fix copying a commander netdeck then importing it again...

@@ -21,7 +21,7 @@ public class FRadioButton  extends SkinnedRadioButton {
         super();
         this.setText(s0);
         if (null != selected) {
-            this.setSelected(selected.booleanValue());
+            this.setSelected(selected);
         }
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         this.setFont(FSkin.getFont(14));

@@ -271,9 +271,7 @@ public class CardFactoryUtil {
     public static byte getMostProminentColors(final Iterable<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        Arrays.fill(map, 0);
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -309,9 +307,6 @@ public class CardFactoryUtil {
     public static int[] SortColorsFromList(final CardCollection list) {
         int cntColors = MagicColor.WUBRG.length;
         final int[] map = new int[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -339,10 +334,7 @@ public class CardFactoryUtil {
             colorRestrictions.add(MagicColor.fromName(col));
         }
         int cntColors = colorRestrictions.size();
-        final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        final int[] map = new int[cntColors];
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -927,7 +919,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Chapter")) {
             final String[] k = keyword.split(":");
             final String[] abs = k[2].split(",");
-            if (abs.length != Integer.valueOf(k[1])) {
+            if (abs.length != Integer.parseInt(k[1])) {
                 throw new RuntimeException("Saga max differ from Ability amount");
             }
 
@@ -2789,7 +2781,7 @@ public class CardFactoryUtil {
             origSA.appendSubAbility(newSA);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
-            final int level = Integer.valueOf(k[1]);
+            final int level = Integer.parseInt(k[1]);
 
             final StringBuilder sbClass = new StringBuilder();
             sbClass.append("AB$ ClassLevelUp | Cost$ ").append(k[2]);

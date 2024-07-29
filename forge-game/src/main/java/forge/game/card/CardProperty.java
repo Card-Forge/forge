@@ -2008,7 +2008,15 @@ public class CardProperty {
                 // otherwise check for keyword object
                 return Objects.equals(castSA.getKeyword(), spellAbility.getKeyword());
             }
-        } else if (property.startsWith("CastSa"))  {
+        } else if (property.equals("CastSaSource")) {
+            SpellAbility castSA = card.getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            if (!castSA.equals(source.getCastSA())) {
+                return false;
+            }
+        } else if (property.startsWith("CastSa")) {
             SpellAbility castSA = card.getCastSA();
             if (castSA == null) {
                 return false;

@@ -47,7 +47,7 @@ public class SpellAbilityChoicesIterator {
         this.controller = controller;
     }
 
-    public List<AbilitySub> chooseModesForAbility(List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
+    public List<AbilitySub> chooseModesForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
         if (modeIterator == null) {
             // Skip modes that don't have legal targets.
             modesMap = new ArrayList<>();

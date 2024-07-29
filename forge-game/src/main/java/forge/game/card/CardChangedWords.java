@@ -33,14 +33,14 @@ public final class CardChangedWords extends ForwardingMap<String, String> {
     }
 
     public Long addEmpty(final long timestamp, final long staticId) {
-        final Long stamp = Long.valueOf(timestamp);
+        final Long stamp = timestamp;
         map.put(stamp, staticId, new WordHolder()); // Table doesn't allow null value
         isDirty = true;
         return stamp;
     }
 
     public Long add(final long timestamp, final long staticId, final String originalWord, final String newWord) {
-        final Long stamp = Long.valueOf(timestamp);
+        final Long stamp = timestamp;
         map.put(stamp, staticId, new WordHolder(originalWord, newWord));
         isDirty = true;
         return stamp;

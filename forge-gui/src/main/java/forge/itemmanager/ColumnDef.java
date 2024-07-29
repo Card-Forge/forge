@@ -619,7 +619,7 @@ public enum ColumnDef {
             if (result == Integer.MAX_VALUE) {
                 if (((IPaperCard) i).getRules().getType().isPlaneswalker()) {
                     String loy = ((IPaperCard) i).getRules().getInitialLoyalty();
-                    result = StringUtils.isNumeric(loy) ? Integer.valueOf(loy) : 0;
+                    result = StringUtils.isNumeric(loy) ? Integer.parseInt(loy) : 0;
                 }
             }
         }

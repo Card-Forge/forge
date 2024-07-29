@@ -66,9 +66,9 @@ public class OpenSimplexNoise {
                 new Grad2(-0.38268343236509, 0.923879532511287),
                 new Grad2(-0.130526192220052, 0.99144486137381)
         };
-        for (int i = 0; i < grad2.length; i++) {
-            grad2[i].dx /= N2;
-            grad2[i].dy /= N2;
+        for (Grad2 value : grad2) {
+            value.dx /= N2;
+            value.dy /= N2;
         }
         for (int i = 0; i < PSIZE; i++) {
             GRADIENTS_2D[i] = grad2[i % grad2.length];
@@ -124,10 +124,10 @@ public class OpenSimplexNoise {
                 new Grad3(-0.24732126143473554, 1.6667938651159684, 2.838945207362466),
                 new Grad3(1.6667938651159684, -0.24732126143473554, 2.838945207362466)
         };
-        for (int i = 0; i < grad3.length; i++) {
-            grad3[i].dx /= N3;
-            grad3[i].dy /= N3;
-            grad3[i].dz /= N3;
+        for (Grad3 value : grad3) {
+            value.dx /= N3;
+            value.dy /= N3;
+            value.dz /= N3;
         }
         for (int i = 0; i < PSIZE; i++) {
             GRADIENTS_3D[i] = grad3[i % grad3.length];
@@ -295,11 +295,11 @@ public class OpenSimplexNoise {
                 new Grad4(0.7821684431180708, 0.4321472685365301, 0.4321472685365301, -0.12128480194602098),
                 new Grad4(0.753341017856078, 0.37968289875261624, 0.37968289875261624, 0.37968289875261624)
         };
-        for (int i = 0; i < grad4.length; i++) {
-            grad4[i].dx /= N4;
-            grad4[i].dy /= N4;
-            grad4[i].dz /= N4;
-            grad4[i].dw /= N4;
+        for (Grad4 value : grad4) {
+            value.dx /= N4;
+            value.dy /= N4;
+            value.dz /= N4;
+            value.dw /= N4;
         }
         for (int i = 0; i < PSIZE; i++) {
             GRADIENTS_4D[i] = grad4[i % grad4.length];

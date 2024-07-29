@@ -154,7 +154,7 @@ public class PlayerDetailsPanel extends JPanel {
      */
     public void updateManaPool() {
         for (final Pair<DetailLabel, Byte> label : manaLabels) {
-            final String mana = String.valueOf(player.getMana(label.getRight().byteValue()));
+            final String mana = String.valueOf(player.getMana(label.getRight()));
             label.getKey().setText(mana);
             label.getKey().setToolTip(mana);
         }

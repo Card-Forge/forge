@@ -410,9 +410,7 @@ public class AttachAi extends SpellAbilityAi {
                 }
 
                 final Iterable<Card> auras = c.getEnchantedBy();
-                final Iterator<Card> itr = auras.iterator();
-                while (itr.hasNext()) {
-                    final Card aura = itr.next();
+                for (Card aura : auras) {
                     SpellAbility auraSA = aura.getSpells().get(0);
                     if (auraSA.getApi() == ApiType.Attach) {
                         if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
