@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -72,6 +73,9 @@ public class DuelScene extends ForgeScene {
     boolean isArena = false;
     AdventureEventData eventData;
     private LoadingOverlay matchOverlay;
+    final int enemyAvatarKey = 90001;
+    final int playerAvatarKey = 90000;
+    FOptionPane bossDialogue;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
 
@@ -98,7 +102,8 @@ public class DuelScene extends ForgeScene {
 
             //Persists expended (or potentially gained) shards back to Adventure
             if (eventData == null || eventData.eventRules.allowsShards) {
-                List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers(); {
+                List<PlayerControllerHuman> humans = hostedMatch.getHumanControllers();
+                {
                     if (humans.size() == 1) {
                         Current.player().setShards(humans.get(0).getPlayer().getNumManaShards());
                     }
@@ -111,31 +116,26 @@ public class DuelScene extends ForgeScene {
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
-            final FBufferedImage fb = new FBufferedImage(120, 120) {
-                @Override
-                protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90001) != null)
-                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                }
-            };
+            final FBufferedImage fb = getFBEnemyAvatar();
             callbackExit = true;
             boolean finalWinner = winner;
-            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("AdvBossInsult"+Aggregates.randomInt(1, 44)), enemyName, fb, new Callback<Integer>() {
-                @Override
-                public void run(Integer result) {
-                    afterGameEnd(enemyName, finalWinner);
-                    exitDuelScene();
-                    fb.dispose();
-                }
-            }));
+            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)),
+                    enemyName, fb, () -> {
+                        afterGameEnd(enemyName, finalWinner);
+                        exitDuelScene();
+                        fb.dispose();
+                    });
+            FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
         } else {
             afterGameEnd(enemyName, winner);
         }
     }
+
     Runnable endRunnable = null;
+
     void afterGameEnd(String enemyName, boolean winner) {
         Forge.restrictAdvMenus = winner;
-        endRunnable = () -> Gdx.app.postRunnable(()-> {
+        endRunnable = () -> Gdx.app.postRunnable(() -> {
             GameHUD.getInstance().switchAudio();
             dungeonEffect = null;
             callbackExit = false;
@@ -149,8 +149,19 @@ public class DuelScene extends ForgeScene {
             }
         });
     }
+
     public void exitDuelScene() {
         Forge.setTransitionScreen(new TransitionScreen(endRunnable, Forge.takeScreenshot(), false, false));
+    }
+
+    private FOptionPane createFOption(String message, String title, FBufferedImage icon, Runnable runnable) {
+        return new FOptionPane(message, null, title, icon, null, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), -1, new Callback<Integer>() {
+            @Override
+            public void run(Integer result) {
+                if (runnable != null)
+                    runnable.run();
+            }
+        });
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {
@@ -188,10 +199,9 @@ public class DuelScene extends ForgeScene {
     public void enter() {
         GameHUD.getInstance().unloadAudio();
         Set<GameType> appliedVariants = new HashSet<>();
-        if (eventData!= null && eventData.eventRules != null){
+        if (eventData != null && eventData.eventRules != null) {
             appliedVariants.add(eventData.eventRules.gameType);
-        }
-        else{
+        } else {
             appliedVariants.add(GameType.Adventure);
         }
 
@@ -211,12 +221,12 @@ public class DuelScene extends ForgeScene {
 
         humanPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
-        FSkin.getAvatars().put(90000, advPlayer.avatar());
-        playerObject.setAvatarIndex(90000);
+        FSkin.getAvatars().put(playerAvatarKey, advPlayer.avatar());
+        playerObject.setAvatarIndex(playerAvatarKey);
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setTeamNumber(0);
-        humanPlayer.setStartingLife(eventData!=null?eventData.eventRules.startingLife:advPlayer.getLife());
-        if (eventData==null || eventData.eventRules.allowsShards)
+        humanPlayer.setStartingLife(eventData != null ? eventData.eventRules.startingLife : advPlayer.getLife());
+        if (eventData == null || eventData.eventRules.allowsShards)
             humanPlayer.setManaShards(advPlayer.getShards());
 
         Array<EffectData> playerEffects = new Array<>();
@@ -236,7 +246,7 @@ public class DuelScene extends ForgeScene {
             humanPlayer.addExtraCardsOnBattlefield(playerCards);
         }
 
-        if (eventData ==null || eventData.eventRules.allowsItems) {
+        if (eventData == null || eventData.eventRules.allowsItems) {
             //Collect and add items effects first.
             for (String playerItem : advPlayer.getEquippedItems()) {
                 ItemData item = ItemData.getItem(playerItem);
@@ -248,7 +258,7 @@ public class DuelScene extends ForgeScene {
                 }
             }
         }
-        if (eventData ==null || eventData.eventRules.allowsBlessings) {
+        if (eventData == null || eventData.eventRules.allowsBlessings) {
             //Collect and add player blessings.
             if (advPlayer.getBlessing() != null) {
                 playerEffects.add(advPlayer.getBlessing());
@@ -274,9 +284,11 @@ public class DuelScene extends ForgeScene {
         currentEnemy = enemy.getData();
         boolean bossBattle = currentEnemy.boss;
         for (int i = 0; i < 8 && currentEnemy != null; i++) {
-            Deck deck = null;
+            Deck deck;
 
             if (this.chaosBattle) { //random challenge for chaos mode
+                if (deckProxyMapMap == null)
+                    continue;
                 //aiextras
                 List<IPaperCard> aiCards = new ArrayList<>();
                 for (String s : deckProxyMapMap.get(deckProxy).getRight()) {
@@ -286,7 +298,7 @@ public class DuelScene extends ForgeScene {
                 deck = deckProxy.getDeck();
             } else if (this.arenaBattleChallenge) {
                 deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
-            } else if (this.eventData != null){
+            } else if (this.eventData != null) {
                 deck = eventData.nextOpponent.getDeck();
             } else {
                 deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Insane") || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
@@ -297,19 +309,22 @@ public class DuelScene extends ForgeScene {
             enemyPlayer.setName(enemy.getName()); //Override name if defined in the map.(only supported for 1 enemy atm)
             TextureRegion enemyAvatar = enemy.getAvatar(i);
             enemyAvatar.flip(true, false); //flip facing left
-            FSkin.getAvatars().put(90001 + i, enemyAvatar);
-            enemyPlayer.setAvatarIndex(90001 + i);
+            FSkin.getAvatars().put(enemyAvatarKey + i, enemyAvatar);
+            enemyPlayer.setAvatarIndex(enemyAvatarKey + i);
             aiPlayer.setPlayer(enemyPlayer);
             aiPlayer.setTeamNumber(currentEnemy.teamNumber);
-            aiPlayer.setStartingLife(eventData!=null?eventData.eventRules.startingLife:Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
+            aiPlayer.setStartingLife(eventData != null ? eventData.eventRules.startingLife : Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
 
             Array<EffectData> equipmentEffects = new Array<>();
-            if (eventData!=null && eventData.eventRules.allowsItems) {
+            if (eventData != null && eventData.eventRules.allowsItems) {
                 if (currentEnemy.equipment != null) {
                     for (String oppItem : currentEnemy.equipment) {
                         ItemData item = ItemData.getItem(oppItem);
+                        if (item == null)
+                            continue;
                         equipmentEffects.add(item.effect);
-                        if (item.effect.opponent != null) playerEffects.add(item.effect.opponent);
+                        if (item.effect.opponent != null)
+                            playerEffects.add(item.effect.opponent);
                     }
                 }
             }
@@ -323,7 +338,7 @@ public class DuelScene extends ForgeScene {
 
             players.add(aiPlayer);
 
-            if (eventData==null) {
+            if (eventData == null) {
                 Current.setLatestDeck(deck);
             }
 
@@ -339,12 +354,11 @@ public class DuelScene extends ForgeScene {
 
         GameRules rules;
 
-        if (eventData != null){
+        if (eventData != null) {
             rules = new GameRules(eventData.eventRules.gameType);
             rules.setGamesPerMatch(eventData.eventRules.gamesPerMatch);
             bossBattle = false;
-        }
-        else{
+        } else {
             rules = new GameRules(GameType.Adventure);
             rules.setGamesPerMatch(enemy.getData().gamesPerMatch);
         }
@@ -358,21 +372,11 @@ public class DuelScene extends ForgeScene {
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         if (chaosBattle || showMessages) {
-            final FBufferedImage fb = new FBufferedImage(120, 120) {
-                @Override
-                protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90001) != null)
-                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                }
-            };
-
+            final FBufferedImage fb = getFBEnemyAvatar();
+            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossIntro" + Aggregates.randomInt(1, 35)),
+                    enemy.getName(), fb, fb::dispose);
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("AdvBossIntro"+Aggregates.randomInt(1, 35)), enemy.getName(), fb, new Callback<Integer>() {
-                        @Override
-                        public void run(Integer result) {
-                            fb.dispose();
-                        }
-                    }))), false, true);
+                    bossDialogue.show())), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }
@@ -397,12 +401,13 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
         initDuels(playerSprite, enemySprite, false, null);
     }
+
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite, boolean isArena, AdventureEventData eventData) {
         this.player = playerSprite;
         this.enemy = enemySprite;
         this.isArena = isArena;
         this.eventData = eventData;
-        if (eventData!= null && eventData.eventRules == null)
+        if (eventData != null && eventData.eventRules == null)
             eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
         this.arenaBattleChallenge = isArena
                 && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
@@ -438,5 +443,15 @@ public class DuelScene extends ForgeScene {
             }
         }
         return AI;
+    }
+
+    private FBufferedImage getFBEnemyAvatar() {
+        return new FBufferedImage(120, 120) {
+            @Override
+            protected void draw(Graphics g, float w, float h) {
+                if (FSkin.getAvatars().get(enemyAvatarKey) != null)
+                    g.drawImage(FSkin.getAvatars().get(enemyAvatarKey), 0, 0, w, h);
+            }
+        };
     }
 }
