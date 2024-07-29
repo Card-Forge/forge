@@ -26,6 +26,7 @@ public class CharmAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
+        final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(source, sa.getParam("Pawprint"), sa) : 0;
 
         final int num;
         final int min;
@@ -66,13 +67,13 @@ public class CharmAi extends SpellAbilityAi {
              * minimum choice requirements with canPlayAi() alone.
              */
             chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
-                    : chooseOptionsAi(choices, ai, timingRight, num, min, sa.hasParam("CanRepeatModes"));
+                    : chooseOptionsAi(choices, ai, timingRight, num, min, pawprintLimit, sa.hasParam("CanRepeatModes"));
         }
 
         if (chosenList.isEmpty()) {
             if (timingRight) {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
-                chosenList = chooseOptionsAi(choices, ai, true, num, min, sa.hasParam("CanRepeatModes"));
+                chosenList = chooseOptionsAi(choices, ai, true, num, min, pawprintLimit, sa.hasParam("CanRepeatModes"));
                 if (chosenList.isEmpty() && min != 0) {
                     return false;
                 }
@@ -93,13 +94,22 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
-            int min, boolean allowRepeat) {
+            int min, int pawprintLimit, boolean allowRepeat) {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        int pawprintAmount = 0;
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai, true);
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                if (pawprintLimit > 0) {
+                    int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
+                    if (pawprintAmount + curPawprintAmount > pawprintLimit) {
+                        continue;
+                    } else {
+                        pawprintAmount += curPawprintAmount;
+                    }
+                }
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
                     return chosenList; // maximum choices reached
