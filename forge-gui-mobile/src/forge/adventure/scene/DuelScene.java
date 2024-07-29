@@ -115,20 +115,16 @@ public class DuelScene extends ForgeScene {
         String enemyName = enemy.getName();
         boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
-        if (chaosBattle || showMessages) {
+        if ((chaosBattle || showMessages) && !winner) {
             final FBufferedImage fb = getFBEnemyAvatar();
             callbackExit = true;
-            if (winner) {
-                afterGameEnd(enemyName, winner);
-            } else {
-                boolean finalWinner = winner;
-                bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)),
-                        enemyName, fb, () -> {
-                            afterGameEnd(enemyName, finalWinner);
-                            exitDuelScene();
-                            fb.dispose();
-                        });
-            }
+            boolean finalWinner = winner;
+            bossDialogue = createFOption(Forge.getLocalizer().getMessage("AdvBossInsult" + Aggregates.randomInt(1, 44)),
+                    enemyName, fb, () -> {
+                        afterGameEnd(enemyName, finalWinner);
+                        exitDuelScene();
+                        fb.dispose();
+                    });
             FThreads.invokeInEdtNowOrLater(() -> bossDialogue.show());
         } else {
             afterGameEnd(enemyName, winner);
