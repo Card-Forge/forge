@@ -1,6 +1,6 @@
 Name:Arcane Sanctum
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+K:CARDNAME enters tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo W U B | SpellDescription$ Add {W}, {U}, or {B}.
-Oracle:Arcane Sanctum enters the battlefield tapped.\n{T}: Add {W}, {U}, or {B}.
+Oracle:Arcane Sanctum enters tapped.\n{T}: Add {W}, {U}, or {B}.

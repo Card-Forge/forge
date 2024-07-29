@@ -8,4 +8,4 @@ T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | ValidActivatingPlayer$ You | Trigg
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckHints:Type$Artifact
-Oracle:Menace\nModular 2 (This creature enters the battlefield with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)\nWhenever you cast a spell other than your first spell each turn, put a +1/+1 counter on Arcbound Tracker.
+Oracle:Menace\nModular 2 (This creature enters with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)\nWhenever you cast a spell other than your first spell each turn, put a +1/+1 counter on Arcbound Tracker.
