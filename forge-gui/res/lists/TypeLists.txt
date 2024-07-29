@@ -18,6 +18,7 @@ Urza's
 [CreatureTypes]
 Advisor:Advisors
 Aetherborn:Aetherborn
+Alien:Aliens
 Ally:Allies
 Angel:Angels
 Antelope:Antelopes

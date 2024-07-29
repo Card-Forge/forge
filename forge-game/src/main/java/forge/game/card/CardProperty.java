@@ -1881,7 +1881,10 @@ public class CardProperty {
             return card.getCastSA().isEvoke();
         } else if (property.equals("PromisedGift")) {
             // Do we need this isUnlinked thing like these others?
-            return card.hasPromisedGift();
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isOptionalCostPaid(OptionalCost.PromiseGift);
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;
