@@ -1,0 +1,9 @@
+Name:Dawn's Truce
+ManaCost:1 W
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+A:SP$ Pump | Defined$ You | KW$ Hexproof | SubAbility$ DBPumpAll1 | SpellDescription$ You and permanents you control gain hexproof until end of turn. If the gift was promised, permanents you control also gain indestructible until end of turn.
+SVar:DBPumpAll1:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof | SubAbility$ DBPumpAll2
+SVar:DBPumpAll2:DB$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Indestructible | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1
+Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)\nYou and permanents you control gain hexproof until end of turn. If the gift was promised, permanents you control also gain indestructible until end of turn.
