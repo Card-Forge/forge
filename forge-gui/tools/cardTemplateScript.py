@@ -182,7 +182,7 @@ while inputName != 'quit' :
                 for text in cardData.oracle :
                         # do some prescripting
                         tokens = line.split(' ');
-                        if text.find("When CARDNAME enters the battlefield") != -1 :
+                        if text.find("When CARDNAME enters") != -1 :
                                 print "\n"+text
                                 print "<Trigger Script Start>"
                                 print 'T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ <TriggerFunc> | TriggerDescription$ '+text
@@ -196,7 +196,7 @@ while inputName != 'quit' :
                                 print "<Trigger Script End>\n"
                         elif text.find("Unleash") != -1 :
                                 print 'K:ETBReplacement:Other:Unleash:Optional'
-                                print 'SVar:Unleash:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can\'t block as long as it has a +1/+1 counter on it.)'
+                                print 'SVar:Unleash:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Unleash (You may have this creature enter with a +1/+1 counter on it. It can\'t block as long as it has a +1/+1 counter on it.)'
                                 print 'S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can\'t block. | CheckSVar$ X | SVarCompare$ GE1 | References$ X'
                                 print 'SVar:X:Count$NumCounters.P1P1'
                         else :
