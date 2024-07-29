@@ -1,7 +1,7 @@
 Name:Act of Authority
 ManaCost:1 W W
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ AuthorityExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target artifact or enchantment.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ AuthorityExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may exile target artifact or enchantment.
 SVar:AuthorityExile:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of CARDNAME.
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBGainControl
@@ -9,4 +9,4 @@ SVar:DBGainControl:DB$ GainControl | Defined$ Self | NewController$ RememberedCo
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
-Oracle:When Act of Authority enters the battlefield, you may exile target artifact or enchantment.\nAt the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of Act of Authority.
+Oracle:When Act of Authority enters, you may exile target artifact or enchantment.\nAt the beginning of your upkeep, you may exile target artifact or enchantment. If you do, its controller gains control of Act of Authority.

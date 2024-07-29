@@ -4,7 +4,7 @@ Types:Creature Illusion
 PT:1/1
 K:Kicker:3
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
-K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters with two +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
 DeckHas:Ability$Counters
-Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nAether Figment can't be blocked.\nIf Aether Figment was kicked, it enters the battlefield with two +1/+1 counters on it.
+Oracle:Kicker {3} (You may pay an additional {3} as you cast this spell.)\nAether Figment can't be blocked.\nIf Aether Figment was kicked, it enters with two +1/+1 counters on it.
