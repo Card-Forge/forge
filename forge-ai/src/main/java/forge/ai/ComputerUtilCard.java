@@ -983,11 +983,11 @@ public class ComputerUtilCard {
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
-            if (color.hasWhite()) map.get(0).setValue(Integer.valueOf(map.get(0).getValue() + 1));
-            if (color.hasBlue()) map.get(1).setValue(Integer.valueOf(map.get(1).getValue() + 1));
-            if (color.hasBlack()) map.get(2).setValue(Integer.valueOf(map.get(2).getValue() + 1));
-            if (color.hasRed()) map.get(3).setValue(Integer.valueOf(map.get(3).getValue() + 1));
-            if (color.hasGreen()) map.get(4).setValue(Integer.valueOf(map.get(4).getValue() + 1));
+            if (color.hasWhite()) map.get(0).setValue(map.get(0).getValue() + 1);
+            if (color.hasBlue()) map.get(1).setValue(map.get(1).getValue() + 1);
+            if (color.hasBlack()) map.get(2).setValue(map.get(2).getValue() + 1);
+            if (color.hasRed()) map.get(3).setValue(map.get(3).getValue() + 1);
+            if (color.hasGreen()) map.get(4).setValue(map.get(4).getValue() + 1);
         }
 
         Collections.sort(map, new Comparator<Pair<Byte, Integer>>() {

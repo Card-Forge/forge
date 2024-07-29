@@ -320,8 +320,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         for (final CardStackRow row : this.rows) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
-            for (int stackIndex = 0, stackCount = row.size(); stackIndex < stackCount; stackIndex++) {
-                final CardStack stack = row.get(stackIndex);
+            for (final CardStack stack : row) {
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
                 x += stack.getWidth();
             }
@@ -608,8 +607,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         final List<CardView> toDelete = Lists.newArrayList(oldCards);
         final List<CardView> notToDelete = Lists.newLinkedList();
         for (final CardView c : modelCopy) {
-            for (int i = 0; i  < toDelete.size(); i++) {
-                final CardView c2 = toDelete.get(i);
+            for (final CardView c2 : toDelete) {
                 if (c.getId() == c2.getId()) {
                     notToDelete.add(c2);
                 }

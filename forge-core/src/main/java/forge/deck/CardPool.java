@@ -468,9 +468,7 @@ public class CardPool extends ItemPool<PaperCard> {
      */
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
-        Iterator<PaperCard> cardsInPool = this.items.keySet().iterator();
-        while (cardsInPool.hasNext()) {
-            PaperCard c = cardsInPool.next();
+        for (PaperCard c : this.items.keySet()) {
             if (predicate.apply(c))
                 filteredPool.add(c, this.items.get(c));
         }

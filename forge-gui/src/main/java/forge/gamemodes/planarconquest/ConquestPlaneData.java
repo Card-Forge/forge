@@ -82,8 +82,7 @@ public class ConquestPlaneData implements IXmlWritable {
 
     public int getTotalWins() {
         int wins = 0;
-        for (int i = 0; i < eventResults.length; i++) {
-            ConquestEventRecord result = eventResults[i];
+        for (ConquestEventRecord result : eventResults) {
             if (result != null) {
                 wins += result.getTotalWins();
             }
@@ -93,8 +92,7 @@ public class ConquestPlaneData implements IXmlWritable {
 
     public int getTotalLosses() {
         int losses = 0;
-        for (int i = 0; i < eventResults.length; i++) {
-            ConquestEventRecord result = eventResults[i];
+        for (ConquestEventRecord result : eventResults) {
             if (result != null) {
                 losses += result.getTotalLosses();
             }

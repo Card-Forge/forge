@@ -211,8 +211,8 @@ public final class GameActionUtil {
                         && source.isForetold() && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
-                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
-                    foretold.putParam("ReduceCost", reduced.toString());
+                    int reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", Integer.toString(reduced));
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -887,7 +887,7 @@ public final class GameActionUtil {
             // skip GameAction
             oldCard.getZone().remove(oldCard);
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
-            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);

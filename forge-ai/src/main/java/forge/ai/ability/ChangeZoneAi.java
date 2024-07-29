@@ -1390,7 +1390,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 aiPlaneswalkers.sort(CardPredicates.compareByCounterType(CounterEnumType.LOYALTY));
                 for (Card pw : aiPlaneswalkers) {
                     int curLoyalty = pw.getCounters(CounterEnumType.LOYALTY);
-                    int freshLoyalty = Integer.valueOf(pw.getCurrentState().getBaseLoyalty());
+                    int freshLoyalty = Integer.parseInt(pw.getCurrentState().getBaseLoyalty());
                     if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
                         return pw;
                     }
@@ -1748,7 +1748,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                         if (MyRandom.percentTrue(chance)) {
                             int curLoyalty = card.getCounters(CounterEnumType.LOYALTY);
-                            int freshLoyalty = Integer.valueOf(card.getCurrentState().getBaseLoyalty());
+                            int freshLoyalty = Integer.parseInt(card.getCurrentState().getBaseLoyalty());
                             if (freshLoyalty - curLoyalty >= loyaltyDiff && curLoyalty <= maxLoyaltyToConsider) {
                                 return true;
                             }

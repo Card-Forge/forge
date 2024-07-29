@@ -87,7 +87,7 @@ public class CostGainLife extends CostPart {
 
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        Integer c = this.getAbilityAmount(ability);
+        int c = this.getAbilityAmount(ability);
         
         int playersLeft = cntPlayers;
         for (final Player opp : decision.players) {

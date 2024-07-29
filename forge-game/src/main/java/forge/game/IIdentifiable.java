@@ -7,7 +7,7 @@ public interface IIdentifiable {
     Function<IIdentifiable, Integer> FN_GET_ID = new Function<IIdentifiable, Integer>() {
         @Override
         public Integer apply(final IIdentifiable input) {
-            return Integer.valueOf(input.getId());
+            return input.getId();
         }
     };
 }

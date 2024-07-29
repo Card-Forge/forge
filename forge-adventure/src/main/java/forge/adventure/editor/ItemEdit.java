@@ -57,7 +57,7 @@ public class ItemEdit extends JComponent {
         currentData.description=description.getText();
         currentData.iconName=iconName.getText();
         currentData.questItem=questItem.isSelected();
-        currentData.cost=((Integer)  cost.getValue()).intValue();
+        currentData.cost= (Integer) cost.getValue();
     }
 
     public void setCurrentItem(ItemData data)

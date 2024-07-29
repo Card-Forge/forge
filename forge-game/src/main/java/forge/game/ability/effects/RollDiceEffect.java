@@ -307,9 +307,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
         if (rememberHighest) {
             int highest = 0;
-            for (int i = 0; i < results.size(); ++i) {
-                if (highest < results.get(i)) {
-                    highest = results.get(i);
+            for (Integer result : results) {
+                if (highest < result) {
+                    highest = result;
                 }
             }
             for (int i = 0; i < results.size(); ++i) {

@@ -728,7 +728,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Boolean input, List<Boolean> values) {
                 if (input != null) {
-                    return input.booleanValue();
+                    return input;
                 }
                 return false;
             }
@@ -737,7 +737,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Boolean input, List<Boolean> values) {
                 if (input != null) {
-                    return !input.booleanValue();
+                    return !input;
                 }
                 return false;
             }
@@ -766,7 +766,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    return input.intValue() > values.get(0).intValue();
+                    return input > values.get(0);
                 }
                 return false;
             }
@@ -775,7 +775,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    return input.intValue() < values.get(0).intValue();
+                    return input < values.get(0);
                 }
                 return false;
             }
@@ -784,7 +784,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    return input.intValue() >= values.get(0).intValue();
+                    return input >= values.get(0);
                 }
                 return false;
             }
@@ -793,7 +793,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    return input.intValue() <= values.get(0).intValue();
+                    return input <= values.get(0);
                 }
                 return false;
             }
@@ -802,8 +802,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    int inputValue = input.intValue();
-                    return values.get(0).intValue() <= inputValue && inputValue <= values.get(1).intValue();
+                    return values.get(0) <= input && input <= values.get(1);
                 }
                 return false;
             }
@@ -812,8 +811,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(Integer input, List<Integer> values) {
                 if (input != null) {
-                    int inputValue = input.intValue();
-                    return values.get(0).intValue() < inputValue && inputValue < values.get(1).intValue();
+                    return values.get(0) < input && input < values.get(1);
                 }
                 return false;
             }
@@ -824,7 +822,7 @@ public class AdvancedSearch {
             @Override
             public boolean apply(String input, List<String> values) {
                 if (input != null) {
-                    return input.toLowerCase().indexOf(values.get(0).toLowerCase()) != -1;
+                    return input.toLowerCase().contains(values.get(0).toLowerCase());
                 }
                 return false;
             }

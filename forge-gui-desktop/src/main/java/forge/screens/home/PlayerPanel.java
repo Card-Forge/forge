@@ -209,11 +209,11 @@ public class PlayerPanel extends FPanel {
 
     void update() {
         avatarLabel.setEnabled(mayEdit);
-        avatarLabel.setIcon(FSkin.getAvatars().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : avatarIndex)));
+        avatarLabel.setIcon(FSkin.getAvatars().get(type == LobbySlotType.OPEN ? -1 : avatarIndex));
         avatarLabel.repaintSelf();
 
         sleeveLabel.setEnabled(mayEdit);
-        sleeveLabel.setIcon(FSkin.getSleeves().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : sleeveIndex)));
+        sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
         sleeveLabel.repaintSelf();
 
         txtPlayerName.setEnabled(mayEdit);
@@ -312,7 +312,7 @@ public class PlayerPanel extends FPanel {
                 lbl.setCommand(new UiCommand() {
                     @Override
                     public void run() {
-                        setAvatarIndex(Integer.valueOf(lbl.getName().substring(11)));
+                        setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
                         aSel.setVisible(false);
                     }
                 });
@@ -368,7 +368,7 @@ public class PlayerPanel extends FPanel {
                 lbl.setCommand(new UiCommand() {
                     @Override
                     public void run() {
-                        setSleeveIndex(Integer.valueOf(lbl.getName().substring(11)));
+                        setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
                         sSel.setVisible(false);
                     }
                 });

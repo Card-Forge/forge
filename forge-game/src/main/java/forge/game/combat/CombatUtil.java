@@ -92,7 +92,7 @@ public class CombatUtil {
             return false;
         }
         final Pair<Map<Card, GameEntity>, Integer> bestAttack = constraints.getLegalAttackers();
-        return myViolations <= bestAttack.getRight().intValue();
+        return myViolations <= bestAttack.getRight();
     }
 
     /**
@@ -122,7 +122,7 @@ public class CombatUtil {
                 if (myViolations == -1) {
                     return false;
                 }
-                return myViolations <= bestAttack.getRight().intValue();
+                return myViolations <= bestAttack.getRight();
             }
         });
     }

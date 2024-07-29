@@ -365,7 +365,7 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderDamage);
         if (map == null) { return 0; }
         Integer damage = map.get(commander.getId());
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
     void updateCommanderDamage(Player p) {
         Map<Integer, Integer> map = Maps.newHashMap();
@@ -388,7 +388,7 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) { return 0; }
         Integer damage = map.get(commander.getId());
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
 
     void updateCommanderCast(Player p, Card c) {
@@ -569,7 +569,7 @@ public class PlayerView extends GameEntityView {
             e.printStackTrace();
             count = null;
         }
-        return count != null ? count.intValue() : 0;
+        return count != null ? count : 0;
     }
     private Map<Byte, Integer> getMana() {
         return get(TrackableProperty.Mana);

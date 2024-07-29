@@ -342,7 +342,7 @@ public class VStack implements IVDoc<CStack> {
 
         public void setStackInstance(final StackItemView item0) {
             item = item0;
-            triggerID = Integer.valueOf(item.getSourceTrigger());
+            triggerID = item.getSourceTrigger();
 
             jmiAutoYield.setSelected(controller.getMatchUI().shouldAutoYield(item.getKey()));
 

@@ -390,7 +390,7 @@ public class CardDetailUtil {
         // counter text
         if (card.getCounters() != null) {
             for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
-                if (c.getValue().intValue() != 0) {
+                if (c.getValue() != 0) {
                     if (area.length() != 0) {
                         area.append("\n");
                     }

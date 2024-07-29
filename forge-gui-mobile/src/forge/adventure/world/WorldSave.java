@@ -101,7 +101,7 @@ public class WorldSave   {
             return QUICK_SAVE_SLOT;
         if (!name.contains("_") || !name.endsWith(".sav"))
             return INVALID_SAVE_SLOT;
-        return Integer.valueOf(name.split("_")[0]);
+        return Integer.parseInt(name.split("_")[0]);
     }
 
     static public String filename(int slot) {

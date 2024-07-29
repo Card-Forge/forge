@@ -78,7 +78,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         }
         Map<CounterType, Integer> alreadyRemoved = column(ge).get(Optional.absent());
         for (Map.Entry<CounterType, Integer> e : ge.getCounters().entrySet()) {
-            Integer rest = e.getValue() - (alreadyRemoved.containsKey(e.getKey()) ? alreadyRemoved.get(e.getKey()) : 0);
+            int rest = e.getValue() - (alreadyRemoved.containsKey(e.getKey()) ? alreadyRemoved.get(e.getKey()) : 0);
             if (rest > 0) {
                 result.put(e.getKey(), rest);
             }

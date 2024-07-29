@@ -15,7 +15,7 @@ import forge.util.TextUtil;
 public class AlterAttributeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
-        boolean activate = Boolean.valueOf(sa.getParamOrDefault("Activate", "true"));
+        boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
         CardCollection defined = getDefinedCardsOrTargeted(sa, "Defined");
 

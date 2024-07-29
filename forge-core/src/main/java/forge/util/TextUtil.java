@@ -355,9 +355,7 @@ public class TextUtil {
      * @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".
      */
     public static String moveArticleToEnd(String str) {
-        String articleWord;
-        for (int i = 0; i < ARTICLE_WORDS.length; i++) {
-            articleWord = ARTICLE_WORDS[i];
+        for (String articleWord : ARTICLE_WORDS) {
             if (str.startsWith(articleWord + " ")) {
                 str = str.substring(articleWord.length() + 1) + " " + articleWord;
                 return str;

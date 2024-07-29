@@ -362,17 +362,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vSource = CardView.get(sa.getHostCard());
         final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
         Integer maxAmount = different ? 1 : manaAmount;
-        Iterator<Byte> it = colorSet.iterator();
-        while (it.hasNext()) {
-            vAffected.put(it.next(), maxAmount);
+        for (Byte color : colorSet) {
+            vAffected.put(color, maxAmount);
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            it = colorSet.iterator();
-            while (it.hasNext()) {
-                Byte color = it.next();
+            for (Byte color : colorSet) {
                 if (vResult.containsKey(color)) {
                     result.put(color, vResult.get(color));
                 }
@@ -689,16 +686,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
             int size = max - min;
             for (int i = 0; i <= size; i++) {
-                choices.add(Integer.valueOf(i + min));
+                choices.add(i + min);
             }
-            return getGui().one(title, choices.build()).intValue();
+            return getGui().one(title, choices.build());
         }
     }
 
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final List<Integer> choices,
                             final Player relatedPlayer) {
-        return getGui().one(title, choices).intValue();
+        return getGui().one(title, choices);
     }
 
     @Override
@@ -1169,9 +1166,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardCollection toExile = new CardCollection();
         final ImmutableList.Builder<Integer> cntChoice = ImmutableList.builder();
         for (int i = 0; i <= cardsInGrave; i++) {
-            cntChoice.add(Integer.valueOf(i));
+            cntChoice.add(i);
         }
-        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
+        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build());
 
         GameEntityViewMap<Card, CardView> gameCacheGrave = GameEntityView.getMap(grave);
         for (int i = 0; i < chosenAmount; i++) {
@@ -1638,7 +1635,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
 
-        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal, labels);
     }
 
     @Override
@@ -1781,7 +1778,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
         for (final Byte b : colors) {
-            colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
+            colorNamesBuilder.add(MagicColor.toLongString(b));
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
@@ -1906,7 +1903,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
             // for the purpose of pre-ordering, no need for extra granularity
-            Integer idxAdditionalInfo = firstStr.indexOf(" [");
+            int idxAdditionalInfo = firstStr.indexOf(" [");
             StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;
@@ -3246,7 +3243,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         Integer v = getGui().getInteger(prompt, 0, max, 9);
-        return v == null ? 0 : v.intValue();
+        return v == null ? 0 : v;
     }
 
     @Override

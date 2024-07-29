@@ -634,7 +634,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         int totalAdded = table.totalValues();
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(Integer.valueOf(totalAdded));
+            card.addRemembered(totalAdded);
         }
 
         if (sa.hasParam("RemovePhase")) {

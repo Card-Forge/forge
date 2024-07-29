@@ -308,7 +308,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 if (logic.contains(":")) {
                     String[] k = logic.split(":");
-                    Integer i = Integer.valueOf(k[1]);
+                    int i = Integer.parseInt(k[1]);
                     return ai.getCreaturesInPlay().size() >= i;
                 }
                 return true;

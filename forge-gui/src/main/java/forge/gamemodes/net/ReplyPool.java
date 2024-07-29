@@ -18,20 +18,20 @@ public class ReplyPool {
 
     public void initialize(final int index) {
         synchronized (pool) {
-            pool.put(Integer.valueOf(index), new CompletableFuture());
+            pool.put(index, new CompletableFuture());
         }
     }
 
     public void complete(final int index, final Object value) {
         synchronized (pool) {
-            pool.get(Integer.valueOf(index)).set(value);
+            pool.get(index).set(value);
         }
     }
 
     public Object get(final int index) throws TimeoutException {
         final CompletableFuture future;
         synchronized (pool) {
-            future = pool.get(Integer.valueOf(index));
+            future = pool.get(index);
         }
         try {
             return future.get(5, TimeUnit.MINUTES);

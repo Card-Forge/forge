@@ -122,7 +122,7 @@ public class RewardEdit extends FormPanel {
         updating=true;
         typeField.setSelectedItem(currentData.type);
 
-        probability.setValue(new Double(currentData.probability));
+        probability.setValue((double) currentData.probability);
         count.setValue(currentData.count);
         addMaxCount.setValue(currentData.addMaxCount);
         cardName.setText(currentData.cardName);

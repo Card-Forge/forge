@@ -38,12 +38,12 @@ public final class MapToAmountUtil {
         int max = Integer.MIN_VALUE;
         T maxElement = null;
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() > max) {
-                max = entry.getValue().intValue();
+            if (entry.getValue() > max) {
+                max = entry.getValue();
                 maxElement = entry.getKey();
             }
         }
-        return Pair.of(maxElement, Integer.valueOf(max));
+        return Pair.of(maxElement, max);
     }
 
     /**
@@ -67,7 +67,7 @@ public final class MapToAmountUtil {
         final int max = Collections.max(map.values());
         final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() == max) {
+            if (entry.getValue() == max) {
                 set.add(entry.getKey());
             }
         }
@@ -93,12 +93,12 @@ public final class MapToAmountUtil {
         int min = Integer.MAX_VALUE;
         T minElement = null;
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() < min) {
-                min = entry.getValue().intValue();
+            if (entry.getValue() < min) {
+                min = entry.getValue();
                 minElement = entry.getKey();
             }
         }
-        return Pair.of(minElement, Integer.valueOf(min));
+        return Pair.of(minElement, min);
     }
 
     /**
@@ -122,7 +122,7 @@ public final class MapToAmountUtil {
         final int min = Collections.min(map.values());
         final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() == min) {
+            if (entry.getValue() == min) {
                 set.add(entry.getKey());
             }
         }

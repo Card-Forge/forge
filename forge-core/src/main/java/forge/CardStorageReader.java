@@ -421,24 +421,11 @@ public class CardStorageReader {
      * @return a new Card instance
      */
     protected final CardRules loadCard(final CardRules.Reader rulesReader, final ZipEntry entry) {
-        InputStream zipInputStream = null;
-        try {
-            zipInputStream = this.zip.getInputStream(entry);
+        try (InputStream zipInputStream = this.zip.getInputStream(entry)) {
             rulesReader.reset();
-
             return rulesReader.readCard(readScript(zipInputStream), Files.getNameWithoutExtension(entry.getName()));
         } catch (final IOException exn) {
             throw new RuntimeException(exn);
-            // PM
-        } finally {
-            try {
-                if (zipInputStream != null) {
-                    zipInputStream.close();
-                }
-            } catch (final IOException ignored) {
-                // 11:08
-                // PM
-            }
         }
     }
 
