@@ -1818,7 +1818,7 @@ public class GameAction {
 
         });
 
-        Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
+        Multimap<String, Card> uniqueLegends = Multimaps.index(a, Card::getName);
         CardCollection removed = new CardCollection();
 
         for (String name : uniqueLegends.keySet()) {

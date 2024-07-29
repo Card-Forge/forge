@@ -17,7 +17,6 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -204,7 +203,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetCMC")) {
             int maxTotalCMC = tgt.getMaxTotalCMC(sa.getHostCard(), sa);
             if (maxTotalCMC > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getCMC);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getCMC();
                 }
@@ -218,7 +217,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetPower")) {
             int maxTotalPower = tgt.getMaxTotalPower(sa.getHostCard(), sa);
             if (maxTotalPower > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getNetPower);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getNetPower();
                 }

@@ -251,8 +251,8 @@ public class CountersPutAi extends CountersAi {
                 } else if (ai.getGame().getCombat().isBlocking(source)) {
                     // when blocking, consider this if it's possible to save the blocker and/or kill at least one attacker
                     CardCollection blocked = ai.getGame().getCombat().getAttackersBlockedBy(source);
-                    int totBlkPower = Aggregates.sum(blocked, CardPredicates.Accessors.fnGetNetPower);
-                    int totBlkToughness = Aggregates.min(blocked, CardPredicates.Accessors.fnGetNetToughness);
+                    int totBlkPower = Aggregates.sum(blocked, Card::getNetPower);
+                    int totBlkToughness = Aggregates.min(blocked, Card::getNetToughness);
 
                     int numActivations = ai.getCounters(CounterEnumType.ENERGY) / sa.getPayCosts().getCostEnergy().convertAmount();
                     if (source.getNetToughness() + numActivations > totBlkPower
@@ -327,7 +327,7 @@ public class CountersPutAi extends CountersAi {
 
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = ai.getCreaturesInPlay();
-            List<Card> leastToughness = Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness);
+            List<Card> leastToughness = Aggregates.listWithMin(creatsYouCtrl, Card::getNetToughness);
             if (leastToughness.isEmpty()) {
                 return false;
             }
@@ -389,7 +389,7 @@ public class CountersPutAi extends CountersAi {
                 sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
-                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), CardPredicates.Accessors.fnGetCmc);
+                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), Card::getCMC);
                 if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                     return true;
                 }
@@ -1194,7 +1194,7 @@ public class CountersPutAi extends CountersAi {
                     }
                 }
 
-                int totBlkPower = Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                int totBlkPower = Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
                 if (source.getNetToughness() <= totBlkPower
                         && source.getNetToughness() + amount > totBlkPower) {
                     return true;
@@ -1208,7 +1208,7 @@ public class CountersPutAi extends CountersAi {
                 }
             }
 
-            int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), CardPredicates.Accessors.fnGetNetPower);
+            int totAtkPower = Aggregates.sum(combat.getAttackersBlockedBy(source), Card::getNetPower);
             if (source.getNetToughness() <= totAtkPower
                     && source.getNetToughness() + amount > totAtkPower) {
                 return true;
@@ -1229,7 +1229,7 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Creature"));
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
-        int maxCMC = Aggregates.max(ownLib, CardPredicates.Accessors.fnGetCmc);
+        int maxCMC = Aggregates.max(ownLib, Card::getCMC);
         int optimalCMC = 0;
         int curAmount = 0;
         // Assume the AI knows its deck list and realizes what it has left in its library. Could be improved to make this less cheat-y.
@@ -1247,7 +1247,7 @@ public class CountersPutAi extends CountersAi {
         Card source = sa.getHostCard();
         CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONLAND_PERMANENTS);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
-        int maxCMC = Aggregates.max(oppInPlay, CardPredicates.Accessors.fnGetCmc);
+        int maxCMC = Aggregates.max(oppInPlay, Card::getCMC);
         int optimalCMC = 0;
         int curAmount = 0;
         for (int cmc = numCtrs; cmc <= maxCMC; cmc++) {

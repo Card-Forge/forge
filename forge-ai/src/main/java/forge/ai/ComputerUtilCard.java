@@ -96,7 +96,7 @@ public class ComputerUtilCard {
             return null;
         }
         // get biggest Artifact
-        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
+        return Aggregates.itemWithMax(all, Card::getCMC);
     }
 
     /**
@@ -111,7 +111,7 @@ public class ComputerUtilCard {
             return null;
         }
         // no AI logic, just return most expensive
-        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
+        return Aggregates.itemWithMax(all, Card::getCMC);
     }
 
     /**
@@ -126,7 +126,7 @@ public class ComputerUtilCard {
             return null;
         }
         // no AI logic, just return least expensive
-        return Aggregates.itemWithMin(all, CardPredicates.Accessors.fnGetCmc);
+        return Aggregates.itemWithMin(all, Card::getCMC);
     }
 
     public static Card getBestPlaneswalkerToDamage(final List<Card> pws) {
@@ -203,7 +203,7 @@ public class ComputerUtilCard {
         }
 
         // get biggest Enchantment
-        return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
+        return Aggregates.itemWithMax(all, Card::getCMC);
     }
 
     /**
@@ -774,7 +774,7 @@ public class ComputerUtilCard {
             // Add all cost of all auras with the same controller
             if (card.isEnchanted()) {
                 final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
-                curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
+                curCMC += Aggregates.sum(auras, Card::getCMC) + auras.size();
             }
 
             if (curCMC >= bigCMC) {

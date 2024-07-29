@@ -209,8 +209,8 @@ public class SpecialAiLogic {
                     return false;
                 }
 
-                final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
-                final int DefP = indestructible ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                final int minDefT = Aggregates.min(combat.getBlockers(source), Card::getNetToughness);
+                final int DefP = indestructible ? 0 : Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
                 return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;
@@ -342,8 +342,8 @@ public class SpecialAiLogic {
                 }
 
                 final boolean sourceCantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
-                final int minDefT = Aggregates.min(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetToughness);
-                final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), CardPredicates.Accessors.fnGetNetPower);
+                final int minDefT = Aggregates.min(combat.getBlockers(source), Card::getNetToughness);
+                final int DefP = sourceCantDie ? 0 : Aggregates.sum(combat.getBlockers(source), Card::getNetPower);
 
                 // Make sure we don't over-sacrifice, only sac until we can survive and kill a creature
                 return source.getNetToughness() - source.getDamage() <= DefP || source.getNetCombatDamage() < minDefT;

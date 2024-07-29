@@ -235,7 +235,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = creats.get(0);
             }
         } else if ("NegativePowerFirst".equals(logic)) {
-            Card lowest = Aggregates.itemWithMin(options, CardPredicates.Accessors.fnGetNetPower);
+            Card lowest = Aggregates.itemWithMin(options, Card::getNetPower);
             if (lowest.getNetPower() <= 0) {
                 choice = lowest;
             } else {

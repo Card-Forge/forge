@@ -19,7 +19,6 @@ package forge.game.card;
 
 import java.util.Comparator;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -773,43 +772,6 @@ public final class CardPredicates {
             }
         };
         public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
-    }
-
-    public static class Accessors {
-        public static final Function<Card, Integer> fnGetNetPower = new Function<Card, Integer>() {
-            @Override
-            public Integer apply(Card a) {
-                return a.getNetPower();
-            }
-        };
-
-        public static final Function<Card, Integer> fnGetNetToughness = new Function<Card, Integer>() {
-            @Override
-            public Integer apply(Card a) {
-                return a.getNetToughness();
-            }
-        };
-
-        public static final Function<Card, Integer> fnGetAttack = new Function<Card, Integer>() {
-            @Override
-            public Integer apply(Card a) {
-                return a.getNetCombatDamage();
-            }
-        };
-
-        public static final Function<Card, Integer> fnGetCmc = new Function<Card, Integer>() {
-            @Override
-            public Integer apply(Card a) {
-                return a.getCMC();
-            }
-        };
-
-        public static final Function<Card, String> fnGetNetName = new Function<Card, String>() {
-            @Override
-            public String apply(Card a) {
-                return a.getName();
-            }
-        };
     }
 
 }

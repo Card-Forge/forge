@@ -2865,12 +2865,12 @@ public class AbilityUtils {
         if (sq[0].startsWith("SumPower")) {
             final String[] restrictions = l[0].split("_");
             CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
+            return doXMath(Aggregates.sum(filteredCards, Card::getNetPower), expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            final Iterable<Card> powers = Aggregates.uniqueByLast(list, CardPredicates.Accessors.fnGetNetPower);
+            final Iterable<Card> powers = Aggregates.uniqueByLast(list, Card::getNetPower);
             return doXMath(Iterables.size(powers), expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
@@ -3532,7 +3532,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("TopOfLibraryCMC")) {
-            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc), m, source, ctb);
+            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), Card::getCMC), m, source, ctb);
         }
 
         if (value.contains("LandsPlayed")) {
@@ -3685,18 +3685,18 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("GreatestPower")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetPower);
+            return Aggregates.max(paidList, Card::getNetPower);
         }
         if (string.startsWith("GreatestToughness")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            return Aggregates.max(paidList, Card::getNetToughness);
         }
 
         if (string.startsWith("SumToughness")) {
-            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            return Aggregates.sum(paidList, Card::getNetToughness);
         }
 
         if (string.startsWith("GreatestCMC")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
+            return Aggregates.max(paidList, Card::getCMC);
         }
 
         if (string.equals("DifferentColorPair")) {
@@ -3718,7 +3718,7 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("SumCMC")) {
-            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetCmc);
+            return Aggregates.sum(paidList, Card::getCMC);
         }
 
         if (string.startsWith("Valid")) {

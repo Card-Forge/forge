@@ -37,7 +37,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Accessors;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -418,7 +417,7 @@ public class AiController {
             CardCollection allCards = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
-            int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
+            int maxCmcInHand = Aggregates.max(hand, Card::getCMC);
             int max = Math.max(maxCmcInHand, 6);
             // consider not playing lands if there are enough already and an ability with a discard cost is present
             if (landsInPlay.size() + landList.size() > max) {
@@ -455,7 +454,7 @@ public class AiController {
                 CardCollection lands = new CardCollection(battlefield);
                 lands.addAll(hand);
                 lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
-                int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
+                int maxCmcInHand = Aggregates.max(hand, Card::getCMC);
 
                 if (lands.size() >= Math.max(maxCmcInHand, 6)) {
                     // don't play MDFC land if other side is spell and enough lands are available
@@ -1441,8 +1440,8 @@ public class AiController {
             }
         }
 
-        int totalCMCInHand = Aggregates.sum(inHand, CardPredicates.Accessors.fnGetCmc);
-        int minCMCInHand = Aggregates.min(inHand, CardPredicates.Accessors.fnGetCmc);
+        int totalCMCInHand = Aggregates.sum(inHand, Card::getCMC);
+        int minCMCInHand = Aggregates.min(inHand, Card::getCMC);
         if (minCMCInHand == Integer.MAX_VALUE)
             minCMCInHand = 0;
         int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
@@ -2140,7 +2139,7 @@ public class AiController {
             CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
             CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
             CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
-            return Aggregates.sum(left, Accessors.fnGetCmc) > Aggregates.sum(right, Accessors.fnGetCmc);
+            return Aggregates.sum(left, Card::getCMC) > Aggregates.sum(right, Card::getCMC);
         }
         return MyRandom.getRandom().nextBoolean();
     }
@@ -2167,8 +2166,8 @@ public class AiController {
         } else if (aiLogic.equals("CMCOppControlsByPower")) {
             // TODO: improve this to check for how dangerous those creatures actually are relative to host card
             CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
-            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Accessors.fnGetNetPower);
-            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Accessors.fnGetNetPower);
+            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Card::getNetPower);
+            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Card::getNetPower);
             return powerOdd > powerEven;
         }
         return MyRandom.getRandom().nextBoolean(); // outside of any specific logic, choose randomly

@@ -478,8 +478,8 @@ public class SpecialCardAi {
             boolean cantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
 
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
-            int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetAttack);
-            int oppT = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetToughness);
+            int oppP = Aggregates.sum(opposition, Card::getNetCombatDamage);
+            int oppT = Aggregates.sum(opposition, Card::getNetToughness);
 
             boolean oppHasFirstStrike = false;
             boolean oppCantDie = true;
@@ -561,7 +561,7 @@ public class SpecialCardAi {
             }
 
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
-            int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
+            int oppT = Aggregates.sum(potentialBlockers, Card::getNetToughness);
 
             return potentialBlockers.isEmpty() || (source.hasKeyword(Keyword.TRAMPLE) && predictedPT.getLeft() - oppT >= oppLife);
         }
