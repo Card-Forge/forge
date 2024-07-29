@@ -18,6 +18,7 @@ Urza's
 [CreatureTypes]
 Advisor:Advisors
 Aetherborn:Aetherborn
+Alien:Aliens
 Ally:Allies
 Angel:Angels
 Antelope:Antelopes
@@ -257,6 +258,7 @@ Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons
+Skunk:Skunks
 Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
@@ -287,6 +289,7 @@ Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
 Time Lord:Time Lords
+Toy:Toys
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -301,6 +304,7 @@ Volver:Volvers
 Wall:Walls
 Warlock:Warlocks
 Warrior:Warriors
+Weasel:Weasels
 Weird:Weirds
 Werewolf:Werewolves
 Whale:Whales
@@ -333,6 +337,7 @@ Saga
 Shrine
 Shard
 [ArtifactTypes]
+Attraction
 Blood
 Bobblehead:Bobbleheads
 Clue:Clues

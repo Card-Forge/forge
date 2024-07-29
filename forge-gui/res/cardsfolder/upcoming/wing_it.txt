@@ -1,8 +1,0 @@
-Name:Wing It
-ManaCost:1 W
-Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPutCounter | SpellDescription$ Target creature gets +2/+2 until end of turn. Put a flying counter on it. Scry 1.
-SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Flying | CounterNum$ 1 | SubAbility$ DBScry
-SVar:DBScry:DB$ Scry
-DeckHas:Ability$Counters
-Oracle:Target creature gets +2/+2 until end of turn. Put a flying counter on it. Scry 1.

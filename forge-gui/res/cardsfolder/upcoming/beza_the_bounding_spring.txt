@@ -1,0 +1,19 @@
+Name:Beza, the Bounding Spring
+ManaCost:2 W W
+Types:Legendary Creature Elemental Elk
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Treasure token if an opponent controls more lands than you. You gain 4 life if an opponent has more life than you. Create two 1/1 blue Fish creature tokens if an opponent controls more creatures than you. Draw a card if an opponent has more cards in hand than you.
+SVar:TrigToken:DB$ Token | ConditionCheckSVar$ XLands | ConditionSVarCompare$ GTYLands | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | ConditionCheckSVar$ XLife | ConditionSVarCompare$ GTYLife | Defined$ You | LifeAmount$ 4 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ XCreatures | ConditionSVarCompare$ GTYCreatures | TokenAmount$ 2 | TokenScript$ u_1_1_fish | TokenOwner$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ XCards | ConditionSVarCompare$ GTYCards
+SVar:XLands:PlayerCountOpponents$HighestValid Land.YouCtrl
+SVar:YLands:Count$Valid Land.YouCtrl
+SVar:XLife:PlayerCountOpponents$HighestLifeTotal
+SVar:YLife:Count$YourLifeTotal
+SVar:XCreatures:PlayerCountOpponents$HighestValid Creature.YouCtrl
+SVar:YCreatures:Count$Valid Creature.YouCtrl
+SVar:XCards:PlayerCountOpponents$HighestCardsInHand
+SVar:YCards:Count$CardsInYourHand
+DeckHas:Ability$Token
+Oracle:When Beza, the Bounding Spring enters, create a Treasure token if an opponent controls more lands than you. You gain 4 life if an opponent has more life than you. Create two 1/1 blue Fish creature tokens if an opponent controls more creatures than you. Draw a card if an opponent has more cards in hand than you.

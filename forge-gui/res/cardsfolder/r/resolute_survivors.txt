@@ -4,7 +4,7 @@ Types:Creature Human Warrior
 PT:3/3
 S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. (It won't untap during your next untap step.)
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | Execute$ TrigDamageAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you exert a creature, CARDNAME deals 1 damage to each opponent and you gain 1 life.
-// This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
+# This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
 SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 Oracle:You may exert Resolute Survivors as it attacks. (It won't untap during your next untap step.)\nWhenever you exert a creature, Resolute Survivors deals 1 damage to each opponent and you gain 1 life.

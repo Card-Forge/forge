@@ -26,7 +26,6 @@ import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
 import forge.game.ability.AbilityUtils;
@@ -141,11 +140,6 @@ public final class StaticAbilityContinuous {
         String mayPlayAltManaCost = null;
         boolean mayPlayGrantZonePermissions = true;
         Integer mayPlayLimit = null;
-
-        //Global rules changes
-        if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
-            effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
-        }
 
         if (layer == StaticAbilityLayer.SETPT || layer == StaticAbilityLayer.CHARACTERISTIC) {
             if (params.containsKey("SetPower")) {
@@ -356,8 +350,8 @@ public final class StaticAbilityContinuous {
                 addAbilities = sVars;
             }
 
-            if (params.containsKey("AddReplacementEffects")) {
-                final String[] sVars = params.get("AddReplacementEffects").split(" & ");
+            if (params.containsKey("AddReplacementEffect")) {
+                final String[] sVars = params.get("AddReplacementEffect").split(" & ");
                 for (int i = 0; i < sVars.length; i++) {
                     sVars[i] = AbilityUtils.getSVar(stAb, sVars[i]);
                 }
@@ -598,6 +592,17 @@ public final class StaticAbilityContinuous {
                     String mhs = params.get("AdditionalVillainousChoice");
                     int add = AbilityUtils.calculateAmount(hostCard, mhs, stAb);
                     p.addAdditionalVillainousChoices(se.getTimestamp(), add);
+                }
+
+                if (params.containsKey("DeclaresAttackers")) {
+                    PlayerCollection players = AbilityUtils.getDefinedPlayers(hostCard, params.get("DeclaresAttackers"), stAb);
+                    if (!players.isEmpty())
+                        p.addDeclaresAttackers(se.getTimestamp(), players.getFirst());
+                }
+                if (params.containsKey("DeclaresBlockers")) {
+                    PlayerCollection players = AbilityUtils.getDefinedPlayers(hostCard, params.get("DeclaresBlockers"), stAb);
+                    if (!players.isEmpty())
+                        p.addDeclaresBlockers(se.getTimestamp(), players.getFirst());
                 }
             }
         }

@@ -1,0 +1,8 @@
+Name:Canal Dredger
+ManaCost:4
+Types:Artifact Creature Construct
+PT:1/5
+Draft:Draft CARDNAME face up.
+Draft:Each player passes the last card from each booster pack to a player who drafted a card named CARDNAME.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.YouOwn | TgtPrompt$ Select target card in your graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target card from your graveyard on the bottom of your library.
+Oracle:Draft Canal Dredger face up.\nEach player passes the last card from each booster pack to a player who drafted a card named Canal Dredger.\n{T}: Put target card from your graveyard on the bottom of your library.

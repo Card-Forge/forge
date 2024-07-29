@@ -131,6 +131,11 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
         return (this.myColor & ~colormask) == 0;
     }
 
+    /** This returns the colors that colormask contains that are not in color */
+    public ColorSet getMissingColors(final byte colormask) {
+        return fromMask(this.myColor & ~colormask);
+    }
+
     /** Operand has no other colors except defined by this. */
     public boolean containsAllColorsFrom(final int colorProfile) {
         return (~this.myColor & colorProfile) == 0;

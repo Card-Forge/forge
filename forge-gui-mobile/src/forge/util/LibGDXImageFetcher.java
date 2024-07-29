@@ -1,17 +1,16 @@
 package forge.util;
 
+import com.badlogic.gdx.files.FileHandle;
+import forge.Forge;
+import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import com.badlogic.gdx.files.FileHandle;
-
-import forge.Forge;
-import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgeConstants;
 
 public class LibGDXImageFetcher extends ImageFetcher {
     @Override
@@ -38,7 +37,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             java.net.URLConnection c = url.openConnection();
-            c.setRequestProperty("User-Agent", "");
+            c.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
 
             InputStream is = c.getInputStream();
             // First, save to a temporary file so that nothing tries to read
@@ -65,7 +64,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", "");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

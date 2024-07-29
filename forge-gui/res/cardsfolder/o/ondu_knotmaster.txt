@@ -1,0 +1,17 @@
+Name:Ondu Knotmaster
+ManaCost:2 W B
+Types:Creature Kor Rogue
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+modified+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another modified creature you control dies, put two +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+AlternateMode:Adventure
+Oracle:Lifelink\nWhenever another modified creature you control dies, put two +1/+1 counters on Ondu Knotmaster.
+
+ALTERNATE
+
+Name:Throw a Line
+ManaCost:W B
+Types:Sorcery Adventure
+A:SP$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select one or two creatures to distribute counters to | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SpellDescription$ Distribute two +1/+1 counters among one or two target creatures.
+Oracle:Distribute two +1/+1 counters among one or two target creatures. (Then exile this card. You may cast the creature later from exile.)

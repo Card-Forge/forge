@@ -174,6 +174,21 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return cp != null && !cp.isEmpty();
     }
 
+    public PaperCard removeCardName(String name) {
+        PaperCard paperCard;
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getName().equalsIgnoreCase(name)) {
+                    paperCard = pc.getKey();
+                    pool.remove(paperCard);
+                    return paperCard;
+                }
+            }
+        }
+        return null;
+    }
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
@@ -524,7 +539,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool getAllCardsInASinglePool() {
         return getAllCardsInASinglePool(true);
     }
+
     public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
+        return getAllCardsInASinglePool(includeCommander, false);
+    }
+
+    public CardPool getAllCardsInASinglePool(final boolean includeCommander, boolean includeExtras) {
         final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
         if (this.has(DeckSection.Sideboard)) {
@@ -533,8 +553,24 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (includeCommander && this.has(DeckSection.Commander)) {
             allCards.addAll(this.get(DeckSection.Commander));
         }
+        if (includeExtras) {
+            for (DeckSection section : DeckSection.NONTRADITIONAL_SECTIONS)
+                if (this.has(section))
+                    allCards.addAll(this.get(section));
+        }
         // do not include schemes / avatars and any non-regular cards
         return allCards;
+    }
+
+    /**
+     * Counts the number of cards with the given name across all deck sections.
+     */
+    public int countByName(String cardName) {
+        int sum = 0;
+        for (Entry<DeckSection, CardPool> section : this) {
+            sum += section.getValue().countByName(cardName);
+        }
+        return sum;
     }
 
     public void setAiHints(String aiHintsInfo) {

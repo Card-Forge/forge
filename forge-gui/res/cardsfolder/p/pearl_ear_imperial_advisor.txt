@@ -1,0 +1,11 @@
+Name:Pearl-Ear, Imperial Advisor
+ManaCost:1 W W
+Types:Legendary Creature Fox Advisor
+PT:3/4
+K:Lifelink
+S:Mode$ Continuous | Affected$ Enchantment.YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Affinity:Aura | Description$ Enchantment spells you cast have affinity for Auras.
+T:Mode$ SpellCast | ValidCard$ Aura | ValidActivatingPlayer$ You | TargetsValid$ Permanent.modified+YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Aura spell that targets a modified permanent you control, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+DeckHints:Type$Aura|Enchantment & Ability$Counters
+Oracle:Lifelink\nEnchantment spells you cast have affinity for Auras.\nWhenever you cast an Aura spell that targets a modified permanent you control, draw a card.

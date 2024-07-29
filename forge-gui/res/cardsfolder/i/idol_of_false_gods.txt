@@ -1,0 +1,10 @@
+Name:Idol of False Gods
+ManaCost:2
+Types:Kindred Artifact Eldrazi
+A:AB$ Token | Cost$ 1 C T | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Eldrazi.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Eldrazi you control dies, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE8_P1P1 | SetPower$ 0 | SetToughness$ 0 | AddType$ Creature | AddKeyword$ Annihilator:2 | Description$ As long as CARDNAME has eight or more +1/+1 counters on it, it's a 0/0 creature in addition to its other types and it has annihilator 2.
+DeckHints:Ability$Graveyard|Sacrifice & Type$Eldrazi
+DeckHas:Ability$Counters|Token
+Oracle:{1}{C}, {T}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."\nWhenever another Eldrazi you control dies, put a +1/+1 counter on Idol of False Gods.\nAs long as Idol of False Gods has eight or more +1/+1 counters on it, it's a 0/0 creature in addition to its other types and it has annihilator 2.

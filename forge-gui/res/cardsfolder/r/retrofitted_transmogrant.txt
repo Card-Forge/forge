@@ -1,0 +1,9 @@
+Name:Retrofitted Transmogrant
+ManaCost:B
+Types:Artifact Creature Zombie
+PT:1/1
+A:AB$ ChangeZone | Cost$ 3 B | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | WithCountersType$ P1P1 | WithCountersAmount$ 2 | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped with two +1/+1 counters on it.
+SVar:DiscardMe:2
+SVar:SacMe:1
+DeckHints:Ability$Discard
+Oracle:{3}{B}: Return Retrofitted Transmogrant from your graveyard to the battlefield tapped with two +1/+1 counters on it.

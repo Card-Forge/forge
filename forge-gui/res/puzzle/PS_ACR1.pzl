@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Assassin's Creed #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/07/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Your opponent has five (unknown) cards in their library. Ensure your solution takes all possible opponent decisions into account!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=5
+p0hand=Poison-Blade Mentor;Fatal Push;Terminate;Apple of Eden, Isu Relic
+p0battlefield=Edward Kenway;Adrestia;Sword of Feast and Famine;Submerged Boneyard;Submerged Boneyard;Submerged Boneyard;Submerged Boneyard;Mountain;Mountain
+p1life=5
+p1hand=Flare of Fortitude;Marionette Apprentice;Kozilek's Command
+p1library=Opt;Opt;Opt;Opt;Opt
+p1battlefield=Kaalia of the Vast|Counters:P1P1=3;Nomad Outpost|Tapped;Nomad Outpost|Tapped;Nomad Outpost|Tapped;Nomad Outpost|Tapped

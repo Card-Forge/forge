@@ -1,0 +1,11 @@
+Name:Kami of Jealous Thirst
+ManaCost:2 B
+Types:Creature Spirit
+PT:1/3
+K:Deathtouch
+A:AB$ LoseLife | Cost$ 4 B | LifeAmount$ 2 | Defined$ Opponent | ReduceCost$ 4 B | ReduceAmount$ X | ActivationLimit$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life. This ability costs {4}{B} less to activate if you've drawn three or more cards this turn. Activate only once each turn.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:X:Count$Compare Y GE3.1.0
+SVar:Y:Count$YouDrewThisTurn
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch\n{4}{B}: Each opponent loses 2 life and you gain 2 life. This ability costs {4}{B} less to activate if you've drawn three or more cards this turn. Activate only once each turn.

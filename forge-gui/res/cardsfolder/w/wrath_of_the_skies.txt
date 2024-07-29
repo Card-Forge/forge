@@ -1,0 +1,11 @@
+Name:Wrath of the Skies
+ManaCost:X W W
+Types:Sorcery
+A:SP$ PutCounter | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ X | SubAbility$ DBChooseNumber | SpellDescription$ You get X {E} (energy counters), then you may pay any amount of {E}. Destroy each artifact, creature, and enchantment with mana value less than or equal to the amount of {E} paid this way.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBDestroyAll
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcLEY,Creature.cmcLEY,Enchantment.cmcLEY | UnlessCost$ PayEnergy<Y> | UnlessPayer$ You | UnlessSwitched$ True
+SVar:X:Count$xPaid
+SVar:Max:Count$YourCountersEnergy
+SVar:Y:Count$ChosenNumber
+AI:RemoveDeck:All
+Oracle:You get X {E} (energy counters), then you may pay any amount of {E}. Destroy each artifact, creature, and enchantment with mana value less than or equal to the amount of {E} paid this way.

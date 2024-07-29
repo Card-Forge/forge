@@ -12,6 +12,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,13 @@ public class RollDiceEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final PlayerCollection player = getTargetPlayers(sa);
 
+        if(sa.hasParam("ToVisitYourAttractions")) {
+            if (player.size() == 1 && player.get(0).equals(sa.getActivatingPlayer()))
+                return "Roll to Visit Your Attractions.";
+            else
+                return String.format("%s %s to visit their Attractions.", Lang.joinHomogenous(player), Lang.joinVerb(player, "roll"));
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         if (player.size() == 1 && player.get(0).equals(sa.getActivatingPlayer())) {
             stringBuilder.append("Roll ");
@@ -60,9 +68,17 @@ public class RollDiceEffect extends SpellAbilityEffect {
     }
 
     public static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides) {
-        return rollDiceForPlayer(sa, player, amount, sides, 0, 0, null);
+        boolean toVisitAttractions = sa != null && sa.hasParam("ToVisitYourAttractions");
+        return rollDiceForPlayer(sa, player, amount, sides, 0, 0, null, toVisitAttractions);
     }
-    private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult) {
+    public static int rollDiceForPlayerToVisitAttractions(Player player) {
+        return rollDiceForPlayer(null, player, 1, 6, 0, 0, null, true);
+    }
+    private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult, boolean toVisitAttractions) {
+        if (amount == 0) {
+            return 0;
+        }
+
         Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
@@ -76,14 +92,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
             case Updated: {
                 amount = (int) repParams.get(AbilityKey.Number);
                 ignore = (int) repParams.get(AbilityKey.Ignore);
+                //noinspection unchecked
                 ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
                 break;
             }
         }
 
-        if (amount == 0) {
-            return 0;
-        }
         int total = 0;
         int countMaxRolls = 0;
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
@@ -121,8 +135,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         //Notify of results
         if (amount > 0) {
             StringBuilder sb = new StringBuilder();
-            sb.append(Localizer.getInstance().getMessage("lblPlayerRolledResult", player,
-                    StringUtils.join(naturalRolls, ", ")));
+            String rollResults = StringUtils.join(naturalRolls, ", ");
+            String resultMessage = toVisitAttractions ? "lblAttractionRollResult" : "lblPlayerRolledResult";
+            sb.append(Localizer.getInstance().getMessage(resultMessage, player, rollResults));
             if (!ignored.isEmpty()) {
                 sb.append("\r\n").append(Localizer.getInstance().getMessage("lblIgnoredRolls",
                         StringUtils.join(ignored, ", ")));
@@ -149,15 +164,17 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 countMaxRolls++;
             }
         }
-        if (sa.hasParam("EvenOddResults")) {
-            sa.setSVar("EvenResults", Integer.toString(evenResults));
-            sa.setSVar("OddResults", Integer.toString(oddResults));
-        }
-        if (sa.hasParam("DifferentResults")) {
-            sa.setSVar("DifferentResults", Integer.toString(differentResults));
-        }
-        if (sa.hasParam("MaxRollsResults")) {
-            sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
+        if (sa != null) {
+            if (sa.hasParam("EvenOddResults")) {
+                sa.setSVar("EvenResults", Integer.toString(evenResults));
+                sa.setSVar("OddResults", Integer.toString(oddResults));
+            }
+            if (sa.hasParam("DifferentResults")) {
+                sa.setSVar("DifferentResults", Integer.toString(differentResults));
+            }
+            if (sa.hasParam("MaxRollsResults")) {
+                sa.setSVar("MaxRolls", Integer.toString(countMaxRolls));
+            }
         }
         total += modifier;
 
@@ -168,6 +185,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             runParams.put(AbilityKey.Sides, sides);
             runParams.put(AbilityKey.Modifier, modifier);
             runParams.put(AbilityKey.Result, roll);
+            runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
             runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
             rollNum++;
@@ -175,6 +193,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Sides, sides);
         runParams.put(AbilityKey.Result, rolls);
+        runParams.put(AbilityKey.RolledToVisitAttractions, toVisitAttractions);
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return total;
@@ -210,7 +229,13 @@ public class RollDiceEffect extends SpellAbilityEffect {
         final int ignore = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("IgnoreLower", "0"), sa);
 
         List<Integer> rolls = new ArrayList<>();
-        int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
+        int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls, sa.hasParam("ToVisitYourAttractions"));
+
+        if (sa.hasParam("UseHighestRoll")) {
+            total = Collections.max(rolls);
+        } else if (sa.hasParam("UseDifferenceBetweenRolls")) {
+            total = Collections.max(rolls) - Collections.min(rolls);
+        }
 
         if (sa.hasParam("StoreResults")) {
             host.addStoredRolls(rolls);
@@ -233,9 +258,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 }
                 sa.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
             }
-        }
-        if (sa.hasParam("UseHighestRoll")) {
-            total = Collections.max(rolls);
         }
 
         if (sa.hasParam("SubsForEach")) {
@@ -278,6 +300,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
             } else {
                 int result = rollDice(sa, player, amount, sides);
                 results.add(result);
+                if (sa.hasParam("ToVisitYourAttractions")) {
+                    player.visitAttractions(result);
+                }
             }
         }
         if (rememberHighest) {

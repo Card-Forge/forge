@@ -1,7 +1,0 @@
-Name:Envoy of the Ancestors
-ManaCost:2 W
-Types:Creature Human Cleric
-PT:2/3
-K:Outlast:W
-S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Lifelink | Description$ Modified creatures you control have trample. (Equipment, Auras you control, and counters are modifications.)
-Oracle:Outlast {W} ({W}, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery.)\nModified creatures you control have lifelink. (Equipment, Auras you control, and counters are modifications.)

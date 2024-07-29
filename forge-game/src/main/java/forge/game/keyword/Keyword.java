@@ -1,18 +1,10 @@
 package forge.game.keyword;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-
 import forge.StaticData;
 import forge.game.card.Card;
 import forge.item.PaperCard;
+
+import java.util.*;
 
 public enum Keyword {
     UNDEFINED("", SimpleKeyword.class, false, ""),
@@ -95,9 +87,11 @@ public enum Keyword {
     FOR_MIRRODIN("For Mirrodin", SimpleKeyword.class, false, "When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it."),
     FORETELL("Foretell", KeywordWithCost.class, false, "During your turn, you may pay {2} and exile this card from your hand face down. Cast it on a later turn for its foretell cost."),
     FORTIFY("Fortify", KeywordWithCost.class, false, "%s: Attach to target land you control. Fortify only as a sorcery."),
+    FREERUNNING("Freerunning", KeywordWithCost.class, false, "You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander."),
     FRENZY("Frenzy", KeywordWithAmount.class, false, "Whenever this creature attacks and isn't blocked, it gets +%d/+0 until end of turn."),
     FRIENDS_FOREVER("Friends forever", Partner.class, true, "You can have two commanders if both have friends forever."),
     FUSE("Fuse", SimpleKeyword.class, true, "You may cast one or both halves of this card from your hand."),
+    GIFT("Gift", SimpleKeyword.class, true, "You may promise an opponent a gift as you cast this spell. If you do, when it enters, they %s."),
     GRAFT("Graft", KeywordWithAmount.class, false, "This permanent enters the battlefield with {%d:+1/+1 counter} on it. Whenever another creature enters the battlefield, you may move a +1/+1 counter from this permanent onto it."),
     GRAVESTORM("Gravestorm", SimpleKeyword.class, false, "When you cast this spell, copy it for each permanent that was put into a graveyard from the battlefield this turn. If the spell has any targets, you may choose new targets for any of the copies."),
     HASTE("Haste", SimpleKeyword.class, true, "This creature can attack and {T} as soon as it comes under your control."),
@@ -105,6 +99,7 @@ public enum Keyword {
     HEXPROOF("Hexproof", Hexproof.class, true, "This can't be the target of %s spells or abilities your opponents control."),
     HIDEAWAY("Hideaway", KeywordWithAmount.class, false, "When this permanent enters the battlefield, look at the top {%d:card} of your library, exile one face down, then put the rest on the bottom of your library."),
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true, "This creature can't be blocked except by creatures with horsemanship."),
+    IMPENDING("Impending", KeywordWithCostAndAmount.class, false, "If you cast this spell for its impending cost, it enters with {%2$d:time counter} and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it."),
     IMPROVISE("Improvise", SimpleKeyword.class, true, "Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}."),
     INDESTRUCTIBLE("Indestructible", SimpleKeyword.class, true, "Effects that say \"destroy\" don't destroy this."),
     INFECT("Infect", SimpleKeyword.class, true, "This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."),
@@ -135,6 +130,7 @@ public enum Keyword {
     NINJUTSU("Ninjutsu", Ninjutsu.class, false, "%s, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your %s tapped and attacking."),
     OUTLAST("Outlast", KeywordWithCost.class, false, "%s, {T}: Put a +1/+1 counter on this creature. Outlast only as a sorcery."),
     OFFERING("Offering", KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %1$s and paying the difference in mana costs between this and the sacrificed %1$s. Mana cost includes color."),
+    OFFSPRING("Offspring", KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it."),
     OVERLOAD("Overload", KeywordWithCost.class, false, "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""),
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),

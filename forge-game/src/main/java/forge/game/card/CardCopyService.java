@@ -63,6 +63,7 @@ public class CardCopyService {
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
             out.setAttachedCards(copyFrom.getAttachedCards());
             out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 
             out.setSpecialized(copyFrom.isSpecialized());
@@ -297,6 +298,7 @@ public class CardCopyService {
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
         newCopy.setSaddled(copyFrom.isSaddled());
+        newCopy.setPromisedGift(copyFrom.getPromisedGift());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
 
@@ -307,6 +309,7 @@ public class CardCopyService {
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
+        newCopy.setExcessDamageReceivedThisTurn(copyFrom.getExcessDamageThisTurn());
 
         // these are LKI already
         newCopy.getBlockedThisTurn().addAll(copyFrom.getBlockedThisTurn());

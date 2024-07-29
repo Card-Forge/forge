@@ -1,0 +1,9 @@
+Name:Metastatic Evangel
+ManaCost:1 W
+Types:Creature Phyrexian Human Cleric
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+DeckNeeds:Ability$Counters
+Oracle:Whenever another nontoken creature enters the battlefield under your control, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

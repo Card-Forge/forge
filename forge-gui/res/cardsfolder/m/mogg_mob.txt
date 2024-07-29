@@ -1,0 +1,6 @@
+Name:Mogg Mob
+ManaCost:R R R
+Types:Creature Goblin
+PT:3/3
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 3 | TargetMin$ 1 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among one, two, or three targets.
+Oracle:Sacrifice Mogg Mob: It deals 3 damage divided as you choose among one, two, or three targets.

@@ -1,0 +1,10 @@
+Name:Nulldrifter
+ManaCost:7
+Types:Creature Eldrazi Elemental
+PT:4/4
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
+K:Flying
+K:Annihilator:1
+K:Evoke:2 U
+Oracle:When you cast this spell, draw two cards.\nFlying\nAnnihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)\nEvoke {2}{U} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)

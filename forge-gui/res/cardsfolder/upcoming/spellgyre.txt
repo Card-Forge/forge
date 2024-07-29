@@ -1,0 +1,8 @@
+Name:Spellgyre
+ManaCost:2 U U
+Types:Instant
+A:SP$ Charm | Choices$ DBCounter,DBSurveil | Defined$ You
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Counter target spell | SpellDescription$ Counter target spell.
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw two cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Choose one —\n• Counter target spell.\n• Surveil 2, then draw two cards. (To surveil 2, look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

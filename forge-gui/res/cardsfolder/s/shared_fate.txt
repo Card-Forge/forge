@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Enchantment
 Text:If a player would draw a card, that player exiles the top card of one of their opponents' libraries face down instead. Each player may look at cards they exiled with CARDNAME, and they may play lands and cast spells from among those cards.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffects | Static$ True
-#Create an effect for each player. The effect contains both Shared Fate's abilities.
+# Create an effect for each player. The effect contains both Shared Fate's abilities.
 SVar:TrigEffects:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | EffectOwner$ Remembered | StaticAbilities$ STPlay | ReplacementEffects$ RDraw | Duration$ UntilHostLeavesPlay | ForgetOnMoved$ Exile
 SVar:RDraw:Event$ Draw | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DBChooseOpp | Description$ If you would draw a card, exile the top card of an opponent's library face down instead.

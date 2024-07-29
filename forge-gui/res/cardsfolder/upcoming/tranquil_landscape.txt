@@ -1,7 +1,0 @@
-Name:Tranquil Landscape
-ManaCost:no cost
-Types:Land
-A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ ChangeZone | Cost$ T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Forest+Basic,Land.Plains+Basic,Land.Island+Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle.
-K:Cycling:G W U
-Oracle:{T}: Add {C}.\n{T}, Sacrifice Tranquil Landscape: Search your library for a basic Forest, Plains, or Island card, put it onto the battlefield tapped, then shuffle.\nCycling {G}{W}{U} ({G}{W}{U}, Discard this card: Draw a card.)

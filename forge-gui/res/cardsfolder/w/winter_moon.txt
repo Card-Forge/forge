@@ -1,0 +1,8 @@
+Name:Winter Moon
+ManaCost:2
+Types:Artifact
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ UntapAdjust:Land.nonBasic:1 | Description$ Players can't untap more than one nonbasic land during their untap steps.
+SVar:NonStackingEffect:True
+DeckHints:Type$Artifact
+AI:RemoveDeck:Random
+Oracle:Players can't untap more than one nonbasic land during their untap steps.

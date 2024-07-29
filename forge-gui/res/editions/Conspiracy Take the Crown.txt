@@ -238,6 +238,7 @@ ScryfallCode=CN2
 [Draft Matters]
 Adriana's Valor
 Animus of Predation
+Archdemon of Paliano
 Assemble the Rank and Vile
 Custodi Peacekeeper
 Echoing Boon
@@ -248,11 +249,14 @@ Hold the Perimeter
 Hymn of the Wilds
 Illusionary Informant
 Incendiary Dissent
+Leovold's Operative
 Natural Unity
 Noble Banneret
 Paliano Vanguard
 Pyretic Hunter
 Regicide
+Smuggler Captain
+Spire Phantasm
 Sovereign's Realm
 Summoner's Bond
 Weight Advantage

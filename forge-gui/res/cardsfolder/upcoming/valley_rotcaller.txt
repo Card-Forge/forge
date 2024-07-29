@@ -1,0 +1,11 @@
+Name:Valley Rotcaller
+ManaCost:1 B
+Types:Creature Squirrel Warlock
+PT:1/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses X life and you gain X life, where X is the number of other Squirrels, Bats, Lizards, and Rats you control.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Valid Squirrel.YouCtrl+StrictlyOther,Bat.YouCtrl+StrictlyOther,Lizard.YouCtrl+StrictlyOther,Rat.YouCtrl+StrictlyOther
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhenever Valley Rotcaller attacks, each opponent loses X life and you gain X life, where X is the number of other Squirrels, Bats, Lizards, and Rats you control.

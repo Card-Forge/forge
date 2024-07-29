@@ -7,6 +7,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -148,6 +149,19 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPromiseGift cost) {
+        if (!cost.canPay(ability, player, isEffect())) {
+            return null;
+        }
+        List<Player> res = cost.getPotentialPlayers(player, ability);
+        // I should only choose one of these right?
+        // TODO Choose the "worst" player.
+        Collections.shuffle(res);
+
+        return PaymentDecision.players(res.subList(0, 1));
+    }
+
+    @Override
     public PaymentDecision visit(CostExile cost) {
         String type = cost.getType();
         if (cost.payCostFromSource()) {
@@ -156,8 +170,27 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (type.equals("All")) {
             return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
-        }
-        else if (type.contains("FromTopGrave")) {
+        } else if (type.contains("FromTopGrave")) {
+            return null;
+        } else if (type.contains("+withTotalCMCGE")) {
+            String strAmount = type.split("withTotalCMCGE")[1];
+            int amount = AbilityUtils.calculateAmount(source, strAmount, ability);
+            String typeCleaned = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", strAmount), "");
+            CardCollection valid = CardLists.getValidCards(player.getGame().getCardsIn(cost.getFrom().get(0)), typeCleaned, player, source, ability);
+            CardCollection chosen = new CardCollection();
+
+            CardLists.sortByCmcDesc(valid);
+            Collections.reverse(valid);
+
+            int totalCMC = 0;
+            for (Card card : valid) {
+                totalCMC += card.getCMC();
+                chosen.add(card);
+                if (totalCMC >= amount) {
+                    return PaymentDecision.card(chosen);
+                }
+            }
+
             return null;
         }
 
@@ -242,6 +275,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostFlipCoin cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
+    }
+
+    @Override
+    public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        CardCollection exile = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        if (!food.isEmpty()) {
+            final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+            CardCollectionView list = aic.chooseSacrificeType("Food", ability, isEffect(), 1, null);
+            return list == null ? null : PaymentDecision.card(list);
+        } else {
+            CardCollectionView chosen = ComputerUtil.chooseExileFromList(player, exile, source, 3, ability, isEffect());
+            return null == chosen ? null : PaymentDecision.card(chosen);
+        }
     }
 
     @Override

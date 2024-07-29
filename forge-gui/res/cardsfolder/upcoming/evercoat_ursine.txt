@@ -1,0 +1,12 @@
+Name:Evercoat Ursine
+ManaCost:4 G
+Types:Creature Elemental Bear
+PT:6/5
+K:Trample
+K:Hideaway:3
+K:Hideaway:3
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CheckSVar$ X | SVarCompare$ GT0 | CombatDamage$ True | Execute$ TrigPlay | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, if there are cards exiled with it, you may play one of them without paying its mana cost.
+SVar:TrigPlay:DB$ Play | Defined$ ExiledWith | Amount$ 1 | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:X:Count$ValidExile Card.ExiledWithSource
+SVar:DBReturn:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+Oracle:Trample\nHideaway 3, hideaway 3\nWhenever Evercoat Ursine deals combat damage to a player, if there are cards exiled with it, you may play one of them without paying its mana cost.

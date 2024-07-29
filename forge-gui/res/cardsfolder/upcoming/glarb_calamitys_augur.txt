@@ -1,0 +1,10 @@
+Name:Glarb, Calamity's Augur
+ManaCost:B G U
+Types:Legendary Creature Frog Wizard Noble
+PT:2/4
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl,Card.TopLibrary+nonLand+YouCtrl | ValidAfterStack$ Spell.cmcGE4 | AffectedZone$ Library | MayPlay$ True | Description$ You may play lands and cast spells with mana value 4 or greater from the top of your library.
+A:AB$ Surveil | Cost$ T | Amount$ 2 | SpellDescription$ Surveil 2.
+DeckHas:Ability$Surveil
+Oracle:Deathtouch\nYou may look at the top card of your library any time.\nYou may play lands and cast spells with mana value 4 or greater from the top of your library.\n{T}: Surveil 2.

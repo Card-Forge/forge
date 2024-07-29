@@ -1,0 +1,8 @@
+Name:Vexing Bauble
+ManaCost:1
+Types:Artifact
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigCounter | ValidSA$ Spell.ManaSpent EQ0 | TriggerDescription$ Whenever a player casts a spell, if no mana was spent to cast it, counter that spell.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSpellAbility
+A:AB$ Draw | Cost$ 1 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice
+Oracle:Whenever a player casts a spell, if no mana was spent to cast it, counter that spell.\n{1}, {T}, Sacrifice Vexing Bauble: Draw a card.

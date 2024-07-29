@@ -1,0 +1,14 @@
+Name:Leyline of Hope
+ManaCost:2 W W
+Types:Enchantment
+K:MayEffectFromOpeningHand:FromHand
+SVar:FromHand:DB$ ChangeZone | Defined$ Self | Origin$ Hand | Destination$ Battlefield | SpellDescription$ If CARDNAME is in your opening hand, you may begin the game with it on the battlefield.
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GainLife | AILogic$ DoubleLife | Description$ If you would gain life, you gain that much life plus 1 instead.
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | CheckSVar$ Y | SVarCompare$ GEZ | Description$ As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.
+SVar:X:ReplaceCount$LifeGained/Plus.1
+SVar:Y:Count$YourLifeTotal
+SVar:Z:Count$YourStartingLife/Plus.7
+SVar:PlayMain1:True
+DeckHints:Ability$LifeGain
+Oracle:If Leyline of Hope is in your opening hand, you may begin the game with it on the battlefield.\nIf you would gain life, you gain that much life plus 1 instead.\nAs long as you have at least 7 life more than your starting life total, creatures you control get +2/+2.

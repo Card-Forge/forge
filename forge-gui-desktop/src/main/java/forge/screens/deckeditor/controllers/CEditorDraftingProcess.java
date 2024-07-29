@@ -116,12 +116,25 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         // can only draft one at a time, regardless of the requested quantity
         PaperCard card = items.iterator().next().getKey();
 
+        if (boosterDraft.getHumanPlayer().shouldSkipThisPick()) {
+            System.out.println(card + " not drafted because we're skipping this pick");
+            showPackToDraft();
+            return;
+        }
+
+        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+            card = boosterDraft.getHumanPlayer().pickFromArchdemonCurse(boosterDraft.getHumanPlayer().nextChoice());
+        }
+
         // Verify if card is in the activate pack?
         this.getDeckManager().addItem(card, 1);
 
-        // get next booster pack
+        // get next booster pack if we aren't picking again from this pack
         this.boosterDraft.setChoice(card);
+        showPackToDraft();
+    }
 
+    protected void showPackToDraft() {
         boolean nextChoice = this.boosterDraft.hasNextChoice();
         ItemPool<PaperCard> pool = null;
         if (nextChoice) {
@@ -133,8 +146,7 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
             this.showChoices(pool);
         }
         else {
-            // TODO Deal Broker
-            // Offer trades before saving
+            boosterDraft.postDraftActions();
 
             this.saveDraft();
         }
@@ -169,8 +181,24 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         int packNumber = ((BoosterDraft) boosterDraft).getCurrentBoosterIndex() + 1;
 
         this.getCatalogManager().setCaption(localizer.getMessage("lblPackNCards", String.valueOf(packNumber)));
-        this.getCatalogManager().setPool(list);
+
+        int count = list.countAll();
+
+        if (boosterDraft.getHumanPlayer().hasArchdemonCurse()) {
+            // Only show facedown cards with no information
+            this.getCatalogManager().setPool(generateFakePaperCards(count));
+        } else {
+            this.getCatalogManager().setPool(list);
+        }
     } // showChoices()
+
+    private ItemPool<PaperCard> generateFakePaperCards(int count) {
+        ItemPool<PaperCard> pool = new ItemPool<>(PaperCard.class);
+        for (int i = 0; i < count; i++) {
+            pool.add(PaperCard.FAKE_CARD);
+        }
+        return pool;
+    }
 
     /**
      * <p>

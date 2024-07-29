@@ -3,7 +3,6 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
-import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
@@ -109,7 +108,7 @@ public class DuelScene extends ForgeScene {
             e.printStackTrace();
         }
         String enemyName = enemy.getName();
-        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
+        boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         Current.player().clearBlessing();
         if ((chaosBattle || showMessages) && !winner) {
             final FBufferedImage fb = new FBufferedImage(120, 120) {
@@ -120,30 +119,12 @@ public class DuelScene extends ForgeScene {
                 }
             };
             callbackExit = true;
-            List<String> insult = Lists.newArrayList("I'm sorry...", "... ....", "Learn from your defeat.",
-                    "I haven't begun to use my full power.", "No matter how much you try, you still won't beat me.",
-                    "Your technique need work.", "Rookie.", "That's your best?", "Hah ha ha ha ha ha ha!", "?!......... (Seriously?!)",
-                    "Forget about a rematch. Practice more instead.", "That was a 100% effort on my part! Well, actually, no... That was more like 50%.",
-                    "If you expected me to lose out of generosity, I'm truly sorry!", "You'll appreciate that I held back during the match!",
-                    "That's the best you can do?", "Don't waste my time with your skills!", "Ha-ha-ha! What's the matter?",
-                    "I hope I didn't hurt your ego too badly... Oops!", "This match... I think I've learned something from this.",
-                    "Hey! Don't worry about it!", "You are not worthy!", "Hm! You should go back to playing puzzle games!",
-                    "Thought you could beat me?  Whew, talk about conceited.", "*Yawn* ... Huh? It's over already? But I just woke up!",
-                    "Next time bring an army. It might give you a chance.", "The reason you lost is quite simple...",
-                    "Is that all you can do?", "You need to learn more to stand a chance.", "You weren't that bad.", "You made an effort at least.",
-                    "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!");
-            String message = Aggregates.random(insult);
             boolean finalWinner = winner;
-            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, fb, new Callback<Integer>() {
+            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("AdvBossInsult"+Aggregates.randomInt(1, 44)), enemyName, fb, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
-                    if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner);
-                        if (Config.instance().getSettingData().disableWinLose) {
-                            MatchController.writeMatchPreferences();
-                            exitDuelScene();
-                        }
-                    }
+                    afterGameEnd(enemyName, finalWinner);
+                    exitDuelScene();
                     fb.dispose();
                 }
             }));
@@ -375,7 +356,7 @@ public class DuelScene extends ForgeScene {
         //hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap, bossBattle ? MusicPlaylist.BOSS : MusicPlaylist.MATCH);
         MatchController.instance.setGameView(hostedMatch.getGameView());
-        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
+        boolean showMessages = enemy.getData().boss || (enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck());
         if (chaosBattle || showMessages) {
             final FBufferedImage fb = new FBufferedImage(120, 120) {
                 @Override
@@ -384,17 +365,9 @@ public class DuelScene extends ForgeScene {
                         g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
                 }
             };
-            List<String> list = Lists.newArrayList("It all depends on your skill!", "It's showtime!", "Let's party!",
-                    "You've proved yourself!", "Are you ready? Go!", "Prepare to strike, now!", "Let's go!", "What's next?",
-                    "Yeah, I've been waitin' for this!", "The stage of battle is set!", "And the battle begins!", "Let's get started!",
-                    "Are you ready?", "It's the battle of the century!", "Let's keep it up!", "How long will this go on?", "I hope you're ready!",
-                    "This could be the end.", "Pull out all the stops!", "It all comes down to this.", "Who will emerge victorious?",
-                    "Nowhere to run, nowhere to hide!", "This battle is over!", "There was no way out of that one!", "Let's do this!", "Let the madness begin!",
-                    "It's all or nothing!", "It's all on the line!", "You can't back down now!", "Do you have what it takes?", "What will happen next?",
-                    "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
-            String message = Aggregates.random(list);
+
             matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
-                    FOptionPane.showMessageDialog(message, enemy.getName(), fb, new Callback<Integer>() {
+                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("AdvBossIntro"+Aggregates.randomInt(1, 35)), enemy.getName(), fb, new Callback<Integer>() {
                         @Override
                         public void run(Integer result) {
                             fb.dispose();

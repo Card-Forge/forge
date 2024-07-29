@@ -73,6 +73,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         long timestamp = game.getNextTimestamp();
+        Set<Card> originalTokens = Sets.newHashSet(tokenTable.columnKeySet());
 
         // support PlayerCollection for affected
         Set<Player> toRemove = Sets.newHashSet();
@@ -113,6 +114,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = new CardCopyService(prototype).copyCard(true);
+                // disconnect from prototype
+                tok.getStates().forEach(cs -> tok.getState(cs).resetOriginalHost());
                 // Crafty Cutpurse would change under which control it does enter,
                 // but it shouldn't change who creates the token
                 tok.setOwner(creator);
@@ -147,7 +150,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     }
                 }
 
-                if (clone) {
+                if (clone || prototype.getCopiedPermanent() != null) {
                     tok.setCopiedPermanent(prototype);
                 }
 
@@ -189,6 +192,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 moved.updateStateForView();
 
                 if (sa.hasParam("RememberTokens")) {
+                    host.addRemembered(moved);
+                }
+                // used for some reflexive trigger
+                if (sa.hasParam("RememberOriginalTokens") && originalTokens.contains(prototype)) {
                     host.addRemembered(moved);
                 }
                 if (sa.hasParam("ImprintTokens")) {

@@ -1,35 +1,17 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -41,6 +23,8 @@ import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
+
+import java.util.*;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
@@ -255,11 +239,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             fromTopGrave = true;
         }
         boolean totalCMC = false;
+        boolean totalCMCgreater = false;
         String totalM = "";
         if (type.contains("+withTotalCMCEQ")) {
             totalCMC = true;
             totalM = type.split("withTotalCMCEQ")[1];
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCEQ", totalM), "");
+        }
+        if (type.contains("+withTotalCMCGE")) {
+            totalCMC = true;
+            totalCMCgreater = true;
+            totalM = type.split("withTotalCMCGE")[1];
+            type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", totalM), "");
         }
         boolean sharedType = false;
         if (type.contains("+withSharedCardType")) {
@@ -298,7 +289,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             inp.setCancelAllowed(true);
             inp.showAndWait();
 
-            if (inp.hasCancelled() || CardLists.getTotalCMC(inp.getSelected()) != total) {
+            int sum = CardLists.getTotalCMC(inp.getSelected());
+            if (inp.hasCancelled() || (sum != total && !totalCMCgreater) || (sum < total && totalCMCgreater)) {
                 return null;
             }
             return PaymentDecision.card(inp.getSelected());
@@ -565,6 +557,36 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        CardCollection exile = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        if (!food.isEmpty() && confirmAction(cost, "Sacrifice Food")) {
+            // Sacrifice Food logic
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, food, ability);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectATargetToSacrifice", "Food", "%d"));
+            inp.setCancelAllowed(!mandatory);
+            inp.showAndWait();
+            if (inp.hasCancelled()) {
+                return null;
+            }
+
+            return PaymentDecision.card(inp.getSelected());
+        } if (exile.size() >= 3) {
+            // Sacrifice Food logic
+            final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 3, 3, exile, ability);
+            inp.setMessage(Localizer.getInstance().getMessage("lblSelectToExile", 3));
+            inp.setCancelAllowed(!mandatory);
+            inp.showAndWait();
+            if (inp.hasCancelled()) {
+                return null;
+            }
+
+            return PaymentDecision.card(inp.getSelected());
+        }
+        return null;
+    }
+
+    @Override
     public PaymentDecision visit(final CostRollDice cost) {
         int c = cost.getAbilityAmount(ability);
 
@@ -686,6 +708,19 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostPartMana cost) {
         // only interactive payment possible for now =(
         return new PaymentDecision(0);
+    }
+
+    @Override
+    public PaymentDecision visit(final CostPromiseGift cost) {
+        // TODO Parse the specific gift
+        PlayerCollection opponents = cost.getPotentialPlayers(player, ability);
+        Player giftee = controller.chooseSingleEntityForEffect(opponents, null, ability, "Choose an opponent to promise a gift", false, null, null);
+
+        if (giftee == null) {
+            return null;
+        }
+
+        return PaymentDecision.players(Lists.newArrayList(giftee));
     }
 
     @Override

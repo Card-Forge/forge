@@ -10,6 +10,7 @@ public enum OptionalCost {
     Entwine("Entwine", ""),
     Kicker1("Kicker", ""),
     Kicker2("Kicker", ""),
+    PromiseGift("Promise Gift", ""),
     Retrace("Retrace", ""),
     Jumpstart("Jump-start", ""),
     ReduceW("(to reduce white mana)", "W"),

@@ -1,0 +1,11 @@
+Name:Charitable Levy
+ManaCost:1 W
+Types:Enchantment
+S:Mode$ RaiseCost | ValidCard$ Card.nonCreature | Type$ Spell | Amount$ 1 | Description$ Noncreature spells cost {1} more to cast.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a noncreature spell, put a collection counter on CARDNAME. Then if there are three or more collection counters on it, sacrifice it. If you do, draw a card, then you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ COLLECTION | CounterNum$ 1 | SubAbility$ DBSac
+SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_GE3_COLLECTION | RememberSacrificed$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | ConditionDefined$ Remembered | ConditionPresent$ Card | Destination$ Battlefield | ChangeType$ Plains | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Noncreature spells cost {1} more to cast.\nWhenever a player casts a noncreature spell, put a collection counter on Charitable Levy. Then if there are three or more collection counters on it, sacrifice it. If you do, draw a card, then you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.

@@ -1,0 +1,14 @@
+Name:Zoraline, Cosmos Caller
+ManaCost:1 W B
+Types:Legendary Creature Bat Cleric
+PT:3/3
+K:Flying
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Bat.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Bat you control attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ W B PayLife<2> | Execute$ TrigChange | SpellDescription$ When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.nonLand+YouOwn+cmcLE3 | TgtPrompt$ Choose target nonland permanent card with mana value 3 or less | WithCountersType$ FINALITY | SpellDescription$ Return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, vigilance\nWhenever a Bat you control attacks, you gain 1 life.\nWhenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.

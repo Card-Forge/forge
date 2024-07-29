@@ -37,7 +37,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
 
         // Spells are not undoable
-        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);
+        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2 && !sa.hasParam("ActivationLimit"));
 
         final boolean optional = sa.hasParam("Optional");
         final Game game = activator.getGame();

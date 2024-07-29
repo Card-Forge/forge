@@ -1,0 +1,11 @@
+Name:Sunspine Lynx
+ManaCost:2 R R
+Types:Creature Elemental Cat
+PT:5/4
+S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
+S:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerDescription$ When CARDNAME enters, it deals damage to each player equal to the number of nonbasic lands that player controls.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBDamage | DamageMap$ True
+SVar:DBDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
+SVar:X:Count$Valid Land.nonBasic+RememberedPlayerCtrl
+Oracle:Players can't gain life.\nDamage can't be prevented.\nWhen Sunspine Lynx enters, it deals damage to each player equal to the number of nonbasic lands that player controls.

@@ -1,8 +1,0 @@
-Name:Sarpadian Simulacrum
-ManaCost:R
-Types:Artifact Creature Goblin
-PT:1/1
-K:Haste
-A:AB$ DealDamage | Cost$ 3 R Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ It deals 4 damage to target creature.
-DeckHas:Ability$Sacrifice
-Oracle:Haste\n{3}{R}, Sacrifice Sarpadian Simulacrum: It deals 4 damage to target creature.

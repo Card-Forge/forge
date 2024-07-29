@@ -9,8 +9,7 @@ SVar:SearchLibrary:DB$ ChangeZone | Origin$ Library | Destination$ Library | Cha
 SVar:EqualTransmute:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ GEY | SubAbility$ PayForTransmute | StackDescription$ None
 SVar:PayForTransmute:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ LTY | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ CostNotPaid | StackDescription$ None | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:CostNotPaid:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | NoLooking$ True | Mandatory$ True | Defined$ Remembered | ChangeNum$ 1 | ConditionCheckSVar$ SackedCMC | ConditionSVarCompare$ LTY | StackDescription$ None | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-# Everything working but when no artifact is sacrificed
-# SackedCMC to be overridden to see if a sacrifice actually happened
+# Everything working but when no artifact is sacrificed SackedCMC to be overridden to see if a sacrifice actually happened
 SVar:Y:RememberedLKI$CardManaCost
 SVar:SackedCMC:Number$0
 SVar:X:SVar$Y/Minus.SackedCMC

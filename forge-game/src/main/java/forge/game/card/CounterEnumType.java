@@ -272,6 +272,8 @@ public enum CounterEnumType {
     MATRIX("MATRX", 183, 174, 255),
 
     MEMORY("MEMRY", 174, 183, 255),
+    
+    MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
 
@@ -286,6 +288,8 @@ public enum CounterEnumType {
     NECRODERMIS("NECRO", 80, 209, 250),
 
     NET("NET", 0, 221, 251),
+
+    NEST("NEST", 80, 80, 50),
 
     OIL("OIL", 99, 102, 106),
 
@@ -340,6 +344,10 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+
+    REV("REV", 255, 108, 111),
+    
+    REVIVAL("REVIVL", 130, 230, 50),
     
     RIBBON("RIBBON", 233, 245, 232),
 
@@ -390,6 +398,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    SUPPLY("SPPLY", 70, 105, 60),
 
     TAKEOVER("TKVR", 63, 49, 191),
 

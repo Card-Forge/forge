@@ -177,6 +177,9 @@ public enum FSkinProp {
     IMG_CMC_MID_HIGH (new int[] {2, 166, 160, 160}, PropType.MANAICONS),
     IMG_CMC_HIGH     (new int[] {2, 248, 160, 160}, PropType.MANAICONS),
 
+    //PAWPRINT
+    IMG_PAWPRINT     (new int[] {2, 902, 80, 80}, PropType.MANAICONS),
+
     //gameplay images
     IMG_TAP             (new int[] {166, 412, 80, 80}, PropType.MANAICONS),
     IMG_UNTAP           (new int[] {248, 412, 80, 80}, PropType.MANAICONS),
@@ -650,12 +653,13 @@ public enum FSkinProp {
             MANA_IMG.put(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }
 
-        MANA_IMG.put("P", FSkinProp.IMG_MANA_PHRYX);
+        MANA_IMG.put("H", FSkinProp.IMG_MANA_PHRYX);
         MANA_IMG.put("Y", FSkinProp.IMG_MANA_Y);
         MANA_IMG.put("Z", FSkinProp.IMG_MANA_Z);
         MANA_IMG.put("CHAOS", FSkinProp.IMG_CHAOS);
         MANA_IMG.put("Q", FSkinProp.IMG_UNTAP);
         MANA_IMG.put("T", FSkinProp.IMG_TAP);
+        MANA_IMG.put("P", FSkinProp.IMG_PAWPRINT);
     }
 
     public enum PropType {

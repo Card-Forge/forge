@@ -56,6 +56,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     boolean isAura();
     boolean isEquipment();
     boolean isFortification();
+    boolean isAttraction();
 
     boolean isSaga();
     boolean isHistoric();

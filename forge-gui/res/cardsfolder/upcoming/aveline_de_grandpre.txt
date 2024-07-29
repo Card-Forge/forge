@@ -1,0 +1,10 @@
+Name:Aveline de Grandpré
+ManaCost:2 G G
+Types:Legendary Creature Human Assassin
+PT:3/3
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+withDeathtouch | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature you control with deathtouch deals combat damage to a player, put that many +1/+1 counters on that creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$DamageAmount
+K:Disguise:B G
+Oracle:Deathtouch\nWhenever a creature you control with deathtouch deals combat damage to a player, put that many +1/+1 counters on that creature.\nDisguise {B}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

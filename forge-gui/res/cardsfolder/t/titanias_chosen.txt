@@ -2,7 +2,7 @@ Name:Titania's Chosen
 ManaCost:2 G
 Types:Creature Elf Archer
 PT:1/1
-T:Mode$ SpellCast | ValidCard$ Card.Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player casts a green spell, put a +1/+1 counter on Titania's Chosen.
+T:Mode$ SpellCast | ValidCard$ Card.Green | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a player casts a green spell, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Card.Green
 Oracle:Whenever a player casts a green spell, put a +1/+1 counter on Titania's Chosen.

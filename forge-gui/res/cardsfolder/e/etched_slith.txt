@@ -1,0 +1,11 @@
+Name:Etched Slith
+ManaCost:1 B
+Types:Artifact Creature Phyrexian Slith
+PT:1/1
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it. When you do, you may remove a counter from another target permanent or opponent.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | RememberAmount$ True | SubAbility$ TrigImmediate
+SVar:TrigImmediate:DB$ ImmediateTrigger | Execute$ TrigRemoveCounter | OptionalDecider$ You | TriggerAmount$ Count$RememberedNumber | SubAbility$ DBCleanup | TriggerDescription$ When you do, you may remove a counter from another target permanent or opponent.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent.Other,Opponent | TgtPrompt$ Select target permanent or opponent | CounterType$ Any | CounterNum$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Menace\nWhenever Etched Slith deals combat damage to a player, put a +1/+1 counter on it. When you do, you may remove a counter from another target permanent or opponent.

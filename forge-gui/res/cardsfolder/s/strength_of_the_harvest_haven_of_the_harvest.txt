@@ -1,0 +1,20 @@
+Name:Strength of the Harvest
+ManaCost:2 GW
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 GW | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each creature and/or enchantment you control.
+SVar:X:Count$Valid Creature.YouCtrl,Enchantment.YouCtrl
+SVar:BuffedBy:Enchantment
+DeckHints:Type$Enchantment
+AlternateMode:Modal
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 for each creature and/or enchantment you control.
+
+ALTERNATE
+
+Name:Haven of the Harvest
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+Oracle:Haven of the Harvest enters the battlefield tapped.\n{T}: Add {G} or {W}.

@@ -33,6 +33,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
+import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
@@ -78,7 +79,8 @@ import java.util.Map.Entry;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.Junkyard,
+            ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -156,6 +158,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Card> completedDungeons = new ArrayList<>();
 
     private final Map<ZoneType, PlayerZone> zones = Maps.newEnumMap(ZoneType.class);
+    private List<PlayerZone> extraZones = null;
+
     private final Map<Long, Integer> adjustLandPlays = Maps.newHashMap();
     private final Set<Long> adjustLandPlaysInfinite = Sets.newHashSet();
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
@@ -193,6 +197,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Long, Integer> additionalOptionalVotes = Maps.newHashMap();
     private SortedSet<Long> controlVotes = Sets.newTreeSet();
     private Map<Long, Integer> additionalVillainousChoices = Maps.newHashMap();
+
+    private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
+    private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -484,6 +491,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             runParams.put(AbilityKey.FirstTime, firstGain);
             game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
+            game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
+
             game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
             return true;
         }
@@ -554,6 +563,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.LifeAmount, toLose);
         runParams.put(AbilityKey.FirstTime, firstLost);
         game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
+
+        game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
 
         return lifeLost;
     }
@@ -904,7 +915,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setCounters(counterName, newValue, null, true);
 
         getGame().addCounterRemovedThisTurn(counterName, this, delta);
-        
+
         /* TODO Run triggers when something cares
         int curCounters = oldValue;
         for (int i = 0; i < delta && curCounters != 0; i++) {
@@ -1195,9 +1206,18 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final CardCollectionView drawCards(final int n) {
-        return drawCards(n, null, AbilityKey.newMap());
+        return drawCards(n, null, AbilityKey.newMap(), this.getZone(ZoneType.Hand));
     }
+
+    public final CardCollectionView drawCards(final int n, PlayerZone zone) {
+        return drawCards(n, null, AbilityKey.newMap(), zone);
+    }
+
     public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params) {
+        return drawCards(n, cause, params, this.getZone(ZoneType.Hand));
+    }
+
+    public final CardCollectionView drawCards(final int n, SpellAbility cause, Map<AbilityKey, Object> params, PlayerZone zone) {
         final CardCollection drawn = new CardCollection();
         if (n <= 0) {
             return drawn;
@@ -1222,7 +1242,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (gameStarted && !canDraw()) {
                 return drawn;
             }
-            drawn.addAll(doDraw(toReveal, cause, params));
+            drawn.addAll(doDraw(toReveal, cause, params, zone));
         }
 
         // reveal multiple drawn cards when playing with the top of the library revealed
@@ -1237,7 +1257,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     /**
      * @return a CardCollectionView of cards actually drawn
      */
-    private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params) {
+    private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
         final CardCollection drawn = new CardCollection();
         final PlayerZone library = getZone(ZoneType.Library);
 
@@ -1272,7 +1292,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            c = game.getAction().moveToHand(c, cause, params);
+            c = game.getAction().moveTo(hand, c, cause, params);
             drawn.add(c);
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
@@ -1337,6 +1357,18 @@ public class Player extends GameEntity implements Comparable<Player> {
             updateZoneForView(zone);
         }
     }
+
+    public final List<PlayerZone> getExtraZones() {
+        return extraZones;
+    }
+
+    public void resetExtraZones(ZoneType type) {
+        extraZones.removeIf(z -> z.getZoneType().equals(type));
+        if (extraZones.isEmpty()) {
+            extraZones = null;
+        }
+    }
+
 
     public final CardCollectionView getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
@@ -2132,12 +2164,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return lost;
     }
 
-    public final boolean hasProwl(final Set<String> types) {
-        StringBuilder sb = new StringBuilder();
-        for (String type : types) {
-            sb.append("Card.YouCtrl+").append(type).append(",");
-        }
-        return !game.getDamageDoneThisTurn(true, true, sb.toString(), "Player", null, this, null).isEmpty();
+    public final boolean hasProwl(final SpellAbility sa) {
+        return !game.getDamageDoneThisTurn(true, true, "Card.YouCtrl+sharesCreatureTypeWith", "Player", sa.getHostCard(), this, sa).isEmpty();
+    }
+
+    public final boolean hasFreerunning() {
+        return !game.getDamageDoneThisTurn(true, true, "Card.Assassin+YouCtrl,Card.IsCommander+YouCtrl", "Player", null, this, null).isEmpty();
     }
 
     public final void setLibrarySearched(final int l) {
@@ -2301,7 +2333,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addSpellCastSinceBegOfYourLastTurn(List<Card> spells) {
         spellsCastSinceBeginningOfLastTurn.addAll(spells);
     }
-    
+
     public final int getSpellsCastThisTurn() {
         return spellsCastThisTurn;
     }
@@ -2961,8 +2993,25 @@ public class Player extends GameEntity implements Comparable<Player> {
                     continue;
                 }
             }
+
+            if (Objects.equals(conspire.getName(), "Backup Plan")) {
+                PlayerZone hand = new PlayerZone(ZoneType.ExtraHand, this);
+                if (this.extraZones == null) {
+                    this.extraZones = new ArrayList<>();
+                }
+                this.extraZones.add(hand);
+            }
+
             com.add(conspire);
         }
+
+        // Attractions
+        PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
+        for (IPaperCard cp : registeredPlayer.getAttractions()) {
+            attractionDeck.add(Card.fromPaperCard(cp, this));
+        }
+        if (!attractionDeck.isEmpty())
+            attractionDeck.shuffle();
 
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
@@ -3813,5 +3862,41 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public void visitAttractions(int light) {
+        CardCollection attractions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isAttractionWithLight(light));
+        for (Card c : attractions) {
+            c.visitAttraction(this);
+        }
+    }
+    public void rollToVisitAttractions() {
+        this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
+    }
+
+    public void addDeclaresAttackers(long ts, Player p) {
+        this.declaresAttackers.put(ts, p);
+    }
+
+    public void removeDeclaresAttackers(long ts) {
+        this.declaresAttackers.remove(ts);
+    }
+
+    public Player getDeclaresAttackers() {
+        Map.Entry<Long, Player> e = declaresAttackers.lastEntry();
+        return e == null ? null : e.getValue();
+    }
+
+    public void addDeclaresBlockers(long ts, Player p) {
+        this.declaresBlockers.put(ts, p);
+    }
+
+    public void removeDeclaresBlockers(long ts) {
+        this.declaresBlockers.remove(ts);
+    }
+
+    public Player getDeclaresBlockers() {
+        Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
+        return e == null ? null : e.getValue();
     }
 }

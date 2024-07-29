@@ -111,6 +111,7 @@ public class CardFactory {
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         copy.setKickerMagnitude(original.getKickerMagnitude());
+        copy.setPromisedGift(original.getPromisedGift());
 
         if (targetSA.isBestow()) {
             copy.animateBestow();
@@ -189,6 +190,8 @@ public class CardFactory {
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
         c.setToken(cp.isToken());
+
+        c.setAttractionCard(cardRules.getType().isAttraction());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -346,9 +349,9 @@ public class CardFactory {
             card.setColor(combinedColor);
             card.setType(new CardType(rules.getType()));
 
-            // Combined text based on Oracle text - might not be necessary, temporarily disabled.
-            //String combinedText = String.format("%s: %s\n%s: %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
-            //card.setText(combinedText);
+            // Combined text based on Oracle text -  might not be necessary
+            String combinedText = String.format("(%s) %s\r\n\r\n(%s) %s", rules.getMainPart().getName(), rules.getMainPart().getOracleText(), rules.getOtherPart().getName(), rules.getOtherPart().getOracleText());
+            card.getState(CardStateName.Original).setOracleText(combinedText);
         }
         return card;
     }
@@ -380,7 +383,7 @@ public class CardFactory {
         c.getCurrentState().setBaseLoyalty(face.getInitialLoyalty());
         c.getCurrentState().setBaseDefense(face.getDefense());
 
-        c.setOracleText(face.getOracleText());
+        c.getCurrentState().setOracleText(face.getOracleText());
 
         // Super and 'middle' types should use enums.
         c.setType(new CardType(face.getType()));
@@ -395,6 +398,8 @@ public class CardFactory {
             c.setBaseToughness(face.getIntToughness());
             c.setBaseToughnessString(face.getToughness());
         }
+
+        c.setAttractionLights(face.getAttractionLights());
 
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
@@ -412,6 +417,73 @@ public class CardFactory {
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+
+        if (face.hasFunctionalVariants()) {
+            applyFunctionalVariant(c, face);
+        }
+    }
+
+    private static void applyFunctionalVariant(Card c, ICardFace originalFace) {
+        String variantName = c.getPaperCard().getFunctionalVariant();
+        if (IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName))
+            return;
+        ICardFace variant = originalFace.getFunctionalVariant(variantName);
+        if (variant == null) {
+            System.out.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", originalFace.getName(), variantName);
+            return;
+        }
+
+        if (variant.getVariables() != null)
+            for (Entry<String, String> v : variant.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+        if (variant.getReplacements() != null)
+            for (String r : variant.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+        if (variant.getStaticAbilities() != null)
+            for (String s : variant.getStaticAbilities())
+                c.addStaticAbility(s);
+        if (variant.getTriggers() != null)
+            for (String t : variant.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
+
+        if (variant.getKeywords() != null)
+            c.addIntrinsicKeywords(variant.getKeywords(), false);
+
+        if (variant.getManaCost() != ManaCost.NO_COST)
+            c.setManaCost(variant.getManaCost());
+        if (variant.getNonAbilityText() != null)
+            c.setText(variant.getNonAbilityText());
+
+        if (!"".equals(variant.getInitialLoyalty()))
+            c.getCurrentState().setBaseLoyalty(variant.getInitialLoyalty());
+        if (!"".equals(variant.getDefense()))
+            c.getCurrentState().setBaseDefense(variant.getDefense());
+
+        if (variant.getOracleText() != null)
+            c.getCurrentState().setOracleText(variant.getOracleText());
+
+        if (variant.getType() != null) {
+            for(String type : variant.getType())
+                c.addType(type);
+        }
+
+        if (variant.getColor() != null)
+            c.setColor(variant.getColor().getColor());
+
+        if (variant.getIntPower() != Integer.MAX_VALUE) {
+            c.setBasePower(variant.getIntPower());
+            c.setBasePowerString(variant.getPower());
+        }
+        if (variant.getIntToughness() != Integer.MAX_VALUE) {
+            c.setBaseToughness(variant.getIntToughness());
+            c.setBaseToughnessString(variant.getToughness());
+        }
+
+        if (variant.getAttractionLights() != null)
+            c.setAttractionLights(variant.getAttractionLights());
+
+        if (variant.getAbilities() != null)
+            CardFactoryUtil.addAbilityFactoryAbilities(c, variant.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {

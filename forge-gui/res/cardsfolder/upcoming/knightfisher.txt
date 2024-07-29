@@ -1,0 +1,8 @@
+Name:Knightfisher
+ManaCost:3 U U
+Types:Creature Bird Knight
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Bird.Other+nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken Bird you control enters, create a 1/1 blue Fish token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_fish | TokenOwner$ You
+Oracle:Flying\nWhenever another nontoken Bird you control enters, create a 1/1 blue Fish token.

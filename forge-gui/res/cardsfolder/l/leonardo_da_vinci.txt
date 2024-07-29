@@ -1,0 +1,13 @@
+Name:Leonardo da Vinci
+ManaCost:2 U
+PT:3/3
+Types:Legendary Creature Human Artificer
+A:AB$ AnimateAll | Cost$ 3 U U | Power$ X | Toughness$ X | ValidCards$ Thopter.YouCtrl | SpellDescription$ Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.
+SVar:X:Count$InYourHand
+A:AB$ Draw | Cost$ 2 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. If the discarded card was an artifact card, exile it from your graveyard. If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying in addition to its other types. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Exile | ConditionDefined$ Remembered | ConditionPresent$ Card.Artifact | ConditionCompare$ EQ1 | Imprint$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ CopyPermanent | Defined$ Imprinted | SetPower$ 0 | SetToughness$ 2 | AddTypes$ Artifact & Creature & Thopter | AddKeywords$ Flying | ConditionDefined$ Remembered | ConditionPresent$ Card.IsImprinted+inZoneExile | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+DeckHints:Type$Artifact|Thopter
+Oracle:{3}{U}{U}: Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.\n{2}{U}, {T}: Draw a card, then discard a card. If the discarded card was an artifact card, exile it from your graveyard. If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying in addition to its other types.

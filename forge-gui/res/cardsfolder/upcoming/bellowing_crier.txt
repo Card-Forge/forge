@@ -1,0 +1,9 @@
+Name:Bellowing Crier
+ManaCost:1 U
+Types:Creature Frog Advisor
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+Oracle:When Bellowing Crier enters, draw a card, then discard a card.

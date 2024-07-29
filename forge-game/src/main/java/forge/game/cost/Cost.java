@@ -17,15 +17,8 @@
  */
 package forge.game.cost;
 
-import java.io.Serializable;
-import java.util.*;
-
-import forge.card.CardType;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
+import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -38,6 +31,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * <p>
@@ -472,6 +470,10 @@ public class Cost implements Serializable {
                     new ArrayList<>(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
         }
 
+        if (parse.startsWith("PromiseGift")) {
+            return new CostPromiseGift();
+        }
+
         if (parse.startsWith("Return<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
@@ -551,6 +553,10 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
+        }
+
+        if (parse.equals("Forage")) {
+            return new CostForage();
         }
 
         // These won't show up with multiples

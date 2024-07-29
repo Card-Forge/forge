@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Sliver
 PT:1/1
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Regen | Description$ All Slivers have "{T}, Regenerate target Sliver."
-SVar:Regen:AB$Regenerate | Cost$ T | ValidTgts$ Sliver | TgtPrompt$ Select a target Sliver. | SpellDescription$ Regenerate a target Sliver.
+SVar:Regen:AB$ Regenerate | Cost$ T | ValidTgts$ Sliver | TgtPrompt$ Select a target Sliver. | SpellDescription$ Regenerate a target Sliver.
 SVar:PlayMain1:TRUE
 Oracle:All Slivers have "{T}: Regenerate target Sliver."

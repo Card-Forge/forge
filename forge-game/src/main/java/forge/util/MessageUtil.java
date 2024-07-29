@@ -30,7 +30,7 @@ public class MessageUtil {
     // These are not much related to PlayerController
     public static  String formatNotificationMessage(SpellAbility sa, Player player, GameObject target, String value) {
         if (sa == null || sa.getApi() == null || sa.getHostCard() == null) {
-            return Localizer.getInstance().getMessage("lblResultIs", value);
+            return String.valueOf(value);
         }
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {

@@ -1,0 +1,6 @@
+Name:Sage of the Unknowable
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:0/4
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | RestrictValid$ Spell.Colorless,Activated | SpellDescription$ Add {C}. Spend this mana only to cast a colorless spell or to activate an ability.
+Oracle:{T}: Add {C}. Spend this mana only to cast a colorless spell or to activate an ability.

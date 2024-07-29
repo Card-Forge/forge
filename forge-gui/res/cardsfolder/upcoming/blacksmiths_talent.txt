@@ -1,0 +1,12 @@
+Name:Blacksmith's Talent
+ManaCost:R
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a colorless Equipment artifact token named Sword with "Equipped creature gets +1/+1" and equip {2}.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ sword | TokenOwner$ You
+K:Class:2:2 R:AddTrigger$ TriggerCombat
+SVar:TriggerCombat:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, attach target Equipment you control to up to one target creature you control.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control.
+K:Class:3:3 R:AddStaticAbility$ SBoost
+SVar:SBoost:Mode$ Continuous | EffectZone$ Battlefield | Condition$ PlayerTurn | Affected$ Creature.YouCtrl+equipped | AddKeyword$ Double Strike & Haste | Description$ During your turn, equipped creatures you control have double strike and haste.
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Blacksmith's Talent enters, create a colorless Equipment artifact token named Sword with "Equipped creature gets +1/+1" and equip {2}.\n{2}{R}: Level 2\nAt the beginning of combat on your turn, attach target Equipment you control to up to one target creature you control.\n{3}{R}: Level 3\nDuring your turn, equipped creatures you control have double strike and haste.

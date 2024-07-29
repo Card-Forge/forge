@@ -1,0 +1,13 @@
+Name:Apple of Eden, Isu Relic
+ManaCost:4
+Types:Legendary Artifact
+A:AB$ ChangeZoneAll | Cost$ T PayLife<4> Sac<1/CARDNAME> | SorcerySpeed$ True | ValidTgts$ Opponent | ChangeType$ Card | Origin$ Hand | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Look at target opponent's hand and exile those cards face down. You may play those cards this turn, and mana of any type can be spent to cast them. Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card. At the beginning of the next end step, return the exiled cards to their owner's hand. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Triggers$ DrawTrig,DrawTrigLand | StaticAbilities$ MayPlay | ForgetOnMoved$ Exile | SubAbility$ DelTrigReturn
+SVar:DelTrigReturn:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ DBReturn | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return the exiled cards to its owner's hand at the beginning of the next end step.
+SVar:DBReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Hand
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and mana of any type can be spent to cast them.
+SVar:DrawTrig:Mode$ SpellCast | ValidCard$ Card.IsRemembered | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
+SVar:DrawTrigLand:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Execute$ TrigDraw | TriggerDescription$ Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardOwner
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}, Pay 4 life, Sacrifice Apple of Eden: Look at target opponent's hand and exile those cards face down. You may play those cards this turn, and mana of any type can be spent to cast them. Until end of turn, whenever you play a land or cast a spell this way, its owner draws a card. At the beginning of the next end step, return the exiled cards to their owner's hand. Activate only as a sorcery.

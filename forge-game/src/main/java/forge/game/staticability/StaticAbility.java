@@ -148,10 +148,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf")
                 || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
                 || hasParam("AddKeyword") || hasParam("AddAbility")
-                || hasParam("AddTrigger") || hasParam("RemoveTriggers")
-                || hasParam("RemoveKeyword") || hasParam("AddReplacementEffects")
+                || hasParam("AddTrigger") || hasParam("AddReplacementEffect")
                 || hasParam("AddStaticAbility") || hasParam("AddSVar")
-                || hasParam("CantHaveKeyword") || hasParam("ShareRememberedKeywords")) {
+                || hasParam("CantHaveKeyword") || hasParam("ShareRememberedKeywords")
+                || hasParam("RemoveKeyword")) {
             layers.add(StaticAbilityLayer.ABILITIES);
         }
 
@@ -165,7 +165,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (hasParam("AddHiddenKeyword") || hasParam("MayPlay")
                 || hasParam("IgnoreEffectCost") || hasParam("Goad") || hasParam("CanBlockAny") || hasParam("CanBlockAmount")
-                || hasParam("AdjustLandPlays") || hasParam("ControlVote") || hasParam("AdditionalVote") || hasParam("AdditionalOptionalVote")) {
+                || hasParam("AdjustLandPlays") || hasParam("ControlVote") || hasParam("AdditionalVote") || hasParam("AdditionalOptionalVote")
+                || hasParam("DeclaresAttackers") || hasParam("DeclaresBlockers")) {
             layers.add(StaticAbilityLayer.RULES);
         }
 

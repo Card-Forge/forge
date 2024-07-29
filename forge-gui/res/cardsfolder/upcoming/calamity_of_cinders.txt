@@ -1,0 +1,6 @@
+Name:Calamity of Cinders
+ManaCost:5 R R
+Types:Sorcery
+K:Convoke
+A:SP$ DamageAll | ValidCards$ Creature.untapped | NumDmg$ 6 | ValidDescription$ each untapped creature. | SpellDescription$ CARDNAME deals 6 damage to each untapped creature.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nCalamity of Cinders deals 6 damage to each untapped creature.

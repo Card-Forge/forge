@@ -53,7 +53,7 @@ public class LifeGainEffect extends SpellAbilityEffect {
         if (variableAmount) {
             amount = "X";
         }
-        final List<Player> tgts = getTargetPlayersWithDuplicates(false, "Defined", sa);
+        final List<Player> tgts = getTargetPlayersWithDuplicates(true, "Defined", sa);
 
         for (final Player p : Sets.newHashSet(tgts)) {
             if (!p.isInGame()) {

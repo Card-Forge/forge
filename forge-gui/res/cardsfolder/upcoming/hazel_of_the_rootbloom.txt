@@ -1,0 +1,10 @@
+Name:Hazel of the Rootbloom
+ManaCost:2 B G
+Types:Legendary Creature Squirrel Druid
+PT:3/5
+A:AB$ Mana | Cost$ T PayLife<2> tapXType<X/Card.token/token> | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBCopyPermanent | TriggerDescription$ At the beginning of your end step, create a token that's a copy of target token you control. If that token is a Squirrel, instead create two tokens that are copies of it.
+SVar:DBCopyPermanent:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | NumCopies$ Y | TgtPrompt$ Select target token you control to copy
+SVar:X:Count$xPaid
+SVar:Y:Targeted$Valid Squirrel/Plus.1
+Oracle:{T}, Pay 2 life, Tap X untapped tokens you control: Add X mana in any combination of colors.\nAt the beginning of your end step, create a token that's a copy of target token you control. If that token is a Squirrel, instead create two tokens that are copies of it.

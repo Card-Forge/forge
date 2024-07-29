@@ -1,0 +1,10 @@
+Name:Baylen, the Haymaker
+ManaCost:R G W
+Types:Legendary Creature Rabbit Warrior
+PT:4/3
+A:AB$ Mana | Cost$ tapXType<2/Permanent.token/token> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Draw | Cost$ tapXType<3/Permanent.token/token> | SpellDescription$ Draw a card.
+A:AB$ PutCounter | Cost$ tapXType<4/Permanent.token/token> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBPump | SpellDescription$ Put three +1/+1 counters on CARDNAME. It gains trample until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Trample
+DeckNeeds:Ability$Token
+Oracle:Tap two untapped tokens you control: Add one mana of any color.\nTap three untapped tokens you control: Draw a card.\nTap four untapped tokens you control: Put three +1/+1 counters on Baylen, the Haymaker. It gains trample until end of turn.

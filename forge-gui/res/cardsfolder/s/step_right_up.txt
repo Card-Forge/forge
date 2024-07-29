@@ -1,0 +1,5 @@
+Name:Step Right Up
+ManaCost:3 B
+Types:Sorcery
+A:SP$ OpenAttraction | Amount$ 2 | SpellDescription$ Open two Attractions. (Put the top two cards of your Attraction deck onto the battlefield.)
+Oracle:Open two Attractions. (Put the top two cards of your Attraction deck onto the battlefield.)

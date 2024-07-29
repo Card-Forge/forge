@@ -1,0 +1,10 @@
+Name:Feather of Flight
+ManaCost:1 W
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddKeyword$ Flying | Description$ Enchanted creature gets +1/+0 and has flying.
+Oracle:Flash\nEnchant creature\nWhen Feather of Flight enters, draw a card.\nEnchanted creature gets +1/+0 and has flying.

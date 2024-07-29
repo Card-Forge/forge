@@ -1,0 +1,9 @@
+Name:Stone Idol Generator
+ManaCost:5
+Types:Artifact
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever a creature you control attacks, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Token | Cost$ T PayEnergy<6> | TokenScript$ c_6_12_a_construct_trample | SorcerySpeed$ True | SpellDescription$ Create a 6/12 colorless Construct artifact creature token with trample. Activate only as a sorcery.
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+Oracle:Whenever a creature you control attacks, you get {E} (an energy counter).\n{T}, Pay six {E}: Create a 6/12 colorless Construct artifact creature token with trample. Activate only as a sorcery.

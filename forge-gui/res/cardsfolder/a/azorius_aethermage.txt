@@ -3,6 +3,6 @@ ManaCost:1 W U
 Types:Creature Human Wizard
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | ValidCard$ Card.YouOwn | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 1 | Defined$ You | NumCards$ 1
+SVar:TrigDraw:AB$ Draw | Cost$ 1 | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random
 Oracle:Whenever a permanent is returned to your hand, you may pay {1}. If you do, draw a card.

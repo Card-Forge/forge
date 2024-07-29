@@ -1,0 +1,11 @@
+Name:Emerald Collector
+ManaCost:1 U
+Types:Creature Human Pirate
+PT:1/2
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 3 | TriggerZones$ Battlefield | Execute$ TrigConjure | GameActivationLimit$ 1 | TriggerDescription$ When you draw your third card in a turn, conjure a card named Mox Emerald into your hand. This ability triggers only once.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Mox Emerald | Zone$ Hand
+A:AB$ Animate | Cost$ 2 G | Defined$ Self | Power$ 4 | Toughness$ 4 | SpellDescription$ CARDNAME has base power and toughness 4/4 until end of turn.
+DeckHas:Type$Artifact
+Oracle:Whenever Emerald Collector deals combat damage to a player, draw a card.\nWhen you draw your third card in a turn, conjure a card named Mox Emerald into your hand. This ability triggers only once.\n{2}{G}: Emerald Collector has base power and toughness 4/4 until end of turn.

@@ -1,0 +1,10 @@
+Name:Chain Assassination
+ManaCost:2 B B
+Types:Instant
+K:Freerunning:1 B
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBDraw | RememberDestroyed$ True | SpellDescription$ Destroy target creature.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ DiedThisTurn | SubAbility$ DBCleanup | SpellDescription$ If another creature died this turn, draw a card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DiedThisTurn:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.IsNotRemembered
+DeckHints:Type$Assassin
+Oracle:Freerunning {1}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nDestroy target creature. If another creature died this turn, draw a card.

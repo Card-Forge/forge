@@ -3,5 +3,5 @@ ManaCost:W
 Types:Creature Kithkin Cleric
 PT:1/1
 T:Mode$ SpellCast | ValidCard$ Card.White | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts a white spell, you may pay {1}. If you do, gain 1 life.
-SVar:TrigGainLife:AB$GainLife | Cost$ 1 | LifeAmount$ 1
+SVar:TrigGainLife:AB$ GainLife | Cost$ 1 | LifeAmount$ 1
 Oracle:Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.

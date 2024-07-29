@@ -725,9 +725,11 @@ public class AbilityUtils {
                     list = Iterables.filter((Iterable<?>) root.getTriggeringObjects().getOrDefault(
                             (AbilityKey.fromString(calcX[0].substring(14))), new CardCollection()), Card.class);
                 }
-                else if (calcX[0].startsWith("Triggered")) {
+                // CardTriggered<AbilityKey> used to bypass AbilityKeys that could also be Player above
+                else if (calcX[0].startsWith("Triggered") || (calcX[0].startsWith("CardTriggered"))) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9))));
+                    final int s = calcX[0].startsWith("Triggered") ? 9 : 13;
+                    list = new CardCollection((Card) root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(s))));
                 }
                 else if (calcX[0].startsWith("Replaced")) {
                     final SpellAbility root = sa.getRootAbility();
@@ -1154,6 +1156,13 @@ public class AbilityUtils {
             if (p != null) {
                 players.add(p);
             }
+        } else if (defined.equals("Promised")) {
+            if (card != null) {
+                final Player p = card.getPromisedGift();
+                if (p != null) {
+                    players.add(p);
+                }
+            }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
         } else if (defined.equals("SourceController")) {
@@ -1324,12 +1333,7 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers();
         }
 
-        // do blessing there before condition checks
-        if (sa.isSpell() && !sa.getHostCard().isPermanent() && sa.getHostCard().hasKeyword(Keyword.ASCEND)) {
-            if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
-                pl.setBlessing(true);
-            }
-        }
+        resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
         if (!sa.isWrapper()) {
@@ -1348,6 +1352,32 @@ public class AbilityUtils {
             return;
         }
         AbilityUtils.resolveApiAbility(sa, game);
+    }
+
+    private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
+        Player controller = sa.getActivatingPlayer();
+        Card source = sa.getHostCard();
+
+        if (!sa.isSpell() || source.isPermanent()) {
+            return;
+        }
+
+        // do blessing there before condition checks
+        if (source.hasKeyword(Keyword.ASCEND)) {
+            if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
+                controller.setBlessing(true);
+            }
+        }
+
+        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+            game.getAction().checkStaticAbilities();
+            // Is AdditionalAbility available from anything here?
+            AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
+            if (giftAbility != null) {
+                giftAbility.setActivatingPlayer(controller);
+                AbilityUtils.resolveApiAbility(giftAbility, game);
+            }
+        }
     }
 
     private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
@@ -1375,6 +1405,10 @@ public class AbilityUtils {
         bread.setData("Card", card.getName());
         bread.setData("SA", sa.toString());
         Sentry.addBreadcrumb(bread);
+
+        if (!sa.isWrapper() && sa.isKeyword(Keyword.GIFT)) {
+            game.getTriggerHandler().runTrigger(TriggerType.GiveGift, AbilityKey.mapFromPlayer(sa.getActivatingPlayer()), false);
+        }
 
         // check conditions
         if (sa.metConditions()) {
@@ -1661,6 +1695,10 @@ public class AbilityUtils {
 
                 if (sq[0].startsWith("Bargain")) {
                     return doXMath(calculateAmount(c, sq[sa.isBargained() ? 1 : 2], ctb), expr, c, ctb);
+                }
+
+                if (sq[0].startsWith("Freerunning")) {
+                    return doXMath(calculateAmount(c, sq[sa.isFreerunning() ? 1 : 2], ctb), expr, c, ctb);
                 }
 
                 // Count$Madness.<True>.<False>
@@ -2208,10 +2246,10 @@ public class AbilityUtils {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("Initiative")) {
-            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1: 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("StartingPlayer")) {
-            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);
+            return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1 : 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("Blessing")) {
             return doXMath(calculateAmount(c, sq[player.hasBlessing() ? 1 : 2], ctb), expr, c, ctb);
@@ -2311,6 +2349,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("TotalDamageReceivedThisTurn")) {
             return doXMath(c.getAssignedDamage(), expr, c, ctb);
+        }
+        if (sq[0].equals("ExcessDamageReceivedThisTurn")) {
+            return doXMath(c.getExcessDamageThisTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("MaxOppDamageThisTurn")) {

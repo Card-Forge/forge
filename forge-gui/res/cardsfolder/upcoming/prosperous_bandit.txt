@@ -1,0 +1,10 @@
+Name:Prosperous Bandit
+ManaCost:2 R
+Types:Creature Raccoon Rogue
+PT:2/2
+K:Offspring:1
+K:First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create that many tapped Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ X | TokenTapped$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Offspring {1} (You may pay an additional {1} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nFirst strike\nWhenever this creature deals combat damage to a player, create that many tapped Treasure tokens.

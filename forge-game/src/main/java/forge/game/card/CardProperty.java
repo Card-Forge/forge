@@ -20,6 +20,7 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -137,6 +138,10 @@ public class CardProperty {
             if (source.hasChosenCard(card)) {
                 return false;
             }
+        } else if (property.startsWith("ChosenMode")) {
+            if (!card.getChosenMode().equals(property.substring(10))) {
+                return false;
+            }
         } else if (property.equals("ChosenSector")) {
             if (!source.getChosenSector().equals(card.getSector())) {
                 return false;
@@ -171,10 +176,6 @@ public class CardProperty {
             }
         } else if (property.equals("Split")) {
             if (!card.isSplitCard()) {
-                return false;
-            }
-        } else if (property.equals("NotSplit")) {
-            if (card.isSplitCard()) {
                 return false;
             }
         } else if (property.equals("AdventureCard")) {
@@ -319,10 +320,6 @@ public class CardProperty {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) {
                 return false;
             }
-        } else if (property.startsWith("NonActivePlayerCtrl")) {
-            if (game.getPhaseHandler().isPlayerTurn(controller)) {
-                return false;
-            }
         } else if (property.startsWith("YouOwn")) {
             if (!card.getOwner().equals(sourceController)) {
                 return false;
@@ -384,7 +381,6 @@ public class CardProperty {
                     if (!Expressions.compare(found.size(), parts[1].substring(0, 2), num)) {
                         return false;
                     }
-
                 } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
@@ -584,21 +580,25 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
-            if (property.substring(10).equals("Targeted")) {
-                for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
-                    if (!card.hasCardAttachment(c)) {
-                        return false;
-                    }
-                }
-            } else if (property.substring(10).equals("Enchanted")) {
+            String prop = property.substring(10);
+            if (prop.equals("Enchanted")) {
                 if (source.getEnchantingCard() == null ||
                         !card.hasCardAttachment(source.getEnchantingCard())) {
                     return false;
                 }
-            } else {
-                if (!card.hasCardAttachment(source)) {
+            } else if (!StringUtils.isBlank(prop)) {
+                boolean found = false;
+                for (final Card c : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
+                    if (card.hasCardAttachment(c)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
                     return false;
                 }
+            } else if (!card.hasCardAttachment(source)) {
+                return false;
             }
         } else if (property.startsWith("FortifiedBy")) {
             if (!card.hasCardAttachment(source)) {
@@ -629,19 +629,12 @@ public class CardProperty {
             if (!card.isMadness()) {
                 return false;
             }
-        } else if (property.contains("Paired")) {
-            if (property.contains("With")) { // PairedWith
-                if (!card.isPaired() || card.getPairedWith() != source) {
-                    return false;
-                }
-            } else if (property.startsWith("Not")) {  // NotPaired
-                if (card.isPaired()) {
-                    return false;
-                }
-            } else { // Paired
-                if (!card.isPaired()) {
-                    return false;
-                }
+        } else if (property.startsWith("Paired")) {
+            if (!card.isPaired()) {
+                return false;
+            }
+            if (property.endsWith("With") && card.getPairedWith() != source) {
+                return false;
             }
         } else if (property.startsWith("Above")) { // "Are Above" Source
             final CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Graveyard);
@@ -1070,11 +1063,6 @@ public class CardProperty {
                     }
                 }
             }
-        } else if (property.equals("NotThisTurnEntered")) {
-            // only check if it entered the Zone this turn
-            if (card.getTurnInZone() == game.getPhaseHandler().getTurn()) {
-                return false;
-            }
         } else if (property.equals("DiscardedThisTurn")) {
             if (card.getTurnInZone() != game.getPhaseHandler().getTurn()) {
                 return false;
@@ -1157,10 +1145,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("DrawnThisTurn")) {
             if (!card.getDrawnThisTurn()) {
-                return false;
-            }
-        } else if (property.startsWith("notDrawnThisTurn")) {
-            if (card.getDrawnThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("FoughtThisTurn")) {
@@ -1248,11 +1232,8 @@ public class CardProperty {
             if (!card.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
-            final String v = property.split(" ")[1];
-            boolean found = card.getDamageHistory().getDamageDoneThisTurn(true, true, null, v, card, sourceController, spellAbility) > 0;
-
-            if (found == property.startsWith("not")) {
+        } else if (property.startsWith("dealtCombatDamageThisTurn")) {
+            if (card.getDamageHistory().getDamageDoneThisTurn(true, true, null, property.split(" ")[1], card, sourceController, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
@@ -1454,10 +1435,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("equipping")) {
             if (!card.isEquipping()) {
-                return false;
-            }
-        } else if (property.startsWith("notEquipping")) {
-            if (card.isEquipping()) {
                 return false;
             }
         } else if (property.startsWith("modified")) {
@@ -1824,6 +1801,25 @@ public class CardProperty {
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
+        } else if (property.equals("linkedCastTrigger")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            List<Card> spellCast = game.getStack().getSpellsCastThisTurn();
+            int idx = spellCast.lastIndexOf(source);
+            if (idx == -1) {
+                return false;
+            }
+            boolean found = false;
+            for (KeywordInterface kw: spellCast.get(idx).getUnhiddenKeywords()) {
+                if (!Collections.disjoint(kw.getTriggers(), spellAbility.getKeyword().getTriggers())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
@@ -1883,6 +1879,20 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isEvoke();
+        } else if (property.equals("PromisedGift")) {
+            // Do we need this isUnlinked thing like these others?
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isOptionalCostPaid(OptionalCost.PromiseGift);
+        } else if (property.equals("impended")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
+                return false;
+            }
+            return card.getCastSA().isImpending();
         } else if (property.equals("prowled")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1947,6 +1957,10 @@ public class CardProperty {
             }
         } else if (property.equals("SaddledThisTurn")) {
             if (!hasTimestampMatch(card, source.getSaddledByThisTurn())) return false;
+        } else if (property.equals("VisitedThisTurn")) {
+            if (!card.wasVisitedThisTurn()) {
+                return false;
+            }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
                 return false;
@@ -2019,37 +2033,16 @@ public class CardProperty {
                 strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
             }
             final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (card.getCastFrom() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
+            if (card.getCastFrom() == null || card.getCastSA() == null || (zoneOwner != null && !card.getCastFrom().getPlayer().equals(zoneOwner))
                     || (byYou && !sourceController.equals(card.getCastSA().getActivatingPlayer()))
                     || realZone != card.getCastFrom().getZoneType()) {
                 return false;
             }
-        } else if (property.startsWith("wasNotCastFrom")) {
-            boolean byYou = property.contains("ByYou");
-            String strZone = property.substring(14);
-            Player zoneOwner = null;
-            if (property.contains("Your")) {
-                strZone = strZone.substring(4);
-                zoneOwner = sourceController;
-            }
-            if (property.contains("Their")) {
-                strZone = strZone.substring(5);
-                zoneOwner = controller;
-            }
-            if (byYou) {
-                strZone = strZone.substring(0, strZone.indexOf("ByYou", 0));
-            }
-            final ZoneType realZone = ZoneType.smartValueOf(strZone);
-            if (card.getCastFrom() != null && (zoneOwner == null || card.getCastFrom().getPlayer().equals(zoneOwner))
-                    && (!byYou || sourceController.equals(card.getCastSA().getActivatingPlayer()))
-                    && realZone == card.getCastFrom().getZoneType()) {
-                return false;
-            }
-        }  else if (property.startsWith("wasCast")) {
+        } else if (property.startsWith("wasCast")) {
             if (!card.wasCast()) {
                 return false;
             }
-            if (property.contains("ByYou") && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
+            if (property.contains("ByYou") && card.getCastSA() != null && !sourceController.equals(card.getCastSA().getActivatingPlayer())) {
                 return false;
             }
         } else if (property.equals("wasNotCast")) {
@@ -2112,8 +2105,7 @@ public class CardProperty {
                     (colors.contains("black") && card.getColor().hasBlack()) ||
                     (colors.contains("red") && card.getColor().hasRed()) ||
                     (colors.contains("green") && card.getColor().hasGreen());
-        } else if (property.equals("NotedName")) {
-            // Should Noble Banneret be hardcoded here or part of the property?
+        } else if (property.equals("NotedNameNobleBanneret")) {
             String names = sourceController.getDraftNotes().get("Noble Banneret");
             if (names == null || names.isEmpty()) {
                 return false;
@@ -2129,6 +2121,17 @@ public class CardProperty {
             List<String> nameList = Lists.newArrayList(names.split(";"));
 
             return nameList.contains(card.getName());
+        } else if (property.equals("NotedNameSmugglerCaptain")) {
+            String names = sourceController.getDraftNotes().get("Smuggler Captain");
+            if (names == null || names.isEmpty()) {
+                return false;
+            }
+            List<String> nameList = Lists.newArrayList(names.split(";"));
+
+            return nameList.contains(card.getName());
+        } else if (property.equals("NotedGuessPhantasm")) {
+            String names = sourceController.getDraftNotes().get("Spire Phantasm");
+            return names != null && !names.isEmpty();
         } else if (property.equals("NotedTypes")) {
             // Should Paliano Vanguard be hardcoded here or part of the property?
             String types = sourceController.getDraftNotes().get("Paliano Vanguard");
@@ -2238,7 +2241,7 @@ public class CardProperty {
         return true;
     }
 
-    private static boolean hasTimestampMatch (final Card card, final CardCollection coll) {
+    private static boolean hasTimestampMatch(final Card card, final CardCollection coll) {
         if (coll == null) {
             return false;
         }
