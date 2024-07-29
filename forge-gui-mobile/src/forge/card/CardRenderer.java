@@ -813,10 +813,10 @@ public class CardRenderer {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
-            if ((keywordKey.indexOf("Flash") != -1)
-                    || ((abilityText.indexOf("May be played by") != -1)
-                    && (abilityText.indexOf("and as though it has flash") != -1))) {
-                if (keywordKey.indexOf("Flashback") == -1)
+            if ((keywordKey.contains("Flash"))
+                    || ((abilityText.contains("May be played by"))
+                    && (abilityText.contains("and as though it has flash")))) {
+                if (!keywordKey.contains("Flashback"))
                     CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }

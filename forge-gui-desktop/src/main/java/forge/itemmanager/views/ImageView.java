@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.stream.IntStream;
 
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final int PADDING = 5;
@@ -154,9 +155,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         SItemManagerUtil.populateImageViewOptions(itemManager0, cbGroupByOptions, cbPileByOptions);
 
-        for (Integer i = MIN_COLUMN_COUNT; i <= MAX_COLUMN_COUNT; i++) {
-            cbColumnCount.addItem(i);
-        }
+        IntStream.rangeClosed(MIN_COLUMN_COUNT, MAX_COLUMN_COUNT).forEach(cbColumnCount::addItem);
         cbGroupByOptions.setMaximumRowCount(cbGroupByOptions.getItemCount());
         cbPileByOptions.setMaximumRowCount(cbPileByOptions.getItemCount());
         cbColumnCount.setMaximumRowCount(cbColumnCount.getItemCount());
@@ -871,9 +870,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     public void selectAll() {
         clearSelection();
-        for (Integer i = 0; i < getCount(); i++) {
-            selectedIndices.add(i);
-        }
+        IntStream.range(0, getCount()).forEach(selectedIndices::add);
         updateSelection();
     }
 

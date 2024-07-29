@@ -62,15 +62,15 @@ public final class LobbySlot implements Serializable {
             changed = true;
         }
         if (data.getArchenemy() != null) {
-            setIsArchenemy(data.getArchenemy().booleanValue());
+            setIsArchenemy(data.getArchenemy());
             changed = true;
         }
         if (data.getReady() != null) {
-            setIsReady(data.getReady().booleanValue());
+            setIsReady(data.getReady());
             changed = true;
         }
         if (data.getDevMode() != null) {
-            setIsDevMode(data.getDevMode().booleanValue());
+            setIsDevMode(data.getDevMode());
             changed = true;
         }
         if (data.getAiOptions() != null) {

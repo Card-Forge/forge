@@ -273,8 +273,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public Iterable<Integer> getSelectedIndices() {
         final List<Integer> indices = new ArrayList<>();
         final int[] selectedRows = this.table.getSelectedRows();
-        for (int i = 0; i < selectedRows.length; i++) {
-            indices.add(selectedRows[i]);
+        for (int selectedRow : selectedRows) {
+            indices.add(selectedRow);
         }
         return indices;
     }

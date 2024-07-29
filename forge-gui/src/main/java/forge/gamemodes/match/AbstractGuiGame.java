@@ -525,7 +525,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final boolean shouldAutoYield(final String key) {
-        String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
         boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
 
         return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
@@ -533,7 +533,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
         boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
 
         if (autoYield) {
@@ -564,27 +564,27 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return Boolean.TRUE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger)));
+        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
     }
 
     @Override
     public final boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return Boolean.FALSE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger)));
+        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
     }
 
     @Override
     public final void setShouldAlwaysAcceptTrigger(final int trigger) {
-        triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.TRUE);
+        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
     }
 
     @Override
     public final void setShouldAlwaysDeclineTrigger(final int trigger) {
-        triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.FALSE);
+        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
     }
 
     @Override
     public final void setShouldAlwaysAskTrigger(final int trigger) {
-        triggersAlwaysAccept.remove(Integer.valueOf(trigger));
+        triggersAlwaysAccept.remove(trigger);
     }
 
     // End of Triggers preliminary choice
@@ -672,11 +672,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         final Integer[] choices = new Integer[count];
         if (sortDesc) {
             for (int i = 0; i < count; i++) {
-                choices[count - i - 1] = Integer.valueOf(i + min);
+                choices[count - i - 1] = i + min;
             }
         } else {
             for (int i = 0; i < count; i++) {
-                choices[i] = Integer.valueOf(i + min);
+                choices[i] = i + min;
             }
         }
         return oneOrNone(message, ImmutableList.copyOf(choices));
@@ -694,7 +694,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         final ImmutableList.Builder<Serializable> choices = ImmutableList.builder();
         for (int i = min; i <= cutoff; i++) {
-            choices.add(Integer.valueOf(i));
+            choices.add(i);
         }
         choices.add(Localizer.getInstance().getMessage("lblOtherInteger"));
 
@@ -723,7 +723,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
-                final Integer val = Integer.valueOf(str);
+                final int val = Integer.parseInt(str);
                 if (val >= min && val <= max) {
                     return val;
                 }

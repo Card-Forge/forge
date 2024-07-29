@@ -181,7 +181,7 @@ public class VAssignGenericAmount extends FDialog {
                 obj = add(new MiscTargetPanel(player.getName(), MatchController.getPlayerAvatar(player)));
             } else if (entity instanceof Byte) {
                 FSkinImageInterface manaSymbol;
-                Byte color = (Byte) entity;
+                byte color = (Byte) entity;
                 if (color == MagicColor.WHITE) {
                     manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_W);
                 } else if (color == MagicColor.BLUE) {

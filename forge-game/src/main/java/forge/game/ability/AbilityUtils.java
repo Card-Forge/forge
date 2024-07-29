@@ -310,7 +310,7 @@ public class AbilityUtils {
         } else if (defined.startsWith("CardUID_")) {
             String idString = defined.substring(8);
             for (final Card cardByID : game.getCardsInGame()) {
-                if (cardByID.getId() == Integer.valueOf(idString)) {
+                if (cardByID.getId() == Integer.parseInt(idString)) {
                     cards.add(game.getCardState(cardByID));
                 }
             }

@@ -2,6 +2,8 @@ package forge.game.mana;
 
 import forge.card.mana.ManaAtom;
 
+import java.util.Arrays;
+
 public class ManaConversionMatrix {
     static byte[] identityMatrix = { ManaAtom.WHITE, ManaAtom.BLUE, ManaAtom.BLACK, ManaAtom.RED, ManaAtom.GREEN, ManaAtom.COLORLESS };
 
@@ -54,13 +56,9 @@ public class ManaConversionMatrix {
 
     public void restoreColorReplacements() {
         // By default each color can only be paid by itself ( {G} -> {G}, {C} -> {C}
-        for (int i = 0; i < colorConversionMatrix.length; i++) {
-            colorConversionMatrix[i] = identityMatrix[i];
-        }
+        System.arraycopy(identityMatrix, 0, colorConversionMatrix, 0, colorConversionMatrix.length);
         // By default all mana types are unrestricted
-        for (int i = 0; i < colorRestrictionMatrix.length; i++) {
-            colorRestrictionMatrix[i] = ManaAtom.ALL_MANA_TYPES;
-        }
+        Arrays.fill(colorRestrictionMatrix, ManaAtom.ALL_MANA_TYPES);
         snowForColor = false;
     }
 }

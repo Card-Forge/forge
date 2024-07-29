@@ -75,7 +75,7 @@ public class Main {
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";
-        Boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile) || cmd.hasOption("landscape");
+        boolean landscapeMode = FileUtil.doesFileExist(switchOrientationFile) || cmd.hasOption("landscape");
         String[] res;
 
         // Width and height for standard smartphone/tablet mode (desktopMode = false)

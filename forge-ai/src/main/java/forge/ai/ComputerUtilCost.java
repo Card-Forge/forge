@@ -710,7 +710,7 @@ public class ComputerUtilCost {
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
         } else if (aiLogic != null && aiLogic.startsWith("Fabricate")) {
-            final int n = Integer.valueOf(aiLogic.substring("Fabricate".length()));
+            final int n = Integer.parseInt(aiLogic.substring("Fabricate".length()));
 
             // if host would leave the play or if host is useless, create tokens
             if (source.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(payer, source)) {

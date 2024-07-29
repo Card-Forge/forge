@@ -51,8 +51,8 @@ public class FTextArea extends SkinnedTextArea {
         int maxLineWidth = 0;
         final FontMetrics metrics = this.getGraphics().getFontMetrics(this.getFont());
         final String[] lines = this.getText().split("(\r\n)|(\n)");
-        for (int i = 0; i < lines.length; i++) {
-            final int lineWidth = metrics.stringWidth(lines[i]);
+        for (String line : lines) {
+            final int lineWidth = metrics.stringWidth(line);
             if (lineWidth > maxLineWidth) {
                 maxLineWidth = lineWidth;
             }

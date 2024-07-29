@@ -410,7 +410,7 @@ public class GameFormat implements Comparable<GameFormat> {
             } catch (Exception e) {
                 formatsubType = FormatSubType.CUSTOM;
             }
-            Integer idx = section.getInt("order");
+            int idx = section.getInt("order");
             String dateStr = section.get("effective");
             if (dateStr == null){
                 dateStr = DEFAULTDATE;

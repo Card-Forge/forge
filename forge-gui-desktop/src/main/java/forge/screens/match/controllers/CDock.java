@@ -125,7 +125,7 @@ public class CDock implements ICDoc {
         final String temp = FModel.getPreferences()
                 .getPref(FPref.UI_TARGETING_OVERLAY);
         final Integer arcState = Ints.tryParse(temp);
-        setArcState(ArcState.values()[arcState == null ? 0 : arcState.intValue()]);
+        setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
         refreshArcStateDisplay();
 
         view.getBtnConcede().setCommand(new UiCommand() {

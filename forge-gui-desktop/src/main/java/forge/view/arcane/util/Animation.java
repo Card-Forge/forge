@@ -252,7 +252,7 @@ public abstract class Animation {
                 Container parent = animationPanel.getParent();
                 if (parent != layeredPane) {
                     layeredPane.add(animationPanel);
-                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER.intValue());
+                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
                 }
 
                 new Animation(speed) {

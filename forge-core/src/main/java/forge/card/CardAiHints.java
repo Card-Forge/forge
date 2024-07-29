@@ -78,13 +78,13 @@ public class CardAiHints {
      */
     public Integer getAiStatusComparable() {
         if (this.isRemovedFromAIDecks && this.isRemovedFromRandomDecks) {
-            return Integer.valueOf(3);
+            return 3;
         } else if (this.isRemovedFromAIDecks) {
-            return Integer.valueOf(4);
+            return 4;
         } else if (this.isRemovedFromRandomDecks) {
-            return Integer.valueOf(2);
+            return 2;
         } else {
-            return Integer.valueOf(1);
+            return 1;
         }
     }
 

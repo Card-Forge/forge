@@ -480,7 +480,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
-        Integer min = c;
+        int min = c;
         if (ability.isOptionalTrigger()) {
             min = 0;
         }
@@ -684,7 +684,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPayEnergy cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         if (player.canPayEnergy(c) &&
                 confirmAction(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"))) {
@@ -695,7 +695,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPayShards cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         if (player.canPayShards(c) &&
                 confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getNumManaShards()), "{M} (Mana Shards)"))) {
@@ -725,7 +725,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPutCardToLib cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         final CardCollection list = CardLists.getValidCards(cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) :
                 player.getCardsIn(cost.getFrom()), cost.getType().split(";"), player, source, ability);
@@ -753,9 +753,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     payableZone.add(p);
                 }
             }
-            return putFromSame(list, c.intValue(), payableZone, cost.from);
+            return putFromSame(list, c, payableZone, cost.from);
         } else {//Graveyard
-            return putFromMiscZone(ability, c.intValue(), list, cost.from);
+            return putFromMiscZone(ability, c, list, cost.from);
         }
     }
 
@@ -906,7 +906,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             };
             inp.setMessage(Localizer.getInstance().getMessage("lblSelectNCardOfSameColorToReveal", String.valueOf(num)));
         } else {
-            Integer num = cost.getAbilityAmount(ability);
+            int num = cost.getAbilityAmount(ability);
 
             CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
             hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);

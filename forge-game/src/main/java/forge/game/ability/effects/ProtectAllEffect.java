@@ -45,7 +45,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final Long timestamp = Long.valueOf(game.getNextTimestamp());
+        final long timestamp = game.getNextTimestamp();
 
         final boolean isChoice = sa.getParam("Gains").contains("Choice");
         final List<String> choices = ProtectEffect.getProtectionList(sa);

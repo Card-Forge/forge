@@ -208,7 +208,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         if (totalRemoved > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(Integer.valueOf(totalRemoved));
+            card.addRemembered(totalRemoved);
         }
     }
 

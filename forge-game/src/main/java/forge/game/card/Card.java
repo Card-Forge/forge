@@ -7370,7 +7370,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incrementTransformedTimestamp();
         }
         if (sa.hasParam("Prototype") && prototypeTimestamp == -1) {
-            Long next = game.getNextTimestamp();
+            long next = game.getNextTimestamp();
             addCloneState(CardFactory.getCloneStates(this, this, sa), next);
             prototypeTimestamp = next;
         }

@@ -43,7 +43,7 @@ public class StoreSVarEffect extends SpellAbilityEffect {
             value = AbilityUtils.xCount(source, expr, sa);
         }
         else if (type.equals("Number")) {
-            value = Integer.valueOf(expr);
+            value = Integer.parseInt(expr);
         }
         else if (type.equals("CountSVar")) {
             if (expr.contains("/")) {
