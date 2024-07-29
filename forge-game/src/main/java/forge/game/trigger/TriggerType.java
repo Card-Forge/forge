@@ -118,7 +118,7 @@ public enum TriggerType {
     RolledDieOnce(TriggerRolledDieOnce.class),
     RoomEntered(TriggerEnteredRoom.class),
     Sacrificed(TriggerSacrificed.class),
-    SacrificedOnce(TriggerSacrificed.class),
+    SacrificedOnce(TriggerSacrificedOnce.class),
     Scry(TriggerScry.class),
     SearchedLibrary(TriggerSearchedLibrary.class),
     SeekAll(TriggerSeekAll.class),
