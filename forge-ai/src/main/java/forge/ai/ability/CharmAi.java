@@ -26,7 +26,6 @@ public class CharmAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         List<AbilitySub> choices = CharmEffect.makePossibleOptions(sa);
-        final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(source, sa.getParam("Pawprint"), sa) : 0;
 
         final int num;
         final int min;
@@ -67,13 +66,13 @@ public class CharmAi extends SpellAbilityAi {
              * minimum choice requirements with canPlayAi() alone.
              */
             chosenList = min > 1 ? chooseMultipleOptionsAi(choices, ai, min)
-                    : chooseOptionsAi(choices, ai, timingRight, num, min, pawprintLimit, sa.hasParam("CanRepeatModes"));
+                    : chooseOptionsAi(choices, ai, timingRight, num, min, sa);
         }
 
         if (chosenList.isEmpty()) {
             if (timingRight) {
                 // Set minimum choices for triggers where chooseMultipleOptionsAi() returns null
-                chosenList = chooseOptionsAi(choices, ai, true, num, min, pawprintLimit, sa.hasParam("CanRepeatModes"));
+                chosenList = chooseOptionsAi(choices, ai, true, num, min, sa);
                 if (chosenList.isEmpty() && min != 0) {
                     return false;
                 }
@@ -94,10 +93,18 @@ public class CharmAi extends SpellAbilityAi {
     }
 
     private List<AbilitySub> chooseOptionsAi(List<AbilitySub> choices, final Player ai, boolean isTrigger, int num,
-            int min, int pawprintLimit, boolean allowRepeat) {
+            int min, SpellAbility sa) {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+        boolean allowRepeat = sa.hasParam("CanRepeatModes"); // FIXME: unused for now, the AI doesn't know how to effectively handle repeated choices
+
+        // Pawprint
+        final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
+        if (pawprintLimit > 0) {
+            Collections.reverse(choices); // try to pay for the more expensive subs first
+        }
         int pawprintAmount = 0;
+
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai, true);

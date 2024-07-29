@@ -16,9 +16,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
 
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
 import org.fourthline.cling.support.model.PortMapping;
 
 import com.google.common.base.Predicates;
@@ -61,7 +58,6 @@ public final class FServerManager {
     private boolean isHosting = false;
     private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
     private EventLoopGroup workerGroup = new NioEventLoopGroup();
-    private UpnpService upnpService = null;
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
@@ -143,10 +139,6 @@ public final class FServerManager {
     private void stopServer(final boolean removeShutdownHook) {
         bossGroup.shutdownGracefully();
         workerGroup.shutdownGracefully();
-        if (upnpService != null) {
-            upnpService.shutdown();
-            upnpService = null;
-        }
         if (removeShutdownHook) {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
@@ -290,16 +282,6 @@ public final class FServerManager {
     private void mapNatPort(final int port) {
         final String localAddress = getLocalAddress();
         final PortMapping portMapping = new PortMapping(port, localAddress, PortMapping.Protocol.TCP, "Forge");
-        if (upnpService != null) {
-            // Safeguard shutdown call, to prevent lingering port mappings
-            upnpService.shutdown();
-        }
-        try {
-            upnpService = new UpnpServiceImpl(new PortMappingListener(portMapping));
-            upnpService.getControlPoint().search();
-        }catch (Error e){
-            e.printStackTrace();
-        }
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {

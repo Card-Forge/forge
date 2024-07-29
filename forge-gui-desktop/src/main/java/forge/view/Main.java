@@ -22,8 +22,6 @@ import forge.Singletons;
 import forge.error.ExceptionHandler;
 import forge.gui.GuiBase;
 import forge.gui.card.CardReaderExperiments;
-import forge.util.BuildInfo;
-import io.sentry.Sentry;
 
 /**
  * Main class for Forge's swing application view.
@@ -34,12 +32,13 @@ public final class Main {
      */
     public static void main(final String[] args) {
 
+        /* Fuck sentry
         Sentry.init(options -> {
             options.setEnableExternalConfiguration(true);
             options.setRelease(BuildInfo.getVersionString());
             options.setEnvironment(System.getProperty("os.name"));
             options.setTag("Java Version", System.getProperty("java.version"));
-        }, true);
+        }, true);*/
 
         // HACK - temporary solution to "Comparison method violates it's general contract!" crash
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
