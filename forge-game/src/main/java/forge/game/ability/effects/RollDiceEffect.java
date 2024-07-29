@@ -75,6 +75,10 @@ public class RollDiceEffect extends SpellAbilityEffect {
         return rollDiceForPlayer(null, player, 1, 6, 0, 0, null, true);
     }
     private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult, boolean toVisitAttractions) {
+        if (amount == 0) {
+            return 0;
+        }
+
         Map<Player, Integer> ignoreChosenMap = Maps.newHashMap();
 
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(player);
@@ -94,9 +98,6 @@ public class RollDiceEffect extends SpellAbilityEffect {
             }
         }
 
-        if (amount == 0) {
-            return 0;
-        }
         int total = 0;
         int countMaxRolls = 0;
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);

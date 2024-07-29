@@ -1260,8 +1260,11 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
-            if (transitionScreen != null)
-                return false;
+            if (transitionScreen != null) {
+                boolean isFDialog = FOverlay.getTopOverlay() != null && FOverlay.getTopOverlay() instanceof FDialog;
+                if (!isFDialog)
+                    return false;
+            }
             if (pointer == 0) { //don't change listeners when second finger goes down for zoom
                 updatePotentialListeners(x, y);
                 if (keyInputAdapter != null) {

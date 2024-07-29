@@ -163,7 +163,11 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final void clearAttachedCards() {
+        if (attachedCards.isEmpty()) {
+            return;
+        }
         attachedCards.clear();
+        updateAttachedCards();
     }
 
     public final boolean hasCardAttachments() {

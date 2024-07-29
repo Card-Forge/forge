@@ -1881,7 +1881,10 @@ public class CardProperty {
             return card.getCastSA().isEvoke();
         } else if (property.equals("PromisedGift")) {
             // Do we need this isUnlinked thing like these others?
-            return card.hasPromisedGift();
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isOptionalCostPaid(OptionalCost.PromiseGift);
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -2005,7 +2008,15 @@ public class CardProperty {
                 // otherwise check for keyword object
                 return Objects.equals(castSA.getKeyword(), spellAbility.getKeyword());
             }
-        } else if (property.startsWith("CastSa"))  {
+        } else if (property.equals("CastSaSource")) {
+            SpellAbility castSA = card.getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            if (!castSA.equals(source.getCastSA())) {
+                return false;
+            }
+        } else if (property.startsWith("CastSa")) {
             SpellAbility castSA = card.getCastSA();
             if (castSA == null) {
                 return false;

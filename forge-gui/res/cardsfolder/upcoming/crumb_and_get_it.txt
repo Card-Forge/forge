@@ -1,0 +1,8 @@
+Name:Crumb and Get It
+ManaCost:W
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ Promised | GiftDescription$ a Food
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature you control gets +2/+2 until end of turn. If the gift was promised, that creature also gains indestructible until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1
+Oracle:Gift a Food (You may promise an opponent a gift as you cast this spell. If you do, they create a Food token before its other effects. It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nTarget creature you control gets +2/+2 until end of turn. If the gift was promised, that creature also gains indestructible until end of turn.
