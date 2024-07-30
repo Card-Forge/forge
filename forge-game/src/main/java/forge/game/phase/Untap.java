@@ -105,12 +105,7 @@ public class Untap extends Phase {
         return !c.isExertedBy(playerTurn);
     }
 
-    public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
-        @Override
-        public boolean apply(Card c) {
-            return canUntap(c);
-        }
-    };
+    public static final Predicate<Card> CANUNTAP = Untap::canUntap;
 
     /**
      * <p>

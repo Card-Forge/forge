@@ -118,12 +118,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-        boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                return input.ignoreLegendRule();
-            }
-        });
+        boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
         if (type.matches("All")) {
             // Logic Part for Vampire Hexmage

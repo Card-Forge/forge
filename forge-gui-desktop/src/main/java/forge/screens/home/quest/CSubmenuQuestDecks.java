@@ -40,12 +40,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         }
     };
 
-    private final UiCommand cmdDeckDelete = new UiCommand() {
-        @Override
-        public void run() {
-            update();
-        }
-    };
+    private final UiCommand cmdDeckDelete = this::update;
 
     @Override
     public void register() {

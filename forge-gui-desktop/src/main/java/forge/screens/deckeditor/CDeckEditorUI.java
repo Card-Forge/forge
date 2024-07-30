@@ -292,12 +292,7 @@ public enum CDeckEditorUI implements ICDoc {
 
         catView.applyFilters();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                catView.focus();
-            }
-        });
+        SwingUtilities.invokeLater(catView::focus);
     }
 
     @Override

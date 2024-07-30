@@ -81,12 +81,7 @@ public class SplashFrame extends JFrame {
         FSkin.loadLight(GuiBase.getForgePrefs().getPref(FPref.UI_SKIN), true);
 
         try {
-            SwingUtilities.invokeAndWait(new Runnable() {
-                @Override
-                public void run() {
-                    SplashFrame.this.init();
-                }
-            });
+            SwingUtilities.invokeAndWait(SplashFrame.this::init);
         }
         catch (Exception e) {
         }

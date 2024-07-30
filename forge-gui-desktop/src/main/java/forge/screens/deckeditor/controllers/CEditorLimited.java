@@ -96,12 +96,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        };
+        final Supplier<DeckGroup> newCreator = DeckGroup::new;
         this.controller = new DeckController<>(deckMap0, this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {

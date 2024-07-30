@@ -351,12 +351,7 @@ public class CardPool extends ItemPool<PaperCard> {
         // Now Get editions corresponding to pivot frequency
         List<CardEdition> pivotCandidates = new ArrayList<>(editionsStatistics.get(pivotFrequency));
         // Now Sort candidates chronologically
-        pivotCandidates.sort(new Comparator<CardEdition>() {
-            @Override
-            public int compare(CardEdition ed1, CardEdition ed2) {
-                return ed1.compareTo(ed2);
-            }
-        });
+        pivotCandidates.sort(CardEdition::compareTo);
         boolean searchPolicyAndPoolAreCompliant = isLatestCardArtPreference == this.isModern();
         if (!searchPolicyAndPoolAreCompliant)
             Collections.reverse(pivotCandidates);  // reverse to have latest-first.

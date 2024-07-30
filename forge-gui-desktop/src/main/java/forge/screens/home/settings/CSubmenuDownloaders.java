@@ -26,11 +26,7 @@ import forge.gui.framework.ICDoc;
 public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdLicensing = new UiCommand() {
-        @Override public void run() {
-            VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing();
-        }
-    };
+    private final UiCommand cmdLicensing = VSubmenuDownloaders.SINGLETON_INSTANCE::showLicensing;
     private final UiCommand cmdCheckForUpdates = new UiCommand() {
         @Override
         public void run() {
@@ -73,16 +69,8 @@ public enum CSubmenuDownloaders implements ICDoc {
             new GuiDownloader(new GuiDownloadSkins()).show();
         }
     };
-    private final UiCommand cmdHowToPlay = new UiCommand() {
-        @Override public void run() {
-            VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay();
-        }
-    };
-    private final UiCommand cmdListImageData = new UiCommand() {
-        @Override public void run() {
-            VSubmenuDownloaders.SINGLETON_INSTANCE.showCardandImageAuditData();
-        }
-    };
+    private final UiCommand cmdHowToPlay = VSubmenuDownloaders.SINGLETON_INSTANCE::showHowToPlay;
+    private final UiCommand cmdListImageData = VSubmenuDownloaders.SINGLETON_INSTANCE::showCardandImageAuditData;
     private final UiCommand cmdImportPictures = new UiCommand() {
         @Override public void run() {
             new ImportDialog(null, null).show();
@@ -124,12 +112,7 @@ public enum CSubmenuDownloaders implements ICDoc {
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                VSubmenuDownloaders.SINGLETON_INSTANCE.focusTopButton();
-            }
-        });
+        SwingUtilities.invokeLater(VSubmenuDownloaders.SINGLETON_INSTANCE::focusTopButton);
     }
 
 }

@@ -1810,13 +1810,7 @@ public class GameAction {
         boolean recheck = false;
 
         // Corner Case 1: Legendary with non legendary creature names
-        CardCollection nonLegendaryNames = CardLists.filter(a, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                return input.hasNonLegendaryCreatureNames();
-            }
-
-        });
+        CardCollection nonLegendaryNames = CardLists.filter(a, Card::hasNonLegendaryCreatureNames);
 
         Multimap<String, Card> uniqueLegends = Multimaps.index(a, Card::getName);
         CardCollection removed = new CardCollection();

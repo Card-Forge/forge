@@ -146,12 +146,7 @@ public class VStack implements IVDoc<CStack> {
         scroller.revalidate();
         scroller.repaint();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                scroller.scrollToTop();
-            }
-        });
+        SwingUtilities.invokeLater(scroller::scrollToTop);
     }
 
     @SuppressWarnings("serial")

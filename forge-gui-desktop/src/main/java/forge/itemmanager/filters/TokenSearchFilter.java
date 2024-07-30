@@ -92,12 +92,7 @@ public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
     private FLabel addButton(JPanel widget, String text) {
         FLabel button = new FLabel.Builder().text(text).hoverable().selectable().selected().build();
 
-        button.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                applyChange();
-            }
-        });
+        button.setCommand((UiCommand) this::applyChange);
 
         widget.add(button);
         return button;

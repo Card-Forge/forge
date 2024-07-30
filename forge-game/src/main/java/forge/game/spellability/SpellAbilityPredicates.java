@@ -28,48 +28,23 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
     }
 
     public static final Predicate<SpellAbility> isMandatory() {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isMandatory();
-            }
-        };
+        return SpellAbility::isMandatory;
     }
 
     public static final Predicate<SpellAbility> isManaAbility() {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isManaAbility();
-            }
-        };
+        return SpellAbility::isManaAbility;
     }
     
     public static final Predicate<SpellAbility> isIntrinsic() {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isIntrinsic();
-            }
-        };
+        return CardTraitBase::isIntrinsic;
     }
 
     public static final Predicate<SpellAbility> isChapter() {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isChapter();
-            }
-        };
+        return SpellAbility::isChapter;
     }
 
     public static final Predicate<SpellAbility> isTrigger() {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isTrigger();
-            }
-        };
+        return SpellAbility::isTrigger;
     }
 
     public static final Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {

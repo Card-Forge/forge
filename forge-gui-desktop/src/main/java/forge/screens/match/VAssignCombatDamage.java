@@ -246,12 +246,7 @@ public class VAssignCombatDamage {
         overlay.add(pnlMain);
 
         pnlMain.getRootPane().setDefaultButton(btnOK);
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                btnAuto.requestFocusInWindow();
-            }
-        });
+        SwingUtilities.invokeLater(btnAuto::requestFocusInWindow);
 
         initialAssignDamage(false);
         SOverlayUtils.showOverlay();

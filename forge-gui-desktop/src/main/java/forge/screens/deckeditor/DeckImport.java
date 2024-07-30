@@ -283,12 +283,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         // Action Listeners
         // ----------------
-        this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                activateCardPreview(e);
-            }
-        });
+        this.htmlOutput.addHyperlinkListener(this::activateCardPreview);
 
         // == C.1 Stats Panel
         FPanel statsPanel = new FPanel(new BorderLayout());

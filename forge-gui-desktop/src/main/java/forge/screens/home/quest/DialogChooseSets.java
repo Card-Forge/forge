@@ -500,12 +500,7 @@ public class DialogChooseSets {
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-		final Runnable cleanup = new Runnable() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		};
+		final Runnable cleanup = SOverlayUtils::hideOverlay;
 
 		FButton btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
 		btnOk.addActionListener(new ActionListener() {

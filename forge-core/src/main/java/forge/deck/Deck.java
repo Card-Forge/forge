@@ -308,12 +308,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;  // pool empty, no card has been found!
 
             // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
-            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard input) {
-                    return deckSection.validate(input);
-                }
-            });
+            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(deckSection::validate);
             // Add all the cards from ValidPool anyway!
             List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
             if (whiteList == null)

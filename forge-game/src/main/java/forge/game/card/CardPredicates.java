@@ -24,6 +24,7 @@ import com.google.common.collect.Iterables;
 
 import forge.card.CardStateName;
 import forge.game.CardTraitBase;
+import forge.game.GameEntity;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -125,12 +126,7 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> isTargetableBy(final SpellAbility source) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return source.canTarget(c);
-            }
-        };
+        return source::canTarget;
     }
 
     public static final Predicate<Card> nameEquals(final String name) {
@@ -361,21 +357,11 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> hasSuspend() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasSuspend();
-            }
-        };
+        return Card::hasSuspend;
     }
 
     public static final Predicate<Card> hasCounters() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasCounters();
-            }
-        };
+        return GameEntity::hasCounters;
     }
 
     public static final Predicate<Card> hasCounter(final CounterType type) {
@@ -540,99 +526,44 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all cards that are tapped.
          */
-        public static final Predicate<Card> TAPPED = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isTapped();
-            }
-        };
+        public static final Predicate<Card> TAPPED = Card::isTapped;
 
-        public static final Predicate<Card> FACE_DOWN = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isFaceDown();
-            }
-        };
+        public static final Predicate<Card> FACE_DOWN = Card::isFaceDown;
 
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */
-        public static final Predicate<Card> UNTAPPED = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isUntapped();
-            }
-        };
+        public static final Predicate<Card> UNTAPPED = Card::isUntapped;
 
-        public static final Predicate<Card> CAN_TAP = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.canTap();
-            }
-        };
+        public static final Predicate<Card> CAN_TAP = Card::canTap;
 
-        public static final Predicate<Card> CAN_CREW = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.canCrew();
-            }
-        };
+        public static final Predicate<Card> CAN_CREW = Card::canCrew;
         /**
          * a Predicate<Card> to get all creatures.
          */
-        public static final Predicate<Card> CREATURES = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isCreature();
-            }
-        };
+        public static final Predicate<Card> CREATURES = Card::isCreature;
 
         /**
          * a Predicate<Card> to get all enchantments.
          */
-        public static final Predicate<Card> ENCHANTMENTS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isEnchantment();
-            }
-        };
+        public static final Predicate<Card> ENCHANTMENTS = Card::isEnchantment;
         /**
          * a Predicate<Card> to get all aura.
          */
-        public static final Predicate<Card> AURA = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isAura();
-            }
-        };
+        public static final Predicate<Card> AURA = Card::isAura;
         /**
          * a Predicate<Card> to get all equipment.
          */
-        public static final Predicate<Card> EQUIPMENT = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isEquipment();
-            }
-        };
+        public static final Predicate<Card> EQUIPMENT = Card::isEquipment;
         /**
          * a Predicate<Card> to get all fortification.
          */
-        public static final Predicate<Card> FORTIFICATION = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isFortification();
-            }
-        };
+        public static final Predicate<Card> FORTIFICATION = Card::isFortification;
 
         /**
          * a Predicate<Card> to get all curse.
          */
-        public static final Predicate<Card> CURSE = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isCurse();
-            }
-        };
+        public static final Predicate<Card> CURSE = Card::isCurse;
 
         /**
          * a Predicate<Card> to get all unenchanted cards in a list.
@@ -646,12 +577,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all enchanted cards in a list.
          */
-        public static final Predicate<Card> ENCHANTED = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isEnchanted();
-            }
-        };
+        public static final Predicate<Card> ENCHANTED = GameEntity::isEnchanted;
         /**
          * a Predicate<Card> to get all nontoken cards.
          */
@@ -683,12 +609,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all artifacts.
          */
-        public static final Predicate<Card> ARTIFACTS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isArtifact();
-            }
-        };
+        public static final Predicate<Card> ARTIFACTS = Card::isArtifact;
         /**
          * a Predicate<Card> to get all nonartifacts.
          */
@@ -719,12 +640,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all permanents.
          */
-        public static final Predicate<Card> PERMANENTS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isPermanent();
-            }
-        };
+        public static final Predicate<Card> PERMANENTS = Card::isPermanent;
         /**
          * a Predicate<Card> to get all nonland permanents.
          */
@@ -753,24 +669,9 @@ public final class CardPredicates {
                 return c.isLand() && c.isSnow();
             }
         };
-        public static final Predicate<Card> PLANESWALKERS = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isPlaneswalker();
-            }
-        };
-        public static final Predicate<Card> BATTLES = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isBattle();
-            }
-        };
-        public static final Predicate<Card> CAN_BE_DESTROYED = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeDestroyed();
-            }
-        };
+        public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
+        public static final Predicate<Card> BATTLES = Card::isBattle;
+        public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;
         public static final Predicate<Card> ATTRACTIONS = Card::isAttraction;
     }
 

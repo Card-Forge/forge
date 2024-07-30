@@ -6,6 +6,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.game.CardTraitBase;
+import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.card.CounterEnumType;
@@ -16,12 +17,7 @@ import forge.game.zone.ZoneType;
 public final class PlayerPredicates {
 
     public static final Predicate<Player> isTargetableBy(final SpellAbility source) {
-        return new Predicate<Player>() {
-            @Override
-            public boolean apply(final Player p) {
-                return source.canTarget(p);
-            }
-        };
+        return source::canTarget;
     }
 
     public static final Predicate<Player> canDiscardBy(final SpellAbility source, final boolean effect) {
@@ -43,12 +39,7 @@ public final class PlayerPredicates {
     }
     
     public static final Predicate<Player> sameTeam(final Player player) {
-        return new Predicate<Player>() {
-            @Override
-            public boolean apply(final Player p) {
-                return player.sameTeam(p);
-            }
-        };
+        return player::sameTeam;
     }
 
     public static final Predicate<Player> isCardInPlay(final String cardName) {
@@ -65,12 +56,7 @@ public final class PlayerPredicates {
     }
 
     public static final Predicate<Player> hasCounters() {
-        return new Predicate<Player>() {
-            @Override
-            public boolean apply(final Player p) {
-                return p.hasCounters();
-            }
-        };
+        return GameEntity::hasCounters;
     }
 
     public static final Predicate<Player> lifeLessOrEqualTo(final int n) {

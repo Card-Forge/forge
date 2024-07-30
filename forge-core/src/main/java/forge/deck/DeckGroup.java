@@ -30,6 +30,10 @@ import java.util.List;
  */
 public class DeckGroup extends DeckBase {
 
+    public DeckGroup() {
+        this("");
+    }
+
     /**
      * Instantiates a new deck group.
      *

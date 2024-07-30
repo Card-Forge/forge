@@ -73,12 +73,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                setupDraft();
-            }
-        });
+        view.getBtnBuildDeck().setCommand((UiCommand) this::setupDraft);
 
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
@@ -216,12 +211,7 @@ public enum CSubmenuDraft implements ICDoc {
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
     /** */

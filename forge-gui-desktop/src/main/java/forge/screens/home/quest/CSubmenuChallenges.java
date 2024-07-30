@@ -50,13 +50,9 @@ public enum CSubmenuChallenges implements ICDoc {
     public void initialize() {
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
 
-        view.getBtnSpellShop().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.showSpellShop(); } });
+        view.getBtnSpellShop().setCommand((UiCommand) QuestUtil::showSpellShop);
 
-        view.getBtnBazaar().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.showBazaar(); } });
+        view.getBtnBazaar().setCommand((UiCommand) QuestUtil::showBazaar);
 
         view.getBtnUnlock().setCommand(
                 new UiCommand() { @Override
@@ -170,9 +166,7 @@ public enum CSubmenuChallenges implements ICDoc {
             final JRadioButton rad = temp.getRad();
             if (haveAnyChallenges) {
                 rad.setSelected(true);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { rad.requestFocusInWindow(); }
-                });
+                SwingUtilities.invokeLater(rad::requestFocusInWindow);
                 haveAnyChallenges = false;
             }
             rad.addKeyListener(_startOnEnter);

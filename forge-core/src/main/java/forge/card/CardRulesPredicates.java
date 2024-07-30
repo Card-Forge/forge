@@ -620,31 +620,11 @@ public final class CardRulesPredicates {
             }
         };
 
-        public static final Predicate<CardRules> CAN_BE_COMMANDER = new Predicate<CardRules>() {
-            @Override
-            public boolean apply(final CardRules subject) {
-                return subject.canBeCommander();
-            }
-        };
-        public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = new Predicate<CardRules>() {
-            @Override
-            public boolean apply(final CardRules subject) {
-                return subject.canBePartnerCommander();
-            }
-        };
+        public static final Predicate<CardRules> CAN_BE_COMMANDER = CardRules::canBeCommander;
+        public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = CardRules::canBePartnerCommander;
 
-        public static final Predicate<CardRules> CAN_BE_OATHBREAKER = new Predicate<CardRules>() {
-            @Override
-            public boolean apply(final CardRules subject) {
-                return subject.canBeOathbreaker();
-            }
-        };
-        public static final Predicate<CardRules> CAN_BE_SIGNATURE_SPELL = new Predicate<CardRules>() {
-            @Override
-            public boolean apply(final CardRules subject) {
-                return subject.canBeSignatureSpell();
-            }
-        };
+        public static final Predicate<CardRules> CAN_BE_OATHBREAKER = CardRules::canBeOathbreaker;
+        public static final Predicate<CardRules> CAN_BE_SIGNATURE_SPELL = CardRules::canBeSignatureSpell;
 
         public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
         public static final Predicate<CardRules> IS_BATTLE = CardRulesPredicates.coreType(true, CardType.CoreType.Battle);

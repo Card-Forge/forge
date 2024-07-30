@@ -335,21 +335,11 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
                     @Override
                     public void run() {
                         if (GuiBase.getInterface().isRunningOnDesktop() && Forge.mouseButtonID == Input.Buttons.RIGHT) {
-                            FThreads.invokeInEdtLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    showZoom();
-                                }
-                            });
+                            FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
                             return;
                         } else if (!selectCard(false)) {
                             //if no cards in stack can be selected, just show zoom/details for card
-                            FThreads.invokeInEdtLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    showZoom();
-                                }
-                            });
+                            FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
                         }
                     }
                 });

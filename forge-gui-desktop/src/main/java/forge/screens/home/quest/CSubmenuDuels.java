@@ -42,21 +42,9 @@ public enum CSubmenuDuels implements ICDoc {
 	public void initialize() {
 		final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
-		view.getBtnSpellShop().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.showSpellShop();
-					}
-				});
+		view.getBtnSpellShop().setCommand((UiCommand) QuestUtil::showSpellShop);
 
-		view.getBtnBazaar().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.showBazaar();
-					}
-				});
+		view.getBtnBazaar().setCommand((UiCommand) QuestUtil::showBazaar);
 
 		view.getBtnTravel().setCommand(
 				new UiCommand() {
@@ -191,12 +179,7 @@ public enum CSubmenuDuels implements ICDoc {
 				final JRadioButton rad = temp.getRad();
 				if (i == 0) {
 					rad.setSelected(true);
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							rad.requestFocusInWindow();
-						}
-					});
+					SwingUtilities.invokeLater(rad::requestFocusInWindow);
 				}
 				temp.addKeyListener(startOnEnter);
 				temp.addMouseListener(mouseClickListener);

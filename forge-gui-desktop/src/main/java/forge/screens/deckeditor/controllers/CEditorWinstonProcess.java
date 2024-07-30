@@ -308,18 +308,8 @@ public class CEditorWinstonProcess extends ACEditorBase<PaperCard, DeckGroup> {
         this.ccAddCommand = this.getBtnAdd().getCommand();
         this.ccAdd4Command = this.getBtnAdd4().getCommand();
 
-        this.getBtnAdd().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorWinstonProcess.this.takePile();
-            }
-        });
-        this.getBtnAdd4().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorWinstonProcess.this.passPile();
-            }
-        });
+        this.getBtnAdd().setCommand((UiCommand) CEditorWinstonProcess.this::takePile);
+        this.getBtnAdd4().setCommand((UiCommand) CEditorWinstonProcess.this::passPile);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

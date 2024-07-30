@@ -255,12 +255,7 @@ public enum FView {
 						overlay.add(p, "w 100::80%, h 50::90%");
 						SOverlayUtils.showOverlay();
 
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								btnOk.requestFocusInWindow();
-							}
-						});
+						SwingUtilities.invokeLater(btnOk::requestFocusInWindow);
 					}
 				}).show();
 			}
@@ -370,12 +365,7 @@ public enum FView {
 				@Override
 				public void run() {
 					SOverlayUtils.showOverlay();
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							btnRemindMeLater.requestFocusInWindow();
-						}
-					});
+					SwingUtilities.invokeLater(btnRemindMeLater::requestFocusInWindow);
 				}
 			});
 

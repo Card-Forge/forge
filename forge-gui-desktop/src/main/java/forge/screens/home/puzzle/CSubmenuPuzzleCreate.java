@@ -118,11 +118,6 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
         rules.setGamesPerMatch(1);
         hostedMatch.startMatch(rules, null, players, human, GuiBase.getInterface().getNewGuiGame());
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 }

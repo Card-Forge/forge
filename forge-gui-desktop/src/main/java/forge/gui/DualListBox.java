@@ -214,12 +214,7 @@ public class DualListBox<T> extends FDialog {
 
         if (remainingSourcesMin <= sourceElements.size() && remainingSourcesMax >= sourceElements.size()) {
             //ensure OK button gets initial focus if remainingSources matches source list count
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    okButton.requestFocusInWindow();
-                }
-            });
+            SwingUtilities.invokeLater(okButton::requestFocusInWindow);
         }
     }
 

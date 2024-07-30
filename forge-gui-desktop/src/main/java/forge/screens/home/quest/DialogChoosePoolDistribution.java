@@ -237,12 +237,7 @@ public class DialogChoosePoolDistribution {
 		});
 
 		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
-		btnCancel.setCommand(new UiCommand() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		});
+		btnCancel.setCommand((UiCommand) SOverlayUtils::hideOverlay);
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 20, ax right"));
 		southPanel.setOpaque(false);

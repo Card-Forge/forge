@@ -250,9 +250,7 @@ public class ImportDialog {
         _topPanel.add(_selectionPanel, "growx, growy, gaptop 10");
 
         // action button widgets
-        final Runnable cleanup = new Runnable() {
-            @Override public void run() { SOverlayUtils.hideOverlay(); }
-        };
+        final Runnable cleanup = SOverlayUtils::hideOverlay;
         _btnStart = new FButton("Start import");
         _btnStart.setEnabled(false);
         _btnCancel = new FButton("Cancel");
@@ -280,9 +278,7 @@ public class ImportDialog {
         SOverlayUtils.showOverlay();
 
         // focus cancel button after the dialog is shown
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { _btnCancel.requestFocusInWindow(); }
-        });
+        SwingUtilities.invokeLater(_btnCancel::requestFocusInWindow);
 
         // if our source dir is provided, set the text, which will fire off an analyzer
         if (isMigration) {

@@ -101,11 +101,6 @@ public final class CardOverlaysMenu {
     }
 
     private void repaintCardOverlays() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                matchUI.repaintCardOverlays();
-            }
-        });
+        SwingUtilities.invokeLater(matchUI::repaintCardOverlays);
     }
 }

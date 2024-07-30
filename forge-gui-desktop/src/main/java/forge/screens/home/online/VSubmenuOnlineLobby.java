@@ -100,13 +100,8 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         btnStop.addActionListener(new ActionListener() {
             @Override
             public final void actionPerformed(final ActionEvent arg0) {
-                Runnable stopGame = new Runnable() {
-                    @Override
-                    public void run() {
-                        // do the STOP needful here
-                        reset();
-                    }
-                };
+                // do the STOP needful here
+                Runnable stopGame = VSubmenuOnlineLobby.this::reset;
                 if (stopGame != null) {
                     stopGame.run();
                 }

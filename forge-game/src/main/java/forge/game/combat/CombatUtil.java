@@ -154,12 +154,7 @@ public class CombatUtil {
      * @return a {@link CardCollection}.
      */
     public static CardCollection getPossibleAttackers(final Player p) {
-        return CardLists.filter(p.getCreaturesInPlay(), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card attacker) {
-                return canAttack(attacker);
-            }
-        });
+        return CardLists.filter(p.getCreaturesInPlay(), CombatUtil::canAttack);
     }
 
     /**

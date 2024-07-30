@@ -50,12 +50,7 @@ public enum CDeckgen implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newRandomConstructed();
-            }
-        });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand((UiCommand) this::newRandomConstructed);
         VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new UiCommand() {
             @Override
             public void run() {

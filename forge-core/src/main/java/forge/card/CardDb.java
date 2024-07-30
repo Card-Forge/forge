@@ -838,12 +838,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;  // nothing to do
 
         // Filter Cards Editions based on set preferences
-        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(CardEdition ed) {
-                return artPref.accept(ed);
-            }
-        }));
+        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, artPref::accept));
 
         /* At this point, it may be possible that Art Preference is too-strict for the requested card!
             i.e. acceptedEditions.size() == 0!

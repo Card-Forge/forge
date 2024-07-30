@@ -112,12 +112,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        };
+        final Supplier<DeckGroup> newCreator = DeckGroup::new;
 
         this.controller = new DeckController<>(questData0.getDraftDecks(), this, newCreator);
         controller.getView().getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);

@@ -20,12 +20,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        MatchController.instance.concede();
-                    }
-                });
+                ThreadUtil.invokeInGameThread(MatchController.instance::concede);
             }
         }));
         /*addItem(new FMenuItem("Save Game", FSkinImage.SAVE, new FEventHandler() {

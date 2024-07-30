@@ -93,12 +93,7 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                     GuiUtils.addSeparator(menu);
                 }
 
-                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblEditExpression"), null, new Runnable() {
-                    @Override
-                    public void run() {
-                        edit();
-                    }
-                });
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblEditExpression"), null, AdvancedSearchFilter.this::edit);
 
                 if (hasFilters) {
                     GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblClearFilter"), null, new Runnable() {

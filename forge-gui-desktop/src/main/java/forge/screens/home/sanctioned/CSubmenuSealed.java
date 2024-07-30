@@ -72,12 +72,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                setupSealed();
-            }
-        });
+        view.getBtnBuildDeck().setCommand((UiCommand) this::setupSealed);
 
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
@@ -86,12 +81,7 @@ public enum CSubmenuSealed implements ICDoc {
             }
         });
 
-        view.getBtnDirections().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                view.showDirections();
-            }
-        });
+        view.getBtnDirections().setCommand((UiCommand) view::showDirections);
 
         view.getRadSingle().addActionListener(radioAction);
 
@@ -171,12 +161,7 @@ public enum CSubmenuSealed implements ICDoc {
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Sealed, null, starter, human, GuiBase.getInterface().getNewGuiGame());
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
     @SuppressWarnings("unchecked")

@@ -70,24 +70,9 @@ public enum CSubmenuGauntletLoad implements ICDoc {
     public void initialize() {
         view.getBtnStart().addActionListener(actStartGame);
 
-        view.getGauntletLister().setCmdDelete(new UiCommand() {
-            @Override
-            public void run() {
-                enableStartButton();
-            }
-        });
-        view.getGauntletLister().setCmdSelect(new UiCommand() {
-            @Override
-            public void run() {
-                enableStartButton();
-            }
-        });
-        view.getGauntletLister().setCmdActivate(new UiCommand() {
-            @Override
-            public void run() {
-                startGame();
-            }
-        });
+        view.getGauntletLister().setCmdDelete((UiCommand) this::enableStartButton);
+        view.getGauntletLister().setCmdSelect((UiCommand) this::enableStartButton);
+        view.getGauntletLister().setCmdActivate((UiCommand) this::startGame);
     }
 
     private void updateData() {
@@ -150,12 +135,7 @@ public enum CSubmenuGauntletLoad implements ICDoc {
 
         gd.startRound(starter, human);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
 }

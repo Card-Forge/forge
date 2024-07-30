@@ -49,90 +49,20 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
 
     public enum EditorType {
-        Constructed(new DeckController<>(FModel.getDecks().getConstructed(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        Draft(new DeckController<>(FModel.getDecks().getDraft(), new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        }), null),
-        Sealed(new DeckController<>(FModel.getDecks().getSealed(), new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        }), null),
-        Winston(new DeckController<>(FModel.getDecks().getWinston(), new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        }), null),
-        Commander(new DeckController<>(FModel.getDecks().getCommander(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        Oathbreaker(new DeckController<>(FModel.getDecks().getOathbreaker(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        TinyLeaders(new DeckController<>(FModel.getDecks().getTinyLeaders(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), DeckFormat.TinyLeaders.isLegalCardPredicate()),
-        Brawl(new DeckController<>(FModel.getDecks().getBrawl(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), DeckFormat.Brawl.isLegalCardPredicate()),
-        Archenemy(new DeckController<>(FModel.getDecks().getScheme(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        Planechase(new DeckController<>(FModel.getDecks().getPlane(), new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        Quest(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        QuestCommander(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until quest loaded
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null),
-        QuestDraft(new DeckController<>(null, new Supplier<DeckGroup>() { //delay setting root folder until quest loaded
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        }), null),
-        PlanarConquest(new DeckController<>(null, new Supplier<Deck>() { //delay setting root folder until conquest loaded
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        }), null);
+        Constructed(new DeckController<>(FModel.getDecks().getConstructed(), (Supplier<Deck>) Deck::new), null),
+        Draft(new DeckController<>(FModel.getDecks().getDraft(), (Supplier<DeckGroup>) DeckGroup::new), null),
+        Sealed(new DeckController<>(FModel.getDecks().getSealed(), (Supplier<DeckGroup>) DeckGroup::new), null),
+        Winston(new DeckController<>(FModel.getDecks().getWinston(), (Supplier<DeckGroup>) DeckGroup::new), null),
+        Commander(new DeckController<>(FModel.getDecks().getCommander(), (Supplier<Deck>) Deck::new), null),
+        Oathbreaker(new DeckController<>(FModel.getDecks().getOathbreaker(), (Supplier<Deck>) Deck::new), null),
+        TinyLeaders(new DeckController<>(FModel.getDecks().getTinyLeaders(), (Supplier<Deck>) Deck::new), DeckFormat.TinyLeaders.isLegalCardPredicate()),
+        Brawl(new DeckController<>(FModel.getDecks().getBrawl(), (Supplier<Deck>) Deck::new), DeckFormat.Brawl.isLegalCardPredicate()),
+        Archenemy(new DeckController<>(FModel.getDecks().getScheme(), (Supplier<Deck>) Deck::new), null),
+        Planechase(new DeckController<>(FModel.getDecks().getPlane(), (Supplier<Deck>) Deck::new), null),
+        Quest(new DeckController<>(null, (Supplier<Deck>) Deck::new), null), //delay setting root folder until quest loaded
+        QuestCommander(new DeckController<>(null, (Supplier<Deck>) Deck::new), null),
+        QuestDraft(new DeckController<>(null, (Supplier<DeckGroup>) DeckGroup::new), null),
+        PlanarConquest(new DeckController<>(null, (Supplier<Deck>) Deck::new), null);
 
         private static final Set<EditorType> LIMITED_TYPES = Collections.unmodifiableSet(
                 EnumSet.of(Draft, Sealed, Winston, QuestDraft)

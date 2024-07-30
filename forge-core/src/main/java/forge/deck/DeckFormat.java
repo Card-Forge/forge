@@ -539,12 +539,7 @@ public enum DeckFormat {
     }
 
     public Predicate<PaperCard> isLegalCardPredicate() {
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return isLegalCard(card);
-            }
-        };
+        return this::isLegalCard;
     }
 
     public Predicate<PaperCard> isLegalCommanderPredicate() {

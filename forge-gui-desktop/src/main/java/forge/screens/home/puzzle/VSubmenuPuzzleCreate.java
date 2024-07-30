@@ -59,11 +59,7 @@ public enum VSubmenuPuzzleCreate implements IVSubmenu<CSubmenuPuzzleCreate> {
     VSubmenuPuzzleCreate() {
         lobby.setListener(vLobby);
 
-        vLobby.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                lobby.applyToSlot(index, event);
-            }
-        });
+        vLobby.setPlayerChangeListener(lobby::applyToSlot);
 
         vLobby.update(false);
     }

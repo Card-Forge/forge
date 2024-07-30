@@ -201,23 +201,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final Runnable cmdResetFilters = new Runnable() {
             @Override public void run() {
                 resetFilters();
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        focus();
-                    }
-                });
+                SwingUtilities.invokeLater(ItemManager.this::focus);
             }
         };
         final Runnable cmdHideFilters = new Runnable() {
             @Override public void run() {
                 setHideFilters(!getHideFilters());
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        focus();
-                    }
-                });
+                SwingUtilities.invokeLater(ItemManager.this::focus);
             }
         };
 

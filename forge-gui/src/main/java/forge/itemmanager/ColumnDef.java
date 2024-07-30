@@ -321,34 +321,12 @@ public enum ColumnDef {
      * The quantity column.
      */
     QUANTITY("lblQty", "lblQuantity", 25, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            }),
+            Entry::getValue, Entry::getValue),
     /**
      * The quantity in deck column.
      */
     DECK_QUANTITY("lblQuantity", "lblQuantity", 50, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            }),
+            Entry::getValue, Entry::getValue),
     /**
      * The new inventory flag column.
      */

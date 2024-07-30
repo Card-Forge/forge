@@ -105,12 +105,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        };
+        final Supplier<Deck> newCreator = Deck::new;
         CardCollections decks = FModel.getDecks();
         switch (gameType) {
         case TinyLeaders:

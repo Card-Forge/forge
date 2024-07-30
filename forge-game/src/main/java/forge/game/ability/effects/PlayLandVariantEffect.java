@@ -47,12 +47,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             }
         }
 
-        final Predicate<PaperCard> cp = Predicates.compose(new Predicate<String>() {
-            @Override
-            public boolean apply(final String name) {
-                return landNames.contains(name);
-            }
-        }, PaperCard::getName);
+        final Predicate<PaperCard> cp = Predicates.compose(landNames::contains, PaperCard::getName);
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
         // get a random basic land
         Card random;

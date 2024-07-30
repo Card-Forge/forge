@@ -57,8 +57,7 @@ public enum CSubmenuQuestStart implements ICDoc {
      */
     @Override
     public void initialize() {
-        view.getBtnEmbark().setCommand(
-                new UiCommand() { @Override public void run() { newQuest(); } });
+        view.getBtnEmbark().setCommand((UiCommand) this::newQuest);
 
         // disable the very powerful sets -- they can be unlocked later for a high price
         final List<String> unselectableSets = new ArrayList<>();

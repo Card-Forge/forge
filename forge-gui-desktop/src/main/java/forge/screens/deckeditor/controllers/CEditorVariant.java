@@ -81,12 +81,7 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        };
+        final Supplier<Deck> newCreator = Deck::new;
         this.controller = new DeckController<>(folder, this, newCreator);
 
         getBtnAddBasicLands().setCommand(new UiCommand() {

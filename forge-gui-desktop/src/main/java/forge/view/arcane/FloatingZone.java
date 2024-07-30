@@ -60,11 +60,7 @@ public class FloatingZone extends FloatingCardArea {
             return false;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public void run() {
-                cardArea.showWindow();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(cardArea::showWindow);
 
         return true;
     }
@@ -76,11 +72,7 @@ public class FloatingZone extends FloatingCardArea {
             return false;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public void run() {
-                cardArea.hideWindow();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(cardArea::hideWindow);
 
         return true;
     }

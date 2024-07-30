@@ -91,12 +91,7 @@ public final class EncodeAi extends SpellAbilityAi {
         Card choice = null;
         // final String logic = sa.getParam("AILogic");
         // if (logic == null) {
-        final List<Card> attackers = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return ComputerUtilCombat.canAttackNextTurn(c);
-            }
-        });
+        final List<Card> attackers = CardLists.filter(list, ComputerUtilCombat::canAttackNextTurn);
         final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

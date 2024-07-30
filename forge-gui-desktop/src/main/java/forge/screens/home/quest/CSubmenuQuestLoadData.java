@@ -29,16 +29,8 @@ public enum CSubmenuQuestLoadData implements ICDoc {
 
     private final Map<String, QuestData> arrQuests = new HashMap<>();
 
-    private final UiCommand cmdQuestSelect = new UiCommand() {
-        @Override public void run() {
-            changeQuest();
-        }
-    };
-    private final UiCommand cmdQuestUpdate = new UiCommand() {
-        @Override public void run() {
-            update();
-        }
-    };
+    private final UiCommand cmdQuestSelect = this::changeQuest;
+    private final UiCommand cmdQuestUpdate = this::update;
 
     @Override
     public void register() {

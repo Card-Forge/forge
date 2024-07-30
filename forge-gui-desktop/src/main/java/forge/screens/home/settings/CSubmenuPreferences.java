@@ -196,54 +196,19 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
-        view.getBtnReset().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetForgeSettingsToDefault();
-            }
-        });
+        view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
 
-        view.getBtnDeleteEditorUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetDeckEditorLayout();
-            }
-        });
+        view.getBtnDeleteEditorUI().setCommand((UiCommand) CSubmenuPreferences.this::resetDeckEditorLayout);
 
-        view.getBtnDeleteWorkshopUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetWorkshopLayout();
-            }
-        });
+        view.getBtnDeleteWorkshopUI().setCommand((UiCommand) CSubmenuPreferences.this::resetWorkshopLayout);
 
-        view.getBtnDeleteMatchUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetMatchScreenLayout();
-            }
-        });
+        view.getBtnDeleteMatchUI().setCommand((UiCommand) CSubmenuPreferences.this::resetMatchScreenLayout);
 
-        view.getBtnUserProfileUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openUserProfileDirectory();
-            }
-        });
+        view.getBtnUserProfileUI().setCommand((UiCommand) CSubmenuPreferences.this::openUserProfileDirectory);
 
-        view.getBtnClearImageCache().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.clearImageCache();
-            }
-        });
+        view.getBtnClearImageCache().setCommand((UiCommand) CSubmenuPreferences.this::clearImageCache);
 
-        view.getBtnTokenPreviewer().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openTokenPreviewer();
-            }
-        });
+        view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
 
         view.getBtnResetJavaFutureCompatibilityWarnings().setCommand(new UiCommand() {
             @Override
@@ -254,12 +219,7 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
-        view.getBtnContentDirectoryUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openContentDirectory();
-            }
-        });
+        view.getBtnContentDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::openContentDirectory);
 
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();

@@ -107,12 +107,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
 
             if (!countersList.isEmpty()) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.ignoreLegendRule();
-                    }
-                });
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
                 if (maritEmpty) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
                             CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));
@@ -237,12 +232,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             // this counters are treat first to be removed
             if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.get(CounterEnumType.ICE))) {
                 CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.ignoreLegendRule();
-                    }
-                });
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
                 if (maritEmpty) {
                     return CounterType.get(CounterEnumType.ICE);
@@ -288,12 +278,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             } else {
                 if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
                     CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card input) {
-                            return input.ignoreLegendRule();
-                        }
-                    });
+                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
 
                     if (maritEmpty) {
                         return false;

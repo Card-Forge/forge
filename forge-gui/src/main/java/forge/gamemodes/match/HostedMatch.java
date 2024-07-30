@@ -511,17 +511,9 @@ public class HostedMatch {
         }
 
         if (continueMatch >= newMatch) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public void run() {
-                    continueMatch();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::continueMatch);
         } else {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public void run() {
-                    restartMatch();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::restartMatch);
         }
     }
 

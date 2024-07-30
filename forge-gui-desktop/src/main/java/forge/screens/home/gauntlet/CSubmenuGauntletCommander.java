@@ -87,12 +87,7 @@ public enum CSubmenuGauntletCommander implements ICDoc {
 
         gd.startRound(starter, human);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
 }

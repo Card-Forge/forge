@@ -79,12 +79,7 @@ public class DialogChooseFormats {
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-		final Runnable cleanup = new Runnable() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		};
+		final Runnable cleanup = SOverlayUtils::hideOverlay;
 
 		FButton btnOk = new FButton(localizer.getMessage("lblOK"));
 		btnOk.addActionListener(new ActionListener() {
@@ -141,12 +136,7 @@ public class DialogChooseFormats {
 		cbl.setVisibleRowCount(Math.min(20, formats.size()));
 
 		if (focused) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					cbl.requestFocusInWindow();
-				}
-			});
+			SwingUtilities.invokeLater(cbl::requestFocusInWindow);
 		}
 
 		JPanel pnl = new JPanel(new MigLayout("center, wrap"));

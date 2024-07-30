@@ -451,12 +451,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             done();
             stop();
         } else {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    updateMessage();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::updateMessage);
         }
     }
 
