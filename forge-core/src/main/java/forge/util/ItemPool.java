@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import com.google.common.collect.Maps;
@@ -44,27 +43,6 @@ import forge.item.InventoryItem;
  */
 public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>>, Serializable {
     private static final long serialVersionUID = 6572047177527559797L;
-
-    public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {
-        @Override
-        public T apply(final Entry<T, Integer> from) {
-            return from.getKey();
-        }
-    };
-
-    public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
-        @Override
-        public String apply(final Entry<T, Integer> from) {
-            return from.getKey().getName();
-        }
-    };
-
-    public final transient Function<Entry<T, Integer>, Integer> FN_GET_COUNT = new Function<Entry<T, Integer>, Integer>() {
-        @Override
-        public Integer apply(final Entry<T, Integer> from) {
-            return from.getValue();
-        }
-    };
 
     public ItemPool(final Class<T> cls) {
         this(new ConcurrentHashMap<>(), cls);

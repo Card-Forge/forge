@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
@@ -185,7 +184,7 @@ public class AttackConstraints {
 
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
-        possible.putAll(Maps.asMap(legalAttackers.asSet(), FN_COUNT_VIOLATIONS));
+        possible.putAll(Maps.asMap(legalAttackers.asSet(), this::countViolations));
         int empty = countViolations(Collections.emptyMap());
         if (empty != -1) {
             possible.put(Collections.emptyMap(), empty);
@@ -343,7 +342,7 @@ public class AttackConstraints {
 
     private final List<Attack> getSortedFilteredRequirements() {
         final List<Attack> result = Lists.newArrayList();
-        final Map<Card, List<Pair<GameEntity, Integer>>> sortedRequirements = Maps.transformValues(requirements, AttackRequirement.SORT);
+        final Map<Card, List<Pair<GameEntity, Integer>>> sortedRequirements = Maps.transformValues(requirements, AttackRequirement::getSortedRequirements);
         for (final Entry<Card, List<Pair<GameEntity, Integer>>> reqList : sortedRequirements.entrySet()) {
             final AttackRestriction restriction = restrictions.get(reqList.getKey());
             final List<Pair<GameEntity, Integer>> list = reqList.getValue();
@@ -446,10 +445,4 @@ public class AttackConstraints {
 
         return violations;
     }
-    private final Function<Map<Card, GameEntity>, Integer> FN_COUNT_VIOLATIONS = new Function<Map<Card,GameEntity>, Integer>() {
-        @Override
-        public Integer apply(final Map<Card, GameEntity> input) {
-            return countViolations(input);
-        }
-    };
 }

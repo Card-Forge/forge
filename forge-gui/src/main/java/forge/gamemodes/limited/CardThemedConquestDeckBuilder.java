@@ -30,7 +30,7 @@ public class CardThemedConquestDeckBuilder extends CardThemedDeckBuilder {
         // remove Unplayables
         if(isForAI) {
             final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                    Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard.FN_GET_RULES));
+                    Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules));
             this.aiPlayables = Lists.newArrayList(playables);
         }else{
             this.aiPlayables = Lists.newArrayList(availableList);

@@ -465,7 +465,8 @@ public class QuestEventDraft implements IQuestEvent {
     }
 
     private BoosterPack getBoosterPack() {
-        return BoosterPack.FN_FROM_SET.apply(getRandomEdition());
+        CardEdition edition = getRandomEdition();
+        return BoosterPack.fromSet(edition);
     }
 
     private PaperCard getPromoCard() {

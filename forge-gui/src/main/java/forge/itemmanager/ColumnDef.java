@@ -298,7 +298,7 @@ public enum ColumnDef {
                             sanctioned.add(gf);
                         }
                     }
-                    return StringUtils.join(Iterables.transform(sanctioned, GameFormat.FN_GET_NAME), ", ");
+                    return StringUtils.join(Iterables.transform(sanctioned, GameFormat::getName), ", ");
                 }
             }),
     /**

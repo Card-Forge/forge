@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
@@ -51,7 +52,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     }
 
     public DeckStorage(final File deckDir0, final String rootDir0, boolean moveWrongDecks) {
-        super(deckDir0, Deck.FN_NAME_SELECTOR);
+        super(deckDir0, DeckBase::getName);
         rootDir = rootDir0;
         moveWronglyNamedDecks = moveWrongDecks;
     }

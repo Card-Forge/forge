@@ -17,7 +17,6 @@
  */
 package forge.item;
 
-import com.google.common.base.Function;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -159,22 +158,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         }
         return hasImage;
     }
-
-    /**
-     * Lambda to get rules for selects from list of printed cards.
-     */
-    public static final Function<PaperCard, CardRules> FN_GET_RULES = new Function<PaperCard, CardRules>() {
-        @Override
-        public CardRules apply(final PaperCard from) {
-            return from.rules;
-        }
-    };
-    public static final Function<PaperCard, String> FN_GET_NAME = new Function<PaperCard, String>() {
-        @Override
-        public String apply(final PaperCard from) {
-            return from.getName();
-        }
-    };
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
         this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false,

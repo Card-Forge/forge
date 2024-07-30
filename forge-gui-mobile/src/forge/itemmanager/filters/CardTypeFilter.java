@@ -55,6 +55,6 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
                 }
             };
         }
-        return Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
+        return Predicates.compose(Predicates.or(types), PaperCard::getRules);
     }
 }

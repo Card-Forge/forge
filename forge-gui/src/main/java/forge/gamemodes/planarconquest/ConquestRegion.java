@@ -131,7 +131,7 @@ public class ConquestRegion {
                     break;
                 case "colors":
                     colorSet = ColorSet.fromNames(value.toCharArray());
-                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard.FN_GET_RULES);
+                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard::getRules);
                     break;
                 case "sets":
                     final String[] sets = value.split(",");

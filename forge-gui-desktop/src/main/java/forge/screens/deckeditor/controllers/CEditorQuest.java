@@ -362,7 +362,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES);
+        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard::getRules);
         return getRemainingCardPool().getFilteredPool(commanderPredicate);
     }
 

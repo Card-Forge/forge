@@ -145,11 +145,11 @@ public class QuestUtilUnlockSets {
         List<CardEdition> options = new ArrayList<>();
 
         // Sort current sets by date
-        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions()::get));
         Collections.sort(allowedSets);
         
         // Sort unlockable sets by date
-        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions()::get));
         Collections.sort(excludedSets);
         
         // get a number of sets between an excluded and any included set

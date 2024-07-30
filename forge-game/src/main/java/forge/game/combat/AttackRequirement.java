@@ -7,7 +7,6 @@ import java.util.Map;
 import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -118,11 +117,5 @@ public class AttackRequirement {
     public List<Pair<GameEntity, Integer>> getSortedRequirements() {
         return MapToAmountUtil.sort(defenderSpecific);
     }
-    public static final Function<AttackRequirement, List<Pair<GameEntity, Integer>>> SORT = new Function<AttackRequirement, List<Pair<GameEntity,Integer>>>() {
-        @Override
-        public List<Pair<GameEntity,Integer>> apply(final AttackRequirement input) {
-            return input.getSortedRequirements();
-        }
-    };
 
 }

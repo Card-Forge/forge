@@ -788,7 +788,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
             Iterable<Entry<T, Integer>> items = pool;
             if (useFilter) {
-                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, (Function<Entry<T, Integer>, T>) Entry::getKey);
                 items = Iterables.filter(pool, pred);
             }
             model.addItems(items);

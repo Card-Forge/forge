@@ -30,7 +30,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         final String landType = sa.getParam("Clone");
         List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
         if ("BasicLand".equals(landType)) {
-            final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES);
+            final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules);
             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
         }
         // current color of source card
@@ -52,7 +52,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             public boolean apply(final String name) {
                 return landNames.contains(name);
             }
-        }, PaperCard.FN_GET_NAME);
+        }, PaperCard::getName);
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
         // get a random basic land
         Card random;

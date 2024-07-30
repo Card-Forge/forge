@@ -61,7 +61,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (sa.hasParam("OptionQuestion")) {
                 message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
-                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName());
+                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType::getTranslatedName), destination.getTranslatedName());
             }
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {

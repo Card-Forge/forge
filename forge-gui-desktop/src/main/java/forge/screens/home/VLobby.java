@@ -454,7 +454,7 @@ public class VLobby implements ILobbyView {
         }
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
+            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
             if (isCommanderDeck) {
                 getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
             } else {

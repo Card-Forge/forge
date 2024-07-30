@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
@@ -317,13 +316,6 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.name;
     }
 
-    public static final Function<GameFormat, String> FN_GET_NAME = new Function<GameFormat, String>() {
-        @Override
-        public String apply(GameFormat arg1) {
-            return arg1.getName();
-        }
-    };
-
     @Override
     public int compareTo(GameFormat other) {
         if (null == other) {
@@ -371,7 +363,7 @@ public class GameFormat implements Comparable<GameFormat> {
         }
         
         public Reader(File forgeFormats, File customFormats, boolean includeArchived) {
-            super(forgeFormats, customFormats, GameFormat.FN_GET_NAME);
+            super(forgeFormats, customFormats, GameFormat::getName);
             this.includeArchived=includeArchived;
         }
 

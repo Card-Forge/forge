@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
@@ -512,13 +511,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         // Original Art
         return releaseDate.compareTo(referenceReleaseDate) < 0;
     }
-
-    public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
-        @Override
-        public String apply(Deck arg1) {
-            return arg1.getName();
-        }
-    };
 
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()

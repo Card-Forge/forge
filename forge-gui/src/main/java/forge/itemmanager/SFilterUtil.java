@@ -51,7 +51,7 @@ public class SFilterUtil {
             try {
                 Predicate<CardRules> filter = expression.evaluate();
                 if (filter != null) {
-                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
+                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard::getRules);
                 }
             }
             catch (Exception ignored) {
@@ -74,7 +74,7 @@ public class SFilterUtil {
         }
         Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
 
-        return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
+        return Predicates.compose(textFilter, PaperCard::getRules);
     }
 
     private static List<String> getSplitText(String text) {

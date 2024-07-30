@@ -60,6 +60,6 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
                 }
             };
         }
-        return Predicates.compose(Predicates.or(cmcs), PaperCard.FN_GET_RULES);
+        return Predicates.compose(Predicates.or(cmcs), PaperCard::getRules);
     }
 }

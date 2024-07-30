@@ -116,7 +116,7 @@ public class AdvancedSearch {
                 return Keyword.getKeywordSet(input);
             }
         }),
-        CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+        CARD_SET("lblSet", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition::getCode) {
             @Override
             protected CardEdition getItemValue(PaperCard input) {
                 return FModel.getMagicDb().getCardEdition(input.getEdition());
@@ -285,7 +285,7 @@ public class AdvancedSearch {
                 return input.getRules().getManaCost().toString();
             }
         }),
-        CARD_RARITY("lblRarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+        CARD_RARITY("lblRarity", PaperCard.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<PaperCard, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity::getLongName, CardRarity::getLongName) {
             @Override
             protected CardRarity getItemValue(PaperCard input) {
                 return input.getRarity();
@@ -335,7 +335,7 @@ public class AdvancedSearch {
                 return Keyword.getKeywordSet((PaperCard)input);
             }
         }),
-        INVITEM_SET("lblSet", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition.FN_GET_CODE) {
+        INVITEM_SET("lblSet", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardEdition>(FModel.getMagicDb().getSortedEditions(), CardEdition::getCode) {
             @Override
             protected CardEdition getItemValue(InventoryItem input) {
                 if (input instanceof PaperCard) {
@@ -532,7 +532,7 @@ public class AdvancedSearch {
                 return cards.get(0) == input;
             }
         }),
-        INVITEM_RARITY("lblRarity", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity.FN_GET_LONG_NAME, CardRarity.FN_GET_LONG_NAME) {
+        INVITEM_RARITY("lblRarity", InventoryItem.class, FilterOperator.SINGLE_LIST_OPS, new CustomListEvaluator<InventoryItem, CardRarity>(Arrays.asList(CardRarity.FILTER_OPTIONS), CardRarity::getLongName, CardRarity::getLongName) {
             @Override
             protected CardRarity getItemValue(InventoryItem input) {
                 if (!(input instanceof PaperCard)) {
@@ -1340,7 +1340,7 @@ public class AdvancedSearch {
 
     private static abstract class ColorEvaluator<T extends InventoryItem> extends CustomListEvaluator<T, MagicColor.Color> {
         public ColorEvaluator() {
-            super(Arrays.asList(MagicColor.Color.values()), MagicColor.FN_GET_SYMBOL);
+            super(Arrays.asList(MagicColor.Color.values()), MagicColor.Color::getSymbol);
         }
 
         @Override

@@ -567,6 +567,6 @@ public enum DeckFormat {
             //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
             predicate = Predicates.or(predicate, CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
-        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
+        return Predicates.compose(predicate, PaperCard::getRules);
     }
 }

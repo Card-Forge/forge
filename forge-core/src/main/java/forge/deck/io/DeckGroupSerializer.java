@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.List;
 
+import forge.deck.DeckBase;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -45,7 +46,7 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
      * @param deckDir0 the deck dir0
      */
     public DeckGroupSerializer(final File deckDir0, String rootDir0) {
-        super(deckDir0, DeckGroup.FN_NAME_SELECTOR);
+        super(deckDir0, DeckBase::getName);
         rootDir = rootDir0;
     }
 

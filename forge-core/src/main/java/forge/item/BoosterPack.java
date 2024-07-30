@@ -20,7 +20,6 @@ package forge.item;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 
 import forge.ImageKeys;
@@ -33,28 +32,22 @@ public class BoosterPack extends SealedProduct {
     private final int artIndex;
     private final int hash;
 
-    public static final Function<CardEdition, BoosterPack> FN_FROM_SET = new Function<CardEdition, BoosterPack>() {
-        @Override
-        public BoosterPack apply(final CardEdition edition) {
-            String boosterKind = edition.getRandomBoosterKind();
-            Template d = edition.getBoosterTemplate(boosterKind);
-            StringBuilder sb = new StringBuilder(edition.getName());
-            sb.append(" ").append(boosterKind);
-            return new BoosterPack(sb.toString(), d);
-        }
-    };
+    public static BoosterPack fromSet(CardEdition edition) {
+        String boosterKind = edition.getRandomBoosterKind();
+        Template d = edition.getBoosterTemplate(boosterKind);
+        StringBuilder sb = new StringBuilder(edition.getName());
+        sb.append(" ").append(boosterKind);
+        return new BoosterPack(sb.toString(), d);
+    }
 
-    public static final Function<String, BoosterPack> FN_FROM_COLOR = new Function<String, BoosterPack>() {
-        @Override
-        public BoosterPack apply(final String color) {
-            return new BoosterPack(color, new Template("?", ImmutableList.of(
-                    Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 11),
-                    Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 3),
-                    Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
-                    Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")", 1))
-            ));
-        }
-    };
+    public static BoosterPack fromColor(final String color) {
+        return new BoosterPack(color, new Template("?", ImmutableList.of(
+                Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 11),
+                Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 3),
+                Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
+                Pair.of(BoosterSlots.LAND + ":color(\"" + color + "\")", 1))
+        ));
+    }
 
     public BoosterPack(final String name0, final Template boosterData) {
         super(name0, boosterData);

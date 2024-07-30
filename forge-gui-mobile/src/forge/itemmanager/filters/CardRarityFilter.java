@@ -20,7 +20,7 @@ public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
 
     @Override
     protected String getDisplayText(CardRarity value) {
-        return CardRarity.FN_GET_LONG_NAME.apply(value);
+        return value.getLongName();
     }
 
     @Override

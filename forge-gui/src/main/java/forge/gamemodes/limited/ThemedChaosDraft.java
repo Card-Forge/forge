@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
@@ -195,16 +194,9 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         return true;
     }
 
-    public static final Function<ThemedChaosDraft, String> FN_GET_TAG = new Function<ThemedChaosDraft, String>() {
-        @Override
-        public String apply(ThemedChaosDraft themedChaosBooster) {
-            return themedChaosBooster.getTag();
-        }
-    };
-
     public static class Reader extends StorageReaderFile<ThemedChaosDraft> {
         public Reader(String pathname) {
-            super(pathname, ThemedChaosDraft.FN_GET_TAG);
+            super(pathname, ThemedChaosDraft::getTag);
         }
 
         @Override

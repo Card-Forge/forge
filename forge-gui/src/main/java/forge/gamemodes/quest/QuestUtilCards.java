@@ -654,7 +654,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
+        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack::fromSet), count));
     }
 
     /**
@@ -669,7 +669,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
+        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack::fromSet), count));
     }
 
     private void generateBoosterBoxesInShop(final int count) {
@@ -701,7 +701,7 @@ public final class QuestUtilCards {
 
         List<BoosterBox> output = new ArrayList<>();
         for (CardEdition e : editions) {
-            output.add(BoosterBox.FN_FROM_SET.apply(e));
+            output.add(BoosterBox.fromSet(e));
         }
 
         questAssets.getShopList().addAllOfTypeFlat(output);
