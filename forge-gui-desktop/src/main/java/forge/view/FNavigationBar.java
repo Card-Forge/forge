@@ -499,7 +499,7 @@ public class FNavigationBar extends FTitleBarBase {
                 addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(final MouseEvent e) {
-                        if (!CloseButton.this.isEnabled()) { return; }
+                        if (!NavigationTab.CloseButton.this.isEnabled()) { return; }
                         if (SwingUtilities.isLeftMouseButton(e)) {
                             pressed = true;
                             repaintSelf();
@@ -517,7 +517,7 @@ public class FNavigationBar extends FTitleBarBase {
                     }
                     @Override
                     public void mouseEntered(final MouseEvent e) {
-                        if (!CloseButton.this.isEnabled()) { return; }
+                        if (!NavigationTab.CloseButton.this.isEnabled()) { return; }
                         hovered = true;
                         repaintSelf();
                     }
