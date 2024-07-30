@@ -13,6 +13,7 @@ ALTERNATE
 Name:Blackbloom Bog
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
-Oracle:Blackbloom Bog enters the battlefield tapped.\n{T}: Add {B}.
+Oracle:Blackbloom Bog enters tapped.\n{T}: Add {B}.

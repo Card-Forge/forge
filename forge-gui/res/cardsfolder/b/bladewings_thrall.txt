@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Zombie
 PT:3/3
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Dragon.YouCtrl | Description$ CARDNAME has flying as long as you control a Dragon.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When a Dragon enters the battlefield, you may return CARDNAME from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ When a Dragon enters, you may return CARDNAME from your graveyard to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:BuffedBy:Dragon
-Oracle:Bladewing's Thrall has flying as long as you control a Dragon.\nWhen a Dragon enters the battlefield, you may return Bladewing's Thrall from your graveyard to the battlefield.
+Oracle:Bladewing's Thrall has flying as long as you control a Dragon.\nWhen a Dragon enters, you may return Bladewing's Thrall from your graveyard to the battlefield.
