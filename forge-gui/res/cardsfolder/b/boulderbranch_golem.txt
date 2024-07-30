@@ -3,8 +3,8 @@ ManaCost:7
 Types:Artifact Creature Golem
 PT:6/5
 K:Prototype:3 G:3:3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain life equal to its power.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBGainLife | TriggerDescription$ When CARDNAME enters, you gain life equal to its power.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$CardPower
 DeckHas:Ability$LifeGain
-Oracle:Prototype {3}{G} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nWhen Boulderbranch Golem enters the battlefield, you gain life equal to its power.
+Oracle:Prototype {3}{G} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nWhen Boulderbranch Golem enters, you gain life equal to its power.

@@ -2,7 +2,7 @@ Name:Bomat Bazaar Barge
 ManaCost:4
 Types:Artifact Vehicle
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1
 K:Crew:3
-Oracle:When Bomat Bazaar Barge enters the battlefield, draw a card.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
+Oracle:When Bomat Bazaar Barge enters, draw a card.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)
