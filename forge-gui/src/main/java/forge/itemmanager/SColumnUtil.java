@@ -148,6 +148,7 @@ public final class SColumnUtil {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.FAVORITE);
         colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.ATTRACTION_LIGHTS);
         colDefs.add(ColumnDef.RARITY);
         colDefs.add(ColumnDef.SET);
         colDefs.add(ColumnDef.COLLECTOR_ORDER);

@@ -178,7 +178,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0) {
         this(rules0, edition0, rarity0, IPaperCard.DEFAULT_ART_INDEX, false,
-                IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME, "");
+                IPaperCard.NO_COLLECTOR_NUMBER, IPaperCard.NO_ARTIST_NAME, IPaperCard.NO_FUNCTIONAL_VARIANT);
     }
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
@@ -415,6 +415,29 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         CardSplitType cst = this.rules.getSplitType();
         return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld
                 || cst == CardSplitType.Modal;
+    }
+
+    @Override
+    public ICardFace getMainFace() {
+        ICardFace face = this.rules.getMainPart();
+        return this.getVariantForFace(face);
+    }
+
+    @Override
+    public ICardFace getOtherFace() {
+        ICardFace face = this.rules.getOtherPart();
+        return this.getVariantForFace(face);
+    }
+
+    private ICardFace getVariantForFace(ICardFace face) {
+        if(!face.hasFunctionalVariants() || this.functionalVariant.equals(NO_FUNCTIONAL_VARIANT))
+            return face;
+        ICardFace variant = face.getFunctionalVariant(this.functionalVariant);
+        if(variant == null) {
+            System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), this.functionalVariant);
+            return face;
+        }
+        return variant;
     }
 
     // Return true if card is one of the five basic lands that can be added for free
