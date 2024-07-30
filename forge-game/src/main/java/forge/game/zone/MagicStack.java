@@ -353,6 +353,40 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(lki);
             sp.getActivatingPlayer().addSpellCastThisTurn();
+
+            // Add expend mana
+            Map<Player, Integer> players = Maps.newHashMap();
+
+            for(SpellAbility sa : sp.getPayingManaAbilities()) {
+                // This section has some complications that may need to be addressed
+                // How do we differentiate mana paid from Assist
+                // With mana created by opposing effects like Eladamri's Vineyard OR Yurlok of Scorch Thrash
+                Player manaPayer = sa.getActivatingPlayer();
+                if (!players.containsKey(manaPayer)) {
+                    players.put(manaPayer, 0);
+                }
+
+                players.put(manaPayer, players.get(manaPayer) + sa.getManaPart().getLastManaProduced().size());
+            }
+
+            for(Entry<Player, Integer> entry : players.entrySet()) {
+                Player manaPayer = entry.getKey();
+                int startingMana =  manaPayer.getExpentThisTurn();
+                int totalMana = startingMana + entry.getValue();
+
+                if (totalMana == 0) {
+                    continue;
+                }
+
+                manaPayer.setExpentThisTurn(totalMana);
+                for(int i = startingMana + 1; i <= totalMana; i++) {
+                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(source.getController());
+                    expendParams.put(AbilityKey.Player, manaPayer);
+                    expendParams.put(AbilityKey.SpellAbility, sp);
+                    expendParams.put(AbilityKey.Amount, i);
+                    game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
+                }
+            }
         }
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());

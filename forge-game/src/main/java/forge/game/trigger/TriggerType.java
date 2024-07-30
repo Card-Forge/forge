@@ -1,10 +1,10 @@
 package forge.game.trigger;
 
+import forge.game.card.Card;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-
-import forge.game.card.Card;
 
 
 /**
@@ -95,6 +95,7 @@ public enum TriggerType {
     LifeLostAll(TriggerLifeLostAll.class),
     LosesGame(TriggerLosesGame.class),
     ManaAdded(TriggerManaAdded.class),
+    ManaExpend(TriggerManaExpend.class),
     Mentored(TriggerMentored.class),
     Milled(TriggerMilled.class),
     MilledOnce(TriggerMilledOnce.class),

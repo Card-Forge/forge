@@ -194,6 +194,7 @@ public class GameSnapshot {
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
         newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
+        newPlayer.setExpentThisTurn(origPlayer.getExpentThisTurn());
         for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
             newPlayer.addSpellCastThisTurn();
         }
