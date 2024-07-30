@@ -355,21 +355,17 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().addSpellCastThisTurn();
 
             // Add expend mana
-            Map<Player, Integer> players = Maps.newHashMap();
+            Map<Player, Integer> expendPlayers = Maps.newHashMap();
 
-            for(SpellAbility sa : sp.getPayingManaAbilities()) {
-                // This section has some complications that may need to be addressed
-                // How do we differentiate mana paid from Assist
-                // With mana created by opposing effects like Eladamri's Vineyard OR Yurlok of Scorch Thrash
-                Player manaPayer = sa.getActivatingPlayer();
-                if (!players.containsKey(manaPayer)) {
-                    players.put(manaPayer, 0);
-                }
+            for (Mana m : sp.getPayingMana()) {
+                // TODO this currently assumes that all mana came from your own pool
+                // but with Assist some might belong to another player instead
+                Player manaPayer = sp.getActivatingPlayer();
 
-                players.put(manaPayer, players.get(manaPayer) + sa.getManaPart().getLastManaProduced().size());
+                expendPlayers.put(manaPayer, expendPlayers.getOrDefault(manaPayer, 0) + 1);
             }
 
-            for(Entry<Player, Integer> entry : players.entrySet()) {
+            for (Entry<Player, Integer> entry : expendPlayers.entrySet()) {
                 Player manaPayer = entry.getKey();
                 int startingMana =  manaPayer.getExpentThisTurn();
                 int totalMana = startingMana + entry.getValue();
@@ -380,8 +376,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
                 manaPayer.setExpentThisTurn(totalMana);
                 for(int i = startingMana + 1; i <= totalMana; i++) {
-                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(source.getController());
-                    expendParams.put(AbilityKey.Player, manaPayer);
+                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(manaPayer);
                     expendParams.put(AbilityKey.SpellAbility, sp);
                     expendParams.put(AbilityKey.Amount, i);
                     game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
