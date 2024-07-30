@@ -157,7 +157,7 @@ public class PlayAi extends SpellAbilityAi {
                     if (!sa.matchesValidParam("ValidSA", s)) {
                         continue;
                     }
-                    if (s instanceof LandAbility) {
+                    if (s.isLandAbility()) {
                         // might want to run some checks here but it's rare anyway
                         return true;
                     }

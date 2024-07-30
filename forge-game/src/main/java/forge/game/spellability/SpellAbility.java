@@ -536,6 +536,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
     public boolean isActivatedAbility() { return false; }
+    public boolean isLandAbility() { return false; }
 
     public boolean isTurnFaceUp() {
         return isMorphUp() || isDisguiseUp() || isManifestUp() || isCloakUp();
@@ -2192,7 +2193,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
         else if (incR[0].contains("LandAbility")) {
-            if (!(root instanceof LandAbility)) {
+            if (!(root.isLandAbility())) {
                 return testFailed;
             }
         }
@@ -2551,7 +2552,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (getRestrictions().isInstantSpeed()) {
             return true;
         }
-        if ((isSpell() || this instanceof LandAbility) && (isCastFromPlayEffect() || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
+        if ((isSpell() || this.isLandAbility()) && (isCastFromPlayEffect() || host.isInstant() || host.hasKeyword(Keyword.FLASH))) {
             return true;
         }
 
@@ -2594,5 +2595,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isCounterableBy(SpellAbility sa) {
         return true;
+    }
+
+    public Card getAlternateHost(Card source) {
+        return null;
     }
 }
