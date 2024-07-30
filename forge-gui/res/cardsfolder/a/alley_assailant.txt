@@ -3,7 +3,8 @@ ManaCost:2 B
 Types:Creature Vampire Rogue
 PT:3/3
 K:Disguise:4 B B
-K:CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target opponent loses 3 life and you gain 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 3 | SubAbility$ DBGain
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ 3
