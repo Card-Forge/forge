@@ -65,16 +65,12 @@ public class CardLists {
         return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
     }
   
-    public static final Comparator<Card> ToughnessComparator = (a, b) -> a.getNetToughness() - b.getNetToughness();
-    public static final Comparator<Card> ToughnessComparatorInv = (a, b) -> b.getNetToughness() - a.getNetToughness();
-    public static final Comparator<Card> PowerComparator = (a, b) -> a.getNetCombatDamage() - b.getNetCombatDamage();
-    public static final Comparator<Card> CmcComparatorInv = (a, b) -> b.getCMC() - a.getCMC();
+    public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
+    public static final Comparator<Card> ToughnessComparatorInv = Comparator.comparingInt(Card::getNetToughness).reversed();
+    public static final Comparator<Card> PowerComparator = Comparator.comparingInt(Card::getNetCombatDamage);
+    public static final Comparator<Card> CmcComparatorInv = Comparator.<Card>comparingInt(Card::getCMC).reversed();
 
-    public static final Comparator<Card> TextLenComparator = (a, b) -> {
-        final int aLen = a.getView().getText().length();
-        final int bLen = b.getView().getText().length();
-        return aLen - bLen;
-    };
+    public static final Comparator<Card> TextLenComparator = Comparator.comparingInt(a -> a.getView().getText().length());
 
     /**
      * <p>

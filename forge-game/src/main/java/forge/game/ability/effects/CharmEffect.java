@@ -269,7 +269,7 @@ public class CharmEffect extends SpellAbilityEffect {
         }
 
         // Sort Chosen by SA order
-        chosen.sort((o1, o2) -> Integer.compare(o1.getSVarInt("CharmOrder"), o2.getSVarInt("CharmOrder")));
+        chosen.sort(Comparator.comparingInt(o -> o.getSVarInt("CharmOrder")));
 
         for (AbilitySub sub : chosen) {
             // Clone the chosen, just in case the same subAb gets chosen multiple times

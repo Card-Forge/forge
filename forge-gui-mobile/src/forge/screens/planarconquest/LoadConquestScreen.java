@@ -305,7 +305,7 @@ public class LoadConquestScreen extends LaunchScreen {
         public void setConquests(List<ConquestData> qd0) {
             List<ConquestData> sorted = new ArrayList<>();
             sorted.addAll(qd0);
-            Collections.sort(sorted, (x, y) -> x.getName().toLowerCase().compareTo(y.getName().toLowerCase()));
+            Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

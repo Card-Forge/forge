@@ -804,7 +804,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return set == null ? "" : set.getCode2();
         }
 
-        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = (c1, c2) -> Collection.this.get(c1.getEdition()).compareTo(Collection.this.get(c2.getEdition()));
+        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = Comparator.comparing(c -> Collection.this.get(c.getEdition()));
 
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
             return new StorageReaderBase<SealedProduct.Template>(null) {

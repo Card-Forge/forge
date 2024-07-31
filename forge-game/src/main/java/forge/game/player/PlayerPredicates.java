@@ -81,20 +81,19 @@ public final class PlayerPredicates {
     }
 
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
-        return (arg0, arg1) -> Integer.compare(arg0.getCardsIn(zone).size(), arg1.getCardsIn(zone).size());
+        return Comparator.comparingInt(arg0 -> arg0.getCardsIn(zone).size());
     }
     
     public static final Comparator<Player> compareByZoneSize(final ZoneType zone, final Predicate<Card> pred) {
-        return (arg0, arg1) -> Integer.compare(CardLists.count(arg0.getCardsIn(zone), pred),
-                CardLists.count(arg1.getCardsIn(zone), pred));
+        return Comparator.comparingInt(arg0 -> CardLists.count(arg0.getCardsIn(zone), pred));
     }
     
     public static final Comparator<Player> compareByLife() {
-        return (arg0, arg1) -> Integer.compare(arg0.getLife(), arg1.getLife());
+        return Comparator.comparingInt(Player::getLife);
     }
     
     public static final Comparator<Player> compareByPoison() {
-        return (arg0, arg1) -> Integer.compare(arg0.getPoisonCounters(), arg1.getPoisonCounters());
+        return Comparator.comparingInt(Player::getPoisonCounters);
     }
 
     public static final Predicate<Player> NOT_LOST = p -> p.getOutcome() == null || p.getOutcome().hasWon();

@@ -965,7 +965,7 @@ public class ComputerUtilCard {
             if (color.hasGreen()) map.get(4).setValue(map.get(4).getValue() + 1);
         }
 
-        Collections.sort(map, (o1, o2) -> o2.getValue() - o1.getValue());
+        Collections.sort(map, Comparator.<Pair<Byte, Integer>>comparingInt(Pair::getValue).reversed());
 
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);

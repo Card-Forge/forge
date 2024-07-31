@@ -126,7 +126,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        orderedCards.sort((card1, card2) -> Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2)));
+        orderedCards.sort(Comparator.comparingInt(manaCardMap::get));
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.print("Ordered Cards: " + orderedCards.size());
@@ -1062,7 +1062,7 @@ public class ComputerUtilMana {
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
         List<ManaCostShard> shardsToPay = Lists.newArrayList(cost.getDistinctShards());
         // optimize order so that the shards with less available sources are considered first
-        shardsToPay.sort((shard1, shard2) -> sourcesForShards.get(shard1).size() - sourcesForShards.get(shard2).size());
+        shardsToPay.sort(Comparator.comparingInt(shard -> sourcesForShards.get(shard).size()));
         // mind the priorities
         // * Pay mono-colored first
         // * Pay 2/C with matching colors

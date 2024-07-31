@@ -134,7 +134,7 @@ public final class MapToAmountUtil {
         for (final Entry<T, Integer> entry : map.entrySet()) {
             entries.add(Pair.of(entry.getKey(), entry.getValue()));
         }
-        Collections.sort(entries, (Comparator<Entry<T, Integer>>) (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+        Collections.sort(entries, Entry.comparingByValue());
         return entries;
     }
 

@@ -156,7 +156,7 @@ public class SpellSmithScene extends UIScene {
             if (configData.allowedEditions != null)
                 return Arrays.asList(configData.allowedEditions).contains(input.getCode());
             return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
-        }).sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(CardEdition::getName)).collect(Collectors.toList());
     }
 
     public boolean done() {

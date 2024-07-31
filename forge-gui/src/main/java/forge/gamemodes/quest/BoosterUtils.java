@@ -580,8 +580,8 @@ public final class BoosterUtils {
 
     public static void sort(List<PaperCard> cards) {
         //sort cards alphabetically so colors appear together and rares appear on top
-        Collections.sort(cards, (c1, c2) -> c1.getName().compareTo(c2.getName()));
-        Collections.sort(cards, (c1, c2) -> c1.getRules().getColor().compareTo(c2.getRules().getColor()));
-        Collections.sort(cards, (c1, c2) -> c2.getRarity().compareTo(c1.getRarity()));
+        Collections.sort(cards, Comparator.comparing(PaperCard::getName));
+        Collections.sort(cards, Comparator.comparing(c -> c.getRules().getColor()));
+        Collections.sort(cards, Comparator.comparing(PaperCard::getRarity).reversed());
     }
 }

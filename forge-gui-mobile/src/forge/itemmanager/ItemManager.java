@@ -17,13 +17,7 @@
  */
 package forge.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
@@ -213,7 +207,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 cols.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(cols, (arg0, arg1) -> Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex()));
+        Collections.sort(cols, Comparator.comparingInt(arg0 -> arg0.getConfig().getIndex()));
 
         sortCols.clear();
         if (cbxSortOptions != null) {

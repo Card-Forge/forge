@@ -241,8 +241,7 @@ public final class CardPredicates {
     }
 
     public static final Comparator<Card> compareByCounterType(final CounterType type) {
-        return (arg0, arg1) -> Integer.compare(arg0.getCounters(type),
-            arg1.getCounters(type));
+        return Comparator.comparingInt(arg0 -> arg0.getCounters(type));
     }
     public static final Comparator<Card> compareByCounterType(final CounterEnumType type) {
         return compareByCounterType(CounterType.get(type));
@@ -257,7 +256,7 @@ public final class CardPredicates {
     }
 
     public static final Comparator<Card> compareByGameTimestamp() {
-        return (arg0, arg1) -> Long.compare(arg0.getGameTimestamp(), arg1.getGameTimestamp());
+        return Comparator.comparingLong(Card::getGameTimestamp);
     }
 
     public static final Predicate<Card> inZone(final ZoneType zt) {

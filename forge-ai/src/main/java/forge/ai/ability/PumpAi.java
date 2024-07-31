@@ -804,13 +804,11 @@ public class PumpAi extends PumpAiBase {
             }
             values.keySet().removeAll(toRemove);
 
-            // JAVA 1.8 use Map.Entry.comparingByValue()
-            data.put(opp, Collections.max(values.entrySet(), (o1, o2) -> o1.getValue() - o2.getValue()));
+            data.put(opp, Collections.max(values.entrySet(), Map.Entry.comparingByValue()));
         }
 
         if (!data.isEmpty()) {
-            // JAVA 1.8 use Map.Entry.comparingByValue() somehow
-            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), (o1, o2) -> o1.getValue().getValue() - o2.getValue().getValue());
+            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), Comparator.comparingInt(o -> o.getValue().getValue()));
 
             // filter list again by the opponent and a creature of the wanted name that can be targeted
             list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
