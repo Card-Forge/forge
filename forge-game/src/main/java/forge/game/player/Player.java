@@ -100,6 +100,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
     private int committedCrimeThisTurn;
+    private int expentThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
@@ -2529,6 +2530,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
+        setExpentThisTurn(0);
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
@@ -3834,6 +3836,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public int getExpentThisTurn() {
+        return expentThisTurn;
+    }
+    public void setExpentThisTurn(int v) {
+        expentThisTurn = v;
     }
 
     public void visitAttractions(int light) {

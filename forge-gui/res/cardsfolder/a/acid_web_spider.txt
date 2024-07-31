@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Creature Spider
 PT:3/5
 K:Reach
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target Equipment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target Equipment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Equipment | TgtPrompt$ Choose target equipment.
 SVar:PlayMain1:TRUE
-Oracle:Reach\nWhen Acid Web Spider enters the battlefield, you may destroy target Equipment.
+Oracle:Reach\nWhen Acid Web Spider enters, you may destroy target Equipment.
