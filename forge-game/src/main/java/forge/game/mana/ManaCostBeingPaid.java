@@ -260,7 +260,7 @@ public class ManaCostBeingPaid {
     public final void increaseShard(final ManaCostShard shard, final int toAdd) {
         increaseShard(shard, toAdd, false);
     }
-    private final void increaseShard(final ManaCostShard shard, final int toAdd, final boolean forX) {
+    private void increaseShard(final ManaCostShard shard, final int toAdd, final boolean forX) {
         if (toAdd <= 0) { return; }
 
         ShardCount sc = unpaidShards.get(shard);

@@ -1065,7 +1065,7 @@ public class PlayerPanel extends FContainer {
     
     private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
     private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblFantasy"), Forge.getLocalizer().getInstance().getMessage("lblGeneric"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private final void getNewName(final Callback<String> callback) {
+    private void getNewName(final Callback<String> callback) {
         final String title = Forge.getLocalizer().getMessage("lblGetNewRandomName");
         final String message = Forge.getLocalizer().getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;

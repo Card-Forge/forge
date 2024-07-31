@@ -755,7 +755,7 @@ public class AiAttackController {
         return false;
     }
 
-    private final Pair<Integer, Integer> getDamageFromBlockingTramplers(final List<Card> blockedAttackers, final List<Card> blockers, final int myFreeMana) {
+    private Pair<Integer, Integer> getDamageFromBlockingTramplers(final List<Card> blockedAttackers, final List<Card> blockers, final int myFreeMana) {
         int currentAttackTax = 0;
         int trampleDamage = 0;
         CardCollection remainingBlockers = new CardCollection(blockers);
@@ -782,7 +782,7 @@ public class AiAttackController {
         return Pair.of(trampleDamage, currentAttackTax);
     }
 
-    private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
+    private GameEntity chooseDefender(final Combat c, final boolean bAssault) {
         final FCollectionView<GameEntity> defs = c.getDefenders();
         if (defs.size() == 1) {
             return defs.getFirst();

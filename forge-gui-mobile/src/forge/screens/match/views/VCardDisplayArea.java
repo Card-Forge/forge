@@ -134,7 +134,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         }
     }
 
-    private final int addCards(CardAreaPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
+    private int addCards(CardAreaPanel cardPanel, float x, float y, float cardWidth, float cardHeight) {
         int totalCount = 0;
         List<CardAreaPanel> attachedPanels = cardPanel.getAttachedPanels();
         if (!attachedPanels.isEmpty()) {

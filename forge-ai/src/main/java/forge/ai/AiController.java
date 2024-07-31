@@ -1518,7 +1518,7 @@ public class AiController {
         return true;
     }
 
-    private final SpellAbility getSpellAbilityToPlay() {
+    private SpellAbility getSpellAbilityToPlay() {
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> saList = Lists.newArrayList();

@@ -117,7 +117,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *
      * @return the applicable layers.
      */
-    private final Set<StaticAbilityLayer> generateLayer() {
+    private Set<StaticAbilityLayer> generateLayer() {
         if (!checkMode("Continuous")) {
             return EnumSet.noneOf(StaticAbilityLayer.class);
         }

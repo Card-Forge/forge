@@ -248,7 +248,7 @@ public class PlayerPanel extends FPanel {
         updateVariantControlsVisibility();
     }
 
-    private final FMouseAdapter radioMouseAdapter(final FRadioButton source, final LobbySlotType type) {
+    private FMouseAdapter radioMouseAdapter(final FRadioButton source, final LobbySlotType type) {
         return new FMouseAdapter() {
             @Override public void onLeftClick(final MouseEvent e) {
                 if (!source.isEnabled()) {

@@ -194,11 +194,11 @@ public class AttackConstraints {
         return MapToAmountUtil.min(possible);
     }
 
-    private final FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
+    private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
         return new FCollection<>
                 (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
     }
-    private final List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
+    private List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
         final List<Map<Card, GameEntity>> result = Lists.newLinkedList();
 
         int localMaximum = maximum;
@@ -340,7 +340,7 @@ public class AttackConstraints {
         }
     }
 
-    private final List<Attack> getSortedFilteredRequirements() {
+    private List<Attack> getSortedFilteredRequirements() {
         final List<Attack> result = Lists.newArrayList();
         final Map<Card, List<Pair<GameEntity, Integer>>> sortedRequirements = Maps.transformValues(requirements, AttackRequirement::getSortedRequirements);
         for (final Entry<Card, List<Pair<GameEntity, Integer>>> reqList : sortedRequirements.entrySet()) {

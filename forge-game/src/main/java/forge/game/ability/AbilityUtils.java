@@ -3024,7 +3024,7 @@ public class AbilityUtils {
     public static final String applyDescriptionTextChangeEffects(final String def, final Card card) {
         return applyTextChangeEffects(def, card, true);
     }
-    private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+    private static String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
         return applyTextChangeEffects(def, isDescriptive, card.getChangedTextColorWords(), card.getChangedTextTypeWords());
     }
 
@@ -3064,7 +3064,7 @@ public class AbilityUtils {
         return replaced;
     }
 
-    private static final String getReplacedText(final String text, final String originalWord, String newWord, final boolean isDescriptive) {
+    private static String getReplacedText(final String text, final String originalWord, String newWord, final boolean isDescriptive) {
         if (isDescriptive) {
             newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
