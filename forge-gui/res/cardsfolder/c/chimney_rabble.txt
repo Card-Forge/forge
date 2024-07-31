@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Creature Phyrexian Goblin Warrior
 PT:3/3
 K:Haste
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Phyrexian Goblin creature token.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 red Phyrexian Goblin creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_phyrexian_goblin
 DeckHas:Ability$Token
-Oracle:Haste\nWhen Chimney Rabble enters the battlefield, create a 1/1 red Phyrexian Goblin creature token.
+Oracle:Haste\nWhen Chimney Rabble enters, create a 1/1 red Phyrexian Goblin creature token.

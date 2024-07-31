@@ -9,4 +9,4 @@ SVar:DBPopulate:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$
 SVar:DBProliferate:DB$ Proliferate | SpellDescription$ Proliferate.
 DeckHas:Ability$Counters|Token|Proliferate
 DeckHints:Ability$Token
-Oracle:Fabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)\nOther nontoken creatures you control have fabricate 1.\n{2}, {T}: Choose one —\n• Populate.\n• Proliferate.
+Oracle:Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)\nOther nontoken creatures you control have fabricate 1.\n{2}, {T}: Choose one —\n• Populate.\n• Proliferate.
