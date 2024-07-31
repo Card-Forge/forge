@@ -8,7 +8,7 @@ SVar:Aurify:DB$ Animate | IsPresent$ Card.Self | Types$ Aura | OverwriteSpells$ 
 SVar:NewAttach:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature.IsRemembered | AILogic$ Pump
 SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigSacrifice | RememberObjects$ RememberedLKI | TriggerDescription$ When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
 SVar:NecromAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBDelay
-SVar:TrigSacrifice:DB$ Destroy | Sacrifice$ True | Defined$ DelayTriggerRememberedLKI
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlayVar:Y GE1
