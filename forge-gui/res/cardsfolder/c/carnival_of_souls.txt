@@ -1,8 +1,8 @@
 Name:Carnival of Souls
 ManaCost:1 B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature enters the battlefield, you lose 1 life and add {B}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature enters, you lose 1 life and add {B}.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | Produced$ B
 AI:RemoveDeck:Random
-Oracle:Whenever a creature enters the battlefield, you lose 1 life and add {B}.
+Oracle:Whenever a creature enters, you lose 1 life and add {B}.

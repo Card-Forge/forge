@@ -2,9 +2,9 @@ Name:Captain of the Mists
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another Human enters the battlefield under your control, untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another Human you control enters, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 A:AB$ TapOrUntap | Cost$ 1 U T | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | SpellDescription$ You may tap or untap target permanent.
 AI:RemoveDeck:All
 SVar:NonCombatPriority:7
-Oracle:Whenever another Human enters the battlefield under your control, untap Captain of the Mists.\n{1}{U}, {T}: You may tap or untap target permanent.
+Oracle:Whenever another Human you control enters, untap Captain of the Mists.\n{1}{U}, {T}: You may tap or untap target permanent.

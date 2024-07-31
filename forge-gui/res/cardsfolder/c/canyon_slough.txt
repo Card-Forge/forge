@@ -1,6 +1,7 @@
 Name:Canyon Slough
 ManaCost:no cost
 Types:Land Swamp Mountain
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Cycling:2
-Oracle:({T}: Add {B} or {R}.)\nCanyon Slough enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)
+Oracle:({T}: Add {B} or {R}.)\nCanyon Slough enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)
