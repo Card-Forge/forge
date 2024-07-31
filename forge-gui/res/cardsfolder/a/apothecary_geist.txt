@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Spirit
 PT:2/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | IsPresent$ Spirit.Other+YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Spirit, gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | IsPresent$ Spirit.Other+YouCtrl | TriggerDescription$ When CARDNAME enters, if you control another Spirit, gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 DeckHints:Type$Spirit
-Oracle:Flying\nWhen Apothecary Geist enters the battlefield, if you control another Spirit, you gain 3 life.
+Oracle:Flying\nWhen Apothecary Geist enters, if you control another Spirit, you gain 3 life.
