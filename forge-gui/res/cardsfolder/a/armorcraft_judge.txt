@@ -2,8 +2,8 @@ Name:Armorcraft Judge
 ManaCost:3 G
 Types:Creature Elf Artificer
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each creature you control with a +1/+1 counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card for each creature you control with a +1/+1 counter on it.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Valid Creature.YouCtrl+counters_GE1_P1P1
 DeckHints:Ability$Counters
-Oracle:When Armorcraft Judge enters the battlefield, draw a card for each creature you control with a +1/+1 counter on it.
+Oracle:When Armorcraft Judge enters, draw a card for each creature you control with a +1/+1 counter on it.
