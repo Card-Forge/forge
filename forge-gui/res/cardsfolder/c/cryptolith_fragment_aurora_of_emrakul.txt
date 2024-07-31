@@ -1,14 +1,15 @@
 Name:Cryptolith Fragment
 ManaCost:3
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBPain | SpellDescription$ Add one mana of any color. Each player loses 1 life.
 SVar:DBPain:DB$ LoseLife | LifeAmount$ 1 | Defined$ Player
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ LE10 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your upkeep, if each player has 10 or less life, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
 SVar:X:PlayerCountPlayers$HighestLifeTotal
 AlternateMode:DoubleFaced
-Oracle:Cryptolith Fragment enters the battlefield tapped.\n{T}: Add one mana of any color. Each player loses 1 life.\nAt the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
+Oracle:Cryptolith Fragment enters tapped.\n{T}: Add one mana of any color. Each player loses 1 life.\nAt the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
 
 ALTERNATE
 
