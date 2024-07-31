@@ -258,12 +258,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         this.getBtnRemove4().setText("Sell all extras");
         this.getBtnRemove4().setToolTipText("Sell unneeded extra copies of all cards");
-        this.getBtnRemove4().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                QuestSpellShop.sellExtras(getCatalogManager(), getDeckManager());
-                updateCreditsLabel();
-            }
+        this.getBtnRemove4().setCommand((UiCommand) () -> {
+            QuestSpellShop.sellExtras(getCatalogManager(), getDeckManager());
+            updateCreditsLabel();
         });
 
         this.getDeckManager().getPnlButtons().add(creditsLabel, "gap 5px");

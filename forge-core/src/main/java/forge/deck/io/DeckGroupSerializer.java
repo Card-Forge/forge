@@ -123,16 +123,12 @@ public class DeckGroupSerializer extends StorageReaderFolder<DeckGroup> implemen
      */
     @Override
     protected FilenameFilter getFileFilter() {
-        return new FilenameFilter() {
-
-            @Override
-            public boolean accept(final File dir, final String name) {
-                final File testSubject = new File(dir, name);
-                final boolean isVisibleFolder = testSubject.isDirectory() && !testSubject.isHidden();
-                final boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
-                final File fileHumanDeck = new File(testSubject, DeckGroupSerializer.humanDeckFile);
-                return isVisibleFolder && hasGoodName && fileHumanDeck.exists();
-            }
+        return (dir, name) -> {
+            final File testSubject = new File(dir, name);
+            final boolean isVisibleFolder = testSubject.isDirectory() && !testSubject.isHidden();
+            final boolean hasGoodName = StringUtils.isNotEmpty(name) && !name.startsWith(".");
+            final File fileHumanDeck = new File(testSubject, DeckGroupSerializer.humanDeckFile);
+            return isVisibleFolder && hasGoodName && fileHumanDeck.exists();
         };
     }
 

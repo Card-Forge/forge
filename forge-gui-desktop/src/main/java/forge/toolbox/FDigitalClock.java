@@ -26,12 +26,9 @@ public class FDigitalClock extends SkinnedLabel {
     public FDigitalClock() {
         clocks.add(this);
         if (timer == null) {
-            timer = new Timer(60000, new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    now.add(Calendar.MINUTE, 1);
-                    updateTimeDisplay();
-                }
+            timer = new Timer(60000, e -> {
+                now.add(Calendar.MINUTE, 1);
+                updateTimeDisplay();
             });
             updateTimeDisplay();
             //ensure timer starts when current minute ends

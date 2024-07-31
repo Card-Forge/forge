@@ -25,14 +25,11 @@ public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
 
     @Override
     protected Predicate<PaperCard> buildPredicate() {
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input) {
-                if (filterValue == null) {
-                    return true;
-                }
-                return input.getRarity() == filterValue;
+        return input -> {
+            if (filterValue == null) {
+                return true;
             }
+            return input.getRarity() == filterValue;
         };
     }
 }

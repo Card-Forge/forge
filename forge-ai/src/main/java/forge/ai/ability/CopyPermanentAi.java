@@ -176,12 +176,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                     }
                 }
 
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer);
-                    }
-                });
+                list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
                 if (Iterables.any(list, Presets.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {

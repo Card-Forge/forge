@@ -55,12 +55,7 @@ public final class CardOverlaysMenu {
     }
 
     private ActionListener getShowOverlaysAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleCardOverlayDisplay((JMenuItem)e.getSource());
-            }
-        };
+        return e -> toggleCardOverlayDisplay((JMenuItem)e.getSource());
     }
 
     private void toggleCardOverlayDisplay(JMenuItem showMenu) {
@@ -84,13 +79,9 @@ public final class CardOverlaysMenu {
     }
 
     private ActionListener getCardOverlaysAction(final FPref overlaySetting) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleOverlaySetting(overlaySetting);
-                repaintCardOverlays();
-            }
-
+        return e -> {
+            toggleOverlaySetting(overlaySetting);
+            repaintCardOverlays();
         };
     }
 

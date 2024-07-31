@@ -108,12 +108,9 @@ public enum CCurrentDeck implements ICDoc {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         try {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
-                    VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
-                }
+            SwingUtilities.invokeLater(() -> {
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+                VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
             });
         } catch (final Exception ex) {
             //BugReporter.reportException(ex);

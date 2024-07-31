@@ -160,12 +160,7 @@ public class MillAi extends SpellAbilityAi {
 
             // select Player which would cause the most damage
             // JAVA 1.8 use Map.Entry.comparingByValue()
-            Map.Entry<Player, Integer> max = Collections.max(list.entrySet(), new Comparator<Map.Entry<Player,Integer>>(){
-                @Override
-                public int compare(Map.Entry<Player, Integer> o1, Map.Entry<Player, Integer> o2) {
-                    return o1.getValue() - o2.getValue();
-                }
-            });
+            Map.Entry<Player, Integer> max = Collections.max(list.entrySet(), (o1, o2) -> o1.getValue() - o2.getValue());
 
             sa.getTargets().add(max.getKey());
         }

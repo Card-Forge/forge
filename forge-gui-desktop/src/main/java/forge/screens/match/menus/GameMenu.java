@@ -66,12 +66,7 @@ public final class GameMenu {
         return menuItem;
     }
     private static ActionListener getSoundEffectsAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                toggleGameSoundEffects();
-            }
-        };
+        return e -> toggleGameSoundEffects();
     }
     private static void toggleGameSoundEffects() {
         final boolean isSoundEffectsEnabled = !prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS);
@@ -88,12 +83,7 @@ public final class GameMenu {
     }
 
     private ActionListener getUndoAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                matchUI.getGameController().undoLastAction();
-            }
-        };
+        return e -> matchUI.getGameController().undoLastAction();
     }
 
     private SkinnedMenuItem getMenuItem_Concede() {
@@ -105,12 +95,7 @@ public final class GameMenu {
     }
 
     private ActionListener getConcedeAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                matchUI.concede();
-            }
-        };
+        return e -> matchUI.concede();
     }
 
     private SkinnedMenuItem getMenuItem_AlphaStrike() {
@@ -123,12 +108,7 @@ public final class GameMenu {
     }
 
     private ActionListener getAlphaStrikeAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                matchUI.getGameController().alphaStrike();
-            }
-        };
+        return e -> matchUI.getGameController().alphaStrike();
     }
 
     private SkinnedMenuItem getMenuItem_EndTurn() {
@@ -141,12 +121,7 @@ public final class GameMenu {
     }
 
     private ActionListener getEndTurnAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                matchUI.getGameController().passPriorityUntilEndOfTurn();
-            }
-        };
+        return e -> matchUI.getGameController().passPriorityUntilEndOfTurn();
     }
 
     private SkinnedMenu getMenuItem_TargetingArcs() {
@@ -190,14 +165,11 @@ public final class GameMenu {
     }
 
     private ActionListener getTargetingRadioButtonAction(final ArcState arcState) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
-                prefs.save();
-                matchUI.getCDock().setArcState(arcState);
-                setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
-            }
+        return e -> {
+            prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
+            prefs.save();
+            matchUI.getCDock().setArcState(arcState);
+            setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
         };
     }
 
@@ -216,12 +188,9 @@ public final class GameMenu {
     }
 
     private ActionListener getAutoYieldsAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                final VAutoYields autoYields = new VAutoYields(matchUI);
-                autoYields.showAutoYields();
-            }
+        return e -> {
+            final VAutoYields autoYields = new VAutoYields(matchUI);
+            autoYields.showAutoYields();
         };
     }
 
@@ -234,11 +203,6 @@ public final class GameMenu {
     }
 
     private ActionListener getViewDeckListAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                matchUI.viewDeckList();
-            }
-        };
+        return e -> matchUI.viewDeckList();
     }
 }

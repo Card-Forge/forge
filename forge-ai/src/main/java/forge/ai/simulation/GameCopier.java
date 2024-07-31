@@ -197,12 +197,7 @@ public class GameCopier {
         // TODO update thisTurnCast
 
         if (advanceToPhase != null) {
-            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, new Runnable() {
-                @Override
-                public void run() {
-                    GameSimulator.resolveStack(newGame, aiPlayer.getWeakestOpponent());
-                }
-            });
+            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, () -> GameSimulator.resolveStack(newGame, aiPlayer.getWeakestOpponent()));
         }
 
         return newGame;

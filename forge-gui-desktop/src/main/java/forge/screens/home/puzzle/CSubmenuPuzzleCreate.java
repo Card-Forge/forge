@@ -40,9 +40,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
 
     @Override
     public void initialize() {
-        view.getBtnStart().addActionListener(
-                new ActionListener() { @Override
-                public void actionPerformed(final ActionEvent e) { startPuzzleCreate(); } });
+        view.getBtnStart().addActionListener(e -> startPuzzleCreate());
     }
 
     @Override
@@ -87,22 +85,16 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
 
         final Puzzle emptyPuzzle = new Puzzle(generateEmptyPuzzle(firstPlayer));
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.setStartGameHook(new Runnable() {
-            @Override
-            public final void run() {
-                SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblWelcomePuzzleModeMessage"),
-                        Localizer.getInstance().getMessage("lblCreateNewPuzzle"), SOptionPane.WARNING_ICON);
-                emptyPuzzle.applyToGame(hostedMatch.getGame());
-            }
+        hostedMatch.setStartGameHook(() -> {
+            SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblWelcomePuzzleModeMessage"),
+                    Localizer.getInstance().getMessage("lblCreateNewPuzzle"), SOptionPane.WARNING_ICON);
+            emptyPuzzle.applyToGame(hostedMatch.getGame());
         });
 
         final List<RegisteredPlayer> players = new ArrayList<>();

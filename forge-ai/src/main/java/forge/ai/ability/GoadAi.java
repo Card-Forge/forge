@@ -32,25 +32,22 @@ public class GoadAi extends SpellAbilityAi {
 
             if (game.getPlayers().size() > 2) {
                 // use this part only in multiplayer
-                CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card c) {
-                        // filter only creatures which can attack
-                        if (ComputerUtilCard.isUselessCreature(ai, c)) {
-                            return false;
-                        }
-                        // useless
-                        if (c.isGoadedBy(ai)) {
-                            return false;
-                        }
-                        // select creatures which can attack an Opponent other than ai
-                        for (Player o : ai.getOpponents()) {
-                            if (ComputerUtilCombat.canAttackNextTurn(c, o)) {
-                                return true;
-                            }
-                        }
+                CardCollection betterList = CardLists.filter(list, c -> {
+                    // filter only creatures which can attack
+                    if (ComputerUtilCard.isUselessCreature(ai, c)) {
                         return false;
                     }
+                    // useless
+                    if (c.isGoadedBy(ai)) {
+                        return false;
+                    }
+                    // select creatures which can attack an Opponent other than ai
+                    for (Player o : ai.getOpponents()) {
+                        if (ComputerUtilCombat.canAttackNextTurn(c, o)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 });
 
                 // if better list is not empty, use that one instead
@@ -61,20 +58,17 @@ public class GoadAi extends SpellAbilityAi {
                 }
             } else {
                 // single Player, goaded creature would attack ai
-                CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card c) {
-                        // filter only creatures which can attack
-                        if (ComputerUtilCard.isUselessCreature(ai, c)) {
-                            return false;
-                        }
-                        // useless
-                        if (c.isGoadedBy(ai)) {
-                            return false;
-                        }
-                        // select only creatures AI can block
-                        return ComputerUtilCard.canBeBlockedProfitably(ai, c, false);
+                CardCollection betterList = CardLists.filter(list, c -> {
+                    // filter only creatures which can attack
+                    if (ComputerUtilCard.isUselessCreature(ai, c)) {
+                        return false;
                     }
+                    // useless
+                    if (c.isGoadedBy(ai)) {
+                        return false;
+                    }
+                    // select only creatures AI can block
+                    return ComputerUtilCard.canBeBlockedProfitably(ai, c, false);
                 });
 
                 // if better list is not empty, use that one instead

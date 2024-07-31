@@ -176,12 +176,9 @@ public class FGroupList<E> extends FScrollPane {
                 header = null;
             }
             else {
-                header = add(new FLabel.ButtonBuilder().text(name0).command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        isCollapsed = !isCollapsed;
-                        FGroupList.this.revalidate();
-                    }
+                header = add(new FLabel.ButtonBuilder().text(name0).command(e -> {
+                    isCollapsed = !isCollapsed;
+                    FGroupList.this.revalidate();
                 }).build());
             }
             setVisible(false); //hide by default unless it has items

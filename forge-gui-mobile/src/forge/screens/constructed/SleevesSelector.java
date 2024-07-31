@@ -92,21 +92,15 @@ public class SleevesSelector  extends FScreen {
                 .build();
 
         if (index == -1) {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(getRandomSleeves(usedSleeves));
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(getRandomSleeves(usedSleeves));
+                Forge.back();
             });
         }
         else {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(index);
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(index);
+                Forge.back();
             });
         }
         scroller.add(lbl);

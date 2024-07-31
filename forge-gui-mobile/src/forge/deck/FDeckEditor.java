@@ -380,12 +380,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         if(allowsSave())
         {
-            btnSave.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    save(null);
-                }
-            });
+            btnSave.setCommand(e -> save(null));
         }
         else
         {
@@ -393,17 +388,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
         btnMoreOptions.setCommand(new FEventHandler() {
             @Override
-            public void handleEvent(FEvent e) {
+            public void handleEvent(FEvent fEvent) {
                 FPopupMenu menu = new FPopupMenu() {
                     @Override
                     protected void buildMenu() {
                         final Localizer localizer = Forge.getLocalizer();
                         if (allowsAddBasic())
-                            addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    CardEdition defaultLandSet;
-                                    switch (editorType) {
+                            addItem(new FMenuItem(localizer.getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e -> {
+                                CardEdition defaultLandSet;
+                                switch (editorType) {
                                     case Draft:
                                     case Sealed:
                                     case QuestDraft:
@@ -421,124 +414,103 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                     default:
                                         defaultLandSet = DeckProxy.getDefaultLandSet(deck);
                                         break;
-                                    }
-                                    AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {
-                                        @Override
-                                        public void run(CardPool landsToAdd) {
-                                            getMainDeckPage().addCards(landsToAdd);
-                                        }
-                                    },null);
-                                    dialog.show();
-                                    setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
                                 }
+                                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, new Callback<CardPool>() {
+                                    @Override
+                                    public void run(CardPool landsToAdd) {
+                                        getMainDeckPage().addCards(landsToAdd);
+                                    }
+                                }, null);
+                                dialog.show();
+                                setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck is visible below dialog
                             }));
                         if (allowsAddExtraSection()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS,  new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    List<String> options = hiddenExtraSections.stream().map(FDeckEditor::labelFromDeckSection).collect(Collectors.toList());
-                                    GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, new Callback<String>() {
-                                        @Override
-                                        public void run(String result) {
-                                            if(result == null || !options.contains(result))
-                                                return;
-                                            DeckSection newSection = hiddenExtraSections.get(options.indexOf(result));
-                                            showExtraSectionTab(newSection);
-                                            filterCatalogForExtraSection(newSection);
-                                            getCatalogPage().scheduleRefresh();
-                                            setSelectedPage(getCatalogPage());
-                                        }
-                                    });
-                                }
+                            addItem(new FMenuItem(localizer.getMessage("lblAddDeckSection"), FSkinImage.CHAOS, e -> {
+                                List<String> options = hiddenExtraSections.stream().map(FDeckEditor::labelFromDeckSection).collect(Collectors.toList());
+                                GuiChoose.oneOrNone(localizer.getMessage("lblAddDeckSectionSelect"), options, new Callback<String>() {
+                                    @Override
+                                    public void run(String result) {
+                                        if (result == null || !options.contains(result))
+                                            return;
+                                        DeckSection newSection = hiddenExtraSections.get(options.indexOf(result));
+                                        showExtraSectionTab(newSection);
+                                        filterCatalogForExtraSection(newSection);
+                                        getCatalogPage().scheduleRefresh();
+                                        setSelectedPage(getCatalogPage());
+                                    }
+                                });
                             }));
                         }
                         if (!isLimitedEditor()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType);
-                                    dialog.setCallback(new Callback<Deck>() {
-                                        @Override
-                                        public void run(Deck importedDeck) {
-                                            if (deck != null && importedDeck.hasName()) {
-                                                deck.setName(importedDeck.getName());
-                                                lblName.setText(importedDeck.getName());
+                            addItem(new FMenuItem(localizer.getMessage("lblImportFromClipboard"), Forge.hdbuttons ? FSkinImage.HDIMPORT : FSkinImage.OPEN, e -> {
+                                FDeckImportDialog dialog = new FDeckImportDialog(!deck.isEmpty(), editorType);
+                                dialog.setCallback(new Callback<Deck>() {
+                                    @Override
+                                    public void run(Deck importedDeck) {
+                                        if (deck != null && importedDeck.hasName()) {
+                                            deck.setName(importedDeck.getName());
+                                            lblName.setText(importedDeck.getName());
+                                        }
+                                        if (dialog.createNewDeck()) {
+                                            for (Entry<DeckSection, CardPool> section : importedDeck) {
+                                                DeckSectionPage page = getPageForSection(section.getKey());
+                                                if (page != null)
+                                                    page.setCards(section.getValue());
                                             }
-                                            if (dialog.createNewDeck()) {
-                                                for(Entry<DeckSection, CardPool> section : importedDeck)
-                                                {
-                                                    DeckSectionPage page = getPageForSection(section.getKey());
-                                                    if(page != null)
-                                                        page.setCards(section.getValue());
-                                                }
-                                            } else {
-                                                for(Entry<DeckSection, CardPool> section : importedDeck)
-                                                {
-                                                    DeckSectionPage page = getPageForSection(section.getKey());
-                                                    if(page != null)
-                                                        page.addCards(section.getValue());
-                                                }
+                                        } else {
+                                            for (Entry<DeckSection, CardPool> section : importedDeck) {
+                                                DeckSectionPage page = getPageForSection(section.getKey());
+                                                if (page != null)
+                                                    page.addCards(section.getValue());
+                                            }
+                                        }
+                                    }
+                                });
+                                dialog.show();
+                                setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
+                            }));
+                            if (allowsSave())
+                                addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, e -> {
+                                    String defaultName = editorType.getController().getNextAvailableName();
+                                    FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
+                                        @Override
+                                        public void run(String result) {
+                                            if (!StringUtils.isEmpty(result)) {
+                                                editorType.getController().saveAs(result);
                                             }
                                         }
                                     });
-                                    dialog.show();
-                                    setSelectedPage(getMainDeckPage()); //select main deck page if needed so main deck if visible below dialog
-                                }
-                            }));
-                            if(allowsSave())
-                                addItem(new FMenuItem(localizer.getMessage("lblSaveAs"), Forge.hdbuttons ? FSkinImage.HDSAVEAS : FSkinImage.SAVEAS, new FEventHandler() {
-                                    @Override
-                                    public void handleEvent(FEvent e) {
-                                        String defaultName = editorType.getController().getNextAvailableName();
-                                        FOptionPane.showInputDialog(localizer.getMessage("lblNameNewCopyDeck"), defaultName, new Callback<String>() {
-                                            @Override
-                                            public void run(String result) {
-                                                if (!StringUtils.isEmpty(result)) {
-                                                    editorType.getController().saveAs(result);
-                                                }
-                                            }
-                                        });
-                                    }
                                 }));
                         }
                         if (allowRename()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    FOptionPane.showInputDialog(localizer.getMessage("lblNewNameDeck"), deck.getName(), new Callback<String>() {
+                            addItem(new FMenuItem(localizer.getMessage("lblRenameDeck"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, e -> FOptionPane.showInputDialog(
+                                    localizer.getMessage("lblNewNameDeck"), deck.getName(), new Callback<String>() {
                                         @Override
                                         public void run(String result) {
                                             editorType.getController().rename(result);
                                         }
-                                    });
-                                }
-                            }));
+                                    }))
+                            );
                         }
                         if (allowDelete()) {
-                            addItem(new FMenuItem(localizer.getMessage("lblDeleteDeck"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    FOptionPane.showConfirmDialog(
-                                            localizer.getMessage("lblConfirmDelete") + " '" + deck.getName() + "'?",
-                                            localizer.getMessage("lblDeleteDeck"), localizer.getMessage("lblDelete"), localizer.getMessage("lblCancel"), false, new Callback<Boolean>() {
-                                                @Override
-                                                public void run(Boolean result) {
-                                                    if (result) {
-                                                        editorType.getController().delete();
-                                                        Forge.back();
-                                                    }
-                                                }
-                                            });
-                                }
-                            }));
+                            addItem(new FMenuItem(localizer.getMessage("lblDeleteDeck"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, e -> FOptionPane.showConfirmDialog(
+                                    localizer.getMessage("lblConfirmDelete") + " '" + deck.getName() + "'?",
+                                    localizer.getMessage("lblDeleteDeck"),
+                                    localizer.getMessage("lblDelete"),
+                                    localizer.getMessage("lblCancel"), false,
+                                    new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                editorType.getController().delete();
+                                                Forge.back();
+                                            }
+                                        }
+                                    }))
+                            );
                         }
-                        addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                FDeckViewer.copyDeckToClipboard(deck);
-                            }
-                        }));
-                        ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
+                        addItem(new FMenuItem(localizer.getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> FDeckViewer.copyDeckToClipboard(deck)));
+                        ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
                     }
                 };
                 menu.show(btnMoreOptions, 0, btnMoreOptions.getHeight());
@@ -1141,14 +1113,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             if (!StringUtils.isEmpty(dest)) {
                 label += " " + dest;
             }
-            menu.addItem(new FMenuItem(label, icon, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (max == 1) {
-                        callback.run(max);
-                    } else {
-                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
-                    }
+            menu.addItem(new FMenuItem(label, icon, e -> {
+                if (max == 1) {
+                    callback.run(max);
+                } else {
+                    GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
                 }
             }));
         }
@@ -1635,50 +1604,41 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //add option to add or remove card from favorites
                 final CardPreferences prefs = CardPreferences.getPrefs(card);
                 if (prefs.getStarCount() == 0) {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            prefs.setStarCount(1);
-                            CardPreferences.save();
-                        }
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAddFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED, e -> {
+                        prefs.setStarCount(1);
+                        CardPreferences.save();
                     }));
                 } else {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            prefs.setStarCount(0);
-                            CardPreferences.save();
-                        }
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFavorites"), Forge.hdbuttons ? FSkinImage.HDSTAR_OUTLINE : FSkinImage.STAR_OUTLINE, e -> {
+                        prefs.setStarCount(0);
+                        CardPreferences.save();
                     }));
                 }
 
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                 if (artOptions.size() > 1) {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            //sort options so current option is on top and selected by default
-                            List<PaperCard> sortedOptions = new ArrayList<>();
-                            sortedOptions.add(card);
-                            for (PaperCard option : artOptions) {
-                                if (option != card) {
-                                    sortedOptions.add(option);
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                        //sort options so current option is on top and selected by default
+                        List<PaperCard> sortedOptions = new ArrayList<>();
+                        sortedOptions.add(card);
+                        for (PaperCard option : artOptions) {
+                            if (option != card) {
+                                sortedOptions.add(option);
+                            }
+                        }
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
+                            @Override
+                            public void run(PaperCard result) {
+                                if (result != null) {
+                                    if (result != card) {
+                                        cardManager.replaceAll(card, result);
+                                    }
+                                    prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
+                                    CardPreferences.save();
                                 }
                             }
-                            GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getName(), sortedOptions, new Callback<PaperCard>() {
-                                @Override
-                                public void run(PaperCard result) {
-                                    if (result != null) {
-                                        if (result != card) {
-                                            cardManager.replaceAll(card, result);
-                                        }
-                                        prefs.setPreferredArt(result.getEdition(), result.getArtIndex());
-                                        CardPreferences.save();
-                                    }
-                                }
-                            });
-                        }
+                        });
                     }));
                 }
             }
@@ -1687,14 +1647,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         @Override
         protected void buildDeckMenu(FPopupMenu menu) {
             if (cardManager.getConfig().getShowUniqueCardsOption()) {
-                menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        boolean wantUnique = !cardManager.getWantUnique();
-                        cardManager.setWantUnique(wantUnique);
-                        refresh();
-                        cardManager.getConfig().setUniqueCardsOnly(wantUnique);
-                    }
+                menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), e -> {
+                    boolean wantUnique = !cardManager.getWantUnique();
+                    cardManager.setWantUnique(wantUnique);
+                    refresh();
+                    cardManager.getConfig().setUniqueCardsOnly(wantUnique);
                 }));
             }
         }

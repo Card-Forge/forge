@@ -122,12 +122,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
             break;
         }
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorConstructed.addBasicLands(CEditorCommander.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorConstructed.addBasicLands(CEditorCommander.this));
     }
 
     //=========== Overridden from ACEditorBase
@@ -213,13 +208,10 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
 

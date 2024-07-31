@@ -65,28 +65,22 @@ public abstract class ValueRangeFilter<T extends InventoryItem> extends ItemFilt
 
         upperBound = addSpinner(widget, false);
 
-        lowerBound.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent arg0) {
-                if (Integer.parseInt(upperBound.getValue().toString()) <
-                        Integer.parseInt(lowerBound.getValue().toString()))
-                {
-                    upperBound.setValue(lowerBound.getValue());
-                }
-                applyChange();
+        lowerBound.addChangeListener(arg0 -> {
+            if (Integer.parseInt(upperBound.getValue().toString()) <
+                    Integer.parseInt(lowerBound.getValue().toString()))
+            {
+                upperBound.setValue(lowerBound.getValue());
             }
+            applyChange();
         });
 
-        upperBound.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent arg0) {
-                if (Integer.parseInt(lowerBound.getValue().toString()) >
-                        Integer.parseInt(upperBound.getValue().toString()))
-                {
-                    lowerBound.setValue(upperBound.getValue());
-                }
-                applyChange();
+        upperBound.addChangeListener(arg0 -> {
+            if (Integer.parseInt(lowerBound.getValue().toString()) >
+                    Integer.parseInt(upperBound.getValue().toString()))
+            {
+                lowerBound.setValue(upperBound.getValue());
             }
+            applyChange();
         });
     }
 

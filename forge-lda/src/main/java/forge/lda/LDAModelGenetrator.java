@@ -45,12 +45,9 @@ public final class LDAModelGenetrator {
 
     public static final void main(String[] args){
         GuiBase.setInterface(new GuiDesktop());
-        FModel.initialize(null, new Function<ForgePreferences, Void>()  {
-            @Override
-            public Void apply(ForgePreferences preferences) {
-                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                return null;
-            }
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+            return null;
         });
         initialize();
     }
@@ -258,12 +255,7 @@ public final class LDAModelGenetrator {
 
             unfilteredTopics.add(new Archetype(topRankVocabs, deckName, decks.size()));
         }
-        Comparator<Archetype> archetypeComparator = new Comparator<Archetype>() {
-            @Override
-            public int compare(Archetype o1, Archetype o2) {
-                return o2.getDeckCount().compareTo(o1.getDeckCount());
-            }
-        };
+        Comparator<Archetype> archetypeComparator = (o1, o2) -> o2.getDeckCount().compareTo(o1.getDeckCount());
 
         Collections.sort(unfilteredTopics,archetypeComparator);
         return unfilteredTopics;
@@ -271,14 +263,10 @@ public final class LDAModelGenetrator {
 
 
 
+    @SuppressWarnings("unchecked")
     private static <K, V> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, new Comparator<Object>() {
-            @SuppressWarnings("unchecked")
-            public int compare(Object o1, Object o2) {
-                return ((Comparable<V>) ((Map.Entry<K, V>) (o2)).getValue()).compareTo(((Map.Entry<K, V>) (o1)).getValue());
-            }
-        });
+        Collections.sort(list, (Comparator<Object>) (o1, o2) -> ((Comparable<V>) ((Map.Entry<K, V>) (o2)).getValue()).compareTo(((Map.Entry<K, V>) (o1)).getValue()));
 
         Map<K, V> result = new LinkedHashMap<>();
         for (Map.Entry<K, V> entry : list) {

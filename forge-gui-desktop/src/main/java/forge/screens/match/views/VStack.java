@@ -292,44 +292,35 @@ public class VStack implements IVDoc<CStack> {
 
         public AbilityMenu(){
             jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
-            jmiAutoYield.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent arg0) {
-                    final String key = item.getKey();
-                    final boolean autoYield = controller.getMatchUI().shouldAutoYield(key);
-                    controller.getMatchUI().setShouldAutoYield(key, !autoYield);
-                    if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
-                        //auto-pass priority if ability is on top of stack
-                        controller.getMatchUI().getGameController().passPriority();
-                    }
+            jmiAutoYield.addActionListener(arg0 -> {
+                final String key = item.getKey();
+                final boolean autoYield = controller.getMatchUI().shouldAutoYield(key);
+                controller.getMatchUI().setShouldAutoYield(key, !autoYield);
+                if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
+                    //auto-pass priority if ability is on top of stack
+                    controller.getMatchUI().getGameController().passPriority();
                 }
             });
             add(jmiAutoYield);
 
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
-            jmiAlwaysYes.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent arg0) {
-                    if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    }
-                    else {
-                        controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
-                    }
+            jmiAlwaysYes.addActionListener(arg0 -> {
+                if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
+                    controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
+                }
+                else {
+                    controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
                 }
             });
             add(jmiAlwaysYes);
 
             jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
-            jmiAlwaysNo.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent arg0) {
-                    if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    }
-                    else {
-                        controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
-                    }
+            jmiAlwaysNo.addActionListener(arg0 -> {
+                if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
+                    controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
+                }
+                else {
+                    controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
                 }
             });
             add(jmiAlwaysNo);

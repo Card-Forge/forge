@@ -101,12 +101,9 @@ public final class GuiUtils {
             label = "<html>" + "<div style='height: " + itemHeight + "px; margin-top: 6px;'>" + label.substring(6, label.length() - 7) + "</div></html>";
         }
         final JMenuItem item = new JMenuItem(label);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                if (null != onClick) {
-                    onClick.run();
-                }
+        item.addActionListener(arg0 -> {
+            if (null != onClick) {
+                onClick.run();
             }
         });
         item.setEnabled(enabled);

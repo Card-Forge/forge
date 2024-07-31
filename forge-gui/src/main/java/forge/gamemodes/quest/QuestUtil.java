@@ -525,13 +525,10 @@ public class QuestUtil {
     public static void finishStartingGame() {
         final QuestController qData = FModel.getQuest();
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                qData.getDuelsManager().randomizeOpponents();
-                qData.setCurrentEvent(event);
-                qData.save();
-            }
+        FThreads.invokeInBackgroundThread(() -> {
+            qData.getDuelsManager().randomizeOpponents();
+            qData.setCurrentEvent(event);
+            qData.save();
         });
 
         int extraLifeHuman = 0;
@@ -608,12 +605,7 @@ public class QuestUtil {
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         final IGuiGame gui = GuiBase.getInterface().getNewGuiGame();
         gui.setPlayerAvatar(aiPlayer, event);
-        FThreads.invokeInEdtNowOrLater(new Runnable(){
-            @Override
-            public void run() {
-                hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui), null);
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(() -> hostedMatch.startMatch(rules, variant, starter, ImmutableMap.of(humanStart, gui), null));
     }
 
     /**

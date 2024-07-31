@@ -170,10 +170,8 @@ public class VAssignGenericAmount {
             }
         }
 
-        btnOK.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
-        btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedAmount(); initialAssignAmount(); } });
+        btnOK.addActionListener(arg0 -> finish());
+        btnReset.addActionListener(arg0 -> { resetAssignedAmount(); initialAssignAmount(); });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));

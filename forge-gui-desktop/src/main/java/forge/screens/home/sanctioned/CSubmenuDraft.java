@@ -45,20 +45,12 @@ import java.util.Map;
 public enum CSubmenuDraft implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdDeckSelect = new UiCommand() {
-        @Override
-        public void run() {
-            VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-            fillOpponentComboBox();
-        }
+    private final UiCommand cmdDeckSelect = () -> {
+        VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+        fillOpponentComboBox();
     };
 
-    private final ActionListener radioAction = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            fillOpponentComboBox();
-        }
-    };
+    private final ActionListener radioAction = e -> fillOpponentComboBox();
 
     @Override
     public void register() {
@@ -75,12 +67,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getBtnBuildDeck().setCommand((UiCommand) this::setupDraft);
 
-        view.getBtnStart().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                startGame(GameType.Draft);
-            }
-        });
+        view.getBtnStart().addActionListener(e -> startGame(GameType.Draft));
 
         view.getRadSingle().addActionListener(radioAction);
 
@@ -104,13 +91,11 @@ public enum CSubmenuDraft implements ICDoc {
             fillOpponentComboBox();
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                if (btnStart.isEnabled()) {
-                    view.getBtnStart().requestFocusInWindow();
-                } else {
-                    view.getBtnBuildDeck().requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            if (btnStart.isEnabled()) {
+                view.getBtnStart().requestFocusInWindow();
+            } else {
+                view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
     }
@@ -152,12 +137,9 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         Map<Integer, Deck> aiMap = Maps.newHashMap();

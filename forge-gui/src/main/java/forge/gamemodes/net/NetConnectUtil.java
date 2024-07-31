@@ -58,12 +58,9 @@ public class NetConnectUtil {
             @Override
             public final void update(final int slot, final LobbySlotType type) {return;}
         });
-        view.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override
-            public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                server.updateSlot(index, event);
-                server.updateLobbyState();
-            }
+        view.setPlayerChangeListener((index, event) -> {
+            server.updateSlot(index, event);
+            server.updateLobbyState();
         });
 
         server.setLobbyListener(new ILobbyListener() {
@@ -154,12 +151,7 @@ public class NetConnectUtil {
                 return lobby;
             }
         });
-        view.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override
-            public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                client.send(event);
-            }
-        });
+        view.setPlayerChangeListener((index, event) -> client.send(event));
 
         String hostname = url;
         int port = ForgeProfileProperties.getServerPort();

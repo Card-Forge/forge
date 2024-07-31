@@ -26,11 +26,7 @@ public enum CSubmenuGauntletCommander implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final ActionListener actStartGame = new ActionListener() {
-        @Override public void actionPerformed(final ActionEvent arg0) {
-            startGame();
-        }
-    };
+    private final ActionListener actStartGame = arg0 -> startGame();
 
     private final VSubmenuGauntletCommander view = VSubmenuGauntletCommander.SINGLETON_INSTANCE;
 
@@ -39,9 +35,7 @@ public enum CSubmenuGauntletCommander implements ICDoc {
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
-        });
+        SwingUtilities.invokeLater(() -> view.getBtnStart().requestFocusInWindow());
     }
 
     @Override
@@ -64,12 +58,9 @@ public enum CSubmenuGauntletCommander implements ICDoc {
         }
 
         // Start game overlay
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         // Find appropriate filename for new save, create and set new save file.

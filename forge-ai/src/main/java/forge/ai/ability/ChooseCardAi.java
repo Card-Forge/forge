@@ -85,15 +85,12 @@ public class ChooseCardAi extends SpellAbilityAi {
                 return false;
             }
             final Combat combat = game.getCombat();
-            choices = CardLists.filter(choices, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                        return false;
-                    }
-                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
+            choices = CardLists.filter(choices, c -> {
+                if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    return false;
                 }
+                int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
+                return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
             });
             return !choices.isEmpty();
         } else if (aiLogic.equals("Ashiok")) {
@@ -201,15 +198,12 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
-            CardCollectionView better = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                        return false;
-                    }
-                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
+            CardCollectionView better = CardLists.filter(options, c -> {
+                if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    return false;
                 }
+                int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
+                return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
             });
             if (!better.isEmpty()) {
                 choice = ComputerUtilCard.getBestAI(better);
@@ -242,19 +236,16 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestCreatureAI(options);
             }
         } else if ("TangleWire".equals(logic)) {
-            CardCollectionView betterList = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.isCreature()) {
+            CardCollectionView betterList = CardLists.filter(options, c -> {
+                if (c.isCreature()) {
+                    return false;
+                }
+                for (SpellAbility sa1 : c.getAllSpellAbilities()) {
+                    if (sa1.getPayCosts().hasTapCost()) {
                         return false;
                     }
-                    for (SpellAbility sa : c.getAllSpellAbilities()) {
-                        if (sa.getPayCosts().hasTapCost()) {
-                            return false;
-                        }
-                    }
-                    return true;
                 }
+                return true;
             });
             if (!betterList.isEmpty()) {
                 choice = betterList.get(0);

@@ -59,12 +59,9 @@ public class ConquestStatsScreen extends FScreen implements IVConquestStats {
             }
         }
         cbPlanes.setAlignment(Align.center);
-        cbPlanes.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ConquestPlane plane = cbPlanes.getSelectedIndex() > 0 ? (ConquestPlane)cbPlanes.getSelectedItem() : null;
-                FModel.getConquest().getModel().updateStatLabels(ConquestStatsScreen.this, plane);
-            }
+        cbPlanes.setChangedHandler(e -> {
+            ConquestPlane plane = cbPlanes.getSelectedIndex() > 0 ? (ConquestPlane)cbPlanes.getSelectedItem() : null;
+            FModel.getConquest().getModel().updateStatLabels(ConquestStatsScreen.this, plane);
         });
     }
 

@@ -111,19 +111,16 @@ public class CombatUtil {
         final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
         final Game game = attacker.getGame();
 
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), new Predicate<GameEntity>() {
-            @Override
-            public boolean apply(final GameEntity defender) {
-                if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
-                    return false;
-                }
-                attackers.put(attacker, defender);
-                final int myViolations = constraints.countViolations(attackers);
-                if (myViolations == -1) {
-                    return false;
-                }
-                return myViolations <= bestAttack.getRight();
+        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> {
+            if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
+                return false;
             }
+            attackers.put(attacker, defender);
+            final int myViolations = constraints.countViolations(attackers);
+            if (myViolations == -1) {
+                return false;
+            }
+            return myViolations <= bestAttack.getRight();
         });
     }
 
@@ -165,12 +162,7 @@ public class CombatUtil {
      * @see #canAttack(Card, GameEntity)
      */
     public static boolean canAttack(final Card attacker) {
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), new Predicate<GameEntity>() {
-            @Override
-            public boolean apply(final GameEntity defender) {
-                return canAttack(attacker, defender);
-            }
-        });
+        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> canAttack(attacker, defender));
     }
 
     /**

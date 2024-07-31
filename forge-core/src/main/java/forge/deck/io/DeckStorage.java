@@ -40,12 +40,7 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     private final boolean moveWronglyNamedDecks;
 
     /** Constant <code>DCKFileFilter</code>. */
-    public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
-        @Override
-        public boolean accept(final File dir, final String name) {
-            return name.endsWith(FILE_EXTENSION);
-        }
-    };
+    public static final FilenameFilter DCK_FILE_FILTER = (dir, name) -> name.endsWith(FILE_EXTENSION);
 
     public DeckStorage(final File deckDir0, final String rootDir0) {
         this(deckDir0, rootDir0, false);

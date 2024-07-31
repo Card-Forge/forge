@@ -68,84 +68,54 @@ public enum CSubmenuQuestStart implements ICDoc {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 
-        view.getBtnCustomFormat().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
-                dialog.setOkCallback(new Runnable() {
-                    @Override
-                    public void run() {
-                        customFormatCodes.clear();
-                        customFormatCodes.addAll(dialog.getSelectedSets());
-                    }
-                });
-            }
+        view.getBtnCustomFormat().setCommand((UiCommand) () -> {
+            final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
+            dialog.setOkCallback(() -> {
+                customFormatCodes.clear();
+                customFormatCodes.addAll(dialog.getSelectedSets());
+            });
         });
 
-        view.getBtnSelectFormat().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final DialogChooseFormats dialog = new DialogChooseFormats();
-                dialog.setOkCallback(new Runnable() {
-                    @Override
-                    public void run() {
-                        customFormatCodes.clear();
-                        Set<String> sets = new HashSet<>();
-                        for(GameFormat format:dialog.getSelectedFormats()){
-                            sets.addAll(format.getAllowedSetCodes());
-                        }
-                        customFormatCodes.addAll(sets);
-                    }
-                });
-            }
+        view.getBtnSelectFormat().setCommand((UiCommand) () -> {
+            final DialogChooseFormats dialog = new DialogChooseFormats();
+            dialog.setOkCallback(() -> {
+                customFormatCodes.clear();
+                Set<String> sets = new HashSet<>();
+                for(GameFormat format:dialog.getSelectedFormats()){
+                    sets.addAll(format.getAllowedSetCodes());
+                }
+                customFormatCodes.addAll(sets);
+            });
         });
 
-        view.getBtnPrizeCustomFormat().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
-                dialog.setOkCallback(new Runnable() {
-                    @Override
-                    public void run() {
-                        customPrizeFormatCodes.clear();
-                        customPrizeFormatCodes.addAll(dialog.getSelectedSets());
-                    }
-                });
-            }
+        view.getBtnPrizeCustomFormat().setCommand((UiCommand) () -> {
+            final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
+            dialog.setOkCallback(() -> {
+                customPrizeFormatCodes.clear();
+                customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+            });
         });
 
-        view.getBtnPrizeSelectFormat().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final DialogChooseFormats dialog = new DialogChooseFormats();
-                dialog.setOkCallback(new Runnable() {
-                    @Override
-                    public void run() {
-                        customPrizeFormatCodes.clear();
-                        Set<String> sets = new HashSet<>();
-                        for(GameFormat format:dialog.getSelectedFormats()){
-                            sets.addAll(format.getAllowedSetCodes());
-                        }
-                        customPrizeFormatCodes.addAll(sets);
-                    }
-                });
-            }
+        view.getBtnPrizeSelectFormat().setCommand((UiCommand) () -> {
+            final DialogChooseFormats dialog = new DialogChooseFormats();
+            dialog.setOkCallback(() -> {
+                customPrizeFormatCodes.clear();
+                Set<String> sets = new HashSet<>();
+                for(GameFormat format:dialog.getSelectedFormats()){
+                    sets.addAll(format.getAllowedSetCodes());
+                }
+                customPrizeFormatCodes.addAll(sets);
+            });
         });
 
-        view.getBtnPreferredColors().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final DialogChoosePoolDistribution colorChooser = new DialogChoosePoolDistribution(preferredColors, poolType, includeArtifacts);
-                colorChooser.show(new UiCommand() {
-                    @Override
-                    public void run() {
-                        preferredColors = colorChooser.getPreferredColors();
-                        poolType = colorChooser.getPoolType();
-                        includeArtifacts = colorChooser.includeArtifacts();
-                        numberOfBoosters = colorChooser.getNumberOfBoosters();
-                    }
-                });
-            }
+        view.getBtnPreferredColors().setCommand((UiCommand) () -> {
+            final DialogChoosePoolDistribution colorChooser = new DialogChoosePoolDistribution(preferredColors, poolType, includeArtifacts);
+            colorChooser.show((UiCommand) () -> {
+                preferredColors = colorChooser.getPreferredColors();
+                poolType = colorChooser.getPoolType();
+                includeArtifacts = colorChooser.includeArtifacts();
+                numberOfBoosters = colorChooser.getNumberOfBoosters();
+            });
         });
 
     }

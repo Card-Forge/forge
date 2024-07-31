@@ -146,12 +146,9 @@ public class PermanentCreatureAi extends PermanentAi {
         if (combat != null && combat.getDefendingPlayers().contains(ai)) {
             // Currently we use a rather simplistic assumption that if we're behind on creature count on board,
             // a flashed in creature might prove to be good as an additional defender
-            int numUntappedPotentialBlockers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card card) {
-                    return card.isUntapped() && !ComputerUtilCard.isUselessCreature(ai, card);
-                }
-            }).size();
+            int numUntappedPotentialBlockers = CardLists.filter(ai.getCreaturesInPlay(),
+                    card1 -> card1.isUntapped() && !ComputerUtilCard.isUselessCreature(ai, card1)
+            ).size();
 
             if (combat.getAttackersOf(ai).size() > numUntappedPotentialBlockers) {
                 valuableBlocker = true;

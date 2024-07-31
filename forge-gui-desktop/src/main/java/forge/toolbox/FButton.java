@@ -255,12 +255,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
 
     @Override
     public void setCommand(final UiCommand command) {
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                command.run();
-            }
-        });
+        addActionListener(e -> command.run());
     }
 
     @Override

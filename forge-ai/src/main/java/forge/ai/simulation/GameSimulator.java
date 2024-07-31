@@ -252,32 +252,29 @@ public class GameSimulator {
         // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
         PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
         sim.setUseSimulation(true);
-        opponent.runWithController(new Runnable() {
-            @Override
-            public void run() {
-                final Set<Card> allAffectedCards = new HashSet<>();
+        opponent.runWithController(() -> {
+            final Set<Card> allAffectedCards = new HashSet<>();
+            game.getAction().checkStateEffects(false, allAffectedCards);
+            game.getStack().addAllTriggeredAbilitiesToStack();
+            while (!game.getStack().isEmpty() && !game.isGameOver()) {
+                debugPrint("Resolving:" + game.getStack().peekAbility());
+
+                // Resolve the top effect on the stack.
+                game.getStack().resolveStack();
+
+                // Evaluate state based effects as a result of resolving stack.
+                // Note: Needs to happen after resolve stack rather than at the
+                // top of the loop to ensure state effects are evaluated after the
+                // last resolved effect
                 game.getAction().checkStateEffects(false, allAffectedCards);
+
+                // Add any triggers additional triggers as a result of the above.
+                // Must be below state effects, since legendary rule is evaluated
+                // as part of state effects and trigger come afterward. (e.g. to
+                // correctly handle two Dark Depths - one having no counters).
                 game.getStack().addAllTriggeredAbilitiesToStack();
-                while (!game.getStack().isEmpty() && !game.isGameOver()) {
-                    debugPrint("Resolving:" + game.getStack().peekAbility());
 
-                    // Resolve the top effect on the stack.
-                    game.getStack().resolveStack();
- 
-                    // Evaluate state based effects as a result of resolving stack.
-                    // Note: Needs to happen after resolve stack rather than at the
-                    // top of the loop to ensure state effects are evaluated after the
-                    // last resolved effect
-                    game.getAction().checkStateEffects(false, allAffectedCards);
-
-                    // Add any triggers additional triggers as a result of the above.
-                    // Must be below state effects, since legendary rule is evaluated
-                    // as part of state effects and trigger come afterward. (e.g. to
-                    // correctly handle two Dark Depths - one having no counters).
-                    game.getStack().addAllTriggeredAbilitiesToStack();
-
-                    // Continue until stack is empty.
-                }
+                // Continue until stack is empty.
             }
         }, sim);
     }

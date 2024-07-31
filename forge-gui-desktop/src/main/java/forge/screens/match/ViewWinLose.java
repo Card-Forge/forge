@@ -134,15 +134,12 @@ public class ViewWinLose implements IWinLoseView<FButton> {
         txtLog.setFocusable(true); // allow highlighting and copying of log
 
         final FLabel btnCopyLog = new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).build();
-        btnCopyLog.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final StringSelection ss = new StringSelection(txtLog.getText());
-                try {
-                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-                } catch (final IllegalStateException ex) {
-                    // ignore; may be unavailable on some platforms
-                }
+        btnCopyLog.setCommand((UiCommand) () -> {
+            final StringSelection ss = new StringSelection(txtLog.getText());
+            try {
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+            } catch (final IllegalStateException ex) {
+                // ignore; may be unavailable on some platforms
             }
         });
 
@@ -192,17 +189,14 @@ public class ViewWinLose implements IWinLoseView<FButton> {
     }
 
     public final void show() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                scrLog.getViewport().setViewPosition(new Point(0, 0));
-                // populateCustomPanel may have changed which buttons are
-                // enabled; focus on the 'best' one
-                if (btnContinue.isEnabled()) {
-                    btnContinue.requestFocusInWindow();
-                } else {
-                    btnQuit.requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            scrLog.getViewport().setViewPosition(new Point(0, 0));
+            // populateCustomPanel may have changed which buttons are
+            // enabled; focus on the 'best' one
+            if (btnContinue.isEnabled()) {
+                btnContinue.requestFocusInWindow();
+            } else {
+                btnQuit.requestFocusInWindow();
             }
         });
 

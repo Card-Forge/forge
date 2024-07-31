@@ -42,11 +42,7 @@ public class ReplyPool {
 
     private static final class CompletableFuture extends FutureTask<Object> {
         public CompletableFuture() {
-            super(new Callable<Object>() {
-                @Override public Object call() throws Exception {
-                    return null;
-                }
-            });
+            super(() -> null);
         }
 
         @Override

@@ -138,16 +138,13 @@ public class ConquestRegion {
                     for (int i = 0; i < sets.length; i++) {
                         sets[i] = sets[i].trim();
                     }
-                    pred = new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard pc) {
-                            for (String set : sets) {
-                                if (pc.getEdition().equals(set)) {
-                                    return true;
-                                }
+                    pred = pc -> {
+                        for (String set : sets) {
+                            if (pc.getEdition().equals(set)) {
+                                return true;
                             }
-                            return false;
                         }
+                        return false;
                     };
                     break;
                 default:

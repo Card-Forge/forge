@@ -261,26 +261,21 @@ public class CountersMoveAi extends SpellAbilityAi {
             // prefered logic for this: try to steal counter
             List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
             if (!oppList.isEmpty()) {
-                List<Card> best = CardLists.filter(oppList, new Predicate<Card>() {
-
-                    @Override
-                    public boolean apply(Card card) {
-                        // do not weak a useless creature if able
-                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
-                            return false;
-                        }
-
-                        final Card srcCardCpy = CardCopyService.getLKICopy(card);
-                        // cant use substract on Copy
-                        srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
-
-                        // do not steal a P1P1 from Undying if it would die this way
-                        if (cType != null && cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
-                            return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
-                        }
-                        return true;
+                List<Card> best = CardLists.filter(oppList, card -> {
+                    // do not weak a useless creature if able
+                    if (ComputerUtilCard.isUselessCreature(ai, card)) {
+                        return false;
                     }
 
+                    final Card srcCardCpy = CardCopyService.getLKICopy(card);
+                    // cant use substract on Copy
+                    srcCardCpy.setCounters(cType, srcCardCpy.getCounters(cType) - amount);
+
+                    // do not steal a P1P1 from Undying if it would die this way
+                    if (cType != null && cType.is(CounterEnumType.P1P1) && srcCardCpy.getNetToughness() <= 0) {
+                        return srcCardCpy.getCounters(cType) > 0 || !card.hasKeyword(Keyword.UNDYING) || card.isToken();
+                    }
+                    return true;
                 });
 
                 // if no Prefered found, try normal list
@@ -303,33 +298,29 @@ public class CountersMoveAi extends SpellAbilityAi {
 
             List<Card> aiList = CardLists.filterControlledBy(tgtCards, ally);
             if (!aiList.isEmpty()) {
-                List<Card> best = CardLists.filter(aiList, new Predicate<Card>() {
-
-                    @Override
-                    public boolean apply(Card card) {
-                        // gain from useless
-                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
-                            return true;
-                        }
-
-                        // source would leave the game
-                        if (card.hasSVar("EndOfTurnLeavePlay")) {
-                            return true;
-                        }
-
-                        // try to remove P1P1 from undying or evolve
-                        if (cType != null && cType.is(CounterEnumType.P1P1)) {
-                            if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
-                                    || card.hasKeyword(Keyword.ADAPT)) {
-                                return true;
-                            }
-                        }
-                        if (cType != null && cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
-                            return true;
-                        }
-
-                        return false;
+                List<Card> best = CardLists.filter(aiList, card -> {
+                    // gain from useless
+                    if (ComputerUtilCard.isUselessCreature(ai, card)) {
+                        return true;
                     }
+
+                    // source would leave the game
+                    if (card.hasSVar("EndOfTurnLeavePlay")) {
+                        return true;
+                    }
+
+                    // try to remove P1P1 from undying or evolve
+                    if (cType != null && cType.is(CounterEnumType.P1P1)) {
+                        if (card.hasKeyword(Keyword.UNDYING) || card.hasKeyword(Keyword.EVOLVE)
+                                || card.hasKeyword(Keyword.ADAPT)) {
+                            return true;
+                        }
+                    }
+                    if (cType != null && cType.is(CounterEnumType.M1M1) && card.hasKeyword(Keyword.PERSIST)) {
+                        return true;
+                    }
+
+                    return false;
                 });
 
                 if (best.isEmpty()) {
@@ -379,34 +370,30 @@ public class CountersMoveAi extends SpellAbilityAi {
             if (ComputerUtilCard.evaluateCreature(lkiWithCounters) > ComputerUtilCard.evaluateCreature(lkiWithoutCounters)) {
                 List<Card> aiList = CardLists.filterControlledBy(tgtCards, ai);
                 if (!aiList.isEmpty()) {
-                    List<Card> best = CardLists.filter(aiList, new Predicate<Card>() {
-
-                        @Override
-                        public boolean apply(Card card) {
-                            // gain from useless
-                            if (ComputerUtilCard.isUselessCreature(ai, card)) {
-                                return false;
-                            }
-
-                            // source would leave the game
-                            if (card.hasSVar("EndOfTurnLeavePlay")) {
-                                return false;
-                            }
-
-                            if (cType != null) {
-                                if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
-                                    return false;
-                                }
-                                if (cType.is(CounterEnumType.M1M1)) {
-                                    return false;
-                                }
-
-                                if (!card.canReceiveCounters(cType)) {
-                                    return false;
-                                }
-                            }
-                            return true;
+                    List<Card> best = CardLists.filter(aiList, card -> {
+                        // gain from useless
+                        if (ComputerUtilCard.isUselessCreature(ai, card)) {
+                            return false;
                         }
+
+                        // source would leave the game
+                        if (card.hasSVar("EndOfTurnLeavePlay")) {
+                            return false;
+                        }
+
+                        if (cType != null) {
+                            if (cType.is(CounterEnumType.P1P1) && card.hasKeyword(Keyword.UNDYING)) {
+                                return false;
+                            }
+                            if (cType.is(CounterEnumType.M1M1)) {
+                                return false;
+                            }
+
+                            if (!card.canReceiveCounters(cType)) {
+                                return false;
+                            }
+                        }
+                        return true;
                     });
 
                     if (best.isEmpty()) {
@@ -432,22 +419,18 @@ public class CountersMoveAi extends SpellAbilityAi {
             // try to move to something useless or something that would leave play
             List<Card> oppList = CardLists.filterControlledBy(tgtCards, ai.getOpponents());
             if (!oppList.isEmpty()) {
-                List<Card> best = CardLists.filter(oppList, new Predicate<Card>() {
-
-                    @Override
-                    public boolean apply(Card card) {
-                        // gain from useless
-                        if (!ComputerUtilCard.isUselessCreature(ai, card)) {
-                            return true;
-                        }
-
-                        // source would leave the game
-                        if (!card.hasSVar("EndOfTurnLeavePlay")) {
-                            return true;
-                        }
-
-                        return false;
+                List<Card> best = CardLists.filter(oppList, card -> {
+                    // gain from useless
+                    if (!ComputerUtilCard.isUselessCreature(ai, card)) {
+                        return true;
                     }
+
+                    // source would leave the game
+                    if (!card.hasSVar("EndOfTurnLeavePlay")) {
+                        return true;
+                    }
+
+                    return false;
                 });
 
                 if (best.isEmpty()) {

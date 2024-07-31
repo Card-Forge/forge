@@ -1002,16 +1002,13 @@ public class QuestEventDraft implements IQuestEvent {
         }
 
         final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
-        Collections.sort(allowedSets, new Comparator<CardEdition>() {
-            @Override
-            public int compare(final CardEdition edition1, final CardEdition edition2) {
-                if (edition1.getDate().before(edition2.getDate())) {
-                    return oldSetsFirst ? -1 : 1;
-                } else if (edition1.getDate().after(edition2.getDate())) {
-                    return oldSetsFirst ? 1 : -1;
-                }
-                return 0;
+        Collections.sort(allowedSets, (edition1, edition2) -> {
+            if (edition1.getDate().before(edition2.getDate())) {
+                return oldSetsFirst ? -1 : 1;
+            } else if (edition1.getDate().after(edition2.getDate())) {
+                return oldSetsFirst ? 1 : -1;
             }
+            return 0;
         });
 
         boolean largeSetFound = false;

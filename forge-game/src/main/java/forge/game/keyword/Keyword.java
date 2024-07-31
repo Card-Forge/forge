@@ -299,13 +299,10 @@ public enum Keyword {
 
     public static Runnable getPreloadTask() {
         if (cardKeywordSetLookup.size() < 10000) { //allow preloading even if some but not all cards loaded
-            return new Runnable() {
-                @Override
-                public void run() {
-                    final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                    for (PaperCard card : cards) {
-                        getKeywordSet(card);
-                    }
+            return () -> {
+                final Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
+                for (PaperCard card : cards) {
+                    getKeywordSet(card);
                 }
             };
         }

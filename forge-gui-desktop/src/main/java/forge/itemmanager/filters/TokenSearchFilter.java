@@ -57,12 +57,9 @@ public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.addTo(widget);
-        cbSearchMode.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent arg0) {
-                if (!txtSearch.isEmpty()) {
-                    applyChange();
-                }
+        cbSearchMode.addItemListener(arg0 -> {
+            if (!txtSearch.isEmpty()) {
+                applyChange();
             }
         });
 
@@ -101,12 +98,7 @@ public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
     @Override
     protected Predicate<PaperToken> buildPredicate() {
         // Don't filter anything out for now.
-        return new Predicate<PaperToken>() {
-            @Override
-            public boolean apply(PaperToken paperToken) {
-                return true;
-            }
-        };
+        return paperToken -> true;
     }
 
     @Override

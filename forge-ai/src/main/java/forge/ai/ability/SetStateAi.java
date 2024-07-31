@@ -75,12 +75,7 @@ public class SetStateAi extends SpellAbilityAi {
                 sa.resetTargets();
 
                 // select only the ones that can transform
-                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.Presets.CREATURES, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card c) {
-                        return c.canTransform(sa);
-                    }
-                });
+                CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.Presets.CREATURES, c -> c.canTransform(sa));
 
                 if (list.isEmpty()) {
                     return false;

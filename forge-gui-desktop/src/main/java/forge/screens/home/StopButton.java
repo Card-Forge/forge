@@ -36,16 +36,11 @@ public class StopButton extends SkinnedButton {
             }
         });
 
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setEnabled(false);
+        addActionListener(e -> {
+            setEnabled(false);
 
-                // ensure the click action can resolve before we allow the button to be clicked again
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { setEnabled(true); }
-                });
-            }
+            // ensure the click action can resolve before we allow the button to be clicked again
+            SwingUtilities.invokeLater(() -> setEnabled(true));
         });
     }
 }

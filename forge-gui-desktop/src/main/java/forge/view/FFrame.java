@@ -74,12 +74,7 @@ public class FFrame extends SkinnedFrame implements ITitleBarOwner {
                 }
             }
         });
-        this.addWindowStateListener(new WindowStateListener() {
-            @Override
-            public void windowStateChanged(final WindowEvent e) {
-                setState(e.getNewState());
-            }
-        });
+        this.addWindowStateListener(e -> setState(e.getNewState()));
 
         // Title bar
         this.titleBar = titleBar0;

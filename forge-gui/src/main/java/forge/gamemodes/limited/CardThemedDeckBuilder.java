@@ -849,17 +849,13 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     private void addRandomCards(int num) {
         final Set<String> deckListNames = getDeckListNames();
-        Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return format.isLegalCard(card)
-                        && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
-                        && !deckListNames.contains(card.getName())
-                        &&!card.getRules().getAiHints().getRemAIDecks()
-                        &&!card.getRules().getAiHints().getRemRandomDecks()
-                        &&!card.getRules().getMainPart().getType().isLand();
-            }
-        };
+        Predicate<PaperCard> possibleFromFullPool = card -> format.isLegalCard(card)
+                && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
+                && !deckListNames.contains(card.getName())
+                && !card.getRules().getAiHints().getRemAIDecks()
+                && !card.getRules().getAiHints().getRemRandomDecks()
+                && !card.getRules().getMainPart().getType().isLand();
+
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {

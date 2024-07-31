@@ -142,19 +142,19 @@ public class DualListBox<T> extends FDialog {
 
         // Dual List control buttons
         addButton = new FButton(">");
-        addButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { onAdd.run(); } });
+        addButton.addActionListener(e -> onAdd.run());
         addAllButton = new FButton(">>");
-        addAllButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); } });
+        addAllButton.addActionListener(e -> _addAll());
         removeButton = new FButton("<");
-        removeButton.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) { onRemove.run(); } });
+        removeButton.addActionListener(e -> onRemove.run());
         removeAllButton = new FButton("<<");
-        removeAllButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _removeAll(); } });
+        removeAllButton.addActionListener(e -> _removeAll());
 
         // Dual List Complete Buttons
         okButton = new FButton(Localizer.getInstance().getMessage("lblOK"));
-        okButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _finish(); } });
+        okButton.addActionListener(e -> _finish());
         autoButton = new FButton(Localizer.getInstance().getMessage("lblAuto"));
-        autoButton.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { _addAll(); _finish(); } });
+        autoButton.addActionListener(e -> { _addAll(); _finish(); });
 
         final FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectOrder") + ":").build();
@@ -185,23 +185,13 @@ public class DualListBox<T> extends FDialog {
         if (destElements != null && !destElements.isEmpty()) {
             addDestinationElements(destElements);
 
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    destList.setSelectedIndex(0);
-                }
-            });
+            SwingUtilities.invokeLater(() -> destList.setSelectedIndex(0));
         }
 
         if (sourceElements != null && !sourceElements.isEmpty()) {
             addSourceElements(sourceElements);
 
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    sourceList.setSelectedIndex(0);
-                }
-            });
+            SwingUtilities.invokeLater(() -> sourceList.setSelectedIndex(0));
         }
 
         int columnWidth = getColumnWidth();
@@ -394,56 +384,50 @@ public class DualListBox<T> extends FDialog {
                 final int callNum = ++callCount;
                 // invoke this later since the list is out of sync with the model
                 // at this moment.
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (callNum != callCount) {
-                            // don't run stale callbacks
-                            return;
-                        }
+                SwingUtilities.invokeLater(() -> {
+                    if (callNum != callCount) {
+                        // don't run stale callbacks
+                        return;
+                    }
 
-                        ListModel<T> model = list.getModel();
-                        if (0 == model.getSize()) {
-                            // nothing left to show
-                            return;
-                        }
+                    ListModel<T> model = list.getModel();
+                    if (0 == model.getSize()) {
+                        // nothing left to show
+                        return;
+                    }
 
-                        int cardIdx = e.getIndex0();
-                        if (model.getSize() <= cardIdx) {
-                            // the last element got removed, get the one above it
-                            cardIdx = model.getSize() - 1;
-                        }
-                        showCard = false;
-                        list.setSelectedIndex(cardIdx);
-                        showCard = true;
-                        showSelectedCard(model.getElementAt(cardIdx));
-                        if (!okButton.isEnabled()) {
-                            list.requestFocusInWindow();
-                        }
+                    int cardIdx = e.getIndex0();
+                    if (model.getSize() <= cardIdx) {
+                        // the last element got removed, get the one above it
+                        cardIdx = model.getSize() - 1;
+                    }
+                    showCard = false;
+                    list.setSelectedIndex(cardIdx);
+                    showCard = true;
+                    showSelectedCard(model.getElementAt(cardIdx));
+                    if (!okButton.isEnabled()) {
+                        list.requestFocusInWindow();
                     }
                 });
             }
 
             @Override
             public void intervalAdded(final ListDataEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        // select just-added items so user can undo the add with a single click
-                        int startIdx = Math.min(e.getIndex0(), e.getIndex1());
-                        int endIdx = Math.max(e.getIndex0(), e.getIndex1());
-                        int[] addedIndices = new int[endIdx - startIdx + 1];
-                        for (int idx = startIdx; idx <= endIdx; ++idx) {
-                            addedIndices[idx - startIdx] = idx;
-                        }
-                        // attempt to scroll to just-added item (setSelectedIndices does not scroll)
-                        // this will scroll to the wrong item if there are other identical items previously in the list
-                        showCard = false;
-                        list.setSelectedValue(list.getModel().getElementAt(
-                                Math.min(endIdx, startIdx + list.getVisibleRowCount())), true);
-                        list.setSelectedIndices(addedIndices);
-                        showCard = true;
+                SwingUtilities.invokeLater(() -> {
+                    // select just-added items so user can undo the add with a single click
+                    int startIdx = Math.min(e.getIndex0(), e.getIndex1());
+                    int endIdx = Math.max(e.getIndex0(), e.getIndex1());
+                    int[] addedIndices = new int[endIdx - startIdx + 1];
+                    for (int idx = startIdx; idx <= endIdx; ++idx) {
+                        addedIndices[idx - startIdx] = idx;
                     }
+                    // attempt to scroll to just-added item (setSelectedIndices does not scroll)
+                    // this will scroll to the wrong item if there are other identical items previously in the list
+                    showCard = false;
+                    list.setSelectedValue(list.getModel().getElementAt(
+                            Math.min(endIdx, startIdx + list.getVisibleRowCount())), true);
+                    list.setSelectedIndices(addedIndices);
+                    showCard = true;
                 });
             }
 
@@ -452,12 +436,7 @@ public class DualListBox<T> extends FDialog {
             }
         });
 
-        list.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent ev) {
-                showSelectedCard(list.getSelectedValue());
-            }
-        });
+        list.addListSelectionListener(ev -> showSelectedCard(list.getSelectedValue()));
 
         list.addFocusListener(new FocusAdapter() {
             @Override

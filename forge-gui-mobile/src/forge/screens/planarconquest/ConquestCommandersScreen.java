@@ -55,32 +55,21 @@ public class ConquestCommandersScreen extends FScreen {
         super(Forge.getLocalizer().getMessage("lblSelectCommander"), ConquestMenu.getMenu());
 
         lstCommanders.setup(ItemManagerConfig.CONQUEST_COMMANDERS);
-        lstCommanders.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.back();
+        lstCommanders.setItemActivateHandler(e -> Forge.back());
+        btnViewDeck.setCommand(e -> {
+            final ConquestCommander commander = lstCommanders.getSelectedItem();
+            if (commander != null) {
+                preventRefreshOnActivate = true;
+                FDeckViewer.show(commander.getDeck());
             }
         });
-        btnViewDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final ConquestCommander commander = lstCommanders.getSelectedItem();
-                if (commander != null) {
-                    preventRefreshOnActivate = true;
-                    FDeckViewer.show(commander.getDeck());
-                }
-            }
-        });
-        btnEditDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final ConquestCommander commander = lstCommanders.getSelectedItem();
-                if (commander != null) {
-                    /*preload deck to cache*/
-                    ImageCache.preloadCache(commander.getDeck());
-                    preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
-                    Forge.openScreen(new ConquestDeckEditor(commander));
-                }
+        btnEditDeck.setCommand(e -> {
+            final ConquestCommander commander = lstCommanders.getSelectedItem();
+            if (commander != null) {
+                /*preload deck to cache*/
+                ImageCache.preloadCache(commander.getDeck());
+                preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
+                Forge.openScreen(new ConquestDeckEditor(commander));
             }
         });
     }
@@ -300,14 +289,11 @@ public class ConquestCommandersScreen extends FScreen {
 
         @Override
         protected Predicate<ConquestCommander> buildPredicate() {
-            return new Predicate<ConquestCommander>() {
-                @Override
-                public boolean apply(ConquestCommander input) {
-                    if (filterValue == null) {
-                        return true;
-                    }
-                    return input.getOriginPlane() == filterValue;
+            return input -> {
+                if (filterValue == null) {
+                    return true;
                 }
+                return input.getOriginPlane() == filterValue;
             };
         }
     }

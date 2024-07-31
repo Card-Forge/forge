@@ -71,12 +71,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         if (lobby == null) {
             final FButton btnConnect = new FButton(Localizer.getInstance().getMessage("lblConnectToServer"));
             btnConnect.setFont(FSkin.getRelativeFont(20));
-            btnConnect.addActionListener(new ActionListener() {
-                @Override
-                public final void actionPerformed(final ActionEvent e) {
-                    getLayoutControl().connectToServer();
-                }
-            });
+            btnConnect.addActionListener(e -> getLayoutControl().connectToServer());
             container.setLayout(new MigLayout("insets 0, gap 0, ax center, ay center"));
             container.add(btnConnect, "w 300!, h 75!");
 
@@ -97,25 +92,17 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
 
         // Stop button event handling
-        btnStop.addActionListener(new ActionListener() {
-            @Override
-            public final void actionPerformed(final ActionEvent arg0) {
-                // do the STOP needful here
-                Runnable stopGame = VSubmenuOnlineLobby.this::reset;
-                if (stopGame != null) {
-                    stopGame.run();
-                }
+        btnStop.addActionListener(arg0 -> {
+            // do the STOP needful here
+            Runnable stopGame = VSubmenuOnlineLobby.this::reset;
+            if (stopGame != null) {
+                stopGame.run();
             }
         });
 
         for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
             fdc.populate();
-            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override
-                public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    lobby.focusOnAvatar();
-                }
-            });
+            fdc.getDecksComboBox().addListener(ev -> lobby.focusOnAvatar());
         }
 
         container.add(lobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");

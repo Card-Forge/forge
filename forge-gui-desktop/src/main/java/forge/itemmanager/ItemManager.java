@@ -187,28 +187,22 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.currentView.getPnlOptions());
         this.add(this.currentView.getScroller());
 
-        final Runnable cmdAddCurrentSearch = new Runnable() {
-            @Override public void run() {
-                final ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
-                if (searchFilter != null) {
-                    lockFiltering = true; //prevent updating filtering from this change
-                    addFilter(searchFilter);
-                    mainSearchFilter.reset();
-                    lockFiltering = false;
-                }
+        final Runnable cmdAddCurrentSearch = () -> {
+            final ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
+            if (searchFilter != null) {
+                lockFiltering = true; //prevent updating filtering from this change
+                addFilter(searchFilter);
+                mainSearchFilter.reset();
+                lockFiltering = false;
             }
         };
-        final Runnable cmdResetFilters = new Runnable() {
-            @Override public void run() {
-                resetFilters();
-                SwingUtilities.invokeLater(ItemManager.this::focus);
-            }
+        final Runnable cmdResetFilters = () -> {
+            resetFilters();
+            SwingUtilities.invokeLater(ItemManager.this::focus);
         };
-        final Runnable cmdHideFilters = new Runnable() {
-            @Override public void run() {
-                setHideFilters(!getHideFilters());
-                SwingUtilities.invokeLater(ItemManager.this::focus);
-            }
+        final Runnable cmdHideFilters = () -> {
+            setHideFilters(!getHideFilters());
+            SwingUtilities.invokeLater(ItemManager.this::focus);
         };
 
         this.mainSearchFilter.getMainComponent().addKeyListener(new KeyAdapter() {
@@ -222,35 +216,31 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         });
 
         //setup command for btnFilters
-        final UiCommand cmdBuildFilterMenu = new UiCommand() {
-            @Override public void run() {
-                final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblFilterMenu"));
-                if (hideFilters) {
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblShowFilters"), null, cmdHideFilters);
-                } else {
-                    final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
-                    GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
-                            KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                            cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                    if (config != ItemManagerConfig.STRING_ONLY) {
-                        buildAddFilterMenu(addMenu);
-                    }
-                    menu.add(addMenu);
-                    GuiUtils.addSeparator(menu);
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblResetFilters"), null, cmdResetFilters);
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblHideFilters"), null, cmdHideFilters);
+        final UiCommand cmdBuildFilterMenu = () -> {
+            final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblFilterMenu"));
+            if (hideFilters) {
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblShowFilters"), null, cmdHideFilters);
+            } else {
+                final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
+                GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
+                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                        cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
+                if (config != ItemManagerConfig.STRING_ONLY) {
+                    buildAddFilterMenu(addMenu);
                 }
-                menu.show(btnFilters, 0, btnFilters.getHeight());
+                menu.add(addMenu);
+                GuiUtils.addSeparator(menu);
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblResetFilters"), null, cmdResetFilters);
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblHideFilters"), null, cmdHideFilters);
             }
+            menu.show(btnFilters, 0, btnFilters.getHeight());
         };
         this.btnFilters.setCommand(cmdBuildFilterMenu);
         this.btnFilters.setRightClickCommand(cmdBuildFilterMenu); //show menu on right-click too
 
-        this.btnViewOptions.setCommand(new Runnable() {
-            @Override public void run() {
-                currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
-                revalidate();
-            }
+        this.btnViewOptions.setCommand((Runnable) () -> {
+            currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
+            revalidate();
         });
 
         //setup initial filters
@@ -875,12 +865,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         if (!applyFilters()) {
             filter.afterFiltersApplied(); //ensure this called even if filters didn't need to be updated
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                filter.getMainComponent().requestFocusInWindow();
-            }
-        });
+        SwingUtilities.invokeLater(() -> filter.getMainComponent().requestFocusInWindow());
     }
 
     public void restoreDefaultFilters() {

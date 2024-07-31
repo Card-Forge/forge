@@ -83,12 +83,8 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 if (hasFilters) {
                     //add a menu item for each filter to allow easily editing just that filter
                     for (final IFilterControl<T> control : model.getControls()) {
-                        GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(control.getFilter().toString(), false), null, new Runnable() {
-                            @Override
-                            public void run() {
-                                model.editFilterControl(control, onFilterChange);
-                            }
-                        });
+                        GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(control.getFilter().toString(), false),
+                                null, () -> model.editFilterControl(control, onFilterChange));
                     }
                     GuiUtils.addSeparator(menu);
                 }
@@ -96,12 +92,9 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                 GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblEditExpression"), null, AdvancedSearchFilter.this::edit);
 
                 if (hasFilters) {
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblClearFilter"), null, new Runnable() {
-                        @Override
-                        public void run() {
-                            reset();
-                            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
-                        }
+                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblClearFilter"), null, () -> {
+                        reset();
+                        itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
                     });
                 }
 

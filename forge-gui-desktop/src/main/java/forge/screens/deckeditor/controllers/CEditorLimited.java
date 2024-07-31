@@ -99,12 +99,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         final Supplier<DeckGroup> newCreator = DeckGroup::new;
         this.controller = new DeckController<>(deckMap0, this, newCreator);
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorLimited.addBasicLands(CEditorLimited.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorLimited.addBasicLands(CEditorLimited.this));
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Conspiracy);
@@ -114,13 +109,10 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
     }
 

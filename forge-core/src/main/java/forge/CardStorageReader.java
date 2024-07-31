@@ -227,14 +227,11 @@ public class CardStorageReader {
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
 
-        final Set<CardRules> result = new TreeSet<>(new Comparator<CardRules>() {
-            @Override
-            public int compare(final CardRules o1, final CardRules o2) {
-                if (loadingTokens) {
-                    return String.CASE_INSENSITIVE_ORDER.compare(o1.getNormalizedName(), o2.getNormalizedName());
-                }
-                return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
+        final Set<CardRules> result = new TreeSet<>((o1, o2) -> {
+            if (loadingTokens) {
+                return String.CASE_INSENSITIVE_ORDER.compare(o1.getNormalizedName(), o2.getNormalizedName());
             }
+            return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
         });
 
         if (loadCardsLazily) {
@@ -321,14 +318,11 @@ public class CardStorageReader {
         for (int iPart = 0; iPart < maxParts; iPart++) {
             final int from = iPart * filesPerPart;
             final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
-            tasks.add(new Callable<List<CardRules>>() {
-                @Override
-                public List<CardRules> call() throws Exception{
-                    final List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
-                    cdl.countDown();
-                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
-                    return res;
-                }
+            tasks.add(() -> {
+                final List<CardRules> res = loadCardsInRangeFromZip(entries, from, till);
+                cdl.countDown();
+                progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
+                return res;
             });
         }
         return tasks;
@@ -342,14 +336,11 @@ public class CardStorageReader {
         for (int iPart = 0; iPart < maxParts; iPart++) {
             final int from = iPart * filesPerPart;
             final int till = iPart == maxParts - 1 ? totalFiles : from + filesPerPart;
-            tasks.add(new Callable<List<CardRules>>() {
-                @Override
-                public List<CardRules> call() throws Exception{
-                    final List<CardRules> res = loadCardsInRange(allFiles, from, till);
-                    cdl.countDown();
-                    progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
-                    return res;
-                }
+            tasks.add(() -> {
+                final List<CardRules> res = loadCardsInRange(allFiles, from, till);
+                cdl.countDown();
+                progressObserver.report(maxParts - (int)cdl.getCount(), maxParts);
+                return res;
             });
         }
         return tasks;

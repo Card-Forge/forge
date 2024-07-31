@@ -49,32 +49,19 @@ public class VAutoYields extends FDialog {
         listScroller = new FScrollPane(lstAutoYields, true);
 
         chkDisableAll = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), matchUI.getDisableAutoYields());
-        chkDisableAll.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                matchUI.setDisableAutoYields(chkDisableAll.isSelected());
-            }
-        });
+        chkDisableAll.addChangeListener(e -> matchUI.setDisableAutoYields(chkDisableAll.isSelected()));
 
         btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
-        btnOk.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                setVisible(false);
-            }
-        });
+        btnOk.setCommand((UiCommand) () -> setVisible(false));
         btnRemove = new FButton(Localizer.getInstance().getMessage("lblRemoveYield"));
-        btnRemove.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                String selected = lstAutoYields.getSelectedValue();
-                if (selected != null) {
-                    autoYields.remove(selected);
-                    btnRemove.setEnabled(autoYields.size() > 0);
-                    matchUI.setShouldAutoYield(selected, false);
-                    VAutoYields.this.revalidate();
-                    lstAutoYields.repaint();
-                }
+        btnRemove.setCommand((UiCommand) () -> {
+            String selected = lstAutoYields.getSelectedValue();
+            if (selected != null) {
+                autoYields.remove(selected);
+                btnRemove.setEnabled(autoYields.size() > 0);
+                matchUI.setShouldAutoYield(selected, false);
+                VAutoYields.this.revalidate();
+                lstAutoYields.repaint();
             }
         });
         if (autoYields.size() > 0) {

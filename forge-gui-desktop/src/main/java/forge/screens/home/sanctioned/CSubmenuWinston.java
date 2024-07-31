@@ -42,12 +42,7 @@ public enum CSubmenuWinston implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdDeckSelect = new UiCommand() {
-        @Override
-        public void run() {
-            VSubmenuWinston.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-        }
-    };
+    private final UiCommand cmdDeckSelect = () -> VSubmenuWinston.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
 
     @Override
     public void register() {
@@ -64,12 +59,7 @@ public enum CSubmenuWinston implements ICDoc {
 
         view.getBtnBuildDeck().setCommand((UiCommand) this::setupDraft);
 
-        view.getBtnStart().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                startGame(GameType.Winston);
-            }
-        });
+        view.getBtnStart().addActionListener(e -> startGame(GameType.Winston));
     }
 
     /* (non-Javadoc)
@@ -87,13 +77,11 @@ public enum CSubmenuWinston implements ICDoc {
             btnStart.setEnabled(true);
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                if (btnStart.isEnabled()) {
-                    view.getBtnStart().requestFocusInWindow();
-                } else {
-                    view.getBtnBuildDeck().requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            if (btnStart.isEnabled()) {
+                view.getBtnStart().requestFocusInWindow();
+            } else {
+                view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
     }
@@ -115,12 +103,9 @@ public enum CSubmenuWinston implements ICDoc {
             }
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         final DeckGroup opponentDecks = FModel.getDecks().getWinston().get(humanDeck.getName());

@@ -182,12 +182,7 @@ public class TokenAi extends SpellAbilityAi {
                 } else {
                     // Flash Foliage
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card c) {
-                            return c.getLethalDamage() == 1;
-                        }
-                    });
+                    CardCollection betterList = CardLists.filter(list, c -> c.getLethalDamage() == 1);
                     if (!betterList.isEmpty()) {
                         list = betterList;
                     }

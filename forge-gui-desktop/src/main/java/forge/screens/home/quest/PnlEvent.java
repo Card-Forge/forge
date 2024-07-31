@@ -89,12 +89,9 @@ class PnlEvent extends JPanel {
         });
 
         // Change listener for radio button
-        this.rad.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent arg0) {
-                if (rad.isSelected()) {
-                    QuestUtil.setEvent(event);
-                }
+        this.rad.addChangeListener(arg0 -> {
+            if (rad.isSelected()) {
+                QuestUtil.setEvent(event);
             }
         });
 

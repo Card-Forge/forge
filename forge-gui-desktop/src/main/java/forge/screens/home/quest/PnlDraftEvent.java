@@ -42,14 +42,11 @@ public class PnlDraftEvent extends JPanel {
 		eventFee.setText(QuestUtil.formatCredits(event.getEntryFee()) + " Credit Entry Fee");
 		eventFee.setFont(FSkin.getFont());
 
-		radButton.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				if (radButton.isSelected()) {
-					QuestUtil.setDraftEvent(event);
-				}
-			}
-		});
+		radButton.addChangeListener(arg0 -> {
+            if (radButton.isSelected()) {
+                QuestUtil.setDraftEvent(event);
+            }
+        });
 
 		this.addMouseListener(mouseListener);
 		eventBoosters.addMouseListener(mouseListener);

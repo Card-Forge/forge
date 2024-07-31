@@ -43,9 +43,7 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
     public void initialize() {
         view.getList().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         updateData();
-        view.getBtnStart().addActionListener(
-                new ActionListener() { @Override
-                public void actionPerformed(final ActionEvent e) { startPuzzleSolve(); } });
+        view.getBtnStart().addActionListener(e -> startPuzzleSolve());
     }
 
     private final UiCommand cmdStart = new UiCommand() {
@@ -84,29 +82,18 @@ public enum CSubmenuPuzzleSolve implements ICDoc, IMenuProvider {
             return false;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        hostedMatch.setStartGameHook(new Runnable() {
-            @Override
-            public final void run() {
-                SOptionPane.showMessageDialog(selected.getGoalDescription(), selected.getName(), SOptionPane.INFORMATION_ICON);
-                selected.applyToGame(hostedMatch.getGame());
-            }
+        hostedMatch.setStartGameHook(() -> {
+            SOptionPane.showMessageDialog(selected.getGoalDescription(), selected.getName(), SOptionPane.INFORMATION_ICON);
+            selected.applyToGame(hostedMatch.getGame());
         });
 
-        hostedMatch.setEndGameHook((new Runnable() {
-            @Override
-            public void run() {
-                selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()));
-            }
-        }));
+        hostedMatch.setEndGameHook((() -> selected.savePuzzleSolve(hostedMatch.getGame().getOutcome().isWinner(GamePlayerUtil.getGuiPlayer()))));
 
         final List<RegisteredPlayer> players = new ArrayList<>();
         final RegisteredPlayer human = new RegisteredPlayer(new Deck()).setPlayer(GamePlayerUtil.getGuiPlayer());

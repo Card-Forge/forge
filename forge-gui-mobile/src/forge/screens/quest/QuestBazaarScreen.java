@@ -178,12 +178,9 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
                 btnBuy.setEnabled(false);
             }
             else {
-                btnBuy.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        QuestUtil.buyQuestItem(item);
-                        ((BazaarPage)((QuestBazaarScreen)Forge.getCurrentScreen()).getSelectedPage()).update();
-                    }
+                btnBuy.setCommand(e -> {
+                    QuestUtil.buyQuestItem(item);
+                    ((BazaarPage)((QuestBazaarScreen)Forge.getCurrentScreen()).getSelectedPage()).update();
                 });
             }
         }

@@ -48,14 +48,11 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap.put(st, button);
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons
-        button.setRightClickCommand(new UiCommand() {
-            @Override
-            public void run() {
-                lockFiltering = true;
-                SFilterUtil.showOnlyStat(st, button, buttonMap);
-                lockFiltering = false;
-                applyChange();
-            }
+        button.setRightClickCommand((UiCommand) () -> {
+            lockFiltering = true;
+            SFilterUtil.showOnlyStat(st, button, buttonMap);
+            lockFiltering = false;
+            applyChange();
         });
     }
 

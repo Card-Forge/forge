@@ -30,27 +30,19 @@ public final class OnlineMenu {
 
     static {
         chatItem = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblShowChatPanel"));
-        chatItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (((JMenuItem)e.getSource()).isSelected()) {
-                    FNetOverlay.SINGLETON_INSTANCE.show();
-                }
-                else {
-                    FNetOverlay.SINGLETON_INSTANCE.hide();
-                }
+        chatItem.addActionListener(e -> {
+            if (((JMenuItem)e.getSource()).isSelected()) {
+                FNetOverlay.SINGLETON_INSTANCE.show();
+            }
+            else {
+                FNetOverlay.SINGLETON_INSTANCE.hide();
             }
         });
     }
 
     private static JMenuItem getMenuItem_ConnectToServer() {
         JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblConnectToServer"));
-        menuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CSubmenuOnlineLobby.SINGLETON_INSTANCE.connectToServer();
-            }
-        });
+        menuItem.addActionListener(e -> CSubmenuOnlineLobby.SINGLETON_INSTANCE.connectToServer());
         return menuItem;
     }
 }

@@ -37,12 +37,9 @@ public class NewGameMenu extends FPopupMenu {
 
         NewGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(caption0, icon0, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    open(true); //remove current screen from chain
-                    setPreferredScreen(NewGameScreen.this);
-                }
+            item = new FMenuItem(caption0, icon0, e -> {
+                open(true); //remove current screen from chain
+                setPreferredScreen(NewGameScreen.this);
             });
         }
         

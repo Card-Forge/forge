@@ -47,81 +47,43 @@ import forge.util.collect.FCollectionView;
 public final class CardPredicates {
 
     public static final Predicate<Card> isController(final Player p) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getController().equals(p);
-            }
-        };
+        return c -> c.getController().equals(p);
     }
     public static final Predicate<Card> isControlledByAnyOf(final FCollectionView<Player> pList) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return pList.contains(c.getController());
-            }
-        };
+        return c -> pList.contains(c.getController());
     }
     public static final Predicate<Card> isOwner(final Player p) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return p.equals(c.getOwner());
-            }
-        };
+        return c -> p.equals(c.getOwner());
     }
 
     public static final Predicate<Card> ownerLives() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.getOwner().hasLost();
-            }
-        };
+        return c -> !c.getOwner().hasLost();
     }
 
     public static final Predicate<Card> isType(final String cardType) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getType().hasStringType(cardType);
-            }
-        };
+        return c -> c.getType().hasStringType(cardType);
     }
 
     public static final Predicate<Card> hasKeyword(final String keyword) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasKeyword(keyword);
-            }
-        };
+        return c -> c.hasKeyword(keyword);
     }
 
     public static final Predicate<Card> hasKeyword(final Keyword keyword) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasKeyword(keyword);
-            }
-        };
+        return c -> c.hasKeyword(keyword);
     }
 
     public static final Predicate<Card> containsKeyword(final String keyword) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
+        return c -> {
+            if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
+                return true;
+            }
+
+            for (KeywordInterface k : c.getKeywords()) {
+                if (k.getOriginal().contains(keyword)) {
                     return true;
                 }
-
-                for (KeywordInterface k : c.getKeywords()) {
-                    if (k.getOriginal().contains(keyword)) {
-                        return true;
-                    }
-                }
-                return false;
             }
+            return false;
         };
     }
 
@@ -130,230 +92,109 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> nameEquals(final String name) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.getName().equals(name);
-            }
-        };
+        return c -> c.getName().equals(name);
     }
 
     public static final Predicate<Card> sharesNameWith(final Card name) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.sharesNameWith(name);
-            }
-        };
+        return c -> c.sharesNameWith(name);
     }
 
     public static final Predicate<Card> sharesCMCWith(final Card cmc) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.sharesCMCWith(cmc);
-            }
-        };
+        return c -> c.sharesCMCWith(cmc);
     }
 
     public static final Predicate<Card> sharesColorWith(final Card color) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.sharesColorWith(color);
-            }
-        };
+        return c -> c.sharesColorWith(color);
     }
 
     public static final Predicate<Card> sharesControllerWith(final Card card) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.sharesControllerWith(card);
-            }
-        };
+        return c -> c.sharesControllerWith(card);
     }
 
     public static Predicate<Card> sharesCardTypeWith(final Card card) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.sharesCardTypeWith(card);
-            }
-        };
+        return c -> c.sharesCardTypeWith(card);
     }
 
     public static Predicate<Card> sharesCreatureTypeWith(final Card card) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.sharesCreatureTypeWith(card);
-            }
-        };
+        return c -> c.sharesCreatureTypeWith(card);
     }
 
     public static Predicate<Card> sharesLandTypeWith(final Card card) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.sharesLandTypeWith(card);
-            }
-        };
+        return c -> c.sharesLandTypeWith(card);
     }
 
     public static final Predicate<Card> possibleBlockers(final Card attacker) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isCreature() && CombatUtil.canBlock(attacker, c);
-            }
-        };
+        return c -> c.isCreature() && CombatUtil.canBlock(attacker, c);
     }
 
     public static final Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isCreature() && CombatUtil.canBlockAtLeastOne(c, attackers);
-            }
-        };
+        return c -> c.isCreature() && CombatUtil.canBlockAtLeastOne(c, attackers);
     }
 
     public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c != null && c.isValid(restrictions, sourceController, source, spellAbility);
-            }
-        };
+        return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
     public static final Predicate<Card> restriction(final String restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c != null && c.isValid(restrictions, sourceController, source, spellAbility);
-            }
-        };
+        return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
     public static final Predicate<Card> canBeSacrificedBy(final SpellAbility sa, final boolean effect) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeSacrificedBy(sa, effect);
-            }
-        };
+        return c -> c.canBeSacrificedBy(sa, effect);
     }
 
     public static final Predicate<Card> canExiledBy(final SpellAbility sa, final boolean effect) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canExiledBy(sa, effect);
-            }
-        };
+        return c -> c.canExiledBy(sa, effect);
     }
 
     public static final Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canBeAttached(aura, sa);
-            }
-        };
+        return c -> c.canBeAttached(aura, sa);
     }
 
     public static final Predicate<Card> isColor(final byte color) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getColor().hasAnyColor(color);
-            }
-        };
+        return c -> c.getColor().hasAnyColor(color);
     } // getColor()
 
     public static final Predicate<Card> isExactlyColor(final byte color) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getColor().hasExactlyColor(color);
-            }
-        };
+        return c -> c.getColor().hasExactlyColor(color);
     }
 
     public static final Predicate<Card> isColorless() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getColor().isColorless();
-            }
-        };
+        return c -> c.getColor().isColorless();
     }
 
     public static final Predicate<Card> isEquippedBy(final String name) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isEquippedBy(name);
-            }
-        };
+        return c -> c.isEquippedBy(name);
     }
 
     public static final Predicate<Card> isEnchantedBy(final String name) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isEnchantedBy(name);
-            }
-        };
+        return c -> c.isEnchantedBy(name);
     }
 
     public static final Predicate<Card> hasCMC(final int cmc) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.sharesCMCWith(cmc);
-            }
-        };
+        return c -> c.sharesCMCWith(cmc);
     }
 
     public static final Predicate<Card> greaterCMC(final int cmc) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                // do not check for Split card anymore
-                return c.getCMC() >= cmc;
-            }
+        return c -> {
+            // do not check for Split card anymore
+            return c.getCMC() >= cmc;
         };
     }
 
     public static final Predicate<Card> lessCMC(final int cmc) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                // do not check for Split card anymore
-                return c.getCMC() <= cmc;
-            }
+        return c -> {
+            // do not check for Split card anymore
+            return c.getCMC() <= cmc;
         };
     }
 
     public static final Predicate<Card> evenCMC() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getCMC() % 2 == 0;
-            }
-        };
+        return c -> c.getCMC() % 2 == 0;
     }
 
     public static final Predicate<Card> oddCMC() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getCMC() % 2 == 1;
-            }
-        };
+        return c -> c.getCMC() % 2 == 1;
     }
 
     public static final Predicate<Card> hasSuspend() {
@@ -372,24 +213,16 @@ public final class CardPredicates {
     }
 
     public static final Predicate<Card> hasCounter(final CounterType type, final int n) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getCounters(type) >= n;
-            }
-        };
+        return c -> c.getCounters(type) >= n;
     }
     public static final Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
         return hasCounter(CounterType.get(type), n);
     }
 
     public static final Predicate<Card> hasLessCounter(final CounterType type, final int n) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                int x = c.getCounters(type);
-                return x > 0 && x <= n;
-            }
+        return c -> {
+            int x = c.getCounters(type);
+            return x > 0 && x <= n;
         };
     }
     public static final Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
@@ -397,124 +230,72 @@ public final class CardPredicates {
     }
 
     public static Predicate<Card> canReceiveCounters(final CounterType counter) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.canReceiveCounters(counter);
-            }
-        };
+        return c -> c.canReceiveCounters(counter);
     }
     public static Predicate<Card> canReceiveCounters(final CounterEnumType counter) {
         return canReceiveCounters(CounterType.get(counter));
     }
 
     public static final Predicate<Card> hasGreaterPowerThan(final int minPower) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getNetPower() > minPower;
-            }
-        };
+        return c -> c.getNetPower() > minPower;
     }
 
     public static final Comparator<Card> compareByCounterType(final CounterType type) {
-        return new Comparator<Card>() {
-            @Override
-            public int compare(Card arg0, Card arg1) {
-                return Integer.compare(arg0.getCounters(type),
-                    arg1.getCounters(type));
-            }
-        };
+        return (arg0, arg1) -> Integer.compare(arg0.getCounters(type),
+            arg1.getCounters(type));
     }
     public static final Comparator<Card> compareByCounterType(final CounterEnumType type) {
         return compareByCounterType(CounterType.get(type));
     }
 
     public static final Predicate<Card> hasSVar(final String name) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasSVar(name);
-            }
-        };
+        return c -> c.hasSVar(name);
     }
 
     public static final Predicate<Card> isExiledWith(final Card card) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return card.equals(c.getExiledWith());
-            }
-        };
+        return c -> card.equals(c.getExiledWith());
     }
 
     public static final Comparator<Card> compareByGameTimestamp() {
-        return new Comparator<Card>() {
-            @Override
-            public int compare(Card arg0, Card arg1) {
-                return Long.compare(arg0.getGameTimestamp(), arg1.getGameTimestamp());
-            }
-        };
+        return (arg0, arg1) -> Long.compare(arg0.getGameTimestamp(), arg1.getGameTimestamp());
     }
 
     public static final Predicate<Card> inZone(final ZoneType zt) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                Zone z = c.getLastKnownZone();
-                return z != null && z.is(zt);
-            }
+        return c -> {
+            Zone z = c.getLastKnownZone();
+            return z != null && z.is(zt);
         };
     }
 
     public static final Predicate<Card> inZone(final Iterable<ZoneType> zt) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                Zone z = c.getLastKnownZone();
-                if (z != null) {
-                    for (ZoneType t : zt) {
-                        if (z.is(t)) {
-                            return true;
-                        }
+        return c -> {
+            Zone z = c.getLastKnownZone();
+            if (z != null) {
+                for (ZoneType t : zt) {
+                    if (z.is(t)) {
+                        return true;
                     }
                 }
-                return false;
             }
+            return false;
         };
     }
 
     public static final Predicate<Card> isRemAIDeck() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c)
-            {
-                return c.getRules() != null && c.getRules().getAiHints().getRemAIDecks();
-            }
-        };
+        return c -> c.getRules() != null && c.getRules().getAiHints().getRemAIDecks();
     }
 
     public static final Predicate<Card> castSA(final Predicate<SpellAbility> predSA) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c)
-            {
-                if (c.getCastSA() == null) {
-                    return false;
-                }
-                return predSA.apply(c.getCastSA());
+        return c -> {
+            if (c.getCastSA() == null) {
+                return false;
             }
+            return predSA.apply(c.getCastSA());
         };
     }
 
     public static final Predicate<Card> phasedIn() {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c)
-            {
-                return !c.isPhasedOut();
-            }
-        };
+        return c -> !c.isPhasedOut();
     }
 
     public static Predicate<Card> isAttractionWithLight(int light) {
@@ -568,12 +349,7 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all unenchanted cards in a list.
          */
-        public static final Predicate<Card> UNENCHANTED = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return !c.isEnchanted();
-            }
-        };
+        public static final Predicate<Card> UNENCHANTED = c -> !c.isEnchanted();
         /**
          * a Predicate<Card> to get all enchanted cards in a list.
          */
@@ -581,30 +357,17 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nontoken cards.
          */
-        public static final Predicate<Card> NON_TOKEN = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return !(c.isToken() || c.isTokenCard());
-            }
-        };
+        public static final Predicate<Card> NON_TOKEN = c -> !(c.isToken() || c.isTokenCard());
         /**
          * a Predicate<Card> to get all token cards.
          */
-        public static final Predicate<Card> TOKEN = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isToken() || c.isTokenCard();
-            }
-        };
+        public static final Predicate<Card> TOKEN = c -> c.isToken() || c.isTokenCard();
         /**
          * a Predicate<Card> to get all basicLands.
          */
-        public static final Predicate<Card> BASIC_LANDS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                // the isBasicLand() check here may be sufficient...
-                return c.isLand() && c.isBasicLand();
-            }
+        public static final Predicate<Card> BASIC_LANDS = c -> {
+            // the isBasicLand() check here may be sufficient...
+            return c.isLand() && c.isBasicLand();
         };
         /**
          * a Predicate<Card> to get all artifacts.
@@ -613,30 +376,15 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nonartifacts.
          */
-        public static final Predicate<Card> NON_ARTIFACTS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return !c.isArtifact();
-            }
-        };
+        public static final Predicate<Card> NON_ARTIFACTS = c -> !c.isArtifact();
         /**
          * a Predicate<Card> to get all lands.
          */
-        public static final Predicate<Card> LANDS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isLand() || (!c.isInZone(ZoneType.Battlefield) && c.isModal() && c.getState(CardStateName.Modal).getType().isLand());
-            }
-        };
+        public static final Predicate<Card> LANDS = c -> c.isLand() || (!c.isInZone(ZoneType.Battlefield) && c.isModal() && c.getState(CardStateName.Modal).getType().isLand());
         /**
          * a Predicate<Card> to get all mana-producing lands.
          */
-        public static final Predicate<Card> LANDS_PRODUCING_MANA = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
-            }
-        };
+        public static final Predicate<Card> LANDS_PRODUCING_MANA = c -> c.isBasicLand() || (c.isLand() && !c.getManaAbilities().isEmpty());
         /**
          * a Predicate<Card> to get all permanents.
          */
@@ -644,31 +392,11 @@ public final class CardPredicates {
         /**
          * a Predicate<Card> to get all nonland permanents.
          */
-        public static final Predicate<Card> NONLAND_PERMANENTS = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isPermanent() && !c.isLand();
-            }
-        };
+        public static final Predicate<Card> NONLAND_PERMANENTS = c -> c.isPermanent() && !c.isLand();
 
-        public static final Predicate<Card> hasFirstStrike = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
-            }
-        };
-        public static final Predicate<Card> hasSecondStrike = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
-            }
-        };
-        public static final Predicate<Card> SNOW_LANDS = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isLand() && c.isSnow();
-            }
-        };
+        public static final Predicate<Card> hasFirstStrike = c -> c.isCreature() && (c.hasFirstStrike() || c.hasDoubleStrike());
+        public static final Predicate<Card> hasSecondStrike = c -> c.isCreature() && (!c.hasFirstStrike() || c.hasDoubleStrike());
+        public static final Predicate<Card> SNOW_LANDS = c -> c.isLand() && c.isSnow();
         public static final Predicate<Card> PLANESWALKERS = Card::isPlaneswalker;
         public static final Predicate<Card> BATTLES = Card::isBattle;
         public static final Predicate<Card> CAN_BE_DESTROYED = Card::canBeDestroyed;

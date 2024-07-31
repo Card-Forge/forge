@@ -63,12 +63,7 @@ public class FThreads {
     }
 
     public static void delayInEDT(final int milliseconds, final Runnable inputUpdater) {
-        final Runnable runInEdt = new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtNowOrLater(inputUpdater);
-            }
-        };
+        final Runnable runInEdt = () -> FThreads.invokeInEdtNowOrLater(inputUpdater);
         ThreadUtil.delay(milliseconds, runInEdt);
     }
 

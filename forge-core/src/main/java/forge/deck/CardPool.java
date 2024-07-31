@@ -318,12 +318,7 @@ public class CardPool extends ItemPool<PaperCard> {
         ListMultimap<Integer, CardEdition> editionsStatistics = this.getCardEditionsGroupedByNumberOfCards(false);
         List<Integer> frequencyValues = new ArrayList<>(editionsStatistics.keySet());
         // Sort in descending order
-        frequencyValues.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer f1, Integer f2) {
-                return (f1.compareTo(f2)) * -1;
-            }
-        });
+        frequencyValues.sort((f1, f2) -> (f1.compareTo(f2)) * -1);
         float weightedMean = 0;
         int sumWeights = 0;
         for (Integer freq : frequencyValues) {

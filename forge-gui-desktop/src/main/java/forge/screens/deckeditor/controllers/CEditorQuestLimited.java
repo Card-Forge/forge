@@ -118,12 +118,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
         controller.getView().getDeckManager().setup(ItemManagerConfig.DRAFT_POOL);
         controller.setModel(questData0.getDraftDecks().get(QuestEventDraft.DECK_NAME));
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorLimited.addBasicLands(CEditorQuestLimited.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorLimited.addBasicLands(CEditorQuestLimited.this));
     }
 
     // fills number of decks using each card

@@ -216,12 +216,9 @@ public class VAssignCombatDamage {
             pnlDefenders.add(l.label, "w 145px!, h 30px!, gap 5px 5px 0 5px");
         }
 
-        btnOK.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
-        btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(false); } });
-        btnAuto.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedDamage(); initialAssignDamage(true); finish(); } });
+        btnOK.addActionListener(arg0 -> finish());
+        btnReset.addActionListener(arg0 -> { resetAssignedDamage(); initialAssignDamage(false); });
+        btnAuto.addActionListener(arg0 -> { resetAssignedDamage(); initialAssignDamage(true); finish(); });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
@@ -238,8 +235,7 @@ public class VAssignCombatDamage {
 
         if (maySkip) {
             pnlButtons.add(btnSkip, "gap 0 10px 0 0, w 110px!, h 30px!");
-            btnSkip.addActionListener(new ActionListener() {
-                @Override public void actionPerformed(ActionEvent arg0) { skip = true; finish(); } });
+            btnSkip.addActionListener(arg0 -> { skip = true; finish(); });
         }
 
         pnlMain.add(pnlButtons, "ax center, w 500px!, gap 10px 10px 10px 10px, span 2");

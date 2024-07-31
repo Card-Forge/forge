@@ -35,29 +35,16 @@ public class VAutoYields extends FDialog {
             }
         });
         chkDisableAll = add(new FCheckBox(Forge.getLocalizer().getMessage("lblDisableAllAutoYields"), MatchController.instance.getDisableAutoYields()));
-        chkDisableAll.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected());
-            }
-        });
-        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-            }
-        });
-        initButton(1, Forge.getLocalizer().getMessage("lblRemoveYield"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                String selected = lstAutoYields.getSelectedItem();
-                if (selected != null) {
-                    lstAutoYields.removeItem(selected);
-                    MatchController.instance.setShouldAutoYield(selected, false);
-                    setButtonEnabled(1, lstAutoYields.getCount() > 0);
-                    lstAutoYields.cleanUpSelections();
-                    VAutoYields.this.revalidate();
-                }
+        chkDisableAll.setCommand(e -> MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected()));
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> hide());
+        initButton(1, Forge.getLocalizer().getMessage("lblRemoveYield"), e -> {
+            String selected = lstAutoYields.getSelectedItem();
+            if (selected != null) {
+                lstAutoYields.removeItem(selected);
+                MatchController.instance.setShouldAutoYield(selected, false);
+                setButtonEnabled(1, lstAutoYields.getCount() > 0);
+                lstAutoYields.cleanUpSelections();
+                VAutoYields.this.revalidate();
             }
         });
         setButtonEnabled(1, autoYields.size() > 0);

@@ -500,12 +500,7 @@ public class CardFactory {
             to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
-            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
-                @Override
-                public AbilitySub apply(AbilitySub input) {
-                    return (AbilitySub) input.copy(host, p, lki, keepTextChanges);
-                }
-            }));
+            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());

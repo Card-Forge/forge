@@ -113,14 +113,12 @@ public abstract class ItemView<T extends InventoryItem> {
         });
         comp.addKeyListener(incrementalSearch);
 
-        this.button.setCommand(new Runnable() {
-            @Override public void run() {
-                if (button.isSelected()) {
-                    itemManager.setViewIndex(index);
-                }
-                else {
-                    button.setSelected(true); //prevent toggling off button
-                }
+        this.button.setCommand((Runnable) () -> {
+            if (button.isSelected()) {
+                itemManager.setViewIndex(index);
+            }
+            else {
+                button.setSelected(true); //prevent toggling off button
             }
         });
 
@@ -180,16 +178,14 @@ public abstract class ItemView<T extends InventoryItem> {
     protected void setUniqueCardsOnlyFilter() {
         this.uniqueCardsOnlyChkBox.setFont(ROW_FONT);
         this.uniqueCardsOnlyChkBox.setToolTipText(localizer.getMessage("ttUniqueCardsOnly"));
-        this.uniqueCardsOnlyChkBox.addChangeListener(new ChangeListener() {
-            @Override public void stateChanged(final ChangeEvent arg0) {
-                final boolean wantUnique = uniqueCardsOnlyChkBox.isSelected();
-                if (itemManager.getWantUnique() == wantUnique) { return; }
-                itemManager.setWantUnique(wantUnique);
-                itemManager.refresh();
+        this.uniqueCardsOnlyChkBox.addChangeListener(arg0 -> {
+            final boolean wantUnique = uniqueCardsOnlyChkBox.isSelected();
+            if (itemManager.getWantUnique() == wantUnique) { return; }
+            itemManager.setWantUnique(wantUnique);
+            itemManager.refresh();
 
-                if (itemManager.getConfig() != null) {
-                    itemManager.getConfig().setUniqueCardsOnly(wantUnique);
-                }
+            if (itemManager.getConfig() != null) {
+                itemManager.getConfig().setUniqueCardsOnly(wantUnique);
             }
         });
         getPnlOptions().add(uniqueCardsOnlyChkBox);
@@ -427,11 +423,7 @@ public abstract class ItemView<T extends InventoryItem> {
                 popup = factory.getPopup(null, popupLabel, tableLoc.x + 10, tableLoc.y + 10);
                 FSkin.setTempBackground(SwingUtilities.getRoot(popupLabel), FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
 
-                popupTimer = new Timer(5000, new ActionListener() {
-                    @Override public void actionPerformed(final ActionEvent e) {
-                        cancel();
-                    }
-                });
+                popupTimer = new Timer(5000, e -> cancel());
                 popupTimer.setRepeats(false);
 
                 popup.show();

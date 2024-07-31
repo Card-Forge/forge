@@ -132,16 +132,13 @@ public class FloatingZone extends FloatingCardArea {
     protected boolean sortedByName = false;
     protected FCollection<CardView> cardList;
 
-    private final Comparator<CardView> comp = new Comparator<CardView>() {
-        @Override
-        public int compare(CardView lhs, CardView rhs) {
-            if (!getMatchUI().mayView(lhs)) {
-                return (getMatchUI().mayView(rhs)) ? 1 : 0;
-            } else if (!getMatchUI().mayView(rhs)) {
-                return -1;
-            } else {
-                return lhs.getName().compareTo(rhs.getName());
-            }
+    private final Comparator<CardView> comp = (lhs, rhs) -> {
+        if (!getMatchUI().mayView(lhs)) {
+            return (getMatchUI().mayView(rhs)) ? 1 : 0;
+        } else if (!getMatchUI().mayView(rhs)) {
+            return -1;
+        } else {
+            return lhs.getName().compareTo(rhs.getName());
         }
     };
 

@@ -25,12 +25,9 @@ public class ConquestCommander implements InventoryItem, IXmlWritable {
         this(card0, null, null);
     }
     public ConquestCommander(PaperCard card0, ConquestPlane startingPlane) {
-        this(card0, ConquestUtil.generateDeck(card0, new DeckGenPool(startingPlane.getCardPool().getAllCards(new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard pc) {
-                CardRules rules = pc.getRules();
-                return !rules.canBeCommander() && !rules.getType().isPlaneswalker(); //prevent including additional commanders or planeswalkers in starting deck
-            }
+        this(card0, ConquestUtil.generateDeck(card0, new DeckGenPool(startingPlane.getCardPool().getAllCards(pc -> {
+            CardRules rules = pc.getRules();
+            return !rules.canBeCommander() && !rules.getType().isPlaneswalker(); //prevent including additional commanders or planeswalkers in starting deck
         })), false), null);
     }
     private ConquestCommander(PaperCard card0, Deck deck0, ConquestRecord record0) {

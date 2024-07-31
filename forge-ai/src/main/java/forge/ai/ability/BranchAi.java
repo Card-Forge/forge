@@ -35,12 +35,9 @@ public class BranchAi extends SpellAbilityAi {
             }
 
             final CardCollection attackers = combat.getAttackers();
-            final CardCollection attackingBattle = CardLists.filter(attackers, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    final GameEntity def = combat.getDefenderByAttacker(combat.getBandOfAttacker(card));
-                    return def instanceof Card && ((Card)def).isBattle();
-                }
+            final CardCollection attackingBattle = CardLists.filter(attackers, card -> {
+                final GameEntity def = combat.getDefenderByAttacker(combat.getBandOfAttacker(card));
+                return def instanceof Card && ((Card)def).isBattle();
             });
 
             if (!attackingBattle.isEmpty()) {

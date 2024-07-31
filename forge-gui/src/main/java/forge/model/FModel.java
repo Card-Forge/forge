@@ -140,23 +140,17 @@ public final class FModel {
                 ProgressObserver.emptyObserver : new ProgressObserver() {
             @Override
             public void setOperationName(final String name, final boolean usePercents) {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setDescription(name);
-                        progressBar.setPercentMode(usePercents);
-                    }
+                FThreads.invokeInEdtLater(() -> {
+                    progressBar.setDescription(name);
+                    progressBar.setPercentMode(usePercents);
                 });
             }
 
             @Override
             public void report(final int current, final int total) {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setMaximum(total);
-                        progressBar.setValue(current);
-                    }
+                FThreads.invokeInEdtLater(() -> {
+                    progressBar.setMaximum(total);
+                    progressBar.setValue(current);
                 });
             }
         };
@@ -249,12 +243,7 @@ public final class FModel {
         Spell.setPerformanceMode(preferences.getPrefBoolean(FPref.PERFORMANCE_MODE));
 
         if (progressBar != null) {
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks"));
-                }
-            });
+            FThreads.invokeInEdtLater(() -> progressBar.setDescription(Localizer.getInstance().getMessage("splash.loading.decks")));
         }
 
         decks = new CardCollections();

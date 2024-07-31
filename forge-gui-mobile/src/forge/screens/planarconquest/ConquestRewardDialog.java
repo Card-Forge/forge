@@ -183,21 +183,13 @@ public class ConquestRewardDialog extends FScrollPane {
 
             add(ConquestRewardDialog.this);
 
-            initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    hide();
-                    if (callback != null) {
-                        callback.run();
-                    }
+            initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> {
+                hide();
+                if (callback != null) {
+                    callback.run();
                 }
             });
-            initButton(1, Forge.getLocalizer().getMessage("lblSkip"), new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    animation.skip();
-                }
-            });
+            initButton(1, Forge.getLocalizer().getMessage("lblSkip"), e -> animation.skip());
 
             //disable both buttons initially
             setButtonEnabled(0, false);

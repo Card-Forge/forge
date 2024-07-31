@@ -55,12 +55,7 @@ public enum CSubmenuQuestLoadData implements ICDoc {
         ArrayList<String> restorableQuests = new ArrayList<>();
 
         // Iterate over files and load quest data for each.
-        final FilenameFilter takeDatFiles = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".dat");
-            }
-        };
+        final FilenameFilter takeDatFiles = (dir, name) -> name.endsWith(".dat");
         final File[] arrFiles = dirQuests.listFiles(takeDatFiles);
         arrQuests.clear();
         for (final File f : arrFiles) {

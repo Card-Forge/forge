@@ -51,12 +51,7 @@ public abstract class AchievementCollection implements Iterable<Achievement> {
         //update all achievements for GUI player after game finished
         //(we are doing it in different threads in different game ports to prevent freezing when processing multiple achievements)
         if (GuiBase.getInterface().isLibgdxPort()) {
-            ThreadUtil.invokeInGameThread(new Runnable() {
-                @Override
-                public void run() {
-                    doUpdateAllAchievements(match, player);
-                }
-            });
+            ThreadUtil.invokeInGameThread(() -> doUpdateAllAchievements(match, player));
         } else {
             doUpdateAllAchievements(match, player);
         }

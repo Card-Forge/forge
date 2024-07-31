@@ -75,19 +75,13 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         });
         txtLog.setFont(FSkinFont.get(12));
 
-        btnCopyLog = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.getClipboard().setContents(txtLog.getText());
-            }
-        }).build());
+        btnCopyLog = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("btnCopyToClipboard")).selectable()
+                .command(e -> Forge.getClipboard().setContents(txtLog.getText())).build()
+        );
 
-        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-            }
-        }).build());
+        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable()
+                .command(e -> hide()).build()
+        );
         lblTitle.setText(composeTitle(game0));
 
         // Control of the win/lose is handled differently for various game

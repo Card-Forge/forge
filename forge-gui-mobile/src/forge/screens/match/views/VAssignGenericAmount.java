@@ -90,18 +90,10 @@ public class VAssignGenericAmount extends FDialog {
         pnlSource = add(new EffectSourcePanel(effectSource));
         pnlTargets = add(new TargetsPanel(targets));
 
-        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                finish();
-            }
-        });
-        initButton(1, Forge.getLocalizer().getMessage("lblReset"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                resetAssignedDamage();
-                initialAssignAmount();
-            }
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> finish());
+        initButton(1, Forge.getLocalizer().getMessage("lblReset"), e -> {
+            resetAssignedDamage();
+            initialAssignAmount();
         });
 
         initialAssignAmount();
@@ -200,18 +192,8 @@ public class VAssignGenericAmount extends FDialog {
                 obj = add(new MiscTargetPanel(entity.toString(), FSkinImage.UNKNOWN));
             }
             label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
-            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignAmountTo(entity, false);
-                }
-            }).build());
-            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignAmountTo(entity, true);
-                }
-            }).build());
+            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(e -> assignAmountTo(entity, false)).build());
+            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(e -> assignAmountTo(entity, true)).build());
         }
 
         @Override

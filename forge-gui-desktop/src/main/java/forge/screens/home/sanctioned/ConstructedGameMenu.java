@@ -38,12 +38,7 @@ public final class ConstructedGameMenu {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbRemoveSmall"));
         MenuUtil.setMenuHint(menu, localizer.getMessage("lblRemoveSmallCreatures"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
-        menu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setSmallCreaturesMode(((JMenuItem)e.getSource()).isSelected());
-            }
-        });
+        menu.addActionListener(e -> setSmallCreaturesMode(((JMenuItem)e.getSource()).isSelected()));
         return menu;
     }
 
@@ -60,12 +55,7 @@ public final class ConstructedGameMenu {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbRemoveArtifacts"));
         MenuUtil.setMenuHint(menu, localizer.getMessage("lblRemoveArtifacts"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
-        menu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setArtifactsMode(((JMenuItem)e.getSource()).isSelected());
-            }
-        });
+        menu.addActionListener(e -> setArtifactsMode(((JMenuItem)e.getSource()).isSelected()));
         return menu;
     }
 
@@ -83,12 +73,7 @@ public final class ConstructedGameMenu {
         JCheckBoxMenuItem menu = new JCheckBoxMenuItem(localizer.getMessage("cbSingletons"));
         MenuUtil.setMenuHint(menu, localizer.getMessage("PreventNonLandDuplicates"));
         menu.setState(prefs.getPrefBoolean(FPref.DECKGEN_SINGLETONS));
-        menu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setSingletonMode(((JMenuItem)e.getSource()).isSelected());
-            }
-        });
+        menu.addActionListener(e -> setSingletonMode(((JMenuItem)e.getSource()).isSelected()));
         return menu;
     }
 

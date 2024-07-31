@@ -35,18 +35,16 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
     }
 
     private ActionListener getDeckTypeComboListener() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                final Object selectedItem = getSelectedItem();
-                if (selectedItem instanceof DeckType) {
-                    MouseUtil.setCursor(Cursor.WAIT_CURSOR);
-                    final DeckType newDeckType = (DeckType)selectedItem;
-                    if (newDeckType != selectedDeckType) {
-                        selectedDeckType = newDeckType;
-                        notifyDeckTypeSelected(newDeckType);
-                    }
-                    MouseUtil.resetCursor();
+        return e -> {
+            final Object selectedItem = getSelectedItem();
+            if (selectedItem instanceof DeckType) {
+                MouseUtil.setCursor(Cursor.WAIT_CURSOR);
+                final DeckType newDeckType = (DeckType)selectedItem;
+                if (newDeckType != selectedDeckType) {
+                    selectedDeckType = newDeckType;
+                    notifyDeckTypeSelected(newDeckType);
                 }
+                MouseUtil.resetCursor();
             }
         };
     }

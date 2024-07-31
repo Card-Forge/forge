@@ -859,20 +859,10 @@ public final class QuestUtilCards {
     // deck editors
     // Maybe we should consider doing so later
     /** The fn new compare. */
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return isNew(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-        }
-    };
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> isNew(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
 
     /** The fn new get. */
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return isNew(from.getKey()) ? "NEW" : "";
-        }
-    };
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> isNew(from.getKey()) ? "NEW" : "";
 
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnOwnedCompare() {
         return fnOwnedCompare;

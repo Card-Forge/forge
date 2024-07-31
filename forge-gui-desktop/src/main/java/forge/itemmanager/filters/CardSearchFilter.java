@@ -57,12 +57,9 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.addTo(widget);
-        cbSearchMode.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent arg0) {
-                if (!txtSearch.isEmpty()) {
-                    applyChange();
-                }
+        cbSearchMode.addItemListener(arg0 -> {
+            if (!txtSearch.isEmpty()) {
+                applyChange();
             }
         });
 

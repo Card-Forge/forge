@@ -138,17 +138,14 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
 
         this.controller = new DeckController<>(questData0.getMyDecks(), this, newCreator);
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                Deck deck = getDeckController().getModel();
-                if (deck == null) { return; }
+        getBtnAddBasicLands().setCommand((UiCommand) () -> {
+            Deck deck = getDeckController().getModel();
+            if (deck == null) { return; }
 
-                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, questData.getDefaultLandSet());
-                CardPool landsToAdd = dialog.show();
-                if (landsToAdd != null) {
-                    onAddItems(landsToAdd, false);
-                }
+            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, questData.getDefaultLandSet());
+            CardPool landsToAdd = dialog.show();
+            if (landsToAdd != null) {
+                onAddItems(landsToAdd, false);
             }
         });
     }
@@ -222,12 +219,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         }
         GuiUtils.addMenuItem(cmb.getMenu(), s,
                 KeyStroke.getKeyStroke(48 + n, 0),
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        SetRatingStars(n,cmb);
-                    }
-                });
+                () -> SetRatingStars(n,cmb));
     }
 
     public void SetRatingStars(int n, EditorContextMenuBuilder cmb) {
@@ -443,13 +435,10 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
 

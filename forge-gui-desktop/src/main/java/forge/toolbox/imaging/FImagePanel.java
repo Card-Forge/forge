@@ -84,12 +84,7 @@ public class FImagePanel extends JPanel {
      * will keep getting restarted - see {@code setResizeListener} method.
      */
     private Timer createResizingTimer(int timerDelay) {
-        return new Timer(timerDelay,  new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                doResizedFinished();
-            }
-        });
+        return new Timer(timerDelay, ev -> doResizedFinished());
     }
 
     private void doResizedFinished() {

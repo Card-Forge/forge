@@ -37,33 +37,28 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             // defined are mostly Self or Creatures you control
             CardCollection list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
 
-            list = CardLists.filter(list, new Predicate<Card>() {
-
-                @Override
-                public boolean apply(Card c) {
-                    if (!c.hasCounters()) {
-                        return false;
-                    }
-
-                    if (counterType != null) {
-                        if (c.getCounters(counterType) <= 0) {
-                            return false;
-                        }
-                        if (!c.canReceiveCounters(counterType)) {
-                            return false;
-                        }
-                    } else {
-                        for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
-                            // has negative counter it would double
-                            if (ComputerUtil.isNegativeCounter(e.getKey(), c)) {
-                                return false;
-                            }
-                        }
-                    }
-
-                    return true;
+            list = CardLists.filter(list, c -> {
+                if (!c.hasCounters()) {
+                    return false;
                 }
 
+                if (counterType != null) {
+                    if (c.getCounters(counterType) <= 0) {
+                        return false;
+                    }
+                    if (!c.canReceiveCounters(counterType)) {
+                        return false;
+                    }
+                } else {
+                    for (Map.Entry<CounterType, Integer> e : c.getCounters().entrySet()) {
+                        // has negative counter it would double
+                        if (ComputerUtil.isNegativeCounter(e.getKey(), c)) {
+                            return false;
+                        }
+                    }
+                }
+
+                return true;
             });
 
             if (list.isEmpty()) {
@@ -137,26 +132,21 @@ public class CountersMultiplyAi extends SpellAbilityAi {
         CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
         // pre filter targetable cards with counters and can receive one of them
-        list = CardLists.filter(list, new Predicate<Card>() {
-
-            @Override
-            public boolean apply(Card c) {
-                if (!c.hasCounters()) {
-                    return false;
-                }
-
-                if (counterType != null) {
-                    if (c.getCounters(counterType) <= 0) {
-                        return false;
-                    }
-                    if (!c.canReceiveCounters(counterType)) {
-                        return false;
-                    }
-                }
-
-                return true;
+        list = CardLists.filter(list, c -> {
+            if (!c.hasCounters()) {
+                return false;
             }
 
+            if (counterType != null) {
+                if (c.getCounters(counterType) <= 0) {
+                    return false;
+                }
+                if (!c.canReceiveCounters(counterType)) {
+                    return false;
+                }
+            }
+
+            return true;
         });
 
         CardCollection aiList = CardLists.filterControlledBy(list, ai);

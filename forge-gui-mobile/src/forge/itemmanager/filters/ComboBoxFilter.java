@@ -39,24 +39,20 @@ public abstract class ComboBoxFilter<T extends InventoryItem, V> extends ItemFil
 
         comboBox.setFont(FSkinFont.get(12));
         comboBox.addItem(allText);
-        comboBox.setChangedHandler(new FEventHandler() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public void handleEvent(FEvent e) {
-                if (preventHandling) { return; }
+        comboBox.setChangedHandler(e -> {
+            if (preventHandling) { return; }
 
-                int index = comboBox.getSelectedIndex();
-                if (index == -1) {
-                    //Do nothing when index set to -1
-                }
-                else if (index == 0) {
-                    filterValue = null;
-                    applyChange();
-                }
-                else {
-                    filterValue = (V)comboBox.getSelectedItem();
-                    applyChange();
-                }
+            int index = comboBox.getSelectedIndex();
+            if (index == -1) {
+                //Do nothing when index set to -1
+            }
+            else if (index == 0) {
+                filterValue = null;
+                applyChange();
+            }
+            else {
+                filterValue = (V)comboBox.getSelectedItem();
+                applyChange();
             }
         });
     }

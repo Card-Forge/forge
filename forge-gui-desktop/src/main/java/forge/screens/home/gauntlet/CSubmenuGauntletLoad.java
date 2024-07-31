@@ -30,11 +30,7 @@ import forge.player.GamePlayerUtil;
 public enum CSubmenuGauntletLoad implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final ActionListener actStartGame = new ActionListener() {
-        @Override public final void actionPerformed(final ActionEvent arg0) {
-            startGame();
-        }
-    };
+    private final ActionListener actStartGame = arg0 -> startGame();
 
     private final VSubmenuGauntletLoad view = VSubmenuGauntletLoad.SINGLETON_INSTANCE;
 
@@ -48,12 +44,10 @@ public enum CSubmenuGauntletLoad implements ICDoc {
 
         view.getGauntletLister().setSelectedIndex(0);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                final JButton btnStart = view.getBtnStart();
-                if (btnStart.isEnabled()) {
-                    view.getBtnStart().requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            final JButton btnStart = view.getBtnStart();
+            if (btnStart.isEnabled()) {
+                view.getBtnStart().requestFocusInWindow();
             }
         });
     }
@@ -116,12 +110,9 @@ public enum CSubmenuGauntletLoad implements ICDoc {
         }
 
         // Start game
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         final List<RegisteredPlayer> starter = new ArrayList<>();

@@ -260,17 +260,14 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         @Override
         protected void buildMenu() {
             for (final T item : FComboBox.this.items) {
-                FMenuItem menuItem = new FMenuItem(getDisplayText(item), new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        if (dropDownItemTap != null) {
-                            dropDownItemTap.handleEvent(new FEvent(FComboBox.this, FEventType.TAP, item));
-                        }
-                        if (item != selectedItem) {
-                            setSelectedItem(item);
-                            if (dropDownChangeHandler != null) {
-                                dropDownChangeHandler.handleEvent(new FEvent(FComboBox.this, FEventType.CHANGE, item));
-                            }
+                FMenuItem menuItem = new FMenuItem(getDisplayText(item), e -> {
+                    if (dropDownItemTap != null) {
+                        dropDownItemTap.handleEvent(new FEvent(FComboBox.this, FEventType.TAP, item));
+                    }
+                    if (item != selectedItem) {
+                        setSelectedItem(item);
+                        if (dropDownChangeHandler != null) {
+                            dropDownChangeHandler.handleEvent(new FEvent(FComboBox.this, FEventType.CHANGE, item));
                         }
                     }
                 });

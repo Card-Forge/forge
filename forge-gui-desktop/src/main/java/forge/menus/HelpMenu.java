@@ -43,14 +43,11 @@ public final class HelpMenu {
     }
 
     private static ActionListener getAboutForgeAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final Localizer localizer = Localizer.getInstance();
-                FOptionPane.showMessageDialog(
-                        "Version : " + BuildInfo.getVersionString(),
-                        localizer.getMessage("lblAboutForge"));
-            }
+        return e -> {
+            final Localizer localizer = Localizer.getInstance();
+            FOptionPane.showMessageDialog(
+                    "Version : " + BuildInfo.getVersionString(),
+                    localizer.getMessage("lblAboutForge"));
         };
     }
 
@@ -115,15 +112,12 @@ public final class HelpMenu {
     }
 
     private static ActionListener getOpenFileAction(final File file) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    openFile(file);
-                } catch (IOException e1) {
-                    // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e1.printStackTrace();
-                }
+        return e -> {
+            try {
+                openFile(file);
+            } catch (IOException e1) {
+                // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                e1.printStackTrace();
             }
         };
     }
@@ -172,12 +166,7 @@ public final class HelpMenu {
     }
 
     private static ActionListener getLaunchUrlAction(final String url) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                MenuUtil.openUrlInBrowser(url);
-            }
-        };
+        return e -> MenuUtil.openUrlInBrowser(url);
     }
 
 }

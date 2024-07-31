@@ -269,12 +269,7 @@ public class FOptionPane extends FDialog {
         final int optionsSize = options.size();
         for (int i = 0; i < optionsSize; i++) {
             final int option = i;
-            initButton(i, options.get(i), new FEventHandler() {
-                @Override
-                public void handleEvent(final FEvent e) {
-                    setResult(option);
-                }
-            });
+            initButton(i, options.get(i), e -> setResult(option));
         }
         defaultOption = defaultOption0;
     }

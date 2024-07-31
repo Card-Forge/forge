@@ -361,23 +361,19 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 List<String> newKeywords = Lists.newArrayList();
-                Iterables.removeIf(keywords, new Predicate<String>() {
-
-                    @Override
-                    public boolean apply(String input) {
-                        if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
-                            return false;
-                        }
-                        for (Player p : players) {
-                            String replacedID = String.valueOf(p.getId());
-                            String replacedName = p.getName();
-
-                            String s = input.replaceAll("ChosenPlayerUID", replacedID);
-                            s = s.replaceAll("ChosenPlayerName", replacedName);
-                            newKeywords.add(s);
-                        }
-                        return true;
+                Iterables.removeIf(keywords, input -> {
+                    if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
+                        return false;
                     }
+                    for (Player p : players) {
+                        String replacedID = String.valueOf(p.getId());
+                        String replacedName = p.getName();
+
+                        String s = input.replaceAll("ChosenPlayerUID", replacedID);
+                        s = s.replaceAll("ChosenPlayerName", replacedName);
+                        newKeywords.add(s);
+                    }
+                    return true;
                 });
                 keywords.addAll(newKeywords);
             }
@@ -480,30 +476,23 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
             if (!affectedKeywords.isEmpty()) {
-                Iterables.removeIf(affectedKeywords, new Predicate<String>() {
-                    @Override
-                    public boolean apply(String input) {
-                        if (input.contains("CardManaCost")) {
-                            if (tgtC.getManaCost().isNoCost()) {
-                                return true;
-                            }
+                Iterables.removeIf(affectedKeywords, input -> {
+                    if (input.contains("CardManaCost")) {
+                        if (tgtC.getManaCost().isNoCost()) {
+                            return true;
                         }
-                        return false;
                     }
+                    return false;
                 });
 
-                affectedKeywords = Lists.transform(affectedKeywords, new Function<String, String>() {
-
-                    @Override
-                    public String apply(String input) {
-                        if (input.contains("CardManaCost")) {
-                            input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
-                        } else if (input.contains("ConvertedManaCost")) {
-                            final String costcmc = Integer.toString(tgtC.getCMC());
-                            input = input.replace("ConvertedManaCost", costcmc);
-                        }
-                        return input;
+                affectedKeywords = Lists.transform(affectedKeywords, input -> {
+                    if (input.contains("CardManaCost")) {
+                        input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
+                    } else if (input.contains("ConvertedManaCost")) {
+                        final String costcmc = Integer.toString(tgtC.getCMC());
+                        input = input.replace("ConvertedManaCost", costcmc);
                     }
+                    return input;
                 });
             }
 

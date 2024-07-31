@@ -308,17 +308,14 @@ public final class FileUtil {
 
     public static List<String> readFile(final URL url) {
         final List<String> lines = new ArrayList<>();
-        ThreadUtil.executeWithTimeout(new Callable<Void>() {
-            @Override
-            public Void call() throws Exception {
-                try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
-                    String line;
-                    while ((line = in.readLine()) != null) {
-                        lines.add(line);
-                    }
+        ThreadUtil.executeWithTimeout((Callable<Void>) () -> {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
+                String line;
+                while ((line = in.readLine()) != null) {
+                    lines.add(line);
                 }
-                return null;
             }
+            return null;
         }, 5000); //abort reading file if it takes longer than 5 seconds
         return lines;
     }

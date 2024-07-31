@@ -534,23 +534,20 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
-        return new Runnable() {
-            @Override
-            public void run() {
-                hostedMatch = GuiBase.getInterface().hostMatch();
-                hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
+        return () -> {
+            hostedMatch = GuiBase.getInterface().hostMatch();
+            hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
 
-                for (final Player p : hostedMatch.getGame().getPlayers()) {
-                    final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
-                    if (p.getController() instanceof IGameController) {
-                        gameControllers.put(slot, (IGameController) p.getController());
-                    }
+            for (final Player p : hostedMatch.getGame().getPlayers()) {
+                final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
+                if (p.getController() instanceof IGameController) {
+                    gameControllers.put(slot, (IGameController) p.getController());
                 }
-
-                hostedMatch.gameControllers = gameControllers;
-
-                onGameStarted();
             }
+
+            hostedMatch.gameControllers = gameControllers;
+
+            onGameStarted();
         };
     }
 

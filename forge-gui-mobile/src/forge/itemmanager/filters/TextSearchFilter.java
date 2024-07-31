@@ -52,12 +52,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         txtSearch = new SearchField();
         widget.add(txtSearch);
 
-        txtSearch.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                applyChange();
-            }
-        });
+        txtSearch.setChangedHandler(e -> applyChange());
     }
 
     @Override

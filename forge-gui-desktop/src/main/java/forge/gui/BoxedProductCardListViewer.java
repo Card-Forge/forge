@@ -116,20 +116,12 @@ public class BoxedProductCardListViewer extends FDialog {
         this.addWindowFocusListener(new CardListFocuser());
 
         FButton btnOK = new FButton("Next Pack");
-        btnOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        btnOK.addActionListener(e -> BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING)));
 
         FButton btnCancel = new FButton("Open All Remaining");
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                BoxedProductCardListViewer.this.skipTheRest = true;
-                BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING));
-            }
+        btnCancel.addActionListener(e -> {
+            BoxedProductCardListViewer.this.skipTheRest = true;
+            BoxedProductCardListViewer.this.processWindowEvent(new WindowEvent(BoxedProductCardListViewer.this, WindowEvent.WINDOW_CLOSING));
         });
         
         this.add(new FLabel.Builder().text(message).build(), "cell 0 0, spanx 3, gapbottom 4");

@@ -71,16 +71,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
         }
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                for (final GameEntity c : targets) {
-                    if (c instanceof Card) {
-                        controller.getGui().setUsedToPay(CardView.get((Card) c), true);
-                    }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntity c : targets) {
+                if (c instanceof Card) {
+                    controller.getGui().setUsedToPay(CardView.get((Card) c), true);
                 }
-                controller.getGui().updateZones(zonesToUpdate);
             }
+            controller.getGui().updateZones(zonesToUpdate);
         });
     }
 

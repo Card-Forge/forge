@@ -14,12 +14,9 @@ import java.util.concurrent.TimeoutException;
 public class TimeLimitedCodeBlock {
 
     public static void runWithTimeout(final Runnable runnable, long timeout, TimeUnit timeUnit) throws Exception {
-        runWithTimeout(new Callable<Object>() {
-            @Override
-            public Object call() {
-                runnable.run();
-                return null;
-            }
+        runWithTimeout(() -> {
+            runnable.run();
+            return null;
         }, timeout, timeUnit);
     }
 

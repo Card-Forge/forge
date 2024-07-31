@@ -82,21 +82,13 @@ public class DialogChooseFormats {
 		final Runnable cleanup = SOverlayUtils::hideOverlay;
 
 		FButton btnOk = new FButton(localizer.getMessage("lblOK"));
-		btnOk.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				cleanup.run();
-				handleOk();
-			}
-		});
+		btnOk.addActionListener(arg0 -> {
+            cleanup.run();
+            handleOk();
+        });
 
 		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
-		btnCancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cleanup.run();
-			}
-		});
+		btnCancel.addActionListener(e -> cleanup.run());
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 20, ax center"));
 		southPanel.setOpaque(false);

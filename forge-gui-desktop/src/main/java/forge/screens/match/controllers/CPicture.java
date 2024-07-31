@@ -126,13 +126,10 @@ public class CPicture implements ICDoc {
      * while the mouse pointer is hovering over the image.
      */
     private void setMouseWheelListener() {
-        picturePanel.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(final MouseWheelEvent arg0) {
-                if (isCardDisplayed()) {
-                    if (arg0.getWheelRotation() < 0) {
-                        zoomer.doMouseWheelZoom();
-                    }
+        picturePanel.addMouseWheelListener(arg0 -> {
+            if (isCardDisplayed()) {
+                if (arg0.getWheelRotation() < 0) {
+                    zoomer.doMouseWheelZoom();
                 }
             }
         });

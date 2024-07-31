@@ -206,12 +206,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
     @Override
     public void activate(int index) {
         final CardAreaPanel cardPanel = CardAreaPanel.get(orderedCards.get(index));
-        ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
-            @Override
-            public void run() {
-                cardPanel.selectCard(false);
-            }
-        });
+        //must invoke in game thread in case a dialog needs to be shown
+        ThreadUtil.invokeInGameThread(() -> cardPanel.selectCard(false));
     }
 
     public static class CardAreaPanel extends FCardPanel {
@@ -331,16 +327,13 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
             if (count > 1) //prevent double choice lists or activate handle
                 return false;
             if (renderedCardContains(x, y)) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
-                    @Override
-                    public void run() {
-                        if (GuiBase.getInterface().isRunningOnDesktop() && Forge.mouseButtonID == Input.Buttons.RIGHT) {
-                            FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
-                            return;
-                        } else if (!selectCard(false)) {
-                            //if no cards in stack can be selected, just show zoom/details for card
-                            FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
-                        }
+                //must invoke in game thread in case a dialog needs to be shown
+                ThreadUtil.invokeInGameThread(() -> {
+                    if (GuiBase.getInterface().isRunningOnDesktop() && Forge.mouseButtonID == Input.Buttons.RIGHT) {
+                        FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
+                    } else if (!selectCard(false)) {
+                        //if no cards in stack can be selected, just show zoom/details for card
+                        FThreads.invokeInEdtLater(CardAreaPanel.this::showZoom);
                     }
                 });
                 return true;
@@ -351,12 +344,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
         @Override
         public boolean flick(float x, float y) {
             if (renderedCardContains(x, y)) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
-                    @Override
-                    public void run() {
-                        selectCard(true);
-                    }
-                });
+                //must invoke in game thread in case a dialog needs to be shown
+                ThreadUtil.invokeInGameThread(() -> selectCard(true));
                 return true;
             }
             return false;

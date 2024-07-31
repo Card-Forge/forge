@@ -1103,23 +1103,13 @@ public class AdvancedSearch {
             String caption = getCaption(values, option, operator);
 
             final OperatorEvaluator<V> evaluator = (OperatorEvaluator<V>) operator.evaluator;
-            Predicate<T> predicate = new Predicate<T>() {
-                @Override
-                public boolean apply(T input) {
-                    return evaluator.apply(getItemValue(input), values);
-                }
-            };
+            Predicate<T> predicate = input -> evaluator.apply(getItemValue(input), values);
 
             final FilterOperator[][] manyValueOperators = { FilterOperator.MULTI_LIST_OPS,
                     FilterOperator.COMBINATION_OPS, FilterOperator.COLLECTION_OPS, FilterOperator.STRINGS_OPS };
             for (FilterOperator[] oper : manyValueOperators) {
                 if (option.operatorOptions == oper) {
-                    predicate = new Predicate<T>() {
-                        @Override
-                        public boolean apply(T input) {
-                            return evaluator.apply(getItemValues(input), values);
-                        }
-                    };
+                    predicate = input -> evaluator.apply(getItemValues(input), values);
                     break;
                 }
             }
@@ -1615,12 +1605,7 @@ public class AdvancedSearch {
         @SuppressWarnings("serial")
         public void addFilterControl(final IFilterControl<T> control) {
             control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
-            control.getBtnFilter().setCommand(new UiCommand() {
-                @Override
-                public void run() {
-                    editFilterControl(control, null);
-                }
-            });
+            control.getBtnFilter().setCommand((UiCommand) () -> editFilterControl(control, null));
             controls.add(control);
         }
 
@@ -1635,35 +1620,29 @@ public class AdvancedSearch {
         }
 
         public void editFilterControl(final IFilterControl<T> control, final Runnable onChange) {
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    final Filter<T> filter = getFilter(control.getGenericType(), control.getFilter(), onChange == null); //reselect option if no change handler passed
-                    if (control.getFilter() != filter) {
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                control.setFilter(filter);
-                                if (filter != null) {
-                                    control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
+            FThreads.invokeInBackgroundThread(() -> {
+                final Filter<T> filter = getFilter(control.getGenericType(), control.getFilter(), onChange == null); //reselect option if no change handler passed
+                if (control.getFilter() != filter) {
+                    FThreads.invokeInEdtLater(() -> {
+                        control.setFilter(filter);
+                        if (filter != null) {
+                            control.getBtnFilter().setText(GuiBase.getInterface().encodeSymbols(filter.toString(), false));
 
-                                    if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
-                                        //the first time the user selects keywords, preload keywords for all cards
-                                        Runnable preloadTask = Keyword.getPreloadTask();
-                                        if (preloadTask != null) {
-                                            GuiBase.getInterface().runBackgroundTask(Localizer.getInstance().getMessage("lblLoadingKeywords"), preloadTask);
-                                        }
-                                    }
-                                }
-                                else {
-                                    control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
-                                }
-                                if (onChange != null) {
-                                    onChange.run();
+                            if (filter.getOption() == FilterOption.CARD_KEYWORDS) {
+                                //the first time the user selects keywords, preload keywords for all cards
+                                Runnable preloadTask = Keyword.getPreloadTask();
+                                if (preloadTask != null) {
+                                    GuiBase.getInterface().runBackgroundTask(Localizer.getInstance().getMessage("lblLoadingKeywords"), preloadTask);
                                 }
                             }
-                        });
-                    }
+                        }
+                        else {
+                            control.getBtnFilter().setText(EMPTY_FILTER_TEXT);
+                        }
+                        if (onChange != null) {
+                            onChange.run();
+                        }
+                    });
                 }
             });
         }

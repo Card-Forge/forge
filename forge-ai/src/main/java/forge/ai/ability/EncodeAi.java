@@ -92,18 +92,15 @@ public final class EncodeAi extends SpellAbilityAi {
         // final String logic = sa.getParam("AILogic");
         // if (logic == null) {
         final List<Card> attackers = CardLists.filter(list, ComputerUtilCombat::canAttackNextTurn);
-        final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                boolean canAttackOpponent = false;
-                for (Player opp : ai.getOpponents()) {
-                    if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, null, opp)) {
-                        canAttackOpponent = true;
-                        break;
-                    }
+        final List<Card> unblockables = CardLists.filter(attackers, c -> {
+            boolean canAttackOpponent = false;
+            for (Player opp : ai.getOpponents()) {
+                if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, null, opp)) {
+                    canAttackOpponent = true;
+                    break;
                 }
-                return canAttackOpponent;
             }
+            return canAttackOpponent;
         });
         if (!unblockables.isEmpty()) {
             choice = ComputerUtilCard.getBestAI(unblockables);

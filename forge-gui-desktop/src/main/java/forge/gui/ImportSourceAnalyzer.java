@@ -383,12 +383,7 @@ public class ImportSourceAnalyzer {
 
             // planar cards now don't have the ".full" part in their filenames
             nameUpdates = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            final Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(final PaperCard arg0) {
-                    return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
-                }
-            };
+            final Predicate<PaperCard> predPlanes = arg0 -> arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
 
             for (final PaperCard c : Iterables.filter(FModel.getMagicDb().getVariantCards().getAllCards(), predPlanes)) {
                 String baseName = c.getCardImageKey();

@@ -85,12 +85,7 @@ public class ChooseGenericAi extends SpellAbilityAi {
         } else if ("Random".equals(logic)) {
             return Aggregates.random(spells);
         } else if ("Phasing".equals(logic)) { // Teferi's Realm : keep aggressive
-            List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, new Predicate<SpellAbility>() {
-                @Override
-                public boolean apply(final SpellAbility sp) {
-                    return !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land");
-                }
-            }));
+            List<SpellAbility> filtered = Lists.newArrayList(Iterables.filter(spells, sp -> !sp.getDescription().contains("Creature") && !sp.getDescription().contains("Land")));
             return Aggregates.random(filtered);
         } else if ("PayUnlessCost".equals(logic)) {
             for (final SpellAbility sp : spells) {

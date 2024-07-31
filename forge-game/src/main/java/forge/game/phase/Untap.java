@@ -150,14 +150,11 @@ public class Untap extends Phase {
         }
         final CardCollection untapList = new CardCollection(list);
         final String[] restrict = restrictUntap.keySet().toArray(new String[restrictUntap.keySet().size()]);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (!Untap.canUntap(c)) {
-                    return false;
-                }
-                return !c.isValid(restrict, player, null, null);
+        list = CardLists.filter(list, c -> {
+            if (!Untap.canUntap(c)) {
+                return false;
             }
+            return !c.isValid(restrict, player, null, null);
         });
 
         for (final Card c : list) {
@@ -263,13 +260,10 @@ public class Untap extends Phase {
 
     private static void doPhasing(final Player turn) {
         // Needs to include phased out cards
-        final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield), new Predicate<Card>() {
-
-            @Override
-            public boolean apply(final Card c) {
-                return (c.isPhasedOut(turn) && c.isDirectlyPhasedOut()) || (c.hasKeyword(Keyword.PHASING) && c.getController().equals(turn));
-            }
-        });
+        final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield),
+                c -> (c.isPhasedOut(turn) && c.isDirectlyPhasedOut())
+                        || (c.hasKeyword(Keyword.PHASING) && c.getController().equals(turn))
+        );
 
         CardCollection toPhase = new CardCollection();
         for (final Card tgtC : list) {

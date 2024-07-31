@@ -84,17 +84,15 @@ public enum FNetOverlay implements IOnlineChatInterface {
         this.remote = remote;
     }
 
-    private final ActionListener onSend = new ActionListener() {
-        @Override public final void actionPerformed(final ActionEvent e) {
-            final String message = txtInput.getText();
-            txtInput.setText("");
-            if (StringUtils.isBlank(message)) {
-                return;
-            }
+    private final ActionListener onSend = e -> {
+        final String message = txtInput.getText();
+        txtInput.setText("");
+        if (StringUtils.isBlank(message)) {
+            return;
+        }
 
-            if (remote != null) {
-                remote.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));
-            }
+        if (remote != null) {
+            remote.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));
         }
     };
 
@@ -128,7 +126,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
         window.add(cmdSend, "w 60px!, h 28px!, gap 0 0 2px 0");
         
         txtInput.addActionListener(onSend);
-        cmdSend.setCommand(new Runnable() { @Override public void run() { onSend.actionPerformed(null); } });
+        cmdSend.setCommand((Runnable) () -> onSend.actionPerformed(null));
     }
 
     public void reset() {

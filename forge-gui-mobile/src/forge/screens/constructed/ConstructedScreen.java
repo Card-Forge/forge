@@ -9,11 +9,6 @@ public class ConstructedScreen extends LobbyScreen {
     public ConstructedScreen() {
         super(null, NewGameMenu.getMenu(), new LocalLobby());
 
-        setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override
-            public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                getLobby().applyToSlot(index, event);
-            }
-        });
+        setPlayerChangeListener((index, event) -> getLobby().applyToSlot(index, event));
     }
 }

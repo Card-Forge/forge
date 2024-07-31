@@ -30,11 +30,9 @@ public enum CBazaarUI implements ICDoc {
 
     /** @param s0 &emsp; {@link java.lang.String} */
     public void showStall(final String s0, final QuestBazaarManager bazaar) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                view.getPnlSingleStall().setStall(bazaar.getStall(s0));
-                view.getPnlSingleStall().updateStall();
-            }
+        SwingUtilities.invokeLater(() -> {
+            view.getPnlSingleStall().setStall(bazaar.getStall(s0));
+            view.getPnlSingleStall().updateStall();
         });
     }
 
@@ -54,10 +52,6 @@ public enum CBazaarUI implements ICDoc {
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                view.getPnlSingleStall().updateStall();
-            }
-        });
+        SwingUtilities.invokeLater(() -> view.getPnlSingleStall().updateStall());
     }
 }

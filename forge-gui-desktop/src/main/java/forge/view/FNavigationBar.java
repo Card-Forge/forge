@@ -238,18 +238,8 @@ public class FNavigationBar extends FTitleBarBase {
                 }
             }
         });
-        incrementRevealTimer = new Timer(revealSpeed / visibleHeight, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                incrementReveal();
-            }
-        });
-        checkForRevealChangeTimer = new Timer(revealDelay, new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                checkForRevealChange();
-            }
-        });
+        incrementRevealTimer = new Timer(revealSpeed / visibleHeight, e -> incrementReveal());
+        checkForRevealChangeTimer = new Timer(revealDelay, e -> checkForRevealChange());
     }
 
     private void startReveal() {

@@ -88,13 +88,10 @@ public final class SLayoutIO {
             FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
             // let it redraw everything first
 
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    SLayoutIO.loadLayout(loadFile);
-                    SLayoutIO.saveLayout(null);
-                    SOverlayUtils.hideOverlay();
-                }
+            FThreads.invokeInEdtLater(() -> {
+                SLayoutIO.loadLayout(loadFile);
+                SLayoutIO.saveLayout(null);
+                SOverlayUtils.hideOverlay();
             });
         }
     }
@@ -103,22 +100,17 @@ public final class SLayoutIO {
         SOverlayUtils.genericOverlay();
         FView.SINGLETON_INSTANCE.getPnlContent().removeAll();
 
-        FThreads.invokeInEdtLater(new Runnable(){
-            @Override public void run() {
-                SLayoutIO.loadLayout(null);
-                SOverlayUtils.hideOverlay();
-            }
+        FThreads.invokeInEdtLater(() -> {
+            SLayoutIO.loadLayout(null);
+            SOverlayUtils.hideOverlay();
         });
     }
 
     public static void saveWindowLayout() {
         if (saveWindowRequested.getAndSet(true)) { return; }
-        ThreadUtil.delay(500, new Runnable() {
-            @Override
-            public void run() {
-                finishSaveWindowLayout();
-                saveWindowRequested.set(false);
-            }
+        ThreadUtil.delay(500, () -> {
+            finishSaveWindowLayout();
+            saveWindowRequested.set(false);
         });
     }
     
@@ -272,13 +264,9 @@ public final class SLayoutIO {
      */
     public static void saveLayout(final File f0) {
         if( saveRequested.getAndSet(true) ) return; 
-        ThreadUtil.delay(100, new Runnable() {
-            
-            @Override
-            public void run() {
-                save(f0);
-                saveRequested.set(false);
-            }
+        ThreadUtil.delay(100, () -> {
+            save(f0);
+            saveRequested.set(false);
         });
     }
 

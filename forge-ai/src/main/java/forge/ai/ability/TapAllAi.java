@@ -75,12 +75,7 @@ public class TapAllAi extends SpellAbilityAi {
         // in AI's turn, check if there are possible attackers, before tapping blockers
         if (game.getPhaseHandler().isPlayerTurn(ai)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
-            final boolean any = Iterables.any(validTappables, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c);
-                }
-            });
+            final boolean any = Iterables.any(validTappables, c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
             return any;
         }
         return true;

@@ -23,12 +23,9 @@ public class EditorMainWindow extends JFrame {
     public EditorMainWindow()
     {
         UIManager.LookAndFeelInfo[] var1 = UIManager.getInstalledLookAndFeels();
-        FModel.initialize(null, new Function<ForgePreferences, Void>()  {
-            @Override
-            public Void apply(ForgePreferences preferences) {
-                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
-                return null;
-            }
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, true);
+            return null;
         });
         Lang.createInstance(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);

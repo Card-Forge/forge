@@ -10,21 +10,11 @@ import forge.game.player.Player;
 
 public final class SpellAbilityPredicates extends CardTraitPredicates {
     public static final Predicate<SpellAbility> isApi(final ApiType type) {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return type.equals(sa.getApi());
-            }
-        };
+        return sa -> type.equals(sa.getApi());
     }
 
     public static final Predicate<SpellAbility> hasSubAbilityApi(final ApiType type) {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.findSubAbilityByType(type) != null;
-            }
-        };
+        return sa -> sa.findSubAbilityByType(type) != null;
     }
 
     public static final Predicate<SpellAbility> isMandatory() {
@@ -48,11 +38,6 @@ public final class SpellAbilityPredicates extends CardTraitPredicates {
     }
 
     public static final Predicate<SpellAbility> isValid(String[] restrictions, Player sourceController, Card source, CardTraitBase spellAbility) {
-        return new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility sa) {
-                return sa.isValid(restrictions, sourceController, source, spellAbility);
-            }
-        };
+        return sa -> sa.isValid(restrictions, sourceController, source, spellAbility);
     }
 }

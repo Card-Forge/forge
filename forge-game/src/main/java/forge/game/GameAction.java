@@ -1132,15 +1132,10 @@ public class GameAction {
             }
         }, true);
 
-        final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
-            @Override
-            public int compare(final StaticAbility a, final StaticAbility b) {
-                return ComparisonChain.start()
-                        .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
-                        .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
-                        .result();
-            }
-        };
+        final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
+                .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
+                .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
+                .result();
         Collections.sort(staticAbilities, comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
@@ -2201,19 +2196,9 @@ public class GameAction {
     private void runPreOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    return input.getName().equals("Emissary's Ploy");
-                }
-            });
+            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), input -> input.getName().equals("Emissary's Ploy"));
             CardCollectionView all = CardLists.filterControlledBy(game.getCardsInGame(), takesAction);
-            List<Card> spires = CardLists.filter(all, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.getName().equals("Cryptic Spires");
-                    }
-            });
+            List<Card> spires = CardLists.filter(all, input -> input.getName().equals("Cryptic Spires"));
 
             int chosen = 1;
             List<Integer> cmc = Lists.newArrayList(1, 2, 3);

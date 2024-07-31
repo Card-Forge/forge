@@ -530,13 +530,9 @@ public class MenuScroller {
     private class MenuScrollTimer extends Timer {
 
         public MenuScrollTimer(final int increment, int interval) {
-            super(interval, new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    firstIndex += increment;
-                    refreshMenu();
-                }
+            super(interval, e -> {
+                firstIndex += increment;
+                refreshMenu();
             });
         }
     }
@@ -644,11 +640,10 @@ public class MenuScroller {
     }
 
     public static void setMenuSelectedIndex(final JPopupMenu menu, final int index, boolean scrollUp) {
-        SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first enabled item selected by default
-            public void run() {
-                for (int i = 0; i < index; i++) {
-                    menu.dispatchEvent(new KeyEvent(menu, KeyEvent.KEY_PRESSED, 0, 0, scrollUp ? KeyEvent.VK_UP : KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
-                }
+        //use invoke later to ensure first enabled item selected by default
+        SwingUtilities.invokeLater(() -> {
+            for (int i = 0; i < index; i++) {
+                menu.dispatchEvent(new KeyEvent(menu, KeyEvent.KEY_PRESSED, 0, 0, scrollUp ? KeyEvent.VK_UP : KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
             }
         });
     }

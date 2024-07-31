@@ -65,11 +65,9 @@ public final class FServerManager {
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
-    private final Thread shutdownHook = new Thread(new Runnable() {
-        @Override public final void run() {
-            if (isHosting()) {
-                stopServer(false);
-            }
+    private final Thread shutdownHook = new Thread(() -> {
+        if (isHosting()) {
+            stopServer(false);
         }
     });
 
@@ -118,15 +116,13 @@ public final class FServerManager {
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
-            new Thread(new Runnable() {
-                @Override public void run() {
-                    try {
-                        ch.sync();
-                    } catch (final InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        stopServer();
-                    }
+            new Thread(() -> {
+                try {
+                    ch.sync();
+                } catch (final InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    stopServer();
                 }
             }).start();
             mapNatPort(port);

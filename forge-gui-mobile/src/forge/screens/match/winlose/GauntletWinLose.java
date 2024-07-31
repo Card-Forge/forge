@@ -29,33 +29,30 @@ public class GauntletWinLose extends ControlWinLose {
             protected void showOutcome(final boolean isMatchOver, final String message1, final String message2, final FSkinProp icon, final List<String> lstEventNames, final List<String> lstEventRecords, final int len, final int num) {
                 if (!isMatchOver) { return; } //don't show progress dialog unless match over
 
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        StringBuilder sb = new StringBuilder();
-                        if (!lstEventNames.isEmpty()) {
-                            for (int i = 0; i < len; i++) {
-                                if (i <= num) {
-                                    sb.append(i + 1).append(". ").append(lstEventNames.get(i)).append(" (").append(lstEventRecords.get(i)).append(")\n");
-                                } else {
-                                    sb.append(i + 1).append(". ??????\n");
-                                }
+                FThreads.invokeInBackgroundThread(() -> {
+                    StringBuilder sb = new StringBuilder();
+                    if (!lstEventNames.isEmpty()) {
+                        for (int i = 0; i < len; i++) {
+                            if (i <= num) {
+                                sb.append(i + 1).append(". ").append(lstEventNames.get(i)).append(" (").append(lstEventRecords.get(i)).append(")\n");
+                            } else {
+                                sb.append(i + 1).append(". ??????\n");
                             }
                         }
-
-                        if (message1 != null) {
-                            sb.append("\n");
-                            sb.append(message1).append("\n\n");
-                            sb.append(message2);
-                        }
-                        else {
-                            if (sb.length() > 0) {
-                                sb.deleteCharAt(sb.length() - 1); //remove final new line character
-                            }
-                        }
-
-                        SOptionPane.showMessageDialog(sb.toString(), Forge.getLocalizer().getMessage("lblGauntletProgress"), icon);
                     }
+
+                    if (message1 != null) {
+                        sb.append("\n");
+                        sb.append(message1).append("\n\n");
+                        sb.append(message2);
+                    }
+                    else {
+                        if (sb.length() > 0) {
+                            sb.deleteCharAt(sb.length() - 1); //remove final new line character
+                        }
+                    }
+
+                    SOptionPane.showMessageDialog(sb.toString(), Forge.getLocalizer().getMessage("lblGauntletProgress"), icon);
                 });
             }
 

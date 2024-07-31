@@ -44,18 +44,10 @@ public class FVanguardChooser extends FScreen {
     public FVanguardChooser(boolean isAi0, FEventHandler selectionChangedHandler) {
         super("");
         isAi = isAi0;
-        lstVanguards.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.back();
-            }
-        });
-        btnRandom.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                selectRandom();
-                Forge.back();
-            }
+        lstVanguards.setItemActivateHandler(e -> Forge.back());
+        btnRandom.setCommand(e -> {
+            selectRandom();
+            Forge.back();
         });
         lstVanguards.setup(ItemManagerConfig.VANGUARDS);
         lstVanguards.setPool(isAi ? allAiAvatars : allHumanAvatars, true);

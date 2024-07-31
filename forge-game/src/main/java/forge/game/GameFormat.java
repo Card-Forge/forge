@@ -454,12 +454,7 @@ public class GameFormat implements Comparable<GameFormat> {
             return TXT_FILE_FILTER;
         }
 
-        public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".txt") || dir.isDirectory();
-            }
-        };
+        public static final FilenameFilter TXT_FILE_FILTER = (dir, name) -> name.endsWith(".txt") || dir.isDirectory();
     }
 
     public static class Collection extends StorageBase<GameFormat> {
@@ -687,10 +682,5 @@ public class GameFormat implements Comparable<GameFormat> {
         }
     }
 
-    public final Predicate<CardEdition> editionLegalPredicate = new Predicate<CardEdition>() {
-        @Override
-        public boolean apply(final CardEdition subject) {
-            return GameFormat.this.isSetLegal(subject.getCode());
-        }
-    };
+    public final Predicate<CardEdition> editionLegalPredicate = subject -> GameFormat.this.isSetLegal(subject.getCode());
 }

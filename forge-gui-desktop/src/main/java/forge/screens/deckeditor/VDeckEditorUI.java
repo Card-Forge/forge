@@ -33,12 +33,7 @@ public enum VDeckEditorUI implements IVTopLevelUI {
      */
     @Override
     public void populate() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                VCardCatalog.SINGLETON_INSTANCE.getItemManager().focus();
-            }
-        });
+        SwingUtilities.invokeLater(() -> VCardCatalog.SINGLETON_INSTANCE.getItemManager().focus());
     }
 
     /* (non-Javadoc)

@@ -172,12 +172,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomDraftFiles"));
                 } else {
-                    Collections.sort(myDrafts, new Comparator<CustomLimited>() {
-                        @Override
-                        public int compare(CustomLimited o1, CustomLimited o2) {
-                            return o1.getName().compareTo(o2.getName());
-                        }
-                    });
+                    Collections.sort(myDrafts, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 
                     final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {

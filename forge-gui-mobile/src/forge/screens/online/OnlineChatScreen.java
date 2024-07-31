@@ -36,12 +36,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         super(null, OnlineMenu.getMenu());
 
         txtSendMessage.setGhostText(Forge.getLocalizer().getMessage("lblEnterMessageToSend"));
-        txtSendMessage.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                sendMessage();
-            }
-        });
+        txtSendMessage.setChangedHandler(e -> sendMessage());
     }
 
     private void sendMessage() {

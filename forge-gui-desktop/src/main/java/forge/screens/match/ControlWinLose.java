@@ -34,26 +34,13 @@ public class ControlWinLose {
 
     /** */
     public void addListeners() {
-        view.getBtnContinue().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                actionOnContinue();
-            }
-        });
+        view.getBtnContinue().addActionListener(e -> actionOnContinue());
 
-        view.getBtnRestart().addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                actionOnRestart();
-            }
-        });
+        view.getBtnRestart().addActionListener(e -> actionOnRestart());
 
-        view.getBtnQuit().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                actionOnQuit();
-                ((JButton) e.getSource()).setEnabled(false);
-            }
+        view.getBtnQuit().addActionListener(e -> {
+            actionOnQuit();
+            ((JButton) e.getSource()).setEnabled(false);
         });
     }
 

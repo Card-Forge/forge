@@ -157,12 +157,7 @@ public abstract class StorageReaderRecursiveFolderWithUserFolder<T> extends Stor
     // methods handling nested folders are provided. It's up to consumer whether to use these or not.
     @Override
     public Iterable<File> getSubFolders() {
-        File[] list = this.directory.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory() && !file.isHidden();
-            }
-        });
+        File[] list = this.directory.listFiles(file -> file.isDirectory() && !file.isHidden());
         return Arrays.asList(list);
     }
 }

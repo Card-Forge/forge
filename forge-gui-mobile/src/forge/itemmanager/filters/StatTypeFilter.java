@@ -27,14 +27,11 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap.put(st, button);
 
         //hook so long-pressing a button toggles itself on and toggles off all other buttons
-        button.setLongPressHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lockFiltering = true;
-                SFilterUtil.showOnlyStat(st, button, buttonMap);
-                lockFiltering = false;
-                applyChange();
-            }
+        button.setLongPressHandler(e -> {
+            lockFiltering = true;
+            SFilterUtil.showOnlyStat(st, button, buttonMap);
+            lockFiltering = false;
+            applyChange();
         });
     }
 

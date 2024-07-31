@@ -50,11 +50,6 @@ public final class WorkshopFileMenu {
     }
 
     private static ActionListener getSaveCardAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	CCardScript.SINGLETON_INSTANCE.saveChanges();
-            }
-        };
+        return e -> CCardScript.SINGLETON_INSTANCE.saveChanges();
     }
 }

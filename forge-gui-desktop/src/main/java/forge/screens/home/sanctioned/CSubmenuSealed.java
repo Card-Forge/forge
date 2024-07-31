@@ -44,20 +44,12 @@ public enum CSubmenuSealed implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdDeckSelect = new UiCommand() {
-        @Override
-        public void run() {
-            VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-            fillOpponentComboBox();
-        }
+    private final UiCommand cmdDeckSelect = () -> {
+        VSubmenuSealed.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+        fillOpponentComboBox();
     };
 
-    private final ActionListener radioAction = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            fillOpponentComboBox();
-        }
-    };
+    private final ActionListener radioAction = e -> fillOpponentComboBox();
 
     @Override
     public void register() {
@@ -74,12 +66,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         view.getBtnBuildDeck().setCommand((UiCommand) this::setupSealed);
 
-        view.getBtnStart().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                startGame(GameType.Sealed);
-            }
-        });
+        view.getBtnStart().addActionListener(e -> startGame(GameType.Sealed));
 
         view.getBtnDirections().setCommand((UiCommand) view::showDirections);
 
@@ -97,14 +84,12 @@ public enum CSubmenuSealed implements ICDoc {
         view.getLstDecks().setPool(DeckProxy.getAllSealedDecks());
         view.getLstDecks().setup(ItemManagerConfig.SEALED_DECKS);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                final JButton btnStart = view.getBtnStart();
-                if (btnStart.isEnabled()) {
-                    view.getBtnStart().requestFocusInWindow();
-                } else {
-                    view.getBtnBuildDeck().requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            final JButton btnStart = view.getBtnStart();
+            if (btnStart.isEnabled()) {
+                view.getBtnStart().requestFocusInWindow();
+            } else {
+                view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
     }
@@ -138,12 +123,9 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         // Restore Zero Indexing

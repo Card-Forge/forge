@@ -26,12 +26,7 @@ public class SpriteGroup extends Group {
     protected void drawChildren(Batch batch, float parentAlpha) {
 
         Actor[] actors = getChildren().toArray();
-        Arrays.sort(actors, Comparator.comparingInt(new ToIntFunction<Actor>() {
-            @Override
-            public int applyAsInt(Actor o) {
-                return (int) -o.getY();
-            }
-        }));
+        Arrays.sort(actors, Comparator.comparingInt(o -> (int) -o.getY()));
 
         for(int i=0;i<actors.length;i++)
         {

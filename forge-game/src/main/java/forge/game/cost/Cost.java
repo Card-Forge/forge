@@ -118,12 +118,7 @@ public class Cost implements Serializable {
         // Things that are pretty much happen at the end (Untap) 16+
         // Things that NEED to happen last 100+
 
-        Collections.sort(this.costParts, new Comparator<CostPart>() {
-            @Override
-            public int compare(CostPart o1, CostPart o2) {
-                return ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder());
-            }
-        });
+        Collections.sort(this.costParts, (o1, o2) -> ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder()));
     }
 
     /**

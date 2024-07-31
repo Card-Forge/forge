@@ -30,12 +30,9 @@ public class PlanarConquestGeneraterGAModern extends PlanarConquestGeneraterGA {
     public static void test(){
 
         GuiBase.setInterface(new GuiDesktop());
-        FModel.initialize(null, new Function<ForgePreferences, Void>()  {
-            @Override
-            public Void apply(ForgePreferences preferences) {
-                preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                return null;
-            }
+        FModel.initialize(null, preferences -> {
+            preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+            return null;
         });
 
         PlanarConquestGeneraterGA ga = new PlanarConquestGeneraterGAModern(new GameRules(GameType.Constructed),

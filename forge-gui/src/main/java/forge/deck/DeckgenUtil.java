@@ -392,9 +392,7 @@ public class DeckgenUtil {
             }
         }
 
-        QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), new Predicate<QuestEventDuel>() {
-            @Override public boolean apply(QuestEventDuel in) { return in.getName().equals(name); }
-        });
+        QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), in -> in.getName().equals(name));
         return duel;
     }
 

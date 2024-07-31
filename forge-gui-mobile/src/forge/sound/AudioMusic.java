@@ -23,12 +23,7 @@ public class AudioMusic implements IAudioMusic {
             if (GameHUD.getInstance().audioIsPlaying())
                 return;
         }
-        music.setOnCompletionListener(new OnCompletionListener() {
-            @Override
-            public void onCompletion(Music music) {
-                onComplete.run();
-            }
-        });
+        music.setOnCompletionListener(music -> onComplete.run());
         music.play();
     }
 

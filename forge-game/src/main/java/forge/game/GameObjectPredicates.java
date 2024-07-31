@@ -33,21 +33,11 @@ import forge.game.player.Player;
 public final class GameObjectPredicates {
 
     public static final Predicate<GameObject> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
-        return new Predicate<GameObject>() {
-            @Override
-            public boolean apply(final GameObject c) {
-                return c != null && c.isValid(restrictions, sourceController, source, spellAbility);
-            }
-        };
+        return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
     public static final Predicate<GameObject> matchesValidParam(final CardTraitBase ctb, final String param) {
-        return new Predicate<GameObject>() {
-            @Override
-            public boolean apply(final GameObject c) {
-                return ctb.matchesValidParam(param, c);
-            }
-        };
+        return c -> ctb.matchesValidParam(param, c);
     }
 
 }

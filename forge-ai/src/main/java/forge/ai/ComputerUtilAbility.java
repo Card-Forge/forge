@@ -38,18 +38,15 @@ public class ComputerUtilAbility {
         CardCollection landList = CardLists.filter(hand, Presets.LANDS);
 
         //filter out cards that can't be played
-        landList = CardLists.filter(landList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (!c.getSVar("NeedsToPlay").isEmpty()) {
-                    final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay, c.getController(), c, null);
-                    if (list.isEmpty()) {
-                        return false;
-                    }
+        landList = CardLists.filter(landList, c -> {
+            if (!c.getSVar("NeedsToPlay").isEmpty()) {
+                final String needsToPlay = c.getSVar("NeedsToPlay");
+                CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay, c.getController(), c, null);
+                if (list.isEmpty()) {
+                    return false;
                 }
-                return player.canPlayLand(c);
             }
+            return player.canPlayLand(c);
         });
 
         final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));

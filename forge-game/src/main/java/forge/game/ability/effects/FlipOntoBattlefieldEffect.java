@@ -100,23 +100,20 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
         Player controller = c.getController();
         ArrayList<Card> attachments = Lists.newArrayList();
         ArrayList<Card> cardsOTB = Lists.newArrayList(CardLists.filter(
-                controller.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        if (card.isAttachedToEntity(c)) {
-                            attachments.add(card);
-                            return true;
-                        } else if (c.isCreature()) {
-                            return card.isCreature();
-                        } else if (c.isPlaneswalker() || c.isArtifact() || (c.isEnchantment() && !c.isAura())) {
-                            return card.isPlaneswalker() || card.isArtifact() || (c.isEnchantment() && !c.isAura());
-                        } else if (c.isLand()) {
-                            return card.isLand();
-                        } else if (c.isAttachedToEntity()) {
-                            return card.isAttachedToEntity(c.getEntityAttachedTo()) || c.equals(card.getAttachedTo());
-                        }
-                        return card.sharesCardTypeWith(c);
+                controller.getCardsIn(ZoneType.Battlefield), card -> {
+                    if (card.isAttachedToEntity(c)) {
+                        attachments.add(card);
+                        return true;
+                    } else if (c.isCreature()) {
+                        return card.isCreature();
+                    } else if (c.isPlaneswalker() || c.isArtifact() || (c.isEnchantment() && !c.isAura())) {
+                        return card.isPlaneswalker() || card.isArtifact() || (c.isEnchantment() && !c.isAura());
+                    } else if (c.isLand()) {
+                        return card.isLand();
+                    } else if (c.isAttachedToEntity()) {
+                        return card.isAttachedToEntity(c.getEntityAttachedTo()) || c.equals(card.getAttachedTo());
                     }
+                    return card.sharesCardTypeWith(c);
                 }
         ));
 

@@ -288,12 +288,9 @@ public abstract class DeckGeneratorBase {
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
-        Predicate<CardRules> canUseInFormat = new Predicate<CardRules>() {
-            @Override
-            public boolean apply(CardRules c) {
-                // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
-                return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
-            }
+        Predicate<CardRules> canUseInFormat = c -> {
+            // FIXME: should this be limited to AI only (!forAi) or should it be generally applied to all random generated decks?
+            return !c.getAiHints().getRemNonCommanderDecks() || format.hasCommander();
         };
 
         if (useArtifacts) {
@@ -337,12 +334,9 @@ public abstract class DeckGeneratorBase {
 
     public static final Predicate<CardRules> AI_CAN_PLAY = Predicates.and(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);
 
-    public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
-        @Override
-        public boolean apply(CardRules c) {
-            ManaCost mc = c.getManaCost();
-            return c.getColorIdentity().isColorless() && !mc.isNoCost();
-        }
+    public static final Predicate<CardRules> COLORLESS_CARDS = c -> {
+        ManaCost mc = c.getManaCost();
+        return c.getColorIdentity().isColorless() && !mc.isNoCost();
     };
 
     public static class MatchColorIdentity implements Predicate<CardRules> {

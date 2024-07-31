@@ -3126,18 +3126,15 @@ public class AbilityUtils {
             return sa;
         }
 
-        final CardCollection splices = CardLists.filter(hand, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
-                    String k = inst.getOriginal();
-                    final String[] n = k.split(":");
-                    if (source.isValid(n[1].split(","), player, input, sa)) {
-                        return true;
-                    }
+        final CardCollection splices = CardLists.filter(hand, input -> {
+            for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
+                String k = inst.getOriginal();
+                final String[] n = k.split(":");
+                if (source.isValid(n[1].split(","), player, input, sa)) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
         splices.remove(source);
@@ -3890,21 +3887,11 @@ public class AbilityUtils {
         // if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
 
         if (sq[0].contains("Multicolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getColor().isMulticolor();
-                }
-            });
+            someCards = CardLists.filter(someCards, c1 -> c1.getColor().isMulticolor());
         }
 
         if (sq[0].contains("Monocolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getColor().isMonoColor();
-                }
-            });
+            someCards = CardLists.filter(someCards, c12 -> c12.getColor().isMonoColor());
         }
         return someCards;
     }

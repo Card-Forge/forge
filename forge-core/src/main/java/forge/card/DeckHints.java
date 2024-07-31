@@ -219,19 +219,16 @@ public class DeckHints {
         } else {
             tdb = null;
         }
-        return new Predicate<CardRules>() {
-            @Override
-            public boolean apply(final CardRules card) {
-                if (predicate.apply(card)) {
+        return card -> {
+            if (predicate.apply(card)) {
+                return true;
+            }
+            for (String tok : card.getTokens()) {
+                if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
                     return true;
                 }
-                for (String tok : card.getTokens()) {
-                    if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
-                        return true;
-                    } 
-                }
-                return false;
             }
+            return false;
         };
     }
 

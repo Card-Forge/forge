@@ -45,16 +45,13 @@ public abstract class ItemFilter<T extends InventoryItem> {
 
     public final <U extends InventoryItem> Predicate<U> buildPredicate(Class<U> genericType) {
         final Predicate<T> predicate = buildPredicate();
-        return new Predicate<U>() {
-            @SuppressWarnings("unchecked")
-            @Override
-            public boolean apply(U item) {
-                try {
-                    return predicate.apply((T)item);
-                }
-                catch (Exception ex) {
-                    return showUnsupportedItem(item); //if can't cast U to T, filter item out unless derived class can handle it
-                }
+        return item -> {
+            try {
+                //noinspection unchecked
+                return predicate.apply((T)item);
+            }
+            catch (Exception ex) {
+                return showUnsupportedItem(item); //if can't cast U to T, filter item out unless derived class can handle it
             }
         };
     }

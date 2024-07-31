@@ -58,12 +58,7 @@ public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
         CardCollectionView all = list;
         if (targeted) {
-            all = CardLists.filter(all, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.canBeTargetedBy(spell);
-                }
-            });
+            all = CardLists.filter(all, c -> c.canBeTargetedBy(spell));
         }
         return getMostExpensivePermanentAI(all);
     }
@@ -194,12 +189,7 @@ public class ComputerUtilCard {
     public static Card getBestEnchantmentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
         List<Card> all = CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS);
         if (targeted) {
-            all = CardLists.filter(all, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.canBeTargetedBy(spell);
-                }
-            });
+            all = CardLists.filter(all, c -> c.canBeTargetedBy(spell));
         }
 
         // get biggest Enchantment
@@ -342,12 +332,7 @@ public class ComputerUtilCard {
      */
     public static Card getCheapestPermanentAI(Iterable<Card> all, final SpellAbility spell, final boolean targeted) {
         if (targeted) {
-            all = CardLists.filter(all, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.canBeTargetedBy(spell);
-                }
-            });
+            all = CardLists.filter(all, c -> c.canBeTargetedBy(spell));
         }
         if (Iterables.isEmpty(all)) {
             return null;
@@ -524,12 +509,10 @@ public class ComputerUtilCard {
         }
 
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.and(Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return !card.hasSVar("DoNotDiscardIfAble");
-                }
-            }));
+            final List<Card> ae = CardLists.filter(list, Predicates.and(
+                    Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS),
+                    card -> !card.hasSVar("DoNotDiscardIfAble")
+            ));
             return getCheapestPermanentAI(ae, null, false);
         }
 
@@ -568,18 +551,10 @@ public class ComputerUtilCard {
         return null;
     }
 
-    public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return evaluateCreature(b) - evaluateCreature(a);
-        }
-    };
-    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = new Comparator<SpellAbility>() {
-        @Override
-        public int compare(final SpellAbility a, final SpellAbility b) {
-            // TODO ideally we could reuse the value from the previous pass with false
-            return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
-        }
+    public static final Comparator<Card> EvaluateCreatureComparator = (a, b) -> evaluateCreature(b) - evaluateCreature(a);
+    public static final Comparator<SpellAbility> EvaluateCreatureSpellComparator = (a, b) -> {
+        // TODO ideally we could reuse the value from the previous pass with false
+        return ComputerUtilAbility.saEvaluator.compareEvaluator(a, b, true);
     };
 
     private static final CreatureEvaluator creatureEvaluator = new CreatureEvaluator();
@@ -990,12 +965,7 @@ public class ComputerUtilCard {
             if (color.hasGreen()) map.get(4).setValue(map.get(4).getValue() + 1);
         }
 
-        Collections.sort(map, new Comparator<Pair<Byte, Integer>>() {
-            @Override
-            public int compare(Pair<Byte, Integer> o1, Pair<Byte, Integer> o2) {
-                return o2.getValue() - o1.getValue();
-            }
-        });
+        Collections.sort(map, (o1, o2) -> o2.getValue() - o1.getValue());
 
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);
@@ -1006,17 +976,14 @@ public class ComputerUtilCard {
         return result;
     }
 
-    public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = new Predicate<Deck>() {
-        @Override
-        public boolean apply(Deck d) {
-            for (Entry<DeckSection, CardPool> cp : d) {
-                for (Entry<PaperCard, Integer> e : cp.getValue()) {
-                    if (e.getKey().getRules().getAiHints().getRemAIDecks())
-                        return false;
-                }
+    public static final Predicate<Deck> AI_KNOWS_HOW_TO_PLAY_ALL_CARDS = d -> {
+        for (Entry<DeckSection, CardPool> cp : d) {
+            for (Entry<PaperCard, Integer> e : cp.getValue()) {
+                if (e.getKey().getRules().getAiHints().getRemAIDecks())
+                    return false;
             }
-            return true;
         }
+        return true;
     };
 
     public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {

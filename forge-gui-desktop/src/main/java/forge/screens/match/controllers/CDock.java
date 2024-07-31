@@ -135,12 +135,7 @@ public class CDock implements ICDoc {
         view.getBtnRevertLayout().setCommand((UiCommand) SLayoutIO::revertLayout);
         view.getBtnOpenLayout().setCommand((UiCommand) SLayoutIO::openLayout);
         view.getBtnSaveLayout().setCommand((UiCommand) SLayoutIO::saveLayout);
-        view.getBtnAlphaStrike().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                matchUI.getGameController().alphaStrike();
-            }
-        });
+        view.getBtnAlphaStrike().setCommand((UiCommand) () -> matchUI.getGameController().alphaStrike());
         view.getBtnTargeting().setCommand((UiCommand) this::toggleTargeting);
     }
 

@@ -531,19 +531,9 @@ public final class ConquestData {
     }
 
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return FModel.getConquest().getModel().newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-        }
-    };
+            from -> FModel.getConquest().getModel().newCards.contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
     private static final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet =
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return FModel.getConquest().getModel().newCards.contains(from.getKey()) ? "NEW" : "";
-        }
-    };
+            from -> FModel.getConquest().getModel().newCards.contains(from.getKey()) ? "NEW" : "";
 
     public static Map<ColumnDef, ItemColumn> getColOverrides(ItemManagerConfig config) {
         Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();

@@ -37,16 +37,11 @@ public class StartButton extends SkinnedButton {
             }
         });
         
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setEnabled(false);
-                
-                // ensure the click action can resolve before we allow the button to be clicked again
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { setEnabled(true); }
-                });
-            }
+        addActionListener(e -> {
+            setEnabled(false);
+
+            // ensure the click action can resolve before we allow the button to be clicked again
+            SwingUtilities.invokeLater(() -> setEnabled(true));
         });
     }
 }

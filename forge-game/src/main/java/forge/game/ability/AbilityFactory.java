@@ -286,12 +286,7 @@ public final class AbilityFactory {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
-                spellAbility.setAdditionalAbilityList(key, Lists.transform(names, new Function<String, AbilitySub>() {
-                    @Override
-                    public AbilitySub apply(String input) {
-                        return getSubAbility(state, input, sVarHolder);
-                    }
-                }));
+                spellAbility.setAdditionalAbilityList(key, Lists.transform(names, input -> getSubAbility(state, input, sVarHolder)));
             }
         }
 

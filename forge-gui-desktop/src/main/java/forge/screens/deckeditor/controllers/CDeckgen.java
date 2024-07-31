@@ -51,24 +51,9 @@ public enum CDeckgen implements ICDoc {
     @Override
     public void initialize() {
         VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand((UiCommand) this::newRandomConstructed);
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(2);
-            }
-        });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(3);
-            }
-        });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(5);
-            }
-        });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand((UiCommand) () -> newGenerateConstructed(2));
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand((UiCommand) () -> newGenerateConstructed(3));
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand((UiCommand) () -> newGenerateConstructed(5));
     }
 
     /* (non-Javadoc)

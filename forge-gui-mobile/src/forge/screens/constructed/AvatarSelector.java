@@ -92,21 +92,15 @@ public class AvatarSelector extends FScreen {
                 .build();
 
         if (index == -1) {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(getRandomAvatar(usedAvatars));
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(getRandomAvatar(usedAvatars));
+                Forge.back();
             });
         }
         else {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(index);
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(index);
+                Forge.back();
             });
         }
         scroller.add(lbl);
