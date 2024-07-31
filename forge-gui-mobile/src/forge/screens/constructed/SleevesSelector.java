@@ -13,8 +13,6 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;

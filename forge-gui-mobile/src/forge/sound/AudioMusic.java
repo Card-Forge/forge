@@ -2,7 +2,6 @@ package forge.sound;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;

@@ -7,7 +7,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Aggregates;
 import forge.util.Utils;

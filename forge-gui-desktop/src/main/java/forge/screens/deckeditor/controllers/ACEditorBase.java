@@ -28,7 +28,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.deck.CardPool;

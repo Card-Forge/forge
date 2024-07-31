@@ -16,8 +16,6 @@ import forge.screens.limited.NewDraftScreen;
 import forge.screens.limited.NewSealedScreen;
 import forge.screens.planarconquest.NewConquestScreen;
 import forge.screens.quest.NewQuestScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public class NewGameMenu extends FPopupMenu {
 

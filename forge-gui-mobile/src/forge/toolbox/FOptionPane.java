@@ -21,7 +21,6 @@ import forge.card.CardZoom;
 import forge.game.card.CardView;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.views.VPrompt;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.WaitCallback;

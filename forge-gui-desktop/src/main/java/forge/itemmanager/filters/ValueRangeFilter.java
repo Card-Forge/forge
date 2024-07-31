@@ -4,8 +4,6 @@ import java.awt.Component;
 
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import com.google.common.base.Predicate;
 

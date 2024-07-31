@@ -10,8 +10,6 @@ import java.util.concurrent.FutureTask;
 
 import javax.swing.JList;
 import javax.swing.WindowConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang3.StringUtils;
 

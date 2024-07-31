@@ -8,8 +8,6 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.TextBounds;
 

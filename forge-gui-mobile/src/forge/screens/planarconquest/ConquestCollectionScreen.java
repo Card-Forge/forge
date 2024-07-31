@@ -30,8 +30,6 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {

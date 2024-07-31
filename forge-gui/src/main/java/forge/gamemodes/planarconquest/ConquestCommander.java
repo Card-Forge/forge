@@ -1,7 +1,5 @@
 package forge.gamemodes.planarconquest;
 
-import com.google.common.base.Predicate;
-
 import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.deck.DeckSection;

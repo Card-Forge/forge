@@ -14,8 +14,6 @@ import forge.screens.limited.LoadDraftScreen;
 import forge.screens.limited.LoadSealedScreen;
 import forge.screens.planarconquest.LoadConquestScreen;
 import forge.screens.quest.LoadQuestScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {

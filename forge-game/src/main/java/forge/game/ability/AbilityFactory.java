@@ -17,7 +17,6 @@
  */
 package forge.game.ability;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;

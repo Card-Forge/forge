@@ -1,13 +1,8 @@
 package forge.screens.home.online;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 
-import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
-import forge.deckchooser.IDecksComboBoxListener;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.IOnlineLobby;
 import forge.gamemodes.net.client.FGameClient;

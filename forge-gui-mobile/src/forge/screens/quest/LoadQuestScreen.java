@@ -35,8 +35,6 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.util.ThreadUtil;

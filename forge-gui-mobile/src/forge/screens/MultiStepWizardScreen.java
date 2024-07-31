@@ -4,8 +4,6 @@ import forge.Forge;
 import forge.menu.FPopupMenu;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public abstract class MultiStepWizardScreen<T> extends FScreen {
     protected final WizardStep<T>[] steps;

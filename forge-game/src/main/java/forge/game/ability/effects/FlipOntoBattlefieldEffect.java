@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;

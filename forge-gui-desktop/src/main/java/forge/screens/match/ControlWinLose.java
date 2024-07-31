@@ -1,8 +1,5 @@
 package forge.screens.match;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 
 import forge.Singletons;

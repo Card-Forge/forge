@@ -9,7 +9,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.screens.FScreen;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.DefaultListItemRenderer;
 import forge.toolbox.FList.ListItemRenderer;
 import forge.util.Utils;

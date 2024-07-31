@@ -5,8 +5,6 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public abstract class ComboBoxFilter<T extends InventoryItem, V> extends ItemFilter<T> {
     protected V filterValue;

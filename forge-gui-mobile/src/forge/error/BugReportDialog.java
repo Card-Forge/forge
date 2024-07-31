@@ -10,8 +10,6 @@ import forge.assets.FSkinFont;
 import forge.gui.error.BugReporter;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;

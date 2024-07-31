@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;

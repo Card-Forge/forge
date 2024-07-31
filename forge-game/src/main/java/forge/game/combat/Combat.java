@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.base.Function;
 import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;

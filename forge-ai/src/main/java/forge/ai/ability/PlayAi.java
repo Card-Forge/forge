@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.CardStateName;

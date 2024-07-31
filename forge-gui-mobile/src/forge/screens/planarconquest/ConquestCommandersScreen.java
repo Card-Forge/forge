@@ -34,8 +34,6 @@ import forge.itemmanager.filters.TextSearchFilter;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.toolbox.FOptionPane;

@@ -20,8 +20,6 @@ import forge.gamemodes.planarconquest.ConquestReward;
 import forge.item.PaperCard;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Utils;

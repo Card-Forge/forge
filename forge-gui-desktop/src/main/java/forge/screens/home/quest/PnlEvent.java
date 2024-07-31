@@ -9,8 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import forge.ImageCache;
 import forge.gamemodes.quest.QuestEvent;

@@ -15,7 +15,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;

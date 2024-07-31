@@ -5,8 +5,6 @@ import forge.assets.FSkin;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 /** 
  * Default controller for a ViewWinLose object. This class can

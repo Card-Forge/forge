@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;

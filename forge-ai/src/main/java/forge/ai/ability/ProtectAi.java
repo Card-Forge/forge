@@ -3,8 +3,6 @@ package forge.ai.ability;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;

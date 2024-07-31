@@ -15,8 +15,6 @@ import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 

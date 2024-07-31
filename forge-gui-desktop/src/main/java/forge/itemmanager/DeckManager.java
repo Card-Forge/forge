@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import forge.itemmanager.filters.*;
 import forge.localinstance.properties.ForgePreferences;

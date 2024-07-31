@@ -5,7 +5,6 @@ import java.util.*;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

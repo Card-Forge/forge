@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import forge.Singletons;
 import forge.deck.DeckBase;

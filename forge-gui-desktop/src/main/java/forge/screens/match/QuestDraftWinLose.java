@@ -16,7 +16,6 @@
  */
 package forge.screens.match;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.google.common.collect.ImmutableList;

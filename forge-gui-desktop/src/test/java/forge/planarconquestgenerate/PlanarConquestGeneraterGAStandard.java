@@ -3,8 +3,6 @@ package forge.planarconquestgenerate;
 import java.io.File;
 import java.util.List;
 
-import com.google.common.base.Function;
-
 import forge.GuiDesktop;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;

@@ -23,8 +23,6 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestDraftUtils;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 /**
  * <p>

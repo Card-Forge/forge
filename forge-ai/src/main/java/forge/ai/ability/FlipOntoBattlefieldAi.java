@@ -2,9 +2,7 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import forge.ai.SpellAbilityAi;
-import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.phase.PhaseHandler;

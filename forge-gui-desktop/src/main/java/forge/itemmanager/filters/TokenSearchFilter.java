@@ -1,8 +1,5 @@
 package forge.itemmanager.filters;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicate;

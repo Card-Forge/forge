@@ -1,7 +1,6 @@
 package forge.game.ability;
 
 import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.card.CardStateName;
 import forge.card.CardType;

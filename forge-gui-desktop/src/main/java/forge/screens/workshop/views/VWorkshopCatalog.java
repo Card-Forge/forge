@@ -1,8 +1,6 @@
 package forge.screens.workshop.views;
 
 import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.Iterables;
 

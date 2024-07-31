@@ -3,8 +3,6 @@ package forge.ai.ability;
 import forge.game.card.CardCopyService;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
