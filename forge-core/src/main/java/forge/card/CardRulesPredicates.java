@@ -1,8 +1,6 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -147,14 +145,7 @@ public final class CardRulesPredicates {
     public static Predicate<CardRules> hasCreatureType(final String... creatureTypes) {
         return card -> {
             if (!card.getType().isCreature()) { return false; }
-
-            final Set<String> set = card.getType().getCreatureTypes();
-            for (final String creatureType : creatureTypes) {
-                if (set.contains(creatureType)) {
-                    return true;
-                }
-            }
-            return false;
+            return !Collections.disjoint(card.getType().getCreatureTypes(), Arrays.asList(creatureTypes));
         };
     }
 
