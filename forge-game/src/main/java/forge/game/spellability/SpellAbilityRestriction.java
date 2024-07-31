@@ -140,6 +140,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setFirstCombatOnly(true);
         }
 
+        if (params.containsKey("ActivationAfterBlockers")) {
+            this.setAfterBlockersOnly(true);
+        }
+
         if (params.containsKey("ActivationGameTypes")) {
             this.setGameTypes(GameType.listValueOf(params.get("ActivationGameTypes")));
         }
@@ -328,6 +332,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getFirstCombatOnly()) {
             if (game.getPhaseHandler().getNumCombat() > (game.getPhaseHandler().inCombat() ? 1 : 0)) {
+                return false;
+            }
+        }
+
+        // CR 506.7f
+        if (this.getAfterBlockersOnly()) {
+            if (game.getPhaseHandler().skippedDeclareBlockers()) {
                 return false;
             }
         }
