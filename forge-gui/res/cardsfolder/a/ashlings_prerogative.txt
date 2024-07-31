@@ -2,9 +2,9 @@ Name:Ashling's Prerogative
 ManaCost:1 R
 Types:Enchantment
 K:ETBReplacement:Other:ChooseEvenOdd
-SVar:ChooseEvenOdd:DB$ ChooseEvenOdd | Defined$ You | ListTitle$ Choose ODD or EVEN | AILogic$ CMCInHand | SpellDescription$ As CARDNAME enters the battlefield, choose odd or even. (Zero is even.)
+SVar:ChooseEvenOdd:DB$ ChooseEvenOdd | Defined$ You | ListTitle$ Choose ODD or EVEN | AILogic$ CMCInHand | SpellDescription$ As CARDNAME enters, choose odd or even. (Zero is even.)
 S:Mode$ Continuous | Affected$ Creature.cmcChosenEvenOdd | AddKeyword$ Haste | Description$ Each creature with mana value of the chosen quality has haste.
-R:Event$ Moved | ValidCard$ Creature.cmcNotChosenEvenOdd | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Each creature without mana value of the chosen quality enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Creature.cmcNotChosenEvenOdd | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Each creature without mana value of the chosen quality enters tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 AI:RemoveDeck:All
-Oracle:As Ashling's Prerogative enters the battlefield, choose odd or even. (Zero is even.)\nEach creature with mana value of the chosen quality has haste.\nEach creature without mana value of the chosen quality enters the battlefield tapped.
+Oracle:As Ashling's Prerogative enters, choose odd or even. (Zero is even.)\nEach creature with mana value of the chosen quality has haste.\nEach creature without mana value of the chosen quality enters tapped.
