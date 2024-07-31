@@ -2,7 +2,7 @@ Name:Blisterstick Shaman
 ManaCost:2 R
 Types:Creature Goblin Shaman
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 SVar:PlayMain1:TRUE
-Oracle:When Blisterstick Shaman enters the battlefield, it deals 1 damage to any target.
+Oracle:When Blisterstick Shaman enters, it deals 1 damage to any target.
