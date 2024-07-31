@@ -493,13 +493,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
+    public boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     @Override
-    public final boolean isAura()           { return hasSubtype("Aura"); }
+    public boolean isAura()           { return hasSubtype("Aura"); }
     @Override
-    public final boolean isEquipment()  { return hasSubtype("Equipment"); }
+    public boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
-    public final boolean isFortification()  { return hasSubtype("Fortification"); }
+    public boolean isFortification()  { return hasSubtype("Fortification"); }
     public boolean isAttraction() {
         return hasSubtype("Attraction");
     }
@@ -986,7 +986,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      *
      * @deprecated
      */
-    public static final String getSingularType(final String type) {
+    public static String getSingularType(final String type) {
         if (Constant.singularTypes.containsKey(type)) {
             return Constant.singularTypes.get(type);
         }
@@ -999,7 +999,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      * @param type a String.
      * @return the corresponding type.
      */
-    public static final String getPluralType(final String type) {
+    public static String getPluralType(final String type) {
         if (Constant.pluralTypes.containsKey(type)) {
             return Constant.pluralTypes.get(type);
         }

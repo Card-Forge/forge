@@ -186,7 +186,7 @@ public class PlayerPanel extends FPanel {
         addHandlersToVariantsControls();
 
         this.addMouseListener(new FMouseAdapter() {
-            @Override public final void onLeftMouseDown(final MouseEvent e) {
+            @Override public void onLeftMouseDown(final MouseEvent e) {
                 avatarLabel.requestFocusInWindow();
             }
         });
@@ -250,7 +250,7 @@ public class PlayerPanel extends FPanel {
 
     private final FMouseAdapter radioMouseAdapter(final FRadioButton source, final LobbySlotType type) {
         return new FMouseAdapter() {
-            @Override public final void onLeftClick(final MouseEvent e) {
+            @Override public void onLeftClick(final MouseEvent e) {
                 if (!source.isEnabled()) {
                     return;
                 }
@@ -297,7 +297,7 @@ public class PlayerPanel extends FPanel {
     };
 
     private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-        @Override public final void onLeftClick(final MouseEvent e) {
+        @Override public void onLeftClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
             }
@@ -325,7 +325,7 @@ public class PlayerPanel extends FPanel {
             lobby.firePlayerChangeListener(index);
         }
 
-        @Override public final void onRightClick(final MouseEvent e) {
+        @Override public void onRightClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
             }
@@ -350,7 +350,7 @@ public class PlayerPanel extends FPanel {
     };
 
     private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
-        @Override public final void onLeftClick(final MouseEvent e) {
+        @Override public void onLeftClick(final MouseEvent e) {
             if (!sleeveLabel.isEnabled()) {
                 return;
             }
@@ -378,7 +378,7 @@ public class PlayerPanel extends FPanel {
             lobby.firePlayerChangeListener(index);
         }
 
-        @Override public final void onRightClick(final MouseEvent e) {
+        @Override public void onRightClick(final MouseEvent e) {
             if (!sleeveLabel.isEnabled()) {
                 return;
             }
@@ -521,7 +521,7 @@ public class PlayerPanel extends FPanel {
 
     private final ActionListener teamListener = new ActionListener() {
         @SuppressWarnings("unchecked")
-        @Override public final void actionPerformed(final ActionEvent e) {
+        @Override public void actionPerformed(final ActionEvent e) {
             final FComboBox<Object> cb = (FComboBox<Object>) e.getSource();
             cb.requestFocusInWindow();
             final Object selection = cb.getSelectedItem();

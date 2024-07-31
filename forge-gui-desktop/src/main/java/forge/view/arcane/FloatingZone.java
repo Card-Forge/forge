@@ -209,7 +209,7 @@ public class FloatingZone extends FloatingCardArea {
         if (!hasBeenShown) {
             getWindow().getTitleBar().addMouseListener(new FMouseAdapter() {
                 @Override
-                public final void onRightClick(final MouseEvent e) {
+                public void onRightClick(final MouseEvent e) {
                     toggleSorted();
                 }
             });

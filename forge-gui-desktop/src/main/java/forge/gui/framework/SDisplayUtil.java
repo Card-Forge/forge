@@ -69,7 +69,7 @@ public class SDisplayUtil {
         }
 
         final TimerTask tt = new TimerTask() {
-            @Override public final void run() {
+            @Override public void run() {
                 counter++;
                 if (counter != (steps - 1)) {
                     SwingUtilities.invokeLater(() -> {

@@ -45,11 +45,11 @@ public enum CCurrentDeck implements ICDoc {
         }
 
         final FileFilter DCK_FILTER = new FileFilter() {
-            @Override public final boolean accept(final File f) {
+            @Override public boolean accept(final File f) {
                 return f.getName().endsWith(DeckStorage.FILE_EXTENSION) || f.isDirectory();
             }
 
-            @Override public final String getDescription() {
+            @Override public String getDescription() {
                 return "Simple Deck File .dck";
             }
         };

@@ -194,7 +194,7 @@ final class CardFace implements ICardFace, Cloneable {
 
     /** {@inheritDoc} */
     @Override
-    public final Object clone() {
+    public Object clone() {
         try {
             return super.clone();
         } catch (final Exception ex) {

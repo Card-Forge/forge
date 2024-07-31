@@ -110,7 +110,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
     }
 
     @Override
-    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
+    protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
     }
 
     public Map<Card, ManaCostShard> getConvokeMap() {

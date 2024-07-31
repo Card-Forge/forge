@@ -46,33 +46,33 @@ import forge.util.collect.FCollectionView;
  */
 public final class CardPredicates {
 
-    public static final Predicate<Card> isController(final Player p) {
+    public static Predicate<Card> isController(final Player p) {
         return c -> c.getController().equals(p);
     }
-    public static final Predicate<Card> isControlledByAnyOf(final FCollectionView<Player> pList) {
+    public static Predicate<Card> isControlledByAnyOf(final FCollectionView<Player> pList) {
         return c -> pList.contains(c.getController());
     }
-    public static final Predicate<Card> isOwner(final Player p) {
+    public static Predicate<Card> isOwner(final Player p) {
         return c -> p.equals(c.getOwner());
     }
 
-    public static final Predicate<Card> ownerLives() {
+    public static Predicate<Card> ownerLives() {
         return c -> !c.getOwner().hasLost();
     }
 
-    public static final Predicate<Card> isType(final String cardType) {
+    public static Predicate<Card> isType(final String cardType) {
         return c -> c.getType().hasStringType(cardType);
     }
 
-    public static final Predicate<Card> hasKeyword(final String keyword) {
+    public static Predicate<Card> hasKeyword(final String keyword) {
         return c -> c.hasKeyword(keyword);
     }
 
-    public static final Predicate<Card> hasKeyword(final Keyword keyword) {
+    public static Predicate<Card> hasKeyword(final Keyword keyword) {
         return c -> c.hasKeyword(keyword);
     }
 
-    public static final Predicate<Card> containsKeyword(final String keyword) {
+    public static Predicate<Card> containsKeyword(final String keyword) {
         return c -> {
             if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
                 return true;
@@ -87,27 +87,27 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> isTargetableBy(final SpellAbility source) {
+    public static Predicate<Card> isTargetableBy(final SpellAbility source) {
         return source::canTarget;
     }
 
-    public static final Predicate<Card> nameEquals(final String name) {
+    public static Predicate<Card> nameEquals(final String name) {
         return c -> c.getName().equals(name);
     }
 
-    public static final Predicate<Card> sharesNameWith(final Card name) {
+    public static Predicate<Card> sharesNameWith(final Card name) {
         return c -> c.sharesNameWith(name);
     }
 
-    public static final Predicate<Card> sharesCMCWith(final Card cmc) {
+    public static Predicate<Card> sharesCMCWith(final Card cmc) {
         return c -> c.sharesCMCWith(cmc);
     }
 
-    public static final Predicate<Card> sharesColorWith(final Card color) {
+    public static Predicate<Card> sharesColorWith(final Card color) {
         return c -> c.sharesColorWith(color);
     }
 
-    public static final Predicate<Card> sharesControllerWith(final Card card) {
+    public static Predicate<Card> sharesControllerWith(final Card card) {
         return c -> c.sharesControllerWith(card);
     }
 
@@ -123,109 +123,109 @@ public final class CardPredicates {
         return c -> c.sharesLandTypeWith(card);
     }
 
-    public static final Predicate<Card> possibleBlockers(final Card attacker) {
+    public static Predicate<Card> possibleBlockers(final Card attacker) {
         return c -> c.isCreature() && CombatUtil.canBlock(attacker, c);
     }
 
-    public static final Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
+    public static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
         return c -> c.isCreature() && CombatUtil.canBlockAtLeastOne(c, attackers);
     }
 
-    public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+    public static Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
-    public static final Predicate<Card> restriction(final String restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+    public static Predicate<Card> restriction(final String restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
-    public static final Predicate<Card> canBeSacrificedBy(final SpellAbility sa, final boolean effect) {
+    public static Predicate<Card> canBeSacrificedBy(final SpellAbility sa, final boolean effect) {
         return c -> c.canBeSacrificedBy(sa, effect);
     }
 
-    public static final Predicate<Card> canExiledBy(final SpellAbility sa, final boolean effect) {
+    public static Predicate<Card> canExiledBy(final SpellAbility sa, final boolean effect) {
         return c -> c.canExiledBy(sa, effect);
     }
 
-    public static final Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa) {
+    public static Predicate<Card> canBeAttached(final Card aura, final SpellAbility sa) {
         return c -> c.canBeAttached(aura, sa);
     }
 
-    public static final Predicate<Card> isColor(final byte color) {
+    public static Predicate<Card> isColor(final byte color) {
         return c -> c.getColor().hasAnyColor(color);
     } // getColor()
 
-    public static final Predicate<Card> isExactlyColor(final byte color) {
+    public static Predicate<Card> isExactlyColor(final byte color) {
         return c -> c.getColor().hasExactlyColor(color);
     }
 
-    public static final Predicate<Card> isColorless() {
+    public static Predicate<Card> isColorless() {
         return c -> c.getColor().isColorless();
     }
 
-    public static final Predicate<Card> isEquippedBy(final String name) {
+    public static Predicate<Card> isEquippedBy(final String name) {
         return c -> c.isEquippedBy(name);
     }
 
-    public static final Predicate<Card> isEnchantedBy(final String name) {
+    public static Predicate<Card> isEnchantedBy(final String name) {
         return c -> c.isEnchantedBy(name);
     }
 
-    public static final Predicate<Card> hasCMC(final int cmc) {
+    public static Predicate<Card> hasCMC(final int cmc) {
         return c -> c.sharesCMCWith(cmc);
     }
 
-    public static final Predicate<Card> greaterCMC(final int cmc) {
+    public static Predicate<Card> greaterCMC(final int cmc) {
         return c -> {
             // do not check for Split card anymore
             return c.getCMC() >= cmc;
         };
     }
 
-    public static final Predicate<Card> lessCMC(final int cmc) {
+    public static Predicate<Card> lessCMC(final int cmc) {
         return c -> {
             // do not check for Split card anymore
             return c.getCMC() <= cmc;
         };
     }
 
-    public static final Predicate<Card> evenCMC() {
+    public static Predicate<Card> evenCMC() {
         return c -> c.getCMC() % 2 == 0;
     }
 
-    public static final Predicate<Card> oddCMC() {
+    public static Predicate<Card> oddCMC() {
         return c -> c.getCMC() % 2 == 1;
     }
 
-    public static final Predicate<Card> hasSuspend() {
+    public static Predicate<Card> hasSuspend() {
         return Card::hasSuspend;
     }
 
-    public static final Predicate<Card> hasCounters() {
+    public static Predicate<Card> hasCounters() {
         return GameEntity::hasCounters;
     }
 
-    public static final Predicate<Card> hasCounter(final CounterType type) {
+    public static Predicate<Card> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
-    public static final Predicate<Card> hasCounter(final CounterEnumType type) {
+    public static Predicate<Card> hasCounter(final CounterEnumType type) {
         return hasCounter(type, 1);
     }
 
-    public static final Predicate<Card> hasCounter(final CounterType type, final int n) {
+    public static Predicate<Card> hasCounter(final CounterType type, final int n) {
         return c -> c.getCounters(type) >= n;
     }
-    public static final Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
+    public static Predicate<Card> hasCounter(final CounterEnumType type, final int n) {
         return hasCounter(CounterType.get(type), n);
     }
 
-    public static final Predicate<Card> hasLessCounter(final CounterType type, final int n) {
+    public static Predicate<Card> hasLessCounter(final CounterType type, final int n) {
         return c -> {
             int x = c.getCounters(type);
             return x > 0 && x <= n;
         };
     }
-    public static final Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
+    public static Predicate<Card> hasLessCounter(final CounterEnumType type, final int n) {
         return hasLessCounter(CounterType.get(type), n);
     }
 
@@ -236,37 +236,37 @@ public final class CardPredicates {
         return canReceiveCounters(CounterType.get(counter));
     }
 
-    public static final Predicate<Card> hasGreaterPowerThan(final int minPower) {
+    public static Predicate<Card> hasGreaterPowerThan(final int minPower) {
         return c -> c.getNetPower() > minPower;
     }
 
-    public static final Comparator<Card> compareByCounterType(final CounterType type) {
+    public static Comparator<Card> compareByCounterType(final CounterType type) {
         return Comparator.comparingInt(arg0 -> arg0.getCounters(type));
     }
-    public static final Comparator<Card> compareByCounterType(final CounterEnumType type) {
+    public static Comparator<Card> compareByCounterType(final CounterEnumType type) {
         return compareByCounterType(CounterType.get(type));
     }
 
-    public static final Predicate<Card> hasSVar(final String name) {
+    public static Predicate<Card> hasSVar(final String name) {
         return c -> c.hasSVar(name);
     }
 
-    public static final Predicate<Card> isExiledWith(final Card card) {
+    public static Predicate<Card> isExiledWith(final Card card) {
         return c -> card.equals(c.getExiledWith());
     }
 
-    public static final Comparator<Card> compareByGameTimestamp() {
+    public static Comparator<Card> compareByGameTimestamp() {
         return Comparator.comparingLong(Card::getGameTimestamp);
     }
 
-    public static final Predicate<Card> inZone(final ZoneType zt) {
+    public static Predicate<Card> inZone(final ZoneType zt) {
         return c -> {
             Zone z = c.getLastKnownZone();
             return z != null && z.is(zt);
         };
     }
 
-    public static final Predicate<Card> inZone(final Iterable<ZoneType> zt) {
+    public static Predicate<Card> inZone(final Iterable<ZoneType> zt) {
         return c -> {
             Zone z = c.getLastKnownZone();
             if (z != null) {
@@ -280,11 +280,11 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> isRemAIDeck() {
+    public static Predicate<Card> isRemAIDeck() {
         return c -> c.getRules() != null && c.getRules().getAiHints().getRemAIDecks();
     }
 
-    public static final Predicate<Card> castSA(final Predicate<SpellAbility> predSA) {
+    public static Predicate<Card> castSA(final Predicate<SpellAbility> predSA) {
         return c -> {
             if (c.getCastSA() == null) {
                 return false;
@@ -293,7 +293,7 @@ public final class CardPredicates {
         };
     }
 
-    public static final Predicate<Card> phasedIn() {
+    public static Predicate<Card> phasedIn() {
         return c -> !c.isPhasedOut();
     }
 

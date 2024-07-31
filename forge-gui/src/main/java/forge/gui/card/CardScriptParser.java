@@ -345,7 +345,7 @@ public final class CardScriptParser {
         }
     }
 
-    private static final Predicate<String> startsWith(final String s) {
+    private static Predicate<String> startsWith(final String s) {
         return s::startsWith;
     }
 

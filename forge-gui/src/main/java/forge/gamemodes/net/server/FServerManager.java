@@ -101,7 +101,7 @@ public final class FServerManager {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public final void initChannel(final SocketChannel ch) throws Exception {
+                        public void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
                                     new CompatibleObjectEncoder(),

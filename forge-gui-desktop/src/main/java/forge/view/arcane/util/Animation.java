@@ -72,7 +72,7 @@ public abstract class Animation {
     private Animation(final long duration, final long delay) {
         this.delay = delay;
         timerTask = new TimerTask() {
-            @Override public final void run() {
+            @Override public void run() {
                 if (frameTimer == null) {
                     onStart();
                     frameTimer = new FrameTimer();

@@ -11,8 +11,7 @@ import forge.game.zone.ZoneType;
 
 public final class AiPlayerPredicates {
 
-    public static final Comparator<Player> compareByZoneValue(final String type, final ZoneType zone,
-            final SpellAbility sa) {
+    public static Comparator<Player> compareByZoneValue(final String type, final ZoneType zone, final SpellAbility sa) {
         return (arg0, arg1) -> {
             CardCollectionView list0 = AbilityUtils.filterListByType(arg0.getCardsIn(zone), type, sa);
             CardCollectionView list1 = AbilityUtils.filterListByType(arg1.getCardsIn(zone), type, sa);

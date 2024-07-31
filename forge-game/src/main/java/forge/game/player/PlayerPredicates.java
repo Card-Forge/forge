@@ -16,83 +16,83 @@ import forge.game.zone.ZoneType;
 
 public final class PlayerPredicates {
 
-    public static final Predicate<Player> isTargetableBy(final SpellAbility source) {
+    public static Predicate<Player> isTargetableBy(final SpellAbility source) {
         return source::canTarget;
     }
 
-    public static final Predicate<Player> canDiscardBy(final SpellAbility source, final boolean effect) {
+    public static Predicate<Player> canDiscardBy(final SpellAbility source, final boolean effect) {
         return p -> p.canDiscardBy(source, effect);
     }
 
-    public static final Predicate<Player> isOpponentOf(final Player player) {
+    public static Predicate<Player> isOpponentOf(final Player player) {
         return p -> p.isOpponentOf(player);
     }
     
-    public static final Predicate<Player> sameTeam(final Player player) {
+    public static Predicate<Player> sameTeam(final Player player) {
         return player::sameTeam;
     }
 
-    public static final Predicate<Player> isCardInPlay(final String cardName) {
+    public static Predicate<Player> isCardInPlay(final String cardName) {
         return p -> p.isCardInPlay(cardName);
     }
     
-    public static final Predicate<Player> isNotCardInPlay(final String cardName) {
+    public static Predicate<Player> isNotCardInPlay(final String cardName) {
         return Predicates.not(isCardInPlay(cardName));
     }
 
-    public static final Predicate<Player> hasCounters() {
+    public static Predicate<Player> hasCounters() {
         return GameEntity::hasCounters;
     }
 
-    public static final Predicate<Player> lifeLessOrEqualTo(final int n) {
+    public static Predicate<Player> lifeLessOrEqualTo(final int n) {
         return p -> p.getLife() <= n;
     }
 
-    public static final Predicate<Player> lifeGreaterOrEqualTo(final int n) {
+    public static Predicate<Player> lifeGreaterOrEqualTo(final int n) {
         return p -> p.getLife() >= n;
     }
 
-    public static final Predicate<Player> hasCounter(final CounterType type) {
+    public static Predicate<Player> hasCounter(final CounterType type) {
         return hasCounter(type, 1);
     }
 
-    public static final Predicate<Player> hasCounter(final CounterType type, final int n) {
+    public static Predicate<Player> hasCounter(final CounterType type, final int n) {
         return p -> p.getCounters(type) >= n;
     }
 
-    public static final Predicate<Player> hasCounter(final CounterEnumType type) {
+    public static Predicate<Player> hasCounter(final CounterEnumType type) {
         return hasCounter(CounterType.get(type), 1);
     }
 
-    public static final Predicate<Player> hasCounter(final CounterEnumType type, final int n) {
+    public static Predicate<Player> hasCounter(final CounterEnumType type, final int n) {
         return hasCounter(CounterType.get(type), n);
     }
     
-    public static final Predicate<Player> hasKeyword(final String keyword) {
+    public static Predicate<Player> hasKeyword(final String keyword) {
         return p -> p.hasKeyword(keyword);
     }
 
-    public static final Predicate<Player> canBeAttached(final Card aura, SpellAbility sa) {
+    public static Predicate<Player> canBeAttached(final Card aura, SpellAbility sa) {
         return p -> p.canBeAttached(aura, sa);
     }
 
-    public static final Predicate<Player> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
+    public static Predicate<Player> restriction(final String[] restrictions, final Player sourceController, final Card source, final CardTraitBase spellAbility) {
         return c -> c != null && c.isValid(restrictions, sourceController, source, spellAbility);
     }
 
-    public static final Comparator<Player> compareByZoneSize(final ZoneType zone) {
+    public static Comparator<Player> compareByZoneSize(final ZoneType zone) {
         return Comparator.comparingInt(arg0 -> arg0.getCardsIn(zone).size());
     }
     
-    public static final Comparator<Player> compareByZoneSize(final ZoneType zone, final Predicate<Card> pred) {
+    public static Comparator<Player> compareByZoneSize(final ZoneType zone, final Predicate<Card> pred) {
         return Comparator.comparingInt(arg0 -> CardLists.count(arg0.getCardsIn(zone), pred));
     }
     
-    public static final Comparator<Player> compareByLife() {
+    public static Comparator<Player> compareByLife() {
         return Comparator.comparingInt(Player::getLife);
     }
     
-    public static final Comparator<Player> compareByPoison() {
+    public static Comparator<Player> compareByPoison() {
         return Comparator.comparingInt(Player::getPoisonCounters);
     }
 

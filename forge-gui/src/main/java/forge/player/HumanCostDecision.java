@@ -1053,7 +1053,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return counterTable.totalValues();
         }
 
-        protected final boolean isValidChoice(final GameEntity choice) {
+        protected boolean isValidChoice(final GameEntity choice) {
             return validChoices.contains(choice);
         }
 

@@ -43,7 +43,7 @@ public final class LDAModelGenetrator {
     public static Map<String, List<Archetype>> ldaArchetypes = new HashMap<>();
 
 
-    public static final void main(String[] args){
+    public static void main(String[] args){
         GuiBase.setInterface(new GuiDesktop());
         FModel.initialize(null, preferences -> {
             preferences.setPref(ForgePreferences.FPref.LOAD_CARD_SCRIPTS_LAZILY, false);

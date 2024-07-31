@@ -47,8 +47,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private boolean mustTargetFiltered;
     private static final long serialVersionUID = -1091595663541356356L;
 
-    public final boolean hasCancelled() { return bCancel; }
-    public final boolean hasPressedOk() { return bOk; }
+    public boolean hasCancelled() { return bCancel; }
+    public boolean hasPressedOk() { return bOk; }
 
     public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
         super(controller);
@@ -148,19 +148,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCancel() {
+    protected void onCancel() {
         bCancel = true;
         this.done();
     }
 
     @Override
-    protected final void onOk() {
+    protected void onOk() {
         bOk = true;
         this.done();
     }
 
     @Override
-    protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (targets.contains(card)) {
             removeTarget(card);
             return false;
@@ -313,7 +313,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
+    protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
         if (targets.contains(player)) {
             removeTarget(player);
             return;

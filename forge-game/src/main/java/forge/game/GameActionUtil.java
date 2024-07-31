@@ -82,7 +82,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
+    public static List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();

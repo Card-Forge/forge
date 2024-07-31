@@ -1527,7 +1527,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @SuppressWarnings("serial") final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard,
                 player.getZone(ZoneType.Hand).getCards()) {
             @Override
-            protected final boolean allowAwaitNextInput() {
+            protected boolean allowAwaitNextInput() {
                 return true; // prevent Cleanup message getting stuck during
                 // opponent's next turn
             }

@@ -141,7 +141,7 @@ public final class MapToAmountUtil {
     private static final MapToAmount<?> EMPTY_MAP = new LinkedHashMapToAmount<>(0);
 
     @SuppressWarnings("unchecked")
-    public static final <T> MapToAmount<T> emptyMap() {
+    public static <T> MapToAmount<T> emptyMap() {
         return (MapToAmount<T>) EMPTY_MAP;
     }
 }
