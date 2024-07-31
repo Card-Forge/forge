@@ -1,0 +1,132 @@
+package forge.item;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+import forge.item.generation.BoosterSlots;
+import forge.util.TextUtil;
+import forge.util.storage.StorageReaderFile;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SealedTemplate {
+
+    @SuppressWarnings("unchecked")
+    public final static SealedTemplate genericDraftBooster = new SealedTemplate(null, Lists.newArrayList(
+            Pair.of(BoosterSlots.COMMON, 10), Pair.of(BoosterSlots.UNCOMMON, 3),
+            Pair.of(BoosterSlots.RARE_MYTHIC, 1), Pair.of(BoosterSlots.BASIC_LAND, 1)
+    ));
+
+    protected final List<Pair<String, Integer>> slots;
+
+    protected final String name;
+
+    public final List<Pair<String, Integer>> getSlots() {
+        return slots;
+    }
+
+    public boolean hasSlot(String s) {
+        for (Pair<String, Integer> slot : getSlots()) {
+            String slotName = slot.getLeft();
+            // Anything after a space or ! or : is not part of the slot's main type
+            if (slotName.split("[ :!]")[0].equals(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public final String getEdition() {
+        return name;
+    }
+    public SealedTemplate(Iterable<Pair<String, Integer>> itrSlots) {
+        this(null, itrSlots);
+    }
+
+    public SealedTemplate(String name0, Iterable<Pair<String, Integer>> itrSlots) {
+        slots = Lists.newArrayList(itrSlots);
+        name = name0;
+    }
+
+    public SealedTemplate(String code, String boosterDesc) {
+        this(code, Reader.parseSlots(boosterDesc));
+    }
+
+    public int getNumberOfCardsExpected() {
+        int sum = 0;
+        for(Pair<String, Integer> p : slots) {
+            sum += p.getRight();
+        }
+        return sum;
+    }
+
+    public static final Function<? super SealedTemplate, String> FN_GET_NAME = new Function<SealedTemplate, String>() {
+        @Override
+        public String apply(SealedTemplate arg1) {
+            return arg1.name;
+        }
+    };
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+
+        s.append("consisting of ");
+        for(Pair<String, Integer> p : slots) {
+            s.append(p.getRight()).append(" ").append(p.getLeft()).append(", ");
+        }
+
+        // trim the last comma and space
+        s.replace(s.length() - 2, s.length(), "");
+
+        // put an 'and' before the previous comma
+        int lastCommaIdx = s.lastIndexOf(",");
+        if (0 < lastCommaIdx) {
+            s.replace(lastCommaIdx+1, lastCommaIdx+1, " and");
+        }
+
+        return s.toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SealedTemplate template = (SealedTemplate) o;
+
+        return slots.equals(template.slots) && name.equals(template.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = slots.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
+    public final static class Reader extends StorageReaderFile<SealedTemplate> {
+        public Reader(File file) {
+            super(file, SealedTemplate.FN_GET_NAME);
+        }
+
+        public static List<Pair<String, Integer>> parseSlots(String data) {
+            final String[] dataz = TextUtil.splitWithParenthesis(data, ',');
+            List<Pair<String, Integer>> slots = new ArrayList<>();
+            for (String slotDesc : dataz) {
+                String[] kv = TextUtil.splitWithParenthesis(slotDesc, ' ', 2);
+                slots.add(ImmutablePair.of(kv[1].replace(";", ","), Integer.parseInt(kv[0])));
+            }
+            return slots;
+        }
+
+        @Override
+        protected SealedTemplate read(String line, int i) {
+            String[] headAndData = TextUtil.split(line, ':', 2);
+            return new SealedTemplate(headAndData[0], parseSlots(headAndData[1]));
+        }
+    }
+}
