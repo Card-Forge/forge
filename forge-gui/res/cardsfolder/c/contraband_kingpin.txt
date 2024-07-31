@@ -3,6 +3,6 @@ ManaCost:U B
 Types:Creature Aetherborn Rogue
 PT:1/4
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever an artifact enters the battlefield under your control, scry 1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever an artifact you control enters, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
-Oracle:Lifelink\nWhenever an artifact enters the battlefield under your control, scry 1.
+Oracle:Lifelink\nWhenever an artifact you control enters, scry 1.

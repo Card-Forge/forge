@@ -8,4 +8,4 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Se
 SVar:X:Count$xPaid
 SVar:Y:Count$DifferentPower_Creature.YouCtrl
 DeckHas:Ability$Counters
-Oracle:Contortionist Troupe enters the battlefield with X +1/+1 counters on it.\nCoven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
+Oracle:Contortionist Troupe enters with X +1/+1 counters on it.\nCoven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.

@@ -1,10 +1,10 @@
 Name:Contagion Engine
 ManaCost:6
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on each creature target player controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on each creature target player controls.
 A:AB$ Proliferate | Cost$ 4 T | SubAbility$ DBProliferate | SpellDescription$ Proliferate, then proliferate again.
 SVar:DBProliferate:DB$ Proliferate
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | IsCurse$ True | CounterType$ M1M1 | CounterNum$ 1
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
-Oracle:When Contagion Engine enters the battlefield, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)
+Oracle:When Contagion Engine enters, put a -1/-1 counter on each creature target player controls.\n{4}, {T}: Proliferate, then proliferate again. (Choose any number of permanents and/or players, then give each another counter of each kind already there. Then do it again.)
