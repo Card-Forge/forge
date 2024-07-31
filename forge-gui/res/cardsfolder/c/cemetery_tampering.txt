@@ -6,4 +6,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZo
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Optional$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | ConditionPresent$ Card.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE20 | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
 DeckHas:Ability$Mill
-Oracle:Hideaway 5 (When this enchantment enters the battlefield, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
+Oracle:Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.

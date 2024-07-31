@@ -2,7 +2,7 @@ Name:Centaur Healer
 ManaCost:1 G W
 Types:Creature Centaur Cleric
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 DeckHas:Ability$Token
-Oracle:When Centaur Healer enters the battlefield, you gain 3 life.
+Oracle:When Centaur Healer enters, you gain 3 life.

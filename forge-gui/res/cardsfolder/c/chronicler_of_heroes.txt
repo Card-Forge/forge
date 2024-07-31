@@ -2,6 +2,6 @@ Name:Chronicler of Heroes
 ManaCost:1 G W
 Types:Creature Centaur Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card if you control a creature with a +1/+1 counter on it.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionPresent$ Creature.YouCtrl+counters_GE1_P1P1
-Oracle:When Chronicler of Heroes enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.
+Oracle:When Chronicler of Heroes enters, draw a card if you control a creature with a +1/+1 counter on it.
