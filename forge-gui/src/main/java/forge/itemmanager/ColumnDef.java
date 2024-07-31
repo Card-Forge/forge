@@ -113,6 +113,10 @@ public enum ColumnDef {
     CMC("lblCMC", "ttCMC", 20, true, SortState.ASC,
             from -> toCMC(from.getKey()),
             from -> toCMC(from.getKey())),
+    ATTRACTION_LIGHTS("lblLights", "lblLights", 94, true, SortState.NONE,
+            from -> toAttractionLightSort(from.getKey()),
+            from -> toAttractionLights(from.getKey())
+    ),
     /**
      * The rarity column.
      */
@@ -380,10 +384,11 @@ public enum ColumnDef {
     private static Integer toPower(final InventoryItem i) {
         int result = Integer.MAX_VALUE;
         if (i instanceof PaperCard) {
-            result = ((IPaperCard) i).getRules().getIntPower();
+            ICardFace face = ((IPaperCard) i).getMainFace();
+            result = face.getIntPower();
             if (result == Integer.MAX_VALUE) {
-                if (((IPaperCard) i).getRules().getType().isPlaneswalker()) {
-                    String loy = ((IPaperCard) i).getRules().getInitialLoyalty();
+                if (face.getType().isPlaneswalker()) {
+                    String loy = face.getInitialLoyalty();
                     result = StringUtils.isNumeric(loy) ? Integer.parseInt(loy) : 0;
                 }
             }
@@ -392,7 +397,7 @@ public enum ColumnDef {
     }
 
     private static Integer toToughness(final InventoryItem i) {
-        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getIntToughness() : Integer.MAX_VALUE;
+        return i instanceof PaperCard ? ((IPaperCard) i).getMainFace().getIntToughness() : Integer.MAX_VALUE;
     }
 
     private static Integer toCMC(final InventoryItem i) {
@@ -468,7 +473,7 @@ public enum ColumnDef {
      * @return Part of a sortable numeric string.
      */
     private static String toArtifactsWithColorlessCostsLast(final InventoryItem i) {
-        forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
 
         return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
                 //If it isn't colorless, see if it can be paid with only white, only blue, only black.
@@ -531,7 +536,7 @@ public enum ColumnDef {
      * @return Part of a sortable numeric string.
      */
     private static String toGoldFirst(final InventoryItem i) {
-        forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
 
         return !(manaCost.canBePaidWithAvailable(MagicColor.WHITE) | manaCost.canBePaidWithAvailable(MagicColor.BLUE) |
                 manaCost.canBePaidWithAvailable(MagicColor.BLACK) | manaCost.canBePaidWithAvailable(MagicColor.RED) |
@@ -549,9 +554,8 @@ public enum ColumnDef {
     //Split card sorting is probably as complex as sorting gets.
     //This method serves as an entry point only, separating the two card parts for convenience.
     private static String toSplitCardSort(final InventoryItem i) {
-        CardRules rules = ((IPaperCard) i).getRules();
-        forge.card.ICardFace mainPart = rules.getMainPart();
-        forge.card.ICardFace otherPart = rules.getOtherPart();
+        ICardFace mainPart = ((IPaperCard) i).getMainFace();
+        ICardFace otherPart = ((IPaperCard) i).getOtherFace();
         return toSplitSort(mainPart, otherPart);
     }
 
@@ -688,5 +692,21 @@ public enum ColumnDef {
                         )
                 )
         );
+    }
+
+    private static Set<Integer> toAttractionLights(final InventoryItem i) {
+        return i instanceof PaperCard ? ((PaperCard) i).getMainFace().getAttractionLights() : null;
+    }
+
+    private static String toAttractionLightSort(final InventoryItem i) {
+        if(!(i instanceof PaperCard))
+            return "";
+        Set<Integer> lights = ((PaperCard) i).getRules().getAttractionLights();
+        return (lights.contains(1) ? "0" : "1") +
+                (lights.contains(2) ? "0" : "1") +
+                (lights.contains(3) ? "0" : "1") +
+                (lights.contains(4) ? "0" : "1") +
+                (lights.contains(5) ? "0" : "1") +
+                (lights.contains(6) ? "0" : "1");
     }
 }

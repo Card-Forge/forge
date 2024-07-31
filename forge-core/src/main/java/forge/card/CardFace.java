@@ -28,11 +28,12 @@ final class CardFace implements ICardFace, Cloneable {
     
     private final static List<String> emptyList = Collections.unmodifiableList(new ArrayList<>());
     private final static Map<String, String> emptyMap = Collections.unmodifiableMap(new TreeMap<>());
+    private final static Set<Integer> emptySet = Collections.unmodifiableSet(new HashSet<>());
 
     private String name;
     private String altName = null;
     private CardType type = null;
-    private ManaCost manaCost = ManaCost.NO_COST;
+    private ManaCost manaCost = null;
     private ColorSet color = null;
 
     private String oracleText = null;
@@ -147,7 +148,7 @@ final class CardFace implements ICardFace, Cloneable {
 
     //Functional variant methods. Used for Attractions and some Un-cards,
     //when cards with the same name can have different logic.
-    public boolean hasFunctionalVariants() {
+    @Override public boolean hasFunctionalVariants() {
         return this.functionalVariants != null;
     }
     @Override public ICardFace getFunctionalVariant(String variant) {
@@ -169,6 +170,7 @@ final class CardFace implements ICardFace, Cloneable {
     void assignMissingFields() { // Most scripts do not specify color explicitly
         if ( null == oracleText ) { System.err.println(name + " has no Oracle text."); oracleText = ""; }
         if ( manaCost == null && color == null ) System.err.println(name + " has neither ManaCost nor Color");
+        if ( manaCost == null ) manaCost = ManaCost.NO_COST;
         if ( color == null ) color = ColorSet.fromManaCost(manaCost);
 
         if ( keywords == null ) keywords = emptyList;
@@ -178,7 +180,54 @@ final class CardFace implements ICardFace, Cloneable {
         if ( replacements == null ) replacements = emptyList;
         if ( variables == null ) variables = emptyMap;
         if ( null == nonAbilityText ) nonAbilityText = "";
-        //Not assigning attractionLightVariants here. Too rarely used. Will test for it downstream.
+        if ( attractionLights == null) attractionLights = emptySet;
+
+        if(this.functionalVariants != null) {
+            //Copy fields to undefined ones in functional variants
+            for (CardFace variant : this.functionalVariants.values()) {
+                if(variant.oracleText == null) variant.oracleText = this.oracleText;
+                if(variant.manaCost == null) variant.manaCost = this.manaCost;
+                if(variant.color == null) variant.color = ColorSet.fromManaCost(variant.manaCost);
+
+                if(variant.type == null) variant.type = this.type;
+
+                if(variant.power == null) {
+                    variant.power = this.power;
+                    variant.iPower = this.iPower;
+                }
+                if(variant.toughness == null) {
+                    variant.toughness = this.toughness;
+                    variant.iToughness = this.iToughness;
+                }
+
+                if("".equals(variant.initialLoyalty)) variant.initialLoyalty = this.initialLoyalty;
+                if("".equals(variant.defense)) variant.defense = this.defense;
+
+                //variant.assignMissingFields();
+                if(variant.keywords == null) variant.keywords = this.keywords;
+                else variant.keywords.addAll(0, this.keywords);
+
+                if(variant.abilities == null) variant.abilities = this.abilities;
+                else variant.abilities.addAll(0, this.abilities);
+
+                if(variant.staticAbilities == null) variant.staticAbilities = this.staticAbilities;
+                else variant.staticAbilities.addAll(0, this.staticAbilities);
+
+                if(variant.triggers == null) variant.triggers = this.triggers;
+                else variant.triggers.addAll(0, this.triggers);
+
+                if(variant.replacements == null) variant.replacements = this.replacements;
+                else variant.replacements.addAll(0, this.replacements);
+
+                if(variant.variables == null) variant.variables = this.variables;
+                else variant.variables.putAll(this.variables);
+
+                if(variant.nonAbilityText == null) variant.nonAbilityText = this.nonAbilityText;
+                if(variant.draftActions == null) variant.draftActions = this.draftActions;
+                if(variant.attractionLights == null) variant.attractionLights = this.attractionLights;
+                if(variant.altName == null) variant.altName = this.altName;
+            }
+        }
     }
 
 

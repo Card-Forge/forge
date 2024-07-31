@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType.CoreType;
+import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.util.PredicateCard;
 import forge.util.PredicateString;
@@ -242,6 +243,8 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getArtist();
     String getItemType();
     boolean hasBackFace();
+    ICardFace getMainFace();
+    ICardFace getOtherFace();
     String getCardImageKey();
     String getCardAltImageKey();
     String getCardWSpecImageKey();
