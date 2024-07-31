@@ -2,6 +2,6 @@ Name:Clockwork Servant
 ManaCost:3
 Types:Artifact Creature Gnome
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Adamant$ Any | Execute$ TrigDraw | TriggerDescription$ Adamant — When CARDNAME enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Adamant$ Any | Execute$ TrigDraw | TriggerDescription$ Adamant — When CARDNAME enters, if at least three mana of the same color was spent to cast it, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Adamant — When Clockwork Servant enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.
+Oracle:Adamant — When Clockwork Servant enters, if at least three mana of the same color was spent to cast it, draw a card.
