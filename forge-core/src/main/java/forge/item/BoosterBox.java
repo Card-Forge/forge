@@ -18,6 +18,7 @@
 
 package forge.item;
 
+import com.google.common.base.Function;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -63,7 +64,7 @@ public class BoosterBox extends BoxedProduct {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getNumberOfCardsExpected();
     }
     
-    public static class Template extends SealedProduct.Template {
+    public static class Template extends SealedTemplate {
         private final int cntBoosters;
 
         public int getCntBoosters() { return cntBoosters; }

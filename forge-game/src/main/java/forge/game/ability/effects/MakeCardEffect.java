@@ -1,10 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
@@ -23,10 +18,15 @@ import forge.game.zone.ZoneType;
 import forge.item.BoosterPack;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class MakeCardEffect extends SpellAbilityEffect {
     @Override
@@ -83,7 +83,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("Choices")) {
                 faces.addAll(parseFaces(sa, "Choices"));
             } else if (sa.hasParam("Booster")) {
-                SealedProduct.Template booster = Aggregates.random(StaticData.instance().getBoosters());
+                SealedTemplate booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
                     ICardFace face = pc.getRules().getMainPart();

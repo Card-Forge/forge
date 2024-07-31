@@ -9,7 +9,7 @@ import forge.gamemodes.limited.IBoosterDraft;
 import forge.gamemodes.limited.IDraftLog;
 import forge.gamemodes.limited.LimitedPlayer;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.model.FModel;
 import org.testng.annotations.Test;
@@ -54,7 +54,7 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public CardPool nextChoice() {
         this.n--;
-        SealedProduct.Template booster = FModel.getMagicDb().getBoosters().get("M11");
+        SealedTemplate booster = FModel.getMagicDb().getBoosters().get("M11");
         CardPool result = new CardPool();
         result.addAllFlat(BoosterGenerator.getBoosterPack(booster));
         return result;
