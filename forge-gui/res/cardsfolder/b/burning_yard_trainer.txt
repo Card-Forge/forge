@@ -4,8 +4,8 @@ Types:Creature Human Knight
 PT:3/3
 K:Haste
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target Knight you control gets +2/+2 and gains trample and haste until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, another target Knight you control gets +2/+2 and gains trample and haste until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Knight.Other+YouCtrl | TgtPrompt$ Select another target Knight you control | NumAtt$ 2 | NumDef$ 2 | KW$ Trample & Haste
 SVar:PlayMain1:TRUE
 DeckHints:Type$Knight
-Oracle:Trample, haste\nWhen Burning-Yard Trainer enters the battlefield, another target Knight you control gets +2/+2 and gains trample and haste until end of turn.
+Oracle:Trample, haste\nWhen Burning-Yard Trainer enters, another target Knight you control gets +2/+2 and gains trample and haste until end of turn.
