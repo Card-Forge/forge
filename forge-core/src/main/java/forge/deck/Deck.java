@@ -123,7 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            Collections.sort(result, (c1, c2) -> Boolean.compare(c1.getRules().canBeSignatureSpell(), c2.getRules().canBeSignatureSpell()));
+            Collections.sort(result, Comparator.comparing(c -> c.getRules().canBeSignatureSpell()));
         }
         return result;
     }

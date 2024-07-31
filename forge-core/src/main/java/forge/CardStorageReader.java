@@ -227,12 +227,13 @@ public class CardStorageReader {
         // Iterate through txt files or zip archive.
         // Report relevant numbers to progress monitor model.
 
-        final Set<CardRules> result = new TreeSet<>((o1, o2) -> {
-            if (loadingTokens) {
-                return String.CASE_INSENSITIVE_ORDER.compare(o1.getNormalizedName(), o2.getNormalizedName());
-            }
-            return String.CASE_INSENSITIVE_ORDER.compare(o1.getName(), o2.getName());
-        });
+        final Set<CardRules> result;
+        if (loadingTokens) {
+            result = new TreeSet<>(Comparator.comparing(CardRules::getNormalizedName, String.CASE_INSENSITIVE_ORDER));
+        }
+        else {
+            result = new TreeSet<>(Comparator.comparing(CardRules::getName, String.CASE_INSENSITIVE_ORDER));
+        }
 
         if (loadCardsLazily) {
             return result;
