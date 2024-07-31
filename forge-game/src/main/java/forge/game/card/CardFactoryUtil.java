@@ -1006,7 +1006,7 @@ public class CardFactoryUtil {
             final String delayTrigStg = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | " +
                     "TriggerDescription$ At end of combat, sacrifice CARDNAME.";
 
-            final String trigSacStg = "DB$ SacrificeAll | Defined$ Self | Controller$ You";
+            final String trigSacStg = "DB$ Sacrifice";
 
             SpellAbility delayTrigSA = AbilityFactory.getAbility(delayTrigStg, card);
 
@@ -1942,7 +1942,7 @@ public class CardFactoryUtil {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
                     "TriggerDescription$ " + sb.toString();
 
-            String effect = "DB$ SacrificeAll | Defined$ Self | Controller$ You | UnlessPayer$ You | UnlessCost$ " + k[1];
+            String effect = "DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
