@@ -6,4 +6,4 @@ K:Backup:1:BackupAbility
 SVar:BackupAbility:DB$ Pump | KW$ Lifelink
 K:Lifelink
 DeckHas:Ability$Counters|LifeGain
-Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nLifelink
+Oracle:Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nLifelink

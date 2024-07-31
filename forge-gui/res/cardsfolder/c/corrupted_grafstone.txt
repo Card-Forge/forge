@@ -1,7 +1,8 @@
 Name:Corrupted Grafstone
 ManaCost:2
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Defined.ValidGraveyard Card.YouOwn | ReflectProperty$ Is | SpellDescription$ Choose a color of a card in your graveyard. Add one mana of that color.
 AI:RemoveDeck:All
-Oracle:Corrupted Grafstone enters the battlefield tapped.\n{T}: Choose a color of a card in your graveyard. Add one mana of that color.
+Oracle:Corrupted Grafstone enters tapped.\n{T}: Choose a color of a card in your graveyard. Add one mana of that color.
