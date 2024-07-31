@@ -138,7 +138,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
             for (final Entry<PaperCard, Integer> e : deck.getMain()) {
                 final PaperCard card = e.getKey();
                 final Integer amount = result.get(card);
-                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
+                result.put(card, amount == null ? 1 : 1 + amount);
             }
         }
         return result;

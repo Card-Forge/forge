@@ -220,7 +220,7 @@ public class VAssignGenericAmount {
             targetsMap.put(mp, at);
         } else if (at.entity instanceof Byte) {
             SkinImage manaSymbol;
-            Byte color = (Byte) at.entity;
+            byte color = (Byte) at.entity;
             if (color == MagicColor.WHITE) {
                 manaSymbol = FSkin.getImage(FSkinProp.IMG_MANA_W);
             } else if (color == MagicColor.BLUE) {

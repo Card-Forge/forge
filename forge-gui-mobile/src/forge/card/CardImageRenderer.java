@@ -11,6 +11,7 @@ import forge.ImageKeys;
 import forge.assets.*;
 import forge.item.PaperCard;
 import forge.util.ImageUtil;
+import forge.util.TextBounds;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.graphics.Color;
@@ -1173,14 +1174,15 @@ public class CardImageRenderer {
             return;
         }
 
+        TextBounds bounds = cardTextRenderer.getBounds(ptText, PT_FONT);
         float padding = PT_FONT.getCapHeight() / 2;
-        float boxWidth = Math.min(PT_FONT.getBounds(ptText).width + 2 * padding,
+        float boxWidth = Math.min(bounds.width + 2 * padding,
                 w - idWidth - padding); //prevent box overlapping ID
         x += w - boxWidth;
         w = boxWidth;
 
         fillColorBackground(g, colors, x, y, w, h);
         g.drawRect(BORDER_THICKNESS, Color.BLACK, x, y, w, h);
-        g.drawText(ptText, PT_FONT, Color.BLACK, x, y, w, h, false, Align.center, true);
+        cardTextRenderer.drawText(g, ptText, PT_FONT, Color.BLACK, x, y, w, h, y, h, false, Align.center, true);
     }
 }

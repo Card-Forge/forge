@@ -1173,8 +1173,8 @@ public class AiAttackController {
         while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
             // sum attacker damage
             int damageThisRound = 0;
-            for (int y = 0; y < attritionalAttackers.size(); y++) {
-                damageThisRound += attritionalAttackers.get(y).getNetCombatDamage();
+            for (Card attritionalAttacker : attritionalAttackers) {
+                damageThisRound += attritionalAttacker.getNetCombatDamage();
             }
             // remove from player life
             humanLife -= damageThisRound;

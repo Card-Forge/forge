@@ -860,7 +860,7 @@ public class Cost implements Serializable {
             return Cost.convertAmountTypeToWords(amount, type);
         }
 
-        return Cost.convertIntAndTypeToWords(i.intValue(), type);
+        return Cost.convertIntAndTypeToWords(i, type);
     }
 
     /**

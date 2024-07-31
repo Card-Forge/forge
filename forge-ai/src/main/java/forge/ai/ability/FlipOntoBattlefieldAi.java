@@ -25,7 +25,7 @@ public class FlipOntoBattlefieldAi extends SpellAbilityAi {
         }
 
         if ("DamageCreatures".equals(logic)) {
-            int maxToughness = Integer.valueOf(sa.getSubAbility().getParam("NumDmg"));
+            int maxToughness = Integer.parseInt(sa.getSubAbility().getParam("NumDmg"));
             CardCollectionView rightToughness = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {

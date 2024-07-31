@@ -35,7 +35,7 @@ public class StaticAbilityCantDraw {
         if (!stAb.matchesValidParam("ValidPlayer", player)) {
             return amount;
         }
-        int limit = Integer.valueOf(stAb.getParamOrDefault("DrawLimit", "0"));
+        int limit = Integer.parseInt(stAb.getParamOrDefault("DrawLimit", "0"));
         int drawn = player.getNumDrawnThisTurn();
         return Math.min(Math.max(limit - drawn, 0), amount);
     }

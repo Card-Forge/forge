@@ -459,12 +459,12 @@ public class VAssignCombatDamage {
             }
             else if (defender instanceof CardView) { // planeswalker
                 final CardView pw = (CardView)defender;
-                lethalDamage = Integer.valueOf(pw.getCurrentState().getLoyalty());
+                lethalDamage = Integer.parseInt(pw.getCurrentState().getLoyalty());
             }
         } else {
             lethalDamage = Math.max(0, card.getLethalDamage());
             if (card.getCurrentState().isPlaneswalker()) {
-                lethalDamage = Integer.valueOf(card.getCurrentState().getLoyalty());
+                lethalDamage = Integer.parseInt(card.getCurrentState().getLoyalty());
             } else if (attackerHasDeathtouch) {
                 lethalDamage = Math.min(lethalDamage, 1);
             }

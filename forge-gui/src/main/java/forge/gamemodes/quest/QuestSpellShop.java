@@ -161,8 +161,7 @@ public class QuestSpellShop {
     public static final Function<Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            final Integer iValue = decksUsingMyCards.count(from.getKey());
-            return iValue.toString();
+            return Integer.toString(decksUsingMyCards.count(from.getKey()));
         }
     };
 

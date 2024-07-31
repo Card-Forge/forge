@@ -314,7 +314,7 @@ public class DialogChoosePoolDistribution {
 
 	public int getNumberOfBoosters() {
 		try {
-			return Integer.valueOf(numberOfBoostersField.getText());
+			return Integer.parseInt(numberOfBoostersField.getText());
 		} catch (NumberFormatException e) {
 			return 0;
 		}

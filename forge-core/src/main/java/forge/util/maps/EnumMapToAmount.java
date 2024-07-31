@@ -32,8 +32,8 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
     public void add(T item, int amount) {
         if (amount <= 0) { return; } // throw an exception maybe?
         Integer cur = get(item);
-        int newVal = cur == null ? amount : amount + cur.intValue();
-        put(item, Integer.valueOf(newVal));
+        int newVal = cur == null ? amount : amount + cur;
+        put(item, newVal);
     }
 
     @Override
@@ -52,9 +52,9 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
     public boolean substract(T item, int amount) {
         Integer cur = get(item);
         if (cur == null) { return false; }
-        int newVal = cur.intValue() - amount;
+        int newVal = cur - amount;
         if (newVal > 0) {
-            put(item, Integer.valueOf(newVal));
+            put(item, newVal);
         }
         else {
             remove(item);
@@ -73,7 +73,7 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
     public int countAll() {
         int c = 0;
         for (java.util.Map.Entry<T, Integer> kv : this.entrySet()) {
-            c += kv.getValue().intValue();
+            c += kv.getValue();
         }
         return c;
     }
@@ -81,6 +81,6 @@ public class EnumMapToAmount<T extends Enum<T>> extends EnumMap<T, Integer> impl
     @Override
     public int count(T item) {
         Integer cur = get(item);
-        return cur == null ? 0 : cur.intValue();
+        return cur == null ? 0 : cur;
     }
 }

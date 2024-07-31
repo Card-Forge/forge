@@ -147,9 +147,9 @@ public class AiProfileUtil {
         if (children == null) {
             System.err.println("AIProfile > can't find AI profile directory!");
         } else {
-            for (int i = 0; i < children.length; i++) {
-                if (children[i].endsWith(AI_PROFILE_EXT)) {
-                    availableProfiles.add(children[i].substring(0, children[i].length() - AI_PROFILE_EXT.length()));
+            for (String child : children) {
+                if (child.endsWith(AI_PROFILE_EXT)) {
+                    availableProfiles.add(child.substring(0, child.length() - AI_PROFILE_EXT.length()));
                 }
             }
         }

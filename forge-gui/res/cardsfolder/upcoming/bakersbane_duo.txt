@@ -1,0 +1,11 @@
+Name:Bakersbane Duo
+ManaCost:1 G
+Types:Creature Squirrel Raccoon
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFood | TriggerDescription$ When CARDNAME enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
+SVar:TrigFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you expend 4, CARDNAME gets +1/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPump:DB$ Pump | NumAtt$ +1 | NumDef$ +1 | Defined$ Self
+DeckHas:Ability$LifeGain|Token|Food
+DeckHints:Ability$Food
+Oracle:When Bakersbane Duo enters, create a Food token.\nWhenever you expend 4, Bakersbane Duo gets +1/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

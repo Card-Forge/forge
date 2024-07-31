@@ -61,7 +61,7 @@ public class CounterEffect extends SpellAbilityEffect {
             // currently all effects using this are targeted in case the spell gets countered before
             // so don't need to worry about LKI (else X amounts would be missing)
             if (sa.hasParam("RememberCounteredCMC")) {
-                sa.getHostCard().addRemembered(Integer.valueOf(tgtSACard.getCMC()));
+                sa.getHostCard().addRemembered(tgtSACard.getCMC());
             }
             if (sa.hasParam("RememberForCounter")) {
                 sa.getHostCard().addRemembered(tgtSACard);

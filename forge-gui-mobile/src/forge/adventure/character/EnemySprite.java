@@ -567,7 +567,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
     public float getLifetime() {
         //default and minimum value for time to remain on overworld map
-        Float lifetime = 20f;
+        float lifetime = 20f;
         return Math.max(data.lifetime, lifetime);
     }
 

@@ -129,10 +129,10 @@ public class WorldBackground extends Actor {
         chunkSize = WorldSave.getCurrentSave().getWorld().getChunkSize();
         if (chunks != null) {
             stage.getSpriteGroup().clear();
-            for (int i = 0; i < chunks.length; i++)
-                for (int j = 0; j < chunks[i].length; j++)
-                    if (chunks[i][j] != null)
-                        chunks[i][j].dispose();
+            for (Texture[] chunk : chunks)
+                for (Texture texture : chunk)
+                    if (texture != null)
+                        texture.dispose();
         }
         chunks = new Texture[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         Array[][] createChunks = new Array[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];

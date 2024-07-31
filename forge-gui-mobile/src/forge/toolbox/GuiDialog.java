@@ -31,7 +31,7 @@ public class GuiDialog {
         final List<String> opts = options == null ? defaultConfirmOptions : options;
         FOptionPane.showCardOptionDialog(c, questionToUse, title, FOptionPane.QUESTION_ICON, opts, defaultIsYes ? 0 : 1, new Callback<Integer>() {
             @Override public void run(final Integer result) {
-                callback.run(result.intValue() == 0);
+                callback.run(result == 0);
             }
         });
     }

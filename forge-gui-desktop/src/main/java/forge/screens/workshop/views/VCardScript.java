@@ -47,7 +47,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
         scrollScript = new FScrollPane(txtScript, true);
         error = doc.addStyle("error", null);
         error.addAttribute(StyleConstants.Background, Color.red);
-        error.addAttribute(StyleConstants.Bold, Boolean.valueOf(true));
+        error.addAttribute(StyleConstants.Bold, Boolean.TRUE);
         empty = doc.addStyle("empty", null);
     }
 

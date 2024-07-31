@@ -4,6 +4,10 @@ Date=2024-08-02
 Name=Bloomburrow
 Type=Expansion
 ScryfallCode=BLB
+Booster=7 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Any, 1 Any+
+ChanceReplaceCommonWith=.015F fromsheet("BLB special guests")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 
 [cards]
 1 C Banishing Light @Zoltan Boros
@@ -413,6 +417,18 @@ ScryfallCode=BLB
 
 [bundle]
 386 R Thundertrap Trainer @Jesper Ejsing
+
+[special guests]
+1 Sword of Fire and Ice|SPG
+1 Secluded Courtyard|SPG
+1 Frogmite|SPG
+1 Toski, Bearer of Secrets|SPG
+1 Sylvan Tutor|SPG
+1 Kindred Charge|SPG
+1 Relentless Rats|SPG
+1 Rat Colony|SPG
+1 Ledger Shredder|SPG
+1 Swords to Plowshares|SPG
 
 [tokens]
 b_1_1_bat_flying

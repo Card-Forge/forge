@@ -338,7 +338,7 @@ public class FImagePanel extends JPanel {
     private void setImageScale() {
         if (this.sourceImage != null) {
             if (this.autoSizeMode != AutoSizeImageMode.OFF) {
-                Double newScale = FImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
+                double newScale = FImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
                 // apply DPI based scale
                 newScale *= GuiBase.getInterface().getScreenScale();
                 if (newScale != this.imageScale) {

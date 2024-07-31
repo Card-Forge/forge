@@ -251,7 +251,7 @@ public class CardDetailPanel extends SkinnedPanel {
             updateBorder(state, mayView);
         }
 
-        powerToughnessLabel.setText(CardDetailUtil.formatPrimaryCharacteristic(state, mayView));
+        powerToughnessLabel.setText(FSkin.encodeSymbols(CardDetailUtil.formatPrimaryCharacteristic(state, mayView), false));
 
         idLabel.setText(mayView ? CardDetailUtil.formatCardId(state) : "");
 

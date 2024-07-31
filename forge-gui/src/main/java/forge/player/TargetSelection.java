@@ -85,8 +85,8 @@ public class TargetSelection {
         final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
-        final int minTargets = numTargets != null ? numTargets.intValue() : ability.getMinTargets();
-        final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
+        final int minTargets = numTargets != null ? numTargets : ability.getMinTargets();
+        final int maxTargets = numTargets != null ? numTargets : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = tgt.isSingleZone();

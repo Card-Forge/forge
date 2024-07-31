@@ -66,7 +66,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
             validationError = val == null ? localizer.getMessage("lblEnteraDecimal") : null;           
         } else {
             final Integer val = Ints.tryParse(i0.getText());
-            validationError = val == null ? localizer.getMessage("lblEnteraNumber") : prefs.validatePreference(i0.getQPref(), val.intValue());          
+            validationError = val == null ? localizer.getMessage("lblEnteraNumber") : prefs.validatePreference(i0.getQPref(), val);
         }
 
         if (validationError != null) {

@@ -167,10 +167,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
                 gameThreadPauser.await();
                 gameThreadPauser.reset();
             }
-            catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-            catch (final BrokenBarrierException e) {
+            catch (final InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
             }
         }
@@ -191,10 +188,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
             public void run() {
                 try {
                     gameThreadPauser.await();
-                } catch (final InterruptedException e) {
-                    // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                } catch (final BrokenBarrierException e) {
+                } catch (final InterruptedException | BrokenBarrierException e) {
                     // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
                     e.printStackTrace();
                 }

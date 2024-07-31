@@ -7,4 +7,4 @@ SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | ValidTgts$ Creature | TgtP
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_EQ0_P1P1 | Execute$ TrigSac | TriggerDescription$ When CARDNAME has no +1/+1 counters on it, sacrifice it.
 SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Creature.YouCtrl
-Oracle:Afiya Grove enters the battlefield with three +1/+1 counters on it.\nAt the beginning of your upkeep, move a +1/+1 counter from Afiya Grove onto target creature.\nWhen Afiya Grove has no +1/+1 counters on it, sacrifice it.
+Oracle:Afiya Grove enters with three +1/+1 counters on it.\nAt the beginning of your upkeep, move a +1/+1 counter from Afiya Grove onto target creature.\nWhen Afiya Grove has no +1/+1 counters on it, sacrifice it.

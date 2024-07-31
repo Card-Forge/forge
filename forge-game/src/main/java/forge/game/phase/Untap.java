@@ -209,7 +209,7 @@ public class Untap extends Phase {
             if (chosen != null) {
                 for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
                     if (chosen.isValid(rest.getKey(), player, null, null)) {
-                        restrictUntap.put(rest.getKey(), rest.getValue().intValue() - 1);
+                        restrictUntap.put(rest.getKey(), rest.getValue() - 1);
                     }
                 }
                 restrictUntapped.add(chosen);
