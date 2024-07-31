@@ -1,7 +1,7 @@
 Name:Cathars' Crusade
 ManaCost:3 W W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ CatharsCounters | TriggerDescription$ Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ CatharsCounters | TriggerDescription$ Whenever a creature you control enters, put a +1/+1 counter on each creature you control.
 SVar:CatharsCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Creature
-Oracle:Whenever a creature enters the battlefield under your control, put a +1/+1 counter on each creature you control.
+Oracle:Whenever a creature you control enters, put a +1/+1 counter on each creature you control.

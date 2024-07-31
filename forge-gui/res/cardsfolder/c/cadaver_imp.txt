@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Creature Imp
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target creature card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
-Oracle:Flying\nWhen Cadaver Imp enters the battlefield, you may return target creature card from your graveyard to your hand.
+Oracle:Flying\nWhen Cadaver Imp enters, you may return target creature card from your graveyard to your hand.
