@@ -2,6 +2,6 @@ Name:Coal Stoker
 ManaCost:3 R
 Types:Creature Elemental
 PT:3/3
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, add {R}{R}{R}.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, if you cast it from your hand, add {R}{R}{R}.
 SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 3
-Oracle:When Coal Stoker enters the battlefield, if you cast it from your hand, add {R}{R}{R}.
+Oracle:When Coal Stoker enters, if you cast it from your hand, add {R}{R}{R}.
