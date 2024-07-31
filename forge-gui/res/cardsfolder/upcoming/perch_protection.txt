@@ -1,6 +1,6 @@
 Name:Perch Protection
 ManaCost:4 W W
-Types:Sorcery
+Types:Instant
 K:Gift
 SVar:GiftAbility:DB$ AddTurn | Defined$ Promised | NumTurns$ 1 | GiftDescription$ an extra turn
 A:SP$ Token | TokenAmount$ 4 | TokenScript$ u_2_2_bird_flying | TokenOwner$ You | SubAbility$ DBPhases | SpellDescription$ Create four 2/2 blue Bird creature tokens with flying. If the gift was promised, all permanents you control phase out, and until your next turn, your life total can't change and you gain protection from everything. Exile CARDNAME.
