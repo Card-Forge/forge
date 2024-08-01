@@ -2,6 +2,6 @@ Name:Archaeomancer
 ManaCost:2 U U
 Types:Creature Human Wizard
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
-Oracle:When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
+Oracle:When Archaeomancer enters, return target instant or sorcery card from your graveyard to your hand.

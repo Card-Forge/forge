@@ -3,8 +3,8 @@ ManaCost:5 W
 Types:Creature Angel Ally
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 1 life for each creature you control.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$LifeGain
-Oracle:Flying\nWhen Angel of Renewal enters the battlefield, you gain 1 life for each creature you control.
+Oracle:Flying\nWhen Angel of Renewal enters, you gain 1 life for each creature you control.

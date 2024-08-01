@@ -4,9 +4,9 @@ Types:Creature Devil Horror
 PT:3/4
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
 K:Prowess
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand, then draw three cards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard your hand, then draw three cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Ability$Graveyard
-Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nProwess\nWhen Bedlam Reveler enters the battlefield, discard your hand, then draw three cards.
+Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nProwess\nWhen Bedlam Reveler enters, discard your hand, then draw three cards.

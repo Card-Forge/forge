@@ -1,23 +1,5 @@
 package forge.gamemodes.gauntlet;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.ConversionException;
 import com.thoughtworks.xstream.converters.Converter;
@@ -28,7 +10,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -37,6 +18,14 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.IgnoringXStream;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class GauntletIO {
     /** Prompt in text field for new (unsaved) built gauntlets. */
@@ -145,11 +134,11 @@ public class GauntletIO {
     }
 
     private static void savePacked(final XStream xStream0, final GauntletData gd0) throws IOException {
-        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(getGauntletFile(gd0)));
-        final GZIPOutputStream zout = new GZIPOutputStream(bout);
-        xStream0.toXML(gd0, zout);
-        zout.flush();
-        zout.close();
+        try(final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(getGauntletFile(gd0).toPath()));
+            final GZIPOutputStream zout = new GZIPOutputStream(bout)) {
+            xStream0.toXML(gd0, zout);
+            zout.flush();
+        }
     }
 
     private static class DeckSectionToXml implements Converter {

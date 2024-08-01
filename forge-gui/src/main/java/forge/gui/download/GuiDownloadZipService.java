@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,31 +105,31 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             progressBar.setMaximum(100);
 
-            // input stream to read file - with 8k buffer
-            final InputStream input = new BufferedInputStream(conn.getInputStream(), 8192);
-
             FileUtil.ensureDirectoryExists(destFolder);
-
-            // output stream to write file
             final String destFile = destFolder + filename;
-            final OutputStream output = new FileOutputStream(destFile);
 
-            int count;
-            long total = 0;
-            final byte[] data = new byte[1024];
+            // input stream to read file - with 8k buffer
+            // output stream to write file
+            try(InputStream input = new BufferedInputStream(conn.getInputStream(), 8192);
+                OutputStream output = java.nio.file.Files.newOutputStream(Paths.get(destFile))) {
 
-            while ((count = input.read(data)) != -1) {
-                if (cancel) { break; }
+                int count;
+                long total = 0;
+                final byte[] data = new byte[1024];
 
-                total += count;
-                if (progressBar != null)
-                    progressBar.setValue((int)(100 * total / contentLength));
-                output.write(data, 0, count);
+                while ((count = input.read(data)) != -1) {
+                    if (cancel) {
+                        break;
+                    }
+
+                    total += count;
+                    if (progressBar != null)
+                        progressBar.setValue((int) (100 * total / contentLength));
+                    output.write(data, 0, count);
+                }
+
+                output.flush();
             }
-
-            output.flush();
-            output.close();
-            input.close();
 
             if (cancel) {
                 new File(destFile).delete();

@@ -3,9 +3,9 @@ ManaCost:5 W
 Types:Creature Angel
 PT:3/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each Gate you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 2 life for each Gate you control.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$Valid Gate.YouCtrl/Times.2
 DeckHas:Ability$LifeGain
 DeckHints:Type$Gate
-Oracle:Flying\nWhen Archway Angel enters the battlefield, you gain 2 life for each Gate you control.
+Oracle:Flying\nWhen Archway Angel enters, you gain 2 life for each Gate you control.

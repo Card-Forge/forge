@@ -1,15 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
-
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostSacrifice;
@@ -32,9 +27,7 @@ public class DestroyAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         if (sa.usesTargeting()) {
             sa.resetTargets();
-            if ("MadSarkhanDragon".equals(aiLogic)) {
-                return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
-            } else if (aiLogic.startsWith("MinLoyalty.")) {
+            if (aiLogic.startsWith("MinLoyalty.")) {
                 int minLoyalty = Integer.parseInt(aiLogic.substring(aiLogic.indexOf(".") + 1));
                 if (source.getCounters(CounterEnumType.LOYALTY) < minLoyalty) {
                     return false;

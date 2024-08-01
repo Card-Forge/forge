@@ -57,6 +57,8 @@ public class SpellAbilityVariables implements Cloneable {
 
     private boolean firstCombatOnly = false;
 
+    private boolean afterBlockersOnly = false;
+
     /** The GameTypes */
     private Set<GameType> gameTypes = EnumSet.noneOf(GameType.class);
 
@@ -621,6 +623,18 @@ public class SpellAbilityVariables implements Cloneable {
     }
     public final boolean setFirstCombatOnly(boolean first) {
         return this.firstCombatOnly = first;
+    }
+
+    /**
+     * Gets the declared blockers.
+     *
+     * @return declared blockers
+     */
+    public final boolean getAfterBlockersOnly() {
+        return this.afterBlockersOnly;
+    }
+    public final boolean setAfterBlockersOnly(boolean first) {
+        return this.afterBlockersOnly = first;
     }
 
     /**

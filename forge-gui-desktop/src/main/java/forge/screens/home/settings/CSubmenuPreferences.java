@@ -414,7 +414,6 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
         comboBox.addActionListener(actionEvent -> {
             AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem()));
-            System.out.println(AiProfileUtil.getAISideboardingMode());
         });
     }
 

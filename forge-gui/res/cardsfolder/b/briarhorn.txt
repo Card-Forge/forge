@@ -3,9 +3,9 @@ ManaCost:3 G
 Types:Creature Elemental
 PT:3/3
 K:Evoke:1 G
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +3/+3 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +3/+3 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayEvoked:Creature.YouCtrl
 K:Flash
-Oracle:Flash\nWhen Briarhorn enters the battlefield, target creature gets +3/+3 until end of turn.\nEvoke {1}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters the battlefield.)
+Oracle:Flash\nWhen Briarhorn enters, target creature gets +3/+3 until end of turn.\nEvoke {1}{G} (You may cast this spell for its evoke cost. If you do, it's sacrificed when it enters.)

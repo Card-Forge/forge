@@ -5,8 +5,8 @@ PT:1/3
 K:Defender
 K:Reach
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescription$ CARDNAME deals 1 damage to each opponent.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Knight+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Knight enters the battlefield under your control, untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Knight+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Knight you control enters, untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Knight
 DeckHints:Type$Knight
-Oracle:Defender, reach\n{T}: Brimstone Trebuchet deals 1 damage to each opponent.\nWhenever a Knight enters the battlefield under your control, untap Brimstone Trebuchet.
+Oracle:Defender, reach\n{T}: Brimstone Trebuchet deals 1 damage to each opponent.\nWhenever a Knight you control enters, untap Brimstone Trebuchet.

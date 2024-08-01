@@ -3,6 +3,6 @@ ManaCost:1 G U
 Types:Creature Fish Lizard
 PT:3/3
 K:Flash
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapOrUntap | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may tap or untap target creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapOrUntap | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may tap or untap target creature.
 SVar:TrigTapOrUntap:DB$ TapOrUntap | ValidTgts$ Creature | TgtPrompt$ Select target creature
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Bounding Krasis enters the battlefield, you may tap or untap target creature.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Bounding Krasis enters, you may tap or untap target creature.

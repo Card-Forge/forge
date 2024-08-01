@@ -266,6 +266,7 @@ public final class FModel {
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+        AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(FModel.getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         //generate Deck Gen matrix
         if(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {

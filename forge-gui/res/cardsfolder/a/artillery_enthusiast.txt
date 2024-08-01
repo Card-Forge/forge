@@ -3,9 +3,9 @@ ManaCost:R
 Types:Creature Goblin Artificer
 PT:1/2
 S:Mode$ Continuous | Affected$ Creature.modified+YouCtrl | AddKeyword$ Menace | Description$ Modified creatures you control have menace.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
 SVar:TrigSeek:AB$ Seek | Cost$ Discard<1/Card> | Type$ Card.cmcEQX
 SVar:X:Discarded$CardManaCost
 DeckHas:Ability$Discard & Keyword$Menace
 DeckHints:Type$Equipment|Aura & Ability$Counters
-Oracle:Modified creatures you control have menace.\nWhen Artillery Enthusiast enters the battlefield, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.
+Oracle:Modified creatures you control have menace.\nWhen Artillery Enthusiast enters, you may discard a card. If you do, seek a card with mana value equal to that card's mana value.

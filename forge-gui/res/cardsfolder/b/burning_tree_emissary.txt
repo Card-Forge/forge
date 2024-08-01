@@ -2,7 +2,7 @@ Name:Burning-Tree Emissary
 ManaCost:RG RG
 Types:Creature Human Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters the battlefield, add {R}{G}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMana | TriggerDescription$ When CARDNAME enters, add {R}{G}.
 SVar:TrigMana:DB$ Mana | Produced$ R G
 SVar:FreeSpellAI:True
-Oracle:When Burning-Tree Emissary enters the battlefield, add {R}{G}.
+Oracle:When Burning-Tree Emissary enters, add {R}{G}.

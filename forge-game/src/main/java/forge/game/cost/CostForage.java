@@ -38,7 +38,7 @@ public class CostForage extends CostPartWithList {
     public String toString() {
         return "Forage";
     }
-    
+
     @Override
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) { return null; }
     @Override
@@ -60,7 +60,7 @@ public class CostForage extends CostPartWithList {
         } else if (targetCards.size() == 1) {
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, table);
-            CardCollection result = new CardCollection(game.getAction().sacrifice(targetCards.getFirst(), ability, effect, moveParams));
+            CardCollection result = game.getAction().sacrifice(targetCards, ability, effect, moveParams);
             triggerForage(payer);
             return result;
         } else {
