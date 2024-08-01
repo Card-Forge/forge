@@ -4,10 +4,38 @@ Date=2024-08-02
 Name=Bloomburrow
 Type=Expansion
 ScryfallCode=BLB
-Booster=7 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Any, 1 Any+
-ChanceReplaceCommonWith=.015F fromsheet("BLB special guests")
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,FullArtLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 FullArtLand, 1 Wildcard, 1 Wildcard+
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
+
+[Common]
+Base=Common
+
+[Common-Guest]
+Base=Common
+Replace=.015625F fromSheet("BLB special guests")
+
+[Uncommon]
+Base=Uncommon
+
+[RareMythic]
+Base=RareMythic
+# I don't know about these numbers, so i'm just copying them from MH3
+Replace=.021F fromSheet("BLB borderless")
+Replace=.051F fromSheet("BLB showcase")
+
+[FullArtLand]
+Base=Land:fromSheet("BLB full art")
+Replace=.20F Land:fromSheet("BLB full art")+
+
+[Wildcard]
+Base=Common
+# I don't know about these numbers, so i'm just copying them from MH3
+Replace=.417F Uncommon
+Replace=.078F MythicRare
+Replace=.004F fromSheet("BLB borderless")
+Replace=.042F fromSheet("BLB showcase")
 
 [cards]
 1 C Banishing Light @Zoltan Boros
@@ -429,6 +457,28 @@ BoosterBox=36
 1 Rat Colony|SPG
 1 Ledger Shredder|SPG
 1 Swords to Plowshares|SPG
+
+[full art]
+4 Plains|BLB|1
+3 Plains|BLB|2
+2 Plains|BLB|3
+1 Plains|BLB|4
+4 Mountain|BLB|1
+3 Mountain|BLB|2
+2 Mountain|BLB|3
+1 Mountain|BLB|4
+4 Swamp|BLB|1
+3 Swamp|BLB|2
+2 Swamp|BLB|3
+1 Swamp|BLB|4
+4 Island|BLB|1
+3 Island|BLB|2
+2 Island|BLB|3
+1 Island|BLB|4
+4 Forest|BLB|1
+3 Forest|BLB|2
+2 Forest|BLB|3
+1 Forest|BLB|4
 
 [tokens]
 b_1_1_bat_flying
