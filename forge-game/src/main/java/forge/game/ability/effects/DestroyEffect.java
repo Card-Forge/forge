@@ -26,7 +26,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         if (tgtCards.isEmpty()) return sa.getParamOrDefault("SpellDescription", "");
         final boolean justOne = tgtCards.size() == 1;
 
-        sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));
+        sb.append("Destroy ").append(Lang.joinHomogenous(tgtCards));
 
         if (sa.hasParam("Radiance")) {
             final String thing = sa.getParamOrDefault("ValidTgts", "thing");
@@ -88,20 +88,14 @@ public class DestroyEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         final boolean noRegen = sa.hasParam("NoRegen");
-        final boolean sac = sa.hasParam("Sacrifice");
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
-        boolean destroyed = false;
 
         SpellAbility cause = sa;
         if (sa.isReplacementAbility()) {
             cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
         }
 
-        if (sac) {
-            destroyed = game.getAction().sacrifice(gameCard, cause, true, params) != null;
-        } else {
-            destroyed = game.getAction().destroy(gameCard, cause, !noRegen, params);
-        }
+        boolean destroyed = game.getAction().destroy(gameCard, cause, !noRegen, params);
         if (destroyed && remDestroyed) {
             host.addRemembered(gameCard);
         }
