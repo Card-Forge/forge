@@ -26,6 +26,7 @@ import forge.ImageKeys;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
+import forge.ai.AiProps;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
@@ -277,6 +278,7 @@ public final class FModel {
 
         //preload AI profiles
         AiProfileUtil.loadAllProfiles(ForgeConstants.AI_PROFILE_DIR);
+        AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(FModel.getPreferences().getPref(FPref.MATCH_AI_SIDEBOARDING_MODE)));
 
         //generate Deck Gen matrix
         if(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_CARDBASED)) {

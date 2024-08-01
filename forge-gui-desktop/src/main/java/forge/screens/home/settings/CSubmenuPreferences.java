@@ -487,7 +487,6 @@ public enum CSubmenuPreferences implements ICDoc {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem()));
-                System.out.println(AiProfileUtil.getAISideboardingMode());
             }
         });
     }
