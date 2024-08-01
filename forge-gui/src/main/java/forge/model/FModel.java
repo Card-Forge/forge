@@ -26,7 +26,6 @@ import forge.ImageKeys;
 import forge.MulliganDefs;
 import forge.StaticData;
 import forge.ai.AiProfileUtil;
-import forge.ai.AiProps;
 import forge.card.CardRulesPredicates;
 import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
