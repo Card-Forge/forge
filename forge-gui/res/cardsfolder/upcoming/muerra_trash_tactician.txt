@@ -1,4 +1,5 @@
 Name:Muerra, Trash Tactician
+ManaCost:1 R G
 Types:Legendary Creature Raccoon Warrior
 PT:2/4
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your first main phase, add {R} or {G} for each Raccoon you control.
