@@ -1,25 +1,24 @@
 package forge.item.generation;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import forge.StaticData;
+import forge.card.PrintSheet;
+import forge.item.PaperCard;
+import forge.item.SealedTemplate;
+import forge.item.SealedTemplateWithSlots;
+import forge.util.ItemPool;
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
-import forge.StaticData;
-import forge.card.PrintSheet;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
-import forge.util.ItemPool;
-
 
 public class UnOpenedProduct implements IUnOpenedProduct {
 
-    private final SealedProduct.Template tpl;
+    private final SealedTemplate tpl;
     private final Map<String, PrintSheet> sheets;
     private boolean poolLimited = false; // if true after successful generation cards are removed from printsheets.
 
@@ -32,23 +31,23 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
     // Means to select from all unique cards (from base game, ie. no schemes or avatars)
-    public UnOpenedProduct(SealedProduct.Template template) {
+    public UnOpenedProduct(SealedTemplate template) {
         tpl = template;
         sheets = null;
     }
 
     // Invoke this constructor only if you are sure that the pool is not equal to deafult carddb
-    public UnOpenedProduct(SealedProduct.Template template, ItemPool<PaperCard> pool) {
+    public UnOpenedProduct(SealedTemplate template, ItemPool<PaperCard> pool) {
         this(template, pool.toFlatList());
     }
 
-    public UnOpenedProduct(SealedProduct.Template template, Iterable<PaperCard> cards) {
+    public UnOpenedProduct(SealedTemplate template, Iterable<PaperCard> cards) {
         tpl = template;
         sheets = new TreeMap<>();
         prebuildSheets(cards);
     }
 
-    public UnOpenedProduct(SealedProduct.Template sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
+    public UnOpenedProduct(SealedTemplate sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
         this(sealedProductTemplate, Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), filterPrinted));
     }
 
@@ -60,7 +59,13 @@ public class UnOpenedProduct implements IUnOpenedProduct {
 
     @Override
     public List<PaperCard> get() {
-        return sheets == null ? BoosterGenerator.getBoosterPack(tpl) : getBoosterPack();
+        if (sheets != null) {
+            return getBoosterPack();
+        } else if (tpl instanceof SealedTemplateWithSlots) {
+            return BoosterGenerator.getBoosterPack((SealedTemplateWithSlots) tpl);
+        }
+
+        return BoosterGenerator.getBoosterPack(tpl);
     }
 
     // If they request cards from an arbitrary pool, there's no use to cache printsheets.

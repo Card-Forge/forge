@@ -19,7 +19,7 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
@@ -436,7 +436,7 @@ public class CardUtil {
                 }
 
                 packCandidates=new HashMap<>();
-                for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
+                for(SealedTemplate template : StaticData.instance().getSpecialBoosters())
                 {
                     if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
                         continue;

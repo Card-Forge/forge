@@ -17,14 +17,13 @@
  */
 package forge.item;
 
-import java.util.List;
-
 import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
+
+import java.util.List;
 
 public class TournamentPack extends SealedProduct {
 
@@ -32,12 +31,12 @@ public class TournamentPack extends SealedProduct {
     public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
         @Override
         public TournamentPack apply(final CardEdition arg1) {
-            Template d = StaticData.instance().getTournamentPacks().get(arg1.getCode());
+            SealedTemplate d = StaticData.instance().getTournamentPacks().get(arg1.getCode());
             return new TournamentPack(arg1.getName(), d);
         }
     };
 
-    public TournamentPack(final String name0, final Template boosterData) {
+    public TournamentPack(final String name0, final SealedTemplate boosterData) {
         super(name0, boosterData);
     }
 

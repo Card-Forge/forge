@@ -28,7 +28,7 @@ import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgeConstants;
@@ -164,7 +164,7 @@ public class SealedCardPoolGenerator {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
-                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedProduct.Template.genericDraftBooster))) {
+                if (!chooseNumberOfBoosters(new UnOpenedProduct(SealedTemplate.genericDraftBooster))) {
                     return;
                 }
                 landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
@@ -218,7 +218,7 @@ public class SealedCardPoolGenerator {
                         List<Pair<String, Integer>> promoSlot = new ArrayList<>();
                         promoSlot.add(Pair.of(pieces[1], num));
 
-                        SealedProduct.Template promoProduct = new SealedProduct.Template("Prerelease Promo", promoSlot);
+                        SealedTemplate promoProduct = new SealedTemplate("Prerelease Promo", promoSlot);
 
                         // Create a "booster" with just the promo card. Rarity + Edition into a Template
                         this.product.add(new UnOpenedProduct(promoProduct, FModel.getMagicDb().getCommonCards().getAllCards(chosenEdition)));

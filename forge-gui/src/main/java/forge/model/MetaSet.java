@@ -18,20 +18,19 @@
 
 package forge.model;
 
-import java.io.File;
-import java.util.List;
-
 import com.google.common.base.Predicate;
-
 import forge.gamemodes.limited.CustomLimited;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+
+import java.io.File;
+import java.util.List;
 
 /** 
  * The class MetaSet. This class is used to define 'special'
@@ -166,7 +165,7 @@ public class MetaSet {
 
         switch(type) {
             case Full:
-                return new UnOpenedProduct(SealedProduct.Template.genericDraftBooster);
+                return new UnOpenedProduct(SealedTemplate.genericDraftBooster);
 
             case Booster:
                 return new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(data));
@@ -179,7 +178,7 @@ public class MetaSet {
 
             case JoinedSet:
                 Predicate<PaperCard> predicate = IPaperCard.Predicates.printedInSets(data.split(" "));
-                return new UnOpenedProduct(SealedProduct.Template.genericDraftBooster, predicate);
+                return new UnOpenedProduct(SealedTemplate.genericDraftBooster, predicate);
 
             case Choose: return UnOpenedMeta.choose(data);
             case Random: return UnOpenedMeta.random(data);
@@ -199,7 +198,7 @@ public class MetaSet {
                 List<String> dfData = FileUtil.readFile(ForgeConstants.SEALED_DIR + data + SealedCardPoolGenerator.FILE_EXT);
                 final CustomLimited myCube = CustomLimited.parse(dfData, FModel.getDecks().getCubes());
 
-                SealedProduct.Template fnPick = myCube.getSealedProductTemplate();
+                SealedTemplate fnPick = myCube.getSealedProductTemplate();
                 return new UnOpenedProduct(fnPick, myCube.getCardPool());
                 
             default: return null;

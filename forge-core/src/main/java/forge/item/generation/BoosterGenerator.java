@@ -17,39 +17,23 @@
  */
 package forge.item.generation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import forge.StaticData;
-import forge.card.CardEdition;
+import forge.card.*;
 import forge.card.CardEdition.FoilType;
-import forge.card.CardRarity;
-import forge.card.CardRulesPredicates;
-import forge.card.CardSplitType;
-import forge.card.PrintSheet;
-import forge.item.IPaperCard;
+import forge.item.*;
 import forge.item.IPaperCard.Predicates.Presets;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
 
 /**
  * <p>
@@ -79,7 +63,7 @@ public class BoosterGenerator {
         return randomCard.getFoiled();
     }
 
-    public static List<PaperCard> getBoosterPack(SealedProduct.Template template) {
+    public static List<PaperCard> getBoosterPack(SealedTemplate template) {
         // TODO: tweak the chances of generating Masterpieces to be more authentic
         // (currently merely added to the Rare/Mythic Rare print sheet via ExtraFoilSheetKey)
 
@@ -407,7 +391,56 @@ public class BoosterGenerator {
         return result;
     }
 
-    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedProduct.Template template, String boosterMustContain) {
+    public static List<PaperCard> getBoosterPack(SealedTemplateWithSlots template) {
+        // SealedTemplateWithSlots ignores all Edition level params
+        // Instead each slot defines their percentages on their own
+
+        CardEdition edition = StaticData.instance().getEditions().get(template.getEdition());
+        List<PaperCard> result = new ArrayList<>();
+        Map<String, BoosterSlot> boosterSlots = template.getNamedSlots();
+
+        for (Pair<String, Integer> slot : template.getSlots()) {
+            String slotType = slot.getLeft().trim();
+            int numCards = slot.getRight();
+            System.out.println(numCards + " of type " + slotType);
+
+            // For cards that end in '+', attempt to convert this card to foil.
+            boolean convertCardFoil = slotType.endsWith("+");
+            if (convertCardFoil) {
+                slotType = slotType.substring(0, slotType.length() - 1);
+            }
+
+            // Unpack Base
+            BoosterSlot boosterSlot = boosterSlots.get(slotType);
+            String determineSheet = boosterSlot.replaceSlot();
+
+            String setCode = template.getEdition();
+
+            // Ok, so we have a sheet now. Most should be standard sheets, but some named edition sheets
+            List<PaperCard> paperCards;
+            PrintSheet ps;
+            try {
+                // Apply the edition to the sheet name by default. We'll try again if thats not a real sheet
+                ps = getPrintSheet(determineSheet + " " + setCode);
+            } catch(Exception e) {
+                ps = getPrintSheet(determineSheet);
+            }
+            if (convertCardFoil) {
+                paperCards = Lists.newArrayList();
+                for(PaperCard pc : ps.random(numCards, true)) {
+                    paperCards.add(pc.getFoiled());
+                }
+            } else {
+                paperCards = ps.random(numCards, true);
+            }
+
+            result.addAll(paperCards);
+        }
+
+        return result;
+    }
+
+    private static void ensureGuaranteedCardInBooster(List<PaperCard> result, SealedTemplate template, String boosterMustContain) {
         // First, see if there's already a card of the given type
         String[] types = TextUtil.split(boosterMustContain, ' ');
         boolean alreadyHaveCard = false;

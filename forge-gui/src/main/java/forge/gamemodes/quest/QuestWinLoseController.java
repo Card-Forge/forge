@@ -1,41 +1,24 @@
 package forge.gamemodes.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import com.google.common.collect.Lists;
-import forge.gui.GuiBase;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ImmutableList;
-
+import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
 import forge.card.CardEdition;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameOutcome;
 import forge.game.GameView;
-import forge.game.player.GameLossReason;
-import forge.game.player.PlayerOutcome;
-import forge.game.player.PlayerStatistics;
-import forge.game.player.PlayerView;
-import forge.game.player.RegisteredPlayer;
+import forge.game.player.*;
 import forge.gamemodes.quest.bazaar.QuestItemType;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
+import forge.gui.GuiBase;
 import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
-import forge.item.BoosterPack;
+import forge.item.*;
 import forge.item.IPaperCard.Predicates;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
 import forge.item.generation.BoosterSlots;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
@@ -46,6 +29,13 @@ import forge.player.GamePlayerUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 public class QuestWinLoseController {
     private final GameView lastGame;
@@ -546,7 +536,7 @@ public class QuestWinLoseController {
 
             final List<String> sets = new ArrayList<>();
 
-            for (final SealedProduct.Template bd : FModel.getMagicDb().getBoosters()) {
+            for (final SealedTemplate bd : FModel.getMagicDb().getBoosters()) {
                 if (bd != null && qData.getFormat().isSetLegal(bd.getEdition())) {
                     sets.add(bd.getEdition());
                 }
@@ -615,8 +605,8 @@ public class QuestWinLoseController {
         }
     }
 
-    private SealedProduct.Template getBoosterTemplate() {
-        return new SealedProduct.Template(ImmutableList.of(
+    private SealedTemplate getBoosterTemplate() {
+        return new SealedTemplate(ImmutableList.of(
                 Pair.of(BoosterSlots.COMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_COMMONS)),
                 Pair.of(BoosterSlots.UNCOMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_UNCOMMONS)),
                 Pair.of(BoosterSlots.RARE_MYTHIC, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_RARES))

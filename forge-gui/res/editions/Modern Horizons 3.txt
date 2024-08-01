@@ -3,13 +3,50 @@ Code=MH3
 Date=2024-06-07
 Name=Modern Horizons 3
 Type=Draft
-Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet("MH3 new to modern"), 1 Land, 1 Any, 1 Any+
-# This isn't the right ratios yet. But it's a start
-ChanceReplaceCommonWith=.0156F fromsheet("MH3 special guests")
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,NewToModern,Common-Land,Wildcard
+Booster=5 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 NewToModern, 1 Common-Land, 1 Wildcard, 1 Wildcard+
 BoosterBox=36
 BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
+
+[Common]
+Base=Common
+
+[Common-Guest]
+Base=Common
+Replace=.015625F fromSheet("MH3 special guests")
+
+[Uncommon]
+Base=Uncommon
+
+[RareMythic]
+Base=RareMythic
+Replace=.021F fromSheet("MH3 retro frame")
+# Fetch lands, Concept Eldrazi, Planeswalkers, Frame Break treatments, Profile treatments, and borderless treatments on Rare or Mythic Rare cards will appear 5.1 percent of the time
+Replace=.051F fromSheet("MH3 booster fun")
+
+[Common-Land]
+Base=Common
+Replace=.20F Land
+Replace=.133F Land+
+Replace=.10F fromSheet("MH3 full art")
+Replace=.067F fromSheet("MH3 full art")+
+
+[NewToModern]
+Base=Uncommon:fromSheet("MH3 new to modern")
+Replace=.213F Rare:fromSheet("MH3 new to modern")
+Replace=.023F Mythic:fromSheet("MH3 new to modern")
+Replace=.008F fromSheet("MH3 borderless frame")
+Replace=.003F fromSheet("MH3 borderless profile")
+Replace=.001F fromSheet("MH3 retro")
+
+[Wildcard]
+Base=Common
+Replace=.417F Uncommon
+Replace=.078F MythicRare
+Replace=.004F fromSheet("MH3 borderless frame")
+Replace=.042F fromSheet("MH3 retro")
 
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
