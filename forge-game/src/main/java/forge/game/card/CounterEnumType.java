@@ -215,6 +215,8 @@ public enum CounterEnumType {
 
     INCARNATION("INCRN", 247, 206, 64),
 
+    INGREDIENT("INGRD", 180, 50, 145),
+    
     INFECTION("INFCT", 0, 230, 66),
     
     INFLUENCE("INFL", 201, 99, 212),
