@@ -8,4 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Planeswalker | TgtPrompt$ Select targe
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 1 damage to you.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
 AI:RemoveDeck:Random
-Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Graf Reaver exploits a creature, destroy target planeswalker.\nAt the beginning of your upkeep, Graf Reaver deals 1 damage to you.
+Oracle:Exploit (When this creature enters, you may sacrifice a creature.)\nWhen Graf Reaver exploits a creature, destroy target planeswalker.\nAt the beginning of your upkeep, Graf Reaver deals 1 damage to you.
