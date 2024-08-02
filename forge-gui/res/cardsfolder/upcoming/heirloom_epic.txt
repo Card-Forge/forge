@@ -1,0 +1,5 @@
+Name:Heirloom Epic
+ManaCost:1
+Types:Artifact
+A:AB$ Draw | Cost$ 4 T | TapCreaturesForMana$ True | SorcerySpeed$ True | SpellDescription$ Draw a card. For each mana in this ability's activation cost, you may tap an untapped creature you control rather than pay that mana. Activate only as a sorcery.
+Oracle:{4}, {T}: Draw a card. For each mana in this ability's activation cost, you may tap an untapped creature you control rather than pay that mana. Activate only as a sorcery.
