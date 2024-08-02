@@ -1,8 +1,9 @@
 Name:False Floor
 ManaCost:4
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
-R:Event$ Moved | ValidCard$ Creature | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+R:Event$ Moved | ValidCard$ Creature | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 A:AB$ ChangeZoneAll | Cost$ 2 T Exile<1/CARDNAME> | ChangeType$ Creature.untapped | Origin$ Battlefield | Destination$ Exile | SorcerySpeed$ True | SpellDescription$ Exile all untapped creatures. Activate only as a sorcery.
-Oracle:False Floor enters the battlefield tapped.\nCreatures enter the battlefield tapped.\n{2}, {T}, Exile False Floor: Exile all untapped creatures. Activate only as a sorcery.
+Oracle:False Floor enters tapped.\nCreatures enter tapped.\n{2}, {T}, Exile False Floor: Exile all untapped creatures. Activate only as a sorcery.

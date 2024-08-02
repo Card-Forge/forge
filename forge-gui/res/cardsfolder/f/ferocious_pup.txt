@@ -2,7 +2,7 @@ Name:Ferocious Pup
 ManaCost:2 G
 Types:Creature Wolf
 PT:0/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/2 green Wolf creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:When Ferocious Pup enters the battlefield, create a 2/2 green Wolf creature token.
+Oracle:When Ferocious Pup enters, create a 2/2 green Wolf creature token.
