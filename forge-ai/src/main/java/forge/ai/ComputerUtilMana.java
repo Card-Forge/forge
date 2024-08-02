@@ -1755,6 +1755,9 @@ public class ComputerUtilMana {
         Card convoked = null;
         if (!improvise) {
             for (ManaCostShard toPay : cost) {
+                if (toPay.isSnow() || toPay.isColorless()) {
+                    continue;
+                }
                 for (Card c : list) {
                     final int mask = c.getColor().getColor() & toPay.getColorMask();
                     if (mask != 0) {
