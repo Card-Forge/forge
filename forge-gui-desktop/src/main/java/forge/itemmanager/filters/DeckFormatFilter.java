@@ -31,13 +31,10 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
 
     public void edit() {
         final DialogChooseFormats dialog = new DialogChooseFormats(this.formats);
-        dialog.setOkCallback(new Runnable() {
-            @Override
-            public void run() {
-                allowReprints = dialog.getWantReprints();
-                formats.clear();
-                formats.addAll(dialog.getSelectedFormats());
-            }
+        dialog.setOkCallback(() -> {
+            allowReprints = dialog.getWantReprints();
+            formats.clear();
+            formats.addAll(dialog.getSelectedFormats());
         });
     }
 }

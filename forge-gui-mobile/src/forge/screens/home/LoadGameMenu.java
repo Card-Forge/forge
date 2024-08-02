@@ -14,8 +14,6 @@ import forge.screens.limited.LoadDraftScreen;
 import forge.screens.limited.LoadSealedScreen;
 import forge.screens.planarconquest.LoadConquestScreen;
 import forge.screens.quest.LoadQuestScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {
@@ -31,12 +29,9 @@ public class LoadGameMenu extends FPopupMenu {
 
         LoadGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    open(true); //remove current screen from chain
-                    setPreferredScreen(LoadGameScreen.this);
-                }
+            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, e -> {
+                open(true); //remove current screen from chain
+                setPreferredScreen(LoadGameScreen.this);
             });
         }
 

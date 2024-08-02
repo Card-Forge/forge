@@ -14,7 +14,6 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -59,12 +58,9 @@ public class ConquestStatsScreen extends FScreen implements IVConquestStats {
             }
         }
         cbPlanes.setAlignment(Align.center);
-        cbPlanes.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ConquestPlane plane = cbPlanes.getSelectedIndex() > 0 ? (ConquestPlane)cbPlanes.getSelectedItem() : null;
-                FModel.getConquest().getModel().updateStatLabels(ConquestStatsScreen.this, plane);
-            }
+        cbPlanes.setChangedHandler(e -> {
+            ConquestPlane plane = cbPlanes.getSelectedIndex() > 0 ? (ConquestPlane)cbPlanes.getSelectedItem() : null;
+            FModel.getConquest().getModel().updateStatLabels(ConquestStatsScreen.this, plane);
         });
     }
 

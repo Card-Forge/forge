@@ -84,12 +84,7 @@ public class GuiDownloader extends FDialog {
         radProxyNone.setSelected(true);
 
         getButton(0).setText("Start");
-        initButton(1, "Cancel", new FEventHandler() {
-            @Override
-            public void handleEvent(final FEvent e) {
-                cmdClose.run();
-            }
-        });
+        initButton(1, "Cancel", e -> cmdClose.run());
 
         progressBar.reset();
         progressBar.setShowProgressTrail(true);
@@ -102,14 +97,11 @@ public class GuiDownloader extends FDialog {
 
         super.show();
 
-        service.initialize(txtAddress, txtPort, progressBar, getButton(0), cmdClose, new Runnable() {
-            @Override
-            public void run() {
-                if (!(service instanceof GuiDownloadZipService)) { //retain continuous rendering for zip service
-                    Forge.stopContinuousRendering();
-                }
-                progressBar.setShowProgressTrail(false);
+        service.initialize(txtAddress, txtPort, progressBar, getButton(0), cmdClose, () -> {
+            if (!(service instanceof GuiDownloadZipService)) { //retain continuous rendering for zip service
+                Forge.stopContinuousRendering();
             }
+            progressBar.setShowProgressTrail(false);
         }, null);
     }
 

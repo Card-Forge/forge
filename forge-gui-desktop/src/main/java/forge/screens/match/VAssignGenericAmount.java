@@ -19,8 +19,6 @@ package forge.screens.match;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -170,10 +168,8 @@ public class VAssignGenericAmount {
             }
         }
 
-        btnOK.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { finish(); } });
-        btnReset.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(ActionEvent arg0) { resetAssignedAmount(); initialAssignAmount(); } });
+        btnOK.addActionListener(arg0 -> finish());
+        btnReset.addActionListener(arg0 -> { resetAssignedAmount(); initialAssignAmount(); });
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));

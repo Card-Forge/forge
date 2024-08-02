@@ -24,11 +24,6 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
         if (format == null) {
             return Predicates.alwaysTrue();
         }
-        return new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(DeckProxy input) {
-                return format.isDeckLegal(input.getDeck());
-            }
-        };
+        return input -> format.isDeckLegal(input.getDeck());
     }
 }

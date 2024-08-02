@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -31,25 +30,22 @@ public class CountersProliferateAi extends SpellAbilityAi {
             if (p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) {
                 allyExpOrEnergy = true;
             }
-            cperms.addAll(CardLists.filter(p.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    if (!crd.hasCounters()) {
-                        return false;
-                    }
-
-                    if (crd.isPlaneswalker()) {
-                        return true;
-                    }
-
-                    // iterate only over existing counters
-                    for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                        if (e.getValue() >= 1 && !ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
-                            return true;
-                        }
-                    }
+            cperms.addAll(CardLists.filter(p.getCardsIn(ZoneType.Battlefield), crd -> {
+                if (!crd.hasCounters()) {
                     return false;
                 }
+
+                if (crd.isPlaneswalker()) {
+                    return true;
+                }
+
+                // iterate only over existing counters
+                for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
+                    if (e.getValue() >= 1 && !ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                        return true;
+                    }
+                }
+                return false;
             }));
         }
 
@@ -58,25 +54,22 @@ public class CountersProliferateAi extends SpellAbilityAi {
 
         for (final Player o : ai.getOpponents()) {
             opponentPoison |= o.getPoisonCounters() > 0 && o.canReceiveCounters(CounterEnumType.POISON);
-            hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    if (!crd.hasCounters()) {
-                        return false;
-                    }
-
-                    if (crd.isPlaneswalker()) {
-                        return false;
-                    }
-
-                    // iterate only over existing counters
-                    for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
-                        if (e.getValue() >= 1 && ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
-                            return true;
-                        }
-                    }
+            hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), crd -> {
+                if (!crd.hasCounters()) {
                     return false;
                 }
+
+                if (crd.isPlaneswalker()) {
+                    return false;
+                }
+
+                // iterate only over existing counters
+                for (final Map.Entry<CounterType, Integer> e : crd.getCounters().entrySet()) {
+                    if (e.getValue() >= 1 && ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                        return true;
+                    }
+                }
+                return false;
             }));
         }
 

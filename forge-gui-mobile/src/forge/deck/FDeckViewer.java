@@ -16,8 +16,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 
 public class FDeckViewer extends FScreen {
@@ -62,23 +60,13 @@ public class FDeckViewer extends FScreen {
                     break;
                 }
 
-                FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        deckViewer.setCurrentSection(section);
-                    }
-                });
+                FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, e -> deckViewer.setCurrentSection(section));
                 if (section == deckViewer.currentSection) {
                     item.setSelected(true);
                 }
                 addItem(item);
             }
-            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    copyDeckToClipboard(deckViewer.deck);
-                }
-            }));
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> copyDeckToClipboard(deckViewer.deck)));
         }
     };
 

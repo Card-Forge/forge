@@ -209,7 +209,7 @@ public final class BoosterUtils {
         for (int i = 0; i < quantity; i++) {
 
             CardEdition edition = Aggregates.random(possibleEditions);
-            BoosterPack pack = BoosterPack.FN_FROM_SET.apply(edition);
+            BoosterPack pack = BoosterPack.fromSet(edition);
 
             if (pack != null) {
                 output.add(pack);
@@ -315,7 +315,7 @@ public final class BoosterUtils {
                         if (preferredColors.contains(MagicColor.COLORLESS) && preferredColors.size() == 1) {
 
                             Predicate<CardRules> predicateRules =  CardRulesPredicates.cost(StringOp.CONTAINS_IC, "p/");
-                            Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard.FN_GET_RULES);
+                            Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
 
                             int size = Iterables.size(Iterables.filter(cardPool, predicateCard));
                             int totalSize = cardPool.size();
@@ -336,7 +336,7 @@ public final class BoosterUtils {
                                 CardRulesPredicates.isColor(preferredColors.get(index)),
                                 CardRulesPredicates.Presets.IS_MULTICOLOR
                         );
-                        Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard.FN_GET_RULES);
+                        Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
 
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
                         //colors if multicolored cards aren't in the selected sets. The more multi-colored cards in the
@@ -413,7 +413,7 @@ public final class BoosterUtils {
                 //handful of multi-colored cards.
                 do {
                     if (color2 != null) {
-                        Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard.FN_GET_RULES);
+                        Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard::getRules);
                         card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
                     }
                 } while (card == null && colorMisses++ < 10);
@@ -496,7 +496,7 @@ public final class BoosterUtils {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
                 //noinspection RedundantCast
                 if (Predicates.alwaysTrue() != (Object) cr) { // guava has a single instance for always-const predicates
-                    preds.add(Predicates.compose(cr, PaperCard.FN_GET_RULES));
+                    preds.add(Predicates.compose(cr, PaperCard::getRules));
                 }
             }
 
@@ -516,10 +516,12 @@ public final class BoosterUtils {
             rewards.add(new QuestRewardCardFiltered(temp));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("booster") && temp[1].equalsIgnoreCase("pack")) {
             // Type 4: a predetermined extra booster pack
-            rewards.add(BoosterPack.FN_FROM_SET.apply(FModel.getMagicDb().getEditions().get(temp[2])));
+            CardEdition edition = FModel.getMagicDb().getEditions().get(temp[2]);
+            rewards.add(BoosterPack.fromSet(edition));
         } else if (temp.length >= 3 && temp[0].equalsIgnoreCase("tournament") && temp[1].equalsIgnoreCase("pack")) {
             // Type 5: a predetermined extra tournament ("starter") pack
-            rewards.add(TournamentPack.FN_FROM_SET.apply(FModel.getMagicDb().getEditions().get(temp[2])));
+            CardEdition edition = FModel.getMagicDb().getEditions().get(temp[2]);
+            rewards.add(TournamentPack.fromSet(edition));
         }
         else if (temp.length > 0) {
             // default: assume we are asking for a single copy of a specific card
@@ -578,23 +580,8 @@ public final class BoosterUtils {
 
     public static void sort(List<PaperCard> cards) {
         //sort cards alphabetically so colors appear together and rares appear on top
-        Collections.sort(cards, new Comparator<PaperCard>() {
-            @Override
-            public int compare(PaperCard c1, PaperCard c2) {
-                return c1.getName().compareTo(c2.getName());
-            }
-        });
-        Collections.sort(cards, new Comparator<PaperCard>() {
-            @Override
-            public int compare(PaperCard c1, PaperCard c2) {
-                return c1.getRules().getColor().compareTo(c2.getRules().getColor());
-            }
-        });
-        Collections.sort(cards, new Comparator<PaperCard>() {
-            @Override
-            public int compare(PaperCard c1, PaperCard c2) {
-                return c2.getRarity().compareTo(c1.getRarity());
-            }
-        });
+        Collections.sort(cards, Comparator.comparing(PaperCard::getName));
+        Collections.sort(cards, Comparator.comparing(c -> c.getRules().getColor()));
+        Collections.sort(cards, Comparator.comparing(PaperCard::getRarity).reversed());
     }
 }

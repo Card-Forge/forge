@@ -4,24 +4,15 @@ import forge.Forge;
 import forge.menu.FPopupMenu;
 import forge.screens.match.views.VPrompt;
 import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public abstract class MultiStepWizardScreen<T> extends FScreen {
     protected final WizardStep<T>[] steps;
     protected final T model;
     private WizardStep<T> currentStep;
-    private final VPrompt prompt = add(new VPrompt(Forge.getLocalizer().getMessage("lblBack"), Forge.getLocalizer().getMessage("lblNext"), new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            advanceStep(-1);
-        }
-    }, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            advanceStep(1);
-        }
-    }));
+    private final VPrompt prompt = add(new VPrompt(Forge.getLocalizer().getMessage("lblBack"),
+            Forge.getLocalizer().getMessage("lblNext"),
+            e -> advanceStep(-1), e -> advanceStep(1)
+    ));
 
     protected MultiStepWizardScreen(String headerCaption, WizardStep<T>[] steps0, T model0) {
         super(headerCaption);

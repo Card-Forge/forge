@@ -20,7 +20,6 @@ package forge.screens.match.controllers;
 import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Window;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -65,18 +64,8 @@ public class CPrompt implements ICDoc {
 
     private Component lastFocusedButton = null;
 
-    private final ActionListener actCancel = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent evt) {
-            selectButtonCancel();
-        }
-    };
-    private final ActionListener actOK = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent evt) {
-            selectButtonOk();
-        }
-    };
+    private final ActionListener actCancel = evt -> selectButtonCancel();
+    private final ActionListener actOK = evt -> selectButtonOk();
 
     private final WindowAdapter focusOKButtonOnDialogClose = new WindowAdapter() {
         @Override

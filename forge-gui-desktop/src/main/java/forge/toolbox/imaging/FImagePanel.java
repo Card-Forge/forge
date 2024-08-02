@@ -19,8 +19,6 @@
 package forge.toolbox.imaging;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.geom.AffineTransform;
@@ -84,12 +82,7 @@ public class FImagePanel extends JPanel {
      * will keep getting restarted - see {@code setResizeListener} method.
      */
     private Timer createResizingTimer(int timerDelay) {
-        return new Timer(timerDelay,  new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ev) {
-                doResizedFinished();
-            }
-        });
+        return new Timer(timerDelay, ev -> doResizedFinished());
     }
 
     private void doResizedFinished() {

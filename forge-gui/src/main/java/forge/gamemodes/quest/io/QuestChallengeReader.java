@@ -18,7 +18,7 @@ import forge.util.storage.StorageReaderFolder;
 
 public class QuestChallengeReader extends StorageReaderFolder<QuestEventChallenge> {
     public QuestChallengeReader(File deckDir0) {
-        super(deckDir0, QuestEventChallenge.FN_GET_ID);
+        super(deckDir0, QuestEventChallenge::getId);
         // TODO Auto-generated constructor stub
     }
 

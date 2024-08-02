@@ -1,7 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -42,80 +40,47 @@ public enum CSubmenuDuels implements ICDoc {
 	public void initialize() {
 		final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
-		view.getBtnSpellShop().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.showSpellShop();
-					}
-				});
+		view.getBtnSpellShop().setCommand((UiCommand) QuestUtil::showSpellShop);
 
-		view.getBtnBazaar().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.showBazaar();
-					}
-				});
+		view.getBtnBazaar().setCommand((UiCommand) QuestUtil::showBazaar);
 
 		view.getBtnTravel().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.travelWorld();
-						CSubmenuDuels.this.update();
-					}
-				});
+                (UiCommand) () -> {
+                    QuestUtil.travelWorld();
+                    CSubmenuDuels.this.update();
+                });
 
 		view.getBtnUnlock().setCommand(
-				new UiCommand() {
-					@Override
-					public void run() {
-						QuestUtil.chooseAndUnlockEdition();
-						CSubmenuDuels.this.update();
-					}
-				});
+                (UiCommand) () -> {
+                    QuestUtil.chooseAndUnlockEdition();
+                    CSubmenuDuels.this.update();
+                });
 
-		view.getBtnStart().addActionListener(
-				new ActionListener() {
-					@Override
-					public void actionPerformed(final ActionEvent e) {
-						QuestUtil.startGame();
-					}
-				});
+		view.getBtnStart().addActionListener(e -> QuestUtil.startGame());
 
 		final QuestController quest = FModel.getQuest();
-		view.getCbPlant().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				// This can't be translated. As the English string "Plant" is used to find the Plant pet.
-				quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
-				quest.save();
-			}
-		});
+		view.getCbPlant().addActionListener(arg0 -> {
+            // This can't be translated. As the English string "Plant" is used to find the Plant pet.
+            quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
+            quest.save();
+        });
 
-		view.getCbxMatchLength().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				String match = view.getCbxMatchLength().getSelectedItem();
-				if (match != null) {
-					quest.setMatchLength(match.substring(match.length() - 1));
-					quest.save();
-				}
-			}
-		});
+		view.getCbxMatchLength().addActionListener(arg0 -> {
+            String match = view.getCbxMatchLength().getSelectedItem();
+            if (match != null) {
+                quest.setMatchLength(match.substring(match.length() - 1));
+                quest.save();
+            }
+        });
 
-		view.getCbxPet().addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				final int slot = 1;
-				final int index = view.getCbxPet().getSelectedIndex();
-				final List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
-				final String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
-				quest.selectPet(slot, petName);
-				quest.save();
-			}
-		});
+		view.getCbxPet().addActionListener(arg0 -> {
+            final int slot = 1;
+            final int index = view.getCbxPet().getSelectedIndex();
+            final List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
+            final String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
+            quest.selectPet(slot, petName);
+            quest.save();
+        });
 
 	}
 
@@ -191,12 +156,7 @@ public enum CSubmenuDuels implements ICDoc {
 				final JRadioButton rad = temp.getRad();
 				if (i == 0) {
 					rad.setSelected(true);
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							rad.requestFocusInWindow();
-						}
-					});
+					SwingUtilities.invokeLater(rad::requestFocusInWindow);
 				}
 				temp.addKeyListener(startOnEnter);
 				temp.addMouseListener(mouseClickListener);

@@ -37,12 +37,9 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
                 .hoverable().selectable(true).selected(true)
                 .build();
 
-        button.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                if (lockFiltering) { return; }
-                applyChange();
-            }
+        button.setCommand((UiCommand) () -> {
+            if (lockFiltering) { return; }
+            applyChange();
         });
 
         this.buttons.add(button);

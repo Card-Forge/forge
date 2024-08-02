@@ -9,8 +9,6 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -81,12 +79,7 @@ public class WorldEditor extends JComponent {
 
     public WorldEditor() {
         list.setCellRenderer(new BiomeDataRenderer());
-        list.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                WorldEditor.this.updateBiome();
-            }
-        });
+        list.addListSelectionListener(e -> WorldEditor.this.updateBiome());
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
         add(tabs);

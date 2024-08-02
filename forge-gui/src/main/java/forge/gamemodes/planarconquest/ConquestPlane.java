@@ -23,8 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Function;
-
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardEdition.CardInSet;
@@ -225,13 +223,6 @@ public class ConquestPlane {
         return name;
     }
 
-    public static final Function<ConquestPlane, String> FN_GET_NAME = new Function<ConquestPlane, String>() {
-        @Override
-        public String apply(ConquestPlane plane) {
-            return plane.getName();
-        }
-    };
-
     public ConquestAwardPool getAwardPool() {
         if (awardPool == null) { //delay initializing until needed
             awardPool = new ConquestAwardPool(cardPool.getAllCards());
@@ -241,7 +232,7 @@ public class ConquestPlane {
 
     public static class Reader extends StorageReaderFile<ConquestPlane> {
         public Reader(String file0) {
-            super(file0, ConquestPlane.FN_GET_NAME);
+            super(file0, ConquestPlane::getName);
         }
 
         @Override

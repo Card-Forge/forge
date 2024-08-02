@@ -3,9 +3,9 @@ package forge.ai.ability;
 import forge.ai.SpellAbilityAi;
 import forge.game.Direction;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -28,11 +28,11 @@ public class ChooseDirectionAi extends SpellAbilityAi {
                 CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
                 CardCollection aiPermanent = CardLists.filterControlledBy(all, ai);
                 aiPermanent.remove(sa.getHostCard());
-                int aiValue = Aggregates.sum(aiPermanent, CardPredicates.Accessors.fnGetCmc);
+                int aiValue = Aggregates.sum(aiPermanent, Card::getCMC);
                 CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(ai, Direction.Left));
                 CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(ai, Direction.Right));
-                int leftValue = Aggregates.sum(left, CardPredicates.Accessors.fnGetCmc);
-                int rightValue = Aggregates.sum(right, CardPredicates.Accessors.fnGetCmc);
+                int leftValue = Aggregates.sum(left, Card::getCMC);
+                int rightValue = Aggregates.sum(right, Card::getCMC);
                 return aiValue <= leftValue && aiValue <= rightValue;
             }
         }

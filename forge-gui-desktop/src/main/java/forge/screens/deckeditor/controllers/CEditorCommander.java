@@ -42,8 +42,6 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -85,14 +83,14 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         if (gameType == GameType.Brawl){
             GameFormat format = FModel.getFormats().get("Brawl");
             Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.and(format.getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES))), PaperCard.class);
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.and(format.getFilterPrinted(), Predicates.compose(commanderFilter, PaperCard::getRules))), PaperCard.class);
             normalPool = ItemPool.createFrom(format.getAllCards(), PaperCard.class);
         }
         else {
             Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
                     ? Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
                     : CardRulesPredicates.Presets.CAN_BE_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard.FN_GET_RULES)),PaperCard.class);
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard::getRules)),PaperCard.class);
             normalPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(), PaperCard.class);
         }
 
@@ -105,12 +103,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        };
+        final Supplier<Deck> newCreator = Deck::new;
         CardCollections decks = FModel.getDecks();
         switch (gameType) {
         case TinyLeaders:
@@ -127,12 +120,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
             break;
         }
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorConstructed.addBasicLands(CEditorCommander.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorConstructed.addBasicLands(CEditorCommander.this));
     }
 
     //=========== Overridden from ACEditorBase
@@ -218,13 +206,10 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
 

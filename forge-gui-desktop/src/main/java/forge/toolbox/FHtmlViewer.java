@@ -31,12 +31,10 @@ public class FHtmlViewer extends SkinnedEditorPane {
 
     @Override
     public void setText(final String text) {
-        SwingUtilities.invokeLater( new Runnable() { //need to invokeLater to avoid flicker
-            @Override
-            public void run() {
-                setSuperText(null == text ? "" : text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
-                setCaretPosition(0); //keep scrolled to top
-            }
+        //need to invokeLater to avoid flicker
+        SwingUtilities.invokeLater(() -> {
+            setSuperText(null == text ? "" : text.replaceAll("(\r\n)|(\n)", "<br>")); //replace line breaks with <br> elements
+            setCaretPosition(0); //keep scrolled to top
         });
     }
 

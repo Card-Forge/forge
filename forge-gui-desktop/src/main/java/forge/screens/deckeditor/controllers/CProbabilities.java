@@ -39,12 +39,7 @@ public enum CProbabilities implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        VProbabilities.SINGLETON_INSTANCE.getLblReshuffle().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                update();
-            }
-        });
+        VProbabilities.SINGLETON_INSTANCE.getLblReshuffle().setCommand((UiCommand) this::update);
     }
 
     /* (non-Javadoc)

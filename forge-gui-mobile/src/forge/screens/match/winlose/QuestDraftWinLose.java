@@ -23,8 +23,6 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestDraftUtils;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 /**
  * <p>
@@ -90,34 +88,31 @@ public class QuestDraftWinLose extends ControlWinLose {
         view.getBtnContinue().setEnabled(!isMatchOver);
         view.getBtnQuit().setText(quitString);
 
-        view.getBtnQuit().setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (warningString == null /*||
-                        FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImages().get(FSkinProp.ICO_WARNING), ImmutableList.of("Yes", "No"), 1) == 0*/) {
-                    if (warningString != null) {
-                        PlayerView humanPlayer = null;
-                        for (PlayerView playerView : MatchController.instance.getLocalPlayers()) {
-                            humanPlayer = playerView;
-                        }
-                        for (PlayerView playerView : lastGame.getPlayers()) {
-                            if (humanPlayer == null) {
-                                throw new IllegalStateException("Forfeit tournament button was pressed in a match without human players.");
-                            }
-                            if (playerView != humanPlayer) {
-                                quest.getAchievements().getCurrentDraft().setWinner(playerView.getName());
-                                quest.save();
-                                // TODO: update needed here?
-                            }
-                        }
-                        //The player is probably not interested in watching more AI matches.
-                        QuestDraftUtils.cancelFurtherMatches();
-                    } else {
-                        MatchController.instance.getGameController().nextGameDecision(NextGameDecision.QUIT);
-                        controller.actionOnQuit();
-                        QuestDraftUtils.matchInProgress = false;
-                        QuestDraftUtils.continueMatches(MatchController.instance);
+        view.getBtnQuit().setCommand(e -> {
+            if (warningString == null /*||
+                    FOptionPane.showOptionDialog(warningString, warningCaption, FSkin.getImages().get(FSkinProp.ICO_WARNING), ImmutableList.of("Yes", "No"), 1) == 0*/) {
+                if (warningString != null) {
+                    PlayerView humanPlayer = null;
+                    for (PlayerView playerView : MatchController.instance.getLocalPlayers()) {
+                        humanPlayer = playerView;
                     }
+                    for (PlayerView playerView : lastGame.getPlayers()) {
+                        if (humanPlayer == null) {
+                            throw new IllegalStateException("Forfeit tournament button was pressed in a match without human players.");
+                        }
+                        if (playerView != humanPlayer) {
+                            quest.getAchievements().getCurrentDraft().setWinner(playerView.getName());
+                            quest.save();
+                            // TODO: update needed here?
+                        }
+                    }
+                    //The player is probably not interested in watching more AI matches.
+                    QuestDraftUtils.cancelFurtherMatches();
+                } else {
+                    MatchController.instance.getGameController().nextGameDecision(NextGameDecision.QUIT);
+                    controller.actionOnQuit();
+                    QuestDraftUtils.matchInProgress = false;
+                    QuestDraftUtils.continueMatches(MatchController.instance);
                 }
             }
         });

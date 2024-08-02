@@ -82,7 +82,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
+    public static List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -577,7 +577,7 @@ public final class GameActionUtil {
                     String n = o.split(":")[1];
                     if (host.wasCast() && n.equals("X")) {
                         CardCollectionView creatures = activator.getCreaturesInPlay();
-                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        int max = Aggregates.max(creatures, Card::getNetPower);
                         n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +

@@ -131,23 +131,20 @@ public class ConquestRegion {
                     break;
                 case "colors":
                     colorSet = ColorSet.fromNames(value.toCharArray());
-                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard.FN_GET_RULES);
+                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard::getRules);
                     break;
                 case "sets":
                     final String[] sets = value.split(",");
                     for (int i = 0; i < sets.length; i++) {
                         sets[i] = sets[i].trim();
                     }
-                    pred = new Predicate<PaperCard>() {
-                        @Override
-                        public boolean apply(PaperCard pc) {
-                            for (String set : sets) {
-                                if (pc.getEdition().equals(set)) {
-                                    return true;
-                                }
+                    pred = pc -> {
+                        for (String set : sets) {
+                            if (pc.getEdition().equals(set)) {
+                                return true;
                             }
-                            return false;
                         }
+                        return false;
                     };
                     break;
                 default:

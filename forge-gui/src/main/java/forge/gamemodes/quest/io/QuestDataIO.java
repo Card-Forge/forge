@@ -907,26 +907,26 @@ public class QuestDataIO {
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
             String s = reader.getAttribute("s");
             if (SealedProduct.specialSets.contains(s) || s.equals("?")) {
-                return BoosterPack.FN_FROM_COLOR.apply(s);
+                return BoosterPack.fromColor(s);
             } else {
                 final CardEdition ed = FModel.getMagicDb().getEditions().get(s);
-                return BoosterPack.FN_FROM_SET.apply(ed);
+                return BoosterPack.fromSet(ed);
             }
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return TournamentPack.FN_FROM_SET.apply(ed);
+            return TournamentPack.fromSet(ed);
         }
 
         protected FatPack readFatPack(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return FatPack.FN_FROM_SET.apply(ed);
+            return FatPack.fromSet(ed);
         }
 
         protected BoosterBox readBoosterBox(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return BoosterBox.FN_FROM_SET.apply(ed);
+            return BoosterBox.fromSet(ed);
         }
 
         protected PaperCard readCardPrinted(final HierarchicalStreamReader reader) {

@@ -209,12 +209,7 @@ public abstract class FScreen extends FContainer {
         protected final FLabel btnBack, lblCaption;
 
         public DefaultHeader(String headerCaption) {
-            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(getBtnPressedColor()).align(Align.center).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    Forge.back();
-                }
-            }).build());
+            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(getBtnPressedColor()).align(Align.center).command(e -> Forge.back()).build());
             lblCaption = add(new FLabel.Builder().text(headerCaption).font(FONT).align(Align.center).build());
         }
 

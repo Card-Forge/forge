@@ -49,27 +49,19 @@ public enum VBazaarUI implements IVTopLevelUI {
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 
-            lbl.setCommand(new UiCommand() {
-                @Override
-                public void run() {
-                    if (previousSelected != null) { previousSelected.setSelected(false); }
-                    lbl.setSelected(true);
-                    previousSelected = lbl;
-                    lbl.requestFocusInWindow();
-                    CBazaarUI.SINGLETON_INSTANCE.showStall(s, bazaar);
-                }
+            lbl.setCommand((UiCommand) () -> {
+                if (previousSelected != null) { previousSelected.setSelected(false); }
+                lbl.setSelected(true);
+                previousSelected = lbl;
+                lbl.requestFocusInWindow();
+                CBazaarUI.SINGLETON_INSTANCE.showStall(s, bazaar);
             });
         }
     }
 
     /** */
     public void refreshLastInstance() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                pnlSingleStall.updateStall();
-            }
-        });
+        SwingUtilities.invokeLater(() -> pnlSingleStall.updateStall());
     }
 
     /**
@@ -119,12 +111,9 @@ public enum VBazaarUI implements IVTopLevelUI {
         pnl.add(pnlAllStalls, "w 25%!, h 100%!");
         pnl.add(pnlSingleStall, "w 75%!, h 100%!");
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if (previousSelected != null) {
-                    previousSelected.requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            if (previousSelected != null) {
+                previousSelected.requestFocusInWindow();
             }
         });
     }

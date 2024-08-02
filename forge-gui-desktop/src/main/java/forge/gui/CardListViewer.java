@@ -18,8 +18,6 @@
 
 package forge.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.util.Collections;
@@ -115,12 +113,7 @@ public class CardListViewer extends FDialog {
         this.addWindowFocusListener(new CardListFocuser());
 
         final FButton btnOK = new FButton(Localizer.getInstance().getMessage("lblOK"));
-        btnOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                CardListViewer.this.processWindowEvent(new WindowEvent(CardListViewer.this, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        btnOK.addActionListener(e -> CardListViewer.this.processWindowEvent(new WindowEvent(CardListViewer.this, WindowEvent.WINDOW_CLOSING)));
 
         this.add(new FLabel.Builder().text(message).build(), "cell 0 0, spanx 3, gapbottom 4");
 

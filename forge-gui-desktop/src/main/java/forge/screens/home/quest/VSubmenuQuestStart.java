@@ -1,7 +1,6 @@
 package forge.screens.home.quest;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,68 +101,56 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
             .fontSize(16).hoverable(true).text(localizer.getMessage("lblEmbark")).build();
 
     /* Listeners */
-    private final ActionListener alStartingPool = new ActionListener() {
-        @SuppressWarnings("incomplete-switch")
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            final StartingPoolType newVal = getStartingPoolType();
-            lblUnrestricted.setVisible(newVal == StartingPoolType.Complete);
+    private final ActionListener alStartingPool = e -> {
+        final StartingPoolType newVal = getStartingPoolType();
+        lblUnrestricted.setVisible(newVal == StartingPoolType.Complete);
 
-            lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
-            cbxPreconDeck.setVisible(newVal == StartingPoolType.Precon);
+        lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
+        cbxPreconDeck.setVisible(newVal == StartingPoolType.Precon);
 
-            lblFormat.setVisible(newVal == StartingPoolType.Sanctioned);
-            cbxFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        lblFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        cbxFormat.setVisible(newVal == StartingPoolType.Sanctioned);
 
-            btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
-            btnSelectFormat.setVisible(newVal == StartingPoolType.Casual);
+        btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+        btnSelectFormat.setVisible(newVal == StartingPoolType.Casual);
 
 
-            final boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
-            lblCustomDeck.setVisible(usesDeckList);
-            cbxCustomDeck.setVisible(usesDeckList);
+        final boolean usesDeckList = newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck || newVal == StartingPoolType.Cube;
+        lblCustomDeck.setVisible(usesDeckList);
+        cbxCustomDeck.setVisible(usesDeckList);
 
-            if (usesDeckList) {
-                cbxCustomDeck.removeAllItems();
-                final CardCollections decks = FModel.getDecks();
-                switch (newVal) {
-                    case SealedDeck:
-                        for (final DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                        break;
-                    case DraftDeck:
-                        for (final DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
-                        break;
-                    case Cube:
-                        for (final Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
-                        break;
-                }
+        if (usesDeckList) {
+            cbxCustomDeck.removeAllItems();
+            final CardCollections decks = FModel.getDecks();
+            switch (newVal) {
+                case SealedDeck:
+                    for (final DeckGroup d : decks.getSealed()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                    break;
+                case DraftDeck:
+                    for (final DeckGroup d : decks.getDraft()) { cbxCustomDeck.addItem(d.getHumanDeck()); }
+                    break;
+                case Cube:
+                    for (final Deck d : decks.getCubes()) { cbxCustomDeck.addItem(d); }
+                    break;
             }
         }
     };
 
     /* Listeners */
-    private final ActionListener alPrizesPool = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            final StartingPoolType newVal = getPrizedPoolType();
-            lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
-            cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
+    private final ActionListener alPrizesPool = e -> {
+        final StartingPoolType newVal = getPrizedPoolType();
+        lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
+        cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
 
-            lblPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
-            cbxPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
-            btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
-            btnPrizeSelectFormat.setVisible(newVal == StartingPoolType.Casual);
-            lblPrizeSameAsStarting.setVisible(newVal == null);
-        }
+        lblPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        cbxPrizeFormat.setVisible(newVal == StartingPoolType.Sanctioned);
+        btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+        btnPrizeSelectFormat.setVisible(newVal == StartingPoolType.Casual);
+        lblPrizeSameAsStarting.setVisible(newVal == null);
     };
 
     /* Listeners */
-    private final ActionListener alStartingWorld = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            updateEnabledFormats();
-        }
-    };
+    private final ActionListener alStartingWorld = e -> updateEnabledFormats();
 
     /**
      * Aux function for enabling or disabling the format selection according to world selection.
@@ -279,12 +266,10 @@ public enum VSubmenuQuestStart implements IVSubmenu<CSubmenuQuestStart> {
         boxCommander.setEnabled(true);
 
         boxCommander.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        if(!isCommander()) return; //do nothing if unselecting Commander Subformat
-                        //Otherwise, set the starting world to Random Commander
-                        cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
-                    }
+                e -> {
+                    if(!isCommander()) return; //do nothing if unselecting Commander Subformat
+                    //Otherwise, set the starting world to Random Commander
+                    cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
                 }
 
         );

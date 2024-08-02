@@ -69,22 +69,16 @@ public class SDisplayUtil {
         }
 
         final TimerTask tt = new TimerTask() {
-            @Override public final void run() {
+            @Override public void run() {
                 counter++;
                 if (counter != (steps - 1)) {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() {
+                    SwingUtilities.invokeLater(() -> {
                         final int r = newR == null ? oldR : newR[counter];
                         final int a = newA == null ? oldA : newR[counter];
                         pnl.setBackground(new Color(r, oldG, oldB, a));
-                    }
                     });
                 } else {
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override public void run() {
-                            pnl.setBackground(new Color(oldR, oldG, oldB, oldA));
-                        }
-                    });
+                    SwingUtilities.invokeLater(() -> pnl.setBackground(new Color(oldR, oldG, oldB, oldA)));
                     remindIsRunning = false;
                     timer1.cancel();
                     newR = null;
@@ -102,19 +96,17 @@ public class SDisplayUtil {
     /** @param tab0 &emsp; {@link java.GuiBase.getInterface().framework.IVDoc} */
     public static void showTab(final IVDoc<? extends ICDoc> tab0) {
 
-        final Runnable showTabRoutine = new Runnable() {
-            @Override public void run() {
-                // FThreads.assertExecutedByEdt(true); - always true
-                final Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
-                final DragCell dc = tab0.getParentCell();
-                if (dc != null) {
-                    dc.setSelected(tab0);
-                }
-                // set focus back to previous owner, if any
-                // if (null != c  &&  c instanceof FButton) {  //pfps UGLY but maybe necessary (probably not)
-                if (null != c) {
-                    c.requestFocusInWindow();
-                }
+        final Runnable showTabRoutine = () -> {
+            // FThreads.assertExecutedByEdt(true); - always true
+            final Component c = KeyboardFocusManager.getCurrentKeyboardFocusManager().getPermanentFocusOwner();
+            final DragCell dc = tab0.getParentCell();
+            if (dc != null) {
+                dc.setSelected(tab0);
+            }
+            // set focus back to previous owner, if any
+            // if (null != c  &&  c instanceof FButton) {  //pfps UGLY but maybe necessary (probably not)
+            if (null != c) {
+                c.requestFocusInWindow();
             }
         };
         if ( FThreads.isGuiThread() ) { //pfps run this now whether in EDT or not so that it doesn't clobber later stuff

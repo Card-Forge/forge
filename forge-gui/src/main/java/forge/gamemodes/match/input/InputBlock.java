@@ -60,12 +60,8 @@ public class InputBlock extends InputSyncronizedBase {
         for (final Card attacker : combat.getAttackers()) {
             for (final Card c : defender.getCreaturesInPlay()) {
                 if (CombatUtil.canBlock(attacker, c, combat)) {
-                    FThreads.invokeInEdtNowOrLater(new Runnable() { //must set current attacker on EDT
-                        @Override
-                        public void run() {
-                            setCurrentAttacker(attacker);
-                        }
-                    });
+                    //must set current attacker on EDT
+                    FThreads.invokeInEdtNowOrLater(() -> setCurrentAttacker(attacker));
                     return;
                 }
             }
@@ -103,12 +99,7 @@ public class InputBlock extends InputSyncronizedBase {
             stop();
         } else {
             //must run in game thread to prevent problems for mobile game
-            ThreadUtil.invokeInGameThread(new Runnable() {
-                @Override
-                public void run() {
-                    getController().getGui().message(blockErrors);
-                }
-            });
+            ThreadUtil.invokeInGameThread(() -> getController().getGui().message(blockErrors));
         }
     }
 

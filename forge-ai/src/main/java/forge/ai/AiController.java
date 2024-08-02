@@ -37,7 +37,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Accessors;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -418,7 +417,7 @@ public class AiController {
             CardCollection allCards = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
-            int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
+            int maxCmcInHand = Aggregates.max(hand, Card::getCMC);
             int max = Math.max(maxCmcInHand, 6);
             // consider not playing lands if there are enough already and an ability with a discard cost is present
             if (landsInPlay.size() + landList.size() > max) {
@@ -437,43 +436,40 @@ public class AiController {
             }
         }
 
-        landList = CardLists.filter(landList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
-                if (canPlaySpellBasic(c, null) != AiPlayDecision.WillPlay) {
+        landList = CardLists.filter(landList, c -> {
+            CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
+            if (canPlaySpellBasic(c, null) != AiPlayDecision.WillPlay) {
+                return false;
+            }
+            String name = c.getName();
+            if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
+                if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
                     return false;
                 }
-                String name = c.getName();
-                if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
-                    if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
-                        return false;
-                    }
-                }
-
-                final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-                CardCollection lands = new CardCollection(battlefield);
-                lands.addAll(hand);
-                lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
-                int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
-
-                if (lands.size() >= Math.max(maxCmcInHand, 6)) {
-                    // don't play MDFC land if other side is spell and enough lands are available
-                    if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
-                        return false;
-                    }
-
-                    // don't play the land if it has cycling and enough lands are available
-                    final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
-                    for (final SpellAbility sa : spellAbilities) {
-                        if (sa.isCycling()) {
-                            return false;
-                        }
-                    }
-                }
-
-                return player.canPlayLand(c);
             }
+
+            final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
+            CardCollection lands = new CardCollection(battlefield);
+            lands.addAll(hand1);
+            lands = CardLists.filter(lands, Presets.LANDS);
+            int maxCmcInHand = Aggregates.max(hand1, Card::getCMC);
+
+            if (lands.size() >= Math.max(maxCmcInHand, 6)) {
+                // don't play MDFC land if other side is spell and enough lands are available
+                if (!c.isLand() || (c.isModal() && !c.getState(CardStateName.Modal).getType().isLand())) {
+                    return false;
+                }
+
+                // don't play the land if it has cycling and enough lands are available
+                final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
+                for (final SpellAbility sa : spellAbilities) {
+                    if (sa.isCycling()) {
+                        return false;
+                    }
+                }
+            }
+
+            return player.canPlayLand(c);
         });
         return landList;
     }
@@ -1441,8 +1437,8 @@ public class AiController {
             }
         }
 
-        int totalCMCInHand = Aggregates.sum(inHand, CardPredicates.Accessors.fnGetCmc);
-        int minCMCInHand = Aggregates.min(inHand, CardPredicates.Accessors.fnGetCmc);
+        int totalCMCInHand = Aggregates.sum(inHand, Card::getCMC);
+        int minCMCInHand = Aggregates.min(inHand, Card::getCMC);
         if (minCMCInHand == Integer.MAX_VALUE)
             minCMCInHand = 0;
         int predictedMana = ComputerUtilMana.getAvailableManaEstimate(player, true);
@@ -1450,66 +1446,60 @@ public class AiController {
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
-        boolean hasRelevantAbsOTB = Iterables.any(otb, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                boolean isTapLand = false;
-                for (ReplacementEffect repl : card.getReplacementEffects()) {
-                    // TODO: improve the detection of taplands
-                    if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
-                        isTapLand = true;
-                    }
+        boolean hasRelevantAbsOTB = Iterables.any(otb, card -> {
+            boolean isTapLand1 = false;
+            for (ReplacementEffect repl : card.getReplacementEffects()) {
+                // TODO: improve the detection of taplands
+                if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
+                    isTapLand1 = true;
                 }
-
-                for (SpellAbility sa : card.getSpellAbilities()) {
-                    if (sa.isAbility()
-                            && sa.getPayCosts().getCostMana() != null
-                            && sa.getPayCosts().getCostMana().getMana().getCMC() > 0
-                            && (!sa.getPayCosts().hasTapCost() || !isTapLand)
-                            && (!sa.hasParam("ActivationZone") || sa.getParam("ActivationZone").contains("Battlefield"))) {
-                        return true;
-                    }
-                }
-                return false;
             }
+
+            for (SpellAbility sa : card.getSpellAbilities()) {
+                if (sa.isAbility()
+                        && sa.getPayCosts().getCostMana() != null
+                        && sa.getPayCosts().getCostMana().getMana().getCMC() > 0
+                        && (!sa.getPayCosts().hasTapCost() || !isTapLand1)
+                        && (!sa.hasParam("ActivationZone") || sa.getParam("ActivationZone").contains("Battlefield"))) {
+                    return true;
+                }
+            }
+            return false;
         });
 
-        boolean hasLandBasedEffect = Iterables.any(otb, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                for (Trigger t : card.getTriggers()) {
-                    Map<String, String> params = t.getMapParams();
-                    if ("ChangesZone".equals(params.get("Mode"))
-                            && params.containsKey("ValidCard")
-                            && (!params.containsKey("AILogic") || !params.get("AILogic").equals("SafeToHold"))
-                            && !params.get("ValidCard").contains("nonLand")
-                            && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
-                            && "Battlefield".equals(params.get("Destination"))) {
-                        // Landfall and other similar triggers
-                        return true;
-                    }
+        boolean hasLandBasedEffect = Iterables.any(otb, card -> {
+            for (Trigger t : card.getTriggers()) {
+                Map<String, String> params = t.getMapParams();
+                if ("ChangesZone".equals(params.get("Mode"))
+                        && params.containsKey("ValidCard")
+                        && (!params.containsKey("AILogic") || !params.get("AILogic").equals("SafeToHold"))
+                        && !params.get("ValidCard").contains("nonLand")
+                        && ((params.get("ValidCard").contains("Land")) || (params.get("ValidCard").contains("Permanent")))
+                        && "Battlefield".equals(params.get("Destination"))) {
+                    // Landfall and other similar triggers
+                    return true;
                 }
-                for (String sv : card.getSVars().keySet()) {
-                    String varValue = card.getSVar(sv);
-                    if (varValue.equals("Count$Domain")) {
-                        for (String type : landToPlay.getType().getLandTypes()) {
-                            if (CardType.isABasicLandType(type) && CardLists.getType(otb, type).isEmpty()) {
-                                return true;
-                            }
-                        }
-                    }
-                    if (varValue.startsWith("Count$Valid") || sv.equals("BuffedBy")) {
-                        if (varValue.contains("Land") || varValue.contains("Plains") || varValue.contains("Forest")
-                                || varValue.contains("Mountain") || varValue.contains("Island") || varValue.contains("Swamp")
-                                || varValue.contains("Wastes")) {
-                            // In presence of various cards that get buffs like "equal to the number of lands you control",
-                            // safer for our AI model to just play the land earlier rather than make a blunder
+            }
+            for (String sv : card.getSVars().keySet()) {
+                String varValue = card.getSVar(sv);
+                if (varValue.equals("Count$Domain")) {
+                    for (String type : landToPlay.getType().getLandTypes()) {
+                        if (CardType.isABasicLandType(type) && CardLists.getType(otb, type).isEmpty()) {
                             return true;
                         }
                     }
                 }
-                return false;
+                if (varValue.startsWith("Count$Valid") || sv.equals("BuffedBy")) {
+                    if (varValue.contains("Land") || varValue.contains("Plains") || varValue.contains("Forest")
+                            || varValue.contains("Mountain") || varValue.contains("Island") || varValue.contains("Swamp")
+                            || varValue.contains("Wastes")) {
+                        // In presence of various cards that get buffs like "equal to the number of lands you control",
+                        // safer for our AI model to just play the land earlier rather than make a blunder
+                        return true;
+                    }
+                }
             }
+            return false;
         });
 
         // TODO: add prediction for effects that will untap a tapland as it enters the battlefield
@@ -1528,7 +1518,7 @@ public class AiController {
         return true;
     }
 
-    private final SpellAbility getSpellAbilityToPlay() {
+    private SpellAbility getSpellAbilityToPlay() {
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> saList = Lists.newArrayList();
@@ -1572,12 +1562,9 @@ public class AiController {
             saList = ComputerUtilAbility.getSpellAbilities(cards, player);
         }
 
-        Iterables.removeIf(saList, new Predicate<SpellAbility>() {
-            @Override
-            public boolean apply(final SpellAbility spellAbility) { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
-                // TODO allow when experimental profile?
-                return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
-            }
+        Iterables.removeIf(saList, spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+            // TODO allow when experimental profile?
+            return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //update LivingEndPlayer
         useLivingEnd = Iterables.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
@@ -1997,14 +1984,9 @@ public class AiController {
             case FlipOntoBattlefield:
                 if ("DamageCreatures".equals(sa.getParam("AILogic"))) {
                     int maxToughness = Integer.parseInt(sa.getSubAbility().getParam("NumDmg"));
-                    CardCollectionView rightToughness = CardLists.filter(pool, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            return card.getController().isOpponentOf(sa.getActivatingPlayer())
-                                    && card.getNetToughness() <= maxToughness
-                                    && card.canBeDestroyed();
-                        }
-                    });
+                    CardCollectionView rightToughness = CardLists.filter(pool, card -> card.getController().isOpponentOf(sa.getActivatingPlayer())
+                            && card.getNetToughness() <= maxToughness
+                            && card.canBeDestroyed());
                     Card bestCreature = ComputerUtilCard.getBestCreatureAI(rightToughness.isEmpty() ? pool : rightToughness);
                     if (bestCreature != null) {
                         result.add(bestCreature);
@@ -2140,7 +2122,7 @@ public class AiController {
             CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
             CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
             CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
-            return Aggregates.sum(left, Accessors.fnGetCmc) > Aggregates.sum(right, Accessors.fnGetCmc);
+            return Aggregates.sum(left, Card::getCMC) > Aggregates.sum(right, Card::getCMC);
         }
         return MyRandom.getRandom().nextBoolean();
     }
@@ -2167,8 +2149,8 @@ public class AiController {
         } else if (aiLogic.equals("CMCOppControlsByPower")) {
             // TODO: improve this to check for how dangerous those creatures actually are relative to host card
             CardCollectionView hand = sa.getActivatingPlayer().getOpponents().getCardsIn(ZoneType.Battlefield);
-            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Accessors.fnGetNetPower);
-            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Accessors.fnGetNetPower);
+            int powerEven = Aggregates.sum(CardLists.filter(hand, CardPredicates.evenCMC()), Card::getNetPower);
+            int powerOdd = Aggregates.sum(CardLists.filter(hand, CardPredicates.oddCMC()), Card::getNetPower);
             return powerOdd > powerEven;
         }
         return MyRandom.getRandom().nextBoolean(); // outside of any specific logic, choose randomly

@@ -3,8 +3,6 @@ package forge.toolbox;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -239,12 +237,9 @@ public class FOptionPane extends FDialog {
         for (int i = 0; i < optionCount; i++) {
             final int option = i;
             final FButton btn = buttons[i];
-            btn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent arg0) {
-                    FOptionPane.this.result = option;
-                    FOptionPane.this.setVisible(false);
-                }
+            btn.addActionListener(arg0 -> {
+                FOptionPane.this.result = option;
+                FOptionPane.this.setVisible(false);
             });
             btn.addKeyListener(new KeyAdapter() { //hook certain keys to move focus between buttons
                 @Override
@@ -304,12 +299,8 @@ public class FOptionPane extends FDialog {
 
     public void setResult(final int result0) {
         this.result = result0;
-        SwingUtilities.invokeLater(new Runnable() { //delay hiding so action can finish first
-            @Override
-            public void run() {
-                setVisible(false);
-            }
-        });
+        //delay hiding so action can finish first
+        SwingUtilities.invokeLater(() -> setVisible(false));
     }
 
     public boolean isButtonEnabled(final int index) {

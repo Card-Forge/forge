@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
@@ -408,18 +407,15 @@ public class UntapAi extends SpellAbilityAi {
         // (it may actually be possible to enable this for sorceries, but that'll need some canPlay shenanigans)
         CardCollection playable = CardLists.filter(inHand, Presets.PERMANENTS);
 
-        CardCollection untappingCards = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                boolean hasUntapLandLogic = false;
-                for (SpellAbility sa : card.getSpellAbilities()) {
-                    if ("PoolExtraMana".equals(sa.getParam("AILogic"))) {
-                        hasUntapLandLogic = true;
-                        break;
-                    }
+        CardCollection untappingCards = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), card -> {
+            boolean hasUntapLandLogic = false;
+            for (SpellAbility sa1 : card.getSpellAbilities()) {
+                if ("PoolExtraMana".equals(sa1.getParam("AILogic"))) {
+                    hasUntapLandLogic = true;
+                    break;
                 }
-                return hasUntapLandLogic && card.isUntapped();
             }
+            return hasUntapLandLogic && card.isUntapped();
         });
 
         // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?

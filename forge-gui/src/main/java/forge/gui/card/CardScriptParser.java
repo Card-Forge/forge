@@ -345,11 +345,8 @@ public final class CardScriptParser {
         }
     }
 
-    private static final Predicate<String> startsWith(final String s) {
-        return new Predicate<String>() {
-            @Override public boolean apply(final String input) {
-                return s.startsWith(input);
-            }};
+    private static Predicate<String> startsWith(final String s) {
+        return s::startsWith;
     }
 
     /**

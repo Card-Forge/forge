@@ -158,13 +158,8 @@ public enum VSubmenuReleaseNotes implements IVSubmenu<CSubmenuReleaseNotes> {
     }
 
     private void setScrollbarToTop() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                // Needs to run in here otherwise does not work.
-                scroller.getVerticalScrollBar().setValue(0);
-            }
-        });
+        // Needs to run in here otherwise does not work.
+        SwingUtilities.invokeLater(() -> scroller.getVerticalScrollBar().setValue(0));
     }
 
 }

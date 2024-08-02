@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
@@ -185,7 +184,7 @@ public class AttackConstraints {
 
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
-        possible.putAll(Maps.asMap(legalAttackers.asSet(), FN_COUNT_VIOLATIONS));
+        possible.putAll(Maps.asMap(legalAttackers.asSet(), this::countViolations));
         int empty = countViolations(Collections.emptyMap());
         if (empty != -1) {
             possible.put(Collections.emptyMap(), empty);
@@ -195,11 +194,11 @@ public class AttackConstraints {
         return MapToAmountUtil.min(possible);
     }
 
-    private final FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
+    private FCollection<Map<Card, GameEntity>> collectLegalAttackers(final List<Attack> reqs, final int maximum) {
         return new FCollection<>
                 (collectLegalAttackers(Collections.emptyMap(), deepClone(reqs), new CardCollection(), maximum));
     }
-    private final List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
+    private List<Map<Card, GameEntity>> collectLegalAttackers(final Map<Card, GameEntity> attackers, final List<Attack> reqs, final CardCollection reserved, final int maximum) {
         final List<Map<Card, GameEntity>> result = Lists.newLinkedList();
 
         int localMaximum = maximum;
@@ -341,9 +340,9 @@ public class AttackConstraints {
         }
     }
 
-    private final List<Attack> getSortedFilteredRequirements() {
+    private List<Attack> getSortedFilteredRequirements() {
         final List<Attack> result = Lists.newArrayList();
-        final Map<Card, List<Pair<GameEntity, Integer>>> sortedRequirements = Maps.transformValues(requirements, AttackRequirement.SORT);
+        final Map<Card, List<Pair<GameEntity, Integer>>> sortedRequirements = Maps.transformValues(requirements, AttackRequirement::getSortedRequirements);
         for (final Entry<Card, List<Pair<GameEntity, Integer>>> reqList : sortedRequirements.entrySet()) {
             final AttackRestriction restriction = restrictions.get(reqList.getKey());
             final List<Pair<GameEntity, Integer>> list = reqList.getValue();
@@ -403,12 +402,7 @@ public class AttackConstraints {
         return findFirst(reqs, Predicates.equalTo(attacker));
     }
     private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
-        return Collections2.filter(reqs, new Predicate<Attack>() {
-            @Override
-            public boolean apply(final Attack input) {
-                return input.attacker.equals(attacker);
-            }
-        });
+        return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
     }
 
     /**
@@ -446,10 +440,4 @@ public class AttackConstraints {
 
         return violations;
     }
-    private final Function<Map<Card, GameEntity>, Integer> FN_COUNT_VIOLATIONS = new Function<Map<Card,GameEntity>, Integer>() {
-        @Override
-        public Integer apply(final Map<Card, GameEntity> input) {
-            return countViolations(input);
-        }
-    };
 }

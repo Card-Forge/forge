@@ -33,17 +33,14 @@ public class DeckFolderFilter extends ListLabelFilter<DeckProxy> {
 
     @Override
     protected final Predicate<DeckProxy> buildPredicate() {
-        return new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(DeckProxy input) {
-                String path = input.getPath();
-                for (String folder : folders) {
-                    if (path.startsWith(folder)) {
-                        return true;
-                    }
+        return input -> {
+            String path = input.getPath();
+            for (String folder : folders) {
+                if (path.startsWith(folder)) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         };
     }
 

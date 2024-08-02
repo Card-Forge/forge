@@ -63,14 +63,11 @@ public class CardSetFilter extends CardFormatFilter {
                                                             true, this.allowReprints);
         final CardSetFilter itemFilter = this;
 
-        dialog.setOkCallback(new Runnable() {
-            @Override
-            public void run() {
-                sets.clear();
-                sets.addAll(dialog.getSelectedSets());
-                allowReprints = dialog.getWantReprints();
-                itemManager.addFilter(itemFilter); // this adds/updates the current filter
-            }
+        dialog.setOkCallback(() -> {
+            sets.clear();
+            sets.addAll(dialog.getSelectedSets());
+            allowReprints = dialog.getWantReprints();
+            itemManager.addFilter(itemFilter); // this adds/updates the current filter
         });
     }
 

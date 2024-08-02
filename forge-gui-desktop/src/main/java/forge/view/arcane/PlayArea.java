@@ -88,7 +88,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.stackCreatures = FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES);
     }
 
-    private final CardStackRow collectAllLands() {
+    private CardStackRow collectAllLands() {
         final CardStackRow allLands = new CardStackRow();
 
         outerLoop:
@@ -138,7 +138,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allLands;
     }
 
-    private final CardStackRow collectAllTokens() {
+    private CardStackRow collectAllTokens() {
         final CardStackRow allTokens = new CardStackRow();
         outerLoop:
         //
@@ -193,7 +193,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allTokens;
     }
 
-    private final CardStackRow collectAllCreatures() {
+    private CardStackRow collectAllCreatures() {
         final CardStackRow allCreatures = new CardStackRow();
         outerLoop:
         //

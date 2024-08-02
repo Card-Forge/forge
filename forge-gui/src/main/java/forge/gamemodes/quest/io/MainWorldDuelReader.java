@@ -34,7 +34,7 @@ public class MainWorldDuelReader extends StorageReaderFolder<QuestEventDuel> {
     private static final String WILD_DIR_NAME = "wild";
     
     public MainWorldDuelReader(File deckDir0) {
-        super(deckDir0, QuestEvent.FN_GET_NAME);
+        super(deckDir0, QuestEvent::getName);
     }
     
     @Override

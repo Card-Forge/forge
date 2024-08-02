@@ -64,24 +64,14 @@ public class TournamentIO {
     }
 
     public static File[] getTournamentFilesUnlocked(final String prefix) {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
-            }
-        };
+        final FilenameFilter filter = (dir, name) -> ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
 
         final File folder = new File(ForgeConstants.TOURNAMENT_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
     public static File[] getTournamentFilesLocked() {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
-            }
-        };
+        final FilenameFilter filter = (dir, name) -> (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
 
         final File folder = new File(ForgeConstants.TOURNAMENT_DIR.defaultLoc);
         return folder.listFiles(filter);

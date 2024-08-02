@@ -140,23 +140,20 @@ public class AiBlockController {
             ComputerUtilCard.sortByEvaluateCreature(attackers);
             CardLists.sortByPowerDesc(attackers);
             //move cards like Phage the Untouchable to the front
-            attackers.sort(new Comparator<Card>() {
-                @Override
-                public int compare(final Card o1, final Card o2) {
-                    if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {
-                        return -1;
-                    }
-                    if (!o1.hasSVar("MustBeBlocked") && o2.hasSVar("MustBeBlocked")) {
-                        return 1;
-                    }
-                    if (attackingCmd.contains(o1) && !attackingCmd.contains(o2)) {
-                        return -1;
-                    }
-                    if (!attackingCmd.contains(o1) && attackingCmd.contains(o2)) {
-                        return 1;
-                    }
-                    return 0;
+            attackers.sort((o1, o2) -> {
+                if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {
+                    return -1;
                 }
+                if (!o1.hasSVar("MustBeBlocked") && o2.hasSVar("MustBeBlocked")) {
+                    return 1;
+                }
+                if (attackingCmd.contains(o1) && !attackingCmd.contains(o2)) {
+                    return -1;
+                }
+                if (!attackingCmd.contains(o1) && attackingCmd.contains(o2)) {
+                    return 1;
+                }
+                return 0;
             });
             return attackers;
         }
@@ -330,43 +327,35 @@ public class AiBlockController {
     }
 
     private Predicate<Card> rampagesOrNeedsManyToBlock(final Combat combat) {
-        return Predicates.or(CardPredicates.hasKeyword(Keyword.RAMPAGE), new Predicate<Card>() {
-
-            @Override
-            public boolean apply(Card input) {
-                // select creature that has a max blocker
-                return StaticAbilityCantAttackBlock.getMinMaxBlocker(input, combat.getDefenderPlayerByAttacker(input)).getRight() < Integer.MAX_VALUE;
-            }
-
+        return Predicates.or(CardPredicates.hasKeyword(Keyword.RAMPAGE), input -> {
+            // select creature that has a max blocker
+            return StaticAbilityCantAttackBlock.getMinMaxBlocker(input, combat.getDefenderPlayerByAttacker(input)).getRight() < Integer.MAX_VALUE;
         });
     }
 
     private Predicate<Card> changesPTWhenBlocked(final boolean onlyForDefVsTrample) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                for (final Trigger tr : card.getTriggers()) {
-                    if (tr.getMode() == TriggerType.AttackerBlocked) {
-                        SpellAbility ab = tr.getOverridingAbility();
-                        if (ab != null) {
-                            if (ab.getApi() == ApiType.Pump && "Self".equals(ab.getParam("Defined"))) {
-                                String rawP = ab.getParam("NumAtt");
-                                String rawT = ab.getParam("NumDef");
-                                if ("+X".equals(rawP) && "+X".equals(rawT) && card.getSVar("X").startsWith("Count$Valid Creature.blockingTriggeredAttacker")) {
-                                    return true;
-                                }
-                                // TODO: maybe also predict calculated bonus above certain threshold?
-                            } else if (ab.getApi() == ApiType.PumpAll && ab.hasParam("ValidCards")
-                                && ab.getParam("ValidCards").startsWith("Creature.blockingSource")) {
-                                int pBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumAtt"), ab);
-                                int tBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumDef"), ab);
-                                return (!onlyForDefVsTrample && pBonus < 0) || tBonus < 0;
+        return card -> {
+            for (final Trigger tr : card.getTriggers()) {
+                if (tr.getMode() == TriggerType.AttackerBlocked) {
+                    SpellAbility ab = tr.getOverridingAbility();
+                    if (ab != null) {
+                        if (ab.getApi() == ApiType.Pump && "Self".equals(ab.getParam("Defined"))) {
+                            String rawP = ab.getParam("NumAtt");
+                            String rawT = ab.getParam("NumDef");
+                            if ("+X".equals(rawP) && "+X".equals(rawT) && card.getSVar("X").startsWith("Count$Valid Creature.blockingTriggeredAttacker")) {
+                                return true;
                             }
+                            // TODO: maybe also predict calculated bonus above certain threshold?
+                        } else if (ab.getApi() == ApiType.PumpAll && ab.hasParam("ValidCards")
+                            && ab.getParam("ValidCards").startsWith("Creature.blockingSource")) {
+                            int pBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumAtt"), ab);
+                            int tBonus = AbilityUtils.calculateAmount(card, ab.getParam("NumDef"), ab);
+                            return (!onlyForDefVsTrample && pBonus < 0) || tBonus < 0;
                         }
                     }
                 }
-                return false;
             }
+            return false;
         };
     }
 
@@ -452,15 +441,12 @@ public class AiBlockController {
 
             // Try to add blockers that could be destroyed, but are worth less than the attacker
             // Don't use blockers without First Strike or Double Strike if attacker has it
-            usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)
-                            && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
-                        return false;
-                    }
-                    return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
+            usableBlockers = CardLists.filter(blockers, c -> {
+                if (ComputerUtilCombat.dealsFirstStrikeDamage(attacker, false, combat)
+                        && !ComputerUtilCombat.dealsFirstStrikeDamage(c, false, combat)) {
+                    return false;
                 }
+                return lifeInDanger || wouldLikeToRandomlyTrade(attacker, c, combat) || ComputerUtilCard.evaluateCreature(c) + diff < ComputerUtilCard.evaluateCreature(attacker);
             });
             if (usableBlockers.size() < 2) {
                 return;
@@ -579,13 +565,8 @@ public class AiBlockController {
             final List<Card> blockGang = new ArrayList<>();
             int absorbedDamage; // The amount of damage needed to kill the first blocker
 
-            List<Card> usableBlockers = CardLists.filter(blockers, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
-                            || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage();
-                }
-            });
+            List<Card> usableBlockers = CardLists.filter(blockers, c -> c.getNetToughness() > attacker.getNetCombatDamage() // performance shortcut
+                    || c.getNetToughness() + ComputerUtilCombat.predictToughnessBonusOfBlocker(attacker, c, true) > attacker.getNetCombatDamage());
             if (usableBlockers.size() < 2) {
                 return;
             }
@@ -829,12 +810,7 @@ public class AiBlockController {
             blockers.removeAll(combat.getBlockers(attacker));
 
             // Don't add any blockers that won't kill the attacker because the damage would be prevented by a static effect
-            blockers = CardLists.filter(blockers, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card blocker) {
-                    return !ComputerUtilCombat.isCombatDamagePrevented(blocker, attacker, blocker.getNetCombatDamage());
-                }
-            });
+            blockers = CardLists.filter(blockers, blocker -> !ComputerUtilCombat.isCombatDamagePrevented(blocker, attacker, blocker.getNetCombatDamage()));
 
             // Try to use safe blockers first
             if (blockers.size() > 0) {
@@ -921,13 +897,9 @@ public class AiBlockController {
 
             CardCollection pwsWithChumpBlocks = new CardCollection();
             CardCollection chosenChumpBlockers = new CardCollection();
-            CardCollection chumpPWDefenders = CardLists.filter(this.blockersLeft, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return ComputerUtilCard.evaluateCreature(card) <= (card.isToken() ? evalThresholdToken
-                            : evalThresholdNonToken);
-                }
-            });
+            CardCollection chumpPWDefenders = CardLists.filter(this.blockersLeft,
+                    card -> ComputerUtilCard.evaluateCreature(card) <= (card.isToken() ? evalThresholdToken : evalThresholdNonToken)
+            );
             CardLists.sortByPowerAsc(chumpPWDefenders);
             if (!chumpPWDefenders.isEmpty()) {
                 for (final Card attacker : attackers) {

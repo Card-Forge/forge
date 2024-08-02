@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
 import forge.ai.ComputerUtil;
@@ -29,12 +28,7 @@ public class MutateAi extends SpellAbilityAi {
                 CardPredicates.hasKeyword(Keyword.DEFENDER),
                 CardPredicates.hasKeyword("CARDNAME can't attack."),
                 CardPredicates.hasKeyword("CARDNAME can't block."),
-                new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card card) {
-                        return ComputerUtilCard.isUselessCreature(aiPlayer, card);
-                    }
-                }
+                card -> ComputerUtilCard.isUselessCreature(aiPlayer, card)
         )));
 
         if (mutateTgts.isEmpty()) {

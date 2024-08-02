@@ -19,10 +19,10 @@ public final class GamePlayerUtil {
     private GamePlayerUtil() { }
 
     private static final LobbyPlayer guiPlayer = new LobbyPlayerHuman("Human");
-    public static final LobbyPlayer getGuiPlayer() {
+    public static LobbyPlayer getGuiPlayer() {
         return guiPlayer;
     }
-    public static final LobbyPlayer getGuiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final boolean writePref) {
+    public static LobbyPlayer getGuiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final boolean writePref) {
         if (writePref) {
             if (!name.equals(guiPlayer.getName())) {
                 guiPlayer.setName(name);
@@ -38,34 +38,34 @@ public final class GamePlayerUtil {
         return new LobbyPlayerHuman(name, avatarIndex, sleeveIndex);
     }
 
-    public static final LobbyPlayer getQuestPlayer() {
+    public static LobbyPlayer getQuestPlayer() {
         return guiPlayer; //TODO: Make this a separate player
     }
 
-    public final static LobbyPlayer createAiPlayer() {
+    public static LobbyPlayer createAiPlayer() {
         return createAiPlayer(GuiDisplayUtil.getRandomAiName());
     }
-    public final static LobbyPlayer createAiPlayer(final String name) {
+    public static LobbyPlayer createAiPlayer(final String name) {
         final int avatarCount = GuiBase.getInterface().getAvatarCount();
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount));
     }
-    public final static LobbyPlayer createAiPlayer(final String name, final String profileOverride) {
+    public static LobbyPlayer createAiPlayer(final String name, final String profileOverride) {
         final int avatarCount = GuiBase.getInterface().getAvatarCount();
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
         return createAiPlayer(name, avatarCount == 0 ? 0 : MyRandom.getRandom().nextInt(avatarCount), sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, profileOverride);
     }
-    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex) {
         final int sleeveCount = GuiBase.getInterface().getSleevesCount();
         return createAiPlayer(name, avatarIndex, sleeveCount == 0 ? 0 : MyRandom.getRandom().nextInt(sleeveCount), null, "");
     }
-    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
         return createAiPlayer(name, avatarIndex, sleeveIndex, null, "");
     }
-    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options) {
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options) {
         return createAiPlayer(name, avatarIndex, sleeveIndex, options, "");
     }
-    public final static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
+    public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
 
         // TODO: implement specific AI profiles for quest mode.

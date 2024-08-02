@@ -24,6 +24,7 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -172,12 +173,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomDraftFiles"));
                 } else {
-                    Collections.sort(myDrafts, new Comparator<CustomLimited>() {
-                        @Override
-                        public int compare(CustomLimited o1, CustomLimited o2) {
-                            return o1.getName().compareTo(o2.getName());
-                        }
-                    });
+                    Collections.sort(myDrafts, Comparator.comparing(DeckBase::getName));
 
                     final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {

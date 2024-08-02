@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import forge.ai.*;
 import forge.game.ability.AbilityUtils;
@@ -170,30 +169,27 @@ public class DestroyAi extends SpellAbilityAi {
             if (!playReusable(ai, sa)) {
                 list = CardLists.filter(list, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
 
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        //Check for cards that can be sacrificed in response
-                        for (final SpellAbility ability : c.getAllSpellAbilities()) {
-                            if (ability.isActivatedAbility()) {
-                                final Cost cost = ability.getPayCosts();
-                                for (final CostPart part : cost.getCostParts()) {
-                                    if (!(part instanceof CostSacrifice)) {
-                                        continue;
-                                    }
-                                    CostSacrifice sacCost = (CostSacrifice) part;
-                                    if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
-                                        return false;
-                                    }
+                list = CardLists.filter(list, c -> {
+                    //Check for cards that can be sacrificed in response
+                    for (final SpellAbility ability : c.getAllSpellAbilities()) {
+                        if (ability.isActivatedAbility()) {
+                            final Cost cost = ability.getPayCosts();
+                            for (final CostPart part : cost.getCostParts()) {
+                                if (!(part instanceof CostSacrifice)) {
+                                    continue;
+                                }
+                                CostSacrifice sacCost = (CostSacrifice) part;
+                                if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
+                                    return false;
                                 }
                             }
                         }
-                        if (c.hasSVar("SacMe")) {
-                            return false;
-                        }
-                        //Check for undying
-                        return !c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterEnumType.P1P1) > 0;
                     }
+                    if (c.hasSVar("SacMe")) {
+                        return false;
+                    }
+                    //Check for undying
+                    return !c.hasKeyword(Keyword.UNDYING) || c.getCounters(CounterEnumType.P1P1) > 0;
                 });
             }
 
@@ -201,12 +197,7 @@ public class DestroyAi extends SpellAbilityAi {
             // regeneration shield
             if (!noRegen) {
                 // TODO filter out things that might be tougher?
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c);
-                    }
-                });
+                list = CardLists.filter(list, c -> c.getShieldCount() == 0 && !ComputerUtil.canRegenerate(ai, c));
             }
 
             // Try to avoid targeting creatures that are dead on board
@@ -340,12 +331,7 @@ public class DestroyAi extends SpellAbilityAi {
             if (!noRegen) {
                 // TODO filter out things that could regenerate in response?
                 // might be tougher?
-                preferred = CardLists.filter(preferred, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.getShieldCount() == 0;
-                    }
-                });
+                preferred = CardLists.filter(preferred, c -> c.getShieldCount() == 0);
             }
 
             // Filter AI-specific targets if provided

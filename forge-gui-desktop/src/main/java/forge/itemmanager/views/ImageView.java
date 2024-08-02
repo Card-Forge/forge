@@ -82,20 +82,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             super(new FLabel.ButtonBuilder());
             setFocusable(false);
             updateToolTip();
-            setCommand(new Runnable() {
-                @Override
-                public void run() {
-                    if (groupBy == null || model.getItems().isEmpty()) { return; }
+            setCommand((Runnable) () -> {
+                if (groupBy == null || model.getItems().isEmpty()) { return; }
 
-                    boolean collapsed = !isAllCollapsed;
-                    for (Group group : groups) {
-                        group.isCollapsed = collapsed;
-                    }
-
-                    updateIsAllCollapsed();
-                    clearSelection(); //must clear selection since indices and visible items will be changing
-                    updateLayout(false);
+                boolean collapsed = !isAllCollapsed;
+                for (Group group : groups) {
+                    group.isCollapsed = collapsed;
                 }
+
+                updateIsAllCollapsed();
+                clearSelection(); //must clear selection since indices and visible items will be changing
+                updateLayout(false);
             });
         }
 
@@ -161,36 +158,27 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         cbColumnCount.setMaximumRowCount(cbColumnCount.getItemCount());
         cbColumnCount.setSelectedIndex(columnCount - MIN_COLUMN_COUNT);
 
-        cbGroupByOptions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                focus();
-                if (cbGroupByOptions.getSelectedIndex() > 0) {
-                    setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
-                }
-                else {
-                    setGroupBy(null);
-                }
+        cbGroupByOptions.addActionListener(e -> {
+            focus();
+            if (cbGroupByOptions.getSelectedIndex() > 0) {
+                setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
+            }
+            else {
+                setGroupBy(null);
             }
         });
-        cbPileByOptions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                focus();
-                if (cbPileByOptions.getSelectedIndex() > 0) {
-                    setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
-                }
-                else {
-                    setPileBy(null);
-                }
+        cbPileByOptions.addActionListener(e -> {
+            focus();
+            if (cbPileByOptions.getSelectedIndex() > 0) {
+                setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
+            }
+            else {
+                setPileBy(null);
             }
         });
-        cbColumnCount.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                focus();
-                setColumnCount(cbColumnCount.getSelectedItem());
-            }
+        cbColumnCount.addActionListener(e -> {
+            focus();
+            setColumnCount(cbColumnCount.getSelectedItem());
         });
 
         //setup display
@@ -277,12 +265,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
                 if (selectItem(e)) {
                     setLockHoveredItem(true); //lock hoveredItem while context menu open
-                    itemManager.showContextMenu(e, new Runnable() {
-                        @Override
-                        public void run() {
-                            setLockHoveredItem(false);
-                        }
-                    });
+                    itemManager.showContextMenu(e, () -> setLockHoveredItem(false));
                 }
             }
 
@@ -1135,12 +1118,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             if (lockInput) { //unlock input after repaint finishes if needed
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        lockInput = false;
-                    }
-                });
+                SwingUtilities.invokeLater(() -> lockInput = false);
             }
         }
 

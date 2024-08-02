@@ -49,11 +49,11 @@ public class VentureEffect  extends SpellAbilityEffect {
                     .getAllCards(Predicates.compose(
                             Predicates.and(CardRulesPredicates.Presets.IS_DUNGEON,
                                     CardRulesPredicates.subType(StringOp.EQUALS, sa.getParam("Dungeon"))),
-                            PaperCard.FN_GET_RULES));
+                            PaperCard::getRules));
         } else {
             // Create a new dungeon card chosen by player in command zone.
             dungeonCards = StaticData.instance().getVariantCards().getAllCards(
-                Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES));
+                Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard::getRules));
             dungeonCards.removeIf(c -> !c.getRules().isEnterableDungeon());
         }
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");

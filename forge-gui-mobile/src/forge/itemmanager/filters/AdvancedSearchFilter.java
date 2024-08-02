@@ -146,27 +146,15 @@ public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T>
                     protected void buildMenu() {
                         //add a menu item for each filter to allow easily editing just that filter
                         for (final IFilterControl<T> control : model.getControls()) {
-                            FMenuItem item = new FMenuItem(control.getFilter().toString(), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    model.editFilterControl(control, onFilterChange);
-                                }
-                            });
+                            FMenuItem item = new FMenuItem(control.getFilter().toString(), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
+                                    e -> model.editFilterControl(control, onFilterChange));
                             item.setTextRenderer(new TextRenderer()); //ensure symbols are displayed
                             addItem(item);
                         }
-                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblEditExpression"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                edit();
-                            }
-                        }));
-                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFilter"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                reset();
-                                itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
-                            }
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblEditExpression"), Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT, e -> edit()));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblRemoveFilter"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, e -> {
+                            reset();
+                            itemManager.applyNewOrModifiedFilter(AdvancedSearchFilter.this);
                         }));
                     }
                 };

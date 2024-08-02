@@ -18,8 +18,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
@@ -36,12 +34,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         super(null, OnlineMenu.getMenu());
 
         txtSendMessage.setGhostText(Forge.getLocalizer().getMessage("lblEnterMessageToSend"));
-        txtSendMessage.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                sendMessage();
-            }
-        });
+        txtSendMessage.setChangedHandler(e -> sendMessage());
     }
 
     private void sendMessage() {

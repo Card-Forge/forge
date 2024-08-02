@@ -3,7 +3,6 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.game.GameFormat;
@@ -203,12 +202,7 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                 decks = DeckProxy.getAllConstructedDecks();
                 break;
         }
-        decks = Iterables.filter(decks, new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(final DeckProxy deck) {
-                return deck.isFavoriteDeck();
-            }
-        });
+        decks = Iterables.filter(decks, DeckProxy::isFavoriteDeck);
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no favorite decks
         }

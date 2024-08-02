@@ -57,13 +57,10 @@ public class GuiDownloadZipService extends GuiDownloadService {
     public final void run() {
         downloadAndUnzip();
         if (!cancel) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (progressBar != null)
-                        progressBar.setDescription(filesExtracted + " " + desc + " extracted");
-                    finish();
-                }
+            FThreads.invokeInEdtNowOrLater(() -> {
+                if (progressBar != null)
+                    progressBar.setDescription(filesExtracted + " " + desc + " extracted");
+                finish();
             });
         }
     }

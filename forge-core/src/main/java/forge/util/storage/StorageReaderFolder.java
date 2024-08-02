@@ -18,7 +18,6 @@
 package forge.util.storage;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -137,12 +136,7 @@ public abstract class StorageReaderFolder<T> extends StorageReaderBase<T> {
     // methods handling nested folders are provided. It's up to consumer whether to use these or not.
     @Override
     public Iterable<File> getSubFolders() {
-        File[] list = this.directory.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory() && !file.isHidden();
-            }
-        });
+        File[] list = this.directory.listFiles(file -> file.isDirectory() && !file.isHidden());
         return Arrays.asList(list);
     }
 }

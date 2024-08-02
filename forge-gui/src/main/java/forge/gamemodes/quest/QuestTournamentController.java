@@ -382,38 +382,30 @@ public class QuestTournamentController {
     }
 
     public void startDraft() {
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                if (drafting) {
-                    SOptionPane.showErrorDialog(localizer.getMessage("lblCurrentlyInDraft"));
-                    return;
-                }
-
-                final QuestEventDraft draftEvent = QuestUtil.getDraftEvent();
-
-                final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
-                if (draftEvent.canEnter()) {
-                    SOptionPane.showMessageDialog(localizer.getMessage("lblYouNeed") + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " " + localizer.getMessage("lblMoreCredits"), localizer.getMessage("lblNotEnoughCredits"), SOptionPane.WARNING_ICON);
-                    return;
-                }
-
-                final boolean okayToEnter = SOptionPane.showOptionDialog(localizer.getMessage("lblTournamentCosts") + QuestUtil.formatCredits(draftEvent.getEntryFee()) + localizer.getMessage("lblSureEnterTournament"), localizer.getMessage("lblEnterDraftTournament"), FSkinProp.ICO_QUEST_GOLD, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 1) == 0;
-
-                if (!okayToEnter) {
-                    return;
-                }
-
-                drafting = true;
-
-                final BoosterDraft draft = draftEvent.enter();
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.startDraft(draft);
-                    }
-                });
+        ThreadUtil.invokeInGameThread(() -> {
+            if (drafting) {
+                SOptionPane.showErrorDialog(localizer.getMessage("lblCurrentlyInDraft"));
+                return;
             }
+
+            final QuestEventDraft draftEvent = QuestUtil.getDraftEvent();
+
+            final long creditsAvailable = FModel.getQuest().getAssets().getCredits();
+            if (draftEvent.canEnter()) {
+                SOptionPane.showMessageDialog(localizer.getMessage("lblYouNeed") + QuestUtil.formatCredits(draftEvent.getEntryFee() - creditsAvailable) + " " + localizer.getMessage("lblMoreCredits"), localizer.getMessage("lblNotEnoughCredits"), SOptionPane.WARNING_ICON);
+                return;
+            }
+
+            final boolean okayToEnter = SOptionPane.showOptionDialog(localizer.getMessage("lblTournamentCosts") + QuestUtil.formatCredits(draftEvent.getEntryFee()) + localizer.getMessage("lblSureEnterTournament"), localizer.getMessage("lblEnterDraftTournament"), FSkinProp.ICO_QUEST_GOLD, ImmutableList.of(localizer.getMessage("lblYes"), localizer.getMessage("lblNo")), 1) == 0;
+
+            if (!okayToEnter) {
+                return;
+            }
+
+            drafting = true;
+
+            final BoosterDraft draft = draftEvent.enter();
+            FThreads.invokeInEdtLater(() -> view.startDraft(draft));
         });
     }
 

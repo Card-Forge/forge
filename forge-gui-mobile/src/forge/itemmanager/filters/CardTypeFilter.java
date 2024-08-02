@@ -48,13 +48,9 @@ public class CardTypeFilter extends StatTypeFilter<PaperCard> {
         }
 
         if (types.size() == buttonMap.size()) {
-            return new Predicate<PaperCard>() { //use custom return true delegate to validate the item is a card
-                @Override
-                public boolean apply(PaperCard card) {
-                    return true;
-                }
-            };
+            //use custom return true delegate to validate the item is a card
+            return card -> true;
         }
-        return Predicates.compose(Predicates.or(types), PaperCard.FN_GET_RULES);
+        return Predicates.compose(Predicates.or(types), PaperCard::getRules);
     }
 }

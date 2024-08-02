@@ -48,14 +48,11 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
         buttonMap.put(st, button);
 
         //hook so right-clicking a button toggles itself on and toggles off all other buttons
-        button.setRightClickCommand(new UiCommand() {
-            @Override
-            public void run() {
-                lockFiltering = true;
-                SFilterUtil.showOnlyStat(st, button, buttonMap);
-                lockFiltering = false;
-                applyChange();
-            }
+        button.setRightClickCommand((UiCommand) () -> {
+            lockFiltering = true;
+            SFilterUtil.showOnlyStat(st, button, buttonMap);
+            lockFiltering = false;
+            applyChange();
         });
     }
 
@@ -80,7 +77,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
         for (StatTypes statTypes : buttonMap.keySet()) {
             if (statTypes.predicate != null) {
-                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard.FN_GET_RULES), PaperCard.class);
+                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard::getRules), PaperCard.class);
                 buttonMap.get(statTypes).setText(String.valueOf(count));
             }
         }

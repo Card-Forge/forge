@@ -139,12 +139,7 @@ public class ConquestController {
         rules.setGamesPerMatch(battle.gamesPerMatch());
         rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-        FThreads.invokeInEdtNowOrLater(new Runnable(){
-            @Override
-            public void run() {
-                hostedMatch.startMatch(rules, variants, starter, humanStart, gui);
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(() -> hostedMatch.startMatch(rules, variants, starter, humanStart, gui));
         activeBattle = battle;
     }
 
