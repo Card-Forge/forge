@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.EquippedBy | TriggerZones$ Battlefield | IsPre
 SVar:TrigDraw:DB$ Draw
 K:Equip:1 W
 DeckHas:Ability$Token & Type$Rebel & Color$Red
-Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nWhenever equipped creature and at least one other creature attack, draw a card.\nEquip {1}{W}
+Oracle:For Mirrodin! (When this Equipment enters, create a 2/2 red Rebel creature token, then attach this to it.)\nWhenever equipped creature and at least one other creature attack, draw a card.\nEquip {1}{W}

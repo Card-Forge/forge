@@ -2,7 +2,7 @@ Name:Goblin Recruiter
 ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.
 SVar:TrigChangeZone:DB$ ChangeZone | ChangeNum$ X | ChangeType$ Goblin | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | Reorder$ True
 SVar:X:Count$InYourLibrary.Goblin
 DeckNeeds:Type$Goblin
@@ -10,4 +10,4 @@ DeckNeeds:Type$Goblin
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE4
 SVar:Z:Count$Valid Land.YouCtrl+inZoneBattlefield
-Oracle:When Goblin Recruiter enters the battlefield, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.
+Oracle:When Goblin Recruiter enters, search your library for any number of Goblin cards, reveal them, then shuffle and put those cards on top in any order.

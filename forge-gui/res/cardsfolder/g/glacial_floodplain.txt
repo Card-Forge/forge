@@ -1,5 +1,6 @@
 Name:Glacial Floodplain
 ManaCost:no cost
 Types:Snow Land Plains Island
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {W} or {U}.)\nGlacial Floodplain enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:({T}: Add {W} or {U}.)\nGlacial Floodplain enters tapped.
