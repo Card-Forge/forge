@@ -227,6 +227,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Raccoon:Raccoons
 Rabbit:Rabbits
 Ranger:Rangers
 Rat:Rats
