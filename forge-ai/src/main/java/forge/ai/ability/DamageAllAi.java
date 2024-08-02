@@ -253,12 +253,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         CardCollection list =
                 CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC, source.getController(), source, sa);
 
-        final Predicate<Card> filterKillable = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false);
-            }
-        };
+        final Predicate<Card> filterKillable = c -> ComputerUtilCombat.predictDamageTo(c, dmg, source, false) >= ComputerUtilCombat.getDamageToKill(c, false);
 
         list = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
         list = CardLists.filter(list, filterKillable);

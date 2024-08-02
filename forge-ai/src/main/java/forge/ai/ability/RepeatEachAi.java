@@ -3,8 +3,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -97,12 +95,7 @@ public class RepeatEachAi extends SpellAbilityAi {
             return hitOpp;
         } else if ("EquipAll".equals(logic)) {
             if (aiPlayer.getGame().getPhaseHandler().is(PhaseType.MAIN1, aiPlayer)) {
-                final CardCollection unequipped = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card card) {
-                        return card.isEquipment() && card.getAttachedTo() != sa.getHostCard();
-                    }
-                });
+                final CardCollection unequipped = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield), card -> card.isEquipment() && card.getAttachedTo() != sa.getHostCard());
 
                 return !unequipped.isEmpty();
             }

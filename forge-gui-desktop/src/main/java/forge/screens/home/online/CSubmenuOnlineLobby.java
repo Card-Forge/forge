@@ -38,23 +38,20 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         final String url = NetConnectUtil.getServerUrl();
         if (url == null) { return; }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                if (url.length() > 0) {
-                    join(url);
-                }
-                else {
-                    try {
-                        host();
-                    } catch (Exception ex) {
-                        // IntelliJ swears that BindException isn't thrown in this try block, but it is!
-                        if (ex.getClass() == BindException.class) {
-                            SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblUnableStartServerPortAlreadyUse"));
-                            SOverlayUtils.hideOverlay();
-                        } else {
-                            BugReporter.reportException(ex);
-                        }
+        FThreads.invokeInBackgroundThread(() -> {
+            if (url.length() > 0) {
+                join(url);
+            }
+            else {
+                try {
+                    host();
+                } catch (Exception ex) {
+                    // IntelliJ swears that BindException isn't thrown in this try block, but it is!
+                    if (ex.getClass() == BindException.class) {
+                        SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblUnableStartServerPortAlreadyUse"));
+                        SOverlayUtils.hideOverlay();
+                    } else {
+                        BugReporter.reportException(ex);
                     }
                 }
             }
@@ -62,49 +59,37 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
     }
 
     private void host() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblStartingServer"));
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblStartingServer"));
+            SOverlayUtils.showOverlay();
         });
 
         final ChatMessage result = NetConnectUtil.host(VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-                FNetOverlay.SINGLETON_INSTANCE.show(result);
-                if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
-                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
-                }
-                NetConnectUtil.copyHostedServerUrl();
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.hideOverlay();
+            FNetOverlay.SINGLETON_INSTANCE.show(result);
+            if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
             }
+            NetConnectUtil.copyHostedServerUrl();
         });
     }
 
     private void join(final String url) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblConnectingToServer"));
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay(Localizer.getInstance().getMessage("lblConnectingToServer"));
+            SOverlayUtils.showOverlay();
         });
 
         final ChatMessage result = NetConnectUtil.join(url, VSubmenuOnlineLobby.SINGLETON_INSTANCE, FNetOverlay.SINGLETON_INSTANCE);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-                if (result instanceof ChatMessage) {
-                    FNetOverlay.SINGLETON_INSTANCE.show(result);
-                    if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
-                        VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
-                    }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.hideOverlay();
+            if (result instanceof ChatMessage) {
+                FNetOverlay.SINGLETON_INSTANCE.show(result);
+                if (CHomeUI.SINGLETON_INSTANCE.getCurrentDocID() == EDocID.HOME_NETWORK) {
+                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.populate();
                 }
             }
         });

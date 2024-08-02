@@ -93,7 +93,7 @@ public class AiProfileUtil {
      * Load a single profile.
      * @param profileName a profile to load.
      */
-    private static final Map<AiProps, String> loadProfile(final String profileName) {
+    private static Map<AiProps, String> loadProfile(final String profileName) {
         Map<AiProps, String> profileMap = new HashMap<>();
 
         List<String> lines = FileUtil.readFile(buildFileName(profileName));

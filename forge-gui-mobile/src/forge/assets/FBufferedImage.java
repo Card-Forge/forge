@@ -60,12 +60,8 @@ public abstract class FBufferedImage extends FImageComplex {
         final FrameBuffer fb = frameBuffer;
         if (fb != null) {
             frameBuffer = null;
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    fb.dispose(); //must be disposed on EDT thread
-                }
-            });
+            //must be disposed on EDT thread
+            FThreads.invokeInEdtNowOrLater(fb::dispose);
         }
     }
 

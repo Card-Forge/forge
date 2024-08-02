@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -274,7 +275,7 @@ public class LoadGauntletScreen extends LaunchScreen {
         public void refresh() {
             List<GauntletData> sorted = new ArrayList<>();
             sorted.addAll(gauntlets);
-            Collections.sort(sorted, (x, y) -> x.getName().toLowerCase().compareTo(y.getName().toLowerCase()));
+            Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

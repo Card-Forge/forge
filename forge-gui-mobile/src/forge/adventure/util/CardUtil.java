@@ -779,14 +779,14 @@ public class CardUtil {
             System.err.println("Set code '" + code + "' not found.");
             return new Deck();
         }
-        BoosterPack cards = BoosterPack.FN_FROM_SET.apply(edition);
+        BoosterPack cards = BoosterPack.fromSet(edition);
         return generateBoosterPackAsDeck(edition);
     }
 
     public static Deck generateBoosterPackAsDeck(CardEdition edition){
         Deck d = new Deck("Booster pack");
         d.setComment(edition.getCode());
-        d.getMain().add(BoosterPack.FN_FROM_SET.apply(edition).getCards());
+        d.getMain().add(BoosterPack.fromSet(edition).getCards());
         return d;
     }
 

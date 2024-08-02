@@ -15,8 +15,6 @@ import forge.menu.FMenuItem;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 
@@ -29,12 +27,7 @@ public class FSideboardDialog extends FDialog {
 
         callback = callback0;
         tabs = add(new SideboardTabs(sideboard, main));
-        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-            }
-        });
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> hide());
         if (sideboard.isEmpty()) { //show main deck by default if sideboard is empty
             tabs.setSelectedPage(tabs.getMainDeckPage());
         }
@@ -89,12 +82,7 @@ public class FSideboardDialog extends FDialog {
             protected TabPageBase(CardPool cardPool, FImage icon0) {
                 super("", icon0);
 
-                cardManager.setItemActivateHandler(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        onCardActivated(cardManager.getSelectedItem());
-                    }
-                });
+                cardManager.setItemActivateHandler(e -> onCardActivated(cardManager.getSelectedItem()));
                 cardManager.setContextMenuBuilder(new ContextMenuBuilder<PaperCard>() {
                     @Override
                     public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
@@ -121,17 +109,14 @@ public class FSideboardDialog extends FDialog {
                 if (!StringUtils.isEmpty(dest)) {
                     label += " " + dest;
                 }
-                menu.addItem(new FMenuItem(label, icon, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        PaperCard card = cardManager.getSelectedItem();
-                        int max = cardManager.getItemCount(card);
-                        if (max == 1) {
-                            callback.run(max);
-                        }
-                        else {
-                            GuiChoose.getInteger(card + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
-                        }
+                menu.addItem(new FMenuItem(label, icon, e -> {
+                    PaperCard card = cardManager.getSelectedItem();
+                    int max = cardManager.getItemCount(card);
+                    if (max == 1) {
+                        callback.run(max);
+                    }
+                    else {
+                        GuiChoose.getInteger(card + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
                     }
                 }));
             }

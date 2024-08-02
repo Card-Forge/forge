@@ -66,63 +66,42 @@ public enum DeckSection {
     }
 
     private static class Validators {
-        static final Function<PaperCard, Boolean> DECK_AND_SIDE_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
-                // in the SideBoard (see Rule 313.2)
-                // Those will be matched later, in case (see `Deck::validateDeferredSections`)
-                return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard();
-            }
+        static final Function<PaperCard, Boolean> DECK_AND_SIDE_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            // NOTE: Same rules applies to both Deck and Side, despite "Conspiracy cards" are allowed
+            // in the SideBoard (see Rule 313.2)
+            // Those will be matched later, in case (see `Deck::validateDeferredSections`)
+            return !t.isConspiracy() && !t.isDungeon() && !t.isPhenomenon() && !t.isPlane() && !t.isScheme() && !t.isVanguard();
         };
 
-        static final Function<PaperCard, Boolean> COMMANDER_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return card.getRules().canBeCommander() || t.isPlaneswalker() || card.getRules().canBeOathbreaker() || card.getRules().canBeSignatureSpell();
-            }
+        static final Function<PaperCard, Boolean> COMMANDER_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return card.getRules().canBeCommander() || t.isPlaneswalker() || card.getRules().canBeOathbreaker() || card.getRules().canBeSignatureSpell();
         };
 
-        static final Function<PaperCard, Boolean> PLANES_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return t.isPlane() || t.isPhenomenon();
-            }
+        static final Function<PaperCard, Boolean> PLANES_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isPlane() || t.isPhenomenon();
         };
 
-        static final Function<PaperCard, Boolean> DUNGEON_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return t.isDungeon();
-            }
+        static final Function<PaperCard, Boolean> DUNGEON_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isDungeon();
         };
 
-        static final Function<PaperCard, Boolean> SCHEME_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return t.isScheme();
-            }
+        static final Function<PaperCard, Boolean> SCHEME_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isScheme();
         };
 
-        static final Function<PaperCard, Boolean> CONSPIRACY_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return t.isConspiracy();
-            }
+        static final Function<PaperCard, Boolean> CONSPIRACY_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isConspiracy();
         };
 
-        static final Function<PaperCard, Boolean> AVATAR_VALIDATOR = new Function<PaperCard, Boolean>() {
-            @Override
-            public Boolean apply(PaperCard card) {
-                CardType t = card.getRules().getType();
-                return t.isVanguard();
-            }
+        static final Function<PaperCard, Boolean> AVATAR_VALIDATOR = card -> {
+            CardType t = card.getRules().getType();
+            return t.isVanguard();
         };
 
         static final Function<PaperCard, Boolean> ATTRACTION_VALIDATOR = card -> {

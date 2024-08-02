@@ -7,4 +7,4 @@ K:Backup:2:BackupAbility
 SVar:BackupAbility:DB$ Pump | KW$ Trample
 K:Trample
 DeckHas:Ability$Counters
-Oracle:Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)\nBackup 2 (When this creature enters the battlefield, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\nTrample
+Oracle:Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)\nBackup 2 (When this creature enters, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\nTrample

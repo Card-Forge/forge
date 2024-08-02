@@ -33,25 +33,17 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
 
         for (final Player pTarget: getTargetPlayers(sa)) {
             // before next untap gain control
-            game.getCleanup().addUntil(pTarget, new GameCommand() {
-                @Override
-                public void run() {
-                    // CR 800.4b
-                    if (!controller.isInGame()) {
-                        return;
-                    }
-
-                    long ts = game.getNextTimestamp();
-                    pTarget.addController(ts, controller);
-
-                    // after following cleanup release control
-                    game.getCleanup().addUntil(new GameCommand() {
-                        @Override
-                        public void run() {
-                            pTarget.removeController(ts);
-                        }
-                    });
+            game.getCleanup().addUntil(pTarget, (GameCommand) () -> {
+                // CR 800.4b
+                if (!controller.isInGame()) {
+                    return;
                 }
+
+                long ts = game.getNextTimestamp();
+                pTarget.addController(ts, controller);
+
+                // after following cleanup release control
+                game.getCleanup().addUntil((GameCommand) () -> pTarget.removeController(ts));
             });
         }
     }

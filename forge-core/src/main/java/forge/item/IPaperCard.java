@@ -225,19 +225,8 @@ public interface IPaperCard extends InventoryItem, Serializable {
             public static final Predicate<PaperCard> IS_WHITE = Predicates.color(true, false, MagicColor.WHITE);
             public static final Predicate<PaperCard> IS_COLORLESS = Predicates.color(true, true, MagicColor.COLORLESS);
 
-            public static final Predicate<PaperCard> IS_UNREBALANCED = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard input) {
-                    return input.isUnRebalanced();
-                }
-            };
-            public static final Predicate<PaperCard> IS_REBALANCED = new Predicate<PaperCard>() {
-
-                @Override
-                public boolean apply(PaperCard input) {
-                    return input.isRebalanced();
-                }
-            };
+            public static final Predicate<PaperCard> IS_UNREBALANCED = PaperCard::isUnRebalanced;
+            public static final Predicate<PaperCard> IS_REBALANCED = PaperCard::isRebalanced;
         }
     }
 

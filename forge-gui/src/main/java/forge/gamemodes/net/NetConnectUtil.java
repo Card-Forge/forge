@@ -9,7 +9,6 @@ import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.event.NetEvent;
-import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.GuiBase;
@@ -17,7 +16,6 @@ import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.ILobbyListener;
-import forge.interfaces.IPlayerChangeListener;
 import forge.interfaces.IUpdateable;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -51,32 +49,29 @@ public class NetConnectUtil {
 
         lobby.setListener(new IUpdateable() {
             @Override
-            public final void update(final boolean fullUpdate) {
+            public void update(final boolean fullUpdate) {
                 view.update(fullUpdate);
                 server.updateLobbyState();
             }
             @Override
-            public final void update(final int slot, final LobbySlotType type) {return;}
+            public void update(final int slot, final LobbySlotType type) {return;}
         });
-        view.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override
-            public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                server.updateSlot(index, event);
-                server.updateLobbyState();
-            }
+        view.setPlayerChangeListener((index, event) -> {
+            server.updateSlot(index, event);
+            server.updateLobbyState();
         });
 
         server.setLobbyListener(new ILobbyListener() {
             @Override
-            public final void update(final GameLobbyData state, final int slot) {
+            public void update(final GameLobbyData state, final int slot) {
                 // NO-OP, lobby connected directly
             }
             @Override
-            public final void message(final String source, final String message) {
+            public void message(final String source, final String message) {
                 chatInterface.addMessage(new ChatMessage(source, message));
             }
             @Override
-            public final void close() {
+            public void close() {
                 // NO-OP, server can't receive close message
             }
             @Override
@@ -86,7 +81,7 @@ public class NetConnectUtil {
         });
         chatInterface.setGameClient(new IRemote() {
             @Override
-            public final void send(final NetEvent event) {
+            public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
                     chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
@@ -94,7 +89,7 @@ public class NetConnectUtil {
                 }
             }
             @Override
-            public final Object sendAndWait(final IdentifiableNetEvent event) {
+            public Object sendAndWait(final IdentifiableNetEvent event) {
                 send(event);
                 return null;
             }
@@ -136,16 +131,16 @@ public class NetConnectUtil {
         lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
             @Override
-            public final void message(final String source, final String message) {
+            public void message(final String source, final String message) {
                 chatInterface.addMessage(new ChatMessage(source, message));
             }
             @Override
-            public final void update(final GameLobbyData state, final int slot) {
+            public void update(final GameLobbyData state, final int slot) {
                 lobby.setLocalPlayer(slot);
                 lobby.setData(state);
             }
             @Override
-            public final void close() {
+            public void close() {
                 GuiBase.setInterrupted(true);
                 onlineLobby.closeConn(Localizer.getInstance().getMessage("lblYourConnectionToHostWasInterrupted", url));
             }
@@ -154,12 +149,7 @@ public class NetConnectUtil {
                 return lobby;
             }
         });
-        view.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override
-            public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                client.send(event);
-            }
-        });
+        view.setPlayerChangeListener((index, event) -> client.send(event));
 
         String hostname = url;
         int port = ForgeProfileProperties.getServerPort();

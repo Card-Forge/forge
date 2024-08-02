@@ -47,12 +47,9 @@ public class ViewItem extends FPanel {
         this.add(this.tarDesc, "w 60%!, gap 0 0 0 10px, wrap");
         this.add(this.lblPrice, "w 60%!, h 20px!, gap 0 0 0 5px");
 
-        this.btnPurchase.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                QuestUtil.buyQuestItem(getItem());
-                VBazaarUI.SINGLETON_INSTANCE.refreshLastInstance();
-            }
+        this.btnPurchase.setCommand((UiCommand) () -> {
+            QuestUtil.buyQuestItem(getItem());
+            VBazaarUI.SINGLETON_INSTANCE.refreshLastInstance();
         });
     }
 
@@ -71,33 +68,30 @@ public class ViewItem extends FPanel {
 
     /** Updates this panel with current item stats. */
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                final QuestAssets qA = FModel.getQuest().getAssets();
-                IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
+        SwingUtilities.invokeLater(() -> {
+            final QuestAssets qA = FModel.getQuest().getAssets();
+            IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
 
-                SkinImage i;
-                try {
-                    i = (SkinImage) bazaarItem.getIcon(qA);
-                } catch (final Exception e1) {
-                    // give up, icon unknown
-                    e1.printStackTrace();
-                    i = (SkinImage) GuiBase.getInterface().getSkinIcon(FSkinProp.ICO_UNKNOWN);
-                }
-
-                ViewItem.this.lblIcon.setIcon(i);
-
-                ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
-                ViewItem.this.lblPrice.setText("Cost: " + bazaarItem.getBuyingPrice(qA) + " credits");
-                String desc = bazaarItem.getPurchaseDescription(qA);
-                ViewItem.this.tarDesc.setText(FSkin.encodeSymbols(desc, false)); //encode in case there are mana symbols in description
-
-                ViewItem.this.btnPurchase.setEnabled(!(qA.getCredits() < bazaarItem.getBuyingPrice(qA)));
-
-                ViewItem.this.revalidate();
-                ViewItem.this.repaintSelf();
+            SkinImage i;
+            try {
+                i = (SkinImage) bazaarItem.getIcon(qA);
+            } catch (final Exception e1) {
+                // give up, icon unknown
+                e1.printStackTrace();
+                i = (SkinImage) GuiBase.getInterface().getSkinIcon(FSkinProp.ICO_UNKNOWN);
             }
+
+            ViewItem.this.lblIcon.setIcon(i);
+
+            ViewItem.this.lblName.setText(bazaarItem.getPurchaseName());
+            ViewItem.this.lblPrice.setText("Cost: " + bazaarItem.getBuyingPrice(qA) + " credits");
+            String desc = bazaarItem.getPurchaseDescription(qA);
+            ViewItem.this.tarDesc.setText(FSkin.encodeSymbols(desc, false)); //encode in case there are mana symbols in description
+
+            ViewItem.this.btnPurchase.setEnabled(!(qA.getCredits() < bazaarItem.getBuyingPrice(qA)));
+
+            ViewItem.this.revalidate();
+            ViewItem.this.repaintSelf();
         });
     }
 }

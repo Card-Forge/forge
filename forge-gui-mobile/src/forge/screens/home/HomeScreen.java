@@ -24,7 +24,6 @@ import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -71,99 +70,73 @@ public class HomeScreen extends FScreen {
     private HomeScreen() {
         super((Header)null);
 
-        addButton(Forge.getLocalizer().getMessage("lblNewGame"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 0;
-                Forge.lastButtonIndex = activeButtonIndex;
-                NewGameMenu.getPreferredScreen().open();
-            }
+        addButton(Forge.getLocalizer().getMessage("lblNewGame"), e -> {
+            activeButtonIndex = 0;
+            Forge.lastButtonIndex = activeButtonIndex;
+            NewGameMenu.getPreferredScreen().open();
         });
-        addButton(Forge.getLocalizer().getMessage("lblLoadGame"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 1;
-                Forge.lastButtonIndex = activeButtonIndex;
-                LoadGameMenu.getPreferredScreen().open();
-            }
+        addButton(Forge.getLocalizer().getMessage("lblLoadGame"), e -> {
+            activeButtonIndex = 1;
+            Forge.lastButtonIndex = activeButtonIndex;
+            LoadGameMenu.getPreferredScreen().open();
         });
-        addButton(Forge.getLocalizer().getMessage("lblPlayOnline"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 2;
-                Forge.lastButtonIndex = activeButtonIndex;
-                OnlineScreen.Lobby.open();
-            }
+        addButton(Forge.getLocalizer().getMessage("lblPlayOnline"), e -> {
+            activeButtonIndex = 2;
+            Forge.lastButtonIndex = activeButtonIndex;
+            OnlineScreen.Lobby.open();
         });
-        addButton(Forge.getLocalizer().getMessage("lblDeckManager"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 3;
-                Forge.lastButtonIndex = activeButtonIndex;
-                if (deckManager == null) {
-                    deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
-                        @Override
-                        protected float doLandscapeLayout(float width, float height) {
-                            //don't show header in landscape mode
-                            getHeader().setBounds(0, 0, 0, 0);
-                            doLayout(0, width, height);
-                            return 0;
-                        }
-                    };
-                    deckManager.setHeaderCaption(Forge.getLocalizer().getMessage("lblDeckManager"));
-                }
-                Forge.openScreen(deckManager);
-            }
-        });
-        addButton(Forge.getLocalizer().getMessage("lblAchievements"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 4;
-                Forge.lastButtonIndex = activeButtonIndex;
-                AchievementsScreen.show();
-            }
-        });
-        addButton(Forge.getLocalizer().getMessage("lblSettings"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = 5;
-                Forge.lastButtonIndex = activeButtonIndex;
-                SettingsScreen.show(true);
-            }
-        });
-        addButton(Forge.getLocalizer().getMessage("lblHelp"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FThreads.invokeInEdtLater(new Runnable() {
+        addButton(Forge.getLocalizer().getMessage("lblDeckManager"), e -> {
+            activeButtonIndex = 3;
+            Forge.lastButtonIndex = activeButtonIndex;
+            if (deckManager == null) {
+                deckManager = new FDeckChooser(GameType.DeckManager, false, null) {
                     @Override
-                    public void run() {
-                        try {
-                            if (Forge.getDeviceAdapter().isConnectedToInternet()) {
-                                FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, ImmutableList.of("Join Discord", "Forge Support"), -1, new Callback<Integer>() {
-                                    @Override
-                                    public void run(Integer result) {
-                                        switch (result) {
-                                            case 0:
-                                                Gdx.net.openURI("https://discord.gg/3v9JCVr");
-                                                break;
-                                            case 1:
-                                                Gdx.net.openURI("https://discord.com/channels/267367946135928833/692000787856883752");
-                                                break;
-                                            default:
-                                                break;
-                                        }
-                                    }
-                                });
-                            } else {
-                                FOptionPane.showErrorDialog("Internet Connection required to open Forge Discord server", "No Internet");
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    protected float doLandscapeLayout(float width, float height) {
+                        //don't show header in landscape mode
+                        getHeader().setBounds(0, 0, 0, 0);
+                        doLayout(0, width, height);
+                        return 0;
                     }
-                });
+                };
+                deckManager.setHeaderCaption(Forge.getLocalizer().getMessage("lblDeckManager"));
             }
+            Forge.openScreen(deckManager);
         });
+        addButton(Forge.getLocalizer().getMessage("lblAchievements"), e -> {
+            activeButtonIndex = 4;
+            Forge.lastButtonIndex = activeButtonIndex;
+            AchievementsScreen.show();
+        });
+        addButton(Forge.getLocalizer().getMessage("lblSettings"), e -> {
+            activeButtonIndex = 5;
+            Forge.lastButtonIndex = activeButtonIndex;
+            SettingsScreen.show(true);
+        });
+        addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
+            try {
+                if (Forge.getDeviceAdapter().isConnectedToInternet()) {
+                    FOptionPane.showOptionDialog("Join Discord option will open the invite link to join Forge Discord server. Forge Support option will open the Forge Support Channel.", "Choose option", FOptionPane.INFORMATION_ICON, ImmutableList.of("Join Discord", "Forge Support"), -1, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            switch (result) {
+                                case 0:
+                                    Gdx.net.openURI("https://discord.gg/3v9JCVr");
+                                    break;
+                                case 1:
+                                    Gdx.net.openURI("https://discord.com/channels/267367946135928833/692000787856883752");
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+                } else {
+                    FOptionPane.showErrorDialog("Internet Connection required to open Forge Discord server", "No Internet");
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }));
         baseButtonCount = buttons.size();
     }
 
@@ -209,13 +182,10 @@ public class HomeScreen extends FScreen {
         for (int i = baseButtonCount; i < buttons.size(); i++) {
             if (buttons.get(i).getText().equals(caption)) {
                 final int index = i;
-                buttons.get(i).setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        activeButtonIndex = index;
-                        Forge.lastButtonIndex = activeButtonIndex;
-                        command.handleEvent(e);
-                    }
+                buttons.get(i).setCommand(e -> {
+                    activeButtonIndex = index;
+                    Forge.lastButtonIndex = activeButtonIndex;
+                    command.handleEvent(e);
                 });
                 activeButtonIndex = i;
                 return;
@@ -223,13 +193,10 @@ public class HomeScreen extends FScreen {
         }
         final int index = buttons.size();
         activeButtonIndex = index;
-        addButton(caption, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activeButtonIndex = index;
-                Forge.lastButtonIndex = activeButtonIndex;
-                command.handleEvent(e);
-            }
+        addButton(caption, e -> {
+            activeButtonIndex = index;
+            Forge.lastButtonIndex = activeButtonIndex;
+            command.handleEvent(e);
         });
         revalidate();
         buttonScroller.scrollIntoView(buttons.get(index));

@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Creature Crocodile
 PT:5/4
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
-Oracle:Haste\nWhen Crocodile of the Crossing enters the battlefield, put a -1/-1 counter on target creature you control.
+Oracle:Haste\nWhen Crocodile of the Crossing enters, put a -1/-1 counter on target creature you control.

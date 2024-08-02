@@ -1,7 +1,7 @@
 Name:Cloudstone Curio
 ManaCost:3
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Permanent.YouCtrl+nonArtifact | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a permanent type with it to its owner's hand.
+T:Mode$ ChangesZone | ValidCard$ Permanent.YouCtrl+nonArtifact | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ Whenever a nonartifact permanent you control enters, you may return another permanent you control that shares a permanent type with it to its owner's hand.
 SVar:TrigBounce:DB$ ChangeZone | DefinedPlayer$ TriggeredCardController | ChangeType$ Triggered.Other+sharesPermanentTypeWith | ChangeNum$ 1 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Optional$ You
 AI:RemoveDeck:Random
-Oracle:Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a permanent type with it to its owner's hand.
+Oracle:Whenever a nonartifact permanent you control enters, you may return another permanent you control that shares a permanent type with it to its owner's hand.

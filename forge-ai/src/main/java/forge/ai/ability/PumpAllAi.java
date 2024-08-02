@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
@@ -85,23 +84,17 @@ public class PumpAllAi extends PumpAiBase {
 
         if (sa.isCurse()) {
             if (defense < 0) { // try to destroy creatures
-                comp = CardLists.filter(comp, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (c.getNetToughness() <= -defense) {
-                            return true; // can kill indestructible creatures
-                        }
-                        return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
+                comp = CardLists.filter(comp, c -> {
+                    if (c.getNetToughness() <= -defense) {
+                        return true; // can kill indestructible creatures
                     }
+                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
                 }); // leaves all creatures that will be destroyed
-                human = CardLists.filter(human, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (c.getNetToughness() <= -defense) {
-                            return true; // can kill indestructible creatures
-                        }
-                        return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
+                human = CardLists.filter(human, c -> {
+                    if (c.getNetToughness() <= -defense) {
+                        return true; // can kill indestructible creatures
                     }
+                    return ComputerUtilCombat.getDamageToKill(c, false) <= -defense && !c.hasKeyword(Keyword.INDESTRUCTIBLE);
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end
             else if (power < 0) { // -X/-0

@@ -1,8 +1,6 @@
 package forge.screens.home.quest;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -50,70 +48,50 @@ public enum CSubmenuChallenges implements ICDoc {
     public void initialize() {
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
 
-        view.getBtnSpellShop().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.showSpellShop(); } });
+        view.getBtnSpellShop().setCommand((UiCommand) QuestUtil::showSpellShop);
 
-        view.getBtnBazaar().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.showBazaar(); } });
+        view.getBtnBazaar().setCommand((UiCommand) QuestUtil::showBazaar);
 
         view.getBtnUnlock().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); } });
+                (UiCommand) () -> { QuestUtil.chooseAndUnlockEdition(); CSubmenuChallenges.this.update(); });
 
         view.getBtnTravel().setCommand(
-                new UiCommand() { @Override
-                    public void run() { QuestUtil.travelWorld(); CSubmenuChallenges.this.update(); } });
+                (UiCommand) () -> { QuestUtil.travelWorld(); CSubmenuChallenges.this.update(); });
 
-        view.getBtnStart().addActionListener(
-                new ActionListener() { @Override
-                    public void actionPerformed(final ActionEvent e) { QuestUtil.startGame(); } });
+        view.getBtnStart().addActionListener(e -> QuestUtil.startGame());
 
         view.getLblZep().setCommand(
-                new UiCommand() {
-                    @Override
-                    public void run() {
-                        final Localizer localizer = Localizer.getInstance();
-                        if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblLaunchaZeppelin"))) {
-                            return;
-                        }
-                        FModel.getQuest().getAchievements().setCurrentChallenges(null);
-                        FModel.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
-                        update();
+                (UiCommand) () -> {
+                    final Localizer localizer = Localizer.getInstance();
+                    if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblLaunchaZeppelin"))) {
+                        return;
                     }
+                    FModel.getQuest().getAchievements().setCurrentChallenges(null);
+                    FModel.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
+                    update();
                 });
 
         final QuestController quest = FModel.getQuest();
-        view.getCbPlant().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                // This can't be translated. As the English string "Plant" is used to find the Plant pet.
-                quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
-                quest.save();
-            }
+        view.getCbPlant().addActionListener(arg0 -> {
+            // This can't be translated. As the English string "Plant" is used to find the Plant pet.
+            quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
+            quest.save();
         });
 
-        view.getCbxPet().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                final int slot = 1;
-                final int index = view.getCbxPet().getSelectedIndex();
-                final List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
-                final String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
-                quest.selectPet(slot, petName);
-                quest.save();
-            }
+        view.getCbxPet().addActionListener(arg0 -> {
+            final int slot = 1;
+            final int index = view.getCbxPet().getSelectedIndex();
+            final List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
+            final String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
+            quest.selectPet(slot, petName);
+            quest.save();
         });
 
-        view.getCbxMatchLength().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                String match = view.getCbxMatchLength().getSelectedItem();
-                if (match != null) {
-                    quest.setMatchLength(match.substring(match.length() - 1));
-                    quest.save();
-                }
+        view.getCbxMatchLength().addActionListener(arg0 -> {
+            String match = view.getCbxMatchLength().getSelectedItem();
+            if (match != null) {
+                quest.setMatchLength(match.substring(match.length() - 1));
+                quest.save();
             }
         });
     }
@@ -170,9 +148,7 @@ public enum CSubmenuChallenges implements ICDoc {
             final JRadioButton rad = temp.getRad();
             if (haveAnyChallenges) {
                 rad.setSelected(true);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { rad.requestFocusInWindow(); }
-                });
+                SwingUtilities.invokeLater(rad::requestFocusInWindow);
                 haveAnyChallenges = false;
             }
             rad.addKeyListener(_startOnEnter);
@@ -190,9 +166,7 @@ public enum CSubmenuChallenges implements ICDoc {
             lbl.setBorder(new EmptyBorder(10, 10, 10, 10));
             lbl.setOpaque(true);
             view.getPnlChallenges().add(lbl, "w 50%!, h 30px!, gap 25% 0 50px 0");
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override public void run() { view.getBtnTravel().requestFocusInWindow(); }
-            });
+            SwingUtilities.invokeLater(() -> view.getBtnTravel().requestFocusInWindow());
         }
 
         Singletons.getView().getFrame().validate();

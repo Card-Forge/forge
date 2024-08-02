@@ -41,12 +41,7 @@ public class PlayerZone extends Zone {
 
     // the this is not the owner of the card
     private static Predicate<Card> alienCardsActivationFilter(final Player who) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.mayPlay(who).isEmpty() || c.mayPlayerLook(who);
-            }
-        };
+        return c -> !c.mayPlay(who).isEmpty() || c.mayPlayerLook(who);
     }
 
     private final class OwnCardsActivationFilter implements Predicate<Card> {

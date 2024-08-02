@@ -12,19 +12,14 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(final ConquestCommander commander) {
         super(EditorType.PlanarConquest, new DeckProxy(commander.getDeck(), Forge.getLocalizer().getMessage("lblConquestCommander"),
                 GameType.PlanarConquest, FModel.getConquest().getDecks()), true);
 
-        setSaveHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                commander.reloadDeck(); //ensure commander receives deck changes
-            }
+        setSaveHandler(e -> {
+            commander.reloadDeck(); //ensure commander receives deck changes
         });
     }
 

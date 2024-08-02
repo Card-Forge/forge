@@ -20,7 +20,6 @@ package forge.gamemodes.quest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -465,7 +464,8 @@ public class QuestEventDraft implements IQuestEvent {
     }
 
     private BoosterPack getBoosterPack() {
-        return BoosterPack.FN_FROM_SET.apply(getRandomEdition());
+        CardEdition edition = getRandomEdition();
+        return BoosterPack.fromSet(edition);
     }
 
     private PaperCard getPromoCard() {
@@ -1001,16 +1001,13 @@ public class QuestEventDraft implements IQuestEvent {
         }
 
         final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
-        Collections.sort(allowedSets, new Comparator<CardEdition>() {
-            @Override
-            public int compare(final CardEdition edition1, final CardEdition edition2) {
-                if (edition1.getDate().before(edition2.getDate())) {
-                    return oldSetsFirst ? -1 : 1;
-                } else if (edition1.getDate().after(edition2.getDate())) {
-                    return oldSetsFirst ? 1 : -1;
-                }
-                return 0;
+        Collections.sort(allowedSets, (edition1, edition2) -> {
+            if (edition1.getDate().before(edition2.getDate())) {
+                return oldSetsFirst ? -1 : 1;
+            } else if (edition1.getDate().after(edition2.getDate())) {
+                return oldSetsFirst ? 1 : -1;
             }
+            return 0;
         });
 
         boolean largeSetFound = false;

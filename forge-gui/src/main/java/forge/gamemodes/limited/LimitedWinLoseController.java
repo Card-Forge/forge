@@ -39,30 +39,27 @@ public abstract class LimitedWinLoseController {
 
         view.getBtnRestart().setText(localizer.getMessage("btnRestartRound"));
 
-        showOutcome(new Runnable() {
-            @Override
-            public void run() {
-                if (!lastGame.isMatchOver()) {
-                    showTournamentInfo(localizer.getMessage("btnTournamentInfo"));
-                    return;
-                }
+        showOutcome(() -> {
+            if (!lastGame.isMatchOver()) {
+                showTournamentInfo(localizer.getMessage("btnTournamentInfo"));
+                return;
+            }
 
-                if (wonMatch) {
-                    if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                        view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (gauntlet.getCurrentRound() + 1)
-                                + "/" + gauntlet.getRounds() + ")");
-                        nextRound = true;
-                        view.getBtnContinue().setEnabled(true);
-                        showTournamentInfo(localizer.getMessage("btnWonRound") + gauntlet.getCurrentRound() + "/"
-                                + gauntlet.getRounds());
-                    } else {
-                        showTournamentInfo(localizer.getMessage("btnWonTournament"));
-                    }
-                } else {
-                    view.getBtnContinue().setVisible(false);
-                    showTournamentInfo(localizer.getMessage("btnLoseRound") + gauntlet.getCurrentRound() + "/"
+            if (wonMatch) {
+                if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
+                    view.getBtnContinue().setText(localizer.getMessage("btnNextRound") + " (" + (gauntlet.getCurrentRound() + 1)
+                            + "/" + gauntlet.getRounds() + ")");
+                    nextRound = true;
+                    view.getBtnContinue().setEnabled(true);
+                    showTournamentInfo(localizer.getMessage("btnWonRound") + gauntlet.getCurrentRound() + "/"
                             + gauntlet.getRounds());
+                } else {
+                    showTournamentInfo(localizer.getMessage("btnWonTournament"));
                 }
+            } else {
+                view.getBtnContinue().setVisible(false);
+                showTournamentInfo(localizer.getMessage("btnLoseRound") + gauntlet.getCurrentRound() + "/"
+                        + gauntlet.getRounds());
             }
         });
     }

@@ -11,8 +11,6 @@ import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FTextField;
 
 
@@ -52,12 +50,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         txtSearch = new SearchField();
         widget.add(txtSearch);
 
-        txtSearch.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                applyChange();
-            }
-        });
+        txtSearch.setChangedHandler(e -> applyChange());
     }
 
     @Override

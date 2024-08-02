@@ -260,7 +260,7 @@ public class ManaCostBeingPaid {
     public final void increaseShard(final ManaCostShard shard, final int toAdd) {
         increaseShard(shard, toAdd, false);
     }
-    private final void increaseShard(final ManaCostShard shard, final int toAdd, final boolean forX) {
+    private void increaseShard(final ManaCostShard shard, final int toAdd, final boolean forX) {
         if (toAdd <= 0) { return; }
 
         ShardCount sc = unpaidShards.get(shard);
@@ -460,15 +460,12 @@ public class ManaCostBeingPaid {
             //throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
-        Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
-            @Override
-            public boolean apply(ManaCostShard ms) {
-                // Check Colored X and see if the color is already used
-                if (ms == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(colorMask), xManaCostPaidByColor)) {
-                    return false;
-                }
-                return pool.canPayForShardWithColor(ms, colorMask);
+        Predicate<ManaCostShard> predCanBePaid = ms -> {
+            // Check Colored X and see if the color is already used
+            if (ms == ManaCostShard.COLORED_X && !canColoredXShardBePaidByColor(MagicColor.toShortString(colorMask), xManaCostPaidByColor)) {
+                return false;
             }
+            return pool.canPayForShardWithColor(ms, colorMask);
         };
 
         return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
@@ -488,12 +485,7 @@ public class ManaCostBeingPaid {
             throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
 
-        Predicate<ManaCostShard> predCanBePaid = new Predicate<ManaCostShard>() {
-            @Override
-            public boolean apply(ManaCostShard ms) {
-                return canBePaidWith(ms, mana, pool, xManaCostPaidByColor);
-            }
-        };
+        Predicate<ManaCostShard> predCanBePaid = ms -> canBePaidWith(ms, mana, pool, xManaCostPaidByColor);
 
         byte inColor = mana.getColor();
         byte outColor = pool.getPossibleColorUses(inColor);

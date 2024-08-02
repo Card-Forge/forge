@@ -128,17 +128,9 @@ public class DraftingProcessScreen extends FDeckEditor {
         }
 
         if (getEditorType() == EditorType.QuestDraft) {
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (questDraftController.cancelDraft()) {
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                canCloseCallback.run(true);
-                            }
-                        });
-                    }
+            FThreads.invokeInBackgroundThread(() -> {
+                if (questDraftController.cancelDraft()) {
+                    FThreads.invokeInEdtLater(() -> canCloseCallback.run(true));
                 }
             });
             return;

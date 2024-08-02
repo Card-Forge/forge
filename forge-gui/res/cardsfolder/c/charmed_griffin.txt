@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Creature Griffin
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from their hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, each other player may put an artifact or enchantment card onto the battlefield from their hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Enchantment | DefinedPlayer$ Player.Other | ChangeNum$ 1
-Oracle:Flying\nWhen Charmed Griffin enters the battlefield, each other player may put an artifact or enchantment card onto the battlefield from their hand.
+Oracle:Flying\nWhen Charmed Griffin enters, each other player may put an artifact or enchantment card onto the battlefield from their hand.

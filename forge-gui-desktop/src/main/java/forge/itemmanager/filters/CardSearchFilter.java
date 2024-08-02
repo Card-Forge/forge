@@ -1,8 +1,5 @@
 package forge.itemmanager.filters;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JPanel;
 
 import com.google.common.base.Predicate;
@@ -57,12 +54,9 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
         cbSearchMode.addItem("in");
         cbSearchMode.addItem("not in");
         cbSearchMode.addTo(widget);
-        cbSearchMode.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent arg0) {
-                if (!txtSearch.isEmpty()) {
-                    applyChange();
-                }
+        cbSearchMode.addItemListener(arg0 -> {
+            if (!txtSearch.isEmpty()) {
+                applyChange();
             }
         });
 
@@ -92,12 +86,7 @@ public class CardSearchFilter extends TextSearchFilter<PaperCard> {
     private FLabel addButton(JPanel widget, String text) {
         FLabel button = new FLabel.Builder().text(text).hoverable().selectable().selected().build();
 
-        button.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                applyChange();
-            }
-        });
+        button.setCommand((UiCommand) this::applyChange);
 
         widget.add(button);
         return button;

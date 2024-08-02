@@ -10,8 +10,6 @@ import forge.assets.FSkinFont;
 import forge.gui.error.BugReporter;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
@@ -41,32 +39,14 @@ public class BugReportDialog extends FScreen { //use screen rather than dialog s
         super(title);
         lblHeader.setFont(FSkinFont.get(12));
         tvDetails = add(new TemplateView(text0));
-        btnReport.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                BugReporter.sendSentry();
-                Forge.back();
-            }
+        btnReport.setCommand(e -> {
+            BugReporter.sendSentry();
+            Forge.back();
         });
-        btnSave.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                BugReporter.saveToFile(tvDetails.text);
-            }
-        });
-        btnDiscard.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.back();
-            }
-        });
+        btnSave.setCommand(e -> BugReporter.saveToFile(tvDetails.text));
+        btnDiscard.setCommand(e -> Forge.back());
         if (showExitAppBtn) {
-            btnExit.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    Forge.exit(true);
-                }
-            });
+            btnExit.setCommand(e -> Forge.exit(true));
         }
         else {
             btnExit.setVisible(false);

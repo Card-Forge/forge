@@ -609,9 +609,7 @@ public enum VSubmenuQuestDraft implements IVSubmenu<CSubmenuQuestDraft>, IQuestT
 
             if (firstPanel) {
                 button.setSelected(true);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() { button.requestFocusInWindow(); }
-                });
+                SwingUtilities.invokeLater(button::requestFocusInWindow);
                 firstPanel = false;
             }
 

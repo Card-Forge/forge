@@ -2,7 +2,6 @@ package forge.menus;
 
 import java.awt.Cursor;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -98,12 +97,10 @@ public final class LayoutMenu {
         return menu;
     }
 
-    private static final ActionListener changeSkin = new ActionListener() {
-        @Override public void actionPerformed(final ActionEvent e) {
-            MouseUtil.setCursor(Cursor.WAIT_CURSOR);
-            FSkin.changeSkin(e.getActionCommand());
-            MouseUtil.resetCursor();
-        }
+    private static final ActionListener changeSkin = e -> {
+        MouseUtil.setCursor(Cursor.WAIT_CURSOR);
+        FSkin.changeSkin(e.getActionCommand());
+        MouseUtil.resetCursor();
     };
 
     private static JMenuItem getMenuItem_ShowBackgroundImage() {
@@ -115,24 +112,22 @@ public final class LayoutMenu {
     }
 
     private static ActionListener getShowBackgroundImageAction(final JCheckBoxMenuItem menuItem) {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                final boolean isVisible = menuItem.getState();
-                prefs.setPref(FPref.UI_MATCH_IMAGE_VISIBLE, isVisible);
-                if (isVisible) {
-                    if (FControl.instance.getCurrentScreen().getDaytime() == null)
-                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
-                    else {
-                        if ("Day".equals(FControl.instance.getCurrentScreen().getDaytime()))
-                            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
-                        else
-                            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
-                    }
-                } else {
-                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+        return e -> {
+            final boolean isVisible = menuItem.getState();
+            prefs.setPref(FPref.UI_MATCH_IMAGE_VISIBLE, isVisible);
+            if (isVisible) {
+                if (FControl.instance.getCurrentScreen().getDaytime() == null)
+                    FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
+                else {
+                    if ("Day".equals(FControl.instance.getCurrentScreen().getDaytime()))
+                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_DAY), true);
+                    else
+                        FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
                 }
-                FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
+            } else {
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
             }
+            FView.SINGLETON_INSTANCE.getPnlInsets().repaint();
         };
     }
 
@@ -145,13 +140,11 @@ public final class LayoutMenu {
         return menuItem;
     }
     private static ActionListener getShowTabsAction(final JCheckBoxMenuItem menuItem) {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                final boolean showTabs = menuItem.getState();
-                FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
-                prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
-                prefs.save();
-            }
+        return e -> {
+            final boolean showTabs = menuItem.getState();
+            FView.SINGLETON_INSTANCE.refreshAllCellLayouts(showTabs);
+            prefs.setPref(FPref.UI_HIDE_GAME_TABS, !showTabs);
+            prefs.save();
         };
     }
 
@@ -164,11 +157,7 @@ public final class LayoutMenu {
     }
 
     private static ActionListener getSaveLayoutAction() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                SLayoutIO.saveLayout();
-            }
-        };
+        return e -> SLayoutIO.saveLayout();
     }
 
     private JMenuItem getMenuItem_OpenLayout() {
@@ -180,11 +169,7 @@ public final class LayoutMenu {
     }
 
     private static ActionListener getOpenLayoutAction() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                SLayoutIO.openLayout();
-            }
-        };
+        return e -> SLayoutIO.openLayout();
     }
 
     private JMenuItem getMenuItem_RevertLayout() {
@@ -196,11 +181,7 @@ public final class LayoutMenu {
     }
 
     private static ActionListener getRevertLayoutAction() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                SLayoutIO.revertLayout();
-            }
-        };
+        return e -> SLayoutIO.revertLayout();
     }
 
     private static JMenuItem getMenuItem_SetWindowSize() {
@@ -211,15 +192,13 @@ public final class LayoutMenu {
     }
 
     private static ActionListener getSetWindowSizeAction() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                final String[] options = {"800x600", "1024x768", "1280x720", "1600x900", "1920x1080", "2560x1440", "3840x2160"};
-                final Localizer localizer = Localizer.getInstance();
-                final String choice = GuiChoose.oneOrNone(localizer.getMessage("lblChooseNewWindowSize"), options);
-                if (choice != null) {
-                    final String[] dims = choice.split("x");
-                    Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
-                }
+        return e -> {
+            final String[] options = {"800x600", "1024x768", "1280x720", "1600x900", "1920x1080", "2560x1440", "3840x2160"};
+            final Localizer localizer = Localizer.getInstance();
+            final String choice = GuiChoose.oneOrNone(localizer.getMessage("lblChooseNewWindowSize"), options);
+            if (choice != null) {
+                final String[] dims = choice.split("x");
+                Singletons.getView().getFrame().setSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
             }
         };
     }
@@ -238,11 +217,9 @@ public final class LayoutMenu {
         return fullScreenItem;
     }
     private static ActionListener getFullScreenAction() {
-        return new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                final FFrame frame = Singletons.getView().getFrame();
-                frame.setFullScreen(!frame.isFullScreen());
-            }
+        return e -> {
+            final FFrame frame = Singletons.getView().getFrame();
+            frame.setFullScreen(!frame.isFullScreen());
         };
     }
 }

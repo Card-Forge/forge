@@ -20,8 +20,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -91,24 +89,16 @@ public final class EncodeAi extends SpellAbilityAi {
         Card choice = null;
         // final String logic = sa.getParam("AILogic");
         // if (logic == null) {
-        final List<Card> attackers = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return ComputerUtilCombat.canAttackNextTurn(c);
-            }
-        });
-        final List<Card> unblockables = CardLists.filter(attackers, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                boolean canAttackOpponent = false;
-                for (Player opp : ai.getOpponents()) {
-                    if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, null, opp)) {
-                        canAttackOpponent = true;
-                        break;
-                    }
+        final List<Card> attackers = CardLists.filter(list, ComputerUtilCombat::canAttackNextTurn);
+        final List<Card> unblockables = CardLists.filter(attackers, c -> {
+            boolean canAttackOpponent = false;
+            for (Player opp : ai.getOpponents()) {
+                if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, null, opp)) {
+                    canAttackOpponent = true;
+                    break;
                 }
-                return canAttackOpponent;
             }
+            return canAttackOpponent;
         });
         if (!unblockables.isEmpty()) {
             choice = ComputerUtilCard.getBestAI(unblockables);

@@ -18,7 +18,6 @@
 package forge.gui;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,7 +44,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -153,18 +151,16 @@ public class ImportDialog {
         final JFileChooser _fileChooser = new JFileChooser();
         _fileChooser.setMultiSelectionEnabled(false);
         _fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        _btnChooseDir.setCommand(new UiCommand() {
-            @Override public void run() {
-                // bring up a file open dialog and, if the OK button is selected, apply the filename
-                // to the import source text field
-                if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
-                    final File f = _fileChooser.getSelectedFile();
-                    if (!f.canRead()) {
-                        FOptionPane.showErrorDialog("Cannot access selected directory (Permission denied).");
-                    }
-                    else {
-                        _txfSrc.setText(f.getAbsolutePath());
-                    }
+        _btnChooseDir.setCommand((UiCommand) () -> {
+            // bring up a file open dialog and, if the OK button is selected, apply the filename
+            // to the import source text field
+            if (JFileChooser.APPROVE_OPTION == _fileChooser.showOpenDialog(JOptionPane.getRootFrame())) {
+                final File f = _fileChooser.getSelectedFile();
+                if (!f.canRead()) {
+                    FOptionPane.showErrorDialog("Cannot access selected directory (Permission denied).");
+                }
+                else {
+                    _txfSrc.setText(f.getAbsolutePath());
                 }
             }
         });
@@ -250,19 +246,15 @@ public class ImportDialog {
         _topPanel.add(_selectionPanel, "growx, growy, gaptop 10");
 
         // action button widgets
-        final Runnable cleanup = new Runnable() {
-            @Override public void run() { SOverlayUtils.hideOverlay(); }
-        };
+        final Runnable cleanup = SOverlayUtils::hideOverlay;
         _btnStart = new FButton("Start import");
         _btnStart.setEnabled(false);
         _btnCancel = new FButton("Cancel");
-        _btnCancel.addActionListener(new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                _cancel = true;
-                cleanup.run();
-                if (null != onDialogClose) {
-                    onDialogClose.run();
-                }
+        _btnCancel.addActionListener(e -> {
+            _cancel = true;
+            cleanup.run();
+            if (null != onDialogClose) {
+                onDialogClose.run();
             }
         });
 
@@ -280,9 +272,7 @@ public class ImportDialog {
         SOverlayUtils.showOverlay();
 
         // focus cancel button after the dialog is shown
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { _btnCancel.requestFocusInWindow(); }
-        });
+        SwingUtilities.invokeLater(_btnCancel::requestFocusInWindow);
 
         // if our source dir is provided, set the text, which will fire off an analyzer
         if (isMigration) {
@@ -314,11 +304,7 @@ public class ImportDialog {
                 new HashMap<>();
 
         // attached to all changeable widgets to keep the UI in sync
-        private final ChangeListener _stateChangedListener = new ChangeListener() {
-            @Override public void stateChanged(final ChangeEvent arg0) {
-                _updateUI();
-            }
-        };
+        private final ChangeListener _stateChangedListener = arg0 -> _updateUI();
 
         private final String       _srcDir;
         private final Runnable     _onAnalyzerDone;
@@ -363,11 +349,7 @@ public class ImportDialog {
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Planar",      ForgeConstants.DECK_PLANE_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Scheme",      ForgeConstants.DECK_SCHEME_DIR));
             _unknownDeckCombo.addItem(new _UnknownDeckChoice("Sealed",      ForgeConstants.DECK_SEALED_DIR));
-            _unknownDeckCombo.addActionListener(new ActionListener() {
-                @Override public void actionPerformed(final ActionEvent arg0) {
-                    _updateUI();
-                }
-            });
+            _unknownDeckCombo.addActionListener(arg0 -> _updateUI());
             _unknownDeckLabel = new FLabel.Builder().text("Treat unknown decks as:").build();
             unknownDeckPanel.add(_unknownDeckLabel);
             _unknownDeckCombo.addTo(unknownDeckPanel);
@@ -515,35 +497,31 @@ public class ImportDialog {
                 timer = new Timer(500, null);
                 timer.setInitialDelay(100);
                 final Timer finalTimer = timer;
-                timer.addActionListener(new ActionListener() {
-                    @Override public void actionPerformed(final ActionEvent arg0) {
-                        if (_cancel) {
-                            finalTimer.stop();
-                            return;
-                        }
-
-                        // timers run in the gui event loop, so it's ok to interact with widgets
-                        _progressBar.setValue(msa.getNumFilesAnalyzed());
-                        _updateUI();
-
-                        // allow the the panel to resize to accommodate additional text
-                        _selectionPanel.getParent().validate();
-                        _selectionPanel.getParent().invalidate();
+                timer.addActionListener(arg0 -> {
+                    if (_cancel) {
+                        finalTimer.stop();
+                        return;
                     }
+
+                    // timers run in the gui event loop, so it's ok to interact with widgets
+                    _progressBar.setValue(msa.getNumFilesAnalyzed());
+                    _updateUI();
+
+                    // allow the the panel to resize to accommodate additional text
+                    _selectionPanel.getParent().validate();
+                    _selectionPanel.getParent().invalidate();
                 });
 
                 // update the progress bar widget from the GUI event loop
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() {
-                        if (_cancel) { return; }
-                        _progressBar.setString("Analyzing...");
-                        _progressBar.setMaximum(numFilesToAnalyze);
-                        _progressBar.setValue(0);
-                        _progressBar.setIndeterminate(false);
+                SwingUtilities.invokeLater(() -> {
+                    if (_cancel) { return; }
+                    _progressBar.setString("Analyzing...");
+                    _progressBar.setMaximum(numFilesToAnalyze);
+                    _progressBar.setValue(0);
+                    _progressBar.setIndeterminate(false);
 
-                        // start update timer
-                        finalTimer.start();
-                    }
+                    // start update timer
+                    finalTimer.start();
                 });
 
                 // does not return until analysis is complete or has been canceled
@@ -551,11 +529,9 @@ public class ImportDialog {
             } catch (final Exception e) {
                 _cancel = true;
 
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() {
-                        _progressBar.setString("Error");
-                        BugReporter.reportException(e);
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    _progressBar.setString("Error");
+                    BugReporter.reportException(e);
                 });
             } finally {
                 // ensure the UI update timer is stopped after analysis is complete
@@ -599,82 +575,80 @@ public class ImportDialog {
                 }
 
                 // set up the start button to start the prepared import on click
-                _btnStart.addActionListener(new ActionListener() {
-                    @Override public void actionPerformed(final ActionEvent arg0) {
-                        // if this is a migration, warn if active settings will not complete a migration and give the
-                        // user an option to fix
-                        if (_isMigration) {
-                            // assemble a list of selections that need to be selected to complete a full migration
-                            final List<String> unselectedButShouldBe = new ArrayList<>();
-                            for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
-                                if (OpType.POSSIBLE_SET_CARD_PIC == entry.getKey()) {
-                                    continue;
-                                }
-
-                                // add name to list if checkbox is unselected, but contains operations
-                                final Pair<FCheckBox, ? extends Map<File, File>> p = entry.getValue();
-                                final FCheckBox cb = p.getLeft();
-                                if (!cb.isSelected() && 0 < p.getRight().size()) {
-                                    unselectedButShouldBe.add(cb.getName());
-                                }
+                _btnStart.addActionListener(arg0 -> {
+                    // if this is a migration, warn if active settings will not complete a migration and give the
+                    // user an option to fix
+                    if (_isMigration) {
+                        // assemble a list of selections that need to be selected to complete a full migration
+                        final List<String> unselectedButShouldBe = new ArrayList<>();
+                        for (final Map.Entry<OpType, Pair<FCheckBox, ? extends Map<File, File>>> entry : _selections.entrySet()) {
+                            if (OpType.POSSIBLE_SET_CARD_PIC == entry.getKey()) {
+                                continue;
                             }
 
-                            if (!unselectedButShouldBe.isEmpty() || !_moveCheckbox.isSelected()) {
-                                final StringBuilder sb = new StringBuilder("<html>");
-                                if (!unselectedButShouldBe.isEmpty()) {
-                                    sb.append("It looks like the following options are not selected, which will result in an incomplete migration:");
-                                    sb.append("<ul>");
-                                    for (final String cbName : unselectedButShouldBe) {
-                                        sb.append("<li><b>").append(cbName).append("</b></li>");
-                                    }
-                                    sb.append("</ul>");
-                                }
-
-                                if (!_moveCheckbox.isSelected()) {
-                                    sb.append(unselectedButShouldBe.isEmpty() ? "It " : "It also ").append("looks like the <b>");
-                                    sb.append(_moveCheckbox.getText()).append("</b> option is not selected.<br><br>");
-                                }
-
-                                sb.append("You can continue anyway, but the migration will be incomplete, and the data migration prompt<br>");
-                                sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
-                                sb.append("unless you move or delete them manually.</html>");
-
-                                final int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, fixOrContinue);
-
-                                if (chosen != 1) {
-                                    // i.e. option 0 was chosen or the dialog was otherwise closed
-                                    return;
-                                }
+                            // add name to list if checkbox is unselected, but contains operations
+                            final Pair<FCheckBox, ? extends Map<File, File>> p = entry.getValue();
+                            final FCheckBox cb = p.getLeft();
+                            if (!cb.isSelected() && 0 < p.getRight().size()) {
+                                unselectedButShouldBe.add(cb.getName());
                             }
                         }
 
-                        // ensure no other actions (except for cancel) can be taken while the import is in progress
-                        _btnStart.setEnabled(false);
-                        _btnChooseDir.setEnabled(false);
+                        if (!unselectedButShouldBe.isEmpty() || !_moveCheckbox.isSelected()) {
+                            final StringBuilder sb = new StringBuilder("<html>");
+                            if (!unselectedButShouldBe.isEmpty()) {
+                                sb.append("It looks like the following options are not selected, which will result in an incomplete migration:");
+                                sb.append("<ul>");
+                                for (final String cbName : unselectedButShouldBe) {
+                                    sb.append("<li><b>").append(cbName).append("</b></li>");
+                                }
+                                sb.append("</ul>");
+                            }
 
-                        for (final Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
-                            selection.getLeft().setEnabled(false);
+                            if (!_moveCheckbox.isSelected()) {
+                                sb.append(unselectedButShouldBe.isEmpty() ? "It " : "It also ").append("looks like the <b>");
+                                sb.append(_moveCheckbox.getText()).append("</b> option is not selected.<br><br>");
+                            }
+
+                            sb.append("You can continue anyway, but the migration will be incomplete, and the data migration prompt<br>");
+                            sb.append("will come up again the next time you start Forge in order to migrate the remaining files<br>");
+                            sb.append("unless you move or delete them manually.</html>");
+
+                            final int chosen = FOptionPane.showOptionDialog(sb.toString(), "Migration warning", FOptionPane.WARNING_ICON, fixOrContinue);
+
+                            if (chosen != 1) {
+                                // i.e. option 0 was chosen or the dialog was otherwise closed
+                                return;
+                            }
                         }
-                        _unknownDeckCombo.setEnabled(false);
-                        _moveCheckbox.setEnabled(false);
-                        _overwriteCheckbox.setEnabled(false);
-
-                        // stop updating the operation log -- the importer needs it now
-                        _operationLogUpdater.requestStop();
-
-                        // jump to the bottom of the log text area so it starts autoscrolling again
-                        // note that since it is controlled by a SmartScroller, just setting the caret position will not work
-                        final JScrollBar scrollBar = _operationLogScroller.getVerticalScrollBar();
-                        scrollBar.setValue(scrollBar.getMaximum());
-
-                        // start importing!
-                        final _Importer importer = new _Importer(
-                                _srcDir, _selections, _unknownDeckCombo, _operationLog, _progressBar,
-                                _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
-                        importer.run();
-
-                        _btnCancel.requestFocusInWindow();
                     }
+
+                    // ensure no other actions (except for cancel) can be taken while the import is in progress
+                    _btnStart.setEnabled(false);
+                    _btnChooseDir.setEnabled(false);
+
+                    for (final Pair<FCheckBox, ? extends Map<File, File>> selection : _selections.values()) {
+                        selection.getLeft().setEnabled(false);
+                    }
+                    _unknownDeckCombo.setEnabled(false);
+                    _moveCheckbox.setEnabled(false);
+                    _overwriteCheckbox.setEnabled(false);
+
+                    // stop updating the operation log -- the importer needs it now
+                    _operationLogUpdater.requestStop();
+
+                    // jump to the bottom of the log text area so it starts autoscrolling again
+                    // note that since it is controlled by a SmartScroller, just setting the caret position will not work
+                    final JScrollBar scrollBar = _operationLogScroller.getVerticalScrollBar();
+                    scrollBar.setValue(scrollBar.getMaximum());
+
+                    // start importing!
+                    final _Importer importer = new _Importer(
+                            _srcDir, _selections, _unknownDeckCombo, _operationLog, _progressBar,
+                            _moveCheckbox.isSelected(), _overwriteCheckbox.isSelected());
+                    importer.run();
+
+                    _btnCancel.requestFocusInWindow();
                 });
 
                 // import ready to proceed: enable the start button
@@ -787,23 +761,20 @@ public class ImportDialog {
                 log.append(" ").append(totalOps).append(" files\n");
                 log.append(isOverwrite ? "O" : "Not o").append("verwriting existing files");
 
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        final String logText = log.toString();
+                SwingUtilities.invokeLater(() -> {
+                    final String logText = log.toString();
 
-                        // setText is thread-safe, but the resizing is not, so might as well do this in the swing event loop thread
-                        _operationLog.setText(log.toString());
+                    // setText is thread-safe, but the resizing is not, so might as well do this in the swing event loop thread
+                    _operationLog.setText(log.toString());
 
-                        if (_maxLogLength < logText.length()) {
-                            _maxLogLength = logText.length();
+                    if (_maxLogLength < logText.length()) {
+                        _maxLogLength = logText.length();
 
-                            // resize the panel properly for the new log contents
-                            _selectionPanel.getParent().validate();
-                            _selectionPanel.getParent().invalidate();
-                            _topPanel.getParent().validate();
-                            _topPanel.getParent().invalidate();
-                        }
+                        // resize the panel properly for the new log contents
+                        _selectionPanel.getParent().validate();
+                        _selectionPanel.getParent().invalidate();
+                        _topPanel.getParent().validate();
+                        _topPanel.getParent().invalidate();
                     }
                 });
             }
@@ -813,12 +784,8 @@ public class ImportDialog {
         public void run() {
             try { _run(); } catch (final InterruptedException e) {
                 _cancel = true;
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() {
-                        // we never interrupt the thread, so this is not expected to happen
-                        BugReporter.reportException(e);
-                    }
-                });
+                // we never interrupt the thread, so this is not expected to happen
+                SwingUtilities.invokeLater(() -> BugReporter.reportException(e));
             }
         }
     }
@@ -898,11 +865,9 @@ public class ImportDialog {
 
                     final int curOpNum = ++numOps;
                     if (0 == curOpNum % progressInterval) {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            @Override public void run() {
-                                if (_cancel) { return; }
-                                _progressBar.setValue(curOpNum);
-                            }
+                        SwingUtilities.invokeLater(() -> {
+                            if (_cancel) { return; }
+                            _progressBar.setValue(curOpNum);
                         });
                     }
 
@@ -972,11 +937,9 @@ public class ImportDialog {
 
                 // report any exceptions in a standard dialog
                 // note that regular I/O errors don't throw, they'll just be mentioned in the log
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override public void run() {
-                        _progressBar.setString("Error");
-                        BugReporter.reportException(e);
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    _progressBar.setString("Error");
+                    BugReporter.reportException(e);
                 });
             }
 

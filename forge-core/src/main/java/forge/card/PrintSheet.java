@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.google.common.base.Function;
-
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
@@ -22,9 +20,6 @@ import forge.util.storage.StorageReaderFileSections;
  *
  */
 public class PrintSheet {
-    public static final Function<PrintSheet, String> FN_GET_KEY = new Function<PrintSheet, String>() {
-        @Override public final String apply(PrintSheet sheet) { return sheet.name; }
-    };
 
     public static final IStorage<PrintSheet> initializePrintSheets(File sheetsFile, CardEdition.Collection editions) {
         IStorage<PrintSheet> sheets = new StorageExtendable<>("Special print runs", new PrintSheet.Reader(sheetsFile));
@@ -156,7 +151,7 @@ public class PrintSheet {
 
     public static class Reader extends StorageReaderFileSections<PrintSheet> {
         public Reader(File file) {
-            super(file, PrintSheet.FN_GET_KEY);
+            super(file, PrintSheet::getName);
         }
 
         @Override

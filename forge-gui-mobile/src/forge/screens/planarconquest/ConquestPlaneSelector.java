@@ -5,7 +5,6 @@ import java.util.List;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
@@ -35,11 +34,8 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private static final float MONITOR_LEFT_MULTIPLIER = 19f / 443f;
     private static final float ARROW_THICKNESS = Utils.scale(3);
 
-    private static List<ConquestPlane> planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), new Predicate<ConquestPlane>() {
-        @Override
-        public boolean apply(ConquestPlane plane) {
-            return !plane.isUnreachable(); //filter out unreachable planes
-        }
+    private static List<ConquestPlane> planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), plane -> {
+        return !plane.isUnreachable(); //filter out unreachable planes
     }));
 
     private final FTimer timer = new FTimer(2.5f) {
@@ -228,11 +224,6 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
 
     public void updateReachablePlanes() {
-        planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), new Predicate<ConquestPlane>() {
-            @Override
-            public boolean apply(ConquestPlane plane) {
-                return !plane.isUnreachable();
-            }
-        }));
+        planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), plane -> !plane.isUnreachable()));
     }
 }

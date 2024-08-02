@@ -40,12 +40,7 @@ public abstract class InputSyncronizedBase extends InputBase implements InputSyn
         onStop();
 
         // ensure input won't accept any user actions.
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                setFinished();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(this::setFinished);
 
         // thread irrelevant
         if (getController().getInputQueue().getInput() != null) {

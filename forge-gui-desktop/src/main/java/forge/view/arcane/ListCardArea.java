@@ -17,8 +17,6 @@
 package forge.view.arcane;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -51,9 +49,7 @@ public class ListCardArea extends FloatingCardArea {
 		window.setModal(true);
 		getScrollPane().setViewportView(this);
 		doneButton = new FButton(Localizer.getInstance().getMessage("lblDone"));
-		doneButton.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
-		});
+		doneButton.addActionListener(e -> window.setVisible(false));
 		window.add(doneButton,BorderLayout.SOUTH);
 		setOpaque(false);
     }
@@ -86,9 +82,7 @@ public class ListCardArea extends FloatingCardArea {
 		getScrollPane().setViewportView(this);
 		setOpaque(false);
 		doneButton = new FButton(Localizer.getInstance().getMessage("lblDone"));
-		doneButton.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) { window.setVisible(false); } 
-		});
+		doneButton.addActionListener(e -> window.setVisible(false));
 		window.add(doneButton,BorderLayout.SOUTH);
 		cardList = new ArrayList<>(cardList0);  // this is modified - pfps - is there a better way?
 		moveableCards = new ArrayList<>(moveableCards0);

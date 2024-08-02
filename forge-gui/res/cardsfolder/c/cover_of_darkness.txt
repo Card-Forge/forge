@@ -2,6 +2,6 @@ Name:Cover of Darkness
 ManaCost:1 B
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type. | AILogic$ MostProminentInComputerDeck
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddKeyword$ Fear | Description$ Creatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
-Oracle:As Cover of Darkness enters the battlefield, choose a creature type.\nCreatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)
+Oracle:As Cover of Darkness enters, choose a creature type.\nCreatures of the chosen type have fear. (They can't be blocked except by artifact creatures and/or black creatures.)

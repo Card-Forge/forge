@@ -1,13 +1,8 @@
 package forge.screens.home.online;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JPanel;
 
-import forge.deckchooser.DecksComboBoxEvent;
 import forge.deckchooser.FDeckChooser;
-import forge.deckchooser.IDecksComboBoxListener;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.IOnlineLobby;
 import forge.gamemodes.net.client.FGameClient;
@@ -71,12 +66,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         if (lobby == null) {
             final FButton btnConnect = new FButton(Localizer.getInstance().getMessage("lblConnectToServer"));
             btnConnect.setFont(FSkin.getRelativeFont(20));
-            btnConnect.addActionListener(new ActionListener() {
-                @Override
-                public final void actionPerformed(final ActionEvent e) {
-                    getLayoutControl().connectToServer();
-                }
-            });
+            btnConnect.addActionListener(e -> getLayoutControl().connectToServer());
             container.setLayout(new MigLayout("insets 0, gap 0, ax center, ay center"));
             container.add(btnConnect, "w 300!, h 75!");
 
@@ -97,30 +87,17 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
 
         // Stop button event handling
-        btnStop.addActionListener(new ActionListener() {
-            @Override
-            public final void actionPerformed(final ActionEvent arg0) {
-                Runnable stopGame = new Runnable() {
-                    @Override
-                    public void run() {
-                        // do the STOP needful here
-                        reset();
-                    }
-                };
-                if (stopGame != null) {
-                    stopGame.run();
-                }
+        btnStop.addActionListener(arg0 -> {
+            // do the STOP needful here
+            Runnable stopGame = VSubmenuOnlineLobby.this::reset;
+            if (stopGame != null) {
+                stopGame.run();
             }
         });
 
         for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
             fdc.populate();
-            fdc.getDecksComboBox().addListener(new IDecksComboBoxListener() {
-                @Override
-                public final void deckTypeSelected(final DecksComboBoxEvent ev) {
-                    lobby.focusOnAvatar();
-                }
-            });
+            fdc.getDecksComboBox().addListener(ev -> lobby.focusOnAvatar());
         }
 
         container.add(lobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");

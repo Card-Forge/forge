@@ -5,7 +5,6 @@ import java.util.*;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -333,26 +332,23 @@ public class AttachAi extends SpellAbilityAi {
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the same type as the changing type
 
         // Don't target fetchlands
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                //Check for cards that can be sacrificed in response
-                for (final SpellAbility ability : c.getAllSpellAbilities()) {
-                    if (ability.isActivatedAbility()) {
-                        final Cost cost = ability.getPayCosts();
-                        for (final CostPart part : cost.getCostParts()) {
-                            if (!(part instanceof CostSacrifice)) {
-                                continue;
-                            }
-                            CostSacrifice sacCost = (CostSacrifice) part;
-                            if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
-                                return false;
-                            }
+        list = CardLists.filter(list, c -> {
+            //Check for cards that can be sacrificed in response
+            for (final SpellAbility ability : c.getAllSpellAbilities()) {
+                if (ability.isActivatedAbility()) {
+                    final Cost cost = ability.getPayCosts();
+                    for (final CostPart part : cost.getCostParts()) {
+                        if (!(part instanceof CostSacrifice)) {
+                            continue;
+                        }
+                        CostSacrifice sacCost = (CostSacrifice) part;
+                        if (sacCost.payCostFromSource() && ComputerUtilCost.canPayCost(ability, c.getController(), false)) {
+                            return false;
                         }
                     }
                 }
-                return true;
             }
+            return true;
         });
 
         final Card c = ComputerUtilCard.getBestAI(list);
@@ -385,43 +381,40 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAIKeepTappedPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For Cards like Paralyzing Grasp and Glimmerdust Nap
-        final List<Card> prefList = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                // Don't do Untapped Vigilance cards
-                if (c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
+        final List<Card> prefList = CardLists.filter(list, c -> {
+            // Don't do Untapped Vigilance cards
+            if (c.isCreature() && c.hasKeyword(Keyword.VIGILANCE) && c.isUntapped()) {
+                return false;
+            }
+
+            if (!mandatory) {
+                if (!c.isCreature() && !c.getType().hasSubtype("Vehicle") && !c.isTapped()) {
+                    // try to identify if this thing can actually tap
+                    for (SpellAbility ab : c.getAllSpellAbilities()) {
+                        if (ab.getPayCosts().hasTapCost()) {
+                            return true;
+                        }
+                    }
                     return false;
                 }
+            }
 
-                if (!mandatory) {
-                    if (!c.isCreature() && !c.getType().hasSubtype("Vehicle") && !c.isTapped()) {
-                        // try to identify if this thing can actually tap
-                        for (SpellAbility ab : c.getAllSpellAbilities()) {
-                            if (ab.getPayCosts().hasTapCost()) {
-                                return true;
-                            }
-                        }
+            if (!c.isEnchanted()) {
+                return true;
+            }
+
+            final Iterable<Card> auras = c.getEnchantedBy();
+            for (Card aura : auras) {
+                SpellAbility auraSA = aura.getSpells().get(0);
+                if (auraSA.getApi() == ApiType.Attach) {
+                    if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
+                        // Don't attach multiple KeepTapped Auras to one card
                         return false;
                     }
                 }
-
-                if (!c.isEnchanted()) {
-                    return true;
-                }
-
-                final Iterable<Card> auras = c.getEnchantedBy();
-                for (Card aura : auras) {
-                    SpellAbility auraSA = aura.getSpells().get(0);
-                    if (auraSA.getApi() == ApiType.Attach) {
-                        if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
-                            // Don't attach multiple KeepTapped Auras to one card
-                            return false;
-                        }
-                    }
-                }
-
-                return true;
             }
+
+            return true;
         });
 
         final Card c = ComputerUtilCard.getBestAI(prefList);
@@ -506,24 +499,14 @@ public class AttachAi extends SpellAbilityAi {
     	if (list.isEmpty()) {
     		return null;
     	}
-    	Card c = null;
+    	Card card = null;
         // AI For choosing a Card to Animate.
         List<Card> betterList = CardLists.getNotType(list, "Creature");
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Animate Artifact")) {
-            betterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getCMC() > 0;
-                }
-            });
-            c = ComputerUtilCard.getMostExpensivePermanentAI(betterList);
+            betterList = CardLists.filter(betterList, c -> c.getCMC() > 0);
+            card = ComputerUtilCard.getMostExpensivePermanentAI(betterList);
         } else {
-        	List<Card> evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.hasKeyword(Keyword.HEXPROOF);
-                }
-            });
+        	List<Card> evenBetterList = CardLists.filter(betterList, c -> c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.hasKeyword(Keyword.HEXPROOF));
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
@@ -531,40 +514,32 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getTurnInZone() != c.getGame().getPhaseHandler().getTurn();
-                }
-            });
+        	evenBetterList = CardLists.filter(betterList, c -> c.getTurnInZone() != c.getGame().getPhaseHandler().getTurn());
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    for (final SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
-                            return false;
-                        }
+        	evenBetterList = CardLists.filter(betterList, c -> {
+                for (final SpellAbility sa1 : c.getSpellAbilities()) {
+                    if (sa1.isAbility() && sa1.getPayCosts().hasTapCost()) {
+                        return false;
                     }
-                    return true;
                 }
+                return true;
             });
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	c = ComputerUtilCard.getWorstAI(betterList);
+        	card = ComputerUtilCard.getWorstAI(betterList);
         }
 
 
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
-        if (c == null && mandatory) {
+        if (card == null && mandatory) {
             return chooseLessPreferred(mandatory, list);
         }
 
-        return c;
+        return card;
     }
 
     /**
@@ -591,29 +566,26 @@ public class AttachAi extends SpellAbilityAi {
 
         //TODO for Reanimate Auras i need the new Attach Spell, in later versions it might be part of the Enchant Keyword
         attachSourceLki.addSpellAbility(AbilityFactory.getAbility(attachSourceLki, "NewAttach"));
-        List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                final Card lki = CardCopyService.getLKICopy(c);
-                // need to fake it as if lki would be on the battlefield
-                lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
+        List<Card> betterList = CardLists.filter(list, c -> {
+            final Card lki = CardCopyService.getLKICopy(c);
+            // need to fake it as if lki would be on the battlefield
+            lki.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
-                // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
-                attachSourceLki.clearRemembered();
-                attachSourceLki.addRemembered(lki);
+            // Reanimate Auras use "Enchant creature put onto the battlefield with CARDNAME" with Remembered
+            attachSourceLki.clearRemembered();
+            attachSourceLki.addRemembered(lki);
 
-                // need to check what the cards would be on the battlefield
-                // do not attach yet, that would cause Events
-                CardCollection preList = new CardCollection(lki);
-                preList.add(attachSourceLki);
-                c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
-                boolean result = lki.canBeAttached(attachSourceLki, null);
+            // need to check what the cards would be on the battlefield
+            // do not attach yet, that would cause Events
+            CardCollection preList = new CardCollection(lki);
+            preList.add(attachSourceLki);
+            c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
+            boolean result = lki.canBeAttached(attachSourceLki, null);
 
-                //reset static abilities
-                c.getGame().getAction().checkStaticAbilities(false);
+            //reset static abilities
+            c.getGame().getAction().checkStaticAbilities(false);
 
-                return result;
-            }
+            return result;
         });
 
         final Card c = ComputerUtilCard.getBestCreatureAI(betterList);
@@ -864,42 +836,29 @@ public class AttachAi extends SpellAbilityAi {
         if (totToughness < 0) {
             // Kill a creature if we can
             final int tgh = totToughness;
-            prefList = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && (c.getLethalDamage() <= Math.abs(tgh))) {
-                        return true;
-                    }
-
-                    return c.getNetToughness() <= Math.abs(tgh);
+            prefList = CardLists.filter(list, c -> {
+                if (!c.hasKeyword(Keyword.INDESTRUCTIBLE) && (c.getLethalDamage() <= Math.abs(tgh))) {
+                    return true;
                 }
+
+                return c.getNetToughness() <= Math.abs(tgh);
             });
         }
 
-        Card c = null;
+        Card card = null;
         if (prefList == null || prefList.isEmpty()) {
             prefList = new ArrayList<>(list);
         } else {
-            c = ComputerUtilCard.getBestAI(prefList);
-            if (c != null) {
-                return c;
+            card = ComputerUtilCard.getBestAI(prefList);
+            if (card != null) {
+                return card;
             }
         }
 
         if (!keywords.isEmpty()) {
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return containsUsefulCurseKeyword(keywords, c, sa);
-                }
-            });
+            prefList = CardLists.filter(prefList, c -> containsUsefulCurseKeyword(keywords, c, sa));
         } else if (totPower < 0) {
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
-                }
-            });
+            prefList = CardLists.filter(prefList, c -> c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c));
         }
 
         //some auras aren't useful in multiples
@@ -915,25 +874,22 @@ public class AttachAi extends SpellAbilityAi {
                 && sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
             final int oldEvalRating = ComputerUtilCard.evaluateCreature(sa.getHostCard().getAttachedTo());
             final int threshold = ai.isAI() ? ((PlayerControllerAi)ai.getController()).getAi().getIntProperty(AiProps.SAC_TO_REATTACH_TARGET_EVAL_THRESHOLD) : Integer.MAX_VALUE;
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    if (!card.isCreature()) {
-                        return false;
-                    }
-
-                    return ComputerUtilCard.evaluateCreature(card) >= oldEvalRating + threshold;
+            prefList = CardLists.filter(prefList, c -> {
+                if (!c.isCreature()) {
+                    return false;
                 }
+
+                return ComputerUtilCard.evaluateCreature(c) >= oldEvalRating + threshold;
             });
         }
 
-        c = ComputerUtilCard.getBestAI(prefList);
+        card = ComputerUtilCard.getBestAI(prefList);
 
-        if (c == null) {
+        if (card == null) {
             return chooseLessPreferred(mandatory, list);
         }
 
-        return acceptableChoice(c, mandatory);
+        return acceptableChoice(card, mandatory);
     }
 
     /**
@@ -1029,41 +985,30 @@ public class AttachAi extends SpellAbilityAi {
      */
     private static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory, final Card attachSource) {
         // AI For choosing a Card to Pump
-        Card c = null;
+        Card card = null;
         List<Card> magnetList = null;
         String stCheck = null;
         if (attachSource.isAura() || sa.isBestow()) {
             stCheck = "EnchantedBy";
-            magnetList = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!c.isCreature()) {
-                        return false;
-                    }
-                    String sVar = c.getSVar("EnchantMe");
-                    return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEnchanted());
+            magnetList = CardLists.filter(list, c -> {
+                if (!c.isCreature()) {
+                    return false;
                 }
+                String sVar = c.getSVar("EnchantMe");
+                return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEnchanted());
             });
         } else if (attachSource.isEquipment()) {
             stCheck = "EquippedBy";
-            magnetList = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!c.isCreature()) {
-                        return false;
-                    }
-                    String sVar = c.getSVar("EquipMe");
-                    return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEquipped());
+            magnetList = CardLists.filter(list, c -> {
+                if (!c.isCreature()) {
+                    return false;
                 }
+                String sVar = c.getSVar("EquipMe");
+                return sVar.equals("Multiple") || (sVar.equals("Once") && !c.isEquipped());
             });
         } else if (attachSource.isFortification()) {
             stCheck = "FortifiedBy";
-            magnetList = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.isCreature() && !c.isFortified();
-                }
-            });
+            magnetList = CardLists.filter(list, c -> c.isCreature() && !c.isFortified());
         }
 
         // Look for triggers that will damage the creature and remove AI-owned creatures that will die
@@ -1109,23 +1054,13 @@ public class AttachAi extends SpellAbilityAi {
                 // Probably want to "weight" the list by amount of Enchantments and
                 // choose the "lightest"
 
-            	List<Card> betterList = CardLists.filter(magnetList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return CombatUtil.canAttack(c, ai.getWeakestOpponent());
-                    }
-                });
+            	List<Card> betterList = CardLists.filter(magnetList, c -> CombatUtil.canAttack(c, ai.getWeakestOpponent()));
             	if (!betterList.isEmpty()) {
             		return ComputerUtilCard.getBestAI(betterList);
             	}
 
             	// Magnet List should not be attached when they are useless
-            	betterList = CardLists.filter(magnetList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return !ComputerUtilCard.isUselessCreature(ai, c);
-                    }
-                });
+            	betterList = CardLists.filter(magnetList, c -> !ComputerUtilCard.isUselessCreature(ai, c));
 
             	if (!betterList.isEmpty()) {
             		return ComputerUtilCard.getBestAI(betterList);
@@ -1179,38 +1114,30 @@ public class AttachAi extends SpellAbilityAi {
         if (totToughness < 0) {
             // Don't kill my own stuff with Negative toughness Auras
             final int tgh = totToughness;
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getLethalDamage() > Math.abs(tgh);
-                }
-            });
+            prefList = CardLists.filter(prefList, c -> c.getLethalDamage() > Math.abs(tgh));
         }
 
         //only add useful keywords unless P/T bonus is significant
         if (totToughness + totPower < 4 && (!keywords.isEmpty() || grantingExtraBlock)) {
             final int pow = totPower;
             final boolean extraBlock = grantingExtraBlock;
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!keywords.isEmpty()) {
-                        for (final String keyword : keywords) {
-                            if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
-                                return true;
-                            }
+            prefList = CardLists.filter(prefList, c -> {
+                if (!keywords.isEmpty()) {
+                    for (final String keyword : keywords) {
+                        if (isUsefulAttachKeyword(keyword, c, sa, pow)) {
+                            return true;
                         }
                     }
-
-                    if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
-                        // consider +2 power a significant bonus on Infect creatures
-                        return true;
-                    }
-                    if (extraBlock && CombatUtil.canBlock(c, true) && !c.canBlockAny()) {
-                        return true;
-                    }
-                    return false;
                 }
+
+                if (c.hasKeyword(Keyword.INFECT) && pow >= 2) {
+                    // consider +2 power a significant bonus on Infect creatures
+                    return true;
+                }
+                if (extraBlock && CombatUtil.canBlock(c, true) && !c.canBlockAny()) {
+                    return true;
+                }
+                return false;
             });
         }
 
@@ -1229,21 +1156,11 @@ public class AttachAi extends SpellAbilityAi {
         	if (!attachSource.getName().equals("Daybreak Coronet")) {
 	            // TODO For Auras like Rancor, that aren't as likely to lead to
 	            // card disadvantage, this check should be skipped
-	            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-	                @Override
-	                public boolean apply(final Card c) {
-	                    return !c.isEnchanted() || c.hasKeyword(Keyword.HEXPROOF);
-	                }
-	            });
+	            prefList = CardLists.filter(prefList, c -> !c.isEnchanted() || c.hasKeyword(Keyword.HEXPROOF));
         	}
 
         	// should not attach Auras to creatures that does leave the play
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return !c.hasSVar("EndOfTurnLeavePlay");
-                }
-            });
+            prefList = CardLists.filter(prefList, c -> !c.hasSVar("EndOfTurnLeavePlay"));
         }
 
         // Should not attach things to crewed vehicles that will stop being creatures soon
@@ -1258,12 +1175,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
         if (canOnlyTargetCreatures && (attachSource.isAura() || attachSource.isEquipment())) {
-            prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return card.getTimesCrewedThisTurn() == 0 || (attachSource.isEquipment() && attachSource.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai));
-                }
-            });
+            prefList = CardLists.filter(prefList, c -> c.getTimesCrewedThisTurn() == 0 || (attachSource.isEquipment() && attachSource.getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)));
         }
 
         if (!grantingAbilities) {
@@ -1271,17 +1183,14 @@ public class AttachAi extends SpellAbilityAi {
             // Filter out creatures that can't Attack or have Defender
             if (keywords.isEmpty()) {
             	final int powerBonus = totPower;
-                prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                    	if (!c.isCreature()) {
-                    		return true;
-                    	}
-                        return powerBonus + c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
+                prefList = CardLists.filter(prefList, c -> {
+                    if (!c.isCreature()) {
+                        return true;
                     }
+                    return powerBonus + c.getNetPower() > 0 && ComputerUtilCombat.canAttackNextTurn(c);
                 });
             }
-            c = ComputerUtilCard.getBestAI(prefList);
+            card = ComputerUtilCard.getBestAI(prefList);
         } else {
             for (Card pref : prefList) {
                 if (pref.isLand() && pref.isUntapped()) {
@@ -1290,14 +1199,14 @@ public class AttachAi extends SpellAbilityAi {
             }
             // If we grant abilities, we may want to put it on something Weak?
             // Possibly more defensive?
-            c = ComputerUtilCard.getWorstPermanentAI(prefList, false, false, false, false);
+            card = ComputerUtilCard.getWorstPermanentAI(prefList, false, false, false, false);
         }
 
-        if (c == null) {
+        if (card == null) {
             return chooseLessPreferred(mandatory, list);
         }
 
-        return c;
+        return card;
     }
 
     /**
@@ -1338,22 +1247,13 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card card) {
-                    return ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo());
-                }
-            }));
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()),
+                    card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {
             List<Card> list = CardUtil.getValidCardsToTarget(sa);
-            CardCollection preferred = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card card) {
-                    return !card.hasCardAttachments();
-                }
-            });
+            CardCollection preferred = CardLists.filter(list, card -> !card.hasCardAttachments());
             return preferred.isEmpty() ? Aggregates.random(list) : Aggregates.random(preferred);
         }
 
@@ -1687,25 +1587,19 @@ public class AttachAi extends SpellAbilityAi {
     public static Card doPumpOrCurseAILogic(final Player ai, final SpellAbility sa, final List<Card> list, final String type) {
         Card chosen = null;
 
-        List<Card> aiType = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                // Don't buff opponent's creatures of given type
-                if (!c.getController().equals(ai)) {
-                    return false;
-                }
-                return c.isValid(type, ai, sa.getHostCard(), sa);
+        List<Card> aiType = CardLists.filter(list, c -> {
+            // Don't buff opponent's creatures of given type
+            if (!c.getController().equals(ai)) {
+                return false;
             }
+            return c.isValid(type, ai, sa.getHostCard(), sa);
         });
-        List<Card> oppNonType = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                // Don't debuff AI's own creatures not of given type
-                if (c.getController().equals(ai)) {
-                    return false;
-                }
-                return !c.isValid(type, ai, sa.getHostCard(), sa) && !ComputerUtilCard.isUselessCreature(ai, c);
+        List<Card> oppNonType = CardLists.filter(list, c -> {
+            // Don't debuff AI's own creatures not of given type
+            if (c.getController().equals(ai)) {
+                return false;
             }
+            return !c.isValid(type, ai, sa.getHostCard(), sa) && !ComputerUtilCard.isUselessCreature(ai, c);
         });
 
         if (!aiType.isEmpty() && !oppNonType.isEmpty()) {
