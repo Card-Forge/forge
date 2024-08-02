@@ -8,4 +8,4 @@ SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredAttackerLKICopy | SubAbility$ D
 SVar:DBDestroy:DB$ Destroy | Defined$ TriggeredBlockerLKICopy
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
-Oracle:Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+Oracle:Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery. This card enters unattached and stays on the battlefield if the creature leaves.)

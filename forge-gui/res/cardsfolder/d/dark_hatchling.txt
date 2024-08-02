@@ -3,6 +3,6 @@ ManaCost:4 B B
 Types:Creature Horror
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target nonblack creature. It can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target nonblack creature. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature.
-Oracle:Flying\nWhen Dark Hatchling enters the battlefield, destroy target nonblack creature. It can't be regenerated.
+Oracle:Flying\nWhen Dark Hatchling enters, destroy target nonblack creature. It can't be regenerated.
