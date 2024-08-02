@@ -5,4 +5,4 @@ R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Graveyard,Library | Destinat
 S:Mode$ CantBeCast | Origin$ Graveyard,Library | Description$ Players can't cast spells from graveyards or libraries.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
-Oracle:Creature cards in graveyards and libraries can't enter.\nPlayers can't cast spells from graveyards or libraries.
+Oracle:Creature cards in graveyards and libraries can't enter the battlefield.\nPlayers can't cast spells from graveyards or libraries.
