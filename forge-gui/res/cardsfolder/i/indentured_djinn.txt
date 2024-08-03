@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Creature Djinn
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each other player may draw up to three cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, each other player may draw up to three cards.
 SVar:TrigDraw:DB$ Draw | Defined$ Player.Other | NumCards$ 3 | Upto$ True | AILogic$ OptionalDraw
-Oracle:Flying\nWhen Indentured Djinn enters the battlefield, each other player may draw up to three cards.
+Oracle:Flying\nWhen Indentured Djinn enters, each other player may draw up to three cards.
