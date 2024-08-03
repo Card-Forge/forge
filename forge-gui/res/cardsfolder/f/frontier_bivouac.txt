@@ -1,6 +1,7 @@
 Name:Frontier Bivouac
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo G U R | SpellDescription$ Add {G}, {U}, or {R}.
-Oracle:Frontier Bivouac enters the battlefield tapped.\n{T}: Add {G}, {U}, or {R}.
+Oracle:Frontier Bivouac enters tapped.\n{T}: Add {G}, {U}, or {R}.
