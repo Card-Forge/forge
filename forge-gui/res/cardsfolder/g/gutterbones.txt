@@ -2,7 +2,8 @@ Name:Gutterbones
 ManaCost:B
 Types:Creature Skeleton Warrior
 PT:2/1
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | PlayerTurn$ True | CheckSVar$ X | SpellDescription$ Return CARDNAME from your graveyard to your hand. Activate only during your turn and only if an opponent lost life this turn.
 SVar:X:Count$LifeOppsLostThisTurn
-Oracle:Gutterbones enters the battlefield tapped.\n{1}{B}: Return Gutterbones from your graveyard to your hand. Activate only during your turn and only if an opponent lost life this turn.
+Oracle:Gutterbones enters tapped.\n{1}{B}: Return Gutterbones from your graveyard to your hand. Activate only during your turn and only if an opponent lost life this turn.
