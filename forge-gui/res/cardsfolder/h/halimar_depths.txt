@@ -1,8 +1,9 @@
 Name:Halimar Depths
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of your library, then put them back in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters, look at the top three cards of your library, then put them back in any order.
 SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 3
-Oracle:Halimar Depths enters the battlefield tapped.\nWhen Halimar Depths enters the battlefield, look at the top three cards of your library, then put them back in any order.\n{T}: Add {U}.
+Oracle:Halimar Depths enters tapped.\nWhen Halimar Depths enters, look at the top three cards of your library, then put them back in any order.\n{T}: Add {U}.
