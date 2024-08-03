@@ -3,6 +3,6 @@ ManaCost:5 G
 Types:Creature Wurm
 PT:4/4
 K:Trample
-K:etbCounter:P1P1:4:CheckSVar$ Morbid:Morbid — CARDNAME enters the battlefield with four +1/+1 counters on it if a creature died this turn.
+K:etbCounter:P1P1:4:CheckSVar$ Morbid:Morbid — CARDNAME enters with four +1/+1 counters on it if a creature died this turn.
 SVar:Morbid:Count$Morbid.1.0
-Oracle:Trample\nMorbid — Gravetiller Wurm enters the battlefield with four +1/+1 counters on it if a creature died this turn.
+Oracle:Trample\nMorbid — Gravetiller Wurm enters with four +1/+1 counters on it if a creature died this turn.

@@ -1,9 +1,9 @@
 Name:Goldmeadow
 ManaCost:no cost
 Types:Plane Lorwyn
-T:Mode$ ChangesZone | ValidCard$ Land | Destination$ Battlefield | Execute$ TripleGoat | TriggerZones$ Command | TriggerDescription$ Whenever a land enters the battlefield, that land's controller creates three 0/1 white Goat creature tokens.
+T:Mode$ ChangesZone | ValidCard$ Land | Destination$ Battlefield | Execute$ TripleGoat | TriggerZones$ Command | TriggerDescription$ Whenever a land enters, that land's controller creates three 0/1 white Goat creature tokens.
 SVar:TripleGoat:DB$ Token | TokenScript$ w_0_1_goat | TokenOwner$ TriggeredCardController | TokenAmount$ 3
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, create a 0/1 white Goat creature token.
 SVar:RolledChaos:DB$ Token | TokenScript$ w_0_1_goat | TokenOwner$ You | TokenAmount$ 1
 SVar:AIRollPlanarDieParams:Mode$ Always | LowPriority$ True | MaxRollsPerTurn$ 9
-Oracle:Whenever a land enters the battlefield, that land's controller creates three 0/1 white Goat creature tokens.\nWhenever chaos ensues, create a 0/1 white Goat creature token.
+Oracle:Whenever a land enters, that land's controller creates three 0/1 white Goat creature tokens.\nWhenever chaos ensues, create a 0/1 white Goat creature token.
