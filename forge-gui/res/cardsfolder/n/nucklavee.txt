@@ -2,8 +2,8 @@ Name:Nucklavee
 ManaCost:4 UR UR
 Types:Creature Beast
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneRed | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target red sorcery card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneRed | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target red sorcery card from your graveyard to your hand.
 SVar:TrigChangeZoneRed:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Sorcery.Red+YouCtrl
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneBlue | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target blue instant card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneBlue | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target blue instant card from your graveyard to your hand.
 SVar:TrigChangeZoneBlue:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.Blue+YouCtrl
-Oracle:When Nucklavee enters the battlefield, you may return target red sorcery card from your graveyard to your hand.\nWhen Nucklavee enters the battlefield, you may return target blue instant card from your graveyard to your hand.
+Oracle:When Nucklavee enters, you may return target red sorcery card from your graveyard to your hand.\nWhen Nucklavee enters, you may return target blue instant card from your graveyard to your hand.
