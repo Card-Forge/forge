@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Spirit
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeInstant | TriggerDescription$ When CARDNAME enters the battlefield, put a random instant card from your library into your graveyard. Then put a random sorcery card from your library into your graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeInstant | TriggerDescription$ When CARDNAME enters, put a random instant card from your library into your graveyard. Then put a random sorcery card from your library into your graveyard.
 SVar:TrigChangeInstant:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Instant.YouOwn | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | SubAbility$ DBChangeSorcery
 SVar:DBChangeSorcery:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Sorcery.YouOwn | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True
 T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourGraveyard,Sorcery.wasCastFromYourGraveyard | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your graveyard, copy that spell. You may choose new targets for the copy.
@@ -11,4 +11,4 @@ SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ A
 AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
-Oracle:Flying\nWhen Geist of Regret enters the battlefield, put a random instant card from your library into your graveyard. Then put a random sorcery card from your library into your graveyard.\nWhenever you cast an instant or sorcery spell from your graveyard, copy that spell. You may choose new targets for the copy.
+Oracle:Flying\nWhen Geist of Regret enters, put a random instant card from your library into your graveyard. Then put a random sorcery card from your library into your graveyard.\nWhenever you cast an instant or sorcery spell from your graveyard, copy that spell. You may choose new targets for the copy.
