@@ -2029,7 +2029,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
-        assertEquals(militantAngel.getEdition(), "GNT");
+        assertEquals(militantAngel.getEdition(), "PZ2");
 
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.Earliest);
