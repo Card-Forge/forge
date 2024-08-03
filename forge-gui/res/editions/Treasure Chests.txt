@@ -93,14 +93,14 @@ ScryfallCode=PZ2
 65691 R	Territorial Hellkite @Jonas De Ro
 65693 M	Edgar Markov @Volkan Baǵa
 65695 R	Disrupt Decorum	@Sidharth Chaturvedi
-65697 R	Crimson Honor Guard	@Kieran Yanner
-65699 R	Bloodsworn Steward	@Daarken
-65701 R	Teferi's Protection	@Chase Stone
+65697 R	Crimson Honor Guard @Kieran Yanner
+65699 R	Bloodsworn Steward @Daarken
+65701 R	Teferi's Protection @Chase Stone
 65703 R	Shifting Shadow	@Christopher Burdett
 65705 R	Wasitora, Nekoru Queen	@Cynthia Sheppard
 65707 M	Mirri, Weatherlight Duelist	@Magali Villeneuve
 65709 R	Qasali Slingers	@Izzy
-65711 R	Hungry Lynx	@Shreya Shetty
+65711 R	Hungry Lynx @Shreya Shetty
 65713 R	Bloodforged Battle-Axe @Alayna Danner
 65715 R	Taigam, Sidisi's Hand @Simon Dominic
 65717 R	Kindred Boon @McLean Kendree
@@ -122,7 +122,7 @@ ScryfallCode=PZ2
 65749 M	Ramos, Dragon Engine @Joseph Meehan
 65751 U	Mirror of the Forebears @Kieran Yanner
 65753 U	Bloodline Necromancer @Joe Slucher
-65755 R	Galecaster Colossus	@Darek Zabrocki
+65755 R	Galecaster Colossus @Darek Zabrocki
 65757 R	Balan, Wandering Knight	@Svetlin Velinov
 65759 M	Mathas, Fiend Seeker @Joe Slucher
 65761 R	Kheru Mind-Eater @Igor Kieryluk
@@ -132,27 +132,27 @@ ScryfallCode=PZ2
 65769 R	Stalking Leonin	@Zoltan Boros
 65771 M	Nazahn, Revered Bladesmith @Victor Adame Minguez
 65773 C	Sinuous Vermin	@Jason Kang
-65775 C	Borderland Explorer	@Lucas Graciano
+65775 C	Borderland Explorer @Lucas Graciano
 65777 C	Skittering Crustacean @Jason Felix
 65779 U	Treasonous Ogre	@Randy Gallegos
 65781 C	Custodi Squire @Alex Horley-Orlandelli
 65783 C	Entourage of Trest @Anthony Palumbo
-65785 M	Expropriate	@Zack Stella
-65787 R	Selvala's Stampede	@Svetlin Velinov
+65785 M	Expropriate @Zack Stella
+65787 R	Selvala's Stampede @Svetlin Velinov
 65789 C	Salvage	@Keith Parkinson
 65791 R	Conqueror's Flail @Franz Vohwinkel
 65793 U	Stream of Acid @DiTerlizzi
 65795 C	Brainwash @Terese Nielsen
-65797 R	Cruel Tutor	@Kev Walker
+65797 R	Cruel Tutor @Kev Walker
 65799 R	Xun Yu, Wei Advisor	@Jack Wei
 65801 R	Huang Zhong, Shu General @Quan Xuejun
 65803 R	Lady Sun @Miao Aili
 65805 R	Zuo Ci, the Mocking Sage @Wang Yuqun
 65807 R	Ma Chao, Western Warrior @Koji
 65809 R	Lu Su, Wu Advisor @Zhao Tan
-65811 R	Lady Zhurong, Warrior Queen	@Miao Aili
-65813 R	Pang Tong, "Young Phoenix"	@Li Tie
-65815 R	Sima Yi, Wei Field Marshal	@Gao Yan
+65811 R	Lady Zhurong, Warrior Queen @Miao Aili
+65813 R	Pang Tong, "Young Phoenix" @Li Tie
+65815 R	Sima Yi, Wei Field Marshal @Gao Yan
 65817 R	Cao Ren, Wei Commander	@Junko Taguchi
 65819 R	Aspect of Wolf @Janine Johnston
 65821 R	Game of Chaos @Thomas Gianni
@@ -168,12 +168,12 @@ ScryfallCode=PZ2
 65841 R	The Unspeakable	@Daarken
 65843 R	Zo-Zu the Punisher @Wayne Reynolds
 65845 U	Guttural Response @Ben Wootten
-65847 M	Jhoira of the Ghitu	@Magali Villeneuve
+65847 M	Jhoira of the Ghitu @Magali Villeneuve
 65849 M	Lovisa Coldeyes	@Anna Steinbauer
 65851 U	Desperate Ritual @Wayne Reynolds
 65853 M	Warren Instigator @Svetlin Velinov
-65855 U	Gempalm Incinerator	@Mark Behm
-65857 R	Goblin Goon	@Steve Prescott
+65855 U	Gempalm Incinerator @Mark Behm
+65857 R	Goblin Goon @Steve Prescott
 65859 M	Master of Waves	@Svetlin Velinov
 65861 U	Tidal Courier @Slawomir Maniak
 65863 C	Lonely Sandbar @Noah Bradley
@@ -192,33 +192,33 @@ ScryfallCode=PZ2
 70669 R	Windgrace's Judgment @Grzegorz Rutkowski
 70671 M	Thantis, the Warweaver @Jehan Choo
 70673 R	Coveted Jewel @Jason A. Engle
-70675 R	Saheeli's Directive	@Craig J Spearing
+70675 R	Saheeli's Directive @Craig J Spearing
 70677 R	Magus of the Balance @Kev Walker
 70679 C	Forge of Heroes	@Titus Lunter
 70681 R	Genesis Storm @Mark Poole
 70683 R	Endless Atlas @Titus Lunter
-70685 M	Saheeli, the Gifted	@Ryan Pancoast
+70685 M	Saheeli, the Gifted @Ryan Pancoast
 70687 M	Tawnos, Urza's Apprentice @Matt Stewart
 70689 R	Bloodtracker @Magali Villeneuve
 70691 M	Tuvasa the Sunlit @Eric Deschamps
 70693 R	Crash of Rhino Beetles @Mike Burns
-70695 R	Echo Storm	@Mark Poole
-70697 R	Retrofitter Foundry	@Dmitry Burmak
+70695 R	Echo Storm @Mark Poole
+70697 R	Retrofitter Foundry @Dmitry Burmak
 70699 M	Kestia, the Cultivator @Zezhou Chen
 70701 R	Empyrial Storm @Mark Poole
 70703 R	Enchanter's Bane @Steve Prescott
 70705 R	Heavenly Blademaster @Zack Stella
-70707 R	Isolated Watchtower	@Alexander Forssberg
-70709 M	Brudiclad, Telchor Engineer	@Daarken
+70707 R	Isolated Watchtower @Alexander Forssberg
+70709 M	Brudiclad, Telchor Engineer @Daarken
 70711 R	Turntimber Sower @Craig J Spearing
-70713 R	Skull Storm	@Mark Poole
-70715 R	Arixmethes, Slumbering Isle	@Dimitar Marinski
+70713 R	Skull Storm @Mark Poole
+70715 R	Arixmethes, Slumbering Isle @Dimitar Marinski
 70717 R	Boreas Charger @Christine Choi
 70719 R	Xantcha, Sleeper Agent @Mark Winters
 70721 U	Loyal Guardian	@Robbie Trevino
 70723 R	Reality Scramble @Simon Dominic
 70725 R	Octopus Umbra @Howard Lyon
-70727 U	Geode Golem	@Yeong-Hao Han
+70727 U	Geode Golem @Yeong-Hao Han
 70729 U	Loyal Unicorn @Volkan Baǵa
 70731 R	Vedalken Humiliator	@Jehan Choo
 70733 R	Primordial Mist	@Titus Lunter
@@ -232,12 +232,12 @@ ScryfallCode=PZ2
 70749 R	Night Incarnate	@Anthony Palumbo
 70751 R	Fury Storm @Mark Poole
 70753 U	Loyal Apprentice @Joe Slucher
-70755 R	Ancient Stone Idol	@Josh Hass
-70757 U	Loyal Drake	@Bayard Wu
+70755 R	Ancient Stone Idol @Josh Hass
+70757 U	Loyal Drake @Bayard Wu
 70759 R	Varchild, Betrayer of Kjeldor @Lucas Graciano
-70761 R	Emissary of Grudges	@Stanton Feng
+70761 R	Emissary of Grudges @Stanton Feng
 70763 M	Aminatou, the Fateshifter @Seb McKinnon
-70765 R	Estrid's Invocation	@Johannes Voss
+70765 R	Estrid's Invocation @Johannes Voss
 70767 R	Angelic Guardian @Sara Winters
 70769 R	Angler Turtle @Alex Konstad
 70771 R	Vengeant Vampire @Mitchell Malloy
@@ -250,7 +250,7 @@ ScryfallCode=PZ2
 70785 M	Avatar of Growth @Grzegorz Rutkowski
 70787 C	Hardened-Scale Armor @Tan Yan Yao
 70789 C	Leopard-Spotted Jiao @Shinchuen Chen
-70791 C	Feiyi Snake	@Qiu De En
+70791 C	Feiyi Snake @Qiu De En
 70793 M	Jiang Yanggu @Tingting Yeh
 70795 M	Mu Yanling @林玄泰
 70797 C	Timber Gorge @Babyson Chen & Uzhen Lin
@@ -261,10 +261,10 @@ ScryfallCode=PZ2
 70807 C	Forest @Xin-Yu Liu
 70809 C	Armored Whirl Turtle @Tingting Yeh
 70811 C	Colorful Feiyi Sparrow @Kee Lo
-70813 C	Purple-Crystal Crab	@Tan Yan Yao
-70815 C	Welkin Tern	@Yutaka Li
+70813 C	Purple-Crystal Crab @Tan Yan Yao
+70815 C	Welkin Tern @Yutaka Li
 70817 C	Vivid Flying Fish @Tingting Yeh
-70819 C	Nine-Tail White Fox	@林玄泰
+70819 C	Nine-Tail White Fox @林玄泰
 70821 C	Earth-Origin Yak @Tan Yan Yao
 70823 U	Moon-Eating Dog	@Tingting Yeh
 70825 U	Stormcloud Spirit @Kee Lo
@@ -282,9 +282,9 @@ ScryfallCode=PZ2
 70849 C	Giant Spider @Qiu De En
 70851 U	Fire-Omen Crane	@Tan Yan Yao
 70853 C Earthshaking Si @Shinchuen Chen
-70855 C	Aggressive Instinct	@Wolk Sheep
+70855 C	Aggressive Instinct @Wolk Sheep
 70857 C	Confidence from Strength @Shinchuen Chen
-70859 C	Breath of Fire @ Xin-Yu Liu
+70859 C	Breath of Fire @Xin-Yu Liu
 70861 R	Journey for the Elixir @Qiu De En
 70863 R	Screeching Phoenix @Tingting Yeh
 70865 C	Cleansing Screech @Tingting Yeh
