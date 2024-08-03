@@ -3,9 +3,9 @@ ManaCost:2 R W
 Types:Legendary Creature Human Knight
 PT:3/4
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+powerGTX | TgtPrompt$ Select target creature an opponent controls with greater power | SubAbility$ DBProtection
 SVar:DBProtection:DB$ ProtectionAll | ValidCards$ Creature.YouCtrl+Legendary | Gains$ TargetedCardColor
 SVar:X:Count$CardPower
 DeckHints:Type$Legendary
-Oracle:Haste\nWhen Éowyn, Fearless Knight enters the battlefield, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
+Oracle:Haste\nWhen Éowyn, Fearless Knight enters, exile target creature an opponent controls with greater power. Legendary creatures you control gain protection from each of that creature's colors until end of turn.
