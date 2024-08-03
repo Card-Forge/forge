@@ -9,4 +9,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1 | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_OIL
 DeckHas:Ability$Counters
-Oracle:Evolved Spinoderm enters the battlefield with four oil counters on it.\nEvolved Spinoderm has trample as long as it has two or fewer oil counters on it. Otherwise, it has hexproof.\nAt the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.
+Oracle:Evolved Spinoderm enters with four oil counters on it.\nEvolved Spinoderm has trample as long as it has two or fewer oil counters on it. Otherwise, it has hexproof.\nAt the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.
