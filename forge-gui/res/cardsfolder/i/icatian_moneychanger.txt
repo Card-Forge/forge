@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a credit counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CREDIT | CounterNum$ 1 | SpellDescription$ Put a credit counter on CARDNAME.
-A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain life equal to the number of credit counters on CARDNAME.
+A:AB$ GainLife | Cost$ Sac<1/CARDNAME> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain 1 life for each credit counter on Icatian Moneychanger. Activate only during your upkeep.
 SVar:X:Count$CardCounters.CREDIT
 AI:RemoveDeck:Random
 Oracle:Icatian Moneychanger enters with three credit counters on it.\nWhen Icatian Moneychanger enters, it deals 3 damage to you.\nAt the beginning of your upkeep, put a credit counter on Icatian Moneychanger.\nSacrifice Icatian Moneychanger: You gain 1 life for each credit counter on Icatian Moneychanger. Activate only during your upkeep.
