@@ -2029,7 +2029,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
-        assertEquals(militantAngel.getEdition(), "GNT");
+        assertEquals(militantAngel.getEdition(), "PZ2");
 
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.Earliest);
@@ -2039,7 +2039,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         // Loyal Unicorn: Available in Forge in The List and COMMANDER 2018
         loyalUnicorn = this.cardDb.getCard(cnLoyalUnicorn);
         assertNotNull(loyalUnicorn);
-        assertEquals(loyalUnicorn.getEdition(), "C18");
+        assertEquals(loyalUnicorn.getEdition(), "PZ2");
 
         legacyLoyalUnicorn = this.legacyCardDb.getCardFromEdition(cnLoyalUnicorn,
                 LegacyCardDb.LegacySetPreference.Earliest);
@@ -2072,7 +2072,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         militantAngel = this.cardDb.getCard(cnMilitantAngel);
         assertNotNull(militantAngel);
-        assertEquals(militantAngel.getEdition(), "GNT");
+        assertEquals(militantAngel.getEdition(), "PZ2");
 
         legacyMilitantAngel = this.legacyCardDb.getCardFromEdition(cnMilitantAngel,
                 LegacyCardDb.LegacySetPreference.EarliestCoreExp);
