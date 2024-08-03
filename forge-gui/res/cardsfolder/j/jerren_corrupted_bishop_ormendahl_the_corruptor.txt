@@ -13,7 +13,7 @@ SVar:X:Count$YourLifeTotal
 DeckHas:Ability$Token|LifeGain|Sacrifice
 DeckHints:Type$Human
 AlternateMode:DoubleFaced
-Oracle:Whenever Jerren, Corrupted Bishop enters the battlefield or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
+Oracle:Whenever Jerren, Corrupted Bishop enters or another nontoken Human you control dies, you lose 1 life and create a 1/1 white Human creature token.\n{2}: Target Human you control gains lifelink until end of turn.\nAt the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
 
 ALTERNATE
 
