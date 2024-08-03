@@ -3,9 +3,9 @@ ManaCost:1 W
 Types:Creature Cat Cleric
 PT:2/1
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains lifelink.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose a creature card in your hand. It perpetually gains lifelink.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Mandatory$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Lifelink | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHas:Ability$LifeGain
-Oracle:Lifelink\nWhen Leonin Sanctifier enters the battlefield, choose a creature card in your hand. It perpetually gains lifelink.
+Oracle:Lifelink\nWhen Leonin Sanctifier enters, choose a creature card in your hand. It perpetually gains lifelink.
