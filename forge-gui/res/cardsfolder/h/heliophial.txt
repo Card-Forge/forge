@@ -8,4 +8,4 @@ SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHas:Ability$Counters|Sacrifice
 DeckHints:Ability$Proliferate
-Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\n{2}, Sacrifice Heliophial: It deals damage equal to the number of charge counters on it to any target.
+Oracle:Sunburst (This enters with a charge counter on it for each color of mana spent to cast it.)\n{2}, Sacrifice Heliophial: It deals damage equal to the number of charge counters on it to any target.
