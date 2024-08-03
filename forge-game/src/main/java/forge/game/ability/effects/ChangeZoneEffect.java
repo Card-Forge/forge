@@ -516,10 +516,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
                 tgtCards = random;
-            } else if (sa.hasParam("Chooser")) {
-                tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
             } else {
-                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
+                if (sa.hasParam("Chooser"))
+                    tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
+                else
+                    tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
+
+                final CardCollection reversed = new CardCollection(tgtCards);
+                Collections.reverse(reversed);
+                tgtCards = reversed;
             }
         }
 
@@ -1229,6 +1234,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("Reorder")) {
                 chosenCards = new CardCollection(decider.getController().orderMoveToZoneList(chosenCards, destination, sa));
+                if(destination == ZoneType.Library && libraryPos >= 0) {
+                    Collections.reverse(chosenCards);
+                }
             }
 
             // remove Controlled While Searching
