@@ -7,4 +7,4 @@ S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powe
 SVar:Y:Count$CardPower
 DeckHas:Ability$Sacrifice|Counters
 DeckHints:Type$Food
-Oracle:Devour Food 3 (As this enters the battlefield, you may sacrifice any number of Foods. This creature enters the battlefield with three times that many +1/+1 counters on it.)\nCreatures with power less than Feasting Hobbit's power can't block it.
+Oracle:Devour Food 3 (As this enters, you may sacrifice any number of Foods. This creature enters with three times that many +1/+1 counters on it.)\nCreatures with power less than Feasting Hobbit's power can't block it.

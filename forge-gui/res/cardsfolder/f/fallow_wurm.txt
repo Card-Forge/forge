@@ -2,8 +2,8 @@ Name:Fallow Wurm
 ManaCost:2 G
 Types:Creature Wurm
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a land card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters, sacrifice it unless you discard a land card.
 SVar:DBSacSelf:DB$ Sacrifice | UnlessCost$ Discard<1/Land> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourHand.Land
-Oracle:When Fallow Wurm enters the battlefield, sacrifice it unless you discard a land card.
+Oracle:When Fallow Wurm enters, sacrifice it unless you discard a land card.
