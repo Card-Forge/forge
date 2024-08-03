@@ -3,7 +3,7 @@ ManaCost:5 G G
 Types:Creature Giant Druid
 PT:5/5
 K:Reach
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 green Wolf creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 2/2 green Wolf creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_wolf | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:Reach (This creature can block creatures with flying.)\nWhen Howling Giant enters the battlefield, create two 2/2 green Wolf creature tokens.
+Oracle:Reach (This creature can block creatures with flying.)\nWhen Howling Giant enters, create two 2/2 green Wolf creature tokens.

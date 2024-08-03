@@ -4,10 +4,10 @@ Types:Creature Whale
 PT:6/6
 K:Flash
 K:Ward:2
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPlayerTurn$ False | SpellDescription$ CARDNAME enters the battlefield tapped unless it's your turn.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless it's your turn.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPlayerTurn$ False
 AlternateMode:Adventure
-Oracle:Flash\nWard {2}\nHorned Loch-Whale enters the battlefield tapped unless it's your turn.
+Oracle:Flash\nWard {2}\nHorned Loch-Whale enters tapped unless it's your turn.
 
 ALTERNATE
 
