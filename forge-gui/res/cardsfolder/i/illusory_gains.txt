@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield under an opponent's control, attach CARDNAME to that creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | TriggerDescription$ Whenever a creature an opponent controls enters, attach CARDNAME to that creature.
 SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
-Oracle:Enchant creature\nYou control enchanted creature.\nWhenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
+Oracle:Enchant creature\nYou control enchanted creature.\nWhenever a creature an opponent controls enters, attach Illusory Gains to that creature.

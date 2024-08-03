@@ -7,4 +7,4 @@ SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y | SubAbility$ DB
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ DOOM | CounterNum$ 1
 SVar:X:Count$CardCounters.DOOM
 SVar:Y:TriggeredCardLKI$CardManaCost
-Oracle:Imminent Doom enters the battlefield with a doom counter on it.\nWhenever you cast a spell with mana value equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
+Oracle:Imminent Doom enters with a doom counter on it.\nWhenever you cast a spell with mana value equal to the number of doom counters on Imminent Doom, Imminent Doom deals that much damage to any target. Then put a doom counter on Imminent Doom.
