@@ -2,7 +2,7 @@ Name:Jared Carthalion, True Heir
 ManaCost:R G W
 Types:Legendary Creature Human Warrior
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, target opponent becomes the monarch. You can't become the monarch this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, target opponent becomes the monarch. You can't become the monarch this turn.
 SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Opponent | SubAbility$ DBNoMonarch
 SVar:DBNoMonarch:DB$ Effect | StaticAbilities$ STCantMonarch | SpellDescription$ You can't become the monarch this turn.
 SVar:STCantMonarch:Mode$ CantBecomeMonarch | ValidPlayer$ You | Description$ You can't become the monarch this turn.
@@ -10,4 +10,4 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | CheckD
 SVar:Counters:DB$ PutCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters
-Oracle:When Jared Carthalion, True Heir enters the battlefield, target opponent becomes the monarch. You can't become the monarch this turn.\nIf damage would be dealt to Jared Carthalion while you're the monarch, prevent that damage and put that many +1/+1 counters on it.
+Oracle:When Jared Carthalion, True Heir enters, target opponent becomes the monarch. You can't become the monarch this turn.\nIf damage would be dealt to Jared Carthalion while you're the monarch, prevent that damage and put that many +1/+1 counters on it.
