@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:5/5
 K:Affinity:Artifact
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, exile all artifacts.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, if you cast it from your hand, exile all artifacts.
 SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Exile
-Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen Furnace Dragon enters the battlefield, if you cast it from your hand, exile all artifacts.
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen Furnace Dragon enters, if you cast it from your hand, exile all artifacts.
