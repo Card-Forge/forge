@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Human Wizard
 PT:2/2
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters the battlefield, copy target instant or sorcery spell. You may choose new targets for that copy.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When CARDNAME enters, copy target instant or sorcery spell. You may choose new targets for that copy.
 SVar:TrigCopy:DB$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | MayChooseTarget$ True
 AI:RemoveDeck:All
-Oracle:Flash\nWhen Dualcaster Mage enters the battlefield, copy target instant or sorcery spell. You may choose new targets for the copy.
+Oracle:Flash\nWhen Dualcaster Mage enters, copy target instant or sorcery spell. You may choose new targets for the copy.

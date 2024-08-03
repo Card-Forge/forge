@@ -3,10 +3,10 @@ ManaCost:1 U
 Types:Creature Drake
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, sacrifice it unless you return an enchantment to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Enchantment | RememberChanged$ True | SubAbility$ DBSac
 SVar:DBSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:NeedsToPlay:Enchantment
-Oracle:Flying\nWhen Drake Familiar enters the battlefield, sacrifice it unless you return an enchantment to its owner's hand.
+Oracle:Flying\nWhen Drake Familiar enters, sacrifice it unless you return an enchantment to its owner's hand.
