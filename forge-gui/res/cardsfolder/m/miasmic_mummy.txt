@@ -2,7 +2,7 @@ Name:Miasmic Mummy
 ManaCost:1 B
 Types:Creature Zombie Jackal
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each player discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
 AI:RemoveDeck:Random
-Oracle:When Miasmic Mummy enters the battlefield, each player discards a card.
+Oracle:When Miasmic Mummy enters, each player discards a card.

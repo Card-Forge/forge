@@ -2,7 +2,7 @@ Name:Midvast Protector
 ManaCost:3 W
 Types:Creature Human Wizard
 PT:2/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProtect | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProtect | TriggerDescription$ When CARDNAME enters, target creature you control gains protection from the color of your choice until end of turn.
 SVar:TrigProtect:DB$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor | AILogic$ MostProminentHumanCreatures
 SVar:PlayMain1:TRUE
-Oracle:When Midvast Protector enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
+Oracle:When Midvast Protector enters, target creature you control gains protection from the color of your choice until end of turn.

@@ -5,4 +5,4 @@ PT:3/1
 K:Menace
 K:Fabricate:1
 DeckHas:Ability$Counters|Token
-Oracle:Menace\nFabricate 1 (When this creature enters the battlefield, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
+Oracle:Menace\nFabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
