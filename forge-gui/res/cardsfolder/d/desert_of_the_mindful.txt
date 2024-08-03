@@ -1,7 +1,8 @@
 Name:Desert of the Mindful
 ManaCost:no cost
 Types:Land Desert
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 K:Cycling:1 U
-Oracle:Desert of the Mindful enters the battlefield tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
+Oracle:Desert of the Mindful enters tapped.\n{T}: Add {U}.\nCycling {1}{U} ({1}{U}, Discard this card: Draw a card.)
