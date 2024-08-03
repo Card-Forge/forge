@@ -98,7 +98,7 @@ ScryfallCode=PZ2
 65701 R	Teferi's Protection @Chase Stone
 65703 R	Shifting Shadow	@Christopher Burdett
 65705 R	Wasitora, Nekoru Queen	@Cynthia Sheppard
-65707 M	Mirri, Weatherlight Duelist	@Magali Villeneuve
+65707 M	Mirri, Weatherlight Duelist @Magali Villeneuve
 65709 R	Qasali Slingers	@Izzy
 65711 R	Hungry Lynx @Shreya Shetty
 65713 R	Bloodforged Battle-Axe @Alayna Danner
@@ -144,7 +144,7 @@ ScryfallCode=PZ2
 65793 U	Stream of Acid @DiTerlizzi
 65795 C	Brainwash @Terese Nielsen
 65797 R	Cruel Tutor @Kev Walker
-65799 R	Xun Yu, Wei Advisor	@Jack Wei
+65799 R	Xun Yu, Wei Advisor @Jack Wei
 65801 R	Huang Zhong, Shu General @Quan Xuejun
 65803 R	Lady Sun @Miao Aili
 65805 R	Zuo Ci, the Mocking Sage @Wang Yuqun
