@@ -135,29 +135,31 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
             Map<Optional<Player>, Map<CounterType, Integer>> values = gm.getValue();
 
-            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(gm.getKey());
-            repParams.put(AbilityKey.Cause, cause);
-            repParams.put(AbilityKey.EffectOnly, effect);
-            repParams.put(AbilityKey.CounterMap, values);
-            repParams.put(AbilityKey.ETB, etb);
-            if (params != null) {
-                repParams.putAll(params);
-            }
+            // ETB Counters are already handled in the Move Event
+            if (!etb) {
+                final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(gm.getKey());
+                repParams.put(AbilityKey.Cause, cause);
+                repParams.put(AbilityKey.EffectOnly, effect);
+                repParams.put(AbilityKey.CounterMap, values);
+                repParams.put(AbilityKey.ETB, etb);
+                if (params != null) {
+                    repParams.putAll(params);
+                }
 
-            switch (game.getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated: {
-                values = (Map<Optional<Player>, Map<CounterType, Integer>>) repParams.get(AbilityKey.CounterMap);
-                break;
-            }
-            default:
-                continue;
+                switch (game.getReplacementHandler().run(ReplacementType.AddCounter, repParams)) {
+                case NotReplaced:
+                    break;
+                case Updated: {
+                    values = (Map<Optional<Player>, Map<CounterType, Integer>>) repParams.get(AbilityKey.CounterMap);
+                    break;
+                }
+                default:
+                    continue;
+                }
             }
 
             // Add ETB flag
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.ETB, etb);
             runParams.put(AbilityKey.Cause, cause);
             if (params != null) {
                 runParams.putAll(params);

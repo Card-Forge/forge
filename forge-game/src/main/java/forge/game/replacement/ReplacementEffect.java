@@ -338,4 +338,8 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
         return true;
     }
+
+    public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
+        return event.equals(getMode());
+    }
 }

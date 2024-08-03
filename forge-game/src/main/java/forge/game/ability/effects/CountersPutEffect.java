@@ -316,7 +316,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -362,7 +363,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -435,7 +437,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                     counterAmount = cti.getValue();
                                 }
                                 if (etbcounter) {
-                                    gameCard.addEtbCounter(cti.getKey(), counterAmount, placer);
+                                    GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                    etbTable.put(placer, gameCard, cti.getKey(), counterAmount);
                                 } else {
                                     gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
                                 }
@@ -531,7 +534,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
 
                     if (etbcounter) {
-                        gameCard.addEtbCounter(counterType, counterAmount, placer);
+                        GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                        etbTable.put(placer, gameCard, counterType, counterAmount);
                     } else {
                         gameCard.addCounter(counterType, counterAmount, placer, table);
                     }
