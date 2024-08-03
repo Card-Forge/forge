@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl+nonToken+cmcGE1 | Origin
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ SubCounter<X/REPR> | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:TriggeredCard$CardManaCost
 DeckHas:Ability$Counters
-Oracle:Magnanimous Magistrate enters the battlefield with five reprieve counters on it.\nWhenever another nontoken creature you control dies, if its mana value was 1 or greater, you may remove that many reprieve counters from Magnanimous Magistrate. If you do, return that card to the battlefield under its owner's control.
+Oracle:Magnanimous Magistrate enters with five reprieve counters on it.\nWhenever another nontoken creature you control dies, if its mana value was 1 or greater, you may remove that many reprieve counters from Magnanimous Magistrate. If you do, return that card to the battlefield under its owner's control.

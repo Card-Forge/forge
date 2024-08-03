@@ -8,4 +8,4 @@ SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose target 
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters|Token
 DeckHints:Type$Artifact
-Oracle:Fabricate 3 (When this creature enters the battlefield, put three +1/+1 counters on it or create three 1/1 colorless Servo artifact creature tokens.)\nWhenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.
+Oracle:Fabricate 3 (When this creature enters, put three +1/+1 counters on it or create three 1/1 colorless Servo artifact creature tokens.)\nWhenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.
