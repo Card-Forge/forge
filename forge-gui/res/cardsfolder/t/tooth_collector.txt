@@ -2,11 +2,11 @@ Name:Tooth Collector
 ManaCost:2 B
 Types:Creature Human Rogue
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls gets -1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature an opponent controls gets -1/-1 until end of turn.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Delirium$ True | Execute$ TripPumpOpp | TriggerZones$ Battlefield | TriggerDescription$ Delirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, target creature that player controls gets -1/-1 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:TripPumpOpp:DB$ Pump | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:PlayMain1:TRUE
 DeckHints:Ability$Graveyard|Discard
 DeckHas:Ability$Delirium
-Oracle:When Tooth Collector enters the battlefield, target creature an opponent controls gets -1/-1 until end of turn.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, target creature that player controls gets -1/-1 until end of turn.
+Oracle:When Tooth Collector enters, target creature an opponent controls gets -1/-1 until end of turn.\nDelirium — At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, target creature that player controls gets -1/-1 until end of turn.
