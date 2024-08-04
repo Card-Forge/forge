@@ -1,13 +1,13 @@
 Name:Temple of the Dragon Queen
 ManaCost:no cost
 Types:Land
-K:ETBReplacement:Other:DBReveal
-SVar:DBReveal:DB$ Reveal | RevealValid$ Dragon | Optional$ True | RememberRevealed$ True | SubAbility$ DBTap | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Dragon card from your hand. CARDNAME enters the battlefield tapped unless you revealed a Dragon card this way or you control a Dragon.
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | StackDescription$ enters the battlefield tapped. | ConditionCheckSVar$ DragonPresence | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBReveal | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Dragon card from your hand. CARDNAME enters tapped unless you revealed a Dragon card this way or you control a Dragon.
+SVar:DBReveal:DB$ Reveal | RevealValid$ Dragon | Optional$ True | RememberRevealed$ True | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | ConditionCheckSVar$ DragonPresence | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DragonPresence:Count$RememberedSize/Plus.DragonControlled
 SVar:DragonControlled:Count$Valid Dragon.inZoneBattlefield+YouCtrl
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
-Oracle:As Temple of the Dragon Queen enters the battlefield, you may reveal a Dragon card from your hand. Temple of the Dragon Queen enters the battlefield tapped unless you revealed a Dragon card this way or you control a Dragon.\nAs Temple of the Dragon Queen enters the battlefield, choose a color.\n{T}: Add one mana of the chosen color.
+Oracle:As Temple of the Dragon Queen enters, you may reveal a Dragon card from your hand. Temple of the Dragon Queen enters tapped unless you revealed a Dragon card this way or you control a Dragon.\nAs Temple of the Dragon Queen enters, choose a color.\n{T}: Add one mana of the chosen color.

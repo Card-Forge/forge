@@ -1,7 +1,7 @@
 Name:Vigilante Justice
 ManaCost:3 R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.YouCtrl | TriggerZones$ Battlefield | Execute$ AndJusticeForAll | TriggerDescription$ Whenever a Human enters the battlefield under your control, CARDNAME deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.YouCtrl | TriggerZones$ Battlefield | Execute$ AndJusticeForAll | TriggerDescription$ Whenever a Human you control enters, CARDNAME deals 1 damage to any target.
 SVar:AndJusticeForAll:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
 AI:RemoveDeck:Random
-Oracle:Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to any target.
+Oracle:Whenever a Human you control enters, Vigilante Justice deals 1 damage to any target.

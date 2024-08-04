@@ -2,7 +2,7 @@ Name:Reclamation Sage
 ManaCost:2 G
 Types:Creature Elf Shaman
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact or enchantment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
 SVar:PlayMain1:TRUE
-Oracle:When Reclamation Sage enters the battlefield, you may destroy target artifact or enchantment.
+Oracle:When Reclamation Sage enters, you may destroy target artifact or enchantment.

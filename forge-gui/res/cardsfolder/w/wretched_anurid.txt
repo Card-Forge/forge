@@ -2,7 +2,7 @@ Name:Wretched Anurid
 ManaCost:1 B
 Types:Creature Zombie Frog Beast
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature enters the battlefield, you lose 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature enters, you lose 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:AntiBuffedBy:Creature
-Oracle:Whenever another creature enters the battlefield, you lose 1 life.
+Oracle:Whenever another creature enters, you lose 1 life.

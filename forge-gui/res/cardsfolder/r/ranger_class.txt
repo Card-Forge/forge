@@ -1,7 +1,7 @@
 Name:Ranger Class
 ManaCost:1 G
 Types:Enchantment Class
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 2/2 green Wolf creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/2 green Wolf creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
 K:Class:2:1 G:AddTrigger$ TriggerAttackersDeclared
 SVar:TriggerAttackersDeclared:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you attack, put a +1/+1 counter on target attacking creature.
@@ -10,4 +10,4 @@ K:Class:3:3 G:AddStaticAbility$ SMayLook & SMayPlay
 SVar:SMayLook:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Secondary$ True | Description$ You may look at the top card of your library any time.
 SVar:SMayPlay:Mode$ Continuous | Affected$ Creature.nonLand+TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Secondary$ True | Description$ You may cast creature spells from the top of your library.
 DeckHas:Ability$Token|Counters
-Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Ranger Class enters the battlefield, create a 2/2 green Wolf creature token.\n{1}{G}: Level 2\nWhenever you attack, put a +1/+1 counter on target attacking creature.\n{3}{G}: Level 3\nYou may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Ranger Class enters, create a 2/2 green Wolf creature token.\n{1}{G}: Level 2\nWhenever you attack, put a +1/+1 counter on target attacking creature.\n{3}{G}: Level 3\nYou may look at the top card of your library any time.\nYou may cast creature spells from the top of your library.

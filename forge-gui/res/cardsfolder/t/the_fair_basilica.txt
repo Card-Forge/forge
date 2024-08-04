@@ -1,8 +1,9 @@
 Name:The Fair Basilica
 ManaCost:no cost
 Types:Land Sphere
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Draw | Cost$ 1 W T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
 DeckHas:Ability$Sacrifice
-Oracle:The Fair Basilica enters the battlefield tapped.\n{T}: Add {W}.\n{1}{W}, {T}, Sacrifice The Fair Basilica: Draw a card.
+Oracle:The Fair Basilica enters tapped.\n{T}: Add {W}.\n{1}{W}, {T}, Sacrifice The Fair Basilica: Draw a card.

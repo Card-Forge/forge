@@ -2,7 +2,7 @@ Name:Undergrowth Scavenger
 ManaCost:3 G
 Types:Creature Fungus Horror
 PT:0/0
-K:etbCounter:P1P1:Y:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
+K:etbCounter:P1P1:Y:no Condition:CARDNAME enters with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
 SVar:Y:Count$ValidGraveyard Creature
 SVar:NeedsToPlayVar:Y GE4
-Oracle:Undergrowth Scavenger enters the battlefield with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.
+Oracle:Undergrowth Scavenger enters with a number of +1/+1 counters on it equal to the number of creature cards in all graveyards.

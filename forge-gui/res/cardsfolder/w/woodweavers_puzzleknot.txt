@@ -1,8 +1,8 @@
 Name:Woodweaver's Puzzleknot
 ManaCost:2
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life and get {E}{E}{E} (three energy counters).
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life and get {E}{E}{E} (three energy counters).
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 A:AB$ GainLife | Cost$ 2 G Sac<1/CARDNAME> | LifeAmount$ 3 | SubAbility$ DBEnergy | SpellDescription$ You gain 3 life and get {E}{E}{E}.
-Oracle:When Woodweaver's Puzzleknot enters the battlefield, you gain 3 life and get {E}{E}{E} (three energy counters).\n{2}{G}, Sacrifice Woodweaver's Puzzleknot: You gain 3 life and get {E}{E}{E}.
+Oracle:When Woodweaver's Puzzleknot enters, you gain 3 life and get {E}{E}{E} (three energy counters).\n{2}{G}, Sacrifice Woodweaver's Puzzleknot: You gain 3 life and get {E}{E}{E}.

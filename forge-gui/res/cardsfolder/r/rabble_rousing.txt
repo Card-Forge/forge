@@ -7,4 +7,4 @@ SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen | TokenAmount$ X | SubAbi
 SVar:DBPlay:DB$ Play | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE10 | Defined$ ExiledWith | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
 SVar:X:TriggerObjectsAttackers$Amount
 DeckHas:Ability$Token & Type$Citizen
-Oracle:Hideaway 5 (When this enchantment enters the battlefield, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nWhenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.
+Oracle:Hideaway 5 (When this enchantment enters, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nWhenever you attack with one or more creatures, create that many 1/1 green and white Citizen creature tokens. Then if you control ten or more creatures, you may play the exiled card without paying its mana cost.

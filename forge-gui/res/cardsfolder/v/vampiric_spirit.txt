@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Creature Spirit
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 4 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 4 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 4
-Oracle:Flying\nWhen Vampiric Spirit enters the battlefield, you lose 4 life.
+Oracle:Flying\nWhen Vampiric Spirit enters, you lose 4 life.

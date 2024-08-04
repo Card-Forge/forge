@@ -3,8 +3,8 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | Desert$ True | TriggerDescription$ When CARDNAME enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | Desert$ True | TriggerDescription$ When CARDNAME enters, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
 DeckHints:Type$Desert
-Oracle:Enchant creature\nWhen Unquenchable Thirst enters the battlefield, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
+Oracle:Enchant creature\nWhen Unquenchable Thirst enters, if you control a Desert or there is a Desert card in your graveyard, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.
