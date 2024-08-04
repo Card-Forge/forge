@@ -462,7 +462,7 @@ public class Main extends AndroidApplication {
     protected void onPause() {
         super.onPause();
 
-        ForgePreferences prefs = FModel.getPreferences();
+        /*ForgePreferences prefs = FModel.getPreferences();
         boolean minimizeonScreenLock = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK);
 
         if (minimizeonScreenLock) {
@@ -473,7 +473,7 @@ public class Main extends AndroidApplication {
                 this.moveTaskToBack(true);
                 // Minimize the app to the background...
             }
-        }
+        }*/
     }
 
     //special clipboard that words on Android

@@ -136,10 +136,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }
             }, 0);
-            lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
+            /*lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
                 Forge.getLocalizer().getMessage("lblMinimizeScreenLock"),
                 Forge.getLocalizer().getMessage("nlMinimizeScreenLock")),
-               0);
+               0);*/
         } else {
             //fullscreen
             lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,
