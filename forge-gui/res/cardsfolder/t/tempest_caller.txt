@@ -2,7 +2,7 @@ Name:Tempest Caller
 ManaCost:2 U U
 Types:Creature Merfolk Wizard
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all creatures target opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all creatures target opponent controls.
 SVar:TrigTapAll:DB$ TapAll | ValidTgts$ Opponent | TgtPrompt$ Select target player | ValidCards$ Creature
 SVar:PlayMain1:TRUE
-Oracle:When Tempest Caller enters the battlefield, tap all creatures target opponent controls.
+Oracle:When Tempest Caller enters, tap all creatures target opponent controls.
