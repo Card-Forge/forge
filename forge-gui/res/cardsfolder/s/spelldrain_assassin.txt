@@ -2,10 +2,10 @@ Name:Spelldrain Assassin
 ManaCost:U B R
 Types:Creature Vampire Assassin
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Sorcery.YouOwn,Instant.YouOwn | ChoiceTitle$ Choose an instant or sorcery card in your hand | Mandatory$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Casualty:2 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Sacrifice
-Oracle:When Spelldrain Assassin enters the battlefield, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
+Oracle:When Spelldrain Assassin enters, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
