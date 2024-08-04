@@ -9,4 +9,4 @@ T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$
 SVar:TrigCounter:DB$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SpellDescription$ Counter target spell, activated ability, or triggered ability.
 AI:RemoveDeck:All
 DeckHas:Ability$Sacrifice
-Oracle:Flash\nFlying\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Overcharged Amalgam exploits a creature, counter target spell, activated ability, or triggered ability.
+Oracle:Flash\nFlying\nExploit (When this creature enters, you may sacrifice a creature.)\nWhen Overcharged Amalgam exploits a creature, counter target spell, activated ability, or triggered ability.
