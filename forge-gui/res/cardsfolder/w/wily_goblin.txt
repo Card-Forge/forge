@@ -2,7 +2,7 @@ Name:Wily Goblin
 ManaCost:R R
 Types:Creature Goblin Pirate
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:When Wily Goblin enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+Oracle:When Wily Goblin enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

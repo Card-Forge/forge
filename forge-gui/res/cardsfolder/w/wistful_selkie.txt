@@ -2,6 +2,6 @@ Name:Wistful Selkie
 ManaCost:GU GU GU
 Types:Creature Merfolk Wizard
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:When Wistful Selkie enters the battlefield, draw a card.
+Oracle:When Wistful Selkie enters, draw a card.

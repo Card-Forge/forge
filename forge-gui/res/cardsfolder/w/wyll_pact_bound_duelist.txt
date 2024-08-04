@@ -3,10 +3,10 @@ ManaCost:3 R R
 Types:Legendary Creature Human Warlock
 PT:4/4
 K:Specialize:2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigControl | TriggerDescription$ When CARDNAME enters, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
 SVar:TrigControl:DB$ GainControl | ValidTgts$ Artifact.OppCtrl+cmcLE4,Creature.OppCtrl+cmcLE4 | TgtPrompt$ Select target artifact or creature an opponent controls with mana value 4 or less | LoseControl$ UntilTheEndOfYourNextTurn
 AlternateMode:Specialize
-Oracle:Specialize {2}\nWhen Wyll, Pact-Bound Duelist enters the battlefield, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
+Oracle:Specialize {2}\nWhen Wyll, Pact-Bound Duelist enters, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
 
 SPECIALIZE:WHITE
 
