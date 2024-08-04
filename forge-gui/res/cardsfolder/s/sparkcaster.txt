@@ -2,9 +2,9 @@ Name:Sparkcaster
 ManaCost:2 R G
 Types:Creature Kavu
 PT:5/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target player or planeswalker.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, return a red or green creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 1 damage to target player or planeswalker.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.Red+YouCtrl,Creature.Green+YouCtrl | ChangeNum$ 1 | Mandatory$ True | AILogic$ NeverBounceItself
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 1
 SVar:NeedsToPlay:Creature.Red+YouCtrl+cmcLE4,Creature.Green+YouCtrl+cmcLE4
-Oracle:When Sparkcaster enters the battlefield, return a red or green creature you control to its owner's hand.\nWhen Sparkcaster enters the battlefield, it deals 1 damage to target player or planeswalker.
+Oracle:When Sparkcaster enters, return a red or green creature you control to its owner's hand.\nWhen Sparkcaster enters, it deals 1 damage to target player or planeswalker.

@@ -2,8 +2,8 @@ Name:Spined Fluke
 ManaCost:2 B
 Types:Creature Worm Horror
 PT:5/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE3
-Oracle:When Spined Fluke enters the battlefield, sacrifice a creature.\n{B}: Regenerate Spined Fluke.
+Oracle:When Spined Fluke enters, sacrifice a creature.\n{B}: Regenerate Spined Fluke.

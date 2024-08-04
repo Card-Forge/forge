@@ -9,4 +9,4 @@ SVar:DBExileAllGraveyard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Ex
 SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.VOID
 DeckHas:Ability$Counters
-Oracle:Sphere of Annihilation enters the battlefield with X void counters on it.\nAt the beginning of your upkeep, exile Sphere of Annihilation, all creatures and planeswalkers with mana value less than or equal to the number of void counters on it, and all creature and planeswalker cards in graveyards with mana value less than or equal to the number of void counters on it.
+Oracle:Sphere of Annihilation enters with X void counters on it.\nAt the beginning of your upkeep, exile Sphere of Annihilation, all creatures and planeswalkers with mana value less than or equal to the number of void counters on it, and all creature and planeswalker cards in graveyards with mana value less than or equal to the number of void counters on it.
