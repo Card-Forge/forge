@@ -11,7 +11,7 @@ DeckHints:Type$Horror
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Counters
 AlternateMode:DoubleFaced
-Oracle:Defender\nThing in the Ice enters the battlefield with four ice counters on it.\nWhenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
+Oracle:Defender\nThing in the Ice enters with four ice counters on it.\nWhenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
 
 ALTERNATE
 
