@@ -3,4 +3,4 @@ ManaCost:1
 Types:Artifact
 K:etbCounter:CHARGE:3
 A:AB$ Mill | Cost$ T SubCounter<1/CHARGE> | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards.
-Oracle:Shriekhorn enters the battlefield with three charge counters on it.\n{T}, Remove a charge counter from Shriekhorn: Target player mills two cards.
+Oracle:Shriekhorn enters with three charge counters on it.\n{T}, Remove a charge counter from Shriekhorn: Target player mills two cards.

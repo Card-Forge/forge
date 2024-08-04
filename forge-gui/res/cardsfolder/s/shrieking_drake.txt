@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Drake
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, return a creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl
-Oracle:Flying\nWhen Shrieking Drake enters the battlefield, return a creature you control to its owner's hand.
+Oracle:Flying\nWhen Shrieking Drake enters, return a creature you control to its owner's hand.
