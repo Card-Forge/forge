@@ -2,7 +2,7 @@ Name:Scourge of Fleets
 ManaCost:5 U U
 Types:Creature Kraken
 PT:6/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters the battlefield, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.toughnessLEX+OppCtrl
 SVar:X:Count$Valid Island.YouCtrl
-Oracle:When Scourge of Fleets enters the battlefield, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.
+Oracle:When Scourge of Fleets enters, return each creature your opponents control with toughness X or less to its owner's hand, where X is the number of Islands you control.

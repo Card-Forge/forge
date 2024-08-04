@@ -8,4 +8,4 @@ SVar:SekkiCounters:DB$ RemoveCounter | CounterType$ P1P1 | CounterNum$ SekkiX | 
 SVar:DBSekkiToken:DB$ Token | TokenAmount$ SekkiX | TokenScript$ c_1_1_spirit
 A:AB$ ChangeZone | Cost$ Sac<8/Spirit> | Defined$ Self | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return NICKNAME from your graveyard to the battlefield.
 SVar:SekkiX:ReplaceCount$DamageAmount
-Oracle:Sekki, Seasons' Guide enters the battlefield with eight +1/+1 counters on it.\nIf damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.\nSacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
+Oracle:Sekki, Seasons' Guide enters with eight +1/+1 counters on it.\nIf damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.\nSacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
