@@ -2,6 +2,6 @@ Name:Voracious Wurm
 ManaCost:1 G
 Types:Creature Wurm
 PT:2/2
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
 SVar:X:Count$LifeYouGainedThisTurn
-Oracle:Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
+Oracle:Voracious Wurm enters with X +1/+1 counters on it, where X is the amount of life you've gained this turn.
