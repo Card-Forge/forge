@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/2
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters the battlefield, untap CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever another creature enters, untap CARDNAME.
 A:AB$ Tap | Cost$ T | ValidTgts$ Creature.cmcLE3 | TgtPrompt$ Select target creature with mana value 3 or less | SpellDescription$ Tap target creature with mana value 3 or less.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
-Oracle:Sunstrike Legionnaire doesn't untap during your untap step.\nWhenever another creature enters the battlefield, untap Sunstrike Legionnaire.\n{T}: Tap target creature with mana value 3 or less.
+Oracle:Sunstrike Legionnaire doesn't untap during your untap step.\nWhenever another creature enters, untap Sunstrike Legionnaire.\n{T}: Tap target creature with mana value 3 or less.
