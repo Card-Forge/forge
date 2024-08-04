@@ -160,6 +160,7 @@ Professor Onyx|Professor's Discipline|You'll get it back at the end of the semes
 Quintorius Kand|Quintorius's Archeological Dig|The past is still alive.
 Ral Zarek|Ral's Long Day|So much work, so much time!
 Ral, Caller of Storms|Ral's Invocation|The storm called and left a message.
+Ral, Crackling Wit|Ral's Perfect Storm|I am not the eye of the storm. I am its heart.
 Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit me.
 Ral, Leyline Prodigy|Ral's Bolt of Inspiration|There's always more ideas.
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
