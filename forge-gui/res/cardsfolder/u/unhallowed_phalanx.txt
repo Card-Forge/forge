@@ -2,5 +2,6 @@ Name:Unhallowed Phalanx
 ManaCost:4 B
 Types:Creature Zombie Soldier
 PT:1/13
-K:CARDNAME enters the battlefield tapped.
-Oracle:Unhallowed Phalanx enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Unhallowed Phalanx enters tapped.

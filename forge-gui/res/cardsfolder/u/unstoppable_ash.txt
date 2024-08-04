@@ -7,4 +7,4 @@ K:Champion:Treefolk,Warrior
 T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumDef$ +5
 AI:RemoveDeck:Random
-Oracle:Trample\nChampion a Treefolk or Warrior (When this enters the battlefield, sacrifice it unless you exile another Treefolk or Warrior you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
+Oracle:Trample\nChampion a Treefolk or Warrior (When this enters, sacrifice it unless you exile another Treefolk or Warrior you control. When this leaves the battlefield, that card returns to the battlefield.)\nWhenever a creature you control becomes blocked, it gets +0/+5 until end of turn.
