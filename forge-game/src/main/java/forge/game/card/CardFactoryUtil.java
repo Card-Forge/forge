@@ -2615,17 +2615,6 @@ public class CardFactoryUtil {
             inst.addReplacement(re);
         }
 
-        if (keyword.equals("CARDNAME enters tapped.")) {
-            String effect = "DB$ Tap | Defined$ Self | ETB$ True "
-                + " | SpellDescription$ CARDNAME enters tapped.";
-
-            final ReplacementEffect re = createETBReplacement(
-                card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", ""
-            );
-
-            inst.addReplacement(re);
-        }
-
         if (keyword.startsWith("ETBReplacement")) {
             String[] splitkw = keyword.split(":");
             ReplacementLayer layer = ReplacementLayer.smartValueOf(splitkw[1]);
