@@ -2224,7 +2224,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             s.append(p[4]);
                         }
                     } else {
-                        s.append(getName()).append(" enters the battlefield with ");
+                        s.append(getName()).append(" enters with ");
                         s.append(Lang.nounWithNumeralExceptOne(p[2],
                                 CounterType.getType(p[1]).getName().toLowerCase() + " counter"));
                         s.append(" on it.");
@@ -2404,9 +2404,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] k = keyword.split(":");
                     final String[] s = (k[0]).split(" ");
                     final String t = s[1];
-                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
-                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
-                    sbLong.append("battlefield with that many +1/+1 counters on it.)");
+                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters, you may ");
+                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters ");
+                    sbLong.append("with that many +1/+1 counters on it.)");
                 } else if (keyword.startsWith("Prototype")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
@@ -2759,7 +2759,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 String text = replacementEffect.getDescription();
                 // Get original description since text might be translated
                 if (replacementEffect.hasParam("Description") &&
-                        replacementEffect.getParam("Description").contains("enters the battlefield")) {
+                        replacementEffect.getParam("Description").contains("enters")) {
                     sb.append(text).append(linebreak);
                 } else {
                     replacementEffects.append(text).append(linebreak);
