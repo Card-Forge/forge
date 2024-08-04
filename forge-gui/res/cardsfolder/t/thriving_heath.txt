@@ -1,8 +1,9 @@
 Name:Thriving Heath
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ white | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color other than white.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ white | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color other than white.
 A:AB$ Mana | Cost$ T | Produced$ Combo W Chosen | SpellDescription$ Add {W} or one mana of the chosen color.
-Oracle:Thriving Heath enters the battlefield tapped.\nAs Thriving Heath enters the battlefield, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color.
+Oracle:Thriving Heath enters tapped.\nAs Thriving Heath enters, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color.
