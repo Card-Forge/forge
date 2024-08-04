@@ -1,10 +1,10 @@
 Name:Trial of Strength
 ManaCost:2 G
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/2 green Beast creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 4/2 green Beast creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_2_beast | TokenOwner$ You
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche you control enters, return CARDNAME to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 DeckHas:Ability$Token
 DeckHints:Type$Cartouche
-Oracle:When Trial of Strength enters the battlefield, create a 4/2 green Beast creature token.\nWhen a Cartouche enters the battlefield under your control, return Trial of Strength to its owner's hand.
+Oracle:When Trial of Strength enters, create a 4/2 green Beast creature token.\nWhen a Cartouche you control enters, return Trial of Strength to its owner's hand.

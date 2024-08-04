@@ -1,10 +1,10 @@
 Name:Trial of Ambition
 ManaCost:1 B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, target opponent sacrifices a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters, target opponent sacrifices a creature.
 SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SacMessage$ Creature
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche enters the battlefield under your control, return CARDNAME to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Cartouche.YouCtrl | Execute$ TrigReturn | TriggerDescription$ When a Cartouche you control enters, return CARDNAME to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ Self
 SVar:NeedsToPlay:Creature.OppCtrl
 DeckHints:Type$Cartouche
-Oracle:When Trial of Ambition enters the battlefield, target opponent sacrifices a creature.\nWhen a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
+Oracle:When Trial of Ambition enters, target opponent sacrifices a creature.\nWhen a Cartouche you control enters, return Trial of Ambition to its owner's hand.
