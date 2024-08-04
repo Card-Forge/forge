@@ -4,5 +4,5 @@ Types:Creature Human Ninja
 PT:0/0
 K:Ninjutsu:1 U
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTypes$ Ninja | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types.
-Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nYou may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTypes$ Ninja | SpellDescription$ You may have CARDNAME enter as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types.
+Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nYou may have Sakashima's Student enter as a copy of any creature on the battlefield, except it's a Ninja in addition to its other creature types.

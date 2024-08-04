@@ -15,6 +15,7 @@ ALTERNATE
 Name:Haven of the Harvest
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-Oracle:Haven of the Harvest enters the battlefield tapped.\n{T}: Add {G} or {W}.
+Oracle:Haven of the Harvest enters tapped.\n{T}: Add {G} or {W}.

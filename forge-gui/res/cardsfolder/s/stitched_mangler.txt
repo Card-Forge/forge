@@ -2,9 +2,10 @@ Name:Stitched Mangler
 ManaCost:2 U
 Types:Creature Zombie Horror
 PT:2/3
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls. | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:PlayMain1:TRUE
-Oracle:Stitched Mangler enters the battlefield tapped.\nWhen Stitched Mangler enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
+Oracle:Stitched Mangler enters tapped.\nWhen Stitched Mangler enters, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.

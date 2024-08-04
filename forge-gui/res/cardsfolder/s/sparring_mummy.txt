@@ -2,6 +2,6 @@ Name:Sparring Mummy
 ManaCost:3 W
 Types:Creature Zombie
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap target creature.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Choose target creature.
-Oracle:When Sparring Mummy enters the battlefield, untap target creature.
+Oracle:When Sparring Mummy enters, untap target creature.

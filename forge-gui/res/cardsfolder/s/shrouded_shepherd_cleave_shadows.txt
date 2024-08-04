@@ -2,10 +2,10 @@ Name:Shrouded Shepherd
 ManaCost:1 W
 Types:Creature Spirit Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gets +2/+2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature you control gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2
 AlternateMode:Adventure
-Oracle:When Shrouded Shepherd enters the battlefield, target creature you control gets +2/+2 until end of turn.
+Oracle:When Shrouded Shepherd enters, target creature you control gets +2/+2 until end of turn.
 
 ALTERNATE
 

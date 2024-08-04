@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Creature Bird
 PT:1/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters, look at the top four cards of your library, then put them back in any order.
 SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
-Oracle:Flying\nWhen Sage Owl enters the battlefield, look at the top four cards of your library, then put them back in any order.
+Oracle:Flying\nWhen Sage Owl enters, look at the top four cards of your library, then put them back in any order.

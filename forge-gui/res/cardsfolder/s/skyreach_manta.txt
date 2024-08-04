@@ -8,4 +8,4 @@ SVar:NoZeroToughnessAI:True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate
-Oracle:Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)\nFlying
+Oracle:Sunburst (This enters with a +1/+1 counter on it for each color of mana spent to cast it.)\nFlying

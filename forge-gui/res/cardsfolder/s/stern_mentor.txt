@@ -5,4 +5,4 @@ PT:2/2
 K:Soulbond
 S:Mode$ Continuous | Affected$ Creature.PairedWith,Creature.Self+Paired | AddAbility$ Mill | Description$ As long as CARDNAME is paired with another creature, each of those creatures have "{T}: Target player mills two cards."
 SVar:Mill:AB$ Mill | Cost$ T | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills two cards.
-Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Stern Mentor is paired with another creature, each of those creatures has "{T}: Target player mills two cards."
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)\nAs long as Stern Mentor is paired with another creature, each of those creatures has "{T}: Target player mills two cards."

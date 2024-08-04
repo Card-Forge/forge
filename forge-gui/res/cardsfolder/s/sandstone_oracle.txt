@@ -3,9 +3,9 @@ ManaCost:7
 Types:Artifact Creature Sphinx
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseOpp | TriggerDescription$ When CARDNAME enters the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseOpp | TriggerDescription$ When CARDNAME enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
 SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ MostCardsInHand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:Y:Count$InYourHand
 SVar:X:Count$InChosenHand/Minus.Y
-Oracle:Flying\nWhen Sandstone Oracle enters the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
+Oracle:Flying\nWhen Sandstone Oracle enters, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.

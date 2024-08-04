@@ -1,8 +1,9 @@
 Name:Skyline Cascade
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature an opponent controls doesn't untap during its controller's next untap step.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-Oracle:Skyline Cascade enters the battlefield tapped.\nWhen Skyline Cascade enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.\n{T}: Add {U}.
+Oracle:Skyline Cascade enters tapped.\nWhen Skyline Cascade enters, target creature an opponent controls doesn't untap during its controller's next untap step.\n{T}: Add {U}.

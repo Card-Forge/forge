@@ -1,8 +1,8 @@
 Name:Serum Tank
 ManaCost:3
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.Other | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield, put a charge counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.Other | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME or another artifact enters, put a charge counter on CARDNAME.
 A:AB$ Draw | Cost$ 3 T SubCounter<1/CHARGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 AI:RemoveDeck:Random
-Oracle:Whenever Serum Tank or another artifact enters the battlefield, put a charge counter on Serum Tank.\n{3}, {T}, Remove a charge counter from Serum Tank: Draw a card.
+Oracle:Whenever Serum Tank or another artifact enters, put a charge counter on Serum Tank.\n{3}, {T}, Remove a charge counter from Serum Tank: Draw a card.
