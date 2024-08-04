@@ -2,8 +2,8 @@ Name:Vedalken Plotter
 ManaCost:2 U
 Types:Creature Vedalken Wizard
 PT:1/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTarget | TriggerDescription$ When CARDNAME enters the battlefield, exchange control of target land you control and target land an opponent controls.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTarget | TriggerDescription$ When CARDNAME enters, exchange control of target land you control and target land an opponent controls.
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Land.YouCtrl | TgtPrompt$ Choose target land you control | SubAbility$ DBExchange | SpellDescription$ Exchange control of target land you control and target land an opponent controls.
 SVar:DBExchange:DB$ ExchangeControl | Defined$ ParentTarget | ValidTgts$ Land.OppCtrl | TgtPrompt$ Choose target land an opponent controls
 AI:RemoveDeck:All
-Oracle:When Vedalken Plotter enters the battlefield, exchange control of target land you control and target land an opponent controls.
+Oracle:When Vedalken Plotter enters, exchange control of target land you control and target land an opponent controls.

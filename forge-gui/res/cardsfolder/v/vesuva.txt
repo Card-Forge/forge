@@ -2,6 +2,6 @@ Name:Vesuva
 ManaCost:no cost
 Types:Land
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Land.Other | IntoPlayTapped$ True | SpellDescription$ You may have CARDNAME enter the battlefield tapped as a copy of any land on the battlefield.
+SVar:DBCopy:DB$ Clone | Choices$ Land.Other | IntoPlayTapped$ True | SpellDescription$ You may have CARDNAME enter tapped as a copy of any land on the battlefield.
 SVar:NeedsToPlay:Land.YouDontCtrl+notnamedVesuva,Land.YouCtrl+nonLegendary+notnamedVesuva
-Oracle:You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
+Oracle:You may have Vesuva enter tapped as a copy of any land on the battlefield.
