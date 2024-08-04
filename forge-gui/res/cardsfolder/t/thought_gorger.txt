@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Horror
 PT:2/2
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EatMyThoughts | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EatMyThoughts | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.
 SVar:EatMyThoughts:DB$ PutCounter | Defined$ Self | CounterNum$ OldThoughts | CounterType$ P1P1 | RememberCards$ True | SubAbility$ GorgeOnThoughts
 SVar:GorgeOnThoughts:DB$ Discard | Mode$ Hand | Defined$ You | ConditionDescription$ If you do, | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -12,4 +12,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.S
 SVar:BringBackThoughts:DB$ Draw | NumCards$ Disgorge | Defined$ TriggeredCardController
 SVar:Disgorge:TriggeredCard$CardCounters.P1P1
 AI:RemoveDeck:All
-Oracle:Trample\nWhen Thought Gorger enters the battlefield, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.\nWhen Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
+Oracle:Trample\nWhen Thought Gorger enters, put a +1/+1 counter on it for each card in your hand. If you do, discard your hand.\nWhen Thought Gorger leaves the battlefield, draw a card for each +1/+1 counter on it.
