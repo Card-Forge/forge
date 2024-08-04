@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDraw:DB$ Draw | NumCards$ X
 SVar:X:TriggeredCard$CardCounters.OIL
 DeckHas:Ability$Counters
-Oracle:Flying\nWatchful Blisterzoa enters the battlefield with an oil counter on it.\nWhen Watchful Blisterzoa dies, draw cards equal to the number of oil counters on it.
+Oracle:Flying\nWatchful Blisterzoa enters with an oil counter on it.\nWhen Watchful Blisterzoa dies, draw cards equal to the number of oil counters on it.

@@ -4,7 +4,7 @@ Types:Creature Shapeshifter
 PT:3/5
 K:Changeling
 K:Reach
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | PresentZone$ Graveyard | TriggerDescription$ When CARDNAME enters the battlefield, if there are three or more creature cards in your graveyard, you gain 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | PresentZone$ Graveyard | TriggerDescription$ When CARDNAME enters, if there are three or more creature cards in your graveyard, you gain 5 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
 SVar:PlayMain1:Random
-Oracle:Changeling (This card is every creature type.)\nReach\nWhen Webweaver Changeling enters the battlefield, if there are three or more creature cards in your graveyard, you gain 5 life.
+Oracle:Changeling (This card is every creature type.)\nReach\nWhen Webweaver Changeling enters, if there are three or more creature cards in your graveyard, you gain 5 life.

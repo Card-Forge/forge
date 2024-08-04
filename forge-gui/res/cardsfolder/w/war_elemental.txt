@@ -2,11 +2,11 @@ Name:War Elemental
 ManaCost:R R R
 Types:Creature Elemental
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice it unless an opponent was dealt damage this turn.
 SVar:TrigSac:DB$ Sacrifice | ConditionCheckSVar$ WarElementalX | ConditionSVarCompare$ EQ0
 SVar:WarElementalX:PlayerCountRegisteredOpponents$HasPropertywasDealtDamageThisTurn
 T:Mode$ DamageDoneOnce | ValidSource$ Card | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent is dealt damage, put that many +1/+1 counters on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ WarElementalY
 SVar:WarElementalY:TriggerCount$DamageAmount
 SVar:NeedsToPlayVar:WarElementalX GE1
-Oracle:When War Elemental enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.\nWhenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
+Oracle:When War Elemental enters, sacrifice it unless an opponent was dealt damage this turn.\nWhenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
