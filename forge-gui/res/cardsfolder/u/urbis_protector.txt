@@ -2,7 +2,7 @@ Name:Urbis Protector
 ManaCost:4 W W
 Types:Creature Human Cleric
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 white Angel creature token with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 4/4 white Angel creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:When Urbis Protector enters the battlefield, create a 4/4 white Angel creature token with flying.
+Oracle:When Urbis Protector enters, create a 4/4 white Angel creature token with flying.

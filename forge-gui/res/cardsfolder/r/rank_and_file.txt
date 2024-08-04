@@ -2,8 +2,8 @@ Name:Rank and File
 ManaCost:2 B B
 Types:Creature Zombie
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, green creatures get -1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters, green creatures get -1/-1 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Green | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:PlayMain1:TRUE
 AI:RemoveDeck:Random
-Oracle:When Rank and File enters the battlefield, green creatures get -1/-1 until end of turn.
+Oracle:When Rank and File enters, green creatures get -1/-1 until end of turn.

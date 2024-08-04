@@ -9,4 +9,4 @@ SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select targe
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:TriggeredCard$CardPower
 DeckHas:Ability$LifeGain
-Oracle:Partner with Cazur, Ruthless Stalker (When this creature enters the battlefield, target player may put Cazur into their hand from their library, then shuffle.)\nUkkima, Stalking Shadow can't be blocked.\nWhen Ukkima leaves the battlefield, it deals X damage to target player and you gain X life, where X is its power.
+Oracle:Partner with Cazur, Ruthless Stalker (When this creature enters, target player may put Cazur into their hand from their library, then shuffle.)\nUkkima, Stalking Shadow can't be blocked.\nWhen Ukkima leaves the battlefield, it deals X damage to target player and you gain X life, where X is its power.

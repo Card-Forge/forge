@@ -2,7 +2,7 @@ Name:Enlightened Maniac
 ManaCost:3 U
 Types:Creature Human
 PT:0/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/2 colorless Eldrazi Horror creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 3/2 colorless Eldrazi Horror creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:When Enlightened Maniac enters the battlefield, create a 3/2 colorless Eldrazi Horror creature token.
+Oracle:When Enlightened Maniac enters, create a 3/2 colorless Eldrazi Horror creature token.

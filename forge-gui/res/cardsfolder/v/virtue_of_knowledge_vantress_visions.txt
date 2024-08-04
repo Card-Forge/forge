@@ -1,9 +1,9 @@
 Name:Virtue of Knowledge
 ManaCost:4 U
 Types:Enchantment
-S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Permanent | Destination$ Battlefield | Description$ If a permanent entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 AlternateMode:Adventure
-Oracle:If a permanent entering the battlefield causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:If a permanent entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 
 ALTERNATE
 

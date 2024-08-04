@@ -3,7 +3,7 @@ ManaCost:4 U
 Types:Creature Bird
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Council's dilemma — When CARDNAME enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on CARDNAME for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigVote | TriggerDescription$ Council's dilemma — When CARDNAME enters, starting with you, each player votes for feather or quill. Put a +1/+1 counter on CARDNAME for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
 SVar:TrigVote:DB$ Vote | Defined$ Player | StoreVoteNum$ True | VoteType$ Feather,Quill | SubAbility$ DBVoteFeather | AILogic$ FeatherOrQuill
 SVar:DBVoteFeather:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ VoteNumFeather | SubAbility$ DBVoteQuill
 SVar:DBVoteQuill:DB$ Draw | NumCards$ VoteNumQuill | SubAbility$ DBDiscard | RememberDrawn$ AllReplaced
@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 DeckHas:Ability$Counters|Discard
 DeckHints:Keyword$Madness & Ability$Delirium
-Oracle:Flying\nCouncil's dilemma — When Messenger Jays enters the battlefield, starting with you, each player votes for feather or quill. Put a +1/+1 counter on Messenger Jays for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.
+Oracle:Flying\nCouncil's dilemma — When Messenger Jays enters, starting with you, each player votes for feather or quill. Put a +1/+1 counter on Messenger Jays for each feather vote and draw a card for each quill vote. For each card drawn this way, discard a card.

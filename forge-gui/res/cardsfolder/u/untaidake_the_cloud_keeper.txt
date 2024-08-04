@@ -1,8 +1,9 @@
 Name:Untaidake, the Cloud Keeper
 ManaCost:no cost
 Types:Legendary Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T PayLife<2> | Produced$ C | Amount$ 2 | RestrictValid$ Spell.Legendary | SpellDescription$ Add {C}{C}. Spend this mana only to cast legendary spells.
 AI:RemoveDeck:Random
 DeckHints:Type$Legendary
-Oracle:Untaidake, the Cloud Keeper enters the battlefield tapped.\n{T}, Pay 2 life: Add {C}{C}. Spend this mana only to cast legendary spells.
+Oracle:Untaidake, the Cloud Keeper enters tapped.\n{T}, Pay 2 life: Add {C}{C}. Spend this mana only to cast legendary spells.

@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Faerie Rogue
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters, sacrifice it unless you return another creature you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Return<1/Creature.Other/other creature> | UnlessPayer$ You
 SVar:NeedsToPlay:Creature.YouCtrl
-Oracle:Flying\nWhen Faerie Impostor enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.
+Oracle:Flying\nWhen Faerie Impostor enters, sacrifice it unless you return another creature you control to its owner's hand.

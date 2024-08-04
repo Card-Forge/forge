@@ -1,7 +1,8 @@
 Name:Witherbloom Campus
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
 A:AB$ Scry | Cost$ 4 T | ScryNum$ 1 | SpellDescription$ Scry 1.
-Oracle:Witherbloom Campus enters the battlefield tapped.\n{T}: Add {B} or {G}.\n{4}, {T}: Scry 1.
+Oracle:Witherbloom Campus enters tapped.\n{T}: Add {B} or {G}.\n{4}, {T}: Scry 1.

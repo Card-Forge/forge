@@ -2,7 +2,7 @@ Name:Leonin Armorguard
 ManaCost:2 G W
 Types:Creature Cat Soldier
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control get +1/+1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters, creatures you control get +1/+1 until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1
 SVar:PlayMain1:TRUE
-Oracle:When Leonin Armorguard enters the battlefield, creatures you control get +1/+1 until end of turn.
+Oracle:When Leonin Armorguard enters, creatures you control get +1/+1 until end of turn.

@@ -30,3 +30,6 @@ ScryfallCode=OLGC
 2022A M Gaea's Cradle @Ralph Horsley
 2022B M Scrubland @Raoul Vitale
 2022C M The Tabernacle at Pendrell Vale @Milivoj Ćeran
+2023 M Lightning Bolt @rk post
+2023A M Volcanic Island @Mark Tedin
+2023EU M Force of Will @Alan Pollack

@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Spirit
 PT:1/3
 K:Skulk
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature an opponent controls doesn't untap during its controller's next untap step.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
 SVar:PlayMain1:TRUE
-Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Fogwalker enters the battlefield, target creature an opponent controls doesn't untap during its controller's next untap step.
+Oracle:Skulk (This creature can't be blocked by creatures with greater power.)\nWhen Fogwalker enters, target creature an opponent controls doesn't untap during its controller's next untap step.

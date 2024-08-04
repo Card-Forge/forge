@@ -2,7 +2,7 @@ Name:Wild Wurm
 ManaCost:3 R
 Types:Creature Wurm
 PT:5/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlipACoin | TriggerDescription$ When CARDNAME enters the battlefield, flip a coin. If you lose the flip, return CARDNAME to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlipACoin | TriggerDescription$ When CARDNAME enters, flip a coin. If you lose the flip, return CARDNAME to its owner's hand.
 SVar:TrigFlipACoin:DB$ FlipACoin | LoseSubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand
-Oracle:When Wild Wurm enters the battlefield, flip a coin. If you lose the flip, return Wild Wurm to its owner's hand.
+Oracle:When Wild Wurm enters, flip a coin. If you lose the flip, return Wild Wurm to its owner's hand.

@@ -1,10 +1,10 @@
 Name:Pandemonium
 ManaCost:3 R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDamage | OptionalDecider$ TriggeredCardController | TriggerDescription$ Whenever a creature enters, that creature's controller may have it deal damage equal to its power to any target of their choice.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | DamageSource$ TriggeredCard | TargetingPlayer$ TriggeredCardController
 SVar:X:TriggeredCard$CardPower
 SVar:PlayMain1:TRUE
 SVar:AIPriorityModifier:9
 AI:RemoveDeck:Random
-Oracle:Whenever a creature enters the battlefield, that creature's controller may have it deal damage equal to its power to any target of their choice.
+Oracle:Whenever a creature enters, that creature's controller may have it deal damage equal to its power to any target of their choice.

@@ -2,6 +2,6 @@ Name:Pattern Matcher
 ManaCost:4
 Types:Artifact Creature Golem
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a card with the same name as another creature you control, reveal it, put it into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may search your library for a card with the same name as another creature you control, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.sharesNameWith Valid Creature.YouCtrl+Other | ChangeNum$ 1 | ShuffleNonMandatory$ True
-Oracle:When Pattern Matcher enters the battlefield, you may search your library for a card with the same name as another creature you control, reveal it, put it into your hand, then shuffle.
+Oracle:When Pattern Matcher enters, you may search your library for a card with the same name as another creature you control, reveal it, put it into your hand, then shuffle.

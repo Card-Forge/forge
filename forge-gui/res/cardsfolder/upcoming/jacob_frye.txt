@@ -8,4 +8,4 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Card.Assassin+YouCtrl,Card.withFreeru
 SVar:DBCast:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | CopyCard$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Name$Evie Fryer & Type$Assassin & Ability$Graveyard
-Oracle:Partner with Evie Frye (When this creature enters the battlefield, target player may put Evie into their hand from their library, then shuffle.)\nWhenever one or more Assassins you control deal combat damage to a player, exile up to one target Assassin card or card with freerunning from your graveyard. If you do, copy it. You may cast the copy.
+Oracle:Partner with Evie Frye (When this creature enters, target player may put Evie into their hand from their library, then shuffle.)\nWhenever one or more Assassins you control deal combat damage to a player, exile up to one target Assassin card or card with freerunning from your graveyard. If you do, copy it. You may cast the copy.

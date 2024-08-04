@@ -2,6 +2,6 @@ Name:Pharika's Mender
 ManaCost:3 B G
 Types:Creature Gorgon
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target creature or enchantment card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl,Enchantment.YouCtrl | TgtPrompt$ Select target creature or enchantment card in your graveyard
-Oracle:When Pharika's Mender enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.
+Oracle:When Pharika's Mender enters, you may return target creature or enchantment card from your graveyard to your hand.

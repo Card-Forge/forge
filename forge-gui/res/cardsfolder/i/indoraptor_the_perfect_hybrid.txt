@@ -10,4 +10,4 @@ SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X | UnlessCos
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 SVar:X:Count$CardPower
 DeckHas:Ability$Counters
-Oracle:Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, where X is the damage dealt to your opponents this turn.)\nMenace\nEnrage — Whenever Indoraptor, the Perfect Hybrid is dealt damage, choose an opponent at random. Indoraptor deals damage equal to its power to that player unless they sacrifice a nontoken creature.
+Oracle:Bloodthirst X (This creature enters with X +1/+1 counters on it, where X is the damage dealt to your opponents this turn.)\nMenace\nEnrage — Whenever Indoraptor, the Perfect Hybrid is dealt damage, choose an opponent at random. Indoraptor deals damage equal to its power to that player unless they sacrifice a nontoken creature.

@@ -4,7 +4,7 @@ Types:Creature Faerie Wizard
 PT:2/2
 K:Flying
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a Faerie card, reveal it, then shuffle and put that card on top.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may search your library for a Faerie card, reveal it, then shuffle and put that card on top.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Card.Faerie | ChangeNum$ 1 | ShuffleNonMandatory$ True
 AI:RemoveDeck:Random
-Oracle:Flash\nFlying\nWhen Faerie Harbinger enters the battlefield, you may search your library for a Faerie card, reveal it, then shuffle and put that card on top.
+Oracle:Flash\nFlying\nWhen Faerie Harbinger enters, you may search your library for a Faerie card, reveal it, then shuffle and put that card on top.

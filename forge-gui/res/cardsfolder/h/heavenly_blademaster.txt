@@ -4,10 +4,10 @@ Types:Creature Angel
 PT:3/6
 K:Flying
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may attach any number of Auras and Equipment you control to it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may attach any number of Auras and Equipment you control to it.
 SVar:DBAttach:DB$ Attach | Object$ Valid Aura.YouCtrl,Equipment.YouCtrl | Optional$ True
 AI:RemoveDeck:Random
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other creatures you control get +1/+1 for each Aura and Equipment attached to CARDNAME.
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 SVar:EnchantMe:Multiple
-Oracle:Flying, double strike\nWhen Heavenly Blademaster enters the battlefield, you may attach any number of Auras and Equipment you control to it.\nOther creatures you control get +1/+1 for each Aura and Equipment attached to Heavenly Blademaster.
+Oracle:Flying, double strike\nWhen Heavenly Blademaster enters, you may attach any number of Auras and Equipment you control to it.\nOther creatures you control get +1/+1 for each Aura and Equipment attached to Heavenly Blademaster.

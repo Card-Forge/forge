@@ -2,7 +2,7 @@ Name:Regal Force
 ManaCost:4 G G G
 Types:Creature Elemental
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each green creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card for each green creature you control.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Valid Creature.Green+YouCtrl
-Oracle:When Regal Force enters the battlefield, draw a card for each green creature you control.
+Oracle:When Regal Force enters, draw a card for each green creature you control.

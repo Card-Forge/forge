@@ -8,4 +8,4 @@ SVar:PhaseTrigger:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZ
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | RemoveKeywords$ Soulbond | AddKeywords$ Haste | AtEOT$ ExileCombat
 DeckHas:Ability$Token
 SVar:BuffedBy:Creature
-Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)\nAs long as Mirage Phalanx is paired with another creature, each of those creatures has "At the beginning of combat on your turn, create a token that's a copy of this creature, except it has haste and loses soulbond. Exile it at end of combat."
+Oracle:Soulbond (You may pair this creature with another unpaired creature when either enters. They remain paired for as long as you control both of them.)\nAs long as Mirage Phalanx is paired with another creature, each of those creatures has "At the beginning of combat on your turn, create a token that's a copy of this creature, except it has haste and loses soulbond. Exile it at end of combat."

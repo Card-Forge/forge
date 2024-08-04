@@ -2,6 +2,6 @@ Name:Hedron Crab
 ManaCost:U
 Types:Creature Crab
 PT:0/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, target player mills three cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Landfall — Whenever a land you control enters, target player mills three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player
-Oracle:Landfall — Whenever a land enters the battlefield under your control, target player mills three cards.
+Oracle:Landfall — Whenever a land you control enters, target player mills three cards.

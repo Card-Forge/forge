@@ -2,7 +2,7 @@ Name:Nylea's Disciple
 ManaCost:2 G G
 Types:Creature Centaur Archer
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain life equal to your devotion to green.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain life equal to your devotion to green.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
 SVar:X:Count$Devotion.Green
-Oracle:When Nylea's Disciple enters the battlefield, you gain life equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)
+Oracle:When Nylea's Disciple enters, you gain life equal to your devotion to green. (Each {G} in the mana costs of permanents you control counts toward your devotion to green.)

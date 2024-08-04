@@ -2,9 +2,9 @@ Name:Overlaid Terrain
 ManaCost:2 G G
 Types:Enchantment
 K:ETBReplacement:Other:TrigSac
-SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Land.YouCtrl | SpellDescription$ As CARDNAME enters the battlefield, sacrifice all lands you control.
+SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Land.YouCtrl | SpellDescription$ As CARDNAME enters, sacrifice all lands you control.
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "{T}: Add two mana of any one color."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:As Overlaid Terrain enters the battlefield, sacrifice all lands you control.\nLands you control have "{T}: Add two mana of any one color."
+Oracle:As Overlaid Terrain enters, sacrifice all lands you control.\nLands you control have "{T}: Add two mana of any one color."

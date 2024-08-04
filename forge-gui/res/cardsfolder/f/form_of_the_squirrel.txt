@@ -1,7 +1,7 @@
 Name:Form of the Squirrel
 ManaCost:G
 Types:Enchantment
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ As CARDNAME enters the battlefield, create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ As CARDNAME enters, create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield.
 SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_squirrel | RememberTokens$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ TrigLose | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ You lose the game when that creature leaves the battlefield.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
@@ -9,4 +9,4 @@ S:Mode$ CantAttack | ValidCard$ Creature | Target$ You | Description$ Creatures 
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Shroud | Description$ You have shroud.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | EffectZone$ Battlefield | Description$ You can't cast spells.
 DeckHas:Ability$Token
-Oracle:As Form of the Squirrel enters the battlefield, create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield.\nCreatures can't attack you.\nYou have shroud.\nYou can't cast spells.
+Oracle:As Form of the Squirrel enters, create a 1/1 green Squirrel creature token. You lose the game when that creature leaves the battlefield.\nCreatures can't attack you.\nYou have shroud.\nYou can't cast spells.

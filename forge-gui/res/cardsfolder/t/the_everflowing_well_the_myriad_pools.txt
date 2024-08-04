@@ -1,7 +1,7 @@
 Name:The Everflowing Well
 ManaCost:2 U
 Types:Legendary Artifact
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards, then draw two cards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill two cards, then draw two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | NumCards$ 2 | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | Execute$ TrigTransform | TriggerDescription$ Descend 8 — At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform CARDNAME.
@@ -10,7 +10,7 @@ SVar:X:Count$ValidGraveyard Permanent.YouOwn
 DeckHas:Ability$Graveyard|Mill
 DeckHints:Ability$Graveyard|Mill
 AlternateMode:DoubleFaced
-Oracle:When The Everflowing Well enters the battlefield, mill two cards, then draw two cards.\nDescend 8 — At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform The Everflowing Well.
+Oracle:When The Everflowing Well enters, mill two cards, then draw two cards.\nDescend 8 — At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform The Everflowing Well.
 
 ALTERNATE
 

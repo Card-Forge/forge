@@ -3,9 +3,9 @@ ManaCost:1 W W
 Types:Enchantment
 K:UpkeepCost:1 W
 K:ETBReplacement:Other:ChooseBlackOrRed
-SVar:ChooseBlackOrRed:DB$ ChooseColor | Defined$ You | Choices$ black,red | AILogic$ MostProminentHumanCreatures | SpellDescription$ As CARDNAME enters the battlefield, choose black or red.
+SVar:ChooseBlackOrRed:DB$ ChooseColor | Defined$ You | Choices$ black,red | AILogic$ MostProminentHumanCreatures | SpellDescription$ As CARDNAME enters, choose black or red.
 T:Mode$ DamageDone | ValidSource$ Creature.ChosenColor+inZoneBattlefield | ValidTarget$ Creature.White+YouCtrl,You | TriggerZones$ Battlefield | Execute$ MangarasRetribution | TriggerDescription$ Whenever a creature of the chosen color deals damage to you or a white creature you control, CARDNAME deals that much damage to that creature.
 SVar:MangarasRetribution:DB$ DealDamage | Defined$ TriggeredSourceLKICopy | NumDmg$ MangaraX
 SVar:MangaraX:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
-Oracle:As Mangara's Equity enters the battlefield, choose black or red.\nAt the beginning of your upkeep, sacrifice Mangara's Equity unless you pay {1}{W}.\nWhenever a creature of the chosen color deals damage to you or a white creature you control, Mangara's Equity deals that much damage to that creature.
+Oracle:As Mangara's Equity enters, choose black or red.\nAt the beginning of your upkeep, sacrifice Mangara's Equity unless you pay {1}{W}.\nWhenever a creature of the chosen color deals damage to you or a white creature you control, Mangara's Equity deals that much damage to that creature.

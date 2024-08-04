@@ -3,4 +3,4 @@ ManaCost:3
 Types:Artifact Equipment
 K:Equip:3
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block equipped creature do so.
-Oracle:All creatures able to block equipped creature do so.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+Oracle:All creatures able to block equipped creature do so.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery. This card enters unattached and stays on the battlefield if the creature leaves.)
