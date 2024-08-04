@@ -2,7 +2,7 @@ Name:Servant of the Conduit
 ManaCost:1 G
 Types:Creature Elf Druid
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E} (two energy counters).
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
 A:AB$ Mana | Cost$ T PayEnergy<1> | Produced$ Any | SpellDescription$ Add one mana of any color.
-Oracle:When Servant of the Conduit enters the battlefield, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Add one mana of any color.
+Oracle:When Servant of the Conduit enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Add one mana of any color.

@@ -2,7 +2,7 @@ Name:Setessan Starbreaker
 ManaCost:3 G
 Types:Creature Human Warrior
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target Aura.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target Aura.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Aura | TgtPrompt$ Choose target Aura.
 SVar:PlayMain1:TRUE
-Oracle:When Setessan Starbreaker enters the battlefield, you may destroy target Aura.
+Oracle:When Setessan Starbreaker enters, you may destroy target Aura.

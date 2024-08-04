@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 GU | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantTarget | ValidCard$ Card.EnchantedBy | Activator$ Opponent | Description$ Enchanted creature can't be the target of spells or abilities your opponents control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:({G/U} can be paid with either {G} or {U}.)\nEnchant creature\nWhen Shielding Plax enters the battlefield, draw a card.\nEnchanted creature can't be the target of spells or abilities your opponents control.
+Oracle:({G/U} can be paid with either {G} or {U}.)\nEnchant creature\nWhen Shielding Plax enters, draw a card.\nEnchanted creature can't be the target of spells or abilities your opponents control.
