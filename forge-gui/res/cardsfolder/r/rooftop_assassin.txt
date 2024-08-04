@@ -5,6 +5,6 @@ PT:2/2
 K:Flash
 K:Flying
 K:Lifelink
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target creature an opponent controls that was dealt damage this turn.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn+OppCtrl | TgtPrompt$ Select target creature an opponent controls that was dealt damage this turn
-Oracle:Flash\nFlying, lifelink\nWhen Rooftop Assassin enters the battlefield, destroy target creature an opponent controls that was dealt damage this turn.
+Oracle:Flash\nFlying, lifelink\nWhen Rooftop Assassin enters, destroy target creature an opponent controls that was dealt damage this turn.
