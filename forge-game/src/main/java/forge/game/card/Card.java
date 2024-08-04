@@ -295,6 +295,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
+    private Player promisedGift;
     private Player protectingPlayer;
     private EvenOdd chosenEvenOdd = null;
     private Direction chosenDirection = null;
@@ -1888,6 +1889,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateChosenPlayer(this);
     }
 
+    public final boolean hasPromisedGift() {
+        return promisedGift != null;
+    }
+    public final Player getPromisedGift() {
+        return promisedGift;
+    }
+    public final void setPromisedGift(final Player p) {
+        if (promisedGift == p) { return; }
+        promisedGift = p;
+        view.updatePromisedGift(this);
+    }
+
     public final Player getProtectingPlayer() {
         return protectingPlayer;
     }
@@ -2424,6 +2437,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sbLong.append(". ").append(k[3]);
                     }
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
+                } else if (keyword.equals("Gift")) {
+                    sbLong.append(keyword);
+                    if (inst.getHostCard() != null && inst.getHostCard().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbLong.append(" ").append(inst.getHostCard().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    }
+                    sbLong.append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
                     sbLong.append(TextUtil.fastReplace(keyword, ":", " "));
                 } else if (keyword.contains("Haunt")) {
@@ -3069,6 +3088,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbCost.append(cost.toSimpleString());
                     sbAfter.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
                     sbAfter.append("\r\n");
+                } else if (keyword.equals("Gift")) {
+                    sbBefore.append(keyword);
+                    if (state.getFirstAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbBefore.append(" ").append(state.getFirstAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    }
+                    sbBefore.append("\r\n");
                 } else if (keyword.equals("Remove CARDNAME from your deck before playing if you're not " +
                         "playing for ante.")) {
                     sbBefore.append(keyword);
@@ -4337,7 +4362,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         updateCloneState(true);
     }
 
-    private final void updateCloneState(final boolean updateView) {
+    private void updateCloneState(final boolean updateView) {
         if (isFaceDown()) {
             setState(CardStateName.FaceDown, updateView, true);
         } else {
@@ -4360,7 +4385,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return CardStateName.Original;
     }
 
-    private final CardCloneStates getLastClonedState() {
+    private CardCloneStates getLastClonedState() {
         if (clonedStates.isEmpty()) {
             return null;
         }
@@ -5098,7 +5123,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    private final KeywordInterface getCopyForStoredKeyword(Map.Entry<Triple<String, Long, Long>, KeywordInterface> e, boolean lki) {
+    private KeywordInterface getCopyForStoredKeyword(Map.Entry<Triple<String, Long, Long>, KeywordInterface> e, boolean lki) {
         // for performance check if we already copied this
         if (lki) {
             for (KeywordsChange kc : changedCardKeywords.column(e.getKey().getMiddle()).values()) {
@@ -6129,7 +6154,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setExcessDamageReceivedThisTurn(final int n) {
         excessDamageThisTurnAmount = n;
     }
-    private final void resetExcessDamage() {
+    private void resetExcessDamage() {
         hasBeenDealtExcessDamageThisTurn = false;
         excessDamageThisTurnAmount = 0;
     }
@@ -7345,7 +7370,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             incrementTransformedTimestamp();
         }
         if (sa.hasParam("Prototype") && prototypeTimestamp == -1) {
-            Long next = game.getNextTimestamp();
+            long next = game.getNextTimestamp();
             addCloneState(CardFactory.getCloneStates(this, this, sa), next);
             prototypeTimestamp = next;
         }

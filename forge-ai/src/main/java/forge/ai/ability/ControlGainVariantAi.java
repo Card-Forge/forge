@@ -20,7 +20,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
@@ -49,12 +48,7 @@ public class ControlGainVariantAi extends SpellAbilityAi {
         String logic = sa.getParam("AILogic");
 
         if ("GainControlOwns".equals(logic)) {
-            List<Card> list = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.isCreature() && !crd.getController().equals(crd.getOwner());
-                }
-            });
+            List<Card> list = CardLists.filter(ai.getGame().getCardsIn(ZoneType.Battlefield), crd -> crd.isCreature() && !crd.getController().equals(crd.getOwner()));
             if (list.isEmpty()) {
                 return false;
             }

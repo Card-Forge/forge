@@ -1,0 +1,12 @@
+Name:Perch Protection
+ManaCost:4 W W
+Types:Instant
+K:Gift
+SVar:GiftAbility:DB$ AddTurn | Defined$ Promised | NumTurns$ 1 | GiftDescription$ an extra turn
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ u_2_2_bird_flying | TokenOwner$ You | SubAbility$ DBPhases | SpellDescription$ Create four 2/2 blue Bird creature tokens with flying. If the gift was promised, all permanents you control phase out, and until your next turn, your life total can't change and you gain protection from everything. Exile CARDNAME.
+SVar:DBPhases:DB$ Phases | Defined$ Valid Permanent.YouCtrl | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | Duration$ UntilYourNextTurn | StaticAbilities$ STCantChange | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ You | Duration$ UntilYourNextTurn | KW$ Protection from everything | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | SubAbility$ DBChange
+SVar:STCantChange:Mode$ CantChangeLife | ValidPlayer$ You | Description$ Your life total can't change.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+Oracle:Gift an extra turn (You may promise an opponent a gift as you cast this spell. If you do, they take an extra turn after this one.)\nCreate four 2/2 blue Bird creature tokens with flying. If the gift was promised, all permanents you control phase out, and until your next turn, your life total can't change and you gain protection from everything.\nExile Perch Protection.

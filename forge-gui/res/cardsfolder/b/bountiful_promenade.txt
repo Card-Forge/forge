@@ -1,8 +1,8 @@
 Name:Bountiful Promenade
 ManaCost:no cost
 Types:Land
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you have two or more opponents.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you have two or more opponents.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2
 SVar:ETBCheckSVar2:PlayerCountOpponents$Amount
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-Oracle:Bountiful Promenade enters the battlefield tapped unless you have two or more opponents.\n{T}: Add {G} or {W}.
+Oracle:Bountiful Promenade enters tapped unless you have two or more opponents.\n{T}: Add {G} or {W}.

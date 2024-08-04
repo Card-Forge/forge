@@ -3,6 +3,6 @@ ManaCost:6
 Types:Artifact Creature Golem
 PT:4/4
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color.
 S:Mode$ Continuous | Affected$ Card.Self | SetColor$ ChosenColor | Description$ CARDNAME is the chosen color. (It's still an artifact.)
-Oracle:As Alloy Golem enters the battlefield, choose a color.\nAlloy Golem is the chosen color. (It's still an artifact.)
+Oracle:As Alloy Golem enters, choose a color.\nAlloy Golem is the chosen color. (It's still an artifact.)

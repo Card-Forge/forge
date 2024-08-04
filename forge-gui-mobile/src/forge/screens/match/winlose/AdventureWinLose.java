@@ -45,7 +45,8 @@ public class AdventureWinLose extends ControlWinLose {
         saveOptions();
         getView().hide();
         DuelScene.instance().GameEnd();
-        DuelScene.instance().exitDuelScene();
+        if (!DuelScene.instance().hasCallbackExit())
+            DuelScene.instance().exitDuelScene();
     }
 
     @Override

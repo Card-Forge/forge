@@ -2,7 +2,7 @@ Name:Noggle Ransacker
 ManaCost:2 UR
 Types:Creature Noggle Rogue
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, each player draws two cards, then discards a card at random.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, each player draws two cards, then discards a card at random.
 SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 2 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ Player | Mode$ Random | NumCards$ 1
-Oracle:When Noggle Ransacker enters the battlefield, each player draws two cards, then discards a card at random.
+Oracle:When Noggle Ransacker enters, each player draws two cards, then discards a card at random.

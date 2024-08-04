@@ -42,14 +42,11 @@ public class CardFormatFilter extends FormatFilter<PaperCard> {
         final CardFormatFilter itemFilter = this;
         dialog.setWantReprintsCB(allowReprints);
 
-        dialog.setOkCallback(new Runnable() {
-            @Override
-            public void run() {
-                formats.clear();
-                formats.addAll(dialog.getSelectedFormats());
-                allowReprints = dialog.getWantReprints();
-                itemManager.addFilter(itemFilter); // this adds/updates the current filter...
-            }
+        dialog.setOkCallback(() -> {
+            formats.clear();
+            formats.addAll(dialog.getSelectedFormats());
+            allowReprints = dialog.getWantReprints();
+            itemManager.addFilter(itemFilter); // this adds/updates the current filter...
         });
     }
 }

@@ -292,9 +292,6 @@ public class QuestAchievements {
         try {
             return drafts.get(currentDraft);
         }
-        catch(ArrayIndexOutOfBoundsException e) {
-            return null;
-        }
         catch(IndexOutOfBoundsException e) {
             return null;
         }

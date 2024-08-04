@@ -1,7 +1,6 @@
 package forge.screens.match.menus;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -55,12 +54,7 @@ public final class CardOverlaysMenu {
     }
 
     private ActionListener getShowOverlaysAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleCardOverlayDisplay((JMenuItem)e.getSource());
-            }
-        };
+        return e -> toggleCardOverlayDisplay((JMenuItem)e.getSource());
     }
 
     private void toggleCardOverlayDisplay(JMenuItem showMenu) {
@@ -84,13 +78,9 @@ public final class CardOverlaysMenu {
     }
 
     private ActionListener getCardOverlaysAction(final FPref overlaySetting) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                toggleOverlaySetting(overlaySetting);
-                repaintCardOverlays();
-            }
-
+        return e -> {
+            toggleOverlaySetting(overlaySetting);
+            repaintCardOverlays();
         };
     }
 
@@ -101,11 +91,6 @@ public final class CardOverlaysMenu {
     }
 
     private void repaintCardOverlays() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                matchUI.repaintCardOverlays();
-            }
-        });
+        SwingUtilities.invokeLater(matchUI::repaintCardOverlays);
     }
 }

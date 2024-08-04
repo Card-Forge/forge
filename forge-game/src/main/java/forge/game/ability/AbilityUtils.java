@@ -1,7 +1,6 @@
 package forge.game.ability;
 
 import com.google.common.base.Functions;
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -310,7 +309,7 @@ public class AbilityUtils {
         } else if (defined.startsWith("CardUID_")) {
             String idString = defined.substring(8);
             for (final Card cardByID : game.getCardsInGame()) {
-                if (cardByID.getId() == Integer.valueOf(idString)) {
+                if (cardByID.getId() == Integer.parseInt(idString)) {
                     cards.add(game.getCardState(cardByID));
                 }
             }
@@ -1156,6 +1155,13 @@ public class AbilityUtils {
             if (p != null) {
                 players.add(p);
             }
+        } else if (defined.equals("Promised")) {
+            if (card != null) {
+                final Player p = card.getPromisedGift();
+                if (p != null) {
+                    players.add(p);
+                }
+            }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
         } else if (defined.equals("SourceController")) {
@@ -1326,12 +1332,7 @@ public class AbilityUtils {
             game.getTriggerHandler().resetActiveTriggers();
         }
 
-        // do blessing there before condition checks
-        if (sa.isSpell() && !sa.getHostCard().isPermanent() && sa.getHostCard().hasKeyword(Keyword.ASCEND)) {
-            if (pl.getZone(ZoneType.Battlefield).size() >= 10) {
-                pl.setBlessing(true);
-            }
-        }
+        resolvePreAbilities(sa, game);
 
         // count times ability resolves this turn
         if (!sa.isWrapper()) {
@@ -1350,6 +1351,32 @@ public class AbilityUtils {
             return;
         }
         AbilityUtils.resolveApiAbility(sa, game);
+    }
+
+    private static void resolvePreAbilities(final SpellAbility sa, final Game game) {
+        Player controller = sa.getActivatingPlayer();
+        Card source = sa.getHostCard();
+
+        if (!sa.isSpell() || source.isPermanent()) {
+            return;
+        }
+
+        // do blessing there before condition checks
+        if (source.hasKeyword(Keyword.ASCEND)) {
+            if (controller.getZone(ZoneType.Battlefield).size() >= 10) {
+                controller.setBlessing(true);
+            }
+        }
+
+        if (source.hasKeyword(Keyword.GIFT) && sa.isOptionalCostPaid(OptionalCost.PromiseGift)) {
+            game.getAction().checkStaticAbilities();
+            // Is AdditionalAbility available from anything here?
+            AbilitySub giftAbility = (AbilitySub) sa.getAdditionalAbility("GiftAbility");
+            if (giftAbility != null) {
+                giftAbility.setActivatingPlayer(controller);
+                AbilityUtils.resolveApiAbility(giftAbility, game);
+            }
+        }
     }
 
     private static void resolveSubAbilities(final SpellAbility sa, final Game game) {
@@ -1377,6 +1404,10 @@ public class AbilityUtils {
         bread.setData("Card", card.getName());
         bread.setData("SA", sa.toString());
         Sentry.addBreadcrumb(bread);
+
+        if (!sa.isWrapper() && sa.isKeyword(Keyword.GIFT)) {
+            game.getTriggerHandler().runTrigger(TriggerType.GiveGift, AbilityKey.mapFromPlayer(sa.getActivatingPlayer()), false);
+        }
 
         // check conditions
         if (sa.metConditions()) {
@@ -2833,12 +2864,12 @@ public class AbilityUtils {
         if (sq[0].startsWith("SumPower")) {
             final String[] restrictions = l[0].split("_");
             CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
-            return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
+            return doXMath(Aggregates.sum(filteredCards, Card::getNetPower), expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            final Iterable<Card> powers = Aggregates.uniqueByLast(list, CardPredicates.Accessors.fnGetNetPower);
+            final Iterable<Card> powers = Aggregates.uniqueByLast(list, Card::getNetPower);
             return doXMath(Iterables.size(powers), expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
@@ -2992,7 +3023,7 @@ public class AbilityUtils {
     public static final String applyDescriptionTextChangeEffects(final String def, final Card card) {
         return applyTextChangeEffects(def, card, true);
     }
-    private static final String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
+    private static String applyTextChangeEffects(final String def, final Card card, final boolean isDescriptive) {
         return applyTextChangeEffects(def, isDescriptive, card.getChangedTextColorWords(), card.getChangedTextTypeWords());
     }
 
@@ -3032,7 +3063,7 @@ public class AbilityUtils {
         return replaced;
     }
 
-    private static final String getReplacedText(final String text, final String originalWord, String newWord, final boolean isDescriptive) {
+    private static String getReplacedText(final String text, final String originalWord, String newWord, final boolean isDescriptive) {
         if (isDescriptive) {
             newWord = "<strike>" + originalWord + "</strike> " + newWord;
         }
@@ -3094,18 +3125,15 @@ public class AbilityUtils {
             return sa;
         }
 
-        final CardCollection splices = CardLists.filter(hand, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
-                    String k = inst.getOriginal();
-                    final String[] n = k.split(":");
-                    if (source.isValid(n[1].split(","), player, input, sa)) {
-                        return true;
-                    }
+        final CardCollection splices = CardLists.filter(hand, input -> {
+            for (final KeywordInterface inst : input.getKeywords(Keyword.SPLICE)) {
+                String k = inst.getOriginal();
+                final String[] n = k.split(":");
+                if (source.isValid(n[1].split(","), player, input, sa)) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
         splices.remove(source);
@@ -3500,7 +3528,7 @@ public class AbilityUtils {
         }
 
         if (value.contains("TopOfLibraryCMC")) {
-            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc), m, source, ctb);
+            return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), Card::getCMC), m, source, ctb);
         }
 
         if (value.contains("LandsPlayed")) {
@@ -3653,18 +3681,18 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("GreatestPower")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetPower);
+            return Aggregates.max(paidList, Card::getNetPower);
         }
         if (string.startsWith("GreatestToughness")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            return Aggregates.max(paidList, Card::getNetToughness);
         }
 
         if (string.startsWith("SumToughness")) {
-            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
+            return Aggregates.sum(paidList, Card::getNetToughness);
         }
 
         if (string.startsWith("GreatestCMC")) {
-            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
+            return Aggregates.max(paidList, Card::getCMC);
         }
 
         if (string.equals("DifferentColorPair")) {
@@ -3686,7 +3714,7 @@ public class AbilityUtils {
         }
 
         if (string.startsWith("SumCMC")) {
-            return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetCmc);
+            return Aggregates.sum(paidList, Card::getCMC);
         }
 
         if (string.startsWith("Valid")) {
@@ -3858,21 +3886,11 @@ public class AbilityUtils {
         // if (sq[0].contains("Green")) someCards = CardLists.filter(someCards, CardPredicates.isColor(MagicColor.GREEN));
 
         if (sq[0].contains("Multicolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getColor().isMulticolor();
-                }
-            });
+            someCards = CardLists.filter(someCards, c1 -> c1.getColor().isMulticolor());
         }
 
         if (sq[0].contains("Monocolor")) {
-            someCards = CardLists.filter(someCards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getColor().isMonoColor();
-                }
-            });
+            someCards = CardLists.filter(someCards, c12 -> c12.getColor().isMonoColor());
         }
         return someCards;
     }

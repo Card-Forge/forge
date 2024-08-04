@@ -534,7 +534,7 @@ public class HumanPlay {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(offering, ability, false, params);
+                game.getAction().sacrifice(new CardCollection(offering), ability, false, params);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -542,7 +542,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(emerge, ability, false, params);
+                game.getAction().sacrifice(new CardCollection(emerge), ability, false, params);
                 ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             } else {
                 ability.resetSacrificedAsEmerge();

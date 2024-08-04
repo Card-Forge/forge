@@ -2,5 +2,6 @@ Name:Rotting Legion
 ManaCost:4 B
 Types:Creature Zombie
 PT:4/5
-K:CARDNAME enters the battlefield tapped.
-Oracle:Rotting Legion enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Rotting Legion enters tapped.

@@ -2,6 +2,6 @@ Name:Corridor Monitor
 ManaCost:1 U
 Types:Artifact Creature Construct
 PT:1/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap target artifact or creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap target artifact or creature you control.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Choose target artifact or creature you control.
-Oracle:When Corridor Monitor enters the battlefield, untap target artifact or creature you control.
+Oracle:When Corridor Monitor enters, untap target artifact or creature you control.

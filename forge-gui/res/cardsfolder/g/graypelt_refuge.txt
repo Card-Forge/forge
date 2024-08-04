@@ -2,8 +2,9 @@ Name:Graypelt Refuge
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 DeckHas:Ability$LifeGain
-Oracle:Graypelt Refuge enters the battlefield tapped.\nWhen Graypelt Refuge enters the battlefield, you gain 1 life.\n{T}: Add {G} or {W}.
+Oracle:Graypelt Refuge enters tapped.\nWhen Graypelt Refuge enters, you gain 1 life.\n{T}: Add {G} or {W}.

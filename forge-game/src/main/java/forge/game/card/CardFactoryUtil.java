@@ -17,40 +17,11 @@
  */
 package forge.game.card;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import forge.GameCommand;
-import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.event.GameEventCardForetold;
-import forge.util.Localizer;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.CardTypeView;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import com.google.common.collect.*;
+import forge.GameCommand;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -60,22 +31,15 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.cost.Cost;
-import forge.game.cost.CostCollectEvidence;
+import forge.game.cost.*;
+import forge.game.event.GameEventCardForetold;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityStatic;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
-import forge.game.spellability.SpellPermanent;
-import forge.game.spellability.TargetRestrictions;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.staticability.StaticAbilityPlotZone;
@@ -83,10 +47,16 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.TextUtil;
-
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * <p>
@@ -301,9 +271,7 @@ public class CardFactoryUtil {
     public static byte getMostProminentColors(final Iterable<Card> list) {
         int cntColors = MagicColor.WUBRG.length;
         final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        Arrays.fill(map, 0);
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -339,9 +307,6 @@ public class CardFactoryUtil {
     public static int[] SortColorsFromList(final CardCollection list) {
         int cntColors = MagicColor.WUBRG.length;
         final int[] map = new int[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -369,10 +334,7 @@ public class CardFactoryUtil {
             colorRestrictions.add(MagicColor.fromName(col));
         }
         int cntColors = colorRestrictions.size();
-        final Integer[] map = new Integer[cntColors];
-        for (int i = 0; i < cntColors; i++) {
-            map[i] = 0;
-        }
+        final int[] map = new int[cntColors];
 
         for (final Card crd : list) {
             ColorSet color = crd.getColor();
@@ -957,7 +919,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Chapter")) {
             final String[] k = keyword.split(":");
             final String[] abs = k[2].split(",");
-            if (abs.length != Integer.valueOf(k[1])) {
+            if (abs.length != Integer.parseInt(k[1])) {
                 throw new RuntimeException("Saga max differ from Ability amount");
             }
 
@@ -1044,7 +1006,7 @@ public class CardFactoryUtil {
             final String delayTrigStg = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | " +
                     "TriggerDescription$ At end of combat, sacrifice CARDNAME.";
 
-            final String trigSacStg = "DB$ SacrificeAll | Defined$ Self | Controller$ You";
+            final String trigSacStg = "DB$ Sacrifice";
 
             SpellAbility delayTrigSA = AbilityFactory.getAbility(delayTrigStg, card);
 
@@ -1254,6 +1216,27 @@ public class CardFactoryUtil {
             etbTrigger.setOverridingAbility(saRebel);
 
             saRebel.setIntrinsic(intrinsic);
+            inst.addTrigger(etbTrigger);
+        } else if (keyword.equals("Gift")) {
+            // Gift is a special keyword that is used to create a trigger for permanents when they enter the battlefield
+            // On casting a Gift needs to be promised to an opponent
+            final SpellAbility saGift = AbilityFactory.getAbility(card.getSVar("GiftAbility"), card);
+            card.getFirstSpellAbility().setAdditionalAbility("GiftAbility", saGift);
+
+            if (!card.isPermanent()) {
+                saGift.setKeyword(inst);
+                return;
+            }
+
+            String giftDescription = saGift.getParamOrDefault("GiftDescription", "<missing description>");
+            final StringBuilder sbTrig = new StringBuilder();
+            sbTrig.append("Mode$ ChangesZone | Destination$ Battlefield | ");
+            sbTrig.append("ValidCard$ Card.Self+PromisedGift | Secondary$ True | TriggerDescription$ ");
+            sbTrig.append("Gift a ").append(giftDescription).append(" to ").append(card.getPromisedGift());
+
+            final Trigger etbTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, intrinsic);
+            etbTrigger.setOverridingAbility(saGift);
+            saGift.setIntrinsic(intrinsic);
             inst.addTrigger(etbTrigger);
         } else if (keyword.startsWith("Graft")) {
             final StringBuilder sb = new StringBuilder();
@@ -1800,20 +1783,20 @@ public class CardFactoryUtil {
             // Setup ETB trigger for card with Soulbond keyword
             final String actualTriggerSelf = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Card.Self | "
-                    + "IsPresent$ Creature.Other+YouCtrl+NotPaired | Secondary$ True | "
+                    + "IsPresent$ Creature.Other+YouCtrl+!Paired | Secondary$ True | "
                     + "TriggerDescription$ When CARDNAME enters the battlefield, "
                     + "you may pair CARDNAME with another unpaired creature you control";
-            final String abStringSelf = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Other+YouCtrl+NotPaired";
+            final String abStringSelf = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Other+YouCtrl+!Paired";
             final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, intrinsic);
             parsedTriggerSelf.setOverridingAbility(AbilityFactory.getAbility(abStringSelf, card));
 
             // Setup ETB trigger for other creatures you control
             final String actualTriggerOther = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | "
-                    + " IsPresent$ Creature.Self+NotPaired | Secondary$ True | "
+                    + " IsPresent$ Creature.Self+!Paired | Secondary$ True | "
                     + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
                     + "you may pair it with CARDNAME";
-            final String abStringOther = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Self+NotPaired";
+            final String abStringOther = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Self+!Paired";
             final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, intrinsic);
             parsedTriggerOther.setOverridingAbility(AbilityFactory.getAbility(abStringOther, card));
 
@@ -1959,7 +1942,7 @@ public class CardFactoryUtil {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
                     "TriggerDescription$ " + sb.toString();
 
-            String effect = "DB$ SacrificeAll | Defined$ Self | Controller$ You | UnlessPayer$ You | UnlessCost$ " + k[1];
+            String effect = "DB$ Sacrifice | UnlessPayer$ You | UnlessCost$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2798,7 +2781,7 @@ public class CardFactoryUtil {
             origSA.appendSubAbility(newSA);
         } else if (keyword.startsWith("Class")) {
             final String[] k = keyword.split(":");
-            final int level = Integer.valueOf(k[1]);
+            final int level = Integer.parseInt(k[1]);
 
             final StringBuilder sbClass = new StringBuilder();
             sbClass.append("AB$ ClassLevelUp | Cost$ ").append(k[2]);

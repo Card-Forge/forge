@@ -2,7 +2,7 @@ Name:Barrow Witches
 ManaCost:4 B
 Types:Creature Human Warlock
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target Knight card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target Knight card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Knight+YouOwn | TgtPrompt$ Select target Knight card in your graveyard
 DeckHints:Type$Knight
-Oracle:When Barrow Witches enters the battlefield, return target Knight card from your graveyard to your hand.
+Oracle:When Barrow Witches enters, return target Knight card from your graveyard to your hand.

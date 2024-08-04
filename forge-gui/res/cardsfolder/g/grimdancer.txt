@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Creature Nightmare
 PT:3/3
 K:ETBReplacement:Other:CounterChoice
-SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Menace,Deathtouch,Lifelink | ChooseDifferent$ 2 | SpellDescription$ CARDNAME enters the battlefield with your choice of two different counters on it from among menace, deathtouch, and lifelink.
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Menace,Deathtouch,Lifelink | ChooseDifferent$ 2 | SpellDescription$ CARDNAME enters with your choice of two different counters on it from among menace, deathtouch, and lifelink.
 DeckHas:Ability$Counters|LifeGain
-Oracle:Grimdancer enters the battlefield with your choice of two different counters on it from among menace, deathtouch, and lifelink.
+Oracle:Grimdancer enters with your choice of two different counters on it from among menace, deathtouch, and lifelink.

@@ -12,6 +12,7 @@ ALTERNATE
 Name:Old-Growth Grove
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
-Oracle:Old-Growth Grove enters the battlefield tapped.\n{T}: Add {B} or {G}.
+Oracle:Old-Growth Grove enters tapped.\n{T}: Add {B} or {G}.

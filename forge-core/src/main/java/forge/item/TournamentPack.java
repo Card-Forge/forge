@@ -19,8 +19,6 @@ package forge.item;
 
 import java.util.List;
 
-import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -28,14 +26,10 @@ import forge.item.generation.BoosterGenerator;
 
 public class TournamentPack extends SealedProduct {
 
-    /** The Constant fnFromSet. */
-    public static final Function<CardEdition, TournamentPack> FN_FROM_SET = new Function<CardEdition, TournamentPack>() {
-        @Override
-        public TournamentPack apply(final CardEdition arg1) {
-            Template d = StaticData.instance().getTournamentPacks().get(arg1.getCode());
-            return new TournamentPack(arg1.getName(), d);
-        }
-    };
+    public static TournamentPack fromSet(CardEdition edition) {
+        Template d = StaticData.instance().getTournamentPacks().get(edition.getCode());
+        return new TournamentPack(edition.getName(), d);
+    }
 
     public TournamentPack(final String name0, final Template boosterData) {
         super(name0, boosterData);

@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Creature Treefolk Druid
 PT:5/4
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLearn | TriggerDescription$ When CARDNAME enters the battlefield, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLearn | TriggerDescription$ When CARDNAME enters, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
 SVar:TrigLearn:DB$ Learn
-Oracle:Trample\nWhen Gnarled Professor enters the battlefield, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)
+Oracle:Trample\nWhen Gnarled Professor enters, learn. (You may reveal a Lesson card you own from outside the game and put it into your hand, or discard a card to draw a card.)

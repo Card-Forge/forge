@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Creature Bird
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
 A:AB$ Animate | Cost$ W | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Colors$ White | OverwriteColors$ True | SpellDescription$ Target permanent becomes white until end of turn.
-Oracle:Flying\nWhen Cloudchaser Kestrel enters the battlefield, destroy target enchantment.\n{W}: Target permanent becomes white until end of turn.
+Oracle:Flying\nWhen Cloudchaser Kestrel enters, destroy target enchantment.\n{W}: Target permanent becomes white until end of turn.

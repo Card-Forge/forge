@@ -13,4 +13,4 @@ SVar:HasAttackEffect:TRUE
 SVar:AE:SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-Oracle:Backup 1 (When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, double the number of +1/+1 counters on target creature. That creature can't be blocked by creatures with power 2 or less this turn.
+Oracle:Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)\nWhenever this creature attacks, double the number of +1/+1 counters on target creature. That creature can't be blocked by creatures with power 2 or less this turn.

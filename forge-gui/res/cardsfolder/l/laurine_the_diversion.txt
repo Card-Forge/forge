@@ -8,4 +8,4 @@ A:AB$ Goad | Cost$ 2 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ 
 SVar:AIPreference:SacCost$Artifact.token+nonCreature,Creature.token+powerLE1,Creature.cmcLE1+powerLE1
 DeckHints:Name$Kamber, the Plunderer
 DeckHas:Ability$Sacrifice
-Oracle:Partner with Kamber, the Plunderer (When this creature enters the battlefield, target player may put Kamber into their hand from their library, then shuffle.)\nFirst strike\n{2}, Sacrifice an artifact or creature: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+Oracle:Partner with Kamber, the Plunderer (When this creature enters, target player may put Kamber into their hand from their library, then shuffle.)\nFirst strike\n{2}, Sacrifice an artifact or creature: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

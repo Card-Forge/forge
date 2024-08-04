@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
@@ -29,7 +28,6 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -173,22 +171,12 @@ public class EffectAi extends SpellAbilityAi {
                     List<Card> human = opp.getCreaturesInPlay();
 
                     // only count creatures that can attack or block
-                    comp = CardLists.filter(comp, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return CombatUtil.canAttack(c, opp);
-                        }
-                    });
+                    comp = CardLists.filter(comp, c -> CombatUtil.canAttack(c, opp));
                     if (comp.size() < 2) {
                         continue;
                     }
                     final List<Card> attackers = comp;
-                    human = CardLists.filter(human, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return CombatUtil.canBlockAtLeastOne(c, attackers);
-                        }
-                    });
+                    human = CardLists.filter(human, c -> CombatUtil.canBlockAtLeastOne(c, attackers));
                     if (human.isEmpty()) {
                         continue;
                     }
@@ -308,7 +296,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 if (logic.contains(":")) {
                     String[] k = logic.split(":");
-                    Integer i = Integer.valueOf(k[1]);
+                    int i = Integer.parseInt(k[1]);
                     return ai.getCreaturesInPlay().size() >= i;
                 }
                 return true;
@@ -345,24 +333,20 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("CantRegenerate")) {
                 if (sa.usesTargeting()) {
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED, new Predicate<Card>() {
-
-                        @Override
-                        public boolean apply(@Nullable Card input) {
-                            Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
-                            runParams.put(AbilityKey.Regeneration, true);
-                            List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
-                            // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                            if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
-                                return false;
-                            }
-
-                            if (cantRegenerateCheckCombat(input) || cantRegenerateCheckStack(input)) {
-                                return true;
-                            }
-
+                    list = CardLists.filter(list, CardPredicates.Presets.CAN_BE_DESTROYED, input -> {
+                        Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
+                        runParams.put(AbilityKey.Regeneration, true);
+                        List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                        // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
+                        if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
                             return false;
                         }
+
+                        if (cantRegenerateCheckCombat(input) || cantRegenerateCheckStack(input)) {
+                            return true;
+                        }
+
+                        return false;
                     });
 
                     if (list.isEmpty()) {

@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Rat Berserker
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Food token, then you may exile three cards from your graveyard. If you do, repeat this process.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ c_a_food_sac | SubAbility$ DBSToreSVar
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ c_a_food_sac | SubAbility$ DBStoreSVar
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckNotPaid | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBToken | RepeatCheckSVar$ CheckNotPaid | RepeatSVarCompare$ GT0
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | UnlessCost$ ExileFromGrave<3/Card> | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBStoreSVar | TokenScript$ c_a_food_sac

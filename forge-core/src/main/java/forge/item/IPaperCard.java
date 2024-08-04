@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.card.CardType.CoreType;
+import forge.card.ICardFace;
 import forge.card.MagicColor;
 import forge.util.PredicateCard;
 import forge.util.PredicateString;
@@ -224,19 +225,8 @@ public interface IPaperCard extends InventoryItem, Serializable {
             public static final Predicate<PaperCard> IS_WHITE = Predicates.color(true, false, MagicColor.WHITE);
             public static final Predicate<PaperCard> IS_COLORLESS = Predicates.color(true, true, MagicColor.COLORLESS);
 
-            public static final Predicate<PaperCard> IS_UNREBALANCED = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard input) {
-                    return input.isUnRebalanced();
-                }
-            };
-            public static final Predicate<PaperCard> IS_REBALANCED = new Predicate<PaperCard>() {
-
-                @Override
-                public boolean apply(PaperCard input) {
-                    return input.isRebalanced();
-                }
-            };
+            public static final Predicate<PaperCard> IS_UNREBALANCED = PaperCard::isUnRebalanced;
+            public static final Predicate<PaperCard> IS_REBALANCED = PaperCard::isRebalanced;
         }
     }
 
@@ -253,6 +243,8 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getArtist();
     String getItemType();
     boolean hasBackFace();
+    ICardFace getMainFace();
+    ICardFace getOtherFace();
     String getCardImageKey();
     String getCardAltImageKey();
     String getCardWSpecImageKey();

@@ -17,8 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -125,12 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            Collections.sort(result, new Comparator<PaperCard>() {
-                @Override
-                public int compare(final PaperCard c1, final PaperCard c2) {
-                    return Boolean.compare(c1.getRules().canBeSignatureSpell(), c2.getRules().canBeSignatureSpell());
-                }
-            });
+            Collections.sort(result, Comparator.comparing(c -> c.getRules().canBeSignatureSpell()));
         }
         return result;
     }
@@ -309,12 +302,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;  // pool empty, no card has been found!
 
             // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
-            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard input) {
-                    return deckSection.validate(input);
-                }
-            });
+            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(deckSection::validate);
             // Add all the cards from ValidPool anyway!
             List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
             if (whiteList == null)
@@ -326,12 +314,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             validatedSections.put(s.getKey(), whiteList);
 
             if (filteredPool.countDistinct() != pool.countDistinct()) {
-                CardPool blackList = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(PaperCard input) {
-                        return !(deckSection.validate(input));
-                    }
-                });
+                CardPool blackList = pool.getFilteredPoolWithCardsCount(input -> !(deckSection.validate(input)));
 
                 for (Entry<PaperCard, Integer> entry : blackList) {
                     DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
@@ -512,13 +495,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         // Original Art
         return releaseDate.compareTo(referenceReleaseDate) < 0;
     }
-
-    public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
-        @Override
-        public String apply(Deck arg1) {
-            return arg1.getName();
-        }
-    };
 
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()

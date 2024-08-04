@@ -2,7 +2,7 @@ Name:Accursed Centaur
 ManaCost:B
 Types:Creature Zombie Centaur
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | AILogic$ ExceptSelf
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE2+powerLE1+toughnessLE2
-Oracle:When Accursed Centaur enters the battlefield, sacrifice a creature.
+Oracle:When Accursed Centaur enters, sacrifice a creature.

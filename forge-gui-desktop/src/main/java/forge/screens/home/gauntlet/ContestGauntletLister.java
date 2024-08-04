@@ -47,12 +47,7 @@ public class ContestGauntletLister extends JPanel {
         final List<RowPanel> tempRows = new ArrayList<>();
         final List<GauntletData> sorted = new ArrayList<>();
         sorted.addAll(gd0);
-        Collections.sort(sorted, new Comparator<GauntletData>() {
-            @Override
-            public int compare(final GauntletData x, final GauntletData y) {
-                return x.getName().compareTo(y.getName());
-            }
-        });
+        Collections.sort(sorted, Comparator.comparing(GauntletData::getName));
 
         // Title row
         // Note: careful with the widths of the rows here;

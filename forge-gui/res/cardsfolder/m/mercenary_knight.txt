@@ -2,8 +2,8 @@ Name:Mercenary Knight
 ManaCost:2 B
 Types:Creature Human Mercenary Knight
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a creature card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters, sacrifice it unless you discard a creature card.
 SVar:DBSacSelf:DB$ Sacrifice | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
-Oracle:When Mercenary Knight enters the battlefield, sacrifice it unless you discard a creature card.
+Oracle:When Mercenary Knight enters, sacrifice it unless you discard a creature card.

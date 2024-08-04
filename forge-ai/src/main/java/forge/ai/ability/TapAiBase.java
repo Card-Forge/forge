@@ -109,39 +109,33 @@ public abstract class TapAiBase extends SpellAbilityAi {
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
         tapList = CardLists.filter(tapList, Presets.CAN_TAP);
-        tapList = CardLists.filter(tapList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (c.isCreature()) {
+        tapList = CardLists.filter(tapList, c -> {
+            if (c.isCreature()) {
+                return true;
+            }
+
+            for (final SpellAbility sa1 : c.getSpellAbilities()) {
+                if (sa1.isAbility() && sa1.getPayCosts().hasTapCost()) {
                     return true;
                 }
-
-                for (final SpellAbility sa : c.getSpellAbilities()) {
-                    if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
-                        return true;
-                    }
-                }
-                return false;
             }
+            return false;
         });
 
         //use broader approach when the cost is a positive thing
         if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
             tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-            tapList = CardLists.filter(tapList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.isCreature()) {
+            tapList = CardLists.filter(tapList, c -> {
+                if (c.isCreature()) {
+                    return true;
+                }
+
+                for (final SpellAbility sa12 : c.getSpellAbilities()) {
+                    if (sa12.isAbility() && sa12.getPayCosts().hasTapCost()) {
                         return true;
                     }
-
-                    for (final SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
-                            return true;
-                        }
-                    }
-                    return false;
                 }
+                return false;
             });
         }
 
@@ -187,12 +181,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                     //Combat has already started
                     attackers = game.getCombat().getAttackers();
                 } else {
-                    attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return CombatUtil.canAttack(c, opp);
-                        }
-                    });
+                    attackers = CardLists.filter(ai.getCreaturesInPlay(), c -> CombatUtil.canAttack(c, opp));
                     attackers.remove(source);
                 }
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
@@ -209,12 +198,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 if (Iterables.any(tapList, CardPredicates.Presets.CREATURES)) {
-                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.isCreature() && CombatUtil.canAttack(c, opp);
-                        }
-                    });
+                    List<Card> creatureList = CardLists.filter(tapList, c -> c.isCreature() && CombatUtil.canAttack(c, opp));
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else { // no creatures available
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);

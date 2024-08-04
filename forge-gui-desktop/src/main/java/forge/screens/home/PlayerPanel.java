@@ -186,7 +186,7 @@ public class PlayerPanel extends FPanel {
         addHandlersToVariantsControls();
 
         this.addMouseListener(new FMouseAdapter() {
-            @Override public final void onLeftMouseDown(final MouseEvent e) {
+            @Override public void onLeftMouseDown(final MouseEvent e) {
                 avatarLabel.requestFocusInWindow();
             }
         });
@@ -209,11 +209,11 @@ public class PlayerPanel extends FPanel {
 
     void update() {
         avatarLabel.setEnabled(mayEdit);
-        avatarLabel.setIcon(FSkin.getAvatars().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : avatarIndex)));
+        avatarLabel.setIcon(FSkin.getAvatars().get(type == LobbySlotType.OPEN ? -1 : avatarIndex));
         avatarLabel.repaintSelf();
 
         sleeveLabel.setEnabled(mayEdit);
-        sleeveLabel.setIcon(FSkin.getSleeves().get(Integer.valueOf(type == LobbySlotType.OPEN ? -1 : sleeveIndex)));
+        sleeveLabel.setIcon(FSkin.getSleeves().get(type == LobbySlotType.OPEN ? -1 : sleeveIndex));
         sleeveLabel.repaintSelf();
 
         txtPlayerName.setEnabled(mayEdit);
@@ -248,9 +248,9 @@ public class PlayerPanel extends FPanel {
         updateVariantControlsVisibility();
     }
 
-    private final FMouseAdapter radioMouseAdapter(final FRadioButton source, final LobbySlotType type) {
+    private FMouseAdapter radioMouseAdapter(final FRadioButton source, final LobbySlotType type) {
         return new FMouseAdapter() {
-            @Override public final void onLeftClick(final MouseEvent e) {
+            @Override public void onLeftClick(final MouseEvent e) {
                 if (!source.isEnabled()) {
                     return;
                 }
@@ -297,7 +297,7 @@ public class PlayerPanel extends FPanel {
     };
 
     private final FMouseAdapter avatarMouseListener = new FMouseAdapter() {
-        @Override public final void onLeftClick(final MouseEvent e) {
+        @Override public void onLeftClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
             }
@@ -309,12 +309,9 @@ public class PlayerPanel extends FPanel {
 
             final AvatarSelector aSel = new AvatarSelector(playerName, avatarIndex, lobby.getUsedAvatars());
             for (final FLabel lbl : aSel.getSelectables()) {
-                lbl.setCommand(new UiCommand() {
-                    @Override
-                    public void run() {
-                        setAvatarIndex(Integer.valueOf(lbl.getName().substring(11)));
-                        aSel.setVisible(false);
-                    }
+                lbl.setCommand((UiCommand) () -> {
+                    setAvatarIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    aSel.setVisible(false);
                 });
             }
 
@@ -328,7 +325,7 @@ public class PlayerPanel extends FPanel {
             lobby.firePlayerChangeListener(index);
         }
 
-        @Override public final void onRightClick(final MouseEvent e) {
+        @Override public void onRightClick(final MouseEvent e) {
             if (!avatarLabel.isEnabled()) {
                 return;
             }
@@ -353,7 +350,7 @@ public class PlayerPanel extends FPanel {
     };
 
     private final FMouseAdapter sleeveMouseListener = new FMouseAdapter() {
-        @Override public final void onLeftClick(final MouseEvent e) {
+        @Override public void onLeftClick(final MouseEvent e) {
             if (!sleeveLabel.isEnabled()) {
                 return;
             }
@@ -365,12 +362,9 @@ public class PlayerPanel extends FPanel {
 
             final SleeveSelector sSel = new SleeveSelector(playerName, sleeveIndex, lobby.getUsedSleeves());
             for (final FLabel lbl : sSel.getSelectables()) {
-                lbl.setCommand(new UiCommand() {
-                    @Override
-                    public void run() {
-                        setSleeveIndex(Integer.valueOf(lbl.getName().substring(11)));
-                        sSel.setVisible(false);
-                    }
+                lbl.setCommand((UiCommand) () -> {
+                    setSleeveIndex(Integer.parseInt(lbl.getName().substring(11)));
+                    sSel.setVisible(false);
                 });
             }
 
@@ -384,7 +378,7 @@ public class PlayerPanel extends FPanel {
             lobby.firePlayerChangeListener(index);
         }
 
-        @Override public final void onRightClick(final MouseEvent e) {
+        @Override public void onRightClick(final MouseEvent e) {
             if (!sleeveLabel.isEnabled()) {
                 return;
             }
@@ -527,7 +521,7 @@ public class PlayerPanel extends FPanel {
 
     private final ActionListener teamListener = new ActionListener() {
         @SuppressWarnings("unchecked")
-        @Override public final void actionPerformed(final ActionEvent e) {
+        @Override public void actionPerformed(final ActionEvent e) {
             final FComboBox<Object> cb = (FComboBox<Object>) e.getSource();
             cb.requestFocusInWindow();
             final Object selection = cb.getSelectedItem();
@@ -541,79 +535,53 @@ public class PlayerPanel extends FPanel {
 
     private void addHandlersToVariantsControls() {
         // Archenemy buttons
-        scmDeckSelectorBtn.setCommand(new Runnable() {
-            @Override public final void run() {
-                lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
-                scmDeckSelectorBtn.requestFocusInWindow();
-                lobby.changePlayerFocus(index);
-            }
+        scmDeckSelectorBtn.setCommand((Runnable) () -> {
+            lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
+            scmDeckSelectorBtn.requestFocusInWindow();
+            lobby.changePlayerFocus(index);
         });
 
-        scmDeckEditor.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
-                final Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
-                    @Override public final boolean apply(final PaperCard arg0) {
-                        return arg0.getRules().getType().isScheme();
-                    }
-                };
+        scmDeckEditor.setCommand((UiCommand) () -> {
+            lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
+            final Predicate<PaperCard> predSchemes = arg0 -> arg0.getRules().getType().isScheme();
 
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                        new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_ARCHENEMY, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
-            }
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                    new CEditorVariant(FModel.getDecks().getScheme(), predSchemes, DeckSection.Schemes, FScreen.DECK_EDITOR_ARCHENEMY, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
         });
 
         // Commander buttons
-        cmdDeckSelectorBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(
-                        lobby.hasVariant(GameType.Oathbreaker) ? GameType.Oathbreaker :
-                        lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders :
-                        lobby.hasVariant(GameType.Brawl) ? GameType.Brawl :
-                        GameType.Commander);
-                cmdDeckSelectorBtn.requestFocusInWindow();
-                lobby.changePlayerFocus(index);
-            }
+        cmdDeckSelectorBtn.setCommand((Runnable) () -> {
+            lobby.setCurrentGameMode(
+                    lobby.hasVariant(GameType.Oathbreaker) ? GameType.Oathbreaker :
+                    lobby.hasVariant(GameType.TinyLeaders) ? GameType.TinyLeaders :
+                    lobby.hasVariant(GameType.Brawl) ? GameType.Brawl :
+                    GameType.Commander);
+            cmdDeckSelectorBtn.requestFocusInWindow();
+            lobby.changePlayerFocus(index);
         });
 
         // Planechase buttons
-        pchDeckSelectorBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(GameType.Planechase);
-                pchDeckSelectorBtn.requestFocusInWindow();
-                lobby.changePlayerFocus(index, GameType.Planechase);
-            }
+        pchDeckSelectorBtn.setCommand((Runnable) () -> {
+            lobby.setCurrentGameMode(GameType.Planechase);
+            pchDeckSelectorBtn.requestFocusInWindow();
+            lobby.changePlayerFocus(index, GameType.Planechase);
         });
 
-        pchDeckEditor.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(GameType.Planechase);
-                final Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(final PaperCard arg0) {
-                        return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
-                    }
-                };
+        pchDeckEditor.setCommand((UiCommand) () -> {
+            lobby.setCurrentGameMode(GameType.Planechase);
+            final Predicate<PaperCard> predPlanes = arg0 -> arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
 
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
-                        new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
-            }
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
+                    new CEditorVariant(FModel.getDecks().getPlane(), predPlanes, DeckSection.Planes, FScreen.DECK_EDITOR_PLANECHASE, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
         });
 
         // Vanguard buttons
-        vgdSelectorBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(GameType.Vanguard);
-                vgdSelectorBtn.requestFocusInWindow();
-                lobby.changePlayerFocus(index, GameType.Vanguard);
-            }
+        vgdSelectorBtn.setCommand((Runnable) () -> {
+            lobby.setCurrentGameMode(GameType.Vanguard);
+            vgdSelectorBtn.requestFocusInWindow();
+            lobby.changePlayerFocus(index, GameType.Vanguard);
         });
     }
 
@@ -625,10 +593,7 @@ public class PlayerPanel extends FPanel {
         final JPopupMenu menu = new  JPopupMenu();
         radioAiUseSimulation = new JCheckBoxMenuItem(localizer.getMessage("lblUseSimulation"));
         menu.add(radioAiUseSimulation);
-        radioAiUseSimulation.addActionListener(new ActionListener() {
-            @Override public final void actionPerformed(final ActionEvent e) {
-                lobby.firePlayerChangeListener(index);
-            } });
+        radioAiUseSimulation.addActionListener(e -> lobby.firePlayerChangeListener(index));
         radioAi.setComponentPopupMenu(menu);
 
         radioHuman.addMouseListener(radioMouseAdapter(radioHuman, LobbySlotType.LOCAL));
@@ -643,38 +608,29 @@ public class PlayerPanel extends FPanel {
 
     private void createReadyButton() {
         chkReady = new FCheckBox(localizer.getMessage("lblReady"));
-        chkReady.addActionListener(new ActionListener() {
-            @Override public final void actionPerformed(final ActionEvent e) {
-                lobby.setReady(index, chkReady.isSelected());
-            }
-        });
+        chkReady.addActionListener(e -> lobby.setReady(index, chkReady.isSelected()));
     }
 
     private void createDevModeButton() {
         chkDevMode = new FCheckBox(localizer.getMessage("cbDevMode"));
 
-        chkDevMode.addActionListener(new ActionListener() {
-            @Override public final void actionPerformed(final ActionEvent e) {
-                final boolean toggle = chkDevMode.isSelected();
-                prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
-                ForgePreferences.DEV_MODE = toggle;
+        chkDevMode.addActionListener(e -> {
+            final boolean toggle = chkDevMode.isSelected();
+            prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
+            ForgePreferences.DEV_MODE = toggle;
 
-                // ensure that preferences panel reflects the change
-                prefs.save();
+            // ensure that preferences panel reflects the change
+            prefs.save();
 
-                lobby.setDevMode(index);
-            }
+            lobby.setDevMode(index);
         });
     }
 
     private void addHandlersDeckSelector() {
-        deckBtn.setCommand(new Runnable() {
-            @Override
-            public void run() {
-                lobby.setCurrentGameMode(GameType.Constructed);
-                deckBtn.requestFocusInWindow();
-                lobby.changePlayerFocus(index, GameType.Constructed);
-            }
+        deckBtn.setCommand((Runnable) () -> {
+            lobby.setCurrentGameMode(GameType.Constructed);
+            deckBtn.requestFocusInWindow();
+            lobby.changePlayerFocus(index, GameType.Constructed);
         });
     }
 
@@ -682,22 +638,19 @@ public class PlayerPanel extends FPanel {
         final FLabel newNameBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblGetaNewRandomName")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_EDIT)).hoverable(true).opaque(false)
                 .unhoveredAlpha(0.9f).build();
-        newNameBtn.setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                final String newName = lobby.getNewName();
-                if (null == newName) {
-                    return;
-                }
-                txtPlayerName.setText(newName);
-
-                if (index == 0) {
-                    prefs.setPref(FPref.PLAYER_NAME, newName);
-                    prefs.save();
-                }
-                txtPlayerName.requestFocus();
-                lobby.changePlayerFocus(index);
+        newNameBtn.setCommand((UiCommand) () -> {
+            final String newName = lobby.getNewName();
+            if (null == newName) {
+                return;
             }
+            txtPlayerName.setText(newName);
+
+            if (index == 0) {
+                prefs.setPref(FPref.PLAYER_NAME, newName);
+                prefs.save();
+            }
+            txtPlayerName.requestFocus();
+            lobby.changePlayerFocus(index);
         });
         newNameBtn.addFocusListener(nameFocusListener);
         return newNameBtn;
@@ -725,13 +678,11 @@ public class PlayerPanel extends FPanel {
     private FLabel createCloseButton() {
         final FLabel closeBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblRemove")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_CLOSE)).hoverable(true).build();
-        closeBtn.setCommand(new Runnable() {
-            @Override public final void run() {
-                if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format(localizer.getMessage("lblReallyKick"), playerName), localizer.getMessage("lblKick"), false)) {
-                    return;
-                }
-                lobby.removePlayer(index);
+        closeBtn.setCommand((Runnable) () -> {
+            if (type == LobbySlotType.REMOTE && !SOptionPane.showConfirmDialog(String.format(localizer.getMessage("lblReallyKick"), playerName), localizer.getMessage("lblKick"), false)) {
+                return;
             }
+            lobby.removePlayer(index);
         });
         return closeBtn;
     }

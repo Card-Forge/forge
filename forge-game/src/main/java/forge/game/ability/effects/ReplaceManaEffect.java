@@ -72,7 +72,7 @@ public class ReplaceManaEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("ReplaceAmount")) {
             // replace amount = multiples
-            replaced = StringUtils.repeat(replaced, " ", Integer.valueOf(sa.getParam("ReplaceAmount")));
+            replaced = StringUtils.repeat(replaced, " ", Integer.parseInt(sa.getParam("ReplaceAmount")));
         }
         params.put(AbilityKey.Mana, replaced);
         // effect was updated

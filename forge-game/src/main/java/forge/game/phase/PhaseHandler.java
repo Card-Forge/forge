@@ -81,6 +81,7 @@ public class PhaseHandler implements java.io.Serializable {
     private transient Player pPlayerPriority = null;
     private transient Player pFirstPriority = null;
     private transient Combat combat = null;
+    private boolean skipDamageSteps = false;
     private boolean bRepeatCleanup = false;
 
     /** The need to next phase. */
@@ -95,7 +96,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final PhaseType getPhase() {
         return phase;
     }
-    private final void setPhase(final PhaseType phase0) {
+    private void setPhase(final PhaseType phase0) {
         if (phase == phase0) { return; }
         phase = phase0;
         game.updatePhaseForView();
@@ -222,20 +223,18 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
-                if (inCombat() && combat.getAttackers().isEmpty()) {
-                    endCombat();
-                }
+                skipDamageSteps = !inCombat() || combat.getAttackers().isEmpty();
                 //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
-                return !inCombat();
+                return skipDamageSteps;
 
             default:
                 return false;
         }
     }
 
-    private final void onPhaseBegin() {
+    private void onPhaseBegin() {
         boolean skipped = false;
 
         game.getTriggerHandler().resetActiveTriggers();
@@ -981,6 +980,10 @@ public class PhaseHandler implements java.io.Serializable {
 
     public final boolean beforeFirstPostCombatMainEnd() {
         return nMain2sThisTurn == 0;
+    }
+
+    public final boolean skippedDeclareBlockers() {
+        return skipDamageSteps;
     }
 
     private final static boolean DEBUG_PHASES = false;

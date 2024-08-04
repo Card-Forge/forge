@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import com.google.common.collect.Maps;
@@ -44,27 +43,6 @@ import forge.item.InventoryItem;
  */
 public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Integer>>, Serializable {
     private static final long serialVersionUID = 6572047177527559797L;
-
-    public final transient Function<Entry<T, Integer>, T> FN_GET_KEY = new Function<Entry<T, Integer>, T>() {
-        @Override
-        public T apply(final Entry<T, Integer> from) {
-            return from.getKey();
-        }
-    };
-
-    public final transient Function<Entry<T, Integer>, String> FN_GET_NAME = new Function<Entry<T, Integer>, String>() {
-        @Override
-        public String apply(final Entry<T, Integer> from) {
-            return from.getKey().getName();
-        }
-    };
-
-    public final transient Function<Entry<T, Integer>, Integer> FN_GET_COUNT = new Function<Entry<T, Integer>, Integer>() {
-        @Override
-        public Integer apply(final Entry<T, Integer> from) {
-            return from.getValue();
-        }
-    };
 
     public ItemPool(final Class<T> cls) {
         this(new ConcurrentHashMap<>(), cls);
@@ -90,7 +68,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         if (from != null) {
             for (final Tin srcKey : from) {
                 if (clsHint.isInstance(srcKey)) {
-                    result.add((Tout) srcKey, Integer.valueOf(1));
+                    result.add((Tout) srcKey, 1);
                 }
             }
         }
@@ -126,7 +104,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             return 0;
         }
         final Integer boxed = items.get(item);
-        return boxed == null ? 0 : boxed.intValue();
+        return boxed == null ? 0 : boxed;
     }
 
     public final int countAll() {
@@ -148,12 +126,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     @SuppressWarnings("unchecked")
     public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
         int count = 0;
-        Map<T, Integer> matchingKeys = Maps.filterKeys(this.items, new Predicate<T>() {
-            @Override
-            public boolean apply(T item) {
-                return cls.isInstance(item) && (condition.apply((U)item));
-            }
-        });
+        Map<T, Integer> matchingKeys = Maps.filterKeys(this.items, item -> cls.isInstance(item) && (condition.apply((U)item)));
         for (Integer i : matchingKeys.values()) {
             count += i;
         }

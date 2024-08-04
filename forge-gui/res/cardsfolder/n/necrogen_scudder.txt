@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Phyrexian Horror
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
-Oracle:Flying\nWhen Necrogen Scudder enters the battlefield, you lose 3 life.
+Oracle:Flying\nWhen Necrogen Scudder enters, you lose 3 life.

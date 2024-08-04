@@ -3,10 +3,10 @@ ManaCost:B
 Types:Creature Human Rogue
 PT:1/1
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rogue.Other+YouCtrl | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another Rogue enters the battlefield under your control, each opponent mills two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rogue.Other+YouCtrl | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME or another Rogue you control enters, each opponent mills two cards.
 SVar:TrigMill:DB$ Mill | Defined$ Player.Opponent | NumCards$ 2
 SVar:BuffedBy:Rogue
 DeckHints:Type$Rogue
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Deathtouch | CheckSVar$ X | SVarCompare$ GE8 | Description$ As long as an opponent has eight or more cards in their graveyard, CARDNAME gets +2/+1 and has deathtouch.
 SVar:X:PlayerCountOpponents$HighestCardsInGraveyard
-Oracle:Flash\nWhenever Thieves' Guild Enforcer or another Rogue enters the battlefield under your control, each opponent mills two cards.\nAs long as an opponent has eight or more cards in their graveyard, Thieves' Guild Enforcer gets +2/+1 and has deathtouch.
+Oracle:Flash\nWhenever Thieves' Guild Enforcer or another Rogue you control enters, each opponent mills two cards.\nAs long as an opponent has eight or more cards in their graveyard, Thieves' Guild Enforcer gets +2/+1 and has deathtouch.

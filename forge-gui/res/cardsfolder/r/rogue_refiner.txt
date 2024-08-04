@@ -2,7 +2,7 @@ Name:Rogue Refiner
 ManaCost:1 G U
 Types:Creature Human Rogue
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card and you get {E}{E} (two energy counters).
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card and you get {E}{E} (two energy counters).
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBEnergy
 SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
-Oracle:When Rogue Refiner enters the battlefield, draw a card and you get {E}{E} (two energy counters).
+Oracle:When Rogue Refiner enters, draw a card and you get {E}{E} (two energy counters).

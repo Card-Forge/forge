@@ -18,6 +18,7 @@
 package forge.card;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import forge.Forge;
@@ -191,6 +192,16 @@ public class CardFaceSymbols {
                 x += dx;
             else
                 y += dx;
+        }
+    }
+
+    public static void drawAttractionLights(Graphics g, Set<Integer> lights, float x, float y, final float imageSize, boolean vertical) {
+        for(int i = 1; i <= 6; i++) {
+            drawSymbol("AL" + i + (lights.contains(i) ? "ON" : "OFF"), g, x, y, imageSize, imageSize);
+            if (!vertical)
+                x += imageSize;
+            else
+                y += imageSize;
         }
     }
 

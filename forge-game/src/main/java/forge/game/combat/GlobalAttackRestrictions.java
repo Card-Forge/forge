@@ -50,7 +50,7 @@ public class GlobalAttackRestrictions {
             if (max == null) {
                 continue;
             }
-            if (returnQuickly && max.intValue() == 0) {
+            if (returnQuickly && max == 0) {
                 // there's at least one creature attacking this defender
                 defenderTooMany.put(defender, 1);
                 break;
@@ -59,13 +59,13 @@ public class GlobalAttackRestrictions {
             for (final Entry<Card, GameEntity> attDef : attackers.entrySet()) {
                 if (attDef.getValue() == defender) {
                     count++;
-                    if (returnQuickly && count > max.intValue()) {
-                        defenderTooMany.put(defender, count - max.intValue());
+                    if (returnQuickly && count > max) {
+                        defenderTooMany.put(defender, count - max);
                         break outer;
                     }
                 }
             }
-            final int nDefTooMany = count - max.intValue();
+            final int nDefTooMany = count - max;
             if (nDefTooMany > 0) {
                 // Too many attackers to one defender!
                 defenderTooMany.put(defender, nDefTooMany);

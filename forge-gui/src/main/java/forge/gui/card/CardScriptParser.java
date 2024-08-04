@@ -345,11 +345,8 @@ public final class CardScriptParser {
         }
     }
 
-    private static final Predicate<String> startsWith(final String s) {
-        return new Predicate<String>() {
-            @Override public boolean apply(final String input) {
-                return s.startsWith(input);
-            }};
+    private static Predicate<String> startsWith(final String s) {
+        return s::startsWith;
     }
 
     /**
@@ -452,7 +449,7 @@ public final class CardScriptParser {
             "RememberedPlayer", "RememberedPlayerCtrl",
             "nonRememberedPlayerCtrl", "TargetedPlayerCtrl",
             "TargetedControllerCtrl", "ActivePlayerCtrl",
-            "NonActivePlayerCtrl", "YouOwn", "YouDontOwn", "OppOwn",
+            "YouOwn", "YouDontOwn", "OppOwn",
             "TargetedPlayerOwn", "OwnerDoesntControl", "Other", "Self",
             "AttachedBy", "Attached", "NameNotEnchantingEnchantedPlayer",
             "NotAttachedTo", "Enchanted", "CanEnchantRemembered",
@@ -460,12 +457,12 @@ public final class CardScriptParser {
             "CanBeEnchantedByAllRemembered", "EquippedBy",
             "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
             "CanBeEquippedBy", "Equipped", "Fortified", "HauntedBy",
-            "notTributed", "madness", "Paired", "NotPaired", "PairedWith",
+            "notTributed", "madness", "Paired", "PairedWith",
             "Above", "DirectlyAbove", "TopGraveyardCreature",
             "BottomGraveyard", "TopLibrary", "BottomLibrary", "Cloned", "DamagedBy", "Damaged",
             "sharesPermanentTypeWith", "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
-            "faceUp", "hasLevelUp", "DrawnThisTurn", "notDrawnThisTurn",
+            "faceUp", "hasLevelUp", "DrawnThisTurn",
             "firstTurnControlled", "notFirstTurnControlled",
             "startedTheTurnUntapped", "attackedOrBlockedSinceYourLastUpkeep",
             "blockedOrBeenBlockedSinceYourLastUpkeep",

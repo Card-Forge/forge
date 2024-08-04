@@ -2,6 +2,6 @@ Name:Chittering Rats
 ManaCost:1 B B
 Types:Creature Rat
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, target opponent puts a card from their hand on top of their library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, target opponent puts a card from their hand on top of their library.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | Chooser$ Targeted | Mandatory$ True | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True
-Oracle:When Chittering Rats enters the battlefield, target opponent puts a card from their hand on top of their library.
+Oracle:When Chittering Rats enters, target opponent puts a card from their hand on top of their library.

@@ -5,4 +5,4 @@ PT:0/0
 K:Flash
 K:etbCounter:P1P1:3
 DeckHas:Ability$Counters
-Oracle:Flash\nAdaptive Shimmerer enters the battlefield with three +1/+1 counters on it.
+Oracle:Flash\nAdaptive Shimmerer enters with three +1/+1 counters on it.

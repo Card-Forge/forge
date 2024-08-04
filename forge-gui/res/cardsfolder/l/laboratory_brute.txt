@@ -2,8 +2,8 @@ Name:Laboratory Brute
 ManaCost:3 U
 Types:Creature Zombie Horror
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill four cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
 DeckHints:Ability$Delirium
 DeckHas:Ability$Graveyard
-Oracle:When Laboratory Brute enters the battlefield, mill four cards.
+Oracle:When Laboratory Brute enters, mill four cards.

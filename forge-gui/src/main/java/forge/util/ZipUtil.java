@@ -1,6 +1,9 @@
 package forge.util;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -11,11 +14,11 @@ import java.util.zip.ZipOutputStream;
 public class ZipUtil {
     public static String backupAdvFile = "forge.adv";
     public static void zip(File source, File dest, String name) throws IOException {
+        try(
         FileOutputStream fos = new FileOutputStream(dest.getAbsolutePath() + File.separator + name);
-        ZipOutputStream zipOut = new ZipOutputStream(fos);
-        zipFile(source, source.getName(), zipOut);
-        zipOut.close();
-        fos.close();
+        ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+            zipFile(source, source.getName(), zipOut);
+        }
     }
 
     private static void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
@@ -69,12 +72,12 @@ public class ZipUtil {
 
                 // write file content
                 val.append(" * "). append(newFile.getName()).append("\n");
-                FileOutputStream fos = new FileOutputStream(newFile);
-                int len;
-                while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
+                try(FileOutputStream fos = new FileOutputStream(newFile)) {
+                    int len;
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
                 }
-                fos.close();
             }
             zipEntry = zis.getNextEntry();
         }

@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Creature Human Monk
 PT:3/2
 K:Prowess
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target enchantment card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.YouCtrl
 DeckHints:Type$Instant|Sorcery & Ability$Graveyard
-Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Lotus-Eye Mystics enters the battlefield, return target enchantment card from your graveyard to your hand.
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Lotus-Eye Mystics enters, return target enchantment card from your graveyard to your hand.

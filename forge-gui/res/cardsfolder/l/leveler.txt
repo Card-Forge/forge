@@ -2,7 +2,7 @@ Name:Leveler
 ManaCost:5
 Types:Artifact Creature Juggernaut
 PT:10/10
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileYourLibrary | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileYourLibrary | TriggerDescription$ When CARDNAME enters, exile all cards from your library.
 SVar:TrigExileYourLibrary:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Library | Destination$ Exile
 AI:RemoveDeck:Random
-Oracle:When Leveler enters the battlefield, exile all cards from your library.
+Oracle:When Leveler enters, exile all cards from your library.

@@ -2,7 +2,7 @@ Name:Manticore of the Gauntlet
 ManaCost:4 R
 Types:Creature Manticore
 PT:5/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature you control. CARDNAME deals 3 damage to target opponent or planeswalker.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on target creature you control. CARDNAME deals 3 damage to target opponent or planeswalker.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | SubAbility$ DBDealDamage | CounterNum$ 1
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ 3
-Oracle:When Manticore of the Gauntlet enters the battlefield, put a -1/-1 counter on target creature you control. Manticore of the Gauntlet deals 3 damage to target opponent or planeswalker.
+Oracle:When Manticore of the Gauntlet enters, put a -1/-1 counter on target creature you control. Manticore of the Gauntlet deals 3 damage to target opponent or planeswalker.

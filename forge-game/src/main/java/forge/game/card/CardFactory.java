@@ -17,7 +17,6 @@
  */
 package forge.game.card;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.ImageKeys;
@@ -44,7 +43,9 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -109,6 +110,7 @@ public class CardFactory {
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
         copy.setKickerMagnitude(original.getKickerMagnitude());
+        copy.setPromisedGift(original.getPromisedGift());
 
         if (targetSA.isBestow()) {
             copy.animateBestow();
@@ -354,6 +356,18 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
+        //If it's a functional variant card, switch to that first.
+        if(face.hasFunctionalVariants()) {
+            String variantName = c.getPaperCard().getFunctionalVariant();
+            if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName)) {
+                ICardFace variant = face.getFunctionalVariant(variantName);
+                if (variant != null)
+                    face = variant;
+                else
+                    System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), variantName);
+            }
+        }
+
         // Build English oracle and translated oracle mapping
         if (c.getId() >= 0) {
             CardTranslation.buildOracleMapping(face.getName(), face.getOracleText());
@@ -414,73 +428,6 @@ public class CardFactory {
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
-
-        if (face.hasFunctionalVariants()) {
-            applyFunctionalVariant(c, face);
-        }
-    }
-
-    private static void applyFunctionalVariant(Card c, ICardFace originalFace) {
-        String variantName = c.getPaperCard().getFunctionalVariant();
-        if (IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName))
-            return;
-        ICardFace variant = originalFace.getFunctionalVariant(variantName);
-        if (variant == null) {
-            System.out.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", originalFace.getName(), variantName);
-            return;
-        }
-
-        if (variant.getVariables() != null)
-            for (Entry<String, String> v : variant.getVariables())
-                c.setSVar(v.getKey(), v.getValue());
-        if (variant.getReplacements() != null)
-            for (String r : variant.getReplacements())
-                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
-        if (variant.getStaticAbilities() != null)
-            for (String s : variant.getStaticAbilities())
-                c.addStaticAbility(s);
-        if (variant.getTriggers() != null)
-            for (String t : variant.getTriggers())
-                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
-
-        if (variant.getKeywords() != null)
-            c.addIntrinsicKeywords(variant.getKeywords(), false);
-
-        if (variant.getManaCost() != ManaCost.NO_COST)
-            c.setManaCost(variant.getManaCost());
-        if (variant.getNonAbilityText() != null)
-            c.setText(variant.getNonAbilityText());
-
-        if (!"".equals(variant.getInitialLoyalty()))
-            c.getCurrentState().setBaseLoyalty(variant.getInitialLoyalty());
-        if (!"".equals(variant.getDefense()))
-            c.getCurrentState().setBaseDefense(variant.getDefense());
-
-        if (variant.getOracleText() != null)
-            c.getCurrentState().setOracleText(variant.getOracleText());
-
-        if (variant.getType() != null) {
-            for(String type : variant.getType())
-                c.addType(type);
-        }
-
-        if (variant.getColor() != null)
-            c.setColor(variant.getColor().getColor());
-
-        if (variant.getIntPower() != Integer.MAX_VALUE) {
-            c.setBasePower(variant.getIntPower());
-            c.setBasePowerString(variant.getPower());
-        }
-        if (variant.getIntToughness() != Integer.MAX_VALUE) {
-            c.setBaseToughness(variant.getIntToughness());
-            c.setBaseToughnessString(variant.getToughness());
-        }
-
-        if (variant.getAttractionLights() != null)
-            c.setAttractionLights(variant.getAttractionLights());
-
-        if (variant.getAbilities() != null)
-            CardFactoryUtil.addAbilityFactoryAbilities(c, variant.getAbilities());
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
@@ -497,12 +444,7 @@ public class CardFactory {
             to.setAdditionalAbility(e.getKey(), e.getValue().copy(host, p, lki, keepTextChanges));
         }
         for (Map.Entry<String, List<AbilitySub>> e : from.getAdditionalAbilityLists().entrySet()) {
-            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), new Function<AbilitySub, AbilitySub>() {
-                @Override
-                public AbilitySub apply(AbilitySub input) {
-                    return (AbilitySub) input.copy(host, p, lki, keepTextChanges);
-                }
-            }));
+            to.setAdditionalAbilityList(e.getKey(), Lists.transform(e.getValue(), input -> (AbilitySub) input.copy(host, p, lki, keepTextChanges)));
         }
         if (from.getRestrictions() != null) {
             to.setRestrictions((SpellAbilityRestriction) from.getRestrictions().copy());

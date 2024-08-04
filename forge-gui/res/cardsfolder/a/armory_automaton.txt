@@ -2,9 +2,9 @@ Name:Armory Automaton
 ManaCost:3
 Types:Artifact Creature Construct
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBAttach | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBAttach | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)
 SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment | TargetMin$ 0 | TargetMax$ MaxTargets | Object$ Targeted | Defined$ Self
 SVar:MaxTargets:Count$Valid Equipment
 SVar:HasAttackEffect:TRUE
-Oracle:Whenever Armory Automaton enters the battlefield or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)
+Oracle:Whenever Armory Automaton enters or attacks, you may attach any number of target Equipment to it. (Control of the Equipment doesn't change.)

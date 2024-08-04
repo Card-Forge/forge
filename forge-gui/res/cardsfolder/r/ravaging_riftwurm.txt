@@ -4,6 +4,6 @@ Types:Creature Wurm
 PT:6/6
 K:Kicker:4
 K:Vanishing:2
-K:etbCounter:TIME:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with three additional time counters on it.
+K:etbCounter:TIME:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters with three additional time counters on it.
 SVar:WasKicked:Count$Kicked.1.0
-Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nVanishing 2 (This creature enters the battlefield with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nIf Ravaging Riftwurm was kicked, it enters the battlefield with three additional time counters on it.
+Oracle:Kicker {4} (You may pay an additional {4} as you cast this spell.)\nVanishing 2 (This creature enters with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nIf Ravaging Riftwurm was kicked, it enters with three additional time counters on it.

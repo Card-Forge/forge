@@ -2,7 +2,7 @@ Name:Plant Elemental
 ManaCost:1 G
 Types:Creature Plant Elemental
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice a Forest.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters, sacrifice it unless you sacrifice a Forest.
 SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<1/Forest> | UnlessPayer$ You
 SVar:NeedsToPlay:Forest.YouCtrl
-Oracle:When Plant Elemental enters the battlefield, sacrifice it unless you sacrifice a Forest.
+Oracle:When Plant Elemental enters, sacrifice it unless you sacrifice a Forest.

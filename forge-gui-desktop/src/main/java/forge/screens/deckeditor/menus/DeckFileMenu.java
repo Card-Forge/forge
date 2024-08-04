@@ -1,6 +1,5 @@
 package forge.screens.deckeditor.menus;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
@@ -62,12 +61,7 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getNewAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Open() {
@@ -80,12 +74,7 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getOpenAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Import() {
@@ -97,12 +86,7 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getImportAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Save() {
@@ -116,12 +100,7 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getSaveAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_SaveAs() {
@@ -135,12 +114,7 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getSaveAsAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().getCommand().run();
     }
 
     private static SkinnedMenuItem getMenuItem_Print() {
@@ -153,11 +127,6 @@ public final class DeckFileMenu {
     }
 
     private static ActionListener getPrintAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().getCommand().run();
-            }
-        };
+        return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().getCommand().run();
     }
 }

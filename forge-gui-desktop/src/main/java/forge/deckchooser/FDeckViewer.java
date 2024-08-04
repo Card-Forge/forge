@@ -22,12 +22,8 @@ import forge.view.FDialog;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -74,18 +70,15 @@ public class FDeckViewer extends FDialog {
             }
         };
         this.cardManager.setPool(deck.getMain());
-        this.cardManager.addSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                final IPaperCard paperCard = cardManager.getSelectedItem();
-                if (paperCard == null) { return; }
+        this.cardManager.addSelectionListener(e -> {
+            final IPaperCard paperCard = cardManager.getSelectedItem();
+            if (paperCard == null) { return; }
 
-                final CardView card = CardView.getCardForUi(paperCard);
-                if (card == null) { return; }
+            final CardView card = CardView.getCardForUi(paperCard);
+            if (card == null) { return; }
 
-                cardDetail.setCard(card);
-                cardPicture.setCard(card.getCurrentState());
-            }
+            cardDetail.setCard(card);
+            cardPicture.setCard(card.getCurrentState());
         });
 
         for (Entry<DeckSection, CardPool> entry : deck) {
@@ -95,31 +88,16 @@ public class FDeckViewer extends FDialog {
         updateCaption();
 
         this.btnCopyToClipboard.setFocusable(false);
-        this.btnCopyToClipboard.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                FDeckViewer.this.copyToClipboard();
-            }
-        });
+        this.btnCopyToClipboard.addActionListener(arg0 -> FDeckViewer.this.copyToClipboard());
         this.btnChangeSection.setFocusable(false);
         if (this.sections.size() > 1) {
-            this.btnChangeSection.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent arg0) {
-                    FDeckViewer.this.changeSection();
-                }
-            });
+            this.btnChangeSection.addActionListener(arg0 -> FDeckViewer.this.changeSection());
         }
         else {
             this.btnChangeSection.setEnabled(false);
         }
         this.btnClose.setFocusable(false);
-        this.btnClose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                FDeckViewer.this.setVisible(false);
-            }
-        });
+        this.btnClose.addActionListener(arg0 -> FDeckViewer.this.setVisible(false));
 
         final int width;
         final int height;
@@ -170,7 +148,7 @@ public class FDeckViewer extends FDialog {
     }
 
     private void copyToClipboard() {
-        final String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
         final StringBuilder deckList = new StringBuilder();
         String dName = deck.getName();
         //fix copying a commander netdeck then importing it again...

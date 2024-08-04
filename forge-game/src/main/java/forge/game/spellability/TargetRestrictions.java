@@ -210,7 +210,7 @@ public class TargetRestrictions {
      *
      * @return the max targets
      */
-    private final String getMaxTotalCMC() {
+    private String getMaxTotalCMC() {
         return this.maxTotalCMC;
     }
 
@@ -223,7 +223,7 @@ public class TargetRestrictions {
      *
      * @return the max targets
      */
-    private final String getMaxTotalPower() {
+    private String getMaxTotalPower() {
         return this.maxTotalPower;
     }
 

@@ -16,8 +16,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 
 public class FDeckViewer extends FScreen {
@@ -62,28 +60,18 @@ public class FDeckViewer extends FScreen {
                     break;
                 }
 
-                FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        deckViewer.setCurrentSection(section);
-                    }
-                });
+                FMenuItem item = new FMenuItem(captionPrefix + " (" + count + ")", icon, e -> deckViewer.setCurrentSection(section));
                 if (section == deckViewer.currentSection) {
                     item.setSelected(true);
                 }
                 addItem(item);
             }
-            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    copyDeckToClipboard(deckViewer.deck);
-                }
-            }));
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e -> copyDeckToClipboard(deckViewer.deck)));
         }
     };
 
     public static void copyDeckToClipboard(Deck deck) {
-        final String nl = System.getProperty("line.separator");
+        final String nl = System.lineSeparator();
         final StringBuilder deckList = new StringBuilder();
         String dName = deck.getName();
         //fix copying a commander netdeck then importing it again...

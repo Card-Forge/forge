@@ -19,26 +19,14 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static final Predicate<InventoryItem> IsTournamentPack = new Predicate<InventoryItem>() {
-
-        @Override
-        public boolean apply(final InventoryItem card) {
-            return card instanceof TournamentPack && !((TournamentPack) card).isStarterDeck();
-        }
-    };
+    public static final Predicate<InventoryItem> IsTournamentPack = card -> card instanceof TournamentPack && !((TournamentPack) card).isStarterDeck();
 
     /**
      * Checks that the inventory item is a Starter Deck.
      * 
      * @return the predicate
      */
-    public static final Predicate<InventoryItem> IsStarterDeck = new Predicate<InventoryItem>() {
-
-        @Override
-        public boolean apply(final InventoryItem card) {
-            return card instanceof TournamentPack && ((TournamentPack) card).isStarterDeck();
-        }
-    };
+    public static final Predicate<InventoryItem> IsStarterDeck = card -> card instanceof TournamentPack && ((TournamentPack) card).isStarterDeck();
 
     /**
      * Checks that the inventory item is a Prebuilt Deck.

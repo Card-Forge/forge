@@ -152,11 +152,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (sa.hasParam("RandomCopied")) {
@@ -187,7 +187,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                         }
                     }
 
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
                     if (!cards.isEmpty()) {
@@ -228,7 +228,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 }
             } else if (chosenMap) {
                 if (sa.hasParam("ChosenMapIndex")) {
-                    final int index = Integer.valueOf(sa.getParam("ChosenMapIndex"));
+                    final int index = Integer.parseInt(sa.getParam("ChosenMapIndex"));
                     if (index >= host.getChosenMap().get(controller).size()) continue;
                     tgtCards.add(host.getChosenMap().get(controller).get(index));
                 } else tgtCards = host.getChosenMap().get(controller);

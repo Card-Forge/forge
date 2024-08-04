@@ -493,13 +493,13 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
+    public boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     @Override
-    public final boolean isAura()           { return hasSubtype("Aura"); }
+    public boolean isAura()           { return hasSubtype("Aura"); }
     @Override
-    public final boolean isEquipment()  { return hasSubtype("Equipment"); }
+    public boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
-    public final boolean isFortification()  { return hasSubtype("Fortification"); }
+    public boolean isFortification()  { return hasSubtype("Fortification"); }
     public boolean isAttraction() {
         return hasSubtype("Attraction");
     }
@@ -858,71 +858,21 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 "Warlock");
     }
     public static class Predicates {
-        public static Predicate<String> IS_LAND_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isALandType(input);
-            }
-        };
-        public static Predicate<String> IS_BASIC_LAND_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isABasicLandType(input);
-            }
-        };
-        public static Predicate<String> IS_ARTIFACT_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAnArtifactType(input);
-            }
-        };
+        public static Predicate<String> IS_LAND_TYPE = CardType::isALandType;
+        public static Predicate<String> IS_BASIC_LAND_TYPE = CardType::isABasicLandType;
+        public static Predicate<String> IS_ARTIFACT_TYPE = CardType::isAnArtifactType;
 
-        public static Predicate<String> IS_CREATURE_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isACreatureType(input);
-            }
-        };
+        public static Predicate<String> IS_CREATURE_TYPE = CardType::isACreatureType;
 
-        public static Predicate<String> IS_ENCHANTMENT_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAnEnchantmentType(input);
-            }
-        };
+        public static Predicate<String> IS_ENCHANTMENT_TYPE = CardType::isAnEnchantmentType;
 
-        public static Predicate<String> IS_SPELL_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isASpellType(input);
-            }
-        };
+        public static Predicate<String> IS_SPELL_TYPE = CardType::isASpellType;
 
-        public static Predicate<String> IS_WALKER_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAPlaneswalkerType(input);
-            }
-        };
-        public static Predicate<String> IS_DUNGEON_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isADungeonType(input);
-            }
-        };
-        public static Predicate<String> IS_BATTLE_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isABattleType(input);
-            }
-        };
+        public static Predicate<String> IS_WALKER_TYPE = CardType::isAPlaneswalkerType;
+        public static Predicate<String> IS_DUNGEON_TYPE = CardType::isADungeonType;
+        public static Predicate<String> IS_BATTLE_TYPE = CardType::isABattleType;
 
-        public static Predicate<String> IS_PLANAR_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAPlanarType(input);
-            }
-        };
+        public static Predicate<String> IS_PLANAR_TYPE = CardType::isAPlanarType;
     }
 
     ///////// Utility methods
@@ -1036,7 +986,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      *
      * @deprecated
      */
-    public static final String getSingularType(final String type) {
+    public static String getSingularType(final String type) {
         if (Constant.singularTypes.containsKey(type)) {
             return Constant.singularTypes.get(type);
         }
@@ -1049,7 +999,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      * @param type a String.
      * @return the corresponding type.
      */
-    public static final String getPluralType(final String type) {
+    public static String getPluralType(final String type) {
         if (Constant.pluralTypes.containsKey(type)) {
             return Constant.pluralTypes.get(type);
         }

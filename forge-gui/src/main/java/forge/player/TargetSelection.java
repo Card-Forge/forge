@@ -67,7 +67,7 @@ public class TargetSelection {
         this.ability = currentAbility;
     }
 
-    private final TargetRestrictions getTgt() {
+    private TargetRestrictions getTgt() {
         return this.ability.getTargetRestrictions();
     }
 
@@ -85,8 +85,8 @@ public class TargetSelection {
         final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
-        final int minTargets = numTargets != null ? numTargets.intValue() : ability.getMinTargets();
-        final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
+        final int minTargets = numTargets != null ? numTargets : ability.getMinTargets();
+        final int maxTargets = numTargets != null ? numTargets : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = tgt.isSingleZone();
@@ -218,7 +218,7 @@ public class TargetSelection {
         return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional, canFilterMustTarget);
     }
 
-    private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
+    private boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -318,7 +318,7 @@ public class TargetSelection {
         return true;
     }
 
-    private final boolean chooseCardFromStack(final boolean mandatory, final Integer numTargets) {
+    private boolean chooseCardFromStack(final boolean mandatory, final Integer numTargets) {
         final TargetRestrictions tgt = this.getTgt();
         final String message = TextUtil.fastReplace(tgt.getVTSelection(),
                 "CARDNAME", ability.getHostCard().toString());

@@ -3,10 +3,10 @@ ManaCost:2 G
 Types:Legendary Creature Human Druid
 PT:2/2
 K:Specialize:3:Wild Shape:Activate only if you control six or more lands.:IsPresent$ Land.YouCtrl | PresentCompare$ GE6
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, seek a land card with a basic land type.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, if you cast it, seek a land card with a basic land type.
 SVar:TrigSeek:DB$ Seek | Type$ Land.hasABasicLandType
 AlternateMode:Specialize
-Oracle:Wild Shape — Specialize {3}. Activate only if you control six or more lands.\nWhen Lukamina, Moon Druid enters the battlefield, if you cast it, seek a land card with a basic land type.
+Oracle:Wild Shape — Specialize {3}. Activate only if you control six or more lands.\nWhen Lukamina, Moon Druid enters, if you cast it, seek a land card with a basic land type.
 
 SPECIALIZE:WHITE
 

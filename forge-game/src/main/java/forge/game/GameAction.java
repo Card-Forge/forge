@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.StaticData;
@@ -1132,15 +1131,10 @@ public class GameAction {
             }
         }, true);
 
-        final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
-            @Override
-            public int compare(final StaticAbility a, final StaticAbility b) {
-                return ComparisonChain.start()
-                        .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
-                        .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
-                        .result();
-            }
-        };
+        final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
+                .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
+                .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
+                .result();
         Collections.sort(staticAbilities, comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
@@ -1442,10 +1436,7 @@ public class GameAction {
                 sacrificeList = (CardCollection) GameActionUtil.orderCardsByTheirOwners(game, sacrificeList, ZoneType.Graveyard, null);
                 orderedSacrificeList = true;
             }
-            for (Card c : sacrificeList) {
-                c.updateWasDestroyed(true);
-                sacrifice(c, null, true, mapParams);
-            }
+            sacrifice(sacrificeList, null, true, mapParams);
             setHoldCheckingStaticAbilities(false);
 
             table.triggerChangesZoneAll(game, null);
@@ -1810,15 +1801,9 @@ public class GameAction {
         boolean recheck = false;
 
         // Corner Case 1: Legendary with non legendary creature names
-        CardCollection nonLegendaryNames = CardLists.filter(a, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                return input.hasNonLegendaryCreatureNames();
-            }
+        CardCollection nonLegendaryNames = CardLists.filter(a, Card::hasNonLegendaryCreatureNames);
 
-        });
-
-        Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
+        Multimap<String, Card> uniqueLegends = Multimaps.index(a, Card::getName);
         CardCollection removed = new CardCollection();
 
         for (String name : uniqueLegends.keySet()) {
@@ -1891,15 +1876,37 @@ public class GameAction {
         return true;
     }
 
-    public final Card sacrifice(final Card c, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
-        if (!c.canBeSacrificedBy(source, effect)) {
-            return null;
+    public final CardCollection sacrifice(final Iterable<Card> list, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
+        Multimap<Player, Card> lki = MultimapBuilder.hashKeys().arrayListValues().build();
+        CardCollection result = new CardCollection();
+        for (Card c : list) {
+            if (c == null) {
+                continue;
+            }
+
+            if (!c.canBeSacrificedBy(source, effect)) {
+                continue;
+            }
+
+            Card lkiCopy = ((CardCollection) params.get(AbilityKey.LastStateBattlefield)).get(c);
+            c.getController().addSacrificedThisTurn(lkiCopy, source);
+            lki.put(c.getController(), lkiCopy);
+
+            c.updateWasDestroyed(true);
+
+            Card changed = sacrificeDestroy(c, source, params);
+            if (changed != null) {
+                result.add(changed);
+            }
         }
-
-        c.getController().addSacrificedThisTurn(c, source);
-
-        c.updateWasDestroyed(true);
-        return sacrificeDestroy(c, source, params);
+        for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {
+            // Run triggers
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(e.getKey());
+            runParams.put(AbilityKey.Cards, new CardCollection(e.getValue()));
+            runParams.put(AbilityKey.Cause, source);
+            game.getTriggerHandler().runTrigger(TriggerType.SacrificedOnce, runParams, false);
+        }
+        return result;
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, Map<AbilityKey, Object> params) {
@@ -2065,7 +2072,7 @@ public class GameAction {
         if (landCount == 0) {
             return 0;
         }
-        return Float.valueOf(landCount)/Float.valueOf(deck.size());
+        return ((float) landCount) / ((float) deck.size());
     }
 
     private float getHandScore(List<Card> hand, float landRatio) {
@@ -2207,19 +2214,9 @@ public class GameAction {
     private void runPreOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    return input.getName().equals("Emissary's Ploy");
-                }
-            });
+            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), input -> input.getName().equals("Emissary's Ploy"));
             CardCollectionView all = CardLists.filterControlledBy(game.getCardsInGame(), takesAction);
-            List<Card> spires = CardLists.filter(all, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.getName().equals("Cryptic Spires");
-                    }
-            });
+            List<Card> spires = CardLists.filter(all, input -> input.getName().equals("Cryptic Spires"));
 
             int chosen = 1;
             List<Integer> cmc = Lists.newArrayList(1, 2, 3);
@@ -2514,7 +2511,7 @@ public class GameAction {
                     lethalDamage.put(c, c.getExcessDamageValue(false));
                 }
 
-                e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable)));
+                e.setValue(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, cause, isCombat, counterTable));
                 sum += e.getValue();
 
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
@@ -2648,7 +2645,7 @@ public class GameAction {
 
     private static void unanimateOnAbortedChange(final SpellAbility cause, final Card c) {
         if (cause.hasParam("AnimateSubAbility")) {
-            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+            long unanimateTimestamp = Long.parseLong(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
             c.removeChangedCardKeywords(unanimateTimestamp, 0);
             c.removeChangedCardTypes(unanimateTimestamp, 0);
             c.removeChangedName(unanimateTimestamp, 0);

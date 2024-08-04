@@ -1,6 +1,5 @@
 package forge.game.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
@@ -23,7 +22,10 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.*;
+import forge.util.CardTranslation;
+import forge.util.Lang;
+import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -431,6 +433,12 @@ public class CardView extends GameEntityView {
     void updateChosenPlayer(Card c) {
         set(TrackableProperty.ChosenPlayer, PlayerView.get(c.getChosenPlayer()));
     }
+    public PlayerView getPromisedGift() {
+        return get(TrackableProperty.PromisedGift);
+    }
+    void updatePromisedGift(Card c) {
+        set(TrackableProperty.PromisedGift, PlayerView.get(c.getPromisedGift()));
+    }
     public PlayerView getProtectingPlayer() {
         return get(TrackableProperty.ProtectingPlayer);
     }
@@ -561,12 +569,7 @@ public class CardView extends GameEntityView {
     public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canBeShownTo);
     }
 
     public boolean canBeShownTo(final PlayerView viewer) {
@@ -632,12 +635,7 @@ public class CardView extends GameEntityView {
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canFaceDownBeShownTo);
     }
 
     public boolean canFaceDownBeShownTo(final PlayerView viewer) {
@@ -1072,7 +1070,7 @@ public class CardView extends GameEntityView {
         if (hiddenId == null) {
             return getId();
         }
-        return hiddenId.intValue();
+        return hiddenId;
     }
     void updateHiddenId(final int hiddenId) {
         set(TrackableProperty.HiddenId, hiddenId);

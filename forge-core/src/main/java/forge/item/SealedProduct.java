@@ -124,7 +124,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     protected List<PaperCard> getRandomBasicLands(final String setCode, final int count) {
         Predicate<PaperCard> cardsRule = Predicates.and(
                 IPaperCard.Predicates.printedInSet(setCode),
-                Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+                Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
         return Aggregates.random(Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), cardsRule), count);
     }
 
@@ -142,6 +142,10 @@ public abstract class SealedProduct implements InventoryItemFromSet {
 
         public final List<Pair<String, Integer>> getSlots() {
             return slots;
+        }
+
+        public final String getName() {
+            return name;
         }
 
         public boolean hasSlot(String s)
@@ -181,13 +185,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
             }
             return sum;
         }
-
-        public static final Function<? super Template, String> FN_GET_NAME = new Function<Template, String>() {
-            @Override
-            public String apply(Template arg1) {
-                return arg1.name;
-            }
-        };
 
         @Override
         public String toString() {
@@ -229,7 +226,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
 
         public final static class Reader extends StorageReaderFile<Template> {
             public Reader(File file) {
-                super(file, Template.FN_GET_NAME);
+                super(file, (Function<? super Template, String>) (Function<Template, String>) Template::getName);
             }
 
             public static List<Pair<String, Integer>> parseSlots(String data) {

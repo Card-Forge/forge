@@ -17,7 +17,6 @@
  */
 package forge.game.player;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ImageKeys;
@@ -101,6 +100,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int lifeGainedTimesThisTurn;
     private int lifeGainedByTeamThisTurn;
     private int committedCrimeThisTurn;
+    private int expentThisTurn;
     private int numManaShards;
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
@@ -292,7 +292,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getAction().moveToCommand(activeScheme, cause);
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, activeScheme);
         game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
@@ -335,21 +334,21 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Find the smallest life total amongst this player's opponents.
      */
     public final int getOpponentsSmallestLifeTotal() {
-        return Aggregates.min(getOpponents(), Accessors.FN_GET_LIFE_TOTAL);
+        return Aggregates.min(getOpponents(), Player::getLife);
     }
 
     /**
      * Find the greatest life total amongst this player's opponents.
      */
     public final int getOpponentsGreatestLifeTotal() {
-        return Aggregates.max(getOpponents(), Accessors.FN_GET_LIFE_TOTAL);
+        return Aggregates.max(getOpponents(), Player::getLife);
     }
 
     /**
      * Get the total number of poison counters amongst this player's opponents.
      */
     public final int getOpponentsTotalPoisonCounters() {
-        return Aggregates.sum(getOpponents(), Accessors.FN_GET_POISON_COUNTERS);
+        return Aggregates.sum(getOpponents(), Player::getPoisonCounters);
     }
 
     /**
@@ -844,14 +843,14 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Get the total damage assigned to this player's opponents this turn.
      */
     public final int getOpponentsAssignedDamage() {
-        return Aggregates.sum(getOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.sum(getOpponents(), GameEntity::getAssignedDamage);
     }
 
     /**
      * Get the greatest amount of damage assigned to a single opponent this turn.
      */
     public final int getMaxOpponentAssignedDamage() {
-        return Aggregates.max(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.max(getRegisteredOpponents(), GameEntity::getAssignedDamage);
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
@@ -940,7 +939,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void setCounters(final CounterType counterType, final Integer num, Player source, boolean fireEvents) {
-        Integer old = getCounters(counterType);
+        int old = getCounters(counterType);
         setCounters(counterType, num);
         view.updateCounters(this);
         if (fireEvents) {
@@ -1847,7 +1846,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final Card getLastDrawnCard() {
         return lastDrawnCard;
     }
-    private final Card setLastDrawnCard(final Card c) {
+    private Card setLastDrawnCard(final Card c) {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
@@ -2153,7 +2152,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getBloodthirstAmount() {
-        return Aggregates.sum(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
+        return Aggregates.sum(getRegisteredOpponents(), GameEntity::getAssignedDamage);
     }
 
     public final int getOpponentLostLifeThisTurn() {
@@ -2222,8 +2221,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (incR.length > 1) {
             final String excR = incR[1];
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
-            for (int j = 0; j < exR.length; j++) {
-                if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
+            for (String s : exR) {
+                if (!hasProperty(s, sourceController, source, spellAbility)) {
                     return false;
                 }
             }
@@ -2295,11 +2294,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
-    public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
+    public final void addSacrificedThisTurn(final Card cpy, final SpellAbility source) {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
 
-        final Card cpy = CardCopyService.getLKICopy(c);
         sacrificedThisTurn.add(cpy);
 
         // Run triggers
@@ -2420,33 +2418,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return draftNotes;
     }
 
-    public static class Accessors {
-        public static Function<Player, String> FN_GET_NAME = new Function<Player, String>() {
-            @Override
-            public String apply(Player input) {
-                return input.getName();
-            }
-        };
-        public static Function<Player, Integer> FN_GET_LIFE_TOTAL = new Function<Player, Integer>() {
-            @Override
-            public Integer apply(Player input) {
-                return input.getLife();
-            }
-        };
-        public static Function<Player, Integer> FN_GET_POISON_COUNTERS = new Function<Player, Integer>() {
-            @Override
-            public Integer apply(Player input) {
-                return input.getPoisonCounters();
-            }
-        };
-        public static final Function<Player, Integer> FN_GET_ASSIGNED_DAMAGE = new Function<Player, Integer>() {
-            @Override
-            public Integer apply(Player input) {
-                return input.getAssignedDamage();
-            }
-        };
-    }
-
     public final LobbyPlayer getLobbyPlayer() {
         return getController().getLobbyPlayer();
     }
@@ -2557,6 +2528,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         setNumManaConversion(0);
 
         setCommitedCrimeThisTurn(0);
+        setExpentThisTurn(0);
 
         damageReceivedThisTurn.clear();
         planeswalkedToThisTurn.clear();
@@ -2805,7 +2777,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public int getCommanderDamage(Card commander) {
         Integer damage = commanderDamage.get(commander);
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
     public void addCommanderDamage(Card commander, int damage) {
         commanderDamage.merge(commander, damage, Integer::sum);
@@ -2902,7 +2874,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                         try {
                             if (keyword.startsWith("etbCounter")) {
                                 final String[] p = keyword.split(":");
-                                c.addCounterInternal(CounterType.getType(p[1]), Integer.valueOf(p[2]), null, false, null, null);
+                                c.addCounterInternal(CounterType.getType(p[1]), Integer.parseInt(p[2]), null, false, null, null);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -3054,7 +3026,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 }
                 int generic = manaCost.getGenericCost();
                 if (generic > 0 || manaCost.getCMC() == 0) {
-                    if (!genericManaSymbols.add(Integer.valueOf(generic))) {
+                    if (!genericManaSymbols.add(generic)) {
                         return false;
                     }
                 }
@@ -3277,7 +3249,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         } else if (level == 3) {
             final String becomesBlockedTrig = "Mode$ AttackerBlockedByCreature | ValidCard$ Card.YouCtrl+IsRingbearer| ValidBlocker$ Creature | TriggerZones$ Command | TriggerDescription$ Whenever your Ring-bearer becomes blocked a creature, that creature's controller sacrifices it at the end of combat.";
             final String endOfCombatTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ TriggeredBlockerLKICopy | TriggerDescription$ At end of combat, the controller of the creature that blocked CARDNAME sacrifices that creature.";
-            final String sacBlockerEffect = "DB$ Destroy | Defined$ DelayTriggerRememberedLKI | Sacrifice$ True";
+            final String sacBlockerEffect = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI";
 
             final Trigger becomesBlockedTrigger = TriggerHandler.parseTrigger(becomesBlockedTrig, getTheRing(), true);
 
@@ -3544,11 +3516,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     public String trimKeywords(String keywordTexts) {
         if (keywordTexts.contains("Protection:")) {
             List <String> lines = Arrays.asList(keywordTexts.split("\n"));
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).startsWith("Protection:")) {
-                    List<String> parts = Arrays.asList(lines.get(i).split(":"));
+            for (String line : lines) {
+                if (line.startsWith("Protection:")) {
+                    List<String> parts = Arrays.asList(line.split(":"));
                     if (parts.size() > 2) {
-                        keywordTexts = TextUtil.fastReplace(keywordTexts, lines.get(i), parts.get(2));
+                        keywordTexts = TextUtil.fastReplace(keywordTexts, line, parts.get(2));
                     }
                 }
             }
@@ -3862,6 +3834,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCommitedCrimeThisTurn(int v) {
         committedCrimeThisTurn = v;
+    }
+
+    public int getExpentThisTurn() {
+        return expentThisTurn;
+    }
+    public void setExpentThisTurn(int v) {
+        expentThisTurn = v;
     }
 
     public void visitAttractions(int light) {

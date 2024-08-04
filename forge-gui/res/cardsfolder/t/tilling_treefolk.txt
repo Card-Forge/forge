@@ -2,6 +2,6 @@ Name:Tilling Treefolk
 ManaCost:2 G
 Types:Creature Treefolk Druid
 PT:1/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return up to two target land cards from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMax$ 2
-Oracle:When Tilling Treefolk enters the battlefield, you may return up to two target land cards from your graveyard to your hand.
+Oracle:When Tilling Treefolk enters, you may return up to two target land cards from your graveyard to your hand.

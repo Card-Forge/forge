@@ -59,31 +59,20 @@ public class FTextField extends FDisplayObject implements ITextField {
         protected void buildMenu() {
             if (text.length() > 0) {
                 if (!readOnly) {
-                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCut"), new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            Forge.getClipboard().setContents(getSelectedText());
-                            textBeforeKeyInput = text;
-                            insertText("");
-                            endEdit();
-                        }
+                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCut"), e -> {
+                        Forge.getClipboard().setContents(getSelectedText());
+                        textBeforeKeyInput = text;
+                        insertText("");
+                        endEdit();
                     }));
                 }
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCopy"), new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        Forge.getClipboard().setContents(getSelectedText());
-                    }
-                }));
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblCopy"), e -> Forge.getClipboard().setContents(getSelectedText())));
             }
             if (!readOnly) {
-                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        textBeforeKeyInput = text;
-                        insertText(Forge.getClipboard().getContents());
-                        endEdit();
-                    }
+                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblPaste"), e -> {
+                    textBeforeKeyInput = text;
+                    insertText(Forge.getClipboard().getContents());
+                    endEdit();
                 }));
             }
         }

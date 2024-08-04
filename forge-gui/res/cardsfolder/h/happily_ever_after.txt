@@ -1,7 +1,7 @@
 Name:Happily Ever After
 ManaCost:2 W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, each player gains 5 life and draws a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, each player gains 5 life and draws a card.
 SVar:TrigGainLife:DB$ GainLife | Defined$ Player | LifeAmount$ 5 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Z | SVarCompare$ EQ11 | LifeTotal$ You | LifeAmount$ GEW | Execute$ TrigWin | TriggerDescription$ At the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
@@ -11,4 +11,4 @@ SVar:Y:Count$ValidBattlefield,Graveyard Card.YouCtrl$CardTypes/LimitMax.6
 SVar:Z:SVar$X/Plus.Y
 SVar:W:Count$YourStartingLife
 DeckHas:Ability$LifeGain
-Oracle:When Happily Ever After enters the battlefield, each player gains 5 life and draws a card.\nAt the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.
+Oracle:When Happily Ever After enters, each player gains 5 life and draws a card.\nAt the beginning of your upkeep, if there are five colors among permanents you control, there are six or more card types among permanents you control and/or cards in your graveyard, and your life total is greater than or equal to your starting life total, you win the game.

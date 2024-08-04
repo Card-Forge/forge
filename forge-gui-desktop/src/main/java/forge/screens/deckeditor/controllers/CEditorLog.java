@@ -56,11 +56,6 @@ public enum CEditorLog implements ICDoc {
      */
     @Override
     public void update() {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                view.updateConsole();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(view::updateConsole);
     }
 }

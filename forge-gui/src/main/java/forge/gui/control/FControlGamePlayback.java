@@ -131,12 +131,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventSpellResolved event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                humanController.getGui().setCard(CardView.get(event.spell.getHostCard()));
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.spell.getHostCard())));
         pauseForEvent(resolveDelay);
         return null;
     }
@@ -146,12 +141,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
      */
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                humanController.getGui().setCard(CardView.get(event.sa.getHostCard()));
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(() -> humanController.getGui().setCard(CardView.get(event.sa.getHostCard())));
         pauseForEvent(castDelay);
         return null;
     }
@@ -167,10 +157,7 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
                 gameThreadPauser.await();
                 gameThreadPauser.reset();
             }
-            catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-            catch (final BrokenBarrierException e) {
+            catch (final InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
             }
         }
@@ -186,18 +173,12 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
 
     private void releaseGameThread() {
         // just need to run another thread through the barrier... not edt preferrably :)
-        getGame().getAction().invoke(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    gameThreadPauser.await();
-                } catch (final InterruptedException e) {
-                    // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                } catch (final BrokenBarrierException e) {
-                    // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
-                    e.printStackTrace();
-                }
+        getGame().getAction().invoke(() -> {
+            try {
+                gameThreadPauser.await();
+            } catch (final InterruptedException | BrokenBarrierException e) {
+                // Auto-generated catch block ignores the exception, but sends it to System.err and probably forge.log.
+                e.printStackTrace();
             }
         });
     }

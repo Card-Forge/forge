@@ -2,6 +2,6 @@ Name:Fungus Elemental
 ManaCost:3 G
 Types:Creature Fungus Elemental
 PT:3/3
-A:AB$ PutCounter | Cost$ G Sac<1/Forest> | Defined$ Self | CounterType$ P2P2 | CounterNum$ 1 | IsPresent$ Card.Self+ThisTurnEntered | SpellDescription$ Put a +2/+2 counter on CARDNAME. Activate only if CARDNAME entered the battlefield this turn.
+A:AB$ PutCounter | Cost$ G Sac<1/Forest> | Defined$ Self | CounterType$ P2P2 | CounterNum$ 1 | IsPresent$ Card.Self+ThisTurnEntered | SpellDescription$ Put a +2/+2 counter on CARDNAME. Activate only if CARDNAME entered this turn.
 AI:RemoveDeck:All
-Oracle:{G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate only if Fungus Elemental entered the battlefield this turn.
+Oracle:{G}, Sacrifice a Forest: Put a +2/+2 counter on Fungus Elemental. Activate only if Fungus Elemental entered this turn.

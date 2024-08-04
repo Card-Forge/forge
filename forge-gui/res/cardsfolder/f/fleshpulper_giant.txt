@@ -2,6 +2,6 @@ Name:Fleshpulper Giant
 ManaCost:5 R R
 Types:Creature Giant
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature with toughness 2 or less.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target creature with toughness 2 or less.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.toughnessLE2 | TgtPrompt$ Select target creature with toughness 2 or less.
-Oracle:When Fleshpulper Giant enters the battlefield, you may destroy target creature with toughness 2 or less.
+Oracle:When Fleshpulper Giant enters, you may destroy target creature with toughness 2 or less.

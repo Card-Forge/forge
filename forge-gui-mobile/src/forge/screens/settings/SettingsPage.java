@@ -233,7 +233,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);
                 AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(newValue));
-                System.out.println(AiProfileUtil.getAISideboardingMode());
             }
         }, 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_EXPERIMENTAL_RESTORE,

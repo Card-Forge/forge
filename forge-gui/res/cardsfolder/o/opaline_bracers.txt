@@ -8,4 +8,4 @@ SVar:X:Count$CardCounters.CHARGE
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 DeckHints:Ability$Proliferate
-Oracle:Sunburst (This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)\nEquipped creature gets +X/+X, where X is the number of charge counters on Opaline Bracers.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Sunburst (This enters with a charge counter on it for each color of mana spent to cast it.)\nEquipped creature gets +X/+X, where X is the number of charge counters on Opaline Bracers.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

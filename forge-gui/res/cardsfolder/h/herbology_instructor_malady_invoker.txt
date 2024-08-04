@@ -2,12 +2,12 @@ Name:Herbology Instructor
 ManaCost:1 G
 Types:Creature Treefolk Druid
 PT:1/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 A:AB$ SetState | Cost$ 6 BP | Defined$ Self | Mode$ Transform | SorcerySpeed$ True | AILogic$ Always | SpellDescription$ Transform CARDNAME. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
 DeckHas:Ability$LifeGain
 AlternateMode:DoubleFaced
-Oracle:When Herbology Instructor enters the battlefield, you gain 3 life.\n{6}{B/P}: Transform Herbology Instructor. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
+Oracle:When Herbology Instructor enters, you gain 3 life.\n{6}{B/P}: Transform Herbology Instructor. Activate only as a sorcery. ({B/P} can be paid with either {B} or 2 life.)
 
 ALTERNATE
 

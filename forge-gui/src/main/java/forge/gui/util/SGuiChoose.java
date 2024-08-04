@@ -87,12 +87,12 @@ public class SGuiChoose {
         final Integer[] choices = new Integer[count];
         if (sortDesc) {
             for (int i = 0; i < count; i++) {
-                choices[count - i - 1] = Integer.valueOf(i + min);
+                choices[count - i - 1] = i + min;
             }
         }
         else {
             for (int i = 0; i < count; i++) {
-                choices[i] = Integer.valueOf(i + min);
+                choices[i] = i + min;
             }
         }
         return SGuiChoose.oneOrNone(message, choices);
@@ -107,7 +107,7 @@ public class SGuiChoose {
 
         final List<Object> choices = new ArrayList<>();
         for (int i = min; i <= cutoff; i++) {
-            choices.add(Integer.valueOf(i));
+            choices.add(i);
         }
         choices.add("...");
 
@@ -136,7 +136,7 @@ public class SGuiChoose {
             if (str == null) { return null; } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
-                final Integer val = Integer.valueOf(str);
+                final int val = Integer.parseInt(str);
                 if (val >= min && val <= max) {
                     return val;
                 }

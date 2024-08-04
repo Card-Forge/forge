@@ -2,7 +2,7 @@ Name:Cauldron Familiar
 ManaCost:B
 Types:Creature Cat
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
@@ -11,4 +11,4 @@ SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:AIPreference:SacCost$Card.Food
 DeckHints:Ability$Food
-Oracle:When Cauldron Familiar enters the battlefield, each opponent loses 1 life and you gain 1 life.\nSacrifice a Food: Return Cauldron Familiar from your graveyard to the battlefield.
+Oracle:When Cauldron Familiar enters, each opponent loses 1 life and you gain 1 life.\nSacrifice a Food: Return Cauldron Familiar from your graveyard to the battlefield.

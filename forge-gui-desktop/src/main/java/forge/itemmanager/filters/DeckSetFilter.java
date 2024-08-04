@@ -60,16 +60,13 @@ public class DeckSetFilter extends DeckFormatFilter {
                                                             true, this.allowReprints);
         final DeckSetFilter itemFilter = this;
 
-        dialog.setOkCallback(new Runnable() {
-            @Override
-            public void run() {
-                sets.clear();
-                sets.addAll(dialog.getSelectedSets());
-                allowReprints = dialog.getWantReprints();
-                formats.clear();
-                formats.add(new GameFormat(null, sets, null));
-                itemManager.addFilter(itemFilter); // this adds/updates the current filter
-            }
+        dialog.setOkCallback(() -> {
+            sets.clear();
+            sets.addAll(dialog.getSelectedSets());
+            allowReprints = dialog.getWantReprints();
+            formats.clear();
+            formats.add(new GameFormat(null, sets, null));
+            itemManager.addFilter(itemFilter); // this adds/updates the current filter
         });
     }
 
@@ -90,11 +87,6 @@ public class DeckSetFilter extends DeckFormatFilter {
 
     @Override
     protected Predicate<DeckProxy> buildPredicate() {
-        return new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(DeckProxy input) {
-                return input != null && sets.contains(input.getEdition().getCode());
-            }
-        };
+        return input -> input != null && sets.contains(input.getEdition().getCode());
     }
 }

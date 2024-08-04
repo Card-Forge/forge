@@ -72,7 +72,7 @@ public abstract class Animation {
     private Animation(final long duration, final long delay) {
         this.delay = delay;
         timerTask = new TimerTask() {
-            @Override public final void run() {
+            @Override public void run() {
                 if (frameTimer == null) {
                     onStart();
                     frameTimer = new FrameTimer();
@@ -241,50 +241,44 @@ public abstract class Animation {
     public static void moveCard(final int startX, final int startY, final int startWidth, final int endX,
             final int endY, final int endWidth, final CardPanel animationPanel, final CardPanel placeholder,
             final JLayeredPane layeredPane, final int speed) {
-        Animation.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
-                final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
+        Animation.invokeLater(() -> {
+            final int startHeight = Math.round(startWidth * CardPanel.ASPECT_RATIO);
+            final int endHeight = Math.round(endWidth * CardPanel.ASPECT_RATIO);
 
-                animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
-                animationPanel.setAnimationPanel(true);
-                Container parent = animationPanel.getParent();
-                if (parent != layeredPane) {
-                    layeredPane.add(animationPanel);
-                    layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER.intValue());
+            animationPanel.setCardBounds(startX, startY, startWidth, startHeight);
+            animationPanel.setAnimationPanel(true);
+            Container parent = animationPanel.getParent();
+            if (parent != layeredPane) {
+                layeredPane.add(animationPanel);
+                layeredPane.setLayer(animationPanel, JLayeredPane.MODAL_LAYER);
+            }
+
+            new Animation(speed) {
+                @Override
+                protected void update(final float percentage) {
+                    int currentX = startX + Math.round((endX - startX) * percentage);
+                    int currentY = startY + Math.round((endY - startY) * percentage);
+                    int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
+                    int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
+                    animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
                 }
 
-                new Animation(speed) {
-                    @Override
-                    protected void update(final float percentage) {
-                        int currentX = startX + Math.round((endX - startX) * percentage);
-                        int currentY = startY + Math.round((endY - startY) * percentage);
-                        int currentWidth = startWidth + Math.round((endWidth - startWidth) * percentage);
-                        int currentHeight = startHeight + Math.round((endHeight - startHeight) * percentage);
-                        animationPanel.setCardBounds(currentX, currentY, currentWidth, currentHeight);
-                    }
-
-                    @Override
-                    protected void onEnd() {
-                        EventQueue.invokeLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (placeholder != null) {
-                                    placeholder.setDisplayEnabled(true);
-                                    placeholder.setCard(placeholder.getCard());
-                                }
-                                animationPanel.setVisible(false);
-                                animationPanel.repaint();
-                                layeredPane.remove(animationPanel);
-                                if (animationPanel != CardPanel.getDragAnimationPanel()) {
-                                    animationPanel.dispose();
-                                }
-                            }
-                        });
-                    }
-                }.run();
-            }
+                @Override
+                protected void onEnd() {
+                    EventQueue.invokeLater(() -> {
+                        if (placeholder != null) {
+                            placeholder.setDisplayEnabled(true);
+                            placeholder.setCard(placeholder.getCard());
+                        }
+                        animationPanel.setVisible(false);
+                        animationPanel.repaint();
+                        layeredPane.remove(animationPanel);
+                        if (animationPanel != CardPanel.getDragAnimationPanel()) {
+                            animationPanel.dispose();
+                        }
+                    });
+                }
+            }.run();
         });
     }
 
@@ -295,14 +289,11 @@ public abstract class Animation {
      *            a {@link forge.view.arcane.CardPanel} object.
      */
     public static void moveCard(final CardPanel placeholder) {
-        Animation.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if (placeholder != null) {
-                    placeholder.setDisplayEnabled(true);
-                    // placeholder.setImage(imagePanel);
-                    placeholder.setCard(placeholder.getCard());
-                }
+        Animation.invokeLater(() -> {
+            if (placeholder != null) {
+                placeholder.setDisplayEnabled(true);
+                // placeholder.setImage(imagePanel);
+                placeholder.setCard(placeholder.getCard());
             }
         });
     }

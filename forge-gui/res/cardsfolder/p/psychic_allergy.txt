@@ -2,7 +2,7 @@ Name:Psychic Allergy
 ManaCost:3 U U
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentInHumanDeck
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDamageOpp | TriggerDescription$ At the beginning of each opponent's upkeep, CARDNAME deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control
 SVar:TrigDamageOpp:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$Valid Permanent.ActivePlayerCtrl+ChosenColor+nonToken
@@ -10,4 +10,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigDestroy:DB$ Destroy | Defined$ Self | UnlessPayer$ You | UnlessCost$ Sac<2/Island>
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
-Oracle:As Psychic Allergy enters the battlefield, choose a color.\nAt the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.\nAt the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.
+Oracle:As Psychic Allergy enters, choose a color.\nAt the beginning of each opponent's upkeep, Psychic Allergy deals X damage to that player, where X is the number of nontoken permanents of the chosen color they control.\nAt the beginning of your upkeep, destroy Psychic Allergy unless you sacrifice two Islands.

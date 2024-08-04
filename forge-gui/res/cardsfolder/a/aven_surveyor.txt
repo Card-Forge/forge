@@ -3,10 +3,10 @@ ManaCost:3 U U
 Types:Creature Bird Scout
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBCounter,DBChangeZone
 SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
 SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-Oracle:Flying\nWhen Aven Surveyor enters the battlefield, choose one —\n• Put a +1/+1 counter on Aven Surveyor.\n• Return target creature to its owner's hand.
+Oracle:Flying\nWhen Aven Surveyor enters, choose one —\n• Put a +1/+1 counter on Aven Surveyor.\n• Return target creature to its owner's hand.

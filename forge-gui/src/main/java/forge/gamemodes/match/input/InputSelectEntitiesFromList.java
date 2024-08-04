@@ -60,12 +60,9 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 zonesToUpdate.add(new PlayerZoneUpdate(cz.getPlayer().getView(), cz.getZoneType()));
             }
         }
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                getController().getGui().updateZones(zonesToUpdate);
-                zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(), zonesToUpdate);
-            }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            getController().getGui().updateZones(zonesToUpdate);
+            zonesShown = getController().getGui().tempShowZones(controller.getPlayer().getView(), zonesToUpdate);
         });
     }
     

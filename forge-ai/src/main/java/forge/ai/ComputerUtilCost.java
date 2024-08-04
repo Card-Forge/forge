@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -472,12 +471,7 @@ public class ComputerUtilCost {
                     String totalP = type.split("withTotalPowerGE")[1];
                     type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
                     CardCollection exclude = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), source.getController(), source, sa);
-                    exclude = CardLists.filter(exclude, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return ComputerUtilCard.evaluateCreature(c) >= vehicleValue;
-                        }
-                    }); // exclude creatures >= vehicle
+                    exclude = CardLists.filter(exclude, c -> ComputerUtilCard.evaluateCreature(c) >= vehicleValue); // exclude creatures >= vehicle
                     exclude.addAll(alreadyTapped);
                     CardCollection tappedCrew = ComputerUtil.chooseTapTypeAccumulatePower(ai, type, sa, true, Integer.parseInt(totalP), exclude);
                     if (tappedCrew != null) {
@@ -616,18 +610,15 @@ public class ComputerUtilCost {
                     CardCollectionView nonManaSources =
                             CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
                                     sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    nonManaSources = CardLists.filter(nonManaSources, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            boolean hasManaSa = false;
-                            for (final SpellAbility sa : card.getSpellAbilities()) {
-                                if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
-                                    hasManaSa = true;
-                                    break;
-                                }
+                    nonManaSources = CardLists.filter(nonManaSources, card -> {
+                        boolean hasManaSa = false;
+                        for (final SpellAbility sa1 : card.getSpellAbilities()) {
+                            if (sa1.isManaAbility() && sa1.getPayCosts().hasTapCost()) {
+                                hasManaSa = true;
+                                break;
                             }
-                            return !hasManaSa;
                         }
+                        return !hasManaSa;
                     });
                     if (nonManaSources.size() < part.convertAmount()) {
                         return false;
@@ -710,7 +701,7 @@ public class ComputerUtilCost {
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
         } else if (aiLogic != null && aiLogic.startsWith("Fabricate")) {
-            final int n = Integer.valueOf(aiLogic.substring("Fabricate".length()));
+            final int n = Integer.parseInt(aiLogic.substring("Fabricate".length()));
 
             // if host would leave the play or if host is useless, create tokens
             if (source.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(payer, source)) {

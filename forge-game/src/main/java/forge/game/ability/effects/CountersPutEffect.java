@@ -193,7 +193,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = activator.getCreaturesInPlay();
             CardCollection leastToughness = new CardCollection(
-                    Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness));
+                    Aggregates.listWithMin(creatsYouCtrl, Card::getNetToughness));
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
@@ -634,7 +634,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         int totalAdded = table.totalValues();
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(Integer.valueOf(totalAdded));
+            card.addRemembered(totalAdded);
         }
 
         if (sa.hasParam("RemovePhase")) {

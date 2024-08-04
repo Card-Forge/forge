@@ -2,10 +2,10 @@ Name:Chittering Witch
 ManaCost:3 B
 Types:Creature Human Warlock
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_rat | TokenOwner$ You
 SVar:X:PlayerCountOpponents$Amount
 A:AB$ Pump | Cost$ 1 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn.
 SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE1
 DeckHas:Ability$Token
-Oracle:When Chittering Witch enters the battlefield, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.\n{1}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
+Oracle:When Chittering Witch enters, create a number of 1/1 black Rat creature tokens equal to the number of opponents you have.\n{1}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.

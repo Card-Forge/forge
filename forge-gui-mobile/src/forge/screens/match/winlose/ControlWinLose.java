@@ -5,8 +5,6 @@ import forge.assets.FSkin;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 /** 
  * Default controller for a ViewWinLose object. This class can
@@ -34,26 +32,13 @@ public class ControlWinLose {
 
     /** */
     public void addListeners() {
-        view.getBtnContinue().setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                actionOnContinue();
-            }
-        });
+        view.getBtnContinue().setCommand(e -> actionOnContinue());
 
-        view.getBtnRestart().setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                actionOnRestart();
-            }
-        });
+        view.getBtnRestart().setCommand(e -> actionOnRestart());
 
-        view.getBtnQuit().setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                actionOnQuit();
-                view.getBtnQuit().setEnabled(false);
-            }
+        view.getBtnQuit().setCommand(e -> {
+            actionOnQuit();
+            view.getBtnQuit().setEnabled(false);
         });
         if(humancount == 0)
             view.getBtnRestart().setEnabled(false);

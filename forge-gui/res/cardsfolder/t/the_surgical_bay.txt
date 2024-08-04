@@ -1,8 +1,9 @@
 Name:The Surgical Bay
 ManaCost:no cost
 Types:Land Sphere
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Draw | Cost$ 1 U T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
 DeckHas:Ability$Sacrifice
-Oracle:The Surgical Bay enters the battlefield tapped.\n{T}: Add {U}.\n{1}{U}, {T}, Sacrifice The Surgical Bay: Draw a card.
+Oracle:The Surgical Bay enters tapped.\n{T}: Add {U}.\n{1}{U}, {T}, Sacrifice The Surgical Bay: Draw a card.

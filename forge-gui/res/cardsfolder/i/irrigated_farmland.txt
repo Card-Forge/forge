@@ -1,6 +1,7 @@
 Name:Irrigated Farmland
 ManaCost:no cost
 Types:Land Plains Island
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Cycling:2
-Oracle:({T}: Add {W} or {U}.)\nIrrigated Farmland enters the battlefield tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)
+Oracle:({T}: Add {W} or {U}.)\nIrrigated Farmland enters tapped.\nCycling {2} ({2}, Discard this card: Draw a card.)

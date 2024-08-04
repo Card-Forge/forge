@@ -260,12 +260,7 @@ public enum FControl implements KeyEventDispatcher {
 
         setGlobalKeyboardHandler();
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Singletons.getView().initialize();
-            }
-        });
+        SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
 
     private void setGlobalKeyboardHandler() {

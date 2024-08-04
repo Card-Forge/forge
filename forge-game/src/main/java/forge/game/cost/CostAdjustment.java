@@ -295,6 +295,10 @@ public class CostAdjustment {
             }
         } // isSpell
 
+        if (sa.hasParam("TapCreaturesForMana")) {
+            adjustCostByConvokeOrImprovise(cost, sa, false, test);
+        }
+
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
             originalCard.setFaceDown(false);
@@ -473,7 +477,7 @@ public class CostAdjustment {
         if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
-                minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
+                minMana = Integer.parseInt(staticAbility.getParam("MinMana"));
             }
 
             final int maxReduction = manaCost.getConvertedManaCost() - minMana - sumReduced;

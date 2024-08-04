@@ -1,7 +1,7 @@
 Name:Alchemist's Vial
 ManaCost:2
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Pump | Cost$ 1 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ HIDDEN CARDNAME can't attack or block. | SpellDescription$ Target creature can't attack or block this turn.
-Oracle:When Alchemist's Vial enters the battlefield, draw a card.\n{1}, {T}, Sacrifice Alchemist's Vial: Target creature can't attack or block this turn.
+Oracle:When Alchemist's Vial enters, draw a card.\n{1}, {T}, Sacrifice Alchemist's Vial: Target creature can't attack or block this turn.

@@ -51,50 +51,20 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         }
     };
 
-    private final UiCommand cmdAddDeck = new UiCommand() {
-        @Override public void run() {
-            addDeck();
-        }
-    };
-    private final UiCommand cmdRemoveDeck = new UiCommand() {
-        @Override public void run() {
-            removeDeck();
-        }
-    };
-    private final UiCommand cmdDeckUp = new UiCommand() {
-        @Override public void run() {
-            deckUp();
-        }
-    };
-    private final UiCommand cmdDeckDown = new UiCommand() {
-        @Override public void run() {
-            deckDown();
-        }
-    };
-    private final UiCommand cmdSave = new UiCommand() {
-        @Override public void run() {
-            saveGauntlet();
-        }
-    };
-    private final UiCommand cmdNew = new UiCommand() {
-        @Override public void run() {
-            newGauntlet();
-        }
-    };
-    private final UiCommand cmdOpen = new UiCommand() {
-        @Override public void run() {
-            openGauntlet();
-        }
-    };
+    private final UiCommand cmdAddDeck = this::addDeck;
+    private final UiCommand cmdRemoveDeck = this::removeDeck;
+    private final UiCommand cmdDeckUp = this::deckUp;
+    private final UiCommand cmdDeckDown = this::deckDown;
+    private final UiCommand cmdSave = this::saveGauntlet;
+    private final UiCommand cmdNew = this::newGauntlet;
+    private final UiCommand cmdOpen = this::openGauntlet;
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.focusName(); }
-        });
+        SwingUtilities.invokeLater(view::focusName);
     }
 
     @Override

@@ -3,9 +3,9 @@ ManaCost:1 B B
 Types:Creature Elemental
 PT:7/7
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters, choose an opponent.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ -X | AddToughness$ -X | Description$ CARDNAME gets -1/-1 for each card in the chosen player's hand.
 SVar:X:Count$InChosenHand
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:PlayerCountPropertyOpponents$HasPropertyHasCardsInHand_Card_LE5
-Oracle:As Nyxathid enters the battlefield, choose an opponent.\nNyxathid gets -1/-1 for each card in the chosen player's hand.
+Oracle:As Nyxathid enters, choose an opponent.\nNyxathid gets -1/-1 for each card in the chosen player's hand.

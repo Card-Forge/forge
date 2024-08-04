@@ -2,7 +2,7 @@ Name:Battle of Hoover Dam
 ManaCost:3 W
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ NCR,Legion | Defined$ You | SetChosenMode$ True | AILogic$ Legion | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the battlefield, choose NCR or Legion.
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ NCR,Legion | Defined$ You | SetChosenMode$ True | AILogic$ Legion | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose NCR or Legion.
 SVar:NCR:DB$ Pump | SpellDescription$ NCR
 SVar:Legion:DB$ Pump | SpellDescription$ Legion
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeNCR | AddTrigger$ NCRTrigger | Description$ • NCR — At the beginning of your end step, return target creature card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.
@@ -12,4 +12,4 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | 
 SVar:LegionTrigger:Mode$ ChangesZone | Secondary$ True | ValidCard$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Legion — Whenever a creature you control dies, put two +1/+1 counters on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
 DeckHas:Ability$Counters|Graveyard
-Oracle:As Battle of Hoover Dam enters the battlefield, choose NCR or Legion.\n• NCR — At the beginning of your end step, return target creature card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.\n• Legion — Whenever a creature you control dies, put two +1/+1 counters on target creature you control.
+Oracle:As Battle of Hoover Dam enters, choose NCR or Legion.\n• NCR — At the beginning of your end step, return target creature card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it.\n• Legion — Whenever a creature you control dies, put two +1/+1 counters on target creature you control.

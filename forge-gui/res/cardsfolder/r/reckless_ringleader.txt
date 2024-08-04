@@ -3,8 +3,8 @@ ManaCost:R
 Types:Creature Goblin Rogue
 PT:1/1
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains haste.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose a creature card in your hand. It perpetually gains haste.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Mandatory$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Haste | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:Haste\nWhen Reckless Ringleader enters the battlefield, choose a creature card in your hand. It perpetually gains haste.
+Oracle:Haste\nWhen Reckless Ringleader enters, choose a creature card in your hand. It perpetually gains haste.

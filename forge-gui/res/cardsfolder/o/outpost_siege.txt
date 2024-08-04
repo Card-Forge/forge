@@ -2,7 +2,7 @@ Name:Outpost Siege
 ManaCost:3 R
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons.
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Khans | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
@@ -14,4 +14,4 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DragonsTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ SmallBurnination | Secondary$ True | TriggerDescription$ Whenever a creature you control leaves the battlefield, CARDNAME deals 1 damage to any target.
 SVar:SmallBurnination:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
-Oracle:As Outpost Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to any target.
+Oracle:As Outpost Siege enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.\n• Dragons — Whenever a creature you control leaves the battlefield, Outpost Siege deals 1 damage to any target.

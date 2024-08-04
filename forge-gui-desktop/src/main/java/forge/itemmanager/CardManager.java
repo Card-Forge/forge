@@ -1,6 +1,5 @@
 package forge.itemmanager;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -78,12 +77,7 @@ public class CardManager extends ItemManager<PaperCard> {
                 continue;  // skip card
 
             // Try to retain only those editions accepted by the current Card Art Preference Policy
-            List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), new Predicate<CardEdition>() {
-                @Override
-                public boolean apply(CardEdition ed) {
-                    return StaticData.instance().getCardArtPreference().accept(ed);
-                }
-            }));
+            List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), ed -> StaticData.instance().getCardArtPreference().accept(ed)));
 
             // If policy too strict, fall back to getting all editions.
             if (acceptedEditions.size() == 0)
@@ -153,66 +147,50 @@ public class CardManager extends ItemManager<PaperCard> {
         final Localizer localizer = Localizer.getInstance();
         JMenu fmt = GuiUtils.createMenu(localizer.getMessage("lblFormat"));
         for (final GameFormat f : FModel.getFormats().getFilterList()) {
-            GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
-                @Override
-                public void run() {
-                    itemManager.addFilter(new CardFormatFilter(itemManager, f));
-                }
-            }, FormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class)));
+            GuiUtils.addMenuItem(fmt, f.getName(), null, () -> itemManager.addFilter(new CardFormatFilter(itemManager, f)),
+                    FormatFilter.canAddFormat(f, itemManager.getFilter(CardFormatFilter.class))
+            );
         }
         menu.add(fmt);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, new Runnable() {
-            @Override public void run() {
-                final CardFormatFilter existingFilter = itemManager.getFilter(CardFormatFilter.class);
-                if (existingFilter != null) {
-                    existingFilter.edit(itemManager);
-                } else {
-                    final DialogChooseFormats dialog = new DialogChooseFormats();
-                    dialog.setWantReprintsCB(true); // assume user wants things permissive...
-                    dialog.setOkCallback(new Runnable() {
-                        @Override public void run() {
-                            final List<GameFormat> formats = dialog.getSelectedFormats();
-                            if (!formats.isEmpty()) {
-                                itemManager.addFilter(new CardFormatFilter(itemManager,formats,dialog.getWantReprints()));
-                            }
-                        }
-                    });
-                }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, () -> {
+            final CardFormatFilter existingFilter = itemManager.getFilter(CardFormatFilter.class);
+            if (existingFilter != null) {
+                existingFilter.edit(itemManager);
+            } else {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setWantReprintsCB(true); // assume user wants things permissive...
+                dialog.setOkCallback(() -> {
+                    final List<GameFormat> formats = dialog.getSelectedFormats();
+                    if (!formats.isEmpty()) {
+                        itemManager.addFilter(new CardFormatFilter(itemManager,formats,dialog.getWantReprints()));
+                    }
+                });
             }
         });
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, new Runnable() {
-            @Override
-            public void run() {
-                CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
-                if (existingFilter != null) {
-                    existingFilter.edit(itemManager);
-                }
-                else {
-                    List<String> limitedSets = getFilteredSetCodesInCatalog();
-                    final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
-                    dialog.setOkCallback(new Runnable() {
-                        @Override
-                        public void run() {
-                            List<String> sets = dialog.getSelectedSets();
-                            if (!sets.isEmpty()) {
-                                itemManager.addFilter(new CardSetFilter(itemManager, sets, limitedSets, dialog.getWantReprints()));
-                            }
-                        }
-                    });
-                }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, () -> {
+            CardSetFilter existingFilter = itemManager.getFilter(CardSetFilter.class);
+            if (existingFilter != null) {
+                existingFilter.edit(itemManager);
+            }
+            else {
+                List<String> limitedSets = getFilteredSetCodesInCatalog();
+                final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
+                dialog.setOkCallback(() -> {
+                    List<String> sets = dialog.getSelectedSets();
+                    if (!sets.isEmpty()) {
+                        itemManager.addFilter(new CardSetFilter(itemManager, sets, limitedSets, dialog.getWantReprints()));
+                    }
+                });
             }
         });
 
         JMenu world = GuiUtils.createMenu(localizer.getMessage("lblQuestWorld"));
         for (final QuestWorld w : FModel.getWorlds()) {
-            GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
-                @Override
-                public void run() {
-                    itemManager.addFilter(new CardQuestWorldFilter(itemManager, w));
-                }
-            }, CardQuestWorldFilter.canAddQuestWorld(w, itemManager.getFilter(CardQuestWorldFilter.class)));
+            GuiUtils.addMenuItem(world, w.getName(), null, () -> itemManager.addFilter(new CardQuestWorldFilter(itemManager, w)),
+                    CardQuestWorldFilter.canAddQuestWorld(w, itemManager.getFilter(CardQuestWorldFilter.class))
+            );
         }
         menu.add(world);
 
@@ -220,94 +198,63 @@ public class CardManager extends ItemManager<PaperCard> {
             JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
             final Iterable<GameFormat> blockFormats = FModel.getFormats().getBlockList();
             for (final GameFormat f : blockFormats) {
-                GuiUtils.addMenuItem(blocks, f.getName(), null, new Runnable() {
-                    @Override
-                    public void run() {
-                        itemManager.addFilter(new CardBlockFilter(itemManager, f));
-                    }
-                }, CardBlockFilter.canAddCardBlockWorld(f, itemManager.getFilter(CardBlockFilter.class)));
+                GuiUtils.addMenuItem(blocks, f.getName(), null, () -> itemManager.addFilter(new CardBlockFilter(itemManager, f)),
+                        CardBlockFilter.canAddCardBlockWorld(f, itemManager.getFilter(CardBlockFilter.class))
+                );
             }
             menu.add(blocks);
         }
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardColorFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardColorFilter.class) == null);
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblTypes"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardTypeFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardTypeFilter.class) == null);
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblConvertedManaCosts"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardCMCFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardCMCFilter.class) == null);
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, () -> itemManager.addFilter(new CardColorFilter(itemManager)),
+                itemManager.getFilter(CardColorFilter.class) == null
+        );
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblTypes"), null, () -> itemManager.addFilter(new CardTypeFilter(itemManager)),
+                itemManager.getFilter(CardTypeFilter.class) == null
+        );
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblConvertedManaCosts"), null, () -> itemManager.addFilter(new CardCMCFilter(itemManager)),
+                itemManager.getFilter(CardCMCFilter.class) == null
+        );
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblCMCRange"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardCMCRangeFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardCMCRangeFilter.class) == null);
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblPowerRange"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardPowerFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardPowerFilter.class) == null);
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblToughnessRange"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardToughnessFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardToughnessFilter.class) == null);
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblCMCRange"), null, () -> itemManager.addFilter(new CardCMCRangeFilter(itemManager)),
+                itemManager.getFilter(CardCMCRangeFilter.class) == null
+        );
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblPowerRange"), null, () -> itemManager.addFilter(new CardPowerFilter(itemManager)),
+                itemManager.getFilter(CardPowerFilter.class) == null
+        );
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblToughnessRange"), null, () -> itemManager.addFilter(new CardToughnessFilter(itemManager)),
+                itemManager.getFilter(CardToughnessFilter.class) == null
+        );
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFoil"), null, new Runnable() {
-            @Override
-            public void run() {
-                itemManager.addFilter(new CardFoilFilter(itemManager));
-            }
-        }, itemManager.getFilter(CardFoilFilter.class) == null);
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFoil"), null, () -> itemManager.addFilter(new CardFoilFilter(itemManager)),
+                itemManager.getFilter(CardFoilFilter.class) == null
+        );
 
         if (QuestMode) {
-            GuiUtils.addMenuItem(menu, localizer.getMessage("lblPersonalRating"), null, new Runnable() {
-                @Override
-                public void run() {
-                    itemManager.addFilter(new CardRatingFilter(itemManager));
-                }
-            }, itemManager.getFilter(CardRatingFilter.class) == null);
+            GuiUtils.addMenuItem(menu, localizer.getMessage("lblPersonalRating"), null, () -> itemManager.addFilter(new CardRatingFilter(itemManager)),
+                    itemManager.getFilter(CardRatingFilter.class) == null
+            );
         }
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced")+ "...", null, new Runnable() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public void run() {
-                AdvancedSearchFilter<PaperCard> filter = itemManager.getFilter(AdvancedSearchFilter.class);
-                if (filter != null) {
-                    filter.edit();
-                }
-                else {
-                    filter = new AdvancedSearchFilter<>(itemManager);
-                    itemManager.lockFiltering = true; //ensure filter not applied until added
-                    boolean result = filter.edit();
-                    itemManager.lockFiltering = false;
-                    if (result) {
-                        itemManager.addFilter(filter);
-                    }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced")+ "...", null, () -> {
+            AdvancedSearchFilter<PaperCard> filter = itemManager.getFilter(AdvancedSearchFilter.class);
+            if (filter != null) {
+                filter.edit();
+            }
+            else {
+                filter = new AdvancedSearchFilter<>(itemManager);
+                itemManager.lockFiltering = true; //ensure filter not applied until added
+                boolean result = filter.edit();
+                itemManager.lockFiltering = false;
+                if (result) {
+                    itemManager.addFilter(filter);
                 }
             }
         });

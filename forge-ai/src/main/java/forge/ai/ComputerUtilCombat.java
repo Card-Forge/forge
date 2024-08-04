@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -79,11 +78,7 @@ public class ComputerUtilCombat {
      */
     public static boolean canAttackNextTurn(final Card attacker) {
         final Iterable<GameEntity> defenders = CombatUtil.getAllPossibleDefenders(attacker.getController());
-        return Iterables.any(defenders, new Predicate<GameEntity>() {
-            @Override public boolean apply(final GameEntity input) {
-                return canAttackNextTurn(attacker, input);
-            }
-        });
+        return Iterables.any(defenders, input -> canAttackNextTurn(attacker, input));
     }
 
     /**
@@ -138,12 +133,7 @@ public class ComputerUtilCombat {
      */
     public static int getTotalFirstStrikeBlockPower(final Card attacker, final Player player) {
         List<Card> list = player.getCreaturesInPlay();
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return (c.hasFirstStrike() || c.hasDoubleStrike()) && CombatUtil.canBlock(attacker, c);
-            }
-        });
+        list = CardLists.filter(list, c -> (c.hasFirstStrike() || c.hasDoubleStrike()) && CombatUtil.canBlock(attacker, c));
 
         return totalFirstStrikeDamageOfBlockers(attacker, list);
     }

@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant Equipment
 A:SP$ Attach | Cost$ U U | ValidTgts$ Equipment | AILogic$ GainControl
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted Equipment.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnattach | TriggerDescription$ When CARDNAME enters the battlefield, unattach enchanted Equipment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnattach | TriggerDescription$ When CARDNAME enters, unattach enchanted Equipment.
 SVar:TrigUnattach:DB$ UnattachAll | Defined$ Valid Card.EquippedByEnchanted | UnattachValid$ Equipment.EnchantedBy
-Oracle:Enchant Equipment\nWhen Carry Away enters the battlefield, unattach enchanted Equipment.\nYou control enchanted Equipment.
+Oracle:Enchant Equipment\nWhen Carry Away enters, unattach enchanted Equipment.\nYou control enchanted Equipment.

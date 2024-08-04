@@ -7,4 +7,4 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ SubCounter<1/OIL> | Execute$ TrigPump | TriggerDescription$ When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select a target creature you control | KWChoice$ Flying,Vigilance,Deathtouch,Lifelink
 SVar:PlayMain1:TRUE
-Oracle:Atraxa's Skitterfang enters the battlefield with three oil counters on it.\nAt the beginning of combat on your turn, you may remove an oil counter from Atraxa's Skitterfang. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.
+Oracle:Atraxa's Skitterfang enters with three oil counters on it.\nAt the beginning of combat on your turn, you may remove an oil counter from Atraxa's Skitterfang. When you do, target creature you control gains your choice of flying, vigilance, deathtouch, or lifelink until end of turn.

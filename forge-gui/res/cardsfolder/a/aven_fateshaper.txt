@@ -4,6 +4,6 @@ Types:Creature Bird Wizard
 PT:4/5
 K:Flying
 A:AB$ RearrangeTopOfLibrary | Cost$ 4 U | Defined$ You | NumCards$ 4 | SpellDescription$ Look at the top four cards of your library, then put them back in any order.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library, then put them back in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters, look at the top four cards of your library, then put them back in any order.
 SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | Defined$ You | NumCards$ 4
-Oracle:Flying\nWhen Aven Fateshaper enters the battlefield, look at the top four cards of your library, then put them back in any order.\n{4}{U}: Look at the top four cards of your library, then put them back in any order.
+Oracle:Flying\nWhen Aven Fateshaper enters, look at the top four cards of your library, then put them back in any order.\n{4}{U}: Look at the top four cards of your library, then put them back in any order.

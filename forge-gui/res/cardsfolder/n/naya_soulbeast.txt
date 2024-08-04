@@ -4,11 +4,11 @@ Types:Creature Beast
 PT:0/0
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When you cast this spell, each player reveals the top card of their library.
 SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.
 SVar:X:Remembered$SumCMC
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Trample
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
-Oracle:When you cast this spell, each player reveals the top card of their library. Naya Soulbeast enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.\nTrample
+Oracle:When you cast this spell, each player reveals the top card of their library. Naya Soulbeast enters with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.\nTrample

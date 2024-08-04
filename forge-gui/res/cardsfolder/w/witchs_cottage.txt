@@ -1,9 +1,9 @@
 Name:Witch's Cottage
 ManaCost:no cost
 Types:Land Swamp
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters the battlefield tapped unless you control three or more other Swamps.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control three or more other Swamps.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl+Other | ConditionCompare$ LT3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield untapped, you may put target creature card from your graveyard on top of your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters untapped, you may put target creature card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Library
 DeckNeeds:Color$Black
-Oracle:({T}: Add {B}.)\nWitch's Cottage enters the battlefield tapped unless you control three or more other Swamps.\nWhen Witch's Cottage enters the battlefield untapped, you may put target creature card from your graveyard on top of your library.
+Oracle:({T}: Add {B}.)\nWitch's Cottage enters tapped unless you control three or more other Swamps.\nWhen Witch's Cottage enters untapped, you may put target creature card from your graveyard on top of your library.

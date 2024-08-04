@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Crocodile Demon
 PT:4/3
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
 DeckHas:Ability$Counters
-Oracle:Lifelink\nWhen Baleful Ammit enters the battlefield, put a -1/-1 counter on target creature you control.
+Oracle:Lifelink\nWhen Baleful Ammit enters, put a -1/-1 counter on target creature you control.

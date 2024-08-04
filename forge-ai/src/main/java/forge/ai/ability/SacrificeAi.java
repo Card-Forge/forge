@@ -49,6 +49,7 @@ public class SacrificeAi extends SpellAbilityAi {
         final Card source = sa.getHostCard();
         final boolean destroy = sa.hasParam("Destroy");
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
+        final String valid = sa.getParamOrDefault("SacValid", "Self");
 
         if (sa.usesTargeting()) {
             final PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
@@ -67,7 +68,6 @@ public class SacrificeAi extends SpellAbilityAi {
             if (mandatory) {
                 return true;
             }
-            final String valid = sa.getParam("SacValid");
             String num = sa.getParamOrDefault("Amount" , "1");
             final int amount = AbilityUtils.calculateAmount(source, num, sa);
 
@@ -107,7 +107,6 @@ public class SacrificeAi extends SpellAbilityAi {
 
         final String defined = sa.getParamOrDefault("Defined", "You");
         final String targeted = sa.getParamOrDefault("ValidTgts", "");
-        final String valid = sa.getParamOrDefault("SacValid", "Self");
         if (valid.equals("Self")) {
             // Self Sacrifice.
         } else if (defined.equals("Player") || targeted.equals("Player") || targeted.equals("Opponent")

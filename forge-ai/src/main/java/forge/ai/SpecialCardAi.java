@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -478,8 +477,8 @@ public class SpecialCardAi {
             boolean cantDie = ComputerUtilCombat.combatantCantBeDestroyed(ai, source);
 
             CardCollection opposition = isBlocking ? combat.getAttackersBlockedBy(source) : combat.getBlockers(source);
-            int oppP = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetAttack);
-            int oppT = Aggregates.sum(opposition, CardPredicates.Accessors.fnGetNetToughness);
+            int oppP = Aggregates.sum(opposition, Card::getNetCombatDamage);
+            int oppT = Aggregates.sum(opposition, Card::getNetToughness);
 
             boolean oppHasFirstStrike = false;
             boolean oppCantDie = true;
@@ -561,7 +560,7 @@ public class SpecialCardAi {
             }
 
             Pair<Integer, Integer> predictedPT = getPumpedPT(ai, source.getNetCombatDamage(), source.getNetToughness());
-            int oppT = Aggregates.sum(potentialBlockers, CardPredicates.Accessors.fnGetNetToughness);
+            int oppT = Aggregates.sum(potentialBlockers, Card::getNetToughness);
 
             return potentialBlockers.isEmpty() || (source.hasKeyword(Keyword.TRAMPLE) && predictedPT.getLeft() - oppT >= oppLife);
         }
@@ -754,28 +753,23 @@ public class SpecialCardAi {
         public static Card getBestAttachTarget(final Player ai, final SpellAbility sa, final List<Card> list) {
             Card chosen = null;
             
-            List<Card> aiStuffies = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    // Don't enchant creatures that can survive
-                    if (!c.getController().equals(ai)) {
-                        return false;
-                    }
-                    final String name = c.getName();
-                    return name.equals("Stuffy Doll") || name.equals("Boros Reckoner") || name.equals("Spitemare");
+            List<Card> aiStuffies = CardLists.filter(list, c -> {
+                // Don't enchant creatures that can survive
+                if (!c.getController().equals(ai)) {
+                    return false;
                 }
+                final String name = c.getName();
+                return name.equals("Stuffy Doll") || name.equals("Boros Reckoner") || name.equals("Spitemare");
             });
             if (!aiStuffies.isEmpty()) {
                 chosen = aiStuffies.get(0);
             } else {
                 List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
-                creatures = CardLists.filter(creatures, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        // Don't enchant creatures that can survive
-                        return c.canBeDestroyed() && c.getNetCombatDamage() >= c.getNetToughness() && !c.isEnchantedBy("Guilty Conscience");
-                    }
-                });
+                // Don't enchant creatures that can survive
+                creatures = CardLists.filter(creatures, c -> c.canBeDestroyed()
+                        && c.getNetCombatDamage() >= c.getNetToughness()
+                        && !c.isEnchantedBy("Guilty Conscience")
+                );
                 chosen = ComputerUtilCard.getBestCreatureAI(creatures);
             }
             
@@ -1385,12 +1379,7 @@ public class SpecialCardAi {
         public static boolean considerMakeDragon(final Player ai, final SpellAbility sa) {
             // TODO: expand this logic to make the AI force the opponent to sacrifice a big threat bigger than a 5/5 flier?
             CardCollection creatures = ai.getCreaturesInPlay();
-            boolean hasValidTgt = !CardLists.filter(creatures, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card t) {
-                    return t.getNetPower() < 5 && t.getNetToughness() < 5;
-                }
-            }).isEmpty();
+            boolean hasValidTgt = !CardLists.filter(creatures, t -> t.getNetPower() < 5 && t.getNetToughness() < 5).isEmpty();
             if (hasValidTgt) {
                 Card worstCreature = ComputerUtilCard.getWorstCreatureAI(creatures);
                 sa.getTargets().add(worstCreature);
@@ -1416,12 +1405,7 @@ public class SpecialCardAi {
     public static class SaviorOfOllenbock {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             CardCollection oppTargetables = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), sa);
-            CardCollection threats = CardLists.filter(oppTargetables, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return !ComputerUtilCard.isUselessCreature(card.getController(), card);
-                }
-            });
+            CardCollection threats = CardLists.filter(oppTargetables, card -> !ComputerUtilCard.isUselessCreature(card.getController(), card));
             CardCollection ownTgts = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
             // TODO: improve the conditions for when the AI is considered threatened (check the possibility of being attacked?)
@@ -1462,13 +1446,10 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int loyalty = sa.getHostCard().getCounters(CounterEnumType.LOYALTY);
             CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
-                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            final Card copy = CardCopyService.getLKICopy(card);
-                            ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
-                            return copy.getNetToughness() > 0;
-                        }
+                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), card -> {
+                        final Card copy = CardCopyService.getLKICopy(card);
+                        ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
+                        return copy.getNetToughness() > 0;
                     }));
             CardLists.sortByCmcDesc(creaturesToGet);
 
@@ -1515,12 +1496,9 @@ public class SpecialCardAi {
 
             // Cards in library that are either below/at (preferred) or above the max CMC affordable by the AI
             // (the latter might happen if we're playing a Reanimator deck with lots of fatties)
-            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai);
-                }
-            });
+            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib,
+                    card -> ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai)
+            );
             if (atTargetCMCInLib.isEmpty()) {
                 atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
             }
@@ -1585,12 +1563,9 @@ public class SpecialCardAi {
             int numManaSrcs = ComputerUtilMana.getAvailableManaEstimate(ai, false)
                     + Math.min(1, manaSrcsInHand.size());
 
-            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai);
-                }
-            });
+            CardCollection atTargetCMCInLib = CardLists.filter(creatsInLib,
+                    card -> ComputerUtilMana.hasEnoughManaSourcesToCast(card.getSpellPermanent(), ai)
+            );
             if (atTargetCMCInLib.isEmpty()) {
                 atTargetCMCInLib = CardLists.filter(creatsInLib, CardPredicates.greaterCMC(numManaSrcs));
             }

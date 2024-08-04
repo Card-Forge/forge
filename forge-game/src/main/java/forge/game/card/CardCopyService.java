@@ -162,7 +162,6 @@ public class CardCopyService {
         }
     }
 
-
     // ========================================================
     // LKI functions
 
@@ -185,7 +184,6 @@ public class CardCopyService {
     public static Card getLKICopy(final Card c, Map<Integer, Card> cachedMap) {
         return new CardCopyService(c).getLKICopy(cachedMap);
     }
-
 
     public static GameEntity getLKICopy(final GameEntity c, Map<Integer, Card> cachedMap) {
         // Ideally, we'd just convert all calls to getLKICopy to use the Map version
@@ -298,6 +296,7 @@ public class CardCopyService {
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
         newCopy.setSaddled(copyFrom.isSaddled());
+        newCopy.setPromisedGift(copyFrom.getPromisedGift());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
 
@@ -406,6 +405,5 @@ public class CardCopyService {
 
         return newCopy;
     }
-
 
 }

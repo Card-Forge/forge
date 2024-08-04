@@ -2,6 +2,6 @@ Name:Warden of the Eye
 ManaCost:2 U R W
 Types:Creature Djinn Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMove | TriggerDescription$ When CARDNAME enters the battlefield, return target noncreature, nonland card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMove | TriggerDescription$ When CARDNAME enters, return target noncreature, nonland card from your graveyard to your hand.
 SVar:TrigMove:DB$ ChangeZone | Mandatory$ True | ValidTgts$ Card.nonCreature+nonLand+YouCtrl | TgtPrompt$ Select target noncreature nonland card | Origin$ Graveyard | Destination$ Hand
-Oracle:When Warden of the Eye enters the battlefield, return target noncreature, nonland card from your graveyard to your hand.
+Oracle:When Warden of the Eye enters, return target noncreature, nonland card from your graveyard to your hand.

@@ -242,8 +242,8 @@ public class TriggerHandler {
         for (final Trigger t : c.getTriggers()) {
             if (
                     TriggerType.Exploited.equals(t.getMode()) ||
-                    TriggerType.Sacrificed.equals(t.getMode()) ||
                     TriggerType.Destroyed.equals(t.getMode()) ||
+                    TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
                             && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
                 registerOneTrigger(t);

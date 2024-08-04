@@ -87,7 +87,7 @@ public abstract class FloatingCardArea extends CardArea {
         if (!hasBeenShown) {
             loadLocation();
             getWindow().getTitleBar().addMouseListener(new FMouseAdapter() {
-                @Override public final void onLeftDoubleClick(final MouseEvent e) {
+                @Override public void onLeftDoubleClick(final MouseEvent e) {
                     getWindow().setVisible(false); //hide window if titlebar double-clicked
                 }
             });

@@ -103,73 +103,70 @@ public class QuestWinLoseController {
         }
 
         //give controller a chance to run remaining logic on a separate thread
-        view.showRewards(new Runnable() {
-            @Override
-            public void run() {
-                if (isAnte) {
-                    // Won/lost cards should already be calculated (even in a draw)
-                    final GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
-                    if (anteResult != null) {
-                        if (anteResult.wonCards != null) {
-                            qc.getCards().addAllCards(anteResult.wonCards);
-                        }
-                        if (anteResult.lostCards != null) {
-                            qc.getCards().loseCards(anteResult.lostCards);
-                        }
-                        anteReport(anteResult.wonCards, anteResult.lostCards);
+        view.showRewards(() -> {
+            if (isAnte) {
+                // Won/lost cards should already be calculated (even in a draw)
+                final GameOutcome.AnteResult anteResult = lastGame.getAnteResult(questPlayer);
+                if (anteResult != null) {
+                    if (anteResult.wonCards != null) {
+                        qc.getCards().addAllCards(anteResult.wonCards);
                     }
+                    if (anteResult.lostCards != null) {
+                        qc.getCards().loseCards(anteResult.lostCards);
+                    }
+                    anteReport(anteResult.wonCards, anteResult.lostCards);
+                }
+            }
+
+            if (matchIsNotOver) { return; } //skip remaining logic if match isn't over yet
+
+            // TODO: We don't have a enum for difficulty?
+            final int difficulty = qData.getAchievements().getDifficulty();
+
+            final int wins = qData.getAchievements().getWin();
+            // Win case
+            if (wonMatch) {
+                // Standard event reward credits
+                awardEventCredits();
+
+                // Challenge reward credits
+                if (qEvent instanceof QuestEventChallenge) {
+                    awardChallengeWin();
                 }
 
-                if (matchIsNotOver) { return; } //skip remaining logic if match isn't over yet
-
-                // TODO: We don't have a enum for difficulty?
-                final int difficulty = qData.getAchievements().getDifficulty();
-
-                final int wins = qData.getAchievements().getWin();
-                // Win case
-                if (wonMatch) {
-                    // Standard event reward credits
-                    awardEventCredits();
-
-                    // Challenge reward credits
-                    if (qEvent instanceof QuestEventChallenge) {
-                        awardChallengeWin();
-                    }
-
-                    else {
-                        awardSpecialReward("Special bonus reward"); // If any
-                        // Random rare for winning against a very hard deck
-                        if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
-                            awardRandomRare("You've won a random rare for winning against a very hard deck.");
-                        }
-                    }
-
-                    awardWinStreakBonus();
-
-                    // Random rare given at 50% chance (65% with luck upgrade)
-                    if (getLuckyCoinResult()) {
-                        awardRandomRare("You've won a random rare.");
-                    }
-
-                    // Award jackpot every 80 games won (currently 10 rares)
-
-                    if ((wins > 0) && (((wins + 1) % 80) == 0)) {
-                        awardJackpot();
-                    }
-
-                }
-                // Lose case
                 else {
-                    penalizeLoss();
+                    awardSpecialReward("Special bonus reward"); // If any
+                    // Random rare for winning against a very hard deck
+                    if (qEvent.getDifficulty() == QuestEventDifficulty.EXPERT) {
+                        awardRandomRare("You've won a random rare for winning against a very hard deck.");
+                    }
                 }
 
-                // Grant booster on a win, or on a loss in easy mode
-                if (wonMatch || difficulty == 0) {
-                    final int outcome = wonMatch ? wins : qData.getAchievements().getLost();
-                    final int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
-                    if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
-                        awardBooster();
-                    }
+                awardWinStreakBonus();
+
+                // Random rare given at 50% chance (65% with luck upgrade)
+                if (getLuckyCoinResult()) {
+                    awardRandomRare("You've won a random rare.");
+                }
+
+                // Award jackpot every 80 games won (currently 10 rares)
+
+                if ((wins > 0) && (((wins + 1) % 80) == 0)) {
+                    awardJackpot();
+                }
+
+            }
+            // Lose case
+            else {
+                penalizeLoss();
+            }
+
+            // Grant booster on a win, or on a loss in easy mode
+            if (wonMatch || difficulty == 0) {
+                final int outcome = wonMatch ? wins : qData.getAchievements().getLost();
+                final int winsPerBooster = FModel.getQuestPreferences().getPrefInt(DifficultyPrefs.WINS_BOOSTER, qData.getAchievements().getDifficulty());
+                if (winsPerBooster > 0 && (outcome + 1) % winsPerBooster == 0) {
+                    awardBooster();
                 }
             }
         });

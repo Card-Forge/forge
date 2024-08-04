@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Creature Faerie Assassin
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target creature that was dealt damage this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target creature that was dealt damage this turn.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.wasDealtDamageThisTurn | TgtPrompt$ Select target creature that was dealt damage this turn.
-Oracle:Flying\nWhen Final-Sting Faerie enters the battlefield, destroy target creature that was dealt damage this turn.
+Oracle:Flying\nWhen Final-Sting Faerie enters, destroy target creature that was dealt damage this turn.

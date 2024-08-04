@@ -3,8 +3,8 @@ ManaCost:6 R R R
 Types:Creature Dragon
 PT:6/6
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target creature equal to the number of Mountains you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals damage to target creature equal to the number of Mountains you control.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
 SVar:X:Count$TypeYouCtrl.Mountain
 SVar:PlayMain1:TRUE
-Oracle:Flying\nWhen Fire Dragon enters the battlefield, it deals damage to target creature equal to the number of Mountains you control.
+Oracle:Flying\nWhen Fire Dragon enters, it deals damage to target creature equal to the number of Mountains you control.

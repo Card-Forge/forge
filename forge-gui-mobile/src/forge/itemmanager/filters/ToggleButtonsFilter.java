@@ -71,14 +71,11 @@ public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemF
             super(new FLabel.Builder()
                 .icon(icon).iconScaleFactor(1f)
                 .align(Align.center)
-                .selectable(true).selected(true)
-                .command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        if (lockFiltering) { return; }
-                        applyChange();
-                    }
-                }));
+                .selectable(true).selected(true));
+            setCommand(() -> {
+                if (lockFiltering) { return; }
+                applyChange();
+            });
         }
 
         public void setLongPressHandler(FEventHandler longPressHandler0) {

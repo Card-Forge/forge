@@ -6,8 +6,8 @@ K:Flying
 K:Vigilance
 K:Trample
 K:ETBReplacement:Other:ChooseT
-SVar:ChooseT:DB$ ChooseType | Type$ Card | ValidTypes$ Artifact,Enchantment,Instant,Sorcery,Planeswalker | SpellDescription$ As CARDNAME enters the battlefield, choose artifact, enchantment, instant, sorcery, or planeswalker.
+SVar:ChooseT:DB$ ChooseType | Type$ Card | ValidTypes$ Artifact,Enchantment,Instant,Sorcery,Planeswalker | SpellDescription$ As CARDNAME enters, choose artifact, enchantment, instant, sorcery, or planeswalker.
 S:Mode$ CantBeCast | ValidCard$ Card.ChosenType | Description$ Players can't cast spells of the chosen type.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:Flying, vigilance, trample\nAs Archon of Valor's Reach enters the battlefield, choose artifact, enchantment, instant, sorcery, or planeswalker.\nPlayers can't cast spells of the chosen type.
+Oracle:Flying, vigilance, trample\nAs Archon of Valor's Reach enters, choose artifact, enchantment, instant, sorcery, or planeswalker.\nPlayers can't cast spells of the chosen type.

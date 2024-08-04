@@ -1,7 +1,6 @@
 package forge.gamemodes.net;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
@@ -18,20 +17,20 @@ public class ReplyPool {
 
     public void initialize(final int index) {
         synchronized (pool) {
-            pool.put(Integer.valueOf(index), new CompletableFuture());
+            pool.put(index, new CompletableFuture());
         }
     }
 
     public void complete(final int index, final Object value) {
         synchronized (pool) {
-            pool.get(Integer.valueOf(index)).set(value);
+            pool.get(index).set(value);
         }
     }
 
     public Object get(final int index) throws TimeoutException {
         final CompletableFuture future;
         synchronized (pool) {
-            future = pool.get(Integer.valueOf(index));
+            future = pool.get(index);
         }
         try {
             return future.get(5, TimeUnit.MINUTES);
@@ -42,11 +41,7 @@ public class ReplyPool {
 
     private static final class CompletableFuture extends FutureTask<Object> {
         public CompletableFuture() {
-            super(new Callable<Object>() {
-                @Override public Object call() throws Exception {
-                    return null;
-                }
-            });
+            super(() -> null);
         }
 
         @Override

@@ -17,14 +17,8 @@
  */
 package forge.game.ability;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.CardTraitBase;
@@ -39,6 +33,10 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -64,7 +62,8 @@ public final class AbilityFactory {
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
             "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
             "RegenerationAbility", // for Regeneration Effect
-            "ReturnAbility" // for Delayed Trigger on Magpie
+            "ReturnAbility", // for Delayed Trigger on Magpie
+            "GiftAbility" // for Promise Gift
         );
 
     public enum AbilityRecordType {
@@ -110,10 +109,10 @@ public final class AbilityFactory {
         }
     }
 
-    public static final SpellAbility getAbility(final String abString, final Card card) {
+    public static SpellAbility getAbility(final String abString, final Card card) {
         return getAbility(abString, card.getCurrentState());
     }
-    public static final SpellAbility getAbility(final String abString, final Card card, final IHasSVars sVarHolder) {
+    public static SpellAbility getAbility(final String abString, final Card card, final IHasSVars sVarHolder) {
         return getAbility(abString, card.getCurrentState(), sVarHolder);
     }
     /**
@@ -127,11 +126,11 @@ public final class AbilityFactory {
      *            a {@link forge.game.card.CardState} object.
      * @return a {@link forge.game.spellability.SpellAbility} object.
      */
-    public static final SpellAbility getAbility(final String abString, final CardState state) {
+    public static SpellAbility getAbility(final String abString, final CardState state) {
         return getAbility(abString, state, state);
     }
 
-    private static final SpellAbility getAbility(final String abString, final CardState state, final IHasSVars sVarHolder) {
+    private static SpellAbility getAbility(final String abString, final CardState state, final IHasSVars sVarHolder) {
         Map<String, String> mapParams;
         try {
             mapParams = AbilityFactory.getMapParams(abString);
@@ -159,15 +158,15 @@ public final class AbilityFactory {
         }
     }
 
-    public static final SpellAbility getAbility(final Card hostCard, final String svar) {
+    public static SpellAbility getAbility(final Card hostCard, final String svar) {
         return getAbility(hostCard, svar, hostCard.getCurrentState());
     }
 
-    public static final SpellAbility getAbility(final Card hostCard, final String svar, final IHasSVars sVarHolder) {
+    public static SpellAbility getAbility(final Card hostCard, final String svar, final IHasSVars sVarHolder) {
         return getAbility(hostCard.getCurrentState(), svar, sVarHolder);
     }
 
-    public static final SpellAbility getAbility(final CardState state, final String svar, final IHasSVars sVarHolder) {
+    public static SpellAbility getAbility(final CardState state, final String svar, final IHasSVars sVarHolder) {
         if (!sVarHolder.hasSVar(svar)) {
             String source = state.getCard().getName();
             throw new RuntimeException("AbilityFactory : getAbility -- " + source +  " has no SVar: " + svar);
@@ -176,7 +175,7 @@ public final class AbilityFactory {
         }
     }
 
-    public static final SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final CardState state, final IHasSVars sVarHolder) {
+    public static SpellAbility getAbility(final Map<String, String> mapParams, AbilityRecordType type, final CardState state, final IHasSVars sVarHolder) {
         return getAbility(type, type.getApiTypeOf(mapParams), mapParams, null, state, sVarHolder);
     }
 
@@ -203,7 +202,7 @@ public final class AbilityFactory {
         return abCost;
     }
 
-    public static final SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams,
+    public static SpellAbility getAbility(AbilityRecordType type, ApiType api, Map<String, String> mapParams,
             Cost abCost, final CardState state, final IHasSVars sVarHolder) {
         final Card hostCard = state.getCard();
         TargetRestrictions abTgt = mapParams.containsKey("ValidTgts") ? readTarget(mapParams) : null;
@@ -286,12 +285,7 @@ public final class AbilityFactory {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
-                spellAbility.setAdditionalAbilityList(key, Lists.transform(names, new Function<String, AbilitySub>() {
-                    @Override
-                    public AbilitySub apply(String input) {
-                        return getSubAbility(state, input, sVarHolder);
-                    }
-                }));
+                spellAbility.setAdditionalAbilityList(key, Lists.transform(names, input -> getSubAbility(state, input, sVarHolder)));
             }
         }
 
@@ -330,7 +324,7 @@ public final class AbilityFactory {
         return spellAbility;
     }
 
-    private static final TargetRestrictions readTarget(Map<String, String> mapParams) {
+    private static TargetRestrictions readTarget(Map<String, String> mapParams) {
         final String min = mapParams.getOrDefault("TargetMin", "1");
         final String max = mapParams.getOrDefault("TargetMax", "1");
 
@@ -424,7 +418,7 @@ public final class AbilityFactory {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private static final void initializeParams(final SpellAbility sa) {
+    private static void initializeParams(final SpellAbility sa) {
         if (sa.hasParam("NonBasicSpell")) {
             sa.setBasicSpell(false);
         }
@@ -438,7 +432,7 @@ public final class AbilityFactory {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private static final void makeRestrictions(final SpellAbility sa) {
+    private static void makeRestrictions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
         if (restrict != null) {
@@ -454,7 +448,7 @@ public final class AbilityFactory {
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
-    private static final void makeConditions(final SpellAbility sa) {
+    private static void makeConditions(final SpellAbility sa) {
         // SpellAbilityConditions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
         condition.setConditions(sa.getMapParams());
@@ -469,7 +463,7 @@ public final class AbilityFactory {
      *
      * @return a {@link forge.game.spellability.AbilitySub} object.
      */
-    private static final AbilitySub getSubAbility(CardState state, String sSub, final IHasSVars sVarHolder) {
+    private static AbilitySub getSubAbility(CardState state, String sSub, final IHasSVars sVarHolder) {
         if (sVarHolder.hasSVar(sSub)) {
             return (AbilitySub) AbilityFactory.getAbility(state, sSub, sVarHolder);
         }
@@ -478,11 +472,11 @@ public final class AbilityFactory {
         return null;
     }
 
-    public static final Map<String, String> getMapParams(final String abString) {
+    public static Map<String, String> getMapParams(final String abString) {
         return FileSection.parseToMap(abString, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
-    public static final void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
+    public static void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
         if (params.containsKey("Origin")) {
             List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
 
@@ -495,7 +489,7 @@ public final class AbilityFactory {
         }
     }
 
-    public static final SpellAbility buildFusedAbility(final Card card) {
+    public static SpellAbility buildFusedAbility(final Card card) {
         if (!card.isSplitCard())
             throw new IllegalStateException("Fuse ability may be built only on split cards");
 

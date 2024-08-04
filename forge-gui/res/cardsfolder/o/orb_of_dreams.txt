@@ -1,7 +1,7 @@
 Name:Orb of Dreams
 ManaCost:3
 Types:Artifact
-R:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Permanents enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Permanent | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Permanents enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 AI:RemoveDeck:Random
-Oracle:Permanents enter the battlefield tapped.
+Oracle:Permanents enter tapped.

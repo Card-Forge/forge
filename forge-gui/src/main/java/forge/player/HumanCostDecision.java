@@ -1,35 +1,17 @@
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
+import forge.game.*;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -41,6 +23,8 @@ import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
+
+import java.util.*;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
@@ -496,7 +480,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         if (list.size() < c) {
             return null;
         }
-        Integer min = c;
+        int min = c;
         if (ability.isOptionalTrigger()) {
             min = 0;
         }
@@ -700,7 +684,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPayEnergy cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         if (player.canPayEnergy(c) &&
                 confirmAction(cost, Localizer.getInstance().getMessage("lblPayEnergyConfirm", cost.toString(), String.valueOf(player.getCounters(CounterEnumType.ENERGY)), "{E}"))) {
@@ -711,7 +695,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(final CostPayShards cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         if (player.canPayShards(c) &&
                 confirmAction(cost, Localizer.getInstance().getMessage("lblPayShardsConfirm", cost.toString(), String.valueOf(player.getNumManaShards()), "{M} (Mana Shards)"))) {
@@ -727,8 +711,21 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(final CostPromiseGift cost) {
+        // TODO Parse the specific gift
+        PlayerCollection opponents = cost.getPotentialPlayers(player, ability);
+        Player giftee = controller.chooseSingleEntityForEffect(opponents, null, ability, "Choose an opponent to promise a gift", false, null, null);
+
+        if (giftee == null) {
+            return null;
+        }
+
+        return PaymentDecision.players(Lists.newArrayList(giftee));
+    }
+
+    @Override
     public PaymentDecision visit(final CostPutCardToLib cost) {
-        Integer c = cost.getAbilityAmount(ability);
+        int c = cost.getAbilityAmount(ability);
 
         final CardCollection list = CardLists.getValidCards(cost.sameZone ? player.getGame().getCardsIn(cost.getFrom()) :
                 player.getCardsIn(cost.getFrom()), cost.getType().split(";"), player, source, ability);
@@ -756,9 +753,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                     payableZone.add(p);
                 }
             }
-            return putFromSame(list, c.intValue(), payableZone, cost.from);
+            return putFromSame(list, c, payableZone, cost.from);
         } else {//Graveyard
-            return putFromMiscZone(ability, c.intValue(), list, cost.from);
+            return putFromMiscZone(ability, c, list, cost.from);
         }
     }
 
@@ -909,7 +906,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             };
             inp.setMessage(Localizer.getInstance().getMessage("lblSelectNCardOfSameColorToReveal", String.valueOf(num)));
         } else {
-            Integer num = cost.getAbilityAmount(ability);
+            int num = cost.getAbilityAmount(ability);
 
             CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
             hand = CardLists.getValidCards(hand, cost.getType().split(";"), player, source, ability);
@@ -1056,7 +1053,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return counterTable.totalValues();
         }
 
-        protected final boolean isValidChoice(final GameEntity choice) {
+        protected boolean isValidChoice(final GameEntity choice) {
             return validChoices.contains(choice);
         }
 
@@ -1122,7 +1119,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, 1, 1, validCards, ability);
-        inp.setMessage(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", Lang.joinHomogenous(cost.zone, ZoneType.Accessors.GET_TRANSLATED_NAME)));
+        inp.setMessage(Localizer.getInstance().getMessage("lblRemoveCountersFromAInZoneCard", Lang.joinHomogenous(cost.zone, ZoneType::getTranslatedName)));
         inp.setCancelAllowed(true);
         inp.showAndWait();
 

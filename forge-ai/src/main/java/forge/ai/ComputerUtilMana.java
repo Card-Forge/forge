@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ai.AiCardMemory.MemorySet;
@@ -126,12 +125,7 @@ public class ComputerUtilMana {
                 }
             }
         }
-        orderedCards.sort(new Comparator<Card>() {
-            @Override
-            public int compare(final Card card1, final Card card2) {
-                return Integer.compare(manaCardMap.get(card1), manaCardMap.get(card2));
-            }
-        });
+        orderedCards.sort(Comparator.comparingInt(manaCardMap::get));
 
         if (DEBUG_MANA_PAYMENT) {
             System.out.print("Ordered Cards: " + orderedCards.size());
@@ -149,29 +143,26 @@ public class ComputerUtilMana {
                 System.out.println("Unsorted Abilities: " + newAbilities);
             }
 
-            newAbilities.sort(new Comparator<SpellAbility>() {
-                @Override
-                public int compare(final SpellAbility ability1, final SpellAbility ability2) {
-                    int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
+            newAbilities.sort((ability1, ability2) -> {
+                int preOrder = orderedCards.indexOf(ability1.getHostCard()) - orderedCards.indexOf(ability2.getHostCard());
 
-                    if (preOrder != 0) {
-                        return preOrder;
-                    }
-
-                    // Mana abilities on the same card
-                    String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
-
-                    boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
-                    boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
-
-                    if (payWithAb1 && !payWithAb2) {
-                        return -1;
-                    } else if (payWithAb2 && !payWithAb1) {
-                        return 1;
-                    }
-
-                    return ability1.compareTo(ability2);
+                if (preOrder != 0) {
+                    return preOrder;
                 }
+
+                // Mana abilities on the same card
+                String shardMana = shard.toString().replaceAll("\\{", "").replaceAll("\\}", "");
+
+                boolean payWithAb1 = ability1.getManaPart().mana(ability1).contains(shardMana);
+                boolean payWithAb2 = ability2.getManaPart().mana(ability2).contains(shardMana);
+
+                if (payWithAb1 && !payWithAb2) {
+                    return -1;
+                } else if (payWithAb2 && !payWithAb1) {
+                    return 1;
+                }
+
+                return ability1.compareTo(ability2);
             });
 
             if (DEBUG_MANA_PAYMENT) {
@@ -195,35 +186,28 @@ public class ComputerUtilMana {
                     final List<SpellAbility> prefSortedAbilities = new ArrayList<>(newAbilities);
                     final List<SpellAbility> otherSortedAbilities = new ArrayList<>(newAbilities);
 
-                    prefSortedAbilities.sort(new Comparator<SpellAbility>() {
-                        @Override
-                        public int compare(final SpellAbility ability1, final SpellAbility ability2) {
-                            if (ability1.getManaPart().mana(ability1).contains(preferredShard))
-                                return -1;
-                            else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
-                                return 1;
+                    prefSortedAbilities.sort((ability1, ability2) -> {
+                        if (ability1.getManaPart().mana(ability1).contains(preferredShard))
+                            return -1;
+                        else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
+                            return 1;
 
-                            return 0;
-                        }
+                        return 0;
                     });
-                    otherSortedAbilities.sort(new Comparator<SpellAbility>() {
-                        @Override
-                        public int compare(final SpellAbility ability1, final SpellAbility ability2) {
-                            if (ability1.getManaPart().mana(ability1).contains(preferredShard))
-                                return 1;
-                            else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
-                                return -1;
+                    otherSortedAbilities.sort((ability1, ability2) -> {
+                        if (ability1.getManaPart().mana(ability1).contains(preferredShard))
+                            return 1;
+                        else if (ability2.getManaPart().mana(ability2).contains(preferredShard))
+                            return -1;
 
-                            return 0;
-                        }
+                        return 0;
                     });
 
                     final List<SpellAbility> finalAbilities = new ArrayList<>();
                     for (int i = 0; i < preferredShardAmount && i < prefSortedAbilities.size(); i++) {
                         finalAbilities.add(prefSortedAbilities.get(i));
                     }
-                    for (int i = 0; i < otherSortedAbilities.size(); i++) {
-                        SpellAbility ab = otherSortedAbilities.get(i);
+                    for (SpellAbility ab : otherSortedAbilities) {
                         if (!finalAbilities.contains(ab))
                             finalAbilities.add(ab);
                     }
@@ -252,24 +236,14 @@ public class ComputerUtilMana {
             List<SpellAbility> filteredList = Lists.newArrayList(saList);
             switch (manaSourceType) {
                 case "Snow":
-                    filteredList.sort(new Comparator<SpellAbility>() {
-                        @Override
-                        public int compare(SpellAbility ab1, SpellAbility ab2) {
-                            return ab1.getHostCard() != null && ab1.getHostCard().isSnow()
-                                    && ab2.getHostCard() != null && !ab2.getHostCard().isSnow() ? -1 : 1;
-                        }
-                    });
+                    filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().isSnow()
+                            && ab2.getHostCard() != null && !ab2.getHostCard().isSnow() ? -1 : 1);
                     saList = filteredList;
                     break;
                 case "Treasure":
                     // Try to spend only one Treasure if possible
-                    filteredList.sort(new Comparator<SpellAbility>() {
-                        @Override
-                        public int compare(SpellAbility ab1, SpellAbility ab2) {
-                            return ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
-                                    && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1;
-                        }
-                    });
+                    filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
+                            && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1);
                     SpellAbility first = filteredList.get(0);
                     if (first.getHostCard() != null && first.getHostCard().getType().hasSubtype("Treasure")) {
                         saList.remove(first);
@@ -281,22 +255,12 @@ public class ComputerUtilMana {
                     break;
                 case "TreasureMax":
                     // Ok to spend as many Treasures as possible
-                    filteredList.sort(new Comparator<SpellAbility>() {
-                        @Override
-                        public int compare(SpellAbility ab1, SpellAbility ab2) {
-                            return ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
-                                    && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1;
-                        }
-                    });
+                    filteredList.sort((ab1, ab2) -> ab1.getHostCard() != null && ab1.getHostCard().getType().hasSubtype("Treasure")
+                            && ab2.getHostCard() != null && !ab2.getHostCard().getType().hasSubtype("Treasure") ? -1 : 1);
                     saList = filteredList;
                     break;
                 case "NotSameCard":
-                    saList = Lists.newArrayList(Iterables.filter(filteredList, new Predicate<SpellAbility>() {
-                        @Override
-                        public boolean apply(final SpellAbility saPay) {
-                            return !saPay.getHostCard().getName().equals(sa.getHostCard().getName());
-                        }
-                    }));
+                    saList = Lists.newArrayList(Iterables.filter(filteredList, saPay -> !saPay.getHostCard().getName().equals(sa.getHostCard().getName())));
                     break;
                 default:
                     break;
@@ -491,7 +455,7 @@ public class ComputerUtilMana {
         if (!replaceAmount.isEmpty()) {
             int totalAmount = 1;
             for (SpellAbility saMana : replaceAmount) {
-                totalAmount *= Integer.valueOf(saMana.getParam("ReplaceAmount"));
+                totalAmount *= Integer.parseInt(saMana.getParam("ReplaceAmount"));
             }
             manaProduced = StringUtils.repeat(manaProduced, " ", totalAmount);
         }
@@ -1097,12 +1061,7 @@ public class ComputerUtilMana {
     private static ManaCostShard getNextShardToPay(ManaCostBeingPaid cost, Multimap<ManaCostShard, SpellAbility> sourcesForShards) {
         List<ManaCostShard> shardsToPay = Lists.newArrayList(cost.getDistinctShards());
         // optimize order so that the shards with less available sources are considered first
-        shardsToPay.sort(new Comparator<ManaCostShard>() {
-            @Override
-            public int compare(final ManaCostShard shard1, final ManaCostShard shard2) {
-                return sourcesForShards.get(shard1).size() - sourcesForShards.get(shard2).size();
-            }
-        });
+        shardsToPay.sort(Comparator.comparingInt(shard -> sourcesForShards.get(shard).size()));
         // mind the priorities
         // * Pay mono-colored first
         // * Pay 2/C with matching colors
@@ -1388,12 +1347,7 @@ public class ComputerUtilMana {
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 
-        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.getManaAbilities().isEmpty();
-            }
-        });
+        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), c -> !c.getManaAbilities().isEmpty());
 
         int maxProduced = 0;
         int producedWithCost = 0;
@@ -1438,17 +1392,14 @@ public class ComputerUtilMana {
     //This method is currently used by AI to estimate available mana
     public static CardCollection getAvailableManaSources(final Player ai, final boolean checkPlayable) {
         final CardCollectionView list = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
-        final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                for (final SpellAbility am : getAIPlayableMana(c)) {
-                    am.setActivatingPlayer(ai, true);
-                    if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
-                        return true;
-                    }
+        final List<Card> manaSources = CardLists.filter(list, c -> {
+            for (final SpellAbility am : getAIPlayableMana(c)) {
+                am.setActivatingPlayer(ai, true);
+                if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         }); // CardListFilter
 
         final CardCollection sortedManaSources = new CardCollection();
@@ -1804,6 +1755,9 @@ public class ComputerUtilMana {
         Card convoked = null;
         if (!improvise) {
             for (ManaCostShard toPay : cost) {
+                if (toPay.isSnow() || toPay.isColorless()) {
+                    continue;
+                }
                 for (Card c : list) {
                     final int mask = c.getColor().getColor() & toPay.getColorMask();
                     if (mask != 0) {

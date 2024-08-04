@@ -24,8 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Function;
-
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.game.GameFormat;
@@ -124,13 +122,6 @@ public class QuestWorld implements Comparable<QuestWorld>{
         return this.getName();
     }
 
-    public static final Function<QuestWorld, String> FN_GET_NAME = new Function<QuestWorld, String>() {
-        @Override
-        public String apply(QuestWorld arg1) {
-            return arg1.getName();
-        }
-    };
-
     /**
      * Class for reading world definitions.
      */
@@ -141,7 +132,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
          * @param file0
          */
         public Reader(String file0) {
-            super(file0, QuestWorld.FN_GET_NAME);
+            super(file0, QuestWorld::getName);
         }
 
         /* (non-Javadoc)

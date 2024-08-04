@@ -92,7 +92,7 @@ public class AttackingBand {
      */
     @Override
     public String toString() {
-        return String.format("%s %s", attackers.toString(), blocked == null ? " ? " : blocked.booleanValue() ? ">||" : ">>>" );
+        return String.format("%s %s", attackers.toString(), blocked == null ? " ? " : blocked ? ">||" : ">>>" );
     }
 
 }

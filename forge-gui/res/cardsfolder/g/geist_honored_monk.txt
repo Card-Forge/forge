@@ -4,10 +4,10 @@ Types:Creature Human Monk
 PT:*/*
 K:Vigilance
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of creatures you control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 white Spirit creature tokens with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
 DeckHas:Ability$Token
-Oracle:Vigilance\nGeist-Honored Monk's power and toughness are each equal to the number of creatures you control.\nWhen Geist-Honored Monk enters the battlefield, create two 1/1 white Spirit creature tokens with flying.
+Oracle:Vigilance\nGeist-Honored Monk's power and toughness are each equal to the number of creatures you control.\nWhen Geist-Honored Monk enters, create two 1/1 white Spirit creature tokens with flying.

@@ -3,6 +3,6 @@ ManaCost:5 R
 Types:Creature Elemental Horse
 PT:5/5
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all other creatures.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all other creatures.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.StrictlyOther
-Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Thundermare enters the battlefield, tap all other creatures.
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nWhen Thundermare enters, tap all other creatures.

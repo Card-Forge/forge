@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Bird Wizard
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target land to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target land to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Hand
-Oracle:Flying\nWhen Aven Fogbringer enters the battlefield, return target land to its owner's hand.
+Oracle:Flying\nWhen Aven Fogbringer enters, return target land to its owner's hand.

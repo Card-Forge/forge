@@ -17,24 +17,16 @@
  */
 package forge.game;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.*;
-import forge.game.card.*;
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityAlternativeCost;
-import forge.util.Aggregates;
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -46,12 +38,21 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -81,7 +82,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
+    public static List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -210,8 +211,8 @@ public final class GameActionUtil {
                         && source.isForetold() && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
-                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
-                    foretold.putParam("ReduceCost", reduced.toString());
+                    int reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", Integer.toString(reduced));
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -434,6 +435,9 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Gift")) {
+              final Cost cost = new Cost("PromiseGift", false);
+              costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
                 int numKickers = sCosts.length;
@@ -573,7 +577,7 @@ public final class GameActionUtil {
                     String n = o.split(":")[1];
                     if (host.wasCast() && n.equals("X")) {
                         CardCollectionView creatures = activator.getCreaturesInPlay();
-                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        int max = Aggregates.max(creatures, Card::getNetPower);
                         n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
@@ -883,7 +887,7 @@ public final class GameActionUtil {
             // skip GameAction
             oldCard.getZone().remove(oldCard);
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
-            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);

@@ -7,4 +7,4 @@ R:Event$ AddCounter | ActiveZones$ Battlefield | ValidCard$ Permanent.YourTeamCt
 SVar:AddOneMoreCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
 SVar:X:ReplaceCount$CounterNum/Plus.1
 DeckNeeds:Ability$Counters
-Oracle:Partner with Toothy, Imaginary Friend (When this creature enters the battlefield, target player may put Toothy into their hand from their library, then shuffle.)\nIf one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.
+Oracle:Partner with Toothy, Imaginary Friend (When this creature enters, target player may put Toothy into their hand from their library, then shuffle.)\nIf one or more counters would be put on a permanent your team controls, that many plus one of each of those kinds of counters are put on that permanent instead.

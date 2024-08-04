@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Dog
 PT:2/2
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +0/+3 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +0/+3 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDef$ +3
 SVar:AmbushAI:True
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Affa Guard Hound enters the battlefield, target creature gets +0/+3 until end of turn.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Affa Guard Hound enters, target creature gets +0/+3 until end of turn.

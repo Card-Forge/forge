@@ -118,16 +118,14 @@ public class InputConfirmMulligan extends InputSyncronizedBase {
         //pfps leave this as is for now - it is confirming during another confirm so it might need the popup
         if (getController().getGui().confirm(cView, "Use " + cView + "'s ability?")) {
             cardSelectLocked = true;
-            ThreadUtil.invokeInGameThread(new Runnable() {
-                @Override public void run() {
-                    final CardCollectionView hand = c0.getController().getCardsIn(ZoneType.Hand);
-                    final int handSize = hand.size();
-                    for (final Card c : hand.threadSafeIterable()) {
-                        player.getGame().getAction().exile(c, null, null);
-                    }
-                    c0.getController().drawCards(handSize);
-                    cardSelectLocked = false;
+            ThreadUtil.invokeInGameThread(() -> {
+                final CardCollectionView hand = c0.getController().getCardsIn(ZoneType.Hand);
+                final int handSize = hand.size();
+                for (final Card c : hand.threadSafeIterable()) {
+                    player.getGame().getAction().exile(c, null, null);
                 }
+                c0.getController().drawCards(handSize);
+                cardSelectLocked = false;
             });
         }
         return true;

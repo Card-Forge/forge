@@ -1,7 +1,8 @@
 Name:Prismatic Geoscope
 ManaCost:5
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ X | PrecostDesc$ Domain — | SpellDescription$ Add X mana in any combination of colors, where X is the number of basic land types among lands you control.
 SVar:X:Count$Domain
-Oracle:Prismatic Geoscope enters the battlefield tapped.\nDomain — {T}: Add X mana in any combination of colors, where X is the number of basic land types among lands you control.
+Oracle:Prismatic Geoscope enters tapped.\nDomain — {T}: Add X mana in any combination of colors, where X is the number of basic land types among lands you control.

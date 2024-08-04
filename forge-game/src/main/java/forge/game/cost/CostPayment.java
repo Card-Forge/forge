@@ -32,6 +32,7 @@ import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -341,7 +342,7 @@ public class CostPayment extends ManaConversionMatrix {
             if (test) {
                 sa.resetSacrificedAsOffering();
             } else if (costIsPaid) {
-                game.getAction().sacrifice(offering, sa, false, params);
+                game.getAction().sacrifice(new CardCollection(offering), sa, false, params);
             }
         }
         if (sa.isEmerge()) {
@@ -353,7 +354,7 @@ public class CostPayment extends ManaConversionMatrix {
             if (test) {
                 sa.resetSacrificedAsEmerge();
             } else if (costIsPaid) {
-                game.getAction().sacrifice(emerge, sa, false, params);
+                game.getAction().sacrifice(new CardCollection(emerge), sa, false, params);
                 sa.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             }
         }

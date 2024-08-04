@@ -2,6 +2,6 @@ Name:Glowing Anemone
 ManaCost:3 U
 Types:Creature Jellyfish Beast
 PT:1/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target land to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target land to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Land | TgtPrompt$ Select target land | Origin$ Battlefield | Destination$ Hand
-Oracle:When Glowing Anemone enters the battlefield, you may return target land to its owner's hand.
+Oracle:When Glowing Anemone enters, you may return target land to its owner's hand.
