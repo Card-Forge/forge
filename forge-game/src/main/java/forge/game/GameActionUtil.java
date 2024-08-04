@@ -684,7 +684,7 @@ public final class GameActionUtil {
         if (host.isCreature()) {
             String kw = "As an additional cost to cast creature spells," +
                     " you may pay any amount of mana. If you do, that creature enters " +
-                    "the battlefield with that many additional +1/+1 counters on it.";
+                    "with that many additional +1/+1 counters on it.";
 
             for (final Card c : activator.getZone(ZoneType.Battlefield)) {
                 for (KeywordInterface ki : c.getKeywords()) {
@@ -741,7 +741,7 @@ public final class GameActionUtil {
             sa.setSVar(amount, sourceCard.getSVar(amount));
         }
 
-        String desc = "It enters the battlefield with ";
+        String desc = "It enters with ";
         desc += Lang.nounWithNumeral(amount, CounterType.getType(counter).getName() + " counter");
         desc += " on it.";
 
