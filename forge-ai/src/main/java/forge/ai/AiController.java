@@ -1432,7 +1432,7 @@ public class AiController {
         // TODO: improve the detection of taplands
         boolean isTapLand = false;
         for (ReplacementEffect repl : landToPlay.getReplacementEffects()) {
-            if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
+            if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters tapped.")) {
                 isTapLand = true;
             }
         }
@@ -1450,7 +1450,7 @@ public class AiController {
             boolean isTapLand1 = false;
             for (ReplacementEffect repl : card.getReplacementEffects()) {
                 // TODO: improve the detection of taplands
-                if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters the battlefield tapped.")) {
+                if (repl.getParamOrDefault("Description", "").equals("CARDNAME enters tapped.")) {
                     isTapLand1 = true;
                 }
             }
