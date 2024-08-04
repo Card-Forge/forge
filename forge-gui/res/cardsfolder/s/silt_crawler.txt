@@ -2,6 +2,6 @@ Name:Silt Crawler
 ManaCost:2 G
 Types:Creature Beast
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all lands you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all lands you control.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Land.YouCtrl
-Oracle:When Silt Crawler enters the battlefield, tap all lands you control.
+Oracle:When Silt Crawler enters, tap all lands you control.

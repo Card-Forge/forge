@@ -8,4 +8,4 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounter | Trigger
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ EffectSource | CounterType$ P1P1 | CounterNum$ 1
 SVar:NumTimes:Count$CardCounters.P1P1
 DeckHas:Ability$Counters
-Oracle:Skeleton Scavengers enters the battlefield with a +1/+1 counter on it.\nPay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
+Oracle:Skeleton Scavengers enters with a +1/+1 counter on it.\nPay {1} for each +1/+1 counter on Skeleton Scavengers: Regenerate Skeleton Scavengers. When it regenerates this way, put a +1/+1 counter on it.
