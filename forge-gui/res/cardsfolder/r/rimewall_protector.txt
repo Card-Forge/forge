@@ -3,7 +3,7 @@ ManaCost:1 U U
 Types:Creature Giant Wizard
 PT:3/4
 K:Ward:1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Giant.Other+YouCtrl,Wizard.Other+YouCtrl | PumpZone$ Battlefield,Hand | Duration$ Perpetual | KW$ Ward:1
 DeckHints:Type$Giant|Wizard
-Oracle:Ward {1}\nWhen Rimewall Protector enters the battlefield, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.
+Oracle:Ward {1}\nWhen Rimewall Protector enters, each other Giant or Wizard you control and each Giant or Wizard card in your hand perpetually gains ward {1}.

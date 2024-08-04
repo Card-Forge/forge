@@ -1,10 +1,10 @@
 Name:Rise of the Hobgoblins
 ManaCost:RW RW
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.
 SVar:TrigToken:AB$ Token | Cost$ X | TokenAmount$ X | TokenScript$ rw_1_1_goblin_soldier | TokenOwner$ You
 SVar:X:Count$xPaid
 A:AB$ PumpAll | Cost$ RW | ValidCards$ Creature.Red+YouCtrl,Creature.White+YouCtrl | KW$ First Strike | SpellDescription$ Red creatures and white creatures you control gain first strike until end of turn.
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Card.canProduceMana+YouCtrl+inZoneBattlefield+untapped
-Oracle:When Rise of the Hobgoblins enters the battlefield, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.\n{R/W}: Red creatures and white creatures you control gain first strike until end of turn.
+Oracle:When Rise of the Hobgoblins enters, you may pay {X}. If you do, create X 1/1 red and white Goblin Soldier creature tokens.\n{R/W}: Red creatures and white creatures you control gain first strike until end of turn.
