@@ -2,8 +2,8 @@ Name:Scampering Scorcher
 ManaCost:3 R
 Types:Creature Elemental
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 red Elemental creature tokens. Elementals you control gain haste until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 red Elemental creature tokens. Elementals you control gain haste until end of turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | SubAbility$ DBPump
 SVar:DBPump:DB$ PumpAll | ValidCards$ Elemental.YouCtrl | KW$ Haste
 DeckHas:Ability$Token
-Oracle:When Scampering Scorcher enters the battlefield, create two 1/1 red Elemental creature tokens. Elementals you control gain haste until end of turn. (They can attack and {T} this turn.)
+Oracle:When Scampering Scorcher enters, create two 1/1 red Elemental creature tokens. Elementals you control gain haste until end of turn. (They can attack and {T} this turn.)

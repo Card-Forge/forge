@@ -4,4 +4,4 @@ Types:Creature Human Berserker
 PT:1/1
 K:Bloodthirst:2
 K:Trample
-Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)\nTrample
+Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters with two +1/+1 counters on it.)\nTrample

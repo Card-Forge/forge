@@ -6,4 +6,4 @@ K:Double Strike
 K:etbCounter:P1P1:X
 A:AB$ PutCounter | Cost$ 1 RG | SorcerySpeed$ True | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only as a sorcery.
 SVar:X:Count$xPaid
-Oracle:Double strike\nSavageborn Hydra enters the battlefield with X +1/+1 counters on it.\n{1}{R/G}: Put a +1/+1 counter on Savageborn Hydra. Activate only as a sorcery.
+Oracle:Double strike\nSavageborn Hydra enters with X +1/+1 counters on it.\n{1}{R/G}: Put a +1/+1 counter on Savageborn Hydra. Activate only as a sorcery.
