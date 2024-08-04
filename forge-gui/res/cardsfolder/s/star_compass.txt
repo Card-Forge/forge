@@ -1,6 +1,7 @@
 Name:Star Compass
 ManaCost:2
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Basic.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any color a basic land you control could produce.
-Oracle:Star Compass enters the battlefield tapped.\n{T}: Add one mana of any color that a basic land you control could produce.
+Oracle:Star Compass enters tapped.\n{T}: Add one mana of any color that a basic land you control could produce.
