@@ -349,6 +349,7 @@ public class GameAction {
             repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
 
             if (toBattlefield) {
+                repParams.put(AbilityKey.EffectOnly, true);
                 repParams.put(AbilityKey.CounterTable, table);
                 repParams.put(AbilityKey.CounterMap, table.column(copied));
             }
