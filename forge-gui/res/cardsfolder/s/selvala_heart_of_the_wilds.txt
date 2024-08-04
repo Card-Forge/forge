@@ -2,10 +2,10 @@ Name:Selvala, Heart of the Wilds
 ManaCost:1 G G
 Types:Legendary Creature Elf Scout
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another creature enters, its controller may draw a card if its power is greater than each other creature's power.
 SVar:TrigDraw:DB$ Draw | OptionalDecider$ TriggeredCardController | Defined$ TriggeredCardController | NumCards$ 1 | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQY
 SVar:Z:TriggeredCard$Valid Card.greatestPower
 SVar:Y:Count$Valid Card.greatestPower
 A:AB$ Mana | Cost$ G T | Produced$ Combo Any | Amount$ X | SpellDescription$ Add X mana in any combination of colors, where X is the greatest power among creatures you control.
 SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
-Oracle:Whenever another creature enters the battlefield, its controller may draw a card if its power is greater than each other creature's power.\n{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.
+Oracle:Whenever another creature enters, its controller may draw a card if its power is greater than each other creature's power.\n{G}, {T}: Add X mana in any combination of colors, where X is the greatest power among creatures you control.

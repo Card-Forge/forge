@@ -2,8 +2,8 @@ Name:Selkie Hedge-Mage
 ManaCost:2 GU
 Types:Creature Merfolk Wizard
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Forest.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Forests, you may gain 3 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Island.YouCtrl | PresentCompare$ GE2 | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Forest.YouCtrl | PresentCompare$ GE2 | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, if you control two or more Forests, you may gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Island.YouCtrl | PresentCompare$ GE2 | Execute$ TrigBounce | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, if you control two or more Islands, you may return target tapped creature to its owner's hand.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Origin$ Battlefield | Destination$ Hand
-Oracle:When Selkie Hedge-Mage enters the battlefield, if you control two or more Forests, you may gain 3 life.\nWhen Selkie Hedge-Mage enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.
+Oracle:When Selkie Hedge-Mage enters, if you control two or more Forests, you may gain 3 life.\nWhen Selkie Hedge-Mage enters, if you control two or more Islands, you may return target tapped creature to its owner's hand.

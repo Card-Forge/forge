@@ -1,7 +1,7 @@
 Name:Semblance Anvil
 ManaCost:3
 Types:Artifact
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a nonland card from your hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters, you may exile a nonland card from your hand.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1
 S:Mode$ ReduceCost | ValidCard$ Card.sharesCardTypeWith Imprinted | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Spells you cast that share a card type with the exiled card cost {2} less to cast.
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
@@ -11,4 +11,4 @@ SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$ValidHand Permanent.nonLand+YouOwn
 AI:RemoveDeck:Random
-Oracle:Imprint — When Semblance Anvil enters the battlefield, you may exile a nonland card from your hand.\nSpells you cast that share a card type with the exiled card cost {2} less to cast.
+Oracle:Imprint — When Semblance Anvil enters, you may exile a nonland card from your hand.\nSpells you cast that share a card type with the exiled card cost {2} less to cast.
