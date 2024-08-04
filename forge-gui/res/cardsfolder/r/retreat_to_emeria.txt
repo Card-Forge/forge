@@ -1,10 +1,10 @@
 Name:Retreat to Emeria
 ManaCost:3 W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land you control enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPumpAll
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kor Ally creature token.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 DeckHints:Type$Ally
 DeckHas:Ability$Token
-Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn.
+Oracle:Landfall — Whenever a land you control enters, choose one —\n• Create a 1/1 white Kor Ally creature token.\n• Creatures you control get +1/+1 until end of turn.
