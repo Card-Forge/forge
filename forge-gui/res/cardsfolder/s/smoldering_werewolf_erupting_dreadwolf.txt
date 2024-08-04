@@ -2,12 +2,12 @@ Name:Smoldering Werewolf
 ManaCost:2 R R
 Types:Creature Werewolf Horror
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each of up to two target creatures.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 1 damage to each of up to two target creatures.
 SVar:TrigDealDamage:DB$ DealDamage | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1
 A:AB$ SetState | Cost$ 4 R R | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
 SVar:PlayMain1:TRUE
 AlternateMode:DoubleFaced
-Oracle:When Smoldering Werewolf enters the battlefield, it deals 1 damage to each of up to two target creatures.\n{4}{R}{R}: Transform Smoldering Werewolf.
+Oracle:When Smoldering Werewolf enters, it deals 1 damage to each of up to two target creatures.\n{4}{R}{R}: Transform Smoldering Werewolf.
 
 ALTERNATE
 

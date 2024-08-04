@@ -3,5 +3,6 @@ ManaCost:5 G G
 Types:Creature Beast
 PT:10/10
 K:Fading:2
-K:CARDNAME enters the battlefield tapped.
-Oracle:Fading 2 (This creature enters the battlefield with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nSkyshroud Behemoth enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Fading 2 (This creature enters with two fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nSkyshroud Behemoth enters tapped.
