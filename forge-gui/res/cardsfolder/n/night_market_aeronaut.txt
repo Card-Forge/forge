@@ -3,5 +3,5 @@ ManaCost:3 B
 Types:Creature Aetherborn Warrior
 PT:2/2
 K:Flying
-K:etbCounter:P1P1:1:Revolt$ True:Revolt — CARDNAME enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.
-Oracle:Flying\nRevolt — Night Market Aeronaut enters the battlefield with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.
+K:etbCounter:P1P1:1:Revolt$ True:Revolt — CARDNAME enters with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.
+Oracle:Flying\nRevolt — Night Market Aeronaut enters with a +1/+1 counter on it if a permanent you controlled left the battlefield this turn.
