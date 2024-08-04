@@ -6,4 +6,4 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 5 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Card.EquippedBy | ValidTarget$ Creature | Execute$ TrigExile | TriggerDescription$ When equipped creature deals damage to a creature, exile that creature.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredTargetLKICopy | Origin$ Battlefield | Destination$ Exile
 DeckHints:Name$Helm of Kaldra|Shield of Kaldra
-Oracle:Equipped creature gets +5/+5.\nWhenever equipped creature deals damage to a creature, exile that creature. (Exile it only if it's still on the battlefield.)\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+Oracle:Equipped creature gets +5/+5.\nWhenever equipped creature deals damage to a creature, exile that creature. (Exile it only if it's still on the battlefield.)\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery. This card enters unattached and stays on the battlefield if the creature leaves.)

@@ -2,7 +2,7 @@ Name:Swashbuckler Extraordinaire
 ManaCost:2 R
 Types:Creature Dragon Rogue Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ X | SacValid$ Treasure | SacMessage$ treasure | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigImmediateTrig
@@ -13,4 +13,4 @@ SVar:DBSize:Count$RememberedSize
 SVar:X:Count$Valid Treasure.YouCtrl
 DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 AI:RemoveDeck:All
-Oracle:When Swashbuckler Extraordinaire enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
+Oracle:When Swashbuckler Extraordinaire enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
