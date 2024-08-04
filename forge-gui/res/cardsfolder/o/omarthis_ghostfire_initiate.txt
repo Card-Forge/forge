@@ -11,4 +11,4 @@ SVar:TrigManifest:DB$ Manifest | Amount$ Y
 SVar:Y:TriggeredCard$CardCounters.P1P1
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-Oracle:Omarthis, Ghostfire Initiate enters the battlefield with X +1/+1 counters on it.\nWhenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on Omarthis.\nWhen Omarthis dies, manifest a number of cards from the top of your library equal to the number of counters on it.
+Oracle:Omarthis, Ghostfire Initiate enters with X +1/+1 counters on it.\nWhenever you put one or more +1/+1 counters on another colorless creature, you may put a +1/+1 counter on Omarthis.\nWhen Omarthis dies, manifest a number of cards from the top of your library equal to the number of counters on it.
