@@ -5,9 +5,9 @@ PT:3/4
 K:Vigilance
 K:Haste
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose a player.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters, choose a player.
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.
 SVar:TrigDealDamage:DB$ DealDamage | DamageSource$ TriggeredSource | NumDmg$ X | Defined$ ChosenPlayer
 SVar:X:TriggerCount$DamageAmount
 SVar:HasCombatEffect:TRUE
-Oracle:Vigilance, haste\nAs Saskia the Unyielding enters the battlefield, choose a player.\nWhenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.
+Oracle:Vigilance, haste\nAs Saskia the Unyielding enters, choose a player.\nWhenever a creature you control deals combat damage to a player, it deals that much damage to the chosen player.

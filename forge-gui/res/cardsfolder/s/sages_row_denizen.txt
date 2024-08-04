@@ -2,6 +2,6 @@ Name:Sage's Row Denizen
 ManaCost:2 U
 Types:Creature Vedalken Wizard
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Blue+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another blue creature enters the battlefield under your control, target player mills two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Blue+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever another blue creature you control enters, target player mills two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
-Oracle:Whenever another blue creature enters the battlefield under your control, target player mills two cards.
+Oracle:Whenever another blue creature you control enters, target player mills two cards.

@@ -3,6 +3,6 @@ ManaCost:3 W
 Types:Artifact Creature Gargoyle
 PT:2/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return target artifact card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may return target artifact card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Artifact.YouCtrl
-Oracle:Flying\nWhen Sanctum Gargoyle enters the battlefield, you may return target artifact card from your graveyard to your hand.
+Oracle:Flying\nWhen Sanctum Gargoyle enters, you may return target artifact card from your graveyard to your hand.
