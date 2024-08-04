@@ -2,6 +2,6 @@ Name:Marshdrinker Giant
 ManaCost:3 G G
 Types:Creature Giant Warrior
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Island or Swamp an opponent controls.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target Island or Swamp an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.Island+OppCtrl,Land.Swamp+OppCtrl | TgtPrompt$ Select target Island or Swamp an opponent controls
-Oracle:When Marshdrinker Giant enters the battlefield, destroy target Island or Swamp an opponent controls.
+Oracle:When Marshdrinker Giant enters, destroy target Island or Swamp an opponent controls.
