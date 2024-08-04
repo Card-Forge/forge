@@ -1,7 +1,8 @@
 Name:Rustvale Bridge
 ManaCost:no cost
 Types:Artifact Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Indestructible
 A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
-Oracle:Rustvale Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {R} or {W}.
+Oracle:Rustvale Bridge enters tapped.\nIndestructible\n{T}: Add {R} or {W}.
