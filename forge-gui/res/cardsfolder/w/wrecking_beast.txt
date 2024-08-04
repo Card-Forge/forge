@@ -5,4 +5,4 @@ PT:6/6
 K:Riot
 K:Trample
 DeckHas:Ability$Counters
-Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)\nTrample
+Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)\nTrample
