@@ -5,7 +5,7 @@ Lights:4 5 6
 K:Visit:TrigPhaseOut
 SVar:TrigPhaseOut:DB$ Phases | ValidTgts$ Creature.IsNotRemembered | RememberAffected$ True | WontPhaseInNormal$ True | SubAbility$ DBEffect | TgtPrompt$ Select target creature that hasn't been phased out by Ferris Wheel | SpellDescription$ Visit — Choose target creature that hasn't been phased out with CARDNAME. That creature phases out until you roll a 3 or less while rolling to visit your Attractions.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Remembered | Duration$ Permanent
-SVar:TrigComeBack:Mode$ RolledDie | TriggerZones$ Command | Execute$ TrigPhaseIn | ValidResult$ LE3 | RolledToVisitAttractions$ True | ValidPlayer$ You | TriggerDescription$ That creature phases out until you roll a 3 or less while rolling to visit your Attractions.
+SVar:TrigComeBack:Mode$ RolledDie | TriggerZones$ Command | Execute$ TrigPhaseIn | Static$ True | ValidResult$ LE3 | RolledToVisitAttractions$ True | ValidPlayer$ You 
 SVar:TrigPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReset | Static$ True

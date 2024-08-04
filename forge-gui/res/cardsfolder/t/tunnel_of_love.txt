@@ -4,8 +4,7 @@ Types:Artifact Attraction
 Variant:A:Lights:2 6
 Variant:B:Lights:3 6
 K:Visit:TrigChoose
-SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse | SubAbility$ DBChoose | SpellDescription$ Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners’ control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
-SVar:DBChoose:DB$ ChooseCard | Defined$ ChosenPlayer | Choices$ Creature.ControlledBy ChosenPlayer | Mandatory$ True | Amount$ 1 | SubAbility$ DBChooseYou
+SVar:TrigChoose:DB$ ChooseCard | ValidTgts$ Opponent | Choices$ Creature.TargetedPlayerCtrl | AILogic$ WorstCard | Mandatory$ True | Amount$ 1 | SubAbility$ DBChooseYou | SpellDescription$ Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners’ control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
 SVar:DBChooseYou:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl | Mandatory$ True | Amount$ 1 | SubAbility$ DBGenericChoice
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ DBBlink,DBFight
 SVar:DBBlink:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ You may exile the chosen creatures. If you do, return them to the battlefield under their owners’ control at the beginning of the next end step.
