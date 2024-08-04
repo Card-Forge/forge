@@ -4,7 +4,7 @@ Types:Creature Hellion
 PT:6/5
 Text:CARDNAME has echo X, where X is your life total.
 K:Echo:X
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg | TriggerDescription$ When CARDNAME enters, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
 SVar:TrigDmg:DB$ ChooseNumber | ListTitle$ amount of damage to be dealt | ChooseAnyNumber$ True | SubAbility$ DBDmg | AILogic$ Min
 SVar:DBDmg:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ Y | NoPrevention$ True | DamageMap$ True | SubAbility$ DmgYou
 SVar:DmgYou:DB$ DealDamage | Defined$ You | NumDmg$ Y | NoPrevention$ True | SubAbility$ DmgResolve
@@ -12,4 +12,4 @@ SVar:DmgResolve:DB$ DamageResolve
 SVar:X:Count$YourLifeTotal
 SVar:Y:Count$ChosenNumber
 AI:RemoveDeck:All
-Oracle:Volcano Hellion has echo {X}, where X is your life total. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Volcano Hellion enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
+Oracle:Volcano Hellion has echo {X}, where X is your life total. (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Volcano Hellion enters, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.
