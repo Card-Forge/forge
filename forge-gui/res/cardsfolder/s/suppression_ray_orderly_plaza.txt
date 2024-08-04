@@ -15,6 +15,7 @@ ALTERNATE
 Name:Orderly Plaza
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
-Oracle:Orderly Plaza enters the battlefield tapped.\n{T}: Add {W} or {U}.
+Oracle:Orderly Plaza enters tapped.\n{T}: Add {W} or {U}.
