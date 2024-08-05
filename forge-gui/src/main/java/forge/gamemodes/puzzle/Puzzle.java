@@ -180,7 +180,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                     break;
                 }
                 String trigPlay = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ " + targets + " | " +
-                        "Static$ True | TriggerDescription$ When the specified permanent enters the battlefield, you win the game.";
+                        "Static$ True | TriggerDescription$ When the specified permanent enters, you win the game.";
                 String effPlay = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ GE" + targetCount;
                 final Trigger triggerPlay = TriggerHandler.parseTrigger(trigPlay, goalCard, true);
                 SpellAbility playSA = AbilityFactory.getAbility(effPlay, goalCard);
