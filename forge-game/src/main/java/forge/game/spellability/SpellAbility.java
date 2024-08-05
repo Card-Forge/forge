@@ -127,6 +127,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     private AlternativeCost altCost = null;
+    private Map<Pair<Long, Long>, Integer> keywordAmount = Maps.newHashMap();
 
     private boolean aftermath = false;
 
@@ -1195,6 +1196,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (manaPart != null) {
                 clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
+
+            clone.keywordAmount = Maps.newHashMap(keywordAmount);
 
             // need to copy the damage tables
             if (damageMap != null) {
@@ -2593,5 +2596,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean isCounterableBy(SpellAbility sa) {
         return true;
+    }
+
+    public boolean hasKeywordAmount(KeywordInterface kw) {
+        return this.keywordAmount.containsKey(Pair.of(kw.getIdx(), kw.getStaticId()));
+    }
+    public int getKeywordAmount(KeywordInterface kw) {
+        return this.keywordAmount.getOrDefault(Pair.of(kw.getIdx(), kw.getStaticId()), 0);
+    }
+    public void setKeywordAmount(KeywordInterface kw, int amount) {
+        this.keywordAmount.put(Pair.of(kw.getIdx(), kw.getStaticId()), amount);
     }
 }
