@@ -306,6 +306,13 @@ public class GameAction {
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
+        GameEntityCounterTable table;
+        if (params != null && params.containsKey(AbilityKey.CounterTable)) {
+            table = (GameEntityCounterTable) params.get(AbilityKey.CounterTable);
+        } else {
+            table = new GameEntityCounterTable();
+        }
+
         if (!suppress) {
             // Temporary disable commander replacement effect
             // 903.9a
@@ -341,6 +348,12 @@ public class GameAction {
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
 
+            if (toBattlefield) {
+                repParams.put(AbilityKey.EffectOnly, true);
+                repParams.put(AbilityKey.CounterTable, table);
+                repParams.put(AbilityKey.CounterMap, table.column(copied));
+            }
+
             if (params != null) {
                 repParams.putAll(params);
             }
@@ -355,7 +368,6 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
 
                 if (repres == ReplacementResult.Prevented) {
-                    c.clearEtbCounters();
                     c.clearControllers();
                     if (cause != null) {
                         unanimateOnAbortedChange(cause, c);
@@ -511,8 +523,6 @@ public class GameAction {
             }
         }
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
-
         if (mergedCards != null) {
             // Move components of merged permanent here
             // Also handle 723.3e and 903.9a
@@ -577,10 +587,8 @@ public class GameAction {
         }
 
         // do ETB counters after zone add
-        if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
+        if (!suppress && toBattlefield && !table.isEmpty()) {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
-            copied.putEtbCounters(table);
-            copied.clearEtbCounters();
         }
 
         // update state for view

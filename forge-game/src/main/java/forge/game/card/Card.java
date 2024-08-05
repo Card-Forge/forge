@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Optional;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.GameCommand;
@@ -332,8 +333,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private CardRules cardRules;
     private final CardView view;
-
-    private Table<Player, CounterType, Integer> etbCounters = HashBasedTable.create();
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
@@ -7812,33 +7811,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.savedLastKnownZone = zone;
     }
 
-    /**
-     * ETBCounters are only used between replacementEffects
-     * and when the Card really enters the Battlefield with the counters
-     * @return map of counters
-     */
-    public final void addEtbCounter(CounterType type, Integer val, final Player source) {
-        int old = etbCounters.contains(source, type) ? etbCounters.get(source, type) : 0;
-        etbCounters.put(source, type, old + val);
-    }
-
-    public final void clearEtbCounters() {
-        etbCounters.clear();
-    }
-
-    public final Table<Player, CounterType, Integer> getEtbCounters() {
-        return etbCounters;
-    }
-
-    public final void putEtbCounters(GameEntityCounterTable table) {
-        for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
-            CounterType ct = e.getColumnKey();
-            if (this.isLKI()) {
+    public final void putEtbCounters(Map<Optional<Player>, Map<CounterType, Integer>> etbCounters) {
+        // used for LKI
+        for (Map<CounterType, Integer> m : etbCounters.values()) {
+            for (Map.Entry<CounterType, Integer> e : m.entrySet()) {
+            CounterType ct = e.getKey();
                 if (canReceiveCounters(ct)) {
                     setCounters(ct, getCounters(ct) + e.getValue());
                 }
-            } else {
-                addCounter(ct, e.getValue(), e.getRowKey(), table);
             }
         }
     }
@@ -8074,8 +8054,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         updateState |= clearNewPT();
         updateState |= clearChangedName();
-
-        clearEtbCounters();
 
         return updateState;
     }

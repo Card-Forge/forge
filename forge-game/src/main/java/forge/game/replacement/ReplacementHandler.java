@@ -29,6 +29,7 @@ import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -95,7 +96,9 @@ public class ReplacementHandler {
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
 
             // need to apply Counters to check its future state on the battlefield
-            affectedLKI.putEtbCounters(null);
+            @SuppressWarnings("unchecked")
+            Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
+            affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
@@ -136,7 +139,7 @@ public class ReplacementHandler {
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
                     if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
                             && (layer == null || replacementEffect.getLayer() == layer)
-                            && event.equals(replacementEffect.getMode())
+                            && replacementEffect.modeCheck(event, runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(cardZone)
                             && replacementEffect.requirementsCheck(game)

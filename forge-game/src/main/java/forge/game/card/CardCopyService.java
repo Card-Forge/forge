@@ -339,7 +339,7 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
+        //newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 

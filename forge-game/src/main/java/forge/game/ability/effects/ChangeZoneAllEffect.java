@@ -7,6 +7,7 @@ import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -144,7 +145,9 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(c, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    c.addEtbCounter(cType, cAmount,sa.getActivatingPlayer());
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(sa.getActivatingPlayer(), c, cType, cAmount);
+                    moveParams.put(AbilityKey.CounterTable, table);
                 }
             }
             Card movedCard = null;
