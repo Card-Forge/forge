@@ -1388,6 +1388,10 @@ public class AbilityUtils {
         // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
         if (sa.isReplacementAbility()) {
+            // register all LTB trigger from last state battlefield
+            for (Card lki : sa.getRootAbility().getLastStateBattlefield()) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
             game.getTriggerHandler().collectTriggerForWaiting();
         } else {
             game.getTriggerHandler().resetActiveTriggers();
