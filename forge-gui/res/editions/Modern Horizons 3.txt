@@ -542,6 +542,11 @@ ScryfallCode=MH3
 495 R Powerbalance @Liiga Smilshkalne
 496 R Flusterstorm @Andrew Mar
 
+[rebalanced]
+A29 R A-Guide of Souls @Ryan Valle
+A38 M A-Ocelot Pride @Chris Seaman
+A122 C A-Galvanic Discharge @Zoltan Boros
+
 [new to modern]
 1 Angel of the Ruins|MH3
 1 Decree of Justice|MH3

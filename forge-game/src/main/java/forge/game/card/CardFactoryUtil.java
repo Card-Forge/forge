@@ -657,7 +657,7 @@ public class CardFactoryUtil {
 
         String[] splitkw = parse.split(":");
 
-        String desc = "CARDNAME enters the battlefield with ";
+        String desc = "CARDNAME enters with ";
         desc += Lang.nounWithNumeralExceptOne(splitkw[2], CounterType.getType(splitkw[1]).getName().toLowerCase() + " counter");
         desc += " on it.";
 
@@ -1252,7 +1252,7 @@ public class CardFactoryUtil {
                 + "| TriggerZones$ Battlefield | OptionalDecider$ You "
                 + "| IsPresent$ Card.Self+counters_GE1_P1P1"
                 + "| Secondary$ True | TriggerDescription$ "
-                + "Whenever another creature enters the battlefield, you "
+                + "Whenever another creature enters, you "
                 + "may move a +1/+1 counter from this creature onto it.";
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
@@ -1280,7 +1280,7 @@ public class CardFactoryUtil {
             final StringBuilder sb = new StringBuilder();
             if (card.isCreature()) {
                 sb.append("When ").append(card.getName());
-                sb.append(" enters the battlefield or the creature it haunts dies, ");
+                sb.append(" enters or the creature it haunts dies, ");
             } else {
                 sb.append("When the creature ").append(card.getName());
                 sb.append(" haunts dies, ");
@@ -1784,7 +1784,7 @@ public class CardFactoryUtil {
             final String actualTriggerSelf = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Card.Self | "
                     + "IsPresent$ Creature.Other+YouCtrl+!Paired | Secondary$ True | "
-                    + "TriggerDescription$ When CARDNAME enters the battlefield, "
+                    + "TriggerDescription$ When CARDNAME enters, "
                     + "you may pair CARDNAME with another unpaired creature you control";
             final String abStringSelf = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Other+YouCtrl+!Paired";
             final Trigger parsedTriggerSelf = TriggerHandler.parseTrigger(actualTriggerSelf, card, intrinsic);
@@ -1794,7 +1794,7 @@ public class CardFactoryUtil {
             final String actualTriggerOther = "Mode$ ChangesZone | Destination$ Battlefield | "
                     + "ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | "
                     + " IsPresent$ Creature.Self+!Paired | Secondary$ True | "
-                    + " TriggerDescription$ When another unpaired creature you control enters the battlefield, "
+                    + " TriggerDescription$ When another unpaired creature you control enters, "
                     + "you may pair it with CARDNAME";
             final String abStringOther = "DB$ Bond | Defined$ TriggeredCardLKICopy | ValidCards$ Creature.Self+!Paired";
             final Trigger parsedTriggerOther = TriggerHandler.parseTrigger(actualTriggerOther, card, intrinsic);
@@ -1819,7 +1819,7 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Squad")) {
             final String trigScript = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | " +
                     "ValidCard$ Card.Self+linkedCastSA | CheckSVar$ SquadAmount | Secondary$ True | " +
-                    "TriggerDescription$ When this creature enters the battlefield, create that many tokens that " +
+                    "TriggerDescription$ When this creature enters, create that many tokens that " +
                     "are copies of it.";
             final String abString = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ SquadAmount";
 
@@ -2160,7 +2160,7 @@ public class CardFactoryUtil {
 
             String desc;
             if (numCounters.equals("X")) {
-                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, "
+                desc = "Bloodthirst X (This creature enters with X +1/+1 counters on it, "
                         + "where X is the damage dealt to your opponents this turn.)";
             } else {
                 desc = "Bloodthirst " + numCounters + " (" + inst.getReminderText() + ")";
@@ -2208,8 +2208,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Compleated")) {
-            String sb = "etbCounter:LOYALTY:PhySpent:CheckSVar$ PhySpent | SVarCompare$ LT0:This planeswalker" +
-                    " enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for";
+            String sb = "etbCounter:LOYALTY:PhySpent:CheckSVar$ PhySpent | SVarCompare$ LT0:Compleated (" + inst.getReminderText() + ")";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
             card.setSVar("PhySpent", "Count$EachPhyrexianPaidWithLife/Negative");
 
@@ -2239,7 +2238,7 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Daybound")) {
-            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | ReplacementResult$ Updated | Description$ If it is night, this permanent enters the battlefield transformed.";
+            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | ReplacementResult$ Updated | Description$ If it is night, this permanent enters transformed.";
             final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, host, intrinsic, card);
@@ -2612,17 +2611,6 @@ public class CardFactoryUtil {
             rep += " | Secondary$ True | Description$ " + keyword;
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(rep, host, intrinsic, card);
-            inst.addReplacement(re);
-        }
-
-        if (keyword.equals("CARDNAME enters the battlefield tapped.")) {
-            String effect = "DB$ Tap | Defined$ Self | ETB$ True "
-                + " | SpellDescription$ CARDNAME enters the battlefield tapped.";
-
-            final ReplacementEffect re = createETBReplacement(
-                card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self", ""
-            );
-
             inst.addReplacement(re);
         }
 
@@ -4111,7 +4099,7 @@ public class CardFactoryUtil {
     public static void setupSiegeAbilities(Card card) {
         StringBuilder chooseSB = new StringBuilder();
         chooseSB.append("Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated");
-        chooseSB.append(" | Description$ (As a Siege enters the battlefield, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
+        chooseSB.append(" | Description$ (As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)");
         String chooseProtector = "DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | Protect$ True | ChoiceTitle$ Choose an opponent to protect this battle";
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(chooseSB.toString(), card, true);

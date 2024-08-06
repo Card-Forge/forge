@@ -401,7 +401,10 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("WithCounter")) {
                                     final int numCtr = AbilityUtils.calculateAmount(host,
                                             sa.getParamOrDefault("WithCounterNum", "1"), sa);
-                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, activator);
+
+                                    GameEntityCounterTable table = new GameEntityCounterTable();
+                                    table.put(activator, c, CounterType.getType(sa.getParam("WithCounter")), numCtr);
+                                    moveParams.put(AbilityKey.CounterTable, table);
                                 }
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {

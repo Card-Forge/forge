@@ -178,9 +178,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
             
             for (final Card c : cards) {
                 if (wCounter && battlefield) {
-                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), 
-                        AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), 
-                        sa), player);
+                    int numCtr = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(player, c, CounterType.getType(sa.getParam("WithCounter")), numCtr);
+                    moveParams.put(AbilityKey.CounterTable, table);
                 }        
                 if (attach) {
                     for (Card a : attachList) {
