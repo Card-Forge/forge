@@ -7812,6 +7812,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void putEtbCounters(Map<Optional<Player>, Map<CounterType, Integer>> etbCounters) {
+        if (etbCounters == null) {
+            return;
+        }
         // used for LKI
         for (Map<CounterType, Integer> m : etbCounters.values()) {
             for (Map.Entry<CounterType, Integer> e : m.entrySet()) {
