@@ -746,6 +746,15 @@ public class CardFactory {
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
+            if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "_" + set));
+            }
+
+            
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());

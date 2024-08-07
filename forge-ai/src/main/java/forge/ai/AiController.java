@@ -529,6 +529,12 @@ public class AiController {
                 repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
                 repParams.put(AbilityKey.Source, land);
 
+                // add Params for AddCounter Replacements
+                GameEntityCounterTable table = new GameEntityCounterTable();
+                repParams.put(AbilityKey.EffectOnly, true);
+                repParams.put(AbilityKey.CounterTable, table);
+                repParams.put(AbilityKey.CounterMap, table.column(land));
+                
                 boolean foundTapped = false;
                 for (ReplacementEffect re : player.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.Other)) {
                     SpellAbility reSA = re.ensureAbility();
