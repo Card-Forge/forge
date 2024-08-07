@@ -877,7 +877,7 @@ public final class GameActionUtil {
             return;
         }
 
-        if (fromZone != null) { // and not a copy
+        if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 
