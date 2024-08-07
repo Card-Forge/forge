@@ -5,15 +5,23 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
+      fail-fast: true
       matrix:
-        java: [ '8', '11' ]
-    name: Test with Java ${{ matrix.Java }}
+        java: ['8', '11']
+        experimental: [false]
+        include:
+          - java: '17'
+            experimental: true
+          - java: '21'
+            experimental: true
+    name: Test with Java ${{ matrix.java }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
