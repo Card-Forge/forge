@@ -1,0 +1,11 @@
+Name:Hound of Urabrask
+ManaCost:3 R R
+Types:Creature Phyrexian
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_EQ0_OIL | TriggerZones$ Battlefield | Execute$ DBReturn | TriggerDescription$ Oildying (When this creature dies, if it had no oil counters on it, return it to the battlefield under its owner's control with an oil counter on it.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ OIL
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each oil counter on it.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_OIL | AddKeyword$ Double Strike | Description$ As long as CARDNAME has an oil counter on it, it has double strike.
+SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters
+Oracle:Oildying (When this creature dies, if it had no oil counters on it, return it to the battlefield under its owner's control with an oil counter on it.)\nHound of Urabrask gets +1/+1 for each oil counter on it.\nAs long as Hound of Urabrask has an oil counter on it, it has double strike.

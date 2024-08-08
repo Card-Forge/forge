@@ -1,0 +1,10 @@
+Name:More of That Strange Oil...
+ManaCost:2 U
+Types:Instant
+A:SP$ Charm | Choices$ DBProliferate,DBCounter
+SVar:DBProliferate:DB$ Proliferate | SubAbility$ DBDraw | SpellDescription$ It's Probably Nothing — Proliferate. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBCounter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature, artifact, or planeswalker spell | ValidTgts$ Creature,Artifact,Planeswalker | SubAbility$ DBScry | SpellDescription$ That Could Actually Be Dangerous — Counter target creature, artifact, or planeswalker spell. Scry 1.
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+DeckHas:Ability$Proliferate
+Oracle:Choose one —\n• It's Probably Nothing — Proliferate. Draw a card.\n• That Could Actually Be Dangerous — Counter target creature, artifact, or planeswalker spell. Scry 1.
