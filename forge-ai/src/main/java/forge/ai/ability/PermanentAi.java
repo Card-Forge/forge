@@ -154,11 +154,11 @@ public class PermanentAi extends SpellAbilityAi {
         }
 
         if (sa.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = sa.getMultiKickerManaCost();
+            //ManaCost mkCost = sa.getMultiKickerManaCost();
             ManaCost mCost = sa.getPayCosts().getTotalMana();
             boolean isZeroCost = mCost.isZero();
             for (int i = 0; i < 10; i++) {
-                mCost = ManaCost.combine(mCost, mkCost);
+                //mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
                 if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai, false)) {
                     //source.setKickerMagnitude(i);
