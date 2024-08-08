@@ -572,14 +572,6 @@ public class HumanPlay {
             toPay.setXManaCostPaid(ability.getXManaCostPaid(), xColor);
         }
 
-        int timesMultikicked = source.getKickerMagnitude();
-        if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = ability.getMultiKickerManaCost();
-            for (int i = 0; i < timesMultikicked; i++) {
-                toPay.addManaCost(mkCost);
-            }
-        }
-
         CardCollection cardsToDelve = new CardCollection();
         if (!effect) {
             CostAdjustment.adjust(toPay, ability, cardsToDelve, false);

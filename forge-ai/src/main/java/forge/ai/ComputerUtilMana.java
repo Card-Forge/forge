@@ -1312,10 +1312,6 @@ public class ComputerUtilMana {
 
         int timesMultikicked = card.getKickerMagnitude();
         if (timesMultikicked > 0 && sa.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = sa.getMultiKickerManaCost();
-            for (int i = 0; i < timesMultikicked; i++) {
-                cost.addManaCost(mkCost);
-            }
             sa.setSVar("Multikicker", String.valueOf(timesMultikicked));
         }
 

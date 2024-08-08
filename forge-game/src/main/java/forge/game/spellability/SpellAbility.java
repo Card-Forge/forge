@@ -31,7 +31,6 @@ import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
-import forge.card.mana.ManaCost;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.Game;
@@ -110,7 +109,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Pair<Long, Player> controlledByPlayer;
 
     private ManaCostBeingPaid manaCostBeingPaid;
-    private ManaCost multiKickerManaCost;
     private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
@@ -455,13 +453,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     // all Spell's and Abilities must override this method
     public abstract void resolve();
-
-    public ManaCost getMultiKickerManaCost() {
-        return multiKickerManaCost;
-    }
-    public void setMultiKickerManaCost(final ManaCost cost) {
-        multiKickerManaCost = cost;
-    }
 
     public Player getActivatingPlayer() {
         return activatingPlayer;
