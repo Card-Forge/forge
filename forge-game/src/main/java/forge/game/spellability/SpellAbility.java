@@ -2611,6 +2611,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getOptionalKeywordAmount(KeywordInterface kw) {
         return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId())), 0);
     }
+    public int getOptionalKeywordAmount(Keyword kw) {
+        return this.optionalKeywordAmount.row(kw).values().stream().mapToInt(i->i).sum();
+    }
     public void setOptionalKeywordAmount(KeywordInterface kw, int amount) {
         this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()), amount);
     }

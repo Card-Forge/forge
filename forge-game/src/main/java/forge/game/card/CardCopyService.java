@@ -379,8 +379,6 @@ public class CardCopyService {
             newCopy.updateKeywordsCache(newCopy.getState(s));
         }
 
-        newCopy.setKickerMagnitude(copyFrom.getKickerMagnitude());
-
         if (copyFrom.getCastSA() != null) {
             SpellAbility castSA = copyFrom.getCastSA().copy(newCopy, true);
             castSA.setLastStateBattlefield(CardCollection.EMPTY);

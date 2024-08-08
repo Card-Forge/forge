@@ -161,11 +161,11 @@ public class PermanentAi extends SpellAbilityAi {
                 mCost = ManaCost.combine(mCost, mkCost);
                 ManaCostBeingPaid mcbp = new ManaCostBeingPaid(mCost);
                 if (!ComputerUtilMana.canPayManaCost(mcbp, sa, ai, false)) {
-                    source.setKickerMagnitude(i);
+                    //source.setKickerMagnitude(i);
                     sa.setSVar("Multikicker", String.valueOf(i));
                     break;
                 }
-                source.setKickerMagnitude(i + 1);
+                //source.setKickerMagnitude(i + 1);
             }
             if (isZeroCost && source.getKickerMagnitude() == 0) {
                 // Bail if the card cost was {0} and no multikicker was paid (e.g. Everflowing Chalice).
