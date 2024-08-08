@@ -127,7 +127,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private List<Object> triggerRemembered = Lists.newArrayList();
 
     private AlternativeCost altCost = null;
-    private Map<Pair<Long, Long>, Integer> keywordAmount = Maps.newHashMap();
+    private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
+    private Table<Keyword, Pair<Long, Long>, Integer> optionalKeywordAmount = HashBasedTable.create();
 
     private boolean aftermath = false;
 
@@ -167,7 +168,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private boolean isCastFromPlayEffect = false;
 
-    private EnumSet<OptionalCost> optionalCosts = EnumSet.noneOf(OptionalCost.class);
     private TargetRestrictions targetRestrictions;
     private TargetChoices targetChosen = new TargetChoices();
 
@@ -1197,7 +1197,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.manaPart = new AbilityManaPart(clone, mapParams);
             }
 
-            clone.keywordAmount = Maps.newHashMap(keywordAmount);
+            clone.optionalKeywordAmount = HashBasedTable.create(optionalKeywordAmount);
 
             // need to copy the damage tables
             if (damageMap != null) {
@@ -2598,13 +2598,20 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return true;
     }
 
-    public boolean hasKeywordAmount(KeywordInterface kw) {
-        return this.keywordAmount.containsKey(Pair.of(kw.getIdx(), kw.getStaticId()));
+    public boolean hasOptionalKeywordAmount(KeywordInterface kw) {
+        return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()));
     }
-    public int getKeywordAmount(KeywordInterface kw) {
-        return this.keywordAmount.getOrDefault(Pair.of(kw.getIdx(), kw.getStaticId()), 0);
+    public boolean hasOptionalKeywordAmount(Keyword kw) {
+        return this.optionalKeywordAmount.containsRow(kw);
     }
-    public void setKeywordAmount(KeywordInterface kw, int amount) {
-        this.keywordAmount.put(Pair.of(kw.getIdx(), kw.getStaticId()), amount);
+    public Set<Keyword> getOptionalKeywords() {
+        return this.optionalKeywordAmount.rowKeySet();
+    }
+
+    public int getOptionalKeywordAmount(KeywordInterface kw) {
+        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId())), 0);
+    }
+    public void setOptionalKeywordAmount(KeywordInterface kw, int amount) {
+        this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()), amount);
     }
 }

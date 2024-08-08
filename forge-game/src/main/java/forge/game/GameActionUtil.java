@@ -588,7 +588,7 @@ public final class GameActionUtil {
                     }
                     result.getPayCosts().add(cost);
                     reset = true;
-                    result.setKeywordAmount(ki, Integer.valueOf(n));
+                    result.setOptionalKeywordAmount(ki, Integer.valueOf(n));
                 }
             } else if (o.equals("Conspire")) {
                 final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
@@ -601,7 +601,7 @@ public final class GameActionUtil {
                         result = sa.copy();
                     }
                     result.getPayCosts().add(cost);
-                    result.setKeywordAmount(ki, 1);
+                    result.setOptionalKeywordAmount(ki, 1);
                     reset = true;
                 }
             } else if (o.startsWith("Offspring")) {
@@ -617,7 +617,7 @@ public final class GameActionUtil {
                     }
                     result.getPayCosts().add(cost);
                     reset = true;
-                    result.setKeywordAmount(ki, 1);
+                    result.setOptionalKeywordAmount(ki, 1);
                 }
             } else if (o.startsWith("Replicate")) {
                 String costStr = o.split(":")[1];
@@ -634,7 +634,7 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setKeywordAmount(ki, v);
+                result.setOptionalKeywordAmount(ki, v);
             } else if (o.startsWith("Squad")) {
                 String costStr = o.split(":")[1];
                 final Cost cost = new Cost(costStr, false);
@@ -650,7 +650,7 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setKeywordAmount(ki, v);
+                result.setOptionalKeywordAmount(ki, v);
             }
         }
 

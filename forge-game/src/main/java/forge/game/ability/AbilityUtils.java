@@ -1893,12 +1893,12 @@ public class AbilityUtils {
                 }
                 return doXMath(v, expr, c, ctb);
             }
-            if (sq[0].equals("CastSAHasOptKeyword")) {
-                return doXMath(c.getCastSA() != null && c.getCastSA().hasKeywordAmount(ctb.getKeyword()) ? 1 : 0, expr, c, ctb);
+            if (sq[0].equals("hasOptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null && c.getCastSA().hasOptionalKeywordAmount(ctb.getKeyword()) ? 1 : 0, expr, c, ctb);
             }
 
-            if (sq[0].equals("CastSAOptKeyword")) {
-                return doXMath(c.getCastSA() != null ? c.getCastSA().getKeywordAmount(ctb.getKeyword()) : 0, expr, c, ctb);
+            if (sq[0].equals("OptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null ? c.getCastSA().getOptionalKeywordAmount(ctb.getKeyword()) : 0, expr, c, ctb);
             }
 
             // Count$DevotionDual.<color name>.<color name>
