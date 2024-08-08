@@ -109,7 +109,6 @@ public class CardFactory {
         copy.setCopiedPermanent(original);
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-        copy.setKickerMagnitude(original.getKickerMagnitude());
         copy.setPromisedGift(original.getPromisedGift());
 
         if (targetSA.isBestow()) {
