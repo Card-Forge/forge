@@ -38,7 +38,7 @@ public enum PhaseType {
 
     private static final Map<PhaseType, Integer> PHASE_INDEX = initializePhaseIndex();
 
-    private static final Map<PhaseType, Integer> initializePhaseIndex() {
+    private static Map<PhaseType, Integer> initializePhaseIndex() {
         Map<PhaseType, Integer> phaseIndex = Maps.newEnumMap(PhaseType.class);
         phaseIndex.put(UNTAP, 0);
         phaseIndex.put(UPKEEP, 0);

@@ -36,9 +36,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { VSubmenuQuestPrefs.SINGLETON_INSTANCE.focusFirstTextbox(); }
-        });
+        SwingUtilities.invokeLater(VSubmenuQuestPrefs.SINGLETON_INSTANCE::focusFirstTextbox);
     }
 
     /**

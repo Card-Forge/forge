@@ -45,11 +45,11 @@ public enum CCurrentDeck implements ICDoc {
         }
 
         final FileFilter DCK_FILTER = new FileFilter() {
-            @Override public final boolean accept(final File f) {
+            @Override public boolean accept(final File f) {
                 return f.getName().endsWith(DeckStorage.FILE_EXTENSION) || f.isDirectory();
             }
 
-            @Override public final String getDescription() {
+            @Override public String getDescription() {
                 return "Simple Deck File .dck";
             }
         };
@@ -67,43 +67,13 @@ public enum CCurrentDeck implements ICDoc {
     @Override
     @SuppressWarnings("serial")
     public void initialize() {
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                SEditorIO.saveDeck();
-            }
-        });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                exportDeck();
-            }
-        });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                printProxies();
-            }
-        });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                openDeck();
-            }
-        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand((UiCommand) SEditorIO::saveDeck);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand((UiCommand) this::exportDeck);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand((UiCommand) this::printProxies);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand((UiCommand) this::openDeck);
 
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newDeck();
-            }
-        });
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                importDeck();
-            }
-        });
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand((UiCommand) this::newDeck);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setCommand((UiCommand) this::importDeck);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
@@ -138,12 +108,9 @@ public enum CCurrentDeck implements ICDoc {
         if (!SEditorIO.confirmSaveChanges(Singletons.getControl().getCurrentScreen(), true)) { return; }
 
         try {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
-                    VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
-                }
+            SwingUtilities.invokeLater(() -> {
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+                VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().requestFocusInWindow();
             });
         } catch (final Exception ex) {
             //BugReporter.reportException(ex);

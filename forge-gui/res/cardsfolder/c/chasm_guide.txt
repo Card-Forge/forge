@@ -2,9 +2,9 @@ Name:Chasm Guide
 ManaCost:3 R
 Types:Creature Goblin Scout Ally
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally enters the battlefield under your control, creatures you control gain haste until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Ally.Other+YouCtrl | Execute$ TrigPumpAll | TriggerDescription$ Rally — Whenever CARDNAME or another Ally you control enters, creatures you control gain haste until end of turn.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Haste
 SVar:PlayMain1:ALWAYS
 SVar:BuffedBy:Ally
 DeckHints:Type$Ally
-Oracle:Rally — Whenever Chasm Guide or another Ally enters the battlefield under your control, creatures you control gain haste until end of turn.
+Oracle:Rally — Whenever Chasm Guide or another Ally you control enters, creatures you control gain haste until end of turn.

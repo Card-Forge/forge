@@ -41,21 +41,16 @@ public class NewSealedScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
-            @Override
-            public void run() {
-                final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
-                if (sealed == null) { return; }
+        //must run in game thread to prevent blocking UI thread
+        ThreadUtil.invokeInGameThread(() -> {
+            final DeckGroup sealed = SealedCardPoolGenerator.generateSealedDeck(false);
+            if (sealed == null) { return; }
 
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        DeckPreferences.setSealedDeck(sealed.getName());
-                        Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false));
-                        Forge.setBackScreen(new LoadSealedScreen(), false); //ensure pressing back goes to load sealed screen
-                    }
-                });
-            }
+            FThreads.invokeInEdtLater(() -> {
+                DeckPreferences.setSealedDeck(sealed.getName());
+                Forge.openScreen(new FDeckEditor(EditorType.Sealed, sealed.getName(), false));
+                Forge.setBackScreen(new LoadSealedScreen(), false); //ensure pressing back goes to load sealed screen
+            });
         });
     }
 }

@@ -24,7 +24,6 @@ import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
@@ -212,14 +211,6 @@ public final class CardBlock implements Comparable<CardBlock> {
         return this.name + " (block)";
     }
 
-    public static final Function<CardBlock, String> FN_GET_NAME = new Function<CardBlock, String>() {
-
-        @Override
-        public String apply(CardBlock arg1) {
-            return arg1.getName();
-        }
-    };
-
     public static class Reader extends StorageReaderFile<CardBlock> {
 
         private final CardEdition.Collection editions;
@@ -229,7 +220,7 @@ public final class CardBlock implements Comparable<CardBlock> {
          * @param editions0
          */
         public Reader(String pathname, CardEdition.Collection editions0) {
-            super(pathname, CardBlock.FN_GET_NAME);
+            super(pathname, CardBlock::getName);
             editions = editions0;
         }
 

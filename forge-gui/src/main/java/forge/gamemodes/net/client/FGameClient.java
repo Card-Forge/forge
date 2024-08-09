@@ -68,15 +68,13 @@ public class FGameClient implements IToServer {
             // Start the connection attempt.
             channel = b.connect(host, port).sync().channel();
             final ChannelFuture ch = channel.closeFuture();
-            new Thread(new Runnable() {
-                @Override public void run() {
-                    try {
-                        ch.sync();
-                    } catch (final InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        group.shutdownGracefully();
-                    }
+            new Thread(() -> {
+                try {
+                    ch.sync();
+                } catch (final InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    group.shutdownGracefully();
                 }
             }).start();
         } catch (final InterruptedException e) {

@@ -289,15 +289,12 @@ public abstract class GameStage extends Stage {
 
     public GameStage() {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight(), new OrthographicCamera()));
-        WorldSave.getCurrentSave().onLoad(new Runnable() {
-            @Override
-            public void run() {
-                if (player == null)
-                    return;
-                foregroundSprites.removeActor(player);
-                player = null;
-                GameStage.this.getPlayerSprite();
-            }
+        WorldSave.getCurrentSave().onLoad(() -> {
+            if (player == null)
+                return;
+            foregroundSprites.removeActor(player);
+            player = null;
+            GameStage.this.getPlayerSprite();
         });
         camera = (OrthographicCamera) getCamera();
 

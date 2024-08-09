@@ -2,7 +2,7 @@ Name:Nessian Game Warden
 ManaCost:3 G G
 Types:Creature Beast
 PT:4/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top X cards of your library, where X is the number of forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters, look at the top X cards of your library, where X is the number of forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
 SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature
 SVar:X:Count$Valid Forest.YouCtrl
-Oracle:When Nessian Game Warden enters the battlefield, look at the top X cards of your library, where X is the number of Forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+Oracle:When Nessian Game Warden enters, look at the top X cards of your library, where X is the number of Forests you control. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.

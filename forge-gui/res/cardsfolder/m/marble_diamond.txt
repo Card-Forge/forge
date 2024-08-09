@@ -2,5 +2,6 @@ Name:Marble Diamond
 ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-K:CARDNAME enters the battlefield tapped.
-Oracle:Marble Diamond enters the battlefield tapped.\n{T}: Add {W}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Marble Diamond enters tapped.\n{T}: Add {W}.

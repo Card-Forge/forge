@@ -1,7 +1,7 @@
 Name:The Doctor's Childhood Barn
 ManaCost:no cost
 Types:Plane Gallifrey
-R:Event$ Moved | ValidCard$ Creature | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Command | Description$ Creatures enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Creature | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Command | Description$ Creatures enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, for each opponent, choose up to one target nonland permanent that opponent controls. Untap those permanents. They phase out. They can't phase in for as long as CARDNAME remains face up. When a player planeswalks, those permanents phase in.
 SVar:RolledChaos:DB$ Untap | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | TgtPrompt$ Select up to one target nonland permanent each opponent controls | SubAbility$ DBPhase
@@ -11,4 +11,4 @@ SVar:DBEffect:DB$ Effect | Triggers$ TrigPlaneswalk | StaticAbilities$ CantPhase
 SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | IsPresent$ Card.EffectSource+faceUp | PresentZone$ Command | Description$ Those permanents can't phase in for as long as EFFECTSOURCE remains face up. When a player planeswalks, those permanents phase in.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ DBPhaseIn | TriggerZones$ Command | Secondary$ True | TriggerDescription$ When a player planeswalks, those permanents phase in.
 SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True
-Oracle:Creatures enter the battlefield tapped.\nWhenever chaos ensues, for each opponent, choose up to one target nonland permanent that opponent controls. Untap those permanents. They phase out. They can't phase in for as long as The Doctor's Childhood Barn remains face up. When a player planeswalks, those permanents phase in.
+Oracle:Creatures enter tapped.\nWhenever chaos ensues, for each opponent, choose up to one target nonland permanent that opponent controls. Untap those permanents. They phase out. They can't phase in for as long as The Doctor's Childhood Barn remains face up. When a player planeswalks, those permanents phase in.

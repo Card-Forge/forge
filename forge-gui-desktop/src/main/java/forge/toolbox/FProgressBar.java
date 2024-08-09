@@ -38,12 +38,9 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
         SwingUtilities.invokeLater(barIncrementor);
     }
 
-    private final Runnable barIncrementor = new Runnable() {
-        @Override
-        public void run() {
-            setValue(tempVal);
-            tempVal = 0;
-        }
+    private final Runnable barIncrementor = () -> {
+        setValue(tempVal);
+        tempVal = 0;
     };
 
     @Override

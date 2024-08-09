@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.IItemReader;
@@ -39,19 +40,14 @@ public class DeckStorage extends StorageReaderFolder<Deck> implements IItemSeria
     private final boolean moveWronglyNamedDecks;
 
     /** Constant <code>DCKFileFilter</code>. */
-    public static final FilenameFilter DCK_FILE_FILTER = new FilenameFilter() {
-        @Override
-        public boolean accept(final File dir, final String name) {
-            return name.endsWith(FILE_EXTENSION);
-        }
-    };
+    public static final FilenameFilter DCK_FILE_FILTER = (dir, name) -> name.endsWith(FILE_EXTENSION);
 
     public DeckStorage(final File deckDir0, final String rootDir0) {
         this(deckDir0, rootDir0, false);
     }
 
     public DeckStorage(final File deckDir0, final String rootDir0, boolean moveWrongDecks) {
-        super(deckDir0, Deck.FN_NAME_SELECTOR);
+        super(deckDir0, DeckBase::getName);
         rootDir = rootDir0;
         moveWronglyNamedDecks = moveWrongDecks;
     }

@@ -1343,7 +1343,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
-        Collections.sort(sortedList, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+        Collections.sort(sortedList, Entry.comparingByValue());
 
         // loop through sorted list and move each type to the front of the
         // validTypes collection
@@ -1527,7 +1527,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @SuppressWarnings("serial") final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard,
                 player.getZone(ZoneType.Hand).getCards()) {
             @Override
-            protected final boolean allowAwaitNextInput() {
+            protected boolean allowAwaitNextInput() {
                 return true; // prevent Cleanup message getting stuck during
                 // opponent's next turn
             }

@@ -633,20 +633,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         cardName = cardNameRequest.cardName;
         isFoil = isFoil || cardNameRequest.isFoil;
 
-        List<PaperCard> candidates = getAllCards(cardName, new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard c) {
-                boolean artIndexFilter = true;
-                boolean collectorNumberFilter = true;
-                boolean setFilter = c.getEdition().equalsIgnoreCase(edition.getCode()) ||
-                        c.getEdition().equalsIgnoreCase(edition.getCode2());
-                if (artIndex > 0)
-                    artIndexFilter = (c.getArtIndex() == artIndex);
-                if ((collectorNumber != null) && (collectorNumber.length() > 0)
-                        && !(collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)))
-                    collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
-                return setFilter && artIndexFilter && collectorNumberFilter;
-            }
+        List<PaperCard> candidates = getAllCards(cardName, c -> {
+            boolean artIndexFilter = true;
+            boolean collectorNumberFilter = true;
+            boolean setFilter = c.getEdition().equalsIgnoreCase(edition.getCode()) ||
+                    c.getEdition().equalsIgnoreCase(edition.getCode2());
+            if (artIndex > 0)
+                artIndexFilter = (c.getArtIndex() == artIndex);
+            if ((collectorNumber != null) && (collectorNumber.length() > 0)
+                    && !(collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)))
+                collectorNumberFilter = (c.getCollectorNumber().equals(collectorNumber));
+            return setFilter && artIndexFilter && collectorNumberFilter;
         });
         if (candidates.isEmpty())
             return null;
@@ -791,26 +788,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         Predicate<PaperCard> cardQueryFilter;
         filter = (filter != null) ? filter : Predicates.alwaysTrue();
         if (releaseDate != null) {
-            cardQueryFilter = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard c) {
-                    if (c.getArtIndex() != cr.artIndex)
-                        return false;  // not interested anyway!
-                    CardEdition ed = editions.get(c.getEdition());
-                    if (ed == null) return false;
-                    if (releasedBeforeFlag)
-                        return ed.getDate().before(releaseDate);
-                    else
-                        return ed.getDate().after(releaseDate);
-                }
+            cardQueryFilter = c -> {
+                if (c.getArtIndex() != cr.artIndex)
+                    return false;  // not interested anyway!
+                CardEdition ed = editions.get(c.getEdition());
+                if (ed == null) return false;
+                if (releasedBeforeFlag)
+                    return ed.getDate().before(releaseDate);
+                else
+                    return ed.getDate().after(releaseDate);
             };
         } else  // filter candidates based on requested artIndex
-            cardQueryFilter = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard card) {
-                    return card.getArtIndex() == cr.artIndex;
-                }
-            };
+            cardQueryFilter = card -> card.getArtIndex() == cr.artIndex;
         cardQueryFilter = Predicates.and(cardQueryFilter, filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
         // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
@@ -838,12 +827,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;  // nothing to do
 
         // Filter Cards Editions based on set preferences
-        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(CardEdition ed) {
-                return artPref.accept(ed);
-            }
-        }));
+        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, artPref::accept));
 
         /* At this point, it may be possible that Art Preference is too-strict for the requested card!
             i.e. acceptedEditions.size() == 0!
@@ -908,13 +892,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public Collection<PaperCard> getUniqueCardsNoAlt() {
-        return Maps.filterEntries(this.uniqueCardsByName, new Predicate<Entry<String, PaperCard>>() {
-            @Override
-            public boolean apply(Entry<String, PaperCard> e) {
-                if (e == null)
-                    return false;
-                return e.getKey().equals(e.getValue().getName());
-            }
+        return Maps.filterEntries(this.uniqueCardsByName, e -> {
+            if (e == null)
+                return false;
+            return e.getKey().equals(e.getValue().getName());
         }).values();
     }
 
@@ -956,60 +937,46 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public Collection<PaperCard> getAllCardsNoAlt() {
-        return Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
-            @Override
-            public boolean apply(Entry<String, PaperCard> entry) {
-                return entry.getKey().equals(entry.getValue().getName());
-            }
-        }).values();
+        return Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).values();
     }
 
     public Collection<PaperCard> getAllNonPromoCards() {
-        return Lists.newArrayList(Iterables.filter(getAllCards(), new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(final PaperCard paperCard) {
-                CardEdition edition = null;
-                try {
-                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                } catch (Exception ex) {
-                    return false;
-                }
-                return edition != null && edition.getType() != Type.PROMO;
+        return Lists.newArrayList(Iterables.filter(getAllCards(), paperCard -> {
+            CardEdition edition = null;
+            try {
+                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+            } catch (Exception ex) {
+                return false;
             }
+            return edition != null && edition.getType() != Type.PROMO;
         }));
     }
 
     public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
-        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(final PaperCard paperCard) {
-                CardEdition edition = null;
-                try {
-                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
-                        return false;
-                } catch (Exception ex) {
+        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), paperCard -> {
+            CardEdition edition = null;
+            try {
+                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
                     return false;
-                }
-                return true;
+            } catch (Exception ex) {
+                return false;
             }
+            return true;
         }));
     }
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(final PaperCard paperCard) {
-                CardEdition edition = null;
-                try {
-                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                    if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
-                        return false;
-                } catch (Exception ex) {
+        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), paperCard -> {
+            CardEdition edition = null;
+            try {
+                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
                     return false;
-                }
-                return true;
+            } catch (Exception ex) {
+                return false;
             }
+            return true;
         }));
     }
 
@@ -1032,12 +999,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, new Predicate<Entry<String, PaperCard>>() {
-            @Override
-            public boolean apply(Entry<String, PaperCard> entry) {
-                return entry.getKey().equals(entry.getValue().getName());
-            }
-        }).get(getName(cardName)));
+        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getName(cardName)));
     }
 
     /**

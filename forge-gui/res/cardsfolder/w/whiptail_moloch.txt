@@ -2,8 +2,8 @@ Name:Whiptail Moloch
 ManaCost:4 R
 Types:Creature Lizard
 PT:6/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters, it deals 3 damage to target creature you control.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | NumDmg$ 3 | TgtPrompt$ Select target creature you control
 SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:Random
-Oracle:When Whiptail Moloch enters the battlefield, it deals 3 damage to target creature you control.
+Oracle:When Whiptail Moloch enters, it deals 3 damage to target creature you control.

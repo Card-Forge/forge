@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
-K:CARDNAME enters the battlefield tapped.
-Oracle:Timberland Ruins enters the battlefield tapped.\n{T}: Add {G}.\n{T}, Sacrifice Timberland Ruins: Add one mana of any color.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Timberland Ruins enters tapped.\n{T}: Add {G}.\n{T}, Sacrifice Timberland Ruins: Add one mana of any color.

@@ -13,8 +13,6 @@ import forge.gamemodes.planarconquest.ConquestPreferences;
 import forge.gamemodes.planarconquest.ConquestPreferences.CQPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 
@@ -58,21 +56,18 @@ public class ConquestPlaneswalkScreen extends FScreen {
         private PlaneswalkButton() {
             super(new FLabel.Builder().font(FSkinFont.get(20)).parseSymbols().pressedColor(ConquestAEtherScreen.FILTER_BUTTON_PRESSED_COLOR)
                     .textColor(ConquestAEtherScreen.FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
-            setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    ConquestData model = FModel.getConquest().getModel();
-                    ConquestPlane selectedPlane = planeSelector.getSelectedPlane();
-                    if (model.isPlaneUnlocked(selectedPlane)) {
-                        model.planeswalkTo(selectedPlane);
-                        model.saveData();
-                        Forge.back();
-                    }
-                    else if (model.spendPlaneswalkEmblems(unlockCost)) {
-                        model.unlockPlane(selectedPlane);
-                        model.saveData();
-                        updateCaption();
-                    }
+            setCommand(e -> {
+                ConquestData model = FModel.getConquest().getModel();
+                ConquestPlane selectedPlane = planeSelector.getSelectedPlane();
+                if (model.isPlaneUnlocked(selectedPlane)) {
+                    model.planeswalkTo(selectedPlane);
+                    model.saveData();
+                    Forge.back();
+                }
+                else if (model.spendPlaneswalkEmblems(unlockCost)) {
+                    model.unlockPlane(selectedPlane);
+                    model.saveData();
+                    updateCaption();
                 }
             });
         }

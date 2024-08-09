@@ -2,5 +2,6 @@ Name:Moss Diamond
 ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-K:CARDNAME enters the battlefield tapped.
-Oracle:Moss Diamond enters the battlefield tapped.\n{T}: Add {G}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Moss Diamond enters tapped.\n{T}: Add {G}.

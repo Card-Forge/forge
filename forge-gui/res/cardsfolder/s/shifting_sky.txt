@@ -2,8 +2,8 @@ Name:Shifting Sky
 ManaCost:2 U
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentKeywordInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentKeywordInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color.
 S:Mode$ Continuous | Affected$ Permanent.nonLand | SetColor$ ChosenColor | Description$ All nonland permanents are the chosen color.
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-Oracle:As Shifting Sky enters the battlefield, choose a color.\nAll nonland permanents are the chosen color.
+Oracle:As Shifting Sky enters, choose a color.\nAll nonland permanents are the chosen color.

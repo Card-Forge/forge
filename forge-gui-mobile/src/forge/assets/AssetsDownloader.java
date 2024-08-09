@@ -162,12 +162,9 @@ public class AssetsDownloader {
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
 
         //reload light version of skin after assets updated
-        FThreads.invokeInEdtAndWait(new Runnable() {
-            @Override
-            public void run() {
-                FSkinFont.updateAll(); //update all fonts used by splash screen
-                FSkin.loadLight(FSkin.getName(), splashScreen);
-            }
+        FThreads.invokeInEdtAndWait(() -> {
+            FSkinFont.updateAll(); //update all fonts used by splash screen
+            FSkin.loadLight(FSkin.getName(), splashScreen);
         });
 
         //save version string to file once assets finish downloading

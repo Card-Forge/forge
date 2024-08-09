@@ -1,7 +1,8 @@
 Name:Memorial to Glory
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Token | Cost$ 3 W T Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | SpellDescription$ Create two 1/1 white Soldier creature tokens.
-Oracle:Memorial to Glory enters the battlefield tapped.\n{T}: Add {W}.\n{3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.
+Oracle:Memorial to Glory enters tapped.\n{T}: Add {W}.\n{3}{W}, {T}, Sacrifice Memorial to Glory: Create two 1/1 white Soldier creature tokens.

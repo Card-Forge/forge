@@ -2,9 +2,9 @@ Name:Ovinomancer
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:0/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters, sacrifice it unless you return three basic lands you control to their owner's hand.
 A:AB$ Destroy | Cost$ Return<1/CARDNAME> T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. It can't be regenerated.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_sheep | TokenOwner$ TargetedController
 SVar:TrigBounce:DB$ Sacrifice | UnlessCost$ Return<3/Land.Basic> | UnlessPayer$ You
 AI:RemoveDeck:All
-Oracle:When Ovinomancer enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.\n{T}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller creates a 0/1 green Sheep creature token.
+Oracle:When Ovinomancer enters, sacrifice it unless you return three basic lands you control to their owner's hand.\n{T}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller creates a 0/1 green Sheep creature token.

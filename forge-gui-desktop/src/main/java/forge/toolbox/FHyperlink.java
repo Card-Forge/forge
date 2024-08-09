@@ -47,24 +47,21 @@ public class FHyperlink extends FLabel {
             }
 
             // overwrite whatever command is there -- we could chain them if we wanted to, though
-            cmdClick(new UiCommand() {
-                @Override
-                public void run() {
-                    if (browsingSupported) {
-                        // open link in default browser
-                        new _LinkRunner(uri).execute();
+            cmdClick((UiCommand) () -> {
+                if (browsingSupported) {
+                    // open link in default browser
+                    new _LinkRunner(uri).execute();
+                }
+                else {
+                    // copy link to clipboard
+                    final StringSelection ss = new StringSelection(bldUrl);
+                    try {
+                        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
                     }
-                    else {
-                        // copy link to clipboard
-                        final StringSelection ss = new StringSelection(bldUrl);
-                        try {
-                            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-                        }
-                        catch (final IllegalStateException ex) {
-                            FOptionPane.showErrorDialog(
-                                    "Sorry, a problem occurred while copying this link to your system clipboard.",
-                                    "A problem occurred");
-                        }
+                    catch (final IllegalStateException ex) {
+                        FOptionPane.showErrorDialog(
+                                "Sorry, a problem occurred while copying this link to your system clipboard.",
+                                "A problem occurred");
                     }
                 }
             });

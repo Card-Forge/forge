@@ -1,8 +1,9 @@
 Name:Empowered Autogenerator
 ManaCost:4
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SubAbility$ DBMana | SpellDescription$ Put a charge counter on CARDNAME. Add X mana of any one color, where X is the number of charge counters on CARDNAME.
 SVar:DBMana:DB$ Mana | Produced$ Any | Amount$ X
 SVar:X:Count$CardCounters.CHARGE
-Oracle:Empowered Autogenerator enters the battlefield tapped.\n{T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.
+Oracle:Empowered Autogenerator enters tapped.\n{T}: Put a charge counter on Empowered Autogenerator. Add X mana of any one color, where X is the number of charge counters on Empowered Autogenerator.

@@ -45,18 +45,18 @@ Name:Viconia, Disciple of Blood
 ManaCost:1 B B
 Types:Legendary Creature Elf Cleric
 PT:3/4
-T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature specializes, conjure a duplicate of target creature card exiled with this creature into your hand. The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters the battlefield, each opponent loses 2 life and you gain 2 life."
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature specializes, conjure a duplicate of target creature card exiled with this creature into your hand. The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters, each opponent loses 2 life and you gain 2 life."
 SVar:TrigConjure:DB$ MakeCard | TgtPrompt$ Select target creature card exiled with this creature | ValidTgts$ Creature.ExiledWithSource | TgtZone$ Exile | Conjure$ True | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Viconia, Disciple of Blood's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | AddTrigger$ ETB | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters the battlefield, each opponent loses 2 life and you gain 2 life."
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | AddTrigger$ ETB | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters, each opponent loses 2 life and you gain 2 life."
 SVar:SpendAnyMana:Mode$ ManaConvert | EffectZone$ Stack | ValidPlayer$ You | ValidCard$ Card.Self | ValidSA$ Spell | ManaConversion$ AnyType->AnyColor | Description$ You may spend mana as though it were mana of any color to cast this spell.
-SVar:ETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this creature enters the battlefield, each opponent loses 2 life and you gain 2 life.
+SVar:ETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this creature enters, each opponent loses 2 life and you gain 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ ChangeZone | Cost$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile target card from a graveyard.
 DeckHas:Ability$LifeGain
-Oracle:When this creature specializes, conjure a duplicate of target creature card exiled with this creature into your hand. The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters the battlefield, each opponent loses 2 life and you gain 2 life."\n{1}: Exile target card from a graveyard.
+Oracle:When this creature specializes, conjure a duplicate of target creature card exiled with this creature into your hand. The duplicate perpetually gains "You may spend mana as though it were mana of any color to cast this spell" and "When this creature enters, each opponent loses 2 life and you gain 2 life."\n{1}: Exile target card from a graveyard.
 
 SPECIALIZE:RED
 

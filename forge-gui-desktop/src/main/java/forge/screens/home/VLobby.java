@@ -1,7 +1,6 @@
 package forge.screens.home;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.ImmutableList;
@@ -184,16 +182,13 @@ public class VLobby implements ILobbyView {
             pnlStart.setOpaque(false);
             pnlStart.add(btnStart, "align center");
             // Start button event handling
-            btnStart.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent arg0) {
-                    Runnable startGame = lobby.startGame();
-                    if (startGame != null) {
-                        if (!gamesInMatch.getSelectedItem().equals(ForgePreferences.FPref.UI_MATCHES_PER_GAME)) {
-                            FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, (String) gamesInMatch.getSelectedItem());
-                        }
-                        startGame.run();
+            btnStart.addActionListener(arg0 -> {
+                Runnable startGame = lobby.startGame();
+                if (startGame != null) {
+                    if (!gamesInMatch.getSelectedItem().equals(FPref.UI_MATCHES_PER_GAME)) {
+                        FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, (String) gamesInMatch.getSelectedItem());
                     }
+                    startGame.run();
                 }
             });
         }
@@ -394,25 +389,13 @@ public class VLobby implements ILobbyView {
     @SuppressWarnings("serial")
     private void buildDeckPanels(final int playerIndex) {
         // Scheme deck list
-        buildDeckPanel(localizer.getMessage("lblSchemeDeck"), playerIndex, schemeDeckLists, schemeDeckPanels, new ListSelectionListener() {
-            @Override public final void valueChanged(final ListSelectionEvent e) {
-                selectSchemeDeck(playerIndex);
-            }
-        });
+        buildDeckPanel(localizer.getMessage("lblSchemeDeck"), playerIndex, schemeDeckLists, schemeDeckPanels, e -> selectSchemeDeck(playerIndex));
 
         // Planar deck list
-        buildDeckPanel(localizer.getMessage("lblPlanarDeck"), playerIndex, planarDeckLists, planarDeckPanels, new ListSelectionListener() {
-            @Override public final void valueChanged(final ListSelectionEvent e) {
-                selectPlanarDeck(playerIndex);
-            }
-        });
+        buildDeckPanel(localizer.getMessage("lblPlanarDeck"), playerIndex, planarDeckLists, planarDeckPanels, e -> selectPlanarDeck(playerIndex));
 
         // Vanguard avatar list
-        buildDeckPanel(localizer.getMessage("lblVanguardAvatar"), playerIndex, vgdAvatarLists, vgdPanels, new ListSelectionListener() {
-            @Override public final void valueChanged(final ListSelectionEvent e) {
-                selectVanguardAvatar(playerIndex);
-            }
-        });
+        buildDeckPanel(localizer.getMessage("lblVanguardAvatar"), playerIndex, vgdAvatarLists, vgdPanels, e -> selectVanguardAvatar(playerIndex));
         Iterables.getLast(vgdAvatarLists).setListData(isPlayerAI(playerIndex) ? aiListData : humanListData);
         Iterables.getLast(vgdAvatarLists).setSelectedIndex(0);
         final CardDetailPanel vgdDetail = new CardDetailPanel();
@@ -454,7 +437,7 @@ public class VLobby implements ILobbyView {
         }
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
+            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
             if (isCommanderDeck) {
                 getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
             } else {
@@ -826,12 +809,9 @@ public class VLobby implements ILobbyView {
         });
     }
 
-    final ActionListener nameListener = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            final FTextField nField = (FTextField)e.getSource();
-            nField.transferFocus();
-        }
+    final ActionListener nameListener = e -> {
+        final FTextField nField = (FTextField)e.getSource();
+        nField.transferFocus();
     };
 
     /////////////////////////////////////

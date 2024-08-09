@@ -318,12 +318,7 @@ public class CardPool extends ItemPool<PaperCard> {
         ListMultimap<Integer, CardEdition> editionsStatistics = this.getCardEditionsGroupedByNumberOfCards(false);
         List<Integer> frequencyValues = new ArrayList<>(editionsStatistics.keySet());
         // Sort in descending order
-        frequencyValues.sort(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer f1, Integer f2) {
-                return (f1.compareTo(f2)) * -1;
-            }
-        });
+        frequencyValues.sort(Comparator.reverseOrder());
         float weightedMean = 0;
         int sumWeights = 0;
         for (Integer freq : frequencyValues) {
@@ -351,12 +346,7 @@ public class CardPool extends ItemPool<PaperCard> {
         // Now Get editions corresponding to pivot frequency
         List<CardEdition> pivotCandidates = new ArrayList<>(editionsStatistics.get(pivotFrequency));
         // Now Sort candidates chronologically
-        pivotCandidates.sort(new Comparator<CardEdition>() {
-            @Override
-            public int compare(CardEdition ed1, CardEdition ed2) {
-                return ed1.compareTo(ed2);
-            }
-        });
+        pivotCandidates.sort(CardEdition::compareTo);
         boolean searchPolicyAndPoolAreCompliant = isLatestCardArtPreference == this.isModern();
         if (!searchPolicyAndPoolAreCompliant)
             Collections.reverse(pivotCandidates);  // reverse to have latest-first.

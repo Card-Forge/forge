@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigLoseLife | TriggerDe
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 K:Equip:2
 SVar:PlayMain1:TRUE
-Oracle:Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1.\nWhenever equipped creature attacks, each opponent loses 1 life.\nEquip {2}
+Oracle:Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +1/+1.\nWhenever equipped creature attacks, each opponent loses 1 life.\nEquip {2}

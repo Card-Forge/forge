@@ -1,5 +1,6 @@
 Name:Geothermal Bog
 ManaCost:no cost
 Types:Land Swamp Mountain
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {B} or {R}.)\nGeothermal Bog enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:({T}: Add {B} or {R}.)\nGeothermal Bog enters tapped.

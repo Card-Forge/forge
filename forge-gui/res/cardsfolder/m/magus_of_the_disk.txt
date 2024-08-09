@@ -2,6 +2,7 @@ Name:Magus of the Disk
 ManaCost:2 W W
 Types:Creature Human Wizard
 PT:2/4
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
-Oracle:Magus of the Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
+Oracle:Magus of the Disk enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.

@@ -2,10 +2,10 @@ Name:Null Chamber
 ManaCost:3 W
 Types:World Enchantment
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | ValidCards$ Card.nonBasic | ValidDescription$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, you and an opponent each choose a card name other than a basic land card name.
+SVar:DBNameCard:DB$ NameCard | ValidCards$ Card.nonBasic | ValidDescription$ card other than a basic land | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters, you and an opponent each choose a card name other than a basic land card name.
 SVar:ChooseP:DB$ ChoosePlayer | Choices$ Opponent | SubAbility$ NameOpp
 SVar:NameOpp:DB$ NameCard | Defined$ ChosenPlayer | ValidCards$ Card.nonBasic | ValidDescription$ a card name other than a basic land card name
 S:Mode$ CantBeCast | ValidCard$ Card.NamedCard | Description$ Spells with the chosen names can't be cast and lands with the chosen names can't be played.
 S:Mode$ CantPlayLand | ValidCard$ Land.NamedCard
 AI:RemoveDeck:Random
-Oracle:As Null Chamber enters the battlefield, you and an opponent each choose a card name other than a basic land card name.\nSpells with the chosen names can't be cast and lands with the chosen names can't be played.
+Oracle:As Null Chamber enters, you and an opponent each choose a card name other than a basic land card name.\nSpells with the chosen names can't be cast and lands with the chosen names can't be played.

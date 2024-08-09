@@ -2,7 +2,7 @@ Name:Venerated Teacher
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters the battlefield, put two level counters on each creature you control with level up.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters, put two level counters on each creature you control with level up.
 SVar:TrigPut:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+withLevel up | CounterType$ LEVEL | CounterNum$ 2
 AI:RemoveDeck:Random
-Oracle:When Venerated Teacher enters the battlefield, put two level counters on each creature you control with level up.
+Oracle:When Venerated Teacher enters, put two level counters on each creature you control with level up.

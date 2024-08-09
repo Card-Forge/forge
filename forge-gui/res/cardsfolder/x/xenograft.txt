@@ -2,8 +2,8 @@ Name:Xenograft
 ManaCost:4 U
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ ChosenType | Description$ Each creature you control is the chosen type in addition to its other types.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:As Xenograft enters the battlefield, choose a creature type.\nEach creature you control is the chosen type in addition to its other types.
+Oracle:As Xenograft enters, choose a creature type.\nEach creature you control is the chosen type in addition to its other types.

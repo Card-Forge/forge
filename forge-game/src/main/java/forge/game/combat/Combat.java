@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.base.Function;
 import com.google.common.collect.*;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -225,12 +224,7 @@ public class Combat {
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
-        return Maps.asMap(getAttackers().asSet(), new Function<Card, GameEntity>() {
-            @Override
-            public GameEntity apply(final Card attacker) {
-                return getDefenderByAttacker(attacker);
-            }
-        });
+        return Maps.asMap(getAttackers().asSet(), this::getDefenderByAttacker);
     }
 
     public final List<AttackingBand> getAttackingBandsOf(GameEntity defender) {
@@ -690,7 +684,7 @@ public class Combat {
         }
     }
 
-    private final boolean assignBlockersDamage(boolean firstStrikeDamage) {
+    private boolean assignBlockersDamage(boolean firstStrikeDamage) {
         // Assign damage by Blockers
         final CardCollection blockers = getAllBlockers();
         boolean assignedDamage = false;
@@ -746,7 +740,7 @@ public class Combat {
         return assignedDamage;
     }
 
-    private final boolean assignAttackersDamage(boolean firstStrikeDamage) {
+    private boolean assignAttackersDamage(boolean firstStrikeDamage) {
         // Assign damage by Attackers
         CardCollection orderedBlockers = null;
         final CardCollection attackers = getAttackers();
@@ -886,7 +880,7 @@ public class Combat {
         return assignedDamage;
     }
 
-    private final boolean dealDamageThisPhase(Card combatant, boolean firstStrikeDamage) {
+    private boolean dealDamageThisPhase(Card combatant, boolean firstStrikeDamage) {
         // During first strike damage, double strike and first strike deal damage
         // During regular strike damage, double strike and anyone who hasn't dealt damage deal damage
         if (combatant.hasDoubleStrike()) {

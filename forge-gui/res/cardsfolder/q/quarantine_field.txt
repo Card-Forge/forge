@@ -3,9 +3,9 @@ ManaCost:X X W W
 Types:Enchantment
 K:etbCounter:ISOLATION:X
 SVar:X:Count$xPaid
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TargetMin$ 0 | TargetMax$ Y | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
 SVar:Y:Count$CardCounters.ISOLATION
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
-Oracle:Quarantine Field enters the battlefield with X isolation counters on it.\nWhen Quarantine Field enters the battlefield, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until Quarantine Field leaves the battlefield.
+Oracle:Quarantine Field enters with X isolation counters on it.\nWhen Quarantine Field enters, for each isolation counter on it, exile up to one target nonland permanent an opponent controls until Quarantine Field leaves the battlefield.

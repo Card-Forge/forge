@@ -18,8 +18,8 @@ ManaCost:no cost
 Colors:green
 Types:Creature Werewolf
 PT:4/4
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDig | Secondary$ True | TriggerDescription$ Whenever this creature enters the battlefield or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigDig | Secondary$ True | TriggerDescription$ Whenever this creature enters or transforms into CARDNAME, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Card.Creature | RestRandomOrder$ True | ForceRevealToController$ True
 K:Nightbound
-Oracle:Whenever this creature enters the battlefield or transforms into Wildsong Howler, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)
+Oracle:Whenever this creature enters or transforms into Wildsong Howler, look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

@@ -18,8 +18,6 @@
 
 package forge.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
@@ -76,12 +74,7 @@ public class CardListChooser extends FDialog {
         this.addWindowFocusListener(new CardListFocuser());
 
         FButton btnOK = new FButton(Localizer.getInstance().getMessage("lblSelectCard"));
-        btnOK.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                CardListChooser.this.processWindowEvent(new WindowEvent(CardListChooser.this, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        btnOK.addActionListener(e -> CardListChooser.this.processWindowEvent(new WindowEvent(CardListChooser.this, WindowEvent.WINDOW_CLOSING)));
         
         //Ensure the window can't be closed without user confirmation.
         //Unfortunately this giant block of code is necessary for that.

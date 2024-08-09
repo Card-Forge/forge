@@ -59,25 +59,16 @@ public enum DeckFormat {
             return null;
         }
     },
-    Commander      ( Range.is(99),                         Range.between(0, 10), 1, null, new Predicate<PaperCard>() {
-        @Override
-        public boolean apply(PaperCard card) {
-            return StaticData.instance().getCommanderPredicate().apply(card);
-        }
-    }),
-    Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null, new Predicate<PaperCard>() {
-        @Override
-        public boolean apply(PaperCard card) {
-            return StaticData.instance().getOathbreakerPredicate().apply(card);
-        }
-    }),
+    Commander      ( Range.is(99),                         Range.between(0, 10), 1, null,
+            card -> StaticData.instance().getCommanderPredicate().apply(card)
+    ),
+    Oathbreaker      ( Range.is(58),                         Range.between(0, 10), 1, null,
+            card -> StaticData.instance().getOathbreakerPredicate().apply(card)
+    ),
     Pauper      ( Range.is(60),                         Range.between(0, 10), 1),
-    Brawl      ( Range.is(59), Range.between(0, 15), 1, null, new Predicate<PaperCard>() {
-        @Override
-        public boolean apply(PaperCard card) {
-            return StaticData.instance().getBrawlPredicate().apply(card);
-        }
-    }),
+    Brawl      ( Range.is(59), Range.between(0, 15), 1, null,
+            card -> StaticData.instance().getBrawlPredicate().apply(card)
+    ),
     TinyLeaders    ( Range.is(49),                         Range.between(0, 10), 1, new Predicate<CardRules>() {
         private final Set<String> bannedCards = ImmutableSet.of(
                 "Ancestral Recall", "Balance", "Black Lotus", "Black Vise", "Channel", "Chaos Orb", "Contract From Below", "Counterbalance", "Darkpact", "Demonic Attorney", "Demonic Tutor", "Earthcraft", "Edric, Spymaster of Trest", "Falling Star",
@@ -501,59 +492,41 @@ public enum DeckFormat {
     }
 
     public Predicate<Deck> isLegalDeckPredicate() {
-        return new Predicate<Deck>() {
-            @Override
-            public boolean apply(Deck deck) {
-                return getDeckConformanceProblem(deck) == null;
-            }
-        };
+        return deck -> getDeckConformanceProblem(deck) == null;
     }
 
     public Predicate<Deck> hasLegalCardsPredicate(boolean enforceDeckLegality) {
-        return new Predicate<Deck>() {
-            @Override
-            public boolean apply(Deck deck) {
-                if (!enforceDeckLegality)
-                    return true;
-                if (cardPoolFilter != null) {
-                    for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                        if (!cardPoolFilter.apply(cp.getKey().getRules())) {
-                            return false;
-                        }
-                    }
-                }
-                if (paperCardPoolFilter != null) {
-                    for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
-                        if (!paperCardPoolFilter.apply(cp.getKey())) {
-                            System.err.println(
-                                    "Excluding deck: '" + deck.toString() +
-                                    "' Reason: '" + cp.getKey() + "' is not legal."
-                            );
-                            return false;
-                        }
-                    }
-                }
+        return deck -> {
+            if (!enforceDeckLegality)
                 return true;
+            if (cardPoolFilter != null) {
+                for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                    if (!cardPoolFilter.apply(cp.getKey().getRules())) {
+                        return false;
+                    }
+                }
             }
+            if (paperCardPoolFilter != null) {
+                for (final Entry<PaperCard, Integer> cp : deck.getAllCardsInASinglePool()) {
+                    if (!paperCardPoolFilter.apply(cp.getKey())) {
+                        System.err.println(
+                                "Excluding deck: '" + deck.toString() +
+                                "' Reason: '" + cp.getKey() + "' is not legal."
+                        );
+                        return false;
+                    }
+                }
+            }
+            return true;
         };
     }
 
     public Predicate<PaperCard> isLegalCardPredicate() {
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return isLegalCard(card);
-            }
-        };
+        return this::isLegalCard;
     }
 
     public Predicate<PaperCard> isLegalCommanderPredicate() {
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                return isLegalCommander(card.getRules());
-            }
-        };
+        return card -> isLegalCommander(card.getRules());
     }
 
     public Predicate<PaperCard> isLegalCardForCommanderPredicate(List<PaperCard> commanders) {
@@ -567,6 +540,6 @@ public enum DeckFormat {
             //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
             predicate = Predicates.or(predicate, CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
-        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
+        return Predicates.compose(predicate, PaperCard::getRules);
     }
 }

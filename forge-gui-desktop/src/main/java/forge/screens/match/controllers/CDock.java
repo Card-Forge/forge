@@ -128,60 +128,15 @@ public class CDock implements ICDoc {
         setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
         refreshArcStateDisplay();
 
-        view.getBtnConcede().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                matchUI.concede();
-            }
-        });
-        view.getBtnSettings().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                SOverlayUtils.showOverlay();
-            }
-        });
-        view.getBtnEndTurn().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                endTurn();
-            }
-        });
-        view.getBtnViewDeckList().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                matchUI.viewDeckList();
-            }
-        });
-        view.getBtnRevertLayout().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                SLayoutIO.revertLayout();
-            }
-        });
-        view.getBtnOpenLayout().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                SLayoutIO.openLayout();
-            }
-        });
-        view.getBtnSaveLayout().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                SLayoutIO.saveLayout();
-            }
-        });
-        view.getBtnAlphaStrike().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                matchUI.getGameController().alphaStrike();
-            }
-        });
-        view.getBtnTargeting().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                toggleTargeting();
-            }
-        });
+        view.getBtnConcede().setCommand((UiCommand) matchUI::concede);
+        view.getBtnSettings().setCommand((UiCommand) SOverlayUtils::showOverlay);
+        view.getBtnEndTurn().setCommand((UiCommand) this::endTurn);
+        view.getBtnViewDeckList().setCommand((UiCommand) matchUI::viewDeckList);
+        view.getBtnRevertLayout().setCommand((UiCommand) SLayoutIO::revertLayout);
+        view.getBtnOpenLayout().setCommand((UiCommand) SLayoutIO::openLayout);
+        view.getBtnSaveLayout().setCommand((UiCommand) SLayoutIO::saveLayout);
+        view.getBtnAlphaStrike().setCommand((UiCommand) () -> matchUI.getGameController().alphaStrike());
+        view.getBtnTargeting().setCommand((UiCommand) this::toggleTargeting);
     }
 
     /* (non-Javadoc)

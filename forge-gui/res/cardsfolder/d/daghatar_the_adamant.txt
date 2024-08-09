@@ -6,4 +6,4 @@ K:Vigilance
 K:etbCounter:P1P1:4
 A:AB$ MoveCounter | Cost$ 1 BG BG | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target creatures to move +1/+1 counters | CounterType$ P1P1 | SpellDescription$ Move a +1/+1 counter from target creature onto a second target creature.
 AI:RemoveDeck:All
-Oracle:Vigilance\nDaghatar the Adamant enters the battlefield with four +1/+1 counters on it.\n{1}{B/G}{B/G}: Move a +1/+1 counter from target creature onto a second target creature.
+Oracle:Vigilance\nDaghatar the Adamant enters with four +1/+1 counters on it.\n{1}{B/G}{B/G}: Move a +1/+1 counter from target creature onto a second target creature.

@@ -654,7 +654,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
+        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack::fromSet), count));
     }
 
     /**
@@ -669,7 +669,7 @@ public final class QuestUtilCards {
             formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
-        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
+        questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack::fromSet), count));
     }
 
     private void generateBoosterBoxesInShop(final int count) {
@@ -701,7 +701,7 @@ public final class QuestUtilCards {
 
         List<BoosterBox> output = new ArrayList<>();
         for (CardEdition e : editions) {
-            output.add(BoosterBox.FN_FROM_SET.apply(e));
+            output.add(BoosterBox.fromSet(e));
         }
 
         questAssets.getShopList().addAllOfTypeFlat(output);
@@ -859,20 +859,10 @@ public final class QuestUtilCards {
     // deck editors
     // Maybe we should consider doing so later
     /** The fn new compare. */
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-        @Override
-        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return isNew(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-        }
-    };
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> isNew(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
 
     /** The fn new get. */
-    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet = new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-        @Override
-        public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-            return isNew(from.getKey()) ? "NEW" : "";
-        }
-    };
+    private final Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> isNew(from.getKey()) ? "NEW" : "";
 
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnOwnedCompare() {
         return fnOwnedCompare;

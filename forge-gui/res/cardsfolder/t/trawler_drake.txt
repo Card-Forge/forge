@@ -10,4 +10,4 @@ SVar:TrigPutCounter:DB$ PutCounter | CounterType$ OIL
 SVar:X:Count$CardCounters.OIL
 SVar:BuffedBy:Card.nonCreature
 DeckHints:Ability$Counters
-Oracle:Flying\nTrawler Drake enters the battlefield with an oil counter on it.\nTrawler Drake gets +1/+1 for each oil counter on it.\nWhenever you cast a noncreature spell, put an oil counter on Trawler Drake.
+Oracle:Flying\nTrawler Drake enters with an oil counter on it.\nTrawler Drake gets +1/+1 for each oil counter on it.\nWhenever you cast a noncreature spell, put an oil counter on Trawler Drake.

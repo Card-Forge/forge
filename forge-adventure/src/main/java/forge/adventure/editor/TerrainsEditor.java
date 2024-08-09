@@ -60,12 +60,7 @@ public class TerrainsEditor extends JComponent{
         add(edit,BorderLayout.CENTER);
 
 
-        edit.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                emitChanged();
-            }
-        });
+        edit.addChangeListener(e -> emitChanged());
     }
     protected void emitChanged() {
         ChangeListener[] listeners = listenerList.getListeners(ChangeListener.class);

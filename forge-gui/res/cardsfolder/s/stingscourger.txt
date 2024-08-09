@@ -2,9 +2,9 @@ Name:Stingscourger
 ManaCost:1 R
 Types:Creature Goblin Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target creature an opponent controls to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
 K:Echo:3 R
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Land.YouCtrl
-Oracle:Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Stingscourger enters the battlefield, return target creature an opponent controls to its owner's hand.
+Oracle:Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Stingscourger enters, return target creature an opponent controls to its owner's hand.

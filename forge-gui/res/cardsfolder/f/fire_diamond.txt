@@ -2,5 +2,6 @@ Name:Fire Diamond
 ManaCost:2
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
-K:CARDNAME enters the battlefield tapped.
-Oracle:Fire Diamond enters the battlefield tapped.\n{T}: Add {R}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Fire Diamond enters tapped.\n{T}: Add {R}.

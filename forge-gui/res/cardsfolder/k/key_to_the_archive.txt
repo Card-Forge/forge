@@ -1,9 +1,10 @@
 Name:Key to the Archive
 ManaCost:4
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook, then discard a card.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters, draft a card from CARDNAME's spellbook, then discard a card.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Approach of the Second Sun,Day of Judgment,Time Warp,Counterspell,Demonic Tutor,Doom Blade,Lightning Bolt,Claim the Firstborn,Krosan Grip,Regrowth,Despark,Electrolyze,Growth Spiral,Lightning Helix,Putrefy | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ TgtChoose
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | SpellDescription$ Add two mana in any combination of colors.
-Oracle:Key to the Archive enters the battlefield tapped.\nWhen Key to the Archive enters the battlefield, draft a card from Key to the Archive's spellbook, then discard a card.\n{T}: Add two mana in any combination of colors.
+Oracle:Key to the Archive enters tapped.\nWhen Key to the Archive enters, draft a card from Key to the Archive's spellbook, then discard a card.\n{T}: Add two mana in any combination of colors.

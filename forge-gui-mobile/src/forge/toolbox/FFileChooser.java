@@ -15,7 +15,6 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
@@ -57,55 +56,37 @@ public class FFileChooser extends FDialog {
         }
         txtFilename.setFont(FSkinFont.get(12));
         txtFilename.setText(defaultFilename0);
-        txtFilename.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                refreshFileList();
+        txtFilename.setChangedHandler(e -> refreshFileList());
+
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> activateSelectedFile(true));
+        initButton(1, Forge.getLocalizer().getMessage("lblNewFolder"), e -> {
+            final File dir = getCurrentDir();
+            if (dir == null) {
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCannotAddNewFolderToInvaildFolder"), Forge.getLocalizer().getMessage("lblInvalidFolder"));
+                return;
             }
-        });
 
-        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                activateSelectedFile(true);
-            }
-        });
-        initButton(1, Forge.getLocalizer().getMessage("lblNewFolder"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final File dir = getCurrentDir();
-                if (dir == null) {
-                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblCannotAddNewFolderToInvaildFolder"), Forge.getLocalizer().getMessage("lblInvalidFolder"));
-                    return;
-                }
+            FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewFolderName"), new Callback<String>() {
+                @Override
+                public void run(String result) {
+                    if (StringUtils.isEmpty(result)) { return; }
 
-                FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewFolderName"), new Callback<String>() {
-                    @Override
-                    public void run(String result) {
-                        if (StringUtils.isEmpty(result)) { return; }
-
-                        try {
-                            File newDir = new File(dir, result);
-                            if (newDir.mkdirs()) {
-                                txtFilename.setText(newDir.getAbsolutePath());
-                                refreshFileList();
-                                return;
-                            }
+                    try {
+                        File newDir = new File(dir, result);
+                        if (newDir.mkdirs()) {
+                            txtFilename.setText(newDir.getAbsolutePath());
+                            refreshFileList();
+                            return;
                         }
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
                     }
-                });
-            }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblEnterFolderNameNotValid", result), Forge.getLocalizer().getMessage("lblInvalidName"));
+                }
+            });
         });
-        initButton(2, Forge.getLocalizer().getMessage("lblCancel"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-            }
-        });
+        initButton(2, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());
 
         baseDir = baseDir0;
         callback = callback0;
@@ -160,12 +141,7 @@ public class FFileChooser extends FDialog {
         FilenameFilter filter = null;
         if (choiceType == ChoiceType.GetDirectory) {
             //don't list files if getting directory
-            filter = new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return new File(dir, name).isDirectory();
-                }
-            };
+            filter = (dir1, name) -> new File(dir1, name).isDirectory();
         }
         lstFiles.setListData(dir.listFiles(filter));
     }
@@ -371,19 +347,9 @@ public class FFileChooser extends FDialog {
                             final String renameBehavior = value.isDirectory() ? Forge.getLocalizer().getMessage("lblRenameFolder") : Forge.getLocalizer().getMessage("lblRenameFile");
                             final String deleteBehavior = value.isDirectory() ? Forge.getLocalizer().getMessage("lblDeleteFolder") : Forge.getLocalizer().getMessage("lblDeleteFile");
                             addItem(new FMenuItem(renameBehavior, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
-                                    new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    renameFile(value);
-                                }
-                            }));
+                                    e -> renameFile(value)));
                             addItem(new FMenuItem(deleteBehavior, Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT,
-                                    new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    deleteFile(index, value);
-                                }
-                            }));
+                                    e -> deleteFile(index, value)));
                         }
                     };
 

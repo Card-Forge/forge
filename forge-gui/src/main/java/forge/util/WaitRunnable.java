@@ -10,13 +10,10 @@ public abstract class WaitRunnable implements Runnable {
 
     public final void invokeAndWait() {
         FThreads.assertExecutedByEdt(false); //not supported if on UI thread
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                WaitRunnable.this.run();
-                synchronized(lock) {
-                    lock.notify();
-                }
+        FThreads.invokeInEdtLater(() -> {
+            WaitRunnable.this.run();
+            synchronized(lock) {
+                lock.notify();
             }
         });
         try {

@@ -1,8 +1,9 @@
 Name:Sejiri Steppe
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProtect | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProtect | TriggerDescription$ When CARDNAME enters, target creature you control gains protection from the color of your choice until end of turn.
 SVar:TrigProtect:DB$ Protection | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Gains$ Choice | Choices$ AnyColor
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-Oracle:Sejiri Steppe enters the battlefield tapped.\nWhen Sejiri Steppe enters the battlefield, target creature you control gains protection from the color of your choice until end of turn.\n{T}: Add {W}.
+Oracle:Sejiri Steppe enters tapped.\nWhen Sejiri Steppe enters, target creature you control gains protection from the color of your choice until end of turn.\n{T}: Add {W}.

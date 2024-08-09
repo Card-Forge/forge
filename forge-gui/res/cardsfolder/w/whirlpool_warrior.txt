@@ -2,7 +2,7 @@ Name:Whirlpool Warrior
 ManaCost:2 U
 Types:Creature Merfolk Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WhirlYou | TriggerDescription$ When CARDNAME enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WhirlYou | TriggerDescription$ When CARDNAME enters, shuffle the cards from your hand into your library, then draw that many cards.
 SVar:WhirlYou:DB$ ChangeZoneAll | Defined$ You | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | RememberChanged$ True | ForgetOtherRemembered$ True | Shuffle$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | SubAbility$ DBCleanup
 A:AB$ RepeatEach | Cost$ R Sac<1/CARDNAME> | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleHand | SpellDescription$ Each player shuffles the cards from their hand into their library, then draws that many cards.
@@ -12,4 +12,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
-Oracle:When Whirlpool Warrior enters the battlefield, shuffle the cards from your hand into your library, then draw that many cards.\n{R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from their hand into their library, then draws that many cards.
+Oracle:When Whirlpool Warrior enters, shuffle the cards from your hand into your library, then draw that many cards.\n{R}, Sacrifice Whirlpool Warrior: Each player shuffles the cards from their hand into their library, then draws that many cards.

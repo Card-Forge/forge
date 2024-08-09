@@ -2,12 +2,12 @@ Name:Callous Sell-Sword
 ManaCost:1 B
 Types:Creature Human Soldier
 PT:2/2
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature that died under your control this turn.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with a +1/+1 counter on it for each creature that died under your control this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 DeckHints:Ability$Graveyard
 DeckHas:Ability$Counters|Sacrifice
 AlternateMode:Adventure
-Oracle:Callous Sell-Sword enters the battlefield with a +1/+1 counter on it for each creature that died under your control this turn.
+Oracle:Callous Sell-Sword enters with a +1/+1 counter on it for each creature that died under your control this turn.
 
 ALTERNATE
 

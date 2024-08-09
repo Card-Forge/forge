@@ -1,6 +1,5 @@
 package forge.game.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
@@ -575,12 +574,7 @@ public class CardView extends GameEntityView {
     public boolean canBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canBeShownTo);
     }
 
     public boolean canBeShownTo(final PlayerView viewer) {
@@ -646,12 +640,7 @@ public class CardView extends GameEntityView {
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
 
-        return Iterables.any(viewers, new Predicate<PlayerView>() {
-            @Override
-            public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input);
-            }
-        });
+        return Iterables.any(viewers, this::canFaceDownBeShownTo);
     }
 
     public boolean canFaceDownBeShownTo(final PlayerView viewer) {

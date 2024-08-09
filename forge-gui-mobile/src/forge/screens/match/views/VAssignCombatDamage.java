@@ -41,8 +41,6 @@ import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -103,34 +101,20 @@ public class VAssignCombatDamage extends FDialog {
         pnlAttacker = add(new AttDefCardPanel(attacker));
         pnlDefenders = add(new DefendersPanel(blockers));
 
-        initButton(0, Forge.getLocalizer().getMessage("lblAuto"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                resetAssignedDamage();
-                initialAssignDamage(true);
-                finish();
-            }
+        initButton(0, Forge.getLocalizer().getMessage("lblAuto"), e -> {
+            resetAssignedDamage();
+            initialAssignDamage(true);
+            finish();
         });
-        initButton(1, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                finish();
-            }
-        });
-        initButton(2, Forge.getLocalizer().getMessage("lblReset"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                resetAssignedDamage();
-                initialAssignDamage(false);
-            }
+        initButton(1, Forge.getLocalizer().getMessage("lblOK"), e -> finish());
+        initButton(2, Forge.getLocalizer().getMessage("lblReset"), e -> {
+            resetAssignedDamage();
+            initialAssignDamage(false);
         });
         if (maySkip) {
-            initButton(2, Forge.getLocalizer().getMessage("lblSkip"), new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    skip = true;
-                    finish();
-                }
+            initButton(2, Forge.getLocalizer().getMessage("lblSkip"), e -> {
+                skip = true;
+                finish();
             });
         }
 
@@ -222,18 +206,8 @@ public class VAssignCombatDamage extends FDialog {
                 obj = add(new MiscAttDefPanel(defender.toString(), FSkinImage.UNKNOWN));
             }
             label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
-            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignDamageTo(card, false);
-                }
-            }).build());
-            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignDamageTo(card, true);
-                }
-            }).build());
+            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(e -> assignDamageTo(card, false)).build());
+            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(e -> assignDamageTo(card, true)).build());
         }
 
         @Override

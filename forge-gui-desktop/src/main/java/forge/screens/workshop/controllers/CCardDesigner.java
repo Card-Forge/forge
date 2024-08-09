@@ -14,11 +14,7 @@ public enum CCardDesigner implements ICDoc {
     SINGLETON_INSTANCE;
 
     CCardDesigner() {
-        VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setCommand(new Runnable() {
-            @Override public final void run() {
-                CCardScript.SINGLETON_INSTANCE.saveChanges();
-            }
-        });
+        VCardDesigner.SINGLETON_INSTANCE.getBtnSaveCard().setCommand((Runnable) CCardScript.SINGLETON_INSTANCE::saveChanges);
     }
 
     //========== Overridden methods

@@ -153,11 +153,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (sa.hasParam("RandomCopied")) {
@@ -188,7 +188,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                         }
                     }
 
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
                     if (!cards.isEmpty()) {

@@ -6,7 +6,7 @@ K:Kicker:2 G
 R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
 K:Hexproof
 K:Haste
-K:etbCounter:P1P1:4:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.
+K:etbCounter:P1P1:4:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters with four +1/+1 counters on it.
 SVar:WasKicked:Count$Kicked.1.0
 DeckHas:Ability$Counters
-Oracle:Kicker {2}{G}\nThis spell can't be countered.\nHexproof, haste\nIf Cragplate Baloth was kicked, it enters the battlefield with four +1/+1 counters on it.
+Oracle:Kicker {2}{G}\nThis spell can't be countered.\nHexproof, haste\nIf Cragplate Baloth was kicked, it enters with four +1/+1 counters on it.

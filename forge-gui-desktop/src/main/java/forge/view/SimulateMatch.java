@@ -1,7 +1,6 @@
 package forge.view;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -244,12 +243,7 @@ public class SimulateMatch {
             if (!folder.isDirectory()) {
                 System.out.println("Directory not found - " + foldName);
             } else {
-                for (File deck : folder.listFiles(new FilenameFilter() {
-                    @Override
-                    public boolean accept(File dir, String name) {
-                        return name.endsWith(".dck");
-                    }
-                })) {
+                for (File deck : folder.listFiles((dir, name) -> name.endsWith(".dck"))) {
                     Deck d = DeckSerializer.fromFile(deck);
                     if (d == null) {
                         System.out.println(TextUtil.concatNoSpace("Could not load deck - ", deck.getName(), ", match cannot start"));

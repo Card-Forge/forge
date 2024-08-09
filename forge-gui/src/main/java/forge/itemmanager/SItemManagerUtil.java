@@ -151,12 +151,7 @@ public final class SItemManagerUtil {
         for (final Entry<InventoryItem, Integer> itemEntry : items) {
             sorted.add(itemEntry);
         }
-        sorted.sort(new Comparator<Entry<InventoryItem, Integer>>() {
-            @Override
-            public int compare(final Entry<InventoryItem, Integer> x, final Entry<InventoryItem, Integer> y) {
-                return x.getKey().toString().compareTo(y.getKey().toString());
-            }
-        });
+        sorted.sort(Comparator.comparing(x -> x.getKey().toString()));
         final StringBuilder builder = new StringBuilder();
         for (final Entry<InventoryItem, Integer> itemEntry : sorted) {
             builder.append("\n").append(itemEntry.getValue()).append(" * ").append(itemEntry.getKey().toString());

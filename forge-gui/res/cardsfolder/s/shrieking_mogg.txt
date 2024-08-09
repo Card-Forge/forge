@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Goblin
 PT:1/1
 K:Haste
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all other creatures.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all other creatures.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.StrictlyOther
 SVar:PlayMain1:TRUE
-Oracle:Haste\nWhen Shrieking Mogg enters the battlefield, tap all other creatures.
+Oracle:Haste\nWhen Shrieking Mogg enters, tap all other creatures.

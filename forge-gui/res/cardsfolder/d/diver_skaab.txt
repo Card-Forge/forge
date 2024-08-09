@@ -6,4 +6,4 @@ K:Exploit
 T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSubmerge | TriggerDescription$ When CARDNAME exploits a creature, target creature's owner puts it on the top or bottom of their library.
 SVar:TrigSubmerge:DB$ ChangeZone | ValidTgts$ Creature | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
 DeckHas:Ability$Sacrifice
-Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Diver Skaab exploits a creature, target creature's owner puts it on the top or bottom of their library.
+Oracle:Exploit (When this creature enters, you may sacrifice a creature.)\nWhen Diver Skaab exploits a creature, target creature's owner puts it on the top or bottom of their library.

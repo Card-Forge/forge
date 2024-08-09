@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Bird Wizard
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand. It perpetually gains flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose a creature card in your hand. It perpetually gains flying.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose a creature card in your hand | Mandatory$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Flying | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:Flying\nWhen Mentor of Evos Isle enters the battlefield, choose a creature card in your hand. It perpetually gains flying.
+Oracle:Flying\nWhen Mentor of Evos Isle enters, choose a creature card in your hand. It perpetually gains flying.

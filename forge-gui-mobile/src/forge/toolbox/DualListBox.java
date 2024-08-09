@@ -91,36 +91,20 @@ public class DualListBox<T> extends FDialog {
 
         // Dual List control buttons
         addButton = add(new FButton(">", onAdd));
-        addAllButton = add(new FButton(">>", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                addAll();
-            }
-        }));
+        addAllButton = add(new FButton(">>", e -> addAll()));
         removeButton = add(new FButton("<", onRemove));
-        removeAllButton = add(new FButton("<<", new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                removeAll();
-            }
-        }));
+        removeAllButton = add(new FButton("<<", e -> removeAll()));
         
-        final FEventHandler onAccept = new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                hide();
-                callback.run(destList.extractListData());
-            }
+        final FEventHandler onAccept = e -> {
+            hide();
+            callback.run(destList.extractListData());
         };
 
         // Dual List Complete Buttons
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), onAccept);
-        initButton(1, Forge.getLocalizer().getMessage("lblAuto"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                addAll();
-                onAccept.handleEvent(e);
-            }
+        initButton(1, Forge.getLocalizer().getMessage("lblAuto"), e -> {
+            addAll();
+            onAccept.handleEvent(e);
         });
 
         selectOrder = add(new FLabel.Builder().align(Align.center).text(Forge.getLocalizer().getMessage("lblSelectOrder")).build());

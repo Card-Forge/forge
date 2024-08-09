@@ -18,6 +18,7 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Optional;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.GameCommand;
@@ -329,8 +330,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private CardRules cardRules;
     private final CardView view;
-
-    private Table<Player, CounterType, Integer> etbCounters = HashBasedTable.create();
 
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
@@ -2250,7 +2249,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             s.append(p[4]);
                         }
                     } else {
-                        s.append(getName()).append(" enters the battlefield with ");
+                        s.append(getName()).append(" enters with ");
                         s.append(Lang.nounWithNumeralExceptOne(p[2],
                                 CounterType.getType(p[1]).getName().toLowerCase() + " counter"));
                         s.append(" on it.");
@@ -2430,9 +2429,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] k = keyword.split(":");
                     final String[] s = (k[0]).split(" ");
                     final String t = s[1];
-                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
-                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
-                    sbLong.append("battlefield with that many +1/+1 counters on it.)");
+                    sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters, you may ");
+                    sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters ");
+                    sbLong.append("with that many +1/+1 counters on it.)");
                 } else if (keyword.startsWith("Prototype")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
@@ -2785,7 +2784,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 String text = replacementEffect.getDescription();
                 // Get original description since text might be translated
                 if (replacementEffect.hasParam("Description") &&
-                        replacementEffect.getParam("Description").contains("enters the battlefield")) {
+                        replacementEffect.getParam("Description").contains("enters")) {
                     sb.append(text).append(linebreak);
                 } else {
                     replacementEffects.append(text).append(linebreak);
@@ -4382,7 +4381,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         updateCloneState(true);
     }
 
-    private final void updateCloneState(final boolean updateView) {
+    private void updateCloneState(final boolean updateView) {
         if (isFaceDown()) {
             setState(CardStateName.FaceDown, updateView, true);
         } else {
@@ -4405,7 +4404,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return CardStateName.Original;
     }
 
-    private final CardCloneStates getLastClonedState() {
+    private CardCloneStates getLastClonedState() {
         if (clonedStates.isEmpty()) {
             return null;
         }
@@ -5143,7 +5142,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    private final KeywordInterface getCopyForStoredKeyword(Map.Entry<Triple<String, Long, Long>, KeywordInterface> e, boolean lki) {
+    private KeywordInterface getCopyForStoredKeyword(Map.Entry<Triple<String, Long, Long>, KeywordInterface> e, boolean lki) {
         // for performance check if we already copied this
         if (lki) {
             for (KeywordsChange kc : changedCardKeywords.column(e.getKey().getMiddle()).values()) {
@@ -6156,7 +6155,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setExcessDamageReceivedThisTurn(final int n) {
         excessDamageThisTurnAmount = n;
     }
-    private final void resetExcessDamage() {
+    private void resetExcessDamage() {
         hasBeenDealtExcessDamageThisTurn = false;
         excessDamageThisTurnAmount = 0;
     }
@@ -7814,33 +7813,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.savedLastKnownZone = zone;
     }
 
-    /**
-     * ETBCounters are only used between replacementEffects
-     * and when the Card really enters the Battlefield with the counters
-     * @return map of counters
-     */
-    public final void addEtbCounter(CounterType type, Integer val, final Player source) {
-        int old = etbCounters.contains(source, type) ? etbCounters.get(source, type) : 0;
-        etbCounters.put(source, type, old + val);
-    }
-
-    public final void clearEtbCounters() {
-        etbCounters.clear();
-    }
-
-    public final Table<Player, CounterType, Integer> getEtbCounters() {
-        return etbCounters;
-    }
-
-    public final void putEtbCounters(GameEntityCounterTable table) {
-        for (Table.Cell<Player, CounterType, Integer> e : etbCounters.cellSet()) {
-            CounterType ct = e.getColumnKey();
-            if (this.isLKI()) {
+    public final void putEtbCounters(Map<Optional<Player>, Map<CounterType, Integer>> etbCounters) {
+        if (etbCounters == null) {
+            return;
+        }
+        // used for LKI
+        for (Map<CounterType, Integer> m : etbCounters.values()) {
+            for (Map.Entry<CounterType, Integer> e : m.entrySet()) {
+            CounterType ct = e.getKey();
                 if (canReceiveCounters(ct)) {
                     setCounters(ct, getCounters(ct) + e.getValue());
                 }
-            } else {
-                addCounter(ct, e.getValue(), e.getRowKey(), table);
             }
         }
     }
@@ -8076,8 +8059,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         updateState |= clearNewPT();
         updateState |= clearChangedName();
-
-        clearEtbCounters();
 
         return updateState;
     }

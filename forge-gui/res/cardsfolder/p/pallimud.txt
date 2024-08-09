@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Beast
 PT:*/3
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters, choose an opponent.
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of tapped lands the chosen player controls.
 SVar:X:Count$Valid Land.tapped+ChosenCtrl
-Oracle:As Pallimud enters the battlefield, choose an opponent.\nPallimud's power is equal to the number of tapped lands the chosen player controls.
+Oracle:As Pallimud enters, choose an opponent.\nPallimud's power is equal to the number of tapped lands the chosen player controls.

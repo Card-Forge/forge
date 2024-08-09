@@ -1,8 +1,8 @@
 Name:Retreat to Valakut
 ManaCost:2 R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land you control enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBPump1,DBPump2
 SVar:DBPump1:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SpellDescription$ Target creature gets +2/+0 until end of turn.
 SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | SpellDescription$ Target creature can't block this turn.
-Oracle:Landfall — Whenever a land enters the battlefield under your control, choose one —\n• Target creature gets +2/+0 until end of turn.\n• Target creature can't block this turn.
+Oracle:Landfall — Whenever a land you control enters, choose one —\n• Target creature gets +2/+0 until end of turn.\n• Target creature can't block this turn.

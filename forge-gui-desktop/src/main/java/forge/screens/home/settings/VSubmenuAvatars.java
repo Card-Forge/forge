@@ -103,11 +103,9 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pnlAvatars.add(scroller, "w 90%!, pushy, growy, gap 5% 0 0 0");
 
-        final UiCommand cmdHuman = new UiCommand() { @Override
-            public void run() { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); } };
+        final UiCommand cmdHuman = () -> { lblAvatarAI.setSelected(false); lblAvatarHuman.requestFocusInWindow(); };
 
-        final UiCommand cmdAI = new UiCommand() { @Override
-            public void run() { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); } };
+        final UiCommand cmdAI = () -> { lblAvatarHuman.setSelected(false); lblAvatarAI.requestFocusInWindow(); };
 
         lblAvatarHuman.setCommand(cmdHuman);
         lblAvatarAI.setCommand(cmdAI);
@@ -138,26 +136,23 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         lbl.setMaximumSize(size);
         lbl.setMinimumSize(size);
 
-        final UiCommand cmd = new UiCommand() {
-            @Override
-            public void run() {
-                String[] indices = FModel.getPreferences()
-                        .getPref(FPref.UI_AVATARS).split(",");
+        final UiCommand cmd = () -> {
+            String[] indices = FModel.getPreferences()
+                    .getPref(FPref.UI_AVATARS).split(",");
 
-                if (lblAvatarAI.isSelected()) {
-                    lblAvatarAI.setIcon(FSkin.getAvatars().get(index0));
-                    lblAvatarAI.repaintSelf();
-                    indices[1] = String.valueOf(index0);
-                }
-                else {
-                    lblAvatarHuman.setIcon(FSkin.getAvatars().get(index0));
-                    lblAvatarHuman.repaintSelf();
-                    indices[0] = String.valueOf(index0);
-                }
-
-                FModel.getPreferences().setPref(FPref.UI_AVATARS, indices[0] + "," + indices[1]);
-                FModel.getPreferences().save();
+            if (lblAvatarAI.isSelected()) {
+                lblAvatarAI.setIcon(FSkin.getAvatars().get(index0));
+                lblAvatarAI.repaintSelf();
+                indices[1] = String.valueOf(index0);
             }
+            else {
+                lblAvatarHuman.setIcon(FSkin.getAvatars().get(index0));
+                lblAvatarHuman.repaintSelf();
+                indices[0] = String.valueOf(index0);
+            }
+
+            FModel.getPreferences().setPref(FPref.UI_AVATARS, indices[0] + "," + indices[1]);
+            FModel.getPreferences().save();
         };
 
         lbl.setCommand(cmd);

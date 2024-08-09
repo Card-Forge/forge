@@ -2,7 +2,7 @@ Name:Palace Siege
 ManaCost:3 B B
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons.
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand.
@@ -13,4 +13,4 @@ SVar:DragonsTrigger:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Va
 SVar:SyphonLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 DeckHas:Ability$LifeGain|Graveyard
-Oracle:As Palace Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand.\n• Dragons — At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
+Oracle:As Palace Siege enters, choose Khans or Dragons.\n• Khans — At the beginning of your upkeep, return target creature card from your graveyard to your hand.\n• Dragons — At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.

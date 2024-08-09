@@ -22,8 +22,6 @@ import forge.model.FModel;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
@@ -178,12 +176,9 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
                 btnBuy.setEnabled(false);
             }
             else {
-                btnBuy.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        QuestUtil.buyQuestItem(item);
-                        ((BazaarPage)((QuestBazaarScreen)Forge.getCurrentScreen()).getSelectedPage()).update();
-                    }
+                btnBuy.setCommand(e -> {
+                    QuestUtil.buyQuestItem(item);
+                    ((BazaarPage)((QuestBazaarScreen)Forge.getCurrentScreen()).getSelectedPage()).update();
                 });
             }
         }

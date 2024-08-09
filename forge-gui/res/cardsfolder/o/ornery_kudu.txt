@@ -2,6 +2,6 @@ Name:Ornery Kudu
 ManaCost:2 G
 Types:Creature Antelope
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a -1/-1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 1
-Oracle:When Ornery Kudu enters the battlefield, put a -1/-1 counter on target creature you control.
+Oracle:When Ornery Kudu enters, put a -1/-1 counter on target creature you control.

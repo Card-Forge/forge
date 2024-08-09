@@ -1,12 +1,12 @@
 Name:Dowsing Device
 ManaCost:1 R
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+Other | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another artifact enters the battlefield under your control, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform CARDNAME if you control four or more artifacts.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Artifact.YouCtrl+Other | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another artifact you control enters, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform CARDNAME if you control four or more artifacts.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | NumAtt$ +1 | KW$ Haste | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Artifact.YouCtrl | ConditionCompare$ GE4 | Mode$ Transform
 DeckHints:Type$Artifact
 AlternateMode:DoubleFaced
-Oracle:Whenever Dowsing Device or another artifact enters the battlefield under your control, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform Dowsing Device if you control four or more artifacts.
+Oracle:Whenever Dowsing Device or another artifact you control enters, up to one target creature you control gets +1/+0 and gains haste until end of turn. Then transform Dowsing Device if you control four or more artifacts.
 
 ALTERNATE
 

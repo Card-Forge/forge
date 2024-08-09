@@ -42,7 +42,7 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
             colorChooserList.add(cp);
         }
 
-        Iterable<CardRules> rules = Iterables.transform(colorChooserList, PaperCard.FN_GET_RULES);
+        Iterable<CardRules> rules = Iterables.transform(colorChooserList, PaperCard::getRules);
 
         int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_WHITE));
         int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLUE));

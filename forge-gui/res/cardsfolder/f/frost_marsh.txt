@@ -1,6 +1,7 @@
 Name:Frost Marsh
 ManaCost:no cost
 Types:Snow Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo U B | SpellDescription$ Add {U} or {B}.
-Oracle:Frost Marsh enters the battlefield tapped.\n{T}: Add {U} or {B}.
+Oracle:Frost Marsh enters tapped.\n{T}: Add {U} or {B}.

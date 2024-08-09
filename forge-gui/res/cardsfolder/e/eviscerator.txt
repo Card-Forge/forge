@@ -3,6 +3,6 @@ ManaCost:3 B B
 Types:Creature Phyrexian Horror
 PT:5/5
 K:Protection from white
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 5 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 5
-Oracle:Protection from white\nWhen Eviscerator enters the battlefield, you lose 5 life.
+Oracle:Protection from white\nWhen Eviscerator enters, you lose 5 life.

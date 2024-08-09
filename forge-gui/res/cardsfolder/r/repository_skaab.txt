@@ -11,4 +11,4 @@ SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn/LimitMax.1
 SVar:Y:Count$Valid Creature.token,Creature.cmcLE2/LimitMax.1
 SVar:Z:SVar$X/Plus.Y
 SVar:NeedsToPlayVar:Z EQ2
-Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Repository Skaab exploits a creature, return target instant or sorcery card from your graveyard to your hand.
+Oracle:Exploit (When this creature enters, you may sacrifice a creature.)\nWhen Repository Skaab exploits a creature, return target instant or sorcery card from your graveyard to your hand.

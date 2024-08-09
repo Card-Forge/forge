@@ -1,6 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,17 +111,14 @@ public class DialogChoosePoolDistribution {
 		right.setOpaque(false);
 
 		final FLabel clearColors = new FLabel.Builder().text(localizer.getMessage("lblClearAll")).fontSize(12).opaque(true).hoverable(true).build();
-		clearColors.setCommand(new UiCommand() {
-			@Override
-			public void run() {
-				cbxBlack.setSelected(false);
-				cbxBlue.setSelected(false);
-				cbxGreen.setSelected(false);
-				cbxRed.setSelected(false);
-				cbxWhite.setSelected(false);
-				cbxColorless.setSelected(false);
-			}
-		});
+		clearColors.setCommand((UiCommand) () -> {
+            cbxBlack.setSelected(false);
+            cbxBlue.setSelected(false);
+            cbxGreen.setSelected(false);
+            cbxRed.setSelected(false);
+            cbxWhite.setSelected(false);
+            cbxColorless.setSelected(false);
+        });
 
 		final FLabel boosterPackLabel = new FLabel.Builder().text(localizer.getMessage("lblNumberofBoosters") + ":").fontSize(14).build();
 		final FLabel colorsLabel = new FLabel.Builder().text(localizer.getMessage("lblColors")).fontSize(18).build();
@@ -162,46 +158,43 @@ public class DialogChoosePoolDistribution {
 		left.add(poolTypePanel, "gaptop 15");
 		left.add(new FTextPane(localizer.getMessage("lblHoverforDescription")), "gaptop 20");
 
-		ActionListener radioButtonListener = new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent e) {
+		ActionListener radioButtonListener = e -> {
 
-				right.removeAll();
+            right.removeAll();
 
-				if (radBoosters.isSelected()) {
-					right.add(boosterPackLabel, "gaptop 10");
-					right.add(numberOfBoostersField, "w 100px!, gaptop 5");
-				} else if (radSurpriseMe.isSelected()) {
-					right.add(noSettingsText, "gaptop 10");
-				} else if (radRandom.isSelected()) {
-					right.add(cbxArtifacts, "gaptop 10");
-				} else {
-					right.add(colorsLabel, "gaptop 10");
-					right.add(clearColors, "w 75px!, h 20px!, gaptop 10");
-					right.add(cbxBlack, "gaptop 10");
-					right.add(cbxBlue);
-					right.add(cbxGreen);
-					right.add(cbxRed);
-					right.add(cbxWhite);
-					right.add(cbxColorless);
-					right.add(cbxArtifacts, "gaptop 25");
-				}
+            if (radBoosters.isSelected()) {
+                right.add(boosterPackLabel, "gaptop 10");
+                right.add(numberOfBoostersField, "w 100px!, gaptop 5");
+            } else if (radSurpriseMe.isSelected()) {
+                right.add(noSettingsText, "gaptop 10");
+            } else if (radRandom.isSelected()) {
+                right.add(cbxArtifacts, "gaptop 10");
+            } else {
+                right.add(colorsLabel, "gaptop 10");
+                right.add(clearColors, "w 75px!, h 20px!, gaptop 10");
+                right.add(cbxBlack, "gaptop 10");
+                right.add(cbxBlue);
+                right.add(cbxGreen);
+                right.add(cbxRed);
+                right.add(cbxWhite);
+                right.add(cbxColorless);
+                right.add(cbxArtifacts, "gaptop 25");
+            }
 
-				clearColors.setVisible(radBalanced.isSelected());
-				cbxBlack.setVisible(radBalanced.isSelected());
-				cbxBlue.setVisible(radBalanced.isSelected());
-				cbxGreen.setVisible(radBalanced.isSelected());
-				cbxRed.setVisible(radBalanced.isSelected());
-				cbxWhite.setVisible(radBalanced.isSelected());
-				cbxColorless.setVisible(radBalanced.isSelected());
-				cbxArtifacts.setVisible(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
-				numberOfBoostersField.setVisible(radBoosters.isSelected());
+            clearColors.setVisible(radBalanced.isSelected());
+            cbxBlack.setVisible(radBalanced.isSelected());
+            cbxBlue.setVisible(radBalanced.isSelected());
+            cbxGreen.setVisible(radBalanced.isSelected());
+            cbxRed.setVisible(radBalanced.isSelected());
+            cbxWhite.setVisible(radBalanced.isSelected());
+            cbxColorless.setVisible(radBalanced.isSelected());
+            cbxArtifacts.setVisible(!radSurpriseMe.isSelected() && !radBoosters.isSelected());
+            numberOfBoostersField.setVisible(radBoosters.isSelected());
 
-				right.validate();
-				right.repaint();
+            right.validate();
+            right.repaint();
 
-			}
-		};
+        };
 
 		clearColors.setVisible(radBalanced.isSelected());
 		cbxBlack.setVisible(radBalanced.isSelected());
@@ -228,21 +221,13 @@ public class DialogChoosePoolDistribution {
 		mainPanel.add(left);
 		mainPanel.add(right);
 
-		btnOk.setCommand(new UiCommand() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-				callback.run();
-			}
-		});
+		btnOk.setCommand((UiCommand) () -> {
+            SOverlayUtils.hideOverlay();
+            callback.run();
+        });
 
 		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
-		btnCancel.setCommand(new UiCommand() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		});
+		btnCancel.setCommand((UiCommand) SOverlayUtils::hideOverlay);
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 20, ax right"));
 		southPanel.setOpaque(false);

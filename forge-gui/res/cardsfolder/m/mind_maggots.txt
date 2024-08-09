@@ -2,11 +2,11 @@ Name:Mind Maggots
 ManaCost:3 B
 Types:Creature Insect
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on CARDNAME.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on CARDNAME.
 SVar:TrigDiscard:DB$ Discard | DiscardValid$ Creature | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ MindMaggotsPutCounter
 SVar:MindMaggotsPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize/Twice
 DeckHas:Ability$Counters|Discard
 DeckHints:Ability$Graveyard
-Oracle:When Mind Maggots enters the battlefield, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.
+Oracle:When Mind Maggots enters, discard any number of creature cards. For each card discarded this way, put two +1/+1 counters on Mind Maggots.

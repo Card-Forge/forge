@@ -3,6 +3,6 @@ ManaCost:3 R G
 Types:Creature Dinosaur
 PT:5/5
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to each other creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters, it deals 1 damage to each other creature.
 SVar:TrigDamageAll:DB$ DamageAll | ValidCards$ Creature.StrictlyOther | NumDmg$ 1 | ValidDescription$ each other creature.
-Oracle:Trample\nWhen Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.
+Oracle:Trample\nWhen Raging Swordtooth enters, it deals 1 damage to each other creature.

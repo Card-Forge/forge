@@ -2,7 +2,7 @@ Name:Extricator of Sin
 ManaCost:2 W
 Types:Creature Human Cleric
 PT:0/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.
 SVar:TrigToken:AB$ Token | Cost$ Sac<1/Permanent.Other/another permanent> | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ Delirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
@@ -10,7 +10,7 @@ SVar:AIPreference:SacCost$Creature.token
 DeckHints:Ability$Graveyard & Type$Eldrazi|Horror
 DeckHas:Ability$Token|Delirium
 AlternateMode:DoubleFaced
-Oracle:When Extricator of Sin enters the battlefield, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.\nDelirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
+Oracle:When Extricator of Sin enters, you may sacrifice another permanent. If you do, create a 3/2 colorless Eldrazi Horror creature token.\nDelirium — At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
 
 ALTERNATE
 

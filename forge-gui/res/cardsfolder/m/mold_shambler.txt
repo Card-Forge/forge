@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Fungus Beast
 PT:3/3
 K:Kicker:1 G
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target noncreature permanent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters, if it was kicked, destroy target noncreature permanent.
 SVar:TrigKicker:DB$ Destroy | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Select target noncreature permanent.
 SVar:NeedsToPlay:Permanent.nonCreature+OppCtrl
-Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nWhen Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
+Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nWhen Mold Shambler enters, if it was kicked, destroy target noncreature permanent.

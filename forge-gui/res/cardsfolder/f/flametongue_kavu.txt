@@ -2,7 +2,7 @@ Name:Flametongue Kavu
 ManaCost:3 R
 Types:Creature Kavu
 PT:4/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 4 damage to target creature.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4
 SVar:PlayMain1:TRUE
-Oracle:When Flametongue Kavu enters the battlefield, it deals 4 damage to target creature.
+Oracle:When Flametongue Kavu enters, it deals 4 damage to target creature.

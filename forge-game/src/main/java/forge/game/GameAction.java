@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.StaticData;
@@ -308,6 +307,13 @@ public class GameAction {
         // ensure that any leftover keyword/type changes are cleared in the state view
         copied.updateStateForView();
 
+        GameEntityCounterTable table;
+        if (params != null && params.containsKey(AbilityKey.CounterTable)) {
+            table = (GameEntityCounterTable) params.get(AbilityKey.CounterTable);
+        } else {
+            table = new GameEntityCounterTable();
+        }
+
         if (!suppress) {
             // Temporary disable commander replacement effect
             // 903.9a
@@ -343,6 +349,12 @@ public class GameAction {
             repParams.put(AbilityKey.Origin, zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put(AbilityKey.Destination, zoneTo.getZoneType());
 
+            if (toBattlefield) {
+                repParams.put(AbilityKey.EffectOnly, true);
+                repParams.put(AbilityKey.CounterTable, table);
+                repParams.put(AbilityKey.CounterMap, table.column(copied));
+            }
+
             if (params != null) {
                 repParams.putAll(params);
             }
@@ -357,7 +369,6 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
 
                 if (repres == ReplacementResult.Prevented) {
-                    c.clearEtbCounters();
                     c.clearControllers();
                     if (cause != null) {
                         unanimateOnAbortedChange(cause, c);
@@ -513,8 +524,6 @@ public class GameAction {
             }
         }
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
-
         if (mergedCards != null) {
             // Move components of merged permanent here
             // Also handle 723.3e and 903.9a
@@ -579,10 +588,8 @@ public class GameAction {
         }
 
         // do ETB counters after zone add
-        if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
+        if (!suppress && toBattlefield && !table.isEmpty()) {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
-            copied.putEtbCounters(table);
-            copied.clearEtbCounters();
         }
 
         // update state for view
@@ -1133,15 +1140,10 @@ public class GameAction {
             }
         }, true);
 
-        final Comparator<StaticAbility> comp = new Comparator<StaticAbility>() {
-            @Override
-            public int compare(final StaticAbility a, final StaticAbility b) {
-                return ComparisonChain.start()
-                        .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
-                        .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
-                        .result();
-            }
-        };
+        final Comparator<StaticAbility> comp = (a, b) -> ComparisonChain.start()
+                .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
+                .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
+                .result();
         Collections.sort(staticAbilities, comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
@@ -1808,15 +1810,9 @@ public class GameAction {
         boolean recheck = false;
 
         // Corner Case 1: Legendary with non legendary creature names
-        CardCollection nonLegendaryNames = CardLists.filter(a, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card input) {
-                return input.hasNonLegendaryCreatureNames();
-            }
+        CardCollection nonLegendaryNames = CardLists.filter(a, Card::hasNonLegendaryCreatureNames);
 
-        });
-
-        Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
+        Multimap<String, Card> uniqueLegends = Multimaps.index(a, Card::getName);
         CardCollection removed = new CardCollection();
 
         for (String name : uniqueLegends.keySet()) {
@@ -2227,19 +2223,9 @@ public class GameAction {
     private void runPreOpeningHandActions(final Player first) {
         Player takesAction = first;
         do {
-            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    return input.getName().equals("Emissary's Ploy");
-                }
-            });
+            List<Card> ploys = CardLists.filter(takesAction.getCardsIn(ZoneType.Command), input -> input.getName().equals("Emissary's Ploy"));
             CardCollectionView all = CardLists.filterControlledBy(game.getCardsInGame(), takesAction);
-            List<Card> spires = CardLists.filter(all, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(Card input) {
-                        return input.getName().equals("Cryptic Spires");
-                    }
-            });
+            List<Card> spires = CardLists.filter(all, input -> input.getName().equals("Cryptic Spires"));
 
             int chosen = 1;
             List<Integer> cmc = Lists.newArrayList(1, 2, 3);

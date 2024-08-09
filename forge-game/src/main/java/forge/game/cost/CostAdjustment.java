@@ -295,6 +295,10 @@ public class CostAdjustment {
             }
         } // isSpell
 
+        if (sa.hasParam("TapCreaturesForMana")) {
+            adjustCostByConvokeOrImprovise(cost, sa, false, test);
+        }
+
         // Reset card state (if changed)
         if (isStateChangeToFaceDown) {
             originalCard.setFaceDown(false);

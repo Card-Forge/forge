@@ -14,4 +14,4 @@ SVar:Y:Count$CardCounters.P1P1/Minus.1
 SVar:X:Count$RememberedSize
 SVar:Power:Count$CardPower
 DeckHas:Ability$Counters|LifeGain
-Oracle:Vigilance\nLily Bowen, Raging Grandma enters the battlefield with two +1/+1 counters on it.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Lily Bowen if its power is 16 or less. Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.
+Oracle:Vigilance\nLily Bowen, Raging Grandma enters with two +1/+1 counters on it.\nAt the beginning of your upkeep, double the number of +1/+1 counters on Lily Bowen if its power is 16 or less. Otherwise, remove all but one +1/+1 counter from it, then you gain 1 life for each +1/+1 counter removed this way.

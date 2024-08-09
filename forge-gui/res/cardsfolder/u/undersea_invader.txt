@@ -3,5 +3,6 @@ ManaCost:4 U U
 Types:Creature Giant Rogue
 PT:5/6
 K:Flash
-K:CARDNAME enters the battlefield tapped.
-Oracle:Flash\nUndersea Invader enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Flash\nUndersea Invader enters tapped.

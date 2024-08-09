@@ -4,4 +4,4 @@ Types:Artifact Equipment
 K:Equip:1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Trample | Description$ Equipped creature has trample and can't be blocked by more than one creature.
 S:Mode$ MinMaxBlocker | ValidCard$ Creature.EquippedBy | Max$ 1 | Secondary$ True | Description$ Equipped creature can't be blocked by more than one creature.
-Oracle:Equipped creature has trample and can't be blocked by more than one creature.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
+Oracle:Equipped creature has trample and can't be blocked by more than one creature.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery. This card enters unattached and stays on the battlefield if the creature leaves.)

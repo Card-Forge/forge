@@ -184,16 +184,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (nextTurn) {
-                    game.getCleanup().addUntil(p, new GameCommand() {
-                        @Override
-                        public void run() {
-                            List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
-                            source.removeRemembered(tempRemembered);
-                            source.addRemembered(p);
-                            AbilityUtils.resolve(repeat);
-                            source.removeRemembered(p);
-                            source.addRemembered(tempRemembered);
-                        }
+                    game.getCleanup().addUntil(p, (GameCommand) () -> {
+                        List<Object> tempRemembered = Lists.newArrayList(Iterables.filter(source.getRemembered(), Player.class));
+                        source.removeRemembered(tempRemembered);
+                        source.addRemembered(p);
+                        AbilityUtils.resolve(repeat);
+                        source.removeRemembered(p);
+                        source.addRemembered(tempRemembered);
                     });
                 } else {
                     // to avoid risk of collision with other abilities swap out other Remembered Player while resolving

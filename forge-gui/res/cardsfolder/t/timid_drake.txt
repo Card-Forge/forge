@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Drake
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When another creature enters the battlefield, return CARDNAME to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ When another creature enters, return CARDNAME to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:AntiBuffedBy:Creature
 AI:RemoveDeck:All
-Oracle:Flying\nWhen another creature enters the battlefield, return Timid Drake to its owner's hand.
+Oracle:Flying\nWhen another creature enters, return Timid Drake to its owner's hand.

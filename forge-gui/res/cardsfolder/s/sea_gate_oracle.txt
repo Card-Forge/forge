@@ -2,6 +2,6 @@ Name:Sea Gate Oracle
 ManaCost:2 U
 Types:Creature Human Wizard
 PT:1/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
 SVar:TrigDig:DB$ Dig | DigNum$ 2 | NoReveal$ True
-Oracle:When Sea Gate Oracle enters the battlefield, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.
+Oracle:When Sea Gate Oracle enters, look at the top two cards of your library. Put one of them into your hand and the other on the bottom of your library.

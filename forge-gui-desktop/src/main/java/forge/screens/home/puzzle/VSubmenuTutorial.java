@@ -6,11 +6,9 @@ import javax.swing.JPanel;
 
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LocalLobby;
-import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.interfaces.IPlayerChangeListener;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.StartButton;
@@ -44,11 +42,7 @@ public enum VSubmenuTutorial implements IVSubmenu<CSubmenuTutorial> {
 
         lobby.setListener(vLobby);
 
-        vLobby.setPlayerChangeListener(new IPlayerChangeListener() {
-            @Override public final void update(final int index, final UpdateLobbyPlayerEvent event) {
-                lobby.applyToSlot(index, event);
-            }
-        });
+        vLobby.setPlayerChangeListener(lobby::applyToSlot);
 
         vLobby.update(false);
     }

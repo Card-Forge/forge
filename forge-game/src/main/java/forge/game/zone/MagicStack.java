@@ -207,7 +207,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         clearUndoStack(Lists.newArrayList(sa));
     }
-    private final void clearUndoStack(List<SpellAbility> sas) {
+    private void clearUndoStack(List<SpellAbility> sas) {
         for (SpellAbility sa : sas) {
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
@@ -629,7 +629,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
+    private void finishResolving(final SpellAbility sa, final boolean fizzle) {
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
         final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
@@ -651,7 +651,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         curResolvingCard = null;
     }
 
-    private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
+    private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
         Card source = sa.getHostCard();
 
         // need to update active trigger
@@ -687,7 +687,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
+    private boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
         List<GameObject> toRemove = Lists.newArrayList();
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
             if (fizzle == null) {
@@ -842,7 +842,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return result;
     }
 
-    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
+    private boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
         if (simultaneousStackEntryList.isEmpty()) {
             return false;
         }

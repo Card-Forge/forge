@@ -22,12 +22,10 @@ public enum CSubmenuAvatars implements ICDoc {
 
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public final void run() {
-                view.refreshAvatarFromPrefs(0);
-                view.refreshAvatarFromPrefs(1);
-                view.focusHuman(); }
-        });
+        SwingUtilities.invokeLater(() -> {
+            view.refreshAvatarFromPrefs(0);
+            view.refreshAvatarFromPrefs(1);
+            view.focusHuman(); });
     }
 
 }

@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Vampire Warrior
 PT:4/4
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, up to two target creatures can't block this turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, up to two target creatures can't block this turn.
 SVar:TrigPump:DB$ Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't block. | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:PlayMain1:TRUE
-Oracle:Haste\nWhen Markov Warlord enters the battlefield, up to two target creatures can't block this turn.
+Oracle:Haste\nWhen Markov Warlord enters, up to two target creatures can't block this turn.

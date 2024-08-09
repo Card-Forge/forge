@@ -13,8 +13,6 @@ import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.screens.FScreen;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
@@ -92,21 +90,15 @@ public class AvatarSelector extends FScreen {
                 .build();
 
         if (index == -1) {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(getRandomAvatar(usedAvatars));
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(getRandomAvatar(usedAvatars));
+                Forge.back();
             });
         }
         else {
-            lbl.setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    callback.run(index);
-                    Forge.back();
-                }
+            lbl.setCommand(e -> {
+                callback.run(index);
+                Forge.back();
             });
         }
         scroller.add(lbl);

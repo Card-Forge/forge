@@ -3,7 +3,7 @@ ManaCost:3 U U
 Types:Creature Fish
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoot | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then discard a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoot | TriggerDescription$ When CARDNAME enters, draw a card, then discard a card.
 SVar:TrigLoot:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-Oracle:Flying\nWhen Sky-Eel School enters the battlefield, draw a card, then discard a card.
+Oracle:Flying\nWhen Sky-Eel School enters, draw a card, then discard a card.

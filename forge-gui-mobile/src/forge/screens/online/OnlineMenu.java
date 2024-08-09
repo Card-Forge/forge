@@ -12,8 +12,6 @@ import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 
@@ -29,37 +27,34 @@ public class OnlineMenu extends FPopupMenu {
 
         OnlineScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if(screenClass == null) {
-                        FOptionPane.showConfirmDialog(
-                                Forge.getLocalizer().getMessage("lblLeaveLobbyDescription"),
-                                Forge.getLocalizer().getMessage("lblDisconnect"), new Callback<Boolean>() {
-                                    @Override
-                                    public void run(Boolean result) {
-                                        if (result) {
-                                            if (FServerManager.getInstance() != null)
-                                                if(FServerManager.getInstance().isHosting()) {
-                                                    FServerManager.getInstance().unsetReady();
-                                                    FServerManager.getInstance().stopServer();
-                                                }
+            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, e -> {
+                if(screenClass == null) {
+                    FOptionPane.showConfirmDialog(
+                            Forge.getLocalizer().getMessage("lblLeaveLobbyDescription"),
+                            Forge.getLocalizer().getMessage("lblDisconnect"), new Callback<Boolean>() {
+                                @Override
+                                public void run(Boolean result) {
+                                    if (result) {
+                                        if (FServerManager.getInstance() != null)
+                                            if(FServerManager.getInstance().isHosting()) {
+                                                FServerManager.getInstance().unsetReady();
+                                                FServerManager.getInstance().stopServer();
+                                            }
 
-                                            if (OnlineLobbyScreen.getfGameClient() != null)
-                                                OnlineLobbyScreen.closeClient();
+                                        if (OnlineLobbyScreen.getfGameClient() != null)
+                                            OnlineLobbyScreen.closeClient();
 
-                                            Forge.back();
-                                            screen = null;
-                                            OnlineLobbyScreen.clearGameLobby();
-                                        }
+                                        Forge.back();
+                                        screen = null;
+                                        OnlineLobbyScreen.clearGameLobby();
                                     }
-                                });
-                        return;
-                    }
-                    Forge.back(); //remove current screen from chain
-                    open();
-                    setPreferredScreen(OnlineScreen.this);
+                                }
+                            });
+                    return;
                 }
+                Forge.back(); //remove current screen from chain
+                open();
+                setPreferredScreen(OnlineScreen.this);
             });
         }
         
