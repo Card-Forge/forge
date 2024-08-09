@@ -1,0 +1,7 @@
+Name:Mysterious Confluence
+ManaCost:5
+Types:Instant
+A:SP$ NameCard | AtRandom$ True | ChooseFromList$ Righteous Confluence,Mystic Confluence,Wretched Confluence,Fiery Confluence,Verdant Confluence,Brokers Confluence,Cabaretti Confluence,Maestros Confluence,Obscura Confluence,Riveteers Confluence | SubAbility$ DBCast | StackDescription$ SpellDescription | SpellDescription$ Choose a card at random from among Righteous Confluence, Mystic Confluence, Wretched Confluence, Fiery Confluence, Verdant Confluence, Brokers Confluence, Cabaretti Confluence, Maestros Confluence, Obscura Confluence, and Riveteers Confluence. Create a copy of that card. You may cast the copy without paying its mana cost.
+SVar:DBCast:DB$ Play | WithoutManaCost$ True | CopyFromChosenName$ True | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+Oracle:Choose a card at random from among Righteous Confluence, Mystic Confluence, Wretched Confluence, Fiery Confluence, Verdant Confluence, Brokers Confluence, Cabaretti Confluence, Maestros Confluence, Obscura Confluence, and Riveteers Confluence. Create a copy of that card. You may cast the copy without paying its mana cost.

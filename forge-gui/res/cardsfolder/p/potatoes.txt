@@ -1,0 +1,10 @@
+Name:Potatoes
+ManaCost:0
+Types:Artifact Food
+A:AB$ Charm | Cost$ 2 T Sac<1/CARDNAME> | Choices$ Boil,Mash,Stew
+SVar:Boil:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ Boil — CARDNAME deals 1 damage to any target.
+SVar:Mash:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 2 | SpellDescription$ Mash — Create two Food tokens.
+SVar:Stew:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ Stew — Gain 3 life. Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+DeckHas:Ability$Sacrifice
+Oracle:{2}, {T}, Sacrifice Potatoes: Choose one —\n• Boil — Potatoes deals 1 damage to any target.\n• Mash — Create two Food tokens.\n• Stew — Gain 3 life. Draw a card.

@@ -1,0 +1,9 @@
+Name:Delve too Deep
+ManaCost:X B
+Types:Sorcery
+K:Delve
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -X | NumDef$ -X | IsCurse$ True | SubAbility$ DBToken | SpellDescription$ Target creature gets -X/-X until end of turn. If X was 7 or greater, create a 7/7 black and red Demon creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ br_7_7_demon | TokenOwner$ You | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Demon
+Oracle:Delve\nTarget creature gets -X/-X until end of turn. If X was 7 or greater, create a 7/7 black and red Demon creature token.
