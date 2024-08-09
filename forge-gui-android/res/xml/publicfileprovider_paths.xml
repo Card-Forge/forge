@@ -1,0 +1,11 @@
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path
+            name="external"
+            path="." />
+    <external-files-path
+            name="external_files"
+            path="." />
+    <files-path
+            name="files"
+            path="." />
+</paths>

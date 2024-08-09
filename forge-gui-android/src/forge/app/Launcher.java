@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import forge.gui.GuiBase;
 
 import java.io.BufferedReader;
@@ -20,9 +21,13 @@ public class Launcher extends Activity {
         startActivity(main);
 
         Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
+        sendIntent(intent, intent.getAction(), intent.getType());
 
+        finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    private void sendIntent(Intent intent, String action, String type) {
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             final Handler handler = new Handler();
             handler.postDelayed(() -> {
@@ -50,9 +55,7 @@ public class Launcher extends Activity {
                 }
             }, 1500);
         }
-        finish();
     }
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -61,8 +64,7 @@ public class Launcher extends Activity {
         String type = intent.getType();
 
         if (Intent.ACTION_SEND.equals(action) && type != null) {
-            final Handler handler = new Handler();
-            handler.postDelayed(() -> {
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 if ("text/plain".equals(type)) {
                     Uri textUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
                     if (textUri != null) {
