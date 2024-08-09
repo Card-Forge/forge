@@ -1,0 +1,14 @@
+Name:Mountain Mover
+ManaCost:2 R
+Types:Artifact Vehicle
+PT:5/3
+K:Flying
+K:Haste
+K:Crew:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ LiftMountain | TriggerDescription$ Whenever CARDNAME enters or attacks, put a Mountain card from outside the game underneath it.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ LiftMountain | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, put a Mountain card from outside the game underneath it.
+SVar:LiftMountain:DB$ ChangeZone | Reveal$ True | Origin$ Sideboard | Destination$ Exile | ChangeType$ Card.Mountain+YouOwn | ChangeTypeDesc$ Mountain card they own | ChangeNum$ 1 | Hidden$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DropMountain | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards underneath it onto the battlefield.
+SVar:DropMountain:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+Text:(Developer's note: For clarity, the first triggered ability has you choosing a Mountain card you own from your sideboard, reveal it and then put it in exile. The second triggered ability puts all cards exiled with this permanent onto the battlefield under the control of this permanent's controller.)
+Oracle:Flying, haste\nWhenever Mountain Mover enters or attacks, put a Mountain card from outside the game underneath it.\nWhen Mountain Mover leaves the battlefield, put all cards underneath it onto the battlefield.\nCrew 3
