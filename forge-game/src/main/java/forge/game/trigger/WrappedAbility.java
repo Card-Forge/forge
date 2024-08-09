@@ -362,15 +362,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public ManaCost getMultiKickerManaCost() {
-        return sa.getMultiKickerManaCost();
-    }
-    @Override
-    public void setMultiKickerManaCost(final ManaCost cost) {
-        sa.setMultiKickerManaCost(cost);
-    }
-
-    @Override
     public void setPayCosts(final Cost abCost) {
         sa.setPayCosts(abCost);
     }
