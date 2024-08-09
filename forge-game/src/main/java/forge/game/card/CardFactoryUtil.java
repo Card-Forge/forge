@@ -907,13 +907,16 @@ public class CardFactoryUtil {
             String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True";
             String[] k = keyword.split(":");
             if (k.length > 2) {
-                abString = abString + " | " + k[2];
+                abString += " | " + k[2];
             }
 
             final Trigger casualtyTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
-            casualtyTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
-            casualtyTrigger.setSVar("Casualty", "0");
-            casualtyTrigger.setSVar("CasualtyPaid", "0");
+            SpellAbility sa = AbilityFactory.getAbility(abString, card);
+            sa.setSVar("CasualtyPaid", "Count$hasOptionalKeywordAmount");
+            sa.setSVar("Casualty", "Count$OptionalKeywordAmount");
+            casualtyTrigger.setOverridingAbility(sa);
+            casualtyTrigger.setSVar("CasualtyPaid", "Count$hasOptionalKeywordAmount");
+            casualtyTrigger.setSVar("Casualty", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(casualtyTrigger);
         } else if (keyword.startsWith("Chapter")) {
@@ -960,7 +963,7 @@ public class CardFactoryUtil {
 
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             conspireTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
-            conspireTrigger.setSVar("Conspire", "0");
+            conspireTrigger.setSVar("Conspire", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(conspireTrigger);
         } else if (keyword.startsWith("Cumulative upkeep")) {
@@ -1585,14 +1588,14 @@ public class CardFactoryUtil {
                 costDesc = "—" + costDesc;
             }
 
-            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+linkedCastTrigger | CheckSVar$ Offspring | Secondary$ True " +
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Offspring | Secondary$ True " +
                     "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-            trigger.setSVar("Offspring", "0");
+            trigger.setSVar("Offspring", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {
@@ -1743,9 +1746,9 @@ public class CardFactoryUtil {
 
             final Trigger replicateTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility replicateAbility = AbilityFactory.getAbility(abString, card);
-            replicateAbility.setSVar("ReplicateAmount", "0");
+            replicateAbility.setSVar("ReplicateAmount", "Count$OptionalKeywordAmount");
             replicateTrigger.setOverridingAbility(replicateAbility);
-            replicateTrigger.setSVar("ReplicateAmount", "0");
+            replicateTrigger.setSVar("ReplicateAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(replicateTrigger);
         } else if (keyword.startsWith("Ripple")) {
             final String[] k = keyword.split(":");
@@ -1825,9 +1828,9 @@ public class CardFactoryUtil {
 
             final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);
-            squadAbility.setSVar("SquadAmount", "0");
+            squadAbility.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             squadTrigger.setOverridingAbility(squadAbility);
-            squadTrigger.setSVar("SquadAmount", "0");
+            squadTrigger.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(squadTrigger);
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
