@@ -842,7 +842,6 @@ public class GameAction {
         }
 
         if (zoneTo.is(ZoneType.Stack)) {
-            // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
             c.setCastFrom(zoneFrom);
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                 c.setCastSA(cause);
