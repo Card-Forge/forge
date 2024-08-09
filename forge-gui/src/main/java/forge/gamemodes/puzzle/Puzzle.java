@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.common.collect.Sets;
 
 import forge.ai.GameState;
+import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
@@ -131,7 +132,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         goalCard.setOwner(human);
         goalCard.setImageKey("t:puzzle");
         goalCard.setName("Puzzle Goal");
-        goalCard.setImmutable(true);
+        goalCard.setGamePieceType(GamePieceType.EFFECT);
         goalCard.setOracleText(getGoalDescription());
 
         int turnCorr = 0;

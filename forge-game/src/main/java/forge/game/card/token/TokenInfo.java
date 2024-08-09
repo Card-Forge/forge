@@ -3,6 +3,7 @@ package forge.game.card.token;
 import java.util.List;
 import java.util.Map;
 
+import forge.card.GamePieceType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -117,7 +118,7 @@ public class TokenInfo {
         c.setImageKey(ImageKeys.getTokenKey(imageName));
 
         c.setColor(color.isEmpty() ? manaCost : color);
-        c.setToken(true);
+        c.setGamePieceType(GamePieceType.TOKEN);
 
         for (final String t : types) {
             c.addType(t);
@@ -151,7 +152,7 @@ public class TokenInfo {
         final Card c = toCard(game, id);
 
         c.setOwner(controller);
-        c.setToken(true);
+        c.setGamePieceType(GamePieceType.TOKEN);
         CardFactoryUtil.setupKeywordedAbilities(c);
         // add them later to prevent setupKeywords from adding them multiple times
         for (final String kw : intrinsicKeywords) {

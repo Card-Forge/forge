@@ -32,6 +32,7 @@ public enum ZoneType {
     None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
+    public static final List<ZoneType> PART_OF_COMMAND_ZONE = Arrays.asList(Command, SchemeDeck, PlanarDeck, AttractionDeck, Junkyard);
 
     private final boolean holdsHiddenInfo;
     private final String zoneName;
@@ -73,6 +74,10 @@ public enum ZoneType {
 
     public boolean isKnown() {
         return !holdsHiddenInfo;
+    }
+
+    public boolean isPartOfCommandZone() {
+        return PART_OF_COMMAND_ZONE.contains(this);
     }
 
     public String getTranslatedName() {
