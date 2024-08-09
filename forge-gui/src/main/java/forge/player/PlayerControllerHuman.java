@@ -722,6 +722,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // create a mapping between a spell's view and the spell itself
         Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(spells);
 
+        if(sa.hasParam("ShowCurrentCard"))
+        {
+            Card current = Iterables.getFirst(AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("ShowCurrentCard"), sa), null);
+            if(current != null) {
+                String promptCurrent = localizer.getMessage("lblCurrentCard") + ": " + current;
+                title = title + "\n" + promptCurrent;
+            }
+        }
+
         //override generic
         List<SpellAbilityView> chosen = getGui().getChoices(title, num, num, Lists.newArrayList(spellViewCache.keySet()));
 
