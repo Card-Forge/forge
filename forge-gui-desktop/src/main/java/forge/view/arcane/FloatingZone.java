@@ -147,7 +147,7 @@ public class FloatingZone extends FloatingCardArea {
         if (zoneCards != null) {
             cardList = new FCollection<>(zoneCards);
             if (sortedByName) {
-                Collections.sort(cardList, comp);
+                cardList.sort(comp);
             }
             return cardList;
         } else {

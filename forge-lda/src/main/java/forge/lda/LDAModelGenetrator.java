@@ -254,7 +254,7 @@ public final class LDAModelGenetrator {
         }
         Comparator<Archetype> archetypeComparator = (o1, o2) -> o2.getDeckCount().compareTo(o1.getDeckCount());
 
-        Collections.sort(unfilteredTopics,archetypeComparator);
+        unfilteredTopics.sort(archetypeComparator);
         return unfilteredTopics;
     }
 
@@ -263,7 +263,7 @@ public final class LDAModelGenetrator {
     @SuppressWarnings("unchecked")
     private static <K, V> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-        Collections.sort(list, (Comparator<Object>) (o1, o2) -> ((Comparable<V>) ((Map.Entry<K, V>) (o2)).getValue()).compareTo(((Map.Entry<K, V>) (o1)).getValue()));
+        list.sort((Comparator<Object>) (o1, o2) -> ((Comparable<V>) ((Map.Entry<K, V>) (o2)).getValue()).compareTo(((Map.Entry<K, V>) (o1)).getValue()));
 
         Map<K, V> result = new LinkedHashMap<>();
         for (Map.Entry<K, V> entry : list) {

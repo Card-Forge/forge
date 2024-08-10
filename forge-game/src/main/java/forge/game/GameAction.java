@@ -1143,7 +1143,7 @@ public class GameAction {
                 .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
                 .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
                 .result();
-        Collections.sort(staticAbilities, comp);
+        staticAbilities.sort(comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {

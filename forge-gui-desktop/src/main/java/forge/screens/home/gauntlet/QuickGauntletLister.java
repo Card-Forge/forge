@@ -65,7 +65,7 @@ public class QuickGauntletLister extends JPanel {
         this.removeAll();
         final List<RowPanel> tempRows = new ArrayList<>();
         final List<GauntletData> sorted = new ArrayList<>(gauntlets);
-        Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
+        sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
 
         // Title row
         // Note: careful with the widths of the rows here;

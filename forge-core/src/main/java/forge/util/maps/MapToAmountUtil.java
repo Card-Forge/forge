@@ -133,7 +133,7 @@ public final class MapToAmountUtil {
         for (final Entry<T, Integer> entry : map.entrySet()) {
             entries.add(Pair.of(entry.getKey(), entry.getValue()));
         }
-        Collections.sort(entries, Entry.comparingByValue());
+        entries.sort(Entry.comparingByValue());
         return entries;
     }
 

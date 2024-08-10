@@ -160,7 +160,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 columns.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(columns, Comparator.comparingInt(ItemTableColumn::getIndex));
+        columns.sort(Comparator.comparingInt(ItemTableColumn::getIndex));
 
         //hide table header if only showing single string column
         final boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));
