@@ -7230,9 +7230,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getCMC(SplitCMCMode.CurrentSideCMC);
     }
     public int getCMC(SplitCMCMode mode) {
-        if (isToken() && getCopiedPermanent() == null) {
-            return 0;
-        }
         if (lkiCMC >= 0) {
             return lkiCMC; // a workaround used by getLKICopy
         }
