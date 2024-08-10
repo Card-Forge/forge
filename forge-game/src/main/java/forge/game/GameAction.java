@@ -248,7 +248,8 @@ public class GameAction {
             // CR 707.12 casting of a card copy
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
                 copied.setCopiedPermanent(c.getCopiedPermanent());
-                copied.setGamePieceType(GamePieceType.COPIED_SPELL);
+                //TODO: Feels like this should fit here and seems to work but it'll take a fair bit more testing to be sure.
+                //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
             }
 
             copied.setGameTimestamp(c.getGameTimestamp());
