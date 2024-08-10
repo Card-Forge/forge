@@ -2092,6 +2092,7 @@ public class ComputerUtilCard {
             for (Card card2 : card.getEnchantedBy()) {
                 if (card2.getOwner() != ai) {
                     disabledByEnemy = true;
+                    break;
                 }
             }
             if (!disabledByEnemy) {

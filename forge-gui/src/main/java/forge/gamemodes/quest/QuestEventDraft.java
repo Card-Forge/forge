@@ -251,6 +251,7 @@ public class QuestEventDraft implements IQuestEvent {
         for (final String name : aiNames) {
             if (playerName.equals(name)) {
                 isHumanPlayer = false;
+                break;
             }
         }
 
@@ -812,6 +813,7 @@ public class QuestEventDraft implements IQuestEvent {
                 for (CardEdition set : block.getSets()) {
                     if (!allowedQuestSets.contains(set)) {
                         blockAllowed = false;
+                        break;
                     }
                 }
 
