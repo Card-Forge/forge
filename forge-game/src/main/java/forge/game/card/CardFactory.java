@@ -170,15 +170,6 @@ public class CardFactory {
         return copySA;
     }
 
-    /**
-     * Set of card types that indicate a nontraditional game piece.
-     */
-    private static final EnumSet<CardType.CoreType> nontraditionalCoreTypes = EnumSet.of(
-            CardType.CoreType.Plane, CardType.CoreType.Phenomenon, CardType.CoreType.Scheme,
-            CardType.CoreType.Vanguard, CardType.CoreType.Dungeon);
-    //Can't add Attractions and Contraptions; those are subtypes.
-    //Sticker sheets can probably go here eventually though.
-
     public static Card getCard(final IPaperCard cp, final Player owner, final Game game) {
         return getCard(cp, owner, owner == null ? -1 : owner.getGame().nextCardId(), game);
     }
@@ -196,24 +187,10 @@ public class CardFactory {
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
 
-        CardType cardType = c.getRules().getType();
         if(cp.isToken())
             c.setGamePieceType(GamePieceType.TOKEN);
-        else if(nontraditionalCoreTypes.stream().anyMatch(cardType::hasType))
-        {
-            if(cardType.isPlane() || cardType.isPhenomenon())
-                c.setGamePieceType(GamePieceType.PLANAR);
-            else if(cardType.isScheme())
-                c.setGamePieceType(GamePieceType.SCHEME);
-            else if(cardType.isDungeon())
-                c.setGamePieceType(GamePieceType.DUNGEON);
-            else if(cardType.isVanguard())
-                c.setGamePieceType(GamePieceType.AVATAR);
-        }
-        else if(cardType.isAttraction())
-            c.setGamePieceType(GamePieceType.ATTRACTION);
         else
-            c.setGamePieceType(GamePieceType.CARD);
+            c.setGamePieceType(c.getRules().getType().getGamePieceType());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
