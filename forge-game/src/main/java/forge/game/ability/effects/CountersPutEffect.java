@@ -690,7 +690,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     protected CounterType chooseTypeFromList(SpellAbility sa, String list, GameEntity obj, PlayerController pc) {
         List<CounterType> choices = Lists.newArrayList();
         for (String s : list.split(",")) {
-            if (!s.equals("") && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
+            if (!s.isEmpty() && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
                 CounterType type = CounterType.getType(s);
                 if (!choices.contains(type)) {
                     choices.add(type);

@@ -2470,7 +2470,7 @@ public class GameAction {
                         Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
                 if (showRevealDialog) {
                     final String message = Localizer.getInstance().getMessage("lblMilledCards");
-                    final boolean addSuffix = !toZoneStr.equals("");
+                    final boolean addSuffix = !toZoneStr.isEmpty();
                     game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
                 game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +

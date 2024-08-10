@@ -2809,7 +2809,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
-                if (!stAbD.equals("")) {
+                if (!stAbD.isEmpty()) {
                     boolean disabled = getGame() != null && getController() != null && game.getAge() != GameStage.Play && !stAb.checkConditions();
                     if (disabled) sb.append(grayTag);
                     sb.append(stAbD);
@@ -3187,7 +3187,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary()) {
                 final String stAbD = stAb.toString();
-                if (!stAbD.equals("")) {
+                if (!stAbD.isEmpty()) {
                     sb.append(stAbD).append("\r\n");
                 }
             }

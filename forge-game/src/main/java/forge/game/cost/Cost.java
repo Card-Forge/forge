@@ -254,8 +254,8 @@ public class Cost implements Serializable {
             }
         }
 
-        if (parsedMana == null && (manaParts.length() > 0 || !xMin.equals(""))) {
-            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.equals("") ? null : xMin);
+        if (parsedMana == null && (manaParts.length() > 0 || !xMin.isEmpty())) {
+            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.isEmpty() ? null : xMin);
         }
         if (parsedMana != null) {
             costParts.add(parsedMana);

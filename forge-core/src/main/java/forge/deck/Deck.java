@@ -550,7 +550,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public void setAiHints(String aiHintsInfo) {
-        if (aiHintsInfo == null || aiHintsInfo.trim().equals("")) {
+        if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
         }
         String[] hints = aiHintsInfo.split("\\|");

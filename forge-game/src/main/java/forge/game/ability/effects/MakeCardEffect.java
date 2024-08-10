@@ -149,7 +149,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
 
             for (final String name : names) {
                 int toMake = amount;
-                if (!name.equals("")) {
+                if (!name.isEmpty()) {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {

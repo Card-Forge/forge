@@ -337,7 +337,7 @@ public final class ImageKeys {
                         File f = new File(lookupDirectory);
                         if (f.exists() && f.isDirectory()) {
                             for (String ext : FILE_EXTENSIONS) {
-                                if (ext.equals(""))
+                                if (ext.isEmpty())
                                     continue;
                                 File placeholder;
                                 String fb1 = fullborderFile.replace(setKey+"/","")+ext;
@@ -371,7 +371,7 @@ public final class ImageKeys {
     private static File findFile(String dir, String filename) {
         if (dir.equals(CACHE_CARD_PICS_DIR)) {
             for (String ext : FILE_EXTENSIONS) {
-                if (ext.equals(""))
+                if (ext.isEmpty())
                     continue;
 
                 File f = new File(dir, filename + ext);

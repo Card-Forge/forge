@@ -1184,7 +1184,7 @@ public class MatchScreen extends FScreen {
     private boolean hasActivePlane() {
         if (MatchController.instance.getGameView() != null)
             if (MatchController.instance.getGameView().getPlanarPlayer() != null) {
-                return !MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName().equals("");
+                return !MatchController.instance.getGameView().getPlanarPlayer().getCurrentPlaneName().isEmpty();
             }
         return false;
     }

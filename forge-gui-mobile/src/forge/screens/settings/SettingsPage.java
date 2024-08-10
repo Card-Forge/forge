@@ -60,7 +60,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
                 ForgePreferences prefs = FModel.getPreferences();
-                if (prefs.getPref(FPref.UI_CJK_FONT).equals("") &&
+                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty() &&
                         (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
                     String message = "Please download CJK font (from \"Files\"), and set it before change language.";
                     if (newValue.equals("zh-CN")) {

@@ -251,7 +251,7 @@ public class CardTranslation {
     public static void buildOracleMapping(String faceName, String oracleText) {
         if (!needsTranslation() || oracleMappings.containsKey(faceName)) return;
         String translatedText = getTranslatedOracle(faceName);
-        if (translatedText.equals("")) {
+        if (translatedText.isEmpty()) {
             // english card only, fall back
             return;
         }
