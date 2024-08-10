@@ -273,8 +273,7 @@ public class LoadGauntletScreen extends LaunchScreen {
         }
 
         public void refresh() {
-            List<GauntletData> sorted = new ArrayList<>();
-            sorted.addAll(gauntlets);
+            List<GauntletData> sorted = new ArrayList<>(gauntlets);
             Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }

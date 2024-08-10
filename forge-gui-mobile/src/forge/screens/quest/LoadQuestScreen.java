@@ -300,8 +300,7 @@ public class LoadQuestScreen extends LaunchScreen {
         }
 
         public void setQuests(List<QuestData> qd0) {
-            List<QuestData> sorted = new ArrayList<>();
-            sorted.addAll(qd0);
+            List<QuestData> sorted = new ArrayList<>(qd0);
             Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }

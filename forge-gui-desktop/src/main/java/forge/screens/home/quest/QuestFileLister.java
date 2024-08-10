@@ -76,8 +76,7 @@ public class QuestFileLister extends JPanel {
     public void setQuests(List<QuestData> qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<>();
-        List<QuestData> sorted = new ArrayList<>();
-        sorted.addAll(qd0);
+        List<QuestData> sorted = new ArrayList<>(qd0);
         Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
 
         // Title row

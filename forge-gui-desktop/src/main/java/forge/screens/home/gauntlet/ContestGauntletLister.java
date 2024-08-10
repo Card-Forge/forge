@@ -45,8 +45,7 @@ public class ContestGauntletLister extends JPanel {
     public void setGauntlets(final List<GauntletData> gd0) {
         this.removeAll();
         final List<RowPanel> tempRows = new ArrayList<>();
-        final List<GauntletData> sorted = new ArrayList<>();
-        sorted.addAll(gd0);
+        final List<GauntletData> sorted = new ArrayList<>(gd0);
         Collections.sort(sorted, Comparator.comparing(GauntletData::getName));
 
         // Title row
