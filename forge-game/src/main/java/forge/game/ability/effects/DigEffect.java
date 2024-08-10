@@ -375,10 +375,11 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                     for (Card c : movedCards) {
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
                             c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                         } else {
@@ -470,6 +471,9 @@ public class DigEffect extends SpellAbilityEffect {
                             }
 
                             for (final Card c : afterOrder) {
+                                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                                AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                                 Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, moveParams);
                                 if (remZone2) {
                                     host.addRemembered(m);
@@ -478,6 +482,9 @@ public class DigEffect extends SpellAbilityEffect {
                         } else {
                             // just move them randomly
                             for (Card c : rest) {
+                                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                                AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                                 if (destZone2 == ZoneType.Exile && !c.canExiledBy(sa, true)) {
                                     continue;
                                 }
