@@ -323,7 +323,7 @@ public final class ImageKeys {
     }
     public static boolean hasSetLookup(String filename) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
-            return StaticData.instance().getSetLookup().keySet().stream().anyMatch(setKey -> filename.startsWith(setKey));
+            return StaticData.instance().getSetLookup().keySet().stream().anyMatch(filename::startsWith);
         }
 
         return false;

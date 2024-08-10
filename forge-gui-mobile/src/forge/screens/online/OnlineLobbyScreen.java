@@ -115,7 +115,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                         }
                         chatInterface.addMessage(result);
                         if (!joinServer) {
-                            FThreads.invokeInBackgroundThread(() -> NetConnectUtil.copyHostedServerUrl());
+                            FThreads.invokeInBackgroundThread(NetConnectUtil::copyHostedServerUrl);
                         }
                         //update menu buttons
                         OnlineScreen.Lobby.update();

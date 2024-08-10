@@ -114,7 +114,7 @@ public class SpellSmithScene extends UIScene {
             }
         }
 
-        ui.onButtonPress("done", () -> SpellSmithScene.this.done());
+        ui.onButtonPress("done", SpellSmithScene.this::done);
         ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
         ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
         ui.onButtonPress("BReset", () -> {

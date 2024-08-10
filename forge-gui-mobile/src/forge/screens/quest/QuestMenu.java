@@ -51,14 +51,14 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         //invoke in background thread so prompts can work
         ThreadUtil.invokeInGameThread(() -> {
             QuestUtil.chooseAndUnlockEdition();
-            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+            FThreads.invokeInEdtLater(QuestMenu::updateCurrentQuestScreen);
         });
     });
     private static final FMenuItem travelItem = new FMenuItem(Forge.getLocalizer().getMessage("btnTravel"), FSkinImage.QUEST_MAP, event -> {
         //invoke in background thread so prompts can work
         ThreadUtil.invokeInGameThread(() -> {
             QuestUtil.travelWorld();
-            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+            FThreads.invokeInEdtLater(QuestMenu::updateCurrentQuestScreen);
         });
     });
     private static final FMenuItem prefsItem = new FMenuItem(Forge.getLocalizer().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, event -> setCurrentScreen(prefsScreen));
