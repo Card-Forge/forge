@@ -283,7 +283,7 @@ public class SoundSystem {
             invalidateSoundCache();
         }
 
-        return availableSets.toArray(new String[availableSets.size()]);
+        return availableSets.toArray(new String[0]);
     }
 
     public String getSoundDirectory() {
@@ -341,6 +341,6 @@ public class SoundSystem {
             MusicPlaylist.invalidateMusicPlaylist();
         }
 
-        return availableSets.toArray(new String[availableSets.size()]);
+        return availableSets.toArray(new String[0]);
     }
 }

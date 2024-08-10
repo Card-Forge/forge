@@ -281,7 +281,7 @@ public class SpellSmithScene extends UIScene {
         loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
         editionList.clearListeners();
         editionList.clearItems();
-        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
+        editionList.setItems(editions.toArray(new CardEdition[0]));
         editionList.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

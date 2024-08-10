@@ -104,7 +104,7 @@ public class TokenInfo {
         if (c.getType().isLegendary()) {
             relevantTypes.add("Legendary");
         }
-        return relevantTypes.toArray(new String[relevantTypes.size()]);
+        return relevantTypes.toArray(new String[0]);
     }
 
     private Card toCard(Game game) {
