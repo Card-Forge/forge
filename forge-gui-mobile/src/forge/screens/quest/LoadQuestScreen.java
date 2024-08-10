@@ -85,7 +85,7 @@ public class LoadQuestScreen extends LaunchScreen {
                 try {
                     arrQuests.put(f.getName(), QuestDataIO.loadData(f));
                 } catch (IOException e) {
-                    System.err.println(String.format("Failed to load quest '%s'", f.getName()));
+                    System.err.printf("Failed to load quest '%s'%n", f.getName());
                     // Failed to load last quest, don't continue with quest loading stuff
                     return;
                 }
