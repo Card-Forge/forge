@@ -183,30 +183,28 @@ public class DialogChooseSets {
 			spinnersEditionTypeMap.put(editionType, spinner);
 		}
 		// == SPINNERS ACTION PERFORMED ==
-		editionTypeSpinners.forEach(spinner -> {
-			spinner.addChangeListener(e -> {
-                // As soon as the value of a spinner becomes different from zero,
-                // enabled the random selection button.
-                int spinValue = (int) spinner.getValue();
-                if (spinValue > 0) {
-                    if (!randomSelectionButton.isEnabled())
-                        randomSelectionButton.setEnabled(true);
-                } else {
-                    // Similarly, when all spinners are set to zero,
-                    // disable the random selection button
-                    boolean allZeros = true;
-                    for (FSpinner spin : editionTypeSpinners) {
-                        int value = (int) spin.getValue();
-                        if (value != 0) {
-                            allZeros = false;
-                            break;
-                        }
-                    }
-                    if (allZeros)
-                        randomSelectionButton.setEnabled(false);
-                }
-            });
-		});
+		editionTypeSpinners.forEach(spinner -> spinner.addChangeListener(e -> {
+			// As soon as the value of a spinner becomes different from zero,
+			// enabled the random selection button.
+			int spinValue = (int) spinner.getValue();
+			if (spinValue > 0) {
+				if (!randomSelectionButton.isEnabled())
+					randomSelectionButton.setEnabled(true);
+			} else {
+			// Similarly, when all spinners are set to zero,
+			// disable the random selection button
+				boolean allZeros = true;
+				for (FSpinner spin : editionTypeSpinners) {
+					int value = (int) spin.getValue();
+					if (value != 0) {
+						allZeros = false;
+						break;
+					}
+				}
+				if (allZeros)
+					randomSelectionButton.setEnabled(false);
+			}
+		}));
 
 		// == ADD SPINNERS AND LABELS TO THE PANEL ==
 		JPanel typeFieldsPanel = null;
