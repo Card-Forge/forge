@@ -300,11 +300,7 @@ public class QuestEventDraft implements IQuestEvent {
             int value;
             final String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
 
-            if (MAP_PRICES.containsKey(boosterName)) {
-                value = MAP_PRICES.get(boosterName);
-            } else {
-                value = 395;
-            }
+            value = MAP_PRICES.getOrDefault(boosterName, 395);
 
             boosterPrices += value;
         }
@@ -529,11 +525,7 @@ public class QuestEventDraft implements IQuestEvent {
 
         final String boosterName = booster.getName();
 
-        if (MAP_PRICES.containsKey(boosterName)) {
-            value = MAP_PRICES.get(boosterName);
-        } else {
-            value = 395;
-        }
+        value = MAP_PRICES.getOrDefault(boosterName, 395);
 
         return value;
 
@@ -961,11 +953,7 @@ public class QuestEventDraft implements IQuestEvent {
             int value;
             final String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
 
-            if (MAP_PRICES.containsKey(boosterName)) {
-                value = MAP_PRICES.get(boosterName);
-            } else {
-                value = 395;
-            }
+            value = MAP_PRICES.getOrDefault(boosterName, 395);
 
             entryFee += value;
 

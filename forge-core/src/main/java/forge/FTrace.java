@@ -15,11 +15,7 @@ public class FTrace {
     }
 
     public static FTrace get(String name0) {
-        FTrace trace = traces.get(name0);
-        if (trace == null) {
-            trace = new FTrace(name0);
-            traces.put(name0, trace);
-        }
+        FTrace trace = traces.computeIfAbsent(name0, FTrace::new);
         return trace;
     }
 

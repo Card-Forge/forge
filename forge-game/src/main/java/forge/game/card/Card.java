@@ -7950,26 +7950,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             }
         } else {
-            List<String> result = chosenModesTurn.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesTurn.put(original, result);
-            }
+            List<String> result = chosenModesTurn.computeIfAbsent(original, k -> Lists.newArrayList());
             result.add(mode);
 
-            result = chosenModesGame.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesGame.put(original, result);
-            }
+            result = chosenModesGame.computeIfAbsent(original, k -> Lists.newArrayList());
             result.add(mode);
 
             if (yourCombat) {
-                result = chosenModesYourCombat.get(original);
-                if (result == null) {
-                    result = Lists.newArrayList();
-                    chosenModesYourCombat.put(original, result);
-                }
+                result = chosenModesYourCombat.computeIfAbsent(original, k -> Lists.newArrayList());
                 result.add(mode);
             }
         }
