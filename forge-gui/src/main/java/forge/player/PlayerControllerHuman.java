@@ -1723,7 +1723,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i < num; i++) {
             if (sa.hasParam("Pawprint")) {
                 final int tmpPaw = chosenPawprint;
-                spellViewCache.values().removeIf(ab -> Integer.valueOf(ab.getParam("Pawprint")) > num - tmpPaw);
+                spellViewCache.values().removeIf(ab -> Integer.parseInt(ab.getParam("Pawprint")) > num - tmpPaw);
             }
             final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
 

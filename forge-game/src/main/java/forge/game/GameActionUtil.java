@@ -588,7 +588,7 @@ public final class GameActionUtil {
                     }
                     result.getPayCosts().add(cost);
                     reset = true;
-                    result.setOptionalKeywordAmount(ki, Integer.valueOf(n));
+                    result.setOptionalKeywordAmount(ki, Integer.parseInt(n));
                 }
             } else if (o.equals("Conspire")) {
                 final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
