@@ -1456,10 +1456,6 @@ public class CardProperty {
             if (!card.isCopiedSpell()) {
                 return false;
             }
-        } else if (property.startsWith("nonCopiedSpell")) {
-            if (card.isCopiedSpell()) {
-                return false;
-            }
         } else if (property.startsWith("hasXCost")) {
             ManaCost cost = card.getManaCost();
             if (cost == null || cost.countX() <= 0) {
@@ -1479,10 +1475,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("exploited")) {
             if (!source.getExploited().contains(card)) {
-                return false;
-            }
-        } else if (property.startsWith("unequalPT")) {
-            if (card.getNetPower() == card.getNetToughness()) {
                 return false;
             }
         } else if (property.startsWith("equalPT")) {
@@ -1899,16 +1891,8 @@ public class CardProperty {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
             }
-        } else if (property.equals("HasNotDevoured")) {
-            if (!card.getDevouredCards().isEmpty()) {
-                return false;
-            }
         } else if (property.equals("IsMonstrous")) {
             if (!card.isMonstrous()) {
-                return false;
-            }
-        } else if (property.equals("IsNotMonstrous")) {
-            if (card.isMonstrous()) {
                 return false;
             }
         } else if (property.equals("IsUnearthed")) {
@@ -1917,10 +1901,6 @@ public class CardProperty {
             }
         } else if (property.equals("IsRenowned")) {
             if (!card.isRenowned()) {
-                return false;
-            }
-        } else if (property.equals("IsNotRenowned")) {
-            if (card.isRenowned()) {
                 return false;
             }
         } else if (property.equals("IsSolved")) {
@@ -1943,10 +1923,6 @@ public class CardProperty {
             }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
-                return false;
-            }
-        } else if (property.equals("IsUnsuspected")) {
-            if (card.isSuspected()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {
