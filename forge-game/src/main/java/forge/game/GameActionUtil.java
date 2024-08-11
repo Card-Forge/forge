@@ -634,7 +634,9 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setOptionalKeywordAmount(ki, v);
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
+                }
             } else if (o.startsWith("Squad")) {
                 String costStr = o.split(":")[1];
                 final Cost cost = new Cost(costStr, false);
@@ -650,7 +652,9 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setOptionalKeywordAmount(ki, v);
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
+                }
             }
         }
 
