@@ -485,7 +485,7 @@ public class AbilityUtils {
         } else if (calcX[0].startsWith("PlayerCount")) {
             final String hType = calcX[0].substring(11);
             final FCollection<Player> players = new FCollection<>();
-            if (hType.equals("Players") || hType.equals("")) {
+            if (hType.equals("Players") || hType.isEmpty()) {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("YourTeam")) {

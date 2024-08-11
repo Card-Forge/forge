@@ -170,6 +170,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // so it gets added to stack
             card.setCopiedPermanent(card);
             card.setGamePieceType(GamePieceType.TOKEN);
+            card.setZone(controller.getZone(ZoneType.None));
             tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();

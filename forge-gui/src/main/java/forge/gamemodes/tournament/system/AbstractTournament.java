@@ -107,11 +107,11 @@ public abstract class AbstractTournament implements Serializable {
 
     public void sortAllPlayers(String sortType) {
         if (sortType.equals("score")) {
-            Collections.sort(allPlayers, (o1, o2) -> o2.getScore() - o1.getScore());
+            allPlayers.sort((o1, o2) -> o2.getScore() - o1.getScore());
         } else if (sortType.equals("index")) {
-            Collections.sort(allPlayers, (o1, o2) -> o2.getIndex() - o1.getIndex());
+            allPlayers.sort((o1, o2) -> o2.getIndex() - o1.getIndex());
         } else if (sortType.equals("swiss")) {
-            Collections.sort(allPlayers, (o1, o2) -> o2.getSwissScore() - o1.getSwissScore());
+            allPlayers.sort((o1, o2) -> o2.getSwissScore() - o1.getSwissScore());
         }
     }
 

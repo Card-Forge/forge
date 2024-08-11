@@ -129,7 +129,7 @@ public class QuestDataIO {
         QuestData data;
         final StringBuilder xml = new StringBuilder();
 
-        try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(xmlSaveFile.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
             final char[] buf = new char[1024];
             while (reader.ready()) {

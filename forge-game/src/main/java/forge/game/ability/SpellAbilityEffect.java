@@ -431,7 +431,7 @@ public abstract class SpellAbilityEffect {
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
     	     "| TriggerDescription$ At the beginning of" + whose + "end step, " + location.toLowerCase()
                 + " CARDNAME.";
-        if (!player.equals("")) {
+        if (!player.isEmpty()) {
             trigStr += " | Player$ " + player;
         }
 

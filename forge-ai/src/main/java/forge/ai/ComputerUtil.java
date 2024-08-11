@@ -2591,7 +2591,7 @@ public class ComputerUtil {
                             chosen = b;
                         }
                     }
-                    if (chosen.equals("")) {
+                    if (chosen.isEmpty()) {
                         for (String b : basics) {
                             if (Iterables.any(possibleCards, CardPredicates.isType(b))) {
                                 chosen = b;

@@ -12,8 +12,11 @@
     <name>Forge Adventure</name>
     <repositories>
         <repository>
-            <id>gdx-nightlies</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>4thline-repo</id>
+            <url>http://4thline.org/m2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>jitpack.io</id>
@@ -29,6 +32,7 @@
                     <include>**/*.vert</include>
                     <include>**/*.frag</include>
                     <include>**/title_bg_lq.png</include>
+                    <include>**/title_bg_lq_portrait.png</include>
                     <include>**/transition.png</include>
                     <include>**/adv_bg_texture.jpg</include>
                     <include>**/adv_bg_splash.png</include>
@@ -231,36 +235,36 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-lwjgl</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-tools</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
-            <version>1.11.0</version>
+            <version>1.12.1</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
@@ -287,7 +291,13 @@
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-desktop</artifactId>
-            <version>2.2.3-SNAPSHOT</version>
+            <version>2.2.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.badlogicgames.gdx</groupId>
+                    <artifactId>gdx</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

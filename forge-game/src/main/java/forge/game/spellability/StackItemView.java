@@ -84,15 +84,15 @@ public class StackItemView extends TrackableObject implements IHasCardView {
             if (kicked && !generic)
                 OptionalCostString += "Kicked";
             if (entwined)
-                OptionalCostString += OptionalCostString.equals("") ? "Entwined" : ", Entwined";
+                OptionalCostString += OptionalCostString.isEmpty() ? "Entwined" : ", Entwined";
             if (buyback)
-                OptionalCostString += OptionalCostString.equals("") ? "Buyback" : ", Buyback";
+                OptionalCostString += OptionalCostString.isEmpty() ? "Buyback" : ", Buyback";
             if (retraced)
-                OptionalCostString += OptionalCostString.equals("") ? "Retraced" : ", Retraced";
+                OptionalCostString += OptionalCostString.isEmpty() ? "Retraced" : ", Retraced";
             if (jumpstart)
-                OptionalCostString += OptionalCostString.equals("") ? "Jumpstart" : ", Jumpstart";
+                OptionalCostString += OptionalCostString.isEmpty() ? "Jumpstart" : ", Jumpstart";
             if (additional || generic)
-                OptionalCostString += OptionalCostString.equals("") ? "Additional" : ", Additional";
+                OptionalCostString += OptionalCostString.isEmpty() ? "Additional" : ", Additional";
         }
         set(TrackableProperty.OptionalCosts, OptionalCostString);
     }
