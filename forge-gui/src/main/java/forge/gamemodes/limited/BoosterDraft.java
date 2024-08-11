@@ -173,7 +173,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomDraftFiles"));
                 } else {
-                    Collections.sort(myDrafts, Comparator.comparing(DeckBase::getName));
+                    myDrafts.sort(Comparator.comparing(DeckBase::getName));
 
                     final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {

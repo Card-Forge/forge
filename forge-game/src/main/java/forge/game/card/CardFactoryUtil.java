@@ -683,7 +683,7 @@ public class CardFactoryUtil {
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.isEmpty() ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), intrinsic, card);
 

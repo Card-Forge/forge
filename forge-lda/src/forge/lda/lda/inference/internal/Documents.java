@@ -45,7 +45,7 @@ class Documents {
         //System.out.println(docID);
         //System.out.println(bow.getWords(docID).toString());
         return bow.getWords(docID).stream()
-                                  .map(id -> vocabs.get(id))
+                                  .map(vocabs::get)
                                   .collect(Collectors.toList());
     }
 

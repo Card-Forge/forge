@@ -1,7 +1,6 @@
 package forge.gamemodes.match;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +133,7 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        Collections.sort(sortedPlayers, (p1, p2) -> {
+        sortedPlayers.sort((p1, p2) -> {
 
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;

@@ -1343,7 +1343,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
-        Collections.sort(sortedList, Entry.comparingByValue());
+        sortedList.sort(Entry.comparingByValue());
 
         // loop through sorted list and move each type to the front of the
         // validTypes collection
@@ -1723,7 +1723,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i < num; i++) {
             if (sa.hasParam("Pawprint")) {
                 final int tmpPaw = chosenPawprint;
-                spellViewCache.values().removeIf(ab -> Integer.valueOf(ab.getParam("Pawprint")) > num - tmpPaw);
+                spellViewCache.values().removeIf(ab -> Integer.parseInt(ab.getParam("Pawprint")) > num - tmpPaw);
             }
             final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
 
@@ -2175,9 +2175,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (final DeckSection s : new TreeSet<>(removedUnplayableCards.keySet())) {
                     if (DeckSection.Sideboard.equals(s))
                         continue;
-                    for (PaperCard c : removedUnplayableCards.get(s)) {
-                        labels.add(c);
-                    }
+                    labels.addAll(removedUnplayableCards.get(s));
                 }
                 if (!labels.isEmpty())
                     getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
@@ -2591,7 +2589,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, input -> CounterType.get(input)));
+                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, CounterType::get));
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {

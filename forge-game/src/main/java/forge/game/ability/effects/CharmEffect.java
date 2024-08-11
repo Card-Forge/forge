@@ -173,7 +173,7 @@ public class CharmEffect extends SpellAbilityEffect {
                 if (spree) {
                     sb.append("+ " + new Cost(sub.getParam("SpreeCost"), false).toSimpleString() + " \u2014 ");
                 } else if (sub.hasParam("Pawprint")) {
-                    sb.append(StringUtils.repeat("{P}", Integer.valueOf(sub.getParam("Pawprint"))) + " \u2014 ");
+                    sb.append(StringUtils.repeat("{P}", Integer.parseInt(sub.getParam("Pawprint"))) + " \u2014 ");
                 } else {
                     sb.append("\u2022 ");
                 }

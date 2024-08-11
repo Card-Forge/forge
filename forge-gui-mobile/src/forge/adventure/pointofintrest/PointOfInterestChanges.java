@@ -147,7 +147,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
 
     public void addObjectReputation(int id, int delta)
     {
-        reputation.put(id, (reputation.containsKey(id)?reputation.get(id):0) + delta);
+        reputation.put(id, (reputation.getOrDefault(id, 0)) + delta);
     }
 
     public int getMapReputation(){

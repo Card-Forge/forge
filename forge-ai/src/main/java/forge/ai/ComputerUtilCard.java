@@ -965,7 +965,7 @@ public class ComputerUtilCard {
             if (color.hasGreen()) map.get(4).setValue(map.get(4).getValue() + 1);
         }
 
-        Collections.sort(map, Comparator.<Pair<Byte, Integer>>comparingInt(Pair::getValue).reversed());
+        map.sort(Comparator.<Pair<Byte, Integer>>comparingInt(Pair::getValue).reversed());
 
         // will this part be once dropped?
         List<String> result = new ArrayList<>(cntColors);
@@ -2092,6 +2092,7 @@ public class ComputerUtilCard {
             for (Card card2 : card.getEnchantedBy()) {
                 if (card2.getOwner() != ai) {
                     disabledByEnemy = true;
+                    break;
                 }
             }
             if (!disabledByEnemy) {

@@ -45,7 +45,7 @@ public class BiomeStructureEdit extends FormPanel {
         add(center);
         add(data);
 
-        structureAtlasPath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
+        structureAtlasPath.getDocument().addDocumentListener(new DocumentChangeListener(BiomeStructureEdit.this::updateStructure));
 
 
         x.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
@@ -55,8 +55,8 @@ public class BiomeStructureEdit extends FormPanel {
         randomPosition.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
 
         N.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
-        sourcePath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
-        maskPath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
+        sourcePath.getDocument().addDocumentListener(new DocumentChangeListener(BiomeStructureEdit.this::updateStructure));
+        maskPath.getDocument().addDocumentListener(new DocumentChangeListener(BiomeStructureEdit.this::updateStructure));
         periodicInput.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
         ground.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
         symmetry.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());

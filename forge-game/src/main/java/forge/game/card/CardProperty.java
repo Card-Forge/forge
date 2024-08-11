@@ -1602,7 +1602,7 @@ public class CardProperty {
             if (!(property.contains("LKI") ? lki : card).isAttacking()) return false;
             if (property.equals("attacking")) return true;
             if (property.endsWith("Alone")) {
-                return CardLists.count(card.getGame().getLastStateBattlefield(), c -> c.isAttacking()) == 1;
+                return CardLists.count(card.getGame().getLastStateBattlefield(), Card::isAttacking) == 1;
             }
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {

@@ -122,7 +122,7 @@ public class DialogChooseFormats {
 
 		choices.addAll(formats);
 		final FCheckBoxList<FCheckBox> cbl = new FCheckBoxList<>(false);
-		cbl.setListData(formats.toArray(new FCheckBox[formats.size()]));
+		cbl.setListData(formats.toArray(new FCheckBox[0]));
 		cbl.setVisibleRowCount(Math.min(20, formats.size()));
 
 		if (focused) {
