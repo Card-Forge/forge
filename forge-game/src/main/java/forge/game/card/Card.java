@@ -7230,9 +7230,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getCMC(SplitCMCMode.CurrentSideCMC);
     }
     public int getCMC(SplitCMCMode mode) {
-        if (isToken() && getCopiedPermanent() == null) {
-            return 0;
-        }
         if (lkiCMC >= 0) {
             return lkiCMC; // a workaround used by getLKICopy
         }
@@ -7263,8 +7260,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (currentStateName == CardStateName.Transformed) {
             // Except in the cases were we clone the back-side of a DFC.
+            if (getCopiedPermanent() != null) {
+                return 0;
+            }
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
         } else if (currentStateName == CardStateName.Meld) {
+            // to follow the rules (but we shouldn't get here while cloned)
+            if (getCopiedPermanent() != null) {
+                return 0;
+            }
             // Melded creatures have a combined CMC of each of their parts
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC() + this.getMeldedWith().getManaCost().getCMC();
         } else {
