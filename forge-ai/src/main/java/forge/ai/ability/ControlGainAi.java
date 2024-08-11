@@ -23,6 +23,7 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpecialCardAi;
@@ -123,6 +124,9 @@ public class ControlGainAi extends SpellAbilityAi {
 
         CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
 
+                    // Filter AI-specific targets if provided
+            list = ComputerUtil.filterAITgts(sa, ai, list, true);
+
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
         if (list.isEmpty()) {
@@ -132,6 +136,10 @@ public class ControlGainAi extends SpellAbilityAi {
 
         // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, c -> {
+            //if (sa.hasParam("AITgts")) {
+                    //if (!c.isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), sa.getHostCard(), sa))
+                    //return false;
+            //}
             if (!sa.canTarget(c)) {
                 return false;
             }
