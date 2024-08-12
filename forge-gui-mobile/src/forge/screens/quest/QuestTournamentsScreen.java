@@ -84,19 +84,19 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         controller = new QuestTournamentController(this);
         btnSpendToken.setCommand(event -> {
             //must run in background thread to handle alerts
-            FThreads.invokeInBackgroundThread(() -> controller.spendToken());
+            FThreads.invokeInBackgroundThread(controller::spendToken);
         });
         btnEditDeck.setCommand(event -> editDeck(true));
         btnLeaveTournament.setCommand(event -> {
             //must run in background thread to handle alerts
-            FThreads.invokeInBackgroundThread(() -> controller.endTournamentAndAwardPrizes());
+            FThreads.invokeInBackgroundThread(controller::endTournamentAndAwardPrizes);
         });
 
         // TODO: is it possible to somehow reuse the original btnEditDeck/btnLeaveTournament
         btnEditDeckInTourn.setCommand(event -> editDeck(true));
         btnLeaveTournamentInTourn.setCommand(event -> {
             //must run in background thread to handle alerts
-            FThreads.invokeInBackgroundThread(() -> controller.endTournamentAndAwardPrizes());
+            FThreads.invokeInBackgroundThread(controller::endTournamentAndAwardPrizes);
         });
 
         pnlPrepareDeck.add(btnEditDeck);

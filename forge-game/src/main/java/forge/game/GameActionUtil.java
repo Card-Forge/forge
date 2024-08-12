@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
@@ -588,7 +589,7 @@ public final class GameActionUtil {
                     }
                     result.getPayCosts().add(cost);
                     reset = true;
-                    result.setOptionalKeywordAmount(ki, Integer.valueOf(n));
+                    result.setOptionalKeywordAmount(ki, Integer.parseInt(n));
                 }
             } else if (o.equals("Conspire")) {
                 final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
@@ -704,7 +705,7 @@ public final class GameActionUtil {
 
         eff.setImageKey(sourceCard.getImageKey());
         eff.setColor(MagicColor.COLORLESS);
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
 
@@ -854,7 +855,7 @@ public final class GameActionUtil {
             return;
         }
 
-        if (fromZone != null) { // and not a copy
+        if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 

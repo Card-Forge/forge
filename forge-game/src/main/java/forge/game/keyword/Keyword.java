@@ -272,10 +272,7 @@ public enum Keyword {
 
     public static List<Keyword> getAllKeywords() {
         Keyword[] values = values();
-        List<Keyword> keywords = new ArrayList<>();
-        for (int i = 1; i < values.length; i++) { //skip UNDEFINED
-            keywords.add(values[i]);
-        }
+        List<Keyword> keywords = new ArrayList<>(Arrays.asList(values).subList(1, values.length)); //skip UNDEFINED
         return keywords;
     }
 

@@ -666,7 +666,7 @@ public class AiController {
         List<SpellAbility> all = ComputerUtilAbility.getSpellAbilities(cards, player);
 
         try {
-            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
             ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());
@@ -1589,7 +1589,7 @@ public class AiController {
             return null;
 
         try {
-            Collections.sort(all, ComputerUtilAbility.saEvaluator); // put best spells first
+            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
             ComputerUtilAbility.sortCreatureSpells(all);
         } catch (IllegalArgumentException ex) {
             System.err.println(ex.getMessage());

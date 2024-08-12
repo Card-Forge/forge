@@ -167,7 +167,7 @@ public class QuestUtilUnlockSets {
         }
 
         // sort by distance, then by code desc
-        Collections.sort(excludedWithDistances, (o1, o2) -> {
+        excludedWithDistances.sort((o1, o2) -> {
             long delta = o2.right - o1.right;
             return delta < 0 ? -1 : delta == 0 ? 0 : 1;
         });

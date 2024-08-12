@@ -940,11 +940,7 @@ public class FSkin {
 
     /** @return {@link java.awt.font} */
     private static Font getFixedFont(final int size) {
-        Font fixedFont = fixedFonts.get(size);
-        if (fixedFont == null) {
-            fixedFont = new Font("Monospaced", Font.PLAIN, size);
-            fixedFonts.put(size, fixedFont);
-        }
+        Font fixedFont = fixedFonts.computeIfAbsent(size, s -> new Font("Monospaced", Font.PLAIN, s));
         return fixedFont;
     }
 

@@ -41,7 +41,6 @@ public class CardCopyService {
         Card out;
         if (copyFrom.isRealToken() || copyFrom.getCopiedPermanent() != null || copyFrom.getPaperCard() == null) {
             out = copyStats(copyFrom, owner, assignNewId);
-            out.setToken(copyFrom.isToken());
             out.setEffectSource(copyFrom.getEffectSource());
             out.setBoon(copyFrom.isBoon());
             out.dangerouslySetGame(toGame);
@@ -56,9 +55,13 @@ public class CardCopyService {
         out.setZone(copyFrom.getZone());
         out.setState(copyFrom.getFaceupCardStateName(), true);
         out.setBackSide(copyFrom.isBackSide());
+        out.setGamePieceType(copyFrom.getGamePieceType());
+        out.setTokenCard(copyFrom.isTokenCard());
 
         if (toGame == copyFrom.getGame()) {
             // Only copy these things if we're not copying them into a new game
+
+            out.setCollectible(copyFrom.isCollectible());
 
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
             out.setAttachedCards(copyFrom.getAttachedCards());
@@ -219,6 +222,7 @@ public class CardCopyService {
         newCopy.setOwner(copyFrom.getOwner());
         newCopy.setController(copyFrom.getController(), 0);
         newCopy.setCommander(copyFrom.isCommander());
+        newCopy.setCollectible(copyFrom.isCollectible());
 
         newCopy.setRules(copyFrom.getRules());
 
@@ -273,9 +277,8 @@ public class CardCopyService {
         }
         */
 
-        newCopy.setToken(copyFrom.isToken());
-        newCopy.setCopiedSpell(copyFrom.isCopiedSpell());
-        newCopy.setImmutable(copyFrom.isImmutable());
+        newCopy.setGamePieceType(copyFrom.getGamePieceType());
+        newCopy.setTokenCard(copyFrom.isTokenCard());
         newCopy.setEmblem(copyFrom.isEmblem());
 
         // lock in the current P/T

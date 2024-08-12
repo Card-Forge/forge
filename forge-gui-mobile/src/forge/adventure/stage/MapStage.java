@@ -701,7 +701,7 @@ public class MapStage extends GameStage {
                             filteredPossibleShops = possibleShops;
                         }
                         Array<ShopData> shops;
-                        if (filteredPossibleShops.size == 0 || shopList.equals(""))
+                        if (filteredPossibleShops.size == 0 || shopList.isEmpty())
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();

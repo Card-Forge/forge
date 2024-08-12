@@ -245,7 +245,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     } else if (value.equals("ChosenType")) {
                         tag = host.getChosenType();
                     }
-                    if (!tag.equals("")) {
+                    if (!tag.isEmpty()) {
                         title = title + " (" + tag +")";
                     }
                 }

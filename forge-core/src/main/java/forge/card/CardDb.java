@@ -218,7 +218,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                     CardRequest request = fromPreferredArtEntry(preferredArt, isFoil);
                     if (request != null)  // otherwise, simply discard it and go on.
                         return request;
-                    System.err.println(String.format("[LOG]: Faulty Entry in Preferred Art for Card %s - Please check!", cardName));
+                    System.err.printf("[LOG]: Faulty Entry in Preferred Art for Card %s - Please check!%n", cardName);
                 }
             }
             // finally, check whether any between artIndex and CollectorNumber has been set

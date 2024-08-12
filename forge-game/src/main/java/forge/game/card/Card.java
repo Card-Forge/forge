@@ -83,6 +83,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Map<CardStateName, CardState> states = Maps.newEnumMap(CardStateName.class);
     private CardState currentState;
     private CardStateName currentStateName = CardStateName.Original;
+    private GamePieceType gamePieceType = GamePieceType.CARD;
 
     private Zone castFrom;
     private SpellAbility castSA;
@@ -193,10 +194,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
     private boolean tapped = false;
     private boolean sickness = true; // summoning sickness
-    private boolean token = false;
+    private boolean collectible = false;
     private boolean tokenCard = false;
     private Card copiedPermanent;
-    private boolean copiedSpell = false;
 
     private boolean unearthed;
     private boolean ringbearer;
@@ -248,11 +248,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean usedToPayCost = false;
 
-    // for Vanguard / Manapool / Emblems etc.
-    private boolean isImmutable = false;
     private boolean isEmblem = false;
     private boolean isBoon = false;
-    private boolean isAttractionCard = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -980,6 +977,35 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setChangedCardNames(Table<Long, Long, CardChangedName> changedCardNames) {
         this.changedCardNames.clear();
         this.changedCardNames.putAll(changedCardNames);
+    }
+
+    public void setGamePieceType(GamePieceType gamePieceType) {
+        this.gamePieceType = gamePieceType;
+        this.view.updateGamePieceType(this);
+        this.view.updateToken(this);
+    }
+
+    public GamePieceType getGamePieceType() {
+        return gamePieceType;
+    }
+
+    // is this "Card" supposed to be a token?
+    public final boolean isToken() {
+        if (isInPlay() && hasMergedCard()) {
+            return getTopMergedCard().gamePieceType == GamePieceType.TOKEN;
+        }
+        return gamePieceType == GamePieceType.TOKEN;
+    }
+    public final boolean isRealToken() {
+        return gamePieceType == GamePieceType.TOKEN;
+    }
+
+    public final boolean isCopiedSpell() {
+        return this.gamePieceType == GamePieceType.COPIED_SPELL;
+    }
+
+    public final boolean isImmutable() {
+        return this.gamePieceType == GamePieceType.EFFECT;
     }
 
     public final boolean isInAlternateState() {
@@ -2809,7 +2835,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary() && !stAb.isClassAbility()) {
                 final String stAbD = stAb.toString();
-                if (!stAbD.equals("")) {
+                if (!stAbD.isEmpty()) {
                     boolean disabled = getGame() != null && getController() != null && game.getAge() != GameStage.Play && !stAb.checkConditions();
                     if (disabled) sb.append(grayTag);
                     sb.append(stAbD);
@@ -3187,7 +3213,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         for (final StaticAbility stAb : state.getStaticAbilities()) {
             if (!stAb.isSecondary()) {
                 final String stAbD = stAb.toString();
-                if (!stAbD.equals("")) {
+                if (!stAbD.isEmpty()) {
                     sb.append(stAbD).append("\r\n");
                 }
             }
@@ -3481,21 +3507,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return !StaticAbilityCantRegenerate.cantRegenerate(this);
     }
 
-    // is this "Card" supposed to be a token?
-    public final boolean isToken() {
-        if (isInPlay() && hasMergedCard()) {
-            return getTopMergedCard().token;
-        }
-        return token;
-    }
-    public final boolean isRealToken() {
-        return token;
-    }
-    public final void setToken(boolean token0) {
-        if (token == token0) { return; }
-        token = token0;
-        view.updateToken(this);
-    }
     public final void updateTokenView() {
         view.updateToken(this);
     }
@@ -3510,6 +3521,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (tokenCard == tokenC) { return; }
         tokenCard = tokenC;
         view.updateTokenCard(this);
+    }
+
+    public final void setCollectible(boolean collectible) {
+        this.collectible = collectible;
+    }
+    /**
+     * Indicates whether this is a card in a player's collection that can be lost to an ante,
+     * given away, ripped up, or is subject to any other effects beyond the scope of the match.
+     * <p>
+     * For cards that began in a player's deck, this is usually true. For tokens, cards that
+     * are conjured, and game pieces that do not require ownership of a matching card (e.g.
+     * sticker sheets and dungeons), this is usually false.
+     * @return true if this card is part of its owner's collection.
+     */
+    public final boolean isCollectible() {
+        return this.collectible;
     }
 
     public void updateWasDestroyed(boolean value) {
@@ -3527,13 +3554,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         //Could fetch the card rules oracle text in an "else" clause here,
         //but CardRules isn't aware of the card's state. May be better to
         //just stash the original oracle text if this comes up.
-    }
-
-    public final boolean isCopiedSpell() {
-        return copiedSpell;
-    }
-    public final void setCopiedSpell(final boolean b) {
-        copiedSpell = b;
     }
 
     public final boolean isFaceDown() {
@@ -5867,14 +5887,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return CardProperty.cardHasProperty(this, property, sourceController, source, spellAbility);
     }
 
-    public final boolean isImmutable() {
-        return isImmutable;
-    }
-    public final void setImmutable(final boolean isImmutable0) {
-        isImmutable = isImmutable0;
-        view.updateImmutable(this);
-    }
-
     public final boolean isEmblem() {
         return isEmblem;
     }
@@ -5889,16 +5901,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setBoon(final boolean isBoon0) {
         isBoon = isBoon0;
         view.updateBoon(this);
-    }
-
-    /**
-     * @return true if this is physically an Attraction card with an Astrotorium card back. False otherwise.
-     */
-    public final boolean isAttractionCard() {
-        return this.isAttractionCard;
-    }
-    public final void setAttractionCard(boolean isAttractionCard) {
-        this.isAttractionCard = isAttractionCard;
     }
 
     /*
@@ -7230,9 +7232,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getCMC(SplitCMCMode.CurrentSideCMC);
     }
     public int getCMC(SplitCMCMode mode) {
-        if (isToken() && getCopiedPermanent() == null) {
-            return 0;
-        }
         if (lkiCMC >= 0) {
             return lkiCMC; // a workaround used by getLKICopy
         }
@@ -7263,8 +7262,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (currentStateName == CardStateName.Transformed) {
             // Except in the cases were we clone the back-side of a DFC.
+            if (getCopiedPermanent() != null) {
+                return 0;
+            }
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC();
         } else if (currentStateName == CardStateName.Meld) {
+            // to follow the rules (but we shouldn't get here while cloned)
+            if (getCopiedPermanent() != null) {
+                return 0;
+            }
             // Melded creatures have a combined CMC of each of their parts
             requestedCMC = getState(CardStateName.Original).getManaCost().getCMC() + this.getMeldedWith().getManaCost().getCMC();
         } else {
@@ -7950,26 +7956,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 }
             }
         } else {
-            List<String> result = chosenModesTurn.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesTurn.put(original, result);
-            }
+            List<String> result = chosenModesTurn.computeIfAbsent(original, k -> Lists.newArrayList());
             result.add(mode);
 
-            result = chosenModesGame.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesGame.put(original, result);
-            }
+            result = chosenModesGame.computeIfAbsent(original, k -> Lists.newArrayList());
             result.add(mode);
 
             if (yourCombat) {
-                result = chosenModesYourCombat.get(original);
-                if (result == null) {
-                    result = Lists.newArrayList();
-                    chosenModesYourCombat.put(original, result);
-                }
+                result = chosenModesYourCombat.computeIfAbsent(original, k -> Lists.newArrayList());
                 result.add(mode);
             }
         }
