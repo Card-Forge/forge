@@ -124,22 +124,11 @@ public class ControlGainAi extends SpellAbilityAi {
 
         CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
 
-                    // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, list, true);
-
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
-        
-        if (list.isEmpty()) {
-            // no valid targets, so we need to bail
-            return false;
-        }
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         // AI won't try to grab cards that are filtered out of AI decks on purpose
         list = CardLists.filter(list, c -> {
-            //if (sa.hasParam("AITgts")) {
-                    //if (!c.isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), sa.getHostCard(), sa))
-                    //return false;
-            //}
             if (!sa.canTarget(c)) {
                 return false;
             }
