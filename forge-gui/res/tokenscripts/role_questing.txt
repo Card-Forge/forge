@@ -1,0 +1,12 @@
+Name:Questing
+ManaCost:no cost
+Types:Enchantment Aura Role
+K:Enchant creature
+A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance & Deathtouch & Haste | Description$ Enchanted creature has vigilance, deathtouch, and haste.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy | ValidBlocker$ Creature.powerLE2 | Description$ Enchanted creature can't be blocked by creatures with power 2 or less.
+S:Mode$ CantPreventDamage | IsCombat$ True | ValidSource$ Creature.YouCtrl | Description$ Combat damage that would be dealt by creatures you control can't be prevented.
+T:Mode$ DamageDone | ValidSource$ Creature.EnchantedBy | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ MoreDamage | TriggerDescription$ Whenever enchanted creature deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
+SVar:MoreDamage:DB$ DealDamage | ValidTgts$ Planeswalker.ControlledBy TriggeredTarget | TgtPrompt$ Select target planeswalker that player controls | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Enchant Creature\nEnchanted creature has vigilance, deathtouch, and haste.\nEnchanted creature can't be blocked by creatures with power 2 or less.\nCombat damage that would be dealt by creatures you control can't be prevented.\nWhenever enchanted creature deals combat damage to an opponent, it deals that much damage to target planeswalker that player controls.
