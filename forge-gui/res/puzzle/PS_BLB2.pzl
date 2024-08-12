@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Bloomburrow #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/08/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has 13 (unknown) cards in their library. You have 5. Ensure your solution considers all possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=2
+p0hand=Playful Shove;Coruscation Mage;Wildfire Howl;Might of the Meek;Sazacap's Brew
+p0library=Opt;Opt;Opt;Opt;Opt
+p0battlefield=Alania, Divergent Storm;Heartfire Hero;Jace, the Perfected Mind|Counters:LOYALTY=2;Island;Mountain;Mountain;Mountain;Mountain
+p1life=13
+p1library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1battlefield=Eriette's Tempting Apple;Deadeye Duelist;Brightblade Stoat;Sundown Pass|Tapped;Sundown Pass|Tapped;Sundown Pass|Tapped;Sundown Pass|Tapped
