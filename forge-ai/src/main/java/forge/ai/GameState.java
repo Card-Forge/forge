@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardStateName;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
@@ -1396,7 +1397,7 @@ public abstract class GameState {
                 } else if (info.equals("ForetoldThisTurn")) {
                     c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
-                    c.setToken(true);
+                    c.setGamePieceType(GamePieceType.TOKEN);
                 }
             }
 
