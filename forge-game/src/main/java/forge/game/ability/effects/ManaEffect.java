@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.util.Lang;
-import io.sentry.Hint;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -241,9 +240,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("SA", sa.toString());
-                Hint hint = new Hint();
-                hint.set(sa.toString(), sa);
-                Sentry.addBreadcrumb(bread, hint);
+                Sentry.addBreadcrumb(bread);
 
                 continue;
             }

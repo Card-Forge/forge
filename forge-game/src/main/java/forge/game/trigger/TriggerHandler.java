@@ -43,7 +43,6 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.Visitor;
 import io.sentry.Breadcrumb;
-import io.sentry.Hint;
 import io.sentry.Sentry;
 
 public class TriggerHandler {
@@ -136,9 +135,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Trigger", trigParse);
-            Hint hint = new Hint();
-            hint.set(host.getName(), host);
-            Sentry.addBreadcrumb(bread, hint);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
@@ -166,9 +163,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Params", mapParams.toString());
-            Hint hint = new Hint();
-            hint.set(host.getName(), host);
-            Sentry.addBreadcrumb(bread, hint);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);

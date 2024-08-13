@@ -56,7 +56,6 @@ import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
-import io.sentry.Hint;
 import io.sentry.Sentry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
@@ -2614,9 +2613,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", this.getName());
                 bread.setData("Keyword", keyword);
-                Hint hint = new Hint();
-                hint.set(this.getName(), this);
-                Sentry.addBreadcrumb(bread, hint);
+                Sentry.addBreadcrumb(bread);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
@@ -3187,9 +3184,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", this.getName());
                 bread.setData("Keyword", keyword);
-                Hint hint = new Hint();
-                hint.set(this.getName(), this);
-                Sentry.addBreadcrumb(bread, hint);
+                Sentry.addBreadcrumb(bread);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }

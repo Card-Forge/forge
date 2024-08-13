@@ -51,7 +51,6 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.Hint;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -543,9 +542,7 @@ public class CardFactoryUtil {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("Ability", rawAbility);
-                Hint hint = new Hint();
-                hint.set(card.getName(), card);
-                Sentry.addBreadcrumb(bread, hint);
+                Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
                 throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
