@@ -17,6 +17,7 @@ import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.Lang;
 import io.sentry.Breadcrumb;
+import io.sentry.Hint;
 import io.sentry.Sentry;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
@@ -106,7 +107,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Keyword", this.original);
-            Sentry.addBreadcrumb(bread, this);
+            Hint hint = new Hint();
+            hint.set(this.original, this);
+            Sentry.addBreadcrumb(bread, hint);
 
             // add Extra for debugging
             Sentry.setExtra("Card", host.getName());
@@ -122,7 +125,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Keyword", this.original);
-            Sentry.addBreadcrumb(bread, this);
+            Hint hint = new Hint();
+            hint.set(this.original, this);
+            Sentry.addBreadcrumb(bread, hint);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + this.original + " for card " + host.getName(), e);
@@ -157,7 +162,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Player", player.getName());
             bread.setData("Keyword", this.original);
-            Sentry.addBreadcrumb(bread, this);
+            Hint hint = new Hint();
+            hint.set(this.original, this);
+            Sentry.addBreadcrumb(bread, hint);
 
             // add Extra for debugging
             Sentry.setExtra("Player", player.getName());
@@ -173,7 +180,9 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Player", player.getName());
             bread.setData("Keyword", this.original);
-            Sentry.addBreadcrumb(bread, this);
+            Hint hint = new Hint();
+            hint.set(this.original, this);
+            Sentry.addBreadcrumb(bread, hint);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + this.original + " for player " + player.getName(), e);

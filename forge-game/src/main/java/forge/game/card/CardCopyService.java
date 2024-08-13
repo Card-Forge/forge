@@ -10,6 +10,7 @@ import forge.game.ability.ApiType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import io.sentry.Breadcrumb;
+import io.sentry.Hint;
 import io.sentry.Sentry;
 
 import java.util.List;
@@ -214,7 +215,9 @@ public class CardCopyService {
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
         bread.setData("Player", copyFrom.getController().getName());
-        Sentry.addBreadcrumb(bread, copyFrom);
+        Hint hint = new Hint();
+        hint.set(copyFrom.getName(), copyFrom);
+        Sentry.addBreadcrumb(bread, hint);
 
         final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);

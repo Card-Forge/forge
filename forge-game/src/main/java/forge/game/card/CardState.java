@@ -50,6 +50,7 @@ import forge.game.trigger.Trigger;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
+import io.sentry.Hint;
 import io.sentry.Sentry;
 
 public class CardState extends GameObject implements IHasSVars {
@@ -303,7 +304,9 @@ public class CardState extends GameObject implements IHasSVars {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", card.getName());
             bread.setData("Keyword", s);
-            Sentry.addBreadcrumb(bread, this);
+            Hint hint = new Hint();
+            hint.set(this.name, this);
+            Sentry.addBreadcrumb(bread, hint);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
