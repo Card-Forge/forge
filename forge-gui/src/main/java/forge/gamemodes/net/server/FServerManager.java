@@ -1,58 +1,38 @@
 package forge.gamemodes.net.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.DatagramSocket;
-import java.net.Inet4Address;
-import java.net.Inet6Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Map;
-
-import org.fourthline.cling.UpnpService;
-import org.fourthline.cling.UpnpServiceImpl;
-import org.fourthline.cling.support.igd.PortMappingListener;
-import org.fourthline.cling.support.model.PortMapping;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
-
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
-import forge.gamemodes.net.event.LobbyUpdateEvent;
-import forge.gamemodes.net.event.LoginEvent;
-import forge.gamemodes.net.event.LogoutEvent;
-import forge.gamemodes.net.event.MessageEvent;
-import forge.gamemodes.net.event.NetEvent;
-import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
+import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import org.fourthline.cling.UpnpService;
+import org.fourthline.cling.UpnpServiceImpl;
+import org.fourthline.cling.support.igd.PortMappingListener;
+import org.fourthline.cling.support.model.PortMapping;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Map;
 
 public final class FServerManager {
     private static FServerManager instance = null;
@@ -65,11 +45,9 @@ public final class FServerManager {
     private final Map<Channel, RemoteClient> clients = Maps.newTreeMap();
     private ServerGameLobby localLobby;
     private ILobbyListener lobbyListener;
-    private final Thread shutdownHook = new Thread(new Runnable() {
-        @Override public final void run() {
-            if (isHosting()) {
-                stopServer(false);
-            }
+    private final Thread shutdownHook = new Thread(() -> {
+        if (isHosting()) {
+            stopServer(false);
         }
     });
 
@@ -103,7 +81,7 @@ public final class FServerManager {
                     .handler(new LoggingHandler(LogLevel.INFO))
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public final void initChannel(final SocketChannel ch) throws Exception {
+                        public void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
                                     new CompatibleObjectEncoder(),
@@ -118,15 +96,13 @@ public final class FServerManager {
 
             // Bind and start to accept incoming connections.
             final ChannelFuture ch = b.bind(port).sync().channel().closeFuture();
-            new Thread(new Runnable() {
-                @Override public void run() {
-                    try {
-                        ch.sync();
-                    } catch (final InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        stopServer();
-                    }
+            new Thread(() -> {
+                try {
+                    ch.sync();
+                } catch (final InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    stopServer();
                 }
             }).start();
             mapNatPort(port);
@@ -268,7 +244,7 @@ public final class FServerManager {
     public static String getExternalAddress() {
         BufferedReader in = null;
         try {
-            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            URL whatismyip = new URL("https://checkip.amazonaws.com");
             in = new BufferedReader(new InputStreamReader(
                     whatismyip.openStream()));
             String ip = in.readLine();

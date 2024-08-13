@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Rogue
 PT:0/4
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters, it connives.
 SVar:TrigConnive:DB$ Connive
 DeckHas:Ability$Discard|Counters
-Oracle:Flash\nWhen Psionic Snoop enters the battlefield, it connives.
+Oracle:Flash\nWhen Psionic Snoop enters, it connives.

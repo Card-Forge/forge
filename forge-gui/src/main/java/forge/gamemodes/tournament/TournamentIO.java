@@ -1,18 +1,5 @@
 package forge.gamemodes.tournament;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -22,12 +9,18 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
 import forge.deck.CardPool;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.IgnoringXStream;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 public class TournamentIO {
     /** Prompt in text field for new (unsaved) built gauntlets. */
@@ -71,24 +64,14 @@ public class TournamentIO {
     }
 
     public static File[] getTournamentFilesUnlocked(final String prefix) {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
-            }
-        };
+        final FilenameFilter filter = (dir, name) -> ((prefix == null || name.startsWith(prefix)) && name.endsWith(SUFFIX_DATA));
 
         final File folder = new File(ForgeConstants.TOURNAMENT_DIR.userPrefLoc);
         return folder.listFiles(filter);
     }
 
     public static File[] getTournamentFilesLocked() {
-        final FilenameFilter filter = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
-            }
-        };
+        final FilenameFilter filter = (dir, name) -> (name.startsWith(PREFIX_LOCKED) && name.endsWith(SUFFIX_DATA));
 
         final File folder = new File(ForgeConstants.TOURNAMENT_DIR.defaultLoc);
         return folder.listFiles(filter);
@@ -96,7 +79,7 @@ public class TournamentIO {
 
     public static TournamentData loadTournament(final File xmlSaveFile) {
         boolean isCorrupt = false;
-        try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(xmlSaveFile.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
             final TournamentData data = (TournamentData)TournamentIO.getSerializer(true).fromXML(reader);
 
@@ -130,11 +113,12 @@ public class TournamentIO {
     }
 
     private static void savePacked(final XStream xStream0, final TournamentData gd0) throws IOException {
-        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(getTournamentFile(gd0)));
-        final GZIPOutputStream zout = new GZIPOutputStream(bout);
-        xStream0.toXML(gd0, zout);
-        zout.flush();
-        zout.close();
+        try(final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(getTournamentFile(gd0).toPath()));
+            final GZIPOutputStream zout = new GZIPOutputStream(bout);
+        ) {
+            xStream0.toXML(gd0, zout);
+            zout.flush();
+        }
     }
 
     private static class DeckSectionToXml implements Converter {

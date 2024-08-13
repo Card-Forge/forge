@@ -2,8 +2,8 @@ Name:Corpse Connoisseur
 ManaCost:4 B
 Types:Creature Zombie Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card, put that card into your graveyard, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may search your library for a creature card, put that card into your graveyard, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Creature | ChangeNum$ 1 | ShuffleNonMandatory$ True
 K:Unearth:3 B
 AI:RemoveDeck:Random
-Oracle:When Corpse Connoisseur enters the battlefield, you may search your library for a creature card, put that card into your graveyard, then shuffle.\nUnearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+Oracle:When Corpse Connoisseur enters, you may search your library for a creature card, put that card into your graveyard, then shuffle.\nUnearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

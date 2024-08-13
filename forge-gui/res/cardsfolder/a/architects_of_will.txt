@@ -3,6 +3,6 @@ ManaCost:2 U B
 Types:Artifact Creature Human Wizard
 PT:3/3
 K:Cycling:UB
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters the battlefield, look at the top three cards of target player's library, then put them back in any order.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRearrange | TriggerDescription$ When CARDNAME enters, look at the top three cards of target player's library, then put them back in any order.
 SVar:TrigRearrange:DB$ RearrangeTopOfLibrary | ValidTgts$ Player | TgtPrompt$ Choose target player. | NumCards$ 3
-Oracle:When Architects of Will enters the battlefield, look at the top three cards of target player's library, then put them back in any order.\nCycling {U/B} ({U/B}, Discard this card: Draw a card.)
+Oracle:When Architects of Will enters, look at the top three cards of target player's library, then put them back in any order.\nCycling {U/B} ({U/B}, Discard this card: Draw a card.)

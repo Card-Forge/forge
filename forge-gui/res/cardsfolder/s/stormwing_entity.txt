@@ -8,6 +8,6 @@ SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckHints:Type$Instant|Sorcery
 K:Flying
 K:Prowess
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters, scry 2.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
-Oracle:This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.\nFlying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Stormwing Entity enters the battlefield, scry 2.
+Oracle:This spell costs {2}{U} less to cast if you've cast an instant or sorcery spell this turn.\nFlying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Stormwing Entity enters, scry 2.

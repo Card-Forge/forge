@@ -69,7 +69,7 @@ public class DeckColors {
     public void setColorsByList(final List<Byte> colors) {
         colorMask = 0;
         for (final Byte col : colors) {
-            colorMask |= col.byteValue();
+            colorMask |= col;
         }
         chosen = null;
     }

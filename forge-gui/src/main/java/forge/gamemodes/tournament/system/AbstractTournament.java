@@ -3,7 +3,6 @@ package forge.gamemodes.tournament.system;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -108,26 +107,11 @@ public abstract class AbstractTournament implements Serializable {
 
     public void sortAllPlayers(String sortType) {
         if (sortType.equals("score")) {
-            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
-                @Override
-                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
-                    return o2.getScore() - o1.getScore();
-                }
-            });
+            allPlayers.sort((o1, o2) -> o2.getScore() - o1.getScore());
         } else if (sortType.equals("index")) {
-            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
-                @Override
-                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
-                    return o2.getIndex() - o1.getIndex();
-                }
-            });
+            allPlayers.sort((o1, o2) -> o2.getIndex() - o1.getIndex());
         } else if (sortType.equals("swiss")) {
-            Collections.sort(allPlayers, new Comparator<TournamentPlayer>() {
-                @Override
-                public int compare(TournamentPlayer o1, TournamentPlayer o2) {
-                    return o2.getSwissScore() - o1.getSwissScore();
-                }
-            });
+            allPlayers.sort((o1, o2) -> o2.getSwissScore() - o1.getSwissScore());
         }
     }
 

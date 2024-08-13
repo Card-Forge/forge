@@ -22,8 +22,6 @@ import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Callback;
@@ -50,44 +48,38 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         cbxFormats.setEnabled(!Forge.isMobileAdventureMode);
         selectedFormat = cbxFormats.getText();
 
-        cbxFormats.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (preventHandling) { return; }
+        cbxFormats.setChangedHandler(e -> {
+            if (preventHandling) { return; }
 
-                int index = cbxFormats.getSelectedIndex();
-                if (index == -1) {
-                    //Do nothing when index set to -1
-                }
-                else if (index == 0) {
-                    format = null;
+            int index = cbxFormats.getSelectedIndex();
+            if (index == -1) {
+                //Do nothing when index set to -1
+            }
+            else if (index == 0) {
+                format = null;
+                applyChange();
+            }
+            else if (index == cbxFormats.getItemCount() - 2) {
+                preventHandling = true;
+                cbxFormats.setText(selectedFormat); //restore previous selection by default
+                preventHandling = false;
+                ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
+                archivedFormatSelect.setOnCloseCallBack(() -> {
+                    format = archivedFormatSelect.getSelectedFormat();
+                    cbxFormats.setText(format.getName());
                     applyChange();
-                }
-                else if (index == cbxFormats.getItemCount() - 2) {
-                    preventHandling = true;
-                    cbxFormats.setText(selectedFormat); //restore previous selection by default
-                    preventHandling = false;
-                    ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
-                    archivedFormatSelect.setOnCloseCallBack(new Runnable(){
-                        @Override
-                        public void run() {
-                            format = archivedFormatSelect.getSelectedFormat();
-                            cbxFormats.setText(format.getName());
-                            applyChange();
-                        }
-                    });
-                    Forge.openScreen(archivedFormatSelect);
-                }
-                else if (index == cbxFormats.getItemCount() - 1) {
-                    preventHandling = true;
-                    cbxFormats.setText(selectedFormat); //restore previous selection by default
-                    preventHandling = false;
-                    Forge.openScreen(new MultiSetSelect());
-                }
-                else {
-                    format = (GameFormat)cbxFormats.getSelectedItem();
-                    applyChange();
-                }
+                });
+                Forge.openScreen(archivedFormatSelect);
+            }
+            else if (index == cbxFormats.getItemCount() - 1) {
+                preventHandling = true;
+                cbxFormats.setText(selectedFormat); //restore previous selection by default
+                preventHandling = false;
+                Forge.openScreen(new MultiSetSelect());
+            }
+            else {
+                format = (GameFormat)cbxFormats.getSelectedItem();
+                applyChange();
             }
         });
     }

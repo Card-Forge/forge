@@ -1,0 +1,11 @@
+Name:Hoarder's Overflow
+ManaCost:1 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters and whenever you expend 4, put a stash counter on it. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters and whenever you expend 4, put a stash counter on it. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ STASH | CounterNum$ 1
+A:AB$ Discard | Cost$ 1 R Sac<1/CARDNAME> | Defined$ You | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard your hand, then draw cards equal to the number of stash counters on CARDNAME.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$CardCounters.STASH
+DeckHas:Ability$Counters
+Oracle:When Hoarder's Overflow enters and whenever you expend 4, put a stash counter on it. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)\n{1}{R}, Sacrifice Hoarder's Overflow: Discard your hand, then draw cards equal to the number of stash counters on Hoarder's Overflow.

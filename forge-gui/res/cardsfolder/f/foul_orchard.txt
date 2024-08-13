@@ -1,6 +1,7 @@
 Name:Foul Orchard
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
-Oracle:Foul Orchard enters the battlefield tapped.\n{T}: Add {B} or {G}.
+Oracle:Foul Orchard enters tapped.\n{T}: Add {B} or {G}.

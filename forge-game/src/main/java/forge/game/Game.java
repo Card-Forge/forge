@@ -260,7 +260,7 @@ public class Game {
 
 
     public void addPlayer(int id, Player player) {
-        playerCache.put(Integer.valueOf(id), player);
+        playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -505,17 +505,14 @@ public class Game {
     }
 
     public CardCollectionView getCardsPlayerCanActivateInStack() {
-        return CardLists.filter(stackZone.getCards(), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                for (final SpellAbility sa : c.getSpellAbilities()) {
-                    final ZoneType restrictZone = sa.getRestrictions().getZone();
-                    if (ZoneType.Stack == restrictZone) {
-                        return true;
-                    }
+        return CardLists.filter(stackZone.getCards(), c -> {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                final ZoneType restrictZone = sa.getRestrictions().getZone();
+                if (ZoneType.Stack == restrictZone) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -1321,7 +1318,7 @@ public class Game {
         }
     }
     public void addFacedownWhileCasting(Card c, int numDrawn) {
-        facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
+        facedownWhileCasting.put(c, numDrawn);
     }
 
     public boolean isDay() {

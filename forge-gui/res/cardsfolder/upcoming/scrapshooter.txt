@@ -1,0 +1,10 @@
+Name:Scrapshooter
+ManaCost:1 G G
+Types:Creature Raccoon Archer
+PT:4/4
+K:Gift
+SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+PromisedGift | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, if the gift was promised, destroy target artifact or enchantment an opponent controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact or enchantment an opponent controls.
+Oracle:Gift a card (You may promise an opponent a gift as you cast this spell. If you do, when it enters, they draw a card.)\nReach\nWhen Scrapshooter enters, if the gift was promised, destroy target artifact or enchantment an opponent controls.

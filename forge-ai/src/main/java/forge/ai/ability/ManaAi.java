@@ -169,7 +169,7 @@ public class ManaAi extends SpellAbilityAi {
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
             if (logic.startsWith("ManaRitualBattery.")) {
-                manaSurplus = Integer.valueOf(logic.substring(18)); // adds an extra mana even if no counters removed
+                manaSurplus = Integer.parseInt(logic.substring(18)); // adds an extra mana even if no counters removed
                 manaReceived += manaSurplus;
             }
         }
@@ -245,7 +245,7 @@ public class ManaAi extends SpellAbilityAi {
         if (logic.startsWith("ManaRitualBattery")) {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,
             // otherwise the AI grabs too many counters at once.
-            int maxCtrs = Aggregates.max(castableSpells, CardPredicates.Accessors.fnGetCmc) - manaSurplus;
+            int maxCtrs = Aggregates.max(castableSpells, Card::getCMC) - manaSurplus;
             sa.setXManaCostPaid(Math.min(numCounters, maxCtrs));
         }
 

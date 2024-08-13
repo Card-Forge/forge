@@ -1,8 +1,9 @@
 Name:Cloudpost
 ManaCost:no cost
 Types:Land Locus
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C} for each Locus on the battlefield.
 SVar:X:Count$Valid Locus
 AI:RemoveDeck:Random
-Oracle:Cloudpost enters the battlefield tapped.\n{T}: Add {C} for each Locus on the battlefield.
+Oracle:Cloudpost enters tapped.\n{T}: Add {C} for each Locus on the battlefield.

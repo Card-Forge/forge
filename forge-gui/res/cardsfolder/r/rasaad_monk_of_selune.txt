@@ -3,14 +3,14 @@ ManaCost:2 W
 Types:Legendary Creature Human Monk
 PT:2/2
 K:Specialize:5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until this creature leaves the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls until this creature leaves the battlefield.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay | RememberChanged$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:Specialize
-Oracle:Specialize {5}\nWhen Rasaad, Monk of Selûne enters the battlefield, exile target creature an opponent controls until this creature leaves the battlefield.
+Oracle:Specialize {5}\nWhen Rasaad, Monk of Selûne enters, exile target creature an opponent controls until this creature leaves the battlefield.
 
 SPECIALIZE:WHITE
 

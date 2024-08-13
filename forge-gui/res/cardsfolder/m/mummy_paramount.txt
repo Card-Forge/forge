@@ -2,8 +2,8 @@ Name:Mummy Paramount
 ManaCost:1 W
 Types:Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Zombie.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Zombie enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Zombie.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another Zombie you control enters, CARDNAME gets +1/+1 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1
 SVar:BuffedBy:Zombie
 DeckHints:Type$Zombie
-Oracle:Whenever another Zombie enters the battlefield under your control, Mummy Paramount gets +1/+1 until end of turn.
+Oracle:Whenever another Zombie you control enters, Mummy Paramount gets +1/+1 until end of turn.

@@ -3,6 +3,6 @@ ManaCost:4 G
 Types:Creature Elf Warrior
 PT:4/4
 K:Trample
-K:etbCounter:P1P1:2:CheckSVar$ Revolt:Revolt — CARDNAME enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
+K:etbCounter:P1P1:2:CheckSVar$ Revolt:Revolt — CARDNAME enters with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
 SVar:Revolt:Count$Revolt.1.0
-Oracle:Trample\nRevolt — Lifecraft Cavalry enters the battlefield with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.
+Oracle:Trample\nRevolt — Lifecraft Cavalry enters with two +1/+1 counters on it if a permanent you controlled left the battlefield this turn.

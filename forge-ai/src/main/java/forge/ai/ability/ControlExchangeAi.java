@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
@@ -32,12 +31,7 @@ public class ControlExchangeAi extends SpellAbilityAi {
         CardCollection list =
                 CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
         // AI won't try to grab cards that are filtered out of AI decks on purpose
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {                
-                return !ComputerUtilCard.isCardRemAIDeck(c) && c.canBeTargetedBy(sa);
-            }
-        });
+        list = CardLists.filter(list, c -> !ComputerUtilCard.isCardRemAIDeck(c) && c.canBeTargetedBy(sa));
         object1 = ComputerUtilCard.getBestAI(list);
         if (sa.hasParam("Defined")) {
             object2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);

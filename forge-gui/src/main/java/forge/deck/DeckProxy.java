@@ -1,6 +1,5 @@
 package forge.deck;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -28,14 +27,13 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
     protected IHasName deck;
     protected final String deckType;
     protected final IStorage<? extends IHasName> storage;
-
-    public static final Function<DeckProxy, String> FN_GET_NAME = arg0 -> arg0.getName();
 
     // cached values
     protected ColorSet color;
@@ -364,7 +362,7 @@ public class DeckProxy implements InventoryItem {
     public String getFormatsString() {
         Set<GameFormat> formats = getFormats();
         if (formats.size() > 1)
-            return StringUtils.join(Iterables.transform(formats, GameFormat.FN_GET_NAME), ", ");
+            return StringUtils.join(Iterables.transform(formats, GameFormat::getName), ", ");
         Object[] formatArray = formats.toArray();
         GameFormat format = (GameFormat)formatArray[0];
         if (format != GameFormat.NoFormat)
@@ -610,7 +608,7 @@ public class DeckProxy implements InventoryItem {
     public static List<DeckProxy> getAllPreconstructedDecks(final IStorage<PreconDeck> iStorage) {
         final List<DeckProxy> decks = new ArrayList<>();
         for (final PreconDeck preconDeck : iStorage) {
-            decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object)PreconDeck.FN_GET_DECK, null, iStorage));
+            decks.add(new DeckProxy(preconDeck, "Precon", (Function<IHasName, Deck>)(Object) (Function<PreconDeck, Deck>) PreconDeck::getDeck, null, iStorage));
         }
         return decks;
     }
@@ -674,8 +672,8 @@ public class DeckProxy implements InventoryItem {
 
         // Since AI decks are tied directly to the human choice,
         // they're just mapped in a parallel map and grabbed when the game starts.
-        for (final DeckGroup d : sealed) {
-            humanDecks.add(new DeckProxy(d, "Sealed", (Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK, GameType.Sealed, sealed));
+        for (final DeckGroup d : sealed) { //TODO: Simplify the method references used by this constructor.
+            humanDecks.add(new DeckProxy(d, "Sealed", (Function<IHasName, Deck>)(Object) (Function<DeckGroup, Deck>) DeckGroup::getHumanDeck, GameType.Sealed, sealed));
         }
         return humanDecks;
     }
@@ -695,7 +693,7 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<DeckGroup> draft = FModel.getDecks().getDraft();
         for (final DeckGroup d : draft) {
-            decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Draft, draft));
+            decks.add(new DeckProxy(d, "Draft", ((Function<IHasName, Deck>)(Object) (Function<DeckGroup, Deck>) DeckGroup::getHumanDeck), GameType.Draft, draft));
         }
         return decks;
     }
@@ -704,7 +702,7 @@ public class DeckProxy implements InventoryItem {
     public static List<DeckProxy> getWinstonDecks(final IStorage<DeckGroup> draft) {
         final List<DeckProxy> decks = new ArrayList<>();
         for (final DeckGroup d : draft) {
-            decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object)DeckGroup.FN_HUMAN_DECK), GameType.Winston, draft));
+            decks.add(new DeckProxy(d, "Winston", ((Function<IHasName, Deck>)(Object) (Function<DeckGroup, Deck>) DeckGroup::getHumanDeck), GameType.Winston, draft));
         }
         return decks;
     }

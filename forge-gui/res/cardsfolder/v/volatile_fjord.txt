@@ -1,5 +1,6 @@
 Name:Volatile Fjord
 ManaCost:no cost
 Types:Snow Land Island Mountain
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {U} or {R}.)\nVolatile Fjord enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:({T}: Add {U} or {R}.)\nVolatile Fjord enters tapped.

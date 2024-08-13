@@ -28,7 +28,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.HyperlinkEvent;
-import javax.swing.event.HyperlinkListener;
 
 import forge.ImageCache;
 import forge.Singletons;
@@ -283,12 +282,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         this.scrollOutput.setViewportBorder(BorderFactory.createLoweredBevelBorder());
         // Action Listeners
         // ----------------
-        this.htmlOutput.addHyperlinkListener(new HyperlinkListener() {
-            @Override
-            public void hyperlinkUpdate(HyperlinkEvent e) {
-                activateCardPreview(e);
-            }
-        });
+        this.htmlOutput.addHyperlinkListener(this::activateCardPreview);
 
         // == C.1 Stats Panel
         FPanel statsPanel = new FPanel(new BorderLayout());
@@ -367,20 +361,13 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // Action Listeners
         // ----------------
-        this.dateTimeCheck.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                final boolean isSel = dateTimeCheck.isSelected();
-                monthDropdown.setEnabled(isSel);
-                yearDropdown.setEnabled(isSel);
-                parseAndDisplay();
-            }
+        this.dateTimeCheck.addActionListener(e -> {
+            final boolean isSel = dateTimeCheck.isSelected();
+            monthDropdown.setEnabled(isSel);
+            yearDropdown.setEnabled(isSel);
+            parseAndDisplay();
         });
-        final ActionListener reparseAction = new ActionListener() {
-            @Override public void actionPerformed(final ActionEvent e) {
-                parseAndDisplay();
-            }
-        };
+        final ActionListener reparseAction = e -> parseAndDisplay();
         this.yearDropdown.addActionListener(reparseAction);
         this.monthDropdown.addActionListener(reparseAction);
 
@@ -434,28 +421,22 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // Action Listeners
         // ----------------
-        ItemListener updateCardArtPreference = new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                String artPreference = cardArtPrefsComboBox.getSelectedItem();
-                if (artPreference == null)
-                    artPreference = latestOpt;  // default, just in case
-                final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
-                final boolean coreExpFilter = cardArtPrefHasFilterCheckBox.isSelected();
-                controller.setCardArtPreference(latestArt, coreExpFilter);
-                parseAndDisplay();
-            }
+        ItemListener updateCardArtPreference = e -> {
+            String artPreference = cardArtPrefsComboBox.getSelectedItem();
+            if (artPreference == null)
+                artPreference = latestOpt;  // default, just in case
+            final boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+            final boolean coreExpFilter = cardArtPrefHasFilterCheckBox.isSelected();
+            controller.setCardArtPreference(latestArt, coreExpFilter);
+            parseAndDisplay();
         };
         this.cardArtPrefsComboBox.addItemListener(updateCardArtPreference);
         this.cardArtPrefHasFilterCheckBox.addItemListener(updateCardArtPreference);
 
-        this.smartCardArtCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean enableSmartCardArt = smartCardArtCheckBox.isSelected();
-                controller.setSmartCardArtOptimisation(enableSmartCardArt);
-                parseAndDisplay();
-            }
+        this.smartCardArtCheckBox.addActionListener(e -> {
+            boolean enableSmartCardArt = smartCardArtCheckBox.isSelected();
+            controller.setSmartCardArtOptimisation(enableSmartCardArt);
+            parseAndDisplay();
         });
 
         optionsPanel.add(cardArtPanel,     "cell 1 0, w 100%, left");
@@ -491,31 +472,25 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         // Action Listeners
         // ----------------
         if (controller.hasNoDefaultGameFormat()) {
-            final ActionListener updateFormatSelectionCheck = new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    final boolean isSel = formatSelectionCheck.isSelected();
-                    formatDropdown.setEnabled(isSel);
-                    if (!isSel)
-                        controller.setCurrentGameFormat(null);  // reset any game format
-                    else {
-                        GameFormat gameFormat = formatDropdown.getSelectedItem();
-                        controller.setCurrentGameFormat(gameFormat);
-                    }
-                    parseAndDisplay();
+            final ActionListener updateFormatSelectionCheck = e -> {
+                final boolean isSel = formatSelectionCheck.isSelected();
+                formatDropdown.setEnabled(isSel);
+                if (!isSel)
+                    controller.setCurrentGameFormat(null);  // reset any game format
+                else {
+                    GameFormat gameFormat = formatDropdown.getSelectedItem();
+                    controller.setCurrentGameFormat(gameFormat);
                 }
+                parseAndDisplay();
             };
             this.formatSelectionCheck.addActionListener(updateFormatSelectionCheck);
             this.formatDropdown.addActionListener(updateFormatSelectionCheck);
         }
 
-        this.includeBnRCheck.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final boolean includeBnR = includeBnRCheck.isSelected();
-                controller.importBannedAndRestrictedCards(includeBnR);
-                parseAndDisplay();
-            }
+        this.includeBnRCheck.addActionListener(e -> {
+            final boolean includeBnR = includeBnRCheck.isSelected();
+            controller.importBannedAndRestrictedCards(includeBnR);
+            parseAndDisplay();
         });
 
         // == C Command buttons
@@ -533,46 +508,35 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // ActionListeners
         // ---------------
-        this.cmdCancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        this.cmdCancelButton.addActionListener(e -> DeckImport.this.processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING)));
 
-        this.cmdAcceptButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                String currentDeckName = g.getDeckController().getModelName();
-                final Deck deck = controller.accept(currentDeckName);
-                if (deck == null) { return; }
-                // If the soon-to-import card list hasn't got any name specified in the list
-                // we set it to the current one (if any) or set a new one.
-                // In this way, if this deck will replace the current one, the name will be kept the same!
-                if (!deck.hasName()){
-                    if (currentDeckName.equals(""))
-                        deck.setName(Localizer.getInstance().getMessage("lblNewDeckName"));
-                    else
-                        deck.setName(currentDeckName);
-                }
-                host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
-                processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
+        this.cmdAcceptButton.addActionListener(e -> {
+            String currentDeckName = g.getDeckController().getModelName();
+            final Deck deck = controller.accept(currentDeckName);
+            if (deck == null) { return; }
+            // If the soon-to-import card list hasn't got any name specified in the list
+            // we set it to the current one (if any) or set a new one.
+            // In this way, if this deck will replace the current one, the name will be kept the same!
+            if (!deck.hasName()){
+                if (currentDeckName.isEmpty())
+                    deck.setName(Localizer.getInstance().getMessage("lblNewDeckName"));
+                else
+                    deck.setName(currentDeckName);
             }
+            host.getDeckController().loadDeck(deck, controller.getCreateNewDeck());
+            processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
         });
 
         if (currentDeckIsNotEmpty){
             this.createNewDeckCheckbox.setSelected(false);
-            this.createNewDeckCheckbox.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    boolean createNewDeck = createNewDeckCheckbox.isSelected();
-                    controller.setCreateNewDeck(createNewDeck);
-                    String cmdAcceptLabel = createNewDeck ? CREATE_NEW_DECK_CMD_LABEL : IMPORT_CARDS_CMD_LABEL;
-                    cmdAcceptButton.setText(cmdAcceptLabel);
-                    String smartCardArtChboxTooltip = createNewDeck ? SMART_CARDART_TT_NO_DECK : SMART_CARDART_TT_WITH_DECK;
-                    smartCardArtCheckBox.setToolTipText(smartCardArtChboxTooltip);
-                    parseAndDisplay();
-                }
+            this.createNewDeckCheckbox.addActionListener(e -> {
+                boolean createNewDeck = createNewDeckCheckbox.isSelected();
+                controller.setCreateNewDeck(createNewDeck);
+                String cmdAcceptLabel = createNewDeck ? CREATE_NEW_DECK_CMD_LABEL : IMPORT_CARDS_CMD_LABEL;
+                cmdAcceptButton.setText(cmdAcceptLabel);
+                String smartCardArtChboxTooltip = createNewDeck ? SMART_CARDART_TT_NO_DECK : SMART_CARDART_TT_WITH_DECK;
+                smartCardArtCheckBox.setToolTipText(smartCardArtChboxTooltip);
+                parseAndDisplay();
             });
         }
 

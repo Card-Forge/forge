@@ -17,7 +17,6 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -48,8 +47,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private boolean mustTargetFiltered;
     private static final long serialVersionUID = -1091595663541356356L;
 
-    public final boolean hasCancelled() { return bCancel; }
-    public final boolean hasPressedOk() { return bOk; }
+    public boolean hasCancelled() { return bCancel; }
+    public boolean hasPressedOk() { return bOk; }
 
     public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
         super(controller);
@@ -72,16 +71,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
         }
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                for (final GameEntity c : targets) {
-                    if (c instanceof Card) {
-                        controller.getGui().setUsedToPay(CardView.get((Card) c), true);
-                    }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntity c : targets) {
+                if (c instanceof Card) {
+                    controller.getGui().setUsedToPay(CardView.get((Card) c), true);
                 }
-                controller.getGui().updateZones(zonesToUpdate);
             }
+            controller.getGui().updateZones(zonesToUpdate);
         });
     }
 
@@ -152,19 +148,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCancel() {
+    protected void onCancel() {
         bCancel = true;
         this.done();
     }
 
     @Override
-    protected final void onOk() {
+    protected void onOk() {
         bOk = true;
         this.done();
     }
 
     @Override
-    protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (targets.contains(card)) {
             removeTarget(card);
             return false;
@@ -204,7 +200,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetCMC")) {
             int maxTotalCMC = tgt.getMaxTotalCMC(sa.getHostCard(), sa);
             if (maxTotalCMC > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getCMC);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getCMC();
                 }
@@ -218,7 +214,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetPower")) {
             int maxTotalPower = tgt.getMaxTotalPower(sa.getHostCard(), sa);
             if (maxTotalPower > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getNetPower);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getNetPower();
                 }
@@ -317,7 +313,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
+    protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
         if (targets.contains(player)) {
             removeTarget(player);
             return;

@@ -104,13 +104,8 @@ public class QuestAssets {
                 modern.takeDataFrom(current);
                 current = modern;
                 inventoryItems.put(itemType, modern);
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
                 e.printStackTrace();
             }
 
@@ -162,11 +157,8 @@ public class QuestAssets {
      * @param level int
      */
     public final void setPetLevel(final String name, final int level) {
-        QuestItemCondition cond = this.combatPets.get(name);
-        if (null == cond) {
-            cond = new QuestItemCondition(); // pets have only level that should be serialized for now
-            this.combatPets.put(name, cond);
-        }
+        QuestItemCondition cond = this.combatPets.computeIfAbsent(name, k -> new QuestItemCondition());
+        // pets have only level that should be serialized for now
         cond.setLevel(level);
     }
 

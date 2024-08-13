@@ -64,14 +64,11 @@ public class InputProxy implements Observer {
         if (!(nextInput instanceof InputLockUI)) {
             controller.getGui().setCurrentPlayer(nextInput.getOwner());
         }
-        final Runnable showMessage = new Runnable() {
-            @Override
-            public void run() {
-                Input current = getInput(); 
-                controller.getInputQueue().syncPoint();
-                //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
-                current.showMessageInitial(); 
-            }
+        final Runnable showMessage = () -> {
+            Input current = getInput();
+            controller.getInputQueue().syncPoint();
+            //System.out.printf("\t%s > showMessage @ %s/%s during %s%n", FThreads.debugGetCurrThreadId(), nextInput.getClass().getSimpleName(), current.getClass().getSimpleName(), game.getPhaseHandler().debugPrintState());
+            current.showMessageInitial();
         };
         FThreads.invokeInEdtLater(showMessage);
     }

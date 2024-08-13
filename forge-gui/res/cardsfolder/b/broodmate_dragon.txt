@@ -3,6 +3,6 @@ ManaCost:3 B R G
 Types:Creature Dragon
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 red Dragon creature token with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 4/4 red Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | TokenOwner$ You
-Oracle:Flying\nWhen Broodmate Dragon enters the battlefield, create a 4/4 red Dragon creature token with flying.
+Oracle:Flying\nWhen Broodmate Dragon enters, create a 4/4 red Dragon creature token with flying.

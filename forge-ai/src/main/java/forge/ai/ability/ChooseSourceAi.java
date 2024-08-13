@@ -3,7 +3,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
@@ -94,14 +93,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
                 }
                 final Combat combat = game.getCombat();
-                choices = CardLists.filter(choices, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                            return false;
-                        }
-                        return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
+                choices = CardLists.filter(choices, c -> {
+                    if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                        return false;
                     }
+                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
                 });
                 return !choices.isEmpty();
             }
@@ -124,15 +120,12 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
             final Combat combat = game.getCombat();
 
-            List<Card> permanentSources = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c == null || c.getZone() == null || c.getZone().getZoneType() != ZoneType.Battlefield
-                    		|| combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                        return false;
-                    }
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
+            List<Card> permanentSources = CardLists.filter(options, c -> {
+                if (c == null || c.getZone() == null || c.getZone().getZoneType() != ZoneType.Battlefield
+                        || combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    return false;
                 }
+                return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > 0;
             });
 
             // Try to choose the best creature for damage prevention.

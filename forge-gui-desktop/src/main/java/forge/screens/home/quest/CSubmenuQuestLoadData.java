@@ -29,16 +29,8 @@ public enum CSubmenuQuestLoadData implements ICDoc {
 
     private final Map<String, QuestData> arrQuests = new HashMap<>();
 
-    private final UiCommand cmdQuestSelect = new UiCommand() {
-        @Override public void run() {
-            changeQuest();
-        }
-    };
-    private final UiCommand cmdQuestUpdate = new UiCommand() {
-        @Override public void run() {
-            update();
-        }
-    };
+    private final UiCommand cmdQuestSelect = this::changeQuest;
+    private final UiCommand cmdQuestUpdate = this::update;
 
     @Override
     public void register() {
@@ -63,21 +55,16 @@ public enum CSubmenuQuestLoadData implements ICDoc {
         ArrayList<String> restorableQuests = new ArrayList<>();
 
         // Iterate over files and load quest data for each.
-        final FilenameFilter takeDatFiles = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".dat");
-            }
-        };
+        final FilenameFilter takeDatFiles = (dir, name) -> name.endsWith(".dat");
         final File[] arrFiles = dirQuests.listFiles(takeDatFiles);
         arrQuests.clear();
         for (final File f : arrFiles) {
             try {
-                System.out.println(String.format("About to load quest (%s)... ", f.getName()));
+                System.out.printf("About to load quest (%s)... %n", f.getName());
                 arrQuests.put(f.getName(), QuestDataIO.loadData(f));
             } catch(IOException ex) {
                 ex.printStackTrace();
-                System.out.println(String.format("Error loading quest data (%s).. skipping for now..", f.getName()));
+                System.err.printf("Error loading quest data (%s).. skipping for now..%n", f.getName());
                 restorableQuests.add(f.getName());
             }
         }

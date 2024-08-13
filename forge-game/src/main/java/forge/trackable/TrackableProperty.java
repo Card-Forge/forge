@@ -2,6 +2,7 @@ package forge.trackable;
 
 
 import forge.card.CardRarity;
+import forge.card.GamePieceType;
 import forge.game.Direction;
 import forge.game.EvenOdd;
 import forge.game.GameType;
@@ -23,7 +24,8 @@ public enum TrackableProperty {
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
 
-    IsImmutable(TrackableTypes.BooleanType),
+    GamePieceType(TrackableTypes.EnumType(GamePieceType.class)),
+
     IsEmblem(TrackableTypes.BooleanType),
     IsBoon(TrackableTypes.BooleanType),
     CanSpecialize(TrackableTypes.BooleanType),

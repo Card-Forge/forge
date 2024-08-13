@@ -3,6 +3,6 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:5/4
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 5 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 5
-Oracle:Trample\nWhen Arborback Stomper enters the battlefield, you gain 5 life.
+Oracle:Trample\nWhen Arborback Stomper enters, you gain 5 life.

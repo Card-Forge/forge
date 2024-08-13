@@ -2,7 +2,7 @@ Name:Citadel Siege
 ManaCost:2 W W
 Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
-SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters the battlefield, choose Khans or Dragons.
+SVar:SiegeChoice:DB$ GenericChoice | Choices$ Khans,Dragons | Defined$ You | SetChosenMode$ True | AILogic$ Dragons | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Khans or Dragons.
 SVar:Khans:DB$ Pump | SpellDescription$ Khans
 SVar:Dragons:DB$ Pump | SpellDescription$ Dragons
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeKhans | AddTrigger$ KhansTrigger | Description$ • Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
@@ -12,4 +12,4 @@ SVar:Boost:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targ
 SVar:DragonsTrigger:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | ValidPlayer$ Opponent | Execute$ TapCreature | Secondary$ True | TriggerDescription$ At the beginning of combat on each opponent's turn, tap target creature that player controls.
 SVar:TapCreature:DB$ Tap | ValidTgts$ Creature.ActivePlayerCtrl | TgtPrompt$ Choose target creature the active player controls.
 DeckHas:Ability$Counters
-Oracle:As Citadel Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.
+Oracle:As Citadel Siege enters, choose Khans or Dragons.\n• Khans — At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.\n• Dragons — At the beginning of combat on each opponent's turn, tap target creature that player controls.

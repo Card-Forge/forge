@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.GamePieceType;
 import forge.game.card.*;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -16,6 +17,7 @@ import com.google.common.collect.Table;
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -123,7 +125,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setController(controller, timestamp);
                 }
                 tok.setGameTimestamp(timestamp);
-                tok.setToken(true);
+                tok.setGamePieceType(GamePieceType.TOKEN);
 
                 // do effect stuff with the token
                 if (sa.hasParam("TokenTapped")) {
@@ -138,7 +140,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    tok.addEtbCounter(cType, cAmount, creator);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(creator, tok, cType, cAmount);
+                    moveParams.put(AbilityKey.CounterTable, table);
                 }
 
                 if (sa.hasParam("AddTriggersFrom")) {

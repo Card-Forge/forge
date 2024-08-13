@@ -7,7 +7,6 @@ import java.util.Map;
 import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -48,7 +47,7 @@ public class AttackRequirement {
 
         for (final GameEntity defender : possibleDefenders) {
             // use put here because we want to always put it, even if the value is 0
-            defenderSpecific.put(defender, Integer.valueOf(defenderSpecific.count(defender) + nAttackAnything));
+            defenderSpecific.put(defender, defenderSpecific.count(defender) + nAttackAnything);
         }
 
         // Remove GameEntities that are no longer on an opposing battlefield or are
@@ -107,7 +106,7 @@ public class AttackRequirement {
 
                     // only count violations if the forced creature can actually attack and has no cost incurred for doing so
                     if (attackers.size() < max && !attackers.containsKey(mustAttack.getKey()) && CombatUtil.canAttack(mustAttack.getKey()) && CombatUtil.getAttackCost(defender.getGame(), mustAttack.getKey(), defender) == null) {
-                        violations += mustAttack.getValue().intValue();
+                        violations += mustAttack.getValue();
                     }
                 }
             }
@@ -118,11 +117,5 @@ public class AttackRequirement {
     public List<Pair<GameEntity, Integer>> getSortedRequirements() {
         return MapToAmountUtil.sort(defenderSpecific);
     }
-    public static final Function<AttackRequirement, List<Pair<GameEntity, Integer>>> SORT = new Function<AttackRequirement, List<Pair<GameEntity,Integer>>>() {
-        @Override
-        public List<Pair<GameEntity,Integer>> apply(final AttackRequirement input) {
-            return input.getSortedRequirements();
-        }
-    };
 
 }

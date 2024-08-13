@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
@@ -100,36 +99,28 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
             default:
                 format = formats.getStandard();
         }
-        return new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(final CardEdition cardEdition){
-                return DEFAULT_FILTER.apply(cardEdition) && format.isSetLegal(cardEdition.getCode());
-            }
-        };
+        return cardEdition -> DEFAULT_FILTER.apply(cardEdition) && format.isSetLegal(cardEdition.getCode());
     }
 
     /**
      * Default filter that only allows actual sets that were printed as 15-card boosters
      */
-    private static final Predicate<CardEdition> DEFAULT_FILTER = new Predicate<CardEdition>() {
-        @Override
-        public boolean apply(final CardEdition cardEdition) {
-            boolean isExpansion = cardEdition.getType().equals(CardEdition.Type.EXPANSION);
-            boolean isCoreSet = cardEdition.getType().equals(CardEdition.Type.CORE);
-            boolean isReprintSet = cardEdition.getType().equals(CardEdition.Type.REPRINT);
-            if (isExpansion || isCoreSet || isReprintSet) {
-                // Only allow sets with 15 cards in booster packs
-                if (cardEdition.hasBoosterTemplate()) {
-                    final List<Pair<String, Integer>> slots = cardEdition.getBoosterTemplate().getSlots();
-                    int boosterSize = 0;
-                    for (Pair<String, Integer> slot : slots) {
-                        boosterSize += slot.getRight();
-                    }
-                    return boosterSize == 15;
+    private static final Predicate<CardEdition> DEFAULT_FILTER = cardEdition -> {
+        boolean isExpansion = cardEdition.getType().equals(CardEdition.Type.EXPANSION);
+        boolean isCoreSet = cardEdition.getType().equals(CardEdition.Type.CORE);
+        boolean isReprintSet = cardEdition.getType().equals(CardEdition.Type.REPRINT);
+        if (isExpansion || isCoreSet || isReprintSet) {
+            // Only allow sets with 15 cards in booster packs
+            if (cardEdition.hasBoosterTemplate()) {
+                final List<Pair<String, Integer>> slots = cardEdition.getBoosterTemplate().getSlots();
+                int boosterSize = 0;
+                for (Pair<String, Integer> slot : slots) {
+                    boosterSize += slot.getRight();
                 }
+                return boosterSize == 15;
             }
-            return false;
         }
+        return false;
     };
 
     /*
@@ -195,16 +186,9 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
         return true;
     }
 
-    public static final Function<ThemedChaosDraft, String> FN_GET_TAG = new Function<ThemedChaosDraft, String>() {
-        @Override
-        public String apply(ThemedChaosDraft themedChaosBooster) {
-            return themedChaosBooster.getTag();
-        }
-    };
-
     public static class Reader extends StorageReaderFile<ThemedChaosDraft> {
         public Reader(String pathname) {
-            super(pathname, ThemedChaosDraft.FN_GET_TAG);
+            super(pathname, ThemedChaosDraft::getTag);
         }
 
         @Override

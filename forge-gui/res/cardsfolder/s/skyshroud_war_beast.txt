@@ -4,10 +4,10 @@ Types:Creature Beast
 PT:*/*
 K:Trample
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters, choose an opponent.
 S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
 SVar:X:Count$Valid Land.nonBasic+ChosenCtrl
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$Valid Land.nonBasic+OppCtrl
-Oracle:Trample\nAs Skyshroud War Beast enters the battlefield, choose an opponent.\nSkyshroud War Beast's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
+Oracle:Trample\nAs Skyshroud War Beast enters, choose an opponent.\nSkyshroud War Beast's power and toughness are each equal to the number of nonbasic lands the chosen player controls.

@@ -3,7 +3,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.card.Card;
@@ -56,12 +55,7 @@ public class RepeatAi extends SpellAbilityAi {
                 Card best = null;
                 Iterable<Card> targetableAi = Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa));
                 if (!logic.endsWith("IgnoreLegendary")) {
-                    best = ComputerUtilCard.getBestAI(Iterables.filter(targetableAi, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card card) {
-                            return card.ignoreLegendRule();
-                        }
-                    }));
+                    best = ComputerUtilCard.getBestAI(Iterables.filter(targetableAi, Card::ignoreLegendRule));
                 } else {
                     best = ComputerUtilCard.getBestAI(targetableAi);
                 }

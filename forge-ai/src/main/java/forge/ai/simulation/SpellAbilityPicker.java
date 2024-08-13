@@ -394,7 +394,7 @@ public class SpellAbilityPicker {
 
     public List<AbilitySub> chooseModeForAbility(SpellAbility sa, List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
         if (interceptor != null) {
-            return interceptor.chooseModesForAbility(choices, min, num, allowRepeat);
+            return interceptor.chooseModesForAbility(sa, choices, min, num, allowRepeat);
         }
         if (plan != null && plan.getSelectedDecision() != null && plan.getSelectedDecision().modes != null) {
             Plan.Decision decision = plan.getSelectedDecision();

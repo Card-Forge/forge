@@ -4,6 +4,6 @@ Types:Creature Dinosaur
 PT:3/3
 K:Menace
 S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature enters the battlefield, CARDNAME deals 1 damage to that creature's controller.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature enters, CARDNAME deals 1 damage to that creature's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1
-Oracle:Menace\nPlayers can't gain life.\nWhenever another creature enters the battlefield, Rampaging Ferocidon deals 1 damage to that creature's controller.
+Oracle:Menace\nPlayers can't gain life.\nWhenever another creature enters, Rampaging Ferocidon deals 1 damage to that creature's controller.

@@ -4,9 +4,9 @@ Types:Creature Human Pirate
 PT:3/2
 K:Flying
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a permanent unless they pay {3}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters, each opponent sacrifices a permanent unless they pay {3}.
 SVar:RepeatEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigSac
 SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 3 | UnlessPayer$ Remembered
 SVar:NeedsToPlayVar:Z LE2
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
-Oracle:Flying\nWhen Rishadan Brigand enters the battlefield, each opponent sacrifices a permanent unless they pay {3}.\nRishadan Brigand can block only creatures with flying.
+Oracle:Flying\nWhen Rishadan Brigand enters, each opponent sacrifices a permanent unless they pay {3}.\nRishadan Brigand can block only creatures with flying.

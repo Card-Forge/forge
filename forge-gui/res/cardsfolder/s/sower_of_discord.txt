@@ -4,7 +4,7 @@ Types:Creature Demon
 PT:6/6
 K:Flying
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ As CARDNAME enters the battlefield, choose two players.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ As CARDNAME enters, choose two players.
 SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse
 T:Mode$ DamageDoneOnce | ActiveZones$ Battlefield | ValidTarget$ Player.Chosen | Execute$ TrigLoseLifeRemembered | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
 T:Mode$ DamageDoneOnce | ActiveZones$ Battlefield | ValidTarget$ Player.IsRemembered | Execute$ TrigLoseLifeChosen | Secondary$ True | TriggerDescription$ Whenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
@@ -13,4 +13,4 @@ SVar:TrigLoseLifeChosen:DB$ LoseLife | Defined$ Player.Chosen | LifeAmount$ X
 SVar:X:TriggerCount$DamageAmount
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Flying\nAs Sower of Discord enters the battlefield, choose two players.\nWhenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.
+Oracle:Flying\nAs Sower of Discord enters, choose two players.\nWhenever damage is dealt to one of the chosen players, the other chosen player also loses that much life.

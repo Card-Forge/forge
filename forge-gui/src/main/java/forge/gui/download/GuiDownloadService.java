@@ -102,25 +102,19 @@ public abstract class GuiDownloadService implements Runnable {
         String startOverrideDesc = getStartOverrideDesc();
         if (startOverrideDesc == null) {
             // Free up the EDT by assembling card list on a background thread
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        files = getNeededFiles();
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (onReadyToStart != null) {
-                                onReadyToStart.run();
-                            }
-                            readyToStart();
-                        }
-                    });
+            FThreads.invokeInBackgroundThread(() -> {
+                try {
+                    files = getNeededFiles();
                 }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                FThreads.invokeInEdtLater(() -> {
+                    if (onReadyToStart != null) {
+                        onReadyToStart.run();
+                    }
+                    readyToStart();
+                });
             });
         } else {
             //handle special case of zip service
@@ -131,12 +125,7 @@ public abstract class GuiDownloadService implements Runnable {
             btnStart.setCommand(cmdStartDownload);
             btnStart.setEnabled(true);
 
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    btnStart.requestFocusInWindow();
-                }
-            });
+            FThreads.invokeInEdtLater(() -> btnStart.requestFocusInWindow());
         }
     }
 
@@ -161,12 +150,7 @@ public abstract class GuiDownloadService implements Runnable {
         }
         btnStart.setEnabled(true);
 
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                btnStart.requestFocusInWindow();
-            }
-        });
+        FThreads.invokeInEdtLater(() -> btnStart.requestFocusInWindow());
     }
 
     public void setType(int type0) {
@@ -200,43 +184,40 @@ public abstract class GuiDownloadService implements Runnable {
     }
 
     private void update(final int count) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                if (onUpdate != null) {
-                    onUpdate.run();
-                }
-
-                final StringBuilder sb = new StringBuilder();
-
-                final int a = getAverageTimePerObject();
-
-                if (count != files.size()) {
-                    sb.append(count).append("/").append(files.size()).append(" - ");
-
-                    long t2Go = (files.size() - count) * a;
-
-                    if (t2Go > 3600000) {
-                        sb.append(String.format("%02d:", t2Go / 3600000));
-                        t2Go = t2Go % 3600000;
-                    }
-                    if (t2Go > 60000) {
-                        sb.append(String.format("%02d:", t2Go / 60000));
-                        t2Go = t2Go % 60000;
-                    } else {
-                        sb.append("00:");
-                    }
-
-                    sb.append(String.format("%02d remaining.", t2Go / 1000));
-                } else {
-                    sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
-                            count, files.size()));
-                    finish();
-                }
-
-                progressBar.setValue(count);
-                progressBar.setDescription(sb.toString());
+        FThreads.invokeInEdtLater(() -> {
+            if (onUpdate != null) {
+                onUpdate.run();
             }
+
+            final StringBuilder sb = new StringBuilder();
+
+            final int a = getAverageTimePerObject();
+
+            if (count != files.size()) {
+                sb.append(count).append("/").append(files.size()).append(" - ");
+
+                long t2Go = (files.size() - count) * a;
+
+                if (t2Go > 3600000) {
+                    sb.append(String.format("%02d:", t2Go / 3600000));
+                    t2Go = t2Go % 3600000;
+                }
+                if (t2Go > 60000) {
+                    sb.append(String.format("%02d:", t2Go / 60000));
+                    t2Go = t2Go % 60000;
+                } else {
+                    sb.append("00:");
+                }
+
+                sb.append(String.format("%02d remaining.", t2Go / 1000));
+            } else {
+                sb.append(String.format("%d of %d items finished! Skipped " + skipped + " items. Please close!",
+                        count, files.size()));
+                finish();
+            }
+
+            progressBar.setValue(count);
+            progressBar.setDescription(sb.toString());
         });
     }
 
@@ -357,7 +338,7 @@ public abstract class GuiDownloadService implements Runnable {
             }
             catch (final FileNotFoundException fnfe) {
                 String formatStr = "  Error - the LQ picture %s could not be found on the server. [%s] - %s";
-                System.out.println(String.format(formatStr, fileDest.getName(), url, fnfe.getMessage()));
+                System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
             }
             catch (final Exception ex) {
                 Log.error("LQ Pictures", "Error downloading pictures", ex);

@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Phyrexian Dragon
 PT:2/2
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self+YouOwn | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield from your graveyard, you may discard your hand. If you do, draw three cards.
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self+YouOwn | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters from your graveyard, you may discard your hand. If you do, draw three cards.
 SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | Defined$ You | NumCards$ 3
 K:Unearth:3 R R
 SVar:DiscardMe:2
@@ -12,4 +12,4 @@ DeckHints:Name$Mishra, Claimed by Gix
 DeckHas:Ability$Graveyard|Discard
 MeldPair:Mishra, Claimed by Gix
 AlternateMode:Meld
-Oracle:Double strike\nWhen Phyrexian Dragon Engine enters the battlefield from your graveyard, you may discard your hand. If you do, draw three cards. \nUnearth:{3}{R}{R}
+Oracle:Double strike\nWhen Phyrexian Dragon Engine enters from your graveyard, you may discard your hand. If you do, draw three cards. \nUnearth:{3}{R}{R}

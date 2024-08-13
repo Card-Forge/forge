@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
@@ -85,15 +84,12 @@ public class ChooseCardAi extends SpellAbilityAi {
                 return false;
             }
             final Combat combat = game.getCombat();
-            choices = CardLists.filter(choices, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                        return false;
-                    }
-                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
+            choices = CardLists.filter(choices, c -> {
+                if (!combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    return false;
                 }
+                int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
+                return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
             });
             return !choices.isEmpty();
         } else if (aiLogic.equals("Ashiok")) {
@@ -172,7 +168,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             logic = logic.replace("NotSelf", "");
         }
         Card choice = null;
-        if (logic.equals("")) {
+        if (logic.isEmpty()) {
             // Base Logic is choose "best"
             choice = ComputerUtilCard.getBestAI(options);
         } else if ("WorstCard".equals(logic)) {
@@ -201,15 +197,12 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("NeedsPrevention")) {
             final Game game = ai.getGame();
             final Combat combat = game.getCombat();
-            CardCollectionView better = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
-                        return false;
-                    }
-                    int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
-                    return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
+            CardCollectionView better = CardLists.filter(options, c -> {
+                if (combat == null || !combat.isAttacking(c, ai) || !combat.isUnblocked(c)) {
+                    return false;
                 }
+                int ref = ComputerUtilAbility.getAbilitySourceName(sa).equals("Forcefield") ? 1 : 0;
+                return ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) > ref;
             });
             if (!better.isEmpty()) {
                 choice = ComputerUtilCard.getBestAI(better);
@@ -235,26 +228,23 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = creats.get(0);
             }
         } else if ("NegativePowerFirst".equals(logic)) {
-            Card lowest = Aggregates.itemWithMin(options, CardPredicates.Accessors.fnGetNetPower);
+            Card lowest = Aggregates.itemWithMin(options, Card::getNetPower);
             if (lowest.getNetPower() <= 0) {
                 choice = lowest;
             } else {
                 choice = ComputerUtilCard.getBestCreatureAI(options);
             }
         } else if ("TangleWire".equals(logic)) {
-            CardCollectionView betterList = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.isCreature()) {
+            CardCollectionView betterList = CardLists.filter(options, c -> {
+                if (c.isCreature()) {
+                    return false;
+                }
+                for (SpellAbility sa1 : c.getAllSpellAbilities()) {
+                    if (sa1.getPayCosts().hasTapCost()) {
                         return false;
                     }
-                    for (SpellAbility sa : c.getAllSpellAbilities()) {
-                        if (sa.getPayCosts().hasTapCost()) {
-                            return false;
-                        }
-                    }
-                    return true;
                 }
+                return true;
             });
             if (!betterList.isEmpty()) {
                 choice = betterList.get(0);

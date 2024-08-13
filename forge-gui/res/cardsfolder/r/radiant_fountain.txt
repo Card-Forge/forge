@@ -1,7 +1,7 @@
 Name:Radiant Fountain
 ManaCost:no cost
 Types:Land
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-Oracle:When Radiant Fountain enters the battlefield, you gain 2 life.\n{T}: Add {C}.
+Oracle:When Radiant Fountain enters, you gain 2 life.\n{T}: Add {C}.

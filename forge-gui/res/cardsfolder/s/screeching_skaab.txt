@@ -2,7 +2,7 @@ Name:Screeching Skaab
 ManaCost:1 U
 Types:Creature Zombie
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill two cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You
 DeckHas:Ability$Graveyard
-Oracle:When Screeching Skaab enters the battlefield, mill two cards.
+Oracle:When Screeching Skaab enters, mill two cards.

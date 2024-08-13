@@ -10,6 +10,7 @@ ALTERNATE
 Name:Ondu Skyruins
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
-Oracle:Ondu Skyruins enters the battlefield tapped.\n{T}: Add {W}.
+Oracle:Ondu Skyruins enters tapped.\n{T}: Add {W}.

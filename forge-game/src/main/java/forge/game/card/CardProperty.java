@@ -20,7 +20,6 @@ import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
@@ -1457,10 +1456,6 @@ public class CardProperty {
             if (!card.isCopiedSpell()) {
                 return false;
             }
-        } else if (property.startsWith("nonCopiedSpell")) {
-            if (card.isCopiedSpell()) {
-                return false;
-            }
         } else if (property.startsWith("hasXCost")) {
             ManaCost cost = card.getManaCost();
             if (cost == null || cost.countX() <= 0) {
@@ -1480,10 +1475,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("exploited")) {
             if (!source.getExploited().contains(card)) {
-                return false;
-            }
-        } else if (property.startsWith("unequalPT")) {
-            if (card.getNetPower() == card.getNetToughness()) {
                 return false;
             }
         } else if (property.startsWith("equalPT")) {
@@ -1603,7 +1594,7 @@ public class CardProperty {
             if (!(property.contains("LKI") ? lki : card).isAttacking()) return false;
             if (property.equals("attacking")) return true;
             if (property.endsWith("Alone")) {
-                return CardLists.count(card.getGame().getLastStateBattlefield(), c -> c.isAttacking()) == 1;
+                return CardLists.count(card.getGame().getLastStateBattlefield(), Card::isAttacking) == 1;
             }
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {
@@ -1801,25 +1792,6 @@ public class CardProperty {
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
                 return false;
             }
-        } else if (property.equals("linkedCastTrigger")) {
-            if (card.getCastSA() == null) {
-                return false;
-            }
-            List<Card> spellCast = game.getStack().getSpellsCastThisTurn();
-            int idx = spellCast.lastIndexOf(source);
-            if (idx == -1) {
-                return false;
-            }
-            boolean found = false;
-            for (KeywordInterface kw: spellCast.get(idx).getUnhiddenKeywords()) {
-                if (!Collections.disjoint(kw.getTriggers(), spellAbility.getKeyword().getTriggers())) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                return false;
-            }
         } else if (property.startsWith("kicked")) {
             // CR 607.2i check cost is linked
             if (AbilityUtils.isUnlinkedFromCastSA(spellAbility, card)) {
@@ -1881,7 +1853,10 @@ public class CardProperty {
             return card.getCastSA().isEvoke();
         } else if (property.equals("PromisedGift")) {
             // Do we need this isUnlinked thing like these others?
-            return card.hasPromisedGift();
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isOptionalCostPaid(OptionalCost.PromiseGift);
         } else if (property.equals("impended")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1916,16 +1891,8 @@ public class CardProperty {
             if (card.getDevouredCards().isEmpty()) {
                 return false;
             }
-        } else if (property.equals("HasNotDevoured")) {
-            if (!card.getDevouredCards().isEmpty()) {
-                return false;
-            }
         } else if (property.equals("IsMonstrous")) {
             if (!card.isMonstrous()) {
-                return false;
-            }
-        } else if (property.equals("IsNotMonstrous")) {
-            if (card.isMonstrous()) {
                 return false;
             }
         } else if (property.equals("IsUnearthed")) {
@@ -1934,10 +1901,6 @@ public class CardProperty {
             }
         } else if (property.equals("IsRenowned")) {
             if (!card.isRenowned()) {
-                return false;
-            }
-        } else if (property.equals("IsNotRenowned")) {
-            if (card.isRenowned()) {
                 return false;
             }
         } else if (property.equals("IsSolved")) {
@@ -1960,10 +1923,6 @@ public class CardProperty {
             }
         } else if (property.equals("IsSuspected")) {
             if (!card.isSuspected()) {
-                return false;
-            }
-        } else if (property.equals("IsUnsuspected")) {
-            if (card.isSuspected()) {
                 return false;
             }
         } else if (property.equals("IsRemembered")) {
@@ -2005,7 +1964,15 @@ public class CardProperty {
                 // otherwise check for keyword object
                 return Objects.equals(castSA.getKeyword(), spellAbility.getKeyword());
             }
-        } else if (property.startsWith("CastSa"))  {
+        } else if (property.equals("CastSaSource")) {
+            SpellAbility castSA = card.getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            if (!castSA.equals(source.getCastSA())) {
+                return false;
+            }
+        } else if (property.startsWith("CastSa")) {
             SpellAbility castSA = card.getCastSA();
             if (castSA == null) {
                 return false;

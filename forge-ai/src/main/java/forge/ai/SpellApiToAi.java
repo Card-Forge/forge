@@ -123,7 +123,7 @@ public enum SpellApiToAi {
             .put(ApiType.MustBlock, MustBlockAi.class)
             .put(ApiType.Mutate, MutateAi.class)
             .put(ApiType.NameCard, ChooseCardNameAi.class)
-            .put(ApiType.NoteCounters, AlwaysPlayAi.class)
+            //.put(ApiType.NoteCounters, AlwaysPlayAi.class)
             .put(ApiType.PeekAndReveal, PeekAndRevealAi.class)
             .put(ApiType.PermanentCreature, PermanentCreatureAi.class)
             .put(ApiType.PermanentNoncreature, PermanentNoncreatureAi.class)

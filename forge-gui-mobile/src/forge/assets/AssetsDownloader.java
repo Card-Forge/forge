@@ -52,26 +52,15 @@ public class AssetsDownloader {
                             "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
-                        message += " If so, you may want to connect to wifi first. The download is around 6.5MB.";
+                        message += " If so, you may want to connect to wifi first. The download is around 12MB.";
                     }
                     if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String apkFile = new GuiDownloadZipService("", "update", apkURL,
                             Forge.getDeviceAdapter().getDownloadsDir(), null, splashScreen.getProgressBar()).download(filename);
                         if (apkFile != null) {
-                            /* FileUriExposedException was added on API 24, Forge now targets API 26 so Android 10 and above runs,
-                            most user thinks Forge crashes but in reality, the method below just can't open the apk when Forge
-                            exits silently to run the downloaded apk. Some devices allow the apk to run but most users are annoyed when
-                            Forge didn't open the apk so I downgrade the check so it will run only on target devices without FileUriExposedException */
-                            if (Forge.androidVersion < 24) {
-                                Forge.getDeviceAdapter().openFile(apkFile);
-                                Forge.exitAnimation(false);
-                                return;
-                            }
-                            // API 24 and above needs manual apk installation unless we provide a FileProvider for FileUriExposedException
-                            switch (SOptionPane.showOptionDialog("Download Successful. Go to your downloads folder and install " + filename +" to update Forge. Forge will now exit.", "", null, ImmutableList.of("Ok"))) {
-                                default:
-                                    Forge.exitAnimation(false);
-                            }
+                            Forge.getDeviceAdapter().openFile(apkFile);
+                            Forge.isMobileAdventureMode = Forge.advStartup;
+                            Forge.exitAnimation(false);
                             return;
                         }
                         SOptionPane.showOptionDialog("Could not download update. " +
@@ -162,12 +151,9 @@ public class AssetsDownloader {
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
 
         //reload light version of skin after assets updated
-        FThreads.invokeInEdtAndWait(new Runnable() {
-            @Override
-            public void run() {
-                FSkinFont.updateAll(); //update all fonts used by splash screen
-                FSkin.loadLight(FSkin.getName(), splashScreen);
-            }
+        FThreads.invokeInEdtAndWait(() -> {
+            FSkinFont.updateAll(); //update all fonts used by splash screen
+            FSkin.loadLight(FSkin.getName(), splashScreen);
         });
 
         //save version string to file once assets finish downloading

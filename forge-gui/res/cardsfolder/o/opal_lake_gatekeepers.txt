@@ -2,7 +2,7 @@ Name:Opal Lake Gatekeepers
 ManaCost:3 U
 Types:Creature Vedalken Soldier
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if you control two or more Gates, you may draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Gate.YouCtrl | PresentCompare$ GE2 | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, if you control two or more Gates, you may draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 DeckHints:Type$Gate
-Oracle:When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.
+Oracle:When Opal Lake Gatekeepers enters, if you control two or more Gates, you may draw a card.

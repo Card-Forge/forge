@@ -31,10 +31,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,47 +69,38 @@ public enum CSubmenuPreferences implements ICDoc {
         this.prefs = FModel.getPreferences();
 
         // This updates variable right now and is not standard
-        view.getCbDevMode().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                if (updating) { return; }
-                // prevent changing DEV_MODE while network game running
-                if (FServerManager.getInstance().isMatchActive()) {
-                    System.out.println(localizer.getMessage("CantChangeDevModeWhileNetworkMath"));
-                    return;
-                }
-
-                final boolean toggle = view.getCbDevMode().isSelected();
-                prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
-                ForgePreferences.DEV_MODE = toggle;
-                prefs.save();
+        view.getCbDevMode().addItemListener(arg0 -> {
+            if (updating) { return; }
+            // prevent changing DEV_MODE while network game running
+            if (FServerManager.getInstance().isMatchActive()) {
+                System.out.println(localizer.getMessage("CantChangeDevModeWhileNetworkMath"));
+                return;
             }
+
+            final boolean toggle = view.getCbDevMode().isSelected();
+            prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
+            ForgePreferences.DEV_MODE = toggle;
+            prefs.save();
         });
 
         // This updates background track immediately and is not standard
-        view.getCbEnableMusic().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                if (updating) { return; }
+        view.getCbEnableMusic().addItemListener(arg0 -> {
+            if (updating) { return; }
 
-                final boolean toggle = view.getCbEnableMusic().isSelected();
-                prefs.setPref(FPref.UI_ENABLE_MUSIC, String.valueOf(toggle));
-                prefs.save();
-                SoundSystem.instance.changeBackgroundTrack();
-            }
+            final boolean toggle = view.getCbEnableMusic().isSelected();
+            prefs.setPref(FPref.UI_ENABLE_MUSIC, String.valueOf(toggle));
+            prefs.save();
+            SoundSystem.instance.changeBackgroundTrack();
         });
 
         // This updates Experimental Network Option
-        view.getCbUseExperimentalNetworkStream().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent arg0) {
-                if (updating) { return; }
+        view.getCbUseExperimentalNetworkStream().addItemListener(arg0 -> {
+            if (updating) { return; }
 
-                final boolean toggle = view.getCbUseExperimentalNetworkStream().isSelected();
-                GuiBase.enablePropertyConfig(toggle);
-                prefs.setPref(FPref.UI_NETPLAY_COMPAT, String.valueOf(toggle));
-                prefs.save();
-            }
+            final boolean toggle = view.getCbUseExperimentalNetworkStream().isSelected();
+            GuiBase.enablePropertyConfig(toggle);
+            prefs.setPref(FPref.UI_NETPLAY_COMPAT, String.valueOf(toggle));
+            prefs.save();
         });
 
         lstControls.clear(); // just in case
@@ -177,90 +165,41 @@ public enum CSubmenuPreferences implements ICDoc {
 
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
-          kv.getKey().addItemListener(new ItemListener() {
-                @Override
-                public void itemStateChanged(final ItemEvent arg0) {
-                    if (updating) { return; }
+          kv.getKey().addItemListener(arg0 -> {
+              if (updating) { return; }
 
-                    prefs.setPref(kv.getValue(), String.valueOf(kv.getKey().isSelected()));
-                    prefs.save();
-                }
-            });
+              prefs.setPref(kv.getValue(), String.valueOf(kv.getKey().isSelected()));
+              prefs.save();
+          });
         }
 
-        view.getCbSmartCardArtSelectionOpt().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(final ItemEvent e) {
-                if (updating) { return; }
-                boolean isEnabled = e.getStateChange() == ItemEvent.SELECTED;
-                FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
-            }
+        view.getCbSmartCardArtSelectionOpt().addItemListener(e -> {
+            if (updating) { return; }
+            boolean isEnabled = e.getStateChange() == ItemEvent.SELECTED;
+            FModel.getMagicDb().setEnableSmartCardArtSelection(isEnabled);
         });
 
-        view.getBtnReset().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetForgeSettingsToDefault();
-            }
+        view.getBtnReset().setCommand((UiCommand) CSubmenuPreferences.this::resetForgeSettingsToDefault);
+
+        view.getBtnDeleteEditorUI().setCommand((UiCommand) CSubmenuPreferences.this::resetDeckEditorLayout);
+
+        view.getBtnDeleteWorkshopUI().setCommand((UiCommand) CSubmenuPreferences.this::resetWorkshopLayout);
+
+        view.getBtnDeleteMatchUI().setCommand((UiCommand) CSubmenuPreferences.this::resetMatchScreenLayout);
+
+        view.getBtnUserProfileUI().setCommand((UiCommand) CSubmenuPreferences.this::openUserProfileDirectory);
+
+        view.getBtnClearImageCache().setCommand((UiCommand) CSubmenuPreferences.this::clearImageCache);
+
+        view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
+
+        view.getBtnResetJavaFutureCompatibilityWarnings().setCommand((UiCommand) () -> {
+            prefs.setPref(FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, false);
+            prefs.save();
+            FOptionPane.showMessageDialog(localizer.getMessage("CompatibilityWarningsReEnabled"));
         });
 
-        view.getBtnDeleteEditorUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetDeckEditorLayout();
-            }
-        });
-
-        view.getBtnDeleteWorkshopUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetWorkshopLayout();
-            }
-        });
-
-        view.getBtnDeleteMatchUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.resetMatchScreenLayout();
-            }
-        });
-
-        view.getBtnUserProfileUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openUserProfileDirectory();
-            }
-        });
-
-        view.getBtnClearImageCache().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.clearImageCache();
-            }
-        });
-
-        view.getBtnTokenPreviewer().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openTokenPreviewer();
-            }
-        });
-
-        view.getBtnResetJavaFutureCompatibilityWarnings().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                prefs.setPref(FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, false);
-                prefs.save();
-                FOptionPane.showMessageDialog(localizer.getMessage("CompatibilityWarningsReEnabled"));
-            }
-        });
-
-        view.getBtnContentDirectoryUI().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CSubmenuPreferences.this.openContentDirectory();
-            }
-        });
+        view.getBtnContentDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::openContentDirectory);
 
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();
@@ -307,9 +246,7 @@ public enum CSubmenuPreferences implements ICDoc {
         }
         view.reloadShortcuts();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.getCbRemoveSmall().requestFocusInWindow(); }
-        });
+        SwingUtilities.invokeLater(() -> view.getCbRemoveSmall().requestFocusInWindow());
 
         updating = false;
     }
@@ -397,11 +334,7 @@ public enum CSubmenuPreferences implements ICDoc {
     private void initializeCloseActionComboBox() {
         final FComboBoxPanel<CloseAction> panel = this.view.getCloseActionComboBoxPanel();
         final FComboBox<CloseAction> comboBox = new FComboBox<>(CloseAction.values());
-        comboBox.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                Singletons.getControl().setCloseAction(comboBox.getSelectedItem());
-            }
-        });
+        comboBox.addItemListener(e -> Singletons.getControl().setCloseAction(comboBox.getSelectedItem()));
         panel.setComboBox(comboBox, Singletons.getControl().getCloseAction());
     }
 
@@ -444,11 +377,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBoxPanel<String> panel = this.view.getCbpMulliganRule();
         final FComboBox<String> comboBox = createComboBox(choices, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
-        comboBox.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(prefs.getPref(FPref.MULLIGAN_RULE)));
-            }
-        });
+        comboBox.addItemListener(e -> StaticData.instance().setMulliganRule(MulliganDefs.GetRuleByName(prefs.getPref(FPref.MULLIGAN_RULE))));
         panel.setComboBox(comboBox, selectedItem);
     }
 
@@ -484,13 +413,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(new String[] {"Off", "AI", "Human For AI"}, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem()));
-                System.out.println(AiProfileUtil.getAISideboardingMode());
-            }
-        });
+        comboBox.addActionListener(actionEvent -> AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem())));
     }
 
     private void initializeSoundSetsComboBox() {
@@ -499,12 +422,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableSoundSets(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                SoundSystem.instance.invalidateSoundCache();
-            }
-        });
+        comboBox.addActionListener(actionEvent -> SoundSystem.instance.invalidateSoundCache());
     }
 
     private void initializeMusicSetsComboBox() {
@@ -513,12 +431,9 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(SoundSystem.instance.getAvailableMusicSets(), userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-        comboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                MusicPlaylist.invalidateMusicPlaylist();
-                SoundSystem.instance.changeBackgroundTrack();
-            }
+        comboBox.addActionListener(actionEvent -> {
+            MusicPlaylist.invalidateMusicPlaylist();
+            SoundSystem.instance.changeBackgroundTrack();
         });
     }
 
@@ -530,18 +445,16 @@ public enum CSubmenuPreferences implements ICDoc {
 
         final FComboBoxPanel<String> panel = this.view.getCbpCardArtPreference();
         final FComboBox<String> comboBox = new FComboBox<>(choices);
-        comboBox.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                String artPreference = comboBox.getSelectedItem();
-                if (artPreference == null)
-                    artPreference = latestOpt;  // default, just in case
-                boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
-                boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
-                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
-                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
-                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
-                CSubmenuPreferences.this.prefs.save();
-            }
+        comboBox.addItemListener(e -> {
+            String artPreference = comboBox.getSelectedItem();
+            if (artPreference == null)
+                artPreference = latestOpt;  // default, just in case
+            boolean latestArt = artPreference.equalsIgnoreCase(latestOpt);
+            boolean coreExpFilter = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
+            String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
+            CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+            CSubmenuPreferences.this.prefs.save();
         });
         final String selectedItem = FModel.getMagicDb().cardArtPreferenceIsLatest() ? latestOpt : originalOpt;
         panel.setComboBox(comboBox, selectedItem);
@@ -549,16 +462,13 @@ public enum CSubmenuPreferences implements ICDoc {
         final JCheckBox coreExpFilter = this.view.getCbCardArtCoreExpansionsOnlyOpt();
         boolean selected = FModel.getMagicDb().isCoreExpansionOnlyFilterSet();
         coreExpFilter.setSelected(selected);
-        coreExpFilter.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
-                boolean coreExpFilter = e.getStateChange() == ItemEvent.SELECTED;
-                FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter);
-                String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
-                CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
-                CSubmenuPreferences.this.prefs.save();
-            }
+        coreExpFilter.addItemListener(e -> {
+            boolean latestArt = FModel.getMagicDb().cardArtPreferenceIsLatest();
+            boolean coreExpFilter1 = e.getStateChange() == ItemEvent.SELECTED;
+            FModel.getMagicDb().setCardArtPreference(latestArt, coreExpFilter1);
+            String preferenceOpt = FModel.getMagicDb().getCardArtPreferenceName();
+            CSubmenuPreferences.this.prefs.setPref(uiPreferredArt, preferenceOpt);
+            CSubmenuPreferences.this.prefs.save();
         });
     }
 
@@ -667,12 +577,10 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private <E> void addComboBoxListener(final FComboBox<E> comboBox, final ForgePreferences.FPref setting) {
-        comboBox.addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                final E selectedType = comboBox.getSelectedItem();
-                CSubmenuPreferences.this.prefs.setPref(setting, selectedType.toString());
-                CSubmenuPreferences.this.prefs.save();
-            }
+        comboBox.addItemListener(e -> {
+            final E selectedType = comboBox.getSelectedItem();
+            CSubmenuPreferences.this.prefs.setPref(setting, selectedType.toString());
+            CSubmenuPreferences.this.prefs.save();
         });
     }
 
@@ -696,11 +604,9 @@ public enum CSubmenuPreferences implements ICDoc {
 
     @SuppressWarnings("serial")
     private UiCommand getPlayerNameButtonCommand() {
-        return new UiCommand() {
-            @Override public void run() {
-                GamePlayerUtil.setPlayerName();
-                setPlayerNameButtonText();
-            }
+        return () -> {
+            GamePlayerUtil.setPlayerName();
+            setPlayerNameButtonText();
         };
     }
 }

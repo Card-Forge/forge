@@ -8,4 +8,4 @@ K:Protection:Card.MultiColor:multicolored
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
-Oracle:Reach, trample, protection from multicolored\nStonecoil Serpent enters the battlefield with X +1/+1 counters on it.
+Oracle:Reach, trample, protection from multicolored\nStonecoil Serpent enters with X +1/+1 counters on it.

@@ -38,8 +38,6 @@ import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.GuiChoose;
 import forge.util.Aggregates;
@@ -153,13 +151,8 @@ public class ConquestAEtherScreen extends FScreen {
         CardRarity rarity = btnRarityFilter.selectedOption.getRarity(MyRandom.getRandom().nextDouble());
         while (true) {
             final CardRarity allowedRarity = rarity;
-            rewardPool = Iterables.filter(filteredPool, new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard card) {
-                    return allowedRarity == card.getRarity()
-                    || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special;
-                }
-            });
+            rewardPool = Iterables.filter(filteredPool, card -> allowedRarity == card.getRarity()
+                    || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special);
             if (Iterables.isEmpty(rewardPool)) { //if pool is empty, must reduce rarity and try again
                 if (rarity == minRarity) {
                     return;
@@ -366,20 +359,15 @@ public class ConquestAEtherScreen extends FScreen {
             caption = caption0;
             options = ImmutableList.copyOf(options0);
             setSelectedOption(options.get(0));
-            setCommand(new FEventHandler() {
+            setCommand(e -> GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblSelectCaptionFilter", caption), 0, 1, options, selectedOption, null, new Callback<List<AEtherFilter>>() {
                 @Override
-                public void handleEvent(FEvent e) {
-                    GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblSelectCaptionFilter", caption), 0, 1, options, selectedOption, null, new Callback<List<AEtherFilter>>() {
-                        @Override
-                        public void run(List<AEtherFilter> result) {
-                            if (!result.isEmpty()) {
-                                setSelectedOption(result.get(0));
-                                updateFilteredPool();
-                            }
-                        }
-                    });
+                public void run(List<AEtherFilter> result) {
+                    if (!result.isEmpty()) {
+                        setSelectedOption(result.get(0));
+                        updateFilteredPool();
+                    }
                 }
-            });
+            }));
         }
 
         private void setSelectedOption(AEtherFilter selectedOption0) {

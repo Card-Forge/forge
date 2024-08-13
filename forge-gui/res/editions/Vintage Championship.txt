@@ -38,3 +38,6 @@ ScryfallCode=OVNT
 2022A M Bazaar of Baghdad @Chris Seaman
 2022B M Time Walk @Tyler Walpole
 2022C M Ancestral Recall @Volkan Baǵa
+2023A M Black Lotus @Jarel Threat
+2023EU M Black Lotus @Raoul Vitale
+2023NA M Black Lotus @Scott M. Fischer

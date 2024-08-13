@@ -1,8 +1,6 @@
 package forge.gamemodes.match;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,13 +133,11 @@ public class HostedMatch {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        Collections.sort(sortedPlayers, new Comparator<RegisteredPlayer>() {
-            @Override public final int compare(final RegisteredPlayer p1, final RegisteredPlayer p2) {
+        sortedPlayers.sort((p1, p2) -> {
 
-                final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-                final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
-                return Integer.compare(v1, v2);
-            }
+            final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+            final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
+            return Integer.compare(v1, v2);
         });
 
         if (sortedPlayers.size() == 2) {
@@ -263,30 +259,28 @@ public class HostedMatch {
 
         // It's important to run match in a different thread to allow GUI inputs to be invoked from inside game. 
         // Game is set on pause while gui player takes decisions
-        game.getAction().invoke(new Runnable() {
-            @Override public final void run() {
-                if (humanCount == 0) {
-                    // Create FControlGamePlayback in game thread to allow pausing
-                    playbackControl = new FControlGamePlayback(humanControllers.get(0));
-                    playbackControl.setGame(game);
-                    game.subscribeToEvents(playbackControl);
-                }
-                // Actually start the game!
-                match.startGame(game, startGameHook);
-                // this function waits?
-                if (endGameHook != null){
-                    endGameHook.run();
-                }
+        game.getAction().invoke(() -> {
+            if (humanCount == 0) {
+                // Create FControlGamePlayback in game thread to allow pausing
+                playbackControl = new FControlGamePlayback(humanControllers.get(0));
+                playbackControl.setGame(game);
+                game.subscribeToEvents(playbackControl);
+            }
+            // Actually start the game!
+            match.startGame(game, startGameHook);
+            // this function waits?
+            if (endGameHook != null){
+                endGameHook.run();
+            }
 
-                // After game is over...
-                isMatchOver = match.isMatchOver();
-                if (humanCount == 0) {
-                    // ... if no human players, let AI decide next game
-                    if (isMatchOver) {
-                        addNextGameDecision(null, NextGameDecision.QUIT);
-                    } else {
-                        addNextGameDecision(null, NextGameDecision.CONTINUE);
-                    }
+            // After game is over...
+            isMatchOver = match.isMatchOver();
+            if (humanCount == 0) {
+                // ... if no human players, let AI decide next game
+                if (isMatchOver) {
+                    addNextGameDecision(null, NextGameDecision.QUIT);
+                } else {
+                    addNextGameDecision(null, NextGameDecision.CONTINUE);
                 }
             }
         });
@@ -398,23 +392,20 @@ public class HostedMatch {
 
             final GameView gameView = event.subgame.getView();
 
-            Runnable switchGameView = new Runnable() {
-                @Override
-                public void run() {
-                    for (final Player p : event.subgame.getPlayers()) {
-                        if (p.getController() instanceof PlayerControllerHuman) {
-                            final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
-                            final IGuiGame gui = guis.get(p.getRegisteredPlayer());
-                            humanController.setGui(gui);
-                            gui.setGameView(null);
-                            gui.setGameView(gameView);
-                            gui.setOriginalGameController(p.getView(), humanController);
-                            gui.openView(new TrackableCollection<>(p.getView()));
-                            gui.setGameView(null);
-                            gui.setGameView(gameView);
-                            event.subgame.subscribeToEvents(new FControlGameEventHandler(humanController));
-                            gui.message(event.message);
-                        }
+            Runnable switchGameView = () -> {
+                for (final Player p : event.subgame.getPlayers()) {
+                    if (p.getController() instanceof PlayerControllerHuman) {
+                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                        final IGuiGame gui = guis.get(p.getRegisteredPlayer());
+                        humanController.setGui(gui);
+                        gui.setGameView(null);
+                        gui.setGameView(gameView);
+                        gui.setOriginalGameController(p.getView(), humanController);
+                        gui.openView(new TrackableCollection<>(p.getView()));
+                        gui.setGameView(null);
+                        gui.setGameView(gameView);
+                        event.subgame.subscribeToEvents(new FControlGameEventHandler(humanController));
+                        gui.message(event.message);
                     }
                 }
             };
@@ -434,22 +425,19 @@ public class HostedMatch {
         @Override
         public Void visit(final GameEventSubgameEnd event) {
             final GameView gameView = event.maingame.getView();
-            Runnable switchGameView = new Runnable() {
-                @Override
-                public void run() {
-                    for (final Player p : event.maingame.getPlayers()) {
-                        if (p.getController() instanceof PlayerControllerHuman) {
-                            final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
-                            final IGuiGame gui = guis.get(p.getRegisteredPlayer());
-                            gui.setGameView(null);
-                            gui.setGameView(gameView);
-                            gui.setOriginalGameController(p.getView(), humanController);
-                            gui.openView(new TrackableCollection<>(p.getView()));
-                            gui.setGameView(null);
-                            gui.setGameView(gameView);
-                            gui.updatePhase(true);
-                            gui.message(event.message);
-                        }
+            Runnable switchGameView = () -> {
+                for (final Player p : event.maingame.getPlayers()) {
+                    if (p.getController() instanceof PlayerControllerHuman) {
+                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                        final IGuiGame gui = guis.get(p.getRegisteredPlayer());
+                        gui.setGameView(null);
+                        gui.setGameView(gameView);
+                        gui.setOriginalGameController(p.getView(), humanController);
+                        gui.openView(new TrackableCollection<>(p.getView()));
+                        gui.setGameView(null);
+                        gui.setGameView(gameView);
+                        gui.updatePhase(true);
+                        gui.message(event.message);
                     }
                 }
             };
@@ -484,11 +472,9 @@ public class HostedMatch {
 
     private void addNextGameDecision(final PlayerControllerHuman controller, final NextGameDecision decision) {
         if (decision == NextGameDecision.QUIT) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public void run() {
-                    endCurrentGame();
-                    isMatchOver = true;
-                }
+            FThreads.invokeInEdtNowOrLater(() -> {
+                endCurrentGame();
+                isMatchOver = true;
             });
             return; // if any player chooses quit, quit the match
         }
@@ -512,17 +498,9 @@ public class HostedMatch {
         }
 
         if (continueMatch >= newMatch) {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public void run() {
-                    continueMatch();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::continueMatch);
         } else {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override public void run() {
-                    restartMatch();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::restartMatch);
         }
     }
 

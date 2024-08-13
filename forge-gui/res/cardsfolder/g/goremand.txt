@@ -5,7 +5,7 @@ PT:5/5
 K:Flying
 K:Trample
 A:SP$ PermanentCreature | Cost$ 4 B B Sac<1/Creature>
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, each opponent sacrifices a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature
 DeckHas:Ability$Sacrifice
-Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFlying\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhen Goremand enters the battlefield, each opponent sacrifices a creature.
+Oracle:As an additional cost to cast this spell, sacrifice a creature.\nFlying\nTrample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nWhen Goremand enters, each opponent sacrifices a creature.

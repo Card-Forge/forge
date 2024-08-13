@@ -1,8 +1,8 @@
 Name:Hierophant's Chalice
 ManaCost:3
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters, target opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-Oracle:When Hierophant's Chalice enters the battlefield, target opponent loses 1 life and you gain 1 life.\n{T}: Add {C}.
+Oracle:When Hierophant's Chalice enters, target opponent loses 1 life and you gain 1 life.\n{T}: Add {C}.

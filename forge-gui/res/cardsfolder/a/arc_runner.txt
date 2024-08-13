@@ -4,7 +4,7 @@ Types:Creature Elemental Ox
 PT:5/1
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Self
+SVar:TrigSac:DB$ Sacrifice
 SVar:EndOfTurnLeavePlay:True
 SVar:PlayMain1:TRUE
 Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nAt the beginning of the end step, sacrifice Arc Runner.

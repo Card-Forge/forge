@@ -44,7 +44,7 @@ class AsyncSoundRegistry {
     }
 
     public synchronized static int getNumIterations(String soundName) {
-        return soundsPlayed.containsKey(soundName) ? soundsPlayed.get(soundName) : 0;
+        return soundsPlayed.getOrDefault(soundName, 0);
     }
 }
 
@@ -79,10 +79,7 @@ public class AltSoundSystem extends Thread {
         try {
             ByteArrayInputStream bis = new ByteArrayInputStream(AudioClip.getAudioClips(soundFile));
             audioInputStream = AudioSystem.getAudioInputStream(bis);
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            return;
-        } catch (IOException e) {
+        } catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
             return;
         }

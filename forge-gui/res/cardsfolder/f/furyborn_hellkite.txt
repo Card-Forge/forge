@@ -4,4 +4,4 @@ Types:Creature Dragon
 PT:6/6
 K:Bloodthirst:6
 K:Flying
-Oracle:Bloodthirst 6 (If an opponent was dealt damage this turn, this creature enters the battlefield with six +1/+1 counters on it.)\nFlying
+Oracle:Bloodthirst 6 (If an opponent was dealt damage this turn, this creature enters with six +1/+1 counters on it.)\nFlying

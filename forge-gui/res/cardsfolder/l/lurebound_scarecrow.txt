@@ -3,8 +3,8 @@ ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:4/4
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentComputerControls
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentComputerControls
 T:Mode$ Always | IsPresent$ Permanent.YouCtrl+ChosenColor | PresentCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ When you control no permanents of the chosen color, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0
 SVar:NeedsToPlay:Permanent.nonColorless+YouCtrl
-Oracle:As Lurebound Scarecrow enters the battlefield, choose a color.\nWhen you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
+Oracle:As Lurebound Scarecrow enters, choose a color.\nWhen you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.

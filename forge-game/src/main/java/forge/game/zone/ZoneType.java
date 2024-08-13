@@ -1,6 +1,5 @@
 package forge.game.zone;
 
-import com.google.common.base.Function;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public enum ZoneType {
     None(true, "lblNoneZone");
 
     public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
+    public static final List<ZoneType> PART_OF_COMMAND_ZONE = Arrays.asList(Command, SchemeDeck, PlanarDeck, AttractionDeck, Junkyard);
 
     private final boolean holdsHiddenInfo;
     private final String zoneName;
@@ -75,6 +75,10 @@ public enum ZoneType {
         return !holdsHiddenInfo;
     }
 
+    public boolean isPartOfCommandZone() {
+        return PART_OF_COMMAND_ZONE.contains(this);
+    }
+
     public String getTranslatedName() {
         return zoneName;
     }
@@ -96,14 +100,5 @@ public enum ZoneType {
 
     public static boolean isKnown(final String origin) {
         return !isHidden(origin);
-    }
-
-    public static class Accessors {
-        public static Function<ZoneType, String> GET_TRANSLATED_NAME = new Function<ZoneType, String>() {
-            @Override
-            public String apply(final ZoneType arg0) {
-                return arg0.getTranslatedName();
-            }
-        };
     }
 }

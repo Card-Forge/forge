@@ -85,7 +85,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         add(c, index, latestState, false);
     }
     public void add(final Card c, Integer index, final Card latestState, final boolean rollback) {
-        if (index != null && cardList.isEmpty() && index.intValue() > 0) {
+        if (index != null && cardList.isEmpty() && index > 0) {
             // something went wrong, most likely the method fired when the game was in an unexpected state
             // (e.g. conceding during the mana payment prompt)
             System.out.println("Warning: tried to add a card to zone with a specific non-zero index, but the zone was empty! Canceling Zone#add to avoid a crash.");
@@ -133,7 +133,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             if (index == null) {
                 cardList.add(c);
             } else {
-                cardList.add(index.intValue(), c);
+                cardList.add(index, c);
             }
         }
         onChanged();

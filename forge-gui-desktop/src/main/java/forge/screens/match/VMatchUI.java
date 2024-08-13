@@ -122,14 +122,11 @@ public class VMatchUI implements IVTopLevelUI {
         }
 
         // Fill in gaps
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
-                    if (c.getDocs().isEmpty()) {
-                        SRearrangingUtil.fillGap(c);
-                        FView.SINGLETON_INSTANCE.removeDragCell(c);
-                    }
+        SwingUtilities.invokeLater(() -> {
+            for (final DragCell c : FView.SINGLETON_INSTANCE.getDragCells()) {
+                if (c.getDocs().isEmpty()) {
+                    SRearrangingUtil.fillGap(c);
+                    FView.SINGLETON_INSTANCE.removeDragCell(c);
                 }
             }
         });

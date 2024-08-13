@@ -5,6 +5,6 @@ PT:3/3
 K:Flash
 K:Flying
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | IsPresent$ Creature.Pirate+Other+YouCtrl | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Pirate, tap up to two target nonland permanents.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | IsPresent$ Creature.Pirate+Other+YouCtrl | TriggerDescription$ When CARDNAME enters, if you control another Pirate, tap up to two target nonland permanents.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target nonland permanent | SpellDescription$ Tap up to two target nonland permanents.
-Oracle:Flash\nFlying\nDreamcaller Siren can block only creatures with flying.\nWhen Dreamcaller Siren enters the battlefield, if you control another Pirate, tap up to two target nonland permanents.
+Oracle:Flash\nFlying\nDreamcaller Siren can block only creatures with flying.\nWhen Dreamcaller Siren enters, if you control another Pirate, tap up to two target nonland permanents.

@@ -7,4 +7,3 @@ Draft:Immediately after the draft, you may reveal a card in your card pool. Each
 A:AB$ Draw | Cost$ T | Defined$ You | NumCards$ 1 | SubAbility$ Discard | SpellDescription$ Draw a card, then discard a card.
 SVar:Discard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 Oracle:Draft Deal Broker face up.\nImmediately after the draft, you may reveal a card in your card pool. Each other player may offer you one card in their card pool in exchange. You may accept any one offer.\n{T}: Draw a card, then discard a card.
-

@@ -6,4 +6,4 @@ K:Flying
 K:Haunt:TrigToken
 SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_bat_flying | TokenOwner$ You | TokenAmount$ 2 | SpellDescription$ Create two 1/1 black Bat creature tokens with flying.
 DeckHas:Ability$Token
-Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Belfry Spirit enters the battlefield or the creature it haunts dies, create two 1/1 black Bat creature tokens with flying.
+Oracle:Flying\nHaunt (When this creature dies, exile it haunting target creature.)\nWhen Belfry Spirit enters or the creature it haunts dies, create two 1/1 black Bat creature tokens with flying.

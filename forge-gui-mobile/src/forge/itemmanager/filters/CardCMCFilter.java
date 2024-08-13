@@ -30,6 +30,6 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
         if (predicate == null) {
             return Predicates.alwaysTrue();
         }
-        return Predicates.compose(predicate, PaperCard.FN_GET_RULES);
+        return Predicates.compose(predicate, PaperCard::getRules);
     }
 }

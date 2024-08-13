@@ -20,7 +20,6 @@ package forge.itemmanager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -125,7 +124,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         final List<Entry<T, Integer>> list = getOrderedList();
         if (list.isEmpty()) { return; }
-        try { Collections.sort(list, new MyComparator()); }
+        try { list.sort(new MyComparator()); }
         //fix NewDeck editor not loading on Android if a user deleted unwanted sets on edition folder
         catch (IllegalArgumentException ex) {}
     }
@@ -189,9 +188,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
             final List<ItemPoolSorter<InventoryItem>> oneColSorters = new ArrayList<>(maxSortDepth);
 
             synchronized (colsToSort) {
-                final Iterator<ItemColumn> it = colsToSort.iterator();
-                while (it.hasNext()) {
-                    final ItemColumn col = it.next();
+                for (ItemColumn col : colsToSort) {
                     oneColSorters.add(new ItemPoolSorter<>(
                             col.getFnSort(),
                             col.getConfig().getSortState().equals(SortState.ASC)));

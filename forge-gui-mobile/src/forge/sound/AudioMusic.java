@@ -2,7 +2,6 @@ package forge.sound;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -23,12 +22,7 @@ public class AudioMusic implements IAudioMusic {
             if (GameHUD.getInstance().audioIsPlaying())
                 return;
         }
-        music.setOnCompletionListener(new OnCompletionListener() {
-            @Override
-            public void onCompletion(Music music) {
-                onComplete.run();
-            }
-        });
+        music.setOnCompletionListener(music -> onComplete.run());
         music.play();
     }
 

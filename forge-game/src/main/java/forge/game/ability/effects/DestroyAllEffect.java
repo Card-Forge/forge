@@ -42,7 +42,7 @@ public class DestroyAllEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        final boolean noRegen = sa.hasParam("NoRegen");
+        boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getHostCard();
         final boolean isOptional = sa.hasParam("Optional");
         final Game game = sa.getActivatingPlayer().getGame();
@@ -90,6 +90,9 @@ public class DestroyAllEffect extends SpellAbilityEffect {
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         for (Card c : list) {
+            if (sa.hasParam("NoRegenValid")) {
+                noRegen = c.isValid(sa.getParam("NoRegenValid"), sa.getActivatingPlayer(), card, sa);
+            }
             if (game.getAction().destroy(c, sa, !noRegen, params) && remDestroyed) {
                 card.addRemembered(zoneMovements.getLastStateBattlefield().get(c));
             }

@@ -10,4 +10,4 @@ SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_blood_draw | TokenOwn
 SVar:PlayMain1:TRUE
 DeckHints:Name$Laurine, the Diversion
 DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood
-Oracle:Partner with Laurine, the Diversion (When this creature enters the battlefield, target player may put Laurine into their hand from their library, then shuffle.)\nLifelink\nWhenever a creature an opponent controls dies, you gain 1 life and create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")
+Oracle:Partner with Laurine, the Diversion (When this creature enters, target player may put Laurine into their hand from their library, then shuffle.)\nLifelink\nWhenever a creature an opponent controls dies, you gain 1 life and create a Blood token. (It's an artifact with "{1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.")

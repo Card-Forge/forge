@@ -193,7 +193,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = activator.getCreaturesInPlay();
             CardCollection leastToughness = new CardCollection(
-                    Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness));
+                    Aggregates.listWithMin(creatsYouCtrl, Card::getNetToughness));
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
@@ -316,7 +316,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -362,7 +363,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -435,7 +437,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                     counterAmount = cti.getValue();
                                 }
                                 if (etbcounter) {
-                                    gameCard.addEtbCounter(cti.getKey(), counterAmount, placer);
+                                    GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                    etbTable.put(placer, gameCard, cti.getKey(), counterAmount);
                                 } else {
                                     gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
                                 }
@@ -531,7 +534,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
 
                     if (etbcounter) {
-                        gameCard.addEtbCounter(counterType, counterAmount, placer);
+                        GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                        etbTable.put(placer, gameCard, counterType, counterAmount);
                     } else {
                         gameCard.addCounter(counterType, counterAmount, placer, table);
                     }
@@ -634,7 +638,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         int totalAdded = table.totalValues();
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(Integer.valueOf(totalAdded));
+            card.addRemembered(totalAdded);
         }
 
         if (sa.hasParam("RemovePhase")) {
@@ -686,7 +690,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     protected CounterType chooseTypeFromList(SpellAbility sa, String list, GameEntity obj, PlayerController pc) {
         List<CounterType> choices = Lists.newArrayList();
         for (String s : list.split(",")) {
-            if (!s.equals("") && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
+            if (!s.isEmpty() && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
                 CounterType type = CounterType.getType(s);
                 if (!choices.contains(type)) {
                     choices.add(type);

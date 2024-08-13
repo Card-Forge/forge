@@ -6,4 +6,4 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters
 SVar:TrigSeek:DB$ Seek | Type$ Card.cmcEQX | SubAbility$ DBRemoveCounter
 SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ OIL
 SVar:X:Count$CardCounters.OIL
-Oracle:Glistening Extractor enters the battlefield with four oil counters on it.\nAt the beginning of your upkeep, if there are one or more oil counters on Glistening Extractor, seek a card with mana value equal to the number of oil counters on Glistening Extractor, then remove an oil counter from Glistening Extractor.
+Oracle:Glistening Extractor enters with four oil counters on it.\nAt the beginning of your upkeep, if there are one or more oil counters on Glistening Extractor, seek a card with mana value equal to the number of oil counters on Glistening Extractor, then remove an oil counter from Glistening Extractor.

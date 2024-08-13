@@ -364,12 +364,7 @@ public class FButton extends FDisplayObject implements IButton {
     //use FEventHandler one except when references as IButton
     @Override
     public void setCommand(final UiCommand command0) {
-        setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                command0.run();
-            }
-        });
+        setCommand(e -> command0.run());
     }
 
     @Override

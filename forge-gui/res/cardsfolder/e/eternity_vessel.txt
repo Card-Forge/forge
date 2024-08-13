@@ -1,9 +1,9 @@
 Name:Eternity Vessel
 ManaCost:6
 Types:Artifact
-K:etbCounter:CHARGE:X:no Condition:CARDNAME enters the battlefield with X charge counters on it, where X is your life total.
+K:etbCounter:CHARGE:X:no Condition:CARDNAME enters with X charge counters on it, where X is your life total.
 SVar:X:Count$YourLifeTotal
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLife | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land you control enters, you may have your life total become the number of charge counters on CARDNAME.
 SVar:TrigLife:DB$ SetLife | Defined$ You | LifeAmount$ Y
 SVar:Y:Count$CardCounters.CHARGE
-Oracle:Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.\nLandfall — Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+Oracle:Eternity Vessel enters with X charge counters on it, where X is your life total.\nLandfall — Whenever a land you control enters, you may have your life total become the number of charge counters on Eternity Vessel.

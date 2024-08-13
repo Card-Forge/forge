@@ -4,4 +4,4 @@ Types:Creature Goblin Berserker
 PT:2/2
 K:Riot
 DeckHas:Ability$Counters
-Oracle:Riot (This creature enters the battlefield with your choice of a +1/+1 counter or haste.)
+Oracle:Riot (This creature enters with your choice of a +1/+1 counter or haste.)

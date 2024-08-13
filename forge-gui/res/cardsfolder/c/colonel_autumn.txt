@@ -9,4 +9,4 @@ T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Creature.YouCtrl | Trigge
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Sacrifice|LifeGain|Counters
 DeckHints:Type$Legendary
-Oracle:Lifelink\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nOther legendary creatures you control have exploit.\nWhenever a creature you control exploits a creature, put a +1/+1 counter on each creature you control.
+Oracle:Lifelink\nExploit (When this creature enters, you may sacrifice a creature.)\nOther legendary creatures you control have exploit.\nWhenever a creature you control exploits a creature, put a +1/+1 counter on each creature you control.

@@ -1,5 +1,6 @@
 Name:Idyllic Beachfront
 ManaCost:no cost
 Types:Land Plains Island
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {W} or {U}.)\nIdyllic Beachfront enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:({T}: Add {W} or {U}.)\nIdyllic Beachfront enters tapped.

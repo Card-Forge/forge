@@ -1,7 +1,7 @@
 Name:Confusion in the Ranks
 ManaCost:3 R R
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact,Creature,Enchantment | TriggerZones$ Battlefield | Execute$ TrigExchangeControl | TriggerDescription$ Whenever an artifact, creature, or enchantment enters the battlefield, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact,Creature,Enchantment | TriggerZones$ Battlefield | Execute$ TrigExchangeControl | TriggerDescription$ Whenever an artifact, creature, or enchantment enters, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.
 SVar:TrigExchangeControl:DB$ ExchangeControl | Defined$ TriggeredCard | TargetingPlayer$ TriggeredCardController | TargetsWithDefinedController$ NonTriggeredCardController | ValidTgts$ Permanent | TargetsWithSharedCardType$ TriggeredCard
 AI:RemoveDeck:Random
-Oracle:Whenever an artifact, creature, or enchantment enters the battlefield, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.
+Oracle:Whenever an artifact, creature, or enchantment enters, its controller chooses target permanent another player controls that shares a card type with it. Exchange control of those permanents.

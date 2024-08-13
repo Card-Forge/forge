@@ -2,7 +2,7 @@ Name:Quarry Hauler
 ManaCost:3 G
 Types:Creature Camel
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAddOrRemoveCounter | TriggerDescription$ When CARDNAME enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAddOrRemoveCounter | TriggerDescription$ When CARDNAME enters, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
 SVar:TrigAddOrRemoveCounter:DB$ AddOrRemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | EachExistingCounter$ True | CounterNum$ 1
 DeckHints:Ability$Counters
-Oracle:When Quarry Hauler enters the battlefield, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.
+Oracle:When Quarry Hauler enters, for each kind of counter on target permanent, put another counter of that kind on it or remove one from it.

@@ -1,8 +1,8 @@
 Name:Rosethorn Halberd
 ManaCost:G
 Types:Artifact Equipment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target non-Human creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target non-Human creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.nonHuman+YouCtrl | TgtPrompt$ Select target non-Human creature you control
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Equipped creature gets +2/+1.
 K:Equip:5
-Oracle:When Rosethorn Halberd enters the battlefield, attach it to target non-Human creature you control.\nEquipped creature gets +2/+1.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:When Rosethorn Halberd enters, attach it to target non-Human creature you control.\nEquipped creature gets +2/+1.\nEquip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)

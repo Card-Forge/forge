@@ -245,7 +245,7 @@ public final class NameGenerator {
         	Collections.addAll(all, fantasyMales);
         	Collections.addAll(all, genericFemales);
         	Collections.addAll(all, fantasyFemales);
-        	sourceList = all.toArray(new String[all.size()]);
+        	sourceList = all.toArray(new String[0]);
         	useMoniker = MyRandom.getRandom().nextFloat() <= 0.04f;
         	break;
         }
@@ -286,7 +286,7 @@ public final class NameGenerator {
 		return getRandomName(gender, type, exclude);
 	}
 
-	private final static String[] getCombinedLists(String[] listOne, String[] listTwo) {
+	private static String[] getCombinedLists(String[] listOne, String[] listTwo) {
 		String[] joined = ArrayUtils.addAll(listOne,listTwo);
 		return joined;
 	}

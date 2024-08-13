@@ -1,8 +1,9 @@
 Name:Jagged Barrens
 ManaCost:no cost
 Types:Land Desert
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to target opponent.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 1 damage to target opponent.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
-Oracle:Jagged Barrens enters the battlefield tapped.\nWhen Jagged Barrens enters the battlefield, it deals 1 damage to target opponent.\n{T}:Add {B} or {R}.
+Oracle:Jagged Barrens enters tapped.\nWhen Jagged Barrens enters, it deals 1 damage to target opponent.\n{T}:Add {B} or {R}.

@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.cost.Cost;
@@ -30,8 +31,10 @@ public class SacrificeAllAi extends SpellAbilityAi {
             if (ai.getCreaturesInPlay().size() < 5 || ai.getCreaturesInPlay().size() * 150 < ComputerUtilCard.evaluateCreatureList(ai.getCreaturesInPlay())) {
                 return false;
             }
+        } else if (logic.equals("MadSarkhanDragon")) {
+            return SpecialCardAi.SarkhanTheMad.considerMakeDragon(ai, sa);
         }
-        
+
         if (!DestroyAllAi.doMassRemovalLogic(ai, sa)) {
             return false;
         }

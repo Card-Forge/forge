@@ -17,25 +17,18 @@
  */
 package forge.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.Reader;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * <p>
@@ -117,8 +110,8 @@ public final class FileUtil {
         File source = new File(sourceFilename);
         if (!source.exists()) { return; } //if source doesn't exist, nothing to copy
 
-        try (InputStream is = new FileInputStream(source);
-             OutputStream os = new FileOutputStream(new File(destFilename))){
+        try (InputStream is = Files.newInputStream(source.toPath());
+             OutputStream os = Files.newOutputStream(new File(destFilename).toPath())){
             byte[] buffer = new byte[1024];
             int length;
             while ((length = is.read(buffer)) > 0) {
@@ -260,7 +253,7 @@ public final class FileUtil {
         final List<String> list = new ArrayList<>();
         try {
             final BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                    new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8));
             String line;
             while ((line = in.readLine()) != null) {
                 if (mayTrim) {
@@ -308,17 +301,14 @@ public final class FileUtil {
 
     public static List<String> readFile(final URL url) {
         final List<String> lines = new ArrayList<>();
-        ThreadUtil.executeWithTimeout(new Callable<Void>() {
-            @Override
-            public Void call() throws Exception {
-                try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
-                    String line;
-                    while ((line = in.readLine()) != null) {
-                        lines.add(line);
-                    }
+        ThreadUtil.executeWithTimeout((Callable<Void>) () -> {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()))) {
+                String line;
+                while ((line = in.readLine()) != null) {
+                    lines.add(line);
                 }
-                return null;
             }
+            return null;
         }, 5000); //abort reading file if it takes longer than 5 seconds
         return lines;
     }

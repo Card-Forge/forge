@@ -8,4 +8,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ SubCounter<1/Menace> | Execute$ TrigReveal | TriggerDescription$ When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.
 SVar:TrigReveal:DB$ RevealHand | Defined$ Spawner>TriggeredTarget | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Spawner>TriggeredTarget | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True
-Oracle:Ninjutsu {2}{B}\nBiting-Palm Ninja enters the battlefield with a menace counter on it.\nWhenever Biting-Palm Ninja deals combat damage to a player, you may remove a menace counter from it. When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.
+Oracle:Ninjutsu {2}{B}\nBiting-Palm Ninja enters with a menace counter on it.\nWhenever Biting-Palm Ninja deals combat damage to a player, you may remove a menace counter from it. When you do, that player reveals their hand and you choose a nonland card from it. Exile that card.

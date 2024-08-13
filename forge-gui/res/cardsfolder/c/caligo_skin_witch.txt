@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Creature Human Wizard
 PT:1/3
 K:Kicker:3 B
-T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, each opponent discards two cards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, if it was kicked, each opponent discards two cards.
 SVar:TrigDiscard:DB$ Discard | Defined$ Player.Opponent | NumCards$ 2 | Mode$ TgtChoose
 SVar:NeedsToPlayKickedVar:Z GE1
 SVar:Z:Count$ValidHand Card.OppOwn
-Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nWhen Caligo Skin-Witch enters the battlefield, if it was kicked, each opponent discards two cards.
+Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nWhen Caligo Skin-Witch enters, if it was kicked, each opponent discards two cards.

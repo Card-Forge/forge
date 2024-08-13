@@ -265,7 +265,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
 
         DeckGeneratorBase.MatchColorIdentity hasColor = new DeckGeneratorBase.MatchColorIdentity(colors);
         Iterable<PaperCard> colorList = Iterables.filter(deckCards,
-                Predicates.not(Predicates.compose(hasColor, PaperCard.FN_GET_RULES)));
+                Predicates.not(Predicates.compose(hasColor, PaperCard::getRules)));
 
         PaperCard exchangeCard = null;
 

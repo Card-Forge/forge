@@ -108,10 +108,7 @@ public class GuiDesktop implements IGuiBase {
             try {
                 SwingUtilities.invokeAndWait(proc);
             }
-            catch (final InterruptedException exn) {
-                throw new RuntimeException(exn);
-            }
-            catch (final InvocationTargetException exn) {
+            catch (final InterruptedException | InvocationTargetException exn) {
                 throw new RuntimeException(exn);
             }
         }

@@ -1,6 +1,6 @@
 Name:Uphill Battle
 ManaCost:2 R
 Types:Enchantment
-R:Event$ Moved | ValidCard$ Creature.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures played by your opponents enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Creature | ValidCause$ LandAbility.OppCtrl,Spell.wasCast+Permanent+CastSa Spell.OppCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures played by your opponents enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
-Oracle:Creatures played by your opponents enter the battlefield tapped.
+Oracle:Creatures played by your opponents enter tapped.

@@ -18,6 +18,7 @@ Urza's
 [CreatureTypes]
 Advisor:Advisors
 Aetherborn:Aetherborn
+Alien:Aliens
 Ally:Allies
 Angel:Angels
 Antelope:Antelopes
@@ -226,6 +227,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Raccoon:Raccoons
 Rabbit:Rabbits
 Ranger:Rangers
 Rat:Rats
@@ -262,6 +264,7 @@ Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
 Slug:Slugs
+Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris

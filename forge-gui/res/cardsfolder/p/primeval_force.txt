@@ -2,8 +2,8 @@ Name:Primeval Force
 ManaCost:2 G G G
 Types:Creature Elemental
 PT:8/8
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice three Forests.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters, sacrifice it unless you sacrifice three Forests.
 SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<3/Forest> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Forest.YouCtrl
-Oracle:When Primeval Force enters the battlefield, sacrifice it unless you sacrifice three Forests.
+Oracle:When Primeval Force enters, sacrifice it unless you sacrifice three Forests.

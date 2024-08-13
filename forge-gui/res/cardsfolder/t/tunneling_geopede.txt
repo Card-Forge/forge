@@ -2,6 +2,6 @@ Name:Tunneling Geopede
 ManaCost:2 R
 Types:Creature Insect
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME deals 1 damage to each opponent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
-Oracle:Landfall — Whenever a land enters the battlefield under your control, Tunneling Geopede deals 1 damage to each opponent.
+Oracle:Landfall — Whenever a land you control enters, Tunneling Geopede deals 1 damage to each opponent.

@@ -60,10 +60,8 @@ public class BalanceEffect extends SpellAbilityEffect {
             if (zone.equals(ZoneType.Hand)) {
                 discardedMap.put(p, p.getController().chooseCardsToDiscardFrom(p, sa, validCards.get(i), numToBalance, numToBalance));
             } else { // Battlefield
-                for (Card card : p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance, validCards.get(i), valid)) {
-                    if (null == card) continue;
-                    game.getAction().sacrifice(card, sa, true, params);
-                }
+                CardCollectionView list = p.getController().choosePermanentsToSacrifice(sa, numToBalance, numToBalance, validCards.get(i), valid);
+                game.getAction().sacrifice(list, sa, true, params);
             }
         }
 

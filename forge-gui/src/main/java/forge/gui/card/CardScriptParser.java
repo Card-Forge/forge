@@ -345,11 +345,8 @@ public final class CardScriptParser {
         }
     }
 
-    private static final Predicate<String> startsWith(final String s) {
-        return new Predicate<String>() {
-            @Override public boolean apply(final String input) {
-                return s.startsWith(input);
-            }};
+    private static Predicate<String> startsWith(final String s) {
+        return s::startsWith;
     }
 
     /**
@@ -489,13 +486,13 @@ public final class CardScriptParser {
             "blockedBySourceThisTurn", "isBlockedByRemembered", "blockedRemembered",
             "blockedByRemembered", "unblocked", "attackersBandedWith",
             "kicked", "kicked1", "kicked2", "evoked",
-            "HasDevoured", "HasNotDevoured", "IsMonstrous", "IsNotMonstrous",
+            "HasDevoured", "IsMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
             "hasActivatedAbility", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
-            "IsNotCommander","IsRenowned", "IsNotRenowned");
+            "IsNotCommander", "IsRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
@@ -507,7 +504,7 @@ public final class CardScriptParser {
                     "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
                     "greatestPowerControlledBy", "greatestCMCControlledBy",
                     "power", "toughness", "cmc", "totalPT", "counters", "non",
-                    "RememberMap", "wasCastFrom", "wasNotCastFrom", "set",
+                    "RememberMap", "wasCastFrom", "set",
                     "inZone", "HasSVar");
 
     private static boolean isValidExclusive(String valid) {

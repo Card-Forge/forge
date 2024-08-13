@@ -1,8 +1,9 @@
 Name:Racers' Ring
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 A:AB$ Draw | Cost$ 2 R G T Sac<1/CARDNAME> | SpellDescription$ Draw a card.
 DeckHas:Ability$Sacrifice
-Oracle:Racers' Ring enters the battlefield tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}, {T}, Sacrifice Racers' Ring: Draw a card.
+Oracle:Racers' Ring enters tapped.\n{T}: Add {R} or {G}.\n{2}{R}{G}, {T}, Sacrifice Racers' Ring: Draw a card.

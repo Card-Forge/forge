@@ -42,8 +42,8 @@ public class EffectEditor extends JComponent  {
         lifeModifier.addChangeListener(e -> EffectEditor.this.updateEffect());
         moveSpeed.addChangeListener(e -> EffectEditor.this.updateEffect());
         colorView.addChangeListener(e -> EffectEditor.this.updateEffect());
-        name.getDocument().addDocumentListener(new DocumentChangeListener(() -> EffectEditor.this.updateEffect()));
-        startBattleWithCard.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EffectEditor.this.updateEffect()));
+        name.getDocument().addDocumentListener(new DocumentChangeListener(EffectEditor.this::updateEffect));
+        startBattleWithCard.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(EffectEditor.this::updateEffect));
         if(opponent!=null)
 
             opponent.addChangeListener(e -> EffectEditor.this.updateEffect());
@@ -57,9 +57,9 @@ public class EffectEditor extends JComponent  {
  
 
         currentData.name=name.getText();
-        currentData.changeStartCards=((Integer)changeStartCards.getValue()).intValue();
-        currentData.lifeModifier= ((Integer)lifeModifier.getValue()).intValue();
-        currentData.moveSpeed= ((Float)moveSpeed.getValue()).floatValue();
+        currentData.changeStartCards = (Integer) changeStartCards.getValue();
+        currentData.lifeModifier = (Integer) lifeModifier.getValue();
+        currentData.moveSpeed = (Float) moveSpeed.getValue();
         currentData.startBattleWithCard = startBattleWithCard.getList();
         currentData.colorView = colorView.isSelected();
         currentData.opponent = opponent.currentData;

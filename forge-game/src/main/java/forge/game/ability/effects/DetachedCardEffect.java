@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.card.GamePieceType;
 import forge.game.card.Card;
 
 //Class for an effect that acts as its own card instead of being attached to a card
@@ -13,7 +14,7 @@ public class DetachedCardEffect extends Card {
 
         setName(name0);
         setOwner(card0.getOwner());
-        setImmutable(true);
+        setGamePieceType(GamePieceType.EFFECT);
 
         setEffectSource(card0);
     }

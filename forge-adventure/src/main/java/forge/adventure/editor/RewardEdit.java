@@ -58,18 +58,18 @@ public class RewardEdit extends FormPanel {
         probability.addChangeListener(e -> RewardEdit.this.updateReward());
         count.addChangeListener(e -> RewardEdit.this.updateReward());
         addMaxCount.addChangeListener(e -> RewardEdit.this.updateReward());
-        cardName.getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        itemName.getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        editions.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        colors.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        rarity.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        subTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        cardTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        superTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        manaCosts.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
-        keyWords.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
+        cardName.getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        itemName.getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        editions.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        colors.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        rarity.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        subTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        cardTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        superTypes.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        manaCosts.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
+        keyWords.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
         colorType.addActionListener((e -> RewardEdit.this.updateReward()));
-        cardText.getDocument().addDocumentListener(new DocumentChangeListener(() -> RewardEdit.this.updateReward()));
+        cardText.getDocument().addDocumentListener(new DocumentChangeListener(RewardEdit.this::updateReward));
 
     }
 
@@ -122,7 +122,7 @@ public class RewardEdit extends FormPanel {
         updating=true;
         typeField.setSelectedItem(currentData.type);
 
-        probability.setValue(new Double(currentData.probability));
+        probability.setValue((double) currentData.probability);
         count.setValue(currentData.count);
         addMaxCount.setValue(currentData.addMaxCount);
         cardName.setText(currentData.cardName);

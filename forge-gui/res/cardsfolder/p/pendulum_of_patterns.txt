@@ -1,7 +1,7 @@
 Name:Pendulum of Patterns
 ManaCost:2
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 A:AB$ Draw | Cost$ 5 T Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
-Oracle:When Pendulum of Patterns enters the battlefield, you gain 3 life.\n{5}, {T}, Sacrifice Pendulum of Patterns: Draw a card.
+Oracle:When Pendulum of Patterns enters, you gain 3 life.\n{5}, {T}, Sacrifice Pendulum of Patterns: Draw a card.

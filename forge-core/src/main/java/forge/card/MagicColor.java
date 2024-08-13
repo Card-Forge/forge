@@ -1,6 +1,5 @@
 package forge.card;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -181,10 +180,4 @@ public final class MagicColor {
         }
     }
 
-    public static final Function<Color, String> FN_GET_SYMBOL = new Function<Color, String>() {
-        @Override
-        public String apply(final Color color) {
-            return color.symbol;
-        }
-    };
 }

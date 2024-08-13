@@ -3,7 +3,7 @@ ManaCost:4 W U B
 Types:Creature Angel Rogue
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
 A:AB$ Effect | Cost$ 2 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | TgtPrompt$ Select target land | RememberObjects$ Targeted,Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {W}, {U}, or {B}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
 SVar:Land:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+IsNotImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {W}, {U}, or {B}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
@@ -12,4 +12,4 @@ SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ 
 SVar:Cast:Mode$ SpellCast | ValidCard$ Card.IsImprinted+IsRemembered+wasCastFromExile | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 DeckHas:Ability$LifeGain
-Oracle:Flying\nWhen Shattered Seraph enters the battlefield, you gain 3 life.\n{2}, Exile Shattered Seraph from your hand: Target land gains "{T}: Add {W}, {U}, or {B}" until Shattered Seraph is cast from exile. You may cast Shattered Seraph for as long as it remains exiled.
+Oracle:Flying\nWhen Shattered Seraph enters, you gain 3 life.\n{2}, Exile Shattered Seraph from your hand: Target land gains "{T}: Add {W}, {U}, or {B}" until Shattered Seraph is cast from exile. You may cast Shattered Seraph for as long as it remains exiled.

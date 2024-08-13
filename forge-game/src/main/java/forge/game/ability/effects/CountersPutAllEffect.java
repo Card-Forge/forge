@@ -84,7 +84,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
             }
             if (sa.hasParam("AmountByChosenMap")) {
                 final String[] parse = sa.getParam("AmountByChosenMap").split(" INDEX ");
-                final int index = parse.length > 1 ? Integer.valueOf(parse[1]) : 0;
+                final int index = parse.length > 1 ? Integer.parseInt(parse[1]) : 0;
                 if (index >= host.getChosenMap().get(placer).size()) continue;
                 final Card chosen = host.getChosenMap().get(placer).get(index);
                 counterAmount = AbilityUtils.xCount(chosen, parse[0], sa);

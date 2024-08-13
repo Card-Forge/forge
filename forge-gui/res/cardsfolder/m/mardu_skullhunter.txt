@@ -2,8 +2,9 @@ Name:Mardu Skullhunter
 ManaCost:1 B
 Types:Creature Human Warrior
 PT:2/1
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDiscard | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, target opponent discards a card.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigDiscard | TriggerDescription$ Raid — When CARDNAME enters, if you attacked this turn, target opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:RaidTest:Count$AttackersDeclared
-Oracle:Mardu Skullhunter enters the battlefield tapped.\nRaid — When Mardu Skullhunter enters the battlefield, if you attacked this turn, target opponent discards a card.
+Oracle:Mardu Skullhunter enters tapped.\nRaid — When Mardu Skullhunter enters, if you attacked this turn, target opponent discards a card.

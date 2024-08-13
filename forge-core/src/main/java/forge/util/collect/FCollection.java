@@ -525,7 +525,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
      * {@inheritDoc}
      */
     public void sort(final Comparator<? super T> comparator) {
-        Collections.sort(list, comparator);
+        list.sort(comparator);
     }
 
     /**

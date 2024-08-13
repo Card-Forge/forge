@@ -2,6 +2,6 @@ Name:Farsight Adept
 ManaCost:2 W
 Types:Creature Kor Wizard
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, you and target opponent each draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you and target opponent each draw a card.
 SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 1
-Oracle:When Farsight Adept enters the battlefield, you and target opponent each draw a card.
+Oracle:When Farsight Adept enters, you and target opponent each draw a card.

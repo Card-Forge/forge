@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -159,13 +158,7 @@ public class MillAi extends SpellAbilityAi {
             }
 
             // select Player which would cause the most damage
-            // JAVA 1.8 use Map.Entry.comparingByValue()
-            Map.Entry<Player, Integer> max = Collections.max(list.entrySet(), new Comparator<Map.Entry<Player,Integer>>(){
-                @Override
-                public int compare(Map.Entry<Player, Integer> o1, Map.Entry<Player, Integer> o2) {
-                    return o1.getValue() - o2.getValue();
-                }
-            });
+            Map.Entry<Player, Integer> max = Collections.max(list.entrySet(), Map.Entry.comparingByValue());
 
             sa.getTargets().add(max.getKey());
         }

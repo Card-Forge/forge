@@ -55,7 +55,6 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
         this.tally = tally0;
     }
 
-
     protected InputSelectManyBase(final PlayerControllerHuman controller, final int min, final int max, final CardView card0) {
     	this(controller,min,max);
     	this.sa = null;

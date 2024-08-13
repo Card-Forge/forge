@@ -207,7 +207,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         clearUndoStack(Lists.newArrayList(sa));
     }
-    private final void clearUndoStack(List<SpellAbility> sas) {
+    private void clearUndoStack(List<SpellAbility> sas) {
         for (SpellAbility sa : sas) {
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
@@ -353,6 +353,35 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(lki);
             sp.getActivatingPlayer().addSpellCastThisTurn();
+
+            // Add expend mana
+            Map<Player, Integer> expendPlayers = Maps.newHashMap();
+
+            for (Mana m : sp.getPayingMana()) {
+                // TODO this currently assumes that all mana came from your own pool
+                // but with Assist some might belong to another player instead
+                Player manaPayer = sp.getActivatingPlayer();
+
+                expendPlayers.put(manaPayer, expendPlayers.getOrDefault(manaPayer, 0) + 1);
+            }
+
+            for (Entry<Player, Integer> entry : expendPlayers.entrySet()) {
+                Player manaPayer = entry.getKey();
+                int startingMana =  manaPayer.getExpentThisTurn();
+                int totalMana = startingMana + entry.getValue();
+
+                if (totalMana == 0) {
+                    continue;
+                }
+
+                manaPayer.setExpentThisTurn(totalMana);
+                for(int i = startingMana + 1; i <= totalMana; i++) {
+                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(manaPayer);
+                    expendParams.put(AbilityKey.SpellAbility, sp);
+                    expendParams.put(AbilityKey.Amount, i);
+                    game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
+                }
+            }
         }
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
@@ -600,7 +629,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
+    private void finishResolving(final SpellAbility sa, final boolean fizzle) {
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
         final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
@@ -622,7 +651,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         curResolvingCard = null;
     }
 
-    private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
+    private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
         Card source = sa.getHostCard();
 
         // need to update active trigger
@@ -658,7 +687,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
+    private boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
         List<GameObject> toRemove = Lists.newArrayList();
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
             if (fizzle == null) {
@@ -813,7 +842,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return result;
     }
 
-    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
+    private boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
         if (simultaneousStackEntryList.isEmpty()) {
             return false;
         }

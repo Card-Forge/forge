@@ -2,8 +2,8 @@ Name:Outrage Shaman
 ManaCost:3 R R
 Types:Creature Goblin Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Chroma — When CARDNAME enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Chroma — When CARDNAME enters, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X
 SVar:X:Count$Chroma.Red
 SVar:PlayMain1:TRUE
-Oracle:Chroma — When Outrage Shaman enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
+Oracle:Chroma — When Outrage Shaman enters, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.

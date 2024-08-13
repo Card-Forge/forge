@@ -9,8 +9,6 @@ import java.util.Map.Entry;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import forge.itemmanager.filters.*;
 import forge.localinstance.properties.ForgePreferences;
@@ -71,20 +69,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         super(DeckProxy.class, cDetailPicture, true, false);
         this.gameType = gt;
 
-        this.addSelectionListener(new ListSelectionListener() {
-            @Override public void valueChanged(final ListSelectionEvent e) {
-                if (cmdSelect != null) {
-                    cmdSelect.run();
-                }
+        this.addSelectionListener(e -> {
+            if (cmdSelect != null) {
+                cmdSelect.run();
             }
         });
 
-        this.setItemActivateCommand(new UiCommand() {
-            @Override
-            public void run() {
-                editDeck(getSelectedItem());
-            }
-        });
+        this.setItemActivateCommand((UiCommand) () -> editDeck(getSelectedItem()));
     }
 
     @Override
@@ -180,12 +171,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                     fullPath = parentPath + key.toString();
                 }
                 final String finalFullPath = fullPath;
-                GuiUtils.addMenuItem(menu, key.toString(), null, new Runnable() {
-                    @Override
-                    public void run() {
-                        addFilter(new DeckFolderFilter(DeckManager.this, finalFullPath));
-                    }
-                }, true);
+                GuiUtils.addMenuItem(menu, key.toString(), null, () -> addFilter(new DeckFolderFilter(DeckManager.this, finalFullPath)), true);
                 Map value = (Map) tree.get(key);
                 if (value.size() > 0) {
                     final JMenu submenu = GuiUtils.createMenu(key.toString());
@@ -221,64 +207,51 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         final JMenu fmt = GuiUtils.createMenu(localizer.getMessage("lblFormat"));
 
         for (final GameFormat f : FModel.getFormats().getFilterList()) {
-            GuiUtils.addMenuItem(fmt, f.getName(), null, new Runnable() {
-                @Override
-                public void run() {
-                    addFilter(new DeckFormatFilter(DeckManager.this, f));
-                }
-            }, FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class)));
+            GuiUtils.addMenuItem(fmt, f.getName(), null, () -> addFilter(new DeckFormatFilter(DeckManager.this, f)),
+                    FormatFilter.canAddFormat(f, getFilter(DeckFormatFilter.class))
+            );
         }
         menu.add(fmt);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, new Runnable() {
-            @Override public void run() {
-                final DeckFormatFilter existingFilter = getFilter(DeckFormatFilter.class);
-                if (existingFilter != null) {
-                    existingFilter.edit();
-                } else {
-                    final DialogChooseFormats dialog = new DialogChooseFormats();
-                    dialog.setOkCallback(new Runnable() {
-                        @Override public void run() {
-                            final List<GameFormat> formats = dialog.getSelectedFormats();
-                            if (!formats.isEmpty()) {
-                                for(GameFormat format: formats) {
-                                    addFilter(new DeckFormatFilter(DeckManager.this, format));
-                                }
-                            }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblFormats") + "...", null, () -> {
+            final DeckFormatFilter existingFilter = getFilter(DeckFormatFilter.class);
+            if (existingFilter != null) {
+                existingFilter.edit();
+            } else {
+                final DialogChooseFormats dialog = new DialogChooseFormats();
+                dialog.setOkCallback(() -> {
+                    final List<GameFormat> formats = dialog.getSelectedFormats();
+                    if (!formats.isEmpty()) {
+                        for(GameFormat format: formats) {
+                            addFilter(new DeckFormatFilter(DeckManager.this, format));
                         }
-                    });
-                }
+                    }
+                });
             }
         });
 
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, new Runnable() {
-            @Override public void run() {
-                final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
-                if (existingFilter != null) {
-                    existingFilter.edit();
-                } else {
-                    List<String> limitedSets = getFilteredSetCodesInCatalog();
-                    final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
-                    dialog.setOkCallback(new Runnable() {
-                        @Override public void run() {
-                            final List<String> sets = dialog.getSelectedSets();
-                            if (!sets.isEmpty()) {
-                                addFilter(new DeckSetFilter(DeckManager.this, sets, limitedSets, dialog.getWantReprints()));
-                            }
-                        }
-                    });
-                }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblSets") + "...", null, () -> {
+            final DeckSetFilter existingFilter = getFilter(DeckSetFilter.class);
+            if (existingFilter != null) {
+                existingFilter.edit();
+            } else {
+                List<String> limitedSets = getFilteredSetCodesInCatalog();
+                final DialogChooseSets dialog = new DialogChooseSets(null, null, limitedSets, true);
+                dialog.setOkCallback(() -> {
+                    final List<String> sets = dialog.getSelectedSets();
+                    if (!sets.isEmpty()) {
+                        addFilter(new DeckSetFilter(DeckManager.this, sets, limitedSets, dialog.getWantReprints()));
+                    }
+                });
             }
         });
 
         final JMenu world = GuiUtils.createMenu(localizer.getMessage("lblQuestWorld"));
         for (final QuestWorld w : FModel.getWorlds()) {
-            GuiUtils.addMenuItem(world, w.getName(), null, new Runnable() {
-                @Override public void run() {
-                    addFilter(new DeckQuestWorldFilter(DeckManager.this, w));
-                }
-            }, DeckQuestWorldFilter.canAddQuestWorld(w, getFilter(DeckQuestWorldFilter.class)));
+            GuiUtils.addMenuItem(world, w.getName(), null, () -> addFilter(new DeckQuestWorldFilter(DeckManager.this, w)),
+                    DeckQuestWorldFilter.canAddQuestWorld(w, getFilter(DeckQuestWorldFilter.class))
+            );
         }
         menu.add(world);
 
@@ -286,43 +259,33 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
             final Iterable<GameFormat> blockFormats = FModel.getFormats().getBlockList();
             for (final GameFormat f : blockFormats) {
-                GuiUtils.addMenuItem(blocks, f.getName(), null, new Runnable() {
-                    @Override
-                    public void run() {
-                        addFilter(new DeckBlockFilter(DeckManager.this, f));
-                    }
-                }, DeckBlockFilter.canAddCardBlock(f, getFilter(DeckBlockFilter.class)));
+                GuiUtils.addMenuItem(blocks, f.getName(), null, () -> addFilter(new DeckBlockFilter(DeckManager.this, f)),
+                        DeckBlockFilter.canAddCardBlock(f, getFilter(DeckBlockFilter.class))
+                );
             }
             menu.add(blocks);
         }
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, new Runnable() {
-            @Override
-            public void run() {
-                addFilter(new DeckColorFilter(DeckManager.this));
-            }
-        }, getFilter(DeckColorFilter.class) == null);
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblColors"), null, () -> addFilter(new DeckColorFilter(DeckManager.this)),
+                getFilter(DeckColorFilter.class) == null
+        );
 
         GuiUtils.addSeparator(menu);
 
-        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced") + "...", null, new Runnable() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public void run() {
-                AdvancedSearchFilter<DeckProxy> filter = getFilter(AdvancedSearchFilter.class);
-                if (filter != null) {
-                    filter.edit();
-                }
-                else {
-                    filter = new AdvancedSearchFilter<>(DeckManager.this);
-                    lockFiltering = true; //ensure filter not applied until added
-                    boolean result = filter.edit();
-                    lockFiltering = false;
-                    if (result) {
-                        addFilter(filter);
-                    }
+        GuiUtils.addMenuItem(menu, localizer.getMessage("lblAdvanced") + "...", null, () -> {
+            AdvancedSearchFilter<DeckProxy> filter = getFilter(AdvancedSearchFilter.class);
+            if (filter != null) {
+                filter.edit();
+            }
+            else {
+                filter = new AdvancedSearchFilter<>(DeckManager.this);
+                lockFiltering = true; //ensure filter not applied until added
+                boolean result = filter.edit();
+                lockFiltering = false;
+                if (result) {
+                    addFilter(filter);
                 }
             }
         });

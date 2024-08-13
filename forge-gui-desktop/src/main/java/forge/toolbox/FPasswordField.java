@@ -51,12 +51,7 @@ public class FPasswordField extends SkinnedPasswordField implements ITextField {
                     }
                 }
                 else { //if not empty, select all text when focused
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            field.selectAll();
-                        }
-                    });
+                    SwingUtilities.invokeLater(field::selectAll);
                 }
             }
 

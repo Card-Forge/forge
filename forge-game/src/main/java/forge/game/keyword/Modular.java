@@ -15,7 +15,7 @@ public class Modular extends KeywordWithAmount {
     @Override
     protected String formatReminderText(String reminderText) {
         if (sunburst) {
-            return "This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.";
+            return "This enters with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.";
         } else {
             return super.formatReminderText(reminderText);
         }

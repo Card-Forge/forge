@@ -99,12 +99,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
                             int div = changingTgtSA.getTotalDividedValue();
                             List<GameEntity> candidates = changingTgtSA.getTargetRestrictions().getAllCandidates(changingTgtSA, true);
                             if (sa.hasParam("RandomTargetRestriction")) {
-                                candidates.removeIf(new java.util.function.Predicate<GameEntity>() {
-                                    @Override
-                                    public boolean test(GameEntity c) {
-                                        return !c.isValid(sa.getParam("RandomTargetRestriction").split(","), activator, sa.getHostCard(), sa);
-                                    }
-                                });
+                                candidates.removeIf(c -> !c.isValid(sa.getParam("RandomTargetRestriction").split(","), activator, sa.getHostCard(), sa));
                             }
                             // CR 115.7a If a target can't be changed to another legal target, the original target is unchanged
                             if (candidates.isEmpty()) {

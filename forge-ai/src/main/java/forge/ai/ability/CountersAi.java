@@ -19,7 +19,6 @@ package forge.ai.ability;
 
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtilCard;
@@ -109,12 +108,7 @@ public abstract class CountersAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
         } else if (type.equals("DIVINITY")) {
-            final CardCollection boon = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getCounters(CounterEnumType.DIVINITY) == 0;
-                }
-            });
+            final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.DIVINITY) == 0);
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
         } else if (CounterType.get(type).isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));

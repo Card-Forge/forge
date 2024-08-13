@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.StaticData;
@@ -423,13 +422,6 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
 
-    public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
-        @Override
-        public String apply(final CardEdition arg1) {
-            return arg1.getCode();
-        }
-    };
-
     @Override
     public int compareTo(final CardEdition o) {
         if (o == null) {
@@ -542,12 +534,12 @@ public final class CardEdition implements Comparable<CardEdition> {
         private final boolean isCustomEditions;
 
         public Reader(File path) {
-            super(path, CardEdition.FN_GET_CODE);
+            super(path, CardEdition::getCode);
             this.isCustomEditions = false;
         }
 
         public Reader(File path, boolean isCustomEditions) {
-            super(path, CardEdition.FN_GET_CODE);
+            super(path, CardEdition::getCode);
             this.isCustomEditions = isCustomEditions;
         }
 
@@ -737,12 +729,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return TXT_FILE_FILTER;
         }
 
-        public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".txt");
-            }
-        };
+        public static final FilenameFilter TXT_FILE_FILTER = (dir, name) -> name.endsWith(".txt");
     }
 
     public static class Collection extends StorageBase<CardEdition> {
@@ -798,12 +785,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         public Iterable<CardEdition> getPrereleaseEditions() {
             List<CardEdition> res = Lists.newArrayList(this);
-            return Iterables.filter(res, new Predicate<CardEdition>() {
-                @Override
-                public boolean apply(final CardEdition edition) {
-                    return edition.getPrerelease() != null;
-                }
-            });
+            return Iterables.filter(res, edition -> edition.getPrerelease() != null);
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {
@@ -822,19 +804,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return set == null ? "" : set.getCode2();
         }
 
-        public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {
-            @Override
-            public CardEdition apply(String code) {
-                return Collection.this.get(code);
-            }
-        };
-
-        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = new Comparator<PaperCard>() {
-            @Override
-            public int compare(PaperCard c1, PaperCard c2) {
-                return Collection.this.get(c1.getEdition()).compareTo(Collection.this.get(c2.getEdition()));
-            }
-        };
+        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = Comparator.comparing(c -> Collection.this.get(c.getEdition()));
 
         public IItemReader<SealedProduct.Template> getBoosterGenerator() {
             return new StorageReaderBase<SealedProduct.Template>(null) {
@@ -913,12 +883,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
             Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
-                    com.google.common.base.Predicates.and(hasBasicLands, new Predicate<CardEdition>() {
-                        @Override
-                        public boolean apply(CardEdition edition) {
-                            return artPreference.accept(edition);
-                        }
-                    }));
+                    com.google.common.base.Predicates.and(hasBasicLands, artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
             List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())
@@ -954,19 +919,16 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
         }
 
-        public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(CardEdition ed) {
-                if (ed == null) {
-                    // Happens for new sets with "???" code
-                    return false;
-                }
-                for(String landName : MagicColor.Constant.BASIC_LANDS) {
-                    if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
-                        return false;
-                }
-                return true;
+        public static final Predicate<CardEdition> hasBasicLands = ed -> {
+            if (ed == null) {
+                // Happens for new sets with "???" code
+                return false;
             }
+            for(String landName : MagicColor.Constant.BASIC_LANDS) {
+                if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
+                    return false;
+            }
+            return true;
         };
     }
 

@@ -20,19 +20,16 @@ public class CardRarityFilter extends ComboBoxFilter<PaperCard, CardRarity> {
 
     @Override
     protected String getDisplayText(CardRarity value) {
-        return CardRarity.FN_GET_LONG_NAME.apply(value);
+        return value.getLongName();
     }
 
     @Override
     protected Predicate<PaperCard> buildPredicate() {
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard input) {
-                if (filterValue == null) {
-                    return true;
-                }
-                return input.getRarity() == filterValue;
+        return input -> {
+            if (filterValue == null) {
+                return true;
             }
+            return input.getRarity() == filterValue;
         };
     }
 }

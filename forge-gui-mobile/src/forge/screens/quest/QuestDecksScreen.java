@@ -19,7 +19,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
@@ -38,18 +37,15 @@ public class QuestDecksScreen extends FScreen {
         .align(Align.center).font(FSkinFont.get(16))
         .text(Forge.getLocalizer().getMessage("lblBuildorselectadeck")).build());
 
-    private final FEventHandler onDeckSelectionChanged = new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            DeckProxy deck = lstDecks.getSelectedItem();
-            if (deck != null) {
-                FModel.getQuest().setCurrentDeck(deck.toString());
-            }
-            else {
-                FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
-            }
-            FModel.getQuest().save();
+    private final FEventHandler onDeckSelectionChanged = e -> {
+        DeckProxy deck = lstDecks.getSelectedItem();
+        if (deck != null) {
+            FModel.getQuest().setCurrentDeck(deck.toString());
         }
+        else {
+            FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
+        }
+        FModel.getQuest().save();
     };
 
     private boolean needRefreshOnActivate = true;
@@ -59,61 +55,30 @@ public class QuestDecksScreen extends FScreen {
         super("", QuestMenu.getMenu());
 
         lstDecks.setup(ItemManagerConfig.QUEST_DECKS);
-        lstDecks.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                Forge.back();
-            }
-        });
+        lstDecks.setItemActivateHandler(e -> Forge.back());
 
-        btnNewDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
-                    @Override
-                    public void run() {
-                        if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblCreateaDeck"))) {
-                            return;
-                        }
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                QuestDeckEditor editor = new QuestDeckEditor(commanderMode);
-                                editor.setSaveHandler(new FEventHandler() {
-                                    @Override
-                                    public void handleEvent(FEvent e) {
-                                        //ensure list is refreshed if new deck is saved
-                                        needRefreshOnActivate = true;
-                                    }
-                                });
-                                Forge.openScreen(editor);
-                            }
-                        });
-                    }
+        //must run in game thread to prevent blocking UI thread
+        btnNewDeck.setCommand(e -> ThreadUtil.invokeInGameThread(() -> {
+            if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblCreateaDeck"))) {
+                return;
+            }
+            FThreads.invokeInEdtLater(() -> {
+                QuestDeckEditor editor = new QuestDeckEditor(commanderMode);
+                editor.setSaveHandler(e1 -> {
+                    //ensure list is refreshed if new deck is saved
+                    needRefreshOnActivate = true;
                 });
+                Forge.openScreen(editor);
+            });
+        }));
+        btnEditDeck.setCommand(e -> editSelectedDeck());
+        btnViewDeck.setCommand(e -> {
+            final DeckProxy deck = lstDecks.getSelectedItem();
+            if (deck != null) {
+                FDeckViewer.show(deck.getDeck());
             }
         });
-        btnEditDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editSelectedDeck();
-            }
-        });
-        btnViewDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final DeckProxy deck = lstDecks.getSelectedItem();
-                if (deck != null) {
-                    FDeckViewer.show(deck.getDeck());
-                }
-            }
-        });
-        btnRandom.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                DeckgenUtil.randomSelect(lstDecks);
-            }
-        });
+        btnRandom.setCommand(e -> DeckgenUtil.randomSelect(lstDecks));
     }
 
     @Override

@@ -497,18 +497,25 @@ public class CardRenderer {
         //render card name and mana cost on first line
         float manaCostWidth = 0;
         ManaCost mainManaCost = cardCurrentState.getManaCost();
-        if (card.isSplitCard()) {
-            //handle rendering both parts of split card
-            mainManaCost = card.getLeftSplitState().getManaCost();
-            ManaCost otherManaCost = card.getAlternateState().getManaCost();
-            manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-            CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
-            //draw "//" between two parts of mana cost
-            manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
-            g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, Align.left, true);
+        if (!mainManaCost.isNoCost() || (card.isSplitCard() && !card.getLeftSplitState().getManaCost().isNoCost())) {
+            if (card.isSplitCard()) {
+                //handle rendering both parts of split card
+                mainManaCost = card.getLeftSplitState().getManaCost();
+                ManaCost otherManaCost = card.getAlternateState().getManaCost();
+                manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+                CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
+                //draw "//" between two parts of mana cost
+                manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
+                g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, Align.left, true);
+            }
+            manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
+            CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
         }
-        manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
-        CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
+        else if(cardCurrentState.isAttraction()) {
+            //For attractions, draw their lights instead of a mana cost.
+            float lightWidth = (6 * MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+            CardFaceSymbols.drawAttractionLights(g, cardCurrentState.getAttractionLights(), x + w - lightWidth, y, MANA_SYMBOL_SIZE, false);
+        }
 
         x += cardArtWidth;
         String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
@@ -544,9 +551,6 @@ public class CardRenderer {
             type += String.format(" [%s / %s]", power, toughness);
         } else if (cardCurrentState.isBattle()) {
             type += " (" + cardCurrentState.getDefense() + ")";
-        } else if (cardCurrentState.isAttraction()) {
-            //TODO: Probably shouldn't be non-localized text here? Not sure what to do if someone makes an attraction with no lights...
-            type += " (" + (cardCurrentState.getAttractionLights().isEmpty() ? "No Lights" : StringUtils.join(cardCurrentState.getAttractionLights(), ", ")) + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
@@ -809,10 +813,10 @@ public class CardRenderer {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
-            if ((keywordKey.indexOf("Flash") != -1)
-                    || ((abilityText.indexOf("May be played by") != -1)
-                    && (abilityText.indexOf("and as though it has flash") != -1))) {
-                if (keywordKey.indexOf("Flashback") == -1)
+            if ((keywordKey.contains("Flash"))
+                    || ((abilityText.contains("May be played by"))
+                    && (abilityText.contains("and as though it has flash")))) {
+                if (!keywordKey.contains("Flashback"))
                     CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }

@@ -3,7 +3,7 @@ ManaCost:4 U U
 Types:Creature Sphinx
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, target opponent draws a card and you draw three cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, target opponent draws a card and you draw three cards.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDraw | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 SVar:DBDraw:DB$ Draw | NumCards$ 3 | Defined$ You | StackDescription$ None
-Oracle:Flying\nWhen Sphinx of Enlightenment enters the battlefield, target opponent draws a card and you draw three cards.
+Oracle:Flying\nWhen Sphinx of Enlightenment enters, target opponent draws a card and you draw three cards.

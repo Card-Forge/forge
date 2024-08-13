@@ -5,7 +5,7 @@ PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 AI:RemoveDeck:All
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 S:Mode$ RaiseCost | ValidTarget$ Card.Self | Activator$ Player.Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target NICKNAME cost {2} more to cast.
-Oracle:Syr Elenora, the Discerning's power is equal to the number of cards in your hand.\nWhen Syr Elenora enters the battlefield, draw a card.\nSpells your opponents cast that target Syr Elenora cost {2} more to cast.
+Oracle:Syr Elenora, the Discerning's power is equal to the number of cards in your hand.\nWhen Syr Elenora enters, draw a card.\nSpells your opponents cast that target Syr Elenora cost {2} more to cast.

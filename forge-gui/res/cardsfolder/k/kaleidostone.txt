@@ -1,8 +1,8 @@
 Name:Kaleidostone
 ManaCost:2
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 A:AB$ Mana | Cost$ 5 T Sac<1/CARDNAME> | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
 AI:RemoveDeck:All
-Oracle:When Kaleidostone enters the battlefield, draw a card.\n{5}, {T}, Sacrifice Kaleidostone: Add {W}{U}{B}{R}{G}.
+Oracle:When Kaleidostone enters, draw a card.\n{5}, {T}, Sacrifice Kaleidostone: Add {W}{U}{B}{R}{G}.

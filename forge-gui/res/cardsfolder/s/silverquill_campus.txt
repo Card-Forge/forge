@@ -1,7 +1,8 @@
 Name:Silverquill Campus
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
 A:AB$ Scry | Cost$ 4 T | ScryNum$ 1 | SpellDescription$ Scry 1.
-Oracle:Silverquill Campus enters the battlefield tapped.\n{T}: Add {W} or {B}.\n{4}, {T}: Scry 1.
+Oracle:Silverquill Campus enters tapped.\n{T}: Add {W} or {B}.\n{4}, {T}: Scry 1.

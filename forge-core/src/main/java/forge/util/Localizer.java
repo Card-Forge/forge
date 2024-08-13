@@ -8,11 +8,7 @@ import java.net.URLClassLoader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Localizer {
 
@@ -83,7 +79,7 @@ public class Localizer {
     public String getMessage(final String key, final Object... messageArguments) {
         return getMessage(false, key, messageArguments);
     }
-    public String getMessage(final boolean forcedEnglish, final String key, final Object... messageArguments) {
+    public String getMessage(boolean forcedEnglish, final String key, final Object... messageArguments) {
         MessageFormat formatter = null;
 
         try {
@@ -94,9 +90,23 @@ public class Localizer {
                 e.printStackTrace();
         }
 
-        if (formatter == null && !silent) {
-            System.err.println("INVALID PROPERTY: '" + key + "' -- Translation Needed?");
-            return "INVALID PROPERTY: '" + key + "' -- Translation Needed?";
+        if (formatter == null) {
+            if (!silent) {
+                System.err.println("INVALID PROPERTY: '" + key + "' -- Translation missing from " + locale);
+            }
+
+            if (english || forcedEnglish) {
+                return "INVALID PROPERTY: '" + key + "' -- Translation missing from English?";
+            }
+            try {
+                formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
+                forcedEnglish = true;
+            } catch (final IllegalArgumentException | MissingResourceException e) {
+                if (!silent) {
+                    e.printStackTrace();
+                }
+                return "INVALID PROPERTY: '" + key + "' -- Translation missing from English locale?";
+            }
         }
 
         silent = false;

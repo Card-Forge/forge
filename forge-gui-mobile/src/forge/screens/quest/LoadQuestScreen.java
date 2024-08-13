@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -35,8 +34,6 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.util.ThreadUtil;
@@ -61,26 +58,11 @@ public class LoadQuestScreen extends LaunchScreen {
         lblOldQuests.setAlignment(Align.center);
 
         btnNewQuest.setFont(FSkinFont.get(16));
-        btnNewQuest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                NewGameScreen.QuestMode.open();
-            }
-        });
+        btnNewQuest.setCommand(e -> NewGameScreen.QuestMode.open());
         btnRenameQuest.setFont(btnNewQuest.getFont());
-        btnRenameQuest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                renameQuest(lstQuests.getSelectedQuest());
-            }
-        });
+        btnRenameQuest.setCommand(e -> renameQuest(lstQuests.getSelectedQuest()));
         btnDeleteQuest.setFont(btnNewQuest.getFont());
-        btnDeleteQuest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                deleteQuest(lstQuests.getSelectedQuest());
-            }
-        });
+        btnDeleteQuest.setCommand(e -> deleteQuest(lstQuests.getSelectedQuest()));
     }
 
     @Override
@@ -90,63 +72,52 @@ public class LoadQuestScreen extends LaunchScreen {
         updateEnabledButtons();
         revalidate();
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
-                final QuestController qc = FModel.getQuest();
+        FThreads.invokeInBackgroundThread(() -> {
+            final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
+            final QuestController qc = FModel.getQuest();
 
-                // Iterate over files and load quest data for each.
-                FilenameFilter takeDatFiles = new FilenameFilter() {
-                    @Override
-                    public boolean accept(final File dir, final String name) {
-                        return name.endsWith(".dat");
-                    }
-                };
-                File[] arrFiles = dirQuests.listFiles(takeDatFiles);
-                Map<String, QuestData> arrQuests = new HashMap<>();
-                for (File f : arrFiles) {
-                    try {
-                        arrQuests.put(f.getName(), QuestDataIO.loadData(f));
-                    } catch (IOException e) {
-                        System.err.println(String.format("Failed to load quest '%s'", f.getName()));
-                        // Failed to load last quest, don't continue with quest loading stuff
-                        return;
-                    }
+            // Iterate over files and load quest data for each.
+            FilenameFilter takeDatFiles = (dir, name) -> name.endsWith(".dat");
+            File[] arrFiles = dirQuests.listFiles(takeDatFiles);
+            Map<String, QuestData> arrQuests = new HashMap<>();
+            for (File f : arrFiles) {
+                try {
+                    arrQuests.put(f.getName(), QuestDataIO.loadData(f));
+                } catch (IOException e) {
+                    System.err.printf("Failed to load quest '%s'%n", f.getName());
+                    // Failed to load last quest, don't continue with quest loading stuff
+                    return;
                 }
+            }
 
-                // Populate list with available quest data.
-                lstQuests.setQuests(new ArrayList<>(arrQuests.values()));
+            // Populate list with available quest data.
+            lstQuests.setQuests(new ArrayList<>(arrQuests.values()));
 
-                // If there are quests available, force select.
-                if (arrQuests.size() > 0) {
-                    final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
+            // If there are quests available, force select.
+            if (arrQuests.size() > 0) {
+                final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
 
-                    // Attempt to select previous quest.
-                    if (arrQuests.get(questname) != null) {
-                        lstQuests.setSelectedQuest(arrQuests.get(questname));
-                    }
-                    else {
-                        lstQuests.setSelectedIndex(0);
-                    }
-
-                    // Drop into AllZone.
-                    qc.load(lstQuests.getSelectedQuest());
+                // Attempt to select previous quest.
+                if (arrQuests.get(questname) != null) {
+                    lstQuests.setSelectedQuest(arrQuests.get(questname));
                 }
                 else {
-                    qc.load(null);
+                    lstQuests.setSelectedIndex(0);
                 }
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        final String str= ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/');
-                        lblOldQuests.setText(Forge.getLocalizer().getMessage("lblOldQuestData").replace("%s",str));
-                        updateEnabledButtons();
-                        revalidate();
-                        lstQuests.scrollIntoView(lstQuests.selectedIndex);
-                    }
-                });
+
+                // Drop into AllZone.
+                qc.load(lstQuests.getSelectedQuest());
             }
+            else {
+                qc.load(null);
+            }
+            Gdx.app.postRunnable(() -> {
+                final String str= ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/');
+                lblOldQuests.setText(Forge.getLocalizer().getMessage("lblOldQuestData").replace("%s",str));
+                updateEnabledButtons();
+                revalidate();
+                lstQuests.scrollIntoView(lstQuests.selectedIndex);
+            });
         });
     }
 
@@ -202,65 +173,56 @@ public class LoadQuestScreen extends LaunchScreen {
     private void renameQuest(final QuestData quest) {
         if (quest == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                String questName;
-                String oldQuestName = quest.getName();
-                while (true) {
-                    questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewQuestName"), Forge.getLocalizer().getMessage("lblRenameQuest"), null, oldQuestName);
-                    if (questName == null) { return; }
+        ThreadUtil.invokeInGameThread(() -> {
+            String questName;
+            String oldQuestName = quest.getName();
+            while (true) {
+                questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewQuestName"), Forge.getLocalizer().getMessage("lblRenameQuest"), null, oldQuestName);
+                if (questName == null) { return; }
 
-                    questName = QuestUtil.cleanString(questName);
-                    if (questName.equals(oldQuestName)) { return; } //quit if chose same name
+                questName = QuestUtil.cleanString(questName);
+                if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
-                    if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestNameEmpty"));
-                        continue;
-                    }
-
-                    boolean exists = false;
-                    for (QuestData questData : lstQuests) {
-                        if (questData.getName().equalsIgnoreCase(questName)) {
-                            exists = true;
-                            break;
-                        }
-                    }
-                    if (exists) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestExists"));
-                        continue;
-                    }
-                    break;
+                if (questName.isEmpty()) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestNameEmpty"));
+                    continue;
                 }
 
-                quest.rename(questName);
+                boolean exists = false;
+                for (QuestData questData : lstQuests) {
+                    if (questData.getName().equalsIgnoreCase(questName)) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (exists) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestExists"));
+                    continue;
+                }
+                break;
             }
+
+            quest.rename(questName);
         });
     }
 
     private void deleteQuest(final QuestData quest) {
         if (quest == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!SOptionPane.showConfirmDialog(
-                        Forge.getLocalizer().getMessage("lblConfirmDelete") + " '" + quest.getName() + "'?",
-                        Forge.getLocalizer().getMessage("lblDeleteQuest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
-                    return;
-                }
-
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
-                        new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
-        
-                        lstQuests.removeQuest(quest);
-                        updateEnabledButtons();
-                    }
-                });
+        ThreadUtil.invokeInGameThread(() -> {
+            if (!SOptionPane.showConfirmDialog(
+                    Forge.getLocalizer().getMessage("lblConfirmDelete") + " '" + quest.getName() + "'?",
+                    Forge.getLocalizer().getMessage("lblDeleteQuest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
+                return;
             }
+
+            FThreads.invokeInEdtLater(() -> {
+                new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat").delete();
+                new File(ForgeConstants.QUEST_SAVE_DIR, quest.getName() + ".dat.bak").delete();
+
+                lstQuests.removeQuest(quest);
+                updateEnabledButtons();
+            });
         });
     }
 
@@ -337,14 +299,8 @@ public class LoadQuestScreen extends LaunchScreen {
         }
 
         public void setQuests(List<QuestData> qd0) {
-            List<QuestData> sorted = new ArrayList<>();
-            sorted.addAll(qd0);
-            Collections.sort(sorted, new Comparator<QuestData>() {
-                @Override
-                public int compare(final QuestData x, final QuestData y) {
-                    return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
-                }
-            });
+            List<QuestData> sorted = new ArrayList<>(qd0);
+            sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

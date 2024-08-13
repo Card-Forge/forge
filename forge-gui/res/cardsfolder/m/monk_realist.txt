@@ -2,6 +2,6 @@ Name:Monk Realist
 ManaCost:1 W
 Types:Creature Human Monk Cleric
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target enchantment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment.
-Oracle:When Monk Realist enters the battlefield, destroy target enchantment.
+Oracle:When Monk Realist enters, destroy target enchantment.

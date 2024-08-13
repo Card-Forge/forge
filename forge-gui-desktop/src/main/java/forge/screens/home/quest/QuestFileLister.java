@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -76,14 +75,8 @@ public class QuestFileLister extends JPanel {
     public void setQuests(List<QuestData> qd0) {
         this.removeAll();
         List<RowPanel> tempRows = new ArrayList<>();
-        List<QuestData> sorted = new ArrayList<>();
-        sorted.addAll(qd0);
-        Collections.sort(sorted, new Comparator<QuestData>() {
-            @Override
-            public int compare(final QuestData x, final QuestData y) {
-                return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
-            }
-        });
+        List<QuestData> sorted = new ArrayList<>(qd0);
+        sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
 
         // Title row
         // Note: careful with the widths of the rows here;

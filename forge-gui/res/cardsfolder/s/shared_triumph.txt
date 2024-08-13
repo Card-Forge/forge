@@ -2,8 +2,8 @@ Name:Shared Triumph
 ManaCost:1 W
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type. | AILogic$ MostProminentInComputerDeck
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures of the chosen type get +1/+1.
 AI:RemoveDeck:Random
 SVar:PlayMain1:TRUE
-Oracle:As Shared Triumph enters the battlefield, choose a creature type.\nCreatures of the chosen type get +1/+1.
+Oracle:As Shared Triumph enters, choose a creature type.\nCreatures of the chosen type get +1/+1.

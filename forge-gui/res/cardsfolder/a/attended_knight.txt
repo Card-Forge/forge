@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Knight
 PT:2/2
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Soldier creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 white Soldier creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
-Oracle:First strike\nWhen Attended Knight enters the battlefield, create a 1/1 white Soldier creature token.
+Oracle:First strike\nWhen Attended Knight enters, create a 1/1 white Soldier creature token.

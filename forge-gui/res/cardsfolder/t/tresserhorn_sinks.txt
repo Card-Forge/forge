@@ -1,6 +1,7 @@
 Name:Tresserhorn Sinks
 ManaCost:no cost
 Types:Snow Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
-Oracle:Tresserhorn Sinks enters the battlefield tapped.\n{T}: Add {B} or {R}.
+Oracle:Tresserhorn Sinks enters tapped.\n{T}: Add {B} or {R}.

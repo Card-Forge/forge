@@ -26,7 +26,6 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -35,7 +34,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -52,9 +50,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
@@ -164,11 +159,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 columns.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(columns, new Comparator<ItemTableColumn>() {
-            @Override public int compare(final ItemTableColumn arg0, final ItemTableColumn arg1) {
-                return Integer.compare(arg0.getIndex(), arg1.getIndex());
-            }
-        });
+        columns.sort(Comparator.comparingInt(ItemTableColumn::getIndex));
 
         //hide table header if only showing single string column
         final boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));
@@ -189,32 +180,30 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                         col.getLongName() : col.getShortName(), col.isVisible());
                 chkBox.setFont(ItemView.ROW_FONT);
                 chkBox.setToolTipText(col.getLongName());
-                chkBox.addChangeListener(new ChangeListener() {
-                    @Override public void stateChanged(final ChangeEvent arg0) {
-                        final boolean visible = chkBox.isSelected();
-                        if (col.isVisible() == visible) { return; }
-                        col.setVisible(visible);
+                chkBox.addChangeListener(arg0 -> {
+                    final boolean visible = chkBox.isSelected();
+                    if (col.isVisible() == visible) { return; }
+                    col.setVisible(visible);
 
-                        if (col.isVisible()) {
-                            colmodel.addColumn(col);
+                    if (col.isVisible()) {
+                        colmodel.addColumn(col);
 
-                            //move column into proper position
-                            final int oldIndex = colmodel.getColumnCount() - 1;
-                            int newIndex = col.getIndex();
-                            for (int i = 0; i < col.getIndex(); i++) {
-                                if (!columns.get(i).isVisible()) {
-                                    newIndex--;
-                                }
-                            }
-                            if (newIndex < oldIndex) {
-                                colmodel.moveColumn(oldIndex, newIndex);
+                        //move column into proper position
+                        final int oldIndex = colmodel.getColumnCount() - 1;
+                        int newIndex = col.getIndex();
+                        for (int i = 0; i < col.getIndex(); i++) {
+                            if (!columns.get(i).isVisible()) {
+                                newIndex--;
                             }
                         }
-                        else {
-                            colmodel.removeColumn(col);
+                        if (newIndex < oldIndex) {
+                            colmodel.moveColumn(oldIndex, newIndex);
                         }
-                        ItemManagerConfig.save();
                     }
+                    else {
+                        colmodel.removeColumn(col);
+                    }
+                    ItemManagerConfig.save();
                 });
                 getPnlOptions().add(chkBox);
             }
@@ -273,8 +262,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     public Iterable<Integer> getSelectedIndices() {
         final List<Integer> indices = new ArrayList<>();
         final int[] selectedRows = this.table.getSelectedRows();
-        for (int i = 0; i < selectedRows.length; i++) {
-            indices.add(selectedRows[i]);
+        for (int selectedRow : selectedRows) {
+            indices.add(selectedRow);
         }
         return indices;
     }
@@ -385,21 +374,18 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             this.setShowHorizontalLines(false);
             this.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
-            final ActionListener listener = new ActionListener() {
-                @Override
-                public void actionPerformed(final ActionEvent e) {
-                    final StringBuilder sb = new StringBuilder();
-                    for (final int row : getSelectedRows()) {
-                        final Entry<T, Integer> item = tableModel.rowToItem(row);
-                        sb.append(item.getValue().toString());
-                        sb.append(' ');
-                        sb.append(item.getKey().toString());
-                        sb.append('\n');
-                    }
-                    final StringSelection selection = new StringSelection(sb.toString());
-                    final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                    clipboard.setContents(selection, selection);
+            final ActionListener listener = e -> {
+                final StringBuilder sb = new StringBuilder();
+                for (final int row : getSelectedRows()) {
+                    final Entry<T, Integer> item = tableModel.rowToItem(row);
+                    sb.append(item.getValue().toString());
+                    sb.append(' ');
+                    sb.append(item.getKey().toString());
+                    sb.append('\n');
                 }
+                final StringSelection selection = new StringSelection(sb.toString());
+                final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(selection, selection);
             };
 
             final KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(), false);
@@ -598,12 +584,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             return -1;
         }
 
-        private final ListSelectionListener listSelectionListener = new ListSelectionListener() {
-            @Override
-            public void valueChanged(final ListSelectionEvent arg0) {
-                ItemListView.this.onSelectionChange();
-            }
-        };
+        private final ListSelectionListener listSelectionListener = arg0 -> ItemListView.this.onSelectionChange();
 
         private final FocusAdapter focusAdapter = new FocusAdapter() {
             @Override

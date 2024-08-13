@@ -1,6 +1,5 @@
 package forge.menus;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -134,12 +133,7 @@ public final class ForgeMenu {
     }
 
     private static ActionListener getRestartAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Singletons.getControl().restartForge();
-            }
-        };
+        return e -> Singletons.getControl().restartForge();
     }
 
     private static JMenuItem getMenuItem_Exit() {
@@ -151,11 +145,6 @@ public final class ForgeMenu {
     }
 
     private static ActionListener getExitAction() {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Singletons.getControl().exitForge();
-            }
-        };
+        return e -> Singletons.getControl().exitForge();
     }
 }

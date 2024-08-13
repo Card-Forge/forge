@@ -2,7 +2,7 @@ Name:Blister Beetle
 ManaCost:1 B
 Types:Creature Insect
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets -1/-1 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets -1/-1 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:PlayMain1:TRUE
-Oracle:When Blister Beetle enters the battlefield, target creature gets -1/-1 until end of turn.
+Oracle:When Blister Beetle enters, target creature gets -1/-1 until end of turn.

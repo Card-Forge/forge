@@ -18,11 +18,11 @@ ALTERNATE
 Name:Dinosaur Headdress
 ManaCost:no cost
 Types:Artifact Equipment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 R:Event$ Attached | ValidCard$ Card.Self | ValidTarget$ Creature | ReplaceWith$ ChooseCard | ActiveZones$ Battlefield | Description$ As CARDNAME becomes attached to a creature, choose an exiled creature card used to craft CARDNAME.
 SVar:ChooseCard:DB$ ChooseCard | Mandatory$ True | DefinedCards$ ExiledWith | ChoiceZone$ Exile
 T:Mode$ Attached | ValidSource$ Card.Self | Static$ True | Execute$ DBClone | TriggerDescription$ Equipped creature is a copy of the last chosen card.
 SVar:DBClone:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Equipped | Duration$ UntilUnattached
 K:Equip:2
-Oracle:When Dinosaur Headdress enters the battlefield, attach it to target creature you control.\nAs Dinosaur Headdress becomes attached to a creature, choose an exiled creature card used to craft Dinosaur Headdress.\nEquipped creature is a copy of the last chosen card.\nEquip {2}
+Oracle:When Dinosaur Headdress enters, attach it to target creature you control.\nAs Dinosaur Headdress becomes attached to a creature, choose an exiled creature card used to craft Dinosaur Headdress.\nEquipped creature is a copy of the last chosen card.\nEquip {2}

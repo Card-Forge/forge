@@ -42,7 +42,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
 
         final CounterType counterType = getCounterType(sa);
-        final int n = Integer.valueOf(sa.getParamOrDefault("Multiplier", "2")) - 1;
+        final int n = Integer.parseInt(sa.getParamOrDefault("Multiplier", "2")) - 1;
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : getTargetCards(sa)) {

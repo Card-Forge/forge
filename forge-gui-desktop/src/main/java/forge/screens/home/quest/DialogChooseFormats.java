@@ -1,7 +1,5 @@
 package forge.screens.home.quest;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -79,29 +77,16 @@ public class DialogChooseFormats {
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-		final Runnable cleanup = new Runnable() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		};
+		final Runnable cleanup = SOverlayUtils::hideOverlay;
 
 		FButton btnOk = new FButton(localizer.getMessage("lblOK"));
-		btnOk.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				cleanup.run();
-				handleOk();
-			}
-		});
+		btnOk.addActionListener(arg0 -> {
+            cleanup.run();
+            handleOk();
+        });
 
 		FButton btnCancel = new FButton(localizer.getMessage("lblCancel"));
-		btnCancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cleanup.run();
-			}
-		});
+		btnCancel.addActionListener(e -> cleanup.run());
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 20, ax center"));
 		southPanel.setOpaque(false);
@@ -137,16 +122,11 @@ public class DialogChooseFormats {
 
 		choices.addAll(formats);
 		final FCheckBoxList<FCheckBox> cbl = new FCheckBoxList<>(false);
-		cbl.setListData(formats.toArray(new FCheckBox[formats.size()]));
+		cbl.setListData(formats.toArray(new FCheckBox[0]));
 		cbl.setVisibleRowCount(Math.min(20, formats.size()));
 
 		if (focused) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					cbl.requestFocusInWindow();
-				}
-			});
+			SwingUtilities.invokeLater(cbl::requestFocusInWindow);
 		}
 
 		JPanel pnl = new JPanel(new MigLayout("center, wrap"));

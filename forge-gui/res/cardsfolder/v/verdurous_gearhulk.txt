@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Artifact Creature Construct
 PT:4/4
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, distribute four +1/+1 counters among any number of target creatures you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creatures you control to distribute counters to | CounterType$ P1P1 | CounterNum$ 4 | TargetMin$ 0 | TargetMax$ 4 | DividedAsYouChoose$ 4
 SVar:PlayMain1:TRUE
-Oracle:Trample\nWhen Verdurous Gearhulk enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.
+Oracle:Trample\nWhen Verdurous Gearhulk enters, distribute four +1/+1 counters among any number of target creatures you control.

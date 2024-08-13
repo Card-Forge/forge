@@ -2,7 +2,7 @@ Name:Strata Scythe
 ManaCost:3
 Types:Artifact Equipment
 K:Equip:3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, search your library for a land card, exile it, then shuffle.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters, search your library for a land card, exile it, then shuffle.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | Origin$ Library | Destination$ Exile | ChangeType$ Land | ChangeNum$ 1
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.
 SVar:X:Count$Valid Land.sharesNameWith Imprinted
@@ -11,4 +11,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsImprinted+ExiledWithSourceLKI | Origin$ 
 SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 AI:RemoveDeck:Random
-Oracle:Imprint — When Strata Scythe enters the battlefield, search your library for a land card, exile it, then shuffle.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}
+Oracle:Imprint — When Strata Scythe enters, search your library for a land card, exile it, then shuffle.\nEquipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.\nEquip {3}

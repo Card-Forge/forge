@@ -2,6 +2,6 @@ Name:Auntie's Hovel
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
-K:ETBReplacement:Other:DBTap
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Goblin> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Goblin card from your hand. If you don't, CARDNAME enters the battlefield tapped.
-Oracle:As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.\n{T}: Add {B} or {R}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Goblin card from your hand. If you don't, CARDNAME enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Goblin> | UnlessPayer$ You | StackDescription$ enters tapped.
+Oracle:As Auntie's Hovel enters, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters tapped.\n{T}: Add {B} or {R}.

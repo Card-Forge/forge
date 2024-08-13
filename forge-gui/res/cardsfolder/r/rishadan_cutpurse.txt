@@ -2,10 +2,10 @@ Name:Rishadan Cutpurse
 ManaCost:2 U
 Types:Creature Human Pirate
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a permanent unless they pay {1}.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ RepeatEachOpp | TriggerDescription$ When CARDNAME enters, each opponent sacrifices a permanent unless they pay {1}.
 SVar:RepeatEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigSac
 SVar:TrigSac:DB$ Sacrifice | Defined$ Remembered | SacValid$ Permanent | SacMessage$ Permanent | UnlessCost$ 1 | UnlessPayer$ Remembered
 SVar:NeedsToPlayVar:Z EQ0
 SVar:Z:Count$Valid Card.canProduceMana+OppCtrl+untapped
 AI:RemoveDeck:Random
-Oracle:When Rishadan Cutpurse enters the battlefield, each opponent sacrifices a permanent unless they pay {1}.
+Oracle:When Rishadan Cutpurse enters, each opponent sacrifices a permanent unless they pay {1}.

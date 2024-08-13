@@ -249,8 +249,7 @@ public class ConquestEvent {
 
         public int getTotalWins() {
             int wins = 0;
-            for (int i = 0; i < tiers.length; i++) {
-                ConquestRecord record = tiers[i];
+            for (ConquestRecord record : tiers) {
                 if (record != null) {
                     wins += record.getWins();
                 }
@@ -259,8 +258,7 @@ public class ConquestEvent {
         }
         public int getTotalLosses() {
             int losses = 0;
-            for (int i = 0; i < tiers.length; i++) {
-                ConquestRecord record = tiers[i];
+            for (ConquestRecord record : tiers) {
                 if (record != null) {
                     losses += record.getLosses();
                 }

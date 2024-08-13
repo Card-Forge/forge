@@ -1,6 +1,7 @@
 Name:Jetmir's Garden
 ManaCost:no cost
 Types:Land Mountain Forest Plains
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Cycling:3
-Oracle:({T}: Add {R}, {G}, or {W}.)\nJetmir's Garden enters the battlefield tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)
+Oracle:({T}: Add {R}, {G}, or {W}.)\nJetmir's Garden enters tapped.\nCycling {3} ({3}, Discard this card: Draw a card.)

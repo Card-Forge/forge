@@ -3,7 +3,7 @@ ManaCost:5 W W
 Types:Creature Angel
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigChangeHand | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigChangeHand | OptionalDecider$ You | TriggerDescription$ Landfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
 SVar:TrigChangeHand:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | DestinationAlternative$ Battlefield | DestAltSVar$ TriggeredCard$Valid Plains | TgtPrompt$ Select target nonland permanent | ValidTgts$ Permanent.YouOwn+nonLand
 SVar:BuffedBy:Land
-Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.
+Oracle:Flying\nLandfall — Whenever a land you control enters, you may return target nonland permanent card from your graveyard to your hand. If that land is a Plains, you may return that nonland permanent card to the battlefield instead.

@@ -2,6 +2,6 @@ Name:Serpent Warrior
 ManaCost:2 B
 Types:Creature Snake Warrior
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, you lose 3 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 3
-Oracle:When Serpent Warrior enters the battlefield, you lose 3 life.
+Oracle:When Serpent Warrior enters, you lose 3 life.

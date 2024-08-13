@@ -11,4 +11,4 @@ SVar:X:TriggeredAttacker$CardPower
 SVar:HasAttackEffect:TRUE
 SVar:AE:SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
-Oracle:Backup 3 (When this creature enters the battlefield, put three +1/+1 counters on target creature. If that's another creature, it gains the following abilities until end of turn.)\nWhenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+Oracle:Backup 3 (When this creature enters, put three +1/+1 counters on target creature. If that's another creature, it gains the following abilities until end of turn.)\nWhenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

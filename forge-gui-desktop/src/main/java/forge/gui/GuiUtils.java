@@ -20,8 +20,6 @@ package forge.gui;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -101,12 +99,9 @@ public final class GuiUtils {
             label = "<html>" + "<div style='height: " + itemHeight + "px; margin-top: 6px;'>" + label.substring(6, label.length() - 7) + "</div></html>";
         }
         final JMenuItem item = new JMenuItem(label);
-        item.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent arg0) {
-                if (null != onClick) {
-                    onClick.run();
-                }
+        item.addActionListener(arg0 -> {
+            if (null != onClick) {
+                onClick.run();
             }
         });
         item.setEnabled(enabled);

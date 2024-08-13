@@ -1,0 +1,9 @@
+Name:Octomancer
+ManaCost:3 G U
+Types:Creature Frog Druid
+PT:3/3
+K:Gift
+SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ u_8_8_octopus | TokenOwner$ Promised | LockTokenScript$ True | GiftDescription$ an Octopus
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of each end step, create a token that's a copy of target creature token that entered the battlefield this turn.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.Creature+token+ThisTurnEntered | TgtPrompt$ Select target creature token that entered the battlefield this turn | NumCopies$ 1
+Oracle:Gift an Octopus (You may promise an opponent a gift as you cast this spell. If you do, when it enters, they create an 8/8 blue Octopus creature token.)\nAt the beginning of each end step, create a token that's a copy of target creature token that entered the battlefield this turn.

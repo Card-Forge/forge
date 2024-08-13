@@ -17,4 +17,4 @@ SVar:Shuffle:DB$ Shuffle | SubAbility$ DBCleanup
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 DeckHints:Type$Instant|Sorcery|Enchantment
-Oracle:Underdark Beholder enters the battlefield with ten eyestalk counters on it.\nIf Underdark Beholder would be dealt damage, remove that many eyestalk counters from it instead. If you can't, sacrifice it.\nWhenever Underdark Beholder attacks, reveal cards from the top of your library until you reveal an instant, sorcery, or enchantment card with converted mana cost less than the number of eyestalk counters on Underdark Beholder. You may cast it without paying its mana cost. Shuffle your library.
+Oracle:Underdark Beholder enters with ten eyestalk counters on it.\nIf Underdark Beholder would be dealt damage, remove that many eyestalk counters from it instead. If you can't, sacrifice it.\nWhenever Underdark Beholder attacks, reveal cards from the top of your library until you reveal an instant, sorcery, or enchantment card with converted mana cost less than the number of eyestalk counters on Underdark Beholder. You may cast it without paying its mana cost. Shuffle your library.

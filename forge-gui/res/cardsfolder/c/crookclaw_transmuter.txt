@@ -4,7 +4,7 @@ Types:Creature Bird Wizard
 PT:3/1
 K:Flash
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, switch target creature's power and toughness until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, switch target creature's power and toughness until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME's power and toughness are switched
 AI:RemoveDeck:All
-Oracle:Flash\nFlying\nWhen Crookclaw Transmuter enters the battlefield, switch target creature's power and toughness until end of turn.
+Oracle:Flash\nFlying\nWhen Crookclaw Transmuter enters, switch target creature's power and toughness until end of turn.

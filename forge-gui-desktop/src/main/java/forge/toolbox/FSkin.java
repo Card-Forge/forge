@@ -940,11 +940,7 @@ public class FSkin {
 
     /** @return {@link java.awt.font} */
     private static Font getFixedFont(final int size) {
-        Font fixedFont = fixedFonts.get(size);
-        if (fixedFont == null) {
-            fixedFont = new Font("Monospaced", Font.PLAIN, size);
-            fixedFonts.put(size, fixedFont);
-        }
+        Font fixedFont = fixedFonts.computeIfAbsent(size, s -> new Font("Monospaced", Font.PLAIN, s));
         return fixedFont;
     }
 
@@ -1120,7 +1116,7 @@ public class FSkin {
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
     bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimColorlessHybrid, bimDefaultSleeve,
-            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank;
+            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank, bimAttractionLights;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
@@ -1239,7 +1235,7 @@ public class FSkin {
         }
 
         final Localizer localizer = Localizer.getInstance();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 12);
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("splash.loading.processingimagesprites") + ": ", 20);
 
         // Grab and test various sprite files.
         final String defaultDir = ForgeConstants.DEFAULT_SKINS_DIR;
@@ -1263,6 +1259,7 @@ public class FSkin {
         final File f18 = new File(defaultDir + ForgeConstants.SPRITE_PHYREXIAN_FILE);
         final File f19 = new File(defaultDir + ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE);
         final File f20 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
+        final File f21 = new File(defaultDir + ForgeConstants.SPRITE_ATTRACTION_LIGHTS_FILE);
 
         try {
             int p = 0;
@@ -1275,6 +1272,8 @@ public class FSkin {
             bimPhyrexian = ImageIO.read(f18);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimColorlessHybrid = ImageIO.read(f19);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimAttractionLights = ImageIO.read(f21);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1363,6 +1362,9 @@ public class FSkin {
                 case COLORLESS_HYBRID:
                     setImage(prop, bimColorlessHybrid);
                     break;
+                case ATTRACTION_LIGHTS:
+                    setImage(prop, bimAttractionLights);
+                    break;
                 case DECKBOX:
                     setImage(prop, bimDefaultDeckbox);
                     break;
@@ -1407,6 +1409,7 @@ public class FSkin {
         bimPhyrexian.flush();
         bimColorlessHybrid.flush();
         bimManaIcons.flush();
+        bimAttractionLights.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
 
@@ -1428,6 +1431,7 @@ public class FSkin {
         bimPhyrexian = null;
         bimColorlessHybrid = null;
         bimManaIcons = null;
+        bimAttractionLights = null;
 
         //establish encoding symbols
         final File dir = new File(ForgeConstants.CACHE_SYMBOLS_DIR);

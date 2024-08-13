@@ -480,7 +480,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             if(data.rewards != null) { //Collect standard rewards.
                 Deck enemyDeck = Current.latestDeck();
                 // By popular demand, remove basic lands from the reward pool.
-                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));
+                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard::getRules));
 
                 for (RewardData rdata : data.rewards) {
                     ret.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));
@@ -567,7 +567,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
     public float getLifetime() {
         //default and minimum value for time to remain on overworld map
-        Float lifetime = 20f;
+        float lifetime = 20f;
         return Math.max(data.lifetime, lifetime);
     }
 
