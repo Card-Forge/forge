@@ -472,7 +472,7 @@ public final class CardScriptParser {
             "wasDealtDamageByHostThisTurn", "wasDealtDamageByEquipeeThisTurn",
             "wasDealtDamageByEnchantedThisTurn", "dealtDamageThisTurn",
             "attackedThisTurn", "attackedLastTurn", "blockedThisTurn",
-            "gotBlockedThisTurn", "notAttackedThisTurn", "notAttackedLastTurn",
+            "gotBlockedThisTurn", "notAttackedThisTurn",
             "notBlockedThisTurn", "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
