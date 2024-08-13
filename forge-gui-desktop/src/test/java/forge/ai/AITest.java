@@ -1,5 +1,6 @@
 package forge.ai;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Function;
@@ -15,6 +16,7 @@ import forge.game.GameType;
 import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactory;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
@@ -22,6 +24,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
+import forge.item.PaperToken;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -50,13 +53,10 @@ public class AITest {
     protected Game initAndCreateGame() {
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
-            FModel.initialize(null, new Function<ForgePreferences, Void>() {
-                @Override
-                public Void apply(ForgePreferences preferences) {
-                    preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                    preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                    return null;
-                }
+            FModel.initialize(null, preferences -> {
+                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
+                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
+                return null;
             });
             initialized = true;
         }
@@ -83,23 +83,6 @@ public class AITest {
         return null;
     }
 
-    protected String gameStateToString(Game game) {
-        StringBuilder sb = new StringBuilder();
-        for (ZoneType zone : ZoneType.values()) {
-            CardCollectionView cards = game.getCardsIn(zone);
-            if (!cards.isEmpty()) {
-                sb.append("Zone ").append(zone.name()).append(":\n");
-                for (Card c : game.getCardsIn(zone)) {
-                    sb.append("  ").append(c);
-                    if (c.isTapped()) {
-                        sb.append(" (T)");
-                    }
-                    sb.append("\n");
-                }
-            }
-        }
-        return sb.toString();
-    }
 
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
@@ -143,10 +126,60 @@ public class AITest {
         return cards;
     }
 
+    protected Card createToken(String name, Player p) {
+        PaperToken token = FModel.getMagicDb().getAllTokens().getToken(name);
+        if (token == null) {
+            System.out.println("Failed to find token name " + name);
+            return null;
+        }
+        return CardFactory.getCard(token, p, p.getGame());
+    }
+
+    protected List<Card> addTokens(String name, int amount, Player p) {
+        List<Card> cards = new ArrayList<>();
+
+        for(int i = 0; i < amount; i++) {
+            cards.add(addToken(name, p));
+        }
+
+        return cards;
+    }
+
+    protected Card addToken(String name, Player p) {
+        Card c = createToken(name, p);
+        // card need a new Timestamp otherwise Static Abilities might collide
+        c.setGameTimestamp(p.getGame().getNextTimestamp());
+        p.getZone(ZoneType.Battlefield).add(c);
+        return c;
+    }
+
     void playUntilStackClear(Game game) {
         do {
             game.getPhaseHandler().mainLoopStep();
         } while (!game.isGameOver() && !game.getStack().isEmpty());
-        return;
+    }
+
+    void playUntilPhase(Game game, PhaseType phase) {
+        do {
+            game.getPhaseHandler().mainLoopStep();
+        } while (!game.isGameOver() && !game.getPhaseHandler().is(phase));
+    }
+
+    protected String gameStateToString(Game game) {
+        StringBuilder sb = new StringBuilder();
+        for (ZoneType zone : ZoneType.values()) {
+            CardCollectionView cards = game.getCardsIn(zone);
+            if (!cards.isEmpty()) {
+                sb.append("Zone ").append(zone.name()).append(":\n");
+                for (Card c : game.getCardsIn(zone)) {
+                    sb.append("  ").append(c);
+                    if (c.isTapped()) {
+                        sb.append(" (T)");
+                    }
+                    sb.append("\n");
+                }
+            }
+        }
+        return sb.toString();
     }
 }

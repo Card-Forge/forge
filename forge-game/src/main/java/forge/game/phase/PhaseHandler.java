@@ -988,8 +988,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final static boolean DEBUG_PHASES = false;
 
-    public void discreteStartFirstTurn(Player goesFirst, Runnable startGameHook) {
-
+    public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
             throw new IllegalStateException("Turns already started, call this only once per game");
         }
@@ -1005,7 +1004,10 @@ public class PhaseHandler implements java.io.Serializable {
             startGameHook.run();
             givePriorityToPlayer = true;
         }
+    }
 
+    public void discreteStartFirstTurn(Player goesFirst, Runnable startGameHook) {
+        setupFirstTurn(goesFirst, startGameHook);
         mainGameLoop();
     }
 
