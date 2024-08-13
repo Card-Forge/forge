@@ -22,7 +22,7 @@ K:Living metal
 K:Menace
 K:Deathtouch
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert NICKNAME.
-SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | ExileWithCounter$ INTEL | SubAbility$ DBConvert
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | ExileWithCounters$ INTEL | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Transform
 SVar:X:TriggerCount$DamageAmount
 SVar:HasAttackEffect:TRUE
