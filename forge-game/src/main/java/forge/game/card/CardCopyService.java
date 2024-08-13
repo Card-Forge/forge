@@ -47,6 +47,7 @@ public class CardCopyService {
 
             // need to copy this values for the tokens
             out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+            out.setCopiedPermanent(copyFrom.getCopiedPermanent());
         } else {
             out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
                     : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
