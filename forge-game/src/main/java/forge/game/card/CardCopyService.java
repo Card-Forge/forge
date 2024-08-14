@@ -215,7 +215,7 @@ public class CardCopyService {
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
         bread.setData("Player", copyFrom.getController().getName());
-        Sentry.addBreadcrumb(bread, copyFrom);
+        Sentry.addBreadcrumb(bread);
 
         final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);

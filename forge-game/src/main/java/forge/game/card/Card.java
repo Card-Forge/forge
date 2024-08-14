@@ -2613,7 +2613,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", this.getName());
                 bread.setData("Keyword", keyword);
-                Sentry.addBreadcrumb(bread, this);
+                Sentry.addBreadcrumb(bread);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
@@ -3184,7 +3184,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", this.getName());
                 bread.setData("Keyword", keyword);
-                Sentry.addBreadcrumb(bread, this);
+                Sentry.addBreadcrumb(bread);
 
                 throw new RuntimeException("Error in Card " + this.getName() + " with Keyword " + keyword, e);
             }
