@@ -1,0 +1,9 @@
+[metadata]
+Code=YBLB
+Date=2024-08-20
+Name=Alchemy: Bloomburrow
+Type=Online
+ScryfallCode=YBLB
+
+[cards]
+0 R Bramblearmor Brawler @Jakob Eirich
