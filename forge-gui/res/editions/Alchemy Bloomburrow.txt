@@ -6,4 +6,6 @@ Type=Online
 ScryfallCode=YBLB
 
 [cards]
+0 U Tasteful Offering @Dave Allsop
 0 R Bramblearmor Brawler @Jakob Eirich
+0 M Euru, Acorn Scrounger @Dave Kendall

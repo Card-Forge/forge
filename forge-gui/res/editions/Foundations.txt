@@ -6,13 +6,24 @@ Type=Core
 ScryfallCode=FDN
 
 [cards]
+12 C Felidar Savior @Ilse Gort
+16 C Helpful Hunter @Xabi Gaztelua
+21 C Prideful Parent @Leonardo Santanna
 66 R Nine-Lives Familiar @Bram Sels
+76 U Vengeful Bloodwitch @Jarel Threat
 116 R Anthem of Champions @Chris Rallis
 140 R Day of Judgment @Vincent Proce
+146 U Savannah Lions @Winona Nelson
 161 M Omniscience @Jason Chan
+175 U Hero's Downfall @Chris Rallis
 227 C Llanowar Elves @Kev Walker
 379 M Omniscience @Dominik Mayer
 385 R Nine-Lives Familiar @Xabi Gaztelua
 405 R Anthem of Champions @Ryan Pancoast
 462 R Nine-Lives Familiar @Bram Sels
 477 R Anthem of Champions @Chris Rallis
+493 U Elspeth's Smite @Livia Prima
+497 R Jazal Goldmane @Aaron Miller
+498 U Leonin Skyhunter @Kev Walker
+499 U Leonin Vanguard @Aaron Miller
+524 C Moment of Craving @Steven Belledin
