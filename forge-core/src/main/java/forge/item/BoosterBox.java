@@ -18,14 +18,12 @@
 
 package forge.item;
 
-import com.google.common.base.Function;
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
 
 public class BoosterBox extends BoxedProduct {
 

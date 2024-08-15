@@ -18,10 +18,7 @@
 
 package forge.item;
 
-import com.google.common.base.Function;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
