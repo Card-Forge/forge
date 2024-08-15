@@ -1296,6 +1296,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
+    /**
+     * Gives a collection of all cards that are melded, merged, or are otherwise representing
+     * a single permanent alongside this one.
+     * @param includeSelf Whether this card is included in the resulting CardCollection.
+     */
+    public final CardCollection getAllComponentCards(boolean includeSelf) {
+        CardCollection out = new CardCollection();
+        if(includeSelf)
+            out.add(this);
+        if(this.getMeldedWith() != null)
+            out.add(this.getMeldedWith());
+        if(mergedTo != null) //Should be safe to recurse here so long as mergedTo remains a one-way relationship.
+            out.addAll(mergedTo.getAllComponentCards(true));
+        if(this.hasMergedCard())
+            out.addAll(mergedCards);
+        if(!includeSelf) //mergedCards includes self.
+            out.remove(this);
+        return out;
+    }
+
     public final void moveMergedToSubgame(SpellAbility cause) {
         if (hasMergedCard()) {
             Zone zone = getZone();

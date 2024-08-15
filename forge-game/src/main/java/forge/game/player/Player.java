@@ -176,8 +176,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int teamNumber = -1;
     private Card activeScheme = null;
-    private List<Card> commanders = Lists.newArrayList();
-    private Map<Card, Integer> commanderCast = Maps.newHashMap();
+    private final List<Card> commanders = Lists.newArrayList();
+    private final Map<Card, Integer> commanderCast = Maps.newHashMap();
+    private final Map<Card, DetachedCardEffect> commanderEffects = Maps.newHashMap();
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private CardCollection lostOwnership = new CardCollection();
@@ -2064,7 +2065,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return loseConditionMet(GameLossReason.Poisoned, null);
         }
 
-        if (game.getRules().hasAppliedVariant(GameType.Commander)) {
+        if (game.getRules().hasAppliedVariant(GameType.Commander)) { //TODO for You're in Command.
             for (Entry<Card, Integer> entry : getCommanderDamage()) {
                 if (entry.getValue() >= 21) {
                     return loseConditionMet(GameLossReason.CommanderDamage, null);
@@ -2766,10 +2767,32 @@ public class Player extends GameEntity implements Comparable<Player> {
     public List<Card> getCommanders() {
         return commanders;
     }
-    public void setCommanders(List<Card> commanders0) {
-        if (commanders0 == commanders) { return; }
-        commanders = commanders0;
+    public void setCommanders(List<Card> commanders) {
+        if (new HashSet<>(this.commanders).containsAll(commanders)) { return; }
+        this.commanders.clear();
+        this.commanders.addAll(commanders);
         view.updateCommander(this);
+    }
+
+    public void addCommander(Card commander) {
+        if(this.commanders.contains(commander))
+            return;
+        this.commanders.add(commander);
+        getZone(ZoneType.Command).add(createCommanderEffect(game, commander));
+        commander.setCommander(true);
+        view.updateCommander(this);
+        view.updateCommanderDamage(this);
+    }
+
+    public void removeCommander(Card commander) {
+        if(!this.commanders.remove(commander))
+            return;
+        DetachedCardEffect commanderEffect = commanderEffects.get(commander);
+        if(commanderEffect != null)
+            game.getAction().exileEffect(commanderEffect);
+        commander.setCommander(false);
+        view.updateCommander(this);
+        view.updateCommanderDamage(this);
     }
 
     public Iterable<Entry<Card, Integer>> getCommanderDamage() {
@@ -3172,6 +3195,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }
         eff.addStaticAbility(mayBePlayedAbility);
+        commander.getOwner().commanderEffects.put(commander, eff);
         return eff;
     }
 
