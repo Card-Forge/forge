@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SealedTemplate {
 
-    @SuppressWarnings("unchecked")
     public final static SealedTemplate genericDraftBooster = new SealedTemplate(null, Lists.newArrayList(
             Pair.of(BoosterSlots.COMMON, 10), Pair.of(BoosterSlots.UNCOMMON, 3),
             Pair.of(BoosterSlots.RARE_MYTHIC, 1), Pair.of(BoosterSlots.BASIC_LAND, 1)
@@ -23,6 +22,10 @@ public class SealedTemplate {
     protected final List<Pair<String, Integer>> slots;
 
     protected final String name;
+
+    public final String getName() {
+        return name;
+    }
 
     public final List<Pair<String, Integer>> getSlots() {
         return slots;
@@ -62,13 +65,6 @@ public class SealedTemplate {
         }
         return sum;
     }
-
-    public static final Function<? super SealedTemplate, String> FN_GET_NAME = new Function<SealedTemplate, String>() {
-        @Override
-        public String apply(SealedTemplate arg1) {
-            return arg1.name;
-        }
-    };
 
     @Override
     public String toString() {
@@ -110,8 +106,9 @@ public class SealedTemplate {
 
     public final static class Reader extends StorageReaderFile<SealedTemplate> {
         public Reader(File file) {
-            super(file, SealedTemplate.FN_GET_NAME);
+            super(file, (Function<? super SealedTemplate, String>) (Function<SealedTemplate, String>) SealedTemplate::getName);
         }
+
 
         public static List<Pair<String, Integer>> parseSlots(String data) {
             final String[] dataz = TextUtil.splitWithParenthesis(data, ',');
