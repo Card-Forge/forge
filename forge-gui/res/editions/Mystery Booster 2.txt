@@ -2,10 +2,10 @@
 Code=MB2
 Date=2024-08-02
 Name=Mystery Booster 2
-Type=Draft
+Type=Funny
 ScryfallCode=MB2
 
-[cards]
+[eternal]
 1 R Mardu Outrider @Evan Shipard
 2 C Environmental Sciences @Jokubas Uogintas
 3 R Karn, the Great Creator @Wisnu Tan
@@ -270,6 +270,8 @@ ScryfallCode=MB2
 262 U Tenacious Pup @Brian Valeza
 263 U Rusko, Clockmaker @Samuel Perin
 264 U Forsaken Crossroads @Kasia 'Kafis' Zielińska
+
+[cards]
 F265 C Indicate @Drew Moss
 F266 C Kozilek, Compleated @Will Liu
 F267 C Marchesa's Surprise Party @Maru Ferreira
