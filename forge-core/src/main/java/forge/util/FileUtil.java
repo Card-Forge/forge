@@ -22,6 +22,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -252,7 +253,7 @@ public final class FileUtil {
         final List<String> list = new ArrayList<>();
         try {
             final BufferedReader in = new BufferedReader(
-                    new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                    new InputStreamReader(Files.newInputStream(file.toPath()), StandardCharsets.UTF_8));
             String line;
             while ((line = in.readLine()) != null) {
                 if (mayTrim) {

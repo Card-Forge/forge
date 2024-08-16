@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -85,7 +84,7 @@ public class LoadQuestScreen extends LaunchScreen {
                 try {
                     arrQuests.put(f.getName(), QuestDataIO.loadData(f));
                 } catch (IOException e) {
-                    System.err.println(String.format("Failed to load quest '%s'", f.getName()));
+                    System.err.printf("Failed to load quest '%s'%n", f.getName());
                     // Failed to load last quest, don't continue with quest loading stuff
                     return;
                 }
@@ -300,9 +299,8 @@ public class LoadQuestScreen extends LaunchScreen {
         }
 
         public void setQuests(List<QuestData> qd0) {
-            List<QuestData> sorted = new ArrayList<>();
-            sorted.addAll(qd0);
-            Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
+            List<QuestData> sorted = new ArrayList<>(qd0);
+            sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

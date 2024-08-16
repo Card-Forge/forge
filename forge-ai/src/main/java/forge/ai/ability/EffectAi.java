@@ -427,7 +427,7 @@ public class EffectAi extends SpellAbilityAi {
         if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer()) {
             // try to target the opponent's best targetable permanent, if able
             CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
-            oppPerms = CardLists.filter(oppPerms, card -> sa.canTarget(card));
+            oppPerms = CardLists.filter(oppPerms, sa::canTarget);
             if (!oppPerms.isEmpty()) {
                 sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(oppPerms));
@@ -437,7 +437,7 @@ public class EffectAi extends SpellAbilityAi {
             if (mandatory) {
                 // try to target the AI's worst targetable permanent, if able
                 CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
-                aiPerms = CardLists.filter(aiPerms, card -> sa.canTarget(card));
+                aiPerms = CardLists.filter(aiPerms, sa::canTarget);
                 if (!aiPerms.isEmpty()) {
                     sa.resetTargets();
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(aiPerms));

@@ -1,13 +1,13 @@
 package forge.util;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Charsets;
 
 public class CardTranslation {
 
@@ -24,7 +24,7 @@ public class CardTranslation {
     private static void readTranslationFile(String language, String languagesDirectory) {
         String filename = "cardnames-" + language + ".txt";
 
-        try (LineReader translationFile = new LineReader(new FileInputStream(languagesDirectory + filename), Charsets.UTF_8)) {
+        try (LineReader translationFile = new LineReader(Files.newInputStream(Paths.get(languagesDirectory + filename)), StandardCharsets.UTF_8)) {
             for (String line : translationFile.readLines()) {
                 String[] matches = line.split("\\|");
                 if (matches.length >= 2) {
@@ -251,7 +251,7 @@ public class CardTranslation {
     public static void buildOracleMapping(String faceName, String oracleText) {
         if (!needsTranslation() || oracleMappings.containsKey(faceName)) return;
         String translatedText = getTranslatedOracle(faceName);
-        if (translatedText.equals("")) {
+        if (translatedText.isEmpty()) {
             // english card only, fall back
             return;
         }

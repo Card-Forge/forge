@@ -412,9 +412,7 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(new String[] {"Off", "AI", "Human For AI"}, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
-        comboBox.addActionListener(actionEvent -> {
-            AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem()));
-        });
+        comboBox.addActionListener(actionEvent -> AiProfileUtil.setAiSideboardingMode(AiProfileUtil.AISideboardingMode.normalizedValueOf(comboBox.getSelectedItem())));
     }
 
     private void initializeSoundSetsComboBox() {

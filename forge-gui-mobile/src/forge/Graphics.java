@@ -1371,7 +1371,7 @@ public class Graphics {
         Dtransforms.removeFirst();
         transformCount--;
         if (transformCount != Dtransforms.size()) {
-            System.err.println(String.format("Stack count: %d, transformCount: %d", Dtransforms.size(), transformCount));
+            System.err.printf("Stack count: %d, transformCount: %d%n", Dtransforms.size(), transformCount);
             transformCount = 0;
             Dtransforms.clear();
         }

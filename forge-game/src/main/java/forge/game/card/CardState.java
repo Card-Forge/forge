@@ -303,7 +303,7 @@ public class CardState extends GameObject implements IHasSVars {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", card.getName());
             bread.setData("Keyword", s);
-            Sentry.addBreadcrumb(bread, this);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);

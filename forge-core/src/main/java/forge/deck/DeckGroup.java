@@ -19,7 +19,6 @@ package forge.deck;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -87,7 +86,7 @@ public class DeckGroup extends DeckBase {
         if (aiDecks.size() < 2) {
             return;
         }
-        Collections.sort(aiDecks, comparator);
+        aiDecks.sort(comparator);
     }
     
     @Override

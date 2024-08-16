@@ -21,12 +21,6 @@ import forge.util.Localizer;
 
 public class PhasesEffect extends SpellAbilityEffect {
 
-    // ******************************************
-    // ************** Phases ********************
-    // ******************************************
-    // Phases generally Phase Out. Time and Tide is the only card that can force
-    // Phased Out cards in.
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -56,10 +50,8 @@ public class PhasesEffect extends SpellAbilityEffect {
                 tgtCards = game.getCardsIn(ZoneType.Battlefield);
             }
             tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
-        } else if (sa.hasParam("Defined")) {
-            tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         } else {
-            tgtCards = getTargetCards(sa);
+            tgtCards = getDefinedCardsOrTargeted(sa);
         }
         if (sa.hasParam("AnyNumber")) {
             tgtCards = activator.getController().chooseCardsForEffect(tgtCards, sa,

@@ -240,7 +240,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("SA", sa.toString());
-                Sentry.addBreadcrumb(bread, sa);
+                Sentry.addBreadcrumb(bread);
 
                 continue;
             }

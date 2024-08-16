@@ -23,12 +23,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.ReadPriceList;
@@ -36,11 +33,14 @@ import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -167,7 +167,7 @@ public class QuestUtilUnlockSets {
         }
 
         // sort by distance, then by code desc
-        Collections.sort(excludedWithDistances, (o1, o2) -> {
+        excludedWithDistances.sort((o1, o2) -> {
             long delta = o2.right - o1.right;
             return delta < 0 ? -1 : delta == 0 ? 0 : 1;
         });
@@ -192,8 +192,8 @@ public class QuestUtilUnlockSets {
      * @param unlockedSet the edition to unlock
      */
     public static void doUnlock(final QuestController qData, final CardEdition unlockedSet) {
-        IStorage<SealedProduct.Template> starters = FModel.getMagicDb().getTournamentPacks();
-        IStorage<SealedProduct.Template> boosters = FModel.getMagicDb().getBoosters();
+        IStorage<SealedTemplate> starters = FModel.getMagicDb().getTournamentPacks();
+        IStorage<SealedTemplate> boosters = FModel.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         String additionalSet = unlockedSet.getAdditionalUnlockSet();

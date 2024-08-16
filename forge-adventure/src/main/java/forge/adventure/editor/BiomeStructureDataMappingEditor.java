@@ -135,8 +135,8 @@ public class BiomeStructureDataMappingEditor extends JComponent {
             add("color:",color);
             add("collision:",collision);
 
-            name.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureDataMappingEdit.this.update()));
-            color.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureDataMappingEdit.this.update()));
+            name.getDocument().addDocumentListener(new DocumentChangeListener(BiomeStructureDataMappingEdit.this::update));
+            color.getDocument().addDocumentListener(new DocumentChangeListener(BiomeStructureDataMappingEdit.this::update));
             collision.addChangeListener(e -> BiomeStructureDataMappingEdit.this.update());
             refresh();
         }

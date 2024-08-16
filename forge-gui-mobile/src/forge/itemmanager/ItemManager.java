@@ -207,7 +207,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 cols.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(cols, Comparator.comparingInt(arg0 -> arg0.getConfig().getIndex()));
+        cols.sort(Comparator.comparingInt(arg0 -> arg0.getConfig().getIndex()));
 
         sortCols.clear();
         if (cbxSortOptions != null) {

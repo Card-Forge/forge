@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Arrays;
 import java.util.List;
 
+import forge.card.GamePieceType;
 import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
@@ -296,7 +297,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
-        copy.setToken(true);
+        copy.setGamePieceType(GamePieceType.TOKEN);
 
         return copy;
     }

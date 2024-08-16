@@ -43,9 +43,7 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -105,7 +103,7 @@ public class CardFactory {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
 
-        copy.setCopiedSpell(true);
+        copy.setGamePieceType(GamePieceType.COPIED_SPELL);
         copy.setCopiedPermanent(original);
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
@@ -188,9 +186,11 @@ public class CardFactory {
         // Would like to move this away from in-game entities
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
-        c.setToken(cp.isToken());
 
-        c.setAttractionCard(cardRules.getType().isAttraction());
+        if(cp.isToken())
+            c.setGamePieceType(GamePieceType.TOKEN);
+        else
+            c.setGamePieceType(c.getRules().getType().getGamePieceType());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -746,6 +746,15 @@ public class CardFactory {
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
+            if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "_" + set));
+            }
+
+            
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());
