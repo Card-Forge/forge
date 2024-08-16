@@ -264,6 +264,7 @@ Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
 Slug:Slugs
+Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris

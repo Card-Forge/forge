@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.card.CardStateName;
+import forge.card.GamePieceType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -168,7 +169,8 @@ public class PlayEffect extends SpellAbilityEffect {
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack
             card.setCopiedPermanent(card);
-            card.setToken(true);
+            card.setGamePieceType(GamePieceType.TOKEN);
+            card.setZone(controller.getZone(ZoneType.None));
             tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
@@ -279,7 +281,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), controller);
 
-                tgtCard.setToken(true);
+                tgtCard.setGamePieceType(GamePieceType.TOKEN);
                 tgtCard.setZone(zone);
                 // to fix the CMC
                 tgtCard.setCopiedPermanent(original);

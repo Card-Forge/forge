@@ -41,7 +41,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             if (method == null) {
                 //throw new IllegalStateException(String.format("Method %s not found", protocolMethod.name()));
                 catchedError[0] += String.format("IllegalStateException: Method %s not found (GameProtocolHandler.java Line 43)\n", protocolMethod.name());
-                System.err.println(String.format("Method %s not found", protocolMethod.name()));
+                System.err.printf("Method %s not found%n", protocolMethod.name());
             }
 
             final Object[] args = event.getObjects();
@@ -58,7 +58,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     try {
                         method.invoke(toInvoke, args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        System.err.println(String.format("Unknown protocol method %s with %d args", methodName, args == null ? 0 : args.length));
+                        System.err.printf("Unknown protocol method %s with %d args%n", methodName, args == null ? 0 : args.length);
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
@@ -72,10 +72,10 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;
                         } else if (theReply != null) {
-                            System.err.println(String.format("Non-serializable return type %s for method %s, returning null", returnType.getName(), methodName));
+                            System.err.printf("Non-serializable return type %s for method %s, returning null%n", returnType.getName(), methodName);
                         }
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        System.err.println(String.format("Unknown protocol method %s with %d args, replying with null", methodName, args == null ? 0 : args.length));
+                        System.err.printf("Unknown protocol method %s with %d args, replying with null%n", methodName, args == null ? 0 : args.length);
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();

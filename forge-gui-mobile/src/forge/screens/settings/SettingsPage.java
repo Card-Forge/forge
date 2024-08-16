@@ -60,7 +60,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
                 ForgePreferences prefs = FModel.getPreferences();
-                if (prefs.getPref(FPref.UI_CJK_FONT).equals("") &&
+                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty() &&
                         (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
                     String message = "Please download CJK font (from \"Files\"), and set it before change language.";
                     if (newValue.equals("zh-CN")) {
@@ -136,10 +136,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     }
                 }
             }, 0);
-            lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
+            /*lstSettings.addItem(new BooleanSetting(FPref.UI_ANDROID_MINIMIZE_ON_SCRLOCK,
                 Forge.getLocalizer().getMessage("lblMinimizeScreenLock"),
                 Forge.getLocalizer().getMessage("nlMinimizeScreenLock")),
-               0);
+               0);*/
         } else {
             //fullscreen
             lstSettings.addItem(new BooleanSetting(FPref.UI_FULLSCREEN_MODE,

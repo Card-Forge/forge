@@ -134,7 +134,7 @@ public class TournamentSwiss extends AbstractTournament {
             return pairSwissGroup(players);
         }
 
-        Collections.sort(players, Comparator.comparingInt(o -> availableOpponents.get(o).size()));
+        players.sort(Comparator.comparingInt(o -> availableOpponents.get(o).size()));
 
         while (players.size() > 1) {
             TournamentPlayer initialPlayer = players.get(0);

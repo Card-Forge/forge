@@ -41,7 +41,7 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(who.equals("") ? peeker : who);
+        sb.append(who.isEmpty() ? peeker : who);
         sb.append(verb).append("the top ");
         sb.append(numPeek > 1 ? Lang.getNumeral(numPeek) + " cards " : "card ").append("of ").append(whose);
         sb.append(" library.");

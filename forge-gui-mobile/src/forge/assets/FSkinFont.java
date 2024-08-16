@@ -1,8 +1,9 @@
 package forge.assets;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -370,7 +371,7 @@ public class FSkinFont {
         String[] translationFilePaths = { ForgeConstants.LANG_DIR + "cardnames-" + langCode + ".txt",
                 ForgeConstants.LANG_DIR + langCode + ".properties" };
         for (String translationFilePath : translationFilePaths) {
-            try (LineReader translationFile = new LineReader(new FileInputStream(translationFilePath),
+            try (LineReader translationFile = new LineReader(Files.newInputStream(Paths.get(translationFilePath)),
                     StandardCharsets.UTF_8)) {
                 for (String fileLine : translationFile.readLines()) {
                     final int stringLength = fileLine.length();

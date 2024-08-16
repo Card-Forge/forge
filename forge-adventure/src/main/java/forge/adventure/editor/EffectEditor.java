@@ -42,8 +42,8 @@ public class EffectEditor extends JComponent  {
         lifeModifier.addChangeListener(e -> EffectEditor.this.updateEffect());
         moveSpeed.addChangeListener(e -> EffectEditor.this.updateEffect());
         colorView.addChangeListener(e -> EffectEditor.this.updateEffect());
-        name.getDocument().addDocumentListener(new DocumentChangeListener(() -> EffectEditor.this.updateEffect()));
-        startBattleWithCard.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EffectEditor.this.updateEffect()));
+        name.getDocument().addDocumentListener(new DocumentChangeListener(EffectEditor.this::updateEffect));
+        startBattleWithCard.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(EffectEditor.this::updateEffect));
         if(opponent!=null)
 
             opponent.addChangeListener(e -> EffectEditor.this.updateEffect());

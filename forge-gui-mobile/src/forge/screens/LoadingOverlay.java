@@ -57,7 +57,7 @@ public class LoadingOverlay extends FOverlay {
         loader.show();
         FThreads.invokeInBackgroundThread(() -> {
             task.run();
-            FThreads.invokeInEdtLater(() -> loader.hide());
+            FThreads.invokeInEdtLater(loader::hide);
         });
     }
 

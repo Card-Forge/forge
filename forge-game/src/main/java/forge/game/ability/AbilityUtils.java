@@ -485,7 +485,7 @@ public class AbilityUtils {
         } else if (calcX[0].startsWith("PlayerCount")) {
             final String hType = calcX[0].substring(11);
             final FCollection<Player> players = new FCollection<>();
-            if (hType.equals("Players") || hType.equals("")) {
+            if (hType.equals("Players") || hType.isEmpty()) {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("YourTeam")) {
@@ -1156,11 +1156,9 @@ public class AbilityUtils {
                 players.add(p);
             }
         } else if (defined.equals("Promised")) {
-            if (card != null) {
-                final Player p = card.getPromisedGift();
-                if (p != null) {
-                    players.add(p);
-                }
+            final Player p = card.getPromisedGift();
+            if (p != null) {
+                players.add(p);
             }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
@@ -1892,6 +1890,13 @@ public class AbilityUtils {
                     }
                 }
                 return doXMath(v, expr, c, ctb);
+            }
+
+            if (sq[0].equals("hasOptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null && c.getCastSA().hasOptionalKeywordAmount(ctb.getKeyword()) ? 1 : 0, expr, c, ctb);
+            }
+            if (sq[0].equals("OptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null ? c.getCastSA().getOptionalKeywordAmount(ctb.getKeyword()) : 0, expr, c, ctb);
             }
 
             // Count$DevotionDual.<color name>.<color name>

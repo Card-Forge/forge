@@ -173,10 +173,10 @@ public class NewGameScene extends MenuScene {
         gender.setCurrentIndex(rand.nextInt());
         colorId.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());
-        ui.onButtonPress("back", () -> NewGameScene.this.back());
-        ui.onButtonPress("start", () -> NewGameScene.this.start());
-        ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
-        ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
+        ui.onButtonPress("back", NewGameScene.this::back);
+        ui.onButtonPress("start", NewGameScene.this::start);
+        ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
+        ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
         difficultyHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showDifficultyHelp(); }});
         modeHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showModeHelp(); }});
     }

@@ -283,6 +283,7 @@ public final class CardRules implements ICardCharacteristics {
         for (String staticAbility : mainPart.getStaticAbilities()) { // Check for Grist
             if (staticAbility.contains("CharacteristicDefining$ True") && staticAbility.contains("AddType$ Creature")) {
                 creature = true;
+                break;
             }
         }
         if (type.isLegendary() && creature) {

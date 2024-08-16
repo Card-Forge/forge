@@ -22,6 +22,7 @@ import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
 import forge.card.CardType.Supertype;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
@@ -87,8 +88,7 @@ public class GameAction {
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
         if (c.isCopiedSpell() && zoneTo.is(ZoneType.Battlefield) && c.isPermanent() && cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
-            c.setCopiedSpell(false);
-            c.setToken(true);
+            c.setGamePieceType(GamePieceType.TOKEN);
         }
 
         if (c.isCopiedSpell() || (c.isImmutable() && zoneTo.is(ZoneType.Exile))) {
@@ -157,8 +157,8 @@ public class GameAction {
 
         //717.6. If a card with an Astrotorium card back would be put into a zone other than the battlefield, exile,
         //or the command zone from anywhere, instead its owner puts it into the junkyard.
-        if (c.isAttractionCard() && !toBattlefield && !zoneTo.is(ZoneType.AttractionDeck)
-                && !zoneTo.is(ZoneType.Junkyard) && !zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Command)) {
+        if (c.getGamePieceType() == GamePieceType.ATTRACTION && !toBattlefield
+                && !zoneTo.getZoneType().isPartOfCommandZone() && !zoneTo.is(ZoneType.Exile)) {
             //This should technically be a replacement effect, but with the "can apply more than once to the same event"
             //clause, this seems sufficient for now.
             //TODO: Figure out what on earth happens if you animate an attraction, mutate a creature/commander/token onto it, and it dies...
@@ -248,6 +248,8 @@ public class GameAction {
             // CR 707.12 casting of a card copy
             if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
                 copied.setCopiedPermanent(c.getCopiedPermanent());
+                //TODO: Feels like this should fit here and seems to work but it'll take a fair bit more testing to be sure.
+                //copied.setGamePieceType(GamePieceType.COPIED_SPELL);
             }
 
             copied.setGameTimestamp(c.getGameTimestamp());
@@ -842,7 +844,6 @@ public class GameAction {
         }
 
         if (zoneTo.is(ZoneType.Stack)) {
-            // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
             c.setCastFrom(zoneFrom);
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                 c.setCastSA(cause);
@@ -1143,7 +1144,7 @@ public class GameAction {
                 .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
                 .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
                 .result();
-        Collections.sort(staticAbilities, comp);
+        staticAbilities.sort(comp);
 
         final Map<StaticAbility, CardCollectionView> affectedPerAbility = Maps.newHashMap();
         for (final StaticAbilityLayer layer : StaticAbilityLayer.CONTINUOUS_LAYERS) {
@@ -2470,7 +2471,7 @@ public class GameAction {
                         Localizer.getInstance().getMessage("lblMilledToZone", destination.getTranslatedName()) + ")";
                 if (showRevealDialog) {
                     final String message = Localizer.getInstance().getMessage("lblMilledCards");
-                    final boolean addSuffix = !toZoneStr.equals("");
+                    final boolean addSuffix = !toZoneStr.isEmpty();
                     game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
                 game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +

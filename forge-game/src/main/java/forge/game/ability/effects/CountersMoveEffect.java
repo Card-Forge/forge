@@ -362,7 +362,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         if (cnum > 0) {
             src.subtractCounter(cType, cnum, activator);
             game.updateLastStateForCard(src);
-            countersToAdd.put(cType, (countersToAdd.containsKey(cType) ? countersToAdd.get(cType) : 0) + cnum);
+            countersToAdd.put(cType, (countersToAdd.getOrDefault(cType, 0)) + cnum);
         }
     }
 }

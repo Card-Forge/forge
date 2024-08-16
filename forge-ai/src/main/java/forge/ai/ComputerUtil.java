@@ -39,6 +39,7 @@ import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
@@ -2590,7 +2591,7 @@ public class ComputerUtil {
                             chosen = b;
                         }
                     }
-                    if (chosen.equals("")) {
+                    if (chosen.isEmpty()) {
                         for (String b : basics) {
                             if (Iterables.any(possibleCards, CardPredicates.isType(b))) {
                                 chosen = b;
@@ -3307,6 +3308,11 @@ public class ComputerUtil {
         repParams.put(AbilityKey.CardLKI, c);
         repParams.put(AbilityKey.Origin, c.getLastKnownZone().getZoneType());
         repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        // add Params for AddCounter Replacements
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
         List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
         return !list.isEmpty();
     }

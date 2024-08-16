@@ -81,6 +81,29 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             isPermanent = permanent;
             pluralName = plural;
         }
+
+        /**
+         * Converts this core type to whichever GamePieceType is typical of it.
+         * Be aware that this will not catch GamePieceTypes derived from subtypes,
+         * such as Attractions.
+         * @return a GamePieceType appropriate for this core type.
+         */
+        public GamePieceType toGamePieceType() {
+            switch(this) {
+                case Plane:
+                case Phenomenon:
+                    return GamePieceType.PLANAR;
+                case Scheme:
+                    return GamePieceType.SCHEME;
+                case Dungeon:
+                    return GamePieceType.DUNGEON;
+                case Vanguard:
+                    return GamePieceType.AVATAR;
+                //Sticker sheets will probably eventually go here.
+                default:
+                    return GamePieceType.CARD;
+            }
+        }
     }
 
     public enum Supertype {
@@ -780,6 +803,17 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return false;
     }
 
+    public GamePieceType getGamePieceType() {
+        if(this.isAttraction())
+            return GamePieceType.ATTRACTION;
+        for(CoreType type : coreTypes) {
+            GamePieceType r = type.toGamePieceType();
+            if(r != GamePieceType.CARD)
+                return r;
+        }
+        return GamePieceType.CARD;
+    }
+
     public static CardType parse(final String typeText, boolean incomplete) {
         // Most types and subtypes, except "Serra's Realm" and
         // "Bolas's Meditation Realm" consist of only one word
@@ -938,7 +972,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isASubType(final String cardType) {
-        return (!isASupertype(cardType) && !isACardType(cardType));
+        return getSortedSubTypes().contains(cardType);
     }
 
     public static boolean isAnArtifactType(final String cardType) {
@@ -1005,4 +1039,5 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         return type;
     }
+
 }

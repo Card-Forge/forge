@@ -24,7 +24,7 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
     protected void startMatch() {
         FThreads.invokeInBackgroundThread(() -> {
             if (QuestUtil.canStartGame()) {
-                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> QuestUtil.finishStartingGame()));
+                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, QuestUtil::finishStartingGame));
                 return;
             }
         });
