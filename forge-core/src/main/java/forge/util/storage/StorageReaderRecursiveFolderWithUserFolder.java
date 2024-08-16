@@ -98,7 +98,7 @@ public abstract class StorageReaderRecursiveFolderWithUserFolder<T> extends Stor
 
         forgeFormats.addAll(customFormats);
 
-        final File[] files = forgeFormats.toArray(new File[forgeFormats.size()]);
+        final File[] files = forgeFormats.toArray(new File[0]);
 
         for (final File file : files) {
             try {

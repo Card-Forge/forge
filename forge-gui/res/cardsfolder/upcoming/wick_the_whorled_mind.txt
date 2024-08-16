@@ -2,7 +2,7 @@ Name:Wick, the Whorled Mind
 ManaCost:3 B
 Types:Legendary Creature Rat Warlock
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rat.Other+YouCtrl | OptionalDecider$ You | Execute$ TrigBranch | TriggerDescription$ Whenever NICKNAME or another Rat you control enters, create a 1/1 black Snail creature token if you don't control a Snail. Otherwise, put a +1/+1 counter on a Snail you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rat.Other+YouCtrl | Execute$ TrigBranch | TriggerDescription$ Whenever NICKNAME or another Rat you control enters, create a 1/1 black Snail creature token if you don't control a Snail. Otherwise, put a +1/+1 counter on a Snail you control.
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBToken | FalseSubAbility$ DBPutCounter
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_snail | TokenOwner$ You
 SVar:DBPutCounter:DB$ PutCounter | Choices$ Snail.YouCtrl | CounterType$ P1P1 | CounterNum$ 1

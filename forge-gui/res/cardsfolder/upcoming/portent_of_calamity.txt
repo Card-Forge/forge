@@ -6,7 +6,7 @@ SVar:DBRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.IsImprinted | TypesFro
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn+IsImprinted | ChoiceZone$ Library | RememberChosen$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | Defined$ Remembered | SubAbility$ DBGraveyard
 SVar:DBGraveyard:DB$ ChangeZoneAll | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | ValidSA$ Spell | CheckSVar$ Y | SVarCompare$ GE4 | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SubAbility$ DBChangeZone2
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | ValidSA$ Spell | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE4 | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SubAbility$ DBChangeZone2
 SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Count$xPaid

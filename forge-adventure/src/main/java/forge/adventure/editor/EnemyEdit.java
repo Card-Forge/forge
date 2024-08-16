@@ -289,7 +289,7 @@ public class EnemyEdit extends FormPanel {
             tags.add(e.nextElement());
         }
 
-        tags.removeIf(q -> q.isEmpty());
+        tags.removeIf(String::isEmpty);
         currentData.questTags = tags.toArray(currentData.questTags);
         QuestController.getInstance().refresh();
         filterExisting(enemyModel);

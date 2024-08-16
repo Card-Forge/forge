@@ -861,7 +861,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        if (name == null || name.equals("")) return;
+        if (name == null || name.isEmpty()) return;
         inventoryItems.removeValue(name, false);
         if (equippedItems.values().contains(name) && !inventoryItems.contains(name, false)) {
             equippedItems.values().remove(name);

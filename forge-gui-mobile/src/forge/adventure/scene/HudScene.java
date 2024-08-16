@@ -24,6 +24,11 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     }
 
     @Override
+    public boolean touchCancelled (int x, int y, int pointer, int button) {
+        return touchUp(x, y, pointer, button);
+    }
+
+    @Override
     public void connected(final Controller controller) {
         hud.ui.controllerConnected();
     }

@@ -232,7 +232,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
         final byte[] buffer = new byte[1024];
         int len;
 
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outPath))) {
+        try (BufferedOutputStream out = new BufferedOutputStream(java.nio.file.Files.newOutputStream(Paths.get(outPath)))) {
             while ((len = in.read(buffer)) >= 0) {
                 out.write(buffer, 0, len);
             }

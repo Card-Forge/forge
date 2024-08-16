@@ -64,7 +64,7 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                 else {
                     inventoryPage.activateItems(items);
                 }
-                FThreads.invokeInEdtLater(() -> updateCreditsLabel());
+                FThreads.invokeInEdtLater(this::updateCreditsLabel);
             });
         });
     }
