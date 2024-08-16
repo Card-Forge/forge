@@ -51,6 +51,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;
+                        break;
                     }
                 }
             } else {

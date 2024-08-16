@@ -10,7 +10,7 @@ S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ CARDNAM
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ClearRemembered | Static$ True
 T:Mode$ Untaps | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ RemoveCounters | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ RemoveCounters | Secondary$ True | TriggerDescription$ When CARDNAME leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.
-SVar:RemoveCounters:DB$ RemoveCounter | Defined$ Creature.IsRemembered | CounterType$ M1M1 | CounterNum$ All | SubAbility$ ClearRemembered
+SVar:RemoveCounters:DB$ RemoveCounter | Defined$ Remembered | CounterType$ M1M1 | CounterNum$ All | SubAbility$ ClearRemembered
 SVar:ClearRemembered:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:You may choose not to untap Giant Oyster during your untap step.\n{T}: For as long as Giant Oyster remains tapped, target tapped creature doesn't untap during its controller's untap step, and at the beginning of each of your draw steps, put a -1/-1 counter on that creature. When Giant Oyster leaves the battlefield or becomes untapped, remove all -1/-1 counters from the creature.

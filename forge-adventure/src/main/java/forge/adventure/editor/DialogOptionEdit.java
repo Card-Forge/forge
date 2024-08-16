@@ -40,8 +40,8 @@ public class DialogOptionEdit extends FormPanel {
 
         add(middle);
 
-        name.getDocument().addDocumentListener(new DocumentChangeListener(() -> DialogOptionEdit.this.updateDialog()));
-        text.getDocument().addDocumentListener(new DocumentChangeListener(() -> DialogOptionEdit.this.updateDialog()));
+        name.getDocument().addDocumentListener(new DocumentChangeListener(DialogOptionEdit.this::updateDialog));
+        text.getDocument().addDocumentListener(new DocumentChangeListener(DialogOptionEdit.this::updateDialog));
 
 
     }

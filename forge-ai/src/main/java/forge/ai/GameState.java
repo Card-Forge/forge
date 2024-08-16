@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.card.CardStateName;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
@@ -1315,7 +1316,7 @@ public abstract class GameState {
                     c.setBackSide(true);
                 }
                 else if (info.startsWith("OnAdventure")) {
-                    String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
+                    String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell";
                     SpellAbility saAdventure = AbilityFactory.getAbility(abAdventure, c);
                     StringBuilder sbPlay = new StringBuilder();
                     sbPlay.append("Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonAdventure");
@@ -1396,7 +1397,7 @@ public abstract class GameState {
                 } else if (info.equals("ForetoldThisTurn")) {
                     c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
-                    c.setToken(true);
+                    c.setGamePieceType(GamePieceType.TOKEN);
                 }
             }
 

@@ -219,6 +219,14 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Tapped, c.isTapped());
     }
 
+    public GamePieceType getGamePieceType() {
+        return get(TrackableProperty.GamePieceType);
+    }
+    void updateGamePieceType(Card c) {
+        set(TrackableProperty.GamePieceType, c.getGamePieceType());
+    }
+
+    //Tracked separately from GamePieceType; a token card or a merged permanent with a token as the top is also considered a "token"
     public boolean isToken() {
         return get(TrackableProperty.Token);
     }
@@ -227,10 +235,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isImmutable() {
-        return get(TrackableProperty.IsImmutable);
-    }
-    public void updateImmutable(Card c) {
-        set(TrackableProperty.IsImmutable, c.isImmutable());
+        return get(TrackableProperty.GamePieceType) == GamePieceType.EFFECT;
     }
 
     public boolean isEmblem() {

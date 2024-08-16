@@ -82,7 +82,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
         // Deal with permanents
         final String valid = sa.getParamOrDefault("ValidCards", "");
-        if (!valid.equals("")) {
+        if (!valid.isEmpty()) {
             CardCollectionView list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), host, sa);
 
             for (final Card tgtC : list) {
@@ -107,7 +107,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
 
         // Deal with Players
         final String players = sa.getParamOrDefault("ValidPlayers", "");
-        if (!players.equals("")) {
+        if (!players.isEmpty()) {
             for (final Player player : AbilityUtils.getDefinedPlayers(host, players, sa)) {
                 player.addChangedKeywords(gainsKWList, ImmutableList.of(), timestamp, 0);
 

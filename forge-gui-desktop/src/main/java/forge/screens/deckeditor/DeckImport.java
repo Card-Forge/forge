@@ -518,7 +518,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             // we set it to the current one (if any) or set a new one.
             // In this way, if this deck will replace the current one, the name will be kept the same!
             if (!deck.hasName()){
-                if (currentDeckName.equals(""))
+                if (currentDeckName.isEmpty())
                     deck.setName(Localizer.getInstance().getMessage("lblNewDeckName"));
                 else
                     deck.setName(currentDeckName);

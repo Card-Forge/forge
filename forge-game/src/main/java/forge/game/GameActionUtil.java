@@ -17,9 +17,9 @@
  */
 package forge.game;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
@@ -41,7 +41,6 @@ import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.staticability.StaticAbilityLayer;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -572,111 +571,90 @@ public final class GameActionUtil {
         for (KeywordInterface ki : host.getKeywords()) {
             final String o = ki.getOriginal();
             if (o.startsWith("Casualty")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String n = o.split(":")[1];
-                    if (host.wasCast() && n.equals("X")) {
-                        CardCollectionView creatures = activator.getCreaturesInPlay();
-                        int max = Aggregates.max(creatures, Card::getNetPower);
-                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
-                    }
-                    final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
-                            " or greater>";
-                    final Cost cost = new Cost(casualtyCost, false);
-                    String str = "Pay for Casualty? " + cost.toSimpleString();
-                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                String n = o.split(":")[1];
+                if (host.wasCast() && n.equals("X")) {
+                    CardCollectionView creatures = activator.getCreaturesInPlay();
+                    int max = Aggregates.max(creatures, Card::getNetPower);
+                    n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
+                }
+                final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
+                        " or greater>";
+                final Cost cost = new Cost(casualtyCost, false);
+                String str = "Pay for Casualty? " + cost.toSimpleString();
+                boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
-                    tr.setSVar("CasualtyPaid", v ? "1" : "0");
-                    tr.getOverridingAbility().setSVar("CasualtyPaid", v ? "1" : "0");
-                    tr.setSVar("Casualty", v ? n : "0");
-                    tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
-
-                    if (v) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                if (v) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(ki, Integer.parseInt(n));
                 }
             } else if (o.equals("Conspire")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
-                        "creature that shares a color with " + host.getName() + ">";
-                    final Cost cost = new Cost(conspireCost, false);
-                    String str = "Pay for Conspire? " + cost.toSimpleString();
+                final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
+                    "creature that shares a color with " + host.getName() + ">";
+                final Cost cost = new Cost(conspireCost, false);
+                String str = "Pay for Conspire? " + cost.toSimpleString();
 
-                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
-                    tr.setSVar("Conspire", v ? "1" : "0");
-
-                    if (v) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                if (pc.addKeywordCost(sa, cost, ki, str)) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    result.setOptionalKeywordAmount(ki, 1);
+                    reset = true;
                 }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String str = "Pay for Offspring? " + cost.toSimpleString();
+                String str = "Pay for Offspring? " + cost.toSimpleString();
 
-                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
-                    tr.setSVar("Offspring", v ? "1" : "0");
+                boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
-                    if (v) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                if (v) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(ki, 1);
                 }
             } else if (o.startsWith("Replicate")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String costStr = o.split(":")[1];
-                    final Cost cost = new Cost(costStr, false);
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
 
-                    String str = "Choose Amount for Replicate: " + cost.toSimpleString();
+                String str = "Choose Amount for Replicate: " + cost.toSimpleString();
 
-                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
-                    tr.setSVar("ReplicateAmount", String.valueOf(v));
-                    tr.getOverridingAbility().setSVar("ReplicateAmount", String.valueOf(v));
-
-                    for (int i = 0; i < v; i++) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
                 }
             } else if (o.startsWith("Squad")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String costStr = o.split(":")[1];
-                    final Cost cost = new Cost(costStr, false);
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
 
-                    String str = "Choose amount for Squad: " + cost.toSimpleString();
+                String str = "Choose amount for Squad: " + cost.toSimpleString();
 
-                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
-                    tr.setSVar("SquadAmount", String.valueOf(v));
-                    tr.getOverridingAbility().setSVar("SquadAmount", String.valueOf(v));
-
-                    for (int i = 0; i < v; i++) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
                 }
             }
         }
@@ -727,7 +705,7 @@ public final class GameActionUtil {
 
         eff.setImageKey(sourceCard.getImageKey());
         eff.setColor(MagicColor.COLORLESS);
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
 
@@ -877,7 +855,7 @@ public final class GameActionUtil {
             return;
         }
 
-        if (fromZone != null) { // and not a copy
+        if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 

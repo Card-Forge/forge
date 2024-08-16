@@ -1,0 +1,38 @@
+[metadata]
+Code=YBLB
+Date=2024-08-20
+Name=Alchemy: Bloomburrow
+Type=Online
+ScryfallCode=YBLB
+
+[cards]
+1 R Awestruck Cygnet @Deruchenko Alexander
+2 U Cottontail Caretaker @Jakub Kasper
+3 U Sandcloud Harbinger @Justyna Dura
+4 R Three Tree Battalion @Leroy Steinmann
+5 R Archival Whorl @Sam Guay
+6 U Pool Resources @Michele Giorgi
+7 U Shellfish Scholar @Michael Phillippi
+8 R Tempest Trapper @Jakob Eirich
+9 U Chittering Skullspeaker @Christina Kraus
+10 R Putrefying Rotboar @Dave Kendall
+11 R Sanguine Soothsayer @David Astruga
+12 U Tasteful Offering @Dave Allsop
+13 U Brave Meadowguard @Jakub Kasper
+14 R Charged Conjuration @Steven Belledin
+15 U Cindercone Smite @Nereida
+16 R Bramblearmor Brawler @Jakob Eirich
+17 U Fountainport Charmer @Nereida
+18 U Traverse Valley @Omar Rayyan
+19 R Vigorous Farming @Jakob Eirich
+20 R Ace Flockbringer @Henry Peters
+21 M Buxton, Decorated Host @Justin Gerard
+22 R Darkstar Banisher @Michael Phillippi
+23 R Dazzling Flameweaver @Henry Peters
+24 M Euru, Acorn Scrounger @Dave Kendall
+25 M Indris, the Hydrostatic Surge @Michele Giorgi
+26 M Leaf-Leap Guide @David Astruga
+27 R Marshland Hordemaster @Justin Gerard
+28 M Recruit Instructor @Omar Rayyan
+29 R Resourceful Collector @Raluca Marinescu
+30 R Thought Rattle @Michele Giorgi

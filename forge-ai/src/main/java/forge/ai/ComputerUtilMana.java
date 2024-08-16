@@ -1040,7 +1040,7 @@ public class ComputerUtilMana {
         // If it's a low priority spell (it's explicitly marked so elsewhere in the AI with a SVar), always
         // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
         // AI profile variable.
-        if (sa.getSVar("LowPriorityAI").equals("")) {
+        if (sa.getSVar("LowPriorityAI").isEmpty()) {
             if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
                 return false;
             }

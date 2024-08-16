@@ -37,7 +37,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     @Override
     protected void finish() {
         //create new quest in game thread so option panes can wait for input
-        ThreadUtil.invokeInGameThread(() -> newConquest());
+        ThreadUtil.invokeInGameThread(this::newConquest);
     }
 
     private void newConquest() {

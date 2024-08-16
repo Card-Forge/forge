@@ -111,13 +111,13 @@ public class DeckRecognizer {
         // WARNING MESSAGES
         // ================
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
+            String ttext = setCode == null || setCode.isEmpty() ? cardName :
                     String.format("%s [%s]", cardName, setCode);
             return new Token(TokenType.UNKNOWN_CARD, count, ttext);
         }
 
         public static Token UnsupportedCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
+            String ttext = setCode == null || setCode.isEmpty() ? cardName :
                     String.format("%s [%s]", cardName, setCode);
             return new Token(TokenType.UNSUPPORTED_CARD, count, ttext);
         }
@@ -846,7 +846,7 @@ public class DeckRecognizer {
         }
         if (isCardRarity(text)){
             String tokenText = cardRarityTokenMatch(text);
-            if (tokenText != null && !tokenText.trim().equals(""))
+            if (tokenText != null && !tokenText.trim().isEmpty())
                 return new Token(TokenType.CARD_RARITY, tokenText);
             return null;
         }

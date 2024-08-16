@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.GamePieceType;
 import forge.game.card.*;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -124,7 +125,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setController(controller, timestamp);
                 }
                 tok.setGameTimestamp(timestamp);
-                tok.setToken(true);
+                tok.setGamePieceType(GamePieceType.TOKEN);
 
                 // do effect stuff with the token
                 if (sa.hasParam("TokenTapped")) {

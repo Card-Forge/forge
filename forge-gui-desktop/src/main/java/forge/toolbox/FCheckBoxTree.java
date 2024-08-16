@@ -209,7 +209,7 @@ public class FCheckBoxTree extends JTree {
     }
 
     public TreePath[] getCheckedPaths() {
-        return checkedPaths.toArray(new TreePath[checkedPaths.size()]);
+        return checkedPaths.toArray(new TreePath[0]);
     }
 
     /**
@@ -227,7 +227,7 @@ public class FCheckBoxTree extends JTree {
                 checkedValues.add(data.item);
             }
         }
-        return checkedValues.toArray(new Object[checkedValues.size()]);
+        return checkedValues.toArray(new Object[0]);
     }
 
     // Returns true in case that the node is selected, has children but not all of them are selected

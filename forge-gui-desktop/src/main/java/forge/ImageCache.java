@@ -185,14 +185,14 @@ public class ImageCache {
         }
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
-        if (!specColor.equals(""))
+        if (!specColor.isEmpty())
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (ipc != null) {
                 if (altState) {
                     imageKey = ipc.getCardAltImageKey();
-                } else if (!specColor.equals("")) {
+                } else if (!specColor.isEmpty()) {
                     switch (specColor) {
                         case "white":
                             imageKey = ipc.getCardWSpecImageKey();
