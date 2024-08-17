@@ -66,6 +66,6 @@ Type=Funny
 59 R The Belligerent and Useless Island
 60 C Common Curve Filler
 
-[prizes]
+[promo]
 61 M Minnea, Planar Tourist
 62 M Polis the Planeshifter

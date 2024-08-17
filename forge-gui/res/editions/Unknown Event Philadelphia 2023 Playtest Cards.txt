@@ -66,6 +66,6 @@ Type=Funny
 59 R Who's That Praetor?
 60 R Call Up Emrakul to Help
 
-[prizes]
+[promo]
 61 M Phila, Unsealed
 62 M Delphia, Undecided

@@ -35,11 +35,14 @@ Type=Funny
 28 U Gingerbehemoth
 29 C Command Mine
 30 C Command Power Plant
+31 R Kevin, Questing Dragon
+32 R Takesies // Backsies
+33 R Trampled Lotus
 
-[prizes]
-31 M You, Magic Playtester
+[promo]
+34 M You, Magic Playtester
 
-[you make]
-32 R Kevin, Questing Dragon
-33 R Takesies // Backsies
-34 R Trampled Lotus
+[You Make The Card]
+1 Kevin, Questing Dragon|UNKLAS23
+1 Takesies // Backsies|UNKLAS23
+1 Trampled Lotus|UNKLAS23

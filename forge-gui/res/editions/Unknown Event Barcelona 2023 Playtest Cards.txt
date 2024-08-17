@@ -66,6 +66,6 @@ Type=Funny
 59 C Your Mana Rock
 60 U Mana Conference
 
-[prizes]
+[promo]
 61 M Barce, Friend Finder
 62 R Lona, Tracker of the Known

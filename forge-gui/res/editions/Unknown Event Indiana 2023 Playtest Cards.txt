@@ -66,5 +66,5 @@ Type=Funny
 59 C Your Mana Rock
 60 U Mana Conference
 
-[prizes]
+[promo]
 61 M Gen, Confider of Ages
