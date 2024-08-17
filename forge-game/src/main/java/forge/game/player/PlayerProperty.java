@@ -193,10 +193,6 @@ public class PlayerProperty {
             if (!player.hasTappedLandForManaThisTurn()) {
                 return false;
             }
-        } else if (property.equals("NoCardsInHandAtBeginningOfTurn")) {
-            if (player.getNumCardsInHandStartedThisTurnWith() > 0) {
-                return false;
-            }
         } else if (property.equals("CardsInHandAtBeginningOfTurn")) {
             if (player.getNumCardsInHandStartedThisTurnWith() <= 0) {
                 return false;

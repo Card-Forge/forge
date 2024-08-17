@@ -1991,7 +1991,6 @@ public class CardFactoryUtil {
             final Trigger t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             t.setOverridingAbility(sa);
             inst.addTrigger(t);
-
         } else if (keyword.startsWith("Prize")) {
             final String[] k = keyword.split(":");
 
