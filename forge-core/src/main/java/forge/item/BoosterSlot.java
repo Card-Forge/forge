@@ -1,7 +1,5 @@
 package forge.item;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
 import java.util.TreeMap;
 
@@ -44,16 +42,6 @@ public class BoosterSlot {
                 slotPercentages.put(startRange, replaceParts[1]);
             }
         }
-    }
-
-    public List<String> getSlotSheet(int amount) {
-        // For the first item in the slot, run float percentages
-        List<String> sheets = Lists.newArrayList();
-        sheets.add(replaceSlot());
-        for(int i = 1; i < amount; i++) {
-            sheets.add(baseRarity);
-        }
-        return sheets;
     }
 
     public String replaceSlot() {
