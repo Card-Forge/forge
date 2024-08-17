@@ -1,6 +1,6 @@
 Name:Ambition's Cost
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Draw | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ DB
-SVar:DB:DB$ LoseLife | LifeAmount$ 3
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ You draw three cards and you lose 3 life. | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
 Oracle:You draw three cards and you lose 3 life.

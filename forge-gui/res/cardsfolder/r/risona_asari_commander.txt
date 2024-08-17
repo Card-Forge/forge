@@ -1,5 +1,4 @@
 Name:Risona, Asari Commander
-Nickname:Risona
 ManaCost:1 R W
 Types:Legendary Creature Human Samurai
 PT:3/3

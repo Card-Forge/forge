@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Vigilance | AddSVar$ EnchantMe | Description$ Enchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ X | AddToughness$ X | AddKeyword$ Vigilance | AddSVar$ EnMe | Description$ Enchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
 SVar:X:Count$Valid Aura.AttachedTo Creature.EnchantedBy/Times.2
-SVar:EnchantMe:Multiple
+SVar:EnMe:SVar:EnchantMe:Multiple
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 for each Aura attached to it and has vigilance.
