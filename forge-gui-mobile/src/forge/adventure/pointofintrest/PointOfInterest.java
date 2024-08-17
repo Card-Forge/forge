@@ -10,6 +10,7 @@ import forge.adventure.util.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -80,9 +81,7 @@ public class PointOfInterest implements Serializable, SaveFileContent {
         data = d;
         active = d.active;
         position.set(pos);
-        for (DialogData.ActionData.QuestFlag flag : data.questFlagsToActivate) {
-            questFlagsToActivate.add(flag);
-        }
+        questFlagsToActivate.addAll(Arrays.asList(data.questFlagsToActivate));
 
         rectangle.set(position.x, position.y, sprite.getWidth(), sprite.getHeight());
     }

@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -22,8 +20,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         final String phase = sa.getParam("Phase");
         final String step = sa.getParam("Step");
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player player : tgtPlayers) {
+        for (final Player player : getTargetPlayers(sa)) {
             sb.append(player).append(" ");
             sb.append("skips their ");
             if (duration == null) {
@@ -45,8 +42,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         final String phase = sa.getParam("Phase");
         final String step = sa.getParam("Step");
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player player : tgtPlayers) {
+        for (final Player player : getTargetPlayers(sa)) {
             createSkipPhaseEffect(sa, player, duration, phase, step);
         }
     }

@@ -102,7 +102,7 @@ public class DeckController<T extends DeckBase> {
                 newModel();
                 isStored = false;
             } else
-                isStored = !this.modelPath.equals("");
+                isStored = !this.modelPath.isEmpty();
         } else {
             CardPool catalogClone = new CardPool(view.getInitialCatalog());
             deck = pickFromCatalog(deck, catalogClone);

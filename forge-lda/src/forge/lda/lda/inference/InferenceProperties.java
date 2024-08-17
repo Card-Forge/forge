@@ -16,10 +16,10 @@
 
 package forge.lda.lda.inference;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class InferenceProperties {
@@ -63,8 +63,8 @@ public class InferenceProperties {
 }
 
 class PropertiesLoader {
-    public InputStream getInputStream(String fileName) throws FileNotFoundException {
+    public InputStream getInputStream(String fileName) throws IOException {
         if (fileName == null) throw new NullPointerException();
-        return new FileInputStream(fileName);
+        return Files.newInputStream(Paths.get(fileName));
     }
 }

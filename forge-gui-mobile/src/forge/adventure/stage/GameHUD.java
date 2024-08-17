@@ -295,7 +295,7 @@ public class GameHUD extends Stage {
                 updatelife = true;
             }
         } else {
-            if (!lifepointsTextColor.equals("")) {
+            if (!lifepointsTextColor.isEmpty()) {
                 lifepointsTextColor = "";
                 updatelife = true;
             }

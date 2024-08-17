@@ -124,7 +124,7 @@ public final class ItemManagerModel<T extends InventoryItem> {
     public void refreshSort() {
         final List<Entry<T, Integer>> list = getOrderedList();
         if (list.isEmpty()) { return; }
-        try { Collections.sort(list, new MyComparator()); }
+        try { list.sort(new MyComparator()); }
         //fix NewDeck editor not loading on Android if a user deleted unwanted sets on edition folder
         catch (IllegalArgumentException ex) {}
     }

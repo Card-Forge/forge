@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.GamePieceType;
 import forge.game.card.*;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
@@ -116,7 +117,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = new CardCopyService(prototype).copyCard(true);
                 // disconnect from prototype
-                tok.getStates().forEach(cs -> tok.getState(cs).resetOriginalHost());
+                tok.getStates().forEach(cs -> tok.getState(cs).resetOriginalHost(prototype));
                 // Crafty Cutpurse would change under which control it does enter,
                 // but it shouldn't change who creates the token
                 tok.setOwner(creator);
@@ -124,7 +125,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     tok.setController(controller, timestamp);
                 }
                 tok.setGameTimestamp(timestamp);
-                tok.setToken(true);
+                tok.setGamePieceType(GamePieceType.TOKEN);
 
                 // do effect stuff with the token
                 if (sa.hasParam("TokenTapped")) {

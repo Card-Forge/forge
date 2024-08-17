@@ -382,25 +382,14 @@ public class CardStorageReader {
      * @return a new Card instance
      */
     protected final CardRules loadCard(final CardRules.Reader reader, final File file) {
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(file);
+        try (InputStream fileInputStream = java.nio.file.Files.newInputStream(file.toPath())) {
             reader.reset();
             final List<String> lines = readScript(fileInputStream);
             return reader.readCard(lines, Files.getNameWithoutExtension(file.getName()));
         } catch (final FileNotFoundException ex) {
             throw new RuntimeException("CardReader : run error -- file not found: " + file.getPath(), ex);
         } catch (final Exception ex) {
-            System.out.println("Error loading cardscript " + file.getName() + ". Please close Forge and resolve this.");
-            throw ex;
-        } finally {
-            try {
-                assert fileInputStream != null;
-                fileInputStream.close();
-            } catch (final IOException ignored) {
-                // 11:08
-                // PM
-            }
+            throw new RuntimeException("Error loading cardscript " + file.getName() + ". Please close Forge and resolve this.", ex);
         }
     }
 

@@ -338,7 +338,7 @@ public abstract class GuiDownloadService implements Runnable {
             }
             catch (final FileNotFoundException fnfe) {
                 String formatStr = "  Error - the LQ picture %s could not be found on the server. [%s] - %s";
-                System.out.println(String.format(formatStr, fileDest.getName(), url, fnfe.getMessage()));
+                System.out.printf((formatStr) + "%n", fileDest.getName(), url, fnfe.getMessage());
             }
             catch (final Exception ex) {
                 Log.error("LQ Pictures", "Error downloading pictures", ex);

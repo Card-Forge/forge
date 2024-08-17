@@ -1,0 +1,5 @@
+Name:Fabled Path of Searo Point
+ManaCost:no cost
+Types:Legendary Land Mountain
+A:AB$ PumpAll | Cost$ W U B R G T | ValidCards$ Creature.YouCtrl | KW$ Landwalk:Land | SpellDescription$ Creatures you control gain landwalk until end of turn.
+Oracle:{W}{U}{B}{R}{G}, {T}: Creatures you control gain landwalk until end of turn.

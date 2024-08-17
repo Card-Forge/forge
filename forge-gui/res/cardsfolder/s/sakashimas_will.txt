@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare Y GE1.2.1 | Choices$ DBControl,DBClone | AdditionalDescription$ . If you control a commander as you cast this spell, you may choose both.
 SVar:DBControl:DB$ ChooseCard | ValidTgts$ Opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ DBGainControl | AILogic$ WorstCard | SpellDescription$ Target opponent chooses a creature they control. You gain control of it.
 SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ You
-SVar:DBClone:DB$ Clone | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | ExcludeChosen$ True | CloneTarget$ Valid Creature.YouCtrl | Duration$ UntilEndOfTurn
+SVar:DBClone:DB$ Clone | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | ExcludeChosen$ True | CloneTarget$ Valid Creature.YouCtrl | Duration$ UntilEndOfTurn | SpellDescription$ Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.
 SVar:Y:Count$Valid Card.IsCommander+YouCtrl
 SVar:PlayMain1:TRUE
 Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Target opponent chooses a creature they control. You gain control of it.\n• Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.

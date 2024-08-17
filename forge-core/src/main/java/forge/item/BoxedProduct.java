@@ -10,7 +10,7 @@ public abstract class BoxedProduct extends SealedProduct {
 	
 	private int numberOfPacks;
 	
-	public BoxedProduct(String name0, Template boosterData, int numberOfPacks) {
+	public BoxedProduct(String name0, SealedTemplate boosterData, int numberOfPacks) {
 		super(name0, boosterData);
 		this.numberOfPacks = numberOfPacks;
 	}

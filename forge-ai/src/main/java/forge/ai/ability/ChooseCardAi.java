@@ -168,7 +168,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             logic = logic.replace("NotSelf", "");
         }
         Card choice = null;
-        if (logic.equals("")) {
+        if (logic.isEmpty()) {
             // Base Logic is choose "best"
             choice = ComputerUtilCard.getBestAI(options);
         } else if ("WorstCard".equals(logic)) {

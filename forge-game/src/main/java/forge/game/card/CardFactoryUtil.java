@@ -542,7 +542,7 @@ public class CardFactoryUtil {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("Ability", rawAbility);
-                Sentry.addBreadcrumb(bread, card);
+                Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
                 throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
@@ -683,7 +683,7 @@ public class CardFactoryUtil {
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.isEmpty() ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), intrinsic, card);
 
@@ -907,13 +907,16 @@ public class CardFactoryUtil {
             String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True";
             String[] k = keyword.split(":");
             if (k.length > 2) {
-                abString = abString + " | " + k[2];
+                abString += " | " + k[2];
             }
 
             final Trigger casualtyTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
-            casualtyTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
-            casualtyTrigger.setSVar("Casualty", "0");
-            casualtyTrigger.setSVar("CasualtyPaid", "0");
+            SpellAbility sa = AbilityFactory.getAbility(abString, card);
+            sa.setSVar("CasualtyPaid", "Count$hasOptionalKeywordAmount");
+            sa.setSVar("Casualty", "Count$OptionalKeywordAmount");
+            casualtyTrigger.setOverridingAbility(sa);
+            casualtyTrigger.setSVar("CasualtyPaid", "Count$hasOptionalKeywordAmount");
+            casualtyTrigger.setSVar("Casualty", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(casualtyTrigger);
         } else if (keyword.startsWith("Chapter")) {
@@ -960,7 +963,7 @@ public class CardFactoryUtil {
 
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             conspireTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
-            conspireTrigger.setSVar("Conspire", "0");
+            conspireTrigger.setSVar("Conspire", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(conspireTrigger);
         } else if (keyword.startsWith("Cumulative upkeep")) {
@@ -1585,14 +1588,14 @@ public class CardFactoryUtil {
                 costDesc = "—" + costDesc;
             }
 
-            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+linkedCastTrigger | CheckSVar$ Offspring | Secondary$ True " +
+            final String trigStr = "Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Offspring | Secondary$ True " +
                     "| TriggerDescription$ Offspring " + costDesc + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NumCopies$ 1 | SetPower$ 1 | SetToughness$ 1";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-            trigger.setSVar("Offspring", "0");
+            trigger.setSVar("Offspring", "Count$OptionalKeywordAmount");
 
             inst.addTrigger(trigger);            
         } else if (keyword.startsWith("Partner:")) {
@@ -1697,7 +1700,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
 
             String renownTrig = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player"
-                    + " | IsPresent$ Card.Self+IsNotRenowned | CombatDamage$ True | Secondary$ True"
+                    + " | IsPresent$ Card.Self+!IsRenowned | CombatDamage$ True | Secondary$ True"
                     + " | TriggerDescription$ Renown " + k[1] +" (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | Defined$ Self | "
@@ -1743,9 +1746,9 @@ public class CardFactoryUtil {
 
             final Trigger replicateTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility replicateAbility = AbilityFactory.getAbility(abString, card);
-            replicateAbility.setSVar("ReplicateAmount", "0");
+            replicateAbility.setSVar("ReplicateAmount", "Count$OptionalKeywordAmount");
             replicateTrigger.setOverridingAbility(replicateAbility);
-            replicateTrigger.setSVar("ReplicateAmount", "0");
+            replicateTrigger.setSVar("ReplicateAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(replicateTrigger);
         } else if (keyword.startsWith("Ripple")) {
             final String[] k = keyword.split(":");
@@ -1825,9 +1828,9 @@ public class CardFactoryUtil {
 
             final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
             final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);
-            squadAbility.setSVar("SquadAmount", "0");
+            squadAbility.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             squadTrigger.setOverridingAbility(squadAbility);
-            squadTrigger.setSVar("SquadAmount", "0");
+            squadTrigger.setSVar("SquadAmount", "Count$OptionalKeywordAmount");
             inst.addTrigger(squadTrigger);
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
@@ -1988,7 +1991,6 @@ public class CardFactoryUtil {
             final Trigger t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             t.setOverridingAbility(sa);
             inst.addTrigger(t);
-
         } else if (keyword.startsWith("Prize")) {
             final String[] k = keyword.split(":");
 
@@ -3226,7 +3228,7 @@ public class CardFactoryUtil {
             String desc = "Monstrosity " + magnitude;
 
             String effect = "AB$ PutCounter | Cost$ " + manacost + " | ConditionPresent$ "
-                    + "Card.Self+IsNotMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
+                    + "Card.Self+!IsMonstrous | Monstrosity$ True | CounterNum$ " + magnitude
                     + " | CounterType$ P1P1 | StackDescription$ SpellDescription";
             if (reduceCost != null) {
                 effect += "| ReduceCost$ " + reduceCost;
@@ -4146,7 +4148,7 @@ public class CardFactoryUtil {
 
         SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
-        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell+nonToken";
+        String abEffect = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.!copiedSpell+nonToken";
         AbilitySub saEffect = (AbilitySub)AbilityFactory.getAbility(abEffect, card);
 
         StringBuilder sbPlay = new StringBuilder();

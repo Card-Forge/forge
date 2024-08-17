@@ -92,11 +92,7 @@ public class QuestPetStorage {
         * Refactoring this to List<QuestPetController> list = this.petsBySlot.computeIfAbsent(Integer.valueOf(iSlot), k -> new ArrayList<QuestPetController>());
         * will cause Android not to compile
         * */
-        List<QuestPetController> list = this.petsBySlot.get(iSlot);
-        if (null == list) {
-            list = new ArrayList<>();
-            this.petsBySlot.put(iSlot, list);
-        }
+        List<QuestPetController> list = this.petsBySlot.computeIfAbsent(iSlot, k -> new ArrayList<>());
         this.petsByName.put(petCtrl.getName(), petCtrl);
         list.add(petCtrl);
     }
