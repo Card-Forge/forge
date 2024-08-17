@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Legendary Creature Cat Warrior
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/1 white Cat Warrior creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_1_cat_warrior | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_1_cat_warrior
 T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Cat.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever one or more other Cats you control die, you may exile NICKNAME, then return him to the battlefield transformed under his owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup

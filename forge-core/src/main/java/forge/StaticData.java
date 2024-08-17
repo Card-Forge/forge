@@ -52,9 +52,9 @@ public class StaticData {
     private boolean sourceImageForClone;
 
     // Loaded lazily:
-    private IStorage<SealedProduct.Template> boosters;
-    private IStorage<SealedProduct.Template> specialBoosters;
-    private IStorage<SealedProduct.Template> tournaments;
+    private IStorage<SealedTemplate> boosters;
+    private IStorage<SealedTemplate> specialBoosters;
+    private IStorage<SealedTemplate> tournaments;
     private IStorage<FatPack.Template> fatPacks;
     private IStorage<BoosterBox.Template> boosterBoxes;
     private IStorage<PrintSheet> printSheets;
@@ -362,23 +362,23 @@ public class StaticData {
         return this.commonCards.contains(cr.cardName) || this.variantCards.contains(cr.cardName);
     }
 
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
-    public final IStorage<SealedProduct.Template> getTournamentPacks() {
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedTemplate}> */
+    public final IStorage<SealedTemplate> getTournamentPacks() {
         if (tournaments == null)
-            tournaments = new StorageBase<>("Starter sets", new SealedProduct.Template.Reader(new File(blockDataFolder, "starters.txt")));
+            tournaments = new StorageBase<>("Starter sets", new SealedTemplate.Reader(new File(blockDataFolder, "starters.txt")));
         return tournaments;
     }
 
-    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
-    public final IStorage<SealedProduct.Template> getBoosters() {
+    /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedTemplate}> */
+    public final IStorage<SealedTemplate> getBoosters() {
         if (boosters == null)
             boosters = new StorageBase<>("Boosters", editions.getBoosterGenerator());
         return boosters;
     }
 
-    public final IStorage<SealedProduct.Template> getSpecialBoosters() {
+    public final IStorage<SealedTemplate> getSpecialBoosters() {
         if (specialBoosters == null)
-            specialBoosters = new StorageBase<>("Special boosters", new SealedProduct.Template.Reader(new File(blockDataFolder, "boosters-special.txt")));
+            specialBoosters = new StorageBase<>("Special boosters", new SealedTemplate.Reader(new File(blockDataFolder, "boosters-special.txt")));
         return specialBoosters;
     }
 

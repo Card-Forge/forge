@@ -47,6 +47,7 @@ public class CardCopyService {
 
             // need to copy this values for the tokens
             out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+            out.setCopiedPermanent(copyFrom.getCopiedPermanent());
         } else {
             out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
                     : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
@@ -214,7 +215,7 @@ public class CardCopyService {
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
         bread.setData("Player", copyFrom.getController().getName());
-        Sentry.addBreadcrumb(bread, copyFrom);
+        Sentry.addBreadcrumb(bread);
 
         final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);

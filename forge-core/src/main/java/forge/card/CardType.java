@@ -972,7 +972,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isASubType(final String cardType) {
-        return (!isASupertype(cardType) && !isACardType(cardType));
+        return getSortedSubTypes().contains(cardType);
     }
 
     public static boolean isAnArtifactType(final String cardType) {

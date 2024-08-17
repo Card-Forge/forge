@@ -1156,11 +1156,9 @@ public class AbilityUtils {
                 players.add(p);
             }
         } else if (defined.equals("Promised")) {
-            if (card != null) {
-                final Player p = card.getPromisedGift();
-                if (p != null) {
-                    players.add(p);
-                }
+            final Player p = card.getPromisedGift();
+            if (p != null) {
+                players.add(p);
             }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
@@ -1893,10 +1891,10 @@ public class AbilityUtils {
                 }
                 return doXMath(v, expr, c, ctb);
             }
+
             if (sq[0].equals("hasOptionalKeywordAmount")) {
                 return doXMath(c.getCastSA() != null && c.getCastSA().hasOptionalKeywordAmount(ctb.getKeyword()) ? 1 : 0, expr, c, ctb);
             }
-
             if (sq[0].equals("OptionalKeywordAmount")) {
                 return doXMath(c.getCastSA() != null ? c.getCastSA().getOptionalKeywordAmount(ctb.getKeyword()) : 0, expr, c, ctb);
             }
