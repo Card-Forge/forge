@@ -1178,9 +1178,6 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
-        for (Card cmd : p.getCommanders()) {
-            p.getZone(ZoneType.Command).add(Player.createCommanderEffect(p.getGame(), cmd));
-        }
 
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
@@ -1326,10 +1323,7 @@ public abstract class GameState {
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                     c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
-                    c.setCommander(true);
-                    List<Card> cmd = Lists.newArrayList(player.getCommanders());
-                    cmd.add(c);
-                    player.setCommanders(cmd);
+                    player.addCommander(c);
                 } else if (info.startsWith("IsRingBearer")) {
                     c.setRingBearer(true);
                     player.setRingBearer(c);

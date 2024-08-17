@@ -176,9 +176,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int teamNumber = -1;
     private Card activeScheme = null;
-    private final List<Card> commanders = Lists.newArrayList();
+    private final CardCollection commanders = new CardCollection();
     private final Map<Card, Integer> commanderCast = Maps.newHashMap();
-    private final Map<Card, DetachedCardEffect> commanderEffects = Maps.newHashMap();
+    private final Map<Card, Card> commanderEffects = Maps.newHashMap();
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private CardCollection lostOwnership = new CardCollection();
@@ -2768,31 +2768,75 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commanders;
     }
     public void setCommanders(List<Card> commanders) {
-        if (new HashSet<>(this.commanders).containsAll(commanders)) { return; }
-        this.commanders.clear();
-        this.commanders.addAll(commanders);
-        view.updateCommander(this);
+        boolean needsUpdate = false;
+        //Remove any existing commanders not in the new list.
+        for(Card oldCommander : this.commanders) {
+            if(commanders.contains(oldCommander))
+                continue;
+            needsUpdate = true;
+            this.commanders.remove(oldCommander);
+            oldCommander.setCommander(false);
+            this.cleanupCommanderEffect(oldCommander);
+        }
+        //Add any new commanders that aren't in the existing list.
+        for(Card newCommander : commanders) {
+            assert(this.equals(newCommander.getOwner()));
+            if(this.commanders.contains(newCommander))
+                continue;
+
+            needsUpdate = true;
+            this.commanders.add(newCommander);
+            newCommander.setCommander(true);
+            this.createCommanderEffect(newCommander);
+        }
+        if(needsUpdate) {
+            view.updateCommander(this);
+        }
+    }
+
+    public void copyCommandersToSnapshot(Player toPlayer, Game toGame) {
+        //Seems like the rest of the logic for copying players should be in this class too.
+        //For now, doing this here can retain the links between commander effects and commanders.
+
+        toPlayer.resetCommanderStats();
+        toPlayer.commanders.clear();
+        for (final Card c : this.getCommanders()) {
+            Card newCommander = toGame.findById(c.getId());
+            Card newCommanderEffect = toGame.findById(commanderEffects.get(c).getId());
+            if(newCommander == null || newCommanderEffect == null)
+                throw new RuntimeException("Unable to find commander in game snapshot: " + c);
+            toPlayer.commanders.add(newCommander);
+            toPlayer.commanderEffects.put(newCommander, newCommanderEffect);
+            newCommander.setCommander(true);
+        }
+        for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
+            //Have to iterate over this separately in case commanders change mid-game.
+            Card commander = toGame.findById(entry.getKey().getId());
+            toPlayer.commanderCast.put(commander, entry.getValue());
+        }
+        for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
+            Card commander = toGame.findById(entry.getKey().getId());
+            int damage = entry.getValue();
+            toPlayer.addCommanderDamage(commander, damage);
+        }
     }
 
     public void addCommander(Card commander) {
+        assert(this.equals(commander.getOwner())); //Making someone else's card your commander isn't currently supported.
         if(this.commanders.contains(commander))
             return;
         this.commanders.add(commander);
-        getZone(ZoneType.Command).add(createCommanderEffect(game, commander));
+        this.createCommanderEffect(commander);
         commander.setCommander(true);
         view.updateCommander(this);
-        view.updateCommanderDamage(this);
     }
 
     public void removeCommander(Card commander) {
         if(!this.commanders.remove(commander))
             return;
-        DetachedCardEffect commanderEffect = commanderEffects.get(commander);
-        if(commanderEffect != null)
-            game.getAction().exileEffect(commanderEffect);
+        this.cleanupCommanderEffect(commander);
         commander.setCommander(false);
         view.updateCommander(this);
-        view.updateCommanderDamage(this);
     }
 
     public Iterable<Entry<Card, Integer>> getCommanderDamage() {
@@ -2942,7 +2986,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // Commander
         if (!registeredPlayer.getCommanders().isEmpty()) {
-            List<Card> commanders = Lists.newArrayList();
             for (PaperCard pc : registeredPlayer.getCommanders()) {
                 Card cmd = Card.fromPaperCard(pc, this);
                 boolean color = false;
@@ -2965,19 +3008,14 @@ public class Player extends GameEntity implements Comparable<Player> {
                             Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
                                     Lang.joinHomogenous(chosenColors)), p);
                 }
-                cmd.setCommander(true);
                 com.add(cmd);
-                commanders.add(cmd);
-                com.add(createCommanderEffect(game, cmd));
+                this.addCommander(cmd);
             }
-            this.setCommanders(commanders);
         }
         else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
             Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
-            cmd.setCommander(true);
             com.add(cmd);
-            setCommanders(Lists.newArrayList(cmd));
-            com.add(createCommanderEffect(game, cmd));
+            this.addCommander(cmd);
         }
 
         // Conspiracies
@@ -3153,7 +3191,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         return eff;
     }
 
-    public static DetachedCardEffect createCommanderEffect(Game game, Card commander) {
+    private void createCommanderEffect(Card commander) {
+        this.cleanupCommanderEffect(commander); //TODO: remove
+
         final String name = Lang.getInstance().getPossesive(commander.getName()) + " Commander Effect";
         DetachedCardEffect eff = new DetachedCardEffect(commander, name);
 
@@ -3196,7 +3236,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         eff.addStaticAbility(mayBePlayedAbility);
         commander.getOwner().commanderEffects.put(commander, eff);
-        return eff;
+        getZone(ZoneType.Command).add(eff);
+    }
+
+    private void cleanupCommanderEffect(Card commander) {
+        Card existing = commanderEffects.get(commander);
+        if(existing == null) {
+            return;
+        }
+        game.getAction().exileEffect(existing);
+        commanderEffects.remove(commander);
     }
 
     public void createPlanechaseEffects(Game game) {

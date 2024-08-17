@@ -115,7 +115,6 @@ public class GameCopier {
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
             }
-            newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
             playerMap.put(origPlayer, newPlayer);
         }
 
@@ -129,27 +128,10 @@ public class GameCopier {
 
         copyGameState(newGame, aiPlayer);
 
-        for (Player p : newGame.getPlayers()) {
-            List<Card> commanders = Lists.newArrayList();
-            for (final Card c : p.getCommanders()) {
-                commanders.add(gameObjectMap.map(c));
-            }
-            p.setCommanders(commanders);
-            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
-        }
         for (Player origPlayer : playerMap.keySet()) {
             Player newPlayer = playerMap.get(origPlayer);
-            for (final Card c : origPlayer.getCommanders()) {
-                Card newCommander = gameObjectMap.map(c);
-                int castTimes = origPlayer.getCommanderCast(c);
-                for (int i = 0; i < castTimes; i++) {
-                    newPlayer.incCommanderCast(newCommander);
-                }
-            }
-            for (Map.Entry<Card, Integer> entry : origPlayer.getCommanderDamage()) {
-                Card newCommander = gameObjectMap.map(entry.getKey());
-                newPlayer.addCommanderDamage(newCommander, entry.getValue());
-            }
+            origPlayer.copyCommandersToSnapshot(newPlayer, newGame);
+            ((PlayerZoneBattlefield) newPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
