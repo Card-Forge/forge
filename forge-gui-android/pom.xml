@@ -7,7 +7,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.64-SNAPSHOT</alpha-version>
+        <alpha-version>1.6.65-SNAPSHOT</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -20,7 +20,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.64-SNAPSHOT</version>
+        <version>1.6.65-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android</artifactId>
-            <version>5.7.0</version>
+            <version>7.14.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -150,7 +150,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-core</artifactId>
-            <version>5.7.0</version>
+            <version>7.14.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -170,7 +170,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-ndk</artifactId>
-            <version>5.7.0</version>
+            <version>7.14.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -190,12 +190,6 @@
                     <artifactId>core</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <!-- runtime dependency of sentry -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>

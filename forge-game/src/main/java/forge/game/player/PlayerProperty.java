@@ -73,10 +73,6 @@ public class PlayerProperty {
             if (player.equals(sourceController)) {
                 return false;
             }
-        } else if (property.equals("OtherThanSourceOwner")) {
-            if (player.equals(source.getOwner())) {
-                return false;
-            }
         } else if (property.equals("CardOwner")) {
             if (!player.equals(source.getOwner())) {
                 return false;
@@ -89,10 +85,6 @@ public class PlayerProperty {
             if (player.getCommittedCrimeThisTurn() < 1) return false;
         } else if (property.equals("isMonarch")) {
             if (!player.isMonarch()) {
-                return false;
-            }
-        } else if (property.equals("isNotMonarch")) {
-            if (player.isMonarch()) {
                 return false;
             }
         } else if (property.equals("hasInitiative")) {
@@ -199,10 +191,6 @@ public class PlayerProperty {
             }
         } else if (property.equals("TappedLandForManaThisTurn")) {
             if (!player.hasTappedLandForManaThisTurn()) {
-                return false;
-            }
-        } else if (property.equals("NoCardsInHandAtBeginningOfTurn")) {
-            if (player.getNumCardsInHandStartedThisTurnWith() > 0) {
                 return false;
             }
         } else if (property.equals("CardsInHandAtBeginningOfTurn")) {

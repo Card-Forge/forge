@@ -88,9 +88,9 @@ public class DigEffect extends SpellAbilityEffect {
                     sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
                 }
                 sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
-                if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
-                    String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
-                            sa.getParam("ExileWithCounter");
+                if (sa.hasParam("WithCounters") || sa.hasParam("ExileWithCounters")) {
+                    String ctr = sa.hasParam("WithCounters") ? sa.getParam("WithCounters") :
+                            sa.getParam("ExileWithCounters");
                     sb.append("with a ");
                     sb.append(CounterType.getType(ctr).getName().toLowerCase());
                     sb.append(" counter on it. They ");
@@ -399,12 +399,12 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("GainControl")) {
                                     c.setController(activator, game.getNextTimestamp());
                                 }
-                                if (sa.hasParam("WithCounter")) {
+                                if (sa.hasParam("WithCounters")) {
                                     final int numCtr = AbilityUtils.calculateAmount(host,
-                                            sa.getParamOrDefault("WithCounterNum", "1"), sa);
+                                            sa.getParamOrDefault("WithCountersAmount", "1"), sa);
 
                                     GameEntityCounterTable table = new GameEntityCounterTable();
-                                    table.put(activator, c, CounterType.getType(sa.getParam("WithCounter")), numCtr);
+                                    table.put(activator, c, CounterType.getType(sa.getParam("WithCounters")), numCtr);
                                     moveParams.put(AbilityKey.CounterTable, table);
                                 }
                             }
@@ -424,8 +424,8 @@ public class DigEffect extends SpellAbilityEffect {
                                     combatChanged = true;
                                 }
                             } else if (destZone1.equals(ZoneType.Exile)) {
-                                if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
+                                if (sa.hasParam("ExileWithCounters")) {
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounters")), 1, activator, counterTable);
                                 }
                                 handleExiledWith(c, sa);
                             }
@@ -490,8 +490,8 @@ public class DigEffect extends SpellAbilityEffect {
                                 }
                                 c = game.getAction().moveTo(destZone2, c, sa, moveParams);
                                 if (destZone2 == ZoneType.Exile) {
-                                    if (sa.hasParam("ExileWithCounter")) {
-                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
+                                    if (sa.hasParam("ExileWithCounters")) {
+                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounters")), 1, activator, counterTable);
                                     }
                                     handleExiledWith(c, sa);
                                     if (remZone2) {

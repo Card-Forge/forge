@@ -1304,9 +1304,6 @@ public class CardProperty {
             if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
                 return false;
             }
-        } else if (property.startsWith("notAttackedLastTurn")) {
-            return !card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
-
         } else if (property.startsWith("greatestPower")) {
             CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             if (property.contains("ControlledBy")) {

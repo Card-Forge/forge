@@ -542,7 +542,7 @@ public class CardFactoryUtil {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("Ability", rawAbility);
-                Sentry.addBreadcrumb(bread, card);
+                Sentry.addBreadcrumb(bread);
 
                 // rethrow the exception with card Name for the user
                 throw new RuntimeException("crash in raw Ability, check card script of " + card.getName(), e);
@@ -1991,7 +1991,6 @@ public class CardFactoryUtil {
             final Trigger t = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
             t.setOverridingAbility(sa);
             inst.addTrigger(t);
-
         } else if (keyword.startsWith("Prize")) {
             final String[] k = keyword.split(":");
 

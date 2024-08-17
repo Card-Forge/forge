@@ -3,7 +3,7 @@ ManaCost:4
 Types:Legendary Artifact
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add an amount of mana of that color equal to your devotion to that color.
+A:AB$ ChooseColor | Cost$ T | AILogic$ MostProminentComputerControls | AINoRecursiveCheck$ True | SubAbility$ DBMana | SpellDescription$ Choose a color. Add an amount of mana of that color equal to your devotion to that color.
 SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
 SVar:X:Count$Devotion.Chosen

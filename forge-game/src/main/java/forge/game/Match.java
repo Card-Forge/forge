@@ -208,6 +208,7 @@ public class Match {
                 if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
                     card.setRandomFoil();
                 }
+                card.setCollectible(true);
 
                 newLibrary.add(card);
             }
@@ -391,6 +392,8 @@ public class Match {
             Deck losersDeck = players.get(i).getDeck();
             List<PaperCard> personalLosses = new ArrayList<>();
             for (Card c : fromGame.getCardsIn(ZoneType.Ante)) {
+                if(!c.isCollectible())
+                    continue;
                 PaperCard toRemove = (PaperCard) c.getPaperCard();
                 // this could miss the cards by returning instances that are not equal to cards found in deck
                 // (but only if the card has multiple prints in a set)

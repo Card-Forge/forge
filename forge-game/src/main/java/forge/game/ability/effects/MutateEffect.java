@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.google.common.collect.Lists;
 
+import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
@@ -28,8 +29,7 @@ public class MutateEffect extends SpellAbilityEffect {
         // The token has the characteristics of the spell that became that token.
         // The token is not “created” for the purposes of any replacement effects or triggered abilities that refer to creating a token.
         if (host.isCopiedSpell()) {
-            host.setCopiedSpell(false);
-            host.setToken(true);
+            host.setGamePieceType(GamePieceType.TOKEN);
         }
 
         final Card target = getDefinedCardsOrTargeted(sa, "Defined").get(0);
