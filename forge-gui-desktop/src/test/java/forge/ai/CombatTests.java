@@ -1,6 +1,7 @@
 package forge.ai;
 
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -38,18 +39,18 @@ public class CombatTests extends AITest {
         addCard("Brazen Scourge", p);
         addCard("Brazen Scourge", p);
         addCard("Mountain", p);
-        addCardToZone("Shock", p, ZoneType.Hand);
+        addCardToZone("Pillar of Flame", p, ZoneType.Hand);
 
         Player opponent = game.getPlayers().get(0);
         opponent.setTeam(1);
 
-        addCard("Runeclaw Bear", opponent);
+        Card bearCard = addCard("Runeclaw Bear", opponent);
         opponent.setLife(6, null);
 
-        this.playUntilPhase(game, PhaseType.END_OF_TURN);
+        this.playUntilStackClear(game);
         System.out.println(this.gameStateToString(game));
 
-        AssertJUnit.assertTrue(game.isGameOver());
+        AssertJUnit.assertEquals(bearCard.getZone().getZoneType(), ZoneType.Exile);
     }
 
 }
