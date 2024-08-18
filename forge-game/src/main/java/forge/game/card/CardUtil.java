@@ -60,6 +60,7 @@ public final class CardUtil {
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "Freerunning",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
+            "Bands with other",
             "etbCounter", "Reflect", "Ward").build();
     /** List of keyword endings of keywords that could be modified by text changes. */
     public static final ImmutableList<String> modifiableKeywordEndings = ImmutableList.<String>builder().add(

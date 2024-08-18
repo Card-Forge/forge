@@ -2479,6 +2479,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sb.append("exile it haunting target creature.");
                     }
                     sb.append(")");
+                } else if (keyword.startsWith("Bands with other")) {
+                    final String[] k = keyword.split(":");
+                    String desc = k.length > 2 ? k[2] : CardType.getPluralType(k[1]);
+                    sbLong.append(k[0]).append(" ").append(desc).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
                          || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
                          || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
