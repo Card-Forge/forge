@@ -5,6 +5,7 @@ import com.google.common.io.Files;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IProgressBar;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
 import java.io.*;
@@ -89,7 +90,7 @@ public class GuiDownloadZipService extends GuiDownloadService {
 
             if (url.getPath().endsWith(".php")) {
                 //ensure file can be downloaded if returned from PHP script
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
             }
 
             conn.connect();
