@@ -43,6 +43,6 @@ Type=Funny
 34 M You, Magic Playtester
 
 [You Make The Card]
-1 Kevin, Questing Dragon|UNKLAS23
-1 Takesies // Backsies|UNKLAS23
-1 Trampled Lotus|UNKLAS23
+1 Kevin, Questing Dragon|UELAS23
+1 Takesies // Backsies|UELAS23
+1 Trampled Lotus|UELAS23
