@@ -1,5 +1,5 @@
 [metadata]
-Code=UNKLAS23
+Code=UELAS23
 Date=2023-09-22
 Name=Unknown Event Las Vegas 2023 Playtest Cards
 Type=Funny

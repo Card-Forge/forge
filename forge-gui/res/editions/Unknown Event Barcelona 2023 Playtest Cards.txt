@@ -1,5 +1,5 @@
 [metadata]
-Code=UNKBAR23
+Code=UEBAR23
 Date=2023-07-28
 Name=Unknown Event Barcelona 2023 Playtest Cards
 Type=Funny

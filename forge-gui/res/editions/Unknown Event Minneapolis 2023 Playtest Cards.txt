@@ -1,5 +1,5 @@
 [metadata]
-Code=UNKMIN23
+Code=UEMIN23
 Date=2023-05-05
 Name=Unknown Event Minneapolis 2023 Playtest Cards
 Type=Funny

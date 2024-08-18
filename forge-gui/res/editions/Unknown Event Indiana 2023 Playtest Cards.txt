@@ -1,5 +1,5 @@
 [metadata]
-Code=UNKIND23
+Code=UEIND23
 Date=2023-08-03
 Name=Unknown Event Indiana 2023 Playtest Cards
 Type=Funny
