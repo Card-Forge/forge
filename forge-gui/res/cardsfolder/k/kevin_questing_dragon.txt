@@ -1,0 +1,17 @@
+Name:Kevin, Questing Dragon
+ManaCost:4 R R R R
+Types:Legendary Creature Dragon
+PT:8/8
+K:Devour:2
+K:Flying
+K:Landwalk:Mountain
+K:Rampage:2
+K:Bushido:2
+K:Trample:Planeswalker
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+S:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
+S:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigControl | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, gain control of target land that player controls. Untap it.
+SVar:TrigControl:DB$ GainControl | ValidTgts$ Land.ControlledBy TriggeredTarget | TgtPrompt$ Select target land damaged player controls | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ Targeted | SpellDescription$ Untap it.
+Oracle:Kevin can't be countered, devour 2\nFlying, mountainwalk, rampage 2, bushido 2, trample over planeswalkers\nDamage can't be prevented.\nPlayers can't gain life.\nWhenever Kevin deals combat damage to a player, gain control of target land that player controls. Untap it.
