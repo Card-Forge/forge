@@ -1,5 +1,4 @@
 Name:Drizzt Do'Urden
-Nickname:Drizzt
 ManaCost:3 G W
 Types:Legendary Creature Elf Ranger
 PT:3/3

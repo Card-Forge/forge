@@ -585,7 +585,7 @@ public class BoosterGenerator {
                     mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
             ) { // custom print sheet
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
-                System.out.println("Attempting to lookup :" + sheetName);
+                System.out.println("Attempting to lookup: " + sheetName);
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 

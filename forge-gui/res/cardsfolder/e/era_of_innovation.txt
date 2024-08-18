@@ -6,4 +6,4 @@ SVar:TrigEnergy:AB$ PutCounter | Cost$ 1 | Defined$ You | CounterType$ ENERGY | 
 A:AB$ Draw | Cost$ PayEnergy<6> Sac<1/CARDNAME> | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:BuffedBy:Artifact,Artificer
 DeckHints:Type$Artifact|Artificer
-Oracle:Whenever an artifact or Artificer you control enters, you may pay {1}. If you do, you get {E}{E} (two energy counters).\nPay {E}{E}{E}{E}{E}{E}, Sacrifice Era of Innovation: Draw three cards.
+Oracle:Whenever an artifact or Artificer you control enters, you may pay {1}. If you do, you get {E}{E} (two energy counters).\nPay six {E}, Sacrifice Era of Innovation: Draw three cards.

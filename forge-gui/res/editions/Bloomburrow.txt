@@ -10,17 +10,17 @@ Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
 [Common]
-Base=Common
+Base=Common:fromSheet("BLB cards")
 
 [Common-Guest]
-Base=Common
+Base=Common:fromSheet("BLB cards")
 Replace=.015625F fromSheet("BLB special guests")
 
 [Uncommon]
-Base=Uncommon
+Base=Uncommon:fromSheet("BLB cards")
 
 [RareMythic]
-Base=RareMythic
+Base=RareMythic:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
 Replace=.021F fromSheet("BLB borderless")
 Replace=.051F fromSheet("BLB showcase")
@@ -30,10 +30,10 @@ Base=Land:fromSheet("BLB full art")
 Replace=.20F Land:fromSheet("BLB full art")+
 
 [Wildcard]
-Base=Common
+Base=Common:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
-Replace=.417F Uncommon
-Replace=.078F MythicRare
+Replace=.417F Uncommon:fromSheet("BLB cards")
+Replace=.078F MythicRare:fromSheet("BLB cards")
 Replace=.004F fromSheet("BLB borderless")
 Replace=.042F fromSheet("BLB showcase")
 

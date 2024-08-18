@@ -757,9 +757,10 @@ public class CardState extends GameObject implements IHasSVars {
                 .build();
     }
 
-    public void resetOriginalHost() {
+    public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic()) {
+            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+                // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }
         }
