@@ -578,7 +578,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
-            List<BoosterSlot> boosterSlots = Lists.newArrayList();
+            List<BoosterSlot> boosterSlots = null;
             Map<String, Integer> tokenNormalized = new HashMap<>();
             Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
             List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
@@ -587,6 +587,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             List<String> boosterSlotsToParse = Lists.newArrayList();
             if (metadata.contains("BoosterSlots")) {
                 boosterSlotsToParse = Lists.newArrayList(metadata.get("BoosterSlots").split(","));
+                boosterSlots = Lists.newArrayList();
             }
 
             for (String sectionName : contents.keySet()) {
