@@ -25,6 +25,6 @@ T:Mode$ BecomesTarget | ValidTarget$ Creature.EnchantedBy | ValidSource$ Spell.A
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_spirit_flying
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ EnchantTarget | Secondary$ True
-SVar:EnchantTarget:SVar:EnchantMe:Multiple
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ EnMe | Secondary$ True
+SVar:EnMe:SVar:EnchantMe:Multiple
 Oracle:Enchant creature\nWhenever Brinebound Gift enters or enchanted creature becomes the target of an Aura spell, create a 1/1 white Spirit creature token with flying.\nIf Brinebound Gift would be put into a graveyard from anywhere, exile it instead.
