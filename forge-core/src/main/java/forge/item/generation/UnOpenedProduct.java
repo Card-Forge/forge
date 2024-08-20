@@ -6,7 +6,6 @@ import forge.StaticData;
 import forge.card.PrintSheet;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
-import forge.item.SealedTemplateWithSlots;
 import forge.util.ItemPool;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -61,8 +60,6 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     public List<PaperCard> get() {
         if (sheets != null) {
             return getBoosterPack();
-        } else if (tpl instanceof SealedTemplateWithSlots) {
-            return BoosterGenerator.getBoosterPack((SealedTemplateWithSlots) tpl);
         }
 
         return BoosterGenerator.getBoosterPack(tpl);
