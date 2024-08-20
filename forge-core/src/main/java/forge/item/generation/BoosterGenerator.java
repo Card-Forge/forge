@@ -64,8 +64,9 @@ public class BoosterGenerator {
     }
 
     public static List<PaperCard> getBoosterPack(SealedTemplate template) {
-        // TODO: tweak the chances of generating Masterpieces to be more authentic
-        // (currently merely added to the Rare/Mythic Rare print sheet via ExtraFoilSheetKey)
+        if (template instanceof SealedTemplateWithSlots) {
+            return BoosterGenerator.getBoosterPack((SealedTemplateWithSlots) template);
+        }
 
         List<PaperCard> result = new ArrayList<>();
         List<PrintSheet> sheetsUsed = new ArrayList<>();
@@ -584,6 +585,7 @@ public class BoosterGenerator {
             if (mainCode.regionMatches(true, 0, "fromSheet", 0, 9) ||
                     mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
             ) { // custom print sheet
+                System.out.println("Parsing from main code: " + mainCode);
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 System.out.println("Attempting to lookup: " + sheetName);
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
