@@ -270,6 +270,7 @@ public abstract class GuiDownloadService implements Runnable {
                     if(url.contains("api.scryfall.com")) {
                         conn.setInstanceFollowRedirects(true);
                         TimeUnit.MILLISECONDS.sleep(100);
+                        fullborder = true;
                     } else {
                         conn.setInstanceFollowRedirects(false);
                     }
