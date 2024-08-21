@@ -4,7 +4,7 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-name=Chaos Incarnate
+Name=Chaos Incarnate
 Description=Kaldheim's demons are vicious raiders with an unrivaled thirst for distruction. Kardur was one of the fiercest demon jarls, inspiring terror in the hearts of other demons. He was sealed beneath the earth by other jarls, but it is said he is slowly making his way back to the surface - inch by inch, day by day, and with thoughts filled with nothing but revenge.
 Set=SCD
 Image=chaos_incarnate.png
