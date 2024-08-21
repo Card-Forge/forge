@@ -3,10 +3,10 @@ ManaCost:1 W
 Types:Legendary Creature Tiefling Cleric
 PT:2/2
 K:Specialize:2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually get +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, creature cards in your hand perpetually get +1/+1.
 SVar:TrigPump:DB$ PumpAll | PumpZone$ Hand | ValidCards$ Creature.YouOwn | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
 AlternateMode:Specialize
-Oracle:Specialize {2}\nWhen Klement, Novice Acolyte enters the battlefield, creature cards in your hand perpetually get +1/+1.
+Oracle:Specialize {2}\nWhen Klement, Novice Acolyte enters, creature cards in your hand perpetually get +1/+1.
 
 SPECIALIZE:WHITE
 
@@ -15,15 +15,15 @@ ManaCost:1 W W
 Types:Legendary Creature Tiefling Cleric
 PT:3/3
 K:Lifelink
-T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it."
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters with a lifelink counter on it."
 SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
-SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it.
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, that creature enters with a lifelink counter on it.
 SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
 SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ Lifelink | CounterNum$ 1 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 DeckHas:Ability$LifeGain|Counters
-Oracle:Lifelink\nWhen this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it."
+Oracle:Lifelink\nWhen this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters with a lifelink counter on it."
 
 SPECIALIZE:BLUE
 

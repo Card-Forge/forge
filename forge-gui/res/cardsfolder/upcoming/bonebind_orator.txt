@@ -1,0 +1,7 @@
+Name:Bonebind Orator
+ManaCost:1 B
+Types:Creature Squirrel Warlock Bard
+PT:2/2
+A:AB$ ChangeZone | Cost$ 3 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select another target creature card in your graveyard | ValidTgts$ Creature.YouOwn+Other | SpellDescription$ Return another target creature card from your graveyard to your hand.
+DeckHas:Ability$Graveyard
+Oracle:{3}{B}, Exile Bonebind Orator from your graveyard: Return another target creature card from your graveyard to your hand.

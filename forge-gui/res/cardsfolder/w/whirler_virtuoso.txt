@@ -2,8 +2,8 @@ Name:Whirler Virtuoso
 ManaCost:1 U R
 Types:Creature Vedalken Artificer
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
 A:AB$ Token | Cost$ PayEnergy<3> | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
 DeckHas:Ability$Token
-Oracle:When Whirler Virtuoso enters the battlefield, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flying.
+Oracle:When Whirler Virtuoso enters, you get {E}{E}{E} (three energy counters).\nPay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flying.

@@ -1,0 +1,9 @@
+Name:Wight of the Reliquary
+ManaCost:B G
+Types:Creature Zombie Knight
+PT:2/2
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
+A:AB$ ChangeZone | Cost$ T Sac<1/Creature.Other/another creature> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it onto the battlefield tapped, then shuffle.
+SVar:X:Count$TypeInYourYard.Creature
+Oracle:Vigilance\nWight of the Reliquary gets +1/+1 for each creature card in your graveyard.\n{T}, Sacrifice another creature: Search your library for a land card, put it onto the battlefield tapped, then shuffle.

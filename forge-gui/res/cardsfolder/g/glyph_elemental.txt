@@ -1,0 +1,12 @@
+Name:Glyph Elemental
+ManaCost:1 W
+Types:Enchantment Creature Elemental
+PT:2/2
+K:Bestow:1 W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ X | AddToughness$ X | Description$ Enchanted creature gets +1/+1 for each +1/+1 counter on CARDNAME.
+SVar:X:Count$CardCounters.P1P1
+SVar:BuffedBy:Land
+DeckHas:Ability$Counters
+Oracle:Bestow {1}{W} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nLandfall — Whenever a land you control enters, put a +1/+1 counter on Glyph Elemental.\nEnchanted creature gets +1/+1 for each +1/+1 counter on Glyph Elemental.

@@ -1,0 +1,15 @@
+Name:Ersta, Friend to All
+ManaCost:W U B R G
+Types:Legendary Planeswalker Ersta
+Loyalty:5
+Text:CARDNAME can be your commander.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ all_1_1_human_wizard | SpellDescription$ Create a 1/1 Human Wizard creature token that's all colors.
+A:AB$ NameCard | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ You | ChooseFromList$ Enlightened Tutor,Mystical Tutor,Booster Tutor,Imperial Recruiter,Worldly Tutor | SubAbility$ DBCast | StackDescription$ SpellDescription | SpellDescription$ Choose a card name from among Enlightened Tutor, Mystical Tutor, Booster Tutor, Imperial Recruiter, and Worldly Tutor. Create a copy of the card with the chosen name. You may cast the copy without paying its mana cost.
+SVar:DBCast:DB$ Play | WithoutManaCost$ True | CopyFromChosenName$ True | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Ersta, Friend to All | Triggers$ EffPhase | Duration$ Permanent | SpellDescription$ You get an emblem with "At the beginning of your upkeep, if you control twenty or more Wizards, you win the game."
+SVar:EffPhase:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigWinGame | IsPresent$ Wizard.YouCtrl | PresentCompare$ GE20 | TriggerDescription$ At the beginning of your upkeep, if you control twenty or more Wizards, you win the game.
+SVar:TrigWinGame:DB$ WinsGame | Defined$ You
+DeckHas:Ability$Token & Type$Human|Advisor|Wizard
+DeckNeeds:Type$Wizard
+Oracle:[+1]: Create a 1/1 Human Wizard creature token that's all colors.\n[-3]: Choose a card name from among Enlightened Tutor, Mystical Tutor, Booster Tutor, Imperial Recruiter, and Worldly Tutor. Create a copy of the card with the chosen name. You may cast the copy without paying its mana cost.\n[-8]: You get an emblem with "At the beginning of your upkeep, if you control twenty or more Wizards, you win the game."\nErsta, Friend to All can be your commander.

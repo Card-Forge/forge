@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Ogre Shaman
 PT:4/3
 K:Multikicker:R
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player or planeswalker equal to twice the number of times it was kicked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters, it deals damage to target player or planeswalker equal to twice the number of times it was kicked.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ X
 SVar:X:Count$TimesKicked/Times.2
-Oracle:Multikicker {R} (You may pay an additional {R} any number of times as you cast this spell.)\nWhen Deathforge Shaman enters the battlefield, it deals damage to target player or planeswalker equal to twice the number of times it was kicked.
+Oracle:Multikicker {R} (You may pay an additional {R} any number of times as you cast this spell.)\nWhen Deathforge Shaman enters, it deals damage to target player or planeswalker equal to twice the number of times it was kicked.

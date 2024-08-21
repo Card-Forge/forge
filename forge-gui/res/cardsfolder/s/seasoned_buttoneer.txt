@@ -1,0 +1,7 @@
+Name:Seasoned Buttoneer
+ManaCost:2 U
+Types:Creature Vedalken Employee
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+Oracle:When Seasoned Buttoneer enters, open an Attraction.

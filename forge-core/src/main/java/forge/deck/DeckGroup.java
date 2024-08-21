@@ -19,17 +19,19 @@ package forge.deck;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.google.common.base.Function;
-
 /**
- * TODO: Write javadoc for this type.
+ * Related decks usually pertaining to a limited experience like draft or sealed
+ * This file represents a human player deck and all opposing AI decks
  * 
  */
 public class DeckGroup extends DeckBase {
+
+    public DeckGroup() {
+        this("");
+    }
 
     /**
      * Instantiates a new deck group.
@@ -84,7 +86,7 @@ public class DeckGroup extends DeckBase {
         if (aiDecks.size() < 2) {
             return;
         }
-        Collections.sort(aiDecks, comparator);
+        aiDecks.sort(comparator);
     }
     
     @Override
@@ -99,8 +101,7 @@ public class DeckGroup extends DeckBase {
         DeckGroup myClone = (DeckGroup) clone;
         myClone.setHumanDeck((Deck) humanDeck.copyTo(getName())); //human deck name should always match DeckGroup name
 
-        for (int i = 0; i < aiDecks.size(); i++) {
-            Deck src = aiDecks.get(i);
+        for (Deck src : aiDecks) {
             myClone.addAiDeck((Deck) src.copyTo(src.getName()));
         }
     }
@@ -136,21 +137,6 @@ public class DeckGroup extends DeckBase {
     protected DeckBase newInstance(final String name0) {
         return new DeckGroup(name0);
     }
-
-    public static final Function<DeckGroup, String> FN_NAME_SELECTOR = new Function<DeckGroup, String>() {
-        @Override
-        public String apply(DeckGroup arg1) {
-            return arg1.getName();
-        }
-    };
-
-
-    public static final Function<DeckGroup, Deck> FN_HUMAN_DECK = new Function<DeckGroup, Deck>() {
-        @Override
-        public Deck apply(DeckGroup arg1) {
-            return arg1.humanDeck;
-        }
-    };
 
     @Override
     public boolean isEmpty() {

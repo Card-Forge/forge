@@ -1,12 +1,5 @@
-[duel]
 [metadata]
 Name=The Great and Powerful Trixie 2
-Title=The Great and Powerful Trixie
-Difficulty=hard
-Description=U splash W Trix combo deck with Illusions of Grandeur and Donate
-Icon=The Great and Powerful Trixie.jpg
-Deck Type=constructed
-Profile=Cautious
 [main]
 3 Arcane Denial
 2 Cancel

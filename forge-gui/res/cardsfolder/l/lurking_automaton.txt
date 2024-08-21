@@ -1,0 +1,9 @@
+Name:Lurking Automaton
+ManaCost:5
+Types:Artifact Creature Construct
+PT:0/0
+Draft:Reveal CARDNAME as you draft it.
+Draft:Note how many cards you've drafted this draft round, including CARDNAME.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it, where X is the highest number you noted for cards named Lurking Automaton.
+SVar:X:Count$DraftNotesHighest.Lurking Automaton
+Oracle:Reveal Lurking Automaton as you draft it and note how many cards you've drafted this draft round, including Lurking Automaton.\nLurking Automaton enters with X +1/+1 counters on it, where X is the highest number you noted for cards named Lurking Automaton.

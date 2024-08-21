@@ -1,0 +1,8 @@
+Name:Shrike Force
+ManaCost:2 W
+Types:Creature Bird Knight
+PT:1/3
+K:Flying
+K:Double Strike
+K:Vigilance
+Oracle:Flying, double strike, vigilance

@@ -21,7 +21,6 @@ import forge.card.CardZoom;
 import forge.game.card.CardView;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.views.VPrompt;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.WaitCallback;
@@ -269,12 +268,7 @@ public class FOptionPane extends FDialog {
         final int optionsSize = options.size();
         for (int i = 0; i < optionsSize; i++) {
             final int option = i;
-            initButton(i, options.get(i), new FEventHandler() {
-                @Override
-                public void handleEvent(final FEvent e) {
-                    setResult(option);
-                }
-            });
+            initButton(i, options.get(i), e -> setResult(option));
         }
         defaultOption = defaultOption0;
     }

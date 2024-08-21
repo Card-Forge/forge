@@ -1,0 +1,9 @@
+Name:Zinnia, Valley's Voice
+ManaCost:U R W
+Types:Legendary Creature Bird Bard
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the number of other creatures you control with base power 1.
+SVar:X:Count$Valid Creature.basePowerEQ1+YouCtrl+Other
+S:Mode$ Continuous | Affected$ Creature.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Offspring:2 | Description$ Creature spells you cast have offspring {2}. (You may pay an additional {2} as you cast a creature spell. If you do, when that creature enters, create a 1/1 token copy of it.)
+Oracle:Flying\nZinnia, Valley's Voice gets +X/+0, where X is the number of other creatures you control with base power 1.\nCreature spells you cast have offspring {2}. (You may pay an additional {2} as you cast a creature spell. If you do, when that creature enters, create a 1/1 token copy of it.)

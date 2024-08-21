@@ -1,0 +1,9 @@
+Name:Stormcatch Mentor
+ManaCost:U R
+Types:Creature Otter Wizard
+PT:1/1
+K:Haste
+K:Prowess
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+DeckHints:Type$Instant|Sorcery
+Oracle:Haste\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nInstant and sorcery spells you cast cost {1} less to cast.

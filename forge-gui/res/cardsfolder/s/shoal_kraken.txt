@@ -2,7 +2,7 @@ Name:Shoal Kraken
 ManaCost:4 U
 Types:Creature Kraken
 PT:3/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Constellation - Whenever an enchantment enters the battlefield under your control, you may a draw card. If you do, discard a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Constellation — Whenever an enchantment you control enters, you may a draw card. If you do, discard a card.
 SVar:TrigDraw:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 DeckNeeds:Type$Enchantment
-Oracle:Constellation — Whenever an enchantment enters the battlefield under your control, you may draw a card. If you do, discard a card.
+Oracle:Constellation — Whenever an enchantment you control enters, you may draw a card. If you do, discard a card.

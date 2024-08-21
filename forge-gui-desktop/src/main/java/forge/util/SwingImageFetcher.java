@@ -2,14 +2,13 @@ package forge.util;
 
 import forge.localinstance.properties.ForgeConstants;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.imageio.ImageIO;
-import javax.swing.SwingUtilities;
 
 public class SwingImageFetcher extends ImageFetcher {
 
@@ -75,7 +74,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", "");
+                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

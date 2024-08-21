@@ -4,6 +4,6 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 K:Double Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, creatures you control gain double strike until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, creatures you control gain double strike until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Double Strike
-Oracle:Flying, double strike\nWhen Terror of Mount Velus enters the battlefield, creatures you control gain double strike until end of turn.
+Oracle:Flying, double strike\nWhen Terror of Mount Velus enters, creatures you control gain double strike until end of turn.

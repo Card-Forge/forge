@@ -1,8 +1,6 @@
 package forge.itemmanager.filters;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -110,12 +108,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         super.applyChange();
     }
 
-    private Timer changeTimer = new Timer(200, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            applyChange();
-        }
-    });
+    private Timer changeTimer = new Timer(200, arg0 -> applyChange());
 
     @Override
     protected Predicate<T> buildPredicate() {

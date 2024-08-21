@@ -1,0 +1,9 @@
+Name:Galvanic Discharge
+ManaCost:R
+Types:Instant
+A:SP$ PutCounter | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 3 | SubAbility$ DBChooseNumber | SpellDescription$ Choose target creature or planeswalker. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. CARDNAME deals that much damage to that permanent.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ CARDNAME deals that much damage to that permanent.
+SVar:Max:Count$YourCountersEnergy
+SVar:X:Count$ChosenNumber
+Oracle:Choose target creature or planeswalker. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Galvanic Discharge deals that much damage to that permanent.

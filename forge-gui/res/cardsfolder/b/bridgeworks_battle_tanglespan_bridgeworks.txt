@@ -1,0 +1,18 @@
+Name:Bridgeworks Battle
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBFight | SpellDescription$ Target creature you control gets +2/+2 until end of turn. Then it fights up to one target creature you don't control.
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control
+SVar:PlayMain1:TRUE
+AlternateMode:Modal
+Oracle:Target creature you control gets +2/+2 until end of turn. Then it fights up to one target creature you don't control.
+
+ALTERNATE
+
+Name:Tanglespan Bridgeworks
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may pay 3 life. If you don't, it enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:As Tanglespan Bridgeworks enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}.

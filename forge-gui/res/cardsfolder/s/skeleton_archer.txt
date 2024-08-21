@@ -2,6 +2,6 @@ Name:Skeleton Archer
 ManaCost:3 B
 Types:Creature Skeleton Archer
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
-Oracle:When Skeleton Archer enters the battlefield, it deals 1 damage to any target.
+Oracle:When Skeleton Archer enters, it deals 1 damage to any target.

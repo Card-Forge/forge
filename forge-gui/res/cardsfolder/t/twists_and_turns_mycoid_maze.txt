@@ -4,12 +4,12 @@ Types:Enchantment
 R:Event$ Explore | ActiveZones$ Battlefield | ValidExplorer$ Creature.YouCtrl | ReplaceWith$ DBScry | Description$ If a creature you control would explore, instead you scry 1, then that creature explores.
 SVar:DBScry:DB$ Scry | SubAbility$ DBExplore
 SVar:DBExplore:DB$ Explore | Defined$ ReplacedCard
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control explores.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExplore | TriggerDescription$ When CARDNAME enters, target creature you control explores.
 SVar:TrigExplore:DB$ Explore | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | CheckSVar$ Count$Valid Land.YouCtrl | SVarCompare$ GE7 | Execute$ TrigTransform | TriggerDescription$ When a land enters the battlefield under your control, if you control seven or more lands, transform CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | CheckSVar$ Count$Valid Land.YouCtrl | SVarCompare$ GE7 | Execute$ TrigTransform | TriggerDescription$ When a land you control enters, if you control seven or more lands, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Mode$ Transform
 AlternateMode:DoubleFaced
-Oracle:If a creature you control would explore, instead you scry 1, then that creature explores.\nWhen Twists and Turns enters the battlefield, target creature you control explores.\nWhen a land enters the battlefield under your control, if you control seven or more lands, transform Twists and Turns.
+Oracle:If a creature you control would explore, instead you scry 1, then that creature explores.\nWhen Twists and Turns enters, target creature you control explores.\nWhen a land you control enters, if you control seven or more lands, transform Twists and Turns.
 
 ALTERNATE
 

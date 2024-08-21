@@ -1,0 +1,11 @@
+Name:Riddle Gate Gargoyle
+ManaCost:W U
+Types:Artifact Creature Gargoyle
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {E}{E}. When you do, target creature you control gains lifelink until end of turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<2> | Execute$ TrigPump | TriggerDescription$ When you do, target creature you control gains lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Lifelink
+Oracle:Flying\nWhen Riddle Gate Gargoyle enters, you get {E}{E}{E} (three energy counters).\nWhenever you attack, you may pay {E}{E}. When you do, target creature you control gains lifelink until end of turn.

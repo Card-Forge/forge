@@ -1,0 +1,11 @@
+Name:Thieving Aven
+ManaCost:2 U
+Types:Creature Bird Rogue
+PT:1/4
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigHeist | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, heist target opponent's library.
+SVar:TrigHeist:DB$ Heist | ValidTgts$ Opponent
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever Thieving Aven deals combat damage to a player, heist target opponent's library.\nWhenever you cast a spell you don't own, put a +1/+1 counter on Thieving Aven.

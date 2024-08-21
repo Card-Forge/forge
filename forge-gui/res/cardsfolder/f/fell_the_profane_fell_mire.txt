@@ -1,0 +1,16 @@
+Name:Fell the Profane
+ManaCost:2 B B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+AlternateMode:Modal
+Oracle:Destroy target creature or planeswalker.
+
+ALTERNATE
+
+Name:Fell Mire
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may pay 3 life. If you don't, it enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+Oracle:As Fell Mire enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {B}.

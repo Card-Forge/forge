@@ -49,306 +49,165 @@ public enum ColumnDef {
      * The column containing the inventory item name.
      */
     STRING("", "", 0, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getKey() instanceof Comparable<?> ? (Comparable<?>) from.getKey() : from.getKey().getName();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getKey().toString();
-                }
-            }),
+            from -> from.getKey() instanceof Comparable<?> ? (Comparable<?>) from.getKey() : from.getKey().getName(),
+            from -> from.getKey().toString()),
     /**
      * The name column.
      */
     NAME("lblName", "lblName", 180, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    if (from.getKey() instanceof PaperCard) {
-                        String sortableName = ((PaperCard)from.getKey()).getSortableName();
-                        return sortableName == null ? TextUtil.toSortableName(from.getKey().getName()) : sortableName;
-                    }
-                    return TextUtil.toSortableName(from.getKey().getName());
+            from -> {
+                if (from.getKey() instanceof PaperCard) {
+                    String sortableName = ((PaperCard)from.getKey()).getSortableName();
+                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getName()) : sortableName;
                 }
+                return TextUtil.toSortableName(from.getKey().getName());
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    if (from.getKey() instanceof PaperCard)
-                        return from.getKey().toString();
-                    return from.getKey().getName();
-                }
+            from -> {
+                if (from.getKey() instanceof PaperCard)
+                    return from.getKey().toString();
+                return from.getKey().getName();
             }),
 
     /**
      * The column for sorting cards in collector order.
      */
     COLLECTOR_ORDER("lblCN", "ttCN", 20, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toCollectorPrefix(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    InventoryItem item = from.getKey();
-                    return item instanceof PaperCard ?
-                            ((PaperCard) item).getCollectorNumber() : IPaperCard.NO_COLLECTOR_NUMBER;
-                }
+            from -> toCollectorPrefix(from.getKey()),
+            from -> {
+                InventoryItem item = from.getKey();
+                return item instanceof PaperCard ? ((PaperCard) item).getCollectorNumber() : IPaperCard.NO_COLLECTOR_NUMBER;
             }),
     /**
      * The type column.
      */
     TYPE("lblType", "ttType", 100, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey()));
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey()));
-                }
-            }),
+            from -> CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey())),
+            from -> CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey()))),
     /**
      * The mana cost column.
      */
     COST("lblCost", "ttCost", 70, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toManaCost(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCardRules(from.getKey());
-                }
-            }),
+            from -> toManaCost(from.getKey()),
+            from -> toCardRules(from.getKey())),
     /**
      * The color column.
      */
     COLOR("lblColor", "ttColor", 46, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toColor(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toColor(from.getKey());
-                }
-            }),
+            from -> toColor(from.getKey()),
+            from -> toColor(from.getKey())),
     /**
      * The power column.
      */
     POWER("lblPower", "ttPower", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toPower(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toPower(from.getKey());
-                }
-            }),
+            from -> toPower(from.getKey()),
+            from -> toPower(from.getKey())),
     /**
      * The toughness column.
      */
     TOUGHNESS("lblToughness", "ttToughness", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toToughness(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toToughness(from.getKey());
-                }
-            }),
+            from -> toToughness(from.getKey()),
+            from -> toToughness(from.getKey())),
     /**
      * The converted mana cost column.
      */
     CMC("lblCMC", "ttCMC", 20, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toCMC(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCMC(from.getKey());
-                }
-            }),
+            from -> toCMC(from.getKey()),
+            from -> toCMC(from.getKey())),
+    ATTRACTION_LIGHTS("lblLights", "lblLights", 94, true, SortState.NONE,
+            from -> toAttractionLightSort(from.getKey()),
+            from -> toAttractionLights(from.getKey())
+    ),
     /**
      * The rarity column.
      */
     RARITY("lblRarity", "lblRarity", 20, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toRarity(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toRarity(from.getKey());
-                }
-            }),
+            from -> toRarity(from.getKey()),
+            from -> toRarity(from.getKey())),
     /**
      * The set code column.
      */
     SET("lblSet", "lblSet", 38, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    if (!(i instanceof InventoryItemFromSet))
-                            return CardEdition.UNKNOWN;
-                    String editionCode = ((InventoryItemFromSet) i).getEdition();
-                    return FModel.getMagicDb().getCardEdition(editionCode);
-                }
+            from -> {
+                InventoryItem i = from.getKey();
+                if (!(i instanceof InventoryItemFromSet))
+                        return CardEdition.UNKNOWN;
+                String editionCode = ((InventoryItemFromSet) i).getEdition();
+                return FModel.getMagicDb().getCardEdition(editionCode);
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
-                }
+            from -> {
+                InventoryItem i = from.getKey();
+                return i instanceof InventoryItemFromSet ? ((InventoryItemFromSet) i).getEdition() : "n/a";
             }),
     /**
      * The AI compatibility flag column
      */
     AI("lblAI", "lblAIStatus", 30, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    return i instanceof PaperCard ? ((IPaperCard) i).getRules().getAiHints().getAiStatusComparable() : Integer.valueOf(-1);
-                }
+            from -> {
+                InventoryItem i = from.getKey();
+                return i instanceof PaperCard ? ((IPaperCard) i).getRules().getAiHints().getAiStatusComparable() : Integer.valueOf(-1);
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    InventoryItem i = from.getKey();
-                    if (!(i instanceof PaperCard)) {
-                        return "n/a";
-                    }
-                    IPaperCard cp = (IPaperCard) i;
-                    CardAiHints ai = cp.getRules().getAiHints();
-
-                    return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "X?" : "X")
-                            : (ai.getRemRandomDecks() ? "?" : "");
+            from -> {
+                InventoryItem i = from.getKey();
+                if (!(i instanceof PaperCard)) {
+                    return "n/a";
                 }
+                IPaperCard cp = (IPaperCard) i;
+                CardAiHints ai = cp.getRules().getAiHints();
+
+                return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "X?" : "X")
+                        : (ai.getRemRandomDecks() ? "?" : "");
             }),
     /**
      * The card format column.
      */
     FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    PaperCard card = toPaperCard(from.getKey());
-                    if (card == null) {
-                        return -1;
-                    }
-                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
-                    int acc = 0;
-                    for (GameFormat gf : formats) {
-                        if (!gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
-                            continue;
-                        }
-                        int ix = gf.getIndex();
-                        if (ix < 30 && ix > 0)
-                            acc |= 0x40000000 >> (ix - 1);
-                    }
-                    return acc;
+            from -> {
+                PaperCard card = toPaperCard(from.getKey());
+                if (card == null) {
+                    return -1;
                 }
+                Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                int acc = 0;
+                for (GameFormat gf : formats) {
+                    if (!gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                        continue;
+                    }
+                    int ix = gf.getIndex();
+                    if (ix < 30 && ix > 0)
+                        acc |= 0x40000000 >> (ix - 1);
+                }
+                return acc;
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    PaperCard card = toPaperCard(from.getKey());
-                    if (card == null) {
-                        return -1;
-                    }
-                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
-                    Set<GameFormat> sanctioned = new HashSet<>();
-                    for (GameFormat gf : formats) {
-                        if (gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
-                            sanctioned.add(gf);
-                        }
-                    }
-                    return StringUtils.join(Iterables.transform(sanctioned, GameFormat.FN_GET_NAME), ", ");
+            from -> {
+                PaperCard card = toPaperCard(from.getKey());
+                if (card == null) {
+                    return -1;
                 }
+                Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                Set<GameFormat> sanctioned = new HashSet<>();
+                for (GameFormat gf : formats) {
+                    if (gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                        sanctioned.add(gf);
+                    }
+                }
+                return StringUtils.join(Iterables.transform(sanctioned, GameFormat::getName), ", ");
             }),
     /**
      * The Draft ranking column.
      */
     RANKING("lblRanking", "lblDraftRanking", 50, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toRanking(from.getKey(), false);
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toRanking(from.getKey(), true);
-                }
-            }),
+            from -> toRanking(from.getKey(), false),
+            from -> toRanking(from.getKey(), true)),
     /**
      * The quantity column.
      */
     QUANTITY("lblQty", "lblQuantity", 25, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            }),
+            Entry::getValue, Entry::getValue),
     /**
      * The quantity in deck column.
      */
     DECK_QUANTITY("lblQuantity", "lblQuantity", 50, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return from.getValue();
-                }
-            }),
+            Entry::getValue, Entry::getValue),
     /**
      * The new inventory flag column.
      */
@@ -373,185 +232,95 @@ public enum ColumnDef {
      * The favorite flag column.
      */
     FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    IPaperCard card = toCard(from.getKey());
-                    if (card == null) {
-                        return -1;
-                    }
-                    return CardPreferences.getPrefs(card).getStarCount();
+            from -> {
+                IPaperCard card = toCard(from.getKey());
+                if (card == null) {
+                    return -1;
                 }
+                return CardPreferences.getPrefs(card).getStarCount();
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toCard(from.getKey());
-                }
-            }),
+            from -> toCard(from.getKey())),
     /**
      * The favorite deck flag column.
      */
     DECK_FAVORITE("", "ttFavorite", 18, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    DeckProxy deck = toDeck(from.getKey());
-                    if (deck == null) {
-                        return -1;
-                    }
-                    return DeckPreferences.getPrefs(deck).getStarCount();
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                if (deck == null) {
+                    return -1;
                 }
+                return DeckPreferences.getPrefs(deck).getStarCount();
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey());
-                }
-            }),
+            from -> toDeck(from.getKey())),
     /**
      * The edit/delete deck column.
      */
     DECK_ACTIONS("", "lblDeleteEdit", 40, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return 0;
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey());
-                }
-            }),
+            from -> 0,
+            from -> toDeck(from.getKey())),
     /**
      * The deck folder column.
      */
     DECK_FOLDER("lblFolder", "lblFolder", 80, false, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeckFolder(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeckFolder(from.getKey());
-                }
-            }),
+            from -> toDeckFolder(from.getKey()),
+            from -> toDeckFolder(from.getKey())),
     /**
      * The deck color column.
      */
     DECK_COLOR("lblColor", "ttColor", 70, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeckColor(from.getKey());
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeckColor(from.getKey());
-                }
-            }),
+            from -> toDeckColor(from.getKey()),
+            from -> toDeckColor(from.getKey())),
     /**
      * The deck format column.
      */
     DECK_FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    DeckProxy deck = toDeck(from.getKey());
-                    if (deck == null) {
-                        return -1;
-                    }
-                    Iterable<GameFormat> all = deck.getExhaustiveFormats();
-                    int acc = 0;
-                    for (GameFormat gf : all) {
-                        int ix = gf.getIndex();
-                        if (ix < 30 && ix > 0)
-                            acc |= 0x40000000 >> (ix - 1);
-                    }
-                    return acc;
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                if (deck == null) {
+                    return -1;
                 }
+                Iterable<GameFormat> all = deck.getExhaustiveFormats();
+                int acc = 0;
+                for (GameFormat gf : all) {
+                    int ix = gf.getIndex();
+                    if (ix < 30 && ix > 0)
+                        acc |= 0x40000000 >> (ix - 1);
+                }
+                return acc;
             },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    DeckProxy deck = toDeck(from.getKey());
-                    if (deck == null) {
-                        return null;
-                    }
-                    return deck.getFormatsString();
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                if (deck == null) {
+                    return null;
                 }
+                return deck.getFormatsString();
             }),
     /**
      * The deck edition column, a mystery to us all.
      */
     DECK_EDITION("lblSet", "lblSet", 38, true, SortState.DESC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getEdition();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    CardEdition deckEdition = toDeck(from.getKey()).getEdition();
-                    if (deckEdition != null)
-                        return deckEdition.getCode();
-                    return null;
-                }
+            from -> toDeck(from.getKey()).getEdition(),
+            from -> {
+                CardEdition deckEdition = toDeck(from.getKey()).getEdition();
+                if (deckEdition != null)
+                    return deckEdition.getCode();
+                return null;
             }),
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
-        new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-            @Override
-            public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI().inMainDeck;
-            }
-        },
-        new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-            @Override
-            public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI();
-            }
-        }),
+            from -> toDeck(from.getKey()).getAI().inMainDeck,
+            from -> toDeck(from.getKey()).getAI()),
     /**
      * The main library size column.
      */
     DECK_MAIN("lblMain", "ttMain", 30, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getMainSize();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getMainSize();
-                }
-            }),
+            from -> toDeck(from.getKey()).getMainSize(),
+            from -> toDeck(from.getKey()).getMainSize()),
     /**
      * The sideboard size column.
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
-            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getSideSize();
-                }
-            },
-            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                    return toDeck(from.getKey()).getSideSize();
-                }
-            });
+            from -> toDeck(from.getKey()).getSideSize(),
+            from -> toDeck(from.getKey()).getSideSize());
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
               Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
@@ -615,11 +384,12 @@ public enum ColumnDef {
     private static Integer toPower(final InventoryItem i) {
         int result = Integer.MAX_VALUE;
         if (i instanceof PaperCard) {
-            result = ((IPaperCard) i).getRules().getIntPower();
+            ICardFace face = ((IPaperCard) i).getMainFace();
+            result = face.getIntPower();
             if (result == Integer.MAX_VALUE) {
-                if (((IPaperCard) i).getRules().getType().isPlaneswalker()) {
-                    String loy = ((IPaperCard) i).getRules().getInitialLoyalty();
-                    result = StringUtils.isNumeric(loy) ? Integer.valueOf(loy) : 0;
+                if (face.getType().isPlaneswalker()) {
+                    String loy = face.getInitialLoyalty();
+                    result = StringUtils.isNumeric(loy) ? Integer.parseInt(loy) : 0;
                 }
             }
         }
@@ -627,7 +397,7 @@ public enum ColumnDef {
     }
 
     private static Integer toToughness(final InventoryItem i) {
-        return i instanceof PaperCard ? ((IPaperCard) i).getRules().getIntToughness() : Integer.MAX_VALUE;
+        return i instanceof PaperCard ? ((IPaperCard) i).getMainFace().getIntToughness() : Integer.MAX_VALUE;
     }
 
     private static Integer toCMC(final InventoryItem i) {
@@ -703,7 +473,7 @@ public enum ColumnDef {
      * @return Part of a sortable numeric string.
      */
     private static String toArtifactsWithColorlessCostsLast(final InventoryItem i) {
-        forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
 
         return !(((IPaperCard) i).getRules().getType().isArtifact() && (toColor(i).isColorless() ||
                 //If it isn't colorless, see if it can be paid with only white, only blue, only black.
@@ -766,7 +536,7 @@ public enum ColumnDef {
      * @return Part of a sortable numeric string.
      */
     private static String toGoldFirst(final InventoryItem i) {
-        forge.card.mana.ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
+        ManaCost manaCost = ((IPaperCard) i).getRules().getManaCost();
 
         return !(manaCost.canBePaidWithAvailable(MagicColor.WHITE) | manaCost.canBePaidWithAvailable(MagicColor.BLUE) |
                 manaCost.canBePaidWithAvailable(MagicColor.BLACK) | manaCost.canBePaidWithAvailable(MagicColor.RED) |
@@ -784,9 +554,8 @@ public enum ColumnDef {
     //Split card sorting is probably as complex as sorting gets.
     //This method serves as an entry point only, separating the two card parts for convenience.
     private static String toSplitCardSort(final InventoryItem i) {
-        CardRules rules = ((IPaperCard) i).getRules();
-        forge.card.ICardFace mainPart = rules.getMainPart();
-        forge.card.ICardFace otherPart = rules.getOtherPart();
+        ICardFace mainPart = ((IPaperCard) i).getMainFace();
+        ICardFace otherPart = ((IPaperCard) i).getOtherFace();
         return toSplitSort(mainPart, otherPart);
     }
 
@@ -923,5 +692,21 @@ public enum ColumnDef {
                         )
                 )
         );
+    }
+
+    private static Set<Integer> toAttractionLights(final InventoryItem i) {
+        return i instanceof PaperCard ? ((PaperCard) i).getMainFace().getAttractionLights() : null;
+    }
+
+    private static String toAttractionLightSort(final InventoryItem i) {
+        if(!(i instanceof PaperCard))
+            return "";
+        Set<Integer> lights = ((PaperCard) i).getRules().getAttractionLights();
+        return (lights.contains(1) ? "0" : "1") +
+                (lights.contains(2) ? "0" : "1") +
+                (lights.contains(3) ? "0" : "1") +
+                (lights.contains(4) ? "0" : "1") +
+                (lights.contains(5) ? "0" : "1") +
+                (lights.contains(6) ? "0" : "1");
     }
 }

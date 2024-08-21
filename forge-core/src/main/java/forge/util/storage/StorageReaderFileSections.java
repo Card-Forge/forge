@@ -101,7 +101,7 @@ public abstract class StorageReaderFileSections<T> extends StorageReaderBase<T> 
         return result;
     }
 
-    private final T readItem(String header, Iterable<String> accumulator, int idx) {
+    private T readItem(String header, Iterable<String> accumulator, int idx) {
         final T item = read(header, accumulator, idx);
         if (null != item) return item;
 

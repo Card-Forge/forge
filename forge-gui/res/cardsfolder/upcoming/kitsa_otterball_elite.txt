@@ -1,0 +1,10 @@
+Name:Kitsa, Otterball Elite
+ManaCost:1 U
+Types:Legendary Creature Otter Wizard
+PT:1/3
+K:Vigilance
+K:Prowess
+A:AB$ Draw | Cost$ T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+A:AB$ CopySpellAbility | Cost$ 2 T | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | AILogic$ OnceIfViable | MayChooseTarget$ True | IsPresent$ Card.powerGE3+Self | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if NICKNAME's power is 3 or greater.
+Oracle:Vigilance\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{T}: Draw a card, then discard a card.\n{2}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy. Activate only if Kitsa's power is 3 or greater.

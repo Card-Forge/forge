@@ -1,0 +1,6 @@
+Name:Copy Land
+ManaCost:2 U
+Types:Enchantment
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Land.Other | AddTypes$ Enchantment | SpellDescription$ You may have CARDNAME enter as a copy of any land on the battlefield, except it's an enchantment in addition to its other types.
+Oracle:You may have Copy Land enter as a copy of any land on the battlefield, except it's an enchantment in addition to its other types.

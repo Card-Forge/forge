@@ -1,0 +1,6 @@
+Name:Restart Sequence
+ManaCost:3 B
+Types:Sorcery
+K:Freerunning:1 B
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+Oracle:Freerunning {1}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nReturn target creature card from your graveyard to the battlefield.

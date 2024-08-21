@@ -197,7 +197,8 @@ public class CostPutCounter extends CostPartWithList {
     protected Card doPayment(Player payer, SpellAbility ability, Card targetCard, final boolean effect) {
         final int i = getAbilityAmount(ability);
         if (isETBReplacement(ability, effect)) {
-            targetCard.addEtbCounter(getCounter(), i, payer);
+            GameEntityCounterTable etbTable = (GameEntityCounterTable) ability.getReplacingObject(AbilityKey.CounterTable);
+            etbTable.put(payer, targetCard, getCounter(), i);
         } else {
             targetCard.addCounter(getCounter(), i, payer, counterTable);
         }

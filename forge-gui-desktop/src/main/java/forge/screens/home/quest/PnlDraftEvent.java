@@ -7,8 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestUtil;
@@ -42,14 +40,11 @@ public class PnlDraftEvent extends JPanel {
 		eventFee.setText(QuestUtil.formatCredits(event.getEntryFee()) + " Credit Entry Fee");
 		eventFee.setFont(FSkin.getFont());
 
-		radButton.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent arg0) {
-				if (radButton.isSelected()) {
-					QuestUtil.setDraftEvent(event);
-				}
-			}
-		});
+		radButton.addChangeListener(arg0 -> {
+            if (radButton.isSelected()) {
+                QuestUtil.setDraftEvent(event);
+            }
+        });
 
 		this.addMouseListener(mouseListener);
 		eventBoosters.addMouseListener(mouseListener);

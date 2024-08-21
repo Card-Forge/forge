@@ -1,0 +1,13 @@
+Name:Cyclops Superconductor
+ManaCost:1 U R
+Types:Creature Cyclops Wizard
+PT:2/2
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBTrigger | TriggerDescription$ When CARDNAME dies, you may pay {E}{E}{E}. When you do, CARDNAME deals damage equal to its power to any target.
+SVar:DBTrigger:AB$ ImmediateTrigger | Cost$ PayEnergy<3> | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals damage equal to its power to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+SVar:X:Count$CardPower
+DeckHints:Type$Instant|Sorcery
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Cyclops Superconductor enters, you get {E}{E}{E} (three energy counters).\nWhen Cyclops Superconductor dies, you may pay {E}{E}{E}. When you do, Cyclops Superconductor deals damage equal to its power to any target.

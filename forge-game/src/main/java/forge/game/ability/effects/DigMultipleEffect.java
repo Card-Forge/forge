@@ -172,8 +172,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     }
                 } else {
                     // just move them randomly
-                    for (int i = 0; i < rest.size(); i++) {
-                        Card c = rest.get(i);
+                    for (Card c : rest) {
                         final ZoneType origin = c.getZone().getZoneType();
                         final PlayerZone toZone = c.getOwner().getZone(destZone2);
                         c = game.getAction().moveTo(toZone, c, sa);
@@ -184,9 +183,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("ImprintRest")) {
-                for (Card c : rest) {
-                    host.addImprintedCard(c);
-                }
+                host.addImprintedCards(rest);
             }
         }
         //table trigger there

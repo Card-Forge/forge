@@ -1,0 +1,18 @@
+Name:Teysa of the Ghost Council
+ManaCost:2 W B
+Types:Legendary Creature Spirit Advisor
+PT:0/5
+K:Starting intensity:0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 white and black Spirit creature token with flying. NICKNAME intensifies by 1.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_1_1_spirit_flying | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify
+S:Mode$ Continuous | Affected$ Spirit.YouCtrl | AddPower$ X | Description$ Spirits you control get +X/+0, where X is NICKNAME's intensity.
+SVar:X:Count$Intensity
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step, you may exile NICKNAME. If you do, at the beginning of your next upkeep, return NICKNAME to the battlefield under its owner's control and it gains haste.
+SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ObzedatReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | TriggerDescription$ Return NICKNAME to the battlefield under its owner's control and it gains haste.
+SVar:ObzedatReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile,Command | Destination$ Battlefield | SubAbility$ ObzedatPump
+SVar:ObzedatPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent
+DeckHas:Ability$Token
+DeckHints:Type$Spirit
+Oracle:Starting intensity 0\nWhen Teysa enters, create a 1/1 white and black Spirit creature token with flying. Teysa intensifies by 1.\nSpirits you control get +X/+0, where X is Teysa's intensity.\n At the beginning of your end step, you may exile Teysa. If you do, at the beginning of your next upkeep, return Teysa to the battlefield under its owner's control and it gains haste.

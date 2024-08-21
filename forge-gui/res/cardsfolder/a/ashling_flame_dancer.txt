@@ -1,0 +1,13 @@
+Name:Ashling, Flame Dancer
+ManaCost:2 R R
+Types:Legendary Creature Elemental Shaman
+PT:4/4
+S:Mode$ UnspentMana | ValidPlayer$ You | ManaType$ Red | Description$ You don't lose unspent red mana as steps and phases end.
+T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, discard a card, then draw a card. If this is the second time this ability has resolved this turn, CARDNAME deals 2 damage to each opponent and each creature they control. If it's the third time, add {R}{R}{R}{R}.
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidPlayers$ Player.Opponent | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ2 | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control | SubAbility$ DBAddMana
+SVar:DBAddMana:DB$ Mana | Produced$ R | Amount$ 4 | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ3
+SVar:Resolved:Count$ResolvedThisTurn
+DeckHints:Type$Instant|Sorcery
+Oracle:You don't lose unspent red mana as steps and phases end.\nMagecraft — Whenever you cast or copy an instant or sorcery spell, discard a card, then draw a card. If this is the second time this ability has resolved this turn, Ashling, Flame Dancer deals 2 damage to each opponent and each creature they control. If it's the third time, add {R}{R}{R}{R}.

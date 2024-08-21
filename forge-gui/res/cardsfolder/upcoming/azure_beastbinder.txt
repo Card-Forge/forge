@@ -1,0 +1,10 @@
+Name:Azure Beastbinder
+ManaCost:1 U
+Types:Creature Rat Rogue
+PT:1/3
+K:Vigilance
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerGE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or greater.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME attacks, up to one target artifact, creature, or planeswalker an opponent controls loses all abilities until your next turn. If it's a creature, it also has base power and toughness 2/2 until your next turn.
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select up to one target artifact, creature, or planeswalker an opponent controls | TargetMin$ 0 | TargetMax$ 1 | RemoveAllAbilities$ True | Duration$ UntilYourNextTurn | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted.Creature | Power$ 2 | Toughness$ 2 | Duration$ UntilYourNextTurn
+Oracle:Vigilance\nAzure Beastbinder can't be blocked by creatures with power 2 or greater.\nWhenever Azure Beastbinder attacks, up to one target artifact, creature, or planeswalker an opponent controls loses all abilities until your next turn. If it's a creature, it also has base power and toughness 2/2 until your next turn.

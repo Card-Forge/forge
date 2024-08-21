@@ -3,8 +3,8 @@ ManaCost:3 W U
 Types:Creature Human Scout
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life and draw two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 2 life and draw two cards.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHas:Ability$LifeGain
-Oracle:Flying\nWhen Cloudblazer enters the battlefield, you gain 2 life and draw two cards.
+Oracle:Flying\nWhen Cloudblazer enters, you gain 2 life and draw two cards.

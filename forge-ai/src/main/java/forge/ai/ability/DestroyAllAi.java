@@ -19,12 +19,7 @@ import forge.game.zone.ZoneType;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
-    private static final Predicate<Card> predicate = new Predicate<Card>() {
-        @Override
-        public boolean apply(final Card c) {
-            return !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || c.hasSVar("SacMe"));
-        }
-    };
+    private static final Predicate<Card> predicate = c -> !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || c.getCounters(CounterEnumType.SHIELD) > 0 || c.hasSVar("SacMe"));
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)

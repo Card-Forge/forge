@@ -2,7 +2,7 @@ Name:Yeva's Forcemage
 ManaCost:2 G
 Types:Creature Elf Shaman
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +2/+2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2
 SVar:PlayMain1:TRUE
-Oracle:When Yeva's Forcemage enters the battlefield, target creature gets +2/+2 until end of turn.
+Oracle:When Yeva's Forcemage enters, target creature gets +2/+2 until end of turn.

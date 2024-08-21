@@ -1,0 +1,21 @@
+Name:Disciple of Freyalise
+ManaCost:3 G G G
+Types:Creature Elf Druid
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.
+SVar:TrigGainLife:AB$ GainLife | Cost$ Sac<1/Creature.Other/another creature> | LifeAmount$ X | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Sacrificed$CardPower
+DeckHas:Ability$Sacrifice|LifeGain
+AlternateMode:Modal
+Oracle:When Disciple of Freyalise enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.
+
+ALTERNATE
+
+Name:Garden of Freyalise
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may pay 3 life. If you don't, it enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:As Garden of Freyalise enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {G}.

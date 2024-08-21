@@ -1,0 +1,15 @@
+Name:Angelic Aberration
+ManaCost:5 W
+Types:Creature Eldrazi Angel
+PT:4/4
+K:Devoid
+K:Flying
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice any number of creatures each with base power or toughness 1 or less. Create that many 4/4 colorless Eldrazi Angel creature tokens with flying and vigilance.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature.basePowerLE1,Creature.baseToughnessLE1 | SacMessage$ any number of creatures each with base power or toughness 1 or less | RememberSacrificed$ True | Optional$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ TokenX | TokenScript$ c_4_4_eldrazi_angel_flying_vigilance | TokenOwner$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Creature.basePowerLE1+YouCtrl,Creature.baseToughnessLE1+YouCtrl
+SVar:TokenX:Remembered$Amount
+DeckHas:Ability$Sacrifice|Token
+Oracle:Devoid\nFlying, vigilance\nWhen Angelic Aberration enters, sacrifice any number of creatures each with base power or toughness 1 or less. Create that many 4/4 colorless Eldrazi Angel creature tokens with flying and vigilance.

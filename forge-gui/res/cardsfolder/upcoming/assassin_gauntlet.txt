@@ -1,0 +1,12 @@
+Name:Assassin Gauntlet
+ManaCost:2 U
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to up to one target creature you control. Tap all creatures target opponent controls.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control | SubAbility$ DBTapAll
+SVar:DBTapAll:DB$ TapAll | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Creature
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigDamageDone | Description$ Equipped creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card."
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+K:Equip:2
+Oracle:When Assassin Gauntlet enters, attach it to up to one target creature you control. Tap all creatures target opponent controls.\nEquipped creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, draw a card, then discard a card."\nEquip {2}

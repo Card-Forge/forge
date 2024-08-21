@@ -1,0 +1,10 @@
+Name:Agate-Blade Assassin
+ManaCost:1 B
+Types:Creature Lizard Assassin
+PT:1/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, defending player loses 1 life and you gain 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+Oracle:Whenever Agate-Blade Assassin attacks, defending player loses 1 life and you gain 1 life.

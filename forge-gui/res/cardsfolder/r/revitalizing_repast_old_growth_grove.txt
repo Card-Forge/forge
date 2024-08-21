@@ -1,0 +1,18 @@
+Name:Revitalizing Repast
+ManaCost:BG
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Indestructible | SpellDescription$ It gains indestructible until end of turn.
+DeckHas:Ability$Counters
+AlternateMode:Modal
+Oracle:Put a +1/+1 counter on target creature. It gains indestructible until end of turn.
+
+ALTERNATE
+
+Name:Old-Growth Grove
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo B G | SpellDescription$ Add {B} or {G}.
+Oracle:Old-Growth Grove enters tapped.\n{T}: Add {B} or {G}.

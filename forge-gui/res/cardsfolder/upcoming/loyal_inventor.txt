@@ -1,0 +1,13 @@
+Name:Loyal Inventor
+ManaCost:2 U
+Types:Creature Human Artificer
+PT:2/3
+K:Vigilance
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTutor | TriggerDescription$ When CARDNAME enters, you may search your library for an artifact card, reveal it, then shuffle. Put that card into your hand if you control an Assassin. Otherwise, put that card on top of your library.
+SVar:TrigTutor:DB$ ChangeZone | Origin$ Library | Destination$ Library | ChangeType$ Artifact | ChangeNum$ 1 | Reveal$ True | RememberChanged$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ConditionCheckSVar$ X | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | Destination$ Library | LibraryPosition$ 0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Card.Assassin+YouCtrl
+DeckHints:Type$Assassin|Artifact
+Oracle:Vigilance\nWhen Loyal Inventor enters, you may search your library for an artifact card, reveal it, then shuffle. Put that card into your hand if you control an Assassin. Otherwise, put that card on top of your library.

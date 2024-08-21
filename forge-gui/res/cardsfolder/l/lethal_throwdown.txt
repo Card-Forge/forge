@@ -1,0 +1,7 @@
+Name:Lethal Throwdown
+ManaCost:B
+Types:Sorcery
+A:SP$ Destroy | Cost$ B Sac<1/Creature/creature or sacrifice a modified creature> | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBDraw | SpellDescription$ Destroy target creature or planeswalker.
+SVar:DBDraw:DB$ Draw | StackDescription$ SpellDescription | ConditionDefined$ Sacrificed | ConditionPresent$ Card.modified | SpellDescription$ If the modified creature was sacrificed, draw a card. (Equipment, Auras you control, and counters are modifications.)
+DeckHas:Ability$Sacrifice
+Oracle:As an additional cost to cast this spell, sacrifice a creature or sacrifice a modified creature. (Equipment, Auras you control, and counters are modifications.)\nDestroy target creature or planeswalker. If the modified creature was sacrificed, draw a card.

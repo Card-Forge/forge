@@ -3,8 +3,8 @@ ManaCost:4 B B
 Types:Creature Giant
 PT:6/6
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 2/2 black Zombie creature tokens.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create two 2/2 black Zombie creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/2 black Zombie creature tokens.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/2 black Zombie creature tokens.
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie | TokenOwner$ You | TokenAmount$ 2
 SVar:HasAttackEffect:TRUE
-Oracle:Deathtouch\nWhenever Grave Titan enters the battlefield or attacks, create two 2/2 black Zombie creature tokens.
+Oracle:Deathtouch\nWhenever Grave Titan enters or attacks, create two 2/2 black Zombie creature tokens.

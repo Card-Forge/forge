@@ -1,0 +1,9 @@
+Name:Cogwork Grinder
+ManaCost:6
+Types:Artifact Creature Construct
+PT:0/0
+Draft:Draft CARDNAME face up.
+Draft:As you draft a card, you may remove it from the draft face down. (Those cards aren't in your card pool.)
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it, where X is the number of cards you removed from the draft with cards named Cogwork Grinder.
+SVar:X:Count$DraftNotesCount.Cogwork Grinder
+Oracle:Draft Cogwork Grinder face up.\nAs you draft a card, you may remove it from the draft face down. (Those cards aren't in your card pool.)\nCogwork Grinder enters with X +1/+1 counters on it, where X is the number of cards you removed from the draft with cards named Cogwork Grinder.

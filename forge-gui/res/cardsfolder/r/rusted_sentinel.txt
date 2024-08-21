@@ -2,5 +2,6 @@ Name:Rusted Sentinel
 ManaCost:4
 Types:Artifact Creature Golem
 PT:3/4
-K:CARDNAME enters the battlefield tapped.
-Oracle:Rusted Sentinel enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Rusted Sentinel enters tapped.

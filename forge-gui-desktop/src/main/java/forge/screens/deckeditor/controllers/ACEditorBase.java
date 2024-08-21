@@ -28,7 +28,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.deck.CardPool;
@@ -214,7 +213,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         Iterable<Entry<String,Integer>> cardsByName = null;
         if (deck != null) {
-            final CardPool allCards = deck.getAllCardsInASinglePool(deck.has(DeckSection.Commander));
+            final CardPool allCards = deck.getAllCardsInASinglePool();
             cardsByName = Aggregates.groupSumBy(allCards, pc -> pc.getRules().getNormalizedName());
         }
 
@@ -234,12 +233,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     max = cardCopies;
                 }
 
-                Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName, new Predicate<Entry<String, Integer>>() {
-                    @Override
-                    public boolean apply(Entry<String, Integer> t) {
-                        return t.getKey().equals(card.getRules().getNormalizedName());
-                    }
-                }, null);
+                Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName,
+                        t -> t.getKey().equals(card.getRules().getNormalizedName()), null);
                 if (cardAmountInfo != null) {
                     max -= cardAmountInfo.getValue();
                 }
@@ -326,16 +321,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public void setDeckManager(final ItemManager<TItem> itemManager) {
         this.deckManager = itemManager;
 
-        btnRemove.setCommand(new UiCommand() {
-            @Override public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
-            }
-        });
-        btnRemove4.setCommand(new UiCommand() {
-            @Override public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4);
-            }
-        });
+        btnRemove.setCommand((UiCommand) () -> CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1));
+        btnRemove4.setCommand((UiCommand) () -> CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 4));
         itemManager.getPnlButtons().add(btnRemove, "w 30%!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnRemove4, "w 30%!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnAddBasicLands, "w 30%!, h 30px!, gapx 5");
@@ -359,16 +346,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public void setCatalogManager(final ItemManager<TItem> itemManager) {
         this.catalogManager = itemManager;
 
-        btnAdd.setCommand(new UiCommand() {
-            @Override public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1);
-            }
-        });
-        btnAdd4.setCommand(new UiCommand() {
-            @Override public void run() {
-                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4);
-            }
-        });
+        btnAdd.setCommand((UiCommand) () -> CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 1));
+        btnAdd4.setCommand((UiCommand) () -> CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false, 4));
         itemManager.getPnlButtons().add(btnAdd, "w 30%!, h 30px!, h 30px!, gapx 5");
         itemManager.getPnlButtons().add(btnAdd4, "w 30%!, h 30px!, h 30px!, gapx 5");
     }
@@ -390,12 +369,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 parent.setSelected(parent.getDocs().get(0));
             } else {
                 // if the parent is now childless, fill in the resultant gap
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        SRearrangingUtil.fillGap(parent);
-                        FView.SINGLETON_INSTANCE.removeDragCell(parent);
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    SRearrangingUtil.fillGap(parent);
+                    FView.SINGLETON_INSTANCE.removeDragCell(parent);
                 });
             }
         }
@@ -475,28 +451,13 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptoprevioustable"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
-                    new Runnable() {
-                @Override
-                public void run() {
-                    getNextItemManager().focus();
-                }
-            });
+                    () -> getNextItemManager().focus());
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptopnexttable"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, InputEvent.META_DOWN_MASK | InputEvent.CTRL_DOWN_MASK),
-                    new Runnable() {
-                @Override
-                public void run() {
-                    getNextItemManager().focus();
-                }
-            });
+                    () -> getNextItemManager().focus());
             GuiUtils.addMenuItem(menu, localizer.getMessage("lblJumptotextfilter"),
                     KeyStroke.getKeyStroke(KeyEvent.VK_F, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                    new Runnable() {
-                @Override
-                public void run() {
-                    getItemManager().focusSearch();
-                }
-            });
+                    () -> getItemManager().focusSearch());
         }
 
         /**
@@ -528,24 +489,22 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         private void addMakeFoil(final int qty) {
             String label = localizer.getMessage("lblConvertToFoil") + " " + SItemManagerUtil.getItemDisplayString(getItemManager().getSelectedItems(), qty, false);
 
-            GuiUtils.addMenuItem(menu, label, null, new Runnable() {
-                        @Override public void run() {
-                            Integer quantity = qty;
-                            if (quantity < 0) {
-                                quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                                if (quantity == null) { return; }
-                            }
-                            // get the currently selected card from the editor
-                            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
-                            PaperCard existingCard = cardManager.getSelectedItem();
-                            // make a foiled version based on the original
-                            PaperCard foiledCard = existingCard.isFoil() ? existingCard.getUnFoiled() : existingCard.getFoiled();
-                            // remove *quantity* instances of existing card
-                            CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
-                            // add *quantity* into the deck and set them as selected
-                            cardManager.addItem(foiledCard, quantity);
-                            cardManager.setSelectedItem(foiledCard);
-                        }
+            GuiUtils.addMenuItem(menu, label, null, () -> {
+                Integer quantity = qty;
+                if (quantity < 0) {
+                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
+                    if (quantity == null) { return; }
+                }
+                // get the currently selected card from the editor
+                CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
+                PaperCard existingCard = cardManager.getSelectedItem();
+                // make a foiled version based on the original
+                PaperCard foiledCard = existingCard.isFoil() ? existingCard.getUnFoiled() : existingCard.getFoiled();
+                // remove *quantity* instances of existing card
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, quantity);
+                // add *quantity* into the deck and set them as selected
+                cardManager.addItem(foiledCard, quantity);
+                cardManager.setSelectedItem(foiledCard);
             }, true, true);
         }
         //TODO: need to translate getItemDisplayString
@@ -554,19 +513,16 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             if (dest != null && !dest.isEmpty()) {
                 label += " " + dest;
             }
-            GuiUtils.addMenuItem(menu, label,
-                    KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), new Runnable() {
-                @Override public void run() {
-                    Integer quantity = qty;
-                    if (quantity < 0) {
-                        quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
-                        if (quantity == null) { return; }
-                    }
-                    if (isAddContextMenu) {
-                        CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
-                    } else {
-                        CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
-                    }
+            GuiUtils.addMenuItem(menu, label, KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, shortcutModifiers), () -> {
+                Integer quantity = qty;
+                if (quantity < 0) {
+                    quantity = GuiChoose.getInteger(localizer.getMessage("lblChooseavalueforX"), 1, -quantity, 20);
+                    if (quantity == null) { return; }
+                }
+                if (isAddContextMenu) {
+                    CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(toAlternate, quantity);
+                } else {
+                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(toAlternate, quantity);
                 }
             }, true, shortcutModifiers == 0);
         }

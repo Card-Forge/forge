@@ -49,12 +49,7 @@ public class DialogTree extends JPanel {
 
     public void addSelectionListener(){
         //subscribe to valueChanged, change to that object in edit pane
-        dialogTree.getSelectionModel().addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                emitChanged(e);
-            }
-        });
+        dialogTree.getSelectionModel().addTreeSelectionListener(this::emitChanged);
 
     }
 

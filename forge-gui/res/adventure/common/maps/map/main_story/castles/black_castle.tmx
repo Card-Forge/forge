@@ -185,7 +185,7 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="High Vampire"/>
+    <property name="enemy" value="Ancient Vampire"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>

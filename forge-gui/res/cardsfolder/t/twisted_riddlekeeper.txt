@@ -1,0 +1,11 @@
+Name:Twisted Riddlekeeper
+ManaCost:8
+Types:Creature Eldrazi Sphinx
+PT:5/5
+K:Flying
+K:Emerge:5 C U
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When you cast this spell, tap up to two target permanents. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | SubAbility$ DBCounter | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target permanents
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Emerge {5}{C}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)\nWhen you cast this spell, tap up to two target permanents. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)\nFlying

@@ -9,4 +9,4 @@ S:Mode$ ReduceCost | ValidCard$ Food.YouCtrl | Type$ Ability | Amount$ 1 | Affec
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token & Type$Artifact
 DeckHints:Type$Food
-Oracle:Partner with Frodo, Adventurous Hobbit (When this creature enters the battlefield, target player may put Frodo into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nActivated abilities of Foods you control cost {1} less to activate.
+Oracle:Partner with Frodo, Adventurous Hobbit (When this creature enters, target player may put Frodo into their hand from their library, then shuffle.)\nAt the beginning of combat on your turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nActivated abilities of Foods you control cost {1} less to activate.

@@ -1,0 +1,8 @@
+Name:Garbage Fire
+ManaCost:2 R
+Types:Instant
+Draft:Reveal CARDNAME as you draft it.
+Draft:Note how many cards you've drafted this draft round, including CARDNAME.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | Description$ CARDNAME deals damage to target creature equal to the highest number you noted for cards named Garbage Fire.
+SVar:X:Count$DraftNotesHighest.Garbage Fire
+Oracle:Reveal Garbage Fire as you draft it and note how many cards you've drafted this draft round, including Garbage Fire.\nGarbage Fire deals damage to target creature equal to the highest number you noted for cards named Garbage Fire.

@@ -6,7 +6,7 @@
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../tileset/dungeon.tsx"/>
- <tileset firstgid="28289" source="../../tileset/FarmFood.tsx"/>
+ <tileset firstgid="16385" source="../../tileset/FarmFood.tsx"/>
  <layer id="10" name="Colission" width="50" height="40">
   <data encoding="base64" compression="zlib">
    eJzt00EKgCAQRmH3dYPqqp2s7lYuBiqIRkdplPeBO43/LQoBAACgX+vwfbzbRt29XXnvD9oG4bEltUF4asltEB5apnPDYtxR4htWdNzRUQYddz10ePjPo9m4wfq+lLgjd4vlbWmyJXVP7rtarnu0m3Le1NZLR/TclXK86aFBvG1tqQEAgNYcP2EZKg==
@@ -28,14 +28,14 @@
   </data>
  </layer>
  <layer id="3" name="Clutter" width="50" height="40">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
-   eJztlsFKw0AQhof0Zr3UtmAvyZ5zs4LvofgY2t76AL6D915U9A18CRUU1AdQjx69uoMddnbsJoLgjmE++EmyWcp87Ga2AIZhGIZhGN1kWgL0XXt2ymwltoIOmw7gxl9vG3Lns+F0unCHS389nITs1wAHdXi+cjpdpMP7JM6xd5jVsZs2l7XrMIhrJh8+hnM0ucyq9XsJ04Rcl6PqL6pNgx5Yg3Roc+Fz6DdyQjX0evE+ovv7Is5eETw+Bvo85LdAud4OWY5jj9MtvR7Spcljd6jbg7vIffVQfJ+rxYP6Jj/zZK/lz/xcnK76bW4P7JvP7AzgZ578VsiJ5tDZ87jq27lZVLHLSf8rqV6M77jDIvNaEFiHdEk50F7iDto8uEvTf3bpoMVj6OKansr28Pljl9sgIF1+Gk0ORMpllBjX6ECgy4iFak2NG0bXOZsDnPtczHNX8jtefP2vPm//3MMwusonsKW0WQ==
+   eJztlrFKA0EQhodLZ2xiEjDN3TYqXGcE+zyC4iuoTUyZB/Ad7G31DXwJFRTUp7C0dQcz7OyYvRMEdzzmg5+721vCfOzebAAMwzAMwzC6ybQE6Lv27JfZSmwFHTYdwL2/PjTk0WfD6XThDjf+ejIJOaoBjuvwfOt0ukiH90mcC++wqGM3bS5r12EQ10w+fAznaHJZVOv3EqYJuS7z6i+qTYMeWIN0aHPhc+g3ckI19HrxPqL7pyLOYRE8Pgb6POS3QLnbDrkexx5XW3o9pEuTx8FQtwd3kfvqufg+V4sH9U1+5sley5/5uThd9dvcHtg339gZwM88+a2QE82hs+dl1bdzs6xil8v+V1K9GN9xh2XmtSCwDumScqC9xB20eXCXpv/s0kGLx9DFNb2W7eHzxy63QUC6/DSaHIiUyygxrtGBQJcRC9WaGjeMrrMzA9j12ZvlruR3nPr6z3zO/7mHYXSVT1B5sEU=
   </data>
  </layer>
  <layer id="9" name="Shades" width="50" height="40" opacity="0.6" tintcolor="#000000">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzt0jkRADAMwLDsXcofSeCVQ5c8JyHw4AgAAOBHVgcwnofoxpMA0N+51QUAsNsD084CRA==
   </data>

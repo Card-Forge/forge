@@ -81,6 +81,29 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             isPermanent = permanent;
             pluralName = plural;
         }
+
+        /**
+         * Converts this core type to whichever GamePieceType is typical of it.
+         * Be aware that this will not catch GamePieceTypes derived from subtypes,
+         * such as Attractions.
+         * @return a GamePieceType appropriate for this core type.
+         */
+        public GamePieceType toGamePieceType() {
+            switch(this) {
+                case Plane:
+                case Phenomenon:
+                    return GamePieceType.PLANAR;
+                case Scheme:
+                    return GamePieceType.SCHEME;
+                case Dungeon:
+                    return GamePieceType.DUNGEON;
+                case Vanguard:
+                    return GamePieceType.AVATAR;
+                //Sticker sheets will probably eventually go here.
+                default:
+                    return GamePieceType.CARD;
+            }
+        }
     }
 
     public enum Supertype {
@@ -382,6 +405,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public boolean hasABasicLandType() {
         return Iterables.any(this.subtypes, Predicates.IS_BASIC_LAND_TYPE);
     }
+    @Override
+    public boolean hasANonBasicLandType() {
+        return !Collections.disjoint(this.subtypes, getNonBasicTypes());
+    }
 
     @Override
     public boolean isPermanent() {
@@ -489,13 +516,16 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
-    public final boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
+    public boolean isAttachment() { return isAura() || isEquipment() || isFortification(); }
     @Override
-    public final boolean isAura()           { return hasSubtype("Aura"); }
+    public boolean isAura()           { return hasSubtype("Aura"); }
     @Override
-    public final boolean isEquipment()  { return hasSubtype("Equipment"); }
+    public boolean isEquipment()  { return hasSubtype("Equipment"); }
     @Override
-    public final boolean isFortification()  { return hasSubtype("Fortification"); }
+    public boolean isFortification()  { return hasSubtype("Fortification"); }
+    public boolean isAttraction() {
+        return hasSubtype("Attraction");
+    }
 
     @Override
     public boolean isSaga() {
@@ -773,6 +803,17 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return false;
     }
 
+    public GamePieceType getGamePieceType() {
+        if(this.isAttraction())
+            return GamePieceType.ATTRACTION;
+        for(CoreType type : coreTypes) {
+            GamePieceType r = type.toGamePieceType();
+            if(r != GamePieceType.CARD)
+                return r;
+        }
+        return GamePieceType.CARD;
+    }
+
     public static CardType parse(final String typeText, boolean incomplete) {
         // Most types and subtypes, except "Serra's Realm" and
         // "Bolas's Meditation Realm" consist of only one word
@@ -851,71 +892,21 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 "Warlock");
     }
     public static class Predicates {
-        public static Predicate<String> IS_LAND_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isALandType(input);
-            }
-        };
-        public static Predicate<String> IS_BASIC_LAND_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isABasicLandType(input);
-            }
-        };
-        public static Predicate<String> IS_ARTIFACT_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAnArtifactType(input);
-            }
-        };
+        public static Predicate<String> IS_LAND_TYPE = CardType::isALandType;
+        public static Predicate<String> IS_BASIC_LAND_TYPE = CardType::isABasicLandType;
+        public static Predicate<String> IS_ARTIFACT_TYPE = CardType::isAnArtifactType;
 
-        public static Predicate<String> IS_CREATURE_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isACreatureType(input);
-            }
-        };
+        public static Predicate<String> IS_CREATURE_TYPE = CardType::isACreatureType;
 
-        public static Predicate<String> IS_ENCHANTMENT_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAnEnchantmentType(input);
-            }
-        };
+        public static Predicate<String> IS_ENCHANTMENT_TYPE = CardType::isAnEnchantmentType;
 
-        public static Predicate<String> IS_SPELL_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isASpellType(input);
-            }
-        };
+        public static Predicate<String> IS_SPELL_TYPE = CardType::isASpellType;
 
-        public static Predicate<String> IS_WALKER_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAPlaneswalkerType(input);
-            }
-        };
-        public static Predicate<String> IS_DUNGEON_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isADungeonType(input);
-            }
-        };
-        public static Predicate<String> IS_BATTLE_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isABattleType(input);
-            }
-        };
+        public static Predicate<String> IS_WALKER_TYPE = CardType::isAPlaneswalkerType;
+        public static Predicate<String> IS_DUNGEON_TYPE = CardType::isADungeonType;
+        public static Predicate<String> IS_BATTLE_TYPE = CardType::isABattleType;
 
-        public static Predicate<String> IS_PLANAR_TYPE = new Predicate<String>() {
-            @Override
-            public boolean apply(String input) {
-                return CardType.isAPlanarType(input);
-            }
-        };
+        public static Predicate<String> IS_PLANAR_TYPE = CardType::isAPlanarType;
     }
 
     ///////// Utility methods
@@ -959,6 +950,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public static Collection<String> getBasicTypes() {
         return Collections.unmodifiableCollection(Constant.BASIC_TYPES);
     }
+    public static Collection<String> getNonBasicTypes() {
+        return Collections.unmodifiableCollection(Constant.LAND_TYPES);
+    }
 
     public static Collection<String> getAllCreatureTypes() {
         return Collections.unmodifiableCollection(Constant.CREATURE_TYPES);
@@ -978,7 +972,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     public static boolean isASubType(final String cardType) {
-        return (!isASupertype(cardType) && !isACardType(cardType));
+        return getSortedSubTypes().contains(cardType);
     }
 
     public static boolean isAnArtifactType(final String cardType) {
@@ -1026,7 +1020,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      *
      * @deprecated
      */
-    public static final String getSingularType(final String type) {
+    public static String getSingularType(final String type) {
         if (Constant.singularTypes.containsKey(type)) {
             return Constant.singularTypes.get(type);
         }
@@ -1039,10 +1033,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
      * @param type a String.
      * @return the corresponding type.
      */
-    public static final String getPluralType(final String type) {
+    public static String getPluralType(final String type) {
         if (Constant.pluralTypes.containsKey(type)) {
             return Constant.pluralTypes.get(type);
         }
         return type;
     }
+
 }

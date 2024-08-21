@@ -19,17 +19,13 @@ package forge.gamemodes.quest;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.ReadPriceList;
@@ -37,11 +33,14 @@ import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -69,7 +68,7 @@ public class QuestUtilUnlockSets {
         final Map<String, Integer> mapPrices = prices.getPriceList();
         final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<>();
 
-        Double multiplier = 1d;
+        double multiplier = 1d;
         int j = 0;
         for (CardEdition ed : getUnlockableEditions(qData)) {
             j++;
@@ -145,11 +144,11 @@ public class QuestUtilUnlockSets {
         List<CardEdition> options = new ArrayList<>();
 
         // Sort current sets by date
-        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), FModel.getMagicDb().getEditions()::get));
         Collections.sort(allowedSets);
         
         // Sort unlockable sets by date
-        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions().FN_EDITION_BY_CODE));
+        List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), FModel.getMagicDb().getEditions()::get));
         Collections.sort(excludedSets);
         
         // get a number of sets between an excluded and any included set
@@ -168,12 +167,9 @@ public class QuestUtilUnlockSets {
         }
 
         // sort by distance, then by code desc
-        Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Long>>() {
-            @Override
-            public int compare(ImmutablePair<CardEdition, Long> o1, ImmutablePair<CardEdition, Long> o2) {
-                long delta = o2.right - o1.right;
-                return delta < 0 ? -1 : delta == 0 ? 0 : 1;
-            }
+        excludedWithDistances.sort((o1, o2) -> {
+            long delta = o2.right - o1.right;
+            return delta < 0 ? -1 : delta == 0 ? 0 : 1;
         });
 
         for (ImmutablePair<CardEdition, Long> set : excludedWithDistances) {
@@ -196,8 +192,8 @@ public class QuestUtilUnlockSets {
      * @param unlockedSet the edition to unlock
      */
     public static void doUnlock(final QuestController qData, final CardEdition unlockedSet) {
-        IStorage<SealedProduct.Template> starters = FModel.getMagicDb().getTournamentPacks();
-        IStorage<SealedProduct.Template> boosters = FModel.getMagicDb().getBoosters();
+        IStorage<SealedTemplate> starters = FModel.getMagicDb().getTournamentPacks();
+        IStorage<SealedTemplate> boosters = FModel.getMagicDb().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
         String additionalSet = unlockedSet.getAdditionalUnlockSet();

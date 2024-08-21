@@ -17,8 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -134,26 +132,18 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        };
+        final Supplier<Deck> newCreator = Deck::new;
 
         this.controller = new DeckController<>(questData0.getMyDecks(), this, newCreator);
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                Deck deck = getDeckController().getModel();
-                if (deck == null) { return; }
+        getBtnAddBasicLands().setCommand((UiCommand) () -> {
+            Deck deck = getDeckController().getModel();
+            if (deck == null) { return; }
 
-                AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, questData.getDefaultLandSet());
-                CardPool landsToAdd = dialog.show();
-                if (landsToAdd != null) {
-                    onAddItems(landsToAdd, false);
-                }
+            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, questData.getDefaultLandSet());
+            CardPool landsToAdd = dialog.show();
+            if (landsToAdd != null) {
+                onAddItems(landsToAdd, false);
             }
         });
     }
@@ -165,7 +155,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
             for (final Entry<PaperCard, Integer> e : deck.getMain()) {
                 final PaperCard card = e.getKey();
                 final Integer amount = result.get(card);
-                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
+                result.put(card, amount == null ? 1 : 1 + amount);
             }
         }
         return result;
@@ -227,12 +217,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         }
         GuiUtils.addMenuItem(cmb.getMenu(), s,
                 KeyStroke.getKeyStroke(48 + n, 0),
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        SetRatingStars(n,cmb);
-                    }
-                });
+                () -> SetRatingStars(n,cmb));
     }
 
     public void SetRatingStars(int n, EditorContextMenuBuilder cmb) {
@@ -362,7 +347,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard.FN_GET_RULES);
+        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard::getRules);
         return getRemainingCardPool().getFilteredPool(commanderPredicate);
     }
 
@@ -448,13 +433,10 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
 

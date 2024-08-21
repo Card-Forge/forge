@@ -1,0 +1,8 @@
+Name:Roil Cartographer
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Landfall — Whenever a land you control enters, you get {E} (an energy counter).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+A:AB$ Draw | Cost$ T PayEnergy<6> | NumCards$ 3 | SpellDescription$ Draw three cards.
+Oracle:Landfall — Whenever a land you control enters, you get {E} (an energy counter).\n{T}, Pay six {E}: Draw three cards.

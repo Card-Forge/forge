@@ -1,7 +1,6 @@
 package forge.util.maps;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
@@ -38,12 +37,12 @@ public final class MapToAmountUtil {
         int max = Integer.MIN_VALUE;
         T maxElement = null;
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() > max) {
-                max = entry.getValue().intValue();
+            if (entry.getValue() > max) {
+                max = entry.getValue();
                 maxElement = entry.getKey();
             }
         }
-        return Pair.of(maxElement, Integer.valueOf(max));
+        return Pair.of(maxElement, max);
     }
 
     /**
@@ -67,7 +66,7 @@ public final class MapToAmountUtil {
         final int max = Collections.max(map.values());
         final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() == max) {
+            if (entry.getValue() == max) {
                 set.add(entry.getKey());
             }
         }
@@ -93,12 +92,12 @@ public final class MapToAmountUtil {
         int min = Integer.MAX_VALUE;
         T minElement = null;
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() < min) {
-                min = entry.getValue().intValue();
+            if (entry.getValue() < min) {
+                min = entry.getValue();
                 minElement = entry.getKey();
             }
         }
-        return Pair.of(minElement, Integer.valueOf(min));
+        return Pair.of(minElement, min);
     }
 
     /**
@@ -122,7 +121,7 @@ public final class MapToAmountUtil {
         final int min = Collections.min(map.values());
         final FCollection<T> set = new FCollection<>();
         for (final Entry<T, Integer> entry : map.entrySet()) {
-            if (entry.getValue().intValue() == min) {
+            if (entry.getValue() == min) {
                 set.add(entry.getKey());
             }
         }
@@ -134,19 +133,14 @@ public final class MapToAmountUtil {
         for (final Entry<T, Integer> entry : map.entrySet()) {
             entries.add(Pair.of(entry.getKey(), entry.getValue()));
         }
-        Collections.sort(entries, new Comparator<Entry<T, Integer>>() {
-            @Override
-            public int compare(final Entry<T, Integer> o1, final Entry<T, Integer> o2) {
-                return o1.getValue().compareTo(o2.getValue());
-            }
-        });
+        entries.sort(Entry.comparingByValue());
         return entries;
     }
 
     private static final MapToAmount<?> EMPTY_MAP = new LinkedHashMapToAmount<>(0);
 
     @SuppressWarnings("unchecked")
-    public static final <T> MapToAmount<T> emptyMap() {
+    public static <T> MapToAmount<T> emptyMap() {
         return (MapToAmount<T>) EMPTY_MAP;
     }
 }

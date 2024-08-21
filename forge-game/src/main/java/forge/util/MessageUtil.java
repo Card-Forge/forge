@@ -12,7 +12,7 @@ public class MessageUtil {
     private MessageUtil() { }
 
     public static String formatMessage(String message, Player player, Object related) {
-        if (related instanceof Player && message.indexOf("{player") >= 0) {
+        if (related instanceof Player && message.contains("{player")) {
             String noun = mayBeYou(player, related);
             message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getInstance().getPossesive(noun));
         }
@@ -20,7 +20,7 @@ public class MessageUtil {
     }
 
     public static String formatMessage(String message, PlayerView player, Object related) {
-        if (related instanceof PlayerView && message.indexOf("{player") >= 0) {
+        if (related instanceof PlayerView && message.contains("{player")) {
             String noun = mayBeYou(player, related);
             message = TextUtil.fastReplace(TextUtil.fastReplace(message, "{player}", noun),"{player's}", Lang.getInstance().getPossesive(noun));
         }
@@ -30,7 +30,7 @@ public class MessageUtil {
     // These are not much related to PlayerController
     public static  String formatNotificationMessage(SpellAbility sa, Player player, GameObject target, String value) {
         if (sa == null || sa.getApi() == null || sa.getHostCard() == null) {
-            return Localizer.getInstance().getMessage("lblResultIs", value);
+            return String.valueOf(value);
         }
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {

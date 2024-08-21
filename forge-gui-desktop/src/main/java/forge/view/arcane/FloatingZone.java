@@ -18,7 +18,6 @@
 package forge.view.arcane;
 
 import java.awt.event.MouseEvent;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,11 +59,7 @@ public class FloatingZone extends FloatingCardArea {
             return false;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public void run() {
-                cardArea.showWindow();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(cardArea::showWindow);
 
         return true;
     }
@@ -76,11 +71,7 @@ public class FloatingZone extends FloatingCardArea {
             return false;
         }
 
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public void run() {
-                cardArea.hideWindow();
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(cardArea::hideWindow);
 
         return true;
     }
@@ -140,16 +131,13 @@ public class FloatingZone extends FloatingCardArea {
     protected boolean sortedByName = false;
     protected FCollection<CardView> cardList;
 
-    private final Comparator<CardView> comp = new Comparator<CardView>() {
-        @Override
-        public int compare(CardView lhs, CardView rhs) {
-            if (!getMatchUI().mayView(lhs)) {
-                return (getMatchUI().mayView(rhs)) ? 1 : 0;
-            } else if (!getMatchUI().mayView(rhs)) {
-                return -1;
-            } else {
-                return lhs.getName().compareTo(rhs.getName());
-            }
+    private final Comparator<CardView> comp = (lhs, rhs) -> {
+        if (!getMatchUI().mayView(lhs)) {
+            return (getMatchUI().mayView(rhs)) ? 1 : 0;
+        } else if (!getMatchUI().mayView(rhs)) {
+            return -1;
+        } else {
+            return lhs.getName().compareTo(rhs.getName());
         }
     };
 
@@ -158,7 +146,7 @@ public class FloatingZone extends FloatingCardArea {
         if (zoneCards != null) {
             cardList = new FCollection<>(zoneCards);
             if (sortedByName) {
-                Collections.sort(cardList, comp);
+                cardList.sort(comp);
             }
             return cardList;
         } else {
@@ -220,7 +208,7 @@ public class FloatingZone extends FloatingCardArea {
         if (!hasBeenShown) {
             getWindow().getTitleBar().addMouseListener(new FMouseAdapter() {
                 @Override
-                public final void onRightClick(final MouseEvent e) {
+                public void onRightClick(final MouseEvent e) {
                     toggleSorted();
                 }
             });

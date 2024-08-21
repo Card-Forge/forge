@@ -1,6 +1,6 @@
 Name:Viashino Sandscout
 ManaCost:1 R
-Types:Creature Viashino Scout
+Types:Creature Lizard Scout
 PT:2/1
 K:Haste
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of the end step, return CARDNAME to its owner's hand.

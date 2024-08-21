@@ -1,0 +1,9 @@
+Name:Expanding Ooze
+ManaCost:1 B G
+Types:Creature Ooze
+PT:3/3
+K:Adapt:1:B G
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on target modified creature you control. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.modified+YouCtrl | TgtPrompt$ Select target modified creature you control | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+Oracle:{B}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)\nWhenever Expanding Ooze attacks, put a +1/+1 counter on target modified creature you control. (Equipment, Auras you control, and counters are modifications.)

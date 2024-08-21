@@ -3,6 +3,6 @@ ManaCost:B
 Types:Instant
 A:SP$ Mana | Cost$ B Sac<1/Creature> | Produced$ B | Amount$ 4 | AILogic$ ManaRitual | AINoRecursiveCheck$ True | SpellDescription$ Add {B}{B}{B}{B}.
 SVar:AIPreference:SacCost$Creature.cmcLE2
-#TODO: Improve the mana ritual AI such that it does not "misfire" from time to time, and only then remove RemoveDeck here, because otherwise sometimes the AI will just sac the creature and not cast anything.
+# TODO: Improve the mana ritual AI such that it does not "misfire" from time to time, and only then remove RemoveDeck here, because otherwise sometimes the AI will just sac the creature and not cast anything.
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nAdd {B}{B}{B}{B}.

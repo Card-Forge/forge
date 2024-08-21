@@ -1,0 +1,12 @@
+Name:Builder's Talent
+ManaCost:1 W
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a white Wall creature token with defender.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_0_4_wall_defender | TokenOwner$ You
+K:Class:2:W:AddTrigger$ TriggerEnter
+SVar:TriggerEnter:Mode$ ChangesZoneAll | ValidCards$ Permanent.nonCreature+nonLand+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more noncreature, nonland permanents you control enter, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+K:Class:3:4 W:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 3 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | Secondary$ True | TriggerDescription$ When this Class becomes level 3, return target noncreature, nonland permanent card from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonCreature+nonLand+YouOwn | TgtPrompt$ Select target noncreature, nonland permanent card from your graveyard | Origin$ Graveyard | Destination$ Battlefield
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen Builder's Talent enters, create a white Wall creature token with defender.\n{W}: Level 2\nWhenever one or more noncreature, nonland permanents you control enter, put a +1/+1 counter on target creature you control.\n{4}{W}: Level 3\nWhen this Class becomes level 3, return target noncreature, nonland permanent card from your graveyard to the battlefield.

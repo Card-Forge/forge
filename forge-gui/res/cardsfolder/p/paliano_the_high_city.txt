@@ -1,0 +1,7 @@
+Name:Paliano, the High City
+ManaCost:no cost
+Types:Legendary Land
+Draft:Reveal CARDNAME as you draft it.
+Draft:As you draft CARDNAME, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.
+A:AB$ Mana | Cost$ T | Produced$ Combo NotedColors | Condition$ Add one mana of any color chosen as you drafted cards named CARDNAME. | SpellDescription$ Add one mana of any color chosen as you drafted cards named Paliano, the High City.
+Oracle:Reveal Paliano, the High City as you draft it. As you draft Paliano, the High City, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.\n{T}: Add one mana of any color chosen as you drafted cards named Paliano, the High City.

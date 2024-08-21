@@ -94,7 +94,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="86" template="../../obj/treasure.tx" x="546" y="204.667">
+  <object id="86" template="../../obj/treasure.tx" x="550.145" y="249.437">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,

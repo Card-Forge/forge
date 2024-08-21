@@ -17,12 +17,12 @@
  */
 package forge.game.spellability;
 
-import java.util.EnumSet;
-import java.util.Set;
-
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 /**
  * <p>
@@ -56,6 +56,8 @@ public class SpellAbilityVariables implements Cloneable {
     private Set<PhaseType> phases = EnumSet.noneOf(PhaseType.class);
 
     private boolean firstCombatOnly = false;
+
+    private boolean afterBlockersOnly = false;
 
     /** The GameTypes */
     private Set<GameType> gameTypes = EnumSet.noneOf(GameType.class);
@@ -341,9 +343,7 @@ public class SpellAbilityVariables implements Cloneable {
     public void setDelirium(boolean delirium) {  this.delirium = delirium; }
 
     public void setRevolt(final boolean bRevolt) { revolt = bRevolt; }
-
     public void setDesert(final boolean bDesert) { desert = bDesert; }
-
     public void setBlessing(final boolean bBlessing) { blessing = bBlessing; }
     public void setSolved(final boolean bSolved) { solved = bSolved; }
 
@@ -623,6 +623,18 @@ public class SpellAbilityVariables implements Cloneable {
     }
     public final boolean setFirstCombatOnly(boolean first) {
         return this.firstCombatOnly = first;
+    }
+
+    /**
+     * Gets the declared blockers.
+     *
+     * @return declared blockers
+     */
+    public final boolean getAfterBlockersOnly() {
+        return this.afterBlockersOnly;
+    }
+    public final boolean setAfterBlockersOnly(boolean first) {
+        return this.afterBlockersOnly = first;
     }
 
     /**

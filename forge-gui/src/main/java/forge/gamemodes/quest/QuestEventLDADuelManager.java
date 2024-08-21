@@ -68,11 +68,11 @@ public class QuestEventLDADuelManager implements QuestEventDuelManagerInterface 
             duel.setTitle(archetype.getName());
             duel.setOpponentName(archetype.getName());
             QuestEventDifficulty diff = QuestEventDifficulty.EASY;
-            if(i <= Float.valueOf(archetypes.size())*.1){
+            if(i <= ((float) archetypes.size()) * 0.1){
                 diff = QuestEventDifficulty.EXPERT;
-            }else if(i <= Float.valueOf(archetypes.size())*.4){
+            }else if(i <= ((float) archetypes.size()) * 0.4){
                 diff = QuestEventDifficulty.HARD;
-            }else if(i <= Float.valueOf(archetypes.size())*.7) {
+            }else if(i <= ((float) archetypes.size()) * 0.7) {
                 diff = QuestEventDifficulty.MEDIUM;
             }
             duel.setDifficulty(diff);

@@ -1,8 +1,6 @@
 package forge.screens.workshop.views;
 
 import javax.swing.JPanel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.Iterables;
 
@@ -45,13 +43,10 @@ public enum VWorkshopCatalog implements IVDoc<CWorkshopCatalog> {
         this.cardManager.setPool(ItemPool.createFrom(allCards, PaperCard.class), true);
         this.cardManagerContainer.setItemManager(this.cardManager);
 
-        this.cardManager.addSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(final ListSelectionEvent e) {
-                final PaperCard card = cardManager.getSelectedItem();
-                cDetailPicture.showItem(card);
-                CCardScript.SINGLETON_INSTANCE.showCard(card);
-            }
+        this.cardManager.addSelectionListener(e -> {
+            final PaperCard card = cardManager.getSelectedItem();
+            cDetailPicture.showItem(card);
+            CCardScript.SINGLETON_INSTANCE.showCard(card);
         });
     }
 

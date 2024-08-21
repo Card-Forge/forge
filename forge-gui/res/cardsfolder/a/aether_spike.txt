@@ -1,0 +1,11 @@
+Name:Aether Spike
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | SubAbility$ DBPutCounter | StackDescription$ {p:You} chooses {s:Targeted}. | SpellDescription$ Choose target spell.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ You | AILogic$ PayEnergy | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBChooseNumber | SpellDescription$ You get {E}{E} (two energy counters), then you may pay any amount of {E}.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to pay | SubAbility$ DBPay | StackDescription$ None
+SVar:DBPay:DB$ Pump | UnlessCost$ Mandatory PayEnergy<N> | UnlessPayer$ You | UnlessSwitched$ True | StackDescription$ None | SubAbility$ DBCounter
+SVar:DBCounter:DB$ Counter | Defined$ Targeted | UnlessCost$ N | UnlessPayer$ TargetedController | StackDescription$ SpellDescription | SpellDescription$ Counter that spell unless its controller pays {1} for each {E} paid this way.
+SVar:Max:Count$YourCountersEnergy
+SVar:N:Count$ChosenNumber
+Oracle:Choose target spell. You get {E}{E} (two energy counters), then you may pay any amount of {E}. Counter that spell unless its controller pays {1} for each {E} paid this way.

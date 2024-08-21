@@ -1,0 +1,8 @@
+Name:Eviscerator's Insight
+ManaCost:1 B
+Types:Instant
+A:SP$ Draw | Cost$ 1 B Sac<1/Artifact;Creature/artifact or creature> | NumCards$ 2 | SpellDescription$ Draw two cards.
+K:Flashback:4 B
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Artifact & Ability$Token
+Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nDraw two cards.\nFlashback {4}{B} (You may cast this card from your graveyard for its flashback cost and any additional costs. Then exile it.)

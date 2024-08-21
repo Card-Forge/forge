@@ -1,0 +1,14 @@
+Name:Portent of Calamity
+ManaCost:X U
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ X | Reveal$ True | ImprintRevealed$ True | SubAbility$ DBRepeatTypes | SpellDescription$ Reveal the top X cards of your library. For each card type, you may exile a card of that type from among them. Put the rest into your graveyard. You may cast a spell from among the exiled cards without paying its mana cost if you exiled four or more cards this way. Then put the rest of the exiled cards into your hand.
+SVar:DBRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.IsImprinted | TypesFromZone$ Library | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZone
+SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.ChosenType+YouOwn+IsImprinted | ChoiceZone$ Library | RememberChosen$ True
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Exile | Defined$ Remembered | SubAbility$ DBGraveyard
+SVar:DBGraveyard:DB$ ChangeZoneAll | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsImprinted+!IsRemembered | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | ValidSA$ Spell | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE4 | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$ValidExile Card.IsRemembered
+Oracle:Reveal the top X cards of your library. For each card type, you may exile a card of that type from among them. Put the rest into your graveyard. You may cast a spell from among the exiled cards without paying its mana cost if you exiled four or more cards this way. Then put the rest of the exiled cards into your hand.

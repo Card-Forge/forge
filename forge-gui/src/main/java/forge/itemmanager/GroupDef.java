@@ -19,195 +19,143 @@ import forge.util.Localizer;
 
 public enum GroupDef {
     COLOR("lblColor", getColorGroups(),
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    return null;
+            groupIndex -> null,
+            item -> {
+                if (item instanceof PaperCard) {
+                    return getColorGroup(((PaperCard) item).getRules().getColor());
                 }
-            },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        return getColorGroup(((PaperCard) item).getRules().getColor());
-                    }
-                    else if (item instanceof DeckProxy) {
-                        return getColorGroup(((DeckProxy) item).getColor());
-                    }
-                    return -1;
+                else if (item instanceof DeckProxy) {
+                    return getColorGroup(((DeckProxy) item).getColor());
                 }
+                return -1;
             }),
     COLOR_IDENTITY("lblColorIdentity", getColorGroups(),
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    return null;
+            groupIndex -> null,
+            item -> {
+                if (item instanceof PaperCard) {
+                    return getColorGroup(((PaperCard) item).getRules().getColorIdentity());
                 }
-            },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        return getColorGroup(((PaperCard) item).getRules().getColorIdentity());
-                    }
-                    else if (item instanceof DeckProxy) {
-                        return getColorGroup(((DeckProxy) item).getColorIdentity());
-                    }
-                    return -1;
+                else if (item instanceof DeckProxy) {
+                    return getColorGroup(((DeckProxy) item).getColorIdentity());
                 }
+                return -1;
             }),
     SET("lblSet", getSetGroups(),
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    return null;
+            groupIndex -> null,
+            item -> {
+                if (item instanceof PaperCard) {
+                    return getSetGroup(((PaperCard) item).getEdition());
                 }
-            },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        return getSetGroup(((PaperCard) item).getEdition());
-                    }
-                    else if (item instanceof DeckProxy) {
-                        return getSetGroup(((DeckProxy) item).getEdition().getCode());
-                    }
-                    return -1;
+                else if (item instanceof DeckProxy) {
+                    return getSetGroup(((DeckProxy) item).getEdition().getCode());
                 }
+                return -1;
             }),
     DEFAULT("lblDefault",
             new String[] { "Creatures", "Spells", "Lands" },
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    if (groupIndex == 2) {
-                        return ColumnDef.NAME; //pile lands by name regardless
-                    }
-                    return null;
+            groupIndex -> {
+                if (groupIndex == 2) {
+                    return ColumnDef.NAME; //pile lands by name regardless
                 }
+                return null;
             },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isCreature()) {
-                            return 0;
-                        }
-                        if (type.isLand()) { //make Artifact Lands appear in Lands group
-                            return 2;
-                        }
-                        if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery() || type.isBattle()) {
-                            return 1;
-                        }
+            item -> {
+                if (item instanceof PaperCard) {
+                    CardType type = ((PaperCard) item).getRules().getType();
+                    if (type.isCreature()) {
+                        return 0;
                     }
-                    return -1;
+                    if (type.isLand()) { //make Artifact Lands appear in Lands group
+                        return 2;
+                    }
+                    if (type.isArtifact() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery() || type.isBattle()) {
+                        return 1;
+                    }
                 }
+                return -1;
             }),
 
     CARD_TYPE("lblType",
             new String[] { "Planeswalker", "Creature", "Sorcery", "Instant", "Artifact", "Enchantment", "Land", "Battle" },
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    if (groupIndex == 6) {
-                        return ColumnDef.NAME; //pile lands by name regardless
-                    }
-                    return null;
+            groupIndex -> {
+                if (groupIndex == 6) {
+                    return ColumnDef.NAME; //pile lands by name regardless
                 }
+                return null;
             },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isPlaneswalker()) {
-                            return 0;
-                        }
-                        if (type.isCreature()) {
-                            return 1;
-                        }
-                        if (type.isInstant()) {
-                            return 3;
-                        }
-                        if (type.isSorcery()) {
-                            return 2;
-                        }
-                        if (type.isArtifact()) {
-                            return 4;
-                        }
-                        if (type.isEnchantment()) {
-                            return 5;
-                        }
-                        if (type.isBattle()) {
-                            return 7;
-                        }
-                        if (type.isLand()) {
-                            return 6;
-                        }
+            item -> {
+                if (item instanceof PaperCard) {
+                    CardType type = ((PaperCard) item).getRules().getType();
+                    if (type.isPlaneswalker()) {
+                        return 0;
                     }
-                    return -1;
+                    if (type.isCreature()) {
+                        return 1;
+                    }
+                    if (type.isInstant()) {
+                        return 3;
+                    }
+                    if (type.isSorcery()) {
+                        return 2;
+                    }
+                    if (type.isArtifact()) {
+                        return 4;
+                    }
+                    if (type.isEnchantment()) {
+                        return 5;
+                    }
+                    if (type.isBattle()) {
+                        return 7;
+                    }
+                    if (type.isLand()) {
+                        return 6;
+                    }
                 }
+                return -1;
             }),
     PW_DECK_SORT("lblPlaneswalkerDeckSort",
             new String[] { "Planeswalker", "Rares", "Creature", "Land", "Other Spells" },
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    return null;
-                }
-            },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        CardType type = ((PaperCard) item).getRules().getType();
-                        if (type.isPlaneswalker()){
-                            return 0;
-                        }
-                        if (((PaperCard) item).getRarity().toString() == "R"){
-                            return 1;
-                        }
-                        if (type.isCreature()){
-                            return 2;
-                        }
-                        if (type.isLand()){
-                            return 3;
-                        }
-                        return 4;
+            groupIndex -> null,
+            item -> {
+                if (item instanceof PaperCard) {
+                    CardType type = ((PaperCard) item).getRules().getType();
+                    if (type.isPlaneswalker()){
+                        return 0;
                     }
-                    return -1;
+                    if (((PaperCard) item).getRarity().toString() == "R"){
+                        return 1;
+                    }
+                    if (type.isCreature()){
+                        return 2;
+                    }
+                    if (type.isLand()){
+                        return 3;
+                    }
+                    return 4;
                 }
+                return -1;
             }),
     CARD_RARITY("lblRarity",
             new String[] { "Mythic Rares", "Rares", "Uncommons", "Commons", "Basic Lands" },
-            new Function<Integer, ColumnDef>() {
-                @Override
-                public ColumnDef apply(final Integer groupIndex) {
-                    return null;
-                }
-            },
-            new Function<InventoryItem, Integer>() {
-                @Override
-                public Integer apply(final InventoryItem item) {
-                    if (item instanceof PaperCard) {
-                        switch (((PaperCard) item).getRarity()) {
-                            case MythicRare:
-                                return 0;
-                            case Rare:
-                                return 1;
-                            case Uncommon:
-                                return 2;
-                            case Common:
-                                return 3;
-                            case BasicLand:
-                                return 4;
-                            default:
-                                return -1; //show Special and Unknown in "Other" group
-                        }
+            groupIndex -> null,
+            item -> {
+                if (item instanceof PaperCard) {
+                    switch (((PaperCard) item).getRarity()) {
+                        case MythicRare:
+                            return 0;
+                        case Rare:
+                            return 1;
+                        case Uncommon:
+                            return 2;
+                        case Common:
+                            return 3;
+                        case BasicLand:
+                            return 4;
+                        default:
+                            return -1; //show Special and Unknown in "Other" group
                     }
-                    return -1;
                 }
+                return -1;
             });
 
     GroupDef(String name0, String[] groups0, Function<Integer, ColumnDef> fnGetPileByOverride0, Function<InventoryItem, Integer> fnGroupItem0) {

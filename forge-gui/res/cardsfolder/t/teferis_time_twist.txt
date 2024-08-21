@@ -2,12 +2,12 @@ Name:Teferi's Time Twist
 ManaCost:1 U
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | AILogic$ DelayedBlink | SubAbility$ DBEffect | SpellDescription$ Exile target permanent you control.
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ ReturnEOT | ReplacementEffects$ EntersAsCreature | SubAbility$ DBCleanup | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
-SVar:ReturnEOT:Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ RememberedLKI
-SVar:EntersAsCreature:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ PutP1P1 | Secondary$ True | ReplacementResult$ Updated | Description$ If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
+SVar:DBEffect:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters as a creature, it enters with an additional +1/+1 counter on it.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI | AnimateSubAbility$ DBConditionEffect
+SVar:DBConditionEffect:DB$ Effect | RememberObjects$ Remembered | ReplacementEffects$ EntersAsCreature
+SVar:EntersAsCreature:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ PutP1P1 | Secondary$ True | ReplacementResult$ Updated | Description$ If it enters as a creature, it enters with an additional +1/+1 counter on it.
 SVar:PutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:Exile target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
+Oracle:Exile target permanent you control. Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters as a creature, it enters with an additional +1/+1 counter on it.

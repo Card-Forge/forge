@@ -3,7 +3,7 @@ ManaCost:4 W
 Types:Creature Human Soldier
 PT:2/2
 K:Vigilance
-K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other creature you control.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with a +1/+1 counter on it for each other creature you control.
 SVar:X:Count$Valid Creature.Other+YouCtrl
 DeckHas:Ability$Counters
-Oracle:Vigilance\nSquad Captain enters the battlefield with a +1/+1 counter on it for each other creature you control.
+Oracle:Vigilance\nSquad Captain enters with a +1/+1 counter on it for each other creature you control.

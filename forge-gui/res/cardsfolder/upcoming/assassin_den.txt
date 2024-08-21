@@ -1,0 +1,9 @@
+Name:Assassin Den
+ManaCost:3 U
+Types:Creature Wall
+PT:2/4
+K:Defender
+A:AB$ PutCounter | Cost$ 3 U | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature you control. It can't be blocked this turn. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | ExileOnMoved$ Battlefield | RememberObjects$ ParentTarget | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+Oracle:Defender (This creature can't attack.)\n{3}{U}: Put a +1/+1 counter on target creature you control. It can't be blocked this turn. Activate only as a sorcery.

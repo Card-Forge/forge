@@ -1,95 +1,166 @@
-[ 
+[
   {
     "name": "Challenge Coin",
-	"description": "A heavy coin made of gold.",
+    "description": "A heavy coin made of gold.",
     "iconName": "ChallengeCoin"
   },
   {
     "name": "Silver Challenge Coin",
-	"description": "A decorative coin made of silver.",
+    "description": "A decorative coin made of silver.",
     "iconName": "SilverChallengeCoin"
   },
   {
     "name": "Bronze Challenge Coin",
-	"description": "A lightweight coin made of bronze.",
+    "description": "A lightweight coin made of bronze.",
     "iconName": "BronzeChallengeCoin"
   },
   {
-	  "name": "Sir Donovan's Amulet",
-	  "usableOnWorldMap":true,
-	  "description": "A talisman for remotely contacting your employer",
-	  "iconName": "SirDonovansAmulet",
-	  "dialogOnUse": {
-		  "text": "The amulet lies inert until mana is channeled through it.",
-		  "options": [{
-			  "name": "Put the amulet away"				
-		  },
-		  {
-			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3}],
-			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
-			  "action": [{"setQuestFlag": {"key": "Quest_ShardMines_EpilogueComplete", "val": 1}, "addShards": -3}],
-			  "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
-			  "options": [
-				{
-					"name": "(Continue)",
-					"text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
-					"options": [
-						{
-							"name": "(Continue)"
-						}
-					]
-				}
-			  ]
-		  },
-		  {
-			  "condition":[{"checkQuestFlag": "Quest_ShardMines_Epilogue"}, {"checkQuestFlag": "Quest_ShardMines_EpilogueComplete", "not": true}, {"hasShards": 3, "not":true}],
-			  "isDisabled": true,
-			  "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
-		  },
-		  {
-			   "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5}],
-			   "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
-			   "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
-				"options": [
-					{
-						"name": "(Continue)",
-						"action": [{"setQuestFlag": {"key": "exploreShand1", "val": 7}, "addShards": -5}]
-					}
-				]
-		  },
-		  {
-		  "condition":[{"getQuestFlag":{"key":"exploreShand1","op":"=","val":6}}, {"getQuestFlag":{"key":"exploreShand1","op":">","val":6}, "not": true}, {"hasShards": 5, "not":true}],
-			  "isDisabled": true,
-			  "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
-		  }
-		  ]
-	  }
-	  "questItem": true
+    "name": "Sir Donovan's Amulet",
+    "usableOnWorldMap": true,
+    "description": "A talisman for remotely contacting your employer",
+    "iconName": "SirDonovansAmulet",
+    "dialogOnUse": {
+      "text": "The amulet lies inert until mana is channeled through it.",
+      "options": [
+        {
+          "name": "Put the amulet away"
+        },
+        {
+          "condition": [
+            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
+              "not": true
+            },
+            { "hasShards": 3 }
+          ],
+          "name": "Contact Sir Donovan (Requires 3 Mana Shards)",
+          "action": [
+            {
+              "setQuestFlag": {
+                "key": "Quest_ShardMines_EpilogueComplete",
+                "val": 1
+              },
+              "addShards": -3
+            }
+          ],
+          "text": "Unsure exactly what to expect, you channel a bit of energy from your own mana shards into the amulet. It glows an array of colors for the briefest of moments and then fades.",
+          "options": [
+            {
+              "name": "(Continue)",
+              "text": "A thought enters your mind in response, not so much words as an urge - you should go to a town.",
+              "options": [
+                {
+                  "name": "(Continue)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            { "checkQuestFlag": "Quest_ShardMines_Epilogue" },
+            {
+              "checkQuestFlag": "Quest_ShardMines_EpilogueComplete",
+              "not": true
+            },
+            {
+              "hasShards": 3,
+              "not": true
+            }
+          ],
+          "isDisabled": true,
+          "name": "Contact Sir Donovan (Requires 3 Mana Shards)"
+        },
+        {
+          "condition": [
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": "=",
+                "val": 6
+              }
+            },
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": ">",
+                "val": 6
+              },
+              "not": true
+            },
+            { "hasShards": 5 }
+          ],
+          "name": "Contact Sir Donovan (Requires 5 Mana Shards)",
+          "text": "You funnel the power of your mana shards into the artifact. It takes using a few more of them before the device reacts this time, but eventually it glows in multiple colors once again.",
+          "options": [
+            {
+              "name": "(Continue)",
+              "action": [
+                {
+                  "setQuestFlag": {
+                    "key": "exploreShand1",
+                    "val": 7
+                  },
+                  "addShards": -5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition": [
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": "=",
+                "val": 6
+              }
+            },
+            {
+              "getQuestFlag": {
+                "key": "exploreShand1",
+                "op": ">",
+                "val": 6
+              },
+              "not": true
+            },
+            {
+              "hasShards": 5,
+              "not": true
+            }
+          ],
+          "isDisabled": true,
+          "name": "Contact Sir Donovan (Requires 5 Mana Shards)"
+        }
+      ]
+    },
+    "questItem": true
   },
   {
-	  "name": "Landscape Sketchbook",
-	  "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
-	  "iconName": "LandscapeSketchbook",
-	  "questItem": true
+    "name": "Landscape Sketchbook",
+    "description": "A leather bound notebook containing sketches of various landscapes across Shandalar",
+    "iconName": "LandscapeSketchbook",
+    "questItem": true
   },
   {
-	  "name": "Landscape Sketchbook - Mirage",
-	  "description": "A leather bound notebook containing sketches of tropical locations",
-	  "iconName": "LandscapeSketchbook"
+    "name": "Landscape Sketchbook - Mirage",
+    "description": "A leather bound notebook containing sketches of tropical locations",
+    "iconName": "LandscapeSketchbook"
   },
   {
-	  "name": "Landscape Sketchbook - Urza's Saga",
-	  "description": "A leather bound notebook containing many different angles of the same terrain features",
-	  "iconName": "LandscapeSketchbook"
+    "name": "Landscape Sketchbook - Urza's Saga",
+    "description": "A leather bound notebook containing many different angles of the same terrain features",
+    "iconName": "LandscapeSketchbook"
   },
   {
-	  "name": "Landscape Sketchbook - Coldsnap",
-	  "description": "A leather bound notebook containing sketches of frost covered vistas",
-	  "iconName": "LandscapeSketchbook"
+    "name": "Landscape Sketchbook - Coldsnap",
+    "description": "A leather bound notebook containing sketches of frost covered vistas",
+    "iconName": "LandscapeSketchbook"
   },
   {
     "name": "Chandra's Tome",
-	"description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "description": "Draft a Chandra themed card that can be cast with mana of any color.",
     "equipmentSlot": "Left",
     "iconName": "ChandrasTome",
     "effect": {
@@ -99,9 +170,9 @@
     }
   },
   {
-  
+
     "name": "Phoenix Charm",
-	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -112,12 +183,12 @@
   },
   {
     "name": "Chandra's Stone",
-	"description": "A small red gemstone recovered after your battle with Chandra.",
+    "description": "A small red gemstone recovered after your battle with Chandra.",
     "iconName": "r"
   },
   {
     "name": "Phoenix",
-	"description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -128,12 +199,12 @@
   },
   {
     "name": "Liliana's Stone",
-	"description": "A small black gemstone recovered after your battle with Liliana.",
+    "description": "A small black gemstone recovered after your battle with Liliana.",
     "iconName": "b"
   },
   {
     "name": "Demonic Contract",
-	"description": "Sign away your soul to know what the future holds",
+    "description": "Sign away your soul to know what the future holds",
     "equipmentSlot": "Right",
     "iconName": "DemonicContract",
     "effect": {
@@ -152,7 +223,8 @@
         "Piper's Charm"
       ]
     }
-  },{
+  },
+  {
     "name": "Sleep Wand",
     "equipmentSlot": "Left",
     "cost": 4000,
@@ -162,7 +234,8 @@
         "Sleep Wand"
       ]
     }
-  },{
+  },
+  {
     "name": "Hill Giant Club",
     "equipmentSlot": "Right",
     "cost": 2000,
@@ -172,7 +245,8 @@
         "Hill Giant Club"
       ]
     }
-  },{
+  },
+  {
     "name": "Cursed Treasure",
     "equipmentSlot": "Right",
     "iconName": "CursedTreasure",
@@ -182,7 +256,8 @@
         "Cursed Treasure"
       ]
     }
-  },{
+  },
+  {
     "name": "Farmer's Tools",
     "equipmentSlot": "Left",
     "iconName": "FarmersTools",
@@ -192,7 +267,8 @@
         "Farmer's Tools"
       ]
     }
-  },{
+  },
+  {
     "name": "Sol Ring",
     "equipmentSlot": "Left",
     "iconName": "SolRing",
@@ -272,8 +348,8 @@
         "r_1_1_goblin"
       ]
     }
- },
- {
+  },
+  {
     "name": "Hivestone",
     "equipmentSlot": "Left",
     "iconName": "Hivestone",
@@ -358,6 +434,11 @@
     "questItem": true
   },
   {
+    "name": "Sorin's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
     "name": "Tibalt's Key",
     "iconName": "StrangeKey",
     "questItem": true
@@ -389,7 +470,7 @@
     "equipmentSlot": "Boots",
     "iconName": "IronBoots",
     "cost": 2000,
-    "effect": { 
+    "effect": {
       "moveSpeed": 1.2
     }
   },
@@ -478,7 +559,18 @@
       "startBattleWithCard": [
         "g_0_1_plant"
       ]
-    }
+  }
+  },
+  {
+   "name": "Sorin's Amulet",
+    "equipmentSlot": "Neck",
+    "iconName": "SorinAmulet",
+    "effect": {
+      "lifeModifier": 2,
+      "startBattleWithCardInCommandZone": [
+        "Sorin's Amulet"
+      ]
+  }
   },
   {
     "name": "Dagger",
@@ -572,9 +664,9 @@
     "iconName": "PresenceoftheHydra",
     "effect": {
       "lifeModifier": 2,
-        "startBattleWithCardInCommandZone": [
-          "Presence of the Hydra"
-        ]
+      "startBattleWithCardInCommandZone": [
+        "Presence of the Hydra"
+      ]
     }
   },
   {
@@ -582,9 +674,9 @@
     "equipmentSlot": "Right",
     "iconName": "DeathRing",
     "effect": {
-        "startBattleWithCardInCommandZone": [
-          "Death Ring"
-        ]
+      "startBattleWithCardInCommandZone": [
+        "Death Ring"
+      ]
     }
   },
   {
@@ -592,9 +684,9 @@
     "equipmentSlot": "Left",
     "iconName": "FlameSword",
     "effect": {
-        "startBattleWithCardInCommandZone": [
-          "Flame Sword"
-        ]
+      "startBattleWithCardInCommandZone": [
+        "Flame Sword"
+      ]
     }
   },
   {
@@ -1009,192 +1101,206 @@
     "iconName": "ShellWand"
   },
 
-{
-	"name": "Manasight Amulet",
-	"equipmentSlot": "Neck",
-	"effect": {
-		"colorView": true
-	},
-	"description": "Grants Manasight, letting you know the colors used by your adversaries.",
-	"iconName": "RelicAmulet"
-},
-{
-	"name": "Fortune Coin",
-	"equipmentSlot": "Left",
-	"effect": {
-		"name": "",
-		"goldModifier": 0.85,
-		"cardRewardBonus": 1
-	},
-	"description": "",
-	"iconName": "FortuneCoin"
-},
-{
-	"name": "Colorless rune",
-	"usableOnWorldMap":true,
+  {
+    "name": "Manasight Amulet",
+    "equipmentSlot": "Neck",
+    "effect": {
+      "colorView": true
+    },
+    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "iconName": "RelicAmulet"
+  },
+  {
+    "name": "Lightbringers Boots",
+    "equipmentSlot": "Boots",
+    "effect": {
+      "opponent": {
+        "lifeModifier": 5
+      },
+      "startBattleWithCard": [
+        "Ajani's Mantra"
+      ]
+    },
+    "description": "Brings life to both friend and foe",
+    "iconName": "LightBoots"
+  },
+  {
+    "name": "Fortune Coin",
+    "equipmentSlot": "Left",
+    "effect": {
+      "name": "",
+      "goldModifier": 0.85,
+      "cardRewardBonus": 1
+    },
+    "description": "",
+    "iconName": "FortuneCoin"
+  },
+  {
+    "name": "Colorless rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"description": "Teleports you to the center",
-	"commandOnUse": "teleport to poi Spawn",
-	"iconName": "ColorlessRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "White rune",
-	"usableOnWorldMap":true,
+    "description": "Teleports you to the center",
+    "commandOnUse": "teleport to poi Spawn",
+    "iconName": "ColorlessRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the plains",
-	"commandOnUse": "teleport to poi \"Plains Capital\"",
-	"iconName": "WhiteRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Black rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the plains",
+    "commandOnUse": "teleport to poi \"Plains Capital\"",
+    "iconName": "WhiteRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Black rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the swamp",
-	"commandOnUse": "teleport to poi \"Swamp Capital\"",
-	"iconName": "BlackRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Blue rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the swamp",
+    "commandOnUse": "teleport to poi \"Swamp Capital\"",
+    "iconName": "BlackRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Blue rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the island",
-	"commandOnUse": "teleport to poi \"Island Capital\"",
-	"iconName": "BlueRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Red rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the island",
+    "commandOnUse": "teleport to poi \"Island Capital\"",
+    "iconName": "BlueRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Red rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the mountain",
-	"commandOnUse": "teleport to poi \"Mountain Capital\"",
-	"iconName": "RedRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "Green rune",
-	"usableOnWorldMap":true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the mountain",
+    "commandOnUse": "teleport to poi \"Mountain Capital\"",
+    "iconName": "RedRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "Green rune",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
-	"effect": {
-		"name": ""
-	},
-	"description": "Teleports you to the forest",
-	"commandOnUse": "teleport to poi \"Forest Capital\"",
-	"iconName": "GreenRune",
-	"questItem": true,
-	"shardsNeeded": 1,
-	"cost": 100
-},
-{
-	"name": "White Staff",
+    "effect": {
+      "name": ""
+    },
+    "description": "Teleports you to the forest",
+    "commandOnUse": "teleport to poi \"Forest Capital\"",
+    "iconName": "GreenRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
+    "name": "White Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":true,
-	"effect": {
-		"name": ""
-	},
-	"description": "Heals you half of your life",
-	"commandOnUse": "heal percent 0.5",
-	"iconName": "WhiteStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 5000
-},
-{
-	"name": "Black Staff",
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Heals you half of your life",
+    "commandOnUse": "heal percent 0.5",
+    "iconName": "WhiteStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Black Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":false,
-	"effect": {
-		"name": ""
-	},
-	"description": "Hide from enemies for some time",
-	"commandOnUse": "hide 10",
-	"iconName": "BlackStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 5000
-},
-{
-	"name": "Blue Staff",
-	"usableOnWorldMap":true,
+    "usableOnWorldMap": true,
+    "usableInPoi": false,
+    "effect": {
+      "name": ""
+    },
+    "description": "Hide from enemies for some time",
+    "commandOnUse": "hide 10",
+    "iconName": "BlackStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Blue Staff",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",
-	"effect": {
-		"name": ""
-	},
-	"description": "Lets you fly for some time",
-	"commandOnUse": "fly 10",
+    "effect": {
+      "name": ""
+    },
+    "description": "Lets you fly for some time",
+    "commandOnUse": "fly 10",
     "iconName": "BlueStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 5000
-},
-{
-	"name": "Red Staff",
-	"usableOnWorldMap":true,
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Red Staff",
+    "usableOnWorldMap": true,
     "equipmentSlot": "Ability1",
-	"effect": {
-		"name": ""
-	},
-	"description": "Kills the closest enemy on the Overworld",
-	"commandOnUse": "remove enemy nearest",
-	"iconName": "RedStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 5000
-},
-{
-	"name": "Green Staff",
+    "effect": {
+      "name": ""
+    },
+    "description": "Kills the closest enemy on the Overworld",
+    "commandOnUse": "remove enemy nearest",
+    "iconName": "RedStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
+    "name": "Green Staff",
     "equipmentSlot": "Ability1",
-	"usableOnWorldMap":true,
-	"usableInPoi":true,
-	"effect": {
-		"name": ""
-	},
-	"description": "Doubles your speed for some time",
-	"commandOnUse": "sprint 10",
-	"iconName": "GreenStaff",
-	"questItem": true,
-	"shardsNeeded": 5,
-	"cost": 5000
-},
-{
+    "usableOnWorldMap": true,
+    "usableInPoi": true,
+    "effect": {
+      "name": ""
+    },
+    "description": "Doubles your speed for some time",
+    "commandOnUse": "sprint 10",
+    "iconName": "GreenStaff",
+    "questItem": true,
+    "shardsNeeded": 5,
+    "cost": 5000
+  },
+  {
     "name": "Slimefoot's Slimy Staff",
     "equipmentSlot": "Left",
     "iconName": "GreenStaff",
     "effect": {
       "lifeModifier": 2,
-      "startBattleWithCardInCommandZone":[
+      "startBattleWithCardInCommandZone": [
         "Slimefoot's Slimy Staff"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Kiora's Bident",
     "equipmentSlot": "Left",
     "iconName": "SleepWand",
@@ -1203,12 +1309,12 @@
       "startBattleWithCard": [
         "Kraken Hatchling"
       ],
-      "startBattleWithCardInCommandZone":[
+      "startBattleWithCardInCommandZone": [
         "Kiora's Bident"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Slime-Covered Boots",
     "equipmentSlot": "Boots",
     "iconName": "SteelBoots",
@@ -1218,9 +1324,26 @@
       "startBattleWithCard": [
         "Ooze Flux"
       ]
-}
-},
-{
+    }
+  },
+  {
+    "name": "Amulet of the Deceiver",
+    "equipmentSlot": "Head",
+    "iconName": "MoxJet",
+    "effect": {
+      "lifeModifier": -1,
+      "moveSpeed": 1.20,
+      "startBattleWithCard": [
+        "Bloodsprout Talisman"
+      ],
+      "opponent": {
+        "startBattleWithCard": [
+          "Illusory Demon"
+        ]
+      }
+    }
+  },
+  {
     "name": "Jace's Signature Hoodie",
     "equipmentSlot": "Body",
     "iconName": "BlueRobes",
@@ -1230,9 +1353,9 @@
       "startBattleWithCardInCommandZone": [
         "Jace's Signature Hoodie"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Teferi's Staff",
     "equipmentSlot": "Left",
     "iconName": "MadStaff",
@@ -1242,9 +1365,9 @@
       "startBattleWithCardInCommandZone": [
         "Teferi's Staff"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Garruk's Mighty Axe",
     "equipmentSlot": "Left",
     "iconName": "GarrukAxe",
@@ -1253,9 +1376,9 @@
       "startBattleWithCardInCommandZone": [
         "Garruk's Mighty Axe"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Nahiri's Armory",
     "equipmentSlot": "Right",
     "iconName": "Armory",
@@ -1264,9 +1387,9 @@
       "startBattleWithCardInCommandZone": [
         "Nahiri's Armory"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Giant Scythe",
     "equipmentSlot": "Left",
     "iconName": "Scythe",
@@ -1275,9 +1398,9 @@
       "startBattleWithCardInCommandZone": [
         "Giant Scythe"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Chicken Egg",
     "equipmentSlot": "Right",
     "iconName": "ChickenEgg",
@@ -1286,9 +1409,9 @@
       "startBattleWithCard": [
         "Chicken Egg"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Tibalt's Bag of Tricks",
     "equipmentSlot": "Left",
     "iconName": "BurningBook",
@@ -1297,9 +1420,9 @@
       "startBattleWithCardInCommandZone": [
         "Tibalt's Bag of Tricks"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Xira's Fancy Hat",
     "equipmentSlot": "Neck",
     "iconName": "BrownHat",
@@ -1308,9 +1431,9 @@
       "startBattleWithCard": [
         "Xira's Hive"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "The Underworld Cookbook",
     "equipmentSlot": "Left",
     "iconName": "UnderworldCookbook",
@@ -1318,9 +1441,9 @@
       "startBattleWithCard": [
         "The Underworld Cookbook"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Mantle of Ancient Lore",
     "equipmentSlot": "Body",
     "iconName": "Conjurer's Mantle",
@@ -1329,9 +1452,9 @@
       "startBattleWithCardInCommandZone": [
         "Mantle of Ancient Lore"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Zedruu's Lantern",
     "equipmentSlot": "Left",
     "iconName": "ZedruuLantern",
@@ -1340,9 +1463,9 @@
       "startBattleWithCardInCommandZone": [
         "Zedruu's Lantern"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Grolnok's Skin",
     "equipmentSlot": "Right",
     "iconName": "FrogSkin",
@@ -1351,9 +1474,9 @@
       "startBattleWithCardInCommandZone": [
         "Grolnok's Skin"
       ]
-}
-},
-{
+    }
+  },
+  {
     "name": "Slobad's Iron Boots",
     "equipmentSlot": "Boots",
     "iconName": "MetallicBoots",
@@ -1363,11 +1486,11 @@
       "startBattleWithCardInCommandZone": [
         "Slobad's Iron Boots"
       ]
-}
-},
+    }
+  },
   {
     "name": "Hallowed Sigil",
-	"description": "Turn a creature hexproof until end of turn.",
+    "description": "Turn a creature hexproof until end of turn.",
     "equipmentSlot": "Neck",
     "iconName": "HallowedSigil",
     "effect": {
@@ -1378,7 +1501,7 @@
   },
   {
     "name": "Unhallowed Sigil",
-	"description": "Devour the life of an enemy creature, killing it.",
+    "description": "Devour the life of an enemy creature, killing it.",
     "equipmentSlot": "Right",
     "iconName": "UnhallowedSigil",
     "effect": {
@@ -1389,6 +1512,31 @@
   },
   {
     "name": "Cultist's Key",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "First Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Second Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Third Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Fourth Shard",
+    "iconName": "StrangeKey",
+    "questItem": true
+  },
+  {
+    "name": "Fifth Shard",
     "iconName": "StrangeKey",
     "questItem": true
   }

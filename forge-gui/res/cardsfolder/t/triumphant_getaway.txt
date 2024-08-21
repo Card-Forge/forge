@@ -1,0 +1,10 @@
+Name:Triumphant Getaway
+ManaCost:1 U B R
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigHeist | TriggerDescription$ When CARDNAME enters, heist target opponent's library twice.
+SVar:TrigHeist:DB$ Heist | ValidTgts$ Opponent | Num$ 2
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, each opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | SubAbility$ DBGain
+SVar:DBGain:DB$ GainLife | LifeAmount$ 2
+Oracle:Flash\nWhen Triumphant Getaway enters, heist target opponent's library twice.\nWhenever you cast a spell you don't own, each opponent loses 2 life and you gain 2 life.

@@ -1,7 +1,5 @@
 [metadata]
 Name=tibalt_horror
-[Avatar]
-
 [Main]
 4 Badlands|30A|1
 4 Blood Crypt|RNA|1
@@ -30,12 +28,4 @@ Name=tibalt_horror
 2 Torment of Hailfire|HOU|1
 1 Tsabo Tavoc|INV|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

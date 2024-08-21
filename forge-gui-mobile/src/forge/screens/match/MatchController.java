@@ -316,10 +316,10 @@ public class MatchController extends AbstractGuiGame {
                 MatchController.writeMatchPreferences();
                 if (getGameView().isMatchOver()){
                     Forge.setCursor(null, "0");
-                    if (!DuelScene.instance().hasCallbackExit()){
-                        DuelScene.instance().GameEnd();
+                    DuelScene.instance().GameEnd();
+                    if (!DuelScene.instance().hasCallbackExit())
                         DuelScene.instance().exitDuelScene();
-                    }
+
                     return;
                 }
                 else{

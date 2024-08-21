@@ -1,21 +1,10 @@
 package forge.game.player;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
@@ -35,6 +24,10 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class PlayerView extends GameEntityView {
     private static final long serialVersionUID = 7005892740909549086L;
@@ -301,6 +294,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.NumManaShards, p.getNumManaShards());
     }
 
+    public Map<String, String> getDraftNotes() {
+        return get(TrackableProperty.DraftNotes);
+    }
+    public void setDraftNotes(Map<String, String> draftNotes) {
+        set(TrackableProperty.DraftNotes, draftNotes);
+    }
+
     public int getNumDrawnThisTurn() {
         return get(TrackableProperty.NumDrawnThisTurn);
     }
@@ -365,7 +365,7 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderDamage);
         if (map == null) { return 0; }
         Integer damage = map.get(commander.getId());
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
     void updateCommanderDamage(Player p) {
         Map<Integer, Integer> map = Maps.newHashMap();
@@ -388,7 +388,7 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) { return 0; }
         Integer damage = map.get(commander.getId());
-        return damage == null ? 0 : damage.intValue();
+        return damage == null ? 0 : damage;
     }
 
     void updateCommanderCast(Player p, Card c) {
@@ -569,7 +569,7 @@ public class PlayerView extends GameEntityView {
             e.printStackTrace();
             count = null;
         }
-        return count != null ? count.intValue() : 0;
+        return count != null ? count : 0;
     }
     private Map<Byte, Integer> getMana() {
         return get(TrackableProperty.Mana);

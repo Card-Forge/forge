@@ -1,0 +1,6 @@
+[format]
+Name:Arena Standard (BLB)
+Type:Archived
+Subtype:Standard
+Effective:2024-07-30
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB

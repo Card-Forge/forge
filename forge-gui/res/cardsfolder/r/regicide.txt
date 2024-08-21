@@ -1,0 +1,7 @@
+Name:Regicide
+ManaCost:B
+Types:Instant
+Draft:Reveal CARDNAME as you draft it.
+Draft:As you draft CARDNAME, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.
+A:SP$ Destroy | ValidTgts$ Creature.NotedColor | SpellDescription$ Destroy target creature that's one or more of the colors chosen as you drafted cards named CARDNAME.
+Oracle:Reveal Regicide as you draft it. The player to your right chooses a color, you choose another color, then the player to your left chooses a third color.\nDestroy target creature that's one or more of the colors chosen as you drafted cards named Regicide.

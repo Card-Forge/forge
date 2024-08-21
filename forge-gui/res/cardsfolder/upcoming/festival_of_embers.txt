@@ -1,0 +1,10 @@
+Name:Festival of Embers
+ManaCost:4 R
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | Condition$ PlayerTurn | MayPlay$ True | EffectZone$ Battlefield | AffectedZone$ Graveyard | RaiseCost$ PayLife<1> | Description$ During your turn, you may cast instant and sorcery spells from your graveyard by paying 1 life in addition to their other costs.
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.YouOwn | ReplaceWith$ Exile | Description$ If a card or token would be put into your graveyard from anywhere, exile it instead.
+SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+A:AB$ Sacrifice | Cost$ 1 R | SpellDescription$ Sacrifice CARDNAME.
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
+Oracle:During your turn, you may cast instant and sorcery spells from your graveyard by paying 1 life in addition to their other costs.\nIf a card or token would be put into your graveyard from anywhere, exile it instead.\n{1}{R}: Sacrifice Festival of Embers.

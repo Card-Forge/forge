@@ -1,0 +1,5 @@
+Name:Repel Calamity
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4,Creature.toughnessGE4 | TgtPrompt$ Select target creature with power or toughness 4 or greater | SpellDescription$ Destroy target creature with power or toughness 4 or greater.
+Oracle:Destroy target creature with power or toughness 4 or greater.

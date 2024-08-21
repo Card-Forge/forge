@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingButton;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
@@ -84,8 +85,49 @@ public class Controls {
 
     }
 
+    static class TypingButtonFix extends TypingButton {
+        public TypingButtonFix(@Null String text) {
+            super(text == null ? "NULL" : text, Controls.getSkin(), Controls.getTextraFont());
+            addListener(new ClickListener(){
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    super.clicked(event, x, y);
+                    SoundSystem.instance.play(SoundEffectType.ButtonPress, false);
+                }
+            });
+        }
+
+        @Override
+        public void setStyle(Button.ButtonStyle style, boolean makeGridGlyphs) {
+            super.setStyle(style, makeGridGlyphs);
+            this.getTextraLabel().setFont(Controls.getTextraFont());
+
+        }
+
+        @Override
+        public String getText() {
+            return this.getTextraLabel().storedText;
+        }
+
+        @Override
+        public void setText(@Null String text) {
+            getTextraLabel().storedText = text;
+            getTextraLabel().layout.setTargetWidth(getTextraLabel().getMaxWidth());
+            getTextraLabel().getFont().markup(text, getTextraLabel().layout.clear());
+            getTextraLabel().setWidth(getTextraLabel().layout.getWidth() + (getTextraLabel().style != null && getTextraLabel().style.background != null ? getTextraLabel().style.background.getLeftWidth() + getTextraLabel().style.background.getRightWidth() : 0.0F));
+            layout();
+        }
+
+    }
+
     static public TextraButton newTextButton(String text) {
         TextraButton button = new TextButtonFix(text);
+        button.getTextraLabel().setWrap(false);
+        return button;
+    }
+
+    static public TypingButton newTypingButton(String text) {
+        TypingButton button = new TypingButtonFix(text);
         button.getTextraLabel().setWrap(false);
         return button;
     }

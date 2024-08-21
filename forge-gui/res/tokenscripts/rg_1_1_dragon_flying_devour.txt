@@ -5,4 +5,4 @@ Colors:red,green
 PT:1/1
 K:Flying
 K:Devour:2
-Oracle:Flying, devour 2 (As this token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
+Oracle:Flying, devour 2 (As this enters, you may sacrifice any number of creatures. This creature enters with twice that many +1/+1 counters on it.)

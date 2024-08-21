@@ -30,8 +30,6 @@ import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.model.FModel;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {
@@ -45,58 +43,46 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
             new CollectionTab(Forge.getLocalizer().getMessage("lblExile"), FSkinImage.EXILE)
         }, true);
         btnExileRetrieveMultiple.setVisible(false); //hide unless in multi-select mode
-        btnExileRetrieveMultiple.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final CardManager list = ((CollectionTab)getSelectedPage()).list;
-                final Collection<PaperCard> cards = list.getSelectedItems();
+        btnExileRetrieveMultiple.setCommand(e -> {
+            final CardManager list = ((CollectionTab)getSelectedPage()).list;
+            final Collection<PaperCard> cards = list.getSelectedItems();
 
-                if (cards.isEmpty()) {
-                    //toggle off multi-select mode if no items selected
-                    list.toggleMultiSelectMode(-1);
-                    return;
-                }
-
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (getSelectedPage() == tabPages[0]) {
-                            int value = 0;
-                            for (PaperCard card : cards) {
-                                value += ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
-                            }
-                            if (FModel.getConquest().getModel().exileCards(cards, value)) {
-                                FThreads.invokeInEdtLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        updateShards();
-                                        getCollectionTab().list.removeItemsFlat(cards);
-                                        getExileTab().list.addItemsFlat(cards);
-                                        updateTabCaptions();
-                                    }
-                                });
-                            }
-                        }
-                        else {
-                            int cost = 0;
-                            for (PaperCard card : cards) {
-                                cost += ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
-                            }
-                            if (FModel.getConquest().getModel().retrieveCardsFromExile(cards, cost)) {
-                                FThreads.invokeInEdtLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        updateShards();
-                                        getCollectionTab().list.addItemsFlat(cards);
-                                        getExileTab().list.removeItemsFlat(cards);
-                                        updateTabCaptions();
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
+            if (cards.isEmpty()) {
+                //toggle off multi-select mode if no items selected
+                list.toggleMultiSelectMode(-1);
+                return;
             }
+
+            FThreads.invokeInBackgroundThread(() -> {
+                if (getSelectedPage() == tabPages.get(0)) {
+                    int value = 0;
+                    for (PaperCard card : cards) {
+                        value += ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
+                    }
+                    if (FModel.getConquest().getModel().exileCards(cards, value)) {
+                        FThreads.invokeInEdtLater(() -> {
+                            updateShards();
+                            getCollectionTab().list.removeItemsFlat(cards);
+                            getExileTab().list.addItemsFlat(cards);
+                            updateTabCaptions();
+                        });
+                    }
+                }
+                else {
+                    int cost = 0;
+                    for (PaperCard card : cards) {
+                        cost += ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
+                    }
+                    if (FModel.getConquest().getModel().retrieveCardsFromExile(cards, cost)) {
+                        FThreads.invokeInEdtLater(() -> {
+                            updateShards();
+                            getCollectionTab().list.addItemsFlat(cards);
+                            getExileTab().list.removeItemsFlat(cards);
+                            updateTabCaptions();
+                        });
+                    }
+                }
+            });
         });
     }
 
@@ -143,7 +129,7 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
         String caption;
         CQPref baseValuePref;
         Collection<PaperCard> cards;
-        if (getSelectedPage() == tabPages[0]) {
+        if (getSelectedPage() == tabPages.get(0)) {
             caption = Forge.getLocalizer().getMessage("lblExile");
             baseValuePref = CQPref.AETHER_BASE_EXILE_VALUE;
             cards = getCollectionTab().list.getSelectedItems();
@@ -172,11 +158,11 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
     }
 
     private CollectionTab getCollectionTab() {
-        return (CollectionTab)tabPages[0];
+        return (CollectionTab) tabPages.get(0);
     }
 
     private CollectionTab getExileTab() {
-        return (CollectionTab)tabPages[1];
+        return (CollectionTab) tabPages.get(1);
     }
 
     @Override
@@ -236,62 +222,37 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
                         final ConquestData model = FModel.getConquest().getModel();
                         if (model.isInExile(card)) {
                             final int cost = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_RETRIEVE_COST);
-                            item = new FMenuItem(Forge.getLocalizer().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    FThreads.invokeInBackgroundThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (model.retrieveCardsFromExile(ImmutableList.of(card), cost)) {
-                                                FThreads.invokeInEdtLater(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        parentScreen.updateShards();
-                                                        parentScreen.getCollectionTab().list.addItem(card, 1);
-                                                        parentScreen.getExileTab().list.removeItem(card, 1);
-                                                        parentScreen.updateTabCaptions();
-                                                    }
-                                                });
-                                            }
-                                        }
+                            item = new FMenuItem(Forge.getLocalizer().getMessage("lblRetrieveForNAE", String.valueOf(cost), "{AE}"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e -> FThreads.invokeInBackgroundThread(() -> {
+                                if (model.retrieveCardsFromExile(ImmutableList.of(card), cost)) {
+                                    FThreads.invokeInEdtLater(() -> {
+                                        parentScreen.updateShards();
+                                        parentScreen.getCollectionTab().list.addItem(card, 1);
+                                        parentScreen.getExileTab().list.removeItem(card, 1);
+                                        parentScreen.updateTabCaptions();
                                     });
                                 }
-                            }, true);
+                            }), true);
                         }
                         else {
                             final int value = ConquestUtil.getShardValue(card, CQPref.AETHER_BASE_EXILE_VALUE);
-                            item = new FMenuItem(Forge.getLocalizer().getMessage("lblExileForNAE", String.valueOf(value), "{AE}"), FSkinImage.EXILE, new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    FThreads.invokeInBackgroundThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (model.exileCards(ImmutableList.of(card), value)) {
-                                                FThreads.invokeInEdtLater(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        parentScreen.updateShards();
-                                                        parentScreen.getCollectionTab().list.removeItem(card, 1);
-                                                        parentScreen.getExileTab().list.addItem(card, 1);
-                                                        parentScreen.updateTabCaptions();
-                                                    }
-                                                });
-                                            }
-                                        }
+                            item = new FMenuItem(Forge.getLocalizer().getMessage("lblExileForNAE", String.valueOf(value), "{AE}"), FSkinImage.EXILE, e -> FThreads.invokeInBackgroundThread(() -> {
+                                if (model.exileCards(ImmutableList.of(card), value)) {
+                                    FThreads.invokeInEdtLater(() -> {
+                                        parentScreen.updateShards();
+                                        parentScreen.getCollectionTab().list.removeItem(card, 1);
+                                        parentScreen.getExileTab().list.addItem(card, 1);
+                                        parentScreen.updateTabCaptions();
                                     });
                                 }
-                            }, true);
+                            }), true);
                         }
                         item.setTextRenderer(new TextRenderer());
                         menu.addItem(item);
                     }
                 });
-                setSelectionChangedHandler(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        if (getMultiSelectMode()) {
-                            parentScreen.updateExileRetrieveButtonCaption();
-                        }
+                setSelectionChangedHandler(e -> {
+                    if (getMultiSelectMode()) {
+                        parentScreen.updateExileRetrieveButtonCaption();
                     }
                 });
             }
@@ -336,14 +297,11 @@ public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionSc
 
             @Override
             protected Predicate<PaperCard> buildPredicate() {
-                return new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(PaperCard input) {
-                        if (filterValue == null) {
-                            return true;
-                        }
-                        return filterValue.getCardPool().contains(input);
+                return input -> {
+                    if (filterValue == null) {
+                        return true;
                     }
+                    return filterValue.getCardPool().contains(input);
                 };
             }
         }

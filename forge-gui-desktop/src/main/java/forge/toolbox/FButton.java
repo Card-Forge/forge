@@ -25,8 +25,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
@@ -255,12 +253,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
 
     @Override
     public void setCommand(final UiCommand command) {
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                command.run();
-            }
-        });
+        addActionListener(e -> command.run());
     }
 
     @Override

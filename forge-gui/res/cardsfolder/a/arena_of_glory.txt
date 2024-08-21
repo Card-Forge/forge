@@ -1,0 +1,8 @@
+Name:Arena of Glory
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a Mountain.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Mountain.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Mana | Cost$ R T Exert<1/CARDNAME> | Produced$ R R | AddsKeywords$ Haste | AddsKeywordsValid$ Spell.Creature | AddsKeywordsUntil$ UntilEOT | SpellDescription$ Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)
+Oracle:Arena of Glory enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{R}, {T}, Exert Arena of Glory: Add {R}{R}. If that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)

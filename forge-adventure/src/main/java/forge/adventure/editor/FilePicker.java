@@ -4,8 +4,6 @@ import forge.adventure.util.Config;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,12 +19,7 @@ public class FilePicker extends Box {
         super(BoxLayout.X_AXIS);
         this.fileEndings = fileEndings;
 
-        findButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                FilePicker.this.find();
-            }
-        });
+        findButton.addActionListener(e -> FilePicker.this.find());
 
         add(edit);
         add(findButton);

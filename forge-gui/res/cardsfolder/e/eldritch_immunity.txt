@@ -1,0 +1,6 @@
+Name:Eldritch Immunity
+ManaCost:C
+Types:Kindred Instant Eldrazi
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Protection from each color | SpellDescription$ Target creature you control gains protection from each color until end of turn.
+K:Overload:4 C
+Oracle:Target creature you control gains protection from each color until end of turn.\nOverload {4}{C}

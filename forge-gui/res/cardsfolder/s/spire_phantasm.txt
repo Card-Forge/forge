@@ -1,0 +1,10 @@
+Name:Spire Phantasm
+ManaCost:2 U U
+Types:Creature Gargoyle Illusion
+PT:3/2
+Draft:Reveal CARDNAME as you draft it.
+Draft:The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+NotedGuessPhantasm | Execute$ DrawACard | TriggerDescription$ When CARDNAME enters, if you guessed correctly for a card named Spire Phantasm, draw a card.
+SVar:DrawACard:DB$ Draw | Amount$ 1
+Oracle:Reveal Spire Phantasm as you draft it. The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.\nFlying\nWhen Spire Phantasm enters, if you guessed correctly for a card named Spire Phantasm, draw a card.

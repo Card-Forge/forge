@@ -1,0 +1,40 @@
+[metadata]
+Code=DSK
+Date=2024-09-27
+Name=Duskmourn: House of Horror
+Type=Expansion
+ScryfallCode=DSK
+
+[cards]
+18 R Leyline of Hope @Sergey Glushakov
+35 R Toby, Beastie Befriender @Jehan Choo
+41 M The Wandering Rescuer @Anna Pavleeva
+86 R Come Back Wrong @David Auden Nash
+94 R Doomsday Excruciator @Denys Tsiperko
+95 R Enduring Tenacity @Isis
+111 U Nowhere to Run @Jodie Muir
+128 R Chainsaw @J.P. Targete
+131 R Cursed Recording @Kim Sokol
+136 R Fear of Missing Out @John Stanko
+157 M Screaming Nemesis @Liiga Smilshkalne
+194 M Overlord of the Hauntwoods @Tiffany Turrill
+272 L Plains @Dan Mumford
+273 L Island @Dan Mumford
+274 L Swamp @Dan Mumford
+275 L Mountain @Dan Mumford
+276 L Forest @Dan Mumford
+292 R Come Back Wrong @David Auden Nash
+309 R Come Back Wrong @Alexis Ziritt
+314 R Chainsaw @Alexis Ziritt
+346 R Doomsday Excruciator @Jarel Threat
+348 M Screaming Nemesis @Inkognit
+351 M The Wandering Rescuer @Vance Kelly
+356 R Toby, Beastie Befriender @Ashley Mackenzie
+374 R Enduring Tenacity @Isis
+383 M Overlord of the Hauntwoods @Tiffany Turrill
+390 M Enduring Tenacity @TAPIOCA
+395 M Overlord of the Hauntwoods @Aogachou
+400 M Enduring Tenacity @TAPIOCA
+405 M Overlord of the Hauntwoods @Aogachou
+406 M The Wandering Rescuer @Vance Kelly
+417 R Twitching Doll @John Tedrick

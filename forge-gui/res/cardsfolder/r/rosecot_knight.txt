@@ -1,0 +1,12 @@
+Name:Rosecot Knight
+ManaCost:4 W
+Types:Creature Human Knight
+PT:3/4
+K:Vigilance
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBDig | TriggerDescription$ When CARDNAME enters, look at the top six cards of your library. You may reveal an artifact or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, put a +1/+1 counter on CARDNAME.
+SVar:DBDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Artifact,Enchantment | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBPutCounter | StackDescription$ None
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact|Enchantment
+Oracle:Vigilance\nWhen Rosecot Knight enters, look at the top six cards of your library. You may reveal an artifact or enchantment card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, put a +1/+1 counter on Rosecot Knight.

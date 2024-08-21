@@ -50,30 +50,10 @@ public enum CDeckgen implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newRandomConstructed();
-            }
-        });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(2);
-            }
-        });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(3);
-            }
-        });
-        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                newGenerateConstructed(5);
-            }
-        });
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandCardpool().setCommand((UiCommand) this::newRandomConstructed);
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck2().setCommand((UiCommand) () -> newGenerateConstructed(2));
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck3().setCommand((UiCommand) () -> newGenerateConstructed(3));
+        VDeckgen.SINGLETON_INSTANCE.getBtnRandDeck5().setCommand((UiCommand) () -> newGenerateConstructed(5));
     }
 
     /* (non-Javadoc)
@@ -90,7 +70,7 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        final Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
+        final Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
         final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 

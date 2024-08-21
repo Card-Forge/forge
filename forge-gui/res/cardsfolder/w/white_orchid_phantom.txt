@@ -1,0 +1,10 @@
+Name:White Orchid Phantom
+ManaCost:W W
+Types:Creature Spirit Knight
+PT:2/2
+K:Flying
+K:First Strike
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy up to one target nonbasic land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select up to one target nonbasic land | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBSearch | AILogic$ GhostQuarter
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ TargetedController | ChangeType$ Land.Basic | ChangeNum$ 1 | Tapped$ True
+Oracle:Flying, first strike\nWhen White Orchid Phantom enters, destroy up to one target nonbasic land. Its controller may search their library for a basic land card, put it onto the battlefield tapped, then shuffle.

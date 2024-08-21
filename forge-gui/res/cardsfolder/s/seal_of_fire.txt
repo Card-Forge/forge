@@ -1,6 +1,7 @@
 Name:Seal of Fire
 ManaCost:R
 Types:Enchantment
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to any target.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 2 | SpellDescription$ It deals 2 damage to any target.
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
 Oracle:Sacrifice Seal of Fire: It deals 2 damage to any target.

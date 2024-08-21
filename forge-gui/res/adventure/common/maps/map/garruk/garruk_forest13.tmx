@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzVl9ENgzAMRPmtRDdgHpbopLQdrvQjUhTlbN/FFHpSfogVv5iLA+ttmtY/Gq3QXEauZR5js8TuDcVGGY+UlefL5zEerW3P/9zHa8YxFuMVxPB57Oz+yjtcxPq1eZT5eq7mqNl6o437BV9hVIbqwR4DivNqVSuLT5HnuV681cvP1pX5mLuuKNMD3hoZfAqnsr6aj41l9m+dYUVv4Nd27cc9vqbVY1g2rx4MV82XdX4Rn8JV2Dw+tp9G1PMBemeRMxy9lyJciAP5yuPz7mwrj+XFSLzHh2ql/sOwfJHaIVnfGEgoRuVjNNI3Ve+drRG+I/oOy2d5MIMv4/8o2qsi3u89Q72C7RFKP0Eso+MD6IymQg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6Aes13vtbEDEnpJVVVVVfXpAffWXM8=
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy1WO1Ow0AM689uHR8v2g3tRTc+Hoge1JJlnFxaIFIFdFnOyTm+HNNxGE7L8zEOw+UwfNm8/Dwvz8v6N9tt8Xta/J+X5238/u7D8acfx8HT/NV3Wtdunz8uv7+OPtZE60xHv27DVsHFvhG29jmw9DA23/sYY+cc3k0NnM2EC7kwplmwRBi5JlgXe9jDewty4tqBM3gHzrg9AkbGgnfMNbxreUR1xXoXw9F5rdu7rKO1d/lNhjf6TrnjOJHttVtDsWT59Yy5gGdPHLar5HkN+nkvxqj3XW9F+8Z8czXeg7HtoXLW5cH11Vr9t/Vy1c8j/fyNVTSwqju971U5wcaakunJVk6772lvwMetzXk4LWT8kZ643PWc1v1XbFEfas329JWeVc2uh9o5DT/0oMMT7avyJOKo6+GKRrPfvM5LUSyXp/pmuVTqnumOzk9RLM0x4soefcvmtijWTfYv6iPEB0+4V6L+qOJ3/IWh5neqTaYhrvYav5eni5nNGnzOujm3p8mqS5V5uMWsav2W2TWLoTxVHsDmovZUcFfnebZsdtI5mt/vnSe28j/TvkzLKnUAN1SHee/upgbZXQT+bsZ1c3WmNeCN02HWv+r5Do5k99XoDqV2pVleezLjPPYsm3+cMb8rvcjnF2YP4Kv0cXRHg45U7qO9/FCLk6x1PuT3zSwecs44gPrvvTNl/0OpYtxzNm3B9xf3wa1zxScg+fpc
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztl70SwiAMgFmce7rqZu/8fxyfUF+ibjr4c119FB/ApTkxpQ0JSev1/JYCJSGEEMC5PxYs+zZgAByN9V8TZBfM/muvPFLUG0PhlUvFsaYCmVXLv4vQjpzQfxDqjSXkh5PxmF1iEZMSsB0Q13OBLrw+T1SfMXSVdBcxv+J74JwoD2tFzeuWOA7mrqyPS0F3SQLiFc6WvuOGczZw9hoQe3bH5v5QXGvlcI4vLNctRTflC+t4y1Gdihnr/dYlXN9uTKzQAfL/y9XXtAmYf+hu1/bO4uZ8fAdoapOgcUfYVd9x5twk+24DJLkUI72Hh9gnyvtvpdA+4O7zh/vk+q3IojqSdxCFVtwNnTf3OB3d
+  </data>
+ </layer>
+ <layer id="7" name="Walls of Trees " width="40" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzNV0luwzAM9N35RezkqW5Rt3+q1cUt0JsfVAuwAmIypJbITQnwkJASRyKHok+Hpjltelz1DbQjtk6s+Sv18d9XRXEbJmlzBCOezTrDMcEnBZslDvDg+lnBIGOxc9bAliMz1Mg3xIphPO+ITWL8ItjYGe6BL0X6DHxD2zQPqz62fK9gt3xy9rPwvR6u1/Zg0+zBR9qG9vr3RPYL+tLa+CRHlm1P5GYH99xDPwn8WjabxDFBHNw3+E4GvlgN+vr9ET7O4LyD+BIT8mMmeLUcp9RRrljnYGLl+N48Hm7M8d5i3Z3G40HhWokgr1PxIadwDpC1+5TY7xBX4CfrRYznJXmVb9QSd7/E/iDnt/pYDe6Oq/+zkm/EVYO/udwIMwfLVwkuL6OR45I7xLl1afL7nZQS/t4qo7If47I1YzGcOfMJk9BvWe30Ss5id8i+jz6Ne8X+6H0WiCXxyV7D6j5lhkGRXMDZiPUOjCUx4Cx/Fr3Get9i3yCsT6WswblM4sb1NWeDVJ76mmffQ6z//OfZJYbP15b19sfe9r3xxXp0X+GOrTNab4d1jyPMHsGmfY+x/3F+wb6aio31Z1yH3zIaN609tL00/QVzlAuo
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../../obj/treasure.tx" x="527.167" y="104.583"/>
+  <object id="63" template="../../obj/gold.tx" x="528.166" y="116"/>
+  <object id="65" template="../../obj/enemy.tx" x="416.084" y="93.1663">
+   <properties>
+    <property name="enemy" value="Faerie"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/gold.tx" x="527.667" y="87.333"/>
+  <object id="70" template="../../obj/door_down.tx" x="328" y="353.333">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/door_down.tx" x="520" y="368">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/door_down.tx" x="208.667" y="256">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/door_down.tx" x="279.333" y="304.667">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/door_down.tx" x="56" y="143.333">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="75" template="../../obj/door_down.tx" x="296.667" y="145">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="76" template="../../obj/door_down.tx" x="472.333" y="256.667">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="77" template="../../obj/door_down.tx" x="160" y="191.333">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="81"/>
+   </properties>
+  </object>
+  <object id="78" template="../../obj/enemy.tx" x="272" y="422.667">
+   <properties>
+    <property name="enemy" value="Faerie"/>
+   </properties>
+  </object>
+  <object id="79" template="../../obj/enemy.tx" x="280.667" y="215.333">
+   <properties>
+    <property name="enemy" value="Faerie"/>
+   </properties>
+  </object>
+  <object id="80" template="../../obj/door_up.tx" x="273" y="480.5">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12B.tmx"/>
+    <property name="teleportObjectId" value="73"/>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/door_down.tx" x="89.2488" y="404.978">
+   <properties>
+    <property name="teleport" value="maps/map/grove_12C.tmx"/>
+    <property name="teleportObjectId" value="80"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

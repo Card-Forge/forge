@@ -1,6 +1,5 @@
 package forge.screens.home.gauntlet;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
@@ -30,21 +29,14 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
     private final VSubmenuGauntletContests view = VSubmenuGauntletContests.SINGLETON_INSTANCE;
 
-    private final ActionListener actStartGame = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent arg0) {
-            startGame();
-        }
-    };
+    private final ActionListener actStartGame = arg0 -> startGame();
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
      */
     @Override
     public void update() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() { view.getBtnStart().requestFocusInWindow(); }
-        });
+        SwingUtilities.invokeLater(() -> view.getBtnStart().requestFocusInWindow());
     }
 
     @Override
@@ -95,12 +87,9 @@ public enum CSubmenuGauntletContests implements ICDoc {
         gd.stamp();
         FModel.setGauntletData(gd);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
         final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
@@ -112,12 +101,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
 
         gd.startRound(starter, human);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
 }

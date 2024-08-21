@@ -3,6 +3,6 @@ ManaCost:5 W
 Types:Creature Bird Cleric
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 3 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
-Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Battle Priest enters the battlefield, you gain 3 life.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aven Battle Priest enters, you gain 3 life.

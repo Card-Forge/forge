@@ -2,7 +2,7 @@ Name:Stingerfling Spider
 ManaCost:4 G
 Types:Creature Spider
 PT:2/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target creature with flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target creature with flying.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying.
 K:Reach
-Oracle:Reach\nWhen Stingerfling Spider enters the battlefield, you may destroy target creature with flying.
+Oracle:Reach\nWhen Stingerfling Spider enters, you may destroy target creature with flying.

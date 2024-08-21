@@ -25,7 +25,8 @@ public enum AbilityEffect {
         if (soundClip == null) {
             soundClip = AudioClip.createClip(ForgeConstants.EFFECTS_DIR + wav);
         }
-        soundClip.play(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_SOUNDS)/100f);
+        if (soundClip != null)
+            soundClip.play(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_SOUNDS)/100f);
         animation.start();
     }
 

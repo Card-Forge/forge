@@ -1,0 +1,11 @@
+Name:Arcbound Condor
+ManaCost:2 B B
+Types:Artifact Creature Bird
+PT:0/0
+K:Flying
+K:Modular:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact you control enters, target creature an opponent controls gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
+Oracle:Flying\nModular 3 (This creature enters with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)\nWhenever another artifact you control enters, target creature an opponent controls gets -1/-1 until end of turn.

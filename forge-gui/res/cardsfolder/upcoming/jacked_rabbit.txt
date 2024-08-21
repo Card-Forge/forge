@@ -1,0 +1,11 @@
+Name:Jacked Rabbit
+ManaCost:X 1 W
+Types:Creature Rabbit Warrior
+PT:1/2
+K:Ravenous
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a number of 1/1 white Rabbit creature tokens equal to CARDNAME's power.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ Y
+SVar:X:Count$xPaid
+SVar:Y:Count$CardPower
+DeckHas:Ability$Counters|Token
+Oracle:Ravenous (This creature enters with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nWhenever Jacked Rabbit attacks, create a number of 1/1 white Rabbit creature tokens equal to Jacked Rabbit's power.

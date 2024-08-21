@@ -11,7 +11,7 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Val
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:Count$xPaid
-#X Will get overwritten by Announce
+# X Will get overwritten by Announce
 SVar:Y:Number$0
 AI:RemoveDeck:All
 Oracle:{X}, {T}: The next X damage that would be dealt this turn to target white creature you control is dealt to Hazduhr the Abbot instead.

@@ -1,0 +1,12 @@
+Name:Blaster Hulk
+ManaCost:6 R R
+Types:Artifact Creature Pirate
+PT:8/8
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Count$CountersRemovedThisTurn ENERGY You | EffectZone$ All | Description$ This spell costs {1} less to cast for each {E} (energy counter) you've paid or lost this turn.
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME attacks, you get {E}{E}, then you may pay eight {E}. When you do, CARDNAME deals 8 damage divided as you choose among up to eight targets.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | SubAbility$ DBTrigger
+SVar:DBTrigger:DB$ ImmediateTrigger | UnlessCost$ PayEnergy<8> | UnlessPayer$ You | UnlessSwitched$ True | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals 8 damage divided as you choose among up to eight targets.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | TgtPrompt$ Select up to eight targets | NumDmg$ 8 | TargetMin$ 0 | TargetMax$ 8 | DividedAsYouChoose$ 8
+SVar:HasAttackEffect:TRUE
+Oracle:This spell costs {1} less to cast for each {E} (energy counter) you've paid or lost this turn.\nHaste\nWhenever Blaster Hulk attacks, you get {E}{E}, then you may pay eight {E}. When you do, Blaster Hulk deals 8 damage divided as you choose among up to eight targets.

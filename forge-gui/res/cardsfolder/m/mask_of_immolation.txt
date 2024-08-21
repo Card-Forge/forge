@@ -1,14 +1,14 @@
 Name:Mask of Immolation
 ManaCost:1 R
 Types:Artifact Equipment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 red Elemental creature token, then attach CARDNAME to it.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 red Elemental creature token, then attach CARDNAME to it.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_elemental | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage | Description$ Equipped creature has "Sacrifice this creature: It deals 1 damage to any target."
-SVar:Damage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:Damage:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Any | NumDmg$ 1 | SpellDescription$ It deals 1 damage to any target.
 SVar:NonStackingAttachEffect:True
-AI:RemoveDeck:All
-DeckHas:Ability$Token
 K:Equip:2
-Oracle:When Mask of Immolation enters the battlefield, create a 1/1 red Elemental creature token, then attach Mask of Immolation to it.\nEquipped creature has "Sacrifice this creature: It deals 1 damage to any target."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
+AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice|Token & Type$Elemental
+Oracle:When Mask of Immolation enters, create a 1/1 red Elemental creature token, then attach Mask of Immolation to it.\nEquipped creature has "Sacrifice this creature: It deals 1 damage to any target."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

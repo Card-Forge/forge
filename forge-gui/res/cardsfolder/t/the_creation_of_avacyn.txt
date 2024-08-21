@@ -1,0 +1,10 @@
+Name:The Creation of Avacyn
+ManaCost:1 B B
+Types:Enchantment Saga
+K:Chapter:3:I,II,III
+SVar:I:DB$ ChangeZone | ChangeNum$ 1 | ChangeType$ Card | Mandatory$ True | Origin$ Library | Destination$ Exile | ExileFaceDown$ True | SpellDescription$ Search your library for a card, exile it face down, then shuffle.
+SVar:II:DB$ SetState | Defined$ ExiledWith | Mode$ TurnFaceUp | SubAbility$ DBLoseLife | SpellDescription$ Turn the exiled card face up. If it's a creature card, you lose life equal to its mana value.
+SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ ExiledWith | ConditionPresent$ Creature | LifeAmount$ ExiledWith$CardManaCost
+SVar:III:DB$ ChangeZone | Optional$ True | Defined$ ExiledWith | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ ExiledWith | ConditionPresent$ Creature | SubAbility$ DBChangeZone | SpellDescription$ You may put the exiled card onto the battlefield if it's a creature card. If you don't put it onto the battlefield, put it into its owner's hand.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Search your library for a card, exile it face down, then shuffle.\nII — Turn the exiled card face up. If it's a creature card, you lose life equal to its mana value.\nIII — You may put the exiled card onto the battlefield if it's a creature card. If you don't put it onto the battlefield, put it into its owner's hand.

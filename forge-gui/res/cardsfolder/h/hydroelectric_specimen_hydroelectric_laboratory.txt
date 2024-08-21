@@ -1,0 +1,19 @@
+Name:Hydroelectric Specimen
+ManaCost:2 U
+Types:Creature Weird
+PT:1/4
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may change a target of target instant or sorcery spell with a single target to CARDNAME.
+SVar:TrigChange:DB$ ChangeTargets | TargetType$ Instant.singleTarget,Sorcery.singleTarget | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True
+AlternateMode:Modal
+Oracle:Flash\nWhen Hydroelectric Specimen enters, you may change a target of target instant or sorcery spell with a single target to Hydroelectric Specimen.
+
+ALTERNATE
+
+Name:Hydroelectric Laboratory
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may pay 3 life. If you don't, it enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+Oracle:As Hydroelectric Laboratory enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {U}.

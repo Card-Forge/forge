@@ -32,15 +32,17 @@ public class StaticAbilityAlternativeCost {
                     continue;
                 }
 
-                Cost cost = new Cost(stAb.getParam("Cost"), sa.isAbility());
+                String costTemplate = stAb.getParam("Cost");
+                costTemplate = costTemplate.replace("ConvertedManaCost", Integer.toString(source.getCMC()));
+
+                Cost cost = new Cost(costTemplate, sa.isAbility());
                 // set the cost to this directly to bypass non mana cost
                 final SpellAbility newSA = sa.isAbility() ? sa.copyWithDefinedCost(cost) : sa.copyWithManaCostReplaced(pl, cost);
                 newSA.setActivatingPlayer(pl);
                 newSA.setBasicSpell(false);
 
-                if (cost.hasXInAnyCostPart()) {
-                    // TODO this is problematic for Spells that already have (non-mana) X SVar
-                    newSA.setSVar("X", stAb.getSVar("X"));
+                if (stAb.hasParam("XAlternative")) {
+                    newSA.putParam("XAlternative", stAb.getParam("XAlternative"));
                 }
 
                 if (stAb.hasParam("Announce")) {

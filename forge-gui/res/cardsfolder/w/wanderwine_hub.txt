@@ -1,7 +1,7 @@
 Name:Wanderwine Hub
 ManaCost:no cost
 Types:Land
-K:ETBReplacement:Other:DBTap
-SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Merfolk> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may reveal a Merfolk card from your hand. If you don't, CARDNAME enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Merfolk> | UnlessPayer$ You | StackDescription$ enters tapped.
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
-Oracle:As Wanderwine Hub enters the battlefield, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters the battlefield tapped.\n{T}: Add {W} or {U}.
+Oracle:As Wanderwine Hub enters, you may reveal a Merfolk card from your hand. If you don't, Wanderwine Hub enters tapped.\n{T}: Add {W} or {U}.

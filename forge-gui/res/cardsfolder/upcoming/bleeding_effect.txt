@@ -1,0 +1,8 @@
+Name:Bleeding Effect
+ManaCost:2 W B
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, creatures you control gain flying until end of turn if a creature card in your graveyard has flying. The same is true for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike & Flying & Deathtouch & Double Strike & Haste & Hexproof & Indestructible & Lifelink & Menace & Reach & Trample & Vigilance | SharedKeywordsZone$ Graveyard | SharedRestrictions$ Creature.YouCtrl
+DeckHints:Ability$Mill|Graveyard
+DeckHas:Ability$LifeGain
+Oracle:At the beginning of combat on your turn, creatures you control gain flying until end of turn if a creature card in your graveyard has flying. The same is true for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.

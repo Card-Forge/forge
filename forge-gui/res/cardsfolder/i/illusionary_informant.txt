@@ -1,0 +1,8 @@
+Name:Illusionary Informant
+ManaCost:1 U
+Types:Creature Bird Illusion
+PT:1/3
+Draft:Draft CARDNAME face up.
+Draft:During the draft, you may turn CARDNAME face down. If you do, look at the next card drafted by a player of your choice.
+K:Flying
+Oracle:Draft Illusionary Informant face up.\nDuring the draft, you may turn Illusionary Informant face down. If you do, look at the next card drafted by a player of your choice.\nFlying

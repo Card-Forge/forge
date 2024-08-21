@@ -2,7 +2,7 @@ Name:Orchard Warden
 ManaCost:4 G G
 Types:Creature Treefolk Shaman
 PT:4/6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Treefolk.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Treefolk.YouCtrl+Other | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever another Treefolk creature you control enters, you may gain life equal to that creature's toughness.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Life
 SVar:Life:TriggeredCard$CardToughness
-Oracle:Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
+Oracle:Whenever another Treefolk creature you control enters, you may gain life equal to that creature's toughness.

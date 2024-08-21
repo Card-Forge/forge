@@ -1,0 +1,9 @@
+Name:Colossal Dreadmask
+ManaCost:4 G G
+Types:Artifact Equipment
+K:Living Weapon
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 6 | AddToughness$ 6 | AddKeyword$ Trample | Description$ Equipped creature gets +6/+6 and has trample.
+K:Equip:3 G G
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Artifact
+Oracle:Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +6/+6 and has trample.\nEquip {3}{G}{G}

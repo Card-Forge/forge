@@ -1,0 +1,17 @@
+Name:Gluttonous Hellkite
+ManaCost:X X B R G
+Types:Creature Dragon
+PT:3/3
+K:Flying
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When you cast this spell, each player sacrifices X creatures. CARDNAME enters with two +1/+1 counters on it for each creature sacrificed this way.
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ Player | Amount$ X | SacValid$ Creature | Mode$ TgtChoose | RememberSacrificed$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ Static | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Static:Event$ Moved | Origin$ Stack | ValidCard$ Card.EffectSource | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBCounter
+SVar:ETBCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ Y | SubAbility$ RemoveSelf
+SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Y:Remembered$Amount/Twice
+SVar:X:Count$xPaid
+DeckHas:Ability$Sacrifice|Counters
+Oracle:When you cast this spell, each player sacrifices X creatures. Gluttonous Hellkite enters with two +1/+1 counters on it for each creature sacrificed this way.\nFlying, trample

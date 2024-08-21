@@ -1,12 +1,12 @@
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
@@ -148,6 +148,19 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostPromiseGift cost) {
+        if (!cost.canPay(ability, player, isEffect())) {
+            return null;
+        }
+        List<Player> res = cost.getPotentialPlayers(player, ability);
+        // I should only choose one of these right?
+        // TODO Choose the "worst" player.
+        Collections.shuffle(res);
+
+        return PaymentDecision.players(res.subList(0, 1));
+    }
+
+    @Override
     public PaymentDecision visit(CostExile cost) {
         String type = cost.getType();
         if (cost.payCostFromSource()) {
@@ -156,8 +169,27 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (type.equals("All")) {
             return PaymentDecision.card(player.getCardsIn(cost.getFrom()));
-        }
-        else if (type.contains("FromTopGrave")) {
+        } else if (type.contains("FromTopGrave")) {
+            return null;
+        } else if (type.contains("+withTotalCMCGE")) {
+            String strAmount = type.split("withTotalCMCGE")[1];
+            int amount = AbilityUtils.calculateAmount(source, strAmount, ability);
+            String typeCleaned = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalCMCGE", strAmount), "");
+            CardCollection valid = CardLists.getValidCards(player.getGame().getCardsIn(cost.getFrom().get(0)), typeCleaned, player, source, ability);
+            CardCollection chosen = new CardCollection();
+
+            CardLists.sortByCmcDesc(valid);
+            Collections.reverse(valid);
+
+            int totalCMC = 0;
+            for (Card card : valid) {
+                totalCMC += card.getCMC();
+                chosen.add(card);
+                if (totalCMC >= amount) {
+                    return PaymentDecision.card(chosen);
+                }
+            }
+
             return null;
         }
 
@@ -242,6 +274,20 @@ public class AiCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(CostFlipCoin cost) {
         int c = cost.getAbilityAmount(ability);
         return PaymentDecision.number(c);
+    }
+
+    @Override
+    public PaymentDecision visit(final CostForage cost) {
+        CardCollection food = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Food"), CardPredicates.canBeSacrificedBy(ability, isEffect()));
+        CardCollection exile = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.canExiledBy(ability, isEffect()));
+        if (!food.isEmpty()) {
+            final AiController aic = ((PlayerControllerAi)player.getController()).getAi();
+            CardCollectionView list = aic.chooseSacrificeType("Food", ability, isEffect(), 1, null);
+            return list == null ? null : PaymentDecision.card(list);
+        } else {
+            CardCollectionView chosen = ComputerUtil.chooseExileFromList(player, exile, source, 3, ability, isEffect());
+            return null == chosen ? null : PaymentDecision.card(chosen);
+        }
     }
 
     @Override
@@ -398,16 +444,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
             CardCollectionView toExclude =
                     CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
                             ability.getActivatingPlayer(), ability.getHostCard(), ability);
-            toExclude = CardLists.filter(toExclude, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    for (final SpellAbility sa : card.getSpellAbilities()) {
-                        if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
-                            return true;
-                        }
+            toExclude = CardLists.filter(toExclude, card -> {
+                for (final SpellAbility sa : card.getSpellAbilities()) {
+                    if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
+                        return true;
                     }
-                    return false;
                 }
+                return false;
             });
             exclude.addAll(toExclude);
         }
@@ -595,16 +638,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         // filter for negative counters
         if (c > toRemove && cost.counter == null) {
-            List<Card> negatives = CardLists.filter(typeList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    for (CounterType cType : table.filterToRemove(crd).keySet()) {
-                        if (ComputerUtil.isNegativeCounter(cType, crd)) {
-                            return true;
-                        }
+            List<Card> negatives = CardLists.filter(typeList, crd -> {
+                for (CounterType cType : table.filterToRemove(crd).keySet()) {
+                    if (ComputerUtil.isNegativeCounter(cType, crd)) {
+                        return true;
                     }
-                    return false;
                 }
+                return false;
             });
 
             if (!negatives.isEmpty()) {
@@ -626,16 +666,13 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // filter for useless counters
         // they have no effect on the card, if they are there or removed
         if (c > toRemove && cost.counter == null) {
-            List<Card> useless = CardLists.filter(typeList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    for (CounterType ctype : table.filterToRemove(crd).keySet()) {
-                        if (ComputerUtil.isUselessCounter(ctype, crd)) {
-                            return true;
-                        }
+            List<Card> useless = CardLists.filter(typeList, crd -> {
+                for (CounterType ctype : table.filterToRemove(crd).keySet()) {
+                    if (ComputerUtil.isUselessCounter(ctype, crd)) {
+                        return true;
                     }
-                    return false;
                 }
+                return false;
             });
 
             if (!useless.isEmpty()) {
@@ -663,17 +700,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
         // try to remove Quest counter on something with enough counters for the
         // effect to continue
         if (c > toRemove && (cost.counter == null || cost.counter.is(CounterEnumType.QUEST))) {
-            List<Card> prefs = CardLists.filter(typeList, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    // a Card without MaxQuestEffect doesn't need any Quest
-                    // counters
-                    int e = 0;
-                    if (crd.hasSVar("MaxQuestEffect")) {
-                        e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
-                    }
-                    return crd.getCounters(CounterEnumType.QUEST) > e;
+            List<Card> prefs = CardLists.filter(typeList, crd -> {
+                // a Card without MaxQuestEffect doesn't need any Quest
+                // counters
+                int e = 0;
+                if (crd.hasSVar("MaxQuestEffect")) {
+                    e = Integer.parseInt(crd.getSVar("MaxQuestEffect"));
                 }
+                return crd.getCounters(CounterEnumType.QUEST) > e;
             });
             prefs.sort(Collections.reverseOrder(CardPredicates.compareByCounterType(CounterEnumType.QUEST)));
 

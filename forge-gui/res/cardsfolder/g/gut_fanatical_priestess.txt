@@ -3,11 +3,11 @@ ManaCost:4 R R
 Types:Legendary Creature Goblin Shaman
 PT:4/3
 K:Specialize:5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
 SVar:TrigFight:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBFight
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ReplaceDyingDefined$ ThisTargetedCard | ReplaceDyingExiledWith$ True
 AlternateMode:Specialize
-Oracle:Specialize {5}\nWhen Gut, Fanatical Priestess enters the battlefield, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
+Oracle:Specialize {5}\nWhen Gut, Fanatical Priestess enters, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
 
 SPECIALIZE:WHITE
 

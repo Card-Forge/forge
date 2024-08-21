@@ -47,15 +47,13 @@ public class AudioMusic implements IAudioMusic {
                     }
                 }
             });
-            new Thread(new Runnable(){
-                @Override public void run(){
-                    try {
-                        musicPlayer.play();
-                    }
-                    catch (Exception e){
-                        e.printStackTrace();
-                        valid = false;
-                    }
+            new Thread(() -> {
+                try {
+                    musicPlayer.play();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    valid = false;
                 }
             }, "Audio Music").start();
         }

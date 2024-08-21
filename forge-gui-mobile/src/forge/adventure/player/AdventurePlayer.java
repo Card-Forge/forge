@@ -150,6 +150,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.enemyLifeFactor = difficultyData.enemyLifeFactor;
         this.difficultyData.sellFactor = difficultyData.sellFactor;
         this.difficultyData.shardSellRatio = difficultyData.shardSellRatio;
+        this.difficultyData.goldLoss = difficultyData.goldLoss;
+        this.difficultyData.lifeLoss = difficultyData.lifeLoss;
 
         gold = difficultyData.staringMoney;
         name = n;
@@ -187,6 +189,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.enemyLifeFactor = diff.enemyLifeFactor;
         this.difficultyData.sellFactor = diff.sellFactor;
         this.difficultyData.shardSellRatio = diff.shardSellRatio;
+        this.difficultyData.goldLoss = diff.goldLoss;
+        this.difficultyData.lifeLoss = diff.lifeLoss;
         resetToMaxLife();
     }
 
@@ -857,7 +861,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void removeItem(String name) {
-        if (name == null || name.equals("")) return;
+        if (name == null || name.isEmpty()) return;
         inventoryItems.removeValue(name, false);
         if (equippedItems.values().contains(name) && !inventoryItems.contains(name, false)) {
             equippedItems.values().remove(name);

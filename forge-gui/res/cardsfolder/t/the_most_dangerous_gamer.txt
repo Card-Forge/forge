@@ -1,0 +1,13 @@
+Name:The Most Dangerous Gamer
+ManaCost:2 B G
+Types:Legendary Creature Human Gamer Guest
+PT:2/2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBOpen | TriggerDescription$ Whenever CARDNAME enters or attacks, open an Attraction.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ DBOpen | TriggerDescription$ Whenever CARDNAME enters or attacks, open an Attraction.
+SVar:DBOpen:DB$ OpenAttraction
+T:Mode$ ChangesZone | Origin$ AttractionDeck | Destination$ Battlefield | ValidCard$ Attraction.YouCtrl | TriggerZones$ Battlefield | Execute$ DBCounter | TriggerDescription$ Whenever you open an Attraction, put a +1/+1 counter on CARDNAME.
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ClaimPrize | ValidCard$ Attraction.YouCtrl | TriggerZones$ Battlefield | Execute$ DBDestroy | TriggerDescription$ Whenever you claim the prize of an Attraction, destroy target permanent.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent.
+Oracle:Deathtouch\nWhenever The Most Dangerous Gamer enters or attacks, open an Attraction.\nWhenever you open an Attraction, put a +1/+1 counter on The Most Dangerous Gamer.\nWhenever you claim the prize of an Attraction, destroy target permanent.

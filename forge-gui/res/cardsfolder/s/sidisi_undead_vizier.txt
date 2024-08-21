@@ -1,9 +1,9 @@
 Name:Sidisi, Undead Vizier
 ManaCost:3 B B
-Types:Legendary Creature Zombie Naga
+Types:Legendary Creature Zombie Snake
 PT:4/6
 K:Deathtouch
 K:Exploit
 T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME exploits a creature, you may search your library for a card, put it into your hand, then shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | ShuffleNonMandatory$ True
-Oracle:Deathtouch\nExploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhen Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle.
+Oracle:Deathtouch\nExploit (When this creature enters, you may sacrifice a creature.)\nWhen Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle.

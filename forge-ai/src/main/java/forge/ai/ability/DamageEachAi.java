@@ -26,6 +26,7 @@ public class DamageEachAi extends DamageAiBase {
             }
             sa.resetTargets();
             sa.getTargets().add(weakestOpp);
+            return weakestOpp.canLoseLife() && !weakestOpp.cantLoseForZeroOrLessLife();
         }
         
         final String damage = sa.getParam("NumDmg");

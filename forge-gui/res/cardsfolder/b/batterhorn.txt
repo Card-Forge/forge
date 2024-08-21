@@ -2,6 +2,6 @@ Name:Batterhorn
 ManaCost:4 R
 Types:Creature Beast
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may destroy target artifact.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-Oracle:When Batterhorn enters the battlefield, you may destroy target artifact.
+Oracle:When Batterhorn enters, you may destroy target artifact.

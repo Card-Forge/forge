@@ -4,6 +4,6 @@ Colors:red,white
 Types:Creature Human Rogue
 PT:1/2
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters the battlefield, it deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters, it deals 1 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 1
-Oracle:Haste\nWhen this creature enters the battlefield, it deals 1 damage to any target.
+Oracle:Haste\nWhen this creature enters, it deals 1 damage to any target.

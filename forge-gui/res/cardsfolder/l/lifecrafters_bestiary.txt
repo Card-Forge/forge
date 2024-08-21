@@ -4,7 +4,7 @@ Types:Artifact
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may pay {G}. If you do, draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ G | NumCards$ 1
+SVar:TrigDraw:AB$ Draw | Cost$ G | NumCards$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Green
 Oracle:At the beginning of your upkeep, scry 1.\nWhenever you cast a creature spell, you may pay {G}. If you do, draw a card.

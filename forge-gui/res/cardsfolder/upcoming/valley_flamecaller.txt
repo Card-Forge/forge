@@ -1,0 +1,9 @@
+Name:Valley Flamecaller
+ManaCost:2 R
+Types:Creature Lizard Warlock
+PT:3/3
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Lizard.YouCtrl,Mouse.YouCtrl,Otter.YouCtrl,Raccoon.YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgPlus1 | Description$ If a Lizard, Mouse, Otter, or Raccoon you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.
+SVar:DmgPlus1:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+DeckHints:Type$Lizard|Mouse|Otter|Raccoon
+Oracle:If a Lizard, Mouse, Otter, or Raccoon you control would deal damage to a permanent or player, it deals that much damage plus 1 instead.

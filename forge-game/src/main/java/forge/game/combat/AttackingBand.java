@@ -5,6 +5,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 
 import java.util.List;
 
@@ -39,28 +40,20 @@ public class AttackingBand {
             return true;
         }
 
-        // Legends lands, Master of the Hunt, Old Fogey (just in case)
-        // Since Bands With Other is a dead keyword, no major reason to make this more generic
-        // But if someone is super motivated, feel free to do it. Just make sure you update Tolaria and Shelkie Brownie
-        String[] bandsWithString = { "Bands with Other Legendary Creatures", "Bands with Other Creatures named Wolves of the Hunt", 
-        "Bands with Other Dinosaurs" };
-        String[] validString = { "Legendary.Creature", "Creature.namedWolves of the Hunt", "Dinosaur" }; 
+        for (Card c : CardLists.getKeyword(band, Keyword.BANDSWITH)) {
+            for (KeywordInterface kw : c.getKeywords(Keyword.BANDSWITH)) {
+                String o = kw.getOriginal();
+                String m[] = o.split(":");
 
-        Card source = band.get(0);
-        for (int i = 0; i < bandsWithString.length; i++) {
-            String keyword = bandsWithString[i];
-            String valid = validString[i];
-
-            // Check if a bands with other keyword exists in band, and each creature in the band fits the valid quality
-            if (!CardLists.getKeyword(band, keyword).isEmpty() &&
-                    CardLists.getValidCards(band, valid, source.getController(), source, null).size() == band.size()) {
-                return true;
+                if (CardLists.getValidCards(band, m[1], c.getController(), c, null).size() == band.size()) {
+                    return true;
+                }
             }
         }
 
         return false;
     }
-    
+
     public boolean canJoinBand(Card card) {
         // Trying to join an existing band, attackers should be non-empty and card should exist
         CardCollection newBand = new CardCollection(attackers);
@@ -92,7 +85,7 @@ public class AttackingBand {
      */
     @Override
     public String toString() {
-        return String.format("%s %s", attackers.toString(), blocked == null ? " ? " : blocked.booleanValue() ? ">||" : ">>>" );
+        return String.format("%s %s", attackers.toString(), blocked == null ? " ? " : blocked ? ">||" : ">>>" );
     }
 
 }

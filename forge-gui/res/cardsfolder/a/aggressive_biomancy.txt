@@ -1,0 +1,8 @@
+Name:Aggressive Biomancy
+ManaCost:X X G U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | NumCopies$ X | AddTriggers$ TrigFight | AddSVars$ TrigFight,TrigFightBis | TgtPrompt$ Select target creature you control | SpellDescription$ Create X tokens that are copies of target creature you control, except they have "When this creature enters, it fights up to one target creature you don't control."
+SVar:TrigFight:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFightBis | TriggerDescription$ When CARDNAME enters, it fights up to one target creature you don't control.
+SVar:TrigFightBis:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1
+SVar:X:Count$xPaid
+Oracle:Create X tokens that are copies of target creature you control, except they have "When this creature enters, it fights up to one target creature you don't control."

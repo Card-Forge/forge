@@ -1,0 +1,9 @@
+Name:Marionette Apprentice
+ManaCost:1 B
+Types:Creature Human Artificer
+PT:1/2
+K:Fabricate:1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.YouCtrl+Other,Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+DeckHas:Ability$Counters|Token
+Oracle:Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)\nWhenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life.

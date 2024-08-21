@@ -1,7 +1,8 @@
 Name:Polluted Mire
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
 K:Cycling:2
-Oracle:Polluted Mire enters the battlefield tapped.\n{T}: Add {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)
+Oracle:Polluted Mire enters tapped.\n{T}: Add {B}.\nCycling {2} ({2}, Discard this card: Draw a card.)

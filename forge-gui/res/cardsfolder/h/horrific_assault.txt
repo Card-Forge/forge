@@ -1,0 +1,9 @@
+Name:Horrific Assault
+ManaCost:G
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ None | SpellDescription$ Target creature you control deals damage equal to its power to target creature or planeswalker you don't control. If you control an Eldrazi, you gain 3 life.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature or planeswalker you don't control | NumDmg$ X | DamageSource$ ParentTarget | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | ConditionPresent$ Eldrazi.YouCtrl
+SVar:X:ParentTargeted$CardPower
+DeckHas:Ability$LifeGain
+Oracle:Target creature you control deals damage equal to its power to target creature or planeswalker you don't control. If you control an Eldrazi, you gain 3 life.

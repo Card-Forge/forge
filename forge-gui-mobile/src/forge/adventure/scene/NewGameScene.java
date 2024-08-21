@@ -127,7 +127,7 @@ public class NewGameScene extends MenuScene {
             modeNames[i] = modes.get(i).getName();
         mode.setTextList(modeNames);
 
-        gender.setTextList(new String[]{Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale")});
+        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale")});
         gender.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -173,10 +173,10 @@ public class NewGameScene extends MenuScene {
         gender.setCurrentIndex(rand.nextInt());
         colorId.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());
-        ui.onButtonPress("back", () -> NewGameScene.this.back());
-        ui.onButtonPress("start", () -> NewGameScene.this.start());
-        ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
-        ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
+        ui.onButtonPress("back", NewGameScene.this::back);
+        ui.onButtonPress("start", NewGameScene.this::start);
+        ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
+        ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
         difficultyHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showDifficultyHelp(); }});
         modeHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showModeHelp(); }});
     }
@@ -217,7 +217,7 @@ public class NewGameScene extends MenuScene {
             }
             Forge.switchScene(GameScene.instance());
         };
-        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
+        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, Forge.getLocalizer().getMessage("lblGeneratingWorld")));
         return true;
     }
 

@@ -2,7 +2,7 @@ Name:Dinrova Horror
 ManaCost:4 U B
 Types:Creature Horror
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters, return target permanent to its owner's hand, then that player discards a card.
 SVar:TrigBounce:DB$ ChangeZone | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ TargetedOwner | NumCards$ 1 | Mode$ TgtChoose
-Oracle:When Dinrova Horror enters the battlefield, return target permanent to its owner's hand, then that player discards a card.
+Oracle:When Dinrova Horror enters, return target permanent to its owner's hand, then that player discards a card.

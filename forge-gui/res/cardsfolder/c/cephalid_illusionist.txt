@@ -1,6 +1,6 @@
 Name:Cephalid Illusionist
 ManaCost:1 U
-Types:Creature Cephalid Wizard
+Types:Creature Octopus Wizard
 PT:1/1
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You

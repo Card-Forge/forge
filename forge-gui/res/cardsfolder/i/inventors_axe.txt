@@ -1,0 +1,11 @@
+Name:Inventor's Axe
+ManaCost:R
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+K:Equip:PayEnergy<2>
+Oracle:Flash\nWhen Inventor's Axe enters, you get {E}{E} (two energy counters).\nWhen Inventor's Axe enters, attach it to target creature you control.\nEquipped creature gets +2/+0.\nEquip—Pay {E}{E}.

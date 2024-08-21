@@ -1,6 +1,6 @@
 Name:Viashino Sandsprinter
 ManaCost:1 R R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:4/1
 K:Haste
 K:Trample

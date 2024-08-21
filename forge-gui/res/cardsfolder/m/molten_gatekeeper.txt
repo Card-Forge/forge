@@ -1,0 +1,9 @@
+Name:Molten Gatekeeper
+ManaCost:2 R
+Types:Artifact Creature Golem
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another creature you control enters, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDmg:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+K:Unearth:R
+DeckHas:Ability$Graveyard
+Oracle:Whenever another creature you control enters, Molten Gatekeeper deals 1 damage to each opponent.\nUnearth {R} ({R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

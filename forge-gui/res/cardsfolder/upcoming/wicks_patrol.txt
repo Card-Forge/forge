@@ -1,0 +1,12 @@
+Name:Wick's Patrol
+ManaCost:4 B B
+Types:Creature Rat Warlock
+PT:5/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill three cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigDebuff | SubAbility$ DBCleanup | TriggerDescription$ When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.YouCtrl$GreatestCMC
+DeckHas:Ability$Graveyard
+Oracle:When Wick's Patrol enters, mill three cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard.

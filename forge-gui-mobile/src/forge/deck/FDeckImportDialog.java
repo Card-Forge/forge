@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.Forge;
 import forge.Graphics;
@@ -32,8 +33,6 @@ import forge.gui.util.SOptionPane;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
@@ -81,6 +80,7 @@ public class FDeckImportDialog extends FDialog {
             supportedSections.add(DeckSection.Sideboard);
             if (editorType != FDeckEditor.EditorType.Constructed)
                 supportedSections.add(DeckSection.Commander);
+            supportedSections.addAll(Lists.newArrayList(FDeckEditor.getExtraSections(editorType)));
             controller.setAllowedSections(supportedSections);
         }
 
@@ -91,56 +91,40 @@ public class FDeckImportDialog extends FDialog {
         this.currentDeckIsEmpty = !replacingDeck;
         this.createNewDeckControl = replacingDeck;
 
-        initButton(0, Forge.getLocalizer().getMessage("lblImport"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
+        initButton(0, Forge.getLocalizer().getMessage("lblImport"), e -> FThreads.invokeInBackgroundThread(() -> {
+            List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText()); //ensure deck updated based on any changes to options
 
-                        if (controller.isSmartCardArtEnabled())
-                            tokens = controller.optimiseCardArtInTokens();
+            if (controller.isSmartCardArtEnabled())
+                tokens = controller.optimiseCardArtInTokens();
 
-                        //if there are any cards that cannot be imported, let user know this and give them the option to cancel
-                        StringBuilder sb = new StringBuilder();
-                        for (DeckRecognizer.Token token : tokens) {
-                            if (token.getType() == TokenType.CARD_FROM_NOT_ALLOWED_SET
-                                    || token.getType() == TokenType.CARD_FROM_INVALID_SET
-                                    || token.getType() == TokenType.UNKNOWN_CARD
-                                    || token.getType() == TokenType.UNSUPPORTED_CARD) {
-                                if (sb.length() > 0)
-                                    sb.append("\n");
-                                sb.append(token.getQuantity()).append(" ").append(token.getText());
-                            }
-                        }
-                        if (sb.length() > 0) {
-                            if (SOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Forge.getLocalizer().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
-                                return;
-                            }
-                        }
-
-                        final Deck deck = controller.accept(); //must accept in background thread in case a dialog is shown
-                        if (deck == null) { return; }
-
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                hide();
-                                if (callback != null)
-                                    callback.run(deck);
-                            }
-                        });
-                    }
-                });
+            //if there are any cards that cannot be imported, let user know this and give them the option to cancel
+            StringBuilder sb = new StringBuilder();
+            for (DeckRecognizer.Token token : tokens) {
+                if (token.getType() == TokenType.CARD_FROM_NOT_ALLOWED_SET
+                        || token.getType() == TokenType.CARD_FROM_INVALID_SET
+                        || token.getType() == TokenType.UNKNOWN_CARD
+                        || token.getType() == TokenType.UNSUPPORTED_CARD) {
+                    if (sb.length() > 0)
+                        sb.append("\n");
+                    sb.append(token.getQuantity()).append(" ").append(token.getText());
+                }
             }
-        });
-        initButton(1, Forge.getLocalizer().getMessage("lblCancel"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
+            if (sb.length() > 0) {
+                if (SOptionPane.showOptionDialog(Forge.getLocalizer().getMessage("lblFollowingCardsCannotBeImported") + "\n\n" + sb, Forge.getLocalizer().getMessage("lblImportRemainingCards"), SOptionPane.INFORMATION_ICON, importOrCancel) == 1) {
+                    return;
+                }
+            }
+
+            final Deck deck = controller.accept(); //must accept in background thread in case a dialog is shown
+            if (deck == null) { return; }
+
+            FThreads.invokeInEdtLater(() -> {
                 hide();
-            }
-        });
+                if (callback != null)
+                    callback.run(deck);
+            });
+        }));
+        initButton(1, Forge.getLocalizer().getMessage("lblCancel"), e -> hide());
 
         List<DeckRecognizer.Token> tokens = controller.parseInput(txtInput.getText());
         if (controller.isSmartCardArtEnabled())
@@ -150,32 +134,13 @@ public class FDeckImportDialog extends FDialog {
             if (token.getType() == TokenType.LEGAL_CARD) {
                 showOptions = true;
 
-                dateTimeCheck.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        updateDropDownEnabled();
-                    }
-                });
-                newEditionCheck.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
-                });
-                onlyCoreExpCheck.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {setArtPreferenceInController();}
-                });
-                smartCardArtCheck.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        controller.setSmartCardArtOptimisation(smartCardArtCheck.isSelected());
-                    }
-                });
-                createNewDeckCheck.setCommand(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        createNewDeckControl = createNewDeckCheck.isSelected();
-                        controller.setCreateNewDeck(createNewDeckControl);
-                    }
+                dateTimeCheck.setCommand(e -> updateDropDownEnabled());
+                newEditionCheck.setCommand(e -> setArtPreferenceInController());
+                onlyCoreExpCheck.setCommand(e -> setArtPreferenceInController());
+                smartCardArtCheck.setCommand(e -> controller.setSmartCardArtOptimisation(smartCardArtCheck.isSelected()));
+                createNewDeckCheck.setCommand(e -> {
+                    createNewDeckControl = createNewDeckCheck.isSelected();
+                    controller.setCreateNewDeck(createNewDeckControl);
                 });
                 updateDropDownEnabled();
                 setArtPreferenceInController();

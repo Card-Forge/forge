@@ -1,0 +1,9 @@
+Name:Excalibur, Sword of Eden
+ManaCost:12
+Types:Legendary Artifact Equipment
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total mana value of historic permanents you control. (Artifacts, legendaries, and Sagas are historic.)
+SVar:X:Count$Valid Permanent.Historic+YouCtrl$SumCMC
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 10 | AddKeyword$ Vigilance | Description$ Equipped creature gets +10/+0 and has vigilance.
+K:Equip:2:Creature.YouCtrl+Legendary:legendary creature
+DeckHints:Type$Legendary|Sage|Artifact
+Oracle:This spell costs {X} less to cast, where X is the total mana value of historic permanents you control. (Artifacts, legendaries, and Sagas are historic.)\nEquipped creature gets +10/+0 and has vigilance.\nEquip legendary creature {2}

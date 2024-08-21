@@ -36,8 +36,6 @@ import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -56,7 +54,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
-            commanderPool, dungeonPool;
+            commanderPool, dungeonPool, attractionPool;
 
     CardManager catalogManager;
     CardManager deckManager;
@@ -131,6 +129,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             default:
         }
 
+        allSections.add(DeckSection.Attractions);
+        attractionPool = FModel.getAttractionPool();
+
         catalogManager = new CardManager(getCDetailPicture(), wantUnique, false, false);
         deckManager = new CardManager(getCDetailPicture(), false, false, false);
         deckManager.setAlwaysNonUnique(true);
@@ -142,12 +143,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<Deck> newCreator = new Supplier<Deck>() {
-            @Override
-            public Deck get() {
-                return new Deck();
-            }
-        };
+        final Supplier<Deck> newCreator = Deck::new;
 
         switch (this.gameType) {
             case Constructed:
@@ -168,12 +164,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             default:
         }
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorConstructed.addBasicLands(CEditorConstructed.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorConstructed.addBasicLands(CEditorConstructed.this));
     }
 
     //=========== Overridden from ACEditorBase
@@ -342,6 +333,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Dungeon:
             cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltodungeondeck"));
             break;
+        case Attractions:
+            cmb.addMoveItems(localizer.getMessage("lblAdd"), localizer.getMessage("lbltoattractiondeck"));
+            break;
         }
     }
 
@@ -373,6 +367,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             break;
         case Dungeon:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdungeondeck"));
+            break;
+        case Attractions:
+            cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromattractiondeck"));
             break;
         }
         if (foilAvailable) {
@@ -482,6 +479,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                         this.getCatalogManager().setAllowMultipleSelections(true);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Dungeon));
                         break;
+                    case Attractions:
+                        this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                        this.getCatalogManager().setPool(attractionPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Attractions));
+                        break;
                 }
             case Commander:
             case Oathbreaker:
@@ -505,6 +508,12 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                         this.getCatalogManager().setPool(commanderPool, true);
                         this.getCatalogManager().setAllowMultipleSelections(false);
                         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Commander));
+                        break;
+                    case Attractions:
+                        this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                        this.getCatalogManager().setPool(attractionPool, true);
+                        this.getCatalogManager().setAllowMultipleSelections(true);
+                        this.getDeckManager().setPool(this.controller.getModel().getOrCreate(DeckSection.Attractions));
                         break;
                     default:
                         break;
@@ -541,13 +550,10 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
 

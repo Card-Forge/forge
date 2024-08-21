@@ -1,0 +1,12 @@
+Name:Overclocked Electromancer
+ManaCost:2 R
+Types:Creature Lizard Wizard
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<3> | CounterType$ P1P1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, double its power until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ Double
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature.wasDealtExcessDamageThisTurn | Execute$ TrigEnergy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, if that creature was dealt excess damage this turn, you get X {E}, where X is that excess damage.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ CardTriggeredTarget$ExcessDamageReceivedThisTurn
+DeckHas:Ability$Counters
+Oracle:At the beginning of combat on your turn, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on Overclocked Electromancer.\nWhenever Overclocked Electromancer attacks, double its power until end of turn.\nWhenever Overclocked Electromancer deals combat damage to a creature, if that creature was dealt excess damage this turn, you get X {E}, where X is that excess damage.

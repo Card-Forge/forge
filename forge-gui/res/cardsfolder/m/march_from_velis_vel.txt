@@ -1,0 +1,7 @@
+Name:March from Velis Vel
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChooseType | Defined$ You | Type$ Nonbasic Land | SubAbility$ DBCloneAll | SpellDescription$ Choose a nonbasic land type. Each land you control of that type becomes a copy of target creature you control until end of turn and gains haste until end of turn.
+SVar:DBCloneAll:DB$ Clone | Defined$ Targeted | CloneTarget$ Valid Land.YouCtrl+ChosenType | AddKeywords$ Haste | Duration$ UntilEndOfTurn | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control
+K:Flashback:4 U
+Oracle:Choose a nonbasic land type. Each land you control of that type becomes a copy of target creature you control until end of turn and gains haste until end of turn.\nFlashback {4}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

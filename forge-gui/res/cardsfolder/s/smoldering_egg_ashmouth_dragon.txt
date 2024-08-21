@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Dragon Egg
 PT:0/4
 K:Defender
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a number of ember counters on CARDNAME equal to the amount of mana spent to cast that spell. Then if CARDNAME has seven or more ember counters on it, remove them and transform Smoldering Egg.
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharge | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a number of ember counters on CARDNAME equal to the amount of mana spent to cast that spell. Then if CARDNAME has seven or more ember counters on it, remove them and transform CARDNAME.
 SVar:TrigCharge:DB$ PutCounter | Defined$ Self | CounterType$ EMBER | CounterNum$ X | SubAbility$ DBBranch
 SVar:DBBranch:DB$ Branch | BranchConditionSVar$ Ember | TrueSubAbility$ DBRemoveCtrs
 SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ EMBER | CounterNum$ All | SubAbility$ DBTransform

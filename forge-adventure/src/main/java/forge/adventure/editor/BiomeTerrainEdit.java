@@ -27,7 +27,7 @@ public class BiomeTerrainEdit extends FormPanel {
         center.add("resolution:",resolution);
         add(center,preview);
 
-        spriteName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeTerrainEdit.this.updateTerrain()));
+        spriteName.getDocument().addDocumentListener(new DocumentChangeListener(BiomeTerrainEdit.this::updateTerrain));
 
         min.addChangeListener(e -> BiomeTerrainEdit.this.updateTerrain());
         max.addChangeListener(e -> BiomeTerrainEdit.this.updateTerrain());

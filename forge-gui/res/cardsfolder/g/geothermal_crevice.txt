@@ -1,8 +1,9 @@
 Name:Geothermal Crevice
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ B G | SpellDescription$ Add {B}{G}.
 AI:RemoveDeck:All
-Oracle:Geothermal Crevice enters the battlefield tapped.\n{T}: Add {R}.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G}.
+Oracle:Geothermal Crevice enters tapped.\n{T}: Add {R}.\n{T}, Sacrifice Geothermal Crevice: Add {B}{G}.

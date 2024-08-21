@@ -1,13 +1,10 @@
 package forge.screens.home.quest;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import forge.Singletons;
 import forge.toolbox.*;
@@ -186,33 +183,28 @@ public class DialogChooseSets {
 			spinnersEditionTypeMap.put(editionType, spinner);
 		}
 		// == SPINNERS ACTION PERFORMED ==
-		editionTypeSpinners.forEach(spinner -> {
-			spinner.addChangeListener(new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					// As soon as the value of a spinner becomes different from zero,
-					// enabled the random selection button.
-					int spinValue = (int) spinner.getValue();
-					if (spinValue > 0) {
-						if (!randomSelectionButton.isEnabled())
-							randomSelectionButton.setEnabled(true);
-					} else {
-						// Similarly, when all spinners are set to zero,
-						// disable the random selection button
-						boolean allZeros = true;
-						for (FSpinner spin : editionTypeSpinners) {
-							int value = (int) spin.getValue();
-							if (value != 0) {
-								allZeros = false;
-								break;
-							}
-						}
-						if (allZeros)
-							randomSelectionButton.setEnabled(false);
+		editionTypeSpinners.forEach(spinner -> spinner.addChangeListener(e -> {
+			// As soon as the value of a spinner becomes different from zero,
+			// enabled the random selection button.
+			int spinValue = (int) spinner.getValue();
+			if (spinValue > 0) {
+				if (!randomSelectionButton.isEnabled())
+					randomSelectionButton.setEnabled(true);
+			} else {
+			// Similarly, when all spinners are set to zero,
+			// disable the random selection button
+				boolean allZeros = true;
+				for (FSpinner spin : editionTypeSpinners) {
+					int value = (int) spin.getValue();
+					if (value != 0) {
+						allZeros = false;
+						break;
 					}
 				}
-			});
-		});
+				if (allZeros)
+					randomSelectionButton.setEnabled(false);
+			}
+		}));
 
 		// == ADD SPINNERS AND LABELS TO THE PANEL ==
 		JPanel typeFieldsPanel = null;
@@ -271,119 +263,116 @@ public class DialogChooseSets {
 		gameFormats.forEach(item -> {
 			FRadioButton button = new FRadioButton(item.getName());
 			button.setActionCommand(item.getName());
-			button.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					/* Whenever a Format button will be pressed, the status of the UI will be
-					   updated accordingly.
-					   In particular, for each format, the number of allowed editions will be retrieved.
-					   (EMPTY LIST in case of NO RESTRICTIONS).
-					*/
-					List<String> allowedSetCodes = item.getAllowedSetCodes();
-					/* A. NO RESTRICTIONS:
-					   -------------------
-					   All the components will be enabled, namely:
-					   - all nodes in the checkbox tree;
-					   - all spinners are enabled and their maximum value updated accordingly from the Tree status
-					*/
-					if (allowedSetCodes.size() == 0) {
-						for (CardEdition ce : allCardEditions) {
-							String code = ce.getCode();
-							FTreeNode node = checkBoxTree.getNodeByKey(code);
-							if (node != null)
-								checkBoxTree.setNodeEnabledStatus(node, true);
-						}
-						for (CardEdition.Type editionType : allEditionTypes.keySet()) {
-							int numberOfEnabledEditions = allEditionTypes.get(editionType);
-							if (numberOfEnabledEditions == 0)
-								// This component will remain disabled, no matter the format selected
-								continue;
-							FSpinner spinner = spinnersEditionTypeMap.get(editionType);
-							FLabel label = labelsEditionTypeMap.get(editionType);
-							spinner.setEnabled(true);
-							label.setEnabled(true);
-							FTreeNode node = checkBoxTree.getNodeByKey(editionType);
-							if (node != null){
-								int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
-								int currentValue = (int) spinner.getValue();
-								spinner.setValue(Math.min(currentValue, maxValue));
-								SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
-								m.setMaximum(maxValue);
-							} else {
-								spinner.setValue(0);
-							}
-						}
-						return;
-					}
-					/* B. FORMAT RESTRICTIONS:
-					   -----------------------
-					   All components matching with **allowed** editions will be ENABLED.
-					   This includes:
-					   - nodes in the checkbox tree;
-					   - spinners (along with their corresponding MAX values as returned from Tree status).
-					   All components matching with the **BLACK LIST** of editions will be DISABLED
-					   (Same as in the previous case).
-					*/
-					List<String> codesToDisable = new ArrayList<>();
-					Set<CardEdition.Type> typesToDisable = new HashSet<>();
-					Set<CardEdition.Type> allowedTypes = new HashSet<>();
-					for (CardEdition ce : allCardEditions) {
-						String code = ce.getCode();
-						if (unselectableSets != null && unselectableSets.contains(code))
-							continue;
-						if (!allowedSetCodes.contains(code)) {
-							codesToDisable.add(code);
-							typesToDisable.add(ce.getType());
-						} else {
-							allowedTypes.add(ce.getType());
-						}
-					}
-					// NOTE: We need to distinguish CardEdition.Type not having any actual CardEdition
-					// in the allowed sets (i.e. to be completely disabled) from those still
-					// having partial sets to be allowed.
-					// The latter will result in adjusted maxValues of the corresponding spinner,
-					// as well as their current value, when necessary.
-					typesToDisable.removeAll(allowedTypes);
+			button.addActionListener(e -> {
+                /* Whenever a Format button will be pressed, the status of the UI will be
+                   updated accordingly.
+                   In particular, for each format, the number of allowed editions will be retrieved.
+                   (EMPTY LIST in case of NO RESTRICTIONS).
+                */
+                List<String> allowedSetCodes = item.getAllowedSetCodes();
+                /* A. NO RESTRICTIONS:
+                   -------------------
+                   All the components will be enabled, namely:
+                   - all nodes in the checkbox tree;
+                   - all spinners are enabled and their maximum value updated accordingly from the Tree status
+                */
+                if (allowedSetCodes.size() == 0) {
+                    for (CardEdition ce : allCardEditions) {
+                        String code = ce.getCode();
+                        FTreeNode node = checkBoxTree.getNodeByKey(code);
+                        if (node != null)
+                            checkBoxTree.setNodeEnabledStatus(node, true);
+                    }
+                    for (CardEdition.Type editionType : allEditionTypes.keySet()) {
+                        int numberOfEnabledEditions = allEditionTypes.get(editionType);
+                        if (numberOfEnabledEditions == 0)
+                            // This component will remain disabled, no matter the format selected
+                            continue;
+                        FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+                        FLabel label = labelsEditionTypeMap.get(editionType);
+                        spinner.setEnabled(true);
+                        label.setEnabled(true);
+                        FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+                        if (node != null){
+                            int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+                            int currentValue = (int) spinner.getValue();
+                            spinner.setValue(Math.min(currentValue, maxValue));
+                            SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+                            m.setMaximum(maxValue);
+                        } else {
+                            spinner.setValue(0);
+                        }
+                    }
+                    return;
+                }
+                /* B. FORMAT RESTRICTIONS:
+                   -----------------------
+                   All components matching with **allowed** editions will be ENABLED.
+                   This includes:
+                   - nodes in the checkbox tree;
+                   - spinners (along with their corresponding MAX values as returned from Tree status).
+                   All components matching with the **BLACK LIST** of editions will be DISABLED
+                   (Same as in the previous case).
+                */
+                List<String> codesToDisable = new ArrayList<>();
+                Set<CardEdition.Type> typesToDisable = new HashSet<>();
+                Set<CardEdition.Type> allowedTypes = new HashSet<>();
+                for (CardEdition ce : allCardEditions) {
+                    String code = ce.getCode();
+                    if (unselectableSets != null && unselectableSets.contains(code))
+                        continue;
+                    if (!allowedSetCodes.contains(code)) {
+                        codesToDisable.add(code);
+                        typesToDisable.add(ce.getType());
+                    } else {
+                        allowedTypes.add(ce.getType());
+                    }
+                }
+                // NOTE: We need to distinguish CardEdition.Type not having any actual CardEdition
+                // in the allowed sets (i.e. to be completely disabled) from those still
+                // having partial sets to be allowed.
+                // The latter will result in adjusted maxValues of the corresponding spinner,
+                // as well as their current value, when necessary.
+                typesToDisable.removeAll(allowedTypes);
 
-					// == Update Checkbox Tree ==
-					for (String code : codesToDisable) {
-						FTreeNode node = checkBoxTree.getNodeByKey(code);
-						if (node != null)
-							checkBoxTree.setNodeEnabledStatus(node, false);
-					}
-					for (String code : allowedSetCodes) {
-						FTreeNode node = checkBoxTree.getNodeByKey(code);
-						if (node != null)
-							checkBoxTree.setNodeEnabledStatus(node, true);
-					}
-					// == update spinners ==
-					for (CardEdition.Type editionType : typesToDisable) {
-						FSpinner spinner = spinnersEditionTypeMap.get(editionType);
-						FLabel label = labelsEditionTypeMap.get(editionType);
-						spinner.setEnabled(false);
-						spinner.setValue(0);
-						label.setEnabled(false);
-					}
-					for (CardEdition.Type editionType : allowedTypes) {
-						if (allEditionTypes.get(editionType) == 0)
-							continue;
-						FLabel label = labelsEditionTypeMap.get(editionType);
-						label.setEnabled(true);
-						FSpinner spinner = spinnersEditionTypeMap.get(editionType);
-						spinner.setEnabled(true);
-						FTreeNode node = checkBoxTree.getNodeByKey(editionType);
-						if (node != null){
-							int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
-							int currentValue = (int) spinner.getValue();
-							spinner.setValue(Math.min(currentValue, maxValue));
-							SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
-							m.setMaximum(maxValue);
-						} else {
-							spinner.setValue(0);
-						}
-					}
-				}
-			});
+                // == Update Checkbox Tree ==
+                for (String code : codesToDisable) {
+                    FTreeNode node = checkBoxTree.getNodeByKey(code);
+                    if (node != null)
+                        checkBoxTree.setNodeEnabledStatus(node, false);
+                }
+                for (String code : allowedSetCodes) {
+                    FTreeNode node = checkBoxTree.getNodeByKey(code);
+                    if (node != null)
+                        checkBoxTree.setNodeEnabledStatus(node, true);
+                }
+                // == update spinners ==
+                for (CardEdition.Type editionType : typesToDisable) {
+                    FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+                    FLabel label = labelsEditionTypeMap.get(editionType);
+                    spinner.setEnabled(false);
+                    spinner.setValue(0);
+                    label.setEnabled(false);
+                }
+                for (CardEdition.Type editionType : allowedTypes) {
+                    if (allEditionTypes.get(editionType) == 0)
+                        continue;
+                    FLabel label = labelsEditionTypeMap.get(editionType);
+                    label.setEnabled(true);
+                    FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+                    spinner.setEnabled(true);
+                    FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+                    if (node != null){
+                        int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+                        int currentValue = (int) spinner.getValue();
+                        spinner.setValue(Math.min(currentValue, maxValue));
+                        SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+                        m.setMaximum(maxValue);
+                    } else {
+                        spinner.setValue(0);
+                    }
+                }
+            });
 			formatButtonGroup.add(button);
 			formatOptionsPanel.add(button);
 			formatButtonGroupMap.put(item.getName(), button);
@@ -392,36 +381,33 @@ public class DialogChooseSets {
 		// NO FORMAT Button
 		FRadioButton noFormatSelectionButton = new FRadioButton(Localizer.getInstance().getMessage("lblNoFormatRestriction"));
 		noFormatSelectionButton.setActionCommand("No Format");
-		noFormatSelectionButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (CardEdition ce: allCardEditions){
-					String code = ce.getCode();
-					FTreeNode node = checkBoxTree.getNodeByKey(code);
-					if (node != null)
-						checkBoxTree.setNodeEnabledStatus(node, true);
-				}
-				for (CardEdition.Type editionType : allEditionTypes.keySet()) {
-					if (allEditionTypes.get(editionType) == 0)
-						// This component will remain disabled, no matter the format selected
-						continue;
-					FSpinner spinner = spinnersEditionTypeMap.get(editionType);
-					FLabel label = labelsEditionTypeMap.get(editionType);
-					spinner.setEnabled(true);
-					label.setEnabled(true);
-					FTreeNode node = checkBoxTree.getNodeByKey(editionType);
-					if (node != null){
-						int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
-						int currentValue = (int) spinner.getValue();
-						spinner.setValue(Math.min(currentValue, maxValue));
-						SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
-						m.setMaximum(maxValue);
-					} else {
-						spinner.setValue(0);
-					}
-				}
-			}
-		});
+		noFormatSelectionButton.addActionListener(e -> {
+            for (CardEdition ce: allCardEditions){
+                String code = ce.getCode();
+                FTreeNode node = checkBoxTree.getNodeByKey(code);
+                if (node != null)
+                    checkBoxTree.setNodeEnabledStatus(node, true);
+            }
+            for (CardEdition.Type editionType : allEditionTypes.keySet()) {
+                if (allEditionTypes.get(editionType) == 0)
+                    // This component will remain disabled, no matter the format selected
+                    continue;
+                FSpinner spinner = spinnersEditionTypeMap.get(editionType);
+                FLabel label = labelsEditionTypeMap.get(editionType);
+                spinner.setEnabled(true);
+                label.setEnabled(true);
+                FTreeNode node = checkBoxTree.getNodeByKey(editionType);
+                if (node != null){
+                    int maxValue = checkBoxTree.getNumberOfActiveChildNodes(node);
+                    int currentValue = (int) spinner.getValue();
+                    spinner.setValue(Math.min(currentValue, maxValue));
+                    SpinnerNumberModel m = (SpinnerNumberModel) spinner.getModel();
+                    m.setMaximum(maxValue);
+                } else {
+                    spinner.setValue(0);
+                }
+            }
+        });
 		formatButtonGroup.add(noFormatSelectionButton);
 		formatOptionsPanel.add(noFormatSelectionButton);
 		formatButtonGroupMap.put("No Format", noFormatSelectionButton);
@@ -500,29 +486,16 @@ public class DialogChooseSets {
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));
 
-		final Runnable cleanup = new Runnable() {
-			@Override
-			public void run() {
-				SOverlayUtils.hideOverlay();
-			}
-		};
+		final Runnable cleanup = SOverlayUtils::hideOverlay;
 
 		FButton btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
-		btnOk.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				cleanup.run();
-				handleOk();
-			}
-		});
+		btnOk.addActionListener(arg0 -> {
+            cleanup.run();
+            handleOk();
+        });
 
 		FButton btnCancel = new FButton(Localizer.getInstance().getMessage("lblCancel"));
-		btnCancel.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				cleanup.run();
-			}
-		});
+		btnCancel.addActionListener(e -> cleanup.run());
 
 		JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 30, ax center"));
 		southPanel.setOpaque(false);

@@ -1,0 +1,10 @@
+Name:Propagator Drone
+ManaCost:1 G
+Types:Creature Eldrazi Drone
+PT:2/2
+K:Devoid
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Evolve | Description$ Creature tokens you control have evolve. (They have "Whenever a creature you control enters, if it has greater power or toughness than this token, put a +1/+1 counter on this token." They see this creature enter.)
+A:AB$ Token | Cost$ 3 G | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+DeckHas:Ability$Token|Counters & Type$Spawn
+DeckHints:Ability$Token
+Oracle:Devoid (This card has no color.)\nCreature tokens you control have evolve. (They have "Whenever a creature you control enters, if it has greater power or toughness than this token, put a +1/+1 counter on this token." They see this creature enter.)\n{3}{G}: Create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."

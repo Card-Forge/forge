@@ -1,0 +1,13 @@
+Name:Hexgold Slith
+ManaCost:1 W
+Types:Creature Slith
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. If you do, it gains first strike until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ PayEnergy<2> | Defined$ Self | KW$ First Strike
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:When Hexgold Slith enters, you get {E}{E} (two energy counters).\nWhenever Hexgold Slith attacks, you may pay {E}{E}. If you do, it gains first strike until end of turn.\nWhenever Hexgold Slith deals combat damage to a player, put a +1/+1 counter on it.

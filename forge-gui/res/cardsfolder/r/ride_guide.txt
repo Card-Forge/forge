@@ -1,0 +1,7 @@
+Name:Ride Guide
+ManaCost:4 W
+Types:Creature Human Employee
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+Oracle:When Ride Guide enters, open an Attraction.

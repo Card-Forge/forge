@@ -282,11 +282,12 @@ public class HumanPlay {
                 CostExile costExile = (CostExile) part;
 
                 if ("All".equals(part.getType())) {
-                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage("lblDoYouWantExileAllCardYouGraveyard"), sourceAbility)) {
-                        return false;
-                    }
-
-                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(ZoneType.Graveyard)), sourceAbility, hcd.isEffect());
+                    ZoneType zone = costExile.getFrom().get(0);
+                    prompt = ZoneType.Graveyard.equals(zone) ? "lblDoYouWantExileAllCardYouGraveyard" :
+                        "lblDoYouWantExileAllCardHand";
+                    if (!p.getController().confirmPayment(part, Localizer.getInstance().getMessage(prompt), 
+                        sourceAbility)) return false;
+                    costExile.payAsDecided(p, PaymentDecision.card(p.getCardsIn(zone)), sourceAbility, hcd.isEffect());
                 } else {
                     CardCollection list = new CardCollection();
                     List<ZoneType> fromZones = costExile.getFrom();
@@ -533,7 +534,7 @@ public class HumanPlay {
             final Card offering = ability.getSacrificedAsOffering();
             offering.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(offering, ability, false, params);
+                game.getAction().sacrifice(new CardCollection(offering), ability, false, params);
             }
             ability.resetSacrificedAsOffering();
         }
@@ -541,7 +542,7 @@ public class HumanPlay {
             final Card emerge = ability.getSacrificedAsEmerge();
             emerge.setUsedToPay(false);
             if (!manaInputCancelled) {
-                game.getAction().sacrifice(emerge, ability, false, params);
+                game.getAction().sacrifice(new CardCollection(emerge), ability, false, params);
                 ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
             } else {
                 ability.resetSacrificedAsEmerge();
@@ -557,26 +558,18 @@ public class HumanPlay {
         final Card source = ability.getHostCard();
         ManaCostBeingPaid toPay = new ManaCostBeingPaid(realCost);
 
-        String xInCard = ability.getSVar("X");
+        String xInCard = ability.getParamOrDefault("XAlternative", ability.getSVar("X"));
         String xColor = ability.getXColor();
         if (source.hasKeyword("Spend only colored mana on X. No more than one mana of each color may be spent this way.")) {
             xColor = "WUBRGX";
         }
         if (mc.getAmountOfX() > 0 && !"Count$xPaid".equals(xInCard)) { // announce X will overwrite whatever was in card script
-            int xPaid = AbilityUtils.calculateAmount(source, "X", ability);
+            int xPaid = AbilityUtils.calculateAmount(source, xInCard, ability);
             toPay.setXManaCostPaid(xPaid, xColor);
             ability.setXManaCostPaid(xPaid);
         }
         else if (ability.getXManaCostPaid() != null) { //ensure pre-announced X value retained
             toPay.setXManaCostPaid(ability.getXManaCostPaid(), xColor);
-        }
-
-        int timesMultikicked = source.getKickerMagnitude();
-        if (timesMultikicked > 0 && ability.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = ability.getMultiKickerManaCost();
-            for (int i = 0; i < timesMultikicked; i++) {
-                toPay.addManaCost(mkCost);
-            }
         }
 
         CardCollection cardsToDelve = new CardCollection();

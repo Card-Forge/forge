@@ -1,0 +1,12 @@
+Name:The Hunger Tide Rises
+ManaCost:2 G
+Types:Enchantment Saga
+K:Chapter:4:DBToken,DBToken,DBToken,DBSacrifice
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_insect | TokenOwner$ You | SpellDescription$ Create a 1/1 black and green Insect creature token.
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ You | Amount$ SacX | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | SubAbility$ DBSearch | SpellDescription$ Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn+cmcLESearchX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Creature.YouCtrl
+SVar:SearchX:Remembered$Amount
+DeckHas:Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Create a 1/1 black and green Insect creature token.\nIV — Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle.

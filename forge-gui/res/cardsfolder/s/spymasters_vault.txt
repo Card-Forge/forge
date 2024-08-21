@@ -1,0 +1,9 @@
+Name:Spymaster's Vault
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a Swamp.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Connive | Cost$ B T | Defined$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ConniveNum$ X | SpellDescription$ Target creature you control connives X, where X is the number of creatures that died this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+Oracle:Spymaster's Vault enters tapped unless you control a Swamp.\n{T}: Add {B}.\n{B}, {T}: Target creature you control connives X, where X is the number of creatures that died this turn.

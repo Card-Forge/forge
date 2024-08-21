@@ -1,0 +1,13 @@
+Name:Jessie Zane, Fangbringer
+ManaCost:1 G G
+Types:Legendary Creature Human Assassin
+PT:3/4
+K:Deathtouch
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When NICKNAME enters and whenever you cast a Snake spell, conjure a card named Ambush Viper into the top six cards of your library at random. It perpetually gains "When this creature enters, draw a card."
+T:Mode$ SpellCast | ValidCard$ Snake | Secondary$ True | ValidActivatingPlayer$ You | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ When NICKNAME enters and whenever you cast a Snake spell, conjure a card named Ambush Viper into the top six cards of your library at random. It perpetually gains "When this creature enters, draw a card."
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Ambush Viper | Zone$ Library | LibraryPosition$ Count$Random.0.6 | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ ETBTrig | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:ETBTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Deathtouch\nWhen Jessie Zane enters and whenever you cast a Snake spell, conjure a card named Ambush Viper into the top six cards of your library at random. It perpetually gains "When this creature enters, draw a card."

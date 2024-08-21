@@ -17,8 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -96,35 +94,23 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         this.setCatalogManager(catalogManager);
         this.setDeckManager(deckManager);
 
-        final Supplier<DeckGroup> newCreator = new Supplier<DeckGroup>() {
-            @Override
-            public DeckGroup get() {
-                return new DeckGroup("");
-            }
-        };
+        final Supplier<DeckGroup> newCreator = DeckGroup::new;
         this.controller = new DeckController<>(deckMap0, this, newCreator);
 
-        getBtnAddBasicLands().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                CEditorLimited.addBasicLands(CEditorLimited.this);
-            }
-        });
+        getBtnAddBasicLands().setCommand((UiCommand) () -> CEditorLimited.addBasicLands(CEditorLimited.this));
 
         allSections.add(DeckSection.Main);
         allSections.add(DeckSection.Conspiracy);
+        allSections.add(DeckSection.Attractions);
 
         this.getCbxSection().removeAllItems();
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
-        this.getCbxSection().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                FComboBox cb = (FComboBox)actionEvent.getSource();
-                DeckSection ds = (DeckSection)cb.getSelectedItem();
-                setEditorMode(ds);
-            }
+        this.getCbxSection().addActionListener(actionEvent -> {
+            FComboBox cb = (FComboBox)actionEvent.getSource();
+            DeckSection ds = (DeckSection)cb.getSelectedItem();
+            setEditorMode(ds);
         });
     }
 
@@ -220,6 +206,10 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
             case Conspiracy:
                 this.getCatalogManager().setup(ItemManagerConfig.DRAFT_CONSPIRACY);
                 this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Conspiracy));
+                break;
+            case Attractions:
+                this.getCatalogManager().setup(ItemManagerConfig.ATTRACTION_POOL);
+                this.getDeckManager().setPool(getHumanDeck().getOrCreate(DeckSection.Attractions));
                 break;
             case Main:
                 this.getCatalogManager().setup(getScreen() == FScreen.DECK_EDITOR_DRAFT ? ItemManagerConfig.DRAFT_POOL : ItemManagerConfig.SEALED_POOL);

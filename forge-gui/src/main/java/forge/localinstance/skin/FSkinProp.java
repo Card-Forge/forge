@@ -17,6 +17,14 @@
  */
 package forge.localinstance.skin;
 
+import java.util.Map;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+
+import forge.card.mana.ManaCostShard;
+import forge.localinstance.properties.ForgeConstants;
+
 /**
  * Assembles settings from selected or default theme as appropriate. Saves in a
  * hashtable, access using .get(settingName) method.
@@ -168,6 +176,23 @@ public enum FSkinProp {
     IMG_CMC_LOW_MID  (new int[] {2, 84, 160, 160}, PropType.MANAICONS),
     IMG_CMC_MID_HIGH (new int[] {2, 166, 160, 160}, PropType.MANAICONS),
     IMG_CMC_HIGH     (new int[] {2, 248, 160, 160}, PropType.MANAICONS),
+
+    //attraction lights
+    IMG_ATTR_1_ON  (new int[] {0, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_2_ON  (new int[] {210, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_3_ON  (new int[] {420, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_4_ON  (new int[] {630, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_5_ON  (new int[] {840, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_6_ON  (new int[] {1050, 0, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_1_OFF (new int[] {0, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_2_OFF (new int[] {210, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_3_OFF (new int[] {420, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_4_OFF (new int[] {630, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_5_OFF (new int[] {840, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+    IMG_ATTR_6_OFF (new int[] {1050, 210, 200, 200}, PropType.ATTRACTION_LIGHTS),
+
+    //PAWPRINT
+    IMG_PAWPRINT     (new int[] {2, 902, 80, 80}, PropType.MANAICONS),
 
     //gameplay images
     IMG_TAP             (new int[] {166, 412, 80, 80}, PropType.MANAICONS),
@@ -496,12 +521,15 @@ public enum FSkinProp {
     //COMMANDER
     IMG_ABILITY_COMMANDER  (new int[] {330, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_RINGBEARER (new int[] {410, 822, 80, 80}, PropType.MANAICONS),
+    //ANNIHILATOR
+    IMG_ABILITY_ANNIHILATOR(new int[] {166, 658, 80, 80}, PropType.ABILITY),
     //TOXIC
-    IMG_ABILITY_TOXIC      (new int[] {630, 1536, 46, 46}, PropType.ICON),
+    IMG_ABILITY_TOXIC      (new int[] {248, 658, 80, 80}, PropType.ABILITY),
     //Ability Icons
     IMG_ABILITY_DEATHTOUCH     (new int[] {2, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DEFENDER       (new int[] {84, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_DOUBLE_STRIKE  (new int[] {166, 2, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_EXALTED        (new int[] {330, 658, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FIRST_STRIKE   (new int[] {248, 2, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FEAR           (new int[] {84, 412, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_FLASH          (new int[] {166, 576, 80, 80}, PropType.ABILITY),
@@ -518,6 +546,8 @@ public enum FSkinProp {
     IMG_ABILITY_SHADOW         (new int[] {84, 576, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_SHROUD         (new int[] {330, 330, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_TRAMPLE        (new int[] {412, 330, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_WARD           (new int[] {84, 658, 80, 80}, PropType.ABILITY),
+    IMG_ABILITY_WITHER         (new int[] {2, 658, 80, 80}, PropType.ABILITY),
     IMG_ABILITY_VIGILANCE      (new int[] {2, 412, 80, 80}, PropType.ABILITY),
     //Hexproof From
     IMG_ABILITY_HEXPROOF_R       (new int[] {2, 494, 80, 80}, PropType.ABILITY),
@@ -575,28 +605,124 @@ public enum FSkinProp {
         return coords[3];
     }
 
+    public static Map<ManaCostShard, FSkinProp> SHARD_IMG = ImmutableMap.<ManaCostShard, FSkinProp>builder()
+            .put(ManaCostShard.WHITE, IMG_MANA_W)
+            .put(ManaCostShard.BLUE, IMG_MANA_U)
+            .put(ManaCostShard.BLACK, IMG_MANA_B)
+            .put(ManaCostShard.RED, IMG_MANA_R)
+            .put(ManaCostShard.GREEN, IMG_MANA_G)
+            .put(ManaCostShard.COLORLESS, IMG_MANA_COLORLESS)
+
+            .put(ManaCostShard.WU, IMG_MANA_HYBRID_WU)
+            .put(ManaCostShard.WB, IMG_MANA_HYBRID_WB)
+            .put(ManaCostShard.UB, IMG_MANA_HYBRID_UB)
+            .put(ManaCostShard.UR, IMG_MANA_HYBRID_UR)
+            .put(ManaCostShard.BR, IMG_MANA_HYBRID_BR)
+            .put(ManaCostShard.BG, IMG_MANA_HYBRID_BG)
+            .put(ManaCostShard.RW, IMG_MANA_HYBRID_RW)
+            .put(ManaCostShard.RG, IMG_MANA_HYBRID_RG)
+            .put(ManaCostShard.GW, IMG_MANA_HYBRID_GW)
+            .put(ManaCostShard.GU, IMG_MANA_HYBRID_GU)
+
+            .put(ManaCostShard.W2, IMG_MANA_2W)
+            .put(ManaCostShard.U2, IMG_MANA_2U)
+            .put(ManaCostShard.B2, IMG_MANA_2B)
+            .put(ManaCostShard.R2, IMG_MANA_2R)
+            .put(ManaCostShard.G2, IMG_MANA_2G)
+
+            .put(ManaCostShard.CW, IMG_MANA_HYBRID_CW)
+            .put(ManaCostShard.CU, IMG_MANA_HYBRID_CU)
+            .put(ManaCostShard.CB, IMG_MANA_HYBRID_CB)
+            .put(ManaCostShard.CR, IMG_MANA_HYBRID_CR)
+            .put(ManaCostShard.CG, IMG_MANA_HYBRID_CG)
+
+            .put(ManaCostShard.WP, IMG_MANA_PHRYX_W)
+            .put(ManaCostShard.UP, IMG_MANA_PHRYX_U)
+            .put(ManaCostShard.BP, IMG_MANA_PHRYX_B)
+            .put(ManaCostShard.RP, IMG_MANA_PHRYX_R)
+            .put(ManaCostShard.GP, IMG_MANA_PHRYX_G)
+
+            .put(ManaCostShard.BGP, IMG_MANA_PHRYX_BG)
+            .put(ManaCostShard.BRP, IMG_MANA_PHRYX_BR)
+            .put(ManaCostShard.GUP, IMG_MANA_PHRYX_GU)
+            .put(ManaCostShard.GWP, IMG_MANA_PHRYX_GW)
+            .put(ManaCostShard.RGP, IMG_MANA_PHRYX_RG)
+            .put(ManaCostShard.RWP, IMG_MANA_PHRYX_RW)
+            .put(ManaCostShard.UBP, IMG_MANA_PHRYX_UB)
+            .put(ManaCostShard.URP, IMG_MANA_PHRYX_UR)
+            .put(ManaCostShard.WBP, IMG_MANA_PHRYX_WB)
+            .put(ManaCostShard.WUP, IMG_MANA_PHRYX_WU)
+
+            .put(ManaCostShard.S, IMG_MANA_SNOW)
+            .put(ManaCostShard.X, IMG_MANA_X)
+
+            .build();
+
+    public static Map<String, FSkinProp> MANA_IMG = Maps.newHashMap();
+    static {
+        for (Map.Entry<ManaCostShard, FSkinProp> e : SHARD_IMG.entrySet()) {
+            MANA_IMG.put(e.getKey().getImageKey(), e.getValue());
+        }
+        for (int i = 0; i <= 20; i++) {
+            MANA_IMG.put(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
+        }
+
+        MANA_IMG.put("H", FSkinProp.IMG_MANA_PHRYX);
+        MANA_IMG.put("Y", FSkinProp.IMG_MANA_Y);
+        MANA_IMG.put("Z", FSkinProp.IMG_MANA_Z);
+        MANA_IMG.put("CHAOS", FSkinProp.IMG_CHAOS);
+        MANA_IMG.put("Q", FSkinProp.IMG_UNTAP);
+        MANA_IMG.put("T", FSkinProp.IMG_TAP);
+        MANA_IMG.put("P", FSkinProp.IMG_PAWPRINT);
+
+        //Attraction lights. Not really mana icons but they're loaded into the card symbols in all the same places.
+        MANA_IMG.put("AL1ON", FSkinProp.IMG_ATTR_1_ON);
+        MANA_IMG.put("AL2ON", FSkinProp.IMG_ATTR_2_ON);
+        MANA_IMG.put("AL3ON", FSkinProp.IMG_ATTR_3_ON);
+        MANA_IMG.put("AL4ON", FSkinProp.IMG_ATTR_4_ON);
+        MANA_IMG.put("AL5ON", FSkinProp.IMG_ATTR_5_ON);
+        MANA_IMG.put("AL6ON", FSkinProp.IMG_ATTR_6_ON);
+        MANA_IMG.put("AL1OFF", FSkinProp.IMG_ATTR_1_OFF);
+        MANA_IMG.put("AL2OFF", FSkinProp.IMG_ATTR_2_OFF);
+        MANA_IMG.put("AL3OFF", FSkinProp.IMG_ATTR_3_OFF);
+        MANA_IMG.put("AL4OFF", FSkinProp.IMG_ATTR_4_OFF);
+        MANA_IMG.put("AL5OFF", FSkinProp.IMG_ATTR_5_OFF);
+        MANA_IMG.put("AL6OFF", FSkinProp.IMG_ATTR_6_OFF);
+    }
+
     public enum PropType {
-        BACKGROUND,
-        COLOR,
-        IMAGE,
-        ICON,
-        FOIL,
-        OLD_FOIL,
-        TROPHY,
-        ABILITY,
-        BORDERS,
-        ADV_BUTTONS,
-        BUTTONS,
-        BTNSTART,
-        MANAICONS,
-        PHYREXIAN,
-        COLORLESS_HYBRID,
-        PLANAR_CONQUEST,
-        ADVENTURE,
-        DECKBOX,
-        SETLOGO,
-        WATERMARKS,
-        DRAFTRANKS,
-        FAVICON
+        BACKGROUND(null),
+        COLOR(null),
+        IMAGE(ForgeConstants.SPRITE_ICONS_FILE),
+        ICON(ForgeConstants.SPRITE_ICONS_FILE),
+        FOIL(ForgeConstants.SPRITE_FOILS_FILE),
+        OLD_FOIL(ForgeConstants.SPRITE_OLD_FOILS_FILE),
+        TROPHY(ForgeConstants.SPRITE_TROPHIES_FILE),
+        ABILITY(ForgeConstants.SPRITE_ABILITY_FILE),
+        BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
+        ADV_BUTTONS(ForgeConstants.SPRITE_ADV_BUTTONS_FILE),
+        BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
+        BTNSTART(ForgeConstants.SPRITE_START_FILE),
+        MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
+        PHYREXIAN(ForgeConstants.SPRITE_PHYREXIAN_FILE),
+        COLORLESS_HYBRID(ForgeConstants.SPRITE_COLORLESS_HYBRID_FILE),
+        ATTRACTION_LIGHTS(ForgeConstants.SPRITE_ATTRACTION_LIGHTS_FILE),
+        PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE),
+        ADVENTURE(ForgeConstants.SPRITE_ADVENTURE_FILE),
+        DECKBOX(ForgeConstants.SPRITE_DECKBOX_FILE),
+        SETLOGO(ForgeConstants.SPRITE_SETLOGO_FILE),
+        WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
+        FAVICON(ForgeConstants.SPRITE_FAVICONS_FILE);
+
+        private final String filename;
+
+        PropType(String filename0) {
+            filename = filename0;
+        }
+
+        public String getFilename() {
+            return filename;
+        }
     }
 }

@@ -1,7 +1,7 @@
 Name:Root Maze
 ManaCost:G
 Types:Enchantment
-R:Event$ Moved | ValidCard$ Artifact,Land | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Artifacts and lands enter the battlefield tapped.
+R:Event$ Moved | ValidCard$ Artifact,Land | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Artifacts and lands enter tapped.
 SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 AI:RemoveDeck:Random
-Oracle:Artifacts and lands enter the battlefield tapped.
+Oracle:Artifacts and lands enter tapped.

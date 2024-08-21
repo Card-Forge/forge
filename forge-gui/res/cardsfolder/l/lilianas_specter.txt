@@ -3,6 +3,6 @@ ManaCost:1 B B
 Types:Creature Specter
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Defined$ Opponent | Mode$ TgtChoose
-Oracle:Flying\nWhen Liliana's Specter enters the battlefield, each opponent discards a card.
+Oracle:Flying\nWhen Liliana's Specter enters, each opponent discards a card.

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Creature Sliver
 PT:2/2
 K:Replicate:1 G
-S:Mode$ Continuous | Affected$ Sliver.YouCtrl | AddKeyword$ Replicate:CardManaCost | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each Sliver spell you cast has replicate. The replicate cost is equal to its mana cost. (A copy of a permanent spell becomes a token.)
+S:Mode$ Continuous | Affected$ Sliver.YouCtrl+wasCast | AddKeyword$ Replicate:CardManaCost | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each Sliver spell you cast has replicate. The replicate cost is equal to its mana cost. (A copy of a permanent spell becomes a token.)
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Sliver
 DeckHas:Ability$Token

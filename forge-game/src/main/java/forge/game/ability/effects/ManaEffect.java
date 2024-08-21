@@ -37,7 +37,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
 
         // Spells are not undoable
-        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2);
+        sa.setUndoable(sa.isAbility() && sa.isUndoable() && tgtPlayers.size() < 2 && !sa.hasParam("ActivationLimit"));
 
         final boolean optional = sa.hasParam("Optional");
         final Game game = activator.getGame();
@@ -240,7 +240,7 @@ public class ManaEffect extends SpellAbilityEffect {
                 Breadcrumb bread = new Breadcrumb(msg);
                 bread.setData("Card", card.getName());
                 bread.setData("SA", sa.toString());
-                Sentry.addBreadcrumb(bread, sa);
+                Sentry.addBreadcrumb(bread);
 
                 continue;
             }

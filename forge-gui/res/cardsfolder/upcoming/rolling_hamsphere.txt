@@ -1,0 +1,11 @@
+Name:Rolling Hamsphere
+ManaCost:7
+Types:Artifact Vehicle
+PT:4/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each Hamster you control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create three 1/1 red Hamster creature tokens, then it deals X damage to any target, where X is the number of Hamsters you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_hamster | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X
+K:Crew:3
+SVar:X:Count$Valid Hamster.YouCtrl
+Oracle:Rolling Hamsphere gets +1/+1 for each Hamster you control.\nWhenever Rolling Hamsphere attacks, create three 1/1 red Hamster creature tokens, then it deals X damage to any target, where X is the number of Hamsters you control.\nCrew 3

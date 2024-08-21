@@ -57,13 +57,7 @@ public class ItemPoolSorter<T> implements Comparator<Entry<T, Integer>> {
     }
 
     /** The Constant byNameThenSet. */
-    public static final ItemPoolSorter<PaperCard> BY_NAME_THEN_SET = new ItemPoolSorter<>(
-            new Function<Entry<PaperCard, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(final Entry<PaperCard, Integer> from) {
-                    return from.getKey();
-                }
-            }, true);
+    public static final ItemPoolSorter<PaperCard> BY_NAME_THEN_SET = new ItemPoolSorter<>(Entry::getKey, true);
 
     /*
      * (non-Javadoc)

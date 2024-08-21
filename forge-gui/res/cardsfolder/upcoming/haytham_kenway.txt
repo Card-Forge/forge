@@ -1,0 +1,13 @@
+Name:Haytham Kenway
+ManaCost:2 W U
+Types:Legendary Creature Human Knight
+PT:3/3
+K:Protection:Assassin
+S:Mode$ Continuous | Affected$ Knight.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection:Assassin | Description$ Other Knights you control get +2/+2 and have protection from Assassins.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile up to one target creature that player controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | TgtPrompt$ Select up to one target creature each opponent controls | Duration$ UntilHostLeavesPlay
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:PlayMain1:TRUE
+SVar:OblivionRing:TRUE
+DeckHints:Type$Knight
+Oracle:Protection from Assassins\nOther Knights you control get +2/+2 and have protection from Assassins.\nWhen Haytham Kenway enters, for each opponent, exile up to one target creature that player controls until Haytham Kenway leaves the battlefield.

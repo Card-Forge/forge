@@ -1,0 +1,14 @@
+Name:Filigree Racer
+ManaCost:3 R
+Types:Artifact Vehicle
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E}{E} (four energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTrigger | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (You may cast that card from your graveyard by discarding a card in addition to paying its other costs. Then exile it.)
+SVar:TrigTrigger:AB$ ImmediateTrigger | Cost$ PayEnergy<2> | Execute$ DBPump | SpellDescription$ When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (You may cast that card from your graveyard by discarding a card in addition to paying its other costs. Then exile it.)
+SVar:DBPump:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | KW$ Jump-start | TgtZone$ Graveyard | PumpZone$ Graveyard
+K:Crew:1
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard|Discard
+Oracle:When Filigree Racer enters, you get {E}{E}{E}{E} (four energy counters).\nWhenever Filigree Racer attacks, you may pay {E}{E}. When you do, target instant or sorcery card in your graveyard gains jump-start until end of turn. (You may cast that card from your graveyard by discarding a card in addition to paying its other costs. Then exile it.)\nCrew 1

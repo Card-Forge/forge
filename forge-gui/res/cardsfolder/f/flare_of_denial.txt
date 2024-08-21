@@ -1,0 +1,6 @@
+Name:Flare of Denial
+ManaCost:1 U U
+Types:Instant
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ Sac<1/Creature.Blue+nonToken/a nontoken blue creature> | Description$ You may sacrifice a nontoken blue creature rather than pay this spell's mana cost.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+Oracle:You may sacrifice a nontoken blue creature rather than pay this spell's mana cost.\nCounter target spell.

@@ -1,7 +1,10 @@
 package forge.gui.card;
 
 import com.google.common.collect.Sets;
-import forge.card.*;
+import forge.card.CardRarity;
+import forge.card.CardStateName;
+import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckRecognizer;
 import forge.game.GameView;
@@ -9,6 +12,7 @@ import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
+import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
@@ -20,12 +24,14 @@ import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardDetailUtil {
@@ -210,7 +216,21 @@ public class CardDetailUtil {
             ptText.append(card.getDefense());
         }
 
+        if (card.isAttraction()) {
+            ptText.append(Localizer.getInstance().getMessage("lblLights")).append(": ");
+            ptText.append(formatAttractionLights(card.getAttractionLights()));
+        }
+
         return ptText.toString();
+    }
+
+    public static String formatAttractionLights(Set<Integer> lights) {
+        return (lights.contains(1) ? "{AL1ON} " : "{AL1OFF} ") +
+                (lights.contains(2) ? "{AL2ON} " : "{AL2OFF} ") +
+                (lights.contains(3) ? "{AL3ON} " : "{AL3OFF} ") +
+                (lights.contains(4) ? "{AL4ON} " : "{AL4OFF} ") +
+                (lights.contains(5) ? "{AL5ON} " : "{AL5OFF} ") +
+                (lights.contains(6) ? "{AL6ON}" : "{AL6OFF}");
     }
 
     public static String formatCardId(final CardStateView card) {
@@ -373,7 +393,7 @@ public class CardDetailUtil {
         // counter text
         if (card.getCounters() != null) {
             for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {
-                if (c.getValue().intValue() != 0) {
+                if (c.getValue() != 0) {
                     if (area.length() != 0) {
                         area.append("\n");
                     }
@@ -417,6 +437,31 @@ public class CardDetailUtil {
             area.append("\n");
             area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
             area.append(state.getName()).append(" this turn.");
+        }
+
+        // Draft keywords
+        if (card.getDraftAction() != null) {
+            for(final String draftAction : card.getDraftAction()) {
+                if (area.length() != 0) {
+                    area.append("\n");
+                }
+                area.append(TextUtil.fastReplace(draftAction, "CARDNAME", card.getName()));
+            }
+        }
+
+        // Draft notes
+        PlayerView pl = card.getController();
+        if (pl != null) {
+            Map<String, String> notes = pl.getDraftNotes();
+            if (notes != null) {
+                String note = notes.get(card.getName());
+                if (note != null) {
+                    if (area.length() != 0) {
+                        area.append("\n");
+                    }
+                    area.append("Draft Notes: ").append(note);
+                }
+            }
         }
 
         // chosen type
@@ -534,7 +579,7 @@ public class CardDetailUtil {
         }
 
         // sector
-        if (!card.getSector().isEmpty()) {
+        if (card.getSector() != null && !card.getSector().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }

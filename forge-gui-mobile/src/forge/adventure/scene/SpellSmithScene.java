@@ -114,7 +114,7 @@ public class SpellSmithScene extends UIScene {
             }
         }
 
-        ui.onButtonPress("done", () -> SpellSmithScene.this.done());
+        ui.onButtonPress("done", SpellSmithScene.this::done);
         ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
         ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
         ui.onButtonPress("BReset", () -> {
@@ -156,12 +156,7 @@ public class SpellSmithScene extends UIScene {
             if (configData.allowedEditions != null)
                 return Arrays.asList(configData.allowedEditions).contains(input.getCode());
             return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
-        }).sorted(new Comparator<CardEdition>() {
-            @Override
-            public int compare(CardEdition e1, CardEdition e2) {
-                return e1.getName().compareTo(e2.getName());
-            }
-        }).collect(Collectors.toList());
+        }).sorted(Comparator.comparing(CardEdition::getName)).collect(Collectors.toList());
     }
 
     public boolean done() {
@@ -286,7 +281,7 @@ public class SpellSmithScene extends UIScene {
         loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
         editionList.clearListeners();
         editionList.clearItems();
-        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
+        editionList.setItems(editions.toArray(new CardEdition[0]));
         editionList.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -69,18 +68,15 @@ public class DebuffAi extends SpellAbilityAi {
             List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             final Combat combat = game.getCombat();
-            return Iterables.any(cards, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    if (c.getController().equals(sa.getActivatingPlayer()) || combat == null)
-                        return false;
+            return Iterables.any(cards, c -> {
+                if (c.getController().equals(sa.getActivatingPlayer()) || combat == null)
+                    return false;
 
-                    if (!combat.isBlocking(c) && !combat.isAttacking(c)) {
-                        return false;
-                    }
-                    // don't add duplicate negative keywords
-                    return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+                if (!combat.isBlocking(c) && !combat.isAttacking(c)) {
+                    return false;
                 }
+                // don't add duplicate negative keywords
+                return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
             });
         } else {
             return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : null, false);
@@ -172,11 +168,8 @@ public class DebuffAi extends SpellAbilityAi {
         final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         CardCollection list = CardLists.getTargetableCards(opp.getCreaturesInPlay(), sa);
         if (!list.isEmpty()) {
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.hasAnyKeyword(kws); // don't add duplicate negative keywords
-                }
+            list = CardLists.filter(list, c -> {
+                return c.hasAnyKeyword(kws); // don't add duplicate negative keywords
             });
         }
         return list;

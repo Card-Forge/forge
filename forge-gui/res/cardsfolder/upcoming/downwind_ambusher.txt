@@ -1,0 +1,10 @@
+Name:Downwind Ambusher
+ManaCost:3 B
+Types:Creature Skunk Assassin
+PT:4/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBDestroy
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Target creature an opponent controls gets -1/-1 until end of turn.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+wasDealtDamageThisTurn | TgtPrompt$ Select target creature an opponent controls that was dealt damage this turn | SpellDescription$ Destroy target creature an opponent controls that was dealt damage this turn.
+Oracle:Flash\nWhen Downwind Ambusher enters, choose one —\n• Target creature an opponent controls gets -1/-1 until end of turn.\n• Destroy target creature an opponent controls that was dealt damage this turn.

@@ -1,0 +1,10 @@
+Name:Ajani Fells the Godsire
+ManaCost:3 W W
+Types:Enchantment Saga
+K:Chapter:3:DBExile,DBCat,DBPump
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl+powerGE3 | TgtPrompt$ Select target creature an opponent controls with power 3 or greater | SpellDescription$ Exile target creature an opponent controls with power 3 or greater.
+SVar:DBCat:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_1_cat_warrior | TokenOwner$ You | SubAbility$ DBPutCounter | SpellDescription$ Create a 2/1 white Cat Warrior creature token, then put a vigilance counter on a creature you control.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ Vigilance | CounterNum$ 1 | Choices$ Creature.YouCtrl
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike | SpellDescription$ Target creature you control gains double strike until end of turn.
+DeckHas:Ability$Token & Type$Cat
+Oracle:I — Exile target creature an opponent controls with power 3 or greater.\nII — Create a 2/1 white Cat Warrior creature token, then put a vigilance counter on a creature you control.\nIII — Target creature you control gains double strike until end of turn.

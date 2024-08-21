@@ -17,15 +17,8 @@
  */
 package forge.game.cost;
 
-import java.io.Serializable;
-import java.util.*;
-
-import forge.card.CardType;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Lists;
-
+import forge.card.CardType;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
@@ -38,6 +31,11 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * <p>
@@ -120,12 +118,7 @@ public class Cost implements Serializable {
         // Things that are pretty much happen at the end (Untap) 16+
         // Things that NEED to happen last 100+
 
-        Collections.sort(this.costParts, new Comparator<CostPart>() {
-            @Override
-            public int compare(CostPart o1, CostPart o2) {
-                return ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder());
-            }
-        });
+        this.costParts.sort((o1, o2) -> ObjectUtils.compare(o1.paymentOrder(), o2.paymentOrder()));
     }
 
     /**
@@ -261,8 +254,8 @@ public class Cost implements Serializable {
             }
         }
 
-        if (parsedMana == null && (manaParts.length() > 0 || !xMin.equals(""))) {
-            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.equals("") ? null : xMin);
+        if (parsedMana == null && (manaParts.length() > 0 || !xMin.isEmpty())) {
+            parsedMana = new CostPartMana(new ManaCost(new ManaCostParser(manaParts.toString())), xMin.isEmpty() ? null : xMin);
         }
         if (parsedMana != null) {
             costParts.add(parsedMana);
@@ -472,6 +465,10 @@ public class Cost implements Serializable {
                     new ArrayList<>(Arrays.asList(ZoneType.Battlefield, ZoneType.Graveyard)));
         }
 
+        if (parse.startsWith("PromiseGift")) {
+            return new CostPromiseGift();
+        }
+
         if (parse.startsWith("Return<")) {
             final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
@@ -551,6 +548,10 @@ public class Cost implements Serializable {
         if (parse.startsWith("RevealChosen<")) {
             final String[] splitStr = abCostParse(parse, 2);
             return new CostRevealChosen(splitStr[0], splitStr.length > 1 ? splitStr[1] : null);
+        }
+
+        if (parse.equals("Forage")) {
+            return new CostForage();
         }
 
         // These won't show up with multiples
@@ -854,7 +855,7 @@ public class Cost implements Serializable {
             return Cost.convertAmountTypeToWords(amount, type);
         }
 
-        return Cost.convertIntAndTypeToWords(i.intValue(), type);
+        return Cost.convertIntAndTypeToWords(i, type);
     }
 
     /**

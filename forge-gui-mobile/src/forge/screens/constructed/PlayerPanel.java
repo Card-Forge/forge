@@ -114,7 +114,7 @@ public class PlayerPanel extends FContainer {
             public void handleEvent(FEvent e) {
                 btnDeck.setEnabled(mayEdit);
                 btnDeck.setText(deckChooser.getSelectedDeckType().toString() + ":" + (Forge.isLandscapeMode() ? " " : "\n") +
-                        Lang.joinHomogenous(((DeckManager)e.getSource()).getSelectedItems(), DeckProxy.FN_GET_NAME));
+                        Lang.joinHomogenous(((DeckManager)e.getSource()).getSelectedItems(), DeckProxy::getName));
                 if (allowNetworking && btnDeck.isEnabled() && humanAiSwitch.isToggled()) { //if its ready but changed the deck, update it
                     screen.updateMyDeck(index);
                 }
@@ -180,42 +180,33 @@ public class PlayerPanel extends FContainer {
                 }
             }
         });
-        lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnSchemeDeck.setText(Forge.getLocalizer().getMessage("lblSchemeDeck")
-                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
-                    if (allowNetworking && btnSchemeDeck.isEnabled() && humanAiSwitch.isToggled()) {
-                        screen.updateMyDeck(index);
-                    }
-                }else{
-                    btnSchemeDeck.setText(Forge.getLocalizer().getMessage("lblSchemeDeck"));
-                }
-            }
-        });
-        lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if( ((DeckManager)e.getSource()).getSelectedItem() != null){
-                    btnPlanarDeck.setText(Forge.getLocalizer().getMessage("lblPlanarDeck")
-                            + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
-                    if (allowNetworking && btnPlanarDeck.isEnabled() && humanAiSwitch.isToggled()) {
-                        screen.updateMyDeck(index);
-                    }
-                }else{
-                    btnPlanarDeck.setText(Forge.getLocalizer().getMessage("lblPlanarDeck"));
-                }
-            }
-        });
-        lstVanguardAvatars = new FVanguardChooser(isAi, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                btnVanguardAvatar.setText(Forge.getLocalizer().getMessage("lblVanguard")
-                        + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getName());
-                if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
+        lstSchemeDecks = new FDeckChooser(GameType.Archenemy, isAi, e -> {
+            if( ((DeckManager)e.getSource()).getSelectedItem() != null){
+                btnSchemeDeck.setText(Forge.getLocalizer().getMessage("lblSchemeDeck")
+                        + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if (allowNetworking && btnSchemeDeck.isEnabled() && humanAiSwitch.isToggled()) {
                     screen.updateMyDeck(index);
                 }
+            }else{
+                btnSchemeDeck.setText(Forge.getLocalizer().getMessage("lblSchemeDeck"));
+            }
+        });
+        lstPlanarDecks = new FDeckChooser(GameType.Planechase, isAi, e -> {
+            if( ((DeckManager)e.getSource()).getSelectedItem() != null){
+                btnPlanarDeck.setText(Forge.getLocalizer().getMessage("lblPlanarDeck")
+                        + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((DeckManager)e.getSource()).getSelectedItem().getName());
+                if (allowNetworking && btnPlanarDeck.isEnabled() && humanAiSwitch.isToggled()) {
+                    screen.updateMyDeck(index);
+                }
+            }else{
+                btnPlanarDeck.setText(Forge.getLocalizer().getMessage("lblPlanarDeck"));
+            }
+        });
+        lstVanguardAvatars = new FVanguardChooser(isAi, e -> {
+            btnVanguardAvatar.setText(Forge.getLocalizer().getMessage("lblVanguard")
+                    + ":" + (Forge.isLandscapeMode() ? " " : "\n") + ((CardManager)e.getSource()).getSelectedItem().getName());
+            if (allowNetworking && btnVanguardAvatar.isEnabled() && humanAiSwitch.isToggled()) {
+                screen.updateMyDeck(index);
             }
         });
 
@@ -246,68 +237,44 @@ public class PlayerPanel extends FContainer {
             add(devModeSwitch);
         }
         add(btnDeck);
-        btnDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                deckChooser.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(deckChooser);
-            }
+        btnDeck.setCommand(e -> {
+            deckChooser.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(deckChooser);
         });
         add(btnCommanderDeck);
-        btnCommanderDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstCommanderDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectCommanderDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstCommanderDecks);
-            }
+        btnCommanderDeck.setCommand(e -> {
+            lstCommanderDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectCommanderDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstCommanderDecks);
         });
         add(btnOathbreakDeck);
-        btnOathbreakDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstOathbreakerDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectOathbreakerDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstOathbreakerDecks);
-            }
+        btnOathbreakDeck.setCommand(e -> {
+            lstOathbreakerDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectOathbreakerDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstOathbreakerDecks);
         });
         add(btnTinyLeadersDeck);
-        btnTinyLeadersDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstTinyLeadersDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectTinyLeadersDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstTinyLeadersDecks);
-            }
+        btnTinyLeadersDeck.setCommand(e -> {
+            lstTinyLeadersDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectTinyLeadersDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstTinyLeadersDecks);
         });
         add(btnBrawlDeck);
-        btnBrawlDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstBrawlDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectBrawlDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstBrawlDecks);
-            }
+        btnBrawlDeck.setCommand(e -> {
+            lstBrawlDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectBrawlDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstBrawlDecks);
         });
         add(btnSchemeDeck);
-        btnSchemeDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstSchemeDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectSchemeDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstSchemeDecks);
-            }
+        btnSchemeDeck.setCommand(e -> {
+            lstSchemeDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectSchemeDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstSchemeDecks);
         });
         add(btnPlanarDeck);
-        btnPlanarDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstPlanarDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectPlanarDeckFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstPlanarDecks);
-            }
+        btnPlanarDeck.setCommand(e -> {
+            lstPlanarDecks.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectPlanarDeckFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstPlanarDecks);
         });
         add(btnVanguardAvatar);
-        btnVanguardAvatar.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                lstVanguardAvatars.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectVanguardFor").replace("%s", txtPlayerName.getText()));
-                Forge.openScreen(lstVanguardAvatars);
-            }
+        btnVanguardAvatar.setCommand(e -> {
+            lstVanguardAvatars.setHeaderCaption(Forge.getLocalizer().getMessage("lblSelectVanguardFor").replace("%s", txtPlayerName.getText()));
+            Forge.openScreen(lstVanguardAvatars);
         });
 
         if (mayEdit == mayEdit0) {
@@ -837,28 +804,23 @@ public class PlayerPanel extends FContainer {
     private FLabel createNameRandomizer() {
         final FLabel newNameBtn = new FLabel.Builder().iconInBackground(false)
                 .icon(Forge.hdbuttons ? FSkinImage.HDEDIT : FSkinImage.EDIT).opaque(false).build();
-        newNameBtn.setCommand(new FEventHandler() {
+        newNameBtn.setCommand(e -> getNewName(new Callback<String>() {
             @Override
-            public void handleEvent(FEvent e) {
-                getNewName(new Callback<String>() {
-                    @Override
-                    public void run(String newName) {
-                        if (newName == null) { return; }
+            public void run(String newName) {
+                if (newName == null) { return; }
 
-                        txtPlayerName.setText(newName);
+                txtPlayerName.setText(newName);
 
-                        if (index == 0) {
-                            prefs.setPref(FPref.PLAYER_NAME, newName);
-                            prefs.save();
-                            screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
-                        }
-                        if (allowNetworking) {
-                            screen.firePlayerChangeListener(index);
-                        }
-                    }
-                });
+                if (index == 0) {
+                    prefs.setPref(FPref.PLAYER_NAME, newName);
+                    prefs.save();
+                    screen.getLobby().applyToSlot(index, UpdateLobbyPlayerEvent.nameUpdate(newName));
+                }
+                if (allowNetworking) {
+                    screen.firePlayerChangeListener(index);
+                }
             }
-        });
+        }));
         return newNameBtn;
     }
 
@@ -1103,7 +1065,7 @@ public class PlayerPanel extends FContainer {
     
     private static final ImmutableList<String> genderOptions = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblMale"), Forge.getLocalizer().getInstance().getMessage("lblFemale"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
     private static final ImmutableList<String> typeOptions   = ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblFantasy"), Forge.getLocalizer().getInstance().getMessage("lblGeneric"), Forge.getLocalizer().getInstance().getMessage("lblAny"));
-    private final void getNewName(final Callback<String> callback) {
+    private void getNewName(final Callback<String> callback) {
         final String title = Forge.getLocalizer().getMessage("lblGetNewRandomName");
         final String message = Forge.getLocalizer().getMessage("lbltypeofName");
         final FSkinImage icon = FOptionPane.QUESTION_ICON;

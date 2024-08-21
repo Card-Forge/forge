@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Outlaws of Thunder Junction #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/05/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all possible opponent decisions and coin flips. The front side of Ashen Reaper is Invasion of Azgol.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=4
+p0hand=Assimilation Aegis;Hell to Pay;Adamant Will
+# TODO: On the picture (see URL above), 3 Restless Bivouac and 2 Shivan Reef are displayed, but the text message says there should be 2 Restless Bivouac and 3 Shivan Reef. Needs some kind of confirmation.
+p0battlefield=T:c_1_1_a_gnome;Breeches, the Blastmaker;Exuberant Fuseling|Counters:P1P1=1;Exuberant Fuseling|Counters:P1P1=1;Restless Bivouac;Restless Bivouac;Restless Bivouac;Shivan Reef;Shivan Reef
+p1life=10
+p1battlefield=T:b_1_1_bat_flying;Invasion of Azgol|Transformed|Counters:P1P1=2;Hollow Marauder

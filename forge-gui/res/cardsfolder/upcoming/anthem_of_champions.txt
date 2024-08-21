@@ -1,0 +1,6 @@
+Name:Anthem of Champions
+ManaCost:G W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures you control get +1/+1.
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +1/+1.

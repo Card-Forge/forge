@@ -17,30 +17,18 @@
  */
 package forge.gamemodes.limited;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Stack;
-import java.util.TreeMap;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
-
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.ChaosBoosterSupplier;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
@@ -53,16 +41,23 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * Booster Draft Format.
  */
 public class BoosterDraft implements IBoosterDraft {
 
+    private int nextId = 0;
     private static final int N_PLAYERS = 8;
     public static final String FILE_EXT = ".draft";
     private final List<LimitedPlayer> players = new ArrayList<>();
-    private LimitedPlayer localPlayer;
+    private final LimitedPlayer localPlayer;
+
+    private IDraftLog draftLog = null;
 
     private String doublePickDuringDraft = ""; // "FirstPick" or "Always"
     protected int nextBoosterGroup = 0;
@@ -90,7 +85,7 @@ public class BoosterDraft implements IBoosterDraft {
     protected boolean generateProduct() {
         switch (this.draftFormat) {
             case Full: // Draft from all cards in Forge
-                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedProduct.Template.genericDraftBooster);
+                final Supplier<List<PaperCard>> s = new UnOpenedProduct(SealedTemplate.genericDraftBooster);
 
                 for (int i = 0; i < 3; i++) {
                     this.product.add(s);
@@ -178,12 +173,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (myDrafts.isEmpty()) {
                     SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblNotFoundCustomDraftFiles"));
                 } else {
-                    Collections.sort(myDrafts, new Comparator<CustomLimited>() {
-                        @Override
-                        public int compare(CustomLimited o1, CustomLimited o2) {
-                            return o1.getName().compareTo(o2.getName());
-                        }
-                    });
+                    myDrafts.sort(Comparator.comparing(DeckBase::getName));
 
                     final CustomLimited customDraft = SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChooseCustomDraft"), myDrafts);
                     if (customDraft == null) {
@@ -264,18 +254,47 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     protected BoosterDraft(final LimitedPoolType draftType) {
+        this(draftType, N_PLAYERS);
+    }
+
+    protected BoosterDraft(final LimitedPoolType draftType, int numPlayers) {
         this.draftFormat = draftType;
 
-        localPlayer = new LimitedPlayer(0);
+        localPlayer = new LimitedPlayer(0, this);
         players.add(localPlayer);
-        for (int i = 1; i < N_PLAYERS; i++) {
-            players.add(new LimitedPlayerAI(i));
+        for (int i = 1; i < numPlayers; i++) {
+            players.add(new LimitedPlayerAI(i, this));
         }
+    }
+
+    public DraftPack addBooster(CardEdition edition) {
+        final IUnOpenedProduct product = new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(edition.getCode()));
+        return new DraftPack(product.get(), nextId++);
     }
 
     @Override
     public boolean isPileDraft() {
         return false;
+    }
+
+    @Override
+    public void setLogEntry(IDraftLog draftingProcess) {
+        draftLog = draftingProcess;
+    }
+
+    @Override
+    public IDraftLog getDraftLog() {
+        return draftLog;
+    }
+
+    @Override
+    public int getRound() {
+        return nextBoosterGroup;
+    }
+
+    @Override
+    public LimitedPlayer getNeighbor(LimitedPlayer player, boolean left) {
+        return players.get((player.order + (left ? 1 : -1) + N_PLAYERS) % N_PLAYERS);
     }
 
     private void setupCustomDraft(final CustomLimited draft) {
@@ -284,7 +303,7 @@ public class BoosterDraft implements IBoosterDraft {
             throw new RuntimeException("BoosterGenerator : deck not found");
         }
 
-        final SealedProduct.Template tpl = draft.getSealedProductTemplate();
+        final SealedTemplate tpl = draft.getSealedProductTemplate();
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
@@ -354,9 +373,11 @@ public class BoosterDraft implements IBoosterDraft {
     }
 
     public void initializeBoosters() {
+
         for (Supplier<List<PaperCard>> boosterRound : this.product) {
             for (int i = 0; i < N_PLAYERS; i++) {
-                this.players.get(i).receiveUnopenedPack(boosterRound.get());
+                DraftPack pack = new DraftPack(boosterRound.get(), nextId++);
+                this.players.get(i).receiveUnopenedPack(pack);
             }
         }
         startRound();
@@ -374,6 +395,9 @@ public class BoosterDraft implements IBoosterDraft {
         for (LimitedPlayer pl : this.players) {
             pl.newPack();
         }
+        if (this.getDraftLog() != null) {
+            this.getDraftLog().addLogEntry("Round " + this.nextBoosterGroup + " is starting...");
+        }
         this.currentBoosterSize = firstPlayer.packQueue.peek().size();
         return true;
     }
@@ -387,6 +411,25 @@ public class BoosterDraft implements IBoosterDraft {
         return decks;
     }
 
+    @Override
+    public LimitedPlayer[] getOpposingPlayers() {
+        return this.players.toArray(new LimitedPlayer[7]);
+    }
+
+    @Override
+    public LimitedPlayer getHumanPlayer() {
+        return this.localPlayer;
+    }
+
+    @Override
+    public LimitedPlayer getPlayer(int i) {
+        if (i == 0) {
+            return this.localPlayer;
+        }
+
+        return this.players.get(i - 1);
+    }
+
     public void passPacks() {
         // Alternate direction of pack passing
         int adjust = this.nextBoosterGroup % 2 == 1 ? 1 : -1;
@@ -394,24 +437,57 @@ public class BoosterDraft implements IBoosterDraft {
             adjust = 0;
         } else if (currentBoosterPick % 2 == 1 && "Always".equals(this.doublePickDuringDraft)) {
             // This may not work with Conspiracy cards that mess with the draft
+            // But it probably doesn't matter since Conspiracy doesn't have double pick?
             adjust = 0;
         }
 
+        // Do any players have a Canal Dredger?
+        List<LimitedPlayer> dredgers = new ArrayList<>();
+        for (LimitedPlayer pl : this.players) {
+            if (pl.hasCanalDredger()) {
+                dredgers.add(pl);
+            }
+        }
+
         for (int i = 0; i < N_PLAYERS; i++) {
-            List<PaperCard> passingPack = this.players.get(i).passPack();
+            LimitedPlayer pl = this.players.get(i);
+            DraftPack passingPack = pl.passPack();
 
             if (passingPack == null)
                 continue;
 
-            if (!passingPack.isEmpty()) {
-                // TODO Canal Dredger for passing a pack with a single card in it
-
-                int passTo = (i + adjust + N_PLAYERS) % N_PLAYERS;
-                this.players.get(passTo).receiveOpenedPack(passingPack);
-                this.players.get(passTo).adjustPackNumber(adjust, packsInDraft);
-            } else {
+            LimitedPlayer passToPlayer = null;
+            if (passingPack.isEmpty()) {
                 packsInDraft--;
+                continue;
             }
+
+            if (passingPack.size() == 1) {
+                if (dredgers.size() == 1) {
+                    passToPlayer = dredgers.get(0);
+                } else if (dredgers.size() > 1) {
+                    // Multiple dredgers, so we need to choose one to pass to
+                    if (dredgers.contains(pl)) {
+                        // If the current player has a Canal Dredger, they should pass to themselves
+                        passToPlayer = pl;
+                    } else if (pl instanceof LimitedPlayerAI) {
+                        // Maybe the AI could have more knowledge about the other players.
+                        // Like don't pass to players that have revealed certain cards or colors
+                        // But random is probably fine for now
+                        Collections.shuffle(dredgers);
+                        passToPlayer = dredgers.get(0);
+                    } else {
+                        // Human player, so we need to ask them
+                        passToPlayer = SGuiChoose.one("Which player with Canal Dredger should we pass the last card to?", dredgers);
+                    }
+                }
+            }
+
+            if (passToPlayer == null) {
+                passToPlayer = this.players.get((i + adjust + N_PLAYERS) % N_PLAYERS);
+            }
+
+            passToPlayer.receiveOpenedPack(passingPack);
         }
     }
 
@@ -419,7 +495,16 @@ public class BoosterDraft implements IBoosterDraft {
         // Loop through players 1-7 to draft their current pack
         for (int i = 1; i < N_PLAYERS; i++) {
             LimitedPlayer pl = this.players.get(i);
-            pl.draftCard(pl.chooseCard());
+            if (pl.shouldSkipThisPick()) {
+                continue;
+            }
+
+            // Computer player has an empty pack or is passing the pack
+            Boolean passPack;
+            do {
+                // THe player holding onto the pack to draft an extra card... Do it now.
+                passPack = pl.draftCard(pl.chooseCard());
+            } while (passPack != null && !passPack);
         }
     }
 
@@ -429,6 +514,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     @Override
     public boolean isRoundOver() {
+        // Really should check if all packs are empty, but this is a good enough approximation
         return packsInDraft == 0;
     }
 
@@ -439,10 +525,12 @@ public class BoosterDraft implements IBoosterDraft {
 
     /**
      * {@inheritDoc}
+     *
+     * @return
      */
     @Override
-    public void setChoice(final PaperCard c) {
-        final List<PaperCard> thisBooster = this.localPlayer.nextChoice();
+    public boolean setChoice(final PaperCard c) {
+        final DraftPack thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
             throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
@@ -451,10 +539,33 @@ public class BoosterDraft implements IBoosterDraft {
 
         recordDraftPick(thisBooster, c);
 
-        this.localPlayer.draftCard(c);
+        boolean passPack = this.localPlayer.draftCard(c);
+        if (passPack) {
+            // Leovolds Operative and Cogwork Librarian get to draft an extra card.. How do we do that?
+            this.passPacks();
+        }
         this.currentBoosterPick++;
-        this.passPacks();
+
+        // Return whether or not we passed, but that the UI always needs to refresh
+        // But returning might be useful for testing or other things?
+        return passPack;
     }
+
+    public void postDraftActions() {
+        List<LimitedPlayer> brokers = new ArrayList<>();
+        for (LimitedPlayer pl : this.players) {
+            if (pl.hasBrokers()) {
+                brokers.add(pl);
+            }
+        }
+
+        Collections.shuffle(brokers);
+        for(LimitedPlayer pl : brokers) {
+            pl.activateBrokers(this.players);
+        }
+
+    }
+
 
     private static String choosePackByPack(final List<String> setz, int packs) {
         StringBuilder sb = new StringBuilder();

@@ -1,0 +1,5 @@
+Name:Backup Plan
+ManaCost:no cost
+Types:Conspiracy
+Text:Draw an additional hand of seven cards as the game begins. Before taking mulligans, shuffle all but one of your hands into your library.
+Oracle:(Start the game with this conspiracy face up in the command zone.)\nDraw an additional hand of seven cards as the game begins. Before taking mulligans, shuffle all but one of your hands into your library.

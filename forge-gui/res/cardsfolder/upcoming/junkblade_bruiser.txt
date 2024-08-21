@@ -1,0 +1,8 @@
+Name:Junkblade Bruiser
+ManaCost:3 RG RG
+Types:Creature Raccoon Berserker
+PT:4/5
+K:Trample
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you expend 4, CARDNAME gets +2/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPump:DB$ Pump | NumAtt$ +2 | NumDef$ +1 | Defined$ Self
+Oracle:Trample\nWhenever you expend 4, Junkblade Bruiser gets +2/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

@@ -1,0 +1,8 @@
+Name:Serum Visionary
+ManaCost:2 U
+Types:Creature Vedalken Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card, then scry 2.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+Oracle:When Serum Visionary enters, draw a card, then scry 2.

@@ -1,0 +1,8 @@
+Name:Roughshod Duo
+ManaCost:2 R
+Types:Creature Mouse Raccoon
+PT:3/2
+K:Trample
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you expend 4, target creature you control gets +1/+1 and gains trample until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+Oracle:Trample\nWhenever you expend 4, target creature you control gets +1/+1 and gains trample until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

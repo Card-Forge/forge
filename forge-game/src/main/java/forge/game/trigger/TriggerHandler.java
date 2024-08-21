@@ -135,7 +135,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Trigger", trigParse);
-            Sentry.addBreadcrumb(bread, host);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
@@ -163,7 +163,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Params", mapParams.toString());
-            Sentry.addBreadcrumb(bread, host);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
@@ -242,8 +242,8 @@ public class TriggerHandler {
         for (final Trigger t : c.getTriggers()) {
             if (
                     TriggerType.Exploited.equals(t.getMode()) ||
-                    TriggerType.Sacrificed.equals(t.getMode()) ||
                     TriggerType.Destroyed.equals(t.getMode()) ||
+                    TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
                     ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
                             && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
                 registerOneTrigger(t);

@@ -1,0 +1,7 @@
+Name:Rabid Gnaw
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ PowerDmg | NumAtt$ +1 | TgtPrompt$ Select target creature you control | SubAbility$ SoulsDamage | StackDescription$ {c:ThisTargetedCard} gets +1/+1 until end of turn. | SpellDescription$ Target creature you control gets +1/+0 until end of turn. Then it deals damage equal to its power to target creature you don't control.
+SVar:SoulsDamage:DB$ DealDamage | ValidTgts$ Creature.YouDontCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target creature you don't control | NumDmg$ X | DamageSource$ ParentTarget | StackDescription$ Then {c:ParentTarget} deals damage equal to its power to {c:ThisTargetedCard}.
+SVar:X:ParentTargeted$CardPower
+Oracle:Target creature you control gets +1/+0 until end of turn. Then it deals damage equal to its power to target creature you don't control.

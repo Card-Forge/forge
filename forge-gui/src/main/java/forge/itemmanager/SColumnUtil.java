@@ -143,6 +143,23 @@ public final class SColumnUtil {
         return columns;
     }
 
+    public static Map<ColumnDef, ItemColumnConfig> getAttractionPoolDefaultColumns() {
+        //Similar to special card pool, but show the collector number and hide the type.
+        List<ColumnDef> colDefs = new ArrayList<>();
+        colDefs.add(ColumnDef.FAVORITE);
+        colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.ATTRACTION_LIGHTS);
+        colDefs.add(ColumnDef.RARITY);
+        colDefs.add(ColumnDef.SET);
+        colDefs.add(ColumnDef.COLLECTOR_ORDER);
+
+        Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
+        columns.get(ColumnDef.FAVORITE).setSortPriority(1);
+        columns.get(ColumnDef.NAME).setSortPriority(2);
+        columns.get(ColumnDef.COLLECTOR_ORDER).setSortPriority(3);
+        return columns;
+    }
+
     public static Map<ColumnDef, ItemColumnConfig> getSpellShopDefaultColumns() {
         Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.QUANTITY, false, true, true, false, false);
         columns.get(ColumnDef.OWNED).setSortPriority(1);

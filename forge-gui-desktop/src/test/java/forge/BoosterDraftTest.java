@@ -1,17 +1,20 @@
 package forge;
 
-import java.util.List;
-
-import org.testng.annotations.Test;
-
+import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.game.card.Card;
+import forge.gamemodes.limited.DraftPack;
 import forge.gamemodes.limited.IBoosterDraft;
+import forge.gamemodes.limited.IDraftLog;
+import forge.gamemodes.limited.LimitedPlayer;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.model.FModel;
+import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,6 +28,7 @@ import forge.model.FModel;
 public class BoosterDraftTest implements IBoosterDraft {
 
     private int n = 3;
+    private int round = 1;
 
     @Override
     @Test(timeOut = 1000)
@@ -33,18 +37,38 @@ public class BoosterDraftTest implements IBoosterDraft {
     }
 
     @Override
+    public LimitedPlayer[] getOpposingPlayers() {
+        return new LimitedPlayer[0];
+    }
+
+    @Override
+    public LimitedPlayer getHumanPlayer() {
+        return null;
+    }
+
+    @Override
+    public int getRound() {
+        return round;
+    }
+
+    @Override
     public CardPool nextChoice() {
         this.n--;
-        SealedProduct.Template booster = FModel.getMagicDb().getBoosters().get("M11");
+        SealedTemplate booster = FModel.getMagicDb().getBoosters().get("M11");
         CardPool result = new CardPool();
         result.addAllFlat(BoosterGenerator.getBoosterPack(booster));
         return result;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     *
+     * @return
+     */
     @Override
-    public void setChoice(final PaperCard c) {
+    public boolean setChoice(final PaperCard c) {
         System.out.println(c.getName());
+        return false;
     }
 
     @Override
@@ -55,6 +79,11 @@ public class BoosterDraftTest implements IBoosterDraft {
     @Override
     public boolean isRoundOver() {
         return hasNextChoice();
+    }
+
+    @Override
+    public DraftPack addBooster(CardEdition edition) {
+        return null;
     }
 
     public List<Card> getChosenCards() {
@@ -69,4 +98,27 @@ public class BoosterDraftTest implements IBoosterDraft {
     public boolean isPileDraft() {
         return false;
     }
+
+    @Override
+    public void setLogEntry(IDraftLog draftingProcess) {
+
+    }
+
+    @Override
+    public IDraftLog getDraftLog() {
+        return null;
+    }
+
+    @Override
+    public LimitedPlayer getNeighbor(LimitedPlayer p, boolean left) {
+        return null;
+    }
+
+    @Override
+    public LimitedPlayer getPlayer(int i) {
+        return null;
+    }
+
+    @Override
+    public void postDraftActions() {}
 }

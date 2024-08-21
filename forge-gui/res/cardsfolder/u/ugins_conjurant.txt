@@ -8,4 +8,4 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self+counters
 SVar:Counters:DB$ RemoveCounter | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ Y
 SVar:Y:ReplaceCount$DamageAmount
 DeckHas:Ability$Counters
-Oracle:Ugin's Conjurant enters the battlefield with X +1/+1 counters on it.\nIf damage would be dealt to Ugin's Conjurant while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from Ugin's Conjurant.
+Oracle:Ugin's Conjurant enters with X +1/+1 counters on it.\nIf damage would be dealt to Ugin's Conjurant while it has a +1/+1 counter on it, prevent that damage and remove that many +1/+1 counters from Ugin's Conjurant.

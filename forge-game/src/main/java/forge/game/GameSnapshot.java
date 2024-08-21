@@ -1,11 +1,9 @@
 package forge.game;
 
-import java.util.*;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.combat.Combat;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseHandler;
@@ -16,6 +14,10 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GameSnapshot {
     private final Game origGame;
@@ -80,19 +82,23 @@ public class GameSnapshot {
             Player toPlayer = findBy(toGame, p);
 
             List<Card> commanders = Lists.newArrayList();
+
+            // Commander cast times are stored in the player, not the card
+            toPlayer.resetCommanderStats();
             for (final Card c : p.getCommanders()) {
                 Card newCommander = findBy(toGame, c);
                 commanders.add(newCommander);
                 int castTimes = p.getCommanderCast(c);
                 for (int i = 0; i < castTimes; i++) {
-                    toPlayer.incCommanderCast(c);
+                    toPlayer.incCommanderCast(newCommander);
                 }
             }
-            toPlayer.setCommanders(commanders);
-
             for (Map.Entry<Card, Integer> entry : p.getCommanderDamage()) {
-                toPlayer.addCommanderDamage(findBy(toGame, entry.getKey()), entry.getValue());
+                Card commander = findBy(toGame, entry.getKey());
+                int damage = entry.getValue();
+                toPlayer.addCommanderDamage(commander, damage);
             }
+            toPlayer.setCommanders(commanders);
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -188,6 +194,7 @@ public class GameSnapshot {
         newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
         newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
         newPlayer.setCommitedCrimeThisTurn(origPlayer.getCommittedCrimeThisTurn());
+        newPlayer.setExpentThisTurn(origPlayer.getExpentThisTurn());
         for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
             newPlayer.addSpellCastThisTurn();
         }
@@ -355,16 +362,16 @@ public class GameSnapshot {
             if (fromCard.getCloneOrigin() != null) {
                 newCard.setCloneOrigin(toGame.findById(fromCard.getCloneOrigin().getId()));
             }
-            if (newCard.getHaunting() != null) {
+            if (fromCard.getHaunting() != null) {
                 newCard.setHaunting(toGame.findById(fromCard.getHaunting().getId()));
             }
-            if (newCard.getEffectSource() != null) {
+            if (fromCard.getEffectSource() != null) {
                 newCard.setEffectSource(toGame.findById(fromCard.getEffectSource().getId()));
             }
-            if (newCard.isPaired()) {
+            if (fromCard.isPaired()) {
                 newCard.setPairedWith(toGame.findById(fromCard.getPairedWith().getId()));
             }
-            if (newCard.getCopiedPermanent() != null) {
+            if (fromCard.getCopiedPermanent() != null) {
                 newCard.setCopiedPermanent(toGame.findById(fromCard.getCopiedPermanent().getId()));
             }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.

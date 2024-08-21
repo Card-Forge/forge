@@ -1,7 +1,8 @@
 Name:Altar of the Lost
 ManaCost:3
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.wasCastFromGraveyard+withFlashback | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
 AI:RemoveDeck:Random
-Oracle:Altar of the Lost enters the battlefield tapped.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.
+Oracle:Altar of the Lost enters tapped.\n{T}: Add two mana in any combination of colors. Spend this mana only to cast spells with flashback from a graveyard.

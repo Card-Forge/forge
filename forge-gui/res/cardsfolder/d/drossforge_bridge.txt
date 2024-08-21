@@ -1,7 +1,8 @@
 Name:Drossforge Bridge
 ManaCost:no cost
 Types:Artifact Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Indestructible
 A:AB$ Mana | Cost$ T | Produced$ Combo B R | SpellDescription$ Add {B} or {R}.
-Oracle:Drossforge Bridge enters the battlefield tapped.\nIndestructible\n{T}: Add {B} or {R}.
+Oracle:Drossforge Bridge enters tapped.\nIndestructible\n{T}: Add {B} or {R}.

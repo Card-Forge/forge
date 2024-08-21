@@ -1,7 +1,5 @@
 [metadata]
 Name=Adventure - Corrupted Cleric
-[Avatar]
-
 [Main]
 1 Archangel of Wrath|DMU|1
 3 Benalish Sleeper|DMU|1
@@ -36,13 +34,3 @@ Name=Adventure - Corrupted Cleric
 2 Tainted Field|C21|1
 1 Terramorphic Expanse|CM2|1
 2 Twilight Panther|RNA|1
-[Sideboard]
-
-[Planes]
-
-[Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

@@ -1,0 +1,9 @@
+Name:Raven Clan War-Axe
+ManaCost:1 R W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may search your library and/or graveyard for a card named Eivor, Battle-Ready, reveal it, and put it into your hand. If you search your library this way, shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedEivor; Battle-Ready | Optional$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Trample | Description$ Equipped creature gets +2/+0 and has trample.
+K:Equip:2
+DeckHints:Name$Eivor, Battle-Ready
+Oracle:When Raven Clan War-Axe enters, you may search your library and/or graveyard for a card named Eivor, Battle-Ready, reveal it, and put it into your hand. If you search your library this way, shuffle.\nEquipped creature gets +2/+0 and has trample.\nEquip {2}

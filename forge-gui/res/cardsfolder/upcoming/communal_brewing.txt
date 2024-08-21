@@ -1,0 +1,16 @@
+Name:Communal Brewing
+ManaCost:2 G
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, any number of target opponents each draw a card. Put an ingredient counter on CARDNAME, then put an ingredient counter on it for each card drawn this way.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | TgtPrompt$ Select any number of target opponents | TargetMin$ 0 | TargetMax$ MaxTgt | RememberDrawn$ AllReplaced | SubAbility$ DBPutCounter1
+SVar:DBPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ INGREDIENT | CounterNum$ 1 | SubAbility$ DBPutCounter2
+SVar:DBPutCounter2:DB$ PutCounter | Defined$ Self | CounterType$ INGREDIENT | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of ingredient counters on CARDNAME.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | SetChosenNumber$ Y | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ Count$ChosenNumber
+SVar:X:Remembered$Amount
+SVar:Y:Count$CardCounters.INGREDIENT
+SVar:MaxTgt:PlayerCountOpponents$Amount
+Oracle:When Communal Brewing enters, any number of target opponents each draw a card. Put an ingredient counter on Communal Brewing, then put an ingredient counter on it for each card drawn this way.\nWhenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of ingredient counters on Communal Brewing.

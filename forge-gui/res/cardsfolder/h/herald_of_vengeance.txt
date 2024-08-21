@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Creature Angel
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy each permanent you don't control that has the same name as a permanent that dealt damage to you last turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters, destroy each permanent you don't control that has the same name as a permanent that dealt damage to you last turn.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.YouDontCtrl+sharesNameWith Remembered
 T:Mode$ DamageDone | ValidSource$ Permanent | ValidTarget$ You | Static$ True | Execute$ TrigRemember
 SVar:TrigRemember:DB$ Pump | ImprintCards$ TriggeredSource
@@ -11,4 +11,4 @@ T:Mode$ Phase | Phase$ Cleanup | Static$ True | Execute$ TrigForget
 SVar:TrigForget:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBImprint
 SVar:DBImprint:DB$ Pump | RememberObjects$ Imprinted | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-Oracle:Flying\nWhen Herald of Vengeance enters the battlefield, destroy each permanent you don't control that has the same name as a permanent that dealt damage to you last turn.
+Oracle:Flying\nWhen Herald of Vengeance enters, destroy each permanent you don't control that has the same name as a permanent that dealt damage to you last turn.

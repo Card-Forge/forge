@@ -1,0 +1,11 @@
+Name:Kozilek's Command
+ManaCost:X C C
+Types:Kindred Instant Eldrazi
+A:SP$ Charm | Choices$ DBToken,DBScry,DBExile,DBExileGraveyard | CharmNum$ 2 | Announce$ X
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ TargetedPlayer | StackDescription$ SpellDescription | SpellDescription$ Target player creates X 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
+SVar:DBScry:DB$ Scry | ScryNum$ X | ValidTgts$ Player | SubAbility$ DBDraw | SpellDescription$ Target player scries X, then draws a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ ParentTarget
+SVar:DBExile:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Choose target creature with mana value X or less | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature with mana value X or less.
+SVar:DBExileGraveyard:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ X | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SpellDescription$ Exile up to X target cards from graveyards.
+SVar:X:Count$xPaid
+Oracle:Choose two —\n• Target player creates X 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."\n• Target player scries X, then draws a card.\n• Exile target creature with mana value X or less.\n• Exile up to X target cards from graveyards.

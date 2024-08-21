@@ -1,0 +1,11 @@
+Name:Arthur, Marigold Knight
+ManaCost:2 U R W
+Types:Legendary Creature Mouse Knight
+PT:4/5
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Creature.attacking+Other | NoResolvingCheck$ True | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME and at least one other creature attack, look at the top six cards of your library. You may put a creature card from among them onto the battlefield tapped and attacking. Put the rest on the bottom of your library in a random order. Return that creature to its owner's hand at end of combat.
+SVar:TrigDig:DB$ Dig | DigNum$ 6 | ChangeNum$ 1 | Optional$ True | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | Tapped$ True | Attacking$ True | RestRandomOrder$ True | RememberChanged$ True | SubAbility$ DBDelayedTrigger
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigBounce | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ Return that creature to its owner's hand at end of combat.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Haste\nWhenever Arthur, Marigold Knight and at least one other creature attack, look at the top six cards of your library. You may put a creature card from among them onto the battlefield tapped and attacking. Put the rest on the bottom of your library in a random order. Return that creature to its owner's hand at end of combat.

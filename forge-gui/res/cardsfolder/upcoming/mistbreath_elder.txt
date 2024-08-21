@@ -1,0 +1,12 @@
+Name:Mistbreath Elder
+ManaCost:G
+Types:Creature Frog Warrior
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBounce | TriggerDescription$ At the beginning of your upkeep, return another creature you control to its owner's hand. If you do, put a +1/+1 counter on CARDNAME. Otherwise, you may return CARDNAME to its owner's hand.
+SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature.StrictlyOther+YouCtrl | ChangeNum$ 1 | Mandatory$ True | Hidden$ True | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ LE0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+AI:RemoveDeck:All
+Oracle:At the beginning of your upkeep, return another creature you control to its owner's hand. If you do, put a +1/+1 counter on Mistbreath Elder. Otherwise, you may return Mistbreath Elder to its owner's hand.

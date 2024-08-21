@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -15,7 +17,6 @@ import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -36,6 +37,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private final Set<GameEntity> targets = Sets.newHashSet();
     private final TargetRestrictions tgt;
     private final SpellAbility sa;
+    private final Integer numTargets;
     private final Collection<Integer> divisionValues;
     private Card lastTarget = null;
     private boolean bCancel = false;
@@ -45,15 +47,16 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     private boolean mustTargetFiltered;
     private static final long serialVersionUID = -1091595663541356356L;
 
-    public final boolean hasCancelled() { return bCancel; }
-    public final boolean hasPressedOk() { return bOk; }
+    public boolean hasCancelled() { return bCancel; }
+    public boolean hasPressedOk() { return bOk; }
 
-    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
+    public InputSelectTargets(final PlayerControllerHuman controller, final List<Card> choices, final SpellAbility sa, final boolean mandatory, Integer numTargets, Collection<Integer> divisionValues, Predicate<GameObject> filter, boolean mustTargetFiltered) {
         super(controller);
         this.choices = choices;
         this.tgt = sa.getTargetRestrictions();
         this.sa = sa;
         this.mandatory = mandatory;
+        this.numTargets = numTargets;
         this.divisionValues = divisionValues;
         this.filter = filter;
 
@@ -68,16 +71,13 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
         }
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                for (final GameEntity c : targets) {
-                    if (c instanceof Card) {
-                        controller.getGui().setUsedToPay(CardView.get((Card) c), true);
-                    }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final GameEntity c : targets) {
+                if (c instanceof Card) {
+                    controller.getGui().setUsedToPay(CardView.get((Card) c), true);
                 }
-                controller.getGui().updateZones(zonesToUpdate);
             }
+            controller.getGui().updateZones(zonesToUpdate);
         });
     }
 
@@ -114,7 +114,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             sb.append(sa.getUniqueTargets());
         }
 
-        final int maxTargets = sa.getMaxTargets();
+        final int maxTargets = ObjectUtils.firstNonNull(numTargets, sa.getMaxTargets());
         final int targeted = sa.getTargets().size();
         if (maxTargets > 1) {
             sb.append(TextUtil.concatNoSpace("\n(", String.valueOf(maxTargets - targeted), " more can be targeted)"));
@@ -129,7 +129,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (divisionValues != null && !divisionValues.isEmpty() && sa.getMinTargets() == 0 && sa.getTargets().size() == 0) {
             // extra logic for Divided with min targets = 0, should only work if num targets are 0 too
             getController().getGui().updateButtons(getOwner(), true, true, false);
-        } else if (!sa.isMinTargetChosen() || (divisionValues != null && !divisionValues.isEmpty())) {
+        } else if (!sa.isMinTargetChosen() || (numTargets != null && targets.size() != numTargets) || (divisionValues != null && !divisionValues.isEmpty())) {
             // If reached Minimum targets, enable OK button
             if (mandatory && tgt.hasCandidates(sa)) {
                 // Player has to click on a target
@@ -148,19 +148,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onCancel() {
+    protected void onCancel() {
         bCancel = true;
         this.done();
     }
 
     @Override
-    protected final void onOk() {
+    protected void onOk() {
         bOk = true;
         this.done();
     }
 
     @Override
-    protected final boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+    protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (targets.contains(card)) {
             removeTarget(card);
             return false;
@@ -200,7 +200,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetCMC")) {
             int maxTotalCMC = tgt.getMaxTotalCMC(sa.getHostCard(), sa);
             if (maxTotalCMC > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetCmc);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getCMC);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getCMC();
                 }
@@ -214,7 +214,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (sa.hasParam("MaxTotalTargetPower")) {
             int maxTotalPower = tgt.getMaxTotalPower(sa.getHostCard(), sa);
             if (maxTotalPower > 0) {
-                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), CardPredicates.Accessors.fnGetNetPower);
+                int soFar = Aggregates.sum(sa.getTargets().getTargetCards(), Card::getNetPower);
                 if (!sa.isTargeting(card)) {
                     soFar += card.getNetPower();
                 }
@@ -313,7 +313,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     @Override
-    protected final void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
+    protected void onPlayerSelected(final Player player, final ITriggerEvent triggerEvent) {
         if (targets.contains(player)) {
             removeTarget(player);
             return;
@@ -420,8 +420,8 @@ public final class InputSelectTargets extends InputSyncronizedBase {
     }
 
     private boolean hasAllTargets() {
-        return sa.isMaxTargetChosen() || (divisionValues != null && sa.getStillToDivide() <= 0)
-            || (divisionValues == null && sa.isDividedAsYouChoose() && sa.getTargets().size() == sa.getStillToDivide());
+        return sa.isMaxTargetChosen() || (numTargets != null && numTargets == targets.size()) || (divisionValues != null && sa.getStillToDivide() <= 0)
+            || (divisionValues == null && sa.isDividedAsYouChoose() && targets.size() == sa.getStillToDivide());
     }
 
     @Override

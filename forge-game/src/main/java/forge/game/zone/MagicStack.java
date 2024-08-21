@@ -17,24 +17,9 @@
  */
 package forge.game.zone;
 
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeSet;
-import java.util.concurrent.LinkedBlockingDeque;
-
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
@@ -43,12 +28,7 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.PlayEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
-import forge.game.event.EventValueChangeType;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventSpellAbilityCast;
-import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.event.GameEventSpellResolved;
-import forge.game.event.GameEventZone;
+import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaRefundService;
@@ -61,6 +41,10 @@ import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.util.TextUtil;
+
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * <p>
@@ -223,7 +207,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         clearUndoStack(Lists.newArrayList(sa));
     }
-    private final void clearUndoStack(List<SpellAbility> sas) {
+    private void clearUndoStack(List<SpellAbility> sas) {
         for (SpellAbility sa : sas) {
             // reset in case a trigger stopped it on a previous activation
             sa.setUndoable(true);
@@ -271,6 +255,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         recordUndoableActions(sp, activator);
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            // this can matter, if e.g. Vhal, Candlekeep Researcher toughness changes from tapping
+            game.getAction().checkStaticAbilities();
+
             if (!sp.isCopied() && !sp.isTrigger()) {
                 // Copied abilities aren't activated, so they shouldn't change these values
                 addAbilityActivatedThisTurn(sp, source);
@@ -339,7 +326,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
 
-        if (frozen && !sp.hasParam("IgnoreFreeze")) {
+        if (frozen && !sp.hasParam("IgnoreFreeze") && !sp.isCastFromPlayEffect()) {
             si = new SpellAbilityStackInstance(sp, id);
             frozenStack.push(si);
             return;
@@ -366,6 +353,35 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             runParams.put(AbilityKey.CardLKI, lki);
             thisTurnCast.add(lki);
             sp.getActivatingPlayer().addSpellCastThisTurn();
+
+            // Add expend mana
+            Map<Player, Integer> expendPlayers = Maps.newHashMap();
+
+            for (Mana m : sp.getPayingMana()) {
+                // TODO this currently assumes that all mana came from your own pool
+                // but with Assist some might belong to another player instead
+                Player manaPayer = sp.getActivatingPlayer();
+
+                expendPlayers.put(manaPayer, expendPlayers.getOrDefault(manaPayer, 0) + 1);
+            }
+
+            for (Entry<Player, Integer> entry : expendPlayers.entrySet()) {
+                Player manaPayer = entry.getKey();
+                int startingMana =  manaPayer.getExpentThisTurn();
+                int totalMana = startingMana + entry.getValue();
+
+                if (totalMana == 0) {
+                    continue;
+                }
+
+                manaPayer.setExpentThisTurn(totalMana);
+                for(int i = startingMana + 1; i <= totalMana; i++) {
+                    Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(manaPayer);
+                    expendParams.put(AbilityKey.SpellAbility, sp);
+                    expendParams.put(AbilityKey.Amount, i);
+                    game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
+                }
+            }
         }
 
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
@@ -605,6 +621,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
+        game.getAction().checkStaticAbilities();
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)
@@ -612,7 +629,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
     }
 
-    private final void finishResolving(final SpellAbility sa, final boolean fizzle) {
+    private void finishResolving(final SpellAbility sa, final boolean fizzle) {
         // SpellAbility is removed from the stack here
         // temporarily removed removing SA after resolution
         final SpellAbilityStackInstance si = getInstanceMatchingSpellAbilityID(sa);
@@ -634,7 +651,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         curResolvingCard = null;
     }
 
-    private final void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
+    private void removeCardFromStack(final SpellAbility sa, final SpellAbilityStackInstance si, final boolean fizzle) {
         Card source = sa.getHostCard();
 
         // need to update active trigger
@@ -670,7 +687,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private final boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
+    private boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
         List<GameObject> toRemove = Lists.newArrayList();
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
             if (fizzle == null) {
@@ -808,14 +825,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Grab players in turn order starting with the active player
         List<Player> players = game.getPlayersInTurnOrder(playerTurn);
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }
             result |= chooseOrderOfSimultaneousStackEntry(p, false);
         }
 
-        for(Player p : players) {
+        for (Player p : players) {
             if (p.hasLost()) {
                 continue;
             }
@@ -825,7 +842,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return result;
     }
 
-    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
+    private boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
         if (simultaneousStackEntryList.isEmpty()) {
             return false;
         }

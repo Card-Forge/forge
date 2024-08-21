@@ -108,15 +108,12 @@ public class GameLogPanel extends JPanel {
      */
     private void forceVerticalScrollbarToMax() {
         scrollPane.validate();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                final JScrollBar scrollbar = scrollPane.getVerticalScrollBar();
-                scrollbar.setValue(scrollbar.getMaximum());
-                // This is needed to ensure scrollbar is set to max correctly.
-                scrollPane.validate();
-                scrollbar.setValue(scrollbar.getMaximum());
-            }
+        SwingUtilities.invokeLater(() -> {
+            final JScrollBar scrollbar = scrollPane.getVerticalScrollBar();
+            scrollbar.setValue(scrollbar.getMaximum());
+            // This is needed to ensure scrollbar is set to max correctly.
+            scrollPane.validate();
+            scrollbar.setValue(scrollbar.getMaximum());
         });
     }
 

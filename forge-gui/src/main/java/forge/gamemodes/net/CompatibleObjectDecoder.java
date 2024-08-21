@@ -37,7 +37,7 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
         try {
             var5 = ois.readObject();
         } catch (StreamCorruptedException e) {
-            System.err.println(String.format("Version Mismatch: %s", e.getMessage()));
+            System.err.printf("Version Mismatch: %s%n", e.getMessage());
         } finally {
             ois.close();
         }

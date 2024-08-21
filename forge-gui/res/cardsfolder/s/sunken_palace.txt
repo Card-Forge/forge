@@ -1,0 +1,10 @@
+Name:Sunken Palace
+ManaCost:no cost
+Types:Land Cave
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ 1 U T ExileFromGrave<7/Card> | Produced$ U | TriggersWhenSpent$ TrigCopy | SpellDescription$ Add {U}. When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy. (Mana abilities can't be copied.)
+SVar:TrigCopy:Mode$ SpellAbilityCast | ValidSA$ Spell,Activated | ValidActivatingPlayer$ You | Execute$ TrigCopyMain | TriggerDescription$ When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy. (Mana abilities can't be copied.)
+SVar:TrigCopyMain:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+Oracle:Sunken Palace enters tapped.\n{T}: Add {U}.\n{1}{U}, {T}, Exile seven cards from your graveyard: Add {U}. When you spend this mana to cast a spell or activate an ability, copy that spell or ability. You may choose new targets for the copy. (Mana abilities can't be copied.)

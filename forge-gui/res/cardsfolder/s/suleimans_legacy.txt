@@ -1,10 +1,10 @@
 Name:Suleiman's Legacy
 ManaCost:R W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroyAll | TriggerDescription$ When CARDNAME enters, destroy all Djinns and Efreets. They can't be regenerated.
 SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Djinn,Efreet | NoRegen$ True
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Djinn,Efreet | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Djinn,Efreet | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever a Djinn or Efreet enters, destroy it. It can't be regenerated.
 SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredCardLKICopy | NoRegen$ True
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
-Oracle:When Suleiman's Legacy enters the battlefield, destroy all Djinns and Efreets. They can't be regenerated.\nWhenever a Djinn or Efreet enters the battlefield, destroy it. It can't be regenerated.
+Oracle:When Suleiman's Legacy enters, destroy all Djinns and Efreets. They can't be regenerated.\nWhenever a Djinn or Efreet enters, destroy it. It can't be regenerated.

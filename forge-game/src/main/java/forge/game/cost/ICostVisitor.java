@@ -15,6 +15,7 @@ public interface ICostVisitor<T> {
     T visit(CostExert cost);
     T visit(CostEnlist cost);
     T visit(CostFlipCoin cost);
+    T visit(CostForage cost);
     T visit(CostRollDice cost);
     T visit(CostMill cost);
     T visit(CostAddMana cost);
@@ -22,6 +23,7 @@ public interface ICostVisitor<T> {
     T visit(CostPayEnergy cost);
     T visit(CostGainLife cost);
     T visit(CostPartMana cost);
+    T visit(CostPromiseGift cost);
     T visit(CostPutCardToLib cost);
     T visit(CostTap cost);
     T visit(CostSacrifice cost);
@@ -103,6 +105,10 @@ public interface ICostVisitor<T> {
         public T visit(CostFlipCoin cost) {
             return null;
         }
+        @Override
+        public T visit(CostForage cost) {
+            return null;
+        }
 
         @Override
         public T visit(CostRollDice cost) {
@@ -138,6 +144,9 @@ public interface ICostVisitor<T> {
         public T visit(CostPartMana cost) {
             return null;
         }
+
+        @Override
+        public T visit(CostPromiseGift cost) { return null; }
 
         @Override
         public T visit(CostPutCardToLib cost) {
@@ -209,5 +218,4 @@ public interface ICostVisitor<T> {
             return null;
         }
     }
-
 }

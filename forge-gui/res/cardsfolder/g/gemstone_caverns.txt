@@ -8,6 +8,6 @@ SVar:ExileFromHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeTy
 A:AB$ Mana | Cost$ T | Produced$ C | ConditionCheckSVar$ CheckCounter | ConditionSVarCompare$ EQ0 | SubAbility$ DBMana | SpellDescription$ Add {C}. If CARDNAME has a luck counter on it, instead add one mana of any color.
 SVar:DBMana:DB$ Mana | Produced$ Any | ConditionCheckSVar$ CheckCounter | ConditionSVarCompare$ GE1
 SVar:CheckCounter:Count$CardCounters.LUCK
-#TODO: The AI is not yet fully aware that this card can generate any color of mana at any time if it has a luck counter on it.
+# TODO: The AI is not yet fully aware that this card can generate any color of mana at any time if it has a luck counter on it.
 AI:RemoveDeck:All
 Oracle:If Gemstone Caverns is in your opening hand and you're not the starting player, you may begin the game with Gemstone Caverns on the battlefield with a luck counter on it. If you do, exile a card from your hand.\n{T}: Add {C}. If Gemstone Caverns has a luck counter on it, instead add one mana of any color.

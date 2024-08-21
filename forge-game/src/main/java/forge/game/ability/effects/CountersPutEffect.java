@@ -90,7 +90,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
         if (sa.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             if (targetCards.size() == 0) {
                 return stringBuilder.toString();
             }
@@ -132,7 +132,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             // if use targeting we show all targets and corresponding counters
         } else if (sa.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
                 stringBuilder.append(targetCard);
@@ -151,7 +151,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             String what = sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices"));
             stringBuilder.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
+            final List<Card> targetCards = getTargetCards(sa);
             final Iterator<Card> it = targetCards.iterator();
             while (it.hasNext()) {
                 final Card targetCard = it.next();
@@ -193,7 +193,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = activator.getCreaturesInPlay();
             CardCollection leastToughness = new CardCollection(
-                    Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness));
+                    Aggregates.listWithMin(creatsYouCtrl, Card::getNetToughness));
 
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
@@ -316,7 +316,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -362,7 +363,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         }
                         if (obj instanceof Card) {
                             if (etbcounter) {
-                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                                GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                etbTable.put(placer, gameCard, ct, counterAmount);
                             } else {
                                 gameCard.addCounter(ct, counterAmount, placer, table);
                             }
@@ -435,7 +437,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                     counterAmount = cti.getValue();
                                 }
                                 if (etbcounter) {
-                                    gameCard.addEtbCounter(cti.getKey(), counterAmount, placer);
+                                    GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                                    etbTable.put(placer, gameCard, cti.getKey(), counterAmount);
                                 } else {
                                     gameCard.addCounter(cti.getKey(), counterAmount, placer, table);
                                 }
@@ -531,7 +534,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
 
                     if (etbcounter) {
-                        gameCard.addEtbCounter(counterType, counterAmount, placer);
+                        GameEntityCounterTable etbTable = (GameEntityCounterTable) sa.getReplacingObject(AbilityKey.CounterTable);
+                        etbTable.put(placer, gameCard, counterType, counterAmount);
                     } else {
                         gameCard.addCounter(counterType, counterAmount, placer, table);
                     }
@@ -548,10 +552,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                 AbilityKey.mapFromCard(gameCard), false);
                     }
                     if (sa.hasParam("Adapt")) {
-                        game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard),
-                                false);
+                        game.getTriggerHandler().runTrigger(TriggerType.Adapt, AbilityKey.mapFromCard(gameCard), false);
                     }
-
                     if (sa.isKeyword(Keyword.MENTOR)) {
                         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                         runParams.put(AbilityKey.Source, sa.getHostCard());
@@ -631,14 +633,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
             resolvePerType(sa, placer, counterType, counterAmount, table, true);
         }
 
-        int totalAdded = table.totalValues();
+        table.replaceCounterEffect(game, sa, true);
 
+        int totalAdded = table.totalValues();
         if (totalAdded > 0 && rememberAmount) {
             // TODO use SpellAbility Remember later
-            card.addRemembered(Integer.valueOf(totalAdded));
+            card.addRemembered(totalAdded);
         }
-
-        table.replaceCounterEffect(game, sa, true);
 
         if (sa.hasParam("RemovePhase")) {
             for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {
@@ -689,7 +690,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
     protected CounterType chooseTypeFromList(SpellAbility sa, String list, GameEntity obj, PlayerController pc) {
         List<CounterType> choices = Lists.newArrayList();
         for (String s : list.split(",")) {
-            if (!s.equals("") && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
+            if (!s.isEmpty() && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
                 CounterType type = CounterType.getType(s);
                 if (!choices.contains(type)) {
                     choices.add(type);

@@ -1,0 +1,11 @@
+Name:Sage of the Maze
+ManaCost:2 G
+Types:Creature Elf Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | SpellDescription$ Add two mana in any combination of colors.
+A:AB$ Animate | Cost$ T | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ X | Toughness$ X | Types$ Citizen,Creature | Keywords$ Haste | SorcerySpeed$ True | SpellDescription$ Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.
+A:AB$ Untap | Cost$ tapXType<1/Gate> | SpellDescription$ Untap CARDNAME.
+SVar:X:Count$Valid Gate.YouCtrl/Twice
+DeckHints:Type$Gate
+DeckHas:Type$Citizen
+Oracle:{T}: Add two mana in any combination of colors.\n{T}: Until end of turn, target land you control becomes an X/X Citizen creature with haste in addition to its other types, where X is twice the number of Gates you control. Activate only as a sorcery.\nTap an untapped Gate you control: Untap Sage of the Maze.

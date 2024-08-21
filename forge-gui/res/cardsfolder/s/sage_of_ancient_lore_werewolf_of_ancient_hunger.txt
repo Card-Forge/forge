@@ -4,15 +4,15 @@ Types:Creature Human Shaman Werewolf
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 T:Mode$ Phase | Phase$ Upkeep | WerewolfTransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of each upkeep, if no spells were cast last turn, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-#TODO: update logic for the AI to play around this
+# TODO: update logic for the AI to play around this
 AI:RemoveDeck:All
 SVar:NeedsToPlayVar:X GE3
 AlternateMode:DoubleFaced
-Oracle:Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.\nWhen Sage of Ancient Lore enters the battlefield, draw a card.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Sage of Ancient Lore.
+Oracle:Sage of Ancient Lore's power and toughness are each equal to the number of cards in your hand.\nWhen Sage of Ancient Lore enters, draw a card.\nAt the beginning of each upkeep, if no spells were cast last turn, transform Sage of Ancient Lore.
 
 ALTERNATE
 

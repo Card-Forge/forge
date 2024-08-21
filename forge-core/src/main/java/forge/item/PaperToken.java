@@ -3,14 +3,10 @@ package forge.item;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import forge.card.*;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.ImageKeys;
-import forge.card.CardEdition;
-import forge.card.CardRarity;
-import forge.card.CardRules;
-import forge.card.CardSplitType;
-import forge.card.ColorSet;
 import forge.util.MyRandom;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
@@ -151,6 +147,12 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
+    public String getFunctionalVariant() {
+        //Tokens aren't differentiated by name, so they don't really need support for this.
+        return IPaperCard.NO_FUNCTIONAL_VARIANT;
+    }
+
+    @Override
     public int getArtIndex() {
         return artIndex;
     }
@@ -196,6 +198,16 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
         CardSplitType cst = this.cardRules.getSplitType();
         //expand this on future for other tokens that has other backsides besides transform..
         return cst == CardSplitType.Transform;
+    }
+
+    @Override
+    public ICardFace getMainFace() {
+        return this.getRules().getMainPart();
+    }
+
+    @Override
+    public ICardFace getOtherFace() {
+        return this.getRules().getOtherPart();
     }
 
     @Override

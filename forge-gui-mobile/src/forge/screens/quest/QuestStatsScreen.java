@@ -17,8 +17,6 @@ import forge.screens.FScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -89,47 +87,35 @@ public class QuestStatsScreen extends FScreen {
         super(Forge.getLocalizer().getMessage("lblQuestStatistics"), QuestMenu.getMenu());
         lblZep.setHeight(Utils.scale(60));
 
-        cbxPet.setDropDownChangeHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final int slot = 1;
-                final int index = cbxPet.getSelectedIndex();
-                List<QuestPetController> pets = FModel.getQuest().getPetsStorage().getAvaliablePets(slot, FModel.getQuest().getAssets());
-                String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
-                FModel.getQuest().selectPet(slot, petName);
+        cbxPet.setDropDownChangeHandler(e -> {
+            final int slot = 1;
+            final int index = cbxPet.getSelectedIndex();
+            List<QuestPetController> pets = FModel.getQuest().getPetsStorage().getAvaliablePets(slot, FModel.getQuest().getAssets());
+            String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
+            FModel.getQuest().selectPet(slot, petName);
+            FModel.getQuest().save();
+        });
+
+        cbxMatchLength.setDropDownChangeHandler(e -> {
+            String match = cbxMatchLength.getSelectedItem();
+            if (match != null) {
+                FModel.getQuest().setMatchLength(match.substring(match.length() - 1));
                 FModel.getQuest().save();
             }
         });
 
-        cbxMatchLength.setDropDownChangeHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                String match = cbxMatchLength.getSelectedItem();
-                if (match != null) {
-                    FModel.getQuest().setMatchLength(match.substring(match.length() - 1));
-                    FModel.getQuest().save();
-                }
-            }
+        cbPlant.setCommand(e -> {
+            // This can't be translated. As the English string "Plant" is used to find the Plant pet.
+            FModel.getQuest().selectPet(0, cbPlant.isSelected() ? "Plant" : null);
+            FModel.getQuest().save();
         });
-
-        cbPlant.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                // This can't be translated. As the English string "Plant" is used to find the Plant pet.
-                FModel.getQuest().selectPet(0, cbPlant.isSelected() ? "Plant" : null);
-                FModel.getQuest().save();
+        lblZep.setCommand(e -> {
+            if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblLaunchaZeppelin"))) {
+                return;
             }
-        });
-        lblZep.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (!QuestUtil.checkActiveQuest(Forge.getLocalizer().getMessage("lblLaunchaZeppelin"))) {
-                    return;
-                }
-                FModel.getQuest().getAchievements().setCurrentChallenges(null);
-                FModel.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
-                update();
-            }
+            FModel.getQuest().getAchievements().setCurrentChallenges(null);
+            FModel.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
+            update();
         });
     }
 

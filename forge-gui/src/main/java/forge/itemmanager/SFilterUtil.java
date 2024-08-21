@@ -51,7 +51,7 @@ public class SFilterUtil {
             try {
                 Predicate<CardRules> filter = expression.evaluate();
                 if (filter != null) {
-                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard.FN_GET_RULES);
+                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard::getRules);
                 }
             }
             catch (Exception ignored) {
@@ -74,7 +74,7 @@ public class SFilterUtil {
         }
         Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
 
-        return Predicates.compose(textFilter, PaperCard.FN_GET_RULES);
+        return Predicates.compose(textFilter, PaperCard::getRules);
     }
 
     private static List<String> getSplitText(String text) {
@@ -145,50 +145,47 @@ public class SFilterUtil {
 
     public static Predicate<PaperCard> buildStarRatingFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap, final HashSet<StarRating> QuestRatings) {
         final Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap2 = buttonMap;
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
+        return card -> {
 
-                StarRating r = new StarRating();
-                r.Name = card.getName();
-                r.Edition = card.getEdition();
-                int j = 0;
-                for (int i = 1; i < 6; i++) {
-                    r.rating = i;
-                    if (QuestRatings.contains(r)) {
-                        j = i;
-                    }
+            StarRating r = new StarRating();
+            r.Name = card.getName();
+            r.Edition = card.getEdition();
+            int j = 0;
+            for (int i = 1; i < 6; i++) {
+                r.rating = i;
+                if (QuestRatings.contains(r)) {
+                    j = i;
                 }
-                boolean result = true;
-
-                if (j == 0) {
-                    if (!buttonMap2.get(StatTypes.RATE_NONE).isSelected()) {
-                        result = false;
-                    }
-                } else if (j == 1) {
-                    if (!buttonMap2.get(StatTypes.RATE_1).isSelected()) {
-                        result = false;
-                    }
-                } else if (j == 2) {
-                    if (!buttonMap2.get(StatTypes.RATE_2).isSelected()) {
-                        result = false;
-                    }
-                } else if (j == 3) {
-                    if (!buttonMap2.get(StatTypes.RATE_3).isSelected()) {
-                        result = false;
-                    }
-                } else if (j == 4) {
-                    if (!buttonMap2.get(StatTypes.RATE_4).isSelected()) {
-                        result = false;
-                    }
-                } else if (j == 5) {
-                    if (!buttonMap2.get(StatTypes.RATE_5).isSelected()) {
-                        result = false;
-                    }
-                }
-                return result;
-
             }
+            boolean result = true;
+
+            if (j == 0) {
+                if (!buttonMap2.get(StatTypes.RATE_NONE).isSelected()) {
+                    result = false;
+                }
+            } else if (j == 1) {
+                if (!buttonMap2.get(StatTypes.RATE_1).isSelected()) {
+                    result = false;
+                }
+            } else if (j == 2) {
+                if (!buttonMap2.get(StatTypes.RATE_2).isSelected()) {
+                    result = false;
+                }
+            } else if (j == 3) {
+                if (!buttonMap2.get(StatTypes.RATE_3).isSelected()) {
+                    result = false;
+                }
+            } else if (j == 4) {
+                if (!buttonMap2.get(StatTypes.RATE_4).isSelected()) {
+                    result = false;
+                }
+            } else if (j == 5) {
+                if (!buttonMap2.get(StatTypes.RATE_5).isSelected()) {
+                    result = false;
+                }
+            }
+            return result;
+
         };
     }
 
@@ -197,33 +194,28 @@ public class SFilterUtil {
                 + ((buttonMap.get(StatTypes.FOIL_NEW).isSelected()) ? 2 : 0)
                 + ((buttonMap.get(StatTypes.FOIL_NONE).isSelected()) ? 4 : 0));
 
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
+        return card -> {
 
-                boolean result = false;
+            boolean result = false;
 
-                CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
-                if ((Foil & 1) == 1) {
-                    // Old Style Foil
-                    if (edition.getFoilType() == CardEdition.FoilType.OLD_STYLE) {
-                        result = result || card.isFoil();
-                    }
+            CardEdition edition = StaticData.instance().getEditions().get(card.getEdition());
+            if ((Foil & 1) == 1) {
+                // Old Style Foil
+                if (edition.getFoilType() == CardEdition.FoilType.OLD_STYLE) {
+                    result = result || card.isFoil();
                 }
-                if ((Foil & 2) == 2) {
-                    // New Style Foil
-                    if (edition.getFoilType() == CardEdition.FoilType.MODERN) {
-                        result = result || card.isFoil();
-                    }
-                }
-                if ((Foil & 4) == 4) {
-                    result = result || !card.isFoil();
-                }
-                return result;
             }
-
+            if ((Foil & 2) == 2) {
+                // New Style Foil
+                if (edition.getFoilType() == CardEdition.FoilType.MODERN) {
+                    result = result || card.isFoil();
+                }
+            }
+            if ((Foil & 4) == 4) {
+                result = result || !card.isFoil();
+            }
+            return result;
         };
-
     }
 
     public static Predicate<PaperCard> buildColorFilter(Map<SItemManagerUtil.StatTypes, ? extends IButton> buttonMap) {
@@ -249,86 +241,80 @@ public class SFilterUtil {
         final boolean wantColorless = buttonMap.get(StatTypes.COLORLESS).isSelected();
         final boolean wantMulticolor = buttonMap.get(StatTypes.MULTICOLOR).isSelected();
 
-        return new Predicate<PaperCard>() {
-            @Override
-            public boolean apply(PaperCard card) {
-                CardRules rules = card.getRules();
-                ColorSet color = rules.getColor();
-                boolean allColorsFilteredOut = colors == 0;
+        return card -> {
+            CardRules rules = card.getRules();
+            ColorSet color = rules.getColor();
+            boolean allColorsFilteredOut = colors == 0;
 
-                //use color identity for lands, which allows filtering to just lands that can be played in your deck
-                boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
-                if (useColorIdentity) {
-                    color = rules.getColorIdentity();
-                }
-
-                boolean result = true;
-                if (wantMulticolor) {
-                    if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
-                        result = color.isMulticolor() || (wantColorless && color.isColorless());
-                    } else if (colors != ColorSet.ALL_COLORS.getColor()) {
-                        if (useColorIdentity && !allColorsFilteredOut) {
-                            result = color.hasAnyColor(colors) || (wantColorless && color.isColorless());
-                        } else {
-                            result = (wantColorless && color.isColorless()) || rules.canCastWithAvailable(colors);
-                        }
-                    }
-                } else {
-                    result = !color.isMulticolor();
-                    if (colors != ColorSet.ALL_COLORS.getColor()) {
-                        if (useColorIdentity && !allColorsFilteredOut) {
-                            result = result && (color.hasAnyColor(colors) || (wantColorless && color.isColorless()));
-                        } else {
-                            result = result && (color.isColorless() || rules.canCastWithAvailable(colors));
-                        }
-                    }
-                }
-                if (!wantColorless) {
-                    if (colors != 0 && colors != ColorSet.ALL_COLORS.getColor()) {
-                        //if colorless filtered out ensure phyrexian cards don't appear
-                        //unless at least one of their colors is selected
-                        result = result && color.hasAnyColor(colors);
-                    }
-                    result = result && !color.isColorless();
-                }
-                return result;
+            //use color identity for lands, which allows filtering to just lands that can be played in your deck
+            boolean useColorIdentity = rules.getType().isLand() && !allColorsFilteredOut && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FILTER_LANDS_BY_COLOR_IDENTITY);
+            if (useColorIdentity) {
+                color = rules.getColorIdentity();
             }
+
+            boolean result = true;
+            if (wantMulticolor) {
+                if (colors == 0) { //handle showing all multi-color cards if all 5 colors are filtered
+                    result = color.isMulticolor() || (wantColorless && color.isColorless());
+                } else if (colors != ColorSet.ALL_COLORS.getColor()) {
+                    if (useColorIdentity && !allColorsFilteredOut) {
+                        result = color.hasAnyColor(colors) || (wantColorless && color.isColorless());
+                    } else {
+                        result = (wantColorless && color.isColorless()) || rules.canCastWithAvailable(colors);
+                    }
+                }
+            } else {
+                result = !color.isMulticolor();
+                if (colors != ColorSet.ALL_COLORS.getColor()) {
+                    if (useColorIdentity && !allColorsFilteredOut) {
+                        result = result && (color.hasAnyColor(colors) || (wantColorless && color.isColorless()));
+                    } else {
+                        result = result && (color.isColorless() || rules.canCastWithAvailable(colors));
+                    }
+                }
+            }
+            if (!wantColorless) {
+                if (colors != 0 && colors != ColorSet.ALL_COLORS.getColor()) {
+                    //if colorless filtered out ensure phyrexian cards don't appear
+                    //unless at least one of their colors is selected
+                    result = result && color.hasAnyColor(colors);
+                }
+                result = result && !color.isColorless();
+            }
+            return result;
         };
     }
 
     public static Predicate<DeckProxy> buildDeckColorFilter(final Map<StatTypes, ? extends IButton> buttonMap) {
-        return new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(DeckProxy input) {
-                byte colorProfile = input.getColor().getColor();
-                if (colorProfile == 0) {
-                    return buttonMap.get(StatTypes.DECK_COLORLESS).isSelected();
-                }
-
-                boolean wantMulticolor = buttonMap.get(StatTypes.DECK_MULTICOLOR).isSelected();
-                if (!wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
-                    return false;
-                }
-
-                byte colors = 0;
-                if (buttonMap.get(StatTypes.DECK_WHITE).isSelected()) {
-                    colors |= MagicColor.WHITE;
-                }
-                if (buttonMap.get(StatTypes.DECK_BLUE).isSelected()) {
-                    colors |= MagicColor.BLUE;
-                }
-                if (buttonMap.get(StatTypes.DECK_BLACK).isSelected()) {
-                    colors |= MagicColor.BLACK;
-                }
-                if (buttonMap.get(StatTypes.DECK_RED).isSelected()) {
-                    colors |= MagicColor.RED;
-                }
-                if (buttonMap.get(StatTypes.DECK_GREEN).isSelected()) {
-                    colors |= MagicColor.GREEN;
-                }
-
-                return colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1 || (colorProfile & colors) == colorProfile;
+        return input -> {
+            byte colorProfile = input.getColor().getColor();
+            if (colorProfile == 0) {
+                return buttonMap.get(StatTypes.DECK_COLORLESS).isSelected();
             }
+
+            boolean wantMulticolor = buttonMap.get(StatTypes.DECK_MULTICOLOR).isSelected();
+            if (!wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1) {
+                return false;
+            }
+
+            byte colors = 0;
+            if (buttonMap.get(StatTypes.DECK_WHITE).isSelected()) {
+                colors |= MagicColor.WHITE;
+            }
+            if (buttonMap.get(StatTypes.DECK_BLUE).isSelected()) {
+                colors |= MagicColor.BLUE;
+            }
+            if (buttonMap.get(StatTypes.DECK_BLACK).isSelected()) {
+                colors |= MagicColor.BLACK;
+            }
+            if (buttonMap.get(StatTypes.DECK_RED).isSelected()) {
+                colors |= MagicColor.RED;
+            }
+            if (buttonMap.get(StatTypes.DECK_GREEN).isSelected()) {
+                colors |= MagicColor.GREEN;
+            }
+
+            return colors == 0 && wantMulticolor && BinaryUtil.bitCount(colorProfile) > 1 || (colorProfile & colors) == colorProfile;
         };
     }
 

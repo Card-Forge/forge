@@ -67,7 +67,7 @@ public class TargetSelection {
         this.ability = currentAbility;
     }
 
-    private final TargetRestrictions getTgt() {
+    private TargetRestrictions getTgt() {
         return this.ability.getTargetRestrictions();
     }
 
@@ -85,8 +85,8 @@ public class TargetSelection {
         final TargetRestrictions tgt = getTgt();
 
         // Number of targets is explicitly set only if spell is being redirected (ex. Swerve or Redirect)
-        final int minTargets = numTargets != null ? numTargets.intValue() : ability.getMinTargets();
-        final int maxTargets = numTargets != null ? numTargets.intValue() : ability.getMaxTargets();
+        final int minTargets = numTargets != null ? numTargets : ability.getMinTargets();
+        final int maxTargets = numTargets != null ? numTargets : ability.getMaxTargets();
         //final int maxTotalCMC = tgt.getMaxTotalCMC(ability.getHostCard(), ability);
         final int numTargeted = ability.getTargets().size();
         final boolean isSingleZone = tgt.isSingleZone();
@@ -110,7 +110,7 @@ public class TargetSelection {
         if (zones.size() == 1 && zones.get(0) == ZoneType.Stack) {
             // If Zone is Stack, the choices are handled slightly differently.
             // Handle everything inside function due to interaction with StackInstance
-            return chooseCardFromStack(mandatory);
+            return chooseCardFromStack(mandatory, numTargets);
         }
 
         List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
@@ -205,7 +205,7 @@ public class TargetSelection {
         PlayerView playerView = controller.getLocalPlayerView();
         PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets, true);
         if (!zones.contains(ZoneType.Stack)) {
-            InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered);
+            InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, numTargets, divisionValues, filter, mustTargetFiltered);
             inp.showAndWait();
             choiceResult = !inp.hasCancelled();
             bTargetingDone = inp.hasPressedOk();
@@ -218,7 +218,7 @@ public class TargetSelection {
         return choiceResult && chooseTargets(numTargets, divisionValues, filter, optional, canFilterMustTarget);
     }
 
-    private final boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
+    private boolean chooseCardFromList(final List<Card> choices, final boolean targeted, final boolean mandatory) {
         // Send in a list of valid cards, and popup a choice box to target
         final Game game = ability.getActivatingPlayer().getGame();
 
@@ -318,7 +318,7 @@ public class TargetSelection {
         return true;
     }
 
-    private final boolean chooseCardFromStack(final boolean mandatory) {
+    private boolean chooseCardFromStack(final boolean mandatory, final Integer numTargets) {
         final TargetRestrictions tgt = this.getTgt();
         final String message = TextUtil.fastReplace(tgt.getVTSelection(),
                 "CARDNAME", ability.getHostCard().toString());
@@ -336,12 +336,13 @@ public class TargetSelection {
         }
 
         while (!bTargetingDone) {
-            if (ability.isMaxTargetChosen()) {
+            if (ability.isMaxTargetChosen() || (numTargets != null && ability.getTargets().size() == numTargets)) {
                 bTargetingDone = true;
                 return true;
             }
 
-            if (!selectOptions.contains("[FINISH TARGETING]") && ability.isMinTargetChosen()) {
+            if (!selectOptions.contains("[FINISH TARGETING]") && ability.isMinTargetChosen() &&
+                    (numTargets == null || ability.getTargets().size() == numTargets)) {
                 selectOptions.add("[FINISH TARGETING]");
             }
 

@@ -17,24 +17,16 @@
  */
 package forge.game;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.collect.*;
-import forge.game.card.*;
-import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityAlternativeCost;
-import forge.util.Aggregates;
-import org.apache.commons.lang3.StringUtils;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.*;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -46,12 +38,20 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
+import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAlternativeCost;
 import forge.game.staticability.StaticAbilityLayer;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -81,7 +81,7 @@ public final class GameActionUtil {
      *         a possible alternative cost the provided activator can use to pay
      *         the provided {@link SpellAbility}.
      */
-    public static final List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
+    public static List<SpellAbility> getAlternativeCosts(final SpellAbility sa, final Player activator, boolean altCostOnly) {
         final List<SpellAbility> alternatives = Lists.newArrayList();
 
         Card source = sa.getHostCard();
@@ -210,8 +210,8 @@ public final class GameActionUtil {
                         && source.isForetold() && !source.enteredThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
-                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
-                    foretold.putParam("ReduceCost", reduced.toString());
+                    int reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", Integer.toString(reduced));
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -228,24 +228,29 @@ public final class GameActionUtil {
 
                 // some needs to check after ability was put on the stack
                 if (game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+                    Map<StaticAbility, CardPlayOption> oldMayPlay = source.getMayPlay();
                     Zone oldZone = source.getLastKnownZone();
                     Card stackCopy = source;
                     if (!source.isLKI()) {
                         stackCopy = CardCopyService.getLKICopy(source);
                     }
                     stackCopy.setLastKnownZone(game.getStackZone());
+                    stackCopy.setCastFrom(oldZone);
                     lkicheck = true;
 
                     stackCopy.clearStaticChangedCardKeywords(false);
                     CardCollection preList = new CardCollection(stackCopy);
                     game.getAction().checkStaticAbilities(false, Sets.newHashSet(stackCopy), preList);
 
+                    stackCopy.setMayPlay(oldMayPlay);
+
                     for (final KeywordInterface inst : stackCopy.getUnhiddenKeywords()) {
                         for (SpellAbility iSa : inst.getAbilities()) {
                             // do only non intrinsic
                             if (iSa.isSpell() && !iSa.isIntrinsic()) {
                                 alternatives.add(iSa);
-                                alternatives.addAll(StaticAbilityAlternativeCost.alternativeCosts(iSa, source, activator));
+                                alternatives.addAll(getMayPlaySpellOptions(iSa, stackCopy, activator, altCostOnly));
+                                // currently only AltCost get added this way
                             }
                         }
                     }
@@ -429,6 +434,9 @@ public final class GameActionUtil {
                 String[] k = keyword.split(":");
                 final Cost cost = new Cost(k[1], false);
                 costs.add(new OptionalCostValue(OptionalCost.Entwine, cost));
+            } else if (keyword.startsWith("Gift")) {
+              final Cost cost = new Cost("PromiseGift", false);
+              costs.add(new OptionalCostValue(OptionalCost.PromiseGift, cost));
             } else if (keyword.startsWith("Kicker")) {
                 String[] sCosts = TextUtil.split(keyword.substring(6), ':');
                 int numKickers = sCosts.length;
@@ -563,93 +571,106 @@ public final class GameActionUtil {
         for (KeywordInterface ki : host.getKeywords()) {
             final String o = ki.getOriginal();
             if (o.startsWith("Casualty")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String n = o.split(":")[1];
-                    if (host.wasCast() && n.equals("X")) {
-                        CardCollectionView creatures = activator.getCreaturesInPlay();
-                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
-                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
-                    }
-                    final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
-                            " or greater>";
-                    final Cost cost = new Cost(casualtyCost, false);
-                    String str = "Pay for Casualty? " + cost.toSimpleString();
-                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+                String n = o.split(":")[1];
+                if (host.wasCast() && n.equals("X")) {
+                    CardCollectionView creatures = activator.getCreaturesInPlay();
+                    int max = Aggregates.max(creatures, Card::getNetPower);
+                    n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
+                }
+                final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
+                        " or greater>";
+                final Cost cost = new Cost(casualtyCost, false);
+                String str = "Pay for Casualty? " + cost.toSimpleString();
+                boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
-                    tr.setSVar("CasualtyPaid", v ? "1" : "0");
-                    tr.getOverridingAbility().setSVar("CasualtyPaid", v ? "1" : "0");
-                    tr.setSVar("Casualty", v ? n : "0");
-                    tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
-
-                    if (v) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                if (v) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(ki, Integer.parseInt(n));
                 }
             } else if (o.equals("Conspire")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
-                        "creature that shares a color with " + host.getName() + ">";
-                    final Cost cost = new Cost(conspireCost, false);
-                    String str = "Pay for Conspire? " + cost.toSimpleString();
+                final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
+                    "creature that shares a color with " + host.getName() + ">";
+                final Cost cost = new Cost(conspireCost, false);
+                String str = "Pay for Conspire? " + cost.toSimpleString();
 
-                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
-                    tr.setSVar("Conspire", v ? "1" : "0");
-
-                    if (v) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                if (pc.addKeywordCost(sa, cost, ki, str)) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    result.setOptionalKeywordAmount(ki, 1);
+                    reset = true;
+                }
+            } else if (o.startsWith("Multikicker")) {
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
+
+                String str = "Choose Amount for Multikicker: " + cost.toSimpleString();
+
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                result.setOptionalKeywordAmount(ki, v);
+            } else if (o.startsWith("Offspring")) {
+                String[] k = o.split(":");
+                final Cost cost = new Cost(k[1], false);
+                String str = "Pay for Offspring? " + cost.toSimpleString();
+
+                boolean v = pc.addKeywordCost(sa, cost, ki, str);
+
+                if (v) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                    result.setOptionalKeywordAmount(ki, 1);
                 }
             } else if (o.startsWith("Replicate")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String costStr = o.split(":")[1];
-                    final Cost cost = new Cost(costStr, false);
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
 
-                    String str = "Choose Amount for Replicate: " + cost.toSimpleString();
+                String str = "Choose Amount for Replicate: " + cost.toSimpleString();
 
-                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
-                    tr.setSVar("ReplicateAmount", String.valueOf(v));
-                    tr.getOverridingAbility().setSVar("ReplicateAmount", String.valueOf(v));
-
-                    for (int i = 0; i < v; i++) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
                 }
             } else if (o.startsWith("Squad")) {
-                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
-                if (tr != null) {
-                    String costStr = o.split(":")[1];
-                    final Cost cost = new Cost(costStr, false);
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
 
-                    String str = "Choose amount for Squad: " + cost.toSimpleString();
+                String str = "Choose amount for Squad: " + cost.toSimpleString();
 
-                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
 
-                    tr.setSVar("SquadAmount", String.valueOf(v));
-                    tr.getOverridingAbility().setSVar("SquadAmount", String.valueOf(v));
-
-                    for (int i = 0; i < v; i++) {
-                        if (result == null) {
-                            result = sa.copy();
-                        }
-                        result.getPayCosts().add(cost);
-                        reset = true;
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
                     }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
                 }
             }
         }
@@ -657,7 +678,7 @@ public final class GameActionUtil {
         if (host.isCreature()) {
             String kw = "As an additional cost to cast creature spells," +
                     " you may pay any amount of mana. If you do, that creature enters " +
-                    "the battlefield with that many additional +1/+1 counters on it.";
+                    "with that many additional +1/+1 counters on it.";
 
             for (final Card c : activator.getZone(ZoneType.Battlefield)) {
                 for (KeywordInterface ki : c.getKeywords()) {
@@ -700,7 +721,7 @@ public final class GameActionUtil {
 
         eff.setImageKey(sourceCard.getImageKey());
         eff.setColor(MagicColor.COLORLESS);
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
         // try to get the SpellAbility from the mana ability
         //eff.setEffectSource((SpellAbility)null);
 
@@ -714,7 +735,7 @@ public final class GameActionUtil {
             sa.setSVar(amount, sourceCard.getSVar(amount));
         }
 
-        String desc = "It enters the battlefield with ";
+        String desc = "It enters with ";
         desc += Lang.nounWithNumeral(amount, CounterType.getType(counter).getName() + " counter");
         desc += " on it.";
 
@@ -850,7 +871,7 @@ public final class GameActionUtil {
             return;
         }
 
-        if (fromZone != null) { // and not a copy
+        if (fromZone != null && !fromZone.is(ZoneType.None)) { // and not a copy
             // might have been an alternative lki host
             oldCard = ability.getCardState().getCard();
 
@@ -860,7 +881,7 @@ public final class GameActionUtil {
             // skip GameAction
             oldCard.getZone().remove(oldCard);
             // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
-            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            Integer newPosition = zonePosition >= 0 ? Math.min(zonePosition, fromZone.size()) : null;
             fromZone.add(oldCard, newPosition, null, true);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);

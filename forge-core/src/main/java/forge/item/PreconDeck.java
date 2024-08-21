@@ -22,8 +22,6 @@ import java.io.FilenameFilter;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.deck.Deck;
@@ -89,16 +87,9 @@ public class PreconDeck implements InventoryItemFromSet {
         return this.description;
     }
 
-    public static final Function<PreconDeck, String> FN_NAME_SELECTOR = new Function<PreconDeck, String>() {
-        @Override
-        public String apply(PreconDeck arg1) {
-            return arg1.getName();
-        }
-    };
-
     public static class Reader extends StorageReaderFolder<PreconDeck> {
         public Reader(final File deckDir0) {
-            super(deckDir0, PreconDeck.FN_NAME_SELECTOR);
+            super(deckDir0, PreconDeck::getName);
         }
 
         @Override
@@ -123,13 +114,6 @@ public class PreconDeck implements InventoryItemFromSet {
             return DeckStorage.DCK_FILE_FILTER;
         }
     }
-    
-    public static final Function<PreconDeck, Deck> FN_GET_DECK = new Function<PreconDeck, Deck>() {
-        @Override
-        public Deck apply(PreconDeck arg1) {
-            return arg1.getDeck();
-        }
-    };
 
     @Override
     public String getImageKey(boolean altState) {

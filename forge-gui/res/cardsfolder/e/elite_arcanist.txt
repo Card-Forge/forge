@@ -2,7 +2,7 @@ Name:Elite Arcanist
 ManaCost:3 U
 Types:Creature Human Wizard
 PT:1/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile an instant card from your hand.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, you may exile an instant card from your hand.
 SVar:TrigExile:DB$ ChangeZone | RememberChanged$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant | ChangeNum$ 1
 A:AB$ Play | Cost$ X T | Valid$ Card.IsRemembered+ExiledWithSource | ValidSA$ Spell | ValidZone$ Exile | Amount$ All | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ Copy the exiled card. You may cast the copy without paying its mana cost. X is the mana value of the exiled card.
 SVar:X:Remembered$CardManaCost
@@ -10,6 +10,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered+ExiledWithSource | Origin$ Ex
 SVar:ForgetCard:DB$ Cleanup | ForgetDefined$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-#Amount$ All | CopyOnce$ True for Strionic Resonator
+# Amount$ All | CopyOnce$ True for Strionic Resonator
 AI:RemoveDeck:All
-Oracle:When Elite Arcanist enters the battlefield, you may exile an instant card from your hand.\n{X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the mana value of the exiled card.
+Oracle:When Elite Arcanist enters, you may exile an instant card from your hand.\n{X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the mana value of the exiled card.

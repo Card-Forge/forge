@@ -1,0 +1,13 @@
+Name:Voltstorm Angel
+ManaCost:3 W W
+Types:Creature Angel
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of combat on your turn, you may pay {E}{E}. When you do, ABILITY
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<2> | Execute$ TrigCharm | TriggerDescription$ When you do, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBSelf,DBOthers | CharmNum$ 1
+SVar:DBSelf:DB$ Pump | Defined$ Self | KW$ Vigilance & Lifelink | SpellDescription$ CARDNAME gains vigilance and lifelink until end of turn.
+SVar:DBOthers:DB$ Pump | Defined$ Valid Creature.StrictlyOther+YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Other creatures you control get +1/+1 until end of turn.
+Oracle:Flying\nWhen Voltstorm Angel enters, you get {E}{E}{E} (three energy counters).\nAt the beginning of combat on your turn, you may pay {E}{E}. When you do, choose one—\n• Voltstorm Angel gains vigilance and lifelink until end of turn.\n• Other creatures you control get +1/+1 until end of turn.

@@ -17,17 +17,9 @@ public class VGameMenu extends FDropDownMenu {
     @Override
     protected void buildMenu() {
 
-        addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ThreadUtil.invokeInGameThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        MatchController.instance.concede();
-                    }
-                });
-            }
-        }));
+        addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
+                ThreadUtil.invokeInGameThread(MatchController.instance::concede)
+        ));
         /*addItem(new FMenuItem("Save Game", FSkinImage.SAVE, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
@@ -69,23 +61,17 @@ public class VGameMenu extends FDropDownMenu {
             }
         }));
         if (!Forge.isMobileAdventureMode) {
-            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    //pause game when spectating AI Match
-                    if (!MatchController.instance.hasLocalPlayers()) {
-                        if(!MatchController.instance.isGamePaused())
-                            MatchController.instance.pauseMatch();
-                    }
-                    SettingsScreen.show(false);
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                //pause game when spectating AI Match
+                if (!MatchController.instance.hasLocalPlayers()) {
+                    if(!MatchController.instance.isGamePaused())
+                        MatchController.instance.pauseMatch();
                 }
+                SettingsScreen.show(false);
             }));
-            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    MatchController.instance.showWinlose();
-                }
-            }));
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, e ->
+                    MatchController.instance.showWinlose()
+            ));
         }
     }
 }

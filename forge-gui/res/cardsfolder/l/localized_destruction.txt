@@ -1,0 +1,9 @@
+Name:Localized Destruction
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ PutCounter | Defined$ You | CounterType$ ENERGY | SubAbility$ DBChooseNumber | StackDescription$ SpellDescription | SpellDescription$ You get {E} (an energy counter), then you may pay one or more {E}.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Count$YourCountersEnergy | ListTitle$ Choose amount of energy to pay | SubAbility$ DBPumpAll | StackDescription$ None
+SVar:DBPumpAll:DB$ PumpAll | ConditionCheckSVar$ X | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | ValidCards$ Creature.YouCtrl+powerEQX | KW$ Indestructible | SubAbility$ DBDestroyAll | StackDescription$ SpellDescription | SpellDescription$ If you do, each creature you control with power equal to the amount of {E} paid this way gains indestructible until end of turn.,,,,,,
+SVar:X:Count$ChosenNumber
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | SpellDescription$ Destroy all creatures.
+Oracle:You get {E} (an energy counter), then you may pay one or more {E}. If you do, each creature you control with power equal to the amount of {E} paid this way gains indestructible until end of turn.\nDestroy all creatures.

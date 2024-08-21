@@ -1,7 +1,5 @@
 [metadata]
 Name=lich
-[Avatar]
-
 [Main]
 1 Acererak the Archlich|AFR|1
 1 Blessing of Belzenlok|MB1|1
@@ -40,12 +38,4 @@ Name=lich
 1 Unmake the Graves|M15|1
 1 Vindictive Lich|C17|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

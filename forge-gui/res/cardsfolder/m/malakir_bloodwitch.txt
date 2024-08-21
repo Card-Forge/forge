@@ -4,11 +4,11 @@ Types:Creature Vampire Shaman
 PT:4/4
 K:Flying
 K:Protection from white
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
+# AFLifeLost will be set by LoseLife
 SVar:X:Count$Valid Vampire.YouCtrl
 AI:RemoveDeck:Random
-Oracle:Flying, protection from white\nWhen Malakir Bloodwitch enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
+Oracle:Flying, protection from white\nWhen Malakir Bloodwitch enters, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.

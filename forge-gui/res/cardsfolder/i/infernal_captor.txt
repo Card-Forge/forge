@@ -1,0 +1,9 @@
+Name:Infernal Captor
+ManaCost:3 R
+Types:Creature Devil Rogue
+PT:3/3
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ When CARDNAME exploits a creature, gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target artifact or creature | ValidTgts$ Artifact,Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste
+DeckHas:Ability$Sacrifice
+Oracle:Exploit (When this creature enters, you may sacrifice a creature.)\nWhen Infernal Captor exploits a creature, gain control of target artifact or creature until end of turn. Untap that permanent. It gains haste until end of turn.

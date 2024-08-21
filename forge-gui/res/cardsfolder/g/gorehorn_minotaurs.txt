@@ -3,4 +3,4 @@ ManaCost:2 R R
 Types:Creature Minotaur Warrior
 PT:3/3
 K:Bloodthirst:2
-Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)
+Oracle:Bloodthirst 2 (If an opponent was dealt damage this turn, this creature enters with two +1/+1 counters on it.)

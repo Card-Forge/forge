@@ -1,7 +1,5 @@
 [metadata]
 Name=bonedragon
-[Avatar]
-
 [Main]
 1 Ancient Brass Dragon|CLB|1
 1 Black Dragon|AFR|1
@@ -32,12 +30,4 @@ Name=bonedragon
 4 Swamp|CLB|4
 2 Urza's Incubator|DMR|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

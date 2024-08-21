@@ -41,13 +41,13 @@ public class CardCopyService {
         Card out;
         if (copyFrom.isRealToken() || copyFrom.getCopiedPermanent() != null || copyFrom.getPaperCard() == null) {
             out = copyStats(copyFrom, owner, assignNewId);
-            out.setToken(copyFrom.isToken());
             out.setEffectSource(copyFrom.getEffectSource());
             out.setBoon(copyFrom.isBoon());
             out.dangerouslySetGame(toGame);
 
             // need to copy this values for the tokens
             out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+            out.setCopiedPermanent(copyFrom.getCopiedPermanent());
         } else {
             out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
                     : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
@@ -56,13 +56,18 @@ public class CardCopyService {
         out.setZone(copyFrom.getZone());
         out.setState(copyFrom.getFaceupCardStateName(), true);
         out.setBackSide(copyFrom.isBackSide());
+        out.setGamePieceType(copyFrom.getGamePieceType());
+        out.setTokenCard(copyFrom.isTokenCard());
 
         if (toGame == copyFrom.getGame()) {
             // Only copy these things if we're not copying them into a new game
 
+            out.setCollectible(copyFrom.isCollectible());
+
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
             out.setAttachedCards(copyFrom.getAttachedCards());
             out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+
             out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
 
             out.setSpecialized(copyFrom.isSpecialized());
@@ -161,7 +166,6 @@ public class CardCopyService {
         }
     }
 
-
     // ========================================================
     // LKI functions
 
@@ -184,7 +188,6 @@ public class CardCopyService {
     public static Card getLKICopy(final Card c, Map<Integer, Card> cachedMap) {
         return new CardCopyService(c).getLKICopy(cachedMap);
     }
-
 
     public static GameEntity getLKICopy(final GameEntity c, Map<Integer, Card> cachedMap) {
         // Ideally, we'd just convert all calls to getLKICopy to use the Map version
@@ -212,7 +215,7 @@ public class CardCopyService {
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
         bread.setData("Player", copyFrom.getController().getName());
-        Sentry.addBreadcrumb(bread, copyFrom);
+        Sentry.addBreadcrumb(bread);
 
         final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);
@@ -220,6 +223,7 @@ public class CardCopyService {
         newCopy.setOwner(copyFrom.getOwner());
         newCopy.setController(copyFrom.getController(), 0);
         newCopy.setCommander(copyFrom.isCommander());
+        newCopy.setCollectible(copyFrom.isCollectible());
 
         newCopy.setRules(copyFrom.getRules());
 
@@ -274,9 +278,8 @@ public class CardCopyService {
         }
         */
 
-        newCopy.setToken(copyFrom.isToken());
-        newCopy.setCopiedSpell(copyFrom.isCopiedSpell());
-        newCopy.setImmutable(copyFrom.isImmutable());
+        newCopy.setGamePieceType(copyFrom.getGamePieceType());
+        newCopy.setTokenCard(copyFrom.isTokenCard());
         newCopy.setEmblem(copyFrom.isEmblem());
 
         // lock in the current P/T
@@ -297,6 +300,7 @@ public class CardCopyService {
         newCopy.setRenowned(copyFrom.isRenowned());
         newCopy.setSolved(copyFrom.isSolved());
         newCopy.setSaddled(copyFrom.isSaddled());
+        newCopy.setPromisedGift(copyFrom.getPromisedGift());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         newCopy.setSuspectedTimestamp(copyFrom.getSuspectedTimestamp());
 
@@ -307,6 +311,7 @@ public class CardCopyService {
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(copyFrom.getDamageReceivedThisTurn());
+        newCopy.setExcessDamageReceivedThisTurn(copyFrom.getExcessDamageThisTurn());
 
         // these are LKI already
         newCopy.getBlockedThisTurn().addAll(copyFrom.getBlockedThisTurn());
@@ -338,7 +343,7 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
+        //newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 
@@ -374,8 +379,6 @@ public class CardCopyService {
             newCopy.updateKeywordsCache(newCopy.getState(s));
         }
 
-        newCopy.setKickerMagnitude(copyFrom.getKickerMagnitude());
-
         if (copyFrom.getCastSA() != null) {
             SpellAbility castSA = copyFrom.getCastSA().copy(newCopy, true);
             castSA.setLastStateBattlefield(CardCollection.EMPTY);
@@ -404,6 +407,5 @@ public class CardCopyService {
 
         return newCopy;
     }
-
 
 }

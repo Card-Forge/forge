@@ -1,0 +1,9 @@
+Name:Overlord of the Hauntwoods
+ManaCost:3 G G
+Types:Enchantment Creature Avatar Horror
+PT:6/5
+K:Impending:4:1 G G
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create a tapped colorless land token named Everywhere that is every basic land type.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create a tapped colorless land token named Everywhere that is every basic land type.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ everywhere | LockTokenScript$ True | TokenTapped$ True
+Oracle:Impending 4—{1}{G}{G} (If you cast this spell for its impending cost, it enters with four time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.)\nWhenever Overlord of the Hauntwoods enters or attacks, create a tapped colorless land token named Everywhere that is every basic land type.

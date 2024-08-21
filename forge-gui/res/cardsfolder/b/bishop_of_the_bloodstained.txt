@@ -2,8 +2,8 @@ Name:Bishop of the Bloodstained
 ManaCost:3 B B
 Types:Creature Vampire Cleric
 PT:3/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 1 life for each Vampire you control.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, target opponent loses 1 life for each Vampire you control.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
 SVar:X:Count$Valid Creature.Vampire+YouCtrl+inZoneBattlefield
 DeckHints:Type$Vampire
-Oracle:When Bishop of the Bloodstained enters the battlefield, target opponent loses 1 life for each Vampire you control.
+Oracle:When Bishop of the Bloodstained enters, target opponent loses 1 life for each Vampire you control.

@@ -3,8 +3,8 @@ ManaCost:4 U B
 Types:Creature Nightmare Horror
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrawDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a card and you draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrawDiscard | TriggerDescription$ When CARDNAME enters, target opponent discards a card and you draw a card.
 SVar:TrigDrawDiscard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | NumCards$ 1 | Mode$ TgtChoose
 DeckHas:Ability$Discard
-Oracle:Flying\nWhen Psychic Symbiont enters the battlefield, target opponent discards a card and you draw a card.
+Oracle:Flying\nWhen Psychic Symbiont enters, target opponent discards a card and you draw a card.

@@ -17,36 +17,6 @@
  */
 package forge.gamemodes.quest.io;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -56,7 +26,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
 import forge.card.CardEdition;
 import forge.deck.CardPool;
 import forge.deck.Deck;
@@ -66,29 +35,31 @@ import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEventDraft;
 import forge.gamemodes.quest.QuestMode;
 import forge.gamemodes.quest.bazaar.QuestItemType;
-import forge.gamemodes.quest.data.DeckConstructionRules;
-import forge.gamemodes.quest.data.GameFormatQuest;
-import forge.gamemodes.quest.data.QuestAchievements;
-import forge.gamemodes.quest.data.QuestAssets;
-import forge.gamemodes.quest.data.QuestData;
-import forge.gamemodes.quest.data.QuestEventDraftContainer;
-import forge.gamemodes.quest.data.QuestItemCondition;
+import forge.gamemodes.quest.data.*;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.gamemodes.quest.data.StarRating;
-import forge.item.BoosterBox;
-import forge.item.BoosterPack;
-import forge.item.FatPack;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PreconDeck;
-import forge.item.SealedProduct;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.IgnoringXStream;
 import forge.util.ItemPool;
 import forge.util.XmlUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * <p>
@@ -158,7 +129,7 @@ public class QuestDataIO {
         QuestData data;
         final StringBuilder xml = new StringBuilder();
 
-        try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(xmlSaveFile.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
             final char[] buf = new char[1024];
             while (reader.ready()) {
@@ -452,19 +423,20 @@ public class QuestDataIO {
     }
 
     private static void savePacked(final String f, final XStream xStream, final QuestData qd) throws IOException {
-        final BufferedOutputStream bout = new BufferedOutputStream(new FileOutputStream(f));
-        final GZIPOutputStream zout = new GZIPOutputStream(bout);
-        xStream.toXML(qd, zout);
-        zout.flush();
-        zout.close();
+        try(
+            final BufferedOutputStream bout = new BufferedOutputStream(Files.newOutputStream(Paths.get(f)));
+            final GZIPOutputStream zout = new GZIPOutputStream(bout)) {
+            xStream.toXML(qd, zout);
+            zout.flush();
+        }
     }
 
     @SuppressWarnings("unused") // used only for debug purposes
     private static void saveUnpacked(final String f, final XStream xStream, final QuestData qd) throws IOException {
-        final BufferedOutputStream boutUnp = new BufferedOutputStream(new FileOutputStream(f));
-        xStream.toXML(qd, boutUnp);
-        boutUnp.flush();
-        boutUnp.close();
+        try(final BufferedOutputStream boutUnp = new BufferedOutputStream(Files.newOutputStream(Paths.get(f)))) {
+            xStream.toXML(qd, boutUnp);
+            boutUnp.flush();
+        }
     }
 
     private static class GameFormatQuestToXml implements Converter {
@@ -935,26 +907,26 @@ public class QuestDataIO {
         protected BoosterPack readBooster(final HierarchicalStreamReader reader) {
             String s = reader.getAttribute("s");
             if (SealedProduct.specialSets.contains(s) || s.equals("?")) {
-                return BoosterPack.FN_FROM_COLOR.apply(s);
+                return BoosterPack.fromColor(s);
             } else {
                 final CardEdition ed = FModel.getMagicDb().getEditions().get(s);
-                return BoosterPack.FN_FROM_SET.apply(ed);
+                return BoosterPack.fromSet(ed);
             }
         }
 
         protected TournamentPack readTournamentPack(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return TournamentPack.FN_FROM_SET.apply(ed);
+            return TournamentPack.fromSet(ed);
         }
 
         protected FatPack readFatPack(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return FatPack.FN_FROM_SET.apply(ed);
+            return FatPack.fromSet(ed);
         }
 
         protected BoosterBox readBoosterBox(final HierarchicalStreamReader reader) {
             final CardEdition ed = FModel.getMagicDb().getEditions().get(reader.getAttribute("s"));
-            return BoosterBox.FN_FROM_SET.apply(ed);
+            return BoosterBox.fromSet(ed);
         }
 
         protected PaperCard readCardPrinted(final HierarchicalStreamReader reader) {

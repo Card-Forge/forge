@@ -1,0 +1,8 @@
+Name:Animus of Predation
+ManaCost:4 G
+Types:Creature Avatar
+PT:4/4
+Draft:Draft CARDNAME face up.
+Draft:As you draft a card, you may remove it from the draft face up. (It isn't in your card pool.)
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying & First Strike & Double Strike & Deathtouch & Haste & Hexproof & Indestructible & Lifelink & Menace & Reach & Vigilance | FromDraftNotes$ Animus of Predation | Description$ If you removed a creature card with flying from the draft with cards named Animus of Predation, CARDNAME has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, and vigilance.
+Oracle:Draft Animus of Predation face up.\nAs you draft a card, you may remove it from the draft face up. (It isn't in your card pool.)\nIf you removed a creature card with flying from the draft with cards named Animus of Predation, Animus of Predation has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, and vigilance.

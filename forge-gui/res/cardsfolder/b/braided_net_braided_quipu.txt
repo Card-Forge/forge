@@ -9,7 +9,7 @@ K:Craft:1 U ExileCtrlOrGrave<1/Artifact.Other>
 DeckHints:Ability$Discard|Mill|Sacrifice & Type$Artifact
 DeckHas:Ability$Graveyard
 AlternateMode:DoubleFaced
-Oracle:Braided Net enters the battlefield with three net counters on it.\n{T}, Remove a net counter from Braided Net: Tap another target nonland permanent. Its activated abilities can't be activated for as long as it remains tapped.\nCraft with artifact {1}{U}
+Oracle:Braided Net enters with three net counters on it.\n{T}, Remove a net counter from Braided Net: Tap another target nonland permanent. Its activated abilities can't be activated for as long as it remains tapped.\nCraft with artifact {1}{U}
 
 ALTERNATE
 

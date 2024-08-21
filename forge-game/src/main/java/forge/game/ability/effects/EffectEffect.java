@@ -149,7 +149,7 @@ public class EffectEffect extends SpellAbilityEffect {
             image = ImageKeys.getTokenKey(
             TextUtil.fastReplace(
                 TextUtil.fastReplace(
-                    TextUtil.fastReplace(name.toLowerCase(), " - ", "_"),
+                    TextUtil.fastReplace(name.toLowerCase(), " — ", "_"),
                         ",", ""),
                     " ", "_").toLowerCase());
         } else { // use host image
@@ -289,8 +289,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // chosen number
             if (sa.hasParam("SetChosenNumber")) {
-                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard,
-                        sa.getParam("SetChosenNumber"), sa));
+                eff.setChosenNumber(AbilityUtils.calculateAmount(hostCard, sa.getParam("SetChosenNumber"), sa));
             } else if (hostCard.hasChosenNumber()) {
                 eff.setChosenNumber(hostCard.getChosenNumber());
             }

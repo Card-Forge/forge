@@ -1,0 +1,9 @@
+Name:Skoa, Embermage
+ManaCost:4 R R
+Types:Legendary Creature Goblin Wizard
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 4 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
+A:AB$ DealDamage | Cost$ Discard<1/Card.namedSkoa, Embermage> Sac<2/Mountain> | CostDesc$ Grandeur — Discard another card named Skoa, Embermage, Sacrifice two Mountains: | ValidTgts$ Any | NumDmg$ 4 | SpellDescription$ NICKNAME deals 4 damage to any target.
+SVar:PlayMain1:TRUE
+Oracle:When Skoa, Embermage enters, it deals 4 damage to any target.\Grandeur — Discard another card named Skoa, Embermage, Sacrifice two Mountains: Skoa deals 4 damage to any target.

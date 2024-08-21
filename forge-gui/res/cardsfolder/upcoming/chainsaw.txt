@@ -1,0 +1,12 @@
+Name:Chainsaw
+ManaCost:1 R
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 3 damage to up to one target creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 3
+T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more creatures die, put a rev counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ REV
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | Description$ Equipped creature gets +X/+0, where X is the number of rev counters on CARDNAME.
+K:Equip:3
+SVar:X:Count$CardCounters.REV
+SVar:PlayMain1:TRUE
+Oracle:When Chainsaw enters, it deals 3 damage to up to one target creature.\nWhenever one or more creatures die, put a rev counter on Chainsaw.\nEquipped creature gets +X/+0, where X is the number of rev counters on Chainsaw.\nEquip {3}

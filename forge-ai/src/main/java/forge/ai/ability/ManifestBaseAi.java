@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
@@ -138,12 +137,7 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
     @Override
     protected Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (Iterables.size(options) > 1 || isOptional) {
-            CardCollection filtered = CardLists.filter(options, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card input) {
-                    return shouldApply(input, ai, sa);
-                }
-            });
+            CardCollection filtered = CardLists.filter(options, input -> shouldApply(input, ai, sa));
             if (!filtered.isEmpty()) {
                 return ComputerUtilCard.getBestAI(filtered);
             }

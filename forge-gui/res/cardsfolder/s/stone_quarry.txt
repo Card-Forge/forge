@@ -1,6 +1,7 @@
 Name:Stone Quarry
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo R W | SpellDescription$ Add {R} or {W}.
-Oracle:Stone Quarry enters the battlefield tapped.\n{T}: Add {R} or {W}.
+Oracle:Stone Quarry enters tapped.\n{T}: Add {R} or {W}.

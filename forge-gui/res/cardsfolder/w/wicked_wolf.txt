@@ -2,11 +2,11 @@ Name:Wicked Wolf
 ManaCost:2 G G
 Types:Creature Wolf
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, it fights up to one target creature you don't control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters, it fights up to one target creature you don't control.
 SVar:TrigFight:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 A:AB$ PutCounter | Cost$ Sac<1/Food> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on CARDNAME. It gains indestructible until end of turn. Tap it.
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self
 DeckHas:Ability$Counters
 DeckHints:Ability$Food
-Oracle:When Wicked Wolf enters the battlefield, it fights up to one target creature you don't control.\nSacrifice a Food: Put a +1/+1 counter on Wicked Wolf. It gains indestructible until end of turn. Tap it.
+Oracle:When Wicked Wolf enters, it fights up to one target creature you don't control.\nSacrifice a Food: Put a +1/+1 counter on Wicked Wolf. It gains indestructible until end of turn. Tap it.

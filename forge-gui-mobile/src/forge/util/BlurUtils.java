@@ -242,8 +242,7 @@ public class BlurUtils {
      */
     public static ByteBuffer unpack(int[] pixels) {
         ByteBuffer buf = BufferUtils.newByteBuffer(pixels.length * 4);
-        for (int src = 0; src < pixels.length; src++) {
-            int value = pixels[src];
+        for (int value : pixels) {
             buf.put((byte) ((value & 0xff000000) >>> 24))
                     .put((byte) ((value & 0x00ff0000) >>> 16))
                     .put((byte) ((value & 0x0000ff00) >>> 8))

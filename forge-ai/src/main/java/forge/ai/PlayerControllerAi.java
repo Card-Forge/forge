@@ -36,6 +36,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.WrappedAbility;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
@@ -569,12 +570,9 @@ public class PlayerControllerAi extends PlayerController {
 
         if (destinationZone == ZoneType.Graveyard) {
             // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-            if (Iterables.any(getGame().getCardsInGame(), new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
-                    return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
-                }
+            if (Iterables.any(getGame().getCardsInGame(), card -> {
+                // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
+                return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
             })) {
                 int bestValue = 0;
                 Card bestCreature = null;
@@ -701,7 +699,7 @@ public class PlayerControllerAi extends PlayerController {
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
         Iterable<Card> cardsOfType = Iterables.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
         if (!Iterables.isEmpty(cardsOfType)) {
-            Card toDiscard = Aggregates.itemWithMin(cardsOfType, CardPredicates.Accessors.fnGetCmc);
+            Card toDiscard = Aggregates.itemWithMin(cardsOfType, Card::getCMC);
             return new CardCollection(toDiscard);
         }
         return getAi().getCardsToDiscard(num, null, sa);
@@ -854,6 +852,22 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public PlayerZone chooseStartingHand(List<PlayerZone> zones) {
+        // Rate all the hands using the AI's hand evaluation function
+        int bestScore = Integer.MIN_VALUE;
+        PlayerZone bestZone = null;
+        for (PlayerZone zone : zones) {
+            int score = ComputerUtil.scoreHand(zone.getCards(), this.player, 0);
+            if (score > bestScore) {
+                bestScore = score;
+                bestZone = zone;
+            }
+        }
+
+        return bestZone;
+    }
+
+    @Override
     public int chooseNumber(SpellAbility sa, String title, int min, int max) {
         return brains.chooseNumber(sa, title, min, max);
     }
@@ -948,7 +962,7 @@ public class PlayerControllerAi extends PlayerController {
                             break;
                     }
                 }
-                return defaultVal != null && defaultVal.booleanValue();
+                return defaultVal != null && defaultVal;
             case UntapTimeVault: return false; // TODO Should AI skip his turn for time vault?
             case LeftOrRight: return brains.chooseDirection(sa);
             case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even
@@ -1130,7 +1144,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(List<ReplacementEffect> possibleReplacers) {
         return brains.chooseSingleReplacementEffect(possibleReplacers);
     }
 
@@ -1372,21 +1386,12 @@ public class PlayerControllerAi extends PlayerController {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
         //Filter out mana sources that will interfere with payManaCost()
-        CardCollection untapped = CardLists.filter(untappedCards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getManaAbilities().isEmpty();
-            }
-        });
+        CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
         // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (improvise) {
-                untapped = CardLists.filter(untapped, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {return !c.isCreature();
-                    }
-                });
+                untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
                 return new HashMap<>();
             }

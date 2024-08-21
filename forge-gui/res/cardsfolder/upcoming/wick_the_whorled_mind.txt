@@ -1,0 +1,14 @@
+Name:Wick, the Whorled Mind
+ManaCost:3 B
+Types:Legendary Creature Rat Warlock
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Rat.Other+YouCtrl | Execute$ TrigBranch | TriggerDescription$ Whenever NICKNAME or another Rat you control enters, create a 1/1 black Snail creature token if you don't control a Snail. Otherwise, put a +1/+1 counter on a Snail you control.
+SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ0 | TrueSubAbility$ DBToken | FalseSubAbility$ DBPutCounter
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_snail | TokenOwner$ You
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Snail.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ DealDamage | Cost$ U B R Sac<1/Snail> | Defined$ Opponent | NumDmg$ Y | SubAbility$ DBDraw | SpellDescription$ NICKNAME deals damage equal to the sacrificed creature's power to each opponent. Then draw cards equal to the sacrificed creature's power.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y
+SVar:X:Count$Valid Snail.YouCtrl
+SVar:Y:Sacrificed$CardPower
+SVar:BuffedBy:Rat
+Oracle:Whenever Wick or another Rat you control enters, create a 1/1 black Snail creature token if you don't control a Snail. Otherwise, put a +1/+1 counter on a Snail you control.\n{U}{B}{R}, Sacrifice a Snail: Wick deals damage equal to the sacrificed creature's power to each opponent. Then draw cards equal to the sacrificed creature's power.

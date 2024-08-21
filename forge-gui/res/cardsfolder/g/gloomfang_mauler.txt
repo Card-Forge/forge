@@ -7,4 +7,4 @@ K:Backup:2:BackupAbility
 SVar:BackupAbility:DB$ Pump | KW$ Menace
 K:Menace
 DeckHas:Ability$Counters
-Oracle:Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)\nBackup 2 (When this creature enters the battlefield, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\nMenace
+Oracle:Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)\nBackup 2 (When this creature enters, put two +1/+1 counters on target creature. If that's another creature, it gains the following ability until end of turn.)\nMenace

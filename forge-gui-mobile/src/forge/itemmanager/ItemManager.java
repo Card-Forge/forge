@@ -17,13 +17,7 @@
  */
 package forge.itemmanager;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
@@ -107,7 +101,6 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * ItemManager Constructor.
      * 
      * @param genericType0 the class of item that this table will contain
-     * @param statLabels0 stat labels for this item manager
      * @param wantUnique0 whether this table should display only one item with the same name
      */
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
@@ -214,7 +207,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 cols.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(cols, (arg0, arg1) -> Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex()));
+        cols.sort(Comparator.comparingInt(arg0 -> arg0.getConfig().getIndex()));
 
         sortCols.clear();
         if (cbxSortOptions != null) {
@@ -749,6 +742,33 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
+    public void applyAdvancedSearchFilter(String filterString) {
+        applyAdvancedSearchFilter(new String[]{filterString}, false);
+    }
+
+    /**
+     * Programmatic method to set this ItemManager's advanced search filter value.
+     * Other filters will be cleared.
+     */
+    public void applyAdvancedSearchFilter(String[] filterStrings, boolean joinAnd) {
+        if(advancedSearchFilter == null) {
+            advancedSearchFilter = createAdvancedSearchFilter();
+            ItemManager.this.add(advancedSearchFilter.getWidget());
+        }
+        lockFiltering = true;
+        for (final ItemFilter<? extends T> filter : filters) {
+            filter.reset();
+        }
+        searchFilter.reset();
+        advancedSearchFilter.reset();
+        advancedSearchFilter.setFilterParts(filterStrings, joinAnd);
+        lockFiltering = false;
+
+        applyFilters();
+        advancedSearchFilter.refreshWidget();
+        revalidate();
+    }
+
     //Refresh displayed items
     public void refresh() {
         updateView(true, getSelectedItems());
@@ -762,7 +782,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
             Iterable<Entry<T, Integer>> items = pool;
             if (useFilter) {
-                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, pool.FN_GET_KEY);
+                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, (Function<Entry<T, Integer>, T>) Entry::getKey);
                 items = Iterables.filter(pool, pred);
             }
             model.addItems(items);

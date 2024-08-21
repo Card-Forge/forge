@@ -1,0 +1,11 @@
+Name:Benthic Anomaly
+ManaCost:6 U
+Types:Creature Eldrazi Serpent
+PT:7/8
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigForEach | TriggerDescription$ When you cast this spell, for each opponent, choose a creature that player controls. Create a token that's a copy of one of those creatures, except its power is equal to the total power of those creatures, its toughness is equal to the total toughness of those creatures, and it's a colorless Eldrazi creature.
+SVar:TrigForEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBCopy
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.RememberedPlayerCtrl | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose a creature this player controls | ImprintChosen$ True
+SVar:DBCopy:DB$ CopyPermanent | Choices$ Creature.IsImprinted | ChoiceTitle$ Choose one of those creatures to copy | SetPower$ Imprinted$CardPower | SetToughness$ Imprinted$CardToughness | SetColor$ Colorless | SetCreatureTypes$ Eldrazi | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearImprinted$ True
+Oracle:Devoid\nWhen you cast this spell, for each opponent, choose a creature that player controls. Create a token that's a copy of one of those creatures, except its power is equal to the total power of those creatures, its toughness is equal to the total toughness of those creatures, and it's a colorless Eldrazi creature.

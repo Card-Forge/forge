@@ -3,9 +3,9 @@ ManaCost:4
 Types:Artifact Creature Horse
 PT:0/4
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, an opponent gains control of it.
-SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBDonate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, an opponent gains control of it.
+SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to | AILogic$ Curse | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, each opponent creates a 1/1 white Soldier creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ Player.Opponent
-Oracle:Defender\nWhen Akroan Horse enters the battlefield, an opponent gains control of it.\nAt the beginning of your upkeep, each opponent creates a 1/1 white Soldier creature token.
+Oracle:Defender\nWhen Akroan Horse enters, an opponent gains control of it.\nAt the beginning of your upkeep, each opponent creates a 1/1 white Soldier creature token.

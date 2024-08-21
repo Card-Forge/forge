@@ -2,8 +2,8 @@ Name:Wort, the Raidmother
 ManaCost:4 RG RG
 Types:Legendary Creature Goblin Shaman
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WortETB | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ WortETB | TriggerDescription$ When CARDNAME enters, create two 1/1 red and green Goblin Warrior creature tokens.
 SVar:WortETB:DB$ Token | TokenAmount$ 2 | TokenScript$ rg_1_1_goblin_warrior | TokenOwner$ You
-S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Instant.Green+YouCtrl,Instant.Red+YouCtrl,Sorcery.Red+YouCtrl,Sorcery.Green+YouCtrl | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+S:Mode$ Continuous | AddKeyword$ Conspire | Affected$ Instant.Green+YouCtrl+wasCast,Instant.Red+YouCtrl+wasCast,Sorcery.Red+YouCtrl+wasCast,Sorcery.Green+YouCtrl+wasCast | AffectedZone$ Stack | EffectZone$ Battlefield | Description$ Each red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
 DeckHas:Ability$Token
-Oracle:When Wort, the Raidmother enters the battlefield, create two 1/1 red and green Goblin Warrior creature tokens.\nEach red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)
+Oracle:When Wort, the Raidmother enters, create two 1/1 red and green Goblin Warrior creature tokens.\nEach red or green instant or sorcery spell you cast has conspire. (As you cast the spell, you may tap two untapped creatures you control that share a color with it. When you do, copy it and you may choose new targets for the copy.)

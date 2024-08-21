@@ -1,9 +1,9 @@
 Name:Staff of the Mind Magus
 ManaCost:3
 Types:Artifact
-T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Island.YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a blue spell or an Island you control enters, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Island.YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a blue spell or an Island you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$Blue
-Oracle:Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.
+Oracle:Whenever you cast a blue spell or an Island you control enters, you gain 1 life.

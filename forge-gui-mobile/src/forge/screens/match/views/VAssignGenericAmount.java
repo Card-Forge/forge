@@ -31,17 +31,17 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
+import forge.assets.FSkinImageInterface;
 import forge.card.CardZoom;
 import forge.card.MagicColor;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -88,18 +88,10 @@ public class VAssignGenericAmount extends FDialog {
         pnlSource = add(new EffectSourcePanel(effectSource));
         pnlTargets = add(new TargetsPanel(targets));
 
-        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                finish();
-            }
-        });
-        initButton(1, Forge.getLocalizer().getMessage("lblReset"), new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                resetAssignedDamage();
-                initialAssignAmount();
-            }
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> finish());
+        initButton(1, Forge.getLocalizer().getMessage("lblReset"), e -> {
+            resetAssignedDamage();
+            initialAssignAmount();
         });
 
         initialAssignAmount();
@@ -178,38 +170,28 @@ public class VAssignGenericAmount extends FDialog {
                 PlayerView player = (PlayerView)entity;
                 obj = add(new MiscTargetPanel(player.getName(), MatchController.getPlayerAvatar(player)));
             } else if (entity instanceof Byte) {
-                FSkinImage manaSymbol;
-                Byte color = (Byte) entity;
+                FSkinImageInterface manaSymbol;
+                byte color = (Byte) entity;
                 if (color == MagicColor.WHITE) {
-                    manaSymbol = FSkinImage.MANA_W;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_W);
                 } else if (color == MagicColor.BLUE) {
-                    manaSymbol = FSkinImage.MANA_U;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_U);
                 } else if (color == MagicColor.BLACK) {
-                    manaSymbol = FSkinImage.MANA_B;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_B);
                 } else if (color == MagicColor.RED) {
-                    manaSymbol = FSkinImage.MANA_R;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_R);
                 } else if (color == MagicColor.GREEN) {
-                    manaSymbol = FSkinImage.MANA_G;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_G);
                 } else { // Should never come here, but add this to avoid compile error
-                    manaSymbol = FSkinImage.MANA_COLORLESS;
+                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_COLORLESS);
                 }
                 obj = add(new MiscTargetPanel("", manaSymbol));
             } else {
                 obj = add(new MiscTargetPanel(entity.toString(), FSkinImage.UNKNOWN));
             }
             label = add(new FLabel.Builder().text("0").font(FSkinFont.get(18)).align(Align.center).build());
-            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignAmountTo(entity, false);
-                }
-            }).build());
-            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    assignAmountTo(entity, true);
-                }
-            }).build());
+            btnSubtract = add(new FLabel.ButtonBuilder().icon(FSkinImage.MINUS).command(e -> assignAmountTo(entity, false)).build());
+            btnAdd = add(new FLabel.ButtonBuilder().icon(Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS).command(e -> assignAmountTo(entity, true)).build());
         }
 
         @Override

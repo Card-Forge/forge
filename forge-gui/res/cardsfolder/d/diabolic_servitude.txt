@@ -1,18 +1,18 @@
 Name:Diabolic Servitude
 ManaCost:3 B
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturnFromGraveyard | TriggerDescription$ When CARDNAME enters the battlefield, return target creature card from your graveyard to the battlefield.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReturnFromGraveyard | TriggerDescription$ When CARDNAME enters, return target creature card from your graveyard to the battlefield.
 SVar:TrigReturnFromGraveyard:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberTargets$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExileAndBounce | TriggerZones$ Battlefield | TriggerDescription$ When the creature put onto the battlefield with CARDNAME dies, exile it and return CARDNAME to its owner's hand.
 SVar:TrigExileAndBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanupAndBounce
 SVar:DBCleanupAndBounce:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBBounceMe
 SVar:DBBounceMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | Hidden$ True
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExileCreature | TriggerDescription$ When CARDNAME leaves the battlefield, exile the creature put onto the battlefield with CARDNAME.
-SVar:TrigExileCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | IsPresent$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:TrigExileCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Exile.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Hand | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Hand.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Library | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Library.
 SVar:NeedsToPlayVar:Y GE1
 SVar:Y:Count$TypeInYourYard.Creature
-Oracle:When Diabolic Servitude enters the battlefield, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with Diabolic Servitude dies, exile it and return Diabolic Servitude to its owner's hand.\nWhen Diabolic Servitude leaves the battlefield, exile the creature put onto the battlefield with Diabolic Servitude.
+Oracle:When Diabolic Servitude enters, return target creature card from your graveyard to the battlefield.\nWhen the creature put onto the battlefield with Diabolic Servitude dies, exile it and return Diabolic Servitude to its owner's hand.\nWhen Diabolic Servitude leaves the battlefield, exile the creature put onto the battlefield with Diabolic Servitude.

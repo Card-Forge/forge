@@ -64,10 +64,20 @@
       "name": "Settings",
       "text": "tr(lblSettings)",
       "selectable": true,
-      "width": 238,
+      "width": 118,
       "height": 48,
       "x": 16,
       "yOffset": 8
+    },
+    {
+      "type": "TextButton",
+      "name": "Backup",
+      "text": "tr(lblData)",
+      "selectable": true,
+      "width": 118,
+      "height": 48,
+      "x": 134,
+      "yOffset": -48
     },
     {
       "type": "TextButton",

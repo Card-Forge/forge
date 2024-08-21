@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Casper 3
-Title=Casper
-Difficulty=hard
-Description=Mono W Enchantment deck with Blessed Spirits and Sigil of the Empty Throne
-Icon=Casper.jpg
-Deck Type=constructed
 [main]
 22 Plains
 1 Serra's Sanctum

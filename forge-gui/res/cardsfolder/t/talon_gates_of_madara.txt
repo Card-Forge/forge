@@ -1,0 +1,11 @@
+Name:Talon Gates of Madara
+ManaCost:no cost
+Types:Land Gate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPhases | TriggerDescription$ When CARDNAME enters, up to one target creature phases out.
+SVar:TrigPhases:DB$ Phases | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ ChangeZone | Cost$ 4 | ActivationZone$ Hand | Origin$ Hand | Defined$ Self | Destination$ Battlefield | SpellDescription$ Put CARDNAME from your hand onto the battlefield.
+DeckHas:Ability$Mana.Colorless
+DeckHints:Color$Colorless
+Oracle:When Talon Gates of Madara enters, up to one target creature phases out.\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}: Put Talon Gates of Madara from your hand onto the battlefield.

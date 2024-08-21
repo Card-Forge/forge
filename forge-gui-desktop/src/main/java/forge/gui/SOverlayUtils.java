@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -77,8 +75,7 @@ public final class SOverlayUtils {
         btnCloseTopRight.setOpaque(false);
         btnCloseTopRight.setBackground(new Color(0, 0, 0));
         btnCloseTopRight.setFocusPainted(false);
-        btnCloseTopRight.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
+        btnCloseTopRight.addActionListener(arg0 -> SOverlayUtils.hideOverlay());
 
         overlay.removeAll();
         overlay.setLayout(null);

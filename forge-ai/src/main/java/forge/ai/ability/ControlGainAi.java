@@ -20,10 +20,10 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpecialCardAi;
@@ -124,54 +124,47 @@ public class ControlGainAi extends SpellAbilityAi {
 
         CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
-        
-        if (list.isEmpty()) {
-            // no valid targets, so we need to bail
-            return false;
-        }
+        // Filter AI-specific targets if provided
+        list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
         // AI won't try to grab cards that are filtered out of AI decks on purpose
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (!sa.canTarget(c)) {
-                    return false;
-                }
-                if (sa.isTrigger()) {
-                    return true;
-                }
-
-                if (!c.canBeControlledBy(ai)) {
-                    return false;
-                }
-
-                // do not take perm control on something that leaves the play end of turn 
-                if (!lose.contains("EOT") && c.hasSVar("EndOfTurnLeavePlay")) {
-                    return false;
-                }
-
-                if (c.isCreature()) {
-                    if (c.getNetCombatDamage() <= 0) {
-                        return false;
-                    }
-
-                    // can not attack any opponent
-                    boolean found = false;
-                    for (final Player opp : opponents) {
-                        if (ComputerUtilCombat.canAttackNextTurn(c, opp)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        return false;
-                    }
-                }
-
-                // do not take control on something it doesn't know how to use
-                return !ComputerUtilCard.isCardRemAIDeck(c);
+        list = CardLists.filter(list, c -> {
+            if (!sa.canTarget(c)) {
+                return false;
             }
+            if (sa.isTrigger()) {
+                return true;
+            }
+
+            if (!c.canBeControlledBy(ai)) {
+                return false;
+            }
+
+            // do not take perm control on something that leaves the play end of turn
+            if (!lose.contains("EOT") && c.hasSVar("EndOfTurnLeavePlay")) {
+                return false;
+            }
+
+            if (c.isCreature()) {
+                if (c.getNetCombatDamage() <= 0) {
+                    return false;
+                }
+
+                // can not attack any opponent
+                boolean found = false;
+                for (final Player opp : opponents) {
+                    if (ComputerUtilCombat.canAttackNextTurn(c, opp)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    return false;
+                }
+            }
+
+            // do not take control on something it doesn't know how to use
+            return !ComputerUtilCard.isCardRemAIDeck(c);
         });
 
         if (list.isEmpty()) {

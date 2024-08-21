@@ -4,4 +4,4 @@ Types:Creature Eldrazi
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
-Oracle:Endless One enters the battlefield with X +1/+1 counters on it.
+Oracle:Endless One enters with X +1/+1 counters on it.

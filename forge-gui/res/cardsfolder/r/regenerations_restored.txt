@@ -10,4 +10,4 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigExtraTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1 | SpellDescription$ Take an extra turn after this one.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:Vanishing 12 (This enchantment enters the battlefield with twelve time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever one or more time counters are removed from Regenerations Restored, scry 1 and you gain 1 life. Then if Regenerations Restored has no time counters on it, exile it. When you do, take an extra turn after this one.
+Oracle:Vanishing 12 (This enchantment enters with twelve time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever one or more time counters are removed from Regenerations Restored, scry 1 and you gain 1 life. Then if Regenerations Restored has no time counters on it, exile it. When you do, take an extra turn after this one.

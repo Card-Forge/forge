@@ -35,7 +35,7 @@ public enum CounterEnumType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
-    ACORN("ACORN", 139,69,19),
+    ACORN("ACORN", 139, 69, 19),
 
     AEGIS("AEGIS", 207, 207, 207),
 
@@ -50,19 +50,21 @@ public enum CounterEnumType {
     AWAKENING("AWAKE", 0, 231, 79),
 
     BLAZE("BLAZE", 255, 124, 82),
-    
+
     BLESSING("BLESS", 251, 0, 94),
+
+    BLIGHT("BLGHT", 130, 115, 160),
 
     BLOOD("BLOOD", 255, 108, 111),
 
     BLOODLINE("BLDLN", 224, 44, 44),
-    
+
     BLOODSTAIN("BLDST", 224, 44, 44),
 
     BORE("BORE", 98, 47, 34),
 
     BOUNTY("BOUNT", 255, 158, 0),
-    
+
     BRAIN("BRAIN", 197, 62, 212),
 
     BRIBERY("BRIBE", 172, 201, 235),
@@ -79,7 +81,7 @@ public enum CounterEnumType {
 
     CHORUS("CHRUS", 0, 192, 246),
 
-    COIN("COIN",255,215,0),
+    COIN("COIN", 255, 215, 0),
 
     COLLECTION("CLLCT", 255, 215, 0),
 
@@ -145,6 +147,8 @@ public enum CounterEnumType {
 
     EYESTALK("EYES", 184, 202, 201),
 
+    EVERYTHING("EVRY", 255, 255, 255),
+
     FADE("FADE", 159, 209, 192),
 
     FATE("FATE", 255, 164, 226),
@@ -163,7 +167,7 @@ public enum CounterEnumType {
 
     FLOOD("FLOOD", 0, 203, 255),
 
-    FORESHADOW("FRSHD",144,99, 207),
+    FORESHADOW("FRSHD", 144, 99, 207),
 
     FUNGUS("FNGUS", 121, 219, 151),
 
@@ -213,6 +217,8 @@ public enum CounterEnumType {
 
     INCARNATION("INCRN", 247, 206, 64),
 
+    INGREDIENT("INGRD", 180, 50, 145),
+    
     INFECTION("INFCT", 0, 230, 66),
     
     INFLUENCE("INFL", 201, 99, 212),
@@ -270,6 +276,8 @@ public enum CounterEnumType {
     MATRIX("MATRX", 183, 174, 255),
 
     MEMORY("MEMRY", 174, 183, 255),
+    
+    MIDWAY("MDWAY", 84, 101, 207),
 
     MINE("MINE", 255, 100, 127),
 
@@ -284,6 +292,8 @@ public enum CounterEnumType {
     NECRODERMIS("NECRO", 80, 209, 250),
 
     NET("NET", 0, 221, 251),
+
+    NEST("NEST", 80, 80, 50),
 
     OIL("OIL", 99, 102, 106),
 
@@ -338,6 +348,10 @@ public enum CounterEnumType {
     REPRIEVE("REPR", 240, 120, 50),
 
     REJECTION("REJECT", 212, 235, 242),
+
+    REV("REV", 255, 108, 111),
+    
+    REVIVAL("REVIVL", 130, 230, 50),
     
     RIBBON("RIBBON", 233, 245, 232),
 
@@ -388,6 +402,8 @@ public enum CounterEnumType {
     STUDY("STUDY", 226, 192, 165),
 
     STUN("STUN", 226, 192, 165),
+
+    SUPPLY("SPPLY", 70, 105, 60),
 
     TAKEOVER("TKVR", 63, 49, 191),
 
@@ -458,6 +474,7 @@ public enum CounterEnumType {
     TRAMPLE("Trample"),
     VIGILANCE("Vigilance")
     SHADOW("Shadow")
+    EXALTED("Exalted")
 //*/
     ;
 

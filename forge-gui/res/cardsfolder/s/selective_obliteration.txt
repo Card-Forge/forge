@@ -1,0 +1,10 @@
+Name:Selective Obliteration
+ManaCost:3 C C
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseColor | SubAbility$ ExileAll | SpellDescription$ Each player chooses a color.
+SVar:DBChooseColor:DB$ ChooseColor | Defined$ Remembered | AILogic$ MostProminentComputerControls | SubAbility$ FilterForExile
+SVar:FilterForExile:DB$ Pump | RememberObjects$ Valid Permanent.RememberedPlayerCtrl+MonoColor+ChosenColor
+SVar:ExileAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.nonColorless+IsNotRemembered | SubAbility$ DBCleanup | SpellDescription$ Then exile each permanent unless it's colorless or it's only the color its controller chose.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Each player chooses a color. Then exile each permanent unless it's colorless or it's only the color its controller chose.

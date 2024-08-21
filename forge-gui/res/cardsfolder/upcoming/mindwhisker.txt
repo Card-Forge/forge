@@ -1,0 +1,11 @@
+Name:Mindwhisker
+ManaCost:2 U
+Types:Creature Rat Wizard
+PT:3/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | Condition$ Threshold | AddPower$ -1 | Description$ Threshold — As long as seven or more cards are in your graveyard, creatures your opponents control get -1/-0.
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard|Surveil
+DeckHints:Ability$Graveyard
+Oracle:At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)\nThreshold — As long as seven or more cards are in your graveyard, creatures your opponents control get -1/-0.

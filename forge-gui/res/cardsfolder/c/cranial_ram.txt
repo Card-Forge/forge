@@ -1,0 +1,10 @@
+Name:Cranial Ram
+ManaCost:B R
+Types:Artifact Equipment
+K:Living Weapon
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ 1 | Description$ Equipped creature gets +X/+1, where X is the number of artifacts you control.
+K:Equip:2
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Artifact
+Oracle:Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)\nEquipped creature gets +X/+1, where X is the number of artifacts you control.\nEquip {2}

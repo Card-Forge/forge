@@ -1,0 +1,8 @@
+Name:Reckless Pyrosurfer
+ManaCost:1 R
+Types:Creature Human Scout
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigBattleCry | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME gains battle cry until end of turn. (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn. Each instance of battle cry triggers separately.)
+SVar:TrigBattleCry:DB$ Pump | Defined$ Self | KW$ Battle cry
+Oracle:Haste\nLandfall — Whenever a land you control enters, Reckless Pyrosurfer gains battle cry until end of turn. (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn. Each instance of battle cry triggers separately.)

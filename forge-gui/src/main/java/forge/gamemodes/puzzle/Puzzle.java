@@ -8,6 +8,7 @@ import java.util.Map;
 import com.google.common.collect.Sets;
 
 import forge.ai.GameState;
+import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.ability.AbilityFactory;
@@ -131,7 +132,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
         goalCard.setOwner(human);
         goalCard.setImageKey("t:puzzle");
         goalCard.setName("Puzzle Goal");
-        goalCard.setImmutable(true);
+        goalCard.setGamePieceType(GamePieceType.EFFECT);
         goalCard.setOracleText(getGoalDescription());
 
         int turnCorr = 0;
@@ -180,7 +181,7 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                     break;
                 }
                 String trigPlay = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ " + targets + " | " +
-                        "Static$ True | TriggerDescription$ When the specified permanent enters the battlefield, you win the game.";
+                        "Static$ True | TriggerDescription$ When the specified permanent enters, you win the game.";
                 String effPlay = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ GE" + targetCount;
                 final Trigger triggerPlay = TriggerHandler.parseTrigger(trigPlay, goalCard, true);
                 SpellAbility playSA = AbilityFactory.getAbility(effPlay, goalCard);

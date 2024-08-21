@@ -2,8 +2,8 @@ Name:Kor Outfitter
 ManaCost:W W
 Types:Creature Kor Soldier
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EquipmentSelection | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may attach target Equipment you control to target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EquipmentSelection | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters, you may attach target Equipment you control to target creature you control.
 SVar:EquipmentSelection:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ KorOutfitting | StackDescription$ None
 SVar:KorOutfitting:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
 AI:RemoveDeck:All
-Oracle:When Kor Outfitter enters the battlefield, you may attach target Equipment you control to target creature you control.
+Oracle:When Kor Outfitter enters, you may attach target Equipment you control to target creature you control.

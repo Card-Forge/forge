@@ -1,0 +1,6 @@
+Name:Short Bow
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance & Reach | Description$ Equipped creature gets +1/+1 and has vigilance and reach.
+K:Equip:1
+Oracle:Equipped creature gets +1/+1 and has vigilance and reach.\nEquip {1}

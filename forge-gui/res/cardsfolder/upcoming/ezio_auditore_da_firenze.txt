@@ -1,0 +1,12 @@
+Name:Ezio Auditore da Firenze
+ManaCost:1 B
+Types:Legendary Creature Human Assassin
+PT:3/2
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Assassin+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Freerunning:B B | Description$ Assassin spells you cast have freerunning {B}{B}. (You may cast a spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game.
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ LifeAmount | ConditionSVarCompare$ LE10 | UnlessCost$ W U B R G | UnlessSwitched$ True | UnlessPayer$ You | Execute$ TrigLoseGame | TriggerDescription$ When you do, that player loses the game.
+SVar:TrigLoseGame:DB$ LosesGame | Defined$ Spawner>TriggeredTarget
+SVar:LifeAmount:TriggeredTarget$LifeTotal
+DeckHints:Type$Assassin
+Oracle:Menace\nAssassin spells you cast have freerunning {B}{B}. (You may cast a spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nWhenever Ezio deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game.

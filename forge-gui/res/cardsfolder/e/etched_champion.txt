@@ -2,6 +2,6 @@ Name:Etched Champion
 ManaCost:3
 Types:Artifact Creature Soldier
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from all colors | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME has protection from all colors as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from each color | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME has protection from each color as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
-Oracle:Metalcraft — Etched Champion has protection from all colors as long as you control three or more artifacts.
+Oracle:Metalcraft — Etched Champion has protection from each color as long as you control three or more artifacts.

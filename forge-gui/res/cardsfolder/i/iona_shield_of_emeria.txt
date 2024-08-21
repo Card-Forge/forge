@@ -4,6 +4,6 @@ Types:Legendary Creature Angel
 PT:7/7
 K:Flying
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentInHumanDeck
 S:Mode$ CantBeCast | ValidCard$ Card.ChosenColor | Caster$ Opponent | Description$ Your opponents can't cast spells of the chosen color.
-Oracle:Flying\nAs Iona, Shield of Emeria enters the battlefield, choose a color.\nYour opponents can't cast spells of the chosen color.
+Oracle:Flying\nAs Iona, Shield of Emeria enters, choose a color.\nYour opponents can't cast spells of the chosen color.

@@ -1,0 +1,8 @@
+Name:Staff of Eden, Vault's Key
+ManaCost:6
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, put target legendary permanent card not named Staff of Eden, Vault's Key from a graveyard onto the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.Legendary+notnamedStaff of Eden; Vault's Key | GainControl$ True | ChangeNum$ 1 | Mandatory$ True | TgtPrompt$ Choose target legendary permanent card not named Staff of Eden, Vault's Key in a graveyard
+A:AB$ Draw | Cost$ T | NumCards$ Count$Valid Permanent.YouCtrl+YouDontOwn | SpellDescription$ Draw a card for each permanent you control but don't own.
+SVar:X:Count$ColorsCtrl Permanent
+Oracle:When Staff of Eden, Vault's Key enters, put target legendary permanent card not named Staff of Eden, Vault's Key from a graveyard onto the battlefield under your control.\n{T}: Draw a card for each permanent you control but don't own.

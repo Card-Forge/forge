@@ -1,0 +1,11 @@
+Name:Reptilian Recruiter
+ManaCost:3 R R
+Types:Creature Lizard Warrior
+PT:4/2
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, choose target creature. If that creature's power is 2 or less or if you control another Lizard, gain control of that creature until end of turn, untap it, and it gains haste until end of turn.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | ConditionCheckSVar$ X
+SVar:X:Count$Valid Creature.targetedBy+powerLE2/Plus.Y
+SVar:Y:Count$Valid Lizard.Other+YouCtrl
+SVar:PlayMain1:OPPONENTCREATURES
+Oracle:Trample\nWhen Reptilian Recruiter enters, choose target creature. If that creature's power is 2 or less or if you control another Lizard, gain control of that creature until end of turn, untap it, and it gains haste until end of turn.

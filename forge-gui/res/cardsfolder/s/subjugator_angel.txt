@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Angel
 PT:4/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters the battlefield, tap all creatures your opponents control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all creatures your opponents control.
 SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.OppCtrl
 SVar:PlayMain1:TRUE
-Oracle:Flying\nWhen Subjugator Angel enters the battlefield, tap all creatures your opponents control.
+Oracle:Flying\nWhen Subjugator Angel enters, tap all creatures your opponents control.

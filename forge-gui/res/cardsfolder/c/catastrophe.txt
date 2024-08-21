@@ -2,6 +2,6 @@ Name:Catastrophe
 ManaCost:4 W W
 Types:Sorcery
 A:SP$ GenericChoice | Choices$ DBKillLand,DBKillCreatures | Defined$ You | AILogic$ BestOption | StackDescription$ SpellDescription | SpellDescription$ Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.
-SVar:DBKillLand:DB$ DestroyAll | ValidCards$ Land | SpellDescription$ Destroy all lands.
+SVar:DBKillLand:DB$ DestroyAll | ValidCards$ Land | NoRegenValid$ Creature | SpellDescription$ Destroy all lands.
 SVar:DBKillCreatures:DB$ DestroyAll | ValidCards$ Creature | NoRegen$ True | SpellDescription$ Destroy all creatures. They can't be regenerated.
 Oracle:Destroy all lands or all creatures. Creatures destroyed this way can't be regenerated.

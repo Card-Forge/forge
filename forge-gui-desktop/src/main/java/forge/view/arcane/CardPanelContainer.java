@@ -22,8 +22,6 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,13 +99,10 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     private void setupMouseWheelListener() {
-        this.addMouseWheelListener(new MouseWheelListener() {
-            @Override
-            public void mouseWheelMoved(final MouseWheelEvent e) {
-                final CardPanel hitPanel = getCardPanel(e.getX(), e.getY());
-                if (hitPanel != null && e.getWheelRotation() < 0) {
-                    mouseWheelZoom(hitPanel.getCard());
-                }
+        this.addMouseWheelListener(e -> {
+            final CardPanel hitPanel = getCardPanel(e.getX(), e.getY());
+            if (hitPanel != null && e.getWheelRotation() < 0) {
+                mouseWheelZoom(hitPanel.getCard());
             }
         });
     }

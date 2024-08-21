@@ -20,12 +20,12 @@ ScryfallCode=UST
 9 U Half-Kitten, Half-
 10 C Humming-
 11 R Jackknight
-12a U Knight of the Kitchen Sink A
-12b U Knight of the Kitchen Sink B
-12c U Knight of the Kitchen Sink C
-12d U Knight of the Kitchen Sink D
-12e U Knight of the Kitchen Sink E
-12f U Knight of the Kitchen Sink F
+12a U Knight of the Kitchen Sink $A
+12b U Knight of the Kitchen Sink $B
+12c U Knight of the Kitchen Sink $C
+12d U Knight of the Kitchen Sink $D
+12e U Knight of the Kitchen Sink $E
+12f U Knight of the Kitchen Sink $F
 13 U Knight of the Widget
 14 U Midlife Upgrade
 15 R Oddly Uneven
@@ -65,12 +65,12 @@ ScryfallCode=UST
 46 U Spy Eye
 47 U Suspicious Nanny
 48 C Time Out
-49a R Very Cryptic Command A
-49b R Very Cryptic Command B
-49c R Very Cryptic Command C
-49d R Very Cryptic Command D
-49e R Very Cryptic Command E
-49f R Very Cryptic Command F
+49a R Very Cryptic Command $A
+49b R Very Cryptic Command $B
+49c R Very Cryptic Command $C
+49d R Very Cryptic Command $D
+49e R Very Cryptic Command $E
+49f R Very Cryptic Command $F
 50 C Wall of Fortune
 51 C Big Boa Constrictor
 52 C capital offense
@@ -91,12 +91,12 @@ ScryfallCode=UST
 64 U Overt Operative
 65 U "Rumors of My Death..."
 66 U Skull Saucer
-67a U Sly Spy A
-67b U Sly Spy B
-67c U Sly Spy C
-67d U Sly Spy D
-67e U Sly Spy E
-67f U Sly Spy F
+67a U Sly Spy $A
+67b U Sly Spy $B
+67c U Sly Spy $C
+67d U Sly Spy $D
+67e U Sly Spy $E
+67f U Sly Spy $F
 68 C Snickering Squirrel
 69 R Spike, Tournament Grinder
 70 U Squirrel-Powered Scheme
@@ -111,12 +111,12 @@ ScryfallCode=UST
 79 C Common Iguana
 80 R The Countdown Is at One
 81 C Feisty Stegosaurus
-82a U Garbage Elemental A
-82b U Garbage Elemental B
-82c U Garbage Elemental C
-82d U Garbage Elemental D
-82e U Garbage Elemental E
-82f U Garbage Elemental F
+82a U Garbage Elemental $A
+82b U Garbage Elemental $B
+82c U Garbage Elemental $C
+82d U Garbage Elemental $D
+82e U Garbage Elemental $E
+82f U Garbage Elemental $F
 83 U Goblin Haberdasher
 84 U Half-Orc, Half-
 85 C Hammer Helper
@@ -153,12 +153,12 @@ ScryfallCode=UST
 110 U Ground Pounder
 111 U Half-Squirrel, Half-
 112 R Hydradoodle
-113a R Ineffable Blessing A
-113b R Ineffable Blessing B
-113c R Ineffable Blessing C
-113d R Ineffable Blessing D
-113e R Ineffable Blessing E
-113f R Ineffable Blessing F
+113a R Ineffable Blessing $A
+113b R Ineffable Blessing $B
+113c R Ineffable Blessing $C
+113d R Ineffable Blessing $D
+113e R Ineffable Blessing $E
+113f R Ineffable Blessing $F
 114 C Joyride Rigger
 115 U Monkey-
 116 C Mother Kangaroo
@@ -195,12 +195,12 @@ ScryfallCode=UST
 145c C Despondent Killbot
 145d C Enraged Killbot
 146 U Entirely Normal Armchair
-147a R Everythingamajig A
-147b R Everythingamajig B
-147c R Everythingamajig C
-147d R Everythingamajig D
-147e R Everythingamajig E
-147f R Everythingamajig F
+147a R Everythingamajig $A
+147b R Everythingamajig $B
+147c R Everythingamajig $C
+147d R Everythingamajig $D
+147e R Everythingamajig $E
+147f R Everythingamajig $F
 148 C Gnome-Made Engine
 149 R Handy Dandy Clone Machine
 150 R Kindslaver

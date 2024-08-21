@@ -1,0 +1,10 @@
+Name:Spinnerette, Arachnobat
+ManaCost:3 B G
+Types:Legendary Creature Spider Performer
+PT:2/4
+K:Reach
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ X | SVarCompare$ GE3 | Description$ As long as you control three or more Attractions, NICKNAME gets +2/+0 and has menace.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+SVar:X:Count$Valid Attraction.YouCtrl
+Oracle:Reach\nWhen Spinnerette, Arachnobat enters the battlefield, open an Attraction.\nAs long as you control three or more Attractions, Spinnerette gets +2/+0 and has menace.

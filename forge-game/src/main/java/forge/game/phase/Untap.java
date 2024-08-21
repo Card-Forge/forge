@@ -105,12 +105,7 @@ public class Untap extends Phase {
         return !c.isExertedBy(playerTurn);
     }
 
-    public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
-        @Override
-        public boolean apply(Card c) {
-            return canUntap(c);
-        }
-    };
+    public static final Predicate<Card> CANUNTAP = Untap::canUntap;
 
     /**
      * <p>
@@ -154,15 +149,12 @@ public class Untap extends Phase {
             }
         }
         final CardCollection untapList = new CardCollection(list);
-        final String[] restrict = restrictUntap.keySet().toArray(new String[restrictUntap.keySet().size()]);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (!Untap.canUntap(c)) {
-                    return false;
-                }
-                return !c.isValid(restrict, player, null, null);
+        final String[] restrict = restrictUntap.keySet().toArray(new String[0]);
+        list = CardLists.filter(list, c -> {
+            if (!Untap.canUntap(c)) {
+                return false;
             }
+            return !c.isValid(restrict, player, null, null);
         });
 
         for (final Card c : list) {
@@ -209,7 +201,7 @@ public class Untap extends Phase {
             if (chosen != null) {
                 for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
                     if (chosen.isValid(rest.getKey(), player, null, null)) {
-                        restrictUntap.put(rest.getKey(), rest.getValue().intValue() - 1);
+                        restrictUntap.put(rest.getKey(), rest.getValue() - 1);
                     }
                 }
                 restrictUntapped.add(chosen);
@@ -268,20 +260,27 @@ public class Untap extends Phase {
 
     private static void doPhasing(final Player turn) {
         // Needs to include phased out cards
-        final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield), new Predicate<Card>() {
+        final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield),
+                c -> (c.isPhasedOut(turn) && c.isDirectlyPhasedOut())
+                        || (c.hasKeyword(Keyword.PHASING) && c.getController().equals(turn))
+        );
 
-            @Override
-            public boolean apply(final Card c) {
-                return (c.isPhasedOut(turn) && c.isDirectlyPhasedOut()) || (c.hasKeyword(Keyword.PHASING) && c.getController().equals(turn));
+        CardCollection toPhase = new CardCollection();
+        for (final Card tgtC : list) {
+            if (tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseIn(tgtC)) {
+                continue;
             }
-        });
-
+            if (!tgtC.isPhasedOut() && StaticAbilityCantPhase.cantPhaseOut(tgtC)) {
+                continue;
+            }
+            toPhase.add(tgtC);
+        }
         // If c has things attached to it, they phase out simultaneously, and
         // will phase back in with it
         // If c is attached to something, it will phase out on its own, and try
         // to attach back to that thing when it comes back
         CardCollection phasedOut = new CardCollection();
-        for (final Card c : list) {
+        for (final Card c : toPhase) {
             if (c.isPhasedOut() && c.isDirectlyPhasedOut()) {
                 c.phase(true);
             } else if (c.hasKeyword(Keyword.PHASING)) {

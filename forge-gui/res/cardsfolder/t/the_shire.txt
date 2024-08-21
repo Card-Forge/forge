@@ -1,10 +1,10 @@
 Name:The Shire
 ManaCost:no cost
 Types:Legendary Land
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary creature.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a legendary creature.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Token | Cost$ 1 G T tapXType<1/Creature> | TokenScript$ c_a_food_sac | SpellDescription$ Create a Food token.
 DeckHas:Ability$Token & Type$Artifact
 DeckHints:Type$Legendary
-Oracle:The Shire enters the battlefield tapped unless you control a legendary creature.\n{T}: Add {G}.\n{1}{G}, {T}, Tap an untapped creature you control: Create a Food token.
+Oracle:The Shire enters tapped unless you control a legendary creature.\n{T}: Add {G}.\n{1}{G}, {T}, Tap an untapped creature you control: Create a Food token.

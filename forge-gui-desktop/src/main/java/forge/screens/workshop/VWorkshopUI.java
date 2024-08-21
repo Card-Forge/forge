@@ -34,12 +34,7 @@ public enum VWorkshopUI implements IVTopLevelUI {
      */
     @Override
     public void populate() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().focus();
-            }
-        });
+        SwingUtilities.invokeLater(() -> VWorkshopCatalog.SINGLETON_INSTANCE.getCardManager().focus());
     }
 
     /* (non-Javadoc)

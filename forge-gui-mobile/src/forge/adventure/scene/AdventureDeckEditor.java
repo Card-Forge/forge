@@ -94,8 +94,14 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             afterCardPicked(card);
         }
 
+        @Override
+        protected int getMaxMoveQuantity(boolean isAddMenu, boolean isAddSource) {
+            return 1;
+        }
+
         private void afterCardPicked(PaperCard card) {
             BoosterDraft draft = getDraft();
+            assert draft != null;
             draft.setChoice(card);
 
             if (draft.hasNextChoice()) {
@@ -1106,10 +1112,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             if (canOnlyBePartnerCommander(card)) {
                 return; //don't auto-change commander unexpectedly
             }
+            DeckSectionPage main = getMainDeckPage();
+            if (main == null)
+                return;
             if (!cardManager.isInfinite()) {
                 removeCard(card);
             }
-            getMainDeckPage().addCard(card);
+            main.addCard(card);
         }
 
         @Override
@@ -1405,7 +1414,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             selected++;
             if (selected > 2)
                 selected = 0;
-            setSelectedPage(tabPages[selected]);
+            setSelectedPage(tabPages.get(selected));
             if (getSelectedPage() instanceof CatalogPage) {
                 ((CatalogPage) getSelectedPage()).cardManager.getConfig().setPileBy(null);
                 ((CatalogPage) getSelectedPage()).cardManager.setHideFilters(true);

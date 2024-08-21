@@ -18,81 +18,6 @@ import forge.util.TextBounds;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
-    static {
-        Forge.getAssets().symbolLookup().put("C", FSkinImage.MANA_COLORLESS);
-        Forge.getAssets().symbolLookup().put("W", FSkinImage.MANA_W);
-        Forge.getAssets().symbolLookup().put("U", FSkinImage.MANA_U);
-        Forge.getAssets().symbolLookup().put("B", FSkinImage.MANA_B);
-        Forge.getAssets().symbolLookup().put("R", FSkinImage.MANA_R);
-        Forge.getAssets().symbolLookup().put("G", FSkinImage.MANA_G);
-        Forge.getAssets().symbolLookup().put("W/U", FSkinImage.MANA_HYBRID_WU);
-        Forge.getAssets().symbolLookup().put("U/B", FSkinImage.MANA_HYBRID_UB);
-        Forge.getAssets().symbolLookup().put("B/R", FSkinImage.MANA_HYBRID_BR);
-        Forge.getAssets().symbolLookup().put("R/G", FSkinImage.MANA_HYBRID_RG);
-        Forge.getAssets().symbolLookup().put("G/W", FSkinImage.MANA_HYBRID_GW);
-        Forge.getAssets().symbolLookup().put("W/B", FSkinImage.MANA_HYBRID_WB);
-        Forge.getAssets().symbolLookup().put("U/R", FSkinImage.MANA_HYBRID_UR);
-        Forge.getAssets().symbolLookup().put("B/G", FSkinImage.MANA_HYBRID_BG);
-        Forge.getAssets().symbolLookup().put("R/W", FSkinImage.MANA_HYBRID_RW);
-        Forge.getAssets().symbolLookup().put("G/U", FSkinImage.MANA_HYBRID_GU);
-        Forge.getAssets().symbolLookup().put("2/W", FSkinImage.MANA_2W);
-        Forge.getAssets().symbolLookup().put("2/U", FSkinImage.MANA_2U);
-        Forge.getAssets().symbolLookup().put("2/B", FSkinImage.MANA_2B);
-        Forge.getAssets().symbolLookup().put("2/R", FSkinImage.MANA_2R);
-        Forge.getAssets().symbolLookup().put("2/G", FSkinImage.MANA_2G);
-        Forge.getAssets().symbolLookup().put("C/W", FSkinImage.MANA_HYBRID_CW);
-        Forge.getAssets().symbolLookup().put("C/U", FSkinImage.MANA_HYBRID_CU);
-        Forge.getAssets().symbolLookup().put("C/B", FSkinImage.MANA_HYBRID_CB);
-        Forge.getAssets().symbolLookup().put("C/R", FSkinImage.MANA_HYBRID_CR);
-        Forge.getAssets().symbolLookup().put("C/G", FSkinImage.MANA_HYBRID_CG);
-        Forge.getAssets().symbolLookup().put("P", FSkinImage.MANA_PHRYX);
-        Forge.getAssets().symbolLookup().put("P/W", FSkinImage.MANA_PHRYX_W);
-        Forge.getAssets().symbolLookup().put("P/U", FSkinImage.MANA_PHRYX_U);
-        Forge.getAssets().symbolLookup().put("P/B", FSkinImage.MANA_PHRYX_B);
-        Forge.getAssets().symbolLookup().put("P/R", FSkinImage.MANA_PHRYX_R);
-        Forge.getAssets().symbolLookup().put("P/G", FSkinImage.MANA_PHRYX_G);
-        Forge.getAssets().symbolLookup().put("W/P", FSkinImage.MANA_PHRYX_W);
-        Forge.getAssets().symbolLookup().put("U/P", FSkinImage.MANA_PHRYX_U);
-        Forge.getAssets().symbolLookup().put("B/P", FSkinImage.MANA_PHRYX_B);
-        Forge.getAssets().symbolLookup().put("R/P", FSkinImage.MANA_PHRYX_R);
-        Forge.getAssets().symbolLookup().put("G/P", FSkinImage.MANA_PHRYX_G);
-        Forge.getAssets().symbolLookup().put("P/B/G", FSkinImage.MANA_PHRYX_BG);
-        Forge.getAssets().symbolLookup().put("P/B/R", FSkinImage.MANA_PHRYX_BR);
-        Forge.getAssets().symbolLookup().put("P/G/U", FSkinImage.MANA_PHRYX_GU);
-        Forge.getAssets().symbolLookup().put("P/G/W", FSkinImage.MANA_PHRYX_GW);
-        Forge.getAssets().symbolLookup().put("P/R/G", FSkinImage.MANA_PHRYX_RG);
-        Forge.getAssets().symbolLookup().put("P/R/W", FSkinImage.MANA_PHRYX_RW);
-        Forge.getAssets().symbolLookup().put("P/U/B", FSkinImage.MANA_PHRYX_UB);
-        Forge.getAssets().symbolLookup().put("P/U/R", FSkinImage.MANA_PHRYX_UR);
-        Forge.getAssets().symbolLookup().put("P/W/B", FSkinImage.MANA_PHRYX_WB);
-        Forge.getAssets().symbolLookup().put("P/W/U", FSkinImage.MANA_PHRYX_WU);
-        Forge.getAssets().symbolLookup().put("B/G/P", FSkinImage.MANA_PHRYX_BG);
-        Forge.getAssets().symbolLookup().put("B/R/P", FSkinImage.MANA_PHRYX_BR);
-        Forge.getAssets().symbolLookup().put("G/U/P", FSkinImage.MANA_PHRYX_GU);
-        Forge.getAssets().symbolLookup().put("G/W/P", FSkinImage.MANA_PHRYX_GW);
-        Forge.getAssets().symbolLookup().put("R/G/P", FSkinImage.MANA_PHRYX_RG);
-        Forge.getAssets().symbolLookup().put("R/W/P", FSkinImage.MANA_PHRYX_RW);
-        Forge.getAssets().symbolLookup().put("U/B/P", FSkinImage.MANA_PHRYX_UB);
-        Forge.getAssets().symbolLookup().put("U/R/P", FSkinImage.MANA_PHRYX_UR);
-        Forge.getAssets().symbolLookup().put("W/B/P", FSkinImage.MANA_PHRYX_WB);
-        Forge.getAssets().symbolLookup().put("W/U/P", FSkinImage.MANA_PHRYX_WU);
-        for (int i = 0; i <= 20; i++) {
-            Forge.getAssets().symbolLookup().put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
-        }
-        Forge.getAssets().symbolLookup().put("X", FSkinImage.MANA_X);
-        Forge.getAssets().symbolLookup().put("Y", FSkinImage.MANA_Y);
-        Forge.getAssets().symbolLookup().put("Z", FSkinImage.MANA_Z);
-        Forge.getAssets().symbolLookup().put("CHAOS", FSkinImage.CHAOS);
-        Forge.getAssets().symbolLookup().put("Q", FSkinImage.UNTAP);
-        Forge.getAssets().symbolLookup().put("S", FSkinImage.MANA_SNOW);
-        Forge.getAssets().symbolLookup().put("T", FSkinImage.TAP);
-        Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
-        Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
-        Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
-        Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
-        Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);
-        Forge.getAssets().symbolLookup().put("M", FSkinImage.MANASHARD);
-    }
 
     public static String startColor(Color color) {
         return "<clr " + Color.rgba8888(color) + ">";
@@ -161,7 +86,11 @@ public class TextRenderer {
                 lastSpaceIdx = text.length();
                 nextSpaceIdx = boundary.next();
             }
-            ch = fullText.charAt(i);
+            try {
+                ch = fullText.charAt(i);
+            } catch (StringIndexOutOfBoundsException e) {
+                ch = Character.MIN_VALUE;
+            }
             switch (ch) {
             case '\r':
                 continue; //skip '\r' character
@@ -206,7 +135,7 @@ public class TextRenderer {
                 if (inSymbolCount > 0) {
                     inSymbolCount--;
                     if (text.length() > 0) {
-                        FSkinImage symbol = Forge.getAssets().symbolLookup().get(text.toString());
+                        FSkinImageInterface symbol = Forge.getAssets().symbolLookup().get(text.toString().replace("/", ""));
                         if (symbol != null) {
                             pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {
@@ -292,53 +221,53 @@ public class TextRenderer {
                     }
                 }
                 if (inKeywordCount > 0) {
-                    inKeywordCount--;
-                    if (inKeywordCount == 0 && text.length() > 0) {
-                        String keyword, value;
-                        text.deleteCharAt(0); //trim leading '<'
-                        if (text.charAt(0) == '/') {
-                            keyword = text.substring(1);
-                            value = null;
-                        }
-                        else {
-                            int idx = text.indexOf(" ");
-                            if (idx != -1) {
-                                keyword = text.substring(0, idx);
-                                value = text.substring(idx + 1);
-                            }
-                            else {
-                                keyword = text.toString();
+                    try {
+                        inKeywordCount--;
+                        if (inKeywordCount == 0 && text.length() > 0) {
+                            String keyword, value;
+                            text.deleteCharAt(0); //trim leading '<'
+                            if (text.charAt(0) == '/') {
+                                keyword = text.substring(1);
                                 value = null;
-                            }
-                        }
-                        boolean validKeyword = true;
-                        switch (keyword) {
-                        case "clr":
-                            colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
-                            break;
-                        case "span":
-                            // <span style="color:gray;">
-                            if (value != null && value.contains("color:")) {
-                                int startIdx = value.indexOf(':') + 1;
-                                int endIdx = value.indexOf(';');
-                                String colorName = value.substring(startIdx, endIdx);
-                                if (colorName.equals("gray")) {
-                                    colorOverride = Color.GRAY;
-                                }
                             } else {
-                                colorOverride = null;
+                                int idx = text.indexOf(" ");
+                                if (idx != -1) {
+                                    keyword = text.substring(0, idx);
+                                    value = text.substring(idx + 1);
+                                } else {
+                                    keyword = text.toString();
+                                    value = null;
+                                }
                             }
-                            break;
-                        default:
-                            validKeyword = false;
-                            break;
+                            boolean validKeyword = true;
+                            switch (keyword) {
+                                case "clr":
+                                    colorOverride = value != null ? new Color(Integer.parseInt(value)) : null;
+                                    break;
+                                case "span":
+                                    // <span style="color:gray;">
+                                    if (value != null && value.contains("color:")) {
+                                        int startIdx = value.indexOf(':') + 1;
+                                        int endIdx = value.indexOf(';');
+                                        String colorName = value.substring(startIdx, endIdx);
+                                        if (colorName.equals("gray")) {
+                                            colorOverride = Color.GRAY;
+                                        }
+                                    } else {
+                                        colorOverride = null;
+                                    }
+                                    break;
+                                default:
+                                    validKeyword = false;
+                                    break;
+                            }
+                            if (validKeyword) {
+                                text.setLength(0);
+                                lastSpaceIdx = -1;
+                                continue; //skip '>' character
+                            }
                         }
-                        if (validKeyword) {
-                            text.setLength(0);
-                            lastSpaceIdx = -1;
-                            continue; //skip '>' character
-                        }
-                    }
+                    } catch (Exception e) {}
                 }
                 break;
             case '(':
@@ -476,26 +405,31 @@ public class TextRenderer {
                             }
                         }
                         if (lastPieceIdx >= 0) {
-                            Piece lastPiece = pieces.get(lastPieceIdx);
-                            lineWidths.add(lastPiece.x + lastPiece.w);
-                            x = 0;
-                            for (int j = lastPieceIdx + 1; j < pieces.size(); j++) {
-                                Piece piece = pieces.get(j);
-                                piece.x = x;
-                                piece.y += lineHeight;
-                                piece.lineNum++;
-                                x += piece.w;
-                            }
-                            y += lineHeight;
-                            totalHeight += lineHeight;
-                            lineNum++;
-                            if (totalHeight > height) {
-                                //try next font size down if out of space
-                                if (font.canShrink()) {
-                                    updatePieces(font.shrink());
-                                    return;
+                            try {
+                                Piece lastPiece = pieces.get(lastPieceIdx);
+                                lineWidths.add(lastPiece.x + lastPiece.w);
+                                x = 0;
+                                int size = pieces.size();
+                                for (int j = lastPieceIdx + 1; j < size; j++) {
+                                    Piece piece = pieces.get(j);
+                                    piece.x = x;
+                                    piece.y += lineHeight;
+                                    piece.lineNum++;
+                                    x += piece.w;
                                 }
-                                needClip = true;
+                                y += lineHeight;
+                                totalHeight += lineHeight;
+                                lineNum++;
+                                if (totalHeight > height) {
+                                    //try next font size down if out of space
+                                    if (font.canShrink()) {
+                                        updatePieces(font.shrink());
+                                        return;
+                                    }
+                                    needClip = true;
+                                }
+                            } catch (Exception e) {
+                                //e.printStackTrace();
                             }
                         } else {
                             if (font.canShrink()) {
@@ -544,7 +478,10 @@ public class TextRenderer {
 
     private void setProps(String text, FSkinFont skinFont, float w, float h, boolean wrap0) {
         boolean needUpdate = false;
-        if (!fullText.equals(text)) {
+        if (fullText == null) {
+            fullText = text;
+            needUpdate = true;
+        } else if (!fullText.equals(text)) {
             fullText = text;
             needUpdate = true;
         }
@@ -599,35 +536,40 @@ public class TextRenderer {
         if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
             g.startClip(x, y, w, h);
         }
-        if (height > totalHeight && centerVertically) {
-            y += (height - totalHeight) / 2;
-        }
-        float[] alignmentOffsets = new float[lineWidths.size()];
-        for (int i = 0; i < lineWidths.size(); i++) {
-            switch (horzAlignment) {
-            case Align.left:
-                alignmentOffsets[i] = 0;
-                break;
-            case Align.center:
-                alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
-                break;
-            case Align.right:
-                alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
-                break;
+        try {
+            if (height > totalHeight && centerVertically) {
+                y += (height - totalHeight) / 2;
             }
-        }
+            float[] alignmentOffsets = new float[lineWidths.size()];
+            int size = lineWidths.size();
+            for (int i = 0; i < size; i++) {
+                switch (horzAlignment) {
+                    case Align.left:
+                        alignmentOffsets[i] = 0;
+                        break;
+                    case Align.center:
+                        alignmentOffsets[i] = Math.max((width - lineWidths.get(i)) / 2, 0);
+                        break;
+                    case Align.right:
+                        alignmentOffsets[i] = Math.max(width - lineWidths.get(i), 0);
+                        break;
+                }
+            }
 
-        visibleStartY -= y; //subtract y to make calculation quicker
-        float visibleEndY = visibleStartY + visibleHeight;
+            visibleStartY -= y; //subtract y to make calculation quicker
+            float visibleEndY = visibleStartY + visibleHeight;
 
-        for (Piece piece : pieces) {
-            if (piece.y + piece.h < visibleStartY) {
-                continue;
+            for (Piece piece : pieces) {
+                if (piece.y + piece.h < visibleStartY) {
+                    continue;
+                }
+                if (piece.y >= visibleEndY) {
+                    break;
+                }
+                piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
             }
-            if (piece.y >= visibleEndY) {
-                break;
-            }
-            piece.draw(g, color, x + alignmentOffsets[piece.lineNum], y);
+        } catch (Exception e) {
+            //e.printStackTrace();
         }
         if (needClip) {
             g.endClip();
@@ -671,9 +613,9 @@ public class TextRenderer {
     }
 
     private class SymbolPiece extends Piece {
-        private FSkinImage image;
+        private FSkinImageInterface image;
 
-        private SymbolPiece(FSkinImage image0, boolean inReminderText0) {
+        private SymbolPiece(FSkinImageInterface image0, boolean inReminderText0) {
             super(inReminderText0);
             image = image0;
         }

@@ -345,11 +345,8 @@ public final class CardScriptParser {
         }
     }
 
-    private static final Predicate<String> startsWith(final String s) {
-        return new Predicate<String>() {
-            @Override public boolean apply(final String input) {
-                return s.startsWith(input);
-            }};
+    private static Predicate<String> startsWith(final String s) {
+        return s::startsWith;
     }
 
     /**
@@ -452,7 +449,7 @@ public final class CardScriptParser {
             "RememberedPlayer", "RememberedPlayerCtrl",
             "nonRememberedPlayerCtrl", "TargetedPlayerCtrl",
             "TargetedControllerCtrl", "ActivePlayerCtrl",
-            "NonActivePlayerCtrl", "YouOwn", "YouDontOwn", "OppOwn",
+            "YouOwn", "YouDontOwn", "OppOwn",
             "TargetedPlayerOwn", "OwnerDoesntControl", "Other", "Self",
             "AttachedBy", "Attached", "NameNotEnchantingEnchantedPlayer",
             "NotAttachedTo", "Enchanted", "CanEnchantRemembered",
@@ -460,12 +457,12 @@ public final class CardScriptParser {
             "CanBeEnchantedByAllRemembered", "EquippedBy",
             "EquippedByTargeted", "EquippedByEnchanted", "FortifiedBy",
             "CanBeEquippedBy", "Equipped", "Fortified", "HauntedBy",
-            "notTributed", "madness", "Paired", "NotPaired", "PairedWith",
+            "notTributed", "madness", "Paired", "PairedWith",
             "Above", "DirectlyAbove", "TopGraveyardCreature",
             "BottomGraveyard", "TopLibrary", "BottomLibrary", "Cloned", "DamagedBy", "Damaged",
             "sharesPermanentTypeWith", "canProduceSameManaTypeWith", "SecondSpellCastThisTurn",
             "ThisTurnCast", "withFlashback", "tapped", "untapped", "faceDown",
-            "faceUp", "hasLevelUp", "DrawnThisTurn", "notDrawnThisTurn",
+            "faceUp", "hasLevelUp", "DrawnThisTurn",
             "firstTurnControlled", "notFirstTurnControlled",
             "startedTheTurnUntapped", "attackedOrBlockedSinceYourLastUpkeep",
             "blockedOrBeenBlockedSinceYourLastUpkeep",
@@ -475,7 +472,7 @@ public final class CardScriptParser {
             "wasDealtDamageByHostThisTurn", "wasDealtDamageByEquipeeThisTurn",
             "wasDealtDamageByEnchantedThisTurn", "dealtDamageThisTurn",
             "attackedThisTurn", "attackedLastTurn", "blockedThisTurn",
-            "gotBlockedThisTurn", "notAttackedThisTurn", "notAttackedLastTurn",
+            "gotBlockedThisTurn", "notAttackedThisTurn",
             "notBlockedThisTurn", "greatestPower", "yardGreatestPower",
             "leastPower", "leastToughness", "greatestCMC",
             "greatestRememberedCMC", "lowestRememberedCMC", "lowestCMC",
@@ -489,13 +486,13 @@ public final class CardScriptParser {
             "blockedBySourceThisTurn", "isBlockedByRemembered", "blockedRemembered",
             "blockedByRemembered", "unblocked", "attackersBandedWith",
             "kicked", "kicked1", "kicked2", "evoked",
-            "HasDevoured", "HasNotDevoured", "IsMonstrous", "IsNotMonstrous",
+            "HasDevoured", "IsMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
             "hasActivatedAbility", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
-            "IsNotCommander","IsRenowned", "IsNotRenowned");
+            "IsNotCommander", "IsRenowned");
     private static final Set<String> VALID_EXCLUSIVE_STARTSWITH = ImmutableSortedSet
             .of("named", "notnamed", "OwnedBy", "ControlledBy",
                     "ControllerControls", "AttachedTo", "EnchantedBy",
@@ -507,7 +504,7 @@ public final class CardScriptParser {
                     "ThisTurnEntered", "sharesTypeWith", "hasKeyword", "with",
                     "greatestPowerControlledBy", "greatestCMCControlledBy",
                     "power", "toughness", "cmc", "totalPT", "counters", "non",
-                    "RememberMap", "wasCastFrom", "wasNotCastFrom", "set",
+                    "RememberMap", "wasCastFrom", "set",
                     "inZone", "HasSVar");
 
     private static boolean isValidExclusive(String valid) {

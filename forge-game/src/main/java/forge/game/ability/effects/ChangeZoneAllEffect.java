@@ -7,13 +7,14 @@ import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -45,56 +46,14 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
         CardCollection cards;
-        List<Player> tgtPlayers = getTargetPlayers(sa);
+        PlayerCollection tgtPlayers = getTargetPlayers(sa);
         final Game game = sa.getActivatingPlayer().getGame();
 
         if ((!sa.usesTargeting() && !sa.hasParam("Defined")) || sa.hasParam("UseAllOriginZones")) {
             cards = new CardCollection(game.getCardsIn(origin));
             tgtPlayers = game.getPlayers();
         } else {
-            cards = new CardCollection();
-            for (final Player p : tgtPlayers) {
-                cards.addAll(p.getCardsIn(origin));
-
-                if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
-                    cards.removeAll(p.getCardsIn(ZoneType.Library));
-                }
-            }
-            if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
-                // Search library using changezoneall effect need a param "Search"
-                if (sa.getActivatingPlayer().hasKeyword("LimitSearchLibrary")) {
-                    for (final Player p : tgtPlayers) {
-                        cards.removeAll(p.getCardsIn(ZoneType.Library));
-                        int fetchNum = Math.min(p.getCardsIn(ZoneType.Library).size(), 4);
-                        cards.addAll(p.getCardsIn(ZoneType.Library, fetchNum));
-                    }
-                }
-                if (!sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
-                    // all these cards have "then that player shuffles", mandatory shuffle
-                    cards.removeAll(game.getCardsIn(ZoneType.Library));
-                }
-            }
-        }
-
-        if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && sa.getActivatingPlayer().canSearchLibraryWith(sa, null)) {
-            CardCollection libCards = CardLists.getValidCards(cards, "Card.inZoneLibrary", sa.getActivatingPlayer(), source, sa);
-            CardCollection libCardsYouOwn = CardLists.filterControlledBy(libCards, sa.getActivatingPlayer());
-            if (!libCardsYouOwn.isEmpty()) { // Only searching one's own library would fire Archive Trap's altcost
-                sa.getActivatingPlayer().incLibrarySearched();
-            }
-            if (!libCards.isEmpty()) {
-                sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
-            }
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
-            runParams.put(AbilityKey.Target, tgtPlayers);
-            game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
-        }
-        if (origin.contains(ZoneType.Hand) && sa.hasParam("Search")) {
-            CardCollection handCards = CardLists.filterControlledBy(CardLists.getValidCards(cards, "Card.inZoneHand", sa.getActivatingPlayer(), source, sa),
-                sa.getActivatingPlayer().getOpponents());
-            if (!handCards.isEmpty()) {
-                sa.getActivatingPlayer().getController().reveal(handCards, ZoneType.Hand, handCards.get(0).getOwner());
-            }
+            cards = tgtPlayers.getCardsIn(origin);
         }
 
         if (sa.hasParam("Optional")) {
@@ -103,7 +62,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (sa.hasParam("OptionQuestion")) {
                 message = TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets);
             } else {
-                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName());
+                message = Localizer.getInstance().getMessage("lblMoveTargetFromOriginToDestination", targets, Lang.joinHomogenous(origin, ZoneType::getTranslatedName), destination.getTranslatedName());
             }
 
             if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
@@ -182,6 +141,13 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (sa.hasParam("FaceDown")) {
                     c.turnFaceDown(true);
                     CardFactoryUtil.setFaceDownState(c, sa);
+                }
+                if (sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(c, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(sa.getActivatingPlayer(), c, cType, cAmount);
+                    moveParams.put(AbilityKey.CounterTable, table);
                 }
             }
             Card movedCard = null;

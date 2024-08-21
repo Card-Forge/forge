@@ -1,0 +1,6 @@
+Name:Raccoon Token
+ManaCost:no cost
+Types:Creature Raccoon
+PT:3/3
+Colors:green
+Oracle:

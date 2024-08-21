@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Kojak 1
-Title=Kojak
-Difficulty=easy
-Description=Mono U deck with Sunken City, Inundate, counterspells and bounce
-Icon=Kojak.jpg
-Deck Type=constructed
 [main]
 4 Merrow Levitator
 1 Spire Golem

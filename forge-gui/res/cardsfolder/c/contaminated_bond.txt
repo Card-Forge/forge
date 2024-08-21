@@ -7,4 +7,4 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execu
 T:Mode$ Blocks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLoseLifeBlock | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, its controller loses 3 life.
 SVar:TrigLoseLifeAttack:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 3
 SVar:TrigLoseLifeBlock:DB$ LoseLife | Defined$ TriggeredBlockerController | LifeAmount$ 3
-Oracle:Enchant creature (Target a creature as you cast this. This card enters the battlefield attached to that creature.)\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.
+Oracle:Enchant creature (Target a creature as you cast this. This card enters attached to that creature.)\nWhenever enchanted creature attacks or blocks, its controller loses 3 life.

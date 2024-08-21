@@ -3,8 +3,8 @@ ManaCost:5 B
 Types:Creature Horror
 PT:2/4
 K:Transmute:1 B B
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachOpp | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses 1 life for each creature they control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEachOpp | TriggerDescription$ When CARDNAME enters, each opponent loses 1 life for each creature they control.
 SVar:TrigEachOpp:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TrigLoseLife
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
 SVar:X:Count$Valid Creature.RememberedPlayerCtrl
-Oracle:When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature they control.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)
+Oracle:When Netherborn Phalanx enters, each opponent loses 1 life for each creature they control.\nTransmute {1}{B}{B} ({1}{B}{B}, Discard this card: Search your library for a card with the same mana value as this card, reveal it, put it into your hand, then shuffle. Transmute only as a sorcery.)

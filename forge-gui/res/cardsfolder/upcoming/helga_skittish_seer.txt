@@ -1,0 +1,11 @@
+Name:Helga, Skittish Seer
+ManaCost:G W U
+Types:Legendary Creature Frog Druid
+PT:1/3
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life, and put a +1/+1 counter on CARDNAME.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | RestrictValid$ Spell.Creature+cmcGE4,Spell.Creature+hasXCost | SpellDescription$ Add X mana of any one color, where X is CARDNAME's power. Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs.
+SVar:X:Count$CardPower
+Oracle:Whenever you cast a creature spell with mana value 4 or greater, you draw a card, gain 1 life, and put a +1/+1 counter on Helga, Skittish Seer.\n{T}: Add X mana of any one color, where X is Helga, Skittish Seer's power. Spend this mana only to cast creature spells with mana value 4 or greater or creature spells with {X} in their mana costs.

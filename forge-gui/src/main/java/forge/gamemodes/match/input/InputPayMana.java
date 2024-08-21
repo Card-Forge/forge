@@ -338,33 +338,30 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         // System.out.println("Chosen sa=" + chosen + " of " + chosen.getHostCard() + " to pay mana");
 
         locked = true;
-        game.getAction().invoke(new Runnable() {
-            @Override
-            public void run() {
-                if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
-                    final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
-                    boolean restrictionsMet = true;
+        game.getAction().invoke(() -> {
+            if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
+                final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
+                boolean restrictionsMet = true;
 
-                    for (AbilityManaPart sa : manaAbilities) {
-                        if (!sa.meetsManaRestrictions(saPaidFor)) {
-                            restrictionsMet = false;
-                            break;
-                        }
+                for (AbilityManaPart sa : manaAbilities) {
+                    if (!sa.meetsManaRestrictions(saPaidFor)) {
+                        restrictionsMet = false;
+                        break;
                     }
-
-                    if (restrictionsMet && !player.getController().isFullControl()) {
-                        player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
-                    }
-                    if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
-                        // force refresh in case too much mana got spent
-                        updateButtons();
-                        canPayManaCost = null;
-                    }
-                    onManaAbilityPaid();
                 }
-                // Need to call this to unlock
-                onStateChanged();
+
+                if (restrictionsMet && !player.getController().isFullControl()) {
+                    player.getManaPool().payManaFromAbility(saPaidFor, manaCost, chosen);
+                }
+                if (!restrictionsMet || chosen.getPayCosts().hasManaCost()) {
+                    // force refresh in case too much mana got spent
+                    updateButtons();
+                    canPayManaCost = null;
+                }
+                onManaAbilityPaid();
             }
+            // Need to call this to unlock
+            onStateChanged();
         });
 
         return true;
@@ -390,19 +387,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         if (supportAutoPay() && !locked) { //prevent AI taking over from double-clicking Auto
             locked = true;
             //use AI utility to automatically pay mana cost if possible
-            final Runnable proc = new Runnable() {
-                @Override
-                public void run() {
-                    ComputerUtilMana.payManaCost(manaCost, saPaidFor, player, effect);
-                }
-            };
+            final Runnable proc = () -> ComputerUtilMana.payManaCost(manaCost, saPaidFor, player, effect);
             //must run in game thread as certain payment actions can only be automated there
-            game.getAction().invoke(new Runnable() {
-                @Override
-                public void run() {
-                    runAsAi(proc);
-                    onStateChanged();
-                }
+            game.getAction().invoke(() -> {
+                runAsAi(proc);
+                onStateChanged();
             });
         }
     }
@@ -451,12 +440,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
             done();
             stop();
         } else {
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() {
-                    updateMessage();
-                }
-            });
+            FThreads.invokeInEdtNowOrLater(this::updateMessage);
         }
     }
 

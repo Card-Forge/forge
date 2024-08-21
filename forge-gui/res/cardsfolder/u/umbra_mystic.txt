@@ -2,6 +2,6 @@ Name:Umbra Mystic
 ManaCost:2 W
 Types:Creature Human Wizard
 PT:2/2
-S:Mode$ Continuous | Affected$ Aura.AttachedTo Permanent.YouCtrl | AddKeyword$ Totem armor | Description$ Auras attached to permanents you control have totem armor. (If an enchanted permanent you control would be destroyed, instead remove all damage from it and destroy an Aura attached to it.)
+S:Mode$ Continuous | Affected$ Aura.AttachedTo Permanent.YouCtrl | AddKeyword$ Umbra armor | Description$ Auras attached to permanents you control have umbra armor. (If an enchanted permanent you control would be destroyed, instead remove all damage from it and destroy an Aura attached to it.)
 SVar:PlayMain1:TRUE
-Oracle:Auras attached to permanents you control have totem armor. (If an enchanted permanent you control would be destroyed, instead remove all damage from it and destroy an Aura attached to it.)
+Oracle:Auras attached to permanents you control have umbra armor. (If an enchanted permanent you control would be destroyed, instead remove all damage from it and destroy an Aura attached to it.)

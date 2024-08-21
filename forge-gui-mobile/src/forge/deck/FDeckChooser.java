@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 
 import forge.Forge;
 import forge.assets.ImageCache;
@@ -1416,7 +1417,7 @@ public class FDeckChooser extends FScreen {
             @Override
             public void run(final Integer numOpponents) {
                 if (numOpponents == null) { return; }
-                List<DeckType> deckTypes = Arrays.asList(
+                List<DeckType> deckTypes = Lists.newArrayList(
                         DeckType.CUSTOM_DECK,
                         DeckType.PRECONSTRUCTED_DECK,
                         DeckType.QUEST_OPPONENT_DECK,

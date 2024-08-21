@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Nac Mac Feegle 3
-Title=Nac Mac Feegle
-Difficulty=hard
-Description=Mono W 1/1 token Deck with Humility, Increasing Devotion and Intangible Virtue
-Icon=Nac Mac Feegle 3.jpg
-Deck Type=constructed
 [main]
 1 Elspeth, Knight-Errant
 4 Gather the Townsfolk

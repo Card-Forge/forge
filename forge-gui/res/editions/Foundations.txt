@@ -1,0 +1,45 @@
+[metadata]
+Code=FDN
+Date=2024-11-15
+Name=Foundations
+Type=Core
+ScryfallCode=FDN
+
+[cards]
+12 C Felidar Savior @Ilse Gort
+16 C Helpful Hunter @Xabi Gaztelua
+21 C Prideful Parent @Leonardo Santanna
+66 R Nine-Lives Familiar @Bram Sels
+76 U Vengeful Bloodwitch @Jarel Threat
+116 R Anthem of Champions @Chris Rallis
+140 R Day of Judgment @Vincent Proce
+146 U Savannah Lions @Winona Nelson
+161 M Omniscience @Jason Chan
+175 U Hero's Downfall @Chris Rallis
+185 U Stromkirk Bloodthief @Caroline Gariba
+227 C Llanowar Elves @Kev Walker
+273 L Plains @Tingting Yeh
+277 L Swamp @Rebecca Guay
+379 M Omniscience @Dominik Mayer
+385 R Nine-Lives Familiar @Xabi Gaztelua
+405 R Anthem of Champions @Ryan Pancoast
+462 R Nine-Lives Familiar @Bram Sels
+477 R Anthem of Champions @Chris Rallis
+490 C Angelic Edict @Trevor Claxton
+493 U Elspeth's Smite @Livia Prima
+495 U Ingenious Leonin @Eric Deschamps
+497 R Jazal Goldmane @Aaron Miller
+498 U Leonin Skyhunter @Kev Walker
+499 U Leonin Vanguard @Aaron Miller
+500 C Moment of Triumph @Steven Belledin
+501 C Pacifism @Kev Walker
+516 U Bloodtithe Collector @Maria Zolotukhina
+518 R Crossway Troublemakers @Aaron J. Riley
+522 C Highborn Vampire @Denman Rooke
+524 C Moment of Craving @Steven Belledin
+525 C Offer Immortality @A. M. Sartor
+529 C Untamed Hunger @Willian Murai
+530 C Vampire Interloper @James Ryman
+531 C Vampire Neonate @Daarken
+532 C Vampire Spawn @Alex Brock
+564 C Uncharted Haven @Adam Paquette

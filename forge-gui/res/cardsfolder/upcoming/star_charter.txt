@@ -1,0 +1,10 @@
+Name:Star Charter
+ManaCost:3 W
+Types:Creature Bat Cleric
+PT:3/1
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDig | TriggerDescription$ At the beginning of your end step, if you gained or lost life this turn, look at the top four cards of your library. You may reveal a creature card with power 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Creature.powerLE3 | RestRandomOrder$ True
+SVar:X:Count$LifeYouGainedThisTurn/Plus.Y
+SVar:Y:PlayerCountPropertyYou$LifeLostThisTurn
+Oracle:Flying\nAt the beginning of your end step, if you gained or lost life this turn, look at the top four cards of your library. You may reveal a creature card with power 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

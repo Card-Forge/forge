@@ -3,7 +3,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.ai.AiController;
@@ -27,6 +26,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPutCounter;
 import forge.game.cost.CostRemoveCounter;
@@ -181,12 +181,7 @@ public class TokenAi extends SpellAbilityAi {
                 } else {
                     // Flash Foliage
                     CardCollection list = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-                    CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(Card c) {
-                            return c.getLethalDamage() == 1;
-                        }
-                    });
+                    CardCollection betterList = CardLists.filter(list, c -> c.getLethalDamage() == 1);
                     if (!betterList.isEmpty()) {
                         list = betterList;
                     }
@@ -221,7 +216,13 @@ public class TokenAi extends SpellAbilityAi {
                 && game.getCombat() != null
                 && !game.getCombat().getAttackers().isEmpty()
                 && alwaysOnOppAttack) {
-            return true;
+            for (Card attacker : game.getCombat().getAttackers()) {
+                if (CombatUtil.canBlock(attacker, actualToken)) {
+                    return true;
+                }
+            }
+            // if the token can't block, then what's the point?
+            return false;
         }
 
         return MyRandom.getRandom().nextFloat() <= chance;
@@ -363,6 +364,9 @@ public class TokenAi extends SpellAbilityAi {
         if (result == null) {
             throw new RuntimeException("don't find Token for TokenScript: " + sa.getParam("TokenScript"));
         }
+
+        // set battlefield zone for LKI checks
+        result.setLastKnownZone(ai.getZone(ZoneType.Battlefield));
 
         // Apply static abilities
         final Game game = ai.getGame();

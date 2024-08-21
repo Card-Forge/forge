@@ -1,0 +1,19 @@
+Name:Pinnacle Monk
+ManaCost:3 R R
+Types:Creature Djinn Monk
+PT:2/2
+K:Prowess
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+AlternateMode:Modal
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhen Pinnacle Monk enters, return target instant or sorcery card from your graveyard to your hand.
+
+ALTERNATE
+
+Name:Mystic Peak
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBTap | ReplacementResult$ Updated | Description$ As CARDNAME enters, you may pay 3 life. If you don't, it enters tapped.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ PayLife<3> | UnlessPayer$ You | StackDescription$ enters tapped.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+Oracle:As Mystic Peak enters, you may pay 3 life. If you don't, it enters tapped.\n{T}: Add {R}.

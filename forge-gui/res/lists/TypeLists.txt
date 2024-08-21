@@ -18,6 +18,7 @@ Urza's
 [CreatureTypes]
 Advisor:Advisors
 Aetherborn:Aetherborn
+Alien:Aliens
 Ally:Allies
 Angel:Angels
 Antelope:Antelopes
@@ -59,7 +60,6 @@ Caribou:Caribous
 Carrier:Carriers
 Cat:Cats
 Centaur:Centaurs
-Cephalid:Cephalids
 Chimera:Chimeras
 Citizen:Citizens
 Clamfolk:Clamfolk
@@ -189,7 +189,6 @@ Mouse:Mice
 Mutant:Mutants
 Myr:Myrs
 Mystic:Mystics
-Naga:Nagas
 Nautilus:Nautili
 Necron:Necrons
 Nephilim:Nephilims
@@ -228,6 +227,7 @@ Praetor:Praetors
 Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
+Raccoon:Raccoons
 Rabbit:Rabbits
 Ranger:Rangers
 Rat:Rats
@@ -259,10 +259,12 @@ Shark:Sharks
 Sheep:Sheep
 Siren:Sirens
 Skeleton:Skeletons
+Skunk:Skunks
 Slith:Sliths
 Sliver:Slivers
 Sloth:Sloths
 Slug:Slugs
+Snail:Snails
 Snake:Snakes
 Soldier:Soldiers
 Soltari:Soltaris
@@ -289,6 +291,7 @@ Thopter:Thopters
 Thrull:Thrulls
 Tiefling:Tieflings
 Time Lord:Time Lords
+Toy:Toys
 Treefolk:Treefolks
 Trilobite:Trilobites
 Triskelavite:Triskelavites
@@ -299,11 +302,11 @@ Unicorn:Unicorns
 Vampire:Vampires
 Varmint:Varmints
 Vedalken:Vedalkens
-Viashino:Viashinos
 Volver:Volvers
 Wall:Walls
 Warlock:Warlocks
 Warrior:Warriors
+Weasel:Weasels
 Weird:Weirds
 Werewolf:Werewolves
 Whale:Whales
@@ -336,6 +339,7 @@ Saga
 Shrine
 Shard
 [ArtifactTypes]
+Attraction
 Blood
 Bobblehead:Bobbleheads
 Clue:Clues

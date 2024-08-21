@@ -1,0 +1,8 @@
+Name:Bloodbraid Challenger
+ManaCost:3 R G
+Types:Creature Elf Berserker
+PT:3/2
+K:Cascade
+K:Haste
+K:Escape:3 R G ExileFromGrave<3/Card.Other/other>
+Oracle:Cascade\nHaste\nEscape—{3}{R}{G}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)

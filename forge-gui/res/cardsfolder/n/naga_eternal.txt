@@ -1,5 +1,5 @@
 Name:Naga Eternal
 ManaCost:2 U
-Types:Creature Zombie Naga
+Types:Creature Zombie Snake
 PT:3/2
 Oracle:

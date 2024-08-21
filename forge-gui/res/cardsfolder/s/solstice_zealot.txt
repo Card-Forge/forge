@@ -1,0 +1,8 @@
+Name:Solstice Zealot
+ManaCost:2 W
+Types:Creature Rhino Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ Tap | Cost$ T PayEnergy<1> | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+Oracle:When Solstice Zealot enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Tap target creature.

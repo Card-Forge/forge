@@ -1,0 +1,11 @@
+Name:Glaring Fleshraker
+ManaCost:2 C
+Types:Creature Eldrazi Drone
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.Colorless | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Colorless+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another colorless creature you control enters, CARDNAME deals 1 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+SVar:BuffedBy:Card.Colorless
+DeckHints:Color$Colorless
+Oracle:Whenever you cast a colorless spell, create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this creature: Add {C}."\nWhenever another colorless creature you control enters, Glaring Fleshraker deals 1 damage to each opponent.

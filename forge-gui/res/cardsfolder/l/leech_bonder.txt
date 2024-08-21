@@ -5,4 +5,4 @@ PT:3/3
 K:etbCounter:M1M1:2
 A:AB$ MoveCounter | Cost$ U Q | ValidTgts$ Creature | TgtPrompt$ Select target creatures to move counters | ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | CounterType$ Any | SpellDescription$ Move a counter from target creature onto a second target creature.
 AI:RemoveDeck:All
-Oracle:Leech Bonder enters the battlefield with two -1/-1 counters on it.\n{U}, {Q}: Move a counter from target creature onto a second target creature. ({Q} is the untap symbol.)
+Oracle:Leech Bonder enters with two -1/-1 counters on it.\n{U}, {Q}: Move a counter from target creature onto a second target creature. ({Q} is the untap symbol.)

@@ -22,7 +22,6 @@ import com.google.common.collect.Iterables;
 import forge.util.IItemReader;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FilenameFilter;
 import java.util.*;
 
@@ -142,12 +141,7 @@ public class StorageBase<T> implements IStorage<T> {
         ArrayList<File> allFilesList = new ArrayList<>();
         if (filesList != null)
             allFilesList.addAll(Arrays.asList(filesList));
-        File[] subFolders = downloadDir.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.isDirectory();
-            }
-        });
+        File[] subFolders = downloadDir.listFiles(File::isDirectory);
         if(subFolders != null) {
             for (File subFolder : subFolders)
                 allFilesList.addAll(getAllFilesList(subFolder, filenameFilter));

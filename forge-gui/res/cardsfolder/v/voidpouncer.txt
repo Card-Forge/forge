@@ -1,0 +1,12 @@
+Name:Voidpouncer
+ManaCost:1 R
+Types:Creature Eldrazi
+PT:3/1
+K:Devoid
+K:Kicker:2 C
+K:ETBReplacement:Other:DBPutCounter:Mandatory::Card.Self+kicked
+SVar:DBPutCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPutCounter2 | SpellDescription$ If CARDNAME was kicked, it enters with two +1/+1 counters and a trample counter on it and with haste.
+SVar:DBPutCounter2:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ Trample | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Keywords$ Haste | Duration$ Permanent
+DeckHas:Ability$Counters
+Oracle:Devoid (This card has no color.)\nKicker {2}{C} (You may pay an additional {2}{C} as you cast this spell.)\nIf Voidpouncer was kicked, it enters with two +1/+1 counters and a trample counter on it and with haste.

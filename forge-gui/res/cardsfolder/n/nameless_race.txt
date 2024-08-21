@@ -3,10 +3,10 @@ ManaCost:3 B
 Types:Creature
 PT:*/*
 K:Trample
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | ReplacementResult$ Updated | Description$ As CARDNAME enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PayLife | ReplacementResult$ Updated | Description$ As CARDNAME enters, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
 SVar:PayLife:AB$ StoreSVar | Cost$ Mandatory PayLife<X> | XMaxLimit$ Limit | SVar$ LifePaidOnETB | Type$ Calculate | Expression$ X
-#Dont use References, when the variable is set by StoreSVar
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
+# Don't use References, when the variable is set by StoreSVar
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered.
 SVar:X:Count$xPaid
 SVar:Limit:SVar$Active/Plus.Buried
 SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
@@ -14,4 +14,4 @@ SVar:Buried:Count$ValidGraveyard Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:Trample\nAs Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
+Oracle:Trample\nAs Nameless Race enters, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\nNameless Race's power and toughness are each equal to the life paid as it entered.

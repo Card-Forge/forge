@@ -1,0 +1,7 @@
+Name:Rockface Village
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ R | RestrictValid$ Spell.Creature | SpellDescription$ Add {R}. Spend this mana only to cast a creature spell.
+A:AB$ Pump | Cost$ R T | ValidTgts$ Lizard.YouCtrl,Mouse.YouCtrl,Otter.YouCtrl,Raccoon.YouCtrl | TgtPrompt$ Select target Lizard, Mouse, Otter, or Raccoon you control | NumAtt$ +1 | KW$ Haste | SorcerySpeed$ True | SpellDescription$ Target Lizard, Mouse, Otter, or Raccoon you control gets +1/+0 and gains haste until end of turn. Activate only as a sorcery.
+Oracle:{T}: Add {C}.\n{T}: Add {R}. Spend this mana only to cast a creature spell.\n{R}, {T}: Target Lizard, Mouse, Otter, or Raccoon you control gets +1/+0 and gains haste until end of turn. Activate only as a sorcery.

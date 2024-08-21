@@ -1,6 +1,6 @@
 Name:Sultai Flayer
 ManaCost:3 G
-Types:Creature Naga Shaman
+Types:Creature Snake Shaman
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+toughnessGE4 | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control with toughness 4 or greater dies, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4

@@ -1,0 +1,14 @@
+Name:Imskir Iron-Eater
+ManaCost:6 B R
+Types:Legendary Creature Demon
+PT:5/5
+K:Affinity:Artifact
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you draw X cards and you lose X life, where X is half the number of artifacts you control, rounded down.
+SVar:TrigDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y
+SVar:Y:Count$Valid Artifact.YouCtrl/HalfDown
+A:AB$ DealDamage | Cost$ 3 R Sac<1/Artifact> | ValidTgts$ Any | NumDmg$ X | SpellDescription$ NICKNAME deals damage to any target equal to the sacrificed artifact's mana value.
+SVar:X:Sacrificed$CardManaCost
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:Affinity for artifacts\nWhen Imskir Iron-Eater enters, you draw X cards and you lose X life, where X is half the number of artifacts you control, rounded down.\n{3}{R}, Sacrifice an artifact: Imskir deals damage to any target equal to the sacrificed artifact's mana value.

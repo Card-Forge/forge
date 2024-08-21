@@ -1,0 +1,11 @@
+Name:Corrupted Shapeshifter
+ManaCost:3 U
+Types:Creature Eldrazi Shapeshifter
+PT:*/*
+K:Devoid
+K:ETBReplacement:Other:MorphChoice
+SVar:MorphChoice:DB$ GenericChoice | Defined$ You | Choices$ Flyer,VigilancePump,Wall | SpellDescription$ As CARDNAME enters, it becomes your choice of a 3/3 creature with flying, a 2/5 creature with vigilance, or a 0/12 creature with defender.
+SVar:Flyer:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 3 | Toughness$ 3 | Keywords$ Flying | SpellDescription$ CARDNAME is a 3/3 creature with flying.
+SVar:VigilancePump:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 2 | Toughness$ 5 | Keywords$ Vigilance | SpellDescription$ CARDNAME is a 2/5 creature with vigilance.
+SVar:Wall:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 0 | Toughness$ 12 | Keywords$ Defender | SpellDescription$ CARDNAME is a 0/12 creature with defender.
+Oracle:Devoid (This card has no color.)\nAs Corrupted Shapeshifter enters, it becomes your choice of a 3/3 creature with flying, a 2/5 creature with vigilance, or a 0/12 creature with defender.

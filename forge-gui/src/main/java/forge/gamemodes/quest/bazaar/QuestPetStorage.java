@@ -76,11 +76,7 @@ public class QuestPetStorage {
                 this.addToMap(petCtrl);
             }
 
-        } catch (final SAXException e) {
-            e.printStackTrace();
-        } catch (final IOException e) {
-            e.printStackTrace();
-        } catch (final ParserConfigurationException e) {
+        } catch (final SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
     }
@@ -96,11 +92,7 @@ public class QuestPetStorage {
         * Refactoring this to List<QuestPetController> list = this.petsBySlot.computeIfAbsent(Integer.valueOf(iSlot), k -> new ArrayList<QuestPetController>());
         * will cause Android not to compile
         * */
-        List<QuestPetController> list = this.petsBySlot.get(Integer.valueOf(iSlot));
-        if (null == list) {
-            list = new ArrayList<>();
-            this.petsBySlot.put(Integer.valueOf(iSlot), list);
-        }
+        List<QuestPetController> list = this.petsBySlot.computeIfAbsent(iSlot, k -> new ArrayList<>());
         this.petsByName.put(petCtrl.getName(), petCtrl);
         list.add(petCtrl);
     }
@@ -124,7 +116,7 @@ public class QuestPetStorage {
      */
     public List<QuestPetController> getAvaliablePets(final int iSlot, final QuestAssets qA) {
         final List<QuestPetController> result = new ArrayList<>();
-        final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
+        final List<QuestPetController> allPossible = this.petsBySlot.get(iSlot);
         if (null != allPossible) {
             for (final QuestPetController c : allPossible) {
                 if (qA.getPetLevel(c.getSaveFileKey()) > 0) {
@@ -143,7 +135,7 @@ public class QuestPetStorage {
      */
     public List<QuestPetController> getAllPets(final int iSlot) {
         final List<QuestPetController> result = new ArrayList<>();
-        final List<QuestPetController> allPossible = this.petsBySlot.get(Integer.valueOf(iSlot));
+        final List<QuestPetController> allPossible = this.petsBySlot.get(iSlot);
         if (null != allPossible) {
             result.addAll(allPossible);
         }

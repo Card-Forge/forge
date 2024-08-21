@@ -155,7 +155,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("WithTotalPower")) {
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
                 CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
-                int negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                int negativeNum = Aggregates.sum(negativeCreats, Card::getNetPower);
                 CardCollection creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - negativeNum);
                 CardCollection chosenPool = new CardCollection();
                 int chosenP = 0;
@@ -171,7 +171,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         chosenP += c.getNetPower();
                         chosenPool.add(c);
                         negativeCreats.remove(c);
-                        negativeNum = Aggregates.sum(negativeCreats, CardPredicates.Accessors.fnGetNetPower);
+                        negativeNum = Aggregates.sum(negativeCreats, Card::getNetPower);
                         creature = CardLists.filterLEPower(p.getCreaturesInPlay(), totP - chosenP - negativeNum);
                         creature.removeAll(chosenPool);
                     }
@@ -245,7 +245,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     } else if (value.equals("ChosenType")) {
                         tag = host.getChosenType();
                     }
-                    if (!tag.equals("")) {
+                    if (!tag.isEmpty()) {
                         title = title + " (" + tag +")";
                     }
                 }

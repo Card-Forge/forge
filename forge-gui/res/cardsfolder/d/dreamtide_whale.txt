@@ -1,0 +1,9 @@
+Name:Dreamtide Whale
+ManaCost:2 U
+Types:Creature Whale
+PT:7/5
+K:Vanishing:2
+T:Mode$ SpellCast | ValidActivatingPlayer$ Player | ActivatorThisTurnCast$ EQ2 | TriggerZones$ Battlefield | Execute$ TrigProliferate | TriggerDescription$ Whenever a player casts their second spell each turn, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+SVar:TrigProliferate:DB$ Proliferate
+DeckHas:Ability$Proliferate
+Oracle:Vanishing 2 (This creature enters with two time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever a player casts their second spell each turn, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)

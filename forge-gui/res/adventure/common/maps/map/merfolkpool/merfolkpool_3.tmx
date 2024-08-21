@@ -34,6 +34,9 @@
   <object id="54" template="../../obj/enemy.tx" x="226.796" y="135.071">
    <properties>
     <property name="enemy" value="Hippo"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
    </properties>
   </object>
   <object id="56" template="../../obj/enemy.tx" x="105.75" y="54.25">

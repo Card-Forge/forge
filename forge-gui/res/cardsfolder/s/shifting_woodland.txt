@@ -1,0 +1,8 @@
+Name:Shifting Woodland
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control a Forest.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Forest.YouCtrl | ConditionCompare$ EQ0
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Clone | Cost$ 2 G G | TgtZone$ Graveyard | TgtPrompt$ Select target permanent card in your graveyard | ValidTgts$ Permanent.YouOwn | Duration$ UntilEndOfTurn | Activation$ Delirium | PrecostDesc$ Delirium — | SpellDescription$ CARDNAME becomes a copy of target permanent card in your graveyard until end of turn. Activate only if there are four or more card types among cards in your graveyard.
+Oracle:Shifting Woodland enters tapped unless you control a Forest.\n{T}: Add {G}.\nDelirium — {2}{G}{G}: Shifting Woodland becomes a copy of target permanent card in your graveyard until end of turn. Activate only if there are four or more card types among cards in your graveyard.

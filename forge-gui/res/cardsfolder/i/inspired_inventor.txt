@@ -1,0 +1,11 @@
+Name:Inspired Inventor
+ManaCost:2 W
+Types:Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBEnergy,DBPutCounter,DBToken
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3 | SpellDescription$ You get {E}{E}{E} (three energy counters).
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Servo artifact creature token.
+DeckHas:Ability$Counters|Token & Type$Servo|Artifact
+Oracle:When Inspired Inventor enters, choose one —\n• You get {E}{E}{E} (three energy counters).\n• Put a +1/+1 counter on target creature.\n• Create a 1/1 colorless Servo artifact creature token.

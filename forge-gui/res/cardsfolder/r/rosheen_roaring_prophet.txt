@@ -1,0 +1,13 @@
+Name:Rosheen, Roaring Prophet
+ManaCost:2 R G
+Types:Legendary Creature Giant Shaman
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill six cards. You may put a card with X in its mana cost from among them into your hand.
+SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 6 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+hasXCost | SelectPrompt$ You may put a card with X in its mana cost from among them into your hand | SubAbility$ DBCleanup
+A:AB$ Reveal | Cost$ T | RevealValid$ Card.hasXCost+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBMana | SpellDescription$ Reveal any number of cards with X in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain X.
+SVar:DBMana:DB$ Mana | Produced$ C | Amount$ MetalWorkerX | RestrictValid$ CostContainsX | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MetalWorkerX:Remembered$Amount/Twice
+DeckHas:Ability$Mill
+Oracle:When Rosheen, Roaring Prophet enters, mill six cards. You may put a card with X in its mana cost from among them into your hand.\n{T}: Reveal any number of cards with X in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain X.

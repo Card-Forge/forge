@@ -54,65 +54,23 @@ public class CardLists {
      * @return a CardCollection
      */
     public static CardCollection filterToughness(final Iterable<Card> in, final int atLeastToughness) {
-        return CardLists.filter(in, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.getNetToughness() <= atLeastToughness;
-            }
-        });
+        return CardLists.filter(in, c -> c.getNetToughness() <= atLeastToughness);
     }
 
     public static CardCollection filterPower(final Iterable<Card> in, final int atLeastPower) {
-        return CardLists.filter(in, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.getNetPower() >= atLeastPower;
-            }
-        });
+        return CardLists.filter(in, c -> c.getNetPower() >= atLeastPower);
     }
 
     public static CardCollection filterLEPower(final Iterable<Card> in, final int lessthanPower) {
-        return CardLists.filter(in, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.getNetPower() <= lessthanPower;
-            }
-        });
+        return CardLists.filter(in, c -> c.getNetPower() <= lessthanPower);
     }
   
-    public static final Comparator<Card> ToughnessComparator = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return a.getNetToughness() - b.getNetToughness();
-        }
-    };
-    public static final Comparator<Card> ToughnessComparatorInv = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return b.getNetToughness() - a.getNetToughness();
-        }
-    };
-    public static final Comparator<Card> PowerComparator = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return a.getNetCombatDamage() - b.getNetCombatDamage();
-        }
-    };
-    public static final Comparator<Card> CmcComparatorInv = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            return b.getCMC() - a.getCMC();
-        }
-    };
+    public static final Comparator<Card> ToughnessComparator = Comparator.comparingInt(Card::getNetToughness);
+    public static final Comparator<Card> ToughnessComparatorInv = Comparator.comparingInt(Card::getNetToughness).reversed();
+    public static final Comparator<Card> PowerComparator = Comparator.comparingInt(Card::getNetCombatDamage);
+    public static final Comparator<Card> CmcComparatorInv = Comparator.<Card>comparingInt(Card::getCMC).reversed();
 
-    public static final Comparator<Card> TextLenComparator = new Comparator<Card>() {
-        @Override
-        public int compare(final Card a, final Card b) {
-            final int aLen = a.getView().getText().length();
-            final int bLen = b.getView().getText().length();
-            return aLen - bLen;
-        }
-    };
+    public static final Comparator<Card> TextLenComparator = Comparator.comparingInt(a -> a.getView().getText().length());
 
     /**
      * <p>
@@ -122,7 +80,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByCmcDesc(final List<Card> list) {
-        Collections.sort(list, CmcComparatorInv);
+        list.sort(CmcComparatorInv);
     }
 
     /**
@@ -133,7 +91,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByToughnessAsc(final List<Card> list) {
-        Collections.sort(list, ToughnessComparator);
+        list.sort(ToughnessComparator);
     }
 
     /**
@@ -144,7 +102,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByToughnessDesc(final List<Card> list) {
-        Collections.sort(list, ToughnessComparatorInv);
+        list.sort(ToughnessComparatorInv);
     }
 
     /**
@@ -155,7 +113,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByPowerAsc(final List<Card> list) {
-        Collections.sort(list, PowerComparator);
+        list.sort(PowerComparator);
     }
 
     // the higher the attack the better
@@ -167,7 +125,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByPowerDesc(final List<Card> list) {
-        Collections.sort(list, Collections.reverseOrder(PowerComparator));
+        list.sort(Collections.reverseOrder(PowerComparator));
     }
 
     /**

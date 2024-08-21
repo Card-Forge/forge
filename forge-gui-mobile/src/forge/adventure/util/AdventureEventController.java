@@ -7,7 +7,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
@@ -101,7 +101,7 @@ public class AdventureEventController implements Serializable {
 
         AdventureEventData e ;
 
-        if (random.nextInt(10) <=4){
+        if (random.nextInt(10) <=2){
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         }
         else{
@@ -145,7 +145,7 @@ public class AdventureEventController implements Serializable {
         //Get all candidates then remove at random until no more than count are included
         //This will prevent duplicate choices within a round of a Jumpstart draft
         List<Deck> packsAsDecks = new ArrayList<>();
-        for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
+        for(SealedTemplate template : StaticData.instance().getSpecialBoosters())
         {
             if (!template.getEdition().contains(block.getLandSet().getCode()))
                 continue;

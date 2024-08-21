@@ -1,0 +1,13 @@
+Name:Guide of Souls
+ManaCost:W
+Types:Creature Human Cleric
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters, you gain 1 life and get {E} (an energy counter).
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBEnergy
+SVar:DBEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may pay {E}{E}{E}. When you do, put two +1/+1 counters and a flying counter on target attacking creature. It becomes an Angel in addition to its other types.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ PayEnergy<3> | Execute$ TrigPutCounter | TriggerDescription$ When you do, put two +1/+1 counters and a flying counter on target attacking creature. It becomes an Angel in addition to its other types.
+SVar:TrigPutCounter:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounterAll | ValidCards$ Creature.targetedBy | CounterType$ P1P1 | CounterNum$ 2 | CounterType2$ Flying | CounterNum2$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Angel | Duration$ Permanent
+Oracle:Whenever another creature you control enters, you gain 1 life and get {E} (an energy counter).\nWhenever you attack, you may pay {E}{E}{E}. When you do, put two +1/+1 counters and a flying counter on target attacking creature. It becomes an Angel in addition to its other types.

@@ -7,4 +7,4 @@ K:Flying
 K:Haste
 S:Mode$ Continuous | Affected$ Knight.YourTeamCtrl | AddKeyword$ Flying & Haste | Description$ Knights your team controls have flying and haste.
 DeckHints:Name$Sylvia Brightspear
-Oracle:Partner with Sylvia Brightspear (When this creature enters the battlefield, target player may put Sylvia into their hand from their library, then shuffle.)\nFlying, haste\nKnights your team controls have flying and haste.
+Oracle:Partner with Sylvia Brightspear (When this creature enters, target player may put Sylvia into their hand from their library, then shuffle.)\nFlying, haste\nKnights your team controls have flying and haste.

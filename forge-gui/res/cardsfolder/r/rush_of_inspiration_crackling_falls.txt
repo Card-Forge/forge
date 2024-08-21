@@ -1,0 +1,17 @@
+Name:Rush of Inspiration
+ManaCost:1 UR UR
+Types:Instant
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards.
+SVar:DBDiscard:DB$ Discard | NumCards$ 1 | Mode$ Random | UnlessCost$ PayEnergy<2> | UnlessPayer$ You | SpellDescription$ Then discard a card at random unless you pay {E}{E} (two energy counters).
+AlternateMode:Modal
+Oracle:Draw two cards. Then discard a card at random unless you pay {E}{E} (two energy counters).
+
+ALTERNATE
+
+Name:Crackling Falls
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
+Oracle:Crackling Falls enters tapped.\n{T}: Add {U} or {R}.

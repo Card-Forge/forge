@@ -26,26 +26,18 @@ public enum CSubmenuQuestDecks implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdDeckSelect = new UiCommand() {
-        @Override
-        public void run() {
-            final DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
-            if (deck != null) {
-                FModel.getQuest().setCurrentDeck(deck.toString());
-            }
-            else {
-                FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
-            }
-            FModel.getQuest().save();
+    private final UiCommand cmdDeckSelect = () -> {
+        final DeckProxy deck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedItem();
+        if (deck != null) {
+            FModel.getQuest().setCurrentDeck(deck.toString());
         }
+        else {
+            FModel.getQuest().setCurrentDeck(QPref.CURRENT_DECK.getDefault());
+        }
+        FModel.getQuest().save();
     };
 
-    private final UiCommand cmdDeckDelete = new UiCommand() {
-        @Override
-        public void run() {
-            update();
-        }
-    };
+    private final UiCommand cmdDeckDelete = this::update;
 
     @Override
     public void register() {
@@ -58,15 +50,12 @@ public enum CSubmenuQuestDecks implements ICDoc {
     public void initialize() {
         final Localizer localizer = Localizer.getInstance();
 
-        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblCreateaDeck"))) {
-                    return;
-                }
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuest(FModel.getQuest(), CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
+        VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand((UiCommand) () -> {
+            if (!QuestUtil.checkActiveQuest(localizer.getMessage("lblCreateaDeck"))) {
+                return;
             }
+            Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_QUEST);
+            CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(new CEditorQuest(FModel.getQuest(), CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture()));
         });
     }
 
@@ -95,12 +84,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
         view.getLstDecks().setDeleteCommand(cmdDeckDelete);
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                view.getBtnNewDeck().requestFocusInWindow();
-            }
-        });
+        SwingUtilities.invokeLater(() -> view.getBtnNewDeck().requestFocusInWindow());
     }
 
 }

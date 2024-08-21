@@ -1,0 +1,11 @@
+Name:Path of Annihilation
+ManaCost:3 G
+Types:Enchantment
+K:Devoid
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_0_1_eldrazi_spawn_sac
+S:Mode$ Continuous | Affected$ Eldrazi.YouCtrl | AddAbility$ AnyMana | Description$ Eldrazi you control have "{T}: Add one mana of any color."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE7 | ValidActivatingPlayer$ You | Execute$ TrigGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell with mana value 7 or greater, you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
+Oracle:Devoid (This card has no color.)\nWhen Path of Annihilation enters, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."\nEldrazi you control have "{T}: Add one mana of any color."\nWhenever you cast a creature spell with mana value 7 or greater, you gain 4 life.

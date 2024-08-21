@@ -1,0 +1,9 @@
+Name:Thornvault Forager
+ManaCost:1 G
+Types:Creature Squirrel Ranger
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Mana | Cost$ T Forage | Produced$ Combo Any | Amount$ 2 | SpellDescription$ Add two mana in any combination of colors.
+A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Hand | ChangeType$ Squirrel | SpellDescription$ Search your library for a Squirrel card, reveal it, put it into your hand, then shuffle.
+DeckHints:Ability$Graveyard & Type$Food
+Oracle:{T}: Add {G}.\n{T}, Forage: Add two mana in any combination of colors. (To forage, exile three cards from your graveyard or sacrifice a Food.)\n{3}{G}, {T}: Search your library for a Squirrel card, reveal it, put it into your hand, then shuffle.

@@ -1,0 +1,9 @@
+Name:Ulamog's Dreadsire
+ManaCost:10
+Types:Creature Eldrazi
+PT:10/10
+K:Vigilance
+K:Ward:Sac<1/Permanent.cmcGE1/a permanent with mana value 1 or greater>
+A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenScript$ c_10_10_eldrazi | TokenOwner$ You | SpellDescription$ Create a 10/10 colorless Eldrazi creature token.
+DeckHas:Ability$Token
+Oracle:Vigilance\nWard—Sacrifice a permanent with mana value 1 or greater\n{T}: Create a 10/10 colorless Eldrazi creature token.

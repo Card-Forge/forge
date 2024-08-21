@@ -1,0 +1,6 @@
+Name:Playful Shove
+ManaCost:1 R
+Types:Sorcery
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 1 | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals 1 damage to any target. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Playful Shove deals 1 damage to any target.\nDraw a card.

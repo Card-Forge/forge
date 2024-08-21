@@ -137,12 +137,6 @@ public class ForgeScript {
                 }
             }
             return found;
-        } else if (property.startsWith("HasSubtype")) {
-            final String subType = property.substring(11);
-            return cardState.getTypeWithChanges().hasSubtype(subType);
-        } else if (property.startsWith("HasNoSubtype")) {
-            final String subType = property.substring(13);
-            return !cardState.getTypeWithChanges().hasSubtype(subType);
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : cardState.getSpellAbilities()) {
                 if (sa.isActivatedAbility() && sa.getPayCosts().hasTapCost()) {
@@ -215,6 +209,8 @@ public class ForgeScript {
             return sa.isBargained();
         } else if (property.equals("Backup")) {
             return sa.isBackup();
+        } else if (property.equals("Bestow")) {
+            return sa.isBestow();
         } else if (property.equals("Blitz")) {
             return sa.isBlitz();
         } else if (property.equals("Buyback")) {
@@ -241,8 +237,6 @@ public class ForgeScript {
             return sa.isKicked();
         } else if (property.equals("Loyalty")) {
             return sa.isPwAbility();
-        } else if (property.equals("nonLoyalty")) {
-            return !sa.isPwAbility();
         } else if (property.equals("Aftermath")) {
             return sa.isAftermath();
         } else if (property.equals("MorphUp")) {
@@ -277,6 +271,8 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.DAYBOUND);
         } else if (property.equals("Nightbound")) {
             return sa.isKeyword(Keyword.NIGHTBOUND);
+        } else if (property.equals("Ward")) {
+            return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
         } else if (property.equals("ChapterNotLore")) {

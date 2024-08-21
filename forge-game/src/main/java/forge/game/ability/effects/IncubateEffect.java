@@ -56,7 +56,6 @@ public class IncubateEffect extends TokenEffectBase {
                         triggerList, combatChanged, sa);
 
                 triggerList.triggerChangesZoneAll(game, sa);
-                triggerList.clear();
 
                 game.fireEvent(new GameEventTokenCreated());
 

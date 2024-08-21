@@ -3,7 +3,7 @@ ManaCost:1 G G
 Types:Creature Wolf Spirit
 PT:3/3
 K:Flash
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Wolf+StrictlyOther+YouCtrl,Creature.Werewolf+StrictlyOther+YouCtrl | NumDef$ +3
 DeckHints:Type$Wolf|Werewolf
-Oracle:Flash\nWhen Spirit of the Hunt enters the battlefield, each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn.
+Oracle:Flash\nWhen Spirit of the Hunt enters, each other creature you control that's a Wolf or a Werewolf gets +0/+3 until end of turn.

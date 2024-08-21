@@ -2,8 +2,8 @@ Name:Curse of Wizardry
 ManaCost:2 B B
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color. | AILogic$ MostProminentInHumanDeck
 T:Mode$ SpellCast | ValidCard$ Card.ChosenColor | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player casts a spell of the chosen color, that player loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredActivator | LifeAmount$ 1
 AI:RemoveDeck:Random
-Oracle:As Curse of Wizardry enters the battlefield, choose a color.\nWhenever a player casts a spell of the chosen color, that player loses 1 life.
+Oracle:As Curse of Wizardry enters, choose a color.\nWhenever a player casts a spell of the chosen color, that player loses 1 life.

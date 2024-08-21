@@ -2,7 +2,6 @@ package forge.screens.planarconquest;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +31,6 @@ import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
@@ -59,26 +56,11 @@ public class LoadConquestScreen extends LaunchScreen {
         lblOldConquests.setAlignment(Align.center);
 
         btnNewConquest.setFont(FSkinFont.get(16));
-        btnNewConquest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                NewGameScreen.PlanarConquest.open();
-            }
-        });
+        btnNewConquest.setCommand(e -> NewGameScreen.PlanarConquest.open());
         btnRenameConquest.setFont(btnNewConquest.getFont());
-        btnRenameConquest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                renameConquest(lstConquests.getSelectedConquest());
-            }
-        });
+        btnRenameConquest.setCommand(e -> renameConquest(lstConquests.getSelectedConquest()));
         btnDeleteConquest.setFont(btnNewConquest.getFont());
-        btnDeleteConquest.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                deleteConquest(lstConquests.getSelectedConquest());
-            }
-        });
+        btnDeleteConquest.setCommand(e -> deleteConquest(lstConquests.getSelectedConquest()));
     }
 
     @Override
@@ -88,54 +70,48 @@ public class LoadConquestScreen extends LaunchScreen {
         updateEnabledButtons();
         revalidate();
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
-                final ConquestController qc = FModel.getConquest();
+        FThreads.invokeInBackgroundThread(() -> {
+            final File dirConquests = new File(ForgeConstants.CONQUEST_SAVE_DIR);
+            final ConquestController qc = FModel.getConquest();
 
-                Map<String, ConquestData> arrConquests = new HashMap<>();
-                if (dirConquests.listFiles() != null) {
-                    for (File f : dirConquests.listFiles()) {
-                        if (f.isDirectory()) {
-                            ConquestData data = new ConquestData(f);
-                            arrConquests.put(data.getName(), data);
-                        }
+            Map<String, ConquestData> arrConquests = new HashMap<>();
+            if (dirConquests.listFiles() != null) {
+                for (File f : dirConquests.listFiles()) {
+                    if (f.isDirectory()) {
+                        ConquestData data = new ConquestData(f);
+                        arrConquests.put(data.getName(), data);
                     }
                 }
+            }
 
-                // Populate list with available conquest data.
-                lstConquests.setConquests(new ArrayList<>(arrConquests.values()));
+            // Populate list with available conquest data.
+            lstConquests.setConquests(new ArrayList<>(arrConquests.values()));
 
-                // If there are quests available, force select.
-                if (arrConquests.size() > 0) {
-                    final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
+            // If there are quests available, force select.
+            if (arrConquests.size() > 0) {
+                final String questname = FModel.getConquestPreferences().getPref(CQPref.CURRENT_CONQUEST);
 
-                    // Attempt to select previous conquest.
-                    ConquestData currentConquest = arrConquests.get(questname);
-                    if (currentConquest != null) {
-                        lstConquests.setSelectedConquest(currentConquest);
-                    }
-                    else {
-                        lstConquests.setSelectedIndex(0);
-                    }
-
-                    // Drop into AllZone.
-                    qc.setModel(lstConquests.getSelectedConquest());
+                // Attempt to select previous conquest.
+                ConquestData currentConquest = arrConquests.get(questname);
+                if (currentConquest != null) {
+                    lstConquests.setSelectedConquest(currentConquest);
                 }
                 else {
-                    qc.setModel(null);
+                    lstConquests.setSelectedIndex(0);
                 }
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        lblOldConquests.setText(Forge.getLocalizer().getMessage("lblOldConquestDataPutIntoDirAndRestartForge", ForgeConstants.CONQUEST_SAVE_DIR));
-                        updateEnabledButtons();
-                        revalidate();
-                        lstConquests.scrollIntoView(lstConquests.selectedIndex);
-                    }
-                });
+
+                // Drop into AllZone.
+                qc.setModel(lstConquests.getSelectedConquest());
             }
+            else {
+                qc.setModel(null);
+            }
+            Gdx.app.postRunnable(() -> {
+                lblOldConquests.setText(Forge.getLocalizer().getMessage("lblOldConquestDataPutIntoDirAndRestartForge", ForgeConstants.CONQUEST_SAVE_DIR));
+                updateEnabledButtons();
+                revalidate();
+                lstConquests.scrollIntoView(lstConquests.selectedIndex);
+            });
         });
     }
 
@@ -192,71 +168,62 @@ public class LoadConquestScreen extends LaunchScreen {
     private void renameConquest(final ConquestData conquest) {
         if (conquest == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                String questName;
-                String oldConquestName = conquest.getName();
-                while (true) {
-                    questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewConquestName"), Forge.getLocalizer().getMessage("lblRenameConquest"), null, oldConquestName);
-                    if (questName == null) { return; }
+        ThreadUtil.invokeInGameThread(() -> {
+            String questName;
+            String oldConquestName = conquest.getName();
+            while (true) {
+                questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewConquestName"), Forge.getLocalizer().getMessage("lblRenameConquest"), null, oldConquestName);
+                if (questName == null) { return; }
 
-                    questName = QuestUtil.cleanString(questName);
-                    if (questName.equals(oldConquestName)) { return; } //quit if chose same name
+                questName = QuestUtil.cleanString(questName);
+                if (questName.equals(oldConquestName)) { return; } //quit if chose same name
 
-                    if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyConquestName"));
-                        continue;
-                    }
-
-                    boolean exists = false;
-                    for (ConquestData questData : lstConquests) {
-                        if (questData.getName().equalsIgnoreCase(questName)) {
-                            exists = true;
-                            break;
-                        }
-                    }
-                    if (exists) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblConquestNameExistsPleasePickAnotherName"));
-                        continue;
-                    }
-                    break;
+                if (questName.isEmpty()) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyConquestName"));
+                    continue;
                 }
 
-                //ensure prefs updated if current conquest is renamed
-                ConquestPreferences prefs = FModel.getConquestPreferences();
-                if (conquest.getName().equals(prefs.getPref(CQPref.CURRENT_CONQUEST))) {
-                    prefs.setPref(CQPref.CURRENT_CONQUEST, questName);
-                    prefs.save();
+                boolean exists = false;
+                for (ConquestData questData : lstConquests) {
+                    if (questData.getName().equalsIgnoreCase(questName)) {
+                        exists = true;
+                        break;
+                    }
                 }
-
-                conquest.rename(questName);
+                if (exists) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblConquestNameExistsPleasePickAnotherName"));
+                    continue;
+                }
+                break;
             }
+
+            //ensure prefs updated if current conquest is renamed
+            ConquestPreferences prefs = FModel.getConquestPreferences();
+            if (conquest.getName().equals(prefs.getPref(CQPref.CURRENT_CONQUEST))) {
+                prefs.setPref(CQPref.CURRENT_CONQUEST, questName);
+                prefs.save();
+            }
+
+            conquest.rename(questName);
         });
     }
 
     private void deleteConquest(final ConquestData conquest) {
         if (conquest == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!SOptionPane.showConfirmDialog(
-                        Forge.getLocalizer().getMessage("lblAreYouSuerDeleteConquest", conquest.getName()),
-                        Forge.getLocalizer().getMessage("lblDeleteConquest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
-                    return;
-                }
-
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        FileUtil.deleteDirectory(conquest.getDirectory());
-
-                        lstConquests.removeConquest(conquest);
-                        updateEnabledButtons();
-                    }
-                });
+        ThreadUtil.invokeInGameThread(() -> {
+            if (!SOptionPane.showConfirmDialog(
+                    Forge.getLocalizer().getMessage("lblAreYouSuerDeleteConquest", conquest.getName()),
+                    Forge.getLocalizer().getMessage("lblDeleteConquest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
+                return;
             }
+
+            FThreads.invokeInEdtLater(() -> {
+                FileUtil.deleteDirectory(conquest.getDirectory());
+
+                lstConquests.removeConquest(conquest);
+                updateEnabledButtons();
+            });
         });
     }
 
@@ -333,14 +300,8 @@ public class LoadConquestScreen extends LaunchScreen {
         }
 
         public void setConquests(List<ConquestData> qd0) {
-            List<ConquestData> sorted = new ArrayList<>();
-            sorted.addAll(qd0);
-            Collections.sort(sorted, new Comparator<ConquestData>() {
-                @Override
-                public int compare(final ConquestData x, final ConquestData y) {
-                    return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
-                }
-            });
+            List<ConquestData> sorted = new ArrayList<>(qd0);
+            sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

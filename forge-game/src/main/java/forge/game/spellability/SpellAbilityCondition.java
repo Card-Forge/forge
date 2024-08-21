@@ -17,16 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Iterables;
-
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -40,6 +31,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 /**
  * <p>
@@ -276,7 +270,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.isRevolt() && !activator.hasRevolt()) return false;
         if (this.isDesert() && !activator.hasDesert()) return false;
         if (this.isBlessing() && !activator.hasBlessing()) return false;
-        
+
         if (this.kicked && !sa.isKicked()) return false;
         if (this.kicked1 && !sa.isOptionalCostPaid(OptionalCost.Kicker1)) return false;
         if (this.kicked2 && !sa.isOptionalCostPaid(OptionalCost.Kicker2)) return false;

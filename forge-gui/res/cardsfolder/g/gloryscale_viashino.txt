@@ -1,6 +1,6 @@
 Name:Gloryscale Viashino
 ManaCost:1 R G W
-Types:Creature Viashino Soldier
+Types:Creature Lizard Soldier
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast a multicolored spell, CARDNAME gets +3/+3 until end of turn.
 SVar:TrigPump:DB$ Pump | NumAtt$ +3 | NumDef$ +3 | Defined$ Self

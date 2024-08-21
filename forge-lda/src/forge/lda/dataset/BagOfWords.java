@@ -69,9 +69,7 @@ public final class BagOfWords {
             try {
                 if (format.isDeckLegal(deck) && deck.getMain().toFlatList().size() == 60) {
                     legalDecks.add(deck);
-                    for (PaperCard card : deck.getMain().toFlatList()) {
-                        cardSet.add(card);
-                    }
+                    cardSet.addAll(deck.getMain().toFlatList());
                 }
             }catch(Exception e){
                 System.out.println("Skipping deck "+deck.getName());

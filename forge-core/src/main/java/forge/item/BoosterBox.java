@@ -18,28 +18,22 @@
 
 package forge.item;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
 
 public class BoosterBox extends BoxedProduct {
-    public static final Function<CardEdition, BoosterBox> FN_FROM_SET = new Function<CardEdition, BoosterBox>() {
-        @Override
-        public BoosterBox apply(final CardEdition arg1) {
-            if (arg1.getBoosterBoxCount() <= 0) {
-                return null;
-            }
-            BoosterBox.Template d = new Template(arg1);
-            if (d == null) { return null; }
-            return new BoosterBox(arg1.getName(), d, d.cntBoosters);
+
+    public static BoosterBox fromSet(CardEdition edition) {
+        if (edition.getBoosterBoxCount() <= 0) {
+            return null;
         }
-    };
+        BoosterBox.Template d = new Template(edition);
+        return new BoosterBox(edition.getName(), d, d.cntBoosters);
+    }
 
     private final BoosterBox.Template fpData;
 
@@ -68,7 +62,7 @@ public class BoosterBox extends BoxedProduct {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getNumberOfCardsExpected();
     }
     
-    public static class Template extends SealedProduct.Template {
+    public static class Template extends SealedTemplate {
         private final int cntBoosters;
 
         public int getCntBoosters() { return cntBoosters; }

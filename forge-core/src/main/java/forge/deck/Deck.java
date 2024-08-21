@@ -17,8 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -49,6 +47,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
+    private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
     private String lastCardArtPreferenceUsed = "";
@@ -91,10 +90,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public Deck(final Deck other, final String newName) {
         super(newName);
         other.cloneFieldsTo(this);
-        for (final Entry<DeckSection, CardPool> sections : other.parts.entrySet()) {
-            parts.put(sections.getKey(), new CardPool(sections.getValue()));
-        }
-        tags.addAll(other.getTags());
     }
 
     @Override
@@ -128,12 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            Collections.sort(result, new Comparator<PaperCard>() {
-                @Override
-                public int compare(final PaperCard c1, final PaperCard c2) {
-                    return Boolean.compare(c1.getRules().canBeSignatureSpell(), c2.getRules().canBeSignatureSpell());
-                }
-            });
+            result.sort(Comparator.comparing(c -> c.getRules().canBeSignatureSpell()));
         }
         return result;
     }
@@ -177,6 +167,21 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return cp != null && !cp.isEmpty();
     }
 
+    public PaperCard removeCardName(String name) {
+        PaperCard paperCard;
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getName().equalsIgnoreCase(name)) {
+                    paperCard = pc.getKey();
+                    pool.remove(paperCard);
+                    return paperCard;
+                }
+            }
+        }
+        return null;
+    }
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
@@ -209,6 +214,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             cp.addAll(kv.getValue());
         }
         result.setAiHints(StringUtils.join(aiHints, " | "));
+        result.setDraftNotes(draftNotes);
+        tags.addAll(result.getTags());
     }
 
     /*
@@ -295,12 +302,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
                 continue;  // pool empty, no card has been found!
 
             // Filter pool by applying DeckSection Validation schema for Card Types (to avoid inconsistencies)
-            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(PaperCard input) {
-                    return deckSection.validate(input);
-                }
-            });
+            CardPool filteredPool = pool.getFilteredPoolWithCardsCount(deckSection::validate);
             // Add all the cards from ValidPool anyway!
             List<String> whiteList = validatedSections.getOrDefault(s.getKey(), null);
             if (whiteList == null)
@@ -312,12 +314,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             validatedSections.put(s.getKey(), whiteList);
 
             if (filteredPool.countDistinct() != pool.countDistinct()) {
-                CardPool blackList = pool.getFilteredPoolWithCardsCount(new Predicate<PaperCard>() {
-                    @Override
-                    public boolean apply(PaperCard input) {
-                        return !(deckSection.validate(input));
-                    }
-                });
+                CardPool blackList = pool.getFilteredPoolWithCardsCount(input -> !(deckSection.validate(input)));
 
                 for (Entry<PaperCard, Integer> entry : blackList) {
                     DeckSection cardSection = DeckSection.matchingSection(entry.getKey());
@@ -499,13 +496,6 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return releaseDate.compareTo(referenceReleaseDate) < 0;
     }
 
-    public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
-        @Override
-        public String apply(Deck arg1) {
-            return arg1.getName();
-        }
-    };
-
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
@@ -525,7 +515,12 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool getAllCardsInASinglePool() {
         return getAllCardsInASinglePool(true);
     }
+
     public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
+        return getAllCardsInASinglePool(includeCommander, false);
+    }
+
+    public CardPool getAllCardsInASinglePool(final boolean includeCommander, boolean includeExtras) {
         final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
         if (this.has(DeckSection.Sideboard)) {
@@ -534,12 +529,28 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         if (includeCommander && this.has(DeckSection.Commander)) {
             allCards.addAll(this.get(DeckSection.Commander));
         }
+        if (includeExtras) {
+            for (DeckSection section : DeckSection.NONTRADITIONAL_SECTIONS)
+                if (this.has(section))
+                    allCards.addAll(this.get(section));
+        }
         // do not include schemes / avatars and any non-regular cards
         return allCards;
     }
 
+    /**
+     * Counts the number of cards with the given name across all deck sections.
+     */
+    public int countByName(String cardName) {
+        int sum = 0;
+        for (Entry<DeckSection, CardPool> section : this) {
+            sum += section.getValue().countByName(cardName);
+        }
+        return sum;
+    }
+
     public void setAiHints(String aiHintsInfo) {
-        if (aiHintsInfo == null || aiHintsInfo.trim().equals("")) {
+        if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
         }
         String[] hints = aiHintsInfo.split("\\|");
@@ -559,6 +570,24 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return "";
+    }
+
+    public void setDraftNotes(Map<String, String> draftNotes) {
+        if (draftNotes == null) {
+            return;
+        }
+
+        for(String key : draftNotes.keySet()) {
+            String notes = draftNotes.get(key);
+            if (notes == null || notes.isEmpty()) {
+                continue;
+            }
+            this.draftNotes.put(key, notes.trim());
+        }
+    }
+
+    public Map<String, String> getDraftNotes() {
+        return draftNotes;
     }
 
     public UnplayableAICards getUnplayableAICards() {

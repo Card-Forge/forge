@@ -1,0 +1,9 @@
+Name:Complaints Clerk
+ManaCost:3 W
+Types:Creature Sloth Beast Employee
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters the battlefield, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigToken | ValidResult$ 1 | ValidPlayer$ You | TriggerDescription$ Whenever you roll a 1, create a 1/1 white Clown Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_a_clown_robot
+Oracle:When Complaints Clerk enters the battlefield, open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)\nWhenever you roll a 1, create a 1/1 white Clown Robot artifact creature token.

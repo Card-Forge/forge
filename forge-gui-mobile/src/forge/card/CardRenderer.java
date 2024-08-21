@@ -37,7 +37,6 @@ import forge.assets.FRotatedImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardZoom.ActivateHandler;
@@ -54,6 +53,7 @@ import forge.item.InventoryItem;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
@@ -99,7 +99,7 @@ public class CardRenderer {
     public static final float PT_BOX_TINT = 0.2f;
     private static final float MANA_COST_PADDING = Utils.scale(3);
     public static final float SET_BOX_MARGIN = Utils.scale(1);
-    public static final float MANA_SYMBOL_SIZE = FSkinImage.MANA_1.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
+    public static final float MANA_SYMBOL_SIZE = FSkin.getImages().get(FSkinProp.IMG_MANA_1).getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
@@ -471,6 +471,7 @@ public class CardRenderer {
     public static void drawCardListItem(Graphics g, FSkinFont font, FSkinColor foreColor, FImageComplex cardArt, CardView card, String set, CardRarity rarity, int power, int toughness, String loyalty, int count, String suffix, float x, float y, float w, float h, boolean compactMode) {
         float cardArtHeight = h + 2 * FList.PADDING;
         float cardArtWidth = cardArtHeight * CARD_ART_RATIO;
+        CardView.CardStateView cardCurrentState = card.getCurrentState();
         if (cardArt != null) {
             float artX = x - FList.PADDING;
             float artY = y - FList.PADDING;
@@ -485,7 +486,7 @@ public class CardRenderer {
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int) srcY, (int) cardArt.getWidth(), (int) srcHeight, -90);
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY + cardArtWidth / 2, cardArtHeight, cardArtWidth / 2, artX + cardArtWidth / 2, artY + cardArtWidth / 2, cardArt.getRegionX(), (int) cardArt.getHeight() - (int) (srcY + srcHeight), (int) cardArt.getWidth(), (int) srcHeight, -90);
             } else if (card.getText().contains("Aftermath")) {
-                FImageComplex secondArt = CardRenderer.getAftermathSecondCardArt(card.getCurrentState().getImageKey());
+                FImageComplex secondArt = CardRenderer.getAftermathSecondCardArt(cardCurrentState.getImageKey());
                 g.drawRotatedImage(cardArt.getTexture(), artX, artY, cardArtWidth, cardArtHeight / 2, artX + cardArtWidth, artY + cardArtHeight / 2, cardArt.getRegionX(), cardArt.getRegionY(), (int) cardArt.getWidth(), (int) cardArt.getHeight() / 2, 0);
                 g.drawRotatedImage(secondArt.getTexture(), artX - cardArtHeight / 2, artY + cardArtHeight / 2, cardArtHeight / 2, cardArtWidth, artX, artY + cardArtHeight / 2, secondArt.getRegionX(), secondArt.getRegionY(), (int) secondArt.getWidth(), (int) secondArt.getHeight(), 90);
             } else {
@@ -495,19 +496,26 @@ public class CardRenderer {
 
         //render card name and mana cost on first line
         float manaCostWidth = 0;
-        ManaCost mainManaCost = card.getCurrentState().getManaCost();
-        if (card.isSplitCard()) {
-            //handle rendering both parts of split card
-            mainManaCost = card.getLeftSplitState().getManaCost();
-            ManaCost otherManaCost = card.getAlternateState().getManaCost();
-            manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
-            CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
-            //draw "//" between two parts of mana cost
-            manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
-            g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, Align.left, true);
+        ManaCost mainManaCost = cardCurrentState.getManaCost();
+        if (!mainManaCost.isNoCost() || (card.isSplitCard() && !card.getLeftSplitState().getManaCost().isNoCost())) {
+            if (card.isSplitCard()) {
+                //handle rendering both parts of split card
+                mainManaCost = card.getLeftSplitState().getManaCost();
+                ManaCost otherManaCost = card.getAlternateState().getManaCost();
+                manaCostWidth = CardFaceSymbols.getWidth(otherManaCost, MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+                CardFaceSymbols.drawManaCost(g, otherManaCost, x + w - manaCostWidth + MANA_COST_PADDING, y, MANA_SYMBOL_SIZE);
+                //draw "//" between two parts of mana cost
+                manaCostWidth += font.getBounds("//").width + MANA_COST_PADDING;
+                g.drawText("//", font, foreColor, x + w - manaCostWidth + MANA_COST_PADDING, y, w, MANA_SYMBOL_SIZE, false, Align.left, true);
+            }
+            manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
+            CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
         }
-        manaCostWidth += CardFaceSymbols.getWidth(mainManaCost, MANA_SYMBOL_SIZE);
-        CardFaceSymbols.drawManaCost(g, mainManaCost, x + w - manaCostWidth, y, MANA_SYMBOL_SIZE);
+        else if(cardCurrentState.isAttraction()) {
+            //For attractions, draw their lights instead of a mana cost.
+            float lightWidth = (6 * MANA_SYMBOL_SIZE) + MANA_COST_PADDING;
+            CardFaceSymbols.drawAttractionLights(g, cardCurrentState.getAttractionLights(), x + w - lightWidth, y, MANA_SYMBOL_SIZE, false);
+        }
 
         x += cardArtWidth;
         String name = CardTranslation.getTranslatedName(card.getCurrentState().getName());
@@ -535,14 +543,14 @@ public class CardRenderer {
             drawSetLabel(g, typeFont, set, rarity, x + availableTypeWidth + SET_BOX_MARGIN, y - SET_BOX_MARGIN, setWidth, lineHeight + 2 * SET_BOX_MARGIN);
         }
         String type = CardDetailUtil.formatCardType(card.getCurrentState(), true);
-        if (card.getCurrentState().isCreature()) { //include P/T or Loyalty at end of type
+        if (cardCurrentState.isCreature()) { //include P/T or Loyalty at end of type
             type += " (" + power + " / " + toughness + ")";
-        } else if (card.getCurrentState().isPlaneswalker()) {
+        } else if (cardCurrentState.isPlaneswalker()) {
             type += " (" + loyalty + ")";
-        } else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
+        } else if (cardCurrentState.isVehicle()) {
             type += String.format(" [%s / %s]", power, toughness);
-        } else if (card.getCurrentState().isBattle()) {
-            type += " (" + card.getCurrentState().getDefense() + ")";
+        } else if (cardCurrentState.isBattle()) {
+            type += " (" + cardCurrentState.getDefense() + ")";
         }
         g.drawText(type, typeFont, foreColor, x, y, availableTypeWidth, lineHeight, false, Align.left, true);
     }
@@ -805,10 +813,10 @@ public class CardRenderer {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
-            if ((keywordKey.indexOf("Flash") != -1)
-                    || ((abilityText.indexOf("May be played by") != -1)
-                    && (abilityText.indexOf("and as though it has flash") != -1))) {
-                if (keywordKey.indexOf("Flashback") == -1)
+            if ((keywordKey.contains("Flash"))
+                    || ((abilityText.contains("May be played by"))
+                    && (abilityText.contains("and as though it has flash")))) {
+                if (!keywordKey.contains("Flashback"))
                     CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }
@@ -903,6 +911,24 @@ public class CardRenderer {
             abiCount += 1;
         } else if (card.getCurrentState().hasFirstStrike()) {
             CardFaceSymbols.drawSymbol("firststrike", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasAnnihilator()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("annihilator", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasExalted()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("exalted", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }
@@ -1073,6 +1099,24 @@ public class CardRenderer {
                 abiX = cx + ((cw * 2) / 1.92f);
             }
             CardFaceSymbols.drawSymbol("lifelink", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasWard()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("ward", g, abiX, abiY, abiScale, abiScale);
+            abiY += abiSpace;
+            abiCount += 1;
+        }
+        if (card.getCurrentState().hasWither()) {
+            if (abiCount > 5) {
+                abiY = cy + (abiSpace * (abiCount - 6));
+                abiX = cx + ((cw * 2) / 1.92f);
+            }
+            CardFaceSymbols.drawSymbol("wither", g, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }

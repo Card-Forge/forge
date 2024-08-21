@@ -107,7 +107,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
         }
 
         if (filterRules != null) {
-            final Predicate<PaperCard> rulesPrinted = Predicates.compose(filterRules, PaperCard.FN_GET_RULES);
+            final Predicate<PaperCard> rulesPrinted = Predicates.compose(filterRules, PaperCard::getRules);
             filters = Predicates.and(filters, rulesPrinted);
         }
         if (filterRarity != null) {

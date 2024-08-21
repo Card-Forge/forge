@@ -1,0 +1,13 @@
+Name:Territory Culler
+ManaCost:4 G
+Types:Creature Eldrazi
+PT:7/5
+K:Devoid
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPeek | TriggerDescription$ Landfall — Whenever a land you control enters, look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Creature | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBToHand
+SVar:DBToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBToGrave
+SVar:DBToGrave:DB$ ChangeZone | Defined$ TopOfLibrary | Origin$ Library | Destination$ Graveyard | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+Oracle:Devoid (This card has no color.)\nReach\nLandfall — Whenever a land you control enters, look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.

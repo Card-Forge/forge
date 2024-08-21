@@ -20,7 +20,6 @@ package forge.gamemodes.quest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -252,6 +251,7 @@ public class QuestEventDraft implements IQuestEvent {
         for (final String name : aiNames) {
             if (playerName.equals(name)) {
                 isHumanPlayer = false;
+                break;
             }
         }
 
@@ -300,11 +300,7 @@ public class QuestEventDraft implements IQuestEvent {
             int value;
             final String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
 
-            if (MAP_PRICES.containsKey(boosterName)) {
-                value = MAP_PRICES.get(boosterName);
-            } else {
-                value = 395;
-            }
+            value = MAP_PRICES.getOrDefault(boosterName, 395);
 
             boosterPrices += value;
         }
@@ -465,7 +461,8 @@ public class QuestEventDraft implements IQuestEvent {
     }
 
     private BoosterPack getBoosterPack() {
-        return BoosterPack.FN_FROM_SET.apply(getRandomEdition());
+        CardEdition edition = getRandomEdition();
+        return BoosterPack.fromSet(edition);
     }
 
     private PaperCard getPromoCard() {
@@ -528,11 +525,7 @@ public class QuestEventDraft implements IQuestEvent {
 
         final String boosterName = booster.getName();
 
-        if (MAP_PRICES.containsKey(boosterName)) {
-            value = MAP_PRICES.get(boosterName);
-        } else {
-            value = 395;
-        }
+        value = MAP_PRICES.getOrDefault(boosterName, 395);
 
         return value;
 
@@ -812,6 +805,7 @@ public class QuestEventDraft implements IQuestEvent {
                 for (CardEdition set : block.getSets()) {
                     if (!allowedQuestSets.contains(set)) {
                         blockAllowed = false;
+                        break;
                     }
                 }
 
@@ -959,11 +953,7 @@ public class QuestEventDraft implements IQuestEvent {
             int value;
             final String boosterName = FModel.getMagicDb().getEditions().get(boosterSet).getName() + " Booster Pack";
 
-            if (MAP_PRICES.containsKey(boosterName)) {
-                value = MAP_PRICES.get(boosterName);
-            } else {
-                value = 395;
-            }
+            value = MAP_PRICES.getOrDefault(boosterName, 395);
 
             entryFee += value;
 
@@ -1001,16 +991,13 @@ public class QuestEventDraft implements IQuestEvent {
         }
 
         final boolean oldSetsFirst = sets.get(0).getDate().before(FModel.getMagicDb().getEditions().get("SOM").getDate());
-        Collections.sort(allowedSets, new Comparator<CardEdition>() {
-            @Override
-            public int compare(final CardEdition edition1, final CardEdition edition2) {
-                if (edition1.getDate().before(edition2.getDate())) {
-                    return oldSetsFirst ? -1 : 1;
-                } else if (edition1.getDate().after(edition2.getDate())) {
-                    return oldSetsFirst ? 1 : -1;
-                }
-                return 0;
+        allowedSets.sort((edition1, edition2) -> {
+            if (edition1.getDate().before(edition2.getDate())) {
+                return oldSetsFirst ? -1 : 1;
+            } else if (edition1.getDate().after(edition2.getDate())) {
+                return oldSetsFirst ? 1 : -1;
             }
+            return 0;
         });
 
         boolean largeSetFound = false;
@@ -1069,7 +1056,7 @@ public class QuestEventDraft implements IQuestEvent {
             if (standings[i].equals(HUMAN)) {
                 bracket.addTournamentPlayer(GamePlayerUtil.getGuiPlayer());
             } else {
-                int idx = Integer.valueOf(standings[i]) - 1;
+                int idx = Integer.parseInt(standings[i]) - 1;
                 bracket.addTournamentPlayer(GamePlayerUtil.createAiPlayer(aiNames[idx], aiIcons[idx]), idx);
             }
         }
@@ -1088,7 +1075,7 @@ public class QuestEventDraft implements IQuestEvent {
                 // Bracket now up to date!
                 break;
             } else {
-                int idx = standings[i].equals(HUMAN) ? -1 : Integer.valueOf(standings[i]) - 1;
+                int idx = standings[i].equals(HUMAN) ? -1 : Integer.parseInt(standings[i]) - 1;
                 pairing.setWinnerByIndex(idx);
                 bracket.reportMatchCompletion(pairing);
             }

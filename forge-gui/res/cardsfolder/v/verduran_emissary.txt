@@ -3,8 +3,8 @@ ManaCost:2 G
 Types:Creature Human Wizard
 PT:2/3
 K:Kicker:1 R
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters, if it was kicked, destroy target artifact. It can't be regenerated.
 SVar:TrigKicker:DB$ Destroy | ValidTgts$ Artifact | NoRegen$ True | TgtPrompt$ Select target artifact
 DeckHints:Color$Red
 SVar:NeedsToPlayKicked:Artifact.OppCtrl
-Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nWhen Verduran Emissary enters the battlefield, if it was kicked, destroy target artifact. It can't be regenerated.
+Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nWhen Verduran Emissary enters, if it was kicked, destroy target artifact. It can't be regenerated.

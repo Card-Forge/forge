@@ -1,6 +1,6 @@
 Name:Sagu Archer
 ManaCost:4 G
-Types:Creature Naga Archer
+Types:Creature Snake Archer
 PT:2/5
 K:Reach
 K:Morph:4 G

@@ -2,9 +2,9 @@ Name:Rope Line Attendant
 ManaCost:G W
 Types:Creature Cat Citizen
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually gain "When this creature enters the battlefield, create a 1/1 green and white Citizen creature token."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters, creature cards in your hand perpetually gain "When this creature enters, create a 1/1 green and white Citizen creature token."
 SVar:TrigAnimate:DB$ AnimateAll | Zone$ Hand | ValidCards$ Creature.YouOwn | Triggers$ ETBToken | Duration$ Perpetual
-SVar:ETBToken:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters the battlefield, create a 1/1 green and white Citizen creature token.
+SVar:ETBToken:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 green and white Citizen creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen
 DeckHas:Ability$Token
-Oracle:When Rope Line Attendant enters the battlefield, creature cards in your hand perpetually gain "When this creature enters the battlefield, create a 1/1 green and white Citizen creature token."
+Oracle:When Rope Line Attendant enters, creature cards in your hand perpetually gain "When this creature enters, create a 1/1 green and white Citizen creature token."

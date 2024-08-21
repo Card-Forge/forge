@@ -1,0 +1,11 @@
+Name:Expel the Unworthy
+ManaCost:1 W
+Types:Sorcery
+K:Kicker:2 W
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature with mana value 3 or less | ValidTgts$ Creature.cmcLE3 | TargetMin$ X | TargetMax$ X | SubAbility$ DBChangeZone | StackDescription$ None | SpellDescription$ Choose target creature with mana value 3 or less.
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ Y | TargetMax$ Y | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | Condition$ Kicked | SubAbility$ DBGainLife | StackDescription$ Exile {c:Targeted}, | SpellDescription$ If this spell was kicked, instead choose target creature. Exile the chosen creature,
+SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ Z | StackDescription$ SpellDescription | SpellDescription$ then its controller gains life equal to its mana value.
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.1.0
+SVar:Z:Targeted$CardManaCost
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nChoose target creature with mana value 3 or less. If this spell was kicked, instead choose target creature. Exile the chosen creature, then its controller gains life equal to its mana value.

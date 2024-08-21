@@ -4,6 +4,6 @@ Types:Creature Thrull
 PT:1/2
 K:Flash
 K:Flying
-S:Mode$ DisableTriggers | ValidCause$ Creature,Artifact | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Artifacts and creatures entering the battlefield don't cause abilities to trigger.
+S:Mode$ DisableTriggers | ValidCause$ Creature,Artifact | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Artifacts and creatures entering don't cause abilities to trigger.
 AI:RemoveDeck:Random
-Oracle:Flash\nFlying\nArtifacts and creatures entering the battlefield don't cause abilities to trigger.
+Oracle:Flash\nFlying\nArtifacts and creatures entering don't cause abilities to trigger.

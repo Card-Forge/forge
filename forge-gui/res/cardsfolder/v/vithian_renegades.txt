@@ -2,6 +2,6 @@ Name:Vithian Renegades
 ManaCost:1 R G
 Types:Creature Human Shaman
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-Oracle:When Vithian Renegades enters the battlefield, destroy target artifact.
+Oracle:When Vithian Renegades enters, destroy target artifact.

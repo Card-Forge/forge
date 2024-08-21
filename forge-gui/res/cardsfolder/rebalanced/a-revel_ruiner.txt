@@ -1,9 +1,9 @@
 Name:A-Revel Ruiner
 ManaCost:3 B
-Types:Creature Cephalid Rogue
+Types:Creature Octopus Rogue
 PT:3/2
 K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters, it connives.
 SVar:TrigConnive:DB$ Connive
 DeckHas:Ability$Discard|Counters
-Oracle:Menace\nWhen Revel Ruiner enters the battlefield, it connives.
+Oracle:Menace\nWhen Revel Ruiner enters, it connives.

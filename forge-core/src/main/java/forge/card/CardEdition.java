@@ -17,14 +17,15 @@
  */
 package forge.card;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.StaticData;
 import forge.card.CardDb.CardArtPreference;
 import forge.deck.CardPool;
+import forge.item.BoosterSlot;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
+import forge.item.SealedTemplateWithSlots;
 import forge.util.*;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
@@ -141,7 +142,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
         JUMPSTART("jumpstart"),
-        REBALANCED("rebalanced");
+        REBALANCED("rebalanced"),
+        ETERNAL("eternal");
 
         private final String name;
 
@@ -166,12 +168,14 @@ public final class CardEdition implements Comparable<CardEdition> {
         public final String collectorNumber;
         public final String name;
         public final String artistName;
+        public final String functionalVariantName;
 
-        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName) {
+        public CardInSet(final String name, final String collectorNumber, final CardRarity rarity, final String artistName, final String functionalVariantName) {
             this.name = name;
             this.collectorNumber = collectorNumber;
             this.rarity = rarity;
             this.artistName = artistName;
+            this.functionalVariantName = functionalVariantName;
         }
 
         public String toString() {
@@ -188,6 +192,10 @@ public final class CardEdition implements Comparable<CardEdition> {
             if (artistName != null) {
                 sb.append(" @");
                 sb.append(artistName);
+            }
+            if (functionalVariantName != null) {
+                sb.append(" $");
+                sb.append(functionalVariantName);
             }
             return sb.toString();
         }
@@ -270,6 +278,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     private String fatPackExtraSlots = "";
 
     // Booster/draft info
+    private List<BoosterSlot> boosterSlots = null;
     private boolean smallSetOverride = false;
     private boolean foilAlwaysInCommonSlot = false;
     private FoilType foilType = FoilType.NOT_SUPPORTED;
@@ -292,8 +301,8 @@ public final class CardEdition implements Comparable<CardEdition> {
     private final Map<String, List<String>> customPrintSheetsToParse;
 
     private int boosterArts = 1;
-    private SealedProduct.Template boosterTpl = null;
-    private final Map<String, SealedProduct.Template> boosterTemplates = new HashMap<>();
+    private SealedTemplate boosterTpl = null;
+    private final Map<String, SealedTemplate> boosterTemplates = new HashMap<>();
 
     private CardEdition(ListMultimap<String, CardInSet> cardMap, Map<String, Integer> tokens, Map<String, List<String>> customPrintSheetsToParse) {
         this.cardMap = cardMap;
@@ -377,6 +386,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     public List<CardInSet> getCards() { return cardMap.get(EditionSectionWithCollectorNumbers.CARDS.getName()); }
     public List<CardInSet> getRebalancedCards() { return cardMap.get(EditionSectionWithCollectorNumbers.REBALANCED.getName()); }
+    public List<CardInSet> getFunnyEternalCards() { return cardMap.get(EditionSectionWithCollectorNumbers.ETERNAL.getName()); }
     public List<CardInSet> getAllCardsInSet() {
         return cardsInSet;
     }
@@ -414,13 +424,6 @@ public final class CardEdition implements Comparable<CardEdition> {
     public boolean isModern() { return getDate().after(parseDate("2003-07-27")); } //8ED and above are modern except some promo cards and others
 
     public Map<String, Integer> getTokens() { return tokenNormalized; }
-
-    public static final Function<CardEdition, String> FN_GET_CODE = new Function<CardEdition, String>() {
-        @Override
-        public String apply(final CardEdition arg1) {
-            return arg1.getCode();
-        }
-    };
 
     @Override
     public int compareTo(final CardEdition o) {
@@ -471,10 +474,10 @@ public final class CardEdition implements Comparable<CardEdition> {
         return boosterArts;
     }
 
-    public SealedProduct.Template getBoosterTemplate() {
+    public SealedTemplate getBoosterTemplate() {
         return getBoosterTemplate("Draft");
     }
-    public SealedProduct.Template getBoosterTemplate(String boosterType) {
+    public SealedTemplate getBoosterTemplate(String boosterType) {
         return boosterTemplates.get(boosterType);
     }
     public String getRandomBoosterKind() {
@@ -534,12 +537,12 @@ public final class CardEdition implements Comparable<CardEdition> {
         private final boolean isCustomEditions;
 
         public Reader(File path) {
-            super(path, CardEdition.FN_GET_CODE);
+            super(path, CardEdition::getCode);
             this.isCustomEditions = false;
         }
 
         public Reader(File path, boolean isCustomEditions) {
-            super(path, CardEdition.FN_GET_CODE);
+            super(path, CardEdition::getCode);
             this.isCustomEditions = isCustomEditions;
         }
 
@@ -567,21 +570,32 @@ public final class CardEdition implements Comparable<CardEdition> {
                     * cnum - grouping #2
                     * rarity - grouping #4
                     * name - grouping #5
+                    * artist name - grouping #7
+                    * functional variant name - grouping #9
              */
 //                "(^(.?[0-9A-Z]+.?))?(([SCURML]) )?(.*)$"
-                "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@]*)( @(.*))?$"
+                    "(^(.?[0-9A-Z]+\\S?[A-Z]*)\\s)?(([SCURML])\\s)?([^@\\$]*)( @([^\\$]*))?( \\$(.+))?$"
             );
 
             ListMultimap<String, CardInSet> cardMap = ArrayListMultimap.create();
+            List<BoosterSlot> boosterSlots = null;
             Map<String, Integer> tokenNormalized = new HashMap<>();
             Map<String, List<String>> customPrintSheetsToParse = new HashMap<>();
             List<String> editionSectionsWithCollectorNumbers = EditionSectionWithCollectorNumbers.getNames();
+
+            FileSection metadata = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
+            List<String> boosterSlotsToParse = Lists.newArrayList();
+            if (metadata.contains("BoosterSlots")) {
+                boosterSlotsToParse = Lists.newArrayList(metadata.get("BoosterSlots").split(","));
+                boosterSlots = Lists.newArrayList();
+            }
 
             for (String sectionName : contents.keySet()) {
                 // skip reserved section names like 'metadata' and 'tokens' that are handled separately
                 if (reservedSectionNames.contains(sectionName)) {
                     continue;
                 }
+
                 // parse sections of the format "<collector number> <rarity> <name>"
                 if (editionSectionsWithCollectorNumbers.contains(sectionName)) {
                     for(String line : contents.get(sectionName)) {
@@ -595,14 +609,17 @@ public final class CardEdition implements Comparable<CardEdition> {
                         CardRarity r = CardRarity.smartValueOf(matcher.group(4));
                         String cardName = matcher.group(5);
                         String artistName = matcher.group(7);
-                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName);
+                        String functionalVariantName = matcher.group(9);
+                        CardInSet cis = new CardInSet(cardName, collectorNumber, r, artistName, functionalVariantName);
 
                         cardMap.put(sectionName, cis);
                     }
-                }
-                // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
-                // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
-                else {
+                } else if (boosterSlotsToParse.contains(sectionName)) {
+                    // parse booster slots of the format "Base=N\n|Replace=<amount> <sheet>"
+                    boosterSlots.add(BoosterSlot.parseSlot(sectionName, contents.get(sectionName)));
+                } else {
+                    // save custom print sheets of the format "<amount> <name>|<setcode>|<art index>"
+                    // to parse later when printsheets are loaded lazily (and the cardpool is already initialized)
                     customPrintSheetsToParse.put(sectionName, contents.get(sectionName));
                 }
             }
@@ -622,31 +639,37 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
 
             CardEdition res = new CardEdition(cardMap, tokenNormalized, customPrintSheetsToParse);
-
+            res.boosterSlots = boosterSlots;
             // parse metadata section
-            FileSection section = FileSection.parse(contents.get("metadata"), FileSection.EQUALS_KV_SEPARATOR);
-            res.name  = section.get("name");
-            res.date  = parseDate(section.get("date"));
-            res.code  = section.get("code");
-            res.code2 = section.get("code2");
+            res.name  = metadata.get("name");
+            res.date  = parseDate(metadata.get("date"));
+            res.code  = metadata.get("code");
+            res.code2 = metadata.get("code2");
             if (res.code2 == null) {
                 res.code2 = res.code;
             }
-            res.scryfallCode = section.get("ScryfallCode");
+            res.scryfallCode = metadata.get("ScryfallCode");
             if (res.scryfallCode == null) {
                 res.scryfallCode = res.code;
             }
-            res.cardsLanguage = section.get("CardLang");
+            res.cardsLanguage = metadata.get("CardLang");
             if (res.cardsLanguage == null) {
                 res.cardsLanguage = "en";
             }
 
-            res.boosterArts = section.getInt("BoosterCovers", 1);
-            String boosterDesc = section.get("Booster");
+            res.boosterArts = metadata.getInt("BoosterCovers", 1);
 
-            if (section.contains("Booster")) {
+            String boosterDesc = metadata.get("Booster");
+
+            if (metadata.contains("Booster")) {
                 // Historical naming convention in Forge for "DraftBooster"
-                res.boosterTpl = new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(boosterDesc));
+                // Do i have access to editions slots?
+                if (res.boosterSlots != null) {
+                    res.boosterTpl = new SealedTemplateWithSlots(res.code, SealedTemplate.Reader.parseSlots(boosterDesc), res.boosterSlots);
+                } else {
+                    res.boosterTpl = new SealedTemplate(res.code, SealedTemplate.Reader.parseSlots(boosterDesc));
+                }
+
                 res.boosterTemplates.put("Draft", res.boosterTpl);
             }
 
@@ -654,18 +677,18 @@ public final class CardEdition implements Comparable<CardEdition> {
             // Theme boosters aren't here because they are closer to preconstructed decks, and should be treated as such
             for (String type : boostertype) {
                 String name = type + "Booster";
-                if (section.contains(name)) {
-                    res.boosterTemplates.put(type, new SealedProduct.Template(res.code, SealedProduct.Template.Reader.parseSlots(section.get(name))));
+                if (metadata.contains(name)) {
+                    res.boosterTemplates.put(type, new SealedTemplate(res.code, SealedTemplate.Reader.parseSlots(metadata.get(name))));
                 }
             }
 
-            res.alias = section.get("alias");
-            res.borderColor = BorderColor.valueOf(section.get("border", "Black").toUpperCase(Locale.ENGLISH));
+            res.alias = metadata.get("alias");
+            res.borderColor = BorderColor.valueOf(metadata.get("border", "Black").toUpperCase(Locale.ENGLISH));
             Type enumType = Type.UNKNOWN;
             if (this.isCustomEditions){
                 enumType = Type.CUSTOM_SET; // Forcing ThirdParty Edition Type to avoid inconsistencies
             } else {
-                String type  = section.get("type");
+                String type  = metadata.get("type");
                 if (null != type && !type.isEmpty()) {
                     try {
                         enumType = Type.valueOf(type.toUpperCase(Locale.ENGLISH));
@@ -677,12 +700,12 @@ public final class CardEdition implements Comparable<CardEdition> {
 
             }
             res.type = enumType;
-            res.prerelease = section.get("Prerelease", null);
-            res.boosterBoxCount = Integer.parseInt(section.get("BoosterBox", enumType.getBoosterBoxDefault()));
-            res.fatPackCount = Integer.parseInt(section.get("FatPack", enumType.getFatPackDefault()));
-            res.fatPackExtraSlots = section.get("FatPackExtraSlots", "");
+            res.prerelease = metadata.get("Prerelease", null);
+            res.boosterBoxCount = Integer.parseInt(metadata.get("BoosterBox", enumType.getBoosterBoxDefault()));
+            res.fatPackCount = Integer.parseInt(metadata.get("FatPack", enumType.getFatPackDefault()));
+            res.fatPackExtraSlots = metadata.get("FatPackExtraSlots", "");
 
-            switch (section.get("foil", "newstyle").toLowerCase()) {
+            switch (metadata.get("foil", "newstyle").toLowerCase()) {
                 case "notsupported":
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
@@ -698,25 +721,25 @@ public final class CardEdition implements Comparable<CardEdition> {
                     res.foilType = FoilType.NOT_SUPPORTED;
                     break;
             }
-            String[] replaceCommon = section.get("ChanceReplaceCommonWith", "0F Common").split(" ", 2);
+            String[] replaceCommon = metadata.get("ChanceReplaceCommonWith", "0F Common").split(" ", 2);
             res.chanceReplaceCommonWith = Double.parseDouble(replaceCommon[0]);
             res.slotReplaceCommonWith = replaceCommon[1];
 
-            res.foilChanceInBooster = section.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
+            res.foilChanceInBooster = metadata.getDouble("FoilChanceInBooster", 21.43F) / 100.0F;
 
-            res.foilAlwaysInCommonSlot = section.getBoolean("FoilAlwaysInCommonSlot", true);
-            res.additionalSheetForFoils = section.get("AdditionalSheetForFoils", "");
+            res.foilAlwaysInCommonSlot = metadata.getBoolean("FoilAlwaysInCommonSlot", true);
+            res.additionalSheetForFoils = metadata.get("AdditionalSheetForFoils", "");
 
-            res.additionalUnlockSet = section.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
+            res.additionalUnlockSet = metadata.get("AdditionalSetUnlockedInQuest", ""); // e.g. Time Spiral Timeshifted (TSB) for Time Spiral
 
-            res.smallSetOverride = section.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
-            res.doublePickDuringDraft = section.get("DoublePick", ""); // "FirstPick" or "Always"
+            res.smallSetOverride = metadata.getBoolean("TreatAsSmallSet", false); // for "small" sets with over 200 cards (e.g. Eldritch Moon)
+            res.doublePickDuringDraft = metadata.get("DoublePick", ""); // "FirstPick" or "Always"
 
-            res.boosterMustContain = section.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
-            res.boosterReplaceSlotFromPrintSheet = section.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
-            res.sheetReplaceCardFromSheet = section.get("SheetReplaceCardFromSheet", "");
-            res.sheetReplaceCardFromSheet2 = section.get("SheetReplaceCardFromSheet2", "");
-            res.chaosDraftThemes = section.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
+            res.boosterMustContain = metadata.get("BoosterMustContain", ""); // e.g. Dominaria guaranteed legendary creature
+            res.boosterReplaceSlotFromPrintSheet = metadata.get("BoosterReplaceSlotFromPrintSheet", ""); // e.g. Zendikar Rising guaranteed double-faced card
+            res.sheetReplaceCardFromSheet = metadata.get("SheetReplaceCardFromSheet", "");
+            res.sheetReplaceCardFromSheet2 = metadata.get("SheetReplaceCardFromSheet2", "");
+            res.chaosDraftThemes = metadata.get("ChaosDraftThemes", "").split(";"); // semicolon separated list of theme names
 
             return res;
         }
@@ -726,12 +749,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             return TXT_FILE_FILTER;
         }
 
-        public static final FilenameFilter TXT_FILE_FILTER = new FilenameFilter() {
-            @Override
-            public boolean accept(final File dir, final String name) {
-                return name.endsWith(".txt");
-            }
-        };
+        public static final FilenameFilter TXT_FILE_FILTER = (dir, name) -> name.endsWith(".txt");
     }
 
     public static class Collection extends StorageBase<CardEdition> {
@@ -787,12 +805,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         public Iterable<CardEdition> getPrereleaseEditions() {
             List<CardEdition> res = Lists.newArrayList(this);
-            return Iterables.filter(res, new Predicate<CardEdition>() {
-                @Override
-                public boolean apply(final CardEdition edition) {
-                    return edition.getPrerelease() != null;
-                }
-            });
+            return Iterables.filter(res, edition -> edition.getPrerelease() != null);
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {
@@ -811,25 +824,13 @@ public final class CardEdition implements Comparable<CardEdition> {
             return set == null ? "" : set.getCode2();
         }
 
-        public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {
-            @Override
-            public CardEdition apply(String code) {
-                return Collection.this.get(code);
-            }
-        };
+        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = Comparator.comparing(c -> Collection.this.get(c.getEdition()));
 
-        public final Comparator<PaperCard> CARD_EDITION_COMPARATOR = new Comparator<PaperCard>() {
-            @Override
-            public int compare(PaperCard c1, PaperCard c2) {
-                return Collection.this.get(c1.getEdition()).compareTo(Collection.this.get(c2.getEdition()));
-            }
-        };
-
-        public IItemReader<SealedProduct.Template> getBoosterGenerator() {
-            return new StorageReaderBase<SealedProduct.Template>(null) {
+        public IItemReader<SealedTemplate> getBoosterGenerator() {
+            return new StorageReaderBase<SealedTemplate>(null) {
                 @Override
-                public Map<String, SealedProduct.Template> readAll() {
-                    Map<String, SealedProduct.Template> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+                public Map<String, SealedTemplate> readAll() {
+                    Map<String, SealedTemplate> map = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                     for (CardEdition ce : Collection.this) {
                         List<String> boosterTypes = Lists.newArrayList(ce.getAvailableBoosterTypes());
                         for (String type : boosterTypes) {
@@ -842,7 +843,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 }
 
                 @Override
-                public String getItemKey(SealedProduct.Template item) {
+                public String getItemKey(SealedTemplate item) {
                     return item.getEdition();
                 }
 
@@ -902,12 +903,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
             Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
-                    com.google.common.base.Predicates.and(hasBasicLands, new Predicate<CardEdition>() {
-                        @Override
-                        public boolean apply(CardEdition edition) {
-                            return artPreference.accept(edition);
-                        }
-                    }));
+                    com.google.common.base.Predicates.and(hasBasicLands, artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
             List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())
@@ -943,19 +939,16 @@ public final class CardEdition implements Comparable<CardEdition> {
             }
         }
 
-        public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
-            @Override
-            public boolean apply(CardEdition ed) {
-                if (ed == null) {
-                    // Happens for new sets with "???" code
-                    return false;
-                }
-                for(String landName : MagicColor.Constant.BASIC_LANDS) {
-                    if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
-                        return false;
-                }
-                return true;
+        public static final Predicate<CardEdition> hasBasicLands = ed -> {
+            if (ed == null) {
+                // Happens for new sets with "???" code
+                return false;
             }
+            for(String landName : MagicColor.Constant.BASIC_LANDS) {
+                if (null == StaticData.instance().getCommonCards().getCard(landName, ed.getCode(), 0))
+                    return false;
+            }
+            return true;
         };
     }
 

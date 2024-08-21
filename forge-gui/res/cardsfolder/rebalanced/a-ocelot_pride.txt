@@ -1,0 +1,14 @@
+Name:A-Ocelot Pride
+ManaCost:1 W
+Types:Creature Cat
+PT:1/1
+K:First Strike
+K:Lifelink
+K:Ascend
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ YouLifeGained | SVarCompare$ GE1 | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you gained life this turn, create a 1/1 white Cat creature token. Then if you have the city's blessing, for each token you control that entered this turn, create a token that's a copy of it.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_cat | TokenOwner$ You | SubAbility$ DBMassTokens
+SVar:DBMassTokens:DB$ CopyPermanent | Condition$ Blessing | Defined$ Valid Card.token+YouCtrl+ThisTurnEntered | NumCopies$ 1
+SVar:YouLifeGained:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain|Token
+DeckHints:Ability$Token
+Oracle:First strike, lifelink\nAscend\nAt the beginning of your end step, if you gained life this turn, create a 1/1 white Cat creature token. Then if you have the city's blessing, for each token you control that entered this turn, create a token that's a copy of it.

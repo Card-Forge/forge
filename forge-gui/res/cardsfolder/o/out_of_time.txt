@@ -1,7 +1,7 @@
 Name:Out of Time
 ManaCost:1 W W
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures, then phase them out until CARDNAME leaves the battlefield. Put a time counter on CARDNAME for each creature phased out this way.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap all creatures, then phase them out until CARDNAME leaves the battlefield. Put a time counter on CARDNAME for each creature phased out this way.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature | SubAbility$ DBPhase
 SVar:DBPhase:DB$ Phases | AllValid$ Creature | RememberAffected$ True | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True | SubAbility$ DBPutCounter
@@ -12,4 +12,4 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ TIME | CounterNum$ X | SubAbilit
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 K:Vanishing
-Oracle:When Out of Time enters the battlefield, untap all creatures, then phase them out until Out of Time leaves the battlefield. Put a time counter on Out of Time for each creature phased out this way.\nVanishing (At the beginning of your upkeep, remove a time counter from this enchantment. When the last is removed, sacrifice it.)
+Oracle:When Out of Time enters, untap all creatures, then phase them out until Out of Time leaves the battlefield. Put a time counter on Out of Time for each creature phased out this way.\nVanishing (At the beginning of your upkeep, remove a time counter from this enchantment. When the last is removed, sacrifice it.)

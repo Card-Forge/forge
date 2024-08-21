@@ -1,0 +1,21 @@
+Name:Drowner of Truth
+ManaCost:5 GU GU
+Types:Creature Eldrazi
+PT:7/6
+K:Devoid
+T:Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ CastSA>Count$Adamant_1.Colorless.1.0 | Execute$ TrigToken | TriggerDescription$ When you cast this spell, if {C} was spent to cast it, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You
+DeckHas:Ability$Token|Sacrifice & Type$Spawn
+DeckHints:Ability$Mana.Colorless
+AlternateMode:Modal
+Oracle:Devoid (This card has no color.)\nWhen you cast this spell, if {C} was spent to cast it, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this creature: Add {C}."
+
+ALTERNATE
+
+Name:Drowned Jungle
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo G U | SpellDescription$ Add {G} or {U}.
+Oracle:Drowned Jungle enters tapped.\n{T}: Add {G} or {U}.

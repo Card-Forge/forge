@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Diablo 3
-Title=Diablo
-Difficulty=hard
-Description=BR Hellbent deck
-Icon=Diablo.jpg
-Deck Type=constructed
 [main]
 4 Badlands
 4 Bloodstained Mire

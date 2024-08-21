@@ -1,0 +1,9 @@
+Name:Tempest Harvester
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+A:AB$ Draw | Cost$ T PayEnergy<1> | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+Oracle:When Tempest Harvester enters, you get {E}{E} (two energy counters).\n{T}, Pay {E}: Draw a card, then discard a card.

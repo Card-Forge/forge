@@ -96,10 +96,10 @@ public class SacrificeEffect extends SpellAbilityEffect {
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(params, sa);
 
         if (valid.equals("Self") && game.getZoneOf(host) != null) {
-            if (game.getZoneOf(host).is(ZoneType.Battlefield)) {
+            if (host.getController().equals(activator) && game.getZoneOf(host).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", host.getName()), null)) {
-                    if (game.getAction().sacrifice(host, sa, true, params) != null && remSacrificed) {
+                    if (game.getAction().sacrifice(new CardCollection(host), sa, true, params) != null && remSacrificed) {
                         host.addRemembered(host);
                     }
                 }
@@ -107,7 +107,9 @@ public class SacrificeEffect extends SpellAbilityEffect {
         } else {
             CardCollectionView choosenToSacrifice = null;
             for (final Player p : getTargetPlayers(sa)) {
-                CardCollectionView battlefield = p.getCardsIn(ZoneType.Battlefield);
+                CardCollection battlefield = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
+                battlefield.removeIf(c -> !zoneMovements.getLastStateBattlefield().contains(c));
+
                 if (sacEachValid) { // Sacrifice maximum permanents in any combination of types specified by SacValid
                     String [] validArray = valid.split(" & ");
                     String [] msgArray = msg.split(" & ");
@@ -153,25 +155,32 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                 choosenToSacrifice = GameActionUtil.orderCardsByTheirOwners(game, choosenToSacrifice, ZoneType.Graveyard, sa);
 
-                for (Card sac : choosenToSacrifice) {
-                    Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
-                    boolean wasSacrificed = !destroy && game.getAction().sacrifice(sac, sa, true, params) != null;
-                    boolean wasDestroyed = destroy && game.getAction().destroy(sac, sa, true, params);
-                    // Run Devour Trigger
-                    if (devour) {
-                        host.addDevoured(lKICopy);
-                        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                        runParams.put(AbilityKey.Devoured, lKICopy);
-                        game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                if (destroy) {
+                    for (Card sac : choosenToSacrifice) {
+                        Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
+                        if (game.getAction().destroy(sac, sa, true, params) && remSacrificed) {
+                            host.addRemembered(lKICopy);
+                        }
                     }
-                    if (exploit) {
-                        host.addExploited(lKICopy);
-                        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
-                        runParams.put(AbilityKey.Exploited, lKICopy);
-                        game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
-                    }
-                    if ((wasDestroyed || wasSacrificed) && remSacrificed) {
-                        host.addRemembered(lKICopy);
+                } else {
+                    for (Card sac : game.getAction().sacrifice(choosenToSacrifice, sa, true, params)) {
+                        Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
+                        // Run Devour Trigger
+                        if (devour) {
+                            host.addDevoured(lKICopy);
+                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                            runParams.put(AbilityKey.Devoured, lKICopy);
+                            game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
+                        }
+                        if (exploit) {
+                            host.addExploited(lKICopy);
+                            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
+                            runParams.put(AbilityKey.Exploited, lKICopy);
+                            game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
+                        }
+                        if (remSacrificed) {
+                            host.addRemembered(lKICopy);
+                        }
                     }
                 }
             }

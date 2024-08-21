@@ -1,0 +1,8 @@
+Name:Petting Zookeeper
+ManaCost:2 G
+Types:Creature Elf Employee
+PT:0/4
+K:Reach
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigOpenAttraction | TriggerDescription$ When CARDNAME enters, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+Oracle:Reach\nWhen Petting Zookeeper enters, open an Attraction.

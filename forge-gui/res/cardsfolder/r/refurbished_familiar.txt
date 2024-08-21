@@ -1,0 +1,13 @@
+Name:Refurbished Familiar
+ManaCost:3 B
+Types:Artifact Creature Zombie Rat
+PT:2/1
+K:Affinity:Artifact
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each opponent discards a card. For each opponent who can't, you draw a card.
+SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountOpponents$Amount/Minus.Remembered$Amount
+DeckHas:Ability$Discard
+Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nFlying\nWhen Refurbished Familiar enters, each opponent discards a card. For each opponent who can't, you draw a card.

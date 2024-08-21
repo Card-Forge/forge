@@ -1,0 +1,11 @@
+Name:Thriving Skyclaw
+ManaCost:2 R R
+Types:Creature Cat Dragon
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E} (three energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on it.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ PayEnergy<3> | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhen Thriving Skyclaw enters, you get {E}{E}{E} (three energy counters).\nWhenever Thriving Skyclaw attacks, you may pay {E}{E}{E}. If you do, put a +1/+1 counter on it.

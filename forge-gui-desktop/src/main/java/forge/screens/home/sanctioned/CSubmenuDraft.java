@@ -1,17 +1,7 @@
 package forge.screens.home.sanctioned;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.SwingUtilities;
-
 import com.google.common.collect.Lists;
-
+import com.google.common.collect.Maps;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -38,6 +28,13 @@ import forge.screens.deckeditor.views.VStatistics;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
 
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Controls the draft submenu in the home UI.
  *
@@ -47,20 +44,12 @@ import forge.util.Localizer;
 public enum CSubmenuDraft implements ICDoc {
     SINGLETON_INSTANCE;
 
-    private final UiCommand cmdDeckSelect = new UiCommand() {
-        @Override
-        public void run() {
-            VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-            fillOpponentComboBox();
-        }
+    private final UiCommand cmdDeckSelect = () -> {
+        VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
+        fillOpponentComboBox();
     };
 
-    private final ActionListener radioAction = new ActionListener() {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            fillOpponentComboBox();
-        }
-    };
+    private final ActionListener radioAction = e -> fillOpponentComboBox();
 
     @Override
     public void register() {
@@ -75,19 +64,9 @@ public enum CSubmenuDraft implements ICDoc {
 
         view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
-        view.getBtnBuildDeck().setCommand(new UiCommand() {
-            @Override
-            public void run() {
-                setupDraft();
-            }
-        });
+        view.getBtnBuildDeck().setCommand((UiCommand) this::setupDraft);
 
-        view.getBtnStart().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                startGame(GameType.Draft);
-            }
-        });
+        view.getBtnStart().addActionListener(e -> startGame(GameType.Draft));
 
         view.getRadSingle().addActionListener(radioAction);
 
@@ -111,13 +90,11 @@ public enum CSubmenuDraft implements ICDoc {
             fillOpponentComboBox();
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override public void run() {
-                if (btnStart.isEnabled()) {
-                    view.getBtnStart().requestFocusInWindow();
-                } else {
-                    view.getBtnBuildDeck().requestFocusInWindow();
-                }
+        SwingUtilities.invokeLater(() -> {
+            if (btnStart.isEnabled()) {
+                view.getBtnStart().requestFocusInWindow();
+            } else {
+                view.getBtnBuildDeck().requestFocusInWindow();
             }
         });
     }
@@ -142,6 +119,12 @@ public enum CSubmenuDraft implements ICDoc {
 
         FModel.getGauntletMini().resetGauntletDraft();
         String duelType = (String)VSubmenuDraft.SINGLETON_INSTANCE.getCbOpponent().getSelectedItem();
+
+        if (duelType == null) {
+            FOptionPane.showErrorDialog("Please select duel types for the draft match.", "Missing opponent items");
+            return;
+        }
+
         final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
         if (gauntlet) {
             if ("Gauntlet".equals(duelType)) {
@@ -153,15 +136,12 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.startGameOverlay();
-                SOverlayUtils.showOverlay();
-            }
+        SwingUtilities.invokeLater(() -> {
+            SOverlayUtils.startGameOverlay();
+            SOverlayUtils.showOverlay();
         });
 
-        List<Deck> aiDecks = Lists.newArrayList();
+        Map<Integer, Deck> aiMap = Maps.newHashMap();
         if (VSubmenuDraft.SINGLETON_INSTANCE.isSingleSelected()) {
             // Restore Zero Indexing
             final int aiIndex = Integer.parseInt(duelType)-1;
@@ -169,39 +149,50 @@ public enum CSubmenuDraft implements ICDoc {
             if (aiDeck == null) {
                 throw new IllegalStateException("Draft: Computer deck is null!");
             }
-            aiDecks.add(aiDeck);
+
+            aiMap.put(aiIndex + 1, aiDeck);
         } else {
             final int numOpponents = Integer.parseInt(duelType);
 
-            List<Deck> randomOpponents = Lists.newArrayList(opponentDecks.getAiDecks());
-            Collections.shuffle(randomOpponents);
-            aiDecks = randomOpponents.subList(0, numOpponents);
-            for(Deck d : aiDecks) {
-                if (d == null) {
+            int maxDecks = opponentDecks.getAiDecks().size();
+            if (numOpponents > maxDecks) {
+                throw new IllegalStateException("Draft: Not enough decks for the number of opponents!");
+            }
+
+            List<Integer> aiIndices = Lists.newArrayList();
+            for(int i = 0; i < maxDecks; i++) {
+                aiIndices.add(i);
+            }
+            Collections.shuffle(aiIndices);
+            aiIndices = aiIndices.subList(0, numOpponents);
+
+            for(int i : aiIndices) {
+                final Deck aiDeck = opponentDecks.getAiDecks().get(i);
+                if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
+
+                aiMap.put(i + 1, aiDeck);
             }
         }
 
         final List<RegisteredPlayer> starter = new ArrayList<>();
+        // Human is 0
         final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
         starter.add(human);
-        for(Deck aiDeck : aiDecks) {
-            starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-        }
-        for (final RegisteredPlayer pl : starter) {
-            pl.assignConspiracies();
+        human.setId(0);
+        human.assignConspiracies();
+        for(Map.Entry<Integer, Deck> aiDeck : aiMap.entrySet()) {
+            RegisteredPlayer aiPlayer = new RegisteredPlayer(aiDeck.getValue()).setPlayer(GamePlayerUtil.createAiPlayer());
+            aiPlayer.setId(aiDeck.getKey());
+            starter.add(aiPlayer);
+            aiPlayer.assignConspiracies();
         }
 
         final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
         hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                SOverlayUtils.hideOverlay();
-            }
-        });
+        SwingUtilities.invokeLater(SOverlayUtils::hideOverlay);
     }
 
     /** */

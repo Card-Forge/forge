@@ -3,6 +3,6 @@ ManaCost:1 U U
 Types:Creature Spirit
 PT:4/6
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates five 1/1 red Goblin creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, target opponent creates five 1/1 red Goblin creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 5 | TokenScript$ r_1_1_goblin | ValidTgts$ Opponent | TokenOwner$ Targeted
-Oracle:Hunted Phantasm can't be blocked.\nWhen Hunted Phantasm enters the battlefield, target opponent creates five 1/1 red Goblin creature tokens.
+Oracle:Hunted Phantasm can't be blocked.\nWhen Hunted Phantasm enters, target opponent creates five 1/1 red Goblin creature tokens.

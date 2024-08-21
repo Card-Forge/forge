@@ -1,8 +1,9 @@
 package forge.assets;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -369,12 +370,12 @@ public class FSkinFont {
         }
         String[] translationFilePaths = { ForgeConstants.LANG_DIR + "cardnames-" + langCode + ".txt",
                 ForgeConstants.LANG_DIR + langCode + ".properties" };
-        for (int i = 0; i < translationFilePaths.length; i++) {
-            try (LineReader translationFile = new LineReader(new FileInputStream(translationFilePaths[i]),
+        for (String translationFilePath : translationFilePaths) {
+            try (LineReader translationFile = new LineReader(Files.newInputStream(Paths.get(translationFilePath)),
                     StandardCharsets.UTF_8)) {
                 for (String fileLine : translationFile.readLines()) {
                     final int stringLength = fileLine.length();
-                    for (int offset = 0; offset < stringLength;) {
+                    for (int offset = 0; offset < stringLength; ) {
                         final int codePoint = fileLine.codePointAt(offset);
                         if (!characterSet.contains(codePoint)) {
                             characterSet.add(codePoint);
@@ -386,7 +387,7 @@ public class FSkinFont {
                 translationFile.close();
             } catch (IOException e) {
                 if (!"en-US".equalsIgnoreCase(langCode))
-                    System.err.println("Error reading translation file: " + translationFilePaths[i]);
+                    System.err.println("Error reading translation file: " + translationFilePath);
             }
         }
         langUniqueCharacterSet.put(langCode, characters.toString());

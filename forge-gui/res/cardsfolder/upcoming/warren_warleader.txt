@@ -1,0 +1,10 @@
+Name:Warren Warleader
+ManaCost:2 W W
+Types:Creature Rabbit Knight
+PT:4/4
+K:Offspring:2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, ABILITY
+SVar:TrigCharm:DB$ Charm | CharmNum$ 1 | Choices$ DBToken,DBPumpAll
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True | SpellDescription$ Create a 1/1 white Rabbit creature token that's tapped and attacking.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Attacking creatures you control get +1/+1 until end of turn.
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhenever you attack, choose one —\n• Create a 1/1 white Rabbit creature token that's tapped and attacking.\n• Attacking creatures you control get +1/+1 until end of turn.

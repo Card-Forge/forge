@@ -1,87 +1,24 @@
 package forge.player;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-import java.util.TreeSet;
-
-
-import forge.game.player.actions.SelectCardAction;
-import forge.game.player.actions.SelectPlayerAction;
-import forge.game.trigger.TriggerType;
-
-import forge.game.mana.ManaCostBeingPaid;
-import forge.gamemodes.match.input.*;
-import forge.trackable.TrackableCollection;
-import forge.util.ImageUtil;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.Range;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-
+import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
-import forge.card.CardDb;
-import forge.card.CardSplitType;
-import forge.card.CardStateName;
-import forge.card.ColorSet;
-import forge.card.ICardFace;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
-import forge.game.GameLogEntryType;
-import forge.game.GameObject;
-import forge.game.GameType;
-import forge.game.PlanarDice;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFaceView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPlayOption;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -93,28 +30,23 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.mana.ManaCostBeingPaid;
+import forge.game.player.*;
+import forge.game.player.actions.SelectCardAction;
+import forge.game.player.actions.SelectPlayerAction;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.SpellAbilityView;
-import forge.game.spellability.TargetChoices;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.input.*;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -130,16 +62,21 @@ import forge.localinstance.achievements.AchievementCollection;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.util.CardTranslation;
-import forge.util.DeckAIUtils;
-import forge.util.ITriggerEvent;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.MessageUtil;
-import forge.util.TextUtil;
+import forge.trackable.TrackableCollection;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.Range;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * A prototype for player controller class
@@ -425,17 +362,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardView vSource = CardView.get(sa.getHostCard());
         final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
         Integer maxAmount = different ? 1 : manaAmount;
-        Iterator<Byte> it = colorSet.iterator();
-        while (it.hasNext()) {
-            vAffected.put(it.next(), maxAmount);
+        for (Byte color : colorSet) {
+            vAffected.put(color, maxAmount);
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
                 localizer.getMessage("lblMana").toLowerCase());
         Map<Byte, Integer> result = new HashMap<>();
         if (vResult != null) { //fix for netplay
-            it = colorSet.iterator();
-            while (it.hasNext()) {
-                Byte color = it.next();
+            for (Byte color : colorSet) {
                 if (vResult.containsKey(color)) {
                     result.put(color, vResult.get(color));
                 }
@@ -524,6 +458,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inp.setCancelAllowed(min == 0);
         inp.showAndWait();
         return new CardCollection(inp.getSelected());
+    }
+
+    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList, final SpellAbility sa) {
+        //this can be used to stop zone select GUI when certain APIs would reveal illegal zone information
+        //initially created for HeistEffect which showed library placement
+        if (ApiType.Heist.equals(sa.getApi())) return false;
+        return useSelectCardsInput(sourceList);
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
@@ -662,7 +603,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             tempShow(delayedReveal.getCards());
         }
 
-        if (useSelectCardsInput(optionList)) {
+        if (useSelectCardsInput(optionList, sa)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, isOptional ? 0 : 1, 1,
                     optionList, sa);
             input.setCancelAllowed(isOptional);
@@ -745,16 +686,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final ImmutableList.Builder<Integer> choices = ImmutableList.builder();
             int size = max - min;
             for (int i = 0; i <= size; i++) {
-                choices.add(Integer.valueOf(i + min));
+                choices.add(i + min);
             }
-            return getGui().one(title, choices.build()).intValue();
+            return getGui().one(title, choices.build());
         }
     }
 
     @Override
     public int chooseNumber(final SpellAbility sa, final String title, final List<Integer> choices,
                             final Player relatedPlayer) {
-        return getGui().one(title, choices).intValue();
+        return getGui().one(title, choices);
     }
 
     @Override
@@ -1174,6 +1115,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             case SchemeDeck:
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoSchemeDeck"), localizer.getMessage("lblClosestToTop"), choices, null);
                 break;
+            case AttractionDeck:
+                choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoAttractionDeck"), localizer.getMessage("lblClosestToTop"), choices, null);
             case Stack:
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCopiesCast"), localizer.getMessage("lblPutFirst"), choices, null);
                 break;
@@ -1223,9 +1166,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final CardCollection toExile = new CardCollection();
         final ImmutableList.Builder<Integer> cntChoice = ImmutableList.builder();
         for (int i = 0; i <= cardsInGrave; i++) {
-            cntChoice.add(Integer.valueOf(i));
+            cntChoice.add(i);
         }
-        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build()).intValue();
+        final int chosenAmount = getGui().one(localizer.getMessage("lblDelveHowManyCards"), cntChoice.build());
 
         GameEntityViewMap<Card, CardView> gameCacheGrave = GameEntityView.getMap(grave);
         for (int i = 0; i < chosenAmount; i++) {
@@ -1400,7 +1343,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
-        Collections.sort(sortedList, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+        sortedList.sort(Entry.comparingByValue());
 
         // loop through sorted list and move each type to the front of the
         // validTypes collection
@@ -1584,7 +1527,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         @SuppressWarnings("serial") final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, nDiscard, nDiscard,
                 player.getZone(ZoneType.Hand).getCards()) {
             @Override
-            protected final boolean allowAwaitNextInput() {
+            protected boolean allowAwaitNextInput() {
                 return true; // prevent Cleanup message getting stuck during
                 // opponent's next turn
             }
@@ -1647,6 +1590,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public PlayerZone chooseStartingHand(List<PlayerZone> zones) {
+        // Create new zone objects in the UI temporarily.
+        // Spawn a new input dialog, it works by selecting a card in the zone you want and clicking OK
+        // The card will then extract the PlayerZone via the card that is chosen and return it to this function
+        // Which will then return the PlayerZone to the caller
+        player.updateZoneForView(player.getZone(ZoneType.Hand));
+        final InputChooseStartingHand inp = new InputChooseStartingHand(this, player);
+        inp.showAndWait();
+        return inp.getSelectedHand();
+    }
+
+    @Override
     public boolean chooseBinary(final SpellAbility sa, final String question, final BinaryChoiceType kindOfChoice,
                                 final Boolean defaultVal) {
         final List<String> labels;
@@ -1680,7 +1635,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
 
-        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal.booleanValue(), labels);
+        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal, labels);
     }
 
     @Override
@@ -1762,10 +1717,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (trackerFrozen) {
             getGame().getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
-        final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
         final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), CardTranslation.getTranslatedName(sa.getHostCard().getName()));
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
+        int chosenPawprint = 0;
         for (int i = 0; i < num; i++) {
+            if (sa.hasParam("Pawprint")) {
+                final int tmpPaw = chosenPawprint;
+                spellViewCache.values().removeIf(ab -> Integer.parseInt(ab.getParam("Pawprint")) > num - tmpPaw);
+            }
+            final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
+
             SpellAbilityView a;
             if (i < min) {
                 a = getGui().one(modeTitle, choices);
@@ -1776,10 +1737,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 break;
             }
 
+            AbilitySub sp = spellViewCache.get(a);
             if (!allowRepeat) {
-                choices.remove(a);
+                spellViewCache.remove(a);
             }
-            chosen.add(spellViewCache.get(a));
+            if (sp.hasParam("Pawprint")) {
+                chosenPawprint += AbilityUtils.calculateAmount(sp.getHostCard(), sp.getParam("Pawprint"), sp);
+            }
+            chosen.add(sp);
         }
         return chosen;
     }
@@ -1823,7 +1788,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             colorNamesBuilder.add(MagicColor.toLongString(MagicColor.COLORLESS));
         }
         for (final Byte b : colors) {
-            colorNamesBuilder.add(MagicColor.toLongString(b.byteValue()));
+            colorNamesBuilder.add(MagicColor.toLongString(b));
         }
         final ImmutableList<String> colorNames = colorNamesBuilder.build();
         if (colorNames.size() > 2) {
@@ -1891,11 +1856,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public ReplacementEffect chooseSingleReplacementEffect(final String prompt, final List<ReplacementEffect> possibleReplacers) {
+    public ReplacementEffect chooseSingleReplacementEffect(final List<ReplacementEffect> possibleReplacers) {
         final ReplacementEffect first = possibleReplacers.get(0);
         if (possibleReplacers.size() == 1) {
             return first;
         }
+        String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         final String firstStr = first.toString();
         for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
@@ -1947,7 +1913,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
             // for the purpose of pre-ordering, no need for extra granularity
-            Integer idxAdditionalInfo = firstStr.indexOf(" [");
+            int idxAdditionalInfo = firstStr.indexOf(" [");
             StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
 
             char delim = (char) 5;
@@ -1956,12 +1922,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 String saStr = currentSa.toString();
 
                 // if current SA isn't a trigger and it uses Targeting, try to show prompt
-                if (!currentSa.isTrigger() && currentSa.usesTargeting()) {
+                if (currentSa.isTrigger()) {
+                    needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
+                } else if (currentSa.usesTargeting()) {
                     needPrompt = true;
                 }
-                if (!needPrompt && !saStr.equals(firstStr) && !currentSa.hasParam("OrderDuplicates")) {
-                    needPrompt = true; // prompt by default unless all abilities
-                    // are the same
+                if (!needPrompt && !saStr.equals(firstStr)) {
+                    // prompt by default unless all abilities are the same
+                    needPrompt = true;
                 }
 
                 saLookupKey.append(delim).append(saStr);
@@ -2207,9 +2175,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (final DeckSection s : new TreeSet<>(removedUnplayableCards.keySet())) {
                     if (DeckSection.Sideboard.equals(s))
                         continue;
-                    for (PaperCard c : removedUnplayableCards.get(s)) {
-                        labels.add(c);
-                    }
+                    labels.addAll(removedUnplayableCards.get(s));
                 }
                 if (!labels.isEmpty())
                     getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
@@ -2623,7 +2589,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, input -> CounterType.get(input)));
+                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, CounterType::get));
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {
@@ -3285,7 +3251,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         Integer v = getGui().getInteger(prompt, 0, max, 9);
-        return v == null ? 0 : v.intValue();
+        return v == null ? 0 : v;
     }
 
     @Override

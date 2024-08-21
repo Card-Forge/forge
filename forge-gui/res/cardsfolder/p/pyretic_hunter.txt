@@ -1,0 +1,10 @@
+Name:Pyretic Hunter
+ManaCost:4 R
+Types:Creature Elemental Cat
+PT:0/0
+Draft:Reveal CARDNAME as you draft it.
+Draft:Note how many cards you've drafted this draft round, including CARDNAME.
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters with X +1/+1 counters on it, where X is the highest number you noted for cards named Pyretic Hunter.
+K:Menace
+SVar:X:Count$DraftNotesHighest.Pyretic Hunter
+Oracle:Reveal Pyretic Hunter as you draft it and note how many cards you've drafted this draft round, including Pyretic Hunter.\nMenace (This creature can't be blocked except by two or more creatures.)\nPyretic Hunter enters with X +1/+1 counters on it, where X is the highest number you noted for cards named Pyretic Hunter.

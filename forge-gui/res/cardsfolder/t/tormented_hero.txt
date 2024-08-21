@@ -2,10 +2,11 @@ Name:Tormented Hero
 ManaCost:B
 Types:Creature Human Warrior
 PT:2/1
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, each opponent loses 1 life. You gain life equal to the life lost this way.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
-#AFLifeLost will be set by LoseLife
-Oracle:Tormented Hero enters the battlefield tapped.\nHeroic — Whenever you cast a spell that targets Tormented Hero, each opponent loses 1 life. You gain life equal to the life lost this way.
+# AFLifeLost will be set by LoseLife
+Oracle:Tormented Hero enters tapped.\nHeroic — Whenever you cast a spell that targets Tormented Hero, each opponent loses 1 life. You gain life equal to the life lost this way.

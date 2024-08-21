@@ -214,15 +214,13 @@ public class SoundSystem {
 
         try {
             currentTrack = GuiBase.getInterface().createAudioMusic(filename);
-            currentTrack.play(new Runnable() {
-                @Override public void run() {
-                    try {
-                        Thread.sleep(SoundSystem.DELAY);
-                    } catch (final InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                    changeBackgroundTrack(); //change track when music completes on its own
+            currentTrack.play(() -> {
+                try {
+                    Thread.sleep(SoundSystem.DELAY);
+                } catch (final InterruptedException ex) {
+                    ex.printStackTrace();
                 }
+                changeBackgroundTrack(); //change track when music completes on its own
             });
             refreshVolume();
         } catch (final Exception ex) {
@@ -285,7 +283,7 @@ public class SoundSystem {
             invalidateSoundCache();
         }
 
-        return availableSets.toArray(new String[availableSets.size()]);
+        return availableSets.toArray(new String[0]);
     }
 
     public String getSoundDirectory() {
@@ -343,6 +341,6 @@ public class SoundSystem {
             MusicPlaylist.invalidateMusicPlaylist();
         }
 
-        return availableSets.toArray(new String[availableSets.size()]);
+        return availableSets.toArray(new String[0]);
     }
 }

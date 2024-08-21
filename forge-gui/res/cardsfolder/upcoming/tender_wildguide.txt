@@ -1,0 +1,8 @@
+Name:Tender Wildguide
+ManaCost:1 G
+Types:Creature Possum Druid
+PT:2/2
+K:Offspring:2
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ PutCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on this creature.
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\n{T}: Add one mana of any color.\n{T}: Put a +1/+1 counter on this creature.

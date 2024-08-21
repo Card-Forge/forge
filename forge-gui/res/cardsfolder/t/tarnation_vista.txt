@@ -1,9 +1,10 @@
 Name:Tarnation Vista
 ManaCost:no cost
 Types:Land Cave
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ ChooseColor | SpellDescription$ CARDNAME enters the battlefield tapped. As it enters, choose a color.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color.
 A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
 A:AB$ Mana | Cost$ 1 T | Produced$ Special EachColorAmong_Permanent.YouCtrl+MonoColor | SpellDescription$ For each color among monocolored permanents you control, add one mana of that color.
-Oracle:Tarnation Vista enters the battlefield tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{1}, {T}: For each color among monocolored permanents you control, add one mana of that color.
+Oracle:Tarnation Vista enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.\n{1}, {T}: For each color among monocolored permanents you control, add one mana of that color.

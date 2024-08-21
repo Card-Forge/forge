@@ -234,7 +234,7 @@ public enum FControl implements KeyEventDispatcher {
                 FModel.getQuest().load(QuestDataIO.loadData(data));
             } catch(IOException ex) {
                 ex.printStackTrace();
-                System.out.println(String.format("Error loading quest data (%s).. skipping for now..", questname));
+                System.err.printf("Error loading quest data (%s).. skipping for now..%n", questname);
             }
         }
 
@@ -260,12 +260,7 @@ public enum FControl implements KeyEventDispatcher {
 
         setGlobalKeyboardHandler();
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Singletons.getView().initialize();
-            }
-        });
+        SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
 
     private void setGlobalKeyboardHandler() {

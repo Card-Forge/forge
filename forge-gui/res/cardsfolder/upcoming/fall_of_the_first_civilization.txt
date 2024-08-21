@@ -1,0 +1,11 @@
+Name:Fall of the First Civilization
+ManaCost:2 W
+Types:Enchantment Saga
+K:Chapter:3:DBDraw,DBExile,DBCalamity
+SVar:DBDraw:DB$ Draw | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 2 | SpellDescription$ You and target opponent each draw two cards.
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | SpellDescription$ Exile target artifact an opponent controls.
+SVar:DBCalamity:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ChooseThreePermanents | SubAbility$ DestroyAll | SpellDescription$ Each player chooses three nonland permanents they control.
+SVar:ChooseThreePermanents:DB$ ChooseCard | Defined$ Remembered | Choices$ Permanent.nonLand+RememberedPlayerCtrl | ChoiceTitle$ Choose three nonland permanents you control | Amount$ 3 | Mandatory$ True | RememberChosen$ True
+SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand+IsNotRemembered | SubAbility$ DBCleanup | SpellDescription$ Destroy all other nonland permanents.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You and target opponent each draw two cards.\nII — Exile target artifact an opponent controls.\nIII — Each player chooses three nonland permanents they control. Destroy all other nonland permanents.

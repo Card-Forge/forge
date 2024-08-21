@@ -1,0 +1,12 @@
+Name:Nyxborn Hydra
+ManaCost:X G
+Types:Enchantment Creature Hydra
+PT:0/1
+K:Bestow:X G G
+K:Reach
+K:Trample
+K:etbCounter:P1P1:X
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ Y | AddToughness$ Y | AddKeyword$ Reach & Trample | Description$ Enchanted creature gets +1/+1 for each +1/+1 counter on CARDNAME and has reach and trample.
+SVar:X:Count$xPaid
+SVar:Y:Count$CardCounters.P1P1
+Oracle:Bestow {X}{G}{G} (If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached.)\nReach, trample\nNyxborn Hydra enters with X +1/+1 counters on it.\nEnchanted creature gets +1/+1 for each +1/+1 counter on Nyxborn Hydra and has reach and trample.

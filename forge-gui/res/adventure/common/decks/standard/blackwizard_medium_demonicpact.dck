@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Demonic Pact 2
-Title=Diablo, Lord of Terror
-Difficulty=medium
-Description=Mono-black demon theme deck with Lord of the Pit and Grave Pact
-Icon=Diablo2 2.jpg
-Deck Type=constructed
 [Main]
 2 Abhorrent Overlord
 2 Abyssal Persecutor

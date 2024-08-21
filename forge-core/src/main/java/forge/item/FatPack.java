@@ -18,29 +18,23 @@
 
 package forge.item;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Function;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public class FatPack extends BoxedProduct {
-    public static final Function<CardEdition, FatPack> FN_FROM_SET = new Function<CardEdition, FatPack>() {
-        @Override
-        public FatPack apply(final CardEdition edition) {
-            int boosters = edition.getFatPackCount();
-            if (boosters <= 0) { return null; }
+    public static FatPack fromSet(final CardEdition edition) {
+        int boosters = edition.getFatPackCount();
+        if (boosters <= 0) { return null; }
 
-            FatPack.Template d = new Template(edition);
-            if (d == null || null == StaticData.instance().getBoosters().get(d.getEdition())) { return null; }
-            return new FatPack(edition.getName(), d, d.cntBoosters);
-        }
-    };
+        FatPack.Template d = new Template(edition);
+        if (null == StaticData.instance().getBoosters().get(d.getEdition())) { return null; }
+        return new FatPack(edition.getName(), d, d.cntBoosters);
+    }
 
     private final FatPack.Template fpData;
 
@@ -77,7 +71,7 @@ public class FatPack extends BoxedProduct {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getNumberOfCardsExpected();
     }
     
-    public static class Template extends SealedProduct.Template {
+    public static class Template extends SealedTemplate {
         private final int cntBoosters;
 
         public int getCntBoosters() { return cntBoosters; }

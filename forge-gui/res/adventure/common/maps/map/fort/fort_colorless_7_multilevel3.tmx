@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="66">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt100KwjAQQOEssildeVtPIvQQc0cRKYYhjT/JTJ3wFh+4kJpHMhq3JaUNAAAAMHRdU7otn3m89+z19jb8Q8slP0l+vf6loWzZn9di1TGiQbe0eqw7eht2ukF/TqQOvSfRO/T8WXeIYYduid4hE3SULVHnQ5+tyB2znCuPORfj/fD43i33e/S9pHY3seio3RlG3BNrM+E1H70tuuGs30Hd8e3/qHcN3h2Sj9fVOo9Ha/e47wIAAAAA5nAHTKzKjg==
+  </data>
+ </layer>
+ <layer id="8" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzNWmtuE0EM3iQrld3kDi3nCH38qXqKwllAcIVKCKniJhwmcAqEYK3EyodrezzeWcQnrSIl8/r8Gtub7dB1H7Zd92PsTPTTmCflWQ/6+Ofp+xtnPYmH0T7D3Xhc73o8j/turD1M417v/L324/nstObeWOv3q+O+zwZHDduTLOnBczAHlheOK8neQ184G3LwdHKvfL8VssR1rseXY5mLBZJBjU1YHCydHE62oXHBMzw7dku43Ok64bmWDKz9Vqe9epi7Hv4+xx5kg7LM2oV1FilDjQP5FsmS90b/Y/Ti7Aj6jTmTP17tjp8EXNcC6ft2PH9Ku6X9NnCejcKD4wQ9tDf7PI67DcjW0jHrqEXMtNZ4D+dHP2R5k3zuFPmUgDZJaBEz2Wcs37PWb2mTUZRipuX/HlrZpMRdA/8nW/Vi4kqRR9YmJVC/UUj7ZHh64X1wXtYmtXVb26e2N9sDPxqX7H2whH1S/NH0JPd8qtB9FC3sk87PuYWXD9wH7iwLj+uuezs979Yvf2ttnx6HyH4ePm+67tP0+UvhgWtn5FTDgcH3b5bLl015/dq1ozykjCg/iuha4tGwK4SnF86vpA9Hcty58Qjxc+LwbVXmYsVMijG9EjNZD6UcIZLLRcA+Qlwsn/fi5eG0v4y7NTkO62UuiMvHTvd5L2byHVKKmSzvgzOmlV4IEZ9HkByvhL1xvi3HRWo14jIscA/WwsvHWN7Sz7J1+1Io9QEIUtbI+8bIL1shWxtGIHsIpVpmLjK1YRQcu/8nZOVJcSCTi8zBUn7ZMu56yPTT5HyGddYl4262NkTgPK8HTsjkiBFkakPEUr3tw8U096J+Xm1tSKjtbVs9Cg0ZHpnaMNLblr69r+gfZvWRqRVe3At8xmH+3Z3lwYj203AM9mpL8SIqp7k8ov009HfJwbrza3Q+lwch0k9j1PYboveh5NH6nY6WL70Z29eHmj68dzoM7Kd5iPTTovWhBL7Tseyq1G+v7aexjr2edbQm197pRPwD76NsP630njhaH1pxTvIo9cyz/bRe7P1VmVuqDwlWXoQ8Ij3zfvDjPcGLl32FHmV9iJBrM4+anvm/7Kdp8U7Li1AfrXPkVv00rT6UOp9zD9b00xgPSf1ocRcxh0dNP41AHLx3yxwTI7YofQd51N7l1v+A+FwYL1v990lyYf+X+ojc5YhL5Xetn7b0f580u8q8/0do/bQ/Lwpjqw==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1eEKgyAUhmHtmoaXOruu1QUNWYdCKs+iwbd6H+hHaOGLSSEAAAAAvzd0vktZWd+4s8Y0jb2EW1oNRVqMK7Z4GopUzVFq8ZwBu687CpWWtbV9O/fxZx1b6DjPVb4rO6Oes6r8X7zKftyxY4tCR44h9PH488/4eYcCb0u9d0oNxtOy7FBsMK0W61BuMDn6LgAAAAAAMHsDZYM3zA==
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt10sKgCAURmFzTRG009ZVLaga3In4KKX6kfNNK/CAN9Q5AAAA4H2TLz8bM+8oyDWEVFueNBi1lpoGo9LS0mBUWgDEXXO++XuzmvonKM250lparGfHTMvvwj1f06KyJ1Mty1D+VqXBxFr2whrVGkwP53bTwz0KAAAAAICvHfENDSM=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzdWkEOwjAMgxsP4QYXeCQf2H6KuKMhkKYqaevUbVJ8AY2udT2nSYDDQcZ6Uj5QcD9i41lYBJ4rMrawzxodpHlnRqpfTgPW3hfrfWTtNe9ouHXyvTZveh3ZPxrTGtI1Uc2sQLQexYkB5BnOctbs84HFd73iyhv757fXxSt/emPTwGPvtfmmV7x5x3HN/iWOtbz/NX6lfV2Ea4/v6zmADlavPbk0TLDWhVZouapWw4jn+MYpl4N/tVJ2DOih1DvXo/y+Bsx+DsGjPKTLvRYw8wkj7llxOzqPIOux+iCr3kyvWzAyt0Xt56Q4Z/ZzUeqo1n4uhdYHWRGhVpkRo+srBli5jukZ737OCms/VzqXpJj+rdWzRk7XjViPb2jxy6xe25A7b7zrGakP8s6/tX5GtbNqrfGZ2ZMRwdCz1c8lDhaOtXnE4yzw+l0LwcubgANYObyHn0tIfcyMP2/s+Vn7uVF+jtTnoH6Gvk/Apv4A4dPjXG7xOZOPxsMrDnPrtvhZ+n9Paz+H8Il8rr0B5iBNmg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="450.334" y="239.188">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel4.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/entry_down.tx" x="273.154" y="384.89">
+   <properties>
+    <property name="teleport" value="../common/maps/map/fort/fort_colorless_7_multilevel2.tmx"/>
+    <property name="teleportObjectId" value="38"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/enemy.tx" x="373.515" y="281.454">
+   <properties>
+    <property name="enemy" value="Eldrazi"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="64,65"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/enemy.tx" x="427.333" y="425.121">
+   <properties>
+    <property name="enemy" value="Eldrazi"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="61,62,61,63"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/treasure.tx" x="354" y="242.333"/>
+  <object id="59" template="../../obj/gold.tx" x="513.667" y="383.667"/>
+  <object id="60" template="../../obj/manashards.tx" x="440.667" y="382.333"/>
+  <object id="61" template="../../obj/waypoint.tx" x="364.667" y="421"/>
+  <object id="62" template="../../obj/waypoint.tx" x="495" y="423"/>
+  <object id="63" template="../../obj/waypoint.tx" x="317.667" y="308.667"/>
+  <object id="64" template="../../obj/waypoint.tx" x="373.333" y="236.667"/>
+  <object id="65" template="../../obj/waypoint.tx" x="386.333" y="487.333"/>
+ </objectgroup>
+</map>

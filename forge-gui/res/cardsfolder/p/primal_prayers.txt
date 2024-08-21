@@ -1,0 +1,7 @@
+Name:Primal Prayers
+ManaCost:2 G G
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+S:Mode$ Continuous | Affected$ Creature.cmcLE3 | MayPlay$ True | MayPlayAltManaCost$ PayEnergy<1> | MayPlayDontGrantZonePermissions$ True | MayPlayWithFlash$ True | AffectedZone$ Hand,Graveyard,Exile,Library,Command | Description$ You may cast creature spells with mana value 3 or less by paying {E} rather than paying their mana costs. If you cast a spell this way, you may cast it as though it had flash.
+Oracle:When Primal Prayers enters, you get {E}{E} (two energy counters).\nYou may cast creature spells with mana value 3 or less by paying {E} rather than paying their mana costs. If you cast a spell this way, you may cast it as though it had flash.

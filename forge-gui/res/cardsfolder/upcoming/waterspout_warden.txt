@@ -1,0 +1,9 @@
+Name:Waterspout Warden
+ManaCost:2 U
+Types:Creature Frog Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Creature.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, if another creature entered the battlefield under your control this turn, CARDNAME gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl+StrictlyOther
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Waterspout Warden attacks, if another creature entered the battlefield under your control this turn, Waterspout Warden gains flying until end of turn.

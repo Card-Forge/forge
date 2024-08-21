@@ -1,8 +1,9 @@
 Name:Oran-Rief, the Vastwood
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-A:AB$ PutCounterAll | Cost$ T | ValidCards$ Creature.Green+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each green creature that entered the battlefield this turn.
+A:AB$ PutCounterAll | Cost$ T | ValidCards$ Creature.Green+ThisTurnEntered | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each green creature that entered this turn.
 DeckHas:Ability$Counters
-Oracle:Oran-Rief, the Vastwood enters the battlefield tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered the battlefield this turn.
+Oracle:Oran-Rief, the Vastwood enters tapped.\n{T}: Add {G}.\n{T}: Put a +1/+1 counter on each green creature that entered this turn.

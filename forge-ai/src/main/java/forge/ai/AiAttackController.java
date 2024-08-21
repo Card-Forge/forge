@@ -32,6 +32,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -124,12 +125,7 @@ public class AiAttackController {
         List<Card> defenders = defender.getCreaturesInPlay();
         int totalMana = ComputerUtilMana.getAvailableManaEstimate(defender, true);
         int manaReserved = 0; // for paying the cost to transform
-        Predicate<Card> canAnimate = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return !c.isTapped() && !c.isCreature() && !c.isPlaneswalker();
-            }
-        };
+        Predicate<Card> canAnimate = c -> !c.isTapped() && !c.isCreature() && !c.isPlaneswalker();
 
         CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
@@ -331,12 +327,7 @@ public class AiAttackController {
     }
 
     public final static List<Card> getPossibleBlockers(final List<Card> blockers, final List<Card> attackers, final boolean nextTurn) {
-        return CardLists.filter(blockers, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return canBlockAnAttacker(c, attackers, nextTurn);
-            }
-        });
+        return CardLists.filter(blockers, c -> canBlockAnAttacker(c, attackers, nextTurn));
     }
 
     public final static boolean canBlockAnAttacker(final Card c, final List<Card> attackers, final boolean nextTurn) {
@@ -395,15 +386,10 @@ public class AiAttackController {
             }
         }
         // reduce the search space
-        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.hasSVar("EndOfTurnLeavePlay")
-                        && (c.toughnessAssignsDamage() || c.getNetCombatDamage() > 0 // performance shortcuts
-                                || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
-                        && ComputerUtilCombat.canAttackNextTurn(c);
-            }
-        });
+        final List<Card> opponentsAttackers = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), c -> !c.hasSVar("EndOfTurnLeavePlay")
+                && (c.toughnessAssignsDamage() || c.getNetCombatDamage() > 0 // performance shortcuts
+                        || c.getNetCombatDamage() + ComputerUtilCombat.predictPowerBonusOfAttacker(c, null, null, true) > 0)
+                && ComputerUtilCombat.canAttackNextTurn(c));
 
         // don't hold back creatures that can't block any of the human creatures
         final List<Card> blockers = getPossibleBlockers(potentialAttackers, opponentsAttackers, true);
@@ -524,13 +510,9 @@ public class AiAttackController {
             return;
         }
 
-        List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
-                "Bands with Other Creatures named Wolves of the Hunt",
-                "Bands with Other Dinosaurs");
-
         List<Card> bandingCreatures = null;
         if (test == null) {
-            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasKeyword(Keyword.BANDSWITH));
 
             // filter out anything that can't legally attack or is already declared as an attacker
             bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
@@ -538,7 +520,7 @@ public class AiAttackController {
             bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
         } else {
             // Test a specific creature for Banding
-            if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
+            if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
                 bandingCreatures = new CardCollection(test);
             }
         }
@@ -556,7 +538,7 @@ public class AiAttackController {
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             for (Card c : bandingCreatures) {
-                Card bestBand;
+                Card bestBand = null;
 
                 if (c.getNetPower() <= 0) {
                     // Don't band a zero power creature if there's already a banding creature in a band
@@ -564,12 +546,16 @@ public class AiAttackController {
                 }
 
                 Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
-                if (c.hasKeyword("Bands with Other Legendary Creatures")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
-                } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
-                } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
+
+                // TODO how should this work with multiple bands with other abilities?
+                if (c.hasKeyword(Keyword.BANDSWITH)) {
+                    for (KeywordInterface kw : c.getKeywords(Keyword.BANDSWITH)) {
+                        final String o = kw.getOriginal();
+                        String m[] = o.split(":");
+                        CardCollection bandPartner = CardLists.getValidCards(attackers, m[1], c.getController(), c, null);
+                        bestBand = ComputerUtilCard.getBestCreatureAI(bandPartner);
+                        break; // ?
+                    }
                 } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker != null && bestAttacker.hasAnyKeyword(evasionKeywords)) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {
@@ -770,7 +756,7 @@ public class AiAttackController {
         return false;
     }
 
-    private final Pair<Integer, Integer> getDamageFromBlockingTramplers(final List<Card> blockedAttackers, final List<Card> blockers, final int myFreeMana) {
+    private Pair<Integer, Integer> getDamageFromBlockingTramplers(final List<Card> blockedAttackers, final List<Card> blockers, final int myFreeMana) {
         int currentAttackTax = 0;
         int trampleDamage = 0;
         CardCollection remainingBlockers = new CardCollection(blockers);
@@ -797,7 +783,7 @@ public class AiAttackController {
         return Pair.of(trampleDamage, currentAttackTax);
     }
 
-    private final GameEntity chooseDefender(final Combat c, final boolean bAssault) {
+    private GameEntity chooseDefender(final Combat c, final boolean bAssault) {
         final FCollectionView<GameEntity> defs = c.getDefenders();
         if (defs.size() == 1) {
             return defs.getFirst();
@@ -932,31 +918,28 @@ public class AiAttackController {
                     // check defenders in order of maximum requirements
                     List<Pair<GameEntity, Integer>> reqs = combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
                     final GameEntity def = defender;
-                    reqs.sort(new Comparator<Pair<GameEntity, Integer>>() {
-                        @Override
-                        public int compare(Pair<GameEntity, Integer> r1, Pair<GameEntity, Integer> r2) {
-                            if (r1.getValue() == r2.getValue()) {
-                                // try to attack the designated defender
-                                if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
-                                    return -1;
-                                }
-                                if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
-                                    return 1;    
-                                }
-                                // otherwise PW
-                                if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
-                                    return -1;
-                                }
-                                if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
-                                    return 1;
-                                }
-                                // or weakest player
-                                if (r1.getKey() instanceof Player && r2.getKey() instanceof Player) {
-                                    return ((Player) r1.getKey()).getLife() - ((Player) r2.getKey()).getLife();
-                                }
+                    reqs.sort((r1, r2) -> {
+                        if (r1.getValue() == r2.getValue()) {
+                            // try to attack the designated defender
+                            if (r1.getKey().equals(def) && !r2.getKey().equals(def)) {
+                                return -1;
                             }
-                            return r2.getValue() - r1.getValue();
+                            if (r2.getKey().equals(def) && !r1.getKey().equals(def)) {
+                                return 1;
+                            }
+                            // otherwise PW
+                            if (r1.getKey() instanceof Card && r2.getKey() instanceof Player) {
+                                return -1;
+                            }
+                            if (r2.getKey() instanceof Card && r1.getKey() instanceof Player) {
+                                return 1;
+                            }
+                            // or weakest player
+                            if (r1.getKey() instanceof Player && r2.getKey() instanceof Player) {
+                                return ((Player) r1.getKey()).getLife() - ((Player) r2.getKey()).getLife();
+                            }
                         }
+                        return r2.getValue() - r1.getValue();
                     });
                     for (Pair<GameEntity, Integer> e : reqs) {
                         if (e.getRight() == 0) continue;
@@ -1173,8 +1156,8 @@ public class AiAttackController {
         while (!attritionalAttackers.isEmpty() && humanLife > 0 && attackRounds < 99) {
             // sum attacker damage
             int damageThisRound = 0;
-            for (int y = 0; y < attritionalAttackers.size(); y++) {
-                damageThisRound += attritionalAttackers.get(y).getNetCombatDamage();
+            for (Card attritionalAttacker : attritionalAttackers) {
+                damageThisRound += attritionalAttacker.getNetCombatDamage();
             }
             // remove from player life
             humanLife -= damageThisRound;
@@ -1406,14 +1389,9 @@ public class AiAttackController {
         }
 
         // contains only the defender's blockers that can actually block the attacker
-        CardCollection validBlockers = CardLists.filter(defenders, new Predicate<Card>() {
-            @Override
-            public boolean apply(Card defender) {
-                return CombatUtil.canBlock(attacker, defender);
-            }
-        });
+        CardCollection validBlockers = CardLists.filter(defenders, defender1 -> CombatUtil.canBlock(attacker, defender1));
 
-        boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, CardPredicates.Accessors.fnGetNetToughness);
+        boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
         boolean dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(

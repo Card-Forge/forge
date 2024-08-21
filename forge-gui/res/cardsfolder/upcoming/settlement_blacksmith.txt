@@ -1,0 +1,7 @@
+Name:Settlement Blacksmith
+ManaCost:2 W
+Types:Creature Human Artificer
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Equipment.YouCtrl | PresentCompare$ GE1 | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, if you control an Equipment, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+Oracle:When Settlement Blacksmith enters, if you control an Equipment, draw a card.

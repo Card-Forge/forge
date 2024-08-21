@@ -39,6 +39,7 @@ import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameEntity;
+import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
@@ -123,8 +124,6 @@ public class ComputerUtil {
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
-        // Remember the now-forgotten kicker cost? Why is this needed?
-        sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
         game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
@@ -305,8 +304,8 @@ public class ComputerUtil {
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
 
         // do this after card got added to stack
-        if (!sa.checkRestrictions(ai)) {
-            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+        if (!newSA.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(newSA, fromZone, zonePosition, pay, source);
             return false;
         }
         
@@ -408,13 +407,9 @@ public class ComputerUtil {
                         return ComputerUtilCard.getWorstLand(landsInPlay);
                     }
                 }
-                final CardCollection sacMeList = CardLists.filter(typeList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
-                                || (priority == 1 && shouldSacrificeThreatenedCard(ai, c, sa));
-                    }
-                });
+                final CardCollection sacMeList = CardLists.filter(typeList, c -> (c.hasSVar("SacMe") && Integer.parseInt(c.getSVar("SacMe")) == priority)
+                        || (priority == 1 && shouldSacrificeThreatenedCard(ai, c, sa))
+                );
                 if (!sacMeList.isEmpty()) {
                     CardLists.shuffle(sacMeList);
                     return sacMeList.getFirst();
@@ -429,16 +424,13 @@ public class ComputerUtil {
                             int maxCreatureEval = aic.getIntProperty(AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
                             boolean allowTokens = aic.getBooleanProperty(AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
                             List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
-                            CardCollection allowList = CardLists.filter(typeList, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
-                                        return false;
-                                    }
-
-                                    return (allowTokens && card.isToken())
-                                            || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                            CardCollection allowList = CardLists.filter(typeList, card -> {
+                                if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
+                                    return false;
                                 }
+
+                                return (allowTokens && card.isToken())
+                                        || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
                             });
                             if (!allowList.isEmpty()) {
                                 CardLists.sortByCmcDesc(allowList);
@@ -455,7 +447,7 @@ public class ComputerUtil {
                 final int landsInHand = Math.min(2, CardLists.getType(ai.getCardsIn(ZoneType.Hand), "Land").size());
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 nonLandsInHand.addAll(ai.getCardsIn(ZoneType.Library));
-                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
                 if (landsInPlay.size() + landsInHand >= highestCMC) {
                     // Don't need more land.
                     return ComputerUtilCard.getWorstLand(landsInPlay);
@@ -539,7 +531,7 @@ public class ComputerUtil {
             if (!landsInHand.isEmpty()) {
                 final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
-                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+                final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
                 if (numLandsInPlay >= highestCMC
                         || (numLandsInPlay + landsInHand.size() > 6 && landsInHand.size() > 1)) {
                     // Don't need more land.
@@ -708,6 +700,11 @@ public class ComputerUtil {
             typeList = new CardCollection(ai.getCardsIn(cost.from));
         }
         typeList = CardLists.getValidCards(typeList, cost.getType().split(";"), activate.getController(), activate, sa);
+
+        return chooseExileFromList(ai, typeList, activate, amount, sa, effect);
+    }
+
+    public static CardCollection chooseExileFromList(final Player ai, CardCollection typeList, final Card activate, final int amount, SpellAbility sa, final boolean effect) {
         typeList = CardLists.filter(typeList, CardPredicates.canExiledBy(sa, effect));
 
         // don't exile the card we're pumping
@@ -730,13 +727,10 @@ public class ComputerUtil {
             // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
             CardLists.sortByCmcDesc(typeList);
             Collections.reverse(typeList);
-            typeList.sort(new Comparator<Card>() {
-                @Override
-                public int compare(final Card a, final Card b) {
-                    if (!a.isInPlay() && b.isInPlay()) return -1;
-                    else if (!b.isInPlay() && a.isInPlay()) return 1;
-                    else return 0;
-                }
+            typeList.sort((a, b) -> {
+                if (!a.isInPlay() && b.isInPlay()) return -1;
+                else if (!b.isInPlay() && a.isInPlay()) return 1;
+                else return 0;
             }); // something that's not on the battlefield should come first
         }
         final CardCollection exileList = new CardCollection();
@@ -953,40 +947,37 @@ public class ComputerUtil {
                     }
                 }
             }
-            remaining = CardLists.filter(remaining, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    int sacThreshold = 190;
+            remaining = CardLists.filter(remaining, c -> {
+                int sacThreshold = 190;
 
-                    String logic = source.getParamOrDefault("AILogic", "");
-                    if (logic.startsWith("SacForDamage")) {
-                        final int damageAmt = logic.contains("cmc") ? c.getManaCost().getCMC() : c.getNetPower();
-                        if (damageAmt <= 0) {
-                            return false;
-                        } else if (damageAmt >= ai.getOpponentsSmallestLifeTotal()) {
-                            return true;
-                        } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
-                                && damageAmt * 2 >= ai.getOpponentsSmallestLifeTotal()) {
-                            return true; // TODO: generalize this for any type and actually make the AI prefer giants?
-                        }
-                    }
-
-                    if ("DesecrationDemon".equals(logic)) {
-                        sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
-                    } else if (considerSacThreshold != -1) {
-                        sacThreshold = considerSacThreshold;
-                    }
-
-                    if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
+                String logic = source.getParamOrDefault("AILogic", "");
+                if (logic.startsWith("SacForDamage")) {
+                    final int damageAmt = logic.contains("cmc") ? c.getManaCost().getCMC() : c.getNetPower();
+                    if (damageAmt <= 0) {
+                        return false;
+                    } else if (damageAmt >= ai.getOpponentsSmallestLifeTotal()) {
                         return true;
+                    } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
+                            && damageAmt * 2 >= ai.getOpponentsSmallestLifeTotal()) {
+                        return true; // TODO: generalize this for any type and actually make the AI prefer giants?
                     }
-
-                    if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
-                        return true;
-                    }
-
-                    return false;
                 }
+
+                if ("DesecrationDemon".equals(logic)) {
+                    sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
+                } else if (considerSacThreshold != -1) {
+                    sacThreshold = considerSacThreshold;
+                }
+
+                if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) < sacThreshold) {
+                    return true;
+                }
+
+                if (ComputerUtilCard.hasActiveUndyingOrPersist(c)) {
+                    return true;
+                }
+
+                return false;
             });
         }
 
@@ -1280,7 +1271,6 @@ public class ComputerUtil {
             if (cardState.hasKeyword(Keyword.SOULBOND) && buffedcard.isCreature() && !buffedcard.isPaired()) {
                 return true;
             }
-
         } // BuffedBy
 
         // there's a good chance AI will attack weak target
@@ -1358,7 +1348,7 @@ public class ComputerUtil {
         final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
         final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
         final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
-        final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
+        final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
             if (landsInPlay.size() >= highestCMC
@@ -1720,7 +1710,6 @@ public class ComputerUtil {
                     }
                 }
             }
-
         }
 
         return damage;
@@ -1759,6 +1748,9 @@ public class ComputerUtil {
             if (spell.isWrapper()) {
                 spell = ((WrappedAbility) spell).getWrappedAbility();
             }
+            if (spell.getOriginalAbility() != null && spell.getOriginalAbility().getHostCard().equals(spell.getHostCard())) {
+                spell = spell.getOriginalAbility();
+            }
             while (sub != null && sub != sa) {
                 sub = sub.getSubAbility();
             }
@@ -1770,6 +1762,9 @@ public class ComputerUtil {
             }
         }
 
+        // align threatened with resolve order
+        // matters if stack contains multiple activations (e.g. Temur Sabertooth)
+        Collections.reverse(objects);
         return objects;
     }
 
@@ -1876,7 +1871,7 @@ public class ComputerUtil {
                     }
 
                     // don't use it on creatures that can't be regenerated
-                    if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) &&
+                    if ((saviourApi == ApiType.Regenerate) &&
                             (!c.canBeShielded() || noRegen)) {
                         continue;
                     }
@@ -1985,7 +1980,7 @@ public class ComputerUtil {
         }
         // Destroy => regeneration/bounce/shroud
         else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
+                && ((saviourApi == ApiType.Regenerate
                         && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone
                         || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                         || saviourApi == ApiType.Protection || saviourApi == null
@@ -2126,7 +2121,6 @@ public class ComputerUtil {
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa) {
         return predictCreatureWillDieThisTurn(ai, creature, excludeSa, false);
     }
-
     public static boolean predictCreatureWillDieThisTurn(final Player ai, final Card creature, final SpellAbility excludeSa, final boolean nonCombatOnly) {
         final Game game = ai.getGame();
 
@@ -2175,12 +2169,7 @@ public class ComputerUtil {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         if (aic.getBooleanProperty(AiProps.AVOID_TARGETING_CREATS_THAT_WILL_DIE)) {
             // Try to avoid targeting creatures that are dead on board
-            List<Card> willBeKilled = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(Card card) {
-                    return card.isCreature() && predictCreatureWillDieThisTurn(ai, card, excludeSa);
-                }
-            });
+            List<Card> willBeKilled = CardLists.filter(list, card -> card.isCreature() && predictCreatureWillDieThisTurn(ai, card, excludeSa));
             list.removeAll(willBeKilled);
         }
         return list;
@@ -2237,13 +2226,8 @@ public class ComputerUtil {
             return finalHandSize;
         }
 
-        final CardCollectionView lands = CardLists.filter(handList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")
-                        && (c.isLand() || c.isArtifact());
-            }
-        });
+        final CardCollectionView lands = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 && !c.hasSVar("NeedsToPlay")
+                && (c.isLand() || c.isArtifact()));
 
         final int handSize = handList.size();
         final int landSize = lands.size();
@@ -2257,12 +2241,7 @@ public class ComputerUtil {
             score += 10;
         }
 
-        final CardCollectionView castables = CardLists.filter(handList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize;
-            }
-        });
+        final CardCollectionView castables = CardLists.filter(handList, c -> c.getManaCost().getCMC() <= 0 || c.getManaCost().getCMC() <= landSize);
 
         score += castables.size() * 2;
 
@@ -2423,7 +2402,7 @@ public class ComputerUtil {
         } else if (c.isCreature()) {
             CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.CREATURES);
             int avgCreatureValue = numCards != 0 ? ComputerUtilCard.evaluateCreatureList(allCreatures) / numCards : 0;
-            int maxControlledCMC = Aggregates.max(creaturesOTB, CardPredicates.Accessors.fnGetCmc);
+            int maxControlledCMC = Aggregates.max(creaturesOTB, Card::getCMC);
 
             if (ComputerUtilCard.evaluateCreature(c) < avgCreatureValue) {
                 if (creaturesOTB.size() > minCreatsToScryCreatsAway) {
@@ -2452,12 +2431,7 @@ public class ComputerUtil {
     }
 
     public static CardCollection getCardsToDiscardFromOpponent(Player chooser, Player discarder, SpellAbility sa, CardCollection validCards, int min, int max) {
-        CardCollection goodChoices = CardLists.filter(validCards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe");
-            }
-        });
+        CardCollection goodChoices = CardLists.filter(validCards, c -> !c.hasSVar("DiscardMeByOpp") && !c.hasSVar("DiscardMe"));
         if (goodChoices.isEmpty()) {
             goodChoices = validCards;
         }
@@ -2615,7 +2589,7 @@ public class ComputerUtil {
                             chosen = b;
                         }
                     }
-                    if (chosen.equals("")) {
+                    if (chosen.isEmpty()) {
                         for (String b : basics) {
                             if (Iterables.any(possibleCards, CardPredicates.isType(b))) {
                                 chosen = b;
@@ -2851,25 +2825,17 @@ public class ComputerUtil {
     }
 
     public static CardCollection getSafeTargets(final Player ai, SpellAbility sa, CardCollectionView validCards) {
-        CardCollection safeCards = CardLists.filter(validCards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (c.getController() == ai) {
-                    return !c.getSVar("Targeting").equals("Dies") && !c.getSVar("Targeting").equals("Counter");
-                }
-                return true;
+        CardCollection safeCards = CardLists.filter(validCards, c -> {
+            if (c.getController() == ai) {
+                return !c.getSVar("Targeting").equals("Dies") && !c.getSVar("Targeting").equals("Counter");
             }
+            return true;
         });
         return safeCards;
     }
 
     public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
-        CardCollection killables = CardLists.filter(validCards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies");
-            }
-        });
+        CardCollection killables = CardLists.filter(validCards, c -> c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies"));
         return ComputerUtilCard.getBestCreatureAI(killables);
     }
 
@@ -3225,12 +3191,7 @@ public class ComputerUtil {
         CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
         CardCollectionView inDeck = ai.getCardsIn(ZoneType.Library);
 
-        Predicate<Card> markedAsReanimator = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card card) {
-                return "true".equalsIgnoreCase(card.getSVar("IsReanimatorCard"));
-            }
-        };
+        Predicate<Card> markedAsReanimator = card -> "true".equalsIgnoreCase(card.getSVar("IsReanimatorCard"));
 
         int numInHand = CardLists.count(inHand, markedAsReanimator);
         int numInDeck = CardLists.count(inDeck, markedAsReanimator);
@@ -3263,12 +3224,7 @@ public class ComputerUtil {
                     value = ComputerUtilCard.evaluateCreature(source);
                 }
                 final int totalValue = value;
-                list = CardLists.filter(srcList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return ComputerUtilCard.evaluateCreature(c) > totalValue + 30;
-                    }
-                });
+                list = CardLists.filter(srcList, c -> ComputerUtilCard.evaluateCreature(c) > totalValue + 30);
             } else {
                 list = CardLists.getValidCards(srcList, sa.getParam("AITgts"), sa.getActivatingPlayer(), source, sa);
             }
@@ -3350,6 +3306,11 @@ public class ComputerUtil {
         repParams.put(AbilityKey.CardLKI, c);
         repParams.put(AbilityKey.Origin, c.getLastKnownZone().getZoneType());
         repParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+        // add Params for AddCounter Replacements
+        GameEntityCounterTable table = new GameEntityCounterTable();
+        repParams.put(AbilityKey.EffectOnly, true);
+        repParams.put(AbilityKey.CounterTable, table);
+        repParams.put(AbilityKey.CounterMap, table.column(c));
         List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
         return !list.isEmpty();
     }

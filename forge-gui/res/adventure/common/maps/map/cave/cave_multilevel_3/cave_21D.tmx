@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="94">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt07EJwDAMRUFXgSzn7b1PijTGhdx9Q3LFtXpIoH631qEwrle6d7qb7Ke78/z0vlX7q/fe9U91//DXazvZndvpLgAAAABA5QG+x34j
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="60">
+  <data encoding="base64" compression="zlib">
+   eJy1WW1OWzEQfH+ABIljhSJu0J6l6mUSqRR6K9oHUg/Q/mxWyojJMLu2k4cl6ymJvbM73q/n3K6n6XZg3u1njM3gvpH5uJqmJ5o/93Pef/+wf75+IObvg20Yz/vPv2iGHi0ZI2ufDKaO7w2bofcf0tlhQzeHd3Uipu512HeEpzg8vhS6Y34yuv87PO9lbfjLj9Xbum83BbjZ72xgGRDt4gDYwWM8rw9rLwxu2Awfz+RgH/irzif2vArvMT4P2q1ct3yiOqMM99HYzefWi+k4z8bzIQbYbo7FEUzlPJ4vDb+Dj2u+qfyvd+qZ89mFTrA9xtWCuI578KhxGN8vmceVe5bLfLg4df63xGRc5Rfn3sp15+KqfI7LpWv3LH63WR/XmyV9jXnUerYRDpb2NdcjwM9H+IXuWd7XCdlcP8FlcB/xtS1wXa+B3ma03t6vj7lo1aIsF2fxiDO9OHAbMc1xDZ1a+sMPwBlqqNvHdjp7st5Qsd06jK83x/wxbsYh6+XOXnm+FEy3h3XMcpDWkUuR4XR0x8x2sQ9n9rK/rKY6ftW3/ibreV2Vc1u1Qtf29GJVHRjVj+VFT1Hp2Cuz5X/qLz29EftsFqPQL+MEmNvO88hyleutY10mL/R6oB4GdWw0RzI+9sa63vcb9GngT22o8oza3tPTht0vZPvWyMneHVs69PY40CHwq/dEHlwfcGZVfmnhc++qfTyPjdH7nD4DMl6NLqfyeerM/JmxUaeX0qXlz+zLMc7pI1l3Z2t29uszcTW2FU/rJMNX547eDjbxHVQVs2qLcpH17Fkv6e6D3FBben0d+u2mtzrP8YrP2fu/ywmQuaU1XJey2ufiFXcuqpvzGc4ZyBszyeP+oqf2zev3ueOUXNHTD1QTeo9ic2y4nroli32ouk/Lcs719P4+CPUXsZXlO5xlLz56uJXhObu/6enheG3VczmfzHAzee7+d1foGvJ35reeu0LeU+npsLP+e+7AhTzNdVofXJ6s7gKyfJcNrQ+8X/0Hv2UxyHmn6m+c3ry/9T7WqpPz+jhHKuen5q3evdkZjGLDjoyTbI9y/5H/a2Vc9fYy/wFgLpcl
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="60">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2EsKgDAMhOGufB3Mi/rAY0oXgYKLupo/ynzgeoK2TWop76zz81Gicik7XYD91inOm8R51QVk9gx0AQL13BrpIhIg3wHVO9TnSstrzszMCBuYTfQ+epYlZo1FnEfcmwL9fZVi/5Dzq4p6TbV3Ec/oZn11n6jniSz/m6meF709wxml7L3R8w5hpn3HDej8DAI=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="74" template="../../../obj/treasure.tx" x="150.833" y="44.3333"/>
+  <object id="75" template="../../../obj/treasure.tx" x="103.417" y="347.25"/>
+  <object id="77" template="../../../obj/gold.tx" x="132.333" y="42.25"/>
+  <object id="78" template="../../../obj/gold.tx" x="56.6667" y="936.667"/>
+  <object id="79" template="../../../obj/gold.tx" x="442.667" y="270"/>
+  <object id="80" template="../../../obj/enemy.tx" x="153.334" y="109.667">
+   <properties>
+    <property name="displayNameOverride" value="Mother Troll"/>
+    <property name="enemy" value="Mountain Ogre"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../obj/enemy.tx" x="109.333" y="414">
+   <properties>
+    <property name="enemy" value="Troll"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../obj/enemy.tx" x="391.166" y="126.167">
+   <properties>
+    <property name="enemy" value="Cloaker"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="83" template="../../../obj/door_up.tx" x="304.75" y="959.083">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_3/cave_21C.tmx"/>
+    <property name="teleportObjectId" value="67"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../obj/enemy.tx" x="327.333" y="278.666">
+   <properties>
+    <property name="enemy" value="Troll"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="89,88,90,91,92,93,92,91,90,88"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../obj/enemy.tx" x="417.333" y="410.667">
+   <properties>
+    <property name="enemy" value="Troll"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../obj/manashards.tx" x="51.3333" y="97.3333"/>
+  <object id="87" template="../../../obj/booster.tx" x="392" y="86.6667">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;AVR&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../obj/waypoint.tx" x="330.667" y="350.667"/>
+  <object id="89" template="../../../obj/waypoint.tx" x="336" y="206"/>
+  <object id="90" template="../../../obj/waypoint.tx" x="286" y="367.333"/>
+  <object id="91" template="../../../obj/waypoint.tx" x="254" y="405.333"/>
+  <object id="92" template="../../../obj/waypoint.tx" x="279.333" y="538"/>
+  <object id="93" template="../../../obj/waypoint.tx" x="298" y="650.667"/>
+ </objectgroup>
+</map>

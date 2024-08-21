@@ -1,0 +1,8 @@
+Name:Treetop Sentries
+ManaCost:3 G
+Types:Creature Squirrel Archer
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you may forage. If you do, draw a card. (To forage, exile three cards from your graveyard or sacrifice a Food.)
+SVar:TrigDraw:AB$ Draw | Cost$ Forage | NumCards$ 1
+Oracle:Reach\nWhen Treetop Sentries enters, you may forage. If you do, draw a card. (To forage, exile three cards from your graveyard or sacrifice a Food.)

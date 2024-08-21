@@ -1,8 +1,8 @@
 Name:Viashino Firstblade
 ManaCost:1 R W
-Types:Creature Viashino Soldier
+Types:Creature Lizard Soldier
 PT:2/2
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, it gets +2/+2 until end of turn.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, it gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | NumAtt$ +2 | NumDef$ +2
-Oracle:Haste\nWhen Viashino Firstblade enters the battlefield, it gets +2/+2 until end of turn.
+Oracle:Haste\nWhen Viashino Firstblade enters, it gets +2/+2 until end of turn.

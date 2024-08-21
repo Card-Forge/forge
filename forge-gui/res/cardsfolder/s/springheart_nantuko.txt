@@ -1,0 +1,10 @@
+Name:Springheart Nantuko
+ManaCost:1 G
+Types:Enchantment Creature Insect Monk
+PT:1/1
+K:Bestow:1 G
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Landfall — Whenever a land you control enters, you may pay {1}{G} if CARDNAME is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.
+SVar:TrigCopy:DB$ CopyPermanent | ConditionPresent$ Card.Self+AttachedTo Creature.YouCtrl | ConditionCompare$ GE1 | UnlessCost$ 1 G | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBToken | Defined$ Enchanted | NumCopies$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You
+Oracle:Bestow {1}{G}\nEnchanted creature gets +1/+1.\nLandfall — Whenever a land you control enters, you may pay {1}{G} if Springheart Nantuko is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.

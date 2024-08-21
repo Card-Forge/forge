@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigBranch | TriggerDesc
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ Legendary | FalseSubAbility$ NonLegendary
 SVar:Legendary:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
 SVar:NonLegendary:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | TokenTapped$ True
-SVar:X:Count$Valid Creature.EquippedBy+Legendary
+SVar:X:TriggeredAttacker$Valid Card.Legendary
 SVar:AE:SVar:HasAttackEffect:TRUE
 K:Equip:2
 DeckHas:Ability$Token & Type$Spirit

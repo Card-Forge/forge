@@ -1,6 +1,6 @@
 Name:Viashino Slaughtermaster
 ManaCost:1 R
-Types:Creature Viashino Warrior
+Types:Creature Lizard Warrior
 PT:1/1
 K:Double Strike
 A:AB$ Pump | Cost$ B G | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | ActivationLimit$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn. Activate only once each turn.

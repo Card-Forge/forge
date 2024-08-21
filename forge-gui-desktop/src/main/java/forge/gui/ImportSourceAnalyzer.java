@@ -383,12 +383,7 @@ public class ImportSourceAnalyzer {
 
             // planar cards now don't have the ".full" part in their filenames
             nameUpdates = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            final Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
-                @Override
-                public boolean apply(final PaperCard arg0) {
-                    return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
-                }
-            };
+            final Predicate<PaperCard> predPlanes = arg0 -> arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
 
             for (final PaperCard c : Iterables.filter(FModel.getMagicDb().getVariantCards().getAllCards(), predPlanes)) {
                 String baseName = c.getCardImageKey();
@@ -450,7 +445,7 @@ public class ImportSourceAnalyzer {
         analyzeListedDir(root, ForgeConstants.CACHE_ICON_PICS_DIR, new ListedAnalyzer() {
             @Override
             public String map(final String filename) {
-                return iconFileNames.containsKey(filename) ? iconFileNames.get(filename) : null;
+                return iconFileNames.getOrDefault(filename, null);
             }
 
             @Override
@@ -622,7 +617,7 @@ public class ImportSourceAnalyzer {
         analyzeListedDir(root, targetDir, new ListedAnalyzer() {
             @Override
             public String map(final String filename) {
-                return fileDb.containsKey(filename) ? fileDb.get(filename) : null;
+                return fileDb.getOrDefault(filename, null);
             }
 
             @Override

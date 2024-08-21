@@ -1,0 +1,11 @@
+Name:Aether Refinery
+ManaCost:4 R R
+Types:Artifact
+R:Event$ AddCounter | ActiveZones$ Battlefield | ValidPlayer$ You | ValidCounterType$ ENERGY | ReplaceWith$ Twice | Description$ If you would get one or more {E}, you get twice that many {E} instead.
+SVar:Twice:DB$ ReplaceCounter | ValidCounterType$ ENERGY | ChooseCounter$ True | Amount$ ReplaceCount$CounterNum/Twice
+A:AB$ PutCounter | Cost$ T | Defined$ You | CounterType$ ENERGY | SubAbility$ DBChooseNumber | StackDescription$ SpellDescription | SpellDescription$ You get {E}, then you may pay one or more {E}.
+SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Count$YourCountersEnergy | ListTitle$ amount of energy to pay | SubAbility$ DBToken | StackDescription$ None
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ X | UnlessCost$ Mandatory PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | TokenScript$ b_x_x_aetherborn | TokenPower$ X | TokenToughness$ X | StackDescription$ SpellDescription | SpellDescription$ If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way.
+SVar:X:Count$ChosenNumber
+DeckHas:Ability$Token & Type$Aetherborn & Color$Black
+Oracle:If you would get one or more {E}, you get twice that many {E} instead.\n{T}: You get {E}, then you may pay one or more {E}. If you do, create an X/X black Aetherborn creature token, where X is the amount of {E} paid this way.

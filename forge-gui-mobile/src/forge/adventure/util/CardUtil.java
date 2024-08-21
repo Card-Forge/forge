@@ -19,7 +19,7 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
@@ -436,7 +436,7 @@ public class CardUtil {
                 }
 
                 packCandidates=new HashMap<>();
-                for(SealedProduct.Template template : StaticData.instance().getSpecialBoosters())
+                for(SealedTemplate template : StaticData.instance().getSpecialBoosters())
                 {
                     if (!editionCodes.contains(template.getEdition().split("\\s",2)[0]))
                         continue;
@@ -713,8 +713,18 @@ public class CardUtil {
 
     public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI, CardEdition starterEdition, boolean discourageDuplicates)
     {
-        if(path.endsWith(".dck"))
-            return DeckSerializer.fromFile(Config.instance().getFile(path).file());
+        if(path.endsWith(".dck")) {
+            FileHandle fileHandle = Config.instance().getFile(path);
+            Deck deck = null;
+            if (fileHandle != null) {
+                deck = DeckSerializer.fromFile(fileHandle.file());
+            }
+            if (deck == null) {
+                deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, true, false, true);
+                System.err.println("Error loading Deck: " + path + "\nGenerating random deck: " + deck.getName());
+            }
+            return deck;
+        }
 
         if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
@@ -769,14 +779,14 @@ public class CardUtil {
             System.err.println("Set code '" + code + "' not found.");
             return new Deck();
         }
-        BoosterPack cards = BoosterPack.FN_FROM_SET.apply(edition);
+        BoosterPack cards = BoosterPack.fromSet(edition);
         return generateBoosterPackAsDeck(edition);
     }
 
     public static Deck generateBoosterPackAsDeck(CardEdition edition){
         Deck d = new Deck("Booster pack");
         d.setComment(edition.getCode());
-        d.getMain().add(BoosterPack.FN_FROM_SET.apply(edition).getCards());
+        d.getMain().add(BoosterPack.fromSet(edition).getCards());
         return d;
     }
 

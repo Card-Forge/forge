@@ -1,7 +1,5 @@
 [metadata]
 Name=witch
-[Avatar]
-
 [Main]
 2 Accursed Witch|SOI|1
 2 Cast Down|DOM|1
@@ -20,12 +18,4 @@ Name=witch
 4 Witch's Cottage|ELD|1
 2 Witch's Vengeance|ELD|1
 [Sideboard]
-
-[Planes]
-
 [Schemes]
-
-[Conspiracy]
-
-[Dungeon]
-

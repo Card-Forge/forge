@@ -1,0 +1,9 @@
+Name:Bello, Bard of the Brambles
+ManaCost:1 R G
+Types:Legendary Creature Raccoon Bard
+PT:3/3
+S:Mode$ Continuous | Affected$ Artifact.nonEquipment+YouCtrl+cmcGE4,Enchantment.nonAura+YouCtrl+cmcGE4 | Condition$ PlayerTurn | SetPower$ 4 | SetToughness$ 4 | AddType$ Creature & Elemental | AddKeyword$ Indestructible & Haste | AddTrigger$ TrigDamageDone | Description$ During your turn, each non-Equipment artifact and non-Aura enchantment you control with mana value 4 or greater is a 4/4 Elemental creature in addition to its other types and has indestructible, haste, and "Whenever this creature deals combat damage to a player, draw a card."
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You
+SVar:PlayMain1:ALWAYS
+Oracle:During your turn, each non-Equipment artifact and non-Aura enchantment you control with mana value 4 or greater is a 4/4 Elemental creature in addition to its other types and has indestructible, haste, and "Whenever this creature deals combat damage to a player, draw a card."

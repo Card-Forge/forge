@@ -1,0 +1,11 @@
+Name:Murmuration
+ManaCost:4 W
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Bird.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | Description$ Birds you control get +1/+1 and have vigilance.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, for each spell you've cast this turn, create a 1/2 blue Bird creature token with flying named Storm Crow.
+SVar:TrigToken:DB$ Token | TokenScript$ storm_crow | TokenAmount$ X | TokenOwner$ You
+SVar:X:Count$ThisTurnCast_Card.YouCtrl
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Token
+DeckHints:Type$Bird
+Oracle:Birds you control get +1/+1 and have vigilance.\nAt the beginning of your end step, for each spell you've cast this turn, create a 1/2 blue Bird creature token with flying named Storm Crow.

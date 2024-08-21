@@ -1,0 +1,8 @@
+Name:Byway Barterer
+ManaCost:2 R
+Types:Creature Raccoon Rogue
+PT:3/3
+K:Menace
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | Defined$ You | NumCards$ 2
+Oracle:Menace\nWhenever you expend 4, you may discard your hand. If you do, draw two cards. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

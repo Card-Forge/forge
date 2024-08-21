@@ -1,0 +1,10 @@
+Name:Bespoke Battlewagon
+ManaCost:3 U
+Types:Artifact Vehicle
+PT:5/6
+A:AB$ PutCounter | Cost$ T | Defined$ You | CounterType$ ENERGY | CounterNum$ 2 | AILogic$ AtOppEOT | SpellDescription$ You get {E}{E} (two energy counters).
+A:AB$ Tap | Cost$ T PayEnergy<2> | ValidTgts$ Creature | SpellDescription$ Tap target creature.
+A:AB$ Draw | Cost$ T PayEnergy<3> | SpellDescription$ Draw a card.
+A:AB$ Animate | Cost$ PayEnergy<4> | Defined$ Self | Types$ Artifact,Creature | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
+K:Crew:4
+Oracle:{T}: You get {E}{E} (two energy counters).\n{T}, Pay {E}{E}: Tap target creature.\n{T}, Pay {E}{E}{E}: Draw a card.\nPay {E}{E}{E}{E}: Bespoke Battlewagon becomes an artifact creature until end of turn.\nCrew 4

@@ -1,0 +1,9 @@
+Name:Guardian of the Forgotten
+ManaCost:3 W
+Types:Creature Elephant Warrior
+PT:4/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+modified | TriggerZones$ Battlefield | Execute$ TrigManifest | TriggerDescription$ Whenever a modified creature you control dies, manifest the top card of your library. (Equipment, Auras you control, and counters are modifications. To manifest a card, put the top card of your library onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigManifest:DB$ Manifest
+DeckHints:Ability$Counters & Type$Equipment|Aura
+Oracle:Vigilance\nWhenever a modified creature you control dies, manifest the top card of your library. (Equipment, Auras you control, and counters are modifications. To manifest a card, put the top card of your library onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)

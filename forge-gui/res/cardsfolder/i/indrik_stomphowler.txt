@@ -2,6 +2,6 @@ Name:Indrik Stomphowler
 ManaCost:4 G
 Types:Creature Beast
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact or enchantment.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment.
-Oracle:When Indrik Stomphowler enters the battlefield, destroy target artifact or enchantment.
+Oracle:When Indrik Stomphowler enters, destroy target artifact or enchantment.

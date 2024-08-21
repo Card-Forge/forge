@@ -1,0 +1,11 @@
+Name:Finneas, Ace Archer
+ManaCost:G W
+Types:Legendary Creature Rabbit Archer
+PT:2/2
+K:Vigilance
+K:Reach
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ Whenever CARDNAME attacks, put a +1/+1 counter on each other creature you control that's a token or a Rabbit. Then if creatures you control have total power 10 or greater, draw a card.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+StrictlyOther+token,Creature.YouCtrl+StrictlyOther+Rabbit | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
+SVar:X:Count$SumPower_Creature.YouCtrl
+Oracle:Vigilance, reach\nWhenever Finneas, Ace Archer attacks, put a +1/+1 counter on each other creature you control that's a token or a Rabbit. Then if creatures you control have total power 10 or greater, draw a card.

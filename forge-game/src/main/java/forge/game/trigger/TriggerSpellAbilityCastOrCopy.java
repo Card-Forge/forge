@@ -70,7 +70,8 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     }
 
     /** {@inheritDoc}
-     * @param runParams*/
+     * @param runParams
+     **/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         final SpellAbility spellAbility = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
@@ -107,6 +108,27 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));
                 if (!Expressions.compare(left, compare, right)) {
+                    return false;
+                }
+            }
+            if (hasParam("ActivatorThisTurnCastEach")) {
+                final String compare = getParam("ActivatorThisTurnCastEach");
+                final String valid = getParamOrDefault("ValidCard", "Card");
+                boolean found = false;
+                int right = Integer.parseInt(compare.substring(2));
+                for (String v : valid.split(",")) {
+                    if (!cast.isValid(v, getHostCard().getController(), getHostCard(), this)) {
+                        continue;
+                    }
+                    List<Card> thisTurnCast = CardUtil.getThisTurnCast(v, getHostCard(), this, getHostCard().getController());
+                    thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, activator);
+                    int left = thisTurnCast.size();
+                    if (Expressions.compare(left, compare, right)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
                     return false;
                 }
             }

@@ -38,10 +38,10 @@ public class ItemEdit extends JComponent {
         add(effect);
         add(new Box.Filler(new Dimension(0,0),new Dimension(0,Integer.MAX_VALUE),new Dimension(0,Integer.MAX_VALUE)));
 
-        nameField.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
-        equipmentSlot.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
-        description.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
-        iconName.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
+        nameField.getDocument().addDocumentListener(new DocumentChangeListener(ItemEdit.this::updateItem));
+        equipmentSlot.getDocument().addDocumentListener(new DocumentChangeListener(ItemEdit.this::updateItem));
+        description.getDocument().addDocumentListener(new DocumentChangeListener(ItemEdit.this::updateItem));
+        iconName.getDocument().addDocumentListener(new DocumentChangeListener(ItemEdit.this::updateItem));
         cost.addChangeListener(e -> ItemEdit.this.updateItem());
         questItem.addChangeListener(e -> ItemEdit.this.updateItem());
         effect.addChangeListener(e -> ItemEdit.this.updateItem());
@@ -57,7 +57,7 @@ public class ItemEdit extends JComponent {
         currentData.description=description.getText();
         currentData.iconName=iconName.getText();
         currentData.questItem=questItem.isSelected();
-        currentData.cost=((Integer)  cost.getValue()).intValue();
+        currentData.cost= (Integer) cost.getValue();
     }
 
     public void setCurrentItem(ItemData data)

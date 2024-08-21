@@ -1,0 +1,10 @@
+Name:Dreamdew Entrancer
+ManaCost:2 G U
+Types:Creature Frog Wizard
+PT:3/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap up to one creature and put three stun counters on it. If you control that creature, draw two cards.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Creature.YouCtrl
+Oracle:Reach\nWhen Dreamdew Entrancer enters, tap up to one creature and put three stun counters on it. If you control that creature, draw two cards.

@@ -111,13 +111,13 @@ public class DeckRecognizer {
         // WARNING MESSAGES
         // ================
         public static Token UnknownCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
+            String ttext = setCode == null || setCode.isEmpty() ? cardName :
                     String.format("%s [%s]", cardName, setCode);
             return new Token(TokenType.UNKNOWN_CARD, count, ttext);
         }
 
         public static Token UnsupportedCard(final String cardName, final String setCode, final int count) {
-            String ttext = setCode == null || setCode.equals("") ? cardName :
+            String ttext = setCode == null || setCode.isEmpty() ? cardName :
                     String.format("%s [%s]", cardName, setCode);
             return new Token(TokenType.UNSUPPORTED_CARD, count, ttext);
         }
@@ -151,6 +151,8 @@ public class DeckRecognizer {
                 matchedSection = DeckSection.Conspiracy;
             else if (sectionName.equals("planes"))
                 matchedSection = DeckSection.Planes;
+            else if (sectionName.equals("attractions"))
+                matchedSection = DeckSection.Attractions;
 
             if (matchedSection == null)  // no match found
                 return null;
@@ -760,6 +762,9 @@ public class DeckRecognizer {
         // is not supported, but other possibilities exist (e.g. Commander card in Constructed
         // could potentially go in Main)
         DeckSection matchedSection = DeckSection.matchingSection(card);
+        // If it's a commander candidate, put it there.
+        if (matchedSection == DeckSection.Main && this.isAllowed(DeckSection.Commander) && DeckSection.Commander.validate(card))
+            return DeckSection.Commander;
         if (this.isAllowed(matchedSection))
             return matchedSection;
         // if matched section is not allowed, try to match the card to main.
@@ -841,7 +846,7 @@ public class DeckRecognizer {
         }
         if (isCardRarity(text)){
             String tokenText = cardRarityTokenMatch(text);
-            if (tokenText != null && !tokenText.trim().equals(""))
+            if (tokenText != null && !tokenText.trim().isEmpty())
                 return new Token(TokenType.CARD_RARITY, tokenText);
             return null;
         }

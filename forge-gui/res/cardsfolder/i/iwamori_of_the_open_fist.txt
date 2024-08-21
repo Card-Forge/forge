@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Legendary Creature Human Monk
 PT:5/5
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put a legendary creature card from their hand onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, each opponent may put a legendary creature card from their hand onto the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Legendary | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
-Oracle:Trample\nWhen Iwamori of the Open Fist enters the battlefield, each opponent may put a legendary creature card from their hand onto the battlefield.
+Oracle:Trample\nWhen Iwamori of the Open Fist enters, each opponent may put a legendary creature card from their hand onto the battlefield.

@@ -1,0 +1,11 @@
+Name:Thought-Stalker Warlock
+ManaCost:2 B
+Types:Creature Lizard Warlock
+PT:2/2
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ When CARDNAME enters, choose target opponent. If they lost life this turn, they reveal their hand, you choose a nonland card from it, and they discard that card. Otherwise, they discard a card.
+SVar:TrigBranch:DB$ Branch | ValidTgts$ Opponent | BranchConditionSVar$ X | BranchConditionSVarCompare$ GT0 | TrueSubAbility$ DBDuress | FalseSubAbility$ DBDiscard
+SVar:DBDuress:DB$ Discard | Defined$ TargetedPlayer | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1
+SVar:DBDiscard:DB$ Discard | Defined$ TargetedPlayer | Mode$ TgtChoose | NumCards$ 1
+SVar:X:TargetedPlayer$LifeLostThisTurn
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhen Thought-Stalker Warlock enters, choose target opponent. If they lost life this turn, they reveal their hand, you choose a nonland card from it, and they discard that card. Otherwise, they discard a card.

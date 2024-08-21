@@ -1,0 +1,6 @@
+Name:Silverquill Lecturer
+ManaCost:4 W
+Types:Creature Kor Wizard
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Demonstrate | Description$ Creature spells you cast have demonstrate. (Whenever you cast a creature spell, you may copy it. If you do, choose an opponent to also copy it. Each copy becomes a token.)
+Oracle:Creature spells you cast have demonstrate. (Whenever you cast a creature spell, you may copy it. If you do, choose an opponent to also copy it. Each copy becomes a token.)

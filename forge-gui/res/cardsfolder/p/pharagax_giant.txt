@@ -3,7 +3,7 @@ ManaCost:4 R
 Types:Creature Giant
 PT:3/3
 K:Tribute:2
-SVar:TrigNotTribute:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ When CARDNAME enters the battlefield, if tribute wasn't paid, CARDNAME deals 5 damage to each opponent.
+SVar:TrigNotTribute:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5 | SpellDescription$ When CARDNAME enters, if tribute wasn't paid, CARDNAME deals 5 damage to each opponent.
 SVar:TributeAILogic:Always
 DeckHas:Ability$Counters
-Oracle:Tribute 2 (As this creature enters the battlefield, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Pharagax Giant enters the battlefield, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.
+Oracle:Tribute 2 (As this creature enters, an opponent of your choice may put two +1/+1 counters on it.)\nWhen Pharagax Giant enters, if tribute wasn't paid, Pharagax Giant deals 5 damage to each opponent.

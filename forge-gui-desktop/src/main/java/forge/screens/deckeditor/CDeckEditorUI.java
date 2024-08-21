@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import forge.Singletons;
 import forge.deck.DeckBase;
@@ -42,13 +40,7 @@ import forge.screens.deckeditor.controllers.CEditorQuestCardShop;
 import forge.screens.deckeditor.controllers.CProbabilities;
 import forge.screens.deckeditor.controllers.CStatistics;
 import forge.screens.deckeditor.controllers.DeckController;
-import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCardCatalog;
-import forge.screens.deckeditor.views.VCommanderDecks;
-import forge.screens.deckeditor.views.VCurrentDeck;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
+import forge.screens.deckeditor.views.*;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
 
@@ -72,6 +64,7 @@ public enum CDeckEditorUI implements ICDoc {
     private final VOathbreakerDecks vOathbreakerDecks;
     private final VBrawlDecks vBrawlDecks;
     private final VTinyLeadersDecks vTinyLeadersDecks;
+    private final VEditorLog vEditorLog;
 
     CDeckEditorUI() {
         screenChildControllers = new HashMap<>();
@@ -86,6 +79,7 @@ public enum CDeckEditorUI implements ICDoc {
         this.vBrawlDecks.setCDetailPicture(cDetailPicture);
         this.vTinyLeadersDecks = VTinyLeadersDecks.SINGLETON_INSTANCE;
         this.vTinyLeadersDecks.setCDetailPicture(cDetailPicture);
+        this.vEditorLog = VEditorLog.SINGLETON_INSTANCE;
     }
 
     public CDetailPicture getCDetailPicture() {
@@ -230,9 +224,9 @@ public enum CDeckEditorUI implements ICDoc {
                     }
                     else if (KeyEvent.VK_LEFT == e.getKeyCode() || KeyEvent.VK_RIGHT == e.getKeyCode()) {
                         if (e.isControlDown() || e.isMetaDown()) {
-                        deckView.focus();
-                        e.consume(); //prevent losing selection
-}
+                            deckView.focus();
+                            e.consume(); //prevent losing selection
+                        }
                     }
                 }
             });
@@ -257,34 +251,16 @@ public enum CDeckEditorUI implements ICDoc {
                 }
             });
 
-            catView.setItemActivateCommand(new UiCommand() {
-                @Override
-                public void run() {
-                    addSelectedCards(false, 1);
-                }
-            });
-            deckView.setItemActivateCommand(new UiCommand() {
-                @Override
-                public void run() {
-                    removeSelectedCards(false, 1);
-                }
-            });
+            catView.setItemActivateCommand((UiCommand) () -> addSelectedCards(false, 1));
+            deckView.setItemActivateCommand((UiCommand) () -> removeSelectedCards(false, 1));
 
             catView.setContextMenuBuilder(childController.createContextMenuBuilder(true));
             deckView.setContextMenuBuilder(childController.createContextMenuBuilder(false));
 
             //set card when selection changes
-            catView.addSelectionListener(new ListSelectionListener() {
-                @Override public void valueChanged(final ListSelectionEvent e) {
-                    setCard(catView.getSelectedItem());
-                }
-            });
+            catView.addSelectionListener(e -> setCard(catView.getSelectedItem()));
 
-            deckView.addSelectionListener(new ListSelectionListener() {
-                @Override public void valueChanged(final ListSelectionEvent e) {
-                    setCard(deckView.getSelectedItem());
-                }
-            });
+            deckView.addSelectionListener(e -> setCard(deckView.getSelectedItem()));
 
             catView.setAllowMultipleSelections(true);
             deckView.setAllowMultipleSelections(true);
@@ -296,18 +272,14 @@ public enum CDeckEditorUI implements ICDoc {
 
         catView.applyFilters();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                catView.focus();
-            }
-        });
+        SwingUtilities.invokeLater(catView::focus);
     }
 
     @Override
     public void register() {
         EDocID.CARD_PICTURE.setDoc(cDetailPicture.getCPicture().getView());
         EDocID.CARD_DETAIL.setDoc(cDetailPicture.getCDetail().getView());
+        EDocID.EDITOR_LOG.setDoc(vEditorLog);
     }
 
     /* (non-Javadoc)

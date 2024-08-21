@@ -1,0 +1,6 @@
+Name:Urza's Cave
+ManaCost:no cost
+Types:Land Urza's Cave
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChangeZone | Cost$ 3 T Sac<1/CARDNAME> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ Search your library for a land card, put it onto the battlefield tapped, then shuffle.
+Oracle:{T}: Add {C}.\n{3}, {T}, Sacrifice Urza's Cave: Search your library for a land card, put it onto the battlefield tapped, then shuffle.

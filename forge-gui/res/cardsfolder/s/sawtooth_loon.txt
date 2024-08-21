@@ -3,11 +3,11 @@ ManaCost:2 W U
 Types:Creature Bird
 PT:2/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a white or blue creature you control to its owner's hand.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards, then put two cards from your hand on the bottom of your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, return a white or blue creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw two cards, then put two cards from your hand on the bottom of your library.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Blue+YouCtrl
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 2 | Mandatory$ True
-#TODO: The AI is bad with the "put two cards on the bottom of your library" thing, it'll put its best cards there because it thinks that it's as good as putting them on top.
+# TODO: The AI is bad with the "put two cards on the bottom of your library" thing, it'll put its best cards there because it thinks that it's as good as putting them on top.
 AI:RemoveDeck:All
-Oracle:Flying\nWhen Sawtooth Loon enters the battlefield, return a white or blue creature you control to its owner's hand.\nWhen Sawtooth Loon enters the battlefield, draw two cards, then put two cards from your hand on the bottom of your library.
+Oracle:Flying\nWhen Sawtooth Loon enters, return a white or blue creature you control to its owner's hand.\nWhen Sawtooth Loon enters, draw two cards, then put two cards from your hand on the bottom of your library.

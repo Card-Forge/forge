@@ -1,0 +1,11 @@
+Name:Smelted Chargebug
+ManaCost:1 R
+Types:Artifact Creature Insect
+PT:1/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E} (two energy counters).
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may pay {E}. If you do, another target attacking creature gets +1/+0 and gains menace until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ PayEnergy<1> | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ +1 | KW$ Menace
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nWhen Smelted Chargebug enters, you get {E}{E} (two energy counters).\nWhenever Smelted Chargebug attacks, you may pay {E}. If you do, another target attacking creature gets +1/+0 and gains menace until end of turn.

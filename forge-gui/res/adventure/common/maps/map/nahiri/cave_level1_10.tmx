@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztWO0OgjAM5Of2YILhRVHwrcDpY0gDjaXMJboiZ2KTZsoScrvr1yh9UZRGfhydrDZ8p6VXM74DAJYUf4j4WlcU1xlfP64Xtz+mGDayZvx/B8DFHkY/uyc+4q9zkyPwqPmTtncup7Ah6Mw5q3GdALDFYg9B0xRGBE21I9c+ch2Df32X2sla26qay/usbz0/G76kM88kHFuEg/vD4Ne1r/fLWOwEVn02C+5e1d53jXFbzjaVETY2GZsWXMZ6Q47puMjJc0ttU3g/5TD4dd/awnLi0Tr+pFEs3nxerdwCnwWuLTW2vjtZY7SeH3LzmGdVdjqrJYe5/Gm+glHsSac63bjljEK/mwhuucfr1vMMn5lWvlfIZ3q2knsIszTXIcTZWeYP4t1D6ov4XeiX9GWMND+hfHtJ9WgEvYOf+n2shiPdM/WsjZbLQXCIxFuMQ3R8lnnxAPSR5q4=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2MsKgCAQhWE33d7/EbLoMaNFEEZmInOs/m8nMnhQZETnAFgY1AE+oFcHuDCqA+DXOnUAoAJzRk1bPMWZd++/o8f8k/Hasb7fRObCPT+OLc49Ra1vGoW7OxLO+8Q6C9s5qnMs4vUBAM/s/wc571dL6v4GlLQCLdIFqA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="61" template="../../obj/door_down.tx" x="319.333" y="19.3333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23B1.tmx"/>
+    <property name="teleportObjectId" value="62"/>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/door_up.tx" x="319.688" y="637.409">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_multilevel_4/cave_23D1.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/enemy.tx" x="304.135" y="324.972">
+   <properties>
+    <property name="enemy" value="Amphin Warrior"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="80,77,78"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

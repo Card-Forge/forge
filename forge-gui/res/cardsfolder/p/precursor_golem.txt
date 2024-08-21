@@ -2,8 +2,8 @@ Name:Precursor Golem
 ManaCost:5
 Types:Artifact Creature Golem
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 3/3 colorless Golem artifact creature tokens.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 3/3 colorless Golem artifact creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_3_3_a_golem | TokenOwner$ You
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player | IsSingleTarget$ True | TargetsValid$ Golem.inZoneBattlefield | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ TriggeredSpellAbilityController | CopyForEachCanTarget$ Golem.inZoneBattlefield
-Oracle:When Precursor Golem enters the battlefield, create two 3/3 colorless Golem artifact creature tokens.\nWhenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.
+Oracle:When Precursor Golem enters, create two 3/3 colorless Golem artifact creature tokens.\nWhenever a player casts an instant or sorcery spell that targets only a single Golem, that player copies that spell for each other Golem that spell could target. Each copy targets a different one of those Golems.

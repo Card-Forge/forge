@@ -17,7 +17,7 @@ import forge.util.storage.StorageReaderFolder;
 
 public class QuestDuelReader extends StorageReaderFolder<QuestEventDuel> {
     public QuestDuelReader(File deckDir0) {
-        super(deckDir0, QuestEvent.FN_GET_NAME);
+        super(deckDir0, QuestEvent::getName);
         // TODO Auto-generated constructor stub
     }
 

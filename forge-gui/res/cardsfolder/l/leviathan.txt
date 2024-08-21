@@ -3,7 +3,8 @@ ManaCost:5 U U U U
 Types:Creature Leviathan
 PT:10/10
 K:Trample
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap CARDNAME.
 SVar:TrigUntap:AB$ Untap | Cost$ Sac<2/Island>
@@ -11,4 +12,4 @@ S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Cost$ Sac<2/Island> | Desc
 SVar:NeedsToPlayVar:Y GE4
 SVar:Y:Count$Valid Island.YouCtrl
 AI:RemoveDeck:All
-Oracle:Trample\nLeviathan enters the battlefield tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)
+Oracle:Trample\nLeviathan enters tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)

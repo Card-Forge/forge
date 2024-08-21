@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.EnumSet;
+import java.util.Map;
 import java.util.Set;
 
 import forge.game.card.Card;
@@ -22,7 +23,6 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     @Override
     public void setHostCard(final Card c) {
         super.setHostCard(c);
-
         if (overridingAbility != null) {
             overridingAbility.setHostCard(c);
         }
@@ -86,4 +86,35 @@ public abstract class TriggerReplacementBase extends CardTraitBase implements II
     }
 
     abstract public SpellAbility ensureAbility();
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeText()
+     */
+    @Override
+    public void changeText() {
+        if (!isIntrinsic()) {
+            return;
+        }
+        super.changeText();
+
+        SpellAbility sa = ensureAbility();
+
+        if (sa != null) {
+            sa.changeText();
+        }
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.CardTraitBase#changeTextIntrinsic(java.util.Map, java.util.Map)
+     */
+    @Override
+    public void changeTextIntrinsic(Map<String, String> colorMap, Map<String, String> typeMap) {
+        super.changeTextIntrinsic(colorMap, typeMap);
+
+        SpellAbility sa = ensureAbility();
+
+        if (sa != null) {
+            sa.changeTextIntrinsic(colorMap, typeMap);
+        }
+    }
 }

@@ -50,7 +50,6 @@ import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
 import forge.util.collect.FCollection;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -102,7 +101,7 @@ public class Game {
     private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
-    private Multimap<CounterType, Pair<Card, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
+    private Multimap<CounterType, Pair<GameEntity, Integer>> countersRemovedThisTurn = ArrayListMultimap.create();
 
     private List<Card> leftBattlefieldThisTurn = Lists.newArrayList();
     private List<Card> leftGraveyardThisTurn = Lists.newArrayList();
@@ -260,7 +259,7 @@ public class Game {
 
 
     public void addPlayer(int id, Player player) {
-        playerCache.put(Integer.valueOf(id), player);
+        playerCache.put(id, player);
     }
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
@@ -327,7 +326,9 @@ public class Game {
         int plId = 0;
         for (RegisteredPlayer psc : players0) {
             IGameEntitiesFactory factory = (IGameEntitiesFactory)psc.getPlayer();
-            Player pl = factory.createIngamePlayer(this, plId++);
+            // If the Registered Player already has a pre-assigned ID, use that. Otherwise, assign a new one.
+            Integer id = psc.getId();
+            Player pl = factory.createIngamePlayer(this, id == null ? plId++ : id);
             allPlayers.add(pl);
             ingamePlayers.add(pl);
 
@@ -503,17 +504,14 @@ public class Game {
     }
 
     public CardCollectionView getCardsPlayerCanActivateInStack() {
-        return CardLists.filter(stackZone.getCards(), new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                for (final SpellAbility sa : c.getSpellAbilities()) {
-                    final ZoneType restrictZone = sa.getRestrictions().getZone();
-                    if (ZoneType.Stack == restrictZone) {
-                        return true;
-                    }
+        return CardLists.filter(stackZone.getCards(), c -> {
+            for (final SpellAbility sa : c.getSpellAbilities()) {
+                final ZoneType restrictZone = sa.getRestrictions().getZone();
+                if (ZoneType.Stack == restrictZone) {
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -1228,10 +1226,14 @@ public class Game {
         countersRemovedThisTurn.put(cType, Pair.of(CardCopyService.getLKICopy(card), value));
     }
 
-    public int getCounterRemovedThisTurn(CounterType cType, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
+    public void addCounterRemovedThisTurn(CounterType cType, Player player, Integer value) {
+        countersRemovedThisTurn.put(cType, Pair.of(player, value));
+    }
+
+    public int getCounterRemovedThisTurn(CounterType cType, String valid, Card source, Player sourceController, CardTraitBase ctb) {
         int result = 0;
-        for (Pair<Card, Integer> p : countersRemovedThisTurn.get(cType)) {
-            if (p.getKey().isValid(validCard.split(","), sourceController, source, ctb)) {
+        for (Pair<GameEntity, Integer> p : countersRemovedThisTurn.get(cType)) {
+            if (p.getKey().isValid(valid.split(","), sourceController, source, ctb)) {
                 result += p.getValue();
             }
         }
@@ -1315,7 +1317,7 @@ public class Game {
         }
     }
     public void addFacedownWhileCasting(Card c, int numDrawn) {
-        facedownWhileCasting.put(c, Integer.valueOf(numDrawn));
+        facedownWhileCasting.put(c, numDrawn);
     }
 
     public boolean isDay() {

@@ -3,8 +3,6 @@ package forge.ai.ability;
 import forge.game.card.CardCopyService;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
-
 import forge.ai.AiController;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
@@ -38,7 +36,6 @@ public class PermanentCreatureAi extends PermanentAi {
      */
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
-
         if ("Never".equals(aiLogic)) {
             return false;
         }
@@ -136,7 +133,7 @@ public class PermanentCreatureAi extends PermanentAi {
         boolean hasETBTrigger = card.hasETBTrigger(true);
         boolean hasAmbushAI = card.hasSVar("AmbushAI");
         boolean defOnlyAmbushAI = hasAmbushAI && "BlockOnly".equals(card.getSVar("AmbushAI"));
-        boolean loseFloatMana = ai.getManaPool().totalMana() > 0 && !ManaEffectAi.canRampPool(ai, card);
+        boolean loseFloatMana = ai.getManaPool().totalMana() > 0 && !ManaAi.canRampPool(ai, card);
         boolean willDiscardNow = isOwnEOT && !ai.isUnlimitedHandSize() && ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize();
         boolean willDieNow = combat != null && ComputerUtilCombat.lifeInSeriousDanger(ai, combat);
         boolean wantToCastInMain1 = ph.is(PhaseType.MAIN1, ai) && ComputerUtil.castPermanentInMain1(ai, sa);
@@ -147,12 +144,9 @@ public class PermanentCreatureAi extends PermanentAi {
         if (combat != null && combat.getDefendingPlayers().contains(ai)) {
             // Currently we use a rather simplistic assumption that if we're behind on creature count on board,
             // a flashed in creature might prove to be good as an additional defender
-            int numUntappedPotentialBlockers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card card) {
-                    return card.isUntapped() && !ComputerUtilCard.isUselessCreature(ai, card);
-                }
-            }).size();
+            int numUntappedPotentialBlockers = CardLists.filter(ai.getCreaturesInPlay(),
+                    card1 -> card1.isUntapped() && !ComputerUtilCard.isUselessCreature(ai, card1)
+            ).size();
 
             if (combat.getAttackersOf(ai).size() > numUntappedPotentialBlockers) {
                 valuableBlocker = true;

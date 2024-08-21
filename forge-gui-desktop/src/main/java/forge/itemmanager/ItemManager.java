@@ -187,38 +187,22 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.currentView.getPnlOptions());
         this.add(this.currentView.getScroller());
 
-        final Runnable cmdAddCurrentSearch = new Runnable() {
-            @Override public void run() {
-                final ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
-                if (searchFilter != null) {
-                    lockFiltering = true; //prevent updating filtering from this change
-                    addFilter(searchFilter);
-                    mainSearchFilter.reset();
-                    lockFiltering = false;
-                }
+        final Runnable cmdAddCurrentSearch = () -> {
+            final ItemFilter<? extends T> searchFilter = mainSearchFilter.createCopy();
+            if (searchFilter != null) {
+                lockFiltering = true; //prevent updating filtering from this change
+                addFilter(searchFilter);
+                mainSearchFilter.reset();
+                lockFiltering = false;
             }
         };
-        final Runnable cmdResetFilters = new Runnable() {
-            @Override public void run() {
-                resetFilters();
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        focus();
-                    }
-                });
-            }
+        final Runnable cmdResetFilters = () -> {
+            resetFilters();
+            SwingUtilities.invokeLater(ItemManager.this::focus);
         };
-        final Runnable cmdHideFilters = new Runnable() {
-            @Override public void run() {
-                setHideFilters(!getHideFilters());
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        focus();
-                    }
-                });
-            }
+        final Runnable cmdHideFilters = () -> {
+            setHideFilters(!getHideFilters());
+            SwingUtilities.invokeLater(ItemManager.this::focus);
         };
 
         this.mainSearchFilter.getMainComponent().addKeyListener(new KeyAdapter() {
@@ -232,35 +216,31 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         });
 
         //setup command for btnFilters
-        final UiCommand cmdBuildFilterMenu = new UiCommand() {
-            @Override public void run() {
-                final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblFilterMenu"));
-                if (hideFilters) {
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblShowFilters"), null, cmdHideFilters);
-                } else {
-                    final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
-                    GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
-                            KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-                            cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
-                    if (config != ItemManagerConfig.STRING_ONLY) {
-                        buildAddFilterMenu(addMenu);
-                    }
-                    menu.add(addMenu);
-                    GuiUtils.addSeparator(menu);
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblResetFilters"), null, cmdResetFilters);
-                    GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblHideFilters"), null, cmdHideFilters);
+        final UiCommand cmdBuildFilterMenu = () -> {
+            final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblFilterMenu"));
+            if (hideFilters) {
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblShowFilters"), null, cmdHideFilters);
+            } else {
+                final JMenu addMenu = GuiUtils.createMenu(Localizer.getInstance().getMessage("lblAddOrEditFilter"));
+                GuiUtils.addMenuItem(addMenu, Localizer.getInstance().getMessage("lblCurrentTextSearch"),
+                        KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
+                        cmdAddCurrentSearch, !mainSearchFilter.isEmpty());
+                if (config != ItemManagerConfig.STRING_ONLY) {
+                    buildAddFilterMenu(addMenu);
                 }
-                menu.show(btnFilters, 0, btnFilters.getHeight());
+                menu.add(addMenu);
+                GuiUtils.addSeparator(menu);
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblResetFilters"), null, cmdResetFilters);
+                GuiUtils.addMenuItem(menu, Localizer.getInstance().getMessage("lblHideFilters"), null, cmdHideFilters);
             }
+            menu.show(btnFilters, 0, btnFilters.getHeight());
         };
         this.btnFilters.setCommand(cmdBuildFilterMenu);
         this.btnFilters.setRightClickCommand(cmdBuildFilterMenu); //show menu on right-click too
 
-        this.btnViewOptions.setCommand(new Runnable() {
-            @Override public void run() {
-                currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
-                revalidate();
-            }
+        this.btnViewOptions.setCommand((Runnable) () -> {
+            currentView.getPnlOptions().setVisible(!currentView.getPnlOptions().isVisible());
+            revalidate();
         });
 
         //setup initial filters
@@ -846,11 +826,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     @SuppressWarnings("unchecked")
     public void addFilter(final ItemFilter<? extends T> filter) {
         final Class<? extends ItemFilter<? extends T>> filterClass = (Class<? extends ItemFilter<? extends T>>) filter.getClass();
-        List<ItemFilter<? extends T>> classFilters = this.filters.get(filterClass);
-        if (classFilters == null) {
-            classFilters = new ArrayList<>();
-            this.filters.put(filterClass, classFilters);
-        }
+        List<ItemFilter<? extends T>> classFilters = this.filters.computeIfAbsent(filterClass, k -> new ArrayList<>());
         if (classFilters.size() > 0) {
             //if filter with the same class already exists, try to merge if allowed
             //NOTE: can always use first filter for these checks since if
@@ -885,12 +861,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         if (!applyFilters()) {
             filter.afterFiltersApplied(); //ensure this called even if filters didn't need to be updated
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                filter.getMainComponent().requestFocusInWindow();
-            }
-        });
+        SwingUtilities.invokeLater(() -> filter.getMainComponent().requestFocusInWindow());
     }
 
     public void restoreDefaultFilters() {
@@ -1021,7 +992,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
     }
 
     protected Iterable<Entry<T, Integer>> getUnique(final Iterable<Entry<T, Integer>> items) {
-        return Aggregates.uniqueByLast(items, this.pool.FN_GET_NAME);
+        return Aggregates.uniqueByLast(items, from -> from.getKey().getName());
     }
 
     /**
@@ -1036,12 +1007,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
+            final Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, Entry::getKey);
             final Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, this.pool.FN_GET_KEY);
+            final Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, Entry::getKey);
             this.model.addItems(Iterables.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
@@ -1065,7 +1036,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
         else if (this.wantUnique) {
             total = 0;
-            final Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, this.pool.FN_GET_NAME);
+            final Iterable<Entry<T, Integer>> items = Aggregates.uniqueByLast(this.pool, from -> from.getKey().getName());
             for (final Entry<T, Integer> entry : items) {
                 total += entry.getValue();
             }

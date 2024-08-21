@@ -72,19 +72,17 @@ public class CField implements ICDoc {
         final ZoneAction anteAction      = new ZoneAction(matchUI, player, ZoneType.Ante);
         final ZoneAction sideboardAction = new ZoneAction(matchUI, player, ZoneType.Sideboard);
 
-        final Function<Byte, Boolean> manaAction = new Function<Byte, Boolean>() {
-            @Override public final Boolean apply(final Byte colorCode) {
-                if (matchUI.getGameController() instanceof PlayerControllerHuman) {
-                    final PlayerControllerHuman controller = (PlayerControllerHuman) matchUI.getGameController();
-                    final Input ipm = controller.getInputQueue().getInput();
-                    if (ipm instanceof InputPayMana && ipm.getOwner().equals(player)) {
-                        final int oldMana = player.getMana(colorCode);
-                        controller.useMana(colorCode.byteValue());
-                        return Boolean.valueOf(oldMana != player.getMana(colorCode));
-                    }
+        final Function<Byte, Boolean> manaAction = colorCode -> {
+            if (matchUI.getGameController() instanceof PlayerControllerHuman) {
+                final PlayerControllerHuman controller = (PlayerControllerHuman) matchUI.getGameController();
+                final Input ipm = controller.getInputQueue().getInput();
+                if (ipm instanceof InputPayMana && ipm.getOwner().equals(player)) {
+                    final int oldMana = player.getMana(colorCode);
+                    controller.useMana(colorCode);
+                    return oldMana != player.getMana(colorCode);
                 }
-                return Boolean.FALSE;
             }
+            return Boolean.FALSE;
         };
 
         view.getDetailsPanel().setupMouseActions(handAction, libraryAction, exileAction, graveAction, flashBackAction,

@@ -1,0 +1,11 @@
+Name:Sowing Mycospawn
+ManaCost:3 G
+Types:Creature Eldrazi Fungus
+PT:3/3
+K:Devoid
+K:Kicker:1 C
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When you cast this spell, search your library for a land card, put it onto the battlefield, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
+T:Mode$ SpellCast | ValidCard$ Card.Self+kicked | Execute$ TrigExile | TriggerDescription$ When you cast this spell, if it was kicked, exile target land.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Land | Origin$ Battlefield | Destination$ Exile
+Oracle:Devoid (This card has no color.)\nKicker {1}{C} (You may pay an additional {1}{C} as you cast this spell.)\nWhen you cast this spell, search your library for a land card, put it onto the battlefield, then shuffle.\nWhen you cast this spell, if it was kicked, exile target land.

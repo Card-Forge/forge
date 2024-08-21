@@ -35,7 +35,21 @@
     "Stinging Study",
     "Study Hall",
     "Witch's Clinic",
-    "Time Vault"
+    "Time Vault",
+    "Sol Ring",
+    "Mana Crypt",
+    "Tolarian Academy",
+    "Tinker",
+    "Demonic Tutor",
+    "Vampiric Tutor",
+    "Bazaar of Baghdad",
+    "Library of Alexandria",
+    "Mana Vault",
+    "Fastbond",
+    "Mishra's Workshop",
+    "Yawgmoth's Bargain",
+    "Gaea's Cradle",
+    "Commander's Sphere"
   ],
   "restrictedEditions": [
     "HTR",
@@ -47,12 +61,12 @@
     "DS0",
     "HHO",
     "CMB1",
-    "UNF",
+    "UST",
     "UGL",
-    "UNH",
+    "UNH", 
+    "PPC1",
     "UND",
-    "PUST",
-    "UST"
+    "PUST"
   ],
   "difficulties": [
     {

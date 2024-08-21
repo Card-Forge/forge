@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="90">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="60" height="40" opacity="0.53">
+  <data encoding="base64" compression="zlib">
+   eJzt1LENwCAQBMEPnDhGclm04TZoiB4thzTAI5hg8r3k6h1RAQAAAAA21J78BgBgPf2KeMsou2m20zbbu7fT9v4flt0AjD649zHZ
+  </data>
+ </layer>
+ <layer id="6" name="Background Tint" width="60" height="40" opacity="0.75">
+  <data encoding="base64" compression="zlib">
+   eJzt1DsOQFAQhtEpbICwPWzwFuxPPEIhKs3NTTjFybT/10yqIhIAAAAAAADAj/R1xHAZ6/J7cpq6iGjOe1j33rYrvytn79Os91P+3rt8/Gfdm0vvgLc2uDp8cQ==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNWm1uwjAM5dfUStuxYIiT7GZlsFvtq8dYrfWJh7GTtHE2IkVMKcR+9rNjp9v1m83uD+fzNGVs/1hubp66zeatu3z+N95oPSy93qf5OX9GydrPeGXPcwID2/ujgR5a1uesF0aUrK9pvnbpfSEf9uZxaOBbrRNGVMyB096+nvyWcb/vb2VF+VjvjX2Zw9qvw7T2Pa2NjfBaNhaZEfJk72N3y2vBuFX+H+bvyfrLYxusHuZoLmleM27BeZzt+0V+Rf5qlasZc3R+tGImZVvm+aEhduZfpI81f3Jxw3zg3C1/t8At/ojeWzAMXT5urBymR+RZxfKi8hZ8PPYXblt7l2CFn6PrIuZPSX2Usp+unzydPd638LHWx7Mp4+P6yLIJnh/627PHO2NLMNfybgmPGJ9Vi8r62fBlaYzkdImIMet8bDVysSf+1TUKj4hzY0ncyECNAL2GLq2jpXOuhtI6cV1Si7eUz5A7Kr3GBXvg9yU1I/Mu8gwCh0p85MlN1VDMB2C1ZsoHrXpiT+8cn1Jxh5hL4SuJsWjMXn+2JG4Yt/7tqbvO39Ddw2/Z/pD4/hpea5uuzYeyF9tozV1Ka7xaRmQ96Z15KXt6nAZHarht1VdRPZKXu0vsifiwckNNzmZbRt+pWH5aou/D0+/UHKk9o7Bf9N2glwdL7enhrc3XiN0ov1oxwvdUNfvUxhz3OpE9vsVh4TdqMt1zwZe85sVDTT6FblE52ctRyK/8LgE9I+Pd99d3Vy18Gxm73vmj73QsO2hbeGONrkvrVH2fYd0d5s6fVK1dOtby0Isx656GY5z9ADvpNUs/cLV2RPgWg98BsA9Le8acfoIXtbWc87qWGGjdera2D87da8BneA+AHsB6/+I9w3OrZ96ptaODJaoPFhmpfpfvLbb97Z0qBj+z9qytS1O2WDq17syzkeRp/8CfVt3pvRes0TNqsu5L+9xU7x9Z27fAHP2+lTFH9pX3PO/1f3RaTcTxf3D5B0mxPB0=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2UsKwjAQBuDZKNRD1fvYYynUs+nCK1jUQhbGJjLP5P+gtIuQhnQymVAikLa3HgC8nI5E03IdmPs9M/fHZRDu/1LYZp33kvZcrorvAj3z574TfIdk3wBW5u0m9BiJbst1H9/PPUjXu+Ye1QvMqb60JpWqhXL7ZO688ysOIsWI13of+KzxWHuGql0ToMvT2o2U8775J6ZxtgKvPOUGT2PJiTDG3qDOaBN3rRB5H7asm7j/HaVK8+nWt7PIy63lndr1kWsvGS9Qr7U4tRD93ArgxRM1yRfn
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="480.98" y="639.379">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/door_down.tx" x="465.499" y="22.3333">
+   <properties>
+    <property name="teleport" value="../common/maps/map/cave/cave_kobold_floor2.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="137.677" y="106.173">
+   <properties>
+    <property name="enemy" value="Kobold Shaman"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/treasure.tx" x="104.5" y="50.5"/>
+  <object id="69" template="../../obj/enemy.tx" x="365.32" y="257.272">
+   <properties>
+    <property name="enemy" value="Kobold Slinger"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="86,85,87,85,86"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="748.336" y="237.186">
+   <properties>
+    <property name="enemy" value="Kobold Warrior"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/enemy.tx" x="623.665" y="105.589">
+   <properties>
+    <property name="enemy" value="Kobold Slinger"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="72" template="../../obj/enemy.tx" x="726.865" y="507.999">
+   <properties>
+    <property name="enemy" value="Kobold Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="83,82,84,82,83"/>
+   </properties>
+  </object>
+  <object id="73" template="../../obj/enemy.tx" x="357.008" y="532.24">
+   <properties>
+    <property name="enemy" value="Kobold Warrior"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="79,78,80,78,79"/>
+   </properties>
+  </object>
+  <object id="74" template="../../obj/manashards.tx" x="457.438" y="342.464"/>
+  <object id="75" template="../../obj/manashards.tx" x="587.65" y="368.09"/>
+  <object id="76" template="../../obj/manashards.tx" x="692.927" y="68.1877"/>
+  <object id="77" template="../../obj/manashards.tx" x="772.578" y="160.306"/>
+  <object id="78" template="../../obj/waypoint.tx" x="469.212" y="535.703"/>
+  <object id="79" template="../../obj/waypoint.tx" x="296.751" y="532.933"/>
+  <object id="80" template="../../obj/waypoint.tx" x="551.633" y="386.791"/>
+  <object id="81" template="../../obj/enemy.tx" x="190.088" y="552.326">
+   <properties>
+    <property name="enemy" value="Kobold Pyromancer"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="82" template="../../obj/waypoint.tx" x="819.676" y="501.765"/>
+  <object id="83" template="../../obj/waypoint.tx" x="579.338" y="497.609"/>
+  <object id="84" template="../../obj/waypoint.tx" x="812.057" y="391.639"/>
+  <object id="85" template="../../obj/waypoint.tx" x="185.24" y="257.272"/>
+  <object id="86" template="../../obj/waypoint.tx" x="524.621" y="261.428"/>
+  <object id="87" template="../../obj/waypoint.tx" x="172.08" y="375.709"/>
+  <object id="88" template="../../obj/gold.tx" x="721.324" y="146.453"/>
+  <object id="89" template="../../obj/gold.tx" x="147.146" y="395.102"/>
+ </objectgroup>
+</map>

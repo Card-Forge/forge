@@ -167,15 +167,13 @@ public class ListChooser<T> {
         }
         int result;
         do {
-            SwingUtilities.invokeLater(new Runnable() { //invoke later so selected item not set until dialog open
-                @Override
-                public void run() {
-                    if (list.contains(item)) {
-                        lstChoices.setSelectedValue(item, true);
-                    }
-                    else {
-                        lstChoices.setSelectedIndex(0);
-                    }
+            //invoke later so selected item not set until dialog open
+            SwingUtilities.invokeLater(() -> {
+                if (list.contains(item)) {
+                    lstChoices.setSelectedValue(item, true);
+                }
+                else {
+                    lstChoices.setSelectedIndex(0);
                 }
             });
             this.optionPane.setVisible(true);

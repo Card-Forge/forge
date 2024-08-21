@@ -35,9 +35,9 @@ public class Assets implements Disposable {
     private HashMap<Integer, FSkinFont> fonts;
     private HashMap<String, FImageComplex> cardArtCache;
     private HashMap<String, FImage> avatarImages;
-    private HashMap<String, FSkinImage> manaImages;
-    private HashMap<String, FSkinImage> symbolLookup;
-    private HashMap<FSkinProp, FSkinImage> images;
+    private HashMap<String, FSkinImageInterface> manaImages;
+    private HashMap<String, FSkinImageInterface> symbolLookup;
+    private HashMap<FSkinProp, FSkinImageInterface> images;
     private HashMap<Integer, TextureRegion> avatars;
     private HashMap<Integer, TextureRegion> sleeves;
     private HashMap<Integer, TextureRegion> cracks;
@@ -147,19 +147,19 @@ public class Assets implements Disposable {
         return avatarImages;
     }
 
-    public HashMap<String, FSkinImage> manaImages() {
+    public HashMap<String, FSkinImageInterface> manaImages() {
         if (manaImages == null)
             manaImages = new HashMap<>();
         return manaImages;
     }
 
-    public HashMap<String, FSkinImage> symbolLookup() {
+    public HashMap<String, FSkinImageInterface> symbolLookup() {
         if (symbolLookup == null)
             symbolLookup = new HashMap<>();
         return symbolLookup;
     }
 
-    public HashMap<FSkinProp, FSkinImage> images() {
+    public HashMap<FSkinProp, FSkinImageInterface> images() {
         if (images == null)
             images = new HashMap<>();
         return images;
@@ -434,7 +434,7 @@ public class Assets implements Disposable {
         }
 
         @SuppressWarnings("unchecked")
-        private int calculateTextureSize(AssetManager assetManager, String fileName, Class type) {
+        private int calculateTextureSize(AssetManager assetManager, String fileName, Class<?> type) {
             if (!Forge.showFPS)
                 return 0;
             Texture texture = (Texture) assetManager.get(fileName, type);
@@ -442,21 +442,7 @@ public class Assets implements Disposable {
             int textureSize = textureData.getWidth() * textureData.getHeight();
             if (Forge.isTextureFilteringEnabled())
                 textureSize = textureSize + (textureSize / 3);
-            switch (textureData.getFormat()) {
-                case RGB565:
-                    textureSize *= 2;
-                    break;
-                case RGB888:
-                    textureSize *= 3;
-                    break;
-                case RGBA4444:
-                    textureSize *= 2;
-                    break;
-                case RGBA8888:
-                    textureSize *= 4;
-                    break;
-            }
-            memoryPerFile.put(fileName, textureSize);
+            memoryPerFile.put(fileName, calcTextureDataSize(textureSize, textureData.getFormat()));
 
             return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
@@ -492,21 +478,7 @@ public class Assets implements Disposable {
                 int textureSize = textureData.getWidth() * textureData.getHeight();
                 if (Forge.isTextureFilteringEnabled())
                     textureSize = textureSize + (textureSize / 3);
-                switch (textureData.getFormat()) {
-                    case RGB565:
-                        textureSize *= 2;
-                        break;
-                    case RGB888:
-                        textureSize *= 3;
-                        break;
-                    case RGBA4444:
-                        textureSize *= 2;
-                        break;
-                    case RGBA8888:
-                        textureSize *= 4;
-                        break;
-                }
-                sum += textureSize;
+                sum += calcTextureDataSize(textureSize, textureData.getFormat());
             }
             if (objectMap == generatedCards)
                 cGenVal = sum;
@@ -559,6 +531,20 @@ public class Assets implements Disposable {
             return val;
         }
 
+        private int calcTextureDataSize(int textureSize, Pixmap.Format format) {
+            switch (format) {
+                case RGB565:
+                case RGBA4444:
+                    return textureSize * 2;
+                case RGB888:
+                    return textureSize * 3;
+                case RGBA8888:
+                    return textureSize * 4;
+                default: //assume plain RGB888
+                    return textureSize * 3;
+            }
+        }
+
         @SuppressWarnings("unchecked")
         @Override
         public synchronized <T> void load(String fileName, Class<T> type, AssetLoaderParameters<T> parameter) {
@@ -583,10 +569,8 @@ public class Assets implements Disposable {
         public synchronized void unload(String fileName) {
             if (isLoaded(fileName))
                 super.unload(fileName);
-            if (memoryPerFile.containsKey(fileName)) {
-                memoryPerFile.remove(fileName);
-                cardArtCache().clear();
-            }
+            memoryPerFile.remove(fileName);
+            cardArtCache().clear();
         }
 
         @Override

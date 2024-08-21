@@ -12,7 +12,9 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
+import forge.StaticData;
 import forge.item.PaperCard;
+import forge.token.TokenDb;
 import forge.util.PredicateString.StringOp;
 import forge.util.collect.FCollection;
 
@@ -27,6 +29,8 @@ public class DeckHints {
      * Enum of types of DeckHints.
      */
     public enum Type {
+        /** extra logic */
+        MODIFIER,
         /** The Ability */
         ABILITY,
         /** The Color. */
@@ -42,7 +46,8 @@ public class DeckHints {
     }
 
     private boolean valid = false;
-    public List<Pair<Type, String>> filters = null;
+    private boolean tokens = true;
+    private List<Pair<Type, String>> filters = null;
 
     /**
      * Construct a DeckHints from the SVar string.
@@ -56,6 +61,12 @@ public class DeckHints {
             for (String piece : pieces) {
                 Pair<Type, String> pair = parseHint(piece.trim());
                 if (pair != null) {
+                    if (pair.getKey() == Type.MODIFIER) {
+                        if (pair.getRight().contains("NoToken")) {
+                            tokens = false;
+                        }
+                        continue;
+                    }
                     if (filters == null) {
                         filters = new ArrayList<>();
                     }
@@ -161,11 +172,11 @@ public class DeckHints {
         // this is case ABILITY, but other types can also use this when the implicit parsing would miss
         String[] params = param.split("\\|");
         for (String ability : params) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard.FN_GET_RULES));
+            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard::getRules));
         }
         // bonus if a DeckHas can satisfy the type with multiple ones
         if (params.length > 1) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard.FN_GET_RULES));
+            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard::getRules));
         }
 
         for (String p : params) {
@@ -173,19 +184,19 @@ public class DeckHints {
             case COLOR:
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard.FN_GET_RULES));
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard::getRules));
                 } else {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard.FN_GET_RULES));
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules));
                 }
                 break;
             case KEYWORD:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard.FN_GET_RULES));
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard::getRules));
                 break;
             case NAME:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard.FN_GET_RULES));
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules));
                 break;
             case TYPE:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard.FN_GET_RULES));
+                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard::getRules));
                 break;
             case NONE:
             case ABILITY: // already done above
@@ -196,7 +207,29 @@ public class DeckHints {
     }
 
     private Iterable<PaperCard> getMatchingItems(Iterable<PaperCard> source, Predicate<CardRules> predicate, Function<PaperCard, CardRules> fn) {
-        return Iterables.filter(source, Predicates.compose(predicate, fn));
+        // TODO should token generators be counted differently for their potential?
+        return Iterables.filter(source, Predicates.compose(tokens ? rulesWithTokens(predicate) : predicate, fn));
+    }
+
+    public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {
+        final TokenDb tdb;
+        if (StaticData.instance() != null) {
+            // not available on some test setups
+            tdb = StaticData.instance().getAllTokens();
+        } else {
+            tdb = null;
+        }
+        return card -> {
+            if (predicate.apply(card)) {
+                return true;
+            }
+            for (String tok : card.getTokens()) {
+                if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
+                    return true;
+                }
+            }
+            return false;
+        };
     }
 
 }

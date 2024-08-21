@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Function;
-
 import forge.deck.Deck;
 import forge.item.InventoryItem;
 
@@ -50,10 +48,6 @@ public abstract class QuestEvent implements IQuestEvent {
     private String opponentName = null;
     private boolean isRandomMatch = false;
 
-
-    public static final Function<QuestEvent, String> FN_GET_NAME = new Function<QuestEvent, String>() {
-        @Override public final String apply(QuestEvent qe) { return qe.name; }
-    };
 
     public final String getTitle() {
         return title;

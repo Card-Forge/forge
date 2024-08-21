@@ -1,0 +1,6 @@
+Name:Coming Attraction
+ManaCost:2 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SubAbility$ DBOpenAttraction | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:DBOpenAttraction:DB$ OpenAttraction | SpellDescription$ Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)
+Oracle:Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. Open an Attraction. (Put the top card of your Attraction deck onto the battlefield.)

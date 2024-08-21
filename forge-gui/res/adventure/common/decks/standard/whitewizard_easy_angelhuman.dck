@@ -1,11 +1,5 @@
-[duel]
 [metadata]
 Name=Sigismund's Avacyn's Glory 1
-Title=Sigismund, Avacyn's Faithful
-Difficulty=easy
-Description=Mono-white humans and angels theme deck
-Icon=Sigismund 1.jpg
-Deck Type=constructed
 [Main]
 1 Angelic Overseer
 1 Archangel

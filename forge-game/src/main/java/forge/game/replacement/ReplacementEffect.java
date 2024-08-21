@@ -329,13 +329,17 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                 return false;
             }
             // and it wasn't already on the field, skip
-            if (getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+            if (getActiveZone() != null && getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 CardCollectionView lastBattlefield = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
-                if (!lastBattlefield.contains(getHostCard())) {
+                if (lastBattlefield != null && !lastBattlefield.contains(getHostCard())) {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
+        return event.equals(getMode());
     }
 }

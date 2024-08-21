@@ -1,0 +1,8 @@
+Name:Emissary of Soulfire
+ManaCost:1 W U
+Types:Creature Djinn Monk
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters, you get {E}{E}{E}.
+SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
+A:AB$ PutCounter | Cost$ PayEnergy<2> | CounterType$ Exalted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | SpellDescription$ Put an exalted counter on target creature you control. Activate only as a sorcery.
+Oracle:When Emissary of Soulfire enters, you get {E}{E}{E}.\nPay {E}{E}: Put an exalted counter on target creature you control. Activate only as a sorcery.

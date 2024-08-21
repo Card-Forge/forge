@@ -1,6 +1,6 @@
 Name:A-Riveteers Initiate
 ManaCost:1 R
-Types:Creature Viashino Citizen
+Types:Creature Lizard Citizen
 PT:2/2
 A:AB$ Pump | Cost$ BG | Defined$ Self | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
 DeckHints:Color$Black|Green
