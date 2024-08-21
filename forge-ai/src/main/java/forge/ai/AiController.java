@@ -1380,6 +1380,7 @@ public class AiController {
                     abilities.removeIf(sa -> !sa.isLandAbility());
 
                     if (!abilities.isEmpty()) {
+                        // TODO extend this logic to evaluate MDFC with both sides land
                         return abilities;
                     }
                 }
