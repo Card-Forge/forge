@@ -1310,11 +1310,6 @@ public class ComputerUtilMana {
 
         CostAdjustment.adjust(cost, sa, null, test);
 
-        //int timesMultikicked = card.getKickerMagnitude();
-        //if (timesMultikicked > 0 && sa.isAnnouncing("Multikicker")) {
-        //    sa.setSVar("Multikicker", String.valueOf(timesMultikicked));
-        //}
-
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();
             ManaCost mCost = ManaCost.ZERO;
