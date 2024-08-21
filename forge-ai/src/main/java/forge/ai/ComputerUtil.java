@@ -124,8 +124,6 @@ public class ComputerUtil {
         // Spell Permanents inherit their cost from Mana Cost
         final Cost cost = sa.getPayCosts();
 
-        // Remember the now-forgotten kicker cost? Why is this needed?
-        sa.getHostCard().setKickerMagnitude(source.getKickerMagnitude());
         game.getStack().freezeStack(sa);
 
         // TODO: update mana color conversion for Daxos of Meletis
