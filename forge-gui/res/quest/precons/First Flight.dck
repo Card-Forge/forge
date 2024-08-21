@@ -4,7 +4,7 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-name=First Flight
+Name=First Flight
 Description=The sphinx Isperia was once the guildmaster of the Azorius Senate on the plane of Ravnica. As supreme judge, her encyclopedic knowledge of the law allowed her to act swiftly and with utmost accuracy. It is said that Isperia had never convicted an innocent - at least by Azorius standards.
 Set=SCD
 Image=first_flight.png
