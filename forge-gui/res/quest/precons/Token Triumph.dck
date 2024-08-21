@@ -4,7 +4,7 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-name=Token Triumph
+Name=Token Triumph
 Description=Emmara Tandris is a high-ranking member of the Selesnya Conclave on the plane of Ravnica. When the leaders of the Conclave were divided, Emmara stepped forward to guide the Selesnya through one of their darkest hours. A dependable leader with an iron will, Emmara will always do what is best for her people.
 Set=SCD
 Image=token_triumph.png
