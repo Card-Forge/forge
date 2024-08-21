@@ -4,7 +4,7 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-name=Draconic Destruction
+Name=Draconic Destruction
 Description=Atarka and her brood thunder across the skies of Tarkir, wreaking destruction with their giant plumes of dragonfire. Few can withstand the savegery of their onslaught as they patrol Tarkir to satiate their hunger. Revered by the Temur clan, Atarka views them as little more than dinner.
 Set=SCD
 Image=draconic_destruction.png
