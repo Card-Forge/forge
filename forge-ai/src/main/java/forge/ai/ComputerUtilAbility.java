@@ -45,7 +45,7 @@ public class ComputerUtilAbility {
                     return false;
                 }
             }
-            return player.canPlayLand(c, false, c.getFirstSpellAbility());;
+            return player.canPlayLand(c, false, c.getFirstSpellAbility());
         });
 
         final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
