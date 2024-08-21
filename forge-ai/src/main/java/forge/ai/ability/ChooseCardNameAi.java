@@ -18,11 +18,15 @@ import forge.card.CardSplitType;
 import forge.card.CardStateName;
 import forge.card.ICardFace;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CardCopyService;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.MyRandom;
 
 public class ChooseCardNameAi extends SpellAbilityAi {
 
@@ -54,8 +58,25 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        // TODO - there is no AILogic implemented yet
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        String aiLogic = sa.getParamOrDefault("AILogic", "");
+        if ("PithingNeedle".equals(aiLogic)) {
+            // Make sure theres something in play worth Needlings.
+            // Planeswalker or equipment or something
+
+            CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
+            if (oppPerms.isEmpty()) {
+                return false;
+            }
+
+            Card card = ComputerUtilCard.getBestPlaneswalkerAI(oppPerms);
+            if (card != null) {
+                return true;
+            }
+
+            // 5 percent chance to cast per opposing card with a non mana ability
+            return MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size();
+        }
         return mandatory;
     }
     /* (non-Javadoc)

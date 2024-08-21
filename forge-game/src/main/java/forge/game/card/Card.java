@@ -4292,7 +4292,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setAttractionLights(attractionLights);
     }
 
-
     public final int getBasePower() {
         return currentState.getBasePower();
     }
