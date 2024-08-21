@@ -468,8 +468,7 @@ public class AiController {
                     }
                 }
             }
-
-            return player.canPlayLand(c, false, c.getFirstSpellAbility());
+            return Iterables.any(c.getAllPossibleAbilities(player, true), SpellAbility::isLandAbility);
         });
         return landList;
     }
