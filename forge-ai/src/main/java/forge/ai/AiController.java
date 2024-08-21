@@ -1936,8 +1936,7 @@ public class AiController {
     }
 
     public CardCollection chooseCardsForEffect(CardCollectionView pool, SpellAbility sa, int min, int max, boolean isOptional, Map<String, Object> params) {
-        if (sa 
-            null || sa.getApi() == null) {
+        if (sa == null || sa.getApi() == null) {
             throw new UnsupportedOperationException();
         }
         CardCollection result = new CardCollection();
