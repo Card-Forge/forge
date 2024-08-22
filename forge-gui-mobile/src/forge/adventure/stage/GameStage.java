@@ -208,7 +208,7 @@ public abstract class GameStage extends Stage {
             dialog.getContentTable().add(group).height(100).width(100).center();
             dialog.getContentTable().add().row();
         } else {
-            TypingLabel label = Controls.newTypingLabel("[%120]" + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
+            TypingLabel label = Controls.newTypingLabel(GameHUD.LARGE_FONT_TAG + Controls.colorIdToTypingString(DeckProxy.getColorIdentity(deck)).toUpperCase() + "\n[%]" + deck.getName());
             label.skipToTheEnd();
             label.setAlignment(Align.center);
             dialog.getContentTable().add(label).align(Align.center);

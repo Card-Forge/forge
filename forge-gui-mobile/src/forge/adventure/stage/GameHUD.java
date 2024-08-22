@@ -51,8 +51,6 @@ public class GameHUD extends Stage {
     private final TextraLabel lifePoints;
     private final TextraLabel money;
     private final TextraLabel shards;
-//    private final TextraLabel moneyupdated;
-//    private final TextraLabel shardsupdated;
     private final TextraLabel keys;
     private TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
@@ -74,7 +72,9 @@ public class GameHUD extends Stage {
     private final ScrollPane scrollPane;
     private final ScrollPane notificationPane;
 
+    public static final String LARGE_FONT_TAG = "[%120]";
     public static final String SMALL_FONT_TAG = "[%95]";
+    public static final String SMALLER_FONT_TAG = "[%80]";
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -397,10 +397,10 @@ public class GameHUD extends Stage {
         updateAbility();
         restorePlayerCollision();
         if (openMapActor != null) {
-            String val = "[%80]" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
+            String val = SMALLER_FONT_TAG + "" + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
             for (AdventureQuestData adq : Current.player().getQuests()) {
                 if (adq.getTargetPOI() != null) {
-                    val = "[%80][+GPS] " + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
+                    val = SMALLER_FONT_TAG + "[+GPS] " + Forge.getLocalizer().getMessageorUseDefault("lblZoom", "Zoom");
                     break;
                 }
             }
@@ -648,7 +648,7 @@ public class GameHUD extends Stage {
     private void updateBookmarkActor(boolean value) {
         if (bookmarkActor == null)
             return;
-        bookmarkActor.setText("[%120][+" + (value ? "Bookmark" : "Unmark") + "]");
+        bookmarkActor.setText(LARGE_FONT_TAG + "[+" + (value ? "Bookmark" : "Unmark") + "]");
     }
 
     private void exitDungeonCallback() {
@@ -698,8 +698,8 @@ public class GameHUD extends Stage {
         setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "---");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "---");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+ExitToWorldMap]", "---");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+Bookmark]", "---");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -814,8 +814,8 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon();
-                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "---");
-                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "---");
+                    setDisabled(exitToWorldMapActor, true, LARGE_FONT_TAG + "[+ExitToWorldMap]", "---");
+                    setDisabled(bookmarkActor, true, LARGE_FONT_TAG + "[+Bookmark]", "---");
                 }
                 return true;
             }

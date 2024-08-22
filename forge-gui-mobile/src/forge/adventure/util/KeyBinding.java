@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerMapping;
 import com.badlogic.gdx.controllers.Controllers;
+import forge.adventure.stage.GameHUD;
 import forge.gui.GuiBase;
 
 public enum KeyBinding {
@@ -45,13 +46,13 @@ public enum KeyBinding {
     public String getLabelText(boolean pressed) {
         if(Controllers.getCurrent()!=null)
         {
-            return "[%120][+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
+            return GameHUD.LARGE_FONT_TAG + "[+"+controllerPrefix+Input.Keys.toString(bindingController).replace(" Button","")+(pressed?"_pressed]":"]");
         }
         else
         {
             if(GuiBase.isAndroid())
                 return "";
-            return "[%120][+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
+            return GameHUD.LARGE_FONT_TAG + "[+"+Input.Keys.toString(binding)+(pressed?"_pressed]":"]");
         }
 
     }
