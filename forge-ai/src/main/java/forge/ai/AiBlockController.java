@@ -753,10 +753,6 @@ public class AiBlockController {
 
             boolean needsMoreChumpBlockers = true;
 
-            // See if it's possible to tank up the damage with Banding
-            List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
-                    "Bands with Other Creatures named Wolves of the Hunt",
-                    "Bands with Other Dinosaurs");
             if (AttackingBand.isValidBand(combat.getBlockers(attacker), true)) {
                 continue;
             }
@@ -766,7 +762,7 @@ public class AiBlockController {
 
             // See if there's a Banding blocker that can tank the damage
             for (final Card blocker : chumpBlockers) {
-                if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasAnyKeyword(bandsWithString)) {
+                if (blocker.hasKeyword(Keyword.BANDING) || blocker.hasKeyword(Keyword.BANDSWITH)) {
                     if (ComputerUtilCombat.getAttack(attacker) > ComputerUtilCombat.totalShieldDamage(attacker, combat.getBlockers(attacker))
                             && ComputerUtilCombat.shieldDamage(attacker, blocker) > 0
                             && CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilCombat.lifeInDanger(ai, combat)) {

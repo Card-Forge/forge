@@ -207,16 +207,13 @@ public final class BoosterUtils {
         }
 
         for (int i = 0; i < quantity; i++) {
-
             CardEdition edition = Aggregates.random(possibleEditions);
             BoosterPack pack = BoosterPack.fromSet(edition);
-
             if (pack != null) {
                 output.add(pack);
             } else {
                 System.err.println("Could not create booster of edition: " + edition);
             }
-
         }
 
         return output;

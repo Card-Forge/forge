@@ -1,8 +1,8 @@
 Name:Steady Progress
 ManaCost:2 U
 Types:Instant
-A:SP$ Proliferate | SpellDescription$ Proliferate. Draw a card. | SubAbility$ DB
-SVar:DB:DB$ Draw | NumCards$ 1
+A:SP$ Proliferate | SpellDescription$ Proliferate. Draw a card. | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
 DeckHas:Ability$Proliferate
 DeckNeeds:Ability$Counters
 Oracle:Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)\nDraw a card.

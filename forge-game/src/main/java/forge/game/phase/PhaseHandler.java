@@ -509,6 +509,8 @@ public class PhaseHandler implements java.io.Serializable {
                     // done this after check state effects, so it only has effect next check
                     game.getCleanup().executeUntil(playerTurn);
 
+                    handleMultiplayerEffects();
+
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
@@ -1266,5 +1268,34 @@ public class PhaseHandler implements java.io.Serializable {
             count += 1;
         }
         return count;
+    }
+
+    private void handleMultiplayerEffects() {
+        // CR 800.4m When a player leaves the game, any continuous effects with durations that last until that
+        // player’s next turn or until a specific point in that turn will last until that turn would have begun
+        int oldPlayerIdx = game.getRegisteredPlayers().indexOf(playerPreviousTurn);
+        final int playerIdx = game.getRegisteredPlayers().indexOf(playerTurn);
+        final int direction = game.getTurnOrder().getShift();
+        while (oldPlayerIdx != playerIdx) {
+            oldPlayerIdx += direction;
+            if (oldPlayerIdx < 0) {
+                oldPlayerIdx = game.getRegisteredPlayers().size() - 1;
+            } else if (oldPlayerIdx > game.getRegisteredPlayers().size() - 1) {
+                oldPlayerIdx = 0;
+            }
+            Player p = game.getRegisteredPlayers().get(oldPlayerIdx);
+            if (p.hasLost()) {
+                // CR 702.26n
+                Untap.doPhasing(p);
+
+                game.getUntap().executeUntil(p);
+                game.getUpkeep().executeUntil(p);
+                game.getUpkeep().executeUntilEndOfPhase(p);
+                game.getEndOfCombat().executeUntilEndOfPhase(p);
+                game.getEndOfTurn().executeUntil(p);
+                game.getEndOfTurn().executeUntilEndOfPhase(p);
+                game.getCleanup().executeUntil(p);
+            }
+        }
     }
 }

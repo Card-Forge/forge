@@ -5,7 +5,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescriptio
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike | IsPresent$ Equipment.AttachedTo Creature.EquippedBy | PresentCompare$ GE2 | Description$ Equipped creature has double strike as long as two or more Equipment are attached to it.
 K:Equip:1
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ EquipMe | Secondary$ True
-SVar:EquipMe:SVar:EquipMe:Multiple
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ EqMe | Secondary$ True
+SVar:EqMe:SVar:EquipMe:Multiple
 DeckHas:Ability$Token
 Oracle:When you cast this spell, copy it. (The copy becomes a token.)\nEquipped creature has double strike as long as two or more Equipment are attached to it.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -250,11 +250,7 @@ public class HumanPlaySpellAbility {
                     ability.setXManaCostPaid(value);
                 } else {
                     ability.setSVar(varName, value.toString());
-                    if ("Multikicker".equals(varName)) {
-                        card.setKickerMagnitude(value);
-                    } else {
-                        card.setSVar(varName, value.toString());
-                    }
+                    card.setSVar(varName, value.toString());
                 }
             }
         }

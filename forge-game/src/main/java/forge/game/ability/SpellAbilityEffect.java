@@ -487,8 +487,7 @@ public abstract class SpellAbilityEffect {
         String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addExileOnCounteredTrigger(final Card card) {
@@ -496,8 +495,7 @@ public abstract class SpellAbilityEffect {
         String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
-        final Trigger addedTrigger = card.addTrigger(parsedTrigger);
-        addedTrigger.setIntrinsic(true);
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addForgetOnPhasedInTrigger(final Card card) {
@@ -520,6 +518,14 @@ public abstract class SpellAbilityEffect {
         parsedTrigger2.setOverridingAbility(forgetSA);
         card.addTrigger(parsedTrigger);
         card.addTrigger(parsedTrigger2);
+    }
+
+    protected static void addExileOnLostTrigger(final Card card) {
+        String trig = "Mode$ LosesGame | ValidPlayer$ You | TriggerController$ Player | TriggerZones$ Command | Static$ True";
+        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        card.addTrigger(parsedTrigger);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {

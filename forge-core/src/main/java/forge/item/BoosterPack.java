@@ -18,15 +18,13 @@
 
 package forge.item;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterSlots;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class BoosterPack extends SealedProduct {
     private final int artIndex;
@@ -34,14 +32,18 @@ public class BoosterPack extends SealedProduct {
 
     public static BoosterPack fromSet(CardEdition edition) {
         String boosterKind = edition.getRandomBoosterKind();
-        Template d = edition.getBoosterTemplate(boosterKind);
+        if (boosterKind == null) {
+            return null;
+        }
+
+        SealedTemplate d = edition.getBoosterTemplate(boosterKind);
         StringBuilder sb = new StringBuilder(edition.getName());
         sb.append(" ").append(boosterKind);
         return new BoosterPack(sb.toString(), d);
     }
 
     public static BoosterPack fromColor(final String color) {
-        return new BoosterPack(color, new Template("?", ImmutableList.of(
+        return new BoosterPack(color, new SealedTemplate("?", ImmutableList.of(
                 Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 11),
                 Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 3),
                 Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
@@ -49,7 +51,7 @@ public class BoosterPack extends SealedProduct {
         ));
     }
 
-    public BoosterPack(final String name0, final Template boosterData) {
+    public BoosterPack(final String name0, final SealedTemplate boosterData) {
         super(name0, boosterData);
 
         if (specialSets.contains(boosterData.getEdition()) || boosterData.getEdition().equals("?")) {
@@ -86,7 +88,7 @@ public class BoosterPack extends SealedProduct {
         return new BoosterPack(name, contents);
     }
 
-    public Template getBoosterData() {
+    public SealedTemplate getBoosterData() {
         return contents;
     }
 
