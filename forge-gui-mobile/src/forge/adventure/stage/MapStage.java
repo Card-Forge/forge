@@ -27,6 +27,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -1025,14 +1026,23 @@ public class MapStage extends GameStage {
                     Gdx.input.vibrate(50);
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(100, 1);
-                    startPause(0.1f, () -> { //Switch to item pickup scene.
-                        RewardSprite RS = (RewardSprite) actor;
-                        RewardScene.instance().loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
-                        RS.remove();
-                        actors.removeValue(RS, true);
-                        changes.deleteObject(RS.getId());
-                        Forge.switchScene(RewardScene.instance());
-                    });
+
+                    RewardSprite RS = (RewardSprite) actor;
+                    Array<Reward> rewards = RS.getRewards();
+
+                    // Check for gold-only/shard-only rewards, grant immediately skipping over RewardScene if so
+                    if (rewards.size == 1 && (rewards.get(0).getType() == Reward.Type.Shards || rewards.get(0).getType() == Reward.Type.Gold)) {
+                        AdventurePlayer.current().addReward(rewards.get(0));
+                    } else {
+                        startPause(0.1f, () -> { //Otherwise switch to item pickup scene.
+                            RewardScene.instance().loadRewards(rewards, RewardScene.Type.Loot, null);
+                            Forge.switchScene(RewardScene.instance());
+                        });
+                    }
+
+                    RS.remove();
+                    actors.removeValue(RS, true);
+                    changes.deleteObject(RS.getId());
                     break;
                 }
             }
