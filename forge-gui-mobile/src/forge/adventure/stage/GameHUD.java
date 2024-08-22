@@ -690,9 +690,12 @@ public class GameHUD extends Stage {
         setVisibility(openMapActor, visible);
         setVisibility(miniMapPlayer, visible);
         setAlpha(gamehud, visible);
-        setAlpha(lifePoints, visible);
-        setAlpha(shards, visible);
-        setAlpha(money, visible);
+
+//        misha-colbourne: Commented these out to keep them visible in non-worldmap scenes
+//        setAlpha(lifePoints, visible);
+//        setAlpha(shards, visible);
+//        setAlpha(money, visible);
+
         setVisibility(blank, visible);
         setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "---");
         setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "---");
