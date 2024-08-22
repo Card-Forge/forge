@@ -45,11 +45,14 @@ import org.apache.commons.lang3.tuple.Pair;
 public class GameHUD extends Stage {
 
     static public GameHUD instance;
+
     private final GameStage gameStage;
     private final Image avatar, miniMapPlayer;
     private final TextraLabel lifePoints;
     private final TextraLabel money;
     private final TextraLabel shards;
+//    private final TextraLabel moneyupdated;
+//    private final TextraLabel shardsupdated;
     private final TextraLabel keys;
     private TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
@@ -70,6 +73,8 @@ public class GameHUD extends Stage {
     private String lifepointsTextColor = "";
     private final ScrollPane scrollPane;
     private final ScrollPane notificationPane;
+
+    public static final String SMALL_FONT_TAG = "[%95]";
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -128,22 +133,21 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", this::openDeck);
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
+
         lifePoints = ui.findActor("lifePoints");
-        shards = ui.findActor("shards");
-        money = ui.findActor("money");
-        shards.setText("[%95][+Shards] 0");
-        money.setText("[%95][+Gold] ");
-        lifePoints.setText("[%95][+Life] 20/20");
+        lifePoints.setText(SMALL_FONT_TAG + "[+Life] 20/20");
+        shards = Controls.newAccountingLabel(ui.findActor("shards"),true, true, this);
+        money = Controls.newAccountingLabel(ui.findActor("money"), false, true, this);
+
         keys = Controls.newTextraLabel("");
         scrollPane = new ScrollPane(keys);
         scrollPane.setPosition(2, 2);
         scrollPane.setStyle(Controls.getSkin().get("translucent", ScrollPane.ScrollPaneStyle.class));
         addActor(scrollPane);
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
-        AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + AdventurePlayer.current().getGold()));
+        AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText(SMALL_FONT_TAG + "[+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -302,7 +306,7 @@ public class GameHUD extends Stage {
         }
         if (updatelife) {
             updatelife = false;
-            lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
+            lifePoints.setText(SMALL_FONT_TAG + "[+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
         }
         if (!MapStage.getInstance().isInMap())
             updateMusic();

@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -25,6 +26,7 @@ import com.github.tommyettinger.textra.TypingButton;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.GameHUD;
 import forge.card.ColorSet;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -489,13 +491,15 @@ public class Controls {
         private final String NEGDECOR = "[RED]-";
         private final String POSDECOR = "[GREEN]+";
         private final Timer t = new Timer();
+        private boolean smallText;
 
-        public AccountingLabel(TextraLabel target, boolean isShards) {
+        public AccountingLabel(TextraLabel target, boolean isShards, boolean smallText) {
             target.setVisible(false);
             placeholder = target;
             label = Controls.newTextraLabel(target.getName() + "Replacement");
             currencyAmount = isShards ? Current.player().getShards() : Current.player().getGold();
             this.isShards = isShards;
+            this.smallText = smallText;
 
             if (isShards) {
                 currencyAmount = Current.player().getShards();
@@ -503,10 +507,12 @@ public class Controls {
                 Current.player().onShardsChange(() -> update(AdventurePlayer.current().getShards(), true));
             } else {
                 currencyAmount = Current.player().getGold();
-                currencyIcon = "[+Gold] "; //fix space since gold sprite is wider than a single glyph
+                currencyIcon = "[+Gold]";
                 Current.player().onGoldChange(() -> update(AdventurePlayer.current().getGold(), true));
             }
-            label.setText(getLabelText(currencyAmount));
+
+            String text = getLabelText(currencyAmount);
+            label.setText(text);
             setName(label.getName());
             replaceLabel(label);
         }
@@ -564,7 +570,14 @@ public class Controls {
         }
 
         private String getLabelText(int amount, String updateText) {
-            return amount + " " + currencyIcon + updateText;
+            StringBuilder sb = new StringBuilder();
+            sb.append(smallText ? GameHUD.SMALL_FONT_TAG  : "");
+            sb.append(currencyIcon);
+            sb.append(" ");
+            sb.append(amount);
+            sb.append(" ");
+            sb.append(updateText);
+            return sb.toString();
         }
 
         private void replaceLabel(TextraLabel newLabel) {
@@ -597,8 +610,17 @@ public class Controls {
         }
     }
 
-    public static TextraLabel newAccountingLabel(TextraLabel target, Boolean isShards) {
-        AccountingLabel label = new AccountingLabel(target, isShards);
+    public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards, boolean smallText, Stage stageToSet) {
+        target.setStage(stageToSet);
+        return newAccountingLabel(target, isShards, smallText);
+    }
+
+    public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards) {
+        return new AccountingLabel(target, isShards, false);
+    }
+
+    public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards, boolean smallText) {
+        AccountingLabel label = new AccountingLabel(target, isShards, smallText);
         return label;
     }
 }
