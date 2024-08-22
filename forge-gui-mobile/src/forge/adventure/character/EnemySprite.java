@@ -324,7 +324,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
         if (_freeze){
             //Mob has defeated player in battle, hold still until player has a chance to move away.
             //Without this moving enemies can immediately restart battle.
-            if (spriteToPlayer.len() < unfreezeRange) {
+            float distance = spriteToPlayer.len();
+            if (distance < unfreezeRange) {
                 timer += delta;
                 return Vector2.Zero;
             }
@@ -635,7 +636,8 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
 
     }
 
-
-
+    public boolean isFrozen() {
+        return _freeze;
+    }
 }
 
