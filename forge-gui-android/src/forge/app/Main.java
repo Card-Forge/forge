@@ -51,6 +51,7 @@ import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidAudio;
+import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
 import com.getkeepsafe.relinker.ReLinker;
 import de.cketti.fileprovider.PublicFileProvider;
 import forge.Forge;
@@ -122,7 +123,8 @@ public class Main extends AndroidApplication {
 
     @Override
     public AndroidAudio createAudio(Context context, AndroidApplicationConfiguration config) {
-        return super.createAudio(context, config);
+        return new AsynchronousAndroidAudio(context, config);
+        //return super.createAudio(context, config);
     }
 
     @Override

@@ -3,12 +3,12 @@ package forge.adventure.scene;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DialogData;
@@ -48,20 +48,20 @@ public class NewGameScene extends MenuScene {
     private final TextraLabel starterEditionLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
-    private final TextraButton difficultyHelp;
+    private final ImageButton difficultyHelp;
     private DialogData difficultySummary;
-    private final TextraButton modeHelp;
+    private final ImageButton modeHelp;
     private DialogData modeSummary;
+    private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
 
     private NewGameScene() {
 
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
-
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
-        selectedName.setText(NameGenerator.getRandomName(gender.getCurrentIndex() > 0 ? "Female" : "Male", "Any", ""));
+        generateName();
         avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
         modeHelp = ui.findActor("modeHelp");
@@ -127,13 +127,12 @@ public class NewGameScene extends MenuScene {
             modeNames[i] = modes.get(i).getName();
         mode.setTextList(modeNames);
 
-        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale")});
+        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
+                Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
         gender.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //gender should be either Male or Female
-                String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
-                selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
+                nameTT = 0.8f;
                 super.clicked(event, x, y);
             }
         });
@@ -150,6 +149,13 @@ public class NewGameScene extends MenuScene {
             }
         });
         race = ui.findActor("race");
+        race.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                avatarTT = 0.7f;
+                super.clicked(event, x, y);
+            }
+        });
         race.addListener(event -> NewGameScene.this.updateAvatar());
         race.setTextList(HeroListData.getRaces());
         difficulty = ui.findActor("difficulty");
@@ -161,15 +167,13 @@ public class NewGameScene extends MenuScene {
         for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
             if (diff.startingDifficulty)
                 startingDifficulty = i;
-            diffList.add(Forge.getLocalizer().getInstance().getMessageorUseDefault("lbl" + diff.name, diff.name));
+            diffList.add(Forge.getLocalizer().getMessageorUseDefault("lbl" + diff.name, diff.name));
             i++;
         }
         difficulty.setTextList(diffList);
         difficulty.setCurrentIndex(startingDifficulty);
 
-        Random rand = new Random();
-        avatarIndex = rand.nextInt();
-        updateAvatar();
+        generateAvatar();
         gender.setCurrentIndex(rand.nextInt());
         colorId.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());
@@ -177,8 +181,16 @@ public class NewGameScene extends MenuScene {
         ui.onButtonPress("start", NewGameScene.this::start);
         ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
         ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
-        difficultyHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showDifficultyHelp(); }});
-        modeHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showModeHelp(); }});
+        difficultyHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                showDifficultyHelp();
+            }
+        });
+        modeHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                showModeHelp();
+            }
+        });
     }
 
     private static NewGameScene object;
@@ -189,6 +201,37 @@ public class NewGameScene extends MenuScene {
         return object;
     }
 
+    float avatarT = 1f, avatarTT = 1f;
+    float nameT = 1f, nameTT = 1f;
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (avatarT > avatarTT) {
+            avatarTT += (delta / 0.5f);
+            generateAvatar();
+        } else {
+            avatarTT = avatarT;
+        }
+        if (nameT > nameTT) {
+            nameTT += (delta / 0.5f);
+            generateName();
+        } else {
+            nameTT = nameT;
+        }
+    }
+
+    private void generateAvatar() {
+        avatarIndex = rand.nextInt();
+        updateAvatar();
+    }
+
+    private void generateName() {
+        //gender should be either Male or Female
+        String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
+        selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
+    }
+
     boolean started = false;
 
     public boolean start() {
@@ -196,7 +239,7 @@ public class NewGameScene extends MenuScene {
             return true;
         started = true;
         if (selectedName.getText().isEmpty()) {
-            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+            generateName();
         }
         Runnable runnable = () -> {
             started = false;
@@ -295,11 +338,11 @@ public class NewGameScene extends MenuScene {
         dismiss.name = "OK";
 
         DialogData matchImpacts = new DialogData();
-        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int)(selectedDifficulty.enemyLifeFactor * 100) , (int)(selectedDifficulty.goldLoss*100), (int)(selectedDifficulty.lifeLoss*100));
+        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
         matchImpacts.name = "Duels";
 
         DialogData economyImpacts = new DialogData();
-        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int)(selectedDifficulty.sellFactor*100), (int)(selectedDifficulty.shardSellRatio*100), (int)(selectedDifficulty.rewardMaxFactor*100));
+        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
         economyImpacts.name = "Economy";
 
         difficultySummary.options = new DialogData[3];
