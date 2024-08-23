@@ -681,10 +681,14 @@ public class GameHUD extends Stage {
 
     private void setAlpha(Actor actor, boolean visible) {
         if (actor != null) {
-            if (visible)
-                actor.getColor().a = 1f;
-            else
-                actor.getColor().a = 0.4f;
+            float alpha = visible ? 1f : 0.4f;
+
+            if (actor instanceof Controls.AccountingLabel) {
+                Controls.AccountingLabel accountingLabel = (Controls.AccountingLabel) actor;
+                accountingLabel.setAlpha(alpha);
+            } else {
+                actor.getColor().a = alpha;
+            }
         }
     }
 

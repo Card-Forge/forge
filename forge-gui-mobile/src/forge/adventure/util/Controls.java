@@ -608,6 +608,10 @@ public class Controls {
                 this.target = replacement;
             }
         }
+
+        public void setAlpha(float alpha) {
+            this.label.getColor().a = alpha;
+        }
     }
 
     public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards, boolean smallText, Stage stageToSet) {
