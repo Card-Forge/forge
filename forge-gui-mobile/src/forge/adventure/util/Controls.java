@@ -588,6 +588,7 @@ public class Controls {
             newLabel.style = placeholder.style;
             newLabel.layout.setBaseColor(label.layout.getBaseColor());
             newLabel.layout();
+            newLabel.setColor(label.getColor());
 
             label.remove();
             label = newLabel;
