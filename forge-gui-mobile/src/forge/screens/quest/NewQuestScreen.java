@@ -181,7 +181,7 @@ public class NewQuestScreen extends FScreen {
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
             .font(FSkinFont.get(22)).text(Forge.getLocalizer().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(event -> {
                 //create new quest in game thread so option panes can wait for input
-                ThreadUtil.invokeInGameThread(() -> newQuest());
+                ThreadUtil.invokeInGameThread(this::newQuest);
             }).build());
 
     public NewQuestScreen() {

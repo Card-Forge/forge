@@ -143,18 +143,14 @@ public class SimpleTiledModel extends Model {
         for (int t = 0; t < cardinality; t++) {
           ColorMap xtileData = tileData.get(tilename);
           this.tiles.add(
-              tile.apply(
-                (Integer x, Integer y) -> (xtileData.getColor(x, y))
-              )
+              tile.apply(xtileData::getColor)
             );
           this.tilenames.add(String.format("%s %s", tilename, t));
         }
       } else {
         ColorMap xtileData = tileData.get(tilename);
         this.tiles.add(
-            tile.apply(
-              (Integer x, Integer y) -> (xtileData.getColor(x, y))
-            )
+            tile.apply(xtileData::getColor)
           );
         
         this.tilenames.add(String.format("%s 0", tilename));

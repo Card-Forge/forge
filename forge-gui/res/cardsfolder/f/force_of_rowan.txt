@@ -1,0 +1,7 @@
+Name:Force of Rowan
+ManaCost:3 R R
+Types:Instant
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ PayLife<1> ExileFromHand<1/Card.Red+Other> | Description$ You may pay 1 life and exile a red card from your hand rather than pay this spell's mana cost.
+A:SP$ CopySpellAbility | ValidTgts$ Instant,Sorcery | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell. You may choose new targets for the copy.
+DeckHints:Type$Instant|Sorcery
+Oracle:You may pay 1 life and exile a red card from your hand rather than pay this spell's mana cost.\nCopy target instant or sorcery spell. You may choose new targets for the copy.

@@ -79,7 +79,7 @@ public class TournamentIO {
 
     public static TournamentData loadTournament(final File xmlSaveFile) {
         boolean isCorrupt = false;
-        try (GZIPInputStream zin = new GZIPInputStream(new FileInputStream(xmlSaveFile));
+        try (GZIPInputStream zin = new GZIPInputStream(Files.newInputStream(xmlSaveFile.toPath()));
              InputStreamReader reader = new InputStreamReader(zin)) {
             final TournamentData data = (TournamentData)TournamentIO.getSerializer(true).fromXML(reader);
 

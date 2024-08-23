@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
@@ -22,8 +20,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final int numTurns = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumTurns"), sa);
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player player : tgtPlayers) {
+        for (final Player player : getTargetPlayers(sa)) {
             sb.append(player).append(" ");
         }
 
@@ -44,8 +41,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
         String exile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile " +
         "| ConditionCheckSVar$ NumTurns | ConditionSVarCompare$ EQ0";
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
-        for (final Player player : tgtPlayers) {
+        for (final Player player : getTargetPlayers(sa)) {
             final Card eff = createEffect(sa, player, name, image);
             eff.setSVar("NumTurns", "Number$" + numTurns);
             SpellAbility calcTurn = AbilityFactory.getAbility(effect, eff);

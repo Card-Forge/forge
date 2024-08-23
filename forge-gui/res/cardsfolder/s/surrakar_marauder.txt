@@ -2,7 +2,7 @@ Name:Surrakar Marauder
 ManaCost:1 B
 Types:Creature Surrakar
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Intimidate
 SVar:BuffedBy:Land
-Oracle:Landfall — Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
+Oracle:Landfall — Whenever a land you control enters, Surrakar Marauder gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)

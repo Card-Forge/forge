@@ -247,6 +247,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 addForgetOnCastTrigger(eff, sa.getParam("ForgetOnCast"));
             }
 
+            if (sa.hasParam("ExileOnLost")) {
+                addExileOnLostTrigger(eff);
+            }
+
             // Set Imprinted
             if (effectImprinted != null) {
                 eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));

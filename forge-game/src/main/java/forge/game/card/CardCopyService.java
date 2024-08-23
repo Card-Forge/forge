@@ -41,13 +41,13 @@ public class CardCopyService {
         Card out;
         if (copyFrom.isRealToken() || copyFrom.getCopiedPermanent() != null || copyFrom.getPaperCard() == null) {
             out = copyStats(copyFrom, owner, assignNewId);
-            out.setToken(copyFrom.isToken());
             out.setEffectSource(copyFrom.getEffectSource());
             out.setBoon(copyFrom.isBoon());
             out.dangerouslySetGame(toGame);
 
             // need to copy this values for the tokens
             out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+            out.setCopiedPermanent(copyFrom.getCopiedPermanent());
         } else {
             out = assignNewId ? getCard(copyFrom.getPaperCard(), owner, toGame)
                     : getCard(copyFrom.getPaperCard(), owner, copyFrom.getId(), toGame);
@@ -56,9 +56,13 @@ public class CardCopyService {
         out.setZone(copyFrom.getZone());
         out.setState(copyFrom.getFaceupCardStateName(), true);
         out.setBackSide(copyFrom.isBackSide());
+        out.setGamePieceType(copyFrom.getGamePieceType());
+        out.setTokenCard(copyFrom.isTokenCard());
 
         if (toGame == copyFrom.getGame()) {
             // Only copy these things if we're not copying them into a new game
+
+            out.setCollectible(copyFrom.isCollectible());
 
             // this's necessary for forge.game.GameAction.unattachCardLeavingBattlefield(Card)
             out.setAttachedCards(copyFrom.getAttachedCards());
@@ -211,7 +215,7 @@ public class CardCopyService {
         bread.setData("Card", copyFrom.getName());
         bread.setData("CardState", copyFrom.getCurrentStateName().toString());
         bread.setData("Player", copyFrom.getController().getName());
-        Sentry.addBreadcrumb(bread, copyFrom);
+        Sentry.addBreadcrumb(bread);
 
         final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);
@@ -219,6 +223,7 @@ public class CardCopyService {
         newCopy.setOwner(copyFrom.getOwner());
         newCopy.setController(copyFrom.getController(), 0);
         newCopy.setCommander(copyFrom.isCommander());
+        newCopy.setCollectible(copyFrom.isCollectible());
 
         newCopy.setRules(copyFrom.getRules());
 
@@ -273,9 +278,8 @@ public class CardCopyService {
         }
         */
 
-        newCopy.setToken(copyFrom.isToken());
-        newCopy.setCopiedSpell(copyFrom.isCopiedSpell());
-        newCopy.setImmutable(copyFrom.isImmutable());
+        newCopy.setGamePieceType(copyFrom.getGamePieceType());
+        newCopy.setTokenCard(copyFrom.isTokenCard());
         newCopy.setEmblem(copyFrom.isEmblem());
 
         // lock in the current P/T
@@ -339,7 +343,7 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
+        //newCopy.getEtbCounters().putAll(copyFrom.getEtbCounters());
 
         newCopy.setUnearthed(copyFrom.isUnearthed());
 
@@ -374,8 +378,6 @@ public class CardCopyService {
         for (CardStateName s : newCopy.getStates()) {
             newCopy.updateKeywordsCache(newCopy.getState(s));
         }
-
-        newCopy.setKickerMagnitude(copyFrom.getKickerMagnitude());
 
         if (copyFrom.getCastSA() != null) {
             SpellAbility castSA = copyFrom.getCastSA().copy(newCopy, true);

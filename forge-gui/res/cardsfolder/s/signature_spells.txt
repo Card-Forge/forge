@@ -1,7 +1,7 @@
 Name:Signature Spells
 ManaCost:4 U U
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeekTwo | TriggerDescription$ When CARDNAME enters the battlefield, seek two instant and/or sorcery cards with mana value 3, then exile them.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeekTwo | TriggerDescription$ When CARDNAME enters, seek two instant and/or sorcery cards with mana value 3, then exile them.
 SVar:TrigSeekTwo:DB$ Seek | ImprintFound$ True | Num$ 2 | Type$ Card.Instant+cmcEQ3,Card.Sorcery+cmcEQ3 | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | Defined$ Imprinted
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBCopy | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may copy a card exiled with CARDNAME. You may cast the copy without paying its mana cost.
@@ -11,4 +11,4 @@ SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 DeckNeeds:Type$Instant|Sorcery
-Oracle:When Signature Spells enters the battlefield, seek two instant and/or sorcery cards with mana value 3, then exile them.\nAt the beginning of your upkeep, you may copy a card exiled with Signature Spells. You may cast the copy without paying its mana cost.
+Oracle:When Signature Spells enters, seek two instant and/or sorcery cards with mana value 3, then exile them.\nAt the beginning of your upkeep, you may copy a card exiled with Signature Spells. You may cast the copy without paying its mana cost.

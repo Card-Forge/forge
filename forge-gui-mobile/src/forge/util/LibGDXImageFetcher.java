@@ -37,7 +37,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
             URL url = new URL(urlToDownload);
             System.out.println("Attempting to fetch: " + url);
             java.net.URLConnection c = url.openConnection();
-            c.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+            c.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
 
             InputStream is = c.getInputStream();
             // First, save to a temporary file so that nothing tries to read
@@ -64,7 +64,7 @@ public class LibGDXImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

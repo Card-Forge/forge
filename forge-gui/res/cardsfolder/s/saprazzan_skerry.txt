@@ -1,11 +1,11 @@
 Name:Saprazzan Skerry
 ManaCost:no cost
 Types:Land
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped with two depletion counters on it.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped with two depletion counters on it.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ DEPLETION | CounterNum$ 2
 A:AB$ Mana | Cost$ T SubCounter<1/DEPLETION> | Produced$ U | SubAbility$ DBSac | Amount$ 2 | SpellDescription$ Add {U}{U}. If there are no depletion counters on CARDNAME, sacrifice it.
 SVar:DBSac:DB$ Sacrifice | SacValid$ Self | ConditionPresent$ Card.Self+counters_EQ0_DEPLETION
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:Saprazzan Skerry enters the battlefield tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U}. If there are no depletion counters on Saprazzan Skerry, sacrifice it.
+Oracle:Saprazzan Skerry enters tapped with two depletion counters on it.\n{T}, Remove a depletion counter from Saprazzan Skerry: Add {U}{U}. If there are no depletion counters on Saprazzan Skerry, sacrifice it.

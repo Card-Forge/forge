@@ -1,9 +1,9 @@
 Name:Staff of the Sun Magus
 ManaCost:3
 Types:Artifact
-T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Plains.YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains you control enters, you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Plains.YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell or a Plains you control enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
 DeckNeeds:Color$White
-Oracle:Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
+Oracle:Whenever you cast a white spell or a Plains you control enters, you gain 1 life.

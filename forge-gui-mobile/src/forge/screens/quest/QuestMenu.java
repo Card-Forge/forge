@@ -51,14 +51,14 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         //invoke in background thread so prompts can work
         ThreadUtil.invokeInGameThread(() -> {
             QuestUtil.chooseAndUnlockEdition();
-            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+            FThreads.invokeInEdtLater(QuestMenu::updateCurrentQuestScreen);
         });
     });
     private static final FMenuItem travelItem = new FMenuItem(Forge.getLocalizer().getMessage("btnTravel"), FSkinImage.QUEST_MAP, event -> {
         //invoke in background thread so prompts can work
         ThreadUtil.invokeInGameThread(() -> {
             QuestUtil.travelWorld();
-            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+            FThreads.invokeInEdtLater(QuestMenu::updateCurrentQuestScreen);
         });
     });
     private static final FMenuItem prefsItem = new FMenuItem(Forge.getLocalizer().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, event -> setCurrentScreen(prefsScreen));
@@ -127,7 +127,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
                 try {
                     FModel.getQuest().load(QuestDataIO.loadData(data));
                 } catch (IOException e) {
-                    System.err.println(String.format("Failed to load quest '%s'", questname));
+                    System.err.printf("Failed to load quest '%s'%n", questname);
                     // Failed to load last quest, don't continue with quest loading stuff
                     return;
                 }

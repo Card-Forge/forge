@@ -701,7 +701,7 @@ public class MapStage extends GameStage {
                             filteredPossibleShops = possibleShops;
                         }
                         Array<ShopData> shops;
-                        if (filteredPossibleShops.size == 0 || shopList.equals(""))
+                        if (filteredPossibleShops.size == 0 || shopList.isEmpty())
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();
@@ -959,10 +959,11 @@ public class MapStage extends GameStage {
                 } else {
                     Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
 
-                    if (destination.epsilonEquals(mob.pos()) && !mob.aggro) {
+                    if (mob.isFrozen() || (destination.epsilonEquals(mob.pos()) && !mob.aggro)) {
                         mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                         continue;
                     }
+
                     if (destination.equals(mob.targetVector) && mob.getNavPath() != null)
                         navPath = mob.getNavPath();
 

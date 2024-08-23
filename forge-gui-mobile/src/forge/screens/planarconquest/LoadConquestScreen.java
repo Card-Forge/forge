@@ -2,7 +2,6 @@ package forge.screens.planarconquest;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -301,9 +300,8 @@ public class LoadConquestScreen extends LaunchScreen {
         }
 
         public void setConquests(List<ConquestData> qd0) {
-            List<ConquestData> sorted = new ArrayList<>();
-            sorted.addAll(qd0);
-            Collections.sort(sorted, Comparator.comparing(x -> x.getName().toLowerCase()));
+            List<ConquestData> sorted = new ArrayList<>(qd0);
+            sorted.sort(Comparator.comparing(x -> x.getName().toLowerCase()));
             setListData(sorted);
         }
 

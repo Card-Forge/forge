@@ -35,8 +35,6 @@ public class DeckProxy implements InventoryItem {
     protected final String deckType;
     protected final IStorage<? extends IHasName> storage;
 
-    public static final Function<DeckProxy, String> FN_GET_NAME = arg0 -> arg0.getName();
-
     // cached values
     protected ColorSet color;
     protected ColorSet colorIdentity;

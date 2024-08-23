@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
 DeckHas:Ability$Counters
 SVar:SacMe:2
-Oracle:Deathtouch\nSpiteful Squad enters the battlefield with two +1/+1 counters on it.\nWhen Spiteful Squad dies, put its counters on target creature you control.
+Oracle:Deathtouch\nSpiteful Squad enters with two +1/+1 counters on it.\nWhen Spiteful Squad dies, put its counters on target creature you control.

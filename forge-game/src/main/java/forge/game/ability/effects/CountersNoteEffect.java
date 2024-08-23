@@ -1,7 +1,10 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CounterType;
@@ -18,17 +21,6 @@ public class CountersNoteEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
-        Player p = sa.getActivatingPlayer();
-        String mode = sa.getParamOrDefault("Mode", "Load");
-
-        for (Card c : getDefinedCardsOrTargeted(sa)) {
-            if (mode.equals(MODE_STORE)) {
-                noteCounters(c, source);
-            } else if (mode.equals(MODE_LOAD)) {
-                loadCounters(c, source, p, sa);
-            }
-        }
     }
 
     public static void noteCounters(Card notee, Card source) {
@@ -39,15 +31,17 @@ public class CountersNoteEffect extends SpellAbilityEffect {
         }
     }
 
-    private void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa) {
+    public static void loadCounters(Card notee, Card source, final Player p, final SpellAbility sa, Map<AbilityKey, Object> moveParams) {
+        GameEntityCounterTable table = new GameEntityCounterTable();
         for (Entry<String, String> svar : source.getSVars().entrySet()) {
             String key = svar.getKey();
             if (key.startsWith(NOTE_COUNTERS)) {
-                notee.addEtbCounter(
-                        CounterType.getType(key.substring(NOTE_COUNTERS.length())),
-                        Integer.parseInt(svar.getValue()), p);
+                CounterType cType = CounterType.getType(key.substring(NOTE_COUNTERS.length()));
+                int cAmount = Integer.parseInt(svar.getValue());
+                table.put(sa.getActivatingPlayer(), notee, cType, cAmount);
             }
             // TODO Probably should "remove" the svars that were temporarily used
         }
+        moveParams.put(AbilityKey.CounterTable, table);
     }
 }

@@ -17,21 +17,12 @@
  */
 package forge.gamemodes.quest;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.card.CardEdition;
 import forge.card.CardRarity;
 import forge.card.ICardDatabase;
@@ -45,16 +36,7 @@ import forge.gamemodes.quest.data.QuestAssets;
 import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.DifficultyPrefs;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.item.BoosterBox;
-import forge.item.BoosterPack;
-import forge.item.FatPack;
-import forge.item.IPaperCard;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.PreconDeck;
-import forge.item.SealedProduct;
-import forge.item.SealedProduct.Template;
-import forge.item.TournamentPack;
+import forge.item.*;
 import forge.item.generation.BoosterSlots;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -62,6 +44,13 @@ import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -604,7 +593,7 @@ public final class QuestUtilCards {
      */
     private void generateSinglesInShop(final int quantity) {
         // This is the spot we need to change
-        SealedProduct.Template boosterTemplate = getShopBoosterTemplate();
+        SealedTemplate boosterTemplate = getShopBoosterTemplate();
         if (questController.getFormat() == null) {
 		    for (int i = 0; i < quantity; i++) {
 			    questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate).get());
@@ -726,25 +715,25 @@ public final class QuestUtilCards {
     }
 
     @SuppressWarnings("unchecked")
-    private SealedProduct.Template getShopBoosterTemplate() {
-        return new SealedProduct.Template(Lists.newArrayList(
+    private SealedTemplate getShopBoosterTemplate() {
+        return new SealedTemplate(Lists.newArrayList(
             Pair.of(BoosterSlots.COMMON, questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)),
             Pair.of(BoosterSlots.UNCOMMON, questPreferences.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)),
             Pair.of(BoosterSlots.RARE_MYTHIC, questPreferences.getPrefInt(QPref.SHOP_SINGLES_RARE))
         ));
     }
 
-    private SealedProduct.Template getBoosterTemplate() {
-        return new SealedProduct.Template(ImmutableList.of(
+    private SealedTemplate getBoosterTemplate() {
+        return new SealedTemplate(ImmutableList.of(
             Pair.of(BoosterSlots.COMMON, questPreferences.getPrefInt(QPref.BOOSTER_COMMONS)),
             Pair.of(BoosterSlots.UNCOMMON, questPreferences.getPrefInt(QPref.BOOSTER_UNCOMMONS)),
             Pair.of(BoosterSlots.RARE_MYTHIC, questPreferences.getPrefInt(QPref.BOOSTER_RARES))
         ));
     }
 
-    public static SealedProduct.Template getColoredBoosterTemplate(final String color) {
+    public static SealedTemplate getColoredBoosterTemplate(final String color) {
         if (FModel.getQuest().getFormat() == null) {
-            return new Template("?", ImmutableList.of(
+            return new SealedTemplate("?", ImmutableList.of(
                     Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 11),
                     Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 3),
                     Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND, 1),
@@ -764,7 +753,7 @@ public final class QuestUtilCards {
                 }
                 restrictions.append(")");
             }
-            return new Template("?", ImmutableList.of(
+            return new SealedTemplate("?", ImmutableList.of(
                     Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
                     Pair.of(BoosterSlots.UNCOMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 3),
                     Pair.of(BoosterSlots.RARE_MYTHIC + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 1),

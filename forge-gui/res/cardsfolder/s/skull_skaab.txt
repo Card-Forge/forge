@@ -7,4 +7,4 @@ T:Mode$ Exploited | ValidCard$ Creature.nonToken | ValidSource$ Creature.YouCtrl
 SVar:TrigToken:DB$ Token | TokenScript$ b_2_2_zombie
 DeckHas:Ability$Token|Sacrifice
 DeckHints:Keyword$Exploit
-Oracle:Exploit (When this creature enters the battlefield, you may sacrifice a creature.)\nWhenever a creature you control exploits a nontoken creature, create a 2/2 black Zombie creature token.
+Oracle:Exploit (When this creature enters, you may sacrifice a creature.)\nWhenever a creature you control exploits a nontoken creature, create a 2/2 black Zombie creature token.

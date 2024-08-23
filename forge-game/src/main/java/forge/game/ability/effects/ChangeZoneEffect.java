@@ -590,7 +590,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                     int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                    gameCard.addEtbCounter(cType, cAmount, activator);
+
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(activator, gameCard, cType, cAmount);
+                    moveParams.put(AbilityKey.CounterTable, table);
+                } else if (sa.hasParam("WithNotedCounters")) {
+                    CountersNoteEffect.loadCounters(gameCard, hostCard, chooser, sa, moveParams);
                 }
                 if (sa.hasParam("GainControl")) {
                     final String g = sa.getParam("GainControl");
@@ -1073,7 +1078,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 searchedLibrary = false;
             }
 
-            if (!defined && !changeType.equals("") && !changeType.startsWith("EACH")) {
+            if (!defined && !changeType.isEmpty() && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
             fetchList.sort();
@@ -1302,7 +1307,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
-                        c.addEtbCounter(cType, cAmount, player);
+                        GameEntityCounterTable table = new GameEntityCounterTable();
+                        table.put(player, c, cType, cAmount);
+                        moveParams.put(AbilityKey.CounterTable, table);
                     }
                     if (sa.hasParam("Transformed")) {
                         if (c.isTransformable()) {
@@ -1474,7 +1481,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (((!ZoneType.Battlefield.equals(destination) && !changeType.equals("") && !defined && !changeType.equals("Card"))
+            if (((!ZoneType.Battlefield.equals(destination) && !changeType.isEmpty() && !defined && !changeType.equals("Card"))
                     || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
                 game.getAction().reveal(movedCards, player);
             }

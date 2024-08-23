@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Instant
 A:SP$ Charm | Choices$ P1P1,Lore
 SVar:P1P1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on target creature you control.
-SVar:Lore:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 2 | SubAbility$ DBEffect | SpellDescription$ Put two lore counters on target Saga you control. The next time one or more enchantment creatures enter the battlefield under your control this turn, each enters with two additional +1/+1 counters on it.
+SVar:Lore:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 2 | SubAbility$ DBEffect | SpellDescription$ Put two lore counters on target Saga you control. The next time one or more enchantment creatures you control enter this turn, each enters with two additional +1/+1 counters on it.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ ReplaceETB | Triggers$ TrigRemove
 SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.Enchantment | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
 SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ DBImprint
@@ -13,4 +13,4 @@ SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ 
 SVar:Z:Imprinted$Amount
 DeckHas:Ability$Counters
 DeckHints:Type$Saga
-Oracle:Choose one —\n• Put two +1/+1 counters on target creature you control.\n• Put two lore counters on target Saga you control. The next time one or more enchantment creatures enter the battlefield under your control this turn, each enters with two additional +1/+1 counters on it.
+Oracle:Choose one —\n• Put two +1/+1 counters on target creature you control.\n• Put two lore counters on target Saga you control. The next time one or more enchantment creatures you control enter this turn, each enters with two additional +1/+1 counters on it.

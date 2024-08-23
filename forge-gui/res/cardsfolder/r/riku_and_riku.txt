@@ -1,0 +1,8 @@
+Name:Riku and Riku
+ManaCost:2 RG U
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:Double Strike
+A:AB$ CopySpellAbility | Cost$ U R | GameActivationLimit$ 1 | TgtPrompt$ Select target instant or sorcery spell you control | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target instant or sorcery spell you control. Activate this ability only once.
+A:AB$ CopySpellAbility | Cost$ G U | GameActivationLimit$ 1 | TgtPrompt$ Select target creature spell you control | ValidTgts$ Creature.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target creature spell you control. Activate this ability only once.
+Oracle:Double strike\n{U}{R}: Copy target instant or sorcery spell you control. Activate this ability only once.\n{G}{U}: Copy target creature spell you control. Activate this ability only once. (Copies of permanent spells enter the battlefield as tokens.)

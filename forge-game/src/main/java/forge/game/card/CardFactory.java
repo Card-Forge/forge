@@ -43,9 +43,7 @@ import forge.item.IPaperCard;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -105,11 +103,10 @@ public class CardFactory {
             copy.setState(copy.getCurrentStateName(), true, true);
         }
 
-        copy.setCopiedSpell(true);
+        copy.setGamePieceType(GamePieceType.COPIED_SPELL);
         copy.setCopiedPermanent(original);
 
         copy.setXManaCostPaidByColor(original.getXManaCostPaidByColor());
-        copy.setKickerMagnitude(original.getKickerMagnitude());
         copy.setPromisedGift(original.getPromisedGift());
 
         if (targetSA.isBestow()) {
@@ -188,9 +185,11 @@ public class CardFactory {
         // Would like to move this away from in-game entities
         String originalPicture = cp.getImageKey(false);
         c.setImageKey(originalPicture);
-        c.setToken(cp.isToken());
 
-        c.setAttractionCard(cardRules.getType().isAttraction());
+        if(cp.isToken())
+            c.setGamePieceType(GamePieceType.TOKEN);
+        else
+            c.setGamePieceType(c.getRules().getType().getGamePieceType());
 
         if (c.hasAlternateState()) {
             if (c.isFlipCard()) {
@@ -414,17 +413,16 @@ public class CardFactory {
 
         // SpellPermanent only for Original State
         if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
-            // this is the "default" spell for permanents like creatures and artifacts
-            if (c.isPermanent() && !c.isAura() && !c.isLand()) {
+            if (c.isLand()) {
+                SpellAbility sa = new LandAbility(c);
+                sa.setCardState(c.getCurrentState());
+                c.addSpellAbility(sa);
+            } else if (c.isPermanent() && !c.isAura()) {
+                // this is the "default" spell for permanents like creatures and artifacts
                 SpellAbility sa = new SpellPermanent(c);
-
-                // Currently only for Modal, might react different when state is always set
-                //if (c.getCurrentStateName() == CardStateName.Modal) {
-                    sa.setCardState(c.getCurrentState());
-                //}
+                sa.setCardState(c.getCurrentState());
                 c.addSpellAbility(sa);
             }
-            // TODO add LandAbility there when refactor MayPlay
         }
 
         CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
@@ -746,6 +744,15 @@ public class CardFactory {
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
 
+            if (sa.isKeyword(Keyword.OFFSPRING) && sa.isIntrinsic()) {
+                String name = TextUtil.fastReplace(
+                        TextUtil.fastReplace(host.getName(), ",", ""),
+                        " ", "_").toLowerCase();
+                String set = host.getSetCode().toLowerCase();
+                state.setImageKey(ImageKeys.getTokenKey("offspring_" + name + "_" + set));
+            }
+
+            
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
                 state.setRarity(originalState.getRarity());

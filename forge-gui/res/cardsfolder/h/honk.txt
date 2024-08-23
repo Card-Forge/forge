@@ -1,0 +1,10 @@
+Name:HONK!
+ManaCost:G
+Types:Instant
+A:SP$ Charm | Choices$ TheGooseIsLoose,TheGooseLaidAnEgg
+SVar:TheGooseIsLoose:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SubAbility$ DBGiveFood | SpellDescription$ The Goose is Loose — Destroy target artifact or enchantment. Its controller creates a Food token.
+SVar:DBGiveFood:DB$ Token | TokenScript$ c_a_food_sac | TokenOwner$ TargetedController | TokenAmount$ 1
+SVar:TheGooseLaidAnEgg:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGetFood | SpellDescription$ The Goose Laid an Egg — Put a +1/+1 counter on target creature. You create a Food token.
+SVar:DBGetFood:DB$ Token | TokenScript$ c_a_food_sac | TokenAmount$ 1
+DeckHas:Ability$Token|Counters|LifeGain & Type$Food|Artifact
+Oracle:Choose one —\n• The Goose is Loose — Destroy target artifact or enchantment. Its controller creates a Food token.\n• The Goose Laid an Egg — Put a +1/+1 counter on target creature. You create a Food token.

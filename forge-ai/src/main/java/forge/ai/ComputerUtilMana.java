@@ -1040,7 +1040,7 @@ public class ComputerUtilMana {
         // If it's a low priority spell (it's explicitly marked so elsewhere in the AI with a SVar), always
         // obey mana reservations for Main 2; otherwise, obey mana reservations depending on the "chance to reserve"
         // AI profile variable.
-        if (sa.getSVar("LowPriorityAI").equals("")) {
+        if (sa.getSVar("LowPriorityAI").isEmpty()) {
             if (chanceToReserve == 0 || MyRandom.getRandom().nextInt(100) >= chanceToReserve) {
                 return false;
             }
@@ -1309,15 +1309,6 @@ public class ComputerUtilMana {
         }
 
         CostAdjustment.adjust(cost, sa, null, test);
-
-        int timesMultikicked = card.getKickerMagnitude();
-        if (timesMultikicked > 0 && sa.isAnnouncing("Multikicker")) {
-            ManaCost mkCost = sa.getMultiKickerManaCost();
-            for (int i = 0; i < timesMultikicked; i++) {
-                cost.addManaCost(mkCost);
-            }
-            sa.setSVar("Multikicker", String.valueOf(timesMultikicked));
-        }
 
         if ("NumTimes".equals(sa.getParam("Announce"))) { // e.g. the Adversary cycle
             ManaCost mkCost = sa.getPayCosts().getTotalMana();

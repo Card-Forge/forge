@@ -52,8 +52,8 @@ public class DeckSelectScene extends UIScene {
         back = ui.findActor("return");
         edit = ui.findActor("edit");
         rename = ui.findActor("rename");
-        ui.onButtonPress("return", () -> DeckSelectScene.this.back());
-        ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
+        ui.onButtonPress("return", DeckSelectScene.this::back);
+        ui.onButtonPress("edit", DeckSelectScene.this::edit);
         ui.onButtonPress("rename", () -> {
             textInput.setText(Current.player().getSelectedDeck().getName());
             showRenameDialog();

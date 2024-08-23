@@ -149,7 +149,7 @@ public class Untap extends Phase {
             }
         }
         final CardCollection untapList = new CardCollection(list);
-        final String[] restrict = restrictUntap.keySet().toArray(new String[restrictUntap.keySet().size()]);
+        final String[] restrict = restrictUntap.keySet().toArray(new String[0]);
         list = CardLists.filter(list, c -> {
             if (!Untap.canUntap(c)) {
                 return false;
@@ -258,7 +258,7 @@ public class Untap extends Phase {
         return untap;
     }
 
-    private static void doPhasing(final Player turn) {
+    public static void doPhasing(final Player turn) {
         // Needs to include phased out cards
         final List<Card> list = CardLists.filter(turn.getGame().getCardsIncludePhasingIn(ZoneType.Battlefield),
                 c -> (c.isPhasedOut(turn) && c.isDirectlyPhasedOut())

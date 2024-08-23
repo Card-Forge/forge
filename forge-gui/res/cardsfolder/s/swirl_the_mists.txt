@@ -2,6 +2,6 @@ Name:Swirl the Mists
 ManaCost:2 U U
 Types:Enchantment
 K:ETBReplacement:Other:ChooseColor
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color word.
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters, choose a color word.
 S:Mode$ Continuous | Affected$ Spell,Permanent | AffectedZone$ Stack,Battlefield | ChangeColorWordsTo$ ChosenColor | Description$ All instances of color words in the text of spells and permanents are changed to the chosen color word.
-Oracle:As Swirl the Mists enters the battlefield, choose a color word.\nAll instances of color words in the text of spells and permanents are changed to the chosen color word.
+Oracle:As Swirl the Mists enters, choose a color word.\nAll instances of color words in the text of spells and permanents are changed to the chosen color word.

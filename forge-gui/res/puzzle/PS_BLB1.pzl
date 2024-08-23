@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Bloomburrow #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/07/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume your opponent could have copies of any Bloomburrow Standard-legal Squirrels in their library (...but none of them do anything in this situation). Ensure your solution takes all possible opponent decisions into account!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Pile On;Audacity;Season of Loss;Brambleguard Veteran
+p0battlefield=Ygra, Eater of All;Camellia, the Seedmiser;Corpseberry Cultivator;Corpseberry Cultivator;Restless Cottage;Restless Cottage;Restless Cottage;Swamp;Swamp
+p1life=11
+p1library=
+p1battlefield=Thornvault Forager;Thornvault Forager;Tender Wildguide;Tender Wildguide;Tender Wildguide|Counters:P1P1=1

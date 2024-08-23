@@ -1,9 +1,9 @@
 Name:Sphere of the Suns
 ManaCost:2
 Types:Artifact
-K:ETBReplacement:Other:SphereTapped
-SVar:SphereTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter | SpellDescription$ CARDNAME enters the battlefield tapped and with three charge counters on it.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ SphereTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped and with three charge counters on it.
+SVar:SphereTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ CHARGE | CounterNum$ 3
 A:AB$ Mana | Cost$ T SubCounter<1/CHARGE> | Produced$ Any | SpellDescription$ Add one mana of any color.
 DeckHas:Ability$Counters
-Oracle:Sphere of the Suns enters the battlefield tapped and with three charge counters on it.\n{T}, Remove a charge counter from Sphere of the Suns: Add one mana of any color.
+Oracle:Sphere of the Suns enters tapped and with three charge counters on it.\n{T}, Remove a charge counter from Sphere of the Suns: Add one mana of any color.

@@ -32,6 +32,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -509,13 +510,9 @@ public class AiAttackController {
             return;
         }
 
-        List<String> bandsWithString = Arrays.asList("Bands with Other Legendary Creatures",
-                "Bands with Other Creatures named Wolves of the Hunt",
-                "Bands with Other Dinosaurs");
-
         List<Card> bandingCreatures = null;
         if (test == null) {
-            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasAnyKeyword(bandsWithString));
+            bandingCreatures = CardLists.filter(myList, card -> card.hasKeyword(Keyword.BANDING) || card.hasKeyword(Keyword.BANDSWITH));
 
             // filter out anything that can't legally attack or is already declared as an attacker
             bandingCreatures = CardLists.filter(bandingCreatures, card -> !combat.isAttacking(card) && CombatUtil.canAttack(card));
@@ -523,7 +520,7 @@ public class AiAttackController {
             bandingCreatures = notNeededAsBlockers(attackers, bandingCreatures);
         } else {
             // Test a specific creature for Banding
-            if (test.hasKeyword(Keyword.BANDING) || test.hasAnyKeyword(bandsWithString)) {
+            if (test.hasKeyword(Keyword.BANDING) || test.hasKeyword(Keyword.BANDSWITH)) {
                 bandingCreatures = new CardCollection(test);
             }
         }
@@ -541,7 +538,7 @@ public class AiAttackController {
 
             // TODO: Assign to band with the best attacker for now, but needs better logic.
             for (Card c : bandingCreatures) {
-                Card bestBand;
+                Card bestBand = null;
 
                 if (c.getNetPower() <= 0) {
                     // Don't band a zero power creature if there's already a banding creature in a band
@@ -549,12 +546,16 @@ public class AiAttackController {
                 }
 
                 Card bestAttacker = ComputerUtilCard.getBestCreatureAI(attackers);
-                if (c.hasKeyword("Bands with Other Legendary Creatures")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Legendary"));
-                } else if (c.hasKeyword("Bands with Other Dinosaurs")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.getType(attackers, "Dinosaur"));
-                } else if (c.hasKeyword("Bands with Other Creatures named Wolves of the Hunt")) {
-                    bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, CardPredicates.nameEquals("Wolves of the Hunt")));
+
+                // TODO how should this work with multiple bands with other abilities?
+                if (c.hasKeyword(Keyword.BANDSWITH)) {
+                    for (KeywordInterface kw : c.getKeywords(Keyword.BANDSWITH)) {
+                        final String o = kw.getOriginal();
+                        String m[] = o.split(":");
+                        CardCollection bandPartner = CardLists.getValidCards(attackers, m[1], c.getController(), c, null);
+                        bestBand = ComputerUtilCard.getBestCreatureAI(bandPartner);
+                        break; // ?
+                    }
                 } else if (!c.hasAnyKeyword(evasionKeywords) && bestAttacker != null && bestAttacker.hasAnyKeyword(evasionKeywords)) {
                     bestBand = ComputerUtilCard.getBestCreatureAI(CardLists.filter(attackers, card -> !card.hasAnyKeyword(evasionKeywords)));
                 } else {

@@ -28,11 +28,7 @@ public class CardPreferences {
 
     public static CardPreferences getPrefs(IPaperCard card) {
         String cardName = card.getName();
-        CardPreferences prefs = allPrefs.get(cardName);
-        if (prefs == null) {
-            prefs = new CardPreferences(cardName);
-            allPrefs.put(cardName, prefs);
-        }
+        CardPreferences prefs = allPrefs.computeIfAbsent(cardName, CardPreferences::new);
         return prefs;
     }
 

@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.64-SNAPSHOT</version>
+        <version>1.6.65-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-game</artifactId>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
-            <version>5.7.0</version>
+            <version>7.14.0</version>
         </dependency>
     </dependencies>
 </project>

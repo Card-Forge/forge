@@ -88,9 +88,9 @@ public class DigEffect extends SpellAbilityEffect {
                     sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
                 }
                 sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
-                if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
-                    String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
-                            sa.getParam("ExileWithCounter");
+                if (sa.hasParam("WithCounters") || sa.hasParam("ExileWithCounters")) {
+                    String ctr = sa.hasParam("WithCounters") ? sa.getParam("WithCounters") :
+                            sa.getParam("ExileWithCounters");
                     sb.append("with a ");
                     sb.append(CounterType.getType(ctr).getName().toLowerCase());
                     sb.append(" counter on it. They ");
@@ -375,10 +375,11 @@ public class DigEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                     for (Card c : movedCards) {
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                         if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
                             c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                         } else {
@@ -398,10 +399,13 @@ public class DigEffect extends SpellAbilityEffect {
                                 if (sa.hasParam("GainControl")) {
                                     c.setController(activator, game.getNextTimestamp());
                                 }
-                                if (sa.hasParam("WithCounter")) {
+                                if (sa.hasParam("WithCounters")) {
                                     final int numCtr = AbilityUtils.calculateAmount(host,
-                                            sa.getParamOrDefault("WithCounterNum", "1"), sa);
-                                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, activator);
+                                            sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+
+                                    GameEntityCounterTable table = new GameEntityCounterTable();
+                                    table.put(activator, c, CounterType.getType(sa.getParam("WithCounters")), numCtr);
+                                    moveParams.put(AbilityKey.CounterTable, table);
                                 }
                             }
                             if (sa.hasAdditionalAbility("AnimateSubAbility")) {
@@ -420,8 +424,8 @@ public class DigEffect extends SpellAbilityEffect {
                                     combatChanged = true;
                                 }
                             } else if (destZone1.equals(ZoneType.Exile)) {
-                                if (sa.hasParam("ExileWithCounter")) {
-                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
+                                if (sa.hasParam("ExileWithCounters")) {
+                                    c.addCounter(CounterType.getType(sa.getParam("ExileWithCounters")), 1, activator, counterTable);
                                 }
                                 handleExiledWith(c, sa);
                             }
@@ -467,6 +471,9 @@ public class DigEffect extends SpellAbilityEffect {
                             }
 
                             for (final Card c : afterOrder) {
+                                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                                AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                                 Card m = game.getAction().moveTo(destZone2, c, libraryPosition2, sa, moveParams);
                                 if (remZone2) {
                                     host.addRemembered(m);
@@ -475,13 +482,16 @@ public class DigEffect extends SpellAbilityEffect {
                         } else {
                             // just move them randomly
                             for (Card c : rest) {
+                                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                                AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
                                 if (destZone2 == ZoneType.Exile && !c.canExiledBy(sa, true)) {
                                     continue;
                                 }
                                 c = game.getAction().moveTo(destZone2, c, sa, moveParams);
                                 if (destZone2 == ZoneType.Exile) {
-                                    if (sa.hasParam("ExileWithCounter")) {
-                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounter")), 1, activator, counterTable);
+                                    if (sa.hasParam("ExileWithCounters")) {
+                                        c.addCounter(CounterType.getType(sa.getParam("ExileWithCounters")), 1, activator, counterTable);
                                     }
                                     handleExiledWith(c, sa);
                                     if (remZone2) {

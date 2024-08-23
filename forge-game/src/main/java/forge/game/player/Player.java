@@ -21,10 +21,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.*;
 import forge.ImageKeys;
 import forge.LobbyPlayer;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.game.*;
@@ -46,7 +43,7 @@ import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.*;
 import forge.game.trigger.Trigger;
@@ -1694,9 +1691,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.fireEvent(new GameEventShuffle(this));
     }
 
-    public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming) {
+    public final boolean playLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility cause) {
         // Dakkon Blackblade Avatar will use a similar effect
-        if (canPlayLand(land, ignoreZoneAndTiming)) {
+        if (canPlayLand(land, ignoreZoneAndTiming, cause)) {
             playLandNoCheck(land, null);
             return true;
         }
@@ -1709,7 +1706,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
-            if (cause instanceof LandAbility) {
+            if (cause.isLandAbility()) {
                 land.changeToState(cause.getCardStateName());
             }
         }
@@ -1733,12 +1730,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return c;
     }
 
-    public final boolean canPlayLand(final Card land) {
-        return canPlayLand(land, false);
-    }
-    public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming) {
-        return canPlayLand(land, ignoreZoneAndTiming, null);
-    }
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility landSa) {
         if (!ignoreZoneAndTiming) {
             // CR 305.3
@@ -2866,6 +2857,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             for (final IPaperCard cp : cards) {
                 Card c = Card.fromPaperCard(cp, this);
                 bf.add(c);
+                c.setCollectible(false); //Some nuance may be appropriate here someday.
                 c.setSickness(true);
                 c.setStartsGameInPlay(true);
                 if (registeredPlayer.hasEnableETBCountersEffect()) {
@@ -2889,7 +2881,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Vanguard
         if (registeredPlayer.getVanguardAvatars() != null) {
             for (PaperCard avatar:registeredPlayer.getVanguardAvatars()) {
-                com.add(Card.fromPaperCard(avatar, this));
+                Card c = Card.fromPaperCard(avatar, this);
+                c.setCollectible(true);
+                com.add(c);
             }
         }
 
@@ -2900,6 +2894,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!sd.isEmpty()) {
             for (Card c : sd) {
+                c.setCollectible(true);
                 getZone(ZoneType.SchemeDeck).add(c);
             }
             getZone(ZoneType.SchemeDeck).shuffle();
@@ -2912,6 +2907,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         if (!l.isEmpty()) {
             for (Card c : l) {
+                c.setCollectible(true);
                 getZone(ZoneType.PlanarDeck).add(c);
             }
             getZone(ZoneType.PlanarDeck).shuffle();
@@ -2942,6 +2938,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                             Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(),
                                     Lang.joinHomogenous(chosenColors)), p);
                 }
+                cmd.setCollectible(true);
                 cmd.setCommander(true);
                 com.add(cmd);
                 commanders.add(cmd);
@@ -2951,6 +2948,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         else if (registeredPlayer.getPlaneswalker() != null) { // Planeswalker
             Card cmd = Card.fromPaperCard(registeredPlayer.getPlaneswalker(), this);
+            cmd.setCollectible(true);
             cmd.setCommander(true);
             com.add(cmd);
             setCommanders(Lists.newArrayList(cmd));
@@ -2980,7 +2978,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Attractions
         PlayerZone attractionDeck = getZone(ZoneType.AttractionDeck);
         for (IPaperCard cp : registeredPlayer.getAttractions()) {
-            attractionDeck.add(Card.fromPaperCard(cp, this));
+            Card c = Card.fromPaperCard(cp, this);
+            c.setCollectible(true);
+            attractionDeck.add(c);
         }
         if (!attractionDeck.isEmpty())
             attractionDeck.shuffle();
@@ -3182,7 +3182,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         eff.setGameTimestamp(game.getNextTimestamp());
         eff.setName(name);
         eff.setOwner(this);
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
         String image = ImageKeys.getTokenKey("planechase");
         eff.setImageKey(image);
 
@@ -3210,7 +3210,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (theRing == null) {
             theRing = new Card(game.nextCardId(), null, game);
             theRing.setOwner(this);
-            theRing.setImmutable(true);
+            theRing.setGamePieceType(GamePieceType.EFFECT);
             String image = ImageKeys.getTokenKey("the_ring");
             if (host != null) {
                 theRing.setImageKey("t:the_ring_" + host.getSetCode().toLowerCase());
@@ -3282,6 +3282,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         card.setOwner(this);
 
+        if(!card.isCollectible()) {
+            return;
+        }
+
         if (lostOwnership.contains(card)) {
             lostOwnership.remove(card);
         } else {
@@ -3334,7 +3338,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (monarchEffect == null) {
             monarchEffect = new Card(game.nextCardId(), null, game);
             monarchEffect.setOwner(this);
-            monarchEffect.setImmutable(true);
+            monarchEffect.setGamePieceType(GamePieceType.EFFECT);
             if (set != null) {
                 monarchEffect.setImageKey("t:monarch_" + set.toLowerCase());
                 monarchEffect.setSetCode(set);
@@ -3386,7 +3390,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (initiativeEffect == null) {
             initiativeEffect = new Card(game.nextCardId(), null, game);
             initiativeEffect.setOwner(this);
-            initiativeEffect.setImmutable(true);
+            initiativeEffect.setGamePieceType(GamePieceType.EFFECT);
             if (set != null) {
                 initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
                 initiativeEffect.setSetCode(set);
@@ -3458,7 +3462,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (radiationEffect == null) {
             radiationEffect = new Card(game.nextCardId(), null, game);
             radiationEffect.setOwner(this);
-            radiationEffect.setImmutable(true);
+            radiationEffect.setGamePieceType(GamePieceType.EFFECT);
             radiationEffect.setImageKey("t:radiation");
             radiationEffect.setName("Radiation");
             if (setCode != null) {
@@ -3563,7 +3567,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             blessingEffect.setOwner(this);
             blessingEffect.setImageKey("t:blessing");
             blessingEffect.setName("City's Blessing");
-            blessingEffect.setImmutable(true);
+            blessingEffect.setGamePieceType(GamePieceType.EFFECT);
 
             blessingEffect.updateStateForView();
 
@@ -3622,7 +3626,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final PlayerZone com = getZone(ZoneType.Command);
 
         keywordEffect = new Card(game.nextCardId(), null, game);
-        keywordEffect.setImmutable(true);
+        keywordEffect.setGamePieceType(GamePieceType.EFFECT);
         keywordEffect.setOwner(this);
         keywordEffect.setName("Keyword Effects");
         keywordEffect.setImageKey(ImageKeys.HIDDEN_CARD);

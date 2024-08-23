@@ -72,6 +72,7 @@ public class HumanPlaySpellAbility {
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
+                    needX = ability.getPayCosts().hasXInAnyCostPart();
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
@@ -249,11 +250,7 @@ public class HumanPlaySpellAbility {
                     ability.setXManaCostPaid(value);
                 } else {
                     ability.setSVar(varName, value.toString());
-                    if ("Multikicker".equals(varName)) {
-                        card.setKickerMagnitude(value);
-                    } else {
-                        card.setSVar(varName, value.toString());
-                    }
+                    card.setSVar(varName, value.toString());
                 }
             }
         }

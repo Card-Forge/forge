@@ -9,4 +9,4 @@ SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Indestructible
 DeckHints:Name$Trynn, Champion of Freedom & Type$Human
 DeckHas:Ability$Counters
 SVar:AIPreference:SacCost$Creature.Token+Human,Creature.Human+cmcLE2
-Oracle:Partner with Trynn, Champion of Freedom (When this creature enters the battlefield, target player may put Trynn into their hand from their library, then shuffle.)\nMenace\nSacrifice a Human: Put a +1/+1 counter on Silvar, Devourer of the Free. It gains indestructible until end of turn.
+Oracle:Partner with Trynn, Champion of Freedom (When this creature enters, target player may put Trynn into their hand from their library, then shuffle.)\nMenace\nSacrifice a Human: Put a +1/+1 counter on Silvar, Devourer of the Free. It gains indestructible until end of turn.

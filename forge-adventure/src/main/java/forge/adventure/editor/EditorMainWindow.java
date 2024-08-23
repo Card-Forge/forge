@@ -42,7 +42,7 @@ public class EditorMainWindow extends JFrame {
         BorderLayout layout=new BorderLayout();
         JToolBar toolBar = new JToolBar("toolbar");
         JButton newButton=new JButton("open ParticleEditor");
-        newButton.addActionListener(e -> EventQueue.invokeLater(() ->new ParticleEditor()));
+        newButton.addActionListener(e -> EventQueue.invokeLater(ParticleEditor::new));
         toolBar.add(newButton);
         setLayout(layout);
         toolBar.setFloatable(false);

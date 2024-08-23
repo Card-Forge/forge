@@ -1,0 +1,7 @@
+Name:Colossal Dreadmaw and Storm Crow
+ManaCost:5 U G
+Types:Legendary Creature Dinosaur Bird
+PT:7/8
+K:Flying
+K:Trample
+Oracle:Flying, trample

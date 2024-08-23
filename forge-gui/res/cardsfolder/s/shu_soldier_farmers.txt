@@ -2,6 +2,6 @@ Name:Shu Soldier-Farmers
 ManaCost:4 W
 Types:Creature Human Soldier
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 4 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 4
-Oracle:When Shu Soldier-Farmers enters the battlefield, you gain 4 life.
+Oracle:When Shu Soldier-Farmers enters, you gain 4 life.

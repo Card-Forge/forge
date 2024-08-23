@@ -17,7 +17,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
-        CardCollection defined = getDefinedCardsOrTargeted(sa, "Defined");
+        CardCollection defined = getDefinedCardsOrTargeted(sa);
 
         if (sa.hasParam("Optional")) {
             final String targets = Lang.joinHomogenous(defined);

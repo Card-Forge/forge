@@ -43,6 +43,7 @@ public enum AbilityKey {
     CounteredSA("CounteredSA"),
     CounterNum("CounterNum"),
     CounterMap("CounterMap"),
+    CounterTable("CounterTable"),
     CounterType("CounterType"),
     Crew("Crew"),
     CumulativeUpkeepPaid("CumulativeUpkeepPaid"),

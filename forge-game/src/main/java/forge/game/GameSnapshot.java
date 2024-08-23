@@ -362,16 +362,16 @@ public class GameSnapshot {
             if (fromCard.getCloneOrigin() != null) {
                 newCard.setCloneOrigin(toGame.findById(fromCard.getCloneOrigin().getId()));
             }
-            if (newCard.getHaunting() != null) {
+            if (fromCard.getHaunting() != null) {
                 newCard.setHaunting(toGame.findById(fromCard.getHaunting().getId()));
             }
-            if (newCard.getEffectSource() != null) {
+            if (fromCard.getEffectSource() != null) {
                 newCard.setEffectSource(toGame.findById(fromCard.getEffectSource().getId()));
             }
-            if (newCard.isPaired()) {
+            if (fromCard.isPaired()) {
                 newCard.setPairedWith(toGame.findById(fromCard.getPairedWith().getId()));
             }
-            if (newCard.getCopiedPermanent() != null) {
+            if (fromCard.getCopiedPermanent() != null) {
                 newCard.setCopiedPermanent(toGame.findById(fromCard.getCopiedPermanent().getId()));
             }
             // TODO: Verify that the above relationships are preserved bi-directionally or not.

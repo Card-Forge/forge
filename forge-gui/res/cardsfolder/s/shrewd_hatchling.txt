@@ -9,4 +9,4 @@ T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZo
 T:Mode$ SpellCast | ValidCard$ Card.Blue | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast a blue spell, remove a -1/-1 counter from CARDNAME.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
 SVar:BuffedBy:Card.Red,Card.Blue
-Oracle:Shrewd Hatchling enters the battlefield with four -1/-1 counters on it.\n{U/R}: Target creature can't block Shrewd Hatchling this turn.\nWhenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.\nWhenever you cast a red spell, remove a -1/-1 counter from Shrewd Hatchling.
+Oracle:Shrewd Hatchling enters with four -1/-1 counters on it.\n{U/R}: Target creature can't block Shrewd Hatchling this turn.\nWhenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.\nWhenever you cast a red spell, remove a -1/-1 counter from Shrewd Hatchling.

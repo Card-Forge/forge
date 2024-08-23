@@ -123,7 +123,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             result.add(c.getKey());
         }
         if (result.size() > 1) { //sort by type so signature spell comes after oathbreaker
-            Collections.sort(result, Comparator.comparing(c -> c.getRules().canBeSignatureSpell()));
+            result.sort(Comparator.comparing(c -> c.getRules().canBeSignatureSpell()));
         }
         return result;
     }
@@ -550,7 +550,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public void setAiHints(String aiHintsInfo) {
-        if (aiHintsInfo == null || aiHintsInfo.trim().equals("")) {
+        if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
         }
         String[] hints = aiHintsInfo.split("\\|");

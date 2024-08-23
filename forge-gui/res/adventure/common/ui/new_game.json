@@ -65,14 +65,14 @@
       "yOffset": 8
     },
 	{
-      "type": "TextButton",
+      "type": "ImageButton",
       "name": "difficultyHelp",
-      "text": "[GOLD]?",
+      "style": "roundhint",
       "selectable": true,
-      "width": 16,
-      "height": 16,
+      "width": 12,
+      "height": 15,
       "x": 145,
-      "yOffset": -16
+      "yOffset": -17
     },
     {
       "type": "Label",
@@ -93,14 +93,14 @@
       "yOffset": 8
     },
 	{
-      "type": "TextButton",
+      "type": "ImageButton",
       "name": "modeHelp",
-      "text": "[GOLD]?",
+      "style": "roundhint",
       "selectable": true,
-      "width": 16,
-      "height": 16,
+      "width": 12,
+      "height": 15,
       "x": 145,
-      "yOffset": -16
+      "yOffset": -17
     },
 	{
       "type": "Label",
