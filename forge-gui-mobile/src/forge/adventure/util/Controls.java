@@ -493,6 +493,7 @@ public class Controls {
         private final Timer t = new Timer();
         private boolean smallText;
         private boolean shouldUpdate;
+        private SequenceAction alphaAdjustSequenceAction = null;
 
         public AccountingLabel(TextraLabel target, boolean isShards, boolean smallText) {
             target.setVisible(false);
@@ -549,12 +550,17 @@ public class Controls {
             if (fadeIn) {
                 float startAlpha = label.getColor().a / 2;
                 float endAlpha = label.getColor().a;
-                SequenceAction sequence = new SequenceAction();
-                sequence.addAction(Actions.alpha(startAlpha));
-                sequence.addAction(Actions.alpha(endAlpha, 2f, Interpolation.pow2Out));
-                finalLabel.addAction(sequence);
+                alphaAdjustSequenceAction = new SequenceAction();
+                alphaAdjustSequenceAction.addAction(Actions.alpha(startAlpha));
+                alphaAdjustSequenceAction.addAction(Actions.alpha(endAlpha, 2f, Interpolation.pow2Out));
+                finalLabel.addAction(alphaAdjustSequenceAction);
             }
             replaceLabel(finalLabel);
+        }
+
+        public void stopAlphaAdjustSequenceAction() {
+            if (alphaAdjustSequenceAction != null)
+                alphaAdjustSequenceAction.reset();
         }
 
         private TextraLabel getDefaultLabel() {
@@ -597,23 +603,24 @@ public class Controls {
             placeholder.getStage().addActor(label);
         }
 
+        public void setAlpha(float alpha) {
+            stopAlphaAdjustSequenceAction();
+            label.getColor().a = alpha;
+        }
+
         private class AccountingLabelUpdater extends Timer.Task {
+            TextraLabel target;
+
+            AccountingLabelUpdater(TextraLabel replacement) {
+                this.target = replacement;
+            }
+
             @Override
             public void run() {
                 if (label.equals(target)) {
                     drawFinalLabel(true);
                 }
             }
-
-            TextraLabel target;
-
-            AccountingLabelUpdater(TextraLabel replacement) {
-                this.target = replacement;
-            }
-        }
-
-        public void setAlpha(float alpha) {
-            this.label.getColor().a = alpha;
         }
     }
 
