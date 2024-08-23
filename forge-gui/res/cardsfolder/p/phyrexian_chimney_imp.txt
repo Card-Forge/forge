@@ -1,0 +1,8 @@
+Name:Phyrexian Chimney Imp
+ManaCost:4 PB
+Types:Creature Phyrexian Imp
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME dies, target opponent puts two cards from their hand on top of their library in any order.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ 0 | ValidTgts$ Opponent | Chooser$ Targeted | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | Reorder$ True | IsCurse$ True
+Oracle:Flying\nWhen Phyrexian Chimney Imp dies, target opponent puts two cards from their hand on top of their library in any order.

@@ -1,0 +1,7 @@
+Name:Incubob
+ManaCost:1 B
+Types:Sorcery
+K:Flashback:3 B PayLife<3>
+A:SP$ Token | TokenScript$ incubator_dark_confidant | WithCountersType$ P1P1 | WithCountersAmount$ 1 | SpellDescription$ Incubate Dark Confidant 1. (Create an Incubator Dark Confidant token with a +1/+1 counter on it and "{2}: Transform this artifact." It transforms into Dark Confidant, except it's also a Phyrexian.)
+DeckHas:Ability$Token|Counters & Type$Incubator|Artifact|Phyrexian|Human|Wizard
+Oracle:Incubate Dark Confidant 1. (Create an Incubator Dark Confidant token with a +1/+1 counter on it and "{2}: Transform this artifact." It transforms into Dark Confidant, except it's also a Phyrexian.)\nFlashback—{3}{B}, Pay 3 life.

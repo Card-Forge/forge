@@ -1,0 +1,9 @@
+Name:Norin and Feldon
+ManaCost:1 R
+Types:Legendary Creature Human Warrior Artificer
+PT:2/2
+A:AB$ CopyPermanent | Cost$ 2 R T | SorcerySpeed$ True | TgtZone$ Graveyard | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | NumCopies$ 1 | AddTypes$ Artifact | PumpKeywords$ Haste | AddSVars$ NorinExile | AddTriggers$ Norin1,Norin2 | SpellDescription$ Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types, gains haste, and has "Whenever a player casts a spell or a creature attacks, exile this token." Activate only as a sorcery.
+SVar:Norin1:Mode$ SpellCast | ValidCard$ Card | Execute$ NorinExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a spell or a creature attacks, exile this token.
+SVar:Norin2:Mode$ Attacks | ValidCard$ Creature | Execute$ NorinExile | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a player casts a spell or a creature attacks, exile this token.
+SVar:NorinExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+Oracle:{2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact in addition to its other types, gains haste, and has "Whenever a player casts a spell or a creature attacks, exile this token." Activate only as a sorcery.

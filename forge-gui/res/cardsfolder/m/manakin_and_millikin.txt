@@ -1,0 +1,8 @@
+Name:Manakin and Millikin
+ManaCost:3
+Types:Artifact Creature Construct
+PT:1/2
+A:AB$ Mana | Cost$ T Mill<1> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
+Oracle:{T}, Mill a card: Add {C}{C}.

@@ -1,0 +1,11 @@
+Name:Locus Cobra
+ManaCost:1 G
+Types:Creature Phyrexian Snake
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, add one mana of any color. If it was a Locus or Sphere land, put a +1/+1 counter on CARDNAME.
+SVar:TrigMana:DB$ Mana | Produced$ Any | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ConditionDefined$ TriggeredCard | ConditionPresent$ Locus,Sphere
+SVar:BuffedBy:Locus,Sphere
+DeckHas:Ability$Counters
+DeckHints:Type$Locus|Sphere
+Oracle:Landfall — Whenever a land enters the battlefield under your control, add one mana of any color. If it was a Locus or Sphere land, put a +1/+1 counter on Locus Cobra.

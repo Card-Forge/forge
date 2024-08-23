@@ -1,0 +1,7 @@
+Name:Phyrexian Ornithopter
+ManaCost:1
+Types:Artifact Creature Thopter
+PT:0/2
+K:Flying
+K:Toxic:1
+Oracle:Flying\nToxic 1 (Players dealt combat damage by this creature also get a poison counter.)

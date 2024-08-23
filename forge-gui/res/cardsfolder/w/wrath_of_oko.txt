@@ -1,0 +1,5 @@
+Name:Wrath of Oko
+ManaCost:2 U U
+Types:Sorcery
+A:SP$ AnimateAll | ValidCards$ Creature | Power$ 3 | Toughness$ 3 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Creature,Elk | RemoveCreatureTypes$ True | RemoveCardTypes$ True | Duration$ Permanent | SpellDescription$ All creatures loose all abilities and become green Elk creatures with base power and toughness 3/3. (This effect lasts indefinitely. Just like Oko. Unfortunately.)
+Oracle:All creatures loose all abilities and become green Elk creatures with base power and toughness 3/3. (This effect lasts indefinitely. Just like Oko. Unfortunately.)

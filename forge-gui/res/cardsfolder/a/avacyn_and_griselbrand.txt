@@ -1,0 +1,11 @@
+Name:Avacyn and Griselbrand
+ManaCost:4 W W B B
+Types:Legendary Creature Angel Demon
+PT:8/8
+K:Flying
+K:Vigilance
+K:Lifelink
+A:AB$ PumpAll | Cost$ PayLife<8> | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SubAbility$ DBDraw | SpellDescription$ Each creature you control gains indestructible until end of turn. Then, draw a card for each creature you control.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$TypeYouCtrl.Creature
+Oracle:Flying, vigilance, lifelink\nPay 8 life: Each creature you control gains indestructible until end of turn. Then, draw a card for each creature you control.
