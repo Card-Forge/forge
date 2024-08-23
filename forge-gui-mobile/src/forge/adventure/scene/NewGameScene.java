@@ -61,7 +61,7 @@ public class NewGameScene extends MenuScene {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
-        selectedName.setText(NameGenerator.getRandomName(gender.getCurrentIndex() > 0 ? "Female" : "Male", "Any", ""));
+        generateName();
         avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
         modeHelp = ui.findActor("modeHelp");
@@ -239,7 +239,7 @@ public class NewGameScene extends MenuScene {
             return true;
         started = true;
         if (selectedName.getText().isEmpty()) {
-            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+            generateName();
         }
         Runnable runnable = () -> {
             started = false;
