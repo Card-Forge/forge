@@ -181,8 +181,16 @@ public class NewGameScene extends MenuScene {
         ui.onButtonPress("start", NewGameScene.this::start);
         ui.onButtonPress("leftAvatar", NewGameScene.this::leftAvatar);
         ui.onButtonPress("rightAvatar", NewGameScene.this::rightAvatar);
-        difficultyHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showDifficultyHelp(); }});
-        modeHelp.addListener(new ClickListener(){ public void clicked(InputEvent e, float x, float y){ showModeHelp(); }});
+        difficultyHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                showDifficultyHelp();
+            }
+        });
+        modeHelp.addListener(new ClickListener() {
+            public void clicked(InputEvent e, float x, float y) {
+                showModeHelp();
+            }
+        });
     }
 
     private static NewGameScene object;
@@ -195,6 +203,7 @@ public class NewGameScene extends MenuScene {
 
     float avatarT = 1f, avatarTT = 1f;
     float nameT = 1f, nameTT = 1f;
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -211,10 +220,12 @@ public class NewGameScene extends MenuScene {
             nameTT = nameT;
         }
     }
+
     private void generateAvatar() {
         avatarIndex = rand.nextInt();
         updateAvatar();
     }
+
     private void generateName() {
         //gender should be either Male or Female
         String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
@@ -327,11 +338,11 @@ public class NewGameScene extends MenuScene {
         dismiss.name = "OK";
 
         DialogData matchImpacts = new DialogData();
-        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int)(selectedDifficulty.enemyLifeFactor * 100) , (int)(selectedDifficulty.goldLoss*100), (int)(selectedDifficulty.lifeLoss*100));
+        matchImpacts.text = String.format("Difficulty: %s\nStarting Life: %d\nEnemy Health: %d%%\nGold loss on defeat: %d%%\nLife loss on defeat: %d%%", selectedDifficulty.name, selectedDifficulty.startingLife, (int) (selectedDifficulty.enemyLifeFactor * 100), (int) (selectedDifficulty.goldLoss * 100), (int) (selectedDifficulty.lifeLoss * 100));
         matchImpacts.name = "Duels";
 
         DialogData economyImpacts = new DialogData();
-        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int)(selectedDifficulty.sellFactor*100), (int)(selectedDifficulty.shardSellRatio*100), (int)(selectedDifficulty.rewardMaxFactor*100));
+        economyImpacts.text = String.format("Difficulty: %s\nStarting Gold: %d\nStarting Mana Shards: %d\nCard Sale Price: %d%%\nMana Shard Sale Price: %d%%\nRandom loot rate: %d%%", selectedDifficulty.name, selectedDifficulty.staringMoney, selectedDifficulty.startingShards, (int) (selectedDifficulty.sellFactor * 100), (int) (selectedDifficulty.shardSellRatio * 100), (int) (selectedDifficulty.rewardMaxFactor * 100));
         economyImpacts.name = "Economy";
 
         difficultySummary.options = new DialogData[3];
