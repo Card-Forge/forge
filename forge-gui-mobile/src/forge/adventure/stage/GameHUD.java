@@ -694,8 +694,8 @@ public class GameHUD extends Stage {
         setVisibility(shards, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "---");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "---");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -810,8 +810,8 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon();
-                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "---");
-                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "---");
+                    setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\uFF0F");
+                    setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\uFF0F");
                 }
                 return true;
             }

@@ -458,6 +458,11 @@
 		"down": "right_down",
 		"focused": "right_f"
 	},
+	"roundhint": {
+		"up": "unpressedround",
+		"down": "pressedround",
+		"focused": "unpressedround"
+	},
 	"item_frame": {
 		"imageCheckedOver": "item_frame_selected_hover",
 		"up": "item_frame",

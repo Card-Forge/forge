@@ -3,12 +3,12 @@ package forge.adventure.scene;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DialogData;
@@ -48,17 +48,17 @@ public class NewGameScene extends MenuScene {
     private final TextraLabel starterEditionLabel;
     private final Array<String> custom;
     private final TextraLabel colorLabel;
-    private final TextraButton difficultyHelp;
+    private final ImageButton difficultyHelp;
     private DialogData difficultySummary;
-    private final TextraButton modeHelp;
+    private final ImageButton modeHelp;
     private DialogData modeSummary;
+    private final Random rand = new Random();
 
     private final Array<AdventureModes> modes = new Array<>();
 
     private NewGameScene() {
 
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
-
         gender = ui.findActor("gender");
         selectedName = ui.findActor("nameField");
         selectedName.setText(NameGenerator.getRandomName(gender.getCurrentIndex() > 0 ? "Female" : "Male", "Any", ""));
@@ -127,13 +127,12 @@ public class NewGameScene extends MenuScene {
             modeNames[i] = modes.get(i).getName();
         mode.setTextList(modeNames);
 
-        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale"), Forge.getLocalizer().getMessage("lblFemale")});
+        gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
+                Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
         gender.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //gender should be either Male or Female
-                String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
-                selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
+                nameTT = 0.8f;
                 super.clicked(event, x, y);
             }
         });
@@ -150,6 +149,13 @@ public class NewGameScene extends MenuScene {
             }
         });
         race = ui.findActor("race");
+        race.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                avatarTT = 0.7f;
+                super.clicked(event, x, y);
+            }
+        });
         race.addListener(event -> NewGameScene.this.updateAvatar());
         race.setTextList(HeroListData.getRaces());
         difficulty = ui.findActor("difficulty");
@@ -167,9 +173,7 @@ public class NewGameScene extends MenuScene {
         difficulty.setTextList(diffList);
         difficulty.setCurrentIndex(startingDifficulty);
 
-        Random rand = new Random();
-        avatarIndex = rand.nextInt();
-        updateAvatar();
+        generateAvatar();
         gender.setCurrentIndex(rand.nextInt());
         colorId.setCurrentIndex(rand.nextInt());
         race.setCurrentIndex(rand.nextInt());
@@ -187,6 +191,34 @@ public class NewGameScene extends MenuScene {
         if (object == null)
             object = new NewGameScene();
         return object;
+    }
+
+    float avatarT = 1f, avatarTT = 1f;
+    float nameT = 1f, nameTT = 1f;
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if (avatarT > avatarTT) {
+            avatarTT += (delta / 0.5f);
+            generateAvatar();
+        } else {
+            avatarTT = avatarT;
+        }
+        if (nameT > nameTT) {
+            nameTT += (delta / 0.5f);
+            generateName();
+        } else {
+            nameTT = nameT;
+        }
+    }
+    private void generateAvatar() {
+        avatarIndex = rand.nextInt();
+        updateAvatar();
+    }
+    private void generateName() {
+        //gender should be either Male or Female
+        String val = gender.getCurrentIndex() > 0 ? "Female" : "Male";
+        selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
     }
 
     boolean started = false;
