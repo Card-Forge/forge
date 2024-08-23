@@ -691,7 +691,6 @@ public class GameHUD extends Stage {
         setVisibility(miniMapPlayer, visible);
         setVisibility(gamehud, visible);
 
-//        misha-colbourne: Commented these out to keep them visible in non-worldmap scenes
         setAlpha(lifePoints, visible);
         setAlpha(shards, visible);
         setAlpha(money, visible);
