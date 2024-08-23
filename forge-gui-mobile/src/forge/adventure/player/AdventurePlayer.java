@@ -79,6 +79,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     final SignalList onBlessing = new SignalList();
     private PointOfInterestChanges currentLocationChanges;
 
+    private boolean currentlyLoading = false;
+
     public AdventurePlayer() {
         clear();
     }
@@ -267,6 +269,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return colorIdentity.toString();
     }
 
+    public boolean isCurrentlyLoading() { return currentlyLoading; }
 
     //Setters
     public void setWorldPosX(float worldPosX) {
@@ -289,6 +292,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     @Override
     public void load(SaveFileData data) {
         clear(); //Reset player data.
+        this.currentlyLoading = true;
+
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife = data.readInt("startingLife");
         this.difficultyData.staringMoney = data.readInt("staringMoney");
@@ -485,6 +490,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onShardsChangeList.emit();
         onGoldChangeList.emit();
         onBlessing.emit();
+
+        this.currentlyLoading = false;
     }
 
     @Override

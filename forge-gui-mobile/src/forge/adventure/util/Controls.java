@@ -492,6 +492,7 @@ public class Controls {
         private final String POSDECOR = "[GREEN]+";
         private final Timer t = new Timer();
         private boolean smallText;
+        private boolean shouldUpdate;
 
         public AccountingLabel(TextraLabel target, boolean isShards, boolean smallText) {
             target.setVisible(false);
@@ -530,8 +531,8 @@ public class Controls {
         }
 
         public void update(int newAmount, boolean animate) {
-
-            if (animate) {
+            // Check if currently loading to avoid animating initial gold/shard values
+            if (animate && !AdventurePlayer.current().isCurrentlyLoading()) {
                 TextraLabel temporaryLabel = getUpdateLabel(newAmount);
                 currencyAmount = newAmount;
                 replaceLabel(temporaryLabel);
@@ -544,12 +545,13 @@ public class Controls {
         }
 
         private void drawFinalLabel(boolean fadeIn) {
-
             TextraLabel finalLabel = getDefaultLabel();
             if (fadeIn) {
+                float startAlpha = label.getColor().a / 2;
+                float endAlpha = label.getColor().a;
                 SequenceAction sequence = new SequenceAction();
-                sequence.addAction(Actions.alpha(0.5f));
-                sequence.addAction(Actions.alpha(1f, 2f, Interpolation.pow2Out));
+                sequence.addAction(Actions.alpha(startAlpha));
+                sequence.addAction(Actions.alpha(endAlpha, 2f, Interpolation.pow2Out));
                 finalLabel.addAction(sequence);
             }
             replaceLabel(finalLabel);
