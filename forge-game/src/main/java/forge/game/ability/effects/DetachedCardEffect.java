@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import forge.card.GamePieceType;
 import forge.game.card.Card;
+import forge.game.player.Player;
 
 //Class for an effect that acts as its own card instead of being attached to a card
 //Example: Commander Effect
@@ -17,6 +18,15 @@ public class DetachedCardEffect extends Card {
         setGamePieceType(GamePieceType.EFFECT);
 
         setEffectSource(card0);
+    }
+
+    public DetachedCardEffect(Player owner, String name) {
+        super(owner.getGame().nextCardId(), null, owner.getGame());
+        this.card = null;
+
+        this.setName(name);
+        this.setOwner(owner);
+        this.setGamePieceType(GamePieceType.EFFECT);
     }
 
     @Override

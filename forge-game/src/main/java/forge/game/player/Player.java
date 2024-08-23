@@ -175,7 +175,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card activeScheme = null;
     private final CardCollection commanders = new CardCollection();
     private final Map<Card, Integer> commanderCast = Maps.newHashMap();
-    private final Map<Card, Card> commanderEffects = Maps.newHashMap();
+    private DetachedCardEffect commanderEffect = null;
     private final Game game;
     private boolean triedToDrawFromEmptyLibrary = false;
     private CardCollection lostOwnership = new CardCollection();
@@ -2773,8 +2773,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             needsUpdate = true;
             this.commanders.remove(oldCommander);
             oldCommander.setCommander(false);
-            this.cleanupCommanderEffect(oldCommander);
         }
+        if(this.commanderEffect == null && !commanders.isEmpty())
+            this.createCommanderEffect();
         //Add any new commanders that aren't in the existing list.
         for(Card newCommander : commanders) {
             assert(this.equals(newCommander.getOwner()));
@@ -2784,7 +2785,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             needsUpdate = true;
             this.commanders.add(newCommander);
             newCommander.setCommander(true);
-            this.createCommanderEffect(newCommander);
         }
         if(needsUpdate) {
             view.updateCommander(this);
@@ -2799,11 +2799,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         toPlayer.commanders.clear();
         for (final Card c : this.getCommanders()) {
             Card newCommander = toGame.findById(c.getId());
-            Card newCommanderEffect = toGame.findById(commanderEffects.get(c).getId());
-            if(newCommander == null || newCommanderEffect == null)
+            if(newCommander == null)
                 throw new RuntimeException("Unable to find commander in game snapshot: " + c);
             toPlayer.commanders.add(newCommander);
-            toPlayer.commanderEffects.put(newCommander, newCommanderEffect);
             newCommander.setCommander(true);
         }
         for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
@@ -2816,6 +2814,16 @@ public class Player extends GameEntity implements Comparable<Player> {
             int damage = entry.getValue();
             toPlayer.addCommanderDamage(commander, damage);
         }
+        if (this.commanderEffect != null) {
+            Card commanderEffect = toGame.findById(this.commanderEffect.getId());
+            if(commanderEffect instanceof DetachedCardEffect)
+                toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
+            else {
+                //TODO: GameSnapshot converts DetachedCardEffects to cards. This can be simplified when that's resolved.
+                toPlayer.getZone(ZoneType.Command).remove(commanderEffect);
+                toPlayer.createCommanderEffect();
+            }
+        }
     }
 
     public void addCommander(Card commander) {
@@ -2823,7 +2831,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         if(this.commanders.contains(commander))
             return;
         this.commanders.add(commander);
-        this.createCommanderEffect(commander);
+        if(this.commanderEffect == null)
+            this.createCommanderEffect();
         commander.setCommander(true);
         view.updateCommander(this);
     }
@@ -2831,9 +2840,25 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void removeCommander(Card commander) {
         if(!this.commanders.remove(commander))
             return;
-        this.cleanupCommanderEffect(commander);
         commander.setCommander(false);
         view.updateCommander(this);
+    }
+
+    /**
+     * Toggles whether the commander replacement effect is active.
+     * (i.e. the option to send your commander to the command zone when
+     * it would otherwise be sent to your library)
+     * <p>
+     * Used when moving a merged permanent with a commander component.
+     * Causes the commander replacement to only be applied after the merged
+     * permanent is split up, rather than causing every component card to be moved.
+     */
+    public void setCommanderReplacementSuppressed(boolean suppress) {
+        if(this.commanderEffect == null)
+            return;
+        for (final ReplacementEffect re : this.commanderEffect.getReplacementEffects()) {
+            re.setSuppressed(suppress);
+        }
     }
 
     public Iterable<Entry<Card, Integer>> getCommanderDamage() {
@@ -3011,7 +3036,6 @@ public class Player extends GameEntity implements Comparable<Player> {
                                     Lang.joinHomogenous(chosenColors)), p);
                 }
                 cmd.setCollectible(true);
-                cmd.setCommander(true);
                 com.add(cmd);
                 this.addCommander(cmd);
             }
@@ -3199,59 +3223,56 @@ public class Player extends GameEntity implements Comparable<Player> {
         return eff;
     }
 
-    private void createCommanderEffect(Card commander) {
-        final String name = Lang.getInstance().getPossesive(commander.getName()) + " Commander Effect";
-        DetachedCardEffect eff = new DetachedCardEffect(commander, name);
+    public void createCommanderEffect() {
+        PlayerZone com = getZone(ZoneType.Command);
+        if(this.commanderEffect != null)
+            com.remove(this.commanderEffect);
 
-        if (game.getRules().hasAppliedVariant(GameType.Oathbreaker) && commander.getRules().canBeSignatureSpell()) {
+        DetachedCardEffect eff = new DetachedCardEffect(this, "Commander Effect");
+
+        String validCommander = "Card.IsCommander+YouOwn";
+        if (game.getRules().hasAppliedVariant(GameType.Oathbreaker)) {
             //signature spells can only reside on the stack or in the command zone
             String effStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Command | Defined$ ReplacedCard";
 
-            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Destination$ Graveyard,Exile,Hand,Library | " +
+            String moved = "Event$ Moved | ValidCard$ Spell.IsCommander+YouOwn | Secondary$ True | Destination$ Graveyard,Exile,Hand,Library | " +
                     "Description$ If a signature spell would be put into another zone from the stack, put it into the command zone instead.";
             ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
             re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
             eff.addReplacementEffect(re);
 
+            //TODO: Actual recognition for signature spells as their own thing, separate from commanders.
+            validCommander = "Permanent.IsCommander+YouOwn";
+
             //signature spells can only be cast if your oathbreaker is in on the battlefield under your control
-            String castRestriction = "Mode$ CantBeCast | ValidCard$ Card.EffectSource+YouOwn | EffectZone$ Command | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | PresentZone$ Battlefield | PresentCompare$ EQ0 | " +
+            String castRestriction = "Mode$ CantBeCast | ValidCard$ Spell.IsCommander+YouOwn | EffectZone$ Command | IsPresent$ Permanent.IsCommander+YouOwn+YouCtrl | PresentZone$ Battlefield | PresentCompare$ EQ0 | " +
                     "Description$ Signature spell can only be cast if your oathbreaker is on the battlefield under your control.";
             eff.addStaticAbility(castRestriction);
         }
-        else {
-            String effStr = "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard";
 
-            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | CommanderMoveReplacement$ True ";
-            if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
-                moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
-            }
-            else if (game.getRules().hasAppliedVariant(GameType.Oathbreaker)) {
-                moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
-            } else {
-                // rule 903.9b
-                moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner's hand or library from anywhere, its owner may put it into the command zone instead.";
-            }
-            ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
-            re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
-            eff.addReplacementEffect(re);
+        String effStr = "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard";
+
+        String moved = "Event$ Moved | ValidCard$ " + validCommander + " | Secondary$ True | Optional$ True | OptionalDecider$ You | CommanderMoveReplacement$ True ";
+        if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
+            moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
         }
+        else if (game.getRules().hasAppliedVariant(GameType.Oathbreaker)) {
+            moved += " | Destination$ Graveyard,Exile,Hand,Library | Description$ If a commander would be exiled or put into hand, graveyard, or library from anywhere, that player may put it into the command zone instead.";
+        } else {
+            // rule 903.9b
+            moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner's hand or library from anywhere, its owner may put it into the command zone instead.";
+        }
+        ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
+        re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
+        eff.addReplacementEffect(re);
 
-        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
+        String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.IsCommander+YouOwn | AffectedZone$ Command";
         if (game.getRules().hasAppliedVariant(GameType.Planeswalker)) { //support paying for Planeswalker with any color mana
             mayBePlayedAbility += " | MayPlayIgnoreColor$ True";
         }
         eff.addStaticAbility(mayBePlayedAbility);
-        commander.getOwner().commanderEffects.put(commander, eff);
-        getZone(ZoneType.Command).add(eff);
-    }
-
-    private void cleanupCommanderEffect(Card commander) {
-        Card existing = commanderEffects.get(commander);
-        if(existing == null) {
-            return;
-        }
-        game.getAction().exileEffect(existing);
-        commanderEffects.remove(commander);
+        this.commanderEffect = eff;
+        com.add(eff);
     }
 
     public void createPlanechaseEffects(Game game) {

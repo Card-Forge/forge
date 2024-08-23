@@ -1179,6 +1179,8 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
+        if (!p.getCommanders().isEmpty())
+            p.createCommanderEffect(); //Original one was lost, and the one made by addCommander would have been erased by setCards.
 
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
