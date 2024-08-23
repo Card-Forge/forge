@@ -1,0 +1,9 @@
+Name:Glorious Dragon-Kin
+ManaCost:7
+Types:Artifact Creature Dragon
+PT:6/6
+K:Flying
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl,Dragon.YouCtrl | AddKeyword$ Protection:Card.ChosenColor:chosenColor | Description$ Artifact creatures and Dragons you control have protection from the chosen color.
+Oracle:Flying\nAs Glorious Dragon-Kin enters the battlefield, choose a color.\nArtifact creatures and Dragons you control have protection from the chosen color.

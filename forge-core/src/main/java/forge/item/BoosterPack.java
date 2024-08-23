@@ -32,6 +32,10 @@ public class BoosterPack extends SealedProduct {
 
     public static BoosterPack fromSet(CardEdition edition) {
         String boosterKind = edition.getRandomBoosterKind();
+        if (boosterKind == null) {
+            return null;
+        }
+
         SealedTemplate d = edition.getBoosterTemplate(boosterKind);
         StringBuilder sb = new StringBuilder(edition.getName());
         sb.append(" ").append(boosterKind);

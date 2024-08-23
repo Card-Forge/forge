@@ -1,0 +1,11 @@
+Name:Innistrad Charm
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ CemeteryRecruitment,Duress,HumanFrailty | Defined$ You
+SVar:CemeteryRecruitment:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBDraw | RememberChanged$ True | SpellDescription$ Return target creature card from your graveyard to your hand. If it's a Zombie card, draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card.Zombie | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Duress:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonCreature+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card.
+SVar:HumanFrailty:DB$ Destroy | ValidTgts$ Creature.Human | TgtPrompt$ Choose target Human creature. | SpellDescription$ Destroy target Human creature.
+DeckHints:Type$Zombie
+Oracle:Choose one —\n• Cemetery Recruitment (Return a creature card from graveyard to hand, draw a card if it's a Zombie.)\n• Duress (Look at their hand, make them discard a noncreature, nonland.)\n• Human Frailty (Destroy target Human.)

@@ -1,0 +1,11 @@
+Name:Really Charming Prince
+ManaCost:1 U
+Types:Creature Faerie Noble
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose one of the following four cards at random: Piracy Charm, Sapphire Charm, Trickery Charm, and Vision Charm. You may create a copy of the chosen card and cast that copy without paying its mana cost.
+SVar:TrigChoose:DB$ NameCard | AtRandom$ True | ChooseFromList$ Piracy Charm,Sapphire Charm,Trickery Charm,Vision Charm | SubAbility$ DBCast | StackDescription$ SpellDescription
+SVar:DBCast:DB$ Play | WithoutManaCost$ True | CopyFromChosenName$ True | Optional$ True | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+SVar:PlayMain1:TRUE
+Oracle:Flying\nWhen Really Charming Prince enters the battlefield, choose one of the following four cards at random: Piracy Charm, Sapphire Charm, Trickery Charm, and Vision Charm. You may create a copy of the chosen card and cast that copy without paying its mana cost.

@@ -91,10 +91,10 @@ public final class GameActionUtil {
             return alternatives;
         }
 
-        if (sa.isSpell()) {
+        if (sa.isSpell() || sa.isLandAbility()) {
             boolean lkicheck = false;
 
-            Card newHost = ((Spell)sa).getAlternateHost(source);
+            Card newHost = sa.getAlternateHost(source);
             if (newHost != null) {
                 source = newHost;
                 lkicheck = true;
@@ -605,6 +605,22 @@ public final class GameActionUtil {
                     result.setOptionalKeywordAmount(ki, 1);
                     reset = true;
                 }
+            } else if (o.startsWith("Multikicker")) {
+                String costStr = o.split(":")[1];
+                final Cost cost = new Cost(costStr, false);
+
+                String str = "Choose Amount for Multikicker: " + cost.toSimpleString();
+
+                int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                for (int i = 0; i < v; i++) {
+                    if (result == null) {
+                        result = sa.copy();
+                    }
+                    result.getPayCosts().add(cost);
+                    reset = true;
+                }
+                result.setOptionalKeywordAmount(ki, v);
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);

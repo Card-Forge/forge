@@ -875,17 +875,23 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    for (Card cc : cards) {
-                        cc.removeImprintedCard(c);
-                        cc.removeEncodedCard(c);
-                        cc.removeRemembered(c);
-                        cc.removeAttachedTo(c);
-                        cc.removeAttachedCard(c);
+                    if (c.getEffectSource() != null && !c.isEmblem()) {
+                        // move effect to another player so they continue to work
+                        c.getZone().remove(c);
+                        getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
+                    } else {
+                        for (Card cc : cards) {
+                            cc.removeImprintedCard(c);
+                            cc.removeEncodedCard(c);
+                            cc.removeRemembered(c);
+                            cc.removeAttachedTo(c);
+                            cc.removeAttachedCard(c);
+                        }
+                        triggerList.put(c.getZone().getZoneType(), null, c);
+                        getAction().ceaseToExist(c, false);
+                        // CR 603.2f owner of trigger source lost game
+                        getTriggerHandler().clearDelayedTrigger(c);
                     }
-                    triggerList.put(c.getZone().getZoneType(), null, c);
-                    getAction().ceaseToExist(c, false);
-                    // CR 603.2f owner of trigger source lost game
-                    getTriggerHandler().clearDelayedTrigger(c);
                 } else {
                     // return stolen permanents
                     if (c.isInPlay() && (c.getController().equals(p) || c.getZone().getPlayer().equals(p))) {

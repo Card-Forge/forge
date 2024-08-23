@@ -1,0 +1,8 @@
+Name:Jeska and Kamahl
+ManaCost:3 R
+Types:Legendary Creature Human Barbarian Warrior
+PT:4/1
+K:First Strike
+K:Haste
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Opponent,Planeswalker,Battle | TgtPrompt$ Select target opponent, battle, or planeswalker | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target opponent, battle, or planeswalker.
+Oracle:Haste, first strike\n{T}: Jeska and Kamahl deals 2 damage to target opponent, battle, or planeswalker.

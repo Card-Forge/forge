@@ -8,7 +8,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 
@@ -45,7 +45,7 @@ public class DiscoverAi extends SpellAbilityAi {
     public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         Card c = (Card)params.get("Card");
         for (SpellAbility s : AbilityUtils.getBasicSpellsFromPlayEffect(c, ai)) {
-            if (s instanceof LandAbility) {
+            if (s.isLandAbility()) {
                 // return false or we get a ClassCastException later if the AI encounters MDFC with land backside
                 return false;
             }

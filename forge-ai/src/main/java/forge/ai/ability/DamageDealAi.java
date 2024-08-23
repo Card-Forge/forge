@@ -95,8 +95,8 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
-        if (damage.equals("X") || sourceName.equals("Crater's Claws")) {
-            if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
+        if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
+            if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
                 dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible

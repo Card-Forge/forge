@@ -1,0 +1,9 @@
+Name:Theros Charm
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | Choices$ IdyllicTutor,RevokeExistence,Reprisal | Defined$ You
+SVar:IdyllicTutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Enchantment | ChangeNum$ 1 | SpellDescription$ Search your library for an enchantment card, reveal it, put it into your hand, then shuffle.
+SVar:RevokeExistence:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
+SVar:Reprisal:DB$ Destroy | ValidTgts$ Creature.powerGE4 | TgtPrompt$ Select target creature with power 4 or greater | NoRegen$ True | SpellDescription$ Destroy target creature with power 4 or greater. It can't be regenerated.
+DeckHints:Type$Enchantment
+Oracle:Choose one —\n• Idyllic Tutor (Search for an enchantment.)\n• Revoke Existence (Exile an artifact or enchantment.)\n• Reprisal (Destroy a creature with power 4 or greater. It can't be regenerated.)

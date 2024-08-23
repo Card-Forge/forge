@@ -1,0 +1,8 @@
+Name:Try-My-Deck Elemental
+ManaCost:3 W
+Types:Creature Elemental
+PT:4/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AffectedZone$ Stack | AddKeyword$ Demonstrate | Description$ Commander spells you cast have demonstrate. (When you cast a commander spell, you may copy it. If you do, choose an opponent to also copy it. The copies become tokens.)
+S:Mode$ IgnoreLegendRule | ValidCard$ Card.IsCommander+YouCtrl | Description$ The "legend rule" doesn't apply to commanders you control.
+Oracle:Flying\nCommander spells you cast have demonstrate. (When you cast a commander spell, you may copy it. If you do, choose an opponent to also copy it. The copies become tokens.)\nThe "legend rule" doesn't apply to commanders you control.

@@ -2307,7 +2307,6 @@ public class GameAction {
         p.createMonarchEffect(set);
         game.setMonarch(p);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
@@ -2332,7 +2331,6 @@ public class GameAction {
         }
 
         // You can take the initiative even if you already have it
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.TakesInitiative, runParams, false);
     }

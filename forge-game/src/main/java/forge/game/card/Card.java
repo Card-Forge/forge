@@ -2499,6 +2499,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         sb.append("exile it haunting target creature.");
                     }
                     sb.append(")");
+                } else if (keyword.startsWith("Bands with other")) {
+                    final String[] k = keyword.split(":");
+                    String desc = k.length > 2 ? k[2] : CardType.getPluralType(k[1]);
+                    sbLong.append(k[0]).append(" ").append(desc).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.equals("Convoke") || keyword.equals("Dethrone")|| keyword.equals("Fear")
                          || keyword.equals("Melee") || keyword.equals("Improvise")|| keyword.equals("Shroud")
                          || keyword.equals("Banding") || keyword.equals("Intimidate")|| keyword.equals("Evolve")
@@ -4312,7 +4316,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setAttractionLights(attractionLights);
     }
 
-
     public final int getBasePower() {
         return currentState.getBasePower();
     }
@@ -4704,11 +4707,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
     }
 
-    private int multiKickerMagnitude = 0;
-    public final void setKickerMagnitude(final int n) { multiKickerMagnitude = n; }
     public final int getKickerMagnitude() {
-        if (multiKickerMagnitude > 0) {
-            return multiKickerMagnitude;
+        if (this.getCastSA() != null && getCastSA().hasOptionalKeywordAmount(Keyword.MULTIKICKER)) {
+            return getCastSA().getOptionalKeywordAmount(Keyword.MULTIKICKER);
         }
         boolean hasK1 = isOptionalCostPaid(OptionalCost.Kicker1);
         return hasK1 == isOptionalCostPaid(OptionalCost.Kicker2) ? (hasK1 ? 2 : 0) : 1;
@@ -7459,7 +7460,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             for (SpellAbility sa : getState(CardStateName.Modal).getSpellAbilities()) {
                 //add alternative costs as additional spell abilities
                 // only add Spells there
-                if (sa.isSpell()) {
+                if (sa.isSpell() || sa.isLandAbility()) {
                     abilities.add(sa);
                     abilities.addAll(GameActionUtil.getAlternativeCosts(sa, player, false));
                 }
@@ -7494,106 +7495,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
         abilities.removeAll(toRemove);
-
-        // Land Abilities below, move them to CardFactory after MayPlayRefactor
-        if (getLastKnownZone().is(ZoneType.Battlefield)) {
-            return abilities;
-        }
-        if (getState(CardStateName.Original).getType().isLand()) {
-            LandAbility la = new LandAbility(this, player, null);
-            la.setCardState(oState);
-            if (la.canPlay()) {
-                abilities.add(la);
-            }
-
-            Card source = this;
-            boolean lkicheck = false;
-
-            // if Card is Facedown, need to check if MayPlay still applies
-            if (isFaceDown()) {
-                lkicheck = true;
-                source = CardCopyService.getLKICopy(source);
-                source.forceTurnFaceUp();
-            }
-
-            if (lkicheck) {
-                // double freeze tracker, so it doesn't update view
-                game.getTracker().freeze();
-                CardCollection preList = new CardCollection(source);
-                game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
-            }
-
-            // extra for MayPlay
-            for (CardPlayOption o : source.mayPlay(player)) {
-                la = new LandAbility(this, player, o);
-                la.setCardState(oState);
-                if (la.canPlay()) {
-                    abilities.add(la);
-                }
-            }
-
-            // reset static abilities
-            if (lkicheck) {
-                game.getAction().checkStaticAbilities(false);
-                // clear delayed changes, this check should not have updated the view
-                game.getTracker().clearDelayed();
-                // need to unfreeze tracker
-                game.getTracker().unfreeze();
-            }
-        }
-
-        if (isModal() && hasState(CardStateName.Modal)) {
-            CardState modal = getState(CardStateName.Modal);
-            if (modal.getType().isLand()) {
-                LandAbility la = new LandAbility(this, player, null);
-                la.setCardState(modal);
-
-                Card source = CardCopyService.getLKICopy(this);
-                boolean lkicheck = true;
-
-                // if Card is Facedown, need to check if MayPlay still applies
-                if (isFaceDown()) {
-                    source.forceTurnFaceUp();
-                }
-
-                // the modal state is not copied with lki, need to copy it extra
-                if (!source.hasState(CardStateName.Modal)) {
-                    source.addAlternateState(CardStateName.Modal, false);
-                    source.getState(CardStateName.Modal).copyFrom(this.getState(CardStateName.Modal), true);
-                }
-
-                source.setSplitStateToPlayAbility(la);
-
-                if (la.canPlay(source)) {
-                    abilities.add(la);
-                }
-
-                if (lkicheck) {
-                    // double freeze tracker, so it doesn't update view
-                    game.getTracker().freeze();
-                    CardCollection preList = new CardCollection(source);
-                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
-                }
-
-                // extra for MayPlay
-                for (CardPlayOption o : source.mayPlay(player)) {
-                    la = new LandAbility(this, player, o);
-                    la.setCardState(modal);
-                    if (la.canPlay(source)) {
-                        abilities.add(la);
-                    }
-                }
-
-                // reset static abilities
-                if (lkicheck) {
-                    game.getAction().checkStaticAbilities(false);
-                    // clear delayed changes, this check should not have updated the view
-                    game.getTracker().clearDelayed();
-                    // need to unfreeze tracker
-                    game.getTracker().unfreeze();
-                }
-            }
-        }
 
         return abilities;
     }

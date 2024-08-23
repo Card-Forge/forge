@@ -45,4 +45,8 @@ public class BuildInfo {
         return StringUtils.containsIgnoreCase(forgeVersion, "git") ||
                 StringUtils.containsIgnoreCase(forgeVersion, "snapshot");
     }
+
+    public static String getUserAgent() {
+        return "Forge/" + getVersionString();
+    }
 }

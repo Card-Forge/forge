@@ -4,6 +4,7 @@ Date=2023-05-12
 Name=March of the Machine: The Aftermath
 Type=Expansion
 ScryfallCode=MAT
+BoosterBox=0
 
 [cards]
 1 U Coppercoat Vanguard @Bruno Biazotto

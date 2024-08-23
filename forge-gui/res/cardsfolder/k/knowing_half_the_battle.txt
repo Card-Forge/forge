@@ -1,0 +1,15 @@
+Name:Knowing
+ManaCost:3 U U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
+AlternateMode:Split
+Oracle:Draw three cards.
+
+ALTERNATE
+
+Name:Half the Battle
+ManaCost:2 R
+Types:Sorcery
+DeckHints:Type$Battle
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Battle | ChangeNum$ 1 | SpellDescription$ Search your library for a Battle card, reveal it, put it into your hand, then shuffle.
+Oracle:Search your library for a Battle card, reveal it, put it into your hand, then shuffle.

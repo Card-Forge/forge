@@ -1,0 +1,11 @@
+Name:Segovian Sword
+ManaCost:3
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ For Segovia! (When this Equipment enters the battlefield, create a -1/-1 blue Squid creature token, then attach this to it. Yes, it's a -1/-1 creature.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_m1_m1_squid | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Squid
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Skulk | Description$ Equipped creature gets +2/+2 and has skulk.
+K:Equip:3
+Oracle:For Segovia! (When this Equipment enters the battlefield, create a -1/-1 blue Squid creature token, then attach this to it. Yes, it's a -1/-1 creature.)\nEquipped creature gets +2/+2 and has skulk. (It can't be blocked by creatures with greater power.)\nEquip {3}
