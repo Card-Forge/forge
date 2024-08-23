@@ -51,7 +51,7 @@ public class GameHUD extends Stage {
     private final TextraLabel money;
     private final TextraLabel shards;
     private final TextraLabel keys;
-    private TextraLabel notificationText = Controls.newTextraLabel("");
+    private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
     private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor;

@@ -167,7 +167,7 @@ public class NewGameScene extends MenuScene {
         for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
             if (diff.startingDifficulty)
                 startingDifficulty = i;
-            diffList.add(Forge.getLocalizer().getInstance().getMessageorUseDefault("lbl" + diff.name, diff.name));
+            diffList.add(Forge.getLocalizer().getMessageorUseDefault("lbl" + diff.name, diff.name));
             i++;
         }
         difficulty.setTextList(diffList);
