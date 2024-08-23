@@ -30,7 +30,25 @@ public class ScryAi extends SpellAbilityAi {
             // ability is targeted
             sa.resetTargets();
 
-            sa.getTargets().add(ai);
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else {
+                for (Player p : ai.getAllies()) {
+                    if (sa.canTarget(p)) {
+                        sa.getTargets().add(p);
+                        break;
+                    }
+                }
+                if (mandatory && !sa.isTargetNumberValid()) {
+                    for (Player p : ai.getOpponents()) {
+                        if (sa.canTarget(p)) {
+                            sa.getTargets().add(p);
+                            break;
+                        }
+                    }
+                }
+            }
+            return mandatory || sa.isTargetNumberValid();
         }
 
         return true;
@@ -133,13 +151,12 @@ public class ScryAi extends SpellAbilityAi {
         }
 
         if (sa.usesTargeting()) {
+            sa.resetTargets();
             if (sa.canTarget(ai)) {
-                sa.resetTargets();
                 sa.getTargets().add(ai);
             } else {
                 for (Player p : ai.getAllies()) {
                     if (sa.canTarget(p)) {
-                        sa.resetTargets();
                         sa.getTargets().add(p);
                         break;
                     }
