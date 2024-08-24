@@ -223,6 +223,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return name;
     }
 
+    public Boolean isFemale() {
+        return isFemale;
+    }
+
     public float getWorldPosX() {
         return worldPosX;
     }
