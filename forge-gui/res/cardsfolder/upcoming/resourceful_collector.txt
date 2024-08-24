@@ -8,4 +8,5 @@ SVar:TrigRandom:DB$ ChooseCard | Choices$ Permanent.nonFood+YouOwn | ChoiceZone$
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Types$ Food,Artifact | Duration$ Perpetual | Abilities$ FoodSac | staticAbilities$ MayPlay | SubAbility$ DBCleanup
 SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.Self | AffectedZone$ Graveyard | Description$ You may cast that card for as long as it's in your graveyard.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Haste\nAt the beginning of your end step, a random non-Food permanent card in your graveyard perpetually becomes a Food artifact in addition to its other types and gains "{2}, Exile this artifact: You gain 3 life." You may play that card for as long as it's in your graveyard.

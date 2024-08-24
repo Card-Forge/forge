@@ -1,5 +1,5 @@
 Name:Sandcloud Harbinger
-ManaCost:2/4
+ManaCost:2 W
 Types:Creature Elemental Horse
 PT:2/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$
