@@ -64,7 +64,6 @@ import forge.util.Aggregates;
 import forge.util.ComparatorUtil;
 import forge.util.Expressions;
 import forge.util.MyRandom;
-import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -437,11 +436,11 @@ public class AiController {
         }
 
         landList = CardLists.filter(landList, c -> {
-            CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (canPlaySpellBasic(c, null) != AiPlayDecision.WillPlay) {
                 return false;
             }
             String name = c.getName();
+            CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
                 if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
                     return false;
@@ -461,11 +460,8 @@ public class AiController {
                 }
 
                 // don't play the land if it has cycling and enough lands are available
-                final FCollectionView<SpellAbility> spellAbilities = c.getSpellAbilities();
-                for (final SpellAbility sa : spellAbilities) {
-                    if (sa.isCycling()) {
-                        return false;
-                    }
+                if (c.hasKeyword(Keyword.CYCLING)) {
+                    return false;
                 }
             }
             return Iterables.any(c.getAllPossibleAbilities(player, true), SpellAbility::isLandAbility);
