@@ -1,0 +1,8 @@
+Name:Red Priest of Yawgmoth
+ManaCost:1 R
+Types:Artifact Creature Phyrexian Cleric
+PT:1/2
+A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ X | SpellDescription$ Add an amount of {R} equal to the sacrificed artifact's mana value.
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$Sacrifice
+Oracle:{T}, Sacrifice an artifact: Add an amount of {R} equal to the sacrificed artifact's mana value.

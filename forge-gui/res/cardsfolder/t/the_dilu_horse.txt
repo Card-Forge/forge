@@ -1,0 +1,10 @@
+Name:The Dilu Horse
+ManaCost:2 G
+Types:Legendary Creature Horse
+PT:2/2
+K:Horsemanship
+K:Partner
+S:Mode$ Continuous | Affected$ Card.YouCtrl+IsCommander | AddKeyword$ Horsemanship | Description$ Commanders you control have horsemanship.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:NonCommander
+Oracle:Horsemanship (This creature can't be blocked except by creatures with horsemanship.)\nCommanders you control have horsemanship.\nPartner (You can have two commanders if both have partner.)

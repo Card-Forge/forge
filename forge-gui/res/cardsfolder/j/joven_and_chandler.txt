@@ -1,0 +1,12 @@
+Name:Joven and Chandler
+ManaCost:3 R R
+Types:Legendary Creature Human Rogue
+PT:3/3
+K:Backup:2:BackupAbilities
+SVar:BackupAbilities:DB$ Animate | Keywords$ Haste | Triggers$ DamageTrig
+SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to an opponent, destroy target artifact that player controls.
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to an opponent, destroy target artifact that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact damaged player controls
+DeckHas:Ability$Counters
+Oracle:Backup 2 (When this creature enters the battlefield, put two +1/+1 counters on target creature. If that's another creature, it gains the following abilities until end of turn.)\nHaste\nWhenever this creature deals combat damage to an opponent, destroy target artifact that player controls.

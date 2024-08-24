@@ -1,0 +1,6 @@
+Name:Performer Token
+ManaCost:no cost
+Types:Creature Performer
+Colors:white
+PT:2/2
+Oracle:

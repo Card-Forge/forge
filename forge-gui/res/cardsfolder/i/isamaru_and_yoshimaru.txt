@@ -1,0 +1,9 @@
+Name:Isamaru and Yoshimaru
+ManaCost:W
+Types:Legendary Creature Dog
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Creature.Legendary+Other+YouCtrl,Creature.cmcEQ1+Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another legendary creature or creature with mana value one enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:BuffedBy:Creature.Legendary,Creature.cmcEQ1
+DeckHas:Ability$Counters
+Oracle:Whenever another legendary creature or creature with mana value one enters the battlefield under your control, put a +1/+1 counter on Isamaru and Yoshimaru.

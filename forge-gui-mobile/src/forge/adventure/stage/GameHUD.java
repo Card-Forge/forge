@@ -52,7 +52,7 @@ public class GameHUD extends Stage {
     private final TextraLabel money;
     private final TextraLabel shards;
     private final TextraLabel keys;
-    private TextraLabel notificationText = Controls.newTextraLabel("");
+    private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
     private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor;
@@ -704,8 +704,8 @@ public class GameHUD extends Stage {
         setAlpha(money, visible);
 
         setVisibility(blank, visible);
-        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+ExitToWorldMap]", "---");
-        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+Bookmark]", "---");
+        setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+ExitToWorldMap]", "\uFF0F");
+        setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), LARGE_FONT_TAG + "[+Bookmark]", "\uFF0F");
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -820,8 +820,8 @@ public class GameHUD extends Stage {
             public boolean act(float v) {
                 if (exitDungeon) {
                     MapStage.getInstance().exitDungeon();
-                    setDisabled(exitToWorldMapActor, true, LARGE_FONT_TAG + "[+ExitToWorldMap]", "---");
-                    setDisabled(bookmarkActor, true, LARGE_FONT_TAG + "[+Bookmark]", "---");
+                    setDisabled(exitToWorldMapActor, true, LARGE_FONT_TAG + "[+ExitToWorldMap]", "\uFF0F");
+                    setDisabled(bookmarkActor, true, LARGE_FONT_TAG + "[+Bookmark]", "\uFF0F");
                 }
                 return true;
             }

@@ -1,0 +1,9 @@
+Name:The Forgotten Place
+ManaCost:no cost
+Types:Land Locus Sphere
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Draw | Cost$ 2 T Sac<1/CARDNAME> | NumCards$ X | SpellDescription$ Draw a card for each Locus and/or Sphere in your graveyard.
+SVar:X:Count$ValidGraveyard Locus.YouOwn,Sphere.YouOwn
+DeckHas:Ability$Sacrifice|Mana.Colorless
+DeckHints:Type$Locus|Sphere
+Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice The Forgotten Place: Draw a card for each Locus and/or Sphere in your graveyard.

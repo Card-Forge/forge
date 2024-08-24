@@ -37,7 +37,7 @@
     {
       "type": "Image",
       "name": "avatar",
-      "x": 321,
+      "x": 384,
       "y": 28,
       "width": 64,
       "height": 64
@@ -46,7 +46,7 @@
       "type": "Image",
       "name": "colorFrame",
       "image": "ui/colorC.png",
-      "x": 305,
+      "x": 368,
       "y": 45,
       "width": 64,
       "height": 64
@@ -137,9 +137,9 @@
       "y": 224
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "playerName",
-      "x": 394,
+      "x": 310,
       "y": 20,
       "width": 80,
       "height": 24,
@@ -150,7 +150,7 @@
       "name": "lifePoints",
       "width": 64,
       "height": 16,
-      "x": 394,
+      "x": 310,
       "y": 40
     },
     {
@@ -158,7 +158,7 @@
       "name": "money",
       "width": 64,
       "height": 16,
-      "x": 394,
+      "x": 310,
       "y": 80
     },
     {
@@ -166,7 +166,7 @@
       "name": "shards",
       "width": 64,
       "height": 16,
-      "x": 394,
+      "x": 310,
       "y": 60
     },
 	{

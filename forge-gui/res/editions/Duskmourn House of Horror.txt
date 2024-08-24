@@ -24,6 +24,7 @@ ScryfallCode=DSK
 275 L Mountain @Dan Mumford
 276 L Forest @Dan Mumford
 292 R Come Back Wrong @David Auden Nash
+296 R Cursed Recording @Kim Sokol
 309 R Come Back Wrong @Alexis Ziritt
 314 R Chainsaw @Alexis Ziritt
 346 R Doomsday Excruciator @Jarel Threat

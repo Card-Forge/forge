@@ -1,6 +1,6 @@
 package forge.ai.simulation;
 
-import forge.game.spellability.LandAbility;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +84,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        AssertJUnit.assertTrue(sa instanceof LandAbility);
+        AssertJUnit.assertTrue(sa.isLandAbility());
         AssertJUnit.assertEquals(mountain, sa.getHostCard());
 
         Plan plan = picker.getPlan();

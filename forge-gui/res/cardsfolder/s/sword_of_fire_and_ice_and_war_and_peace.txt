@@ -1,0 +1,14 @@
+Name:Sword of Fire and Ice and War and Peace
+ManaCost:6
+Types:Artifact Equipment
+K:Equip:4
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | AddSVar$ SwordOfFireAndIceCE | AddKeyword$ Protection from white & Protection from blue & Protection from red | Description$ Equipped creature gets +4/+4 and has protection from white, blue, and red.
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDealDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to an opponent, CARDNAME deals 2 damage to any target and you draw a card. Then, it deals damage to defending player equal to the number of cards in their hand and you gain 1 life for each card in your hand.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBWar
+SVar:DBWar:DB$ DealDamage | Defined$ TriggeredTarget | NumDmg$ X | SubAbility$ DBGain
+SVar:X:TriggeredTarget$CardsInHand
+SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ Y
+SVar:Y:Count$CardsInYourHand
+SVar:SwordOfFireAndIceCE:SVar:MustBeBlocked:AttackingPlayerConservative
+Oracle:Equipped creature gets +4/+4 and has protection from white, blue, and red.\nWhenever equipped creature deals combat damage to an opponent, Sword of Fire and Ice and War and Peace deals 2 damage to any target and you draw a card. Then, it deals damage to defending player equal to the number of cards in their hand and you gain 1 life for each card in your hand.\nEquip {4}

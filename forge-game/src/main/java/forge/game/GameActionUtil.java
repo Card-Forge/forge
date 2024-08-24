@@ -91,10 +91,10 @@ public final class GameActionUtil {
             return alternatives;
         }
 
-        if (sa.isSpell()) {
+        if (sa.isSpell() || sa.isLandAbility()) {
             boolean lkicheck = false;
 
-            Card newHost = ((Spell)sa).getAlternateHost(source);
+            Card newHost = sa.getAlternateHost(source);
             if (newHost != null) {
                 source = newHost;
                 lkicheck = true;
