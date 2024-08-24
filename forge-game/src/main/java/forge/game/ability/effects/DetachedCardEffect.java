@@ -29,6 +29,14 @@ public class DetachedCardEffect extends Card {
         this.setGamePieceType(GamePieceType.EFFECT);
     }
 
+    public DetachedCardEffect(DetachedCardEffect from, boolean assignNewId) {
+        super(assignNewId ? from.getGame().nextCardId() : from.id, from.getPaperCard(), from.getGame());
+        this.setName(from.getName());
+        this.setOwner(from.getOwner());
+        this.setGamePieceType(GamePieceType.EFFECT);
+        this.setEffectSource(from.getEffectSource());
+    }
+
     @Override
     public Card getCardForUi() {
         return card; //use linked card for the sake of UI display logic

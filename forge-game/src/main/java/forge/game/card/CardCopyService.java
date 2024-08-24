@@ -7,6 +7,7 @@ import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import io.sentry.Breadcrumb;
@@ -108,7 +109,11 @@ public class CardCopyService {
         if (assignNewId) {
             id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         }
-        final Card c = new Card(id, in.getPaperCard(), in.getGame());
+        final Card c;
+        if(in instanceof DetachedCardEffect)
+            c = new DetachedCardEffect((DetachedCardEffect) in, assignNewId);
+        else
+            c = new Card(id, in.getPaperCard(), in.getGame());
 
         c.setOwner(newOwner);
         c.setSetCode(in.getSetCode());

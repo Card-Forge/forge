@@ -2805,18 +2805,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
             Card commander = toGame.findById(entry.getKey().getId());
+            if(commander == null) //Ceased to exist?
+                continue;
             int damage = entry.getValue();
             toPlayer.addCommanderDamage(commander, damage);
         }
         if (this.commanderEffect != null) {
             Card commanderEffect = toGame.findById(this.commanderEffect.getId());
-            if(commanderEffect instanceof DetachedCardEffect)
-                toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
-            else {
-                //TODO: GameSnapshot converts DetachedCardEffects to cards. This can be simplified when that's resolved.
-                toPlayer.getZone(ZoneType.Command).remove(commanderEffect);
-                toPlayer.createCommanderEffect();
-            }
+            toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
         }
     }
 

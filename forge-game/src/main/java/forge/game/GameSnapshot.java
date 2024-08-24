@@ -80,7 +80,7 @@ public class GameSnapshot {
 
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
-            toPlayer.copyCommandersToSnapshot(toPlayer, toGame);
+            p.copyCommandersToSnapshot(toPlayer, toGame);
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
