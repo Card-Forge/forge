@@ -414,7 +414,7 @@ public class LimitedPlayer {
     }
 
     public boolean hasCanalDredger() {
-        return (playerFlags & CanalDredgerLastPick) != CanalDredgerLastPick;
+        return (playerFlags & CanalDredgerLastPick) == CanalDredgerLastPick;
     }
 
     public void receiveUnopenedPack(DraftPack pack) {
