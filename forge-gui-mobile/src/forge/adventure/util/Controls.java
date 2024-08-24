@@ -624,13 +624,13 @@ public class Controls {
         }
     }
 
+    public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards) {
+        return newAccountingLabel(target, isShards, false);
+    }
+
     public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards, boolean smallText, Stage stageToSet) {
         target.setStage(stageToSet);
         return newAccountingLabel(target, isShards, smallText);
-    }
-
-    public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards) {
-        return new AccountingLabel(target, isShards, false);
     }
 
     public static TextraLabel newAccountingLabel(TextraLabel target, boolean isShards, boolean smallText) {
