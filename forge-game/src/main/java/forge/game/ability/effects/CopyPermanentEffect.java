@@ -13,7 +13,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ImageKeys;
 import forge.StaticData;
+import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -46,53 +48,59 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final StringBuilder sb = new StringBuilder();
 
         final Player activator = sa.getActivatingPlayer();
-        final List<Card> tgtCards = getTargetCards(sa);
-        boolean justOne = tgtCards.size() == 1;
-        boolean addKWs = sa.hasParam("AddKeywords");
         final int numCopies = sa.hasParam("NumCopies") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCopies"), sa) : 1;
 
-        sb.append(activator).append(" creates ").append(Lang.nounWithNumeralExceptOne(numCopies, "token"));
-        sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
-        sb.append(Lang.joinHomogenous(tgtCards));
-
-        if (addKWs) {
-            final List<String> keywords = Lists.newArrayList();
-            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
-            if (sa.getDescription().contains("except")) {
-                sb.append(", except ").append(justOne ? "it has " : "they have ");
-            } else {
-                sb.append(". ").append(justOne ? "It gains " : "They gain ");
-            }
-            sb.append(Lang.joinHomogenous(keywords).toLowerCase());
-        }
-
-        if (sa.hasParam("AddTriggers")) {
-            final String oDesc = sa.getDescription();
-            final String trigStg = oDesc.contains("\"") ?
-                    oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1) :
-                    "[trigger text parsing error]";
-            if (addKWs) {
-                sb.append(" and ").append(trigStg);
-            } else {
-                sb.append(". ").append(justOne ? "It gains " : "They gain ").append(trigStg);
-            }
+        sb.append(activator).append(" creates ");
+        if (sa.hasParam("DefinedName")) {
+            sb.append(Lang.nounWithNumeralExceptOne(numCopies, sa.getParam("DefinedName") + " token"));
         } else {
-            sb.append(".");
-        }
+            final List<Card> tgtCards = getTargetCards(sa);
+            boolean justOne = tgtCards.size() == 1;
+            boolean addKWs = sa.hasParam("AddKeywords");
 
-        if (sa.hasParam("AtEOT")) {
-            String atEOT = sa.getParam("AtEOT");
-            String verb = "Sacrifice ";
-            if (atEOT.startsWith("Exile")) {
-                verb = "Exile ";
+            sb.append(Lang.nounWithNumeralExceptOne(numCopies, "token"));
+            sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
+            sb.append(Lang.joinHomogenous(tgtCards));
+
+            if (addKWs) {
+                final List<String> keywords = Lists.newArrayList();
+                keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+                if (sa.getDescription().contains("except")) {
+                    sb.append(", except ").append(justOne ? "it has " : "they have ");
+                } else {
+                    sb.append(". ").append(justOne ? "It gains " : "They gain ");
+                }
+                sb.append(Lang.joinHomogenous(keywords).toLowerCase());
             }
-            sb.append(" ").append(verb).append(justOne ? "it " : "them ").append("at ");
-            String when = "the beginning of the next end step.";
-            if (atEOT.endsWith("Combat")) {
-                when = "end of combat.";
+
+            if (sa.hasParam("AddTriggers")) {
+                final String oDesc = sa.getDescription();
+                final String trigStg = oDesc.contains("\"") ?
+                        oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1) :
+                        "[trigger text parsing error]";
+                if (addKWs) {
+                    sb.append(" and ").append(trigStg);
+                } else {
+                    sb.append(". ").append(justOne ? "It gains " : "They gain ").append(trigStg);
+                }
+            } else {
+                sb.append(".");
             }
-            sb.append(when);
+
+            if (sa.hasParam("AtEOT")) {
+                String atEOT = sa.getParam("AtEOT");
+                String verb = "Sacrifice ";
+                if (atEOT.startsWith("Exile")) {
+                    verb = "Exile ";
+                }
+                sb.append(" ").append(verb).append(justOne ? "it " : "them ").append("at ");
+                String when = "the beginning of the next end step.";
+                if (atEOT.endsWith("Combat")) {
+                    when = "end of combat.";
+                }
+                sb.append(when);
+            }
         }
 
         return sb.toString();
@@ -180,20 +188,21 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     tgtCards = choice;
 
                     System.err.println("Copying random permanent(s): " + tgtCards.toString());
-                } else if (sa.hasParam("DefinedName")) {
-                    String name = sa.getParam("DefinedName");
-                    if (name.equals("NamedCard")) {
-                        if (!host.getNamedCard().isEmpty()) {
-                            name = host.getNamedCard();
-                        }
+                }
+            } else if (sa.hasParam("DefinedName")) {
+                List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
+                String name = sa.getParam("DefinedName");
+                if (name.equals("NamedCard")) {
+                    if (!host.getNamedCard().isEmpty()) {
+                        name = host.getNamedCard();
                     }
+                }
 
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
-                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
-                    if (!cards.isEmpty()) {
-                        tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
-                    }
+                if (!cards.isEmpty()) {
+                    tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
                 }
             } else if (sa.hasParam("Choices")) {
                 Player chooser = activator;
@@ -296,6 +305,13 @@ public class CopyPermanentEffect extends TokenEffectBase {
             copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
         } else {
             copy.setState(copy.getCurrentStateName(), true, true);
+        }
+        if (sa.hasParam("DefinedName")) {
+            String name = TextUtil.fastReplace(TextUtil.fastReplace(original.getName(), ",", ""), " ", "_").toLowerCase();
+            String set = sa.getOriginalHost().getSetCode();
+            copy.getCurrentState().setRarity(CardRarity.Common); // Token Rarity
+            copy.getCurrentState().setSetCode(set);
+            copy.getCurrentState().setImageKey(ImageKeys.getTokenKey(name + "_" + set.toLowerCase()));
         }
         copy.setGamePieceType(GamePieceType.TOKEN);
 
