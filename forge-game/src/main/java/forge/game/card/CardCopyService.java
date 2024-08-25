@@ -222,7 +222,11 @@ public class CardCopyService {
         bread.setData("Player", copyFrom.getController().getName());
         Sentry.addBreadcrumb(bread);
 
-        final Card newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
+        final Card newCopy;
+        if(copyFrom instanceof DetachedCardEffect)
+            newCopy = new DetachedCardEffect((DetachedCardEffect) copyFrom, false);
+        else
+            newCopy = new Card(copyFrom.getId(), copyFrom.getPaperCard(), copyFrom.getGame(), null);
         cachedMap.put(copyFrom.getId(), newCopy);
         newCopy.setSetCode(copyFrom.getSetCode());
         newCopy.setOwner(copyFrom.getOwner());
