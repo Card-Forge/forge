@@ -17,6 +17,7 @@ import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
 import forge.game.*;
+import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
@@ -310,7 +311,11 @@ public class GameCopier {
         // The issue is that it requires parsing the original card from scratch from the paper card. We should
         // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
         // be needed. Once the below code accurately copies the card, remove the USE_FROM_PAPER_CARD code path.
-        Card newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
+        Card newCard;
+        if (c instanceof DetachedCardEffect)
+            newCard = new DetachedCardEffect((DetachedCardEffect) c, newGame, true);
+        else
+            newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
         newCard.setOwner(newOwner);
         newCard.setName(c.getName());
         newCard.setCommander(c.isCommander());

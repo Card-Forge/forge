@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import forge.card.GamePieceType;
+import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
@@ -30,7 +31,11 @@ public class DetachedCardEffect extends Card {
     }
 
     public DetachedCardEffect(DetachedCardEffect from, boolean assignNewId) {
-        super(assignNewId ? from.getGame().nextCardId() : from.id, from.getPaperCard(), from.getGame());
+        this(from, from.getGame(), assignNewId);
+    }
+
+    public DetachedCardEffect(DetachedCardEffect from, Game game, boolean assignNewId) {
+        super(assignNewId ? game.nextCardId() : from.id, from.getPaperCard(), from.getGame());
         this.setName(from.getName());
         this.setOwner(from.getOwner());
         this.setGamePieceType(GamePieceType.EFFECT);
