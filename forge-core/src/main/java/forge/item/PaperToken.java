@@ -169,7 +169,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
 
     @Override
     public CardRarity getRarity() {
-        return CardRarity.None;
+        return CardRarity.Token;
     }
 
     @Override

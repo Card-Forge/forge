@@ -286,7 +286,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             copy = original;
             String name = TextUtil.fastReplace(TextUtil.fastReplace(original.getName(), ",", ""), " ", "_").toLowerCase();
             String set = sa.getOriginalHost().getSetCode();
-            copy.getCurrentState().setRarity(CardRarity.Common); // Token Rarity
+            copy.getCurrentState().setRarity(CardRarity.Token);
             copy.getCurrentState().setSetCode(set);
             copy.getCurrentState().setImageKey(ImageKeys.getTokenKey(name + "_" + set.toLowerCase()));
         } else {
