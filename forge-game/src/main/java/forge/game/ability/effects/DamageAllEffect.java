@@ -56,8 +56,7 @@ public class DamageAllEffect extends DamageBaseEffect {
         final Card sourceLKI = card.getGame().getChangeZoneLKIInfo(card);
         final Game game = sa.getActivatingPlayer().getGame();
 
-        final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityUtils.calculateAmount(source, damage, sa);
+        final int dmg = AbilityUtils.calculateAmount(source, sa.getParam("NumDmg"), sa);
 
         //Remember params from this effect have been moved to dealDamage in GameAction
         Player targetPlayer = sa.getTargets().getFirstTargetedPlayer();

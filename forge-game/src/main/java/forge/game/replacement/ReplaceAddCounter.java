@@ -110,7 +110,6 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
     @Override
     public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
-        // TODO Auto-generated method stub
         if (super.modeCheck(event, runParams)) {
             return true;
         }

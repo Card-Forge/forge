@@ -120,12 +120,7 @@ public abstract class Trigger extends TriggerReplacementBase {
     public String toString(boolean active) {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
             StringBuilder sb = new StringBuilder();
-            ITranslatable nameSource;
-            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
-                nameSource = cardState;
-            } else {
-                nameSource = getHostCard();
-            }
+            ITranslatable nameSource = getHostName(this);
             String desc = getParam("TriggerDescription");
             if (!desc.contains("ABILITY")) {
                 desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), nameSource);

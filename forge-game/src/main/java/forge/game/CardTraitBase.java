@@ -27,6 +27,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.ITranslatable;
 
 /**
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
@@ -621,6 +622,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             return null;
         }
         return getCardState().getView().getState();
+    }
+
+    public ITranslatable getHostName(CardTraitBase node) {
+        // if alternate state is viewed while card uses original
+        if (node.isIntrinsic() && node.cardState != null && !node.cardState.getStateName().equals(getHostCard().getCurrentStateName())) {
+            return node.cardState;
+        }
+        return node.getHostCard();
     }
 
     public Card getOriginalHost() {

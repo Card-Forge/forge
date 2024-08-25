@@ -208,7 +208,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 Player chooser = activator;
                 if (sa.hasParam("Chooser")) {
                     final String choose = sa.getParam("Chooser");
-                    chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                    chooser = AbilityUtils.getDefinedPlayers(host, choose, sa).get(0);
                 }
 
                 // For Mimic Vat with mutated creature, need to choose one imprinted card
@@ -272,7 +272,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game, sa);
-            triggerList.clear();
         }
         if (combatChanged.isTrue()) {
             game.updateCombatForView();

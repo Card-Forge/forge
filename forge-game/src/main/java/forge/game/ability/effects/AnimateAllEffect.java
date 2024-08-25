@@ -28,7 +28,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
     public void resolve(final SpellAbility sa) {
         final Card host = sa.getHostCard();
 
-        // AF specific sa
         Integer power = null;
         if (sa.hasParam("Power")) {
             power = AbilityUtils.calculateAmount(host, sa.getParam("Power"), sa);

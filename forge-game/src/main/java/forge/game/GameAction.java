@@ -1507,6 +1507,7 @@ public class GameAction {
         if (!c.isSaga()) {
             return false;
         }
+        // needs to be effect, because otherwise it might be a cost?
         if (!c.canBeSacrificedBy(null, true)) {
             return false;
         }
@@ -1514,7 +1515,6 @@ public class GameAction {
             return false;
         }
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isChapter())) {
-            // needs to be effect, because otherwise it might be a cost?
             sacrificeList.add(c);
             checkAgain = true;
         }
@@ -1537,6 +1537,7 @@ public class GameAction {
         }
         return checkAgain;
     }
+
     private boolean stateBasedAction_Role(Card c, CardCollection removeList) {
         if (!c.hasCardAttachments()) {
             return false;
@@ -1552,7 +1553,6 @@ public class GameAction {
             if (rolesByPlayer.size() <= 1) {
                 continue;
             }
-            // sort by game timestamp
             rolesByPlayer.sort(CardPredicates.compareByGameTimestamp());
             removeList.addAll(rolesByPlayer.subList(0, rolesByPlayer.size() - 1));
             checkAgain = true;
@@ -1780,7 +1780,6 @@ public class GameAction {
     }
 
     private boolean handlePlaneswalkerRule(Player p, CardCollection noRegCreats) {
-        // get all Planeswalkers
         final List<Card> list = p.getPlaneswalkersInPlay();
         boolean recheck = false;
 
@@ -2584,7 +2583,6 @@ public class GameAction {
         player.addCompletedDungeon(dungeon);
         ceaseToExist(dungeon, true);
 
-        // Run RoomEntered trigger
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(dungeon);
         runParams.put(AbilityKey.Player, player);
         game.getTriggerHandler().runTrigger(TriggerType.DungeonCompleted, runParams, false);
