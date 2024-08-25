@@ -1,0 +1,12 @@
+Name:Elemental, My Dear
+ManaCost:X U U
+Types:Sorcery
+A:SP$ Investigate | Num$ X | SubAbility$ DBToken | SpellDescription$ Investigate X times, then create an 0/0 Blue Elemental creature token.
+SVar:DBToken:DB$ Token | TokenScript$ u_0_0_elemental | RememberTokens$ True | SubAbility$ DBPutCounters
+SVar:DBPutCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ Y | StackDescription$ SpellDescription | SubAbility$ DBCleanup | SpellDescription$ Put +1/+1 counters on that token equal to the number of Clues you control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:Y:Count$Valid Clue.YouCtrl
+DeckHas:Ability$Token|Counters & Type$Elemental|Clue
+DeckHints:Type$Clue
+Oracle:Investigate X times, then create an 0/0 Blue Elemental creature token. Put +1/+1 counters on that token equal to the number of Clues you control.

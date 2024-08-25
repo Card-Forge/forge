@@ -1,0 +1,8 @@
+Name:The Rebellious Intelligence
+ManaCost:5
+Types:Legendary Artifact Creature Rebel
+PT:5/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigWish | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put a random card from outside the game into your hand.
+SVar:TrigWish:DB$ ChangeZone | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | Hidden$ True | AtRandom$ True
+A:AB$ Mana | Cost$ T | Produced$ W U B R G | RestrictValid$ CantPayGenericCosts | SpellDescription$ Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
+Oracle:At the beginning of your upkeep, put a random card from outside the game into your hand. (In Commander sealed, that's everything you didn't play with. In any other commander game, find a way to select a random Magic card.)\n{T}: Add {W}{U}{B}{R}{G}. This mana can't be spent to pay generic mana costs.
