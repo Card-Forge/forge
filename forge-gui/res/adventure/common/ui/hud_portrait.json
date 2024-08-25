@@ -56,7 +56,7 @@
       "y": 10
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "lifePoints", 
       "width": 48,
       "height": 3,
@@ -64,7 +64,7 @@
       "y": 62
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "shards",
       "font": "default",
       "width": 48,
@@ -73,7 +73,7 @@
       "y": 76
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "money",
       "font": "default",
       "width": 48,
