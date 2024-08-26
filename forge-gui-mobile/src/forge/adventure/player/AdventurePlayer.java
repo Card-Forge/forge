@@ -2,15 +2,20 @@ package forge.adventure.player;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
+import com.github.tommyettinger.textra.TextraLabel;
 import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
 import forge.adventure.scene.DeckEditScene;
+import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
@@ -221,6 +226,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public String getName() {
         return name;
+    }
+
+    public Boolean isFemale() {
+        return isFemale;
     }
 
     public float getWorldPosX() {
@@ -594,6 +603,28 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return HeroListData.getRaces().get(Current.player().heroRace);
     }
 
+    public GameStage getCurrentGameStage() {
+        if (MapStage.getInstance().isInMap())
+            return MapStage.getInstance();
+        return WorldStage.getInstance();
+    }
+    public void addStatusMessage(String iconName, String message, Integer itemCount, float x, float y) {
+        String symbol = itemCount == null || itemCount < 0 ? "" : " +";
+        String icon = iconName == null ? "" : "[+" + iconName + "]";
+        String count = itemCount == null ? "" : String.valueOf(itemCount);
+        TextraLabel actor = Controls.newTextraLabel("[%95]" + icon + "[WHITE]" + symbol + count + " " + message);
+        actor.setPosition(x, y);
+        actor.addAction(Actions.after(
+                Actions.sequence(
+                        Actions.parallel(
+                                Actions.moveBy(0f, 5f, 4f),
+                                Actions.fadeIn(2f)
+                        ),
+                        Actions.fadeOut(3f),
+                        Actions.removeActor()
+                )));
+        GameHUD.getInstance().addActor(actor);
+    }
     public void addCard(PaperCard card) {
         cards.add(card);
         newCards.add(card);

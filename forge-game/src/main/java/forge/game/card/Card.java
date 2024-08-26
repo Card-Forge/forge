@@ -5526,6 +5526,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return isInstant() || isSorcery() || (isAura() && !isInZone(ZoneType.Battlefield));
     }
 
+    public final boolean hasPlayableLandFace() { return isLand() || (isModal() && getState(CardStateName.Modal).getType().isLand()); }
+
     public final boolean isLand()       { return getType().isLand(); }
     public final boolean isBasicLand()  { return getType().isBasicLand(); }
     public final boolean isSnow()       { return getType().isSnow(); }

@@ -47,9 +47,9 @@ public class GameHUD extends Stage {
     static public GameHUD instance;
     private final GameStage gameStage;
     private final Image avatar, miniMapPlayer;
-    private final TextraLabel lifePoints;
-    private final TextraLabel money;
-    private final TextraLabel shards;
+    private final TypingLabel lifePoints;
+    private final TypingLabel money;
+    private final TypingLabel shards;
     private final TextraLabel keys;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
@@ -60,7 +60,7 @@ public class GameHUD extends Stage {
     private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     float opacity = 1f;
-    private boolean debugMap, updatelife;
+    private boolean debugMap;
 
     private final Dialog dialog;
     private boolean dialogOnlyInput;
@@ -129,8 +129,11 @@ public class GameHUD extends Stage {
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
         lifePoints = ui.findActor("lifePoints");
+        lifePoints.skipToTheEnd();
         shards = ui.findActor("shards");
+        shards.skipToTheEnd();
         money = ui.findActor("money");
+        money.skipToTheEnd();
         shards.setText("[%95][+Shards] 0");
         money.setText("[%95][+Gold] ");
         lifePoints.setText("[%95][+Life] 20/20");
@@ -139,11 +142,31 @@ public class GameHUD extends Stage {
         scrollPane.setPosition(2, 2);
         scrollPane.setStyle(Controls.getSkin().get("translucent", ScrollPane.ScrollPaneStyle.class));
         addActor(scrollPane);
-        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        AdventurePlayer.current().onShardsChange(() -> shards.setText("[%95][+Shards] " + AdventurePlayer.current().getShards()));
-        AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
+        AdventurePlayer.current().onLifeChange(() -> {
+            String effect = "{EMERGE}";
+            String heartbeat = "";
+            //colored lifepoints
+            if (Current.player().getLife() >= Current.player().getMaxLife()) {
+                //color green if max life
+                lifepointsTextColor = "[GREEN]";
+            } else if (Current.player().getLife() <= 5) {
+                //color red if critical
+                effect = "";
+                heartbeat = "{HEARTBEAT=0.5;0.5}";
+                lifepointsTextColor = "{ENDHEARTBEAT}[RED]";
+            }
+            else {
+                lifepointsTextColor = "[WHITE]";
+            }
+            lifePoints.restart("[%95]" + heartbeat + "[+Life]" + lifepointsTextColor + effect + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
 
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[%95][+Gold] " + AdventurePlayer.current().getGold()));
+        });
+        AdventurePlayer.current().onShardsChange(() -> {
+
+            shards.restart("[%95][+Shards] {EMERGE}" + AdventurePlayer.current().getShards());
+        });
+        AdventurePlayer.current().onGoldChange(() -> money.restart("[%95][+Gold] {EMERGE}" + AdventurePlayer.current().getGold()));
+        AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
         console = new Console();
@@ -268,7 +291,6 @@ public class GameHUD extends Stage {
 
     @Override
     public void draw() {
-        updatelife = false;
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
@@ -281,29 +303,7 @@ public class GameHUD extends Stage {
                 !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
                 && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
                 || !console.isVisible())); // prevent drawing on top of console or notifications
-        //colored lifepoints
-        if (Current.player().getLife() >= Current.player().getMaxLife()) {
-            //color green if max life
-            if (!lifepointsTextColor.equals("[GREEN]")) {
-                lifepointsTextColor = "[GREEN]";
-                updatelife = true;
-            }
-        } else if (Current.player().getLife() <= 5) {
-            //color red if critical
-            if (!lifepointsTextColor.equals("[RED]")) {
-                lifepointsTextColor = "[RED]";
-                updatelife = true;
-            }
-        } else {
-            if (!lifepointsTextColor.isEmpty()) {
-                lifepointsTextColor = "";
-                updatelife = true;
-            }
-        }
-        if (updatelife) {
-            updatelife = false;
-            lifePoints.setText("[%95][+Life]" + lifepointsTextColor + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-        }
+
         if (!MapStage.getInstance().isInMap())
             updateMusic();
         else
@@ -690,9 +690,11 @@ public class GameHUD extends Stage {
         setVisibility(openMapActor, visible);
         setVisibility(miniMapPlayer, visible);
         setVisibility(gamehud, visible);
-        setVisibility(lifePoints, visible);
-        setVisibility(shards, visible);
-        setVisibility(money, visible);
+
+        setAlpha(lifePoints, visible);
+        setAlpha(shards, visible);
+        setAlpha(money, visible);
+
         setVisibility(blank, visible);
         setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
         setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");

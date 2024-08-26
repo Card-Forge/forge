@@ -275,7 +275,7 @@ public class BlurUtils {
         int y = (int)(pixmap.getHeight()*0.35f);
         int width = pixmap.getWidth()-x;
         int height = pixmap.getHeight()-y;
-        return blur(pixmap, x/2, y/2, width, height, 0, 0, width, height, radius, iterations, disposePixmap);
+        return blur(pixmap, x/2, y/2, width, height, 0, 0, width/4, height/4, radius, iterations, disposePixmap);
     }
 
     /**

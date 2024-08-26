@@ -54,7 +54,7 @@ public class LandAbility extends AbilityStatic {
     public boolean canPlay() {
         Card land = this.getHostCard();
         final Player p = this.getActivatingPlayer();
-        if (p == null) {
+        if (p == null || land.isInZone(ZoneType.Battlefield)) {
             return false;
         }
         if (this.getCardState() != null && land.getCurrentStateName() != this.getCardStateName()) {
