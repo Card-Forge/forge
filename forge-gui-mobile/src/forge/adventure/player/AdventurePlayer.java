@@ -12,7 +12,6 @@ import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
 import forge.adventure.scene.DeckEditScene;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
@@ -614,16 +613,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         String count = itemCount == null ? "" : String.valueOf(itemCount);
         TextraLabel actor = Controls.newTextraLabel("[%95]" + icon + "[WHITE]" + symbol + count + " " + message);
         actor.setPosition(x, y);
-        actor.addAction(Actions.after(
-                Actions.sequence(
-                        Actions.parallel(
-                                Actions.moveBy(0f, 5f, 4f),
-                                Actions.fadeIn(2f)
-                        ),
-                        Actions.fadeOut(3f),
-                        Actions.removeActor()
-                )));
-        GameHUD.getInstance().addActor(actor);
+        actor.addAction(Actions.sequence(
+            Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
+            Actions.hide(),
+            Actions.removeActor())
+        );
+        getCurrentGameStage().addActor(actor);
     }
     public void addCard(PaperCard card) {
         cards.add(card);
@@ -783,8 +778,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setShards(int number) {
-        shards = number;
-        onShardsChangeList.emit();
+        boolean changed = shards != number;
+        if (changed) {
+            shards = number;
+            onShardsChangeList.emit();
+        }
     }
 
     public void addBlessing(EffectData bless) {
