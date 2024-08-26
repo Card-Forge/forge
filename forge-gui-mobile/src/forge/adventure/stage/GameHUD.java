@@ -60,7 +60,7 @@ public class GameHUD extends Stage {
     private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     float opacity = 1f;
-    private boolean debugMap;
+    private boolean debugMap, transluscent;
 
     private final Dialog dialog;
     private boolean dialogOnlyInput;
@@ -134,9 +134,9 @@ public class GameHUD extends Stage {
         shards.skipToTheEnd();
         money = ui.findActor("money");
         money.skipToTheEnd();
-        shards.setText("[%95][+Shards] 0");
-        money.setText("[%95][+Gold] ");
-        lifePoints.setText("[%95][+Life] 20/20");
+        shards.setText("[%95][+Shards]");
+        money.setText("[%95][+Gold]");
+        lifePoints.setText("[%95][+Life]");
         keys = Controls.newTextraLabel("");
         scrollPane = new ScrollPane(keys);
         scrollPane.setPosition(2, 2);
@@ -144,6 +144,7 @@ public class GameHUD extends Stage {
         addActor(scrollPane);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
+            String effectEnd = "{ENDEMERGE}";
             String heartbeat = "";
             //colored lifepoints
             if (Current.player().getLife() >= Current.player().getMaxLife()) {
@@ -152,20 +153,20 @@ public class GameHUD extends Stage {
             } else if (Current.player().getLife() <= 5) {
                 //color red if critical
                 effect = "";
+                effectEnd = "";
                 heartbeat = "{HEARTBEAT=0.5;0.5}";
                 lifepointsTextColor = "{ENDHEARTBEAT}[RED]";
             }
             else {
                 lifepointsTextColor = "[WHITE]";
             }
-            lifePoints.restart("[%95]" + heartbeat + "[+Life]" + lifepointsTextColor + effect + " " + AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-
+            lifePoints.restart("[%95]" + heartbeat + "[+Life]" + lifepointsTextColor + effect + " " + AdventurePlayer.current().getLife() + effectEnd + "/" + AdventurePlayer.current().getMaxLife());
         });
         AdventurePlayer.current().onShardsChange(() -> {
 
-            shards.restart("[%95][+Shards] {EMERGE}" + AdventurePlayer.current().getShards());
+            shards.restart("[%95][+Shards]{EMERGE} " + AdventurePlayer.current().getShards() + "{ENDEMERGE}");
         });
-        AdventurePlayer.current().onGoldChange(() -> money.restart("[%95][+Gold] {EMERGE}" + AdventurePlayer.current().getGold()));
+        AdventurePlayer.current().onGoldChange(() -> money.restart("[%95][+Gold]{EMERGE} " + AdventurePlayer.current().getGold() + "{ENDEMERGE}"));
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
@@ -173,11 +174,9 @@ public class GameHUD extends Stage {
         console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
         ui.addActor(console);
-        if (GuiBase.isAndroid()) {
-            avatar.addListener(new ConsoleToggleListener());
-            avatarborder.addListener(new ConsoleToggleListener());
-            gamehud.addListener(new ConsoleToggleListener());
-        }
+        avatar.addListener(new ConsoleToggleListener());
+        avatarborder.addListener(new ConsoleToggleListener());
+        gamehud.addListener(new ConsoleToggleListener());
         WorldSave.getCurrentSave().onLoad(this::enter);
 
         eventTouchDown = new InputEvent();
@@ -685,17 +684,18 @@ public class GameHUD extends Stage {
     }
 
     public void showHideMap(boolean visible) {
+        transluscent = !visible;
         setVisibility(miniMap, visible);
         setVisibility(mapborder, visible);
         setVisibility(openMapActor, visible);
         setVisibility(miniMapPlayer, visible);
-        setVisibility(gamehud, visible);
+        setAlpha(gamehud, visible);
 
         setAlpha(lifePoints, visible);
         setAlpha(shards, visible);
         setAlpha(money, visible);
 
-        setVisibility(blank, visible);
+        setAlpha(blank, visible);
         setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
         setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
         setAlpha(avatarborder, visible);
@@ -710,6 +710,45 @@ public class GameHUD extends Stage {
             setAlpha(button, visible);
         }
         opacity = visible ? 1f : 0.4f;
+    }
+    public void updateHUD(boolean translucent) {
+        if (translucent) {
+            setAlpha(lifePoints, false);
+            setAlpha(shards, false);
+            setAlpha(money, false);
+            setAlpha(avatarborder, false);
+            setAlpha(avatar, false);
+            setAlpha(deckActor, false);
+            setAlpha(menuActor, false);
+            setAlpha(logbookActor, false);
+            setAlpha(inventoryActor, false);
+            setAlpha(exitToWorldMapActor, false);
+            setAlpha(bookmarkActor, false);
+            setAlpha(gamehud, false);
+            setAlpha(blank, false);
+            for (TextraButton button : abilityButtonMap) {
+                setAlpha(button, false);
+            }
+            transluscent = true;
+        } else {
+            setAlpha(lifePoints, true);
+            setAlpha(shards, true);
+            setAlpha(money, true);
+            setAlpha(avatarborder, true);
+            setAlpha(avatar, true);
+            setAlpha(deckActor, true);
+            setAlpha(menuActor, true);
+            setAlpha(logbookActor, true);
+            setAlpha(inventoryActor, true);
+            setAlpha(exitToWorldMapActor, true);
+            setAlpha(bookmarkActor, true);
+            setAlpha(gamehud, true);
+            setAlpha(blank, true);
+            for (TextraButton button : abilityButtonMap) {
+                setAlpha(button, true);
+            }
+            transluscent = false;
+        }
     }
 
     void toggleConsole() {
@@ -863,9 +902,18 @@ public class GameHUD extends Stage {
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
-            toggleConsole();
+            if (GuiBase.isAndroid())
+                toggleConsole();
             return super.longPress(actor, x, y);
         }
+
+        @Override
+        public void tap(InputEvent event, float x, float y, int count, int button) {
+            if (count > 1 && MapStage.getInstance().isInMap())
+                updateHUD(!transluscent);
+            super.tap(event, x, y, count, button);
+        }
+
     }
 
     public void updateMusic() {
