@@ -139,6 +139,30 @@ public class Config {
         return configData;
     }
 
+    public int getBlurDivisor() {
+        int val = 1;
+        try {
+            switch(settingsData.videomode) {
+                case "720p":
+                case "768p":
+                    val = 8;
+                    break;
+                case "900p":
+                case "1080p":
+                    val = 16;
+                    break;
+                case "1440p":
+                case "2160p":
+                    val = 32;
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            return val;
+        }
+        return val;
+    }
     public String getPrefix() {
         return prefix;
     }
