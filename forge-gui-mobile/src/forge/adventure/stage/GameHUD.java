@@ -81,7 +81,7 @@ public class GameHUD extends Stage {
     private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     float opacity = 1f;
-    private boolean debugMap, transluscent;
+    private boolean debugMap, transluscent, hidden;
 
     private final Dialog dialog;
     private boolean dialogOnlyInput;
@@ -94,6 +94,7 @@ public class GameHUD extends Stage {
     private final Group mapGroup = new Group();
     private final Group hudGroup = new Group();
     private final Group menuGroup = new Group();
+    private final Group avatarGroup = new Group();
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -225,8 +226,6 @@ public class GameHUD extends Stage {
         hudGroup.addActor(shards);
         hudGroup.addActor(money);
         hudGroup.addActor(blank);
-        hudGroup.addActor(avatarborder);
-        hudGroup.addActor(avatar);
         ui.addActor(hudGroup);
         //MENU
         menuGroup.addActor(deckActor);
@@ -236,6 +235,10 @@ public class GameHUD extends Stage {
         menuGroup.addActor(exitToWorldMapActor);
         menuGroup.addActor(bookmarkActor);
         ui.addActor(menuGroup);
+        //AVATAR
+        avatarGroup.addActor(avatar);
+        avatarGroup.addActor(avatarborder);
+        ui.addActor(avatarGroup);
     }
 
     private void openMap() {
@@ -447,6 +450,7 @@ public class GameHUD extends Stage {
         }
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
+        avatarGroup.setZIndex(ui.getChildren().size);
     }
 
     void clearAbility() {
@@ -705,11 +709,6 @@ public class GameHUD extends Stage {
         gameStage.openMenu();
     }
 
-    private void setVisibility(Actor actor, boolean visible) {
-        if (actor != null)
-            actor.setVisible(visible);
-    }
-
     private void setDisabled(Actor actor, boolean value, String enabled, String disabled) {
         if (actor instanceof TextraButton) {
             ((TextraButton) actor).setDisabled(value);
@@ -720,17 +719,18 @@ public class GameHUD extends Stage {
     private void setAlpha(Actor actor, boolean visible) {
         if (actor != null) {
             if (visible)
-                actor.getColor().a = 1f;
+                actor.addAction(Actions.alpha(1f, 0.5f));
             else
-                actor.getColor().a = 0.4f;
+                actor.addAction(Actions.alpha(actor == mapGroup ? 0f : 0.4f, 0.5f));
         }
     }
 
     public void showHideMap(boolean visible) {
         transluscent = !visible;
-        setVisibility(mapGroup, visible);
+        setAlpha(mapGroup, visible);
         setAlpha(hudGroup, visible);
         setAlpha(menuGroup, visible);
+        setAlpha(avatarGroup, visible);
 
         setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
         setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
@@ -743,8 +743,11 @@ public class GameHUD extends Stage {
 
     public void setHUDOpacity(boolean translucent) {
         if (translucent) {
+            if (!MapStage.getInstance().isInMap())
+                return; //WorldStage opacity issue
             setAlpha(hudGroup, false);
             setAlpha(menuGroup, false);
+            setAlpha(avatarGroup, false);
             for (TextraButton button : abilityButtonMap) {
                 setAlpha(button, false);
             }
@@ -752,10 +755,31 @@ public class GameHUD extends Stage {
         } else {
             setAlpha(hudGroup, true);
             setAlpha(menuGroup, true);
+            setAlpha(avatarGroup, true);
             for (TextraButton button : abilityButtonMap) {
                 setAlpha(button, true);
             }
             transluscent = false;
+        }
+    }
+
+    public void showHideHUD(boolean hide) {
+        if (hide) {
+            hudGroup.addAction(Actions.fadeOut(0.5f));
+            menuGroup.addAction(Actions.fadeOut(0.5f));
+            if (!MapStage.getInstance().isInMap())
+                mapGroup.addAction(Actions.fadeOut(0.5f));
+            if (MapStage.getInstance().isInMap())
+                avatarGroup.addAction(Actions.alpha(0.4f, 0.5f));
+            hidden = true;
+        } else {
+            float alpha = MapStage.getInstance().isInMap() ? 0.4f : 1f;
+            avatarGroup.addAction(Actions.alpha(alpha, 0.5f));
+            hudGroup.addAction(Actions.alpha(alpha, 0.5f));
+            menuGroup.addAction(Actions.alpha(alpha, 0.5f));
+            if (!MapStage.getInstance().isInMap())
+                mapGroup.addAction(Actions.fadeIn(0.5f));
+            hidden = false;
         }
     }
 
@@ -917,11 +941,14 @@ public class GameHUD extends Stage {
 
         @Override
         public void tap(InputEvent event, float x, float y, int count, int button) {
-            if (count > 1 && MapStage.getInstance().isInMap())
+            if (console.isVisible())
+                return;
+            if (count > 1 && button == 0)
+                showHideHUD(!hidden);
+            else if (button == 0)
                 setHUDOpacity(!transluscent);
             super.tap(event, x, y, count, button);
         }
-
     }
 
     public void updateMusic() {
