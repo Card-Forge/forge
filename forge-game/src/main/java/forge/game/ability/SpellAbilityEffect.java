@@ -82,8 +82,7 @@ public abstract class SpellAbilityEffect {
                 if (params.containsKey("SpellDescription")) {
                     if (rawSDesc.contains(",,,,,,")) rawSDesc = rawSDesc.replaceAll(",,,,,,", " ");
                     if (rawSDesc.contains(",,,")) rawSDesc = rawSDesc.replaceAll(",,,", " ");
-                    String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc,
-                            sa.getHostCard().getName());
+                    String spellDesc = CardTranslation.translateSingleDescriptionText(rawSDesc, sa.getHostCard());
 
                     //trim reminder text from StackDesc
                     int idxL = spellDesc.indexOf(" (");
@@ -113,7 +112,7 @@ public abstract class SpellAbilityEffect {
         } else {
             final String condDesc = sa.getParam("ConditionDescription");
             final String afterDesc = sa.getParam("AfterDescription");
-            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard().getName());
+            final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard());
             if (condDesc != null) {
                 sb.append(condDesc).append(" ");
             }
