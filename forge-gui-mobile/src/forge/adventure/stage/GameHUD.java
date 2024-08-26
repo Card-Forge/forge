@@ -8,10 +8,20 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -28,8 +38,19 @@ import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.*;
-import forge.adventure.util.*;
+import forge.adventure.scene.DeckSelectScene;
+import forge.adventure.scene.GameScene;
+import forge.adventure.scene.InventoryScene;
+import forge.adventure.scene.MapViewScene;
+import forge.adventure.scene.QuestLogScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.AdventureQuestController;
+import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
+import forge.adventure.util.KeyBinding;
+import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.GuiBase;
@@ -70,6 +91,9 @@ public class GameHUD extends Stage {
     private String lifepointsTextColor = "";
     private final ScrollPane scrollPane;
     private final ScrollPane notificationPane;
+    private final Group mapGroup = new Group();
+    private final Group hudGroup = new Group();
+    private final Group menuGroup = new Group();
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -156,16 +180,12 @@ public class GameHUD extends Stage {
                 effectEnd = "";
                 heartbeat = "{HEARTBEAT=0.5;0.5}";
                 lifepointsTextColor = "{ENDHEARTBEAT}[RED]";
-            }
-            else {
+            } else {
                 lifepointsTextColor = "[WHITE]";
             }
             lifePoints.restart("[%95]" + heartbeat + "[+Life]" + lifepointsTextColor + effect + " " + AdventurePlayer.current().getLife() + effectEnd + "/" + AdventurePlayer.current().getMaxLife());
         });
-        AdventurePlayer.current().onShardsChange(() -> {
-
-            shards.restart("[%95][+Shards]{EMERGE} " + AdventurePlayer.current().getShards() + "{ENDEMERGE}");
-        });
+        AdventurePlayer.current().onShardsChange(() -> shards.restart("[%95][+Shards]{EMERGE} " + AdventurePlayer.current().getShards() + "{ENDEMERGE}"));
         AdventurePlayer.current().onGoldChange(() -> money.restart("[%95][+Gold]{EMERGE} " + AdventurePlayer.current().getGold() + "{ENDEMERGE}"));
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
@@ -188,11 +208,34 @@ public class GameHUD extends Stage {
 
         notificationPane = new ScrollPane(notificationText);
         notificationPane.setTouchable(Touchable.childrenOnly);
-        notificationPane.setBounds(5, GuiBase.isAndroid() ? getHeight() : -notificationText.getPrefHeight(), getWidth()*0.4f, 25);
+        notificationPane.setBounds(5, GuiBase.isAndroid() ? getHeight() : -notificationText.getPrefHeight(), getWidth() * 0.4f, 25);
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
 
         ui.addActor(notificationPane);
+        //MAP
+        mapGroup.addActor(miniMap);
+        mapGroup.addActor(mapborder);
+        mapGroup.addActor(openMapActor);
+        mapGroup.addActor(miniMapPlayer);
+        ui.addActor(mapGroup);
+        //HUD
+        hudGroup.addActor(gamehud);
+        hudGroup.addActor(lifePoints);
+        hudGroup.addActor(shards);
+        hudGroup.addActor(money);
+        hudGroup.addActor(blank);
+        hudGroup.addActor(avatarborder);
+        hudGroup.addActor(avatar);
+        ui.addActor(hudGroup);
+        //MENU
+        menuGroup.addActor(deckActor);
+        menuGroup.addActor(menuActor);
+        menuGroup.addActor(logbookActor);
+        menuGroup.addActor(inventoryActor);
+        menuGroup.addActor(exitToWorldMapActor);
+        menuGroup.addActor(bookmarkActor);
+        ui.addActor(menuGroup);
     }
 
     private void openMap() {
@@ -299,8 +342,8 @@ public class GameHUD extends Stage {
         miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
 
         miniMapPlayer.setVisible(miniMap.isVisible() &&
-                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
-                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(),miniMapPlayer.getY()))
+                !Controls.actorContainsVector(notificationPane, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
+                && (!Controls.actorContainsVector(console, new Vector2(miniMapPlayer.getX(), miniMapPlayer.getY()))
                 || !console.isVisible())); // prevent drawing on top of console or notifications
 
         if (!MapStage.getInstance().isInMap())
@@ -355,7 +398,7 @@ public class GameHUD extends Stage {
         switch (GameScene.instance().getAdventurePlayerLocation(false, false)) {
             case "capital":
             case "town":
-                if(MapStage.getInstance().isInMap()) {
+                if (MapStage.getInstance().isInMap()) {
                     int rep = TileMapScene.instance().getPointOfInterestChanges().getMapReputation();
                     String reputationText = TileMapScene.instance().rootPoint.getDisplayName() + "\nReputation: " + (rep > 0 ? "[GREEN]" : rep < 0 ? "[RED]" : "[WHITE]") + rep + "[/]";
                     if (fromWorldMap) {
@@ -685,65 +728,30 @@ public class GameHUD extends Stage {
 
     public void showHideMap(boolean visible) {
         transluscent = !visible;
-        setVisibility(miniMap, visible);
-        setVisibility(mapborder, visible);
-        setVisibility(openMapActor, visible);
-        setVisibility(miniMapPlayer, visible);
-        setAlpha(gamehud, visible);
+        setVisibility(mapGroup, visible);
+        setAlpha(hudGroup, visible);
+        setAlpha(menuGroup, visible);
 
-        setAlpha(lifePoints, visible);
-        setAlpha(shards, visible);
-        setAlpha(money, visible);
-
-        setAlpha(blank, visible);
         setDisabled(exitToWorldMapActor, !MapStage.getInstance().isInMap(), "[%120][+ExitToWorldMap]", "\uFF0F");
         setDisabled(bookmarkActor, !MapStage.getInstance().isInMap(), "[%120][+Bookmark]", "\uFF0F");
-        setAlpha(avatarborder, visible);
-        setAlpha(avatar, visible);
-        setAlpha(deckActor, visible);
-        setAlpha(menuActor, visible);
-        setAlpha(logbookActor, visible);
-        setAlpha(inventoryActor, visible);
-        setAlpha(exitToWorldMapActor, visible);
-        setAlpha(bookmarkActor, visible);
+
         for (TextraButton button : abilityButtonMap) {
             setAlpha(button, visible);
         }
         opacity = visible ? 1f : 0.4f;
     }
-    public void updateHUD(boolean translucent) {
+
+    public void setHUDOpacity(boolean translucent) {
         if (translucent) {
-            setAlpha(lifePoints, false);
-            setAlpha(shards, false);
-            setAlpha(money, false);
-            setAlpha(avatarborder, false);
-            setAlpha(avatar, false);
-            setAlpha(deckActor, false);
-            setAlpha(menuActor, false);
-            setAlpha(logbookActor, false);
-            setAlpha(inventoryActor, false);
-            setAlpha(exitToWorldMapActor, false);
-            setAlpha(bookmarkActor, false);
-            setAlpha(gamehud, false);
-            setAlpha(blank, false);
+            setAlpha(hudGroup, false);
+            setAlpha(menuGroup, false);
             for (TextraButton button : abilityButtonMap) {
                 setAlpha(button, false);
             }
             transluscent = true;
         } else {
-            setAlpha(lifePoints, true);
-            setAlpha(shards, true);
-            setAlpha(money, true);
-            setAlpha(avatarborder, true);
-            setAlpha(avatar, true);
-            setAlpha(deckActor, true);
-            setAlpha(menuActor, true);
-            setAlpha(logbookActor, true);
-            setAlpha(inventoryActor, true);
-            setAlpha(exitToWorldMapActor, true);
-            setAlpha(bookmarkActor, true);
-            setAlpha(gamehud, true);
-            setAlpha(blank, true);
+            setAlpha(hudGroup, true);
+            setAlpha(menuGroup, true);
             for (TextraButton button : abilityButtonMap) {
                 setAlpha(button, true);
             }
@@ -910,7 +918,7 @@ public class GameHUD extends Stage {
         @Override
         public void tap(InputEvent event, float x, float y, int count, int button) {
             if (count > 1 && MapStage.getInstance().isInMap())
-                updateHUD(!transluscent);
+                setHUDOpacity(!transluscent);
             super.tap(event, x, y, count, button);
         }
 
@@ -977,13 +985,13 @@ public class GameHUD extends Stage {
                 notificationText.setWrap(false);
                 notificationText.setText(text);
                 notificationText.setColor(Color.BLACK);
-                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode()?getWidth() * 0.25f : getWidth() - 25));
+                notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
                 notificationText.setWrap(true);
                 notificationText.layout();
 
                 notificationPane.setSize(notificationText.getWidth() + 10, notificationText.getPrefHeight() + 20);
 
-                notificationPane.setPosition(5, Forge.isLandscapeMode()? -notificationPane.getHeight(): getHeight());
+                notificationPane.setPosition(5, Forge.isLandscapeMode() ? -notificationPane.getHeight() : getHeight());
 
                 notificationPane.getColor().a = 1f;
                 notificationPane.layout();
@@ -998,22 +1006,22 @@ public class GameHUD extends Stage {
             newNotification = Actions.after(Actions.sequence(preconfigureNotification,
                     Actions.moveTo(5, 0, 2f),
                     Actions.delay(10f),
-                    Actions.alpha(0f,3f),
-                    Actions.sizeTo(0,0)));
+                    Actions.alpha(0f, 3f),
+                    Actions.sizeTo(0, 0)));
         } else {
             newNotification = Actions.after(Actions.sequence(preconfigureNotification,
                     Actions.moveToAligned(5, getHeight(), Align.topLeft, 2f),
                     Actions.delay(10f),
-                    Actions.alpha(0f,3f),
-                    Actions.sizeTo(0,0)));
+                    Actions.alpha(0f, 3f),
+                    Actions.sizeTo(0, 0)));
         }
 
         notificationPane.addAction(newNotification);
     }
 
-    public void clearNotifications(){
+    public void clearNotifications() {
         notificationText.setText("");
-        notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth()*0.4f, 25);
+        notificationPane.setBounds(5, Forge.isLandscapeMode() ? -notificationText.getPrefHeight() : getHeight(), getWidth() * 0.4f, 25);
         notificationPane.setStyle(Controls.getSkin().get("paper", ScrollPane.ScrollPaneStyle.class));
         notificationPane.getColor().a = 0f;
     }
