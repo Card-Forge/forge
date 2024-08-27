@@ -1,0 +1,12 @@
+Name:Gingerbehemoth
+ManaCost:6
+Types:Artifact Creature Food Golem
+PT:6/6
+K:Vigilance
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Secondary$ True | Description$ CARDNAME costs {2} less to cast for each Food you've sacrificed this turn.
+SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Food/Times.2
+A:AB$ GainLife | Cost$ 4 T Sac<1/CARDNAME> | LifeAmount$ 6 | SpellDescription$ You gain 6 life.
+DeckHas:Ability$LifeGain
+DeckHints:Type$Food
+Oracle:Gingerbehemoth costs {2} less to cast for each Food you've sacrificed this turn.\nVigilance, trample\n{4}, {T}, Sacrifice Gingerbehemoth: You gain 6 life.

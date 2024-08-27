@@ -1,0 +1,12 @@
+Name:The Belligerent and Useless Island
+ManaCost:no cost
+Types:Legendary Artifact Land Vehicle Island
+PT:2/2
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,Battle | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player or battle, draw a card then discard a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+K:Crew:2
+DeckHas:Ability$Discard
+Oracle:The Belligerent and Useless Island enters the battlefield tapped.\nWhenever The Belligerent and Useless Island deals combat damage to a player or battle, draw a card then discard a card.\nCrew 2

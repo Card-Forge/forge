@@ -270,12 +270,12 @@ public class BlurUtils {
                 pixmap.getWidth(), pixmap.getHeight(), radius, iterations,
                 disposePixmap);
     }
-    public static Pixmap blur(Pixmap pixmap, int radius, int iterations, boolean disposePixmap, boolean crop) {
+    public static Pixmap blur(Pixmap pixmap, int radius, int iterations, boolean disposePixmap, int div) {
         int x = (int)(pixmap.getWidth()*0.35f);
         int y = (int)(pixmap.getHeight()*0.35f);
         int width = pixmap.getWidth()-x;
         int height = pixmap.getHeight()-y;
-        return blur(pixmap, x/2, y/2, width, height, 0, 0, width, height, radius, iterations, disposePixmap);
+        return blur(pixmap, x/2, y/2, width, height, 0, 0, width/div, height/div, radius, iterations, disposePixmap);
     }
 
     /**

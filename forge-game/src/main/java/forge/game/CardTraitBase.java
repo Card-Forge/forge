@@ -64,7 +64,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "TokenImage", "NewName", "ChooseFromList")
+            .add("TokenScript", "TokenImage", "NewName" , "DefinedName", "ChooseFromList")
             .add("AddAbility").build();
 
     /**
@@ -170,7 +170,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      *
      * @return a boolean.
      */
-    public final boolean isSecondary() {
+    public boolean isSecondary() {
         return getParamOrDefault("Secondary", "False").equals("True");
     }
 

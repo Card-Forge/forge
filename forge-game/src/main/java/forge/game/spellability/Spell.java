@@ -153,6 +153,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         this.castFaceDown = faceDown;
     }
 
+    @Override
     public Card getAlternateHost(Card source) {
         boolean lkicheck = false;
 

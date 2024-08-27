@@ -14,7 +14,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostPutCounter;
@@ -32,20 +31,14 @@ public class ComputerUtilAbility {
         if (!game.getStack().isEmpty() || !game.getPhaseHandler().getPhase().isMain()) {
             return null;
         }
-        final CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
-        hand.addAll(player.getCardsIn(ZoneType.Exile));
-        CardCollection landList = CardLists.filter(hand, Presets.LANDS);
+        CardCollection landList = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
         //filter out cards that can't be played
         landList = CardLists.filter(landList, c -> {
-            if (!c.getSVar("NeedsToPlay").isEmpty()) {
-                final String needsToPlay = c.getSVar("NeedsToPlay");
-                CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay, c.getController(), c, null);
-                if (list.isEmpty()) {
-                    return false;
-                }
+            if (!c.hasPlayableLandFace()) {
+                return false;
             }
-            return player.canPlayLand(c);
+            return player.canPlayLand(c, false, c.getFirstSpellAbility());
         });
 
         final CardCollection landsNotInHand = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
@@ -54,7 +47,7 @@ public class ComputerUtilAbility {
             landsNotInHand.add(player.getCardsIn(ZoneType.Library).get(0));
         }
         for (final Card crd : landsNotInHand) {
-            if (!(crd.isLand() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
+            if (!(crd.hasPlayableLandFace() || (crd.isFaceDown() && crd.getState(CardStateName.Original).getType().isLand()))) {
                 continue;
             }
             if (!crd.mayPlay(player).isEmpty()) {

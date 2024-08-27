@@ -27,6 +27,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.*;
 import forge.adventure.util.*;
@@ -959,10 +960,11 @@ public class MapStage extends GameStage {
                 } else {
                     Vector2 destination = mob.getTargetVector(player, verticesNearPlayer, delta);
 
-                    if (destination.epsilonEquals(mob.pos()) && !mob.aggro) {
+                    if (mob.isFrozen() || (destination.epsilonEquals(mob.pos()) && !mob.aggro)) {
                         mob.setAnimation(CharacterSprite.AnimationTypes.Idle);
                         continue;
                     }
+
                     if (destination.equals(mob.targetVector) && mob.getNavPath() != null)
                         navPath = mob.getNavPath();
 
@@ -1025,18 +1027,40 @@ public class MapStage extends GameStage {
                     Gdx.input.vibrate(50);
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(100, 1);
-                    startPause(0.1f, () -> { //Switch to item pickup scene.
-                        RewardSprite RS = (RewardSprite) actor;
-                        RewardScene.instance().loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
-                        RS.remove();
-                        actors.removeValue(RS, true);
-                        changes.deleteObject(RS.getId());
-                        Forge.switchScene(RewardScene.instance());
-                    });
+                    RewardSprite RS = (RewardSprite) actor;
+                    Array<Reward> rewards = RS.getRewards();
+
+                    if (rewards.size == 1) {
+                        Reward reward = rewards.get(0);
+                        switch (reward.getType()) {
+                            case Life:
+                            case Shards:
+                            case Gold:
+                                String message = Forge.getLocalizer().getMessageorUseDefault("lbl" + reward.getType().name(), reward.getType().name());
+                                AdventurePlayer.current().addStatusMessage(reward.getType().name(), message, reward.getCount(), actor.getX(), actor.getY() + player.getHeight());
+                                AdventurePlayer.current().addReward(reward);
+                                break;
+                            default:
+                                showRewardScene(rewards);
+                                break;
+                        }
+                    } else {
+                        showRewardScene(rewards);
+                    }
+                    RS.remove();
+                    actors.removeValue(RS, true);
+                    changes.deleteObject(RS.getId());
                     break;
                 }
             }
         }
+    }
+
+    private void showRewardScene(Array<Reward> rewards) {
+        startPause(0.1f, () -> {
+            RewardScene.instance().loadRewards(rewards, RewardScene.Type.Loot, null);
+            Forge.switchScene(RewardScene.instance());
+        });
     }
 
     boolean started = false;

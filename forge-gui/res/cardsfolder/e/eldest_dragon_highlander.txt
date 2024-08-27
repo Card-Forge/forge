@@ -1,0 +1,10 @@
+Name:Eldest Dragon Highlander
+ManaCost:W W U U B B R R G G
+Types:Legendary Creature Elder Dragon
+PT:7/7
+K:Flying
+K:Trample
+K:Rampage:2
+A:AB$ PumpAll | Cost$ W U B R G | ValidCards$ Dragon.Elder+YouCtrl | NumAtt$ 7 | NumDef$ 7 | SpellDescription$ Elder Dragons you control get +7/+7 until end of turn.
+K:UpkeepCost:W U B R G
+Oracle:Flying, trample, rampage 2\n{W}{U}{B}{R}{G}: Elder Dragons you control get +7/+7 until end of turn.\nAt the beginning of your upkeep, sacrifice Eldest Dragon Highlander unless you pay {W}{U}{B}{R}{G}.

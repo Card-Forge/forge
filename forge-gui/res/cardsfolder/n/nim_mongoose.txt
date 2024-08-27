@@ -1,0 +1,11 @@
+Name:Nim Mongoose
+ManaCost:B
+Types:Creature Zombie Mongoose
+PT:2/1
+K:Shroud
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Condition$ Threshold | Description$ Threshold — CARDNAME gets +1/+0 for each artifact you control as long as seven or more cards are in your graveyard.
+SVar:X:Count$Valid Artifact.YouCtrl
+SVar:BuffedBy:Artifact
+Oracle:Shroud\nNim Mongoose enters the battlefield tapped.\nThreshold — Nim Mongoose gets +1/+0 for each artifact you control as long as seven or more cards are in your graveyard.
