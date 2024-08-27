@@ -76,7 +76,7 @@ import java.util.Map.Entry;
  * @author Forge
  * @version $Id$
  */
-public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
+public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITranslatable {
     private Game game;
     private final IPaperCard paperCard;
 
@@ -2227,7 +2227,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
+        return CardTranslation.translateMultipleDescriptionText(sb.toString(), this);
     }
 
     // convert a keyword list to the String that should be displayed in game
@@ -2632,7 +2632,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sbLong.append("\r\n");
         }
         sb.append(sbLong);
-        return CardTranslation.translateMultipleDescriptionText(sb.toString(), getName());
+        return CardTranslation.translateMultipleDescriptionText(sb.toString(), this);
     }
 
     private String kickerDesc(String keyword, String remText) {
@@ -3194,7 +3194,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        sb.append(CardTranslation.translateMultipleDescriptionText(sbBefore.toString(), state.getName()));
+        sb.append(CardTranslation.translateMultipleDescriptionText(sbBefore.toString(), state));
 
         // add Spells there to main StringBuilder
         sb.append(strSpell);
@@ -3223,7 +3223,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        sb.append(CardTranslation.translateMultipleDescriptionText(sbAfter.toString(), state.getName()));
+        sb.append(CardTranslation.translateMultipleDescriptionText(sbAfter.toString(), state));
         return sb;
     }
 
@@ -3553,8 +3553,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCopiedPermanent(final Card c) {
         if (copiedPermanent == c) { return; }
         copiedPermanent = c;
-        if(c != null)
+        if(c != null) {
             currentState.setOracleText(c.getOracleText());
+            currentState.setFunctionalVariantName(c.getCurrentState().getFunctionalVariantName());
+        }
         //Could fetch the card rules oracle text in an "else" clause here,
         //but CardRules isn't aware of the card's state. May be better to
         //just stash the original oracle text if this comes up.
@@ -7558,6 +7560,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void setOracleText(final String oracleText) {
         currentState.setOracleText(oracleText);
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return currentState.getTranslationKey();
+    }
+    @Override
+    public String getUntranslatedName() {
+        return this.getName();
+    }
+    @Override
+    public String getUntranslatedType() {
+        return currentState.getUntranslatedType();
+    }
+    @Override
+    public String getUntranslatedOracle() {
+        return currentState.getUntranslatedOracle();
     }
 
     @Override

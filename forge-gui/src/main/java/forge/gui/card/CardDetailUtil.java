@@ -178,7 +178,7 @@ public class CardDetailUtil {
 
     public static String formatCardType(final CardStateView card, final boolean canShow) {
         boolean isInPlay = card.getCard() != null && ZoneType.Battlefield.equals(card.getCard().getZone());
-        String translatedtype = CardTranslation.getTranslatedType(card.getName(), card.getType().toString());
+        String translatedtype = CardTranslation.getTranslatedType(card);
         return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown && isInPlay ? "Creature" : "");
     }
 
@@ -319,8 +319,8 @@ public class CardDetailUtil {
                 needTranslation = false;
         }
         String text = !card.isSplitCard() ?
-            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
-            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null) :
+            card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState(), card.getRightSplitState()) : null );
 
         // Bracket P/T for Level up
         if (text.contains("LEVEL")) {
