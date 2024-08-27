@@ -620,7 +620,10 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setOptionalKeywordAmount(ki, v);
+
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
+                }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);
