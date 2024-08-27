@@ -898,6 +898,9 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilHostLeavesPlayOrEOT".equals(duration)) {
             host.addLeavesPlayCommand(until);
             game.getEndOfTurn().addUntil(until);
+        } else if ("UntilHostLeavesPlayOrEndOfCombat".equals(duration)) {
+            host.addLeavesPlayCommand(until);
+            game.getEndOfCombat().addUntil(until);
         } else if ("UntilLoseControlOfHost".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addChangeControllerCommand(until);

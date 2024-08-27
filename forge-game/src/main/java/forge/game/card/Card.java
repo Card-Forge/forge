@@ -4591,19 +4591,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return StaticAbilityCombatDamageToughness.combatDamageToughness(this);
     }
 
-    // How much combat damage does the card deal
-    public final StatBreakdown getNetCombatDamageBreakdown() {
-        if (hasKeyword("CARDNAME assigns no combat damage")) {
-            return new StatBreakdown();
-        }
-
-        if (toughnessAssignsDamage()) {
-            return getNetToughnessBreakdown();
-        }
-        return getNetPowerBreakdown();
+    public final boolean assignNoCombatDamage() {
+        return StaticAbilityAssignNoCombatDamage.assignNoCombatDamage(this);
     }
+
+    // How much combat damage does the card deal
     public final int getNetCombatDamage() {
-        return getNetCombatDamageBreakdown().getTotal();
+        return assignNoCombatDamage() ? 0 : (toughnessAssignsDamage() ? getNetToughnessBreakdown() : getNetPowerBreakdown()).getTotal();
     }
 
     private int intensity = 0;
