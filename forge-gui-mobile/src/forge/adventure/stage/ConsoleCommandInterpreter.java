@@ -193,7 +193,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"leave"}, s -> {
             if (!MapStage.getInstance().isInMap()) return "not on a map";
-            MapStage.getInstance().exitDungeon();
+            MapStage.getInstance().exitDungeon(false);
             return "Got out";
         });
         registerCommand(new String[]{"debug", "collision"}, s -> {

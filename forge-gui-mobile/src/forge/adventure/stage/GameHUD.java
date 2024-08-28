@@ -882,7 +882,7 @@ public class GameHUD extends Stage {
             @Override
             public boolean act(float v) {
                 if (exitDungeon) {
-                    MapStage.getInstance().exitDungeon();
+                    MapStage.getInstance().exitDungeon(false);
                     setDisabled(exitToWorldMapActor, true, "[%120][+ExitToWorldMap]", "\uFF0F");
                     setDisabled(bookmarkActor, true, "[%120][+Bookmark]", "\uFF0F");
                 }

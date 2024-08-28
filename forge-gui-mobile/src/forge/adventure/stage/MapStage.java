@@ -605,7 +605,7 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(MapStage.this::exitDungeon));
+                        addMapActor(obj, new OnCollide(() -> MapStage.this.exitDungeon(false)));
                         break;
                     case "dialog":
                         if (obj instanceof TiledMapTileMapObject) {
@@ -749,13 +749,15 @@ public class MapStage extends GameStage {
         }
     }
 
-    public boolean exitDungeon() {
+    public boolean exitDungeon(boolean defeated) {
         WorldSave.getCurrentSave().autoSave();
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
+        if (defeated)
+            WorldStage.getInstance().resetPlayerLocation();
         Forge.switchScene(GameScene.instance());
         return true;
     }
@@ -799,10 +801,11 @@ public class MapStage extends GameStage {
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.this);
                 boolean defeated = Current.player().defeated();
-                if (canFailDungeon && defeated) {
+                if (defeated) {
                     //If hardcore mode is added, check and redirect to game over screen here
-                    dungeonFailedDialog();
-                    exitDungeon();
+                    if (canFailDungeon)
+                        dungeonFailedDialog();
+                    exitDungeon(true);
                 }
                 MapStage.this.stop();
                 currentMob = null;
