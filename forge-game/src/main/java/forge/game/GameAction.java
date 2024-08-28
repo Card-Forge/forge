@@ -1399,10 +1399,10 @@ public class GameAction {
                         || game.getRules().hasAppliedVariant(GameType.Brawl)
                         || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
                     for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
-                        checkAgain |= stateBasedAction903_9a(c);
+                        checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
                     for (final Card c : p.getCardsIn(ZoneType.Exile).threadSafeIterable()) {
-                        checkAgain |= stateBasedAction903_9a(c);
+                        checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
                 }
 
@@ -1633,14 +1633,15 @@ public class GameAction {
         return checkAgain;
     }
 
-    private boolean stateBasedAction903_9a(Card c) {
+    private boolean stateBasedAction_Commander(Card c, Map<AbilityKey, Object> mapParams) {
+        // CR 903.9a
         if (c.isRealCommander() && c.canMoveToCommandZone()) {
             // FIXME: need to flush the tracker to make sure the Commander is properly updated
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
             if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
-                moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
+                moveTo(c.getOwner().getZone(ZoneType.Command), c, null, mapParams);
                 return true;
             }
         }
