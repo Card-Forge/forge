@@ -131,7 +131,7 @@ public class GameCopier {
 
         for (Player origPlayer : playerMap.keySet()) {
             Player newPlayer = playerMap.get(origPlayer);
-            origPlayer.copyCommandersToSnapshot(newPlayer, newGame);
+            origPlayer.copyCommandersToSnapshot(newPlayer, gameObjectMap::map);
             ((PlayerZoneBattlefield) newPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

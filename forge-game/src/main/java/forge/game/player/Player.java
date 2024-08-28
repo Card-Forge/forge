@@ -63,6 +63,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 
 /**
  * <p>
@@ -2785,14 +2786,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-    public void copyCommandersToSnapshot(Player toPlayer, Game toGame) {
+    public void copyCommandersToSnapshot(Player toPlayer, Function<Card, Card> mapper) {
         //Seems like the rest of the logic for copying players should be in this class too.
         //For now, doing this here can retain the links between commander effects and commanders.
 
         toPlayer.resetCommanderStats();
         toPlayer.commanders.clear();
         for (final Card c : this.getCommanders()) {
-            Card newCommander = toGame.findById(c.getId());
+            Card newCommander = mapper.apply(c);
             if(newCommander == null)
                 throw new RuntimeException("Unable to find commander in game snapshot: " + c);
             toPlayer.commanders.add(newCommander);
@@ -2800,18 +2801,18 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
         for (Map.Entry<Card, Integer> entry : this.commanderCast.entrySet()) {
             //Have to iterate over this separately in case commanders change mid-game.
-            Card commander = toGame.findById(entry.getKey().getId());
+            Card commander = mapper.apply(entry.getKey());
             toPlayer.commanderCast.put(commander, entry.getValue());
         }
         for (Map.Entry<Card, Integer> entry : this.getCommanderDamage()) {
-            Card commander = toGame.findById(entry.getKey().getId());
+            Card commander = mapper.apply(entry.getKey());
             if(commander == null) //Ceased to exist?
                 continue;
             int damage = entry.getValue();
             toPlayer.addCommanderDamage(commander, damage);
         }
         if (this.commanderEffect != null) {
-            Card commanderEffect = toGame.findById(this.commanderEffect.getId());
+            Card commanderEffect = mapper.apply(this.commanderEffect);
             toPlayer.commanderEffect = (DetachedCardEffect) commanderEffect;
         }
     }
