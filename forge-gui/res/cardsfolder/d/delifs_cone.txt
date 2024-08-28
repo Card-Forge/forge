@@ -3,8 +3,9 @@ ManaCost:0
 Types:Artifact
 A:AB$ Effect | Cost$ T Sac<1/CARDNAME> | ValidTgts$ Creature.YouCtrl | Triggers$ TrigAttackerUnblocked | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | SpellDescription$ This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
 SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Card.IsRemembered | Execute$ GainLife | OptionalDecider$ You | TriggerDescription$ This turn, when that creature attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
-SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ DelifX | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME assigns no combat damage | StackDescription$ {c:Remembered} assigns no combat damage this turn.
+SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ DelifX | SubAbility$ DBNoCombatDamage
+SVar:DBNoCombatDamage:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ SNoCombatDamage | ForgetOnMoved$ Battlefield
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.IsRemembered | Description$ Remembered creature assigns no combat damage this turn.
 SVar:DelifX:Remembered$CardPower
 AI:RemoveDeck:All
 Oracle:{T}, Sacrifice Delif's Cone: This turn, when target creature you control attacks and isn't blocked, you may gain life equal to its power. If you do, it assigns no combat damage this turn.
