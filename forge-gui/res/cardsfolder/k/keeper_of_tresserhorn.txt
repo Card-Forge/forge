@@ -2,7 +2,8 @@ Name:Keeper of Tresserhorn
 ManaCost:5 B
 Types:Creature Avatar
 PT:6/6
-T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBLose
+T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ DBNoCombatDamage | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.
+SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBLose
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
 SVar:DBLose:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 2
 Oracle:Whenever Keeper of Tresserhorn attacks and isn't blocked, it assigns no combat damage this turn and defending player loses 2 life.

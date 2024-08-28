@@ -4,7 +4,8 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 T:Mode$ AttackerBlocked | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ LaccolithDmg | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
-SVar:LaccolithDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ RigX | SubAbility$ NoCombatDamage | DamageSource$ TriggeredAttacker
-SVar:NoCombatDamage:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ HIDDEN CARDNAME assigns no combat damage
+SVar:LaccolithDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature to deal damage to | NumDmg$ RigX | SubAbility$ DBNoCombatDamage | DamageSource$ TriggeredAttacker
+SVar:DBNoCombatDamage:DB$ Effect | RememberObjects$ TriggeredAttackerLKICopy | StaticAbilities$ SNoCombatDamage | ForgetOnMoved$ Battlefield
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.IsRemembered | Description$ Remembered creature assigns no combat damage this turn.
 SVar:RigX:TriggeredAttacker$CardPower
 Oracle:Enchant creature\nWhenever enchanted creature becomes blocked, you may have it deal damage equal to its power to target creature. If you do, the first creature assigns no combat damage this turn.
