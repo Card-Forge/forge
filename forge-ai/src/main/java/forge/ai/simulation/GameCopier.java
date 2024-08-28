@@ -66,11 +66,7 @@ public class GameCopier {
     }
 
     public Game makeCopy() {
-        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            return snapshot.makeCopy();
-        } else {
-            return makeCopy(null, null);
-        }
+        return makeCopy(null, null);
     }
     public Game makeCopy(PhaseType advanceToPhase, Player aiPlayer) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {

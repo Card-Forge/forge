@@ -30,16 +30,7 @@ public class AbilityApiBased extends AbilityActivated {
 
     @Override
     public String getStackDescription() {
-        StringBuilder sb = new StringBuilder();
-        if (this.hostCard.hasPromisedGift() && this.isSpell() && !this.hostCard.isPermanent()) {
-            sb.append("Gift a ").
-                    append(this.getAdditionalAbility("GiftAbility").getParam("GiftDescription")).
-                    append(" to ").append(this.hostCard.getPromisedGift()).
-                    append(". ");
-        }
-
-        sb.append(effect.getStackDescriptionWithSubs(mapParams, this));
-        return sb.toString();
+        return effect.getStackDescriptionWithSubs(mapParams, this);
     }
 
     /* (non-Javadoc)

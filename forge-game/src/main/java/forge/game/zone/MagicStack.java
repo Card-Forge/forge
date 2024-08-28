@@ -544,7 +544,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex, false));
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
         return si;
     }
 

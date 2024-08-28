@@ -64,6 +64,11 @@ public abstract class SpellAbilityEffect {
             // prelude for when this is root ability
             if (!(sa instanceof AbilitySub)) {
                 sb.append(sa.getHostCard()).append(" -");
+                if (sa.getHostCard().hasPromisedGift()) {
+                    sb.append(" Gift ").
+                    append(sa.getAdditionalAbility("GiftAbility").getParam("GiftDescription")).
+                    append(" to ").append(sa.getHostCard().getPromisedGift()).append(". ");
+                }
             }
             sb.append(" ");
         }
@@ -462,6 +467,7 @@ public abstract class SpellAbilityEffect {
 
     public static void addForgetOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | ExcludedDestinations$ Stack,Exile | Destination$ Any | TriggerZones$ Command | Static$ True";
+        // CR 400.8 Exiled card becomes new object when it's exiled
         String trig2 = "Mode$ Exiled | ValidCard$ Card.IsRemembered | ValidCause$ SpellAbility.!EffectSource | TriggerZones$ Command | Static$ True";
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);

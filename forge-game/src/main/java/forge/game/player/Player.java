@@ -2017,14 +2017,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean cantWin() {
-        boolean isAnyOppLoseProof = false;
-        for (Player p : game.getPlayers()) {
-            if (p == this || p.getOutcome() != null) {
-                continue; // except self and already dead
-            }
-            isAnyOppLoseProof |= p.hasKeyword("You can't lose the game.");
-        }
-        return hasKeyword("You can't win the game.") || isAnyOppLoseProof;
+        return hasKeyword("You can't win the game.");
     }
 
     public final boolean checkLoseCondition() {

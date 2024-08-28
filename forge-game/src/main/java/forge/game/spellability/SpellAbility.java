@@ -984,13 +984,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                ITranslatable nameSource;
-                // if alternate state is viewed while card uses original
-                if (node.isIntrinsic() && node.cardState != null && node.cardState.getCard() == node.getHostCard()) {
-                    nameSource = node.cardState;
-                } else {
-                    nameSource = node.getHostCard();
-                }
+                ITranslatable nameSource = getHostName(node);
                 desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
                 String translatedName = CardTranslation.getTranslatedName(nameSource);
                 desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
