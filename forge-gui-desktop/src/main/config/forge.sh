@@ -5,9 +5,9 @@
 # Based on the code from this source: https://eed3si9n.com/detecting-java-version-bash
 jdk_version() {
   local result
-  local IFS=$'\n'
+  local IFS; IFS=$'\n'
   # remove \r for Cygwin
-  local lines=$("$java_cmd" -Xms32M -Xmx32M -version 2>&1 | tr '\r' '\n')
+  local lines; lines="$("$java_cmd" -Xms32M -Xmx32M -version 2>&1 | tr '\r' '\n')"
   if [[ -z $java_cmd ]]
   then
     result=no_java
@@ -15,13 +15,13 @@ jdk_version() {
     for line in $lines; do
       if [[ (-z $result) && ($line = *"version \""*) ]]
       then
-        local ver=$(echo $line | sed -e 's/.*version "\(.*\)"\(.*\)/\1/; 1q')
+        local ver; ver=$(echo "$line" | sed -e 's/.*version "\(.*\)"\(.*\)/\1/; 1q')
         # on macOS, sed doesn't support '?'
         if [[ $ver = "1."* ]]
         then
-          result=$(echo $ver | sed -e 's/1\.\([0-9]*\)\(.*\)/\1/; 1q')
+          result=$(echo "$ver" | sed -e 's/1\.\([0-9]*\)\(.*\)/\1/; 1q')
         else
-          result=$(echo $ver | sed -e 's/\([0-9]*\)\(.*\)/\1/; 1q')
+          result=$(echo "$ver" | sed -e 's/\([0-9]*\)\(.*\)/\1/; 1q')
         fi
       fi
     done
@@ -39,7 +39,7 @@ fi
 v="$(jdk_version)"
 
 SHAREDPARAMS='-Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$ '"$@"
-cd $(dirname "${0}")
+cd "$(dirname "${0}")" || exit
 
 if [[ $v -ge 17 ]]
 then
