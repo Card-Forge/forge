@@ -630,11 +630,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case Card:
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
-                if (reward.isNoSell()) {
+                if (reward.isAutoSell()) {
+                  autoSellCards.add(reward.getCard());
+                  refreshEditor();
+                } else if (reward.isNoSell()) {
                     noSellCards.add(reward.getCard());
-                    AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
-                    if (editor != null)
-                        editor.refresh();
+                    refreshEditor();
                 }
                 break;
             case Gold:
@@ -656,6 +657,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 addShards(reward.getCount());
                 break;
         }
+    }
+
+    private void refreshEditor() {
+        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+        if (editor != null)
+            editor.refresh();
     }
 
     private void addGold(int goldCount) {

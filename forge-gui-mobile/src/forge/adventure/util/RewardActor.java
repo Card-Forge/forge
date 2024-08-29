@@ -59,6 +59,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     ImageToolTip tooltip;
     HoldTooltip holdTooltip;
     Reward reward;
+    public TextraButton autoSell;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
@@ -77,7 +78,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
-    boolean isRewardShop, showOverlay;
+    boolean isRewardShop, showOverlay, isLoot;
     TextraLabel overlayLabel;
 
     public int renderedCount = 0; //Counter for cards that require rendering a preview.
@@ -181,12 +182,21 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         this.flipOnClick = flippable;
         this.reward = reward;
         this.isRewardShop = RewardScene.Type.Shop.equals(type);
+        this.isLoot = RewardScene.Type.Loot.equals(type);
         this.showOverlay = showOverlay;
         if (backTexture == null) {
             backTexture = FSkin.getSleeves().get(0);
         }
         switch (reward.type) {
             case Card: {
+                autoSell = Controls.newTextButton("[%75][GRAY]\uFF04");
+                autoSell.addListener(new ClickListener() {
+                    public void clicked(InputEvent event, float x, float y) {
+                        reward.setAutoSell(!reward.isAutoSell());
+                        String c = reward.isAutoSell() ? "[%75][GREEN]" : "[%75][GRAY]";
+                        autoSell.setText(c+"\uFF04");
+                    }
+                });
                 hasbackface = reward.getCard().hasBackFace();
                 if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
@@ -709,6 +719,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             } catch (Exception e) {
             }
         }
+        if (autoSell != null)
+            autoSell.remove();
     }
 
     public void flip() {
@@ -717,6 +729,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         clicked = true;
         flipProcess = 0;
         SoundSystem.instance.play(SoundEffectType.FlipCard, false);
+        if (isLoot && autoSell != null) {
+            autoSell.setPosition(this.getX(), this.getY());
+            getStage().addActor(autoSell);
+        }
     }
 
     public void sold() {
