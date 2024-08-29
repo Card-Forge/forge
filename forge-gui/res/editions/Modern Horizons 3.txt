@@ -659,7 +659,6 @@ c_a_treasure_sac
 g_0_1_plant
 g_1_1_insect
 r_1_1_gremlin
-spellgorger_weird
 u_1_1_a_thopter_flying
 u_1_2_moonfolk_flying
 u_2_2_bird_flying
