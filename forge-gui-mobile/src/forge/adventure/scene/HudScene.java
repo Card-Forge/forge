@@ -139,8 +139,6 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
             return true;
         if (isInHudOnlyMode())
             return false;
-        if (Forge.advFreezePlayerControls)
-            return false;
         return stage.touchUp(screenX, screenY, pointer, button);
     }
 
