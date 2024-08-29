@@ -801,19 +801,18 @@ public class MapStage extends GameStage {
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.this);
                 boolean defeated = Current.player().defeated();
-                if (defeated) {
-                    //If hardcore mode is added, check and redirect to game over screen here
-                    if (canFailDungeon)
-                        dungeonFailedDialog();
-                    exitDungeon(true);
-                }
+                //If hardcore mode is added, check and redirect to game over screen here
+                if (canFailDungeon && !defeated)
+                    dungeonFailedDialog(true);
+                else
+                    exitDungeon(defeated);
                 MapStage.this.stop();
                 currentMob = null;
             });
         }
     }
 
-    private void dungeonFailedDialog() {
+    private void dungeonFailedDialog(boolean exit) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
@@ -832,7 +831,8 @@ public class MapStage extends GameStage {
             public void clicked(InputEvent event, float x, float y) {
                 L.skipToTheEnd();
                 super.clicked(event, x, y);
-                //exitDungeon();
+                if (exit)
+                    exitDungeon(false);
             }
         });
         dialog.getButtonTable().add(ok).width(240f);

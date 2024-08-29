@@ -147,7 +147,7 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-    public void showImageDialog(String message, FBufferedImage fb) {
+    public void showImageDialog(String message, FBufferedImage fb, Runnable runnable) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
@@ -173,6 +173,9 @@ public abstract class GameStage extends Stage {
                         fb.dispose();
                 }
             }, 0.5f);
+            if (runnable != null) {
+                runnable.run();
+            }
         })).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -642,18 +645,13 @@ public abstract class GameStage extends Stage {
     {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
-            Timer.schedule(new Timer.Task() {
-                @Override
-                public void run() {
-                    FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
-                        WorldStage.getInstance().setPosition(poi.getPosition());
-                        WorldStage.getInstance().loadPOI(poi);
-                        Forge.clearTransitionScreen();
-                        showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null);
-                    }, null, false, true, false, false)));
-                }
-            }, 0.3f);
-        }
+            showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
+                () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                    WorldStage.getInstance().loadPOI(poi);
+                    Forge.clearTransitionScreen();
+                    }, null, false, true, false, false))));
+        }//Spawn shouldn't be null
     }
 
 }
