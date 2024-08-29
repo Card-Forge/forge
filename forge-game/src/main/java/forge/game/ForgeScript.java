@@ -79,7 +79,7 @@ public class ForgeScript {
             return non != colors.isMonoColor();
         } else if (property.startsWith("ChosenColor")) {
             boolean non = property.startsWith("non");
-            return !non && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
+            return !non && source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
         } else if (property.startsWith("AnyChosenColor")) {
             boolean non = property.startsWith("non");
             return !non && source.hasChosenColor()
