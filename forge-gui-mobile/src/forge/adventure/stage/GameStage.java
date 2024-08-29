@@ -24,6 +24,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.DialogData;
@@ -646,13 +647,20 @@ public abstract class GameStage extends Stage {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
             Forge.advFreezePlayerControls = true;
-            showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
-                () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
-                    Forge.advFreezePlayerControls = false;
-                    WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
-                    WorldStage.getInstance().loadPOI(poi);
-                    Forge.clearTransitionScreen();
-                    }, null, false, true, false, false))));
+            getPlayerSprite().setAnimation(CharacterSprite.AnimationTypes.Death);
+            getPlayerSprite().playEffect(Paths.EFFECT_BLOOD, 0.5f);
+            Timer.schedule(new Timer.Task() {
+                @Override
+                public void run() {
+                    showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
+                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+                                Forge.advFreezePlayerControls = false;
+                                WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                                WorldStage.getInstance().loadPOI(poi);
+                                Forge.clearTransitionScreen();
+                            }, Forge.takeScreenshot(), ""))));
+                }
+            }, 1f);
         }//Spawn shouldn't be null
     }
 

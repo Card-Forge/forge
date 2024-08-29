@@ -31,11 +31,15 @@ public class TransitionScreen extends FContainer {
     Texture vsTexture;
     String enemyAtlasPath, playerAvatarName, enemyAvatarName;
     private String message = "", playerRecord = "", enemyRecord = "";
-    boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene;
+    boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene, isAlternate;
     GlyphLayout layout;
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
+    }
+
+    public TransitionScreen(Runnable proc, TextureRegion screen, String message) {//simple for custom transition
+        this(proc, screen, true, false, false, false, false, message, null, "", "", "", "", "");
     }
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, String loadingMessage) {
@@ -51,6 +55,9 @@ public class TransitionScreen extends FContainer {
     }
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion player, String enemyAtlas, String playerName, String enemyName, String playerRecord, String enemyRecord) {
+        this(proc, screen, false, enterMatch, loading, intro, fadeMusic, loadingMessage, player, enemyAtlas, playerName, enemyName, playerRecord, enemyRecord);
+    }
+    public TransitionScreen(Runnable proc, TextureRegion screen, boolean alternate, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion player, String enemyAtlas, String playerName, String enemyName, String playerRecord, String enemyRecord) {
         progressBar = new FProgressBar();
         progressBar.setMaximum(100);
         progressBar.setPercentMode(true);
@@ -62,6 +69,7 @@ public class TransitionScreen extends FContainer {
         isloading = loading;
         isIntro = intro;
         isFadeMusic = fadeMusic;
+        isAlternate = alternate;
         message = loadingMessage;
         this.playerRecord = playerRecord;
         this.enemyRecord = enemyRecord;
@@ -99,7 +107,7 @@ public class TransitionScreen extends FContainer {
     }
 
     private class BGAnimation extends ForgeAnimation {
-        float DURATION = isArenaScene ? 1.2f : 0.6f;
+        float DURATION = isArenaScene || isAlternate ? 1.2f : 0.6f;
         private float progress = 0;
         TextureRegion enemyAvatar;
 
@@ -119,7 +127,12 @@ public class TransitionScreen extends FContainer {
                     e.printStackTrace();
                 }
             }
-            if (isloading) {
+            if (isAlternate) {
+                g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                if (textureRegion != null) {
+                    g.drawPortalFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), Math.min(percentage, 1f), true);
+                }
+            } else if (isloading) {
                 g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                 FSkinTexture bgTexture = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE;
                 if (bgTexture != null) {

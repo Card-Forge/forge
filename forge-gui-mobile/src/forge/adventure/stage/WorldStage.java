@@ -67,7 +67,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     boolean collided = false;
     @Override
     protected void onActing(float delta) {
-        if (isPaused() || MapStage.getInstance().isDialogOnlyInput())
+        if (isPaused() || MapStage.getInstance().isDialogOnlyInput() || Forge.advFreezePlayerControls)
             return;
         drawNavigationArrow();
         if (player.isMoving()) {

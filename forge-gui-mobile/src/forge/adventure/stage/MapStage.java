@@ -935,7 +935,7 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
-        if (isPaused() || isDialogOnlyInput())
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls)
             return;
         Iterator<EnemySprite> it = enemies.iterator();
 
