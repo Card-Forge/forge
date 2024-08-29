@@ -134,7 +134,7 @@ public class DuelScene extends ForgeScene {
     Runnable endRunnable = null;
 
     void afterGameEnd(String enemyName, boolean winner) {
-        Forge.restrictAdvMenus = winner;
+        Forge.advFreezePlayerControls = winner;
         endRunnable = () -> Gdx.app.postRunnable(() -> {
             GameHUD.getInstance().switchAudio();
             dungeonEffect = null;

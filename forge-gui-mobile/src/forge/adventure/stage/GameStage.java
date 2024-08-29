@@ -570,7 +570,7 @@ public abstract class GameStage extends Stage {
     }
 
     public void openMenu() {
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(StartScene.instance());
@@ -645,8 +645,10 @@ public abstract class GameStage extends Stage {
     {
         PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
         if (poi != null) {
+            Forge.advFreezePlayerControls = true;
             showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
                 () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    Forge.advFreezePlayerControls = false;
                     WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                     WorldStage.getInstance().loadPOI(poi);
                     Forge.clearTransitionScreen();
