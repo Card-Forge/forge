@@ -153,7 +153,7 @@ public class GuiMobile implements IGuiBase {
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
         if (Forge.isMobileAdventureMode) {
-            FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image));
+            FThreads.invokeInEdtNowOrLater(() -> MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, (FBufferedImage)image, null));
             return;
         }
         new WaitCallback<Integer>() {

@@ -34,6 +34,7 @@ import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Paths;
@@ -46,7 +47,9 @@ import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.screens.TransitionScreen;
 import forge.util.MyRandom;
 
 import java.util.HashMap;
@@ -144,12 +147,12 @@ public abstract class GameStage extends Stage {
         showDialog();
     }
 
-    public void showImageDialog(String message, FBufferedImage fb) {
+    public void showImageDialog(String message, FBufferedImage fb, Runnable runnable) {
         dialog.getContentTable().clear();
         dialog.getButtonTable().clear();
         dialog.clearListeners();
 
-        if (fb.getTexture() != null) {
+        if (fb != null && fb.getTexture() != null) {
             TextureRegion tr = new TextureRegion(fb.getTexture());
             tr.flip(true, true);
             Image image = new Image(tr);
@@ -166,9 +169,13 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    fb.dispose();
+                    if (fb != null)
+                        fb.dispose();
                 }
             }, 0.5f);
+            if (runnable != null) {
+                runnable.run();
+            }
         })).width(240f);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
@@ -632,6 +639,19 @@ public abstract class GameStage extends Stage {
     public void setPosition(Vector2 position) {
         getPlayerSprite().setPosition(position);
         teleported(position);
+    }
+
+    public void resetPlayerLocation()
+    {
+        PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
+        if (poi != null) {
+            showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
+                () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                    WorldStage.getInstance().loadPOI(poi);
+                    Forge.clearTransitionScreen();
+                    }, null, false, true, false, false))));
+        }//Spawn shouldn't be null
     }
 
 }
