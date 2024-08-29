@@ -56,11 +56,10 @@ public class ForgeScript {
         } else if (property.contains("Colorless")) { // ... Card is colorless
             boolean non = property.startsWith("non");
             return non != colors.isColorless();
-        } else if (property.contains("MultiColor")) {
+        } else if (property.startsWith("MultiColor")) {
             // ... Card is multicolored
-            boolean non = property.startsWith("non");
-            return non != colors.isMulticolor();
-        } else if (property.contains("EnemyColor")) {
+            return colors.isMulticolor();
+        } else if (property.startsWith("EnemyColor")) {
             if (colors.countColors() != 2) {
                 return false;
             }
@@ -71,18 +70,14 @@ public class ForgeScript {
                 }
             }
             return false;
-        } else if (property.contains("AllColors")) {
-            boolean non = property.startsWith("non");
-            return non != colors.isAllColors();
-        } else if (property.contains("MonoColor")) { // ... Card is monocolored
-            boolean non = property.startsWith("non");
-            return non != colors.isMonoColor();
+        } else if (property.startsWith("AllColors")) {
+            return colors.isAllColors();
+        } else if (property.startsWith("MonoColor")) { // ... Card is monocolored
+            return colors.isMonoColor();
         } else if (property.startsWith("ChosenColor")) {
-            boolean non = property.startsWith("non");
-            return !non && source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
+            return source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));
         } else if (property.startsWith("AnyChosenColor")) {
-            boolean non = property.startsWith("non");
-            return !non && source.hasChosenColor()
+            return source.hasChosenColor()
                     && colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor());
         } else if (property.equals("AssociatedWithChosenColor")) {
             final String color = source.getChosenColor();
