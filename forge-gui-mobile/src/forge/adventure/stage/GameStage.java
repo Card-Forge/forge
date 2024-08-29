@@ -649,7 +649,7 @@ public abstract class GameStage extends Stage {
                         WorldStage.getInstance().setPosition(poi.getPosition());
                         WorldStage.getInstance().loadPOI(poi);
                         Forge.clearTransitionScreen();
-                        showImageDialog(Forge.getLocalizer().getMessage("lblYouLostTheLastGame", Current.player().getName()), null);
+                        showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null);
                     }, null, false, true, false, false)));
                 }
             }, 0.3f);
