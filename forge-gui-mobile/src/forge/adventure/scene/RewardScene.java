@@ -133,7 +133,7 @@ public class RewardScene extends UIScene {
         }
         //save RAM
         ImageCache.unloadCardTextures(true);
-        Forge.restrictAdvMenus = false;
+        Forge.advFreezePlayerControls = false;
         if (this.collectionPool != null) {
             this.collectionPool.clear();
             this.collectionPool = null;

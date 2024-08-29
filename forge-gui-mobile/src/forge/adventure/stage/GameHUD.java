@@ -244,7 +244,7 @@ public class GameHUD extends Stage {
     private void openMap() {
         if (console.isVisible())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         Forge.switchScene(MapViewScene.instance());
     }
@@ -252,7 +252,7 @@ public class GameHUD extends Stage {
     private void logbook() {
         if (console.isVisible())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         Forge.switchScene(QuestLogScene.instance(Forge.getCurrentScene()));
     }
@@ -482,6 +482,8 @@ public class GameHUD extends Stage {
             TextraButton button = Controls.newTextButton("[%90][+" + data.iconName + "][+Shards][BLACK]" + data.shardsNeeded, () -> {
                 if (console.isVisible())
                     return;
+                if (Forge.advFreezePlayerControls)
+                    return;
                 boolean isInPoi = MapStage.getInstance().isInMap();
                 if (!(isInPoi && data.usableInPoi || !isInPoi && data.usableOnWorldMap))
                     return;
@@ -619,7 +621,7 @@ public class GameHUD extends Stage {
     private void openDeck() {
         if (console.isVisible())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         Forge.switchScene(DeckSelectScene.instance());
     }
@@ -627,7 +629,7 @@ public class GameHUD extends Stage {
     private void openInventory() {
         if (console.isVisible())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         WorldSave.getCurrentSave().header.createPreview();
         Forge.switchScene(InventoryScene.instance());
@@ -640,7 +642,7 @@ public class GameHUD extends Stage {
             return;
         if (!MapStage.getInstance().canEscape())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
@@ -664,7 +666,7 @@ public class GameHUD extends Stage {
             return;
         if (!MapStage.getInstance().canEscape())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         if (MapStage.getInstance().isInMap()) {
             if (MapStage.getInstance().getChanges().isBookmarked()) {
@@ -704,7 +706,7 @@ public class GameHUD extends Stage {
     private void menu() {
         if (console.isVisible())
             return;
-        if (Forge.restrictAdvMenus)
+        if (Forge.advFreezePlayerControls)
             return;
         gameStage.openMenu();
     }
