@@ -570,6 +570,12 @@ public abstract class GameStage extends Stage {
         return false;
     }
 
+    @Override
+    public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+        stop();
+        return super.touchCancelled(screenX, screenY, pointer, button);
+    }
+
     public void openMenu() {
         if (Forge.advFreezePlayerControls)
             return;
