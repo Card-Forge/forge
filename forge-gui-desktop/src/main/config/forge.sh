@@ -1,18 +1,10 @@
 #!/bin/bash
- 
+
 # returns the JDK version.
 # 8 for 1.8.0_nn, 9 for 9-ea etc, and "no_java" for undetected
 # Based on the code from this source: https://eed3si9n.com/detecting-java-version-bash
 jdk_version() {
   local result
-  local java_cmd
-  if [[ -n $(type -p java) ]]
-  then
-    java_cmd=java
-  elif [[ (-n "$JAVA_HOME") && (-x "$JAVA_HOME/bin/java") ]]
-  then
-    java_cmd="$JAVA_HOME/bin/java"
-  fi
   local IFS=$'\n'
   # remove \r for Cygwin
   local lines=$("$java_cmd" -Xms32M -Xmx32M -version 2>&1 | tr '\r' '\n')
@@ -36,6 +28,14 @@ jdk_version() {
   fi
   echo "$result"
 }
+
+if [[ (-n "$JAVA_HOME") && (-x "$JAVA_HOME/bin/java") ]]
+then
+  java_cmd="$JAVA_HOME/bin/java"
+elif [[ -n $(type -p java) ]]
+then
+  java_cmd="java"
+fi
 v="$(jdk_version)"
 
 SHAREDPARAMS='-Xmx4096m -Dfile.encoding=UTF-8 -jar $project.build.finalName$ '"$@"
@@ -43,10 +43,10 @@ cd $(dirname "${0}")
 
 if [[ $v -ge 17 ]]
 then
-    java --add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/java.awt.color=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED --add-opens java.desktop/javax.swing.event=ALL-UNNAMED --add-opens java.desktop/sun.awt.image=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.desktop/java.awt.image=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true $SHAREDPARAMS
+    $java_cmd --add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/java.awt.color=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED --add-opens java.desktop/javax.swing.event=ALL-UNNAMED --add-opens java.desktop/sun.awt.image=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.desktop/java.awt.image=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true $SHAREDPARAMS
 elif [[ $v -ge 11 ]]
 then
-    java --illegal-access=permit $SHAREDPARAMS
+    $java_cmd --illegal-access=permit $SHAREDPARAMS
 else
-    java $SHAREDPARAMS
+    $java_cmd $SHAREDPARAMS
 fi
