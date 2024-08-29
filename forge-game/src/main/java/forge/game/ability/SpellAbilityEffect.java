@@ -250,6 +250,15 @@ public abstract class SpellAbilityEffect {
                 }
             }
         }
+        if (resultUnique == null)
+            return null;
+        if (sa.hasParam("IncludeAllComponentCards")) {
+            CardCollection components = new CardCollection();
+            for (Card c : resultUnique) {
+                components.addAll(c.getAllComponentCards(false));
+            }
+            resultUnique.addAll(components);
+        }
         return resultUnique;
     }
 

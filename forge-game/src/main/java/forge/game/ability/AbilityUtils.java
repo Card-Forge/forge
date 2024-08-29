@@ -1541,6 +1541,11 @@ public class AbilityUtils {
                 host.clearRemembered();
             }
             host.addRemembered(sa.getTargets());
+            if (sa.hasParam("IncludeAllComponentCards")) {
+                for (Card c : sa.getTargets().getTargetCards()) {
+                    host.addRemembered(c.getAllComponentCards(false));
+                }
+            }
         }
 
         if (sa.hasParam("RememberCostMana")) {

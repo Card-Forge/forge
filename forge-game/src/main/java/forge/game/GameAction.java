@@ -169,7 +169,6 @@ public class GameAction {
 
         Card copied = null;
         Card lastKnownInfo = null;
-        Card commanderEffect = null; // The effect card of commander replacement effect
 
         // get the LKI from above like ChangeZoneEffect
         if (params != null && params.containsKey(AbilityKey.CardLKI)) {
@@ -319,23 +318,8 @@ public class GameAction {
             // Temporary disable commander replacement effect
             // 903.9a
             if (fromBattlefield && !toBattlefield && c.isCommander() && c.hasMergedCard()) {
-                // Find the commander replacement effect "card"
-                CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
-                for (final Card effCard : comCards) {
-                    for (final ReplacementEffect re : effCard.getReplacementEffects()) {
-                        if (re.hasParam("CommanderMoveReplacement") && c.getMergedCards().contains(effCard.getEffectSource())) {
-                            commanderEffect = effCard;
-                            break;
-                        }
-                    }
-                    if (commanderEffect != null) break;
-                }
                 // Disable the commander replacement effect
-                if (commanderEffect != null) {
-                    for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
-                        re.setSuppressed(true);
-                    }
-                }
+                c.getOwner().setCommanderReplacementSuppressed(true);
             }
 
             // in addition to actual tokens, cards "made" by digital-only mechanics
@@ -529,11 +513,7 @@ public class GameAction {
             // Move components of merged permanent here
             // Also handle 723.3e and 903.9a
             boolean wasToken = c.isToken();
-            if (commanderEffect != null) {
-                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
-                    re.setSuppressed(false);
-                }
-            }
+            c.getOwner().setCommanderReplacementSuppressed(false);
             // Change zone of original card so components isToken() and isCommander() return correct value
             // when running replacement effects here
             c.setZone(zoneTo);

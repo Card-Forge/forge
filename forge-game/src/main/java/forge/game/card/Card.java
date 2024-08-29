@@ -1322,6 +1322,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
+    /**
+     * Gives a collection of all cards that are melded, merged, or are otherwise representing
+     * a single permanent alongside this one.
+     * @param includeSelf Whether this card is included in the resulting CardCollection.
+     */
+    public final CardCollection getAllComponentCards(boolean includeSelf) {
+        CardCollection out = new CardCollection();
+        if(includeSelf)
+            out.add(this);
+        if(this.getMeldedWith() != null)
+            out.add(this.getMeldedWith());
+        if(mergedTo != null) //Should be safe to recurse here so long as mergedTo remains a one-way relationship.
+            out.addAll(mergedTo.getAllComponentCards(true));
+        if(this.hasMergedCard())
+            out.addAll(mergedCards);
+        if(!includeSelf) //mergedCards includes self.
+            out.remove(this);
+        return out;
+    }
+
     public final void moveMergedToSubgame(SpellAbility cause) {
         if (hasMergedCard()) {
             Zone zone = getZone();
@@ -6350,10 +6370,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final String getImageKey() {
-        return getCardForUi().currentState.getImageKey();
+        Card uiCard = getCardForUi();
+        if(uiCard == null)
+            return "";
+        return uiCard.currentState.getImageKey();
     }
     public final void setImageKey(final String iFN) {
-        getCardForUi().currentState.setImageKey(iFN);
+        Card uiCard = getCardForUi();
+        if(uiCard == null)
+            this.currentState.setImageKey(iFN); //Shouldn't really matter; the card isn't supposed to show in the UI anyway.
+        else
+            uiCard.currentState.setImageKey(iFN);
     }
     public final void setImageKey(final IPaperCard ipc, final CardStateName stateName) {
         if (ipc == null)
@@ -6380,7 +6407,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public String getImageKey(CardStateName state) {
-        CardState c = getCardForUi().states.get(state);
+        Card uiCard = getCardForUi();
+        if(uiCard == null)
+            return "";
+        CardState c = uiCard.states.get(state);
         return (c != null ? c.getImageKey() : "");
     }
 
