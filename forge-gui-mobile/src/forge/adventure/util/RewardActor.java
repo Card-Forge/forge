@@ -189,11 +189,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         switch (reward.type) {
             case Card: {
-                autoSell = Controls.newTextButton("[%75][GRAY]\uFF04");
+                autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
+                float scale = autoSell.getWidth();
+                autoSell.setSize(scale, scale*1.2f);
                 autoSell.addListener(new ClickListener() {
                     public void clicked(InputEvent event, float x, float y) {
                         reward.setAutoSell(!reward.isAutoSell());
-                        String c = reward.isAutoSell() ? "[%75][GREEN]" : "[%75][GRAY]";
+                        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
                         autoSell.setText(c+"\uFF04");
                     }
                 });
@@ -732,6 +734,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (isLoot && autoSell != null) {
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
+            autoSell.setVisible(false);
         }
     }
 
@@ -761,6 +764,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
+            if (autoSell != null && !autoSell.isVisible() && flipProcess == 1)
+                autoSell.setVisible(true);
             // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
         }
 
