@@ -35,7 +35,6 @@ public class ForgeScript {
 
     public static boolean cardStateHasProperty(CardState cardState, String property, Player sourceController,
             Card source, CardTraitBase spellAbility) {
-
         boolean withSource = property.endsWith("Source");
         final ColorSet colors;
         if (withSource && StaticAbilityColorlessDamageSource.colorlessDamageSource(cardState)) {
@@ -53,7 +52,7 @@ public class ForgeScript {
             int desiredColor = MagicColor.fromName(colorName);
             boolean hasColor = colors.hasAnyColor(desiredColor);
             return mustHave == hasColor;
-        } else if (property.contains("Colorless")) { // ... Card is colorless
+        } else if (property.contains("Colorless")) {
             boolean non = property.startsWith("non");
             return non != colors.isColorless();
         } else if (property.startsWith("MultiColor")) {
@@ -72,7 +71,7 @@ public class ForgeScript {
             return false;
         } else if (property.startsWith("AllColors")) {
             return colors.isAllColors();
-        } else if (property.startsWith("MonoColor")) { // ... Card is monocolored
+        } else if (property.startsWith("MonoColor")) {
             return colors.isMonoColor();
         } else if (property.startsWith("ChosenColor")) {
             return source.hasChosenColor() && colors.hasAnyColor(MagicColor.fromName(source.getChosenColor()));

@@ -353,7 +353,7 @@ public class ComputerUtilAbility {
                 }
                 // 1. increase chance of using Surge effects
                 // 2. non-surged versions are usually inefficient
-                if (source.getOracleText().contains("surge cost") && !sa.isSurged()) {
+                if (source.hasKeyword(Keyword.SURGE) && !sa.isSurged()) {
                     p -= 9;
                 }
                 // move snap-casted spells to front
@@ -386,8 +386,10 @@ public class ComputerUtilAbility {
             }
 
             if (ApiType.DestroyAll == sa.getApi()) {
+                // check boardwipe earlier
                 p += 4;
             } else if (ApiType.Mana == sa.getApi()) {
+                // keep mana abilities for paying
                 p -= 9;
             }
 
@@ -398,7 +400,7 @@ public class ComputerUtilAbility {
 
             return p;
         }
-    };
+    }
 
     public static List<SpellAbility> sortCreatureSpells(final List<SpellAbility> all) {
         // try to smoothen power creep by making CMC less of a factor

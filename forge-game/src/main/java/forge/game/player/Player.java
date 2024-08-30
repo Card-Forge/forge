@@ -1843,6 +1843,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         lastDrawnCard = c;
         return lastDrawnCard;
     }
+
     public final Card getRingBearer() {
         return ringBearer;
     }
@@ -1865,6 +1866,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         ringBearer.setRingBearer(false);
         ringBearer = null;
     }
+
     public final String getNamedCard() {
         return namedCard;
     }

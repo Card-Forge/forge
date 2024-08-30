@@ -422,26 +422,30 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddAllCreatureTypes")) {
                 addAllCreatureTypes = true;
             }
-            if (params.containsKey("RemoveSuperTypes")) {
-                remove.add(RemoveType.SuperTypes);
-            }
-            if (params.containsKey("RemoveCardTypes")) {
-                remove.add(RemoveType.CardTypes);
-            }
-            if (params.containsKey("RemoveSubTypes")) {
-                remove.add(RemoveType.SubTypes);
-            }
-            if (params.containsKey("RemoveLandTypes")) {
-                remove.add(RemoveType.LandTypes);
-            }
-            if (params.containsKey("RemoveCreatureTypes")) {
-                remove.add(RemoveType.CreatureTypes);
-            }
-            if (params.containsKey("RemoveArtifactTypes")) {
-                remove.add(RemoveType.ArtifactTypes);
-            }
-            if (params.containsKey("RemoveEnchantmentTypes")) {
-                remove.add(RemoveType.EnchantmentTypes);
+
+            // overwrite doesn't work without new value (e.g. Conspiracy missing choice)
+            if (addTypes == null || !addTypes.isEmpty()) {
+                if (params.containsKey("RemoveSuperTypes")) {
+                    remove.add(RemoveType.SuperTypes);
+                }
+                if (params.containsKey("RemoveCardTypes")) {
+                    remove.add(RemoveType.CardTypes);
+                }
+                if (params.containsKey("RemoveSubTypes")) {
+                    remove.add(RemoveType.SubTypes);
+                }
+                if (params.containsKey("RemoveLandTypes")) {
+                    remove.add(RemoveType.LandTypes);
+                }
+                if (params.containsKey("RemoveCreatureTypes")) {
+                    remove.add(RemoveType.CreatureTypes);
+                }
+                if (params.containsKey("RemoveArtifactTypes")) {
+                    remove.add(RemoveType.ArtifactTypes);
+                }
+                if (params.containsKey("RemoveEnchantmentTypes")) {
+                    remove.add(RemoveType.EnchantmentTypes);
+                }
             }
         }
 
@@ -510,7 +514,7 @@ public final class StaticAbilityContinuous {
         // modify players
         for (final Player p : affectedPlayers) {
             // add keywords
-            if (addKeywords != null) {
+            if (addKeywords != null && !addKeywords.isEmpty()) {
                 p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
             }
 
@@ -718,7 +722,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
+            if ((addKeywords != null && !addKeywords.isEmpty()) || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);
@@ -876,7 +880,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if (addTypes != null || removeTypes != null || addAllCreatureTypes || !remove.isEmpty()) {
+            if ((addTypes != null && !addTypes.isEmpty()) || (removeTypes != null && !removeTypes.isEmpty()) || addAllCreatureTypes || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
                         se.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
             }
