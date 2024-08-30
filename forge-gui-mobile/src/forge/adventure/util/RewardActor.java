@@ -189,16 +189,18 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         switch (reward.type) {
             case Card: {
-                autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
-                float scale = autoSell.getWidth();
-                autoSell.setSize(scale, scale*1.2f);
-                autoSell.addListener(new ClickListener() {
-                    public void clicked(InputEvent event, float x, float y) {
-                        reward.setAutoSell(!reward.isAutoSell());
-                        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
-                        autoSell.setText(c+"\uFF04");
-                    }
-                });
+                if (!reward.isNoSell) {
+                    autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
+                    float scale = autoSell.getWidth();
+                    autoSell.setSize(scale, scale*1.2f);
+                    autoSell.addListener(new ClickListener() {
+                        public void clicked(InputEvent event, float x, float y) {
+                            reward.setAutoSell(!reward.isAutoSell());
+                            String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
+                            autoSell.setText(c+"\uFF04");
+                        }
+                    });
+                }
                 hasbackface = reward.getCard().hasBackFace();
                 if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
                     int count = 0;
