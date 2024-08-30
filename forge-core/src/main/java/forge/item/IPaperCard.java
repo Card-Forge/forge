@@ -194,8 +194,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
          * easier access from code.
          */
         public abstract static class Presets {
-            // Think twice before using these, since rarity is a prop of printed
-            // card.
+            // Think twice before using these, since rarity is a prop of printed card.
             /** The Constant isCommon. */
             public static final Predicate<PaperCard> IS_COMMON = Predicates.rarity(true, CardRarity.Common);
 
