@@ -27,10 +27,13 @@ ScryfallCode=DSK
 296 R Cursed Recording @Kim Sokol
 309 R Come Back Wrong @Alexis Ziritt
 314 R Chainsaw @Alexis Ziritt
+315 R Cursed Recording @Alexis Ziritt
+316 R Fear of Missing Out @Cacho Rubione
 346 R Doomsday Excruciator @Jarel Threat
 348 M Screaming Nemesis @Inkognit
 351 M The Wandering Rescuer @Vance Kelly
 356 R Toby, Beastie Befriender @Ashley Mackenzie
+369 R Leyline of Hope @Sergey Glushakov
 374 R Enduring Tenacity @Isis
 383 M Overlord of the Hauntwoods @Tiffany Turrill
 390 M Enduring Tenacity @TAPIOCA
