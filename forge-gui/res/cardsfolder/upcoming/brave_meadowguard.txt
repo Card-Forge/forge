@@ -1,0 +1,9 @@
+Name:Brave Meadowguard
+ManaCost:1 R
+Types:Creature Mouse Soldier
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters, conjure a card named Might of the Meek into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Might of the Meek | Zone$ Hand
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigCounter | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+Oracle:When Brave Meadowguard enters, conjure a card named Might of the Meek into your hand.\nValiant — Whenever Brave Meadowguard becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.

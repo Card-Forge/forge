@@ -1,0 +1,13 @@
+Name:Resourceful Collector
+ManaCost:1 R G
+Types:Creature Raccoon Druid
+PT:3/3
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRandom | TriggerDescription$ At the beginning of your end step, a random non-Food permanent card in your graveyard perpetually becomes a Food artifact in addition to its other types and gains "{2}, Exile this artifact: You gain 3 life." You may play that card for as long as it's in your graveyard.
+SVar:TrigRandom:DB$ ChooseCard | Choices$ Permanent.nonFood+YouOwn | ChoiceZone$ Graveyard | AtRandom$ True | Amount$ 1 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Types$ Food,Artifact | Defined$ ChosenCard | Duration$ Perpetual | Abilities$ FoodSac | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | ForgetOnMoved$ Graveyard | RememberObjects$ ChosenCard | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast that card for as long as it's in your graveyard.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:FoodSac:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+Oracle:Haste\nAt the beginning of your end step, a random non-Food permanent card in your graveyard perpetually becomes a Food artifact in addition to its other types and gains "{2}, Exile this artifact: You gain 3 life." You may play that card for as long as it's in your graveyard.
