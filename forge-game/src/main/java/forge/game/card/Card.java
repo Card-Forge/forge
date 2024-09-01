@@ -4099,7 +4099,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return state.getType();
     }
 
-    // TODO add changed type by card text
     public Iterable<CardChangedType> getChangedCardTypes() {
         // If there are no changed types, just return an empty immutable list, which actually
         // produces a surprisingly large speedup by avoid lots of temp objects and making iteration

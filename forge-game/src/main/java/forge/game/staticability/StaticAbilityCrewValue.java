@@ -8,25 +8,6 @@ public class StaticAbilityCrewValue {
 
     static String MODE = "CrewValue";
 
-    public static boolean hasAnyCrewValue(final Card card) {
-        final Game game = card.getGame();
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
-            for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(MODE)) {
-                    continue;
-                }
-                if (hasAnyCrewValue(stAb, card)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean hasAnyCrewValue(final StaticAbility stAb, final Card card) {
-        return stAb.matchesValidParam("ValidCard", card);
-    }
-
     public static boolean crewsWithToughness(final Card card) {
         final Game game = card.getGame();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
