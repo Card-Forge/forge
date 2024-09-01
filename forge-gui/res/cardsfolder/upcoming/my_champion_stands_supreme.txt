@@ -1,4 +1,4 @@
-Name:I Am Duskmourn
+Name:My Champion Stands Supreme
 ManaCost:no cost
 Types:Ongoing Scheme
 S:Mode$ Continuous | Affected$ Card.IsCommander+YouOwn | EffectZone$ Command | AddKeyword$ Ward:2 | Description$ Your commander has ward {2).
