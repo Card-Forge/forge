@@ -5705,7 +5705,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
-            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, true);
         }
 
         game.updateLastStateForCard(this);
