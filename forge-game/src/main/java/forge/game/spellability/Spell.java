@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import java.util.List;
 import java.util.Map;
 
 import forge.game.card.CardCopyService;
@@ -32,8 +31,6 @@ import forge.game.card.CardFactory;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.staticability.StaticAbilityCantBeCast;
 import forge.game.zone.ZoneType;
@@ -216,7 +213,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(getHostCard());
         repParams.put(AbilityKey.SpellAbility, this);
         repParams.put(AbilityKey.Cause, sa);
-        List<ReplacementEffect> list = getHostCard().getGame().getReplacementHandler().getReplacementList(ReplacementType.Counter, repParams, ReplacementLayer.CantHappen);
-        return list.isEmpty();
+        return !getHostCard().getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Counter, repParams);
     }
 }

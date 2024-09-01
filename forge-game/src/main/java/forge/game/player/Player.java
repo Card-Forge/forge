@@ -1979,7 +1979,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void altWinBySpellEffect(final String sourceName) {
         if (cantWin()) {
-            System.out.println("Tried to win, but currently can't.");
             return;
         }
         setOutcome(PlayerOutcome.altWin(sourceName));
@@ -1987,16 +1986,14 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
         if (state != GameLossReason.OpponentWon) {
-            if (cantLose()) {
-                System.out.println("Tried to lose, but currently can't.");
-                return false;
-            }
-
             // Replacement effects
-            if (game.getReplacementHandler().run(ReplacementType.GameLoss, AbilityKey.mapFromAffected(this)) != ReplacementResult.NotReplaced) {
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+            repParams.put(AbilityKey.LoseReason, state);
+            if (game.getReplacementHandler().run(ReplacementType.GameLoss, repParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }
+        //final String spellName = sa != null ? sa.getHostCard().getName() : null;
         setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
     }
@@ -2009,25 +2006,39 @@ public class Player extends GameEntity implements Comparable<Player> {
         setOutcome(PlayerOutcome.draw());
     }
 
+    public final boolean conceded() {
+        return getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded;
+    }
+
     public final boolean cantLose() {
-        if (getOutcome() != null && getOutcome().lossState == GameLossReason.Conceded) {
+        if (conceded()) {
             return false;
         }
-        return hasKeyword("You can't lose the game.");
+        return cantLoseCheck(null);
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
-        return cantLose() || hasKeyword("You don't lose the game for having 0 or less life.");
+        if (conceded()) {
+            return false;
+        }
+        return cantLoseCheck(GameLossReason.LifeReachedZero);
+    }
+
+    public final boolean cantLoseCheck(final GameLossReason state) {
+        // Replacement effects
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.LoseReason, state);
+        return game.getReplacementHandler().cantHappenCheck(ReplacementType.GameLoss, repParams);
     }
 
     public final boolean cantWin() {
-        return hasKeyword("You can't win the game.");
+        return game.getReplacementHandler().cantHappenCheck(ReplacementType.GameWin, AbilityKey.mapFromAffected(this));
     }
 
     public final boolean checkLoseCondition() {
         // Just in case player already lost
-        if (getOutcome() != null) {
-            return getOutcome().lossState != null;
+        if (hasLost()) {
+            return true;
         }
 
         // check this first because of Lich's Mirror (704.7)
@@ -2036,26 +2047,27 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (triedToDrawFromEmptyLibrary) {
             triedToDrawFromEmptyLibrary = false; // one-shot check
             // Mine, Mine, Mine! prevents decking
-            if (!hasKeyword("You don't lose the game for drawing from an empty library.")) {
-                return loseConditionMet(GameLossReason.Milled, null);
+            if (loseConditionMet(GameLossReason.Milled, null)) {
+                return true;
             }
         }
 
         // Rule 704.5a -  If a player has 0 or less life, he or she loses the game.
         final boolean hasNoLife = getLife() <= 0;
-        if (hasNoLife && !cantLoseForZeroOrLessLife()) {
-            return loseConditionMet(GameLossReason.LifeReachedZero, null);
+        if (hasNoLife && loseConditionMet(GameLossReason.LifeReachedZero, null)) {
+            return true;
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        if (getCounters(CounterEnumType.POISON) >= 10) {
-            return loseConditionMet(GameLossReason.Poisoned, null);
+        // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
+        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+            return true;
         }
 
         if (game.getRules().hasAppliedVariant(GameType.Commander)) {
             for (Entry<Card, Integer> entry : getCommanderDamage()) {
-                if (entry.getValue() >= 21) {
-                    return loseConditionMet(GameLossReason.CommanderDamage, null);
+                if (entry.getValue() >= 21 && loseConditionMet(GameLossReason.CommanderDamage, null)) {
+                    return true;
                 }
             }
         }

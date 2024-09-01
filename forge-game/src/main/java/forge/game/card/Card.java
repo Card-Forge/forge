@@ -806,9 +806,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         // Check replacement effects
         Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        List<ReplacementEffect> list = game.getReplacementHandler().getReplacementList(ReplacementType.TurnFaceUp,
-                repParams, ReplacementLayer.CantHappen);
-        if (!list.isEmpty()) return false;
+        if (game.getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
 
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
@@ -4770,9 +4768,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Check replacement effects
         Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.IsCombat, attacker); // right name for parameter?
-        List<ReplacementEffect> list = getGame().getReplacementHandler().getReplacementList(ReplacementType.Tap, repParams, ReplacementLayer.CantHappen);
-
-        return list.isEmpty();
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Tap, repParams);
     }
 
     public final boolean tap(boolean tapAnimation, SpellAbility cause, Player tapper) {

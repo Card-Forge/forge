@@ -201,7 +201,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         // try first to find Opponent that can lose life and lose the game
         if (!opps.isEmpty()) {
             for (Player opp : opps) {
-                if (opp.canLoseLife() && !opp.cantLose()) {
+                if (opp.canLoseLife() && !opp.cantLoseForZeroOrLessLife()) {
                     sa.getTargets().add(opp);
                     return true;
                 }
