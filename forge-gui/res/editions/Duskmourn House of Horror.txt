@@ -6,18 +6,39 @@ Type=Expansion
 ScryfallCode=DSK
 
 [cards]
+4 M Dollmaker's Shop @Chris Cold
+6 R Enduring Innocence @Liiga Smilshkalne
+10 C Fear of Immobility @Martin de Diego Sádaba
 18 R Leyline of Hope @Sergey Glushakov
+23 M Overlord of the Mistmoors @Steven Belledin
+32 R Split Up @Dominik Mayer
 35 R Toby, Beastie Befriender @Jehan Choo
+39 U Unwanted Remake @Eli Minaya
+40 U Veteran Survivor @Kai Carpenter
 41 M The Wandering Rescuer @Anna Pavleeva
+71 U Scrabbling Skullcrab @John Tedrick
 86 R Come Back Wrong @David Auden Nash
+92 R Demonic Counsel @Babs Webb
 94 R Doomsday Excruciator @Denys Tsiperko
 95 R Enduring Tenacity @Isis
+97 C Fear of Lost Teeth @Oriana Menendez
 111 U Nowhere to Run @Jodie Muir
+120 M Valgavoth, Terror Eater @Antonio José Manzanedo
 128 R Chainsaw @J.P. Targete
 131 R Cursed Recording @Kim Sokol
 136 R Fear of Missing Out @John Stanko
+145 U Norin, Swift Survivalist @Yigit Koroglu
+153 R Razorkin Needlehead @Riccardo Federici
 157 M Screaming Nemesis @Liiga Smilshkalne
+182 M Hauntwoods Shrieker @John Tedrick
 194 M Overlord of the Hauntwoods @Tiffany Turrill
+212 U Disturbing Mirth @Nino Vecia
+219 R The Jolly Balloon Man @Campbell White
+220 M Kaito, Bane of Nightmares @Joshua Raphael
+226 R Peer Past the Veil @Tuan Duong Chu
+240 R Winter, Misanthropic Guide @Jodie Muir
+241 R Zimone, All-Questioning @Ekaterina Burmak
+271 R Valgavoth's Lair @Martin de Diego Sádaba
 272 L Plains @Dan Mumford
 273 L Island @Dan Mumford
 274 L Swamp @Dan Mumford
@@ -25,20 +46,44 @@ ScryfallCode=DSK
 276 L Forest @Dan Mumford
 292 R Come Back Wrong @David Auden Nash
 296 R Cursed Recording @Kim Sokol
+297 U Norin, Swift Survivalist @Yigit Koroglu
+304 R Split Up @Toni Infante
+306 U Unwanted Remake @Ivan Shavrin
 309 R Come Back Wrong @Alexis Ziritt
+310 R Demonic Counsel @Bastien Grivet
 314 R Chainsaw @Alexis Ziritt
 315 R Cursed Recording @Alexis Ziritt
 316 R Fear of Missing Out @Cacho Rubione
+325 R Peer Past the Veil @Scott Buoncristiano
+327 R Valgavoth's Lair @Ivan Shavrin
+328 M Kaito, Bane of Nightmares @Marta Nael
+335 M Dollmaker's Shop @Cacho Rubione
 346 R Doomsday Excruciator @Jarel Threat
+347 R Razorkin Needlehead @Loïc Canavaggia
 348 M Screaming Nemesis @Inkognit
+349 M Hauntwoods Shrieker @Sidharth Chaturvedi
 351 M The Wandering Rescuer @Vance Kelly
+352 M Valgavoth, Terror Eater @Pig Hands
+354 M Kaito, Bane of Nightmares @Richard Luong
 356 R Toby, Beastie Befriender @Ashley Mackenzie
+359 R The Jolly Balloon Man @Richard Luong
+365 R Winter, Misanthropic Guide @Sam Wolfe Connelly
+366 R Zimone, All-Questioning @Sam Wolfe Connelly
+368 R Enduring Innocence @Liiga Smilshkalne
 369 R Leyline of Hope @Sergey Glushakov
+370 M Overlord of the Mistmoors @Steven Belledin
 374 R Enduring Tenacity @Isis
 383 M Overlord of the Hauntwoods @Tiffany Turrill
+386 R Enduring Innocence @Kawasumi
+387 M Overlord of the Mistmoors @Takeuchi Moto
 390 M Enduring Tenacity @TAPIOCA
 395 M Overlord of the Hauntwoods @Aogachou
+396 R Enduring Innocence @Kawasumi
+397 M Overlord of the Mistmoors @Takeuchi Moto
 400 M Enduring Tenacity @TAPIOCA
 405 M Overlord of the Hauntwoods @Aogachou
 406 M The Wandering Rescuer @Vance Kelly
+407 M Valgavoth, Terror Eater @Pig Hands
+408 M Tyvar, the Pummeler @Richard Luong
+409 M Kaito, Bane of Nightmares @Richard Luong
 417 R Twitching Doll @John Tedrick

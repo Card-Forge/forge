@@ -6,5 +6,15 @@ Type=Commander
 ScryfallCode=DSC
 
 [cards]
+1 M Aminatou, Veil Piercer @David Palumbo
+6 M Valgavoth, Harrower of Souls @Chris Cold
+7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
+8 M Zimone, Mystery Unraveler @Mila Pesic
 338 C I Will Savor Your Agony @Michael Walsh
 357 C Time Bends to My Will @Eli Minaya
+368 M Crypt Ghast @Tim Jacobus
+369 M Damn @Tim Jacobus
+370 M Exhume @Tim Jacobus
+371 M Archon of Cruelty @James Bousema
+372 M Goryo's Vengeance @Martin Ansin
+373 M Living Death @Josh Newton
