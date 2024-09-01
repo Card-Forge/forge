@@ -10,7 +10,6 @@ import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.adventure.scene.DeckEditScene;
 import forge.adventure.scene.ShopScene;
 import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
@@ -1063,13 +1062,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (cardPrice == null)
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
-                    } else if (Forge.getCurrentScene() instanceof DeckEditScene) {
+                    } /*else if (Forge.getCurrentScene() instanceof DeckEditScene) {
                         if (((DeckEditScene) Forge.getCurrentScene()).isAutoSell((PaperCard) item)) {
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblAutoSell"), Color.GREEN, x, y, w, h);
                         } else if (((DeckEditScene) Forge.getCurrentScene()).isNoSell((PaperCard) item)) {
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
-                    }
+                    }*///TODO FIX Distinction
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
