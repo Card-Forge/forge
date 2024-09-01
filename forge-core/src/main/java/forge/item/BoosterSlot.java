@@ -45,7 +45,7 @@ public class BoosterSlot {
     }
 
     public String replaceSlot() {
-        double rand = Math.random() * 100;
+        float rand = (float) Math.random();
         for (Float key : slotPercentages.keySet()) {
             if (rand < key) {
                 System.out.println("Replaced a base slot! " + slotName + " -> " + slotPercentages.get(key));

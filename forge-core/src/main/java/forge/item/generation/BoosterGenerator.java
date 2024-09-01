@@ -415,6 +415,11 @@ public class BoosterGenerator {
             BoosterSlot boosterSlot = boosterSlots.get(slotType);
             String determineSheet = boosterSlot.replaceSlot();
 
+            if (determineSheet.endsWith("+")) {
+                determineSheet = determineSheet.substring(0, determineSheet.length() - 1);
+                convertCardFoil = true;
+            }
+
             String setCode = template.getEdition();
 
             // Ok, so we have a sheet now. Most should be standard sheets, but some named edition sheets
