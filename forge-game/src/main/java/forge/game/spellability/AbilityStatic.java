@@ -60,7 +60,7 @@ public abstract class AbilityStatic extends Ability implements Cloneable {
         // Initial usage is Karlov Watchdog preventing disguise/morph/cloak/manifest turning face up
         if (this.isTurnFaceUp()) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(c);
-            if (!c.getGame().getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
+            if (c.getGame().getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
         }
 
         return this.getRestrictions().canPlay(c, this);
