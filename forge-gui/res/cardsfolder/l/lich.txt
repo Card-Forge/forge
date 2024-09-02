@@ -4,7 +4,7 @@ Types:Enchantment
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LoseLife | ReplacementResult$ Updated | Description$ As CARDNAME enters, you lose life equal to your life total.
 SVar:LoseLife:DB$ LoseLife | LifeAmount$ LifeTotal
 SVar:LifeTotal:Count$YourLifeTotal
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ValidLoseReason$ LifeReachedZero | Layer$ CantHappen | Description$ You don't lose the game for having 0 or less life.
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AILogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:ReplaceCount$LifeGained

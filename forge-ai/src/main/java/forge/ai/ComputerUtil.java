@@ -52,6 +52,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementLayer;
@@ -920,7 +921,7 @@ public class ComputerUtil {
             }
         } else if (isOptional && source.getActivatingPlayer().isOpponentOf(ai)) {
             if ("Pillar Tombs of Aku".equals(host.getName())) {
-                if (!ai.canLoseLife() || ai.cantLose()) {
+                if (!ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) {
                     return sacrificed; // sacrifice none
                 }
             } else {
@@ -2688,7 +2689,7 @@ public class ComputerUtil {
             return Iterables.getFirst(votes.keySet(), null);
         case "FeatherOrQuill":
             // try to mill opponent with Quill vote
-            if (opponent && !controller.cantLose()) {
+            if (opponent && !controller.cantLoseCheck(GameLossReason.Milled)) {
                 int numQuill = votes.get("Quill").size();
                 if (numQuill + 1 >= controller.getCardsIn(ZoneType.Library).size()) {
                     return controller.isCardInPlay("Laboratory Maniac") ? "Feather" : "Quill";
@@ -3252,7 +3253,7 @@ public class ComputerUtil {
 
         // performance shortcut
         // TODO if checking upcoming turn it should be a permanent effect
-        if (ai.cantLose()) {
+        if (ai.cantLoseForZeroOrLessLife()) {
             return remainingLife;
         }
 
@@ -3311,8 +3312,7 @@ public class ComputerUtil {
         repParams.put(AbilityKey.EffectOnly, true);
         repParams.put(AbilityKey.CounterTable, table);
         repParams.put(AbilityKey.CounterMap, table.column(c));
-        List<ReplacementEffect> list = c.getGame().getReplacementHandler().getReplacementList(ReplacementType.Moved, repParams, ReplacementLayer.CantHappen);
-        return !list.isEmpty();
+        return c.getGame().getReplacementHandler().cantHappenCheck(ReplacementType.Moved, repParams);
     }
 
     public static boolean shouldSacrificeThreatenedCard(Player ai, Card c, SpellAbility sa) {

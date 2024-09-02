@@ -176,6 +176,10 @@ public class ReplacementHandler {
         return possibleReplacers;
     }
 
+    public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return !getReplacementList(event, runParams, ReplacementLayer.CantHappen).isEmpty();
+    }
+
     /**
      *
      * Runs any applicable replacement effects.

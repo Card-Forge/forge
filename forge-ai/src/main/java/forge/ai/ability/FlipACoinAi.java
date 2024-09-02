@@ -28,7 +28,7 @@ public class FlipACoinAi extends SpellAbilityAi {
                 }
                 sa.resetTargets();
                 for (Player o : ai.getOpponents()) {
-                    if (sa.canTarget(o) && o.canLoseLife() && !o.cantLose()) {
+                    if (sa.canTarget(o) && o.canLoseLife() && !o.cantLoseForZeroOrLessLife()) {
                         sa.getTargets().add(o);
                         return true;
                     }

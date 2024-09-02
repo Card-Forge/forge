@@ -22,6 +22,7 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -232,6 +233,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             for (String s : valids) {
                 PlanarDice valid = PlanarDice.smartValueOf(s);
                 if (((PlanarDice) o).name().equals(valid.name())) {
+                    return true;
+                }
+            }
+        } else if (o instanceof GameLossReason) {
+            for (String s : valids) {
+                GameLossReason valid = GameLossReason.smartValueOf(s);
+                if (((GameLossReason) o).name().equals(valid.name())) {
                     return true;
                 }
             }

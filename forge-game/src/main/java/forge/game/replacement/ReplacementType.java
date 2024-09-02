@@ -28,6 +28,7 @@ public enum ReplacementType {
     Explore(ReplaceExplore.class),
     GainLife(ReplaceGainLife.class),
     GameLoss(ReplaceGameLoss.class),
+    GameWin(ReplaceGameWin.class),
     Learn(ReplaceLearn.class),
     LifeReduced(ReplaceLifeReduced.class),
     LoseMana(ReplaceLoseMana.class),
