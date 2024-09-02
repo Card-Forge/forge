@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -132,7 +131,7 @@ public class SFilterUtil {
         }
 
         @Override
-        public boolean apply(T input) {
+        public boolean test(T input) {
             String name = input.getName().toLowerCase();
             for (String s : splitText) {
                 if (name.contains(s)) {

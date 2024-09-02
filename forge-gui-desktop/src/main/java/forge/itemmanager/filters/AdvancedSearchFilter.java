@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -14,7 +15,6 @@ import javax.swing.SwingConstants;
 import forge.util.Iterables;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.gui.GuiUtils;

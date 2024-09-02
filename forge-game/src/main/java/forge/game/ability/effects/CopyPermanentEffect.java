@@ -2,13 +2,13 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import forge.card.GamePieceType;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;

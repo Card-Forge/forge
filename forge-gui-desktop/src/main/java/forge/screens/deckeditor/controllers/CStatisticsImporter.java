@@ -1,6 +1,5 @@
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
@@ -19,6 +18,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class CStatisticsImporter {
 

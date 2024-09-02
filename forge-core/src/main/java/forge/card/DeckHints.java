@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 import forge.StaticData;
 import forge.item.PaperCard;
@@ -218,11 +218,11 @@ public class DeckHints {
             tdb = null;
         }
         return card -> {
-            if (predicate.apply(card)) {
+            if (predicate.test(card)) {
                 return true;
             }
             for (String tok : card.getTokens()) {
-                if (tdb != null && tdb.containsRule(tok) && predicate.apply(tdb.getToken(tok).getRules())) {
+                if (tdb != null && tdb.containsRule(tok) && predicate.test(tdb.getToken(tok).getRules())) {
                     return true;
                 }
             }

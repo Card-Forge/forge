@@ -1,11 +1,11 @@
 package forge.game.combat;
 
-import com.google.common.base.Predicate;
-
 import forge.card.MagicColor;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.util.Predicates;
+
+import java.util.function.Predicate;
 
 public enum AttackRestrictionType {
 

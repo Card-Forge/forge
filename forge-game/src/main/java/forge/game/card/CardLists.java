@@ -20,8 +20,8 @@ package forge.game.card;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.game.CardTraitBase;
@@ -349,7 +349,7 @@ public class CardLists {
 
         int count = 0;
         for (Card c : cardList) {
-            if (filt.apply(c)) {
+            if (filt.test(c)) {
                 count++;
             }
         }

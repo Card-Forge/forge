@@ -2,8 +2,6 @@ package forge.itemmanager.filters;
 
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-
 import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.PaperToken;
@@ -13,6 +11,8 @@ import forge.toolbox.FComboBoxWrapper;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
+
+import java.util.function.Predicate;
 
 
 public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
@@ -101,7 +101,7 @@ public class TokenSearchFilter extends TextSearchFilter<PaperToken> {
     @Override
     protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
         //fallback to regular item text filter if item not PaperCard
-        boolean result = btnName.isSelected() && SFilterUtil.buildItemTextFilter(txtSearch.getText()).apply(item);
+        boolean result = btnName.isSelected() && SFilterUtil.buildItemTextFilter(txtSearch.getText()).test(item);
         if (cbSearchMode.getSelectedIndex() != 0) { //invert result if needed
             result = !result;
         }

@@ -2,8 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;

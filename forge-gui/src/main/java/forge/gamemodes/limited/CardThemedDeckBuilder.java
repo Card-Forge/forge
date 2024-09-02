@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -436,7 +436,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
 
         @Override
-        public boolean apply(CardRules subject) {
+        public boolean test(CardRules subject) {
             return allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor());
         }
     }
@@ -610,7 +610,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         Predicate<PaperCard> possibleFromFullPool = new Predicate<PaperCard>() {
             final Set<String> deckListNames = getDeckListNames();
             @Override
-            public boolean apply(PaperCard card) {
+            public boolean test(PaperCard card) {
                 return format.isLegalCard(card)
                         && card.getRules().getColorIdentity().hasNoColorsExcept(colors)
                         && !deckListNames.contains(card.getName())
@@ -649,7 +649,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         final Set<String> sets = new HashSet<>();
         for (final PaperCard cp : aiPlayables) {
             final CardEdition ee = FModel.getMagicDb().getEditions().get(cp.getEdition());
-            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.apply(ee)) {
+            if( !sets.contains(cp.getEdition()) && CardEdition.Predicates.hasBasicLands.test(ee)) {
                 sets.add(cp.getEdition());
             }
         }

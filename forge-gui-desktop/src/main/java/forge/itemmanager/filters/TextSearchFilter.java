@@ -3,11 +3,10 @@ package forge.itemmanager.filters;
 import java.awt.Component;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import com.google.common.base.Predicate;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;

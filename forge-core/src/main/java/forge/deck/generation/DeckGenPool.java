@@ -2,8 +2,7 @@ package forge.deck.generation;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.item.IPaperCard;
 import forge.item.PaperCard;

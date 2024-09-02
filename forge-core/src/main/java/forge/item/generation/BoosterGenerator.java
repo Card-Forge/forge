@@ -17,7 +17,6 @@
  */
 package forge.item.generation;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
@@ -30,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -529,7 +529,7 @@ public class BoosterGenerator {
         PaperCard toReplace = null;
         // Find first card in booster that matches the rarity
         for (PaperCard card : booster) {
-            if (rarityPredicate.apply(card)) {
+            if (rarityPredicate.test(card)) {
                 toReplace = card;
                 break;
             }

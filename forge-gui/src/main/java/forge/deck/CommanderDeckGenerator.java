@@ -3,8 +3,7 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.card.CardEdition;
 import forge.card.CardRules;

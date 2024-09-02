@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -429,7 +429,7 @@ public class ConquestUtil {
         }
 
         @Override
-        public boolean apply(PaperCard card) {
+        public boolean test(PaperCard card) {
             return card.getRules().getColorIdentity().hasNoColorsExcept(color);
         }
     }
@@ -449,7 +449,7 @@ public class ConquestUtil {
         }
 
         @Override
-        public boolean apply(PaperCard card) {
+        public boolean test(PaperCard card) {
             CardType cardType = card.getRules().getType();
             if (nonTypes != null) {
                 for (CoreType nonType : nonTypes) {
@@ -511,7 +511,7 @@ public class ConquestUtil {
         }
 
         @Override
-        public boolean apply(PaperCard card) {
+        public boolean test(PaperCard card) {
             return rarityOdds.containsKey(card.getRarity());
         }
     }
@@ -525,7 +525,7 @@ public class ConquestUtil {
         }
 
         @Override
-        public boolean apply(PaperCard card) {
+        public boolean test(PaperCard card) {
             int cardCmc = card.getRules().getManaCost().getCMC();
             if (cardCmc < cmcMin) { return false; }
             return cmcMax == -1 || cardCmc <= cmcMax;

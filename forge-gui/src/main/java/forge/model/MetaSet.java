@@ -18,7 +18,6 @@
 
 package forge.model;
 
-import com.google.common.base.Predicate;
 import forge.gamemodes.limited.CustomLimited;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
 import forge.item.IPaperCard;
@@ -31,6 +30,7 @@ import forge.util.FileUtil;
 
 import java.io.File;
 import java.util.List;
+import java.util.function.Predicate;
 
 /** 
  * The class MetaSet. This class is used to define 'special'

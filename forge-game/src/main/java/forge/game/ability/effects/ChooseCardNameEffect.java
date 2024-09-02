@@ -1,8 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.*;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.StaticData;
 import forge.card.CardFacePredicates;

@@ -1,11 +1,10 @@
 package forge.card;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -342,7 +341,7 @@ public final class CardRulesPredicates {
         }
 
         @Override
-        public boolean apply(final CardRules card) {
+        public boolean test(final CardRules card) {
             boolean shouldContain;
             switch (this.field) {
             case NAME:
@@ -402,7 +401,7 @@ public final class CardRulesPredicates {
         }
 
         @Override
-        public boolean apply(final CardRules subject) {
+        public boolean test(final CardRules subject) {
             if (null == subject) {
                 return false;
             }
@@ -441,7 +440,7 @@ public final class CardRulesPredicates {
         }
 
         @Override
-        public boolean apply(final CardRules card) {
+        public boolean test(final CardRules card) {
             int value;
             switch (this.field) {
             case CMC:
@@ -484,7 +483,7 @@ public final class CardRulesPredicates {
         private final boolean shouldBeEqual;
 
         @Override
-        public boolean apply(final CardRules card) {
+        public boolean test(final CardRules card) {
             if (null == card) {
                 return false;
             }
@@ -502,7 +501,7 @@ public final class CardRulesPredicates {
         private final boolean shouldBeEqual;
 
         @Override
-        public boolean apply(final CardRules card) {
+        public boolean test(final CardRules card) {
             return this.shouldBeEqual == card.getType().hasSupertype(this.operand);
         }
 
@@ -520,7 +519,7 @@ public final class CardRulesPredicates {
         }
 
         @Override
-        public boolean apply(final CardRules subject) {
+        public boolean test(final CardRules subject) {
             return subject.getSplitType() == cst;
         }
     }

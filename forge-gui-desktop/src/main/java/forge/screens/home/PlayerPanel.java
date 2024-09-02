@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
@@ -17,7 +18,6 @@ import javax.swing.JPopupMenu;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 
 import forge.Singletons;

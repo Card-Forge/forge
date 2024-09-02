@@ -2,8 +2,7 @@ package forge.itemmanager.filters;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.item.PaperCard;

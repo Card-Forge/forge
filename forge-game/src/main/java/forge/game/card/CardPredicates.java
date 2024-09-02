@@ -18,8 +18,7 @@
 package forge.game.card;
 
 import java.util.Comparator;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -288,7 +287,7 @@ public final class CardPredicates {
             if (c.getCastSA() == null) {
                 return false;
             }
-            return predSA.apply(c.getCastSA());
+            return predSA.test(c.getCastSA());
         };
     }
 

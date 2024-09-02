@@ -1,8 +1,7 @@
 package forge.game.player;
 
 import java.util.Comparator;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;

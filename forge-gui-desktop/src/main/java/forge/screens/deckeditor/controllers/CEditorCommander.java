@@ -17,7 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -45,6 +44,7 @@ import forge.util.Predicates;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * Child controller for constructed deck editor UI.

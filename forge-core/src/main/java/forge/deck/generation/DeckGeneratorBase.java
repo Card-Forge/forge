@@ -17,7 +17,6 @@
  */
 package forge.deck.generation;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.*;
@@ -31,6 +30,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -342,7 +342,7 @@ public abstract class DeckGeneratorBase {
         }
 
         @Override
-        public boolean apply(CardRules subject) {
+        public boolean test(CardRules subject) {
             ManaCost mc = subject.getManaCost();
             return !mc.isPureGeneric() && allowedColor.containsAllColorsFrom(subject.getColorIdentity().getColor());
             //return  mc.canBePaidWithAvaliable(allowedColor);
@@ -360,7 +360,7 @@ public abstract class DeckGeneratorBase {
         }
 
         @Override
-        public boolean apply(CardRules c) {
+        public boolean test(CardRules c) {
             ManaCost mc = c.getManaCost();
             int cmc = mc.getCMC();
             return cmc >= min && cmc <= max && !mc.isNoCost();

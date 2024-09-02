@@ -1,6 +1,5 @@
 package forge.deck;
 
-import com.google.common.base.Predicate;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
@@ -28,6 +27,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 // Adding a generic to this class creates compile problems in ItemManager (that I can not fix)
 public class DeckProxy implements InventoryItem {
@@ -518,7 +518,7 @@ public class DeckProxy implements InventoryItem {
         }
 
         for (final Deck d : folder) {
-            if (filter == null || filter.apply(d)) {
+            if (filter == null || filter.test(d)) {
                 list.add(new DeckProxy(d, deckType, gameType, path, folder, null));
             }
         }
@@ -533,7 +533,7 @@ public class DeckProxy implements InventoryItem {
                 case Sideboard:
                 case Commander:
                     for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        if (!cardPredicate.apply(poolEntry.getKey())) {
+                        if (!cardPredicate.test(poolEntry.getKey())) {
                             return false; //all cards in deck must pass card predicate to pass deck predicate
                         }
                     }

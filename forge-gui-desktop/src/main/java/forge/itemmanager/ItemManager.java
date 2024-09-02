@@ -17,7 +17,6 @@
  */
 package forge.itemmanager;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -49,6 +48,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * ItemManager.

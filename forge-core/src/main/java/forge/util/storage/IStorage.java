@@ -18,8 +18,7 @@
 package forge.util.storage;
 
 import java.util.Collection;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.util.IHasName;
 

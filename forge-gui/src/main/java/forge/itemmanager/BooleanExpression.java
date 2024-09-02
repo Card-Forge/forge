@@ -4,8 +4,7 @@ package forge.itemmanager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;

@@ -1,10 +1,9 @@
 package forge.screens.deckeditor.controllers;
 
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import javax.swing.JLabel;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;

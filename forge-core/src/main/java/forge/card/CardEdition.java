@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.StaticData;
 import forge.card.CardDb.CardArtPreference;
@@ -38,6 +37,7 @@ import java.io.FilenameFilter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -891,7 +891,7 @@ public final class CardEdition implements Comparable<CardEdition> {
 
         private static class CanMakeBooster implements Predicate<CardEdition> {
             @Override
-            public boolean apply(final CardEdition subject) {
+            public boolean test(final CardEdition subject) {
                 return subject.hasBoosterTemplate();
             }
         }
@@ -919,7 +919,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
         private static class CanMakeStarter implements Predicate<CardEdition> {
             @Override
-            public boolean apply(final CardEdition subject) {
+            public boolean test(final CardEdition subject) {
                 return StaticData.instance().getTournamentPacks().contains(subject.getCode());
             }
         }
@@ -927,7 +927,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
         private static class CanMakeFatPack implements Predicate<CardEdition> {
             @Override
-            public boolean apply(final CardEdition subject) {
+            public boolean test(final CardEdition subject) {
                 return subject.getFatPackCount() > 0;
             }
         }
@@ -935,7 +935,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static final Predicate<CardEdition> HAS_BOOSTER_BOX = new CanMakeBoosterBox();
         private static class CanMakeBoosterBox implements Predicate<CardEdition> {
             @Override
-            public boolean apply(final CardEdition subject) {
+            public boolean test(final CardEdition subject) {
                 return subject.getBoosterBoxCount() > 0;
             }
         }

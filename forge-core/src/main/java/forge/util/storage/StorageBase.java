@@ -17,13 +17,13 @@
  */
 package forge.util.storage;
 
-import com.google.common.base.Predicate;
 import forge.util.IItemReader;
 import forge.util.Iterables;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -77,7 +77,7 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public T find(Predicate<T> condition) {
-        return Iterables.tryFind(map.values(), condition).orNull();
+        return Iterables.tryFind(map.values(), condition).orElse(null);
     }
 
     @Override

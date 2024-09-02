@@ -18,7 +18,6 @@
 
 package forge.item;
 
-import com.google.common.base.Predicate;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.item.generation.BoosterGenerator;
@@ -28,6 +27,7 @@ import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public abstract class SealedProduct implements InventoryItemFromSet {
 

@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.limited;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -41,6 +40,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * Booster Draft Format.

@@ -18,13 +18,13 @@
 package forge.card;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;

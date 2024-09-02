@@ -19,8 +19,8 @@ package forge.gamemodes.quest.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
-import com.google.common.base.Predicate;
 import forge.card.CardEdition;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.setrotation.ISetRotation;
@@ -181,7 +181,7 @@ public final class GameFormatQuest extends GameFormat {
 			}
 
 			@Override
-			public boolean apply(final CardEdition subject) {
+			public boolean test(final CardEdition subject) {
 				return this.qFormat.isSetLegal(subject.getCode());
 			}
 		}

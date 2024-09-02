@@ -1,9 +1,9 @@
 package forge.screens.planarconquest;
 
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
 
 import forge.Forge;
 import forge.Graphics;
@@ -266,8 +266,8 @@ public class ConquestCommandersScreen extends FScreen {
                 private final Predicate<PaperCard> pred = SFilterUtil.buildColorFilter(buttonMap);
 
                 @Override
-                public boolean apply(ConquestCommander input) {
-                    return pred.apply(input.getCard());
+                public boolean test(ConquestCommander input) {
+                    return pred.test(input.getCard());
                 }
             };
         }

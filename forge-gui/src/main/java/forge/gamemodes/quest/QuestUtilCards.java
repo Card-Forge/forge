@@ -18,7 +18,6 @@
 package forge.gamemodes.quest;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.CardEdition;
@@ -47,6 +46,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -93,7 +93,7 @@ public final class QuestUtilCards {
             for (String edCode : availableEditions) {
                 CardEdition ed = FModel.getMagicDb().getEditions().get(edCode);
                 // Duel decks might have only 2 types of basic lands
-                if (CardEdition.Predicates.hasBasicLands.apply(ed)) {
+                if (CardEdition.Predicates.hasBasicLands.test(ed)) {
                     landCodes.add(edCode);
                 }
             }
@@ -613,7 +613,7 @@ public final class QuestUtilCards {
     	List<PaperCard> temp = new ArrayList<>();
 
 	    for (PaperCard card : cards) {
-		    if (predicate.apply(card)) {
+		    if (predicate.test(card)) {
 		    	temp.add(card);
 		    }
 	    }

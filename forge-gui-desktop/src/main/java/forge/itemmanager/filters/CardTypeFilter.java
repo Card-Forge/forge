@@ -2,10 +2,9 @@ package forge.itemmanager.filters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.swing.JPanel;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardRules;
 import forge.item.PaperCard;

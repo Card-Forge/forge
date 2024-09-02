@@ -17,7 +17,6 @@
  */
 package forge.deck;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -35,6 +34,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -459,7 +459,7 @@ public class CardPool extends ItemPool<PaperCard> {
     public CardPool getFilteredPool(Predicate<PaperCard> predicate) {
         CardPool filteredPool = new CardPool();
         for (PaperCard c : this.items.keySet()) {
-            if (predicate.apply(c))
+            if (predicate.test(c))
                 filteredPool.add(c, this.items.get(c));
         }
         return filteredPool;
@@ -475,7 +475,7 @@ public class CardPool extends ItemPool<PaperCard> {
         for (Entry<PaperCard, Integer> entry : this.items.entrySet()) {
             PaperCard pc = entry.getKey();
             int count = entry.getValue();
-            if (predicate.apply(pc))
+            if (predicate.test(pc))
                 filteredPool.add(pc, count);
         }
         return filteredPool;

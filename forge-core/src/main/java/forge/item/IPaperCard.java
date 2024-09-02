@@ -1,6 +1,5 @@
 package forge.item;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -15,6 +14,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 
@@ -82,7 +82,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             }
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 boolean colorFound = false;
                 if (noColor) {
                     return card.getRules().getColor().isColorless() == shouldBeEqual;
@@ -111,7 +111,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             private final boolean shouldBeEqual;
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 return (card.getRarity() == this.operand) == this.shouldBeEqual;
             }
 
@@ -126,7 +126,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             private final boolean mustContain;
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 return this.sets.contains(card.getEdition()) == this.mustContain;
             }
 
@@ -140,7 +140,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             private final String operand;
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 return this.op(card.getName(), this.operand);
             }
 
@@ -154,7 +154,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             private final List<String> operand;
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 final String cardName = card.getName();
                 for (final String element : this.operand) {
                     if (this.op(cardName, element)) {
@@ -174,7 +174,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             private final List<PaperCard> operand;
 
             @Override
-            public boolean apply(final PaperCard card) {
+            public boolean test(final PaperCard card) {
                 for (final PaperCard element : this.operand) {
                     if (this.op(card, element)) {
                         return true;

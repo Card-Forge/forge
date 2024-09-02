@@ -22,11 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import javax.swing.KeyStroke;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
 
 import forge.card.CardRules;
@@ -303,7 +303,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         }
 
         @Override
-        public boolean apply(PaperCard subject) {
+        public boolean test(PaperCard subject) {
             CardRules cr = subject.getRules();
             ManaCost mc = cr.getManaCost();
             return allowedColor.containsAllColorsFrom(cr.getColorIdentity().getColor());

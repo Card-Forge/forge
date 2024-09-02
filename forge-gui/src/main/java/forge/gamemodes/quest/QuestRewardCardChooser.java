@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.item.PaperCard;
 import forge.model.FModel;

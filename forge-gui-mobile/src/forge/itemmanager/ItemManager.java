@@ -19,12 +19,12 @@ package forge.itemmanager;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 
 import forge.Forge;
 import forge.Graphics;

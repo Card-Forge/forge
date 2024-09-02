@@ -3,11 +3,11 @@ package forge.screens.planarconquest;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
@@ -109,7 +109,7 @@ public class ConquestAEtherScreen extends FScreen {
         filteredPool.clear();
         strictPool.clear();
         for (PaperCard card : pool) {
-            if (predicate == null || predicate.apply(card)) {
+            if (predicate == null || predicate.test(card)) {
                 filteredPool.add(card);
                 if (selectedRarity == card.getRarity()) {
                     strictPool.add(card);

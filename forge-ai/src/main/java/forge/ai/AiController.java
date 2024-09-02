@@ -18,7 +18,6 @@
 package forge.ai;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
@@ -63,6 +62,7 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>

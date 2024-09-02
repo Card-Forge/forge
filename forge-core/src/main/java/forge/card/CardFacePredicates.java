@@ -1,8 +1,8 @@
 package forge.card;
 
-import com.google.common.base.Predicate;
-
 import forge.card.mana.ManaCost;
+
+import java.util.function.Predicate;
 
 
 public final class CardFacePredicates {
@@ -12,7 +12,7 @@ public final class CardFacePredicates {
         private final boolean shouldBeEqual;
 
         @Override
-        public boolean apply(final ICardFace face) {
+        public boolean test(final ICardFace face) {
             if (null == face) {
                 return false;
             }
@@ -30,7 +30,7 @@ public final class CardFacePredicates {
         private final boolean shouldBeEqual;
 
         @Override
-        public boolean apply(final ICardFace face) {
+        public boolean test(final ICardFace face) {
             return this.shouldBeEqual == face.getType().hasSupertype(this.operand);
         }
 
@@ -81,7 +81,7 @@ public final class CardFacePredicates {
         }
 
         @Override
-        public boolean apply(ICardFace input) {
+        public boolean test(ICardFace input) {
             String[] k = valid.split("\\.", 2);
 
             if ("Card".equals(k[0])) {

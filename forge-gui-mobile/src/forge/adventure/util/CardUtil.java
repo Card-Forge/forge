@@ -2,7 +2,6 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
@@ -27,6 +26,7 @@ import forge.util.Predicates;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import static forge.adventure.data.RewardData.generateAllCards;
@@ -71,7 +71,7 @@ public class CardUtil {
         }
 
         @Override
-        public boolean apply(final PaperCard card) {
+        public boolean test(final PaperCard card) {
             if(!this.rarities.isEmpty()&&!this.rarities.contains(card.getRarity()))
                 return !this.shouldBeEqual;
             if(!this.editions.isEmpty()&&!this.editions.contains(card.getEdition())) {
@@ -340,7 +340,7 @@ public class CardUtil {
 
         for (final PaperCard item : cards)
         {
-            if(pre.apply(item))
+            if(pre.test(item))
                 result.add(item);
         }
         return result;

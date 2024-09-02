@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.deck.DeckgenUtil;
 import forge.game.GameFormat;
@@ -157,7 +156,7 @@ public class QuestChallengeGenerator {
         @Override
         public QuestEventChallenge find(Predicate<QuestEventChallenge> condition) {
             for(QuestEventChallenge challenge:challenges.values()){
-                if(condition.apply(challenge)){
+                if(condition.test(challenge)){
                     return challenge;
                 }
             }

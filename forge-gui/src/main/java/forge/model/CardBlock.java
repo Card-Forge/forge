@@ -21,10 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.item.IPaperCard;

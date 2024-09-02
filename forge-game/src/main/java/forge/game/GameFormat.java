@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -40,6 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 
 public class GameFormat implements Comparable<GameFormat> {
@@ -264,7 +264,7 @@ public class GameFormat implements Comparable<GameFormat> {
         {
             final List<PaperCard> erroneousCI = new ArrayList<>();
             for (Entry<PaperCard, Integer> poolEntry : allCards) {
-                if (!getFilterRules().apply(poolEntry.getKey())) {
+                if (!getFilterRules().test(poolEntry.getKey())) {
                     erroneousCI.add(poolEntry.getKey());
                 }
             }
@@ -612,7 +612,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Set<GameFormat> getAllFormatsOfCard(PaperCard card) {
             Set<GameFormat> result = new HashSet<>();
             for (GameFormat gf : naturallyOrdered) {
-                if (gf.getFilterRules().apply(card)) {
+                if (gf.getFilterRules().test(card)) {
                     result.add(gf);
                 }
             }

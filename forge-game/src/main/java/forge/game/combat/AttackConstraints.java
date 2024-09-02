@@ -7,12 +7,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -392,7 +392,7 @@ public class AttackConstraints {
     }
     private static Attack findFirst(final List<Attack> reqs, final Predicate<Card> predicate) {
         for (final Attack req : reqs) {
-            if (predicate.apply(req.attacker)) {
+            if (predicate.test(req.attacker)) {
                 return req;
             }
         }

@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.google.common.base.Predicate;
+import java.util.function.Predicate;
 
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -159,7 +158,7 @@ public class ConquestRegion {
     static void addCard(PaperCard pc, Iterable<ConquestRegion> regions) {
         boolean foundRegion = false;
         for (ConquestRegion region : regions) {
-            if (region.pred.apply(pc)) {
+            if (region.pred.test(pc)) {
                 region.cardPool.add(pc);
                 foundRegion = true;
             }

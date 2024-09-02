@@ -17,9 +17,9 @@
  */
 package forge.util;
 
-import com.google.common.base.Predicate;
-
 import forge.item.PaperCard;
+
+import java.util.function.Predicate;
 
 /**
  * Special predicate class to perform string operations.
@@ -74,8 +74,7 @@ public abstract class PredicateCard<T> implements Predicate<T> {
 
     public static PredicateCard<PaperCard> equals(final PaperCard what) {
         return new PredicateCard<PaperCard>(StringOp.EQUALS) {
-            @Override
-            public boolean apply(PaperCard subject) {
+            public boolean test(PaperCard subject) {
                 return op(subject, what);
             }
         };

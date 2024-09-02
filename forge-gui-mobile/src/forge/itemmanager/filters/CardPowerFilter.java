@@ -1,12 +1,12 @@
 package forge.itemmanager.filters;
 
-import com.google.common.base.Predicate;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.util.Predicates;
+
+import java.util.function.Predicate;
 
 
 public class CardPowerFilter extends ValueRangeFilter<PaperCard> {

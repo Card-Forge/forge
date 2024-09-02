@@ -18,7 +18,6 @@
 package forge.game.zone;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -49,6 +48,7 @@ import forge.util.TextUtil;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -980,14 +980,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
         for (SpellAbilityStackInstance si : stack) {
             if (si.isTrigger() && si.getSourceCard().equals(source)) {
-                if (pred == null || pred.apply(si.getSpellAbility())) {
+                if (pred == null || pred.test(si.getSpellAbility())) {
                     return true;
                 }
             }
         }
         for (SpellAbility sa : simultaneousStackEntryList) {
             if (sa.isTrigger() && sa.getHostCard().equals(source)) {
-                if (pred == null || pred.apply(sa)) {
+                if (pred == null || pred.test(sa)) {
                     return true;
                 }
             }

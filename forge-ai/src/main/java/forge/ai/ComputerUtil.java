@@ -18,6 +18,7 @@
 package forge.ai;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -27,8 +28,6 @@ import forge.game.card.*;
 import forge.game.cost.*;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Predicate;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;

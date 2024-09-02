@@ -22,12 +22,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.item.IPaperCard;

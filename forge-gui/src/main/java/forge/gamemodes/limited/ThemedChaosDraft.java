@@ -1,10 +1,9 @@
 package forge.gamemodes.limited;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -72,7 +71,7 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
      */
     private final Predicate<CardEdition> themedFilter = new Predicate<CardEdition>() {
         @Override
-        public boolean apply(final CardEdition cardEdition) {
+        public boolean test(final CardEdition cardEdition) {
             String[] themes = cardEdition.getChaosDraftThemes();
             for (String theme : themes) {
                 if (tag.equals(theme)) return true;
@@ -99,7 +98,7 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
             default:
                 format = formats.getStandard();
         }
-        return cardEdition -> DEFAULT_FILTER.apply(cardEdition) && format.isSetLegal(cardEdition.getCode());
+        return cardEdition -> DEFAULT_FILTER.test(cardEdition) && format.isSetLegal(cardEdition.getCode());
     }
 
     /**

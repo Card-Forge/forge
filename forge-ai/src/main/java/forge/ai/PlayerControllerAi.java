@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -50,6 +49,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.security.InvalidParameterException;
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**

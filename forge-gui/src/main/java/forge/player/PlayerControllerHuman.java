@@ -1,7 +1,6 @@
 package forge.player;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicate;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -77,6 +76,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**

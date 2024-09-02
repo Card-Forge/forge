@@ -1,7 +1,5 @@
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
-
 import forge.Singletons;
 import forge.card.CardDb;
 import forge.card.CardRulesPredicates;
@@ -26,6 +24,8 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.util.Aggregates;
 import forge.util.Iterables;
 import forge.util.Predicates;
+
+import java.util.function.Predicate;
 
 
 /**

@@ -1,12 +1,12 @@
 package forge.card;
 
-import com.google.common.base.Predicate;
 import forge.card.CardDb.CardArtPreference;
 import forge.item.PaperCard;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 public interface ICardDatabase extends Iterable<PaperCard> {
     /**

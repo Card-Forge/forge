@@ -17,7 +17,6 @@
  */
 package forge.card;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -37,6 +36,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
@@ -1062,7 +1062,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         @Override
-        public boolean apply(final PaperCard subject) {
+        public boolean test(final PaperCard subject) {
             for (PaperCard c : getAllCards(subject.getName())) {
                 if (sets.contains(c.getEdition())) {
                     return true;
@@ -1085,7 +1085,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             this.sets.addAll(allowedSets);
         }
         @Override
-        public boolean apply(final PaperCard card){
+        public boolean test(final PaperCard card){
             if (card == null) return false;
             return this.sets.contains(card.getEdition());
         }
@@ -1110,7 +1110,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         @Override
-        public boolean apply(final PaperCard subject) {
+        public boolean test(final PaperCard subject) {
             return matchingCards.contains(subject.getName());
         }
     }

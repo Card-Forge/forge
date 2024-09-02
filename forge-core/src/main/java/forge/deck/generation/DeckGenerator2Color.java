@@ -19,10 +19,10 @@ package forge.deck.generation;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 import forge.card.ColorSet;
