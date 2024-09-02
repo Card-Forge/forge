@@ -17,7 +17,6 @@
  */
 package forge.itemmanager;
 
-import com.google.common.base.Function;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
@@ -43,6 +42,7 @@ import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Function;
 
 public enum ColumnDef {
     /**

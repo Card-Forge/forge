@@ -3,8 +3,7 @@ package forge.gamemodes.net.server;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import forge.LobbyPlayer;
 import forge.ai.GameState;

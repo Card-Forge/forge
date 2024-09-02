@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.download.GuiDownloadService;

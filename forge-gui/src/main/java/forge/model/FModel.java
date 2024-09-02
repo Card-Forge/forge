@@ -17,7 +17,6 @@
  */
 package forge.model;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Maps;
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;
@@ -62,6 +61,7 @@ import forge.util.storage.StorageBase;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Function;
 
 /**
  * The default Model implementation for Forge.

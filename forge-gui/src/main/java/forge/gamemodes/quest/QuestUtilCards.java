@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.quest;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.CardEdition;
@@ -46,6 +45,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**

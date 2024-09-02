@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Function;
 
 import forge.StaticData;
 import forge.item.PaperCard;

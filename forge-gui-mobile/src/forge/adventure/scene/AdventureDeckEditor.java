@@ -4,7 +4,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.data.AdventureEventData;
@@ -40,6 +39,7 @@ import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 

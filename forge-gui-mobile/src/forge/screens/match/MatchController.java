@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import forge.adventure.scene.DuelScene;
 import forge.adventure.util.Config;
@@ -15,7 +16,6 @@ import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 

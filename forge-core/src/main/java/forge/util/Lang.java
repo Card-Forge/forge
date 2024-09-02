@@ -2,11 +2,11 @@ package forge.util;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import forge.util.lang.LangChinese;

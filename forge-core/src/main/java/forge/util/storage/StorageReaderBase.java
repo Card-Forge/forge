@@ -3,8 +3,8 @@ package forge.util.storage;
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 
 import forge.util.IItemReader;

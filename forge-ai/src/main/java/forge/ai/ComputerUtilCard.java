@@ -2,9 +2,9 @@ package forge.ai;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
-import com.google.common.base.Function;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.card.mana.ManaCost;
 import forge.game.card.*;

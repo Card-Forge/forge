@@ -4,8 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
