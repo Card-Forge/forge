@@ -30,7 +30,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
 import forge.StaticData;
@@ -55,6 +54,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.view.arcane.CardPanel;

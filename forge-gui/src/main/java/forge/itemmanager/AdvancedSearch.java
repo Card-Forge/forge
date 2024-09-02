@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -49,6 +48,7 @@ import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.util.Predicates;
 
 public class AdvancedSearch {
     public enum FilterOption {

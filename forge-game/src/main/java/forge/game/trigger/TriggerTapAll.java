@@ -1,10 +1,10 @@
 package forge.game.trigger;
 
-import com.google.common.collect.Iterables;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.util.Iterables;
 import forge.util.Localizer;
 
 import java.util.Map;

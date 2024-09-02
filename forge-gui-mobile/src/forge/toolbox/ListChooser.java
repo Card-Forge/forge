@@ -25,9 +25,7 @@ import java.util.List;
 import com.badlogic.gdx.Input;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.Graphics;
@@ -41,6 +39,8 @@ import forge.itemmanager.filters.ListLabelFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
 import forge.util.Callback;
+import forge.util.Iterables;
+import forge.util.Predicates;
 import forge.util.Utils;
 
 /**

@@ -2,15 +2,10 @@ package forge.card;
 
 import java.util.*;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
-import forge.util.CardTranslation;
-import forge.util.ComparableOp;
-import forge.util.PredicateString;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with
@@ -590,7 +585,7 @@ public final class CardRulesPredicates {
                 Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
 
         /** The Constant IS_NON_CREATURE_SPELL. **/
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = com.google.common.base.Predicates
+        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates
                 .or(Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
                         Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE)));
 

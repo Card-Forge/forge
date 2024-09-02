@@ -11,11 +11,11 @@ import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
+import forge.util.Iterables;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;

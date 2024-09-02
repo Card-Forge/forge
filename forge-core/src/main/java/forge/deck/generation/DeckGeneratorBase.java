@@ -18,8 +18,6 @@
 package forge.deck.generation;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.*;
@@ -28,10 +26,7 @@ import forge.deck.CardPool;
 import forge.deck.DeckFormat;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.DebugTrace;
-import forge.util.ItemPool;
-import forge.util.MyRandom;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;

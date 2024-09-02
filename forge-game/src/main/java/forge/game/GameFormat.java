@@ -18,7 +18,6 @@
 package forge.game;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -31,6 +30,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.Predicates;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 

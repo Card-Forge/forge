@@ -3,14 +3,13 @@ package forge.deck;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.IHasGameType;
 import forge.gamemodes.quest.QuestController;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.Iterables;
 
 public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
     private enum RandomDeckType {

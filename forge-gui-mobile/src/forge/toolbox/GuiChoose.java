@@ -7,10 +7,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import forge.Forge;
+import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 
 import forge.game.card.CardView;
 import forge.util.Callback;

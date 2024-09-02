@@ -22,8 +22,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.CardTraitBase;
@@ -32,7 +30,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityCrewValue;
+import forge.util.Iterables;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 import forge.util.collect.FCollectionView;
 
 /**

@@ -2,7 +2,6 @@ package forge.game.player;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableMultiset;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
@@ -20,6 +19,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.CardTranslation;
+import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;

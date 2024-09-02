@@ -17,7 +17,6 @@
  */
 package forge.game.spellability;
 
-import com.google.common.collect.Iterables;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -30,6 +29,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 

@@ -19,13 +19,16 @@ package forge.ai;
 
 import java.util.*;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Sets;
 import forge.game.card.*;
 import forge.game.cost.*;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
@@ -66,9 +69,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
 

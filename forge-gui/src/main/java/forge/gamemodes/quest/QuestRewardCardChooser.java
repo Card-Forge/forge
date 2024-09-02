@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.ItemPool;
+import forge.util.Iterables;
 
 /** 
  * Resolves a card chooser InventoryItem into a CardPrinted.

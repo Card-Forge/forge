@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.ICardFace;
@@ -20,6 +19,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.MyRandom;
 
 import java.util.Collection;

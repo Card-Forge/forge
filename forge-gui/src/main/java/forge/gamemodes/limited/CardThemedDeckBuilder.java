@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -34,7 +32,9 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.Iterables;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 
 /**
  * Limited format deck.

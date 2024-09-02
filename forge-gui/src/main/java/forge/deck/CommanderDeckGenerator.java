@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -15,6 +13,8 @@ import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.ItemPool;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 /**
  * Created by maustin on 09/05/2017.

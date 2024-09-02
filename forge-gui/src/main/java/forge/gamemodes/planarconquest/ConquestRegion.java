@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
@@ -16,6 +15,7 @@ import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
+import forge.util.Predicates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionReader;
 import forge.util.collect.FCollectionView;

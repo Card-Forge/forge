@@ -18,8 +18,10 @@
 package forge.card;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.*;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimaps;
 
 import forge.StaticData;
 import forge.card.CardEdition.CardInSet;
@@ -27,9 +29,7 @@ import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.CollectionSuppliers;
-import forge.util.Lang;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.lang.LangEnglish;
 
 import org.apache.commons.lang3.StringUtils;

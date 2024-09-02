@@ -8,8 +8,6 @@ import forge.ImageKeys;
 import forge.game.ability.AbilityKey;
 import forge.game.cost.*;
 
-import com.google.common.collect.Iterables;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -44,6 +42,7 @@ import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
 import forge.util.Aggregates;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;

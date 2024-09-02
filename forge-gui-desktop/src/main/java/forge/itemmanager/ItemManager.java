@@ -18,8 +18,6 @@
 package forge.itemmanager;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -37,10 +35,7 @@ import forge.toolbox.*;
 import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.Localizer;
-import forge.util.ReflectionUtil;
+import forge.util.*;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

@@ -3,9 +3,6 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -26,6 +23,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 

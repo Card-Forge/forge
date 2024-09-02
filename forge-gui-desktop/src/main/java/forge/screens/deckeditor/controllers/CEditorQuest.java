@@ -27,7 +27,6 @@ import javax.swing.KeyStroke;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 
 import forge.card.CardRules;
@@ -61,6 +60,7 @@ import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Predicates;
 
 /**
  * Child controller for quest deck editor UI.

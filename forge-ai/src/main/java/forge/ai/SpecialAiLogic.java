@@ -1,6 +1,5 @@
 package forge.ai;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.ai.ability.TokenAi;
@@ -17,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Expressions;
+import forge.util.Iterables;
 
 import java.util.List;
 

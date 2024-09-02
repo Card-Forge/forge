@@ -1,8 +1,6 @@
 package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.Singletons;
 import forge.card.CardDb;
@@ -26,6 +24,8 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.util.Aggregates;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 
 /**

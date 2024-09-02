@@ -18,7 +18,6 @@
 package forge.itemmanager;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
@@ -33,6 +32,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 

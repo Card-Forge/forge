@@ -25,8 +25,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.Graphics;
@@ -55,7 +53,9 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.ItemPool;
+import forge.util.Iterables;
 import forge.util.LayoutHelper;
+import forge.util.Predicates;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {

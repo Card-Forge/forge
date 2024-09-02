@@ -2,8 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.base.Predicates;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -15,6 +13,7 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.util.Predicates;
 
 public class MutateAi extends SpellAbilityAi {
     @Override

@@ -21,10 +21,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.Iterables;
+import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;

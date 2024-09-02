@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
@@ -21,6 +20,7 @@ import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
+import forge.util.Iterables;
 import forge.util.Localizer;
 
 import java.util.ArrayList;

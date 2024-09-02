@@ -20,14 +20,13 @@ package forge.game.trigger;
 import java.util.Collections;
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
+import forge.util.Iterables;
 
 public class TriggerTokenCreatedOnce extends Trigger {
 

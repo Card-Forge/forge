@@ -3,7 +3,6 @@ package forge.adventure.data;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -22,6 +21,7 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;

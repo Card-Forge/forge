@@ -6,18 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CollectionSuppliers;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 
 /**
  * Test Class (only for test purposes) to compare previous method

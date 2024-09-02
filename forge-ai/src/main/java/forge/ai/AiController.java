@@ -19,8 +19,6 @@ package forge.ai;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
@@ -60,10 +58,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.ComparatorUtil;
-import forge.util.Expressions;
-import forge.util.MyRandom;
+import forge.util.*;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 

@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import com.google.common.base.Predicates;
 import forge.Forge;
 import forge.adventure.data.DialogData;
 import forge.adventure.data.EffectData;
@@ -33,6 +32,7 @@ import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

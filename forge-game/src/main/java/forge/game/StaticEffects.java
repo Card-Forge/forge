@@ -20,11 +20,11 @@ package forge.game;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.game.card.Card;
 import forge.game.staticability.StaticAbility;
+import forge.util.Iterables;
 
 /**
  * <p>

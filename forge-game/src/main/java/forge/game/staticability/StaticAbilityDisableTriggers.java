@@ -1,6 +1,5 @@
 package forge.game.staticability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Table.Cell;
 
 import forge.game.Game;
@@ -9,6 +8,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Map;

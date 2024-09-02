@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Iterables;
 
 /** 
  * Allows the player to choose a card from a predicate-filtered list of cards.

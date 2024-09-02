@@ -1,12 +1,12 @@
 package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
+import forge.util.Predicates;
 
 
 public class CardColorlessCostFilter extends ValueRangeFilter<PaperCard> {

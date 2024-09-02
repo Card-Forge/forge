@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -12,6 +10,7 @@ import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.Localizer;
 

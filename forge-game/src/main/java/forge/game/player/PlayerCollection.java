@@ -5,11 +5,11 @@ import java.util.Comparator;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Iterables;
 import forge.util.collect.FCollection;
 
 public class PlayerCollection extends FCollection<Player> {

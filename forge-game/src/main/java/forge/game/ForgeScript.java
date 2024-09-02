@@ -1,7 +1,5 @@
 package forge.game;
 
-import com.google.common.collect.Iterables;
-
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
@@ -23,6 +21,7 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;

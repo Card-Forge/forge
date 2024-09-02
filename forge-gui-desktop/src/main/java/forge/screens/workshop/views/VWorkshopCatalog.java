@@ -2,8 +2,6 @@ package forge.screens.workshop.views;
 
 import javax.swing.JPanel;
 
-import com.google.common.collect.Iterables;
-
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -16,6 +14,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.workshop.controllers.CCardScript;
 import forge.screens.workshop.controllers.CWorkshopCatalog;
 import forge.util.ItemPool;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.StaticData;
 import forge.card.CardEdition;
@@ -26,6 +25,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.PredicateString.StringOp;
+import forge.util.Predicates;
 
 /** 
  * Static factory; holds blocks of form elements and predicates

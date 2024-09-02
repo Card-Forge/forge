@@ -1,13 +1,12 @@
 package forge.localinstance.achievements;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
+import forge.util.Iterables;
 import forge.util.Localizer;
+import forge.util.Predicates;
 
 public class AgainstAllOdds extends Achievement {
     public AgainstAllOdds() {

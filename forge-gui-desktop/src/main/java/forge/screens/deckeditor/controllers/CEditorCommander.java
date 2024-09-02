@@ -18,7 +18,6 @@
 package forge.screens.deckeditor.controllers;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -41,6 +40,7 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
+import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;

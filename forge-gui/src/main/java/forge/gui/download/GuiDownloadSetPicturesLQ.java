@@ -23,9 +23,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.TreeMap;
 
+import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Iterables;
 
 import forge.StaticData;
 import forge.card.CardEdition;

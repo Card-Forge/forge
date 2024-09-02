@@ -3,9 +3,9 @@ package forge.game.ability.effects;
 import java.util.EnumSet;
 import java.util.Map;
 
+import forge.util.Iterables;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 

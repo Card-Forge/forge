@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -24,6 +22,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 import java.util.List;
 import java.util.Map;

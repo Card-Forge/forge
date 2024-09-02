@@ -3,8 +3,6 @@ package forge.adventure.util;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
@@ -24,6 +22,8 @@ import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

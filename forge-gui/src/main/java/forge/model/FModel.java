@@ -18,7 +18,6 @@
 package forge.model;
 
 import com.google.common.base.Function;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
 import forge.CardStorageReader;
 import forge.CardStorageReader.ProgressObserver;

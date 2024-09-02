@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
@@ -16,6 +15,7 @@ import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.Localizer;
+import forge.util.Predicates;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {

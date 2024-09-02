@@ -19,12 +19,12 @@
 package forge.item;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.item.generation.BoosterGenerator;
 import forge.util.Aggregates;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;

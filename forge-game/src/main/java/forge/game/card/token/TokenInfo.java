@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import forge.card.GamePieceType;
+import forge.util.Iterables;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;

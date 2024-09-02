@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -38,6 +37,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.IHasSkinProp;
 import forge.model.FModel;
 import forge.util.FileUtil;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 

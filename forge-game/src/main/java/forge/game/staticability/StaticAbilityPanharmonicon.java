@@ -1,8 +1,6 @@
 package forge.game.staticability;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -22,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.Iterables;
+import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {

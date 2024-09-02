@@ -20,7 +20,6 @@ package forge.game.card;
 import java.util.Comparator;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -31,6 +30,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
 

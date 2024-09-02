@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
@@ -28,6 +26,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 

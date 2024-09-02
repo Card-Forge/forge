@@ -27,6 +27,7 @@ import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.item.SealedTemplateWithSlots;
 import forge.util.*;
+import forge.util.Iterables;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -903,7 +904,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
             Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
-                    com.google.common.base.Predicates.and(hasBasicLands, artPreference::accept));
+                    forge.util.Predicates.and(hasBasicLands, artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
             List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())

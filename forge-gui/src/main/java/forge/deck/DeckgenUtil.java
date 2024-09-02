@@ -9,11 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -45,9 +44,6 @@ import forge.item.PaperCard;
 import forge.itemmanager.IItemManager;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.util.Aggregates;
-import forge.util.Lang;
-import forge.util.MyRandom;
 import forge.util.storage.IStorage;
 
 /** 

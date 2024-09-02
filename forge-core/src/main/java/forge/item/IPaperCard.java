@@ -43,14 +43,14 @@ public interface IPaperCard extends InventoryItem, Serializable {
 
         public static Predicate<PaperCard> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
-                return com.google.common.base.Predicates.alwaysTrue();
+                return forge.util.Predicates.alwaysTrue();
             }
             return new PredicateSets(value, shouldContain);
         }
 
         public static Predicate<PaperCard> printedInSet(final String value) {
             if (StringUtils.isEmpty(value)) {
-                return com.google.common.base.Predicates.alwaysTrue();
+                return forge.util.Predicates.alwaysTrue();
             }
             return new PredicateSets(Lists.newArrayList(value), true);
         }
@@ -209,7 +209,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             public static final Predicate<PaperCard> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
 
             /** The Constant isRareOrMythic. */
-            public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = com.google.common.base.Predicates.or(Presets.IS_RARE,
+            public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = forge.util.Predicates.or(Presets.IS_RARE,
                     Presets.IS_MYTHIC_RARE);
 
             /** The Constant isSpecial. */

@@ -3,9 +3,8 @@ package forge.game.event;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.player.Player;
+import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.TextUtil;
 

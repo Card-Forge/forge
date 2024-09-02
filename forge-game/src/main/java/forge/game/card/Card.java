@@ -19,9 +19,7 @@ package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicates;
 import com.google.common.collect.*;
-import com.google.common.collect.Iterables;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.*;
@@ -54,6 +52,7 @@ import forge.item.PaperCard;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.*;
+import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;

@@ -5,7 +5,6 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -19,6 +18,7 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+import forge.util.Predicates;
 
 /**
  * Controls the "analysis" panel in the deck editor UI.

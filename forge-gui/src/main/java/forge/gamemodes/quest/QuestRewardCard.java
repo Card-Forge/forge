@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Predicates;
 
 public abstract class QuestRewardCard implements IQuestRewardCard {
 

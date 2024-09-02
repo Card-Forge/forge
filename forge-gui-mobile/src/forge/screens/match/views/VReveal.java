@@ -1,7 +1,6 @@
 package forge.screens.match.views;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -18,6 +17,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.util.CardTranslation;
 import forge.util.ImageUtil;
+import forge.util.Iterables;
 import forge.util.Utils;
 
 import java.util.ArrayList;

@@ -5,10 +5,9 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 

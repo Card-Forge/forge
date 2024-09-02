@@ -19,9 +19,7 @@ package forge.gamemodes.quest;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardEdition;
 import forge.card.CardRarity;
@@ -41,9 +39,7 @@ import forge.item.generation.BoosterSlots;
 import forge.item.generation.UnOpenedProduct;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.MyRandom;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;

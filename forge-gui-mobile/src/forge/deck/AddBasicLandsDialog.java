@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.Graphics;
@@ -48,6 +47,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextArea;
 import forge.util.Callback;
+import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.Utils;
 

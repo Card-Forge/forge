@@ -26,7 +26,6 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.game.Game;
@@ -36,6 +35,7 @@ import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
+import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;

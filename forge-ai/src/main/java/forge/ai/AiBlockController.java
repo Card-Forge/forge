@@ -20,7 +20,6 @@ package forge.ai;
 import java.util.*;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.card.CardStateName;
 import forge.game.GameEntity;
@@ -46,6 +45,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 import forge.util.collect.FCollectionView;
 
 

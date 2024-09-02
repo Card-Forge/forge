@@ -8,12 +8,11 @@ import java.util.Map;
 
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -45,10 +44,6 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
 
 public class PlayEffect extends SpellAbilityEffect {
     @Override

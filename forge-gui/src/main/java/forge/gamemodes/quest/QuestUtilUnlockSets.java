@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardEdition;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
@@ -36,6 +35,7 @@ import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
+import forge.util.Iterables;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.ImmutablePair;

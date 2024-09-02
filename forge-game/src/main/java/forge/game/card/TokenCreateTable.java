@@ -3,11 +3,11 @@ package forge.game.card;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.Iterables;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 

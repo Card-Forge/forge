@@ -1,6 +1,5 @@
 package forge.game.player;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
 import forge.deck.CardPool;
@@ -9,6 +8,7 @@ import forge.deck.DeckSection;
 import forge.game.GameType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.Iterables;
 
 import java.util.ArrayList;
 import java.util.Collections;

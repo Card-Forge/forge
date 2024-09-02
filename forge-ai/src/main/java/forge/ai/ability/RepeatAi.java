@@ -3,7 +3,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
@@ -13,6 +12,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.util.Iterables;
 
 public class RepeatAi extends SpellAbilityAi {
 

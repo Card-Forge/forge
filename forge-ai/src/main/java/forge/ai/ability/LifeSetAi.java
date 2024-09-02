@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
-
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -16,6 +14,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class LifeSetAi extends SpellAbilityAi {

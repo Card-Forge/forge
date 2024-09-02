@@ -19,12 +19,11 @@ package forge.game.trigger;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
+import forge.util.Iterables;
 import forge.util.Localizer;
 
 /**

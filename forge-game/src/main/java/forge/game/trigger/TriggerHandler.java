@@ -20,7 +20,6 @@ package forge.game.trigger;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -41,6 +40,7 @@ import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import forge.util.Iterables;
 import forge.util.Visitor;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;

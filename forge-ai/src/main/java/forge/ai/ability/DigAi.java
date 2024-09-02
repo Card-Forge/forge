@@ -2,8 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
-
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -26,6 +24,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.TextUtil;
 
 

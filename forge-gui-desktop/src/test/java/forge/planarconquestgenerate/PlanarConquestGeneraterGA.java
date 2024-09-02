@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GuiDesktop;
@@ -37,9 +36,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
-import forge.util.AbstractGeneticAlgorithm;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.view.SimulateMatch;
 
 public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {

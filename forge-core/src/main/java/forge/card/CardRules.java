@@ -20,9 +20,9 @@ package forge.card;
 import java.util.*;
 
 import com.google.common.collect.Lists;
+import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.card.mana.IParserManaCost;

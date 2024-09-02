@@ -1,10 +1,10 @@
 package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
+import forge.util.Predicates;
 
 
 public class CardFormatFilter extends FormatFilter<PaperCard> {

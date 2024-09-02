@@ -1,6 +1,5 @@
 package forge.itemmanager;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -18,6 +17,7 @@ import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.CollectionSuppliers;
+import forge.util.Iterables;
 import forge.util.Localizer;
 
 import javax.swing.*;

@@ -56,6 +56,7 @@ public class Iterables {
     }
 
     public static <F, T> Iterable<T> transform(final Iterable<F> iterable, final Function<? super F, T> function) {
+        //TODO: Collection input variant. Some usages use Lists.newArrayList on output which could be made part of the stream.
         return () -> StreamSupport.stream(iterable.spliterator(), false).map(function).iterator();
     }
 
@@ -80,6 +81,10 @@ public class Iterables {
     public static <T> boolean removeIf(Iterable<T> iterable, Predicate<T> test) {
         //TODO: Convert parameter type
         return ((Collection<T>) iterable).removeIf(test);
+    }
+
+    public static boolean removeAll(Collection<?> removeFrom, Collection<?> toRemove) {
+        return removeFrom.removeAll(toRemove);
     }
 
     public static int size(Collection<?> collection) {
@@ -134,6 +139,16 @@ public class Iterables {
     }
     public static <T> Iterable<T> concat(Iterable<? extends Iterable<? extends T>> inputs) {
         return com.google.common.collect.Iterables.concat(inputs);
+    }
+    public static <T> Iterable<T> concat(Iterable<? extends T> a, Iterable<? extends T> b, Iterable<? extends T> c) {
+        return com.google.common.collect.Iterables.concat(a, b, c);
+    }
+    public static <T> Iterable<T> concat(Iterable<? extends T> a, Iterable<? extends T> b, Iterable<? extends T> c, Iterable<? extends T> d) {
+        return com.google.common.collect.Iterables.concat(a, b, c, d);
+    }
+
+    public static int frequency(Iterable<?> iterable, Object element) {
+        return com.google.common.collect.Iterables.frequency(iterable, element);
     }
 
     public static <T> T get(Iterable<T> iterable, int position) {

@@ -5,14 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import com.google.common.base.Predicates;
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
 
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.Iterables;
 import forge.util.MyRandom;
+import forge.util.Predicates;
 
 public class WinstonDraft extends BoosterDraft {
     private WinstonDraftAI draftAI = null;

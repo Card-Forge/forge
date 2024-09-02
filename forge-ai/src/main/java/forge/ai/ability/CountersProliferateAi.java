@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AiProps;
@@ -17,6 +16,7 @@ import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 
 public class CountersProliferateAi extends SpellAbilityAi {
 

@@ -2,7 +2,6 @@ package forge.ai.ability;
 
 import java.util.Map;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -21,6 +20,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 
 public class AmassAi extends SpellAbilityAi {
     @Override

@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.card.CardStateName;
 import forge.card.CardTypeView;
@@ -14,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
+import forge.util.Iterables;
 import forge.util.MyRandom;
 
 import java.util.Iterator;

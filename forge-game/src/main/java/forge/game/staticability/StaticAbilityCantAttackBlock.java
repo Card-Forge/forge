@@ -17,10 +17,9 @@
  */
 package forge.game.staticability;
 
+import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.collect.Iterables;
 
 import forge.game.Game;
 import forge.game.GameEntity;

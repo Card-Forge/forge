@@ -4,13 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.card.GamePieceType;
-import forge.util.Lang;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ImageKeys;
@@ -33,10 +31,7 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
-import forge.util.Aggregates;
-import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
-import forge.util.TextUtil;
 
 public class CopyPermanentEffect extends TokenEffectBase {
 

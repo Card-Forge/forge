@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 public class DeckGenPool implements IDeckGenPool {
     private final Map<String, PaperCard> cards = new HashMap<>();

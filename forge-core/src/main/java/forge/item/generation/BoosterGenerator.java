@@ -18,8 +18,6 @@
 package forge.item.generation;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
@@ -27,9 +25,7 @@ import forge.card.*;
 import forge.card.CardEdition.FoilType;
 import forge.item.*;
 import forge.item.IPaperCard.Predicates.Presets;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
-import forge.util.TextUtil;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 

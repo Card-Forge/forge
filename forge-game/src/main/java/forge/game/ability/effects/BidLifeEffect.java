@@ -1,13 +1,12 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Iterables;
-
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 

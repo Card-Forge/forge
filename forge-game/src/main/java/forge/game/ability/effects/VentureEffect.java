@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Predicates;
-
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
@@ -25,6 +23,7 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
+import forge.util.Predicates;
 
 public class VentureEffect  extends SpellAbilityEffect {
 

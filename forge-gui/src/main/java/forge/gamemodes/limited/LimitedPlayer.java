@@ -1,6 +1,5 @@
 package forge.gamemodes.limited;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.card.CardEdition;
@@ -11,6 +10,7 @@ import forge.deck.DeckSection;
 import forge.gui.util.SGuiChoose;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.Iterables;
 import forge.util.TextUtil;
 
 import java.util.*;

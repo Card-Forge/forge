@@ -3,8 +3,6 @@ package forge.game.ability.effects;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
@@ -19,6 +17,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.Iterables;
+import forge.util.Predicates;
 
 public class PlayLandVariantEffect extends SpellAbilityEffect {
 

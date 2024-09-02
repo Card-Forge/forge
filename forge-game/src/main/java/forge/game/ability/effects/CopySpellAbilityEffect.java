@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameEntity;
@@ -17,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityCantBeCopied;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;

@@ -28,8 +28,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
-import com.google.common.collect.Iterables;
-
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -65,6 +63,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
+import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.view.FView;
 

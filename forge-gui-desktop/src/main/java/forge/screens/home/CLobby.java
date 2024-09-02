@@ -5,13 +5,12 @@ import java.util.Vector;
 
 import javax.swing.SwingUtilities;
 
-import com.google.common.collect.Iterables;
-
 import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.toolbox.FList;
+import forge.util.Iterables;
 
 public class CLobby {
 
