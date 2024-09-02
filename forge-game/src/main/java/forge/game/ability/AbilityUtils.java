@@ -1,6 +1,5 @@
 package forge.game.ability;
 
-import com.google.common.base.Functions;
 import com.google.common.collect.*;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -674,9 +673,9 @@ public class AbilityUtils {
                     @SuppressWarnings("unchecked")
                     Iterable<Integer> numbers = (Iterable<Integer>) to;
                     if (calcX[0].endsWith("Max")) {
-                        count = Aggregates.max(numbers, Functions.identity());
+                        count = Aggregates.max(numbers);
                     } else {
-                        count = Aggregates.sum(numbers, Functions.identity());
+                        count = Aggregates.sum(numbers);
                     }
                 } else {
                     count = (Integer) to;
@@ -2390,7 +2389,7 @@ public class AbilityUtils {
             } else if (sq[0].startsWith("Num")) {
                 num = dmgInstances.size();
             } else {
-                num = Aggregates.sum(dmgInstances, Functions.identity());
+                num = Aggregates.sum(dmgInstances);
             }
             return doXMath(num, expr, c, ctb);
         }
@@ -3528,7 +3527,7 @@ public class AbilityUtils {
         if (value.contains("Counters")) {
             int count = 0;
             if (sq[1].equals("ALL")) {
-                count = Aggregates.sum(player.getCounters().values(), Functions.identity());
+                count = Aggregates.sum(player.getCounters().values());
             } else {
                 count = player.getCounters(CounterType.getType(sq[1]));
             }
