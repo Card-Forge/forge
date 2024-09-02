@@ -379,6 +379,28 @@ public class SaveLoadScene extends UIScene {
     }
 
     public String getSaveFileSuffix() {
-        return ASCII_179 + GameScene.instance().getAdventurePlayerLocation(true, true);
+        String difficulty;
+        switch (AdventurePlayer.current().getDifficulty().name) {
+            case "easy":
+            case "Easy":
+                difficulty = "[%99][CYAN]\uFF0A[WHITE]";
+                break;
+            case "normal":
+            case "Normal":
+                difficulty = "[%99][GREEN]\uFF0A[WHITE]";
+                break;
+            case "hard":
+            case "Hard":
+                difficulty = "[%99][GOLD]\uFF0A[WHITE]";
+                break;
+            case "insane":
+            case "Insane":
+                difficulty = "[%99][RED]\uFF0A[WHITE]";
+                break;
+            default:
+                difficulty = "[%99][WHITE]";
+                break;
+        }
+        return ASCII_179 + difficulty + GameScene.instance().getAdventurePlayerLocation(true, true);
     }
 }

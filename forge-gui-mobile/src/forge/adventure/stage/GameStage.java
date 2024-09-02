@@ -658,11 +658,12 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
+                    showImageDialog(Current.generateDefeatMessage(), null,
                             () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 Forge.advFreezePlayerControls = false;
                                 WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                                 WorldStage.getInstance().loadPOI(poi);
+                                WorldSave.getCurrentSave().autoSave();
                                 Forge.clearTransitionScreen();
                             }, Forge.takeScreenshot(), ""))));
                 }

@@ -750,7 +750,6 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon(boolean defeated) {
-        WorldSave.getCurrentSave().autoSave();
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);

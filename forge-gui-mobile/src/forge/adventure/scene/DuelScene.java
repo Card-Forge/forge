@@ -302,7 +302,7 @@ public class DuelScene extends ForgeScene {
             } else if (this.eventData != null) {
                 deck = eventData.nextOpponent.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Insane") || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
@@ -410,9 +410,7 @@ public class DuelScene extends ForgeScene {
         this.eventData = eventData;
         if (eventData != null && eventData.eventRules == null)
             eventData.eventRules = new AdventureEventData.AdventureEventRules(AdventureEventController.EventFormat.Constructed, 1.0f);
-        this.arenaBattleChallenge = isArena
-                && (Current.player().getDifficulty().name.equalsIgnoreCase("Hard")
-                || Current.player().getDifficulty().name.equalsIgnoreCase("Insane"));
+        this.arenaBattleChallenge = isArena && Current.player().isHardorInsaneDifficulty();
         if (eventData != null && eventData.registeredDeck != null)
             this.playerDeck = eventData.registeredDeck;
         else
