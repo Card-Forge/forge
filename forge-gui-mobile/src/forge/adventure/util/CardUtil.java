@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.GeneratedDeckData;
@@ -804,15 +805,15 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByName(String cardName) {
-        List<PaperCard> validCards = Arrays.asList(Iterables.toArray(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
-                input -> input.getCardName().equals(cardName)), PaperCard.class));
+        List<PaperCard> validCards = Lists.newArrayList(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName)));
 
         return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
-        List<PaperCard> validCards = Arrays.asList(Iterables.toArray(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
-                input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)), PaperCard.class));
+        List<PaperCard> validCards = Lists.newArrayList(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
+                input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)));
 
         if (validCards.isEmpty()) {
             System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");

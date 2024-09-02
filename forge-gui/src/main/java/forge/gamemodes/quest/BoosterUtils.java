@@ -449,7 +449,7 @@ public final class BoosterUtils {
      */
     public static Predicate<CardRules> parseRulesLimitation(final String input) {
         if (null == input || "random".equalsIgnoreCase(input)) {
-            return Predicates.alwaysTrue();
+            return null;
         }
 
         if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.Presets.IS_BLACK;
@@ -491,8 +491,7 @@ public final class BoosterUtils {
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
-                //noinspection RedundantCast
-                if (Predicates.alwaysTrue() != (Object) cr) { // guava has a single instance for always-const predicates
+                if (cr != null) {
                     preds.add(Predicates.compose(cr, PaperCard::getRules));
                 }
             }

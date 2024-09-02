@@ -196,7 +196,7 @@ public final class CardRulesPredicates {
         try {
             return CardRulesPredicates.coreType(isEqual, Enum.valueOf(CardType.CoreType.class, what));
         } catch (final Exception e) {
-            return com.google.common.base.Predicates.alwaysFalse();
+            return x -> false;
         }
     }
 
@@ -226,7 +226,7 @@ public final class CardRulesPredicates {
         try {
             return CardRulesPredicates.superType(isEqual, Enum.valueOf(CardType.Supertype.class, what));
         } catch (final Exception e) {
-            return com.google.common.base.Predicates.alwaysFalse();
+            return x -> false;
         }
     }
 

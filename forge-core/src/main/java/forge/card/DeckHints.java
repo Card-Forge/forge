@@ -123,14 +123,12 @@ public class DeckHints {
         for (Pair<Type, String> pair : filters) {
             Type type = pair.getLeft();
             String param = pair.getRight();
-            Iterable<PaperCard> cards = getCardsForFilter(cardList, type, param);
-            if (cards != null) {
-                // if a type is used more than once intersect respective matches
-                if (ret.containsKey(type)) {
-                    Iterables.retainAll(cards, new FCollection<>(ret.get(type)));
-                }
-                ret.put(type, cards);
+            List<PaperCard> cards = getCardsForFilter(cardList, type, param);
+            // if a type is used more than once intersect respective matches
+            if (ret.containsKey(type)) {
+                cards.retainAll(new FCollection<>(ret.get(type)));
             }
+            ret.put(type, cards);
         }
         return ret;
     }
@@ -166,7 +164,7 @@ public class DeckHints {
         return pair;
     }
 
-    private Iterable<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
+    private List<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
         List<PaperCard> cards = new ArrayList<>();
 
         // this is case ABILITY, but other types can also use this when the implicit parsing would miss
