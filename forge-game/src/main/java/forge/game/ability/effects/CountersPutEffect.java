@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.common.base.Optional;
 
 import forge.game.Game;
 import forge.game.GameEntity;

@@ -18,7 +18,6 @@
 package forge.game.card;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Optional;
 import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.StaticData;
