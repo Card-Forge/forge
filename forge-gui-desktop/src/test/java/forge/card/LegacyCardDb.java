@@ -25,7 +25,7 @@ import forge.item.PaperCard;
 public class LegacyCardDb {
     public CardEdition.Collection editions;
     public ListMultimap<String, PaperCard> allCardsByName = Multimaps
-            .newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            .newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
 
     public enum LegacySetPreference {
         Latest(false), LatestCoreExp(true), Earliest(false), EarliestCoreExp(true), Random(false);

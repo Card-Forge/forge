@@ -896,7 +896,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 @Override
                 protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
                     final Card firstCard = Iterables.getFirst(this.selected, null);
-                    if (firstCard != null && !CardPredicates.sharesColorWith(firstCard).apply(c)) {
+                    if (firstCard != null && !CardPredicates.sharesColorWith(firstCard).test(c)) {
                         return false;
                     }
                     return super.onCardSelected(c, otherCardsToSelect, triggerEvent);

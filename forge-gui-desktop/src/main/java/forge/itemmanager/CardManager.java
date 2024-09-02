@@ -16,7 +16,6 @@ import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.util.CollectionSuppliers;
 import forge.util.Iterables;
 import forge.util.Localizer;
 
@@ -56,7 +55,7 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
         ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(
-                new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+                new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
         for (Entry<PaperCard, Integer> item : items) {
             final String cardName = item.getKey().getName();
             entriesByName.put(cardName, item);
@@ -67,7 +66,7 @@ public class CardManager extends ItemManager<PaperCard> {
         for (String cardName : entriesByName.keySet()) {
             List<Entry<PaperCard, Integer>> entries = entriesByName.get(cardName);
 
-            ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), CollectionSuppliers.arrayLists());
+            ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), Lists::newArrayList);
             for (Entry<PaperCard, Integer> entry : entries) {
                 CardEdition ed = StaticData.instance().getCardEdition(entry.getKey().getEdition());
                 if (ed != null)

@@ -79,9 +79,8 @@ public class Iterables {
         return iterable.stream().filter(predicate).findFirst().orElse(defaultValue);
     }
 
-    public static <T> boolean removeIf(Iterable<T> iterable, Predicate<T> test) {
-        //TODO: Convert parameter type
-        return ((Collection<T>) iterable).removeIf(test);
+    public static <T> boolean removeIf(Collection<T> iterable, Predicate<? super T> test) {
+        return iterable.removeIf(test);
     }
 
     public static boolean removeAll(Collection<?> removeFrom, Collection<?> toRemove) {
@@ -105,14 +104,14 @@ public class Iterables {
     }
 
     public static <T> T getFirst(List<? extends T> iterable, T defaultValue) {
-        return iterable.isEmpty() ? defaultValue : iterable.getFirst();
+        return iterable.isEmpty() ? defaultValue : iterable.get(0);
     }
 
     public static <T> T getLast(List<T> iterable) {
-        return iterable.getLast();
+        return iterable.get(iterable.size() - 1);
     }
     public static <T> T getLast(List<? extends T> iterable, T defaultValue) {
-        return iterable.isEmpty() ? defaultValue : iterable.getLast();
+        return iterable.isEmpty() ? defaultValue : iterable.get(iterable.size() - 1);
     }
     public static boolean isEmpty(Collection<?> iterable) {
         return iterable.isEmpty();

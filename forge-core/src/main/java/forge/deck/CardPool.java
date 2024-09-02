@@ -25,7 +25,6 @@ import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.util.CollectionSuppliers;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
@@ -205,7 +204,7 @@ public class CardPool extends ItemPool<PaperCard> {
      */
     public ListMultimap<Integer, CardEdition> getCardEditionsGroupedByNumberOfCards(boolean includeBasicLands){
         Map<CardEdition, Integer> editionsFrequencyMap = this.getCardEditionStatistics(includeBasicLands);
-        ListMultimap<Integer, CardEdition> reverseMap = Multimaps.newListMultimap(new HashMap<>(), CollectionSuppliers.arrayLists());
+        ListMultimap<Integer, CardEdition> reverseMap = Multimaps.newListMultimap(new HashMap<>(), Lists::newArrayList);
         for (Map.Entry<CardEdition, Integer> entry : editionsFrequencyMap.entrySet())
             reverseMap.put(entry.getValue(), entry.getKey());
         return reverseMap;

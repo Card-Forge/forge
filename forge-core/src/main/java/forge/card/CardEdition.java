@@ -403,7 +403,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     public List<CardInSet> getCardInSet(String cardName){
         if (cardsInSetLookupMap == null) {
             // initialise
-            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+            cardsInSetLookupMap = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
             List<CardInSet> cardsInSet = this.getAllCardsInSet();
             for (CardInSet cis : cardsInSet){
                 String key = cis.name;
