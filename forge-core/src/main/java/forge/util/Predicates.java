@@ -60,56 +60,14 @@ public class Predicates {
     //TODO: Uncomment all when switching off Guava. Then Inline.
 
     //TODO: This one probably needs case by case; nullable targets need a safe test, whereas nonnull targets can be simplified further.
-//    public static <T> Predicate<T> equalTo(T target) {
-//        return x -> Objects.equals(target, x);
-//    }
-
-//    public static <T> Predicate<T> instanceOf(Class<?> clazz) {
-//        return clazz::isInstance;
-//    }
-//    public static <T> Predicate<T> in(Collection<? extends T> target) {
-//        return target::contains;
-//    }
-
-
-
-    //TODO: Delete everything below.
-    public static <T> com.google.common.base.Predicate<T> not(com.google.common.base.Predicate<T> predicate) {
-        return com.google.common.base.Predicates.not(predicate);
+    public static <T> Predicate<T> equalTo(T target) {
+        return x -> Objects.equals(target, x);
     }
 
-    public static <T> com.google.common.base.Predicate<T> and(Iterable<? extends com.google.common.base.Predicate<? super T>> components) {
-        return com.google.common.base.Predicates.and(components);
+    public static <T> Predicate<T> instanceOf(Class<?> clazz) {
+        return clazz::isInstance;
     }
-    public static <T> com.google.common.base.Predicate<T> and(com.google.common.base.Predicate<? super T>... components) {
-        return com.google.common.base.Predicates.and(components);
-    }
-    public static <T> com.google.common.base.Predicate<T> and(com.google.common.base.Predicate<? super T> first, com.google.common.base.Predicate<? super T> second) {
-        return com.google.common.base.Predicates.and(first, second);
-    }
-    public static <T> com.google.common.base.Predicate<T> or(Iterable<? extends com.google.common.base.Predicate<? super T>> components) {
-        return com.google.common.base.Predicates.or(components);
-    }
-    public static <T> com.google.common.base.Predicate<T> or(com.google.common.base.Predicate<? super T>... components) {
-        return com.google.common.base.Predicates.or(components);
-    }
-    public static <T> com.google.common.base.Predicate<T> or(com.google.common.base.Predicate<? super T> first, com.google.common.base.Predicate<? super T> second) {
-        return com.google.common.base.Predicates.or(first, second);
-    }
-
-    public static <T> com.google.common.base.Predicate<T> equalTo(T target) {
-        return com.google.common.base.Predicates.equalTo(target);
-    }
-    public static <T> com.google.common.base.Predicate<T> instanceOf(Class<?> clazz) {
-        return com.google.common.base.Predicates.instanceOf(clazz);
-    }
-    public static <T> com.google.common.base.Predicate<T> in(Collection<? extends T> target) {
-        return com.google.common.base.Predicates.in(target);
-    }
-
-    public static <A, B> com.google.common.base.Predicate<A> compose(
-            com.google.common.base.Predicate<B> predicate,
-            com.google.common.base.Function<A, ? extends B> function) {
-        return com.google.common.base.Predicates.compose(predicate, function);
+    public static <T> Predicate<T> in(Collection<? extends T> target) {
+        return target::contains;
     }
 }

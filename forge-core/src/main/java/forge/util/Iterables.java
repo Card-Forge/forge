@@ -57,6 +57,7 @@ public class Iterables {
 
     public static <F, T> Iterable<T> transform(final Iterable<F> iterable, final Function<? super F, T> function) {
         //TODO: Collection input variant. Some usages use Lists.newArrayList on output which could be made part of the stream.
+        //Should probably also be ? extends T in the function type
         return () -> StreamSupport.stream(iterable.spliterator(), false).map(function).iterator();
     }
 
@@ -172,37 +173,5 @@ public class Iterables {
 
     public static boolean isEmpty(Iterable<?> iterable) {
         return com.google.common.collect.Iterables.isEmpty(iterable);
-    }
-
-
-    //TODO: Delete everything below.
-    public static <T> Iterable<T> filter(Iterable<T> iterable, com.google.common.base.Predicate<? super T> filter) {
-        return com.google.common.collect.Iterables.filter(iterable, filter);
-    }
-    public static <T> boolean any(Iterable<T> iterable, com.google.common.base.Predicate<? super T> filter) {
-        return com.google.common.collect.Iterables.any(iterable, filter);
-    }
-    public static <T> boolean all(Iterable<T> iterable, com.google.common.base.Predicate<? super T> filter) {
-        return com.google.common.collect.Iterables.any(iterable, filter);
-    }
-    public static <T> boolean removeIf(Iterable<T> iterable, com.google.common.base.Predicate<? super T> test) {
-        return com.google.common.collect.Iterables.removeIf(iterable, test);
-    }
-    public static <T> T find(Iterable<T> iterable, com.google.common.base.Predicate<? super T> predicate) {
-        return com.google.common.collect.Iterables.find(iterable, predicate);
-    }
-    public static <T> T find(Iterable<T> iterable, com.google.common.base.Predicate<? super T> predicate, T defaultValue) {
-        return com.google.common.collect.Iterables.find(iterable, predicate, defaultValue);
-    }
-    public static <T> com.google.common.base.Optional<T> tryFind(Iterable<T> iterable, com.google.common.base.Predicate<? super T> predicate) {
-        return com.google.common.collect.Iterables.tryFind(iterable, predicate);
-    }
-
-    public static <T> int indexOf(Iterable<T> iterable, com.google.common.base.Predicate<? super T> predicate) {
-        return com.google.common.collect.Iterables.indexOf(iterable, predicate);
-    }
-    
-    public static <F, T> Iterable<T> transform(Iterable<F> iterable, com.google.common.base.Function<? super F, ? extends T> function) {
-        return com.google.common.collect.Iterables.transform(iterable, function);
     }
 }
