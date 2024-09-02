@@ -291,7 +291,7 @@ public abstract class DeckGeneratorBase {
         if (useArtifacts) {
             hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor, canUseInFormat), PaperCard::getRules));
+        return Iterables.filter(pool.getAllCards(), Predicates.compose(canPlay.and(hasColor).and(canUseInFormat), PaperCard::getRules));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -390,7 +390,7 @@ public abstract class DeckGeneratorBase {
         Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
         Predicate<CardRules> exceptBasicLand = Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND);
 
-        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(Predicates.and(dualLandFilter, exceptBasicLand, canPlay), PaperCard::getRules));
+        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(dualLandFilter.and(exceptBasicLand).and(canPlay), PaperCard::getRules));
         Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}\\{([WUBRG])\\}",

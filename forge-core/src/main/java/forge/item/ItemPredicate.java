@@ -20,14 +20,14 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    public static final Predicate<InventoryItem> IsTournamentPack = card -> card instanceof TournamentPack && !((TournamentPack) card).isStarterDeck();
+    public static final Predicate<Object> IsTournamentPack = card -> card instanceof TournamentPack && !((TournamentPack) card).isStarterDeck();
 
     /**
      * Checks that the inventory item is a Starter Deck.
      * 
      * @return the predicate
      */
-    public static final Predicate<InventoryItem> IsStarterDeck = card -> card instanceof TournamentPack && ((TournamentPack) card).isStarterDeck();
+    public static final Predicate<Object> IsStarterDeck = card -> card instanceof TournamentPack && ((TournamentPack) card).isStarterDeck();
 
     /**
      * Checks that the inventory item is a Prebuilt Deck.
@@ -40,6 +40,6 @@ public abstract class ItemPredicate {
      */
     public static class Presets {
         /** The Item IsPack. */
-        public static final Predicate<InventoryItem> IS_PACK_OR_DECK = Predicates.or(IsBoosterPack, IsFatPack, IsTournamentPack, IsStarterDeck, IsPrebuiltDeck);
+        public static final Predicate<Object> IS_PACK_OR_DECK = IsBoosterPack.or(IsFatPack).or(IsTournamentPack).or(IsStarterDeck).or(IsPrebuiltDeck);
     }
 }

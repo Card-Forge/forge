@@ -584,9 +584,12 @@ public final class CardRulesPredicates {
                 Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
 
         /** The Constant IS_NON_CREATURE_SPELL. **/
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates
-                .or(Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
-                        Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE)));
+        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL =
+            Presets.IS_SORCERY
+                    .or(Presets.IS_INSTANT)
+                    .or(Presets.IS_PLANESWALKER)
+                    .or(Presets.IS_ENCHANTMENT) //TODO: Battles? Is testing these one by one really the best way to check "non-creature"?
+                    .or(Presets.IS_ARTIFACT.and(Presets.IS_CREATURE.negate()));
 
         /** The Constant isWhite. */
         public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(MagicColor.WHITE);

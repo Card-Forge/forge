@@ -1442,11 +1442,14 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             int loyalty = sa.getHostCard().getCounters(CounterEnumType.LOYALTY);
             CardCollection creaturesToGet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard),
-                    Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.lessCMC(loyalty - 1), card -> {
-                        final Card copy = CardCopyService.getLKICopy(card);
-                        ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
-                        return copy.getNetToughness() > 0;
-                    }));
+                    CardPredicates.Presets.CREATURES
+                        .and(CardPredicates.lessCMC(loyalty - 1))
+                        .and(card -> {
+                            final Card copy = CardCopyService.getLKICopy(card);
+                            ComputerUtilCard.applyStaticContPT(ai.getGame(), copy, null);
+                            return copy.getNetToughness() > 0;
+                        })
+            );
             CardLists.sortByCmcDesc(creaturesToGet);
 
             if (creaturesToGet.isEmpty()) {

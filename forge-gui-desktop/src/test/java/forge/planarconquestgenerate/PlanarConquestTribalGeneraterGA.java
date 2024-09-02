@@ -77,11 +77,12 @@ public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filteredTribe= Iterables.filter(cards, Predicates.and(
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules),
-                Predicates.compose(CardRulesPredicates.hasCreatureType("Pirate"), PaperCard::getRules),
-                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules),
-                gameFormat.getFilterPrinted()));
+        Iterable<PaperCard> filteredTribe= Iterables.filter(cards,
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
+                        .and(Predicates.compose(CardRulesPredicates.hasCreatureType("Pirate"), PaperCard::getRules))
+                        .and(Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules))
+                        .and(gameFormat.getFilterPrinted())
+        );
 
         List<PaperCard> filteredListTribe = Lists.newArrayList(filteredTribe);
         rankedList = CardRanker.rankCardsInDeck(filteredListTribe);

@@ -123,7 +123,7 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
     }
 
     @SuppressWarnings("unchecked")
-    public final <U extends InventoryItem> int countAll(Predicate<U> condition, Class<U> cls) {
+    public final <U extends InventoryItem> int countAll(Predicate<? super U> condition, Class<U> cls) {
         int count = 0;
         Map<T, Integer> matchingKeys = Maps.filterKeys(this.items, item -> cls.isInstance(item) && (condition.test((U)item)));
         for (Integer i : matchingKeys.values()) {

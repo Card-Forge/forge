@@ -1390,9 +1390,11 @@ public class AiAttackController {
         boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
-        boolean dangerousBlockersPresent = Iterables.any(validBlockers, Predicates.or(
-                CardPredicates.hasKeyword(Keyword.WITHER), CardPredicates.hasKeyword(Keyword.INFECT),
-                CardPredicates.hasKeyword(Keyword.LIFELINK)));
+        boolean dangerousBlockersPresent = Iterables.any(validBlockers,
+                CardPredicates.hasKeyword(Keyword.WITHER)
+                        .or(CardPredicates.hasKeyword(Keyword.INFECT))
+                        .or(CardPredicates.hasKeyword(Keyword.LIFELINK))
+        );
 
         // total power of the defending creatures, used in predicting whether a gang block can kill the attacker
         int defPower = CardLists.getTotalPower(validBlockers, true, false);

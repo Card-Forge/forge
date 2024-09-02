@@ -75,11 +75,12 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filtered= Iterables.filter(cards, Predicates.and(
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules),
-                Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, PaperCard::getRules),
-                //Predicates.compose(CardRulesPredicates.Presets.IS_LEGENDARY, PaperCard.FN_GET_RULES),
-                gameFormat.getFilterPrinted()));
+        Iterable<PaperCard> filtered= Iterables.filter(cards,
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
+                        .and(Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, PaperCard::getRules))
+                        //.and(Predicates.compose(CardRulesPredicates.Presets.IS_LEGENDARY, PaperCard::getRules))
+                        .and(gameFormat.getFilterPrinted())
+                );
 
         List<PaperCard> filteredList = Lists.newArrayList(filtered);
         rankedList = CardRanker.rankCardsInDeck(filteredList);

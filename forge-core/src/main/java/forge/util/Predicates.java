@@ -1,6 +1,5 @@
 package forge.util;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
@@ -14,24 +13,9 @@ public class Predicates {
         //TODO: Should be able to clean up the casting here.
         return x -> Iterables.all(components, (Predicate<Predicate<? super T>>) i -> i.test(x));
     }
-    public static <T> Predicate<T> and(Predicate<? super T>... components) {
-        //TODO: Switch to iterables all once it stops being confused and the others are inlined.
-        //Or just switch this to chained "and"s by hand.
-        return x -> {
-            for(Predicate<? super T> predicate : components) {
-                if(!predicate.test(x))
-                    return false;
-            }
-            return true;
-        };
-    }
     public static <T> Predicate<T> or(Iterable<? extends Predicate<? super T>> components) {
         //TODO: Should be able to clean up the casting here.
         return x -> Iterables.any(components, (Predicate<Predicate<? super T>>) i -> i.test(x));
-    }
-    public static <T> Predicate<T> or(Predicate<? super T>... components) {
-        //TODO: Faster implementation. Or just do this one by hand.
-        return or(Arrays.asList(components));
     }
 
     public static <A, B> Predicate<A> compose(Predicate<B> predicate, Function<A, ? extends B> function) {

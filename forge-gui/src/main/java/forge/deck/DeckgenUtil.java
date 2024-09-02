@@ -663,9 +663,8 @@ public class DeckgenUtil {
         // Get random multicolor Legendary creature
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
-        @SuppressWarnings("unchecked")
-        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.and(format.isLegalCardPredicate(), format.isLegalCommanderPredicate(),
-                Predicates.compose(canPlay, PaperCard::getRules)));
+        Predicate<PaperCard> legal = format.isLegalCardPredicate().and(format.isLegalCommanderPredicate());
+        Iterable<PaperCard> legends = cardDb.getAllCards(legal.and(Predicates.compose(canPlay, PaperCard::getRules)));
 
         commander = Aggregates.random(legends);
         return generateRandomCommanderDeck(commander, format, forAi, false);

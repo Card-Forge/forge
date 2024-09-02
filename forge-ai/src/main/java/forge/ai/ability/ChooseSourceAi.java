@@ -136,8 +136,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
             if (!Iterables.isEmpty(options)) {
                 List<Card> oppCreatures = CardLists.filter(options, Predicates.and(CardPredicates.Presets.CREATURES,
                         Predicates.not(CardPredicates.isOwner(aiChoser))));
-                List<Card> aiNonCreatures = CardLists.filter(options, Predicates.and(Predicates.not(CardPredicates.Presets.CREATURES),
-                        CardPredicates.Presets.PERMANENTS, CardPredicates.isOwner(aiChoser)));
+                List<Card> aiNonCreatures = CardLists.filter(options,
+                        Predicates.not(CardPredicates.Presets.CREATURES)
+                                .and(CardPredicates.Presets.PERMANENTS)
+                                .and(CardPredicates.isOwner(aiChoser))
+                );
 
                 if (!oppCreatures.isEmpty()) {
                     return ComputerUtilCard.getBestCreatureAI(oppCreatures);

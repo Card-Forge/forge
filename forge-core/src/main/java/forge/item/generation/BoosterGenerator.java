@@ -613,31 +613,31 @@ public class BoosterGenerator {
             ps.addAll(Iterables.filter(src, predicate));
 
         } else if (mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE)) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon
-            Predicate<PaperCard> predicateRares = Predicates.and(setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            Predicate<PaperCard> predicateRares = setPred.and(Presets.IS_RARE).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateRares));
 
-            Predicate<PaperCard> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
+            Predicate<PaperCard> predicateUncommon = setPred.and(Presets.IS_UNCOMMON).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateUncommon), 3);
 
         } else if (mainCode.equalsIgnoreCase(BoosterSlots.RARE_MYTHIC)) {
             // Typical ratio of rares to mythics is 53:15, changing to 35:10 in smaller sets.
             // To achieve the desired 1:8 are all mythics are added once, and all rares added twice per print sheet.
 
-            Predicate<PaperCard> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
+            Predicate<PaperCard> predicateMythic = setPred.and(Presets.IS_MYTHIC_RARE).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateMythic));
 
-            Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            Predicate<PaperCard> predicateRare = setPred.and(Presets.IS_RARE).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
         } else if (mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE_MYTHIC)) {
             // Extended version of RARE_MYTHIC, used for Alchemy slots
 
-            Predicate<PaperCard> predicateMythic = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, extraPred);
+            Predicate<PaperCard> predicateMythic = setPred.and(Presets.IS_MYTHIC_RARE).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateMythic));
 
-            Predicate<PaperCard> predicateRare = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_RARE, extraPred);
+            Predicate<PaperCard> predicateRare = setPred.and(Presets.IS_RARE).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateRare), 2);
 
-            Predicate<PaperCard> predicateUncommon = Predicates.and( setPred, IPaperCard.Predicates.Presets.IS_UNCOMMON, extraPred);
+            Predicate<PaperCard> predicateUncommon = setPred.and(Presets.IS_UNCOMMON).and(extraPred);
             ps.addAll(Iterables.filter(src, predicateUncommon), 4);
         } else {
             throw new IllegalArgumentException("Booster generator: operator could not be parsed - " + mainCode);
@@ -670,10 +670,9 @@ public class BoosterGenerator {
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
                 toAdd = Predicates.compose(
-                            Predicates.or(
-                                CardRulesPredicates.splitType(CardSplitType.Transform),
-                                CardRulesPredicates.splitType(CardSplitType.Meld),
-                                CardRulesPredicates.splitType(CardSplitType.Modal)
+                        CardRulesPredicates.splitType(CardSplitType.Transform)
+                                .or(CardRulesPredicates.splitType(CardSplitType.Meld))
+                                .or(CardRulesPredicates.splitType(CardSplitType.Modal)
                             ),
                         PaperCard::getRules);
             } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules);
