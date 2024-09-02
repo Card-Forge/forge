@@ -842,6 +842,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return false;
     }
 
+    public ItemData getRandomEquippedArmor() {
+        Array<ItemData> armor = new Array<>();
+        for (String name : equippedItems.values()) {
+            ItemData data = ItemData.getItem(name);
+            if (data != null
+                && ("Boots".equalsIgnoreCase(data.equipmentSlot)
+                || "Body".equalsIgnoreCase(data.equipmentSlot)
+                || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
+                armor.add(data);
+            }
+        }
+        return armor.random();
+    }
+
     public ItemData getEquippedAbility1() {
         for (String name : equippedItems.values()) {
             ItemData data = ItemData.getItem(name);
@@ -877,6 +891,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public DifficultyData getDifficulty() {
         return difficultyData;
+    }
+
+    public boolean isHardorInsaneDifficulty() {
+        return "Hard".equalsIgnoreCase(difficultyData.name) || "Insane".equalsIgnoreCase(difficultyData.name);
     }
 
     public void renameDeck(String text) {

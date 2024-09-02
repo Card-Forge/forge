@@ -218,10 +218,13 @@ public class InventoryScene extends UIScene {
         }
     }
 
+    public void clearItemDescription() {
+        itemDescription.setText("");
+    }
     private void setSelected(Button actor) {
         selected = actor;
         if (actor == null) {
-            itemDescription.setText("");
+            clearItemDescription();
             deleteButton.setDisabled(true);
             equipButton.setDisabled(true);
             useButton.setDisabled(true);
@@ -246,7 +249,7 @@ public class InventoryScene extends UIScene {
             if (Current.player().getShards() < data.shardsNeeded)
                 useButton.setDisabled(true);
 
-            if (data.equipmentSlot == null || data.equipmentSlot.isEmpty()) {
+            if (data.equipmentSlot == null || data.equipmentSlot.isEmpty() || data.isCracked) {
                 equipButton.setDisabled(true);
             } else {
                 equipButton.setDisabled(false);
@@ -261,7 +264,8 @@ public class InventoryScene extends UIScene {
                     button.layout();
                 }
             }
-            itemDescription.setText(data.name + "\n[%98]" + data.getDescription());
+            String status = data.isCracked ? " (" + Forge.getLocalizer().getMessage("lblCracked") + ")" : "";
+            itemDescription.setText(data.name + status + "\n[%98]" + data.getDescription());
         }
         else if (deckLocation.containsKey(actor)){
             Deck data = (deckLocation.get(actor));
