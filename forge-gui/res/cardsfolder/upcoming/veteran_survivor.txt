@@ -1,5 +1,6 @@
 Name:Veteran Survivor
 Types:Creature Human Survivor
+ManaCost:W
 PT:2/1
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | IsPresent$ Card.Self+tapped | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, exile up to one target card from a graveyard.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile
