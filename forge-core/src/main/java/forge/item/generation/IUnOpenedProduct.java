@@ -1,8 +1,7 @@
 package forge.item.generation;
 
 import java.util.List;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import forge.item.PaperCard;
 

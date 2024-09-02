@@ -17,7 +17,6 @@
  */
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Supplier;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -40,6 +39,7 @@ import forge.util.storage.IStorage;
 
 import java.util.Map.Entry;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * Child controller for constructed deck editor UI.

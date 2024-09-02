@@ -24,10 +24,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import javax.swing.KeyStroke;
-
-import com.google.common.base.Supplier;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;

@@ -3,8 +3,8 @@ package forge.util;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.function.Supplier;
 
-import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 

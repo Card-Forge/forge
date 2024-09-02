@@ -3,7 +3,6 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
@@ -40,6 +39,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class FDeckEditor extends TabPageScreen<FDeckEditor> {

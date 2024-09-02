@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import forge.deck.CardPool;
 import forge.deck.Deck;

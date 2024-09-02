@@ -23,8 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
