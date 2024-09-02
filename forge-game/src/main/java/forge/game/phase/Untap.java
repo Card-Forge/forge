@@ -232,7 +232,7 @@ public class Untap extends Phase {
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Map, untapMap);
         game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
-    } // end doUntap
+    }
 
     private static boolean optionalUntap(final Card c) {
         boolean untap = true;
@@ -300,6 +300,10 @@ public class Untap extends Phase {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, phasedOut);
             turn.getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOutAll, runParams, false);
+        }
+        if (!toPhase.isEmpty()) {
+            // collect now before some zone change during Untap resets triggers
+            turn.getGame().getTriggerHandler().collectTriggerForWaiting();
         }
     }
 
