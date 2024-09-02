@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -479,7 +480,7 @@ public class PumpEffect extends SpellAbilityEffect {
                     return false;
                 });
 
-                affectedKeywords = Lists.transform(affectedKeywords, input -> {
+                affectedKeywords = affectedKeywords.stream().map(input -> {
                     if (input.contains("CardManaCost")) {
                         input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());
                     } else if (input.contains("ConvertedManaCost")) {
@@ -487,7 +488,7 @@ public class PumpEffect extends SpellAbilityEffect {
                         input = input.replace("ConvertedManaCost", costcmc);
                     }
                     return input;
-                });
+                }).collect(Collectors.toList());
             }
 
             if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Double")) {
