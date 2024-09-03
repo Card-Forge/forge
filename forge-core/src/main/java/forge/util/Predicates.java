@@ -37,10 +37,4 @@ public class Predicates {
         //TODO: remove casting?
         return ((Predicate<T>) first).or(second);
     }
-
-    //TODO: This one probably needs case by case; nullable targets need a safe test, whereas nonnull targets can be simplified further.
-    public static <T> Predicate<T> equalTo(T target) {
-        return x -> Objects.equals(target, x);
-    }
-
 }

@@ -399,7 +399,7 @@ public class AttackConstraints {
         return null;
     }
     private static Attack findFirst(final List<Attack> reqs, final Card attacker) {
-        return findFirst(reqs, Predicates.equalTo(attacker));
+        return findFirst(reqs, attacker::equals);
     }
     private static Collection<Attack> findAll(final List<Attack> reqs, final Card attacker) {
         return Collections2.filter(reqs, input -> input.attacker.equals(attacker));
