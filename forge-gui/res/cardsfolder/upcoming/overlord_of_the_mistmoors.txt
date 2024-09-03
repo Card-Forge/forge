@@ -1,0 +1,9 @@
+Name:Overlord of the Mistmoors
+ManaCost:5 W W
+Types:Enchantment Creature Avatar Horror
+PT:6/6
+K:Impending:4:2 W W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/1 white Insect creature tokens with flying.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME enters or attacks, create two 2/1 white Insect creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_2_1_insect_flying
+Oracle:Impending 4—{2}{W}{W} (If you cast this spell for its impending cost, it enters with four time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.)\nWhenever Overlord of the Mistmoors enters or attacks, create two 2/1 white Insect creature tokens with flying.
