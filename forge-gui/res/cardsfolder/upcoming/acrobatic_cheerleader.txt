@@ -1,5 +1,6 @@
 Name:Acrobatic Cheerleader
 ManaCost:1 W
+Types:Creature Human Survivor
 PT:2/2
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | CheckSVar$ Count$ValidSelf Card.tapped | TriggerZones$ Battlefield | Execute$ TrigPutCounter | GameActivationLimit$ 1 | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, put a flying counter on it. This ability triggers only once.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ Flying | CounterNum$ 1
