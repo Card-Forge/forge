@@ -31,7 +31,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import forge.util.collect.FCollection;
 
 /**
@@ -118,15 +117,15 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     public final boolean isTargetingAnyCard() {
-        return Iterables.any(targets, Predicates.instanceOf(Card.class));
+        return Iterables.any(targets, Card.class::isInstance);
     }
 
     public final boolean isTargetingAnyPlayer() {
-        return Iterables.any(targets, Predicates.instanceOf(Player.class));
+        return Iterables.any(targets, Player.class::isInstance);
     }
 
     public final boolean isTargetingAnySpell() {
-        return Iterables.any(targets, Predicates.instanceOf(SpellAbility.class));
+        return Iterables.any(targets, SpellAbility.class::isInstance);
     }
 
     public final Card getFirstTargetedCard() {

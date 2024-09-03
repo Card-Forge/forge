@@ -1,7 +1,5 @@
 package forge.item;
 
-import forge.util.Predicates;
-
 import java.util.function.Predicate;
 
 /**
@@ -11,9 +9,9 @@ public abstract class ItemPredicate {
 
     // Static builder methods - they choose concrete implementation by themselves
 
-    public static final Predicate<Object> IsBoosterPack = Predicates.instanceOf(BoosterPack.class);
-    public static final Predicate<Object> IsPrebuiltDeck = Predicates.instanceOf(PreconDeck.class);
-    public static final Predicate<Object> IsFatPack = Predicates.instanceOf(FatPack.class);
+    public static final Predicate<Object> IsBoosterPack = BoosterPack.class::isInstance;
+    public static final Predicate<Object> IsPrebuiltDeck = PreconDeck.class::isInstance;
+    public static final Predicate<Object> IsFatPack = FatPack.class::isInstance;
 
     /**
      * Checks that the inventory item is a Tournament Pack.
