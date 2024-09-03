@@ -190,7 +190,7 @@ public class GameAction {
                     // Make sure the card returns from the battlefield as the original card with two halves
                     resetToOriginal = true;
                 }
-            } else if (!zoneTo.is(ZoneType.Stack)) {
+            } else if (!zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield)) {
                 // For regular splits, recreate the original state unless the card is going to stack as one half
                 resetToOriginal = true;
             }

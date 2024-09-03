@@ -415,7 +415,11 @@ public class CardFactory {
         c.setAttractionLights(face.getAttractionLights());
 
         // SpellPermanent only for Original State
-        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
+        if (c.getCurrentStateName() == CardStateName.Original ||
+                c.getCurrentStateName() == CardStateName.LeftSplit ||
+                c.getCurrentStateName() == CardStateName.RightSplit ||
+                c.getCurrentStateName() == CardStateName.Modal ||
+                c.getCurrentStateName().toString().startsWith("Specialize")) {
             if (c.isLand()) {
                 SpellAbility sa = new LandAbility(c);
                 sa.setCardState(c.getCurrentState());
