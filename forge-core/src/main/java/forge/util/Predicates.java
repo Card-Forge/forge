@@ -1,6 +1,5 @@
 package forge.util;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -44,7 +43,4 @@ public class Predicates {
         return x -> Objects.equals(target, x);
     }
 
-    public static <T> Predicate<T> in(Collection<? extends T> target) {
-        return target::contains;
-    }
 }

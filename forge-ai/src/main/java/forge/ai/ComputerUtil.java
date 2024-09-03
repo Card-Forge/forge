@@ -2450,7 +2450,7 @@ public class ComputerUtil {
         // not enough good choices, need to fill the rest
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
-            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(Predicates.in(goodChoices))), minDiff));
+            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(goodChoices::contains)), minDiff));
             return goodChoices;
         }
 

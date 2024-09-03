@@ -924,7 +924,7 @@ public class ComputerUtilCost {
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
             final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), Predicates.in(targets))));
+            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), targets::contains)));
         }
         return new CardCollection(choices);
     }
