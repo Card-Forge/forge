@@ -9,14 +9,21 @@ ScryfallCode=DSK
 4 M Dollmaker's Shop @Chris Cold
 6 R Enduring Innocence @Liiga Smilshkalne
 10 C Fear of Immobility @Martin de Diego Sádaba
+14 U Glimmer Seeker @Kev Fang
 18 R Leyline of Hope @Sergey Glushakov
 23 M Overlord of the Mistmoors @Steven Belledin
+24 U Patched Plaything @Domenico Cava
 32 R Split Up @Dominik Mayer
 35 R Toby, Beastie Befriender @Jehan Choo
 39 U Unwanted Remake @Eli Minaya
 40 U Veteran Survivor @Kai Carpenter
 41 M The Wandering Rescuer @Anna Pavleeva
+51 R Enduring Curiosity @Julie Dillon
+55 U Fear of Failed Tests @Jana Heidersdorf
+58 U Fear of Isolation @Irina Nordsol
+67 M Mirror Room @Helge C. Balzer
 71 U Scrabbling Skullcrab @John Tedrick
+81 U Unwilling Vessel @Josu Hernaiz
 86 R Come Back Wrong @David Auden Nash
 92 R Demonic Counsel @Babs Webb
 94 R Doomsday Excruciator @Denys Tsiperko
@@ -27,6 +34,7 @@ ScryfallCode=DSK
 128 R Chainsaw @J.P. Targete
 131 R Cursed Recording @Kim Sokol
 136 R Fear of Missing Out @John Stanko
+141 U Infernal Phantom @Mike Sass
 145 U Norin, Swift Survivalist @Yigit Koroglu
 153 R Razorkin Needlehead @Riccardo Federici
 157 M Screaming Nemesis @Liiga Smilshkalne
@@ -36,8 +44,20 @@ ScryfallCode=DSK
 219 R The Jolly Balloon Man @Campbell White
 220 M Kaito, Bane of Nightmares @Joshua Raphael
 226 R Peer Past the Veil @Tuan Duong Chu
+235 U Smoky Lounge @Marco Gorlei
+237 R Undead Sprinter @Nino Vecia
 240 R Winter, Misanthropic Guide @Jodie Muir
 241 R Zimone, All-Questioning @Ekaterina Burmak
+255 C Abandoned Campground @Cristi Balanescu
+257 C Bleeding Woods @Henry Peters
+258 C Etched Cornfield @Randy Gallegos
+262 C Lakeside Shack @Bartek Fedyczak
+263 C Murky Sewer @Martin de Diego Sádaba
+264 C Neglected Manor @Carlos Palma Cruchaga
+265 C Peculiar Lighthouse @Raymond Bonilla
+266 C Raucous Carnival @Josu Solano
+267 C Razortrap Gorge @Filip Burburan
+268 C Strangled Cemetery @Marco Gorlei
 271 R Valgavoth's Lair @Martin de Diego Sádaba
 272 L Plains @Dan Mumford
 273 L Island @Dan Mumford
@@ -58,10 +78,12 @@ ScryfallCode=DSK
 327 R Valgavoth's Lair @Ivan Shavrin
 328 M Kaito, Bane of Nightmares @Marta Nael
 335 M Dollmaker's Shop @Cacho Rubione
+337 M Mirror Room @Cacho Rubione
 346 R Doomsday Excruciator @Jarel Threat
 347 R Razorkin Needlehead @Loïc Canavaggia
 348 M Screaming Nemesis @Inkognit
 349 M Hauntwoods Shrieker @Sidharth Chaturvedi
+350 R Undead Sprinter @John Thacker
 351 M The Wandering Rescuer @Vance Kelly
 352 M Valgavoth, Terror Eater @Pig Hands
 354 M Kaito, Bane of Nightmares @Richard Luong
@@ -76,10 +98,12 @@ ScryfallCode=DSK
 383 M Overlord of the Hauntwoods @Tiffany Turrill
 386 R Enduring Innocence @Kawasumi
 387 M Overlord of the Mistmoors @Takeuchi Moto
+388 R Enduring Curiosity @D-suzuki
 390 M Enduring Tenacity @TAPIOCA
 395 M Overlord of the Hauntwoods @Aogachou
 396 R Enduring Innocence @Kawasumi
 397 M Overlord of the Mistmoors @Takeuchi Moto
+398 R Enduring Curiosity @D-suzuki
 400 M Enduring Tenacity @TAPIOCA
 405 M Overlord of the Hauntwoods @Aogachou
 406 M The Wandering Rescuer @Vance Kelly

@@ -10,7 +10,9 @@ ScryfallCode=DSC
 6 M Valgavoth, Harrower of Souls @Chris Cold
 7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
 8 M Zimone, Mystery Unraveler @Mila Pesic
+334 C I Am Duskmourn @Liiga Smilshkalne
 338 C I Will Savor Your Agony @Michael Walsh
+341 C My Champion Stands Supreme @Justyna Dura
 357 C Time Bends to My Will @Eli Minaya
 368 M Crypt Ghast @Tim Jacobus
 369 M Damn @Tim Jacobus
