@@ -678,10 +678,10 @@ public abstract class GameStage extends Stage {
         if (defeat.exists()) {
             TextureRegion tr = new TextureRegion(Forge.getAssets().getTexture(defeat, true, false));
             tr.flip(true, false);
-            return new FBufferedImage(88, 100) {
+            return new FBufferedImage(176, 200) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
-                    g.drawImage(tr, 0, 0, 88, 100);
+                    g.drawImage(tr, 0, 0, 176, 200);
                 }
             };
         }
