@@ -212,7 +212,7 @@ public class CardFactoryUtil {
     public static boolean handleHiddenAgenda(Player player, Card card) {
         SpellAbility sa = new SpellAbility.EmptySa(card);
         sa.putParam("AILogic", card.getSVar("AgendaLogic"));
-        Predicate<ICardFace> cpp = Predicates.alwaysTrue();
+        Predicate<ICardFace> cpp = x -> true;
         //Predicate<Card> pc = Predicates.in(player.getAllCards());
         // TODO This would be better to send in the player's deck, not all cards
         String name = player.getController().chooseCardName(sa, cpp, "Card",

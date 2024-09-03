@@ -31,7 +31,7 @@ public class CardToughnessFilter extends ValueRangeFilter<PaperCard> {
     protected Predicate<PaperCard> buildPredicate() {
         Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.TOUGHNESS);
         if (predicate == null) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_CREATURE);
         return Predicates.compose(predicate, PaperCard::getRules);

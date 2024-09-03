@@ -568,7 +568,7 @@ public class BoosterGenerator {
     public static PrintSheet makeSheet(String sheetKey, Iterable<PaperCard> src) {
         PrintSheet ps = new PrintSheet(sheetKey);
         String[] sKey = TextUtil.splitWithParenthesis(sheetKey, ' ', 2);
-        Predicate<PaperCard> setPred = (Predicate<PaperCard>) (sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : Predicates.alwaysTrue());
+        Predicate<PaperCard> setPred = sKey.length > 1 ? IPaperCard.Predicates.printedInSets(sKey[1].split(" ")) : x1 -> true;
 
         List<String> operators = new LinkedList<>(Arrays.asList(TextUtil.splitWithParenthesis(sKey[0], ':')));
         Predicate<PaperCard> extraPred = buildExtraPredicate(operators);
@@ -585,7 +585,7 @@ public class BoosterGenerator {
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
                 System.out.println("Attempting to lookup: " + sheetName);
                 src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                setPred = Predicates.alwaysTrue();
+                setPred = x -> true;
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
@@ -597,7 +597,7 @@ public class BoosterGenerator {
                 }
 
                 src = srcList;
-                setPred = Predicates.alwaysTrue();
+                setPred = x -> true;
             } else {
                 continue;
             }
@@ -732,7 +732,7 @@ public class BoosterGenerator {
         }
 
         if (conditions.isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
 
         return Predicates.and(conditions);

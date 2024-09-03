@@ -18,16 +18,16 @@ public enum AttackRestrictionType {
 
     public Predicate<Card> getPredicate(final Card attacker) {
         switch (this) {
-        case NEED_GREATER_POWER:
-            return CardPredicates.hasGreaterPowerThan(attacker.getNetPower());
-        case NEED_BLACK_OR_GREEN:
-            return Predicates.and(
-                    CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)),
-                    // may explicitly not be black/green itself
-                    Predicates.not(Predicates.equalTo(attacker)));
-        case NOT_ALONE:
-            return Predicates.alwaysTrue();
-        default:
+            case NEED_GREATER_POWER:
+                return CardPredicates.hasGreaterPowerThan(attacker.getNetPower());
+            case NEED_BLACK_OR_GREEN:
+                return Predicates.and(
+                        CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN)),
+                        // may explicitly not be black/green itself
+                        Predicates.not(Predicates.equalTo(attacker)));
+            case NOT_ALONE:
+                return x -> true;
+            default:
         }
         return null;
     }

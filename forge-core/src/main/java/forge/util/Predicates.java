@@ -24,9 +24,7 @@ public class Predicates {
 
 
     //TODO: Inline everything below.
-    public static <T> Predicate<T> alwaysTrue() {
-        return x -> true;
-    }
+
     public static <T> Predicate<T> not(Predicate<T> predicate) {
         return predicate.negate();
     }

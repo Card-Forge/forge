@@ -786,7 +786,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         List<PaperCard> cards;
         Predicate<PaperCard> cardQueryFilter;
-        filter = (filter != null) ? filter : Predicates.alwaysTrue();
+        filter = filter != null ? filter : (x -> true);
         if (releaseDate != null) {
             cardQueryFilter = c -> {
                 if (c.getArtIndex() != cr.artIndex)

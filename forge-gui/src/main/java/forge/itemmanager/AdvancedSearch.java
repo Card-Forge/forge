@@ -1538,7 +1538,7 @@ public class AdvancedSearch {
 
         public Predicate<T> getPredicate() {
             if (isEmpty()) {
-                return Predicates.alwaysTrue();
+                return x -> true;
             }
             return getPredicatePiece(new ExpressionIterator());
         }

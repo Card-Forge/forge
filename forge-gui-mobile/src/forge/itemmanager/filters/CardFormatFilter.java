@@ -2,7 +2,6 @@ package forge.itemmanager.filters;
 
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
-import forge.util.Predicates;
 
 import java.util.function.Predicate;
 
@@ -22,7 +21,7 @@ public class CardFormatFilter extends FormatFilter<PaperCard> {
     @Override
     protected final Predicate<PaperCard> buildPredicate() {
         if (format == null) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         if (format.getName() == null) {
             return format.getFilterPrinted(); //if format is collection of sets, don't show reprints in other sets

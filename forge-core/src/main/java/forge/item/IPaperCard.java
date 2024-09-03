@@ -43,14 +43,14 @@ public interface IPaperCard extends InventoryItem, Serializable {
 
         public static Predicate<PaperCard> printedInSets(final List<String> value, final boolean shouldContain) {
             if ((value == null) || value.isEmpty()) {
-                return forge.util.Predicates.alwaysTrue();
+                return x -> true;
             }
             return new PredicateSets(value, shouldContain);
         }
 
         public static Predicate<PaperCard> printedInSet(final String value) {
             if (StringUtils.isEmpty(value)) {
-                return forge.util.Predicates.alwaysTrue();
+                return x -> true;
             }
             return new PredicateSets(Lists.newArrayList(value), true);
         }

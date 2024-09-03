@@ -28,7 +28,7 @@ public class CardCMCFilter extends ValueRangeFilter<PaperCard> {
     protected Predicate<PaperCard> buildPredicate() {
         Predicate<CardRules> predicate = getCardRulesFieldPredicate(CardRulesPredicates.LeafNumber.CardField.CMC);
         if (predicate == null) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         return Predicates.compose(predicate, PaperCard::getRules);
     }

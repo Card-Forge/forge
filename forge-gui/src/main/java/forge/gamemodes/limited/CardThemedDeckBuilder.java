@@ -278,7 +278,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         addLandKeyCards();
 
         // 8. Add non-basic lands
-        List<String> duals = getDualLandList(isForAI ? CardRulesPredicates.IS_KEPT_IN_AI_DECKS : Predicates.alwaysTrue());
+        List<String> duals = getDualLandList(isForAI ? CardRulesPredicates.IS_KEPT_IN_AI_DECKS : x -> true);
         addNonBasicLands();
         if (logToConsole) {
             System.out.println("Post Nonbasic lands : " + deckList.size());

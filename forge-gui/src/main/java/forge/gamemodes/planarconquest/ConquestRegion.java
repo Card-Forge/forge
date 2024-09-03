@@ -106,7 +106,7 @@ public class ConquestRegion {
             String name = null;
             String artCardName = null;
             ColorSet colorSet = ColorSet.ALL_COLORS;
-            Predicate<PaperCard> pred = Predicates.alwaysTrue();
+            Predicate<PaperCard> pred = x -> true;
 
             String key, value;
             String[] pieces = line.split("\\|");

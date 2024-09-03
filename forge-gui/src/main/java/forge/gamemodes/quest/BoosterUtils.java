@@ -126,7 +126,7 @@ public final class BoosterUtils {
 
         }
 
-        Predicate<PaperCard> filter = Predicates.alwaysTrue();
+        Predicate<PaperCard> filter = x -> true;
         if (formatStartingPool != null) {
             filter = formatStartingPool.getFilterPrinted();
         }

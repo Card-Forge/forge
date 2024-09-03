@@ -162,7 +162,7 @@ public class BooleanExpression {
         if (!predicates.isEmpty()) {
             return Predicates.or(predicates);
         }
-        return Predicates.alwaysTrue();
+        return x -> true;
 
     }
 

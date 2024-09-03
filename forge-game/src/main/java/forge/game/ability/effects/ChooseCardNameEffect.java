@@ -112,7 +112,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 }
             }  else {
                 // use CardFace because you might name a alternate names
-                Predicate<ICardFace> cpp = Predicates.alwaysTrue();
+                Predicate<ICardFace> cpp = x -> true;
                 if (sa.hasParam("ValidCards")) {
                     //Calculating/replacing this must happen before running valid in CardFacePredicates
                     if (valid.contains("cmcEQ") && !StringUtils.isNumeric(valid.split("cmcEQ")[1])) {

@@ -14,7 +14,6 @@ import forge.itemmanager.SFilterUtil;
 import forge.toolbox.FTextField;
 import forge.toolbox.LayoutHelper;
 import forge.util.Localizer;
-import forge.util.Predicates;
 
 
 public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
@@ -113,7 +112,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
     protected Predicate<T> buildPredicate() {
         String text = txtSearch.getText();
         if (text.trim().isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         return SFilterUtil.buildItemTextFilter(text);
     }

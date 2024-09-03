@@ -41,7 +41,7 @@ public class SFilterUtil {
         text = text.trim();
         
         if (text.isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
 
         if (BooleanExpression.isExpression(text)) {
@@ -117,7 +117,7 @@ public class SFilterUtil {
 
     public static <T extends InventoryItem> Predicate<T> buildItemTextFilter(String text) {
         if (text.trim().isEmpty()) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
 
         return new ItemTextPredicate<>(text);
