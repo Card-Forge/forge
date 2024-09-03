@@ -20,7 +20,7 @@ package forge.game.trigger;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.function.Predicate;
 
 import forge.util.Iterables;
 import org.apache.commons.lang3.ArrayUtils;
@@ -186,7 +186,7 @@ public class TriggerChangesZone extends Trigger {
 
             // checks which card this spell was the castSA
             SpellAbility castSA = getHostCard().getCastSA();
-            int left = Iterables.indexOf(thisTurnCast, CardPredicates.castSA(x -> Objects.equals(castSA, x)));
+            int left = Iterables.indexOf(thisTurnCast, CardPredicates.castSA(Predicate.isEqual(castSA)));
             int right = Integer.parseInt(compare.substring(2));
             if (!Expressions.compare(left + 1, compare, right)) {
                 return false;
