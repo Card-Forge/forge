@@ -322,7 +322,7 @@ public class SaveLoadScene extends UIScene {
         if (worldSaveHeader.name.contains(Character.toString(ASCII_179))) {
             String[] split = TextUtil.split(worldSaveHeader.name, ASCII_179);
             if (getLocation)
-                result = split.length > 1 ? split[1] : "";
+                result = split.length > 1 ? split[1] : "OLD SaveData!";
             else
                 result = split[0];
         }
