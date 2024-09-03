@@ -8,7 +8,6 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
@@ -23,7 +22,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 import java.util.List;
 import java.util.Map;
@@ -340,7 +338,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // See if there's anything to untap that is tapped and that doesn't untap during the next untap step by itself
-        CardCollection noAutoUntap = CardLists.filter(untapList, Predicates.not(Untap.CANUNTAP));
+        CardCollection noAutoUntap = CardLists.filter(untapList, Untap.CANUNTAP.negate());
         if (!noAutoUntap.isEmpty()) {
             return ComputerUtilCard.getBestAI(noAutoUntap);
         }
@@ -402,7 +400,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // Check if something is playable if we untap for an additional mana with this, then proceed
-        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
         // The AI is not very good at timing non-permanent spells this way, so filter them out
         // (it may actually be possible to enable this for sorceries, but that'll need some canPlay shenanigans)
         CardCollection playable = CardLists.filter(inHand, Presets.PERMANENTS);

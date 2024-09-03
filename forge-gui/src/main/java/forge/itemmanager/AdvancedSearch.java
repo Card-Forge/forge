@@ -1574,7 +1574,7 @@ public class AdvancedSearch {
                     predPiece = ((AdvancedSearch.Filter<T>) piece).getPredicate();
                 }
                 if (applyNot) {
-                    predPiece = Predicates.not(predPiece);
+                    predPiece = predPiece.negate();
                     applyNot = false;
                 }
                 if (pred == null) {

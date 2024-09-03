@@ -206,7 +206,7 @@ public class ComputerUtilCard {
         }
 
         // prefer to target non basic lands
-        final List<Card> nbLand = CardLists.filter(land, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+        final List<Card> nbLand = CardLists.filter(land, CardPredicates.Presets.BASIC_LANDS.negate());
 
         if (!nbLand.isEmpty()) {
             // TODO - Improve ranking various non-basic lands depending on context

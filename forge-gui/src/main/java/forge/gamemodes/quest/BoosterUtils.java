@@ -77,15 +77,15 @@ public final class BoosterUtils {
 
     private static final Predicate<CardEdition> filterPioneerNotStandard = Predicates.and(
             CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterPioneer, Predicates.not(formats.getStandard().editionLegalPredicate)));
+            Predicates.and(filterPioneer, formats.getStandard().editionLegalPredicate.negate()));
 
     private static final Predicate<CardEdition> filterModernNotPioneer = Predicates.and(
             CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterModern, Predicates.not(filterPioneer)));
+            Predicates.and(filterModern, filterPioneer.negate()));
 
     /** The filter not ext. */
     private static final Predicate<CardEdition> filterNotModern = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.not(filterModern));
+            filterModern.negate());
 
     /**
      * Gets the quest starter deck.

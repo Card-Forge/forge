@@ -764,7 +764,7 @@ public class PlayerControllerAi extends PlayerController {
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
                 CardCollection producingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA);
-                CardCollection nonProducingLands = CardLists.filter(landsInHand, Predicates.not(Presets.LANDS_PRODUCING_MANA));
+                CardCollection nonProducingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA.negate());
                 Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
                         : ComputerUtilCard.getWorstLand(nonProducingLands);
                 toReturn.add(worstLand);
@@ -1436,7 +1436,7 @@ public class PlayerControllerAi extends PlayerController {
                     if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
                         String chosenName = consp.getNamedCard();
                         if (!chosenName.isEmpty()) {
-                            aiLibrary = CardLists.filter(aiLibrary, Predicates.not(CardPredicates.nameEquals(chosenName)));
+                            aiLibrary = CardLists.filter(aiLibrary, CardPredicates.nameEquals(chosenName).negate());
                         }
                     }
                 }
@@ -1469,7 +1469,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         } else {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
-            list = CardLists.filter(list, Predicates.not(Presets.LANDS));
+            list = CardLists.filter(list, Presets.LANDS.negate());
             if (!list.isEmpty()) {
                 return list.get(0).getName();
             }

@@ -18,7 +18,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Predicates;
 
 public class CloneAi extends SpellAbilityAi {
 
@@ -210,7 +209,7 @@ public class CloneAi extends SpellAbilityAi {
 
         // prevent loop of choosing copy of same card
         if (isVesuva) {
-            options = CardLists.filter(options, Predicates.not(CardPredicates.sharesNameWith(host)));
+            options = CardLists.filter(options, CardPredicates.sharesNameWith(host).negate());
         }
 
         Card choice = isOpp ? ComputerUtilCard.getWorstAI(options) : ComputerUtilCard.getBestAI(options);

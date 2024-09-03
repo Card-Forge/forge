@@ -3,6 +3,7 @@ package forge.ai.ability;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
@@ -31,7 +32,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class CopyPermanentAi extends SpellAbilityAi {
     @Override
@@ -135,7 +135,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
                 // TODO: possibly improve the check, currently only checks if the name is the same
                 // Possibly also check if the card is threatened, and then allow to copy (this will, however, require a bit
                 // of a rewrite in canPlayAI to allow a response form of CopyPermanentAi)
-                list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(host.getName())));
+                Predicate<Card> nameEquals = CardPredicates.nameEquals(host.getName());
+                list = CardLists.filter(list, nameEquals.negate());
             }
 
             //Nothing to target
@@ -143,7 +144,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
             	return false;
             }
 
-            CardCollection betterList = CardLists.filter(list, Predicates.not(CardPredicates.isRemAIDeck()));
+            CardCollection betterList = CardLists.filter(list, CardPredicates.isRemAIDeck().negate());
             if (betterList.isEmpty()) {
                 if (!mandatory) {
                     return false;

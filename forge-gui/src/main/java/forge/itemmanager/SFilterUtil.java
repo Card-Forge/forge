@@ -50,7 +50,7 @@ public class SFilterUtil {
             try {
                 Predicate<CardRules> filter = expression.evaluate();
                 if (filter != null) {
-                    return Predicates.compose(invert ? Predicates.not(filter) : filter, PaperCard::getRules);
+                    return Predicates.compose(invert ? filter.negate() : filter, PaperCard::getRules);
                 }
             }
             catch (Exception ignored) {
@@ -71,7 +71,8 @@ public class SFilterUtil {
 
             terms.add(Predicates.or(subands));
         }
-        Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
+        Predicate<CardRules> textFilter;
+        textFilter = invert ? Predicates.or(terms).negate() : Predicates.and(terms);
 
         return Predicates.compose(textFilter, PaperCard::getRules);
     }

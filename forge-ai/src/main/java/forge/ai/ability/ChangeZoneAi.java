@@ -29,10 +29,10 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -371,7 +371,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             // remove cards that won't be seen if library can't be searched
             if (!ai.canSearchLibraryWith(sa, p)) {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.inZone(ZoneType.Library)));
+                list = CardLists.filter(list, CardPredicates.inZone(ZoneType.Library).negate());
             }
 
             if (type != null && p == ai) {
@@ -614,8 +614,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // pick dual lands if available
-        if (Iterables.any(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
-            result = CardLists.filter(result, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+        if (Iterables.any(result, Presets.BASIC_LANDS.negate())) {
+            result = CardLists.filter(result, Presets.BASIC_LANDS.negate());
         }
 
         return result.get(0);
@@ -906,7 +906,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (source.isInZone(ZoneType.Hand)) {
-            list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
+            Predicate<Card> nameEquals = CardPredicates.nameEquals(source.getName());
+            list = CardLists.filter(list, nameEquals.negate()); // Don't get the same card back.
         }
         if (sa.isSpell()) {
             list.remove(source); // spells can't target their own source, because it's actually in the stack zone
@@ -1629,7 +1630,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            CardCollection sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(ComputerUtilAbility.getAbilitySourceName(sa))));
+            Predicate<Card> nameEquals = CardPredicates.nameEquals(ComputerUtilAbility.getAbilitySourceName(sa));
+            CardCollection sameNamed = CardLists.filter(fetchList, nameEquals.negate());
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }
@@ -1961,7 +1963,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             if (logic.contains("NonLand")) {
-                scanList = CardLists.filter(scanList, Predicates.not(Presets.LANDS));
+                scanList = CardLists.filter(scanList, Presets.LANDS.negate());
             }
 
             if (logic.contains("NonExiled")) {

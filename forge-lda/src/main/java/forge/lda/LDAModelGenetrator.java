@@ -291,7 +291,7 @@ public final class LDAModelGenetrator {
 
         //get all cards
         final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
-                , Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules));
+                , Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES.negate(), PaperCard::getRules));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -350,7 +350,7 @@ public final class LDAModelGenetrator {
     public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES), PaperCard::getRules))){
+                Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND_NOT_WASTES.negate(), PaperCard::getRules))){
             if (!pairCard.getName().equals(legend.getName())){
                 try {
                     int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];

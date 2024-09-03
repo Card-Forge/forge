@@ -338,7 +338,7 @@ public class EffectAi extends SpellAbilityAi {
                         runParams.put(AbilityKey.Regeneration, true);
                         List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                         // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                        if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                        if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration").negate())) {
                             return false;
                         }
 
@@ -369,7 +369,7 @@ public class EffectAi extends SpellAbilityAi {
                     runParams.put(AbilityKey.Regeneration, true);
                     List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                     // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                    if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, Predicates.not(CardTraitPredicates.hasParam("Regeneration")))) {
+                    if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration").negate())) {
                         return false;
                     }
 

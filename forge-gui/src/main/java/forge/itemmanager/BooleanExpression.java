@@ -133,7 +133,7 @@ public class BooleanExpression {
             case NOT:
                 operators.pop();
                 left = operands.pop();
-                operands.push(Predicates.not(left));
+                operands.push(left.negate());
                 break;
             default:
                 if (alwaysPopOperator) {

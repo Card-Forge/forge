@@ -1,6 +1,5 @@
 package forge.util;
 
-import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -23,10 +22,6 @@ public class Predicates {
 
 
     //TODO: Inline everything below.
-
-    public static <T> Predicate<T> not(Predicate<T> predicate) {
-        return predicate.negate();
-    }
 
     public static <T> Predicate<T> and(Predicate<? super T> first, Predicate<? super T> second) {
         //TODO: remove casting?

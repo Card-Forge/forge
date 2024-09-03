@@ -261,11 +261,11 @@ public class CardLists {
     }
 
     public static CardCollection getNotKeyword(Iterable<Card> cardList, String keyword) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword).negate());
     }
 
     public static CardCollection getNotKeyword(Iterable<Card> cardList, final Keyword keyword) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
+        return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword).negate());
     }
 
     public static int getAmountOfKeyword(final Iterable<Card> cardList, final String keyword) {
@@ -285,7 +285,7 @@ public class CardLists {
     // cardType is like "Land" or "Goblin", returns a new CardCollection that is a
     // subset of current CardList
     public static CardCollection getNotType(Iterable<Card> cardList, String cardType) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
+        return CardLists.filter(cardList, CardPredicates.isType(cardType).negate());
     }
 
     public static CardCollection getType(Iterable<Card> cardList, String cardType) {
@@ -293,7 +293,7 @@ public class CardLists {
     }
 
     public static CardCollection getNotColor(Iterable<Card> cardList, byte color) {
-        return CardLists.filter(cardList, Predicates.not(CardPredicates.isColor(color)));
+        return CardLists.filter(cardList, CardPredicates.isColor(color).negate());
     }
 
     public static CardCollection getColor(Iterable<Card> cardList, byte color) {

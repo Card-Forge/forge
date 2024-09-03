@@ -26,11 +26,11 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class CountersPutAi extends CountersAi {
 
@@ -271,8 +271,9 @@ public class CountersPutAi extends CountersAi {
                 return false;
             }
 
+            Predicate<Card> predicate = CardPredicates.hasCounter(CounterType.getType(type));
             CardCollection oppCreats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(),
-                    Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))),
+                    predicate.negate(),
                             CardPredicates.isTargetableBy(sa));
 
             if (!oppCreats.isEmpty()) {

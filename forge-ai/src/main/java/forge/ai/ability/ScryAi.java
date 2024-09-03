@@ -16,7 +16,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 
 public class ScryAi extends SpellAbilityAi {
 
@@ -100,7 +99,7 @@ public class ScryAi extends SpellAbilityAi {
     private boolean doBestOpportunityLogic(Player ai, SpellAbility sa, PhaseHandler ph) {
         // Check to see if there are any cards in hand that may be worth casting
         boolean hasSomethingElse = false;
-        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS))) {
+        for (Card c : CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS.negate())) {
             for (SpellAbility ab : c.getAllSpellAbilities()) {
                 if (ab.getPayCosts().hasManaCost()
                         && ComputerUtilMana.hasEnoughManaSourcesToCast(ab, ai)) {

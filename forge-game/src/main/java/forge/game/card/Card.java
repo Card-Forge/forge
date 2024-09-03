@@ -3372,7 +3372,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 // List only has nonMana
                 if (null == mana) {
                     List<SpellAbility> toRemove = Lists.newArrayList(
-                            Iterables.filter(list, Predicates.not(SpellAbilityPredicates.isManaAbility())));
+                            Iterables.filter(list, SpellAbilityPredicates.isManaAbility().negate()));
                     list.removeAll(toRemove);
                 } else if (false == mana) {
                     list.clear();

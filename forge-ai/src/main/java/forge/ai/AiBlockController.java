@@ -367,7 +367,7 @@ public class AiBlockController {
      * @param combat a {@link forge.game.combat.Combat} object.
      */
     private void makeGangBlocks(final Combat combat) {
-        List<Card> currentAttackers = CardLists.filter(attackersLeft, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
+        List<Card> currentAttackers = CardLists.filter(attackersLeft, rampagesOrNeedsManyToBlock(combat).negate());
         List<Card> blockers;
 
         // Try to block an attacker without first strike with a gang of first strikers
@@ -739,11 +739,11 @@ public class AiBlockController {
         List<Card> chumpBlockers;
 
         List<Card> tramplingAttackers = CardLists.getKeyword(attackers, Keyword.TRAMPLE);
-        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
+        tramplingAttackers = CardLists.filter(tramplingAttackers, rampagesOrNeedsManyToBlock(combat).negate());
 
         // TODO - Instead of filtering out rampage-like and similar triggers, make the AI properly count P/T and
         // reinforce when actually possible without losing material.
-        tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(changesPTWhenBlocked(true)));
+        tramplingAttackers = CardLists.filter(tramplingAttackers, changesPTWhenBlocked(true).negate());
 
         for (final Card attacker : tramplingAttackers) {
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()) {
@@ -794,11 +794,11 @@ public class AiBlockController {
     private void reinforceBlockersToKill(final Combat combat) {
         List<Card> safeBlockers;
         List<Card> blockers;
-        List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, Predicates.not(rampagesOrNeedsManyToBlock(combat)));
+        List<Card> targetAttackers = CardLists.filter(blockedButUnkilled, rampagesOrNeedsManyToBlock(combat).negate());
 
         // TODO - Instead of filtering out rampage-like and similar triggers, make the AI properly count P/T and
         // reinforce when actually possible without losing material.
-        targetAttackers = CardLists.filter(targetAttackers, Predicates.not(changesPTWhenBlocked(false)));
+        targetAttackers = CardLists.filter(targetAttackers, changesPTWhenBlocked(false).negate());
 
         for (final Card attacker : targetAttackers) {
             blockers = getPossibleBlockers(combat, attacker, blockersLeft, false);

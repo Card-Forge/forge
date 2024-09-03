@@ -633,7 +633,7 @@ public class ComputerUtilCost {
                 if (part instanceof CostSacrifice) {
                     CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
                             sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    valid = CardLists.filter(valid, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+                    valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
                     if (valid.isEmpty()) {
                         return false;
                     }
@@ -924,7 +924,7 @@ public class ComputerUtilCost {
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
             final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, Predicates.not(Predicates.and(CardPredicates.isController(ai), targets::contains)));
+            choices = Iterables.filter(choices, Predicates.and(CardPredicates.isController(ai), targets::contains).negate());
         }
         return new CardCollection(choices);
     }

@@ -24,7 +24,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class CountersMultiplyAi extends SpellAbilityAi {
 
@@ -104,7 +103,7 @@ public class CountersMultiplyAi extends SpellAbilityAi {
             if (list.isEmpty()) {
                 return false;
             }
-            Card safeMatch = Iterables.getFirst(Iterables.filter(list, Predicates.not(CardPredicates.hasCounters())), null);
+            Card safeMatch = Iterables.getFirst(Iterables.filter(list, CardPredicates.hasCounters().negate()), null);
             sa.getTargets().add(safeMatch == null ? list.getFirst() : safeMatch);
             return true;
         }

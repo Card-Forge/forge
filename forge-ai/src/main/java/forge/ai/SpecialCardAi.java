@@ -125,7 +125,7 @@ public class SpecialCardAi {
             int numManaSrcs = manaSources.size();
 
             CardCollection allCards = CardLists.filter(ai.getAllCards(), Arrays.asList(CardPredicates.Presets.NON_TOKEN,
-                    Predicates.not(CardPredicates.Presets.LANDS), CardPredicates.isOwner(ai)));
+                    CardPredicates.Presets.LANDS.negate(), CardPredicates.isOwner(ai)));
 
             int numHighCMC = CardLists.count(allCards, CardPredicates.greaterCMC(5));
             int numLowCMC = CardLists.count(allCards, CardPredicates.lessCMC(3));
@@ -206,7 +206,7 @@ public class SpecialCardAi {
             List<Card> AiLandsOnly = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.Presets.LANDS);
             List<Card> OppPerms = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
-                    Predicates.not(CardPredicates.Presets.CREATURES));
+                    CardPredicates.Presets.CREATURES.negate());
 
             // TODO: improve this logic (currently the AI has difficulty evaluating non-creature permanents,
             // which it can only distinguish by their CMC, considering >CMC higher value).
@@ -331,12 +331,12 @@ public class SpecialCardAi {
     public static class DeathgorgeScavenger {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Card worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
-            Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+            Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES.negate()));
             if (worstCreat == null) {
                 worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
             }
             if (worstNonCreat == null) {
-                worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), Predicates.not(CardPredicates.Presets.CREATURES)));
+                worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES.negate()));
             }
 
             sa.resetTargets();
@@ -786,7 +786,7 @@ public class SpecialCardAi {
             int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(),
                     sa.getParamOrDefault("ChangeNum", "1"), sa);
             CardCollection lib = CardLists.filter(ai.getCardsIn(ZoneType.Library),
-                    Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
+                    CardPredicates.nameEquals(sa.getHostCard().getName()).negate());
             lib.sort(CardLists.CmcComparatorInv);
 
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
@@ -1316,7 +1316,7 @@ public class SpecialCardAi {
                 return false;
             }
 
-            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, CardPredicates.Presets.BASIC_LANDS.negate())).size();
 
             boolean hasBridge = false;
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -1334,7 +1334,7 @@ public class SpecialCardAi {
             }
 
             for (Player opp : ai.getOpponents()) {
-                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, Predicates.not(CardPredicates.Presets.BASIC_LANDS))).size();
+                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, CardPredicates.Presets.BASIC_LANDS.negate())).size();
                 // Always if enemy would die and we don't!
                 // TODO : predict actual damage instead of assuming it'll be 2*lands
                 // Don't if we lose, unless we lose anyway to unblocked creatures next turn

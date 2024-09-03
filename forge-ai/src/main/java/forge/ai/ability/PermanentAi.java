@@ -141,10 +141,10 @@ public class PermanentAi extends SpellAbilityAi {
                         && card.getState(CardStateName.Original).getManaCost() != null
                         && card.getState(CardStateName.Original).getManaCost().getCMC() == manaValue);
                 if (manaValue == 0) {
-                    aiCards = CardLists.filter(aiCards, Predicates.not(CardPredicates.isType("Land")));
-                    oppCards = CardLists.filter(oppCards, Predicates.not(CardPredicates.isType("Land")));
+                    aiCards = CardLists.filter(aiCards, CardPredicates.isType("Land").negate());
+                    oppCards = CardLists.filter(oppCards, CardPredicates.isType("Land").negate());
                     // also filter out other Chalices in our own deck
-                    aiCards = CardLists.filter(aiCards, Predicates.not(CardPredicates.nameEquals("Chalice of the Void")));
+                    aiCards = CardLists.filter(aiCards, CardPredicates.nameEquals("Chalice of the Void").negate());
                 }
                 if (oppCards.size() > 3 && oppCards.size() >= aiCards.size() * 2) {
                     sa.setXManaCostPaid(manaValue);

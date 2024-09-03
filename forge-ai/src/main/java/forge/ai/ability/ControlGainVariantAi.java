@@ -29,7 +29,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 
 /**
@@ -64,7 +63,7 @@ public class ControlGainVariantAi extends SpellAbilityAi {
 
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        Iterable<Card> otherCtrl = CardLists.filter(options, Predicates.not(CardPredicates.isController(ai)));
+        Iterable<Card> otherCtrl = CardLists.filter(options, CardPredicates.isController(ai).negate());
         if (Iterables.isEmpty(otherCtrl)) {
             return ComputerUtilCard.getWorstAI(options);
         } else {

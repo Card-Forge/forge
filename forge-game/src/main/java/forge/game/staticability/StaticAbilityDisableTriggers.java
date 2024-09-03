@@ -8,10 +8,10 @@ import forge.game.ability.AbilityKey;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class StaticAbilityDisableTriggers {
 
@@ -108,7 +108,8 @@ public class StaticAbilityDisableTriggers {
                 CardCollection changers = cell.getValue();
                 if ((origin == null || cell.getRowKey() == ZoneType.valueOf(origin)) &&
                 (destination == null || cell.getColumnKey() == ZoneType.valueOf(destination))) {
-                    changers = CardLists.filter(changers, Predicates.not(CardPredicates.restriction(stAb.getParam("ValidCause").split(","), stAb.getHostCard().getController(), stAb.getHostCard(), stAb)));
+                    Predicate<Card> validCause = CardPredicates.restriction(stAb.getParam("ValidCause").split(","), stAb.getHostCard().getController(), stAb.getHostCard(), stAb);
+                    changers = CardLists.filter(changers, validCause.negate());
                     // static will match some of the causes
                     if (changers.size() < cell.getValue().size()) {
                         possiblyDisabled = true;

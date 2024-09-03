@@ -123,7 +123,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
                 final Card first = inp.getFirstSelected();
                 discarded.add(first);
-                hand = CardLists.filter(hand, Predicates.not(CardPredicates.sharesNameWith(first)));
+                hand = CardLists.filter(hand, CardPredicates.sharesNameWith(first).negate());
                 c--;
             }
             return PaymentDecision.card(discarded);
@@ -1182,7 +1182,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 }
                 final Card first = inp.getFirstSelected();
                 chosen.add(first);
-                list = CardLists.filter(list, Predicates.not(CardPredicates.sharesNameWith(first)));
+                list = CardLists.filter(list, CardPredicates.sharesNameWith(first).negate());
                 c--;
             }
             return PaymentDecision.card(chosen);

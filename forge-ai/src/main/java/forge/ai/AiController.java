@@ -404,7 +404,7 @@ public class AiController {
 
     private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        CardCollection nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection nonLandList = CardLists.filter(hand, Presets.LANDS.negate());
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
             CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
@@ -469,7 +469,7 @@ public class AiController {
             return null;
         }
 
-        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
 
         // Some considerations for Momir/MoJhoSto
         boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
@@ -598,8 +598,8 @@ public class AiController {
             }
 
             // pick dual lands if available
-            if (Iterables.any(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS))) {
-                landList = CardLists.filter(landList, Predicates.not(CardPredicates.Presets.BASIC_LANDS));
+            if (Iterables.any(landList, Presets.BASIC_LANDS.negate())) {
+                landList = CardLists.filter(landList, Presets.BASIC_LANDS.negate());
             }
         }
         return ComputerUtilCard.getBestLandToPlayAI(landList);
@@ -1397,12 +1397,11 @@ public class AiController {
             return false;
         }
 
-        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand),
-                Predicates.not(CardPredicates.Presets.LANDS));
+        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!Iterables.any(otb, Predicates.not(CardPredicates.Presets.LANDS))) {
+            if (!Iterables.any(otb, Presets.LANDS.negate())) {
                 return false;
             }
         }
@@ -1578,7 +1577,8 @@ public class AiController {
 
             if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                    && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
+                    && player.getZone(ZoneType.Hand).contains(
+                            Predicates.or(Presets.LANDS, CardPredicates.hasKeyword("Storm")).negate())) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                     // skip evaluating Storm unless we reached the minimum Storm count
                     continue;

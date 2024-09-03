@@ -639,7 +639,7 @@ public class ComputerUtil {
         // if the source has "Casualty", don't sacrifice cards that may have granted the effect
         // TODO: is there a surefire way to determine which card added Casualty?
         if (source.hasKeyword(Keyword.CASUALTY)) {
-            typeList = CardLists.filter(typeList, Predicates.not(CardPredicates.hasSVar("AIDontSacToCasualty")));
+            typeList = CardLists.filter(typeList, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
         }
 
         if (typeList.size() < amount) {
@@ -1664,7 +1664,7 @@ public class ComputerUtil {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivatableInExternalZones(true));
-        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.not(Presets.PERMANENTS)));
+        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.PERMANENTS.negate()));
 
         for (final Card c : all) {
             if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
@@ -2450,7 +2450,7 @@ public class ComputerUtil {
         // not enough good choices, need to fill the rest
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
-            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(goodChoices::contains)), minDiff));
+            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, ((Predicate<Card>) goodChoices::contains).negate()), minDiff));
             return goodChoices;
         }
 

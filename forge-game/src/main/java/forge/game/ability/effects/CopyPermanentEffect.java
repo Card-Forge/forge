@@ -219,7 +219,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
                             if (choosen != null) {
                                 tgtCards.add(choosen);
-                                choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
+                                choices = CardLists.filter(choices, CardPredicates.sharesNameWith(choosen).negate());
                             } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"), null)) {
                                 break;
                             }

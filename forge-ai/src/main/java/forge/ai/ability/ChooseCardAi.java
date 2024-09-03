@@ -27,7 +27,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class ChooseCardAi extends SpellAbilityAi {
 
@@ -271,7 +270,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("Phylactery")) {
             CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
             CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
-            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Predicates.not(Presets.CREATURES));
+            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Presets.CREATURES.negate());
             CardCollection creatures = CardLists.filter(aiArtifacts, Presets.CREATURES);
             if (!indestructibles.isEmpty()) {
                 // Choose the worst (smallest) indestructible artifact so that the opponent would have to waste

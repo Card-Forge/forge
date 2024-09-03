@@ -14,7 +14,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
-import forge.util.Predicates;
+
+import java.util.function.Predicate;
 
 public class DestroyAi extends SpellAbilityAi {
     @Override
@@ -167,7 +168,8 @@ public class DestroyAi extends SpellAbilityAi {
                 list = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, list, false);
             }
             if (!playReusable(ai, sa)) {
-                list = CardLists.filter(list, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
+                Predicate<Card> hasCounter = CardPredicates.hasCounter(CounterEnumType.SHIELD, 1);
+                list = CardLists.filter(list, hasCounter.negate());
 
                 list = CardLists.filter(list, c -> {
                     //Check for cards that can be sacrificed in response
@@ -321,7 +323,8 @@ public class DestroyAi extends SpellAbilityAi {
 
             CardCollection preferred = CardLists.getNotKeyword(list, Keyword.INDESTRUCTIBLE);
             preferred = CardLists.filterControlledBy(preferred, ai.getOpponents());
-            preferred = CardLists.filter(preferred, Predicates.not(CardPredicates.hasCounter(CounterEnumType.SHIELD, 1)));
+            Predicate<Card> hasCounter = CardPredicates.hasCounter(CounterEnumType.SHIELD, 1);
+            preferred = CardLists.filter(preferred, hasCounter.negate());
             if (CardLists.getNotType(preferred, "Creature").isEmpty()) {
                 preferred = ComputerUtilCard.prioritizeCreaturesWorthRemovingNow(ai, preferred, false);
             }

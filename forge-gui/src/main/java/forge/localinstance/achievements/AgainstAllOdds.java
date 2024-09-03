@@ -6,7 +6,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.util.Iterables;
 import forge.util.Localizer;
-import forge.util.Predicates;
 
 public class AgainstAllOdds extends Achievement {
     public AgainstAllOdds() {
@@ -28,7 +27,7 @@ public class AgainstAllOdds extends Achievement {
                 otherOpps.remove(opp);
                 if (Iterables.all(otherOpps, PlayerPredicates.sameTeam(opp))) {
                     teamNum++;   
-                } else if (Iterables.all(otherOpps, Predicates.not(PlayerPredicates.sameTeam(opp)))) {
+                } else if (Iterables.all(otherOpps, PlayerPredicates.sameTeam(opp).negate())) {
                     teamNum--;
                 }
             }

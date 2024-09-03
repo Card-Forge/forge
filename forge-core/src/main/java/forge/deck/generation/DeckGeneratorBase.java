@@ -234,7 +234,7 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-            Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
+            Predicate<PaperCard> exceptBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules).negate();
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<PaperCard> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
@@ -388,7 +388,7 @@ public abstract class DeckGeneratorBase {
 
         //filter to provide all dual lands from pool matching 2 or 3 colors from current deck
         Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
-        Predicate<CardRules> exceptBasicLand = Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND);
+        Predicate<CardRules> exceptBasicLand = CardRulesPredicates.Presets.IS_BASIC_LAND.negate();
 
         Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(dualLandFilter.and(exceptBasicLand).and(canPlay), PaperCard::getRules));
         Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",

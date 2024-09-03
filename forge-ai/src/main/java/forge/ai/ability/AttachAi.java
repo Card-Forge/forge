@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 import forge.game.card.*;
 import forge.util.Predicates;
@@ -864,7 +865,7 @@ public class AttachAi extends SpellAbilityAi {
         //some auras aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList,
-                Predicates.not(CardPredicates.isEnchantedBy(attachSource.getName()))
+                CardPredicates.isEnchantedBy(attachSource.getName()).negate()
             );
         }
 
@@ -1143,10 +1144,10 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, Predicates.not(Predicates.or(
+            prefList = CardLists.filter(prefList, Predicates.or(
                 CardPredicates.isEquippedBy(attachSource.getName()),
                 CardPredicates.isEnchantedBy(attachSource.getName())
-            )));
+            ).negate());
         }
 
         // Don't pump cards that will die.

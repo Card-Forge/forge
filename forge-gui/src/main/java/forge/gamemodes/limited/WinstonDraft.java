@@ -11,7 +11,6 @@ import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 
 public class WinstonDraft extends BoosterDraft {
     private WinstonDraftAI draftAI = null;
@@ -41,7 +40,7 @@ public class WinstonDraft extends BoosterDraft {
         for (final Supplier<List<PaperCard>> supply : this.product) {
             for (int j = 0; j < NUM_PLAYERS; j++) {
                 // Remove Basic Lands from draft for simplicity
-                for (final PaperCard paperCard : Iterables.filter(supply.get(), Predicates.not(PaperCard.Predicates.Presets.IS_BASIC_LAND))) {
+                for (final PaperCard paperCard : Iterables.filter(supply.get(), PaperCard.Predicates.Presets.IS_BASIC_LAND.negate())) {
                     this.deck.add(paperCard);
                 }
             }

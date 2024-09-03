@@ -726,7 +726,7 @@ public class BoosterGenerator {
             itOp.remove();
 
             if (invert) {
-                toAdd = Predicates.not(toAdd);
+                toAdd = toAdd.negate();
             }
             conditions.add(toAdd);
         }
