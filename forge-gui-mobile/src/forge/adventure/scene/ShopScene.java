@@ -61,6 +61,8 @@ public class ShopScene extends ForgeScene {
             }
         }
         AdventurePlayer.current().doAutosell();
+        if (screen != null)
+            screen.refresh();
     }
 
     private boolean confirmAutosell(int profit, int cards, float townPriceModifier) {
