@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/market_portrait.png",
+      "image": "ui/shardalley_portrait.png",
       "width": 270,
       "height": 480
     },      
