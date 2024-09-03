@@ -1,0 +1,10 @@
+Name:The Value Knight
+ManaCost:3 U
+Types:Legendary Creature Human Knight
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create Syr Acha, a 1/1 legendary red artifact creature Food Knight token with "{2}, {T}, Sacrifice this token: You gain 3 life. Until end of turn, if you would draw a card, draw two cards instead."
+SVar:TrigToken:DB$ Token | TokenScript$ syr_acha
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Token|Counters & Type$Artifact|Food
+Oracle:When The Value Knight enters the battlefield, create Syr Acha, a 1/1 legendary red artifact creature Food Knight token with "{2}, {T}, Sacrifice this token: You gain 3 life. Until end of turn, if you would draw a card, draw two cards instead."\nWhenever you draw a card, put a +1/+1 counter on The Value Knight.
