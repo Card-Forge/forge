@@ -318,15 +318,15 @@ public class SaveLoadScene extends UIScene {
     }
 
     private String getSplitHeaderName(WorldSaveHeader worldSaveHeader, boolean getLocation) {
-        String result = worldSaveHeader.name;
+        String noMapData = "[RED]No Map Data!";
         if (worldSaveHeader.name.contains(Character.toString(ASCII_179))) {
             String[] split = TextUtil.split(worldSaveHeader.name, ASCII_179);
             if (getLocation)
-                result = split.length > 1 ? split[1] : "OLD SaveData!";
+                return split.length > 1 ? split[1] : noMapData;
             else
-                result = split[0];
+                return split[0];
         }
-        return result;
+        return getLocation ? noMapData : worldSaveHeader.name;
     }
 
     public enum Modes {
