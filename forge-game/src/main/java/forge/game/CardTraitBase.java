@@ -421,15 +421,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (params.containsKey("PresentZone")) {
                 presentZone = ZoneType.smartValueOf(params.get("PresentZone"));
             }
-            CardCollection list = new CardCollection();
-            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getOpponents().getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Any")) {
-                list.addAll(hostController.getAllies().getCardsIn(presentZone));
+            CardCollection list;
+            if (params.containsKey("PresentDefined")) {
+                list = AbilityUtils.getDefinedCards(getHostCard(), params.get("PresentDefined"), this);
+            } else {
+                list = new CardCollection();
+                if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getCardsIn(presentZone));
+                }
+                if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getOpponents().getCardsIn(presentZone));
+                }
+                if (presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getAllies().getCardsIn(presentZone));
+                }
             }
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
