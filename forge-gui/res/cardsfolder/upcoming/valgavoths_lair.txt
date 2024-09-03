@@ -1,4 +1,5 @@
 Name:Valgavoth's Lair
+ManaCost:no cost
 Types:Enchantment Land
 K:Hexproof
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
