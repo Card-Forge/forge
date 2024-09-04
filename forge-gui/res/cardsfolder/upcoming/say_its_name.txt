@@ -1,0 +1,9 @@
+Name:Say Its Name
+ManaCost:1 G
+Types:Sorcery
+A:SP$ Mill | NumCards$ 3 | Defined$ You | SubAbility$ DBChangeZone | SpellDescription$ Mill three cards. Then you may return a creature or land card from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn,Land.YouOwn | ChangeNum$ 1 | Hidden$ True
+A:AB$ ChangeZone | Cost$ ExileFromGrave<1/CARDNAME> ExileFromGrave<2/Card.Other+YouOwn+namedSay Its Name> | ActivationZone$ Graveyard | Hidden$ True | Origin$ Library | OriginAlternative$ Graveyard,Hand | Destination$ Battlefield | ChangeType$ Card.YouOwn+namedAltanak; the Thrice-Called | SorcerySpeed$ True | SpellDescription$ Search your graveyard, hand, and/or library for a card named Altanak, the Thrice-Called and put it onto the battlefield. If you search your library this way, shuffle. Activate only as a sorcery.
+DeckHas:Ability$Graveyard
+DeckHints:Name$Altanak, the Thrice-Called
+Oracle:Mill three cards. Then you may return a creature or land card from your graveyard to your hand.\nExile this card and two other cards named Say Its Name from your graveyard: Search your graveyard, hand, and/or library for a card named Altanak, the Thrice-Called and put it onto the battlefield. If you search your library this way, shuffle. Activate only as a sorcery.
