@@ -29,6 +29,7 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
             CardCollection tgtCards;
+            Card toGrave = null;
             boolean fromLibrary = false;
             if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
                 ZoneType choiceZone = ZoneType.Hand;
@@ -50,6 +51,15 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
             } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
                 tgtCards = p.getTopXCardsFromLibrary(amount);
                 fromLibrary = true;
+            } else if (sa.hasParam("Dread")) {
+                tgtCards = p.getTopXCardsFromLibrary(2);
+                if (!tgtCards.isEmpty()) {
+                    Card manifest = p.getController().chooseSingleEntityForEffect(tgtCards, sa, getDefaultMessage(), null);
+                    tgtCards.remove(manifest);
+                    toGrave = tgtCards.isEmpty() ? null : tgtCards.getFirst();
+                    tgtCards = new CardCollection(manifest);
+                }
+                fromLibrary = true;
             } else {
                 tgtCards = getTargetCards(sa);
                 if (Iterables.all(tgtCards, CardPredicates.inZone(ZoneType.Library))) {
@@ -67,6 +77,10 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
                     internalEffect(c, p, sa, moveParams);
+                    if (sa.hasParam("Dread") && toGrave != null) {
+                        game.getAction().moveToGraveyard(toGrave, sa, moveParams);
+                        toGrave = null;
+                    }
                     triggerList.triggerChangesZoneAll(game, sa);
                 }
             } else {
