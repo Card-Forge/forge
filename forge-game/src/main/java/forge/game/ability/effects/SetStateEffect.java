@@ -96,6 +96,15 @@ public class SetStateEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            if (sa.hasParam("RevealFirst")) {
+                Card lki = CardCopyService.getLKICopy(tgtCard);
+                lki.forceTurnFaceUp();
+                game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblRevealFaceDownCards"));
+                if (sa.hasParam("ValidNewFace") && !lki.isValid(sa.getParam("ValidNewFace").split(","), p, host, sa)) {
+                    continue;
+                }
+            }
+
             // facedown cards that are not Permanent, can't turn faceup there
             if ("TurnFaceUp".equals(mode) && gameCard.isFaceDown() && gameCard.isInPlay()) {
                 if (gameCard.hasMergedCard()) {
@@ -118,7 +127,6 @@ public class SetStateEffect extends SpellAbilityEffect {
                     Card lki = CardCopyService.getLKICopy(gameCard);
                     lki.forceTurnFaceUp();
                     game.getAction().reveal(new CardCollection(lki), lki.getOwner(), true, Localizer.getInstance().getMessage("lblFaceDownCardCantTurnFaceUp"));
-
                     continue;
                 }
             }

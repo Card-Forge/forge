@@ -692,7 +692,6 @@ public class GameAction {
             if (wasFacedown) {
                 Card revealLKI = CardCopyService.getLKICopy(c);
                 revealLKI.forceTurnFaceUp();
-
                 reveal(new CardCollection(revealLKI), revealLKI.getOwner(), true, "Face-down card leaves the battlefield: ");
 
                 copied.setState(CardStateName.Original, true);
