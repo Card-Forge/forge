@@ -842,6 +842,10 @@ public final class GameActionUtil {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
                 Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (sa != null && sa.hasParam("GainControl")) {
+                    // TODO this doesn't account for changes from e.g. Gather Specimens yet
+                    decider = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
+                }
                 if (decider.equals(p)) {
                     subList.add(c);
                 }
