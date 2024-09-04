@@ -878,6 +878,8 @@ public abstract class SpellAbilityEffect {
             } else {
                 game.getUpkeep().addUntilEnd(controller, until);
             }
+        } else if ("UntilNextEndStep".equals(duration)) {
+            game.getEndOfTurn().addAt(until);
         } else if ("UntilYourNextEndStep".equals(duration)) {
             game.getEndOfTurn().addUntil(controller, until);
         } else if ("UntilYourNextTurn".equals(duration)) {

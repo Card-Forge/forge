@@ -1,0 +1,13 @@
+Name:The Crimson Avenger
+ManaCost:3 R R
+Types:Legendary Creature Human Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose target spell an opponent controls. Reveal cards from the top of your library until you reveal a card that shares a mana value with it. Cast that card without paying its mana cost. Then shuffle your library.
+SVar:TrigChoose:DB$ Pump | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card.OppCtrl | TgtPrompt$ Select target spell an opponent controls | SubAbility$ CrimsonCascade
+SVar:CrimsonCascade:DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.cmcEQX | NoMoveRevealed$ True | RememberFound$ True | SubAbility$ CascadeCast
+SVar:CascadeCast:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | ValidSA$ Spell | SubAbility$ YouShuffle
+SVar:YouShuffle:DB$ Shuffle | Defined$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Targeted$CardManaCost
+Oracle:Flash\nWhen The Crimson Avenger enters the battlefield, choose target spell an opponent controls. Reveal cards from the top of your library until you reveal a card that shares a mana value with it. Cast that card without paying its mana cost. Then shuffle your library.

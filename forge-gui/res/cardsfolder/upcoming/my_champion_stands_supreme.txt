@@ -1,0 +1,9 @@
+Name:My Champion Stands Supreme
+ManaCost:no cost
+Types:Ongoing Scheme
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouOwn | EffectZone$ Command | AddKeyword$ Ward:2 | Description$ Your commander has ward {2).
+T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Command | Execute$ TrigPutCounter | TriggerDescription$ Whenever your commander attacks, put two +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredAttackerLKICopy | CounterType$ P1P1 | CounterNum$ 2
+T:Mode$ ChangesZone | ValidCard$ Card.IsCommander+YouOwn | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigAbandon | TriggerZones$ Command | TriggerDescription$ When your commander leaves the battlefield, abandon this scheme.
+SVar:TrigAbandon:DB$ Abandon
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nYour commander has ward {2).\nWhenever your commander attacks, put two +1/+1 counters on it.\nWhen your commander leaves the battlefield, abandon this scheme.

@@ -27,7 +27,6 @@ public class GameLossEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-
         for (final Player p : getTargetPlayers(sa)) {
             p.loseConditionMet(GameLossReason.SpellEffect, sa.getHostCard().getName());
         }

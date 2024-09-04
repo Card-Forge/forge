@@ -1,0 +1,10 @@
+Name:Vehicle Token
+ManaCost:no cost
+Types:Artifact Vehicle
+PT:0/0
+K:Flying
+K:Crew:2
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each Bear you control.
+SVar:X:Count$Valid Bear.YouCtrl
+SVar:BuffedBy:Bear
+Oracle:Flying\nThis creature gets +1/+1 for each Bear you control.\nCrew 2

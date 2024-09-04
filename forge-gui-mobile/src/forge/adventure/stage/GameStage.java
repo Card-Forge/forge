@@ -2,6 +2,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
@@ -24,6 +25,7 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.Graphics;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.character.MapActor;
 import forge.adventure.character.PlayerSprite;
@@ -34,6 +36,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
@@ -658,16 +661,31 @@ public abstract class GameStage extends Stage {
             Timer.schedule(new Timer.Task() {
                 @Override
                 public void run() {
-                    showImageDialog(Forge.getLocalizer().getMessage("lblYouDied", Current.player().getName()), null,
+                    showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
                             () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 Forge.advFreezePlayerControls = false;
                                 WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                                 WorldStage.getInstance().loadPOI(poi);
+                                WorldSave.getCurrentSave().autoSave();
                                 Forge.clearTransitionScreen();
                             }, Forge.takeScreenshot(), ""))));
                 }
             }, 1f);
         }//Spawn shouldn't be null
+    }
+    private FBufferedImage getDefeatBadge() {
+        FileHandle defeat = Config.instance().getFile("ui/defeat.png");
+        if (defeat.exists()) {
+            TextureRegion tr = new TextureRegion(Forge.getAssets().getTexture(defeat, true, false));
+            tr.flip(true, false);
+            return new FBufferedImage(176, 200) {
+                @Override
+                protected void draw(Graphics g, float w, float h) {
+                    g.drawImage(tr, 0, 0, 176, 200);
+                }
+            };
+        }
+        return null;
     }
 
 }

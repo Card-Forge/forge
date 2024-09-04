@@ -1,0 +1,9 @@
+Name:The Juzam Master
+ManaCost:2 B B
+Types:Legendary Creature Human Wizard
+PT:4/5
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddTrigger$ JuzamTrigger | Description$ Creatures you control get +1/+0 and have "At the beginning of your upkeep, this creature deals 1 damage to you."
+SVar:JuzamTrigger:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your upkeep, this creature deals 1 damage to you.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ You | NumDmg$ 1
+SVar:PlayMain1:TRUE
+Oracle:Creatures you control get +1/+0 and have "At the beginning of your upkeep, this creature deals 1 damage to you."
