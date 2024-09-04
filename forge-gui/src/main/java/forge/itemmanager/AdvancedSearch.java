@@ -48,7 +48,6 @@ import forge.item.SealedProduct;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-import forge.util.Predicates;
 
 public class AdvancedSearch {
     public enum FilterOption {
@@ -1584,7 +1583,7 @@ public class AdvancedSearch {
                     pred = pred.and(predPiece);
                 }
                 else if (operator == Operator.OR) {
-                    pred = Predicates.or(pred, predPiece);
+                    pred = pred.or(predPiece);
                 }
                 operator = null;
             }

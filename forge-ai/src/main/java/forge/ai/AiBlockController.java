@@ -44,7 +44,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import forge.util.collect.FCollectionView;
 
 
@@ -326,7 +325,7 @@ public class AiBlockController {
     }
 
     private Predicate<Card> rampagesOrNeedsManyToBlock(final Combat combat) {
-        return Predicates.or(CardPredicates.hasKeyword(Keyword.RAMPAGE), input -> {
+        return CardPredicates.hasKeyword(Keyword.RAMPAGE).or(input -> {
             // select creature that has a max blocker
             return StaticAbilityCantAttackBlock.getMinMaxBlocker(input, combat.getDefenderPlayerByAttacker(input)).getRight() < Integer.MAX_VALUE;
         });

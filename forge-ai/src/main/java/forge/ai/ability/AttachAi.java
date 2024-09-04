@@ -1,10 +1,8 @@
 package forge.ai.ability;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 import forge.game.card.*;
-import forge.util.Predicates;
 import org.apache.commons.lang3.ObjectUtils;
 
 import com.google.common.collect.Lists;
@@ -1144,9 +1142,8 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, Predicates.or(
-                CardPredicates.isEquippedBy(attachSource.getName()),
-                CardPredicates.isEnchantedBy(attachSource.getName())
+            prefList = CardLists.filter(prefList, CardPredicates.isEquippedBy(attachSource.getName())
+                    .or(CardPredicates.isEnchantedBy(attachSource.getName())
             ).negate());
         }
 
@@ -1248,8 +1245,8 @@ public class AttachAi extends SpellAbilityAi {
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
-            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), Predicates.or(CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents()),
-                    card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
+            CardCollection list = CardLists.filter(CardUtil.getValidCardsToTarget(sa), CardPredicates.isControlledByAnyOf(aiPlayer.getOpponents())
+                    .or(card -> ComputerUtilCard.isUselessCreature(aiPlayer, card.getAttachedTo())));
 
             return !list.isEmpty() ? ComputerUtilCard.getBestAI(list) : null;
         } else if ("Unenchanted".equals(sa.getParam("AILogic"))) {

@@ -760,9 +760,10 @@ public class DeckgenUtil {
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
-                    format.isLegalCardPredicate().and(Predicates.compose(Predicates.or(
-                            new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
-                            DeckGeneratorBase.COLORLESS_CARDS), PaperCard::getRules)));
+                    format.isLegalCardPredicate().and(Predicates.compose(
+                            new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity())
+                                    .or(DeckGeneratorBase.COLORLESS_CARDS),
+                            PaperCard::getRules)));
             switch (format) {
             case Brawl: //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
                 colorList = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());

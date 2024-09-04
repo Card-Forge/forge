@@ -52,7 +52,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Special logic for individual cards
@@ -156,8 +155,8 @@ public class SpecialCardAi {
             }
             int libsize = ai.getCardsIn(ZoneType.Library).size();
 
-            final CardCollection hand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Predicates.or(
-                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+            final CardCollection hand = CardLists.filter(ai.getCardsIn(ZoneType.Hand),
+                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
             if (!hand.isEmpty()) {
                 // has spell that can be cast in hand with put ability
                 if (Iterables.any(hand, CardPredicates.hasCMC(counterNum + 1))) {
@@ -169,8 +168,8 @@ public class SpecialCardAi {
                     return true;
                 }
             }
-            final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library), Predicates.or(
-                    CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+            final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library),
+                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
             if (!library.isEmpty()) {
                 // get max cmc of instant or sorceries in the libary
                 int maxCMC = 0;
@@ -360,8 +359,8 @@ public class SpecialCardAi {
 
         public static boolean considerSacrificingCreature(final Player ai, final SpellAbility sa) {
             CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.UNTAPPED.and(Predicates.or(
-                            CardPredicates.hasKeyword(Keyword.FLYING), CardPredicates.hasKeyword(Keyword.REACH))));
+                    CardPredicates.Presets.UNTAPPED.and(
+                            CardPredicates.hasKeyword(Keyword.FLYING).or(CardPredicates.hasKeyword(Keyword.REACH))));
             boolean hasUsefulBlocker = false;
 
             for (Card c : flyingCreatures) {
@@ -998,7 +997,7 @@ public class SpecialCardAi {
         // Scan the fetch list for a card with at least one activated ability.
         // TODO: can be improved to a full consider(sa, ai) logic which would scan the graveyard first and hand last
         public static Card considerCardFromList(final CardCollection fetchList) {
-            for (Card c : CardLists.filter(fetchList, Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.CREATURES))) {
+            for (Card c : CardLists.filter(fetchList, CardPredicates.Presets.ARTIFACTS.or(CardPredicates.Presets.CREATURES))) {
                 for (SpellAbility ab : c.getSpellAbilities()) {
                     if (ab.isActivatedAbility()) {
                         Player controller = c.getController();

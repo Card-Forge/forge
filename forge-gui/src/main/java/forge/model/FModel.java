@@ -346,8 +346,8 @@ public final class FModel {
 
     public static ItemPool<PaperCard> getOathbreakerCommander() {
         if (oathbreakerCommander == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(Predicates.or(
-                    CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard::getRules)), PaperCard.class);
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.compose(
+                    CardRulesPredicates.Presets.CAN_BE_OATHBREAKER.or(CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL), PaperCard::getRules)), PaperCard.class);
         return oathbreakerCommander;
     }
 

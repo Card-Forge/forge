@@ -569,7 +569,7 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);
         public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardType.CoreType.Plane);
         public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardType.CoreType.Phenomenon);
-        public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = Predicates.or(IS_PLANE, IS_PHENOMENON);
+        public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = IS_PLANE.or(IS_PHENOMENON);
         public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardType.CoreType.Scheme);
         public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
         public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
@@ -577,8 +577,8 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_ATTRACTION = Presets.IS_ARTIFACT.and(CardRulesPredicates.subType("Attraction"));
 
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
-        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Presets.IS_LEGENDARY.and(Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
-        public static final Predicate<CardRules> CAN_BE_TINY_LEADERS_COMMANDER = Presets.IS_LEGENDARY.and(Predicates.or(Presets.IS_CREATURE, Presets.IS_PLANESWALKER));
+        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Presets.IS_LEGENDARY.and(Presets.IS_CREATURE.or(Presets.IS_PLANESWALKER));
+        public static final Predicate<CardRules> CAN_BE_TINY_LEADERS_COMMANDER = Presets.IS_LEGENDARY.and(Presets.IS_CREATURE.or(Presets.IS_PLANESWALKER));
 
         /** The Constant IS_NON_CREATURE_SPELL. **/
         public static final Predicate<CardRules> IS_NON_CREATURE_SPELL =

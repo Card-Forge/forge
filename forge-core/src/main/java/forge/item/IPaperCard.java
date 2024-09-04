@@ -209,8 +209,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
             public static final Predicate<PaperCard> IS_MYTHIC_RARE = Predicates.rarity(true, CardRarity.MythicRare);
 
             /** The Constant isRareOrMythic. */
-            public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = forge.util.Predicates.or(Presets.IS_RARE,
-                    Presets.IS_MYTHIC_RARE);
+            public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = Presets.IS_RARE.or(Presets.IS_MYTHIC_RARE);
 
             /** The Constant isSpecial. */
             public static final Predicate<PaperCard> IS_SPECIAL = Predicates.rarity(true, CardRarity.Special);

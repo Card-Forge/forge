@@ -505,7 +505,7 @@ public class ComputerUtilCard {
 
         if (hasEnchantmants || hasArtifacts) {
             final List<Card> ae = CardLists.filter(list,
-                    Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS)
+                    (CardPredicates.Presets.ARTIFACTS.or(CardPredicates.Presets.ENCHANTMENTS))
                     .and(card -> !card.hasSVar("DoNotDiscardIfAble"))
             );
             return getCheapestPermanentAI(ae, null, false);
@@ -522,7 +522,7 @@ public class ComputerUtilCard {
     public static final Card getCheapestSpellAI(final Iterable<Card> list) {
         if (!Iterables.isEmpty(list)) {
             CardCollection cc = CardLists.filter(list,
-                    Predicates.or(CardPredicates.isType("Instant"), CardPredicates.isType("Sorcery")));
+                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
 
             if (cc.isEmpty()) {
                 return null;

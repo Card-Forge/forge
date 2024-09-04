@@ -30,7 +30,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class ManaAi extends SpellAbilityAi {
 
@@ -239,7 +238,7 @@ public class ManaAi extends SpellAbilityAi {
                 Arrays.asList(
                         CardPredicates.restriction(restrictValid.split(","), ai, host, sa),
                         CardPredicates.lessCMC(searchCMC),
-                        Predicates.or(CardPredicates.isColorless(), CardPredicates.isColor(producedColor))));
+                        CardPredicates.isColorless().or(CardPredicates.isColor(producedColor))));
 
         if (logic.startsWith("ManaRitualBattery")) {
             // Don't remove more counters than would be needed to cast the more expensive thing we want to cast,

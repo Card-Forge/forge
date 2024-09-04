@@ -2801,8 +2801,7 @@ public class ComputerUtil {
                 }
 
                 // has cards with SacMe or Token
-                if (CardLists.count(aiCreatures,
-                        Predicates.or(CardPredicates.hasSVar("SacMe"), CardPredicates.Presets.TOKEN)) >= numDeath) {
+                if (CardLists.count(aiCreatures, CardPredicates.hasSVar("SacMe").or(Presets.TOKEN)) >= numDeath) {
                     return "Death";
                 }
 

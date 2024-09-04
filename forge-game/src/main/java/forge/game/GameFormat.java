@@ -159,7 +159,7 @@ public class GameFormat implements Comparable<GameFormat> {
             p = p.and(Predicates.or(crp));
         }
         if (!this.getAdditionalCards().isEmpty()) {
-            p = Predicates.or(p, IPaperCard.Predicates.names(this.getAdditionalCards()));
+            p = p.or(IPaperCard.Predicates.names(this.getAdditionalCards()));
         }
         return p;
     }

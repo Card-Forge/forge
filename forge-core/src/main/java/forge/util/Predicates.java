@@ -20,12 +20,4 @@ public class Predicates {
     public static <A, B> Predicate<A> compose(Predicate<B> predicate, Function<A, ? extends B> function) {
         return x -> predicate.test(function.apply(x));
     }
-
-
-    //TODO: Inline everything below.
-
-    public static <T> Predicate<T> or(Predicate<? super T> first, Predicate<? super T> second) {
-        //TODO: remove casting?
-        return ((Predicate<T>) first).or(second);
-    }
 }

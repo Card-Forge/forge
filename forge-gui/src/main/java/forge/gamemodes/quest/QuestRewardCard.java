@@ -91,13 +91,13 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                     if (rarityCodes.length > 0) {
                         for (final String rarity : rarityCodes) {
                             if (rarity.startsWith("C") || rarity.startsWith("c")) {
-                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_COMMON : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_COMMON));
+                                filterRarity = filterRarity == null ? IPaperCard.Predicates.Presets.IS_COMMON : filterRarity.or(IPaperCard.Predicates.Presets.IS_COMMON);
                             } else if (rarity.startsWith("U") || rarity.startsWith("u")) {
-                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_UNCOMMON : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_UNCOMMON));
+                                filterRarity = filterRarity == null ? IPaperCard.Predicates.Presets.IS_UNCOMMON : filterRarity.or(IPaperCard.Predicates.Presets.IS_UNCOMMON);
                             } else if (rarity.startsWith("R") || rarity.startsWith("r")) {
-                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_RARE : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_RARE));
+                                filterRarity = filterRarity == null ? IPaperCard.Predicates.Presets.IS_RARE : filterRarity.or(IPaperCard.Predicates.Presets.IS_RARE);
                             } else if (rarity.startsWith("M") || rarity.startsWith("m")) {
-                                filterRarity = (filterRarity == null ? IPaperCard.Predicates.Presets.IS_MYTHIC_RARE : Predicates.or(filterRarity, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE));
+                                filterRarity = filterRarity == null ? IPaperCard.Predicates.Presets.IS_MYTHIC_RARE : filterRarity.or(IPaperCard.Predicates.Presets.IS_MYTHIC_RARE);
                             }
                         }
                     }

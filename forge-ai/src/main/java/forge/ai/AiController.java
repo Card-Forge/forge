@@ -1578,7 +1578,7 @@ public class AiController {
             if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
                     && player.getZone(ZoneType.Hand).contains(
-                            Predicates.or(Presets.LANDS, CardPredicates.hasKeyword("Storm")).negate())) {
+                            Presets.LANDS.or(CardPredicates.hasKeyword("Storm")).negate())) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                     // skip evaluating Storm unless we reached the minimum Storm count
                     continue;

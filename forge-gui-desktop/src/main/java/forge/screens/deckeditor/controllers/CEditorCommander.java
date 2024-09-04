@@ -88,7 +88,7 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         }
         else {
             Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
-                    ? Predicates.or(CardRulesPredicates.Presets.CAN_BE_OATHBREAKER, CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
+                    ? CardRulesPredicates.Presets.CAN_BE_OATHBREAKER.or(CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
                     : CardRulesPredicates.Presets.CAN_BE_COMMANDER;
             commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard::getRules)),PaperCard.class);
             normalPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(), PaperCard.class);

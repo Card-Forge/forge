@@ -20,7 +20,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -450,7 +449,7 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
 
-                List<Card> alliedTgts = CardLists.filter(tgts, Predicates.or(CardPredicates.isControlledByAnyOf(ai.getAllies()), CardPredicates.isController(ai)));
+                List<Card> alliedTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getAllies()).or(CardPredicates.isController(ai)));
                 List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
 
                 Card destroyTgt = null;
@@ -512,7 +511,7 @@ public class PumpAi extends PumpAiBase {
         // Detain target nonland permanent: don't target noncreature permanents that don't have
         // any activated abilities.
         if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
-            list = CardLists.filter(list, Predicates.or(CardPredicates.Presets.CREATURES, card -> {
+            list = CardLists.filter(list, Presets.CREATURES.or(card -> {
                 for (SpellAbility sa1 : card.getSpellAbilities()) {
                     if (sa1.isActivatedAbility()) {
                         return true;

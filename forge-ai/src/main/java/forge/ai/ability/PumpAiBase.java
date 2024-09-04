@@ -27,7 +27,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public abstract class PumpAiBase extends SpellAbilityAi {
 
@@ -204,7 +203,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                 return true;
             }
-            Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword(Keyword.FLYING), CardPredicates.hasKeyword(Keyword.REACH));
+            Predicate<Card> flyingOrReach = CardPredicates.hasKeyword(Keyword.FLYING).or(CardPredicates.hasKeyword(Keyword.REACH));
             if (ph.isPlayerTurn(opp) && combat != null
                     && !attackingFlyer.isEmpty()
                     && CombatUtil.canBlock(card)) {

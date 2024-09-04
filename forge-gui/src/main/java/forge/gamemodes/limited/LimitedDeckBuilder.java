@@ -134,7 +134,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     @SuppressWarnings("unused")
     public Deck buildDeck(final String landSetCode) {
         // 1. Prepare
-        hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
+        hasColor = new MatchColorIdentity(colors).or(COLORLESS_CARDS);
         Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
                 Predicates.compose(hasColor, PaperCard::getRules));
         rankedColorList = CardRanker.rankCardsInDeck(colorList);
@@ -497,8 +497,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
                 }
             }
 
-            hasColor = Predicates.or(new DeckGeneratorBase.MatchColorIdentity(colors),
-                    DeckGeneratorBase.COLORLESS_CARDS);
+            hasColor = new MatchColorIdentity(colors).or(DeckGeneratorBase.COLORLESS_CARDS);
             final Iterable<PaperCard> threeColorList = Iterables.filter(rankedOthers,
                     Predicates.compose(hasColor, PaperCard::getRules));
             for (final PaperCard card : threeColorList) {

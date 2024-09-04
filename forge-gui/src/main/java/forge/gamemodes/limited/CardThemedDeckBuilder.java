@@ -183,7 +183,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      */
     public Deck buildDeck() {
         // 1. Prepare
-        hasColor = Predicates.or(new MatchColorIdentity(colors), COLORLESS_CARDS);
+        hasColor = new MatchColorIdentity(colors).or(COLORLESS_CARDS);
         if (logColorsToConsole) {
             System.out.println(keyCard.getName());
             System.out.println("Colors: " + colors.toEnumSet().toString());
@@ -192,8 +192,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 Predicates.compose(hasColor, PaperCard::getRules));
         rankedColorList = Lists.newArrayList(colorList);
         onColorCreaturesAndSpells = Iterables.filter(rankedColorList,
-                Predicates.compose(Predicates.or(CardRulesPredicates.Presets.IS_CREATURE,
-                        CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL), PaperCard::getRules));
+                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE
+                        .or(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL), PaperCard::getRules));
 
         // Guava iterables do not copy the collection contents, instead they act
         // as filters and iterate over _source_ collection each time. So even if
@@ -476,8 +476,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 }
             }
 
-            hasColor = CardRulesPredicates.Presets.IS_NON_LAND.and(Predicates.or(new MatchColorIdentity(colors),
-                    DeckGeneratorBase.COLORLESS_CARDS));
+            hasColor = CardRulesPredicates.Presets.IS_NON_LAND.and(new MatchColorIdentity(colors)
+                    .or(DeckGeneratorBase.COLORLESS_CARDS));
             final Iterable<PaperCard> threeColorList = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, PaperCard::getRules));
             for (final PaperCard card : threeColorList) {

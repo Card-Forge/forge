@@ -538,7 +538,7 @@ public enum DeckFormat {
         if (commanders.size() == 1 && commanders.get(0).getRules().canBePartnerCommander()) { //also show available partners a commander can have a partner
             //702.124g If a legendary card has more than one partner ability, you may choose which one to use when designating your commander, but you can’t use both.
             //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
-            predicate = Predicates.or(predicate, CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
+            predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
         return Predicates.compose(predicate, PaperCard::getRules);
     }

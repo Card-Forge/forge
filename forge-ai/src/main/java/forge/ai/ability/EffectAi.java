@@ -26,7 +26,6 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import forge.util.TextUtil;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class EffectAi extends SpellAbilityAi {
                 for (Player opp : ai.getOpponents()) {
                     boolean worthHolding = false;
                     CardCollectionView oppCreatsLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield),
-                        Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.Presets.CREATURES));
+                            Presets.LANDS.or(Presets.CREATURES));
                     CardCollectionView oppCreatsLandsTapped = CardLists.filter(oppCreatsLands, CardPredicates.Presets.TAPPED);
 
                     if (oppCreatsLandsTapped.size() >= 3 || oppCreatsLands.size() == oppCreatsLandsTapped.size()) {

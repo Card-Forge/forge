@@ -289,7 +289,7 @@ public abstract class DeckGeneratorBase {
         };
 
         if (useArtifacts) {
-            hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
+            hasColor = hasColor.or(COLORLESS_CARDS);
         }
         return Iterables.filter(pool.getAllCards(), Predicates.compose(canPlay.and(hasColor).and(canUseInFormat), PaperCard::getRules));
     }
