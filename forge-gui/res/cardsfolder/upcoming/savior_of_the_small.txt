@@ -1,5 +1,5 @@
 Name:Savior of the Small
-Types:Creature Human Survivor
+Types:Creature Kor Survivor
 ManaCost:3 W
 PT:3/4
 T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, return target creature card with mana value 3 or less from your graveyard to your hand.
