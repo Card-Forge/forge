@@ -75,5 +75,13 @@ ScryfallCode=SPG
 61 M Frogmite @Mike Sass
 62 M Sword of Fire and Ice @Volkan Baǵa
 63 M Secluded Courtyard @Dan Murayama Scott
+64 M Hallowed Haunting @Mila Pesic
+65 M Soul Warden @Joshua Cairos
+66 M Expropriate @Borja Pindado
+67 M Phantasmal Image @Darren Tan
 68 M Damnation @Masahiro Ito
+69 M Sacrifice @David Palumbo
+70 M Maddening Hex @Javier Charro
+71 M Unholy Heat @Josh Hass
 72 M Collected Company @Borja Pindado
+73 M Noxious Revival @Javier Charro
