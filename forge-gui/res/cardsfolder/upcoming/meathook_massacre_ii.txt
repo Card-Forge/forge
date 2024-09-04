@@ -1,7 +1,7 @@
 Name:Meathook Massacre II
 ManaCost:X X B B B B
 Types:Legendary Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, each player sacrifices two creatures.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, each player sacrifices X creatures.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Player | Amount$ X | SacValid$ Creature
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn1 | TriggerDescription$ Whenever a creature you control dies, you may pay 3 life. If you do, return that card under your control with a finality counter on it.
 SVar:TrigReturn1:AB$ ChangeZone | Cost$ PayLife<3> | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredNewCardLKICopy | WithCountersType$ FINALITY
