@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
@@ -32,6 +33,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -745,8 +747,20 @@ public final class StaticAbilityContinuous {
                     newKeywords.addAll(extraKeywords);
 
                     newKeywords = Lists.transform(newKeywords, input -> {
+                        int reduced = 0;
+                        if (stAb.hasParam("ReduceCost")) {
+                           reduced = AbilityUtils.calculateAmount(hostCard, stAb.getParam("ReduceCost"), stAb);
+                        }
                         if (input.contains("CardManaCost")) {
-                            input = input.replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                            ManaCost cost;
+                            if (reduced > 0) {
+                                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(affectedCard.getManaCost());
+                                mcbp.decreaseGenericMana(reduced);
+                                cost = mcbp.toManaCost();
+                            } else {
+                                cost = affectedCard.getManaCost();
+                            }
+                            input = input.replace("CardManaCost", cost.getShortString());
                         } else if (input.contains("ConvertedManaCost")) {
                             final String costcmc = Integer.toString(affectedCard.getCMC());
                             input = input.replace("ConvertedManaCost", costcmc);

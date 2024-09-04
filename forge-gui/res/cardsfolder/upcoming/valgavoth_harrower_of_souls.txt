@@ -1,0 +1,11 @@
+Name:Valgavoth, Harrower of Souls
+ManaCost:2 B R
+Types:Legendary Creature Elder Demon
+PT:4/4
+K:Flying
+K:Ward:PayLife<2>
+T:Mode$ LifeLost | ValidPlayer$ Opponent.Active | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent loses life for the first time during each of their turns, put a +1/+1 counter on CARDNAME and draw a card.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWard — Pay 2 life.\nWhenever an opponent loses life for the first time during each of their turns, put a +1/+1 counter on Valgavoth, Harrower of Souls and draw a card.
