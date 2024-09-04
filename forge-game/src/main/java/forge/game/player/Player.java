@@ -63,6 +63,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -3749,9 +3750,9 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean hasUrzaLands() {
         final CardCollectionView landsControlled = getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Mine")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Power-Plant")))
-                && Iterables.any(landsControlled, Predicates.and(CardPredicates.isType("Urza's"), CardPredicates.isType("Tower")));
+        return Iterables.any(landsControlled, CardPredicates.isType("Urza's").and(CardPredicates.isType("Mine")))
+                && Iterables.any(landsControlled, CardPredicates.isType("Urza's").and(CardPredicates.isType("Power-Plant")))
+                && Iterables.any(landsControlled, CardPredicates.isType("Urza's").and(CardPredicates.isType("Tower")));
     }
 
     public void revealFaceDownCards() {

@@ -504,10 +504,10 @@ public class ComputerUtilCard {
         }
 
         if (hasEnchantmants || hasArtifacts) {
-            final List<Card> ae = CardLists.filter(list, Predicates.and(
-                    Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS),
-                    card -> !card.hasSVar("DoNotDiscardIfAble")
-            ));
+            final List<Card> ae = CardLists.filter(list,
+                    Predicates.or(CardPredicates.Presets.ARTIFACTS, CardPredicates.Presets.ENCHANTMENTS)
+                    .and(card -> !card.hasSVar("DoNotDiscardIfAble"))
+            );
             return getCheapestPermanentAI(ae, null, false);
         }
 

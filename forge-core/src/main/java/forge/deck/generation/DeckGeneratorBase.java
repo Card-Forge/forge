@@ -108,8 +108,8 @@ public abstract class DeckGeneratorBase {
     protected boolean setBasicLandPool(String edition){
         Predicate<PaperCard> isSetBasicLand;
         if (edition !=null){
-            isSetBasicLand = Predicates.and(IPaperCard.Predicates.printedInSet(edition),
-                    Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
+            isSetBasicLand = IPaperCard.Predicates.printedInSet(edition)
+                    .and(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
         }else{
             isSetBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules);
         }
@@ -327,7 +327,7 @@ public abstract class DeckGeneratorBase {
         map.put(key, boxed == null ? delta : boxed + delta);
     }
 
-    public static final Predicate<CardRules> AI_CAN_PLAY = Predicates.and(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);
+    public static final Predicate<CardRules> AI_CAN_PLAY = CardRulesPredicates.IS_KEPT_IN_AI_DECKS.and(CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);
 
     public static final Predicate<CardRules> COLORLESS_CARDS = c -> {
         ManaCost mc = c.getManaCost();

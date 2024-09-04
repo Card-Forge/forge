@@ -52,6 +52,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Special logic for individual cards
@@ -359,7 +360,7 @@ public class SpecialCardAi {
 
         public static boolean considerSacrificingCreature(final Player ai, final SpellAbility sa) {
             CardCollection flyingCreatures = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    Predicates.and(CardPredicates.Presets.UNTAPPED, Predicates.or(
+                    CardPredicates.Presets.UNTAPPED.and(Predicates.or(
                             CardPredicates.hasKeyword(Keyword.FLYING), CardPredicates.hasKeyword(Keyword.REACH))));
             boolean hasUsefulBlocker = false;
 
@@ -1296,7 +1297,7 @@ public class SpecialCardAi {
         public static boolean considerSecondTarget(final Player ai, final SpellAbility sa) {
             Card firstTgt = sa.getParent().getTargetCard();
             Iterable<Card> candidates = Iterables.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
-                    Predicates.and(CardPredicates.sharesCardTypeWith(firstTgt), CardPredicates.isTargetableBy(sa)));
+                    CardPredicates.sharesCardTypeWith(firstTgt).and(CardPredicates.isTargetableBy(sa)));
             Card secondTgt = Aggregates.random(candidates);
             if (secondTgt != null) {
                 sa.resetTargets();
@@ -1316,7 +1317,7 @@ public class SpecialCardAi {
                 return false;
             }
 
-            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, CardPredicates.Presets.BASIC_LANDS.negate())).size();
+            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS.and(CardPredicates.Presets.BASIC_LANDS.negate())).size();
 
             boolean hasBridge = false;
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -1334,7 +1335,7 @@ public class SpecialCardAi {
             }
 
             for (Player opp : ai.getOpponents()) {
-                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.Presets.LANDS, CardPredicates.Presets.BASIC_LANDS.negate())).size();
+                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS.and(CardPredicates.Presets.BASIC_LANDS.negate())).size();
                 // Always if enemy would die and we don't!
                 // TODO : predict actual damage instead of assuming it'll be 2*lands
                 // Don't if we lose, unless we lose anyway to unblocked creatures next turn

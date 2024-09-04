@@ -79,7 +79,7 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
                         for (final String rule : ruleCodes) {
                             final Predicate<CardRules> newRule = BoosterUtils.parseRulesLimitation(rule);
                             if (newRule != null) {
-                                filterRules = (filterRules == null ? newRule : Predicates.and(filterRules, newRule));
+                                filterRules = filterRules == null ? newRule : filterRules.and(newRule);
                             }
                         }
                     }
@@ -107,10 +107,10 @@ public abstract class QuestRewardCard implements IQuestRewardCard {
 
         if (filterRules != null) {
             final Predicate<PaperCard> rulesPrinted = Predicates.compose(filterRules, PaperCard::getRules);
-            filters = Predicates.and(filters, rulesPrinted);
+            filters = filters.and(rulesPrinted);
         }
         if (filterRarity != null) {
-            filters = Predicates.and(filters, filterRarity);
+            filters = filters.and(filterRarity);
         }
         return filters;
     }

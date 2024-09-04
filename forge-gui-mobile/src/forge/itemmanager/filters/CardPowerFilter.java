@@ -30,7 +30,7 @@ public class CardPowerFilter extends ValueRangeFilter<PaperCard> {
         if (predicate == null) {
             return x -> true;
         }
-        predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_CREATURE);
+        predicate = predicate.and(CardRulesPredicates.Presets.IS_CREATURE);
         return Predicates.compose(predicate, PaperCard::getRules);
     }
 }

@@ -22,7 +22,6 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -792,7 +791,7 @@ public class CardUtil {
     }
 
     public static Deck generateRandomBoosterPackAsDeck(final Predicate<CardEdition> editionFilter) {
-        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, editionFilter);
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
         Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
 
         if (!possibleEditions.iterator().hasNext()) {

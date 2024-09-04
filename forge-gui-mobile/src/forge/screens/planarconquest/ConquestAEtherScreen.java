@@ -389,7 +389,7 @@ public class ConquestAEtherScreen extends FScreen {
             if (predicate == null) {
                 return selectedOption.getPredicate();
             }
-            return Predicates.and(predicate, selectedOption.getPredicate());
+            return predicate.and(selectedOption.getPredicate());
         }
 
         @Override

@@ -904,7 +904,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
             Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
-                    forge.util.Predicates.and(hasBasicLands, artPreference::accept));
+                    hasBasicLands.and(artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();
             List<CardEdition> selectedEditions = new ArrayList<CardEdition>();
             while (editionsIterator.hasNext())

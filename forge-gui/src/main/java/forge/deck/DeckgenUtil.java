@@ -61,7 +61,7 @@ public class DeckgenUtil {
         try {
             List<String> keys      = new ArrayList<>(CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet());
             String       randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
-            Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(randomKey));
+            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCard.Predicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
 
             return buildCardGenDeck(keyCard,format,isForAI);
@@ -73,7 +73,7 @@ public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(String cardName, GameFormat format, boolean isForAI){
         try {
-            Predicate<PaperCard> cardFilter = Predicates.and(format.getFilterPrinted(),PaperCard.Predicates.name(cardName));
+            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCard.Predicates.name(cardName));
             return buildCardGenDeck(FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0),format,isForAI);
         }catch (Exception e){
             e.printStackTrace();
@@ -467,17 +467,19 @@ public class DeckgenUtil {
                     deck = Aggregates.random(geneticAI).getDeck();
 
             } else {
+                Predicate<DeckProxy> sizePredicate = deckProxy -> deckProxy.getMainSize() <= 60;
                 if (!selection.isEmpty() && selection.size() < 4) {
-                    Predicate<DeckProxy> pred = Predicates.and(deckProxy -> deckProxy.getMainSize() <= 60, deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
+                    Predicate<DeckProxy> colorPredicate = deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor());
+                    Predicate<DeckProxy> pred = sizePredicate.and(colorPredicate);
                     if (isTheme)
                         deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
                     else
                         deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
                 } else {
                     if (isTheme)
-                        deck = Aggregates.random(Iterables.filter(advThemes, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                        deck = Aggregates.random(Iterables.filter(advThemes, sizePredicate)).getDeck();
                     else
-                        deck = Aggregates.random(Iterables.filter(advPrecons, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                        deck = Aggregates.random(Iterables.filter(advPrecons, sizePredicate)).getDeck();
                 }
             }
         } catch (Exception e) {
@@ -758,7 +760,7 @@ public class DeckgenUtil {
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
-                    Predicates.and(format.isLegalCardPredicate(),Predicates.compose(Predicates.or(
+                    format.isLegalCardPredicate().and(Predicates.compose(Predicates.or(
                             new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity()),
                             DeckGeneratorBase.COLORLESS_CARDS), PaperCard::getRules)));
             switch (format) {

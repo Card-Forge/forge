@@ -18,7 +18,6 @@ import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -473,7 +472,7 @@ public class DeckProxy implements InventoryItem {
         if (filter == null) {
             filter = DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
+            filter = filter.and(DeckFormat.TinyLeaders.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
         }
         addDecksRecursivelly("Tiny Leaders", GameType.TinyLeaders, result, "", FModel.getDecks().getTinyLeaders(), filter);
         return result;
@@ -487,7 +486,7 @@ public class DeckProxy implements InventoryItem {
         if (filter == null) {
             filter = DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         } else {
-            filter = Predicates.and(DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)), filter);
+            filter = filter.and(DeckFormat.Brawl.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
         }
         addDecksRecursivelly("Brawl", GameType.Brawl, result, "", FModel.getDecks().getBrawl(), filter);
         return result;

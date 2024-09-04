@@ -72,20 +72,18 @@ public final class BoosterUtils {
     private static final Predicate<CardEdition> filterPioneer = formats.getPioneer().editionLegalPredicate;
     private static final Predicate<CardEdition> filterModern= formats.getModern().editionLegalPredicate;
 
-    private static final Predicate<CardEdition> filterStandard = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            formats.getStandard().editionLegalPredicate);
+    private static final Predicate<CardEdition> filterStandard = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(formats.getStandard().editionLegalPredicate);
 
-    private static final Predicate<CardEdition> filterPioneerNotStandard = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterPioneer, formats.getStandard().editionLegalPredicate.negate()));
+    private static final Predicate<CardEdition> filterPioneerNotStandard = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(filterPioneer
+                    .and(formats.getStandard().editionLegalPredicate.negate()));
 
-    private static final Predicate<CardEdition> filterModernNotPioneer = Predicates.and(
-            CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            Predicates.and(filterModern, filterPioneer.negate()));
+    private static final Predicate<CardEdition> filterModernNotPioneer = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(filterModern.and(filterPioneer.negate()));
 
     /** The filter not ext. */
-    private static final Predicate<CardEdition> filterNotModern = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER,
-            filterModern.negate());
+    private static final Predicate<CardEdition> filterNotModern = CardEdition.Predicates.CAN_MAKE_BOOSTER
+            .and(filterModern.negate());
 
     /**
      * Gets the quest starter deck.
@@ -198,7 +196,7 @@ public final class BoosterUtils {
 
         List<InventoryItem> output = new ArrayList<>();
 
-        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, editionFilter);
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
         Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
 
         if (!possibleEditions.iterator().hasNext()) {
@@ -273,7 +271,7 @@ public final class BoosterUtils {
                 predicate = CardRulesPredicates.hasColor(color);
             }
             if (MyRandom.getRandom().nextDouble() < 0.1) {
-                predicate = Predicates.and(predicate, CardRulesPredicates.Presets.IS_MULTICOLOR);
+                predicate = predicate.and(CardRulesPredicates.Presets.IS_MULTICOLOR);
             }
             colorFilters.add(predicate);
         }
@@ -329,10 +327,8 @@ public final class BoosterUtils {
                         }
 
                         //Try to get multicolored cards that fit into the preferred colors.
-                        Predicate<CardRules> predicateRules = Predicates.and(
-                                CardRulesPredicates.isColor(preferredColors.get(index)),
-                                CardRulesPredicates.Presets.IS_MULTICOLOR
-                        );
+                        Predicate<CardRules> predicateRules = CardRulesPredicates.isColor(preferredColors.get(index))
+                                .and(CardRulesPredicates.Presets.IS_MULTICOLOR);
                         Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
 
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
@@ -355,7 +351,7 @@ public final class BoosterUtils {
 
                 for (Byte color : otherColors) {
                     if (i % 6 == 0) {
-                        colorFilters.add(Predicates.and(CardRulesPredicates.isColor(color), CardRulesPredicates.Presets.IS_MULTICOLOR));
+                        colorFilters.add(CardRulesPredicates.isColor(color).and(CardRulesPredicates.Presets.IS_MULTICOLOR));
                     } else {
                         colorFilters.add(CardRulesPredicates.isMonoColor(color));
                     }
@@ -411,7 +407,7 @@ public final class BoosterUtils {
                 do {
                     if (color2 != null) {
                         Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard::getRules);
-                        card = Aggregates.random(Iterables.filter(source, Predicates.and(filter, color2c)));
+                        card = Aggregates.random(Iterables.filter(source, filter.and(color2c)));
                     }
                 } while (card == null && colorMisses++ < 10);
             }

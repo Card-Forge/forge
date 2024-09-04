@@ -24,7 +24,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 
@@ -134,8 +133,8 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
             // No optimal creature was found above, so try to broaden the choice.
             if (!Iterables.isEmpty(options)) {
-                List<Card> oppCreatures = CardLists.filter(options, Predicates.and(CardPredicates.Presets.CREATURES,
-                        CardPredicates.isOwner(aiChoser).negate()));
+                List<Card> oppCreatures = CardLists.filter(options,
+                        CardPredicates.Presets.CREATURES.and(CardPredicates.isOwner(aiChoser).negate()));
                 List<Card> aiNonCreatures = CardLists.filter(options,
                         CardPredicates.Presets.CREATURES.negate()
                                 .and(CardPredicates.Presets.PERMANENTS)

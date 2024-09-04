@@ -122,7 +122,7 @@ public class BooleanExpression {
                 operators.pop();
                 right = operands.pop();
                 left = operands.pop();
-                operands.push(Predicates.and(left, right));
+                operands.push(left.and(right));
                 break;
             case OR:
                 operators.pop();

@@ -1581,7 +1581,7 @@ public class AdvancedSearch {
                     pred = predPiece;
                 }
                 else if (operator == Operator.AND) {
-                    pred = Predicates.and(pred, predPiece);
+                    pred = pred.and(predPiece);
                 }
                 else if (operator == Operator.OR) {
                     pred = Predicates.or(pred, predPiece);

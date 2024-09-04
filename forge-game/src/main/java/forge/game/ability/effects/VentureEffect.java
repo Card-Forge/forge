@@ -46,8 +46,8 @@ public class VentureEffect  extends SpellAbilityEffect {
         if (sa.hasParam("Dungeon")) {
             dungeonCards = StaticData.instance().getVariantCards()
                     .getAllCards(Predicates.compose(
-                            Predicates.and(CardRulesPredicates.Presets.IS_DUNGEON,
-                                    CardRulesPredicates.subType(StringOp.EQUALS, sa.getParam("Dungeon"))),
+                            CardRulesPredicates.Presets.IS_DUNGEON
+                                    .and(CardRulesPredicates.subType(StringOp.EQUALS, sa.getParam("Dungeon"))),
                             PaperCard::getRules));
         } else {
             // Create a new dungeon card chosen by player in command zone.

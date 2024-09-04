@@ -7,7 +7,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class MeldAi extends SpellAbilityAi {
     @Override
@@ -19,11 +18,11 @@ public class MeldAi extends SpellAbilityAi {
         if (cardsOTB.isEmpty()) {
             return false;
         }
-        
-        boolean hasPrimaryMeld = Iterables.any(cardsOTB, Predicates.and(
-                CardPredicates.nameEquals(primaryMeld), CardPredicates.isOwner(aiPlayer)));
-        boolean hasSecondaryMeld = Iterables.any(cardsOTB, Predicates.and(
-                CardPredicates.nameEquals(secondaryMeld), CardPredicates.isOwner(aiPlayer)));
+
+        boolean hasPrimaryMeld = Iterables.any(cardsOTB,
+                CardPredicates.nameEquals(primaryMeld).and(CardPredicates.isOwner(aiPlayer)));
+        boolean hasSecondaryMeld = Iterables.any(cardsOTB,
+                CardPredicates.nameEquals(secondaryMeld).and(CardPredicates.isOwner(aiPlayer)));
         
         return hasPrimaryMeld && hasSecondaryMeld && sa.getHostCard().getName().equals(primaryMeld);
     }

@@ -314,7 +314,7 @@ public class CardLists {
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return new CardCollection(Iterables.filter(cardList, Predicates.and(f1, f2)));
+        return new CardCollection(Iterables.filter(cardList, f1.and(f2)));
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {
@@ -337,7 +337,7 @@ public class CardLists {
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return Lists.newArrayList(Iterables.filter(cardList, Predicates.and(f1, f2)));
+        return Lists.newArrayList(Iterables.filter(cardList, f1.and(f2)));
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {

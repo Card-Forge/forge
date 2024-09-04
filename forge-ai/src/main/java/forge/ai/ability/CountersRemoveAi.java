@@ -26,7 +26,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class CountersRemoveAi extends SpellAbilityAi {
 
@@ -183,7 +182,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
 
             CardCollection planeswalkerList = CardLists.filter(list,
-                    Predicates.and(CardPredicates.Presets.PLANESWALKERS, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                    CardPredicates.Presets.PLANESWALKERS.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
                     CardPredicates.hasLessCounter(CounterEnumType.LOYALTY, amount));
 
             if (!planeswalkerList.isEmpty()) {
@@ -223,7 +222,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
                 // remove P1P1 counters from opposing creatures
                 CardCollection oppP1P1List = CardLists.filter(list,
-                        Predicates.and(CardPredicates.Presets.CREATURES, CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                        CardPredicates.Presets.CREATURES.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
                         CardPredicates.hasCounter(CounterEnumType.P1P1));
                 if (!oppP1P1List.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(oppP1P1List));

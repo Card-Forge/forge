@@ -800,7 +800,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             };
         } else  // filter candidates based on requested artIndex
             cardQueryFilter = card -> card.getArtIndex() == cr.artIndex;
-        cardQueryFilter = Predicates.and(cardQueryFilter, filter);
+        cardQueryFilter = cardQueryFilter.and(filter);
         cards = getAllCards(cr.cardName, cardQueryFilter);
         // Note: No need to check whether "cards" is empty; the next for loop will validate condition at L699
         if (cards.size() == 1)  // if only one candidate, there much else we should do
@@ -879,7 +879,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return 0;
         Predicate<PaperCard> predicate = card -> card.getEdition().equalsIgnoreCase(setCode);
         if(functionalVariantName != null && !functionalVariantName.equals(IPaperCard.NO_FUNCTIONAL_VARIANT)) {
-            predicate = Predicates.and(predicate, card -> functionalVariantName.equals(card.getFunctionalVariant()));
+            predicate = predicate.and(card -> functionalVariantName.equals(card.getFunctionalVariant()));
         }
         Collection<PaperCard> cardsInSet = getAllCards(cardName, predicate);
         return cardsInSet.size();

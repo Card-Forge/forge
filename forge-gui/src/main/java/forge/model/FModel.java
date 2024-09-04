@@ -335,9 +335,12 @@ public final class FModel {
     }
 
     public static ItemPool<PaperCard> getBrawlCommander() {
-        if (brawlCommander == null)
-            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(Predicates.and(
-                    FModel.getFormats().get("Brawl").getFilterPrinted(), Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard::getRules))), PaperCard.class);
+        if (brawlCommander == null) {
+            return ItemPool.createFrom(getMagicDb().getCommonCards().getAllCardsNoAlt(
+                    FModel.getFormats().get("Brawl").getFilterPrinted()
+                            .and(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER, PaperCard::getRules))
+            ), PaperCard.class);
+        }
         return brawlCommander;
     }
 

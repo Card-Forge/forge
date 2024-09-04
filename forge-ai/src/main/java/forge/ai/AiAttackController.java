@@ -613,7 +613,7 @@ public class AiAttackController {
             // and do not predict the blocker limit (which is safer)
             if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.Presets.UNTAPPED)) {
                 maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
-                        Predicates.and(CardPredicates.isType("Vehicle"), CardPredicates.Presets.UNTAPPED));
+                        CardPredicates.isType("Vehicle").and(CardPredicates.Presets.UNTAPPED));
             }
         }
 

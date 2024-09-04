@@ -609,7 +609,7 @@ public class BoosterGenerator {
         String mainCode = operators.isEmpty() ? null : operators.get(0).trim();
 
         if (null == mainCode || mainCode.equalsIgnoreCase(BoosterSlots.ANY)) { // no restriction on rarity
-            Predicate<PaperCard> predicate = Predicates.and(setPred, extraPred);
+            Predicate<PaperCard> predicate = setPred.and(extraPred);
             ps.addAll(Iterables.filter(src, predicate));
 
         } else if (mainCode.equalsIgnoreCase(BoosterSlots.UNCOMMON_RARE)) { // for sets like ARN, where U1 cards are considered rare and U3 are uncommon

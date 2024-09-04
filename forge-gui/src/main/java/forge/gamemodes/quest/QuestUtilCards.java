@@ -207,7 +207,7 @@ public final class QuestUtilCards {
      * @return the composite predicate.
      */
     public Predicate<PaperCard> applyFormatFilter(Predicate<PaperCard> source) {
-       return questController.getFormat() == null ? source : Predicates.and(source, questController.getFormat().getFilterPrinted());
+        return questController.getFormat() == null ? source : source.and(questController.getFormat().getFilterPrinted());
     }
 
     /**
@@ -636,7 +636,7 @@ public final class QuestUtilCards {
     private void generateTournamentsInShop(final int count) {
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
         if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
+            formatFilter = formatFilter.and(isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack::fromSet), count));
@@ -651,7 +651,7 @@ public final class QuestUtilCards {
     private void generateFatPacksInShop(final int count) {
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
         if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
+            formatFilter = formatFilter.and(isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
         questAssets.getShopList().addAllOfTypeFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack::fromSet), count));
@@ -665,7 +665,7 @@ public final class QuestUtilCards {
 
         Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_BOOSTER_BOX;
         if (questController.getFormat() != null) {
-            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(questController.getFormat()));
+            formatFilter = formatFilter.and(isLegalInQuestFormat(questController.getFormat()));
         }
         Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
 

@@ -319,8 +319,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         //Add remaining non-land colour matching cards to sideboard
         final CardPool cp = result.getOrCreate(DeckSection.Sideboard);
         Iterable<PaperCard> potentialSideboard = Iterables.filter(aiPlayables,
-                Predicates.and(Predicates.compose(hasColor, PaperCard::getRules),
-                        Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules)));
+                Predicates.compose(hasColor, PaperCard::getRules)
+                        .and(Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules)));
         int i=0;
         while(i<15 && potentialSideboard.iterator().hasNext()){
             PaperCard sbCard = potentialSideboard.iterator().next();
@@ -476,7 +476,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
                 }
             }
 
-            hasColor = Predicates.and(CardRulesPredicates.Presets.IS_NON_LAND,Predicates.or(new MatchColorIdentity(colors),
+            hasColor = CardRulesPredicates.Presets.IS_NON_LAND.and(Predicates.or(new MatchColorIdentity(colors),
                     DeckGeneratorBase.COLORLESS_CARDS));
             final Iterable<PaperCard> threeColorList = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, PaperCard::getRules));
@@ -521,8 +521,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected boolean setBasicLandPool(String edition){
         Predicate<PaperCard> isSetBasicLand;
         if (edition !=null){
-            isSetBasicLand = Predicates.and(IPaperCard.Predicates.printedInSet(edition),
-                    Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
+            isSetBasicLand = IPaperCard.Predicates.printedInSet(edition)
+                    .and(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
         }else{
             isSetBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules);
         }

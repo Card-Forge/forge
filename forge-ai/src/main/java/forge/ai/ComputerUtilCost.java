@@ -23,7 +23,6 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.ObjectUtils;
@@ -924,7 +923,7 @@ public class ComputerUtilCost {
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
             final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, Predicates.and(CardPredicates.isController(ai), targets::contains).negate());
+            choices = Iterables.filter(choices, CardPredicates.isController(ai).and(targets::contains).negate());
         }
         return new CardCollection(choices);
     }

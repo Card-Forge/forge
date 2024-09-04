@@ -45,7 +45,6 @@ import forge.game.staticability.StaticAbilityCantPhase;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 /**
  * <p>
@@ -114,7 +113,7 @@ public class Untap extends Phase {
      */
     private void doUntap() {
         final Player player = game.getPhaseHandler().getPlayerTurn();
-        final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, CANUNTAP);
+        final Predicate<Card> tappedCanUntap = Presets.TAPPED.and(CANUNTAP);
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));

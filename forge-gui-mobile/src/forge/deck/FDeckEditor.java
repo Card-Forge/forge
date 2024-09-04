@@ -93,7 +93,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 }
             }
             else if (additionalFilter != null) {
-                filter = Predicates.and(filter, additionalFilter);
+                filter = filter.and(additionalFilter);
             }
 
             ItemPool<PaperCard> filteredPool = new ItemPool<>(PaperCard.class);

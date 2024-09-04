@@ -20,7 +20,6 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
@@ -319,7 +318,7 @@ public class AdventureEventData implements Serializable {
     private CardBlock pickWeightedCardBlock() {
         CardEdition.Collection editions = FModel.getMagicDb().getEditions();
         Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
-        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, selectSetPool());
+        Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(selectSetPool());
         List<CardEdition> allEditions = new ArrayList<>();
         StreamSupport.stream(editions.spliterator(), false).filter(filter).filter(CardEdition::hasBoosterTemplate).collect(Collectors.toList()).iterator().forEachRemaining(allEditions::add);
 

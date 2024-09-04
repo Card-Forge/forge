@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.util.Iterables;
-import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class StaticAbilityPanharmonicon {
@@ -178,10 +177,10 @@ public class StaticAbilityPanharmonicon {
                 Map<Card, Integer> dmgMap = (Map<Card, Integer>) runParams.get(AbilityKey.DamageMap);
                 // 1. check it's valid cause for static
                 // 2. and it must also be valid for trigger event
-                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource"),
-                        GameObjectPredicates.matchesValidParam(trigger, "ValidSource")
-                        ))) {
+                if (!Iterables.any(dmgMap.keySet(),
+                        GameObjectPredicates.matchesValidParam(stAb, "ValidSource")
+                        .and(GameObjectPredicates.matchesValidParam(trigger, "ValidSource"))
+                        )) {
                     return false;
                 }
                 // DamageAmount$ can be ignored for now (its usage doesn't interact with ValidSource from either)
@@ -191,10 +190,9 @@ public class StaticAbilityPanharmonicon {
                     return false;
                 }
                 Map<GameEntity, Integer> dmgMap = (Map<GameEntity, Integer>) runParams.get(AbilityKey.DamageMap);
-                if (!Iterables.any(dmgMap.keySet(), Predicates.and(
-                        GameObjectPredicates.matchesValidParam(stAb, "ValidTarget"),
-                        GameObjectPredicates.matchesValidParam(trigger, "ValidTarget")
-                        ))) {
+                if (!Iterables.any(dmgMap.keySet(), GameObjectPredicates.matchesValidParam(stAb, "ValidTarget")
+                        .and(GameObjectPredicates.matchesValidParam(trigger, "ValidTarget"))
+                        )) {
                     return false;
                 }
             }

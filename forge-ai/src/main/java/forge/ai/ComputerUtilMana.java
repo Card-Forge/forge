@@ -43,7 +43,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -314,7 +313,7 @@ public class ComputerUtilMana {
                 // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
                 // be tapped to pay its own cost if there's another untapped land like that available
                 if (ma.getHostCard().equals(sa.getTargetCard())) {
-                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)) > 1) {
+                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(ma.getHostCard().getName()).and(CardPredicates.Presets.UNTAPPED)) > 1) {
                         continue;
                     }
                 }
