@@ -110,6 +110,9 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
         if (getCardState() != null && getCardStateName().equals(CardStateName.RightSplit)) {
             return getCardState();
         }
+        if (getRootAbility().getSplicedCards() != null && getRootAbility().getSplicedCards().contains(getCardState().getCard())) {
+            return getCardState();
+        }
         return super.getSVarFallback();
     }
 
