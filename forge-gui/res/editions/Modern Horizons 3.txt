@@ -528,6 +528,37 @@ Replace=.042F fromSheet("MH3 alternate frame")
 520 C Tranquil Landscape @Randy Gallegos
 521 C Twisted Landscape @Piotr Dura
 
+[alternate frame]
+435 R Bloodstained Mire @Bruce Brenneise
+436 R Flooded Strand @Alexander Forssberg
+437 U Nesting Grounds @Yeong-Hao Han
+438 R Polluted Delta @Chris Ostrowski
+439 U Snow-Covered Wastes @Mark Poole
+440 R Windswept Heath @Alexander Forssberg
+441 R Wooded Foothills @Chris Ostrowski
+473 M Emrakul, the World Anew @Brent Hollowell
+474 M Herigast, Erupting Nullkite @Lucas Graciano
+475 M Kozilek, the Broken Reality @Brent Hollowell
+476 M Ulamog, the Defiler @Chase Stone
+477 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
+478 R Phelia, Exuberant Shepherd @Rudy Siswanto
+479 R K'rrik, Son of Yawgmoth @Chase Stone
+480 R Shilgengar, Sire of Famine @Chris Rallis
+481 M Ashling, Flame Dancer @Michal Ivan
+482 R Laelia, the Blade Reforged @Wisnu Tan
+483 M Eladamri, Korvecdal @Zoltan Boros
+484 R Six @Andrew Mar
+485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
+486 M Breya, Etherium Shaper @Tiffany Turrill
+487 R Genku, Future Shaper @Chuck Lukacs
+488 R Imskir Iron-Eater @Xavier Ribeiro
+489 M Kaalia of the Vast @Justyna Dura
+490 R Kudo, King Among Bears @Ekaterina Burmak
+491 R Nadu, Winged Wisdom @Daren Bader
+492 R The Necrobloom @Igor Krstic
+493 M Phlage, Titan of Fire's Fury @Lucas Graciano
+494 R Rosheen, Roaring Prophet @Fang Xinyu
+
 [extended art]
 447 R Argent Dais @Carlos Palma Cruchaga
 448 R Guide of Souls @Ryan Valle
@@ -615,37 +646,6 @@ A122 C A-Galvanic Discharge @Zoltan Boros
 1 Grief|SPG
 1 Fury|SPG
 1 Endurance|SPG
-
-[alternate frame]
-435 R Bloodstained Mire @Bruce Brenneise
-436 R Flooded Strand @Alexander Forssberg
-437 U Nesting Grounds @Yeong-Hao Han
-438 R Polluted Delta @Chris Ostrowski
-439 U Snow-Covered Wastes @Mark Poole
-440 R Windswept Heath @Alexander Forssberg
-441 R Wooded Foothills @Chris Ostrowski
-473 M Emrakul, the World Anew @Brent Hollowell
-474 M Herigast, Erupting Nullkite @Lucas Graciano
-475 M Kozilek, the Broken Reality @Brent Hollowell
-476 M Ulamog, the Defiler @Chase Stone
-477 R Pearl-Ear, Imperial Advisor @Fajareka Setiawan
-478 R Phelia, Exuberant Shepherd @Rudy Siswanto
-479 R K'rrik, Son of Yawgmoth @Chase Stone
-480 R Shilgengar, Sire of Famine @Chris Rallis
-481 M Ashling, Flame Dancer @Michal Ivan
-482 R Laelia, the Blade Reforged @Wisnu Tan
-483 M Eladamri, Korvecdal @Zoltan Boros
-484 R Six @Andrew Mar
-485 M Arna Kennerüd, Skycaptain @Cristi Balanescu
-486 M Breya, Etherium Shaper @Tiffany Turrill
-487 R Genku, Future Shaper @Chuck Lukacs
-488 R Imskir Iron-Eater @Xavier Ribeiro
-489 M Kaalia of the Vast @Justyna Dura
-490 R Kudo, King Among Bears @Ekaterina Burmak
-491 R Nadu, Winged Wisdom @Daren Bader
-492 R The Necrobloom @Igor Krstic
-493 M Phlage, Titan of Fire's Fury @Lucas Graciano
-494 R Rosheen, Roaring Prophet @Fang Xinyu
 
 [tokens]
 b_0_0_phyrexian_germ
