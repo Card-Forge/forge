@@ -770,7 +770,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, se.getTimestamp(), stAb.getId(), true);
+                        removeAllAbilities, se.getTimestamp(), stAb, true);
             }
 
             // add HIDDEN keywords

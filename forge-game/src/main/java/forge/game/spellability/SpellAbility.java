@@ -701,7 +701,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         mana.getSourceCard().getController(), mana.getSourceCard(), null)) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, timestamp, 0);
+                    host.addChangedCardKeywords(kws, null, false, timestamp, null);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
@@ -2586,7 +2586,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean hasOptionalKeywordAmount(KeywordInterface kw) {
-        return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()));
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), staticId));
     }
     public boolean hasOptionalKeywordAmount(Keyword kw) {
         return this.optionalKeywordAmount.containsRow(kw);
@@ -2596,13 +2597,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public int getOptionalKeywordAmount(KeywordInterface kw) {
-        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId())), 0);
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), staticId)), 0);
     }
     public int getOptionalKeywordAmount(Keyword kw) {
         return this.optionalKeywordAmount.row(kw).values().stream().mapToInt(i->i).sum();
     }
     public void setOptionalKeywordAmount(KeywordInterface kw, int amount) {
-        this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()), amount);
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), staticId), amount);
     }
     public void clearOptionalKeywordAmount() {
         optionalKeywordAmount.clear();

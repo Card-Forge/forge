@@ -25,7 +25,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
     private Keyword keyword;
     private String original;
-    private long staticId = 0;
+    private StaticAbility st = null;
     private long idx = -1;
 
     private List<Trigger> triggers = Lists.newArrayList();
@@ -366,12 +366,12 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             sa.setIntrinsic(value);
         }
     }
-    
-    public long getStaticId() {
-        return this.staticId;
+
+    public StaticAbility getStatic() {
+        return this.st;
     }
-    public void setStaticId(long v) {
-        this.staticId = v;
+    public void setStatic(StaticAbility st) {
+        this.st = st;
     }
 
     public long getIdx() {

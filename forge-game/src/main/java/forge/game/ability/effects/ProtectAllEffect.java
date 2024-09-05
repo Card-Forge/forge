@@ -86,7 +86,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
             CardCollectionView list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), host, sa);
 
             for (final Card tgtC : list) {
-                tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
+                tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, null, true);
 
                 if (!"Permanent".equals(sa.getParam("Duration"))) {
                     // If not Permanent, remove protection at EOT

@@ -1696,7 +1696,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!Keyword.smartValueOf(counterType.toString().split(":")[0]).isMultipleRedundant()) {
             num = getCounters(counterType);
         }
-        addChangedCardKeywords(Collections.nCopies(num, counterType.toString()), null, false, timestamp, 0, updateView);
+        addChangedCardKeywords(Collections.nCopies(num, counterType.toString()), null, false, timestamp, null, updateView);
         return true;
     }
 
@@ -4657,7 +4657,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         } else if (category.equals("Keywords")) {
             boolean removeAll = p.containsKey("RemoveAll") && (boolean) p.get("RemoveAll") == true;
             addChangedCardKeywords((List<String>) p.get("AddKeywords"), Lists.newArrayList(), removeAll,
-                (long) p.get("Timestamp"), (long) 0);
+                (long) p.get("Timestamp"), null);
         } else if (category.equals("Types")) {
             addChangedCardTypes((CardType) p.get("AddTypes"), (CardType) p.get("RemoveTypes"),
                 false, (Set<RemoveType>) p.get("RemoveXTypes"),
@@ -4963,7 +4963,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         KeywordInterface result = storedKeywordByText.get(triple);
         if (result == null) {
             result = ki.copy(this, false);
-            result.setStaticId(stAb.getId());
+            result.setStatic(stAb);
             result.setIdx(idx);
             result.setIntrinsic(true);
             storedKeywordByText.put(triple, result);
@@ -5086,11 +5086,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
-            final boolean removeAllKeywords, final long timestamp, final long staticId) {
-        addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, staticId, true);
+            final boolean removeAllKeywords, final long timestamp, final StaticAbility st) {
+        addChangedCardKeywords(keywords, removeKeywords, removeAllKeywords, timestamp, st, true);
     }
     public final void addChangedCardKeywords(final List<String> keywords, final List<String> removeKeywords,
-            final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
+            final boolean removeAllKeywords, final long timestamp, final StaticAbility st, final boolean updateView) {
         List<KeywordInterface> kws = Lists.newArrayList();
         if (keywords != null) {
             long idx = 1;
@@ -5104,14 +5104,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     }
                 }
                 if (canHave) {
-                    kws.add(getKeywordForStaticAbility(kw, staticId, idx));
+                    kws.add(getKeywordForStaticAbility(kw, st, idx));
                 }
                 idx++;
             }
         }
 
         final KeywordsChange newCks = new KeywordsChange(kws, removeKeywords, removeAllKeywords);
-        changedCardKeywords.put(timestamp, staticId, newCks);
+        changedCardKeywords.put(timestamp, st == null ? 0l : st.getId(), newCks);
 
         if (updateView) {
             updateKeywords();
@@ -5120,12 +5120,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final KeywordInterface getKeywordForStaticAbility(String kw, final long staticId, final long idx) {
+    public final KeywordInterface getKeywordForStaticAbility(String kw, final StaticAbility st, final long idx) {
         KeywordInterface result;
+        long staticId = st == null ? 0 : st.getId();
         Triple<String, Long, Long> triple = Triple.of(kw, staticId, idx);
         if (staticId < 1 || !storedKeywords.containsKey(triple)) {
             result = Keyword.getInstance(kw);
-            result.setStaticId(staticId);
+            result.setStatic(st);
             result.setIdx(idx);
             result.createTraits(this, false);
             if (staticId > 0) {
@@ -5138,8 +5139,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
-        if (kw.getStaticId() > 0) {
-            storedKeywords.put(Triple.of(kw.getOriginal(), kw.getStaticId(), kw.getIdx()), kw);
+        if (kw.getStatic() != null) {
+            storedKeywords.put(Triple.of(kw.getOriginal(), (long)kw.getStatic().getId(), kw.getIdx()), kw);
         }
     }
 
@@ -5184,8 +5185,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final void addChangedCardKeywordsInternal(
         final Collection<KeywordInterface> keywords, final Collection<KeywordInterface> removeKeywords,
         final boolean removeAllKeywords,
-        final long timestamp, final long staticId, final boolean updateView) {
+        final long timestamp, final StaticAbility st, final boolean updateView) {
         final KeywordsChange newCks = new KeywordsChange(keywords, removeKeywords, removeAllKeywords);
+        long staticId = st == null ? 0 : st.getId();
         changedCardKeywords.put(timestamp, staticId, newCks);
 
         if (updateView) {
@@ -6568,7 +6570,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             suspectedTimestamp = getGame().getNextTimestamp();
 
             // use this for CantHaveKeyword
-            addChangedCardKeywords(ImmutableList.of("Menace"), ImmutableList.<String>of(), false, suspectedTimestamp, 0, true);
+            addChangedCardKeywords(ImmutableList.of("Menace"), ImmutableList.<String>of(), false, suspectedTimestamp, null, true);
 
             if (suspectedStatic == null) {
                 String effect = "Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block.";
@@ -6719,7 +6721,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 new CardType(Collections.singletonList("Creature"), true),
                 false, EnumSet.of(RemoveType.EnchantmentTypes), bestowTimestamp, 0, updateView, false);
         addChangedCardKeywords(Collections.singletonList("Enchant creature"), Lists.newArrayList(),
-                false, bestowTimestamp, 0, updateView);
+                false, bestowTimestamp, null, updateView);
     }
 
     public final void unanimateBestow() {
