@@ -1,0 +1,9 @@
+Name:Wary Watchdog
+ManaCost:1 G
+Types:Creature Dog
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When CARDNAME enters or dies, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSurveil | Secondary$ True | TriggerDescription$ When CARDNAME enters or dies, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When Wary Watchdog enters or dies, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
