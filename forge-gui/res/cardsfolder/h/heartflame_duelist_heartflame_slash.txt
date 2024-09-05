@@ -10,7 +10,7 @@ Oracle:Instant and sorcery spells you control have lifelink.
 
 ALTERNATE
 
-Name:Lagoon Breach
+Name:Heartflame Slash
 ManaCost:2 R
 Types:Instant Adventure
 A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to any target. (Then exile this card. You may cast the creature later from exile.)
