@@ -1,0 +1,9 @@
+Name:Overlord of the Boilerbilges
+ManaCost:4 R R
+Types:Enchantment Creature Avatar Horror
+PT:5/5
+K:Impending:4:2 R R
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME enters or attacks, it deals 4 damage to any target.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME enters or attacks, it deals 4 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 4
+Oracle:Impending 4—{2}{R}{R} (If you cast this spell for its impending cost, it enters with four time counters and isn't a creature until the last is removed. At the beginning of your end step, remove a time counter from it.)\nWhenever Overlord of the Boilerbilges enters or attacks, it deals 4 damage to any target.
