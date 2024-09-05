@@ -289,7 +289,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         activeScheme = getZone(ZoneType.SchemeDeck).get(0);
         game.getAction().moveToCommand(activeScheme, cause);
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, activeScheme);

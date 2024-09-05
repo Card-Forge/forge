@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -29,22 +28,16 @@ public class AbandonEffect extends SpellAbilityEffect {
             return;
         }
 
-        final Game game = controller.getGame();
-
         if (sa.hasParam("RememberAbandoned")) {
             source.addRemembered(source);
         }
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         controller.getZone(ZoneType.Command).remove(source);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
         controller.getZone(ZoneType.SchemeDeck).add(source);
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Scheme, source);
-        game.getTriggerHandler().runTrigger(TriggerType.Abandoned, runParams, false);
+        controller.getGame().getTriggerHandler().runTrigger(TriggerType.Abandoned, runParams, false);
     }
 
 }
