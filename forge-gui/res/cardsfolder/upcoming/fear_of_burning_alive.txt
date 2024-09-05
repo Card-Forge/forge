@@ -1,0 +1,10 @@
+Name:Fear of Burning Alive
+ManaCost:4 R R
+Types:Enchantment Creature Nightmare
+PT:4/4
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME enters, it deals 4 damage to each opponent.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 4
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Opponent | CombatDamage$ False | TriggerZones$ Battlefield | Delirium$ True | Execute$ TrigDmg | TriggerDescription$ Delirium — Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, CARDNAME deals that amount of damage to target creature that player controls.
+SVar:TrigDmg:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature that player controls | TargetsWithDefinedController$ TriggeredTarget | NumDmg$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:When Fear of Burning Alive enters, it deals 4 damage to each opponent.\nDelirium — Whenever a source you control deals noncombat damage to an opponent, if there are four or more card types among cards in your graveyard, Fear of Burning Alive deals that amount of damage to target creature that player controls.
