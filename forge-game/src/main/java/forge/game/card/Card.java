@@ -2429,9 +2429,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         String pip = mc.getFirstPhyrexianPip();
                         String[] parts = pip.substring(1, pip.length() - 1).split("/");
                         final StringBuilder rem = new StringBuilder();
-                        rem.append(pip).append(" can be paid with {").append(parts[1]).append("}");
+                        rem.append(pip).append(" can be paid with {").append(parts[0]).append("}");
                         if (parts.length > 2) {
-                            rem.append(", {").append(parts[2]).append("},");
+                            rem.append(", {").append(parts[1]).append("},");
                         }
                         rem.append(" or 2 life. ");
                         if (mc.getPhyrexianCount() > 1) {

@@ -2,6 +2,8 @@ package forge.game.ability;
 
 import com.google.common.base.Functions;
 import com.google.common.collect.*;
+import com.google.common.math.IntMath;
+
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -1628,6 +1630,14 @@ public class AbilityUtils {
                 final int lhs = calculateAmount(c, compString[1], ctb);
                 final int rhs =  calculateAmount(c, compString[2].substring(2), ctb);
                 boolean v = Expressions.compare(lhs, compString[2], rhs);
+                return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
+            }
+
+            // Count$IsPrime <SVar>.<True>.<False>
+            if (sq[0].startsWith("IsPrime")) {
+                final String[] compString = sq[0].split(" ");
+                final int lhs = calculateAmount(c, compString[1], ctb);
+                boolean v = IntMath.isPrime(lhs);
                 return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
             }
 

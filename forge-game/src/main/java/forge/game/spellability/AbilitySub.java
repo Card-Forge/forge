@@ -19,7 +19,6 @@ package forge.game.spellability;
 
 import java.util.Map;
 
-import forge.card.CardStateName;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
@@ -107,7 +106,8 @@ public final class AbilitySub extends SpellAbility implements java.io.Serializab
 
     @Override
     protected IHasSVars getSVarFallback() {
-        if (getCardState() != null && getCardStateName().equals(CardStateName.RightSplit)) {
+        // fused or spliced
+        if (getRootAbility().getCardState() != getCardState()) {
             return getCardState();
         }
         return super.getSVarFallback();
