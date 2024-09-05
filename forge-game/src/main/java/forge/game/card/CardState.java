@@ -45,6 +45,7 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.ITranslatable;
@@ -375,6 +376,15 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
     public final SpellAbility getFirstSpellAbility() {
         return Iterables.getFirst(getNonManaAbilities(), null);
+    }
+
+    public final SpellAbility getFirstSpellAbilityWithFallback() {
+        SpellAbility sa = getFirstSpellAbility();
+        if (sa != null || getTypeWithChanges().isLand()) {
+            return sa;
+        }
+        // this happens if it's transformed backside (e.g. Disturbed)
+        return new SpellPermanent(getCard(), this);
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {
