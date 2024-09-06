@@ -48,6 +48,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -1002,12 +1003,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         }
 
         if (useFilter && this.wantUnique) {
-            final Predicate<Entry<T, Integer>> filterForPool = Predicates.compose(this.filterPredicate, Entry::getKey);
+            final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
             final Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = Predicates.compose(this.filterPredicate, Entry::getKey);
+            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());;
             this.model.addItems(Iterables.filter(this.pool, pred));
         }
         else if (this.wantUnique) {

@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
@@ -1151,7 +1152,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("DifferentPower")) {
                         for (Card c : chosenCards) {
-                            fetchList = CardLists.filter(fetchList, Predicates.compose(Predicate.isEqual(c.getNetPower()), Card::getNetPower).negate());
+                            int chosenPower = c.getNetPower();
+                            fetchList = CardLists.filter(fetchList, x -> x.getNetPower() != chosenPower);
                         }
                     }
                     if (sa.hasParam("ShareLandType")) {

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Lists;
@@ -19,7 +20,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class PlayLandVariantEffect extends SpellAbilityEffect {
 
@@ -48,7 +48,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
             }
         }
 
-        final Predicate<PaperCard> cp = Predicates.compose(landNames::contains, PaperCard::getName);
+        final Predicate<PaperCard> cp = x -> landNames.contains(x.getName());
         cards = Lists.newArrayList(Iterables.filter(cards, cp));
         // get a random basic land
         Card random;
