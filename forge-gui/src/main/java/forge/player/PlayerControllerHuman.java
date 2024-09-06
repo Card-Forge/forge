@@ -1255,7 +1255,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                  final List<String> invalidTypes, final boolean isOptional) {
         final List<String> types = Lists.newArrayList(validTypes);
         if (invalidTypes != null && !invalidTypes.isEmpty()) {
-            Iterables.removeAll(types, invalidTypes);
+            types.removeAll(invalidTypes);
         }
         if (kindOfType.equals("Creature")) {
             sortCreatureTypes(types);

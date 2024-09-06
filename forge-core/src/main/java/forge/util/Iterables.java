@@ -83,10 +83,6 @@ public class Iterables {
         return iterable.removeIf(test);
     }
 
-    public static boolean removeAll(Collection<?> removeFrom, Collection<?> toRemove) {
-        return removeFrom.removeAll(toRemove);
-    }
-
     public static int size(Collection<?> collection) {
         return collection.size();
     }
