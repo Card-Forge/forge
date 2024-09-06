@@ -151,7 +151,7 @@ public class ReplacementHandler {
                 return true;
             }
 
-        });
+        }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (checkAgain) {
             if (affectedLKI != null && affectedCard != null) {
