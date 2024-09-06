@@ -668,13 +668,12 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
-                toAdd = Predicates.compose(
+                toAdd = PaperCardPredicates.fromRules(
                         CardRulesPredicates.splitType(CardSplitType.Transform)
                                 .or(CardRulesPredicates.splitType(CardSplitType.Meld))
                                 .or(CardRulesPredicates.splitType(CardSplitType.Modal)
-                            ),
-                        PaperCard::getRules);
-            } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules);
+                            ));
+            } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND);
             } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = PaperCardPredicates.IS_BASIC_LAND;
             } else if (operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = PaperCardPredicates.IS_SPECIAL;
             } else if (operator.equalsIgnoreCase(BoosterSlots.SPECIAL)) {       toAdd = PaperCardPredicates.IS_SPECIAL;

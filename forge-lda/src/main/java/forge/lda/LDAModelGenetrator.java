@@ -11,6 +11,7 @@ import forge.deck.io.Archetype;
 import forge.deck.io.CardThemedLDAIO;
 import forge.deck.io.DeckStorage;
 import forge.gui.GuiBase;
+import forge.item.PaperCardPredicates;
 import forge.lda.dataset.Dataset;
 import forge.lda.lda.LDA;
 import forge.game.GameFormat;
@@ -290,8 +291,8 @@ public final class LDAModelGenetrator {
                 true);
 
         //get all cards
-        final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
-                , Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(),
+                PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -305,9 +306,9 @@ public final class LDAModelGenetrator {
         }
 
         //filter to just legal commanders
-        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList,Predicates.compose(
-                DeckFormat.Commander::isLegalCommander, PaperCard::getRules
-        )));
+        List<PaperCard> legends = Lists.newArrayList(Iterables.filter(cardList, PaperCardPredicates.fromRules(
+                DeckFormat.Commander::isLegalCommander))
+        );
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){
@@ -350,7 +351,7 @@ public final class LDAModelGenetrator {
     public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
+                PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))){
             if (!pairCard.getName().equals(legend.getName())){
                 try {
                     int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];

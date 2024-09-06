@@ -7,6 +7,7 @@ import forge.deck.CardPool;
 import forge.deck.DeckRecognizer;
 import forge.deck.DeckSection;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.SItemManagerUtil;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.util.ItemPool;
@@ -100,7 +101,7 @@ public class CStatisticsImporter {
     }
 
     private void setLabelValue(final JLabel label, final ItemPool<PaperCard> deck, final Predicate<CardRules> predicate, final int total) {
-        final int tmp = deck.countAll(Predicates.compose(predicate, PaperCard::getRules));
+        final int tmp = deck.countAll(PaperCardPredicates.fromRules(predicate));
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 

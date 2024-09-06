@@ -10,6 +10,7 @@ import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.ItemPool;
 import forge.util.Iterables;
@@ -41,7 +42,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), format.isLegalCommanderPredicate()
-                .and(Predicates.compose(canPlay, PaperCard::getRules)));
+                .and(PaperCardPredicates.fromRules(canPlay)));
         final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));
@@ -65,7 +66,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), format.isLegalCardPredicate()
-                .and(Predicates.compose(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER.and(canPlay), PaperCard::getRules)));
+                .and(PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER.and(canPlay))));
         final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));

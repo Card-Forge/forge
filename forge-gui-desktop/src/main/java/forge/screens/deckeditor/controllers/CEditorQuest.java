@@ -44,6 +44,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
@@ -346,7 +347,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.CAN_BE_COMMANDER, PaperCard::getRules);
+        Predicate<PaperCard> commanderPredicate = PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_COMMANDER);
         return getRemainingCardPool().getFilteredPool(commanderPredicate);
     }
 

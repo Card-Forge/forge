@@ -16,6 +16,7 @@ import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -70,7 +71,7 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        final Predicate<PaperCard> notBasicLand = Predicates.compose(CardRulesPredicates.NOT_BASIC_LAND, PaperCard::getRules);
+        final Predicate<PaperCard> notBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND);
         final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 

@@ -12,6 +12,7 @@ import forge.deck.DeckBase;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VStatistics;
@@ -51,7 +52,7 @@ public enum CStatistics implements ICDoc {
     }
 
     private void setLabelValue(final JLabel label, final ItemPool<PaperCard> deck, final Predicate<CardRules> predicate, final int total) {
-        final int tmp = deck.countAll(Predicates.compose(predicate, PaperCard::getRules));
+        final int tmp = deck.countAll(PaperCardPredicates.fromRules(predicate));
         label.setText(tmp + " (" + calculatePercentage(tmp, total) + "%)");
     }
 

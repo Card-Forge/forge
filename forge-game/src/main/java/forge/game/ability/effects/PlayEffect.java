@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
+import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
@@ -121,11 +122,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             } else if (valid.equalsIgnoreCase("sorcery")) {
                 cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_SORCERY, PaperCard::getRules);
+                final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             } else if (valid.equalsIgnoreCase("instant")) {
                 cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_INSTANT, PaperCard::getRules);
+                final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {

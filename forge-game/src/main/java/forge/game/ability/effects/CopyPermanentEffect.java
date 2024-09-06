@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import forge.card.GamePieceType;
+import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
@@ -156,11 +157,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard::getRules);
+                    Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_EQUIPMENT, PaperCard::getRules);
+                    Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_EQUIPMENT);
                     cards = Lists.newArrayList(Iterables.filter(cards, cpp));
                 }
                 if (sa.hasParam("RandomCopied")) {
@@ -193,7 +194,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     }
                 }
 
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
+                Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.name(StringOp.EQUALS, name));
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
                 if (!cards.isEmpty()) {

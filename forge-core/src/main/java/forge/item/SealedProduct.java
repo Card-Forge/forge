@@ -114,7 +114,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
 
     protected List<PaperCard> getRandomBasicLands(final String setCode, final int count) {
         Predicate<PaperCard> cardsRule = PaperCardPredicates.printedInSet(setCode)
-                .and(Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules));
+                .and(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
         return Aggregates.random(Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), cardsRule), count);
     }
 }

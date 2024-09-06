@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.item.PaperCardPredicates;
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
@@ -73,8 +74,8 @@ public final class CardRelationMatrixGenerator {
                 ForgeConstants.DECK_GEN_DIR, false),
                 true);
 
-        final Iterable<PaperCard> cards = Iterables.filter(format.getAllCards()
-                , Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> cards = Iterables.filter(format.getAllCards(),
+                PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -90,7 +91,7 @@ public final class CardRelationMatrixGenerator {
             for (Deck deck:decks){
                 if (deck.getMain().contains(card)){
                     for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                            Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
+                            PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))){
                         if (!pairCard.getName().equals(card.getName())){
                             try {
                                 int old = matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
@@ -142,8 +143,8 @@ public final class CardRelationMatrixGenerator {
                 true);
 
         //get all cards
-        final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
-                , Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
+        final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(),
+                PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -200,7 +201,7 @@ public final class CardRelationMatrixGenerator {
     public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
+                PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))){
             if (!pairCard.getName().equals(legend.getName())){
                 try {
                     int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];

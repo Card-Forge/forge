@@ -10,6 +10,7 @@ import forge.gui.UiCommand;
 import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
@@ -76,7 +77,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
         for (StatTypes statTypes : buttonMap.keySet()) {
             if (statTypes.predicate != null) {
-                int count = items.countAll(Predicates.compose(statTypes.predicate, PaperCard::getRules), PaperCard.class);
+                int count = items.countAll(PaperCardPredicates.fromRules(statTypes.predicate), PaperCard.class);
                 buttonMap.get(statTypes).setText(String.valueOf(count));
             }
         }

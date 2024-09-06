@@ -29,6 +29,7 @@ import forge.deck.generation.DeckGeneratorBase.FilterCMC;
 import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.Iterables;
 import forge.util.Predicates;
@@ -540,6 +541,6 @@ public enum DeckFormat {
             //Notably, no partner ability or combination of partner abilities can ever let a player have more than two commanders.
             predicate = predicate.or(CardRulesPredicates.canBePartnerCommanderWith(commanders.get(0).getRules()));
         }
-        return Predicates.compose(predicate, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(predicate);
     }
 }

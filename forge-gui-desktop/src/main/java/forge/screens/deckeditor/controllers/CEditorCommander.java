@@ -28,6 +28,7 @@ import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.CardCollections;
@@ -83,14 +84,14 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         if (gameType == GameType.Brawl){
             GameFormat format = FModel.getFormats().get("Brawl");
             Predicate<CardRules> commanderFilter = CardRulesPredicates.CAN_BE_BRAWL_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(format.getFilterPrinted().and(Predicates.compose(commanderFilter, PaperCard::getRules))), PaperCard.class);
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(format.getFilterPrinted().and(PaperCardPredicates.fromRules(commanderFilter))), PaperCard.class);
             normalPool = ItemPool.createFrom(format.getAllCards(), PaperCard.class);
         }
         else {
             Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
                     ? CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL)
                     : CardRulesPredicates.CAN_BE_COMMANDER;
-            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard::getRules)),PaperCard.class);
+            commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(PaperCardPredicates.fromRules(commanderFilter)),PaperCard.class);
             normalPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(), PaperCard.class);
         }
 

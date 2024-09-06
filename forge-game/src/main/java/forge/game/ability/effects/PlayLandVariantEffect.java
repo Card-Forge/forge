@@ -16,6 +16,7 @@ import forge.game.card.CardFactory;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.Iterables;
 import forge.util.Predicates;
@@ -30,7 +31,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         final String landType = sa.getParam("Clone");
         List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
         if ("BasicLand".equals(landType)) {
-            final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules);
+            final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND);
             cards = Lists.newArrayList(Iterables.filter(cards, cpp));
         }
         // current color of source card

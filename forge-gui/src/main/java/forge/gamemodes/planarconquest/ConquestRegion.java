@@ -12,6 +12,7 @@ import forge.deck.generation.DeckGenPool;
 import forge.game.card.Card;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 import forge.util.Predicates;
@@ -130,7 +131,7 @@ public class ConquestRegion {
                     break;
                 case "colors":
                     colorSet = ColorSet.fromNames(value.toCharArray());
-                    pred = Predicates.compose(CardRulesPredicates.hasColorIdentity(colorSet.getColor()), PaperCard::getRules);
+                    pred = PaperCardPredicates.fromRules(CardRulesPredicates.hasColorIdentity(colorSet.getColor()));
                     break;
                 case "sets":
                     final String[] sets = value.split(",");

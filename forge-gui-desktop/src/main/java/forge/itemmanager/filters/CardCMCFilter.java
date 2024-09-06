@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import forge.card.CardRules;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.itemmanager.SpellShopManager;
@@ -55,6 +56,6 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
             //use custom return true delegate to validate the item is a card
             return card -> true;
         }
-        return Predicates.compose(Predicates.or(cmcs), PaperCard::getRules);
+        return PaperCardPredicates.fromRules(Predicates.or(cmcs));
     }
 }

@@ -205,6 +205,7 @@ public class DeckHints {
 
     private Iterable<PaperCard> getMatchingItems(Iterable<PaperCard> source, Predicate<CardRules> predicate, Function<PaperCard, CardRules> fn) {
         // TODO should token generators be counted differently for their potential?
+        // And would there ever be a circumstance where `fn` should be anything but PaperCard::getRules?
         return Iterables.filter(source, Predicates.compose(tokens ? rulesWithTokens(predicate) : predicate, fn));
     }
 

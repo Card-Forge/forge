@@ -305,7 +305,7 @@ public final class BoosterUtils {
                         if (preferredColors.contains(MagicColor.COLORLESS) && preferredColors.size() == 1) {
 
                             Predicate<CardRules> predicateRules =  CardRulesPredicates.cost(StringOp.CONTAINS_IC, "p/");
-                            Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
+                            Predicate<PaperCard> predicateCard = PaperCardPredicates.fromRules(predicateRules);
 
                             int size = Iterables.size(Iterables.filter(cardPool, predicateCard));
                             int totalSize = cardPool.size();
@@ -324,7 +324,7 @@ public final class BoosterUtils {
                         //Try to get multicolored cards that fit into the preferred colors.
                         Predicate<CardRules> predicateRules = CardRulesPredicates.isColor(preferredColors.get(index))
                                 .and(CardRulesPredicates.IS_MULTICOLOR);
-                        Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
+                        Predicate<PaperCard> predicateCard = PaperCardPredicates.fromRules(predicateRules);
 
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
                         //colors if multicolored cards aren't in the selected sets. The more multi-colored cards in the
@@ -401,7 +401,7 @@ public final class BoosterUtils {
                 //handful of multi-colored cards.
                 do {
                     if (color2 != null) {
-                        Predicate<PaperCard> color2c = Predicates.compose(color2, PaperCard::getRules);
+                        Predicate<PaperCard> color2c = PaperCardPredicates.fromRules(color2);
                         card = Aggregates.random(Iterables.filter(source, filter.and(color2c)));
                     }
                 } while (card == null && colorMisses++ < 10);
@@ -483,7 +483,7 @@ public final class BoosterUtils {
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
                 if (cr != null) {
-                    preds.add(Predicates.compose(cr, PaperCard::getRules));
+                    preds.add(PaperCardPredicates.fromRules(cr));
                 }
             }
 

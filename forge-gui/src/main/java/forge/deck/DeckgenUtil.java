@@ -215,8 +215,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
+        if(deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -314,8 +314,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
+        if(deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -667,7 +667,7 @@ public class DeckgenUtil {
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         Predicate<PaperCard> legal = format.isLegalCardPredicate().and(format.isLegalCommanderPredicate());
-        Iterable<PaperCard> legends = cardDb.getAllCards(legal.and(Predicates.compose(canPlay, PaperCard::getRules)));
+        Iterable<PaperCard> legends = cardDb.getAllCards(legal.and(PaperCardPredicates.fromRules(canPlay)));
 
         commander = Aggregates.random(legends);
         return generateRandomCommanderDeck(commander, format, forAi, false);
@@ -761,10 +761,9 @@ public class DeckgenUtil {
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
             Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
-                    format.isLegalCardPredicate().and(Predicates.compose(
+                    format.isLegalCardPredicate().and(PaperCardPredicates.fromRules(
                             new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity())
-                                    .or(DeckGeneratorBase.COLORLESS_CARDS),
-                            PaperCard::getRules)));
+                                    .or(DeckGeneratorBase.COLORLESS_CARDS))));
             switch (format) {
             case Brawl: //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
                 colorList = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
@@ -842,7 +841,7 @@ public class DeckgenUtil {
 
         // determine how many additional lands we need, but don't take lands already in deck into consideration,
         // or we risk incorrectly determining the target deck size
-        int numLands = Iterables.size(Iterables.filter(cards, Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
+        int numLands = Iterables.size(Iterables.filter(cards, PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
         int sizeNoLands = cards.size() - numLands;
 
         // attempt to determine if building for sealed, constructed or EDH

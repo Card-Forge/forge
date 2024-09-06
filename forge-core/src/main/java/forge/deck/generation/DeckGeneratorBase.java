@@ -87,12 +87,12 @@ public abstract class DeckGeneratorBase {
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
-        final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard::getRules));
+        final Iterable<PaperCard> creatures = Iterables.filter(cards, PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE));
         final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
         trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
-        Predicate<PaperCard> preSpells = Predicates.compose(CardRulesPredicates.IS_NON_CREATURE_SPELL, PaperCard::getRules);
+        Predicate<PaperCard> preSpells = PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_CREATURE_SPELL);
         final Iterable<PaperCard> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
         trace.append("Spells to add:").append(spellCnt).append("\n");
@@ -107,11 +107,11 @@ public abstract class DeckGeneratorBase {
 
     protected boolean setBasicLandPool(String edition){
         Predicate<PaperCard> isSetBasicLand;
-        if (edition !=null){
+        if (edition != null){
             isSetBasicLand = PaperCardPredicates.printedInSet(edition)
-                    .and(Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules));
-        }else{
-            isSetBasicLand = Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules);
+                    .and(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
+        } else {
+            isSetBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND);
         }
 
         landPool = new DeckGenPool(StaticData.instance().getCommonCards().getAllCards(isSetBasicLand));
@@ -234,7 +234,7 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-            Predicate<PaperCard> exceptBasicLand = Predicates.compose(CardRulesPredicates.NOT_BASIC_LAND, PaperCard::getRules);
+            Predicate<PaperCard> exceptBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND);
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<PaperCard> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
@@ -261,7 +261,7 @@ public abstract class DeckGeneratorBase {
         float requestedOverTotal = (float)cnt / totalWeight;
 
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
-            Iterable<PaperCard> matchingCards = Iterables.filter(source, Predicates.compose(pair.getLeft(), PaperCard::getRules));
+            Iterable<PaperCard> matchingCards = Iterables.filter(source, PaperCardPredicates.fromRules(pair.getLeft()));
             int cmcCountForPool = (int) Math.ceil(pair.getRight() * desiredOverTotal);
             
             int addOfThisCmc = Math.round(pair.getRight() * requestedOverTotal);
@@ -291,7 +291,7 @@ public abstract class DeckGeneratorBase {
         if (useArtifacts) {
             hasColor = hasColor.or(COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(), Predicates.compose(canPlay.and(hasColor).and(canUseInFormat), PaperCard::getRules));
+        return Iterables.filter(pool.getAllCards(), PaperCardPredicates.fromRules(canPlay.and(hasColor).and(canUseInFormat)));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -390,7 +390,7 @@ public abstract class DeckGeneratorBase {
         Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
         Predicate<CardRules> exceptBasicLand = CardRulesPredicates.NOT_BASIC_LAND;
 
-        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(dualLandFilter.and(exceptBasicLand).and(canPlay), PaperCard::getRules));
+        Iterable<PaperCard> landCards = pool.getAllCards(PaperCardPredicates.fromRules(dualLandFilter.and(exceptBasicLand).and(canPlay)));
         Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}\\{([WUBRG])\\}",

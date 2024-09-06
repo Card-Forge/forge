@@ -19,6 +19,7 @@ import forge.gamemodes.quest.data.StarRating;
 import forge.gui.interfaces.IButton;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -50,7 +51,7 @@ public class SFilterUtil {
             try {
                 Predicate<CardRules> filter = expression.evaluate();
                 if (filter != null) {
-                    return Predicates.compose(invert ? filter.negate() : filter, PaperCard::getRules);
+                    return PaperCardPredicates.fromRules(invert ? filter.negate() : filter);
                 }
             }
             catch (Exception ignored) {
@@ -74,7 +75,7 @@ public class SFilterUtil {
         Predicate<CardRules> textFilter;
         textFilter = invert ? Predicates.or(terms).negate() : Predicates.and(terms);
 
-        return Predicates.compose(textFilter, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(textFilter);
     }
 
     private static List<String> getSplitText(String text) {

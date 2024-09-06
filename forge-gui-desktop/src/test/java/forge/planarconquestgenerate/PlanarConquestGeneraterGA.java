@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -106,9 +107,9 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
         }
 
         Iterable<PaperCard> filtered= Iterables.filter(cards,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
-                        .and(Predicates.compose(CardRulesPredicates.IS_NON_LAND, PaperCard::getRules))
-                        .and(gameFormat.getFilterPrinted())
+                PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+                                .and(CardRulesPredicates.IS_NON_LAND)
+                        ).and(gameFormat.getFilterPrinted())
         );
 
         List<PaperCard> filteredList = Lists.newArrayList(filtered);

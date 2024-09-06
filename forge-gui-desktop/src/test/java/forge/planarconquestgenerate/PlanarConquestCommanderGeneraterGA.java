@@ -20,6 +20,7 @@ import forge.game.GameType;
 import forge.gamemodes.limited.CardRanker;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -76,10 +77,10 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
         }
 
         Iterable<PaperCard> filtered= Iterables.filter(cards,
-                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
-                        .and(Predicates.compose(CardRulesPredicates.IS_PLANESWALKER, PaperCard::getRules))
-                        //.and(Predicates.compose(CardRulesPredicates.IS_LEGENDARY, PaperCard::getRules))
-                        .and(gameFormat.getFilterPrinted())
+                PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+                                .and(CardRulesPredicates.IS_PLANESWALKER)
+                                //.and(CardRulesPredicates.IS_LEGENDARY)
+                        ).and(gameFormat.getFilterPrinted())
                 );
 
         List<PaperCard> filteredList = Lists.newArrayList(filtered);

@@ -3,6 +3,7 @@ package forge.itemmanager.filters;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.util.Predicates;
 
@@ -31,6 +32,6 @@ public class CardToughnessFilter extends ValueRangeFilter<PaperCard> {
             return x -> true;
         }
         predicate = predicate.and(CardRulesPredicates.IS_CREATURE);
-        return Predicates.compose(predicate, PaperCard::getRules);
+        return PaperCardPredicates.fromRules(predicate);
     }
 }

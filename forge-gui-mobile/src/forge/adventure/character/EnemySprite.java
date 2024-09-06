@@ -30,6 +30,7 @@ import forge.card.CardRulesPredicates;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Predicates;
@@ -481,7 +482,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             if(data.rewards != null) { //Collect standard rewards.
                 Deck enemyDeck = Current.latestDeck();
                 // By popular demand, remove basic lands from the reward pool.
-                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(CardRulesPredicates.NOT_BASIC_LAND, PaperCard::getRules));
+                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND));
 
                 for (RewardData rdata : data.rewards) {
                     ret.addAll(rdata.generate(false,  enemyDeck == null ? null : deckNoBasicLands.toFlatList(),true ));

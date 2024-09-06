@@ -1,9 +1,7 @@
 package forge.item;
 
 import com.google.common.collect.Lists;
-import forge.card.CardRarity;
-import forge.card.CardType;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.util.PredicateCard;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
@@ -177,6 +175,11 @@ public abstract class PaperCardPredicates {
             super(StringOp.EQUALS);
             this.operand = operand;
         }
+    }
+
+    //TODO: Remove
+    public static Predicate<PaperCard> fromRules(Predicate<CardRules> cardRulesPredicate) {
+        return paperCard -> cardRulesPredicate.test(paperCard.getRules());
     }
 
     public static final Predicate<PaperCard> IS_COMMON = PaperCardPredicates.rarity(true, CardRarity.Common);
