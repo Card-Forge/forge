@@ -9,4 +9,4 @@ SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any
 SVar:X:PlayerCountPropertyYou$SacrificedThisTurn Permanent
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate|Token
-Oracle:Menace\n{2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on Sawblade Skinripper\nAt the beginning of your end step, if you sacrificed one or more permanents this turn, Sawblade Skinripper deals that much damage to any target.
+Oracle:Menace\n{2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on Sawblade Skinripper.\nAt the beginning of your end step, if you sacrificed one or more permanents this turn, Sawblade Skinripper deals that much damage to any target.
