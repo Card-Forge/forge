@@ -549,9 +549,12 @@ public final class CardRulesPredicates {
 
         /** The Constant isBasicLand. */
         public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
+        public static final Predicate<CardRules> NOT_BASIC_LAND = subject -> !subject.getType().isBasicLand();
 
-        /** The Constant isBasicLandNotWastes. */
+        /** Matches only Plains, Island, Swamp, Mountain, or Forest. */
         public static final Predicate<CardRules> IS_BASIC_LAND_NOT_WASTES = subject -> !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
+        /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
+        public static final Predicate<CardRules> NOT_TRUE_BASIC_LAND = subject -> !subject.getType().isBasicLand() || subject.getName().equals("Wastes");
 
         /** The Constant isNonBasicLand. */
         public static final Predicate<CardRules> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();

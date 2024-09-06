@@ -270,7 +270,7 @@ public class ChooseCardAi extends SpellAbilityAi {
         } else if (logic.equals("Phylactery")) {
             CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
             CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
-            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Presets.CREATURES.negate());
+            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Presets.NON_CREATURES);
             CardCollection creatures = CardLists.filter(aiArtifacts, Presets.CREATURES);
             if (!indestructibles.isEmpty()) {
                 // Choose the worst (smallest) indestructible artifact so that the opponent would have to waste

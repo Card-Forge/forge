@@ -206,7 +206,7 @@ public class ComputerUtilCard {
         }
 
         // prefer to target non basic lands
-        final List<Card> nbLand = CardLists.filter(land, CardPredicates.Presets.BASIC_LANDS.negate());
+        final List<Card> nbLand = CardLists.filter(land, CardPredicates.Presets.NONBASIC_LANDS);
 
         if (!nbLand.isEmpty()) {
             // TODO - Improve ranking various non-basic lands depending on context
@@ -521,8 +521,7 @@ public class ComputerUtilCard {
 
     public static final Card getCheapestSpellAI(final Iterable<Card> list) {
         if (!Iterables.isEmpty(list)) {
-            CardCollection cc = CardLists.filter(list,
-                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
+            CardCollection cc = CardLists.filter(list, CardPredicates.Presets.INSTANTS_AND_SORCERIES);
 
             if (cc.isEmpty()) {
                 return null;

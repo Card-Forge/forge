@@ -1143,8 +1143,8 @@ public class AttachAi extends SpellAbilityAi {
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
             prefList = CardLists.filter(prefList, CardPredicates.isEquippedBy(attachSource.getName())
-                    .or(CardPredicates.isEnchantedBy(attachSource.getName())
-            ).negate());
+                    .or(CardPredicates.isEnchantedBy(attachSource.getName())).negate()
+            );
         }
 
         // Don't pump cards that will die.

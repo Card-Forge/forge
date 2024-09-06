@@ -125,7 +125,7 @@ public class SpecialCardAi {
             int numManaSrcs = manaSources.size();
 
             CardCollection allCards = CardLists.filter(ai.getAllCards(), Arrays.asList(CardPredicates.Presets.NON_TOKEN,
-                    CardPredicates.Presets.LANDS.negate(), CardPredicates.isOwner(ai)));
+                    CardPredicates.Presets.NON_LANDS, CardPredicates.isOwner(ai)));
 
             int numHighCMC = CardLists.count(allCards, CardPredicates.greaterCMC(5));
             int numLowCMC = CardLists.count(allCards, CardPredicates.lessCMC(3));
@@ -156,7 +156,7 @@ public class SpecialCardAi {
             int libsize = ai.getCardsIn(ZoneType.Library).size();
 
             final CardCollection hand = CardLists.filter(ai.getCardsIn(ZoneType.Hand),
-                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
+                    CardPredicates.Presets.INSTANTS_AND_SORCERIES);
             if (!hand.isEmpty()) {
                 // has spell that can be cast in hand with put ability
                 if (Iterables.any(hand, CardPredicates.hasCMC(counterNum + 1))) {
@@ -169,7 +169,7 @@ public class SpecialCardAi {
                 }
             }
             final CardCollection library = CardLists.filter(ai.getCardsIn(ZoneType.Library),
-                    CardPredicates.isType("Instant").or(CardPredicates.isType("Sorcery")));
+                    CardPredicates.Presets.INSTANTS_AND_SORCERIES);
             if (!library.isEmpty()) {
                 // get max cmc of instant or sorceries in the libary
                 int maxCMC = 0;
@@ -206,7 +206,7 @@ public class SpecialCardAi {
             List<Card> AiLandsOnly = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
                     CardPredicates.Presets.LANDS);
             List<Card> OppPerms = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.CREATURES.negate());
+                    CardPredicates.Presets.NON_CREATURES);
 
             // TODO: improve this logic (currently the AI has difficulty evaluating non-creature permanents,
             // which it can only distinguish by their CMC, considering >CMC higher value).
@@ -331,12 +331,12 @@ public class SpecialCardAi {
     public static class DeathgorgeScavenger {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Card worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
-            Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES.negate()));
+            Card worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.NON_CREATURES));
             if (worstCreat == null) {
                 worstCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES));
             }
             if (worstNonCreat == null) {
-                worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES.negate()));
+                worstNonCreat = ComputerUtilCard.getWorstAI(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.NON_CREATURES));
             }
 
             sa.resetTargets();
@@ -786,7 +786,7 @@ public class SpecialCardAi {
             int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(),
                     sa.getParamOrDefault("ChangeNum", "1"), sa);
             CardCollection lib = CardLists.filter(ai.getCardsIn(ZoneType.Library),
-                    CardPredicates.nameEquals(sa.getHostCard().getName()).negate());
+                    CardPredicates.nameNotEquals(sa.getHostCard().getName()));
             lib.sort(CardLists.CmcComparatorInv);
 
             // Additional cards which are difficult to auto-classify but which are generally good to Intuition for
@@ -1316,7 +1316,7 @@ public class SpecialCardAi {
                 return false;
             }
 
-            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS.and(CardPredicates.Presets.BASIC_LANDS.negate())).size();
+            int aiLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONBASIC_LANDS).size();
 
             boolean hasBridge = false;
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -1334,7 +1334,7 @@ public class SpecialCardAi {
             }
 
             for (Player opp : ai.getOpponents()) {
-                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS.and(CardPredicates.Presets.BASIC_LANDS.negate())).size();
+                int oppLands = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONBASIC_LANDS).size();
                 // Always if enemy would die and we don't!
                 // TODO : predict actual damage instead of assuming it'll be 2*lands
                 // Don't if we lose, unless we lose anyway to unblocked creatures next turn

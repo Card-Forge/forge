@@ -70,7 +70,7 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        final Predicate<PaperCard> notBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules).negate();
+        final Predicate<PaperCard> notBasicLand = Predicates.compose(CardRulesPredicates.Presets.NOT_BASIC_LAND, PaperCard::getRules);
         final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 

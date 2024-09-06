@@ -1436,7 +1436,7 @@ public class PlayerControllerAi extends PlayerController {
                     if (consp.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
                         String chosenName = consp.getNamedCard();
                         if (!chosenName.isEmpty()) {
-                            aiLibrary = CardLists.filter(aiLibrary, CardPredicates.nameEquals(chosenName).negate());
+                            aiLibrary = CardLists.filter(aiLibrary, CardPredicates.nameNotEquals(chosenName));
                         }
                     }
                 }
@@ -1469,7 +1469,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         } else {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
-            list = CardLists.filter(list, Presets.LANDS.negate());
+            list = CardLists.filter(list, Presets.NON_LANDS);
             if (!list.isEmpty()) {
                 return list.get(0).getName();
             }

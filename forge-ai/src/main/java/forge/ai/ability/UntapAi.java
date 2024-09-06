@@ -400,7 +400,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // Check if something is playable if we untap for an additional mana with this, then proceed
-        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
+        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
         // The AI is not very good at timing non-permanent spells this way, so filter them out
         // (it may actually be possible to enable this for sorceries, but that'll need some canPlay shenanigans)
         CardCollection playable = CardLists.filter(inHand, Presets.PERMANENTS);

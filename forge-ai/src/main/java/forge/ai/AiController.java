@@ -404,7 +404,7 @@ public class AiController {
 
     private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        CardCollection nonLandList = CardLists.filter(hand, Presets.LANDS.negate());
+        CardCollection nonLandList = CardLists.filter(hand, Presets.NON_LANDS);
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
             CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
@@ -469,7 +469,7 @@ public class AiController {
             return null;
         }
 
-        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
 
         // Some considerations for Momir/MoJhoSto
         boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
@@ -598,8 +598,8 @@ public class AiController {
             }
 
             // pick dual lands if available
-            if (Iterables.any(landList, Presets.BASIC_LANDS.negate())) {
-                landList = CardLists.filter(landList, Presets.BASIC_LANDS.negate());
+            if (Iterables.any(landList, Presets.NONBASIC_LANDS)) {
+                landList = CardLists.filter(landList, Presets.NONBASIC_LANDS);
             }
         }
         return ComputerUtilCard.getBestLandToPlayAI(landList);
@@ -1397,11 +1397,11 @@ public class AiController {
             return false;
         }
 
-        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.LANDS.negate());
+        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!Iterables.any(otb, Presets.LANDS.negate())) {
+            if (!Iterables.any(otb, Presets.NON_LANDS)) {
                 return false;
             }
         }

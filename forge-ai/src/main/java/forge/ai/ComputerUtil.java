@@ -2218,7 +2218,7 @@ public class ComputerUtil {
         }
 
         CardCollectionView library = ai.getCardsIn(ZoneType.Library);
-        int landsInDeck = CardLists.count(library, CardPredicates.isType("Land"));
+        int landsInDeck = CardLists.count(library, Presets.LANDS);
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {

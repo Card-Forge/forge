@@ -614,8 +614,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // pick dual lands if available
-        if (Iterables.any(result, Presets.BASIC_LANDS.negate())) {
-            result = CardLists.filter(result, Presets.BASIC_LANDS.negate());
+        if (Iterables.any(result, Presets.NONBASIC_LANDS)) {
+            result = CardLists.filter(result, Presets.NONBASIC_LANDS);
         }
 
         return result.get(0);
@@ -906,8 +906,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         if (source.isInZone(ZoneType.Hand)) {
-            Predicate<Card> nameEquals = CardPredicates.nameEquals(source.getName());
-            list = CardLists.filter(list, nameEquals.negate()); // Don't get the same card back.
+            list = CardLists.filter(list, CardPredicates.nameNotEquals(source.getName())); // Don't get the same card back.
         }
         if (sa.isSpell()) {
             list.remove(source); // spells can't target their own source, because it's actually in the stack zone
@@ -1014,7 +1013,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     boolean saheeliFelidarCombo = ComputerUtilAbility.getAbilitySourceName(sa).equals("Felidar Guardian")
                             && tobounce.getName().equals("Saheeli Rai")
                             && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Felidar Guardian")).size() <
-                            CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Creature")).size() + ai.getOpponentsGreatestLifeTotal() + 10;
+                            CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), Presets.CREATURES).size() + ai.getOpponentsGreatestLifeTotal() + 10;
 
                     // remember that the card was bounced already unless it's a special combo case
                     if (!saheeliFelidarCombo) {
@@ -1630,8 +1629,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         } else {
             // Don't fetch another tutor with the same name
-            Predicate<Card> nameEquals = CardPredicates.nameEquals(ComputerUtilAbility.getAbilitySourceName(sa));
-            CardCollection sameNamed = CardLists.filter(fetchList, nameEquals.negate());
+            CardCollection sameNamed = CardLists.filter(fetchList, CardPredicates.nameNotEquals(ComputerUtilAbility.getAbilitySourceName(sa)));
             if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                 fetchList = sameNamed;
             }
@@ -1963,7 +1961,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             if (logic.contains("NonLand")) {
-                scanList = CardLists.filter(scanList, Presets.LANDS.negate());
+                scanList = CardLists.filter(scanList, Presets.NON_LANDS);
             }
 
             if (logic.contains("NonExiled")) {

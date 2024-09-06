@@ -92,6 +92,9 @@ public final class CardPredicates {
     public static Predicate<Card> nameEquals(final String name) {
         return c -> c.getName().equals(name);
     }
+    public static Predicate<Card> nameNotEquals(final String name) {
+        return c -> !c.getName().equals(name);
+    }
 
     public static Predicate<Card> sharesNameWith(final Card name) {
         return c -> c.sharesNameWith(name);
@@ -320,6 +323,7 @@ public final class CardPredicates {
          * a Predicate<Card> to get all creatures.
          */
         public static final Predicate<Card> CREATURES = Card::isCreature;
+        public static final Predicate<Card> NON_CREATURES = c -> !c.isCreature();
 
         /**
          * a Predicate<Card> to get all enchantments.
@@ -366,6 +370,7 @@ public final class CardPredicates {
             // the isBasicLand() check here may be sufficient...
             return c.isLand() && c.isBasicLand();
         };
+        public static final Predicate<Card> NONBASIC_LANDS = c -> c.isLand() && !c.isBasicLand();
         /**
          * a Predicate<Card> to get all artifacts.
          */
@@ -374,10 +379,12 @@ public final class CardPredicates {
          * a Predicate<Card> to get all nonartifacts.
          */
         public static final Predicate<Card> NON_ARTIFACTS = c -> !c.isArtifact();
+        public static final Predicate<Card> INSTANTS_AND_SORCERIES = Card::isInstantOrSorcery;
         /**
          * a Predicate<Card> to get all lands.
          */
-        public static final Predicate<Card> LANDS = c -> c.isLand();
+        public static final Predicate<Card> LANDS = Card::isLand;
+        public static final Predicate<Card> NON_LANDS = c -> !c.isLand();
         /**
          * a Predicate<Card> to get all mana-producing lands.
          */

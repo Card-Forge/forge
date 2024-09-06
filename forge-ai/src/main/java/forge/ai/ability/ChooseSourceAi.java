@@ -136,7 +136,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
                 List<Card> oppCreatures = CardLists.filter(options,
                         CardPredicates.Presets.CREATURES.and(CardPredicates.isOwner(aiChoser).negate()));
                 List<Card> aiNonCreatures = CardLists.filter(options,
-                        CardPredicates.Presets.CREATURES.negate()
+                        CardPredicates.Presets.NON_CREATURES
                                 .and(CardPredicates.Presets.PERMANENTS)
                                 .and(CardPredicates.isOwner(aiChoser))
                 );

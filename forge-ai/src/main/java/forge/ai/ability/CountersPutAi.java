@@ -1193,7 +1193,7 @@ public class CountersPutAi extends CountersAi {
 
     private boolean doChargeToCMCLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.isType("Creature"));
+        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
         int maxCMC = Aggregates.max(ownLib, Card::getCMC);
         int optimalCMC = 0;
