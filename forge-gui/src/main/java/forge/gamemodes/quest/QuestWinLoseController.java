@@ -18,7 +18,6 @@ import forge.gui.interfaces.IButton;
 import forge.gui.interfaces.IWinLoseView;
 import forge.gui.util.SGuiChoose;
 import forge.item.*;
-import forge.item.PaperCardPredicates;
 import forge.item.generation.BoosterSlots;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;

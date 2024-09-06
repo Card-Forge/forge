@@ -39,7 +39,6 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
-import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;

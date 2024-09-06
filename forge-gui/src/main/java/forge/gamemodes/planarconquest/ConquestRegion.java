@@ -15,7 +15,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
-import forge.util.Predicates;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionReader;
 import forge.util.collect.FCollectionView;

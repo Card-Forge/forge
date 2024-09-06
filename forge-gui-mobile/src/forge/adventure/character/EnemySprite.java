@@ -33,7 +33,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

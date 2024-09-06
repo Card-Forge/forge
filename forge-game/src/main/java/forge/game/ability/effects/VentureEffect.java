@@ -26,7 +26,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
-import forge.util.Predicates;
 
 public class VentureEffect  extends SpellAbilityEffect {
 

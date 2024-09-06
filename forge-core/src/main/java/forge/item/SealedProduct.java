@@ -23,7 +23,6 @@ import forge.card.CardRulesPredicates;
 import forge.item.generation.BoosterGenerator;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;

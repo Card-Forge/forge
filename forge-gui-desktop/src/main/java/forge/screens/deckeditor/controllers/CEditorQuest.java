@@ -60,7 +60,6 @@ import forge.screens.home.quest.CSubmenuQuestDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
-import forge.util.Predicates;
 
 /**
  * Child controller for quest deck editor UI.

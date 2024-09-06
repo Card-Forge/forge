@@ -12,7 +12,6 @@ import java.util.Map;
 
 import forge.item.PaperCardPredicates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Lists;

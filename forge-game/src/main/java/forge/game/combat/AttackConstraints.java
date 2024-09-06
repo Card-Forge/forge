@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import forge.util.Iterables;
-import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Collections2;

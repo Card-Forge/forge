@@ -12,7 +12,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 /**
  * Created by maustin on 28/02/2018.

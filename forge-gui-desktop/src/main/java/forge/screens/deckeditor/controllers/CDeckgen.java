@@ -24,7 +24,6 @@ import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 import java.util.function.Predicate;
 

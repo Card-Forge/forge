@@ -5,7 +5,6 @@ import forge.card.CardRulesPredicates;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
-import forge.util.Predicates;
 
 import java.util.function.Predicate;
 

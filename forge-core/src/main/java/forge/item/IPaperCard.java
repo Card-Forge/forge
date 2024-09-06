@@ -1,20 +1,10 @@
 package forge.item;
 
-import com.google.common.collect.Lists;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardType.CoreType;
 import forge.card.ICardFace;
-import forge.card.MagicColor;
-import forge.util.PredicateCard;
-import forge.util.PredicateString;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 
 public interface IPaperCard extends InventoryItem, Serializable {
 

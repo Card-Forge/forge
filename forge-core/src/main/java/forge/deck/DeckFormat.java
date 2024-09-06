@@ -32,7 +32,6 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;

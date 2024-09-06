@@ -12,7 +12,6 @@ import forge.itemmanager.SItemManagerUtil;
 import forge.screens.deckeditor.views.VStatisticsImporter;
 import forge.util.ItemPool;
 import forge.util.Localizer;
-import forge.util.Predicates;
 
 import javax.swing.*;
 import java.util.AbstractMap;

@@ -8,7 +8,6 @@ import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.model.FModel;
-import forge.util.Predicates;
 
 public abstract class QuestRewardCard implements IQuestRewardCard {
 

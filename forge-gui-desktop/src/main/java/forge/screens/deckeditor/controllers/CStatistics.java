@@ -18,7 +18,6 @@ import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VStatistics;
 import forge.util.ItemPool;
 import forge.util.Localizer;
-import forge.util.Predicates;
 
 /**
  * Controls the "analysis" panel in the deck editor UI.

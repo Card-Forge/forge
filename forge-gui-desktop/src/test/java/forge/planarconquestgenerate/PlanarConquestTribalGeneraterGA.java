@@ -24,7 +24,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Iterables;
-import forge.util.Predicates;
 
 public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
 

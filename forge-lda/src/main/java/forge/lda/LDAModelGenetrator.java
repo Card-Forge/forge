@@ -20,7 +20,6 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.Iterables;
-import forge.util.Predicates;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
 import org.apache.commons.lang3.ArrayUtils;

@@ -30,7 +30,6 @@ import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 
 /**
  * Limited format deck.

@@ -11,7 +11,6 @@ import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.Iterables;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
