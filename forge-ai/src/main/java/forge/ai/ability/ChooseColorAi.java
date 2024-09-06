@@ -68,7 +68,7 @@ public class ChooseColorAi extends SpellAbilityAi {
                 // activate in Main 2 hoping that the extra mana surplus will make a difference
                 // if there are some nonland permanents in hand
                 CardCollectionView permanents = CardLists.filter(ai.getCardsIn(ZoneType.Hand), 
-                        CardPredicates.Presets.NONLAND_PERMANENTS);
+                        CardPredicates.NONLAND_PERMANENTS);
 
                 return permanents.size() > 0 && ph.is(PhaseType.MAIN2, ai);
             }

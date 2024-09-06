@@ -82,14 +82,14 @@ public final class CEditorCommander extends CDeckEditor<Deck> {
         CardDb commonCards = FModel.getMagicDb().getCommonCards();
         if (gameType == GameType.Brawl){
             GameFormat format = FModel.getFormats().get("Brawl");
-            Predicate<CardRules> commanderFilter = CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER;
+            Predicate<CardRules> commanderFilter = CardRulesPredicates.CAN_BE_BRAWL_COMMANDER;
             commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(format.getFilterPrinted().and(Predicates.compose(commanderFilter, PaperCard::getRules))), PaperCard.class);
             normalPool = ItemPool.createFrom(format.getAllCards(), PaperCard.class);
         }
         else {
             Predicate<CardRules> commanderFilter = gameType == GameType.Oathbreaker
-                    ? CardRulesPredicates.Presets.CAN_BE_OATHBREAKER.or(CardRulesPredicates.Presets.CAN_BE_SIGNATURE_SPELL)
-                    : CardRulesPredicates.Presets.CAN_BE_COMMANDER;
+                    ? CardRulesPredicates.CAN_BE_OATHBREAKER.or(CardRulesPredicates.CAN_BE_SIGNATURE_SPELL)
+                    : CardRulesPredicates.CAN_BE_COMMANDER;
             commanderPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(Predicates.compose(commanderFilter, PaperCard::getRules)),PaperCard.class);
             normalPool = ItemPool.createFrom(commonCards.getAllCardsNoAlt(), PaperCard.class);
         }

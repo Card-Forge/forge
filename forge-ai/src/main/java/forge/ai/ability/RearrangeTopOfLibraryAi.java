@@ -115,7 +115,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
             uncastableCMCThreshold = aic.getIntProperty(AiProps.SCRY_IMMEDIATELY_UNCASTABLE_CMC_DIFF);
         }
 
-        int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
         int cmc = top.isSplitCard() ? Math.min(top.getCMC(Card.SplitCMCMode.LeftSplitCMC), top.getCMC(Card.SplitCMCMode.RightSplitCMC))
                 : top.getCMC();
         int maxCastable = ComputerUtilMana.getAvailableManaEstimate(p, false);

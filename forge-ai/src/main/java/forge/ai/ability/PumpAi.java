@@ -8,7 +8,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTapType;
 import forge.game.keyword.Keyword;
@@ -402,7 +401,7 @@ public class PumpAi extends PumpAiBase {
         CardCollection list;
         if (sa.hasParam("AILogic")) {
             if (sa.getParam("AILogic").equals("HighestPower") || sa.getParam("AILogic").equals("ContinuousBonus")) {
-                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), ai, source, sa);
+                list = CardLists.getValidCards(CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES), tgt.getValidTgts(), ai, source, sa);
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortByPowerDesc(list);
 
@@ -511,7 +510,7 @@ public class PumpAi extends PumpAiBase {
         // Detain target nonland permanent: don't target noncreature permanents that don't have
         // any activated abilities.
         if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
-            list = CardLists.filter(list, Presets.CREATURES.or(card -> {
+            list = CardLists.filter(list, CardPredicates.CREATURES.or(card -> {
                 for (SpellAbility sa1 : card.getSpellAbilities()) {
                     if (sa1.isActivatedAbility()) {
                         return true;

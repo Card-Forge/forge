@@ -134,10 +134,10 @@ public class ChooseSourceAi extends SpellAbilityAi {
             // No optimal creature was found above, so try to broaden the choice.
             if (!Iterables.isEmpty(options)) {
                 List<Card> oppCreatures = CardLists.filter(options,
-                        CardPredicates.Presets.CREATURES.and(CardPredicates.isOwner(aiChoser).negate()));
+                        CardPredicates.CREATURES.and(CardPredicates.isOwner(aiChoser).negate()));
                 List<Card> aiNonCreatures = CardLists.filter(options,
-                        CardPredicates.Presets.NON_CREATURES
-                                .and(CardPredicates.Presets.PERMANENTS)
+                        CardPredicates.NON_CREATURES
+                                .and(CardPredicates.PERMANENTS)
                                 .and(CardPredicates.isOwner(aiChoser))
                 );
 

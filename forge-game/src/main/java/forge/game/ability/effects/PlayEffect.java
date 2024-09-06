@@ -121,11 +121,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             } else if (valid.equalsIgnoreCase("sorcery")) {
                 cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_SORCERY, PaperCard::getRules);
+                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_SORCERY, PaperCard::getRules);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             } else if (valid.equalsIgnoreCase("instant")) {
                 cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_INSTANT, PaperCard::getRules);
+                final Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.IS_INSTANT, PaperCard::getRules);
                 cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             }
             if (sa.hasParam("RandomCopied")) {

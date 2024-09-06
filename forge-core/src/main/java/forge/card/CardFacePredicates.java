@@ -133,21 +133,9 @@ public final class CardFacePredicates {
         return new ValidPredicate(val);
     }
 
-    public static class Presets {
-        /** The Constant isBasicLand. */
-        public static final Predicate<ICardFace> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
-
-        /** The Constant isNonBasicLand. */
-        public static final Predicate<ICardFace> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
-
-        /** The Constant isCreature. */
-        public static final Predicate<ICardFace> IS_CREATURE = CardFacePredicates
-                .coreType(true, CardType.CoreType.Creature);
-
-        public static final Predicate<ICardFace> IS_LEGENDARY = CardFacePredicates
-                .superType(true, CardType.Supertype.Legendary);
-        
-        public static final Predicate<ICardFace> IS_NON_LAND = CardFacePredicates
-        		.coreType(false, CardType.CoreType.Land);
-    }
+    public static final Predicate<ICardFace> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
+    public static final Predicate<ICardFace> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
+    public static final Predicate<ICardFace> IS_CREATURE = CardFacePredicates.coreType(true, CardType.CoreType.Creature);
+    public static final Predicate<ICardFace> IS_LEGENDARY = CardFacePredicates.superType(true, CardType.Supertype.Legendary);
+    public static final Predicate<ICardFace> IS_NON_LAND = CardFacePredicates.coreType(false, CardType.CoreType.Land);
 }

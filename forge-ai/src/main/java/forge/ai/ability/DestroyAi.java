@@ -425,8 +425,8 @@ public class DestroyAi extends SpellAbilityAi {
         boolean nonBasicTgt = !tgtLand.isBasicLand();
 
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
-        int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA);
+        int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
 
         // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
         boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;

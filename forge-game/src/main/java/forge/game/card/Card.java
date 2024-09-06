@@ -3862,11 +3862,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getEquippedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
+        return CardLists.filter(getAttachedCards(), CardPredicates.EQUIPMENT);
     }
 
     public final boolean isEquipped() {
-        return Iterables.any(getAttachedCards(), CardPredicates.Presets.EQUIPMENT);
+        return Iterables.any(getAttachedCards(), CardPredicates.EQUIPMENT);
     }
     public final boolean isEquippedBy(Card c) {
         return this.hasCardAttachment(c);
@@ -3876,11 +3876,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final CardCollectionView getFortifiedBy() {
-        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
+        return CardLists.filter(getAttachedCards(), CardPredicates.FORTIFICATION);
     }
 
     public final boolean isFortified() {
-        return Iterables.any(getAttachedCards(), CardPredicates.Presets.FORTIFICATION);
+        return Iterables.any(getAttachedCards(), CardPredicates.FORTIFICATION);
     }
     public final boolean isFortifiedBy(Card c) {
         // 301.5e + 301.6

@@ -2225,7 +2225,7 @@ public class AbilityUtils {
         if (sq[0].equals("EnchantedControllerCreatures")) { // maybe refactor into a Valid with ControlledBy
             int v = 0;
             if (c.getEnchantingCard() != null) {
-                v = CardLists.count(c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                v = CardLists.count(c.getEnchantingCard().getController().getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             }
             return doXMath(v, expr, c, ctb);
         }
@@ -3877,9 +3877,9 @@ public class AbilityUtils {
         // Refined qualities
 
         // "Untapped Lands" - Count$UntappedTypeYouCtrl.Land
-        // if (sq[0].contains("Untapped")) { someCards = CardLists.filter(someCards, Presets.UNTAPPED); }
+        // if (sq[0].contains("Untapped")) { someCards = CardLists.filter(someCards, CardPredicates.UNTAPPED); }
 
-        // if (sq[0].contains("Tapped")) { someCards = CardLists.filter(someCards, Presets.TAPPED); }
+        // if (sq[0].contains("Tapped")) { someCards = CardLists.filter(someCards, CardPredicates.TAPPED); }
 
 //        String sq0 = sq[0].toLowerCase();
 //        for (String color : MagicColor.Constant.ONLY_COLORS) {

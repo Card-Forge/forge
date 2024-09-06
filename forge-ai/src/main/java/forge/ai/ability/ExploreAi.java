@@ -43,8 +43,8 @@ public class ExploreAi extends SpellAbilityAi {
         int predictedMana = ComputerUtilMana.getAvailableManaSources(ai, false).size();
         CardCollectionView cardsOTB = ai.getCardsIn(ZoneType.Battlefield);
         CardCollectionView cardsInHand = ai.getCardsIn(ZoneType.Hand);
-        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
 
         int maxCMCDiff = 1;
         int numLandsToStillNeedMore = 2;

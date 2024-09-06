@@ -57,16 +57,16 @@ public class CStatisticsImporter {
         // Hack-ish: avoid /0 cases, but still populate labels :)
         if (total == 0) { total = 1; }
 
-        setLabelValue(this.view.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE, total);
-        setLabelValue(this.view.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND, total);
-        setLabelValue(this.view.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT, total);
-        setLabelValue(this.view.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT, total);
-        setLabelValue(this.view.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT, total);
-        setLabelValue(this.view.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY, total);
-        setLabelValue(this.view.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER, total);
+        setLabelValue(this.view.getLblCreature(), deck, CardRulesPredicates.IS_CREATURE, total);
+        setLabelValue(this.view.getLblLand(), deck, CardRulesPredicates.IS_LAND, total);
+        setLabelValue(this.view.getLblEnchantment(), deck, CardRulesPredicates.IS_ENCHANTMENT, total);
+        setLabelValue(this.view.getLblArtifact(), deck, CardRulesPredicates.IS_ARTIFACT, total);
+        setLabelValue(this.view.getLblInstant(), deck, CardRulesPredicates.IS_INSTANT, total);
+        setLabelValue(this.view.getLblSorcery(), deck, CardRulesPredicates.IS_SORCERY, total);
+        setLabelValue(this.view.getLblPlaneswalker(), deck, CardRulesPredicates.IS_PLANESWALKER, total);
 
-        setLabelValue(this.view.getLblMulti(), deck, CardRulesPredicates.Presets.IS_MULTICOLOR, total);
-        setLabelValue(this.view.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS, total);
+        setLabelValue(this.view.getLblMulti(), deck, CardRulesPredicates.IS_MULTICOLOR, total);
+        setLabelValue(this.view.getLblColorless(), deck, CardRulesPredicates.IS_COLORLESS, total);
         setLabelValue(this.view.getLblBlack(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLACK), total);
         setLabelValue(this.view.getLblBlue(), deck, CardRulesPredicates.isMonoColor(MagicColor.BLUE), total);
         setLabelValue(this.view.getLblGreen(), deck, CardRulesPredicates.isMonoColor(MagicColor.GREEN), total);

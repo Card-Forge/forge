@@ -30,7 +30,6 @@ import forge.game.ability.ApiType;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.event.*;
 import forge.game.keyword.*;
 import forge.game.keyword.KeywordCollection.KeywordCollectionView;
@@ -63,7 +62,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.function.Predicate;
 
 /**
  * <p>
@@ -2084,7 +2082,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasMetalcraft() {
-        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS) >= 3;
+        return CardLists.count(getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS) >= 3;
     }
 
     public final boolean hasDesert() {
@@ -2123,7 +2121,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
+        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.LANDS);
     }
 
     public boolean hasFerocious() {
@@ -2436,29 +2434,29 @@ public class Player extends GameEntity implements Comparable<Player> {
      * use to get a list of creatures in play for a given player.
      */
     public CardCollection getCreaturesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
     }
 
     public CardCollection getPlaneswalkersInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.PLANESWALKERS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS);
     }
 
     public CardCollection getBattlesInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.BATTLES);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
     }
 
     /**
      * use to get a list of tokens in play for a given player.
      */
     public CardCollection getTokensInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.TOKEN);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.TOKEN);
     }
 
     /**
      * use to get a list of all lands a given player has on the battlefield.
      */
     public CardCollection getLandsInPlay() {
-        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS);
     }
 
     public boolean isCardInPlay(final String cardName) {
@@ -3596,7 +3594,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean isCursed() {
-        return CardLists.count(getAttachedCards(), CardPredicates.Presets.CURSE) > 0;
+        return CardLists.count(getAttachedCards(), CardPredicates.CURSE) > 0;
     }
 
     public boolean canDiscardBy(SpellAbility sa, final boolean effect) {

@@ -25,8 +25,8 @@ import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import forge.util.Predicates;
@@ -138,17 +138,17 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterPrinted = this.buildFilterPrinted();
     }
     protected Predicate<PaperCard> buildFilter(boolean printed) {
-        Predicate<PaperCard> p = IPaperCard.Predicates.names(this.getBannedCardNames()).negate();
+        Predicate<PaperCard> p = PaperCardPredicates.names(this.getBannedCardNames()).negate();
 
         if (FormatSubType.ARENA.equals(this.getFormatSubType())) {
-            p = p.and(IPaperCard.Predicates.Presets.IS_UNREBALANCED.negate());
+            p = p.and(PaperCardPredicates.IS_UNREBALANCED.negate());
         } else {
-            p = p.and(IPaperCard.Predicates.Presets.IS_REBALANCED.negate());
+            p = p.and(PaperCardPredicates.IS_REBALANCED.negate());
         }
 
         if (!this.getAllowedSetCodes().isEmpty()) {
             p = p.and(printed ?
-                    IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed) :
+                    PaperCardPredicates.printedInSets(this.getAllowedSetCodes(), printed) :
                     StaticData.instance().getCommonCards().wasPrintedInSets(this.getAllowedSetCodes()));
         }
         if (!this.getAllowedRarities().isEmpty()) {
@@ -159,7 +159,7 @@ public class GameFormat implements Comparable<GameFormat> {
             p = p.and(Predicates.or(crp));
         }
         if (!this.getAdditionalCards().isEmpty()) {
-            p = p.or(IPaperCard.Predicates.names(this.getAdditionalCards()));
+            p = p.or(PaperCardPredicates.names(this.getAdditionalCards()));
         }
         return p;
     }

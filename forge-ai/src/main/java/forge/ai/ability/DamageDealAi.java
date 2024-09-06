@@ -28,7 +28,6 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -408,7 +407,7 @@ public class DamageDealAi extends DamageAiBase {
         final Player activator = sa.getActivatingPlayer();
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.Presets.PLANESWALKERS);
+        List<Card> hPlay = CardLists.filter(getTargetableCards(ai, sa, pl, tgt, activator, source, game), CardPredicates.PLANESWALKERS);
 
         CardCollection killables = CardLists.filter(hPlay, c -> c.getSVar("Targeting").equals("Dies")
                 || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
@@ -892,8 +891,8 @@ public class DamageDealAi extends DamageAiBase {
 
             // See if there's an indestructible target that can be used
             CardCollection indestructible = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.CREATURES
-                            .and(CardPredicates.Presets.PLANESWALKERS) //TODO: Should this be "or" Planeswalkers?
+                    CardPredicates.CREATURES
+                            .and(CardPredicates.PLANESWALKERS) //TODO: Should this be "or" Planeswalkers?
                             .and(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE))
                             .and(CardPredicates.isTargetableBy(sa))
             );
@@ -909,7 +908,7 @@ public class DamageDealAi extends DamageAiBase {
             }
             else if (tgt.canTgtPlaneswalker()) {
                 // Second pass for planeswalkers: choose AI's worst planeswalker
-                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANESWALKERS, CardPredicates.isTargetableBy(sa)));
+                final Card c = ComputerUtilCard.getWorstPlaneswalkerToDamage(CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.PLANESWALKERS, CardPredicates.isTargetableBy(sa)));
                 if (c != null) {
                     sa.getTargets().add(c);
                     if (divided) {

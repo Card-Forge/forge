@@ -24,12 +24,12 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
+import forge.item.PaperCardPredicates;
 import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.card.CardEdition;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -374,7 +374,7 @@ public class ImportSourceAnalyzer {
             cardFileNamesBySet = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             for (final CardEdition ce : FModel.getMagicDb().getEditions()) {
                 final Map<String, String> cardFileNames = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-                final Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(ce.getCode());
+                final Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(ce.getCode());
                 addSetCards(cardFileNames, FModel.getMagicDb().getCommonCards().getAllCards(), filter);
                 addSetCards(cardFileNames, FModel.getMagicDb().getVariantCards().getAllCards(), filter);
                 cardFileNamesBySet.put(ce.getCode2(), cardFileNames);

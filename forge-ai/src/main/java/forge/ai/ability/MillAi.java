@@ -37,7 +37,7 @@ public class MillAi extends SpellAbilityAi {
             return ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai);
         } else if (aiLogic.equals("LilianaMill")) {
             // Only mill if a "Raise Dead" target is available, in case of control decks with few creatures
-            return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES).size() >= 1;
+            return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES).size() >= 1;
         }
         return true;
     }

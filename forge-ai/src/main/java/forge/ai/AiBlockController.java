@@ -1343,7 +1343,7 @@ public class AiBlockController {
         boolean creatureParityOrAllowedDiff = aiCreatureCount
                 + (randomTradeIfBehindOnBoard ? maxCreatDiff : 0) >= oppCreatureCount;
         boolean wantToTradeWithCreatInHand = !checkingOther && randomTradeIfCreatInHand
-                && ai.getZone(ZoneType.Hand).contains(CardPredicates.Presets.CREATURES)
+                && ai.getZone(ZoneType.Hand).contains(CardPredicates.CREATURES)
                 && aiCreatureCount + maxCreatDiffWithRepl >= oppCreatureCount;
         boolean wantToSavePlaneswalker = MyRandom.percentTrue(chanceToSavePW)
                 && combat.getDefenderByAttacker(attacker) instanceof Card

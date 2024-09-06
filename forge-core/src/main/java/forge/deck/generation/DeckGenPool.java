@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Iterables;
 
 public class DeckGenPool implements IDeckGenPool {
@@ -37,7 +37,7 @@ public class DeckGenPool implements IDeckGenPool {
 
     @Override
     public PaperCard getCard(String name, String edition) {
-        Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition).and(IPaperCard.Predicates.name(name));
+        Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition).and(PaperCardPredicates.name(name));
         Iterable<PaperCard> editionCards=Iterables.filter(cards.values(), filter);
         if (editionCards.iterator().hasNext()){
             return editionCards.iterator().next();

@@ -70,7 +70,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             // Momir needs PaperCard
             //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
             //Predicate<PaperCard> cpp = Predicates.and(
-            //    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
+            //    Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard.FN_GET_RULES),
             //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
             //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
             //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();

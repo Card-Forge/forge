@@ -22,7 +22,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -177,7 +176,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
                 list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
-                if (Iterables.any(list, Presets.CREATURES)) {
+                if (Iterables.any(list, CardPredicates.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {

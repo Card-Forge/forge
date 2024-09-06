@@ -94,7 +94,7 @@ public class DiscardAi extends SpellAbilityAi {
         if (sa.hasParam("AnyNumber")) {
             if ("DiscardUncastableAndExcess".equals(aiLogic)) {
                 final CardCollectionView inHand = ai.getCardsIn(ZoneType.Hand);
-                final int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+                final int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
                 int numDiscard = 0;
                 int numOppInHand = 0;
                 for (Player p : ai.getGame().getPlayers()) {

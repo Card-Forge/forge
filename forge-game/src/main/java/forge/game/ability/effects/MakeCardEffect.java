@@ -14,10 +14,7 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.item.BoosterPack;
-import forge.item.IPaperCard;
-import forge.item.PaperCard;
-import forge.item.SealedTemplate;
+import forge.item.*;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Iterables;
@@ -153,7 +150,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {
-                            pc = Iterables.getLast(Iterables.filter(pack, IPaperCard.Predicates.name(name)));
+                            pc = Iterables.getLast(Iterables.filter(pack, PaperCardPredicates.name(name)));
                         } else {
                             pc = StaticData.instance().getCommonCards().getUniqueByName(name);
                         }

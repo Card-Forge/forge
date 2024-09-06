@@ -54,11 +54,11 @@ import java.util.function.Predicate;
  */
 public final class QuestUtilCards {
 
-	private static final Predicate<PaperCard> COMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_COMMON;
-	private static final Predicate<PaperCard> UNCOMMON_PREDICATE = IPaperCard.Predicates.Presets.IS_UNCOMMON;
-	private static final Predicate<PaperCard> RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC;
-	private static final Predicate<PaperCard> ONLY_RARE_PREDICATE = IPaperCard.Predicates.Presets.IS_RARE;
-	private static final Predicate<PaperCard> MYTHIC_PREDICATE = IPaperCard.Predicates.Presets.IS_MYTHIC_RARE;
+	private static final Predicate<PaperCard> COMMON_PREDICATE = PaperCardPredicates.IS_COMMON;
+	private static final Predicate<PaperCard> UNCOMMON_PREDICATE = PaperCardPredicates.IS_UNCOMMON;
+	private static final Predicate<PaperCard> RARE_PREDICATE = PaperCardPredicates.IS_RARE_OR_MYTHIC;
+	private static final Predicate<PaperCard> ONLY_RARE_PREDICATE = PaperCardPredicates.IS_RARE;
+	private static final Predicate<PaperCard> MYTHIC_PREDICATE = PaperCardPredicates.IS_MYTHIC_RARE;
 
     private final QuestController  questController;
     private final QuestPreferences questPreferences;
@@ -870,7 +870,7 @@ public final class QuestUtilCards {
         }
 
         // get all cards in the specified edition
-        Predicate<PaperCard> filter = IPaperCard.Predicates.printedInSet(edition);
+        Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition);
         Iterable<PaperCard> editionCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), filter);
 
         ItemPool<PaperCard> ownedCards = questAssets.getCardPool();

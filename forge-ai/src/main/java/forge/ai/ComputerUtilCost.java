@@ -10,7 +10,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -745,7 +744,7 @@ public class ComputerUtilCost {
 
             // Special Card logic, this one try to median its power with the number of artifacts
             if ("Marionette Master".equals(source.getName())) {
-                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
                 return list.size() >= copy.getNetPower();
             } else if ("Cultivator of Blades".equals(source.getName())) {
                 // Cultivator does try to median with number of Creatures
@@ -832,7 +831,7 @@ public class ComputerUtilCost {
         return getAvailableManaColors(ai, Lists.newArrayList(additionalLand));
     }
     public static Set<String> getAvailableManaColors(Player ai, List<Card> additionalLands) {
-        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.UNTAPPED);
+        CardCollection cardsToConsider = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.UNTAPPED);
         Set<String> colorsAvailable = Sets.newHashSet();
 
         if (additionalLands != null) {

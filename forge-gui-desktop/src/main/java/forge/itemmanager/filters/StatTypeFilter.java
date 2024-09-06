@@ -59,7 +59,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
     protected <U extends InventoryItem> boolean showUnsupportedItem(U item) {
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK); //support special pack/deck case
         if (btnPackOrDeck != null && btnPackOrDeck.isSelected()) {
-            return ItemPredicate.Presets.IS_PACK_OR_DECK.test(item);
+            return ItemPredicate.IS_PACK_OR_DECK.test(item);
         }
         return false;
     }
@@ -70,7 +70,7 @@ public abstract class StatTypeFilter<T extends InventoryItem> extends ToggleButt
 
         FLabel btnPackOrDeck = buttonMap.get(StatTypes.PACK_OR_DECK);
         if (btnPackOrDeck != null) { //support special pack/deck case
-            int count = items.countAll(ItemPredicate.Presets.IS_PACK_OR_DECK, InventoryItem.class);
+            int count = items.countAll(ItemPredicate.IS_PACK_OR_DECK, InventoryItem.class);
             btnPackOrDeck.setText(String.valueOf(count));
         }
 

@@ -15,7 +15,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -107,7 +106,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
         final Game game = ai.getGame();
         CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
-        tapList = CardLists.filter(tapList, Presets.CAN_TAP);
+        tapList = CardLists.filter(tapList, CardPredicates.CAN_TAP);
         tapList = CardLists.filter(tapList, c -> {
             if (c.isCreature()) {
                 return true;
@@ -196,7 +195,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
             } else if (phase.isPlayerTurn(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-                if (Iterables.any(tapList, CardPredicates.Presets.CREATURES)) {
+                if (Iterables.any(tapList, CardPredicates.CREATURES)) {
                     List<Card> creatureList = CardLists.filter(tapList, c -> c.isCreature() && CombatUtil.canAttack(c, opp));
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else { // no creatures available
@@ -264,7 +263,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
         }
 
         // try to just tap already tapped things
-        tapList = CardLists.filter(list, Presets.TAPPED);
+        tapList = CardLists.filter(list, CardPredicates.TAPPED);
 
         if (tapTargetList(ai, sa, tapList, mandatory)) {
             return true;

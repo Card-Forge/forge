@@ -20,7 +20,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardView;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
@@ -427,7 +426,7 @@ public class HumanPlay {
             }
             else if (part instanceof CostTapType) {
                 CardCollectionView list = CardLists.getValidCards(p.getCardsIn(ZoneType.Battlefield), part.getType().split(";"), p, source, sourceAbility);
-                list = CardLists.filter(list, Presets.CAN_TAP);
+                list = CardLists.filter(list, CardPredicates.CAN_TAP);
                 int amount = part.getAbilityAmount(sourceAbility);
                 boolean hasPaid = payCostPart(controller, p, sourceAbility, hcd.isEffect(), (CostPartWithList)part, amount, list, Localizer.getInstance().getMessage("lblTap") + orString);
                 if (!hasPaid) { return false; }

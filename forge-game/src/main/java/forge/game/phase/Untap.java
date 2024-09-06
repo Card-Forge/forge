@@ -34,7 +34,6 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -113,7 +112,7 @@ public class Untap extends Phase {
      */
     private void doUntap() {
         final Player player = game.getPhaseHandler().getPlayerTurn();
-        final Predicate<Card> tappedCanUntap = Presets.TAPPED.and(CANUNTAP);
+        final Predicate<Card> tappedCanUntap = CardPredicates.TAPPED.and(CANUNTAP);
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection list = new CardCollection(player.getCardsIn(ZoneType.Battlefield));

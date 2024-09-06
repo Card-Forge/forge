@@ -14,7 +14,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
@@ -646,7 +645,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
             Collections.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
@@ -931,7 +930,7 @@ public class CardProperty {
                     return false;
                 } else if (restriction.equals("NonToken")) {
                     return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
-                            Presets.NON_TOKEN, CardPredicates.sharesNameWith(card)).isEmpty();
+                            CardPredicates.NON_TOKEN, CardPredicates.sharesNameWith(card)).isEmpty();
                 } else if (restriction.equals("TriggeredCard")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
@@ -1305,7 +1304,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1319,14 +1318,14 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("yardGreatestPower")) {
-            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
             for (final Card crd : cards) {
                 if (crd.getNetPower() > card.getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1340,7 +1339,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) { // 4/25/2023 only used for adventure mode Death Ring
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1363,7 +1362,7 @@ public class CardProperty {
             }
 
             if ("NonLandPermanent".equals(prop)) {
-                cards = CardLists.filter(cards, CardPredicates.Presets.NONLAND_PERMANENTS);
+                cards = CardLists.filter(cards, CardPredicates.NONLAND_PERMANENTS);
             } else {
                 cards = CardLists.getType(cards, prop);
             }

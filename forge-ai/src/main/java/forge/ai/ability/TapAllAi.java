@@ -45,7 +45,7 @@ public class TapAllAi extends SpellAbilityAi {
         }
 
         validTappables = CardLists.getValidCards(validTappables, valid, source.getController(), source, sa);
-        validTappables = CardLists.filter(validTappables, CardPredicates.Presets.UNTAPPED);
+        validTappables = CardLists.filter(validTappables, CardPredicates.UNTAPPED);
 
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParam("AILogic");
@@ -83,7 +83,7 @@ public class TapAllAi extends SpellAbilityAi {
         final Game game = source.getGame();
         CardCollectionView tmpList = game.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source, sa);
-        tmpList = CardLists.filter(tmpList, CardPredicates.Presets.UNTAPPED);
+        tmpList = CardLists.filter(tmpList, CardPredicates.UNTAPPED);
         return tmpList;
     }
 

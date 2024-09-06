@@ -509,7 +509,7 @@ public class AttachAi extends SpellAbilityAi {
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}
-        	evenBetterList = CardLists.filter(betterList, CardPredicates.Presets.UNTAPPED);
+        	evenBetterList = CardLists.filter(betterList, CardPredicates.UNTAPPED);
         	if (!evenBetterList.isEmpty()) {
         		betterList = evenBetterList;
         	}

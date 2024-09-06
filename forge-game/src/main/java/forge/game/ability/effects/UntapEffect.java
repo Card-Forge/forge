@@ -4,12 +4,7 @@ import com.google.common.collect.Maps;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardUtil;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -102,7 +97,7 @@ public class UntapEffect extends SpellAbilityEffect {
                     valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
             // the few mandatory are handled differently
             if (!mandatory) {
-                list = CardLists.filter(list, Presets.TAPPED);
+                list = CardLists.filter(list, CardPredicates.TAPPED);
             }
 
             final CardCollectionView selected = p.getController().chooseCardsForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectCardToUntap"), mandatory ? num : 0, num, !mandatory, null);

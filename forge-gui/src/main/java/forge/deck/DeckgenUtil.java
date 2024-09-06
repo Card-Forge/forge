@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -61,7 +62,7 @@ public class DeckgenUtil {
         try {
             List<String> keys      = new ArrayList<>(CardArchetypeLDAGenerator.ldaPools.get(format.getName()).keySet());
             String       randomKey = keys.get( MyRandom.getRandom().nextInt(keys.size()) );
-            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCard.Predicates.name(randomKey));
+            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCardPredicates.name(randomKey));
             PaperCard keyCard = FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0);
 
             return buildCardGenDeck(keyCard,format,isForAI);
@@ -73,7 +74,7 @@ public class DeckgenUtil {
 
     public static Deck buildCardGenDeck(String cardName, GameFormat format, boolean isForAI){
         try {
-            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCard.Predicates.name(cardName));
+            Predicate<PaperCard> cardFilter = format.getFilterPrinted().and(PaperCardPredicates.name(cardName));
             return buildCardGenDeck(FModel.getMagicDb().getCommonCards().getAllCards(cardFilter).get(0),format,isForAI);
         }catch (Exception e){
             e.printStackTrace();
@@ -214,8 +215,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules)));
+        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -313,8 +314,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules)));
+        if(deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules))>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -841,7 +842,7 @@ public class DeckgenUtil {
 
         // determine how many additional lands we need, but don't take lands already in deck into consideration,
         // or we risk incorrectly determining the target deck size
-        int numLands = Iterables.size(Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules)));
+        int numLands = Iterables.size(Iterables.filter(cards, Predicates.compose(CardRulesPredicates.IS_LAND, PaperCard::getRules)));
         int sizeNoLands = cards.size() - numLands;
 
         // attempt to determine if building for sealed, constructed or EDH

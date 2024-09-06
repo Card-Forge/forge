@@ -43,11 +43,11 @@ public class SealedDeckBuilder extends LimitedDeckBuilder {
 
         Iterable<CardRules> rules = Iterables.transform(colorChooserList, PaperCard::getRules);
 
-        int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_WHITE));
-        int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLUE));
-        int black = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLACK));
-        int red = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_RED));
-        int green = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_GREEN));
+        int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.IS_WHITE));
+        int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.IS_BLUE));
+        int black = Iterables.size(Iterables.filter(rules, CardRulesPredicates.IS_BLACK));
+        int red = Iterables.size(Iterables.filter(rules, CardRulesPredicates.IS_RED));
+        int green = Iterables.size(Iterables.filter(rules, CardRulesPredicates.IS_GREEN));
 
         final int[] colorCounts = { white, blue, black, red, green };
         int[] countsCopy = Arrays.copyOf(colorCounts, 5);

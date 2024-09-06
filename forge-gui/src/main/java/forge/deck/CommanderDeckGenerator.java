@@ -65,7 +65,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), format.isLegalCardPredicate()
-                .and(Predicates.compose(CardRulesPredicates.Presets.CAN_BE_BRAWL_COMMANDER.and(canPlay), PaperCard::getRules)));
+                .and(Predicates.compose(CardRulesPredicates.CAN_BE_BRAWL_COMMANDER.and(canPlay), PaperCard::getRules)));
         final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));

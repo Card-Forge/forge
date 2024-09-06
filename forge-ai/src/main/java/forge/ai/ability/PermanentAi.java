@@ -140,8 +140,8 @@ public class PermanentAi extends SpellAbilityAi {
                         && card.getState(CardStateName.Original).getManaCost() != null
                         && card.getState(CardStateName.Original).getManaCost().getCMC() == manaValue);
                 if (manaValue == 0) {
-                    aiCards = CardLists.filter(aiCards, CardPredicates.Presets.NON_LANDS);
-                    oppCards = CardLists.filter(oppCards, CardPredicates.Presets.NON_LANDS);
+                    aiCards = CardLists.filter(aiCards, CardPredicates.NON_LANDS);
+                    oppCards = CardLists.filter(oppCards, CardPredicates.NON_LANDS);
                     // also filter out other Chalices in our own deck
                     aiCards = CardLists.filter(aiCards, CardPredicates.nameNotEquals("Chalice of the Void"));
                 }
@@ -257,7 +257,7 @@ public class PermanentAi extends SpellAbilityAi {
                     // Only cast if there are X or more mana sources controlled by the AI *or*
                     // if there are X-1 mana sources in play but the AI has an extra land in hand
                     CardCollection m = ComputerUtilMana.getAvailableManaSources(ai, true);
-                    int extraMana = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS) > 0 ? 1 : 0;
+                    int extraMana = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS) > 0 ? 1 : 0;
                     if (source.getName().equals("Illusions of Grandeur")) {
                         // TODO: this is currently hardcoded for specific Illusions-Donate cost reduction spells, need to make this generic.
                         extraMana += Math.min(3, CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Sapphire Medallion").or(CardPredicates.nameEquals("Helm of Awakening"))).size()) * 2; // each cost-reduction spell accounts for {1} in both Illusions and Donate

@@ -23,8 +23,8 @@ import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.DeckFormat;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -87,12 +87,12 @@ public abstract class DeckGeneratorBase {
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
-        final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard::getRules));
+        final Iterable<PaperCard> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.IS_CREATURE, PaperCard::getRules));
         final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
         trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
-        Predicate<PaperCard> preSpells = Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, PaperCard::getRules);
+        Predicate<PaperCard> preSpells = Predicates.compose(CardRulesPredicates.IS_NON_CREATURE_SPELL, PaperCard::getRules);
         final Iterable<PaperCard> spells = Iterables.filter(cards, preSpells);
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
         trace.append("Spells to add:").append(spellCnt).append("\n");
@@ -108,10 +108,10 @@ public abstract class DeckGeneratorBase {
     protected boolean setBasicLandPool(String edition){
         Predicate<PaperCard> isSetBasicLand;
         if (edition !=null){
-            isSetBasicLand = IPaperCard.Predicates.printedInSet(edition)
-                    .and(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
+            isSetBasicLand = PaperCardPredicates.printedInSet(edition)
+                    .and(Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules));
         }else{
-            isSetBasicLand = Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules);
+            isSetBasicLand = Predicates.compose(CardRulesPredicates.IS_BASIC_LAND, PaperCard::getRules);
         }
 
         landPool = new DeckGenPool(StaticData.instance().getCommonCards().getAllCards(isSetBasicLand));
@@ -234,7 +234,7 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-            Predicate<PaperCard> exceptBasicLand = Predicates.compose(CardRulesPredicates.Presets.NOT_BASIC_LAND, PaperCard::getRules);
+            Predicate<PaperCard> exceptBasicLand = Predicates.compose(CardRulesPredicates.NOT_BASIC_LAND, PaperCard::getRules);
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 Iterable<PaperCard> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
@@ -388,7 +388,7 @@ public abstract class DeckGeneratorBase {
 
         //filter to provide all dual lands from pool matching 2 or 3 colors from current deck
         Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
-        Predicate<CardRules> exceptBasicLand = CardRulesPredicates.Presets.NOT_BASIC_LAND;
+        Predicate<CardRules> exceptBasicLand = CardRulesPredicates.NOT_BASIC_LAND;
 
         Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(dualLandFilter.and(exceptBasicLand).and(canPlay), PaperCard::getRules));
         Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",

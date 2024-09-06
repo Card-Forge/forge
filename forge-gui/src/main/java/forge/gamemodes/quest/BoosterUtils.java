@@ -25,6 +25,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import forge.item.*;
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
@@ -38,12 +39,6 @@ import forge.card.MagicColor;
 import forge.card.PrintSheet;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
-import forge.item.BoosterPack;
-import forge.item.IPaperCard;
-import forge.item.IPaperCard.Predicates.Presets;
-import forge.item.InventoryItem;
-import forge.item.PaperCard;
-import forge.item.TournamentPack;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -142,18 +137,18 @@ public final class BoosterUtils {
         }
 
         final boolean allowDuplicates = userPrefs != null && userPrefs.allowDuplicates();
-        final boolean mythicsAvailable = Iterables.any(cardPool, Presets.IS_MYTHIC_RARE);
+        final boolean mythicsAvailable = Iterables.any(cardPool, PaperCardPredicates.IS_MYTHIC_RARE);
         final int numMythics = mythicsAvailable ? numRares / RARES_PER_MYTHIC : 0;
         final int adjustedRares = numRares - numMythics;
 
         final List<Predicate<CardRules>> colorFilters = getColorFilters(userPrefs, cardPool);
 
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_COMMON, numCommons, colorFilters, allowDuplicates));
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_UNCOMMON, numUncommons, colorFilters, allowDuplicates));
-        cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_RARE, adjustedRares, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_COMMON, numCommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_UNCOMMON, numUncommons, colorFilters, allowDuplicates));
+        cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_RARE, adjustedRares, colorFilters, allowDuplicates));
 
         if (numMythics > 0) {
-            cards.addAll(BoosterUtils.generateCards(cardPool, Presets.IS_MYTHIC_RARE, numMythics, colorFilters, allowDuplicates));
+            cards.addAll(BoosterUtils.generateCards(cardPool, PaperCardPredicates.IS_MYTHIC_RARE, numMythics, colorFilters, allowDuplicates));
         }
 
         return cards;
@@ -271,7 +266,7 @@ public final class BoosterUtils {
                 predicate = CardRulesPredicates.hasColor(color);
             }
             if (MyRandom.getRandom().nextDouble() < 0.1) {
-                predicate = predicate.and(CardRulesPredicates.Presets.IS_MULTICOLOR);
+                predicate = predicate.and(CardRulesPredicates.IS_MULTICOLOR);
             }
             colorFilters.add(predicate);
         }
@@ -303,7 +298,7 @@ public final class BoosterUtils {
 
                     //Add artifacts here if there's no colorless selection
                     if (i % 8 == 0 && !preferredColors.contains(MagicColor.COLORLESS) && includeArtifacts) {
-                        colorFilters.add(CardRulesPredicates.Presets.IS_ARTIFACT);
+                        colorFilters.add(CardRulesPredicates.IS_ARTIFACT);
                     } else if (i % 5 == 0) {
 
                         //If colorless is the only color selected, add a small chance to get Phyrexian mana cost cards.
@@ -328,7 +323,7 @@ public final class BoosterUtils {
 
                         //Try to get multicolored cards that fit into the preferred colors.
                         Predicate<CardRules> predicateRules = CardRulesPredicates.isColor(preferredColors.get(index))
-                                .and(CardRulesPredicates.Presets.IS_MULTICOLOR);
+                                .and(CardRulesPredicates.IS_MULTICOLOR);
                         Predicate<PaperCard> predicateCard = Predicates.compose(predicateRules, PaperCard::getRules);
 
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
@@ -351,7 +346,7 @@ public final class BoosterUtils {
 
                 for (Byte color : otherColors) {
                     if (i % 6 == 0) {
-                        colorFilters.add(CardRulesPredicates.isColor(color).and(CardRulesPredicates.Presets.IS_MULTICOLOR));
+                        colorFilters.add(CardRulesPredicates.isColor(color).and(CardRulesPredicates.IS_MULTICOLOR));
                     } else {
                         colorFilters.add(CardRulesPredicates.isMonoColor(color));
                     }
@@ -448,21 +443,21 @@ public final class BoosterUtils {
             return null;
         }
 
-        if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.Presets.IS_BLACK;
-        if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.Presets.IS_BLUE;
-        if (input.equalsIgnoreCase("green"))          return CardRulesPredicates.Presets.IS_GREEN;
-        if (input.equalsIgnoreCase("red"))            return CardRulesPredicates.Presets.IS_RED;
-        if (input.equalsIgnoreCase("white"))          return CardRulesPredicates.Presets.IS_WHITE;
-        if (input.equalsIgnoreCase("colorless"))      return CardRulesPredicates.Presets.IS_COLORLESS;
-        if (input.equalsIgnoreCase("multicolor"))     return CardRulesPredicates.Presets.IS_MULTICOLOR;
+        if (input.equalsIgnoreCase("black"))          return CardRulesPredicates.IS_BLACK;
+        if (input.equalsIgnoreCase("blue"))           return CardRulesPredicates.IS_BLUE;
+        if (input.equalsIgnoreCase("green"))          return CardRulesPredicates.IS_GREEN;
+        if (input.equalsIgnoreCase("red"))            return CardRulesPredicates.IS_RED;
+        if (input.equalsIgnoreCase("white"))          return CardRulesPredicates.IS_WHITE;
+        if (input.equalsIgnoreCase("colorless"))      return CardRulesPredicates.IS_COLORLESS;
+        if (input.equalsIgnoreCase("multicolor"))     return CardRulesPredicates.IS_MULTICOLOR;
 
-        if (input.equalsIgnoreCase("land"))           return CardRulesPredicates.Presets.IS_LAND;
-        if (input.equalsIgnoreCase("creature"))       return CardRulesPredicates.Presets.IS_CREATURE;
-        if (input.equalsIgnoreCase("artifact"))       return CardRulesPredicates.Presets.IS_ARTIFACT;
-        if (input.equalsIgnoreCase("planeswalker"))   return CardRulesPredicates.Presets.IS_PLANESWALKER;
-        if (input.equalsIgnoreCase("instant"))        return CardRulesPredicates.Presets.IS_INSTANT;
-        if (input.equalsIgnoreCase("sorcery"))        return CardRulesPredicates.Presets.IS_SORCERY;
-        if (input.equalsIgnoreCase("enchantment"))    return CardRulesPredicates.Presets.IS_ENCHANTMENT;
+        if (input.equalsIgnoreCase("land"))           return CardRulesPredicates.IS_LAND;
+        if (input.equalsIgnoreCase("creature"))       return CardRulesPredicates.IS_CREATURE;
+        if (input.equalsIgnoreCase("artifact"))       return CardRulesPredicates.IS_ARTIFACT;
+        if (input.equalsIgnoreCase("planeswalker"))   return CardRulesPredicates.IS_PLANESWALKER;
+        if (input.equalsIgnoreCase("instant"))        return CardRulesPredicates.IS_INSTANT;
+        if (input.equalsIgnoreCase("sorcery"))        return CardRulesPredicates.IS_SORCERY;
+        if (input.equalsIgnoreCase("enchantment"))    return CardRulesPredicates.IS_ENCHANTMENT;
 
         throw new IllegalArgumentException("No CardRules limitations could be parsed from: " + input);
     }
@@ -483,7 +478,7 @@ public final class BoosterUtils {
             final int qty = Integer.parseInt(temp[0]);
 
             List<Predicate<PaperCard>> preds = new ArrayList<>();
-            preds.add(IPaperCard.Predicates.Presets.IS_RARE_OR_MYTHIC); // Determine rarity
+            preds.add(PaperCardPredicates.IS_RARE_OR_MYTHIC); // Determine rarity
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);

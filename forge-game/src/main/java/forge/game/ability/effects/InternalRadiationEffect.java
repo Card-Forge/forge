@@ -29,7 +29,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
 
         final CardCollectionView milled = game.getAction().mill(new PlayerCollection(p), numRad, ZoneType.Graveyard, sa, moveParams);
         table.triggerChangesZoneAll(game, sa);
-        int n = CardLists.count(milled, CardPredicates.Presets.NON_LANDS);
+        int n = CardLists.count(milled, CardPredicates.NON_LANDS);
 
         if (StaticAbilityGainLifeRadiation.gainLifeRadiation(p)) {
             p.gainLife(n, sa.getHostCard(), sa);

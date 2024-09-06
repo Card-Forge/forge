@@ -92,7 +92,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         } else if ("ExileGraveyards".equals(aiLogic)) {
             for (Player opp : ai.getOpponents()) {
                 CardCollectionView cardsGY = opp.getCardsIn(ZoneType.Graveyard);
-                CardCollection creats = CardLists.filter(cardsGY, CardPredicates.Presets.CREATURES);
+                CardCollection creats = CardLists.filter(cardsGY, CardPredicates.CREATURES);
 
                 if (opp.hasDelirium() || opp.hasThreshold() || creats.size() >= 5) {
                     return true;
@@ -107,7 +107,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 Player bestTgt = null;
                 if (player.canBeTargetedBy(sa)) {
                     int numGY = CardLists.count(player.getCardsIn(ZoneType.Graveyard),
-                            CardPredicates.Presets.CREATURES);
+                            CardPredicates.CREATURES);
                     if (numGY > maxSize) {
                         maxSize = numGY;
                         bestTgt = player;
@@ -353,7 +353,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
             // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
             // there is no specific AI to support playing it in a smarter way. Feel free to expand.
-            return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES);
+            return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.CREATURES);
         }
 
         CardCollectionView humanType = ai.getOpponents().getCardsIn(origin);

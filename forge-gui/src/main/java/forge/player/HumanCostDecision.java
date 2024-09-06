@@ -6,7 +6,6 @@ import forge.card.MagicColor;
 import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.cost.*;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -1232,7 +1231,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,
                 source, ability);
-        typeList = CardLists.filter(typeList, ability.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, ability.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         Integer c = null;
         if (!amount.equals("Any")) {
@@ -1306,7 +1305,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, Presets.TAPPED);
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED);
         if (!cost.canUntapSource) {
             typeList.remove(source);
         }

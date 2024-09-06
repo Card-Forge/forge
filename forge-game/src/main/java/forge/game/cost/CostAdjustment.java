@@ -338,11 +338,11 @@ public class CostAdjustment {
 
         final Player activator = sa.getActivatingPlayer();
         CardCollectionView untappedCards = CardLists.filter(activator.getCardsIn(ZoneType.Battlefield),
-                CardPredicates.Presets.CAN_TAP);
+                CardPredicates.CAN_TAP);
         if (improvise) {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.ARTIFACTS);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.ARTIFACTS);
         } else {
-            untappedCards = CardLists.filter(untappedCards, CardPredicates.Presets.CREATURES);
+            untappedCards = CardLists.filter(untappedCards, CardPredicates.CREATURES);
         }
 
         Map<Card, ManaCostShard> convokedCards = activator.getController().chooseCardsForConvokeOrImprovise(sa,

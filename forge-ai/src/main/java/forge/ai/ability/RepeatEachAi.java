@@ -8,7 +8,6 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -30,7 +29,7 @@ public class RepeatEachAi extends SpellAbilityAi {
         } else if ("Never".equals(logic)) {
             return false;
         } else if ("CloneAllTokens".equals(logic)) {
-            List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), Presets.TOKEN);
+            List<Card> humTokenCreats = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.TOKEN);
             List<Card> compTokenCreats = aiPlayer.getTokensInPlay();
 
             return compTokenCreats.size() > humTokenCreats.size();

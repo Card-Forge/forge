@@ -26,7 +26,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
 import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostEnlist;
@@ -185,7 +184,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                 game.getAction().resetActivationsPerTurn();
 
-                final int lands = CardLists.count(playerTurn.getLandsInPlay(), Presets.UNTAPPED);
+                final int lands = CardLists.count(playerTurn.getLandsInPlay(), CardPredicates.UNTAPPED);
                 playerTurn.setNumPowerSurgeLands(lands);
             }
             //update tokens
@@ -287,7 +286,7 @@ public class PhaseHandler implements java.io.Serializable {
                             }
                         }
                         // roll for attractions if we have any
-                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Presets.ATTRACTIONS)) {
+                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), CardPredicates.ATTRACTIONS)) {
                             playerTurn.rollToVisitAttractions();
                         }
                         table.replaceCounterEffect(game, null, false);

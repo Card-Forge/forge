@@ -107,7 +107,7 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
 
         Iterable<PaperCard> filtered= Iterables.filter(cards,
                 Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
-                        .and(Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, PaperCard::getRules))
+                        .and(Predicates.compose(CardRulesPredicates.IS_NON_LAND, PaperCard::getRules))
                         .and(gameFormat.getFilterPrinted())
         );
 

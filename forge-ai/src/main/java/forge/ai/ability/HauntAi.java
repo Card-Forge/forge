@@ -20,7 +20,7 @@ public class HauntAi extends SpellAbilityAi {
         final Game game = ai.getGame();
         if (sa.usesTargeting() && !card.isToken()) {
             final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.Presets.CREATURES);
+                    CardPredicates.CREATURES);
 
             // nothing to haunt
             if (creats.isEmpty()) {

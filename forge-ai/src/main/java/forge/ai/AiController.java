@@ -34,7 +34,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellApiBased;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
@@ -404,10 +403,10 @@ public class AiController {
 
     private CardCollection filterLandsToPlay(CardCollection landList) {
         final CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        CardCollection nonLandList = CardLists.filter(hand, Presets.NON_LANDS);
+        CardCollection nonLandList = CardLists.filter(hand, CardPredicates.NON_LANDS);
         if (landList.size() == 1 && nonLandList.size() < 3) {
             CardCollectionView cardsInPlay = player.getCardsIn(ZoneType.Battlefield);
-            CardCollection landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
+            CardCollection landsInPlay = CardLists.filter(cardsInPlay, CardPredicates.LANDS);
             CardCollection allCards = new CardCollection(player.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(player.getCardsIn(ZoneType.Command));
             allCards.addAll(cardsInPlay);
@@ -445,7 +444,7 @@ public class AiController {
             final CardCollectionView hand1 = player.getCardsIn(ZoneType.Hand);
             CardCollection lands = new CardCollection(battlefield);
             lands.addAll(hand1);
-            lands = CardLists.filter(lands, Presets.LANDS);
+            lands = CardLists.filter(lands, CardPredicates.LANDS);
             int maxCmcInHand = Aggregates.max(hand1, Card::getCMC);
 
             if (lands.size() >= Math.max(maxCmcInHand, 6)) {
@@ -469,7 +468,7 @@ public class AiController {
             return null;
         }
 
-        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
+        CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
         // Some considerations for Momir/MoJhoSto
         boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
@@ -598,8 +597,8 @@ public class AiController {
             }
 
             // pick dual lands if available
-            if (Iterables.any(landList, Presets.NONBASIC_LANDS)) {
-                landList = CardLists.filter(landList, Presets.NONBASIC_LANDS);
+            if (Iterables.any(landList, CardPredicates.NONBASIC_LANDS)) {
+                landList = CardLists.filter(landList, CardPredicates.NONBASIC_LANDS);
             }
         }
         return ComputerUtilCard.getBestLandToPlayAI(landList);
@@ -1061,7 +1060,7 @@ public class AiController {
                 if ("DiscardUncastableAndExcess".equals(sa.getParam("AILogic"))) {
                     CardCollection discards = new CardCollection();
                     final CardCollectionView inHand = player.getCardsIn(ZoneType.Hand);
-                    final int numLandsOTB = CardLists.count(inHand, CardPredicates.Presets.LANDS);
+                    final int numLandsOTB = CardLists.count(inHand, CardPredicates.LANDS);
                     int numOppInHand = 0;
                     for (Player p : player.getGame().getPlayers()) {
                         if (p.getCardsIn(ZoneType.Hand).size() > numOppInHand) {
@@ -1119,8 +1118,8 @@ public class AiController {
             if (validCards.isEmpty()) {
                 continue;
             }
-            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-            final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.Presets.LANDS);
+            final int numLandsInPlay = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
+            final CardCollection landsInHand = CardLists.filter(validCards, CardPredicates.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
@@ -1397,11 +1396,11 @@ public class AiController {
             return false;
         }
 
-        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
+        CardCollection inHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!Iterables.any(otb, Presets.NON_LANDS)) {
+            if (!Iterables.any(otb, CardPredicates.NON_LANDS)) {
                 return false;
             }
         }
@@ -1578,7 +1577,7 @@ public class AiController {
             if (sa.getHostCard().hasKeyword(Keyword.STORM)
                     && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
                     && player.getZone(ZoneType.Hand).contains(
-                            Presets.LANDS.or(CardPredicates.hasKeyword("Storm")).negate())) {
+                            CardPredicates.LANDS.or(CardPredicates.hasKeyword("Storm")).negate())) {
                 if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
                     // skip evaluating Storm unless we reached the minimum Storm count
                     continue;
@@ -1601,7 +1600,7 @@ public class AiController {
                 } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
                     if (isLifeInDanger) { //needs more tune up for certain conditions
                         aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
-                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
+                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.CREATURES).size() > 4) {
                         if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
                             continue;
                         else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
@@ -1971,7 +1970,7 @@ public class AiController {
                         break;
                     }
                 } else {
-                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.Presets.CAN_BE_DESTROYED);
+                    CardCollectionView viableOptions = CardLists.filter(pool, CardPredicates.isControlledByAnyOf(sa.getActivatingPlayer().getOpponents()), CardPredicates.CAN_BE_DESTROYED);
                     Card best = ComputerUtilCard.getBestAI(viableOptions);
                     if (best != null) {
                         result.add(best);
@@ -2047,7 +2046,7 @@ public class AiController {
         CardLists.shuffle(library);
 
         // remove all land, keep non-basicland in there, shuffled
-        CardCollection land = CardLists.filter(library, CardPredicates.Presets.LANDS);
+        CardCollection land = CardLists.filter(library, CardPredicates.LANDS);
         for (Card c : land) {
             if (c.isLand()) {
                 library.remove(c);
@@ -2097,7 +2096,7 @@ public class AiController {
             }
         }
         if ("Aminatou".equals(sa.getParam("AILogic")) && game.getPlayers().size() > 2) {
-            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NONLAND_PERMANENTS);
+            CardCollection all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.NONLAND_PERMANENTS);
             CardCollection left = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Left));
             CardCollection right = CardLists.filterControlledBy(all, game.getNextPlayerAfter(player, Direction.Right));
             return Aggregates.sum(left, Card::getCMC) > Aggregates.sum(right, Card::getCMC);

@@ -181,7 +181,7 @@ public class DeckHints {
             case COLOR:
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard::getRules));
+                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.IS_COLORLESS, PaperCard::getRules));
                 } else {
                     Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules));
                 }

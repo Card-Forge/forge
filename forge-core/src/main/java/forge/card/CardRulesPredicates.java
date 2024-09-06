@@ -12,13 +12,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class CardRulesPredicates {
 
-    /** The Constant isKeptInAiDecks. */
     public static final Predicate<CardRules> IS_KEPT_IN_AI_DECKS = card -> !card.getAiHints().getRemAIDecks();
-
-    /** The Constant isKeptInAiLimitedDecks. */
     public static final Predicate<CardRules> IS_KEPT_IN_AI_LIMITED_DECKS = card -> !card.getAiHints().getRemAIDecks() && !card.getAiHints().getRemNonCommanderDecks();
-
-    /** The Constant isKeptInRandomDecks. */
     public static final Predicate<CardRules> IS_KEPT_IN_RANDOM_DECKS = card -> !card.getAiHints().getRemRandomDecks();
 
     // Static builder methods - they choose concrete implementation by themselves
@@ -524,106 +519,50 @@ public final class CardRulesPredicates {
         }
     }
 
-    /**
-     * The Class Presets.
-     */
-    public static class Presets {
-
-        /** The Constant isCreature. */
-        public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates
-                .coreType(true, CardType.CoreType.Creature);
-
-        public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates
-                .superType(true, CardType.Supertype.Legendary);
-
-        /** The Constant isArtifact. */
-        public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates
-                .coreType(true, CardType.CoreType.Artifact);
-
-        /** The Constant isEquipment. */
-        public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates
-                .subType("Equipment");
-
-        /** The Constant isLand. */
-        public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
-
-        /** The Constant isBasicLand. */
-        public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
-        public static final Predicate<CardRules> NOT_BASIC_LAND = subject -> !subject.getType().isBasicLand();
-
-        /** Matches only Plains, Island, Swamp, Mountain, or Forest. */
-        public static final Predicate<CardRules> IS_BASIC_LAND_NOT_WASTES = subject -> !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
-        /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
-        public static final Predicate<CardRules> NOT_TRUE_BASIC_LAND = subject -> !subject.getType().isBasicLand() || subject.getName().equals("Wastes");
-
-        /** The Constant isNonBasicLand. */
-        public static final Predicate<CardRules> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
-
-        public static final Predicate<CardRules> CAN_BE_COMMANDER = CardRules::canBeCommander;
-        public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = CardRules::canBePartnerCommander;
-
-        public static final Predicate<CardRules> CAN_BE_OATHBREAKER = CardRules::canBeOathbreaker;
-        public static final Predicate<CardRules> CAN_BE_SIGNATURE_SPELL = CardRules::canBeSignatureSpell;
-
-        public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
-        public static final Predicate<CardRules> IS_BATTLE = CardRulesPredicates.coreType(true, CardType.CoreType.Battle);
-        public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
-        public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
-        public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);
-        public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardType.CoreType.Plane);
-        public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardType.CoreType.Phenomenon);
-        public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = IS_PLANE.or(IS_PHENOMENON);
-        public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardType.CoreType.Scheme);
-        public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
-        public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
-        public static final Predicate<CardRules> IS_DUNGEON = CardRulesPredicates.coreType(true, CardType.CoreType.Dungeon);
-        public static final Predicate<CardRules> IS_ATTRACTION = Presets.IS_ARTIFACT.and(CardRulesPredicates.subType("Attraction"));
-
-        public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
-        public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = Presets.IS_LEGENDARY.and(Presets.IS_CREATURE.or(Presets.IS_PLANESWALKER));
-        public static final Predicate<CardRules> CAN_BE_TINY_LEADERS_COMMANDER = Presets.IS_LEGENDARY.and(Presets.IS_CREATURE.or(Presets.IS_PLANESWALKER));
-
-        /** The Constant IS_NON_CREATURE_SPELL. **/
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL =
-            Presets.IS_SORCERY
-                    .or(Presets.IS_INSTANT)
-                    .or(Presets.IS_PLANESWALKER)
-                    .or(Presets.IS_ENCHANTMENT) //TODO: Battles? Is testing these one by one really the best way to check "non-creature"?
-                    .or(Presets.IS_ARTIFACT.and(Presets.IS_CREATURE.negate()));
-
-        /** The Constant isWhite. */
-        public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(MagicColor.WHITE);
-
-        /** The Constant isBlue. */
-        public static final Predicate<CardRules> IS_BLUE = CardRulesPredicates.isColor(MagicColor.BLUE);
-
-        /** The Constant isBlack. */
-        public static final Predicate<CardRules> IS_BLACK = CardRulesPredicates.isColor(MagicColor.BLACK);
-
-        /** The Constant isRed. */
-        public static final Predicate<CardRules> IS_RED = CardRulesPredicates.isColor(MagicColor.RED);
-
-        /** The Constant isGreen. */
-        public static final Predicate<CardRules> IS_GREEN = CardRulesPredicates.isColor(MagicColor.GREEN);
-
-        /** The Constant isColorless. */
-        public static final Predicate<CardRules> IS_COLORLESS = CardRulesPredicates.hasCntColors((byte) 0);
-
-        /** The Constant isMulticolor. */
-        public static final Predicate<CardRules> IS_MULTICOLOR = CardRulesPredicates.hasAtLeastCntColors((byte) 2);
-
-        /** The Constant isMonocolor. */
-        public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
-
-        /** The Constant colors. */
-        public static final List<Predicate<CardRules>> COLORS = new ArrayList<>();
-        static {
-            Presets.COLORS.add(Presets.IS_WHITE);
-            Presets.COLORS.add(Presets.IS_BLUE);
-            Presets.COLORS.add(Presets.IS_BLACK);
-            Presets.COLORS.add(Presets.IS_RED);
-            Presets.COLORS.add(Presets.IS_GREEN);
-            Presets.COLORS.add(Presets.IS_COLORLESS);
-        }
-    }
+    public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates.coreType(true, CardType.CoreType.Creature);
+    public static final Predicate<CardRules> IS_LEGENDARY = CardRulesPredicates.superType(true, CardType.Supertype.Legendary);
+    public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates.coreType(true, CardType.CoreType.Artifact);
+    public static final Predicate<CardRules> IS_ATTRACTION = CardRulesPredicates.IS_ARTIFACT.and(CardRulesPredicates.subType("Attraction"));
+    public static final Predicate<CardRules> IS_EQUIPMENT = CardRulesPredicates.subType("Equipment");
+    public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
+    public static final Predicate<CardRules> IS_BASIC_LAND = subject -> subject.getType().isBasicLand();
+    public static final Predicate<CardRules> NOT_BASIC_LAND = subject -> !subject.getType().isBasicLand();
+    /** Matches only Plains, Island, Swamp, Mountain, or Forest. */
+    public static final Predicate<CardRules> IS_TRUE_BASIC_LAND = subject -> !subject.getName().equals("Wastes")&&subject.getType().isBasicLand();
+    /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
+    public static final Predicate<CardRules> NOT_TRUE_BASIC_LAND = subject -> !subject.getType().isBasicLand() || subject.getName().equals("Wastes");
+    public static final Predicate<CardRules> IS_NONBASIC_LAND = subject -> subject.getType().isLand() && !subject.getType().isBasicLand();
+    public static final Predicate<CardRules> CAN_BE_COMMANDER = CardRules::canBeCommander;
+    public static final Predicate<CardRules> CAN_BE_PARTNER_COMMANDER = CardRules::canBePartnerCommander;
+    public static final Predicate<CardRules> CAN_BE_OATHBREAKER = CardRules::canBeOathbreaker;
+    public static final Predicate<CardRules> CAN_BE_SIGNATURE_SPELL = CardRules::canBeSignatureSpell;
+    public static final Predicate<CardRules> IS_PLANESWALKER = CardRulesPredicates.coreType(true, CardType.CoreType.Planeswalker);
+    public static final Predicate<CardRules> CAN_BE_TINY_LEADERS_COMMANDER = CardRulesPredicates.IS_LEGENDARY.and(CardRulesPredicates.IS_CREATURE.or(CardRulesPredicates.IS_PLANESWALKER));
+    public static final Predicate<CardRules> CAN_BE_BRAWL_COMMANDER = CardRulesPredicates.IS_LEGENDARY.and(CardRulesPredicates.IS_CREATURE.or(CardRulesPredicates.IS_PLANESWALKER));
+    public static final Predicate<CardRules> IS_BATTLE = CardRulesPredicates.coreType(true, CardType.CoreType.Battle);
+    public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
+    public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
+    public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);
+    public static final Predicate<CardRules> IS_NON_CREATURE_SPELL =
+            CardRulesPredicates.IS_SORCERY
+                    .or(CardRulesPredicates.IS_INSTANT)
+                    .or(CardRulesPredicates.IS_PLANESWALKER)
+                    .or(CardRulesPredicates.IS_ENCHANTMENT) //TODO: Battles? Is testing these one by one really the best way to check "non-creature"?
+                    .or(CardRulesPredicates.IS_ARTIFACT.and(CardRulesPredicates.IS_CREATURE.negate()));
+    public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardType.CoreType.Plane);
+    public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardType.CoreType.Phenomenon);
+    public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = IS_PLANE.or(IS_PHENOMENON);
+    public static final Predicate<CardRules> IS_SCHEME = CardRulesPredicates.coreType(true, CardType.CoreType.Scheme);
+    public static final Predicate<CardRules> IS_VANGUARD = CardRulesPredicates.coreType(true, CardType.CoreType.Vanguard);
+    public static final Predicate<CardRules> IS_CONSPIRACY = CardRulesPredicates.coreType(true, CardType.CoreType.Conspiracy);
+    public static final Predicate<CardRules> IS_DUNGEON = CardRulesPredicates.coreType(true, CardType.CoreType.Dungeon);
+    public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardType.CoreType.Land);
+    public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(MagicColor.WHITE);
+    public static final Predicate<CardRules> IS_BLUE = CardRulesPredicates.isColor(MagicColor.BLUE);
+    public static final Predicate<CardRules> IS_BLACK = CardRulesPredicates.isColor(MagicColor.BLACK);
+    public static final Predicate<CardRules> IS_RED = CardRulesPredicates.isColor(MagicColor.RED);
+    public static final Predicate<CardRules> IS_GREEN = CardRulesPredicates.isColor(MagicColor.GREEN);
+    public static final Predicate<CardRules> IS_COLORLESS = CardRulesPredicates.hasCntColors((byte) 0);
+    public static final Predicate<CardRules> IS_MULTICOLOR = CardRulesPredicates.hasAtLeastCntColors((byte) 2);
+    public static final Predicate<CardRules> IS_MONOCOLOR = CardRulesPredicates.hasCntColors((byte) 1);
 }

@@ -135,7 +135,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
 
-            CardCollection planeswalkerList = CardLists.filter(list, CardPredicates.Presets.PLANESWALKERS,
+            CardCollection planeswalkerList = CardLists.filter(list, CardPredicates.PLANESWALKERS,
                     CardPredicates.hasCounter(CounterEnumType.LOYALTY, 5));
 
             if (!planeswalkerList.isEmpty()) {
@@ -182,7 +182,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             list = CardLists.filter(list, CardPredicates.isTargetableBy(sa));
 
             CardCollection planeswalkerList = CardLists.filter(list,
-                    CardPredicates.Presets.PLANESWALKERS.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                    CardPredicates.PLANESWALKERS.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
                     CardPredicates.hasLessCounter(CounterEnumType.LOYALTY, amount));
 
             if (!planeswalkerList.isEmpty()) {
@@ -222,7 +222,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
                 // remove P1P1 counters from opposing creatures
                 CardCollection oppP1P1List = CardLists.filter(list,
-                        CardPredicates.Presets.CREATURES.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
+                        CardPredicates.CREATURES.and(CardPredicates.isControlledByAnyOf(ai.getOpponents())),
                         CardPredicates.hasCounter(CounterEnumType.P1P1));
                 if (!oppP1P1List.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(oppP1P1List));

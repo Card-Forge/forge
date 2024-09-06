@@ -48,7 +48,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
@@ -528,7 +527,7 @@ public class ComputerUtil {
             // Discard lands
             final CardCollection landsInHand = CardLists.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+                final int numLandsInPlay = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
                 final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
                 if (numLandsInPlay >= highestCMC
@@ -769,7 +768,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, CardPredicates.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -799,7 +798,7 @@ public class ComputerUtil {
         all.removeAll(exclude);
         CardCollection typeList = CardLists.getValidCards(all, type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, sa.isCrew() ? Presets.CAN_CREW : Presets.CAN_TAP);
+        typeList = CardLists.filter(typeList, sa.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         if (tap) {
             typeList.remove(activate);
@@ -837,7 +836,7 @@ public class ComputerUtil {
         CardCollection typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate, sa);
 
-        typeList = CardLists.filter(typeList, Presets.TAPPED);
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED);
 
         if (untap) {
             typeList.remove(activate);
@@ -1035,7 +1034,7 @@ public class ComputerUtil {
             c = ComputerUtilCard.getWorstCreatureAI(remaining);
         }
         else if (CardLists.getNotType(remaining, "Land").isEmpty()) {
-            c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.Presets.LANDS));
+            c = ComputerUtilCard.getWorstLand(CardLists.filter(remaining, CardPredicates.LANDS));
         }
         else {
             c = ComputerUtilCard.getWorstPermanentAI(remaining, false, false, false, false);
@@ -1344,8 +1343,8 @@ public class ComputerUtil {
         }
 
         final Game game = ai.getGame();
-        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
-        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+        final CardCollection landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
+        final CardCollection landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS);
         final CardCollection nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
         final int discardCMC = discard.getCMC();
@@ -1664,7 +1663,7 @@ public class ComputerUtil {
         int damage = 0;
         final CardCollection all = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(ai.getCardsActivatableInExternalZones(true));
-        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.PERMANENTS.negate()));
+        all.addAll(CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.PERMANENTS.negate()));
 
         for (final Card c : all) {
             if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != ai && c.mayPlay(ai).isEmpty()) {
@@ -2218,7 +2217,7 @@ public class ComputerUtil {
         }
 
         CardCollectionView library = ai.getCardsIn(ZoneType.Library);
-        int landsInDeck = CardLists.count(library, Presets.LANDS);
+        int landsInDeck = CardLists.count(library, CardPredicates.LANDS);
 
         // no land deck, can't do anything better
         if (landsInDeck == 0) {
@@ -2363,14 +2362,14 @@ public class ComputerUtil {
         CardCollectionView cardsInHand = player.getCardsIn(ZoneType.Hand);
         CardCollectionView cardsOTB = player.getCardsIn(ZoneType.Battlefield);
 
-        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsOTB = CardLists.filter(cardsOTB, CardPredicates.LANDS_PRODUCING_MANA);
         CardCollection thisLandOTB = CardLists.filter(cardsOTB, CardPredicates.nameEquals(c.getName()));
-        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.Presets.LANDS_PRODUCING_MANA);
+        CardCollection landsInHand = CardLists.filter(cardsInHand, CardPredicates.LANDS_PRODUCING_MANA);
         // valuable mana-producing artifacts that may be equated to a land
         List<String> manaArts = Arrays.asList("Mox Pearl", "Mox Sapphire", "Mox Jet", "Mox Ruby", "Mox Emerald");
 
         // evaluate creatures available in deck
-        CardCollectionView allCreatures = CardLists.filter(allCards, CardPredicates.Presets.CREATURES, CardPredicates.isOwner(player));
+        CardCollectionView allCreatures = CardLists.filter(allCards, CardPredicates.CREATURES, CardPredicates.isOwner(player));
         int numCards = allCreatures.size();
 
         if (landsOTB.size() < maxLandsToScryLandsToTop && landsInHand.isEmpty()) {
@@ -2399,7 +2398,7 @@ public class ComputerUtil {
                 }
             }
         } else if (c.isCreature()) {
-            CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.Presets.CREATURES);
+            CardCollection creaturesOTB = CardLists.filter(cardsOTB, CardPredicates.CREATURES);
             int avgCreatureValue = numCards != 0 ? ComputerUtilCard.evaluateCreatureList(allCreatures) / numCards : 0;
             int maxControlledCMC = Aggregates.max(creaturesOTB, Card::getCMC);
 
@@ -2490,7 +2489,7 @@ public class ComputerUtil {
                 double amount = 0;
                 for (String type : CardType.getAllCardTypes()) {
                     if (!invalidTypes.contains(type)) {
-                        CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), Presets.TAPPED);
+                        CardCollection list = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(type), CardPredicates.TAPPED);
                         double i = type.equals("Creature") ? list.size() * 1.5 : list.size();
                         if (i > amount) {
                             amount = i;
@@ -2801,7 +2800,7 @@ public class ComputerUtil {
                 }
 
                 // has cards with SacMe or Token
-                if (CardLists.count(aiCreatures, CardPredicates.hasSVar("SacMe").or(Presets.TOKEN)) >= numDeath) {
+                if (CardLists.count(aiCreatures, CardPredicates.hasSVar("SacMe").or(CardPredicates.TOKEN)) >= numDeath) {
                     return "Death";
                 }
 

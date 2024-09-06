@@ -19,7 +19,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.*;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostEnlist;
@@ -614,7 +613,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
+            int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
 
             if (!p.isOpponentOf(player)) {
                 if (landsOTB <= 2) {
@@ -758,13 +757,13 @@ public class PlayerControllerAi extends PlayerController {
         for (int i = 0; i < cardsToReturn; i++) {
             hand.removeAll(toReturn);
 
-            CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
-            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, Presets.LANDS);
+            CardCollection landsInHand = CardLists.filter(hand, CardPredicates.LANDS);
+            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, CardPredicates.LANDS);
 
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
-                CardCollection producingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA);
-                CardCollection nonProducingLands = CardLists.filter(landsInHand, Presets.LANDS_PRODUCING_MANA.negate());
+                CardCollection producingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA);
+                CardCollection nonProducingLands = CardLists.filter(landsInHand, CardPredicates.LANDS_PRODUCING_MANA.negate());
                 Card worstLand = nonProducingLands.isEmpty() ? ComputerUtilCard.getWorstLand(producingLands)
                         : ComputerUtilCard.getWorstLand(nonProducingLands);
                 toReturn.add(worstLand);
@@ -1074,7 +1073,7 @@ public class PlayerControllerAi extends PlayerController {
             return Iterables.getFirst(options, null);
         }
         List<String> possible = Lists.newArrayList();
-        CardCollection oppUntappedCreatures = CardLists.filter(player.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        CardCollection oppUntappedCreatures = CardLists.filter(player.getOpponents().getCreaturesInPlay(), CardPredicates.UNTAPPED);
         if (tgtCard != null) {
             for (String kw : options) {
                 if (tgtCard.hasKeyword(kw)) {
@@ -1336,7 +1335,7 @@ public class PlayerControllerAi extends PlayerController {
             // Probably want to see if the face up pile has anything "worth it", then potentially take face down pile
             return pile1.size() >= pile2.size();
         } else {
-            boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.Presets.CREATURES);
+            boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.CREATURES);
             int cmc1 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile1) : ComputerUtilCard.evaluatePermanentList(pile1);
             int cmc2 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile2) : ComputerUtilCard.evaluatePermanentList(pile2);
 
@@ -1469,7 +1468,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         } else {
             CardCollectionView list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
-            list = CardLists.filter(list, Presets.NON_LANDS);
+            list = CardLists.filter(list, CardPredicates.NON_LANDS);
             if (!list.isEmpty()) {
                 return list.get(0).getName();
             }

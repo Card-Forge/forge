@@ -222,11 +222,11 @@ public class Combat {
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.Presets.PLANESWALKERS);
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.PLANESWALKERS);
     }
 
     public final CardCollection getDefendingBattles() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.Presets.BATTLES);
+        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.BATTLES);
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {

@@ -380,7 +380,7 @@ public class CountersPutAi extends CountersAi {
                 sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
-                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES), Card::getCMC);
+                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES), Card::getCMC);
                 if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                     return true;
                 }
@@ -703,7 +703,7 @@ public class CountersPutAi extends CountersAi {
                 if (sa.isCurse()) {
                     choice = chooseCursedTarget(list, type, amount, ai);
                 } else {
-                    CardCollection lands = CardLists.filter(list, CardPredicates.Presets.LANDS);
+                    CardCollection lands = CardLists.filter(list, CardPredicates.LANDS);
                     SpellAbility animate = sa.findSubAbilityByType(ApiType.Animate);
                     if (!lands.isEmpty() && animate != null) {
                         choice = ComputerUtilCard.getWorstLand(lands);
@@ -796,7 +796,7 @@ public class CountersPutAi extends CountersAi {
             }
 
             // try to choose player with less creatures
-            Player choice = playerList.min(PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.Presets.CREATURES));
+            Player choice = playerList.min(PlayerPredicates.compareByZoneSize(ZoneType.Battlefield, CardPredicates.CREATURES));
 
             if (choice != null) {
                 sa.getTargets().add(choice);
@@ -1193,7 +1193,7 @@ public class CountersPutAi extends CountersAi {
 
     private boolean doChargeToCMCLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+        CardCollectionView ownLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
         int maxCMC = Aggregates.max(ownLib, Card::getCMC);
         int optimalCMC = 0;
@@ -1211,7 +1211,7 @@ public class CountersPutAi extends CountersAi {
 
     private boolean doChargeToOppCtrlCMCLogic(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
-        CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.NONLAND_PERMANENTS);
+        CardCollectionView oppInPlay = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.NONLAND_PERMANENTS);
         int numCtrs = source.getCounters(CounterEnumType.CHARGE);
         int maxCMC = Aggregates.max(oppInPlay, Card::getCMC);
         int optimalCMC = 0;

@@ -24,7 +24,7 @@ public class UntapAllAi extends SpellAbilityAi {
         			&& source.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_END)) {
         		return false;
         	}
-            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.TAPPED);
             final String valid = sa.getParamOrDefault("ValidCards", "");
             list = CardLists.getValidCards(list, valid, source.getController(), source, sa);
             // don't untap if only opponent benefits
@@ -39,7 +39,7 @@ public class UntapAllAi extends SpellAbilityAi {
 
         if (sa.hasParam("ValidCards")) {
             String valid = sa.getParam("ValidCards");
-            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
+            CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.TAPPED);
             list = CardLists.getValidCards(list, valid, source.getController(), source, sa);
             return mandatory || !list.isEmpty();
         }

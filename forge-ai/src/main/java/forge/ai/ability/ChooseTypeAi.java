@@ -65,7 +65,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
         int avgPower = 0;
         
         // predict the opposition
-        CardCollection oppCreatures = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        CardCollection oppCreatures = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.UNTAPPED);
         int maxOppPower = 0;
         int maxOppToughness = 0;
         int oppUsefulCreatures = 0;
@@ -85,7 +85,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
 
         if (maxX > 1) {
             CardCollection cre = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED);
+                    CardPredicates.isType(chosenType), CardPredicates.UNTAPPED);
             if (!cre.isEmpty()) {
                 for (Card c: cre) {
                     avgPower += c.getNetPower();

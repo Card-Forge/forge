@@ -130,7 +130,7 @@ public class AnimateAi extends SpellAbilityAi {
                 && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
         if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
-                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.Presets.CREATURES)
+                && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.CREATURES)
                 && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
         }

@@ -77,8 +77,8 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
 
         Iterable<PaperCard> filtered= Iterables.filter(cards,
                 Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, PaperCard::getRules)
-                        .and(Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, PaperCard::getRules))
-                        //.and(Predicates.compose(CardRulesPredicates.Presets.IS_LEGENDARY, PaperCard::getRules))
+                        .and(Predicates.compose(CardRulesPredicates.IS_PLANESWALKER, PaperCard::getRules))
+                        //.and(Predicates.compose(CardRulesPredicates.IS_LEGENDARY, PaperCard::getRules))
                         .and(gameFormat.getFilterPrinted())
                 );
 

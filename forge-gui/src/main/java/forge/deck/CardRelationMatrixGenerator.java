@@ -74,7 +74,7 @@ public final class CardRelationMatrixGenerator {
                 true);
 
         final Iterable<PaperCard> cards = Iterables.filter(format.getAllCards()
-                , Predicates.compose(CardRulesPredicates.Presets.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
+                , Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -90,7 +90,7 @@ public final class CardRelationMatrixGenerator {
             for (Deck deck:decks){
                 if (deck.getMain().contains(card)){
                     for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                            Predicates.compose(CardRulesPredicates.Presets.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
+                            Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
                         if (!pairCard.getName().equals(card.getName())){
                             try {
                                 int old = matrix[cardIntegerMap.get(card.getName())][cardIntegerMap.get(pairCard.getName())];
@@ -143,7 +143,7 @@ public final class CardRelationMatrixGenerator {
 
         //get all cards
         final Iterable<PaperCard> cards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards()
-                , Predicates.compose(CardRulesPredicates.Presets.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
+                , Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules));
         List<PaperCard> cardList = Lists.newArrayList(cards);
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -200,7 +200,7 @@ public final class CardRelationMatrixGenerator {
     public static void updateLegendMatrix(Deck deck, PaperCard legend, Map<String, Integer> cardIntegerMap,
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         for (PaperCard pairCard:Iterables.filter(deck.getMain().toFlatList(),
-                Predicates.compose(CardRulesPredicates.Presets.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
+                Predicates.compose(CardRulesPredicates.NOT_TRUE_BASIC_LAND, PaperCard::getRules))){
             if (!pairCard.getName().equals(legend.getName())){
                 try {
                     int old = matrix[legendIntegerMap.get(legend.getName())][cardIntegerMap.get(pairCard.getName())];

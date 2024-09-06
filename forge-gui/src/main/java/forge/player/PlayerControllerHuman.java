@@ -2618,7 +2618,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void tapPermanents() {
             getGame().getAction().invoke(() -> {
                 final CardCollectionView untapped = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.Presets.UNTAPPED);
+                        CardPredicates.UNTAPPED);
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                         Integer.MAX_VALUE, untapped);
                 inp.setCancelAllowed(true);
@@ -2647,7 +2647,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         public void untapPermanents() {
             getGame().getAction().invoke(() -> {
                 final CardCollectionView tapped = CardLists.filter(getGame().getCardsIn(ZoneType.Battlefield),
-                        CardPredicates.Presets.TAPPED);
+                        CardPredicates.TAPPED);
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(PlayerControllerHuman.this, 0,
                         Integer.MAX_VALUE, tapped);
                 inp.setCancelAllowed(true);

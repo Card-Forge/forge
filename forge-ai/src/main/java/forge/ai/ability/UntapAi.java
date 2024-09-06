@@ -8,7 +8,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
+import forge.game.card.CardPredicates;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostTap;
@@ -155,7 +155,7 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        CardCollection untapList = targetUntapped ? list : CardLists.filter(list, Presets.TAPPED);
+        CardCollection untapList = targetUntapped ? list : CardLists.filter(list, CardPredicates.TAPPED);
         // filter out enchantments and planeswalkers, their tapped state doesn't matter.
         final String[] tappablePermanents = {"Creature", "Land", "Artifact"};
         untapList = CardLists.getValidCards(untapList, tappablePermanents, source.getController(), source, sa);
@@ -260,7 +260,7 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // try to just tap already tapped things
-        tapList = CardLists.filter(list, Presets.UNTAPPED);
+        tapList = CardLists.filter(list, CardPredicates.UNTAPPED);
 
         if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
             return true;
@@ -400,10 +400,10 @@ public class UntapAi extends SpellAbilityAi {
         }
 
         // Check if something is playable if we untap for an additional mana with this, then proceed
-        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), Presets.NON_LANDS);
+        CardCollection inHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
         // The AI is not very good at timing non-permanent spells this way, so filter them out
         // (it may actually be possible to enable this for sorceries, but that'll need some canPlay shenanigans)
-        CardCollection playable = CardLists.filter(inHand, Presets.PERMANENTS);
+        CardCollection playable = CardLists.filter(inHand, CardPredicates.PERMANENTS);
 
         CardCollection untappingCards = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), card -> {
             boolean hasUntapLandLogic = false;
@@ -427,7 +427,7 @@ public class UntapAi extends SpellAbilityAi {
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
                         if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Presets.LANDS_PRODUCING_MANA, Presets.TAPPED);
+                                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.TAPPED);
                             manaLandsTapped = CardLists.getValidCards(manaLandsTapped, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (!manaLandsTapped.isEmpty()) {
@@ -437,7 +437,7 @@ public class UntapAi extends SpellAbilityAi {
 
                             // pool one additional mana by tapping a land to try to ramp to something
                             CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Presets.LANDS_PRODUCING_MANA, Presets.CAN_TAP);
+                                    CardPredicates.LANDS_PRODUCING_MANA, CardPredicates.CAN_TAP);
                             manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (manaLands.isEmpty()) {
