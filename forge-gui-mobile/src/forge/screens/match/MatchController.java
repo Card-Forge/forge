@@ -12,7 +12,6 @@ import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
-import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -680,7 +679,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
-        if (delayedReveal == null || Iterables.isEmpty(delayedReveal.getCards())) {
+        if (delayedReveal == null || delayedReveal.getCards().isEmpty()) {
             if (isOptional) {
                 return SGuiChoose.oneOrNone(title, optionList);
             }

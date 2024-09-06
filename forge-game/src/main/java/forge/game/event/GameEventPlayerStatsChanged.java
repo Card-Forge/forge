@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import forge.game.player.Player;
-import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
@@ -36,7 +35,7 @@ public class GameEventPlayerStatsChanged extends GameEvent {
 
     @Override
     public String toString() {
-        if (null == players || Iterables.isEmpty(players)) {
+        if (null == players || players.isEmpty()) {
             return "Player state changes: (empty list)";
         }
         return TextUtil.concatWithSpace("Player state changes:", Lang.joinHomogenous(players));

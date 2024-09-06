@@ -21,8 +21,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -319,7 +319,7 @@ public class UntapAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         CardCollection pref = CardLists.filterControlledBy(list, ai.getYourTeam());
-        if (Iterables.isEmpty(pref)) {
+        if (pref.isEmpty()) {
             if (isOptional) {
                 return null;
             }

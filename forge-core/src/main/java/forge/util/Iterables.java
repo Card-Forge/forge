@@ -113,9 +113,6 @@ public class Iterables {
     public static <T> T getLast(List<? extends T> iterable, T defaultValue) {
         return iterable.isEmpty() ? defaultValue : iterable.get(iterable.size() - 1);
     }
-    public static boolean isEmpty(Collection<?> iterable) {
-        return iterable.isEmpty();
-    }
 
     //TODO: Restore everything below
     public static <T> Iterable<T> unmodifiableIterable(final Iterable<? extends T> iterable) {
