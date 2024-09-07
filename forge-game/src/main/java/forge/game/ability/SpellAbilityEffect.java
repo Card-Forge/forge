@@ -463,6 +463,11 @@ public abstract class SpellAbilityEffect {
         card.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "AtEOT"), card.getGame().getNextTimestamp(), 0);
     }
 
+    protected static SpellAbility getExileSpellAbility(final Card card) {
+        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        return AbilityFactory.getAbility(effect, card);
+    }
+
     protected static SpellAbility getForgetSpellAbility(final Card card) {
         String forgetEffect = "DB$ Pump | ForgetObjects$ TriggeredCard";
         String exileEffect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile"
@@ -498,17 +503,15 @@ public abstract class SpellAbilityEffect {
 
     protected static void addExileOnMovedTrigger(final Card card, final String zone) {
         String trig = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Any | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
         card.addTrigger(parsedTrigger);
     }
 
     protected static void addExileOnCounteredTrigger(final Card card) {
         String trig = "Mode$ Countered | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
         card.addTrigger(parsedTrigger);
     }
 
@@ -517,6 +520,13 @@ public abstract class SpellAbilityEffect {
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        card.addTrigger(parsedTrigger);
+    }
+
+    protected static void addExileCounterTrigger(final Card card, final String counterType) {
+        String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.EffectSource | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
+        final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
         card.addTrigger(parsedTrigger);
     }
 
@@ -536,9 +546,8 @@ public abstract class SpellAbilityEffect {
 
     protected static void addExileOnLostTrigger(final Card card) {
         String trig = "Mode$ LosesGame | ValidPlayer$ You | TriggerController$ Player | TriggerZones$ Command | Static$ True";
-        String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+        parsedTrigger.setOverridingAbility(getExileSpellAbility(card));
         card.addTrigger(parsedTrigger);
     }
 

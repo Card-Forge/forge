@@ -1067,8 +1067,8 @@ public class CardFactoryUtil {
             pump.setSubAbility(remove);
             remove.setSubAbility(cleanup);
             trigger.setOverridingAbility(trigMake);
-            
-            inst.addTrigger(trigger); 
+
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];
@@ -1381,7 +1381,7 @@ public class CardFactoryUtil {
             String hideawayDig = "DB$ Dig | Defined$ You | DigNum$ " + n + " | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True | RestRandomOrder$ True";
             String hideawayEffect = "DB$ Effect | StaticAbilities$ STHideawayEffectLookAtCard | ForgetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent";
             String cleanupStr = "DB$ Cleanup | ClearRemembered$ True";
-            
+
             String lookAtCard = "Mode$ Continuous | Affected$ Card.IsRemembered | MayLookAt$ EffectSourceController | EffectZone$ Command | AffectedZone$ Exile | Description$ Any player who has controlled the permanent that exiled this card may look at this card in the exile zone.";
 
             SpellAbility digSA = AbilityFactory.getAbility(hideawayDig, card);
@@ -1597,7 +1597,7 @@ public class CardFactoryUtil {
             trigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
             trigger.setSVar("Offspring", "Count$OptionalKeywordAmount");
 
-            inst.addTrigger(trigger);            
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Partner:")) {
             // Partner With
             final String[] k = keyword.split(":");
@@ -2354,7 +2354,17 @@ public class CardFactoryUtil {
             final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + m
                     + " | ETB$ True | SpellDescription$ " + desc;
 
-            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
+            SpellAbility repAb = AbilityFactory.getAbility(effect, card);
+
+            String staticEffect = "DB$ Effect | StaticAbilities$ NoCreature | ExileOnCounter$ TIME | Duration$ UntilHostLeavesPlay";
+
+            String staticNoCreature = "Mode$ Continuous | Affected$ Card.EffectSource+counters_GE1_TIME | RemoveType$ Creature | Description$ EFFECTSOURCE isn't a creature.";
+
+            AbilitySub effectAb = (AbilitySub)AbilityFactory.getAbility(staticEffect, card);
+            effectAb.setSVar("NoCreature", staticNoCreature);
+            repAb.setSubAbility(effectAb);
+
+            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, repAb, false, true, intrinsic, "Card.Self+impended", "");
 
             inst.addReplacement(re);
         } else if (keyword.equals("Jump-start")) {
@@ -2438,7 +2448,7 @@ public class CardFactoryUtil {
 
             re.setOverridingAbility(saCounter);
 
-            inst.addReplacement(re); 
+            inst.addReplacement(re);
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidLKI$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
@@ -2729,7 +2739,7 @@ public class CardFactoryUtil {
                     sbRem.append(i + 1 == bCost.getCostParts().size() ? "." : " and ");
                     i++;
                 }
-                remTxt = sbRem.toString();   
+                remTxt = sbRem.toString();
             }
             sbDesc.append(onlyMana ? " " : "—").append(bCost.toSimpleString()).append(!onlyMana ? "." : "");
             sbDesc.append(" (").append(remTxt).append(")");
@@ -3987,9 +3997,6 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Horsemanship")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
                     " | Description$ Horsemanship (" + inst.getReminderText() + ")";
-            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
-        } else if (keyword.startsWith("Impending")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+counters_GE1_TIME | RemoveType$ Creature | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
