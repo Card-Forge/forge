@@ -1,0 +1,10 @@
+Name:Appendage Amalgam
+ManaCost:2 B
+Types:Enchantment Creature Horror
+PT:3/2
+K:Flash
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 1
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Surveil|Graveyard
+Oracle:Flash\nWhenever Appendage Amalgam attacks, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
