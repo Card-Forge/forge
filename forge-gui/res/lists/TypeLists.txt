@@ -335,6 +335,7 @@ Case
 Class
 Curse:Curses
 Role
+Room
 Rune
 Saga:Sagas
 Shrine:Shrines
