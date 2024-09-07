@@ -327,6 +327,8 @@ public enum CounterEnumType {
 
     POLYP("POLYP", 236, 185, 198),
 
+    POSSESSION("POSSN", 60, 65, 85),
+
     PREY("PREY", 240, 0, 0),
 
     PUPA("PUPA", 0, 223, 203),
