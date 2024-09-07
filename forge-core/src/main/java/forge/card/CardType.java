@@ -261,7 +261,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (!isCreature() && !isKindred()) {
             return false;
         }
-        boolean changed = Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+        boolean changed = subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
         // need to remove AllCreatureTypes too when setting Creature Type
         if (allCreatureTypes) {
             changed = true;
@@ -605,18 +605,18 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
             else if (!newType.subtypes.isEmpty()) {
                 if (ct.isRemoveLandTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_LAND_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_LAND_TYPE);
                 }
                 if (ct.isRemoveCreatureTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_CREATURE_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
                     // need to remove AllCreatureTypes too when removing creature Types
                     newType.allCreatureTypes = false;
                 }
                 if (ct.isRemoveArtifactTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_ARTIFACT_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
                 }
                 if (ct.isRemoveEnchantmentTypes()) {
-                    Iterables.removeIf(newType.subtypes, Predicates.IS_ENCHANTMENT_TYPE);
+                    newType.subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
                 }
             }
             if (ct.getRemoveType() != null) {
@@ -655,31 +655,31 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             return;
         }
         if (!isCreature() && !isKindred()) {
-            Iterables.removeIf(subtypes, Predicates.IS_CREATURE_TYPE);
+            subtypes.removeIf(Predicates.IS_CREATURE_TYPE);
         }
         if (!isLand()) {
-            Iterables.removeIf(subtypes, Predicates.IS_LAND_TYPE);
+            subtypes.removeIf(Predicates.IS_LAND_TYPE);
         }
         if (!isArtifact()) {
-            Iterables.removeIf(subtypes, Predicates.IS_ARTIFACT_TYPE);
+            subtypes.removeIf(Predicates.IS_ARTIFACT_TYPE);
         }
         if (!isEnchantment()) {
-            Iterables.removeIf(subtypes, Predicates.IS_ENCHANTMENT_TYPE);
+            subtypes.removeIf(Predicates.IS_ENCHANTMENT_TYPE);
         }
         if (!isInstant() && !isSorcery()) {
-            Iterables.removeIf(subtypes, Predicates.IS_SPELL_TYPE);
+            subtypes.removeIf(Predicates.IS_SPELL_TYPE);
         }
         if (!isPlaneswalker()) {
-            Iterables.removeIf(subtypes, Predicates.IS_WALKER_TYPE);
+            subtypes.removeIf(Predicates.IS_WALKER_TYPE);
         }
         if (!isDungeon()) {
-            Iterables.removeIf(subtypes, Predicates.IS_DUNGEON_TYPE);
+            subtypes.removeIf(Predicates.IS_DUNGEON_TYPE);
         }
         if (!isBattle()) {
-            Iterables.removeIf(subtypes, Predicates.IS_BATTLE_TYPE);
+            subtypes.removeIf(Predicates.IS_BATTLE_TYPE);
         }
         if (!isPlane()) {
-            Iterables.removeIf(subtypes, Predicates.IS_PLANAR_TYPE);
+            subtypes.removeIf(Predicates.IS_PLANAR_TYPE);
         }
     }
 

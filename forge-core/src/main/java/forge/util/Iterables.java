@@ -79,10 +79,6 @@ public class Iterables {
         return iterable.stream().filter(predicate).findFirst().orElse(defaultValue);
     }
 
-    public static <T> boolean removeIf(Collection<T> iterable, Predicate<? super T> test) {
-        return iterable.removeIf(test);
-    }
-
     public static int size(Collection<?> collection) {
         return collection.size();
     }

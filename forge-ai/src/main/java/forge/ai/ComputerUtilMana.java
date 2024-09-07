@@ -612,7 +612,7 @@ public class ComputerUtilMana {
             payMultipleMana(cost, manaProduced, ai);
 
             // remove from available lists
-            Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+            sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
         }
 
         CostPayment.handleOfferings(sa, true, cost.isPaid());
@@ -794,7 +794,7 @@ public class ComputerUtilMana {
                 payMultipleMana(cost, manaProduced, ai);
 
                 // remove from available lists
-                Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
             } else {
                 final CostPayment pay = new CostPayment(saPayment.getPayCosts(), saPayment);
                 if (!pay.payComputerCosts(new AiCostDecision(ai, saPayment, effect))) {
@@ -811,7 +811,7 @@ public class ComputerUtilMana {
 
                 if (hasConverge) {
                     // hack to prevent converge re-using sources
-                    Iterables.removeIf(sourcesForShards.values(), CardTraitPredicates.isHostCard(saPayment.getHostCard()));
+                    sourcesForShards.values().removeIf(CardTraitPredicates.isHostCard(saPayment.getHostCard()));
                 }
             }
         }

@@ -172,7 +172,7 @@ public final class StaticAbilityContinuous {
                 // update keywords with Chosen parts
                 final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
 
-                Iterables.removeIf(addKeywords, input -> {
+                addKeywords.removeIf(input -> {
                     if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
                     }
@@ -374,7 +374,7 @@ public final class StaticAbilityContinuous {
                 addTypes = Lists.newArrayList(Arrays.asList(params.get("AddType").split(" & ")));
                 List<String> newTypes = Lists.newArrayList();
 
-                Iterables.removeIf(addTypes, input -> {
+                addTypes.removeIf(input -> {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
@@ -413,7 +413,7 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("RemoveType")) {
                 removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
 
-                Iterables.removeIf(removeTypes, input -> {
+                removeTypes.removeIf(input -> {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
@@ -725,7 +725,7 @@ public final class StaticAbilityContinuous {
                     newKeywords = Lists.newArrayList(addKeywords);
                     final List<String> extraKeywords = Lists.newArrayList();
 
-                    Iterables.removeIf(newKeywords, input -> {
+                    newKeywords.removeIf(input -> {
                         if (input.contains("CardManaCost") && affectedCard.getManaCost().isNoCost()) {
                             return true;
                         }

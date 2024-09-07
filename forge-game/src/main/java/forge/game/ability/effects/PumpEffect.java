@@ -356,7 +356,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 List<String> newKeywords = Lists.newArrayList();
-                Iterables.removeIf(keywords, input -> {
+                keywords.removeIf(input -> {
                     if (!input.contains("ChosenPlayerUID") && !input.contains("ChosenPlayerName")) {
                         return false;
                     }
@@ -471,7 +471,7 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
             if (!affectedKeywords.isEmpty()) {
-                Iterables.removeIf(affectedKeywords, input -> {
+                affectedKeywords.removeIf(input -> {
                     if (input.contains("CardManaCost")) {
                         if (tgtC.getManaCost().isNoCost()) {
                             return true;
