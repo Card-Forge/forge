@@ -12,7 +12,6 @@ import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import forge.util.Iterables;
 import forge.util.Localizer;
 
 public class TriggerChangesZoneAll extends Trigger {
@@ -26,7 +25,7 @@ public class TriggerChangesZoneAll extends Trigger {
         final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
         // leaves the GY trigger look back in time
-        if (Iterables.contains(getActiveZone(), ZoneType.Battlefield) && "Graveyard".equals(getParam("Origin"))
+        if (getActiveZone().contains(ZoneType.Battlefield) && "Graveyard".equals(getParam("Origin"))
                 && !table.getLastStateBattlefield().contains(getHostCard())) {
             return false;
         }

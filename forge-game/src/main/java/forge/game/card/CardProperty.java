@@ -34,10 +34,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class CardProperty {
 
@@ -2132,7 +2129,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("NotDefined")) {
             final String key = property.substring("NotDefined".length());
-            if (Iterables.contains(AbilityUtils.getDefinedCards(source, key, spellAbility), card)) {
+            if (AbilityUtils.getDefinedCards(source, key, spellAbility).contains(card)) {
                 return false;
             }
         } else if (property.equals("CanPayManaCost")) {
