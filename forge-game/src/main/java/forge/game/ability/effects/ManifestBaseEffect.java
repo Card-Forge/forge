@@ -48,9 +48,6 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : getDefaultMessage() + " ";
 
                 tgtCards = new CardCollection(p.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
-            } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
-                tgtCards = p.getTopXCardsFromLibrary(amount);
-                fromLibrary = true;
             } else if (sa.hasParam("Dread")) {
                 tgtCards = p.getTopXCardsFromLibrary(2);
                 if (!tgtCards.isEmpty()) {
@@ -59,6 +56,9 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
                     toGrave = tgtCards.isEmpty() ? null : tgtCards.getFirst();
                     tgtCards = new CardCollection(manifest);
                 }
+                fromLibrary = true;
+            } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
+                tgtCards = p.getTopXCardsFromLibrary(amount);
                 fromLibrary = true;
             } else {
                 tgtCards = getTargetCards(sa);
