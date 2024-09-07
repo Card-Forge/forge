@@ -231,6 +231,8 @@ public class ForgeScript {
             return sa.isMorphUp();
         } else if (property.equals("ManifestUp")) {
             return sa.isManifestUp();
+        } else if (property.equals("Unlock")) {
+            return sa.isUnlock();
         } else if (property.equals("isTurnFaceUp")) {
             return sa.isTurnFaceUp();
         } else if (property.equals("isCastFaceDown")) {

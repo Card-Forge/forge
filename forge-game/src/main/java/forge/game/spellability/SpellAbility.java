@@ -547,6 +547,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return hasParam("CloakUp");
     }
 
+    public boolean isUnlock() {
+        return hasParam("Unlock");
+    }
+
     public boolean isCycling() {
         return isKeyword(Keyword.CYCLING) || isKeyword(Keyword.TYPECYCLING);
     }
