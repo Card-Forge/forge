@@ -1,12 +1,6 @@
 package forge.gamemodes.limited;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Lists;
@@ -590,10 +584,10 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             if (ai.getRemRandomDecks()) {
                 final List<PaperCard> comboCards = new ArrayList<>();
                 if (ai.getDeckNeeds() != null && ai.getDeckNeeds().isValid()) {
-                    Iterables.addAll(comboCards, ai.getDeckNeeds().filter(deckList));
+                    ai.getDeckNeeds().filter(deckList).forEach(comboCards::add);
                 }
                 if (ai.getDeckHints() != null && ai.getDeckHints().isValid()) {
-                    Iterables.addAll(comboCards, ai.getDeckHints().filter(deckList));
+                    ai.getDeckHints().filter(deckList).forEach(comboCards::add);
                 }
                 if (comboCards.isEmpty()) {
                     if (logToConsole) {

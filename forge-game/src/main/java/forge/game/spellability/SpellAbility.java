@@ -1994,7 +1994,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         SpellAbility child = getParent();
         while (child != null) {
             if (child.usesTargeting()) {
-                Iterables.addAll(targets, child.getTargets());
+                targets.addAll(child.getTargets());
             }
             child = child.getParent();
         }

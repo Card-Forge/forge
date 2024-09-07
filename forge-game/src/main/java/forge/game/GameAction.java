@@ -1178,7 +1178,7 @@ public class GameAction {
 
         for (final CardCollectionView affected : affectedPerAbility.values()) {
             if (affected != null) {
-                Iterables.addAll(affectedCards, affected);
+                affected.forEach(affectedCards::add);
             }
         }
 

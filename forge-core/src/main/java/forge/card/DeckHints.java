@@ -1,9 +1,6 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -168,11 +165,11 @@ public class DeckHints {
         // this is case ABILITY, but other types can also use this when the implicit parsing would miss
         String[] params = param.split("\\|");
         for (String ability : params) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard::getRules));
+            getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard::getRules).forEach(cards::add);
         }
         // bonus if a DeckHas can satisfy the type with multiple ones
         if (params.length > 1) {
-            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard::getRules));
+            getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, params), PaperCard::getRules).forEach(cards::add);
         }
 
         for (String p : params) {
@@ -180,19 +177,19 @@ public class DeckHints {
             case COLOR:
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.IS_COLORLESS, PaperCard::getRules));
+                    getMatchingItems(cardList, CardRulesPredicates.IS_COLORLESS, PaperCard::getRules).forEach(cards::add);
                 } else {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules));
+                    getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules).forEach(cards::add);
                 }
                 break;
             case KEYWORD:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard::getRules));
+                getMatchingItems(cardList, CardRulesPredicates.hasKeyword(p), PaperCard::getRules).forEach(cards::add);
                 break;
             case NAME:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules));
+                getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules).forEach(cards::add);
                 break;
             case TYPE:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard::getRules));
+                getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard::getRules).forEach(cards::add);
                 break;
             case NONE:
             case ABILITY: // already done above

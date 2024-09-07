@@ -91,14 +91,6 @@ public class Iterables {
         return collection.contains(element);
     }
 
-    public static <T> boolean addAll(Collection<T> collection, Collection<? extends T> toAdd) {
-        return collection.addAll(toAdd);
-    }
-
-    public static <T> void addAll(Collection<T> collection, Iterable<? extends T> toAdd) {
-        toAdd.forEach(collection::add);
-    }
-
     public static <T> T getFirst(List<? extends T> iterable, T defaultValue) {
         return iterable.isEmpty() ? defaultValue : iterable.get(0);
     }

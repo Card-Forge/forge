@@ -1925,7 +1925,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setAttackedPlayersMyLastTurn(Iterable<Player> players) {
         attackedPlayersLastTurn.clear();
-        Iterables.addAll(attackedPlayersLastTurn, players);
+        players.forEach(attackedPlayersLastTurn::add);
     }
 
     public final List<Player> getAttackedPlayersMyCombat() {

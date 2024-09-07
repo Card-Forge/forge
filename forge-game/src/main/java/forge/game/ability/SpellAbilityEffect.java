@@ -229,7 +229,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new CardCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetCards());
+            sa.getTargets().getTargetCards().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "Self").split(" & ");
             for (String d : def) {
@@ -269,7 +269,7 @@ public abstract class SpellAbilityEffect {
                 resultUnique = new PlayerCollection();
                 resultDuplicate = resultUnique;
             }
-            Iterables.addAll(resultDuplicate, sa.getTargets().getTargetPlayers());
+            sa.getTargets().getTargetPlayers().forEach(resultDuplicate::add);
         } else {
             String[] def = sa.getParamOrDefault(definedParam, "You").split(" & ");
             for (String d : def) {

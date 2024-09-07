@@ -516,7 +516,7 @@ public class CardFactoryUtil {
     public static int getCardTypesFromList(final CardCollectionView list) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
-            Iterables.addAll(types, c1.getType().getCoreTypes());
+            c1.getType().getCoreTypes().forEach(types::add);
         }
         return types.size();
     }

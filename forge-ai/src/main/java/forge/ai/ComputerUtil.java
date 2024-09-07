@@ -1753,7 +1753,7 @@ public class ComputerUtil {
                 sub = sub.getSubAbility();
             }
             if (sa == null || (sa != spell && sa != sub)) {
-                Iterables.addAll(objects, predictThreatenedObjects(ai, sa, spell));
+                predictThreatenedObjects(ai, sa, spell).forEach(objects::add);
             }
             if (top) {
                 break; // only evaluate top-stack
@@ -2103,7 +2103,7 @@ public class ComputerUtil {
             }
         }
 
-        Iterables.addAll(threatened, predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
+        predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()).forEach(threatened::add);
         return threatened;
     }
 

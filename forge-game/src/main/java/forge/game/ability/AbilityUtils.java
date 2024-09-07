@@ -160,12 +160,12 @@ public class AbilityUtils {
             }
         } else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
-                Iterables.addAll(cards, ((SpellAbility)sa).getTargets().getTargetCards());
+                ((SpellAbility)sa).getTargets().getTargetCards().forEach(cards::add);
             }
         } else if (defined.equals("ParentTarget") && sa instanceof SpellAbility) {
             final SpellAbility parent = ((SpellAbility)sa).getParentTargetingCard();
             if (parent != null) {
-                Iterables.addAll(cards, parent.getTargets().getTargetCards());
+                parent.getTargets().getTargetCards().forEach(cards::add);
             }
         }  else if (defined.startsWith("Triggered") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
@@ -599,13 +599,13 @@ public class AbilityUtils {
                 final List<Player> players = new ArrayList<>();
                 final SpellAbility saTargeting = sa.getSATargetingPlayer();
                 if (null != saTargeting) {
-                    Iterables.addAll(players, saTargeting.getTargets().getTargetPlayers());
+                    saTargeting.getTargets().getTargetPlayers().forEach(players::add);
                 }
                 val = playerXCount(players, calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("ThisTargetedPlayer")) {
                 final List<Player> players = new ArrayList<>();
-                Iterables.addAll(players, sa.getTargets().getTargetPlayers());
+                sa.getTargets().getTargetPlayers().forEach(players::add);
                 val = playerXCount(players, calcX[1], card, ability);
             }
             else if (calcX[0].startsWith("TargetedObjects")) {
@@ -614,7 +614,7 @@ public class AbilityUtils {
                 SpellAbility loopSA = sa.getRootAbility();
                 while (loopSA != null) {
                     if (loopSA.usesTargeting()) {
-                        Iterables.addAll(objects, loopSA.getTargets());
+                        objects.addAll(loopSA.getTargets());
                     }
                     loopSA = loopSA.getSubAbility();
                 }
@@ -970,7 +970,7 @@ public class AbilityUtils {
             }
         } else if (defined.equals("ThisTargetedPlayer") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
-                Iterables.addAll(players, ((SpellAbility)sa).getTargets().getTargetPlayers());
+                ((SpellAbility)sa).getTargets().getTargetPlayers().forEach(players::add);
             }
         } else if (defined.equals("TargetedController")) {
             for (final Card c : getDefinedCards(card, "Targeted", sa)) {
@@ -2645,7 +2645,7 @@ public class AbilityUtils {
             final Set<String> creatTypes = Sets.newHashSet();
 
             for (Card card : cards) {
-                Iterables.addAll(creatTypes, card.getType().getCreatureTypes());
+                creatTypes.addAll(card.getType().getCreatureTypes());
             }
             // filter out fun types?
             return doXMath(creatTypes.size(), expr, c, ctb);
@@ -3915,7 +3915,7 @@ public class AbilityUtils {
     public static int countCardTypesFromList(final Iterable<Card> list, boolean permanentTypes) {
         EnumSet<CardType.CoreType> types = EnumSet.noneOf(CardType.CoreType.class);
         for (Card c1 : list) {
-            Iterables.addAll(types, c1.getType().getCoreTypes());
+            c1.getType().getCoreTypes().forEach(types::add);
         }
         if (permanentTypes)
             return (int) types.stream().filter(type -> type.isPermanent).count();
@@ -3925,7 +3925,7 @@ public class AbilityUtils {
     public static int countSuperTypesFromList(final Iterable<Card> list) {
         EnumSet<CardType.Supertype> types = EnumSet.noneOf(CardType.Supertype.class);
         for (Card c1 : list) {
-            Iterables.addAll(types, c1.getType().getSupertypes());
+            c1.getType().getSupertypes().forEach(types::add);
         }
 
         return types.size();
@@ -3934,7 +3934,7 @@ public class AbilityUtils {
     public static int countSubTypesFromList(final Iterable<Card> list) {
         Set<String> types = new HashSet<>();
         for (Card c1 : list) {
-            Iterables.addAll(types, c1.getType().getSubtypes());
+            c1.getType().getSubtypes().forEach(types::add);
         }
 
         return types.size();

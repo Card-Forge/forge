@@ -193,8 +193,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
 
-            Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa,
-                    Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
+            activator.getController().chooseCardsForEffect(leastToughness, sa,
+                        Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params).forEach(tgtObjects::add);
         } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther || putOnDefined)) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
@@ -242,8 +242,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (sa.hasParam("DividedRandomly")) {
                 tgtObjects.addAll(choices);
             } else {
-                Iterables.addAll(tgtObjects, chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
-                        sa.hasParam("ChoiceOptional"), params));
+                chooser.getController().chooseCardsForEffect(choices, sa, title, m, n,
+                                sa.hasParam("ChoiceOptional"), params).forEach(tgtObjects::add);
             }
         } else {
             tgtObjects.addAll(getDefinedEntitiesOrTargeted(sa, "Defined"));
