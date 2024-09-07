@@ -26,8 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
