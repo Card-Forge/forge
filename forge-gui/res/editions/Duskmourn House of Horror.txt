@@ -9,25 +9,32 @@ ScryfallCode=DSK
 1 C Acrobatic Cheerleader @Julia Metzger
 2 C Cult Healer @Diana Franco
 4 M Dollmaker's Shop @Chris Cold
+5 C Emerge from the Cocoon @Marta Nael
 6 R Enduring Innocence @Liiga Smilshkalne
 7 U Ethereal Armor @Tyler Walpole
 10 C Fear of Immobility @Martin de Diego Sádaba
+11 C Fear of Surveillance @Jana Heidersdorf
 14 U Glimmer Seeker @Kev Fang
 18 R Leyline of Hope @Sergey Glushakov
+19 U Lionheart Glimmer @Josu Hernaiz
 22 U Orphans of the Wheat @Julie Dillon
 23 M Overlord of the Mistmoors @Steven Belledin
 24 U Patched Plaything @Domenico Cava
+26 R Reluctant Role Model @Chris Rallis
 27 U Savior of the Small @Elizabeth Peiró
 29 U Shardmage's Rescue @Jarel Threat
 31 C Shepherding Spirits @Billy Christian
 32 R Split Up @Dominik Mayer
+33 U Splitskin Doll @Diana Franco
 35 R Toby, Beastie Befriender @Jehan Choo
 36 C Trapped in the Screen @Michael Phillippi
+38 C Unsettling Twins @Lauren K. Cannon
 39 U Unwanted Remake @Eli Minaya
 40 U Veteran Survivor @Kai Carpenter
 41 M The Wandering Rescuer @Anna Pavleeva
 43 U Bottomless Pool @Diana Franco
 44 R Central Elevator @Cristi Balanescu
+45 C Clammy Prowler @John Tedrick
 47 U Cursed Windbreaker @Nino Vecia
 51 R Enduring Curiosity @Julie Dillon
 55 U Fear of Failed Tests @Jana Heidersdorf
@@ -44,8 +51,11 @@ ScryfallCode=DSK
 72 R Silent Hallcreeper @Joshua Raphael
 73 C Stalked Researcher @Marta Nael
 74 U Stay Hidden, Stay Silent @Josu Hernaiz
+76 C Tunnel Surveyor @John Stanko
+77 C Twist Reality @Allen Williams
 81 U Unwilling Vessel @Josu Hernaiz
 86 R Come Back Wrong @David Auden Nash
+87 U Commune with Evil @Ovidio Cartagena
 89 U Cynical Loner @Miranda Meeks
 90 U Dashing Bloodsucker @Randy Gallegos
 92 R Demonic Counsel @Babs Webb
@@ -54,25 +64,35 @@ ScryfallCode=DSK
 96 C Fanatic of the Harrowing @Fajareka Setiawan
 97 C Fear of Lost Teeth @Oriana Menendez
 98 C Fear of the Dark @Sam Wolfe Connelly
+99 C Final Vengeance @David Szabo
 100 M Funeral Room @Miklós Ligeti
+101 C Give In to Violence @Septian Fajrianto
 102 R Grievous Wound @Martina Fačková
 106 R Leyline of the Void @Sergey Glushakov
 108 M Meathook Massacre II @Tiffany Turrill
 111 U Nowhere to Run @Jodie Muir
 114 U Popular Egotist @Julia Metzger
+118 R Unholy Lobby @Matteo Bassini
 119 R Unstoppable Slasher @Maxime Minard
 120 M Valgavoth, Terror Eater @Antonio José Manzanedo
 121 U Valgavoth's Faithful @Jodie Muir
+122 U Vile Mutilator @Néstor Ossandón Leal
+126 U Betrayer's Bargain @Billy Christian
 128 R Chainsaw @J.P. Targete
 130 C Clockwork Percussionist @Eric Wilkerson
 131 R Cursed Recording @Kim Sokol
+132 U Diversion Specialist @Tuan Duong Chu
 135 U Fear of Burning Alive @J.P. Targete
 136 R Fear of Missing Out @John Stanko
 137 C Glassworks @Sergey Glushakov
+138 C Grab the Prize @Halil Ural
+139 C Hand That Feeds @Loïc Canavaggia
 141 U Infernal Phantom @Mike Sass
+142 U Irreverent Gremlin @Fajareka Setiawan
 143 R Leyline of Resonance @Sergey Glushakov
 145 U Norin, Swift Survivalist @Yigit Koroglu
 146 M Overlord of the Boilerbilges @Helge C. Balzer
+148 U Piggy Bank @Steve Ellis
 149 U Pyroclasm @Néstor Ossandón Leal
 153 R Razorkin Needlehead @Riccardo Federici
 155 M The Rollercrusher Ride @Deruchenko Alexander
@@ -81,12 +101,17 @@ ScryfallCode=DSK
 161 U Untimely Malfunction @Jarel Threat
 163 C Vicious Clown @Johann Bodin
 166 U Altanak, the Thrice-Called @Sam Wolfe Connelly
+167 C Anthropede @Loïc Canavaggia
 168 R Balustrade Wurm @Maxime Minard
+169 C Bashful Beastie @Aaron Miller
 180 C Grasping Longneck @Mathias Kollros
+181 U Greenhouse @John Di Giovanni
 182 M Hauntwoods Shrieker @John Tedrick
 183 R Hedge Shredder @Cristi Balanescu
 186 U Insidious Fungus @Slawomir Maniak
 188 R Leyline of Mutation @Sergey Glushakov
+192 R Omnivorous Flytrap @Antonio José Manzanedo
+193 U Overgrown Zealot @Tyler Walpole
 194 M Overlord of the Hauntwoods @Tiffany Turrill
 195 U Patchwork Beastie @John Tedrick
 197 C Say Its Name @Sam Wolfe Connelly
@@ -95,15 +120,19 @@ ScryfallCode=DSK
 200 U Threats Around Every Corner @Andrea Piparo
 201 R Twitching Doll @Warren Mahy
 202 M Tyvar, the Pummeler @Olivier Bernard
+206 C Wary Watchdog @Olivier Bernard
 212 U Disturbing Mirth @Nino Vecia
 213 U Drag to the Roots @Deruchenko Alexander
 214 U Fear of Infinity @Fernando Falcone
+216 U Growing Dread @Maxime Minard
 217 U Inquisitive Glimmer @Julie Dillon
 219 R The Jolly Balloon Man @Campbell White
 220 M Kaito, Bane of Nightmares @Joshua Raphael
 224 M Niko, Light of Hope @Aurore Folny
 226 R Peer Past the Veil @Tuan Duong Chu
+231 U Sawblade Skinripper @Zezhou Chen
 232 U Shrewd Storyteller @David Palumbo
+234 U Skullsnap Nuisance @Allen Douglas
 235 U Smoky Lounge @Marco Gorlei
 236 R The Swarmweaver @Helge C. Balzer
 237 R Undead Sprinter @Nino Vecia
@@ -111,6 +140,7 @@ ScryfallCode=DSK
 240 R Winter, Misanthropic Guide @Jodie Muir
 241 R Zimone, All-Questioning @Ekaterina Burmak
 242 U Attack-in-the-Box @Domenico Cava
+243 C Bear Trap @Michele Giorgi
 248 R Ghost Vacuum @David Szabo
 250 U Haunted Screen @Sean Murray
 254 U Saw @Jarel Threat
@@ -128,6 +158,7 @@ ScryfallCode=DSK
 266 C Raucous Carnival @Josu Solano
 267 C Razortrap Gorge @Filip Burburan
 268 C Strangled Cemetery @Marco Gorlei
+269 C Terramorphic Expanse @Sam Burley
 270 R Thornspire Verge @Kasia 'Kafis' Zielińska
 271 R Valgavoth's Lair @Martin de Diego Sádaba
 272 L Plains @Dan Mumford
@@ -135,14 +166,27 @@ ScryfallCode=DSK
 274 L Swamp @Dan Mumford
 275 L Mountain @Dan Mumford
 276 L Forest @Dan Mumford
+277 L Plains @Marco Gorlei
+278 L Plains @Josu Hernaiz
+279 L Island @Raymond Bonilla
+280 L Island @Leonardo Borazio
+281 L Swamp @Martin de Diego Sádaba
+282 L Swamp @Néstor Ossandón Leal
+283 L Mountain @Ralph Horsley
+284 L Mountain @Néstor Ossandón Leal
+285 L Forest @Martin de Diego Sádaba
+286 L Forest @Josu Hernaiz
+289 R Reluctant Role Model @Chris Rallis
 291 U Stay Hidden, Stay Silent @Josu Hernaiz
 292 R Come Back Wrong @David Auden Nash
 293 M Meathook Massacre II @Tiffany Turrill
+294 R Unstoppable Slasher @Maxime Minard
 295 C Clockwork Percussionist @Eric Wilkerson
 296 R Cursed Recording @Kim Sokol
 297 U Norin, Swift Survivalist @Yigit Koroglu
 298 M The Rollercrusher Ride @Deruchenko Alexander
 301 R The Swarmweaver @Helge C. Balzer
+303 R Reluctant Role Model @Ivan Shavrin
 304 R Split Up @Toni Infante
 306 U Unwanted Remake @Ivan Shavrin
 308 R Marina Vendrell's Grimoire @Lenka Šimečková & Scott Okumura
@@ -156,6 +200,7 @@ ScryfallCode=DSK
 317 M The Rollercrusher Ride @Cacho Rubione
 319 R Balustrade Wurm @Alexis Ziritt
 321 U Insidious Fungus @Bastien Grivet
+322 R Omnivorous Flytrap @Chun Lo
 325 R Peer Past the Veil @Scott Buoncristiano
 326 R Ghost Vacuum @Lenka Šimečková & Scott Okumura
 327 R Valgavoth's Lair @Ivan Shavrin
@@ -169,6 +214,7 @@ ScryfallCode=DSK
 336 R Central Elevator @Ivan Shavrin
 337 M Mirror Room @Cacho Rubione
 338 M Funeral Room @Alexandre Chaudret
+339 R Unholy Lobby @Alexis Ziritt
 346 R Doomsday Excruciator @Jarel Threat
 347 R Razorkin Needlehead @Loïc Canavaggia
 348 M Screaming Nemesis @Inkognit
@@ -196,6 +242,7 @@ ScryfallCode=DSK
 376 R Leyline of the Void @Sergey Glushakov
 379 R Leyline of Resonance @Sergey Glushakov
 380 M Overlord of the Boilerbilges @Helge C. Balzer
+382 R Leyline of Mutation @Sergey Glushakov
 383 M Overlord of the Hauntwoods @Tiffany Turrill
 384 R Twitching Doll @Warren Mahy
 386 R Enduring Innocence @Kawasumi
