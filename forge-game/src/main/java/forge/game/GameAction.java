@@ -485,17 +485,17 @@ public class GameAction {
                 if (c.getCastSA() != null && !c.getCastSA().isIntrinsic() && c.getCastSA().getKeyword() != null) {
                     KeywordInterface ki = c.getCastSA().getKeyword();
                     ki.setHostCard(copied);
-                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), 0, true);
+                    copied.addChangedCardKeywordsInternal(ImmutableList.of(ki), null, false, copied.getGameTimestamp(), null, true);
                 }
                 // TODO hot fix for non-intrinsic offspring
-                Multimap<Long, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
+                Multimap<StaticAbility, KeywordInterface> addKw = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (KeywordInterface kw : c.getKeywords(Keyword.OFFSPRING)) {
                     if (!kw.isIntrinsic()) {
-                        addKw.put(kw.getStaticId(), kw);
+                        addKw.put(kw.getStatic(), kw);
                     }
                 }
                 if (!addKw.isEmpty()) {
-                    for (Map.Entry<Long, Collection<KeywordInterface>> e : addKw.asMap().entrySet()) {
+                    for (Map.Entry<StaticAbility, Collection<KeywordInterface>> e : addKw.asMap().entrySet()) {
                         copied.addChangedCardKeywordsInternal(e.getValue(), null, false, copied.getGameTimestamp(), e.getKey(), true);
                     }
                 }
@@ -601,7 +601,7 @@ public class GameAction {
         // 400.7g try adding keyword back into card if it doesn't already have it
         if (zoneTo.is(ZoneType.Stack) && cause != null && cause.isSpell() && !cause.isIntrinsic() && c.equals(cause.getHostCard())) {
             if (cause.getKeyword() != null && !copied.getKeywords().contains(cause.getKeyword())) {
-                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), 0, true);
+                copied.addChangedCardKeywordsInternal(ImmutableList.of(cause.getKeyword()), null, false, game.getNextTimestamp(), null, true);
             }
         }
 

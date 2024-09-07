@@ -68,7 +68,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                     params.put("Category", "Keywords");
                     tgtC.addPerpetual(params);
                 }
-                tgtC.addChangedCardKeywords(kws, null, false, timestamp, 0);
+                tgtC.addChangedCardKeywords(kws, null, false, timestamp, null);
             }
             if (redrawPT) {
                 tgtC.updatePowerToughnessForView();
