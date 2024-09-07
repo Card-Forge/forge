@@ -72,12 +72,6 @@ public class Iterables {
     public static <T> boolean all(Collection<T> iterable, Predicate<? super T> test) {
         return iterable.stream().allMatch(test);
     }
-    public static <T> T find(Collection<T> iterable, Predicate<? super T> predicate) {
-        return iterable.stream().filter(predicate).findFirst().get();
-    }
-    public static <T> T find(Collection<T> iterable, Predicate<? super T> predicate, T defaultValue) {
-        return iterable.stream().filter(predicate).findFirst().orElse(defaultValue);
-    }
 
     public static int size(Collection<?> collection) {
         return collection.size();

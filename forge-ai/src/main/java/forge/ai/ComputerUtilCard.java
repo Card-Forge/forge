@@ -245,7 +245,7 @@ public class ComputerUtilCard {
         }
         if (iminBL == Integer.MAX_VALUE) {
             // All basic lands have no basic land type. Just return something
-            return Iterables.find(land, CardPredicates.UNTAPPED, land.get(0));
+            return land.stream().filter(CardPredicates.UNTAPPED).findFirst().orElse(land.get(0));
         }
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
