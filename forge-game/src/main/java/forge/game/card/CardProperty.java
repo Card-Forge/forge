@@ -906,7 +906,7 @@ public class CardProperty {
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
                     return game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
+                    return CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController).stream().anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -1704,7 +1704,7 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+            if (blocked.stream().anyMatch(CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
                 return true;
             }
             for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
@@ -1719,7 +1719,7 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+            if (blocked.stream().anyMatch(CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
                 return true;
             }
             for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
@@ -2098,7 +2098,7 @@ public class CardProperty {
             }
             List<String> typeList = Lists.newArrayList(types.split(","));
 
-            return Iterables.any(card.getType().getCreatureTypes(), typeList::contains);
+            return card.getType().getCreatureTypes().stream().anyMatch(typeList::contains);
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);

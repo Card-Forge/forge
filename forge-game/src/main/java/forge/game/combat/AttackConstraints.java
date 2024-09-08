@@ -266,7 +266,7 @@ public class AttackConstraints {
             }
 
             for (final Predicate<Card> predicateRestriction : predicateRestrictions) {
-                if (Iterables.any(Sets.union(myAttackers.keySet(), reserved.asSet()), predicateRestriction)) {
+                if (Sets.union(myAttackers.keySet(), reserved.asSet()).stream().anyMatch(predicateRestriction)) {
                     // predicate fulfilled already, ignore!
                     continue;
                 }

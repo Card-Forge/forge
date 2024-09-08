@@ -612,7 +612,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // pick dual lands if available
-        if (Iterables.any(result, CardPredicates.NONBASIC_LANDS)) {
+        if (result.stream().anyMatch(CardPredicates.NONBASIC_LANDS)) {
             result = CardLists.filter(result, CardPredicates.NONBASIC_LANDS);
         }
 

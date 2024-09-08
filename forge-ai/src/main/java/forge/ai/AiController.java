@@ -458,7 +458,7 @@ public class AiController {
                     return false;
                 }
             }
-            return Iterables.any(c.getAllPossibleAbilities(player, true), SpellAbility::isLandAbility);
+            return c.getAllPossibleAbilities(player, true).stream().anyMatch(SpellAbility::isLandAbility);
         });
         return landList;
     }

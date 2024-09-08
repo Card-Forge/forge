@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableSortedSet;
@@ -393,7 +392,7 @@ public final class CardScriptParser {
         if (DEFINED_CARDS.contains(defined)) {
             return true;
         }
-        return Iterables.any(DEFINED_CARDS_STARTSWITH, startsWith(defined));
+        return DEFINED_CARDS_STARTSWITH.stream().anyMatch(startsWith(defined));
     }
     private static boolean isDefinedPlayerLegal(final String defined) {
         final boolean non = defined.startsWith("Non"), flipped = defined.startsWith("Flipped");
@@ -409,7 +408,7 @@ public final class CardScriptParser {
         if (DEFINED_PLAYERS.contains(defined)) {
             return true;
         }
-        return Iterables.any(DEFINED_PLAYERS_STARTSWITH, startsWith(defined));
+        return DEFINED_PLAYERS_STARTSWITH.stream().anyMatch(startsWith(defined));
     }
 
     private static final Set<String> VALID_INCLUSIVE = ImmutableSortedSet.of(
@@ -514,7 +513,7 @@ public final class CardScriptParser {
         if (VALID_EXCLUSIVE.contains(valid)) {
             return true;
         }
-        return Iterables.any(VALID_EXCLUSIVE_STARTSWITH, startsWith(valid));
+        return VALID_EXCLUSIVE_STARTSWITH.stream().anyMatch(startsWith(valid));
     }
 
     private static final class KeyValuePair {

@@ -334,9 +334,9 @@ public class EffectAi extends SpellAbilityAi {
                     list = CardLists.filter(list, CardPredicates.CAN_BE_DESTROYED, input -> {
                         Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(input);
                         runParams.put(AbilityKey.Regeneration, true);
-                        List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                        List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                         // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                        if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration").negate())) {
+                        if (repDestroyList.isEmpty() || repDestroyList.stream().anyMatch(CardTraitPredicates.hasParam("Regeneration").negate())) {
                             return false;
                         }
 
@@ -365,9 +365,9 @@ public class EffectAi extends SpellAbilityAi {
 
                     Map<AbilityKey, Object> runParams = AbilityKey.mapFromAffected(sa.getHostCard());
                     runParams.put(AbilityKey.Regeneration, true);
-                    List<ReplacementEffect> repDestoryList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
+                    List<ReplacementEffect> repDestroyList = game.getReplacementHandler().getReplacementList(ReplacementType.Destroy, runParams, ReplacementLayer.Other);
                     // no Destroy Replacement, or one non-Regeneration one like Totem-Armor
-                    if (repDestoryList.isEmpty() || Iterables.any(repDestoryList, CardTraitPredicates.hasParam("Regeneration").negate())) {
+                    if (repDestroyList.isEmpty() || repDestroyList.stream().anyMatch(CardTraitPredicates.hasParam("Regeneration").negate())) {
                         return false;
                     }
 

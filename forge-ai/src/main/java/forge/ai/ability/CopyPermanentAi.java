@@ -176,7 +176,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
 
                 list = CardLists.filter(list, c -> (!c.getType().isLegendary() || canCopyLegendary) || !c.getController().equals(aiPlayer));
                 Card choice;
-                if (Iterables.any(list, CardPredicates.CREATURES)) {
+                if (list.stream().anyMatch(CardPredicates.CREATURES)) {
                     if (sa.hasParam("TargetingPlayer")) {
                         choice = ComputerUtilCard.getWorstCreatureAI(list);
                     } else {

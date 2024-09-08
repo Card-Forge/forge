@@ -751,7 +751,7 @@ public class ComputerUtilMana {
                         break; // unwise to pay
                     } else if (sa.getParam("AIPhyrexianPayment").startsWith("OnFatalDamage.")) {
                         int dmg = Integer.parseInt(sa.getParam("AIPhyrexianPayment").substring(14));
-                        if (!Iterables.any(ai.getOpponents(), PlayerPredicates.lifeLessOrEqualTo(dmg))) {
+                        if (ai.getOpponents().stream().noneMatch(PlayerPredicates.lifeLessOrEqualTo(dmg))) {
                             break; // no one to finish with the gut shot
                         }
                     }

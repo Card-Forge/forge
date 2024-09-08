@@ -2119,7 +2119,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasLandfall() {
-        return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.LANDS);
+        return getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null).stream()
+                .anyMatch(CardPredicates.LANDS);
     }
 
     public boolean hasFerocious() {

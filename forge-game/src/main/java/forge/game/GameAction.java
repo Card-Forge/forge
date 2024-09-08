@@ -132,7 +132,7 @@ public class GameAction {
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+            if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(c, null))) {
                 found = true;
             }
 
@@ -411,7 +411,7 @@ public class GameAction {
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
             if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
                 boolean found = false;
-                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied, null))) {
+                if (game.getPlayers().stream().anyMatch(PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
                 if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {

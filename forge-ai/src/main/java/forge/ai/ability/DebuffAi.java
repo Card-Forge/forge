@@ -23,7 +23,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
-import forge.util.Iterables;
 
 public class DebuffAi extends SpellAbilityAi {
 
@@ -68,7 +67,7 @@ public class DebuffAi extends SpellAbilityAi {
             List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             final Combat combat = game.getCombat();
-            return Iterables.any(cards, c -> {
+            return cards.stream().anyMatch(c -> {
                 if (c.getController().equals(sa.getActivatingPlayer()) || combat == null)
                     return false;
 

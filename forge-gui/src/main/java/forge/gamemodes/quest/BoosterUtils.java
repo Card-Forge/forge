@@ -19,10 +19,7 @@ package forge.gamemodes.quest;
 
 import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 import forge.item.*;
@@ -137,7 +134,7 @@ public final class BoosterUtils {
         }
 
         final boolean allowDuplicates = userPrefs != null && userPrefs.allowDuplicates();
-        final boolean mythicsAvailable = Iterables.any(cardPool, PaperCardPredicates.IS_MYTHIC_RARE);
+        final boolean mythicsAvailable = cardPool.stream().anyMatch(PaperCardPredicates.IS_MYTHIC_RARE);
         final int numMythics = mythicsAvailable ? numRares / RARES_PER_MYTHIC : 0;
         final int adjustedRares = numRares - numMythics;
 

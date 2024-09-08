@@ -403,7 +403,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public boolean hasABasicLandType() {
-        return Iterables.any(this.subtypes, Predicates.IS_BASIC_LAND_TYPE);
+        return this.subtypes.stream().anyMatch(Predicates.IS_BASIC_LAND_TYPE);
     }
     @Override
     public boolean hasANonBasicLandType() {

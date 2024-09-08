@@ -1,10 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import forge.card.CardStateName;
@@ -190,7 +186,8 @@ public class PlayEffect extends SpellAbilityEffect {
             Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 Card c = it.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
+                if (AbilityUtils.getBasicSpellsFromPlayEffect(c, controller).stream()
+                        .noneMatch(SpellAbilityPredicates.isValid(valid, controller, source, sa))) {
                     // it.remove will only remove item from the list part of CardCollection
                     tgtCards.asSet().remove(c);
                     it.remove();
@@ -232,7 +229,8 @@ public class PlayEffect extends SpellAbilityEffect {
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
                 while (it.hasNext()) {
                     Card c = it.next();
-                    if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
+                    if (AbilityUtils.getBasicSpellsFromPlayEffect(c, controller).stream()
+                            .noneMatch(SpellAbilityPredicates.isValid(valid, controller, c, sa))) {
                         // it.remove will only remove item from the list part of CardCollection
                         tgtCards.asSet().remove(c);
                         it.remove();

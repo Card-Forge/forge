@@ -573,7 +573,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (this.getGameTypes().size() > 0) {
             Predicate<GameType> pgt = type -> game.getRules().hasAppliedVariant(type);
-            if (!Iterables.any(getGameTypes(), pgt)) {
+            if (getGameTypes().stream().noneMatch(pgt)) {
                 return false;
             }
         }

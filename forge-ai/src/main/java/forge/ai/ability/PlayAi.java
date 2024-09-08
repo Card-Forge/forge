@@ -13,7 +13,6 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 import java.util.Iterator;
@@ -223,7 +222,8 @@ public class PlayAi extends SpellAbilityAi {
             final Iterator<Card> itr = cards.iterator();
             while (itr.hasNext()) {
                 final Card c = itr.next();
-                if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, ai), SpellAbilityPredicates.isValid(valid, ai , source, sa))) {
+                if (AbilityUtils.getBasicSpellsFromPlayEffect(c, ai).stream()
+                        .noneMatch(SpellAbilityPredicates.isValid(valid, ai, source, sa))) {
                     itr.remove();
                 }
             }

@@ -1,13 +1,9 @@
 package forge.game.combat;
 
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import forge.game.GameEntity;
 import forge.game.card.Card;
-import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
@@ -54,11 +50,11 @@ public class AttackRestriction {
             violations.add(AttackRestrictionType.ONLY_ALONE);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER)
-                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
+                && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_GREATER_POWER);
         }
         if (restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)
-                && !Iterables.any(attackers.keySet(), AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
+                && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
         if (restrictions.contains(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {

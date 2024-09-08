@@ -1421,7 +1421,7 @@ public class ComputerUtilCard {
             //1. become attacker for whatever reason
             if (!doesCreatureAttackAI(ai, c) && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))) {
+                if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))) {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0) {
@@ -1473,8 +1473,8 @@ public class ComputerUtilCard {
             }
 
             //3. grant evasive
-            if (Iterables.any(oppCreatures, CardPredicates.possibleBlockers(c))) {
-                if (!Iterables.any(oppCreatures, CardPredicates.possibleBlockers(pumped))
+            if (oppCreatures.stream().anyMatch(CardPredicates.possibleBlockers(c))) {
+                if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))
                         && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
