@@ -1119,23 +1119,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void surveil(int num, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        repParams.put(AbilityKey.Source, cause);
-        repParams.put(AbilityKey.SurveilNum, num);
-        if (params != null) {
-            repParams.putAll(params);
-        }
-
-        switch (getGame().getReplacementHandler().run(ReplacementType.Surveil, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated: {
-                num = (int) repParams.get(AbilityKey.SurveilNum);
-                break;
-            }
-            default:
-                return;
-        }
+        num += StaticAbilitySurveilNum.surveilNumMod(this);
 
         final CardCollection topN = getTopXCardsFromLibrary(num);
 
