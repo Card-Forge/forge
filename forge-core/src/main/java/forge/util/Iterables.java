@@ -66,9 +66,6 @@ public class Iterables {
     public static <T> Iterable<T> filter(Collection<T> iterable, Predicate<? super T> filter) {
         return () -> iterable.stream().filter(filter).iterator();
     }
-    public static <T> boolean all(Collection<T> iterable, Predicate<? super T> test) {
-        return iterable.stream().allMatch(test);
-    }
 
 
     public static int size(Collection<?> collection) {
