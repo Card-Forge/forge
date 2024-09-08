@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
-                <version>1.7.25</version>
+                <version>2.1.2</version>
                 <executions>
                     <execution>
                         <id>l4j-adv</id>
@@ -99,7 +99,7 @@
                                     <opt>--add-opens java.base/java.math=ALL-UNNAMED</opt>
                                     <opt>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</opt>
                                     <opt>--add-opens java.base/java.nio=ALL-UNNAMED</opt>
-                                    <opt>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/sun.nio.ch=ALL-UNNAMED</opt>
                                     <opt>--add-opens java.base/java.util=ALL-UNNAMED</opt>
                                     <opt>--add-opens java.base/java.lang.reflect=ALL-UNNAMED</opt>
                                     <opt>--add-opens java.base/java.text=ALL-UNNAMED</opt>
