@@ -29,7 +29,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class ChangeZoneAllAi extends SpellAbilityAi {
@@ -353,7 +352,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             // TODO: this is a stub to prevent the AI from crashing the game when, for instance, playing the opponent's
             // Profaner from exile without paying its mana cost. Otherwise the card is marked AI:RemoveDeck:All and
             // there is no specific AI to support playing it in a smarter way. Feel free to expand.
-            return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.CREATURES);
+            return ai.getOpponents().getCardsIn(origin).anyMatch(CardPredicates.CREATURES);
         }
 
         CardCollectionView humanType = ai.getOpponents().getCardsIn(origin);

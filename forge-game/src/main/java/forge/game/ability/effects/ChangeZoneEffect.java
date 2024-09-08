@@ -947,7 +947,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 for (ZoneType z : origin) {
                     // all cards that use this currently only search 1 card, no extra logic needed
-                    if (z.isKnown() && Iterables.any(altFetchList, CardPredicates.inZone(z))) {
+                    if (z.isKnown() && altFetchList.anyMatch(CardPredicates.inZone(z))) {
                         mandatory = true;
                     }
                 }

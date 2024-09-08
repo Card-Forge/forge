@@ -17,7 +17,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 public class PermanentAi extends SpellAbilityAi {
@@ -213,7 +212,7 @@ public class PermanentAi extends SpellAbilityAi {
 
                 if (param.equals("MustHaveInHand")) {
                     // Only cast if another card is present in hand (e.g. Illusions of Grandeur followed by Donate)
-                    boolean hasCard = Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(value));
+                    boolean hasCard = ai.getCardsIn(ZoneType.Hand).anyMatch(CardPredicates.nameEquals(value));
                     if (!hasCard) {
                         dontCast = true;
                     }

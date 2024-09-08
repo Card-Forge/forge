@@ -159,11 +159,11 @@ public class SpecialCardAi {
                     CardPredicates.INSTANTS_AND_SORCERIES);
             if (!hand.isEmpty()) {
                 // has spell that can be cast in hand with put ability
-                if (Iterables.any(hand, CardPredicates.hasCMC(counterNum + 1))) {
+                if (hand.anyMatch(CardPredicates.hasCMC(counterNum + 1))) {
                     return false;
                 }
                 // has spell that can be cast if one counter is removed
-                if (Iterables.any(hand, CardPredicates.hasCMC(counterNum))) {
+                if (hand.anyMatch(CardPredicates.hasCMC(counterNum))) {
                     sa.setXManaCostPaid(1);
                     return true;
                 }
@@ -659,7 +659,7 @@ public class SpecialCardAi {
                     // Need to have something else in hand that is blue in addition to Force of Will itself,
                     // otherwise the AI will fail to play the card and the card will disappear from the pool
                     return false;
-                } else if (!Iterables.any(blueCards, CardPredicates.lessCMC(3))) {
+                } else if (!blueCards.anyMatch(CardPredicates.lessCMC(3))) {
                     // We probably need a low-CMC card to exile to it, exiling a higher CMC spell may be suboptimal
                     // since the AI does not prioritize/value cards vs. permission at the moment.
                     return false;
@@ -864,7 +864,7 @@ public class SpecialCardAi {
 
                         for (Card c1 : lib) {
                             if (c1.getName().equals(c.getName())) {
-                                if (!Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.nameEquals(c1.getName()))
+                                if (!ai.getCardsIn(ZoneType.Hand).anyMatch(CardPredicates.nameEquals(c1.getName()))
                                         && ComputerUtilMana.hasEnoughManaSourcesToCast(c1.getFirstSpellAbility(), ai)) {
                                     // Try not to search for things we already have in hand or that we can't cast
                                     libPriorityList.add(c1);
@@ -980,7 +980,7 @@ public class SpecialCardAi {
 
             for (Card gate : availableGates)
             {
-                if (!Iterables.any(currentGates, CardPredicates.nameEquals(gate.getName())))
+                if (!currentGates.anyMatch(CardPredicates.nameEquals(gate.getName())))
                 {
                     // Diversify our mana base
                     return gate;
@@ -1130,7 +1130,7 @@ public class SpecialCardAi {
                 return false; // nothing to draw from the library
             }
 
-            if (Iterables.any(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Yawgmoth's Bargain"))) {
+            if (ai.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Yawgmoth's Bargain"))) {
                 // Prefer Yawgmoth's Bargain because AI is generally better with it
 
                 // TODO: in presence of bad effects which deal damage when a card is drawn, probably better to prefer Necropotence instead?
@@ -1148,7 +1148,7 @@ public class SpecialCardAi {
             }
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise"));
+            boolean blackViseOTB = game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Black Vise"));
 
             if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0 
@@ -1803,7 +1803,7 @@ public class SpecialCardAi {
             int maxHandSize = ai.getMaxHandSize();
 
             // TODO: Any other bad effects like that?
-            boolean blackViseOTB = Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Black Vise"));
+            boolean blackViseOTB = game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Black Vise"));
 
             // TODO: Consider effects like "whenever a player draws a card, he loses N life" (e.g. Nekusar, the Mindraiser),
             //       and effects that draw an additional card whenever a card is drawn.

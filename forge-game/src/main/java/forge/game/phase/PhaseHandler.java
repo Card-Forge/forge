@@ -41,7 +41,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CollectionSuppliers;
-import forge.util.Iterables;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -286,7 +285,7 @@ public class PhaseHandler implements java.io.Serializable {
                             }
                         }
                         // roll for attractions if we have any
-                        if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), CardPredicates.ATTRACTIONS)) {
+                        if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
                             playerTurn.rollToVisitAttractions();
                         }
                         table.replaceCounterEffect(game, null, false);

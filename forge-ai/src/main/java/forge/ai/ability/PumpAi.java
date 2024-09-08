@@ -18,7 +18,6 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -795,7 +794,7 @@ public class PumpAi extends PumpAiBase {
 
             List<String> toRemove = Lists.newArrayList();
             for (final String name : values.keySet()) {
-                if (!Iterables.any(oppList, CardPredicates.nameEquals(name))) {
+                if (!oppList.anyMatch(CardPredicates.nameEquals(name))) {
                     toRemove.add(name);
                 }
             }

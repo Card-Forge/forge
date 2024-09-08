@@ -35,7 +35,6 @@ import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.util.CollectionSuppliers;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -146,7 +145,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     }
 
     public final boolean contains(final Predicate<Card> condition) {
-        return Iterables.any(cardList, condition);
+        return cardList.anyMatch(condition);
     }
 
     public void remove(final Card c) {

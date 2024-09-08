@@ -2583,13 +2583,13 @@ public class ComputerUtil {
                     CardCollectionView possibleCards = ai.getAllCards();
 
                     for (String b : basics) {
-                        if (!Iterables.any(presentCards, CardPredicates.isType(b)) && Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                        if (!presentCards.anyMatch(CardPredicates.isType(b)) && possibleCards.anyMatch(CardPredicates.isType(b))) {
                             chosen = b;
                         }
                     }
                     if (chosen.isEmpty()) {
                         for (String b : basics) {
-                            if (Iterables.any(possibleCards, CardPredicates.isType(b))) {
+                            if (possibleCards.anyMatch(CardPredicates.isType(b))) {
                                 chosen = b;
                             }
                         }

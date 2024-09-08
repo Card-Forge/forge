@@ -611,7 +611,7 @@ public class AiAttackController {
             // TODO: the AI should ideally predict how many times it can activate
             // for now, unless the opponent is tapped out, break at this point
             // and do not predict the blocker limit (which is safer)
-            if (Iterables.any(defendingOpponent.getLandsInPlay(), CardPredicates.UNTAPPED)) {
+            if (defendingOpponent.getLandsInPlay().anyMatch(CardPredicates.UNTAPPED)) {
                 maxBlockersAfterCrew += CardLists.count(CardLists.getNotType(defendingOpponent.getCardsIn(ZoneType.Battlefield), "Creature"),
                         CardPredicates.isType("Vehicle").and(CardPredicates.UNTAPPED));
             }
@@ -1390,7 +1390,7 @@ public class AiAttackController {
         boolean canTrampleOverDefenders = attacker.hasKeyword(Keyword.TRAMPLE) && attacker.getNetCombatDamage() > Aggregates.sum(validBlockers, Card::getNetToughness);
 
         // used to check that CanKillAllDangerous check makes sense in context where creatures with dangerous abilities are present
-        boolean dangerousBlockersPresent = Iterables.any(validBlockers,
+        boolean dangerousBlockersPresent = validBlockers.anyMatch(
                 CardPredicates.hasKeyword(Keyword.WITHER)
                         .or(CardPredicates.hasKeyword(Keyword.INFECT))
                         .or(CardPredicates.hasKeyword(Keyword.LIFELINK))

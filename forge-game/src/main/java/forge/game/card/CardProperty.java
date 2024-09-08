@@ -696,7 +696,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("SharesCMCWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                return Iterables.any(list, CardPredicates.sharesCMCWith(card));
+                return list.anyMatch(CardPredicates.sharesCMCWith(card));
             }
         } else if (property.startsWith("SharesColorWith")) {
             // if card is colorless, it can't share colors
@@ -713,7 +713,7 @@ public class CardProperty {
                     final String restriction = property.split("SharesColorWithOther ")[1];
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     list.remove(card);
-                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
+                    return list.anyMatch(CardPredicates.sharesColorWith(card));
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
@@ -751,7 +751,7 @@ public class CardProperty {
                         if (!card.getColor().hasAnyColor(cs.getColor())) return false;
                         break;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesColorWith(card))) {
+                        if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesColorWith(card))) {
                             return false;
                         }
                         break;
@@ -825,10 +825,10 @@ public class CardProperty {
                     default:
                         CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                         if (property.contains("WithAll")) {
-                            if (!Iterables.all(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                            if (!def.allMatch(CardPredicates.sharesCreatureTypeWith(card))) {
                                 return false;
                             }  
-                        } else if (!Iterables.any(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                        } else if (!def.anyMatch(CardPredicates.sharesCreatureTypeWith(card))) {
                             return false;
                         }
                         break;
@@ -860,14 +860,14 @@ public class CardProperty {
                         }
                         return false;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCardTypeWith(card))) {
+                        if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesCardTypeWith(card))) {
                             return false;
                         }
                 }
             }
         } else if (property.startsWith("sharesLandTypeWith")) {
             final String restriction = property.split("sharesLandTypeWith ")[1];
-            if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesLandTypeWith(card))) {
+            if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesLandTypeWith(card))) {
                 return false;
             }
         } else if (property.equals("sharesPermanentTypeWith")) {
@@ -900,11 +900,11 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    return Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return sourceController.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
-                    return Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
+                    return game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
                     return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
@@ -939,7 +939,8 @@ public class CardProperty {
                     }
                     return false;
                 } else {
-                    if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesNameWith(card))) {
+                    CardCollection iterable = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    if (!iterable.anyMatch(CardPredicates.sharesNameWith(card))) {
                         return false;
                     }
                 }
@@ -953,9 +954,9 @@ public class CardProperty {
                 final String restriction = property.split("doesNotShareNameWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
+                    return !list.anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("YourGraveyard")) {
-                    return !Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return !sourceController.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("OtherYourBattlefield")) {
                     // Obviously it's going to share a name with itself, so consider that in the
                     CardCollection list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
@@ -970,7 +971,7 @@ public class CardProperty {
                 } else {
                     CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction,
                             sourceController, source, spellAbility);
-                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
+                    return !list.anyMatch(CardPredicates.sharesNameWith(card));
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {
@@ -981,7 +982,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesControllerWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                if (!Iterables.any(list, CardPredicates.sharesControllerWith(card))) {
+                if (!list.anyMatch(CardPredicates.sharesControllerWith(card))) {
                     return false;
                 }
             }
@@ -993,7 +994,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
                 CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                if (!Iterables.all(def, CardPredicates.isOwner(card.getOwner()))) {
+                if (!def.allMatch(CardPredicates.isOwner(card.getOwner()))) {
                     return false;
                 }
             }

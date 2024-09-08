@@ -194,7 +194,7 @@ public class AiController {
                             return true;
                         }
                     }
-                    if (Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.nameEquals(hostName))) {
+                    if (game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.nameEquals(hostName))) {
                         return true;
                     }
                 }
@@ -436,7 +436,7 @@ public class AiController {
             String name = c.getName();
             CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
             if (c.getType().isLegendary() && !name.equals("Flagstones of Trokair")) {
-                if (Iterables.any(battlefield, CardPredicates.nameEquals(name))) {
+                if (battlefield.anyMatch(CardPredicates.nameEquals(name))) {
                     return false;
                 }
             }
@@ -554,7 +554,7 @@ public class AiController {
             CardCollection oneDrops = CardLists.filter(nonLandsInHand, CardPredicates.hasCMC(1));
             for (int i = 0; i < MagicColor.WUBRG.length; i++) {
                 byte color = MagicColor.WUBRG[i];
-                if (Iterables.any(oneDrops, CardPredicates.isColor(color))) {
+                if (oneDrops.anyMatch(CardPredicates.isColor(color))) {
                     for (Card land : landList) {
                         if (land.getType().hasSubtype(MagicColor.Constant.BASIC_LANDS.get(i))) {
                             return land;
@@ -597,7 +597,7 @@ public class AiController {
             }
 
             // pick dual lands if available
-            if (Iterables.any(landList, CardPredicates.NONBASIC_LANDS)) {
+            if (landList.anyMatch(CardPredicates.NONBASIC_LANDS)) {
                 landList = CardLists.filter(landList, CardPredicates.NONBASIC_LANDS);
             }
         }
@@ -1400,7 +1400,7 @@ public class AiController {
         CardCollectionView otb = player.getCardsIn(ZoneType.Battlefield);
 
         if (getBooleanProperty(AiProps.HOLD_LAND_DROP_ONLY_IF_HAVE_OTHER_PERMS)) {
-            if (!Iterables.any(otb, CardPredicates.NON_LANDS)) {
+            if (!otb.anyMatch(CardPredicates.NON_LANDS)) {
                 return false;
             }
         }
@@ -1422,7 +1422,7 @@ public class AiController {
         boolean canCastWithLandDrop = (predictedMana + 1 >= minCMCInHand) && minCMCInHand > 0 && !isTapLand;
         boolean cantCastAnythingNow = predictedMana < minCMCInHand;
 
-        boolean hasRelevantAbsOTB = Iterables.any(otb, card -> {
+        boolean hasRelevantAbsOTB = otb.anyMatch(card -> {
             boolean isTapLand1 = false;
             for (ReplacementEffect repl : card.getReplacementEffects()) {
                 // TODO: improve the detection of taplands
@@ -1443,7 +1443,7 @@ public class AiController {
             return false;
         });
 
-        boolean hasLandBasedEffect = Iterables.any(otb, card -> {
+        boolean hasLandBasedEffect = otb.anyMatch(card -> {
             for (Trigger t : card.getTriggers()) {
                 Map<String, String> params = t.getMapParams();
                 if ("ChangesZone".equals(params.get("Mode"))
@@ -2172,7 +2172,7 @@ public class AiController {
         // do mandatory discard early if hand is empty or has DiscardMe card
         boolean discardEarly = false;
         CardCollectionView playerHand = player.getCardsIn(ZoneType.Hand);
-        if (playerHand.isEmpty() || Iterables.any(playerHand, CardPredicates.hasSVar("DiscardMe"))) {
+        if (playerHand.isEmpty() || playerHand.anyMatch(CardPredicates.hasSVar("DiscardMe"))) {
             discardEarly = true;
             result.addAll(mandatoryDiscard);
         }

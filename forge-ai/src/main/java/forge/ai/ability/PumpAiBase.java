@@ -26,7 +26,6 @@ import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 
 public abstract class PumpAiBase extends SpellAbilityAi {
 
@@ -188,7 +187,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.endsWith("Flying")) {
             CardCollectionView attackingFlyer = CardCollection.EMPTY;
             if (combat != null) {
@@ -220,8 +219,8 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
-                    && Iterables.any(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
-                    flyingOrReach.negate());
+                    && CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card))
+                        .anyMatch(flyingOrReach.negate());
         } else if (keyword.endsWith("Horsemanship")) {
             if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS)
@@ -282,7 +281,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                     && !opp.getCreaturesInPlay().isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("First Strike")) {
             if (card.hasDoubleStrike()) {
                 return false;
@@ -325,7 +324,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && CombatUtil.canBeBlocked(card, null, opp)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 1
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Infect")) {
             if (newPower <= 0) {
                 return false;
@@ -365,31 +364,31 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Plains").isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Landwalk:Island")) {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Island").isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Landwalk:Swamp")) {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Swamp").isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Landwalk:Mountain")) {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Mountain").isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Landwalk:Forest")) {
             return !ph.isPlayerTurn(opp) && ((combat != null && combat.isAttacking(card)) || CombatUtil.canAttack(card, opp))
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Forest").isEmpty()
-                    && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
+                    && opp.getCreaturesInPlay().anyMatch(CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
             return combat != null && (combat.isBlocking(card) || combat.isBlocked(card));
         } else if (keyword.equals("Menace")) {

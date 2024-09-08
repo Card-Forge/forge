@@ -38,7 +38,6 @@ import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -49,6 +48,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * <p>
@@ -110,7 +110,7 @@ public class CombatUtil {
         final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
         final Game game = attacker.getGame();
 
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> {
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> {
             if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
                 return false;
             }
@@ -161,7 +161,7 @@ public class CombatUtil {
      * @see #canAttack(Card, GameEntity)
      */
     public static boolean canAttack(final Card attacker) {
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> canAttack(attacker, defender));
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> canAttack(attacker, defender));
     }
 
     /**

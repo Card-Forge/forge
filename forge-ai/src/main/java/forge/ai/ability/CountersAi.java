@@ -32,7 +32,6 @@ import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Iterables;
 
 
 /**
@@ -64,7 +63,7 @@ public abstract class CountersAi extends SpellAbilityAi {
         Card choice;
 
         // opponent can always order it so that he gets 0
-        if (amount == 1 && Iterables.any(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
+        if (amount == 1 && ai.getOpponents().getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.nameEquals("Vorinclex, Monstrous Raider"))) {
             return null;
         }
 

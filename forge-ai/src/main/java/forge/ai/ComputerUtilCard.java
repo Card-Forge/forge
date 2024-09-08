@@ -1056,7 +1056,7 @@ public class ComputerUtilCard {
                     String devotionCode = "Count$Devotion." + MagicColor.toLongString(c);
 
                     int devotion = AbilityUtils.calculateAmount(sa.getHostCard(), devotionCode, sa);
-                    if (devotion > curDevotion && Iterables.any(hand, CardPredicates.isColor(c))) {
+                    if (devotion > curDevotion && hand.anyMatch(CardPredicates.isColor(c))) {
                         curDevotion = devotion;
                         chosenColor = MagicColor.toLongString(c);
                     }

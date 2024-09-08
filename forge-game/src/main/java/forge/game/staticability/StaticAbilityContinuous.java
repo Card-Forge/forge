@@ -231,7 +231,7 @@ public final class StaticAbilityContinuous {
                         CardCollectionView lands = hostCard.getController().getLandsInPlay();
                         final List<String> basic = MagicColor.Constant.BASIC_LANDS;
                         for (String type : basic) {
-                            if (Iterables.any(lands, CardPredicates.isType(type))) {
+                            if (lands.anyMatch(CardPredicates.isType(type))) {
                                 String y = input.replaceAll("YourBasic", type);
                                 newKeywords.add(y);
                             }

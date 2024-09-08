@@ -1,7 +1,5 @@
 package forge.util;
 
-import forge.util.collect.FCollectionView;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -73,12 +71,6 @@ public class Iterables {
     }
     public static <T> boolean all(Collection<T> iterable, Predicate<? super T> test) {
         return iterable.stream().allMatch(test);
-    }
-    public static <T> boolean any(FCollectionView<T> iterable, Predicate<? super T> test) {
-        return iterable.anyMatch(test);
-    }
-    public static <T> boolean all(FCollectionView<T> iterable, Predicate<? super T> test) {
-        return iterable.allMatch(test);
     }
 
 

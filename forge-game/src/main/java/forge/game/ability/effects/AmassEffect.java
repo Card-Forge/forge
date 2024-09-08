@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.EnumSet;
 import java.util.Map;
 
-import forge.util.Iterables;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;
@@ -58,7 +57,7 @@ public class AmassEffect extends TokenEffectBase {
         final String type = sa.getParam("Type");
 
         // create army token if needed
-        if (!Iterables.any(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"))) {
+        if (!activator.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.isType("Army"))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 

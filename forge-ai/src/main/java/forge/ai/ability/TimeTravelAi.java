@@ -15,8 +15,8 @@ import java.util.Map;
 public class TimeTravelAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
-        boolean hasSuspendedCards = Iterables.any(aiPlayer.getCardsIn(ZoneType.Exile), CardPredicates.hasSuspend());
-        boolean hasRelevantCardsOTB = Iterables.any(aiPlayer.getCardsIn(ZoneType.Battlefield), CardPredicates.hasCounter(CounterEnumType.TIME));
+        boolean hasSuspendedCards = aiPlayer.getCardsIn(ZoneType.Exile).anyMatch(CardPredicates.hasSuspend());
+        boolean hasRelevantCardsOTB = aiPlayer.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.hasCounter(CounterEnumType.TIME));
 
         // TODO: add more logic for cards which may need it
         return hasSuspendedCards || hasRelevantCardsOTB;

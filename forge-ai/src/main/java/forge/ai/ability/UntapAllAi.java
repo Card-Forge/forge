@@ -11,7 +11,6 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 
 public class UntapAllAi extends SpellAbilityAi {
     @Override
@@ -28,7 +27,7 @@ public class UntapAllAi extends SpellAbilityAi {
             final String valid = sa.getParamOrDefault("ValidCards", "");
             list = CardLists.getValidCards(list, valid, source.getController(), source, sa);
             // don't untap if only opponent benefits
-            return Iterables.any(list, CardPredicates.isControlledByAnyOf(aiPlayer.getYourTeam()));
+            return list.anyMatch(CardPredicates.isControlledByAnyOf(aiPlayer.getYourTeam()));
         }
         return false;
     }

@@ -137,13 +137,13 @@ public class GameAction {
             }
 
             if (!found) {
-                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(c, null))) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(c, null))) {
                     found = true;
                 }
             }
 
             if (!found) {
-                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(c, null))) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(c, null))) {
                     found = true;
                 }
             }
@@ -414,10 +414,10 @@ public class GameAction {
                 if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any(lastBattlefield, CardPredicates.canBeAttached(copied, null))) {
+                if (lastBattlefield.anyMatch(CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any(lastGraveyard, CardPredicates.canBeAttached(copied, null))) {
+                if (lastGraveyard.anyMatch(CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
                 if (!found) {

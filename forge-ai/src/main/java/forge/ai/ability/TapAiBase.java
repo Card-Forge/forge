@@ -21,7 +21,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 
 public abstract class TapAiBase extends SpellAbilityAi {
 
@@ -195,7 +194,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
             } else if (phase.isPlayerTurn(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
-                if (Iterables.any(tapList, CardPredicates.CREATURES)) {
+                if (tapList.anyMatch(CardPredicates.CREATURES)) {
                     List<Card> creatureList = CardLists.filter(tapList, c -> c.isCreature() && CombatUtil.canAttack(c, opp));
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
                 } else { // no creatures available

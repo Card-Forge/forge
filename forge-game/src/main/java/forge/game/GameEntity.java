@@ -20,7 +20,6 @@ package forge.game;
 import java.util.List;
 import java.util.Map;
 
-import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.Lists;
@@ -176,7 +175,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public final boolean isEnchanted() {
         // enchanted means attached by Aura
-        return Iterables.any(getAttachedCards(), CardPredicates.AURA);
+        return getAttachedCards().anyMatch(CardPredicates.AURA);
     }
 
     public final boolean hasCardAttachment(Card c) {
@@ -188,7 +187,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final boolean hasCardAttachment(final String cardName) {
-        return Iterables.any(getAttachedCards(), CardPredicates.nameEquals(cardName));
+        return getAttachedCards().anyMatch(CardPredicates.nameEquals(cardName));
     }
     public final boolean isEnchantedBy(final String cardName) {
         // Rule 303.4k  Even if c is no Aura it still counts

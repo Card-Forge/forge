@@ -30,7 +30,7 @@ public class AmassAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            return Iterables.any(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
+            return aiArmies.anyMatch(CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         }
         final String type = sa.getParam("Type");
         StringBuilder sb = new StringBuilder("b_0_0_");

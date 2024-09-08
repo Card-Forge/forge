@@ -22,7 +22,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 
 public class PumpAllAi extends PumpAiBase {
 
@@ -134,7 +133,7 @@ public class PumpAllAi extends PumpAiBase {
             return pumpAgainstRemoval(ai, sa, comp);
         }
 
-        return Iterables.any(ai.getCreaturesInPlay(), c -> c.isValid(valid, source.getController(), source, sa)
+        return ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
                 && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
     } // pumpAllCanPlayAI()
 

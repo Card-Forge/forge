@@ -33,7 +33,6 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.Lang;
 
 /**
@@ -150,7 +149,7 @@ public class CostSacrifice extends CostPartWithList {
             CardCollectionView typeList = activator.getCardsIn(ZoneType.Battlefield);
             typeList = CardLists.getValidCards(typeList, getType().split(";"), activator, source, ability);
             // it needs to check if everything can be sacrificed
-            return Iterables.all(typeList, CardPredicates.canBeSacrificedBy(ability, effect));
+            return typeList.allMatch(CardPredicates.canBeSacrificedBy(ability, effect));
         }
 
         int amount = getAbilityAmount(ability);

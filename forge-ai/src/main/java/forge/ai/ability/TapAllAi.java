@@ -17,7 +17,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class TapAllAi extends SpellAbilityAi {
@@ -73,7 +72,7 @@ public class TapAllAi extends SpellAbilityAi {
         // in AI's turn, check if there are possible attackers, before tapping blockers
         if (game.getPhaseHandler().isPlayerTurn(ai)) {
             validTappables = ai.getCardsIn(ZoneType.Battlefield);
-            final boolean any = Iterables.any(validTappables, c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
+            final boolean any = validTappables.anyMatch(c -> CombatUtil.canAttack(c) && ComputerUtilCombat.canAttackNextTurn(c));
             return any;
         }
         return true;

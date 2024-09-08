@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import forge.ai.AiController;
 import forge.ai.AiProps;
@@ -380,7 +381,8 @@ public class TokenAi extends SpellAbilityAi {
 
         // look for card without role from ai
         List<Card> prefListSBA = CardLists.filter(tgts, c ->
-        !Iterables.any(c.getAttachedCards(), att -> att.getController() == ai && att.getType().hasSubtype("Role")));
+                !c.getAttachedCards().anyMatch(att ->
+                        att.getController() == ai && att.getType().hasSubtype("Role")));
 
         List<Card> prefList;
         if (isCurse) {

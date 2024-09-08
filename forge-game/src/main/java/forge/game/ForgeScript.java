@@ -21,7 +21,6 @@ import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -158,7 +157,7 @@ public class ForgeScript {
             }
             return false;
         } else if (property.equals("hasManaAbility")) {
-            if (Iterables.any(cardState.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
+            if (cardState.getSpellAbilities().anyMatch(SpellAbilityPredicates.isManaAbility())) {
                 return true;
             }
             for (final Trigger trig : cardState.getTriggers()) {
