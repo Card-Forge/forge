@@ -549,6 +549,17 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         }
         return obj;
     }
+
+    @Override
+    public boolean anyMatch(Predicate<? super T> test) {
+        return set.stream().anyMatch(test);
+    }
+
+    @Override
+    public boolean allMatch(Predicate<? super T> test) {
+        return set.stream().allMatch(test);
+    }
+
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve
@@ -654,6 +665,10 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             }
             return a;
         }
+
+        @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
+        @Override public boolean allMatch(Predicate<? super T> test) {return true;}
+
         @Override public final String toString() {
             return "[]";
         }
