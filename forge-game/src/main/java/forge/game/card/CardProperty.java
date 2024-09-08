@@ -1501,6 +1501,14 @@ public class CardProperty {
             if (card.getCMC() % 2 != 1) {
                 return false;
             }
+        } else if (property.equals("powerEven")) {
+            if (card.getNetPower() % 2 != 0) {
+                return false;
+            }
+        } else if (property.equals("powerOdd")) {
+            if (card.getNetPower() % 2 != 1) {
+                return false;
+            }
         } else if (property.equals("cmcChosenEvenOdd")) {
             if (!source.hasChosenEvenOdd()) {
                 return false;
