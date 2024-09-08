@@ -215,6 +215,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     private boolean plotted;
 
+    private Set<CardStateName> unlockedRooms = EnumSet.noneOf(CardStateName.class);
+    private Map<CardStateName, SpellAbility> unlockAbilities = Maps.newEnumMap(CardStateName.class);
+
     private boolean specialized;
 
     private int timesCrewedThisTurn = 0;
@@ -444,6 +447,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (state == CardStateName.FaceDown) {
             return getFaceDownState();
         }
+        if (state == CardStateName.EmptyRoom) {
+            return getEmptyRoomState();
+        }
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return getOriginalState(state);
@@ -452,7 +458,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasState(final CardStateName state) {
-        if (state == CardStateName.FaceDown) {
+        if (state == CardStateName.FaceDown || state == CardStateName.EmptyRoom) {
             return true;
         }
         CardCloneStates clStates = getLastClonedState();
@@ -465,6 +471,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public CardState getOriginalState(final CardStateName state) {
         if (state == CardStateName.FaceDown) {
             return getFaceDownState();
+        }
+        if (state == CardStateName.EmptyRoom) {
+            return getEmptyRoomState();
         }
         return states.get(state);
     }
@@ -492,7 +501,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
-        if (state != CardStateName.FaceDown) {
+        if (state != CardStateName.FaceDown && state != CardStateName.EmptyRoom) {
             CardCloneStates cloneStates = getLastClonedState();
             if (cloneStates != null) {
                 if (!cloneStates.containsKey(state)) {
@@ -1966,7 +1975,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Integer getChosenNumber() {
         return chosenNumber;
     }
-    
+
     public final void setChosenNumber(final int i) { setChosenNumber(i, false); }
     public final void setChosenNumber(final int i, final boolean secret) {
         chosenNumber = i;
@@ -3122,7 +3131,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb") || keyword.startsWith("Overload") 
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
                         || keyword.startsWith("Plot")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
@@ -5577,6 +5586,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final boolean isOutlaw()     { return getType().isOutlaw(); }
 
+    public final boolean isRoom()       { return getType().hasSubtype("Room"); }
+
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Card that) {
@@ -6637,7 +6648,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (plotted == true && !isLKI()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             game.getTriggerHandler().runTrigger(TriggerType.BecomesPlotted, runParams, false);
-        }    
+        }
         return true;
     }
 
@@ -7476,6 +7487,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
+        if (isInPlay() && isRoom()) {
+            if (getCurrentStateName() == CardStateName.RightSplit || getCurrentStateName() == CardStateName.EmptyRoom) {
+                abilities.add(getUnlockAbility(CardStateName.LeftSplit));
+            }
+            if (getCurrentStateName() == CardStateName.LeftSplit || getCurrentStateName() == CardStateName.EmptyRoom) {
+                abilities.add(getUnlockAbility(CardStateName.RightSplit));
+            }
+        }
+
         if (isInPlay() && isFaceDown() && oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
         {
             if (isManifested()) {
@@ -8082,5 +8102,81 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
+    }
+
+    public Set<CardStateName> getUnlockedRooms() {
+        return this.unlockedRooms;
+    }
+    public void setUnlockedRooms(Set<CardStateName> set) {
+        this.unlockedRooms = set;
+    }
+
+    public List<String> getUnlockedRoomNames() {
+        List<String> result = Lists.newArrayList();
+        for (CardStateName stateName : unlockedRooms) {
+            if (this.hasState(stateName)) {
+                result.add(this.getState(stateName).getName());
+            }
+        }
+        return result;
+    }
+
+    public boolean unlockRoom(Player p, CardStateName stateName) {
+        if (unlockedRooms.contains(stateName)) {
+            return false;
+        }
+        unlockedRooms.add(stateName);
+
+        updateRooms();
+
+        Map<AbilityKey, Object> unlockParams =  AbilityKey.mapFromPlayer(p);
+        unlockParams.put(AbilityKey.Card, this);
+        unlockParams.put(AbilityKey.CardState, getState(stateName));
+        getGame().getTriggerHandler().runTrigger(TriggerType.UnlockDoor, unlockParams, true);
+
+        // fully unlock
+        if (unlockedRooms.size() > 1) {
+            Map<AbilityKey, Object> fullyUnlockParams = AbilityKey.mapFromPlayer(p);
+            fullyUnlockParams.put(AbilityKey.Card, this);
+
+            getGame().getTriggerHandler().runTrigger(TriggerType.FullyUnlock, fullyUnlockParams, true);
+        }
+
+        return true;
+    }
+
+    public void updateRooms() {
+        if (!this.isRoom()) {
+            return;
+        }
+        if (this.isFaceDown()) {
+            return;
+        }
+        if (unlockedRooms.isEmpty()) {
+            this.setState(CardStateName.EmptyRoom, true);
+        } else if (unlockedRooms.size() > 1) {
+            this.setState(CardStateName.Original, true);
+        } else { // we already know the set is only one
+            for (CardStateName name : unlockedRooms) {
+                this.setState(name, true);
+            }
+        }
+        // update trigger after state change
+        getGame().getTriggerHandler().clearActiveTriggers(this, null);
+        getGame().getTriggerHandler().registerActiveTrigger(this, false);
+    }
+
+    public CardState getEmptyRoomState() {
+        if (!states.containsKey(CardStateName.EmptyRoom)) {
+            states.put(CardStateName.EmptyRoom, CardUtil.getEmptyRoomCharacteristic(this));
+        }
+        return states.get(CardStateName.EmptyRoom);
+    }
+
+    public SpellAbility getUnlockAbility(CardStateName state) {
+        if (!unlockAbilities.containsKey(state)) {
+            unlockAbilities.put(state, CardFactoryUtil.abilityUnlockRoom(getState(state)));
+        }
+        return unlockAbilities.get(state);
     }
 }

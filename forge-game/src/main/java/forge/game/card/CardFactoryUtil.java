@@ -119,6 +119,30 @@ public class CardFactoryUtil {
         return morphDown;
     }
 
+    public static SpellAbility abilityUnlockRoom(CardState cardState) {
+        final AbilityStatic unlock = new AbilityStatic(cardState.getCard(), cardState.getManaCost()) {
+
+            @Override
+            public void resolve() {
+                // TODO Auto-generated method stub
+                hostCard.unlockRoom(getActivatingPlayer(), getCardStateName());
+            }
+
+            @Override
+            public boolean canPlay() {
+                if (!hostCard.isInPlay()) {
+                    return false; // cut short if already on the battlefield, avoids side effects when checking statics
+                }
+                return true;
+            }
+        };
+
+        unlock.setDescription("Unlock " + cardState.getName());
+        unlock.setCardState(cardState);
+
+        return unlock;
+    }
+
     /**
      * <p>
      * abilityMorphUp.

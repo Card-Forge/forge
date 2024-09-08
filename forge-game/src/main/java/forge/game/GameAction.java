@@ -190,6 +190,11 @@ public class GameAction {
                     // Make sure the card returns from the battlefield as the original card with two halves
                     resetToOriginal = true;
                 }
+            } else if (zoneTo.is(ZoneType.Battlefield) && c.isRoom()) {
+                if (c.getCastSA() == null) {
+                    // need to set as empty room
+                    c.updateRooms();
+                }
             } else if (!zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield)) {
                 // For regular splits, recreate the original state unless the card is going to stack as one half
                 resetToOriginal = true;
@@ -604,6 +609,9 @@ public class GameAction {
         // CR 603.6b
         if (toBattlefield) {
             zoneTo.saveLKI(copied, lastKnownInfo);
+            if (copied.isRoom() && copied.getCastSA() != null) {
+                copied.unlockRoom(copied.getCastSA().getActivatingPlayer(), copied.getCastSA().getCardStateName());
+            }
         }
 
         // only now that the LKI preserved it
