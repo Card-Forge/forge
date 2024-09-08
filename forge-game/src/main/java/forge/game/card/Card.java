@@ -7487,7 +7487,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
-        if (isInPlay() && isRoom()) {
+        if (isInPlay() && isRoom() && !isPhasedOut() && player.canCastSorcery()) {
             if (getCurrentStateName() == CardStateName.RightSplit || getCurrentStateName() == CardStateName.EmptyRoom) {
                 abilities.add(getUnlockAbility(CardStateName.LeftSplit));
             }
