@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 8
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
-          java-version: '8'
+          java-version: '11'
           distribution: 'temurin'
           cache: 'maven'
           server-id: cardforge-repo
@@ -46,7 +46,7 @@ jobs:
       - name: Set Up Android tools
         run: |
           JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-26"
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-29"
           JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;30.0.3"
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
