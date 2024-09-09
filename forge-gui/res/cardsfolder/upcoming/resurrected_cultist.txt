@@ -1,0 +1,8 @@
+Name:Resurrected Cultist
+ManaCost:2 B
+Types:Creature Human Cleric
+PT:4/1
+A:AB$ ChangeZone | Cost$ 2 B B | PrecostDesc$ Delirium — | Activation$ Delirium | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ FINALITY | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return CARDNAME from your graveyard to the battlefield with a finality counter on it. Activate only if there are four or more card types among cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — {2}{B}{B}: Return Resurrected Cultist from your graveyard to the battlefield with a finality counter on it. Activate only if there are four or more card types among cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)
