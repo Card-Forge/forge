@@ -24,7 +24,7 @@ ScryfallCode=DSC
 81 R Citanul Hierophants @Zezhou Chen
 88 C Growth Spiral @Nicholas Gregory
 92 C Arcane Signet @David Astruga
-94 C Sol Ring @John Stanko
+94 U Sol Ring @John Stanko
 96 C Command Tower @Eddie Schillo
 260 C Ash Barrens @Rockey Chen
 334 C I Am Duskmourn @Liiga Smilshkalne
