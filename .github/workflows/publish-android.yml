@@ -43,8 +43,8 @@ jobs:
         uses: maxim-lobanov/setup-android-tools@v1
         with:
           packages: |
-            platforms;android-33
-            build-tools;33.0.3
+            platforms;android-29
+            build-tools;30.0.3
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |

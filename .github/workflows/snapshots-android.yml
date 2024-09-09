@@ -46,8 +46,8 @@ jobs:
       - name: Set Up Android tools
         run: |
           JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-33"
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;33.0.3"
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-29"
+          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;30.0.3"
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |
