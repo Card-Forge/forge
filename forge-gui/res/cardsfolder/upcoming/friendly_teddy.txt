@@ -1,0 +1,7 @@
+Name:Friendly Teddy
+ManaCost:2
+Types:Artifact Creature Bear Toy
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, each player draws a card.
+SVar:TrigDraw:DB$ Draw | Defined$ Player
+Oracle:When Friendly Teddy enters, each player draws a card.
