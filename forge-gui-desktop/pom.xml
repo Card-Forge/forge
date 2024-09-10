@@ -279,7 +279,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-jpeg</artifactId>
-            <version>3.7.0</version>
+            <version>3.11.0</version>
         </dependency>
     </dependencies>
 
