@@ -33,6 +33,9 @@ public class SurveilEffect extends SpellAbilityEffect {
         if (sa.hasParam("Amount")) {
             num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
+        if (num == 0) {
+            return;
+        }
 
         boolean isOptional = sa.hasParam("Optional");
 

@@ -7,13 +7,38 @@ ScryfallCode=DSC
 
 [cards]
 1 M Aminatou, Veil Piercer @David Palumbo
+2 M Kianne, Corrupted Memory @Mila Pesic
 6 M Valgavoth, Harrower of Souls @Chris Cold
 7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
 8 M Zimone, Mystery Unraveler @Mila Pesic
+13 R Glitch Interpreter @Miguel Mercado
+14 R They Came from the Pipes @Andreas Zafiratos
+15 R Zimone's Hypothesis @Crystal Fae
+30 R Curator Beastie @Nils Hamm
+32 R Disorienting Choice @Mirko Failoni
+33 R Experimental Lab @Arthur Yuan
+35 R Shriekwood Devourer @David Astruga
+39 R Giggling Skitterspike @Nino Is
+72 R Cackling Counterpart @Zezhou Chen
+80 U Beast Within @David Astruga
+81 R Citanul Hierophants @Zezhou Chen
+88 C Growth Spiral @Nicholas Gregory
+92 C Arcane Signet @David Astruga
+94 U Sol Ring @John Stanko
+96 C Command Tower @Eddie Schillo
+260 C Ash Barrens @Rockey Chen
 334 C I Am Duskmourn @Liiga Smilshkalne
+336 C I Am Untouchable @Bartek Fedyczak
 338 C I Will Savor Your Agony @Michael Walsh
+339 C Kneel Before My Legions @Dave Kendall
+340 C Mine Is the Only Truth @Eli Minaya
 341 C My Champion Stands Supreme @Justyna Dura
+344 C My Laughter Echoes @Richard Kane Ferguson
+352 C Power Without Equal @Eli Minaya
 357 C Time Bends to My Will @Eli Minaya
+363 C You Will Know True Suffering @Pavel Kolomeyets
+366 C Your Own Face Mocks You @Dominik Mayer
+367 C Your Plans Mean Nothing @Fernando Falcone
 368 M Crypt Ghast @Tim Jacobus
 369 M Damn @Tim Jacobus
 370 M Exhume @Tim Jacobus
