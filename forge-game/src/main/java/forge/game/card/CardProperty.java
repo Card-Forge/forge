@@ -836,8 +836,8 @@ public class CardProperty {
                 }
             } else {
                 // Special case to prevent list from comparing with itself
-                if (property.startsWith("SharesCardTypeWithOther")) {
-                    final String restriction = property.split("SharesCardTypeWithOther ")[1];
+                if (property.startsWith("sharesCardTypeWithOther")) {
+                    final String restriction = property.split("sharesCardTypeWithOther ")[1];
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     list.remove(card);
                     return Iterables.any(list, CardPredicates.sharesCardTypeWith(card));
