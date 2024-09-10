@@ -503,52 +503,43 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int loseLife(int toLose, final boolean damage, final boolean manaBurn) {
-        int lifeLost = 0;
-        if (!canLoseLife()) {
+        // Rule 118.4
+        // this is for players being able to pay 0 life nothing to do
+        // no trigger for lost no life
+        if (toLose <= 0 || !canLoseLife()) {
             return 0;
         }
-        if (toLose > 0) {
-            int oldLife = life;
-            // Run applicable replacement effects
-            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-            repParams.put(AbilityKey.Amount, toLose);
-            repParams.put(AbilityKey.IsDamage, damage);
+        int oldLife = life;
+        // Run applicable replacement effects
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.Amount, toLose);
+        repParams.put(AbilityKey.IsDamage, damage);
 
-            switch (getGame().getReplacementHandler().run(ReplacementType.LifeReduced, repParams)) {
-            case NotReplaced:
-                break;
-            case Updated:
-                // check if this is still the affected player
-                if (this.equals(repParams.get(AbilityKey.Affected))) {
-                    toLose = (int) repParams.get(AbilityKey.Amount);
-                    // there is nothing that changes lifegain into lifeloss this way
-                    if (toLose <= 0) {
-                        return 0;
-                    }
-                } else {
+        switch (getGame().getReplacementHandler().run(ReplacementType.LifeReduced, repParams)) {
+        case NotReplaced:
+            break;
+        case Updated:
+            // check if this is still the affected player
+            if (this.equals(repParams.get(AbilityKey.Affected))) {
+                toLose = (int) repParams.get(AbilityKey.Amount);
+                // there is nothing that changes lifegain into lifeloss this way
+                if (toLose <= 0) {
                     return 0;
                 }
-                break;
-            default:
+            } else {
                 return 0;
             }
+            break;
+        default:
+            return 0;
+        }
 
-            life -= toLose;
-            view.updateLife(this);
-            lifeLost = toLose;
-            if (manaBurn) {
-                game.fireEvent(new GameEventManaBurn(this, lifeLost, true));
-            } else {
-                game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-            }
-        } else if (toLose == 0) {
-            // Rule 118.4
-            // this is for players being able to pay 0 life nothing to do
-            // no trigger for lost no life
-            return 0;
+        life -= toLose;
+        view.updateLife(this);
+        if (manaBurn) {
+            game.fireEvent(new GameEventManaBurn(this, toLose, true));
         } else {
-            System.out.println("Player - trying to lose negative life");
-            return 0;
+            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
         }
 
         boolean firstLost = lifeLostThisTurn == 0;
@@ -563,7 +554,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         game.getTriggerHandler().runTrigger(TriggerType.LifeChanged, runParams, false);
 
-        return lifeLost;
+        return toLose;
     }
 
     public final boolean canLoseLife() {
@@ -695,7 +686,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (infect) {
             poisonCounters += amount;
         }
-        else if (!hasKeyword("Damage doesn't cause you to lose life.")) {
+        else {
             // rule 118.2. Damage dealt to a player normally causes that player to lose that much life.
             simultaneousDamage += amount;
         }
