@@ -23,6 +23,8 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
@@ -205,7 +207,7 @@ public class Main extends AndroidApplication {
         TextView text = new TextView(this);
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
-        String SP = Build.VERSION.SDK_INT > 29 ? "Files & Media" : "Storage Permission";
+        String SP = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? "Files & Media" : "Storage Permission";
 
         String title = "Forge needs " + SP + " to run properly...\n" +
                 "Follow these simple steps:\n\n";
@@ -287,7 +289,7 @@ public class Main extends AndroidApplication {
                         displayMessage(forgeLogo, adapter, exception, msg, false);
                     } else if (title.isEmpty() && steps.isEmpty()) {
                         if (isLandscape) {
-                            Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= 26 ?
+                            Main.this.setRequestedOrientation(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
                                     ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE : //Oreo and above has virtual back/menu buttons
                                     ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                         } else {
@@ -418,7 +420,7 @@ public class Main extends AndroidApplication {
             loadGame("", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
             return;
         }
-        ASSETS_DIR = Build.VERSION.SDK_INT > 29 ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
+        ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
@@ -442,11 +444,11 @@ public class Main extends AndroidApplication {
         adapter.switchOrientationFile = ASSETS_DIR + "switch_orientation.ini";
         boolean landscapeMode = adapter.isTablet == !FileUtil.doesFileExist(adapter.switchOrientationFile);
 
-        String info = totalRAM < 3500 || Build.VERSION.SDK_INT < 29 ? "Device Specification Check\n" + getDeviceName()
+        String info = totalRAM < 3500 || Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ? "Device Specification Check\n" + getDeviceName()
                 + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB\n\nMinimum Requirements:" : "";
-        String lowV = Build.VERSION.SDK_INT < 29 ? "\nAPI: Android 10 or higher" : "";
+        String lowV = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ? "\nAPI: Android 10 or higher" : "";
         String lowM = totalRAM < 3500 ? "\nRAM: 4GB RAM or higher" : "";
-        if (landscapeMode && Build.VERSION.SDK_INT > 32) {
+        if (landscapeMode && Build.VERSION.SDK_INT > 32) { //Android 13 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
         loadGame(info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
@@ -521,27 +523,78 @@ public class Main extends AndroidApplication {
         private final boolean isTablet;
         private final ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         private String switchOrientationFile;
+        private final Context context;
+        private boolean connected;
 
         private AndroidAdapter(Context context) {
+            this.context = context;
             isTablet = (context.getResources().getConfiguration().screenLayout
                     & Configuration.SCREENLAYOUT_SIZE_MASK)
                     >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-        }
+            try {
+                if (connManager != null) {
+                    connManager.registerDefaultNetworkCallback(
+                        new ConnectivityManager.NetworkCallback() {
+                            @Override
+                            public void onAvailable(Network network) {
+                                connected = true;
+                            }
 
+                            @Override
+                            public void onLost(Network network) {
+                                connected = false;
+                            }
+                        }
+                    );
+                }
+            } catch (Exception e) {
+                connected = false;
+            }
+        }
+        private boolean hasInternet() {
+            return isNetworkConnected(false);
+        }
+        private boolean hasWiFiInternet() {
+            return isNetworkConnected(true);
+        }
+        private boolean isNetworkConnected(boolean wifiOnly) {
+            boolean result = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (connManager != null) {
+                    NetworkCapabilities capabilities = connManager.getNetworkCapabilities(connManager.getActiveNetwork());
+                    if (capabilities != null) {
+                        if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                            result = connected;
+                        } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                            result = connected && !wifiOnly;
+                        }
+                    }
+                }
+            } else {
+                if (connManager != null) {
+                    NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
+                    if (activeNetwork != null) {
+                        // connected to the internet
+                        if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {
+                            result = true;
+                        } else if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
+                            result = !wifiOnly;
+                        }
+                    }
+                }
+            }
+            return result;
+        }
         @Override
         public boolean isConnectedToInternet() {
-            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(() -> {
-                NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
-                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-            }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
+            //if it can't determine Internet connection within two seconds, assume not connected
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(this::hasInternet, 2000));
         }
 
         @Override
         public boolean isConnectedToWifi() {
-            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(() -> {
-                NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                return wifi.isConnected();
-            }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
+            //if it can't determine Internet connection within two seconds, assume not connected
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(this::hasWiFiInternet, 2000));
         }
 
         @Override
@@ -622,7 +675,7 @@ public class Main extends AndroidApplication {
             WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();
             Point size = new Point();
-            if (Build.VERSION.SDK_INT >= 17) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 // Seems it doesn't compile if using 4.1.1.4 since it's missing this method
                 if (real)
                     display.getRealSize(size);
@@ -630,7 +683,7 @@ public class Main extends AndroidApplication {
                     display.getSize(size);
                 //remove this line below and use the method above if using Android libs higher than 4.1.1.4
                 //return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // this method don't take account the soft navigation bars taken in rendered screen
-            } else if (Build.VERSION.SDK_INT >= 14) {
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 try {
                     size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
                     size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
