@@ -8,34 +8,65 @@ ScryfallCode=DSC
 [cards]
 1 M Aminatou, Veil Piercer @David Palumbo
 2 M Kianne, Corrupted Memory @Mila Pesic
+4 M The Master of Keys @Wisnu Tan
 6 M Valgavoth, Harrower of Souls @Chris Cold
 7 M Winter, Cynical Opportunist @Andrey Kuzinskiy
 8 M Zimone, Mystery Unraveler @Mila Pesic
+9 R Redress Fate @Julie Dillon
+10 R Secret Arcade @Arthur Yuan
+11 R Soaring Lightbringer @Michele Giorgi
+12 R Fear of Sleep Paralysis @Joshua Raphael
 13 R Glitch Interpreter @Miguel Mercado
 14 R They Came from the Pipes @Andreas Zafiratos
 15 R Zimone's Hypothesis @Crystal Fae
+16 R Ancient Cellarspawn @Alexandre Honoré
+17 R Cramped Vents @Arthur Yuan
+21 R Metamorphosis Fanatic @Andreas Zafiratos
 30 R Curator Beastie @Nils Hamm
 32 R Disorienting Choice @Mirko Failoni
 33 R Experimental Lab @Arthur Yuan
 35 R Shriekwood Devourer @David Astruga
+38 R Phenomenon Investigators @Viko Menezes
 39 R Giggling Skitterspike @Nino Is
+41 R Redress Fate @Julie Dillon
+42 R Soaring Lightbringer @Michele Giorgi
+43 R Fear of Sleep Paralysis @Joshua Raphael
+47 R Ancient Cellarspawn @Alexandre Honoré
+51 R Metamorphosis Fanatic @Andreas Zafiratos
+65 R Phenomenon Investigators @Viko Menezes
+68 R Mesa Enchantress @Eelis Kyttanen
+69 U Moon-Blessed Cleric @Mark Poole
+70 R Terminus @Jarel Threat
+71 R Aminatou's Augury @Loïc Canavaggia
 72 R Cackling Counterpart @Zezhou Chen
+73 C Ponder @Ernanda Souza
+74 C Portent @Bartek Fedyczak
+75 U Telling Time @LA Draws
 80 U Beast Within @David Astruga
 81 R Citanul Hierophants @Zezhou Chen
+87 U Diabolic Vision @Mirko Failoni
 88 C Growth Spiral @Nicholas Gregory
+91 R Utter End @Nicholas Gregory
 92 C Arcane Signet @David Astruga
 94 U Sol Ring @John Stanko
 96 C Command Tower @Eddie Schillo
 260 C Ash Barrens @Rockey Chen
+328 C Behold the Power of Destruction @Alex Branwyn
+331 C Choose Your Demise @Volkan Baǵa
 334 C I Am Duskmourn @Liiga Smilshkalne
 336 C I Am Untouchable @Bartek Fedyczak
 338 C I Will Savor Your Agony @Michael Walsh
 339 C Kneel Before My Legions @Dave Kendall
 340 C Mine Is the Only Truth @Eli Minaya
 341 C My Champion Stands Supreme @Justyna Dura
+343 C My Followers Ascend @Steven Russell Black
 344 C My Laughter Echoes @Richard Kane Ferguson
+350 C Only I Know What Awaits @Samuel Araya
 352 C Power Without Equal @Eli Minaya
+353 C A Premonition of Your Demise @Jessica Fong
+356 C My Wealth Will Bury You @Valera Lutfullina
 357 C Time Bends to My Will @Eli Minaya
+360 C You Cannot Hide from Me @Allen Williams
 363 C You Will Know True Suffering @Pavel Kolomeyets
 366 C Your Own Face Mocks You @Dominik Mayer
 367 C Your Plans Mean Nothing @Fernando Falcone
