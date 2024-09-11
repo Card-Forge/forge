@@ -262,12 +262,6 @@ public class PhaseHandler implements java.io.Serializable {
                         p.resetNumDrawnThisDrawStep();
                     }
                     playerTurn.drawCard();
-                    for (Player p : game.getPlayers()) {
-                        if (p.isOpponentOf(playerTurn) &&
-                                p.hasKeyword("You draw a card during each opponent's draw step.")) {
-                            p.drawCard();
-                        }
-                    }
                     break;
 
                 case MAIN1:
