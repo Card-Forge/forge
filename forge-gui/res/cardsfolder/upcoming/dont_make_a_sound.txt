@@ -1,6 +1,6 @@
 Name:Don't Make a Sound
 ManaCost:1 U
 Types:Instant
-A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or battle spell | ValidTgts$ Creature,Battle | UnlessCost$ 4 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBSurveil | SpellDescription$ Counter target spell unless its controller pays {2}. If they do, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target pell | ValidTgts$ Creature,Battle | UnlessCost$ 4 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBSurveil | SpellDescription$ Counter target spell unless its controller pays {2}. If they do, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:TrigSurveil:DB$ Surveil | Amount$ 2
 Oracle:Counter target spell unless its controller pays {2}. If they do, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
