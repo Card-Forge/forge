@@ -1,6 +1,6 @@
 Name:Barbflare Gremlin
 ManaCost:3 R
-Types:Creature - Gremlin
+Types:Creature Gremlin
 PT:3/2
 K:First Strike
 K:Haste
