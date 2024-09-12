@@ -1,0 +1,9 @@
+Name:Rot Like the Scum You Are
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a 2/2 green Ooze creature token, then put a number of +1/+1 counters on it equal to the number of lands your opponents control.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_ooze | RememberTokens$ True | TokenOwner$ You | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Land.OppCtrl
+Oracle:When you set this scheme in motion, create a 2/2 green Ooze creature token, then put a number of +1/+1 counters on it equal to the number of lands your opponents control.
