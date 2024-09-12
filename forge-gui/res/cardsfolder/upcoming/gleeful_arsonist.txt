@@ -1,6 +1,6 @@
 Name:Gleeful Arsonist
 ManaCost:2 R
-Types:Creature - Human Wizard
+Types:Creature Human Wizard
 PT:1/2
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever an opponent casts a noncreature spell, CARDNAME deals damage equal to its power to that player.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ TriggeredActivator | NumDmg$ X
