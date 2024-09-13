@@ -1,0 +1,8 @@
+Name:Flesh Burrower
+ManaCost:1 G
+Types:Creature Insect
+PT:2/2
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Deathtouch
+Oracle:Deathtouch\nWhenever Flesh Burrower attacks, another target creature you control gains deathtouch until end of turn.
