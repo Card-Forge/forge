@@ -87,8 +87,10 @@ ScryfallCode=DSK
 85 C Cackling Slasher @Johann Bodin
 86 R Come Back Wrong @David Auden Nash
 87 U Commune with Evil @Ovidio Cartagena
+88 C Cracked Skull @Mirko Failoni
 89 U Cynical Loner @Miranda Meeks
 90 U Dashing Bloodsucker @Randy Gallegos
+91 U Defiled Crypt @Martin de Diego Sádaba
 92 R Demonic Counsel @Babs Webb
 94 R Doomsday Excruciator @Denys Tsiperko
 95 R Enduring Tenacity @Isis
@@ -121,6 +123,7 @@ ScryfallCode=DSK
 122 U Vile Mutilator @Néstor Ossandón Leal
 123 C Winter's Intervention @Cristi Balanescu
 124 U Withering Torment @Inkognit
+125 C Bedhead Beastie @David Auden Nash
 126 U Betrayer's Bargain @Billy Christian
 127 C Boilerbilges Ripper @Kai Carpenter
 128 R Chainsaw @J.P. Targete
@@ -151,12 +154,14 @@ ScryfallCode=DSK
 153 R Razorkin Needlehead @Riccardo Federici
 154 C Ripchain Razorkin @David Szabo
 155 M The Rollercrusher Ride @Deruchenko Alexander
+156 C Scorching Dragonfire @Marta Nael
 157 M Screaming Nemesis @Liiga Smilshkalne
 159 U Trial of Agony @Mike Sass
 160 C Turn Inside Out @Loïc Canavaggia
 161 U Untimely Malfunction @Jarel Threat
 162 U Vengeful Possession @Dominik Mayer
 163 C Vicious Clown @Johann Bodin
+164 U Violent Urge @Mirko Failoni
 165 R Waltz of Rage @Mathias Kollros
 166 U Altanak, the Thrice-Called @Sam Wolfe Connelly
 167 C Anthropede @Loïc Canavaggia
@@ -182,6 +187,7 @@ ScryfallCode=DSK
 187 R Kona, Rescue Beastie @Brian Valeza
 188 R Leyline of Mutation @Sergey Glushakov
 189 C Manifest Dread @Andrey Kuzinskiy
+190 C Moldering Gym @Helge C. Balzer
 192 R Omnivorous Flytrap @Antonio José Manzanedo
 193 U Overgrown Zealot @Tyler Walpole
 194 M Overlord of the Hauntwoods @Tiffany Turrill
@@ -195,6 +201,7 @@ ScryfallCode=DSK
 202 M Tyvar, the Pummeler @Olivier Bernard
 203 U Under the Skin @Fernando Falcone
 204 R Valgavoth's Onslaught @Lie Setiawan
+205 M Walk-in Closet @Miklós Ligeti
 206 C Wary Watchdog @Olivier Bernard
 207 U Wickerfolk Thresher @WolfSkullJack
 208 U Arabella, Abandoned Doll @J.P. Targete
@@ -326,7 +333,9 @@ ScryfallCode=DSK
 338 M Funeral Room @Alexandre Chaudret
 339 R Unholy Annex @Alexis Ziritt
 340 M Charred Foyer @Oliver Barrett
+341 M Walk-in Closet @Bastien Grivet
 342 R Restricted Office @Scott Buoncristiano
+343 R Roaring Furnace @Toni Infante
 344 M Abhorrent Oculus @Igor Krstic
 345 R Silent Hallcreeper @Inkognit
 346 R Doomsday Excruciator @Jarel Threat
@@ -359,6 +368,7 @@ ScryfallCode=DSK
 374 R Enduring Tenacity @Isis
 375 R Grievous Wound @Martina Fačková
 376 R Leyline of the Void @Sergey Glushakov
+377 M Overlord of the Balemurk @Babs Webb
 378 R Enduring Courage @Yigit Koroglu
 379 R Leyline of Resonance @Sergey Glushakov
 380 M Overlord of the Boilerbilges @Helge C. Balzer
@@ -372,6 +382,7 @@ ScryfallCode=DSK
 388 R Enduring Curiosity @D-suzuki
 389 M Overlord of the Floodpits @Sansyu
 390 M Enduring Tenacity @TAPIOCA
+391 M Overlord of the Balemurk @Mikio Masuda
 392 M Enduring Courage @Nuisuke
 393 M Overlord of the Boilerbilges @akio
 394 M Enduring Vitality @Issei Murakami
@@ -381,6 +392,7 @@ ScryfallCode=DSK
 398 R Enduring Curiosity @D-suzuki
 399 M Overlord of the Floodpits @Sansyu
 400 M Enduring Tenacity @TAPIOCA
+401 M Overlord of the Balemurk @Mikio Masuda
 402 M Enduring Courage @Nuisuke
 403 M Overlord of the Boilerbilges @akio
 404 M Enduring Vitality @Issei Murakami
