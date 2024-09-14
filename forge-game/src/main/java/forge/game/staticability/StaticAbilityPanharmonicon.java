@@ -62,6 +62,10 @@ public class StaticAbilityPanharmonicon {
                     continue;
                 }
                 // it can't trigger more times than the limit allows
+                if (t.hasParam("GameActivationLimit") &&
+                        t.getActivationsThisGame() + n + 1 >= Integer.parseInt(t.getParam("GameActivationLimit"))) {
+                    break;
+                }
                 if (t.hasParam("ActivationLimit") &&
                         t.getActivationsThisTurn() + n + 1 >= Integer.parseInt(t.getParam("ActivationLimit"))) {
                     break;
