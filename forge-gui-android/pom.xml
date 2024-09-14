@@ -317,9 +317,9 @@
                             <executable>java</executable>
                             <arguments>
                                 <argument>-jar</argument>
-                                <argument>${pom.basedir}/uber-apk-signer.jar</argument>
+                                <argument>${pom.basedir}/tools/uber-apk-signer.jar</argument>
                                 <argument>-a</argument>
-                                <argument>target/</argument>
+                                <argument>${pom.basedir}/target/</argument>
                                 <argument>--ks</argument>
                                 <argument>forge.keystore</argument>
                                 <argument>--ksAlias</argument>
