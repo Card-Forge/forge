@@ -1,0 +1,11 @@
+Name:Fear of Abduction
+ManaCost:4 W W
+Types:Enchantment Creature Nightmare
+PT:5/5
+A:SP$ PermanentCreature | Cost$ 4 W W Exile<1/Creature>
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, put each card exiled with it into its owner's hand.
+SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Hand
+Oracle:As an additional cost to cast this spell, exile a creature you control.\nFlying\nWhen Fear of Abduction enters, exile target creature an opponent controls.\nWhen Fear of Abduction leaves the battlefield, put each card exiled with it into its owner's hand.
