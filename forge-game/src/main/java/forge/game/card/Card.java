@@ -8122,7 +8122,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean unlockRoom(Player p, CardStateName stateName) {
-        if (unlockedRooms.contains(stateName)) {
+        if (unlockedRooms.contains(stateName) || (stateName != CardStateName.LeftSplit && stateName != CardStateName.RightSplit)) {
             return false;
         }
         unlockedRooms.add(stateName);

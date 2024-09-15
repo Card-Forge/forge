@@ -124,7 +124,6 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                // TODO Auto-generated method stub
                 hostCard.unlockRoom(getActivatingPlayer(), getCardStateName());
             }
 
