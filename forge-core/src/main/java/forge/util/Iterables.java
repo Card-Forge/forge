@@ -1,7 +1,6 @@
 package forge.util;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -59,31 +58,8 @@ public class Iterables {
     }
 
     public static <F, T> Iterable<T> transform(final Iterable<F> iterable, final Function<? super F, T> function) {
-        //TODO: Collection input variant. Some usages use Lists.newArrayList on output which could be made part of the stream.
         //Should probably also be ? extends T in the function type
         return () -> StreamSupport.stream(iterable.spliterator(), false).map(function).iterator();
-    }
-
-    //TODO: Inline everything below.
-
-
-    public static int size(Collection<?> collection) {
-        return collection.size();
-    }
-
-    public static boolean contains(Collection<?> collection, Object element) {
-        return collection.contains(element);
-    }
-
-    public static <T> T getFirst(List<? extends T> iterable, T defaultValue) {
-        return iterable.isEmpty() ? defaultValue : iterable.get(0);
-    }
-
-    public static <T> T getLast(List<T> iterable) {
-        return iterable.get(iterable.size() - 1);
-    }
-    public static <T> T getLast(List<? extends T> iterable, T defaultValue) {
-        return iterable.isEmpty() ? defaultValue : iterable.get(iterable.size() - 1);
     }
 
     //TODO: Restore everything below
