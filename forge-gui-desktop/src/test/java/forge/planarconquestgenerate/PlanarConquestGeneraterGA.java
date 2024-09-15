@@ -4,12 +4,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.collect.Lists;
 
 import forge.GuiDesktop;
 import forge.LobbyPlayer;
@@ -106,13 +105,12 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filtered= Iterables.filter(cards,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
-                                .and(CardRulesPredicates.IS_NON_LAND)
-                        ).and(gameFormat.getFilterPrinted())
-        );
+        List<PaperCard> filteredList = cards.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+                                .and(CardRulesPredicates.IS_NON_LAND)))
+                .filter(gameFormat.getFilterPrinted())
+                .collect(Collectors.toList());
 
-        List<PaperCard> filteredList = Lists.newArrayList(filtered);
         setRankedList(CardRanker.rankCardsInDeck(filteredList));
         List<Deck> decks = new ArrayList<>();
         for(PaperCard card: getRankedList().subList(0,cardsToUse)){

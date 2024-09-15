@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
+import forge.card.CardDb;
 import forge.item.PaperCardPredicates;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -356,15 +356,15 @@ public class ImportSourceAnalyzer {
     // set card pics
     //
 
-    private static void addSetCards(final Map<String, String> cardFileNames, final Iterable<PaperCard> library, final Predicate<PaperCard> filter) {
-        for (final PaperCard c : Iterables.filter(library, filter)) {
+    private static void addSetCards(final Map<String, String> cardFileNames, final CardDb library, final Predicate<PaperCard> filter) {
+        library.streamAllCards().filter(filter).forEach(c -> {
             String filename = c.getCardImageKey() + ".jpg";
             cardFileNames.put(filename, filename);
             if (c.hasBackFace()) {
                 filename = c.getCardAltImageKey() + ".jpg";
                 cardFileNames.put(filename, filename);
             }
-        }
+        });
     }
 
     Map<String, Map<String, String>> cardFileNamesBySet;
@@ -375,8 +375,8 @@ public class ImportSourceAnalyzer {
             for (final CardEdition ce : FModel.getMagicDb().getEditions()) {
                 final Map<String, String> cardFileNames = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
                 final Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(ce.getCode());
-                addSetCards(cardFileNames, FModel.getMagicDb().getCommonCards().getAllCards(), filter);
-                addSetCards(cardFileNames, FModel.getMagicDb().getVariantCards().getAllCards(), filter);
+                addSetCards(cardFileNames, FModel.getMagicDb().getCommonCards(), filter);
+                addSetCards(cardFileNames, FModel.getMagicDb().getVariantCards(), filter);
                 cardFileNamesBySet.put(ce.getCode2(), cardFileNames);
             }
 
@@ -384,14 +384,14 @@ public class ImportSourceAnalyzer {
             nameUpdates = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Predicate<PaperCard> predPlanes = arg0 -> arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
 
-            for (final PaperCard c : Iterables.filter(FModel.getMagicDb().getVariantCards().getAllCards(), predPlanes)) {
+            FModel.getMagicDb().getVariantCards().streamAllCards().filter(predPlanes).forEach(c -> {
                 String baseName = c.getCardImageKey();
                 nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 if (c.hasBackFace()) {
                     baseName = c.getCardAltImageKey();
                     nameUpdates.put(baseName + ".full.jpg", baseName + ".jpg");
                 }
-            }
+            });
         }
 
         final CardEdition.Collection editions = FModel.getMagicDb().getEditions();

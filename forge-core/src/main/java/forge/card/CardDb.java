@@ -38,6 +38,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static String foilSuffix = "+";
@@ -827,7 +828,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;  // nothing to do
 
         // Filter Cards Editions based on set preferences
-        List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(cardEditions, artPref::accept));
+        List<CardEdition> acceptedEditions = cardEditions.stream().filter(artPref::accept).collect(Collectors.toList());
 
         /* At this point, it may be possible that Art Preference is too-strict for the requested card!
             i.e. acceptedEditions.size() == 0!
@@ -899,6 +900,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }).values();
     }
 
+    public List<PaperCard> getUniqueCardsNoAlt(String cardName) {
+        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getName(cardName)));
+    }
+
     public PaperCard getUniqueByName(final String name) {
         return uniqueCardsByName.get(getName(name));
     }
@@ -940,8 +945,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).values();
     }
 
-    public Collection<PaperCard> getAllNonPromoCards() {
-        return Lists.newArrayList(Iterables.filter(getAllCards(), paperCard -> {
+    @Override
+    public Stream<PaperCard> streamAllCards() {
+        return allCardsByName.values().stream();
+    }
+    @Override
+    public Stream<PaperCard> streamUniqueCards() {
+        return uniqueCardsByName.values().stream();
+    }
+    public Stream<PaperCard> streamAllCardsNoAlt() {
+        return allCardsByName.entries().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
+    }
+    public Stream<PaperCard> streamUniqueCardsNoAlt() {
+        return uniqueCardsByName.entrySet().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
+    }
+    public Stream<PaperCard> streamAllNonPromoCards() {
+        //TODO: This should probably just be a filter to tack onto streamAllCards
+        return streamAllCards().filter(paperCard -> {
             CardEdition edition = null;
             try {
                 edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
@@ -949,11 +969,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return false;
             }
             return edition != null && edition.getType() != Type.PROMO;
-        }));
+        });
+    }
+
+    public Stream<ICardFace> streamAllFaces() {
+        return facesByName.values().stream();
+    }
+
+    public Collection<PaperCard> getAllNonPromoCards() {
+        return streamAllNonPromoCards().collect(Collectors.toList());
     }
 
     public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
-        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), paperCard -> {
+        return streamUniqueCardsNoAlt().filter(paperCard -> {
             CardEdition edition = null;
             try {
                 edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
@@ -963,11 +991,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return false;
             }
             return true;
-        }));
+        }).collect(Collectors.toList());
     }
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), paperCard -> {
+        //TODO: This should probably also be a stream filter.
+        return streamAllCardsNoAlt().filter(paperCard -> {
             CardEdition edition = null;
             try {
                 edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
@@ -977,7 +1006,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 return false;
             }
             return true;
-        }));
+        }).collect(Collectors.toList());
     }
 
     public String getName(final String cardName) {
@@ -1007,19 +1036,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      */
     @Override
     public List<PaperCard> getAllCards(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(getAllCards(), predicate));
+        return streamAllCards().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @Override
     public List<PaperCard> getAllCards(final String cardName, Predicate<PaperCard> predicate){
-        return Lists.newArrayList(Iterables.filter(getAllCards(cardName), predicate));
+        return getAllCards(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
      * Returns a modifiable list of cards matching the given predicate
      */
     public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
-        return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), predicate));
+        return streamAllCardsNoAlt().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     // Do I want a foiled version of these cards?

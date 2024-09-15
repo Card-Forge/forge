@@ -841,7 +841,7 @@ public class DeckgenUtil {
 
         // determine how many additional lands we need, but don't take lands already in deck into consideration,
         // or we risk incorrectly determining the target deck size
-        int numLands = Iterables.size(Iterables.filter(cards, PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
+        int numLands = (int) cards.stream().filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)).count();
         int sizeNoLands = cards.size() - numLands;
 
         // attempt to determine if building for sealed, constructed or EDH

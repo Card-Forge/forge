@@ -156,7 +156,7 @@ public class ConquestUtil {
         if (colorIdentity != MagicColor.ALL_COLORS) {
             Predicate<PaperCard> pred = DeckFormat.Commander.isLegalCardForCommanderPredicate(deck.getCommanders());
 
-            availableCards.retainAll(Lists.newArrayList(Iterables.filter(availableCards, pred)));
+            availableCards.removeIf(pred.negate());
         }
 
         //create pool from available cards

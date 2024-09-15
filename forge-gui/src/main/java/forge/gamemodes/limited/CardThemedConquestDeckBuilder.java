@@ -1,6 +1,7 @@
 package forge.gamemodes.limited;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 
@@ -29,9 +30,9 @@ public class CardThemedConquestDeckBuilder extends CardThemedDeckBuilder {
         secondKeyCard = null;
         // remove Unplayables
         if(isForAI) {
-            final Iterable<PaperCard> playables = Iterables.filter(availableList,
-                    PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS));
-            this.aiPlayables = Lists.newArrayList(playables);
+            this.aiPlayables = availableList.stream()
+                    .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS))
+                    .collect(Collectors.toList());
         }else{
             this.aiPlayables = Lists.newArrayList(availableList);
         }

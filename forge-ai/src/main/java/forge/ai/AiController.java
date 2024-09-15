@@ -62,6 +62,7 @@ import io.sentry.Sentry;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -2205,7 +2206,7 @@ public class AiController {
 
     // TODO move to more common place
     private static <T> List<T> filterList(List<T> input, Predicate<? super T> pred) {
-        List<T> filtered = Lists.newArrayList(Iterables.filter(input, pred));
+        List<T> filtered = input.stream().filter(pred).collect(Collectors.toList());
         input.removeAll(filtered);
         return filtered;
     }

@@ -19,6 +19,7 @@ package forge.util.storage;
 
 import java.util.Collection;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import forge.util.IHasName;
 
@@ -35,4 +36,5 @@ public interface IStorage<T> extends Iterable<T>, IHasName {
     IStorage<IStorage<T>> getFolders();
     IStorage<T> tryGetFolder(String path);
     IStorage<T> getFolderOrCreate(String path);
+    Stream<T> stream();
 }

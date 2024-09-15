@@ -685,7 +685,7 @@ public class SpecialCardAi {
     // Goblin Polka Band
     public static class GoblinPolkaBand {
         public static boolean consider(final Player ai, final SpellAbility sa) {
-            int maxPotentialTgts = Lists.newArrayList(Iterables.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.UNTAPPED)).size();
+            int maxPotentialTgts = ai.getOpponents().getCreaturesInPlay().filter(CardPredicates.UNTAPPED).size();
             int maxPotentialPayment = ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false);
 
             int numTgts = Math.min(maxPotentialPayment, maxPotentialTgts);
@@ -1295,7 +1295,7 @@ public class SpecialCardAi {
 
         public static boolean considerSecondTarget(final Player ai, final SpellAbility sa) {
             Card firstTgt = sa.getParent().getTargetCard();
-            Iterable<Card> candidates = Iterables.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield),
+            CardCollection candidates = ai.getOpponents().getCardsIn(ZoneType.Battlefield).filter(
                     CardPredicates.sharesCardTypeWith(firstTgt).and(CardPredicates.isTargetableBy(sa)));
             Card secondTgt = Aggregates.random(candidates);
             if (secondTgt != null) {

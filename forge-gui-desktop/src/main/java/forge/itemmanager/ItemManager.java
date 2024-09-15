@@ -1007,7 +1007,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             this.model.addItems(items);
         }
         else if (useFilter) {
-            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());;
+            final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
             this.model.addItems(Iterables.filter(this.pool, pred));
         }
         else if (this.wantUnique) {

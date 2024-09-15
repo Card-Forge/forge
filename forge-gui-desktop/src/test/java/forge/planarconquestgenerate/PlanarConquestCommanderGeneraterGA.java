@@ -3,8 +3,7 @@ package forge.planarconquestgenerate;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.collect.Lists;
+import java.util.stream.Collectors;
 
 import forge.GuiDesktop;
 import forge.StaticData;
@@ -24,7 +23,6 @@ import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.Iterables;
 
 public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterGA {
 
@@ -75,14 +73,14 @@ public class PlanarConquestCommanderGeneraterGA extends PlanarConquestGeneraterG
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filtered= Iterables.filter(cards,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+        List<PaperCard> filteredList = cards.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
                                 .and(CardRulesPredicates.IS_PLANESWALKER)
                                 //.and(CardRulesPredicates.IS_LEGENDARY)
-                        ).and(gameFormat.getFilterPrinted())
-                );
+                        ))
+                .filter(gameFormat.getFilterPrinted())
+                .collect(Collectors.toList());
 
-        List<PaperCard> filteredList = Lists.newArrayList(filtered);
         rankedList = CardRanker.rankCardsInDeck(filteredList);
         List<Deck> decks = new ArrayList<>();
         for(PaperCard card: rankedList.subList(0,cardsToUse)){

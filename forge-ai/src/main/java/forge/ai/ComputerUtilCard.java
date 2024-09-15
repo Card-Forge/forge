@@ -250,12 +250,11 @@ public class ComputerUtilCard {
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
 
-        for (Card ut : Iterables.filter(bLand, CardPredicates.UNTAPPED)) {
-            return ut;
-        }
-
-        // TODO potentially risky if simulation mode currently able to reach this from triggers
-        return Aggregates.random(bLand); // random tapped land of least represented type
+        return bLand.stream()
+                .filter(CardPredicates.UNTAPPED)
+                .findFirst()
+                // TODO potentially risky if simulation mode currently able to reach this from triggers
+                .orElseGet(() -> Aggregates.random(bLand)); // random tapped land of least represented type
     }
 
     /**

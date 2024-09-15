@@ -47,6 +47,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -111,10 +112,10 @@ public final class QuestUtilCards {
                 wastesCodes.add("OGW");
             }
         } else {
-            Iterable<CardEdition> allEditions = FModel.getMagicDb().getEditions();
-            for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
-                landCodes.add(edition.getCode());
-            }
+            FModel.getMagicDb().getEditions().stream()
+                    .filter(CardEdition.Predicates.hasBasicLands)
+                    .map(CardEdition::getCode)
+                    .forEach(landCodes::add);
             snowLandCodes.add("ICE");
             snowLandCodes.add("CSP");
             snowLandCodes.add("KHM");
@@ -667,12 +668,9 @@ public final class QuestUtilCards {
         if (questController.getFormat() != null) {
             formatFilter = formatFilter.and(isLegalInQuestFormat(questController.getFormat()));
         }
-        Iterable<CardEdition> rightEditions = Iterables.filter(FModel.getMagicDb().getEditions(), formatFilter);
 
-        List<CardEdition> editions = new ArrayList<>();
-        for (CardEdition e : rightEditions) {
-            editions.add(e);
-        }
+        List<CardEdition> editions = FModel.getMagicDb().getEditions().stream()
+                .filter(formatFilter).collect(Collectors.toList());
 
         Collections.shuffle(editions);
 

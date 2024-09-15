@@ -2,7 +2,6 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.GeneratedDeckData;
@@ -27,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static forge.adventure.data.RewardData.generateAllCards;
 
@@ -804,15 +804,22 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByName(String cardName) {
-        List<PaperCard> validCards = Lists.newArrayList(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
-                input -> input.getCardName().equals(cardName)));
+        List<PaperCard> validCards;
+        //Faster to ask the CardDB for a card name than it is to search the pool.
+        if (Config.instance().getSettingData().useAllCardVariants)
+            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
+        else
+            validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
 
         return validCards.get(Current.world().getRandom().nextInt(validCards.size()));
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
-        List<PaperCard> validCards = Lists.newArrayList(Iterables.filter(getFullCardPool(Config.instance().getSettingData().useAllCardVariants),
-                input -> input.getCardName().equals(cardName) && input.getEdition().equals(edition)));
+        List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
+                ? FModel.getMagicDb().getCommonCards().getAllCards(cardName)
+                : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
+        List<PaperCard> validCards = cardPool.stream()
+                .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
 
         if (validCards.isEmpty()) {
             System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");

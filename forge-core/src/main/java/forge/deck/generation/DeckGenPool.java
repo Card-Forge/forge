@@ -38,11 +38,9 @@ public class DeckGenPool implements IDeckGenPool {
     @Override
     public PaperCard getCard(String name, String edition) {
         Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition).and(PaperCardPredicates.name(name));
-        Iterable<PaperCard> editionCards=Iterables.filter(cards.values(), filter);
-        if (editionCards.iterator().hasNext()){
-            return editionCards.iterator().next();
-        }
-        return getCard(name);
+        return cards.values().stream()
+                .filter(filter)
+                .findFirst().orElseGet(() -> getCard(name));
     }
 
     @Override

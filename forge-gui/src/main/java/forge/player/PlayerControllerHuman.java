@@ -1805,16 +1805,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public ICardFace chooseSingleCardFace(final SpellAbility sa, final String message, final Predicate<ICardFace> cpp,
                                           final String name) {
-        final Iterable<ICardFace> cardsFromDb = FModel.getMagicDb().getCommonCards().getAllFaces();
-        final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
-        CardFaceView cardFaceView;
-        List<CardFaceView> choices = new ArrayList<>();
-        for (ICardFace cardFace : cards) {
-            cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
-            choices.add(cardFaceView);
-        }
-        Collections.sort(choices);
-        cardFaceView = getGui().one(message, choices);
+        List<CardFaceView> choices = FModel.getMagicDb().getCommonCards().streamAllFaces()
+                .filter(cpp)
+                .map(cardFace -> new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName()))
+                .sorted()
+                .collect(Collectors.toList());
+        CardFaceView cardFaceView = getGui().one(message, choices);
         return StaticData.instance().getCommonCards().getFaceByName(cardFaceView.getOracleName());
     }
 

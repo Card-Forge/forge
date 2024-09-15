@@ -304,9 +304,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             creatureTypes.addAll(getAllCreatureTypes());
             creatureTypes.removeAll(this.excludedCreatureSubtypes);
         } else {
-            for (final String t : Iterables.filter(subtypes, Predicates.IS_CREATURE_TYPE)) {
-                creatureTypes.add(t);
-            }
+            subtypes.stream().filter(Predicates.IS_CREATURE_TYPE).forEach(creatureTypes::add);
         }
         return creatureTypes;
     }

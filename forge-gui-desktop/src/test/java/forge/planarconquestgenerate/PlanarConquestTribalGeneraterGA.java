@@ -3,8 +3,7 @@ package forge.planarconquestgenerate;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.collect.Lists;
+import java.util.stream.Collectors;
 
 import forge.GuiDesktop;
 import forge.StaticData;
@@ -23,7 +22,6 @@ import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
-import forge.util.Iterables;
 
 public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
 
@@ -77,14 +75,13 @@ public class PlanarConquestTribalGeneraterGA extends PlanarConquestGeneraterGA {
             cards.add(StaticData.instance().getCommonCards().getUniqueByName(cardName));
         }
 
-        Iterable<PaperCard> filteredTribe= Iterables.filter(cards,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
+        List<PaperCard> filteredListTribe = cards.stream()
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_KEPT_IN_AI_DECKS
                                 .and(CardRulesPredicates.hasCreatureType("Pirate"))
-                                .and(CardRulesPredicates.IS_CREATURE)
-                        ).and(gameFormat.getFilterPrinted())
-        );
+                                .and(CardRulesPredicates.IS_CREATURE)))
+                .filter(gameFormat.getFilterPrinted())
+                .collect(Collectors.toList());
 
-        List<PaperCard> filteredListTribe = Lists.newArrayList(filteredTribe);
         rankedList = CardRanker.rankCardsInDeck(filteredListTribe);
         List<Deck> decks = new ArrayList<>();
         for(PaperCard card: rankedList.subList(0,cardsToUse)){

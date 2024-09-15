@@ -41,12 +41,12 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
@@ -264,7 +264,10 @@ public class ComputerUtilMana {
                     saList = filteredList;
                     break;
                 case "NotSameCard":
-                    saList = Lists.newArrayList(Iterables.filter(filteredList, saPay -> !saPay.getHostCard().getName().equals(sa.getHostCard().getName())));
+                    String hostName = sa.getHostCard().getName();
+                    saList = filteredList.stream()
+                            .filter(saPay -> !saPay.getHostCard().getName().equals(hostName))
+                            .collect(Collectors.toList());
                     break;
                 default:
                     break;

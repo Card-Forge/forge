@@ -22,11 +22,11 @@ import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.item.generation.BoosterGenerator;
 import forge.util.Aggregates;
-import forge.util.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public abstract class SealedProduct implements InventoryItemFromSet {
 
@@ -114,6 +114,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     protected List<PaperCard> getRandomBasicLands(final String setCode, final int count) {
         Predicate<PaperCard> cardsRule = PaperCardPredicates.printedInSet(setCode)
                 .and(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
-        return Aggregates.random(Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), cardsRule), count);
+        return Aggregates.random(StaticData.instance().getCommonCards().streamAllCards().filter(cardsRule).collect(Collectors.toList()), count);
     }
 }

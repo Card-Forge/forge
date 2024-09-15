@@ -10,7 +10,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class WinstonDraft extends BoosterDraft {
@@ -41,9 +40,9 @@ public class WinstonDraft extends BoosterDraft {
         for (final Supplier<List<PaperCard>> supply : this.product) {
             for (int j = 0; j < NUM_PLAYERS; j++) {
                 // Remove Basic Lands from draft for simplicity
-                for (final PaperCard paperCard : Iterables.filter(supply.get(), PaperCardPredicates.IS_BASIC_LAND.negate())) {
-                    this.deck.add(paperCard);
-                }
+                supply.get().stream()
+                        .filter(PaperCardPredicates.IS_BASIC_LAND.negate())
+                        .forEach(this.deck::add);
             }
         }
         Collections.shuffle(this.deck, MyRandom.getRandom());

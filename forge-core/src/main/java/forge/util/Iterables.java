@@ -19,6 +19,9 @@ public class Iterables {
     public static <T> Iterable<T> filter(Iterable<T> iterable, Predicate<? super T> filter) {
         return () -> StreamSupport.stream(iterable.spliterator(), false).filter(filter).iterator();
     }
+    public static <T> Iterable<T> filter(Collection<T> iterable, Predicate<? super T> filter) {
+        return () -> iterable.stream().filter(filter).iterator();
+    }
     public static <T> Iterable<T> filter(final Iterable<?> iterable, final Class<T> desiredType) {
         return () -> StreamSupport.stream(iterable.spliterator(), false)
                 .filter(desiredType::isInstance)
@@ -62,10 +65,6 @@ public class Iterables {
     }
 
     //TODO: Inline everything below.
-
-    public static <T> Iterable<T> filter(Collection<T> iterable, Predicate<? super T> filter) {
-        return () -> iterable.stream().filter(filter).iterator();
-    }
 
 
     public static int size(Collection<?> collection) {

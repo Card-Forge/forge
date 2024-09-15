@@ -150,7 +150,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
             List<Card> tgtCards = Lists.newArrayList();
 
             if (sa.hasParam("ValidSupportedCopy")) {
-                List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
+                Iterable<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
                 String valid = sa.getParam("ValidSupportedCopy");
                 if (valid.contains("X")) {
                     valid = TextUtil.fastReplace(valid,
@@ -158,11 +158,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
                     Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE);
-                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                    cards = Iterables.filter(cards, cpp);
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
                     Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_EQUIPMENT);
-                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                    cards = Iterables.filter(cards, cpp);
                 }
                 if (sa.hasParam("RandomCopied")) {
                     List<PaperCard> copysource = Lists.newArrayList(cards);

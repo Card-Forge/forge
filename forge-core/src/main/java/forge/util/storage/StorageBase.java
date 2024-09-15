@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -63,6 +64,11 @@ public class StorageBase<T> implements IStorage<T> {
     @Override
     public Iterator<T> iterator() {
         return map.values().iterator();
+    }
+
+    @Override
+    public Stream<T> stream() {
+        return map.values().stream();
     }
 
     @Override

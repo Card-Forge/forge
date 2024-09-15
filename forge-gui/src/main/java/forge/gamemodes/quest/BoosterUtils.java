@@ -21,13 +21,12 @@ import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.item.*;
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.Lists;
 
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -121,7 +120,7 @@ public final class BoosterUtils {
             filter = formatStartingPool.getFilterPrinted();
         }
 
-        final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), filter));
+        final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllNonPromoCards().filter(filter).collect(Collectors.toList());
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {
@@ -304,7 +303,7 @@ public final class BoosterUtils {
                             Predicate<CardRules> predicateRules =  CardRulesPredicates.cost(StringOp.CONTAINS_IC, "p/");
                             Predicate<PaperCard> predicateCard = PaperCardPredicates.fromRules(predicateRules);
 
-                            int size = Iterables.size(Iterables.filter(cardPool, predicateCard));
+                            int size = (int) cardPool.stream().filter(predicateCard).count();
                             int totalSize = cardPool.size();
 
                             double phyrexianAmount = (double) size / totalSize;
@@ -326,7 +325,7 @@ public final class BoosterUtils {
                         //Adjust for the number of multicolored possibilities. This prevents flooding of non-selected
                         //colors if multicolored cards aren't in the selected sets. The more multi-colored cards in the
                         //sets, the more that will be selected.
-                        if (usedMulticolor / 8 < Iterables.size(Iterables.filter(cardPool, predicateCard))) {
+                        if (usedMulticolor / 8 < cardPool.stream().filter(predicateCard).count()) {
                             colorFilters.add(predicateRules);
                             usedMulticolor++;
                         } else {
@@ -490,7 +489,7 @@ public final class BoosterUtils {
 
             PrintSheet ps = new PrintSheet("Quest rewards");
             Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            ps.addAll(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), predicate));
+            FModel.getMagicDb().getCommonCards().streamAllNonPromoCards().filter(predicate).forEach(ps::add);
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice

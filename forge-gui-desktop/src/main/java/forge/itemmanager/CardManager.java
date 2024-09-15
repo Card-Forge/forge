@@ -16,12 +16,13 @@ import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.util.Iterables;
 import forge.util.Localizer;
 
 import javax.swing.*;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /** 
  * ItemManager for cards
@@ -76,7 +77,8 @@ public class CardManager extends ItemManager<PaperCard> {
                 continue;  // skip card
 
             // Try to retain only those editions accepted by the current Card Art Preference Policy
-            List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), ed -> StaticData.instance().getCardArtPreference().accept(ed)));
+            Predicate<CardEdition> editionPredicate = ed -> StaticData.instance().getCardArtPreference().accept(ed);
+            List<CardEdition> acceptedEditions = entriesByEdition.keySet().stream().filter(editionPredicate).collect(Collectors.toList());
 
             // If policy too strict, fall back to getting all editions.
             if (acceptedEditions.size() == 0)

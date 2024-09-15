@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public interface ICardDatabase extends Iterable<PaperCard> {
     /**
@@ -84,6 +85,9 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Collection<PaperCard> getAllCards(String cardName,Predicate<PaperCard> predicate);
     Collection<PaperCard> getAllCards(CardEdition edition);
     Collection<PaperCard> getUniqueCards();
+
+    Stream<PaperCard> streamAllCards();
+    Stream<PaperCard> streamUniqueCards();
 
     /* UTILITY METHODS
      * =============== */

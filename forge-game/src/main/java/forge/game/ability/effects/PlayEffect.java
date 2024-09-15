@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
@@ -10,7 +11,6 @@ import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
@@ -117,13 +117,11 @@ public class PlayEffect extends SpellAbilityEffect {
                     cards.add(StaticData.instance().getCommonCards().getUniqueByName(name));
                 }
             } else if (valid.equalsIgnoreCase("sorcery")) {
-                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                 final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                cards = StaticData.instance().getCommonCards().streamUniqueCards().filter(cpp).collect(Collectors.toList());
             } else if (valid.equalsIgnoreCase("instant")) {
-                cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
                 final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                cards = StaticData.instance().getCommonCards().streamUniqueCards().filter(cpp).collect(Collectors.toList());
             }
             if (sa.hasParam("RandomCopied")) {
                 final CardCollection choice = new CardCollection();

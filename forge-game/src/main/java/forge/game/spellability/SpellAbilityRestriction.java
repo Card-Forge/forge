@@ -38,7 +38,6 @@ import forge.game.staticability.StaticAbilityNumLoyaltyAct;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import forge.util.Iterables;
 import forge.util.collect.FCollection;
 
 /**
@@ -468,7 +467,8 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
-            final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
+            Predicate<GameObject> restriction = GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa);
+            final int left = (int) list.stream().filter(restriction).count();
 
             final String rightString = this.getPresentCompare().substring(2);
             int right = AbilityUtils.calculateAmount(c, rightString, sa);
