@@ -91,13 +91,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
         if (sa.usesTargeting()) {
             final List<Card> targetCards = getTargetCards(sa);
-            if (targetCards.size() == 0) {
+            if (targetCards.isEmpty()) {
                 return stringBuilder.toString();
             }
         }
 
-        final String key = forEach ? "ForEachNum" : "CounterNum";
-        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault(key, "1"), sa);
+        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("CounterNum", "1"), sa);
 
         if (sa.hasParam("Bolster")) {
             stringBuilder.append("bolsters ").append(amount).append(".");
@@ -308,7 +307,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     for (int i = 0; i < num; i++) {
                         CounterType ct = chooseTypeFromList(sa, options, obj, pc);
                         typesToAdd.add(ct);
-                        options = options.replace(ct.getName(),"");
+                        options = options.replace(ct.getName(), "");
                     }
                     for (CounterType ct : typesToAdd) {
                         if (obj instanceof Player) {
@@ -338,7 +337,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             CardCollectionView counterCards =
                                     CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
                                             type.split("_")[1], activator, card, sa);
-                            List <CounterType> counterTypes = Lists.newArrayList();
+                            List<CounterType> counterTypes = Lists.newArrayList();
                             for (Card c : counterCards) {
                                 for (final Map.Entry<CounterType, Integer> map : c.getCounters().entrySet()) {
                                     if (!counterTypes.contains(map.getKey())) {
@@ -357,7 +356,23 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             typesToAdd.add(CounterType.getType(type));
                         }
                     }
+                    int remaining = counterAmount;
                     for (CounterType ct : typesToAdd) {
+                        if (sa.hasParam("SplitAmount")) {
+                            if (typesToAdd.size() - typesToAdd.indexOf(ct) > 1) {
+                                Map<String, Object> params = Maps.newHashMap();
+                                params.put("Target", obj);
+                                params.put("CounterType", counterType);
+                                counterAmount = pc.chooseNumber(sa, ct.toString() + ": " +
+                                        Localizer.getInstance().getMessage("lblHowManyCounters"), 0, remaining, params);
+                                if (counterAmount == 0) {
+                                    continue;
+                                }
+                                remaining -= counterAmount;
+                            } else {
+                                counterAmount = remaining;
+                            }
+                        }
                         if (obj instanceof Player) {
                             ((Player) obj).addCounter(ct, counterAmount, placer, table);
                         }
@@ -483,11 +498,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     }
 
                     // Adapt need extra logic
-                    if (sa.hasParam("Adapt")) {
-                        if (!(gameCard.getCounters(CounterEnumType.P1P1) == 0
-                                || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
-                            continue;
-                        }
+                    if (sa.hasParam("Adapt") &&
+                            !(gameCard.getCounters(CounterEnumType.P1P1) == 0 || StaticAbilityAdapt.anyWithAdapt(sa, gameCard))) {
+                        continue;
                     }
 
                     if (sa.isKeyword(Keyword.TRIBUTE)) {
