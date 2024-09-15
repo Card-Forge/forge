@@ -10,23 +10,8 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.Localizer;
 
-public class ManifestDreadEffect extends ManifestBaseEffect {
-    @Override
-    protected String getDefaultMessage() {
-        return Localizer.getInstance().getMessage("lblChooseCardToManifest");
-    }
-    @Override
-    protected Card internalEffect(Card c, Player p, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
-        final Card source = sa.getHostCard();
-        Card rem = c.manifest(p, sa, moveParams);
-        if (rem != null && sa.hasParam("RememberManifested") && rem.isManifested()) {
-            source.addRemembered(rem);
-        }
-        return rem;
-    }
-
+public class ManifestDreadEffect extends ManifestEffect {
     @Override
     protected void manifestLoop(SpellAbility sa, Player p, final int amount) {
         final Game game = p.getGame();
