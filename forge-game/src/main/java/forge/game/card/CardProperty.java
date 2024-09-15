@@ -671,7 +671,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopLibraryLand")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.Presets.LANDS);
+            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.LANDS);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }

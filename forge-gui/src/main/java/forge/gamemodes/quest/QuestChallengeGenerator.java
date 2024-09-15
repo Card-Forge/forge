@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import forge.deck.DeckgenUtil;
 import forge.game.GameFormat;
@@ -216,6 +217,11 @@ public class QuestChallengeGenerator {
         @Override
         public Iterator<QuestEventChallenge> iterator() {
             return challenges.values().iterator();
+        }
+
+        @Override
+        public Stream<QuestEventChallenge> stream() {
+            return challenges.values().stream();
         }
     }
 }
