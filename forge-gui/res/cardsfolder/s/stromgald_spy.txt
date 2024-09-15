@@ -3,8 +3,9 @@ ManaCost:3 B
 Types:Creature Human Rogue
 PT:2/4
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may have defending player play with their hand revealed for as long as CARDNAME remains on the battlefield. If you do, CARDNAME assigns no combat damage this turn.
-SVar:TrigExile:DB$ Effect | StaticAbilities$ STRevealHand | RememberObjects$ DefendingPlayer | Duration$ AsLongAsInPlay | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
+SVar:TrigExile:DB$ Effect | StaticAbilities$ STRevealHand | RememberObjects$ DefendingPlayer | Duration$ AsLongAsInPlay | SubAbility$ DBNoCombatDamage
+SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
 SVar:STRevealHand:Mode$ Continuous | AffectedZone$ Hand | Affected$ Card.RememberedPlayerOwn | MayLookAt$ Player | Description$ The defending player plays with their hand revealed.
 AI:RemoveDeck:All
 Oracle:Whenever Stromgald Spy attacks and isn't blocked, you may have defending player play with their hand revealed for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.

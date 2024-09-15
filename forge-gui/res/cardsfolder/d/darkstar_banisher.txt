@@ -1,0 +1,11 @@
+Name:Darkstar Banisher
+ManaCost:1 W B
+Types:Creature Bat Cleric
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target nonland permanent with mana value 3 or less an opponent controls.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl+cmcLE3 | RememberChanged$ True | TgtPrompt$ Select target nonland permanent with mana value 3 or less an opponent controls
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When CARDNAME leaves the battlefield, the exiled card's owner seeks a card that shares a card type with the exiled card.
+SVar:TrigSeek:DB$ Seek | Defined$ RememberedOwner | Type$ Card.sharesCardTypeWith Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nWhen Darkstar Banisher enters, exile target nonland permanent with mana value 3 or less an opponent controls.\nWhen Darkstar Banisher leaves the battlefield, the exiled card's owner seeks a card that shares a card type with the exiled card.

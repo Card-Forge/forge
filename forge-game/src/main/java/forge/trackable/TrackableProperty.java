@@ -123,6 +123,7 @@ public enum TrackableProperty {
     ManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
+    FunctionalVariant(TrackableTypes.StringType),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),

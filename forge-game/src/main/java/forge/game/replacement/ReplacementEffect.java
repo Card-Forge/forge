@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import com.google.common.collect.*;
 
+import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
@@ -221,15 +222,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            String currentName;
-            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
-                currentName = cardState.getName();
-            } else {
-                currentName = getHostCard().getName();
-            }
-            desc = CardTranslation.translateSingleDescriptionText(desc, currentName);
-            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            ITranslatable nameSource = getHostName(this);
+            desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
+            String translatedName = CardTranslation.getTranslatedName(nameSource);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
             if (desc.contains("EFFECTSOURCE")) {
                 desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
             }

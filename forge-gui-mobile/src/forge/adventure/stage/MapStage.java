@@ -605,7 +605,7 @@ public class MapStage extends GameStage {
                         }));
                         break;
                     case "exit":
-                        addMapActor(obj, new OnCollide(MapStage.this::exitDungeon));
+                        addMapActor(obj, new OnCollide(() -> MapStage.this.exitDungeon(false)));
                         break;
                     case "dialog":
                         if (obj instanceof TiledMapTileMapObject) {
@@ -749,13 +749,14 @@ public class MapStage extends GameStage {
         }
     }
 
-    public boolean exitDungeon() {
-        WorldSave.getCurrentSave().autoSave();
+    public boolean exitDungeon(boolean defeated) {
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
+        if (defeated)
+            WorldStage.getInstance().resetPlayerLocation();
         Forge.switchScene(GameScene.instance());
         return true;
     }
@@ -799,18 +800,18 @@ public class MapStage extends GameStage {
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.this);
                 boolean defeated = Current.player().defeated();
-                if (canFailDungeon && defeated) {
-                    //If hardcore mode is added, check and redirect to game over screen here
-                    dungeonFailedDialog();
-                    exitDungeon();
-                }
+                //If hardcore mode is added, check and redirect to game over screen here
+                if (canFailDungeon && !defeated)
+                    dungeonFailedDialog(true);
+                else
+                    exitDungeon(defeated);
                 MapStage.this.stop();
                 currentMob = null;
             });
         }
     }
 
-    private void dungeonFailedDialog() {
+    private void dungeonFailedDialog(boolean exit) {
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
         dialog.clearListeners();
@@ -829,7 +830,8 @@ public class MapStage extends GameStage {
             public void clicked(InputEvent event, float x, float y) {
                 L.skipToTheEnd();
                 super.clicked(event, x, y);
-                //exitDungeon();
+                if (exit)
+                    exitDungeon(false);
             }
         });
         dialog.getButtonTable().add(ok).width(240f);
@@ -932,7 +934,7 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
-        if (isPaused() || isDialogOnlyInput())
+        if (isPaused() || isDialogOnlyInput() || Forge.advFreezePlayerControls)
             return;
         Iterator<EnemySprite> it = enemies.iterator();
 
@@ -1076,7 +1078,7 @@ public class MapStage extends GameStage {
         int duration = mob.getData().boss ? 400 : 200;
         if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
             Controllers.getCurrent().startVibration(duration, 1);
-        Forge.restrictAdvMenus = true;
+        Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
         startPause(0.8f, () -> {
             if (started)

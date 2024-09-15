@@ -19,6 +19,7 @@ package forge.game.replacement;
 
 import java.util.*;
 
+import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -143,7 +144,7 @@ public class ReplacementHandler {
                 return true;
             }
 
-        });
+        }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (checkAgain) {
             if (affectedLKI != null && affectedCard != null) {
@@ -166,6 +167,10 @@ public class ReplacementHandler {
         }
 
         return possibleReplacers;
+    }
+
+    public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return !getReplacementList(event, runParams, ReplacementLayer.CantHappen).isEmpty();
     }
 
     /**
@@ -322,7 +327,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
+            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getCardForUi(), host).getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)

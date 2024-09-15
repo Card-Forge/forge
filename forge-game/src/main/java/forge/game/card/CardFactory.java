@@ -356,13 +356,16 @@ public class CardFactory {
     }
 
     private static void readCardFace(Card c, ICardFace face) {
+        String variantName = null;
         //If it's a functional variant card, switch to that first.
         if(face.hasFunctionalVariants()) {
-            String variantName = c.getPaperCard().getFunctionalVariant();
+            variantName = c.getPaperCard().getFunctionalVariant();
             if (!IPaperCard.NO_FUNCTIONAL_VARIANT.equals(variantName)) {
                 ICardFace variant = face.getFunctionalVariant(variantName);
-                if (variant != null)
+                if (variant != null) {
                     face = variant;
+                    c.getCurrentState().setFunctionalVariantName(variantName);
+                }
                 else
                     System.err.printf("Tried to apply unknown or unsupported variant - Card: \"%s\"; Variant: %s\n", face.getName(), variantName);
             }
@@ -370,7 +373,7 @@ public class CardFactory {
 
         // Build English oracle and translated oracle mapping
         if (c.getId() >= 0) {
-            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText());
+            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
         }
 
         // Name first so Senty has the Card name

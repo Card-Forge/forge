@@ -414,7 +414,7 @@ public class CardLists {
     public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (crew && StaticAbilityCrewValue.hasAnyCrewValue(crd)) {
+            if (crew) {
                 if (StaticAbilityCrewValue.crewsWithToughness(crd)) {
                     total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
                 } else {

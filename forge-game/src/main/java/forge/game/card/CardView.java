@@ -1161,7 +1161,7 @@ public class CardView extends GameEntityView {
         return (zone + ' ' + CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
-    public class CardStateView extends TrackableObject {
+    public class CardStateView extends TrackableObject implements ITranslatable {
         private static final long serialVersionUID = 6673944200513430607L;
 
         private final CardStateName state;
@@ -1312,6 +1312,13 @@ public class CardView extends GameEntityView {
         }
         void setOracleText(String oracleText) {
             set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
+        }
+
+        public String getFunctionalVariantName() {
+            return get(TrackableProperty.FunctionalVariant);
+        }
+        void setFunctionalVariantName(String functionalVariant) {
+            set(TrackableProperty.FunctionalVariant, functionalVariant);
         }
 
         public String getRulesText() {
@@ -1736,6 +1743,25 @@ public class CardView extends GameEntityView {
         }
         public boolean isAttraction() {
             return getType().isAttraction();
+        }
+
+        @Override
+        public String getTranslationKey() {
+            String key = getName();
+            String variant = getFunctionalVariantName();
+            if(StringUtils.isNotEmpty(variant))
+                key = key + " $" + variant;
+            return key;
+        }
+
+        @Override
+        public String getUntranslatedType() {
+            return getType().toString();
+        }
+
+        @Override
+        public String getUntranslatedOracle() {
+            return getOracleText();
         }
     }
 

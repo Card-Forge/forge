@@ -81,8 +81,8 @@ public enum ColumnDef {
      * The type column.
      */
     TYPE("lblType", "ttType", 100, false, SortState.ASC,
-            from -> CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey())),
-            from -> CardTranslation.getTranslatedType(from.getKey().getName(), toType(from.getKey()))),
+            from -> CardTranslation.getTranslatedType(from.getKey()),
+            from -> CardTranslation.getTranslatedType(from.getKey())),
     /**
      * The mana cost column.
      */
@@ -355,10 +355,6 @@ public enum ColumnDef {
     @Override
     public String toString() {
         return this.longName;
-    }
-
-    private static String toType(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getType().toString() : i.getItemType();
     }
 
     private static IPaperCard toCard(final InventoryItem i) {

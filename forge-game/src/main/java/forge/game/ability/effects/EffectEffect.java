@@ -251,6 +251,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 addExileOnLostTrigger(eff);
             }
 
+            if (sa.hasParam("ExileOnCounter")) {
+                addExileCounterTrigger(eff, sa.getParam("ExileOnCounter"));
+            }
+
             // Set Imprinted
             if (effectImprinted != null) {
                 eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));

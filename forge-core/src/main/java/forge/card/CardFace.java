@@ -156,6 +156,9 @@ final class CardFace implements ICardFace, Cloneable {
             return null;
         return this.functionalVariants.get(variant);
     }
+    @Override public Map<String, ? extends ICardFace> getFunctionalVariants() {
+        return this.functionalVariants;
+    }
     CardFace getOrCreateFunctionalVariant(String variant) {
         if (this.functionalVariants == null) {
             this.functionalVariants = new HashMap<>();

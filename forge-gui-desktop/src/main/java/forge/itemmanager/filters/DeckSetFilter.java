@@ -25,7 +25,9 @@ public class DeckSetFilter extends DeckFormatFilter {
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0,
                          Collection<String> limitedSets0, boolean allowReprints0) {
         this(itemManager0, sets0, allowReprints0);
-        this.limitedSets.addAll(limitedSets0);
+        if (limitedSets0 != null) {
+            this.limitedSets.addAll(limitedSets0);
+        }
     }
 
     @Override

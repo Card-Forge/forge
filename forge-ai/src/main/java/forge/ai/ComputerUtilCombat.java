@@ -724,7 +724,6 @@ public class ComputerUtilCombat {
         return totalDamageOfBlockers(attacker, blockers) >= getDamageToKill(attacker, false);
     }
 
-    // Will this trigger trigger?
     /**
      * <p>
      * combatTriggerWillTrigger.

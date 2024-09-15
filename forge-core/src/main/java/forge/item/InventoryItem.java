@@ -17,13 +17,18 @@
  */
 package forge.item;
 
-import forge.util.IHasName;
+import forge.util.ITranslatable;
 
 /**
  * Interface to define a player's inventory may hold. Should include
  * CardPrinted, Booster, Pets, Plants... etc
  */
-public interface InventoryItem extends IHasName {
+public interface InventoryItem extends ITranslatable {
     String getItemType();
     String getImageKey(boolean altState);
+
+    @Override
+    default String getUntranslatedType() {
+        return getItemType();
+    }
 }

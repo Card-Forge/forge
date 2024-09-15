@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.*;
+import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.StaticEffect;
 import forge.game.StaticEffects;
@@ -31,6 +32,7 @@ import forge.game.card.*;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.replacement.ReplacementEffect;
@@ -423,26 +425,30 @@ public final class StaticAbilityContinuous {
             if (params.containsKey("AddAllCreatureTypes")) {
                 addAllCreatureTypes = true;
             }
-            if (params.containsKey("RemoveSuperTypes")) {
-                remove.add(RemoveType.SuperTypes);
-            }
-            if (params.containsKey("RemoveCardTypes")) {
-                remove.add(RemoveType.CardTypes);
-            }
-            if (params.containsKey("RemoveSubTypes")) {
-                remove.add(RemoveType.SubTypes);
-            }
-            if (params.containsKey("RemoveLandTypes")) {
-                remove.add(RemoveType.LandTypes);
-            }
-            if (params.containsKey("RemoveCreatureTypes")) {
-                remove.add(RemoveType.CreatureTypes);
-            }
-            if (params.containsKey("RemoveArtifactTypes")) {
-                remove.add(RemoveType.ArtifactTypes);
-            }
-            if (params.containsKey("RemoveEnchantmentTypes")) {
-                remove.add(RemoveType.EnchantmentTypes);
+
+            // overwrite doesn't work without new value (e.g. Conspiracy missing choice)
+            if (addTypes == null || !addTypes.isEmpty()) {
+                if (params.containsKey("RemoveSuperTypes")) {
+                    remove.add(RemoveType.SuperTypes);
+                }
+                if (params.containsKey("RemoveCardTypes")) {
+                    remove.add(RemoveType.CardTypes);
+                }
+                if (params.containsKey("RemoveSubTypes")) {
+                    remove.add(RemoveType.SubTypes);
+                }
+                if (params.containsKey("RemoveLandTypes")) {
+                    remove.add(RemoveType.LandTypes);
+                }
+                if (params.containsKey("RemoveCreatureTypes")) {
+                    remove.add(RemoveType.CreatureTypes);
+                }
+                if (params.containsKey("RemoveArtifactTypes")) {
+                    remove.add(RemoveType.ArtifactTypes);
+                }
+                if (params.containsKey("RemoveEnchantmentTypes")) {
+                    remove.add(RemoveType.EnchantmentTypes);
+                }
             }
         }
 
@@ -511,7 +517,7 @@ public final class StaticAbilityContinuous {
         // modify players
         for (final Player p : affectedPlayers) {
             // add keywords
-            if (addKeywords != null) {
+            if (addKeywords != null && !addKeywords.isEmpty()) {
                 p.addChangedKeywords(addKeywords, removeKeywords, se.getTimestamp(), stAb.getId());
             }
 
@@ -719,7 +725,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
+            if ((addKeywords != null && !addKeywords.isEmpty()) || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
                     newKeywords = Lists.newArrayList(addKeywords);
@@ -742,8 +748,20 @@ public final class StaticAbilityContinuous {
                     newKeywords.addAll(extraKeywords);
 
                     newKeywords = newKeywords.stream().map(input -> {
+                        int reduced = 0;
+                        if (stAb.hasParam("ReduceCost")) {
+                           reduced = AbilityUtils.calculateAmount(hostCard, stAb.getParam("ReduceCost"), stAb);
+                        }
                         if (input.contains("CardManaCost")) {
-                            input = input.replace("CardManaCost", affectedCard.getManaCost().getShortString());
+                            ManaCost cost;
+                            if (reduced > 0) {
+                                ManaCostBeingPaid mcbp = new ManaCostBeingPaid(affectedCard.getManaCost());
+                                mcbp.decreaseGenericMana(reduced);
+                                cost = mcbp.toManaCost();
+                            } else {
+                                cost = affectedCard.getManaCost();
+                            }
+                            input = input.replace("CardManaCost", cost.getShortString());
                         } else if (input.contains("ConvertedManaCost")) {
                             final String costcmc = Integer.toString(affectedCard.getCMC());
                             input = input.replace("ConvertedManaCost", costcmc);
@@ -753,7 +771,7 @@ public final class StaticAbilityContinuous {
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,
-                        removeAllAbilities, se.getTimestamp(), stAb.getId(), true);
+                        removeAllAbilities, se.getTimestamp(), stAb, true);
             }
 
             // add HIDDEN keywords
@@ -877,7 +895,7 @@ public final class StaticAbilityContinuous {
             }
 
             // add Types
-            if (addTypes != null || removeTypes != null || addAllCreatureTypes || !remove.isEmpty()) {
+            if ((addTypes != null && !addTypes.isEmpty()) || (removeTypes != null && !removeTypes.isEmpty()) || addAllCreatureTypes || !remove.isEmpty()) {
                 affectedCard.addChangedCardTypes(addTypes, removeTypes, addAllCreatureTypes, remove,
                         se.getTimestamp(), stAb.getId(), true, stAb.hasParam("CharacteristicDefining"));
             }

@@ -14,7 +14,7 @@ public class HauntEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card host = sa.getHostCard();
-        if (host.isPermanent()) {
+        if (host.isPermanent() && sa.hasTriggeringObject(AbilityKey.NewCard)) {
             // get new version instead of battlefield lki
             host = (Card) sa.getTriggeringObject(AbilityKey.NewCard);
         }

@@ -67,7 +67,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     boolean collided = false;
     @Override
     protected void onActing(float delta) {
-        if (isPaused() || MapStage.getInstance().isDialogOnlyInput())
+        if (isPaused() || MapStage.getInstance().isDialogOnlyInput() || Forge.advFreezePlayerControls)
             return;
         drawNavigationArrow();
         if (player.isMoving()) {
@@ -122,7 +122,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     int duration = mob.getData().boss ? 400 : 200;
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
                         Controllers.getCurrent().startVibration(duration, 1);
-                    Forge.restrictAdvMenus = true;
+                    Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
@@ -188,11 +188,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
             startPause(0.5f, () -> {
                 currentMob.resetCollisionHeight();
-                Current.player().defeated();
+                boolean defeated = Current.player().defeated();
                 AdventureQuestController.instance().updateQuestsLose(currentMob);
                 AdventureQuestController.instance().showQuestDialogs(MapStage.getInstance());
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
+                if (defeated) {
+                    WorldStage.getInstance().resetPlayerLocation();
+                }
             });
         }
     }
@@ -209,23 +212,27 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    try {
-                        WorldSave.getCurrentSave().autoSave();
-                        TileMapScene.instance().load(point.getPointOfInterest());
-                        stop();
-                        TileMapScene.instance().setFromWorldMap(true);
-                        Forge.switchScene(TileMapScene.instance());
-                        point.getMapSprite().checkOut();
-                    } catch (Exception e) {
-                        System.err.println("Error loading map...");
-                        e.printStackTrace();
-                    }
+                    WorldSave.getCurrentSave().autoSave();
+                    loadPOI(point.getPointOfInterest());
+                    point.getMapSprite().checkOut();
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;
                     }
                 }
             }
+        }
+    }
+
+    public void loadPOI(PointOfInterest poi) {
+        try {
+            TileMapScene.instance().load(poi);
+            stop();
+            TileMapScene.instance().setFromWorldMap(true);
+            Forge.switchScene(TileMapScene.instance());
+        } catch (Exception e) {
+            System.err.println("Error loading map...");
+            e.printStackTrace();
         }
     }
 

@@ -4,8 +4,8 @@ Types:Creature Hydra
 Colors:green,blue
 PT:1/4
 K:Defender
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game and your opponents can't win the game.
-S:Mode$ Continuous | Affected$ Opponent | AddKeyword$ You can't win the game. | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Battlefield | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ You can't lose the game and your opponents can't win the game.
 S:Mode$ AttackRestrict | MaxAttackers$ 6 | ValidDefender$ You | Description$ No more than six creatures can attack you each combat.
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would leave the battlefield, instead exile it with three time counters on it. It gains suspend.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | WithCountersType$ TIME | WithCountersAmount$ 3 | Origin$ All | Destination$ Exile | Defined$ ReplacedCard | SubAbility$ GiveSuspend

@@ -126,7 +126,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
                 params.put("Category", "Keywords");
                 c.addPerpetual(params);
             }
-            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
+            c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, null);
         }
 
         // do this after changing types in case it wasn't a creature before

@@ -45,11 +45,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
-import forge.util.Expressions;
-import forge.util.FileSection;
-import forge.util.Lang;
-import forge.util.TextUtil;
+import forge.util.*;
 
 /**
  * The Class StaticAbility.
@@ -187,15 +183,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     @Override
     public final String toString() {
         if (hasParam("Description") && !this.isSuppressed()) {
-            String currentName;
-            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
-                currentName = cardState.getName();
-            } else {
-                currentName = getHostCard().getName();
-            }
-            String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), currentName);
-            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            ITranslatable nameSource = getHostName(this);
+            String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), nameSource);
+            String translatedName = CardTranslation.getTranslatedName(nameSource);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
 
             return desc;
         } else {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 import forge.adventure.util.Controls;
 
 public class Console extends Window {
@@ -17,8 +18,10 @@ public class Console extends Window {
             setVisible(false);
             getStage().unfocus(input);
         } else {
-            setVisible(true);
-            getStage().setKeyboardFocus(input);
+            if (!Forge.advFreezePlayerControls) {
+                setVisible(true);
+                getStage().setKeyboardFocus(input);
+            }
         }
     }
 

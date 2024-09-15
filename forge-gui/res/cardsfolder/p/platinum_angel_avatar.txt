@@ -2,8 +2,8 @@ Name:Platinum Angel Avatar
 ManaCost:no cost
 Types:Vanguard
 HandLifeModifier:-1/-2
-S:Mode$ Continuous | EffectZone$ Command | Affected$ You | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | AddKeyword$ You can't lose the game. | Description$ If you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Player.Opponent | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | AddKeyword$ You can't win the game.
+R:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | Layer$ CantHappen | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | Description$ If you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
+R:Event$ GameWin | ActiveZones$ Command | ValidPlayer$ Opponent | Layer$ CantHappen | CheckSVar$ AvatarAX | CheckSecondSVar$ AvatarCX | CheckThirdSVar$ AvatarEX | CheckFourthSVar$ AvatarLX | Secondary$ True | Description$ If you control an artifact, a creature, an enchantment, and a land, you can't lose the game and your opponents can't win the game.
 SVar:AvatarAX:Count$Valid Artifact.YouCtrl
 SVar:AvatarCX:Count$Valid Creature.YouCtrl
 SVar:AvatarEX:Count$Valid Enchantment.YouCtrl

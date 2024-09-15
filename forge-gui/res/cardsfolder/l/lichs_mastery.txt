@@ -2,7 +2,7 @@ Name:Lich's Mastery
 ManaCost:3 B B B
 Types:Legendary Enchantment
 K:Hexproof
-S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | Layer$ CantHappen | Description$ You can't lose the game.
 T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever you gain life, draw that many cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:TriggerCount$LifeAmount

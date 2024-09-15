@@ -132,8 +132,11 @@ public final class CardEdition implements Comparable<CardEdition> {
         SPECIAL_SLOT("special slot"), //to help with convoluted boosters
         PRECON_PRODUCT("precon product"),
         BORDERLESS("borderless"),
+        BORDERLESS_PROFILE("borderless profile"),
+        BORDERLESS_FRAME("borderless frame"),
         ETCHED("etched"),
         SHOWCASE("showcase"),
+        FULL_ART("full art"),
         EXTENDED_ART("extended art"),
         ALTERNATE_ART("alternate art"),
         ALTERNATE_FRAME("alternate frame"),

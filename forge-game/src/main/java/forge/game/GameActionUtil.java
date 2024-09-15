@@ -339,7 +339,7 @@ public final class GameActionUtil {
             newSA.setMayPlay(o);
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
-            if (!source.equals(host)) {
+            if (!source.equals(host) && host.getCardForUi() != null) {
                 sb.append(" by ");
                 if (host.isImmutable() && host.getEffectSource() != null) {
                     sb.append(host.getEffectSource());
@@ -620,7 +620,10 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setOptionalKeywordAmount(ki, v);
+
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
+                }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);
@@ -839,6 +842,10 @@ public final class GameActionUtil {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
                 Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (sa != null && sa.hasParam("GainControl")) {
+                    // TODO this doesn't account for changes from e.g. Gather Specimens yet
+                    decider = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
+                }
                 if (decider.equals(p)) {
                     subList.add(c);
                 }

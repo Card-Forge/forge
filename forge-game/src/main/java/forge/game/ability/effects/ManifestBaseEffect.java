@@ -24,57 +24,74 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         // Usually a number leaving possibility for X, Sacrifice X land: Manifest X creatures.
         final int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
+        final int times = sa.hasParam("Times") ? AbilityUtils.calculateAmount(source, sa.getParam("Times"), sa) : 1;
 
-        for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
-            CardCollection tgtCards;
-            boolean fromLibrary = false;
-            if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
-                ZoneType choiceZone = ZoneType.Hand;
-                if (sa.hasParam("ChoiceZone")) {
-                    choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
-                    fromLibrary = choiceZone.equals(ZoneType.Library);
-                }
-                CardCollectionView choices = p.getCardsIn(choiceZone);
-                if (sa.hasParam("Choices")) {
-                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
-                }
-                if (choices.isEmpty()) {
-                    continue;
-                }
+        for (int i = 0; i < times; i++) {
+            for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
+                CardCollection tgtCards;
+                Card toGrave = null;
+                boolean fromLibrary = false;
+                if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
+                    ZoneType choiceZone = ZoneType.Hand;
+                    if (sa.hasParam("ChoiceZone")) {
+                        choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                        fromLibrary = choiceZone.equals(ZoneType.Library);
+                    }
+                    CardCollectionView choices = p.getCardsIn(choiceZone);
+                    if (sa.hasParam("Choices")) {
+                        choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
+                    }
+                    if (choices.isEmpty()) {
+                        continue;
+                    }
 
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : getDefaultMessage() + " ";
+                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : getDefaultMessage() + " ";
 
-                tgtCards = new CardCollection(p.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
-            } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
-                tgtCards = p.getTopXCardsFromLibrary(amount);
-                fromLibrary = true;
-            } else {
-                tgtCards = getTargetCards(sa);
-                if (tgtCards.allMatch(CardPredicates.inZone(ZoneType.Library))) {
+                    tgtCards = new CardCollection(p.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
+                } else if (sa.hasParam("Dread")) {
+                    tgtCards = p.getTopXCardsFromLibrary(2);
+                    if (!tgtCards.isEmpty()) {
+                        Card manifest = p.getController().chooseSingleEntityForEffect(tgtCards, sa, getDefaultMessage(), null);
+                        tgtCards.remove(manifest);
+                        toGrave = tgtCards.isEmpty() ? null : tgtCards.getFirst();
+                        tgtCards = new CardCollection(manifest);
+                    }
                     fromLibrary = true;
+                } else if ("TopOfLibrary".equals(sa.getParamOrDefault("Defined", "TopOfLibrary"))) {
+                    tgtCards = p.getTopXCardsFromLibrary(amount);
+                    fromLibrary = true;
+                } else {
+                    tgtCards = getTargetCards(sa);
+                    if (tgtCards.allMatch(CardPredicates.inZone(ZoneType.Library))) {
+                        fromLibrary = true;
+                    }
                 }
-            }
 
-            if (sa.hasParam("Shuffle")) {
-                CardLists.shuffle(tgtCards);
-            }
+                if (sa.hasParam("Shuffle")) {
+                    CardLists.shuffle(tgtCards);
+                }
 
-            if (fromLibrary) {
-                for (Card c : tgtCards) {
-                    // CR 701.34d If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
+                if (fromLibrary) {
+                    for (Card c : tgtCards) {
+                        // CR 701.34d If an effect instructs a player to manifest multiple cards from their library, those cards are manifested one at a time.
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
+                        internalEffect(c, p, sa, moveParams);
+                        if (sa.hasParam("Dread") && toGrave != null) {
+                            game.getAction().moveToGraveyard(toGrave, sa, moveParams);
+                            toGrave = null;
+                        }
+                        triggerList.triggerChangesZoneAll(game, sa);
+                    }
+                } else {
+                    // manifest from other zones should be done at the same time
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
-                    internalEffect(c, p, sa, moveParams);
+                    for (Card c : tgtCards) {
+                        internalEffect(c, p, sa, moveParams);
+                    }
                     triggerList.triggerChangesZoneAll(game, sa);
                 }
-            } else {
-                // manifest from other zones should be done at the same time
-                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
-                for (Card c : tgtCards) {
-                    internalEffect(c, p, sa, moveParams);
-                }
-                triggerList.triggerChangesZoneAll(game, sa);
             }
         }
     }

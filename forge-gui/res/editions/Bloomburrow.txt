@@ -33,7 +33,7 @@ Replace=.20F Land:fromSheet("BLB full art")+
 Base=Common:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
 Replace=.417F Uncommon:fromSheet("BLB cards")
-Replace=.078F MythicRare:fromSheet("BLB cards")
+Replace=.078F RareMythic:fromSheet("BLB cards")
 Replace=.004F fromSheet("BLB borderless")
 Replace=.042F fromSheet("BLB showcase")
 

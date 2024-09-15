@@ -1,0 +1,8 @@
+Name:Fear of Failed Tests
+ManaCost:4 U
+Types:Enchantment Creature Nightmare
+PT:2/7
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw that many cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+Oracle:Whenever Fear of Failed Tests deals combat damage to a player, draw that many cards.

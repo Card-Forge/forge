@@ -1,0 +1,9 @@
+Name:The Spike Cactus
+ManaCost:1 G G
+Types:Legendary Creature Spike
+PT:0/0
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with +1/+1 counters on it equal to the amount of mana spent to cast it.
+A:AB$ PutCounter | Cost$ 2 SubCounter<1/P1P1> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:X:Count$CastTotalManaSpent
+DeckHas:Ability$Counters
+Oracle:The Spike Cactus enters the battlefield with +1/+1 counters on it equal to the amount of mana spent to cast it.\n{2}, Remove a +1/+1 counter from The Spike Cactus: Put a +1/+1 counter on target creature.

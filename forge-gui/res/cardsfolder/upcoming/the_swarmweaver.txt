@@ -1,0 +1,10 @@
+Name:The Swarmweaver
+ManaCost:2 B G
+Types:Legendary Artifact Creature Scarecrow
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create two 1/1 black and green Insect creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ bg_1_1_insect_flying | TokenOwner$ You
+S:Mode$ Continuous | Condition$ Delirium | Affected$ Insect.YouCtrl,Spider.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Deathtouch | Description$ Delirium — As long as there are four or more card types among cards in your graveyard, Insects and Spiders you control get +1/+1 and have deathtouch.
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:When The Swarmweaver enters, create two 1/1 black and green Insect creature tokens with flying.\nDelirium — As long as there are four or more card types among cards in your graveyard, Insects and Spiders you control get +1/+1 and have deathtouch.

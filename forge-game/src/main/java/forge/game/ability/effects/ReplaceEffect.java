@@ -48,7 +48,7 @@ public class ReplaceEffect extends SpellAbilityEffect {
             for (Player key : AbilityUtils.getDefinedPlayers(card, sa.getParam("VarKey"), sa)) {
                 m.put(key, m.getOrDefault(key, 0) + AbilityUtils.calculateAmount(card, varValue, sa));
             }
-        } else {
+        } else if (varName != null) {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
         }
 

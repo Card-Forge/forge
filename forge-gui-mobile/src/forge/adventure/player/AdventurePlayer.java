@@ -12,7 +12,6 @@ import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.AdventureDeckEditor;
 import forge.adventure.scene.DeckEditScene;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
@@ -614,16 +613,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         String count = itemCount == null ? "" : String.valueOf(itemCount);
         TextraLabel actor = Controls.newTextraLabel("[%95]" + icon + "[WHITE]" + symbol + count + " " + message);
         actor.setPosition(x, y);
-        actor.addAction(Actions.after(
-                Actions.sequence(
-                        Actions.parallel(
-                                Actions.moveBy(0f, 5f, 4f),
-                                Actions.fadeIn(2f)
-                        ),
-                        Actions.fadeOut(3f),
-                        Actions.removeActor()
-                )));
-        GameHUD.getInstance().addActor(actor);
+        actor.addAction(Actions.sequence(
+            Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
+            Actions.hide(),
+            Actions.removeActor())
+        );
+        getCurrentGameStage().addActor(actor);
     }
     public void addCard(PaperCard card) {
         cards.add(card);
@@ -635,11 +630,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case Card:
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
-                if (reward.isNoSell()) {
+                if (reward.isAutoSell()) {
+                  autoSellCards.add(reward.getCard());
+                  refreshEditor();
+                } else if (reward.isNoSell()) {
                     noSellCards.add(reward.getCard());
-                    AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
-                    if (editor != null)
-                        editor.refresh();
+                    refreshEditor();
                 }
                 break;
             case Gold:
@@ -661,6 +657,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 addShards(reward.getCount());
                 break;
         }
+    }
+
+    private void refreshEditor() {
+        AdventureDeckEditor editor = ((AdventureDeckEditor) DeckEditScene.getInstance().getScreen());
+        if (editor != null)
+            editor.refresh();
     }
 
     private void addGold(int goldCount) {
@@ -742,11 +744,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean defeated() {
         gold = (int) (gold - (gold * difficultyData.goldLoss));
-        int newLife = (int) (life - (maxLife * difficultyData.lifeLoss));
-        life = Math.max(1, newLife);
+        life = (int) (life - (maxLife * difficultyData.lifeLoss));
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
-        return newLife < 1;
+        return life < 1;
         //If true, the player would have had 0 or less, and thus is actually "defeated" if the caller cares about it
     }
 
@@ -783,8 +784,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setShards(int number) {
-        shards = number;
-        onShardsChangeList.emit();
+        boolean changed = shards != number;
+        if (changed) {
+            shards = number;
+            onShardsChangeList.emit();
+        }
     }
 
     public void addBlessing(EffectData bless) {
@@ -838,6 +842,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return false;
     }
 
+    public ItemData getRandomEquippedArmor() {
+        Array<ItemData> armor = new Array<>();
+        for (String name : equippedItems.values()) {
+            ItemData data = ItemData.getItem(name);
+            if (data != null
+                && ("Boots".equalsIgnoreCase(data.equipmentSlot)
+                || "Body".equalsIgnoreCase(data.equipmentSlot)
+                || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
+                armor.add(data);
+            }
+        }
+        return armor.random();
+    }
+
     public ItemData getEquippedAbility1() {
         for (String name : equippedItems.values()) {
             ItemData data = ItemData.getItem(name);
@@ -873,6 +891,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public DifficultyData getDifficulty() {
         return difficultyData;
+    }
+
+    public boolean isHardorInsaneDifficulty() {
+        return "Hard".equalsIgnoreCase(difficultyData.name) || "Insane".equalsIgnoreCase(difficultyData.name);
     }
 
     public void renameDeck(String text) {

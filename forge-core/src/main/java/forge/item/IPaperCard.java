@@ -37,5 +37,22 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getCardRSpecImageKey();
     String getCardGSpecImageKey();
 
-    public boolean isRebalanced();
+    boolean isRebalanced();
+
+    @Override
+    default String getTranslationKey() {
+        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()))
+            return getName() + " $" + getFunctionalVariant();
+        return getName();
+    }
+
+    @Override
+    default String getUntranslatedType() {
+        return getRules().getType().toString();
+    }
+
+    @Override
+    default String getUntranslatedOracle() {
+        return getRules().getOracleText();
+    }
 }
