@@ -484,7 +484,10 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {
                 if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
-                    PaperCard pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    PaperCard pc = null;
+                    if (!card.getName().isEmpty()) {
+                        pc = StaticData.instance().getCommonCards().getCard(card.getName());
+                    }
                     int ofs = pc != null && Card.getCardForUi(pc).hasKeyword(Keyword.AFTERMATH) ? -12 : 12;
 
                     drawManaCost(g, card.getLeftSplitState().getManaCost(), ofs);
