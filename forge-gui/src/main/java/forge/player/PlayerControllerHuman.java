@@ -1857,12 +1857,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
+        final List<String> res = Lists.newArrayListWithCapacity(possibleReplacers.size());
+        for (ReplacementEffect r : possibleReplacers)
+            res.add(r.toString());
         String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         final String firstStr = first.toString();
         for (int i = 1; i < possibleReplacers.size(); i++) {
             // prompt user if there are multiple different options
             if (!possibleReplacers.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleReplacers);
+                int index = res.indexOf(getGui().one(prompt, res));
+                if (index > -1)
+                    return possibleReplacers.get(index);
             }
         }
         // return first option without prompting if all options are the same
@@ -1875,11 +1880,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleStatics.size() == 1 || !fullControl) {
             return first;
         }
+        final List<String> sts = Lists.newArrayListWithCapacity(possibleStatics.size());
+        for (StaticAbility s : possibleStatics)
+            sts.add(s.toString());
         final String firstStr = first.toString();
         for (int i = 1; i < possibleStatics.size(); i++) {
             // prompt user if there are multiple different options
             if (!possibleStatics.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleStatics);
+                int index = sts.indexOf(getGui().one(prompt, sts));
+                if (index > -1)
+                    return possibleStatics.get(index);
             }
         }
         // return first option without prompting if all options are the same
