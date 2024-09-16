@@ -1,0 +1,7 @@
+Name:Shapeshifter Token
+ManaCost:no cost
+Types:Creature Shapeshifter
+PT:*/*
+K:Changeling
+K:Deathtouch
+Oracle:Changeling, deathtouch
