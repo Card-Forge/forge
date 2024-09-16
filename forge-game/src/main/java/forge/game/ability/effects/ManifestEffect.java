@@ -9,10 +9,11 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
 public class ManifestEffect extends ManifestBaseEffect {
-
+    @Override
     protected String getDefaultMessage() {
         return Localizer.getInstance().getMessage("lblChooseCardToManifest");
     }
+    @Override
     protected Card internalEffect(Card c, Player p, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         final Card source = sa.getHostCard();
         Card rem = c.manifest(p, sa, moveParams);
