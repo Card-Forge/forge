@@ -31,7 +31,7 @@ public class TriggerUnlockDoor extends Trigger {
                 return false;
             }
             // This Face
-            if (!getCardStateName().equals(state.getCardStateName())) {
+            if (!getCardStateName().equals(state.getStateName())) {
                 return false;
             }
         }
