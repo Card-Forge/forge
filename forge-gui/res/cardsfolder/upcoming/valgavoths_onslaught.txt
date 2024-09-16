@@ -1,7 +1,7 @@
 Name:Valgavoth's Onslaught
 ManaCost:X X G
 Types:Instant
-A:SP$ Manifest | Dread$ True | Times$ X | RememberManifested$ True | SubAbility$ DBPutCounterAll
+A:SP$ ManifestDread | Amount$ X | RememberManifested$ True | SubAbility$ DBPutCounterAll
 SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Card.IsRemembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
