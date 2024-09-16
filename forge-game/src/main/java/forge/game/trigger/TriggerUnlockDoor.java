@@ -26,7 +26,12 @@ public class TriggerUnlockDoor extends Trigger {
 
         if (hasParam("ThisDoor")) {
             CardState state = (CardState) runParams.get(AbilityKey.CardState);
-            if (!getCardState().equals(state)) {
+            // This Card
+            if (!getHostCard().equals(state.getCard())) {
+                return false;
+            }
+            // This Face
+            if (!getCardStateName().equals(state.getCardStateName())) {
                 return false;
             }
         }
