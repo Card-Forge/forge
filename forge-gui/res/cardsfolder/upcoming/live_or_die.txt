@@ -1,0 +1,7 @@
+Name:Live or Die
+ManaCost:3 B B
+Types:Instant
+A:SP$ Charm | Choices$ DBChange,DBDestroy | CharmNum$ 1
+SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+Oracle:Choose one —\n• Return target creature card from your graveyard to the battlefield.\n• Destroy target creature.
