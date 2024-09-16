@@ -18,15 +18,11 @@
 package forge.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
+import java.util.function.*;
+import java.util.stream.Collector;
 
 import com.google.common.collect.Maps;
 import forge.item.InventoryItem;
@@ -72,6 +68,37 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
             }
         }
         return result;
+    }
+
+    public static <T extends InventoryItem> Collector<? extends InventoryItem, ?, ItemPool<T>> collector(Class<T> cls) {
+        return new Collector<InventoryItem, ItemPool<T>, ItemPool<T>>() {
+            @Override
+            public Supplier<ItemPool<T>> supplier() {
+                return () -> new ItemPool<T>(cls);
+            }
+
+            @Override
+            public BiConsumer<ItemPool<T>, InventoryItem> accumulator() {
+                return (pool, item) -> {
+                    if (cls.isInstance(item)) pool.add(cls.cast(item), 1);
+                };
+            }
+
+            @Override
+            public BinaryOperator<ItemPool<T>> combiner() {
+                return (first, second) -> {
+                    first.addAll(second);
+                    return first;
+                };
+            }
+
+            @Override public Function<ItemPool<T>, ItemPool<T>> finisher() {
+                return Function.identity();
+            }
+            @Override public Set<Characteristics> characteristics() {
+                return EnumSet.of(Characteristics.IDENTITY_FINISH);
+            }
+        };
     }
 
     protected ItemPool(final Map<T, Integer> items0, final Class<T> cls) {

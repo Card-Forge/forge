@@ -141,10 +141,10 @@ public final class CEditorVariant extends CDeckEditor<Deck> {
      */
     @Override
     public void resetTables() {
-        Iterable<PaperCard> allNT = FModel.getMagicDb().getVariantCards().getAllCards();
-        allNT = Iterables.filter(allNT, cardPoolCondition);
+        ItemPool<PaperCard> allNT = FModel.getMagicDb().getVariantCards().streamAllCards()
+                .filter(cardPoolCondition).collect(ItemPool.collector(PaperCard.class));
 
-        this.getCatalogManager().setPool(ItemPool.createFrom(allNT, PaperCard.class), true);
+        this.getCatalogManager().setPool(allNT, true);
         this.getDeckManager().setPool(this.controller.getModel().getOrCreate(this.sectionMode));
     }
 
