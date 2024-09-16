@@ -97,6 +97,7 @@ public enum TriggerType {
     LosesGame(TriggerLosesGame.class),
     ManaAdded(TriggerManaAdded.class),
     ManaExpend(TriggerManaExpend.class),
+    ManifestDread(TriggerManifestDread.class),
     Mentored(TriggerMentored.class),
     Milled(TriggerMilled.class),
     MilledOnce(TriggerMilledOnce.class),
