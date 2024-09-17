@@ -1,0 +1,11 @@
+Name:Convert to Slime
+ManaCost:3 B G
+Types:Sorcery
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to destroy | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBPump1 | SpellDescription$ Destroy up to one target artifact, up to one target creature, and up to one target enchantment. Delirium — Then if there are four or more card types among cards in your graveyard, create an X/X green Ooze token, where X is the total mana value of permanents destroyed this way.
+SVar:DBPump1:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature to destroy | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBPump2
+SVar:DBPump2:DB$ Pump | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment to destroy | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | RememberDestroyed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | Condition$ Delirium | TokenAmount$ 1 | TokenScript$ g_x_x_ooze | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$SumCMC
+Oracle:Destroy up to one target artifact, up to one target creature, and up to one target enchantment.\nDelirium — Then if there are four or more card types among cards in your graveyard, create an X/X green Ooze token, where X is the total mana value of permanents destroyed this way.

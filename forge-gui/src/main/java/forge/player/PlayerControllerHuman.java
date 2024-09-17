@@ -1064,7 +1064,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView orderMoveToZoneList(final CardCollectionView cards, final ZoneType destinationZone, final SpellAbility source) {
-        boolean bottomOfLibrary = false;
         if (source == null || source.getApi() != ApiType.ReorderZone) {
             if (destinationZone == ZoneType.Graveyard) {
                 switch (FModel.getPreferences().getPref(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED)) {
@@ -1087,17 +1086,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
-        if (source != null) {
-            if (source.hasParam("LibraryPosition")) {
-                bottomOfLibrary = Integer.parseInt(source.getParam("LibraryPosition")) < 0;
-            }
-        }
         tempShowCards(cards);
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
         switch (destinationZone) {
             case Library:
+                boolean bottomOfLibrary = (source != null && source.hasParam("LibraryPosition") ?
+                        AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) : 0) < 0;
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoLibrary"), localizer.getMessage(bottomOfLibrary ? "lblClosestToBottom" : "lblClosestToTop"), choices, null);
                 break;
             case Battlefield:
@@ -1861,12 +1857,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
+        final List<String> res = Lists.newArrayListWithCapacity(possibleReplacers.size());
+        for (ReplacementEffect r : possibleReplacers)
+            res.add(r.getDescription());
         String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
-        final String firstStr = first.toString();
-        for (int i = 1; i < possibleReplacers.size(); i++) {
+        final String firstStr = res.get(0);
+        for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
-            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleReplacers);
+            if (!res.get(i).equals(firstStr)) {
+                if (!GuiBase.isNetworkplay()) //non network game show more info since they don't need serialization
+                    return getGui().one(prompt, possibleReplacers);
+                int index = res.indexOf(getGui().one(prompt, res));
+                if (index > -1)
+                    return possibleReplacers.get(index);
             }
         }
         // return first option without prompting if all options are the same
@@ -1879,11 +1882,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleStatics.size() == 1 || !fullControl) {
             return first;
         }
-        final String firstStr = first.toString();
-        for (int i = 1; i < possibleStatics.size(); i++) {
+        final List<String> sts = Lists.newArrayListWithCapacity(possibleStatics.size());
+        for (StaticAbility s : possibleStatics)
+            sts.add(s.toString());
+        final String firstStr = sts.get(0);
+        for (int i = 1; i < sts.size(); i++) {
             // prompt user if there are multiple different options
-            if (!possibleStatics.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleStatics);
+            if (!sts.get(i).equals(firstStr)) {
+                if (!GuiBase.isNetworkplay()) //non network game show more info since they don't need serialization
+                    return getGui().one(prompt, possibleStatics);
+                int index = sts.indexOf(getGui().one(prompt, sts));
+                if (index > -1)
+                    return possibleStatics.get(index);
             }
         }
         // return first option without prompting if all options are the same

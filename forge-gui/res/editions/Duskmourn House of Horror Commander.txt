@@ -100,7 +100,7 @@ ScryfallCode=DSC
 92 C Arcane Signet @David Astruga
 93 U Lightning Greaves @Adrián Rodríguez Pérez
 94 U Sol Ring @John Stanko
-95 C Suspicious Bookcase @Tyler Walpole
+95 U Suspicious Bookcase @Tyler Walpole
 96 C Command Tower @Eddie Schillo
 97 C Auramancer @Rebecca Guay
 98 U Cast Out @Magali Villeneuve
@@ -314,7 +314,7 @@ ScryfallCode=DSC
 306 C Tangled Islet @Randy Gallegos
 307 R Temple of Deceit @Jonas De Ro
 308 R Temple of Enlightenment @Piotr Dura
-309 R Temple of Malady @James Paick
+309 R Temple of Malady @Titus Lunter
 310 R Temple of Malice @Jonas De Ro
 311 R Temple of Mystery @Piotr Dura
 312 R Temple of Silence @Adam Paquette

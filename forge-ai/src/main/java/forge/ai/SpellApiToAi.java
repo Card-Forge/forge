@@ -115,6 +115,7 @@ public enum SpellApiToAi {
             .put(ApiType.Mana, ManaAi.class)
             .put(ApiType.ManaReflected, CannotPlayAi.class)
             .put(ApiType.Manifest, ManifestAi.class)
+            .put(ApiType.ManifestDread, ManifestAi.class)
             .put(ApiType.Meld, MeldAi.class)
             .put(ApiType.Mill, MillAi.class)
             .put(ApiType.MoveCounter, CountersMoveAi.class)
