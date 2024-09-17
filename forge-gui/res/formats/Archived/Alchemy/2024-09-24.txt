@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (DSK)
+Type:Archived
+Subtype:Arena
+Effective:2024-09-24
+Sets:ANA, ANB, WOE, YWOE, LCI, YLCI, MKM, YMKM, OTJ, BIG, YOTJ, BLB, YBLB, DSK
