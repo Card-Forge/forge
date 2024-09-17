@@ -448,7 +448,7 @@ public class Main extends AndroidApplication {
                 + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB\n\nMinimum Requirements:" : "";
         String lowV = Build.VERSION.SDK_INT < Build.VERSION_CODES.Q ? "\nAPI: Android 10 or higher" : "";
         String lowM = totalRAM < 3500 ? "\nRAM: 4GB RAM or higher" : "";
-        if (landscapeMode && Build.VERSION.SDK_INT > 32) { //Android 13 onwards
+        if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
         loadGame(info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
