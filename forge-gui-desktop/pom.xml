@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.1.2</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -108,7 +108,7 @@
             <plugin>
                 <groupId>se.bjurr.gitchangelog</groupId>
                 <artifactId>git-changelog-maven-plugin</artifactId>
-                <version>1.92</version>
+                <version>1.101.0</version>
                 <executions>
                     <execution>
                         <id>GenerateGitChangelog</id>
@@ -188,12 +188,34 @@
         <dependency>
             <groupId>com.mortennobel</groupId>
             <artifactId>java-image-scaling</artifactId>
-            <version>0.8.5</version>
+            <version>0.8.6</version>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-testng-common</artifactId>
             <version>2.0.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.beust</groupId>
+                    <artifactId>jcommander</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.objenesis</groupId>
+                    <artifactId>objenesis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy-agent</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- declare a specific dependency to override org.powermock's transitive dependency -->
         <dependency>
@@ -201,24 +223,52 @@
             <artifactId>testng</artifactId>
             <version>7.4.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.beust</groupId>
+                    <artifactId>jcommander</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-module-testng</artifactId>
             <version>2.0.9</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.testng</groupId>
+                    <artifactId>testng</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-core</artifactId>
             <version>2.0.9</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy-agent</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
             <artifactId>powermock-api-mockito2</artifactId>
             <version>2.0.9</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mockito</groupId>
+                    <artifactId>mockito-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.powermock</groupId>
@@ -231,38 +281,52 @@
             <artifactId>mockito-core</artifactId>
             <version>3.12.4</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.objenesis</groupId>
+                    <artifactId>objenesis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.bytebuddy</groupId>
+                    <artifactId>byte-buddy-agent</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
-            <version>1.12.3</version>
+            <version>1.14.5</version>
         </dependency>
         <dependency>
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy-agent</artifactId>
-            <version>1.12.3</version>
+            <version>1.14.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
-            <version>3.2</version>
+            <version>3.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>2.3.31</version>
+            <version>2.3.32</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>jlayer</artifactId>
-            <version>1.0.1-1</version>
+            <version>1.0.1.4</version>
         </dependency>
         <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
-            <version>1.78</version>
+            <version>1.82</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -367,7 +431,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -490,7 +554,7 @@
                                     <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
-                                    <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+                                    <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-11-lts</downloadUrl>
                                     <icon>src/main/config/forge.ico</icon>
                                     <classPath>
                                         <mainClass>forge.view.Main</mainClass>
@@ -554,7 +618,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -712,7 +776,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -827,7 +891,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>

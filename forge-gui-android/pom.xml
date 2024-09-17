@@ -414,7 +414,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -472,7 +472,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
