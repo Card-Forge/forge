@@ -6,4 +6,5 @@ SVar:ChooseCrtr:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creatur
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
 Oracle:Each player chooses any number of creatures they control with total power 4 or less, then sacrifices all other creatures they control.
