@@ -35,9 +35,11 @@ import forge.game.player.*;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementEffectView;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityView;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -1857,19 +1859,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = Lists.newArrayListWithCapacity(possibleReplacers.size());
-        for (ReplacementEffect r : possibleReplacers)
-            res.add(r.getDescription());
-        String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
+        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::getDescription).collect(Collectors.toList());
         final String firstStr = res.get(0);
+        final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
             if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay()) //non network game show more info since they don't need serialization
+                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
                     return getGui().one(prompt, possibleReplacers);
-                int index = res.indexOf(getGui().one(prompt, res));
-                if (index > -1)
-                    return possibleReplacers.get(index);
+                ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
+                return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
             }
         }
         // return first option without prompting if all options are the same
@@ -1882,18 +1881,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleStatics.size() == 1 || !fullControl) {
             return first;
         }
-        final List<String> sts = Lists.newArrayListWithCapacity(possibleStatics.size());
-        for (StaticAbility s : possibleStatics)
-            sts.add(s.toString());
+        final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toList());
         final String firstStr = sts.get(0);
         for (int i = 1; i < sts.size(); i++) {
             // prompt user if there are multiple different options
             if (!sts.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay()) //non network game show more info since they don't need serialization
+                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
                     return getGui().one(prompt, possibleStatics);
-                int index = sts.indexOf(getGui().one(prompt, sts));
-                if (index > -1)
-                    return possibleStatics.get(index);
+                StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
+                return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
             }
         }
         // return first option without prompting if all options are the same

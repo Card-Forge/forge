@@ -241,6 +241,14 @@ public enum TrackableProperty {
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
 
+    //ReplacementEffectView
+    RE_HostCard(TrackableTypes.CardViewType),
+    RE_Description(TrackableTypes.StringType),
+
+    //StaticAbilityView
+    ST_HostCard(TrackableTypes.CardViewType),
+    ST_Description(TrackableTypes.StringType),
+
     //HasBackSide
     BackSideName(TrackableTypes.StringType),
     HasBackSide(TrackableTypes.BooleanType),
