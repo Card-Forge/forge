@@ -62,6 +62,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private int mayPlayTurn = 0;
 
     private SpellAbility payingTrigSA;
+    private StaticAbilityView view = null;
 
     @Override
     public final int getId() {
@@ -229,6 +230,16 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         this.layers = this.generateLayer();
         this.hostCard = host;
         this.setCardState(state);
+    }
+
+    public StaticAbilityView getView() {
+        if (view == null)
+            view = new StaticAbilityView(this);
+        else {
+            view.updateHostCard(this);
+            view.updateDescription(this);
+        }
+        return view;
     }
 
     public final CardCollectionView applyContinuousAbilityBefore(final StaticAbilityLayer layer, final CardCollectionView preList) {
