@@ -2,7 +2,7 @@ Name:Regna's Sanction
 ManaCost:3 W
 Types:Sorcery
 A:SP$ AssignGroup | Defined$ Player | Choices$ FriendRepeat,FoeRepeat | AILogic$ FriendOrFoe | SpellDescription$ For each player, choose friend or foe. Each friend puts a +1/+1 counter on each creature they control. Each foe chooses one untapped creature they control, then taps the rest.
-SVar:FriendRepeat:DB$ PutCounterAll | ValidCards$ Creature.RememberedPlayerCtrl | CounterType$ P1P1 | CounterNum$ 1 | Placer$ Remembered | SpellDescription$ Each friend puts a +1/+1 counter on each creature they control.
+SVar:FriendRepeat:DB$ PutCounterAll | ValidCards$ Creature.RememberedPlayerCtrl | CounterType$ P1P1 | CounterNum$ 1 | Placer$ Controller | SpellDescription$ Each friend puts a +1/+1 counter on each creature they control.
 SVar:FoeRepeat:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.untapped | ControlledByPlayer$ Chooser | Amount$ 1 | ChoiceTitle$ Choose one creature to keep untapped | Mandatory$ True | Reveal$ True | SubAbility$ DBTapAll | SpellDescription$ Each foe chooses one untapped creature they control, then taps the rest.
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.nonChosenCard+RememberedPlayerCtrl | TapperController$ True
 SVar:NeedsToPlayVar:Z GE3
