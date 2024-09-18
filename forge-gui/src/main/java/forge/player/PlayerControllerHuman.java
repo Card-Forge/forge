@@ -1859,7 +1859,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::getDescription).collect(Collectors.toList());
+        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
         final String firstStr = res.get(0);
         final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         for (int i = 1; i < res.size(); i++) {
