@@ -45,20 +45,6 @@ public class RepeatEachAi extends SpellAbilityAi {
                     return false;
                 }
             }
-        } else if ("OpponentHasCreatures".equals(logic)) { //TODO convert this to NeedsToPlayVar
-            for (Player opp : aiPlayer.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        } else if ("OpponentHasMultipleCreatures".equals(logic)) {
-            for (Player opp : aiPlayer.getOpponents()) {
-                if (opp.getCreaturesInPlay().size() > 1) {
-                    return true;
-                }
-            }
-            return false;
         } else if ("AllPlayerLoseLife".equals(logic)) {
             final Card source = sa.getHostCard();
             SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
