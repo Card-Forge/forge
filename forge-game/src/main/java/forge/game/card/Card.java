@@ -8145,6 +8145,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
+    public boolean lockRoom(Player p, CardStateName stateName) {
+        if (!unlockedRooms.contains(stateName) || (stateName != CardStateName.LeftSplit && stateName != CardStateName.RightSplit)) {
+            return false;
+        }
+        unlockedRooms.remove(stateName);
+
+        updateRooms();
+
+        return true;
+    }
+
     public void updateRooms() {
         if (!this.isRoom()) {
             return;
