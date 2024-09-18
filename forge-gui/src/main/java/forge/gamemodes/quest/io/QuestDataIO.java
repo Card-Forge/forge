@@ -461,6 +461,11 @@ public class QuestDataIO {
                 writer.addAttribute("s", set);
                 writer.endNode();
             }
+            for(String extra : format.getAdditionalCards()){
+                writer.startNode("extra");
+                writer.addAttribute("s", extra);
+                writer.endNode();
+            }
             for (String ban : format.getBannedCardNames()) {
                 writer.startNode("ban");
                 writer.addAttribute("s", ban);
@@ -475,6 +480,7 @@ public class QuestDataIO {
             String unlocksUsed = reader.getAttribute("unlocksUsed");
             boolean canUnlock = !("0".equals(reader.getAttribute("canUnlock")));
             List<String> allowedSets = new ArrayList<>();
+            List<String> extraCards = new ArrayList<>();
             List<String> bannedCards = new ArrayList<>();
             reader.moveUp();
             while (reader.hasMoreChildren()) {
@@ -488,9 +494,12 @@ public class QuestDataIO {
                     allowedSets.add(reader.getAttribute("s"));
                     // System.out.println("Added + " + toSets + " to legal sets");
                 }
+                else if(nodename.equals("extra")){
+                    extraCards.add(reader.getAttribute("s"));
+                }
                 reader.moveUp();
             }
-            GameFormatQuest res = new GameFormatQuest(name, allowedSets, bannedCards);
+            GameFormatQuest res = new GameFormatQuest(name, allowedSets, extraCards, bannedCards);
             try {
                 if (StringUtils.isNotEmpty(unlocksUsed)) {
                     setFinalField(GameFormatQuest.class, "unlocksUsed", res, Integer.parseInt(unlocksUsed));

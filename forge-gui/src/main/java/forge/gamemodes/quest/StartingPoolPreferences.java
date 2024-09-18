@@ -29,6 +29,8 @@ import java.util.List;
 public final class StartingPoolPreferences {
 
     public enum PoolType {
+        /** Using this method to generate cards in the shop is faster. */
+        SHOP,
         /** Cards of the selected colors will be given equal odds during generation. */
         BALANCED,
         /** Anything goes. Selected colors are ignored and what goes in the pool is almost entirely random. */

@@ -231,7 +231,17 @@ public final class BoosterUtils {
             final List<Byte> preferredColors = userPrefs.getPreferredColors();
 
             switch (userPrefs.getPoolType()) {
-
+                case SHOP:
+                    possibleColors.clear();
+                    possibleColors.add(MagicColor.BLUE);
+                    possibleColors.add(MagicColor.RED);
+                    possibleColors.add(MagicColor.BLACK);
+                    possibleColors.add(MagicColor.WHITE);
+                    possibleColors.add(MagicColor.GREEN);
+                    possibleColors.add(MagicColor.COLORLESS);
+                    preferredColors.clear();
+                    populateBalancedFilters(colorFilters, preferredColors, cardPool, includeArtifacts);
+                    break;
                 case RANDOM_BALANCED:
                     preferredColors.clear();
                     int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (MyRandom.getRandom().nextDouble() * COLOR_COUNT_PROBABILITIES.length)];
@@ -439,6 +449,12 @@ public final class BoosterUtils {
         return result;
     }
 
+    //faster way of generating singles
+    public static List<PaperCard> generateShopSingles(final Iterable<PaperCard> source, final Predicate<PaperCard> filter, final int cntNeeded){
+        final StartingPoolPreferences userPrefs = new StartingPoolPreferences(StartingPoolPreferences.PoolType.SHOP, Lists.newArrayList(), true, false, true, cntNeeded);
+        final List<Predicate<CardRules>> colorFilters = getColorFilters(userPrefs, (List<PaperCard>)source);
+        return generateCards(source, filter, cntNeeded, colorFilters, true);
+    }
 
     /**
      * Parse a limitation for a reward or chosen card.
@@ -519,8 +535,10 @@ public final class BoosterUtils {
             // Type 5: a predetermined extra tournament ("starter") pack
             CardEdition edition = FModel.getMagicDb().getEditions().get(temp[2]);
             rewards.add(TournamentPack.fromSet(edition));
-        }
-        else if (temp.length > 0) {
+        } else if(temp.length >= 3 && temp[0].equalsIgnoreCase("booster") && temp[1].equalsIgnoreCase("quest")) {
+            // Type 6: a booster pack from the current quest world cardPool
+            rewards.add(BoosterPack.fromColor(temp[2]));
+        }else if (temp.length > 0) {
             // default: assume we are asking for a single copy of a specific card
             final PaperCard specific = FModel.getMagicDb().getCommonCards().getCard(s);
             if (specific != null) {

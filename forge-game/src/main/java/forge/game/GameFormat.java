@@ -92,11 +92,11 @@ public class GameFormat implements Comparable<GameFormat> {
 
     private final int index;
 
-    public GameFormat(final String fName, final Iterable<String> sets, final List<String> bannedCards) {
-        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, null, null, 0, FormatType.CUSTOM, FormatSubType.CUSTOM);
+    public GameFormat(final String fName, final Iterable<String> sets, final List<String> additionalCards, final List<String> bannedCards) {
+        this(fName, parseDate(DEFAULTDATE), sets, bannedCards, null, false, additionalCards, null, 0, FormatType.CUSTOM, FormatSubType.CUSTOM);
     }
-    
-    public static final GameFormat NoFormat = new GameFormat("(none)", parseDate(DEFAULTDATE) , null, null, null, false
+
+    public static final GameFormat NoFormat = new GameFormat("(none)", parseDate(DEFAULTDATE), null, null, null, false
             , null, null, Integer.MAX_VALUE, FormatType.CUSTOM, FormatSubType.CUSTOM);
     
     public GameFormat(final String fName, final Date effectiveDate, final Iterable<String> sets, final List<String> bannedCards,
@@ -146,20 +146,57 @@ public class GameFormat implements Comparable<GameFormat> {
             p = Predicates.and(p, Predicates.not(IPaperCard.Predicates.Presets.IS_REBALANCED));
         }
 
-        if (!this.getAllowedSetCodes().isEmpty()) {
-            p = Predicates.and(p, printed ?
-                    IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed) :
-                    StaticData.instance().getCommonCards().wasPrintedInSets(this.getAllowedSetCodes()));
+        //creates a predicate for additional cards
+        Predicate<PaperCard> additionalPred = null;
+        if (!this.getAdditionalCards().isEmpty()) {
+            List<String> cardNames = Lists.newArrayList();
+            List<PaperCard> cards = Lists.newArrayList();
+            for(String card : this.getAdditionalCards()){
+                String[] split = card.split("@");
+                PaperCard pCard = null;
+                if(split.length == 2){
+                    pCard = StaticData.instance().getCommonCards().getCard(split[0], split[1]);
+                    if(pCard != null){
+                        cards.add(pCard);
+                        cardNames.add(split[0]);
+                    }
+                }else{
+                    pCard = StaticData.instance().getCommonCards().getUniqueByName(split[0]);
+                    if(pCard != null){
+                        cards.add(pCard);
+                        cardNames.add(pCard.getName());
+                    }
+                }
+            }
+            additionalPred = IPaperCard.Predicates.names(cardNames);
         }
+
+        //in case allowed set codes are not empty and there are additional cards, it'll set the predicate to account for both
+        if (!this.getAllowedSetCodes().isEmpty()) {
+            Predicate<PaperCard> setsPred = null;
+            if(printed){
+                setsPred = IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed);
+            }else{
+                setsPred = (Predicate<PaperCard>) StaticData.instance().getCommonCards().wasPrintedInSets(this.getAllowedSetCodes());
+            }
+            if(additionalPred != null)
+            {
+                p = Predicates.and(p, Predicates.or(setsPred, additionalPred));
+            }else{
+                p = Predicates.and(p, setsPred);
+            }
+        }
+        //if allowed set codes are empty, the whole format will only be additional cards (if there are any)
+        else if(additionalPred != null){
+            p = Predicates.and(p, additionalPred);
+        }
+
         if (!this.getAllowedRarities().isEmpty()) {
             List<Predicate<? super PaperCard>> crp = Lists.newArrayList();
             for (CardRarity cr: this.getAllowedRarities()) {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
             p = Predicates.and(p, Predicates.or(crp));
-        }
-        if (!this.getAdditionalCards().isEmpty()) {
-            p = Predicates.or(p, IPaperCard.Predicates.names(this.getAdditionalCards()));
         }
         return p;
     }
@@ -236,6 +273,41 @@ public class GameFormat implements Comparable<GameFormat> {
                 }
             }
         }
+        //adds extra cards to the pool
+        for(String extraCard : additionalCardNames_ro){
+            String[] split = extraCard.split("@");
+            if(split.length == 2){
+                PaperCard pc = commonCards.getCard(split[0], split[1]);
+                if(pc != null){
+                    cards.add(pc);
+                }
+            }else{
+                PaperCard pc = commonCards.getCard(extraCard);
+                if(pc != null){
+                    cards.add(pc);
+                }
+            }
+        }
+        return cards;
+    }
+    public List<PaperCard> getAllExtraCards(){
+        List<PaperCard> cards = new ArrayList<>();
+        CardDb commonCards = StaticData.instance().getCommonCards();
+        //adds extra cards to the pool
+        for(String extraCard : additionalCardNames_ro){
+            String[] split = extraCard.split("@");
+            if(split.length == 2){
+                PaperCard pc = commonCards.getCard(split[0], split[1]);
+                if(pc != null){
+                    cards.add(pc);
+                }
+            }else{
+                PaperCard pc = commonCards.getCard(extraCard);
+                if(pc != null){
+                    cards.add(pc);
+                }
+            }
+        }
         return cards;
     }
 
@@ -247,8 +319,9 @@ public class GameFormat implements Comparable<GameFormat> {
         return this.filterPrinted;
     }
 
+    //if there arent additional cards nor allowed sets, it will return false
     public boolean isSetLegal(final String setCode) {
-        return this.getAllowedSetCodes().isEmpty() || this.getAllowedSetCodes().contains(setCode);
+        return (this.getAllowedSetCodes().isEmpty() && this.getAdditionalCards().isEmpty()) || this.getAllowedSetCodes().contains(setCode);
     }
     
     private boolean isPoolLegal(final CardPool allCards) {
