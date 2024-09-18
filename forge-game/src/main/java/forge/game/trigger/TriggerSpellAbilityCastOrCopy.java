@@ -139,6 +139,9 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         if (!matchesValidParam("ValidSA", spellAbility)) {
             return false;
         }
+        if (!matchesValidParam("ValidSAonCard", spellAbility, cast)) {
+            return false;
+        }
 
         if (hasParam("TargetsValid")) {
             SpellAbility sa = spellAbility;
