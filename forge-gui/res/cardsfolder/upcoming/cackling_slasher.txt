@@ -3,7 +3,6 @@ ManaCost:3 B
 Types:Creature Human Assassin
 PT:3/3
 K:Deathtouch
-K:etbCounter:P1P1:1:CheckSVar$ Morbid:CARDNAME enters with a +1/+1 counter on it if a creature died this turn.
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+K:etbCounter:P1P1:1:Count$Morbid:CARDNAME enters with a +1/+1 counter on it if a creature died this turn.
 DeckHas:Ability$Counters
 Oracle:Deathtouch\nCackling Slasher Buzzard enters with a +1/+1 counter on it if a creature died this turn.
