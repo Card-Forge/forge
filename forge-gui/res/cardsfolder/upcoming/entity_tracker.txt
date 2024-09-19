@@ -5,6 +5,6 @@ PT:2/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, draw a card.
 T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigDraw | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, draw a card.
-SVar:TrigBDraw:DB$ Draw
+SVar:TrigDraw:DB$ Draw
 DeckNeeds:Type$Enchantment
 Oracle:Flash\nEerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, draw a card.
