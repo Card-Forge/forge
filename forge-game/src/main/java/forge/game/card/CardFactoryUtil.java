@@ -1415,7 +1415,7 @@ public class CardFactoryUtil {
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Impending")) {
             // Remove Time counter trigger
-            final String endTrig = "Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_TIME" +
+            final String endTrig = "Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+impended+counters_GE1_TIME" +
                     " | Secondary$ True | TriggerDescription$ At the beginning of your end step, remove a time counter from it.";
 
             final String remove = "DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1";
@@ -2354,17 +2354,7 @@ public class CardFactoryUtil {
             final String effect = "DB$ PutCounter | Defined$ ReplacedCard | CounterType$ TIME | CounterNum$ " + m
                     + " | ETB$ True | SpellDescription$ " + desc;
 
-            SpellAbility repAb = AbilityFactory.getAbility(effect, card);
-
-            String staticEffect = "DB$ Effect | StaticAbilities$ NoCreature | ExileOnCounter$ TIME | Duration$ UntilHostLeavesPlay";
-
-            String staticNoCreature = "Mode$ Continuous | Affected$ Card.EffectSource+counters_GE1_TIME | RemoveType$ Creature | Description$ EFFECTSOURCE isn't a creature.";
-
-            AbilitySub effectAb = (AbilitySub)AbilityFactory.getAbility(staticEffect, card);
-            effectAb.setSVar("NoCreature", staticNoCreature);
-            repAb.setSubAbility(effectAb);
-
-            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, repAb, false, true, intrinsic, "Card.Self+impended", "");
+            final ReplacementEffect re = createETBReplacement(card, ReplacementLayer.Other, effect, false, true, intrinsic, "Card.Self+impended", "");
 
             inst.addReplacement(re);
         } else if (keyword.equals("Jump-start")) {
@@ -3997,6 +3987,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Horsemanship")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.withoutHorsemanship | Secondary$ True " +
                     " | Description$ Horsemanship (" + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.startsWith("Impending")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self+impended+counters_GE1_TIME | RemoveType$ Creature | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+!SharesColorWith | Secondary$ True " +

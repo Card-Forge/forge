@@ -8,7 +8,7 @@ SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Lifelink
 SVar:DBMurder:DB$ DestroyAll | ValidCards$ Creature.powerLE2 | SpellDescription$ Destroy each creature with power 2 or less.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Creature.YouOwn | SelectPrompt$ Select up to two creature cards from your graveyard to return to your hand | Hidden$ True | StackDescription$ {p:You} returns up to two creature cards from their graveyard to their hand. | SpellDescription$ Return up to two creature cards from your graveyard to your hand.
 SVar:DBSacrifice:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ Each opponent sacrifices a creature with the highest power among creatures they control.
-SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | Reveal$ True | RememberChosen$ True
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice|LifeGain|Counters & Keyword$Lifelink
