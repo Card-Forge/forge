@@ -76,6 +76,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         OTHER,  // FALLBACK CATEGORY
         CUSTOM_SET; // custom sets
 
+        public static final EnumSet<Type> REPRINT_SET_TYPES = EnumSet.of(REPRINT, PROMO, COLLECTOR_EDITION);
+
         public String getBoosterBoxDefault() {
             switch (this) {
                 case CORE:

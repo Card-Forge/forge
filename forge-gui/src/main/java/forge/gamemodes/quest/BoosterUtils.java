@@ -23,16 +23,12 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import forge.card.*;
 import forge.item.*;
 import forge.util.Iterables;
 import forge.util.Predicates;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.card.CardEdition;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
-import forge.card.MagicColor;
-import forge.card.PrintSheet;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
@@ -115,12 +111,13 @@ public final class BoosterUtils {
 
         }
 
-        Predicate<PaperCard> filter = x -> true;
+        Predicate<PaperCard> filter = CardDb.EDITION_NON_PROMO;
         if (formatStartingPool != null) {
-            filter = formatStartingPool.getFilterPrinted();
+            filter = filter.and(formatStartingPool.getFilterPrinted());
         }
 
-        final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllNonPromoCards().filter(filter).collect(Collectors.toList());
+        final List<PaperCard> cardPool = FModel.getMagicDb().getCommonCards().streamAllCards()
+                .filter(filter).collect(Collectors.toList());
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {
@@ -475,6 +472,7 @@ public final class BoosterUtils {
 
             List<Predicate<PaperCard>> preds = new ArrayList<>();
             preds.add(PaperCardPredicates.IS_RARE_OR_MYTHIC); // Determine rarity
+            preds.add(CardDb.EDITION_NON_PROMO);
 
             if (temp.length > 2) {
                 Predicate<CardRules> cr = parseRulesLimitation(temp[1]);
@@ -488,8 +486,9 @@ public final class BoosterUtils {
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
-            Predicate<PaperCard> predicate = preds.size() == 1 ? preds.get(0) : Predicates.and(preds);
-            FModel.getMagicDb().getCommonCards().streamAllNonPromoCards().filter(predicate).forEach(ps::add);
+            Predicate<PaperCard> predicate = Predicates.and(preds);
+            FModel.getMagicDb().getCommonCards().streamAllCards()
+                    .filter(predicate).forEach(ps::add);
             rewards.addAll(ps.random(qty, true));
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice

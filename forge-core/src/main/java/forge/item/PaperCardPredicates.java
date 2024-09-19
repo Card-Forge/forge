@@ -177,7 +177,6 @@ public abstract class PaperCardPredicates {
         }
     }
 
-    //TODO: Remove
     public static Predicate<PaperCard> fromRules(Predicate<CardRules> cardRulesPredicate) {
         return paperCard -> cardRulesPredicate.test(paperCard.getRules());
     }

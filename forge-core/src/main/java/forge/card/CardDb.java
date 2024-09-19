@@ -76,9 +76,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             latestFirst = latestSetFirst;
         }
 
+        private static final EnumSet<Type> ALLOWED_SET_TYPES = EnumSet.of(Type.CORE, Type.EXPANSION, Type.REPRINT);
+
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
-            return !filterSets || ed.getType() == Type.CORE || ed.getType() == Type.EXPANSION || ed.getType() == Type.REPRINT;
+            return !filterSets || ALLOWED_SET_TYPES.contains(ed.getType());
         }
     }
 
@@ -959,54 +961,33 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public Stream<PaperCard> streamUniqueCardsNoAlt() {
         return uniqueCardsByName.entrySet().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
     }
-    public Stream<PaperCard> streamAllNonPromoCards() {
-        //TODO: This should probably just be a filter to tack onto streamAllCards
-        return streamAllCards().filter(paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-            } catch (Exception ex) {
-                return false;
-            }
-            return edition != null && edition.getType() != Type.PROMO;
-        });
-    }
 
     public Stream<ICardFace> streamAllFaces() {
         return facesByName.values().stream();
     }
 
-    public Collection<PaperCard> getAllNonPromoCards() {
-        return streamAllNonPromoCards().collect(Collectors.toList());
-    }
-
-    public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
-        return streamUniqueCardsNoAlt().filter(paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
-                    return false;
-            } catch (Exception ex) {
-                return false;
-            }
+    public static final Predicate<PaperCard> EDITION_NON_PROMO = paperCard -> {
+        String code = paperCard.getEdition();
+        CardEdition edition = StaticData.instance().getCardEdition(code);
+        if(edition == null && code.equals("???"))
             return true;
-        }).collect(Collectors.toList());
+        return edition != null && edition.getType() != Type.PROMO;
+    };
+
+    public static final Predicate<PaperCard> EDITION_NON_REPRINT = paperCard -> {
+        String code = paperCard.getEdition();
+        CardEdition edition = StaticData.instance().getCardEdition(code);
+        if(edition == null && code.equals("???"))
+            return true;
+        return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
+    };
+
+    public Collection<PaperCard> getAllNonPromoCards() {
+        return streamAllCards().filter(EDITION_NON_PROMO).collect(Collectors.toList());
     }
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        //TODO: This should probably also be a stream filter.
-        return streamAllCardsNoAlt().filter(paperCard -> {
-            CardEdition edition = null;
-            try {
-                edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
-                if (edition.getType() == Type.PROMO || edition.getType() == Type.REPRINT || edition.getType()==Type.COLLECTOR_EDITION)
-                    return false;
-            } catch (Exception ex) {
-                return false;
-            }
-            return true;
-        }).collect(Collectors.toList());
+        return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
 
     public String getName(final String cardName) {

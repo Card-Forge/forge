@@ -185,7 +185,8 @@ public class ConquestUtil {
 
     public static Iterable<PaperCard> getStartingPlaneswalkerOptions(final PaperCard startingCommander) {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
-        final List<String> selected = Lists.newArrayList();
+        final Set<String> selected = Sets.newHashSet();
+        //TODO: Could make this more efficient by streaming unique cards and then mapping them to an acceptable print if they aren't already...
         return Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), card -> {
             if (selected.contains(card.getName())) {
                 return false;
