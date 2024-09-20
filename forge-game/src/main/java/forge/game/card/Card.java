@@ -188,7 +188,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
-    private boolean becameTargetThisTurn = false;
+    private boolean becameTargetThisTurn, valiant = false;
     private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -3701,6 +3701,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public void setBecameTargetThisTurn(boolean becameTargetThisTurn0) {
         becameTargetThisTurn = becameTargetThisTurn0;
+    }
+    public boolean isValiant() {
+        return valiant;
+    }
+    public void setValiant(boolean v) {
+        valiant = v;
     }
 
     public boolean hasStartedTheTurnUntapped() {
