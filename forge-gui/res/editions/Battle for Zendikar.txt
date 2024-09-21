@@ -13,285 +13,255 @@ AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=BFZ
 
 [cards]
-54 U Adverse Conditions @Jason Rainville
-138 M Akoum Firebird @Chris Rahn
-139 R Akoum Hellkite @Jaime Jones
-140 U Akoum Stonewaker @Victor Adame Minguez
-222 R Aligned Hedron Network @Richard Wright
-228 R Ally Encampment @Jonas De Ro
-103 C Altar's Reap @Tyler Jacobson
-18 U Angel of Renewal @Todd Lockwood
-208 R Angelic Captain @Volkan Baǵa
-19 C Angelic Gift @Josu Hernaiz
-69 C Anticipate @Tyler Jacobson
 1 U Bane of Bala Ged @Chase Stone
-127 R Barrage Tyrant @Chris Rallis
-170 R Beastcaller Savant @Anthony Palumbo
-141 C Belligerent Whiptail @Jakub Kasper
-55 C Benthic Infiltrator @Mathias Kollros
 2 R Blight Herder @Todd Lockwood
-229 U Blighted Cataract @Vincent Proce
-230 U Blighted Fen @Jonas De Ro
-231 U Blighted Gorge @Jung Park
-232 U Blighted Steppe @Yeong-Hao Han
-233 U Blighted Woodland @Jason Felix
-163 C Blisterpod @Ryan Barger
-104 U Bloodbond Vampire @Anna Steinbauer
-142 C Boiling Earth @Titus Lunter
-105 C Bone Splinters @Deruchenko Alexander
 3 U Breaker of Armies @Richard Wright
-70 C Brilliant Spectrum @Winona Nelson
-209 R Bring to Light @Jonas De Ro
-199 R Brood Butcher @Daarken
-164 U Brood Monitor @Izzy
-171 C Broodhunter Wurm @Svetlin Velinov
-200 R Brutal Expulsion @Victor Adame Minguez
-165 C Call the Scions @Winona Nelson
-234 R Canopy Vista @Adam Paquette
-106 U Carrier Thrall @Lius Lasahido
-201 U Catacomb Sifter @Craig J Spearing
-143 U Chasm Guide @Johannes Voss
-235 R Cinder Glade @Adam Paquette
-20 C Cliffside Lookout @Eric Deschamps
-71 C Cloud Manta @Mike Bierek
-72 C Clutch of Currents @Igor Kieryluk
-73 U Coastal Discovery @Kieran Yanner
-90 C Complete Disregard @Peter Mohrbacher
 4 R Conduit of Ruin @Slawomir Maniak
-74 C Coralhelm Guide @Viktor Titov
-21 C Courier Griffin @Kieran Yanner
-128 U Crumble to Dust @James Paick
-56 U Cryptic Cruiser @Svetlin Velinov
-91 C Culling Drone @Alejandro Mirabal
-75 U Dampening Pulse @Johann Bodin
 5 U Deathless Behemoth @Jason Felix
-107 R Defiant Bloodlord @Craig J Spearing
-108 C Demon's Grasp @David Gaillet
 6 R Desolation Twin @Jack Wang
-76 C Dispel @Chase Stone
-92 C Dominator Drone @James Zapata
-144 M Dragonmaster Outcast @Raymond Swanland
-109 M Drana, Liberator of Malakir @Mike Bierek
-210 U Drana's Emissary @Karl Kopinski
-57 R Drowner of Hope @Tomasz Jedruszek
-202 R Dust Stalker @Clint Cearley
-110 C Dutiful Return @Anna Steinbauer
-172 C Earthen Arms @Dan Scott
 7 C Eldrazi Devastator @Joseph Meehan
-58 C Eldrazi Skyspawner @Chase Stone
+8 R Endless One @Jason Felix
+9 R Gruesome Slaughter @Aleksi Briclot
+10 C Kozilek's Channeler @Jason Felix
+11 M Oblivion Sower @Jaime Jones
+12 C Ruin Processor @Slawomir Maniak
+13 C Scour from Existence @Clint Cearley
+14 U Titan's Presence @Slawomir Maniak
+15 M Ulamog, the Ceaseless Hunger @Michael Komarck
+16 U Ulamog's Despoiler @Peter Mohrbacher
+17 M Void Winnower @Chase Stone
+18 U Angel of Renewal @Todd Lockwood
+19 C Angelic Gift @Josu Hernaiz
+20 C Cliffside Lookout @Eric Deschamps
+21 C Courier Griffin @Kieran Yanner
 22 R Emeria Shepherd @Cynthia Sheppard
 23 U Encircling Fissure @Igor Kieryluk
-8 R Endless One @Jason Felix
-236 C Evolving Wilds @Izzy
-77 R Exert Influence @Magali Villeneuve
 24 U Expedition Envoy @David Palumbo
-166 C Eyeless Watcher @Yohann Schepacz
-203 R Fathom Feeder @Clint Cearley
 25 C Felidar Cub @Steve Prescott
 26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
-237 C Fertile Thicket @Andreas Rocha
-145 U Firemantle Mage @Chris Rahn
-204 U Forerunner of Slaughter @James Zapata
 27 C Fortified Rampart @David Gaillet
-167 R From Beyond @Mathias Kollros
-111 C Geyserfield Stalker @Deruchenko Alexander
 28 C Ghostly Sentinel @Daarken
-173 C Giant Mantis @Lake Hurwitz
-30 C Gideon's Reproach @Dan Scott
 29 M Gideon, Ally of Zendikar @Eric Deschamps
-146 C Goblin War Paint @Karl Kopinski
-93 C Grave Birthing @Craig J Spearing
-174 M Greenwarden of Murasa @Eric Deschamps
-94 U Grip of Desolation @Lius Lasahido
-211 U Grove Rumbler @Greg Opalinski
-212 U Grovetender Druids @Chase Stone
-9 R Gruesome Slaughter @Aleksi Briclot
-78 R Guardian of Tazeem @Zack Stella
-112 R Guul Draz Overseer @Karl Kopinski
-113 U Hagra Sharpshooter @Josu Hernaiz
-79 U Halimar Tidecaller @Magali Villeneuve
-223 U Hedron Archive @Craig J Spearing
-224 C Hedron Blade @Zack Stella
-205 U Herald of Kozilek @Johannes Voss
+30 C Gideon's Reproach @Dan Scott
 31 R Hero of Goma Fada @Lake Hurwitz
-59 U Horribly Awry @Clint Cearley
-60 C Incubator Drone @Cynthia Sheppard
-175 U Infuse with the Elements @Daniel Ljunggren
 32 C Inspired Charge @Willian Murai
-176 U Jaddi Offshoot @Daarken
-114 C Kalastria Healer @Anthony Palumbo
-115 C Kalastria Nightwatch @Jama Jurabaev
-213 M Kiora, Master of the Depths @Jason Chan
 33 C Kitesail Scout @Dan Scott
 34 U Kor Bladewhirl @Steven Belledin
 35 C Kor Castigator @Greg Opalinski
 36 U Kor Entanglers @Jason Rainville
-10 C Kozilek's Channeler @Jason Felix
-129 C Kozilek's Sentinel @Raymond Swanland
 37 R Lantern Scout @Steven Belledin
-147 C Lavastep Raider @Matt Stewart
-177 C Lifespring Druid @Willian Murai
 38 C Lithomancer's Focus @Cynthia Sheppard
-238 C Looming Spires @Florian de Gesincourt
-239 R Lumbering Falls @Titus Lunter
 39 C Makindi Patrol @David Palumbo
-148 C Makindi Sliderunner @Matt Stewart
-116 U Malakir Familiar @Alejandro Mirabal
-214 R March from the Tomb @Lake Hurwitz
-95 C Mind Raker @Lius Lasahido
-117 C Mire's Malice @Jakub Kasper
-61 C Mist Intruder @Jason Rainville
-130 U Molten Nursery @Raymond Swanland
-240 C Mortuary Mire @James Paick
-215 R Munda, Ambush Leader @Johannes Voss
-178 U Murasa Ranger @Eric Deschamps
-62 C Murk Strider @Chase Stone
-179 C Natural Connection @Wesley Burt
-131 C Nettle Drone @Clint Cearley
-118 C Nirkana Assassin @Viktor Titov
-180 R Nissa's Renewal @Lius Lasahido
-216 R Noyan Dar, Roil Shaper @Karl Kopinski
-119 M Ob Nixilis Reignited @Chris Rahn
-11 M Oblivion Sower @Jaime Jones
-217 M Omnath, Locus of Rage @Brad Rigney
-149 C Ondu Champion @Volkan Baǵa
 40 C Ondu Greathorn @Aaron Miller
 41 U Ondu Rising @Igor Kieryluk
-63 C Oracle of Dust @Jason Rainville
-181 R Oran-Rief Hydra @Chris Rahn
-182 C Oran-Rief Invoker @Anastasia Ovchinnikova
-150 C Outnumber @Tyler Jacobson
-120 R Painful Truths @Winona Nelson
-80 M Part the Waterveil @Titus Lunter
-225 U Pathway Arrows @Kev Walker
-226 U Pilgrim's Eye @Dan Scott
 42 R Planar Outburst @Vincent Proce
-183 U Plated Crusher @Jama Jurabaev
-184 C Plummet @Aaron Miller
-241 R Prairie Stream @Adam Paquette
-81 R Prism Array @Philip Straub
-132 U Processor Assault @Jama Jurabaev
 43 M Quarantine Field @Daarken
-151 R Radiant Flames @Slawomir Maniak
-152 C Reckless Cohort @Volkan Baǵa
-185 C Reclaiming Vines @Bastien L. Deharme
-218 U Resolute Blademaster @Joseph Meehan
-82 U Retreat to Coralhelm @Kieran Yanner
 44 U Retreat to Emeria @Kieran Yanner
-121 U Retreat to Hagra @Kieran Yanner
-186 U Retreat to Kazandu @Kieran Yanner
-153 U Retreat to Valakut @Kieran Yanner
-122 U Rising Miasma @Deruchenko Alexander
-219 U Roil Spout @Igor Kieryluk
 45 U Roil's Retribution @Raymond Swanland
-83 C Roilmage's Trick @Johann Bodin
-154 U Rolling Thunder @Yohann Schepacz
-187 U Rot Shambler @Yeong-Hao Han
-12 C Ruin Processor @Slawomir Maniak
-64 U Ruination Guide @Mathias Kollros
-123 R Ruinous Path @Jaime Jones
-84 C Rush of Ice @Deruchenko Alexander
-65 C Salvage Drone @Slawomir Maniak
-242 R Sanctum of Ugin @James Paick
-243 C Sandstone Bridge @Cliff Childs
-85 R Scatter to the Winds @Raymond Swanland
-13 C Scour from Existence @Clint Cearley
-188 U Scythe Leopard @Daniel Ljunggren
-189 C Seek the Wilds @Anna Steinbauer
 46 U Serene Steward @Magali Villeneuve
-133 R Serpentine Spike @Jaime Jones
 47 C Shadow Glider @Steve Prescott
-244 R Shambling Vent @Jung Park
-155 C Shatterskull Recruit @David Palumbo
 48 C Sheer Drop @Clint Cearley
-245 R Shrine of the Forsaken Gods @Daniel Ljunggren
-96 C Silent Skimmer @Alejandro Mirabal
-206 M Sire of Stagnation @Tyler Jacobson
-97 U Skitterskin @Michael Komarck
-246 C Skyline Cascade @Philip Straub
-220 U Skyrider Elf @Dan Scott
-227 U Slab Hammer @Joseph Meehan
-98 C Sludge Crawler @Johann Bodin
 49 C Smite the Monstrous @Jakub Kasper
-247 R Smoldering Marsh @Adam Paquette
-99 R Smothering Abomination @Aleksi Briclot
-190 C Snapping Gnarlid @Kev Walker
-248 U Spawning Bed @Jason Felix
-66 C Spell Shrivel @Jack Wang
 50 U Stasis Snare @Jason Felix
 51 C Stone Haven Medic @Anna Steinbauer
-156 C Stonefury @Chris Rallis
-249 R Sunken Hollow @Adam Paquette
-157 C Sure Strike @Jakub Kasper
+52 C Tandem Tactics @David Gaillet
+53 U Unified Front @Dan Scott
+54 U Adverse Conditions @Jason Rainville
+55 C Benthic Infiltrator @Mathias Kollros
+56 U Cryptic Cruiser @Svetlin Velinov
+57 R Drowner of Hope @Tomasz Jedruszek
+58 C Eldrazi Skyspawner @Chase Stone
+59 U Horribly Awry @Clint Cearley
+60 C Incubator Drone @Cynthia Sheppard
+61 C Mist Intruder @Jason Rainville
+62 C Murk Strider @Chase Stone
+63 C Oracle of Dust @Jason Rainville
+64 U Ruination Guide @Mathias Kollros
+65 C Salvage Drone @Slawomir Maniak
+66 C Spell Shrivel @Jack Wang
+67 U Tide Drifter @Daarken
+68 U Ulamog's Reclaimer @Svetlin Velinov
+69 C Anticipate @Tyler Jacobson
+70 C Brilliant Spectrum @Winona Nelson
+71 C Cloud Manta @Mike Bierek
+72 C Clutch of Currents @Igor Kieryluk
+73 U Coastal Discovery @Kieran Yanner
+74 C Coralhelm Guide @Viktor Titov
+75 U Dampening Pulse @Johann Bodin
+76 C Dispel @Chase Stone
+77 R Exert Influence @Magali Villeneuve
+78 R Guardian of Tazeem @Zack Stella
+79 U Halimar Tidecaller @Magali Villeneuve
+80 M Part the Waterveil @Titus Lunter
+81 R Prism Array @Philip Straub
+82 U Retreat to Coralhelm @Kieran Yanner
+83 C Roilmage's Trick @Johann Bodin
+84 C Rush of Ice @Deruchenko Alexander
+85 R Scatter to the Winds @Raymond Swanland
+86 C Tightening Coils @Tyler Jacobson
+87 R Ugin's Insight @Tyler Jacobson
+88 C Wave-Wing Elemental @John Severin Brassell
+89 U Windrider Patrol @Svetlin Velinov
+90 C Complete Disregard @Peter Mohrbacher
+91 C Culling Drone @Alejandro Mirabal
+92 C Dominator Drone @James Zapata
+93 C Grave Birthing @Craig J Spearing
+94 U Grip of Desolation @Lius Lasahido
+95 C Mind Raker @Lius Lasahido
+96 C Silent Skimmer @Alejandro Mirabal
+97 U Skitterskin @Michael Komarck
+98 C Sludge Crawler @Johann Bodin
+99 R Smothering Abomination @Aleksi Briclot
 100 C Swarm Surge @Svetlin Velinov
+101 U Transgress the Mind @Cynthia Sheppard
+102 R Wasteland Strangler @Jack Wang
+103 C Altar's Reap @Tyler Jacobson
+104 U Bloodbond Vampire @Anna Steinbauer
+105 C Bone Splinters @Deruchenko Alexander
+106 U Carrier Thrall @Lius Lasahido
+107 R Defiant Bloodlord @Craig J Spearing
+108 C Demon's Grasp @David Gaillet
+109 M Drana, Liberator of Malakir @Mike Bierek
+110 C Dutiful Return @Anna Steinbauer
+111 C Geyserfield Stalker @Deruchenko Alexander
+112 R Guul Draz Overseer @Karl Kopinski
+113 U Hagra Sharpshooter @Josu Hernaiz
+114 C Kalastria Healer @Anthony Palumbo
+115 C Kalastria Nightwatch @Jama Jurabaev
+116 U Malakir Familiar @Alejandro Mirabal
+117 C Mire's Malice @Jakub Kasper
+118 C Nirkana Assassin @Viktor Titov
+119 M Ob Nixilis Reignited @Chris Rahn
+120 R Painful Truths @Winona Nelson
+121 U Retreat to Hagra @Kieran Yanner
+122 U Rising Miasma @Deruchenko Alexander
+123 R Ruinous Path @Jaime Jones
+124 U Vampiric Rites @Anastasia Ovchinnikova
+125 C Voracious Null @Karl Kopinski
+126 U Zulaport Cutthroat @Jason Rainville
+127 R Barrage Tyrant @Chris Rallis
+128 U Crumble to Dust @James Paick
+129 C Kozilek's Sentinel @Raymond Swanland
+130 U Molten Nursery @Raymond Swanland
+131 C Nettle Drone @Clint Cearley
+132 U Processor Assault @Jama Jurabaev
+133 R Serpentine Spike @Jaime Jones
+134 C Touch of the Void @David Gaillet
+135 U Turn Against @Chris Rallis
+136 C Vestige of Emrakul @Tyler Jacobson
+137 U Vile Aggregate @Chris Rallis
+138 M Akoum Firebird @Chris Rahn
+139 R Akoum Hellkite @Jaime Jones
+140 U Akoum Stonewaker @Victor Adame Minguez
+141 C Belligerent Whiptail @Jakub Kasper
+142 C Boiling Earth @Titus Lunter
+143 U Chasm Guide @Johannes Voss
+144 M Dragonmaster Outcast @Raymond Swanland
+145 U Firemantle Mage @Chris Rahn
+146 C Goblin War Paint @Karl Kopinski
+147 C Lavastep Raider @Matt Stewart
+148 C Makindi Sliderunner @Matt Stewart
+149 C Ondu Champion @Volkan Baǵa
+150 C Outnumber @Tyler Jacobson
+151 R Radiant Flames @Slawomir Maniak
+152 C Reckless Cohort @Volkan Baǵa
+153 U Retreat to Valakut @Kieran Yanner
+154 U Rolling Thunder @Yohann Schepacz
+155 C Shatterskull Recruit @David Palumbo
+156 C Stonefury @Chris Rallis
+157 C Sure Strike @Jakub Kasper
+158 U Tunneling Geopede @Tomasz Jedruszek
+159 C Valakut Invoker @Joseph Meehan
+160 C Valakut Predator @Kev Walker
+161 C Volcanic Upheaval @Yeong-Hao Han
+162 R Zada, Hedron Grinder @Chris Rallis
+163 C Blisterpod @Ryan Barger
+164 U Brood Monitor @Izzy
+165 C Call the Scions @Winona Nelson
+166 C Eyeless Watcher @Yohann Schepacz
+167 R From Beyond @Mathias Kollros
+168 C Unnatural Aggression @James Ryman
+169 U Void Attendant @Viktor Titov
+170 R Beastcaller Savant @Anthony Palumbo
+171 C Broodhunter Wurm @Svetlin Velinov
+172 C Earthen Arms @Dan Scott
+173 C Giant Mantis @Lake Hurwitz
+174 M Greenwarden of Murasa @Eric Deschamps
+175 U Infuse with the Elements @Daniel Ljunggren
+176 U Jaddi Offshoot @Daarken
+177 C Lifespring Druid @Willian Murai
+178 U Murasa Ranger @Eric Deschamps
+179 C Natural Connection @Wesley Burt
+180 R Nissa's Renewal @Lius Lasahido
+181 R Oran-Rief Hydra @Chris Rahn
+182 C Oran-Rief Invoker @Anastasia Ovchinnikova
+183 U Plated Crusher @Jama Jurabaev
+184 C Plummet @Aaron Miller
+185 C Reclaiming Vines @Bastien L. Deharme
+186 U Retreat to Kazandu @Kieran Yanner
+187 U Rot Shambler @Yeong-Hao Han
+188 U Scythe Leopard @Daniel Ljunggren
+189 C Seek the Wilds @Anna Steinbauer
+190 C Snapping Gnarlid @Kev Walker
 191 C Swell of Growth @Magali Villeneuve
 192 U Sylvan Scrying @Daniel Ljunggren
 193 C Tajuru Beastmaster @Greg Opalinski
 194 C Tajuru Stalwart @Wesley Burt
 195 U Tajuru Warcaller @Anastasia Ovchinnikova
-52 C Tandem Tactics @David Gaillet
 196 C Territorial Baloth @Matt Stewart
-67 U Tide Drifter @Daarken
-86 C Tightening Coils @Tyler Jacobson
-14 U Titan's Presence @Slawomir Maniak
-134 C Touch of the Void @David Gaillet
-101 U Transgress the Mind @Cynthia Sheppard
-158 U Tunneling Geopede @Tomasz Jedruszek
-135 U Turn Against @Chris Rallis
-87 R Ugin's Insight @Tyler Jacobson
-16 U Ulamog's Despoiler @Peter Mohrbacher
-207 U Ulamog's Nullifier @Aleksi Briclot
-68 U Ulamog's Reclaimer @Svetlin Velinov
-15 M Ulamog, the Ceaseless Hunger @Michael Komarck
 197 M Undergrowth Champion @Tyler Jacobson
-53 U Unified Front @Dan Scott
-168 C Unnatural Aggression @James Ryman
-159 C Valakut Invoker @Joseph Meehan
-160 C Valakut Predator @Kev Walker
-124 U Vampiric Rites @Anastasia Ovchinnikova
-136 C Vestige of Emrakul @Tyler Jacobson
-221 R Veteran Warleader @Josu Hernaiz
-137 U Vile Aggregate @Chris Rallis
-169 U Void Attendant @Viktor Titov
-17 M Void Winnower @Chase Stone
-161 C Volcanic Upheaval @Yeong-Hao Han
-125 C Voracious Null @Karl Kopinski
-102 R Wasteland Strangler @Jack Wang
-88 C Wave-Wing Elemental @John Severin Brassell
-89 U Windrider Patrol @Svetlin Velinov
 198 R Woodland Wanderer @Vincent Proce
-162 R Zada, Hedron Grinder @Chris Rallis
-126 U Zulaport Cutthroat @Jason Rainville
-270 L Forest @Noah Bradley
-270a L Forest @Noah Bradley
-271 L Forest @Sam Burley
-271a L Forest @Sam Burley
-272 L Forest @Adam Paquette
-272a L Forest @Adam Paquette
-273 L Forest @Vincent Proce
-273a L Forest @Vincent Proce
-274 L Forest @Tianhua X
-274a L Forest @Tianhua X
-255 L Island @Noah Bradley
-255a L Island @Noah Bradley
-256 L Island @Sam Burley
-256a L Island @Sam Burley
-257 L Island @Adam Paquette
-257a L Island @Adam Paquette
-258 L Island @Vincent Proce
-258a L Island @Vincent Proce
-259 L Island @Tianhua X
-259a L Island @Tianhua X
-265 L Mountain @Noah Bradley
-265a L Mountain @Noah Bradley
-266 L Mountain @Sam Burley
-266a L Mountain @Sam Burley
-267 L Mountain @Véronique Meignaud
-267a L Mountain @Véronique Meignaud
-268 L Mountain @Adam Paquette
-268a L Mountain @Adam Paquette
-269 L Mountain @Tianhua X
-269a L Mountain @Tianhua X
+199 R Brood Butcher @Daarken
+200 R Brutal Expulsion @Victor Adame Minguez
+201 U Catacomb Sifter @Craig J Spearing
+202 R Dust Stalker @Clint Cearley
+203 R Fathom Feeder @Clint Cearley
+204 U Forerunner of Slaughter @James Zapata
+205 U Herald of Kozilek @Johannes Voss
+206 M Sire of Stagnation @Tyler Jacobson
+207 U Ulamog's Nullifier @Aleksi Briclot
+208 R Angelic Captain @Volkan Baǵa
+209 R Bring to Light @Jonas De Ro
+210 U Drana's Emissary @Karl Kopinski
+211 U Grove Rumbler @Greg Opalinski
+212 U Grovetender Druids @Chase Stone
+213 M Kiora, Master of the Depths @Jason Chan
+214 R March from the Tomb @Lake Hurwitz
+215 R Munda, Ambush Leader @Johannes Voss
+216 R Noyan Dar, Roil Shaper @Karl Kopinski
+217 M Omnath, Locus of Rage @Brad Rigney
+218 U Resolute Blademaster @Joseph Meehan
+219 U Roil Spout @Igor Kieryluk
+220 U Skyrider Elf @Dan Scott
+221 R Veteran Warleader @Josu Hernaiz
+222 R Aligned Hedron Network @Richard Wright
+223 U Hedron Archive @Craig J Spearing
+224 C Hedron Blade @Zack Stella
+225 U Pathway Arrows @Kev Walker
+226 U Pilgrim's Eye @Dan Scott
+227 U Slab Hammer @Joseph Meehan
+228 R Ally Encampment @Jonas De Ro
+229 U Blighted Cataract @Vincent Proce
+230 U Blighted Fen @Jonas De Ro
+231 U Blighted Gorge @Jung Park
+232 U Blighted Steppe @Yeong-Hao Han
+233 U Blighted Woodland @Jason Felix
+234 R Canopy Vista @Adam Paquette
+235 R Cinder Glade @Adam Paquette
+236 C Evolving Wilds @Izzy
+237 C Fertile Thicket @Andreas Rocha
+238 C Looming Spires @Florian de Gesincourt
+239 R Lumbering Falls @Titus Lunter
+240 C Mortuary Mire @James Paick
+241 R Prairie Stream @Adam Paquette
+242 R Sanctum of Ugin @James Paick
+243 C Sandstone Bridge @Cliff Childs
+244 R Shambling Vent @Jung Park
+245 R Shrine of the Forsaken Gods @Daniel Ljunggren
+246 C Skyline Cascade @Philip Straub
+247 R Smoldering Marsh @Adam Paquette
+248 U Spawning Bed @Jason Felix
+249 R Sunken Hollow @Adam Paquette
 250 L Plains @Noah Bradley
 250a L Plains @Noah Bradley
 251 L Plains @Sam Burley
@@ -302,6 +272,16 @@ ScryfallCode=BFZ
 253a L Plains @Vincent Proce
 254 L Plains @Tianhua X
 254a L Plains @Tianhua X
+255 L Island @Noah Bradley
+255a L Island @Noah Bradley
+256 L Island @Sam Burley
+256a L Island @Sam Burley
+257 L Island @Adam Paquette
+257a L Island @Adam Paquette
+258 L Island @Vincent Proce
+258a L Island @Vincent Proce
+259 L Island @Tianhua X
+259a L Island @Tianhua X
 260 L Swamp @Noah Bradley
 260a L Swamp @Noah Bradley
 261 L Swamp @Sam Burley
@@ -312,6 +292,26 @@ ScryfallCode=BFZ
 263a L Swamp @Jung Park
 264 L Swamp @Tianhua X
 264a L Swamp @Tianhua X
+265 L Mountain @Noah Bradley
+265a L Mountain @Noah Bradley
+266 L Mountain @Sam Burley
+266a L Mountain @Sam Burley
+267 L Mountain @Véronique Meignaud
+267a L Mountain @Véronique Meignaud
+268 L Mountain @Adam Paquette
+268a L Mountain @Adam Paquette
+269 L Mountain @Tianhua X
+269a L Mountain @Tianhua X
+270 L Forest @Noah Bradley
+270a L Forest @Noah Bradley
+271 L Forest @Sam Burley
+271a L Forest @Sam Burley
+272 L Forest @Adam Paquette
+272a L Forest @Adam Paquette
+273 L Forest @Vincent Proce
+273a L Forest @Vincent Proce
+274 L Forest @Tianhua X
+274a L Forest @Tianhua X
 
 [tokens]
 c_10_10_eldrazi

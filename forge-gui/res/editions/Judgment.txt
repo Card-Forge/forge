@@ -14,148 +14,148 @@ ScryfallCode=JUD
 
 [cards]
 1 U Ancestor's Chosen @Pete Venters
-77 U Anger @John Avon
-104 C Anurid Barkripper @Randy Gallegos
-137 R Anurid Brushhopper @Arnie Swekel
-105 U Anurid Swarmsnapper @John Matson
-78 C Arcane Teachings @Mark Brill
-34 C Aven Fogbringer @Edward P. Beard, Jr.
 2 U Aven Warcraft @Roger Raupp
-61 R Balthor the Defiled @Carl Critchlow
-79 C Barbarian Bully @Mike Ploog
 3 U Battle Screech @Randy Gallegos
-106 C Battlefield Scrounger @Daren Bader
 4 C Battlewise Aven @Wayne England
 5 C Benevolent Bodyguard @Roger Raupp
-80 C Book Burning @Dave Dorman
 6 C Border Patrol @Roger Raupp
-107 U Brawn @Matt Cavotta
-81 R Breaking Point @Matthew D. Wilson
-82 U Browbeat @Mark Tedin
-83 R Burning Wish @Scott M. Fischer
-62 U Cabal Therapy @Ron Spencer
-63 C Cabal Trainee @Pete Venters
 7 C Cagemail @Scott M. Fischer
-108 C Canopy Claws @Matthew Mitchell
-109 C Centaur Rootcaster @Eric Peterson
-35 R Cephalid Constable @Alan Pollack
-36 U Cephalid Inkshrouder @Tony Szczudlo
 8 U Chastise @Carl Critchlow
 9 R Commander Eesha @Rebecca Guay
-110 R Crush of Wurms @Christopher Moeller
-37 R Cunning Wish @Jim Nelson
-64 R Death Wish @Jeff Easley
-38 C Defy Gravity @Ben Thompson
-84 R Dwarven Bloodboiler @Arnie Swekel
-85 U Dwarven Driller @Edward P. Beard, Jr.
-86 C Dwarven Scorcher @Thomas M. Baxa
-65 C Earsplitting Rats @Heather Hudson
-111 U Elephant Guide @Jim Nelson
-87 C Ember Shot @Alan Pollack
-39 C Envelop @Don Hazeltine
-112 R Epic Struggle @Greg Hildebrandt & Tim Hildebrandt
-113 R Erhnam Djinn @Greg Staples
-114 U Exoskeletal Armor @Wayne England
-66 U Filth @Thomas M. Baxa
-88 U Firecat Blitz @David Martin
-89 C Flaring Pain @Glen Angus
-40 U Flash of Insight @Ben Thompson
-90 R Fledgling Dragon @Greg Staples
-115 C Folk Medicine @Matt Cavotta
-116 U Forcemage Advocate @Darrell Riche
 10 C Funeral Pyre @Carl Critchlow
-117 R Genesis @Mark Zug
-118 C Giant Warthog @Kev Walker
 11 R Glory @Donato Giancola
 12 R Golden Wish @Alan Pollack
-91 C Goretusk Firebeast @Keith Garletts
-67 U Grave Consequences @Tim Hildebrandt
-41 C Grip of Amnesia @Bradley Williams
-119 U Grizzly Fate @Dave Dorman
 13 C Guided Strike @Dave Dorman
-68 R Guiltfeeder @Mark Tedin
-42 C Hapless Researcher @Ron Spears
-120 C Harvester Druid @David Martin
-138 R Hunting Grounds @Mark Brill
-92 U Infectious Rage @Christopher Moeller
-121 C Ironshell Beetle @Heather Hudson
-93 R Jeska, Warrior Adept @rk post
-43 C Keep Watch @Fred Rahmqvist
-122 U Krosan Reclamation @Gary Ruddell
-141 U Krosan Verge @Tony Szczudlo
-123 C Krosan Wayfarer @Edward P. Beard, Jr.
-44 U Laquatus's Disdain @Pete Venters
-94 C Lava Dart @Darrell Riche
 14 C Lead Astray @Adam Rex
-95 C Liberated Dwarf @Greg Hildebrandt
-96 R Lightning Surge @Ron Spears
-124 R Living Wish @Eric Peterson
-45 C Lost in Thought @Ben Thompson
-69 R Masked Gorgon @Matthew D. Wilson
-46 C Mental Note @Bradley Williams
-139 R Mirari's Wake @David Martin
-47 C Mirror Wall @Mark Brill
-48 R Mist of Stagnation @Mike Ploog
-70 R Morality Shift @Jerry Tiritilli
-142 U Nantuko Monastery @Rob Alexander
-125 C Nantuko Tracer @Greg Staples
 15 R Nomad Mythmaker @Eric Peterson
-126 C Nullmage Advocate @Darrell Riche
-127 U Phantom Centaur @Carl Critchlow
 16 U Phantom Flock @David Martin
-128 R Phantom Nantuko @Wayne England
-140 R Phantom Nishoba @Arnie Swekel
 17 C Phantom Nomad @Jim Nelson
-129 C Phantom Tiger @Brian Snõddy
-97 U Planar Chaos @Ron Spencer
 18 C Prismatic Strands @Eric Peterson
 19 R Pulsemage Advocate @Jeff Easley
-49 U Quiet Speculation @John Avon
-71 C Rats' Feast @Bob Petillo
 20 C Ray of Revelation @Doug Chaffee
-143 U Riftstone Portal @Don Hazeltine
-50 R Scalpelexis @Mark Tedin
-130 R Seedtime @Rebecca Guay
 21 R Selfless Exorcist @Christopher Moeller
-131 U Serene Sunset @David Martin
-98 R Shaman's Trance @Greg Hildebrandt
 22 C Shieldmage Advocate @Christopher Moeller
 23 R Silver Seraph @Matthew D. Wilson
 24 R Solitary Confinement @Scott M. Fischer
 25 U Soulcatchers' Aerie @Rob Alexander
-99 U Soulgorger Orgg @John Matson
-100 C Spellgorger Barbarian @Mark Romanoski
-51 R Spelljack @Pete Venters
 26 U Spirit Cairn @Gary Ruddell
 27 U Spurnmage Advocate @Ron Spears
-72 U Stitch Together @Arnie Swekel
-132 C Sudden Strength @Alan Pollack
 28 C Suntail Hawk @Heather Hudson
-73 R Sutured Ghoul @Carl Critchlow
-101 U Swelter @Ben Thompson
-102 C Swirling Sandstorm @Tony Szczudlo
-133 R Sylvan Safekeeper @Pete Venters
-52 R Telekinetic Bonds @Jim Nelson
 29 R Test of Endurance @Mike Ploog
-134 R Thriss, Nantuko Primus @John Avon
-74 C Toxic Stench @Bradley Williams
 30 C Trained Pronghorn @John Matson
-75 U Treacherous Vampire @Kev Walker
-76 C Treacherous Werewolf @Mark Tedin
-135 U Tunneler Wurm @Jeff Easley
 31 U Unquestioned Authority @Alex Horley-Orlandelli
 32 U Valor @Kev Walker
-136 C Venomous Vines @Ron Spencer
 33 C Vigilant Sentry @Eric Peterson
+34 C Aven Fogbringer @Edward P. Beard, Jr.
+35 R Cephalid Constable @Alan Pollack
+36 U Cephalid Inkshrouder @Tony Szczudlo
+37 R Cunning Wish @Jim Nelson
+38 C Defy Gravity @Ben Thompson
+39 C Envelop @Don Hazeltine
+40 U Flash of Insight @Ben Thompson
+41 C Grip of Amnesia @Bradley Williams
+42 C Hapless Researcher @Ron Spears
+43 C Keep Watch @Fred Rahmqvist
+44 U Laquatus's Disdain @Pete Venters
+45 C Lost in Thought @Ben Thompson
+46 C Mental Note @Bradley Williams
+47 C Mirror Wall @Mark Brill
+48 R Mist of Stagnation @Mike Ploog
+49 U Quiet Speculation @John Avon
+50 R Scalpelexis @Mark Tedin
+51 R Spelljack @Pete Venters
+52 R Telekinetic Bonds @Jim Nelson
 53 U Web of Inertia @Don Hazeltine
 54 U Wonder @Rebecca Guay
-103 R Worldgorger Dragon @Wayne England
 55 R Wormfang Behemoth @Heather Hudson
 56 U Wormfang Crab @Glen Angus
 57 C Wormfang Drake @Thomas M. Baxa
 58 R Wormfang Manta @Heather Hudson
 59 C Wormfang Newt @Doug Chaffee
 60 U Wormfang Turtle @John Avon
+61 R Balthor the Defiled @Carl Critchlow
+62 U Cabal Therapy @Ron Spencer
+63 C Cabal Trainee @Pete Venters
+64 R Death Wish @Jeff Easley
+65 C Earsplitting Rats @Heather Hudson
+66 U Filth @Thomas M. Baxa
+67 U Grave Consequences @Tim Hildebrandt
+68 R Guiltfeeder @Mark Tedin
+69 R Masked Gorgon @Matthew D. Wilson
+70 R Morality Shift @Jerry Tiritilli
+71 C Rats' Feast @Bob Petillo
+72 U Stitch Together @Arnie Swekel
+73 R Sutured Ghoul @Carl Critchlow
+74 C Toxic Stench @Bradley Williams
+75 U Treacherous Vampire @Kev Walker
+76 C Treacherous Werewolf @Mark Tedin
+77 U Anger @John Avon
+78 C Arcane Teachings @Mark Brill
+79 C Barbarian Bully @Mike Ploog
+80 C Book Burning @Dave Dorman
+81 R Breaking Point @Matthew D. Wilson
+82 U Browbeat @Mark Tedin
+83 R Burning Wish @Scott M. Fischer
+84 R Dwarven Bloodboiler @Arnie Swekel
+85 U Dwarven Driller @Edward P. Beard, Jr.
+86 C Dwarven Scorcher @Thomas M. Baxa
+87 C Ember Shot @Alan Pollack
+88 U Firecat Blitz @David Martin
+89 C Flaring Pain @Glen Angus
+90 R Fledgling Dragon @Greg Staples
+91 C Goretusk Firebeast @Keith Garletts
+92 U Infectious Rage @Christopher Moeller
+93 R Jeska, Warrior Adept @rk post
+94 C Lava Dart @Darrell Riche
+95 C Liberated Dwarf @Greg Hildebrandt
+96 R Lightning Surge @Ron Spears
+97 U Planar Chaos @Ron Spencer
+98 R Shaman's Trance @Greg Hildebrandt
+99 U Soulgorger Orgg @John Matson
+100 C Spellgorger Barbarian @Mark Romanoski
+101 U Swelter @Ben Thompson
+102 C Swirling Sandstorm @Tony Szczudlo
+103 R Worldgorger Dragon @Wayne England
+104 C Anurid Barkripper @Randy Gallegos
+105 U Anurid Swarmsnapper @John Matson
+106 C Battlefield Scrounger @Daren Bader
+107 U Brawn @Matt Cavotta
+108 C Canopy Claws @Matthew Mitchell
+109 C Centaur Rootcaster @Eric Peterson
+110 R Crush of Wurms @Christopher Moeller
+111 U Elephant Guide @Jim Nelson
+112 R Epic Struggle @Greg Hildebrandt & Tim Hildebrandt
+113 R Erhnam Djinn @Greg Staples
+114 U Exoskeletal Armor @Wayne England
+115 C Folk Medicine @Matt Cavotta
+116 U Forcemage Advocate @Darrell Riche
+117 R Genesis @Mark Zug
+118 C Giant Warthog @Kev Walker
+119 U Grizzly Fate @Dave Dorman
+120 C Harvester Druid @David Martin
+121 C Ironshell Beetle @Heather Hudson
+122 U Krosan Reclamation @Gary Ruddell
+123 C Krosan Wayfarer @Edward P. Beard, Jr.
+124 R Living Wish @Eric Peterson
+125 C Nantuko Tracer @Greg Staples
+126 C Nullmage Advocate @Darrell Riche
+127 U Phantom Centaur @Carl Critchlow
+128 R Phantom Nantuko @Wayne England
+129 C Phantom Tiger @Brian Snõddy
+130 R Seedtime @Rebecca Guay
+131 U Serene Sunset @David Martin
+132 C Sudden Strength @Alan Pollack
+133 R Sylvan Safekeeper @Pete Venters
+134 R Thriss, Nantuko Primus @John Avon
+135 U Tunneler Wurm @Jeff Easley
+136 C Venomous Vines @Ron Spencer
+137 R Anurid Brushhopper @Arnie Swekel
+138 R Hunting Grounds @Mark Brill
+139 R Mirari's Wake @David Martin
+140 R Phantom Nishoba @Arnie Swekel
+141 U Krosan Verge @Tony Szczudlo
+142 U Nantuko Monastery @Rob Alexander
+143 U Riftstone Portal @Don Hazeltine
 
 [tokens]
 w_1_1_bird_flying

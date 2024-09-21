@@ -7,6 +7,7 @@ ScryfallCode=DD2
 
 [cards]
 1 M Jace Beleren @Kev Walker
+1★ M Jace Beleren @Yoshino Himori
 2 C Martyr of Frost @Wayne England
 3 C Fathom Seer @Ralph Horsley
 4 C Voidmage Apprentice @Jim Nelson
@@ -40,6 +41,7 @@ ScryfallCode=DD2
 32 L Island @Donato Giancola
 33 L Island @Christopher Moeller
 34 M Chandra Nalaar @Kev Walker
+34★ M Chandra Nalaar @Yoshino Himori
 35 C Flamekin Brawler @Daren Bader
 36 C Fireslinger @Jeff Reitz
 37 C Soulbright Flamekin @Kev Walker
@@ -68,8 +70,6 @@ ScryfallCode=DD2
 60 L Mountain @Christopher Moeller
 61 L Mountain @Greg Staples
 62 L Mountain @Mark Tedin
-1★ M Jace Beleren @Yoshino Himori
-34★ M Chandra Nalaar @Yoshino Himori
 
 [tokens]
 r_3_1_elemental_shaman_haste
