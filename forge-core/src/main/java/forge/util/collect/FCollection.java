@@ -12,6 +12,7 @@ import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import forge.util.Iterables;
 import org.apache.commons.lang3.ArrayUtils;
@@ -551,6 +552,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     }
 
     @Override
+    public Stream<T> stream() {
+        return list.stream();
+    }
+
+    @Override
     public boolean anyMatch(Predicate<? super T> test) {
         return set.stream().anyMatch(test);
     }
@@ -666,6 +672,7 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             return a;
         }
 
+        @Override public Stream<T> stream() {return Stream.empty();}
         @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
         @Override public boolean allMatch(Predicate<? super T> test) {return true;}
 
