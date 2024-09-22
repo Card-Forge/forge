@@ -425,45 +425,45 @@ public class QuestWinLoseController {
 
         switch (currentStreak) {
         case 3:
-            cardsWon.addAll(qData.getCards().addRandomCommon(1));
+            cardsWon.addAll(qData.getCards().addRandomCards(1, PaperCardPredicates.IS_COMMON));
             typeWon = "common";
             break;
         case 5:
-            cardsWon.addAll(qData.getCards().addRandomUncommon(1));
+            cardsWon.addAll(qData.getCards().addRandomCards(1, PaperCardPredicates.IS_UNCOMMON));
             typeWon = "uncommon";
             break;
         case 7:
-            cardsWon.addAll(qData.getCards().addRandomRareNotMythic(1));
+            cardsWon.addAll(qData.getCards().addRandomCards(1, PaperCardPredicates.IS_RARE));
             typeWon = "rare";
             break;
         case 10:
-            cardsToAdd = qData.getCards().addRandomMythicRare(1);
+            cardsToAdd = qData.getCards().addRandomCards(1, PaperCardPredicates.IS_MYTHIC_RARE);
             if (cardsToAdd != null) {
                 cardsWon.addAll(cardsToAdd);
                 typeWon = "mythic rare";
             } else {
-                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(3));
+                cardsWon.addAll(qData.getCards().addRandomCards(3, PaperCardPredicates.IS_RARE));
                 typeWon = "rare";
             }
             break;
         case 25:
-            cardsToAdd = qData.getCards().addRandomMythicRare(5);
+            cardsToAdd = qData.getCards().addRandomCards(5, PaperCardPredicates.IS_MYTHIC_RARE);
             if (cardsToAdd != null) {
                 cardsWon.addAll(cardsToAdd);
                 typeWon = "mythic rare";
             } else {
-                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(15));
+                cardsWon.addAll(qData.getCards().addRandomCards(15, PaperCardPredicates.IS_RARE));
                 typeWon = "rare";
             }
             addDraftToken = true;
             break;
         case 0: //The 50th win in the streak is 0, since (50 % 50 == 0)
-            cardsToAdd = qData.getCards().addRandomMythicRare(10);
+            cardsToAdd = qData.getCards().addRandomCards(10, PaperCardPredicates.IS_MYTHIC_RARE);
             if (cardsToAdd != null) {
                 cardsWon.addAll(cardsToAdd);
                 typeWon = "mythic rare";
             } else {
-                cardsWon.addAll(qData.getCards().addRandomRareNotMythic(30));
+                cardsWon.addAll(qData.getCards().addRandomCards(30, PaperCardPredicates.IS_RARE));
                 typeWon = "rare";
             }
             addDraftToken = true;
@@ -490,7 +490,7 @@ public class QuestWinLoseController {
      *
      */
     private void awardJackpot() {
-        final List<PaperCard> cardsWon = qData.getCards().addRandomRare(10);
+        final List<PaperCard> cardsWon = qData.getCards().addRandomCards(10, PaperCardPredicates.IS_RARE_OR_MYTHIC);
         view.showCards(Localizer.getInstance().getMessage("lblJustWonTenRandomRares"), cardsWon);
     }
 
