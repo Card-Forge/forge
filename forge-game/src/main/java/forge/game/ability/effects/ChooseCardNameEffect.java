@@ -131,8 +131,9 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     cpp = CardFacePredicates.valid(valid);
                 }
                 if (randomChoice) {
-                    final Iterable<ICardFace> cards = Iterables.filter(StaticData.instance().getCommonCards().getAllFaces(), cpp);
-                    chosen = Aggregates.random(cards).getName();
+                    chosen = StaticData.instance().getCommonCards().streamAllFaces()
+                            .filter(cpp).collect(StreamUtils.random()).get()
+                            .getName();
                 } else {
                     chosen = p.getController().chooseCardName(sa, cpp, valid, message);
                 }

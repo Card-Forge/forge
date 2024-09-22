@@ -234,11 +234,11 @@ public abstract class DeckGeneratorBase {
             addSome(targetSize - actualSize, tDeck.toFlatList());
         }
         else if (actualSize > targetSize) {
-            Predicate<PaperCard> exceptBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND);
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
-                Iterable<PaperCard> matchingCards = Iterables.filter(tDeck.toFlatList(), exceptBasicLand);
-                List<PaperCard> toRemove = Aggregates.random(matchingCards,  actualSize - targetSize);
+                List<PaperCard> toRemove = tDeck.toFlatList().stream()
+                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND))
+                        .collect(StreamUtils.random(actualSize - targetSize));
                 tDeck.removeAllFlat(toRemove);
 
                 for (PaperCard c : toRemove) {

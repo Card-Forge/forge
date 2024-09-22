@@ -22,9 +22,9 @@ import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VDeckgen;
-import forge.util.Aggregates;
-import forge.util.Iterables;
+import forge.util.StreamUtils;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -71,8 +71,10 @@ public enum CDeckgen implements ICDoc {
         final Deck randomDeck = new Deck();
 
         final Predicate<PaperCard> notBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND);
-        final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
-        randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
+        List<PaperCard> randomCards = FModel.getMagicDb().getCommonCards().streamUniqueCards()
+                .filter(notBasicLand)
+                .collect(StreamUtils.random(15 * 5));
+        randomDeck.getMain().addAllFlat(randomCards);
 
         for(final String landName : MagicColor.Constant.BASIC_LANDS) {
             randomDeck.getMain().add(landName, 1);

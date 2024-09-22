@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.item.PaperCardPredicates;
 import forge.util.*;
@@ -463,25 +464,18 @@ public class DeckgenUtil {
         try {
             if (useGeneticAI) {
                 if (!selection.isEmpty())
-                    deck = Aggregates.random(Iterables.filter(geneticAI, deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))).getDeck();
+                    deck = geneticAI.stream()
+                            .filter(deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))
+                            .collect(StreamUtils.random()).get().getDeck();
                 else
                     deck = Aggregates.random(geneticAI).getDeck();
 
             } else {
-                Predicate<DeckProxy> sizePredicate = deckProxy -> deckProxy.getMainSize() <= 60;
-                if (!selection.isEmpty() && selection.size() < 4) {
-                    Predicate<DeckProxy> colorPredicate = deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor());
-                    Predicate<DeckProxy> pred = sizePredicate.and(colorPredicate);
-                    if (isTheme)
-                        deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
-                    else
-                        deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
-                } else {
-                    if (isTheme)
-                        deck = Aggregates.random(Iterables.filter(advThemes, sizePredicate)).getDeck();
-                    else
-                        deck = Aggregates.random(Iterables.filter(advPrecons, sizePredicate)).getDeck();
-                }
+                Predicate<DeckProxy> predicate = deckProxy -> deckProxy.getMainSize() <= 60;
+                if (!selection.isEmpty() && selection.size() < 4)
+                    predicate = predicate.and(deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
+                List<DeckProxy> source = isTheme ? advThemes : advPrecons;
+                deck = source.stream().filter(predicate).collect(StreamUtils.random()).get().getDeck();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -658,18 +652,15 @@ public class DeckgenUtil {
 
     /** Generate a 2-5-color Commander deck. */
     public static Deck generateCommanderDeck(boolean forAi, GameType gameType) {
-        final Deck deck;
-        IDeckGenPool cardDb = FModel.getMagicDb().getCommonCards();
-        PaperCard commander;
-        ColorSet colorID;
-
         // Get random multicolor Legendary creature
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
-        Predicate<PaperCard> legal = format.isLegalCardPredicate().and(format.isLegalCommanderPredicate());
-        Iterable<PaperCard> legends = cardDb.getAllCards(legal.and(PaperCardPredicates.fromRules(canPlay)));
 
-        commander = Aggregates.random(legends);
+        PaperCard commander = FModel.getMagicDb().getCommonCards().streamAllCards()
+                .filter(format.isLegalCardPredicate())
+                .filter(format.isLegalCommanderPredicate())
+                .filter(PaperCardPredicates.fromRules(canPlay))
+                .collect(StreamUtils.random()).get();
         return generateRandomCommanderDeck(commander, format, forAi, false);
     }
 

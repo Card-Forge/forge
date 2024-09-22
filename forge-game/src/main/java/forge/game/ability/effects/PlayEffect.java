@@ -1,9 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import forge.card.CardDb;
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
 import forge.item.PaperCardPredicates;
@@ -109,25 +109,28 @@ public class PlayEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("AnySupportedCard")) {
             final String valid = sa.getParam("AnySupportedCard");
-            List<PaperCard> cards = null;
+            Stream<PaperCard> cards;
+            CardDb cardDb = StaticData.instance().getCommonCards();
             if (valid.startsWith("Names:")) {
-                cards = new ArrayList<>();
-                for (String name : valid.substring(6).split(",")) {
-                    name = name.replace(";", ",");
-                    cards.add(StaticData.instance().getCommonCards().getUniqueByName(name));
-                }
+                cards = Arrays.stream(valid.substring(6).split(","))
+                        .map(name -> name.replace(";", ","))
+                        .map(cardDb::getUniqueByName);
             } else if (valid.equalsIgnoreCase("sorcery")) {
-                final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY);
-                cards = StaticData.instance().getCommonCards().streamUniqueCards().filter(cpp).collect(Collectors.toList());
+                cards = cardDb.streamUniqueCards()
+                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_SORCERY));
             } else if (valid.equalsIgnoreCase("instant")) {
-                final Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT);
-                cards = StaticData.instance().getCommonCards().streamUniqueCards().filter(cpp).collect(Collectors.toList());
+                cards = cardDb.streamUniqueCards()
+                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_INSTANT));
+            } else {
+                //Could just return a stream of all cards, but that should probably be a specific option rather than a fallback.
+                //Could also just leave it null but there's currently nothing else that can happen that case.
+                throw new UnsupportedOperationException("Unknown parameter for AnySupportedCard: " + valid);
             }
             if (sa.hasParam("RandomCopied")) {
                 final CardCollection choice = new CardCollection();
                 final String num = sa.getParamOrDefault("RandomNum", "1");
-                int ncopied = AbilityUtils.calculateAmount(source, num, sa);
-                for (PaperCard cp : Aggregates.random(cards, ncopied)) {
+                int nCopied = AbilityUtils.calculateAmount(source, num, sa);
+                for (PaperCard cp : cards.collect(StreamUtils.random(nCopied))) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     if (sa.getActivatingPlayer().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
                         continue;
