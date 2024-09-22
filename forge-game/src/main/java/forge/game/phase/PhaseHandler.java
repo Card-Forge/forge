@@ -40,7 +40,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -716,7 +715,7 @@ public class PhaseHandler implements java.io.Serializable {
             // map: defender => (many) attacker => (many) blocker
             Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(ArrayList::new);
                 for (Card att : combat.getAttackersOf(ge)) {
                     protectThisDefender.addAll(att, combat.getBlockers(att));
                 }

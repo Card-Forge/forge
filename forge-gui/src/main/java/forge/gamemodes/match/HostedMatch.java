@@ -1,11 +1,7 @@
 package forge.gamemodes.match;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import forge.ai.AiProfileUtil;
 import forge.gui.control.PlaybackSpeed;
@@ -53,7 +49,6 @@ import forge.player.PlayerControllerHuman;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
-import forge.util.CollectionSuppliers;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
@@ -189,7 +184,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(CollectionSuppliers.arrayLists());
+        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);

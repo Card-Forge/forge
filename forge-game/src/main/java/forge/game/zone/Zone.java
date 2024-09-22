@@ -17,11 +17,7 @@
  */
 package forge.game.zone;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
@@ -34,7 +30,6 @@ import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
-import forge.util.CollectionSuppliers;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -54,8 +49,8 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     protected final ZoneType zoneType;
     protected final Game game;
 
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
-    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, CollectionSuppliers.arrayLists());
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedThisTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
+    protected final transient MapOfLists<ZoneType, Card> cardsAddedLastTurn = new EnumMapOfLists<>(ZoneType.class, ArrayList::new);
 
     public Zone(final ZoneType zone0, Game game0) {
         zoneType = zone0;
