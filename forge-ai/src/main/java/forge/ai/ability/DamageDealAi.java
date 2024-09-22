@@ -894,8 +894,7 @@ public class DamageDealAi extends DamageAiBase {
 
             // See if there's an indestructible target that can be used
             CardCollection indestructible = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.CREATURES
-                            .and(CardPredicates.PLANESWALKERS) //TODO: Should this be "or" Planeswalkers?
+                    (CardPredicates.CREATURES.or(CardPredicates.PLANESWALKERS))
                             .and(CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE))
                             .and(CardPredicates.isTargetableBy(sa))
             );

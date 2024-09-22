@@ -564,12 +564,10 @@ public final class CardRulesPredicates {
     public static final Predicate<CardRules> IS_INSTANT = CardRulesPredicates.coreType(true, CardType.CoreType.Instant);
     public static final Predicate<CardRules> IS_SORCERY = CardRulesPredicates.coreType(true, CardType.CoreType.Sorcery);
     public static final Predicate<CardRules> IS_ENCHANTMENT = CardRulesPredicates.coreType(true, CardType.CoreType.Enchantment);
-    public static final Predicate<CardRules> IS_NON_CREATURE_SPELL =
-            CardRulesPredicates.IS_SORCERY
-                    .or(CardRulesPredicates.IS_INSTANT)
-                    .or(CardRulesPredicates.IS_PLANESWALKER)
-                    .or(CardRulesPredicates.IS_ENCHANTMENT) //TODO: Battles? Is testing these one by one really the best way to check "non-creature"?
-                    .or(CardRulesPredicates.IS_ARTIFACT.and(CardRulesPredicates.IS_CREATURE.negate()));
+    public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = (
+            CardRulesPredicates.IS_CREATURE.or(CardRulesPredicates.IS_LAND).or(CardRules::isVariant)
+    ).negate();
+
     public static final Predicate<CardRules> IS_PLANE = CardRulesPredicates.coreType(true, CardType.CoreType.Plane);
     public static final Predicate<CardRules> IS_PHENOMENON = CardRulesPredicates.coreType(true, CardType.CoreType.Phenomenon);
     public static final Predicate<CardRules> IS_PLANE_OR_PHENOMENON = IS_PLANE.or(IS_PHENOMENON);
