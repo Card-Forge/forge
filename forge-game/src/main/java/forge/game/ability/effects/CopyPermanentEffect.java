@@ -157,8 +157,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                    Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE);
-                    cards = Iterables.filter(cards, cpp);
+                    cards = Iterables.filter(cards, PaperCardPredicates.IS_CREATURE);
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
                     Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_EQUIPMENT);

@@ -346,8 +346,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = PaperCardPredicates.fromRules(CardRulesPredicates.CAN_BE_COMMANDER);
-        return getRemainingCardPool().getFilteredPool(commanderPredicate);
+        return getRemainingCardPool().getFilteredPool(PaperCardPredicates.CAN_BE_COMMANDER);
     }
 
     @Override

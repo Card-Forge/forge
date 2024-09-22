@@ -41,7 +41,7 @@ public class WinstonDraft extends BoosterDraft {
             for (int j = 0; j < NUM_PLAYERS; j++) {
                 // Remove Basic Lands from draft for simplicity
                 supply.get().stream()
-                        .filter(PaperCardPredicates.IS_BASIC_LAND.negate())
+                        .filter(PaperCardPredicates.IS_BASIC_LAND_RARITY.negate())
                         .forEach(this.deck::add);
             }
         }

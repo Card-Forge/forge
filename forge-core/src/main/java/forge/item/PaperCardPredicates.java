@@ -187,7 +187,7 @@ public abstract class PaperCardPredicates {
     public static final Predicate<PaperCard> IS_MYTHIC_RARE = PaperCardPredicates.rarity(true, CardRarity.MythicRare);
     public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = PaperCardPredicates.IS_RARE.or(PaperCardPredicates.IS_MYTHIC_RARE);
     public static final Predicate<PaperCard> IS_SPECIAL = PaperCardPredicates.rarity(true, CardRarity.Special);
-    public static final Predicate<PaperCard> IS_BASIC_LAND = PaperCardPredicates.rarity(true, CardRarity.BasicLand);
+    public static final Predicate<PaperCard> IS_BASIC_LAND_RARITY = PaperCardPredicates.rarity(true, CardRarity.BasicLand);
     public static final Predicate<PaperCard> IS_BLACK = PaperCardPredicates.color(true, false, MagicColor.BLACK);
     public static final Predicate<PaperCard> IS_BLUE = PaperCardPredicates.color(true, false, MagicColor.BLUE);
     public static final Predicate<PaperCard> IS_GREEN = PaperCardPredicates.color(true, false, MagicColor.GREEN);
@@ -196,4 +196,16 @@ public abstract class PaperCardPredicates {
     public static final Predicate<PaperCard> IS_COLORLESS = PaperCardPredicates.color(true, true, MagicColor.COLORLESS);
     public static final Predicate<PaperCard> IS_UNREBALANCED = PaperCard::isUnRebalanced;
     public static final Predicate<PaperCard> IS_REBALANCED = PaperCard::isRebalanced;
+
+    //Common rules-based predicates.
+    public static final Predicate<PaperCard> IS_LAND = fromRules(CardRulesPredicates.IS_LAND);
+    public static final Predicate<PaperCard> IS_NON_LAND = fromRules(CardRulesPredicates.IS_NON_LAND);
+    public static final Predicate<PaperCard> IS_BASIC_LAND = fromRules(CardRulesPredicates.IS_BASIC_LAND);
+    /** Matches any card except Plains, Island, Swamp, Mountain, Forest, or Wastes. */
+    public static final Predicate<PaperCard> NOT_BASIC_LAND = fromRules(CardRulesPredicates.NOT_BASIC_LAND);
+    /** Matches any card except Plains, Island, Swamp, Mountain, or Forest. */
+    public static final Predicate<PaperCard> NOT_TRUE_BASIC_LAND = fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND);
+    public static final Predicate<PaperCard> IS_NONBASIC_LAND = fromRules(CardRulesPredicates.IS_NONBASIC_LAND);
+    public static final Predicate<PaperCard> IS_CREATURE = fromRules(CardRulesPredicates.IS_CREATURE);
+    public static final Predicate<PaperCard> CAN_BE_COMMANDER = fromRules(CardRulesPredicates.CAN_BE_COMMANDER);
 }

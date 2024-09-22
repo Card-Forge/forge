@@ -514,7 +514,7 @@ public class BoosterGenerator {
         Predicate<PaperCard> rarityPredicate = null;
         switch (toAdd.getRarity()) {
             case BasicLand:
-                rarityPredicate = PaperCardPredicates.IS_BASIC_LAND;
+                rarityPredicate = PaperCardPredicates.IS_BASIC_LAND_RARITY;
                 break;
             case Common:
                 rarityPredicate = PaperCardPredicates.IS_COMMON;
@@ -678,8 +678,8 @@ public class BoosterGenerator {
                                 .or(CardRulesPredicates.splitType(CardSplitType.Meld))
                                 .or(CardRulesPredicates.splitType(CardSplitType.Modal)
                             ));
-            } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND);
-            } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = PaperCardPredicates.IS_BASIC_LAND;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = PaperCardPredicates.IS_LAND;
+            } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = PaperCardPredicates.IS_BASIC_LAND_RARITY;
             } else if (operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = PaperCardPredicates.IS_SPECIAL;
             } else if (operator.equalsIgnoreCase(BoosterSlots.SPECIAL)) {       toAdd = PaperCardPredicates.IS_SPECIAL;
             } else if (operator.equalsIgnoreCase(BoosterSlots.MYTHIC)) {        toAdd = PaperCardPredicates.IS_MYTHIC_RARE;

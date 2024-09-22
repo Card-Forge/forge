@@ -289,7 +289,7 @@ public final class LDAModelGenetrator {
 
         //get all cards
         List<PaperCard> cardList = FModel.getMagicDb().getCommonCards().streamUniqueCards()
-                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+                .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
                 .collect(Collectors.toList());
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -349,7 +349,7 @@ public final class LDAModelGenetrator {
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         String cardName = legend.getName();
         deck.getMain().toFlatList().stream()
-            .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+            .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
             .filter(PaperCardPredicates.name(cardName).negate())
             .forEach(pairCard -> {
                 try {

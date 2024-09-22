@@ -112,7 +112,7 @@ public abstract class SealedProduct implements InventoryItemFromSet {
     protected List<PaperCard> getRandomBasicLands(final String setCode, final int count) {
         return StaticData.instance().getCommonCards().streamAllCards()
                 .filter(PaperCardPredicates.printedInSet(setCode))
-                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND))
+                .filter(PaperCardPredicates.IS_BASIC_LAND)
                 .collect(StreamUtils.random(count));
     }
 }

@@ -87,7 +87,7 @@ public abstract class DeckGeneratorBase {
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
-        final Iterable<PaperCard> creatures = Iterables.filter(cards, PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE));
+        final Iterable<PaperCard> creatures = Iterables.filter(cards, PaperCardPredicates.IS_CREATURE);
         final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
         trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
@@ -109,9 +109,9 @@ public abstract class DeckGeneratorBase {
         Predicate<PaperCard> isSetBasicLand;
         if (edition != null){
             isSetBasicLand = PaperCardPredicates.printedInSet(edition)
-                    .and(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
+                    .and(PaperCardPredicates.IS_BASIC_LAND);
         } else {
-            isSetBasicLand = PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND);
+            isSetBasicLand = PaperCardPredicates.IS_BASIC_LAND;
         }
 
         landPool = new DeckGenPool(StaticData.instance().getCommonCards().getAllCards(isSetBasicLand));
@@ -237,7 +237,7 @@ public abstract class DeckGeneratorBase {
 
             for (int i = 0; i < 3 && actualSize > targetSize; i++) {
                 List<PaperCard> toRemove = tDeck.toFlatList().stream()
-                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_BASIC_LAND))
+                        .filter(PaperCardPredicates.NOT_BASIC_LAND)
                         .collect(StreamUtils.random(actualSize - targetSize));
                 tDeck.removeAllFlat(toRemove);
 

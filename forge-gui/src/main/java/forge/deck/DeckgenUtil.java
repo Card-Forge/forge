@@ -216,8 +216,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
+        if(deck.getMain().countAll(PaperCardPredicates.IS_LAND)>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.IS_LAND));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -315,8 +315,8 @@ public class DeckgenUtil {
             System.out.println("Wrong card count "+deck.getMain().countAll());
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
-        if(deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND))>27){
-            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)));
+        if(deck.getMain().countAll(PaperCardPredicates.IS_LAND)>27){
+            System.out.println("Too many lands "+deck.getMain().countAll(PaperCardPredicates.IS_LAND));
             deck=buildLDACArchetypeDeck(format,isForAI);
         }
         while(deck.get(DeckSection.Sideboard).countAll()>15){
@@ -832,7 +832,7 @@ public class DeckgenUtil {
 
         // determine how many additional lands we need, but don't take lands already in deck into consideration,
         // or we risk incorrectly determining the target deck size
-        int numLands = (int) cards.stream().filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_LAND)).count();
+        int numLands = (int) cards.stream().filter(PaperCardPredicates.IS_LAND).count();
         int sizeNoLands = cards.size() - numLands;
 
         // attempt to determine if building for sealed, constructed or EDH

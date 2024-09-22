@@ -72,7 +72,7 @@ public final class CardRelationMatrixGenerator {
                 true);
 
         List<PaperCard> cardList = format.getAllCards().stream()
-                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+                .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
                 .collect(Collectors.toList());
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -89,7 +89,7 @@ public final class CardRelationMatrixGenerator {
                 if (deck.getMain().contains(card)) {
                     String cardName = card.getName();
                     deck.getMain().toFlatList().stream()
-                        .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+                        .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
                         .filter(pairCard -> !pairCard.getName().equals(cardName))
                         .forEach(pairCard -> {
                             try {
@@ -142,7 +142,7 @@ public final class CardRelationMatrixGenerator {
 
         //get all cards
         List<PaperCard> cardList = FModel.getMagicDb().getCommonCards().streamUniqueCards()
-                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+                .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
                 .collect(Collectors.toList());
         cardList.add(FModel.getMagicDb().getCommonCards().getCard("Wastes"));
         Map<String, Integer> cardIntegerMap = new HashMap<>();
@@ -200,7 +200,7 @@ public final class CardRelationMatrixGenerator {
                              Map<String, Integer> legendIntegerMap, int[][] matrix){
         String cardName = legend.getName();
         deck.getMain().toFlatList().stream()
-            .filter(PaperCardPredicates.fromRules(CardRulesPredicates.NOT_TRUE_BASIC_LAND))
+            .filter(PaperCardPredicates.NOT_TRUE_BASIC_LAND)
             .filter(pairCard -> !pairCard.getName().equals(cardName))
             .forEach(pairCard -> {
                 try {

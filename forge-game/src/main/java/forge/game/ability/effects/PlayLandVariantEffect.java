@@ -30,7 +30,7 @@ public class PlayLandVariantEffect extends SpellAbilityEffect {
         final String landType = sa.getParam("Clone");
         Stream<PaperCard> cardStream = StaticData.instance().getCommonCards().streamUniqueCards();
         if ("BasicLand".equals(landType)) {
-            cardStream = cardStream.filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
+            cardStream = cardStream.filter(PaperCardPredicates.IS_BASIC_LAND);
         }
         // current color of source card
         final ColorSet color = source.getColor();

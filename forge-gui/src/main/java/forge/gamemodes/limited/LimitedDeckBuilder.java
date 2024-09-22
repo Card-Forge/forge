@@ -133,8 +133,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
                 PaperCardPredicates.fromRules(hasColor));
         rankedColorList = CardRanker.rankCardsInDeck(colorList);
-        onColorCreatures = Iterables.filter(rankedColorList,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE));
+        onColorCreatures = Iterables.filter(rankedColorList, PaperCardPredicates.IS_CREATURE);
         onColorNonCreatures = Iterables.filter(rankedColorList,
                 PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_CREATURE_SPELL));
         // Guava iterables do not copy the collection contents, instead they act
@@ -166,7 +165,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         // an extra.
         if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 4) {
             final PaperCard card = rankedColorList.stream()
-                    .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_LAND))
+                    .filter(PaperCardPredicates.IS_NON_LAND)
                     .findFirst().orElse(null);
             if (card != null) {
                 deckList.add(card);
@@ -337,8 +336,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addLands(final int[] clrCnts, final String landSetCode) {
         // basic lands that are available in the deck
-        final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_BASIC_LAND));
+        final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, PaperCardPredicates.IS_BASIC_LAND);
         final Set<PaperCard> snowLands = new HashSet<>();
 
         // total of all ClrCnts
@@ -450,8 +448,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        final Iterable<PaperCard> lands = Iterables.filter(aiPlayables,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_NONBASIC_LAND));
+        final Iterable<PaperCard> lands = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
         List<PaperCard> landsToAdd = new ArrayList<>();
         for (final PaperCard card : lands) {
             if (landsNeeded > 0) {
@@ -478,8 +475,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addThirdColorCards(int num) {
         if (num > 0) {
-            final Iterable<PaperCard> others = Iterables.filter(aiPlayables,
-                    PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_LAND));
+            final Iterable<PaperCard> others = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
             // We haven't yet ranked the off-color cards.
             // Compare them to the cards already in the deckList.
             List<PaperCard> rankedOthers = CardRanker.rankCardsInPack(others, deckList, colors, true);
@@ -521,8 +517,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *           number to add
      */
     private void addRandomCards(int num) {
-        final Iterable<PaperCard> others = Iterables.filter(aiPlayables,
-                PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_LAND));
+        final Iterable<PaperCard> others = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
         List <PaperCard> toAdd = new ArrayList<>();
         for (final PaperCard card : others) {
             if (num > 0) {
@@ -665,8 +660,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }
-        final Predicate<PaperCard> filter = PaperCardPredicates.fromRules(CardRulesPredicates.IS_CREATURE);
-        deckList.stream().filter(filter)
+        deckList.stream().filter(PaperCardPredicates.IS_CREATURE)
                 .mapToInt(creature -> creature.getRules().getManaCost().getCMC())
                 .map(cmc -> Math.max(1, Math.min(cmc, 6)))
                 .forEach(cmc -> creatureCosts.put(cmc, creatureCosts.get(cmc) + 1));
