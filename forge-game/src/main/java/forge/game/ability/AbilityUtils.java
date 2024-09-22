@@ -2887,14 +2887,18 @@ public class AbilityUtils {
         // TODO move below to handlePaid
         if (sq[0].startsWith("SumPower")) {
             final String[] restrictions = l[0].split("_");
-            CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
-            return doXMath(Aggregates.sum(filteredCards, Card::getNetPower), expr, c, ctb);
+            int sumPower = game.getCardsIn(ZoneType.Battlefield).stream()
+                    .filter(CardPredicates.restriction(restrictions[1], player, c, ctb))
+                    .mapToInt(Card::getNetPower).sum();
+            return doXMath(sumPower, expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
-            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            final Iterable<Card> powers = Aggregates.uniqueByLast(list, Card::getNetPower);
-            return doXMath(Iterables.size(powers), expr, c, ctb);
+            final int uniquePowers = (int) game.getCardsIn(ZoneType.Battlefield).stream()
+                    .filter(CardPredicates.restriction(restriction, player, c, ctb))
+                    .map(Card::getNetPower)
+                    .distinct().count();
+            return doXMath(uniquePowers, expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final Set<CounterType> kinds = Sets.newHashSet();

@@ -380,7 +380,10 @@ public class CountersPutAi extends CountersAi {
                 sa.setXManaCostPaid(amount);
             } else if ("ExiledCreatureFromGraveCMC".equals(logic)) {
                 // e.g. Necropolis
-                amount = Aggregates.max(CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES), Card::getCMC);
+                amount = ai.getCardsIn(ZoneType.Graveyard).stream()
+                        .filter(CardPredicates.CREATURES)
+                        .mapToInt(Card::getCMC)
+                        .max().orElse(0);
                 if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                     return true;
                 }

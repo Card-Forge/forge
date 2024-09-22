@@ -67,6 +67,7 @@ public class PlayerCollection extends FCollection<Player> {
     }
     
     // value functions with Function
+    //TODO: Could probably move these up to FCollectionView, apply them, and trim off a bunch of "Aggregates" clauses.
     public Integer min(Function<Player, Integer> func) {
         return Aggregates.min(this, func);
     }

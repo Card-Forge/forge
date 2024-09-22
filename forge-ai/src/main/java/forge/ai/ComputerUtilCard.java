@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import forge.ai.simulation.GameStateEvaluator;
 import forge.card.mana.ManaCost;
@@ -81,12 +82,11 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestArtifactAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.ARTIFACTS);
-        if (all.size() == 0) {
-            return null;
-        }
         // get biggest Artifact
-        return Aggregates.itemWithMax(all, Card::getCMC);
+        return list.stream()
+                .filter(CardPredicates.ARTIFACTS)
+                .max(Comparator.comparing(Card::getCMC))
+                .orElse(null);
     }
 
     /**
@@ -96,12 +96,11 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getBestPlaneswalkerAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.PLANESWALKERS);
-        if (all.isEmpty()) {
-            return null;
-        }
         // no AI logic, just return most expensive
-        return Aggregates.itemWithMax(all, Card::getCMC);
+        return list.stream()
+                .filter(CardPredicates.PLANESWALKERS)
+                .max(Comparator.comparing(Card::getCMC))
+                .orElse(null);
     }
 
     /**
@@ -111,12 +110,11 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getWorstPlaneswalkerAI(final List<Card> list) {
-        List<Card> all = CardLists.filter(list, CardPredicates.PLANESWALKERS);
-        if (all.isEmpty()) {
-            return null;
-        }
         // no AI logic, just return least expensive
-        return Aggregates.itemWithMin(all, Card::getCMC);
+        return list.stream()
+                .filter(CardPredicates.PLANESWALKERS)
+                .min(Comparator.comparing(Card::getCMC))
+                .orElse(null);
     }
 
     public static Card getBestPlaneswalkerToDamage(final List<Card> pws) {
@@ -182,13 +180,13 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestEnchantmentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
-        List<Card> all = CardLists.filter(list, CardPredicates.ENCHANTMENTS);
+        Stream<Card> cardStream = list.stream().filter(CardPredicates.ENCHANTMENTS);
         if (targeted) {
-            all = CardLists.filter(all, c -> c.canBeTargetedBy(spell));
+            cardStream = cardStream.filter(c -> c.canBeTargetedBy(spell));
         }
 
         // get biggest Enchantment
-        return Aggregates.itemWithMax(all, Card::getCMC);
+        return cardStream.max(Comparator.comparing(Card::getCMC)).orElse(null);
     }
 
     /**
