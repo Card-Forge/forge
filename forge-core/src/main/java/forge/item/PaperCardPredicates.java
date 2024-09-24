@@ -2,7 +2,6 @@ package forge.item;
 
 import com.google.common.collect.Lists;
 import forge.card.*;
-import forge.util.PredicateCard;
 import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,13 +14,6 @@ import java.util.function.Predicate;
  * Filters based on PaperCard values.
  */
 public abstract class PaperCardPredicates {
-    public static Predicate<PaperCard> rarity(final boolean isEqual, final CardRarity value) {
-        return new PredicateRarity(value, isEqual);
-    }
-
-    public static Predicate<PaperCard> color(final boolean isEqual, final boolean noColor, final byte value) {
-        return new PredicateColor(value, noColor, isEqual);
-    }
 
     public static Predicate<PaperCard> printedInSets(final String[] sets) {
         return printedInSets(Lists.newArrayList(sets), true);
@@ -42,70 +34,50 @@ public abstract class PaperCardPredicates {
     }
 
     public static Predicate<PaperCard> name(final String what) {
-        return new PredicateName(PredicateString.StringOp.EQUALS_IC, what);
-    }
-
-    public static Predicate<PaperCard> name(final PredicateString.StringOp op, final String what) {
-        return new PredicateName(op, what);
+        return new PredicateName(what);
     }
 
     public static Predicate<PaperCard> names(final List<String> what) {
         return new PredicateNames(what);
     }
 
-    public static Predicate<PaperCard> cards(final List<PaperCard> what) {
-        return new PredicateCards(what);
-    }
-
     private static final class PredicateColor implements Predicate<PaperCard> {
 
         private final byte operand;
-        private final boolean noColor;
-        private final boolean shouldBeEqual;
 
-        private PredicateColor(final byte color, final boolean noColor, final boolean wantEqual) {
+        private PredicateColor(final byte color) {
             this.operand = color;
-            this.noColor = noColor;
-            this.shouldBeEqual = wantEqual;
         }
 
         @Override
         public boolean test(final PaperCard card) {
-            boolean colorFound = false;
-            if (noColor) {
-                return card.getRules().getColor().isColorless() == shouldBeEqual;
-            }
             for (final byte color : card.getRules().getColor()) {
                 if (color == operand) {
-                    colorFound = true;
-                    break;
+                    return true;
                 }
             }
             if (card.getRules().getType().hasType(CardType.CoreType.Land)) {
                 for (final byte color : card.getRules().getColorIdentity()) {
                     if (color == operand) {
-                        colorFound = true;
-                        break;
+                        return true;
                     }
                 }
             }
-            return colorFound == shouldBeEqual;
+            return false;
         }
 
     }
 
     private static final class PredicateRarity implements Predicate<PaperCard> {
         private final CardRarity operand;
-        private final boolean shouldBeEqual;
 
         @Override
         public boolean test(final PaperCard card) {
-            return (card.getRarity() == this.operand) == this.shouldBeEqual;
+            return (card.getRarity() == this.operand);
         }
 
-        private PredicateRarity(final CardRarity type, final boolean wantEqual) {
+        private PredicateRarity(final CardRarity type) {
             this.operand = type;
-            this.shouldBeEqual = wantEqual;
         }
     }
 
@@ -132,8 +104,8 @@ public abstract class PaperCardPredicates {
             return this.op(card.getName(), this.operand);
         }
 
-        private PredicateName(final StringOp operator, final String operand) {
-            super(operator);
+        private PredicateName(final String operand) {
+            super(StringOp.EQUALS_IC);
             this.operand = operand;
         }
     }
@@ -158,42 +130,23 @@ public abstract class PaperCardPredicates {
         }
     }
 
-    private static final class PredicateCards extends PredicateCard<PaperCard> {
-        private final List<PaperCard> operand;
-
-        @Override
-        public boolean test(final PaperCard card) {
-            for (final PaperCard element : this.operand) {
-                if (this.op(card, element)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private PredicateCards(final List<PaperCard> operand) {
-            super(StringOp.EQUALS);
-            this.operand = operand;
-        }
-    }
-
     public static Predicate<PaperCard> fromRules(Predicate<CardRules> cardRulesPredicate) {
         return paperCard -> cardRulesPredicate.test(paperCard.getRules());
     }
 
-    public static final Predicate<PaperCard> IS_COMMON = PaperCardPredicates.rarity(true, CardRarity.Common);
-    public static final Predicate<PaperCard> IS_UNCOMMON = PaperCardPredicates.rarity(true, CardRarity.Uncommon);
-    public static final Predicate<PaperCard> IS_RARE = PaperCardPredicates.rarity(true, CardRarity.Rare);
-    public static final Predicate<PaperCard> IS_MYTHIC_RARE = PaperCardPredicates.rarity(true, CardRarity.MythicRare);
+    public static final Predicate<PaperCard> IS_COMMON = new PredicateRarity(CardRarity.Common);
+    public static final Predicate<PaperCard> IS_UNCOMMON = new PredicateRarity(CardRarity.Uncommon);
+    public static final Predicate<PaperCard> IS_RARE = new PredicateRarity(CardRarity.Rare);
+    public static final Predicate<PaperCard> IS_MYTHIC_RARE = new PredicateRarity(CardRarity.MythicRare);
     public static final Predicate<PaperCard> IS_RARE_OR_MYTHIC = PaperCardPredicates.IS_RARE.or(PaperCardPredicates.IS_MYTHIC_RARE);
-    public static final Predicate<PaperCard> IS_SPECIAL = PaperCardPredicates.rarity(true, CardRarity.Special);
-    public static final Predicate<PaperCard> IS_BASIC_LAND_RARITY = PaperCardPredicates.rarity(true, CardRarity.BasicLand);
-    public static final Predicate<PaperCard> IS_BLACK = PaperCardPredicates.color(true, false, MagicColor.BLACK);
-    public static final Predicate<PaperCard> IS_BLUE = PaperCardPredicates.color(true, false, MagicColor.BLUE);
-    public static final Predicate<PaperCard> IS_GREEN = PaperCardPredicates.color(true, false, MagicColor.GREEN);
-    public static final Predicate<PaperCard> IS_RED = PaperCardPredicates.color(true, false, MagicColor.RED);
-    public static final Predicate<PaperCard> IS_WHITE = PaperCardPredicates.color(true, false, MagicColor.WHITE);
-    public static final Predicate<PaperCard> IS_COLORLESS = PaperCardPredicates.color(true, true, MagicColor.COLORLESS);
+    public static final Predicate<PaperCard> IS_SPECIAL = new PredicateRarity(CardRarity.Special);
+    public static final Predicate<PaperCard> IS_BASIC_LAND_RARITY = new PredicateRarity(CardRarity.BasicLand);
+    public static final Predicate<PaperCard> IS_BLACK = new PredicateColor(MagicColor.BLACK);
+    public static final Predicate<PaperCard> IS_BLUE = new PredicateColor(MagicColor.BLUE);
+    public static final Predicate<PaperCard> IS_GREEN = new PredicateColor(MagicColor.GREEN);
+    public static final Predicate<PaperCard> IS_RED = new PredicateColor(MagicColor.RED);
+    public static final Predicate<PaperCard> IS_WHITE = new PredicateColor(MagicColor.WHITE);
+    public static final Predicate<PaperCard> IS_COLORLESS = paperCard -> paperCard.getRules().getColor().isColorless();
     public static final Predicate<PaperCard> IS_UNREBALANCED = PaperCard::isUnRebalanced;
     public static final Predicate<PaperCard> IS_REBALANCED = PaperCard::isRebalanced;
 

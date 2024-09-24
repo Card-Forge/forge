@@ -1060,69 +1060,26 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     @Override
-    public Predicate<? super PaperCard> wasPrintedInSets(List<String> setCodes) {
-        return new PredicateExistsInSets(setCodes);
-    }
-
-    private class PredicateExistsInSets implements Predicate<PaperCard> {
-        private final List<String> sets;
-
-        public PredicateExistsInSets(final List<String> wantSets) {
-            this.sets = wantSets; // maybe should make a copy here?
-        }
-
-        @Override
-        public boolean test(final PaperCard subject) {
-            for (PaperCard c : getAllCards(subject.getName())) {
-                if (sets.contains(c.getEdition())) {
-                    return true;
-                }
-            }
-            return false;
-        }
+    public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
+        Set<String> sets = new HashSet<>(setCodes);
+        return paperCard -> getAllCards(paperCard.getName()).stream()
+                .map(PaperCard::getEdition)
+                .anyMatch(sets::contains);
     }
 
     // This Predicate validates if a card is legal in a given format (identified by the list of allowed sets)
     @Override
-    public Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes){
-        return new PredicateLegalInSets(allowedSetCodes);
-    }
-
-    private class PredicateLegalInSets implements Predicate<PaperCard> {
-        private final List<String> sets = new ArrayList<>();
-
-        public PredicateLegalInSets(final List<String> allowedSets){
-            this.sets.addAll(allowedSets);
-        }
-        @Override
-        public boolean test(final PaperCard card){
-            if (card == null) return false;
-            return this.sets.contains(card.getEdition());
-        }
+    public Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes){
+        Set<String> sets = new HashSet<>(allowedSetCodes);
+        return paperCard -> paperCard != null && sets.contains(paperCard.getEdition());
     }
 
     // This Predicate validates if a card was printed at [rarity], on any of its printings
     @Override
     public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
-        return new PredicatePrintedAtRarity(rarity);
-    }
-
-    private class PredicatePrintedAtRarity implements Predicate<PaperCard> {
-        private final Set<String> matchingCards;
-
-        public PredicatePrintedAtRarity(CardRarity rarity) {
-            this.matchingCards = new HashSet<>();
-            for (PaperCard c : getAllCards()) {
-                if (c.getRarity() == rarity) {
-                    this.matchingCards.add(c.getName());
-                }
-            }
-        }
-
-        @Override
-        public boolean test(final PaperCard subject) {
-            return matchingCards.contains(subject.getName());
-        }
+        return paperCard -> getAllCards(paperCard.getName()).stream()
+                .map(PaperCard::getRarity)
+                .anyMatch(rarity::equals);
     }
 
     public StringBuilder appendCardToStringBuilder(PaperCard card, StringBuilder sb) {

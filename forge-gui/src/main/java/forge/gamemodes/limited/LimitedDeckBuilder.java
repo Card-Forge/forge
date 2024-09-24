@@ -84,7 +84,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
 
         // keep Conspiracies in a separate list
         this.draftedConspiracies = aiPlayables.stream()
-                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.coreType(true, "Conspiracy")))
+                .filter(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONSPIRACY))
                 .collect(Collectors.toList());
         this.aiPlayables.removeAll(draftedConspiracies);
 

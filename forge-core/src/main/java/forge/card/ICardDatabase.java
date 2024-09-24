@@ -94,7 +94,7 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     int getMaxArtIndex(String cardName);
     int getArtCount(String cardName, String edition);
     // Utility Predicates
-    Predicate<? super PaperCard> wasPrintedInSets(List<String> allowedSetCodes);
-    Predicate<? super PaperCard> isLegal(List<String> allowedSetCodes);
+    Predicate<? super PaperCard> wasPrintedInSets(Collection<String> allowedSetCodes);
+    Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes);
     Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity);
 }

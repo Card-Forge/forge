@@ -465,7 +465,7 @@ public final class QuestUtilCards {
     public static Predicate<CardEdition> isLegalInQuestFormat(final GameFormatQuest qFormat) {
         if(qFormat == null)
             return x -> true;
-        return GameFormatQuest.QPredicates.isLegalInFormatQuest(qFormat);
+        return edition -> qFormat.isSetLegal(edition.getCode());
     }
 
 

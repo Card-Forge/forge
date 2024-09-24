@@ -892,14 +892,7 @@ public final class CardEdition implements Comparable<CardEdition> {
     }
 
     public static class Predicates {
-        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = new CanMakeBooster();
-
-        private static class CanMakeBooster implements Predicate<CardEdition> {
-            @Override
-            public boolean test(final CardEdition subject) {
-                return subject.hasBoosterTemplate();
-            }
-        }
+        public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = CardEdition::hasBoosterTemplate;
 
         public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
             return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
@@ -921,29 +914,11 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
 
-        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = new CanMakeStarter();
-        private static class CanMakeStarter implements Predicate<CardEdition> {
-            @Override
-            public boolean test(final CardEdition subject) {
-                return StaticData.instance().getTournamentPacks().contains(subject.getCode());
-            }
-        }
+        public static final Predicate<CardEdition> HAS_TOURNAMENT_PACK = edition -> StaticData.instance().getTournamentPacks().contains(edition.getCode());
 
-        public static final Predicate<CardEdition> HAS_FAT_PACK = new CanMakeFatPack();
-        private static class CanMakeFatPack implements Predicate<CardEdition> {
-            @Override
-            public boolean test(final CardEdition subject) {
-                return subject.getFatPackCount() > 0;
-            }
-        }
+        public static final Predicate<CardEdition> HAS_FAT_PACK = edition -> edition.getFatPackCount() > 0;
 
-        public static final Predicate<CardEdition> HAS_BOOSTER_BOX = new CanMakeBoosterBox();
-        private static class CanMakeBoosterBox implements Predicate<CardEdition> {
-            @Override
-            public boolean test(final CardEdition subject) {
-                return subject.getBoosterBoxCount() > 0;
-            }
-        }
+        public static final Predicate<CardEdition> HAS_BOOSTER_BOX = edition -> edition.getBoosterBoxCount() > 0;
 
         public static final Predicate<CardEdition> hasBasicLands = ed -> {
             if (ed == null) {

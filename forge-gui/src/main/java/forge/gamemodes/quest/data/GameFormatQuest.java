@@ -162,30 +162,4 @@ public final class GameFormatQuest extends GameFormat {
 		return unlocksUsed;
 	}
 
-	public abstract static class QPredicates {
-		/**
-		 * Checks if is legal in quest format.
-		 *
-		 * @param qFormat the format
-		 * @return the predicate
-		 */
-		public static Predicate<CardEdition> isLegalInFormatQuest(final GameFormatQuest qFormat) {
-			return new LegalInFormatQuest(qFormat);
-		}
-
-		private static final class LegalInFormatQuest implements Predicate<CardEdition> {
-			private final GameFormatQuest qFormat;
-
-			private LegalInFormatQuest(final GameFormatQuest fmt) {
-				this.qFormat = fmt;
-			}
-
-			@Override
-			public boolean test(final CardEdition subject) {
-				return this.qFormat.isSetLegal(subject.getCode());
-			}
-		}
-
-	}
-
 }

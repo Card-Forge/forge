@@ -673,11 +673,7 @@ public class BoosterGenerator {
 
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
-                toAdd = PaperCardPredicates.fromRules(
-                        CardRulesPredicates.splitType(CardSplitType.Transform)
-                                .or(CardRulesPredicates.splitType(CardSplitType.Meld))
-                                .or(CardRulesPredicates.splitType(CardSplitType.Modal)
-                            ));
+                toAdd = card -> CardSplitType.DUAL_FACED_CARDS.contains(card.getRules().getSplitType());
             } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = PaperCardPredicates.IS_LAND;
             } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = PaperCardPredicates.IS_BASIC_LAND_RARITY;
             } else if (operator.equalsIgnoreCase(BoosterSlots.TIME_SHIFTED)) {  toAdd = PaperCardPredicates.IS_SPECIAL;
@@ -718,8 +714,8 @@ public class BoosterGenerator {
                 toAdd = PaperCardPredicates.printedInSets(sets);
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
-                Iterable<PaperCard> cards = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                toAdd = PaperCardPredicates.cards(Lists.newArrayList(cards));
+                Set<PaperCard> cards = Sets.newHashSet(StaticData.instance().getPrintSheets().get(sheetName).toFlatList());
+                toAdd = cards::contains;
             }
 
             if (toAdd == null) {

@@ -387,7 +387,7 @@ public abstract class DeckGeneratorBase {
         }
 
         //filter to provide all dual lands from pool matching 2 or 3 colors from current deck
-        Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
+        Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(CardType.CoreType.Land);
         Predicate<CardRules> exceptBasicLand = CardRulesPredicates.NOT_BASIC_LAND;
 
         Iterable<PaperCard> landCards = pool.getAllCards(PaperCardPredicates.fromRules(dualLandFilter.and(exceptBasicLand).and(canPlay)));
