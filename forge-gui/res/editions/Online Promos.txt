@@ -25,7 +25,6 @@ ScryfallCode=PRM
 23952 S Kjeldoran Outpost @Jeff A. Menges
 23954 S Lake of the Dead @Pete Venters
 23956 S Hazezon Tamar @Richard Kane Ferguson
-F26584 S Gleemox @Dan Frazier
 26980 S Sliver Queen @Ron Spencer
 31399 S Decree of Justice @Alan Pollack
 31401 S Fireblast @Michael Danza
@@ -262,3 +261,4 @@ F26584 S Gleemox @Dan Frazier
 99667 S Mizzium Mortars @Deruchenko Alexander
 99669 S History of Benalia @Alix Branwyn
 99671 S Winds of Abandon @James Paick
+F26584 S Gleemox @Dan Frazier
