@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -203,7 +204,7 @@ public class DeckHints {
         // TODO should token generators be counted differently for their potential?
         // And would there ever be a circumstance where `fn` should be anything but PaperCard::getRules?
         Predicate<CardRules> predicate1 = tokens ? rulesWithTokens(predicate) : predicate;
-        return Iterables.filter(source, x -> predicate1.test(fn.apply(x)));
+        return IterableUtil.filter(source, x -> predicate1.test(fn.apply(x)));
     }
 
     public static Predicate<CardRules> rulesWithTokens(final Predicate<CardRules> predicate) {

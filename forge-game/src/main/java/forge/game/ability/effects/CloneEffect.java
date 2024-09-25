@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
@@ -179,9 +179,9 @@ public class CloneEffect extends SpellAbilityEffect {
                             cloneCard.clearImprintedCards();
                             cloneCard.clearRemembered();
                             // restore original Remembered and Imprinted, ignore cards from players who lost
-                            cloneCard.addImprintedCards(Iterables.filter(clonedImprinted, CardPredicates.ownerLives()));
-                            cloneCard.addRemembered(Iterables.filter(clonedRemembered, Player.class));
-                            cloneCard.addRemembered(Iterables.filter(Iterables.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
+                            cloneCard.addImprintedCards(IterableUtil.filter(clonedImprinted, CardPredicates.ownerLives()));
+                            cloneCard.addRemembered(IterableUtil.filter(clonedRemembered, Player.class));
+                            cloneCard.addRemembered(IterableUtil.filter(IterableUtil.filter(clonedRemembered, Card.class), CardPredicates.ownerLives()));
                             cloneCard.updateStateForView();
                             game.fireEvent(new GameEventCardStatsChanged(cloneCard));
                         }

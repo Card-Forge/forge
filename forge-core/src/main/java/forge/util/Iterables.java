@@ -1,10 +1,6 @@
 package forge.util;
 
 import java.util.Collection;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.StreamSupport;
 
 /**
  * Provides helper methods for Iterables similar to the Guava library,
@@ -12,55 +8,6 @@ import java.util.stream.StreamSupport;
  */
 public class Iterables {
     private Iterables(){}
-
-    //TODO: Migrate everything below.
-
-    public static <T> Iterable<T> filter(Iterable<T> iterable, Predicate<? super T> filter) {
-        return () -> StreamSupport.stream(iterable.spliterator(), false).filter(filter).iterator();
-    }
-    public static <T> Iterable<T> filter(Collection<T> iterable, Predicate<? super T> filter) {
-        return () -> iterable.stream().filter(filter).iterator();
-    }
-    public static <T> Iterable<T> filter(final Iterable<?> iterable, final Class<T> desiredType) {
-        return () -> StreamSupport.stream(iterable.spliterator(), false)
-                .filter(desiredType::isInstance)
-                .map(desiredType::cast)
-                .iterator();
-    }
-
-    public static <T> boolean any(Iterable<T> iterable, Predicate<? super T> test) {
-        return StreamSupport.stream(iterable.spliterator(), false).anyMatch(test);
-    }
-
-    public static <T> boolean all(Iterable<T> iterable, Predicate<? super T> test) {
-        return StreamSupport.stream(iterable.spliterator(), false).allMatch(test);
-    }
-
-    @SuppressWarnings("OptionalGetWithoutIsPresent")
-    public static <T> T find(Iterable<T> iterable, Predicate<? super T> predicate) {
-        return StreamSupport.stream(iterable.spliterator(), false).filter(predicate).findFirst().get();
-    }
-    public static <T> T find(Iterable<T> iterable, Predicate<? super T> predicate, T defaultValue) {
-        return StreamSupport.stream(iterable.spliterator(), false).filter(predicate).findFirst().orElse(defaultValue);
-    }
-    public static <T> Optional<T> tryFind(Iterable<T> iterable, Predicate<? super T> predicate) {
-        return StreamSupport.stream(iterable.spliterator(), false).filter(predicate).findFirst();
-    }
-
-    public static <T> int indexOf(Iterable<T> iterable, Predicate<? super T> predicate) {
-        int index = 0;
-        for(T i : iterable) {
-            if(predicate.test(i))
-                return index;
-            index++;
-        }
-        return -1;
-    }
-
-    public static <F, T> Iterable<T> transform(final Iterable<F> iterable, final Function<? super F, T> function) {
-        //Should probably also be ? extends T in the function type
-        return () -> StreamSupport.stream(iterable.spliterator(), false).map(function).iterator();
-    }
 
     //TODO: Restore everything below
     public static <T> Iterable<T> unmodifiableIterable(final Iterable<? extends T> iterable) {

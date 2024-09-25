@@ -10,7 +10,7 @@ import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.interfaces.ILobbyListener;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -148,7 +148,7 @@ public final class FServerManager {
     }
     public void broadcastExcept(final NetEvent event, final Collection<RemoteClient> notTo) {
         Predicate<RemoteClient> filter = ((Predicate<RemoteClient>) notTo::contains).negate();
-        broadcastTo(event, Iterables.filter(clients.values(), filter));
+        broadcastTo(event, IterableUtil.filter(clients.values(), filter));
     }
     private void broadcastTo(final NetEvent event, final Iterable<RemoteClient> to) {
         for (final RemoteClient client : to) {

@@ -125,7 +125,7 @@ public class AiAttackController {
 
         CardCollection tappedDefenders = new CardCollection();
         for (Card c : CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), canAnimate)) {
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.Animate))) {
                 if (sa.usesTargeting() || !sa.getParamOrDefault("Defined", "Self").equals("Self")) {
                     continue;
                 }
@@ -149,7 +149,7 @@ public class AiAttackController {
             defenders.removeAll(tappedDefenders);
 
             // Transform (e.g. Incubator tokens)
-            for (SpellAbility sa : Iterables.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
+            for (SpellAbility sa : IterableUtil.filter(c.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.SetState))) {
                 Card transformedCopy = ComputerUtilCombat.canTransform(c);
                 if (transformedCopy.isCreature()) {
                     int saCMC = sa.getPayCosts() != null && sa.getPayCosts().hasManaCost() ?
@@ -1313,7 +1313,7 @@ public class AiAttackController {
             if (attackersLeft.isEmpty() || possibleDefenders.isEmpty()) {
                 break;
             }
-            CardCollection pwDefending = new CardCollection(Iterables.filter(possibleDefenders, Card.class));
+            CardCollection pwDefending = new CardCollection(IterableUtil.filter(possibleDefenders, Card.class));
             if (pwDefending.isEmpty()) {
                 // TODO for now only looks at same player as we'd have to check the others from start too
                 //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());

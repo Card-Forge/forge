@@ -25,6 +25,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 
 public class ChooseCardAi extends SpellAbilityAi {
@@ -177,7 +178,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
-            if (Iterables.any(options, CardPredicates.UNTAPPED)) {
+            if (IterableUtil.any(options, CardPredicates.UNTAPPED)) {
                 options = CardLists.filter(options, CardPredicates.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);

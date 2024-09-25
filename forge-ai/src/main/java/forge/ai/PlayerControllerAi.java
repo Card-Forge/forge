@@ -696,7 +696,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        Iterable<Card> cardsOfType = Iterables.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+        Iterable<Card> cardsOfType = IterableUtil.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
         if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, Card::getCMC);
             return new CardCollection(toDiscard);
@@ -1335,7 +1335,7 @@ public class PlayerControllerAi extends PlayerController {
             // Probably want to see if the face up pile has anything "worth it", then potentially take face down pile
             return pile1.size() >= pile2.size();
         } else {
-            boolean allCreatures = Iterables.all(Iterables.concat(pile1, pile2), CardPredicates.CREATURES);
+            boolean allCreatures = IterableUtil.all(Iterables.concat(pile1, pile2), CardPredicates.CREATURES);
             int cmc1 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile1) : ComputerUtilCard.evaluatePermanentList(pile1);
             int cmc2 = allCreatures ? ComputerUtilCard.evaluateCreatureList(pile2) : ComputerUtilCard.evaluatePermanentList(pile2);
 

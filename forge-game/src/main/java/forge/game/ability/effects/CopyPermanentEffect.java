@@ -157,11 +157,11 @@ public class CopyPermanentEffect extends TokenEffectBase {
                             "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
                 if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                    cards = Iterables.filter(cards, PaperCardPredicates.IS_CREATURE);
+                    cards = IterableUtil.filter(cards, PaperCardPredicates.IS_CREATURE);
                 }
                 if (StringUtils.containsIgnoreCase(valid, "equipment")) {
                     Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.IS_EQUIPMENT);
-                    cards = Iterables.filter(cards, cpp);
+                    cards = IterableUtil.filter(cards, cpp);
                 }
                 if (sa.hasParam("RandomCopied")) {
                     List<PaperCard> copysource = Lists.newArrayList(cards);
@@ -194,7 +194,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
                 }
 
                 Predicate<PaperCard> cpp = PaperCardPredicates.fromRules(CardRulesPredicates.name(StringOp.EQUALS, name));
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                cards = Lists.newArrayList(IterableUtil.filter(cards, cpp));
 
                 if (!cards.isEmpty()) {
                     tgtCards.add(Card.fromPaperCard(cards.get(0), controller));

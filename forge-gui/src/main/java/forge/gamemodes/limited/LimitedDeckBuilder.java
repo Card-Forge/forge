@@ -23,7 +23,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.model.FModel;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 
 /**
@@ -130,18 +130,18 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
     public Deck buildDeck(final String landSetCode) {
         // 1. Prepare
         hasColor = new MatchColorIdentity(colors).or(COLORLESS_CARDS);
-        Iterable<PaperCard> colorList = Iterables.filter(aiPlayables,
+        Iterable<PaperCard> colorList = IterableUtil.filter(aiPlayables,
                 PaperCardPredicates.fromRules(hasColor));
         rankedColorList = CardRanker.rankCardsInDeck(colorList);
-        onColorCreatures = Iterables.filter(rankedColorList, PaperCardPredicates.IS_CREATURE);
-        onColorNonCreatures = Iterables.filter(rankedColorList,
+        onColorCreatures = IterableUtil.filter(rankedColorList, PaperCardPredicates.IS_CREATURE);
+        onColorNonCreatures = IterableUtil.filter(rankedColorList,
                 PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_CREATURE_SPELL));
         // Guava iterables do not copy the collection contents, instead they act
         // as filters and iterate over _source_ collection each time. So even if
         // aiPlayable has changed, there is no need to create a new iterable.
 
         // 2. Add any planeswalkers
-        final Iterable<PaperCard> onColorWalkers = Iterables.filter(colorList,
+        final Iterable<PaperCard> onColorWalkers = IterableUtil.filter(colorList,
                 PaperCardPredicates.fromRules(CardRulesPredicates.IS_PLANESWALKER));
         final List<PaperCard> walkers = Lists.newArrayList(onColorWalkers);
         deckList.addAll(walkers);
@@ -336,7 +336,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addLands(final int[] clrCnts, final String landSetCode) {
         // basic lands that are available in the deck
-        final Iterable<PaperCard> basicLands = Iterables.filter(aiPlayables, PaperCardPredicates.IS_BASIC_LAND);
+        final Iterable<PaperCard> basicLands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_BASIC_LAND);
         final Set<PaperCard> snowLands = new HashSet<>();
 
         // total of all ClrCnts
@@ -448,7 +448,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      * Add non-basic lands to the deck.
      */
     private void addNonBasicLands() {
-        final Iterable<PaperCard> lands = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
+        final Iterable<PaperCard> lands = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NONBASIC_LAND);
         List<PaperCard> landsToAdd = new ArrayList<>();
         for (final PaperCard card : lands) {
             if (landsNeeded > 0) {
@@ -475,7 +475,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      */
     private void addThirdColorCards(int num) {
         if (num > 0) {
-            final Iterable<PaperCard> others = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
+            final Iterable<PaperCard> others = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
             // We haven't yet ranked the off-color cards.
             // Compare them to the cards already in the deckList.
             List<PaperCard> rankedOthers = CardRanker.rankCardsInPack(others, deckList, colors, true);
@@ -490,7 +490,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
             }
 
             hasColor = new MatchColorIdentity(colors).or(DeckGeneratorBase.COLORLESS_CARDS);
-            final Iterable<PaperCard> threeColorList = Iterables.filter(rankedOthers,
+            final Iterable<PaperCard> threeColorList = IterableUtil.filter(rankedOthers,
                     PaperCardPredicates.fromRules(hasColor));
             for (final PaperCard card : threeColorList) {
                 if (num > 0) {
@@ -517,7 +517,7 @@ public class LimitedDeckBuilder extends DeckGeneratorBase {
      *           number to add
      */
     private void addRandomCards(int num) {
-        final Iterable<PaperCard> others = Iterables.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
+        final Iterable<PaperCard> others = IterableUtil.filter(aiPlayables, PaperCardPredicates.IS_NON_LAND);
         List <PaperCard> toAdd = new ArrayList<>();
         for (final PaperCard card : others) {
             if (num > 0) {

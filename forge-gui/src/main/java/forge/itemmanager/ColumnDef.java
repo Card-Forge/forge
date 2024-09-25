@@ -30,10 +30,7 @@ import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
-import forge.util.CardTranslation;
-import forge.util.Iterables;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -190,7 +187,7 @@ public enum ColumnDef {
                         sanctioned.add(gf);
                     }
                 }
-                return StringUtils.join(Iterables.transform(sanctioned, GameFormat::getName), ", ");
+                return StringUtils.join(IterableUtil.transform(sanctioned, GameFormat::getName), ", ");
             }),
     /**
      * The Draft ranking column.

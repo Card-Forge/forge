@@ -20,6 +20,7 @@ package forge.card;
 import java.util.*;
 import java.util.function.Predicate;
 
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
@@ -631,7 +632,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             }
             // remove specific creature types from all creature types
             if (ct.getRemoveType() != null && newType.allCreatureTypes) {
-                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(Iterables.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
+                newType.excludedCreatureSubtypes.addAll(Lists.newArrayList(IterableUtil.filter(ct.getRemoveType(), Predicates.IS_CREATURE_TYPE)));
             }
         }
         // sanisfy subtypes

@@ -29,7 +29,7 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import forge.util.Predicates;
+import forge.util.IterableUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
@@ -156,7 +156,7 @@ public class GameFormat implements Comparable<GameFormat> {
             for (CardRarity cr: this.getAllowedRarities()) {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
-            p = p.and(Predicates.or(crp));
+            p = p.and(IterableUtil.or(crp));
         }
         if (!this.getAdditionalCards().isEmpty()) {
             p = p.or(PaperCardPredicates.names(this.getAdditionalCards()));

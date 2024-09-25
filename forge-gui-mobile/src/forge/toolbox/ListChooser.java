@@ -38,10 +38,7 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.ListLabelFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.util.Callback;
-import forge.util.Iterables;
-import forge.util.Predicates;
-import forge.util.Utils;
+import forge.util.*;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -176,7 +173,7 @@ public class ListChooser<T> extends FContainer {
             lstChoices.setListData(list);
         }
         else {
-            lstChoices.setListData(Iterables.filter(list, Predicates.and(predicates)));
+            lstChoices.setListData(IterableUtil.filter(list, IterableUtil.and(predicates)));
         }
 
         if (!lstChoices.isEmpty() && lstChoices.getMaxChoices() > 0) {

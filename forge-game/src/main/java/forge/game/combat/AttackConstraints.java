@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -362,7 +363,7 @@ public class AttackConstraints {
         while (!sortedPlayerReqs.isEmpty()) {
             Pair<GameEntity, Integer> playerReq = MapToAmountUtil.max(sortedPlayerReqs);
             // find best attack to also fulfill the additional requirements
-            Attack bestMatch = Iterables.getLast(Iterables.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
+            Attack bestMatch = Iterables.getLast(IterableUtil.filter(result, att -> !usedAttackers.contains(att.attacker) && att.defender.equals(playerReq.getLeft())), null);
             if (bestMatch != null) {
                 bestMatch.requirements += playerReq.getRight();
                 usedAttackers.add(bestMatch.attacker);

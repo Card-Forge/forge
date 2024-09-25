@@ -12,7 +12,7 @@ import forge.item.PaperCardPredicates;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.itemmanager.SpellShopManager;
-import forge.util.Predicates;
+import forge.util.IterableUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -56,6 +56,6 @@ public class CardCMCFilter extends StatTypeFilter<PaperCard> {
             //use custom return true delegate to validate the item is a card
             return card -> true;
         }
-        return PaperCardPredicates.fromRules(Predicates.or(cmcs));
+        return PaperCardPredicates.fromRules(IterableUtil.or(cmcs));
     }
 }

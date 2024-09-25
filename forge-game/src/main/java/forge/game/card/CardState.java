@@ -47,6 +47,7 @@ import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import forge.util.ITranslatable;
 import forge.util.collect.FCollection;
@@ -368,7 +369,7 @@ public class CardState extends GameObject implements IHasSVars, ITranslatable {
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {
-        return Iterables.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
+        return IterableUtil.filter(getSpellAbilities(), SpellAbilityPredicates.isIntrinsic());
     }
 
     public final SpellAbility getFirstAbility() {

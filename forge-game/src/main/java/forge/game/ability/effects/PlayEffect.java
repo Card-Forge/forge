@@ -380,7 +380,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     }
                     abCost = new Cost(source.getManaCost(), false);
                 } else if (cost.equals("SuspendCost")) {
-                    abCost = Iterables.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
+                    abCost = IterableUtil.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
                         if (unpayableCost) {

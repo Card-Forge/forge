@@ -16,10 +16,7 @@ import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Aggregates;
-import forge.util.Iterables;
-import forge.util.Lang;
-import forge.util.Localizer;
+import forge.util.*;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -106,7 +103,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
-            List<Object> oldRem = Lists.newArrayList(Iterables.filter(host.getRemembered(), Player.class));
+            List<Object> oldRem = Lists.newArrayList(IterableUtil.filter(host.getRemembered(), Player.class));
             if (tempRem) {
                 host.removeRemembered(oldRem);
                 host.addRemembered(p); // currently we only ever need the Chooser, may need more support later

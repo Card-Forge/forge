@@ -26,7 +26,6 @@ import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.item.SealedTemplateWithSlots;
 import forge.util.*;
-import forge.util.Iterables;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderBase;
 import forge.util.storage.StorageReaderFolder;
@@ -897,12 +896,12 @@ public final class CardEdition implements Comparable<CardEdition> {
         public static final Predicate<CardEdition> CAN_MAKE_BOOSTER = CardEdition::hasBoosterTemplate;
 
         public static CardEdition getRandomSetWithAllBasicLands(Iterable<CardEdition> allEditions) {
-            return Aggregates.random(Iterables.filter(allEditions, hasBasicLands));
+            return Aggregates.random(IterableUtil.filter(allEditions, hasBasicLands));
         }
 
         public static CardEdition getPreferredArtEditionWithAllBasicLands() {
             CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
-            Iterable<CardEdition> editionsWithBasicLands = Iterables.filter(
+            Iterable<CardEdition> editionsWithBasicLands = IterableUtil.filter(
                     StaticData.instance().getEditions().getOrderedEditions(),
                     hasBasicLands.and(artPreference::accept));
             Iterator<CardEdition> editionsIterator = editionsWithBasicLands.iterator();

@@ -37,7 +37,7 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -218,15 +218,15 @@ public class Combat {
     }
 
     public final FCollectionView<Player> getDefendingPlayers() {
-        return new FCollection<>(Iterables.filter(attackableEntries, Player.class));
+        return new FCollection<>(IterableUtil.filter(attackableEntries, Player.class));
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.PLANESWALKERS);
+        return CardLists.filter(IterableUtil.filter(attackableEntries, Card.class), CardPredicates.PLANESWALKERS);
     }
 
     public final CardCollection getDefendingBattles() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.BATTLES);
+        return CardLists.filter(IterableUtil.filter(attackableEntries, Card.class), CardPredicates.BATTLES);
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
@@ -608,7 +608,7 @@ public class Combat {
             }
         }
 
-        for (Card battleOrPW : Iterables.filter(attackableEntries, Card.class)) {
+        for (Card battleOrPW : IterableUtil.filter(attackableEntries, Card.class)) {
             if (battleOrPW.equals(c)) {
                 Multimap<GameEntity, AttackingBand> attackerBuffer = ArrayListMultimap.create();
                 Collection<AttackingBand> bands = attackedByBands.get(c);

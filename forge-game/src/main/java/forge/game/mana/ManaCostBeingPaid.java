@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
@@ -464,7 +465,7 @@ public class ManaCostBeingPaid {
             return pool.canPayForShardWithColor(ms, colorMask);
         };
 
-        return tryPayMana(colorMask, Iterables.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
+        return tryPayMana(colorMask, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), pool.getPossibleColorUses(colorMask)) != null;
     }
 
     /**
@@ -485,12 +486,12 @@ public class ManaCostBeingPaid {
 
         byte inColor = mana.getColor();
         byte outColor = pool.getPossibleColorUses(inColor);
-        return tryPayMana(inColor, Iterables.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
+        return tryPayMana(inColor, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), outColor) != null;
     }
     
     public final ManaCostShard payManaViaConvoke(final byte color) {
         Predicate<ManaCostShard> predCanBePaid = ms -> !ms.isSnow() && !ms.isColorless() && ms.canBePaidWithManaOfColor(color);
-        return tryPayMana(color, Iterables.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
+        return tryPayMana(color, IterableUtil.filter(unpaidShards.keySet(), predCanBePaid), (byte)0xFF);
     }
 
     public ManaCostShard getShardToPayByPriority(Iterable<ManaCostShard> payableShards, byte possibleUses) {

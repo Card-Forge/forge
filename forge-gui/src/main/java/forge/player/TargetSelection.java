@@ -47,7 +47,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 
 /**
@@ -117,7 +117,7 @@ public class TargetSelection {
         boolean hasEnoughCandidates = candidates.size() >= minTargets;
         if (tgt.isDifferentControllers() || tgt.isForEachPlayer()) {
             PlayerCollection controllers = new PlayerCollection();
-            Iterables.filter(candidates, Card.class).forEach(c -> controllers.add(c.getController()));
+            IterableUtil.filter(candidates, Card.class).forEach(c -> controllers.add(c.getController()));
             hasEnoughCandidates &= controllers.size() >= minTargets;
         }
         mandatory &= hasEnoughCandidates;
@@ -154,7 +154,7 @@ public class TargetSelection {
             mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(controller.getPlayer(), validTargets, ability);
         }
         if (filter != null) {
-            validTargets = new CardCollection(Iterables.filter(validTargets, filter));
+            validTargets = new CardCollection(IterableUtil.filter(validTargets, filter));
         }
 
         // single zone

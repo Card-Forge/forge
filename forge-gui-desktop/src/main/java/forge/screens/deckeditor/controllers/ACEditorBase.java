@@ -61,10 +61,7 @@ import forge.toolbox.ContextMenuBuilder;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
-import forge.util.Aggregates;
-import forge.util.ItemPool;
-import forge.util.Iterables;
-import forge.util.Localizer;
+import forge.util.*;
 import forge.view.FView;
 
 /**
@@ -232,7 +229,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     max = cardCopies;
                 }
 
-                Entry<String, Integer> cardAmountInfo = Iterables.find(cardsByName,
+                Entry<String, Integer> cardAmountInfo = IterableUtil.find(cardsByName,
                         t -> t.getKey().equals(card.getRules().getNormalizedName()), null);
                 if (cardAmountInfo != null) {
                     max -= cardAmountInfo.getValue();

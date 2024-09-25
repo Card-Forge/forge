@@ -384,7 +384,7 @@ public class SpecialCardAi {
                     ai.getCardsIn(ZoneType.Battlefield).threadSafeIterable(), CardPredicates.hasSVar("DonateMe")));
             if (donateTarget != null) {
                 // first filter for opponents which can be targeted by SA
-                final Iterable<Player> oppList = Iterables.filter(ai.getOpponents(),
+                final Iterable<Player> oppList = IterableUtil.filter(ai.getOpponents(),
                         PlayerPredicates.isTargetableBy(sa));
 
                 // All opponents have hexproof or something like that
@@ -393,7 +393,7 @@ public class SpecialCardAi {
                 }
 
                 // filter for player who does not have donate target already
-                Iterable<Player> oppTarget = Iterables.filter(oppList,
+                Iterable<Player> oppTarget = IterableUtil.filter(oppList,
                         PlayerPredicates.isNotCardInPlay(donateTarget.getName()));
                 // fall back to previous list
                 if (Iterables.isEmpty(oppTarget)) {
@@ -1763,7 +1763,7 @@ public class SpecialCardAi {
             // check if +1 would be sufficient
             if (single != null) {
                 // TODO use better logic to find the right Deal Damage Effect?
-                SpellAbility ugin_burn = Iterables.find(source.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.DealDamage), null);
+                SpellAbility ugin_burn = IterableUtil.find(source.getSpellAbilities(), SpellAbilityPredicates.isApi(ApiType.DealDamage), null);
                 if (ugin_burn != null) {
                     // basic logic copied from DamageDealAi::dealDamageChooseTgtC
                     if (ugin_burn.canTarget(single)) {

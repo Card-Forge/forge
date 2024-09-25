@@ -13,7 +13,7 @@ import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.model.FModel;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 
 /**
  * Created by maustin on 28/02/2018.
@@ -22,7 +22,7 @@ public class CardThemedConquestDeckBuilder extends CardThemedDeckBuilder {
 
     public CardThemedConquestDeckBuilder(PaperCard commanderCard0, final List<PaperCard> dList, GameFormat gameFormat, boolean isForAI, DeckFormat format) {
         super(new DeckGenPool(
-                Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(),
+                IterableUtil.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(),
                         gameFormat.getFilterPrinted())
         ), format);
         this.availableList = dList;

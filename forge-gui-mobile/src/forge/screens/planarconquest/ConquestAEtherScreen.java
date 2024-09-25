@@ -146,7 +146,7 @@ public class ConquestAEtherScreen extends FScreen {
         CardRarity rarity = btnRarityFilter.selectedOption.getRarity(MyRandom.getRandom().nextDouble());
         while (true) {
             final CardRarity allowedRarity = rarity;
-            rewardPool = Iterables.filter(filteredPool, card -> allowedRarity == card.getRarity()
+            rewardPool = IterableUtil.filter(filteredPool, card -> allowedRarity == card.getRarity()
                     || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special);
             if (Iterables.isEmpty(rewardPool)) { //if pool is empty, must reduce rarity and try again
                 if (rarity == minRarity) {

@@ -87,13 +87,13 @@ public abstract class DeckGeneratorBase {
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
-        final Iterable<PaperCard> creatures = Iterables.filter(cards, PaperCardPredicates.IS_CREATURE);
+        final Iterable<PaperCard> creatures = IterableUtil.filter(cards, PaperCardPredicates.IS_CREATURE);
         final int creatCnt = (int) Math.ceil(getCreaturePercentage() * size);
         trace.append("Creatures to add:").append(creatCnt).append("\n");
         addCmcAdjusted(creatures, creatCnt, cmcLevels);
 
         Predicate<PaperCard> preSpells = PaperCardPredicates.fromRules(CardRulesPredicates.IS_NON_CREATURE_SPELL);
-        final Iterable<PaperCard> spells = Iterables.filter(cards, preSpells);
+        final Iterable<PaperCard> spells = IterableUtil.filter(cards, preSpells);
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
         trace.append("Spells to add:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels);
@@ -261,7 +261,7 @@ public abstract class DeckGeneratorBase {
         float requestedOverTotal = (float)cnt / totalWeight;
 
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
-            Iterable<PaperCard> matchingCards = Iterables.filter(source, PaperCardPredicates.fromRules(pair.getLeft()));
+            Iterable<PaperCard> matchingCards = IterableUtil.filter(source, PaperCardPredicates.fromRules(pair.getLeft()));
             int cmcCountForPool = (int) Math.ceil(pair.getRight() * desiredOverTotal);
             
             int addOfThisCmc = Math.round(pair.getRight() * requestedOverTotal);
@@ -291,7 +291,7 @@ public abstract class DeckGeneratorBase {
         if (useArtifacts) {
             hasColor = hasColor.or(COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(), PaperCardPredicates.fromRules(canPlay.and(hasColor).and(canUseInFormat)));
+        return IterableUtil.filter(pool.getAllCards(), PaperCardPredicates.fromRules(canPlay.and(hasColor).and(canUseInFormat)));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {

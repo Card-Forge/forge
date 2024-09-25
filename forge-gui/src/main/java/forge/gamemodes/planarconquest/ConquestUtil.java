@@ -36,10 +36,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.IHasSkinProp;
 import forge.model.FModel;
-import forge.util.FileUtil;
-import forge.util.Iterables;
-import forge.util.Localizer;
-import forge.util.MyRandom;
+import forge.util.*;
 
 public class ConquestUtil {
     private ConquestUtil() {}
@@ -187,7 +184,7 @@ public class ConquestUtil {
         final byte colorIdentity = startingCommander.getRules().getColorIdentity().getColor();
         final Set<String> selected = Sets.newHashSet();
         //TODO: Could make this more efficient by streaming unique cards and then mapping them to an acceptable print if they aren't already...
-        return Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), card -> {
+        return IterableUtil.filter(FModel.getMagicDb().getCommonCards().getAllNonPromosNonReprintsNoAlt(), card -> {
             if (selected.contains(card.getName())) {
                 return false;
             }

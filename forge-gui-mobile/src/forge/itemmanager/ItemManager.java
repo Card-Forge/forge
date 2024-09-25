@@ -52,10 +52,7 @@ import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.ItemPool;
-import forge.util.Iterables;
-import forge.util.LayoutHelper;
-import forge.util.Predicates;
+import forge.util.*;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {
@@ -685,7 +682,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             predicates.add(advancedSearchFilter.buildPredicate(genericType));
         }
 
-        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.and(predicates);
         if (filterPredicate == newFilterPredicate) { return false; }
 
         filterPredicate = newFilterPredicate;
@@ -783,7 +780,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             Iterable<Entry<T, Integer>> items = pool;
             if (useFilter) {
                 Predicate<Entry<T, Integer>> pred = x -> filterPredicate.test(x.getKey());
-                items = Iterables.filter(pool, pred);
+                items = IterableUtil.filter(pool, pred);
             }
             model.addItems(items);
         }

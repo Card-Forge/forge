@@ -24,8 +24,8 @@ import forge.itemmanager.SItemManagerUtil.StatTypes;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
+import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
-import forge.util.Predicates;
 
 /** 
  * Static factory; holds blocks of form elements and predicates
@@ -70,10 +70,10 @@ public class SFilterUtil {
             if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
             if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
 
-            terms.add(Predicates.or(subands));
+            terms.add(IterableUtil.or(subands));
         }
         Predicate<CardRules> textFilter;
-        textFilter = invert ? Predicates.or(terms).negate() : Predicates.and(terms);
+        textFilter = invert ? IterableUtil.or(terms).negate() : IterableUtil.and(terms);
 
         return PaperCardPredicates.fromRules(textFilter);
     }
@@ -381,7 +381,7 @@ public class SFilterUtil {
         for (GameFormat f : formats) {
             predicates.add(allowReprints ? f.getFilterRules() : f.getFilterPrinted());
         }
-        return Predicates.or(predicates);
+        return IterableUtil.or(predicates);
     }
 
     public static <T> Predicate<T> optimizedAnd(Predicate<T> p1, Predicate<T> p2) {

@@ -24,6 +24,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import forge.util.MyRandom;
 
@@ -791,7 +792,7 @@ public class CountersPutAi extends CountersAi {
             }
         } else if (sa.getTargetRestrictions().canOnlyTgtOpponent() && !sa.getTargetRestrictions().canTgtCreature()) {
             // can only target opponent
-            PlayerCollection playerList = new PlayerCollection(Iterables.filter(
+            PlayerCollection playerList = new PlayerCollection(IterableUtil.filter(
                     sa.getTargetRestrictions().getAllCandidates(sa, true, true), Player.class));
 
             if (playerList.isEmpty()) {

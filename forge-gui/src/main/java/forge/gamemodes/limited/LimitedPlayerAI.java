@@ -9,7 +9,7 @@ import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgePreferences;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -264,7 +264,7 @@ public class LimitedPlayerAI extends LimitedPlayer {
         List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
 
         DeckGeneratorBase.MatchColorIdentity hasColor = new DeckGeneratorBase.MatchColorIdentity(colors);
-        Iterable<PaperCard> colorList = Iterables.filter(deckCards,
+        Iterable<PaperCard> colorList = IterableUtil.filter(deckCards,
                 PaperCardPredicates.fromRules(hasColor).negate());
 
         PaperCard exchangeCard = null;

@@ -18,7 +18,7 @@
 package forge.util.storage;
 
 import forge.util.IItemReader;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -83,7 +83,7 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public T find(Predicate<T> condition) {
-        return Iterables.tryFind(map.values(), condition).orElse(null);
+        return IterableUtil.tryFind(map.values(), condition).orElse(null);
     }
 
     @Override

@@ -901,7 +901,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
             predicates.add(mainSearchFilter.buildPredicate(this.genericType));
         }
 
-        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        final Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.and(predicates);
         if (this.filterPredicate == newFilterPredicate) { return false; }
 
         this.filterPredicate = newFilterPredicate;
@@ -1003,12 +1003,12 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
         if (useFilter && this.wantUnique) {
             final Predicate<Entry<T, Integer>> filterForPool = x -> this.filterPredicate.test(x.getKey());
-            final Iterable<Entry<T, Integer>> items = getUnique(Iterables.filter(this.pool, filterForPool));
+            final Iterable<Entry<T, Integer>> items = getUnique(IterableUtil.filter(this.pool, filterForPool));
             this.model.addItems(items);
         }
         else if (useFilter) {
             final Predicate<Entry<T, Integer>> pred = x -> this.filterPredicate.test(x.getKey());
-            this.model.addItems(Iterables.filter(this.pool, pred));
+            this.model.addItems(IterableUtil.filter(this.pool, pred));
         }
         else if (this.wantUnique) {
             final Iterable<Entry<T, Integer>> items = getUnique(this.pool);

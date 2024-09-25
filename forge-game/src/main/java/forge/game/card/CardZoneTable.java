@@ -17,6 +17,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
@@ -135,7 +136,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
 
     public CardCollection filterCards(Iterable<ZoneType> origin, Iterable<ZoneType> destination, String valid, Card host, CardTraitBase sa) {
         CardCollection allCards = new CardCollection();
-        if (destination != null && !Iterables.any(destination, d -> columnKeySet().contains(d))) {
+        if (destination != null && !IterableUtil.any(destination, d -> columnKeySet().contains(d))) {
             return allCards;
         }
         if (origin != null) {

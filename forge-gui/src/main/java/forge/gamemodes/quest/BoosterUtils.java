@@ -25,15 +25,12 @@ import java.util.stream.Collectors;
 
 import forge.card.*;
 import forge.item.*;
-import forge.util.Iterables;
-import forge.util.Predicates;
+import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
 import forge.util.PredicateString.StringOp;
 
 /**
@@ -185,7 +182,7 @@ public final class BoosterUtils {
         List<InventoryItem> output = new ArrayList<>();
 
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
-        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+        Iterable<CardEdition> possibleEditions = IterableUtil.filter(FModel.getMagicDb().getEditions(), filter);
 
         if (!possibleEditions.iterator().hasNext()) {
             System.err.println("No sets found in starting pool that can create boosters.");
@@ -395,7 +392,7 @@ public final class BoosterUtils {
                 do {
                     if (color2 != null) {
                         Predicate<PaperCard> color2c = PaperCardPredicates.fromRules(color2);
-                        card = Aggregates.random(Iterables.filter(source, filter.and(color2c)));
+                        card = Aggregates.random(IterableUtil.filter(source, filter.and(color2c)));
                     }
                 } while (card == null && colorMisses++ < 10);
             }
@@ -486,7 +483,7 @@ public final class BoosterUtils {
             }
 
             PrintSheet ps = new PrintSheet("Quest rewards");
-            Predicate<PaperCard> predicate = Predicates.and(preds);
+            Predicate<PaperCard> predicate = IterableUtil.and(preds);
             FModel.getMagicDb().getCommonCards().streamAllCards()
                     .filter(predicate).forEach(ps::add);
             rewards.addAll(ps.random(qty, true));

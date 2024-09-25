@@ -42,7 +42,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 
 import java.util.*;
@@ -230,7 +230,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         undoStackOwner = null;
     }
     public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
-        return Iterables.filter(undoStack, CardTraitPredicates.isHostCard(c));
+        return IterableUtil.filter(undoStack, CardTraitPredicates.isHostCard(c));
     }
 
     public final void add(SpellAbility sp) {
@@ -1020,7 +1020,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {
-            if (Iterables.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {
+            if (IterableUtil.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {
                 return true;
             }
             for (SpellAbility sp : tc.getTargetSpells()) {

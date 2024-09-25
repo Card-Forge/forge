@@ -20,6 +20,7 @@ import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 
 import java.text.SimpleDateFormat;
@@ -792,7 +793,7 @@ public class CardUtil {
 
     public static Deck generateRandomBoosterPackAsDeck(final Predicate<CardEdition> editionFilter) {
         Predicate<CardEdition> filter = CardEdition.Predicates.CAN_MAKE_BOOSTER.and(editionFilter);
-        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+        Iterable<CardEdition> possibleEditions = IterableUtil.filter(FModel.getMagicDb().getEditions(), filter);
 
         if (!possibleEditions.iterator().hasNext()) {
             System.err.println("No sets found matching edition filter that can create boosters.");

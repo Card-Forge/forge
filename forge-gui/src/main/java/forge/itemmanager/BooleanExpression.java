@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
+import forge.util.IterableUtil;
 import forge.util.PredicateString.StringOp;
-import forge.util.Predicates;
 
 public class BooleanExpression {
     private Stack<Operator> operators = new Stack<>();
@@ -160,7 +160,7 @@ public class BooleanExpression {
             predicates.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, value));
         }
         if (!predicates.isEmpty()) {
-            return Predicates.or(predicates);
+            return IterableUtil.or(predicates);
         }
         return x -> true;
 

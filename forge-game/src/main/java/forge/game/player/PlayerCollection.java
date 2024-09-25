@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 import forge.game.card.CardCollection;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.collect.FCollection;
 
 public class PlayerCollection extends FCollection<Player> {
@@ -53,7 +53,7 @@ public class PlayerCollection extends FCollection<Player> {
     
     // filter functions with predicate
     public PlayerCollection filter(Predicate<Player> pred) {
-        return new PlayerCollection(Iterables.filter(this, pred));
+        return new PlayerCollection(IterableUtil.filter(this, pred));
     }
     
     // sort functions with Comparator

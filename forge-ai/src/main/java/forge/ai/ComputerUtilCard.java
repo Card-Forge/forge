@@ -211,17 +211,17 @@ public class ComputerUtilCard {
 
             // Urza's Mine/Tower/Power Plant
             final CardCollectionView aiAvailable = nbLand.get(0).getController().getCardsIn(Arrays.asList(ZoneType.Battlefield, ZoneType.Hand));
-            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
+            if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Mine"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Mine")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Mine")).getFirst();
                 }
             }
-            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Tower"))) {
+            if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Tower"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Tower")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Tower")).getFirst();
                 }
             }
-            if (Iterables.any(list, CardPredicates.nameEquals("Urza's Power Plant"))) {
+            if (IterableUtil.any(list, CardPredicates.nameEquals("Urza's Power Plant"))) {
                 if (CardLists.filter(aiAvailable, CardPredicates.nameEquals("Urza's Power Plant")).isEmpty()) {
                     return CardLists.filter(nbLand, CardPredicates.nameEquals("Urza's Power Plant")).getFirst();
                 }
@@ -354,10 +354,10 @@ public class ComputerUtilCard {
      */
     public static Card getBestAI(final Iterable<Card> list) {
         // Get Best will filter by appropriate getBest list if ALL of the list is of that type
-        if (Iterables.all(list, CardPredicates.CREATURES)) {
+        if (IterableUtil.all(list, CardPredicates.CREATURES)) {
             return getBestCreatureAI(list);
         }
-        if (Iterables.all(list, CardPredicates.LANDS)) {
+        if (IterableUtil.all(list, CardPredicates.LANDS)) {
             return getBestLandAI(list);
         }
         // TODO - Once we get an EvaluatePermanent this should call getBestPermanent()
@@ -374,7 +374,7 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+        return Aggregates.itemWithMax(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
     /**
@@ -387,7 +387,7 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMax(Iterables.filter(list, Card::hasPlayableLandFace), ComputerUtilCard.landEvaluator);
+        return Aggregates.itemWithMax(IterableUtil.filter(list, Card::hasPlayableLandFace), ComputerUtilCard.landEvaluator);
     }
 
     /**
@@ -402,7 +402,7 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
+        return Aggregates.itemWithMin(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
     // This selection rates tokens higher
@@ -476,21 +476,21 @@ public class ComputerUtilCard {
             return null;
         }
 
-        final boolean hasEnchantmants = Iterables.any(list, CardPredicates.ENCHANTMENTS);
+        final boolean hasEnchantmants = IterableUtil.any(list, CardPredicates.ENCHANTMENTS);
         if (biasEnch && hasEnchantmants) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.ENCHANTMENTS), null, false);
         }
 
-        final boolean hasArtifacts = Iterables.any(list, CardPredicates.ARTIFACTS);
+        final boolean hasArtifacts = IterableUtil.any(list, CardPredicates.ARTIFACTS);
         if (biasArt && hasArtifacts) {
             return getCheapestPermanentAI(CardLists.filter(list, CardPredicates.ARTIFACTS), null, false);
         }
 
-        if (biasLand && Iterables.any(list, CardPredicates.LANDS)) {
+        if (biasLand && IterableUtil.any(list, CardPredicates.LANDS)) {
             return getWorstLand(CardLists.filter(list, CardPredicates.LANDS));
         }
 
-        final boolean hasCreatures = Iterables.any(list, CardPredicates.CREATURES);
+        final boolean hasCreatures = IterableUtil.any(list, CardPredicates.CREATURES);
         if (biasCreature && hasCreatures) {
             return getWorstCreatureAI(CardLists.filter(list, CardPredicates.CREATURES));
         }

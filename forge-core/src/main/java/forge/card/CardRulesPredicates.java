@@ -129,7 +129,7 @@ public final class CardRulesPredicates {
      * @return the predicate
      */
     public static Predicate<CardRules> hasKeyword(final String keyword) {
-        return card -> Iterables.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
+        return card -> IterableUtil.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
     }
 
     /**

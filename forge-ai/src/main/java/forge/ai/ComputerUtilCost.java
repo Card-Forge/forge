@@ -20,7 +20,7 @@ import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -922,7 +922,7 @@ public class ComputerUtilCost {
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
             final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = Iterables.filter(choices, CardPredicates.isController(ai).and(targets::contains).negate());
+            choices = IterableUtil.filter(choices, CardPredicates.isController(ai).and(targets::contains).negate());
         }
         return new CardCollection(choices);
     }

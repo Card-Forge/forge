@@ -30,9 +30,8 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityCrewValue;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
-import forge.util.Predicates;
 import forge.util.collect.FCollectionView;
 
 /**
@@ -310,15 +309,15 @@ public class CardLists {
      *         criteria; may be empty, but never null.
      */
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> filt) {
-        return new CardCollection(Iterables.filter(cardList, filt));
+        return new CardCollection(IterableUtil.filter(cardList, filt));
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return new CardCollection(Iterables.filter(cardList, f1.and(f2)));
+        return new CardCollection(IterableUtil.filter(cardList, f1.and(f2)));
     }
 
     public static CardCollection filter(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {
-        return new CardCollection(Iterables.filter(cardList, Predicates.and(filt)));
+        return new CardCollection(IterableUtil.filter(cardList, IterableUtil.and(filt)));
     }
 
     /**
@@ -333,15 +332,15 @@ public class CardLists {
      *         criteria; may be empty, but never null.
      */
     public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> filt) {
-        return Lists.newArrayList(Iterables.filter(cardList, filt));
+        return Lists.newArrayList(IterableUtil.filter(cardList, filt));
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Predicate<Card> f1, Predicate<Card> f2) {
-        return Lists.newArrayList(Iterables.filter(cardList, f1.and(f2)));
+        return Lists.newArrayList(IterableUtil.filter(cardList, f1.and(f2)));
     }
 
     public static List<Card> filterAsList(Iterable<Card> cardList, Iterable<Predicate<Card>> filt) {
-        return Lists.newArrayList(Iterables.filter(cardList, Predicates.and(filt)));
+        return Lists.newArrayList(IterableUtil.filter(cardList, IterableUtil.and(filt)));
     }
 
     public static int count(Iterable<Card> cardList, Predicate<Card> filt) {

@@ -1608,7 +1608,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         Iterable<Card> milledView = getCardsIn(ZoneType.Library);
         // 614.13c
         if (sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB) != null) {
-            milledView = Iterables.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
+            milledView = IterableUtil.filter(milledView, c -> !((CardCollection) sa.getRootAbility().getReplacingObject(AbilityKey.SimultaneousETB)).contains(c));
         }
         CardCollectionView milled = new CardCollection(Iterables.limit(milledView, n));
 
@@ -1893,7 +1893,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Iterable<Player> getAttackedPlayersMyTurn() {
-        return Iterables.filter(attackedThisTurn.keySet(), Player.class);
+        return IterableUtil.filter(attackedThisTurn.keySet(), Player.class);
     }
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;

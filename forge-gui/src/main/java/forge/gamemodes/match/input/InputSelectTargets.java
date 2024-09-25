@@ -395,7 +395,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (ge instanceof Card) {
             getController().getGui().setUsedToPay(CardView.get((Card) ge), false);
             // try to get last selected card
-            lastTarget = Iterables.getLast(Iterables.filter(targets, Card.class), null);
+            lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
         else if (ge instanceof Player) {
             getController().getGui().setHighlighted(PlayerView.get((Player) ge), false);

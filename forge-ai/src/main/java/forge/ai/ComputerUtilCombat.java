@@ -42,6 +42,7 @@ import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -78,7 +79,7 @@ public class ComputerUtilCombat {
      */
     public static boolean canAttackNextTurn(final Card attacker) {
         final Iterable<GameEntity> defenders = CombatUtil.getAllPossibleDefenders(attacker.getController());
-        return Iterables.any(defenders, input -> canAttackNextTurn(attacker, input));
+        return IterableUtil.any(defenders, input -> canAttackNextTurn(attacker, input));
     }
 
     /**

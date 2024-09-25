@@ -30,6 +30,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import forge.util.collect.FCollection;
 
@@ -51,7 +52,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final int getTotalTargetedCMC() {
         int totalCMC = 0;
-        for (Card c : Iterables.filter(targets, Card.class)) {
+        for (Card c : IterableUtil.filter(targets, Card.class)) {
             totalCMC += c.getCMC();
         }
         return totalCMC;
@@ -59,7 +60,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     public final int getTotalTargetedPower() {
         int totalPower = 0;
-        for (Card c : Iterables.filter(targets, Card.class)) {
+        for (Card c : IterableUtil.filter(targets, Card.class)) {
             totalPower += c.getNetPower();
         }
         return totalPower;
@@ -101,19 +102,19 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     }
 
     public final CardCollectionView getTargetCards() {
-        return new CardCollection(Iterables.filter(targets, Card.class));
+        return new CardCollection(IterableUtil.filter(targets, Card.class));
     }
 
     public final Iterable<Player> getTargetPlayers() {
-        return Iterables.filter(targets, Player.class);
+        return IterableUtil.filter(targets, Player.class);
     }
 
     public final Iterable<SpellAbility> getTargetSpells() {
-        return Iterables.filter(targets, SpellAbility.class);
+        return IterableUtil.filter(targets, SpellAbility.class);
     }
 
     public final Iterable<GameEntity> getTargetEntities() {
-        return Iterables.filter(targets, GameEntity.class);
+        return IterableUtil.filter(targets, GameEntity.class);
     }
 
     public final boolean isTargetingAnyCard() {
@@ -161,7 +162,7 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
     @Override
     public boolean contains(Object o) {
         if (o instanceof Card) {
-            return Iterables.any(Iterables.filter(targets, Card.class), c -> c.equalsWithGameTimestamp((Card) o));
+            return IterableUtil.any(IterableUtil.filter(targets, Card.class), c -> c.equalsWithGameTimestamp((Card) o));
         }
         return super.contains(o);
     }

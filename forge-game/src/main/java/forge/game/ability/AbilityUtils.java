@@ -178,7 +178,7 @@ public class AbilityUtils {
                 if (crd instanceof Card) {
                     c = (Card) crd;
                 } else if (crd instanceof Iterable) {
-                    cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
+                    cards.addAll(IterableUtil.filter((Iterable<?>) crd, Card.class));
                 }
             }
             else if (defined.contains("HostCard")) { //Triggered*HostCard
@@ -194,7 +194,7 @@ public class AbilityUtils {
                 if (crd instanceof Card) {
                     c = game.getCardState((Card) crd);
                 } else if (crd instanceof Iterable) {
-                    cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
+                    cards.addAll(IterableUtil.filter((Iterable<?>) crd, Card.class));
                 }
             }
         } else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
@@ -205,7 +205,7 @@ public class AbilityUtils {
             if (crd instanceof Card) {
                 c = (Card) crd;
             } else if (crd instanceof Iterable<?>) {
-                cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
+                cards.addAll(IterableUtil.filter((Iterable<?>) crd, Card.class));
             }
         } else if (defined.equals("Remembered") || defined.equals("RememberedCard")) {
             if (!hostCard.hasRemembered()) {
@@ -719,11 +719,11 @@ public class AbilityUtils {
                 }
                 else if (calcX[0].startsWith("TriggerRemembered")) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = Iterables.filter(root.getTriggerRemembered(), Card.class);
+                    list = IterableUtil.filter(root.getTriggerRemembered(), Card.class);
                 }
                 else if (calcX[0].startsWith("TriggerObjects")) {
                     final SpellAbility root = sa.getRootAbility();
-                    list = Iterables.filter((Iterable<?>) root.getTriggeringObjects().getOrDefault(
+                    list = IterableUtil.filter((Iterable<?>) root.getTriggeringObjects().getOrDefault(
                             (AbilityKey.fromString(calcX[0].substring(14))), new CardCollection()), Card.class);
                 }
                 // CardTriggered<AbilityKey> used to bypass AbilityKeys that could also be Player above
@@ -741,7 +741,7 @@ public class AbilityUtils {
                 }
                 if (list != null) {
                     // there could be null inside!
-                    list = Iterables.filter(list, Card.class);
+                    list = IterableUtil.filter(list, Card.class);
                     val = handlePaid(list, calcX[1], card, ability);
                 }
             }
@@ -1052,9 +1052,9 @@ public class AbilityUtils {
                     o = ((SpellAbility) c).getActivatingPlayer();
                 } else if (c instanceof Iterable<?>) { // For merged permanent
                     if (orCont) {
-                        addPlayer(Iterables.filter((Iterable<Object>)c, Player.class), "", players);
+                        addPlayer(IterableUtil.filter((Iterable<Object>)c, Player.class), "", players);
                     }
-                    addPlayer(Iterables.filter((Iterable<Object>)c, Card.class), "Controller", players);
+                    addPlayer(IterableUtil.filter((Iterable<Object>)c, Card.class), "Controller", players);
                 }
             } else if (defParsed.endsWith("Opponent")) {
                 String triggeringType = defParsed.substring(9);
@@ -1091,7 +1091,7 @@ public class AbilityUtils {
                     players.add((Player) o);
                 }
                 if (o instanceof Iterable) {
-                    players.addAll(Iterables.filter((Iterable<?>)o, Player.class));
+                    players.addAll(IterableUtil.filter((Iterable<?>)o, Player.class));
                 }
             }
         } else if (defined.startsWith("OppNon")) {
@@ -3679,7 +3679,7 @@ public class AbilityUtils {
         }
 
         if (s.startsWith("Valid")) {
-            return handlePaid(Iterables.filter(objects, Card.class), s, source, ctb);
+            return handlePaid(IterableUtil.filter(objects, Card.class), s, source, ctb);
         }
 
         int n = s.startsWith("Amount") ? objects.size() : 0;

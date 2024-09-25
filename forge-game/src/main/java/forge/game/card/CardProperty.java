@@ -27,6 +27,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Expressions;
+import forge.util.IterableUtil;
 import forge.util.Iterables;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -836,7 +837,7 @@ public class CardProperty {
                     final String restriction = property.split("sharesCardTypeWithOther ")[1];
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     list.remove(card);
-                    return Iterables.any(list, CardPredicates.sharesCardTypeWith(card));
+                    return IterableUtil.any(list, CardPredicates.sharesCardTypeWith(card));
                 }
 
                 final String restriction = property.split("sharesCardTypeWith ")[1];

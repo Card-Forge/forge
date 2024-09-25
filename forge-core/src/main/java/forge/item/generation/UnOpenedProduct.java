@@ -5,7 +5,7 @@ import forge.card.PrintSheet;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.util.ItemPool;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class UnOpenedProduct implements IUnOpenedProduct {
     }
 
     public UnOpenedProduct(SealedTemplate sealedProductTemplate, Predicate<PaperCard> filterPrinted) {
-        this(sealedProductTemplate, Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), filterPrinted));
+        this(sealedProductTemplate, IterableUtil.filter(StaticData.instance().getCommonCards().getAllCards(), filterPrinted));
     }
 
     private void prebuildSheets(Iterable<PaperCard> sourceList) {

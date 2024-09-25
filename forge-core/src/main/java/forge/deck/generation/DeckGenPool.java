@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 
 public class DeckGenPool implements IDeckGenPool {
     private final Map<String, PaperCard> cards = new HashMap<>();
@@ -64,6 +64,6 @@ public class DeckGenPool implements IDeckGenPool {
 
     @Override
     public Iterable<PaperCard> getAllCards(Predicate<PaperCard> filter) {
-        return Iterables.filter(getAllCards(), filter);
+        return IterableUtil.filter(getAllCards(), filter);
     }
 }

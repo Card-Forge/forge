@@ -29,7 +29,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 
 public class ManaAi extends SpellAbilityAi {
 
@@ -253,7 +253,7 @@ public class ManaAi extends SpellAbilityAi {
 
     private boolean improvesPosition(Player ai, SpellAbility sa) {
         boolean activateForTrigger = (!ai.getManaPool().hasBurn() || !ai.canLoseLife() || ai.cantLoseForZeroOrLessLife()) &&
-                Iterables.any(Iterables.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
+                IterableUtil.any(IterableUtil.filter(sa.getHostCard().getTriggers(), CardTraitPredicates.hasParam("AILogic", "ActivateOnce")),
                 t -> sa.getHostCard().getAbilityActivatedThisTurn(t.getOverridingAbility()) == 0);
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();

@@ -29,7 +29,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
 
@@ -72,7 +72,7 @@ public final class CardPredicates {
 
     public static Predicate<Card> containsKeyword(final String keyword) {
         return c -> {
-            if (Iterables.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
+            if (IterableUtil.any(c.getHiddenExtrinsicKeywords(), PredicateString.contains(keyword))) {
                 return true;
             }
 

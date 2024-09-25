@@ -204,7 +204,7 @@ public class BoosterDraft implements IBoosterDraft {
                 // Filter all sets by theme restrictions
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
-                final Iterable<CardEdition> chaosDraftEditions = Iterables.filter(
+                final Iterable<CardEdition> chaosDraftEditions = IterableUtil.filter(
                         allEditions.getOrderedEditions(),
                         themeFilter);
                 // Add chaos "boosters" as special suppliers

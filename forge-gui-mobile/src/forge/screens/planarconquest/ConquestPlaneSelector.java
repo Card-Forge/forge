@@ -22,7 +22,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTimer;
 import forge.toolbox.GuiDialog;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -34,7 +34,7 @@ public class ConquestPlaneSelector extends FDisplayObject {
     private static final float MONITOR_LEFT_MULTIPLIER = 19f / 443f;
     private static final float ARROW_THICKNESS = Utils.scale(3);
 
-    private static List<ConquestPlane> planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), plane -> {
+    private static List<ConquestPlane> planes = ImmutableList.copyOf(IterableUtil.filter(FModel.getPlanes(), plane -> {
         return !plane.isUnreachable(); //filter out unreachable planes
     }));
 
@@ -224,6 +224,6 @@ public class ConquestPlaneSelector extends FDisplayObject {
     }
 
     public void updateReachablePlanes() {
-        planes = ImmutableList.copyOf(Iterables.filter(FModel.getPlanes(), plane -> !plane.isUnreachable()));
+        planes = ImmutableList.copyOf(IterableUtil.filter(FModel.getPlanes(), plane -> !plane.isUnreachable()));
     }
 }

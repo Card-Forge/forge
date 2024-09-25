@@ -17,7 +17,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
 import forge.util.IHasName;
-import forge.util.Iterables;
+import forge.util.IterableUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -361,7 +361,7 @@ public class DeckProxy implements InventoryItem {
     public String getFormatsString() {
         Set<GameFormat> formats = getFormats();
         if (formats.size() > 1)
-            return StringUtils.join(Iterables.transform(formats, GameFormat::getName), ", ");
+            return StringUtils.join(IterableUtil.transform(formats, GameFormat::getName), ", ");
         Object[] formatArray = formats.toArray();
         GameFormat format = (GameFormat)formatArray[0];
         if (format != GameFormat.NoFormat)

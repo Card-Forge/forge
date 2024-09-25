@@ -389,7 +389,7 @@ public class DeckgenUtil {
             }
         }
 
-        QuestEventDuel duel = Iterables.find(qCtrl.getDuelsManager().getAllDuels(), in -> in.getName().equals(name));
+        QuestEventDuel duel = IterableUtil.find(qCtrl.getDuelsManager().getAllDuels(), in -> in.getName().equals(name));
         return duel;
     }
 
@@ -750,13 +750,13 @@ public class DeckgenUtil {
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
             //shuffle first 400 random cards
-            Iterable<PaperCard> colorList = Iterables.filter(format.getCardPool(cardDb).getAllCards(),
+            Iterable<PaperCard> colorList = IterableUtil.filter(format.getCardPool(cardDb).getAllCards(),
                     format.isLegalCardPredicate().and(PaperCardPredicates.fromRules(
                             new CardThemedDeckBuilder.MatchColorIdentity(commander.getRules().getColorIdentity())
                                     .or(DeckGeneratorBase.COLORLESS_CARDS))));
             switch (format) {
             case Brawl: //for Brawl - add additional filterprinted rule to remove old reprints for a consistent look
-                colorList = Iterables.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
+                colorList = IterableUtil.filter(colorList,FModel.getFormats().getStandard().getFilterPrinted());
                 break;
             case Oathbreaker:
                 //check for signature spells
