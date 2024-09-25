@@ -70,15 +70,15 @@ public class ItemPool<T extends InventoryItem> implements Iterable<Entry<T, Inte
         return result;
     }
 
-    public static <T extends InventoryItem> Collector<? extends InventoryItem, ?, ItemPool<T>> collector(Class<T> cls) {
-        return new Collector<InventoryItem, ItemPool<T>, ItemPool<T>>() {
+    public static <T extends InventoryItem> Collector<T, ?, ItemPool<T>> collector(Class<T> cls) {
+        return new Collector<T, ItemPool<T>, ItemPool<T>>() {
             @Override
             public Supplier<ItemPool<T>> supplier() {
                 return () -> new ItemPool<T>(cls);
             }
 
             @Override
-            public BiConsumer<ItemPool<T>, InventoryItem> accumulator() {
+            public BiConsumer<ItemPool<T>, T> accumulator() {
                 return (pool, item) -> {
                     if (cls.isInstance(item)) pool.add(cls.cast(item), 1);
                 };
