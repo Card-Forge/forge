@@ -33,7 +33,6 @@ import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VDeckgen;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.ItemPool;
-import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 

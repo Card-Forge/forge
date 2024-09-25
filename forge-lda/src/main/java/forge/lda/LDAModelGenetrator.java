@@ -2,7 +2,6 @@ package forge.lda;
 
 import forge.GuiDesktop;
 import forge.StaticData;
-import forge.card.CardRulesPredicates;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.io.Archetype;

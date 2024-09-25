@@ -29,7 +29,6 @@ import java.util.function.Supplier;
 import javax.swing.KeyStroke;
 
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;

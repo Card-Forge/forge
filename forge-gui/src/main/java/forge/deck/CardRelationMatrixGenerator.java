@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import forge.item.PaperCardPredicates;
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.card.CardRulesPredicates;
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;

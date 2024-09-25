@@ -19,7 +19,6 @@
 package forge.item;
 
 import forge.StaticData;
-import forge.card.CardRulesPredicates;
 import forge.item.generation.BoosterGenerator;
 import forge.util.StreamUtils;
 

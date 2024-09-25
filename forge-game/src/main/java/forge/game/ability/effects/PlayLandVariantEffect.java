@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 import com.google.common.collect.Lists;
 
 import forge.StaticData;
-import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.game.Game;

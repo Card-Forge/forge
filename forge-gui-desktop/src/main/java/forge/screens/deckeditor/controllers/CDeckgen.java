@@ -2,7 +2,6 @@ package forge.screens.deckeditor.controllers;
 
 import forge.Singletons;
 import forge.card.CardDb;
-import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -25,7 +24,6 @@ import forge.screens.deckeditor.views.VDeckgen;
 import forge.util.StreamUtils;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 
 /**
