@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Bloomburrow #04
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/09/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Ensure your solution satisfies all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Ornery Tumblewagg;Oko, the Ringleader;Season of Gathering;Shivan Devastator;Ferocification
+p0battlefield=Innkeeper's Talent|ClassLevel:2;Rampaging Geoderm;Kami of Whispered Hopes|Counters:P1P1=2;Island;Island;Mountain;Mountain;Forest;Forest
+p1life=17
+p1battlefield=Fear of Immobility;Shield-Wall Sentinel
