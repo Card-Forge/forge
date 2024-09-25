@@ -40,6 +40,7 @@ import java.util.Map.Entry;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -810,8 +811,9 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
 
         public Iterable<CardEdition> getPrereleaseEditions() {
-            List<CardEdition> res = Lists.newArrayList(this);
-            return Iterables.filter(res, edition -> edition.getPrerelease() != null);
+            return this.stream()
+                    .filter(edition -> edition.getPrerelease() != null)
+                    .collect(Collectors.toList());
         }
 
         public CardEdition getEditionByCodeOrThrow(final String code) {

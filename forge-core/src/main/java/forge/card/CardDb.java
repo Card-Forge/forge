@@ -982,10 +982,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return edition != null && Type.REPRINT_SET_TYPES.contains(edition.getType());
     };
 
-    public Collection<PaperCard> getAllNonPromoCards() {
-        return streamAllCards().filter(EDITION_NON_PROMO).collect(Collectors.toList());
-    }
-
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
         return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
