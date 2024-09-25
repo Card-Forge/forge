@@ -20,7 +20,7 @@ package forge.item;
 
 import forge.StaticData;
 import forge.item.generation.BoosterGenerator;
-import forge.util.StreamUtils;
+import forge.util.StreamUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +112,6 @@ public abstract class SealedProduct implements InventoryItemFromSet {
         return StaticData.instance().getCommonCards().streamAllCards()
                 .filter(PaperCardPredicates.printedInSet(setCode))
                 .filter(PaperCardPredicates.IS_BASIC_LAND)
-                .collect(StreamUtils.random(count));
+                .collect(StreamUtil.random(count));
     }
 }

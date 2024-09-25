@@ -5,9 +5,9 @@ import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-public class StreamUtils {
+public class StreamUtil {
 
-    private StreamUtils(){}
+    private StreamUtil(){}
 
     /**
      * Reduces a stream to a random element of the stream. Used with {@link Stream#collect}.

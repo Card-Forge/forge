@@ -465,7 +465,7 @@ public class DeckgenUtil {
                 if (!selection.isEmpty())
                     deck = geneticAI.stream()
                             .filter(deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))
-                            .collect(StreamUtils.random()).get().getDeck();
+                            .collect(StreamUtil.random()).get().getDeck();
                 else
                     deck = Aggregates.random(geneticAI).getDeck();
 
@@ -474,7 +474,7 @@ public class DeckgenUtil {
                 if (!selection.isEmpty() && selection.size() < 4)
                     predicate = predicate.and(deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
                 List<DeckProxy> source = isTheme ? advThemes : advPrecons;
-                deck = source.stream().filter(predicate).collect(StreamUtils.random()).get().getDeck();
+                deck = source.stream().filter(predicate).collect(StreamUtil.random()).get().getDeck();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -659,7 +659,7 @@ public class DeckgenUtil {
                 .filter(format.isLegalCardPredicate())
                 .filter(format.isLegalCommanderPredicate())
                 .filter(PaperCardPredicates.fromRules(canPlay))
-                .collect(StreamUtils.random()).get();
+                .collect(StreamUtil.random()).get();
         return generateRandomCommanderDeck(commander, format, forAi, false);
     }
 

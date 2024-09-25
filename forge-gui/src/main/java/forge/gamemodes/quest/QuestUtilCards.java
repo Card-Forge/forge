@@ -223,7 +223,7 @@ public final class QuestUtilCards {
         Stream<PaperCard> pool = getQuestCardPool();
         final PaperCard card = pool
                 .filter(applyFormatFilter(PaperCardPredicates.IS_RARE_OR_MYTHIC))
-                .collect(StreamUtils.random()).get();
+                .collect(StreamUtil.random()).get();
 
         addSingleCard(card, 1);
         return card;
@@ -239,7 +239,7 @@ public final class QuestUtilCards {
      */
     public List<PaperCard> addRandomCards(final int n, Predicate<PaperCard> predicate) {
         Stream<PaperCard> pool = getQuestCardPool();
-        final List<PaperCard> newCards = pool.filter(predicate).collect(StreamUtils.random(n));
+        final List<PaperCard> newCards = pool.filter(predicate).collect(StreamUtil.random(n));
 
         addAllCards(newCards);
         return newCards;
@@ -560,7 +560,7 @@ public final class QuestUtilCards {
                 .filter(CardEdition.Predicates.HAS_TOURNAMENT_PACK)
                 .filter(isLegalInQuestFormat(questController.getFormat()))
                 .map(TournamentPack::fromSet)
-                .collect(StreamUtils.random(count));
+                .collect(StreamUtil.random(count));
         questAssets.getShopList().addAllOfTypeFlat(packs);
     }
 
@@ -575,7 +575,7 @@ public final class QuestUtilCards {
                 .filter(CardEdition.Predicates.HAS_FAT_PACK)
                 .filter(isLegalInQuestFormat(questController.getFormat()))
                 .map(FatPack::fromSet)
-                .collect(StreamUtils.random(count));
+                .collect(StreamUtil.random(count));
         questAssets.getShopList().addAllOfTypeFlat(packs);
     }
 
@@ -625,7 +625,7 @@ public final class QuestUtilCards {
         }
         final List<PreconDeck> decks = QuestController.getPrecons().stream()
                 .filter(formatFilter)
-                .collect(StreamUtils.random(count));
+                .collect(StreamUtil.random(count));
         questAssets.getShopList().addAllOfTypeFlat(decks);
     }
 

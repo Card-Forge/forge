@@ -130,7 +130,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 final CardCollection choice = new CardCollection();
                 final String num = sa.getParamOrDefault("RandomNum", "1");
                 int nCopied = AbilityUtils.calculateAmount(source, num, sa);
-                for (PaperCard cp : cards.collect(StreamUtils.random(nCopied))) {
+                for (PaperCard cp : cards.collect(StreamUtil.random(nCopied))) {
                     final Card possibleCard = Card.fromPaperCard(cp, sa.getActivatingPlayer());
                     if (sa.getActivatingPlayer().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
                         continue;

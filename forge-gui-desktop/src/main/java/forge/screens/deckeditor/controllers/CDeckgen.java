@@ -21,7 +21,7 @@ import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VDeckgen;
-import forge.util.StreamUtils;
+import forge.util.StreamUtil;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public enum CDeckgen implements ICDoc {
 
         List<PaperCard> randomCards = FModel.getMagicDb().getCommonCards().streamUniqueCards()
                 .filter(PaperCardPredicates.NOT_BASIC_LAND)
-                .collect(StreamUtils.random(15 * 5));
+                .collect(StreamUtil.random(15 * 5));
         randomDeck.getMain().addAllFlat(randomCards);
 
         for(final String landName : MagicColor.Constant.BASIC_LANDS) {
