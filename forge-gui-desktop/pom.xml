@@ -376,7 +376,7 @@
                                         <preCp>anything</preCp>
                                     </classPath>
                                     <jre>
-                                        <minVersion>11.0.1</minVersion>
+                                        <minVersion>17</minVersion>
                                         <jdkPreference>jdkOnly</jdkPreference>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>
@@ -554,7 +554,7 @@
                                     <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                     <dontWrapJar>true</dontWrapJar>
                                     <errTitle>forge</errTitle>
-                                    <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-11-lts</downloadUrl>
+                                    <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
                                     <icon>src/main/config/forge.ico</icon>
                                     <classPath>
                                         <mainClass>forge.view.Main</mainClass>
@@ -562,7 +562,7 @@
                                         <preCp>anything</preCp>
                                     </classPath>
                                     <jre>
-                                        <minVersion>11.0.1</minVersion>
+                                        <minVersion>17</minVersion>
                                         <jdkPreference>jdkOnly</jdkPreference>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>

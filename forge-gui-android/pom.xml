@@ -40,8 +40,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>
-            <version>13-robolectric-9030017</version>
+            <version>14-robolectric-10818077</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -234,21 +234,16 @@
                                 <scope>system</scope>
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
-                            <dependency>
-                                <groupId>net.sf.proguard</groupId>
-                                <artifactId>proguard-base</artifactId>
-                                <version>6.2.2</version>
-                            </dependency>
                         </dependencies>
-                        <version>4.6.1</version>
+                        <version>4.6.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>33</platform>
-                                <buildTools>33.0.2</buildTools>
+                                <platform>34</platform>
+                                <buildTools>34.0.0</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -260,6 +255,7 @@
                                 <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
                             <release>true</release>
                             <dexCompiler>d8</dexCompiler>
                             <d8>
@@ -343,21 +339,16 @@
                                 <scope>system</scope>
                                 <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
-                            <dependency>
-                                <groupId>net.sf.proguard</groupId>
-                                <artifactId>proguard-base</artifactId>
-                                <version>6.2.2</version>
-                            </dependency>
                         </dependencies>
-                        <version>4.6.1</version>
+                        <version>4.6.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>33</platform>
-                                <buildTools>33.0.2</buildTools>
+                                <platform>34</platform>
+                                <buildTools>34.0.0</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
@@ -372,6 +363,7 @@
                                 <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
                             <release>true</release>
                             <dexCompiler>d8</dexCompiler>
                             <d8>

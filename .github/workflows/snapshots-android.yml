@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
           server-id: cardforge-repo
@@ -45,9 +45,9 @@ jobs:
           
       - name: Set Up Android tools
         run: |
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-33"
-          JAVA_HOME=${JAVA_HOME_11_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;33.0.2"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-33"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;34.0.0"
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |
@@ -74,11 +74,11 @@ jobs:
 
       - name: Install Android maven plugin
         run: |
-          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.1
-          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.1
-          curl -L -o android-maven-plugin-4.6.1.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.jar
-          curl -L -o android-maven-plugin-4.6.1.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.1/android-maven-plugin-4.6.1.pom
-          #mvn install:install-file -Dfile=android-maven-plugin-4.6.1.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.1 -Dpackaging=jar
+          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          curl -L -o android-maven-plugin-4.6.2.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.jar
+          curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
+          #mvn install:install-file -Dfile=android-maven-plugin-4.6.2.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.2 -Dpackaging=jar
           cd -
           mvn install -Dmaven.test.skip=true
           mvn dependency:tree
@@ -89,7 +89,7 @@ jobs:
           d=$(date +%m-%d)
           # Replace date in forge-gui-mobile/src/forge/Forge.java
           sed -i -e "s/-SNAPSHOT/-SNAPSHOT-${d}/g" forge-gui-mobile/src/forge/Forge.java
-          mvn -U -B -P android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=33.0.2 -Dmaven.test.skip=true
+          mvn -U -B -P android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=34.0.0 -Dmaven.test.skip=true
           mkdir -p  forge-gui-android/target/upload
           mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
           mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/
