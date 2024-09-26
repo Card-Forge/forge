@@ -319,17 +319,13 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
 
         //Add remaining non-land colour matching cards to sideboard
         final CardPool cp = result.getOrCreate(DeckSection.Sideboard);
-        Iterator<PaperCard> potentialSideboard = aiPlayables.stream()
-                .filter(PaperCardPredicates.fromRules(hasColor.and(CardRulesPredicates.IS_NON_LAND))).iterator();
-        int i=0;
-        while(i<15 && potentialSideboard.hasNext()){
-            PaperCard sbCard = potentialSideboard.next();
-            cp.add(sbCard);
-            aiPlayables.remove(sbCard);
-            rankedColorList.remove(sbCard);
-
-            ++i;
-        }
+        List<PaperCard> sideboard = aiPlayables.stream()
+                .filter(PaperCardPredicates.fromRules(hasColor.and(CardRulesPredicates.IS_NON_LAND)))
+                .limit(15)
+                .collect(Collectors.toList());
+        cp.addAllFlat(sideboard);
+        aiPlayables.removeAll(sideboard);
+        rankedColorList.removeAll(sideboard);
         if (logToConsole) {
             debugFinalDeck();
         }
