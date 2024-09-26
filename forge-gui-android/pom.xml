@@ -177,7 +177,8 @@
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-android</artifactId>
             <version>2.2.3</version>
-            <type>aar</type>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/libs/gdx-controllers-android.jar</systemPath>
             <exclusions>
                 <exclusion>
                     <groupId>com.badlogicgames.gdx</groupId>
