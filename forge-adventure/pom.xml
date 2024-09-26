@@ -133,7 +133,7 @@
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
-                <version>1.5.2</version>
+                <version>1.5.3</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -239,7 +239,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>24.1.0</version>
+            <version>25.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
