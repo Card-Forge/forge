@@ -307,7 +307,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -327,7 +327,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -347,7 +347,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -367,7 +367,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -389,7 +389,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     } else if (sc.xCount > 0) { // X part that can only be paid by specific color
                         if (otherSubtract >= sc.xCount) {
@@ -403,7 +403,7 @@ public class ManaCostBeingPaid {
                             sc.totalCount -= otherSubtract;
                             sc.xCount -= otherSubtract;
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
