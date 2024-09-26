@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.ImageKeys;
 import forge.game.ability.AbilityKey;
 import forge.game.cost.*;
@@ -41,7 +42,6 @@ import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gui.FThreads;
 import forge.gui.util.SGuiChoose;
 import forge.util.Aggregates;
-import forge.util.Iterables;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
@@ -195,7 +195,8 @@ public class HumanPlay {
         // Only human player pays this way
         Card current = null; // Used in spells with RepeatEach effect to distinguish cards, Cut the Tethers
         if (sourceAbility.hasParam("ShowCurrentCard")) {
-            current = Iterables.getFirst(AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility), null);
+            Iterable<? extends Card> iterable = AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility);
+            current = Iterables.getFirst(iterable, null);
         }
 
         final List<CostPart> parts = cost.getCostParts();

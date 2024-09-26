@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import forge.card.GamePieceType;
 import forge.game.card.*;
-import forge.util.Iterables;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Lists;

@@ -3,7 +3,7 @@ package forge.gamesimulationtests.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.util.Iterables;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class SpecificationHandler<TYPE, SPECIFICATION extends Specification<TYPE>> {

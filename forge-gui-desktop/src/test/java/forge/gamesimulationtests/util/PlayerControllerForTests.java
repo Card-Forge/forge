@@ -1,5 +1,6 @@
 package forge.gamesimulationtests.util;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -47,7 +48,6 @@ import forge.item.PaperCard;
 import forge.player.HumanPlay;
 import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;

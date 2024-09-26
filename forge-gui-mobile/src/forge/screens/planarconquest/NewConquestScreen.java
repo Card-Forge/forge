@@ -1,5 +1,6 @@
 package forge.screens.planarconquest;
 
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.assets.FImage;
 import forge.card.CardImage;
@@ -18,7 +19,6 @@ import forge.screens.home.NewGameMenu;
 import forge.screens.planarconquest.ConquestMenu.LaunchReason;
 import forge.toolbox.FChoiceList;
 import forge.toolbox.FOptionPane;
-import forge.util.Iterables;
 import forge.util.ThreadUtil;
 
 public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenModel> {

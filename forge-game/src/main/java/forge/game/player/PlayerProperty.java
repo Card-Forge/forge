@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -10,7 +11,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
-import forge.util.Iterables;
 import forge.util.TextUtil;
 
 import java.util.*;

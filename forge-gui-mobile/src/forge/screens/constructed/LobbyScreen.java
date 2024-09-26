@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import forge.player.GamePlayerUtil;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;

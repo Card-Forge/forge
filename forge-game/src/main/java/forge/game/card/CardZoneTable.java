@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -18,7 +19,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist

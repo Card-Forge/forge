@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.game.Game;
@@ -25,7 +26,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 import java.util.Collections;

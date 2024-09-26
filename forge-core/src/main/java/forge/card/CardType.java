@@ -20,18 +20,11 @@ package forge.card;
 import java.util.*;
 import java.util.function.Predicate;
 
+import com.google.common.collect.*;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 import forge.util.Settable;
 
@@ -197,9 +190,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
     public boolean addAll(final CardTypeView type) {
         boolean changed = false;
-        if (Iterables.addAll_withReturn(coreTypes, type.getCoreTypes())) { changed = true; }
-        if (Iterables.addAll_withReturn(supertypes, type.getSupertypes())) { changed = true; }
-        if (Iterables.addAll_withReturn(subtypes, type.getSubtypes())) { changed = true; }
+        if (Iterables.addAll(coreTypes, type.getCoreTypes())) { changed = true; }
+        if (Iterables.addAll(supertypes, type.getSupertypes())) { changed = true; }
+        if (Iterables.addAll(subtypes, type.getSubtypes())) { changed = true; }
         sanisfySubtypes();
         return changed;
     }

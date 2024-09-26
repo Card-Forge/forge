@@ -12,7 +12,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
-import forge.util.Iterables;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableList;

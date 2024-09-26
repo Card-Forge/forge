@@ -1,6 +1,7 @@
 package forge.adventure.data;
 
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
@@ -10,7 +11,6 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 
 import java.io.Serializable;
 import java.util.*;

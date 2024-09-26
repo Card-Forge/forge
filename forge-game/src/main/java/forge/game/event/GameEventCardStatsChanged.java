@@ -3,7 +3,7 @@ package forge.game.event;
 import java.util.Arrays;
 import java.util.Collection;
 
-import forge.util.Iterables;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.card.Card;

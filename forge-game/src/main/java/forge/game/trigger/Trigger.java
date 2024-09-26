@@ -17,6 +17,7 @@
  */
 package forge.game.trigger;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.*;
@@ -36,7 +37,6 @@ import forge.game.zone.CostPaymentStack;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.ITranslatable;
-import forge.util.Iterables;
 import forge.util.Lang;
 import forge.util.TextUtil;
 

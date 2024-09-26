@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -9,7 +10,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CounterEnumType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Iterables;
 
 /** 
  * TODO: Write javadoc for this type.

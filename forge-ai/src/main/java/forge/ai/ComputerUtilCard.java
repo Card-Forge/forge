@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+import com.google.common.collect.Iterables;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.card.mana.ManaCost;
 import forge.game.card.*;

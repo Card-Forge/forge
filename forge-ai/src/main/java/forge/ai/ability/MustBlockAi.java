@@ -3,6 +3,7 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
@@ -17,7 +18,6 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Iterables;
 
 public class MustBlockAi extends SpellAbilityAi {
 

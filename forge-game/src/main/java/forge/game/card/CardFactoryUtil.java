@@ -17,10 +17,7 @@
  */
 package forge.game.card;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.card.*;
 import forge.card.mana.ManaCost;

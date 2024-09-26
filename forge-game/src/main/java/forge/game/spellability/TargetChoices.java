@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ForwardingList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.game.GameEntity;
@@ -31,7 +32,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import forge.util.collect.FCollection;
 
 /**

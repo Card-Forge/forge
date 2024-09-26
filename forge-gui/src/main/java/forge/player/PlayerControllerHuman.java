@@ -62,7 +62,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.trackable.TrackableCollection;
 import forge.util.*;
-import forge.util.Iterables;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Sentry;

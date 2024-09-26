@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import com.google.common.collect.Iterables;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.StaticData;

@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.ai.*;
@@ -26,7 +27,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 

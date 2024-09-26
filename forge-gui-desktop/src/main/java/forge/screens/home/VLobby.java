@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.AIOption;

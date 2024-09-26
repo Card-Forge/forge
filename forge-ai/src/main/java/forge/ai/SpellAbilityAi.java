@@ -1,5 +1,6 @@
 package forge.ai;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.ICardFace;
@@ -19,7 +20,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityCondition;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 import java.util.Collection;
@@ -361,7 +361,7 @@ public abstract class SpellAbilityAi {
     public String chooseCardName(Player ai, SpellAbility sa, List<ICardFace> faces) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardName is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
 
-        final ICardFace face = Iterables.getFirst(faces, null); 
+        final ICardFace face = Iterables.getFirst(faces, null);
         return face == null ? "" : face.getName();
     }
 

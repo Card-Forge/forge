@@ -25,8 +25,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Predicate;
 
+import com.google.common.collect.Iterables;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -512,7 +512,7 @@ public class ManaCostBeingPaid {
             return null;
         }
 
-       return Iterables.getFirst(choice, null);
+        return Iterables.getFirst(choice, null);
     }
 
     private ManaCostShard tryPayMana(final byte colorMask, Iterable<ManaCostShard> payableShards, byte possibleUses) {

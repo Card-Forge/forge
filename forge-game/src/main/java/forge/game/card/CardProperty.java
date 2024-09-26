@@ -1,5 +1,6 @@
 package forge.game.card;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
@@ -28,7 +29,6 @@ import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Expressions;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;

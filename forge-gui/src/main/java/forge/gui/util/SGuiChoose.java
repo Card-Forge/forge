@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-import forge.util.Iterables;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.gui.GuiBase;

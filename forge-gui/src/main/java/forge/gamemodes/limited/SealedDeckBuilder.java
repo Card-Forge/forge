@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 /**

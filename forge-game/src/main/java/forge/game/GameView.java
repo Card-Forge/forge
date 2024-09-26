@@ -2,6 +2,7 @@ package forge.game;
 
 import java.util.List;
 
+import com.google.common.collect.Iterables;
 import forge.LobbyPlayer;
 import forge.deck.Deck;
 import forge.game.GameOutcome.AnteResult;
@@ -19,7 +20,6 @@ import forge.game.zone.MagicStack;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.util.Iterables;
 import forge.util.collect.FCollectionView;
 
 public class GameView extends TrackableObject {

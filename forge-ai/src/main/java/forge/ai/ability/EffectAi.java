@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.*;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
@@ -23,7 +24,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 

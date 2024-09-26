@@ -19,7 +19,7 @@ package forge.player;
 
 import java.util.Collections;
 
-import forge.util.Iterables;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardType;

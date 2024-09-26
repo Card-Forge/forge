@@ -14,13 +14,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import forge.util.Iterables;
+import com.google.common.collect.*;
 import org.apache.commons.lang3.ArrayUtils;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
 
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in

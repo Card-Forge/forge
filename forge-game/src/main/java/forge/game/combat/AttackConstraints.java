@@ -9,15 +9,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import com.google.common.collect.*;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
 import forge.game.Game;

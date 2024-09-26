@@ -2,6 +2,7 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.GeneratedDeckData;
@@ -21,7 +22,6 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 
 import java.text.SimpleDateFormat;
 import java.util.*;

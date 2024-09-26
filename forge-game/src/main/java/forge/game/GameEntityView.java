@@ -1,12 +1,12 @@
 package forge.game;
 
+import com.google.common.collect.Iterables;
 import forge.game.card.CardView;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 
 public abstract class GameEntityView extends TrackableObject {
     private static final long serialVersionUID = -5129089945124455670L;

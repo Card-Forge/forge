@@ -18,6 +18,7 @@
 package forge.deck;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -31,7 +32,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.Aggregates;
-import forge.util.Iterables;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.tuple.ImmutablePair;

@@ -19,12 +19,7 @@ package forge.game.spellability;
 
 import java.util.*;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Table;
-import com.google.common.collect.TreeBasedTable;
+import com.google.common.collect.*;
 
 import forge.game.cost.CostSacrifice;
 import forge.util.*;

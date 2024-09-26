@@ -20,10 +20,7 @@ package forge.ai;
 import java.util.*;
 import java.util.function.Predicate;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
+import com.google.common.collect.*;
 import forge.game.card.*;
 import forge.game.cost.*;
 import forge.util.*;

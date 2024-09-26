@@ -1,5 +1,6 @@
 package forge.item;
 
+import com.google.common.collect.Iterables;
 import forge.GuiDesktop;
 import forge.card.CardRarity;
 import forge.card.CardRules;
@@ -7,7 +8,6 @@ import forge.card.DeckHints;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
-import forge.util.Iterables;
 import junit.framework.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

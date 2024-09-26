@@ -17,13 +17,13 @@
  */
 package forge.game.zone;
 
+import com.google.common.collect.Iterables;
 import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.util.Iterables;
 import forge.util.Lang;
 
 import java.util.function.Predicate;

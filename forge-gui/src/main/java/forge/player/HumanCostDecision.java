@@ -1,5 +1,6 @@
 package forge.player;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.card.MagicColor;

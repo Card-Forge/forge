@@ -17,6 +17,7 @@
  */
 package forge.ai;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.game.Game;
@@ -43,7 +44,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -2539,10 +2539,10 @@ public class ComputerUtilCombat {
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
             // 1. If the card that spawned the attacker was sent at a card, attack the same. Consider improving.
             if (def instanceof Card && Iterables.contains(defenders, def)) {
-                if (((Card)def).isPlaneswalker()) {
+                if (((Card) def).isPlaneswalker()) {
                     return def;
                 }
-                if (((Card)def).isBattle()) {
+                if (((Card) def).isBattle()) {
                     return def;
                 }
             }

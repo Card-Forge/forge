@@ -1,12 +1,12 @@
 package forge.gamemodes.limited;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
 import forge.card.DeckHints;
 import forge.card.MagicColor;
 import forge.item.PaperCard;
-import forge.util.Iterables;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;

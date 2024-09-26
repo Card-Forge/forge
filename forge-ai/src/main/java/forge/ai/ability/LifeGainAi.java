@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
 import forge.ai.ComputerUtilCombat;
@@ -18,7 +19,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class LifeGainAi extends SpellAbilityAi {

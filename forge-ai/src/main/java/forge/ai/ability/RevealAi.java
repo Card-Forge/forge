@@ -1,5 +1,6 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;
@@ -8,7 +9,6 @@ import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
-import forge.util.Iterables;
 import forge.util.MyRandom;
 
 public class RevealAi extends RevealAiBase {

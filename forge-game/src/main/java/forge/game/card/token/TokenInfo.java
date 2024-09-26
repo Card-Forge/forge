@@ -3,8 +3,8 @@ package forge.game.card.token;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import forge.card.GamePieceType;
-import forge.util.Iterables;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 

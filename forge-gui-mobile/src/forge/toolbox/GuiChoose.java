@@ -7,8 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
+import com.google.common.collect.Iterables;
 import forge.Forge;
-import forge.util.Iterables;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.card.CardView;
