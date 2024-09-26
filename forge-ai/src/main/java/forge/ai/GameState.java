@@ -1398,7 +1398,7 @@ public abstract class GameState {
                     c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
                     c.setGamePieceType(GamePieceType.TOKEN);
-                } else if (info.equals("ClassLevel:")) {
+                } else if (info.startsWith("ClassLevel:")) {
                     c.setClassLevel(Integer.parseInt(info.substring(info.indexOf(':') + 1)));
                 }
             }

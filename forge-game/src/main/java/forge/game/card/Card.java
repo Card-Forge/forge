@@ -7206,6 +7206,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setRegeneratedThisTurn(0);
         resetShieldCount();
         setBecameTargetThisTurn(false);
+        setValiant(false);
         setFoughtThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
