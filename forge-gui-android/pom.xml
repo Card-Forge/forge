@@ -74,24 +74,6 @@
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/relinker.jar</systemPath>
         </dependency>
-        <!-- declare a specific dependency to override com.google.android's transitive dependency -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.14</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- declare a specific dependency to override org.apache.httpcomponents's transitive dependency -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.17.1</version>
-        </dependency>
         <dependency>
             <groupId>forge</groupId>
             <artifactId>forge-core</artifactId>
