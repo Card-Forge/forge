@@ -17,16 +17,15 @@
  */
 package forge.card;
 
-import java.util.*;
-import java.util.function.Predicate;
-
 import com.google.common.collect.*;
 import forge.util.IterableUtil;
+import forge.util.Settable;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.util.Settable;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>

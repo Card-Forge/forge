@@ -1,10 +1,15 @@
 package forge.card;
 
-import java.util.*;
-import java.util.function.Predicate;
-
-import forge.util.*;
+import forge.util.CardTranslation;
+import forge.util.ComparableOp;
+import forge.util.IterableUtil;
+import forge.util.PredicateString;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * Filtering conditions specific for CardRules class, defined here along with

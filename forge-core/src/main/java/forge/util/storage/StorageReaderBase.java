@@ -1,13 +1,12 @@
 package forge.util.storage;
 
+import com.google.common.collect.ImmutableList;
+import forge.util.IItemReader;
+
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Function;
-
-import com.google.common.collect.ImmutableList;
-
-import forge.util.IItemReader;
 
 public abstract class StorageReaderBase<T> implements IItemReader<T> {
     protected final Function<? super T, String> keySelector;

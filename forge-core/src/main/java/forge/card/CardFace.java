@@ -1,12 +1,11 @@
 package forge.card;
 
+import forge.card.mana.ManaCost;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
-
-import org.apache.commons.lang3.StringUtils;
-
-import forge.card.mana.ManaCost;
 
 //
 // DO NOT AUTOFORMAT / CHECKSTYLE THIS FILE

@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import forge.ai.*;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
@@ -13,6 +11,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.IterableUtil;
+
+import java.util.Map;
 
 public class RepeatAi extends SpellAbilityAi {
 

@@ -17,11 +17,7 @@
  */
 package forge.player;
 
-import java.util.Collections;
-
 import com.google.common.collect.Iterables;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -41,6 +37,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityManaConvert;
 import forge.game.zone.Zone;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Collections;
 
 /**
  * <p>

@@ -1,13 +1,13 @@
 package forge.ai.ability;
 
-import java.util.Map;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
 
 public class ReplaceDamageAi extends SpellAbilityAi {
 

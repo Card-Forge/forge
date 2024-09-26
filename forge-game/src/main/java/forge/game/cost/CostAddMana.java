@@ -17,16 +17,15 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.card.mana.ManaAtom;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Class CostAddMana.

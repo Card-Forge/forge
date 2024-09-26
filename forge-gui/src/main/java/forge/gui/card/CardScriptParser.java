@@ -1,23 +1,21 @@
 package forge.gui.card;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import forge.card.CardType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.ApiType;
 import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public final class CardScriptParser {
 

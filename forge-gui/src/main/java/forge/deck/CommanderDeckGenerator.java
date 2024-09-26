@@ -1,11 +1,5 @@
 package forge.deck;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -14,6 +8,12 @@ import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.model.FModel;
 import forge.util.ItemPool;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by maustin on 09/05/2017.

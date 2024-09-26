@@ -1,21 +1,12 @@
 package forge.util.collect;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 import com.google.common.collect.*;
 import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.Serializable;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in

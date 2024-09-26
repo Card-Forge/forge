@@ -20,10 +20,16 @@ package forge.item.generation;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.StaticData;
-import forge.card.*;
+import forge.card.CardEdition;
 import forge.card.CardEdition.FoilType;
+import forge.card.CardRarity;
+import forge.card.CardSplitType;
+import forge.card.PrintSheet;
 import forge.item.*;
-import forge.util.*;
+import forge.util.Aggregates;
+import forge.util.IterableUtil;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 

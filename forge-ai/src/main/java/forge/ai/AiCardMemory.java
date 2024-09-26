@@ -18,11 +18,11 @@
 
 package forge.ai;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * <p>

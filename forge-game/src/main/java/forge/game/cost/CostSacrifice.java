@@ -17,13 +17,8 @@
  */
 package forge.game.cost;
 
-import forge.card.CardType;
-
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
-
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -34,6 +29,9 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The Class CostSacrifice.

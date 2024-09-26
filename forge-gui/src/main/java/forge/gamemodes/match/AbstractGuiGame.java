@@ -1,19 +1,6 @@
 package forge.gamemodes.match;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.google.common.collect.*;
-import forge.gui.control.PlaybackSpeed;
-import forge.trackable.TrackableCollection;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -23,6 +10,7 @@ import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
@@ -31,8 +19,13 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
+import java.util.*;
 
 public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private PlayerView currentPlayer = null;

@@ -1,12 +1,12 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import forge.ai.SpellAbilityAi;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
+import java.util.Map;
 
 public class AssignGroupAi extends SpellAbilityAi {
 

@@ -3,8 +3,6 @@
  */
 package forge.game.card;
 
-import java.util.Map;
-
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
@@ -19,6 +17,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
+
+import java.util.Map;
 
 public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardCollection> {
     // TODO use EnumBasedTable if exist

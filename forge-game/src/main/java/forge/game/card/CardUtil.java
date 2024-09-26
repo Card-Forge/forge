@@ -17,14 +17,9 @@
  */
 package forge.game.card;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -42,6 +37,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class CardUtil {
     // disable instantiation

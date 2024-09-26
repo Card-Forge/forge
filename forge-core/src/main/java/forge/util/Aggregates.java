@@ -1,10 +1,10 @@
 package forge.util;
 
+import com.google.common.collect.Lists;
+
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
-
-import com.google.common.collect.Lists;
 
 /** 
  * TODO: Write javadoc for this type.

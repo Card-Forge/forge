@@ -17,9 +17,6 @@
  */
 package forge.game.card;
 
-import java.util.Comparator;
-import java.util.function.Predicate;
-
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.combat.CombatUtil;
@@ -32,6 +29,9 @@ import forge.game.zone.ZoneType;
 import forge.util.IterableUtil;
 import forge.util.PredicateString;
 import forge.util.collect.FCollectionView;
+
+import java.util.Comparator;
+import java.util.function.Predicate;
 
 
 /**

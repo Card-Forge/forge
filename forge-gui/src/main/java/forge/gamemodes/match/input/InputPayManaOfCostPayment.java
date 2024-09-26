@@ -1,8 +1,5 @@
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.mana.Mana;
@@ -15,6 +12,9 @@ import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InputPayManaOfCostPayment extends InputPayMana {
 

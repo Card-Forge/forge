@@ -1,27 +1,19 @@
 package forge.deck;
 
-import java.io.File;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import forge.item.PaperCardPredicates;
-import org.apache.commons.lang3.ArrayUtils;
-
 import forge.deck.io.CardThemedMatrixIO;
 import forge.deck.io.DeckStorage;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageImmediatelySerialized;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.io.File;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by maustin on 09/05/2017.

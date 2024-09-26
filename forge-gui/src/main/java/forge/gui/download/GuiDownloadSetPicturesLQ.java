@@ -17,15 +17,7 @@
  */
 package forge.gui.download;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.TreeMap;
-
 import com.google.common.collect.Iterables;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.PaperCard;
@@ -33,6 +25,13 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
     @Override

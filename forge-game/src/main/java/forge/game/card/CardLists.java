@@ -17,13 +17,7 @@
  */
 package forge.game.card;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Predicate;
-
 import com.google.common.collect.Lists;
-
 import forge.game.CardTraitBase;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
@@ -33,6 +27,11 @@ import forge.game.staticability.StaticAbilityCrewValue;
 import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * <p>

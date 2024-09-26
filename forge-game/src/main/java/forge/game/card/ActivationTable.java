@@ -1,18 +1,16 @@
 package forge.game.card;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.apache.commons.lang3.ObjectUtils;
-
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
-
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.List;
+import java.util.Optional;
 
 public class ActivationTable extends ForwardingTable<SpellAbility, Optional<StaticAbility>, List<Player>> {
     Table<SpellAbility, Optional<StaticAbility>, List<Player>> dataTable = HashBasedTable.create();

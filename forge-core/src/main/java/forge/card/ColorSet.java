@@ -17,20 +17,14 @@
  */
 package forge.card;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
 import com.google.common.collect.UnmodifiableIterator;
-
 import forge.card.MagicColor.Color;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.util.BinaryUtil;
+
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * <p>CardColor class.</p>

@@ -1,20 +1,18 @@
 package forge.game.card;
 
+import com.google.common.collect.ForwardingTable;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import forge.game.CardTraitBase;
+import forge.game.GameObject;
+import forge.game.GameObjectPredicates;
+import forge.game.player.Player;
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import forge.game.GameObject;
-import org.apache.commons.lang3.ObjectUtils;
-
-import com.google.common.collect.ForwardingTable;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
-
-import forge.game.CardTraitBase;
-import forge.game.GameObjectPredicates;
-import forge.game.player.Player;
 
 public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 

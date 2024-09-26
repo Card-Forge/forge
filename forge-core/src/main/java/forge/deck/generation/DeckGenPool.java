@@ -1,12 +1,12 @@
 package forge.deck.generation;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
 import forge.util.IterableUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class DeckGenPool implements IDeckGenPool {
     private final Map<String, PaperCard> cards = new HashMap<>();

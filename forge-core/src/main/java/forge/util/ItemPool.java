@@ -17,15 +17,15 @@
  */
 package forge.util;
 
+import com.google.common.collect.Maps;
+import forge.item.InventoryItem;
+
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.*;
 import java.util.stream.Collector;
-
-import com.google.common.collect.Maps;
-import forge.item.InventoryItem;
 
 /**
  * <p>

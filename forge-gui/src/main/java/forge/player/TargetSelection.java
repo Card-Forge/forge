@@ -17,21 +17,9 @@
  */
 package forge.player;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.game.Game;
-import forge.game.GameEntity;
-import forge.game.GameEntityView;
-import forge.game.GameEntityViewMap;
-import forge.game.GameObject;
+import forge.game.*;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -49,6 +37,9 @@ import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 import forge.util.TextUtil;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * <p>

@@ -1,7 +1,5 @@
 package forge.gamemodes.net.client;
 
-import java.util.List;
-
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
@@ -13,6 +11,8 @@ import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
 import forge.util.ITriggerEvent;
+
+import java.util.List;
 
 public class NetGameController implements IGameController {
 

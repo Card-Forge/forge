@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -15,6 +13,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
+
+import java.util.List;
 
 public class LifeLoseAi extends SpellAbilityAi {
 

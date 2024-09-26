@@ -17,20 +17,14 @@
  */
 package forge.util;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * TODO: Write javadoc for this type.

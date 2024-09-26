@@ -1,13 +1,12 @@
 package forge.ai;
 
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import forge.ai.ability.*;
 import forge.game.ability.ApiType;
 import forge.util.ReflectionUtil;
+
+import java.util.Map;
 
 public enum SpellApiToAi {
     Converter;

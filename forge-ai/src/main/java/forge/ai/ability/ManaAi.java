@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.List;
-
 import forge.ai.*;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
@@ -10,12 +7,7 @@ import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
@@ -30,6 +22,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ManaAi extends SpellAbilityAi {
 

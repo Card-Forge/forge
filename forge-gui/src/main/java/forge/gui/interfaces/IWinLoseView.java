@@ -1,9 +1,9 @@
 package forge.gui.interfaces;
 
-import java.util.List;
-
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
+
+import java.util.List;
 
 public interface IWinLoseView<T extends IButton> {
     T getBtnContinue();

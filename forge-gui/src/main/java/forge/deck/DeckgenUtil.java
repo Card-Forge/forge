@@ -1,21 +1,6 @@
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import forge.item.PaperCardPredicates;
-import forge.util.*;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
-
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardRules;
@@ -23,12 +8,7 @@ import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
-import forge.deck.generation.DeckGenerator2Color;
-import forge.deck.generation.DeckGenerator3Color;
-import forge.deck.generation.DeckGenerator5Color;
-import forge.deck.generation.DeckGeneratorBase;
-import forge.deck.generation.DeckGeneratorMonoColor;
-import forge.deck.generation.IDeckGenPool;
+import forge.deck.generation.*;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.game.GameType;
@@ -42,10 +22,16 @@ import forge.gamemodes.quest.QuestEventChallenge;
 import forge.gamemodes.quest.QuestEventDuel;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.IItemManager;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.util.*;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.*;
+import java.util.function.Predicate;
 
 /** 
  * Utility collection for various types of decks.

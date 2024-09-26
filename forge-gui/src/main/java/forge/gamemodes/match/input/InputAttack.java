@@ -17,12 +17,7 @@
  */
 package forge.gamemodes.match.input;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
-
 import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
@@ -41,6 +36,10 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.collect.FCollectionView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
