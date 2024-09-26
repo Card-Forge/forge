@@ -21,11 +21,11 @@ public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         Game game = player.getGame();
-        if (property.endsWith("Activator")) {
-            sourceController = spellAbility.getHostCard().getController();
-            property = property.substring(0, property.length() - 9);
-        }
-        if (property.equals("You")) {
+        if (property.equals("Activator")) {
+            if (!player.equals(spellAbility.getHostCard().getController())) {
+                return false;
+            }
+        } else if (property.equals("You")) {
             if (!player.equals(sourceController)) {
                 return false;
             }

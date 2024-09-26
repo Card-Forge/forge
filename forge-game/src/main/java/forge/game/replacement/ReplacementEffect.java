@@ -60,6 +60,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     private boolean hasRun = false;
 
     private List<ReplacementEffect> otherChoices = null;
+    private ReplacementEffectView view = null;
 
     /**
      * Gets the id.
@@ -109,6 +110,15 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
     }
 
+    public ReplacementEffectView getView() {
+        if (view == null)
+            view = new ReplacementEffectView(this);
+        else {
+            view.updateHostCard(this);
+            view.updateDescription(this);
+        }
+        return view;
+    }
     /**
      * Sets the checks for run.
      *

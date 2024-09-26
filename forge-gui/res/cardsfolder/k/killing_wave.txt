@@ -11,4 +11,5 @@ SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.Z
 SVar:Z:Count$Valid Creature.RememberedPlayerCtrl+IsRemembered
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
 Oracle:For each creature, its controller sacrifices it unless they pay X life.

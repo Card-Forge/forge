@@ -4,5 +4,5 @@ Types:Creature Devil
 PT:1/1
 K:Haste
 A:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | CheckSVar$ Morbid | SVarCompare$ GE1 | SpellDescription$ CARDNAME deals 1 damage to any target. Activate only if a creature died this turn.
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Morbid:Count$Morbid.1.0
 Oracle:Haste\nMorbid — {T}: Vengeful Devil deals 1 damage to any target. Activate only if a creature died this turn.

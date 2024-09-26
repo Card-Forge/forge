@@ -61,7 +61,7 @@ public abstract class SpellAbilityEffect {
             // prelude for when this is root ability
             if (!(sa instanceof AbilitySub)) {
                 sb.append(sa.getHostCard()).append(" -");
-                if (sa.getHostCard().hasPromisedGift()) {
+                if (sa.getHostCard().hasPromisedGift() && sa.hasAdditionalAbility("GiftAbility")) {
                     sb.append(" Gift ").
                     append(sa.getAdditionalAbility("GiftAbility").getParam("GiftDescription")).
                     append(" to ").append(sa.getHostCard().getPromisedGift()).append(". ");
