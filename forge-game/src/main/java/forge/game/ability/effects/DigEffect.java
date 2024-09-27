@@ -123,7 +123,6 @@ public class DigEffect extends SpellAbilityEffect {
         int destZone1ChangeNum = 1;
         String changeValid = sa.getParamOrDefault("ChangeValid", "");
         final boolean anyNumber = sa.hasParam("AnyNumber");
-
         final boolean optional = sa.hasParam("Optional");
         final boolean skipReorder = sa.hasParam("SkipReorder");
 
@@ -299,6 +298,17 @@ public class DigEffect extends SpellAbilityEffect {
                     chooser.getController().endTempShowCards();
                     if (!movedCards.isEmpty()) {
                         game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
+                    }
+                } else if (sa.hasParam("WithDifferentPowers")) {
+                    movedCards = new CardCollection();
+                    while (!valid.isEmpty() && (anyNumber || movedCards.size() < destZone1ChangeNum)) {
+                        String title = Localizer.getInstance().getMessage(movedCards.isEmpty()?"lblChooseCreature":"lblChooseCreatureWithDiffPower");
+                        Card choice = p.getController().chooseSingleEntityForEffect(valid, sa, title, true, null);
+                        if (choice == null) {
+                            break;
+                        }
+                        movedCards.add(choice);
+                        valid = CardLists.getValidCards(valid, "Card.powerNE" + choice.getNetPower(), activator, host, sa);
                     }
                 } else {
                     String prompt;
