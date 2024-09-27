@@ -12,97 +12,97 @@ ScryfallCode=ARN
 
 [cards]
 1 U Abu Ja'far @Ken Meyer, Jr.
-34 R Aladdin @Julie Baroh
-56 R Aladdin's Lamp @Mark Tedin
-57 R Aladdin's Ring @Dan Frazier
-35 U Ali Baba @Julie Baroh
-36 R Ali from Cairo @Mark Poole
 2 C Army of Allah @Brian Snõddy
 2† C Army of Allah @Brian Snõddy
-70 U Bazaar of Baghdad @Jeff A. Menges
-37 C Bird Maiden @Kaja Foglio
-37† C Bird Maiden @Kaja Foglio
-58 R Bottle of Suleiman @Jesper Myrfors
-59 U Brass Man @Christopher Rush
 3 C Camel @Sandra Everingham
-60 R City in a Bottle @Drew Tucker
-71 U City of Brass @Mark Tedin
-23 C Cuombajj Witches @Kaja Foglio
-45 U Cyclone @Mark Tedin
-61 R Dancing Scimitar @Anson Maddocks
-12 C Dandân @Drew Tucker
-72 C Desert @Jesper Myrfors
-38 C Desert Nomads @Christopher Rush
-46 U Desert Twister @Susan Van Camp
-73 U Diamond Valley @Brian Snõddy
-47 R Drop of Honey @Anson Maddocks
-62 R Ebony Horse @Dameon Willich
-24 R El-Hajjâj @Dameon Willich
-74 R Elephant Graveyard @Rob Alexander
-25 C Erg Raiders @Dameon Willich
-25† C Erg Raiders @Dameon Willich
-48 R Erhnam Djinn @Ken Meyer, Jr.
 4 U Eye for an Eye @Mark Poole
+5 R Jihad @Brian Snõddy
+6 R King Suleiman @Mark Poole
+7 C Moorish Cavalry @Dameon Willich
+7† C Moorish Cavalry @Dameon Willich
+8 C Piety @Mark Poole
+8† C Piety @Mark Poole
+9 R Repentant Blacksmith @Drew Tucker
+10 R Shahrazad @Kaja Foglio
+11 C War Elephant @Kristen Bishop
+11† C War Elephant @Kristen Bishop
+12 C Dandân @Drew Tucker
 13 C Fishliver Oil @Anson Maddocks
 13† C Fishliver Oil @Anson Maddocks
-63 U Flying Carpet @Mark Tedin
 14 C Flying Men @Christopher Rush
-49 C Ghazbán Ogre @Jesper Myrfors
 15 C Giant Tortoise @Kaja Foglio
 15† C Giant Tortoise @Kaja Foglio
+16 R Island Fish Jasconius @Jesper Myrfors
+17 U Merchant Ship @Tom Wänerstrand
+18 R Old Man of the Sea @Susan Van Camp
+19 R Serendib Djinn @Anson Maddocks
+20 R Serendib Efreet @Anson Maddocks
+21 U Sindbad @Julie Baroh
+22 C Unstable Mutation @Douglas Shuler
+23 C Cuombajj Witches @Kaja Foglio
+24 R El-Hajjâj @Dameon Willich
+25 C Erg Raiders @Dameon Willich
+25† C Erg Raiders @Dameon Willich
 26 R Guardian Beast @Ken Meyer, Jr.
 27 C Hasran Ogress @Dan Frazier
 27† C Hasran Ogress @Dan Frazier
-39 C Hurr Jackal @Drew Tucker
-50 R Ifh-Bíff Efreet @Jesper Myrfors
-16 R Island Fish Jasconius @Jesper Myrfors
-75 R Island of Wak-Wak @Douglas Shuler
-64 R Jandor's Ring @Dan Frazier
-65 R Jandor's Saddlebags @Dameon Willich
-66 U Jeweled Bird @Amy Weber
-5 R Jihad @Brian Snõddy
 28 R Junún Efreet @Christopher Rush
 29 R Juzám Djinn @Mark Tedin
 30 U Khabál Ghoul @Douglas Shuler
-6 R King Suleiman @Mark Poole
-40 C Kird Ape @Ken Meyer, Jr.
-76 U Library of Alexandria @Mark Poole
-41 U Magnetic Mountain @Susan Van Camp
-17 U Merchant Ship @Tom Wänerstrand
-51 C Metamorphosis @Christopher Rush
-42 R Mijae Djinn @Susan Van Camp
-7 C Moorish Cavalry @Dameon Willich
-7† C Moorish Cavalry @Dameon Willich
-77 C Mountain @Douglas Shuler
-52 C Nafs Asp @Christopher Rush
-52† C Nafs Asp @Christopher Rush
-78 U Oasis @Brian Snõddy
-18 R Old Man of the Sea @Susan Van Camp
 31 C Oubliette @Douglas Shuler
 31† C Oubliette @Douglas Shuler
-8 C Piety @Mark Poole
-8† C Piety @Mark Poole
-67 R Pyramids @Amy Weber
-9 R Repentant Blacksmith @Drew Tucker
-68 R Ring of Ma'rûf @Dan Frazier
-43 C Rukh Egg @Christopher Rush
-43† C Rukh Egg @Christopher Rush
-69 U Sandals of Abdallah @Dan Frazier
-53 C Sandstorm @Brian Snõddy
-19 R Serendib Djinn @Anson Maddocks
-20 R Serendib Efreet @Anson Maddocks
-10 R Shahrazad @Kaja Foglio
-21 U Sindbad @Julie Baroh
-54 R Singing Tree @Rob Alexander
 32 U Sorceress Queen @Kaja Foglio
 33 C Stone-Throwing Devils @Ken Meyer, Jr.
 33† C Stone-Throwing Devils @Ken Meyer, Jr.
-22 C Unstable Mutation @Douglas Shuler
-11 C War Elephant @Kristen Bishop
-11† C War Elephant @Kristen Bishop
+34 R Aladdin @Julie Baroh
+35 U Ali Baba @Julie Baroh
+36 R Ali from Cairo @Mark Poole
+37 C Bird Maiden @Kaja Foglio
+37† C Bird Maiden @Kaja Foglio
+38 C Desert Nomads @Christopher Rush
+39 C Hurr Jackal @Drew Tucker
+40 C Kird Ape @Ken Meyer, Jr.
+41 U Magnetic Mountain @Susan Van Camp
+42 R Mijae Djinn @Susan Van Camp
+43 C Rukh Egg @Christopher Rush
+43† C Rukh Egg @Christopher Rush
+44 R Ydwen Efreet @Drew Tucker
+45 U Cyclone @Mark Tedin
+46 U Desert Twister @Susan Van Camp
+47 R Drop of Honey @Anson Maddocks
+48 R Erhnam Djinn @Ken Meyer, Jr.
+49 C Ghazbán Ogre @Jesper Myrfors
+50 R Ifh-Bíff Efreet @Jesper Myrfors
+51 C Metamorphosis @Christopher Rush
+52 C Nafs Asp @Christopher Rush
+52† C Nafs Asp @Christopher Rush
+53 C Sandstorm @Brian Snõddy
+54 R Singing Tree @Rob Alexander
 55 C Wyluli Wolf @Susan Van Camp
 55† C Wyluli Wolf @Susan Van Camp
-44 R Ydwen Efreet @Drew Tucker
+56 R Aladdin's Lamp @Mark Tedin
+57 R Aladdin's Ring @Dan Frazier
+58 R Bottle of Suleiman @Jesper Myrfors
+59 U Brass Man @Christopher Rush
+60 R City in a Bottle @Drew Tucker
+61 R Dancing Scimitar @Anson Maddocks
+62 R Ebony Horse @Dameon Willich
+63 U Flying Carpet @Mark Tedin
+64 R Jandor's Ring @Dan Frazier
+65 R Jandor's Saddlebags @Dameon Willich
+66 U Jeweled Bird @Amy Weber
+67 R Pyramids @Amy Weber
+68 R Ring of Ma'rûf @Dan Frazier
+69 U Sandals of Abdallah @Dan Frazier
+70 U Bazaar of Baghdad @Jeff A. Menges
+71 U City of Brass @Mark Tedin
+72 C Desert @Jesper Myrfors
+73 U Diamond Valley @Brian Snõddy
+74 R Elephant Graveyard @Rob Alexander
+75 R Island of Wak-Wak @Douglas Shuler
+76 U Library of Alexandria @Mark Poole
+77 C Mountain @Douglas Shuler
+78 U Oasis @Brian Snõddy
 
 [tokens]
 r_4_4_bird_flying

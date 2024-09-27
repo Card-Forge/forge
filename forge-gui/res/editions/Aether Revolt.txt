@@ -198,7 +198,6 @@ ScryfallCode=AER
 183 C Welder Automaton @Victor Adame Minguez
 184 R Spire of Industry @John Avon
 
-
 [precon product]
 185 M Ajani, Valiant Protector @Anna Steinbauer
 186 C Inspiring Roar @Chris Rahn
