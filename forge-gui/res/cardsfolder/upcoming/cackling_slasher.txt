@@ -1,0 +1,8 @@
+Name:Cackling Slasher
+ManaCost:3 B
+Types:Creature Human Assassin
+PT:3/3
+K:Deathtouch
+K:etbCounter:P1P1:1:CheckSVar$ Count$Morbid.1.0:CARDNAME enters with a +1/+1 counter on it if a creature died this turn.
+DeckHas:Ability$Counters
+Oracle:Deathtouch\nCackling Slasher enters with a +1/+1 counter on it if a creature died this turn.
