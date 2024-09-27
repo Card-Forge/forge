@@ -1,0 +1,13 @@
+Name:Rip, Spawn Hunter
+Types:Legendary Creature Human Survivor
+ManaCost:2 G W
+PT:4/4
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, reveal the top X cards of your library, where X is its power. Put any number of creature and/or Vehicle cards with different powers from among them into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ You | PeekAmount$ X | RememberRevealed$ True | NoPeek$ True | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ Max | Choices$ Creature.IsRemembered,Vehicle.IsRemembered | ChoiceZone$ Library | ChoiceTitle$ Choose any number of vehicles and creatures with different power | WithDifferentPowers$ True | SubAbility$ DBToHand
+SVar:DBToHand:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Hand | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:X:Count$CardPower
+SVar:Max:Count$DifferentPower_Creature,Vehicle
+Oracle:Survival — At the beginning of your second main phase, if Rip, Spawn Hunter is tapped, reveal the top X cards of your library, where X is its power. Put any number of creature and/or Vehicle cards with different powers from among them into your hand. Put the rest on the bottom of your library in a random order.
