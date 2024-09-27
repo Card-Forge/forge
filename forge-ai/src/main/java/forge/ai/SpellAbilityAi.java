@@ -365,6 +365,12 @@ public abstract class SpellAbilityAi {
         return face == null ? "" : face.getName();
     }
 
+    public ICardFace chooseCardFace(Player ai, SpellAbility sa, List<ICardFace> faces) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardFace is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+
+        return Iterables.getFirst(faces, null);
+    }
+
     public int chooseNumber(Player player, SpellAbility sa, int min, int max, Map<String, Object> params) {
         return max;
     }

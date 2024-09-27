@@ -1830,6 +1830,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        return getGui().one(message, faces);
+    }
+
+    @Override
     public CounterType chooseCounterType(final List<CounterType> options, final SpellAbility sa, final String prompt,
                                          Map<String, Object> params) {
         if (options.size() <= 1) {
@@ -3216,7 +3221,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
-        ICardFace face = getGui().one(message, faces);
+        ICardFace face = chooseSingleCardFace(sa, faces, message);
         return face == null ? "" : face.getName();
     }
 

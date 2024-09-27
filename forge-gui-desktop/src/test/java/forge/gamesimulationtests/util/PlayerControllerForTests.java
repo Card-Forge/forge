@@ -728,6 +728,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
         // TODO Auto-generated method stub
         return null;

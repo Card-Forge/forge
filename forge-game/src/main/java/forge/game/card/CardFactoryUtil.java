@@ -120,26 +120,9 @@ public class CardFactoryUtil {
     }
 
     public static SpellAbility abilityUnlockRoom(CardState cardState) {
-        final AbilityStatic unlock = new AbilityStatic(cardState.getCard(), cardState.getManaCost()) {
+        String unlockStr = "ST$ UnlockDoor | Cost$ " + cardState.getManaCost().getShortString() + " | Unlock$ True | SpellDescription$ Unlock " + cardState.getName();
 
-            @Override
-            public void resolve() {
-                hostCard.unlockRoom(getActivatingPlayer(), getCardStateName());
-            }
-
-            @Override
-            public boolean canPlay() {
-                if (!hostCard.isInPlay()) {
-                    return false; // cut short if already on the battlefield, avoids side effects when checking statics
-                }
-                return true;
-            }
-        };
-
-        unlock.setDescription("Unlock " + cardState.getName());
-        unlock.setCardState(cardState);
-
-        return unlock;
+        return AbilityFactory.getAbility(unlockStr, cardState);
     }
 
     /**

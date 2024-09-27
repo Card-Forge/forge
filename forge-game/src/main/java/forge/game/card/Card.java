@@ -8121,6 +8121,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return result;
     }
 
+    public Set<CardStateName> getLockedRooms() {
+        if (!this.isSplitCard())
+            return ImmutableSet.of();
+        Set<CardStateName> result = Sets.newHashSet(CardStateName.LeftSplit, CardStateName.RightSplit);
+        result.removeAll(this.unlockedRooms);
+        return result;
+    }
+
+    public List<String> getLockedRoomNames() {
+        List<String> result = Lists.newArrayList();
+        for (CardStateName stateName : getLockedRooms()) {
+            if (this.hasState(stateName)) {
+                result.add(this.getState(stateName).getName());
+            }
+        }
+        return result;
+    }
+
     public boolean unlockRoom(Player p, CardStateName stateName) {
         if (unlockedRooms.contains(stateName) || (stateName != CardStateName.LeftSplit && stateName != CardStateName.RightSplit)) {
             return false;
