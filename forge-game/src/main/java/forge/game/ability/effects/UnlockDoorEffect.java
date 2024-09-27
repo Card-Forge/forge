@@ -2,8 +2,8 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
-import org.testng.collections.Lists;
-import org.testng.collections.Maps;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.StaticData;
 import forge.card.CardStateName;
