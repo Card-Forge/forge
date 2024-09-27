@@ -252,8 +252,7 @@ public class DigEffect extends SpellAbilityEffect {
 
                 if (changeAll) {
                     movedCards = new CardCollection(valid);
-                }
-                else if (sa.hasParam("RandomChange")) {
+                } else if (sa.hasParam("RandomChange")) {
                     int numChanging = Math.min(destZone1ChangeNum, valid.size());
                     movedCards = CardLists.getRandomSubList(valid, numChanging);
                 } else if (totalCMC) {
@@ -300,20 +299,18 @@ public class DigEffect extends SpellAbilityEffect {
                     if (!movedCards.isEmpty()) {
                         game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
                     }
-                }
-                else if (sa.hasParam("WithDifferentPowers")) {
+                } else if (sa.hasParam("WithDifferentPowers")) {
                     movedCards = new CardCollection();
-                    while (!valid.isEmpty()  && (anyNumber || movedCards.size() < destZone1ChangeNum)) {
+                    while (!valid.isEmpty() && (anyNumber || movedCards.size() < destZone1ChangeNum)) {
                         String title = Localizer.getInstance().getMessage(movedCards.isEmpty()?"lblChooseCreature":"lblChooseCreatureWithDiffPower");
                         Card choice = p.getController().chooseSingleEntityForEffect(valid, sa, title, true, null);
                         if (choice == null) {
                             break;
                         }
                         movedCards.add(choice);
-                        valid = CardLists.getValidCards(valid, "card.powerNE"+ choice.getNetPower(), activator, host, sa);
+                        valid = CardLists.getValidCards(valid, "Card.powerNE" + choice.getNetPower(), activator, host, sa);
                     }
-                }
-                else {
+                } else {
                     String prompt;
 
                     if (sa.hasParam("PrimaryPrompt")) {
