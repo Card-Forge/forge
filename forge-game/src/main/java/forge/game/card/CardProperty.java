@@ -292,17 +292,6 @@ public class CardProperty {
             if (!source.isRemembered(p)) {
                 return false;
             }
-        } else if (property.startsWith("nonRememberedPlayerCtrl")) {
-            if (!source.hasRemembered()) {
-                final Card newCard = game.getCardState(source);
-                if (newCard.isRemembered(controller)) {
-                    return false;
-                }
-            }
-
-            if (source.isRemembered(controller)) {
-                return false;
-            }
         } else if (property.equals("targetedBy")) {
             if (!(spellAbility instanceof SpellAbility)) {
                 return false;
