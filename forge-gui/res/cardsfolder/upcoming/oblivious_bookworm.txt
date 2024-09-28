@@ -3,12 +3,11 @@ ManaCost:G U
 Types:Creature Human Wizard
 PT:2/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | OptionalDecider$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may draw a card. If you do, discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn.
-SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ Condition | ConditionSVarCompare$ EQ0
-T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigRemember | TriggerZones$ Battlefield | Static$ True
+SVar:TrigDraw:AB$ Discard | Cost$ Draw<1/You> | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionCheckSVar$ Condition | ConditionSVarCompare$ EQ0 
+T:Mode$ TurnFaceUp | ValidCard$ Permanent | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigRemember | Static$ True
 SVar:TrigRemember:DB$ Pump | RememberObjects$ TriggeredCard
 T:Mode$ Phase | Phase$ Upkeep | Static$ True | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Condition:Count$RememberedSize/Plus.Y
-SVar:Y:Count$Valid Permanent.faceDown+ThisTurnEntered+EnteredUnder You
+SVar:Y:Count$Valid Permanent.faceDown+ThisTurnEntered
 Oracle:At the beginning of your end step, you may draw a card. If you do, discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn.
