@@ -84,12 +84,6 @@ public class CardProperty {
                 }
             }
             return found;
-        } else if (property.startsWith("DifferentNameThan")) {
-            for (Card c : AbilityUtils.getDefinedCards(source, property.substring(17), spellAbility)) {
-                if (card.sharesNameWith(c)) {
-                    return false;
-                }
-            }
         } else if (property.equals("NamedByRememberedPlayer")) {
             if (!source.hasRemembered()) {
                 final Card newCard = game.getCardState(source);
@@ -480,10 +474,6 @@ public class CardProperty {
         } else if (property.equals("NameNotEnchantingEnchantedPlayer")) {
             Player enchantedPlayer = source.getPlayerAttachedTo();
             if (enchantedPlayer == null || enchantedPlayer.isEnchantedBy(card.getName())) {
-                return false;
-            }
-        } else if (property.equals("NotAttachedTo")) {
-            if (source.hasCardAttachment(card)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedBy")) {
@@ -1274,10 +1264,6 @@ public class CardProperty {
             return card.getDamageHistory().getCreatureAttackedLastTurnOf(controller);
         } else if (property.startsWith("blockedThisTurn")) {
             if (card.getBlockedThisTurn().isEmpty()) {
-                return false;
-            }
-        } else if (property.startsWith("notBlockedThisTurn")) {
-            if (!card.getBlockedThisTurn().isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("notExertedThisTurn")) {
