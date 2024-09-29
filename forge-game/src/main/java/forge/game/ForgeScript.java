@@ -15,7 +15,6 @@ import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCastWithFlash;
@@ -145,7 +144,7 @@ public class ForgeScript {
             }
             return false;
         } else if (property.equals("hasManaAbility")) {
-            if (cardState.getSpellAbilities().anyMatch(SpellAbilityPredicates.isManaAbility())) {
+            if (!cardState.getManaAbilities().isEmpty()) {
                 return true;
             }
             for (final Trigger trig : cardState.getTriggers()) {

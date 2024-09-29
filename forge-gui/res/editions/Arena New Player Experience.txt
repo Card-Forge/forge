@@ -6,42 +6,42 @@ Type=Online
 ScryfallCode=ANA
 
 [cards]
-24 C Altar's Reap
-25 U Ambition's Cost
 1 U Angelic Reward
 2 U Blinding Radiance
-36 R Chaos Maw
 3 U Confront the Assault
-26 C Cruel Cut
-14 C Divination
-37 U Doublecast
-46 C Feral Roar
-39 U Goblin Bruiser
-40 U Goblin Gang Leader
-41 U Goblin Grenade
 4 R Inspiring Commander
 5 C Knight's Pledge
 7 C Loxodon Line Breaker
-29 C Miasmic Mummy
-31 C Nimble Pilferer
-42 R Ogre Painbringer
-16 M Overflowing Insight
-43 C Raging Goblin
-33 C Renegade Demon
-34 U Rise from the Grave
-19 C River's Favor
-47 C Rumbling Baloth
 8 C Sanctuary Cat
-44 U Seismic Rupture
 9 U Serra Angel
-18 C Shorecomber Crab
 10 C Shrine Keeper
-35 R Soulhunter Rakshasa
 11 C Spiritual Guardian
 12 C Tactical Advantage
 13 C Take Vengeance
+14 C Divination
+16 M Overflowing Insight
+18 C Shorecomber Crab
+19 C River's Favor
 19 U Titanic Pelagosaur
-48 C Treetop Warden
-45 U Volcanic Dragon
 22 C Waterknot
 23 C Zephyr Gull
+24 C Altar's Reap
+25 U Ambition's Cost
+26 C Cruel Cut
+29 C Miasmic Mummy
+31 C Nimble Pilferer
+33 C Renegade Demon
+34 U Rise from the Grave
+35 R Soulhunter Rakshasa
+36 R Chaos Maw
+37 U Doublecast
+39 U Goblin Bruiser
+40 U Goblin Gang Leader
+41 U Goblin Grenade
+42 R Ogre Painbringer
+43 C Raging Goblin
+44 U Seismic Rupture
+45 U Volcanic Dragon
+46 C Feral Roar
+47 C Rumbling Baloth
+48 C Treetop Warden
