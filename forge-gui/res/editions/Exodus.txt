@@ -10,149 +10,149 @@ Foil=NotSupported
 ScryfallCode=EXO
 
 [cards]
-27 C Aether Tide @Andrew Robinson
 1 C Allay @Randy Gallegos
-79 C Anarchist @Brom
 2 C Angelic Blessing @Mark Zug
-105 C Avenging Druid @Daren Bader
-106 C Bequeathal @D. Alexander Gregory
-53 C Carnophage @Pete Venters
-107 U Cartographer @Jeff Laubenstein
-54 C Cat Burglar @DiTerlizzi
 3 R Cataclysm @Jim Nelson
 4 C Charging Paladin @Ciruelo
-80 C Cinder Crawler @Jim Nelson
-143 R City of Traitors @Kev Walker
-131 R Coat of Arms @Scott M. Fischer
 5 R Convalescence @D. Alexander Gregory
-108 U Crashing Boars @Ron Spencer
-55 C Culling the Weak @Scott M. Fischer
+6 R Exalted Dragon @Matthew D. Wilson
+7 U High Ground @rk post
+8 U Keeper of the Light @D. Alexander Gregory
+9 C Kor Chant @John Matson
+10 R Limited Resources @Keith Parkinson
+11 R Oath of Lieges @Mark Zug
+12 R Paladin en-Vec @Randy Elliott
+13 U Peace of Mind @Randy Elliott
+14 U Pegasus Stampede @Mark Zug
+15 U Penance @Terese Nielsen
+16 C Reaping the Rewards @Heather Hudson
+17 U Reconnaissance @Val Mayerik
+18 C Shackles @Heather Hudson
+19 C Shield Mate @Randy Elliott
+20 C Soltari Visionary @Adam Rex
+21 C Soul Warden @Randy Gallegos
+22 C Standing Troops @Daren Bader
+23 U Treasure Hunter @Adam Rex
+24 R Wall of Nets @Terese Nielsen
+25 C Welkin Hawk @Rob Alexander
+26 U Zealots en-Dal @Brom
+27 C Aether Tide @Andrew Robinson
 28 C Cunning @Kev Walker
 29 U Curiosity @Val Mayerik
+30 R Dominating Licid @Heather Hudson
+31 R Ephemeron @Keith Parkinson
+32 R Equilibrium @Jeff Miracola
+33 R Ertai, Wizard Adept @Terese Nielsen
+34 C Fade Away @Jeff Miracola
+35 U Forbid @Scott Kirschner
+36 U Keeper of the Mind @Matthew D. Wilson
+37 U Killer Whale @Stephen Daniele
+38 U Mana Breach @Rebecca Guay
+39 C Merfolk Looter @Ron Spencer
+40 R Mind Over Matter @Keith Parkinson
+41 U Mirozel @Jim Nelson
+42 R Oath of Scholars @Michael Sutfin
+43 C Robe of Mirrors @John Matson
+44 C Rootwater Mystic @Michael Sutfin
+45 C School of Piranha @Daren Bader
+46 U Scrivener @Heather Hudson
+47 R Thalakos Drifters @Andrew Robinson
+48 C Thalakos Scout @John Matson
+49 C Theft of Dreams @Richard Kane Ferguson
+50 U Treasure Trove @Michael Sutfin
+51 C Wayward Soul @M. W. Kaluta & DiTerlizzi
+52 C Whiptongue Frog @Jeff Miracola
+53 C Carnophage @Pete Venters
+54 C Cat Burglar @DiTerlizzi
+55 C Culling the Weak @Scott M. Fischer
 56 C Cursed Flesh @Ron Spencer
 57 U Dauthi Cutthroat @Dermot Power
 58 C Dauthi Jackal @Adam Rex
 59 U Dauthi Warlord @Kev Walker
 60 C Death's Duet @Keith Parkinson
-81 C Dizzying Gaze @Thomas M. Baxa
-30 R Dominating Licid @Heather Hudson
-109 U Elven Palisade @Mark Zug
-110 C Elvish Berserker @Paolo Parente
 61 R Entropic Specter @Ron Spencer
-31 R Ephemeron @Keith Parkinson
-32 R Equilibrium @Jeff Miracola
-132 R Erratic Portal @John Matson
-33 R Ertai, Wizard Adept @Terese Nielsen
-6 R Exalted Dragon @Matthew D. Wilson
-34 C Fade Away @Jeff Miracola
-82 R Fighting Chance @Mike Raabe
-83 U Flowstone Flood @Paolo Parente
-35 U Forbid @Scott Kirschner
 62 U Fugue @Randy Gallegos
-84 C Furnace Brood @Jeff Miracola
 63 C Grollub @Chippy
 64 R Hatred @Brom
-7 U High Ground @rk post
-111 C Jackalope Herd @Ron Spencer
-112 U Keeper of the Beasts @rk post
 65 U Keeper of the Dead @Brom
-85 U Keeper of the Flame @Terese Nielsen
-8 U Keeper of the Light @D. Alexander Gregory
-36 U Keeper of the Mind @Matthew D. Wilson
-37 U Killer Whale @Stephen Daniele
-9 C Kor Chant @John Matson
-10 R Limited Resources @Keith Parkinson
-86 C Mage il-Vec @John Matson
-38 U Mana Breach @Rebecca Guay
-113 R Manabond @Stephen Daniele
-87 C Maniacal Rage @Pete Venters
-133 U Medicine Bag @DiTerlizzi
-134 R Memory Crystal @Michael Sutfin
-39 C Merfolk Looter @Ron Spencer
 66 U Mind Maggots @Ron Spencer
-40 R Mind Over Matter @Keith Parkinson
-135 R Mindless Automaton @Brian Snõddy
-41 U Mirozel @Jim Nelson
-114 R Mirri, Cat Warrior @Daren Bader
-88 U Mogg Assassin @Dermot Power
-89 R Monstrous Hound @Dermot Power
 67 C Nausea @Jeff Miracola
 68 U Necrologia @Brom
-136 R Null Brooch @DiTerlizzi
-115 R Oath of Druids @Daren Bader
 69 R Oath of Ghouls @Brom
-11 R Oath of Lieges @Mark Zug
-90 R Oath of Mages @Keith Parkinson
-42 R Oath of Scholars @Michael Sutfin
-91 R Ogre Shaman @Paolo Parente
-92 C Onslaught @Paolo Parente
-12 R Paladin en-Vec @Randy Elliott
-93 R Pandemonium @Pete Venters
-94 U Paroxysm @Scott Kirschner
-13 U Peace of Mind @Randy Elliott
-14 U Pegasus Stampede @Mark Zug
-15 U Penance @Terese Nielsen
 70 R Pit Spawn @Thomas M. Baxa
 71 R Plaguebearer @Ron Spencer
-116 C Plated Rootwalla @Randy Elliott
-117 C Predatory Hunger @Brom
+72 R Recurring Nightmare @Jeff Laubenstein
+73 C Scare Tactics @DiTerlizzi
+74 U Slaughter @Pete Venters
+75 U Spike Cannibal @Joel Biske
+76 C Thrull Surgeon @rk post
+77 C Vampire Hounds @Kev Walker
+78 R Volrath's Dungeon @Stephen Daniele
+79 C Anarchist @Brom
+80 C Cinder Crawler @Jim Nelson
+81 C Dizzying Gaze @Thomas M. Baxa
+82 R Fighting Chance @Mike Raabe
+83 U Flowstone Flood @Paolo Parente
+84 C Furnace Brood @Jeff Miracola
+85 U Keeper of the Flame @Terese Nielsen
+86 C Mage il-Vec @John Matson
+87 C Maniacal Rage @Pete Venters
+88 U Mogg Assassin @Dermot Power
+89 R Monstrous Hound @Dermot Power
+90 R Oath of Mages @Keith Parkinson
+91 R Ogre Shaman @Paolo Parente
+92 C Onslaught @Paolo Parente
+93 R Pandemonium @Pete Venters
+94 U Paroxysm @Scott Kirschner
 95 U Price of Progress @Richard Kane Ferguson
-118 C Pygmy Troll @Daniel Gelon
-119 C Rabid Wolverines @Daren Bader
 96 C Raging Goblin @Brian Snõddy
 97 R Ravenous Baboons @Daren Bader
-16 C Reaping the Rewards @Heather Hudson
 98 C Reckless Ogre @Paolo Parente
-120 C Reclaim @Andrew Robinson
-17 U Reconnaissance @Val Mayerik
-72 R Recurring Nightmare @Jeff Laubenstein
-121 U Resuscitate @Rebecca Guay
-43 C Robe of Mirrors @John Matson
-122 C Rootwater Alligator @Stephen Daniele
-44 C Rootwater Mystic @Michael Sutfin
 99 U Sabertooth Wyvern @Keith Parkinson
 100 U Scalding Salamander @Terese Nielsen
-73 C Scare Tactics @DiTerlizzi
-45 C School of Piranha @Daren Bader
-46 U Scrivener @Heather Hudson
 101 R Seismic Assault @Dermot Power
-18 C Shackles @Heather Hudson
 102 C Shattering Pulse @Donato Giancola
-19 C Shield Mate @Randy Elliott
-137 U Skyshaper @Donato Giancola
+103 C Sonic Burst @Brian Snõddy
+104 U Spellshock @Thomas M. Baxa
+105 C Avenging Druid @Daren Bader
+106 C Bequeathal @D. Alexander Gregory
+107 U Cartographer @Jeff Laubenstein
+108 U Crashing Boars @Ron Spencer
+109 U Elven Palisade @Mark Zug
+110 C Elvish Berserker @Paolo Parente
+111 C Jackalope Herd @Ron Spencer
+112 U Keeper of the Beasts @rk post
+113 R Manabond @Stephen Daniele
+114 R Mirri, Cat Warrior @Daren Bader
+115 R Oath of Druids @Daren Bader
+116 C Plated Rootwalla @Randy Elliott
+117 C Predatory Hunger @Brom
+118 C Pygmy Troll @Daniel Gelon
+119 C Rabid Wolverines @Daren Bader
+120 C Reclaim @Andrew Robinson
+121 U Resuscitate @Rebecca Guay
+122 C Rootwater Alligator @Stephen Daniele
 123 U Skyshroud Elite @Paolo Parente
 124 R Skyshroud War Beast @Jim Nelson
-74 U Slaughter @Pete Venters
-20 C Soltari Visionary @Adam Rex
 125 U Song of Serenity @DiTerlizzi
-103 C Sonic Burst @Brian Snõddy
-21 C Soul Warden @Randy Gallegos
-138 U Spellbook @Ciruelo
-104 U Spellshock @Thomas M. Baxa
-139 R Sphere of Resistance @Doug Chaffee
-75 U Spike Cannibal @Joel Biske
 126 R Spike Hatcher @Stephen Daniele
 127 U Spike Rogue @Heather Hudson
 128 R Spike Weaver @Mike Raabe
-22 C Standing Troops @Daren Bader
 129 R Survival of the Fittest @Pete Venters
-47 R Thalakos Drifters @Andrew Robinson
-48 C Thalakos Scout @John Matson
-49 C Theft of Dreams @Richard Kane Ferguson
-140 R Thopter Squadron @Doug Chaffee
-76 C Thrull Surgeon @rk post
-141 U Transmogrifying Licid @Jim Nelson
-23 U Treasure Hunter @Adam Rex
-50 U Treasure Trove @Michael Sutfin
-77 C Vampire Hounds @Kev Walker
-78 R Volrath's Dungeon @Stephen Daniele
-24 R Wall of Nets @Terese Nielsen
-51 C Wayward Soul @M. W. Kaluta & DiTerlizzi
-25 C Welkin Hawk @Rob Alexander
-52 C Whiptongue Frog @Jeff Miracola
 130 C Wood Elves @Rebecca Guay
+131 R Coat of Arms @Scott M. Fischer
+132 R Erratic Portal @John Matson
+133 U Medicine Bag @DiTerlizzi
+134 R Memory Crystal @Michael Sutfin
+135 R Mindless Automaton @Brian Snõddy
+136 R Null Brooch @DiTerlizzi
+137 U Skyshaper @Donato Giancola
+138 U Spellbook @Ciruelo
+139 R Sphere of Resistance @Doug Chaffee
+140 R Thopter Squadron @Doug Chaffee
+141 U Transmogrifying Licid @Jim Nelson
 142 R Workhorse @DiTerlizzi
-26 U Zealots en-Dal @Brom
+143 R City of Traitors @Kev Walker
 
 [tokens]
 c_1_1_a_thopter_flying

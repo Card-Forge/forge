@@ -147,21 +147,21 @@ A138 U Simic Growth Chamber @John Avon
 A139 C Terramorphic Expanse @Dan Scott
 A140 C Tranquil Thicket @Heather Hudson
 A141 U Treva's Ruins @Jerry Tiritilli
-B34 L Plains @John Avon
-B35 L Plains @Ryan Pancoast
-B36 L Plains @D. J. Cleland-Hura
 A145 L Island @Ku Xueming
 A146 L Island @Ku Xueming
 A147 L Island @Ku Xueming
 A148 L Swamp @Wang Chuxiong
 A149 L Swamp @Wang Chuxiong
 A150 L Swamp @Wang Chuxiong
-B38 L Mountain @Nils Hamm
-B39 L Mountain @Karl Kopinski
-B40 L Mountain @Rob Alexander
 A154 L Forest @Ji Yong
 A155 L Forest @Ji Yong
 A156 L Forest @Ji Yong
+B34 L Plains @John Avon
+B35 L Plains @Ryan Pancoast
+B36 L Plains @D. J. Cleland-Hura
+B38 L Mountain @Nils Hamm
+B39 L Mountain @Karl Kopinski
+B40 L Mountain @Rob Alexander
 
 [tokens]
 w_4_4_angel_flying

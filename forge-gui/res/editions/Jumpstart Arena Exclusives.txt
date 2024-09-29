@@ -7,20 +7,20 @@ ScryfallCode=AJMP
 
 [cards]
 3 R Archon of Sun's Grace @Matt Stewart
-84 C Audacious Thief @Dmitry Burmak
 4 U Banishing Light @Willian Murai
-80 U Bond of Revival @Lake Hurwitz
-57 R Carnifex Demon @Aleksi Briclot
-137 R Doomed Necromancer @Volkan Baǵa
-178 U Dryad Greenseeker @Greg Opalinski
-121 U Fanatic of Mogis @Matt Stewart
 48 R Gadwick, the Wizened @Colin Boyer
-130 U Goblin Oriflamme @David Palumbo
+57 R Carnifex Demon @Aleksi Briclot
+74 U Weight of Memory @Eric Deschamps
+80 U Bond of Revival @Lake Hurwitz
+84 C Audacious Thief @Dmitry Burmak
 88 R Lightning Serpent @John Avon
+121 U Fanatic of Mogis @Matt Stewart
+123 R Woe Strider @John Thacker
+130 U Goblin Oriflamme @David Palumbo
+137 R Doomed Necromancer @Volkan Baǵa
+139 C Scorching Dragonfire @Eric Velhagen
+143 C Prey Upon @G-host Lee
 152 U Lightning Strike @Adam Paquette
 173 C Pollenbright Druid @Matt Stewart
-143 C Prey Upon @G-host Lee
-139 C Scorching Dragonfire @Eric Velhagen
+178 U Dryad Greenseeker @Greg Opalinski
 310 R Serra's Guardian @Magali Villeneuve
-74 U Weight of Memory @Eric Deschamps
-123 R Woe Strider @John Thacker

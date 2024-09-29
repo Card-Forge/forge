@@ -10,39 +10,85 @@ Foil=NotSupported
 ScryfallCode=STH
 
 [cards]
-126 U Acidic Sliver @Jeff Miracola
-76 R Amok @Dermot Power
-101 R Awakening @Dan Frazier
 1 C Bandage @Rebecca Guay
-51 U Bottomless Pit @Kev Walker
-52 C Brush with Death @Stephen Daniele
-132 U Bullwhip @Brom
-102 R Burgeoning @Randy Gallegos
 2 U Calming Licid @D. Alexander Gregory
-53 C Cannibalize @Robert Bliss
-103 R Carnassid @Brom
 3 C Change of Heart @Ron Spencer
-26 C Cloud Spirit @Randy Gallegos
-104 U Constant Mists @Dermot Power
 4 U Contemplation @Brom
-27 C Contempt @Val Mayerik
 5 C Conviction @Paolo Parente
-77 U Convulsing Licid @Scott Kirschner
-54 U Corrupting Licid @Thomas M. Baxa
-78 C Craven Giant @Brian Snõddy
-105 C Crossbow Ambush @Kev Walker
-55 R Crovax the Cursed @Pete Venters
-127 U Crystalline Sliver @Allen Williams
-56 U Dauthi Trapper @Thomas M. Baxa
-57 C Death Stroke @Colin MacNeil
+6 R Hidden Retreat @Terese Nielsen
+7 C Honor Guard @Joel Biske
+8 U Lancers en-Kor @Pete Venters
+9 C Nomads en-Kor @Val Mayerik
+10 R Pursuit of Knowledge @DiTerlizzi
+11 R Rolling Stones @John Matson
+12 R Sacred Ground @Terese Nielsen
+13 C Samite Blessing @Rebecca Guay
+14 U Scapegoat @Daren Bader
+15 R Shaman en-Kor @Jeff Miracola
+16 C Skyshroud Falcon @Mike Raabe
+17 C Smite @Daren Bader
+18 R Soltari Champion @Adam Rex
+19 C Spirit en-Kor @John Matson
+20 U Temper @Matthew D. Wilson
+21 C Venerable Monk @Terese Nielsen
+22 U Wall of Essence @Adam Rex
+23 U Warrior en-Kor @Stephen Daniele
+24 R Warrior Angel @Brom
+25 C Youthful Knight @Rebecca Guay
+26 C Cloud Spirit @Randy Gallegos
+27 C Contempt @Val Mayerik
 28 R Dream Halls @Matthew D. Wilson
 29 C Dream Prowler @Richard Kane Ferguson
-79 C Duct Crawler @Stephen Daniele
-58 C Dungeon Shade @Jason Alexander Behnke
-106 U Elven Rite @Jeff Miracola
-107 C Endangered Armodon @Kev Walker
-133 R Ensnaring Bridge @Pete Venters
 30 R Evacuation @Rob Alexander
+31 U Gliding Licid @Heather Hudson
+32 C Hammerhead Shark @Stephen Daniele
+33 U Hesitation @Pete Venters
+34 R Intruder Alarm @Donato Giancola
+35 C Leap @Kev Walker
+36 C Mana Leak @Christopher Rush
+37 U Mask of the Mimic @Heather Hudson
+38 C Mind Games @Andrew Robinson
+39 U Ransack @Ron Spencer
+40 U Rebound @Doug Chaffee
+41 R Reins of Power @Colin MacNeil
+42 C Sift @Pete Venters
+43 R Silver Wyvern @Colin MacNeil
+44 C Spindrift Drake @Anthony S. Waters
+45 R Thalakos Deceiver @Andrew Robinson
+46 C Tidal Surge @Doug Chaffee
+47 C Tidal Warrior @Daren Bader
+48 R Volrath's Shapeshifter @Ron Spencer
+49 U Walking Dream @Richard Kane Ferguson
+50 U Wall of Tears @Rebecca Guay
+51 U Bottomless Pit @Kev Walker
+52 C Brush with Death @Stephen Daniele
+53 C Cannibalize @Robert Bliss
+54 U Corrupting Licid @Thomas M. Baxa
+55 R Crovax the Cursed @Pete Venters
+56 U Dauthi Trapper @Thomas M. Baxa
+57 C Death Stroke @Colin MacNeil
+58 C Dungeon Shade @Jason Alexander Behnke
+59 C Foul Imp @Jim Nelson
+60 R Grave Pact @Scott Kirschner
+61 C Lab Rats @DiTerlizzi
+62 U Megrim @Donato Giancola
+63 U Mind Peel @Adam Rex
+64 R Mindwarper @Paolo Parente
+65 C Morgue Thrull @Robert Bliss
+66 R Mortuary @Robert Bliss
+67 C Rabid Rats @Matthew D. Wilson
+68 R Revenant @Terese Nielsen
+69 C Serpent Warrior @Ron Spencer
+70 R Skeleton Scavengers @Brian Snõddy
+71 R Stronghold Assassin @Matthew D. Wilson
+72 U Stronghold Taskmaster @Brom
+73 C Torment @Paolo Parente
+74 C Tortured Existence @Keith Parkinson
+75 U Wall of Souls @John Matson
+76 R Amok @Dermot Power
+77 U Convulsing Licid @Scott Kirschner
+78 C Craven Giant @Brian Snõddy
+79 C Duct Crawler @Stephen Daniele
 80 U Fanning the Flames @Ron Spencer
 81 U Flame Wave @Donato Giancola
 82 C Fling @Paolo Parente
@@ -50,109 +96,63 @@ ScryfallCode=STH
 84 U Flowstone Hellion @Daren Bader
 85 R Flowstone Mauler @Paolo Parente
 86 C Flowstone Shambler @Jim Nelson
-59 C Foul Imp @Jim Nelson
 87 C Furnace Spirit @Jeff Miracola
-31 U Gliding Licid @Heather Hudson
-60 R Grave Pact @Scott Kirschner
-32 C Hammerhead Shark @Stephen Daniele
-134 U Heartstone @John Matson
 88 U Heat of Battle @Matthew D. Wilson
-108 R Hermit Druid @Heather Hudson
-33 U Hesitation @Pete Venters
-128 U Hibernation Sliver @Scott Kirschner
-6 R Hidden Retreat @Terese Nielsen
-7 C Honor Guard @Joel Biske
-136 U Hornet Cannon @Ron Spencer
-135 R Horn of Greed @Jeff Miracola
-34 R Intruder Alarm @Donato Giancola
 89 R Invasion Plans @Pete Venters
-137 R Jinxed Ring @M. W. Kaluta & DiTerlizzi
-61 C Lab Rats @DiTerlizzi
-8 U Lancers en-Kor @Pete Venters
-35 C Leap @Kev Walker
-109 C Lowland Basilisk @Randy Gallegos
-36 C Mana Leak @Christopher Rush
-37 U Mask of the Mimic @Heather Hudson
-62 U Megrim @Donato Giancola
-38 C Mind Games @Andrew Robinson
-63 U Mind Peel @Adam Rex
-64 R Mindwarper @Paolo Parente
 90 C Mob Justice @Ron Spencer
 91 C Mogg Bombers @Dermot Power
 92 C Mogg Flunkies @Brom
 93 R Mogg Infestation @Pete Venters
 94 U Mogg Maniac @Brian Snõddy
-65 C Morgue Thrull @Robert Bliss
-66 R Mortuary @Robert Bliss
-138 R Mox Diamond @Dan Frazier
+95 R Ruination @Dermot Power
+96 C Seething Anger @Val Mayerik
+97 R Shard Phoenix @Paolo Parente
+98 C Shock @Randy Gallegos
+99 R Spitting Hydra @Daren Bader
+100 U Wall of Razors @Michael Sutfin
+101 R Awakening @Dan Frazier
+102 R Burgeoning @Randy Gallegos
+103 R Carnassid @Brom
+104 U Constant Mists @Dermot Power
+105 C Crossbow Ambush @Kev Walker
+106 U Elven Rite @Jeff Miracola
+107 C Endangered Armodon @Kev Walker
+108 R Hermit Druid @Heather Hudson
+109 C Lowland Basilisk @Randy Gallegos
 110 C Mulch @Rebecca Guay
-9 C Nomads en-Kor @Val Mayerik
 111 C Overgrowth @Rob Alexander
-139 R Portcullis @Kev Walker
 112 U Primal Rage @Brian Snõddy
 113 C Provoke @Terese Nielsen
-10 R Pursuit of Knowledge @DiTerlizzi
-67 C Rabid Rats @Matthew D. Wilson
-39 U Ransack @Ron Spencer
-40 U Rebound @Doug Chaffee
-41 R Reins of Power @Colin MacNeil
-68 R Revenant @Terese Nielsen
-11 R Rolling Stones @John Matson
-95 R Ruination @Dermot Power
-12 R Sacred Ground @Terese Nielsen
-13 C Samite Blessing @Rebecca Guay
-14 U Scapegoat @Daren Bader
-96 C Seething Anger @Val Mayerik
-69 C Serpent Warrior @Ron Spencer
-15 R Shaman en-Kor @Jeff Miracola
-97 R Shard Phoenix @Paolo Parente
-140 U Shifting Wall @Michael Sutfin
-98 C Shock @Randy Gallegos
-42 C Sift @Pete Venters
-43 R Silver Wyvern @Colin MacNeil
-70 R Skeleton Scavengers @Brian Snõddy
 114 C Skyshroud Archer @Jeff Miracola
-16 C Skyshroud Falcon @Mike Raabe
 115 C Skyshroud Troopers @DiTerlizzi
-129 R Sliver Queen @Ron Spencer
-17 C Smite @Daren Bader
-18 R Soltari Champion @Adam Rex
 116 R Spike Breeder @Adam Rex
 117 C Spike Colony @Douglas Shuler
 118 U Spike Feeder @Heather Hudson
 119 U Spike Soldier @Randy Elliott
 120 C Spike Worker @Daniel Gelon
-44 C Spindrift Drake @Anthony S. Waters
-130 U Spined Sliver @Ron Spencer
 121 C Spined Wurm @Keith Parkinson
-19 C Spirit en-Kor @John Matson
-99 R Spitting Hydra @Daren Bader
-71 R Stronghold Assassin @Matthew D. Wilson
-72 U Stronghold Taskmaster @Brom
-141 R Sword of the Chosen @Adam Rex
-20 U Temper @Matthew D. Wilson
 122 U Tempting Licid @Randy Gallegos
-45 R Thalakos Deceiver @Andrew Robinson
-46 C Tidal Surge @Doug Chaffee
-47 C Tidal Warrior @Daren Bader
-73 C Torment @Paolo Parente
-74 C Tortured Existence @Keith Parkinson
-21 C Venerable Monk @Terese Nielsen
 123 R Verdant Touch @M. W. Kaluta & DiTerlizzi
-131 U Victual Sliver @Terese Nielsen
 124 R Volrath's Gardens @Rob Alexander
-142 R Volrath's Laboratory @Brom
-48 R Volrath's Shapeshifter @Ron Spencer
-143 R Volrath's Stronghold @Kev Walker
-49 U Walking Dream @Richard Kane Ferguson
 125 U Wall of Blossoms @Heather Hudson
-22 U Wall of Essence @Adam Rex
-100 U Wall of Razors @Michael Sutfin
-75 U Wall of Souls @John Matson
-50 U Wall of Tears @Rebecca Guay
-24 R Warrior Angel @Brom
-23 U Warrior en-Kor @Stephen Daniele
-25 C Youthful Knight @Rebecca Guay
+126 U Acidic Sliver @Jeff Miracola
+127 U Crystalline Sliver @Allen Williams
+128 U Hibernation Sliver @Scott Kirschner
+129 R Sliver Queen @Ron Spencer
+130 U Spined Sliver @Ron Spencer
+131 U Victual Sliver @Terese Nielsen
+132 U Bullwhip @Brom
+133 R Ensnaring Bridge @Pete Venters
+134 U Heartstone @John Matson
+135 R Horn of Greed @Jeff Miracola
+136 U Hornet Cannon @Ron Spencer
+137 R Jinxed Ring @M. W. Kaluta & DiTerlizzi
+138 R Mox Diamond @Dan Frazier
+139 R Portcullis @Kev Walker
+140 U Shifting Wall @Michael Sutfin
+141 R Sword of the Chosen @Adam Rex
+142 R Volrath's Laboratory @Brom
+143 R Volrath's Stronghold @Kev Walker
 
 [tokens]
 hornet
