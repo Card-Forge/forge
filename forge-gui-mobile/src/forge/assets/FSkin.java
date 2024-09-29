@@ -128,6 +128,17 @@ public class FSkin {
         //reset hd buttons/icons
         Forge.hdbuttons = false;
         Forge.hdstart = false;
+        // TODO: the "v2" string should be a property of the default skin.
+        FileHandle v2File = Gdx.files.absolute(ForgeConstants.FONTS_DIR + "v2");
+        if (v2File == null || !v2File.exists()) {
+            //delete cached fonts
+            FSkinFont.deleteCachedFiles();
+            try {
+                v2File.file().createNewFile();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         //ensure skins directory exists
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.CACHE_SKINS_DIR);
