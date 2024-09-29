@@ -95,7 +95,7 @@ public class StreamUtil {
 
         public void accumulate(T next) {
             sampleCount++;
-            if(sampleCount < maxSize) {
+            if(sampleCount <= maxSize) {
                 //Add the first [maxSize] items into the result list
                 samples.add(next);
                 return;
