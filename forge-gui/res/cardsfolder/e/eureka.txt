@@ -5,9 +5,9 @@ A:SP$ Repeat | RepeatSubAbility$ ResetCheck | RepeatCheckSVar$ NumPlayerGiveup |
 SVar:ResetCheck:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBRepeatChoice
 SVar:DBRepeatChoice:DB$ RepeatEach | StartingWithActivator$ True | RepeatSubAbility$ DBChoice | RepeatPlayers$ Player
 SVar:DBChoice:DB$ GenericChoice | Choices$ DBCheckHand,DBNoChange | Defined$ Player.IsRemembered
-SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | SpellDescription$ Choose a permanent to put onto the battlefield
+SVar:DBCheckHand:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ EQ0 | SubAbility$ DBChoose | SpellDescription$ Choose a permanent to put onto the battlefield.
 SVar:DBChoose:DB$ ChangeZone | DefinedPlayer$ Player.IsRemembered | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent | ChangeNum$ 1 | ConditionCheckSVar$ CheckHand | ConditionSVarCompare$ GE1
-SVar:DBNoChange:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | SpellDescription$ Do not put a permanent onto the battlefield
+SVar:DBNoChange:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ CountSVar | Expression$ NumPlayerGiveup/Plus.1 | SpellDescription$ Do not put a permanent onto the battlefield.
 SVar:FinalReset:DB$ StoreSVar | SVar$ NumPlayerGiveup | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumPlayerGiveup:Number$0
