@@ -175,6 +175,7 @@ public class FSkin {
         //load theme logo while changing skins
         Forge.getAssets().loadTexture(getSkinFile("hd_logo.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("adv_logo.png"), new TextureLoader.TextureParameter());
+        Forge.getAssets().loadTexture(getDefaultSkinFile("cover.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("overlay_alpha.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("splatter.png"));
 
