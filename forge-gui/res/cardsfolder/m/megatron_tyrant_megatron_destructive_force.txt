@@ -4,13 +4,13 @@ Types:Legendary Artifact Creature Robot
 PT:7/5
 K:More Than Meets the Eye:1 R W B
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | Phases$ BeginCombat->EndCombat | Description$ Your opponents can't cast spells during combat.
-T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | OptionalDecider$ You | TriggerDescription$ At the beginning of your postcombat main phase, you may convert NICKNAME. If you do, add {C} for each 1 life your opponents have lost this turn.
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | OptionalDecider$ You | TriggerDescription$ At the beginning of each of your postcombat main phases, you may convert NICKNAME. If you do, add {C} for each 1 life your opponents have lost this turn.
 SVar:TrigConvert:DB$ SetState | Mode$ Transform | RememberChanged$ True | SubAbility$ DBMana
 SVar:DBMana:DB$ Mana | ConditionDefined$ Remembered | ConditionPresent$ Card | Produced$ C | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$LifeOppsLostThisTurn
 AlternateMode:DoubleFaced
-Oracle:More Than Meets the Eye {1}{R}{W}{B} (You may cast this card converted for {1}{R}{W}{B}.)\nYour opponents can't cast spells during combat.\nAt the beginning of your postcombat main phase, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
+Oracle:More Than Meets the Eye {1}{R}{W}{B} (You may cast this card converted for {1}{R}{W}{B}.)\nYour opponents can't cast spells during combat.\nAt the beginning of each of your postcombat main phases, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
 
 ALTERNATE
 
