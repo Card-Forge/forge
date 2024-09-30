@@ -1,0 +1,10 @@
+Name:Archival Whorl
+ManaCost:3 U U
+Types:Sorcery
+K:Gift
+SVar:GiftAbility:DB$ MakeCard | Name$ Rhystic Study | Defined$ Promised | Zone$ Battlefield | GiftDescription$ a Rhystic Study
+A:SP$ ChangeZoneAll | Origin$ Graveyard,Hand | Destination$ Library | ChangeType$ Card.YouOwn | Shuffle$ True | SubAbility$ DBDraw | SpellDescription$ Shuffle your hand and graveyard into your library, then draw seven cards. If the gift wasn't promised, each other player also shuffles their hand and graveyard into their library, then draws seven cards.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 7 | SubAbility$ DBChangeZoneAllOpponents
+SVar:DBChangeZoneAllOpponents:DB$ ChangeZoneAll | ConditionPresent$ Card.PromisedGift | ConditionCompare$ EQ0 | Origin$ Graveyard,Hand | Destination$ Library | ChangeType$ Card.OwnedBy Player.Other | Shuffle$ True | SubAbility$ DBDrawBis
+SVar:DBDrawBis:DB$ Draw | Defined$ Player.Other | ConditionPresent$ Card.PromisedGift | ConditionCompare$ EQ0 | NumCards$ 7
+Oracle:Gift a Rhystic Study\nShuffle your hand and graveyard into your library, then draw seven cards. If the gift wasn't promised, each other player also shuffles their hand and graveyard into their library, then draws seven cards.

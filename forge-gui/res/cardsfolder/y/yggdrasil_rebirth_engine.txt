@@ -1,0 +1,10 @@
+Name:Yggdrasil, Rebirth Engine
+ManaCost:3
+Types:Legendary Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZoneAll | TriggerDescription$ When CARDNAME enters, exile all creature cards from your graveyard.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Exile
+A:AB$ Dig | Cost$ T | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | SpellDescription$ Exile the top three cards of your library.
+A:AB$ ChangeZone | Cost$ 4 T | Origin$ Exile | Destination$ Battlefield | Mandatory$ True | Hidden$ True | ChangeType$ Creature.ExiledWithSource | SorcerySpeed$ True | GainControl$ True | SubAbility$ DBPump | RememberChanged$ True | SpellDescription$ Put a creature card exiled with NICKNAME onto the battlefield under your control. It gains haste until end of turn. Activate only as a sorcery.
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Yggdrasil, Rebirth Engine enters, exile all creature cards from your graveyard.\n{T}: Exile the top three cards of your library.\n{4}, {T}: Put a creature card exiled with Yggdrasil onto the battlefield under your control. It gains haste until end of turn. Activate only as a sorcery.

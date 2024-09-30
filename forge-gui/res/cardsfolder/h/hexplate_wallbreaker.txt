@@ -8,4 +8,4 @@ SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.attacking | SubAbility$ DBAdd
 SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
 K:Equip:3 R
 DeckHas:Ability$Token & Type$Rebel & Color$Red
-Oracle:For Mirrodin! (When this Equipment enters the battlefield, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +2/+2.\nWhenever equipped creature attacks, if it's the first combat phase of the turn, untap each attacking creature. After this phase, there is an additional combat phase.\nEquip {3}{R}
+Oracle:For Mirrodin! (When this Equipment enters, create a 2/2 red Rebel creature token, then attach this to it.)\nEquipped creature gets +2/+2.\nWhenever equipped creature attacks, if it's the first combat phase of the turn, untap each attacking creature. After this phase, there is an additional combat phase.\nEquip {3}{R}

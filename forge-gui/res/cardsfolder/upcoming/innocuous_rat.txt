@@ -1,0 +1,7 @@
+Name:Innocuous Rat
+ManaCost:1 B
+Types:Creature Rat
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ When CARDNAME dies, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+Oracle:When Innocuous Rat dies, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

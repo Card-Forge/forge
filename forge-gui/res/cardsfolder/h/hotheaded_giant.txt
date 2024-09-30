@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Giant Warrior
 PT:4/4
 K:Haste
-K:etbCounter:M1M1:2:CheckSVar$ OtherRedCast | SVarCompare$ EQ0:CARDNAME enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
-SVar:OtherRedCast:Count$ThisTurnCast_Card.Red+Other+YouCtrl
-Oracle:Haste\nHotheaded Giant enters the battlefield with two -1/-1 counters on it unless you've cast another red spell this turn.
+K:etbCounter:M1M1:2:CheckSVar$ OtherRedCast | SVarCompare$ EQ0:CARDNAME enters with two -1/-1 counters on it unless you've cast another red spell this turn.
+SVar:OtherRedCast:Count$ThisTurnCast_Card.Red+!CastSaSource+YouCtrl
+Oracle:Haste\nHotheaded Giant enters with two -1/-1 counters on it unless you've cast another red spell this turn.

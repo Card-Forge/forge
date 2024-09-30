@@ -1,0 +1,10 @@
+Name:Seedglaive Mentor
+ManaCost:1 R W
+Types:Creature Mouse Soldier
+PT:3/2
+K:Vigilance
+K:Haste
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigCounter | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Vigilance, haste\nValiant — Whenever Seedglaive Mentor becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.

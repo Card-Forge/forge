@@ -1,0 +1,9 @@
+Name:Alania, Divergent Storm
+ManaCost:3 U R
+Types:Legendary Creature Otter Wizard
+PT:3/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery,Otter.!CastSaSource | ActivatorThisTurnCastEach$ EQ1 | ValidActivatingPlayer$ You | OptionalDecider$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, if it's the first instant spell, the first sorcery spell, or the first Otter spell other than NICKNAME you've cast this turn, you may have target opponent draw a card. If you do, copy that spell. You may choose new targets for the copy.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:BuffedBy:Instant,Sorcery,Otter
+Oracle:Whenever you cast a spell, if it's the first instant spell, the first sorcery spell, or the first Otter spell other than Alania you've cast this turn, you may have target opponent draw a card. If you do, copy that spell. You may choose new targets for the copy.

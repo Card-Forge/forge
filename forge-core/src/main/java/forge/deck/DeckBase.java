@@ -75,7 +75,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
     public void setName(String deckName) { this.name = deckName; }
 
     public boolean hasName() {
-        return !(this.name.equals(""));
+        return !(this.name.isEmpty());
     }
 
     public String getDirectory() {

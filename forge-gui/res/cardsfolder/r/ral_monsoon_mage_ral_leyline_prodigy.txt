@@ -20,7 +20,7 @@ ManaCost:no cost
 Colors:blue,red
 Types:Legendary Planeswalker Ral
 Loyalty:2
-K:etbCounter:LOYALTY:X:no Condition:CARDNAME enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
+K:etbCounter:LOYALTY:X:no Condition:CARDNAME enters with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ RalReduceCost | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
 SVar:RalReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
 A:AB$ DealDamage | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Any | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBDraw | SpellDescription$ NICKNAME deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than NICKNAME.
@@ -31,4 +31,4 @@ SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | E
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 DeckNeeds:Type$Instant|Sorcery
-Oracle:Ral, Leyline Prodigy enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.\n[+1]: Until your next turn, instant and sorcery spells you cast cost {1} less to cast.\n[-2]: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral.\n[-8]: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs.
+Oracle:Ral, Leyline Prodigy enters with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.\n[+1]: Until your next turn, instant and sorcery spells you cast cost {1} less to cast.\n[-2]: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral.\n[-8]: Exile the top eight cards of your library. You may cast instant and sorcery spells from among them this turn without paying their mana costs.

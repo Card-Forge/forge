@@ -1,0 +1,12 @@
+Name:Artist's Talent
+ManaCost:1 R
+Types:Enchantment Class
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever you cast a noncreature spell, you may discard a card. If you do, draw a card.
+SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card>
+K:Class:2:2 R:AddStaticAbility$ SReduceCost
+SVar:SReduceCost:Mode$ ReduceCost | ValidCard$ Card.nonCreature | Type$ Spell | Activator$ You | Amount$ 1 | Secondary$ True | Description$ Noncreature spells you cast cost {1} less to cast.
+K:Class:3:2 R:AddReplacementEffect$ DoubleDamage
+SVar:DoubleDamage:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent.OppCtrl,Opponent | IsCombat$ False | ReplaceWith$ DmgPlus2 | Description$ If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.
+SVar:DmgPlus2:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.2
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever you cast a noncreature spell, you may discard a card. If you do, draw a card.\n{2}{R}: Level 2\nNoncreature spells you cast cost {1} less to cast.\n{2}{R}: Level 3\nIf a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.

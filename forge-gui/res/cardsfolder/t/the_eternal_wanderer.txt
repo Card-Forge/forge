@@ -9,7 +9,7 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defi
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenScript$ w_2_2_samurai_double_strike | SpellDescription$ Create a 2/2 white Samurai creature token with double strike.
 A:AB$ RepeatEach | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBSacAll | StackDescription$ SpellDescription | SpellDescription$ For each player, choose a creature that player controls. Each player sacrifices all creatures they control not chosen this way.
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPlayerCtrl | Mandatory$ True | Amount$ 1 | ChoiceTitle$ Choose a creature this player controls | ImprintChosen$ True
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature | ControlledByPlayer$ Remembered | ChoiceTitle$ Choose a creature this player controls | Mandatory$ True | Reveal$ True | ImprintChosen$ True
 SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Creature.IsNotImprinted | SubAbility$ DBCleanup2 | StackDescription$ None
 SVar:DBCleanup2:DB$ Cleanup | ClearChosenCard$ True | ClearImprinted$ True
 DeckHas:Ability$Token|Sacrifice & Type$Samurai

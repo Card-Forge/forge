@@ -17,7 +17,6 @@ public class TriggerPhaseOutAll extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-
         if (!matchesValidParam("ValidCards", runParams.get(AbilityKey.Cards))) {
             return false;
         }

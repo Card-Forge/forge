@@ -1,8 +1,0 @@
-Name:Savor
-ManaCost:1 B
-Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True | SubAbility$ DBToken | SpellDescription$ Target creature gets -2/-2 until end of turn.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.
-DeckHas:Ability$Token|LifeGain|Food
-DeckHints:Ability$Food
-Oracle:Target creature gets -2/-2 until end of turn. Create a Food Token.

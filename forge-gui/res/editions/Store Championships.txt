@@ -32,3 +32,9 @@ ScryfallCode=SCH
 24 R Blazing Rootwalla @Brian Valeza
 25 R Hollow One @Adam Volker
 26 R Vengevine @Brian Valeza
+27 R Monastery Swiftspear @Francisco Miyara
+28 R Shark Typhoon @Carlos Palma Cruchaga
+29 R Urza's Saga @Eytan Zana
+30 R Chromatic Sphere @Lorenzo Lanfranconi
+31 R Reality Smasher @Michal Ivan
+32 R Void Winnower @Joshua Raphael

@@ -1,0 +1,10 @@
+Name:Starlit Soothsayer
+ManaCost:2 B
+Types:Creature Bat Cleric
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your end step, if you gained or lost life this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+SVar:TrigSurveil:DB$ Surveil | Defined$ You | Amount$ 1
+SVar:X:Count$LifeYouGainedThisTurn/Plus.Y
+SVar:Y:PlayerCountPropertyYou$LifeLostThisTurn
+Oracle:Flying\nAt the beginning of your end step, if you gained or lost life this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)

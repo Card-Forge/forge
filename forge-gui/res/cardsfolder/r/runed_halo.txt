@@ -2,8 +2,8 @@ Name:Runed Halo
 ManaCost:W W
 Types:Enchantment
 K:ETBReplacement:Other:DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a card name.
+SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters, choose a card name.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ Protection:ChosenName | Description$ You have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:As Runed Halo enters the battlefield, choose a card name.\nYou have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)
+Oracle:As Runed Halo enters, choose a card name.\nYou have protection from the chosen card name. (You can't be targeted, dealt damage, or enchanted by anything with that name.)

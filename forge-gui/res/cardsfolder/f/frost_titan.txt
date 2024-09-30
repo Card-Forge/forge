@@ -3,10 +3,10 @@ ManaCost:4 U U
 Types:Creature Giant
 PT:6/6
 T:Mode$ BecomesTarget | ValidSource$ SpellAbility.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME enters or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ 2 | UnlessPayer$ TriggeredSourceSAController
 SVar:HasAttackEffect:TRUE
-Oracle:Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.\nWhenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+Oracle:Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.\nWhenever Frost Titan enters or attacks, tap target permanent. It doesn't untap during its controller's next untap step.

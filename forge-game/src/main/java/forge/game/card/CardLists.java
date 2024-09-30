@@ -80,7 +80,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByCmcDesc(final List<Card> list) {
-        Collections.sort(list, CmcComparatorInv);
+        list.sort(CmcComparatorInv);
     }
 
     /**
@@ -91,7 +91,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByToughnessAsc(final List<Card> list) {
-        Collections.sort(list, ToughnessComparator);
+        list.sort(ToughnessComparator);
     }
 
     /**
@@ -102,7 +102,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByToughnessDesc(final List<Card> list) {
-        Collections.sort(list, ToughnessComparatorInv);
+        list.sort(ToughnessComparatorInv);
     }
 
     /**
@@ -113,7 +113,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByPowerAsc(final List<Card> list) {
-        Collections.sort(list, PowerComparator);
+        list.sort(PowerComparator);
     }
 
     // the higher the attack the better
@@ -125,7 +125,7 @@ public class CardLists {
      * @param list
      */
     public static void sortByPowerDesc(final List<Card> list) {
-        Collections.sort(list, Collections.reverseOrder(PowerComparator));
+        list.sort(Collections.reverseOrder(PowerComparator));
     }
 
     /**
@@ -414,7 +414,7 @@ public class CardLists {
     public static int getTotalPower(Iterable<Card> cardList, boolean ignoreNegativePower, boolean crew) {
         int total = 0;
         for (final Card crd : cardList) {
-            if (crew && StaticAbilityCrewValue.hasAnyCrewValue(crd)) {
+            if (crew) {
                 if (StaticAbilityCrewValue.crewsWithToughness(crd)) {
                     total += ignoreNegativePower ? Math.max(0, crd.getNetToughness()) : crd.getNetToughness();
                 } else {

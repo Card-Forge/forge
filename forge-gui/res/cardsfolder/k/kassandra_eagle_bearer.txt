@@ -1,0 +1,11 @@
+Name:Kassandra, Eagle Bearer
+ManaCost:1 R W
+Types:Legendary Creature Human Assassin Warrior
+PT:2/2
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | OptionalDecider$ You | TriggerDescription$ When NICKNAME enters, search your graveyard, hand, and library for a card named The Spear of Leonidas, put it onto the battlefield, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | OriginAlternative$ Graveyard,Hand | Hidden$ True | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.namedThe Spear of Leonidas | ChangeNum$ 1 | ShuffleNonMandatory$ True
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl+EquippedByValid Equipment.Legendary | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control with a legendary Equipment attached to it deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHints:Name$The Spear of Leonidas & Type$Equipment
+Oracle:Haste\nWhen Kassandra enters, search your graveyard, hand, and library for a card named The Spear of Leonidas, put it onto the battlefield, then shuffle.\nWhenever a creature you control with a legendary Equipment attached to it deals combat damage to a player, draw a card.

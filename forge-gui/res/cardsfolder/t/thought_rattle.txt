@@ -1,0 +1,10 @@
+Name:Thought Rattle
+ManaCost:U B
+Types:Sorcery
+A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+TargetedPlayerCtrl | RememberRevealed$ True | SubAbility$ DBExile | StackDescription$ REP Target opponent_{p:Targeted} & You choose_{p:You} chooses & Exile_{p:You} exiles & your graveyard_{p:You}'s graveyard & seek_they seek | SpellDescription$ Target opponent reveals each nonland card in their hand. You choose one of those cards. Exile that card. Threshold — If seven or more cards are in your graveyard, seek a Rat card. It perpetually gains "This spell costs 1 less to cast."
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeTypeDesc$ nonland card | Mandatory$ True | SubAbility$ DBClearRemembered | StackDescription$ None
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBSeek
+SVar:DBSeek:DB$ Seek | Condition$ Threshold | Num$ 1 | Type$ Rat | RememberFound$ True | SubAbility$ DBAnimate | StackDescription$ None
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ ReduceCost | Duration$ Perpetual | StackDescription$ None
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
+Oracle:Target opponent reveals each nonland card in their hand. You choose one of those cards. Exile that card.\nThreshold — If seven or more cards are in your graveyard, seek a Rat card. It perpetually gains "This spell costs 1 less to cast."

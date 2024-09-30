@@ -1,0 +1,9 @@
+Name:Growing Dread
+ManaCost:G U
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ When CARDNAME enters, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+T:Mode$ TurnFaceUp | ValidCard$ Permanent | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you turn a permanent face up, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flash\nWhen Growing Dread enters, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)\nWhenever you turn a permanent face up, put a +1/+1 counter on it.

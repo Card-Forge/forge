@@ -26,11 +26,29 @@ public class ScryAi extends SpellAbilityAi {
      */
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        if (sa.usesTargeting()) { // It doesn't appear that Scry ever targets
+        if (sa.usesTargeting()) {
             // ability is targeted
             sa.resetTargets();
 
-            sa.getTargets().add(ai);
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else {
+                for (Player p : ai.getAllies()) {
+                    if (sa.canTarget(p)) {
+                        sa.getTargets().add(p);
+                        break;
+                    }
+                }
+                if (mandatory && !sa.isTargetNumberValid()) {
+                    for (Player p : ai.getOpponents()) {
+                        if (sa.canTarget(p)) {
+                            sa.getTargets().add(p);
+                            break;
+                        }
+                    }
+                }
+            }
+            return mandatory || sa.isTargetNumberValid();
         }
 
         return true;
@@ -130,6 +148,21 @@ public class ScryAi extends SpellAbilityAi {
 
         if (playReusable(ai, sa)) {
             randomReturn = true;
+        }
+
+        if (sa.usesTargeting()) {
+            sa.resetTargets();
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else {
+                for (Player p : ai.getAllies()) {
+                    if (sa.canTarget(p)) {
+                        sa.getTargets().add(p);
+                        break;
+                    }
+                }
+            }
+            randomReturn = sa.isTargetNumberValid();
         }
 
         return randomReturn;

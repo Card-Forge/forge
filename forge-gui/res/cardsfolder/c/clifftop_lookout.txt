@@ -1,0 +1,8 @@
+Name:Clifftop Lookout
+ManaCost:2 G
+Types:Creature Frog Scout
+PT:1/2
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ When CARDNAME enters, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Land | ValidDescription$ land | FoundDestination$ Battlefield | Tapped$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+Oracle:Reach\nWhen Clifftop Lookout enters, reveal cards from the top of your library until you reveal a land card. Put that card onto the battlefield tapped and the rest on the bottom of your library in a random order.

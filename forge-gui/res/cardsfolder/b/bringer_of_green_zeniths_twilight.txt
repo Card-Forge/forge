@@ -1,0 +1,14 @@
+Name:Bringer of Green Zenith's Twilight
+ManaCost:X G G
+Types:Creature Phyrexian Bringer
+PT:2/2
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ W U B R G | Description$ You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost. If you do, X is 5.
+K:etbCounter:P1P1:Y:no condition:CARDNAME enters the battlefield with X +1/+1 counters on it. If X was 5 or greater, it enters with twice that many counters instead.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, shuffle it into its owner's library.
+SVar:TrigChange:DB$ ChangeZone | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy
+SVar:X:Count$xPaid
+SVar:AltCostPaid:Count$AltCost.5.X
+SVar:Y:Count$Compare AltCostPaid LT5.AltCostPaid.Z
+SVar:Z:SVar$AltCostPaid/Twice
+DeckHas:Ability$Counters
+Oracle:You may pay {W}{U}{B}{R}{G} rather than pay this spell's mana cost. If you do, X is 5.\nBringer of Green Zenith's Twilight enters the battlefield with X +1/+1 counters on it. If X was 5 or greater, it enters with twice that many counters instead.\nWhen Bringer of Green Zenith's Twilight dies, shuffle it into its owner's library.

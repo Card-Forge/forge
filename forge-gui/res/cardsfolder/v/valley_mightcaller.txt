@@ -1,0 +1,10 @@
+Name:Valley Mightcaller
+ManaCost:G
+Types:Creature Frog Warrior
+PT:1/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Frog.Other+YouCtrl,Rabbit.Other+YouCtrl,Raccoon.Other+YouCtrl,Squirrel.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Frog, Rabbit, Raccoon, or Squirrel you control enters, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Frog|Rabbit|Raccoon|Squirrel
+Oracle:Trample\nWhenever another Frog, Rabbit, Raccoon, or Squirrel you control enters, put a +1/+1 counter on Valley Mightcaller.

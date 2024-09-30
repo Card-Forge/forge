@@ -6,4 +6,4 @@ K:Partner:Virtus the Veiled
 K:Vigilance
 K:CARDNAME must be blocked if able.
 K:CARDNAME must be blocked by two or more creatures if able.
-Oracle:Partner with Virtus the Veiled (When this creature enters the battlefield, target player may put Virtus into their hand from their library, then shuffle.)\nVigilance\nGorm the Great must be blocked if able, and Gorm must be blocked by two or more creatures if able.
+Oracle:Partner with Virtus the Veiled (When this creature enters, target player may put Virtus into their hand from their library, then shuffle.)\nVigilance\nGorm the Great must be blocked if able, and Gorm must be blocked by two or more creatures if able.

@@ -1,7 +1,8 @@
 Name:Stirring Wildwood
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {W} or {G}.
 A:AB$ Animate | Cost$ 1 G W | Defined$ Self | Power$ 3 | Toughness$ 4 | Types$ Creature,Elemental | Keywords$ Reach | Colors$ Green,White | OverwriteColors$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 3/4 green and white Elemental creature with reach. It's still a land.
-Oracle:Stirring Wildwood enters the battlefield tapped.\n{T}: Add {G} or {W}.\n{1}{G}{W}: Until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach. It's still a land.
+Oracle:Stirring Wildwood enters tapped.\n{T}: Add {G} or {W}.\n{1}{G}{W}: Until end of turn, Stirring Wildwood becomes a 3/4 green and white Elemental creature with reach. It's still a land.

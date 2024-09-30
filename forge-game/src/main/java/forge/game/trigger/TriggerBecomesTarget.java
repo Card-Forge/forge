@@ -77,6 +77,12 @@ public class TriggerBecomesTarget extends Trigger {
             }
         }
 
+        if (hasParam("Valiant")) {
+            if (!runParams.containsKey(AbilityKey.Valiant)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

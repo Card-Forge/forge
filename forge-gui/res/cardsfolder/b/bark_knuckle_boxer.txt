@@ -1,0 +1,7 @@
+Name:Bark-Knuckle Boxer
+ManaCost:1 G
+Types:Creature Raccoon Berserker
+PT:3/2
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you expend 4, CARDNAME gains indestructible until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPump:DB$ Pump | KW$ Indestructible | Defined$ Self
+Oracle:Whenever you expend 4, Bark-Knuckle Boxer gains indestructible until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

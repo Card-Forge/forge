@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw two cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw two cards.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
-Oracle:Enchant creature\nWhen Flight of Fancy enters the battlefield, draw two cards.\nEnchanted creature has flying.
+Oracle:Enchant creature\nWhen Flight of Fancy enters, draw two cards.\nEnchanted creature has flying.

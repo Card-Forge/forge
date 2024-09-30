@@ -3,8 +3,8 @@ ManaCost:U U
 Types:Enchantment
 K:Cumulative upkeep:2
 K:ETBReplacement:Other:ChooseType1
-SVar:ChooseType1:DB$ ChooseType | Defined$ You | Type$ Basic Land | SubAbility$ ChooseType2 | SpellDescription$ As CARDNAME enters the battlefield, choose two basic land types.
+SVar:ChooseType1:DB$ ChooseType | Defined$ You | Type$ Basic Land | SubAbility$ ChooseType2 | SpellDescription$ As CARDNAME enters, choose two basic land types.
 SVar:ChooseType2:DB$ ChooseType | Defined$ You | Type$ Basic Land | ChooseType2$ True
 S:Mode$ Continuous | Affected$ Land.Basic+ChosenType | AddType$ ChosenType2 | RemoveLandTypes$ True | Description$ Basic lands of the first chosen type are the second chosen type.
 AI:RemoveDeck:All
-Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAs Illusionary Terrain enters the battlefield, choose two basic land types.\nBasic lands of the first chosen type are the second chosen type.
+Oracle:Cumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nAs Illusionary Terrain enters, choose two basic land types.\nBasic lands of the first chosen type are the second chosen type.

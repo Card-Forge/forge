@@ -263,11 +263,7 @@ public class ManaCostBeingPaid {
     private void increaseShard(final ManaCostShard shard, final int toAdd, final boolean forX) {
         if (toAdd <= 0) { return; }
 
-        ShardCount sc = unpaidShards.get(shard);
-        if (sc == null) {
-            sc = new ShardCount();
-            unpaidShards.put(shard, sc);
-        }
+        ShardCount sc = unpaidShards.computeIfAbsent(shard, k -> new ShardCount());
         if (forX) {
             sc.xCount += toAdd;
         }
@@ -311,7 +307,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -331,7 +327,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -351,7 +347,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -371,7 +367,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }
@@ -393,7 +389,7 @@ public class ManaCostBeingPaid {
                                 sc.xCount = sc.totalCount;
                             }
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     } else if (sc.xCount > 0) { // X part that can only be paid by specific color
                         if (otherSubtract >= sc.xCount) {
@@ -407,7 +403,7 @@ public class ManaCostBeingPaid {
                             sc.totalCount -= otherSubtract;
                             sc.xCount -= otherSubtract;
                             // nothing more left in otherSubtract
-                            return;
+                            break;
                         }
                     }
                 }

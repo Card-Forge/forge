@@ -1,10 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
@@ -23,10 +18,15 @@ import forge.game.zone.ZoneType;
 import forge.item.BoosterPack;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class MakeCardEffect extends SpellAbilityEffect {
     @Override
@@ -43,7 +43,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             List<ICardFace> faces = new ArrayList<>();
             List<PaperCard> pack = null;
             List<String> names = Lists.newArrayList();
-            
+
             final String desc = sa.getParamOrDefault("OptionPrompt", "");
             if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
                     !player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(desc), null)) {
@@ -83,7 +83,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             } else if (sa.hasParam("Choices")) {
                 faces.addAll(parseFaces(sa, "Choices"));
             } else if (sa.hasParam("Booster")) {
-                SealedProduct.Template booster = Aggregates.random(StaticData.instance().getBoosters());
+                SealedTemplate booster = Aggregates.random(StaticData.instance().getBoosters());
                 pack = new BoosterPack(booster.getEdition(), booster).getCards();
                 for (PaperCard pc : pack) {
                     ICardFace face = pc.getRules().getMainPart();
@@ -149,7 +149,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
 
             for (final String name : names) {
                 int toMake = amount;
-                if (!name.equals("")) {
+                if (!name.isEmpty()) {
                     while (toMake > 0) {
                         PaperCard pc;
                         if (pack != null) {
@@ -175,12 +175,13 @@ public class MakeCardEffect extends SpellAbilityEffect {
             CardCollection madeCards = new CardCollection();
             final boolean wCounter = sa.hasParam("WithCounter");
             final boolean battlefield = zone.equals(ZoneType.Battlefield);
-            
+
             for (final Card c : cards) {
                 if (wCounter && battlefield) {
-                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), 
-                        AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), 
-                        sa), player);
+                    int numCtr = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    table.put(player, c, CounterType.getType(sa.getParam("WithCounter")), numCtr);
+                    moveParams.put(AbilityKey.CounterTable, table);
                 }        
                 if (attach) {
                     for (Card a : attachList) {
@@ -229,7 +230,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         }
     }
 
-    private List<ICardFace> parseFaces (final SpellAbility sa, final String param) {
+    private List<ICardFace> parseFaces(final SpellAbility sa, final String param) {
         List<ICardFace> parsedFaces = new ArrayList<>();
         for (String s : sa.getParam(param).split(",")) {
             // Cardnames that include "," must use ";" instead (i.e. Tovolar; Dire Overlord)
@@ -243,7 +244,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
         return parsedFaces;
     }
 
-    private Card finishMaking (final SpellAbility sa, final Card made, final Card source) {
+    private Card finishMaking(final SpellAbility sa, final Card made, final Card source) {
         if (sa.hasParam("FaceDown")) made.turnFaceDown(true);
         if (sa.hasParam("RememberMade")) source.addRemembered(made);
         if (sa.hasParam("ImprintMade")) source.addImprintedCard(made);

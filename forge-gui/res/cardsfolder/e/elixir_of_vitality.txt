@@ -1,7 +1,8 @@
 Name:Elixir of Vitality
 ManaCost:4
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ GainLife | Cost$ T Sac<1/CARDNAME> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 A:AB$ GainLife | Cost$ 8 T Sac<1/CARDNAME> | LifeAmount$ 8 | SpellDescription$ You gain 8 life.
-Oracle:Elixir of Vitality enters the battlefield tapped.\n{T}, Sacrifice Elixir of Vitality: You gain 4 life.\n{8}, {T}, Sacrifice Elixir of Vitality: You gain 8 life.
+Oracle:Elixir of Vitality enters tapped.\n{T}, Sacrifice Elixir of Vitality: You gain 4 life.\n{8}, {T}, Sacrifice Elixir of Vitality: You gain 8 life.

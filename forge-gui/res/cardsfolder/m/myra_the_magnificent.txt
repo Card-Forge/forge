@@ -1,0 +1,16 @@
+Name:Myra the Magnificent
+ManaCost:2 U R
+Types:Legendary Creature Human Performer
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Instant.wasCastFromYourHandByYou,Sorcery.wasCastFromYourHandByYou | ValidActivatingPlayer$ You | Execute$ TrigOpenAttraction | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell from your hand, open an Attraction.
+SVar:TrigOpenAttraction:DB$ OpenAttraction
+A:AB$ ChangeZone | Cost$ X T | ValidTgts$ Instant.cmcEQX+YouCtrl,Sorcery.cmcEQX+YouCtrl | Origin$ Graveyard | Imprint$ True | Destination$ Exile | SubAbility$ DBPutCounter | SpellDescription$ Exile target instant or sorcery card with mana value X from your graveyard and choose an Attraction you control that doesn't have a midway counter on it. Put a midway counter on it. For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Attraction.YouCtrl+counters_EQ0_MIDWAY | RememberPut$ True | ChoicePrompt$ Select target attraction you control that doesn't have a midway counter on it | CounterType$ MIDWAY | CounterNum$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigVisit,RemoveEffect | RememberObjects$ Remembered | ImprintCards$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:TrigVisit:Mode$ VisitAttraction | ValidPlayer$ You | ValidCard$ Attraction.IsRemembered | Execute$ TrigCopy | TriggerDescription$ For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.
+SVar:TrigCopy:DB$ Play | Valid$ Card.IsImprinted | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Amount$ All | Optional$ True | CopyCard$ True
+SVar:RemoveEffect:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:Count$xPaid
+Oracle:Whenever you cast an instant or sorcery spell from your hand, open an Attraction.\n{X}, {T}: Exile target instant or sorcery card with mana value X from your graveyard and choose an Attraction you control that doesn't have a midway counter on it. Put a midway counter on it. For as long as that Attraction is on the battlefield, whenever you visit it, copy the exiled card. You may cast the copy without paying its mana cost.

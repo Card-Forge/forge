@@ -1,8 +1,8 @@
 Name:Meteorite
 ManaCost:5
 Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 2 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 SVar:PlayMain1:TRUE
-Oracle:When Meteorite enters the battlefield, it deals 2 damage to any target.\n{T}: Add one mana of any color.
+Oracle:When Meteorite enters, it deals 2 damage to any target.\n{T}: Add one mana of any color.

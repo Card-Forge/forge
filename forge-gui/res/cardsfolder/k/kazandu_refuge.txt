@@ -1,9 +1,10 @@
 Name:Kazandu Refuge
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
 DeckHas:Ability$LifeGain
-Oracle:Kazandu Refuge enters the battlefield tapped.\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.\n{T}: Add {R} or {G}.
+Oracle:Kazandu Refuge enters tapped.\nWhen Kazandu Refuge enters, you gain 1 life.\n{T}: Add {R} or {G}.

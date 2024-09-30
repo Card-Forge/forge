@@ -2,6 +2,6 @@ Name:Overgrown Farmland
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
-K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or more other lands.
-Oracle:Overgrown Farmland enters the battlefield tapped unless you control two or more other lands.\n{T}: Add {G} or {W}.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless you control two or more other lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT2
+Oracle:Overgrown Farmland enters tapped unless you control two or more other lands.\n{T}: Add {G} or {W}.

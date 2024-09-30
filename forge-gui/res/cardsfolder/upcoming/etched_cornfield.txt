@@ -1,0 +1,8 @@
+Name:Etched Cornfield
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters tapped unless a player has 13 or less life.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GT13
+SVar:X:PlayerCountPlayers$LowestLifeTotal
+A:AB$ Mana | Cost$ T | Produced$ Combo G W | SpellDescription$ Add {G} or {W}.
+Oracle:Etched Cornfield enters tapped unless a player has 13 or less life.\n{T}: Add {G} or {W}.

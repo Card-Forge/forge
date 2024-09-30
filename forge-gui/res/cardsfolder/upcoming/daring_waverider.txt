@@ -1,7 +1,0 @@
-Name:Daring Waverider
-ManaCost:4 U U
-Types:Creature Otter Wizard
-PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When CARDNAME enters, you may cast target instant or sorcery card with mana value 4 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard this turn, exile it instead.
-SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl+cmcLE4,Sorcery.YouCtrl+cmcLE4 | ValidSA$ Spell | TgtPrompt$ Choose target instant or sorcery card with mana value 3 or less from your graveyard | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell
-Oracle:When Daring Waverider enters, you may cast target instant or sorcery card with mana value 4 or less from your graveyard without paying its mana cost. If that spell would be put into your graveyard this turn, exile it instead.

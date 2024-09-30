@@ -2,8 +2,8 @@ Name:Roots of Life
 ManaCost:1 G G
 Types:Enchantment
 K:ETBReplacement:Other:ChooseLT
-SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Basic Land | InvalidTypes$ Mountain,Forest,Plains | AILogic$ MostProminentOppControls | SpellDescription$ As CARDNAME enters the battlefield, choose Island or Swamp.
+SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Basic Land | InvalidTypes$ Mountain,Forest,Plains | AILogic$ MostProminentOppControls | SpellDescription$ As CARDNAME enters, choose Island or Swamp.
 T:Mode$ Taps | ValidCard$ Land.ChosenType+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever a land of the chosen type an opponent controls becomes tapped, you may gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 AI:RemoveDeck:Random
-Oracle:As Roots of Life enters the battlefield, choose Island or Swamp.\nWhenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.
+Oracle:As Roots of Life enters, choose Island or Swamp.\nWhenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.

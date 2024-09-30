@@ -2,7 +2,7 @@ Name:Hollowhenge Scavenger
 ManaCost:3 G G
 Types:Creature Elemental
 PT:4/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigGainLife | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, you gain 5 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigGainLife | TriggerDescription$ Morbid — When CARDNAME enters, if a creature died this turn, you gain 5 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 5
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-Oracle:Morbid — When Hollowhenge Scavenger enters the battlefield, if a creature died this turn, you gain 5 life.
+SVar:Morbid:Count$Morbid.1.0
+Oracle:Morbid — When Hollowhenge Scavenger enters, if a creature died this turn, you gain 5 life.

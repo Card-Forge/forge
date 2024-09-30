@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.MoreObjects;
 import forge.game.card.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -95,7 +97,9 @@ public class ReplacementHandler {
             affectedLKI.setLastKnownZone(affectedCard.getController().getZone(ZoneType.Battlefield));
 
             // need to apply Counters to check its future state on the battlefield
-            affectedLKI.putEtbCounters(null);
+            @SuppressWarnings("unchecked")
+            Map<Optional<Player>, Map<CounterType, Integer>> etbCounters = (Map<Optional<Player>, Map<CounterType, Integer>>) runParams.get(AbilityKey.CounterMap);
+            affectedLKI.putEtbCounters(etbCounters);
             preList.add(affectedLKI);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(affectedLKI), preList);
             checkAgain = true;
@@ -136,7 +140,7 @@ public class ReplacementHandler {
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
                     if (!replacementEffect.hasRun() && !hasRun.contains(replacementEffect)
                             && (layer == null || replacementEffect.getLayer() == layer)
-                            && event.equals(replacementEffect.getMode())
+                            && replacementEffect.modeCheck(event, runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(cardZone)
                             && replacementEffect.requirementsCheck(game)
@@ -147,7 +151,7 @@ public class ReplacementHandler {
                 return true;
             }
 
-        });
+        }, affectedCard != null && affectedCard.isInZone(ZoneType.Sideboard));
 
         if (checkAgain) {
             if (affectedLKI != null && affectedCard != null) {
@@ -170,6 +174,10 @@ public class ReplacementHandler {
         }
 
         return possibleReplacers;
+    }
+
+    public boolean cantHappenCheck(final ReplacementType event, final Map<AbilityKey, Object> runParams) {
+        return !getReplacementList(event, runParams, ReplacementLayer.CantHappen).isEmpty();
     }
 
     /**
@@ -326,7 +334,7 @@ public class ReplacementHandler {
                         replacementEffect.getParam("OptionalDecider"), effectSA).get(0);
             }
 
-            String name = CardTranslation.getTranslatedName(host.getCardForUi().getName());
+            String name = CardTranslation.getTranslatedName(MoreObjects.firstNonNull(host.getCardForUi(), host).getName());
             String effectDesc = TextUtil.fastReplace(replacementEffect.getDescription(), "CARDNAME", name);
             final String question = runParams.containsKey(AbilityKey.Card)
                 ? Localizer.getInstance().getMessage("lblApplyCardReplacementEffectToCardConfirm", name, runParams.get(AbilityKey.Card).toString(), effectDesc)

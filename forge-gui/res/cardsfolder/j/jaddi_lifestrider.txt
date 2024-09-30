@@ -2,10 +2,10 @@ Name:Jaddi Lifestrider
 ManaCost:4 G
 Types:Creature Elemental
 PT:2/8
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigJaddiLifestriderTap | TriggerDescription$ When CARDNAME enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigJaddiLifestriderTap | TriggerDescription$ When CARDNAME enters, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
 SVar:TrigJaddiLifestriderTap:DB$ Tap | CardChoices$ Creature.YouCtrl+untapped | AnyNumber$ True | ChoiceAmount$ Count$Valid Creature.YouCtrl+untapped | RememberTapped$ True | SubAbility$ DBJaddiLifestriderGainLife
 SVar:DBJaddiLifestriderGainLife:DB$ GainLife | LifeAmount$ JaddiLifestriderZ | SubAbility$ DBJaddiLifestriderCleanup
 SVar:DBJaddiLifestriderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:JaddiLifestriderY:Remembered$Amount
 SVar:JaddiLifestriderZ:SVar$JaddiLifestriderY/Times.2
-Oracle:When Jaddi Lifestrider enters the battlefield, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.
+Oracle:When Jaddi Lifestrider enters, you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way.

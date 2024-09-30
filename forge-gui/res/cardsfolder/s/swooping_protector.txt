@@ -6,4 +6,4 @@ K:Flash
 K:Flying
 K:etbCounter:SHIELD:1
 DeckHas:Ability$Counters
-Oracle:Flash\nFlying\nSwooping Protector enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+Oracle:Flash\nFlying\nSwooping Protector enters with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)

@@ -1,0 +1,6 @@
+Name:Gloomlake Verge
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
+A:AB$ Mana | Cost$ T | Produced$ B | IsPresent$ Island.YouCtrl,Swamp.YouCtrl | SpellDescription$ Add {B}. Activate only if you control an Island or a Swamp.
+Oracle:{T}: Add {U}.\n{T}: Add {B}. Activate only if you control an Island or a Swamp.

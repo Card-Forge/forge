@@ -1,0 +1,9 @@
+Name:Layla Hassan
+ManaCost:3 W
+Types:Legendary Creature Human Assassin
+PT:3/4
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters and whenever one or more Assassins you control deal combat damage to a player, return target historic card from your graveyard to your hand.
+T:Mode$ DamageDoneOnce | ValidSource$ Assassin.YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever one or more Assassins you control deal combat damage to a player, return target historic card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Card.Historic+YouCtrl | TgtPrompt$ Select target historic card
+Oracle:First strike\nWhen Layla Hassan enters and whenever one or more Assassins you control deal combat damage to a player, return target historic card from your graveyard to your hand.

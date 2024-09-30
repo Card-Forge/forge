@@ -1,7 +1,0 @@
-Name:Bumbleflower's Sharepot
-ManaCost:2
-Types:Artifact
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
-A:AB$ Destroy | Cost$ 5 T Sac<1/CARDNAME> | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SorcerySpeed$ True | SpellDescription$ Destroy target nonland permanent. Activate only as a sorcery.
-Oracle:When Bumbleflower's Sharepot enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.)\n{5}, {T}, Sacrifice Bumbleflower's Sharepot: Destroy target nonland permanent. Activate only as a sorcery.

@@ -2,7 +2,7 @@ Name:Death Pit Offering
 ManaCost:2 B B
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creatures you control get +2/+2.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice all creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice all creatures you control.
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Creature.YouCtrl
 AI:RemoveDeck:All
-Oracle:When Death Pit Offering enters the battlefield, sacrifice all creatures you control.\nCreatures you control get +2/+2.
+Oracle:When Death Pit Offering enters, sacrifice all creatures you control.\nCreatures you control get +2/+2.

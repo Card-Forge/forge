@@ -3,8 +3,8 @@ ManaCost:4 G
 Types:Creature Spider
 PT:3/5
 K:Reach
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigInvestigate | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigInvestigate | TriggerDescription$ Morbid — When CARDNAME enters, if a creature died this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Morbid:Count$Morbid.1.0
 DeckHas:Ability$Investigate|Token
-Oracle:Reach\nMorbid — When Funnel-Web Recluse enters the battlefield, if a creature died this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+Oracle:Reach\nMorbid — When Funnel-Web Recluse enters, if a creature died this turn, investigate. (Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

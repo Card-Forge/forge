@@ -138,11 +138,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return unFoiledVersion;
     }
 
-//    @Override
-//    public String getImageKey() {
-//        return getImageLocator(getImageName(), getArtIndex(), true, false);
-//    }
-
     @Override
     public String getItemType() {
         final Localizer localizer = Localizer.getInstance();

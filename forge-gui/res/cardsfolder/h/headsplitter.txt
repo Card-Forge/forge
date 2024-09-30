@@ -1,0 +1,11 @@
+Name:Headsplitter
+ManaCost:1 R
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 black Assassin creature token with menace, then attach CARDNAME to it.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_assassin_menace | TokenOwner$ You | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
+K:Equip:2
+Oracle:When Headsplitter enters, create a 1/1 black Assassin creature token with menace, then attach Headsplitter to it.\nEquipped creature gets +1/+0.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

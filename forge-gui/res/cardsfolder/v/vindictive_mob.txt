@@ -2,9 +2,9 @@ Name:Vindictive Mob
 ManaCost:4 B B
 Types:Creature Human Berserker
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Saproling | Description$ CARDNAME can't be blocked by Saprolings.
 AI:RemoveDeck:Random
 SVar:NeedsToPlay:Creature.YouCtrl
-Oracle:When Vindictive Mob enters the battlefield, sacrifice a creature.\nVindictive Mob can't be blocked by Saprolings.
+Oracle:When Vindictive Mob enters, sacrifice a creature.\nVindictive Mob can't be blocked by Saprolings.

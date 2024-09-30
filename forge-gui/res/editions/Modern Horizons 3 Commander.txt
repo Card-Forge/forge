@@ -428,7 +428,6 @@ marit_lage
 r_1_1_goblin
 r_5_5_dragon_flying
 rgw_1_1_sand_warrior
-tarmogoyf
 u_2_1_a_phyrexian_myr
 u_2_2_shapeshifter_changeling
 u_x_x_illusion

@@ -1,0 +1,9 @@
+Name:Maha, Its Feathers Night
+ManaCost:3 B B
+Types:Legendary Creature Elemental Bird
+PT:6/5
+K:Flying
+K:Trample
+K:Ward:Discard<1/Card>
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | SetToughness$ 1 | Description$ Creatures your opponents control have base toughness 1.
+Oracle:Flying, trample\nWard—Discard a card.\nCreatures your opponents control have base toughness 1.

@@ -1,0 +1,10 @@
+Name:Steelburr Champion
+ManaCost:2 W
+Types:Creature Mouse Soldier
+PT:1/1
+K:Offspring:1 W
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever an opponent casts a noncreature spell, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:Offspring {1}{W} (You may pay an additional {1}{W} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nVigilance\nWhenever an opponent casts a noncreature spell, put a +1/+1 counter on this creature.

@@ -1,0 +1,8 @@
+Name:Arno Dorian
+ManaCost:2 B R
+Types:Legendary Creature Human Assassin
+PT:3/3
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Assassin.Other+YouCtrl | AddPower$ 2 | Description$ Other Assassins you control get +2/+0.
+K:Disguise:B R
+Oracle:Deathtouch\nOther Assassins you control get +2/+0.\nDisguise {B}{R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)

@@ -1,0 +1,9 @@
+Name:Hired Claw
+ManaCost:R
+Types:Creature Lizard Mercenary
+PT:1/2
+T:Mode$ AttackersDeclared | ValidAttackers$ Lizard.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you attack with one or more Lizards, CARDNAME deals 1 damage to target opponent.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ 1
+A:AB$ PutCounter | Cost$ 1 R | CounterType$ P1P1 | CounterNum$ 1 | CheckSVar$ X | ActivationLimit$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME. Activate only if an opponent lost life this turn and only once each turn.
+SVar:X:Count$LifeOppsLostThisTurn
+Oracle:Whenever you attack with one or more Lizards, Hired Claw deals 1 damage to target opponent.\n{1}{R}: Put a +1/+1 counter on Hired Claw. Activate only if an opponent lost life this turn and only once each turn.

@@ -3,9 +3,9 @@ ManaCost:2 B
 Types:Creature Zombie Beast
 PT:5/4
 K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two -1/-1 counters on target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put two -1/-1 counters on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ M1M1 | IsCurse$ True | CounterNum$ 2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Zombie.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another Zombie you control dies, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 DeckHints:Type$Zombie
-Oracle:Menace\nWhen Plague Belcher enters the battlefield, put two -1/-1 counters on target creature you control.\nWhenever another Zombie you control dies, each opponent loses 1 life.
+Oracle:Menace\nWhen Plague Belcher enters, put two -1/-1 counters on target creature you control.\nWhenever another Zombie you control dies, each opponent loses 1 life.

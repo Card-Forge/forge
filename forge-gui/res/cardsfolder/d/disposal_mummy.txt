@@ -2,6 +2,6 @@ Name:Disposal Mummy
 ManaCost:2 W
 Types:Creature Zombie Jackal
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from an opponent's graveyard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target card from an opponent's graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in an opponent's graveyard | ValidTgts$ Card.OppOwn
-Oracle:When Disposal Mummy enters the battlefield, exile target card from an opponent's graveyard.
+Oracle:When Disposal Mummy enters, exile target card from an opponent's graveyard.

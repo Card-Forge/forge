@@ -1,0 +1,7 @@
+Name:You're in Command
+ManaCost:1 W
+Types:Sorcery
+A:SP$ AlterAttribute | ValidTgts$ Creature.YouOwn+YouCtrl | IncludeAllComponentCards$ True | Attributes$ Commander | RememberTargets$ True | SubAbility$ DBDemote | SpellDescription$ Choose target creature you own and control. That creature becomes your commander. Any other commanders you have are no longer your commander. (That creature starts with a commander tax of {0}.)
+SVar:DBDemote:DB$ AlterAttribute | Defined$ ValidAll Card.YouOwn+IsNotRemembered+IsCommander | Attributes$ Commander | Activate$ False | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Choose target creature you own and control. That creature becomes your commander. Any other commanders you have are no longer your commander. (That creature starts with a commander tax of {0}.)

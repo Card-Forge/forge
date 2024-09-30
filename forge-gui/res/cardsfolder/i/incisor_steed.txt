@@ -1,0 +1,10 @@
+Name:Incisor Steed
+ManaCost:1 W
+Types:Artifact Creature Phyrexian Horse
+PT:1/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE3 | Condition$ Metalcraft | Description$ Corrupted Metalcraft — As long as you control three or more artifacts and an opponent has three or more poison counters, CARDNAME gets +3/+0.
+SVar:X:PlayerCountOpponents$HighestCounters.Poison
+SVar:BuffedBy:Artifact
+DeckHints:Keyword$Toxic|Infect & Type$Artifact
+Oracle:Vigilance\nCorrupted Metalcraft — As long as you control three or more artifacts and an opponent has three or more poison counters, Incisor Steed gets +3/+0.

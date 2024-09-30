@@ -1,0 +1,12 @@
+Name:Innkeeper's Talent
+ManaCost:1 G
+Types:Enchantment Class
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+K:Class:2:G:AddStaticAbility$ WardForCounters
+SVar:WardForCounters:Mode$ Continuous | Affected$ Permanent.YouCtrl+HasCounters | AddKeyword$ Ward:1 | Description$ Permanents you control with counters on them have ward {1}.
+K:Class:3:3 G:AddReplacementEffect$ DoubleCounters
+SVar:DoubleCounters:Event$ AddCounter | ActiveZones$ Battlefield | ValidSource$ You | ValidObject$ Permanent.inZoneBattlefield,Player | ReplaceWith$ AddTwiceCounters | Description$ If you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.
+SVar:AddTwiceCounters:DB$ ReplaceCounter | ChooseCounter$ True | Amount$ X
+SVar:X:ReplaceCount$CounterNum/Twice
+Oracle:(Gain the next level as a sorcery to add its ability.)\nAt the beginning of combat on your turn, put a +1/+1 counter on target creature you control.\n{G}: Level 2\nPermanents you control with counters on them have ward {1}.\n{3}{G}: Level 3\nIf you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.

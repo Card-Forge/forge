@@ -7,13 +7,13 @@ ScryfallCode=PLG21
 
 [cards]
 1 R Aven Mindcensor @Rebecca Guay
-C1 R Xantcha, Sleeper Agent @Mark Winters
-J1 R Orb of Dragonkind @Kawasumi
 2 R Dig Through Time @Ryan Yee
-C2 R Yuriko, the Tiger's Shadow @Yongjae Choi
-J2 R Orb of Dragonkind @Kawasumi
 3 R Bolas's Citadel @Jonas De Ro
-C3 R Path of Ancestry @Andreas Rocha
-J3 R Orb of Dragonkind @Kawasumi
 4 R Goblin Guide @Warren Mahy
 5 R Scavenging Ooze @Austin Hsu
+C1 R Xantcha, Sleeper Agent @Mark Winters
+C2 R Yuriko, the Tiger's Shadow @Yongjae Choi
+C3 R Path of Ancestry @Andreas Rocha
+J1 R Orb of Dragonkind @Kawasumi
+J2 R Orb of Dragonkind @Kawasumi
+J3 R Orb of Dragonkind @Kawasumi

@@ -110,8 +110,7 @@ public final class FModel {
         if (GuiBase.isAndroid()) //todo get device on other mobile platforms
             System.out.println(GuiBase.getDeviceName() + " (RAM: " + GuiBase.getDeviceRAM() + "MB, Android " + GuiBase.getAndroidRelease() + " API Level " + GuiBase.getAndroidAPILevel() + ")");
         else {
-            System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")");
-            System.out.println("Java Version - " + RuntimeVersion.of(System.getProperty("java.version")).toString());
+            System.out.println(System.getProperty("os.name") + " (" + System.getProperty("os.version") + " " + System.getProperty("os.arch") + ")\n" + System.getProperty("java.vendor") + " (Java " + System.getProperty("java.runtime.version") + ", " + System.getProperty("java.vm.name") + ")");
         }
         ImageKeys.initializeDirs(
                 ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,

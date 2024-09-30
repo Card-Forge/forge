@@ -1,0 +1,20 @@
+Name:Brightcap Badger
+ManaCost:3 G
+Types:Creature Badger Druid
+PT:3/4
+S:Mode$ Continuous | Affected$ Fungus.YouCtrl,Saproling.YouCtrl | AddAbility$ Mana | Description$ Each Fungus and Saproling you control has "{T}: Add {G}."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G}.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_saproling | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Fungus|Saproling
+AlternateMode:Adventure
+Oracle:Each Fungus and Saproling you control has "{T}: Add {G}."\nAt the beginning of your end step, create a 1/1 green Saproling creature token.
+
+ALTERNATE
+
+Name:Fungus Frolic
+ManaCost:2 G
+Types:Instant Adventure
+A:SP$ Token | TokenScript$ g_1_1_saproling | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 1/1 green Saproling creature tokens.
+Oracle:Create two 1/1 green Saproling creature tokens. (Then exile this card. You may cast the creature later from exile.)

@@ -17,23 +17,22 @@
  */
 package forge.gamemodes.limited;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.item.PaperCard;
-import forge.item.SealedProduct;
+import forge.item.SealedTemplate;
 import forge.model.FModel;
 import forge.util.FileSection;
 import forge.util.ItemPool;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -44,7 +43,7 @@ import forge.util.storage.IStorage;
  * @version $Id$
  */
 public class CustomLimited extends DeckBase {
-    private final SealedProduct.Template tpl;
+    private final SealedTemplate tpl;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -57,7 +56,7 @@ public class CustomLimited extends DeckBase {
         CardEdition edition = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
         if(edition!=null)//can be null on lazy loading, probably does not work correctly then
             landSetCode=edition.getCode();
-        tpl = new SealedProduct.Template(slots);
+        tpl = new SealedTemplate(slots);
     }
 
     private static final long serialVersionUID = 7435640939026612173L;
@@ -110,7 +109,7 @@ public class CustomLimited extends DeckBase {
                 slots.add(ImmutablePair.of(kv[1], Integer.parseInt(kv[0])));
             }
         } else
-            slots = SealedProduct.Template.genericDraftBooster.getSlots();
+            slots = SealedTemplate.genericDraftBooster.getSlots();
 
         final CustomLimited cd = new CustomLimited(data.get("Name"), slots);
         cd.landSetCode = data.get("LandSetCode");
@@ -172,9 +171,9 @@ public class CustomLimited extends DeckBase {
 
     /**
      * TODO: Write javadoc for this method.
-     * @return SealedProduct.Template
+     * @return SealedTemplate
      */
-    public SealedProduct.Template getSealedProductTemplate() {
+    public SealedTemplate getSealedProductTemplate() {
         return tpl;
     }
 

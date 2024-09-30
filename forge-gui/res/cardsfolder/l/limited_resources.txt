@@ -1,13 +1,13 @@
 Name:Limited Resources
 ManaCost:W
 Types:Enchantment
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBRepeatResources | TriggerDescription$ When CARDNAME enters the battlefield, each player chooses five lands they control and sacrifices the rest.
-SVar:DBRepeatResources:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ CardChoice
-SVar:CardChoice:DB$ ChooseCard | Defined$ Remembered | Amount$ 5 | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose a land | RememberChosen$ True | SubAbility$ SacRest
-SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.RememberedPlayerCtrl+IsNotRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBCardChoice | TriggerDescription$ When CARDNAME enters, each player chooses five lands they control and sacrifices the rest.
+SVar:DBCardChoice:DB$ ChooseCard | Defined$ Player | Choices$ Land | ControlledByPlayer$ Chooser | Amount$ 5 | ChoiceTitle$ Choose five lands to keep | Mandatory$ True | Reveal$ True | SubAbility$ SacRest
+SVar:SacRest:DB$ SacrificeAll | ValidCards$ Land.nonChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 S:Mode$ CantPlayLand | IsPresent$ Land | PresentCompare$ GE10 | Description$ Players can't play lands as long as ten or more lands are on the battlefield.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
-Oracle:When Limited Resources enters the battlefield, each player chooses five lands they control and sacrifices the rest.\nPlayers can't play lands as long as ten or more lands are on the battlefield.
+DeckHas:Ability$Sacrifice
+Oracle:When Limited Resources enters, each player chooses five lands they control and sacrifices the rest.\nPlayers can't play lands as long as ten or more lands are on the battlefield.

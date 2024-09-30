@@ -18,14 +18,13 @@
 
 package forge.item;
 
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardEdition;
 import forge.item.generation.BoosterGenerator;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public class FatPack extends BoxedProduct {
     public static FatPack fromSet(final CardEdition edition) {
@@ -72,7 +71,7 @@ public class FatPack extends BoxedProduct {
         return super.getTotalCards() * fpData.getCntBoosters() + fpData.getNumberOfCardsExpected();
     }
     
-    public static class Template extends SealedProduct.Template {
+    public static class Template extends SealedTemplate {
         private final int cntBoosters;
 
         public int getCntBoosters() { return cntBoosters; }

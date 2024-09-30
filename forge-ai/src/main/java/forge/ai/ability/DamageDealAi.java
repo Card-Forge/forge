@@ -95,8 +95,8 @@ public class DamageDealAi extends DamageAiBase {
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
 
-        if (damage.equals("X") || sourceName.equals("Crater's Claws")) {
-            if (sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
+        if (damage.equals("X") || source.getSVar("X").equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
+            if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid") || sourceName.equals("Crater's Claws")) {
                 dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
@@ -150,12 +150,6 @@ public class DamageDealAi extends DamageAiBase {
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
-        } else if ("OpponentHasCreatures".equals(logic)) {
-            for (Player opp : ai.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()) {
-                    return true;
-                }
-            }
         } else if (logic.startsWith("ProcRaid.")) {
             if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
@@ -723,6 +717,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty())
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
                     boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);

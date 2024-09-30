@@ -4,7 +4,7 @@ Types:Creature Eldrazi Drone
 PT:3/1
 K:Devoid
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Colorless+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another colorless creature enters the battlefield under your control, target opponent loses 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+Colorless+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever another colorless creature you control enters, target opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
 DeckHints:Color$Colorless & Keyword$Devoid
-Oracle:Devoid (This card has no color.)\nFirst strike\nWhenever another colorless creature enters the battlefield under your control, target opponent loses 1 life.
+Oracle:Devoid (This card has no color.)\nFirst strike\nWhenever another colorless creature you control enters, target opponent loses 1 life.

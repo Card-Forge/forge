@@ -1,0 +1,10 @@
+Name:Sunshower Druid
+ManaCost:G
+Types:Creature Frog Druid
+PT:0/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on target creature and you gain 1 life.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
+Oracle:When Sunshower Druid enters, put a +1/+1 counter on target creature and you gain 1 life.

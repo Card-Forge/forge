@@ -4,8 +4,8 @@ Types:Legendary Creature Human Assassin
 PT:3/3
 K:Deathtouch
 K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters the battlefield, you become the monarch.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ You
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ Opponent.isMonarch | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_1_1_assassin_deathtouch_haste | TokenOwner$ You
-Oracle:Deathtouch, haste\nWhen Queen Marchesa enters the battlefield, you become the monarch.\nAt the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
+Oracle:Deathtouch, haste\nWhen Queen Marchesa enters, you become the monarch.\nAt the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.

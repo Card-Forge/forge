@@ -2,10 +2,10 @@ Name:Odunos River Trawler
 ManaCost:2 B
 Types:Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, return target enchantment creature card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, return target enchantment creature card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.Creature+YouCtrl
 A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Enchantment.Creature+YouCtrl | TgtPrompt$ Select target enchantment creature card from your graveyard | SpellDescription$ Return target enchantment creature card from your graveyard to your hand.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 DeckNeeds:Color$White
-Oracle:When Odunos River Trawler enters the battlefield, return target enchantment creature card from your graveyard to your hand.\n{W}, Sacrifice Odunos River Trawler: Return target enchantment creature card from your graveyard to your hand.
+Oracle:When Odunos River Trawler enters, return target enchantment creature card from your graveyard to your hand.\n{W}, Sacrifice Odunos River Trawler: Return target enchantment creature card from your graveyard to your hand.

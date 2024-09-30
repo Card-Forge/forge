@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.card.CardStateName;
+import forge.card.GamePieceType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -38,7 +39,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.LandAbility;
+
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.zone.Zone;
@@ -168,7 +169,8 @@ public class PlayEffect extends SpellAbilityEffect {
             Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), controller);
             // so it gets added to stack
             card.setCopiedPermanent(card);
-            card.setToken(true);
+            card.setGamePieceType(GamePieceType.TOKEN);
+            card.setZone(controller.getZone(ZoneType.None));
             tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
@@ -279,7 +281,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), controller);
 
-                tgtCard.setToken(true);
+                tgtCard.setGamePieceType(GamePieceType.TOKEN);
                 tgtCard.setZone(zone);
                 // to fix the CMC
                 tgtCard.setCopiedPermanent(original);
@@ -341,7 +343,7 @@ public class PlayEffect extends SpellAbilityEffect {
             final Zone originZone = tgtCard.getZone();
 
             // lands will be played
-            if (tgtSA instanceof LandAbility) {
+            if (tgtSA.isLandAbility()) {
                 tgtSA.resolve();
                 amount--;
                 if (remember) {

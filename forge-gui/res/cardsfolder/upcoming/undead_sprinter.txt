@@ -1,0 +1,16 @@
+Name:Undead Sprinter
+ManaCost:B R
+Types:Creature Zombie
+PT:2/2
+K:Trample
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Graveyard | AffectedZone$ Graveyard | MayPlay$ True | CheckSVar$ X | Description$ You may cast CARDNAME from your graveyard if a non-Zombie creature died this turn. If you do, CARDNAME enters with a +1/+1 counter on it.
+T:Mode$ SpellCast | ValidCard$ Card.Self | ValidSA$ Spell.MayPlaySource | Static$ True | Execute$ DBEffect
+SVar:DBEffect:DB$ Effect | ExileOnMoved$ Stack | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.EffectSource | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ That creature enters with an additional +1/+1 counter on it.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonZombie
+SVar:SacMe:3
+SVar:DiscardMe:3
+Oracle:Trample, haste\nYou may cast Undead Sprinter from your graveyard if a non-Zombie creature died this turn. If you do, Undead Sprinter enters with a +1/+1 counter on it.

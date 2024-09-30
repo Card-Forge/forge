@@ -2,9 +2,9 @@ Name:Marsh Crocodile
 ManaCost:2 U B
 Types:Creature Crocodile
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a blue or black creature you control to its owner's hand.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each player discards a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, return a blue or black creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, each player discards a card.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Blue+YouCtrl | AILogic$ NeverBounceItself
 SVar:TrigDiscard:DB$ Discard | Defined$ Player | NumCards$ 1 | Mode$ TgtChoose
 SVar:NeedsToPlay:Creature.Black+YouCtrl+cmcLE3,Creature.Blue+YouCtrl+cmcLE3
-Oracle:When Marsh Crocodile enters the battlefield, return a blue or black creature you control to its owner's hand.\nWhen Marsh Crocodile enters the battlefield, each player discards a card.
+Oracle:When Marsh Crocodile enters, return a blue or black creature you control to its owner's hand.\nWhen Marsh Crocodile enters, each player discards a card.

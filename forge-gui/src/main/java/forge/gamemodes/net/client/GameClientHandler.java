@@ -215,7 +215,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         }
 
         final List<RegisteredPlayer> sortedPlayers = Lists.newArrayList(players);
-        Collections.sort(sortedPlayers, (p1, p2) -> {
+        sortedPlayers.sort((p1, p2) -> {
             final int v1 = p1.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             final int v2 = p2.getPlayer() instanceof LobbyPlayerHuman ? 0 : 1;
             return Integer.compare(v1, v2);

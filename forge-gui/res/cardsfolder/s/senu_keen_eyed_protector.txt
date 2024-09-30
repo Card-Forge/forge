@@ -1,0 +1,11 @@
+Name:Senu, Keen-Eyed Protector
+ManaCost:1 W
+Types:Legendary Creature Bird Scout
+PT:2/1
+K:Flying
+K:Vigilance
+A:AB$ GainLife | Cost$ T Exile<1/CARDNAME> | LifeAmount$ 2 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+T:Mode$ AttackerUnblocked | ValidCard$ Creature.Legendary+YouCtrl | Execute$ TrigChange | TriggerZones$ Exile | TriggerDescription$ When a legendary creature you control attacks and isn't blocked, if NICKNAME is exiled, put it onto the battlefield attacking.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Exile | Defined$ Self | Destination$ Battlefield | Attacking$ True
+Oracle:Flying, vigilance\n{T}, Exile Senu, Keen-Eyed Protector: You gain 2 life and scry 2.\nWhen a legendary creature you control attacks and isn't blocked, if Senu is exiled, put it onto the battlefield attacking.

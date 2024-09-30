@@ -1,0 +1,12 @@
+Name:Sokrates, Athenian Teacher
+ManaCost:1 W U
+Types:Legendary Creature Human Advisor
+PT:0/4
+K:Defender
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it's untapped.
+A:AB$ Animate | Cost$ T | ValidTgts$ Creature | PrecostDesc$ Sokratic Dialogue | Replacements$ RPrevent | SpellDescription$ Until end of turn, target creature gains "If this creature would deal combat damage to a player, prevent that damage. This creature's controller and that player each draw half that many cards, rounded down."
+SVar:RPrevent:Event$ DamageDone | ValidTarget$ Player | Prevent$ True | IsCombat$ True | ValidSource$ Card.Self | ReplaceWith$ Draw | Description$ If this creature would deal combat damage to a player, prevent that damage. This creature's controller and that player each draw half that many cards, rounded down.
+SVar:Draw:DB$ Draw | Defined$ CardController & ReplacedTarget | NumCards$ X
+SVar:X:ReplaceCount$DamageAmount/HalfDown
+AI:RemoveDeck:All
+Oracle:Defender\nSokrates, Athenian Teacher has hexproof as long as it's untapped.\nSokratic Dialogue — {T}: Until end of turn, target creature gains "If this creature would deal combat damage to a player, prevent that damage. This creature's controller and that player each draw half that many cards, rounded down."

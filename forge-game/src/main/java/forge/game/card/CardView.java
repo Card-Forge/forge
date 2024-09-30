@@ -22,10 +22,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.Tracker;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -219,6 +216,14 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Tapped, c.isTapped());
     }
 
+    public GamePieceType getGamePieceType() {
+        return get(TrackableProperty.GamePieceType);
+    }
+    void updateGamePieceType(Card c) {
+        set(TrackableProperty.GamePieceType, c.getGamePieceType());
+    }
+
+    //Tracked separately from GamePieceType; a token card or a merged permanent with a token as the top is also considered a "token"
     public boolean isToken() {
         return get(TrackableProperty.Token);
     }
@@ -227,10 +232,7 @@ public class CardView extends GameEntityView {
     }
 
     public boolean isImmutable() {
-        return get(TrackableProperty.IsImmutable);
-    }
-    public void updateImmutable(Card c) {
-        set(TrackableProperty.IsImmutable, c.isImmutable());
+        return get(TrackableProperty.GamePieceType) == GamePieceType.EFFECT;
     }
 
     public boolean isEmblem() {
@@ -1160,7 +1162,7 @@ public class CardView extends GameEntityView {
         return (zone + ' ' + CardTranslation.getTranslatedName(name) + " (" + getId() + ")").trim();
     }
 
-    public class CardStateView extends TrackableObject {
+    public class CardStateView extends TrackableObject implements ITranslatable {
         private static final long serialVersionUID = 6673944200513430607L;
 
         private final CardStateName state;
@@ -1311,6 +1313,13 @@ public class CardView extends GameEntityView {
         }
         void setOracleText(String oracleText) {
             set(TrackableProperty.OracleText, oracleText.replace("\\n", "\r\n\r\n").trim());
+        }
+
+        public String getFunctionalVariantName() {
+            return get(TrackableProperty.FunctionalVariant);
+        }
+        void setFunctionalVariantName(String functionalVariant) {
+            set(TrackableProperty.FunctionalVariant, functionalVariant);
         }
 
         public String getRulesText() {
@@ -1735,6 +1744,25 @@ public class CardView extends GameEntityView {
         }
         public boolean isAttraction() {
             return getType().isAttraction();
+        }
+
+        @Override
+        public String getTranslationKey() {
+            String key = getName();
+            String variant = getFunctionalVariantName();
+            if(StringUtils.isNotEmpty(variant))
+                key = key + " $" + variant;
+            return key;
+        }
+
+        @Override
+        public String getUntranslatedType() {
+            return getType().toString();
+        }
+
+        @Override
+        public String getUntranslatedOracle() {
+            return getOracleText();
         }
     }
 

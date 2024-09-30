@@ -2,7 +2,7 @@ Name:Sensor Splicer
 ManaCost:4 W
 Types:Creature Phyrexian Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 3/3 colorless Phyrexian Golem artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddKeyword$ Vigilance | Description$ Golem creatures you control have vigilance.
-Oracle:When Sensor Splicer enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolem creatures you control have vigilance.
+Oracle:When Sensor Splicer enters, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolem creatures you control have vigilance.

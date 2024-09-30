@@ -136,7 +136,7 @@
       "y": 440
     },
     {
-      "type": "Label",
+      "type": "TypingLabel",
       "name": "playerName",
       "x": 98,
       "y": 4,

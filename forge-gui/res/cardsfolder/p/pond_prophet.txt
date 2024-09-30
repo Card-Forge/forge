@@ -1,0 +1,7 @@
+Name:Pond Prophet
+ManaCost:GU GU
+Types:Creature Frog Advisor
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:When Pond Prophet enters, draw a card.

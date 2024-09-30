@@ -1,0 +1,10 @@
+Name:Corpseberry Cultivator
+ManaCost:1 BG BG
+Types:Creature Squirrel Warlock
+PT:2/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, you may forage. (Exile three cards from your graveyard or sacrifice a Food.)
+SVar:TrigPump:AB$ Pump | Cost$ Forage
+T:Mode$ Forage | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you forage, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Ability$Graveyard & Type$Food
+Oracle:At the beginning of combat on your turn, you may forage. (Exile three cards from your graveyard or sacrifice a Food.)\nWhenever you forage, put a +1/+1 counter on Corpseberry Cultivator.

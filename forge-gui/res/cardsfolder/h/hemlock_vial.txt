@@ -1,0 +1,8 @@
+Name:Hemlock Vial
+ManaCost:1 B
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+A:AB$ PumpAll | Cost$ B T Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+equipped,Equipment.YouCtrl | KW$ Deathtouch | SpellDescription$ Each equipped creature and Equipment you control gains deathtouch until end of turn.
+Oracle:When Hemlock Vial enters, you draw a card and you lose 1 life.\n{B}, {T}, Sacrifice Hemlock Vial: Each equipped creature and Equipment you control gains deathtouch until end of turn.

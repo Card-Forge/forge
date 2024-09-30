@@ -74,7 +74,7 @@ public class SwingImageFetcher extends ImageFetcher {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 //connection.setConnectTimeout(1000 * 5); //wait 5 seconds the most
                 //connection.setReadTimeout(1000 * 5);
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+                conn.setRequestProperty("User-Agent", BuildInfo.getUserAgent());
                 if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND)
                     imageurl = TextUtil.fastReplace(imageurl, ".full.jpg", ".fullborder.jpg");
                 conn.disconnect();

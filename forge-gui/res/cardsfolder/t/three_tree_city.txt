@@ -1,0 +1,11 @@
+Name:Three Tree City
+ManaCost:no cost
+Types:Legendary Land
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type. | AILogic$ MostProminentInComputerDeckNonToken
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ ChooseColor | Cost$ 2 T | AILogic$ MostProminentInComputerDeck | SubAbility$ DBMana | SpellDescription$ Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type.
+SVar:DBMana:DB$ Mana | Produced$ Chosen | Amount$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
+SVar:X:Count$Valid Creature.ChosenType+YouCtrl
+Oracle:As Three Tree City enters, choose a creature type.\n{T}: Add {C}.\n{2}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type.

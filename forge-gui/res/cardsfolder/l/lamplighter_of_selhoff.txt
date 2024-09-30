@@ -2,7 +2,7 @@ Name:Lamplighter of Selhoff
 ManaCost:4 U
 Types:Creature Zombie Horror
 PT:3/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Zombie+Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Zombie, you may draw a card. If you do, discard a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Permanent.Zombie+Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, if you control another Zombie, you may draw a card. If you do, discard a card.
 SVar:TrigDraw:AB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | Cost$ Draw<1/You>
 DeckHints:Type$Zombie
-Oracle:When Lamplighter of Selhoff enters the battlefield, if you control another Zombie, you may draw a card. If you do, discard a card.
+Oracle:When Lamplighter of Selhoff enters, if you control another Zombie, you may draw a card. If you do, discard a card.

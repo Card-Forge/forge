@@ -3,6 +3,6 @@ ManaCost:2 R
 Types:Creature Human Rogue
 PT:4/1
 K:Echo:2 R
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target artifact.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
-Oracle:Echo {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Keldon Vandals enters the battlefield, destroy target artifact.
+Oracle:Echo {2}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Keldon Vandals enters, destroy target artifact.

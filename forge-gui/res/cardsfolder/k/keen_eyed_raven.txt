@@ -1,0 +1,9 @@
+Name:Keen-Eyed Raven
+ManaCost:2 W
+Types:Creature Bird
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on another target creature you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Keen-Eyed Raven enters, put a +1/+1 counter on another target creature you control.

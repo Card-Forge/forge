@@ -2,7 +2,7 @@ Name:Necromancer's Assistant
 ManaCost:2 B
 Types:Creature Zombie
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 DeckHints:Ability$Graveyard
-Oracle:When Necromancer's Assistant enters the battlefield, mill three cards.
+Oracle:When Necromancer's Assistant enters, mill three cards.

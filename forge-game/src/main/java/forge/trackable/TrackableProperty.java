@@ -2,6 +2,7 @@ package forge.trackable;
 
 
 import forge.card.CardRarity;
+import forge.card.GamePieceType;
 import forge.game.Direction;
 import forge.game.EvenOdd;
 import forge.game.GameType;
@@ -23,7 +24,8 @@ public enum TrackableProperty {
     Controller(TrackableTypes.PlayerViewType),
     Zone(TrackableTypes.EnumType(ZoneType.class)),
 
-    IsImmutable(TrackableTypes.BooleanType),
+    GamePieceType(TrackableTypes.EnumType(GamePieceType.class)),
+
     IsEmblem(TrackableTypes.BooleanType),
     IsBoon(TrackableTypes.BooleanType),
     CanSpecialize(TrackableTypes.BooleanType),
@@ -121,6 +123,7 @@ public enum TrackableProperty {
     ManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
+    FunctionalVariant(TrackableTypes.StringType),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
@@ -237,6 +240,14 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+
+    //ReplacementEffectView
+    RE_HostCard(TrackableTypes.CardViewType),
+    RE_Description(TrackableTypes.StringType),
+
+    //StaticAbilityView
+    ST_HostCard(TrackableTypes.CardViewType),
+    ST_Description(TrackableTypes.StringType),
 
     //HasBackSide
     BackSideName(TrackableTypes.StringType),

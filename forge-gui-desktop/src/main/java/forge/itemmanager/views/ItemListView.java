@@ -34,7 +34,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.LinkedList;
@@ -160,7 +159,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 columns.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(columns, Comparator.comparingInt(ItemTableColumn::getIndex));
+        columns.sort(Comparator.comparingInt(ItemTableColumn::getIndex));
 
         //hide table header if only showing single string column
         final boolean hideHeader = (config.getCols().size() == 1 && config.getCols().containsKey(ColumnDef.STRING));

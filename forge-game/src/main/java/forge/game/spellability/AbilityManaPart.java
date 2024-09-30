@@ -19,6 +19,7 @@ package forge.game.spellability;
 
 import com.google.common.collect.Lists;
 import forge.card.ColorSet;
+import forge.card.GamePieceType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
@@ -249,7 +250,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         eff.setImageKey(sourceCard.getImageKey());
         eff.setColor(MagicColor.COLORLESS);
-        eff.setImmutable(true);
+        eff.setGamePieceType(GamePieceType.EFFECT);
 
         String cantcounterstr = "Event$ Counter | ValidCard$ Card.IsRemembered | Description$ That spell can't be countered.";
         ReplacementEffect re = ReplacementHandler.parseReplacement(cantcounterstr, eff, true);
@@ -403,14 +404,6 @@ public class AbilityManaPart implements java.io.Serializable {
                     return true;
                 }
                 if (restriction.endsWith("C") && payment.getCostMana().getMana().getShardCount(ManaCostShard.COLORLESS) > 0) {
-                    return true;
-                }
-                continue;
-            }
-
-            if (restriction.equals("FaceDownOrTurnFaceUp")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
-                        || sa.isTurnFaceUp()) {
                     return true;
                 }
                 continue;

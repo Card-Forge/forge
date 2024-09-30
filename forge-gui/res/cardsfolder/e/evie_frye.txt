@@ -1,0 +1,13 @@
+Name:Evie Frye
+ManaCost:1 U
+Types:Legendary Creature Human Assassin
+PT:2/1
+K:Partner:Jacob Frye
+A:AB$ Draw | Cost$ 1 T | NumCards$ 1 | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | Optional$ True | NumCards$ 1 | RememberDiscarded$ True | SubAbility$ DBImmediateTrig | StackDescription$ None
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | Execute$ TrigUnblockable | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ When you discard a creature card this way, target creature you control can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Name$Jacob Frye
+Oracle:Partner with Jacob Frye (When this creature enters, target player may put Jacob into their hand from their library, then shuffle.)\n{1}, {T}: Draw a card, then discard a card. When you discard a creature card this way, target creature you control can't be blocked this turn.

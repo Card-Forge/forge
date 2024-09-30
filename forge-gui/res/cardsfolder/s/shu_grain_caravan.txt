@@ -2,6 +2,6 @@ Name:Shu Grain Caravan
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 2 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
-Oracle:When Shu Grain Caravan enters the battlefield, you gain 2 life.
+Oracle:When Shu Grain Caravan enters, you gain 2 life.

@@ -380,7 +380,7 @@ public class VStack extends FDropDown {
             int index = text.indexOf(name);
             String newtext = "";
             String cId =  "(" + sourceCard.getId() + ")";
-            String optionalCostString = !stackInstance.getOptionalCostString().equals("") ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
+            String optionalCostString = !stackInstance.getOptionalCostString().isEmpty() ? " ("+ stackInstance.getOptionalCostString() + ")" : "";
 
             if (index == -1) {
                 newtext = TextUtil.fastReplace(text.trim(), "  ", " ");

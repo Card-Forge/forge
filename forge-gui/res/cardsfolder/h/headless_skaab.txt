@@ -2,6 +2,7 @@ Name:Headless Skaab
 ManaCost:2 U
 Types:Creature Zombie Warrior
 PT:3/6
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:SP$ PermanentCreature | Cost$ 2 U ExileFromGrave<1/Creature>
-Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nHeadless Skaab enters the battlefield tapped.
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nHeadless Skaab enters tapped.

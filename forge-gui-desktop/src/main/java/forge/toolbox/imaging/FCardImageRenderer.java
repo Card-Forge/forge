@@ -203,9 +203,9 @@ public class FCardImageRenderer {
         if (card.isSplitCard()) {
             boolean needTranslation = !"en-US".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE));
             final CardStateView leftState = card.getLeftSplitState();
-            final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState.getName()) : leftState.getOracleText();
+            final String leftText = needTranslation ? CardTranslation.getTranslatedOracle(leftState) : leftState.getOracleText();
             final CardStateView rightState = card.getRightSplitState();
-            String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState.getName()) : rightState.getOracleText();
+            String rightText = needTranslation ? CardTranslation.getTranslatedOracle(rightState) : rightState.getOracleText();
             boolean isAftermath = (rightState.getKeywordKey().contains("Aftermath"));
             BufferedImage leftArt = null;
             BufferedImage rightArt = null;
@@ -247,9 +247,9 @@ public class FCardImageRenderer {
         } else if (card.isFlipCard()) {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(false);
-            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             final CardStateView flipState = card.getState(true);
-            final String flipText = card.getText(flipState, needTranslation ? CardTranslation.getTranslationTexts(flipState.getName(), "") : null);
+            final String flipText = card.getText(flipState, needTranslation ? CardTranslation.getTranslationTexts(flipState) : null);
             CARD_ART_RATIO = 1.728f;
             updateAreaSizes(ratio, ratio);
             int heightAdjust = OUTER_BORDER_THICKNESS + PT_SIZE / 2;
@@ -261,16 +261,16 @@ public class FCardImageRenderer {
         } else if (card.isAdventureCard()) {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(false);
-            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             final CardStateView advState = card.getState(true);
-            final String advText = card.getText(advState, needTranslation ? CardTranslation.getTranslationTexts(advState.getName(), "") : null);
+            final String advText = card.getText(advState, needTranslation ? CardTranslation.getTranslationTexts(advState) : null);
             CARD_ART_RATIO = 1.37f;
             updateAreaSizes(ratio, ratio);
             drawAdvCardImage(g, state, text, advState, advText, width, height, art);
         } else {
             boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
             final CardStateView state = card.getState(altState);
-            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null);
+            final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             CARD_ART_RATIO = 1.37f;
             if (art != null && Math.abs((float)art.getWidth() / (float)art.getHeight() - CARD_ART_RATIO) > 0.1f) {
                 CARD_ART_RATIO = (float)art.getWidth() / (float)art.getHeight();

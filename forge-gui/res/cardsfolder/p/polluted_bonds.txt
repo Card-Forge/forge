@@ -1,7 +1,7 @@
 Name:Polluted Bonds
 ManaCost:3 B B
 Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever a land enters under an opponent's control, that player loses 2 life and you gain 2 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ TriggeredCardController | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-Oracle:Whenever a land enters the battlefield under an opponent's control, that player loses 2 life and you gain 2 life.
+Oracle:Whenever a land enters under an opponent's control, that player loses 2 life and you gain 2 life.

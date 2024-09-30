@@ -45,19 +45,23 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
+import forge.util.ITranslatable;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.StringUtils;
 
-public class CardState extends GameObject implements IHasSVars {
+public class CardState extends GameObject implements IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private ManaCost manaCost = ManaCost.NO_COST;
     private byte color = MagicColor.COLORLESS;
     private String oracleText = "";
+    private String functionalVariantName = null;
     private int basePower = 0;
     private int baseToughness = 0;
     private String basePowerString = null;
@@ -202,6 +206,16 @@ public class CardState extends GameObject implements IHasSVars {
         view.setOracleText(oracleText);
     }
 
+    public String getFunctionalVariantName() {
+        return functionalVariantName;
+    }
+    public void setFunctionalVariantName(String functionalVariantName) {
+        if(functionalVariantName != null && functionalVariantName.isEmpty())
+            functionalVariantName = null;
+        this.functionalVariantName = functionalVariantName;
+        view.setFunctionalVariantName(functionalVariantName);
+    }
+
 
     public final int getBasePower() {
         return basePower;
@@ -303,7 +317,7 @@ public class CardState extends GameObject implements IHasSVars {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", card.getName());
             bread.setData("Keyword", s);
-            Sentry.addBreadcrumb(bread, this);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Keyword " + s + " for card " + card.getName(), e);
@@ -362,6 +376,15 @@ public class CardState extends GameObject implements IHasSVars {
     }
     public final SpellAbility getFirstSpellAbility() {
         return Iterables.getFirst(getNonManaAbilities(), null);
+    }
+
+    public final SpellAbility getFirstSpellAbilityWithFallback() {
+        SpellAbility sa = getFirstSpellAbility();
+        if (sa != null || getTypeWithChanges().isLand()) {
+            return sa;
+        }
+        // this happens if it's transformed backside (e.g. Disturbed)
+        return new SpellPermanent(getCard(), this);
     }
 
     public final boolean hasSpellAbility(final SpellAbility sa) {
@@ -605,6 +628,7 @@ public class CardState extends GameObject implements IHasSVars {
         setManaCost(source.getManaCost());
         setColor(source.getColor());
         setOracleText(source.getOracleText());
+        setFunctionalVariantName(source.getFunctionalVariantName());
         setBasePower(source.getBasePower());
         setBaseToughness(source.getBaseToughness());
         setBaseLoyalty(source.getBaseLoyalty());
@@ -757,9 +781,10 @@ public class CardState extends GameObject implements IHasSVars {
                 .build();
     }
 
-    public void resetOriginalHost() {
+    public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic()) {
+            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+                // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }
         }
@@ -802,5 +827,22 @@ public class CardState extends GameObject implements IHasSVars {
             cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
         }
         return cloakUp;
+    }
+
+    @Override
+    public String getTranslationKey() {
+        if(StringUtils.isNotEmpty(functionalVariantName))
+            return name + " $" + functionalVariantName;
+        return name;
+    }
+
+    @Override
+    public String getUntranslatedType() {
+        return getType().toString();
+    }
+
+    @Override
+    public String getUntranslatedOracle() {
+        return getOracleText();
     }
 }

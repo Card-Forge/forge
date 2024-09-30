@@ -1,0 +1,11 @@
+Name:Havi, the All-Father
+ManaCost:3 R G W
+Types:Legendary Creature God Warrior
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Historic+YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | AddKeyword$ Indestructible | Description$ CARDNAME has indestructible as long as there are four or more historic cards in your graveyard. (Artifacts, legendaries, and Sagas are historic.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Legendary+YouCtrl+Other | Execute$ TrigReturn | TriggerDescription$ Sage Project — Whenever NICKNAME or another legendary creature you control dies, return target legendary creature card with lesser mana value from your graveyard to the battlefield tapped.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Legendary+cmcLTX+YouOwn | TgtPrompt$ Choose target legendary creature card with lesser mana value | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+SVar:X:TriggeredCard$CardManaCost
+DeckHas:Ability$Graveyard
+DeckHints:Type$Legendary
+Oracle:Havi, the All-Father has indestructible as long as there are four or more historic cards in your graveyard. (Artifacts, legendaries, and Sagas are historic.)\nSage Project — Whenever Havi or another legendary creature you control dies, return target legendary creature card with lesser mana value from your graveyard to the battlefield tapped.

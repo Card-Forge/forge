@@ -1,0 +1,6 @@
+Name:Coordinated Clobbering
+ManaCost:G
+Types:Sorcery
+A:SP$ Tap | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | TargetMin$ 1 | TargetMax$ 2 | SubAbility$ DBEachDamage | SpellDescription$ Tap one or two target untapped creatures you control. They each deal damage equal to their power to target creature an opponent controls.
+SVar:DBEachDamage:DB$ EachDamage | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | DefinedDamagers$ ParentTarget | NumDmg$ Count$CardPower
+Oracle:Tap one or two target untapped creatures you control. They each deal damage equal to their power to target creature an opponent controls.

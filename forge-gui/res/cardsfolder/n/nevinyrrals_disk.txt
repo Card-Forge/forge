@@ -1,8 +1,9 @@
 Name:Nevinyrral's Disk
 ManaCost:4
 Types:Artifact
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 SVar:NonStackingEffect:True
 DeckHints:Type$Planeswalker & Name$Nevinyrral, Urborg Tyrant
-Oracle:Nevinyrral's Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.
+Oracle:Nevinyrral's Disk enters tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.

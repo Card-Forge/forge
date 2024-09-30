@@ -1,0 +1,10 @@
+Name:Stay Hidden, Stay Silent
+ManaCost:1 U
+Types:Enchantment Aura
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ KeepTapped
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+A:AB$ ChangeZone | Cost$ 4 U U | Origin$ Battlefield | Destination$ Library | Shuffle$ True | Defined$ Enchanted | SorcerySpeed$ True | SubAbility$ DBDread | SpellDescription$ Shuffle enchanted creature into its owner's library, then manifest dread. Activate only as a sorcery.
+SVar:DBDread:DB$ ManifestDread
+Oracle:Enchant creature\nWhen Stay Hidden, Stay Silent enters, tap enchanted creature.\nEnchanted creature doesn't untap during its controller's untap step.\n{4}{U}{U}: Shuffle enchanted creature into its owner's library, then manifest dread. Activate only as a sorcery.

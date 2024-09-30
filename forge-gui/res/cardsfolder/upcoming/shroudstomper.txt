@@ -1,0 +1,12 @@
+Name:Shroudstomper
+ManaCost:3 W W B B
+Types:Creature Elemental
+PT:5/5
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME enters or attacks, each opponent loses 2 life. You gain 2 life and draw a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, each opponent loses 2 life. You gain 2 life and draw a card.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Shroudstomper enters or attacks, each opponent loses 2 life. You gain 2 life and draw a card.

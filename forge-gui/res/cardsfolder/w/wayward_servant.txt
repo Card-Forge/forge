@@ -2,9 +2,9 @@ Name:Wayward Servant
 ManaCost:W B
 Types:Creature Zombie
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Zombie.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Zombie.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever another Zombie you control enters, each opponent loses 1 life and you gain 1 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$LifeGain
 DeckHints:Type$Zombie
-Oracle:Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+Oracle:Whenever another Zombie you control enters, each opponent loses 1 life and you gain 1 life.

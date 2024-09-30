@@ -57,6 +57,9 @@ public class TriggerTurnFaceUp extends Trigger {
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
+        if (!matchesValidParam("ValidCause", runParams.get(AbilityKey.Cause))) {
+            return false;
+        }
 
         return true;
     }

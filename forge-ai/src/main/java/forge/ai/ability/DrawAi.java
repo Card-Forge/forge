@@ -38,6 +38,7 @@ import forge.game.card.CounterType;
 import forge.game.cost.*;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
@@ -325,7 +326,7 @@ public class DrawAi extends SpellAbilityAi {
                 }
 
                 // try to kill opponent
-                if (oppA.cantLose() || !oppA.canDraw()) {
+                if (oppA.cantLoseCheck(GameLossReason.Milled) || !oppA.canDraw()) {
                     continue;
                 }
 

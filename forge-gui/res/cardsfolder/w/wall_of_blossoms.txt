@@ -3,6 +3,6 @@ ManaCost:1 G
 Types:Creature Plant Wall
 PT:0/4
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Defender\nWhen Wall of Blossoms enters the battlefield, draw a card.
+Oracle:Defender\nWhen Wall of Blossoms enters, draw a card.

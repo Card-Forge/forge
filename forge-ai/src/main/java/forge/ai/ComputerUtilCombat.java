@@ -421,7 +421,7 @@ public class ComputerUtilCombat {
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
-                if (!attacker.getSVar("MustBeBlocked").equals("")) {
+                if (!attacker.getSVar("MustBeBlocked").isEmpty()) {
                     boolean cond = false;
                     String condVal = attacker.getSVar("MustBeBlocked");
                     boolean isAttackingPlayer = combat.getDefenderByAttacker(attacker) instanceof Player;
@@ -490,7 +490,7 @@ public class ComputerUtilCombat {
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.isEmpty()) {
-                if (!attacker.getSVar("MustBeBlocked").equals("")) {
+                if (!attacker.getSVar("MustBeBlocked").isEmpty()) {
                     return true;
                 }
             }
@@ -724,7 +724,6 @@ public class ComputerUtilCombat {
         return totalDamageOfBlockers(attacker, blockers) >= getDamageToKill(attacker, false);
     }
 
-    // Will this trigger trigger?
     /**
      * <p>
      * combatTriggerWillTrigger.

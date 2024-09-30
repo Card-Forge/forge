@@ -1,0 +1,8 @@
+Name:Lilypad Village
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ U | RestrictValid$ Spell.Creature | SpellDescription$ Add {U}. Spend this mana only to cast a creature spell.
+A:AB$ Surveil | Cost$ U T | Amount$ 2 | CheckSVar$ X | SVarCompare$ GE1 | SpellDescription$ Surveil 2. Activate only if a Bird, Frog, Otter, or Rat entered the battlefield under your control this turn.
+SVar:X:Count$ThisTurnEntered_Battlefield_Frog.YouCtrl,Bird.YouCtrl,Otter.YouCtrl,Rat.YouCtrl
+Oracle:{T}: Add {C}.\n{T}: Add {U}. Spend this mana only to cast a creature spell.\n {U}, {T}: Surveil 2. Activate only if a Bird, Frog, Otter, or Rat entered the battlefield under your control this turn.

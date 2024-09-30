@@ -1,0 +1,8 @@
+Name:Prideful Parent
+ManaCost:2 W
+Types:Creature Cat
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 white Cat creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_cat
+Oracle:Vigilance (Attacking doesn't cause this creature to tap.)\nWhen this creature enters, create a 1/1 white Cat creature token.

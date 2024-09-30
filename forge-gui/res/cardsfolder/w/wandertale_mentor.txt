@@ -1,0 +1,8 @@
+Name:Wandertale Mentor
+ManaCost:R G
+Types:Creature Raccoon Bard
+PT:2/2
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you expend 4, put a +1/+1 counter on CARDNAME. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+A:AB$ Mana | Cost$ T | Produced$ Combo R G | SpellDescription$ Add {R} or {G}.
+Oracle:Whenever you expend 4, put a +1/+1 counter on Wandertale Mentor. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)\n{T}: Add {R} or {G}.

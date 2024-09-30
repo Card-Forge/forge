@@ -1,8 +1,0 @@
-Name:Nocturnal Hunger
-ManaCost:2 B
-Types:Instant
-K:Gift
-SVar:GiftAbility:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ Promised | GiftDescription$ a Food
-A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBLoseLife | SpellDescription$ Destroy target creature. If the gift wasn't promised, you lose 2 life.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ You | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ0 | LifeAmount$ 2
-Oracle:Gift a Food (You may promise an opponent a gift as you cast this spell. If you do, they create a Food token before its other effects. It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nDestroy target creature. If the gift wasn't promised, you lose 2 life.

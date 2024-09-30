@@ -2,11 +2,11 @@ Name:Thalia's Lieutenant
 ManaCost:1 W
 Types:Creature Human Soldier
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other Human you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on each other Human you control.
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Human.YouCtrl+StrictlyOther | CounterType$ P1P1 | CounterNum$ 1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Human you control enters, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 SVar:BuffedBy:Human
 DeckHints:Type$Human
 DeckHas:Ability$Counters
-Oracle:When Thalia's Lieutenant enters the battlefield, put a +1/+1 counter on each other Human you control.\nWhenever another Human enters the battlefield under your control, put a +1/+1 counter on Thalia's Lieutenant.
+Oracle:When Thalia's Lieutenant enters, put a +1/+1 counter on each other Human you control.\nWhenever another Human you control enters, put a +1/+1 counter on Thalia's Lieutenant.

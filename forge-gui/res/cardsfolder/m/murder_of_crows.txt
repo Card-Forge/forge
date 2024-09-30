@@ -3,6 +3,6 @@ ManaCost:3 U U
 Types:Creature Bird
 PT:4/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature dies, you may draw a card. If you do, discard a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | Execute$ TrigLoot | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature dies, you may draw a card. If you do, discard a card.
 SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Cost$ Draw<1/You>
 Oracle:Flying\nWhenever another creature dies, you may draw a card. If you do, discard a card.

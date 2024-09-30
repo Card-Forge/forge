@@ -1,7 +1,7 @@
 Name:Carbonize
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DB | ReplaceDyingDefined$ ThisTargetedCard.Creature | SpellDescription$ CARDNAME deals 3 damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.
-SVar:DB:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | AILogic$ CantRegenerate | StackDescription$ None
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ 3 | SubAbility$ DBEffect | ReplaceDyingDefined$ ThisTargetedCard.Creature | SpellDescription$ CARDNAME deals 3 damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.
+SVar:DBEffect:DB$ Effect | RememberObjects$ ParentTarget | ForgetOnMoved$ Battlefield | StaticAbilities$ NoRegen | IsCurse$ True | ConditionDefined$ ParentTarget | ConditionPresent$ Creature | AILogic$ CantRegenerate | StackDescription$ None
 SVar:NoRegen:Mode$ CantRegenerate | ValidCard$ Card.IsRemembered | Description$ Creature can't be regenerated this turn.
 Oracle:Carbonize deals 3 damage to any target. If it's a creature, it can't be regenerated this turn, and if it would die this turn, exile it instead.

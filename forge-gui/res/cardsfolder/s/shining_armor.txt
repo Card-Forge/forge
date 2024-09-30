@@ -2,10 +2,10 @@ Name:Shining Armor
 ManaCost:1 W
 Types:Artifact Equipment
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target Knight you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target Knight you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Knight.YouCtrl | TgtPrompt$ Select target Knight you control
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 2 | AddKeyword$ Vigilance | Description$ Equipped creature gets +0/+2 and has vigilance.
 K:Equip:3
 SVar:BuffedBy:Knight
 DeckHints:Type$Knight
-Oracle:Flash\nWhen Shining Armor enters the battlefield, attach it to target Knight you control.\nEquipped creature gets +0/+2 and has vigilance.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
+Oracle:Flash\nWhen Shining Armor enters, attach it to target Knight you control.\nEquipped creature gets +0/+2 and has vigilance.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

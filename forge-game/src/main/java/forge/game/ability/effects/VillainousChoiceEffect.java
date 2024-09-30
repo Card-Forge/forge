@@ -10,7 +10,6 @@ import forge.game.spellability.SpellAbility;
 
 import java.util.List;
 
-
 public class VillainousChoiceEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {

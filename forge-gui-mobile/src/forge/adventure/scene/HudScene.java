@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
+import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.IAfterMatch;
@@ -21,6 +22,11 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     protected HudScene(GameStage s) {
         stage = s;
         hud = GameHUD.getInstance();
+    }
+
+    @Override
+    public boolean touchCancelled (int x, int y, int pointer, int button) {
+        return touchUp(x, y, pointer, button);
     }
 
     @Override
@@ -75,6 +81,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
             return true;
         if (isInHudOnlyMode())
             return false;
+        if (Forge.advFreezePlayerControls)
+            return false;
         return stage.keyDown(keycode);
     }
 
@@ -87,6 +95,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         if (hud.keyUp(keycode))
             return true;
         if (isInHudOnlyMode())
+            return false;
+        if (Forge.advFreezePlayerControls)
             return false;
         return stage.keyUp(keycode);
     }
@@ -107,6 +117,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
             return true;
         if (isInHudOnlyMode())
             return false;
+        if (Forge.advFreezePlayerControls)
+            return false;
         return stage.keyTyped(character);
     }
 
@@ -115,6 +127,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         if (hud.touchDown(screenX, screenY, pointer, button))
             return true;
         if (isInHudOnlyMode())
+            return false;
+        if (Forge.advFreezePlayerControls)
             return false;
         return stage.touchDown(screenX, screenY, pointer, button);
     }
@@ -134,6 +148,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
             return true;
         if (isInHudOnlyMode())
             return false;
+        if (Forge.advFreezePlayerControls)
+            return false;
         return stage.touchDragged(screenX, screenY, pointer);
     }
 
@@ -143,6 +159,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
             return true;
         if (isInHudOnlyMode())
             return false;
+        if (Forge.advFreezePlayerControls)
+            return false;
         return stage.mouseMoved(screenX, screenY);
     }
 
@@ -151,6 +169,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         if (hud.scrolled(amountX, amountY))
             return true;
         if (isInHudOnlyMode())
+            return false;
+        if (Forge.advFreezePlayerControls)
             return false;
         return stage.scrolled(amountX, amountY);
     }

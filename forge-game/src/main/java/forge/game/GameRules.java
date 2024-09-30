@@ -95,6 +95,10 @@ public class GameRules {
             this.appliedVariants.addAll(appliedVariants);
     }
 
+    public void addAppliedVariant(final GameType variant) {
+        this.appliedVariants.add(variant);
+    }
+
     public boolean hasAppliedVariant(final GameType variant) {
         return appliedVariants.contains(variant);
     }

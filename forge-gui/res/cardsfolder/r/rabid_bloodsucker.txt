@@ -3,6 +3,6 @@ ManaCost:4 B
 Types:Creature Vampire
 PT:3/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each player loses 2 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters, each player loses 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player | LifeAmount$ 2
-Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Rabid Bloodsucker enters the battlefield, each player loses 2 life.
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Rabid Bloodsucker enters, each player loses 2 life.

@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Creature Shapeshifter
 PT:2/2
 K:Changeling
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a colorless Shapeshifter creature token with changeling.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a colorless Shapeshifter creature token with changeling.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_shapeshifter_changeling | TokenOwner$ You
 DeckHas:Ability$Token
-Oracle:Changeling (This card is every creature type.)\nWhen Irregular Cohort enters the battlefield, create a 2/2 colorless Shapeshifter creature token with changeling.
+Oracle:Changeling (This card is every creature type.)\nWhen Irregular Cohort enters, create a 2/2 colorless Shapeshifter creature token with changeling.

@@ -3,10 +3,10 @@ ManaCost:B R
 Types:Creature Lizard Warrior
 PT:3/1
 K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.withoutBlitz+YouOwn | ChoiceTitle$ Choose a creature card in your hand without blitz | Mandatory$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | KW$ Blitz:CardManaCost:Spell.Creature | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 K:Blitz:B R
 DeckHas:Ability$Sacrifice
-Oracle:Menace\nWhen Riveteers Provocateur enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.\nBlitz {B}{R}
+Oracle:Menace\nWhen Riveteers Provocateur enters, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.\nBlitz {B}{R}

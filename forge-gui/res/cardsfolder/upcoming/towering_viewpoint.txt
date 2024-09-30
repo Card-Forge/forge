@@ -1,8 +1,0 @@
-Name:Towering Viewpoint
-ManaCost:2
-Types:Artifact Creature Wall
-PT:0/4
-K:Defender
-K:Reach
-A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying | SpellDescription$ Target creature gains flying until end of turn.
-Oracle:Defender, reach\nLeap of Faith — {3}: Target creature gains flying until end of turn.

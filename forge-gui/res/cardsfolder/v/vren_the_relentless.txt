@@ -1,0 +1,11 @@
+Name:Vren, the Relentless
+ManaCost:2 U B
+Types:Legendary Creature Rat Rogue
+PT:3/4
+K:Ward:2
+R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | ReplaceWith$ DBExile | Description$ If a creature an opponent controls would die, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, create X 1/1 black Rat creature tokens with "This creature gets +1/+1 for each other Rat you control," where X is the number of creatures your opponents controlled that were exiled this turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_rat_relentless | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Exile_from_Battlefield_Creature.OppCtrl
+Oracle:Ward {2}\nIf a creature an opponent controls would die, exile it instead.\nAt the beginning of each end step, create X 1/1 black Rat creature tokens with "This creature gets +1/+1 for each other Rat you control," where X is the number of creatures your opponents controlled that were exiled this turn.

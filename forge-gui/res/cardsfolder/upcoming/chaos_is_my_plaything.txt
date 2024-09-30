@@ -1,0 +1,8 @@
+Name:Chaos Is My Plaything
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, for each opponent, exile target permanent that player controls. Then each player reveals cards from the top of their library until they reveal a permanent card, puts it onto the battlefield, and puts the rest on the bottom of their library in a random order.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.OppCtrl | TgtPrompt$ Select up to one target creature each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Defined$ Player | Valid$ Permanent | ValidDescription$ permanent | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Battlefield
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:When you set this scheme in motion, for each opponent, exile target permanent that player controls. Then each player reveals cards from the top of their library until they reveal a permanent card, puts it onto the battlefield, and puts the rest on the bottom of their library in a random order.

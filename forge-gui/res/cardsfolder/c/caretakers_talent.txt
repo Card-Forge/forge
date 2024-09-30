@@ -1,0 +1,12 @@
+Name:Caretaker's Talent
+ManaCost:2 W
+Types:Enchantment Class
+T:Mode$ ChangesZoneAll | ValidCards$ Permanent.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more tokens you control enter, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw
+K:Class:2:W:AddTrigger$ TriggerClassLevel
+SVar:TriggerClassLevel:Mode$ ClassLevelGained | ClassLevel$ 2 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When this Class becomes level 2, create a token that's a copy of target token you control.
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ 1
+K:Class:3:3 W:AddStaticAbility$ SBuff
+SVar:SBuff:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creature tokens you control get +2/+2.
+DeckNeeds:Ability$Token
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhenever one or more tokens you control enter, draw a card. This ability triggers only once each turn.\n{W}: Level 2\nWhen this Class becomes level 2, create a token that's a copy of target token you control.\n{3}{W}: Level 3\nCreature tokens you control get +2/+2.

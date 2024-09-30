@@ -51,12 +51,12 @@ public class BiomeEdit extends FormPanel {
         add(terrain);
         add(structures);
 
-        name.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
-        tilesetName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
-        color.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
+        name.getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
+        tilesetName.getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
+        color.getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
         collision.addChangeListener(e -> BiomeEdit.this.updateTerrain());
-        spriteNames.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
-        enemies.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
+        spriteNames.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
+        enemies.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
         terrain.addChangeListener(e -> BiomeEdit.this.updateTerrain());
 
 
@@ -64,7 +64,7 @@ public class BiomeEdit extends FormPanel {
         startPointY.addChangeListener(e -> BiomeEdit.this.updateTerrain());
         noiseWeight.addChangeListener(e -> BiomeEdit.this.updateTerrain());
         distWeight.addChangeListener(e -> BiomeEdit.this.updateTerrain());
-        tilesetAtlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
+        tilesetAtlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(BiomeEdit.this::updateTerrain));
         width.addChangeListener(e -> BiomeEdit.this.updateTerrain());
         height.addChangeListener(e -> BiomeEdit.this.updateTerrain());
         refresh();

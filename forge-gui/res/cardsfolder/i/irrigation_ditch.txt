@@ -1,8 +1,9 @@
 Name:Irrigation Ditch
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add {W}.
 A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ G U | SpellDescription$ Add {G}{U}.
 AI:RemoveDeck:All
-Oracle:Irrigation Ditch enters the battlefield tapped.\n{T}: Add {W}.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U}.
+Oracle:Irrigation Ditch enters tapped.\n{T}: Add {W}.\n{T}, Sacrifice Irrigation Ditch: Add {G}{U}.

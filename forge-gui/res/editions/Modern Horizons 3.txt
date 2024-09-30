@@ -3,13 +3,49 @@ Code=MH3
 Date=2024-06-07
 Name=Modern Horizons 3
 Type=Draft
-Booster=6 Common, 3 Uncommon, 1 RareMythic, 1 fromSheet("MH3 new to modern"), 1 Land, 1 Any, 1 Any+
-# This isn't the right ratios yet. But it's a start
-ChanceReplaceCommonWith=.0156F fromsheet("MH3 special guests")
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,NewToModern,Common-Land,Wildcard
+Booster=5 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 NewToModern, 1 Common-Land, 1 Wildcard, 1 Wildcard+
 BoosterBox=36
 BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
+
+[Common]
+Base=Common:fromSheet("MH3 cards")
+
+[Common-Guest]
+Base=Common:fromSheet("MH3 cards")
+Replace=.015625F fromSheet("MH3 special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MH3 cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("MH3 cards")
+Replace=.021F fromSheet("MH3 alternate frame")
+Replace=.051F fromSheet("MH3 borderless")
+
+[Common-Land]
+Base=Common:fromSheet("MH3 cards")
+Replace=.20F Land:fromSheet("MH3 cards")
+Replace=.133F Land:fromSheet("MH3 cards")+
+Replace=.10F fromSheet("MH3 full art")
+Replace=.067F fromSheet("MH3 full art")+
+
+[NewToModern]
+Base=Uncommon:fromSheet("MH3 new to modern")
+Replace=.213F Rare:fromSheet("MH3 new to modern")
+Replace=.023F Mythic:fromSheet("MH3 new to modern")
+Replace=.008F fromSheet("MH3 borderless frame")
+Replace=.003F fromSheet("MH3 borderless profile")
+Replace=.001F fromSheet("MH3 alternate frame")
+
+[Wildcard]
+Base=Common:fromSheet("MH3 cards")
+Replace=.417F Uncommon:fromSheet("MH3 cards")
+Replace=.078F RareMythic:fromSheet("MH3 cards")
+Replace=.004F fromSheet("MH3 borderless frame")
+Replace=.042F fromSheet("MH3 alternate frame")
 
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
@@ -315,12 +351,6 @@ ScryfallCode=MH3
 301 R Deserted Temple @Rob Alexander
 302 U Nesting Grounds @Yeong-Hao Han
 303 M Phyrexian Tower @Martin de Diego Sádaba
-304 L Plains @Nadia Hurianova
-305 L Island @Samuele Bandini
-306 L Swamp @Yohann Schepacz
-307 L Mountain @Chuck Lukacs
-308 L Forest @Vance Kovacs
-309 U Snow-Covered Wastes @Tomáš Honz
 310 L Plains @Volkan Baǵa
 311 L Plains @Lius Lasahido
 312 L Island @Alayna Danner
@@ -331,6 +361,14 @@ ScryfallCode=MH3
 317 L Mountain @Paolo Parente
 318 L Forest @Lars Grant-West
 319 L Forest @Brian Valeza
+
+[full art]
+304 L Plains @Nadia Hurianova
+305 L Island @Samuele Bandini
+306 L Swamp @Yohann Schepacz
+307 L Mountain @Chuck Lukacs
+308 L Forest @Vance Kovacs
+309 U Snow-Covered Wastes @Tomáš Honz
 
 [borderless]
 320 R Echoes of Eternity @Clint Lockwood
@@ -363,6 +401,8 @@ ScryfallCode=MH3
 347 R Pearl Medallion @Olena Richards
 348 R Ruby Medallion @Martina Pilcerova
 349 R Sapphire Medallion @Ron Spears
+
+[borderless frame]
 350 R Archway of Innovation @Sam Burley
 351 R Arena of Glory @Piotr Dura
 352 R Bloodstained Mire @Sean Vo
@@ -384,6 +424,8 @@ ScryfallCode=MH3
 368 R Laelia, the Blade Reforged @Tyler Walpole
 369 M Eladamri, Korvecdal @Tyler Walpole
 370 R Six @Ivan Shavrin
+
+[borderless profile]
 371 M Arna Kennerüd, Skycaptain @Grant Griffin
 372 M Breya, Etherium Shaper @Jack Hughes
 373 R Genku, Future Shaper @Ivan Shavrin
@@ -460,6 +502,33 @@ ScryfallCode=MH3
 432 R Kudo, King Among Bears @Ekaterina Burmak
 433 R Psychic Frog @Pete Venters
 434 R Rosheen, Roaring Prophet @Fang Xinyu
+497 L Plains @Volkan Baǵa
+498 L Plains @Lius Lasahido
+499 L Island @Alayna Danner
+500 L Island @Raph Lomotan
+501 L Swamp @David Álvarez
+502 L Swamp @Carlos Palma Cruchaga
+503 L Mountain @Carlos Palma Cruchaga
+504 L Mountain @Paolo Parente
+505 L Forest @Lars Grant-West
+506 L Forest @Brian Valeza
+507 U Glaring Fleshraker @Raph Lomotan
+508 U Wastescape Battlemage @Paolo Parente
+509 C Jolted Awake @Steven Russell Black
+510 U Bespoke Battlewagon @Zoltan Boros
+511 U Roil Cartographer @Miranda Meeks
+512 C Accursed Marauder @Paolo Parente
+513 U Amped Raptor @Alex Konstad
+514 U Unstable Amulet @José Parodi
+515 U Izzet Generatorium @Yeong-Hao Han
+516 U Scurry of Gremlins @Ben Wootten
+517 C Snapping Voidcraw @Camille Alquier
+518 U Titans' Vanguard @Richard Kane Ferguson
+519 U Solar Transformer @Mike Bierek
+520 C Tranquil Landscape @Randy Gallegos
+521 C Twisted Landscape @Piotr Dura
+
+[alternate frame]
 435 R Bloodstained Mire @Bruce Brenneise
 436 R Flooded Strand @Alexander Forssberg
 437 U Nesting Grounds @Yeong-Hao Han
@@ -489,31 +558,6 @@ ScryfallCode=MH3
 492 R The Necrobloom @Igor Krstic
 493 M Phlage, Titan of Fire's Fury @Lucas Graciano
 494 R Rosheen, Roaring Prophet @Fang Xinyu
-497 L Plains @Volkan Baǵa
-498 L Plains @Lius Lasahido
-499 L Island @Alayna Danner
-500 L Island @Raph Lomotan
-501 L Swamp @David Álvarez
-502 L Swamp @Carlos Palma Cruchaga
-503 L Mountain @Carlos Palma Cruchaga
-504 L Mountain @Paolo Parente
-505 L Forest @Lars Grant-West
-506 L Forest @Brian Valeza
-507 U Glaring Fleshraker @Raph Lomotan
-508 U Wastescape Battlemage @Paolo Parente
-509 C Jolted Awake @Steven Russell Black
-510 U Bespoke Battlewagon @Zoltan Boros
-511 U Roil Cartographer @Miranda Meeks
-512 C Accursed Marauder @Paolo Parente
-513 U Amped Raptor @Alex Konstad
-514 U Unstable Amulet @José Parodi
-515 U Izzet Generatorium @Yeong-Hao Han
-516 U Scurry of Gremlins @Ben Wootten
-517 C Snapping Voidcraw @Camille Alquier
-518 U Titans' Vanguard @Richard Kane Ferguson
-519 U Solar Transformer @Mike Bierek
-520 C Tranquil Landscape @Randy Gallegos
-521 C Twisted Landscape @Piotr Dura
 
 [extended art]
 447 R Argent Dais @Carlos Palma Cruchaga
@@ -541,6 +585,11 @@ ScryfallCode=MH3
 [promo]
 495 R Powerbalance @Liiga Smilshkalne
 496 R Flusterstorm @Andrew Mar
+
+[rebalanced]
+A29 R A-Guide of Souls @Ryan Valle
+A38 M A-Ocelot Pride @Chris Seaman
+A122 C A-Galvanic Discharge @Zoltan Boros
 
 [new to modern]
 1 Angel of the Ruins|MH3
@@ -617,7 +666,6 @@ c_a_treasure_sac
 g_0_1_plant
 g_1_1_insect
 r_1_1_gremlin
-spellgorger_weird
 u_1_1_a_thopter_flying
 u_1_2_moonfolk_flying
 u_2_2_bird_flying

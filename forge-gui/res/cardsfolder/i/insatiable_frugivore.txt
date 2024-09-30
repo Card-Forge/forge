@@ -1,0 +1,14 @@
+Name:Insatiable Frugivore
+ManaCost:3 B
+Types:Creature Rat Berserker
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a Food token, then you may exile three cards from your graveyard. If you do, repeat this process.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ c_a_food_sac | SubAbility$ DBStoreSVar
+SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckNotPaid | Type$ Number | Expression$ 1 | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ Repeat | RepeatSubAbility$ DBToken | RepeatCheckSVar$ CheckNotPaid | RepeatSVarCompare$ GT0
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | UnlessCost$ ExileFromGrave<3/Card> | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DBStoreSVarT | TokenScript$ c_a_food_sac
+SVar:DBStoreSVarT:DB$ StoreSVar | SVar$ CheckNotPaid | Type$ Number | Expression$ 0
+A:AB$ PumpAll | Cost$ 3 B Sac<X/Food> | ValidCards$ Creature.YouCtrl | NumAtt$ +X | KW$ Menace | SpellDescription$ Creatures you control get +X/+0 and gain menace until end of turn.
+SVar:CheckNotPaid:Number$1
+SVar:X:Count$xPaid
+Oracle:When Insatiable Frugivore enters, create a Food token, then you may exile three cards from your graveyard. If you do, repeat this process.\n{3}{B}, Sacrifice X Foods: Creatures you control get +X/+0 and gain menace until end of turn.

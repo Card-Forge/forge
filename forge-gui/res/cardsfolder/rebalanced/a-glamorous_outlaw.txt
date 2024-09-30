@@ -2,7 +2,7 @@ Name:A-Glamorous Outlaw
 ManaCost:3 U B R
 Types:Creature Vampire Rogue
 PT:4/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to each opponent and you gain 2 life. Scry 2.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 2 damage to each opponent and you gain 2 life. Scry 2.
 SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Opponent | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
@@ -13,4 +13,4 @@ SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ 
 SVar:Cast:Mode$ SpellCast | ValidCard$ Card.IsImprinted+IsRemembered+wasCastFromExile | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 DeckHas:Ability$LifeGain
-Oracle:When Glamorous Outlaw enters the battlefield, it deals 2 damage to each opponent and you gain 2 life. Scry 2.\n{1}, Exile Glamorous Outlaw from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until Glamorous Outlaw is cast from exile. You may cast Glamorous Outlaw for as long as it remains exiled.
+Oracle:When Glamorous Outlaw enters, it deals 2 damage to each opponent and you gain 2 life. Scry 2.\n{1}, Exile Glamorous Outlaw from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until Glamorous Outlaw is cast from exile. You may cast Glamorous Outlaw for as long as it remains exiled.

@@ -1,9 +1,9 @@
 Name:Oath of Ajani
 ManaCost:G W
 Types:Legendary Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on each creature you control.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ ReduceCost | ValidCard$ Planeswalker | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Planeswalker spells you cast cost {1} less to cast.
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
-Oracle:When Oath of Ajani enters the battlefield, put a +1/+1 counter on each creature you control.\nPlaneswalker spells you cast cost {1} less to cast.
+Oracle:When Oath of Ajani enters, put a +1/+1 counter on each creature you control.\nPlaneswalker spells you cast cost {1} less to cast.

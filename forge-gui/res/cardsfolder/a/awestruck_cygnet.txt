@@ -1,0 +1,10 @@
+Name:Awestruck Cygnet
+ManaCost:W
+Types:Creature Bird Scout
+PT:2/1
+K:Starting intensity:0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+withFlying | IsPresent$ Card.Self+namedAwestruck Cygnet | TriggerZones$ Battlefield | Execute$ TrigIntensify | TriggerDescription$ Whenever a creature you control with flying enters, if this creature is named Awestruck Cygnet, cards you own named Awestruck Cygnet intensify by 1.
+SVar:TrigIntensify:DB$ Intensify | AllDefined$ Card.namedAwestruck Cygnet+YouOwn
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 5 | CheckSVar$ X | SetName$ Radiant Swan | SVarCompare$ GE3 | AddKeyword$ Flying & Vigilance | SetToughness$ 3 | Description$ As long as this card's intensity is 3 or more, it has base power and toughness 5/4, has flying and vigilance, and is named Radiant Swan.
+SVar:X:Count$Intensity
+Oracle:Starting intensity 0\nWhenever a creature you control with flying enters, if this creature is named Awestruck Cygnet, cards you own named Awestruck Cygnet intensify by 1.\nAs long as this card's intensity is 3 or more, it has base power and toughness 5/4, has flying and vigilance, and is named Radiant Swan.

@@ -35,7 +35,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
         final CardCollectionView milled = game.getAction().mill(new PlayerCollection(p), numRad, ZoneType.Graveyard, sa, moveParams);
         table.triggerChangesZoneAll(game, sa);
         int n = CardLists.count(milled, Predicates.not(CardPredicates.Presets.LANDS));
-        
+
         if (StaticAbilityGainLifeRadiation.gainLifeRadiation(p)) {
             p.gainLife(n, sa.getHostCard(), sa);
         } else {
@@ -49,7 +49,7 @@ public class InternalRadiationEffect extends SpellAbilityEffect {
                 game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
             }
         }
-        
+
         // and remove n rad counter
         p.removeRadCounters(n);
     }

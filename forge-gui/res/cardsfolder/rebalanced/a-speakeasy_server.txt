@@ -3,8 +3,8 @@ ManaCost:4 W
 Types:Creature Bird Citizen
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life for each creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters, you gain 1 life for each creature you control.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$LifeGain
-Oracle:Flying\nWhen Speakeasy Server enters the battlefield, you gain 1 life for each creature you control.
+Oracle:Flying\nWhen Speakeasy Server enters, you gain 1 life for each creature you control.

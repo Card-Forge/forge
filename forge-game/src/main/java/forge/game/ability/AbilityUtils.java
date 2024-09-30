@@ -2,6 +2,8 @@ package forge.game.ability;
 
 import com.google.common.base.Functions;
 import com.google.common.collect.*;
+import com.google.common.math.IntMath;
+
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -485,7 +487,7 @@ public class AbilityUtils {
         } else if (calcX[0].startsWith("PlayerCount")) {
             final String hType = calcX[0].substring(11);
             final FCollection<Player> players = new FCollection<>();
-            if (hType.equals("Players") || hType.equals("")) {
+            if (hType.equals("Players") || hType.isEmpty()) {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("YourTeam")) {
@@ -1156,11 +1158,9 @@ public class AbilityUtils {
                 players.add(p);
             }
         } else if (defined.equals("Promised")) {
-            if (card != null) {
-                final Player p = card.getPromisedGift();
-                if (p != null) {
-                    players.add(p);
-                }
+            final Player p = card.getPromisedGift();
+            if (p != null) {
+                players.add(p);
             }
         } else if (defined.startsWith("ChosenCard")) {
             addPlayer(card.getChosenCards(), defined, players);
@@ -1388,6 +1388,10 @@ public class AbilityUtils {
         // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
         if (sa.isReplacementAbility()) {
+            // register all LTB trigger from last state battlefield
+            for (Card lki : sa.getRootAbility().getLastStateBattlefield()) {
+                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            }
             game.getTriggerHandler().collectTriggerForWaiting();
         } else {
             game.getTriggerHandler().resetActiveTriggers();
@@ -1539,6 +1543,11 @@ public class AbilityUtils {
                 host.clearRemembered();
             }
             host.addRemembered(sa.getTargets());
+            if (sa.hasParam("IncludeAllComponentCards")) {
+                for (Card c : sa.getTargets().getTargetCards()) {
+                    host.addRemembered(c.getAllComponentCards(false));
+                }
+            }
         }
 
         if (sa.hasParam("RememberCostMana")) {
@@ -1621,6 +1630,14 @@ public class AbilityUtils {
                 final int lhs = calculateAmount(c, compString[1], ctb);
                 final int rhs =  calculateAmount(c, compString[2].substring(2), ctb);
                 boolean v = Expressions.compare(lhs, compString[2], rhs);
+                return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
+            }
+
+            // Count$IsPrime <SVar>.<True>.<False>
+            if (sq[0].startsWith("IsPrime")) {
+                final String[] compString = sq[0].split(" ");
+                final int lhs = calculateAmount(c, compString[1], ctb);
+                boolean v = IntMath.isPrime(lhs);
                 return doXMath(calculateAmount(c, sq[v ? 1 : 2], ctb), expr, c, ctb);
             }
 
@@ -1888,6 +1905,13 @@ public class AbilityUtils {
                     }
                 }
                 return doXMath(v, expr, c, ctb);
+            }
+
+            if (sq[0].equals("hasOptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null && c.getCastSA().hasOptionalKeywordAmount(ctb.getKeyword()) ? 1 : 0, expr, c, ctb);
+            }
+            if (sq[0].equals("OptionalKeywordAmount")) {
+                return doXMath(c.getCastSA() != null ? c.getCastSA().getOptionalKeywordAmount(ctb.getKeyword()) : 0, expr, c, ctb);
             }
 
             // Count$DevotionDual.<color name>.<color name>
@@ -2944,7 +2968,8 @@ public class AbilityUtils {
         }
 
         for (SpellAbility s : list) {
-            if (s instanceof LandAbility) {
+            if (s.isLandAbility()) {
+                s.setActivatingPlayer(controller);
                 // CR 305.3
                 if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
                     sas.add(s);
@@ -2972,9 +2997,7 @@ public class AbilityUtils {
 
     private static void collectSpellsForPlayEffect(final List<SpellAbility> result, final CardState state, final Player controller, final boolean withAltCost) {
         if (state.getType().isLand()) {
-            LandAbility la = new LandAbility(state.getCard(), controller, null);
-            la.setCardState(state);
-            result.add(la);
+            result.add(state.getFirstSpellAbility());
         }
         final Iterable<SpellAbility> spells = state.getSpellAbilities();
         for (SpellAbility sa : spells) {

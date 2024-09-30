@@ -1,0 +1,9 @@
+Name:Plumecreed Escort
+ManaCost:1 U
+Types:Creature Bird Scout
+PT:2/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, target creature you control gains hexproof until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof
+Oracle:Flash\nFlying\nWhen Plumecreed Escort enters, target creature you control gains hexproof until end of turn.

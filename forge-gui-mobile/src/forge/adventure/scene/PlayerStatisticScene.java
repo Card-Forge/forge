@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
@@ -44,7 +45,8 @@ public class PlayerStatisticScene extends UIScene {
     TextraLabel wins, totalWins, eventWins, eventMatchWins;
     TextraLabel loss, totalLoss, eventLosses, eventMatchLosses;
     TextraLabel winloss, lossWinRatio, eventLossWinRatio, eventMatchLossWinRatio;
-    TextraLabel playerName, headerAchievements, headerAvatar, headerName, headerWinLoss;
+    TextraLabel headerAchievements, headerAvatar, headerName, headerWinLoss;
+    TypingLabel playerName;
     TextraButton back, toggleAward;
     private final Table scrollContainer, achievementContainer;
     TextraLabel blessingScroll;
@@ -196,7 +198,9 @@ public class PlayerStatisticScene extends UIScene {
         scrollContainer.clear();
 
         if (playerName != null) {
-            playerName.setText(GamePlayerUtil.getGuiPlayer().getName());
+            String gender = Current.player().isFemale() ? "{GRADIENT=MAGENTA;MAUVE;1;1}\u2640{ENDGRADIENT}[BLACK] " : "{GRADIENT=CYAN;BLUE;1;1}\u2642{ENDGRADIENT}[BLACK] ";
+            playerName.setText(gender + GamePlayerUtil.getGuiPlayer().getName());
+            playerName.skipToTheEnd();
         }
         if (avatar != null) {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));

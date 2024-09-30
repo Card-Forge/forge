@@ -2,6 +2,6 @@ Name:Pillar of Origins
 ManaCost:2
 Types:Artifact
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a creature type.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature+ChosenType | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
-Oracle:As Pillar of Origins enters the battlefield, choose a creature type.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.
+Oracle:As Pillar of Origins enters, choose a creature type.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell of the chosen type.

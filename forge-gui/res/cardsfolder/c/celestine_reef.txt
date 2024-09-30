@@ -3,9 +3,9 @@ ManaCost:no cost
 Types:Plane Luvion
 S:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature.withoutFlying+!hasKeywordLandwalk:Island | Description$ Creatures without flying or islandwalk can't attack.
 T:Mode$ ChaosEnsues | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever chaos ensues, until a player planeswalks, you can't lose the game and your opponents can't win the game.
-SVar:RolledChaos:DB$ Effect | StaticAbilities$ STCantlose,STCantWin | Triggers$ TrigPlaneswalk | Duration$ Permanent
-SVar:STCantlose:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't lose the game. | Description$ Until a player planeswalks, you can't lose the game and your opponents can't win the game.
-SVar:STCantWin:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ You can't win the game.
+SVar:RolledChaos:DB$ Effect | ReplacementEffects$ DBYouCantLose,DBOppCantWin | Triggers$ TrigPlaneswalk | Duration$ Permanent
+SVar:DBYouCantLose:Event$ GameLoss | ValidPlayer$ You | Layer$ CantHappen | Description$ Until a player planeswalks, you can't lose the game and your opponents can't win the game.
+SVar:DBOppCantWin:Event$ GameWin | ValidPlayer$ Opponent | Layer$ CantHappen | Secondary$ True | Description$ Until a player planeswalks, you can't lose the game and your opponents can't win the game.
 SVar:TrigPlaneswalk:Mode$ PlaneswalkedTo | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AIRollPlanarDieParams:Mode$ Always

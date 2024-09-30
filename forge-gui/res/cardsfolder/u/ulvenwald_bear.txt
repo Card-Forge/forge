@@ -2,7 +2,7 @@ Name:Ulvenwald Bear
 ManaCost:2 G
 Types:Creature Bear
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ Morbid — When CARDNAME enters the battlefield, if a creature died this turn, put two +1/+1 counters on target creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ Morbid — When CARDNAME enters, if a creature died this turn, put two +1/+1 counters on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2
-SVar:Morbid:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-Oracle:Morbid — When Ulvenwald Bear enters the battlefield, if a creature died this turn, put two +1/+1 counters on target creature.
+SVar:Morbid:Count$Morbid.1.0
+Oracle:Morbid — When Ulvenwald Bear enters, if a creature died this turn, put two +1/+1 counters on target creature.

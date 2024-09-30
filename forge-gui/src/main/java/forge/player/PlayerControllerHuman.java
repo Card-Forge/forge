@@ -35,9 +35,11 @@ import forge.game.player.*;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
 import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementEffectView;
 import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityView;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -1073,7 +1075,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView orderMoveToZoneList(final CardCollectionView cards, final ZoneType destinationZone, final SpellAbility source) {
-        boolean bottomOfLibrary = false;
         if (source == null || source.getApi() != ApiType.ReorderZone) {
             if (destinationZone == ZoneType.Graveyard) {
                 switch (FModel.getPreferences().getPref(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED)) {
@@ -1096,17 +1097,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
-        if (source != null) {
-            if (source.hasParam("LibraryPosition")) {
-                bottomOfLibrary = Integer.parseInt(source.getParam("LibraryPosition")) < 0;
-            }
-        }
         tempShowCards(cards);
         GameEntityViewMap<Card, CardView> gameCacheMove = GameEntityView.getMap(cards);
         List<CardView> choices = gameCacheMove.getTrackableKeys();
 
         switch (destinationZone) {
             case Library:
+                boolean bottomOfLibrary = (source != null && source.hasParam("LibraryPosition") ?
+                        AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) : 0) < 0;
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoLibrary"), localizer.getMessage(bottomOfLibrary ? "lblClosestToBottom" : "lblClosestToTop"), choices, null);
                 break;
             case Battlefield:
@@ -1352,7 +1350,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
-        Collections.sort(sortedList, Entry.comparingByValue());
+        sortedList.sort(Entry.comparingByValue());
 
         // loop through sorted list and move each type to the front of the
         // validTypes collection
@@ -1732,7 +1730,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 0; i < num; i++) {
             if (sa.hasParam("Pawprint")) {
                 final int tmpPaw = chosenPawprint;
-                spellViewCache.values().removeIf(ab -> Integer.valueOf(ab.getParam("Pawprint")) > num - tmpPaw);
+                spellViewCache.values().removeIf(ab -> Integer.parseInt(ab.getParam("Pawprint")) > num - tmpPaw);
             }
             final List<SpellAbilityView> choices = Lists.newArrayList(spellViewCache.keySet());
 
@@ -1870,12 +1868,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
-        final String firstStr = first.toString();
-        for (int i = 1; i < possibleReplacers.size(); i++) {
+        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
+        final String firstStr = res.get(0);
+        final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
+        for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
-            if (!possibleReplacers.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleReplacers);
+            if (!res.get(i).equals(firstStr)) {
+                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
+                    return getGui().one(prompt, possibleReplacers);
+                ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
+                return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
             }
         }
         // return first option without prompting if all options are the same
@@ -1888,11 +1890,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleStatics.size() == 1 || !fullControl) {
             return first;
         }
-        final String firstStr = first.toString();
-        for (int i = 1; i < possibleStatics.size(); i++) {
+        final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toList());
+        final String firstStr = sts.get(0);
+        for (int i = 1; i < sts.size(); i++) {
             // prompt user if there are multiple different options
-            if (!possibleStatics.get(i).toString().equals(firstStr)) {
-                return getGui().one(prompt, possibleStatics);
+            if (!sts.get(i).equals(firstStr)) {
+                if (!GuiBase.isNetworkplay()) //non network game don't need serialization
+                    return getGui().one(prompt, possibleStatics);
+                StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
+                return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
             }
         }
         // return first option without prompting if all options are the same
@@ -2184,9 +2190,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 for (final DeckSection s : new TreeSet<>(removedUnplayableCards.keySet())) {
                     if (DeckSection.Sideboard.equals(s))
                         continue;
-                    for (PaperCard c : removedUnplayableCards.get(s)) {
-                        labels.add(c);
-                    }
+                    labels.addAll(removedUnplayableCards.get(s));
                 }
                 if (!labels.isEmpty())
                     getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
@@ -2600,7 +2604,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Card card = gameCacheCounters.get(cv);
 
             final ImmutableList<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
-                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, input -> CounterType.get(input)));
+                    : ImmutableList.copyOf(Collections2.transform(CounterEnumType.values, CounterType::get));
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
             if (counter == null) {

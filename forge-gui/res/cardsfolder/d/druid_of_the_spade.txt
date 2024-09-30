@@ -1,0 +1,7 @@
+Name:Druid of the Spade
+ManaCost:2 G
+Types:Creature Rabbit Druid
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddKeyword$ Trample | IsPresent$ Permanent.token+YouCtrl | Description$ As long as you control a token, CARDNAME gets +2/+0 and has trample.
+DeckHints:Ability$Token
+Oracle:As long as you control a token, Druid of the Spade gets +2/+0 and has trample.

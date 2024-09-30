@@ -58,7 +58,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
             return false;
         }
 
-        if (runParams.containsKey(AbilityKey.ETB) && (Boolean)runParams.get(AbilityKey.ETB) && !canReplaceETB(runParams)) {
+        if (runParams.containsKey(AbilityKey.Destination) && !canReplaceETB(runParams)) {
             return false;
         }
 
@@ -96,10 +96,26 @@ public class ReplaceAddCounter extends ReplacementEffect {
                 if (0 >= ObjectUtils.defaultIfNull(e.getValue().get(ct), 0)) {
                     continue;
                 }
+                return true;
             }
-            return true;
+            for (int i : e.getValue().values()) {
+                if (i > 0) {
+                    return true;
+                }
+            }
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
+        if (super.modeCheck(event, runParams)) {
+            return true;
+        }
+        if (event.equals(ReplacementType.Moved) && runParams.containsKey(AbilityKey.CounterMap)) {
+            return true;
+        }
         return false;
     }
 }

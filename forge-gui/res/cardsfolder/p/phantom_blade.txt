@@ -1,0 +1,9 @@
+Name:Phantom Blade
+ManaCost:4 B
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to up to one target creature you control. Destroy up to one other target creature.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature you control | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TargetUnique$ True | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+1 and has menace. (It can't be blocked except by two or more creatures.)
+K:Equip:2
+Oracle:When Phantom Blade enters, attach it to up to one target creature you control. Destroy up to one other target creature.\nEquipped creature gets +1/+1 and has menace. (It can't be blocked except by two or more creatures.)\nEquip {2}

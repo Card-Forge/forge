@@ -54,7 +54,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.64-SNAPSHOT";
+    public static final String CURRENT_VERSION = "1.6.65-SNAPSHOT";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -63,7 +63,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
-    public static boolean restrictAdvMenus = false;
+    public static boolean advFreezePlayerControls = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;

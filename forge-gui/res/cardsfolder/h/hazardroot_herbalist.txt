@@ -1,0 +1,10 @@
+Name:Hazardroot Herbalist
+ManaCost:2 G
+Types:Creature Rabbit Druid
+PT:1/4
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target creature you control gets +1/+0 until end of turn. If that creature is a token, it also gains deathtouch until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Permanent.token | KW$ Deathtouch
+SVar:PlayMain1:TRUE
+DeckHints:Ability$Token
+Oracle:Whenever you attack, target creature you control gets +1/+0 until end of turn. If that creature is a token, it also gains deathtouch until end of turn.

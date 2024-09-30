@@ -1,0 +1,11 @@
+Name:Kastral, the Windcrested
+ManaCost:3 W U
+Types:Legendary Creature Bird Scout
+PT:4/5
+K:Flying
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Bird+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Whenever one or more Birds you control deal combat damage to a player, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBChangeZone,DBPutCounterAll,DBDraw
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Creature.Bird+YouOwn | WithCountersType$ FINALITY | Optional$ You | SpellDescription$ You may put a Bird creature card from your hand or graveyard onto the battlefield with a finality counter on it.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Bird.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each Bird you control.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Flying\nWhenever one or more Birds you control deal combat damage to a player, choose one —\n• You may put a Bird creature card from your hand or graveyard onto the battlefield with a finality counter on it.\n• Put a +1/+1 counter on each Bird you control.\n• Draw a card.

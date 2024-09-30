@@ -17,8 +17,8 @@ Colors:blue
 Types:Creature Spirit
 PT:3/4
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, shuffle up to three target cards from your graveyard into your library.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to three target cards from your graveyard | TargetMin$ 0 | TargetMax$ 3 | Shuffle$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, you may shuffle up to three target cards from your graveyard into your library.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | ValidTgts$ Card.YouOwn | TgtPrompt$ Select up to three target cards from your graveyard | TargetMin$ 0 | TargetMax$ 3 | Shuffle$ True | ShuffleNonMandatory$ True
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
-Oracle:Flying\nWhen Ghostly Castigator enters, shuffle up to three target cards from your graveyard into your library.\nIf Ghostly Castigator would be put into a graveyard from anywhere, exile it instead.
+Oracle:Flying\nWhen Ghostly Castigator enters, you may shuffle up to three target cards from your graveyard into your library.\nIf Ghostly Castigator would be put into a graveyard from anywhere, exile it instead.

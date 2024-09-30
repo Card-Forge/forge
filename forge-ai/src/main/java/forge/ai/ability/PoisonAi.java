@@ -7,6 +7,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.card.CounterType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
@@ -85,7 +86,7 @@ public class PoisonAi extends SpellAbilityAi {
         if (!tgts.isEmpty()) {
             // try to select a opponent that can lose through poison counters
             PlayerCollection betterTgts = tgts.filter(input -> {
-                if (input.cantLose()) {
+                if (input.cantLoseCheck(GameLossReason.Poisoned)) {
                     return false;
                 } else if (!input.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     return false;
@@ -106,7 +107,7 @@ public class PoisonAi extends SpellAbilityAi {
         if (tgts.isEmpty()) {
             if (mandatory) {
                 // AI is uneffected
-                if (ai.canBeTargetedBy(sa) && ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
+                if (ai.canBeTargetedBy(sa) && !ai.canReceiveCounters(CounterType.get(CounterEnumType.POISON))) {
                     sa.getTargets().add(ai);
                     return true;
                 }
@@ -115,7 +116,7 @@ public class PoisonAi extends SpellAbilityAi {
                 if (!allies.isEmpty()) {
                     // some ally would be unaffected
                     PlayerCollection betterAllies = allies.filter(input -> {
-                        if (input.cantLose()) {
+                        if (input.cantLoseCheck(GameLossReason.Poisoned)) {
                             return true;
                         }
                         return !input.canReceiveCounters(CounterType.get(CounterEnumType.POISON));

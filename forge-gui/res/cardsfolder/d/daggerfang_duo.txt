@@ -1,0 +1,9 @@
+Name:Daggerfang Duo
+ManaCost:2 B
+Types:Creature Rat Squirrel
+PT:3/2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters, you may mill two cards. (You may put the top two cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | Optional$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:Deathtouch\nWhen Daggerfang Duo enters, you may mill two cards. (You may put the top two cards of your library into your graveyard.)

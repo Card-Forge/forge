@@ -1,0 +1,10 @@
+Name:Carrot Cake
+ManaCost:1 W
+Types:Artifact Food
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters and when you sacrifice it, create a 1/1 white Rabbit creature token and scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ When CARDNAME enters and when you sacrifice it, create a 1/1 white Rabbit creature token and scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_rabbit | TokenOwner$ You | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 1
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME> | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+DeckHas:Ability$LifeGain|Food|Token
+Oracle:When Carrot Cake enters and when you sacrifice it, create a 1/1 white Rabbit creature token and scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{2}, {T}, Sacrifice Carrot Cake: You gain 3 life.

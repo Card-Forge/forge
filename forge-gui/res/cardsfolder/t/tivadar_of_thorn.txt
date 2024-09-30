@@ -4,6 +4,6 @@ Types:Legendary Creature Human Knight
 PT:2/2
 K:First Strike
 K:Protection from red
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy target Goblin.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target Goblin.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Goblin | TgtPrompt$ Select target Goblin
-Oracle:First strike, protection from red\nWhen Tivadar of Thorn enters the battlefield, destroy target Goblin.
+Oracle:First strike, protection from red\nWhen Tivadar of Thorn enters, destroy target Goblin.

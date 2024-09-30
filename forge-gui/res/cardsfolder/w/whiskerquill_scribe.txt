@@ -1,0 +1,7 @@
+Name:Whiskerquill Scribe
+ManaCost:1 R
+Types:Creature Mouse Citizen
+PT:2/2
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigDraw | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+Oracle:Valiant — Whenever Whiskerquill Scribe becomes the target of a spell or ability you control for the first time each turn, you may discard a card. If you do, draw a card.

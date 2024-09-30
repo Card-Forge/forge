@@ -4,7 +4,7 @@ Types:Creature Faerie Wizard
 PT:1/1
 K:Flash
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell with mana value X or less, where X is the number of Faeries you control.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters, counter target spell with mana value X or less, where X is the number of Faeries you control.
 SVar:TrigCounter:DB$ Counter | TargetType$ Spell | ValidTgts$ Card.cmcLEX | TgtPrompt$ Select target spell with mana value less than or equal to the number of Faeries you control
 SVar:X:Count$Valid Faerie.YouCtrl
-Oracle:Flash\nFlying\nWhen Spellstutter Sprite enters the battlefield, counter target spell with mana value X or less, where X is the number of Faeries you control.
+Oracle:Flash\nFlying\nWhen Spellstutter Sprite enters, counter target spell with mana value X or less, where X is the number of Faeries you control.

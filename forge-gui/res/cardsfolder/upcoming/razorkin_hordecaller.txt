@@ -1,0 +1,9 @@
+Name:Razorkin Hordecaller
+ManaCost:4 R
+Types:Creature Human Clown Berserker
+PT:4/4
+K:Haste
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, create a 1/1 red Gremlin creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_gremlin | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Haste\nWhenever you attack, create a 1/1 red Gremlin creature token.

@@ -3,9 +3,9 @@ ManaCost:2 B B R R
 Types:Legendary Creature Demon Dragon
 PT:6/6
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-Oracle:Flying\nWhen Malfegor enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
+Oracle:Flying\nWhen Malfegor enters, discard your hand. Each opponent sacrifices a creature for each card discarded this way.

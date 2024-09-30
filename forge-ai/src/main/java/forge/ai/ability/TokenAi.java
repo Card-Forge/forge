@@ -81,7 +81,7 @@ public class TokenAi extends SpellAbilityAi {
 
         Card actualToken = spawnToken(ai, sa);
 
-        if (actualToken == null || actualToken.getNetToughness() < 1) {
+        if (actualToken == null || (actualToken.isCreature() && actualToken.getNetToughness() < 1)) {
             final AbilitySub sub = sa.getSubAbility();
             // useful
             // no token created

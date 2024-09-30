@@ -6,4 +6,5 @@ SVar:DBChooseSac:DB$ ChooseCard | Choices$ Card.IsRemembered | Defined$ Targeted
 SVar:DBSac:DB$ SacrificeAll | Defined$ ChosenCard | SubAbility$ DBBounce | StackDescription$ None
 SVar:DBBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
 Oracle:Choose two target creatures controlled by the same player. Their controller chooses and sacrifices one of them. Return the other to its owner's hand.

@@ -1,0 +1,8 @@
+Name:Bushy Bodyguard
+ManaCost:1 G
+Types:Creature Squirrel Warrior
+PT:2/1
+K:Offspring:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerDescription$ When this creature enters, you may forage. If you do, put two +1/+1 counters on it. (To forage, exile three cards from your graveyard or sacrifice a Food.)
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Forage | CounterType$ P1P1 | CounterNum$ 2
+Oracle:Offspring {2} (You may pay an additional {2} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhen this creature enters, you may forage. If you do, put two +1/+1 counters on it. (To forage, exile three cards from your graveyard or sacrifice a Food.)

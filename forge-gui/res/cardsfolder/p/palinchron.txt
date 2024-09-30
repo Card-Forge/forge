@@ -3,8 +3,8 @@ ManaCost:5 U U
 Types:Creature Illusion
 PT:4/5
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap up to seven lands.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, untap up to seven lands.
 SVar:TrigUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 7
 A:AB$ ChangeZone | Cost$ 2 U U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:FreeSpellAI:True
-Oracle:Flying\nWhen Palinchron enters the battlefield, untap up to seven lands.\n{2}{U}{U}: Return Palinchron to its owner's hand.
+Oracle:Flying\nWhen Palinchron enters, untap up to seven lands.\n{2}{U}{U}: Return Palinchron to its owner's hand.

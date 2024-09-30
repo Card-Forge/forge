@@ -1,0 +1,6 @@
+Name:Pearl of Wisdom
+ManaCost:2 U
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Otter.YouCtrl | Description$ This spell costs {1} less to cast if you control an Otter.
+A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:This spell costs {1} less to cast if you control an Otter.\nDraw two cards.

@@ -1,0 +1,9 @@
+Name:Merciless Harlequin
+ManaCost:2 B
+Types:Creature Human Assassin
+PT:2/1
+K:Freerunning:1 B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+Oracle:Freerunning {1}{B} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nWhen Merciless Harlequin enters, you draw a card and you lose 1 life.

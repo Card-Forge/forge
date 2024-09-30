@@ -2,7 +2,7 @@ Name:Shimmer
 ManaCost:2 U U
 Types:Enchantment
 K:ETBReplacement:Other:ChooseLT
-SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Land | SpellDescription$ As CARDNAME enters the battlefield, choose a land type.
+SVar:ChooseLT:DB$ ChooseType | Defined$ You | Type$ Land | SpellDescription$ As CARDNAME enters, choose a land type.
 S:Mode$ Continuous | Affected$ Land.ChosenType | AddKeyword$ Phasing | Description$ Each land of the chosen type has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)
 AI:RemoveDeck:All
-Oracle:As Shimmer enters the battlefield, choose a land type.\nEach land of the chosen type has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)
+Oracle:As Shimmer enters, choose a land type.\nEach land of the chosen type has phasing. (It phases in or out before its controller untaps during each of their untap steps. While it's phased out, it's treated as though it doesn't exist.)

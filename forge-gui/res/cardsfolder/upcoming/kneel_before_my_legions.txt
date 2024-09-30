@@ -1,0 +1,8 @@
+Name:Kneel Before My Legions
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPumpAll | CharmNum$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_scarecrow_vigilance | TokenOwner$ You | SpellDescription$ Create a 4/4 colorless Scarecrow artifact creature token with vigilance.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | KW$ Vigilance & Trample | SpellDescription$ Creatures you control get +3/+3 and gain vigilance and trample until end of turn.
+Oracle:When you set this scheme in motion, choose one —\n• Create a 4/4 colorless Scarecrow artifact creature token with vigilance.\n• Creatures you control get +3/+3 and gain vigilance and trample until end of turn.

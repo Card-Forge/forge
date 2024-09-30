@@ -1,7 +1,0 @@
-Name:Might of the Meek
-ManaCost:R
-Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Trample | SubAbility$ DBPump | SpellDescription$ Target creature gains trample until end of turn. It also gets +1/+0 until end of turn if you control a Mouse. Draw a card.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +1 | ConditionPresent$ Mouse.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Mouse. | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-Oracle:Target creature gains trample until end of turn. It also gets +1/+0 until end of turn if you control a Mouse.\nDraw a card.

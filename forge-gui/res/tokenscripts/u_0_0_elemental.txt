@@ -1,0 +1,6 @@
+Name:Elemental Token
+ManaCost:no cost
+Types:Creature Elemental
+Colors:blue
+PT:0/0
+Oracle:

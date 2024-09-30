@@ -135,7 +135,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Trigger", trigParse);
-            Sentry.addBreadcrumb(bread, host);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
@@ -163,7 +163,7 @@ public class TriggerHandler {
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", host.getName());
             bread.setData("Params", mapParams.toString());
-            Sentry.addBreadcrumb(bread, host);
+            Sentry.addBreadcrumb(bread);
 
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);

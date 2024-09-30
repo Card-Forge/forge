@@ -1,7 +1,8 @@
 Name:Memorial to War
 ManaCost:no cost
 Types:Land
-K:CARDNAME enters the battlefield tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Destroy | Cost$ 4 R T Sac<1/CARDNAME> | ValidTgts$ Land | TgtPrompt$ Select target land | SpellDescription$ Destroy target land.
-Oracle:Memorial to War enters the battlefield tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice Memorial to War: Destroy target land.
+Oracle:Memorial to War enters tapped.\n{T}: Add {R}.\n{4}{R}, {T}, Sacrifice Memorial to War: Destroy target land.

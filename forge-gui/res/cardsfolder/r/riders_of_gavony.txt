@@ -4,8 +4,8 @@ Types:Creature Human Knight
 PT:3/3
 K:Vigilance
 K:ETBReplacement:Other:ChooseCT
-SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentOppControls
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters, choose a creature type. | AILogic$ MostProminentOppControls
 S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddKeyword$ Protection:Creature.ChosenType:ChosenType | Description$ Human creatures you control have protection from creatures of the chosen type.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Human
-Oracle:Vigilance\nAs Riders of Gavony enters the battlefield, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type.
+Oracle:Vigilance\nAs Riders of Gavony enters, choose a creature type.\nHuman creatures you control have protection from creatures of the chosen type.

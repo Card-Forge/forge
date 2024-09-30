@@ -8,8 +8,8 @@ SVar:TrigSurveil:DB$ Surveil | Amount$ X
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ Y | SVarCompare$ GE3 | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if three or more cards were put into your graveyard from anywhere other than the battlefield this turn, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
-SVar:Y:Count$ThisTurnEntered_Graveyard_Card.YouOwn/Minus.CountHand
-SVar:CountHand:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.YouOwn
+SVar:Y:Count$ThisTurnEntered_Graveyard_Card.YouOwn/Minus.Z
+SVar:Z:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.YouOwn
 DeckHints:Ability$Mill
 DeckHas:Ability$Surveil|Graveyard
 Oracle:Flying\nWhenever you attack, surveil X, where X is the number of opponents being attacked.\nAt the beginning of each end step, if three or more cards were put into your graveyard from anywhere other than the battlefield this turn, draw a card.

@@ -1,0 +1,13 @@
+Name:Honored Dreyleader
+ManaCost:2 G
+Types:Creature Squirrel Warrior
+PT:1/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter1 | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on it for each other Squirrel and/or Food you control.
+SVar:TrigPutCounter1:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Squirrel.Other+YouCtrl,Food.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter2 | TriggerDescription$ Whenever another Squirrel or Food you control enters, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter2:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$Valid Squirrel.Other+YouCtrl,Food.Other+YouCtrl
+DeckHas:Ability$Counters
+DeckHints:Type$Squirrel|Food
+Oracle:Trample\nWhen Honored Dreyleader enters, put a +1/+1 counter on it for each other Squirrel and/or Food you control.\nWhenever another Squirrel or Food you control enters, put a +1/+1 counter on Honored Dreyleader.

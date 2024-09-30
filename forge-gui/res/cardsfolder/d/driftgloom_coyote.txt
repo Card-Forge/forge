@@ -1,0 +1,9 @@
+Name:Driftgloom Coyote
+ManaCost:3 W W
+Types:Creature Elemental Coyote
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls until CARDNAME leaves the battlefield. If that creature had power 2 or less, put a +1/+1 counter on CARDNAME.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Targeted | ConditionPresent$ Creature.powerLE2
+SVar:PlayMain1:TRUE
+Oracle:When Driftgloom Coyote enters, exile target creature an opponent controls until Driftgloom Coyote leaves the battlefield. If that creature had power 2 or less, put a +1/+1 counter on Driftgloom Coyote.

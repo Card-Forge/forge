@@ -1,0 +1,6 @@
+Name:Warren Elder
+ManaCost:1 W
+Types:Creature Rabbit Cleric
+PT:2/2
+A:AB$ PumpAll | Cost$ 3 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:{3}{W}: Creatures you control get +1/+1 until end of turn.

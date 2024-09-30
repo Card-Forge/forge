@@ -1,0 +1,9 @@
+Name:Moonrise Cleric
+ManaCost:1 WB WB
+Types:Creature Bat Cleric
+PT:2/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Whenever CARDNAME attacks, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever Moonrise Cleric attacks, you gain 1 life.

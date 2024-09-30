@@ -1,9 +1,0 @@
-Name:For the Common Good
-ManaCost:X X G
-Types:Sorcery
-A:SP$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl | TgtPrompt$ Select target token you control | NumCopies$ X | AddTriggers$ TrigFight | SubAbility$ DBPumpAll | SpellDescription$ Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control.
-SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.token+YouCtrl | KW$ Indestructible | Duration$ UntilYourNextTurn | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y
-SVar:X:Count$xPaid
-SVar:Y:Count$Valid Permanent.token+YouCtrl
-Oracle:Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control.

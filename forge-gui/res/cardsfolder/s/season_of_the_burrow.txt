@@ -1,0 +1,11 @@
+Name:Season of the Burrow
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBExile,DBReanimate | CharmNum$ 5 | MinCharmNum$ 0 | CanRepeatModes$ True | Pawprint$ 5
+SVar:DBToken:DB$ Token | Pawprint$ 1 | TokenScript$ w_1_1_rabbit | SpellDescription$ Create a 1/1 white Rabbit creature token.
+SVar:DBExile:DB$ ChangeZone | Pawprint$ 2 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | RememberLKI$ True | SubAbility$ DBDraw | SpellDescription$ Exile target nonland permanent. Its controller draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ RememberedController | NumCards$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBReanimate:DB$ ChangeZone | Pawprint$ 3 | ValidTgts$ Permanent.YouCtrl+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield | WithCountersType$ Indestructible | SpellDescription$ Return target permanent card with mana value 3 or less from your graveyard to the battlefield with an indestructible counter on it.
+DeckHas:Ability$Graveyard|Counters|Token
+Oracle:Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Create a 1/1 white Rabbit creature token.\n{P}{P} — Exile target nonland permanent. Its controller draws a card.\n{P}{P}{P} — Return target permanent card with mana value 3 or less from your graveyard to the battlefield with an indestructible counter on it.

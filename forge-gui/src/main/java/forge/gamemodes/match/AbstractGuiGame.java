@@ -461,17 +461,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void awaitNextInput() {
-        if (awaitNextInputTimer == null) {
-            String name = "?";
-            if (this.currentPlayer != null)
-                name = this.currentPlayer.getLobbyPlayerName();
-            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
-        }
+        checkAwaitNextInputTimer();
         //delay updating prompt to await next input briefly so buttons don't flicker disabled then enabled
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
                 FThreads.invokeInEdtLater(() -> {
+                    checkAwaitNextInputTimer();
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
@@ -482,6 +478,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
         };
         awaitNextInputTimer.schedule(awaitNextInputTask, 250);
+    }
+    private void checkAwaitNextInputTimer() {
+        if (awaitNextInputTimer == null) {
+            String name = "?";
+            if (this.currentPlayer != null)
+                name = this.currentPlayer.getLobbyPlayerName();
+            awaitNextInputTimer = new Timer("awaitNextInputTimer Game:" + this.gameView.getId() + " Player:" + name);
+        }
     }
 
     protected final void updatePromptForAwait(final PlayerView playerView) {

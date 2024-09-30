@@ -1,0 +1,10 @@
+Name:Curious Forager
+ManaCost:2 G
+Types:Creature Squirrel Druid
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever CARDNAME enters, you may forage. When you do, return target permanent card from your graveyard to your hand. (To forage, exile three cards from your graveyard or sacrifice a Food.)
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Forage | Execute$ TrigReturn | SpellDescription$ When you do, return target permanent card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent to return from your graveyard
+DeckHas:Ability$Graveyard
+DeckHints:Type$Food
+Oracle:When Curious Forager enters, you may forage. When you do, return target permanent card from your graveyard to your hand. (To forage, exile three cards from your graveyard or sacrifice a Food.)

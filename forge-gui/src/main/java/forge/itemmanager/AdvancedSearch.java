@@ -4,7 +4,6 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -83,11 +82,12 @@ public class AdvancedSearch {
             protected Set<String> getItemValues(PaperCard input) {
                 Set<String> names = new HashSet<>();
                 names.add(input.getRules().getOracleText());
-                names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                names.add(CardTranslation.getTranslatedOracle(input));
                 CardSplitType cardSplitType = input.getRules().getSplitType();
                 if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
                         names.add(input.getRules().getOtherPart().getOracleText());
+                        //Doesn't support a combination of functional variant + split card, but none of those exist yet.
                         names.add(CardTranslation.getTranslatedOracle(input.getRules().getOtherPart().getName()));
                     }
                 }
@@ -297,7 +297,7 @@ public class AdvancedSearch {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
                 if (cards.size() <= 1) { return true; }
 
-                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                cards.sort(FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
                 return cards.get(0) == input;
             }
         }),
@@ -528,7 +528,7 @@ public class AdvancedSearch {
                 List<PaperCard> cards = FModel.getMagicDb().getCommonCards().getAllCards(input.getName());
                 if (cards.size() <= 1) { return true; }
 
-                Collections.sort(cards, FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
+                cards.sort(FModel.getMagicDb().getEditions().CARD_EDITION_COMPARATOR);
                 return cards.get(0) == input;
             }
         }),

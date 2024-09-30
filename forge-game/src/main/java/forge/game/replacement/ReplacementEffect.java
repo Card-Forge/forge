@@ -23,6 +23,7 @@ import java.util.Objects;
 
 import com.google.common.collect.*;
 
+import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.game.Game;
@@ -59,6 +60,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     private boolean hasRun = false;
 
     private List<ReplacementEffect> otherChoices = null;
+    private ReplacementEffectView view = null;
 
     /**
      * Gets the id.
@@ -108,6 +110,15 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
     }
 
+    public ReplacementEffectView getView() {
+        if (view == null)
+            view = new ReplacementEffectView(this);
+        else {
+            view.updateHostCard(this);
+            view.updateDescription(this);
+        }
+        return view;
+    }
     /**
      * Sets the checks for run.
      *
@@ -221,15 +232,11 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
     public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
             String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
-            String currentName;
-            if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
-                currentName = cardState.getName();
-            } else {
-                currentName = getHostCard().getName();
-            }
-            desc = CardTranslation.translateSingleDescriptionText(desc, currentName);
-            desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            ITranslatable nameSource = getHostName(this);
+            desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
+            String translatedName = CardTranslation.getTranslatedName(nameSource);
+            desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
+            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
             if (desc.contains("EFFECTSOURCE")) {
                 desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
             }
@@ -329,13 +336,17 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                 return false;
             }
             // and it wasn't already on the field, skip
-            if (getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+            if (getActiveZone() != null && getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 CardCollectionView lastBattlefield = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
-                if (!lastBattlefield.contains(getHostCard())) {
+                if (lastBattlefield != null && !lastBattlefield.contains(getHostCard())) {
                     return false;
                 }
             }
         }
         return true;
+    }
+
+    public boolean modeCheck(ReplacementType event, Map<AbilityKey, Object> runParams) {
+        return event.equals(getMode());
     }
 }

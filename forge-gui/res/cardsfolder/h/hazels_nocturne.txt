@@ -1,0 +1,8 @@
+Name:Hazel's Nocturne
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SubAbility$ DBDrain | SpellDescription$ Return up to two target creature cards from your graveyard to your hand. Each opponent loses 2 life and you gain 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Return up to two target creature cards from your graveyard to your hand. Each opponent loses 2 life and you gain 2 life.

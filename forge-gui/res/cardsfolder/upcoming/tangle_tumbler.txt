@@ -1,8 +1,0 @@
-Name:Tangle Tumbler
-ManaCost:3
-Types:Artifact Vehicle
-PT:6/6
-K:Vigilance
-A:AB$ PutCounter | Cost$ 3 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
-A:AB$ Animate | Cost$ tapXType<2/Permanent.token/token> | Defined$ Self | Types$ Artifact,Creature | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.
-Oracle:Vigilance\n{3}, {T}: Put a +1/+1 counter on target creature.\nTap two untapped tokens you control: Tangle Tumbler becomes an artifact creature until end of turn.

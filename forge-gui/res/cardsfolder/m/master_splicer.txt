@@ -2,8 +2,8 @@ Name:Master Splicer
 ManaCost:3 W
 Types:Creature Phyrexian Human Artificer
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 3/3 colorless Phyrexian Golem artifact creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_3_a_phyrexian_golem | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Creature.Golem+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Golems you control get +1/+1.
 DeckHas:Ability$Token
-Oracle:When Master Splicer enters the battlefield, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolems you control get +1/+1.
+Oracle:When Master Splicer enters, create a 3/3 colorless Phyrexian Golem artifact creature token.\nGolems you control get +1/+1.

@@ -1,0 +1,9 @@
+Name:Plumecreed Mentor
+ManaCost:1 W U
+Types:Creature Bird Scout
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+YouCtrl+withFlying | Origin$ Any | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another creature you control with flying enters, put a +1/+1 counter on target creature you control without flying.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.withoutFlying+YouCtrl | TgtPrompt$ Select target creature you control without flying. | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+Oracle:Flying\nWhenever Plumecreed Mentor or another creature you control with flying enters, put a +1/+1 counter on target creature you control without flying.

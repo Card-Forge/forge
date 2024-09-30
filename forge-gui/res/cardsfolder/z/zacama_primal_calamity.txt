@@ -5,10 +5,10 @@ PT:9/9
 K:Vigilance
 K:Reach
 K:Trample
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, untap all lands you control.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters, if you cast it, untap all lands you control.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Land.YouCtrl
-A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ Zacama deals 3 damage to target creature.
+A:AB$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ NICKNAME deals 3 damage to target creature.
 A:AB$ Destroy | Cost$ 2 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 A:AB$ GainLife | Cost$ 2 W | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
 DeckHints:Type$Dinosaur
-Oracle:Vigilance, reach, trample\nWhen Zacama, Primal Calamity enters the battlefield, if you cast it, untap all lands you control.\n{2}{R}: Zacama deals 3 damage to target creature.\n{2}{G}: Destroy target artifact or enchantment.\n{2}{W}: You gain 3 life.
+Oracle:Vigilance, reach, trample\nWhen Zacama, Primal Calamity enters, if you cast it, untap all lands you control.\n{2}{R}: Zacama deals 3 damage to target creature.\n{2}{G}: Destroy target artifact or enchantment.\n{2}{W}: You gain 3 life.

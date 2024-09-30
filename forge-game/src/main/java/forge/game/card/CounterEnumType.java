@@ -327,6 +327,8 @@ public enum CounterEnumType {
 
     POLYP("POLYP", 236, 185, 198),
 
+    POSSESSION("POSSN", 60, 65, 85),
+
     PREY("PREY", 240, 0, 0),
 
     PUPA("PUPA", 0, 223, 203),
@@ -344,6 +346,8 @@ public enum CounterEnumType {
     P2P2("+2/+2", "+2/+2", 96, 226, 23),
 
     QUEST("QUEST", 251, 189, 0),
+
+    RELEASE("RELEASE", 200, 210, 50),
 
     REPRIEVE("REPR", 240, 120, 50),
 

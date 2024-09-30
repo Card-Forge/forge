@@ -1,0 +1,8 @@
+Name:Soul of Mirrodin
+ManaCost:6
+Types:Artifact Creature Spirit
+PT:6/6
+K:Trample
+A:AB$ ChangeZone | Cost$ 5 | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLE5 | Tapped$ True | ChangeNum$ 1 | Shuffle$ True | SpellDescription$ Search your library for an artifact card with mana value 5 or less, put it onto the battlefield tapped, then shuffle.
+A:AB$ ChangeZone | Cost$ 5 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact.cmcLE5 | Tapped$ True | ChangeNum$ 1 | Shuffle$ True | SpellDescription$ Search your library for an artifact card with mana value 5 or less, put it onto the battlefield tapped, then shuffle.
+Oracle:Trample\n{5}: Search your library for an artifact card with mana value 5 or less, put it onto the battlefield tapped, then shuffle.\n{5}, Exile Soul of Mirrodin from your graveyard: Search your library for an artifact card with mana value 5 or less, put it onto the battlefield tapped, then shuffle.

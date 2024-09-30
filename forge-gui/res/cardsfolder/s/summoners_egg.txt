@@ -2,7 +2,7 @@ Name:Summoner's Egg
 ManaCost:4
 Types:Artifact Creature Egg
 PT:0/4
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters the battlefield, you may exile a card from your hand face down.
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters, you may exile a card from your hand face down.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Imprint$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigFaceUp | TriggerDescription$ When CARDNAME dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
 SVar:TrigFaceUp:DB$ SetState | Defined$ Imprinted | SubAbility$ DBChangeZone | Mode$ TurnFaceUp
@@ -10,4 +10,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destinat
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:SacMe:5
 AI:RemoveDeck:All
-Oracle:Imprint — When Summoner's Egg enters the battlefield, you may exile a card from your hand face down.\nWhen Summoner's Egg dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.
+Oracle:Imprint — When Summoner's Egg enters, you may exile a card from your hand face down.\nWhen Summoner's Egg dies, turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control.

@@ -2,7 +2,7 @@ Name:Master Thief
 ManaCost:2 U U
 Types:Creature Human Rogue
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target artifact for as long as you control CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, gain control of target artifact for as long as you control CARDNAME.
 SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target artifact | ValidTgts$ Artifact | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target artifact for as long as you control CARDNAME.
 SVar:PlayMain1:TRUE
-Oracle:When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
+Oracle:When Master Thief enters, gain control of target artifact for as long as you control Master Thief.

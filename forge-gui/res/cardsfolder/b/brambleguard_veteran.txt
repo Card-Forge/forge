@@ -1,0 +1,7 @@
+Name:Brambleguard Veteran
+ManaCost:1 G G
+Types:Creature Raccoon Warrior
+PT:3/4
+T:Mode$ ManaExpend | Amount$ 4 | Player$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you expend 4, Raccoons you control get +1/+1 and gain vigilance until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Raccoon.YouCtrl | KW$ Vigilance | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever you expend 4, Raccoons you control get +1/+1 and gain vigilance until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)

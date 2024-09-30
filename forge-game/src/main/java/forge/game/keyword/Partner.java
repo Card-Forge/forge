@@ -25,7 +25,7 @@ public class Partner extends SimpleKeyword {
         } else {
             final StringBuilder sb = new StringBuilder();
 
-            sb.append("When this creature enters the battlefield, target player may put ");
+            sb.append("When this creature enters, target player may put ");
             sb.append(with);
             sb.append(" into their hand from their library, then shuffle.");
 

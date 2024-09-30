@@ -1,0 +1,14 @@
+Name:Mjölnir, Storm Hammer
+ManaCost:4
+Types:Legendary Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When NICKNAME enters, attach it to target legendary creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.Legendary+YouCtrl | TgtPrompt$ Select target creature you control
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigTap | TriggerDescription$ Whenever equipped creature attacks, tap target creature defending player controls and put a stun counter on it. Then NICKNAME deals damage to each opponent equal to the number of tapped creatures that opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer | SubAbility$ DBCounter | TgtPrompt$ Select target creature defending player controls
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1 | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBDmg | DamageMap$ True
+SVar:DBDmg:DB$ DealDamage | Defined$ Player.IsRemembered | NumDmg$ X
+SVar:X:Count$Valid Creature.RememberedPlayerCtrl+tapped
+K:Equip:4
+DeckHas:Ability$Counters
+Oracle:When Mjölnir enters, attach it to target legendary creature you control.\nWhenever equipped creature attacks, tap target creature defending player controls and put a stun counter on it. Then Mjölnir deals damage to each opponent equal to the number of tapped creatures that opponent controls.\nEquip {4}

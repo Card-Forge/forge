@@ -1,0 +1,13 @@
+Name:Eddymurk Crab
+ManaCost:5 U U
+Types:Creature Elemental Crab
+PT:5/5
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each instant and sorcery card in your graveyard.
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPlayerTurn$ False | SpellDescription$ CARDNAME enters tapped if it's not your turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, tap up to two target creatures.
+SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHints:Ability$Graveyard
+Oracle:Flash\nThis spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nEddymurk Crab enters tapped if it's not your turn.\nWhen Eddymurk Crab enters, tap up to two target creatures.

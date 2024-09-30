@@ -2,7 +2,7 @@ Name:Dread Cacodemon
 ManaCost:7 B B B
 Types:Creature Demon
 PT:8/8
-T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastFromYourHandByYou+Self | Destination$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.OppCtrl | SubAbility$ DBTapAll
 SVar:DBTapAll:DB$ TapAll | ValidCards$ Creature.YouCtrl+StrictlyOther
-Oracle:When Dread Cacodemon enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.
+Oracle:When Dread Cacodemon enters, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control.

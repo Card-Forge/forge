@@ -20,6 +20,7 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> {
                     type = "artifact, legendary, and/or Saga permanent";
                 }
                 break;
+            case BANDSWITH:
             case HEXPROOF:
             case LANDWALK:
                 type = details.split(":")[1];

@@ -1,0 +1,11 @@
+Name:Clement, the Worrywort
+ManaCost:1 G U
+Types:Legendary Creature Frog Druid
+PT:3/3
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Creature.Other+YouCtrl | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME or another creature you control enters, return up to one target creature you control with lesser mana value to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl+cmcLTX | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control with lesser mana value | Origin$ Battlefield | Destination$ Hand
+S:Mode$ Continuous | Affected$ Frog.YouCtrl | AddAbility$ AnyMana | Description$ Frogs you control have "{T}: Add {G} or {U}. Spend this mana only to cast a creature spell."
+SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Combo G U | RestrictValid$ Spell.Creature | SpellDescription$ Add {G} or {U}. Spend this mana only to cast a creature spell.
+SVar:X:TriggeredCard$CardManaCost
+Oracle:Vigilance\nWhenever Clement, the Worrywort or another creature you control enters, return up to one target creature you control with lesser mana value to its owner's hand.\nFrogs you control have "{T}: Add {G} or {U}. Spend this mana only to cast a creature spell."

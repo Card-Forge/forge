@@ -44,7 +44,7 @@ class AsyncSoundRegistry {
     }
 
     public synchronized static int getNumIterations(String soundName) {
-        return soundsPlayed.containsKey(soundName) ? soundsPlayed.get(soundName) : 0;
+        return soundsPlayed.getOrDefault(soundName, 0);
     }
 }
 

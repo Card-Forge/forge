@@ -1,0 +1,10 @@
+Name:Hidden Footblade
+ManaCost:R
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters, attach it to target creature you control. That creature gains indestructible until end of turn.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ First Strike
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Haste | Description$ Equipped creature gets +1/+0 and has haste.
+K:Equip:2
+Oracle:Flash\nWhen Hidden Footblade enters, attach it to target creature you control. That creature gains first strike until end of turn.\nEquipped creature gets +1/+0 and has haste.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

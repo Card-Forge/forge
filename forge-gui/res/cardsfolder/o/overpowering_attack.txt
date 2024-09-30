@@ -1,0 +1,7 @@
+Name:Overpowering Attack
+ManaCost:3 R R
+Types:Sorcery
+K:Freerunning:2 R
+A:SP$ UntapAll | ValidCards$ Creature.YouCtrl+attackedThisTurn | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures you control that attacked this turn. If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase.
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2 | ConditionPlayerTurn$ True
+Oracle:Freerunning {2}{R} (You may cast this spell for its freerunning cost if you dealt combat damage to a player this turn with an Assassin or commander.)\nUntap all creatures you control that attacked this turn. If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase.

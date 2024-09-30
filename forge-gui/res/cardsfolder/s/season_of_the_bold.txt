@@ -1,0 +1,14 @@
+Name:Season of the Bold
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBExile,DBDamageEffect | CharmNum$ 5 | MinCharmNum$ 0 | CanRepeatModes$ True | Pawprint$ 5
+SVar:DBToken:DB$ Token | Pawprint$ 1 | TokenScript$ c_a_treasure_sac | TokenTapped$ True | SpellDescription$ Create a tapped Treasure token.
+SVar:DBExile:DB$ Dig | Pawprint$ 2 | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play them.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | Duration$ UntilTheEndOfYourNextTurn | StaticAbilities$ Play | SubAbility$ DBCleanup | ForgetOnMoved$ Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play remembered card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBDamageEffect:DB$ Effect | Pawprint$ 3 | Duration$ UntilTheEndOfYourNextTurn | Triggers$ TrigSpellCast | SpellDescription$ Until the end of your next turn, whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.
+SVar:TrigSpellCast:Mode$ SpellCast | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a spell, CARDNAME deals 2 damage to up to one target creature.
+SVar:EffSpellCast:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | NumDmg$ 2 | DamageSource$ EffectSource
+DeckHas:Ability$Token & Type$Treasure|Artifact
+Oracle:Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Create a tapped Treasure token.\n{P}{P} — Exile the top two cards of your library. Until the end of your next turn, you may play them.\n{P}{P}{P} — Until the end of your next turn, whenever you cast a spell, Season of the Bold deals 2 damage to up to one target creature.

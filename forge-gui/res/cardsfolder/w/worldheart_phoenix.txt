@@ -3,7 +3,11 @@ ManaCost:3 R
 Types:Creature Phoenix
 PT:2/2
 K:Flying
-S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ Graveyard | Cost$ W U B R G | Description$ You may cast CARDNAME from graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.
-K:etbCounter:P1P1:2:CheckSVar$AltCostPaid:no desc
+S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ Graveyard | Cost$ W U B R G | Description$ You may cast CARDNAME from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters with two +1/+1 counters on it.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Static$ True | Execute$ DBEffect | CheckSVar$ AltCostPaid
+SVar:DBEffect:DB$ Effect | ExileOnMoved$ Stack | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.EffectSource | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ That creature enters with two additional +1/+1 counters on it.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:AltCostPaid:Count$AltCost.1.0
-Oracle:Flying\nYou may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters the battlefield with two +1/+1 counters on it.
+Oracle:Flying\nYou may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. If you do, it enters with two +1/+1 counters on it.

@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Phyrexian Cleric
 PT:1/4
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBUntap,DBTap
 SVar:DBUntap:DB$ Untap | TgtPrompt$ Choose target permanent you control | ValidTgts$ Permanent.YouCtrl | SpellDescription$ Untap target permanent you control.
 SVar:DBTap:DB$ Tap | TgtPrompt$ Choose target permanent an opponent controls | ValidTgts$ Permanent.OppCtrl | SpellDescription$ Tap target permanent an opponent controls.
-Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deceiver Exarch enters the battlefield, choose one —\n• Untap target permanent you control.\n• Tap target permanent an opponent controls.
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Deceiver Exarch enters, choose one —\n• Untap target permanent you control.\n• Tap target permanent an opponent controls.

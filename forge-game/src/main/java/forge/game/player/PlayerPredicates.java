@@ -97,5 +97,4 @@ public final class PlayerPredicates {
     }
 
     public static final Predicate<Player> NOT_LOST = p -> p.getOutcome() == null || p.getOutcome().hasWon();
-    public static final Predicate<Player> CANT_WIN = p -> p.hasKeyword("You can't win the game.");
 }

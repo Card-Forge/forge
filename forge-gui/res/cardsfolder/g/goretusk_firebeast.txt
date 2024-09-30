@@ -2,6 +2,6 @@ Name:Goretusk Firebeast
 ManaCost:5 R
 Types:Creature Elemental Boar Beast
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to target player or planeswalker.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 4 damage to target player or planeswalker.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | NumDmg$ 4
-Oracle:When Goretusk Firebeast enters the battlefield, it deals 4 damage to target player or planeswalker.
+Oracle:When Goretusk Firebeast enters, it deals 4 damage to target player or planeswalker.

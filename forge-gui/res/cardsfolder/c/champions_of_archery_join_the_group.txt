@@ -1,0 +1,19 @@
+Name:Champions of Archery
+ManaCost:3 R
+Types:Legendary Creature Human Archer
+PT:1/4
+K:Reach
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AddPower$ +X | Description$ Commanders you control get +X/+0, where X is the number of commanders you control.
+SVar:X:Count$Valid Card.IsCommander+YouCtrl
+AlternateMode:Adventure
+Oracle:Reach\nCommanders you control get +X/+0, where X is the number of commanders you control.
+
+ALTERNATE
+
+Name:Join the Group
+ManaCost:2 R
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Hand | Destination$ Command | Optional$ You | ChangeType$ Card.Creature+Legendary+YouOwn | ChangeNum$ 1 | ChangeTypeDesc$ a legendary creature card | SelectPrompt$ Select a legendary creature card in your hand | RememberChanged$ True | SubAbility$ YouAreCommander | StackDescription$ REP You_{p:You} & your hand_their hand & also your_also {p:You}'s | SpellDescription$ You may put a legendary creature card from your hand into the command zone. It's also your commander.
+SVar:YouAreCommander:DB$ AlterAttribute | Defined$ Remembered | Attributes$ Commander | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:You may put a legendary creature card from your hand into the command zone. It's also your commander.
