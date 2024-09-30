@@ -1,4 +1,4 @@
-Name:Incubator Dark Confidant Token
+Name:Incubator Dark Confidant
 ManaCost:no cost
 Types:Artifact Incubator
 A:AB$ SetState | Cost$ 2 | Mode$ Transform | SpellDescription$ Transform this artifact.
