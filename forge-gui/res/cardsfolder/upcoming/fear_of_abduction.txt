@@ -2,7 +2,7 @@ Name:Fear of Abduction
 ManaCost:4 W W
 Types:Enchantment Creature Nightmare
 PT:5/5
-A:SP$ PermanentCreature | Cost$ 4 W W Exile<1/Creature>
+A:SP$ PermanentCreature | Cost$ 4 W W Exile<1/Creature> | SpellDescription$ As an additional cost to cast this spell, exile a creature you control.
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target creature an opponent controls.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
