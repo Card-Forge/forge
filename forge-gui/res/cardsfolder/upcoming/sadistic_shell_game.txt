@@ -1,8 +1,8 @@
 Name:Sadistic Shell Game
 ManaCost:4 B
 Types:Sorcery
-A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBDestroy | InTurnOrder$ True | StackDescription$ SpellDescription | SpellDescription$ Starting with the next opponent in turn order, each player chooses a creature you don’t control. Destroy the chosen creatures.
-SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature | Reveal$ True | Defined$ Player.IsRemembered | ControlledByPlayer$ Opponent | Mandatory$ True | ChoiceTitle$ Choose a creature to destroy | RememberChosen$ True | AILogic$ OppPreferred
+A:SP$ RepeatEach | RepeatPlayers$ Player | StartingWith$ Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Starting with the next opponent in turn order, each player chooses a creature you don’t control. Destroy the chosen creatures.
+SVar:DBChooseCard:DB$ ChooseCard | Choices$ Creature.YouDontCtrl | Reveal$ True | Defined$ Player.IsRemembered | Mandatory$ True | ChoiceTitle$ Choose a creature to destroy | RememberChosen$ True | AILogic$ OppPreferred
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.Creature+IsRemembered | SubAbility$ DBCleanup | StackDescription$ Destroy the chosen creatures.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 Oracle:Starting with the next opponent in turn order, each player chooses a creature you don’t control. Destroy the chosen creatures.

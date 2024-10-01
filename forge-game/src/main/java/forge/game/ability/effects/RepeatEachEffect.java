@@ -173,10 +173,23 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
             boolean nextTurn = sa.hasParam("NextTurnForEachPlayer");
-            if (sa.hasParam("StartingWithActivator")) {
-                int aidx = repeatPlayers.indexOf(activator);
-                if (aidx != -1) {
-                    Collections.rotate(repeatPlayers, -aidx);
+            if (sa.hasParam("StartingWith")) {
+                switch (sa.getParam("StartingWith")) {
+                    case "Opponent":
+                        // NAPAP Order
+                        int aidx = repeatPlayers.indexOf(game.getNextPlayerAfter(activator));
+                        if (aidx != -1) {
+                            Collections.rotate(repeatPlayers, -aidx);
+                        }
+                        break;
+                    case "You":
+                    default:
+                        // APNAP Order
+                        aidx = repeatPlayers.indexOf(activator);
+                        if (aidx != -1) {
+                            Collections.rotate(repeatPlayers, -aidx);
+                        }
+                        break;
                 }
             }
             for (final Player p : repeatPlayers) {

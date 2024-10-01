@@ -303,10 +303,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
     }
 
-    public final PlayerCollection getOpponentsInTurnOrder() {
-        return game.getPlayersInTurnOrder(this).filter(PlayerPredicates.isOpponentOf(this));
-    }
-
     public final PlayerCollection getRegisteredOpponents() {
         return game.getRegisteredPlayers().filter(PlayerPredicates.isOpponentOf(this));
     }
