@@ -1,9 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-
-import com.google.common.base.Predicates;
-
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -17,6 +13,8 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.util.collect.FCollection;
+
+import java.util.List;
 
 public class LifeLoseAi extends SpellAbilityAi {
 
@@ -129,7 +127,7 @@ public class LifeLoseAi extends SpellAbilityAi {
         final PlayerCollection tgtPlayers = getPlayers(ai, sa);
          // TODO: check against the amount we could obtain when multiple activations are possible
         PlayerCollection filteredPlayer = tgtPlayers
-                .filter(Predicates.and(PlayerPredicates.isOpponentOf(ai), PlayerPredicates.lifeLessOrEqualTo(amount)));
+                .filter(PlayerPredicates.isOpponentOf(ai).and(PlayerPredicates.lifeLessOrEqualTo(amount)));
         // killing opponents asap
         if (!filteredPlayer.isEmpty()) {
             return true;

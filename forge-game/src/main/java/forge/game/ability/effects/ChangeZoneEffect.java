@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -954,7 +953,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 for (ZoneType z : origin) {
                     // all cards that use this currently only search 1 card, no extra logic needed
-                    if (z.isKnown() && Iterables.any(altFetchList, CardPredicates.inZone(z))) {
+                    if (z.isKnown() && altFetchList.anyMatch(CardPredicates.inZone(z))) {
                         mandatory = true;
                     }
                 }
@@ -1129,17 +1128,18 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 for (int i = 0; i < changeNum && destination != null; i++) {
                     if (sa.hasParam("DifferentNames")) {
                         for (Card c : chosenCards) {
-                            fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesNameWith(c)));
+                            fetchList = CardLists.filter(fetchList, CardPredicates.sharesNameWith(c).negate());
                         }
                     }
                     if (sa.hasParam("DifferentCMC")) {
                         for (Card c : chosenCards) {
-                            fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
+                            fetchList = CardLists.filter(fetchList, CardPredicates.sharesCMCWith(c).negate());
                         }
                     }
                     if (sa.hasParam("DifferentPower")) {
                         for (Card c : chosenCards) {
-                            fetchList = CardLists.filter(fetchList, Predicates.not(Predicates.compose(Predicates.equalTo(c.getNetPower()), Card::getNetPower)));
+                            int chosenPower = c.getNetPower();
+                            fetchList = CardLists.filter(fetchList, x -> x.getNetPower() != chosenPower);
                         }
                     }
                     if (sa.hasParam("ShareLandType")) {

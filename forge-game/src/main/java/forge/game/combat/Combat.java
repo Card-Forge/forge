@@ -17,7 +17,12 @@
  */
 package forge.game.combat;
 
-import com.google.common.collect.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.Table;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
@@ -32,6 +37,7 @@ import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -212,15 +218,15 @@ public class Combat {
     }
 
     public final FCollectionView<Player> getDefendingPlayers() {
-        return new FCollection<>(Iterables.filter(attackableEntries, Player.class));
+        return new FCollection<>(IterableUtil.filter(attackableEntries, Player.class));
     }
 
     public final CardCollection getDefendingPlaneswalkers() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Planeswalker"));
+        return CardLists.filter(IterableUtil.filter(attackableEntries, Card.class), CardPredicates.PLANESWALKERS);
     }
 
     public final CardCollection getDefendingBattles() {
-        return CardLists.filter(Iterables.filter(attackableEntries, Card.class), CardPredicates.isType("Battle"));
+        return CardLists.filter(IterableUtil.filter(attackableEntries, Card.class), CardPredicates.BATTLES);
     }
 
     public final Map<Card, GameEntity> getAttackersAndDefenders() {
@@ -602,7 +608,7 @@ public class Combat {
             }
         }
 
-        for (Card battleOrPW : Iterables.filter(attackableEntries, Card.class)) {
+        for (Card battleOrPW : IterableUtil.filter(attackableEntries, Card.class)) {
             if (battleOrPW.equals(c)) {
                 Multimap<GameEntity, AttackingBand> attackerBuffer = ArrayListMultimap.create();
                 Collection<AttackingBand> bands = attackedByBands.get(c);

@@ -1,10 +1,6 @@
 package forge.gamemodes.net.client;
 
-import java.util.List;
-import java.util.concurrent.TimeoutException;
-
 import com.google.common.collect.Lists;
-
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
@@ -16,17 +12,14 @@ import forge.gamemodes.net.event.NetEvent;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
+
+import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer {
 

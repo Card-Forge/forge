@@ -17,13 +17,14 @@
  */
 package forge.util.storage;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import forge.util.IItemReader;
+import forge.util.IterableUtil;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -66,6 +67,11 @@ public class StorageBase<T> implements IStorage<T> {
     }
 
     @Override
+    public Stream<T> stream() {
+        return map.values().stream();
+    }
+
+    @Override
     public boolean contains(String name) {
         return name != null && map.containsKey(name);
     }
@@ -77,7 +83,7 @@ public class StorageBase<T> implements IStorage<T> {
 
     @Override
     public T find(Predicate<T> condition) {
-        return Iterables.tryFind(map.values(), condition).orNull();
+        return IterableUtil.tryFind(map.values(), condition).orElse(null);
     }
 
     @Override

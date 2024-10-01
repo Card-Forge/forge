@@ -17,16 +17,8 @@
  */
 package forge.game.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.mana.*;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -34,8 +26,14 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
+import forge.game.mana.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>

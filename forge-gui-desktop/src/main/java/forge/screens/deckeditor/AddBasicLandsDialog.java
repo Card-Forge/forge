@@ -30,7 +30,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 import forge.ImageCache;
 import forge.StaticData;
@@ -55,6 +54,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.FTextField;
+import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 import forge.view.arcane.CardPanel;
@@ -68,7 +68,7 @@ public class AddBasicLandsDialog {
     private static final int LAND_PANEL_PADDING = 3;
 
     private final FComboBoxPanel<CardEdition> cbLandSet = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblLandSet") + ":", FlowLayout.CENTER,
-            Iterables.filter(StaticData.instance().getSortedEditions(), CardEdition.Predicates.hasBasicLands));
+            IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition.Predicates.hasBasicLands));
 
     private final MainPanel panel = new MainPanel();
     private final LandPanel pnlPlains = new LandPanel("Plains");

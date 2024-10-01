@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import java.util.function.Predicate;
 
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -110,10 +108,8 @@ public class QuestRewardCardChooser extends QuestRewardCard {
         } else if (type == poolType.predicateFilter) {
             List<PaperCard> cardChoices = new ArrayList<>();
 
-            for (final PaperCard card : Iterables.filter(FModel.getMagicDb().getCommonCards().getAllCards(), predicates)) {
-                cardChoices.add(card);
-            }
-            Collections.sort(cardChoices);
+            FModel.getMagicDb().getCommonCards().streamAllCards().filter(predicates)
+                    .sorted().forEach(cardChoices::add); //TODO: Once java is at 10+, can use Collectors.toUnmodifiableList
 
             return Collections.unmodifiableList(cardChoices);
         } else {

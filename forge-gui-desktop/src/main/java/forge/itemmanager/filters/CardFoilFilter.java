@@ -2,12 +2,12 @@ package forge.itemmanager.filters;
 
 import javax.swing.JPanel;
 
-import com.google.common.base.Predicate;
-
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+
+import java.util.function.Predicate;
 
 
 public class CardFoilFilter extends StatTypeFilter<PaperCard> {

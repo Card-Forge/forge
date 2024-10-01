@@ -141,7 +141,7 @@ public class SpellSmithScene extends UIScene {
         editions = StaticData.instance().getSortedEditions().stream().filter(input -> {
             if (input == null)
                 return false;
-            if (input.getType() == CardEdition.Type.REPRINT || input.getType() == CardEdition.Type.PROMO || input.getType() == CardEdition.Type.COLLECTOR_EDITION)
+            if (CardEdition.Type.REPRINT_SET_TYPES.contains(input.getType()))
                 return false;
             if (input.getDate() != null) {
                 Instant now = Instant.now(); //this should filter upcoming sets from release date + 1 day..

@@ -15,7 +15,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
@@ -29,6 +28,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Expressions;
+import forge.util.IterableUtil;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -625,7 +625,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
             Collections.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
@@ -654,7 +654,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopLibraryLand")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.Presets.LANDS);
+            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Library), CardPredicates.LANDS);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
@@ -684,7 +684,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("SharesCMCWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                return Iterables.any(list, CardPredicates.sharesCMCWith(card));
+                return list.anyMatch(CardPredicates.sharesCMCWith(card));
             }
         } else if (property.startsWith("SharesColorWith")) {
             // if card is colorless, it can't share colors
@@ -701,7 +701,7 @@ public class CardProperty {
                     final String restriction = property.split("SharesColorWithOther ")[1];
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     list.remove(card);
-                    return Iterables.any(list, CardPredicates.sharesColorWith(card));
+                    return list.anyMatch(CardPredicates.sharesColorWith(card));
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
@@ -738,7 +738,7 @@ public class CardProperty {
                         if (!card.getColor().hasAnyColor(cs.getColor())) return false;
                         break;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesColorWith(card))) {
+                        if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesColorWith(card))) {
                             return false;
                         }
                         break;
@@ -799,10 +799,10 @@ public class CardProperty {
                     default:
                         CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                         if (property.contains("WithAll")) {
-                            if (!Iterables.all(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                            if (!def.allMatch(CardPredicates.sharesCreatureTypeWith(card))) {
                                 return false;
                             }  
-                        } else if (!Iterables.any(def, CardPredicates.sharesCreatureTypeWith(card))) {
+                        } else if (!def.anyMatch(CardPredicates.sharesCreatureTypeWith(card))) {
                             return false;
                         }
                         break;
@@ -819,7 +819,7 @@ public class CardProperty {
                     final String restriction = property.split("sharesCardTypeWithOther ")[1];
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     list.remove(card);
-                    return Iterables.any(list, CardPredicates.sharesCardTypeWith(card));
+                    return IterableUtil.any(list, CardPredicates.sharesCardTypeWith(card));
                 }
 
                 final String restriction = property.split("sharesCardTypeWith ")[1];
@@ -842,14 +842,14 @@ public class CardProperty {
                         }
                         return false;
                     default:
-                        if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesCardTypeWith(card))) {
+                        if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesCardTypeWith(card))) {
                             return false;
                         }
                 }
             }
         } else if (property.startsWith("sharesLandTypeWith")) {
             final String restriction = property.split("sharesLandTypeWith ")[1];
-            if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesLandTypeWith(card))) {
+            if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesLandTypeWith(card))) {
                 return false;
             }
         } else if (property.equals("sharesPermanentTypeWith")) {
@@ -882,13 +882,13 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    return Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return sourceController.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Graveyard.toString())) {
-                    return Iterables.any(game.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return game.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    return Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
+                    return game.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("ThisTurnCast")) {
-                    return Iterables.any(CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController), CardPredicates.sharesNameWith(card));
+                    return CardUtil.getThisTurnCast("Card", source, spellAbility, sourceController).stream().anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("MovedToGrave")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         final SpellAbility root = ((SpellAbility) spellAbility).getRootAbility();
@@ -909,7 +909,7 @@ public class CardProperty {
                     return false;
                 } else if (restriction.equals("NonToken")) {
                     return !CardLists.filter(game.getCardsIn(ZoneType.Battlefield),
-                            Presets.NON_TOKEN, CardPredicates.sharesNameWith(card)).isEmpty();
+                            CardPredicates.NON_TOKEN, CardPredicates.sharesNameWith(card)).isEmpty();
                 } else if (restriction.equals("TriggeredCard")) {
                     if (!(spellAbility instanceof SpellAbility)) {
                         System.out.println("Looking at TriggeredCard but no SA?");
@@ -921,7 +921,8 @@ public class CardProperty {
                     }
                     return false;
                 } else {
-                    if (!Iterables.any(AbilityUtils.getDefinedCards(source, restriction, spellAbility), CardPredicates.sharesNameWith(card))) {
+                    CardCollection iterable = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+                    if (!iterable.anyMatch(CardPredicates.sharesNameWith(card))) {
                         return false;
                     }
                 }
@@ -935,9 +936,9 @@ public class CardProperty {
                 final String restriction = property.split("doesNotShareNameWith ")[1];
                 if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
+                    return !list.anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("YourGraveyard")) {
-                    return !Iterables.any(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.sharesNameWith(card));
+                    return !sourceController.getCardsIn(ZoneType.Graveyard).anyMatch(CardPredicates.sharesNameWith(card));
                 } else if (restriction.equals("OtherYourBattlefield")) {
                     // Obviously it's going to share a name with itself, so consider that in the
                     CardCollection list = CardLists.filter(sourceController.getCardsIn(ZoneType.Battlefield), CardPredicates.sharesNameWith(card));
@@ -952,7 +953,7 @@ public class CardProperty {
                 } else {
                     CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction,
                             sourceController, source, spellAbility);
-                    return !Iterables.any(list, CardPredicates.sharesNameWith(card));
+                    return !list.anyMatch(CardPredicates.sharesNameWith(card));
                 }
             }
         } else if (property.startsWith("sharesControllerWith")) {
@@ -963,7 +964,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesControllerWith ")[1];
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                if (!Iterables.any(list, CardPredicates.sharesControllerWith(card))) {
+                if (!list.anyMatch(CardPredicates.sharesControllerWith(card))) {
                     return false;
                 }
             }
@@ -975,7 +976,7 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
                 CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                if (!Iterables.all(def, CardPredicates.isOwner(card.getOwner()))) {
+                if (!def.allMatch(CardPredicates.isOwner(card.getOwner()))) {
                     return false;
                 }
             }
@@ -1279,7 +1280,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1293,14 +1294,14 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("yardGreatestPower")) {
-            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+            final CardCollectionView cards = CardLists.filter(sourceController.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
             for (final Card crd : cards) {
                 if (crd.getNetPower() > card.getNetPower()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) {
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1314,7 +1315,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("leastToughness")) {
-            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            CardCollectionView cards = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.CREATURES);
             if (property.contains("ControlledBy")) { // 4/25/2023 only used for adventure mode Death Ring
                 FCollectionView<Player> p = AbilityUtils.getDefinedPlayers(source, property.split("ControlledBy")[1], spellAbility);
                 cards = CardLists.filterControlledBy(cards, p);
@@ -1337,7 +1338,7 @@ public class CardProperty {
             }
 
             if ("NonLandPermanent".equals(prop)) {
-                cards = CardLists.filter(cards, CardPredicates.Presets.NONLAND_PERMANENTS);
+                cards = CardLists.filter(cards, CardPredicates.NONLAND_PERMANENTS);
             } else {
                 cards = CardLists.getType(cards, prop);
             }
@@ -1688,7 +1689,7 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+            if (blocked.stream().anyMatch(CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
                 return true;
             }
             for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
@@ -1703,7 +1704,7 @@ public class CardProperty {
                 return false;
             }
             String valid = property.split(" ")[1];
-            if (Iterables.any(blocked, CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
+            if (blocked.stream().anyMatch(CardPredicates.restriction(valid, card.getController(), source, spellAbility))) {
                 return true;
             }
             for (Card c : AbilityUtils.getDefinedCards(source, valid, spellAbility)) {
@@ -2082,7 +2083,7 @@ public class CardProperty {
             }
             List<String> typeList = Lists.newArrayList(types.split(","));
 
-            return Iterables.any(card.getType().getCreatureTypes(), typeList::contains);
+            return card.getType().getCreatureTypes().stream().anyMatch(typeList::contains);
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
@@ -2114,7 +2115,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("NotDefined")) {
             final String key = property.substring("NotDefined".length());
-            if (Iterables.contains(AbilityUtils.getDefinedCards(source, key, spellAbility), card)) {
+            if (AbilityUtils.getDefinedCards(source, key, spellAbility).contains(card)) {
                 return false;
             }
         } else if (property.equals("CanPayManaCost")) {

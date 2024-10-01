@@ -3,10 +3,10 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 
 import forge.StaticData;
+import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
@@ -23,6 +23,7 @@ import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
 
@@ -45,15 +46,14 @@ public class VentureEffect  extends SpellAbilityEffect {
 
         List<PaperCard> dungeonCards = null;
         if (sa.hasParam("Dungeon")) {
-            dungeonCards = StaticData.instance().getVariantCards()
-                    .getAllCards(Predicates.compose(
-                            Predicates.and(CardRulesPredicates.Presets.IS_DUNGEON,
-                                    CardRulesPredicates.subType(StringOp.EQUALS, sa.getParam("Dungeon"))),
-                            PaperCard::getRules));
+            String dungeonType = sa.getParam("Dungeon");
+            Predicate<CardRules> rulesPredicate = CardRulesPredicates.IS_DUNGEON.and(CardRulesPredicates.subType(StringOp.EQUALS, dungeonType));
+            dungeonCards = StaticData.instance().getVariantCards().getAllCards(
+                    PaperCardPredicates.fromRules(rulesPredicate));
         } else {
             // Create a new dungeon card chosen by player in command zone.
             dungeonCards = StaticData.instance().getVariantCards().getAllCards(
-                Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard::getRules));
+                    PaperCardPredicates.fromRules(CardRulesPredicates.IS_DUNGEON));
             dungeonCards.removeIf(c -> !c.getRules().isEnterableDungeon());
         }
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");

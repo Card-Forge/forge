@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import com.google.common.base.Predicates;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
@@ -20,6 +19,7 @@ import forge.util.MyRandom;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class PhasesAi extends SpellAbilityAi {
     @Override
@@ -117,7 +117,8 @@ public class PhasesAi extends SpellAbilityAi {
         // in general, if it's our own creature, choose the weakest one, if it's the opponent's creature,
         // choose the strongest one
         if (!list.isEmpty()) {
-            CardCollectionView oppList = CardLists.filter(list, Predicates.not(CardPredicates.isController(source.getController())));
+            Predicate<Card> isController = CardPredicates.isController(source.getController());
+            CardCollectionView oppList = CardLists.filter(list, isController.negate());
             sa.resetTargets();
             sa.getTargets().add(!oppList.isEmpty() ? ComputerUtilCard.getBestAI(oppList) : ComputerUtilCard.getWorstAI(list));
             return true;

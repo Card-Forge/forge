@@ -20,8 +20,7 @@ package forge.screens.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
