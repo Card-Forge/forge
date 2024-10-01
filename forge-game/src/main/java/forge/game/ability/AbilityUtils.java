@@ -1193,7 +1193,11 @@ public class AbilityUtils {
         } else if (defined.equals("You")) {
             players.add(player);
         } else if (defined.equals("Opponent")) {
-            players.addAll(player.getOpponents());
+            if (sa.hasParam("InTurnOrder") && sa.getParam("InTurnOrder").equals("True")) {
+                players.addAll(player.getOpponentsInTurnOrder());
+            } else {
+                players.addAll(player.getOpponents());
+            }
         } else if (defined.startsWith("NextPlayerToYour")) {
             Direction dir = defined.substring(16).equals("Left") ? Direction.Left : Direction.Right;
             players.add(game.getNextPlayerAfter(player, dir));
