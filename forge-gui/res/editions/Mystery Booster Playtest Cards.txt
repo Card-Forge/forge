@@ -68,7 +68,7 @@ ScryfallCode=CMB1
 59 R Planequake @Chris Kiritz
 60 R Problematic Volcano @Gavin Verhey
 61 R Queue of Beetles @Brendan Sell
-62 R Red Herring @Chris Mooney
+62 R P-Red Herring @Chris Mooney
 63 R Seasoned Weaponsmith @Mark L. Gottlieb
 64 R Siege Elemental @Levi Parker
 65 R Throat Wolf @Sam Stoddard
@@ -103,7 +103,7 @@ ScryfallCode=CMB1
 94 R Kaya, Ghost Haunter @Sydney Adams
 95 R Louvaq, the Aberrant @Cynthia Sheppard
 96 R Personal Decoy @Alison Luhrs
-97 R Pick Your Poison @Corey Bowen
+97 R P-Pick Your Poison @Corey Bowen
 98 R Seek Bolas's Counsel @Matt Warren
 99 R Sliv-Mizzet, Hivemind @Jeff Stewart
 100 R Smelt // Herd // Saw @Alli Steele
