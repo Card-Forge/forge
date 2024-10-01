@@ -306,7 +306,7 @@ ScryfallCode=KTK
 211y R Villainous Wealth @Josu Solano
 218y U Cranial Archive @Igor Krstic
 236y U Mystic Monastery @Josu Solano
-237y C Nomad Outpost @Kamila Szutenberg
+237y U Nomad Outpost @Kamila Szutenberg
 
 [tokens]
 w_3_4_bird_flying

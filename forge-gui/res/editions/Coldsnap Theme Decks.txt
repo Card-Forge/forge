@@ -13,7 +13,7 @@ ScryfallCode=CST
 20 C Disenchant @Brian Snõddy
 25 U Browse @Phil Foglio
 30b C Lat-Nam's Legacy @Tom Wänerstrand
-34 C Kjeldoran Elite Guard @Melissa A. Benson
+34 U Kjeldoran Elite Guard @Melissa A. Benson
 37 U Storm Elemental @John Matson
 42 U Viscerid Drone @Heather Hudson
 43 U Balduvian Dead @Mike Kimble

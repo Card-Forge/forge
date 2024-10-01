@@ -8,7 +8,7 @@ ScryfallCode=CP1
 [cards]
 1 R Prognostic Sphinx @Jesper Ejsing
 2 R Fated Intervention @Eric Deschamps
-3 R Font of Fertility @Jung Park
+3 C Font of Fertility @Jung Park
 4 R Hydra Broodmaster @Vincent Proce
 5 R Prophet of Kruphix @Anastasia Ovchinnikova
 6 R Temple of Mystery @Adam Paquette

@@ -520,7 +520,7 @@ ScryfallCode=LTC
 512 R Mordor on the March @Campbell White
 513 R Fell Beast of Mordor @Campbell White
 514 R Minas Morgul, Dark Fortress @Campbell White
-515 R Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
+515 M Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
 516 M Ishkanah, Grafwidow @Greg Hildebrandt & Tim Hildebrandt
 517 R Doran, the Siege Tower @Greg Hildebrandt & Tim Hildebrandt
 518 R Hammerheim @Greg Hildebrandt & Tim Hildebrandt
@@ -534,7 +534,7 @@ ScryfallCode=LTC
 526 M Diabolic Intent @Greg Hildebrandt & Tim Hildebrandt
 527 U Elvish Harbinger @Greg Hildebrandt & Tim Hildebrandt
 528 U Explore @Greg Hildebrandt & Tim Hildebrandt
-529 M Seasons Past @Greg Hildebrandt & Tim Hildebrandt
+529 R Seasons Past @Greg Hildebrandt & Tim Hildebrandt
 530 R Second Harvest @Greg Hildebrandt & Tim Hildebrandt
 531 M Sylvan Tutor @Greg Hildebrandt & Tim Hildebrandt
 532 U Tempt with Discovery @Greg Hildebrandt & Tim Hildebrandt

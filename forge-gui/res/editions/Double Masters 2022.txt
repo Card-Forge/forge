@@ -82,7 +82,7 @@ ScryfallCode=2X2
 69 M Bitterblossom @Rebecca Guay
 70 U Blood Artist @LA Draws
 71 C Bloodflow Connoisseur @Slawomir Maniak
-72 U Carrier Thrall @Lius Lasahido
+72 C Carrier Thrall @Lius Lasahido
 73 R Damnation @Kev Walker
 74 C Disfigure @Justin Sweet
 75 C Eyeblight's Ending @Ron Spears
@@ -128,7 +128,7 @@ ScryfallCode=2X2
 115 U Labyrinth Champion @Chase Stone
 116 C Lava Coil @Wesley Burt
 117 U Lightning Bolt @Christopher Moeller
-118 U Living Lightning @Caio Monteiro
+118 C Living Lightning @Caio Monteiro
 119 C Monastery Swiftspear @Steve Argyle
 120 C Pirate's Pillage @Wayne Reynolds
 121 C Purphoros's Emissary @Sam Burley

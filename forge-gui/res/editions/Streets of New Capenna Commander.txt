@@ -290,7 +290,7 @@ ScryfallCode=NCC
 282 U Beast Within @Jesper Ejsing
 283 R Beastmaster Ascension @Alex Horley-Orlandelli
 284 R Champion of Lambholt @Christopher Moeller
-285 U Cultivate @Anthony Palumbo
+285 C Cultivate @Anthony Palumbo
 286 U Devoted Druid @Kimonas Theodossiou
 287 U Evolution Sage @Simon Dominic
 288 R Evolutionary Leap @Chris Rahn
@@ -356,7 +356,7 @@ ScryfallCode=NCC
 348 U Primal Empathy @Micah Epstein
 349 M Roalesk, Apex Hybrid @Svetlin Velinov
 350 R Selvala, Explorer Returned @Tyler Jacobson
-351 U Shadowmage Infiltrator @Tomasz Jedruszek
+351 R Shadowmage Infiltrator @Tomasz Jedruszek
 352 R Silent-Blade Oni @Steve Prescott
 353 U Terminate @Lucas Graciano
 354 R Thief of Sanity @Igor Kieryluk
@@ -371,10 +371,10 @@ ScryfallCode=NCC
 363 C Commander's Sphere @Ryan Alexander Lee
 364 R Crystalline Giant @Jason Rainville
 365 C Dimir Signet @Raoul Vitale
-366 C Everflowing Chalice @Steve Argyle
+366 U Everflowing Chalice @Steve Argyle
 367 U Fellwar Stone @John Avon
 368 R Idol of Oblivion @Piotr Dura
-369 U Izzet Signet @Raoul Vitale
+369 C Izzet Signet @Raoul Vitale
 370 R Lifecrafter's Bestiary @Izzy
 371 U Lightning Greaves @Jeremy Jarvis
 372 R Mimic Vat @Donato Giancola
