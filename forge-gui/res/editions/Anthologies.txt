@@ -85,12 +85,12 @@ ScryfallCode=ATH
 75 C Slippery Karst @Stephen Daniele
 76 C Smoldering Crater @Mark Tedin
 77 R Strip Mine @Daniel Gelon
-78 C Plains @Tom Wänerstrand
-79 C Plains @Douglas Shuler
-80 C Swamp @Douglas Shuler
-81 C Swamp @Brom
-82 C Mountain @Douglas Shuler
-83 C Mountain @John Avon
+78 L Plains @Tom Wänerstrand
+79 L Plains @Douglas Shuler
+80 L Swamp @Douglas Shuler
+81 L Swamp @Brom
+82 L Mountain @Douglas Shuler
+83 L Mountain @John Avon
 84 L Forest @Tony Roberts
 85 L Forest @Quinton Hoover
 
