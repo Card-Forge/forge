@@ -52,7 +52,7 @@ ScryfallCode=NEO
 39 C Sunblade Samurai @Aaron Miller
 40 U Touch the Spirit Realm @Marta Nael
 41 C Wanderer's Intervention @Cristi Balanescu
-42 M The Wandering Emperor @William Arnold
+42 M The Wandering Emperor @Tommy Arnold
 43 U When We Were Young @Eric Deschamps
 44 U Acquisition Octopus @Francisco Miyara
 45 U Anchor to Reality @Alix Branwyn
@@ -67,7 +67,7 @@ ScryfallCode=NEO
 54 C Futurist Sentinel @Daniel Ljunggren
 55 U Go-Shintai of Lost Wisdom @Johannes Voss
 56 C Guardians of Oboro @Anna Steinbauer
-57 R Inventive Iteration @Nestor Ossandon Leal
+57 R Inventive Iteration @Néstor Ossandón Leal
 58 R Invoke the Winds @Olivier Bernard
 59 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 60 M Kairi, the Swirling Sky @Tyler Jacobson
@@ -138,7 +138,7 @@ ScryfallCode=NEO
 125 C Twisted Embrace @Betty Jiang
 126 C Undercity Scrounger @Mike Jordana
 127 U Unforgiving One @Fariba Khamseh
-128 C Virus Beetle @Dan Scott
+128 C Virus Beetle @Dan Murayama Scott
 129 C You Are Already Dead @Zoltan Boros
 130 C Akki Ember-Keeper @April Prime
 131 C Akki Ronin @Olivier Bernard
@@ -167,7 +167,7 @@ ScryfallCode=NEO
 154 R March of Reckless Joy @Fiona Hsieh
 155 R Ogre-Head Helm @Viko Menezes
 156 C Peerless Samurai @Micah Epstein
-157 U Rabbit Battery @Justyna Gil
+157 U Rabbit Battery @Justyna Dura
 158 U Reinforced Ronin @Kekai Kotaki
 159 R Scrap Welder @Simon Dominic
 160 C Scrapyard Steelbreaker @Eric Wilkerson
@@ -250,7 +250,7 @@ ScryfallCode=NEO
 237 M Spirit-Sister's Call @Dominik Mayer
 238 M Tamiyo, Compleated Sage @Chris Rahn
 239 C Automated Artificer @Izzy
-240 U Bronze Cudgels @Nestor Ossandon Leal
+240 U Bronze Cudgels @Néstor Ossandón Leal
 241 C Brute Suit @Raymond Swanland
 242 U Circuit Mender @Hector Ortiz
 243 U Containment Construct @Julian Kok Joon Wen
@@ -260,7 +260,7 @@ ScryfallCode=NEO
 247 U High-Speed Hoverbike @Julian Kok Joon Wen
 248 C Iron Apprentice @Kekai Kotaki
 249 R Mechtitan Core @Victor Adame Minguez
-250 R Mirror Box @Nestor Ossandon Leal
+250 R Mirror Box @Néstor Ossandón Leal
 251 C Network Terminal @Andreas Zafiratos
 252 C Ninja's Kunai @Tomasz Jedruszek
 253 C Papercraft Decoy @Brian Valeza
@@ -336,7 +336,7 @@ ScryfallCode=NEO
 308 M Tamiyo, Compleated Sage @Chris Rahn
 309 C Eiganjo Exemplar @Yamada Rokkaku
 310 C Imperial Subduer @Yunomachi
-311 U Norika Yamazaki, the Poet @Xiaji
+311 U Norika Yamazaki, the Poet @Xiaji & Yangyang
 312 U Selfless Samurai @Ishikawa Kenta
 313 C Seven-Tail Mentor @Aogachou
 314 U Sky-Blessed Samurai @Misei Ito
@@ -346,7 +346,7 @@ ScryfallCode=NEO
 318 C Nezumi Bladeblesser @Kemonomichi
 319 C Akki Ronin @Nijimaarc
 320 R Goro-Goro, Disciple of Ryusei @Rorubei
-321 U Heiko Yamazaki, the General @Xiaji
+321 U Heiko Yamazaki, the General @Xiaji & Yangyang
 322 C Peerless Samurai @Yosuke Adachi
 323 U Reinforced Ronin @Inuchiyo Meimaru
 324 U Upriser Renegade @Maji
@@ -376,7 +376,7 @@ ScryfallCode=NEO
 348 U Kappa Tech-Wrecker @Yoshiro Ambe
 349 R Spring-Leaf Avenger @Hirokorin
 350 M Kaito Shizuki @Hagiya Kaoru
-351 R Kotose, the Silent Spider @Penekor
+351 R Kotose, the Silent Spider @PE-nekoR
 352 R Satoru Umezawa @Raita Kazama
 353 U Silver-Fur Master @Fukuzo Katsura
 354 R The Restoration of Eiganjo @yo-ne
@@ -410,7 +410,7 @@ ScryfallCode=NEO
 382 R Soul Transfer @Dai-XT
 383 M Explosive Singularity @Ari
 384 R Invoke Calamity @ZOUNOSE
-385 R Lizard Blades @Penekor
+385 R Lizard Blades @PE-nekoR
 386 R March of Reckless Joy @Miyaki Hajime
 387 R Ogre-Head Helm @Dai-XT
 388 R Scrap Welder @Areku Nishiki
@@ -426,7 +426,7 @@ ScryfallCode=NEO
 398 R Hinata, Dawn-Crowned @Ryota Murayama
 399 R Satsuki, the Living Lore @Domco.
 400 M Spirit-Sister's Call @RYUTETSU
-401 R Eater of Virtue @Katana Canata
+401 R Eater of Virtue @Canata Katana
 402 R Mechtitan Core @Naochika Morishita
 403 R Mirror Box @Mid
 404 R Reckoner Bankbuster @Yoshiya
@@ -459,7 +459,7 @@ ScryfallCode=NEO
 440 R Lion Sash @Yongjae Choi
 441 R March of Otherworldly Light @Nils Hamm
 442 R The Restoration of Eiganjo @Titus Lunter
-443 R Inventive Iteration @Nestor Ossandon Leal
+443 R Inventive Iteration @Néstor Ossandón Leal
 444 R Invoke the Winds @Olivier Bernard
 445 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 446 M Kairi, the Swirling Sky @Tyler Jacobson
@@ -514,7 +514,7 @@ ScryfallCode=NEO
 495 M Spirit-Sister's Call @Dominik Mayer
 496 R Eater of Virtue @Tuan Duong Chu
 497 R Mechtitan Core @Victor Adame Minguez
-498 R Mirror Box @Nestor Ossandon Leal
+498 R Mirror Box @Néstor Ossandón Leal
 499 R Reckoner Bankbuster @Steve Prescott
 500 R Surgehacker Mech @Wisnu Tan
 501 R Boseiju, Who Endures @Chris Ostrowski

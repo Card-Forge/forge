@@ -22,7 +22,7 @@ ScryfallCode=LTC
 14 R Grey Host Reinforcements @Patrik Hell
 15 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
 16 R Lossarnach Captain @Justine Cruz
-17 R Of Herbs and Stewed Rabbit @Dan Scott
+17 R Of Herbs and Stewed Rabbit @Dan Murayama Scott
 18 R Archivist of Gondor @Wisnu Tan
 19 R Corsairs of Umbar @Narendra Bintara Adi
 20 R Denethor, Stone Seer @Bruno Biazotto
@@ -424,7 +424,7 @@ ScryfallCode=LTC
 416 R Grey Host Reinforcements @Patrik Hell
 417 R Gwaihir, Greatest of the Eagles @Jesper Ejsing
 418 R Lossarnach Captain @Justine Cruz
-419 R Of Herbs and Stewed Rabbit @Dan Scott
+419 R Of Herbs and Stewed Rabbit @Dan Murayama Scott
 420 R Archivist of Gondor @Wisnu Tan
 421 R Corsairs of Umbar @Narendra Bintara Adi
 422 R Denethor, Stone Seer @Bruno Biazotto
@@ -453,7 +453,7 @@ ScryfallCode=LTC
 445 R Prize Pig @Bartłomiej Gaweł
 446 R Travel Through Caradhras @Constantin Marin
 447 R Windswift Slice @Narendra Bintara Adi
-448 M Aragorn, King of Gondor @Eli
+448 M Aragorn, King of Gondor @Yongjae Choi
 449 R The Balrog of Moria @Rudy Siswanto
 450 R Banquet Guests @Viko Menezes
 451 R Bilbo, Birthday Celebrant @Billy Christian
@@ -470,7 +470,7 @@ ScryfallCode=LTC
 462 M Galadriel, Elven-Queen @Axel Sauerwald
 463 M Gandalf, Westward Voyager @Sidharth Chaturvedi
 464 R Gríma, Saruman's Footman @Matt Stewart
-465 R In the Darkness Bind Them @Lack
+465 R In the Darkness Bind Them @Daarken
 466 R Lidless Gaze @Yigit Koroglu
 467 R Lord of the Nazgûl @Anton Solovianchyk
 468 R Merry, Warden of Isengard @Viko Menezes
@@ -520,7 +520,7 @@ ScryfallCode=LTC
 512 R Mordor on the March @Campbell White
 513 R Fell Beast of Mordor @Campbell White
 514 R Minas Morgul, Dark Fortress @Campbell White
-515 R Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
+515 M Kenrith, the Returned King @Greg Hildebrandt & Tim Hildebrandt
 516 M Ishkanah, Grafwidow @Greg Hildebrandt & Tim Hildebrandt
 517 R Doran, the Siege Tower @Greg Hildebrandt & Tim Hildebrandt
 518 R Hammerheim @Greg Hildebrandt & Tim Hildebrandt
@@ -534,7 +534,7 @@ ScryfallCode=LTC
 526 M Diabolic Intent @Greg Hildebrandt & Tim Hildebrandt
 527 U Elvish Harbinger @Greg Hildebrandt & Tim Hildebrandt
 528 U Explore @Greg Hildebrandt & Tim Hildebrandt
-529 M Seasons Past @Greg Hildebrandt & Tim Hildebrandt
+529 R Seasons Past @Greg Hildebrandt & Tim Hildebrandt
 530 R Second Harvest @Greg Hildebrandt & Tim Hildebrandt
 531 M Sylvan Tutor @Greg Hildebrandt & Tim Hildebrandt
 532 U Tempt with Discovery @Greg Hildebrandt & Tim Hildebrandt

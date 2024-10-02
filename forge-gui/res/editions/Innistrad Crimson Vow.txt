@@ -28,9 +28,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 17 M Hallowed Haunting @David Auden Nash
 18 C Heron of Hope @Daarken
 19 C Heron-Blessed Geist @Jason A. Engle
-20 R Hopeful Initiate @Dan Scott
+20 R Hopeful Initiate @Dan Murayama Scott
 21 R Katilda, Dawnhart Martyr @Manuel Castañón
-22 C Kindly Ancestor @Justyna Gil
+22 C Kindly Ancestor @Justyna Dura
 23 R Lantern Flare @Lie Setiawan
 24 C Militia Rallier @Eelis Kyttanen
 25 C Nebelgast Beguiler @Andreas Zafiratos
@@ -44,7 +44,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 33 C Sanctify @Kasia 'Kafis' Zielińska
 34 M Savior of Ollenbock @Aaron J. Riley
 35 C Sigarda's Imprisonment @Bryan Sola
-36 R Sigarda's Summons @Nestor Ossandon Leal
+36 R Sigarda's Summons @Néstor Ossandón Leal
 37 C Supernatural Rescue @Anastasia Ovchinnikova
 38 R Thalia, Guardian of Thraben @Magali Villeneuve
 39 C Traveling Minister @Slawomir Maniak
@@ -108,7 +108,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 97 U Bloodsworn Squire @Darren Tan
 98 R Bloodvial Purveyor @Fesbra
 99 U Catapult Fodder @Jesper Ejsing
-100 M Cemetery Desecrator @Dan Scott
+100 M Cemetery Desecrator @Dan Murayama Scott
 101 R Concealing Curtains @Brian Valeza
 102 C Courier Bat @Ilse Gort
 103 R Demonic Bargain @Sam Guay
@@ -136,12 +136,12 @@ Prerelease=6 Boosters, 1 RareMythic+
 125 C Persistent Specimen @Scott Murphy
 126 C Pointed Discussion @Jarel Threat
 127 C Ragged Recluse @Lie Setiawan
-128 U Restless Bloodseeker @Justyna Gil
+128 U Restless Bloodseeker @Justyna Dura
 129 C Rot-Tide Gargantua @Filip Burburan
 130 U Skulking Killer @Alex Brock
-131 M Sorin the Mirthless @Martina Fackova
+131 M Sorin the Mirthless @Martina Fačková
 132 M Toxrill, the Corrosive @Simon Dominic
-133 U Undead Butler @Nestor Ossandon Leal
+133 U Undead Butler @Néstor Ossandón Leal
 134 C Undying Malice @Igor Kieryluk
 135 C Unhallowed Phalanx @Nicholas Gregory
 136 C Vampire's Kiss @Ilse Gort
@@ -186,11 +186,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 175 U Rending Flame @Olena Richards
 176 U Runebound Wolf @Tomas Duchek
 177 U Sanguine Statuette @Izzy
-178 R Stensia Uprising @Dan Scott
+178 R Stensia Uprising @Dan Murayama Scott
 179 C Sure Strike @Lie Setiawan
 180 U Vampires' Vengeance @Chris Cold
 181 M Volatile Arsonist @Gabor Szikszai
-182 C Voldaren Epicure @Martina Fackova
+182 C Voldaren Epicure @Martina Fačková
 183 U Voltaic Visionary @Francisco Miyara
 184 C Weary Prisoner @Jason Rainville
 185 C Apprentice Sharpshooter @Steve Prescott
@@ -268,7 +268,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 257 C Honored Heirloom @Leanna Crossan
 258 R Investigator's Journal @Yeong-Hao Han
 259 U Lantern of the Lost @Chris Cold
-260 C Wedding Invitation @Justyna Gil
+260 C Wedding Invitation @Justyna Dura
 261 R Deathcap Glade @Sam Burley
 262 R Dreamroot Cascade @Sam Burley
 263 C Evolving Wilds @Alayna Danner
@@ -288,7 +288,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 277 L Forest @Indra Nugroho
 
 [borderless]
-278 M Sorin the Mirthless @Justyna Gil
+278 M Sorin the Mirthless @Justyna Dura
 279 M Chandra, Dressed to Kill @Ekaterina Burmak
 280 M Kaya, Geist Hunter @Raymond Swanland
 281 R Deathcap Glade @Muhammad Firdaus
@@ -323,7 +323,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 308 C Voldaren Epicure @Vi Szendrey (Cashile)
 309 R Anje, Maid of Dishonor @Christian Angel
 310 U Bloodtithe Harvester @Sami Makkonen
-311 R Edgar, Charmed Groom @Nestor Ossandon Leal
+311 R Edgar, Charmed Groom @Néstor Ossandón Leal
 312 U Markov Purifier @Samuel Araya
 313 U Markov Waltzer @Jason A. Engle
 314 R Odric, Blood-Cursed @Anna Pavleeva
@@ -341,11 +341,11 @@ Prerelease=6 Boosters, 1 RareMythic+
 326 R Old Rutstein @Mark Riddick
 327 R Runo Stromkirk @Nico Delort
 328 R Torens, Fist of the Angels @Cabrol
-329 U Circle of Confinement @Dan Scott
+329 U Circle of Confinement @Dan Murayama Scott
 330 M Savior of Ollenbock @Johannes Voss
 331 R Thalia, Guardian of Thraben @Magali Villeneuve
 332 M Jacob Hauken, Inspector @Slawomir Maniak
-333 U Thirst for Discovery @Dan Scott
+333 U Thirst for Discovery @Dan Murayama Scott
 334 R Falkenrath Forebear @Greg Staples
 335 M Henrika Domnathi @Nils Hamm
 336 U Innocent Traveler @Igor Kieryluk
@@ -364,10 +364,10 @@ Prerelease=6 Boosters, 1 RareMythic+
 347 M Cemetery Protector @Chris Rallis
 348 M Faithbound Judge @Svetlin Velinov
 349 M Hallowed Haunting @David Auden Nash
-350 R Hopeful Initiate @Dan Scott
+350 R Hopeful Initiate @Dan Murayama Scott
 351 R Lantern Flare @Lie Setiawan
 352 M Savior of Ollenbock @Aaron J. Riley
-353 R Sigarda's Summons @Nestor Ossandon Leal
+353 R Sigarda's Summons @Néstor Ossandón Leal
 354 R Voice of the Blessed @Anastasia Ovchinnikova
 355 R Wedding Announcement @Caroline Gariba
 356 M Cemetery Illuminator @Uriah Voth
@@ -380,7 +380,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 363 R Overcharged Amalgam @Mike Jordana
 364 R Patchwork Crawler @Fesbra
 365 R Winged Portent @Nicholas Gregory
-366 M Cemetery Desecrator @Dan Scott
+366 M Cemetery Desecrator @Dan Murayama Scott
 367 R Concealing Curtains @Brian Valeza
 368 R Demonic Bargain @Sam Guay
 369 R Dreadfeast Demon @Andrew Mar
@@ -395,7 +395,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 378 R Ill-Tempered Loner @Grzegorz Rutkowski
 379 R Kessig Wolfrider @Bram Sels
 380 M Manaform Hellkite @Andrew Mar
-381 R Stensia Uprising @Dan Scott
+381 R Stensia Uprising @Dan Murayama Scott
 382 M Volatile Arsonist @Gabor Szikszai
 383 R Ascendant Packleader @Alessandra Pisano
 384 M Avabruck Caretaker @Heonhwa Choe

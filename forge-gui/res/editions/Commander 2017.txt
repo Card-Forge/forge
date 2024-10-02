@@ -33,7 +33,7 @@ ScryfallCode=C17
 24 U Curse of Opulence @Kieran Yanner
 25 R Disrupt Decorum @Sidharth Chaturvedi
 26 R Izzet Chemister @Svetlin Velinov
-27 R Kindred Charge @Dan Scott
+27 R Kindred Charge @Dan Murayama Scott
 28 R Shifting Shadow @Christopher Burdett
 29 R Territorial Hellkite @Jonas De Ro
 30 U Curse of Bounty @Kieran Yanner
@@ -99,10 +99,10 @@ ScryfallCode=C17
 90 R Polymorphist's Jest @Craig J Spearing
 91 U Reality Shift @Howard Lyon
 92 C Sea Gate Oracle @Daniel Ljunggren
-93 R Serendib Sorcerer @Dan Scott
+93 R Serendib Sorcerer @Dan Murayama Scott
 94 R Spelltwine @Noah Bradley
 95 U Ambition's Cost @Zezhou Chen
-96 R Anowon, the Ruin Sage @Dan Scott
+96 R Anowon, the Ruin Sage @Dan Murayama Scott
 97 R Apprentice Necromancer @Randy Vargas
 98 R Black Market @Jeff Easley
 99 U Blood Artist @Johannes Voss
@@ -180,11 +180,11 @@ ScryfallCode=C17
 171 R Etherium-Horn Sorcerer @Franz Vohwinkel
 172 R Fleecemane Lion @Slawomir Maniak
 173 M Havengul Lich @James Ryman
-174 R Intet, the Dreamer @Dan Scott
+174 R Intet, the Dreamer @Dan Murayama Scott
 175 C Izzet Chronarch @Steven Belledin
 176 R Kolaghan, the Storm's Fury @Jaime Jones
 177 M Marchesa, the Black Rose @Matt Stewart
-178 R Memory Plunder @Dan Scott
+178 R Memory Plunder @Dan Murayama Scott
 179 R Merciless Eviction @Richard Wright
 180 R Mercurial Chemister @Wesley Burt
 181 M Mirari's Wake @Volkan Baǵa
@@ -230,11 +230,11 @@ ScryfallCode=C17
 221 U Rakdos Signet @Martina Pilcerova
 222 U Skullclamp @Daniel Ljunggren
 223 U Sol Ring @Mike Bierek
-224 R Staff of Nin @Dan Scott
+224 R Staff of Nin @Dan Murayama Scott
 225 R Steel Hellkite @James Paick
 226 U Swiftfoot Boots @Svetlin Velinov
 227 R Sword of the Animist @Daniel Ljunggren
-228 R Sword of Vengeance @Dan Scott
+228 R Sword of Vengeance @Dan Murayama Scott
 229 U Unstable Obelisk @William Wu
 230 C Wayfarer's Bauble @Darrell Riche
 231 R Well of Lost Dreams @Jeff Miracola
@@ -291,7 +291,7 @@ ScryfallCode=C17
 282 U Stone Quarry @Cliff Childs
 283 C Swiftwater Cliffs @Eytan Zana
 284 U Temple of the False God @James Zapata
-285 C Terramorphic Expanse @Dan Scott
+285 C Terramorphic Expanse @Dan Murayama Scott
 286 U Tranquil Expanse @Cliff Childs
 287 C Tranquil Thicket @Heather Hudson
 288 U Urborg Volcano @Tony Szczudlo

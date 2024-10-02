@@ -77,7 +77,7 @@ ScryfallCode=WOC
 69 R Kor Spiritdancer @Nils Hamm
 70 R Mantle of the Ancients @Lucas Graciano
 71 M Realm-Cloaked Giant @Adam Paquette
-72 R Retether @Dan Scott
+72 R Retether @Dan Murayama Scott
 73 U Sage's Reverie @Jason Rainville
 74 R Shalai, Voice of Plenty @Victor Adame Minguez
 75 U Spectral Steel @Johannes Voss
@@ -106,7 +106,7 @@ ScryfallCode=WOC
 98 C Keep Watch @Fred Rahmqvist
 99 R Midnight Clock @Alexander Forssberg
 100 U Nightveil Sprite @Uriah Voth
-101 C Opt @Dan Scott
+101 C Opt @Dan Murayama Scott
 102 R Perplexing Test @Fariba Khamseh
 103 U Quickling @Clint Cearley
 104 U Reality Shift @Howard Lyon
@@ -150,10 +150,10 @@ ScryfallCode=WOC
 142 R Oona, Queen of the Fae @Adam Rex
 143 U Pollenbright Wings @Brian Valeza
 144 U Siona, Captain of the Pyleas @Chris Rallis
-145 C Arcane Signet @Dan Scott
+145 C Arcane Signet @Dan Murayama Scott
 146 U Dimir Signet @Raoul Vitale
 147 U Fellwar Stone @John Avon
-148 C Mind Stone @Adam Rex
+148 U Mind Stone @Adam Rex
 149 U Sol Ring @Mike Bierek
 150 U Talisman of Dominance @Mike Dringenberg
 151 C Wayfarer's Bauble @Darrell Riche

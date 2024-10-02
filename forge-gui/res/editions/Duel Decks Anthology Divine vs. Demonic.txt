@@ -15,7 +15,7 @@ ScryfallCode=DVD
 7 U Serra Advocate @Matthew D. Wilson
 8 U Sustainer of the Realm @Mark Zug
 9 U Angel of Mercy @Volkan Baǵa
-10 R Serra Angel @Greg Staples
+10 U Serra Angel @Greg Staples
 11 R Twilight Shepherd @Jason Chan
 12 R Luminous Angel @Jason Chan
 13 R Reya Dawnbringer @Matthew D. Wilson
@@ -47,7 +47,7 @@ ScryfallCode=DVD
 39 U Souldrinker @Dermot Power
 40 U Abyssal Specter @Michael Sutfin
 41 C Cackling Imp @Matt Thompson
-42 R Fallen Angel @Matthew D. Wilson
+42 U Fallen Angel @Matthew D. Wilson
 43 R Reiver Demon @Brom
 44 R Kuro, Pitlord @Jon Foster
 45 C Dark Ritual @Clint Langley

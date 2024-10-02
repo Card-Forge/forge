@@ -14,5 +14,5 @@ ScryfallCode=PTHS
 98 R Nighthowler @Seb McKinnon
 120★ R Ember Swallower @Vincent Proce
 149★ R Anthousa, Setessan Hero @Howard Lyon
-160 U Karametra's Acolyte @Dan Scott
+160 U Karametra's Acolyte @Dan Murayama Scott
 180★ R Sylvan Caryatid @Lars Grant-West

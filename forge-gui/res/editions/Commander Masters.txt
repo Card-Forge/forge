@@ -159,7 +159,7 @@ ScryfallCode=CMM
 151 R Demonlord Belzenlok @Tyler Jacobson
 152 C Dread Drone @Raymond Swanland
 153 C Dread Return @Kev Walker
-154 C Drown in Sorrow @
+154 C Drown in Sorrow @Valera Lutfullina
 155 R Endrek Sahr, Master Breeder @Lucas Graciano
 156 U Exsanguinate @Marie Magny
 157 U Extinguish All Hope @Aaron J. Riley
@@ -218,7 +218,7 @@ ScryfallCode=CMM
 210 C Champion of the Flame @Wayne Reynolds
 211 C Crimson Fleet Commodore @Sidharth Chaturvedi
 212 C Cyclops Electromancer @Jason Felix
-213 R Daretti, Scrap Savant @Dan Scott
+213 R Daretti, Scrap Savant @Dan Murayama Scott
 214 R Deflecting Swat @Izzy
 215 R Disrupt Decorum @Sidharth Chaturvedi
 216 R Divergent Transformations @Kev Walker
@@ -242,7 +242,7 @@ ScryfallCode=CMM
 234 C Impulsive Pilferer @Jakub Kasper
 235 R Inferno Titan @Kev Walker
 236 M Insurrection @Mark Zug
-237 R Kazuul, Tyrant of the Cliffs @Paul Bonner
+237 U Kazuul, Tyrant of the Cliffs @Paul Bonner
 238 R Krenko, Mob Boss @Karl Kopinski
 239 C Living Lightning @Caio Monteiro
 240 U Loyal Apprentice @Joe Slucher
@@ -262,11 +262,11 @@ ScryfallCode=CMM
 254 U Skyline Despot @Lucas Graciano
 255 U Slice and Dice @Jeremy Wilson
 256 C Spikeshot Goblin @Alan Pollack
-257 C Spitebellows @
+257 C Spitebellows @Brent Hollowell
 258 U Squee, Goblin Nabob @Greg Staples
 259 R Star of Extinction @Chris Rahn
 260 U Storm-Kiln Artist @Manuel Castañón
-261 R Subira, Tulzidi Caravanner @Leesha Hannigan
+261 U Subira, Tulzidi Caravanner @Leesha Hannigan
 262 C Sulfurous Blast @Jeff Miracola
 263 R Tempt with Vengeance @Ryan Barger
 264 C Temur Battle Rage @Jaime Jones
@@ -372,7 +372,7 @@ ScryfallCode=CMM
 364 R Yuriko, the Tiger's Shadow @Yongjae Choi
 365 R Zacama, Primal Calamity @Jaime Jones
 366 R Zilortha, Strength Incarnate @Chase Stone
-367 U Arcane Signet @Dan Scott
+367 U Arcane Signet @Dan Murayama Scott
 368 U Ashnod's Altar @Greg Staples
 369 U Assault Suit @James Paick
 370 C Bonder's Ornament @Lindsey Look
@@ -407,7 +407,7 @@ ScryfallCode=CMM
 399 U Meteor Golem @Samuel Perin
 400 C Myr Sire @Jaime Jones
 401 R Pearl Medallion @Daniel Ljunggren
-402 C Pilgrim's Eye @Dan Scott
+402 C Pilgrim's Eye @Dan Murayama Scott
 403 C Prismatic Lens @Scott Murphy
 404 C Prophetic Prism @Daniel Ljunggren
 405 R Ruby Medallion @Daniel Ljunggren
@@ -536,7 +536,7 @@ ScryfallCode=CMM
 528 R Ashling the Pilgrim @Wayne Reynolds
 529 R Avatar of Slaughter @Jason A. Engle
 530 M Balefire Dragon @Eric Deschamps
-531 R Daretti, Scrap Savant @Dan Scott
+531 R Daretti, Scrap Savant @Dan Murayama Scott
 532 R Deflecting Swat @Izzy
 533 R Disrupt Decorum @Sidharth Chaturvedi
 534 R Divergent Transformations @Kev Walker
@@ -747,7 +747,7 @@ ScryfallCode=CMM
 739 R Composer of Spring @Gaboleps
 740 R For the Ancestors @Hristo D. Chukov
 741 R Hatchery Sliver @Svetlin Velinov
-742 R Nyxborn Behemoth @Nestor Ossandon Leal
+742 R Nyxborn Behemoth @Néstor Ossandón Leal
 743 R Darksteel Monolith @Sergey Glushakov
 744 R Abstruse Archaic @Hristo D. Chukov
 745 R Calamity of the Titans @Svetlin Velinov
@@ -777,7 +777,7 @@ ScryfallCode=CMM
 769 R Composer of Spring @Gaboleps
 770 R For the Ancestors @Hristo D. Chukov
 771 R Hatchery Sliver @Svetlin Velinov
-772 R Nyxborn Behemoth @Nestor Ossandon Leal
+772 R Nyxborn Behemoth @Néstor Ossandón Leal
 773 M Anikthea, Hand of Erebos @Magali Villeneuve
 774 M Leori, Sparktouched Hunter @John Tedrick
 775 M Narci, Fable Singer @Miranda Meeks
@@ -867,7 +867,7 @@ ScryfallCode=CMM
 859 U Windfall @Scott Murphy
 860 C Winged Sliver @Anthony S. Waters
 861 C Clot Sliver @Jeff Laubenstein
-862 R Crippling Fear @Nestor Ossandon Leal
+862 R Crippling Fear @Néstor Ossandón Leal
 863 C Crypt Sliver @Michele Giorgi
 864 R Cunning Rhetoric @Chris Rallis
 865 R Doomwake Giant @Kev Walker

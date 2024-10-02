@@ -6,7 +6,7 @@ Type=Promo
 ScryfallCode=P30A
 
 [cards]
-1 U Serra Angel @Kev Walker
+1 R Serra Angel @Kev Walker
 2 R Ball Lightning @Trevor Claxton
 3 R Fyndhorn Elves @Igor Kieryluk
 4 R Wall of Roots @Matt Stewart
@@ -22,7 +22,7 @@ ScryfallCode=P30A
 14 R Niv-Mizzet, the Firemind @Daarken
 15 R Tarmogoyf @Ryan Barger
 16 R Glen Elendra Archmage @Warren Mahy
-17 U Acidic Slime @Karl Kopinski
+17 R Acidic Slime @Karl Kopinski
 18 R Terastodon @Lars Grant-West
 19 R Hornet Queen @Martina Pilcerova
 20 R Harvester of Souls @Thomas M. Baxa

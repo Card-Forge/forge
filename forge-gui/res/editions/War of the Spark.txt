@@ -56,7 +56,7 @@ ScryfallCode=WAR
 37 U The Wanderer @Wesley Burt
 37★ U The Wanderer @Norikatsu Miyoshi
 38 C Wanderer's Strike @Sara Winters
-39 C War Screecher @Dan Scott
+39 C War Screecher @Dan Murayama Scott
 40 C Ashiok's Skulker @Livia Prima
 41 U Augur of Bolas @Alex Konstad
 42 C Aven Eternal @Johan Grenier
@@ -272,7 +272,7 @@ ScryfallCode=WAR
 229 U Dovin, Hand of Control @Kieran Yanner
 229★ U Dovin, Hand of Control @Nablange
 230 U Huatli, the Sun's Heart @Lius Lasahido
-230★ U Huatli, the Sun's Heart @Masuda Mikio
+230★ U Huatli, the Sun's Heart @Mikio Masuda
 231 U Kaya, Bane of the Dead @Magali Villeneuve
 231★ U Kaya, Bane of the Dead @Mid
 232 U Kiora, Behemoth Beckoner @Jaime Jones

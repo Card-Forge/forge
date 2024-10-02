@@ -133,7 +133,7 @@ ScryfallCode=LCC
 125 R Akroma's Will @Antonio José Manzanedo
 126 R Austere Command @Anna Steinbauer
 127 U Bellowing Aegisaur @Craig J Spearing
-128 C Generous Gift @Kev Walker
+128 U Generous Gift @Kev Walker
 129 R Kindred Boon @Carlos Palma Cruchaga
 130 R Kinjalli's Sunwing @Simon Dominic
 131 U Majestic Heliopterus @Filip Burburan
@@ -144,7 +144,7 @@ ScryfallCode=LCC
 136 U Return to Dust @Anato Finnstark
 137 U Swords to Plowshares @Jesper Ejsing
 138 R Temple Altisaur @Daarken
-139 R Wakening Sun's Avatar @Tyler Jacobson
+139 M Wakening Sun's Avatar @Tyler Jacobson
 140 R Welcoming Vampire @Lorenzo Mastroianni
 141 R Zetalpa, Primal Dawn @Chris Rallis
 142 U Aetherize @Alexandre Honoré
@@ -210,7 +210,7 @@ ScryfallCode=LCC
 202 R New Blood @Howard Lyon
 203 R Nighthawk Scavenger @Heonhwa Choe
 204 U Oathsworn Vampire @Greg Opalinski
-205 R Olivia's Wrath @Nestor Ossandon Leal
+205 R Olivia's Wrath @Néstor Ossandón Leal
 206 R Pact of the Serpent @Donato Giancola
 207 R Patron of the Vein @Tommy Arnold
 208 U Pitiless Plunderer @David Palumbo
@@ -219,7 +219,7 @@ ScryfallCode=LCC
 211 M Twilight Prophet @Seb McKinnon
 212 C Village Rites @Igor Kieryluk
 213 C Viscera Seer @John Stanko
-214 U Yahenni, Undying Partisan @Lius Lasahido
+214 R Yahenni, Undying Partisan @Lius Lasahido
 215 R Angrath's Marauders @Victor Adame Minguez
 216 R Blasphemous Act @Daarken
 217 U Breeches, Brazen Plunderer @Svetlin Velinov
@@ -249,7 +249,7 @@ ScryfallCode=LCC
 241 C Explore @David Sondered
 242 C Farseek @Hristo D. Chukov
 243 R Hardened Scales @Mark Winters
-244 U Inspiring Call @Dan Scott
+244 U Inspiring Call @Dan Murayama Scott
 245 C Kodama's Reach @Heather Hudson
 246 U Migration Path @Grzegorz Rutkowski
 247 R Rampaging Brontodon @Lars Grant-West
@@ -301,10 +301,10 @@ ScryfallCode=LCC
 293 M Vona, Butcher of Magan @Volkan Baǵa
 294 R Vorel of the Hull Clade @Mike Bierek
 295 M Xenagos, God of Revels @Jason Chan
-296 R Zacama, Primal Calamity @Jaime Jones
+296 M Zacama, Primal Calamity @Jaime Jones
 297 R Zara, Renegade Recruiter @Chris Rallis
 298 R Zegana, Utopian Speaker @Slawomir Maniak
-299 C Arcane Signet @Dan Scott
+299 C Arcane Signet @Dan Murayama Scott
 300 R Blade of the Bloodchief @Jung Park
 301 C Commander's Sphere @Ryan Alexander Lee
 302 U Dimir Signet @Raoul Vitale
@@ -323,7 +323,7 @@ ScryfallCode=LCC
 315 U Talisman of Hierarchy @Lindsey Look
 316 R Vanquisher's Banner @Milivoj Ćeran
 317 C Wayfarer's Bauble @David Sondered
-318 R Alchemist's Refuge @Dan Scott
+318 R Alchemist's Refuge @Dan Murayama Scott
 319 R Arch of Orazca @Titus Lunter
 320 C Bojuka Bog @Howard Lyon
 321 R Canopy Vista @Steven Belledin
@@ -365,7 +365,7 @@ ScryfallCode=LCC
 357 R Temple of Mystery @Piotr Dura
 358 R Temple of Silence @Adam Paquette
 359 U Temple of the False God @James Zapata
-360 C Terramorphic Expanse @Dan Scott
+360 C Terramorphic Expanse @Dan Murayama Scott
 361 C Thriving Bluff @Johannes Voss
 362 C Thriving Grove @Ravenna Tran
 363 C Thriving Heath @Alayna Danner

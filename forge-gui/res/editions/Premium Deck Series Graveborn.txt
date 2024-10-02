@@ -29,7 +29,7 @@ ScryfallCode=PD3
 21 C Last Rites @Bradley Williams
 22 U Diabolic Servitude @Scott M. Fischer
 23 U Dread Return @Kev Walker
-24 U Crystal Vein @Pat Morrissey
+24 U Crystal Vein @Pat Lewis
 25 U Ebon Stronghold @Liz Danforth
 26 C Polluted Mire @Stephen Daniele
 27 L Swamp @Aleksi Briclot
