@@ -796,6 +796,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return setState(CardStateName.FaceDown, false);
     }
 
+    public void forceTurnFaceUp() {
+        turnFaceUp(false, null);
+    }
+
     public boolean turnFaceUp(SpellAbility cause) {
         return turnFaceUp(true, cause);
     }
@@ -7713,12 +7717,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             this.removeChangedCardKeywords(c.getLayerTimestamp(), stAb.getId(), false);
             this.removeChangedCardTraits(c.getLayerTimestamp(), stAb.getId());
         }
-    }
-
-    public void forceTurnFaceUp() {
-        getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
-        turnFaceUp(false, null);
-        getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 
     public final void addGoad(Long timestamp, final Player p) {
