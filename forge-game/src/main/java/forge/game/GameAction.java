@@ -1318,6 +1318,7 @@ public class GameAction {
 
                 checkAgainCard |= stateBasedAction_Saga(c, sacrificeList);
                 checkAgainCard |= stateBasedAction_Battle(c, noRegCreats);
+                checkAgainCard |= stateBasedAction_Siege(c);
                 checkAgainCard |= stateBasedAction_Role(c, unAttachList);
                 checkAgainCard |= stateBasedAction704_attach(c, unAttachList); // Attachment
 
@@ -1503,15 +1504,34 @@ public class GameAction {
     private boolean stateBasedAction_Battle(Card c, CardCollection removeList) {
         boolean checkAgain = false;
         if (!c.getType().isBattle()) {
-            return false;
+            return checkAgain;
+        }
+        if ((c.getProtectingPlayer() == null || !c.getProtectingPlayer().isInGame()) &&
+                (game.getCombat() == null || game.getCombat().getAttackersOf(c).isEmpty())) {
+            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
+            c.setProtectingPlayer(newProtector);
+            checkAgain = true;
         }
         if (c.getCounters(CounterEnumType.DEFENSE) > 0) {
-            return false;
+            return checkAgain;
         }
         // 704.5v If a battle has defense 0 and it isn't the source of an ability that has triggered but not yet left the stack,
         // it’s put into its owner’s graveyard.
         if (!game.getStack().hasSourceOnStack(c, SpellAbilityPredicates.isTrigger())) {
             removeList.add(c);
+            checkAgain = true;
+        }
+        return checkAgain;
+    }
+
+    private boolean stateBasedAction_Siege(Card c) {
+        boolean checkAgain = false;
+        if (!c.getType().hasStringType("Siege")) {
+            return false;
+        }
+        if (c.getController().equals(c.getProtectingPlayer())) {
+            Player newProtector = c.getController().getController().chooseSingleEntityForEffect(c.getController().getOpponents(), null, "Choose an opponent to protect this battle", null);
+            c.setProtectingPlayer(newProtector);
             checkAgain = true;
         }
         return checkAgain;
