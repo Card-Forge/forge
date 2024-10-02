@@ -62,7 +62,7 @@ ScryfallCode=PZ1
 53 U Anger @John Avon
 54 R Awaken the Sky Tyrant @Adam Paquette
 55 R Chaos Warp @Trevor Claxton
-56 M Daretti, Scrap Savant @Dan Scott
+56 M Daretti, Scrap Savant @Dan Murayama Scott
 57 R Diaochan, Artful Beauty @Miao Aili
 58 R Dream Pillager @Min Yum
 59 U Faithless Looting @Gabor Szikszai
@@ -71,7 +71,7 @@ ScryfallCode=PZ1
 62 R Goblin Sharpshooter @Wayne Reynolds
 63 R Magus of the Wheel @Carl Frank
 64 R Meteor Blast @Mike Sass
-65 R Mizzix's Mastery @Dan Scott
+65 R Mizzix's Mastery @Dan Murayama Scott
 66 U Punishing Fire @Christopher Moeller
 67 R Rite of the Raging Storm @Svetlin Velinov
 68 U Vow of Lightning @Svetlin Velinov

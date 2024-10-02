@@ -57,8 +57,8 @@ ScryfallCode=BRR
 49 R Scrap Trawler @Daarken
 50 R Sculpting Steel @Heather Hudson
 51 U Self-Assembler @Toraji
-52 R Semblance Anvil @Dan Scott
-53 U Sigil of Valor @Dan Scott
+52 R Semblance Anvil @Dan Murayama Scott
+53 U Sigil of Valor @Dan Murayama Scott
 54 U Soul-Guide Lantern @Cliff Childs
 55 U Springleaf Drum @Seb McKinnon
 56 M Staff of Domination @Ben Thompson
@@ -120,8 +120,8 @@ ScryfallCode=BRR
 112 R Scrap Trawler @Daarken
 113 R Sculpting Steel @Heather Hudson
 114 U Self-Assembler @Toraji
-115 R Semblance Anvil @Dan Scott
-116 U Sigil of Valor @Dan Scott
+115 R Semblance Anvil @Dan Murayama Scott
+116 U Sigil of Valor @Dan Murayama Scott
 117 U Soul-Guide Lantern @Lars Grant-West
 118 U Springleaf Drum @Jakub Kasper
 119 M Staff of Domination @Warren Mahy

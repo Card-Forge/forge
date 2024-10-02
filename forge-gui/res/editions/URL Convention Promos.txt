@@ -7,7 +7,7 @@ ScryfallCode=PURL
 
 [cards]
 1 R Steward of Valeron @Greg Staples
-2 R Kor Skyfisher @Dan Scott
+2 R Kor Skyfisher @Dan Murayama Scott
 3 R Bloodthrone Vampire @Steve Argyle
 4 R Merfolk Mesmerist @Jana Schirmer & Johannes Voss
 5 R Chandra's Fury @Volkan Baǵa

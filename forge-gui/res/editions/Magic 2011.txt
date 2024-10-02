@@ -227,7 +227,7 @@ ScryfallCode=M11
 213 U Sorcerer's Strongbox @Chuck Lukacs
 214 R Steel Overseer @Chris Rahn
 215 U Stone Golem @Martina Pilcerova
-216 R Sword of Vengeance @Dan Scott
+216 R Sword of Vengeance @Dan Murayama Scott
 217 R Temple Bell @Mark Tedin
 218 R Triskelion @Christopher Moeller
 219 U Voltaic Key @Franz Vohwinkel
@@ -240,7 +240,7 @@ ScryfallCode=M11
 226 R Mystifying Maze @Robh Ruppel
 227 R Rootbound Crag @Matt Stewart
 228 R Sunpetal Grove @Jason Chan
-229 C Terramorphic Expanse @Dan Scott
+229 C Terramorphic Expanse @Dan Murayama Scott
 230 L Plains @John Avon
 231 L Plains @John Avon
 232 L Plains @D. J. Cleland-Hura

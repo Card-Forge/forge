@@ -92,7 +92,7 @@ FoilAlwaysInCommonSlot=False
 77 R Embargo @Nelson DeCastro
 78 U Energy Flux @Qiao Dafu
 79 R Extravagant Spirit @Edward P. Beard, Jr.
-80 U False Demise @Pat Morrissey
+80 U False Demise @Pat Lewis
 81 U Glowing Anemone @Pete Venters
 82 C Gush @Kev Walker
 83 U High Seas @Massimilano Frezzato
@@ -116,10 +116,10 @@ FoilAlwaysInCommonSlot=False
 101 C Saprazzan Outrigger @Doug Chaffee
 102 C Saprazzan Raider @Jeff Miracola
 103 U Shoving Match @Dave Dorman
-104 U Soothsaying @Pat Morrissey
+104 U Soothsaying @Pat Lewis
 105 R Squeeze @DiTerlizzi
 106 R Statecraft @Mike Ploog
-107 C Stinging Barrier @Pat Morrissey
+107 C Stinging Barrier @Pat Lewis
 108 U Thwart @Christopher Moeller
 109 C Tidal Bore @Frank Kelly Freas
 110 R Tidal Kraken @Christopher Moeller
@@ -340,7 +340,7 @@ FoilAlwaysInCommonSlot=False
 325 U Rushwood Grove @George Pratt
 326 C Sandstone Needle @Alan Rabinowitz
 327 U Saprazzan Cove @Rebecca Guay
-328 C Saprazzan Skerry @Pat Morrissey
+328 C Saprazzan Skerry @Pat Lewis
 329 U Subterranean Hangar @Matt Cavotta
 330 R Tower of the Magistrate @Thomas Gianni
 331 L Plains @Terry Springer

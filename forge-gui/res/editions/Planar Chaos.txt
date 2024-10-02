@@ -23,7 +23,7 @@ ScryfallCode=PLC
 10 C Pallid Mycoderm @Jim Nelson
 11 C Poultice Sliver @Randy Gallegos
 12 U Rebuff the Wicked @Stephen Tappin
-13 R Retether @Dan Scott
+13 R Retether @Dan Murayama Scott
 14 U Riftmarked Knight @William O'Connor
 15 U Saltblast @Paolo Parente
 16 C Saltfield Recluse @Brian Despain
@@ -49,7 +49,7 @@ ScryfallCode=PLC
 36 R Braids, Conjurer Adept @Zoltan Boros & Gabor Szikszai
 37 R Chronozoa @James Wong
 38 R Dichotomancy @Steven Belledin
-39 U Dismal Failure @Dan Scott
+39 U Dismal Failure @Dan Murayama Scott
 40 C Dreamscape Artist @Jim Murray
 41 C Erratic Mutation @Zoltan Boros & Gabor Szikszai
 42 U Jodah's Avenger @Pete Venters
@@ -71,7 +71,7 @@ ScryfallCode=PLC
 58 C Piracy Charm @John Avon
 59 C Primal Plasma @Luca Zontini
 60 U Riptide Pilferer @Steve Prescott
-61 R Serendib Sorcerer @Dan Scott
+61 R Serendib Sorcerer @Dan Murayama Scott
 62 R Serra Sphinx @Daren Bader
 63 U Big Game Hunter @Carl Critchlow
 64 C Blightspeaker @Ron Spears
@@ -142,7 +142,7 @@ ScryfallCode=PLC
 129 C Giant Dustwasp @Greg Hildebrandt
 130 U Hunting Wilds @Steve Ellis
 131 R Jedit Ojanen of Efrava @Carl Critchlow
-132 U Kavu Predator @Dan Scott
+132 U Kavu Predator @Dan Murayama Scott
 133 R Life and Limb @Jim Nelson
 134 R Magus of the Library @Wayne Reynolds
 135 C Mire Boa @Greg Hildebrandt
@@ -168,7 +168,7 @@ ScryfallCode=PLC
 155 U Darkheart Sliver @rk post
 156 U Dormant Sliver @Lars Grant-West
 157 U Frenetic Sliver @Luca Zontini
-158 R Intet, the Dreamer @Dan Scott
+158 R Intet, the Dreamer @Dan Murayama Scott
 159 U Necrotic Sliver @Dave Allsop
 160 R Numot, the Devastator @Dan Dos Santos
 161 R Oros, the Avenger @Daren Bader

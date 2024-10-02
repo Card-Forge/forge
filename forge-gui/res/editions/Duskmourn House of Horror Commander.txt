@@ -129,7 +129,7 @@ ScryfallCode=DSC
 121 M One with the Multiverse @Liiga Smilshkalne
 122 C Otherworldly Gaze @Chris Cold
 123 R Primordial Mist @Titus Lunter
-124 R Prognostic Sphinx @Steve Prescott
+124 R Prognostic Sphinx @Jesper Ejsing
 125 U Reality Shift @Howard Lyon
 126 U Retreat to Coralhelm @Kieran Yanner
 127 R Shark Typhoon @Caio Monteiro

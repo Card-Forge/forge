@@ -50,7 +50,7 @@ ScryfallCode=M21
 36 U Selfless Savior @Ralph Horsley
 37 U Siege Striker @Zoltan Boros
 38 R Speaker of the Heavens @Randy Vargas
-39 C Staunch Shieldmate @Bartlomiej Gawel
+39 C Staunch Shieldmate @Bartłomiej Gaweł
 40 C Swift Response @Deruchenko Alexander
 41 U Tempered Veteran @Izzy
 42 C Valorous Steed @Donato Giancola
@@ -118,7 +118,7 @@ ScryfallCode=M21
 104 R Hooded Blightfang @Uriah Voth
 105 C Infernal Scarring @Mike Bierek
 106 R Kaervek, the Spiteful @Daarken
-107 U Kitesail Freebooter @Dan Scott
+107 U Kitesail Freebooter @Dan Murayama Scott
 108 M Liliana, Waker of the Dead @Anna Steinbauer
 109 U Liliana's Devotee @Colin Boyer
 110 R Liliana's Standard Bearer @Josh Hass
@@ -191,7 +191,7 @@ ScryfallCode=M21
 177 U Cultivate @Anthony Palumbo
 178 C Drowsing Tyrannodon @Simon Dominic
 179 M Elder Gargaroth @Nicholas Gregory
-180 R Feline Sovereign @Dan Scott
+180 R Feline Sovereign @Dan Murayama Scott
 181 U Fierce Empath @Johann Bodin
 182 U Fungal Rebirth @Nicholas Gregory
 183 M Garruk, Unleashed @Lie Setiawan
@@ -342,7 +342,7 @@ ScryfallCode=M21
 
 [precon product]
 320 M Basri, Devoted Paladin @Jason Rainville
-321 C Adherent of Hope @Dan Scott
+321 C Adherent of Hope @Dan Murayama Scott
 322 R Basri's Aegis @Paul Scott Canavan
 323 U Sigiled Contender @Randy Vargas
 324 M Teferi, Timeless Voyager @Jake Murray
@@ -351,7 +351,7 @@ ScryfallCode=M21
 327 R Teferi's Wavecaster @Miranda Meeks
 328 M Liliana, Death Mage @Kieran Yanner
 329 R Liliana's Scorn @Josh Hass
-330 U Liliana's Scrounger @Martina Fackova
+330 U Liliana's Scrounger @Martina Fačková
 331 C Spirit of Malevolence @Josu Hernaiz
 332 M Chandra, Flame's Catalyst @Grzegorz Rutkowski
 333 R Chandra's Firemaw @Bryan Sola
@@ -360,7 +360,7 @@ ScryfallCode=M21
 336 M Garruk, Savage Herald @Eric Deschamps
 337 R Garruk's Warsteed @Ilse Gort
 338 U Predatory Wurm @Jason A. Engle
-339 C Wildwood Patrol @Dan Scott
+339 C Wildwood Patrol @Dan Murayama Scott
 
 [extended art]
 340 M Baneslayer Angel @Greg Staples
@@ -397,7 +397,7 @@ ScryfallCode=M21
 371 R Volcanic Salvo @Torstein Nordstrand
 372 R Azusa, Lost but Seeking @Winona Nelson
 373 M Elder Gargaroth @Nicholas Gregory
-374 R Feline Sovereign @Dan Scott
+374 R Feline Sovereign @Dan Murayama Scott
 375 R Heroic Intervention @James Ryman
 376 R Jolrael, Mwonvuli Recluse @Izzy
 377 R Primal Might @Randy Vargas

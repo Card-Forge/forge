@@ -62,7 +62,7 @@ ScryfallCode=SOM
 48 U Trinket Mage @Scott Chou
 49 C Turn Aside @Shelly Wan
 50 U Twisted Image @Izzy
-51 C Vault Skyward @Dan Scott
+51 C Vault Skyward @Dan Murayama Scott
 52 C Vedalken Certarch @Karl Kopinski
 53 U Volition Reins @Svetlin Velinov
 54 C Blackcleave Goblin @Nils Hamm
@@ -212,7 +212,7 @@ ScryfallCode=SOM
 198 U Rust Tick @Carl Critchlow
 199 U Rusted Relic @Igor Kieryluk
 200 C Saberclaw Golem @Mike Bierek
-201 R Semblance Anvil @Dan Scott
+201 R Semblance Anvil @Dan Murayama Scott
 202 C Silver Myr @Alan Pollack
 203 C Snapsail Glider @Efrem Palacios
 204 C Soliton @Jason Felix

@@ -17,7 +17,7 @@ ScryfallCode=DIS
 2 U Azorius Herald @Justin Sweet
 3 C Beacon Hawk @William Simpson
 4 U Blessing of the Nephilim @Greg Hildebrandt
-5 U Brace for Impact @Dan Scott
+5 U Brace for Impact @Dan Murayama Scott
 6 C Carom @Alex Horley-Orlandelli
 7 R Celestial Ancient @Mark Tedin
 8 U Condemn @Daren Bader
@@ -35,7 +35,7 @@ ScryfallCode=DIS
 20 C Valor Made Real @Jeff Miracola
 21 R Wakestone Gargoyle @Jim Murray
 22 U Court Hussar @Ron Spears
-23 R Cytoplast Manipulator @Dan Scott
+23 R Cytoplast Manipulator @Dan Murayama Scott
 24 C Enigma Eidolon @Shishizaru
 25 R Govern the Guildless @Alex Horley-Orlandelli
 26 C Helium Squirter @Hideaki Takamura
@@ -64,7 +64,7 @@ ScryfallCode=DIS
 49 U Nightcreep @Jeff Miracola
 50 R Nihilistic Glee @Ron Spears & Wayne Reynolds
 51 U Ragamuffyn @rk post
-52 R Ratcatcher @Dan Scott
+52 R Ratcatcher @Dan Murayama Scott
 53 C Seal of Doom @Ralph Horsley
 54 C Slaughterhouse Bouncer @Greg Staples
 55 U Slithering Shade @Daren Bader
@@ -96,7 +96,7 @@ ScryfallCode=DIS
 81 R Cytoplast Root-Kin @Thomas M. Baxa
 82 C Cytospawn Shambler @Anthony S. Waters
 83 R Elemental Resonance @Mark Tedin
-84 U Fertile Imagination @Dan Scott
+84 U Fertile Imagination @Dan Murayama Scott
 85 U Flash Foliage @Ron Spears
 86 U Indrik Stomphowler @Carl Critchlow
 87 R Loaming Shaman @Carl Critchlow
@@ -106,7 +106,7 @@ ScryfallCode=DIS
 91 U Simic Basilisk @Luca Zontini
 92 C Simic Initiate @Dany Orizio
 93 C Simic Ragworm @Nick Percival
-94 C Sporeback Troll @Dan Scott
+94 C Sporeback Troll @Dan Murayama Scott
 95 R Sprouting Phytohydra @Heather Hudson
 96 U Stomp and Howl @Carl Critchlow
 97 C Street Savvy @Kev Walker
@@ -154,7 +154,7 @@ ScryfallCode=DIS
 139 C Wrecking Ball @Ron Spears
 140 R Avatar of Discord @rk post
 141 U Azorius Guildmage @Christopher Moeller
-142 R Biomantic Mastery @Dan Scott
+142 R Biomantic Mastery @Dan Murayama Scott
 143 R Dovescape @Shishizaru
 144 C Minister of Impediments @Brian Hagan
 145 U Rakdos Guildmage @Jeremy Jarvis
