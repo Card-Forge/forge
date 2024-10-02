@@ -3,7 +3,6 @@ package forge.game.zone;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
