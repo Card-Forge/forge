@@ -351,12 +351,6 @@ Replace=.042F fromSheet("MH3 alternate frame")
 301 R Deserted Temple @Rob Alexander
 302 U Nesting Grounds @Yeong-Hao Han
 303 M Phyrexian Tower @Martin de Diego Sádaba
-304 L Plains @Nadia Hurianova
-305 L Island @Samuele Bandini
-306 L Swamp @Yohann Schepacz
-307 L Mountain @Chuck Lukacs
-308 L Forest @Vance Kovacs
-309 U Snow-Covered Wastes @Tomáš Honz
 310 L Plains @Volkan Baǵa
 311 L Plains @Lius Lasahido
 312 L Island @Alayna Danner
@@ -367,6 +361,14 @@ Replace=.042F fromSheet("MH3 alternate frame")
 317 L Mountain @Paolo Parente
 318 L Forest @Lars Grant-West
 319 L Forest @Brian Valeza
+
+[full art]
+304 L Plains @Nadia Hurianova
+305 L Island @Samuele Bandini
+306 L Swamp @Yohann Schepacz
+307 L Mountain @Chuck Lukacs
+308 L Forest @Vance Kovacs
+309 U Snow-Covered Wastes @Tomáš Honz
 
 [borderless]
 320 R Echoes of Eternity @Clint Lockwood
@@ -588,14 +590,6 @@ Replace=.042F fromSheet("MH3 alternate frame")
 A29 R A-Guide of Souls @Ryan Valle
 A38 M A-Ocelot Pride @Chris Seaman
 A122 C A-Galvanic Discharge @Zoltan Boros
-
-[full art]
-304 L Plains @Nadia Hurianova
-305 L Island @Samuele Bandini
-306 L Swamp @Yohann Schepacz
-307 L Mountain @Chuck Lukacs
-308 L Forest @Vance Kovacs
-309 U Snow-Covered Wastes @Tomáš Honz
 
 [new to modern]
 1 Angel of the Ruins|MH3
