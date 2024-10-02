@@ -173,6 +173,13 @@ public abstract class PlayerController {
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN);
 
     public abstract boolean willPutCardOnTop(Card c);
+
+    /**
+     * Prompts the player to choose the order for cards being moved into a zone.
+     * The cards will be returned in the order that they should be moved, one at a time,
+     * to the given zone and position. Be aware that when moving cards to the top of a
+     * deck, this will be the reverse of the order they will ultimately end up in.
+     */
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
     /** p = target player, validCards - possible discards, min cards to discard */
