@@ -300,7 +300,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final PlayerCollection getOpponents() {
-        return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
+        return game.getPlayersInTurnOrder(this).filter(PlayerPredicates.isOpponentOf(this));
     }
 
     public final PlayerCollection getRegisteredOpponents() {
