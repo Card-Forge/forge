@@ -120,7 +120,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
                     final PlayerZone zone = c.getOwner().getZone(destZone1);
 
                     if (!sa.hasParam("ChangeLater")) {
-                        if (zone.is(ZoneType.Library) || zone.is(ZoneType.PlanarDeck) || zone.is(ZoneType.SchemeDeck)) {
+                        if (zone.getZoneType().isDeck()) {
                             c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                         } else {
                             if (destZone1.equals(ZoneType.Battlefield)) {
@@ -153,8 +153,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
             // now, move the rest to destZone2
             if (!sa.hasParam("ChangeLater")) {
-                if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck
-                        || destZone2 == ZoneType.SchemeDeck || destZone2 == ZoneType.Graveyard) {
+                if (destZone2.isDeck() || destZone2 == ZoneType.Graveyard) {
                     CardCollection afterOrder = rest;
                     if (sa.hasParam("RestRandomOrder")) {
                         CardLists.shuffle(afterOrder);
