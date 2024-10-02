@@ -26,15 +26,15 @@ ScryfallCode=SNC
 13 C Gathering Throng @Randy Vargas
 14 R Giada, Font of Hope @Eric Deschamps
 15 M Halo Fountain @Anastasia Ovchinnikova
-16 C Hold for Ransom @Nestor Ossandon Leal
+16 C Hold for Ransom @Néstor Ossandón Leal
 17 U Illuminator Virtuoso @John Stanko
 18 C Inspiring Overseer @Irina Nordsol
 19 C Kill Shot @Josh Hass
 20 U Knockout Blow @Zoltan Boros
 21 U Mage's Attendant @Igor Kieryluk
-22 R Mysterious Limousine @Dan Scott
+22 R Mysterious Limousine @Dan Murayama Scott
 23 U Patch Up @Scott Murphy
-24 R Rabble Rousing @Nestor Ossandon Leal
+24 R Rabble Rousing @Néstor Ossandón Leal
 25 C Raffine's Guidance @Rémi Jacquot
 26 C Raffine's Informant @John Stanko
 27 U Refuse to Yield @Josh Hass
@@ -77,7 +77,7 @@ ScryfallCode=SNC
 64 U Wingshield Agent @Aaron J. Riley
 65 R Wiretapping @Jason A. Engle
 66 C Witness Protection @Dominik Mayer
-67 M Angel of Suffering @Martina Fackova
+67 M Angel of Suffering @Martina Fačková
 68 M Body Launderer @Matt Stewart
 69 R Cemetery Tampering @Taras Susak
 70 C Corrupt Court Official @Drew Baker
@@ -126,7 +126,7 @@ ScryfallCode=SNC
 113 C Light 'Em Up @Tony Foti
 114 C Mayhem Patrol @Johan Grenier
 115 C Plasma Jockey @Andrew Mar
-116 R Professional Face-Breaker @Dan Scott
+116 R Professional Face-Breaker @Dan Murayama Scott
 117 U Pugnacious Pugilist @Justine Cruz
 118 U Pyre-Sledge Arsonist @Kekai Kotaki
 119 C Ready to Rumble @Josu Hernaiz
@@ -176,7 +176,7 @@ ScryfallCode=SNC
 163 U Voice of the Vermin @Irina Nordsol
 164 C Warm Welcome @Inka Schulz
 165 R Workshop Warchief @Zoltan Boros
-166 R Aven Heartstabber @Dan Scott
+166 R Aven Heartstabber @Dan Murayama Scott
 167 R Black Market Tycoon @Brock Grossman
 168 C Body Dropper @Jakub Kasper
 169 U Brazen Upstart @Dallas Williams
@@ -207,7 +207,7 @@ ScryfallCode=SNC
 194 C Jetmir's Fixer @John Thacker
 195 R Jinnie Fay, Jetmir's Second @David Gaillet
 196 U Lagrella, the Magpie @Donato Giancola
-197 M Lord Xander, the Collector @Martina Fackova
+197 M Lord Xander, the Collector @Martina Fačková
 198 R Maestros Ascendancy @Jodie Muir
 199 U Maestros Charm @Steve Argyle
 200 R Maestros Diabolist @Bastien L. Deharme
@@ -433,15 +433,15 @@ ScryfallCode=SNC
 [extended art]
 406 R Depopulate @Jokubas Uogintas
 407 R Extraction Specialist @Irina Nordsol
-408 R Mysterious Limousine @Dan Scott
-409 R Rabble Rousing @Nestor Ossandon Leal
+408 R Mysterious Limousine @Dan Murayama Scott
+409 R Rabble Rousing @Néstor Ossandón Leal
 410 R Cut Your Losses @Dominik Mayer
 411 M Even the Score @Greg Opalinski
 412 R Ledger Shredder @Mila Pesic
 413 R Reservoir Kraken @Nicholas Gregory
 414 R Undercover Operative @Tyler Walpole
 415 R Wiretapping @Jason A. Engle
-416 M Angel of Suffering @Martina Fackova
+416 M Angel of Suffering @Martina Fačková
 417 M Body Launderer @Matt Stewart
 418 R Cemetery Tampering @Taras Susak
 419 R Cut of the Profits @Donato Giancola
@@ -451,14 +451,14 @@ ScryfallCode=SNC
 423 R Devilish Valet @Bud Cook
 424 R Hoard Hauler @Jake Murray
 425 R Jaxis, the Troublemaker @Zoltan Boros
-426 R Professional Face-Breaker @Dan Scott
+426 R Professional Face-Breaker @Dan Murayama Scott
 427 R Structural Assault @Liiga Smilshkalne
 428 R Widespread Thieving @Andrew Mar
 429 R Evolving Door @Drew Baker
 430 R Fight Rigging @Daarken
 431 R Gala Greeters @Bud Cook
 432 R Workshop Warchief @Zoltan Boros
-433 R Aven Heartstabber @Dan Scott
+433 R Aven Heartstabber @Dan Murayama Scott
 434 R Black Market Tycoon @Brock Grossman
 435 R Corpse Explosion @Greg Staples
 436 M Meeting of the Five @Dominik Mayer

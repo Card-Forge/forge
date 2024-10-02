@@ -95,7 +95,7 @@ ScryfallCode=C13
 86 R Phyrexian Delver @Igor Kieryluk
 87 U Phyrexian Gargantua @Igor Kieryluk
 88 U Phyrexian Reclamation @rk post
-89 R Price of Knowledge @Dan Scott
+89 R Price of Knowledge @Dan Murayama Scott
 90 C Quagmire Druid @Jaime Jones
 91 U Reckless Spite @Karl Kopinski
 92 R Sanguine Bond @Jaime Jones
@@ -109,7 +109,7 @@ ScryfallCode=C13
 100 U Wight of Precinct Six @Ryan Barger
 101 U Blood Rites @Raymond Swanland
 102 R Capricious Efreet @Justin Sweet
-103 R Charmbreaker Devils @Dan Scott
+103 R Charmbreaker Devils @Dan Murayama Scott
 104 R Crater Hellion @Daren Bader
 105 U Curse of Chaos @Jason A. Engle
 106 U Fireball @Dave Dorman
@@ -130,7 +130,7 @@ ScryfallCode=C13
 121 R Stalking Vengeance @Anthony S. Waters
 122 R Starstorm @Jonas De Ro
 123 U Street Spasm @Raymond Swanland
-124 R Sudden Demise @Dan Scott
+124 R Sudden Demise @Dan Murayama Scott
 125 R Tempt with Vengeance @Ryan Barger
 126 U Terra Ravager @Ralph Horsley
 127 R Tooth and Claw @Val Mayerik
@@ -138,7 +138,7 @@ ScryfallCode=C13
 129 R Warstorm Surge @Raymond Swanland
 130 R Where Ancients Tread @Zoltan Boros & Gabor Szikszai
 131 R Widespread Panic @Dave Kendall
-132 R Wild Ricochet @Dan Scott
+132 R Wild Ricochet @Dan Murayama Scott
 133 R Witch Hunt @Karl Kopinski
 134 U Acidic Slime @Karl Kopinski
 135 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
@@ -259,7 +259,7 @@ ScryfallCode=C13
 250 C Obelisk of Esper @Francis Tsai
 251 C Obelisk of Grixis @Nils Hamm
 252 C Obelisk of Jund @Brandon Kitkouski
-253 C Pilgrim's Eye @Dan Scott
+253 C Pilgrim's Eye @Dan Murayama Scott
 254 R Plague Boiler @Mark Tedin
 255 C Pristine Talisman @Matt Cavotta
 256 R Seer's Sundial @Franz Vohwinkel
@@ -334,7 +334,7 @@ ScryfallCode=C13
 325 C Smoldering Crater @Mark Tedin
 326 R Springjack Pasture @Terese Nielsen
 327 U Temple of the False God @Brian Snõddy
-328 C Terramorphic Expanse @Dan Scott
+328 C Terramorphic Expanse @Dan Murayama Scott
 329 C Tranquil Thicket @Heather Hudson
 330 C Transguild Promenade @Noah Bradley
 331 U Urza's Factory @Mark Tedin

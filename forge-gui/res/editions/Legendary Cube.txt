@@ -7,7 +7,7 @@ Type=Online
 ScryfallCode=PZ1
 
 [cards]
-1 R Bastion Protector @Victor Adame Minguez
+1 U Bastion Protector @Victor Adame Minguez
 2 R Containment Priest @John Stanko
 3 R Dawnbreak Reclaimer @Tyler Jacobson
 4 U Ghostly Prison @Wayne England
@@ -62,7 +62,7 @@ ScryfallCode=PZ1
 53 U Anger @John Avon
 54 R Awaken the Sky Tyrant @Adam Paquette
 55 R Chaos Warp @Trevor Claxton
-56 M Daretti, Scrap Savant @Dan Scott
+56 M Daretti, Scrap Savant @Dan Murayama Scott
 57 R Diaochan, Artful Beauty @Miao Aili
 58 R Dream Pillager @Min Yum
 59 U Faithless Looting @Gabor Szikszai
@@ -71,7 +71,7 @@ ScryfallCode=PZ1
 62 R Goblin Sharpshooter @Wayne Reynolds
 63 R Magus of the Wheel @Carl Frank
 64 R Meteor Blast @Mike Sass
-65 R Mizzix's Mastery @Dan Scott
+65 R Mizzix's Mastery @Dan Murayama Scott
 66 U Punishing Fire @Christopher Moeller
 67 R Rite of the Raging Storm @Svetlin Velinov
 68 U Vow of Lightning @Svetlin Velinov
@@ -134,7 +134,7 @@ ScryfallCode=PZ1
 125 R Sandstone Oracle @Eric Deschamps
 126 R Scroll Rack @Heather Hudson
 127 R Scytheclaw @James Paick
-128 U Seal of the Guildpact @Franz Vohwinkel
+128 R Seal of the Guildpact @Franz Vohwinkel
 129 U Sol Ring @Mike Bierek
 130 U Swiftfoot Boots @Svetlin Velinov
 131 U Thought Vessel @rk post

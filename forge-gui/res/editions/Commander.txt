@@ -71,7 +71,7 @@ ScryfallCode=cmd
 60 U Scattering Stroke @Franz Vohwinkel
 61 U Skyscribing @Luca Zontini
 62 C Slipstream Eel @Mark Tedin
-63 U Spell Crumple @Dan Scott
+63 U Spell Crumple @Dan Murayama Scott
 64 R Trade Secrets @Ron Spears
 65 R Trench Gorger @Hideaki Takamura
 66 U Vedalken Plotter @Greg Staples
@@ -147,7 +147,7 @@ ScryfallCode=cmd
 136 R Stranglehold @John Stanko
 137 U Sulfurous Blast @Jeff Miracola
 138 U Vow of Lightning @Svetlin Velinov
-139 R Wild Ricochet @Dan Scott
+139 R Wild Ricochet @Dan Murayama Scott
 140 U Acidic Slime @Karl Kopinski
 141 C Aquastrand Spider @Dany Orizio
 142 R Awakening Zone @Johann Bodin
@@ -212,7 +212,7 @@ ScryfallCode=cmd
 201 U Golgari Guildmage @Zoltan Boros & Gabor Szikszai
 202 U Gwyllion Hedge-Mage @Todd Lockwood
 203 C Hull Breach @Brian Snõddy
-204 R Intet, the Dreamer @Dan Scott
+204 R Intet, the Dreamer @Dan Murayama Scott
 205 C Izzet Chronarch @Nick Percival
 206 M Kaalia of the Vast @Michael Komarck
 207 M Karador, Ghost Chieftain @Todd Lockwood
@@ -299,7 +299,7 @@ ScryfallCode=cmd
 288 C Simic Growth Chamber @John Avon
 289 U Svogthos, the Restless Tomb @Martina Pilcerova
 290 U Temple of the False God @Brian Snõddy
-291 C Terramorphic Expanse @Dan Scott
+291 C Terramorphic Expanse @Dan Murayama Scott
 292 C Tranquil Thicket @Heather Hudson
 293 U Vivid Crag @Martina Pilcerova
 294 U Vivid Creek @Fred Fields

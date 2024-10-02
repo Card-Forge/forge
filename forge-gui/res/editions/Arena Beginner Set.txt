@@ -95,7 +95,7 @@ ScryfallCode=ANB
 87 C Tin Street Cadet @Jarel Threat
 88 U Volcanic Dragon @Chris Rahn
 89 U Affectionate Indrik @Steve Prescott
-90 C Baloth Packhunter @Nestor Ossandon Leal
+90 C Baloth Packhunter @Néstor Ossandón Leal
 91 C Charging Badger @Raoul Vitale
 92 U Colossal Majesty @Randy Vargas
 93 R Epic Proportions @Jesper Ejsing
@@ -113,7 +113,7 @@ ScryfallCode=ANB
 105 C Stony Strength @Chris Seaman
 106 C Titanic Growth @Ryan Pancoast
 107 C Treetop Warden @Colin Boyer
-108 C Wildwood Patrol @Dan Scott
+108 C Wildwood Patrol @Dan Murayama Scott
 109 C Woodland Mystic @Uriah Voth
 110 R World Shaper @Raymond Swanland
 111 C Evolving Wilds @Steven Belledin
@@ -122,5 +122,5 @@ ScryfallCode=ANB
 114 C Mountain @Richard Wright
 115 C Plains @Nils Hamm
 116 C Swamp @Adam Paquette
-117 C Arcane Signet @Dan Scott
+117 C Arcane Signet @Dan Murayama Scott
 118 C Command Tower @Evan Shipard

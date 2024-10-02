@@ -97,7 +97,7 @@ ScryfallCode=ARN
 70 U Bazaar of Baghdad @Jeff A. Menges
 71 U City of Brass @Mark Tedin
 72 C Desert @Jesper Myrfors
-73 U Diamond Valley @Brian Snõddy
+73 R Diamond Valley @Brian Snõddy
 74 R Elephant Graveyard @Rob Alexander
 75 R Island of Wak-Wak @Douglas Shuler
 76 U Library of Alexandria @Mark Poole

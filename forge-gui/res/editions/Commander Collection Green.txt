@@ -6,7 +6,7 @@ Type=Collector_Edition
 ScryfallCode=CC1
 
 [cards]
-1 R Freyalise, Llanowar's Fury @Kieran Yanner
+1 M Freyalise, Llanowar's Fury @Kieran Yanner
 2 M Omnath, Locus of Mana @Chase Stone
 3 R Bane of Progress @Grzegorz Rutkowski
 4 R Seedborn Muse @Forrest Imel

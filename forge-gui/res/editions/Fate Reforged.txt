@@ -27,7 +27,7 @@ ScryfallCode=FRF
 14 U Honor's Reward @Izzy
 15 U Jeskai Barricade @Noah Bradley
 16 U Lightform @Steve Prescott
-17 U Lotus-Eye Mystics @Dan Scott
+17 U Lotus-Eye Mystics @Dan Murayama Scott
 18 U Mardu Woe-Reaper @Willian Murai
 19 R Mastery of the Unseen @Daniel Ljunggren
 20 M Monastery Mentor @Magali Villeneuve
@@ -54,13 +54,13 @@ ScryfallCode=FRF
 41 U Mindscour Dragon @Wesley Burt
 42 U Mistfire Adept @Clint Cearley
 43 R Monastery Siege @Mark Winters
-44 U Neutralizing Blast @Dan Scott
+44 U Neutralizing Blast @Dan Murayama Scott
 45 C Rakshasa's Disdain @Seb McKinnon
 46 U Reality Shift @Howard Lyon
 47 C Refocus @Kev Walker
 48 U Renowned Weaponsmith @Eric Deschamps
 49 U Rite of Undoing @Anastasia Ovchinnikova
-50 R Sage-Eye Avengers @Dan Scott
+50 R Sage-Eye Avengers @Dan Murayama Scott
 51 U Shifting Loyalties @James Ryman
 52 R Shu Yun, the Silent Tempest @David Gaillet
 53 C Sultai Skullkeeper @Ryan Barger

@@ -146,7 +146,7 @@ ScryfallCode=AKR
 136 U Abrade @Jonas De Ro
 137 U Ahn-Crop Crasher @Seb McKinnon
 138 R Anger of the Gods @Yigit Koroglu
-139 U Battlefield Scavenger @Dan Scott
+139 U Battlefield Scavenger @Dan Murayama Scott
 140 C Bloodlust Inciter @Anthony Palumbo
 141 C Blur of Blades @Anna Steinbauer
 142 C Brute Strength @Nils Hamm
@@ -173,7 +173,7 @@ ScryfallCode=AKR
 163 C Khenra Scrapper @Jesper Ejsing
 164 C Magma Spray @Svetlin Velinov
 165 U Magmaroth @Yeong-Hao Han
-166 C Nef-Crop Entangler @Dan Scott
+166 C Nef-Crop Entangler @Dan Murayama Scott
 167 M Neheb, the Eternal @Chris Rahn
 168 C Nimble-Blade Khenra @Tomasz Jedruszek
 169 C Open Fire @Jason Kang
@@ -205,7 +205,7 @@ ScryfallCode=AKR
 195 U Hope Tender @Magali Villeneuve
 196 M Hornet Queen @Jonathan Kuo
 197 R Hour of Promise @Jonas De Ro
-198 C Initiate's Companion @Dan Scott
+198 C Initiate's Companion @Dan Murayama Scott
 199 C Life Goes On @Daarken
 200 M Majestic Myriarch @Randy Vargas
 201 U Manglehorn @Lius Lasahido
@@ -249,7 +249,7 @@ ScryfallCode=AKR
 239 R Heaven // Earth @Jonas De Ro
 240 U Honored Crop-Captain @Sara Winters
 241 U Khenra Charioteer @Chris Rallis
-242 R Leave // Chance @Dan Scott
+242 R Leave // Chance @Dan Murayama Scott
 243 M The Locust God @Lius Lasahido
 244 R Lord of Extinction @Jason A. Engle
 245 U Merciless Javelineer @Nils Hamm

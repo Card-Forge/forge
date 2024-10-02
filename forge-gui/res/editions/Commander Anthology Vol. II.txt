@@ -9,7 +9,7 @@ ScryfallCode=CM2
 1 M The Mimeoplasm @Svetlin Velinov
 2 M Damia, Sage of Stone @Steve Argyle
 3 R Vorosh, the Hunter @Mark Zug
-4 M Daretti, Scrap Savant @Dan Scott
+4 M Daretti, Scrap Savant @Dan Murayama Scott
 5 R Bosh, Iron Golem @Brom
 6 M Feldon of the Third Path @Chase Stone
 7 M Kalemne, Disciple of Iroas @Jason Chan
@@ -54,8 +54,8 @@ ScryfallCode=CM2
 46 R Minds Aglow @Yeong-Hao Han
 47 C Mulldrifter @Eric Fortune
 48 R Riddlekeeper @Steve Prescott
-49 U Slipstream Eel @Mark Tedin
-50 U Spell Crumple @Dan Scott
+49 C Slipstream Eel @Mark Tedin
+50 U Spell Crumple @Dan Murayama Scott
 51 U Tezzeret's Gambit @Karl Kopinski
 52 U Thrummingbird @Efrem Palacios
 53 C Treasure Cruise @Cynthia Sheppard
@@ -121,7 +121,7 @@ ScryfallCode=CM2
 113 R Magus of the Wheel @Carl Frank
 114 U Meteor Blast @Mike Sass
 115 U Rite of the Raging Storm @Svetlin Velinov
-116 R Scrap Mastery @Dan Scott
+116 R Scrap Mastery @Dan Murayama Scott
 117 U Spitebellows @Larry MacDougall
 118 R Starstorm @Jonas De Ro
 119 C Stinkdrinker Daredevil @Pete Venters
@@ -144,7 +144,7 @@ ScryfallCode=CM2
 136 U Eternal Witness @Terese Nielsen
 137 R Forgotten Ancient @Mark Tedin
 138 R Hardened Scales @Mark Winters
-139 U Inspiring Call @Dan Scott
+139 U Inspiring Call @Dan Murayama Scott
 140 M Kalonian Hydra @Chris Rahn
 141 R Lhurgoyf @Pete Venters
 142 C Relic Crush @Steven Belledin
@@ -215,7 +215,7 @@ ScryfallCode=CM2
 207 U Palladium Myr @Alan Pollack
 208 C Panic Spellbomb @Franz Vohwinkel
 209 R Pentavus @Greg Staples
-210 C Pilgrim's Eye @Dan Scott
+210 C Pilgrim's Eye @Dan Murayama Scott
 211 C Pristine Talisman @Matt Cavotta
 212 R Ruby Medallion @Daniel Ljunggren
 213 U Sandstone Oracle @Eric Deschamps
@@ -224,9 +224,9 @@ ScryfallCode=CM2
 216 C Simic Signet @Mike Sass
 217 U Sol Ring @Mike Bierek
 218 R Solemn Simulacrum @Greg Staples
-219 R Solemn Simulacrum @Dan Scott
+219 R Solemn Simulacrum @Dan Murayama Scott
 220 R Spine of Ish Sah @Daniel Ljunggren
-221 R Staff of Nin @Dan Scott
+221 R Staff of Nin @Dan Murayama Scott
 222 R Steel Hellkite @James Paick
 223 U Swiftfoot Boots @Svetlin Velinov
 224 C Thought Vessel @rk post
@@ -278,7 +278,7 @@ ScryfallCode=CM2
 270 U Svogthos, the Restless Tomb @Martina Pilcerova
 271 U Temple of the False God @Brian Snõddy
 272 U Temple of the False God @James Zapata
-273 C Terramorphic Expanse @Dan Scott
+273 C Terramorphic Expanse @Dan Murayama Scott
 274 C Tranquil Thicket @Heather Hudson
 275 R Underground River @Andrew Goldhawk
 276 U Vivid Crag @Martina Pilcerova

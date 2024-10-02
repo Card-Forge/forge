@@ -22,7 +22,7 @@ ScryfallCode=C14
 13 R Domineering Will @Mike Sass
 14 R Dulcet Sirens @Magali Villeneuve
 15 R Intellectual Offering @Mark Winters
-16 R Reef Worm @Dan Scott
+16 R Reef Worm @Dan Murayama Scott
 17 M Stitcher Geralf @Karla Ortiz
 18 R Stormsurge Kraken @Svetlin Velinov
 19 M Teferi, Temporal Archmage @Tyler Jacobson
@@ -39,12 +39,12 @@ ScryfallCode=C14
 30 R Spoils of Blood @Erica Yang
 31 R Wake the Dead @Christopher Moeller
 32 R Bitter Feud @Aaron Miller
-33 M Daretti, Scrap Savant @Dan Scott
+33 M Daretti, Scrap Savant @Dan Murayama Scott
 34 R Dualcaster Mage @Matt Stewart
 35 M Feldon of the Third Path @Chase Stone
 36 R Impact Resonance @Jesper Ejsing
 37 R Incite Rebellion @Alex Horley-Orlandelli
-38 R Scrap Mastery @Dan Scott
+38 R Scrap Mastery @Dan Murayama Scott
 39 R Tyrant's Familiar @Todd Lockwood
 40 R Volcanic Offering @Eric Velhagen
 41 R Warmonger Hellkite @Trevor Claxton
@@ -82,7 +82,7 @@ ScryfallCode=C14
 73 U Gift of Estates @Hugh Jamieson
 74 R Grand Abolisher @Eric Deschamps
 75 R Kemba, Kha Regent @Todd Lockwood
-76 C Kor Sanctifiers @Dan Scott
+76 C Kor Sanctifiers @Dan Murayama Scott
 77 R Marshal's Anthem @Matt Stewart
 78 R Martial Coup @Greg Staples
 79 R Mentor of the Meek @Jana Schirmer & Johannes Voss
@@ -268,7 +268,7 @@ ScryfallCode=C14
 259 C Panic Spellbomb @Franz Vohwinkel
 260 R Pearl Medallion @Daniel Ljunggren
 261 R Pentavus @Greg Staples
-262 C Pilgrim's Eye @Dan Scott
+262 C Pilgrim's Eye @Dan Murayama Scott
 263 R Predator, Flagship @Mark Tedin
 264 C Pristine Talisman @Matt Cavotta
 265 R Ruby Medallion @Daniel Ljunggren
@@ -277,12 +277,12 @@ ScryfallCode=C14
 268 U Skullclamp @Daniel Ljunggren
 269 U Sky Diamond @Lindsey Look
 270 U Sol Ring @Mike Bierek
-271 R Solemn Simulacrum @Dan Scott
+271 R Solemn Simulacrum @Dan Murayama Scott
 272 R Spine of Ish Sah @Daniel Ljunggren
 273 R Steel Hellkite @James Paick
 274 R Strata Scythe @Scott Chou
 275 U Swiftfoot Boots @Svetlin Velinov
-276 R Sword of Vengeance @Dan Scott
+276 R Sword of Vengeance @Dan Murayama Scott
 277 U Thran Dynamo @Ron Spears
 278 U Tormod's Crypt @Lars Grant-West
 279 R Trading Post @Adam Paquette
@@ -321,7 +321,7 @@ ScryfallCode=C14
 312 C Smoldering Crater @Mark Tedin
 313 U Tectonic Edge @Vincent Proce
 314 U Temple of the False God @Brian Snõddy
-315 C Terramorphic Expanse @Dan Scott
+315 C Terramorphic Expanse @Dan Murayama Scott
 316 C Tranquil Thicket @Heather Hudson
 317 U Zoetic Cavern @Lars Grant-West
 318 L Plains @John Avon

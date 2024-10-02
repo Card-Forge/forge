@@ -30,7 +30,7 @@ ScryfallCode=SHM
 17 U Pale Wayfarer @Heather Hudson
 18 U Prison Term @Zoltan Boros & Gabor Szikszai
 19 U Resplendent Mentor @Franz Vohwinkel
-20 C Rune-Cervin Rider @Dan Scott
+20 C Rune-Cervin Rider @Dan Murayama Scott
 21 R Runed Halo @Steve Prescott
 22 C Safehold Sentry @William O'Connor
 23 U Spectral Procession @Jeremy Enecio
@@ -87,14 +87,14 @@ ScryfallCode=SHM
 74 R Polluted Bonds @Michael Sutfin
 75 R Puppeteer Clique @Daren Bader
 76 C Rite of Consumption @Ron Spencer
-77 C Sickle Ripper @Dan Scott
+77 C Sickle Ripper @Dan Murayama Scott
 78 C Smolder Initiate @Chippy
 79 C Splitting Headache @Thomas Denmark
 80 C Torture @E. M. Gist
 81 R Wound Reflection @Terese Nielsen & Ron Spencer
 82 C Blistering Dieflyn @Scott Altmann
 83 U Bloodmark Mentor @Dave Allsop
-84 C Bloodshed Fever @Dan Scott
+84 C Bloodshed Fever @Dan Murayama Scott
 85 C Boggart Arsonists @Jesper Ejsing
 86 C Burn Trail @Nils Hamm
 87 R Cragganwick Cremator @Jeremy Enecio
@@ -124,7 +124,7 @@ ScryfallCode=SHM
 111 R Dramatic Entrance @Mike Dringenberg
 112 U Drove of Elves @Larry MacDougall
 113 C Farhaven Elf @Brandon Kitkouski
-114 U Flourishing Defenses @Dan Scott
+114 U Flourishing Defenses @Dan Murayama Scott
 115 C Foxfire Oak @Dave Kendall
 116 C Gleeful Sabotage @Todd Lockwood
 117 U Gloomwidow @Mark Tedin
@@ -179,7 +179,7 @@ ScryfallCode=SHM
 166 C Helm of the Ghastlord @Franz Vohwinkel
 167 U Inkfathom Infiltrator @Jesper Ejsing
 168 U Inkfathom Witch @Larry MacDougall
-169 R Memory Plunder @Dan Scott
+169 R Memory Plunder @Dan Murayama Scott
 170 C Memory Sluice @Wayne England
 171 U Merrow Grimeblotter @Cyril Van Der Haegen
 172 R Oona, Queen of the Fae @Adam Rex
@@ -197,7 +197,7 @@ ScryfallCode=SHM
 184 R Din of the Fireherd @Dave Dorman
 185 C Emberstrike Duo @Aleksi Briclot
 186 R Everlasting Torment @Richard Kane Ferguson
-187 C Fists of the Demigod @Dan Scott
+187 C Fists of the Demigod @Dan Murayama Scott
 188 R Fulminator Mage @rk post
 189 U Grief Tyrant @Izzy
 190 U Kulrath Knight @Daarken
@@ -250,7 +250,7 @@ ScryfallCode=SHM
 237 R Rhys the Redeemed @Steve Prescott
 238 C Safehold Duo @Izzy
 239 C Safehold Elite @Richard Whitters
-240 C Safewright Quest @Dan Scott
+240 C Safewright Quest @Dan Murayama Scott
 241 U Seedcradle Witch @Steven Belledin
 242 C Shield of the Oversoul @Steven Belledin
 243 R Wheel of Sun and Moon @Zoltan Boros & Gabor Szikszai
