@@ -481,7 +481,7 @@ ScryfallCode=JMP
 473 C Marauder's Axe @Mitchell Malloy
 474 U Meteor Golem @Lake Hurwitz
 475 C Myr Sire @Jaime Jones
-476 U Perilous Myr @Jason Felix
+476 C Perilous Myr @Jason Felix
 477 C Pirate's Cutlass @John Stanko
 478 C Prophetic Prism @John Avon
 479 U Rogue's Gloves @Cyril Van Der Haegen

@@ -99,10 +99,10 @@ ScryfallCode=ATQ
 82b R Strip Mine @Daniel Gelon
 82c R Strip Mine @Daniel Gelon
 82d R Strip Mine @Daniel Gelon
-83a C Urza's Mine @Anson Maddocks
+83a U Urza's Mine @Anson Maddocks
 83b U Urza's Mine @Anson Maddocks
 83c C Urza's Mine @Anson Maddocks
-83d U Urza's Mine @Anson Maddocks
+83d C Urza's Mine @Anson Maddocks
 84a C Urza's Power Plant @Mark Tedin
 84b U Urza's Power Plant @Mark Tedin
 84c C Urza's Power Plant @Mark Tedin

@@ -18,7 +18,7 @@ ScryfallCode=A25
 5 M Armageddon @Chris Rahn
 6 C Auramancer @Rebecca Guay
 7 C Cloudshift @Howard Lyon
-8 C Congregate @Mark Zug
+8 U Congregate @Mark Zug
 9 R Darien, King of Kjeldor @Michael Phillippi
 10 C Dauntless Cathar @Zack Stella
 11 R Decree of Justice @Adam Rex
@@ -212,7 +212,7 @@ ScryfallCode=A25
 199 U Boros Charm @Zoltan Boros
 200 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
 201 U Cloudblazer @Dan Scott
-202 M Conflux @Karl Kopinski
+202 R Conflux @Karl Kopinski
 203 R Eladamri's Call @Kev Walker
 204 M Gisela, Blade of Goldnight @Jason Chan
 205 R Grenzo, Dungeon Warden @Lucas Graciano

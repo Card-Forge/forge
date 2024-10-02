@@ -242,7 +242,7 @@ ScryfallCode=CMM
 234 C Impulsive Pilferer @Jakub Kasper
 235 R Inferno Titan @Kev Walker
 236 M Insurrection @Mark Zug
-237 R Kazuul, Tyrant of the Cliffs @Paul Bonner
+237 U Kazuul, Tyrant of the Cliffs @Paul Bonner
 238 R Krenko, Mob Boss @Karl Kopinski
 239 C Living Lightning @Caio Monteiro
 240 U Loyal Apprentice @Joe Slucher
@@ -266,7 +266,7 @@ ScryfallCode=CMM
 258 U Squee, Goblin Nabob @Greg Staples
 259 R Star of Extinction @Chris Rahn
 260 U Storm-Kiln Artist @Manuel Castañón
-261 R Subira, Tulzidi Caravanner @Leesha Hannigan
+261 U Subira, Tulzidi Caravanner @Leesha Hannigan
 262 C Sulfurous Blast @Jeff Miracola
 263 R Tempt with Vengeance @Ryan Barger
 264 C Temur Battle Rage @Jaime Jones

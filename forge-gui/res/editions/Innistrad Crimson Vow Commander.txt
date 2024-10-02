@@ -101,7 +101,7 @@ ScryfallCode=VOC
 93 R Mentor of the Meek @Jana Schirmer & Johannes Voss
 94 R Mirror Entity @Zoltan Boros & Gabor Szikszai
 95 R Oyobi, Who Split the Heavens @Christopher Moeller
-96 U Promise of Bunrei @Stephen Tappin
+96 R Promise of Bunrei @Stephen Tappin
 97 R Remorseful Cleric @Grzegorz Rutkowski
 98 U Spectral Shepherd @Johann Bodin
 99 U Swords to Plowshares @Jesper Ejsing
@@ -185,7 +185,7 @@ ScryfallCode=VOC
 177 C Path of Ancestry @Alayna Danner
 178 R Port Town @Kamila Szutenberg
 179 R Prairie Stream @Adam Paquette
-180 U Rakdos Carnarium @John Avon
+180 C Rakdos Carnarium @John Avon
 181 R Shadowblood Ridge @Sam White
 182 R Skycloud Expanse @Sam White
 183 R Smoldering Marsh @Adam Paquette

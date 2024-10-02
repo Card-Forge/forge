@@ -70,7 +70,7 @@ ScryfallCode=CLU
 62 U Glorifier of Dusk @Viktor Titov
 63 C Gods Willing @Mark Winters
 64 C Law-Rune Enforcer @Eric Deschamps
-65 U Martial Impetus @Aaron Miller
+65 C Martial Impetus @Aaron Miller
 66 C Mighty Leap @rk post
 67 U Oust @Mike Bierek
 68 C Parhelion Patrol @Even Amundsen
@@ -97,7 +97,7 @@ ScryfallCode=CLU
 89 C Leapfrog @Aaron Miller
 90 C Owl Familiar @Janine Johnston
 91 C Passwall Adept @John Thacker
-92 U Psychic Impetus @Lindsey Look
+92 C Psychic Impetus @Lindsey Look
 93 U Rapid Hybridization @Jack Wang
 94 C Repeal @Dan Scott
 95 U Rescuer Sphinx @Jesper Ejsing

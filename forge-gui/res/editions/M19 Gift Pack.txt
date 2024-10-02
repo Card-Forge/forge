@@ -7,8 +7,8 @@ Type=Promo
 ScryfallCode=g18
 
 [cards]
-GP1 S Angelic Guardian @Sara Winters
-GP2 S Angler Turtle @Alex Konstad
-GP3 S Vengeant Vampire @Mitchell Malloy
-GP4 S Immortal Phoenix @Daarken
-GP5 S Rampaging Brontodon @Lars Grant-West
+GP1 R Angelic Guardian @Sara Winters
+GP2 R Angler Turtle @Alex Konstad
+GP3 R Vengeant Vampire @Mitchell Malloy
+GP4 R Immortal Phoenix @Daarken
+GP5 R Rampaging Brontodon @Lars Grant-West

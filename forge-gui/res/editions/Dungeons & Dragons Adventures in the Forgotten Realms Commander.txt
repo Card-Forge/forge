@@ -142,7 +142,7 @@ ScryfallCode=AFC
 134 R Opportunistic Dragon @Chris Rahn
 135 R Outpost Siege @Daarken
 136 C Rile @Igor Kieryluk
-137 R Scourge of Valkas @Lucas Graciano
+137 M Scourge of Valkas @Lucas Graciano
 138 U Shiny Impetus @Svetlin Velinov
 139 R Shivan Hellkite @Kev Walker
 140 R Skyline Despot @Lucas Graciano
@@ -177,7 +177,7 @@ ScryfallCode=AFC
 169 C Return to Nature @Alayna Danner
 170 R Rishkar's Expertise @Magali Villeneuve
 171 R Shamanic Revelation @Cynthia Sheppard
-172 U Utopia Sprawl @Ron Spears
+172 C Utopia Sprawl @Ron Spears
 173 R Verdant Embrace @Stephen Tappin
 174 C Wild Growth @Tony Szczudlo
 175 M Ashen Rider @Chris Rahn
@@ -212,7 +212,7 @@ ScryfallCode=AFC
 204 R Dragon's Hoard @Adam Paquette
 205 C Explorer's Scope @Vincent Proce
 206 U Fellwar Stone @John Avon
-207 U Gruul Signet @Efrem Palacios
+207 C Gruul Signet @Efrem Palacios
 208 U Heirloom Blade @Carmen Sinek
 209 R Masterwork of Ingenuity @Ulrich Brunin
 210 U Meteor Golem @Lake Hurwitz
@@ -326,7 +326,7 @@ ScryfallCode=AFC
 318 R Hurl Through Hell @Olena Richards
 319 M Karazikar, the Eye Tyrant @Jason A. Engle
 320 M Klauth, Unrivaled Ancient @Andrew Mar
-321 C Klauth's Will @Olivier Bernard
+321 R Klauth's Will @Olivier Bernard
 322 R Midnight Pathlighter @PINDURSKI
 323 M Nihiloor @Chris Rallis
 324 M Prosper, Tome-Bound @Yongjae Choi

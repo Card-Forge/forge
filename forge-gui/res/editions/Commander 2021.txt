@@ -158,7 +158,7 @@ ScryfallCode=C21
 150 U Parasitic Impetus @Mila Pesic
 151 U Reckless Spite @Karl Kopinski
 152 R Sangromancer @Igor Kieryluk
-153 U Sanguine Bond @Jaime Jones
+153 R Sanguine Bond @Jaime Jones
 154 U Silversmote Ghoul @Bryan Sola
 155 U Suffer the Past @Trevor Claxton
 156 R Taste of Death @Chris Rallis
@@ -320,7 +320,7 @@ ScryfallCode=C21
 312 U Rogue's Passage @Christine Choi
 313 U Sapseep Forest @Aleksi Briclot
 314 R Scavenger Grounds @Steven Belledin
-315 C Secluded Steppe @Heather Hudson
+315 U Secluded Steppe @Heather Hudson
 316 R Shivan Reef @Rob Alexander
 317 U Simic Growth Chamber @John Avon
 318 R Slayers' Stronghold @Karl Kopinski
