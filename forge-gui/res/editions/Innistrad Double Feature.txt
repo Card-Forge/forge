@@ -29,7 +29,7 @@ ScryfallCode=DBL
 16 U Duelcraft Trainer @John Stanko
 17 M Enduring Angel @Irina Nordsol
 18 R Fateful Absence @Eric Deschamps
-19 C Flare of Faith @Justyna Gil
+19 C Flare of Faith @Justyna Dura
 20 U Gavony Dawnguard @Micah Epstein
 21 C Gavony Silversmith @Volkan Baǵa
 22 C Gavony Trapper @Caio Monteiro
@@ -55,7 +55,7 @@ ScryfallCode=DBL
 42 C Baithook Angler @Uriah Voth
 43 C Component Collector @Mark Behm
 44 C Consider @Zezhou Chen
-45 U Covetous Castaway @Dan Scott
+45 U Covetous Castaway @Dan Murayama Scott
 46 R Curse of Surveillance @Igor Kieryluk
 47 U Delver of Secrets @Matt Stewart
 48 C Devious Cover-Up @Colin Boyer
@@ -175,9 +175,9 @@ ScryfallCode=DBL
 162 M Sunstreak Phoenix @Brian Valeza
 163 C Tavern Ruffian @Zoltan Boros
 164 U Thermo-Alchemist @Raymond Swanland
-165 U Village Watch @Nestor Ossandon Leal
+165 U Village Watch @Néstor Ossandón Leal
 166 U Voldaren Ambusher @Evyn Fong
-167 C Voldaren Stinger @Martina Fackova
+167 C Voldaren Stinger @Martina Fačková
 168 R Augur of Autumn @Billy Christian
 169 C Bird Admirer @Slawomir Maniak
 170 C Bounding Wolf @Andrea Radeck
@@ -263,7 +263,7 @@ ScryfallCode=DBL
 250 R Wake to Slaughter @Chris Cold
 251 U Winterthorn Blessing @Yeong-Hao Han
 252 R The Celestus @Jonas De Ro
-253 C Crossroads Candleguide @Dan Scott
+253 C Crossroads Candleguide @Dan Murayama Scott
 254 C Jack-o'-Lantern @Josu Hernaiz
 255 U Moonsilver Key @Joseph Meehan
 256 U Mystic Skull @Joe Slucher
@@ -297,9 +297,9 @@ ScryfallCode=DBL
 284 M Hallowed Haunting @David Auden Nash
 285 C Heron of Hope @Daarken
 286 C Heron-Blessed Geist @Jason A. Engle
-287 R Hopeful Initiate @Dan Scott
+287 R Hopeful Initiate @Dan Murayama Scott
 288 R Katilda, Dawnhart Martyr @Manuel Castañón
-289 C Kindly Ancestor @Justyna Gil
+289 C Kindly Ancestor @Justyna Dura
 290 R Lantern Flare @Lie Setiawan
 291 C Militia Rallier @Eelis Kyttanen
 292 C Nebelgast Beguiler @Andreas Zafiratos
@@ -313,7 +313,7 @@ ScryfallCode=DBL
 300 C Sanctify @Kasia 'Kafis' Zielińska
 301 M Savior of Ollenbock @Aaron J. Riley
 302 C Sigarda's Imprisonment @Bryan Sola
-303 R Sigarda's Summons @Nestor Ossandon Leal
+303 R Sigarda's Summons @Néstor Ossandón Leal
 304 C Supernatural Rescue @Anastasia Ovchinnikova
 305 R Thalia, Guardian of Thraben @Magali Villeneuve
 306 C Traveling Minister @Slawomir Maniak
@@ -377,7 +377,7 @@ ScryfallCode=DBL
 364 U Bloodsworn Squire @Darren Tan
 365 R Bloodvial Purveyor @Fesbra
 366 U Catapult Fodder @Jesper Ejsing
-367 M Cemetery Desecrator @Dan Scott
+367 M Cemetery Desecrator @Dan Murayama Scott
 368 R Concealing Curtains @Brian Valeza
 369 C Courier Bat @Ilse Gort
 370 R Demonic Bargain @Sam Guay
@@ -405,12 +405,12 @@ ScryfallCode=DBL
 392 C Persistent Specimen @Scott Murphy
 393 C Pointed Discussion @Jarel Threat
 394 C Ragged Recluse @Lie Setiawan
-395 U Restless Bloodseeker @Justyna Gil
+395 U Restless Bloodseeker @Justyna Dura
 396 C Rot-Tide Gargantua @Filip Burburan
 397 U Skulking Killer @Alex Brock
-398 M Sorin the Mirthless @Martina Fackova
+398 M Sorin the Mirthless @Martina Fačková
 399 M Toxrill, the Corrosive @Simon Dominic
-400 U Undead Butler @Nestor Ossandon Leal
+400 U Undead Butler @Néstor Ossandón Leal
 401 C Undying Malice @Igor Kieryluk
 402 C Unhallowed Phalanx @Nicholas Gregory
 403 C Vampire's Kiss @Ilse Gort
@@ -455,11 +455,11 @@ ScryfallCode=DBL
 442 U Rending Flame @Olena Richards
 443 U Runebound Wolf @Tomas Duchek
 444 U Sanguine Statuette @Izzy
-445 R Stensia Uprising @Dan Scott
+445 R Stensia Uprising @Dan Murayama Scott
 446 C Sure Strike @Lie Setiawan
 447 U Vampires' Vengeance @Chris Cold
 448 M Volatile Arsonist @Gabor Szikszai
-449 C Voldaren Epicure @Martina Fackova
+449 C Voldaren Epicure @Martina Fačková
 450 U Voltaic Visionary @Francisco Miyara
 451 C Weary Prisoner @Jason Rainville
 452 C Apprentice Sharpshooter @Steve Prescott
@@ -537,7 +537,7 @@ ScryfallCode=DBL
 524 C Honored Heirloom @Leanna Crossan
 525 R Investigator's Journal @Yeong-Hao Han
 526 U Lantern of the Lost @Chris Cold
-527 C Wedding Invitation @Justyna Gil
+527 C Wedding Invitation @Justyna Dura
 528 R Deathcap Glade @Sam Burley
 529 R Dreamroot Cascade @Sam Burley
 530 C Evolving Wilds @Alayna Danner

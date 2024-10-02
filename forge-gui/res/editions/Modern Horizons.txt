@@ -27,7 +27,7 @@ ScryfallCode=MH1
 14 C Impostor of the Sixth Pride @Chris Seaman
 15 C Irregular Cohort @Steve Argyle
 16 U King of the Pride @Jonathan Kuo
-17 C Knight of Old Benalia @Dan Scott
+17 C Knight of Old Benalia @Dan Murayama Scott
 18 C Lancer Sliver @Lucas Graciano
 19 C Martyr's Soul @Mila Pesic
 20 R On Thin Ice @Lucas Graciano
@@ -59,11 +59,11 @@ ScryfallCode=MH1
 46 M Echo of Eons @Terese Nielsen
 47 U Everdream @Nils Hamm
 48 U Exclude @Jehan Choo
-49 C Eyekite @Dan Scott
+49 C Eyekite @Dan Murayama Scott
 50 U Fact or Fiction @Matt Cavotta
 51 C Faerie Seer @Colin Boyer
 52 R Force of Negation @Paul Scott Canavan
-53 R Future Sight @Dan Scott
+53 R Future Sight @Dan Murayama Scott
 54 C Iceberg Cancrix @Ravenna Tran
 55 C Man-o'-War @Jon J Muth
 56 R Marit Lage's Slumber @Randy Vargas
@@ -170,7 +170,7 @@ ScryfallCode=MH1
 157 C Bellowing Elk @Lucas Graciano
 158 R Collector Ouphe @Filip Burburan
 159 U Conifer Wurm @Raoul Vitale
-160 R Crashing Footfalls @Dan Scott
+160 R Crashing Footfalls @Dan Murayama Scott
 161 R Deep Forest Hermit @Chris Seaman
 162 C Elvish Fury @Randy Vargas
 163 C Excavating Anurid @Joe Slucher
@@ -185,7 +185,7 @@ ScryfallCode=MH1
 172 C Murasa Behemoth @Dave Kendall
 173 U Nantuko Cultivator @Jehan Choo
 174 C Nimble Mongoose @Kev Walker
-175 U Regrowth @Dan Scott
+175 U Regrowth @Dan Murayama Scott
 176 C Rime Tender @Bastien L. Deharme
 177 U Saddled Rimestag @Winona Nelson
 178 C Savage Swipe @David Gaillet

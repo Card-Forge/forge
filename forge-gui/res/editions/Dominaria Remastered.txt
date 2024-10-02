@@ -130,7 +130,7 @@ ScryfallCode=DMR
 116 U Dragon Whelp @Jokubas Uogintas
 117 C Ember Beast @Wayne England
 118 C Empty the Warrens @Johan Grenier
-119 U Fireblast @Donato Giancola
+119 U Fireblast @Mike Bierek
 120 U Flametongue Kavu @Slawomir Maniak
 121 R Gamble @Andrew Goldhawk
 122 U Gempalm Incinerator @Andrew Mar
@@ -159,7 +159,7 @@ ScryfallCode=DMR
 145 C Suq'Ata Lancer @Jeff Miracola
 146 C Undying Rage @Scott M. Fischer
 147 U Valduk, Keeper of the Flame @Victor Adame Minguez
-148 M Worldgorger Dragon @Nestor Ossandon Leal
+148 M Worldgorger Dragon @Néstor Ossandón Leal
 149 R Arboria @Uriah Voth
 150 C Battlefield Scrounger @Daren Bader
 151 R Birds of Paradise @Mark Poole
@@ -227,7 +227,7 @@ ScryfallCode=DMR
 213 U Illusion // Reality @John Avon & David Martin
 214 U Night // Day @Christopher Moeller & Anthony S. Waters
 215 U Fire // Ice @David Martin & Franz Vohwinkel
-216 U Life // Death @Ryan Barger
+216 U Life // Death @Anthony S. Waters & Scott Murphy
 217 R Crawlspace @Zoltan Boros
 218 R Cryptic Gateway @David Martin
 219 U Damping Sphere @Adam Paquette
@@ -332,7 +332,7 @@ ScryfallCode=DMR
 316 C Chain Lightning @Christopher Moeller
 317 U Dragon Whelp @Jokubas Uogintas
 318 C Empty the Warrens @Johan Grenier
-319 U Fireblast @Donato Giancola
+319 U Fireblast @Mike Bierek
 320 U Flametongue Kavu @Slawomir Maniak
 321 R Gamble @Andrew Goldhawk
 322 U Gempalm Incinerator @Andrew Mar
@@ -347,7 +347,7 @@ ScryfallCode=DMR
 331 M Sneak Attack @Jerry Tiritilli
 332 R Sulfuric Vortex @Greg Staples
 333 U Valduk, Keeper of the Flame @Victor Adame Minguez
-334 M Worldgorger Dragon @Nestor Ossandon Leal
+334 M Worldgorger Dragon @Néstor Ossandón Leal
 335 R Arboria @Uriah Voth
 336 R Birds of Paradise @Mark Poole
 337 U Deadwood Treefolk @Don Hazeltine

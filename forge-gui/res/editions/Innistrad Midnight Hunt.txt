@@ -27,7 +27,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 16 U Duelcraft Trainer @John Stanko
 17 M Enduring Angel @Irina Nordsol
 18 R Fateful Absence @Eric Deschamps
-19 C Flare of Faith @Justyna Gil
+19 C Flare of Faith @Justyna Dura
 20 U Gavony Dawnguard @Micah Epstein
 21 C Gavony Silversmith @Volkan Baǵa
 22 C Gavony Trapper @Caio Monteiro
@@ -53,7 +53,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 42 C Baithook Angler @Uriah Voth
 43 C Component Collector @Mark Behm
 44 C Consider @Zezhou Chen
-45 U Covetous Castaway @Dan Scott
+45 U Covetous Castaway @Dan Murayama Scott
 46 R Curse of Surveillance @Igor Kieryluk
 47 U Delver of Secrets @Matt Stewart
 48 C Devious Cover-Up @Colin Boyer
@@ -102,7 +102,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 90 U Bloodtithe Collector @Maria Zolotukhina
 91 R Champion of the Perished @Kekai Kotaki
 92 U Covert Cutpurse @John Stanko
-93 C Crawl from the Cellar @Igor Kieryluk
+93 C Crawl from the Cellar @Igor Krstic
 94 R Curse of Leeches @Uriah Voth
 95 C Defenestrate @Darek Zabrocki
 96 C Diregraf Horde @Alex Negrea
@@ -174,9 +174,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 162 M Sunstreak Phoenix @Brian Valeza
 163 C Tavern Ruffian @Zoltan Boros
 164 U Thermo-Alchemist @Raymond Swanland
-165 U Village Watch @Nestor Ossandon Leal
+165 U Village Watch @Néstor Ossandón Leal
 166 U Voldaren Ambusher @Evyn Fong
-167 C Voldaren Stinger @Martina Fackova
+167 C Voldaren Stinger @Martina Fačková
 168 R Augur of Autumn @Billy Christian
 169 C Bird Admirer @Slawomir Maniak
 170 C Bounding Wolf @Andrea Radeck
@@ -262,7 +262,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 250 R Wake to Slaughter @Chris Cold
 251 U Winterthorn Blessing @Yeong-Hao Han
 252 R The Celestus @Jonas De Ro
-253 C Crossroads Candleguide @Dan Scott
+253 C Crossroads Candleguide @Dan Murayama Scott
 254 C Jack-o'-Lantern @Josu Hernaiz
 255 U Moonsilver Key @Joseph Meehan
 256 U Mystic Skull @Joe Slucher

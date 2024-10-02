@@ -27,7 +27,7 @@ ScryfallCode=LCI
 15 C Glorifier of Suffering @Lauren K. Cannon
 16 U Guardian of the Great Door @Justyna Dura
 17 U Helping Hand @Aldo Domínguez
-18 C Ironpaw Aspirant @Dan Scott
+18 C Ironpaw Aspirant @Dan Murayama Scott
 19 U Kinjalli's Dawnrunner @Arash Radkia
 20 R Kutzil's Flanker @Michele Giorgi
 21 U Malamet War Scribe @Nicholas Gregory
@@ -133,7 +133,7 @@ ScryfallCode=LCI
 121 R Souls of the Lost @Nils Hamm
 122 R Stalactite Stalker @Olivier Bernard
 123 R Starving Revenant @Fesbra
-124 U Stinging Cave Crawler @Dan Scott
+124 U Stinging Cave Crawler @Dan Murayama Scott
 125 U Synapse Necromage @Piotr Foksowicz
 126 R Tarrian's Journal @Randy Gallegos
 127 R Terror Tide @Brock Grossman
@@ -182,7 +182,7 @@ ScryfallCode=LCI
 170 U Triumphant Chomp @Simon Dominic
 171 R Trumpeting Carnosaur @Lars Grant-West
 172 C Volatile Wanderglyph @Slawomir Maniak
-173 U Zoyowa's Justice @Nestor Ossandon Leal
+173 U Zoyowa's Justice @Néstor Ossandón Leal
 174 C Armored Kincaller @John Tedrick
 175 C Basking Capybara @Ilse Gort
 176 R Bedrock Tortoise @Maxime Minard
@@ -200,7 +200,7 @@ ScryfallCode=LCI
 188 R Growing Rites of Itlimoc @Josu Hernaiz
 189 M Huatli, Poet of Unity @Tyler Jacobson
 190 C Huatli's Final Strike @Marta Nael
-191 R Hulking Raptor @Nestor Ossandon Leal
+191 R Hulking Raptor @Néstor Ossandón Leal
 192 C In the Presence of Ages @Steve Prescott
 193 R Intrepid Paleontologist @Irina Nordsol
 194 U Ixalli's Lorekeeper @Ernanda Souza
@@ -267,7 +267,7 @@ ScryfallCode=LCI
 255 C Hunter's Blowgun @Hector Ortiz
 256 R Matzalantli, the Great Door @Piotr Dura
 257 M The Millennium Calendar @Zoltan Boros
-258 R Roaming Throne @Anastasia Balakchina
+258 R Roaming Throne @Cristi Balanescu
 259 C Runaway Boulder @Loïc Canavaggia
 260 U Scampering Surveyor @Xavier Ribeiro
 261 U Sorcerous Spyglass @Tyler Walpole
@@ -276,7 +276,7 @@ ScryfallCode=LCI
 264 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
 265 R Threefold Thunderhulk @Xavier Ribeiro
 266 R Throne of the Grim Captain @Tiffany Turrill
-267 R Treasure Map @Nestor Ossandon Leal
+267 R Treasure Map @Néstor Ossandón Leal
 268 C Captivating Cave @Lorenzo Lanfranconi
 269 M Cavern of Souls @Alayna Danner
 270 U Cavernous Maw @Alfven Ato
@@ -325,11 +325,11 @@ ScryfallCode=LCI
 311 M Vito, Fanatic of Aclazotz @WolfSkullJack
 312 U Zoyowa Lava-Tongue @Richard Luong
 313 R Throne of the Grim Captain @Rafal Wechterowicz
-314 M Ojer Taq, Deepest Foundation @Josu Hernaiz
+314 M Ojer Taq, Deepest Foundation @Clint Lockwood & Josu Hernaiz
 315 M Ojer Pakpatiq, Deepest Epoch @Clint Lockwood & Viko Menezes
 316 M Aclazotz, Deepest Betrayal @Clint Lockwood & Viko Menezes
 317 M Ojer Axonil, Deepest Might @Clint Lockwood & Viko Menezes
-318 M Ojer Kaslem, Deepest Growth @Eddie Mendoza
+318 M Ojer Kaslem, Deepest Growth @Clint Lockwood & Eddie Mendoza
 319 M The Ancient One @Clint Lockwood
 410a M Cavern of Souls @Pedro Correa
 410b M Cavern of Souls @Pedro Correa
@@ -412,13 +412,13 @@ ScryfallCode=LCI
 388 M The Millennium Calendar @Zoltan Boros
 389 R Tarrian's Soulcleaver @Marzena Nereida Piwowar
 390 R Threefold Thunderhulk @Xavier Ribeiro
-391 R Treasure Map @Nestor Ossandon Leal
+391 R Treasure Map @Néstor Ossandón Leal
 392 R Sunken Citadel @Matteo Bassini
 
 [bundle]
 393 L Plains @Carlos Palma Cruchaga
 394 L Plains @Adam Paquette
-395 L Island @Nestor Ossandon Leal
+395 L Island @Néstor Ossandón Leal
 396 L Island @Adam Paquette
 397 L Swamp @Logan Feliciano
 398 L Swamp @Adam Paquette

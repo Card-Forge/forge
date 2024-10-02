@@ -39,7 +39,7 @@ ScryfallCode=DDI
 31 U Vanish into Memory @Rebekah Lynn
 32 C Overrule @Alan Pollack
 33 C Azorius Chancery @John Avon
-34 U Flood Plain @Pat Morrissey
+34 U Flood Plain @Pat Lewis
 35 U New Benalia @Richard Wright
 36 U Sejiri Refuge @Ryan Pancoast
 37 C Soaring Seacliff @Izzy
@@ -52,7 +52,7 @@ ScryfallCode=DDI
 44 M Koth of the Hammer @Eric Deschamps
 45 C Plated Geopede @Johann Bodin
 46 C Pygmy Pyrosaur @Dan Frazier
-47 C Pilgrim's Eye @Dan Scott
+47 C Pilgrim's Eye @Dan Murayama Scott
 48 U Aether Membrane @Zoltan Boros & Gabor Szikszai
 49 C Fiery Hellhound @Ted Galaday
 50 C Vulshok Sorcerer @rk post
