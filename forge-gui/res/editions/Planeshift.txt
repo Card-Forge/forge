@@ -85,8 +85,8 @@ ScryfallCode=PLS
 71 C Singe @John Avon
 72 C Slingshot Goblin @Jeff Easley
 73 U Strafe @Jim Nelson
-74 S Tahngarth, Talruum Hero @Dave Dorman
 74 R Tahngarth, Talruum Hero @Dave Dorman
+74★ R Tahngarth, Talruum Hero @Kev Walker
 75 U Thunderscape Battlemage @Mike Ploog
 76 C Thunderscape Familiar @Daren Bader
 77 U Alpha Kavu @Matt Cavotta
@@ -120,7 +120,7 @@ ScryfallCode=PLS
 105 U Dromar's Charm @David Martin
 106 R Eladamri's Call @Kev Walker
 107 R Ertai, the Corrupted @Mark Tedin
-107 S Ertai, the Corrupted @Mark Tedin
+107★ R Ertai, the Corrupted @Kev Walker
 108 U Fleetfoot Panther @Mark Brill
 109 C Gerrard's Command @Roger Raupp
 110 C Horned Kavu @Michael Sutfin
@@ -147,7 +147,7 @@ ScryfallCode=PLS
 131 R Draco @Sam Wood
 132 U Mana Cylix @Donato Giancola
 133 R Skyship Weatherlight @Mark Tedin
-133 S Skyship Weatherlight @Mark Tedin
+133★ R Skyship Weatherlight @Kev Walker
 134 U Star Compass @Donato Giancola
 135 U Stratadon @Brian Snõddy
 136 U Crosis's Catacombs @Edward P. Beard, Jr.

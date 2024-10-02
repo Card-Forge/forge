@@ -12,7 +12,7 @@ ScryfallCode=YONE
 3 R Nettling Host @Dominik Mayer
 4 U Norn's Fetchling @Carlos Palma Cruchaga
 5 R Quicksilver Servitor @Samuel Araya
-6 R Surgical Metamorph @Nestor Ossandon Leal
+6 R Surgical Metamorph @Néstor Ossandón Leal
 7 U Tezzeret's Reckoning @Camille Alquier
 8 R Blightwing Whelp @J.P. Targete
 9 U March Toward Perfection @Brian Valeza

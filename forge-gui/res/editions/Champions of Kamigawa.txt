@@ -137,7 +137,7 @@ ScryfallCode=CHK
 124 R Marrow-Gnawer @Wayne Reynolds
 125 C Midnight Covenant @Pete Venters
 126 R Myojin of Night's Reach @Kev Walker
-127 U Nezumi Bone-Reader @Dan Scott
+127 U Nezumi Bone-Reader @Dan Murayama Scott
 128 C Nezumi Cutthroat @Carl Critchlow
 129 U Nezumi Graverobber @Jim Nelson
 130 C Nezumi Ronin @Scott M. Fischer
@@ -242,9 +242,9 @@ ScryfallCode=CHK
 228 C Moss Kami @Hugh Jamieson
 229 R Myojin of Life's Web @Kev Walker
 230 R Nature's Will @Mitch Cotie
-231 U Orbweaver Kumo @Dan Scott
+231 U Orbweaver Kumo @Dan Murayama Scott
 232 C Order of the Sacred Bell @Carl Critchlow
-233 U Orochi Eggwatcher @Dan Scott
+233 U Orochi Eggwatcher @Dan Murayama Scott
 234 C Orochi Leafcaller @Joel Thomas
 235 C Orochi Ranger @Greg Hildebrandt
 236 C Orochi Sustainer @rk post

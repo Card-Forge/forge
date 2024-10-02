@@ -46,7 +46,7 @@ ScryfallCode=ALA
 33 C Cancel @David Palumbo
 34 C Cathartic Adept @Carl Critchlow
 35 C Cloudheath Drake @Izzy
-36 C Coma Veil @Dan Scott
+36 C Coma Veil @Dan Murayama Scott
 37 C Courier's Capsule @Andrew Murray
 38 R Covenant of Minds @Dan Seagrave
 39 U Dawnray Archer @Dan Dos Santos
@@ -54,7 +54,7 @@ ScryfallCode=ALA
 41 U Etherium Astrolabe @Michael Bruinsma
 42 C Etherium Sculptor @Steven Belledin
 43 U Fatestitcher @E. M. Gist
-44 U Filigree Sages @Dan Scott
+44 U Filigree Sages @Dan Murayama Scott
 45 R Gather Specimens @Michael Bruinsma
 46 C Jhessian Lookout @Donato Giancola
 47 C Kathari Screecher @Pete Venters
@@ -68,7 +68,7 @@ ScryfallCode=ALA
 55 R Sharding Sphinx @Michael Bruinsma
 56 R Skill Borrower @Shelly Wan
 57 C Spell Snip @Michael Sutfin
-58 U Sphinx's Herald @Dan Scott
+58 U Sphinx's Herald @Dan Murayama Scott
 59 C Steelclad Serpent @Carl Critchlow
 60 M Tezzeret the Seeker @Anthony Francisco
 61 C Tortoise Formation @Mark Zug
@@ -89,7 +89,7 @@ ScryfallCode=ALA
 76 U Fleshbag Marauder @Pete Venters
 77 C Glaze Fiend @Joshua Hagler
 78 U Grixis Battlemage @Nils Hamm
-79 R Immortal Coil @Dan Scott
+79 R Immortal Coil @Dan Murayama Scott
 80 U Infest @Karl Kopinski
 81 C Onyx Goblet @rk post
 82 U Puppet Conjurer @Steven Belledin

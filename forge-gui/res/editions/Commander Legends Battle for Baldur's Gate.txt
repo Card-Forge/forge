@@ -24,11 +24,11 @@ ScryfallCode=CLB
 13 U Crystal Dragon @John Severin Brassell
 14 U Cut a Deal @Jodie Muir
 15 C Dawnbringer Cleric @Lie Setiawan
-16 U Ellyn Harbreeze, Busybody @Dan Scott
+16 U Ellyn Harbreeze, Busybody @Dan Murayama Scott
 17 U Far Traveler @Alix Branwyn
 18 C Flaming Fist @Diego Gisbert
 19 C Flaming Fist Officer @Darek Zabrocki
-20 U Githzerai Monk @Dan Scott
+20 U Githzerai Monk @Dan Murayama Scott
 21 C Goliath Paladin @John Severin Brassell
 22 C Greatsword of Tyr @Titus Lunter
 23 C Guardian Naga @Tom Babbey
@@ -45,7 +45,7 @@ ScryfallCode=CLB
 34 C Minimus Containment @Steve Prescott
 35 R Noble Heritage @Dallas Williams
 36 C Pegasus Guardian @Leanna Crossan
-37 U Rasaad yn Bashir @Dan Scott
+37 U Rasaad yn Bashir @Dan Murayama Scott
 38 C Recruitment Drive @Diego Gisbert
 39 U Rescuer Chwinga @Nils Hamm
 40 C Roving Harper @Anastasia Ovchinnikova
@@ -215,7 +215,7 @@ ScryfallCode=CLB
 204 R Wand of Wonder @Xavier Ribeiro
 205 C Warehouse Thief @Andrea Piparo
 206 U Wild Magic Surge @Dave Greco
-207 R Wrathful Red Dragon @Dan Scott
+207 R Wrathful Red Dragon @Dan Murayama Scott
 208 R Wyll, Blade of Frontiers @Mads Ahm
 209 R Wyll's Reversal @Irina Nordsol
 210 C Young Red Dragon @Adam Vehige
@@ -291,7 +291,7 @@ ScryfallCode=CLB
 280 U Korlessa, Scale Singer @Jesper Ejsing
 281 U Lozhan, Dragons' Legacy @Rudy Siswanto
 282 U Mahadi, Emporium Master @Ilse Gort
-283 R Mazzy, Truesword Paladin @Justyna Gil
+283 R Mazzy, Truesword Paladin @Justyna Dura
 284 R Miirym, Sentinel Wyrm @Kekai Kotaki
 285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 286 U Minthara, Merciless Soul @Evyn Fong
@@ -302,8 +302,8 @@ ScryfallCode=CLB
 291 R Raggadragga, Goreguts Boss @Xavier Ribeiro
 292 R Raphael, Fiendish Savior @Livia Prima
 293 U Rilsa Rael, Kingpin @Micah Epstein
-294 M Tasha, the Witch Queen @Martina Fackova
-295 U Thrakkus the Butcher @Nestor Ossandon Leal
+294 M Tasha, the Witch Queen @Martina Fačková
+295 U Thrakkus the Butcher @Néstor Ossandón Leal
 296 R Zevlor, Elturel Exile @David Rapoza
 297 U Arcane Encyclopedia @Victor Harmatiuk
 298 U Arcane Signet @Sam White
@@ -484,14 +484,14 @@ ScryfallCode=CLB
 449 C Sky Diamond @Phil Stone
 450 U Stonespeaker Crystal @Mark A. Nelson
 471 U Abdel Adrian, Gorion's Ward @Karl Kopinski
-472 U Ellyn Harbreeze, Busybody @Dan Scott
+472 U Ellyn Harbreeze, Busybody @Dan Murayama Scott
 473 U Far Traveler @Alix Branwyn
 474 C Flaming Fist @Diego Gisbert
 475 U Inspiring Leader @Stephen Stark
 476 R Lae'zel, Vlaakith's Champion @John Stanko
 477 U Lulu, Loyal Hollyphant @Jakob Eirich
 478 R Noble Heritage @Dallas Williams
-479 U Rasaad yn Bashir @Dan Scott
+479 U Rasaad yn Bashir @Dan Murayama Scott
 480 U Veteran Soldier @Brock Grossman
 481 U Alora, Merry Thief @Aaron Miller
 482 C Candlekeep Sage @Kim Sokol
@@ -553,7 +553,7 @@ ScryfallCode=CLB
 538 U Korlessa, Scale Singer @Jesper Ejsing
 539 U Lozhan, Dragons' Legacy @Rudy Siswanto
 540 U Mahadi, Emporium Master @Ilse Gort
-541 R Mazzy, Truesword Paladin @Justyna Gil
+541 R Mazzy, Truesword Paladin @Justyna Dura
 542 R Miirym, Sentinel Wyrm @Kekai Kotaki
 543 U Minthara, Merciless Soul @Evyn Fong
 544 R Myrkul, Lord of Bones @Isis
@@ -563,7 +563,7 @@ ScryfallCode=CLB
 548 R Raggadragga, Goreguts Boss @Xavier Ribeiro
 549 R Raphael, Fiendish Savior @Livia Prima
 550 U Rilsa Rael, Kingpin @Micah Epstein
-551 U Thrakkus the Butcher @Nestor Ossandon Leal
+551 U Thrakkus the Butcher @Néstor Ossandón Leal
 552 R Zevlor, Elturel Exile @David Rapoza
 931 M Captain N'ghathrod @Andrey Kuzinskiy
 932 M Faldorn, Dread Wolf Herald @Jason A. Engle
@@ -603,7 +603,7 @@ ScryfallCode=CLB
 582 R Firbolg Flutist @Joseph Weston
 583 M Storm King's Thunder @Alexander Mokhov
 584 R Wand of Wonder @Xavier Ribeiro
-585 R Wrathful Red Dragon @Dan Scott
+585 R Wrathful Red Dragon @Dan Murayama Scott
 586 R Wyll's Reversal @Irina Nordsol
 587 R Barroom Brawl @Craig J Spearing
 588 R Earthquake Dragon @Johan Grenier
@@ -765,7 +765,7 @@ ScryfallCode=CLB
 742 M Calculating Lich @Antonio José Manzanedo
 743 C Changeling Outcast @Micah Epstein
 744 U Corpse Augur @Scott M. Fischer
-745 R Crippling Fear @Nestor Ossandon Leal
+745 R Crippling Fear @Néstor Ossandón Leal
 746 R Curtains' Call @James Ryman
 747 R Dark Hatchling @Brad Rigney
 748 C Dauthi Horror @Jeff Laubenstein
@@ -869,7 +869,7 @@ ScryfallCode=CLB
 846 R Firja's Retribution @Anna Steinbauer
 847 U Grumgully, the Generous @Milivoj Ćeran
 848 R High Priest of Penance @Mark Zug
-849 R Memory Plunder @Dan Scott
+849 R Memory Plunder @Dan Murayama Scott
 850 R Nemesis of Reason @Mark Tedin
 851 R Niv-Mizzet, Parun @Svetlin Velinov
 852 U Sprite Dragon @Gabor Szikszai

@@ -5,6 +5,7 @@ import java.util.List;
 
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -36,7 +37,8 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
                 Collections.shuffle(list, MyRandom.getRandom());
                 p.getZone(zone).setCards(list);
             } else {
-                p.getController().orderMoveToZoneList(list, zone, sa);
+                CardCollectionView orderedCards = p.getController().orderMoveToZoneList(list, zone, sa);
+                p.getZone(zone).setCards(orderedCards);
             }
         }
     }

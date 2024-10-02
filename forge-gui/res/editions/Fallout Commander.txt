@@ -160,7 +160,7 @@ ScryfallCode=PIP
 152 R Overflowing Basin @Marina Ortega Lorente
 153 R Sunscorched Divide @Zezhou Chen
 154 R Viridescent Bog @Rafater
-155 C All That Glitters @Iain McCaig
+155 C All That Glitters @Kieran Yanner
 156 R Austere Command @Andrew Theophilopoulos
 157 R Captain of the Watch @Jonas De Ro
 158 U Crush Contraband @Xavier Ribeiro
@@ -688,7 +688,7 @@ ScryfallCode=PIP
 680 R Overflowing Basin @Marina Ortega Lorente
 681 R Sunscorched Divide @Zezhou Chen
 682 R Viridescent Bog @Rafater
-683 C All That Glitters @Iain McCaig
+683 C All That Glitters @Kieran Yanner
 684 R Austere Command @Andrew Theophilopoulos
 685 R Captain of the Watch @Jonas De Ro
 686 U Crush Contraband @Xavier Ribeiro

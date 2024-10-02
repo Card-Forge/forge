@@ -39,7 +39,7 @@ ScryfallCode=CLU
 31 U Ecstatic Electromancer @Caio Monteiro
 32 R Frenzied Gorespawn @Kekai Kotaki
 33 U Furious Spinesplitter @Elizabeth Peiró
-34 R Herald of Ilharg @Dan Scott
+34 R Herald of Ilharg @Dan Murayama Scott
 35 U Incriminating Impetus @Tony Foti
 36 R Lavinia, Foil to Conspiracy @Chris Rahn
 37 R Lonis, Genetics Expert @Kai Carpenter
@@ -70,7 +70,7 @@ ScryfallCode=CLU
 62 U Glorifier of Dusk @Viktor Titov
 63 C Gods Willing @Mark Winters
 64 C Law-Rune Enforcer @Eric Deschamps
-65 U Martial Impetus @Aaron Miller
+65 C Martial Impetus @Aaron Miller
 66 C Mighty Leap @rk post
 67 U Oust @Mike Bierek
 68 C Parhelion Patrol @Even Amundsen
@@ -85,7 +85,7 @@ ScryfallCode=CLU
 77 C Trusted Pegasus @Chris Rahn
 78 C Twilight Panther @Uriah Voth
 79 U Urbis Protector @Steve Argyle
-80 C War Screecher @Dan Scott
+80 C War Screecher @Dan Murayama Scott
 81 U Chemister's Insight @Josh Hass
 82 C Cloudkin Seer @Anastasia Ovchinnikova
 83 U Code of Constraint @Ekaterina Burmak
@@ -97,9 +97,9 @@ ScryfallCode=CLU
 89 C Leapfrog @Aaron Miller
 90 C Owl Familiar @Janine Johnston
 91 C Passwall Adept @John Thacker
-92 U Psychic Impetus @Lindsey Look
+92 C Psychic Impetus @Lindsey Look
 93 U Rapid Hybridization @Jack Wang
-94 C Repeal @Dan Scott
+94 C Repeal @Dan Murayama Scott
 95 U Rescuer Sphinx @Jesper Ejsing
 96 C Roaming Ghostlight @Zezhou Chen
 97 C Sage's Row Savant @Bastien L. Deharme
@@ -137,7 +137,7 @@ ScryfallCode=CLU
 129 C Cosmotronic Wave @Titus Lunter
 130 U Dagger Caster @Viktor Titov
 131 C Deputized Protester @Lius Lasahido
-132 C Direct Current @Dan Scott
+132 C Direct Current @Dan Murayama Scott
 133 C Fire Urchin @Deruchenko Alexander
 134 U Firefist Striker @Tyler Jacobson
 135 U Frenzied Goblin @Randy Vargas
@@ -180,12 +180,12 @@ ScryfallCode=CLU
 172 C Predatory Impetus @Randy Vargas
 173 C Sauroform Hybrid @Nils Hamm
 174 C Steeple Creeper @Svetlin Velinov
-175 C Territorial Boar @Dan Scott
+175 C Territorial Boar @Dan Murayama Scott
 176 C Thrashing Mossdog @Ryan Barger
 177 C Transluminant @Greg Hildebrandt
-178 C Vines of the Recluse @Dan Scott
+178 C Vines of the Recluse @Dan Murayama Scott
 179 C Wildsize @Jim Murray
-180 C Wildwood Patrol @Dan Scott
+180 C Wildwood Patrol @Dan Murayama Scott
 181 C Yeva's Forcemage @Eric Deschamps
 182 R Clan Defiance @Daarken
 183 C Curse of Chains @Drew Tucker
@@ -201,7 +201,7 @@ ScryfallCode=CLU
 193 C Frostburn Weird @Mike Bierek
 194 U Golgari Guildmage @Zoltan Boros & Gabor Szikszai
 195 M Hydroid Krasis @Jason Felix
-196 R Hypersonic Dragon @Dan Scott
+196 R Hypersonic Dragon @Dan Murayama Scott
 197 U Incubation // Incongruity @Mike Bierek
 198 U Integrity // Intervention @Ben Maier
 199 R Lavinia of the Tenth @Willian Murai

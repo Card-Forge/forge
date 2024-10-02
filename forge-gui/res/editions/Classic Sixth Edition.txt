@@ -279,7 +279,7 @@ ScryfallCode=6ED
 265 C Vitalize @Pete Venters
 266 R Waiting in the Weeds @Susan Van Camp
 267 U Warthog @Steve White
-268 C Wild Growth @Pat Morrissey
+268 C Wild Growth @Pat Lewis
 269 U Worldly Tutor @David O'Connor
 270 R Wyluli Wolf @Susan Van Camp
 271 R Aladdin's Ring @Stuart Griffin
@@ -333,7 +333,7 @@ ScryfallCode=6ED
 319 R Adarkar Wastes @Gary Leach
 320 R Brushland @Tom Wänerstrand
 321 R City of Brass @Tom Wänerstrand
-322 U Crystal Vein @Pat Morrissey
+322 U Crystal Vein @Pat Lewis
 323 U Dwarven Ruins @Liz Danforth
 324 U Ebon Stronghold @Liz Danforth
 325 U Havenwood Battleground @Liz Danforth

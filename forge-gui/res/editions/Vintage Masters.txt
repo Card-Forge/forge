@@ -80,7 +80,7 @@ ScryfallCode=VMA
 68 R Flusterstorm @Erica Yang
 69 R Force of Will @Matt Stewart
 70 C Frantic Search @Jeff Miracola
-71 R Future Sight @Dan Scott
+71 R Future Sight @Dan Murayama Scott
 72 U Gush @Kev Walker
 73 U High Tide @Eric Deschamps
 74 M Jace, the Mind Sculptor @Jason Chan
@@ -236,7 +236,7 @@ ScryfallCode=VMA
 224 U Penumbra Wurm @Daarken
 225 C Provoke @Terese Nielsen
 226 R Realm Seekers @Mike Sass
-227 R Regrowth @Dan Scott
+227 R Regrowth @Dan Murayama Scott
 228 U Roar of the Wurm @Kev Walker
 229 R Rofellos, Llanowar Emissary @Michael Sutfin
 230 R Saproling Burst @Carl Critchlow

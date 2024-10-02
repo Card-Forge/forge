@@ -7,4 +7,4 @@ ScryfallCode=PSOK
 
 [cards]
 18★ R Kiyomaro, First to Stand @Ittoku
-99★ R Ghost-Lit Raider @Ittoku
+99★ U Ghost-Lit Raider @Ittoku

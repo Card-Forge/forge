@@ -38,7 +38,7 @@ ScryfallCode=BBD
 28 U Jubilant Mascot @Filip Burburan
 29 R Play of the Game @Jung Park
 30 R Regna's Sanction @Bayard Wu
-31 C Skystreamer @Dan Scott
+31 C Skystreamer @Dan Murayama Scott
 32 R Together Forever @Aaron Miller
 33 M Arcane Artisan @Tommy Arnold
 34 U Fumble @Gabor Szikszai
@@ -150,9 +150,9 @@ ScryfallCode=BBD
 140 C Daggerdrome Imp @Jack Wang
 141 R Diabolic Intent @Josu Hernaiz
 142 C Doomed Dissenter @Tony Foti
-143 C Eyeblight Assassin @Dan Scott
+143 C Eyeblight Assassin @Dan Murayama Scott
 144 C Fill with Fright @Luca Zontini
-145 C Grotesque Mutation @Dan Scott
+145 C Grotesque Mutation @Dan Murayama Scott
 146 C Hand of Silumgar @Lius Lasahido
 147 C Last Gasp @Jason A. Engle
 148 C Liturgy of Blood @Zack Stella

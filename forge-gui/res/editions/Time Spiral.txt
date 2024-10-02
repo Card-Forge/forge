@@ -179,14 +179,14 @@ ScryfallCode=TSP
 165 C Ironclaw Buzzardiers @Carl Critchlow
 166 R Jaya Ballard, Task Mage @Matt Cavotta
 167 C Keldon Halberdier @Paolo Parente
-168 C Lightning Axe @Dan Scott
+168 C Lightning Axe @Dan Murayama Scott
 169 R Magus of the Scroll @Greg Staples
 170 C Mogg War Marshal @Wayne England
 171 R Norin the Wary @Heather Hudson
 172 C Orcish Cannonade @Pete Venters
 173 R Pardic Dragon @Zoltan Boros & Gabor Szikszai
 174 C Plunder @Thomas M. Baxa
-175 R Reiterate @Dan Scott
+175 R Reiterate @Dan Murayama Scott
 176 C Rift Bolt @Michael Sutfin
 177 R Sedge Sliver @Richard Kane Ferguson
 178 C Subterranean Shambler @Kev Walker
@@ -197,7 +197,7 @@ ScryfallCode=TSP
 183 C Two-Headed Sliver @Dany Orizio
 184 U Undying Rage @Scott M. Fischer
 185 C Viashino Bladescout @Dany Orizio
-186 U Volcanic Awakening @Dan Scott
+186 U Volcanic Awakening @Dan Murayama Scott
 187 R Wheel of Fate @Kev Walker
 188 R Word of Seizing @Vance Kovacs
 189 C Aether Web @Justin Sweet
@@ -228,7 +228,7 @@ ScryfallCode=TSP
 214 C Scarwood Treefolk @Stuart Griffin
 215 U Scryb Ranger @Rebecca Guay
 216 C Search for Tomorrow @Randy Gallegos
-217 R Spectral Force @Dan Scott
+217 R Spectral Force @Dan Murayama Scott
 218 R Spike Tiller @Tony Szczudlo
 219 C Spinneret Sliver @Michael Sutfin
 220 U Sporesower Thallid @Ron Spencer
@@ -290,7 +290,7 @@ ScryfallCode=TSP
 276 U Molten Slagheap @Daren Bader
 277 U Saltcrusted Steppe @Greg Staples
 278 R Swarmyard @Thomas M. Baxa
-279 C Terramorphic Expanse @Dan Scott
+279 C Terramorphic Expanse @Dan Murayama Scott
 280 U Urza's Factory @Mark Tedin
 281 R Vesuva @Zoltan Boros & Gabor Szikszai
 282 L Plains @Rob Alexander

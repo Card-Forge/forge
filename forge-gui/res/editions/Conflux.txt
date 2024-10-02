@@ -37,7 +37,7 @@ ScryfallCode=CON
 23 U Controlled Instincts @Ralph Horsley
 24 U Cumber Stone @Warren Mahy
 25 U Esperzoa @Warren Mahy
-26 M Ethersworn Adjudicator @Dan Scott
+26 M Ethersworn Adjudicator @Dan Murayama Scott
 27 C Faerie Mechanist @Matt Cavotta
 28 C Frontline Sage @Volkan Baǵa
 29 C Grixis Illusionist @Mark Tedin
@@ -59,7 +59,7 @@ ScryfallCode=CON
 45 U Fleshformer @Dave Kendall
 46 U Grixis Slavedriver @Dave Kendall
 47 C Infectious Horror @Pete Venters
-48 R Kederekt Parasite @Dan Scott
+48 R Kederekt Parasite @Dan Murayama Scott
 49 R Nyxathid @Raymond Swanland
 50 C Pestilent Kathari @Dave Kendall
 51 C Rotting Rats @Dave Allsop

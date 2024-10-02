@@ -1,0 +1,6 @@
+Name:Sadistic Shell Game
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChooseCard | Choices$ Creature.YouDontCtrl | Reveal$ True | Defined$ Player | StartingWith$ Opponent | Mandatory$ True | ChoiceTitle$ Choose a creature to destroy | AILogic$ OppPreferred | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Starting with the next opponent in turn order, each player chooses a creature you don't control. Destroy the chosen creatures.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Card.ChosenCard | StackDescription$ None
+Oracle:Starting with the next opponent in turn order, each player chooses a creature you don't control. Destroy the chosen creatures.

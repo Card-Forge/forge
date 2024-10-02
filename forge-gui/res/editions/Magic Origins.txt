@@ -95,7 +95,7 @@ ScryfallCode=ORI
 81 U Turn to Frog @Warren Mahy
 82 C Watercourser @Mathias Kollros
 83 U Whirler Rogue @Winona Nelson
-84 R Willbreaker @Dan Scott
+84 R Willbreaker @Dan Murayama Scott
 85 U Blightcaster @Winona Nelson
 86 C Catacomb Slug @Nils Hamm
 87 U Consecrated by Blood @John Stanko
@@ -106,7 +106,7 @@ ScryfallCode=ORI
 92 M Demonic Pact @Aleksi Briclot
 93 R Despoiler of Souls @Greg Staples
 94 M Erebos's Titan @Peter Mohrbacher
-95 C Eyeblight Assassin @Dan Scott
+95 C Eyeblight Assassin @Dan Murayama Scott
 96 U Eyeblight Massacre @Igor Kieryluk
 97 C Fetid Imp @Nils Hamm
 98 U Fleshbag Marauder @Mark Zug
@@ -228,12 +228,12 @@ ScryfallCode=ORI
 214 U Iroas's Champion @Marco Nelor
 215 U Possessed Skaab @John Stanko
 216 U Reclusive Artificer @Cynthia Sheppard
-217 U Shaman of the Pack @Dan Scott
+217 U Shaman of the Pack @Dan Murayama Scott
 218 U Thunderclap Wyvern @Jason Felix
 219 U Zendikar Incarnate @Lucas Graciano
 220 C Alchemist's Vial @Lindsey Look
 221 M Alhammarret's Archive @Richard Wright
-222 U Angel's Tomb @Dan Scott
+222 U Angel's Tomb @Dan Murayama Scott
 223 C Bonded Construct @Craig J Spearing
 224 U Brawler's Plate @Jung Park
 225 U Chief of the Foundry @Daniel Ljunggren
@@ -250,7 +250,7 @@ ScryfallCode=ORI
 236 M Pyromancer's Goggles @James Paick
 237 U Ramroller @Craig J Spearing
 238 U Runed Servitor @Mike Bierek
-239 U Sigil of Valor @Dan Scott
+239 U Sigil of Valor @Dan Murayama Scott
 240 R Sword of the Animist @Daniel Ljunggren
 241 U Throwing Knife @Mathias Kollros
 242 C Veteran's Sidearm @Aaron Miller

@@ -26,15 +26,15 @@ ScryfallCode=NEC
 18 R Akki Battle Squad @Steve Prescott
 19 R Collision of Realms @Piotr Dura
 20 R Kami of Celebration @Milivoj Ćeran
-21 R Komainu Battle Armor @Nestor Ossandon Leal
+21 R Komainu Battle Armor @Néstor Ossandón Leal
 22 R Smoke Spirits' Aid @Uriah Voth
 23 R Unquenchable Fury @Livia Prima
 24 R Ascendant Acolyte @Micah Epstein
 25 R Concord with the Kami @Marta Nael
 26 R Kosei, Penitent Warlord @Matt Stewart
-27 R One with the Kami @Justyna Gil
+27 R One with the Kami @Justyna Dura
 28 R Rampant Rejuvenator @Andrey Kuzinskiy
-29 R Silkguard @Dan Scott
+29 R Silkguard @Dan Murayama Scott
 30 R Tanuki Transplanter @Oleksandr Kozachenko
 31 R Myojin of Blooming Dawn @Yigit Koroglu
 32 M Yoshimaru, Ever Faithful @Ilse Gort
@@ -65,7 +65,7 @@ ScryfallCode=NEC
 57 R Akki Battle Squad @Steve Prescott
 58 R Collision of Realms @Piotr Dura
 59 R Kami of Celebration @Milivoj Ćeran
-60 R Komainu Battle Armor @Nestor Ossandon Leal
+60 R Komainu Battle Armor @Néstor Ossandón Leal
 61 R Myojin of Roaring Blades @Jason A. Engle
 62 R Smoke Spirits' Aid @Uriah Voth
 63 R Unquenchable Fury @Livia Prima
@@ -74,9 +74,9 @@ ScryfallCode=NEC
 66 M Go-Shintai of Life's Origin @Alexander Mokhov
 67 R Kosei, Penitent Warlord @Matt Stewart
 68 R Myojin of Towering Might @Ryan Pancoast
-69 R One with the Kami @Justyna Gil
+69 R One with the Kami @Justyna Dura
 70 R Rampant Rejuvenator @Andrey Kuzinskiy
-71 R Silkguard @Dan Scott
+71 R Silkguard @Dan Murayama Scott
 72 R Tanuki Transplanter @Oleksandr Kozachenko
 73 M Chishiro, the Shattered Blade @Lius Lasahido
 74 M Kaima, the Fractured Calm @Filip Burburan
@@ -149,7 +149,7 @@ ScryfallCode=NEC
 141 U Raff Capashen, Ship's Mage @John Stanko
 142 U Rhythm of the Wild @Tomasz Jedruszek
 143 R Ulasht, the Hate Seed @Nottsuo
-144 C Arcane Signet @Dan Scott
+144 C Arcane Signet @Dan Murayama Scott
 145 U Azorius Signet @Raoul Vitale
 146 R Blackblade Reforged @Chris Rahn
 147 R Bonehoard @Chippy
@@ -169,7 +169,7 @@ ScryfallCode=NEC
 161 U Sol Ring @Mike Bierek
 162 R Solemn Simulacrum @Donato Giancola
 163 U Swiftfoot Boots @Svetlin Velinov
-164 R Sword of Vengeance @Dan Scott
+164 R Sword of Vengeance @Dan Murayama Scott
 165 M Weatherlight @Jaime Jones
 166 R Cinder Glade @Adam Paquette
 167 C Command Tower @Ryan Yee

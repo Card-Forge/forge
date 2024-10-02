@@ -20,7 +20,7 @@ ScryfallCode=YOTJ
 12 U Impetuous Lootmonger @Inkognit
 13 R Sapphire Collector @Francis Tneh
 14 U Switchgrass Grazer @Leanna Crossan
-15 C Wagon Wrecker @Wero Gallo
+15 R Wagon Wrecker @Wero Gallo
 16 R Blooming Cactusfolk @David Szabo
 17 M Jessie Zane, Fangbringer @Francisco Miyara
 18 R Jet Collector @Francis Tneh

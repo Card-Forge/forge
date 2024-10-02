@@ -29,7 +29,7 @@ ScryfallCode=DDR
 20 U Seek the Horizon @Min Yum
 21 R Thicket Elemental @Ron Spencer
 22 C Thornweald Archer @Dave Kendall
-23 C Vines of the Recluse @Dan Scott
+23 C Vines of the Recluse @Dan Murayama Scott
 24 U Walker of the Grove @Todd Lockwood
 25 C Wood Elves @Josh Hass
 26 U Woodborn Behemoth @Matt Stewart

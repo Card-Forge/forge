@@ -244,7 +244,7 @@ ScryfallCode=MIR
 232 U Nettletooth Djinn @Janine Johnston
 233 R Preferred Selection @Kev Walker
 234 C Quirion Elves @Randy Gallegos
-235 C Rampant Growth @Pat Morrissey
+235 C Rampant Growth @Pat Lewis
 236 C Regeneration @Charles Gillespie
 237 U Roots of Life @Tony Roberts
 238 C Sabertooth Cobra @Andrew Robinson
@@ -259,7 +259,7 @@ ScryfallCode=MIR
 247 C Uktabi Faerie @Junior Tomlin
 248 R Uktabi Wildcats @John Matson
 249 U Unseen Walker @Alan Rabinowitz
-250 U Unyaro Bee Sting @Pat Morrissey
+250 U Unyaro Bee Sting @Pat Lewis
 251 C Village Elder @Donato Giancola
 252 R Waiting in the Weeds @Susan Van Camp
 253 C Wall of Roots @John Matson
@@ -334,8 +334,8 @@ ScryfallCode=MIR
 322 U Unerring Sling @Zak Plucinski
 323 R Ventifact Bottle @Ron Spencer
 324 U Bad River @Terese Nielsen
-325 U Crystal Vein @Pat Morrissey
-326 U Flood Plain @Pat Morrissey
+325 U Crystal Vein @Pat Lewis
+326 U Flood Plain @Pat Lewis
 327 U Grasslands @John Avon
 328 U Mountain Valley @Kari Johnson
 329 U Rocky Tar Pit @Jeff Miracola

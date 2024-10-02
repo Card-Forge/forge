@@ -273,7 +273,7 @@ ScryfallCode=40K
 265 U Ash Barrens @Sergei Leoluch Panin
 266 U Barren Moor @Rafater
 267 C Cave of Temptation @Teodora Dumitriu
-268 R Choked Estuary @LiXin Yin
+268 R Choked Estuary @Lixin Yin
 269 R Cinder Glade @Sergio Cosmai
 270 C Command Tower @Logan Feliciano
 271 C Command Tower @Games Workshop
@@ -287,7 +287,7 @@ ScryfallCode=40K
 279 R Foreboding Ruins @Josu Solano
 280 C Forgotten Cave @Andrey Nyarl
 281 U Frontier Bivouac @Álvaro Calvo Escudero
-282 R Game Trail @LiXin Yin
+282 R Game Trail @Lixin Yin
 283 U Memorial to Glory @Games Workshop
 284 U Molten Slagheap @Anthony Devine
 285 U Myriad Landscape @Adrián Rodríguez Pérez
@@ -305,7 +305,7 @@ ScryfallCode=40K
 297 R Temple of Abandon @Logan Feliciano
 298 R Temple of Epiphany @Álvaro Calvo Escudero
 299 R Temple of Mystery @Eliz Roxs
-300 U Temple of the False God @Josu Hernaiz
+300 U Temple of the False God @Josu Solano
 301 C Terramorphic Expanse @Kekai Kotaki
 302 C Thornwood Falls @Josu Hernaiz
 303 C Tranquil Cove @Eliz Roxs
@@ -314,7 +314,7 @@ ScryfallCode=40K
 306 L Plains @Zhillustrator
 307 L Island @Marina Ortega Lorente
 308 L Island @Calder Moore
-309 L Island @LiXin Yin
+309 L Island @Lixin Yin
 310 L Swamp @JB Casacop
 311 L Swamp @Johan Grenier
 312 L Swamp @Calder Moore
