@@ -3,6 +3,7 @@ Code=PSDG
 Date=2001-06-28
 Name=Sega Dreamcast Cards
 Type=Promo
+ScryfallCode=PSDG
 
 [cards]
 1 R Arden Angel @Greg Staples

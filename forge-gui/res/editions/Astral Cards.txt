@@ -3,6 +3,7 @@ Code=PAST
 Date=1997-04-01
 Name=Astral Cards
 Type=Funny
+ScryfallCode=PAST
 
 [cards]
 1 C Aswan Jaguar @Pat Lewis

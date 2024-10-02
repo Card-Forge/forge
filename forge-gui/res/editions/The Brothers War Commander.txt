@@ -136,7 +136,7 @@ ScryfallCode=BRC
 130 M Sphinx's Revelation @John Di Giovanni
 131 R Vindicate @Brian Snõddy
 132 C Arcane Signet @Dan Scott
-133 U Azorius Signet @Raoul Vitale
+133 C Azorius Signet @Raoul Vitale
 134 U Chief of the Foundry @Daniel Ljunggren
 135 C Commander's Sphere @Ryan Alexander Lee
 136 U Cranial Plating @Adam Rex
@@ -159,7 +159,7 @@ ScryfallCode=BRC
 153 R Oblivion Stone @Gabor Szikszai
 154 C Orzhov Signet @Martina Pilcerova
 155 C Prophetic Prism @John Avon
-156 U Rakdos Signet @Martina Pilcerova
+156 C Rakdos Signet @Martina Pilcerova
 157 U Relic of Progenitus @Jean-Sébastien Rossbach
 158 U Servo Schematic @Titus Lunter
 159 U Skullclamp @Daniel Ljunggren

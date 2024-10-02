@@ -9,7 +9,7 @@ DoublePick=Always
 ScryfallCode=CMR
 
 [cards]
-1 C The Prismatic Piper @Seb McKinnon
+1 S The Prismatic Piper @Seb McKinnon
 2 M Akroma, Vision of Ixidor @Chris Rahn
 3 R Akroma's Will @Antonio José Manzanedo
 4 U Alharu, Solemn Ritualist @Chris Rallis
@@ -487,7 +487,7 @@ ScryfallCode=CMR
 474 U Swiftfoot Boots @Svetlin Velinov
 475 R Sword of Vengeance @Dan Scott
 476 U Blighted Woodland @Jason Felix
-477 C Boros Garrison @John Avon
+477 U Boros Garrison @John Avon
 478 C Boros Guildgate @Noah Bradley
 479 C Command Tower @Ryan Yee
 480 U Coral Atoll @John Avon
@@ -560,7 +560,7 @@ ScryfallCode=CMR
 543 M Zedruu the Greathearted @Mark Zug
 544 M Zur the Enchanter @Josu Hernaiz
 545 M Ramos, Dragon Engine @Joseph Meehan
-546 C The Prismatic Piper @Seb McKinnon
+546 S The Prismatic Piper @Seb McKinnon
 547 M Akroma, Vision of Ixidor @Chris Rahn
 548 U Alharu, Solemn Ritualist @Chris Rallis
 549 U Ardenn, Intrepid Archaeologist @Jason Rainville

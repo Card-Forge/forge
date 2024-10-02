@@ -119,7 +119,7 @@ ScryfallCode=DSC
 111 U Archetype of Imagination @Robbie Trevino
 112 R Body of Knowledge @Clint Cearley
 113 C Brainstorm @Willian Murai
-114 C Counterspell @Zack Stella
+114 U Counterspell @Zack Stella
 115 R Dig Through Time @Ryan Yee
 116 M Dream Eater @Daarken
 117 R Extravagant Replication @Pauline Voss
@@ -189,7 +189,7 @@ ScryfallCode=DSC
 181 C Greater Tanuki @Ilse Gort
 182 U Harmonize @Dan Murayama Scott
 183 C Harrow @Rob Alexander
-184 M Hornet Queen @Jonathan Kuo
+184 R Hornet Queen @Jonathan Kuo
 185 M Hydra Omnivore @Svetlin Velinov
 186 R Inscription of Abundance @Zoltan Boros
 187 M Ishkanah, Grafwidow @Christine Choi
@@ -284,7 +284,7 @@ ScryfallCode=DSC
 276 R Flooded Grove @Dave Kendall
 277 R Foreboding Ruins @Adam Paquette
 278 C Geothermal Bog @Gabor Szikszai
-279 C Golgari Rot Farm @John Avon
+279 U Golgari Rot Farm @John Avon
 280 R Graven Cairns @Anthony S. Waters
 281 R Grim Backwoods @Vincent Proce
 282 C Halimar Depths @Volkan Baǵa

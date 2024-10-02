@@ -234,7 +234,7 @@ ScryfallCode=C20
 226 U Nyx Weaver @Jack Wang
 227 R Prophetic Bolt @Slawomir Maniak
 228 U Putrefy @Igor Kieryluk
-229 R Rashmi, Eternities Crafter @Magali Villeneuve
+229 M Rashmi, Eternities Crafter @Magali Villeneuve
 230 U Temur Charm @Mathias Kollros
 231 U Terminate @Lucas Graciano
 232 U Trygon Predator @Jack Wang
