@@ -32,7 +32,7 @@ A23 U Fact or Fiction @Terese Nielsen
 A24 U Hinder @Wayne Reynolds
 A25 C Looter il-Kor @Mike Dringenberg
 A26 C Man-o'-War @Jon J Muth
-A27 C Merfolk Looter @Ron Spencer
+A27 U Merfolk Looter @Ron Spencer
 A28 C Mulldrifter @Eric Fortune
 A29 U Overwhelming Intellect @Alex Horley-Orlandelli
 A30 U Raven Familiar @Edward P. Beard, Jr.
@@ -54,7 +54,7 @@ A45 U Nezumi Graverobber @Jim Nelson
 A46 R Phyrexian Arena @Pete Venters
 A47 C Reaping the Graves @Ron Spencer
 A48 U Shriekmaw @Steve Prescott
-A49 U Stinkweed Imp @Edward P. Beard, Jr.
+A49 C Stinkweed Imp @Edward P. Beard, Jr.
 A50 C Terror @Ron Spencer
 A51 C Twisted Abomination @Daren Bader
 A52 C Anarchist @Brom

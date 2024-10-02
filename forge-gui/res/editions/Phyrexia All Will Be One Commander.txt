@@ -109,7 +109,7 @@ ScryfallCode=ONC
 101 R Legion Warboss @Alex Konstad
 102 U Loyal Apprentice @Joe Slucher
 103 R Siege-Gang Commander @Aaron Miller
-104 S Beast Within @Dave Allsop
+104 U Beast Within @Dave Allsop
 105 C Blight Mamba @Drew Baker
 106 U Carrion Call @Adrian Smith
 107 C Cultivate @Anthony Palumbo

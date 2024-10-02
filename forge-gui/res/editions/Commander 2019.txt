@@ -129,7 +129,7 @@ ScryfallCode=C19
 120 R Hex @Michael Sutfin
 121 R In Garruk's Wake @Chase Stone
 122 C Murderous Compulsion @David Palumbo
-123 C Nightshade Assassin @Darren Tan
+123 U Nightshade Assassin @Darren Tan
 124 M Ob Nixilis Reignited @Chris Rahn
 125 R Overseer of the Damned @rk post
 126 U Plaguecrafter @Anna Steinbauer

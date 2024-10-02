@@ -7,4 +7,4 @@ ScryfallCode=PGPT
 
 [cards]
 142★ R Djinn Illuminatus @Michael Sutfin
-144★ R Gruul Guildmage @Paolo Parente
+144★ U Gruul Guildmage @Paolo Parente

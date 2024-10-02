@@ -139,7 +139,7 @@ ScryfallCode=BLC
 131 R Exotic Orchard @Ron Spears
 132 U Reliquary Tower @Jesper Ejsing
 133 R Swarmyard @Volkan Baǵa
-134 U Angel of the Ruins @Viko Menezes
+134 R Angel of the Ruins @Viko Menezes
 135 U Baird, Steward of Argive @Christine Choi
 136 R Blade Splicer @Greg Staples
 137 R Boss's Chauffeur @Yangtian Li
@@ -150,7 +150,7 @@ ScryfallCode=BLC
 142 R Jazal Goldmane @Aaron Miller
 143 R Loran of the Third Path @Steven Belledin
 144 M Luminous Broodmoth @Lie Setiawan
-145 R Mangara, the Diplomat @Howard Lyon
+145 M Mangara, the Diplomat @Howard Lyon
 146 R Martial Coup @Greg Staples
 147 U Path to Exile @Raf Sarmento
 148 R Promise of Loyalty @Sara Winters
@@ -203,7 +203,7 @@ ScryfallCode=BLC
 195 R Devilish Valet @Bud Cook
 196 R Etali, Primal Storm @Raymond Swanland
 197 R Gratuitous Violence @Christopher Moeller
-198 R Inferno Titan @Kev Walker
+198 M Inferno Titan @Kev Walker
 199 R Outpost Siege @Daarken
 200 R Rain of Riches @Evyn Fong
 201 R Rose Room Treasurer @David Sladek
@@ -227,7 +227,7 @@ ScryfallCode=BLC
 219 U Garruk's Uprising @Wisnu Tan
 220 R Ghalta, Primal Hunger @Chase Stone
 221 R Gilded Goose @Lindsey Look
-222 U Goreclaw, Terror of Qal Sisma @Svetlin Velinov
+222 R Goreclaw, Terror of Qal Sisma @Svetlin Velinov
 223 R Greater Good @Mathias Kollros
 224 M Grothama, All-Devouring @Mark Behm
 225 R Jolrael, Mwonvuli Recluse @Izzy
@@ -238,7 +238,7 @@ ScryfallCode=BLC
 230 R Managorger Hydra @Lucas Graciano
 231 R Path of Discovery @Howard Lyon
 232 M Primeval Bounty @Christine Choi
-233 R Rampaging Baloths @Steve Prescott
+233 M Rampaging Baloths @Steve Prescott
 234 C Rampant Growth @Steven Belledin
 235 R Rishkar, Peema Renegade @Todd Lockwood
 236 C Sakura-Tribe Elder @Anastasia Ovchinnikova
@@ -277,13 +277,13 @@ ScryfallCode=BLC
 269 U Fellwar Stone @John Avon
 270 R Ghirapur Orrery @Kirsten Zirngibl
 271 R Gilded Lotus @Volkan Baǵa
-272 C Golgari Signet @Raoul Vitale
-273 C Gruul Signet @Efrem Palacios
+272 U Golgari Signet @Raoul Vitale
+273 U Gruul Signet @Efrem Palacios
 274 U Haywire Mite @Izzy
 275 U Hedron Archive @Craig J Spearing
 276 R Helm of the Host @Igor Kieryluk
 277 R Idol of Oblivion @Piotr Dura
-278 C Izzet Signet @Raoul Vitale
+278 U Izzet Signet @Raoul Vitale
 279 R Maskwood Nexus @Jason A. Engle
 280 U Mind Stone @Adam Rex
 281 C Ornithopter of Paradise @Raoul Vitale
@@ -294,7 +294,7 @@ ScryfallCode=BLC
 286 U Swiftfoot Boots @Svetlin Velinov
 287 U Talisman of Impulse @Mike Dringenberg
 288 U Talisman of Resilience @Lindsey Look
-289 U Thought Vessel @rk post
+289 C Thought Vessel @rk post
 290 U Thran Dynamo @Ron Spears
 291 R Adarkar Wastes @Piotr Dura
 292 U Barren Moor @Heather Hudson
@@ -313,7 +313,7 @@ ScryfallCode=BLC
 305 C Forgotten Cave @Tony Szczudlo
 306 R Game Trail @Adam Paquette
 307 R Glacial Fortress @Franz Vohwinkel
-308 C Golgari Rot Farm @John Avon
+308 U Golgari Rot Farm @John Avon
 309 R Grim Backwoods @Vincent Proce
 310 C Gruul Turf @John Avon
 311 C Haunted Mire @Bruce Brenneise

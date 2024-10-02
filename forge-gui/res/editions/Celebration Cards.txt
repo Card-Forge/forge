@@ -6,7 +6,7 @@ Type=Funny
 ScryfallCode=PCEL
 
 [cards]
-1 M 1996 World Champion @Christopher Rush
+1 R 1996 World Champion @Christopher Rush
 2 R Shichifukujin Dragon @Christopher Rush
 3 R Proposal @Quinton Hoover
 4 R Splendid Genesis @Monique Thirifay

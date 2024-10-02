@@ -213,7 +213,7 @@ ScryfallCode=C18
 204 U Dreamstone Hedron @Eric Deschamps
 205 R Duplicant @Marco Nelor
 206 U Hedron Archive @Craig J Spearing
-207 U Izzet Signet @Raoul Vitale
+207 C Izzet Signet @Raoul Vitale
 208 U Magnifying Glass @Dan Scott
 209 R Mimic Vat @Matt Cavotta
 210 C Mind Stone @Adam Rex

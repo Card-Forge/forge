@@ -210,7 +210,7 @@ ScryfallCode=DSK
 202 M Tyvar, the Pummeler @Olivier Bernard
 203 U Under the Skin @Fernando Falcone
 204 R Valgavoth's Onslaught @Lie Setiawan
-205 M Walk-in Closet @Miklós Ligeti
+205 M Walk-In Closet @Miklós Ligeti
 206 C Wary Watchdog @Olivier Bernard
 207 U Wickerfolk Thresher @WolfSkullJack
 208 U Arabella, Abandoned Doll @J.P. Targete
@@ -394,7 +394,7 @@ ScryfallCode=DSK
 338 M Funeral Room @Alexandre Chaudret
 339 R Unholy Annex @Alexis Ziritt
 340 M Charred Foyer @Oliver Barrett
-341 M Walk-in Closet @Bastien Grivet
+341 M Walk-In Closet @Bastien Grivet
 342 R Restricted Office @Scott Buoncristiano
 343 R Roaring Furnace @Toni Infante
 344 M Abhorrent Oculus @Igor Krstic

@@ -117,9 +117,9 @@ ScryfallCode=ZNC
 109 C Commander's Sphere @Ryan Alexander Lee
 110 U Dimir Keyrune @Daniel Ljunggren
 111 C Dimir Locket @Zezhou Chen
-112 U Dimir Signet @Raoul Vitale
+112 C Dimir Signet @Raoul Vitale
 113 U Heirloom Blade @Carmen Sinek
-114 C Mind Stone @Adam Rex
+114 U Mind Stone @Adam Rex
 115 R Obelisk of Urd @John Severin Brassell
 116 U Sandstone Oracle @Izzy
 117 C Scaretiller @Jakub Kasper
@@ -127,7 +127,7 @@ ScryfallCode=ZNC
 119 R Seer's Sundial @Franz Vohwinkel
 120 U Sol Ring @Mike Bierek
 121 U Blighted Woodland @Jason Felix
-122 C Boros Garrison @John Avon
+122 U Boros Garrison @John Avon
 123 C Boros Guildgate @Noah Bradley
 124 C Command Tower @Ryan Yee
 125 U Cryptic Caves @Sung Choi
@@ -145,7 +145,7 @@ ScryfallCode=ZNC
 137 R Needle Spires @Jonas De Ro
 138 U Rogue's Passage @Christine Choi
 139 C Selesnya Guildgate @Howard Lyon
-140 C Selesnya Sanctuary @John Avon
+140 U Selesnya Sanctuary @John Avon
 141 U Submerged Boneyard @Cliff Childs
 142 C Terramorphic Expanse @Dan Scott
 

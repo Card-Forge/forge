@@ -10,7 +10,7 @@ ScryfallCode=SS3
 2 R Cathartic Reunion @Howard Lyon
 3 R Fiery Confluence @Micah Epstein
 4 M Past in Flames @Josu Hernaiz
-5 M Pyroblast @Yongjae Choi
+5 R Pyroblast @Yongjae Choi
 6 R Pyromancer Ascension @Karl Kopinski
 7 R Rite of Flame @Kieran Yanner
 8 R Young Pyromancer @Cynthia Sheppard

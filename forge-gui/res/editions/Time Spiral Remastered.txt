@@ -280,13 +280,13 @@ ScryfallCode=TSR
 270 R Lotus Bloom @Mark Zug
 271 U Paradise Plume @Wayne England
 272 C Prismatic Lens @Alan Pollack
-273 C Sliversmith @John Avon
+273 U Sliversmith @John Avon
 274 R Stuffy Doll @Dave Allsop
 275 U Calciform Pools @Darrell Riche
 276 U Dreadship Reef @Lars Grant-West
 277 R Dryad Arbor @Eric Fortune
 278 R Flagstones of Trokair @Rob Alexander
-279 C Fungal Reaches @Martina Pilcerova
+279 U Fungal Reaches @Martina Pilcerova
 280 M Gemstone Caverns @Martina Pilcerova
 281 R Kher Keep @Paolo Parente
 282 U Molten Slagheap @Daren Bader
