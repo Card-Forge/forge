@@ -62,7 +62,7 @@ ScryfallCode=RAV
 47 U Ethereal Usher @Mark A. Nelson
 48 R Eye of the Storm @Hideaki Takamura
 49 C Flight of Fancy @Glen Angus
-50 U Flow of Ideas @Dan Scott
+50 U Flow of Ideas @Dan Murayama Scott
 51 R Followed Footsteps @Glen Angus
 52 C Grayscaled Gharial @Chris Dien
 53 R Grozoth @Cyril Van Der Haegen
@@ -85,8 +85,8 @@ ScryfallCode=RAV
 70 C Terraformer @Luca Zontini
 71 C Tidewater Minion @Tomas Giorello
 72 R Tunnel Vision @Dany Orizio
-73 C Vedalken Dismisser @Dan Scott
-74 C Vedalken Entrancer @Dan Scott
+73 C Vedalken Dismisser @Dan Murayama Scott
+74 C Vedalken Entrancer @Dan Murayama Scott
 75 U Wizened Snitches @Greg Staples
 76 C Zephyr Spirit @Tomas Giorello
 77 R Blood Funnel @Thomas M. Baxa
@@ -123,7 +123,7 @@ ScryfallCode=RAV
 108 C Strands of Undeath @Dave Allsop
 109 C Thoughtpicker Witch @Pete Venters
 110 U Undercity Shade @Dana Knutson
-111 U Vigor Mortis @Dan Scott
+111 U Vigor Mortis @Dan Murayama Scott
 112 U Vindictive Mob @Wayne Reynolds
 113 R Woebringer Demon @Daren Bader
 114 C Barbarian Riftcutter @Carl Critchlow
@@ -228,13 +228,13 @@ ScryfallCode=RAV
 213 U Lightning Helix @Kev Walker
 214 R Loxodon Hierarch @Kev Walker
 215 R Mindleech Mass @Kev Walker
-216 U Moroii @Dan Scott
+216 U Moroii @Dan Murayama Scott
 217 C Perplex @Tsutomu Kawade
 218 R Phytohydra @Jim Murray
 219 U Pollenbright Wings @Terese Nielsen
 220 U Psychic Drain @Nick Percival
 221 U Putrefy @Jim Nelson
-222 C Rally the Righteous @Dan Scott
+222 C Rally the Righteous @Dan Murayama Scott
 223 R Razia, Boros Archangel @Donato Giancola
 224 R Razia's Purification @Shishizaru
 225 R Savra, Queen of the Golgari @Scott M. Fischer
@@ -266,7 +266,7 @@ ScryfallCode=RAV
 251 R Privileged Position @Wayne England
 252 U Selesnya Guildmage @Mark Zug
 253 R Shadow of Doubt @Greg Staples
-254 R Bloodletter Quill @Dan Scott
+254 R Bloodletter Quill @Dan Murayama Scott
 255 C Boros Signet @Greg Hildebrandt
 256 R Bottled Cloister @Luca Zontini
 257 R Cloudstone Curio @Heather Hudson

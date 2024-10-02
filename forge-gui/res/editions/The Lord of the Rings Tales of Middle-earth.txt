@@ -393,7 +393,7 @@ ScryfallCode=LTR
 482 C Slip On the Ring @Iga Oliwiak
 483 C Soldier of the Grey Host @Chris Cold
 484 C Stalwarts of Osgiliath @Lixin Yin
-485 U Tale of Tinúviel @Eli
+485 U Tale of Tinúviel @Anthony Devine
 486 C Took Reaper @Tatiana Veryayskaya
 487 R War of the Last Alliance @Alexander Forssberg
 488 C Westfold Rider @Anastasia Balakchina
@@ -461,7 +461,7 @@ ScryfallCode=LTR
 550 C Nasty End @Valera Lutfullina
 551 U Nazgûl @Igor Krstic
 552 U Oath of the Grey Host @Miklós Ligeti
-553 R One Ring to Rule Them All @Nino Is
+553 R One Ring to Rule Them All @L J Koh
 554 R Orcish Bowmasters @Maxim Kostin
 555 C Orcish Medicine @Irvin Rodriguez
 556 C Sam's Desperate Rescue @Lixin Yin
@@ -550,7 +550,7 @@ ScryfallCode=LTR
 639 C Shower of Arrows @Manuel Castañón
 640 U Stew the Coneys @Eelis Kyttanen
 641 C Wose Pathfinder @Iga Oliwiak
-642 R Aragorn, Company Leader @Eli
+642 R Aragorn, Company Leader @Anna Steinbauer
 643 M Aragorn, the Uniter @Javier Charro
 644 M Arwen, Mortal Queen @Miranda Meeks
 645 U Arwen Undómiel @Yongjae Choi
@@ -653,7 +653,7 @@ ScryfallCode=LTR
 805 R Legolas, Master Archer @Dominik Mayer
 806 U Meriadoc Brandybuck @Marko Manev
 807 U Peregrin Took @Anato Finnstark
-808 R Aragorn, Company Leader @Eli
+808 R Aragorn, Company Leader @Andreas Rocha
 809 M Aragorn, the Uniter @Dominik Mayer
 810 R Elrond, Master of Healing @Andreas Rocha
 811 R Faramir, Prince of Ithilien @Andreas Rocha

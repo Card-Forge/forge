@@ -48,7 +48,7 @@ ScryfallCode=ROE
 35 U Luminous Wake @Mike Bierek
 36 C Makindi Griffin @Izzy
 37 U Mammoth Umbra @Howard Lyon
-38 R Near-Death Experience @Dan Scott
+38 R Near-Death Experience @Dan Murayama Scott
 39 R Nomads' Assembly @Erica Yang
 40 U Oust @Mike Bierek
 41 C Puncturing Light @Zoltan Boros & Gabor Szikszai
@@ -196,7 +196,7 @@ ScryfallCode=ROE
 183 R Gelatinous Genesis @Daniel Ljunggren
 184 R Gigantomancer @Chippy
 185 U Gravity Well @Rob Alexander
-186 C Growth Spasm @Dan Scott
+186 C Growth Spasm @Dan Murayama Scott
 187 C Haze Frog @Jesper Ejsing
 188 U Irresistible Prey @Jesper Ejsing
 189 U Jaddi Lifestrider @Vincent Proce

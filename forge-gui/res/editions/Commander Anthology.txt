@@ -230,7 +230,7 @@ ScryfallCode=CMA
 221 U Loreseeker's Stone @Franz Vohwinkel
 222 U Moss Diamond @Lindsey Look
 223 C Orzhov Signet @Greg Hildebrandt
-224 C Pilgrim's Eye @Dan Scott
+224 C Pilgrim's Eye @Dan Murayama Scott
 225 R Predator, Flagship @Mark Tedin
 226 C Rakdos Signet @Greg Hildebrandt
 227 R Seer's Sundial @Franz Vohwinkel
@@ -284,7 +284,7 @@ ScryfallCode=CMA
 275 C Slippery Karst @Stephen Daniele
 276 U Tainted Wood @Rob Alexander
 277 U Temple of the False God @Brian Snõddy
-278 C Terramorphic Expanse @Dan Scott
+278 C Terramorphic Expanse @Dan Murayama Scott
 279 C Tranquil Thicket @Heather Hudson
 280 C Transguild Promenade @Noah Bradley
 281 U Vivid Grove @Howard Lyon

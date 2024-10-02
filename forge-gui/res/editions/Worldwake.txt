@@ -59,7 +59,7 @@ ScryfallCode=WWK
 46 C Wind Zendikon @Vincent Proce
 47 M Abyssal Persecutor @Chippy
 48 R Agadeem Occultist @Vance Kovacs
-49 R Anowon, the Ruin Sage @Dan Scott
+49 R Anowon, the Ruin Sage @Dan Murayama Scott
 50 U Bloodhusk Ritualist @Daarken
 51 C Bojuka Brigand @Johann Bodin
 52 C Brink of Disaster @Alex Horley-Orlandelli
@@ -138,7 +138,7 @@ ScryfallCode=WWK
 125 C Hedron Rover @Jason Felix
 126 C Kitesail @Cyril Van Der Haegen
 127 R Lodestone Golem @Chris Rahn
-128 C Pilgrim's Eye @Dan Scott
+128 C Pilgrim's Eye @Dan Murayama Scott
 129 U Razor Boomerang @Franz Vohwinkel
 130 R Seer's Sundial @Franz Vohwinkel
 131 C Walking Atlas @Rob Alexander

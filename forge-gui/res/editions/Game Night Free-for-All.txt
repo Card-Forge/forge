@@ -110,7 +110,7 @@ ScryfallCode=GN3
 103 U Overrun @Carl Critchlow
 104 C Rabid Bite @John Thacker
 105 C Ram Through @Zoltan Boros
-106 U Regrowth @Dan Scott
+106 U Regrowth @Dan Murayama Scott
 107 U Sylvan Messenger @PINDURSKI
 108 C Taunting Elf @Rebecca Guay
 109 R Thorn Lieutenant @Uriah Voth
@@ -124,7 +124,7 @@ ScryfallCode=GN3
 117 C Howling Golem @Grzegorz Rutkowski
 118 R Moonsilver Spear @James Paick
 119 U Ring of Thune @Erica Yang
-120 R Sword of Vengeance @Dan Scott
+120 R Sword of Vengeance @Dan Murayama Scott
 121 U Trusty Machete @Raymond Swanland
 122 L Plains @Sam Burley
 123 L Plains @Alayna Danner

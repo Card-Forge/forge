@@ -16,7 +16,7 @@ ScryfallCode=KHC
 8 R Tales of the Ancestors @Colin Boyer
 9 R Pact of the Serpent @Donato Giancola
 10 R Ruthless Winnower @Zoltan Boros
-11 R Serpent's Soul-Jar @Dan Scott
+11 R Serpent's Soul-Jar @Dan Murayama Scott
 12 R Bounty of Skemfar @Colin Boyer
 13 R Crown of Skemfar @Jason Felix
 14 R Wolverine Riders @Jesper Ejsing
@@ -83,13 +83,13 @@ ScryfallCode=KHC
 75 U Sylvan Messenger @PINDURSKI
 76 C Timberwatch Elf @Yohann Schepacz
 77 U Voice of Many @Greg Staples
-78 R Voice of the Woods @Nestor Ossandon Leal
+78 R Voice of the Woods @Néstor Ossandón Leal
 79 U Wirewood Channeler @Alan Pollack
 80 C Wood Elves @Josh Hass
 81 U Abomination of Llanowar @Vincent Proce
 82 R Brago, King Eternal @Karla Ortiz
 83 R Casualties of War @Tomasz Jedruszek
-84 U Cloudblazer @Dan Scott
+84 U Cloudblazer @Dan Murayama Scott
 85 U Empyrean Eagle @Ryan Yee
 86 U Golgari Findbroker @Bram Sels
 87 U Migratory Route @Winona Nelson
@@ -97,11 +97,11 @@ ScryfallCode=KHC
 89 U Moldervine Reclamation @Antonio José Manzanedo
 90 U Poison-Tip Archer @Dmitry Burmak
 91 U Putrefy @Clint Cearley
-92 U Shaman of the Pack @Dan Scott
+92 U Shaman of the Pack @Dan Murayama Scott
 93 U Soulherder @Seb McKinnon
 94 U Thunderclap Wyvern @Jason Felix
 95 U Twinblade Assassins @Campbell White
-96 C Arcane Signet @Dan Scott
+96 C Arcane Signet @Dan Murayama Scott
 97 U Azorius Signet @Raoul Vitale
 98 U Burnished Hart @Yeong-Hao Han
 99 C Commander's Sphere @Ryan Alexander Lee

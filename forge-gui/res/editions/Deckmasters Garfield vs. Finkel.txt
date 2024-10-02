@@ -28,7 +28,7 @@ ScryfallCode=DKM
 16 C Lava Burst @Tom Wänerstrand
 17 U Orcish Cannoneers @Dan Frazier
 18 U Pillage @Richard Kane Ferguson
-19 U Pyroclasm @Pat Morrissey
+19 U Pyroclasm @Pat Lewis
 20 C Shatter @Bryon Wackwitz
 21a C Storm Shaman @Carol Heyer
 21b C Storm Shaman @Carol Heyer
@@ -43,7 +43,7 @@ ScryfallCode=DKM
 30 C Woolly Spider @Daniel Gelon
 31a C Yavimaya Ancients @Quinton Hoover
 31b C Yavimaya Ancients @Quinton Hoover
-32 U Yavimaya Ants @Pat Morrissey
+32 U Yavimaya Ants @Pat Lewis
 33 U Giant Trap Door Spider @Heather Hudson
 34 C Barbed Sextant @Amy Weber
 35 R Elkin Bottle @Quinton Hoover
@@ -60,6 +60,6 @@ ScryfallCode=DKM
 45 L Mountain @Tom Wänerstrand
 46 L Mountain @Tom Wänerstrand
 47 L Mountain @Tom Wänerstrand
-48 L Forest @Pat Morrissey
-49 L Forest @Pat Morrissey
-50 L Forest @Pat Morrissey
+48 L Forest @Pat Lewis
+49 L Forest @Pat Lewis
+50 L Forest @Pat Lewis

@@ -8,4 +8,4 @@ ScryfallCode=PDP14
 [cards]
 1 R Bonescythe Sliver @Brad Rigney
 2 R Ogre Battledriver @Matt Stewart
-3 R Scavenging Ooze @Dan Scott
+3 R Scavenging Ooze @Dan Murayama Scott

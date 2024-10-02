@@ -12,8 +12,8 @@ ScryfallCode=MIC
 4 M Kyler, Sigardian Emissary @Dmitry Burmak
 5 R Celestial Judgment @Alexander Mokhov
 6 R Curse of Conformity @Chris Cold
-7 R Moorland Rescuer @Justyna Gil
-8 R Sigarda's Vanguard @Martina Fackova
+7 R Moorland Rescuer @Justyna Dura
+8 R Sigarda's Vanguard @Martina Fačková
 9 R Stalwart Pathlighter @Sidharth Chaturvedi
 10 R Wall of Mourning @Kasia 'Kafis' Zielińska
 11 R Cleaver Skaab @Johann Bodin
@@ -34,7 +34,7 @@ ScryfallCode=MIC
 26 R Heronblade Elite @Yigit Koroglu
 27 R Kurbis, Harvest Celebrant @Irvin Rodriguez
 28 R Ruinous Intrusion @Johann Bodin
-29 R Sigardian Zealot @Justyna Gil
+29 R Sigardian Zealot @Justyna Dura
 30 R Somberwald Beastmaster @Marta Nael
 31 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
 32 R Visions of Glory @Alexander Mokhov
@@ -50,8 +50,8 @@ ScryfallCode=MIC
 42 M Kyler, Sigardian Emissary @Dmitry Burmak
 43 R Celestial Judgment @Alexander Mokhov
 44 R Curse of Conformity @Chris Cold
-45 R Moorland Rescuer @Justyna Gil
-46 R Sigarda's Vanguard @Martina Fackova
+45 R Moorland Rescuer @Justyna Dura
+46 R Sigarda's Vanguard @Martina Fačková
 47 R Stalwart Pathlighter @Sidharth Chaturvedi
 48 R Wall of Mourning @Kasia 'Kafis' Zielińska
 49 R Cleaver Skaab @Johann Bodin
@@ -72,7 +72,7 @@ ScryfallCode=MIC
 64 R Heronblade Elite @Yigit Koroglu
 65 M Kurbis, Harvest Celebrant @Irvin Rodriguez
 66 R Ruinous Intrusion @Johann Bodin
-67 R Sigardian Zealot @Justyna Gil
+67 R Sigardian Zealot @Justyna Dura
 68 R Somberwald Beastmaster @Marta Nael
 69 M Avacyn's Memorial @Kasia 'Kafis' Zielińska
 70 R Visions of Glory @Alexander Mokhov
@@ -102,7 +102,7 @@ ScryfallCode=MIC
 94 U Swords to Plowshares @Sam Wolfe Connelly
 95 R Unbreakable Formation @Matt Stewart
 96 R Victory's Envoy @Sara Winters
-97 R Aetherspouts @Dan Scott
+97 R Aetherspouts @Dan Murayama Scott
 98 C Distant Melody @Omar Rayyan
 99 U Eternal Skylord @Johan Grenier
 100 R Forgotten Creation @Izzy
@@ -144,9 +144,9 @@ ScryfallCode=MIC
 136 R Champion of Lambholt @Christopher Moeller
 137 R Death's Presence @Ryan Barger
 138 U Eternal Witness @Chris Rahn
-139 C Growth Spasm @Dan Scott
+139 C Growth Spasm @Dan Murayama Scott
 140 R Gyre Sage @Tyler Jacobson
-141 U Inspiring Call @Dan Scott
+141 U Inspiring Call @Dan Murayama Scott
 142 R Kessig Cagebreakers @Wayne England
 143 R Shamanic Revelation @Cynthia Sheppard
 144 R Somberwald Sage @Steve Argyle
@@ -162,7 +162,7 @@ ScryfallCode=MIC
 154 U Ruthless Deathfang @Filip Burburan
 155 M Sigarda, Heron's Grace @Chris Rahn
 156 U Trostani's Summoner @Howard Lyon
-157 C Arcane Signet @Dan Scott
+157 C Arcane Signet @Dan Murayama Scott
 158 C Charcoal Diamond @Lindsey Look
 159 C Commander's Sphere @Ryan Alexander Lee
 160 R Lifecrafter's Bestiary @Izzy

@@ -42,10 +42,10 @@ ScryfallCode=BFZ
 27 C Fortified Rampart @David Gaillet
 28 C Ghostly Sentinel @Daarken
 29 M Gideon, Ally of Zendikar @Eric Deschamps
-30 C Gideon's Reproach @Dan Scott
+30 C Gideon's Reproach @Dan Murayama Scott
 31 R Hero of Goma Fada @Lake Hurwitz
 32 C Inspired Charge @Willian Murai
-33 C Kitesail Scout @Dan Scott
+33 C Kitesail Scout @Dan Murayama Scott
 34 U Kor Bladewhirl @Steven Belledin
 35 C Kor Castigator @Greg Opalinski
 36 U Kor Entanglers @Jason Rainville
@@ -65,7 +65,7 @@ ScryfallCode=BFZ
 50 U Stasis Snare @Jason Felix
 51 C Stone Haven Medic @Anna Steinbauer
 52 C Tandem Tactics @David Gaillet
-53 U Unified Front @Dan Scott
+53 U Unified Front @Dan Murayama Scott
 54 U Adverse Conditions @Jason Rainville
 55 C Benthic Infiltrator @Mathias Kollros
 56 U Cryptic Cruiser @Svetlin Velinov
@@ -184,7 +184,7 @@ ScryfallCode=BFZ
 169 U Void Attendant @Viktor Titov
 170 R Beastcaller Savant @Anthony Palumbo
 171 C Broodhunter Wurm @Svetlin Velinov
-172 C Earthen Arms @Dan Scott
+172 C Earthen Arms @Dan Murayama Scott
 173 C Giant Mantis @Lake Hurwitz
 174 M Greenwarden of Murasa @Eric Deschamps
 175 U Infuse with the Elements @Daniel Ljunggren
@@ -232,13 +232,13 @@ ScryfallCode=BFZ
 217 M Omnath, Locus of Rage @Brad Rigney
 218 U Resolute Blademaster @Joseph Meehan
 219 U Roil Spout @Igor Kieryluk
-220 U Skyrider Elf @Dan Scott
+220 U Skyrider Elf @Dan Murayama Scott
 221 R Veteran Warleader @Josu Hernaiz
 222 R Aligned Hedron Network @Richard Wright
 223 U Hedron Archive @Craig J Spearing
 224 C Hedron Blade @Zack Stella
 225 U Pathway Arrows @Kev Walker
-226 U Pilgrim's Eye @Dan Scott
+226 U Pilgrim's Eye @Dan Murayama Scott
 227 U Slab Hammer @Joseph Meehan
 228 R Ally Encampment @Jonas De Ro
 229 U Blighted Cataract @Vincent Proce

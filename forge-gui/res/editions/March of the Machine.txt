@@ -245,7 +245,7 @@ ScryfallCode=MOM
 233 U Invasion of Ergamon @Manuel Castañón
 234 U Invasion of Kaladesh @Leon Tukker
 235 U Invasion of Kylem @Johann Bodin
-236 U Invasion of Lorwyn @Dan Scott
+236 U Invasion of Lorwyn @Dan Murayama Scott
 237 U Invasion of Moag @Filip Burburan
 238 U Invasion of New Capenna @Diego Gisbert
 239 M Invasion of New Phyrexia @Chris Rallis
@@ -336,10 +336,10 @@ ScryfallCode=MOM
 320 M Archangel Elspeth @Denys Tsiperko
 321 M Chandra, Hope's Beacon @Randy Vargas
 322 M Wrenn and Realmbreaker @Jehan Choo
-338 M Elesh Norn @Ryan Pancost
+338 M Elesh Norn @Ryan Pancoast
 339 M Jin-Gitaxias @Julian Kok Joon Wen
 340 M Sheoldred @Camille Alquier
-341 M Urabrask @Jose Parodi
+341 M Urabrask @José Parodi
 342 M Vorinclex @Joseph Weston
 
 [jumpstart]
