@@ -1,0 +1,7 @@
+Name:Savior of the Small
+Types:Creature Kor Survivor
+ManaCost:3 W
+PT:3/4
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, return target creature card with mana value 3 or less from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn+cmcLE3 | TgtPrompt$ Select target creature card with mana value 3 or less
+Oracle:Survival — At the beginning of your second main phase, if Savior of the Small is tapped, return target creature card with mana value 3 or less from your graveyard to your hand.

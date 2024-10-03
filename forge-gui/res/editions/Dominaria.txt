@@ -13,7 +13,7 @@ ScryfallCode=DOM
 [cards]
 1 M Karn, Scion of Urza @Chase Stone
 2 C Adamant Will @Alex Konstad
-3 C Aven Sentry @Dan Scott
+3 C Aven Sentry @Dan Murayama Scott
 4 U Baird, Steward of Argive @Christine Choi
 5 C Benalish Honor Guard @Ryan Pancoast
 6 R Benalish Marshal @Mark Zug
@@ -240,7 +240,7 @@ ScryfallCode=DOM
 227 C Powerstone Shard @Lindsey Look
 228 U Shield of the Realm @Manuel Castañón
 229 C Short Sword @John Severin Brassell
-230 C Skittering Surveyor @Dan Scott
+230 C Skittering Surveyor @Dan Murayama Scott
 231 U Sorcerer's Wand @Matt Stewart
 232 C Sparring Construct @Mark Behm
 233 R Thran Temporal Gateway @Jason Felix

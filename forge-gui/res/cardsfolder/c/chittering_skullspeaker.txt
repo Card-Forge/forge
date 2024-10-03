@@ -1,0 +1,11 @@
+Name:Chittering Skullspeaker
+ManaCost:1 B
+Types:Creature Squirrel Warlock
+PT:1/1
+K:Starting intensity:0
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigIntensify | TriggerDescription$ When CARDNAME enters, cards you own named Chittering Skullspeaker intensify by 1. Then you draw X cards and lose X life, where X is CARDNAME's intensity.
+SVar:TrigIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+namedChittering Skullspeaker | DefinedDesc$ all cards they own named Chittering Skullspeaker | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
+SVar:X:Count$Intensity
+Oracle:Starting intensity 0\nWhen Chittering Skullspeaker enters, cards you own named Chittering Skullspeaker intensify by 1. Then you draw X cards and lose X life, where X is Chittering Skullspeaker's intensity.

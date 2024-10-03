@@ -7,7 +7,7 @@ ScryfallCode=BRC
 
 [cards]
 1 M Mishra, Eminent One @Randy Vargas
-2 M Urza, Chief Artificer @Bartlomiej Gawel
+2 M Urza, Chief Artificer @Bartłomiej Gaweł
 3 M Tawnos, Solemn Survivor @Matt Stewart
 4 M Ashnod the Uncaring @Kieran Yanner
 5 R Sanwell, Avenger Ace @Josu Hernaiz
@@ -29,7 +29,7 @@ ScryfallCode=BRC
 21 R Disciple of Caelus Nin @Steve Argyle
 22 R The Brothers' War @Mark Poole
 23 R Sardian Avenger @Joseph Weston
-24 M Rootpath Purifier @Justyna Gil
+24 M Rootpath Purifier @Justyna Dura
 25 M Titania, Nature's Force @Heonhwa Choe
 26 R The Archimandrite @Cristi Balanescu
 27 R Staff of Titania @Samuel Perin
@@ -43,16 +43,16 @@ ScryfallCode=BRC
 35 L Mountain @Bruce Brenneise
 36 L Mountain @Victor Harmatiuk
 39 M Mishra, Eminent One @Randy Vargas
-40 M Urza, Chief Artificer @Bartlomiej Gawel
+40 M Urza, Chief Artificer @Bartłomiej Gaweł
 41 R Disciple of Caelus Nin @Steve Argyle
 42 M Tawnos, Solemn Survivor @Matt Stewart
 43 R Sardian Avenger @Joseph Weston
-44 M Rootpath Purifier @Justyna Gil
+44 M Rootpath Purifier @Justyna Dura
 45 M Titania, Nature's Force @Heonhwa Choe
 46 R The Archimandrite @Cristi Balanescu
 47 M Ashnod the Uncaring @Kieran Yanner
 48 M Mishra, Eminent One @Randy Vargas
-49 M Urza, Chief Artificer @Bartlomiej Gawel
+49 M Urza, Chief Artificer @Bartłomiej Gaweł
 50 R Staff of Titania @Samuel Perin
 51 R Urza's Workshop @Alexander Forssberg
 52 R Sanwell, Avenger Ace @Josu Hernaiz
@@ -86,7 +86,7 @@ ScryfallCode=BRC
 80 R Bident of Thassa @Kari Christensen
 81 R Emry, Lurker of the Loch @Livia Prima
 82 C Etherium Sculptor @Steven Belledin
-83 M Ethersworn Adjudicator @Dan Scott
+83 M Ethersworn Adjudicator @Dan Murayama Scott
 84 U Fact or Fiction @Matt Cavotta
 85 U Filigree Attendant @Igor Kieryluk
 86 R Master of Etherium @Matt Cavotta
@@ -135,8 +135,8 @@ ScryfallCode=BRC
 129 M Silas Renn, Seeker Adept @Joseph Meehan
 130 M Sphinx's Revelation @John Di Giovanni
 131 R Vindicate @Brian Snõddy
-132 C Arcane Signet @Dan Scott
-133 U Azorius Signet @Raoul Vitale
+132 C Arcane Signet @Dan Murayama Scott
+133 C Azorius Signet @Raoul Vitale
 134 U Chief of the Foundry @Daniel Ljunggren
 135 C Commander's Sphere @Ryan Alexander Lee
 136 U Cranial Plating @Adam Rex
@@ -159,7 +159,7 @@ ScryfallCode=BRC
 153 R Oblivion Stone @Gabor Szikszai
 154 C Orzhov Signet @Martina Pilcerova
 155 C Prophetic Prism @John Avon
-156 U Rakdos Signet @Martina Pilcerova
+156 C Rakdos Signet @Martina Pilcerova
 157 U Relic of Progenitus @Jean-Sébastien Rossbach
 158 U Servo Schematic @Titus Lunter
 159 U Skullclamp @Daniel Ljunggren
@@ -213,7 +213,7 @@ ScryfallCode=BRC
 207 R Temple of Epiphany @Adam Paquette
 208 R Temple of Malice @Jonas De Ro
 209 R Temple of Silence @Adam Paquette
-210 C Terramorphic Expanse @Dan Scott
+210 C Terramorphic Expanse @Dan Murayama Scott
 211 C Vault of Whispers @Alexander Forssberg
 
 [tokens]

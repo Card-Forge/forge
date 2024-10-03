@@ -194,8 +194,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
          * easier access from code.
          */
         public abstract static class Presets {
-            // Think twice before using these, since rarity is a prop of printed
-            // card.
+            // Think twice before using these, since rarity is a prop of printed card.
             /** The Constant isCommon. */
             public static final Predicate<PaperCard> IS_COMMON = Predicates.rarity(true, CardRarity.Common);
 
@@ -253,5 +252,22 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getCardRSpecImageKey();
     String getCardGSpecImageKey();
 
-    public boolean isRebalanced();
+    boolean isRebalanced();
+
+    @Override
+    default String getTranslationKey() {
+        if(!NO_FUNCTIONAL_VARIANT.equals(getFunctionalVariant()))
+            return getName() + " $" + getFunctionalVariant();
+        return getName();
+    }
+
+    @Override
+    default String getUntranslatedType() {
+        return getRules().getType().toString();
+    }
+
+    @Override
+    default String getUntranslatedOracle() {
+        return getRules().getOracleText();
+    }
 }

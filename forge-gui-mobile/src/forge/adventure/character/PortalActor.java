@@ -39,7 +39,7 @@ public class PortalActor extends EntryActor {
         }
         if (currentAnimationType == PortalAnimationTypes.Active) {
             if (targetMap == null || targetMap.isEmpty()) {
-                stage.exitDungeon();
+                stage.exitDungeon(false);
             } else {
                 if (targetMap.equals(currentMap)) {
                     stage.spawn(entryTargetObject);

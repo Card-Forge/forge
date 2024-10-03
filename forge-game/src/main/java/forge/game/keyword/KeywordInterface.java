@@ -23,8 +23,10 @@ public interface KeywordInterface extends Cloneable {
     String getReminderText();
 
     int getAmount();
-    long getStaticId();
-    void setStaticId(long v);
+
+    StaticAbility getStatic();
+    void setStatic(StaticAbility st);
+
     long getIdx();
     void setIdx(long i);
 

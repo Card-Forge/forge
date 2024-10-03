@@ -12,170 +12,170 @@ ScryfallCode=SOK
 
 [cards]
 1 U Aether Shockwave @Stephen Tappin
-91 R Adamaro, First to Desire @Paolo Parente
-92 C Akki Drillmaster @Alan Pollack
-93 C Akki Underling @Franz Vohwinkel
-61 R Akuta, Born of Ash @Ben Thompson
 2 C Araba Mothrider @Anthony S. Waters
-121 R Arashi, the Sky Asunder @Kev Walker
-152 R Ashes of the Fallen @Dan Frazier
-122 R Ayumi, the Last Visitor @rk post
-94 C Barrel Down Sokenzan @Greg Staples
-153 R Blood Clock @Keith Garletts
-123 R Bounteous Kirin @Shishizaru
-124 U Briarknit Kami @Brian Despain
-95 U Burning-Eye Zubera @Anthony S. Waters
-96 U Captive Flame @Keith Garletts
 3 R Celestial Kirin @Adam Rex
 4 U Charge Across the Araba @Dany Orizio
-62 R Choice of Damnations @Tim Hildebrandt
-31 R Cloudhoof Kirin @Randy Gallegos
 5 C Cowed by Wisdom @Daren Bader
 6 C Curtain of Light @Chippy
-32 C Cut the Earthly Bond @Jeff Miracola
-63 C Death Denied @Greg Hildebrandt
-64 C Death of a Thousand Stings @Scott M. Fischer
-65 C Deathknell Kami @Puddnhead
-66 C Deathmask Nezumi @Daren Bader
-125 U Dense Canopy @Luca Zontini
 7 U Descendant of Kiyomaro @Christopher Rush
-126 U Descendant of Masumaro @Rob Alexander
-33 C Descendant of Soramaro @Brian Despain
-127 C Dosan's Oldest Chant @Tim Hildebrandt
-34 C Dreamcatcher @Mark Tedin
-154 U Ebony Owl Netsuke @Tim Hildebrandt
 8 U Eiganjo Free-Riders @Kev Walker
-128 C Elder Pine of Jukai @Alan Pollack
-129 R Endless Swarm @Jeremy Jarvis
 9 R Enduring Ideal @Daren Bader
-35 R Erayo, Soratami Ascendant @Matt Cavotta
-36 R Eternal Dominion @Shishizaru
-37 U Evermind @Matt Thompson
-67 U Exile into Darkness @Pete Venters
-97 U Feral Lightning @Chippy
-130 C Fiddlehead Kami @Rebecca Guay
-68 U Footsteps of the Goryo @Chippy
-38 C Freed from the Real @Scott M. Fischer
-98 U Gaze of Adamaro @Paolo Parente
-131 U Ghost-Lit Nourisher @Tsutomu Kawade
-99 U Ghost-Lit Raider @Ittoku
 10 U Ghost-Lit Redeemer @Shishizaru
-69 U Ghost-Lit Stalker @Hideaki Takamura
-39 U Ghost-Lit Warder @Kensuke Okabayashi
-100 C Glitterfang @Ron Spencer
-70 C Gnat Miser @Thomas M. Baxa
-101 U Godo's Irregulars @Tim Hildebrandt
 11 U Hail of Arrows @Anthony S. Waters
-71 U Hand of Cruelty @Kev Walker
 12 U Hand of Honor @Kev Walker
-132 U Haru-Onna @Rebecca Guay
-102 R Hidetsugu's Second Rite @Jeff Miracola
-103 R Homura, Human Ascendant @Kev Walker
-40 C Ideas Unbound @Mark Tedin
-104 R Iizuka the Ruthless @Darrell Riche
-151 R Iname as One @Stephen Tappin
-72 R Infernal Kirin @Carl Critchlow
-133 C Inner Calm, Outer Strength @Stephen Tappin
-105 C Inner Fire @Christopher Moeller
 13 U Inner-Chamber Guard @Brian Snõddy
-106 C Into the Fray @Paolo Parente
-155 U Ivory Crane Netsuke @Greg Hildebrandt
-107 R Jiwari, the Earth Aflame @Adam Rex
-74 C Kagemaro's Clutch @Pat Lee
-73 R Kagemaro, First to Suffer @Adam Rex
-41 R Kaho, Minamo Historian @Greg Staples
-75 C Kami of Empty Graves @Greg Hildebrandt
-42 R Kami of the Crescent Moon @Darrell Riche
-134 U Kami of the Tended Garden @Thomas M. Baxa
-135 U Kashi-Tribe Elite @Ben Thompson
 14 R Kataki, War's Wage @Matt Thompson
-76 U Kemuri-Onna @Ittoku
-77 U Kiku's Shadow @Pete Venters
-43 U Kiri-Onna @Kensuke Okabayashi
 15 C Kitsune Bonesetter @Heather Hudson
 16 C Kitsune Dawnblade @Carl Critchlow
 17 C Kitsune Loreweaver @Eric Polak
 18 R Kiyomaro, First to Stand @Kev Walker
+19 R Michiko Konda, Truth Seeker @Christopher Moeller
+20 C Moonwing Moth @Franz Vohwinkel
+21 U Nikko-Onna @Shishizaru
+22 C Plow Through Reito @Ron Spencer
+23 U Presence of the Wise @Christopher Moeller
+24 R Promise of Bunrei @Stephen Tappin
+25 R Pure Intentions @Randy Gallegos
+26 R Reverence @Ittoku
+27 R Rune-Tail, Kitsune Ascendant @Randy Gallegos
+28 C Shinen of Stars' Light @Jeremy Jarvis
+29 C Spiritual Visit @Pete Venters
+30 C Torii Watchward @Jeff Miracola
+31 R Cloudhoof Kirin @Randy Gallegos
+32 C Cut the Earthly Bond @Jeff Miracola
+33 C Descendant of Soramaro @Brian Despain
+34 C Dreamcatcher @Mark Tedin
+35 R Erayo, Soratami Ascendant @Matt Cavotta
+36 R Eternal Dominion @Shishizaru
+37 U Evermind @Matt Thompson
+38 C Freed from the Real @Scott M. Fischer
+39 U Ghost-Lit Warder @Kensuke Okabayashi
+40 C Ideas Unbound @Mark Tedin
+41 R Kaho, Minamo Historian @Greg Staples
+42 R Kami of the Crescent Moon @Darrell Riche
+43 U Kiri-Onna @Kensuke Okabayashi
+44 R Meishin, the Mind Cage @Thomas Gianni
+45 C Minamo Scrollkeeper @Paolo Parente
+46 C Moonbow Illusionist @Dan Frazier
+47 C Murmurs from Beyond @Paolo Parente
+48 C Oboro Breezecaller @Rebecca Guay
+49 U Oboro Envoy @Rob Alexander
+50 C Oppressive Will @Pat Lee
+51 U Overwhelming Intellect @Alex Horley-Orlandelli
+52 U Rushing-Tide Zubera @Mark Brill
+53 R Sakashima the Impostor @rk post
+54 U Secretkeeper @Ron Spencer
+55 U Shape Stealer @Jim Nelson
+56 U Shifting Borders @Alex Horley-Orlandelli
+57 C Shinen of Flight's Wings @Scott M. Fischer
+58 R Soramaro, First to Dream @Brian Despain
+59 U Trusted Advisor @Jim Nelson
+60 R Twincast @Christopher Moeller
+61 R Akuta, Born of Ash @Ben Thompson
+62 R Choice of Damnations @Tim Hildebrandt
+63 C Death Denied @Greg Hildebrandt
+64 C Death of a Thousand Stings @Scott M. Fischer
+65 C Deathknell Kami @Puddnhead
+66 C Deathmask Nezumi @Daren Bader
+67 U Exile into Darkness @Pete Venters
+68 U Footsteps of the Goryo @Chippy
+69 U Ghost-Lit Stalker @Hideaki Takamura
+70 C Gnat Miser @Thomas M. Baxa
+71 U Hand of Cruelty @Kev Walker
+72 R Infernal Kirin @Carl Critchlow
+73 R Kagemaro, First to Suffer @Adam Rex
+74 C Kagemaro's Clutch @Pat Lee
+75 C Kami of Empty Graves @Greg Hildebrandt
+76 U Kemuri-Onna @Ittoku
+77 U Kiku's Shadow @Pete Venters
 78 R Kuon, Ogre Ascendant @Hideaki Takamura
 79 C Kuro's Taken @Puddnhead
 80 U Locust Miser @Alan Pollack
 81 R Maga, Traitor to Mortals @Jim Murray
-156 U Manriki-Gusari @Thomas Gianni
-136 R Masumaro, First to Live @Adam Rex
-137 C Matsu-Tribe Birdstalker @Heather Hudson
 82 U Measure of Wickedness @Daren Bader
-44 R Meishin, the Mind Cage @Thomas Gianni
-19 R Michiko Konda, Truth Seeker @Christopher Moeller
-162 R Mikokoro, Center of the Sea @John Avon
-45 C Minamo Scrollkeeper @Paolo Parente
-163 R Miren, the Moaning Well @Rob Alexander
-138 U Molting Skin @Jeremy Jarvis
-46 C Moonbow Illusionist @Dan Frazier
-20 C Moonwing Moth @Franz Vohwinkel
-47 C Murmurs from Beyond @Paolo Parente
 83 R Neverending Torment @Thomas Gianni
-139 C Nightsoil Kami @Jim Nelson
-21 U Nikko-Onna @Shishizaru
-157 U O-Naginata @Brian Snõddy
-48 C Oboro Breezecaller @Rebecca Guay
-49 U Oboro Envoy @Rob Alexander
-164 R Oboro, Palace in the Clouds @Rob Alexander
-140 C Okina Nightwatch @Heather Hudson
 84 R One with Nothing @Jim Nelson
-108 U Oni of Wild Places @Mark Tedin
-50 C Oppressive Will @Pat Lee
-51 U Overwhelming Intellect @Alex Horley-Orlandelli
 85 R Pain's Reward @Matt Cavotta
-109 C Path of Anger's Flame @Pat Lee
-158 R Pithing Needle @Pete Venters
-22 C Plow Through Reito @Ron Spencer
-23 U Presence of the Wise @Christopher Moeller
-24 R Promise of Bunrei @Stephen Tappin
-141 C Promised Kannushi @Matt Thompson
-25 R Pure Intentions @Randy Gallegos
-110 R Rally the Horde @Paolo Parente
 86 C Raving Oni-Slave @Eric Polak
 87 U Razorjaw Oni @Carl Critchlow
-142 R Reki, the History of Kamigawa @Edward P. Beard, Jr.
-143 C Rending Vines @Dan Frazier
-26 R Reverence @Ittoku
-111 C Ronin Cavekeeper @Paolo Parente
-27 R Rune-Tail, Kitsune Ascendant @Randy Gallegos
-52 U Rushing-Tide Zubera @Mark Brill
-53 R Sakashima the Impostor @rk post
-144 C Sakura-Tribe Scout @Darrell Riche
-145 R Sasaya, Orochi Ascendant @Christopher Moeller
-159 R Scroll of Origins @Dany Orizio
-54 U Secretkeeper @Ron Spencer
-146 R Seed the Land @Anthony S. Waters
-147 U Seek the Horizon @Eric Polak
-148 R Sekki, Seasons' Guide @Kev Walker
-55 U Shape Stealer @Jim Nelson
-56 U Shifting Borders @Alex Horley-Orlandelli
 88 C Shinen of Fear's Chill @Darrell Riche
-57 C Shinen of Flight's Wings @Scott M. Fischer
-112 C Shinen of Fury's Fire @Dan Frazier
-149 C Shinen of Life's Roar @Matt Cavotta
-28 C Shinen of Stars' Light @Jeremy Jarvis
 89 C Sink into Takenuma @Pat Lee
 90 U Skull Collector @Thomas M. Baxa
+91 R Adamaro, First to Desire @Paolo Parente
+92 C Akki Drillmaster @Alan Pollack
+93 C Akki Underling @Franz Vohwinkel
+94 C Barrel Down Sokenzan @Greg Staples
+95 U Burning-Eye Zubera @Anthony S. Waters
+96 U Captive Flame @Keith Garletts
+97 U Feral Lightning @Chippy
+98 U Gaze of Adamaro @Paolo Parente
+99 U Ghost-Lit Raider @Ittoku
+100 C Glitterfang @Ron Spencer
+101 U Godo's Irregulars @Tim Hildebrandt
+102 R Hidetsugu's Second Rite @Jeff Miracola
+103 R Homura, Human Ascendant @Kev Walker
+104 R Iizuka the Ruthless @Darrell Riche
+105 C Inner Fire @Christopher Moeller
+106 C Into the Fray @Paolo Parente
+107 R Jiwari, the Earth Aflame @Adam Rex
+108 U Oni of Wild Places @Mark Tedin
+109 C Path of Anger's Flame @Pat Lee
+110 R Rally the Horde @Paolo Parente
+111 C Ronin Cavekeeper @Paolo Parente
+112 C Shinen of Fury's Fire @Dan Frazier
 113 R Skyfire Kirin @Tsutomu Kawade
 114 U Sokenzan Renegade @Alan Pollack
 115 C Sokenzan Spellblade @Carl Critchlow
-58 R Soramaro, First to Dream @Brian Despain
-160 U Soratami Cloud Chariot @Franz Vohwinkel
 116 C Spiraling Embers @Chippy
-29 C Spiritual Visit @Pete Venters
-150 U Stampeding Serow @Edward P. Beard, Jr.
 117 U Sunder from Within @Jeff Miracola
 118 R Thoughts of Ruin @John Avon
-165 R Tomb of Urami @Alex Horley-Orlandelli
-30 C Torii Watchward @Jeff Miracola
-59 U Trusted Advisor @Jim Nelson
-60 R Twincast @Christopher Moeller
 119 R Undying Flames @Tsutomu Kawade
-161 R Wine of Blood and Iron @Luca Zontini
 120 U Yuki-Onna @Hideaki Takamura
+121 R Arashi, the Sky Asunder @Kev Walker
+122 R Ayumi, the Last Visitor @rk post
+123 R Bounteous Kirin @Shishizaru
+124 U Briarknit Kami @Brian Despain
+125 U Dense Canopy @Luca Zontini
+126 U Descendant of Masumaro @Rob Alexander
+127 C Dosan's Oldest Chant @Tim Hildebrandt
+128 C Elder Pine of Jukai @Alan Pollack
+129 R Endless Swarm @Jeremy Jarvis
+130 C Fiddlehead Kami @Rebecca Guay
+131 U Ghost-Lit Nourisher @Tsutomu Kawade
+132 U Haru-Onna @Rebecca Guay
+133 C Inner Calm, Outer Strength @Stephen Tappin
+134 U Kami of the Tended Garden @Thomas M. Baxa
+135 U Kashi-Tribe Elite @Ben Thompson
+136 R Masumaro, First to Live @Adam Rex
+137 C Matsu-Tribe Birdstalker @Heather Hudson
+138 U Molting Skin @Jeremy Jarvis
+139 C Nightsoil Kami @Jim Nelson
+140 C Okina Nightwatch @Heather Hudson
+141 C Promised Kannushi @Matt Thompson
+142 R Reki, the History of Kamigawa @Edward P. Beard, Jr.
+143 C Rending Vines @Dan Frazier
+144 C Sakura-Tribe Scout @Darrell Riche
+145 R Sasaya, Orochi Ascendant @Christopher Moeller
+146 R Seed the Land @Anthony S. Waters
+147 U Seek the Horizon @Eric Polak
+148 R Sekki, Seasons' Guide @Kev Walker
+149 C Shinen of Life's Roar @Matt Cavotta
+150 U Stampeding Serow @Edward P. Beard, Jr.
+151 R Iname as One @Stephen Tappin
+152 R Ashes of the Fallen @Dan Frazier
+153 R Blood Clock @Keith Garletts
+154 U Ebony Owl Netsuke @Tim Hildebrandt
+155 U Ivory Crane Netsuke @Greg Hildebrandt
+156 U Manriki-Gusari @Thomas Gianni
+157 U O-Naginata @Brian Snõddy
+158 R Pithing Needle @Pete Venters
+159 R Scroll of Origins @Dany Orizio
+160 U Soratami Cloud Chariot @Franz Vohwinkel
+161 R Wine of Blood and Iron @Luca Zontini
+162 R Mikokoro, Center of the Sea @John Avon
+163 R Miren, the Moaning Well @Rob Alexander
+164 R Oboro, Palace in the Clouds @Rob Alexander
+165 R Tomb of Urami @Alex Horley-Orlandelli
 
 [tokens]
 urami

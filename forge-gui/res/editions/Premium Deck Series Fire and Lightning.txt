@@ -7,37 +7,37 @@ Type=Collector_Edition
 ScryfallCode=PD2
 
 [cards]
-12 R Ball Lightning @Trevor Claxton
-28 U Barbarian Ring @John Avon
-13 U Boggart Ram-Gang @Dave Allsop
-21 U Browbeat @Mark Tedin
-16 C Chain Lightning @Christopher Moeller
-9 C Cinder Pyromancer @Greg Staples
-5 R Figure of Destiny @Scott M. Fischer
-15 U Fire Servant @Ryan Yee
-27 U Fireball @Dave Dorman
-26 C Fireblast @Michael Danza
-22 U Flames of the Blood Hand @Aleksi Briclot
-29 U Ghitu Encampment @John Avon
 1 R Grim Lavamancer @Michael Sutfin
-23 R Hammer of Bogardan @Ron Spencer
-6 U Hellspark Elemental @Justin Sweet
 2 U Jackal Pup @Kev Walker
-10 R Jaya Ballard, Task Mage @Matt Cavotta
-14 U Keldon Champion @Mark Tedin
-7 C Keldon Marauders @Alex Horley-Orlandelli
-17 C Lightning Bolt @Christopher Moeller
 3 U Mogg Fanatic @Brom
+4 U Spark Elemental @John Avon
+5 R Figure of Destiny @Scott M. Fischer
+6 U Hellspark Elemental @Justin Sweet
+7 C Keldon Marauders @Alex Horley-Orlandelli
 8 C Mogg Flunkies @Brom
+9 C Cinder Pyromancer @Greg Staples
+10 R Jaya Ballard, Task Mage @Matt Cavotta
+11 C Vulshok Sorcerer @rk post
+12 R Ball Lightning @Trevor Claxton
+13 U Boggart Ram-Gang @Dave Allsop
+14 U Keldon Champion @Mark Tedin
+15 U Fire Servant @Ryan Yee
+16 C Chain Lightning @Christopher Moeller
+17 C Lightning Bolt @Christopher Moeller
+18 U Price of Progress @Richard Kane Ferguson
+19 C Thunderbolt @Dylan Martens
+20 R Reverberate @jD
+21 U Browbeat @Mark Tedin
+22 U Flames of the Blood Hand @Aleksi Briclot
+23 R Hammer of Bogardan @Ron Spencer
+24 U Pillage @Bradley Williams
+25 U Sudden Impact @Wayne Reynolds
+26 C Fireblast @Michael Danza
+27 U Fireball @Dave Dorman
+28 U Barbarian Ring @John Avon
+29 U Ghitu Encampment @John Avon
+30 C Teetering Peaks @Fred Fields
 31 L Mountain @John Avon
 32 L Mountain @Aleksi Briclot
 33 L Mountain @Aleksi Briclot
 34 L Mountain @Richard Wright
-24 U Pillage @Bradley Williams
-18 U Price of Progress @Richard Kane Ferguson
-20 R Reverberate @jD
-4 U Spark Elemental @John Avon
-25 U Sudden Impact @Wayne Reynolds
-30 C Teetering Peaks @Fred Fields
-19 C Thunderbolt @Dylan Martens
-11 C Vulshok Sorcerer @rk post

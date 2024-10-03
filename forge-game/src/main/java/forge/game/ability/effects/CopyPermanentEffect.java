@@ -13,7 +13,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.ImageKeys;
 import forge.StaticData;
+import forge.card.CardRarity;
 import forge.card.CardRulesPredicates;
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -46,53 +48,59 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final StringBuilder sb = new StringBuilder();
 
         final Player activator = sa.getActivatingPlayer();
-        final List<Card> tgtCards = getTargetCards(sa);
-        boolean justOne = tgtCards.size() == 1;
-        boolean addKWs = sa.hasParam("AddKeywords");
         final int numCopies = sa.hasParam("NumCopies") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCopies"), sa) : 1;
 
-        sb.append(activator).append(" creates ").append(Lang.nounWithNumeralExceptOne(numCopies, "token"));
-        sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
-        sb.append(Lang.joinHomogenous(tgtCards));
-
-        if (addKWs) {
-            final List<String> keywords = Lists.newArrayList();
-            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
-            if (sa.getDescription().contains("except")) {
-                sb.append(", except ").append(justOne ? "it has " : "they have ");
-            } else {
-                sb.append(". ").append(justOne ? "It gains " : "They gain ");
-            }
-            sb.append(Lang.joinHomogenous(keywords).toLowerCase());
-        }
-
-        if (sa.hasParam("AddTriggers")) {
-            final String oDesc = sa.getDescription();
-            final String trigStg = oDesc.contains("\"") ?
-                    oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1) :
-                    "[trigger text parsing error]";
-            if (addKWs) {
-                sb.append(" and ").append(trigStg);
-            } else {
-                sb.append(". ").append(justOne ? "It gains " : "They gain ").append(trigStg);
-            }
+        sb.append(activator).append(" creates ");
+        if (sa.hasParam("DefinedName")) {
+            sb.append(Lang.nounWithNumeralExceptOne(numCopies, sa.getParam("DefinedName") + " token"));
         } else {
-            sb.append(".");
-        }
+            final List<Card> tgtCards = getTargetCards(sa);
+            boolean justOne = tgtCards.size() == 1;
+            boolean addKWs = sa.hasParam("AddKeywords");
 
-        if (sa.hasParam("AtEOT")) {
-            String atEOT = sa.getParam("AtEOT");
-            String verb = "Sacrifice ";
-            if (atEOT.startsWith("Exile")) {
-                verb = "Exile ";
+            sb.append(Lang.nounWithNumeralExceptOne(numCopies, "token"));
+            sb.append(numCopies == 1 ? " that's a copy" : " that are copies").append(" of ");
+            sb.append(Lang.joinHomogenous(tgtCards));
+
+            if (addKWs) {
+                final List<String> keywords = Lists.newArrayList();
+                keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
+                if (sa.getDescription().contains("except")) {
+                    sb.append(", except ").append(justOne ? "it has " : "they have ");
+                } else {
+                    sb.append(". ").append(justOne ? "It gains " : "They gain ");
+                }
+                sb.append(Lang.joinHomogenous(keywords).toLowerCase());
             }
-            sb.append(" ").append(verb).append(justOne ? "it " : "them ").append("at ");
-            String when = "the beginning of the next end step.";
-            if (atEOT.endsWith("Combat")) {
-                when = "end of combat.";
+
+            if (sa.hasParam("AddTriggers")) {
+                final String oDesc = sa.getDescription();
+                final String trigStg = oDesc.contains("\"") ?
+                        oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1) :
+                        "[trigger text parsing error]";
+                if (addKWs) {
+                    sb.append(" and ").append(trigStg);
+                } else {
+                    sb.append(". ").append(justOne ? "It gains " : "They gain ").append(trigStg);
+                }
+            } else {
+                sb.append(".");
             }
-            sb.append(when);
+
+            if (sa.hasParam("AtEOT")) {
+                String atEOT = sa.getParam("AtEOT");
+                String verb = "Sacrifice ";
+                if (atEOT.startsWith("Exile")) {
+                    verb = "Exile ";
+                }
+                sb.append(" ").append(verb).append(justOne ? "it " : "them ").append("at ");
+                String when = "the beginning of the next end step.";
+                if (atEOT.endsWith("Combat")) {
+                    when = "end of combat.";
+                }
+                sb.append(when);
+            }
         }
 
         return sb.toString();
@@ -180,26 +188,27 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     tgtCards = choice;
 
                     System.err.println("Copying random permanent(s): " + tgtCards.toString());
-                } else if (sa.hasParam("DefinedName")) {
-                    String name = sa.getParam("DefinedName");
-                    if (name.equals("NamedCard")) {
-                        if (!host.getNamedCard().isEmpty()) {
-                            name = host.getNamedCard();
-                        }
+                }
+            } else if (sa.hasParam("DefinedName")) {
+                List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
+                String name = sa.getParam("DefinedName");
+                if (name.equals("NamedCard")) {
+                    if (!host.getNamedCard().isEmpty()) {
+                        name = host.getNamedCard();
                     }
+                }
 
-                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
-                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard::getRules);
+                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
 
-                    if (!cards.isEmpty()) {
-                        tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
-                    }
+                if (!cards.isEmpty()) {
+                    tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
                 }
             } else if (sa.hasParam("Choices")) {
                 Player chooser = activator;
                 if (sa.hasParam("Chooser")) {
                     final String choose = sa.getParam("Chooser");
-                    chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                    chooser = AbilityUtils.getDefinedPlayers(host, choose, sa).get(0);
                 }
 
                 // For Mimic Vat with mutated creature, need to choose one imprinted card
@@ -249,6 +258,10 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
                 if (sa.hasParam("ForEach")) {
                     for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
+                        if (sa.hasParam("OptionalForEach") && !activator.getController().confirmAction(sa, null,
+                                Localizer.getInstance().getMessage("lblCopyPermanentConfirm") + " (" + p + ")", null)) {
+                            continue;
+                        }
                         Card proto = getProtoType(sa, c, controller);
                         proto.addRemembered(p);
                         tokenTable.put(controller, proto, numCopies);
@@ -263,7 +276,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
         if (!useZoneTable) {
             triggerList.triggerChangesZoneAll(game, sa);
-            triggerList.clear();
         }
         if (combatChanged.isTrue()) {
             game.updateCombatForView();
@@ -272,31 +284,42 @@ public class CopyPermanentEffect extends TokenEffectBase {
     }
 
     public static Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
-        final Card host = sa.getHostCard();
-        int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
-        // need to create a physical card first, i need the original card faces
-        final Card copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
+        final Card copy;
+        if (sa.hasParam("DefinedName")) {
+            copy = original;
+            String name = TextUtil.fastReplace(TextUtil.fastReplace(original.getName(), ",", ""), " ", "_").toLowerCase();
+            String set = sa.getOriginalHost().getSetCode();
+            copy.getCurrentState().setRarity(CardRarity.Token);
+            copy.getCurrentState().setSetCode(set);
+            copy.getCurrentState().setImageKey(ImageKeys.getTokenKey(name + "_" + set.toLowerCase()));
+        } else {
+            final Card host = sa.getHostCard();
 
-        copy.setTokenSpawningAbility(sa);
-        if (original.isTransformable()) {
-            // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
-            // the resulting token is a transforming token that has both a front face and a back face.
-            // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
-            // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
-            // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
-            copy.setBackSide(original.isBackSide());
-            if (original.isTransformed()) {
-                copy.incrementTransformedTimestamp();
+            int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
+            // need to create a physical card first, i need the original card faces
+            copy = CardFactory.getCard(original.getPaperCard(), newOwner, id, host.getGame());
+            if (original.isTransformable()) {
+                // 707.8a If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced card not on the battlefield,
+                // the resulting token is a transforming token that has both a front face and a back face.
+                // The characteristics of each face are determined by the copiable values of the same face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+                // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield with its back face up.
+                // This rule does not apply to tokens that are created with their own set of characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
+                copy.setBackSide(original.isBackSide());
+                if (original.isTransformed()) {
+                    copy.incrementTransformedTimestamp();
+                }
+            }
+
+            copy.setStates(CardFactory.getCloneStates(original, copy, sa));
+            // force update the now set State
+            if (original.isTransformable()) {
+                copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
+            } else {
+                copy.setState(copy.getCurrentStateName(), true, true);
             }
         }
 
-        copy.setStates(CardFactory.getCloneStates(original, copy, sa));
-        // force update the now set State
-        if (original.isTransformable()) {
-            copy.setState(original.isTransformed() ? CardStateName.Transformed : CardStateName.Original, true, true);
-        } else {
-            copy.setState(copy.getCurrentStateName(), true, true);
-        }
+        copy.setTokenSpawningAbility(sa);
         copy.setGamePieceType(GamePieceType.TOKEN);
 
         return copy;

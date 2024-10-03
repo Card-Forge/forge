@@ -437,13 +437,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
         if (!chosenTargets.isEmpty()) {
-            runParams = AbilityKey.newMap();
             SpellAbility s = sp;
             if (si != null) {
                 s = si.getSpellAbility();
                 chosenTargets = s.getAllTargetChoices();
             }
-            runParams.put(AbilityKey.SourceSA, s);
             Set<GameObject> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
                 for (final GameObject tgt : tc) {
@@ -453,14 +451,22 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                         continue;
                     }
 
+                    runParams = AbilityKey.newMap();
+                    runParams.put(AbilityKey.SourceSA, s);
                     if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
                         runParams.put(AbilityKey.FirstTime, null);
                         ((Card) tgt).setBecameTargetThisTurn(true);
+                    }
+                    if (tgt instanceof Card && !((Card) tgt).isValiant() && activator.equals(((Card) tgt).getController())) {
+                        runParams.put(AbilityKey.Valiant, null);
+                        ((Card) tgt).setValiant(true);
                     }
                     runParams.put(AbilityKey.Target, tgt);
                     game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                 }
             }
+            runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.SourceSA, s);
             runParams.put(AbilityKey.Targets, distinctObjects);
             runParams.put(AbilityKey.Cause, s.getHostCard());
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
@@ -544,7 +550,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
         }
         game.updateStackForView();
-        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex, false));
+        game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
         return si;
     }
 

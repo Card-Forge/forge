@@ -67,7 +67,7 @@ ScryfallCode=DDU
 59 C Neurok Replica @Zoltan Boros & Gabor Szikszai
 60 C Pyrite Spellbomb @Jim Nelson
 61 R Scuttling Doom Engine @Filip Burburan
-62 R Solemn Simulacrum @Dan Scott
+62 R Solemn Simulacrum @Dan Murayama Scott
 63 R Thopter Assembly @Svetlin Velinov
 64 U Voyager Staff @Tsutomu Kawade
 65 U Darksteel Citadel @John Avon

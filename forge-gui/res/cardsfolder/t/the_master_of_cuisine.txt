@@ -1,0 +1,14 @@
+Name:The Master of Cuisine
+ManaCost:R G W
+Types:Legendary Creature Human Chef
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature attacks, create a Food token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+T:Mode$ Sacrificed | ValidCard$ Food.YouCtrl | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a food, ABILITY
+SVar:TrigChoose:DB$ Charm | Choices$ Gelato,Pasta,Pizza | CharmNum$ 1
+SVar:Gelato:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste & Trample | SpellDescription$ Gelato — Target creature gains haste and trample until end of turn.
+SVar:Pasta:DB$ Scry | ScryNum$ 1 | SpellDescription$ Pasta — Scry 1.
+SVar:Pizza:DB$ Tap | ValidTgts$ Creature | SpellDescription$ Pizza — Tap target creature.
+DeckHas:Ability$Token & Type$Artifact|Food
+DeckHints:Type$Food
+Oracle:Whenever this creature attacks, create a Food token.\nWhenever you sacrifice a food, choose one\n• Gelato — Target creature gains haste and trample until end of turn.\n• Pasta — Scry 1.\n• Pizza — Tap target creature.

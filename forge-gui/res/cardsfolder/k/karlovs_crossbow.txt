@@ -1,0 +1,10 @@
+Name:Karlov's Crossbow
+ManaCost:5
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigSac | TriggerDescription$ Whenever equipped creature attacks, sacrifice CARDNAME and destroy target creature an opponent controls.
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls.
+K:Equip:1
+A:AB$ Effect | Cost$ 0 Reveal<1/CARDNAME> | Forecast$ True | Name$ Emblem — Karlov's Crossbow | StaticAbilities$ ReduceCost | Duration$ Permanent | AILogic$ Always | SpellDescription$ For the remainder of the game, spells you cast named Karlov's Crossbow cost {1} less to cast. (Activate only during your upkeep and only once each turn.)
+SVar:ReduceCost:Mode$ ReduceCost | ValidCard$ Card.namedKarlov's Crossbow | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast named Karlov's Crossbow cost {1} less to cast.
+Oracle:Whenever equipped creature attacks, sacrifice Karlov's Crossbow and destroy target creature an opponent controls.\nEquip {1}\nForecast — {0}, Reveal Karlov's Crossbow from your hand: For the remainder of the game, spells you cast named Karlov's Crossbow cost {1} less to cast. (Activate only during your upkeep and only once each turn.)

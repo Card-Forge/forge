@@ -177,7 +177,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
 
                 if (!pumpKeywords.isEmpty()) {
-                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, timestamp, 0);
+                    moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, timestamp, null);
                     addPumpUntil(sa, moved, timestamp);
                 }
 

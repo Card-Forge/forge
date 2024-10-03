@@ -1,0 +1,7 @@
+Name:Insect Token
+ManaCost:no cost
+Types:Creature Insect
+Colors:black,green
+PT:1/1
+K:Flying
+Oracle:Flying

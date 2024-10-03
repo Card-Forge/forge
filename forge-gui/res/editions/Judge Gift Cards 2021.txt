@@ -7,8 +7,8 @@ ScryfallCode=PJ21
 
 [cards]
 1 M Morophon, the Boundless @Svetlin Velinov
-2 M K'rrik, Son of Yawgmoth @Daniel Ljunggren
-3 M Edgar Markov @Martina Fackova
+2 R K'rrik, Son of Yawgmoth @Daniel Ljunggren
+3 M Edgar Markov @Martina Fačková
 4 M Ezuri, Claw of Progress @Livia Prima
 5 M The Gitrog Monster @Nils Hamm
 6 R Grand Arbiter Augustin IV @Matt Stewart

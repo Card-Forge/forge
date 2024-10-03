@@ -1,0 +1,7 @@
+Name:Monstrous Emergence
+ManaCost:1 G
+Types:Sorcery
+A:SP$ DealDamage | Cost$ 1 G RevealOrChoose<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the power of the creature you chose or the card you revealed to target creature.
+SVar:X:Revealed$CardPower
+AI:RemoveDeck:All
+Oracle:As an additional cost to cast this spell, choose a creature you control or reveal a creature card from your hand.\nMonstrous Emergence deals damage equal to the power of the creature you chose or the card you revealed to target creature.

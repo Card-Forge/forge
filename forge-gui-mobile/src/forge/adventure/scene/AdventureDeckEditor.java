@@ -17,7 +17,12 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
 import forge.card.CardZoom;
-import forge.deck.*;
+import forge.deck.AddBasicLandsDialog;
+import forge.deck.CardPool;
+import forge.deck.Deck;
+import forge.deck.DeckFormat;
+import forge.deck.DeckSection;
+import forge.deck.FDeckViewer;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.item.InventoryItem;
@@ -32,10 +37,13 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.ItemPool;
-import forge.util.Localizer;
 import forge.util.Utils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,7 +56,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         Deck contents = new Deck();
 
         protected ContentPreviewPage(Deck cardsToShow) {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             contents = cardsToShow;
         }
 
@@ -66,7 +74,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class DraftPackPage extends CatalogPage {
         protected DraftPackPage() {
-            super(ItemManagerConfig.DRAFT_PACK, Localizer.getInstance().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
+            super(ItemManagerConfig.DRAFT_PACK, Forge.getLocalizer().getMessage("lblPackN", String.valueOf(1)), FSkinImage.PACK);
         }
 
         @Override
@@ -134,13 +142,13 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class StoreCatalogPage extends CatalogPage {
         protected StoreCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             Current.player().onGoldChange(() -> lblGold.setText(String.valueOf(AdventurePlayer.current().getGold())));
         }
 
         @Override
         protected void buildMenu(final FDropDownMenu menu, final PaperCard card) {
-            addItem(menu, "Sell for ", String.valueOf(AdventurePlayer.current().cardSellPrice(card)), SIDEBOARD_ICON, false, true, new Callback<Integer>() {
+            addItem(menu, Forge.getLocalizer().getMessage("lblSellFor"), String.valueOf(AdventurePlayer.current().cardSellPrice(card)), SIDEBOARD_ICON, false, true, new Callback<Integer>() {
                 @Override
                 public void run(Integer result) {
                     if (result == null || result <= 0) {
@@ -169,7 +177,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class CollectionCatalogPage extends CatalogPage {
         protected CollectionCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Localizer.getInstance().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
         }
 
         @Override
@@ -184,6 +192,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     if (!cardManager.isInfinite()) {
                         removeCard(card, result);
                     }
+                    if (Current.player().autoSellCards.contains(card))
+                        Current.player().autoSellCards.remove(card);
                     getMainDeckPage().addCard(card, result);
                 }
             });
@@ -198,6 +208,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                         if (!cardManager.isInfinite()) {
                             removeCard(card, result);
                         }
+                        if (Current.player().autoSellCards.contains(card))
+                            Current.player().autoSellCards.remove(card);
                         getSideboardPage().addCard(card, result);
                     }
                 });
@@ -208,17 +220,17 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             int sellableCount = Current.player().getSellableCards().count(card);
 
             if (noSellCount > 0) {
-                FMenuItem unsellableCount = new FMenuItem("Unsellable (" + noSellCount + ")", null, null);
+                FMenuItem unsellableCount = new FMenuItem(Forge.getLocalizer().getMessage("lblUnsellableCount", noSellCount), null, null);
                 unsellableCount.setEnabled(false);
                 menu.addItem(unsellableCount);
             }
 
             if (sellableCount > 0) {
-                FMenuItem moveToAutosell = new FMenuItem("Move to Autosell (" + autoSellCount + " / " + sellableCount + ")", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> Current.player().autoSellCards.add(card));
+                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> Current.player().autoSellCards.add(card));
                 moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
                 menu.addItem(moveToAutosell);
 
-                FMenuItem moveToCatalog = new FMenuItem("Move back to Catalog (" + autoSellCount + " / " + sellableCount + ")", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> Current.player().autoSellCards.remove(card));
+                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> Current.player().autoSellCards.remove(card));
                 moveToCatalog.setEnabled(autoSellCount > 0);
                 menu.addItem(moveToCatalog);
             }
@@ -533,28 +545,28 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                         }
                         if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage)) {
                             if (catalogPage.showNoSellCards) {
-                                FMenuItem hideNoSell = new FMenuItem("Hide No-Sell cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleNoSellCards(false));
+                                FMenuItem hideNoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideNoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleNoSellCards(false));
                                 addItem(hideNoSell);
                                 hideNoSell.setEnabled(catalogPage.showAutoSellCards || catalogPage.showCollectionCards);
                             } else {
-                                addItem(new FMenuItem("Show No-Sell cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleNoSellCards(true)));
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowNoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleNoSellCards(true)));
                             }
                             if (catalogPage.showAutoSellCards) {
-                                FMenuItem hideAutoSell = new FMenuItem("Hide Auto-Sell cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleAutoSellCards(false));
+                                FMenuItem hideAutoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideAutoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleAutoSellCards(false));
                                 addItem(hideAutoSell);
                                 hideAutoSell.setEnabled(catalogPage.showCollectionCards || catalogPage.showNoSellCards);
                             } else {
-                                addItem(new FMenuItem("Show Auto-Sell cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleAutoSellCards(true)));
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAutoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleAutoSellCards(true)));
                             }
                             if (catalogPage.showCollectionCards) {
-                                FMenuItem hideCollection = new FMenuItem("Hide Collection cards", Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleCollectionCards(false));
+                                FMenuItem hideCollection = new FMenuItem(Forge.getLocalizer().getMessage("lblHideCollection"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleCollectionCards(false));
                                 addItem(hideCollection);
                                 hideCollection.setEnabled(catalogPage.showAutoSellCards || catalogPage.showNoSellCards);
                             } else {
-                                addItem(new FMenuItem("Show Collection cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleCollectionCards(true)));
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowCollection"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleCollectionCards(true)));
                             }
                             if (!catalogPage.showNoSellCards || !catalogPage.showAutoSellCards || !catalogPage.showCollectionCards) {
-                                addItem(new FMenuItem("Show All cards", Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAll"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
                             }
                         }
                         ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);

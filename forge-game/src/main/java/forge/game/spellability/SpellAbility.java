@@ -20,6 +20,7 @@ package forge.game.spellability;
 import java.util.*;
 
 import forge.game.cost.CostSacrifice;
+import forge.util.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -68,11 +69,6 @@ import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.TextUtil;
 
 //only SpellAbility can go on the stack
 //override any methods as needed
@@ -551,6 +547,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return hasParam("CloakUp");
     }
 
+    public boolean isUnlock() {
+        return hasParam("Unlock");
+    }
+
     public boolean isCycling() {
         return isKeyword(Keyword.CYCLING) || isKeyword(Keyword.TYPECYCLING);
     }
@@ -705,7 +705,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                         mana.getSourceCard().getController(), mana.getSourceCard(), null)) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
-                    host.addChangedCardKeywords(kws, null, false, timestamp, 0);
+                    host.addChangedCardKeywords(kws, null, false, timestamp, null);
                     if (mana.addsKeywordsUntil()) {
                         final GameCommand untilEOT = new GameCommand() {
                             private static final long serialVersionUID = -8285169579025607693L;
@@ -988,16 +988,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             String desc = node.getDescription();
             if (node.getHostCard() != null) {
-                String currentName;
-                // if alternate state is viewed while card uses original
-                if (node.isIntrinsic() && node.cardState != null && node.cardState.getCard() == node.getHostCard()) {
-                    currentName = node.cardState.getName();
-                } else {
-                    currentName = node.getHostCard().getName();
-                }
-                desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);
-                desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-                desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+                ITranslatable nameSource = getHostName(node);
+                desc = CardTranslation.translateMultipleDescriptionText(desc, nameSource);
+                String translatedName = CardTranslation.getTranslatedName(nameSource);
+                desc = TextUtil.fastReplace(desc, "CARDNAME", translatedName);
+                desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(translatedName));
                 if (node.getOriginalHost() != null) {
                     desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
                 }
@@ -2595,7 +2590,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public boolean hasOptionalKeywordAmount(KeywordInterface kw) {
-        return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()));
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        return this.optionalKeywordAmount.contains(kw.getKeyword(), Pair.of(kw.getIdx(), staticId));
     }
     public boolean hasOptionalKeywordAmount(Keyword kw) {
         return this.optionalKeywordAmount.containsRow(kw);
@@ -2605,13 +2601,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public int getOptionalKeywordAmount(KeywordInterface kw) {
-        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId())), 0);
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        return ObjectUtils.firstNonNull(this.optionalKeywordAmount.get(kw.getKeyword(), Pair.of(kw.getIdx(), staticId)), 0);
     }
     public int getOptionalKeywordAmount(Keyword kw) {
         return this.optionalKeywordAmount.row(kw).values().stream().mapToInt(i->i).sum();
     }
     public void setOptionalKeywordAmount(KeywordInterface kw, int amount) {
-        this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), kw.getStaticId()), amount);
+        long staticId = kw.getStatic() == null ? 0 : kw.getStatic().getId();
+        this.optionalKeywordAmount.put(kw.getKeyword(), Pair.of(kw.getIdx(), staticId), amount);
     }
     public void clearOptionalKeywordAmount() {
         optionalKeywordAmount.clear();

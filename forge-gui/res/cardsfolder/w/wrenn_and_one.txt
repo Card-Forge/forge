@@ -1,0 +1,13 @@
+Name:Wrenn and One
+ManaCost:no cost
+Colors:green
+Types:Land Planeswalker Wrenn
+Loyalty:1
+A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ Self | Abilities$ ABMana | Duration$ UntilYourNextTurn | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains "{T}: Add {G}" until your next turn.
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_1_1_squirrel | StackDescription$ REP Create_{p:You} creates | SpellDescription$ Create a 1/1 green Squirrel creature token.
+A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Wrenn and One | Image$ emblem_wrenn_and_one | Triggers$ TrigCradle | Duration$ Permanent | StackDescription$ REP You get_{p:You} gets | SpellDescription$ You get an emblem with "At the beginning of your precombat main phase, add {G} for each creature you control."
+SVar:TrigCradle:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigMana | TriggerDescription$ At the beginning of your precombat main phase, add {G} for each creature you control.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | Defined$ You
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:[+1]: Wrenn and One gains "{T}: Add {G}" until your next turn.\n[-1]: Create a 1/1 green Squirrel creature token.\n[-4]: You get an emblem with "At the beginning of your precombat main phase, add {G} for each creature you control."

@@ -11,7 +11,7 @@ ScryfallCode=VOC
 3 M Donal, Herald of Wings @Wayne Reynolds
 4 M Timothar, Baron of Bats @Jason A. Engle
 5 R Drogskol Reinforcements @Antonio José Manzanedo
-6 R Haunted Library @Justyna Gil
+6 R Haunted Library @Justyna Dura
 7 R Priest of the Blessed Graf @Irina Nordsol
 8 R Rhoda, Geist Avenger @Randy Vargas
 9 R Storm of Souls @Liiga Smilshkalne
@@ -25,7 +25,7 @@ ScryfallCode=VOC
 17 R Crossway Troublemakers @Aaron J. Riley
 18 R Glass-Cast Heart @Alayna Danner
 19 R Kamber, the Plunderer @Andrey Kuzinskiy
-20 R Olivia's Wrath @Nestor Ossandon Leal
+20 R Olivia's Wrath @Néstor Ossandón Leal
 21 R Predators' Hour @Tomas Duchek
 22 R Shadowgrange Archfiend @Oleksandr Kozachenko
 23 R Arterial Alchemy @Caio Monteiro
@@ -49,7 +49,7 @@ ScryfallCode=VOC
 41 M Donal, Herald of Wings @Wayne Reynolds
 42 M Timothar, Baron of Bats @Jason A. Engle
 43 R Drogskol Reinforcements @Antonio José Manzanedo
-44 R Haunted Library @Justyna Gil
+44 R Haunted Library @Justyna Dura
 45 R Priest of the Blessed Graf @Irina Nordsol
 46 R Rhoda, Geist Avenger @Randy Vargas
 47 R Storm of Souls @Liiga Smilshkalne
@@ -63,7 +63,7 @@ ScryfallCode=VOC
 55 R Crossway Troublemakers @Aaron J. Riley
 56 R Glass-Cast Heart @Alayna Danner
 57 R Kamber, the Plunderer @Andrey Kuzinskiy
-58 R Olivia's Wrath @Nestor Ossandon Leal
+58 R Olivia's Wrath @Néstor Ossandón Leal
 59 R Predators' Hour @Tomas Duchek
 60 R Shadowgrange Archfiend @Oleksandr Kozachenko
 61 R Arterial Alchemy @Caio Monteiro
@@ -101,7 +101,7 @@ ScryfallCode=VOC
 93 R Mentor of the Meek @Jana Schirmer & Johannes Voss
 94 R Mirror Entity @Zoltan Boros & Gabor Szikszai
 95 R Oyobi, Who Split the Heavens @Christopher Moeller
-96 U Promise of Bunrei @Stephen Tappin
+96 R Promise of Bunrei @Stephen Tappin
 97 R Remorseful Cleric @Grzegorz Rutkowski
 98 U Spectral Shepherd @Johann Bodin
 99 U Swords to Plowshares @Jesper Ejsing
@@ -123,7 +123,7 @@ ScryfallCode=VOC
 115 R Supreme Phantom @Robbie Trevino
 116 R Verity Circle @Volkan Baǵa
 117 U Ancient Craving @Rob Alexander
-118 R Anowon, the Ruin Sage @Dan Scott
+118 R Anowon, the Ruin Sage @Dan Murayama Scott
 119 U Blood Artist @Johannes Voss
 120 U Bloodline Necromancer @Joe Slucher
 121 M Bloodlord of Vaasgoth @Greg Staples
@@ -164,7 +164,7 @@ ScryfallCode=VOC
 156 U Rakdos Charm @Zoltan Boros
 157 U Stromkirk Captain @Jana Schirmer & Johannes Voss
 158 R Vampiric Dragon @Gary Ruddell
-159 C Arcane Signet @Dan Scott
+159 C Arcane Signet @Dan Murayama Scott
 160 C Azorius Locket @Craig J Spearing
 161 U Azorius Signet @Raoul Vitale
 162 C Charcoal Diamond @Lindsey Look
@@ -185,7 +185,7 @@ ScryfallCode=VOC
 177 C Path of Ancestry @Alayna Danner
 178 R Port Town @Kamila Szutenberg
 179 R Prairie Stream @Adam Paquette
-180 U Rakdos Carnarium @John Avon
+180 C Rakdos Carnarium @John Avon
 181 R Shadowblood Ridge @Sam White
 182 R Skycloud Expanse @Sam White
 183 R Smoldering Marsh @Adam Paquette

@@ -14,7 +14,7 @@ ScryfallCode=HA6
 6 M Go-Shintai of Life's Origin @Alexander Mokhov
 7 M Tarmogoyf @Filip Burburan
 8 R Glimpse the Unthinkable @Brandon Kitkouski
-9 M Chalice of the Void @Mark Zug
+9 R Chalice of the Void @Mark Zug
 10 R Retrofitter Foundry @Dmitry Burmak
 11 C Darkmoss Bridge @Raoul Vitale
 12 C Drossforge Bridge @Raoul Vitale

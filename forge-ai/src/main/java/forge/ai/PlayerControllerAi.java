@@ -647,6 +647,12 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
+            if(source == null || !source.hasParam("LibraryPosition")
+                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
+                //Cards going to the top of a deck are returned in reverse order.
+                Collections.reverse(reordered);
+            }
+
             assert(reordered.size() == cards.size());
 
             return reordered;

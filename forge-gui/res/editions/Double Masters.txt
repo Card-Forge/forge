@@ -145,7 +145,7 @@ ScryfallCode=2XM
 132 R Ion Storm @Michael Sutfin
 133 C Kazuul's Toll Collector @Greg Staples
 134 U Kuldotha Flamefiend @Raymond Swanland
-135 C Lightning Axe @Dan Scott
+135 C Lightning Axe @Dan Murayama Scott
 136 M Mana Echoes @Christopher Moeller
 137 C Orcish Vandal @Alex Konstad
 138 U Pyrewild Shaman @Lucas Graciano
@@ -279,7 +279,7 @@ ScryfallCode=2XM
 266 R Kuldotha Forgemaster @jD
 267 U Lightning Greaves @Jeremy Jarvis
 268 R Lux Cannon @Martina Pilcerova
-269 C Magnifying Glass @Dan Scott
+269 C Magnifying Glass @Dan Murayama Scott
 270 M Mana Crypt @Matt Stewart
 271 R Masterwork of Ingenuity @Ulrich Brunin
 272 R Mesmeric Orb @David Martin

@@ -103,7 +103,7 @@ ScryfallCode=RNA
 89 C Undercity's Embrace @Tyler Walpole
 90 U Vindictive Vampire @Randy Gallegos
 91 C Act of Treason @Scott Murphy
-92 R Amplifire @Dan Scott
+92 R Amplifire @Dan Murayama Scott
 93 C Burn Bright @Scott Murphy
 94 C Burning-Tree Vandal @Aaron Miller
 95 U Cavalcade of Calamity @Jonas De Ro
@@ -149,14 +149,14 @@ ScryfallCode=RNA
 135 C Rampaging Rendhorn @Ben Wootten
 136 U Regenesis @James Paick
 137 C Root Snare @Craig J Spearing
-138 C Sagittars' Volley @Dan Scott
+138 C Sagittars' Volley @Dan Murayama Scott
 139 C Saruli Caretaker @Howard Lyon
 140 C Sauroform Hybrid @Nils Hamm
 141 U Silhana Wayfinder @Suzanne Helmigh
 142 C Steeple Creeper @Svetlin Velinov
 143 C Stony Strength @Chris Seaman
-144 C Sylvan Brushstrider @Dan Scott
-145 C Territorial Boar @Dan Scott
+144 C Sylvan Brushstrider @Dan Murayama Scott
+145 C Territorial Boar @Dan Murayama Scott
 146 C Titanic Brawl @Svetlin Velinov
 147 U Tower Defense @Craig J Spearing
 148 U Trollbred Guardian @Mathias Kollros

@@ -1,0 +1,11 @@
+Name:Ancient Cellarspawn
+ManaCost:1 B B
+Types:Enchantment Creature Horror
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Demon,Horror,Nightmare | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Each spell you cast that's a Demon, Horror, or Nightmare costs {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | Execute$ TrigLoseLife | TriggerZones$ Battlefield | ValidSAonCard$ Spell.ManaSpent LTX | TriggerDescription$ Whenever you cast a spell, if the amount of mana spent to cast it was less than its mana value, target opponent loses life equal to the difference.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ SVar$Y/Minus.Z
+SVar:X:Count$CardManaCost
+SVar:Y:TriggeredCard$CardManaCost
+SVar:Z:TriggeredCard$CastTotalManaSpent
+Oracle:Each spell you cast that's a Demon, Horror, or Nightmare costs {1} less to cast.\nWhenever you cast a spell, if the amount of mana spent to cast it was less than its mana value, target opponent loses life equal to the difference.

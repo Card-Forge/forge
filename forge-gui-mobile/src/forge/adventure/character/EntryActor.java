@@ -43,7 +43,7 @@ public class EntryActor extends MapActor{
     {
         if(targetMap==null||targetMap.isEmpty())
         {
-            stage.exitDungeon();
+            stage.exitDungeon(false);
         }
         else
         {

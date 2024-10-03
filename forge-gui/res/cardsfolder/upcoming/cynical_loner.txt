@@ -1,0 +1,8 @@
+Name:Cynical Loner
+Types:Creature Human Survivor
+ManaCost:1 B
+PT:3/1
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Glimmer | Description$ CARDNAME can't be blocked by Glimmers.
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, you may search your library for a card, put it into your graveyard, then shuffle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True
+Oracle:Cynical Loner can't be blocked by Glimmers.\nSurvival — At the beginning of your second main phase, if Cynical Loner is tapped, you may search your library for a card, put it into your graveyard, then shuffle.

@@ -48,7 +48,6 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -339,7 +338,7 @@ public final class GameActionUtil {
             newSA.setMayPlay(o);
 
             final StringBuilder sb = new StringBuilder(sa.getDescription());
-            if (!source.equals(host)) {
+            if (!source.equals(host) && host.getCardForUi() != null) {
                 sb.append(" by ");
                 if (host.isImmutable() && host.getEffectSource() != null) {
                     sb.append(host.getEffectSource());
@@ -620,7 +619,10 @@ public final class GameActionUtil {
                     result.getPayCosts().add(cost);
                     reset = true;
                 }
-                result.setOptionalKeywordAmount(ki, v);
+
+                if (result != null) {
+                    result.setOptionalKeywordAmount(ki, v);
+                }
             } else if (o.startsWith("Offspring")) {
                 String[] k = o.split(":");
                 final Cost cost = new Cost(k[1], false);
@@ -829,16 +831,16 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        PlayerCollection players = new PlayerCollection(game.getPlayers());
         // CR 613.7m use APNAP
-        int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
-        if (indexAP != -1) {
-            Collections.rotate(players, - indexAP);
-        }
+        PlayerCollection players = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
         for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {
                 Player decider = dest == ZoneType.Battlefield ? c.getController() : c.getOwner();
+                if (sa != null && sa.hasParam("GainControl")) {
+                    // TODO this doesn't account for changes from e.g. Gather Specimens yet
+                    decider = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("GainControl"), sa).get(0);
+                }
                 if (decider.equals(p)) {
                     subList.add(c);
                 }

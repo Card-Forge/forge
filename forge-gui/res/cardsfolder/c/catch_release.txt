@@ -11,6 +11,6 @@ ALTERNATE
 Name:Release
 ManaCost:4 R W
 Types:Sorcery
-A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBSac | SpellDescription$ Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
-SVar:DBSac:DB$ Sacrifice | Defined$ Player.IsRemembered | SacValid$ Artifact & Creature & Enchantment & Land & Planeswalker | SacEachValid$ True
+A:SP$ Sacrifice | Defined$ Player | SacValid$ Artifact & Creature & Enchantment & Land & Planeswalker | SacEachValid$ True | SpellDescription$ Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.
+DeckHas:Ability$Sacrifice
 Oracle:Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.\nFuse (You may cast one or both halves of this card from your hand.)

@@ -22,11 +22,13 @@ import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
+import forge.util.ITranslatable;
 
 /**
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
@@ -64,7 +66,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "TokenImage", "NewName", "ChooseFromList")
+            .add("TokenScript", "TokenImage", "NewName" , "DefinedName", "ChooseFromList")
             .add("AddAbility").build();
 
     /**
@@ -234,6 +236,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                     return true;
                 }
             }
+        } else if (o instanceof GameLossReason) {
+            for (String s : valids) {
+                GameLossReason valid = GameLossReason.smartValueOf(s);
+                if (((GameLossReason) o).name().equals(valid.name())) {
+                    return true;
+                }
+            }
         }
 
         return false;
@@ -302,7 +311,10 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if ("True".equalsIgnoreCase(params.get("Bloodthirst")) != hostController.hasBloodthirst()) return false;
         }
         if (params.containsKey("FatefulHour")) {
-            if ("True".equalsIgnoreCase(params.get("FatefulHour")) != (hostController.getLife() > 5)) return false;
+            if ("True".equalsIgnoreCase(params.get("FatefulHour")) != (hostController.getLife() <= 5)) return false;
+        }
+        if (params.containsKey("Monarch")) {
+            if ("True".equalsIgnoreCase(params.get("Monarch")) != hostController.isMonarch()) return false;
         }
         if (params.containsKey("Revolt")) {
             if ("True".equalsIgnoreCase(params.get("Revolt")) != hostController.hasRevolt()) return false;
@@ -412,15 +424,20 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (params.containsKey("PresentZone")) {
                 presentZone = ZoneType.smartValueOf(params.get("PresentZone"));
             }
-            CardCollection list = new CardCollection();
-            if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
-                list.addAll(hostController.getOpponents().getCardsIn(presentZone));
-            }
-            if (presentPlayer.equals("Any")) {
-                list.addAll(hostController.getAllies().getCardsIn(presentZone));
+            CardCollection list;
+            if (params.containsKey("PresentDefined")) {
+                list = AbilityUtils.getDefinedCards(getHostCard(), params.get("PresentDefined"), this);
+            } else {
+                list = new CardCollection();
+                if (presentPlayer.equals("You") || presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getCardsIn(presentZone));
+                }
+                if (presentPlayer.equals("Opponent") || presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getOpponents().getCardsIn(presentZone));
+                }
+                if (presentPlayer.equals("Any")) {
+                    list.addAll(hostController.getAllies().getCardsIn(presentZone));
+                }
             }
             list = CardLists.getValidCards(list, sIsPresent, hostController, this.getHostCard(), this);
 
@@ -553,6 +570,9 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     protected IHasSVars getSVarFallback() {
+        if (this.getKeyword() != null && this.getKeyword().getStatic() != null) {
+            return this.getKeyword().getStatic();
+        }
         if (getCardState() != null)
             return getCardState();
         return getHostCard();
@@ -621,6 +641,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             return null;
         }
         return getCardState().getView().getState();
+    }
+
+    public ITranslatable getHostName(CardTraitBase node) {
+        // if alternate state is viewed while card uses original
+        if (node.isIntrinsic() && node.cardState != null && !node.cardState.getStateName().equals(getHostCard().getCurrentStateName())) {
+            return node.cardState;
+        }
+        return node.getHostCard();
     }
 
     public Card getOriginalHost() {

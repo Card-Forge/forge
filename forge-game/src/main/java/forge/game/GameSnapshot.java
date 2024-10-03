@@ -80,25 +80,7 @@ public class GameSnapshot {
 
         for (Player p : fromGame.getPlayers()) {
             Player toPlayer = findBy(toGame, p);
-
-            List<Card> commanders = Lists.newArrayList();
-
-            // Commander cast times are stored in the player, not the card
-            toPlayer.resetCommanderStats();
-            for (final Card c : p.getCommanders()) {
-                Card newCommander = findBy(toGame, c);
-                commanders.add(newCommander);
-                int castTimes = p.getCommanderCast(c);
-                for (int i = 0; i < castTimes; i++) {
-                    toPlayer.incCommanderCast(newCommander);
-                }
-            }
-            for (Map.Entry<Card, Integer> entry : p.getCommanderDamage()) {
-                Card commander = findBy(toGame, entry.getKey());
-                int damage = entry.getValue();
-                toPlayer.addCommanderDamage(commander, damage);
-            }
-            toPlayer.setCommanders(commanders);
+            p.copyCommandersToSnapshot(toPlayer, c -> findBy(toGame, c));
             ((PlayerZoneBattlefield) toPlayer.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
         toGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
@@ -204,8 +186,6 @@ public class GameSnapshot {
 
         // Copy mana pool
         copyManaPool(origPlayer, newPlayer);
-
-        newPlayer.setCommanders(origPlayer.getCommanders()); // will be fixed up below
     }
 
     private void copyManaPool(Player fromPlayer, Player toPlayer) {

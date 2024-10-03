@@ -68,7 +68,7 @@ ScryfallCode=C20
 60 R Glademuse @Ilse Gort
 61 R Obscuring Haze @Campbell White
 62 U Predatory Impetus @Randy Vargas
-63 R Ravenous Gigantotherium @Bartlomiej Gawel
+63 R Ravenous Gigantotherium @Bartłomiej Gaweł
 64 R Sawtusk Demolisher @Aaron Miller
 65 R Selective Adaptation @Tomasz Jedruszek
 66 R Slippery Bogbonder @Mila Pesic
@@ -152,7 +152,7 @@ ScryfallCode=C20
 144 R Captivating Crew @Winona Nelson
 145 M Chandra, Flamecaller @Jason Rainville
 146 R Chaos Warp @Trevor Claxton
-147 R Charmbreaker Devils @Dan Scott
+147 R Charmbreaker Devils @Dan Murayama Scott
 148 M Comet Storm @Jung Park
 149 R Commune with Lava @Ryan Barger
 150 R Dualcaster Mage @Matt Stewart
@@ -178,7 +178,7 @@ ScryfallCode=C20
 170 C Cultivate @Anthony Palumbo
 171 C Evolution Charm @John Avon
 172 R Genesis Hydra @Peter Mohrbacher
-173 U Harmonize @Dan Scott
+173 U Harmonize @Dan Murayama Scott
 174 C Harrow @Rob Alexander
 175 U Heroes' Bane @Raymond Swanland
 176 R Hornet Queen @Martina Pilcerova
@@ -234,7 +234,7 @@ ScryfallCode=C20
 226 U Nyx Weaver @Jack Wang
 227 R Prophetic Bolt @Slawomir Maniak
 228 U Putrefy @Igor Kieryluk
-229 R Rashmi, Eternities Crafter @Magali Villeneuve
+229 M Rashmi, Eternities Crafter @Magali Villeneuve
 230 U Temur Charm @Mathias Kollros
 231 U Terminate @Lucas Graciano
 232 U Trygon Predator @Jack Wang
@@ -242,7 +242,7 @@ ScryfallCode=C20
 234 R Wort, the Raidmother @Dave Allsop
 235 R Wydwen, the Biting Gale @Matt Cavotta
 236 R Abandoned Sarcophagus @Daarken
-237 C Arcane Signet @Dan Scott
+237 C Arcane Signet @Dan Murayama Scott
 238 U Azorius Signet @Raoul Vitale
 239 U Boros Signet @Mike Sass
 240 C Commander's Sphere @Ryan Alexander Lee

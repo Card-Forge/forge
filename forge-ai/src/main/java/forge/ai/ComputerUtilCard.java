@@ -395,7 +395,7 @@ public class ComputerUtilCard {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.LANDS), ComputerUtilCard.landEvaluator);
+        return Aggregates.itemWithMax(Iterables.filter(list, Card::hasPlayableLandFace), ComputerUtilCard.landEvaluator);
     }
 
     /**
@@ -1759,7 +1759,7 @@ public class ComputerUtilCard {
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
 
         if (!kws.isEmpty()) {
-            pumped.addChangedCardKeywords(kws, null, false, timestamp, 0, false);
+            pumped.addChangedCardKeywords(kws, null, false, timestamp, null, false);
         }
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
@@ -1780,7 +1780,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, false);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, null, false);
         pumped.updateKeywordsCache(pumped.getCurrentState());
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;

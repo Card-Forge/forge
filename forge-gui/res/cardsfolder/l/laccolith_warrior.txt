@@ -4,6 +4,7 @@ Types:Creature Beast Warrior
 PT:3/3
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME becomes blocked, you may have it deal damage equal to its power to target creature. If you do, CARDNAME assigns no combat damage this turn.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SubAbility$ DBNoCombatDamage
-SVar:DBNoCombatDamage:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME assigns no combat damage
+SVar:DBNoCombatDamage:DB$ Effect | StaticAbilities$ SNoCombatDamage | Duration$ UntilHostLeavesPlayOrEOT
+SVar:SNoCombatDamage:Mode$ AssignNoCombatDamage | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE assigns no combat damage this turn.
 SVar:X:Count$CardPower
 Oracle:Whenever Laccolith Warrior becomes blocked, you may have it deal damage equal to its power to target creature. If you do, Laccolith Warrior assigns no combat damage this turn.

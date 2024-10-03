@@ -1,0 +1,6 @@
+Name:Fetching Garden
+ManaCost:no cost
+Types:Land Forest Plains
+R:Event$ Moved | ValidCard$ Card.Self | ValidCause$ LandAbility.YouCtrl | Origin$ Hand | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped if it was played from your hand.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+Oracle:Fetching Garden enters tapped if it was played from your hand.

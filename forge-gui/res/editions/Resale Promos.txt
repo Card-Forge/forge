@@ -6,26 +6,19 @@ Type=Promo
 ScryfallCode=PRES
 
 [cards]
-A1 R Jaya Ballard, Task Mage @Matt Cavotta
-A2 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
-A3 R Broodmate Dragon @Vance Kovacs
-A4 R Retaliator Griffin @Jesper Ejsing
-A5 R Terra Stomper @Goran Josic
-A6 R Terastodon @Lars Grant-West
-A7 R Knight Exemplar @Jason Chan
-A8 R Sunblast Angel @Jason Chan
-A9 R Angel of Glory's Rise @James Ryman
-A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
-A11 R Angelic Skirmisher @David Rapoza
-A12 R Xathrid Necromancer @Maciej Kuciara
 1 R Llanowar Elves @Chris Rahn
 2 M Lathril, Blade of the Elves @Caroline Gariba
+2b M Jace, Memory Adept @D. Alexander Gregory
+9 M Ajani, Mentor of Heroes @Aaron Miller
 13★ U Loam Lion @Daniel Ljunggren
 26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
+46 R Welcoming Vampire @Lorenzo Mastroianni
 47 R Thalia's Lancers @David Palumbo
 49 R Curator of Mysteries @Christine Choi
 52 R Cyclone Summoner @Andrey Kuzinskiy
+69 R Patrician Geist @Marta Nael
 100 R Etali, Primal Storm @Raymond Swanland
+118 R Headless Rider @E. M. Gist
 123 R Beast Whisperer @Matt Stewart
 124 R End-Raze Forerunners @Mathias Kollros
 125 R Calamity Bearer @Simon Dominic
@@ -46,3 +39,15 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 235★ R Nyx Lotus @Raoul Vitale
 374 R Valkyrie Harbinger @Tran Nguyen
 376 R Cleaving Reaper @Victor Adame Minguez
+A1 R Jaya Ballard, Task Mage @Matt Cavotta
+A2 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
+A3 R Broodmate Dragon @Vance Kovacs
+A4 R Retaliator Griffin @Jesper Ejsing
+A5 R Terra Stomper @Goran Josic
+A6 R Terastodon @Lars Grant-West
+A7 R Knight Exemplar @Jason Chan
+A8 R Sunblast Angel @Jason Chan
+A9 R Angel of Glory's Rise @James Ryman
+A10 R Hamletback Goliath @Paolo Parente & Brian Snõddy
+A11 R Angelic Skirmisher @David Rapoza
+A12 R Xathrid Necromancer @Maciej Kuciara

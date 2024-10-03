@@ -7,44 +7,44 @@ Alias=H09
 ScryfallCode=H09
 
 [cards]
-13 U Acidic Sliver @Jeff Miracola
-3 C Amoeboid Changeling @Nils Hamm
-31 U Ancient Ziggurat @John Avon
-28 C Aphetto Dredging @Monte Michael Moore
-16 U Armor Sliver @Scott Kirschner
-18 U Barbed Sliver @Scott Kirschner
-22 R Brood Sliver @Ron Spears
-5 C Clot Sliver @Jeff Laubenstein
-29 R Coat of Arms @Scott M. Fischer
-11 U Crystalline Sliver @Allen Williams
-27 C Distant Melody @Omar Rayyan
-41 L Forest @Douglas Shuler
-6 C Frenzy Sliver @Glen Angus
-21 R Fungus Sliver @Daniel Gelon
-25 U Fury Sliver @Paolo Parente
-8 C Gemhide Sliver @John Matson
-7 C Heart Sliver @Ron Spencer
-26 U Heartstone @John Matson
-12 U Hibernation Sliver @Scott Kirschner
-19 C Homing Sliver @Trevor Hairsine
-38 L Island @Randy Gallegos
 1 C Metallic Sliver @Allen Williams
-23 U Might Sliver @Jeff Miracola
-40 L Mountain @Mark Poole
+2 C Virulent Sliver @Franz Vohwinkel
+3 C Amoeboid Changeling @Nils Hamm
+4 C Winged Sliver @Anthony S. Waters
+5 C Clot Sliver @Jeff Laubenstein
+6 C Frenzy Sliver @Glen Angus
+7 C Heart Sliver @Ron Spencer
+8 C Gemhide Sliver @John Matson
 9 C Muscle Sliver @Richard Kane Ferguson
-20 U Necrotic Sliver @Dave Allsop
-37 L Plains @Terese Nielsen
 10 C Quick Sliver @John Avon
+11 U Crystalline Sliver @Allen Williams
+12 U Hibernation Sliver @Scott Kirschner
+13 U Acidic Sliver @Jeff Miracola
+14 U Spined Sliver @Ron Spencer
+15 U Victual Sliver @Terese Nielsen
+16 U Armor Sliver @Scott Kirschner
+17 U Spectral Sliver @Pete Venters
+18 U Barbed Sliver @Scott Kirschner
+19 C Homing Sliver @Trevor Hairsine
+20 U Necrotic Sliver @Dave Allsop
+21 R Fungus Sliver @Daniel Gelon
+22 R Brood Sliver @Ron Spears
+23 U Might Sliver @Jeff Miracola
+24 M Sliver Overlord @Tony Szczudlo
+25 U Fury Sliver @Paolo Parente
+26 U Heartstone @John Matson
+27 C Distant Melody @Omar Rayyan
+28 C Aphetto Dredging @Monte Michael Moore
+29 R Coat of Arms @Scott M. Fischer
+30 R Wild Pair @Mark Brill
+31 U Ancient Ziggurat @John Avon
 32 R Rootbound Crag @Matt Stewart
 33 C Rupture Spire @Jaime Jones
-24 M Sliver Overlord @Tony Szczudlo
-17 U Spectral Sliver @Pete Venters
-14 U Spined Sliver @Ron Spencer
-39 L Swamp @Brom
-34 C Terramorphic Expanse @Dan Scott
-15 U Victual Sliver @Terese Nielsen
-2 C Virulent Sliver @Franz Vohwinkel
+34 C Terramorphic Expanse @Dan Murayama Scott
 35 U Vivid Creek @Fred Fields
 36 U Vivid Grove @Howard Lyon
-30 R Wild Pair @Mark Brill
-4 C Winged Sliver @Anthony S. Waters
+37 L Plains @Terese Nielsen
+38 L Island @Randy Gallegos
+39 L Swamp @Brom
+40 L Mountain @Mark Poole
+41 L Forest @Douglas Shuler

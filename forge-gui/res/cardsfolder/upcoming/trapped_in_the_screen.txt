@@ -1,0 +1,8 @@
+Name:Trapped in the Screen
+ManaCost:2 W
+Types:Enchantment
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters, exile target artifact, creature, or enchantment an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl,Creature.OppCtrl,Enchantment.OppCtrl | TgtPrompt$ Select target artifact, creature, or enchantment an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+Oracle:Ward {2} (Whenever this enchantment becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen Trapped in the Screen enters, exile target artifact, creature, or enchantment an opponent controls until Trapped in the Screen leaves the battlefield.

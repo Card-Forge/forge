@@ -1,0 +1,12 @@
+Name:Whiskervale Forerunner
+ManaCost:3 W
+Types:Creature Mouse Bard
+PT:3/4
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigPeekAndReveal | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, look at the top five cards of your library. You may reveal a creature card with mana value 3 or less from among them. You may put it onto the battlefield if it's your turn. If you don't put it onto the battlefield, put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigPeekAndReveal:DB$ PeekAndReveal | Defined$ You | PeekAmount$ 5 | NoReveal$ True | RememberPeeked$ True | SubAbility$ PickOne
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a creature card to reveal | Choices$ Card.Creature+cmcLE3+IsRemembered | ChoiceZone$ Library | Reveal$ True | SubAbility$ DBChangeZoneBattlefield
+SVar:DBChangeZoneBattlefield:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Defined$ ChosenCard | ConditionPlayerTurn$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.ChosenCard | ConditionCompare$ EQ1 | Optional$ True | SubAbility$ DBChangeZoneHand
+SVar:DBChangeZoneHand:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Library | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.ChosenCard+inZoneBattlefield | ConditionCompare$ EQ0 | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:Valiant — Whenever Whiskervale Forerunner becomes the target of a spell or ability you control for the first time each turn, look at the top five cards of your library. You may reveal a creature card with mana value 3 or less from among them. You may put it onto the battlefield if it's your turn. If you don't put it onto the battlefield, put it into your hand. Put the rest on the bottom of your library in a random order.

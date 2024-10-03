@@ -2,7 +2,6 @@ package forge.game;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 import com.google.common.collect.Iterables;
@@ -93,11 +92,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         if (event.sa.getTargetRestrictions() != null) {
             StringBuilder sb = new StringBuilder();
 
-            List<TargetChoices> targets = event.sa.getAllTargetChoices();
-            // Include the TargetChoices from the stack instance, since the real target choices
-            // are on that object at this point (see SpellAbilityStackInstance constructor).
-            targets.add(event.si.getTargetChoices());
-            for (TargetChoices ch : targets) {
+            for (TargetChoices ch : event.sa.getAllTargetChoices()) {
                 if (null != ch) {
                     sb.append(ch);
                 }

@@ -1,0 +1,7 @@
+Name:Split Up
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroyAll,DBDestroyAll2
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.tapped | SpellDescription$ Destroy all tapped creatures.
+SVar:DBDestroyAll2:DB$ DestroyAll | ValidCards$ Creature.untapped | SpellDescription$ Destroy all untapped creatures.
+Oracle:Choose one —\n• Destroy all tapped creatures.\n• Destroy all untapped creatures.

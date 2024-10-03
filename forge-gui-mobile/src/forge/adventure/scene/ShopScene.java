@@ -54,13 +54,15 @@ public class ShopScene extends ForgeScene {
             int cards = 0;
             for (PaperCard cardToSell: Current.player().autoSellCards.toFlatList()) {
                 cards++;
-                profit += AdventurePlayer.current().cardSellPrice(cardToSell);
+                profit += getCardPrice(cardToSell);
             }
             if (!confirmAutosell(profit, cards, changes.getTownPriceModifier())) {
                 return;
             }
         }
         AdventurePlayer.current().doAutosell();
+        if (screen != null)
+            screen.refresh();
     }
 
     private boolean confirmAutosell(int profit, int cards, float townPriceModifier) {
@@ -70,5 +72,8 @@ public class ShopScene extends ForgeScene {
     public void loadChanges(PointOfInterestChanges changes) {
         AdventurePlayer.current().loadChanges(changes);
         this.changes = changes;
+    }
+    public int getCardPrice(PaperCard pc) {
+        return AdventurePlayer.current().cardSellPrice(pc);
     }
 }

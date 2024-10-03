@@ -334,6 +334,17 @@ public final class CardRulesPredicates {
             if (face == null) {
                 return false;
             }
+            if (face.hasFunctionalVariants()) {
+                for (Map.Entry<String, ? extends ICardFace> v : face.getFunctionalVariants().entrySet()) {
+                    //Not a very pretty implementation, but an ICardFace doesn't have a specific variant, so they all need to be checked.
+                    String origOracle = v.getValue().getOracleText();
+                    if(op(origOracle, operand))
+                        return true;
+                    String name = v.getValue().getName() + " $" + v.getKey();
+                    if(op(CardTranslation.getTranslatedOracle(name), operand))
+                        return true;
+                }
+            }
             if (op(face.getOracleText(), operand) || op(CardTranslation.getTranslatedOracle(face.getName()), operand)) {
                 return true;
             }
@@ -342,6 +353,16 @@ public final class CardRulesPredicates {
         protected boolean checkType(ICardFace face) {
             if (face == null) {
                 return false;
+            }
+            if (face.hasFunctionalVariants()) {
+                for (Map.Entry<String, ? extends ICardFace> v : face.getFunctionalVariants().entrySet()) {
+                    String origType = v.getValue().getType().toString();
+                    if(op(origType, operand))
+                        return true;
+                    String name = v.getValue().getName() + " $" + v.getKey();
+                    if(op(CardTranslation.getTranslatedType(name, origType), operand))
+                        return true;
+                }
             }
             return (op(CardTranslation.getTranslatedType(face.getName(), face.getType().toString()), operand) || op(face.getType().toString(), operand));
         }

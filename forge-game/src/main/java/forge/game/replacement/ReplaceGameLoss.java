@@ -30,6 +30,10 @@ public class ReplaceGameLoss extends ReplacementEffect {
             return false;
         }
 
+        if (!matchesValidParam("ValidLoseReason", runParams.get(AbilityKey.LoseReason))) {
+            return false;
+        }
+
         return true;
     }
 

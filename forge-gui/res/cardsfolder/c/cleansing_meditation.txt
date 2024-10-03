@@ -1,9 +1,10 @@
 Name:Cleansing Meditation
 ManaCost:1 W W
 Types:Sorcery
-A:SP$ DestroyAll | ValidCards$ Enchantment | SubAbility$ ThresholdDestruction | ConditionCheckSVar$ X | ConditionSVarCompare$ LT7 | SpellDescription$ Destroy all enchantments.
-SVar:ThresholdDestruction:DB$ DestroyAll | ValidCards$ Enchantment | SubAbility$ ThresholdReturn | ConditionCheckSVar$ X | ConditionSVarCompare$ GE7 | RememberDestroyed$ True | StackDescription$ Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments, | SpellDescription$ Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
-SVar:ThresholdReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | StackDescription$ then return all cards in your graveyard destroyed this way to the battlefield. | SubAbility$ DBCleanup
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE7 | TrueSubAbility$ ThreshDestruction | FalseSubAbility$ Destruction | SpellDescription$ Destroy all enchantments. Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.
+SVar:Destruction:DB$ DestroyAll | ValidCards$ Enchantment
+SVar:ThreshDestruction:DB$ DestroyAll | ValidCards$ Enchantment | SubAbility$ ThreshReturn | RememberDestroyed$ True | StackDescription$ Threshold — If seven or more cards are in your graveyard, instead destroy all enchantments,
+SVar:ThreshReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+YouCtrl | Origin$ Graveyard | Destination$ Battlefield | StackDescription$ then return all cards in your graveyard destroyed this way to the battlefield. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Card.YouCtrl
 Oracle:Destroy all enchantments.\nThreshold — If seven or more cards are in your graveyard, instead destroy all enchantments, then return all cards in your graveyard destroyed this way to the battlefield.

@@ -123,6 +123,7 @@ public enum TrackableProperty {
     ManaCost(TrackableTypes.ManaCostType),
     SetCode(TrackableTypes.StringType),
     Rarity(TrackableTypes.EnumType(CardRarity.class)),
+    FunctionalVariant(TrackableTypes.StringType),
     OracleText(TrackableTypes.StringType),
     RulesText(TrackableTypes.StringType),
     Power(TrackableTypes.IntegerType),
@@ -239,6 +240,14 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+
+    //ReplacementEffectView
+    RE_HostCard(TrackableTypes.CardViewType),
+    RE_Description(TrackableTypes.StringType),
+
+    //StaticAbilityView
+    ST_HostCard(TrackableTypes.CardViewType),
+    ST_Description(TrackableTypes.StringType),
 
     //HasBackSide
     BackSideName(TrackableTypes.StringType),

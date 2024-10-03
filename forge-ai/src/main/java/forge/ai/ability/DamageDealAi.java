@@ -150,12 +150,6 @@ public class DamageDealAi extends DamageAiBase {
         String logic = sa.getParamOrDefault("AILogic", "");
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
-        } else if ("OpponentHasCreatures".equals(logic)) {
-            for (Player opp : ai.getOpponents()) {
-                if (!opp.getCreaturesInPlay().isEmpty()) {
-                    return true;
-                }
-            }
         } else if (logic.startsWith("ProcRaid.")) {
             if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
@@ -723,6 +717,7 @@ public class DamageDealAi extends DamageAiBase {
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
+                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty())
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
                     boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);

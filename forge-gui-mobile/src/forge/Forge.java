@@ -63,7 +63,7 @@ public class Forge implements ApplicationListener {
     static Batch animationBatch;
     static TextureRegion lastScreenTexture;
     private static boolean sceneWasSwapped = false;
-    public static boolean restrictAdvMenus = false;
+    public static boolean advFreezePlayerControls = false;
     private static Clipboard clipboard;
     private static IDeviceAdapter deviceAdapter;
     private static int screenWidth;

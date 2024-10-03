@@ -1,0 +1,9 @@
+Name:Tasteful Offering
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SacTrig | SubAbility$ DBToken | StackDescription$ REP You get_{p:You} gets & Create a_{p:You} creates a | SpellDescription$ You get a two-time boon with "Whenever you sacrifice one or more permanents, seek a nonland card." Create a Food token.
+SVar:SacTrig:Mode$ SacrificedOnce | ValidCard$ Permanent | ValidPlayer$ You | TriggerZones$ Command | BoonAmount$ 2 | Execute$ TrigSeek | TriggerDescription$ Whenever you sacrifice one or more permanents, seek a nonland card.
+SVar:TrigSeek:DB$ Seek | Num$ 1 | Type$ Card.nonLand
+SVar:DBToken:DB$ Token | TokenScript$ c_a_food_sac
+DeckHas:Ability$LifeGain|Token
+Oracle:You get a two-time boon with "Whenever you sacrifice one or more permanents, seek a nonland card." Create a Food token.

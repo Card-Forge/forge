@@ -1,0 +1,6 @@
+Name:Time Bends to My Will
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigExtraTurn | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, take an extra turn after this one. Skip the untap step of that turn.
+SVar:TrigExtraTurn:DB$ AddTurn | NumTurns$ 1 | SkipUntap$ True
+Oracle:When you set this scheme in motion, take an extra turn after this one. Skip the untap step of that turn.

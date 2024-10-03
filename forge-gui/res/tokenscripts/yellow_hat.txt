@@ -1,0 +1,6 @@
+Name:Yellow Hat
+ManaCost:no cost
+Types:Legendary Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 4 | AddToughness$ 4 | AddKeyword$ Lifelink | Description$ Equipped creature gets +4/+4 and gains lifelink.
+Oracle:Equipped creature gets +4/+4 and gains lifelink.\nEquip {2}

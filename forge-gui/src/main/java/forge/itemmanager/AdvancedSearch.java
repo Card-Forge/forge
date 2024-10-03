@@ -82,11 +82,12 @@ public class AdvancedSearch {
             protected Set<String> getItemValues(PaperCard input) {
                 Set<String> names = new HashSet<>();
                 names.add(input.getRules().getOracleText());
-                names.add(CardTranslation.getTranslatedOracle(input.getName()));
+                names.add(CardTranslation.getTranslatedOracle(input));
                 CardSplitType cardSplitType = input.getRules().getSplitType();
                 if (cardSplitType != CardSplitType.None && cardSplitType != CardSplitType.Split) {
                     if (input.getRules().getOtherPart() != null) {
                         names.add(input.getRules().getOtherPart().getOracleText());
+                        //Doesn't support a combination of functional variant + split card, but none of those exist yet.
                         names.add(CardTranslation.getTranslatedOracle(input.getRules().getOtherPart().getName()));
                     }
                 }

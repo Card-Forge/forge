@@ -106,7 +106,7 @@ ScryfallCode=SOI
 91 C Stormrider Spirit @Lake Hurwitz
 92 R Thing in the Ice @Svetlin Velinov
 93 U Trail of Evidence @Daniel Ljunggren
-94 U Uninvited Geist @Dan Scott
+94 U Uninvited Geist @Dan Murayama Scott
 95 C Vessel of Paramnesia @Kieran Yanner
 96 R Welcome to the Fold @David Palumbo
 97 U Accursed Witch @Wesley Burt
@@ -127,7 +127,7 @@ ScryfallCode=SOI
 112 C Ghoulcaller's Accomplice @Dave Kendall
 113 U Ghoulsteed @Jason Kang
 114 U Gisa's Bidding @Jason Felix
-115 C Grotesque Mutation @Dan Scott
+115 C Grotesque Mutation @Dan Murayama Scott
 116 U Heir of Falkenrath @Jason Rainville
 117 C Hound of the Farbogs @Christine Choi
 118 U Indulgent Aristocrat @Anna Steinbauer
@@ -198,7 +198,7 @@ ScryfallCode=SOI
 183 U Spiteful Motives @Marco Nelor
 184 U Stensia Masquerade @Willian Murai
 185 C Structural Distortion @Jung Park
-186 C Tormenting Voice @Dan Scott
+186 C Tormenting Voice @Dan Murayama Scott
 187 U Ulrich's Kindred @Josu Hernaiz
 188 C Uncaged Fury @Jason Kang
 189 C Vessel of Volatility @Kieran Yanner
@@ -221,7 +221,7 @@ ScryfallCode=SOI
 206 U Gloomwidow @Svetlin Velinov
 207 U Graf Mole @Lars Grant-West
 208 U Groundskeeper @Anthony Palumbo
-209 U Hermit of the Natterknolls @Dan Scott
+209 U Hermit of the Natterknolls @Dan Murayama Scott
 210 C Hinterland Logger @Karl Kopinski
 211 U Howlpack Resurgence @Izzy
 212 R Inexorable Blob @Nils Hamm
@@ -270,7 +270,7 @@ ScryfallCode=SOI
 255 C Explosive Apparatus @Lindsey Look
 256 U Harvest Hand @Jason Felix
 257 U Haunted Cloak @Volkan Baǵa
-258 U Magnifying Glass @Dan Scott
+258 U Magnifying Glass @Dan Murayama Scott
 259 U Murderer's Axe @Winona Nelson
 260 U Neglected Heirloom @Volkan Baǵa
 261 U Runaway Carriage @Kev Walker

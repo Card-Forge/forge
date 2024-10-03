@@ -46,7 +46,7 @@ ScryfallCode=TD2
 38 U Coastal Tower @Don Hazeltine
 39 U Forbidding Watchtower @Aleksi Briclot
 40 C Seat of the Synod @John Avon
-41 C Terramorphic Expanse @Dan Scott
+41 C Terramorphic Expanse @Dan Murayama Scott
 42 L Plains @James Paick
 43 L Plains @John Avon
 44 L Plains @Martina Pilcerova
@@ -75,7 +75,7 @@ ScryfallCode=TD2
 67 U Contagion Clasp @Anthony Palumbo
 68 U Mortarpod @Eric Deschamps
 69 U Spawning Pit @Tony Szczudlo
-70 U Exhume @Carl Critchlow
+70 C Exhume @Carl Critchlow
 71 R Phyrexian Altar @Ron Spears
 72 C Morbid Plunder @Mike Bierek
 73 U Putrefy @Jim Nelson

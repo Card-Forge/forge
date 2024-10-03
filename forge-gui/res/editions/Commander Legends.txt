@@ -9,7 +9,7 @@ DoublePick=Always
 ScryfallCode=CMR
 
 [cards]
-1 C The Prismatic Piper @Seb McKinnon
+1 S The Prismatic Piper @Seb McKinnon
 2 M Akroma, Vision of Ixidor @Chris Rahn
 3 R Akroma's Will @Antonio José Manzanedo
 4 U Alharu, Solemn Ritualist @Chris Rallis
@@ -131,7 +131,7 @@ ScryfallCode=CMR
 120 C Elvish Doomsayer @Denman Rooke
 121 R Elvish Dreadlord @Randy Vargas
 122 C Exquisite Huntmaster @Lie Setiawan
-123 C Eyeblight Assassin @Dan Scott
+123 C Eyeblight Assassin @Dan Murayama Scott
 124 C Eyeblight Cullers @Randy Vargas
 125 C Eyeblight Massacre @Igor Kieryluk
 126 U Falthis, Shadowcat Familiar @Jesper Ejsing
@@ -249,7 +249,7 @@ ScryfallCode=CMR
 238 R Kamahl's Will @Nicholas Gregory
 239 R Kodama of the East Tree @Daarken
 240 C Lifecrafter's Gift @Winona Nelson
-241 C Lys Alana Bowmaster @Dan Scott
+241 C Lys Alana Bowmaster @Dan Murayama Scott
 242 R Magus of the Order @Tomasz Jedruszek
 243 C Molder Beast @Randis Albion
 244 U Monstrous Onslaught @Slawomir Maniak
@@ -276,7 +276,7 @@ ScryfallCode=CMR
 265 U Abomination of Llanowar @Vincent Proce
 266 R Amareth, the Lustrous @Lie Setiawan
 267 U Araumi of the Dead Tide @Daarken
-268 R Archelos, Lagoon Mystic @Dan Scott
+268 R Archelos, Lagoon Mystic @Dan Murayama Scott
 269 R Averna, the Chaos Bloom @Lucas Graciano
 270 R Belbe, Corrupted Observer @Igor Kieryluk
 271 R Bell Borca, Spectral Sergeant @Mila Pesic
@@ -291,7 +291,7 @@ ScryfallCode=CMR
 280 U Imoti, Celebrant of Bounty @Ekaterina Burmak
 281 R Jared Carthalion, True Heir @Lius Lasahido
 282 U Juri, Master of the Revue @Dmitry Burmak
-283 U Kangee, Sky Warden @Dan Scott
+283 U Kangee, Sky Warden @Dan Murayama Scott
 284 R Kwain, Itinerant Meddler @Lucas Graciano
 285 R Lathiel, the Bounteous Dawn @Lucas Graciano
 286 R Liesa, Shroud of Dusk @Slawomir Maniak
@@ -305,7 +305,7 @@ ScryfallCode=CMR
 294 R Zara, Renegade Recruiter @Chris Rallis
 295 C Amorphous Axe @Martina Pilcerova
 296 U Angelic Armaments @Daniel Ljunggren
-297 U Arcane Signet @Dan Scott
+297 U Arcane Signet @Dan Murayama Scott
 298 C Armillary Sphere @Franz Vohwinkel
 299 C Armory of Iroas @Yeong-Hao Han
 300 R Bladegriff Prototype @Johann Bodin
@@ -340,7 +340,7 @@ ScryfallCode=CMR
 329 U Pennon Blade @Alex Horley-Orlandelli
 330 C Perilous Myr @Jason Felix
 331 M Phyrexian Triniform @Adam Paquette
-332 C Pilgrim's Eye @Dan Scott
+332 C Pilgrim's Eye @Dan Murayama Scott
 333 C Pirate's Cutlass @John Stanko
 334 C Prophetic Prism @John Avon
 335 R Rings of Brighthearth @Howard Lyon
@@ -365,7 +365,7 @@ ScryfallCode=CMR
 354 R Rejuvenating Springs @Alayna Danner
 355 C Rupture Spire @Jaime Jones
 356 R Spectator Seating @Ravenna Tran
-357 C Terramorphic Expanse @Dan Scott
+357 C Terramorphic Expanse @Dan Murayama Scott
 358 R Training Center @Daniel Ljunggren
 359 R Undergrowth Stadium @Yeong-Hao Han
 360 R Vault of Champions @Cliff Childs
@@ -429,7 +429,7 @@ ScryfallCode=CMR
 416 R Relentless Assault @Christopher Moeller
 417 C Temur Battle Rage @Jaime Jones
 418 U Volcanic Fallout @Zoltan Boros & Gabor Szikszai
-419 R Wild Ricochet @Dan Scott
+419 R Wild Ricochet @Dan Murayama Scott
 420 R Word of Seizing @Vance Kovacs
 421 U Acidic Slime @Karl Kopinski
 422 M Avenger of Zendikar @Zoltan Boros & Gabor Szikszai
@@ -485,9 +485,9 @@ ScryfallCode=CMR
 472 U Sol Ring @Mike Bierek
 473 R Sunforger @Darrell Riche
 474 U Swiftfoot Boots @Svetlin Velinov
-475 R Sword of Vengeance @Dan Scott
+475 R Sword of Vengeance @Dan Murayama Scott
 476 U Blighted Woodland @Jason Felix
-477 C Boros Garrison @John Avon
+477 U Boros Garrison @John Avon
 478 C Boros Guildgate @Noah Bradley
 479 C Command Tower @Ryan Yee
 480 U Coral Atoll @John Avon
@@ -507,7 +507,7 @@ ScryfallCode=CMR
 494 R Slayers' Stronghold @Karl Kopinski
 495 U Stone Quarry @Noah Bradley
 496 U Sunhome, Fortress of the Legion @Martina Pilcerova
-497 C Terramorphic Expanse @Dan Scott
+497 C Terramorphic Expanse @Dan Murayama Scott
 498 C Thornwood Falls @Eytan Zana
 499 C Transguild Promenade @Noah Bradley
 500 U Vivid Creek @Fred Fields
@@ -560,7 +560,7 @@ ScryfallCode=CMR
 543 M Zedruu the Greathearted @Mark Zug
 544 M Zur the Enchanter @Josu Hernaiz
 545 M Ramos, Dragon Engine @Joseph Meehan
-546 C The Prismatic Piper @Seb McKinnon
+546 S The Prismatic Piper @Seb McKinnon
 547 M Akroma, Vision of Ixidor @Chris Rahn
 548 U Alharu, Solemn Ritualist @Chris Rallis
 549 U Ardenn, Intrepid Archaeologist @Jason Rainville
@@ -602,7 +602,7 @@ ScryfallCode=CMR
 585 U Abomination of Llanowar @Vincent Proce
 586 R Amareth, the Lustrous @Lie Setiawan
 587 U Araumi of the Dead Tide @Daarken
-588 R Archelos, Lagoon Mystic @Dan Scott
+588 R Archelos, Lagoon Mystic @Dan Murayama Scott
 589 R Averna, the Chaos Bloom @Lucas Graciano
 590 R Belbe, Corrupted Observer @Igor Kieryluk
 591 R Bell Borca, Spectral Sergeant @Mila Pesic
@@ -617,7 +617,7 @@ ScryfallCode=CMR
 600 U Imoti, Celebrant of Bounty @Ekaterina Burmak
 601 R Jared Carthalion, True Heir @Lius Lasahido
 602 U Juri, Master of the Revue @Dmitry Burmak
-603 U Kangee, Sky Warden @Dan Scott
+603 U Kangee, Sky Warden @Dan Murayama Scott
 604 R Kwain, Itinerant Meddler @Lucas Graciano
 605 R Lathiel, the Bounteous Dawn @Lucas Graciano
 606 R Liesa, Shroud of Dusk @Slawomir Maniak
@@ -705,7 +705,7 @@ ScryfallCode=CMR
 686 U Three Visits @Yeong-Hao Han
 687 U Boros Charm @Zoltan Boros
 688 C Coiling Oracle @Mark Zug
-689 U Arcane Signet @Dan Scott
+689 U Arcane Signet @Dan Murayama Scott
 690 R Bladegriff Prototype @Johann Bodin
 691 U Burnished Hart @Yeong-Hao Han
 692 M Commander's Plate @Volkan Baǵa
@@ -728,7 +728,7 @@ ScryfallCode=CMR
 709 R Rejuvenating Springs @Alayna Danner
 710 U Reliquary Tower @Jesper Ejsing
 711 R Spectator Seating @Ravenna Tran
-712 C Terramorphic Expanse @Dan Scott
+712 C Terramorphic Expanse @Dan Murayama Scott
 713 R Training Center @Daniel Ljunggren
 714 R Undergrowth Stadium @Yeong-Hao Han
 715 R Vault of Champions @Cliff Childs

@@ -391,6 +391,10 @@ public abstract class GameState {
                 }
                 newText.append("|MergedCards:").append(TextUtil.join(mergedCardNames, ","));
             }
+
+            if (c.getClassLevel() > 1) {
+                newText.append("|ClassLevel:").append(c.getClassLevel());
+            }
         }
 
         if (zoneType == ZoneType.Exile) {
@@ -623,6 +627,7 @@ public abstract class GameState {
         }
 
         game.getStack().setResolving(false);
+        game.getStack().unfreezeStack();
 
         // Advance to a certain phase, activating all triggered abilities
         if (advPhase != null) {
@@ -1179,9 +1184,8 @@ public abstract class GameState {
                 zone.setCards(kv.getValue());
             }
         }
-        for (Card cmd : p.getCommanders()) {
-            p.getZone(ZoneType.Command).add(Player.createCommanderEffect(p.getGame(), cmd));
-        }
+        if (!p.getCommanders().isEmpty())
+            p.createCommanderEffect(); //Original one was lost, and the one made by addCommander would have been erased by setCards.
 
         updateManaPool(p, state.manaPool, true, false);
         updateManaPool(p, state.persistentMana, false, true);
@@ -1327,10 +1331,7 @@ public abstract class GameState {
                     c.setExiledWith(c); // This seems to be the way it's set up internally. Potentially not needed here?
                     c.setExiledBy(c.getController());
                 } else if (info.startsWith("IsCommander")) {
-                    c.setCommander(true);
-                    List<Card> cmd = Lists.newArrayList(player.getCommanders());
-                    cmd.add(c);
-                    player.setCommanders(cmd);
+                    player.addCommander(c);
                 } else if (info.startsWith("IsRingBearer")) {
                     c.setRingBearer(true);
                     player.setRingBearer(c);
@@ -1398,6 +1399,8 @@ public abstract class GameState {
                     c.setTurnInZone(turn);
                 } else if (info.equals("IsToken")) {
                     c.setGamePieceType(GamePieceType.TOKEN);
+                } else if (info.startsWith("ClassLevel:")) {
+                    c.setClassLevel(Integer.parseInt(info.substring(info.indexOf(':') + 1)));
                 }
             }
 
