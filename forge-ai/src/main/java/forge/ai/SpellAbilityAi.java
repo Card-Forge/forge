@@ -8,6 +8,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.card.CardState;
 import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.mana.ManaCostBeingPaid;
@@ -367,6 +368,12 @@ public abstract class SpellAbilityAi {
 
     public ICardFace chooseCardFace(Player ai, SpellAbility sa, List<ICardFace> faces) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardFace is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
+
+        return Iterables.getFirst(faces, null);
+    }
+
+    public CardState chooseCardState(Player ai, SpellAbility sa, List<CardState> faces) {
+        System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardState is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
 
         return Iterables.getFirst(faces, null);
     }

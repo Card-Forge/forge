@@ -244,6 +244,7 @@ public abstract class PlayerController {
 
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message);
+    public abstract CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params);

@@ -1,6 +1,7 @@
 package forge.game.card;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
 import forge.StaticData;
@@ -38,6 +39,14 @@ public class CardView extends GameEntityView {
         if (c == null) { return null; }
         CardState s = c.getState(state);
         return s == null ? null : s.getView();
+    }
+
+    public static Map<CardStateView, CardState> getStateMap(Iterable<CardState> states) {
+        Map<CardStateView, CardState> stateViewCache = Maps.newLinkedHashMap();
+        for (CardState state : states) {
+            stateViewCache.put(state.getView(), state);
+        }
+        return stateViewCache;
     }
 
     public CardView getBackup() {

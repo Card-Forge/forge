@@ -734,6 +734,12 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public Card chooseDungeon(Player player, List<PaperCard> dungeonCards, String message) {
         // TODO Auto-generated method stub
         return null;

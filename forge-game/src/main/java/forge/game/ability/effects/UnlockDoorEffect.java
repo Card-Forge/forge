@@ -1,18 +1,16 @@
 package forge.game.ability.effects;
 
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import forge.StaticData;
-import forge.card.CardStateName;
-import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardState;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -49,25 +47,14 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                 c.unlockRoom(activator, sa.getCardStateName());
                 break;
             case "Unlock":
-                //List<ICardFace> faces = c.getLockedRoomNames().stream().map(face -> StaticData.instance().getCommonCards().getFaceByName(face)).collect(Collectors.toList());
-
-                Map<ICardFace, CardStateName> map = Maps.newHashMap();
-                
-                for (CardStateName faceStateName : c.getLockedRooms()) {
-                    if (!c.hasState(faceStateName)) {
-                        continue;
-                    }
-                    String faceName = c.getState(faceStateName).getName();
-                    ICardFace face = StaticData.instance().getCommonCards().getFaceByName(faceName);
-                    map.put(face, faceStateName);
-                }
+                List<CardState> states = c.getLockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
 
                 // need to choose Room Name
-                ICardFace chosen = activator.getController().chooseSingleCardFace(sa, Lists.newArrayList(map.keySet()), "Choose Room to unlock");
+                CardState chosen = activator.getController().chooseSingleCardState(sa, states, "Choose Room to unlock");
                 if (chosen == null) {
                     continue;
                 }
-                c.unlockRoom(activator, map.get(chosen));
+                c.unlockRoom(activator, chosen.getStateName());
                 break;
             }
         }
