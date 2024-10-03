@@ -22,20 +22,20 @@ Base=Uncommon:fromSheet("BLB cards")
 [RareMythic]
 Base=RareMythic:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
-Replace=.021F fromSheet("BLB borderless")
-Replace=.051F fromSheet("BLB showcase")
+Replace=.021F RareMythic:fromSheet("BLB borderless||BLB cards")
+Replace=.051F RareMythic:fromSheet("BLB showcase||BLB cards")
 
 [FullArtLand]
-Base=Land:fromSheet("BLB full art")
-Replace=.20F Land:fromSheet("BLB full art")+
+Base=BasicLand:fromSheet("BLB cards")
+Replace=.20F BasicLand:fromSheet("BLB cards")+
 
 [Wildcard]
 Base=Common:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
 Replace=.417F Uncommon:fromSheet("BLB cards")
 Replace=.078F RareMythic:fromSheet("BLB cards")
-Replace=.004F fromSheet("BLB borderless")
-Replace=.042F fromSheet("BLB showcase")
+Replace=.004F RareMythic:fromSheet("BLB borderless||BLB cards")
+Replace=.042F RareMythic:fromSheet("BLB showcase||BLB cards")
 
 [cards]
 1 C Banishing Light @Zoltan Boros
@@ -319,16 +319,6 @@ Replace=.042F fromSheet("BLB showcase")
 279 L Forest @David Robert Hovey
 280 L Forest @David Robert Hovey
 281 L Forest @David Robert Hovey
-369 L Plains @Piotr Dura
-370 L Plains @Julian Kok Joon Wen
-371 L Island @Alexander Forssberg
-372 L Island @Lorenzo Lanfranconi
-373 L Swamp @Piotr Dura
-374 L Swamp @Thomas Stoop
-375 L Mountain @Samuele Bandini
-376 L Mountain @Adam Paquette
-377 L Forest @Alayna Danner
-378 L Forest @Donato Giancola
 
 [borderless]
 282 M Season of the Burrow @Edgar Sánchez Hidalgo
@@ -424,6 +414,16 @@ Replace=.042F fromSheet("BLB showcase")
 368 R Fountainport @Leon Tukker
 
 [precon product]
+369 L Plains @Piotr Dura
+370 L Plains @Julian Kok Joon Wen
+371 L Island @Alexander Forssberg
+372 L Island @Lorenzo Lanfranconi
+373 L Swamp @Piotr Dura
+374 L Swamp @Thomas Stoop
+375 L Mountain @Samuele Bandini
+376 L Mountain @Adam Paquette
+377 L Forest @Alayna Danner
+378 L Forest @Donato Giancola
 379 M Bria, Riptide Rogue @Borja Pindado
 380 M Byrke, Long Ear of the Law @Manuel Castañón
 387 R Serra Redeemer @Joshua Raphael
@@ -444,8 +444,6 @@ Replace=.042F fromSheet("BLB showcase")
 383 U Fell @A. M. Sartor
 384 U Wear Down @Iris Compiet
 385 U Stormcatch Mentor @Manuel Castañón
-
-[bundle]
 386 R Thundertrap Trainer @Jesper Ejsing
 
 [special guests]
@@ -459,28 +457,6 @@ Replace=.042F fromSheet("BLB showcase")
 1 Rat Colony|SPG
 1 Ledger Shredder|SPG
 1 Swords to Plowshares|SPG
-
-[full art]
-4 Plains|BLB|1
-3 Plains|BLB|2
-2 Plains|BLB|3
-1 Plains|BLB|4
-4 Mountain|BLB|1
-3 Mountain|BLB|2
-2 Mountain|BLB|3
-1 Mountain|BLB|4
-4 Swamp|BLB|1
-3 Swamp|BLB|2
-2 Swamp|BLB|3
-1 Swamp|BLB|4
-4 Island|BLB|1
-3 Island|BLB|2
-2 Island|BLB|3
-1 Island|BLB|4
-4 Forest|BLB|1
-3 Forest|BLB|2
-2 Forest|BLB|3
-1 Forest|BLB|4
 
 [tokens]
 b_1_1_bat_flying
