@@ -30,7 +30,7 @@ public class FileSectionManual extends FileSection {
      * @param value the value
      */
     public void put(final String key, final String value) {
-        this.getLines().put(key, value);
+        this.lines.put(key, value);
     }
 
 }
