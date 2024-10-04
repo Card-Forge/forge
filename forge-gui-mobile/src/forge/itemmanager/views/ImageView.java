@@ -1127,13 +1127,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             }
                         }
                     } else {
-                        //draw missing box display if not avail or loading...
-                        g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
-                        //g.drawImage(Forge.getAssets().getDefaultImage(), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
-                        g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
-                        //draw plastic effect overlay.
-                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
-                        //g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                        if (itemManager.getConfig() == ItemManagerConfig.STRING_ONLY) {
+                            //draw generic box for stringOnly config
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                        } else {
+                            //draw missing box display if not avail or loading...
+                            g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
+                            //temporary fill image
+                            g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                            //draw plastic effect overlay.
+                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+
+                        }
                     }
                     if (deckColor != null) {
                         //deck color identity
