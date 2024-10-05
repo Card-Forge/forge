@@ -852,7 +852,7 @@ public class CardRenderer {
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4.5f;
-                if (card.isSplitCard() && card.hasAlternateState()) {
+                if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                     if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
                         if (isChoiceList) {
                             if (card.getRightSplitState().getName().equals(details.getName()))
