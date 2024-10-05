@@ -4092,13 +4092,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
-        // CR 506.4 attacked planeswalkers leave combat
-        boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
-        if (checkCombat && !types.isPlaneswalker()) {
-            game.getCombat().removeFromCombat(this);
-        }
-        return types;
+        return state.getType().getTypeWithChanges(changedCardTypes);
     }
 
     public final CardTypeView getOriginalType() {

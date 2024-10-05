@@ -626,11 +626,17 @@ public class Combat {
     }
 
     public final boolean removeAbsentCombatants() {
-        // iterate all attackers and remove illegal declarations
+        // CR 506.4 iterate all attackers and remove illegal declarations
         CardCollection missingCombatants = new CardCollection();
         for (Entry<GameEntity, AttackingBand> ee : attackedByBands.entries()) {
             for (Card c : ee.getValue().getAttackers()) {
                 if (!c.isInPlay() || !c.isCreature()) {
+                    missingCombatants.add(c);
+                }
+            }
+            if (ee.getKey() instanceof Card) {
+                Card c = (Card) ee.getKey();
+                if (!c.isBattle() && !c.isPlaneswalker()) {
                     missingCombatants.add(c);
                 }
             }
