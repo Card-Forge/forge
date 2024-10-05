@@ -3,8 +3,7 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.testng.collections.Lists;
-
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
