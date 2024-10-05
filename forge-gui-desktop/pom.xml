@@ -355,7 +355,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>2.1.2</version>
+                        <version>2.5.1</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -377,7 +377,7 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>17</minVersion>
-                                        <jdkPreference>jdkOnly</jdkPreference>
+                                        <requiresJdk>jdkOnly</requiresJdk>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>
                                             <opt>-Dfile.encoding=UTF-8</opt>
@@ -540,7 +540,7 @@
                     <plugin>
                         <groupId>com.akathist.maven.plugins.launch4j</groupId>
                         <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>2.1.2</version>
+                        <version>2.5.1</version>
                         <executions>
                             <execution>
                                 <id>l4j-gui</id>
@@ -563,7 +563,7 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>17</minVersion>
-                                        <jdkPreference>jdkOnly</jdkPreference>
+                                        <requiresJdk>jdkOnly</requiresJdk>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>
                                             <opt>-Dfile.encoding=UTF-8</opt>
@@ -653,6 +653,12 @@
                                             </fileset>
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor-mac.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.cmd" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure-mac.sh" />
@@ -660,12 +666,6 @@
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target/classes" includes="build.txt" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.exe" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor-mac.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.command" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.cmd" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
                                         <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />

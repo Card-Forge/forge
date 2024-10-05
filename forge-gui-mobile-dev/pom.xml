@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
-                <version>2.1.2</version>
+                <version>2.5.1</version>
                 <executions>
                     <execution>
                         <id>l4j-adv</id>
@@ -82,7 +82,7 @@
                             <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>forge</errTitle>
-                            <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
                             <icon>src/main/config/forge-adventure.ico</icon>
                             <classPath>
                                 <mainClass>forge.app.Main</mainClass>
@@ -91,7 +91,7 @@
                             </classPath>
                             <jre>
                                 <minVersion>17</minVersion>
-                                <jdkPreference>jdkOnly</jdkPreference>
+                                <requiresJdk>jdkOnly</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
                                     <opt>-Dfile.encoding=UTF-8</opt>
