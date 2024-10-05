@@ -107,7 +107,7 @@ In Intellij, if the SDK Manager is not already running, go to Tools > Android > 
 
 #### Proguard update
 
-Proguard 7.5.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports Java 17.
+Standalone Proguard 7.6.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports up to Java 23 (latest android uses Java 17).
 
 #### Android Build
 
