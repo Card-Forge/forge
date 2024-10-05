@@ -196,9 +196,11 @@ ScryfallCode=OGW
 181 C Unknown Shores @Jung Park
 182 R Wandering Fumarole @Florian de Gesincourt
 183 C Wastes @Jason Felix
-183 C Wastes @Jason Felix
 184 C Wastes @Raymond Swanland
-184 C Wastes @Raymond Swanland
+
+[alternate art]
+183a C Wastes @Jason Felix
+184a C Wastes @Raymond Swanland
 
 [tokens]
 c_1_1_eldrazi_scion_sac

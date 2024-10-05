@@ -286,6 +286,8 @@ BoosterBox=36
 274 L Swamp @Salvatorre Zee Yazzie
 275 L Mountain @Salvatorre Zee Yazzie
 276 L Forest @Salvatorre Zee Yazzie
+
+[precon product]
 277 L Plains @Sergey Glushakov
 278 L Plains @Adam Paquette
 279 L Island @Sergey Glushakov
