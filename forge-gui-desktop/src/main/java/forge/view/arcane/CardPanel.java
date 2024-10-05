@@ -479,7 +479,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
-            final boolean showSplitMana = card.isSplitCard();
+            final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
             if (!showSplitMana) {
                 drawManaCost(g, card.getCurrentState().getManaCost(), 0);
             } else {

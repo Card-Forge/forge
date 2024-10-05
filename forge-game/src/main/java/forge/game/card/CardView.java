@@ -804,7 +804,7 @@ public class CardView extends GameEntityView {
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
-        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
+        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack && getZone() != ZoneType.Battlefield) {
             sb.append("(").append(getLeftSplitState().getName()).append(") ");
             sb.append(getLeftSplitState().getAbilityText());
             sb.append("\r\n\r\n").append("(").append(getRightSplitState().getName()).append(") ");
