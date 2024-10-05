@@ -177,6 +177,7 @@ public class FSkin {
         Forge.getAssets().loadTexture(getDefaultSkinFile("adv_logo.png"), new TextureLoader.TextureParameter());
         Forge.getAssets().loadTexture(getDefaultSkinFile("cover.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("overlay_alpha.png"));
+        Forge.getAssets().loadTexture(getDefaultSkinFile("spiral.png"));
         Forge.getAssets().loadTexture(getDefaultSkinFile("splatter.png"));
 
         if (splashScreen != null) {

@@ -92,6 +92,7 @@ public class Forge implements ApplicationListener {
     private static boolean destroyThis = false;
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
+    public static float deltaTime = 0f;
     private static boolean isloadingaMatch = false;
     public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
@@ -713,6 +714,7 @@ public class Forge implements ApplicationListener {
                             }
                         }
                     }
+                    deltaTime = 0f;
                 }
             }
         });
@@ -849,6 +851,10 @@ public class Forge implements ApplicationListener {
             ForgeAnimation.advanceAll();
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+            //set delta for rotation
+            deltaTime += Gdx.graphics.getDeltaTime();
+            if (deltaTime > 22.5f)
+                deltaTime = 0f;
 
             FContainer screen = currentScreen;
 
