@@ -3,8 +3,11 @@ package forge.game.ability.effects;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.testng.collections.Lists;
+
 import com.google.common.collect.Maps;
 
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -55,6 +58,44 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                     continue;
                 }
                 c.unlockRoom(activator, chosen.getStateName());
+                break;
+            case "LockOrUnlock":
+                switch (c.getLockedRooms().size()) {
+                case 0:
+                    // no locked, all unlocked, can only lock door
+                    List<CardState> unlockStates = c.getUnlockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
+                    CardState chosenUnlock = activator.getController().chooseSingleCardState(sa, unlockStates, "Choose Room to lock");
+                    if (chosenUnlock == null) {
+                        continue;
+                    }
+                    c.lockRoom(activator, chosenUnlock.getStateName());
+                    break;
+                case 1:
+                    // TODO check for Lock vs Unlock first?
+                    List<CardState> bothStates = Lists.newArrayList();
+                    bothStates.add(c.getState(CardStateName.LeftSplit));
+                    bothStates.add(c.getState(CardStateName.RightSplit));
+                    CardState chosenBoth = activator.getController().chooseSingleCardState(sa, bothStates, "Choose Room to lock or unlock");
+                    if (chosenBoth == null) {
+                        continue;
+                    }
+                    if (c.getLockedRooms().contains(chosenBoth.getStateName())) {
+                        c.unlockRoom(activator, chosenBoth.getStateName());
+                    } else {
+                        c.lockRoom(activator, chosenBoth.getStateName());
+                    }
+                    break;
+                case 2:
+                    List<CardState> lockStates = c.getLockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
+
+                    // need to choose Room Name
+                    CardState chosenLock = activator.getController().chooseSingleCardState(sa, lockStates, "Choose Room to unlock");
+                    if (chosenLock == null) {
+                        continue;
+                    }
+                    c.unlockRoom(activator, chosenLock.getStateName());
+                    break;
+                }
                 break;
             }
         }
