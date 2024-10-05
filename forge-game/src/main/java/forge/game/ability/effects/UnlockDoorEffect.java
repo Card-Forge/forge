@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
@@ -44,6 +45,8 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
         }
         
         for (Card c : list) {
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("Object", c);
             switch (sa.getParamOrDefault("Mode", "ThisDoor")) {          
             case "ThisDoor":
                 c.unlockRoom(activator, sa.getCardStateName());
@@ -52,7 +55,7 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                 List<CardState> states = c.getLockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
 
                 // need to choose Room Name
-                CardState chosen = activator.getController().chooseSingleCardState(sa, states, "Choose Room to unlock");
+                CardState chosen = activator.getController().chooseSingleCardState(sa, states, "Choose Room to unlock", params);
                 if (chosen == null) {
                     continue;
                 }
@@ -63,7 +66,7 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                 case 0:
                     // no locked, all unlocked, can only lock door
                     List<CardState> unlockStates = c.getUnlockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
-                    CardState chosenUnlock = activator.getController().chooseSingleCardState(sa, unlockStates, "Choose Room to lock");
+                    CardState chosenUnlock = activator.getController().chooseSingleCardState(sa, unlockStates, "Choose Room to lock", params);
                     if (chosenUnlock == null) {
                         continue;
                     }
@@ -74,7 +77,7 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                     List<CardState> bothStates = Lists.newArrayList();
                     bothStates.add(c.getState(CardStateName.LeftSplit));
                     bothStates.add(c.getState(CardStateName.RightSplit));
-                    CardState chosenBoth = activator.getController().chooseSingleCardState(sa, bothStates, "Choose Room to lock or unlock");
+                    CardState chosenBoth = activator.getController().chooseSingleCardState(sa, bothStates, "Choose Room to lock or unlock", params);
                     if (chosenBoth == null) {
                         continue;
                     }
@@ -88,7 +91,7 @@ public class UnlockDoorEffect extends SpellAbilityEffect {
                     List<CardState> lockStates = c.getLockedRooms().stream().map(stateName -> c.getState(stateName)).collect(Collectors.toList());
 
                     // need to choose Room Name
-                    CardState chosenLock = activator.getController().chooseSingleCardState(sa, lockStates, "Choose Room to unlock");
+                    CardState chosenLock = activator.getController().chooseSingleCardState(sa, lockStates, "Choose Room to unlock", params);
                     if (chosenLock == null) {
                         continue;
                     }

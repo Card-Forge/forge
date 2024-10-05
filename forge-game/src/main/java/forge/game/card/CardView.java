@@ -1193,6 +1193,11 @@ public class CardView extends GameEntityView {
         }
 
         @Override
+        public int hashCode() {
+            return Objects.hash(getId(), state);
+        }
+
+        @Override
         public String toString() {
             return (getName() + " (" + getDisplayId() + ")").trim();
         }

@@ -734,7 +734,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message) {
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
         // TODO Auto-generated method stub
         return null;
     }

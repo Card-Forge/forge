@@ -372,7 +372,7 @@ public abstract class SpellAbilityAi {
         return Iterables.getFirst(faces, null);
     }
 
-    public CardState chooseCardState(Player ai, SpellAbility sa, List<CardState> faces) {
+    public CardState chooseCardState(Player ai, SpellAbility sa, List<CardState> faces, Map<String, Object> params) {
         System.err.println("Warning: default (ie. inherited from base class) implementation of chooseCardState is used for " + this.getClass().getName() + ". Consider declaring an overloaded method");
 
         return Iterables.getFirst(faces, null);

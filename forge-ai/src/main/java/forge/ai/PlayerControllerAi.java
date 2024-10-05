@@ -1540,12 +1540,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message) {
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
-        return SpellApiToAi.Converter.get(api).chooseCardState(player, sa, states);
+        return SpellApiToAi.Converter.get(api).chooseCardState(player, sa, states, params);
     }
 
     @Override

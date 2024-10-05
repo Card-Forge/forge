@@ -1845,7 +1845,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message) {
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
         if (states.size() <= 1) {
             return Iterables.getFirst(states, null);
         }
