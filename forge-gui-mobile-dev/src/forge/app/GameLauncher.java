@@ -8,6 +8,7 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.adventure.util.Config;
+import forge.assets.AssetsDownloader;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 
