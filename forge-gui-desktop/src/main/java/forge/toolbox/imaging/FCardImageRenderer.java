@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.CardRarity;
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -749,8 +750,11 @@ public class FCardImageRenderer {
         //draw type
         x += padding;
         w -= padding;
-        String typeLine = CardDetailUtil.formatCardType(state, true).replace(" - ", " — ");
-        drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
+        // check for shared type line
+        if (!state.getType().hasStringType("Room") || state.getState() != CardStateName.RightSplit) {
+            String typeLine = CardDetailUtil.formatCardType(state, true).replace(" - ", " — ");
+            drawVerticallyCenteredString(g, typeLine, new Rectangle(x, y, w, h), TYPE_FONT, TYPE_SIZE);
+        }
     }
 
     /**

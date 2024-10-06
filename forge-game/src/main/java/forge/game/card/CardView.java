@@ -1,6 +1,7 @@
 package forge.game.card;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
 import forge.StaticData;
@@ -38,6 +39,14 @@ public class CardView extends GameEntityView {
         if (c == null) { return null; }
         CardState s = c.getState(state);
         return s == null ? null : s.getView();
+    }
+
+    public static Map<CardStateView, CardState> getStateMap(Iterable<CardState> states) {
+        Map<CardStateView, CardState> stateViewCache = Maps.newLinkedHashMap();
+        for (CardState state : states) {
+            stateViewCache.put(state.getView(), state);
+        }
+        return stateViewCache;
     }
 
     public CardView getBackup() {
@@ -795,7 +804,7 @@ public class CardView extends GameEntityView {
             sb.append(getOwner().getCommanderInfo(this)).append("\r\n");
         }
 
-        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack) {
+        if (isSplitCard() && !isFaceDown() && getZone() != ZoneType.Stack && getZone() != ZoneType.Battlefield) {
             sb.append("(").append(getLeftSplitState().getName()).append(") ");
             sb.append(getLeftSplitState().getAbilityText());
             sb.append("\r\n\r\n").append("(").append(getRightSplitState().getName()).append(") ");
@@ -1181,6 +1190,11 @@ public class CardView extends GameEntityView {
                 return String.valueOf(getId());
             }
             return StringUtils.EMPTY;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getId(), state);
         }
 
         @Override
