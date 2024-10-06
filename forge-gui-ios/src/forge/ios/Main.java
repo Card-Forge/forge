@@ -113,6 +113,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public void closeSplashScreen() {
+            //only for desktop mobile-dev
+        }
+
+        @Override
         public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
 
         }

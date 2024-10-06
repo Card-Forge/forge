@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 import java.awt.Desktop;
+import java.awt.SplashScreen;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -87,6 +88,14 @@ public class Main {
         public void exit() {
             Gdx.app.exit(); //can just use Gdx.app.exit for desktop
             System.exit(0);
+        }
+
+        @Override
+        public void closeSplashScreen() {
+            SplashScreen splash = SplashScreen.getSplashScreen();
+            if (splash != null) {
+                splash.close();
+            }
         }
 
         @Override

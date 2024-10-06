@@ -27,6 +27,7 @@
                     <include>**/bg_splash.png</include>
                     <include>**/bg_texture.jpg</include>
                     <include>**/font1.ttf</include>
+                    <include>**/logo.png</include>
                 </includes>
             </resource>
         </resources>
@@ -84,11 +85,6 @@
                             <errTitle>forge</errTitle>
                             <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
                             <icon>src/main/config/forge-adventure.ico</icon>
-                            <classPath>
-                                <mainClass>forge.app.Main</mainClass>
-                                <addDependencies>false</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
                             <jre>
                                 <minVersion>17</minVersion>
                                 <requiresJdk>jdkOnly</requiresJdk>
@@ -154,6 +150,9 @@
                             <mainClass>forge.app.Main</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <SplashScreen-Image>splash/logo.png</SplashScreen-Image>
+                        </manifestEntries>
                     </archive>
                 </configuration>
                 <executions>

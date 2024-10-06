@@ -641,6 +641,11 @@ public class Main extends AndroidApplication {
         }
 
         @Override
+        public void closeSplashScreen() {
+            //only for desktop mobile-dev
+        }
+
+        @Override
         public boolean isTablet() {
             return isTablet;
         }
