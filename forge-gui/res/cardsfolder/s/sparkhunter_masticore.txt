@@ -2,7 +2,7 @@ Name:Sparkhunter Masticore
 ManaCost:3
 Types:Artifact Creature Masticore
 PT:3/4
-A:SP$ PermanentCreature | Cost$ 3 Discard<1/Card> | SpellDescription$ As an additional cost to cast this spell, discard a card.
+A:SP$ PermanentCreature | Cost$ 3 Discard<1/Card>
 DeckHas:Ability$Discard
 K:Protection:Planeswalker:planeswalkers
 A:AB$ DealDamage | Cost$ 1 | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target planeswalker.
