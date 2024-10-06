@@ -2,7 +2,7 @@ Name:Rottenmouth Viper
 ManaCost:5 B
 Types:Creature Elemental Snake
 PT:6/6
-A:SP$ PermanentCreature | Cost$ 5 B Sac<X/Permanent.nonLand/nonland permanent> | AILogic$ SacToReduceCost | AdditionalDesc$ This spell costs {1} less to cast for each permanent sacrificed this way. | SpellDescription$ As an additional cost to cast this spell, you may sacrifice any number of nonland permanents. This spell costs {1} less to cast for each permanent sacrificed this way.
+A:SP$ PermanentCreature | Cost$ 5 B Sac<X/Permanent.nonLand/nonland permanent> | AILogic$ SacToReduceCost | AdditionalDesc$ This spell costs {1} less to cast for each permanent sacrificed this way.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Relative$ True
 SVar:X:Count$xPaid
 SVar:AIPreference:SacCost$Artifact.token+nonLegendary,Creature.token+powerLE2+toughnessLE2,Creature.cmcLE2+powerLE2+toughnessLE2
