@@ -1050,7 +1050,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isSplitCard() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+        //return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+        // in case or clones or copies
+        return hasState(CardStateName.LeftSplit);
     }
 
     public final boolean isAdventureCard() {
@@ -5998,9 +6000,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean shares = getName(true).equals(name);
 
         // Split cards has extra logic to check if it does share a name with
-        if (isSplitCard()) {
-            shares |= name.equals(getState(CardStateName.LeftSplit).getName());
-            shares |= name.equals(getState(CardStateName.RightSplit).getName());
+        if (!shares) {
+            if (isInPlay()) {
+               // split cards in play are only rooms
+               for (String door : getUnlockedRoomNames()) {
+                   shares |= name.equals(door);
+               }
+            } else { // not on the battlefield
+                if (hasState(CardStateName.LeftSplit)) {
+                    shares |= name.equals(getState(CardStateName.LeftSplit).getName());
+                }
+                if (hasState(CardStateName.RightSplit)) {
+                    shares |= name.equals(getState(CardStateName.RightSplit).getName());
+                }
+            }
+            // TODO does it need extra check for stack?
         }
 
         if (!shares && hasNonLegendaryCreatureNames()) {
