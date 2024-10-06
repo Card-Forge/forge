@@ -7,5 +7,5 @@ SVar:TrigLook:DB$ PeekAndReveal | PeekAmount$ 7 | NoReveal$ True | RememberPeeke
 SVar:DBPump:DB$ Pump | KW$ First Strike & Flying & Deathtouch & Double Strike & Haste & Hexproof & Indestructible & Lifelink & Menace & Protection & Reach & Trample & Vigilance | SharedKeywordsZone$ Library | SharedRestrictions$ Card.IsRemembered | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle
-DeckHints:Keyword$Flying|FirstStrike|DoubleStrike|Deathtouch|Haste|Hexproof|Indestructible|Lifelink|Menace|Protection|Reach|Trample|Vigilance
+DeckHints:Keyword$Flying|First Strike|Double Strike|Deathtouch|Haste|Hexproof|Indestructible|Lifelink|Menace|Protection|Reach|Trample|Vigilance
 Oracle:When Priest of Possibility enters, look at the top seven cards of your library. If a card among them has flying, Priest of Possibility perpetually gains flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance. Then shuffle.
