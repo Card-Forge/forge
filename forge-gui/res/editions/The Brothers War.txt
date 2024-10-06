@@ -305,11 +305,6 @@ ScryfallCode=BRO
 290 R Terror Ballista @Leon Tukker
 291 R Artificer's Dragon @Leon Tukker
 292 R Woodcaller Automaton @Ryan Pancoast
-373 R Rescue Retriever @Jesper Ejsing
-374 R Geology Enthusiast @Fajareka Setiawan
-375 R Terror Ballista @Leon Tukker
-376 R Artificer's Dragon @Leon Tukker
-377 R Woodcaller Automaton @Ryan Pancoast
 
 [borderless]
 293 M Teferi, Temporal Pilgrim @Cosmin Podar
@@ -394,6 +389,11 @@ ScryfallCode=BRO
 370 R Fortified Beachhead @Christian Dimitrov
 371 R Hall of Tagsin @Christian Dimitrov
 372 R Mishra's Foundry @Leon Tukker
+373 R Rescue Retriever @Jesper Ejsing
+374 R Geology Enthusiast @Fajareka Setiawan
+375 R Terror Ballista @Leon Tukker
+376 R Artificer's Dragon @Leon Tukker
+377 R Woodcaller Automaton @Ryan Pancoast
 
 [buy a box]
 378 R Mishra's Foundry @Leon Tukker
