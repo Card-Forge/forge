@@ -939,6 +939,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return alt ? StaticData.instance().getCommonCards().getName(name, true) :  name;
     }
 
+    public final boolean hasNameOverwrite() {
+        return changedCardNames.values().stream().anyMatch(CardChangedName::isOverwrite);
+    }
+
     public final boolean hasNonLegendaryCreatureNames() {
         boolean result = false;
         for (CardChangedName change : this.changedCardNames.values()) {
@@ -6003,7 +6007,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean shares = getName(true).equals(name);
 
         // Split cards has extra logic to check if it does share a name with
-        if (!shares) {
+        if (!shares && !hasNameOverwrite()) {
             if (isInPlay()) {
                // split cards in play are only rooms
                for (String door : getUnlockedRoomNames()) {
