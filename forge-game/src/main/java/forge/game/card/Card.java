@@ -1050,7 +1050,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isSplitCard() {
-        //return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+        // Normal Split Cards, these need to return true before Split States are added
+        if (getRules() != null && getRules().getSplitType() == CardSplitType.Split) {
+            return true;
+        };
         // in case or clones or copies
         return hasState(CardStateName.LeftSplit);
     }
