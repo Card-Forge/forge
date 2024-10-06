@@ -796,6 +796,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return setState(CardStateName.FaceDown, false);
     }
 
+    public void forceTurnFaceUp() {
+        turnFaceUp(false, null);
+    }
+
     public boolean turnFaceUp(SpellAbility cause) {
         return turnFaceUp(true, cause);
     }
@@ -4088,13 +4092,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
-        // CR 506.4 attacked planeswalkers leave combat
-        boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
-        if (checkCombat && !types.isPlaneswalker()) {
-            game.getCombat().removeFromCombat(this);
-        }
-        return types;
+        return state.getType().getTypeWithChanges(changedCardTypes);
     }
 
     public final CardTypeView getOriginalType() {
@@ -7713,12 +7711,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             this.removeChangedCardKeywords(c.getLayerTimestamp(), stAb.getId(), false);
             this.removeChangedCardTraits(c.getLayerTimestamp(), stAb.getId());
         }
-    }
-
-    public void forceTurnFaceUp() {
-        getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
-        turnFaceUp(false, null);
-        getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 
     public final void addGoad(Long timestamp, final Player p) {

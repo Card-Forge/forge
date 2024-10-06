@@ -44,11 +44,11 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
 
     @Override
     protected String getMessage() {
-	StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         if ( FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT) &&
-	     sa != null ) {
-	    sb.append(sa.getStackDescription()).append("\n");
-	}
+                sa != null ) {
+            sb.append(sa.getStackDescription()).append("\n");
+        }
         sb.append(TextUtil.concatNoSpace("Choose ", cardType, " to tap for ", description, ".\nRemaining mana cost is ", remainingCost.toString()));
         return sb.toString();
     }
