@@ -119,6 +119,12 @@ public class CardFactoryUtil {
         return morphDown;
     }
 
+    public static SpellAbility abilityUnlockRoom(CardState cardState) {
+        String unlockStr = "ST$ UnlockDoor | Cost$ " + cardState.getManaCost().getShortString() + " | Unlock$ True | SpellDescription$ Unlock " + cardState.getName();
+
+        return AbilityFactory.getAbility(unlockStr, cardState);
+    }
+
     /**
      * <p>
      * abilityMorphUp.
