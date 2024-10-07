@@ -262,6 +262,8 @@ ScryfallCode=BBD
 252 L Swamp @Titus Lunter
 253 L Mountain @Titus Lunter
 254 L Forest @Titus Lunter
+
+[etched]
 255 M Will Kenrith @Anna Steinbauer
 256 M Rowan Kenrith @Anna Steinbauer
 

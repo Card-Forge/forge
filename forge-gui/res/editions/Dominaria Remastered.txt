@@ -274,7 +274,7 @@ ScryfallCode=DMR
 260 U Treva's Ruins @Jerry Tiritilli
 261 R Woodland Cemetery @Christine Choi
 
-[showcase]
+[alternate frame]
 262 R Divine Sacrament @Ekaterina Burmak
 263 R Enlightened Tutor @Howard Lyon
 264 R Glory @Donato Giancola

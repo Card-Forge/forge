@@ -343,6 +343,8 @@ ScryfallCode=2XM
 330 C Urza's Power Plant @Brian Snõddy
 331 C Urza's Tower @Brian Snõddy
 332 R Wooded Bastion @Christopher Moeller
+
+[borderless]
 333 M Karn Liberated @Mark Tedin
 334 M Jace, the Mind Sculptor @Jason Chan
 335 M Avacyn, Angel of Hope @Randy Vargas
@@ -383,6 +385,8 @@ ScryfallCode=2XM
 370 R Urza's Mine @Mark Tedin
 371 R Urza's Power Plant @Mark Tedin
 372 R Urza's Tower @Mark Tedin
+
+[buy a box]
 373 L Plains @John Avon
 374 L Plains @Noah Bradley
 375 L Island @John Avon

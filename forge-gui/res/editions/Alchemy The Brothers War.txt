@@ -37,3 +37,4 @@ ScryfallCode=YBRO
 28 U Patchplate Resolute @Wayne Reynolds
 29 R Urza's Construction Drone @Yeong-Hao Han
 30 R Warzone Duplicator @Daniel Ljunggren
+31 M History of Benalia @Alix Branwyn

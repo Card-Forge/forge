@@ -162,7 +162,7 @@ ScryfallCode=CN2
 150 C Unnerve @Terese Nielsen
 151 U Burn Away @Vincent Proce
 152 R Burning Wish @Scott M. Fischer
-153 R Charmbreaker Devils @Dan Scott
+153 R Charmbreaker Devils @Dan Murayama Scott
 154 U Coordinated Assault @John Severin Brassell
 155 C Ember Beast @David Rapoza
 156 C Fiery Fall @Daarken
