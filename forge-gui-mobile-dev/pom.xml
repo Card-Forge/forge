@@ -27,7 +27,7 @@
                     <include>**/bg_splash.png</include>
                     <include>**/bg_texture.jpg</include>
                     <include>**/font1.ttf</include>
-                    <include>**/logo.png</include>
+                    <include>**/logo.gif</include>
                 </includes>
             </resource>
         </resources>
@@ -151,7 +151,7 @@
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <SplashScreen-Image>splash/logo.png</SplashScreen-Image>
+                            <SplashScreen-Image>splash/logo.gif</SplashScreen-Image>
                         </manifestEntries>
                     </archive>
                 </configuration>
