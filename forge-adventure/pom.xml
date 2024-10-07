@@ -58,7 +58,7 @@
                     <executions>
                         <!--extra-->
                         <execution>
-                            <id>l4j-adv</id>
+                            <id>l4j-adv-editor</id>
                             <phase>package</phase>
                             <goals>
                                 <goal>launch4j</goal>
