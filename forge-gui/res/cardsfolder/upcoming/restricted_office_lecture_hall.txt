@@ -11,5 +11,5 @@ ALTERNATE
 Name:Lecture Hall
 ManaCost:5 U U
 Types:Enchantment Room
-S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Hexproof | Description$ nOther permanents you control have hexproof.
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddKeyword$ Hexproof | Description$ Other permanents you control have hexproof.
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nOther permanents you control have hexproof.
