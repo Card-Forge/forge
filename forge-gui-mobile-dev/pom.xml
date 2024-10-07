@@ -87,7 +87,7 @@
                             <icon>src/main/config/forge-adventure.ico</icon>
                             <jre>
                                 <minVersion>17</minVersion>
-                                <requiresJdk>jdkOnly</requiresJdk>
+                                <requiresJdk>true</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
                                     <opt>-Dfile.encoding=UTF-8</opt>

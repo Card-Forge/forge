@@ -377,7 +377,7 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>17</minVersion>
-                                        <requiresJdk>jdkOnly</requiresJdk>
+                                        <requiresJdk>true</requiresJdk>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>
                                             <opt>-Dfile.encoding=UTF-8</opt>
@@ -563,7 +563,7 @@
                                     </classPath>
                                     <jre>
                                         <minVersion>17</minVersion>
-                                        <requiresJdk>jdkOnly</requiresJdk>
+                                        <requiresJdk>true</requiresJdk>
                                         <maxHeapSize>4096</maxHeapSize>
                                         <opts>
                                             <opt>-Dfile.encoding=UTF-8</opt>
