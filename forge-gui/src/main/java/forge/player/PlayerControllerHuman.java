@@ -19,6 +19,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -1830,12 +1831,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        return getGui().one(message, faces);
+    }
+
+    @Override
     public CounterType chooseCounterType(final List<CounterType> options, final SpellAbility sa, final String prompt,
                                          Map<String, Object> params) {
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }
         return getGui().one(prompt, options);
+    }
+
+    @Override
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
+        if (states.size() <= 1) {
+            return Iterables.getFirst(states, null);
+        }
+        Map<CardStateView, CardState> cache = CardView.getStateMap(states);
+        CardStateView chosen = getGui().one(message, Lists.newArrayList(cache.keySet()));
+        return cache.get(chosen);
     }
 
     @Override
@@ -3216,7 +3232,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
-        ICardFace face = getGui().one(message, faces);
+        ICardFace face = chooseSingleCardFace(sa, faces, message);
         return face == null ? "" : face.getName();
     }
 

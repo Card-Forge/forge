@@ -5,5 +5,5 @@ PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. CARDNAME gains that ability until your next upkeep.
 SVar:TrigChoice:DB$ Pump | Defined$ Self | KWChoice$ Flying,First Strike,Trample,Rampage:3 | Duration$ UntilYourNextUpkeep
 AI:RemoveDeck:All
-DeckHas:Keyword$Rampage|Trample|FirstStrike|Flying
+DeckHas:Keyword$Rampage|Trample|First Strike|Flying
 Oracle:At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep. (Whenever a creature with rampage 3 becomes blocked, it gets +3/+3 until end of turn for each creature blocking it beyond the first.)
