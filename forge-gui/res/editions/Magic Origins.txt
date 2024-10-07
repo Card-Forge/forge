@@ -284,6 +284,8 @@ ScryfallCode=ORI
 270 L Forest @Jonas De Ro
 271 L Forest @Jonas De Ro
 272 L Forest @Vincent Proce
+
+[precon product]
 273 R Aegis Angel @Aleksi Briclot
 274 C Divine Verdict @Kev Walker
 275 C Eagle of the Watch @Scott Murphy

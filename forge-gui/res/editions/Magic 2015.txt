@@ -281,6 +281,8 @@ ScryfallCode=M15
 267 L Forest @Steven Belledin
 268 L Forest @Noah Bradley
 269 L Forest @Jonas De Ro
+
+[precon product]
 270 R Aegis Angel @Aleksi Briclot
 271 C Divine Verdict @Kev Walker
 272 C Inspired Charge @Wayne Reynolds

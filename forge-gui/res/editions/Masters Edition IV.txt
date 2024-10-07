@@ -266,18 +266,20 @@ ScryfallCode=ME4
 255 R Tundra @Jesper Myrfors
 256 R Underground Sea @Rob Alexander
 257a L Urza's Mine @Anson Maddocks
+258a L Urza's Power Plant @Mark Tedin
+259a L Urza's Tower @Mark Poole
+260 R Volcanic Island @Brian Snõddy
+
+[alternate art]
 257b L Urza's Mine @Anson Maddocks
 257c L Urza's Mine @Anson Maddocks
 257d L Urza's Mine @Anson Maddocks
-258a L Urza's Power Plant @Mark Tedin
 258b L Urza's Power Plant @Mark Tedin
 258c L Urza's Power Plant @Mark Tedin
 258d L Urza's Power Plant @Mark Tedin
-259a L Urza's Tower @Mark Poole
 259b L Urza's Tower @Mark Poole
 259c L Urza's Tower @Mark Poole
 259d L Urza's Tower @Mark Poole
-260 R Volcanic Island @Brian Snõddy
 
 [UrzaLands]
 1 Urza's Tower|ME4|1
