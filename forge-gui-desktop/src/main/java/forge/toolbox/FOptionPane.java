@@ -15,7 +15,9 @@ import javax.swing.text.StyleConstants;
 
 import com.google.common.collect.ImmutableList;
 
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
 import forge.view.FDialog;
@@ -81,7 +83,7 @@ public class FOptionPane extends FDialog {
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, Component comp, final List<String> options) {
         return showOptionDialog(message, title, icon, comp, options, 0);
     }
-    
+
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final List<String> options, final int defaultOption) {
         // not fully done loading yet, avoid crash when called by colorCheck for random decks (as each item gets selected after another)
         if (FView.SINGLETON_INSTANCE.getSplash() != null) {
@@ -102,7 +104,7 @@ public class FOptionPane extends FDialog {
         optionPane.dispose();
         return dialogResult;
     }
-    
+
     public static String showInputDialog(final String message, final String title) {
         return showInputDialog(message, title, null, "", null);
     }
@@ -164,6 +166,7 @@ public class FOptionPane extends FDialog {
         final int gapBottom = comp == null ? gapAboveButtons : padding;
         FLabel centeredLabel = null;
         FTextPane centeredPrompt = null;
+        final int okShortCut = Integer.parseInt(FModel.getPreferences().getPref(ForgePreferences.FPref.SHORTCUT_PRESS_BUTTON));
 
         if (icon != null) {
             if (icon.getWidth() < 100) {
@@ -244,27 +247,21 @@ public class FOptionPane extends FDialog {
             btn.addKeyListener(new KeyAdapter() { //hook certain keys to move focus between buttons
                 @Override
                 public void keyPressed(final KeyEvent e) {
-                    switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT:
-                        if (option > 0) {
-                            buttons[option - 1].requestFocusInWindow();
-                        }
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        if (option < lastOption) {
-                            buttons[option + 1].requestFocusInWindow();
-                        }
-                        break;
-                    case KeyEvent.VK_HOME:
-                        if (option > 0) {
-                            buttons[0].requestFocusInWindow();
-                        }
-                        break;
-                    case KeyEvent.VK_END:
-                        if (option < lastOption) {
-                            buttons[lastOption].requestFocusInWindow();
-                        }
-                        break;
+                    int code = e.getKeyCode();
+                    if(okShortCut == code) {
+                        btn.doClick();
+                    }
+                    else if(KeyEvent.VK_LEFT == code && option > 0){
+                        buttons[option - 1].requestFocusInWindow();
+                    }
+                    else if( KeyEvent.VK_RIGHT == code && option < lastOption){
+                        buttons[option + 1].requestFocusInWindow();
+                    }
+                    else if(KeyEvent.VK_HOME == code && option > 0) {
+                        buttons[0].requestFocusInWindow();
+                    }
+                    else if(KeyEvent.VK_END == code && option < lastOption) {
+                        buttons[lastOption].requestFocusInWindow();
                     }
                 }
             });
@@ -275,7 +272,7 @@ public class FOptionPane extends FDialog {
             x += dx;
         }
 
-        if (centeredLabel != null) {
+        if (null != centeredPrompt) {
             centeredLabel.setPreferredSize(new Dimension(width - 2 * padding, centeredLabel.getMinimumSize().height));
             centeredPrompt.setPreferredSize(new Dimension(width - 2 * padding, centeredPrompt.getPreferredSize().height));
         }
