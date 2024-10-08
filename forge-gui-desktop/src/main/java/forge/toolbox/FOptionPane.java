@@ -122,46 +122,56 @@ public class FOptionPane extends FDialog {
 
     @SuppressWarnings("unchecked")
     public static <T> T showInputDialog(final String message, final String title, final SkinImage icon, final String initialInput, final List<T> inputOptions) {
-        final JComponent inputField;
-        FTextField txtInput = null;
-        FComboBox<T> cbInput = null;
-        if (inputOptions == null) {
-            txtInput = new FTextField.Builder().text(initialInput).build();
-            inputField = txtInput;
-        } else {
-            cbInput = new FComboBox<>(inputOptions);
-            cbInput.setSelectedItem(initialInput);
-            inputField = cbInput;
-        }
+        final Callable<T> showChoice = () -> {
+            final JComponent inputField;
+            FTextField txtInput = null;
+            FComboBox<T> cbInput = null;
+            if (inputOptions == null) {
+                txtInput = new FTextField.Builder().text(initialInput).build();
+                inputField = txtInput;
+            } else {
+                cbInput = new FComboBox<>(inputOptions);
+                cbInput.setSelectedItem(initialInput);
+                inputField = cbInput;
+            }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), -1);
-        optionPane.setDefaultFocus(inputField);
-        inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    optionPane.setResult(0);
+            final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), -1);
+            optionPane.setDefaultFocus(inputField);
+            inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        optionPane.setResult(0);
+                    }
+                }
+            });
+            optionPane.setVisible(true);
+            final int dialogResult = optionPane.result;
+            optionPane.dispose();
+            if (dialogResult == 0) {
+                if (inputOptions == null) {
+                    return (T)txtInput.getText();
+                } else {
+                    return cbInput.getSelectedItem();
                 }
             }
-        });
-        optionPane.setVisible(true);
-        final int dialogResult = optionPane.result;
-        optionPane.dispose();
-        if (dialogResult == 0) {
-            if (inputOptions == null) {
-                return (T)txtInput.getText();
-            } else {
-                return cbInput.getSelectedItem();
-            }
+            return null;
+        };
+        final FutureTask<T> future = new FutureTask<>(showChoice);
+        FThreads.invokeInEdtAndWait(future);
+        try {
+            return future.get();
+        } catch (final Exception e) { // should be no exception here
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
     private final FButton[] buttons;
 
     public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
-        //FThreads.assertExecutedByEdt(true); TODO: Verify whether the rest of the invocations of this are thread safe.
+        FThreads.assertExecutedByEdt(true);
         this.setTitle(title);
 
         final int padding = 10;
