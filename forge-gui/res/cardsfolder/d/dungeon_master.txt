@@ -3,7 +3,7 @@ ManaCost:2 W U
 Types:Legendary Planeswalker Dungeon Master
 Loyalty:1
 K:ETBReplacement:Other:RollLoyal
-SVar:RollLoyal:DB$ RollDice | Sides$ 4 | ResultSVar$ Result | SubAbility$ DBLoyalty | SpellDescription$ Add 1d4 loyalty counters to CARDNAME
+SVar:RollLoyal:DB$ RollDice | Sides$ 4 | ResultSVar$ Result | SubAbility$ DBLoyalty | SpellDescription$ Add 1d4 loyalty counters to CARDNAME.
 SVar:DBLoyalty:DB$ PutCounter | Defined$ Self | CounterType$ LOYALTY | CounterNum$ Result | ETB$ True
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Opponent | TokenOwner$ Targeted | TokenScript$ b_1_1_skeleton_opp_life | Planeswalker$ True | SpellDescription$ Target opponent creates a 1/1 black Skeleton creature token with "When this creature dies, each opponent gains 2 life."
 A:AB$ RollDice | Cost$ AddCounter<1/LOYALTY> | Sides$ 20 | ResultSubAbilities$ 1:DBSkipTurn,12-20:DBDraw | Planeswalker$ True | SpellDescription$ Roll a d20. If you roll a 1, skip your next turn. If you roll a 12 or higher, draw a card.

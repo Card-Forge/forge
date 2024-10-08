@@ -64,6 +64,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -3953,5 +3955,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public Player getDeclaresBlockers() {
         Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
         return e == null ? null : e.getValue();
+    }
+
+    public List<String> getUnlockedDoors() {
+        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+                .filter(Card::isRoom)
+                .map(Card::getUnlockedRoomNames)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }
