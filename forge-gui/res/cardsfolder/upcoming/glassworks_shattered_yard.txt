@@ -9,7 +9,7 @@ Oracle:(You may cast either half. That door unlocks on the battlefield. As a sor
 ALTERNATE
 
 Name:Shattered Yard
-ManaCost:4 R R
+ManaCost:4 R
 Types:Enchantment Room
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAllDamage | TriggerDescription$ At the beginning of your end step, this Room deals 1 damage to each opponent.
 SVar:TrigAllDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1
