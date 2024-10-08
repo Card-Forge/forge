@@ -204,24 +204,45 @@ public class WorldStage extends GameStage implements SaveFileContent {
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
                 PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
-                if (!point.getPointOfInterest().getActive())
-                {
+
+                // Check if the POI is active
+                if (!point.getPointOfInterest().getActive()) {
                     continue;
                 }
-                if (player.collideWith(point.getBoundingRect())) {
-                    if (point == collidingPoint) {
-                        continue;
+
+                // Define a larger bounding box around the POI
+                Rectangle largerBoundingRect = createLargerHitbox(point.getBoundingRect(), 100); // Expand hitbox by 100 units
+                boolean playerInLargerZone = player.collideWith(largerBoundingRect);
+                boolean playerInMainZone = player.collideWith(point.getBoundingRect());
+
+                // Track if player is within the larger zone
+                if (playerInLargerZone) {
+                    // Check if player is in the main hitbox, but only trigger POI if they have exited before
+                    if (playerInMainZone && point.hasExited()) {
+                        // Save the game and trigger the POI if it's a new collision
+                        WorldSave.getCurrentSave().autoSave();
+                        loadPOI(point.getPointOfInterest());
+                        point.getMapSprite().checkOut();
+                        collidingPoint = point;
+                        point.setHasExited(false); // Player is inside the POI, reset exit flag
                     }
-                    WorldSave.getCurrentSave().autoSave();
-                    loadPOI(point.getPointOfInterest());
-                    point.getMapSprite().checkOut();
                 } else {
-                    if (point == collidingPoint) {
-                        collidingPoint = null;
-                    }
+                    // Player has exited the larger zone, allowing them to re-enter later
+                    point.setHasExited(true);
+                    collidingPoint = null;
                 }
             }
         }
+    }
+
+    // Helper method to create a larger hitbox around a POI
+    private Rectangle createLargerHitbox(Rectangle originalRect, float expansionAmount) {
+        return new Rectangle(
+                originalRect.x - expansionAmount / 2,
+                originalRect.y - expansionAmount / 2,
+                originalRect.width + expansionAmount,
+                originalRect.height + expansionAmount
+        );
     }
 
     public void loadPOI(PointOfInterest poi) {

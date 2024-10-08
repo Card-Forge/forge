@@ -11,6 +11,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
  * MapSprite for points of interest to add a bounding rect for collision detection
  */
 public class PointOfInterestMapSprite extends MapSprite {
+    private boolean hasExited = false; // Track exit state
     PointOfInterest pointOfInterest;
     Texture debugTexture;
     Rectangle boundingRect;
@@ -44,6 +45,14 @@ public class PointOfInterestMapSprite extends MapSprite {
 
     public Rectangle getBoundingRect() {
         return boundingRect;
+    }
+
+    public boolean hasExited() {
+        return hasExited;
+    }
+
+    public void setHasExited(boolean hasExited) {
+        this.hasExited = hasExited;
     }
 
     @Override
