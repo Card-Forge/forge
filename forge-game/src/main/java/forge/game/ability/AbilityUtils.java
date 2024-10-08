@@ -3,7 +3,6 @@ package forge.game.ability;
 import com.google.common.base.Functions;
 import com.google.common.collect.*;
 import com.google.common.math.IntMath;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
@@ -2508,6 +2507,19 @@ public class AbilityUtils {
             final String[] workingCopy = l[0].split(" ", 2);
             final String validFilter = workingCopy[1];
             return doXMath(CardLists.getValidCardCount(game.getLeftGraveyardThisTurn(), validFilter, player, c, ctb), expr, c, ctb);
+        }
+
+        // Count$UnlockedDoors <Valid>
+        if (sq[0].startsWith("UnlockedDoors")) {
+            final String[] workingCopy = l[0].split(" ", 2);
+            final String validFilter = workingCopy[1];
+
+            int unlocked = 0;
+            for (Card doorCard : CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validFilter, player, c, ctb)) {
+                unlocked += doorCard.getUnlockedRooms().size();
+            }
+
+            return doXMath(unlocked, expr, c, ctb);
         }
 
         // Manapool
