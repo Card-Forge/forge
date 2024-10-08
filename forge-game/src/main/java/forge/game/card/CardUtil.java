@@ -215,6 +215,24 @@ public final class CardUtil {
         return ret;
     }
 
+    public static CardState getEmptyRoomCharacteristic(Card c) {
+        return getEmptyRoomCharacteristic(c, CardStateName.EmptyRoom);
+    }
+    public static CardState getEmptyRoomCharacteristic(Card c, CardStateName state) {
+        final CardType type = new CardType(false);
+        type.add("Enchantment");
+        type.add("Room");
+        final CardState ret = new CardState(c, state);
+
+        ret.setName("");
+        ret.setType(type);
+
+        // find new image key for empty room
+        ret.setImageKey(c.getImageKey());
+
+        return ret;
+    }
+
     // a nice entry point with minimum parameters
     public static Set<String> getReflectableManaColors(final SpellAbility sa) {
         return getReflectableManaColors(sa, sa, Sets.newHashSet(), new CardCollection());
