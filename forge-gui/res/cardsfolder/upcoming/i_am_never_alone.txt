@@ -1,6 +1,6 @@
 Name:I Am Never Alone
 ManaCost:no cost
 Types:Scheme
-T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBCopyCommander | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a token that’s a copy of your commander, except it’s not legendary.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBCopyCommander | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create a token that's a copy of your commander, except it's not legendary.
 SVar:DBCopyCommander:DB$ CopyPermanent | Choices$ Creature.IsCommander+YouOwn | Defined$ ValidAll Creature.IsCommander+YouOwn  | ChoiceTitle$ Choose a commander you own | NonLegendary$ True
-Oracle:When you set this scheme in motion, create a token that’s a copy of your commander, except it’s not legendary.\n"This is but a pale shadow of my true form. Cower before it, and despair."
+Oracle:When you set this scheme in motion, create a token that's a copy of your commander, except it's not legendary.\n"This is but a pale shadow of my true form. Cower before it, and despair."
