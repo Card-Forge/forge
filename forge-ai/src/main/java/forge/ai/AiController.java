@@ -937,9 +937,6 @@ public class AiController {
         if (!sa.checkRestrictions(spellHost, player)) {
             return AiPlayDecision.AnotherTime;
         }
-        if (sa instanceof SpellPermanent) {
-            return canPlayFromEffectAI((SpellPermanent) sa, false, true);
-        }
         if (sa.usesTargeting()) {
             if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
                 return AiPlayDecision.TargetingFailed;
@@ -949,6 +946,9 @@ public class AiController {
             }
         }
         if (sa instanceof Spell) {
+            if (card.isPermanent()) {
+                return canPlayFromEffectAI((Spell) sa, false, true);
+            }
             if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
                     ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
                 return AiPlayDecision.CurseEffects;
@@ -1034,8 +1034,8 @@ public class AiController {
     }
 
     public CardCollection getCardsToDiscard(int min, final int max, final CardCollection validCards, final SpellAbility sa) {
-        if (validCards.size() < min) {
-            return null;
+        if (validCards.size() <= min) {
+            return validCards; //return all valid cards since they will be discarded without filtering needed
         }
 
         Card sourceCard = null;
@@ -1279,7 +1279,7 @@ public class AiController {
                 return AiPlayDecision.WillPlay;
             }
 
-            if (spell instanceof SpellPermanent) {
+            if (card.isPermanent()) {
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }

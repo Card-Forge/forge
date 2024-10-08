@@ -11,4 +11,4 @@ SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefiel
 SVar:DBAttach:DB$ Attach | Object$ Targeted | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
-Oracle:As long as Ratonhnhaké꞉ton hasn't dealt damage yet, it has hexproof and can't be blocked.\nWhenever Ratonhnhaké꞉ton deals combat damage to a player, create a 1/1 black Assassin creature token with menace. When you do, return target Equipment card from your graveyard to the battlefield, then attach it to that token.
+Oracle:As long as Ratonhnhaké:ton hasn't dealt damage yet, it has hexproof and can't be blocked.\nWhenever Ratonhnhaké:ton deals combat damage to a player, create a 1/1 black Assassin creature token with menace. When you do, return target Equipment card from your graveyard to the battlefield, then attach it to that token.

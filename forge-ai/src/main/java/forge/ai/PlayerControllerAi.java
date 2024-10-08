@@ -1531,6 +1531,24 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardFace(player, sa, faces);
+    }
+
+    @Override
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardState(player, sa, states, params);
+    }
+
+    @Override
     public Card chooseDungeon(Player ai, List<PaperCard> dungeonCards, String message) {
         // TODO: improve the conditions that define which dungeon is a viable option to choose
         List<String> dungeonNames = Lists.newArrayList();
