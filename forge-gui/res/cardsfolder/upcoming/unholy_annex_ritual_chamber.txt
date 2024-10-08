@@ -7,6 +7,7 @@ SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare
 SVar:DBLoseLife1:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 SVar:DBLoseLife2:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+SVar:X:Count$Valid Demon.YouCtrl
 DeckHas:Ability$LifeGain
 AlternateMode:Split
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nAt the beginning of your end step, draw a card. If you control a Demon, each opponent loses 2 life and you gain 2 life. Otherwise, you lose 2 life.
