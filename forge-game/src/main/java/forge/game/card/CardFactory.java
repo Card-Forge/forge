@@ -33,6 +33,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
@@ -266,6 +267,11 @@ public class CardFactory {
                 for (StaticAbility st : card.getCurrentState().getStaticAbilities()) {
                     if (st.isIntrinsic()) {
                         original.addStaticAbility(st.copy(card, false));
+                    }
+                }
+                for (ReplacementEffect re : card.getCurrentState().getReplacementEffects()) {
+                    if (re.isIntrinsic()) {
+                        original.addReplacementEffect(re.copy(card, false));
                     }
                 }
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
