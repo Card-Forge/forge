@@ -13,7 +13,6 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     Iterable<Supertype> getSupertypes();
     Iterable<String> getSubtypes();
     Iterable<String> getExcludedCreatureSubTypes();
-    Iterable<String> getAllTypes();
 
     Set<String> getCreatureTypes();
     Set<String> getLandTypes();
