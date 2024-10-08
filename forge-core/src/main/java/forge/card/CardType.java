@@ -312,6 +312,21 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     @Override
+    public Iterable<String> getAllTypes() {
+        final Set<String> allTypes = Sets.newHashSet();
+        for (final Supertype st : supertypes) {
+            allTypes.add(st.name());
+        }
+        for (final CoreType ct : coreTypes) {
+            allTypes.add(ct.name());
+        }
+        for (final String st : subtypes) {
+            allTypes.add(st);
+        }
+        return allTypes;
+    }
+
+    @Override
     public Set<String> getLandTypes() {
         final Set<String> landTypes = Sets.newHashSet();
         if (isLand()) {
@@ -779,13 +794,26 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (ctOther == null) {
             return false;
         }
-
         for (final CoreType type : getCoreTypes()) {
             if (ctOther.hasType(type)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean sharesAllCardTypesWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+        List<String> ctOtherCoreTypes = new ArrayList<>();
+        ctOther.getAllTypes().forEach(ctOtherCoreTypes::add);
+        for (final String type : getAllTypes()) {
+            if (!ctOtherCoreTypes.contains(type)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean sharesSubtypeWith(final CardTypeView ctOther) {

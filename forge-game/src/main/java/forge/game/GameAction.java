@@ -1870,6 +1870,8 @@ public class GameAction {
 
     public final CardCollection sacrifice(final Iterable<Card> list, final SpellAbility source, final boolean effect, Map<AbilityKey, Object> params) {
         Multimap<Player, Card> lki = MultimapBuilder.hashKeys().arrayListValues().build();
+        final boolean showRevealDialog = source != null && source.hasParam("ShowSacrificedCards");
+
         CardCollection result = new CardCollection();
         for (Card c : list) {
             if (c == null) {
@@ -1889,6 +1891,10 @@ public class GameAction {
             Card changed = sacrificeDestroy(c, source, params);
             if (changed != null) {
                 result.add(changed);
+            }
+            if (showRevealDialog) {
+                final String message = Localizer.getInstance().getMessage("lblSacrifice");
+                game.getAction().reveal(result, ZoneType.Graveyard, c.getOwner(), false, message, false);
             }
         }
         for (Map.Entry<Player, Collection<Card>> e : lki.asMap().entrySet()) {

@@ -13,6 +13,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     Iterable<Supertype> getSupertypes();
     Iterable<String> getSubtypes();
     Iterable<String> getExcludedCreatureSubTypes();
+    Iterable<String> getAllTypes();
 
     Set<String> getCreatureTypes();
     Set<String> getLandTypes();
@@ -30,6 +31,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     public boolean sharesLandTypeWith(final CardTypeView ctOther);
     public boolean sharesPermanentTypeWith(final CardTypeView ctOther);
     public boolean sharesCardTypeWith(final CardTypeView ctOther);
+    public boolean sharesAllCardTypesWith(final CardTypeView ctOther);
 
     boolean isPermanent();
     boolean isCreature();
