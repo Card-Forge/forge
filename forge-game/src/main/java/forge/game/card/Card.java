@@ -1748,12 +1748,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final void subtractCounter(final CounterType counterName, final int n, final Player remover) {
-        if (canRemoveCounters(counterName)) {
-            subtractCounter(counterName, n, remover, false);
-        }
+        subtractCounter(counterName, n, remover, false);
     }
 
     public final void subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
+        if (!canRemoveCounters(counterName)) {
+            return;
+        }
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - n, 0);
 
