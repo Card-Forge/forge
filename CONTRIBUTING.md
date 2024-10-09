@@ -83,12 +83,11 @@ Google no longer supports Android SDK releases for Eclipse. use IntelliJ.
 
 #### Android SDK
 
-Reference SO for obtaining a specific release: https://stackoverflow.com/questions/27043522/where-can-i-download-an-older-version-of-the-android-sdk
+TBD
 
 ##### Windows
 
-Download the following archived version of the Android SDK: http://dl-ssl.google.com/android/repository/tools_r25.2.3-windows.zip. Install it somewhere on your machine.  This is referenced
-in the following instructions as your 'Android SDK Install' path.
+TBD
 
 ##### Linux / Mac OSX
 
@@ -102,8 +101,8 @@ TBD
 
 In Intellij, if the SDK Manager is not already running, go to Tools > Android > Android SDK Manager.  Install the following options / versions:
 
-- Android SDK Build-tools 34.0.0
-- Android 14 (API 34) SDK Platform
+- Android SDK Build-tools 35.0.0
+- Android 15 (API 35) SDK Platform
 
 #### Proguard update
 

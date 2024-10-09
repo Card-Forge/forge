@@ -46,8 +46,8 @@ jobs:
       - name: Set Up Android tools
         run: |
           JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-33"
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;34.0.0"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-35"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.0"
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |
@@ -89,7 +89,7 @@ jobs:
           d=$(date +%m-%d)
           # Replace date in forge-gui-mobile/src/forge/Forge.java
           sed -i -e "s/-SNAPSHOT/-SNAPSHOT-${d}/g" forge-gui-mobile/src/forge/Forge.java
-          mvn -U -B -P android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=34.0.0 -Dmaven.test.skip=true
+          mvn -U -B -P android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
           mkdir -p  forge-gui-android/target/upload
           mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
           mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/

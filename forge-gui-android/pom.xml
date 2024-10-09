@@ -8,7 +8,8 @@
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
         <alpha-version>${revision}</alpha-version>
-        <alpha-versionCode>2</alpha-versionCode>
+        <!-- the previous android:versionCode was 106650000, so it must be larger or it will not be installed -->
+        <alpha-versionCode>200000000</alpha-versionCode>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -58,7 +59,7 @@
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>
-            <version>14-robolectric-10818077</version>
+            <version>15-robolectric-12468137</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -226,8 +227,8 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>34</platform>
-                                <buildTools>34.0.0</buildTools>
+                                <platform>35</platform>
+                                <buildTools>35.0.0</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
@@ -344,8 +345,8 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>34</platform>
-                                <buildTools>34.0.0</buildTools>
+                                <platform>35</platform>
+                                <buildTools>35.0.0</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>

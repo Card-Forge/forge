@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -82,6 +83,7 @@ public class Main extends AndroidApplication {
     private View forgeLogo = null, forgeView = null, activeView = null;
     private ProgressBar progressBar;
     private TextView progressText;
+    private String versionString;
 
     private AndroidClipboard getAndroidClipboard() {
         if (androidClipboard == null)
@@ -132,6 +134,12 @@ public class Main extends AndroidApplication {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
+            versionString = pInfo.versionName;
+        } catch (Exception e) {
+            versionString = "0.0";
+        }
         setContentView(getResources().getIdentifier("main", "layout", getPackageName()));
         mShortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
         sharedPreferences = getPreferences(Context.MODE_PRIVATE);
@@ -280,7 +288,7 @@ public class Main extends AndroidApplication {
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
-            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
+            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName(), versionString), config);
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 0f, 1f).setDuration(1800), null, new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -378,8 +386,9 @@ public class Main extends AndroidApplication {
 
     private AnimatorSet getAnimator(Animator play, Animator with, AnimatorListenerAdapter adapter) {
         AnimatorSet animatorSet = new AnimatorSet();
-        if (with != null)
-            animatorSet.play(play).with(with);
+        if (with != null) {
+            animatorSet.playTogether(play, with);
+        }
         else
             animatorSet.play(play);
         animatorSet.addListener(adapter);

@@ -54,7 +54,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.65-SNAPSHOT";
+    public static String CURRENT_VERSION = "0.0";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -127,20 +127,23 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
-        app = new Forge();
-        if (GuiBase.getInterface() == null) {
-            clipboard = clipboard0;
-            deviceAdapter = deviceAdapter0;
-            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
-            GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.enablePropertyConfig(value);
-            isPortraitMode = androidOrientation;
-            totalDeviceRAM = totalRAM;
-            isTabletDevice = isTablet;
-            androidVersion = AndroidAPI;
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName, String versionString) {
+        if (app == null) {
+            app = new Forge();
+            if (GuiBase.getInterface() == null) {
+                CURRENT_VERSION = versionString;
+                clipboard = clipboard0;
+                deviceAdapter = deviceAdapter0;
+                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+                GuiBase.setInterface(new GuiMobile(assetDir0));
+                GuiBase.enablePropertyConfig(propertyConfig);
+                isPortraitMode = androidOrientation;
+                totalDeviceRAM = totalRAM;
+                isTabletDevice = isTablet;
+                androidVersion = AndroidAPI;
+            }
+            GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 

@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 
 public class GameLauncher {
     public GameLauncher() {
+        String versionString = BuildInfo.getVersionString();
         // Set this to "true" to make the mobile game port run as a full-screen desktop application
         boolean desktopMode = true;//cmd.hasOption("fullscreen");
         // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
@@ -44,7 +45,7 @@ public class GameLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                desktopMode ? desktopModeAssetsDir : assetsDir, false, false, 0, false, 0, "", "");
+                desktopMode ? desktopModeAssetsDir : assetsDir, false, false, 0, false, 0, "", "", versionString);
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
@@ -52,7 +53,7 @@ public class GameLauncher {
         } else {
             config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
         }
-        config.setTitle("Forge - " + BuildInfo.getVersionString());
+        config.setTitle("Forge - " + versionString);
         config.setWindowListener(new Lwjgl3WindowAdapter() {
             @Override
             public boolean closeRequested() {

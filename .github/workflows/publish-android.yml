@@ -43,8 +43,8 @@ jobs:
         uses: maxim-lobanov/setup-android-tools@v1
         with:
           packages: |
-            platforms;android-34
-            build-tools;34.0.0
+            platforms;android-35
+            build-tools;35.0.0
 
       - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
         run: |
@@ -83,7 +83,7 @@ jobs:
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
           export _JAVA_OPTIONS="-Xmx2g"
-          mvn -U -B -P android-release-build,android-release-upload install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=34.0.0 -Dmaven.test.skip=true
+          mvn -U -B -P android-release-build,android-release-upload install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
