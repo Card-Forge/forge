@@ -57,7 +57,7 @@ public class DeckBlockFilter extends DeckSetFilter {
                 allBannedCards.addAll(bannedCards);
         }
         this.formats.clear();
-        this.formats.add(new GameFormat(null, this.sets, allBannedCards));
+        this.formats.add(new GameFormat(null, this.sets, null, allBannedCards));
         return true;
     }
 

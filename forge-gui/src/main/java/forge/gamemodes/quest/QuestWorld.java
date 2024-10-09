@@ -145,6 +145,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
             GameFormatQuest useFormat = null;
 
             final List<String> sets = new ArrayList<>();
+            final List<String> extraCards = new ArrayList<>();
             final List<String> bannedCards = new ArrayList<>(); // if both empty, no format
 
             String key, value;
@@ -170,6 +171,9 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 case "sets":
                     sets.addAll(Arrays.asList(value.split(", ")));
                     break;
+                case "extra":
+                     extraCards.addAll(Arrays.asList(value.split(";")));
+                     break;
                 case "banned":
                     bannedCards.addAll(Arrays.asList(value.split("; ")));
                     break;
@@ -184,31 +188,35 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 return null;
             }
 
-            if (!sets.isEmpty() || !bannedCards.isEmpty()) {
-                useFormat = new GameFormatQuest(useName, sets, bannedCards);
+            if (!sets.isEmpty() || !bannedCards.isEmpty() || !extraCards.isEmpty()) {
+                useFormat = new GameFormatQuest(useName, sets, extraCards, bannedCards);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.STANDARDWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
                         FModel.getFormats().getStandard().getAllowedSetCodes(),
+                        extraCards,
                         FModel.getFormats().getStandard().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.PIONEERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.PIONEERWORLDNAME,
                         FModel.getFormats().getPioneer().getAllowedSetCodes(),
+                        extraCards,
                         FModel.getFormats().getPioneer().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.MODERNWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.MODERNWORLDNAME,
                         FModel.getFormats().getModern().getAllowedSetCodes(),
+                        extraCards,
                         FModel.getFormats().getModern().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.RANDOMCOMMANDERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.RANDOMCOMMANDERWORLDNAME,
                         FModel.getFormats().getFormat("Commander").getAllowedSetCodes(),
+                        extraCards,
                         FModel.getFormats().getFormat("Commander").getBannedCardNames(),false);
             }
 
@@ -223,6 +231,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 }
                 useFormat = new GameFormatQuest(QuestWorld.EVOLVINGWILDSWORLDNAME,
                         allowedCodes,
+                        extraCards,
                         FModel.getFormats().getVintage().getBannedCardNames(),false, rot);
             }
 

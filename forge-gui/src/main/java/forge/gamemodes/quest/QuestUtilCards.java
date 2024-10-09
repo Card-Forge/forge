@@ -600,10 +600,16 @@ public final class QuestUtilCards {
 		    }
 		    return;
 	    } else {
-            for (int i = 0; i < quantity; i++) {
-                // Unopened product based on format of the cards?
-                questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate, questController.getFormat().getFilterPrinted()).get());
-            }
+            //faster method for dealing with a lot of additional cards
+            List<PaperCard> cards = Lists.newArrayList();
+            final List<PaperCard> cardPool = questController.getFormat().getAllCards();
+
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_COMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_UNCOMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_RARE, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+
+            questAssets.getShopList().addAllOfTypeFlat(cards);
         }
     }
 
@@ -742,16 +748,24 @@ public final class QuestUtilCards {
         } else {
             StringBuilder restrictions    = new StringBuilder();
             List<String>  allowedSetCodes = FModel.getQuest().getFormat().getAllowedSetCodes();
-            if (allowedSetCodes.isEmpty()) {
-                for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
-                    restrictions.append(":!name(\"").append(restrictedCard).append("\")");
-                }
-            } else {
+            List<PaperCard> additionalCards = FModel.getQuest().getFormat().getAllExtraCards();
+            if (!allowedSetCodes.isEmpty()){
                 restrictions.append(":fromSets(\"");
                 for (String set : allowedSetCodes) {
                     restrictions.append(set).append(",");
                 }
                 restrictions.append(")");
+            }
+            //adds additional format cards to the random colored booster
+            if(!additionalCards.isEmpty()){
+                restrictions.append(":name(");
+                for(PaperCard card : additionalCards){
+                    restrictions.append("\"").append(card.getName()).append('@').append(card.getEdition()).append("\",");
+                }
+                restrictions.append(")");
+            }
+            for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
+                restrictions.append(":!name(\"").append(restrictedCard).append("\")");
             }
             return new SealedTemplate("?", ImmutableList.of(
                     Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
