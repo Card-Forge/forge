@@ -105,6 +105,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int numDrawnThisTurn;
+    private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
     private int numExploredThisTurn;
@@ -1444,6 +1445,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numDrawnThisTurn;
     }
 
+    public final int getNumDrawnLastTurn() {
+        return numDrawnLastTurn;
+    }
+
     public final int numDrawnThisDrawStep() {
         return numDrawnThisDrawStep;
     }
@@ -2256,6 +2261,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setLandsPlayedLastTurn(int num) {
         landsPlayedLastTurn = num;
     }
+    public final void setNumDrawnLastTurn(int num) {
+        numDrawnLastTurn= num;
+    }
 
     public final int getInvestigateNumThisTurn() {
         return investigatedThisTurn;
@@ -2475,6 +2483,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final PlayerZone pz : zones.values()) {
             pz.resetCardsAddedThisTurn();
         }
+        setNumDrawnLastTurn(getNumDrawnThisTurn());
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
         resetNumExploredThisTurn();

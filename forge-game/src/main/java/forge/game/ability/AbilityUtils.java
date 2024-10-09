@@ -2304,6 +2304,10 @@ public class AbilityUtils {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
         }
 
+        if (sq[0].equals("YouDrewLastTurn")) {
+            return doXMath(player.getNumDrawnLastTurn(), expr, c, ctb);
+        }
+
         if (sq[0].equals("YouRollThisTurn")) {
             return doXMath(player.getNumRollsThisTurn(), expr, c, ctb);
         }
