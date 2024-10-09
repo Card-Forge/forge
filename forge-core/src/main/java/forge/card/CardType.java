@@ -796,6 +796,11 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return false;
             }
         }
+        for (final CoreType type : ctOther.getCoreTypes()) {
+            if (!this.hasType(type)) {
+                return false;
+            }
+        }
         return true;
     }
 
