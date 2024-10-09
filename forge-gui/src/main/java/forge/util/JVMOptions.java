@@ -34,7 +34,7 @@ public class JVMOptions {
                     .append("(Use forge-adventure-mac.sh is for macOS to run properly).\n")
                     .append("Alternatively, add all these JVM Options in your Command line: \n");
             for (String arg : mandatoryArgs)
-                sb.append(arg.replace("=", " "));
+                sb.append(arg.replace("=", " ")).append("\n");
         }
         return sb;
     }
