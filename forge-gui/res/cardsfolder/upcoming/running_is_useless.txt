@@ -1,0 +1,9 @@
+Name:Running Is Useless
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose any number of creatures with different mana values.
+SVar:DBChoose:DB$ ChooseCard | ValidTgts$ Creature | TargetsWithDifferentCMC$ True | TargetMax$ AmountToChoose | TargetMin$ 0 | RememberTargets$ True | ChoiceTitle$ Choose any number of creatures with different mana values. | SubAbility$ DBDestroy
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
+SVar:AmountToChoose:Count$Valid Creature
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When you set this scheme in motion, choose any number of creatures with different mana values. Destroy those creatures.\n"Yes, flee from me, prey! Flee from your inevitable fate until your feeble mortal body collapses. I will drink my fill of your fear."
