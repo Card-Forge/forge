@@ -23,6 +23,11 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.zumikua</groupId>
+            <artifactId>webploader-common</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
