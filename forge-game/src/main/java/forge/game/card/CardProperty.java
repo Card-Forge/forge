@@ -35,10 +35,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class CardProperty {
 
@@ -1503,7 +1500,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
                 || property.startsWith("totalPT") || property.startsWith("numColors")
-                || property.startsWith("basePower") || property.startsWith("baseToughness")) {
+                || property.startsWith("basePower") || property.startsWith("baseToughness") || property.startsWith("numTypes")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1529,6 +1526,9 @@ public class CardProperty {
             } else if (property.startsWith("numColors")) {
                 rhs = property.substring(11);
                 y = card.getColor().countColors();
+            } else if (property.startsWith("numTypes")) {
+                rhs = property.substring(10);
+                y = ((Collection<?>)card.getType().getCoreTypes()).size();
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
