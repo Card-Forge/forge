@@ -211,7 +211,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
 
                 // Define a larger bounding box around the POI
-                Rectangle largerBoundingRect = createLargerHitbox(point.getBoundingRect(), 100); // Expand hitbox by 100 units
+                Rectangle largerBoundingRect = createLargerHitbox(point.getBoundingRect(), 25); // Expand hitbox by 50 units
                 boolean playerInLargerZone = player.collideWith(largerBoundingRect);
                 boolean playerInMainZone = player.collideWith(point.getBoundingRect());
 

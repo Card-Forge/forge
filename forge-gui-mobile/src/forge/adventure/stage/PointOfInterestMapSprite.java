@@ -57,8 +57,29 @@ public class PointOfInterestMapSprite extends MapSprite {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (pointOfInterest.getActive())
+        if (pointOfInterest.getActive()) {
+            // Draw the actual sprite of the POI
             super.draw(batch, parentAlpha);
-        //batch.draw(getDebugTexture(),getX(),getY());
+
+            // Optionally draw the regular bounding box for collision detection (Red)
+            batch.setColor(1, 0, 0, 1);  // Red color for the regular bounding box
+            batch.draw(getDebugTexture(), getX(), getY(), getWidth(), getHeight());  // Draw the red rectangle for the original bounding box
+
+            // Now, calculate the larger bounding box (without calling the method)
+            float expansionAmount = 25;  // Define the expansion amount
+            float largerX = getX() - expansionAmount / 2;
+            float largerY = getY() - expansionAmount / 2;
+            float largerWidth = getWidth() + expansionAmount;
+            float largerHeight = getHeight() + expansionAmount;
+
+            // Draw the larger bounding box (Blue or Green)
+            batch.setColor(0, 0, 1, 1);  // Blue color for the larger bounding box (change to green with 0, 1, 0, 1)
+            batch.draw(getDebugTexture(), largerX, largerY, largerWidth, largerHeight);  // Draw the larger bounding box
+
+            // Reset the color back to white to avoid affecting other draw calls
+            batch.setColor(Color.WHITE);
+        }
     }
+
+
 }
