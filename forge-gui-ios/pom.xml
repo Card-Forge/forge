@@ -6,13 +6,13 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>1.6.58.001</alpha-version>
+        <alpha-version>${revision}</alpha-version>
     </properties>
 
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.65-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-ios</artifactId>

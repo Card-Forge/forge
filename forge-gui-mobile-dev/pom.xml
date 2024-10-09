@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.65-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -37,33 +37,6 @@
                 <configuration>
                     <source>17</source>
                     <target>17</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.3</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
-                    <outputBasedir>${project.build.directory}</outputBasedir>
-                    <outputDir>.</outputDir>
-                    <regex>false</regex>
-                    <replacements>
-                        <replacement>
-                            <token>$project.build.finalName$</token>
-                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
-                        </replacement>
-                    </replacements>
                 </configuration>
             </plugin>
             <plugin>
@@ -137,6 +110,32 @@
                     </execution>
                     <!--extra-->
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${basedir}/${configSourceDirectory}</basedir>
+                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
