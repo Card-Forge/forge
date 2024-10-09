@@ -308,7 +308,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
-
+    abstract public boolean canRemoveCounters(final CounterType type);
     abstract public boolean canReceiveCounters(final CounterType type);
     abstract public void subtractCounter(final CounterType counterName, final int n, final Player remover);
     abstract public void clearCounters();

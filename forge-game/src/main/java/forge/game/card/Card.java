@@ -1590,6 +1590,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public final boolean canRemoveCounters(final CounterType type) {
+        if (isPhasedOut()) {
+            return false;
+        }
+        if (StaticAbilityCantRemoveCounter.anyCantRemoveCounter(this, type)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public final boolean canReceiveCounters(final CounterType type) {
         if (isPhasedOut()) {
             return false;
@@ -1737,7 +1748,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     @Override
     public final void subtractCounter(final CounterType counterName, final int n, final Player remover) {
-        subtractCounter(counterName, n, remover, false);
+        if (canRemoveCounters(counterName)) {
+            subtractCounter(counterName, n, remover, false);
+        }
     }
 
     public final void subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {

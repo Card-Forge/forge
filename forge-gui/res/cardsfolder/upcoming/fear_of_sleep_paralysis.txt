@@ -1,0 +1,11 @@
+Name:Fear of Sleep Paralysis
+ManaCost:5 U
+Types:Enchantment Creature Nightmare
+PT:6/6
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Eerie — Whenever Fear of Sleep Paralysis or another enchantment you control enters and whenever you fully unlock a Room, tap up to one target creature and put a stun counter on it.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever Fear of Sleep Paralysis or another enchantment you control enters and whenever you fully unlock a Room, tap up to one target creature and put a stun counter on it.
+S:Mode$ CantRemoveCounter | ValidCard$ Permanent.OppCtrl | CounterType$ Stun | Description$ Stun counters can't be removed from permanents your opponents control.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Tap target creature and put a stun counter on it. | SubAbility$ DBStun
+SVar:DBStun:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+Oracle:Flying\nEerie — Whenever Fear of Sleep Paralysis or another enchantment you control enters and whenever you fully unlock a Room, tap up to one target creature and put a stun counter on it.\nStun counters can’t be removed from permanents your opponents control. (They won’t untap if they have stun counters.)
