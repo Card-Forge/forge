@@ -1528,7 +1528,7 @@ public class CardProperty {
                 y = card.getColor().countColors();
             } else if (property.startsWith("numTypes")) {
                 rhs = property.substring(10);
-                y = ((Collection<?>)card.getType().getCoreTypes()).size();
+                y = Iterables.size(card.getType().getCoreTypes());
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
