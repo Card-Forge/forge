@@ -114,6 +114,10 @@ public final class CardPredicates {
         return c -> c.sharesCardTypeWith(card);
     }
 
+    public static Predicate<Card> sharesAllCardTypesWith(final Card card) {
+        return c -> c.sharesAllCardTypesWith(card);
+    }
+
     public static Predicate<Card> sharesCreatureTypeWith(final Card card) {
         return c -> c.sharesCreatureTypeWith(card);
     }
