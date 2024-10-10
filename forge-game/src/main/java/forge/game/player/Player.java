@@ -845,6 +845,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Aggregates.max(getRegisteredOpponents(), GameEntity::getAssignedDamage);
     }
 
+    public final boolean canRemoveCounters(final CounterType type) {
+        if (!isInGame()) {
+            return false;
+        }
+        if (StaticAbilityCantRemoveCounter.anyCantRemoveCounter(this, type)) {
+            return false;
+        }
+        return true;
+    }
+
     public final boolean canReceiveCounters(final CounterType type) {
         if (!isInGame()) {
             return false;
