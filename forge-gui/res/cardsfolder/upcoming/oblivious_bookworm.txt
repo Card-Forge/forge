@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigDraw:DB$ Draw | RememberDrawn$ True | OptionalDecider$ You | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | ConditionCheckSVar$ Condition | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ TurnFaceUp | ValidCard$ Permanent+inZoneBattlefield | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigRemember | Static$ True
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.inZoneBattlefield | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigRemember | Static$ True
 SVar:TrigRemember:DB$ Pump | ImprintCards$ TriggeredCard
 T:Mode$ Phase | Phase$ Upkeep | Static$ True | Execute$ DBCleanupStatic
 SVar:DBCleanupStatic:DB$ Cleanup | ClearImprinted$ True
