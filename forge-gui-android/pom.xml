@@ -49,6 +49,7 @@
                             <goal>timestamp-property</goal>
                         </goals>
                         <configuration>
+                            <!-- generate MonthDate code to month.date property -->
                             <name>month.date</name>
                             <pattern>MMdd</pattern>
                         </configuration>
@@ -60,6 +61,7 @@
                             <goal>regex-property</goal>
                         </goals>
                         <configuration>
+                            <!-- generate versionName from revision property to snapshot-version property  -->
                             <name>snapshot-version</name>
                             <value>${revision}</value>
                             <regex>-SNAPSHOT</regex>
@@ -74,6 +76,7 @@
                             <goal>regex-property</goal>
                         </goals>
                         <configuration>
+                            <!-- generate versionCode from revision property to snapshot-versionCode property -->
                             <name>snapshot-versionCode</name>
                             <value>${revision}</value>
                             <regex>[^0-9]</regex>
@@ -97,6 +100,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <!-- append generated snapshot-version property -->
         <finalName>forge-android-${snapshot-version}</finalName>
     </build>
     <dependencies>
@@ -327,38 +331,6 @@
             </properties>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.6.0</version>
-                        <executions>
-                            <execution>
-                                <id>timestamp-property</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>timestamp-property</goal>
-                                </goals>
-                                <configuration>
-                                    <name>month.date</name>
-                                    <pattern>MMdd</pattern>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>regex-property</id>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>regex-property</goal>
-                                </goals>
-                                <configuration>
-                                    <name>snapshot-version</name>
-                                    <value>${revision}</value>
-                                    <regex>-SNAPSHOT</regex>
-                                    <replacement>-SNAPSHOT-${month.date}</replacement>
-                                    <failIfNoMatch>false</failIfNoMatch>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                     <plugin>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>3.4.1</version>
