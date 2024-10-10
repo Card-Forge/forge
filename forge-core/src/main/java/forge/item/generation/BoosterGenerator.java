@@ -584,19 +584,18 @@ public class BoosterGenerator {
                     mainCode.regionMatches(true, 0, "wholeSheet", 0, 10)
             ) { // custom print sheet
                 System.out.println("Parsing from main code: " + mainCode);
-                //Sheet name can be split by || to allow alternative section to be used in case first one is not found.
-                String[] sheetNames =  StringUtils.strip(mainCode.substring(10), "()\" ").split("\\|\\|");
-                PrintSheet sheet = null;
-                for(String sheetName : sheetNames ){
-                    System.out.println("Attempting to lookup: " + sheetName);
-                    sheet = StaticData.instance().getPrintSheets().get(sheetName);
-                    if(null != sheet){
-                        src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
-                        setPred = Predicates.alwaysTrue();
-                        break;
-                    }
+                String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
+                System.out.println("Attempting to lookup : " + sheetName);
+                PrintSheet sheet = StaticData.instance().getPrintSheets().get(sheetName);
+                if(null == sheet) {
+                    String fallback = sheetName.split(" ")[0]+ " cards";
+                    System.out.println("Sheet : " + sheetName + " not found. Default to : " + fallback);
+                    sheet = StaticData.instance().getPrintSheets().get(fallback);
                 }
-                if(null == sheet) throw new RuntimeException("Sheet(s) not found : " + String.join(", ",sheetNames));
+                if(null == sheet) throw new RuntimeException("Sheet : " + sheetName + " not found.");
+                src = sheet.toFlatList();
+                setPred = Predicates.alwaysTrue();
+
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
                 String list = StringUtils.strip(mainCode.substring(5), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(list, ',', '"', '"');

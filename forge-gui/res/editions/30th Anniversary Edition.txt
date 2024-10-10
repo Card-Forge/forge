@@ -4,7 +4,7 @@ Date=2022-11-28
 Name=30th Anniversary Edition
 Type=Collector_Edition
 BoosterCovers=3
-Booster=7 Common:fromsheet("30A cards"), 3 Uncommon:fromSheet("30A cards"), 1 Rare:fromSheet("30A cards"), 2 BasicLand:fromSheet("30A cards"), 1 BasicLand:fromSheet("30A alternate frame||30A cards"), 1 !BasicLand:fromSheet("30A alternate frame||30A cards")
+Booster=7 Common:fromsheet("30A cards"), 3 Uncommon:fromSheet("30A cards"), 1 Rare:fromSheet("30A cards"), 2 BasicLand:fromSheet("30A cards"), 1 BasicLand:fromSheet("30A retro frame"), 1 !BasicLand:fromSheet("30A retro frame")
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=30A
@@ -310,7 +310,7 @@ ScryfallCode=30A
 [alternate art]
 266 U Sol Ring @Mark Tedin
 
-[alternate frame]
+[retro frame]
 298 R Animate Wall @Dan Frazier
 299 R Armageddon @Jesper Myrfors
 300 R Balance @Mark Poole

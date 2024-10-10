@@ -399,7 +399,7 @@ ScryfallCode=MH2
 379 M Kaldra Compleat @Vincent Proce
 380 R Urza's Saga @Titus Lunter
 
-[alternate frame]
+[retro frame]
 381 C Blacksmith's Skill @Jason A. Engle
 382 C Marble Gargoyle @Drew Tucker
 383 R Out of Time @Tobias Kwan

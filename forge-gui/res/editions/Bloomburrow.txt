@@ -9,6 +9,7 @@ Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 FullArtLand, 1 Wil
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
+#Numbers from https://mtgscribe.com/2024/07/14/play-booster-fact-sheet-bloomburrow/
 [Common]
 Base=Common:fromSheet("BLB cards")
 
@@ -21,9 +22,6 @@ Base=Uncommon:fromSheet("BLB cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("BLB cards")
-# I don't know about these numbers, so i'm just copying them from MH3
-Replace=.021F RareMythic:fromSheet("BLB borderless||BLB cards")
-Replace=.051F RareMythic:fromSheet("BLB showcase||BLB cards")
 
 [FullArtLand]
 Base=BasicLand:fromSheet("BLB cards")
@@ -33,9 +31,7 @@ Replace=.20F BasicLand:fromSheet("BLB cards")+
 Base=Common:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
 Replace=.417F Uncommon:fromSheet("BLB cards")
-Replace=.078F RareMythic:fromSheet("BLB cards")
-Replace=.004F RareMythic:fromSheet("BLB borderless||BLB cards")
-Replace=.042F RareMythic:fromSheet("BLB showcase||BLB cards")
+Replace=.012F RareMythic:fromSheet("BLB cards")
 
 [cards]
 1 C Banishing Light @Zoltan Boros

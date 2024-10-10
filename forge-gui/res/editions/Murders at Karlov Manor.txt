@@ -4,7 +4,7 @@ Date=2024-02-09
 Name=Murders at Karlov Manor
 Type=Expansion
 ScryfallCode=MKM
-Booster=7 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Any, 1 Any+
+Booster=7 Common:fromSheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand, 1 Any:fromSheet("MKM cards"), 1 Any:fromSheet("MKM cards")+
 ChanceReplaceCommonWith=.125F fromsheet("MKM karlov surprise")
 Prerelease=6 Boosters, 1 RareMythic+, 1 Any:fromsheet("MKM prerelease promo")+
 BoosterBox=36
@@ -447,17 +447,14 @@ BoosterBox=36
 426 U Lightning Helix @Eli Minaya
 427 U No More Lies @Liiga Smilshkalne
 428 R Axebane Ferox @Adam Volker
+
+[prerelease promo]
 430 M Melek, Reforged Researcher @Andreas Zafiratos
 431 M Tomik, Wielder of Law @Valera Lutfullina
 432 M Voja, Jaws of the Conclave @Valera Lutfullina
 
 [buy a box]
 429 R Wojek Investigator @Greg Staples
-
-[prerelease promo]
-1 Melek, Reforged Researcher|MKM
-1 Tomik, Wielder of Law|MKM
-1 Voja, Jaws of the Conclave|MKM
 
 [karlov surprise]
 1 Baleful Mastery|PLIST

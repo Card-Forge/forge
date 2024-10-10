@@ -10,6 +10,7 @@ BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
 
+#Numbers from https://mtgscribe.com/2024/05/22/play-booster-fact-sheet-modern-horizons-3/
 [Common]
 Base=Common:fromSheet("MH3 cards")
 
@@ -22,8 +23,8 @@ Base=Uncommon:fromSheet("MH3 cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("MH3 cards")
-Replace=.021F fromSheet("MH3 alternate frame")
-Replace=.051F fromSheet("MH3 borderless")
+Replace=.021F RareMythic:fromSheet("MH3 retro frame")
+Replace=.9999F RareMythic:fromSheet("MH3 borderless")
 
 [Common-Land]
 Base=Common:fromSheet("MH3 cards")
@@ -36,16 +37,16 @@ Replace=.067F fromSheet("MH3 full art")+
 Base=Uncommon:fromSheet("MH3 new to modern")
 Replace=.213F Rare:fromSheet("MH3 new to modern")
 Replace=.023F Mythic:fromSheet("MH3 new to modern")
-Replace=.008F fromSheet("MH3 borderless frame")
-Replace=.003F fromSheet("MH3 borderless profile")
-Replace=.001F fromSheet("MH3 alternate frame")
+Replace=.011F RareMythic:fromSheet("MH3 borderless")
+Replace=.001F Mythic:fromSheet("MH3 borderless")
+Replace=.002F RareMythic:fromSheet("MH3 retro frame")
 
 [Wildcard]
 Base=Common:fromSheet("MH3 cards")
 Replace=.417F Uncommon:fromSheet("MH3 cards")
 Replace=.078F RareMythic:fromSheet("MH3 cards")
-Replace=.004F fromSheet("MH3 borderless frame")
-Replace=.042F fromSheet("MH3 alternate frame")
+Replace=.004F RareMythic:fromSheet("MH3 borderless")
+Replace=.042F fromSheet("MH3 retro frame")
 
 [cards]
 1 U Breaker of Creation @Yohann Schepacz
@@ -403,8 +404,6 @@ Replace=.042F fromSheet("MH3 alternate frame")
 347 R Pearl Medallion @Olena Richards
 348 R Ruby Medallion @Martina Pilcerova
 349 R Sapphire Medallion @Ron Spears
-
-[borderless frame]
 350 R Archway of Innovation @Sam Burley
 351 R Arena of Glory @Piotr Dura
 352 R Bloodstained Mire @Sean Vo
@@ -417,8 +416,6 @@ Replace=.042F fromSheet("MH3 alternate frame")
 359 M Ugin's Labyrinth @Samuele Bandini
 360 R Windswept Heath @Samuele Bandini
 361 R Wooded Foothills @Tomáš Honz
-
-[borderless profile]
 362 M Herigast, Erupting Nullkite @Tyler Walpole
 363 R Pearl-Ear, Imperial Advisor @Peter Diamond
 364 R Phelia, Exuberant Shepherd @Allison Carl
@@ -452,7 +449,7 @@ Replace=.042F fromSheet("MH3 alternate frame")
 471 M Ral, Monsoon Mage @Borja Pindado
 472 M Grist, Voracious Larva @Ron Spencer
 
-[alternate frame]
+[retro frame]
 384 M Emrakul, the World Anew @Brent Hollowell
 385 U It That Heralds the End @Alex Konstad
 386 M Kozilek, the Broken Reality @Brent Hollowell

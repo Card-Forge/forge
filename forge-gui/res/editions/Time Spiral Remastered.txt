@@ -298,7 +298,7 @@ ScryfallCode=TSR
 288 U Urza's Factory @Mark Tedin
 289 M Vesuva @Zoltan Boros & Gabor Szikszai
 
-[alternate frame]
+[retro frame]
 290 S Ajani's Pridemate @Svetlin Velinov
 291 S Banishing Light @Willian Murai
 292 S Containment Priest @John Stanko

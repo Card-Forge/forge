@@ -126,16 +126,14 @@ ScryfallCode=CHR
 112 R City of Brass @Mark Tedin
 113 R Safe Haven @Christopher Rush
 114a U Urza's Mine @Anson Maddocks
-115a U Urza's Power Plant @Mark Tedin
-116a U Urza's Tower @Mark Poole
-
-[alternate art]
 114b U Urza's Mine @Anson Maddocks
 114c U Urza's Mine @Anson Maddocks
 114d U Urza's Mine @Anson Maddocks
+115a U Urza's Power Plant @Mark Tedin
 115b U Urza's Power Plant @Mark Tedin
 115c U Urza's Power Plant @Mark Tedin
 115d U Urza's Power Plant @Mark Tedin
+116a U Urza's Tower @Mark Poole
 116b U Urza's Tower @Mark Poole
 116c U Urza's Tower @Mark Poole
 116d U Urza's Tower @Mark Poole

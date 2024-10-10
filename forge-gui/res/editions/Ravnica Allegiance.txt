@@ -5,7 +5,7 @@ Name=Ravnica Allegiance
 Code2=RNA
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Secret Cards"), 1 RareMythic:!fromSheet("RNA Secret Cards"), 1 fromSheet("RNA Lands")
+Booster=10 Common:fromSheet("RNA cards"):!fromSheet("RNA Lands"), 3 Uncommon:fromSheet("RNA cards"), 1 RareMythic:fromSheet("RNA cards"), 1 fromSheet("RNA Lands")
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA
@@ -289,6 +289,13 @@ ScryfallCode=RNA
 
 [buy a box]
 273 M The Haunt of Hightower @Lius Lasahido
+
+[Lands]
+Azorius Guildgate|RNA
+Gruul Guildgate|RNA
+Orzhov Guildgate|RNA
+Rakdos Guildgate|RNA
+Simic Guildgate|RNA
 
 [tokens]
 rg_4_4_beast_trample
