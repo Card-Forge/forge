@@ -1,0 +1,13 @@
+Name:Your Plans Mean Nothing
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DBChoosePlayer | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, any number of target players each discard their hands. Each opponent draws cards equal to the number of cards that player discarded minus one. Then if you discarded a card this way, draw seven cards.
+SVar:DBChoosePlayer:DB$ Pump | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ PlayerCount | TgtPrompt$ Choose any number of players | SubAbility$ DBRepeat
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Targeted | RepeatSubAbility$ DBDiscard | SubAbility$ DBYouDraw | SpellDescription$ Each opponent draws cards equal to the number of cards that player discarded minus one. Then if you discarded a card this way, draw seven cards.
+SVar:DBDiscard:DB$ Discard | Defined$ Remembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Player.Opponent+IsRemembered
+SVar:DBYouDraw:DB$ Draw | Defined$ You | NumCards$ 7 | ConditionDefined$ Remembered | ConditionPresent$ Card.YouOwn | SubAbility$ DBClearRemembered
+SVar:DBClearRemembered:DB$ Cleanup | ClearRemembered$ True
+SVar:PlayerCount:PlayerCountPlayers$Amount
+SVar:X:Remembered$Valid Card.RememberedPlayerOwn/Minus.1
+Oracle:When you set this scheme in motion, any number of target players each discard their hands. Each opponent draws cards equal to the number of cards that player discarded minus one. Then if you discarded a card this way, draw seven cards.
