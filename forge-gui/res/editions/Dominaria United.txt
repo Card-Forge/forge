@@ -400,8 +400,6 @@ ScryfallCode=DMU
 380 R Shivan Reef @Donato Giancola
 381 R Sulfurous Springs @Mark Tedin
 382 R Yavimaya Coast @Mark Poole
-435 M Sheoldred, the Apocalypse @Richard Whitters
-436 M Sheoldred, the Apocalypse @Richard Whitters
 
 [extended art]
 383 R Anointed Peacekeeper @Tia Masic

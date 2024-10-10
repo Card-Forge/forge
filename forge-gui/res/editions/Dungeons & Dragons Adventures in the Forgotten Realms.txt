@@ -426,7 +426,6 @@ FatPackExtraSlots=20 BasicLands, 20 BasicLands+
 
 [rebalanced]
 A7 U A-Cloister Gargoyle @Mark Zug
-A9 C A-Dawnbringer Cleric @Lie Setiawan
 A14 C A-Dwarfhold Champion @Miguel Mercado
 A32 U A-Plate Armor @Martina Pilcerova
 A53 M A-Demilich @Daniel Zrom
@@ -442,7 +441,6 @@ A181 M A-Ellywick Tumblestrum @Anna Steinbauer
 A183 C A-Find the Path @Lindsey Look
 A196 R A-Ochre Jelly @Daarken
 A219 U A-Bruenor Battlehammer @Wayne Reynolds
-A226 U A-Krydle of Baldur's Gate @Bryan Sola
 A231 U A-Shessra, Death's Whisper @Marie Magny
 A233 R A-Sorcerer Class @Alexander Mokhov
 A237 R A-Triumphant Adventurer @Alexander Mokhov
