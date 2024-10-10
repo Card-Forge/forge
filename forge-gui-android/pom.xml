@@ -8,8 +8,6 @@
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
         <alpha-version>${revision}</alpha-version>
-        <!-- the previous android:versionCode was 106650000, so it must be larger or it will not be installed -->
-        <alpha-versionCode>200000000</alpha-versionCode>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -40,6 +38,52 @@
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>month.date</name>
+                            <pattern>MMdd</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>snapshot-version</name>
+                            <value>${revision}</value>
+                            <regex>-SNAPSHOT</regex>
+                            <replacement>-SNAPSHOT-${month.date}</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property2</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <name>snapshot-versionCode</name>
+                            <value>${revision}</value>
+                            <regex>[^0-9]</regex>
+                            <replacement></replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>17</source>
@@ -53,7 +97,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-android-${alpha-version}</finalName>
+        <finalName>forge-android-${snapshot-version}</finalName>
     </build>
     <dependencies>
         <dependency>
@@ -268,7 +312,7 @@
                                 <configuration>
                                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                                     <manifestVersionName>${alpha-version}</manifestVersionName>
-                                    <manifestVersionCode>${alpha-versionCode}</manifestVersionCode>
+                                    <manifestVersionCode>1</manifestVersionCode>
                                 </configuration>
                             </execution>
                         </executions>
@@ -283,6 +327,38 @@
             </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>timestamp-property</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>timestamp-property</goal>
+                                </goals>
+                                <configuration>
+                                    <name>month.date</name>
+                                    <pattern>MMdd</pattern>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>regex-property</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>regex-property</goal>
+                                </goals>
+                                <configuration>
+                                    <name>snapshot-version</name>
+                                    <value>${revision}</value>
+                                    <regex>-SNAPSHOT</regex>
+                                    <replacement>-SNAPSHOT-${month.date}</replacement>
+                                    <failIfNoMatch>false</failIfNoMatch>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>3.4.1</version>
@@ -388,8 +464,8 @@
                                 </goals>
                                 <configuration>
                                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-                                    <manifestVersionName>${alpha-version}</manifestVersionName>
-                                    <manifestVersionCode>${alpha-versionCode}</manifestVersionCode>
+                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                    <manifestVersionCode>${snapshot-versionCode}0${month.date}</manifestVersionCode>
                                 </configuration>
                             </execution>
                         </executions>
