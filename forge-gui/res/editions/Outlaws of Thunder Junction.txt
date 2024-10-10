@@ -481,5 +481,3 @@ w_1_1_sheep
 w_2_2_ox
 w_2_2_spirit_flying
 w_3_3_angel_flying
-
- 

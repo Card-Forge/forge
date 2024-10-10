@@ -24,7 +24,7 @@ Base=Uncommon:fromSheet("MH3 cards")
 [RareMythic]
 Base=RareMythic:fromSheet("MH3 cards")
 Replace=.021F RareMythic:fromSheet("MH3 retro frame")
-Replace=.9999F RareMythic:fromSheet("MH3 borderless")
+Replace=.051F RareMythic:fromSheet("MH3 borderless")
 
 [Common-Land]
 Base=Common:fromSheet("MH3 cards")

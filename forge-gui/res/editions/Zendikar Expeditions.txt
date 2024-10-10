@@ -31,7 +31,7 @@ ScryfallCode=EXP
 22 M Scalding Tarn @Ryan Yee
 23 M Verdant Catacombs @Ryan Yee
 24 M Arid Mesa @Ryan Yee
-25 M Misty Rainforest @Ryan
+25 M Misty Rainforest @Ryan Yee
 
 #Bonus cards for OGW Oath of the Gatewatch
 [special slot]
