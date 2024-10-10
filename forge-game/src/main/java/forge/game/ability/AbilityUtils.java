@@ -1296,7 +1296,7 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.startsWith("ValidStack")) {
-            String valid = changedDef.split(" ", 2)[1];
+            String[] valid = changedDef.split(" ", 2)[1].split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
                 SpellAbility instanceSA = stackInstance.getSpellAbility();
                 if (instanceSA != null && instanceSA.isValid(valid, player, card, sa)) {
