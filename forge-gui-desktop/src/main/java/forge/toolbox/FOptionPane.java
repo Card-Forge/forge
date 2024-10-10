@@ -6,15 +6,15 @@ import java.awt.FontMetrics;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
-import javax.swing.JComponent;
-import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.StyleConstants;
 
 import com.google.common.collect.ImmutableList;
 
+import forge.gui.FThreads;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
@@ -87,20 +87,25 @@ public class FOptionPane extends FDialog {
         if (FView.SINGLETON_INSTANCE.getSplash() != null) {
             return 0;
         }
-
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, null, options, defaultOption);
-        optionPane.setVisible(true);
-        final int dialogResult = optionPane.result;
-        optionPane.dispose();
-        return dialogResult;
+        return showOptionDialog(message, title, icon, null, options, defaultOption);
     }
 
     public static int showOptionDialog(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, comp, options, defaultOption);
-        optionPane.setVisible(true);
-        final int dialogResult = optionPane.result;
-        optionPane.dispose();
-        return dialogResult;
+        final Callable<Integer> showChoice = () -> {
+            final FOptionPane optionPane = new FOptionPane(message, title, icon, comp, options, defaultOption);
+            optionPane.setVisible(true);
+            final int dialogResult = optionPane.result;
+            optionPane.dispose();
+            return dialogResult;
+        };
+        final FutureTask<Integer> future = new FutureTask<>(showChoice);
+        FThreads.invokeInEdtAndWait(future);
+        try {
+            return future.get();
+        } catch (final Exception e) { // should be no exception here
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
     
     public static String showInputDialog(final String message, final String title) {
@@ -117,45 +122,56 @@ public class FOptionPane extends FDialog {
 
     @SuppressWarnings("unchecked")
     public static <T> T showInputDialog(final String message, final String title, final SkinImage icon, final String initialInput, final List<T> inputOptions) {
-        final JComponent inputField;
-        FTextField txtInput = null;
-        FComboBox<T> cbInput = null;
-        if (inputOptions == null) {
-            txtInput = new FTextField.Builder().text(initialInput).build();
-            inputField = txtInput;
-        } else {
-            cbInput = new FComboBox<>(inputOptions);
-            cbInput.setSelectedItem(initialInput);
-            inputField = cbInput;
-        }
+        final Callable<T> showChoice = () -> {
+            final JComponent inputField;
+            FTextField txtInput = null;
+            FComboBox<T> cbInput = null;
+            if (inputOptions == null) {
+                txtInput = new FTextField.Builder().text(initialInput).build();
+                inputField = txtInput;
+            } else {
+                cbInput = new FComboBox<>(inputOptions);
+                cbInput.setSelectedItem(initialInput);
+                inputField = cbInput;
+            }
 
-        final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), -1);
-        optionPane.setDefaultFocus(inputField);
-        inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
-            @Override
-            public void keyPressed(final KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    optionPane.setResult(0);
+            final FOptionPane optionPane = new FOptionPane(message, title, icon, inputField, ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")), -1);
+            optionPane.setDefaultFocus(inputField);
+            inputField.addKeyListener(new KeyAdapter() { //hook so pressing Enter on field accepts dialog
+                @Override
+                public void keyPressed(final KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        optionPane.setResult(0);
+                    }
+                }
+            });
+            optionPane.setVisible(true);
+            final int dialogResult = optionPane.result;
+            optionPane.dispose();
+            if (dialogResult == 0) {
+                if (inputOptions == null) {
+                    return (T)txtInput.getText();
+                } else {
+                    return cbInput.getSelectedItem();
                 }
             }
-        });
-        optionPane.setVisible(true);
-        final int dialogResult = optionPane.result;
-        optionPane.dispose();
-        if (dialogResult == 0) {
-            if (inputOptions == null) {
-                return (T)txtInput.getText();
-            } else {
-                return cbInput.getSelectedItem();
-            }
+            return null;
+        };
+        final FutureTask<T> future = new FutureTask<>(showChoice);
+        FThreads.invokeInEdtAndWait(future);
+        try {
+            return future.get();
+        } catch (final Exception e) { // should be no exception here
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
     private final FButton[] buttons;
 
     public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
+        FThreads.assertExecutedByEdt(true);
         this.setTitle(title);
 
         final int padding = 10;
@@ -163,7 +179,7 @@ public class FOptionPane extends FDialog {
         final int gapAboveButtons = padding * 3 / 2;
         final int gapBottom = comp == null ? gapAboveButtons : padding;
         FLabel centeredLabel = null;
-        FTextPane centeredPrompt = null;
+        FTextPane prompt = null;
 
         if (icon != null) {
             if (icon.getWidth() < 100) {
@@ -179,23 +195,16 @@ public class FOptionPane extends FDialog {
             }
         }
         if (message != null) {
-            if (centeredLabel == null) {
-                final FTextArea prompt = new FTextArea(message);
-                prompt.setFont(FSkin.getFont(14));
-                prompt.setAutoSize(true);
-                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-                prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
-                this.add(prompt, "x " + x + ", ay top, wrap, gaptop " + (icon == null ? 0 : 7) + ", gapbottom " + gapBottom);
-            }
-            else {
-                final FTextPane prompt = new FTextPane(message);
-                prompt.setFont(FSkin.getFont(14));
+            prompt = new FTextPane();
+            prompt.setContentType("text/html");
+            prompt.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+            prompt.setText(FSkin.encodeSymbols(message, false));
+            prompt.setFont(FSkin.getFont(14));
+            if(centeredLabel != null)
                 prompt.setTextAlignment(StyleConstants.ALIGN_CENTER);
-                final Dimension parentSize = JOptionPane.getRootFrame().getSize();
-                prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
-                this.add(prompt, "x " + x + ", ay top, wrap, gapbottom " + gapBottom);
-                centeredPrompt = prompt;
-            }
+            final Dimension parentSize = JOptionPane.getRootFrame().getSize();
+            prompt.setMaximumSize(new Dimension(parentSize.width / 2, parentSize.height - 100));
+            this.add(prompt, "x " + x + ", ay top, wrap, gaptop " + (icon == null ? 0 : 7) + ", gapbottom " + gapBottom);
             x = padding;
         }
         if (comp != null) {
@@ -277,7 +286,8 @@ public class FOptionPane extends FDialog {
 
         if (centeredLabel != null) {
             centeredLabel.setPreferredSize(new Dimension(width - 2 * padding, centeredLabel.getMinimumSize().height));
-            centeredPrompt.setPreferredSize(new Dimension(width - 2 * padding, centeredPrompt.getPreferredSize().height));
+            if(prompt != null)
+                prompt.setPreferredSize(new Dimension(width - 2 * padding, prompt.getPreferredSize().height));
         }
 
         this.setSize(width, this.getHeight() + buttonHeight); //resize dialog again to account for buttons
