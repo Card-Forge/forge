@@ -1296,7 +1296,7 @@ public class AbilityUtils {
                 }
             }
         } else if (defined.startsWith("ValidStack")) {
-            String valid = changedDef.split(" ", 2)[1];
+            String[] valid = changedDef.split(" ", 2)[1].split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
                 SpellAbility instanceSA = stackInstance.getSpellAbility();
                 if (instanceSA != null && instanceSA.isValid(valid, player, card, sa)) {
@@ -2302,6 +2302,10 @@ public class AbilityUtils {
 
         if (sq[0].equals("YouDrewThisTurn")) {
             return doXMath(player.getNumDrawnThisTurn(), expr, c, ctb);
+        }
+
+        if (sq[0].equals("YouDrewLastTurn")) {
+            return doXMath(player.getNumDrawnLastTurn(), expr, c, ctb);
         }
 
         if (sq[0].equals("YouRollThisTurn")) {
