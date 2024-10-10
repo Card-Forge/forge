@@ -1,0 +1,14 @@
+Name:Dazzling Theater
+ManaCost:3 W
+Types:Enchantment Room
+S:Mode$ Continuous | Affected$ Card.Creature+YouCtrl+wasCast | AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Creature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nCreature spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a creature spell pays for {1} or one mana of that creature's color.)
+
+ALTERNATE
+
+Name:Prop Room
+ManaCost:2 W
+Types:Enchantment Room
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap each creature you control during each other player's untap step.
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nUntap each creature you control during each other player's untap step.
