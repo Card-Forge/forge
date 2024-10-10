@@ -7,7 +7,7 @@ Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wik
 ## Requirements / Tools
 
 - you favourite Java IDE (IntelliJ, Eclipse, VSCodium, Emacs, Vi...)
-- Java JDK 8 or later (some IDEs such as Eclipse require JDK11+, whereas the Android build currently only works with JDK8)
+- Java JDK 17 or later
 - Git
 - Git client (optional)
 - Maven
@@ -46,9 +46,9 @@ At this time, Eclipse is not the recommended IDE for Forge development.
 
 - Clone your forked repo to your local machine.
 
-- Make sure the Java SDK is installed -- not just the JRE.  Java 8 or newer required.  If you execute `java -version` at the shell or command prompt, it should report version 1.8 or later.
+- Make sure the Java SDK is installed -- not just the JRE.  Java 17 or newer required.  If you execute `java -version` at the shell or command prompt, it should report version 17 or later.
 
-- Install Eclipse 2018-12 or later for Java.  Launch it.
+- Install Eclipse 2021-12 or later for Java.  Launch it.
 
 - Create a workspace.  Go to the workbench.  Right-click inside of Package Explorer > Import... > Maven > Existing Maven Projects > Navigate to root path of the local forge repo and
   ensure everything is checked > Finish.
@@ -79,16 +79,15 @@ This is the configuration used for doing mobile development using the Windows / 
 
 ### Eclipse / Android SDK Integration
 
-Google no longer supports Android SDK releases for Eclipse.  That said, it is still possible to build and debug Android platforms.
+Google no longer supports Android SDK releases for Eclipse. use IntelliJ.
 
 #### Android SDK
 
-Reference SO for obtaining a specific release: https://stackoverflow.com/questions/27043522/where-can-i-download-an-older-version-of-the-android-sdk
+TBD
 
 ##### Windows
 
-Download the following archived version of the Android SDK: http://dl-ssl.google.com/android/repository/tools_r25.2.3-windows.zip. Install it somewhere on your machine.  This is referenced
-in the following instructions as your 'Android SDK Install' path.
+TBD
 
 ##### Linux / Mac OSX
 
@@ -96,68 +95,30 @@ TBD
 
 #### Android Plugin for Eclipse
 
-Google's last plugin release does not work completely with target's running Android 7.0 or later.  Download the ADT-24.2.0-20160729.zip plugin
-from: https://github.com/khaledev/ADT/releases
-
-In Eclipse go to: Help > Install New Software... > Add > Name: ADT Update, Click on the "Archive:" button and navigate to the downloaded ADT-24.2.0-20160729.zip file > Add.  Install all "Developer Tools".  Eclipse
-should restart and prompt you to run the SDK Manager.  Launch it and continue to the next steps below.
+TBD
 
 #### Android Platform
 
-In Eclipse, if the SDK Manager is not already running, go to Window > Android SDK Manager.  Install the following options / versions:
+In Intellij, if the SDK Manager is not already running, go to Tools > Android > Android SDK Manager.  Install the following options / versions:
 
-- Android SDK Build-tools 26.0.1
-- Android 8.0.0 (API 26) SDK Platform
-- Google USB Driver (in case your phone is not detected by ADB)
-
-Note that this will populate additional tools in the Android SDK install path extracted above.
+- Android SDK Build-tools 35.0.0
+- Android 15 (API 35) SDK Platform
 
 #### Proguard update
 
-The Proguard included with the Android SDK Build-tools is outdated and does not work with Java 1.8.  Download Proguard 6.0.3 or later (last tested with 7.0.1) from https://github.com/Guardsquare/proguard
-- Go to the Android SDK install path.  Rename the tools/proguard/ path to tools/proguard-4.7/.
-
-- Extract your Proguard version to the Android SDK install path under tools/.  You will need to either rename the dir proguard-<your-version> to proguard/ or, if your filesystem supports it, use a symbolic link (the later is highly recommended), such as `ln -s proguard proguard-<your-version>`.
+Standalone Proguard 7.6.0 is included with the project (proguard.jar) under forge-gui-android > tools and supports up to Java 23 (latest android uses Java 17).
 
 #### Android Build
 
-The Eclipse plug-ins do NOT support building things for Android.  They do however allow you to use the debugger so you can still set breakpoints and trace
-things out.  The steps below show how to generate a debug Android build.
-
-1) Create a Maven build for the forge top-level project.  Right-click on the forge project.  Run as.. > Maven build...
-   - On the Main tab, set Goals: clean install
-
-2) Run forge Maven build.  If everything built, you should see "BUILD SUCCESS" in the Console View.
-
-3) Right-click on the forge-gui-android project.  Run as.. > Maven build...
-
-   - On the Main tab, set Goals: install, Profiles: android-debug
-   - On the Environment tab, you may need to define the variable ANDROID_HOME with the value containing the path to your Android SDK installation.  For example, Variable: ANDROID_HOME, Value: Your Android SDK install path here.
-
-4) Run the forge-gui-android Maven build.  This may take a few minutes.  If everything worked, you should see "BUILD SUCCESS" in the Console View.
-
-Assuming you got this far, you should have an Android forge-android-[version].apk in the forge-gui-android/target path.
+TBD
 
 #### Android Deploy
 
-You'll need to have the Android SDK install path platform-tools/ path in your command search path to easily deploy builds.
-
-- Open a command prompt.  Navigate to the forge-gui-android/target/ path.
-
-- Connect your Android device to your dev machine.
-
-- Ensure the device is visible using `adb devices`
-
-- Remove the old Forge install if present: `adb uninstall forge.app`
-
-- Install the new apk: `adb install forge-android-[version].apk`
+TBD
 
 #### Android Debugging
 
-Assuming the apk is installed, launch it from the device.
-
-In Eclipse, launch the DDMS.  Window > Perspective > Open Perspective > Other... > DDMS.  You should see the forge app in the list.  Highlight the app, click on the green debug button and a
-green debug button should appear next to the app's name.  You can now set breakpoints and step through the source code.
+TBD
 
 ### Windows / Linux SNAPSHOT build
 

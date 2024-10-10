@@ -1,1 +1,1 @@
-${alpha-version}
+${snapshot-version}

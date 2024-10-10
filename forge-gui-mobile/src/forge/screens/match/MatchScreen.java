@@ -479,7 +479,7 @@ public class MatchScreen extends FScreen {
             //draw arrows for combat
             final CombatView combat = game.getCombat();
             for (CardView c : cardsonBattlefield) {
-                TargetingOverlay.assembleArrows(g, c, endpoints, combat, is4Player() || is3Player() ? playerViewSet : null);
+                TargetingOverlay.assembleArrows(g, c, endpoints, combat, playerViewSet);
             }
         } catch (Exception e) {
         }
