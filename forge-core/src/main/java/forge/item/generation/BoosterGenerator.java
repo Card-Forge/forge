@@ -250,7 +250,7 @@ public class BoosterGenerator {
                 if ((edition.getName().equals("Planeshift")) &&
                         (slotType.startsWith(BoosterSlots.RARE))
                         && (foilSlot.startsWith(BoosterSlots.SPECIAL))
-                        ) {
+                ) {
                     numCards--;
                 }
             }
@@ -585,15 +585,8 @@ public class BoosterGenerator {
             ) { // custom print sheet
                 System.out.println("Parsing from main code: " + mainCode);
                 String sheetName = StringUtils.strip(mainCode.substring(10), "()\" ");
-                System.out.println("Attempting to lookup : " + sheetName);
-                PrintSheet sheet = StaticData.instance().getPrintSheets().get(sheetName);
-                if(null == sheet) {
-                    String fallback = sheetName.split(" ")[0]+ " cards";
-                    System.out.println("Sheet : " + sheetName + " not found. Default to : " + fallback);
-                    sheet = StaticData.instance().getPrintSheets().get(fallback);
-                }
-                if(null == sheet) throw new RuntimeException("Sheet : " + sheetName + " not found.");
-                src = sheet.toFlatList();
+                System.out.println("Attempting to lookup: " + sheetName);
+                src = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
                 setPred = Predicates.alwaysTrue();
 
             } else if (mainCode.startsWith("promo") || mainCode.startsWith("name")) { // get exactly the named cards, that's a tiny inlined print sheet
@@ -679,11 +672,11 @@ public class BoosterGenerator {
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
                 toAdd = Predicates.compose(
-                            Predicates.or(
+                        Predicates.or(
                                 CardRulesPredicates.splitType(CardSplitType.Transform),
                                 CardRulesPredicates.splitType(CardSplitType.Meld),
                                 CardRulesPredicates.splitType(CardSplitType.Modal)
-                            ),
+                        ),
                         PaperCard::getRules);
             } else if (operator.equalsIgnoreCase(BoosterSlots.LAND)) {          toAdd = Predicates.compose(CardRulesPredicates.Presets.IS_LAND, PaperCard::getRules);
             } else if (operator.equalsIgnoreCase(BoosterSlots.BASIC_LAND)) {    toAdd = IPaperCard.Predicates.Presets.IS_BASIC_LAND;
