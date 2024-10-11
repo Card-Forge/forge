@@ -39,7 +39,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected Random rand = MyRandom.getRandom();
     WorldBackground background;
     private float spawnDelay = 0;
-    private static final float spawnInterval = 12;//todo config
+    private static final float spawnInterval = 4;//todo config
     private PointOfInterestMapSprite collidingPoint;
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
     private final static Float dieTimer = 20f;//todo config
