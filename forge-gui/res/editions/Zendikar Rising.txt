@@ -401,7 +401,6 @@ ScryfallCode=ZNR
 379 R Throne of Makindi @Igor Kieryluk
 
 [precon product]
-288† R Needleverge Pathway @Alayna Danner
 380 L Plains @Adam Paquette
 381 L Island @Tianhua X
 382 L Swamp @Adam Paquette

@@ -450,6 +450,8 @@ ScryfallCode=DMU
 
 [buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa
+435 M Sheoldred, the Apocalypse @Richard Whitters
+436 M Sheoldred, the Apocalypse @Richard Whitters
 
 [promo]
 429 R Herd Migration @Antonio José Manzanedo

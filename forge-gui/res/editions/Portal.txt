@@ -243,7 +243,6 @@ ScryfallCode=POR
 114s U Vampiric Feast @王峰
 117s R Wicked Pact @杨光恒
 118† U Blaze @Gerry Grace
-118†s U Blaze @David A. Cherry
 118s U Blaze @David A. Cherry
 134s U Hulking Cyclops @Lin Yan
 145† C Raging Goblin @Pete Venters

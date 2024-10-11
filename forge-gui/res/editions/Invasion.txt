@@ -5,7 +5,7 @@ Name=Invasion
 Code2=IN
 Type=Expansion
 BoosterCovers=3
-Booster=11 Common:fromsheet("INV cards"), 3 Uncommon:fromsheet("INV cards"), 1 Rare:fromsheet("INV cards")
+Booster=11 Common, 3 Uncommon, 1 Rare
 FatPack=6
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False
@@ -362,9 +362,6 @@ ScryfallCode=INV
 348 L Forest @Alan Pollack
 349 L Forest @Alan Pollack
 350 L Forest @Glen Angus
-
-[precon product]
-134★ C Urborg Skeleton @Tom Wänerstrand
 
 [tokens]
 w_x_x_reflection

@@ -361,9 +361,6 @@ ScryfallCode=MIR
 349 L Forest @Tony Roberts
 350 L Forest @Tony Roberts
 
-[alternate art]
-87† C Reality Ripple @D. Alexander Gregory
-
 [tokens]
 tombspawn
 wood

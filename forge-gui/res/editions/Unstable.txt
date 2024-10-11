@@ -89,7 +89,7 @@ ScryfallCode=UST
 62 U Old-Fashioned Vampire @Simon Dominic
 63 R Over My Dead Bodies @Even Amundsen
 64 U Overt Operative @Bram Sels
-65 U "Rumors of My Death . . ." @Alex Konstad
+65 U "Rumors of My Death..." @Alex Konstad
 66 U Skull Saucer @Mike Burns
 67a U Sly Spy @Michael Phillippi $A
 67b U Sly Spy @Michael Phillippi $B
