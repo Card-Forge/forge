@@ -580,7 +580,7 @@ public class MapStage extends GameStage {
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(InnScene.instance(TileMapScene.instance(), TileMapScene.instance().rootPoint.getID(), changes, id))));
                         break;
                     case "spellsmith":
-                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
+                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance(changes))));
                         break;
                     case "shardtrader":
                         MapActor shardTraderActor = new OnCollide(() -> Forge.switchScene(ShardTraderScene.instance()));

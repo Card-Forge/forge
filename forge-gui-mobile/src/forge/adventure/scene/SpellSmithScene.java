@@ -32,6 +32,16 @@ public class SpellSmithScene extends UIScene {
 
     private static SpellSmithScene object;
 
+    // Method that accepts PointOfInterestChanges
+    public static SpellSmithScene instance(PointOfInterestChanges localChanges) {
+        changes = localChanges;
+
+        if (object == null)
+            object = new SpellSmithScene();
+        return object;
+    }
+
+    // Overloaded method without PointOfInterestChanges
     public static SpellSmithScene instance() {
         if (object == null)
             object = new SpellSmithScene();
