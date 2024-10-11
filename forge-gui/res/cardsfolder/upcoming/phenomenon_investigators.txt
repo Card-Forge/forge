@@ -3,7 +3,7 @@ ManaCost:2 U B
 Types:Creature Human Detective
 PT:3/4
 K:ETBReplacement:Other:BelieveOrDoubt
-SVar:BelieveOrDoubt:DB$ GenericChoice | Choices$ Believe,Doubt | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, enters, choose Believe or Doubt.
+SVar:BelieveOrDoubt:DB$ GenericChoice | Choices$ Believe,Doubt | Defined$ You | SetChosenMode$ True | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Believe or Doubt.
 SVar:Believe:DB$ Pump | SpellDescription$ Believe
 SVar:Doubt:DB$ Pump | SpellDescription$ Doubt
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeBelieve | AddTrigger$ BelieveTrigger | Description$ • Believe — Whenever a nontoken creature you control dies, create a 2/2 black Horror enchantment creature token.

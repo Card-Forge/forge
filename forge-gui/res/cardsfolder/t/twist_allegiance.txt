@@ -3,7 +3,7 @@ ManaCost:6 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Opponent | AllValid$ Creature.TargetedPlayerCtrl | NewController$ You | LoseControl$ EOT | RememberControlled$ True | StackDescription$ REP You_{p:You} & target opponent_{p:Targeted} | SubAbility$ DBGainCtrlOpp | SpellDescription$ You and target opponent each gain control of all creatures the other controls until end of turn. Untap those creatures. Those creatures gain haste until end of turn.
 SVar:DBGainCtrlOpp:DB$ GainControl | AllValid$ Creature.IsNotRemembered+YouCtrl | NewController$ Targeted | LoseControl$ EOT | RememberControlled$ True | StackDescription$ None | SubAbility$ DBUntapAll
-SVar:DBDUntapAll:DB$ UntapAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBPumpAll
+SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBPumpAll
 SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

@@ -6088,6 +6088,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return getType().sharesCardTypeWith(c1.getType());
     }
 
+    public final boolean sharesAllCardTypesWith(final Card c1) {
+        if (c1 == null) {
+            return false;
+        }
+        return getType().sharesAllCardTypesWith(c1.getType());
+    }
+
     public final boolean sharesControllerWith(final Card c1) {
         return c1 != null && getController().equals(c1.getController());
     }
