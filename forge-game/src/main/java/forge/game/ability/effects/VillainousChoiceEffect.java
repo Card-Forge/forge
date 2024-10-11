@@ -21,15 +21,6 @@ public class VillainousChoiceEffect extends SpellAbilityEffect {
         for (Player p : getDefinedPlayersOrTargeted(sa)) {
             int choiceAmount = p.getAdditionalVillainousChoices() + 1;
 
-            List<SpellAbility> saToRemove = Lists.newArrayList();
-
-            for (SpellAbility saChoice : abilities) {
-                if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(sa.getHostCard(), saChoice, sa.getActivatingPlayer())) {
-                    saToRemove.add(saChoice);
-                }
-            }
-            abilities.removeAll(saToRemove);
-
             // For the AI chooseSAForEffect really should take the least good ability. Currently it just takes the first
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             for(int i = 0; i < choiceAmount; i++) {

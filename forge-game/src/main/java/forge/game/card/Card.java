@@ -805,6 +805,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return setState(CardStateName.FaceDown, false);
     }
 
+    public boolean canBeTurnedFaceUp() {
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams);
+    }
+
     public void forceTurnFaceUp() {
         turnFaceUp(false, null);
     }
@@ -813,13 +818,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return turnFaceUp(true, cause);
     }
     public boolean turnFaceUp(boolean runTriggers, SpellAbility cause) {
-        if (!isFaceDown()) {
+        if (!isFaceDown() || !canBeTurnedFaceUp()) {
             return false;
         }
-
-        // Check replacement effects
-        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        if (game.getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
 
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
@@ -855,10 +856,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             triggerHandler.registerActiveTrigger(this, false);
         }
         if (runTriggers) {
-            // Run replacement effects
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             game.getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             runParams.put(AbilityKey.Cause, cause);
 
