@@ -7,10 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.StaticData;
+import forge.adventure.character.RewardSprite;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -50,7 +52,7 @@ public class SpellSmithScene extends UIScene {
 
     private List<PaperCard> cardPool = new ArrayList<>();
     private TextraLabel playerGold, playerShards, poolSize;
-    private final TextraButton pullUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith;
+    private final TextraButton pullUsingGold, pullPackUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith;
     private final ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
@@ -65,7 +67,7 @@ public class SpellSmithScene extends UIScene {
     private int cost_low = -1;
     private int cost_high = 9999;
     //Other
-    private final float basePrice = 125f;
+    private final float basePrice = 0f;
     private int currentPrice = 0;
     private int currentShardPrice = 0;
     private List<CardEdition> editions = null;
@@ -82,6 +84,10 @@ public class SpellSmithScene extends UIScene {
 
         pullUsingGold = ui.findActor("pullUsingGold");
         pullUsingGold.setDisabled(true);
+
+        pullPackUsingGold = ui.findActor("pullPackUsingGold");
+        pullPackUsingGold.setDisabled(true);
+
         pullUsingShards = ui.findActor("pullUsingShards");
         pullUsingShards.setDisabled(true);
 
@@ -139,6 +145,7 @@ public class SpellSmithScene extends UIScene {
         ui.onButtonPress("decline", SpellSmithScene.this::declineSmithing);
         ui.onButtonPress("done", SpellSmithScene.this::done);
         ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
+        ui.onButtonPress("pullPackUsingGold", () -> SpellSmithScene.this.pullPack(false));
         ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
         ui.onButtonPress("BReset", () -> {
             reset();
@@ -165,7 +172,7 @@ public class SpellSmithScene extends UIScene {
         editions = StaticData.instance().getSortedEditions().stream().filter(input -> {
             if (input == null)
                 return false;
-            if (input.getType() == CardEdition.Type.REPRINT || input.getType() == CardEdition.Type.PROMO || input.getType() == CardEdition.Type.COLLECTOR_EDITION)
+            if (input.getType() != CardEdition.Type.CORE && input.getType() != CardEdition.Type.EXPANSION && input.getType() != CardEdition.Type.BOXED_SET && input.getType() != CardEdition.Type.DRAFT)
                 return false;
             if (input.getDate() != null) {
                 Instant now = Instant.now(); //this should filter upcoming sets from release date + 1 day..
@@ -174,7 +181,7 @@ public class SpellSmithScene extends UIScene {
             }
             List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
                     .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
-            if (it.size() == 0)
+            if (it.isEmpty())
                 return false;
             ConfigData configData = Config.instance().getConfigData();
             if (configData.allowedEditions != null)
@@ -401,10 +408,106 @@ public class SpellSmithScene extends UIScene {
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
+        pullPackUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
         pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
+        pullPackUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
         editionList.setUserObject(edition);
+    }
+
+    public void pullPack(boolean usingShards) {
+        paidInShards = usingShards;
+        Array<Reward> rewardPack = new Array<>();
+
+        // Separate card pool by rarity and type
+        List<PaperCard> commonCards = cardPool.stream()
+                .filter(card -> card.getRarity().toString().equals("C"))
+                .collect(Collectors.toList());
+        List<PaperCard> uncommonCards = cardPool.stream()
+                .filter(card -> card.getRarity().toString().equals("U"))
+                .collect(Collectors.toList());
+        List<PaperCard> rareCards = cardPool.stream()
+                .filter(card -> card.getRarity().toString().equals("R"))
+                .collect(Collectors.toList());
+        List<PaperCard> mythicRareCards = cardPool.stream()
+                .filter(card -> card.getRarity().toString().equals("M"))
+                .collect(Collectors.toList());
+        List<PaperCard> basicLands = cardPool.stream()
+                .filter(card -> card.getRules().getType().isLand() && card.isVeryBasicLand())
+                .collect(Collectors.toList());
+
+        // Pull 1 basic land
+        if (!basicLands.isEmpty()) {
+            PaperCard P = basicLands.get(MyRandom.getRandom().nextInt(basicLands.size()));
+            Reward reward = createReward(P);
+            rewardPack.add(reward);
+        }
+
+        // Pull 10 commons
+        for (int i = 0; i < 10 && !commonCards.isEmpty(); i++) {
+            PaperCard P = commonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
+            Reward reward = createReward(P);
+            rewardPack.add(reward);
+        }
+
+        // Pull 2 uncommons
+        for (int i = 0; i < 2 && !uncommonCards.isEmpty(); i++) {
+            PaperCard P = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
+            Reward reward = createReward(P);
+            rewardPack.add(reward);
+        }
+
+        // Pull 1 uncommon or any
+        if (!commonCards.isEmpty()) {
+            PaperCard P;
+            if (MyRandom.getRandom().nextInt(3) == 0) {
+                // 1 in 3 chance of pulling a rare or mythic rare
+                if (!mythicRareCards.isEmpty()) {
+                    P = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
+                } else {
+                    P = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
+                }
+            } else {
+                P = uncommonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
+            }
+            Reward reward = createReward(P);
+            rewardPack.add(reward);
+        }
+
+        // Pull 1 rare with a 1/8th chance of being a mythic rare
+        if (!rareCards.isEmpty()) {
+            // 1/8th chance of pulling a mythic rare
+            if (MyRandom.getRandom().nextInt(8) == 0 && !mythicRareCards.isEmpty()) {
+                PaperCard P = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
+                Reward reward = createReward(P);
+                rewardPack.add(reward);
+            } else {
+                PaperCard P = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
+                Reward reward = createReward(P);
+                rewardPack.add(reward);
+            }
+        }
+
+        // Display the rewards using the reward scene
+        showRewardScene(rewardPack);
+    }
+
+    private Reward createReward(PaperCard P) {
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            if (!edition.isEmpty()) {
+                return new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
+            } else {
+                return new Reward(CardUtil.getCardByName(P.getCardName()));
+            }
+        } else {
+            return new Reward(P);
+        }
+    }
+
+    private void showRewardScene(Array<Reward> rewards) {
+        RewardScene.instance().loadRewards(rewards, RewardScene.Type.Loot, null);
+        Forge.switchScene(RewardScene.instance());
     }
 
     public void pullCard(boolean usingShards) {
@@ -466,6 +569,7 @@ public class SpellSmithScene extends UIScene {
 
     private void updatePullButtons() {
         pullUsingGold.setDisabled(Current.player().getGold() < currentPrice);
+        pullPackUsingGold.setDisabled(Current.player().getGold() < currentPrice);
         pullUsingShards.setDisabled(Current.player().getShards() < currentShardPrice);
 
         acceptReward.setVisible(false);
@@ -476,6 +580,7 @@ public class SpellSmithScene extends UIScene {
 
     private void disablePullButtons() {
         pullUsingGold.setDisabled(true);
+        pullPackUsingGold.setDisabled(true);
         pullUsingShards.setDisabled(true);
     }
 }

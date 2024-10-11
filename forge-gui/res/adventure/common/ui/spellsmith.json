@@ -150,6 +150,17 @@
       "width": 90,
       "height": 20
     },
+    {
+      "type": "TextButton",
+      "selectable": true,
+      "name": "pullPackUsingGold",
+      "binding": "Status",
+      "text": "tr(lblDraw) [+gold]",
+      "x": 175,
+      "y": 5,
+      "width": 90,
+      "height": 20
+    },
 	{
       "type": "Label",
       "name": "playerShards", 
