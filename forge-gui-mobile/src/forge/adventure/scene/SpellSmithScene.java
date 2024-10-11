@@ -13,6 +13,7 @@ import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
+import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -60,7 +61,8 @@ public class SpellSmithScene extends UIScene {
     private List<CardEdition> editions = null;
     private Reward currentReward = null;
     private boolean paidInShards = false;
-
+    static PointOfInterestChanges changes;
+    
     private SpellSmithScene() {
         super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
 
@@ -321,7 +323,7 @@ public class SpellSmithScene extends UIScene {
 
     public void filterResults() {
         Iterable<PaperCard> P = RewardData.getAllCards();
-        float totalCost = basePrice * Current.player().goldModifier();
+        float totalCost = basePrice * Current.player().goldModifier() * changes.getTownPriceModifier();
         final List<String> colorFilter = new ArrayList<>();
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet())
             switch (B.getKey()) {

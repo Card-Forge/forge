@@ -130,7 +130,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
     }
 
     int maxRepToApply = 20;
-    float priceModifierPerRep = 0.005f;
+    float priceModifierPerRep = 0.025f;
 
     public float getTownPriceModifier(){
         int townRep = reputation.getOrDefault(0, 0);
