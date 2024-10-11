@@ -5,7 +5,7 @@ Name=Dominaria United
 Code2=DMU
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 BasicLand:fromSheet("DMU cards")
+Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
 BoosterMustContain=Legendary Creature
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
@@ -479,6 +479,28 @@ A225 U A-Uurg, Spawn of Turg @Nicholas Gregory
 A227 U A-Zar Ojanen, Scion of Efrava @Justine Cruz
 A259 R A-Thran Portal @Sarah Finnigan
 A286 R A-Briar Hydra @Caio Monteiro
+
+[lands]
+2 Plains|DMU|1
+2 Plains|DMU|2
+2 Plains|DMU|3
+1 Plains|DMU|4
+2 Island|DMU|1
+2 Island|DMU|2
+2 Island|DMU|3
+1 Island|DMU|4
+2 Swamp|DMU|1
+2 Swamp|DMU|2
+2 Swamp|DMU|3
+1 Swamp|DMU|4
+2 Mountain|DMU|1
+2 Mountain|DMU|2
+2 Mountain|DMU|3
+1 Mountain|DMU|4
+2 Forest|DMU|1
+2 Forest|DMU|2
+2 Forest|DMU|3
+1 Forest|DMU|4
 
 [tokens]
 b_1_1_bird_flying_noblock
