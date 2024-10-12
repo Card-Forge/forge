@@ -119,7 +119,7 @@ public class CardCopyService {
         c.setSetCode(in.getSetCode());
 
         for (final CardStateName state : in.getStates()) {
-            copyState(in, state, c, state);
+            copyState(in, state, c, state, false);
         }
 
         c.setState(in.getCurrentStateName(), false);
