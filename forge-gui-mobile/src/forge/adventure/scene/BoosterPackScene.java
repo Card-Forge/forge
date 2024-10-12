@@ -75,7 +75,7 @@ public class BoosterPackScene extends UIScene {
     static PointOfInterestChanges changes;
 
     private BoosterPackScene() {
-        super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
+        super(Forge.isLandscapeMode() ? "ui/boosterpack.json" : "ui/boosterpack_portrait.json");
 
         editionList = ui.findActor("BSelectPlane");
         rewardDummy = ui.findActor("RewardDummy");
