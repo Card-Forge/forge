@@ -41,7 +41,7 @@ public class BoosterPackScene extends UIScene {
 
     private List<PaperCard> cardPool = new ArrayList<>();
     private TextraLabel playerGold, playerShards, poolSize;
-    private final TextraButton pullUsingGold, pullPackUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith;
+    private final TextraButton pullUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith;
     private final ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
@@ -72,9 +72,6 @@ public class BoosterPackScene extends UIScene {
 
         pullUsingGold = ui.findActor("pullUsingGold");
         pullUsingGold.setDisabled(true);
-
-        pullPackUsingGold = ui.findActor("pullPackUsingGold");
-        pullPackUsingGold.setDisabled(true);
 
         pullUsingShards = ui.findActor("pullUsingShards");
         pullUsingShards.setDisabled(true);
@@ -129,12 +126,9 @@ public class BoosterPackScene extends UIScene {
             }
         }
 
-        ui.onButtonPress("accept", BoosterPackScene.this::acceptSmithing);
-        ui.onButtonPress("decline", BoosterPackScene.this::declineSmithing);
         ui.onButtonPress("done", BoosterPackScene.this::done);
-        ui.onButtonPress("pullUsingGold", () -> BoosterPackScene.this.pullCard(false));
-        ui.onButtonPress("pullPackUsingGold", () -> BoosterPackScene.this.pullPack(false));
-        ui.onButtonPress("pullUsingShards", () -> BoosterPackScene.this.pullCard(true));
+        ui.onButtonPress("pullUsingGold", () -> BoosterPackScene.this.pullPack(false));
+        ui.onButtonPress("pullUsingShards", () -> BoosterPackScene.this.pullPack(true));
         ui.onButtonPress("BReset", () -> {
             reset();
             filterResults();
@@ -179,10 +173,6 @@ public class BoosterPackScene extends UIScene {
     }
 
     public boolean done() {
-        if (currentReward != null) {
-            acceptSmithing();
-        }
-
         if (rewardActor != null) rewardActor.remove();
         cardPool.clear(); //Get rid of cardPool, filtering is fast enough to justify keeping it cached.
         Forge.switchToLast();
@@ -396,11 +386,9 @@ public class BoosterPackScene extends UIScene {
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
-        pullPackUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
         pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
-        pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
-        pullPackUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost || edition.isEmpty());
-        pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
+        pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost || edition.isEmpty());
+        pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice || edition.isEmpty());
         editionList.setUserObject(edition);
     }
 
@@ -479,6 +467,13 @@ public class BoosterPackScene extends UIScene {
 
         // Display the rewards using the reward scene
         showRewardScene(rewardPack);
+        if (paidInShards) {
+            Current.player().takeShards(currentShardPrice);
+        } else {
+            Current.player().takeGold(currentPrice);
+        }
+        clearReward();
+        updatePullButtons();
     }
 
     private Reward createReward(PaperCard P) {
@@ -498,56 +493,6 @@ public class BoosterPackScene extends UIScene {
         Forge.switchScene(RewardScene.instance());
     }
 
-    public void pullCard(boolean usingShards) {
-        paidInShards = usingShards;
-        PaperCard P = cardPool.get(MyRandom.getRandom().nextInt(cardPool.size())); //Don't use the standard RNG.
-        currentReward = null;
-        if (Config.instance().getSettingData().useAllCardVariants) {
-            if (!edition.isEmpty()) {
-                currentReward = new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
-            } else {
-                currentReward = new Reward(CardUtil.getCardByName(P.getCardName())); // grab any random variant if no set preference is specified
-            }
-        } else {
-            currentReward = new Reward(P);
-        }
-        if (rewardActor != null) rewardActor.remove();
-        rewardActor = new RewardActor(currentReward, true, null, true);
-        rewardActor.flip(); //Make it flip so it draws visual attention, why not.
-        rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
-        stage.addActor(rewardActor);
-
-        acceptReward.setVisible(true);
-        declineReward.setVisible(true);
-        exitSmith.setDisabled(true);
-        disablePullButtons();
-    }
-
-    private void acceptSmithing() {
-        if (paidInShards) {
-            Current.player().takeShards(currentShardPrice);
-        } else {
-            Current.player().takeGold(currentPrice);
-        }
-
-        Current.player().addReward(currentReward);
-
-        clearReward();
-        updatePullButtons();
-    }
-
-    private void declineSmithing() {
-        // Decline the smith reward for 10% of original price
-        float priceAdjustment = .10f;
-        if (paidInShards) {
-            Current.player().takeShards((int)(currentShardPrice * priceAdjustment));
-        } else {
-            Current.player().takeGold((int)(currentPrice * priceAdjustment));
-        }
-
-        clearReward();
-        updatePullButtons();
-    }
 
     private void clearReward() {
         if (rewardActor != null) rewardActor.remove();
@@ -556,10 +501,8 @@ public class BoosterPackScene extends UIScene {
 
     private void updatePullButtons() {
         String selectedEdition = editionList.getSelected().getCode();
-        pullUsingGold.setDisabled(Current.player().getGold() < currentPrice);
-        pullPackUsingGold.setDisabled(Current.player().getGold() < currentPrice);
-        pullPackUsingGold.setDisabled(Current.player().getGold() < currentPrice || selectedEdition.isEmpty());
-        pullUsingShards.setDisabled(Current.player().getShards() < currentShardPrice);
+        pullUsingGold.setDisabled(Current.player().getGold() < currentPrice || selectedEdition.isEmpty());
+        pullUsingShards.setDisabled(Current.player().getShards() < currentShardPrice || selectedEdition.isEmpty());
 
         acceptReward.setVisible(false);
         declineReward.setVisible(false);
@@ -569,7 +512,6 @@ public class BoosterPackScene extends UIScene {
 
     private void disablePullButtons() {
         pullUsingGold.setDisabled(true);
-        pullPackUsingGold.setDisabled(true);
         pullUsingShards.setDisabled(true);
     }
 }
