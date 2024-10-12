@@ -12,7 +12,6 @@ import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.BoosterPackScene;
-import forge.adventure.scene.SpellSmithScene;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;

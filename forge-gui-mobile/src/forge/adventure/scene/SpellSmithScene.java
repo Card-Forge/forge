@@ -13,7 +13,6 @@ import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -62,7 +61,6 @@ public class SpellSmithScene extends UIScene {
     private List<CardEdition> editions = null;
     private Reward currentReward = null;
     private boolean paidInShards = false;
-    static PointOfInterestChanges changes;
     
     private SpellSmithScene() {
         super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");

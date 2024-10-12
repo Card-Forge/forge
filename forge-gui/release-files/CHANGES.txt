@@ -1,2 +1,2615 @@
-- Bug fixes -
-As always, this release of Forge features an assortment of bug fixes and improvements based on user feedback during the previous release run.
+## Unreleased
+### No issue
+
+**misc**
+
+
+[88bcc7c6c249c66](https://github.com/nwg5817/forge/commit/88bcc7c6c249c66) Meta *2024-10-12 05:11:43*
+
+**UI Looks OK**
+
+
+[21176233de5d734](https://github.com/nwg5817/forge/commit/21176233de5d734) Meta *2024-10-12 04:46:08*
+
+**Removals**
+
+
+[c1badc24f49f287](https://github.com/nwg5817/forge/commit/c1badc24f49f287) Meta *2024-10-12 03:47:36*
+
+**Remove nonfunction**
+
+
+[3dab98e46c4ced4](https://github.com/nwg5817/forge/commit/3dab98e46c4ced4) Meta *2024-10-12 02:49:37*
+
+**Price Changes**
+
+
+[5aafc376359d804](https://github.com/nwg5817/forge/commit/5aafc376359d804) Meta *2024-10-12 02:35:58*
+
+**Disable button if set not selected**
+
+
+[6cbfef4e7dc35f0](https://github.com/nwg5817/forge/commit/6cbfef4e7dc35f0) Meta *2024-10-12 02:28:10*
+
+**Booster Book Opens**
+
+
+[7a5a756cec24342](https://github.com/nwg5817/forge/commit/7a5a756cec24342) Meta *2024-10-12 01:34:47*
+
+**Booster Book Created and added on Normal**
+
+
+[9f7376c21872411](https://github.com/nwg5817/forge/commit/9f7376c21872411) Meta *2024-10-12 01:12:32*
+
+**Revert**
+
+
+[0ee7176ca0b4f14](https://github.com/nwg5817/forge/commit/0ee7176ca0b4f14) Meta *2024-10-12 00:30:46*
+
+**Working Booster Scene**
+
+
+[b11716f209df63e](https://github.com/nwg5817/forge/commit/b11716f209df63e) Meta *2024-10-12 00:28:00*
+
+**BoosterPackScene**
+
+
+[ee82f0d3dd98612](https://github.com/nwg5817/forge/commit/ee82f0d3dd98612) Meta *2024-10-12 00:12:53*
+
+**Reputation changes smithing cosT?**
+
+
+[1ff15e89f9e6e26](https://github.com/nwg5817/forge/commit/1ff15e89f9e6e26) Meta *2024-10-11 15:05:55*
+
+**Merge branch 'master' into Meta**
+
+
+[e8be1f0c8908a3c](https://github.com/nwg5817/forge/commit/e8be1f0c8908a3c) Meta *2024-10-11 01:21:27*
+
+**Merge pull request #2 from Card-Forge/master**
+
+ * Sync
+
+[87ee5f0918fc362](https://github.com/nwg5817/forge/commit/87ee5f0918fc362) JMAilan *2024-10-11 01:19:43*
+
+**Smithing discount**
+
+
+[7ae95323a18c039](https://github.com/nwg5817/forge/commit/7ae95323a18c039) Meta *2024-10-11 01:13:33*
+
+**Update oblivious_bookworm.txt (#6272)**
+
+
+[5189313d4d1f7f7](https://github.com/nwg5817/forge/commit/5189313d4d1f7f7) tool4ever *2024-10-10 20:23:29*
+
+**Updated 3 DSK Cards (#6270)**
+
+
+[73513cf2c11363e](https://github.com/nwg5817/forge/commit/73513cf2c11363e) loud1990 *2024-10-10 18:45:46*
+
+**Edit pile cleanup: part 5, folder 'upcoming' part 2**
+
+
+[1068ff3f1ab3fd8](https://github.com/nwg5817/forge/commit/1068ff3f1ab3fd8) Renato Filipe Vidal Santos *2024-10-10 13:05:08*
+
+**Edit pile cleanup: part 4, folder 'upcoming' part 1 (#6221)**
+
+
+[4fc77be4df973f2](https://github.com/nwg5817/forge/commit/4fc77be4df973f2) Renato Filipe Vidal Santos *2024-10-10 13:04:18*
+
+**Edit pile cleanup: part 6, folder 'upcoming' part 3 (#6223)**
+
+
+[747ed18e165bb40](https://github.com/nwg5817/forge/commit/747ed18e165bb40) Renato Filipe Vidal Santos *2024-10-10 13:03:29*
+
+**- Added puzzle PS_DSK1. (#6269)**
+
+
+[fddab97eeaa1c3a](https://github.com/nwg5817/forge/commit/fddab97eeaa1c3a) Agetian *2024-10-10 07:28:38*
+
+**Add Rendmaw Creaking Nest and supporting changes (#6265)**
+
+ * Add Rendmaw Creaking Nest, supporting property numTypes, and black 2/2 bird flying token
+ * Updated accoring to PR requests
+ * Update rendmaw_creaking_nest.txt
+ * Added landplayed trigger
+ * ---------
+ * Co-authored-by: loperjchris &lt;christopher.loper1990@gmail.com&gt;
+
+[cca7db56547135e](https://github.com/nwg5817/forge/commit/cca7db56547135e) TwentyToedToad *2024-10-10 07:16:39*
+
+**Add Demonic Covenant and supporting changes (#6257)**
+
+ * Add Demonic Covenant and supporting changes
+ * Updated changes
+ * Update demonic_covenant.txt
+ * Addressing PR comments
+ * ---------
+ * Co-authored-by: loperjchris &lt;christopher.loper1990@gmail.com&gt;
+
+[96d065189ba44d9](https://github.com/nwg5817/forge/commit/96d065189ba44d9) TwentyToedToad *2024-10-10 07:13:19*
+
+**Added Your Plans Mean Nothing (#6262)**
+
+ * Added Your Plans Mean Nothing
+ * Tested with teammates to ensure that if a teammate is targeted they do not get to draw cards but they do discard their hand.
+ * Update your_plans_mean_nothing.txt
+
+[b2513288738710a](https://github.com/nwg5817/forge/commit/b2513288738710a) TwentyToedToad *2024-10-10 07:13:11*
+
+**Fix Summary Dismissal (#6263)**
+
+
+[6f9cb7c74d23ba9](https://github.com/nwg5817/forge/commit/6f9cb7c74d23ba9) tool4ever *2024-10-10 06:34:41*
+
+**Revert**
+
+
+[63fb188b4bc58d7](https://github.com/nwg5817/forge/commit/63fb188b4bc58d7) Meta *2024-10-10 00:51:14*
+
+**Merge branch 'master' into Meta**
+
+
+[0d9998dbba02eac](https://github.com/nwg5817/forge/commit/0d9998dbba02eac) Meta *2024-10-10 00:33:17*
+
+**Merge pull request #1 from Card-Forge/master**
+
+ * Update
+
+[82afeea4521e6f5](https://github.com/nwg5817/forge/commit/82afeea4521e6f5) JMAilan *2024-10-10 00:31:14*
+
+**Initial bounding box**
+
+ * size
+
+[dc9da41a0055fe9](https://github.com/nwg5817/forge/commit/dc9da41a0055fe9) Meta *2024-10-10 00:26:44*
+
+**Add Mine Is the Only Truth (#6259)**
+
+
+[1bd54d2ca0d8168](https://github.com/nwg5817/forge/commit/1bd54d2ca0d8168) TwentyToedToad *2024-10-09 20:27:33*
+
+**Add Running Is Useless (#6261)**
+
+
+[5f022923b040d5a](https://github.com/nwg5817/forge/commit/5f022923b040d5a) TwentyToedToad *2024-10-09 19:39:20*
+
+**Room scripts (#6253)**
+
+
+[73c40b620b998ff](https://github.com/nwg5817/forge/commit/73c40b620b998ff) Fulgur14 *2024-10-09 18:54:39*
+
+**Pom Updates**
+
+ * Java 17 requirement
+
+[88913e8d7d45a6c](https://github.com/nwg5817/forge/commit/88913e8d7d45a6c) Meta *2024-10-09 14:30:19*
+
+**Add I Am Never Alone (#6258)**
+
+ * Add I Am Never Alone
+ * Update i_am_never_alone.txt
+ * Update i_am_never_alone.txt
+ * ---------
+ * Co-authored-by: loperjchris &lt;christopher.loper1990@gmail.com&gt;
+
+[e1452ef997fc37e](https://github.com/nwg5817/forge/commit/e1452ef997fc37e) TwentyToedToad *2024-10-09 07:30:45*
+
+**size and border**
+
+
+[0264fcd787a3e29](https://github.com/nwg5817/forge/commit/0264fcd787a3e29) Meta *2024-10-09 00:15:00*
+
+**Initial bounding box**
+
+
+[04d840832e00cc4](https://github.com/nwg5817/forge/commit/04d840832e00cc4) Meta *2024-10-08 19:23:27*
+
+**Show chosen mana for mana abilities as symbols (#6256)**
+
+ * Support for icons in dialogs.
+ * Mana abilities show chosen mana via icons.
+ * Thread safety for showOptionDialog
+ * Ensure EventDispatchThread for showInputDialog
+ * ---------
+ * Co-authored-by: Jetz &lt;Jetz722@gmail.com&gt;
+
+[48adeb357d9c458](https://github.com/nwg5817/forge/commit/48adeb357d9c458) Jetz72 *2024-10-08 19:17:18*
+
+**Added Fear My Authority (#6255)**
+
+
+[cbdbe1d62b557c7](https://github.com/nwg5817/forge/commit/cbdbe1d62b557c7) TwentyToedToad *2024-10-08 16:53:07*
+
+**Added Disorienting Choice (#6244)**
+
+
+[5e3833436eb63ab](https://github.com/nwg5817/forge/commit/5e3833436eb63ab) TwentyToedToad *2024-10-08 14:12:03*
+
+**Support Torture Pit (#6254)**
+
+
+[fe0abb25a6931ab](https://github.com/nwg5817/forge/commit/fe0abb25a6931ab) tool4ever *2024-10-08 13:09:10*
+
+**Add Spell Smith Insurance (reject smithing for 10% cost)**
+
+
+[dd60a84f40e733f](https://github.com/nwg5817/forge/commit/dd60a84f40e733f) Chris H *2024-10-08 13:07:15*
+
+**add translation**
+
+
+[cfd90362e27eca7](https://github.com/nwg5817/forge/commit/cfd90362e27eca7) kevlahnota *2024-10-08 13:07:15*
+
+**Fixed spell description of snakeskin_veil (#6250)**
+
+
+[69d8bf52d3e61ab](https://github.com/nwg5817/forge/commit/69d8bf52d3e61ab) Marco F *2024-10-08 11:48:34*
+
+**Update demon_of_fates_design.txt (#6251)**
+
+
+[443a28e7862e2c9](https://github.com/nwg5817/forge/commit/443a28e7862e2c9) Fulgur14 *2024-10-08 11:48:00*
+
+**Update Eerie cards (#6252)**
+
+
+[31bd6d87ed36c38](https://github.com/nwg5817/forge/commit/31bd6d87ed36c38) Fulgur14 *2024-10-08 11:46:50*
+
+**Merge pull request #6249 from paulsnoops/add_ydsk**
+
+ * Edition updates: YDSK
+
+[9a4d7fd39952e72](https://github.com/nwg5817/forge/commit/9a4d7fd39952e72) Paul Hammerton *2024-10-08 08:45:25*
+
+**Edition updates: YDSK**
+
+
+[6060cfa5eec4192](https://github.com/nwg5817/forge/commit/6060cfa5eec4192) Paul Hammerton *2024-10-08 08:38:20*
+
+**Merge pull request #6246 from Card-Forge/opened-rooms**
+
+ * Add Rampaging Soulrager
+
+[065cf48d35492c6](https://github.com/nwg5817/forge/commit/065cf48d35492c6) Hans Mackowiak *2024-10-08 08:35:40*
+
+**Merge pull request #6243 from Ivniinvi/patch-1**
+
+ * Aerie Typo Fix
+
+[28e26270209d6fa](https://github.com/nwg5817/forge/commit/28e26270209d6fa) Hans Mackowiak *2024-10-08 08:34:39*
+
+**Merge pull request #6247 from paulsnoops/fix_primo**
+
+ * Fix Primo the Indivisible token
+
+[4d93a40a56eecda](https://github.com/nwg5817/forge/commit/4d93a40a56eecda) Hans Mackowiak *2024-10-08 08:33:58*
+
+**Merge pull request #6248 from paulsnoops/sld_update**
+
+ * Edition updates: SLD
+
+[c8e4a8bde57b62b](https://github.com/nwg5817/forge/commit/c8e4a8bde57b62b) Paul Hammerton *2024-10-08 08:29:35*
+
+**Merge remote-tracking branch 'origin/master'**
+
+
+[af22edaff554557](https://github.com/nwg5817/forge/commit/af22edaff554557) Anthony Calosa *2024-10-08 08:26:11*
+
+**fix crash when card defined is missing or invalid**
+
+ * these card should be replaced or create a custom card for adventure mode
+ * Power Struggle, Necropolis of Azar
+
+[af3ceb33480bb69](https://github.com/nwg5817/forge/commit/af3ceb33480bb69) Anthony Calosa *2024-10-08 08:25:52*
+
+**Edition updates: SLD**
+
+
+[89f499baaeb481f](https://github.com/nwg5817/forge/commit/89f499baaeb481f) Paul Hammerton *2024-10-08 08:20:04*
+
+**Fix primo the Indivisible token**
+
+
+[93d381a7ee65d6e](https://github.com/nwg5817/forge/commit/93d381a7ee65d6e) Paul Hammerton *2024-10-08 08:14:39*
+
+**Merge pull request #6242 from Simisays/ROOMBIS**
+
+ * DSK 10 Room cards
+
+[e771ca43d8c3610](https://github.com/nwg5817/forge/commit/e771ca43d8c3610) Paul Hammerton *2024-10-08 07:52:03*
+
+**Add Rampaging Soulrager**
+
+
+[ca9f6c2f8db8692](https://github.com/nwg5817/forge/commit/ca9f6c2f8db8692) Chris H *2024-10-08 02:23:00*
+
+**Update glassworks_shattered_yard.txt**
+
+
+[57011c6cf5b8801](https://github.com/nwg5817/forge/commit/57011c6cf5b8801) Chris H *2024-10-08 02:14:24*
+
+**Update aerie_0.tmx**
+
+
+[fec420574f28b9c](https://github.com/nwg5817/forge/commit/fec420574f28b9c) Matt Headley *2024-10-07 23:51:37*
+
+**Update mirror_room_fractured_realm.txt**
+
+
+[89c4f695c5f3654](https://github.com/nwg5817/forge/commit/89c4f695c5f3654) Simisays *2024-10-07 17:59:53*
+
+**cleanup**
+
+
+[33ae2ee952722bc](https://github.com/nwg5817/forge/commit/33ae2ee952722bc) Simisays *2024-10-07 17:31:25*
+
+**update**
+
+
+[d90577c77d0705e](https://github.com/nwg5817/forge/commit/d90577c77d0705e) Simisays *2024-10-07 17:12:18*
+
+**Create inquisitive_glimmer.txt (#6240)**
+
+
+[5054223bb77e9a4](https://github.com/nwg5817/forge/commit/5054223bb77e9a4) Hans Mackowiak *2024-10-07 16:29:18*
+
+**Edition updates for rooms: DSC, DSK (#6239)**
+
+
+[4b2640d412191d5](https://github.com/nwg5817/forge/commit/4b2640d412191d5) Paul Hammerton *2024-10-06 19:46:31*
+
+**Room: First Spell Part (#6044)**
+
+ * Room: First Spell
+ * ----
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.59&gt;
+ * Co-authored-by: TRT &lt;&gt;
+ * Co-authored-by: Anthony Calosa &lt;anthonycalosa@gmail.com&gt;
+
+[80b30d9a6ae7879](https://github.com/nwg5817/forge/commit/80b30d9a6ae7879) Hans Mackowiak *2024-10-06 18:11:28*
+
+**Edit pile cleanup: part 2, folders 'h' to 'q' (#6219)**
+
+
+[88006ebe856f36b](https://github.com/nwg5817/forge/commit/88006ebe856f36b) Renato Filipe Vidal Santos *2024-10-06 17:14:01*
+
+**Edit pile cleanup: part 1, folders 'a' to 'g' (#6218)**
+
+
+[7ca16f29eb4a5f8](https://github.com/nwg5817/forge/commit/7ca16f29eb4a5f8) Renato Filipe Vidal Santos *2024-10-06 16:20:08*
+
+**Edit pile cleanup: part 3, folders 'r' to 'u' & 'rebalanced' (#6220)**
+
+
+[ae95ff2ea61cee1](https://github.com/nwg5817/forge/commit/ae95ff2ea61cee1) Renato Filipe Vidal Santos *2024-10-06 14:08:23*
+
+**Display additional cost text during payment (#6233)**
+
+
+[0829d0223709e3d](https://github.com/nwg5817/forge/commit/0829d0223709e3d) tool4ever *2024-10-06 14:08:11*
+
+**PCEL: 1996 World Champion (#6088)**
+
+ * Add files via upload
+ * Update 1996_world_champion.txt
+ * Add files via upload
+ * Add files via upload
+
+[5526621328deb8c](https://github.com/nwg5817/forge/commit/5526621328deb8c) Renato Filipe Vidal Santos *2024-10-06 10:25:15*
+
+**fix AI crash when minimum cards to discard exceeds than the valid cards**
+
+ * reported here: https://discord.com/channels/267367946135928833/1291545865814675578/1291545865814675578
+
+[5affe7dd23a3368](https://github.com/nwg5817/forge/commit/5affe7dd23a3368) kevlahnota *2024-10-04 07:45:11*
+
+**prevent NPE**
+
+
+[fea8855e0ec4b53](https://github.com/nwg5817/forge/commit/fea8855e0ec4b53) kevlahnota *2024-10-04 03:33:36*
+
+**Update screaming_nemesis.txt**
+
+
+[0971db66f444459](https://github.com/nwg5817/forge/commit/0971db66f444459) tool4ever *2024-10-03 00:13:09*
+
+**Merge pull request #6232 from Ayora29/artist**
+
+ * Update @Artist names in edition txt files
+
+[6a745c721b9a594](https://github.com/nwg5817/forge/commit/6a745c721b9a594) Paul Hammerton *2024-10-02 18:25:59*
+
+**Fix bad section move**
+
+
+[ab8a4be1ce405ea](https://github.com/nwg5817/forge/commit/ab8a4be1ce405ea) fanch *2024-10-02 18:11:52*
+
+**Fix ChangeZoneEffect ordering to library; Aetherspouts prompt (#5798)**
+
+ * Fix ChangeZone ordering to library
+ * Fix cards not showing up for Aetherspouts.
+
+[84e6a6105213710](https://github.com/nwg5817/forge/commit/84e6a6105213710) Jetz72 *2024-10-02 15:39:51*
+
+**Sadistic Shell Game**
+
+
+[436a3382b6e5c46](https://github.com/nwg5817/forge/commit/436a3382b6e5c46) TwentyToedToad *2024-10-02 14:11:00*
+
+**Update @Artist names in edition txt files**
+
+
+[95eea713ee6b907](https://github.com/nwg5817/forge/commit/95eea713ee6b907) fanch *2024-10-02 11:29:45*
+
+**Merge pull request #6231 from Ayora29/typos**
+
+ * Fix wrong rarity in edition txt files
+
+[3df291c1f599066](https://github.com/nwg5817/forge/commit/3df291c1f599066) Paul Hammerton *2024-10-02 08:50:10*
+
+**Update paranormal_analyst.txt**
+
+
+[9cbf0f8fc63ad44](https://github.com/nwg5817/forge/commit/9cbf0f8fc63ad44) tool4ever *2024-10-02 05:48:27*
+
+**Support second main (#6230)**
+
+
+[f336bd1284ac29f](https://github.com/nwg5817/forge/commit/f336bd1284ac29f) tool4ever *2024-10-02 05:23:14*
+
+**Revert CMB1 change in card names**
+
+
+[abb6162e6f0fcf3](https://github.com/nwg5817/forge/commit/abb6162e6f0fcf3) fanch *2024-10-01 20:48:41*
+
+**Merge branch 'Card-Forge:master' into typos**
+
+
+[d6aa7f3e35a6b34](https://github.com/nwg5817/forge/commit/d6aa7f3e35a6b34) Ayora29 *2024-10-01 19:24:58*
+
+**More fixes to rarities**
+
+
+[589d50d553debc1](https://github.com/nwg5817/forge/commit/589d50d553debc1) fanch *2024-10-01 19:14:40*
+
+**Update shichifukujin_dragon.txt (#6176)**
+
+
+[301c0006535b5d7](https://github.com/nwg5817/forge/commit/301c0006535b5d7) Renato Filipe Vidal Santos *2024-10-01 18:47:49*
+
+**DSK 2 cards (#6210)**
+
+
+[8d4ddec7dadc99b](https://github.com/nwg5817/forge/commit/8d4ddec7dadc99b) Simisays *2024-10-01 18:38:50*
+
+**Restore Anthologies.txt L rarity for lands (#6229)**
+
+
+[b502e0f8aca4532](https://github.com/nwg5817/forge/commit/b502e0f8aca4532) Ayora29 *2024-10-01 18:38:15*
+
+**Special rarities for masterpieces cards**
+
+
+[aa9f18f9fbcffbd](https://github.com/nwg5817/forge/commit/aa9f18f9fbcffbd) fanch *2024-10-01 18:28:43*
+
+**Fix wrong rarities**
+
+
+[345912fbae6d9dd](https://github.com/nwg5817/forge/commit/345912fbae6d9dd) fanch *2024-10-01 18:23:49*
+
+**Star Athlete (DSC)**
+
+
+[c752f862ee4db8f](https://github.com/nwg5817/forge/commit/c752f862ee4db8f) TwentyToedToad *2024-10-01 17:18:41*
+
+**Edit pile cleanup: part 7, folders 'v' to 'z' & 'tokenscripts' (#6224)**
+
+
+[310cd28423af572](https://github.com/nwg5817/forge/commit/310cd28423af572) Renato Filipe Vidal Santos *2024-10-01 15:31:17*
+
+**Add Scryfall code**
+
+
+[e2a6e3b1b167fcb](https://github.com/nwg5817/forge/commit/e2a6e3b1b167fcb) fanch *2024-10-01 10:10:09*
+
+**Add Scryfall code**
+
+
+[d7ec1a225c3c5f7](https://github.com/nwg5817/forge/commit/d7ec1a225c3c5f7) fanch *2024-10-01 09:59:35*
+
+**Restore Anthologies.txt L rarity for lands**
+
+
+[377d30dbf5f8f52](https://github.com/nwg5817/forge/commit/377d30dbf5f8f52) fanch *2024-10-01 08:30:02*
+
+**Merge pull request #6228 from Ayora29/anthologies**
+
+ * Re-arange Anthologies edition txt file according to Scryfall
+
+[bd4843c6a3703d7](https://github.com/nwg5817/forge/commit/bd4843c6a3703d7) Paul Hammerton *2024-10-01 08:14:29*
+
+**Re-arange Anthologies edition txt file according to Scryfall. Pictures still displayin correctly.**
+
+
+[135f19e91a09380](https://github.com/nwg5817/forge/commit/135f19e91a09380) fanch *2024-10-01 07:31:50*
+
+**LDA Update (better names for deck archetypes) (#6227)**
+
+ * - Add new genetic decks (Standard, Modern) with metagame as of Bloomburrow
+ * - LDA Update
+
+[4fcd6f577acffa7](https://github.com/nwg5817/forge/commit/4fcd6f577acffa7) Agetian *2024-10-01 06:44:32*
+
+**Update Oracle text of some "main phase" related cards (#6216)**
+
+
+[269136373823b74](https://github.com/nwg5817/forge/commit/269136373823b74) BigCrunch22 *2024-09-30 18:09:56*
+
+**Merge pull request #6214 from paulsnoops/edition_updates**
+
+ * Edition updates: SLD
+
+[9e17cf433a46f4b](https://github.com/nwg5817/forge/commit/9e17cf433a46f4b) Paul Hammerton *2024-09-30 09:04:43*
+
+**Edition updates: SLD**
+
+
+[02ac0642521c65b](https://github.com/nwg5817/forge/commit/02ac0642521c65b) Paul Hammerton *2024-09-30 08:55:23*
+
+**Fix GameStates starting with frozen stack if RE executes (#6213)**
+
+ * Fix GameStates starting with frozen stack if RE executes
+ * Fix NPE when facedown
+
+[a949a988a565612](https://github.com/nwg5817/forge/commit/a949a988a565612) tool4ever *2024-09-29 20:18:35*
+
+**- Add new genetic decks (Standard, Modern) with metagame as of Bloomburrow (#6212)**
+
+
+[ea070a85aac6da8](https://github.com/nwg5817/forge/commit/ea070a85aac6da8) Agetian *2024-09-29 14:29:34*
+
+**Some cleanup (#6211)**
+
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.59&gt;
+
+[86dc3a4d5e02df6](https://github.com/nwg5817/forge/commit/86dc3a4d5e02df6) tool4ever *2024-09-28 16:04:41*
+
+**Merge pull request #6183 from Ayora29/master**
+
+ * Reorder card entries in 111 edition files.
+
+[6169285cdbbdfec](https://github.com/nwg5817/forge/commit/6169285cdbbdfec) Paul Hammerton *2024-09-27 18:17:47*
+
+**Merge branch 'Card-Forge:master' into master**
+
+
+[ab7037f59cdc218](https://github.com/nwg5817/forge/commit/ab7037f59cdc218) Ayora29 *2024-09-27 17:49:28*
+
+**Some cleanup (#6209)**
+
+
+[cb4e0e572135681](https://github.com/nwg5817/forge/commit/cb4e0e572135681) tool4ever *2024-09-27 16:59:27*
+
+**Merge pull request #6204 from Agetian/master**
+
+ * Add LDA information for Bloomburrow metagame (Standard, Modern)
+
+[ac335a6b8037584](https://github.com/nwg5817/forge/commit/ac335a6b8037584) Hans Mackowiak *2024-09-27 16:57:19*
+
+**Update enter_the_enigma.txt (#6206)**
+
+ * Closes #6202
+
+[c5aaf7583829ffa](https://github.com/nwg5817/forge/commit/c5aaf7583829ffa) tool4ever *2024-09-27 13:22:32*
+
+**Add WithDifferentPowers$ to DigEffect + "Rip, Spawn Hunter" card (#6208)**
+
+
+[b10424920521de7](https://github.com/nwg5817/forge/commit/b10424920521de7) Ayora29 *2024-09-27 13:22:16*
+
+**10 DSK cards**
+
+
+[ec7314673e0206b](https://github.com/nwg5817/forge/commit/ec7314673e0206b) Fulgur14 *2024-09-27 12:53:52*
+
+**Update myra_the_magnificent.txt (#6203)**
+
+
+[69985e4c2fd811d](https://github.com/nwg5817/forge/commit/69985e4c2fd811d) Simisays *2024-09-27 12:22:42*
+
+**- Add LDA information for Bloomburrow metagame (Standard, Modern).**
+
+
+[4622441ec88b476](https://github.com/nwg5817/forge/commit/4622441ec88b476) Agetian *2024-09-27 11:59:43*
+
+**Update drop_tower.txt**
+
+
+[ba4682e038c9665](https://github.com/nwg5817/forge/commit/ba4682e038c9665) tool4ever *2024-09-26 18:00:47*
+
+**Make Myriad optional for each player again (#6191)**
+
+ * Make Myriad optional for each player again
+ * Fix scripts
+ * Fix NPE due to not removing empty shards
+ * ---------
+ * Co-authored-by: TRT &lt;&gt;
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.59&gt;
+
+[941a1129e540a42](https://github.com/nwg5817/forge/commit/941a1129e540a42) tool4ever *2024-09-26 05:52:08*
+
+**Rename monstruous_emergence.txt to monstrous_emergence.txt (#6197)**
+
+
+[2ac31bf45cc05d3](https://github.com/nwg5817/forge/commit/2ac31bf45cc05d3) Fulgur14 *2024-09-25 18:19:53*
+
+**Fix valiant cards only triggering once per game rather than once per turn (#6196)**
+
+
+[786d6834ef17bb9](https://github.com/nwg5817/forge/commit/786d6834ef17bb9) Michael Lo *2024-09-25 14:58:28*
+
+**New dsk card : Monstrous Emergence (#6194)**
+
+
+[68db59f080528e5](https://github.com/nwg5817/forge/commit/68db59f080528e5) Ayora29 *2024-09-25 11:01:18*
+
+**Update valgavoths_onslaught.txt (#6187)**
+
+
+[fb5d9a0b562eb03](https://github.com/nwg5817/forge/commit/fb5d9a0b562eb03) tool4ever *2024-09-25 08:02:36*
+
+**- Add puzzle PS_BLB4, fix GameState support for class level. (#6195)**
+
+
+[35cd7d0f4eee531](https://github.com/nwg5817/forge/commit/35cd7d0f4eee531) Agetian *2024-09-25 08:02:22*
+
+**Update a_premonition_of_your_demise.txt**
+
+
+[dd5aa11742d4e9e](https://github.com/nwg5817/forge/commit/dd5aa11742d4e9e) kevlahnota *2024-09-24 12:38:59*
+
+**Merge pull request #6192 from paulsnoops/cmdr_bans_23_9**
+
+ * Commander Banned and Restricted September 23, 2024
+
+[6334d22bf09c31b](https://github.com/nwg5817/forge/commit/6334d22bf09c31b) Paul Hammerton *2024-09-23 16:54:06*
+
+**Commander Banned and Restricted September 23, 2024**
+
+
+[3df6319efae3461](https://github.com/nwg5817/forge/commit/3df6319efae3461) Paul Hammerton *2024-09-23 16:46:46*
+
+**Merge branch 'Card-Forge:master' into master**
+
+
+[1cd976344ae3a25](https://github.com/nwg5817/forge/commit/1cd976344ae3a25) Ayora29 *2024-09-23 07:49:00*
+
+**Fixed 2 DSK cards (#6186)**
+
+ * Fixed Trial of Agony which wasn&#x27;t dealing the damage, and Disturbing Mirth which was only allowing you to sacrifice another enchantment (not a creature).
+
+[2b41b1cbe82c5c6](https://github.com/nwg5817/forge/commit/2b41b1cbe82c5c6) loud1990 *2024-09-22 17:56:17*
+
+**Fix NPE with Starforged Sword (#6188)**
+
+ * Fix NPE
+ * Fix The Lord of Pain
+ * ---------
+ * Co-authored-by: TRT &lt;&gt;
+
+[aebde7a1d0dab15](https://github.com/nwg5817/forge/commit/aebde7a1d0dab15) tool4ever *2024-09-22 17:54:02*
+
+**collector number stating with F\d are considered numeric only**
+
+
+[3825904d422a061](https://github.com/nwg5817/forge/commit/3825904d422a061) fanch *2024-09-21 19:44:40*
+
+**Reorder card entries in 111 edition files.**
+
+ * No card add, no card remove. Only reorder, numerically then alphabetically.
+
+[59a8050a5f96d7f](https://github.com/nwg5817/forge/commit/59a8050a5f96d7f) fanch *2024-09-21 13:31:31*
+
+**Script cleanup (#6180)**
+
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.59&gt;
+
+[11a7f7b2719b109](https://github.com/nwg5817/forge/commit/11a7f7b2719b109) tool4ever *2024-09-20 16:29:27*
+
+**Fixes gleaned from notes: pass #3 (#6179)**
+
+
+[a67ab2818b30aaa](https://github.com/nwg5817/forge/commit/a67ab2818b30aaa) Renato Filipe Vidal Santos *2024-09-20 14:59:41*
+
+**Fix Valiant triggers failing if another player targets first (#6178)**
+
+
+[7a192a687396a78](https://github.com/nwg5817/forge/commit/7a192a687396a78) tool4ever *2024-09-20 09:53:07*
+
+**Impending NonCreature as StaticAbility (#6177)**
+
+
+[869db7febbafa1d](https://github.com/nwg5817/forge/commit/869db7febbafa1d) Hans Mackowiak *2024-09-19 07:36:13*
+
+**Update grist_voracious_larva_grist_the_plague_swarm.txt**
+
+
+[86294108eb7c824](https://github.com/nwg5817/forge/commit/86294108eb7c824) tool4ever *2024-09-19 07:27:56*
+
+**Fixes gleaned from notes: pass #2, Cataclysm-like and other "choose to keep" effects. (#6165)**
+
+ * Add files via upload
+ * Update slaughter_the_strong.txt
+ * Update incriminate.txt
+ * Update a-incriminate.txt
+ * Update phyrexian_dreadnought.txt
+ * Update killing_wave.txt
+ * Update global_ruin.txt
+ * Update barrins_spite.txt
+ * Update szats_will.txt
+ * Update soul_shatter.txt
+ * Update slaughter_the_strong.txt
+ * Update shadowgrange_archfiend.txt
+ * Update professor_onyx.txt
+ * Update phyrexian_dreadnought.txt
+ * Update myrkuls_edict.txt
+ * Update gixs_command.txt
+ * Update flare_of_malice.txt
+ * Update demonic_hordes.txt
+ * Update crackling_doom.txt
+ * Update revival_experiment.txt
+ * Update perilous_predicament.txt
+ * Update regnas_sanction.txt
+ * Update catch_release.txt
+ * Update regnas_sanction.txt
+ * Update regnas_sanction.txt
+ * ---------
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[ac807c4766b8383](https://github.com/nwg5817/forge/commit/ac807c4766b8383) Renato Filipe Vidal Santos *2024-09-19 03:56:29*
+
+**Merge pull request #6173 from tool4ever/fix18**
+
+ * Fix RE choice for different sources
+
+[e09c09b924a708f](https://github.com/nwg5817/forge/commit/e09c09b924a708f) kevlahnota *2024-09-18 11:18:44*
+
+**Fix RE choice for different sources**
+
+
+[ee3c8173e1f2fe8](https://github.com/nwg5817/forge/commit/ee3c8173e1f2fe8) tool4EvEr *2024-09-18 07:37:11*
+
+**Update zndrsplts_judgment.txt**
+
+
+[daf1a891c0edf74](https://github.com/nwg5817/forge/commit/daf1a891c0edf74) tool4ever *2024-09-18 07:11:28*
+
+**Fix scripts (#6169)**
+
+
+[b396e780cf6d0ca](https://github.com/nwg5817/forge/commit/b396e780cf6d0ca) tool4ever *2024-09-18 07:08:58*
+
+**DSK cards from misplaced PR (#6157)**
+
+
+[7b94f07fa8eeef0](https://github.com/nwg5817/forge/commit/7b94f07fa8eeef0) Fulgur14 *2024-09-18 05:25:08*
+
+**Erratic Apparition fix (#6170)**
+
+
+[dd0bd28d2c66276](https://github.com/nwg5817/forge/commit/dd0bd28d2c66276) Glorax *2024-09-18 05:24:43*
+
+**Ancient Cellarspawn - incomplete, might need support (#6123)**
+
+ * Ancient Cellarspawn - incomplete, might need support
+ * Support Ancient Cellarspawn
+ * ---------
+ * Co-authored-by: TRT &lt;&gt;
+
+[95dd06e55f6c96f](https://github.com/nwg5817/forge/commit/95dd06e55f6c96f) Fulgur14 *2024-09-18 05:18:06*
+
+**Overgrown Zealot fix (#6167)**
+
+
+[922a0c21be2a682](https://github.com/nwg5817/forge/commit/922a0c21be2a682) Glorax *2024-09-17 20:48:07*
+
+**Spineseeker Centipede fix (#6166)**
+
+
+[05bf665f5222976](https://github.com/nwg5817/forge/commit/05bf665f5222976) Glorax *2024-09-17 20:21:05*
+
+**Merge pull request #6163 from paulsnoops/dsk_formats**
+
+ * Format updates for DSK &amp; DSC
+
+[90d550facc4a42e](https://github.com/nwg5817/forge/commit/90d550facc4a42e) Paul Hammerton *2024-09-17 07:56:04*
+
+**Format updates for DSK & DSC**
+
+
+[120d43542445833](https://github.com/nwg5817/forge/commit/120d43542445833) Paul Hammerton *2024-09-17 07:51:21*
+
+**Merge pull request #6162 from paulsnoops/edition_updates**
+
+ * Edition updates: SCH, SLD
+
+[e204ea751d7e890](https://github.com/nwg5817/forge/commit/e204ea751d7e890) Paul Hammerton *2024-09-17 07:35:55*
+
+**Edition updates: SCH, SLD**
+
+
+[5d389ad62c903be](https://github.com/nwg5817/forge/commit/5d389ad62c903be) Paul Hammerton *2024-09-17 07:32:45*
+
+**Add ReplacementEffectView, StaticAbility View for Netplay Dialog**
+
+
+[663bde22ac9efdf](https://github.com/nwg5817/forge/commit/663bde22ac9efdf) kevlahnota *2024-09-17 06:58:43*
+
+**Update suspended_sentence.txt**
+
+
+[0a4cff5adc42d55](https://github.com/nwg5817/forge/commit/0a4cff5adc42d55) tool4ever *2024-09-17 05:38:06*
+
+**Fulgur14 patch 191321 (#6158)**
+
+
+[7c7c1fda0128bd9](https://github.com/nwg5817/forge/commit/7c7c1fda0128bd9) Fulgur14 *2024-09-16 20:13:43*
+
+**Update only_i_know_what_awaits.txt**
+
+
+[4c7c7edbf147fd7](https://github.com/nwg5817/forge/commit/4c7c7edbf147fd7) tool4ever *2024-09-16 15:34:27*
+
+**Update PlayerControllerHuman.java**
+
+ * show more info on choice list on non network game
+
+[79b1c3c9fd32bd2](https://github.com/nwg5817/forge/commit/79b1c3c9fd32bd2) kevlahnota *2024-09-16 11:38:30*
+
+**ManifestDread as separate Effect (#6151)**
+
+
+[7b9e2a6735126da](https://github.com/nwg5817/forge/commit/7b9e2a6735126da) Hans Mackowiak *2024-09-16 10:36:31*
+
+**18 mostly leaked DSK/DSC cards (plus one token) (#6131)**
+
+
+[6e3c17a2a842e35](https://github.com/nwg5817/forge/commit/6e3c17a2a842e35) Fulgur14 *2024-09-16 08:17:22*
+
+**Merge pull request #6156 from Card-Forge/kevlahnota-patch-1**
+
+ * fix netplay crash
+
+[512b3208ae5b2a9](https://github.com/nwg5817/forge/commit/512b3208ae5b2a9) kevlahnota *2024-09-16 08:09:33*
+
+**fix netplay crash**
+
+ * -closes issue #6145
+
+[c4d943750cb2681](https://github.com/nwg5817/forge/commit/c4d943750cb2681) kevlahnota *2024-09-16 08:04:19*
+
+**Update all_shall_smolder_in_my_wake.txt (#6155)**
+
+
+[a63f87e5bee58cc](https://github.com/nwg5817/forge/commit/a63f87e5bee58cc) Fulgur14 *2024-09-16 07:58:15*
+
+**prevent NPE**
+
+
+[cb325996c9710c9](https://github.com/nwg5817/forge/commit/cb325996c9710c9) kevlahnota *2024-09-16 05:34:48*
+
+**Update commander_liara_portyr.txt (#6152)**
+
+
+[419ca27328ad433](https://github.com/nwg5817/forge/commit/419ca27328ad433) tool4ever *2024-09-16 03:53:15*
+
+**Update victor_valgavoths_seneschal.txt**
+
+
+[b85b6cac6eb82de](https://github.com/nwg5817/forge/commit/b85b6cac6eb82de) Chris H *2024-09-15 20:37:35*
+
+**Fix Mutate + Unexpectedly Absent (#6150)**
+
+
+[cbfcbfa8c50b78b](https://github.com/nwg5817/forge/commit/cbfcbfa8c50b78b) tool4ever *2024-09-15 17:05:14*
+
+**2 DSC cards + 6 schemes (#6136)**
+
+
+[0ab14fdb374fe65](https://github.com/nwg5817/forge/commit/0ab14fdb374fe65) Fulgur14 *2024-09-15 14:21:51*
+
+**Fix optional shuffle into Library cases (#6147)**
+
+
+[91e952da638388e](https://github.com/nwg5817/forge/commit/91e952da638388e) tool4ever *2024-09-15 14:21:39*
+
+**Merge pull request #6148 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC
+
+[653bf46404d6b24](https://github.com/nwg5817/forge/commit/653bf46404d6b24) Paul Hammerton *2024-09-15 10:31:24*
+
+**Edition updates: DSC**
+
+
+[148a13c9cf342ff](https://github.com/nwg5817/forge/commit/148a13c9cf342ff) Paul Hammerton *2024-09-15 10:28:19*
+
+**2 DSK cards, some DSC cards, 5 Schemes (#6122)**
+
+
+[a60f3f84e0abd13](https://github.com/nwg5817/forge/commit/a60f3f84e0abd13) Fulgur14 *2024-09-15 09:18:24*
+
+**Fix Undying not triggering when dying from SBA (#6146)**
+
+
+[f1ff92801f34987](https://github.com/nwg5817/forge/commit/f1ff92801f34987) tool4ever *2024-09-15 08:15:54*
+
+**5 DSC Schemes (#6134)**
+
+ * Update amped_raptor.txt
+ * Add files via upload
+ * Update i_call_for_slaughter.txt
+ * Update reality_is_mine_to_control.txt
+ * Update you_exist_only_to_amuse.txt
+ * Update your_nightmares_are_delicious.txt
+ * Update your_nightmares_are_delicious.txt
+ * ---------
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[445508d3ab0b0f0](https://github.com/nwg5817/forge/commit/445508d3ab0b0f0) Fulgur14 *2024-09-15 04:24:43*
+
+**Update coordinated_clobbering.txt (#6144)**
+
+
+[813588b8977ab8c](https://github.com/nwg5817/forge/commit/813588b8977ab8c) Glorax *2024-09-14 20:48:39*
+
+**Fix Frankenstein's Monster (#6143)**
+
+
+[21c34b552dd917c](https://github.com/nwg5817/forge/commit/21c34b552dd917c) tool4ever *2024-09-14 17:47:40*
+
+**Update your_own_face_mocks_you.txt**
+
+
+[d303bb122c44fdb](https://github.com/nwg5817/forge/commit/d303bb122c44fdb) tool4ever *2024-09-14 10:17:37*
+
+**Merge pull request #6142 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK
+
+[12f937e4ca4a066](https://github.com/nwg5817/forge/commit/12f937e4ca4a066) Paul Hammerton *2024-09-14 09:52:50*
+
+**Edition updates: DSC, DSK**
+
+
+[df868df7cd5957c](https://github.com/nwg5817/forge/commit/df868df7cd5957c) Paul Hammerton *2024-09-14 09:49:45*
+
+**Update ogre_battlecaster.txt (#6140)**
+
+
+[2db3e4d7ba11679](https://github.com/nwg5817/forge/commit/2db3e4d7ba11679) Renato Filipe Vidal Santos *2024-09-14 09:40:23*
+
+**Fix Break Down the Door, Wickerfolk Thresher (#6141)**
+
+
+[78a134b2dff43ce](https://github.com/nwg5817/forge/commit/78a134b2dff43ce) Paul Hammerton *2024-09-14 07:51:24*
+
+**Update season_of_gathering.txt (#6139)**
+
+
+[52ae8962805f7d7](https://github.com/nwg5817/forge/commit/52ae8962805f7d7) Renato Filipe Vidal Santos *2024-09-13 19:37:07*
+
+**23 DSK cards (+one Scheme) (#6112)**
+
+
+[2ac557c46e2ffbe](https://github.com/nwg5817/forge/commit/2ac557c46e2ffbe) Fulgur14 *2024-09-13 19:36:58*
+
+**Seized from Slumber (DSK) (#6137)**
+
+ * This should be the last new card, all unimplemented cards are now in the project.
+
+[d8c45e7d622b5e1](https://github.com/nwg5817/forge/commit/d8c45e7d622b5e1) Fulgur14 *2024-09-13 17:01:44*
+
+**Merge pull request #6138 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK
+
+[5143f3ade03b909](https://github.com/nwg5817/forge/commit/5143f3ade03b909) Paul Hammerton *2024-09-13 16:30:48*
+
+**fix_test**
+
+
+[33e733559e20c66](https://github.com/nwg5817/forge/commit/33e733559e20c66) Paul Hammerton *2024-09-13 16:27:43*
+
+**Edition updates: DSC, DSK**
+
+
+[a2d653a0fc8b5b4](https://github.com/nwg5817/forge/commit/a2d653a0fc8b5b4) Paul Hammerton *2024-09-13 16:22:12*
+
+**Violent Urge (DSK) (#6132)**
+
+
+[e76eb919d998364](https://github.com/nwg5817/forge/commit/e76eb919d998364) Fulgur14 *2024-09-13 05:16:38*
+
+**Merge pull request #6133 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK
+
+[486a93e4b182af8](https://github.com/nwg5817/forge/commit/486a93e4b182af8) Paul Hammerton *2024-09-12 16:41:49*
+
+**Edition updates: DSK**
+
+
+[f87c24b9f5650bd](https://github.com/nwg5817/forge/commit/f87c24b9f5650bd) Paul Hammerton *2024-09-12 16:26:30*
+
+**Add files via upload (#6125)**
+
+
+[7cf11e21aea0358](https://github.com/nwg5817/forge/commit/7cf11e21aea0358) Fulgur14 *2024-09-12 05:38:52*
+
+**Fear of Exposure and Killer's Mask (DSK) (#6128)**
+
+
+[0a58e8a35437bb1](https://github.com/nwg5817/forge/commit/0a58e8a35437bb1) Fulgur14 *2024-09-12 05:38:47*
+
+**Merge pull request #6130 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK
+
+[82d3c549f2dacd1](https://github.com/nwg5817/forge/commit/82d3c549f2dacd1) Paul Hammerton *2024-09-11 16:55:51*
+
+**Edition updates: DSC, DSK**
+
+
+[f14d2ca26f90c2b](https://github.com/nwg5817/forge/commit/f14d2ca26f90c2b) Paul Hammerton *2024-09-11 16:48:41*
+
+**Teferi without PlayerKeyword**
+
+
+[9efa29cbf03b33b](https://github.com/nwg5817/forge/commit/9efa29cbf03b33b) Hans Mackowiak *2024-09-11 10:51:54*
+
+**4 DSK + 7 DSC cards (#6099)**
+
+ * Support The Tale of Tamiyo
+ * Support Kianne, Corrupted Memory
+
+[d76b7985264c76b](https://github.com/nwg5817/forge/commit/d76b7985264c76b) Fulgur14 *2024-09-11 10:24:44*
+
+**Fix MDFC NPE (#6121)**
+
+ * Co-authored-by: TRT &lt;&gt;
+
+[bd1f48d5303bce8](https://github.com/nwg5817/forge/commit/bd1f48d5303bce8) tool4ever *2024-09-11 07:11:42*
+
+**Add files via upload (#6118)**
+
+
+[138c866b12d20dc](https://github.com/nwg5817/forge/commit/138c866b12d20dc) Fulgur14 *2024-09-10 14:11:22*
+
+**8 DSK cards (Marvin, Murderous Mimic and audience) (#6117)**
+
+ * 8 DSK cards (Marvin, Murderous Mimic and audience)
+ * Update optimistic_scavenger.txt
+ * Update rootwise_survivor.txt
+ * Update rootwise_survivor.txt
+
+[8aa398f7eba1cd2](https://github.com/nwg5817/forge/commit/8aa398f7eba1cd2) Fulgur14 *2024-09-10 14:11:11*
+
+**Merge pull request #6120 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK
+
+[246a49e64216e46](https://github.com/nwg5817/forge/commit/246a49e64216e46) Paul Hammerton *2024-09-10 13:33:35*
+
+**Edition updates: DSK**
+
+
+[56c4ffa39b2a334](https://github.com/nwg5817/forge/commit/56c4ffa39b2a334) Paul Hammerton *2024-09-10 13:30:38*
+
+**Player: use LifeReduced CantHappen for Archon of Coronation (#6116)**
+
+ * Player: use LifeReduced CantHappen for Archon of Coronation
+
+[e1c794c640f8f60](https://github.com/nwg5817/forge/commit/e1c794c640f8f60) Hans Mackowiak *2024-09-10 10:56:31*
+
+**Valgavoth's Onslaught (#6119)**
+
+
+[ebe9fbebe4b747d](https://github.com/nwg5817/forge/commit/ebe9fbebe4b747d) Fulgur14 *2024-09-10 10:42:06*
+
+**Support for Valgavoth's Onslaught (#6114)**
+
+
+[69158e01baae252](https://github.com/nwg5817/forge/commit/69158e01baae252) tool4ever *2024-09-10 07:58:46*
+
+**Update bashful_beastie.txt (#6113)**
+
+
+[4170ba7b32dcf16](https://github.com/nwg5817/forge/commit/4170ba7b32dcf16) Chris H *2024-09-09 19:23:53*
+
+**Merge pull request #6111 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK
+
+[e061766cfc3aef6](https://github.com/nwg5817/forge/commit/e061766cfc3aef6) Paul Hammerton *2024-09-09 16:40:46*
+
+**Edition updates: DSC, DSK**
+
+
+[b5fa9b81f6b5bd6](https://github.com/nwg5817/forge/commit/b5fa9b81f6b5bd6) Paul Hammerton *2024-09-09 16:35:25*
+
+**Arabella, Abandoned Doll (DSK) (#6110)**
+
+
+[4fe3e51e62e4ff9](https://github.com/nwg5817/forge/commit/4fe3e51e62e4ff9) Fulgur14 *2024-09-09 10:38:39*
+
+**Drop Java 8 Test (#6109)**
+
+
+[5ff515b03babcdb](https://github.com/nwg5817/forge/commit/5ff515b03babcdb) Hans Mackowiak *2024-09-09 08:38:44*
+
+**Update PlayerPredicates.java**
+
+ * CANT_WIN not used anymore, use player.cantWin()
+
+[75bbbfe6c8da4ab](https://github.com/nwg5817/forge/commit/75bbbfe6c8da4ab) Hans Mackowiak *2024-09-09 04:59:15*
+
+**Fix Enhanced Surveillance (#6104)**
+
+
+[d6bc1788d9795ec](https://github.com/nwg5817/forge/commit/d6bc1788d9795ec) tool4ever *2024-09-08 14:59:58*
+
+**4 DSK cards + some Schemes (#6101)**
+
+
+[5f3e531d2ef786c](https://github.com/nwg5817/forge/commit/5f3e531d2ef786c) Fulgur14 *2024-09-08 12:34:24*
+
+**Merge pull request #6102 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK
+
+[036365e984d1508](https://github.com/nwg5817/forge/commit/036365e984d1508) Paul Hammerton *2024-09-08 09:42:23*
+
+**Edition updates: DSC, DSK**
+
+
+[6813e80e1ed99ad](https://github.com/nwg5817/forge/commit/6813e80e1ed99ad) Paul Hammerton *2024-09-08 09:37:44*
+
+**Fix Erratic Apparition**
+
+
+[050e3d1eb658fab](https://github.com/nwg5817/forge/commit/050e3d1eb658fab) Paul Hammerton *2024-09-07 19:43:26*
+
+**Under the Skin (DSK) (#6098)**
+
+
+[0408b3149eaaf21](https://github.com/nwg5817/forge/commit/0408b3149eaaf21) Fulgur14 *2024-09-07 14:58:06*
+
+**13 DSK cards (Diversion Specialist and friends) (#6084)**
+
+
+[cce6ccfd01b7a7e](https://github.com/nwg5817/forge/commit/cce6ccfd01b7a7e) Fulgur14 *2024-09-07 14:20:48*
+
+**Keyword: link StaticAbility into it (#6079)**
+
+ * Keyword: link StaticAbility into it
+ * fix getKeywordMagnitude to check for StaticAbility
+
+[4862071db75bf30](https://github.com/nwg5817/forge/commit/4862071db75bf30) Hans Mackowiak *2024-09-07 14:19:57*
+
+**7 DSK cards (Boilerbilges Ripper and victims) (#6092)**
+
+ * 7 DSK cards (Boilerbilges Ripper and victims)
+ * Update glimmerburst.txt
+
+[e7b05b2c9b1171e](https://github.com/nwg5817/forge/commit/e7b05b2c9b1171e) Fulgur14 *2024-09-07 14:19:29*
+
+**Impending: use Effect for Last Time counter removed (#6096)**
+
+
+[f792a5b79e9365d](https://github.com/nwg5817/forge/commit/f792a5b79e9365d) Hans Mackowiak *2024-09-07 14:19:17*
+
+**Eerie DSK cards (#6063)**
+
+ * Eerie DSK cards
+ * Add files via upload
+ * Update zimone_mystery_unraveler.txt
+ * Add files via upload
+ * Update stalked_researcher.txt
+ * Update victor_valgavoths_seneschal.txt
+
+[73adb8b2d9cf851](https://github.com/nwg5817/forge/commit/73adb8b2d9cf851) Fulgur14 *2024-09-07 14:19:00*
+
+**Update cloudsteel_kirin.txt**
+
+
+[7a1fa8b1a45237a](https://github.com/nwg5817/forge/commit/7a1fa8b1a45237a) tool4ever *2024-09-07 13:48:18*
+
+**Growing Dread -- might need support (#6083)**
+
+ * Bonus Hallow fix / old revert
+
+[b6aeb14e576a0e1](https://github.com/nwg5817/forge/commit/b6aeb14e576a0e1) Fulgur14 *2024-09-07 09:27:04*
+
+**Merge pull request #6095 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK
+
+[5aa0832e7b2dfb6](https://github.com/nwg5817/forge/commit/5aa0832e7b2dfb6) Paul Hammerton *2024-09-07 09:13:31*
+
+**Edition updates: DSK**
+
+
+[7d2f1ba193b066c](https://github.com/nwg5817/forge/commit/7d2f1ba193b066c) Paul Hammerton *2024-09-07 09:10:30*
+
+**Add Room Helper functions (#6093)**
+
+
+[d2e3175961b78c5](https://github.com/nwg5817/forge/commit/d2e3175961b78c5) Hans Mackowiak *2024-09-07 08:55:10*
+
+**Update it-IT.properties**
+
+ * try to fix UnknownFormatConversionException
+ * Conversion &#x3D; &#x27;m&#x27;
+
+[07cc3ef58f61cca](https://github.com/nwg5817/forge/commit/07cc3ef58f61cca) kevlahnota *2024-09-07 07:58:34*
+
+**Dread fix (#6094)**
+
+
+[825296eaf2a7d39](https://github.com/nwg5817/forge/commit/825296eaf2a7d39) tool4ever *2024-09-07 07:26:10*
+
+**Lionheart Glimmer (DSK) (#6087)**
+
+
+[af519dc62d180c6](https://github.com/nwg5817/forge/commit/af519dc62d180c6) Fulgur14 *2024-09-07 07:11:54*
+
+**Merge pull request #6090 from Card-Forge/kevlahnota-patch-1**
+
+ * Update nahiri_heir_of_the_ancients.txt
+
+[86b142099d99b12](https://github.com/nwg5817/forge/commit/86b142099d99b12) kevlahnota *2024-09-07 01:21:30*
+
+**Update nahiri_heir_of_the_ancients.txt**
+
+
+[8b5ad4ebe7099ef](https://github.com/nwg5817/forge/commit/8b5ad4ebe7099ef) kevlahnota *2024-09-07 01:20:58*
+
+**Merge pull request #6089 from kevlahnota/master2**
+
+ * check awaitNextInputTimer
+
+[5b3e7eff63c374d](https://github.com/nwg5817/forge/commit/5b3e7eff63c374d) kevlahnota *2024-09-07 00:33:43*
+
+**check awaitNextInputTimer**
+
+
+[f61fa59566931a1](https://github.com/nwg5817/forge/commit/f61fa59566931a1) Anthony Calosa *2024-09-07 00:30:24*
+
+**Update tin_street_gossip.txt**
+
+
+[07154c12657229f](https://github.com/nwg5817/forge/commit/07154c12657229f) tool4ever *2024-09-06 17:48:45*
+
+**Overgrown Zealot (DSK)**
+
+
+[73f2a1a041bf1a0](https://github.com/nwg5817/forge/commit/73f2a1a041bf1a0) Fulgur14 *2024-09-06 17:46:56*
+
+**Fix intrinsic ETB replacement not working if card enters from sideboard (#6082)**
+
+
+[d2af4c2bcb9460c](https://github.com/nwg5817/forge/commit/d2af4c2bcb9460c) tool4ever *2024-09-06 16:40:11*
+
+**Support for Overgrown Zealot (#6085)**
+
+
+[45c70b08fd36bcd](https://github.com/nwg5817/forge/commit/45c70b08fd36bcd) tool4ever *2024-09-06 16:40:01*
+
+**Update kirtars_wrath.txt**
+
+
+[1049f9c8850c59c](https://github.com/nwg5817/forge/commit/1049f9c8850c59c) tool4ever *2024-09-06 14:31:48*
+
+**Merge pull request #6081 from kevlahnota/master2**
+
+ * Update Adventure BG files
+
+[46c1e5db720ab48](https://github.com/nwg5817/forge/commit/46c1e5db720ab48) kevlahnota *2024-09-06 12:12:05*
+
+**Update threats_around_every_corner.txt**
+
+
+[c7841c6e5621def](https://github.com/nwg5817/forge/commit/c7841c6e5621def) tool4ever *2024-09-06 12:10:16*
+
+**Update Adventure BG files**
+
+
+[1781eb2ba350339](https://github.com/nwg5817/forge/commit/1781eb2ba350339) Anthony Calosa *2024-09-06 12:05:27*
+
+**3 DSK cards (Omnivorous Flytrap and friends) (#6080)**
+
+
+[d20a75d1716526b](https://github.com/nwg5817/forge/commit/d20a75d1716526b) Fulgur14 *2024-09-06 06:26:41*
+
+**Irreverent Gremlin (#6078)**
+
+ * Add files via upload
+ * Update irreverent_gremlin.txt
+
+[ba4defbb536e42b](https://github.com/nwg5817/forge/commit/ba4defbb536e42b) Fulgur14 *2024-09-06 05:52:16*
+
+**8 DSK cards (#6076)**
+
+
+[faadf62e2a0dc1c](https://github.com/nwg5817/forge/commit/faadf62e2a0dc1c) Fulgur14 *2024-09-05 17:03:32*
+
+**Merge pull request #6077 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK
+
+[dbf6fc0134115b2](https://github.com/nwg5817/forge/commit/dbf6fc0134115b2) Paul Hammerton *2024-09-05 17:01:49*
+
+**Edition updates: DSK**
+
+
+[b1e6920e3fe043d](https://github.com/nwg5817/forge/commit/b1e6920e3fe043d) Paul Hammerton *2024-09-05 16:57:27*
+
+**6 DSK cards (#6067)**
+
+
+[0231e68d85b9268](https://github.com/nwg5817/forge/commit/0231e68d85b9268) Fulgur14 *2024-09-05 16:38:02*
+
+**Orphans of the Wheat (#6073)**
+
+
+[e8b98039ca8761d](https://github.com/nwg5817/forge/commit/e8b98039ca8761d) Fulgur14 *2024-09-05 15:13:00*
+
+**5 DSK cards (#6065)**
+
+ * 5 DSK cards
+ * Update shrewd_storyteller.txt
+ * Update fear_of_burning_alive.txt
+
+[14262404b88b1f6](https://github.com/nwg5817/forge/commit/14262404b88b1f6) Fulgur14 *2024-09-05 15:06:17*
+
+**More DSK cards (#6059)**
+
+ * Update veteran_survivor.txt
+ * Update carrionette.txt
+ * Add files via upload
+ * Update titania_voice_of_gaea_titania_gaea_incarnate.txt
+ * Add files via upload
+ * Update carrionette.txt
+ * Update titania_voice_of_gaea_titania_gaea_incarnate.txt
+ * Update haunted_screen.txt
+ * Update haunted_screen.txt
+ * Update overlord_of_the_boilerbilges.txt
+ * Update savior_of_the_small.txt
+ * Update untimely_malfunction.txt
+ * Update savior_of_the_small.txt
+ * Update savior_of_the_small.txt
+ * Update insidious_fungus.txt
+
+[b8a70ef9df808e2](https://github.com/nwg5817/forge/commit/b8a70ef9df808e2) Fulgur14 *2024-09-05 15:06:03*
+
+**Unstoppable Slasher and Dashing Bloodsucker (#6069)**
+
+ * Unstoppable Slasher and Dashing Bloodsucker
+ * Add files via upload
+
+[dd2f9cad54979b5](https://github.com/nwg5817/forge/commit/dd2f9cad54979b5) Fulgur14 *2024-09-05 15:04:54*
+
+**19 DSK cards (#6054)**
+
+ * 19 DSK cards
+ * Ghost Vacuum has a weird bug: if AI uses the second ability, I get a window where I can order how the cards should enter the battlefield.
+ * Add files via upload
+ * Update grievous_wound.txt
+ * Update meathook_massacre_ii.txt
+ * Update say_its_name.txt
+ * Update say_its_name.txt
+ * Update drag_to_the_roots.txt
+ * Update patchwork_beastie.txt
+ * ---------
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[1b7405dffaf02b0](https://github.com/nwg5817/forge/commit/1b7405dffaf02b0) Fulgur14 *2024-09-05 15:04:44*
+
+**Fix self-replacement scripts (#6041)**
+
+ * Fix self-replacement scripts
+ * Fix scripts to use current value on resolve
+ * Clean up
+ * Try to get right controller when ordering
+ * Fix corner case
+ * Fix script
+ * Revert for now
+ * ---------
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.60&gt;
+
+[9acbcb710e7d6dc](https://github.com/nwg5817/forge/commit/9acbcb710e7d6dc) tool4ever *2024-09-05 15:03:38*
+
+**Fixed typos in Heartflame Slash and Tyr's Blessing (#6074)**
+
+
+[a396312debb409a](https://github.com/nwg5817/forge/commit/a396312debb409a) Kay Schwenk *2024-09-05 15:00:35*
+
+**Fix transformed backside cast failing when some AltCost apply (#6070)**
+
+
+[30af2883188a622](https://github.com/nwg5817/forge/commit/30af2883188a622) tool4ever *2024-09-05 13:34:17*
+
+**Fix SVar fallback for Splice (#6072)**
+
+
+[1f8317dae96d7be](https://github.com/nwg5817/forge/commit/1f8317dae96d7be) tool4ever *2024-09-05 13:33:01*
+
+**Update dog_umbra.txt**
+
+ * Closes #6061
+
+[32510dd118430a1](https://github.com/nwg5817/forge/commit/32510dd118430a1) Hans Mackowiak *2024-09-05 12:37:44*
+
+**Fix MH3 generation**
+
+
+[9a5f0b9ff160df8](https://github.com/nwg5817/forge/commit/9a5f0b9ff160df8) Chris H *2024-09-05 11:13:13*
+
+**Zimone, All-Questioning and support (#6040)**
+
+
+[53719aeab7bed82](https://github.com/nwg5817/forge/commit/53719aeab7bed82) tool4ever *2024-09-05 10:41:21*
+
+**Fix Pawprint in Compleated (#6060)**
+
+
+[dbaf9451c58ff2d](https://github.com/nwg5817/forge/commit/dbaf9451c58ff2d) tool4ever *2024-09-04 17:54:28*
+
+**TriggerFullyUnlock: Trigger used for Eerie (#6052)**
+
+
+[a9755129f23be93](https://github.com/nwg5817/forge/commit/a9755129f23be93) Hans Mackowiak *2024-09-04 17:32:46*
+
+**Merge pull request #6062 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK, SPG
+
+[1ced41dded0530e](https://github.com/nwg5817/forge/commit/1ced41dded0530e) Paul Hammerton *2024-09-04 17:19:50*
+
+**Edition updates: DSK, SPG**
+
+
+[8a3ce730c6c1593](https://github.com/nwg5817/forge/commit/8a3ce730c6c1593) Paul Hammerton *2024-09-04 17:13:17*
+
+**Hauntwoods Shrieker and support (#6058)**
+
+
+[1ee37020ddd482e](https://github.com/nwg5817/forge/commit/1ee37020ddd482e) tool4ever *2024-09-04 16:13:39*
+
+**Added cards with manifest dread (#6057)**
+
+ * Added cards with manifest dread
+ * Add files via upload
+ * Update disturbing_mirth.txt
+ * Update zimone_mystery_unraveler.txt
+ * Update turn_inside_out.txt
+
+[959bfe8d319dc35](https://github.com/nwg5817/forge/commit/959bfe8d319dc35) Fulgur14 *2024-09-04 13:01:58*
+
+**3 new DSK cards (#6034)**
+
+
+[4a0a4c110ad5037](https://github.com/nwg5817/forge/commit/4a0a4c110ad5037) Fulgur14 *2024-09-04 10:30:27*
+
+**Balustrade Wurm (DSK) (#6056)**
+
+
+[cf4879c04094ba8](https://github.com/nwg5817/forge/commit/cf4879c04094ba8) Fulgur14 *2024-09-04 10:03:23*
+
+**Niko, Light of Hope -- needs a bit more (#6053)**
+
+ * Niko, Light of Hope -- needs a bit more
+ * Fix script
+ * Add support
+ * ---------
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.60&gt;
+
+[5d1d6cab14f6485](https://github.com/nwg5817/forge/commit/5d1d6cab14f6485) Fulgur14 *2024-09-04 10:03:08*
+
+**7 DSK cards from Card Gallery (#6048)**
+
+ * 7 DSK cards from Card Gallery
+ * Update acrobatic_cheerleader.txt
+ * Update fanatic_of_the_harrowing.txt
+ * Update acrobatic_cheerleader.txt
+ * ---------
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[14e2fa9ff54439c](https://github.com/nwg5817/forge/commit/14e2fa9ff54439c) Fulgur14 *2024-09-04 10:02:50*
+
+**Manifest Dread**
+
+
+[9e30bd943c629b1](https://github.com/nwg5817/forge/commit/9e30bd943c629b1) tool4EvEr *2024-09-04 09:28:18*
+
+**Intervening if triggers with tapped/untapped state (#6037)**
+
+
+[d33f6296a7a9989](https://github.com/nwg5817/forge/commit/d33f6296a7a9989) Fulgur14 *2024-09-04 07:12:26*
+
+**CardTraitBase: PresentDefined for Trigger and ReplacementEffects**
+
+
+[53d9936fb968933](https://github.com/nwg5817/forge/commit/53d9936fb968933) Hans Mackowiak *2024-09-04 05:39:08*
+
+**DSK: Undead Sprinter (#6050)**
+
+
+[67edc8d37101f13](https://github.com/nwg5817/forge/commit/67edc8d37101f13) tool4ever *2024-09-04 05:24:05*
+
+**DSC 4 cards + moving upcoming to folders (#6027)**
+
+ * Support Aminatou, Veil Piercer
+ * ---------
+ * Co-authored-by: TRT &lt;&gt;
+
+[676174043e9dae1](https://github.com/nwg5817/forge/commit/676174043e9dae1) Simisays *2024-09-04 05:10:42*
+
+**Add files via upload (#6049)**
+
+
+[736ccdd89339f56](https://github.com/nwg5817/forge/commit/736ccdd89339f56) Renato Filipe Vidal Santos *2024-09-04 05:01:10*
+
+**Merge pull request #6046 from paulsnoops/dsk_fixes**
+
+ * Some DSK card script fixes
+
+[a512990cf5fb111](https://github.com/nwg5817/forge/commit/a512990cf5fb111) Paul Hammerton *2024-09-03 12:17:48*
+
+**file_name**
+
+
+[7bcb127e9d30cf0](https://github.com/nwg5817/forge/commit/7bcb127e9d30cf0) Paul Hammerton *2024-09-03 12:10:42*
+
+**Some DSK card script fixes**
+
+
+[e8ce564605f4054](https://github.com/nwg5817/forge/commit/e8ce564605f4054) Paul Hammerton *2024-09-03 12:08:38*
+
+**Merge pull request #6026 from Fulgur14/Fulgur14-patch-53**
+
+ * 18 Duskmourn cards + 2 Schemes
+
+[8d714fce30a4936](https://github.com/nwg5817/forge/commit/8d714fce30a4936) Paul Hammerton *2024-09-03 11:54:43*
+
+**Merge pull request #6018 from Lykrast/master**
+
+ * 27 cards from 2024 Unknown Events (1 is in mystery booster 2)
+
+[aa47c8099f2b536](https://github.com/nwg5817/forge/commit/aa47c8099f2b536) Paul Hammerton *2024-09-03 11:53:49*
+
+**Merge pull request #6038 from Fulgur14/Fulgur14-patch-57**
+
+ * Common dual cycle for DSK
+
+[bc8f8bb4ff5ba0b](https://github.com/nwg5817/forge/commit/bc8f8bb4ff5ba0b) Paul Hammerton *2024-09-03 11:53:20*
+
+**Merge pull request #6043 from kevlahnota/master2**
+
+ * update adventure UI BG
+
+[13c50ffe60f1915](https://github.com/nwg5817/forge/commit/13c50ffe60f1915) kevlahnota *2024-09-03 11:31:47*
+
+**increase badge fb resolution**
+
+
+[bfaaed273888980](https://github.com/nwg5817/forge/commit/bfaaed273888980) Anthony Calosa *2024-09-03 11:23:26*
+
+**update bg, ui outline**
+
+
+[9296aece2598a1c](https://github.com/nwg5817/forge/commit/9296aece2598a1c) Anthony Calosa *2024-09-03 10:18:02*
+
+**Merge pull request #6045 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK, SLD
+
+[c27af329b14fd10](https://github.com/nwg5817/forge/commit/c27af329b14fd10) Paul Hammerton *2024-09-03 09:54:19*
+
+**Edition updates: DSC, DSK, SLD**
+
+
+[b56d9b78941251c](https://github.com/nwg5817/forge/commit/b56d9b78941251c) Paul Hammerton *2024-09-03 09:40:23*
+
+**Update kaito_bane_of_nightmares.txt**
+
+
+[0f36b53a1e67b00](https://github.com/nwg5817/forge/commit/0f36b53a1e67b00) Fulgur14 *2024-09-03 06:12:37*
+
+**pixelized other UI icons, indexed BG color**
+
+
+[5b4f09303246d2e](https://github.com/nwg5817/forge/commit/5b4f09303246d2e) Anthony Calosa *2024-09-03 05:02:58*
+
+**downscale tavernevent**
+
+
+[76b433ec933cd23](https://github.com/nwg5817/forge/commit/76b433ec933cd23) Anthony Calosa *2024-09-03 03:54:03*
+
+**update defeat badge**
+
+ * - u[scale and proper pixelized
+
+[b5c46f388a255e2](https://github.com/nwg5817/forge/commit/b5c46f388a255e2) Anthony Calosa *2024-09-03 03:34:36*
+
+**Merge pull request #6042 from kevlahnota/master2**
+
+ * fix autosell refresh, update SaveLoadScene
+
+[a634ffeb894f952](https://github.com/nwg5817/forge/commit/a634ffeb894f952) kevlahnota *2024-09-03 02:14:00*
+
+**add defeat badge, prevent console toggle when controls are frozen**
+
+
+[df04f1b1b137374](https://github.com/nwg5817/forge/commit/df04f1b1b137374) Anthony Calosa *2024-09-03 02:10:16*
+
+**update location info**
+
+
+[b785f5042e54592](https://github.com/nwg5817/forge/commit/b785f5042e54592) Anthony Calosa *2024-09-03 00:56:58*
+
+**update preview info**
+
+
+[13968ffb08c89d3](https://github.com/nwg5817/forge/commit/13968ffb08c89d3) Anthony Calosa *2024-09-03 00:30:36*
+
+**fix autosell refresh, update SaveLoadScene**
+
+
+[b80ac34189684fa](https://github.com/nwg5817/forge/commit/b80ac34189684fa) Anthony Calosa *2024-09-03 00:18:40*
+
+**- Add puzzle PS_BLB3, add support for class level to GameState. (#6039)**
+
+
+[1a1833c58831425](https://github.com/nwg5817/forge/commit/1a1833c58831425) Agetian *2024-09-02 16:59:07*
+
+**Fix ate o clock spell description**
+
+
+[9e28e06d70105c1](https://github.com/nwg5817/forge/commit/9e28e06d70105c1) Lykrast *2024-09-02 16:23:01*
+
+**Add files via upload**
+
+
+[bc056c7f92be03d](https://github.com/nwg5817/forge/commit/bc056c7f92be03d) Fulgur14 *2024-09-02 16:09:47*
+
+**Update nowhere_to_run.txt**
+
+
+[2fd7f66e253d9d1](https://github.com/nwg5817/forge/commit/2fd7f66e253d9d1) Fulgur14 *2024-09-02 16:06:36*
+
+**Common dual cycle for DSK**
+
+
+[319e743df1a1838](https://github.com/nwg5817/forge/commit/319e743df1a1838) Fulgur14 *2024-09-02 16:02:37*
+
+**Update nowhere_to_run.txt**
+
+
+[205a13ce2a35700](https://github.com/nwg5817/forge/commit/205a13ce2a35700) Fulgur14 *2024-09-02 15:56:25*
+
+**Update kaito_bane_of_nightmares.txt**
+
+
+[29db7f6ccbe184c](https://github.com/nwg5817/forge/commit/29db7f6ccbe184c) Fulgur14 *2024-09-02 15:48:51*
+
+**Update veteran_survivor.txt**
+
+
+[7322ffbdadbc830](https://github.com/nwg5817/forge/commit/7322ffbdadbc830) Fulgur14 *2024-09-02 13:51:16*
+
+**Merge pull request #6036 from kevlahnota/master2**
+
+ * update adventure defeat penalty
+
+[19d8c7bac6f63a1](https://github.com/nwg5817/forge/commit/19d8c7bac6f63a1) kevlahnota *2024-09-02 13:41:47*
+
+**update adventure defeat penalty**
+
+ * - random armor crack (unusable)
+ * - add difficulty indicator in load game preview (red - insane, gold - hard, green - normal, cyan - easy)
+
+[f59ebf64e92a146](https://github.com/nwg5817/forge/commit/f59ebf64e92a146) Anthony Calosa *2024-09-02 13:38:19*
+
+**Update champions_of_archery_join_the_group.txt (#6035)**
+
+
+[8a409c91b0216cc](https://github.com/nwg5817/forge/commit/8a409c91b0216cc) Fulgur14 *2024-09-02 12:18:54*
+
+**Update veteran_survivor.txt**
+
+
+[c5da294e0560a2f](https://github.com/nwg5817/forge/commit/c5da294e0560a2f) Fulgur14 *2024-09-02 11:21:27*
+
+**Some cleaning brought with smaller fixes (#6029)**
+
+ * Fix Teferi&#x27;s Imp
+
+[229b1562be6f38f](https://github.com/nwg5817/forge/commit/229b1562be6f38f) tool4ever *2024-09-02 08:47:50*
+
+**GameLoss: use CantHappen for cantLose (#6024)**
+
+ * GameLoss: use CantHappen for cantLose
+
+[40bc5aa021142ea](https://github.com/nwg5817/forge/commit/40bc5aa021142ea) Hans Mackowiak *2024-09-02 08:35:45*
+
+**Update mishra_claimed_by_gix_mishra_lost_to_phyrexia.txt (#6030)**
+
+
+[bf9a9beac63ba0c](https://github.com/nwg5817/forge/commit/bf9a9beac63ba0c) Renato Filipe Vidal Santos *2024-09-02 05:34:47*
+
+**Update veteran_survivor.txt**
+
+
+[e530c3a34cdaaad](https://github.com/nwg5817/forge/commit/e530c3a34cdaaad) Fulgur14 *2024-09-01 17:50:36*
+
+**Update overlord_of_the_mistmoors.txt**
+
+
+[695e1344d689bb7](https://github.com/nwg5817/forge/commit/695e1344d689bb7) Fulgur14 *2024-09-01 17:50:19*
+
+**Update kaito_bane_of_nightmares.txt**
+
+
+[6ec11f0a778d042](https://github.com/nwg5817/forge/commit/6ec11f0a778d042) Fulgur14 *2024-09-01 17:49:59*
+
+**Merge pull request #6028 from kevlahnota/master2**
+
+ * fix freeze
+
+[4db49a094a836a2](https://github.com/nwg5817/forge/commit/4db49a094a836a2) kevlahnota *2024-09-01 12:37:51*
+
+**fix freeze**
+
+
+[9aecf60ac745467](https://github.com/nwg5817/forge/commit/9aecf60ac745467) Anthony Calosa *2024-09-01 12:37:19*
+
+**Fix booster replacement for Bloomburrow**
+
+
+[754cfcd79a97382](https://github.com/nwg5817/forge/commit/754cfcd79a97382) Chris H *2024-09-01 12:00:53*
+
+**Add files via upload**
+
+
+[8d23de631f86173](https://github.com/nwg5817/forge/commit/8d23de631f86173) Fulgur14 *2024-09-01 10:20:30*
+
+**18 Duskmourn cards + 2 Schemes**
+
+
+[29cbb11e2432b40](https://github.com/nwg5817/forge/commit/29cbb11e2432b40) Fulgur14 *2024-09-01 10:19:45*
+
+**Merge pull request #6023 from paulsnoops/edition_updates**
+
+ * Edition updates: DSC, DSK, SPG
+
+[bcbfe14a7062764](https://github.com/nwg5817/forge/commit/bcbfe14a7062764) Paul Hammerton *2024-09-01 07:40:28*
+
+**Edition updates: DSC, DSK, SPG**
+
+
+[ae2ab498f1a5eae](https://github.com/nwg5817/forge/commit/ae2ab498f1a5eae) Paul Hammerton *2024-09-01 07:37:00*
+
+**Merge pull request #6022 from kevlahnota/master2**
+
+ * Disable autosell/nosell labels
+
+[f8c89995db58e35](https://github.com/nwg5817/forge/commit/f8c89995db58e35) kevlahnota *2024-09-01 04:08:09*
+
+**Disable labels**
+
+ * -todo distinction
+
+[00ab0bf50b7fe00](https://github.com/nwg5817/forge/commit/00ab0bf50b7fe00) Anthony Calosa *2024-09-01 04:06:37*
+
+**Merge pull request #6020 from kevlahnota/master2**
+
+ * update AdventureDeckEditor
+
+[845f7f60f0f6662](https://github.com/nwg5817/forge/commit/845f7f60f0f6662) kevlahnota *2024-08-31 23:20:04*
+
+**update AdventureDeckEditor**
+
+ * - show Shop prices, show Auto Sell / No Sell card label
+
+[cdbc3cfab759fbc](https://github.com/nwg5817/forge/commit/cdbc3cfab759fbc) Anthony Calosa *2024-08-31 23:12:53*
+
+**Merge pull request #6019 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK, PRES
+
+[256fc780d8fd9c0](https://github.com/nwg5817/forge/commit/256fc780d8fd9c0) Paul Hammerton *2024-08-31 08:53:00*
+
+**Edition updates: DSK, PRES**
+
+
+[d2fb65c108c76e7](https://github.com/nwg5817/forge/commit/d2fb65c108c76e7) Paul Hammerton *2024-08-31 08:48:20*
+
+**YBLB 24 cards (#5955)**
+
+ * update
+ * Update awestruck_cygnet.txt
+ * 10 more
+ * cleanup + last 4
+ * cleanup
+ * Update archival_whorl.txt
+ * cleanup
+ * Update buxton_decorated_host.txt
+ * cleanup 2
+ * cleanup
+
+[6d43aa91528b0ba](https://github.com/nwg5817/forge/commit/6d43aa91528b0ba) Simisays *2024-08-31 04:47:05*
+
+**Amsterdam cards**
+
+
+[0db4ac579cc8834](https://github.com/nwg5817/forge/commit/0db4ac579cc8834) Lykrast *2024-08-31 01:10:41*
+
+**Fix Conspiracy removing types without choice for new one (#6017)**
+
+ * Skip incomplete overwrite
+ * Fix NPE for Unhaunting
+
+[080d347199d5d0d](https://github.com/nwg5817/forge/commit/080d347199d5d0d) tool4ever *2024-08-30 17:13:49*
+
+**Merge pull request #6013 from paulsnoops/mh3_m3c_updates**
+
+ * MH3 &amp; M3C remove unnecessary tokens
+
+[cadf278871f2375](https://github.com/nwg5817/forge/commit/cadf278871f2375) Paul Hammerton *2024-08-30 07:52:09*
+
+**Merge pull request #6016 from kevlahnota/master2**
+
+ * fix noSell cardreward
+
+[6d429170054e8b6](https://github.com/nwg5817/forge/commit/6d429170054e8b6) kevlahnota *2024-08-30 01:51:08*
+
+**fix noSell cardreward**
+
+
+[5978b3ef16e33d0](https://github.com/nwg5817/forge/commit/5978b3ef16e33d0) Anthony Calosa *2024-08-30 01:47:16*
+
+**Merge pull request #6012 from kevlahnota/master2**
+
+ * add autosell toggle for rewards
+
+[20f5bbed98aff5d](https://github.com/nwg5817/forge/commit/20f5bbed98aff5d) kevlahnota *2024-08-29 22:21:46*
+
+**update touchcancelled**
+
+
+[e184fb20b90db7d](https://github.com/nwg5817/forge/commit/e184fb20b90db7d) Anthony Calosa *2024-08-29 22:15:09*
+
+**MH3 & M3C remove unnecessary tokens**
+
+
+[9b7659ab84a80fd](https://github.com/nwg5817/forge/commit/9b7659ab84a80fd) Paul Hammerton *2024-08-29 17:34:04*
+
+**PH19: Champions of Archery (#6006)**
+
+
+[d24e2963228aec3](https://github.com/nwg5817/forge/commit/d24e2963228aec3) Renato Filipe Vidal Santos *2024-08-29 16:28:43*
+
+**Merge pull request #5933 from Jetz72/youreInCommand**
+
+ * You&#x27;re In Command + Support
+
+[7421871a3647069](https://github.com/nwg5817/forge/commit/7421871a3647069) tool4ever *2024-08-29 16:28:29*
+
+**update button**
+
+
+[b1e6e6fd3d4458a](https://github.com/nwg5817/forge/commit/b1e6e6fd3d4458a) Anthony Calosa *2024-08-29 15:09:27*
+
+**add autosell toggle for rewards**
+
+
+[4e68ac3807ff592](https://github.com/nwg5817/forge/commit/4e68ac3807ff592) Anthony Calosa *2024-08-29 14:31:07*
+
+**Merge pull request #6010 from kevlahnota/master2**
+
+ * update player death transition
+
+[78bff0a8f96d6e7](https://github.com/nwg5817/forge/commit/78bff0a8f96d6e7) kevlahnota *2024-08-29 11:36:16*
+
+**update player death transition**
+
+
+[f5ab73d32dd9018](https://github.com/nwg5817/forge/commit/f5ab73d32dd9018) Anthony Calosa *2024-08-29 11:26:40*
+
+**ColorlessDamageSource as StaticAbility (#6007)**
+
+ * ColorlessDamageSource as StaticAbility
+
+[239e327f0ba8587](https://github.com/nwg5817/forge/commit/239e327f0ba8587) Hans Mackowiak *2024-08-29 08:06:58*
+
+**Merge pull request #6009 from kevlahnota/master2**
+
+ * restrict menu and movement on player defeat dialog
+
+[3111e73a6364023](https://github.com/nwg5817/forge/commit/3111e73a6364023) kevlahnota *2024-08-29 07:47:33*
+
+**remove uncommited changes**
+
+
+[6a2f185b0823d97](https://github.com/nwg5817/forge/commit/6a2f185b0823d97) kevlahnota *2024-08-29 07:42:17*
+
+**retrict menu and movement on player defeat dialog**
+
+
+[977c11ced0ba129](https://github.com/nwg5817/forge/commit/977c11ced0ba129) Anthony Calosa *2024-08-29 06:45:54*
+
+**Merge pull request #6002 from kevlahnota/master2**
+
+ * add resetPlayerLocation on defeat
+
+[96080ca479da920](https://github.com/nwg5817/forge/commit/96080ca479da920) kevlahnota *2024-08-29 03:28:55*
+
+**fix overlapping dialog, fix player position**
+
+
+[a3f8b0aca27271e](https://github.com/nwg5817/forge/commit/a3f8b0aca27271e) Anthony Calosa *2024-08-29 03:24:50*
+
+**update message**
+
+
+[14c14b880de8cd6](https://github.com/nwg5817/forge/commit/14c14b880de8cd6) Anthony Calosa *2024-08-29 02:40:26*
+
+**YBLB: Shellfish Scholar, Tasteful Offering, Tempest Trapper, Thought Rattle, Three Tree Battalion, Vigorous Farming (#5944)**
+
+
+[36bb08624653d07](https://github.com/nwg5817/forge/commit/36bb08624653d07) Renato Filipe Vidal Santos *2024-08-28 20:08:39*
+
+**Fix missing ChangesZoneAll (#6005)**
+
+
+[229fd798fba2d36](https://github.com/nwg5817/forge/commit/229fd798fba2d36) tool4ever *2024-08-28 18:23:31*
+
+**Some fixes (#6004)**
+
+ * Fix NPE
+
+[756ba28a144a11d](https://github.com/nwg5817/forge/commit/756ba28a144a11d) tool4ever *2024-08-28 15:54:28*
+
+**StaticAbilityAssignNoCombatDamage (#5998)**
+
+ * StaticAbilityAssignNoCombatDamage
+ * ---------
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[4b533d22a03dd57](https://github.com/nwg5817/forge/commit/4b533d22a03dd57) Hans Mackowiak *2024-08-28 15:18:36*
+
+**add resetPlayerLocation on defeat**
+
+
+[24d4899cde345e9](https://github.com/nwg5817/forge/commit/24d4899cde345e9) Anthony Calosa *2024-08-28 13:54:48*
+
+**MB2: Fetching Garden, Gobland, The Heron Moon, Omenpath to Naya (#5989)**
+
+ * Add files via upload
+ * Add files via upload
+ * Add files via upload
+ * Update CounterEnumType.java
+ * Add files via upload
+ * Add files via upload
+ * Update CounterEnumType.java
+
+[51abd277d2a3ba8](https://github.com/nwg5817/forge/commit/51abd277d2a3ba8) Renato Filipe Vidal Santos *2024-08-28 06:24:48*
+
+**Fix mapping copied commander effects between games**
+
+
+[a8351fadc73ae3a](https://github.com/nwg5817/forge/commit/a8351fadc73ae3a) Jetz *2024-08-28 00:35:10*
+
+**Merge pull request #5991 from Jetz72/fixes20240825**
+
+ * Translation support for functional variants
+
+[53084f43c37e4eb](https://github.com/nwg5817/forge/commit/53084f43c37e4eb) kevlahnota *2024-08-27 04:43:35*
+
+**Merge pull request #5997 from hovergoat/master**
+
+ * Fix for crash when no multikicker cost is paid
+
+[27102729abbdad7](https://github.com/nwg5817/forge/commit/27102729abbdad7) kevlahnota *2024-08-27 04:40:22*
+
+**Merge branch 'Card-Forge:master' into master**
+
+
+[7cf9ea0ded330b3](https://github.com/nwg5817/forge/commit/7cf9ea0ded330b3) hovergoat *2024-08-27 01:30:20*
+
+**Fixed crash when multikicker is 0**
+
+
+[7327d6674396e06](https://github.com/nwg5817/forge/commit/7327d6674396e06) hovergoat *2024-08-27 01:30:05*
+
+**Merge pull request #5995 from paulsnoops/bnr_26_aug**
+
+ * Banned and Restricted Announcement for August 26, 2024
+
+[d66666007ce9002](https://github.com/nwg5817/forge/commit/d66666007ce9002) Paul Hammerton *2024-08-26 19:57:15*
+
+**Banned and Restricted Announcement for August 26, 2024**
+
+
+[c725a49f526588f](https://github.com/nwg5817/forge/commit/c725a49f526588f) Paul Hammerton *2024-08-26 19:51:36*
+
+**Update sorins_boss_effect.txt (#5985)**
+
+
+[927c6fab582668d](https://github.com/nwg5817/forge/commit/927c6fab582668d) Simisays *2024-08-26 13:47:10*
+
+**- Improve AI for Searing Blaze (#5987)**
+
+
+[5890bdffc38927c](https://github.com/nwg5817/forge/commit/5890bdffc38927c) Agetian *2024-08-26 13:45:22*
+
+**Merge pull request #5993 from kevlahnota/master2**
+
+ * fix actor placement GameHUD -&gt; currentStage
+
+[11c0b12ec89376d](https://github.com/nwg5817/forge/commit/11c0b12ec89376d) kevlahnota *2024-08-26 12:42:02*
+
+**adjust blur divisor**
+
+
+[2442883501af18d](https://github.com/nwg5817/forge/commit/2442883501af18d) Anthony Calosa *2024-08-26 12:27:47*
+
+**update avatar listener single tap/click set translucency, double tap/click set hud visibility**
+
+
+[c212c41a30197fc](https://github.com/nwg5817/forge/commit/c212c41a30197fc) Anthony Calosa *2024-08-26 12:00:17*
+
+**update actor groupings**
+
+
+[284a4daf8846abb](https://github.com/nwg5817/forge/commit/284a4daf8846abb) Anthony Calosa *2024-08-26 09:28:24*
+
+**fix actor placement GameHUD -> currentStage**
+
+ * - add hud transluscency via avatar/gamehud double click/tap
+
+[4a8776a2f793f07](https://github.com/nwg5817/forge/commit/4a8776a2f793f07) Anthony Calosa *2024-08-26 08:58:45*
+
+**Merge branch 'Card-Forge:master' into fixes20240825**
+
+
+[bba94d5a9e17ee6](https://github.com/nwg5817/forge/commit/bba94d5a9e17ee6) Jetz72 *2024-08-26 04:26:28*
+
+**Support functional variants in translations**
+
+
+[4afc86b4b4fc9fa](https://github.com/nwg5817/forge/commit/4afc86b4b4fc9fa) Jetz *2024-08-26 04:25:43*
+
+**MB2: Slumbering Waterways, Temur Elevator, Under-Construction Skyscraper, Wrenn and One (#5980)**
+
+ * Add files via upload
+ * Add files via upload
+ * Add files via upload
+ * Add files via upload
+
+[17ffe17e9dfaf52](https://github.com/nwg5817/forge/commit/17ffe17e9dfaf52) Renato Filipe Vidal Santos *2024-08-26 04:04:35*
+
+**Merge pull request #5970 from misha-colbourne/hud-visibility-fix**
+
+ * Fixed missing elements from HUD in towns/dungeons/etc
+
+[c1edd4a2f46b44f](https://github.com/nwg5817/forge/commit/c1edd4a2f46b44f) kevlahnota *2024-08-26 01:11:43*
+
+**Unknown Event Chicago 2024 (+ edition for amsterdam)**
+
+
+[bccc6d81b1f6fea](https://github.com/nwg5817/forge/commit/bccc6d81b1f6fea) Lykrast *2024-08-25 21:22:21*
+
+**DetachedCardEffect GameCopier copying**
+
+
+[fd5634144656e10](https://github.com/nwg5817/forge/commit/fd5634144656e10) Jetz *2024-08-25 20:40:58*
+
+**Merge pull request #5990 from kevlahnota/master2**
+
+ * update GameHUD items
+
+[68bc50770da81e4](https://github.com/nwg5817/forge/commit/68bc50770da81e4) kevlahnota *2024-08-25 14:58:24*
+
+**update GameHUD**
+
+
+[c13396f9843f71b](https://github.com/nwg5817/forge/commit/c13396f9843f71b) Anthony Calosa *2024-08-25 14:51:15*
+
+**DetachedCardEffect LKI copying**
+
+
+[b97788d8eba9dff](https://github.com/nwg5817/forge/commit/b97788d8eba9dff) Jetz *2024-08-25 13:58:59*
+
+**CopyPermanentEffect: use DefinedName for special copies (#5988)**
+
+ * CopyPermanentEffect: use DefinedName for special copies
+
+[c3a2e671308368c](https://github.com/nwg5817/forge/commit/c3a2e671308368c) Hans Mackowiak *2024-08-25 08:44:15*
+
+**LandAbility: skip if already in Battlefield**
+
+
+[3ef0479d76b51f4](https://github.com/nwg5817/forge/commit/3ef0479d76b51f4) Hans Mackowiak *2024-08-25 07:12:55*
+
+**Fix commander snapshotting**
+
+ * Fix DetachedCardEffect snapshottong
+
+[7b7dd0f7c3b8958](https://github.com/nwg5817/forge/commit/7b7dd0f7c3b8958) Jetz *2024-08-24 20:35:35*
+
+**Remove "by Commander Effect" from SA list**
+
+
+[34e5938f085c95b](https://github.com/nwg5817/forge/commit/34e5938f085c95b) Jetz *2024-08-24 20:34:22*
+
+**LDA Standard - August 7, 2024**
+
+
+[2dc025bf679b0ab](https://github.com/nwg5817/forge/commit/2dc025bf679b0ab) kevlahnota *2024-08-24 15:01:48*
+
+**Fix Wheel of Potential (#5983)**
+
+ * Wheel of Potential revision
+ * Logic cleanup
+ * ---------
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.60&gt;
+
+[30a358dda1304f6](https://github.com/nwg5817/forge/commit/30a358dda1304f6) tool4ever *2024-08-24 11:25:36*
+
+**Merge pull request #5984 from paulsnoops/edition_updates**
+
+ * Edition updates: DSK, SLD and add YBLB to formats
+
+[6a503ccdbd4e5b6](https://github.com/nwg5817/forge/commit/6a503ccdbd4e5b6) Paul Hammerton *2024-08-24 08:31:30*
+
+**Edition updates: DSK, SLD, YBLB (also add YBLB to formats)**
+
+
+[1716fd2e1aecf4f](https://github.com/nwg5817/forge/commit/1716fd2e1aecf4f) Paul Hammerton *2024-08-24 08:26:43*
+
+**Merge pull request #5982 from kevlahnota/master2**
+
+ * update PlayerStatisticScene, BlurUtils
+
+[8f4e70aa04c1b43](https://github.com/nwg5817/forge/commit/8f4e70aa04c1b43) kevlahnota *2024-08-24 04:59:14*
+
+**Fix bad logic check (#5981)**
+
+
+[3522492c85dfd8f](https://github.com/nwg5817/forge/commit/3522492c85dfd8f) Chris H *2024-08-24 04:51:57*
+
+**update PlayerStatisticScene, BlurUtils**
+
+ * - make blur pixelized
+
+[e04451b962c62d0](https://github.com/nwg5817/forge/commit/e04451b962c62d0) Anthony Calosa *2024-08-24 04:47:30*
+
+**Update insatiable_frugivore.txt**
+
+ * - fixes 5977
+
+[3bfef56d516c7b3](https://github.com/nwg5817/forge/commit/3bfef56d516c7b3) kevlahnota *2024-08-23 23:45:35*
+
+**Merge branch 'master' into youreInCommand**
+
+
+[0b43d3ebf5c3ec7](https://github.com/nwg5817/forge/commit/0b43d3ebf5c3ec7) Jetz *2024-08-23 23:06:02*
+
+**Single commander effect per player**
+
+ * Support DetachedCardEffect with no source card
+
+[955314527a59d8a](https://github.com/nwg5817/forge/commit/955314527a59d8a) Jetz *2024-08-23 23:04:59*
+
+**include components for RememberTargets**
+
+
+[610488bc22fc19a](https://github.com/nwg5817/forge/commit/610488bc22fc19a) Jetz *2024-08-23 22:55:52*
+
+**Update config.json**
+
+ * general playtest and some funny cards shouldn&#x27;t be on adventure unless specified otherwise
+
+[ab11c10fd404bd4](https://github.com/nwg5817/forge/commit/ab11c10fd404bd4) kevlahnota *2024-08-23 15:45:32*
+
+**Merge pull request #5974 from kevlahnota/master2**
+
+ * Update NewGameScene
+
+[30ae922c5eb54f9](https://github.com/nwg5817/forge/commit/30ae922c5eb54f9) kevlahnota *2024-08-23 11:02:50*
+
+**Fix NPE with Brilliant Ultimatum**
+
+
+[45b333b8acc904d](https://github.com/nwg5817/forge/commit/45b333b8acc904d) TRT *2024-08-23 10:10:31*
+
+**- First draft: fix AI for Fireball and Shatterskull Smashing (#5975)**
+
+
+[76f4113fb7da105](https://github.com/nwg5817/forge/commit/76f4113fb7da105) Agetian *2024-08-23 09:37:23*
+
+**Add files via upload (#5971)**
+
+
+[33e5d14ea58ee14](https://github.com/nwg5817/forge/commit/33e5d14ea58ee14) Renato Filipe Vidal Santos *2024-08-23 09:36:02*
+
+**73 cards from Unknown Events 2023 (some being in mb2) (#5913)**
+
+ * Unknown Philadelphia 2023 and Minenapolis 2023
+ * Barcelona 2023 what I could
+ * A few of the las vegas ones
+ * Questing role give to creature instead of being on aura
+ * Changed prizes to promo, should fix phila
+ * And also put the you make the card on a special sheet, should fix a future issue if I got it right
+ * Fix the etb tapped from bloomburrow patch
+ * Kept old wording for now cause those cards don&#x27;t have oracle texts, might change if asked
+ * Las Vegas 2023 (what I could)
+ * Shortened set codes as suggested
+ * Fix edition change on las vegas ymtc
+
+[8d433e019d1b5b3](https://github.com/nwg5817/forge/commit/8d433e019d1b5b3) Lykrast *2024-08-23 09:35:52*
+
+**minor**
+
+
+[b6485e709407ee6](https://github.com/nwg5817/forge/commit/b6485e709407ee6) Anthony Calosa *2024-08-23 09:35:19*
+
+**remove duplicate function**
+
+
+[3df84ca71e9b6d8](https://github.com/nwg5817/forge/commit/3df84ca71e9b6d8) Anthony Calosa *2024-08-23 09:16:33*
+
+**minor cleanup**
+
+
+[6bba3ee9541a2cc](https://github.com/nwg5817/forge/commit/6bba3ee9541a2cc) Anthony Calosa *2024-08-23 09:02:13*
+
+**refactor LandAbility to be created by CardFactory (#5047)**
+
+ * ---------
+ * Co-authored-by: tool4EvEr &lt;tool4EvEr@192.168.0.60&gt;
+
+[77710cf1b03b7f0](https://github.com/nwg5817/forge/commit/77710cf1b03b7f0) Hans Mackowiak *2024-08-23 08:57:33*
+
+**Update NewGameScene**
+
+ * - Hint TextButton -&gt; ImageButton
+ * - add Random Avatar Listener
+ * - update NameGenerator Listener
+ * - update disabled Menu text
+ * - use AsyncAudio for Android
+
+[c7c2cd74fe63892](https://github.com/nwg5817/forge/commit/c7c2cd74fe63892) Anthony Calosa *2024-08-23 08:53:07*
+
+**Merge pull request #5963 from misha-colbourne/AdventureEnemyFreezeFix**
+
+ * Adventure enemy freeze fix
+
+[a52e06fb820c238](https://github.com/nwg5817/forge/commit/a52e06fb820c238) kevlahnota *2024-08-23 05:10:43*
+
+**Fix Scry AI that requires targeting (Kozilek's Command) (#5972)**
+
+ * - Fix Scry AI that requires targeting (Kozilek&#x27;s Command)
+ * - Slight tweak to targeted Scry AI.
+
+[45353b6d73712f6](https://github.com/nwg5817/forge/commit/45353b6d73712f6) Agetian *2024-08-23 04:38:42*
+
+**Removed lingering outdated comment**
+
+
+[2ec00616409d32b](https://github.com/nwg5817/forge/commit/2ec00616409d32b) misha-colbourne *2024-08-23 00:36:04*
+
+**Font tag size constants, cleaned up unused variables I added**
+
+
+[b9c576ad5d329ff](https://github.com/nwg5817/forge/commit/b9c576ad5d329ff) misha-colbourne *2024-08-23 00:28:01*
+
+**Font tag size constants, cleaned up unused variables I added**
+
+
+[478ad3a1353e11f](https://github.com/nwg5817/forge/commit/478ad3a1353e11f) misha-colbourne *2024-08-22 23:24:49*
+
+**Fixed missing elements from HUD when not on world map (now translucent instead of invisible)**
+
+
+[663a712852e8b41](https://github.com/nwg5817/forge/commit/663a712852e8b41) misha-colbourne *2024-08-22 18:31:06*
+
+**- Fix AI assuming no token created for non-creature tokens**
+
+
+[3ae72e9d8a1cf0d](https://github.com/nwg5817/forge/commit/3ae72e9d8a1cf0d) Agetian *2024-08-22 10:35:46*
+
+**Update moonstone_harbinger.txt (#5966)**
+
+
+[8ba1edaba709de9](https://github.com/nwg5817/forge/commit/8ba1edaba709de9) Renato Filipe Vidal Santos *2024-08-22 05:16:54*
+
+**Merge branch 'Card-Forge:master' into AdventureEnemyFreezeFix**
+
+
+[a445520ef525deb](https://github.com/nwg5817/forge/commit/a445520ef525deb) misha-colbourne *2024-08-22 00:24:09*
+
+**Added check for frozen enemy to enemy idle anim condition**
+
+
+[7ffd7b1d63c706c](https://github.com/nwg5817/forge/commit/7ffd7b1d63c706c) misha-colbourne *2024-08-22 00:19:25*
+
+**Rename Reap the Tide.dck to Reap the Tides.dck (#5959)**
+
+
+[3141293c295a943](https://github.com/nwg5817/forge/commit/3141293c295a943) Sunnovah *2024-08-21 18:16:04*
+
+**Implement CR 800.4m (#189)**
+
+ * Relocate effects instead of exiling
+
+[064512ed83f3b1b](https://github.com/nwg5817/forge/commit/064512ed83f3b1b) tool4ever *2024-08-21 18:14:13*
+
+**Rename Stalward Unity [C16] [2016].dck to Stalwart Unity [C16] [2016].dck (#5960)**
+
+
+[38fb16c64f83b75](https://github.com/nwg5817/forge/commit/38fb16c64f83b75) Sunnovah *2024-08-21 18:13:11*
+
+**Fix a few issues with boosters in quest mode**
+
+
+[90fcb38fec43aba](https://github.com/nwg5817/forge/commit/90fcb38fec43aba) Chris H *2024-08-21 17:27:49*
+
+**Misc cleanup (#5958)**
+
+
+[d369c500dfe99e4](https://github.com/nwg5817/forge/commit/d369c500dfe99e4) tool4ever *2024-08-21 15:47:25*
+
+**Update oracle_en_vec.txt (#5956)**
+
+
+[3e2c0198fdb4c42](https://github.com/nwg5817/forge/commit/3e2c0198fdb4c42) Renato Filipe Vidal Santos *2024-08-21 08:30:15*
+
+**GameActionUtil: use Multikicker as KeywordExtraCost (#5881)**
+
+ * GameActionUtil: use Multikicker as KeywordExtraCost
+ * ~ remove getMultiKickerManaCost
+ * ~ remove Announce$ Multikicker
+ * some AI tweaks
+ * Fix MultiKicker for AI
+ * Update ComputerUtilMana.java
+ * Update ComputerUtil.java
+
+[7ba2d0217279b8d](https://github.com/nwg5817/forge/commit/7ba2d0217279b8d) Hans Mackowiak *2024-08-21 07:25:47*
+
+**Update alharu_solemn_ritualist.txt (#5952)**
+
+
+[3df0a15d7db8820](https://github.com/nwg5817/forge/commit/3df0a15d7db8820) NimSpork *2024-08-19 10:45:13*
+
+**Keyword: add 'Bands with other' keyword (#5950)**
+
+
+[492ff16c1258e55](https://github.com/nwg5817/forge/commit/492ff16c1258e55) Hans Mackowiak *2024-08-19 04:32:44*
+
+**Update cackling_observer.txt (#5949)**
+
+
+[bb07351d4e70778](https://github.com/nwg5817/forge/commit/bb07351d4e70778) Renato Filipe Vidal Santos *2024-08-18 17:28:43*
+
+**Declare Forge user agent (#5946)**
+
+
+[d2178756b52e0ed](https://github.com/nwg5817/forge/commit/d2178756b52e0ed) Chris H *2024-08-18 17:17:43*
+
+**Fix booster generation for editions without booster slots**
+
+
+[80cc302c99261f9](https://github.com/nwg5817/forge/commit/80cc302c99261f9) Chris H *2024-08-18 14:39:44*
+
+**Glyph cleanup: August 2024 pass**
+
+
+[acf15a65a877db0](https://github.com/nwg5817/forge/commit/acf15a65a877db0) Renato Filipe Vidal Santos *2024-08-18 11:37:16*
+
+**Duplication cleanup: pass #1 (#5942)**
+
+
+[7b5f790fe490d2e](https://github.com/nwg5817/forge/commit/7b5f790fe490d2e) Renato Filipe Vidal Santos *2024-08-18 09:40:20*
+
+**Merge branch 'master' into youreInCommand**
+
+
+[601f6a72c1ac425](https://github.com/nwg5817/forge/commit/601f6a72c1ac425) Jetz *2024-08-17 19:56:13*
+
+**Merge branch 'master' into youreInCommand**
+
+ * # Conflicts:
+ * #	forge-game/src/main/java/forge/game/player/Player.java
+
+[ec7f2be51c32bd6](https://github.com/nwg5817/forge/commit/ec7f2be51c32bd6) Jetz *2024-08-17 19:40:38*
+
+**setCommanders rewrite**
+
+
+[6929231fd549c05](https://github.com/nwg5817/forge/commit/6929231fd549c05) Jetz *2024-08-17 19:21:44*
+
+**Only grab BLB cards for Booster Slots. Ideally this would happen by default, but yknow how it goes.**
+
+
+[600cf82308170dd](https://github.com/nwg5817/forge/commit/600cf82308170dd) Chris H *2024-08-17 19:15:12*
+
+**Improve resetOriginalHost (#5939)**
+
+ * Co-authored-by: TRT &lt;&gt;
+
+[1857d1795d1bf97](https://github.com/nwg5817/forge/commit/1857d1795d1bf97) tool4ever *2024-08-17 07:58:34*
+
+**Add files via upload (#5868)**
+
+
+[852cdacb025f857](https://github.com/nwg5817/forge/commit/852cdacb025f857) Renato Filipe Vidal Santos *2024-08-17 07:58:09*
+
+**Add files via upload (#5867)**
+
+
+[fdef390c658d1bb](https://github.com/nwg5817/forge/commit/fdef390c658d1bb) Renato Filipe Vidal Santos *2024-08-17 07:57:58*
+
+**Add files via upload (#5866)**
+
+
+[26a5d5caf4ff248](https://github.com/nwg5817/forge/commit/26a5d5caf4ff248) Renato Filipe Vidal Santos *2024-08-17 07:57:45*
+
+**Add files via upload (#5869)**
+
+ * Co-authored-by: tool4ever &lt;therealtoolkit@hotmail.com&gt;
+
+[fc80c84df99a0b1](https://github.com/nwg5817/forge/commit/fc80c84df99a0b1) Renato Filipe Vidal Santos *2024-08-17 07:57:28*
+
+**Fix some issues**
+
+
+[c2206d533d78ca4](https://github.com/nwg5817/forge/commit/c2206d533d78ca4) Chris H *2024-08-16 20:57:21*
+
+**Convert BLB to new Booster Slot definition**
+
+
+[925819c83e9b383](https://github.com/nwg5817/forge/commit/925819c83e9b383) Chris H *2024-08-16 20:57:21*
+
+**Generate individual booster slots with individual replacement percentages**
+
+ * Convert MH3 to booster slot percentages
+
+[4554dee721fbb50](https://github.com/nwg5817/forge/commit/4554dee721fbb50) Chris H *2024-08-16 20:57:21*
+
+**Merge pull request #5938 from paulsnoops/edition_updates**
+
+ * Edition updates: FDN, MB2, YBLB
+
+[658542309a6e9ff](https://github.com/nwg5817/forge/commit/658542309a6e9ff) Paul Hammerton *2024-08-16 10:42:40*
+
+**YBLB**
+
+
+[5342518b982a73e](https://github.com/nwg5817/forge/commit/5342518b982a73e) Paul Hammerton *2024-08-16 10:39:52*
+
+**eternal**
+
+
+[668c5d64e830587](https://github.com/nwg5817/forge/commit/668c5d64e830587) Paul Hammerton *2024-08-16 10:05:35*
+
+**Edition updates: FDN, MB2**
+
+
+[a2951abac8eef5e](https://github.com/nwg5817/forge/commit/a2951abac8eef5e) Paul Hammerton *2024-08-16 10:03:13*
+
+**Merge pull request #5937 from kevlahnota/master2**
+
+ * fix NPE
+
+[c06e97d57b80b94](https://github.com/nwg5817/forge/commit/c06e97d57b80b94) kevlahnota *2024-08-16 02:29:35*
+
+**fix NPE**
+
+
+[de3b6b82cb0c944](https://github.com/nwg5817/forge/commit/de3b6b82cb0c944) Anthony Calosa *2024-08-16 02:27:25*
+
+**Merge pull request #5934 from dracontes/rb-fdn-2**
+
+ * FDN: Felidar Savior, Helpful Hunter, Prideful Parent, Vengeful Bloodwitch
+
+[e590df1a0830426](https://github.com/nwg5817/forge/commit/e590df1a0830426) Paul Hammerton *2024-08-15 16:07:51*
+
+**Update helpful_hunter.txt**
+
+
+[0ac16b3b28b384f](https://github.com/nwg5817/forge/commit/0ac16b3b28b384f) Renato Filipe Vidal Santos *2024-08-15 15:54:23*
+
+**Update prideful_parent.txt**
+
+
+[00a08d325d7191d](https://github.com/nwg5817/forge/commit/00a08d325d7191d) Renato Filipe Vidal Santos *2024-08-15 15:53:48*
+
+**Update ajani_nacatl_pariah_ajani_nacatl_avenger.txt**
+
+
+[7f150ce74142cc4](https://github.com/nwg5817/forge/commit/7f150ce74142cc4) Renato Filipe Vidal Santos *2024-08-15 15:53:14*
+
+**Update spirited_companion.txt**
+
+
+[ec8dc5ff0cf8627](https://github.com/nwg5817/forge/commit/ec8dc5ff0cf8627) Renato Filipe Vidal Santos *2024-08-15 15:52:42*
+
+**Add files via upload**
+
+
+[4ce94b929f83f61](https://github.com/nwg5817/forge/commit/4ce94b929f83f61) Renato Filipe Vidal Santos *2024-08-15 15:37:27*
+
+**Update desert_warfare.txt (#5926)**
+
+
+[b7605ee1da7b1e0](https://github.com/nwg5817/forge/commit/b7605ee1da7b1e0) Renato Filipe Vidal Santos *2024-08-15 15:27:31*
+
+**You're In Command + Support**
+
+
+[6a53c187ad1f497](https://github.com/nwg5817/forge/commit/6a53c187ad1f497) Jetz *2024-08-15 13:33:11*
+
+**Merge pull request #5931 from paulsnoops/edition_updates**
+
+ * Edition updates: FDN, SLD, YBLB
+
+[038374c3c5df334](https://github.com/nwg5817/forge/commit/038374c3c5df334) Paul Hammerton *2024-08-15 09:46:44*
+
+**Edition updates: FDN, SLD, YBLB**
+
+
+[d3fd7523e201b03](https://github.com/nwg5817/forge/commit/d3fd7523e201b03) Paul Hammerton *2024-08-15 09:42:51*
+
+**Update planequake.txt (#5928)**
+
+
+[6ef5acbd517e643](https://github.com/nwg5817/forge/commit/6ef5acbd517e643) Renato Filipe Vidal Santos *2024-08-15 07:52:46*
+
+**Update long_river_lurker.txt (#5927)**
+
+
+[6f110c114af6a01](https://github.com/nwg5817/forge/commit/6f110c114af6a01) Renato Filipe Vidal Santos *2024-08-15 07:52:18*
+
+**Update karn_living_legacy.txt (#5930)**
+
+
+[df78ac9a7362c68](https://github.com/nwg5817/forge/commit/df78ac9a7362c68) Chris H *2024-08-15 06:44:45*
+
+**UNF last 3 attractions (#5845)**
+
+ * update
+ * cleanup
+ * Update tunnel_of_love.txt
+
+[9201ccb390e923c](https://github.com/nwg5817/forge/commit/9201ccb390e923c) Simisays *2024-08-15 02:26:20*
+
+**Blb release (#5929)**
+
+ * [maven-release-plugin] prepare release forge-1.6.64
+ * [maven-release-plugin] prepare for next development iteration
+ * Update pom.xml
+ * Update AndroidManifest.xml
+ * Update pom.xml
+ * Update Forge.java
+ * ---------
+ * Co-authored-by: GitHub Actions &lt;actions@github.com&gt;
+
+[8be414d9dd5982a](https://github.com/nwg5817/forge/commit/8be414d9dd5982a) Chris H *2024-08-15 01:06:29*
+
+
