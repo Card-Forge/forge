@@ -651,7 +651,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
                 // TODO sort negatives to remove from best Cards first?
                 for (final Card crd : negatives) {
                     for (Map.Entry<CounterType, Integer> e : table.filterToRemove(crd).entrySet()) {
-                        if (ComputerUtil.isNegativeCounter(e.getKey(), crd)) {
+                        if (ComputerUtil.isNegativeCounter(e.getKey(), crd) && crd.canRemoveCounters(e.getKey())) {
                             int over = Math.min(e.getValue(), c - toRemove);
                             if (over > 0) {
                                 toRemove += over;
@@ -762,7 +762,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             }
         }
 
-        // if table is empty, than no counter was removed
+        // if table is empty, then no counter was removed
         return table.isEmpty() ? null : PaymentDecision.counters(table);
     }
 
