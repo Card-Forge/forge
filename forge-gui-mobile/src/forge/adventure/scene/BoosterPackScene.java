@@ -29,23 +29,23 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 
-public class SpellSmithScene extends UIScene {
+public class BoosterPackScene extends UIScene {
 
-    private static SpellSmithScene object;
+    private static BoosterPackScene object;
 
     // Method that accepts PointOfInterestChanges
-    public static SpellSmithScene instance(PointOfInterestChanges localChanges) {
+    public static BoosterPackScene instance(PointOfInterestChanges localChanges) {
         changes = localChanges;
 
         if (object == null)
-            object = new SpellSmithScene();
+            object = new BoosterPackScene();
         return object;
     }
 
     // Overloaded method without PointOfInterestChanges
-    public static SpellSmithScene instance() {
+    public static BoosterPackScene instance() {
         if (object == null)
-            object = new SpellSmithScene();
+            object = new BoosterPackScene();
         return object;
     }
 
@@ -73,8 +73,8 @@ public class SpellSmithScene extends UIScene {
     private Reward currentReward = null;
     private boolean paidInShards = false;
     static PointOfInterestChanges changes;
-    
-    private SpellSmithScene() {
+
+    private BoosterPackScene() {
         super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
 
         editionList = ui.findActor("BSelectPlane");
@@ -140,12 +140,12 @@ public class SpellSmithScene extends UIScene {
             }
         }
 
-        ui.onButtonPress("accept", SpellSmithScene.this::acceptSmithing);
-        ui.onButtonPress("decline", SpellSmithScene.this::declineSmithing);
-        ui.onButtonPress("done", SpellSmithScene.this::done);
-        ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
-        ui.onButtonPress("pullPackUsingGold", () -> SpellSmithScene.this.pullPack(false));
-        ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
+        ui.onButtonPress("accept", BoosterPackScene.this::acceptSmithing);
+        ui.onButtonPress("decline", BoosterPackScene.this::declineSmithing);
+        ui.onButtonPress("done", BoosterPackScene.this::done);
+        ui.onButtonPress("pullUsingGold", () -> BoosterPackScene.this.pullCard(false));
+        ui.onButtonPress("pullPackUsingGold", () -> BoosterPackScene.this.pullPack(false));
+        ui.onButtonPress("pullUsingShards", () -> BoosterPackScene.this.pullCard(true));
         ui.onButtonPress("BReset", () -> {
             reset();
             filterResults();
