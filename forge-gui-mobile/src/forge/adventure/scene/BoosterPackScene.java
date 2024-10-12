@@ -399,7 +399,7 @@ public class BoosterPackScene extends UIScene {
         pullPackUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
         pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
-        pullPackUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost);
+        pullPackUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost || edition.isEmpty());
         pullUsingShards.setDisabled(!(cardPool.size() > 0) || Current.player().getShards() < currentShardPrice);
         editionList.setUserObject(edition);
     }
@@ -554,10 +554,11 @@ public class BoosterPackScene extends UIScene {
         currentReward = null;
     }
 
-
     private void updatePullButtons() {
+        String selectedEdition = editionList.getSelected().getCode();
         pullUsingGold.setDisabled(Current.player().getGold() < currentPrice);
         pullPackUsingGold.setDisabled(Current.player().getGold() < currentPrice);
+        pullPackUsingGold.setDisabled(Current.player().getGold() < currentPrice || selectedEdition.isEmpty());
         pullUsingShards.setDisabled(Current.player().getShards() < currentShardPrice);
 
         acceptReward.setVisible(false);
