@@ -56,7 +56,7 @@ public class BoosterPackScene extends UIScene {
     private int cost_low = -1;
     private int cost_high = 9999;
     //Other
-    private final float basePrice = 125f;
+    private final float basePrice = 0f;
     private int currentPrice = 0;
     private int currentShardPrice = 0;
     private List<CardEdition> editions = null;
@@ -143,6 +143,22 @@ public class BoosterPackScene extends UIScene {
                 return Arrays.asList(configData.allowedEditions).contains(input.getCode());
             return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
         }).sorted(Comparator.comparing(CardEdition::getName)).collect(Collectors.toList());
+        editionList.setUserObject(editions.get(0).getCode());
+        String selectedEditionCode = editions.get(0).getCode();
+        System.out.println("User object set to edition code: " + selectedEditionCode);
+        setSelectedByEditionCode(editions.get(0).getCode());
+    }
+
+    public void setSelectedByEditionCode(String editionCode) {
+        // Find the CardEdition that matches the given edition code
+        for (CardEdition edition : editionList.getItems()) {
+            if (edition.getCode().equals(editionCode)) {
+                // Set the matching edition as the selected item in the SelectBox
+                editionList.setSelected(edition);
+                return;
+            }
+        }
+        System.out.println("Edition with code " + editionCode + " not found.");
     }
 
     public boolean done() {
@@ -175,33 +191,53 @@ public class BoosterPackScene extends UIScene {
         }
     }
 
+    private CardEdition previousEdition;  // Store the previously selected edition
+
     @Override
     public void enter() {
-        reset();
-        loadEditions(); //just to be safe since it's preloaded, if somehow edition is null, then reload it
+        // Only reload editions if there is no previous selection or no editions have been loaded yet
+        if (previousEdition == null || editions == null) {
+            loadEditions();  // Reload editions only if necessary
+        }
+
         editionList.clearListeners();
         editionList.clearItems();
-        editionList.setItems(editions.toArray(new CardEdition[0]));
+        editionList.setItems(editions.toArray(new CardEdition[0]));  // Populate the SelectBox
+
+        // Restore the previous selection if available
+        if (previousEdition != null) {
+            editionList.setSelected(previousEdition);  // Restore the previous selection in the SelectBox
+            edition = previousEdition.getCode();  // Set the edition code based on the restored selection
+            System.out.println("Restored previously selected edition: " + edition);
+        }
+
+        // Add listeners for the SelectBox
         editionList.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                CardEdition E = editionList.getSelected();
-                edition = E.getCode();
-                editionList.setColor(Color.RED);
-                filterResults();
+                CardEdition E = editionList.getSelected();  // Get the selected edition
+                edition = E.getCode();  // Store the code of the selected edition
+                previousEdition = E;  // Save the current selection for future re-entries
+                filterResults();  // Apply filters based on the selected edition
             }
         });
+
+        // Listener to show the scroll pane when clicked
         editionList.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                editionList.showScrollPane();
+                editionList.showScrollPane();  // Show scrollable list of editions
             }
         });
-        editionList.setColor(Color.WHITE);
-        filterResults();
-        super.enter();
-    }
 
+        // Reset the color to white on re-entry (optional, depending on your UI needs)
+        editionList.setColor(Color.WHITE);
+
+        // Filter results based on the selected edition or any other filters
+        filterResults();
+
+        super.enter();  // Call the superclass' enter method
+    }
 
     public void filterResults() {
         Iterable<PaperCard> P = RewardData.getAllCards();
@@ -281,27 +317,32 @@ public class BoosterPackScene extends UIScene {
 
     public void pullPack(boolean usingShards) {
         Array<Reward> rewardPack = new Array<>();
-
+        int p = rewardPack.size;
         // Separate card pool by rarity and type
-        List<PaperCard> commonCards = cardPool.stream()
+        List<PaperCard> allCards = new ArrayList<>(cardPool);
+        List<PaperCard> commonCards = allCards.stream()
                 .filter(card -> card.getRarity().toString().equals("C"))
                 .collect(Collectors.toList());
-        List<PaperCard> uncommonCards = cardPool.stream()
+        List<PaperCard> uncommonCards = allCards.stream()
                 .filter(card -> card.getRarity().toString().equals("U"))
                 .collect(Collectors.toList());
-        List<PaperCard> rareCards = cardPool.stream()
+        List<PaperCard> rareCards = allCards.stream()
                 .filter(card -> card.getRarity().toString().equals("R"))
                 .collect(Collectors.toList());
-        List<PaperCard> mythicRareCards = cardPool.stream()
+        List<PaperCard> mythicRareCards = allCards.stream()
                 .filter(card -> card.getRarity().toString().equals("M"))
                 .collect(Collectors.toList());
-        List<PaperCard> basicLands = cardPool.stream()
+        List<PaperCard> basicLands = allCards.stream()
                 .filter(card -> card.getRules().getType().isLand() && card.isVeryBasicLand())
                 .collect(Collectors.toList());
 
         // Pull 1 basic land
         if (!basicLands.isEmpty()) {
             PaperCard P = basicLands.get(MyRandom.getRandom().nextInt(basicLands.size()));
+            Reward reward = createReward(P);
+            rewardPack.add(reward);
+        } else {
+            PaperCard P = allCards.get(MyRandom.getRandom().nextInt(allCards.size()));
             Reward reward = createReward(P);
             rewardPack.add(reward);
         }
@@ -321,17 +362,17 @@ public class BoosterPackScene extends UIScene {
         }
 
         // Pull 1 uncommon or any
-        if (!commonCards.isEmpty()) {
-            PaperCard P;
+        if (!uncommonCards.isEmpty()) {
+            PaperCard P = null;
             if (MyRandom.getRandom().nextInt(3) == 0) {
                 // 1 in 3 chance of pulling a rare or mythic rare
                 if (!mythicRareCards.isEmpty()) {
                     P = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
-                } else {
+                } else if (!rareCards.isEmpty()) {
                     P = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
                 }
             } else {
-                P = uncommonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
+                P = allCards.get(MyRandom.getRandom().nextInt(allCards.size()));
             }
             Reward reward = createReward(P);
             rewardPack.add(reward);
