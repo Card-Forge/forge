@@ -368,9 +368,9 @@ public class BoosterPackScene extends UIScene {
         }).collect(Collectors.toList());
         //Stream method is very fast, might not be necessary to precache anything.
         if (!edition.isEmpty())
-            totalCost *= 4.0f; //Edition select cost multiplier. This is a huge factor, so it's most expensive.
+            totalCost *= 2.0f; //Edition select cost multiplier. This is a huge factor, so it's most expensive.
         if (colorFilter.size() > 0)
-            totalCost *= Math.min(colorFilter.size() * 2.5f, 6.0f); //Color filter cost multiplier.
+            totalCost *= Math.min(colorFilter.size() * 3.0f, 6.0f); //Color filter cost multiplier.
         if (!rarity.isEmpty()) { //Rarity cost multiplier.
             switch (rarity) {
                 case "C":
