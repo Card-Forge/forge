@@ -32,15 +32,6 @@ public class SpellSmithScene extends UIScene {
 
     private static SpellSmithScene object;
 
-    // Method that accepts PointOfInterestChanges
-    public static SpellSmithScene instance(PointOfInterestChanges localChanges) {
-        changes = localChanges;
-
-        if (object == null)
-            object = new SpellSmithScene();
-        return object;
-    }
-
     // Overloaded method without PointOfInterestChanges
     public static SpellSmithScene instance() {
         if (object == null)
@@ -333,7 +324,7 @@ public class SpellSmithScene extends UIScene {
 
     public void filterResults() {
         Iterable<PaperCard> P = RewardData.getAllCards();
-        float totalCost = basePrice * Current.player().goldModifier() * changes.getTownPriceModifier();
+        float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet())
             switch (B.getKey()) {

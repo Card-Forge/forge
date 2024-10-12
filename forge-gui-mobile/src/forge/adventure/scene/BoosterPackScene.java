@@ -14,7 +14,6 @@ import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
-import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
@@ -32,15 +31,6 @@ import java.util.stream.StreamSupport;
 public class BoosterPackScene extends UIScene {
 
     private static BoosterPackScene object;
-
-    // Method that accepts PointOfInterestChanges
-    public static BoosterPackScene instance(PointOfInterestChanges localChanges) {
-        changes = localChanges;
-
-        if (object == null)
-            object = new BoosterPackScene();
-        return object;
-    }
 
     // Overloaded method without PointOfInterestChanges
     public static BoosterPackScene instance() {
@@ -72,7 +62,6 @@ public class BoosterPackScene extends UIScene {
     private List<CardEdition> editions = null;
     private Reward currentReward = null;
     private boolean paidInShards = false;
-    static PointOfInterestChanges changes;
 
     private BoosterPackScene() {
         super(Forge.isLandscapeMode() ? "ui/boosterpack.json" : "ui/boosterpack_portrait.json");
@@ -339,7 +328,7 @@ public class BoosterPackScene extends UIScene {
 
     public void filterResults() {
         Iterable<PaperCard> P = RewardData.getAllCards();
-        float totalCost = basePrice * Current.player().goldModifier() * changes.getTownPriceModifier();
+        float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet())
             switch (B.getKey()) {

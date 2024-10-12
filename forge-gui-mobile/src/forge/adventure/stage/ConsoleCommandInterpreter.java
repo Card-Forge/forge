@@ -3,6 +3,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.StaticData;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.BiomeData;
@@ -10,6 +11,8 @@ import forge.adventure.data.EnemyData;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.BoosterPackScene;
+import forge.adventure.scene.SpellSmithScene;
 import forge.adventure.util.Current;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
@@ -199,6 +202,10 @@ public class ConsoleCommandInterpreter {
         registerCommand(new String[]{"debug", "collision"}, s -> {
             currentGameStage().debugCollision(true);
             return "Got out";
+        });
+        registerCommand(new String[]{"open", "booster", "book"}, s -> {
+            Forge.switchScene(BoosterPackScene.instance());
+            return "Opened Booster Book";
         });
         registerCommand(new String[]{"give", "card"}, s -> {
             //TODO: Specify optional amount.
