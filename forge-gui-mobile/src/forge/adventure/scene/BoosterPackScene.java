@@ -113,7 +113,7 @@ public class BoosterPackScene extends UIScene {
         cost_low = -1;
         cost_high = 9999;
         rarity = "";
-        currentPrice = (int) basePrice;
+        currentPrice = 0;
         for (Map.Entry<String, TextraButton> B : colorButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : costButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
@@ -273,10 +273,6 @@ public class BoosterPackScene extends UIScene {
             if (colorFilter.size() > 0)
                 if (input.getRules().getColor() != ColorSet.fromNames(colorFilter)) return false;
             if (!rarity.isEmpty()) if (!input.getRarity().toString().equals(rarity)) return false;
-            if (cost_low > -1) {
-                if (!(input.getRules().getManaCost().getCMC() >= cost_low && input.getRules().getManaCost().getCMC() <= cost_high))
-                    return false;
-            }
             return true;
         }).collect(Collectors.toList());
         //Stream method is very fast, might not be necessary to precache anything.
