@@ -148,7 +148,8 @@
         "G":"decks/starter/pile_green_n.json"
       },
       "startItems": [
-        "Leather Boots"
+        "Leather Boots",
+        "Booster Book"
       ]
     },{
       "name": "Hard",

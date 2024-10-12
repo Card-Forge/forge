@@ -1136,6 +1136,17 @@
     "iconName": "FortuneCoin"
   },
   {
+    "name": "Booster Book",
+    "usableOnWorldMap": true,
+    "equipmentSlot": "Ability2",
+    "description": "Opens the Magic Booster Book",
+    "commandOnUse": "open booster book",
+    "iconName": "ColorlessRune",
+    "questItem": true,
+    "shardsNeeded": 1,
+    "cost": 100
+  },
+  {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
     "equipmentSlot": "Ability2",
