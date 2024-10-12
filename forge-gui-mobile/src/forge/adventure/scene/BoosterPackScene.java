@@ -61,7 +61,6 @@ public class BoosterPackScene extends UIScene {
     private int currentShardPrice = 0;
     private List<CardEdition> editions = null;
     private Reward currentReward = null;
-    private boolean paidInShards = false;
 
     private BoosterPackScene() {
         super(Forge.isLandscapeMode() ? "ui/boosterpack.json" : "ui/boosterpack_portrait.json");
@@ -94,32 +93,6 @@ public class BoosterPackScene extends UIScene {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         selectColor(i);
-                        filterResults();
-                    }
-                });
-            }
-        }
-        for (String i : new String[]{"BCommon", "BUncommon", "BRare", "BMythic"}) {
-            TextraButton button = ui.findActor(i);
-            if (button != null) {
-                rarityButtons.put(i, button);
-                button.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        if (selectRarity(i)) button.setColor(Color.RED);
-                        filterResults();
-                    }
-                });
-            }
-        }
-        for (String i : new String[]{"B02", "B35", "B68", "B9X"}) {
-            TextraButton button = ui.findActor(i);
-            if (button != null) {
-                costButtons.put(i, button);
-                button.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        if (selectCost(i)) button.setColor(Color.RED);
                         filterResults();
                     }
                 });
@@ -179,45 +152,6 @@ public class BoosterPackScene extends UIScene {
         return true;
     }
 
-    private boolean selectRarity(String what) {
-        for (Map.Entry<String, TextraButton> B : rarityButtons.entrySet())
-            B.getValue().setColor(Color.WHITE);
-        switch (what) {
-            case "BCommon":
-                if (rarity.equals("C")) {
-                    rarity = "";
-                    return false;
-                }
-                rarity = "C";
-                break;
-            case "BUncommon":
-                if (rarity.equals("U")) {
-                    rarity = "";
-                    return false;
-                }
-                rarity = "U";
-                break;
-            case "BRare":
-                if (rarity.equals("R")) {
-                    rarity = "";
-                    return false;
-                }
-                rarity = "R";
-                break;
-            case "BMythic":
-                if (rarity.equals("M")) {
-                    rarity = "";
-                    return false;
-                }
-                rarity = "M";
-                break;
-            default:
-                rarity = "";
-                break;
-        }
-        return true;
-    }
-
     private void selectColor(String what) {
         TextraButton B = colorButtons.get(what);
         switch (what) {
@@ -239,53 +173,6 @@ public class BoosterPackScene extends UIScene {
                 break;
 
         }
-    }
-
-    private boolean selectCost(String what) {
-        for (Map.Entry<String, TextraButton> B : costButtons.entrySet())
-            B.getValue().setColor(Color.WHITE);
-        switch (what) {
-            case "B02":
-                if (cost_low == 0 && cost_high == 2) {
-                    cost_low = -1;
-                    cost_high = 9999;
-                    return false;
-                }
-                cost_low = 0;
-                cost_high = 2;
-                break;
-            case "B35":
-                if (cost_low == 3 && cost_high == 5) {
-                    cost_low = -1;
-                    cost_high = 9999;
-                    return false;
-                }
-                cost_low = 3;
-                cost_high = 5;
-                break;
-            case "B68":
-                if (cost_low == 6 && cost_high == 8) {
-                    cost_low = -1;
-                    cost_high = 9999;
-                    return false;
-                }
-                cost_low = 6;
-                cost_high = 8;
-                break;
-            case "B9X":
-                if (cost_low == 9 && cost_high == 9999) {
-                    cost_low = -1;
-                    cost_high = 9999;
-                    return false;
-                }
-                cost_low = 9;
-                cost_high = 9999;
-                break;
-            default:
-                cost_low = -1;
-                break;
-        }
-        return true;
     }
 
     @Override
@@ -393,7 +280,6 @@ public class BoosterPackScene extends UIScene {
     }
 
     public void pullPack(boolean usingShards) {
-        paidInShards = usingShards;
         Array<Reward> rewardPack = new Array<>();
 
         // Separate card pool by rarity and type
@@ -467,7 +353,7 @@ public class BoosterPackScene extends UIScene {
 
         // Display the rewards using the reward scene
         showRewardScene(rewardPack);
-        if (paidInShards) {
+        if (usingShards) {
             Current.player().takeShards(currentShardPrice);
         } else {
             Current.player().takeGold(currentPrice);
