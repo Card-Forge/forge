@@ -10,6 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
@@ -124,6 +128,10 @@ public class BoosterPackScene extends UIScene {
     public void loadEditions() {
         if (editions != null)
             return;
+        Predicate<CardEdition> filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, Predicates.notNull());
+        Iterable<CardEdition> possibleEditions = Iterables.filter(FModel.getMagicDb().getEditions(), filter);
+        List<CardEdition> possibleEditionsList = Lists.newArrayList(possibleEditions);
+        System.out.println("Editions after CAN_MAKE_BOOSTER and notNull filter: " + possibleEditionsList.size());
         editions = StaticData.instance().getSortedEditions().stream().filter(input -> {
             if (input == null)
                 return false;
@@ -143,10 +151,13 @@ public class BoosterPackScene extends UIScene {
                 return Arrays.asList(configData.allowedEditions).contains(input.getCode());
             return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
         }).sorted(Comparator.comparing(CardEdition::getName)).collect(Collectors.toList());
+
+        // Log the number of editions after all filtering
+        System.out.println("Editions after all filters: " + editions.size());
+
         editionList.setUserObject(editions.get(0).getCode());
         String selectedEditionCode = editions.get(0).getCode();
         System.out.println("User object set to edition code: " + selectedEditionCode);
-        setSelectedByEditionCode(editions.get(0).getCode());
     }
 
     public void setSelectedByEditionCode(String editionCode) {
@@ -276,34 +287,13 @@ public class BoosterPackScene extends UIScene {
             return true;
         }).collect(Collectors.toList());
         //Stream method is very fast, might not be necessary to precache anything.
-        if (!edition.isEmpty())
-            totalCost *= 2.0f; //Edition select cost multiplier. This is a huge factor, so it's most expensive.
         if (colorFilter.size() > 0)
-            totalCost *= Math.min(colorFilter.size() * 3.0f, 6.0f); //Color filter cost multiplier.
-        if (!rarity.isEmpty()) { //Rarity cost multiplier.
-            switch (rarity) {
-                case "C":
-                    totalCost *= 1.5f;
-                    break;
-                case "U":
-                    totalCost *= 2.5f;
-                    break;
-                case "R":
-                    totalCost *= 4.0f;
-                    break;
-                case "M":
-                    totalCost *= 5.5f;
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (cost_low > -1) totalCost *= 2.5f; //And CMC cost multiplier.
+            totalCost *= Math.min(colorFilter.size() * 2.0f, 4.0f); //Color filter cost multiplier.
 
         cardPool = StreamSupport.stream(P.spliterator(), false).collect(Collectors.toList());
         poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
-        currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
+        currentShardPrice = (int) (totalCost * 0.1f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
         pullUsingShards.setText("[+Pull][+shards]" + currentShardPrice);
         pullUsingGold.setDisabled(!(cardPool.size() > 0) || Current.player().getGold() < totalCost || edition.isEmpty());
@@ -316,21 +306,34 @@ public class BoosterPackScene extends UIScene {
         int p = rewardPack.size;
         // Separate card pool by rarity and type
         List<PaperCard> allCards = new ArrayList<>(cardPool);
-        List<PaperCard> commonCards = allCards.stream()
-                .filter(card -> card.getRarity().toString().equals("C"))
-                .collect(Collectors.toList());
-        List<PaperCard> uncommonCards = allCards.stream()
-                .filter(card -> card.getRarity().toString().equals("U"))
-                .collect(Collectors.toList());
-        List<PaperCard> rareCards = allCards.stream()
-                .filter(card -> card.getRarity().toString().equals("R"))
-                .collect(Collectors.toList());
-        List<PaperCard> mythicRareCards = allCards.stream()
-                .filter(card -> card.getRarity().toString().equals("M"))
-                .collect(Collectors.toList());
-        List<PaperCard> basicLands = allCards.stream()
-                .filter(card -> card.getRules().getType().isLand() && card.isVeryBasicLand())
-                .collect(Collectors.toList());
+
+        // Log the quantities
+        System.out.println("Card quantities in " + edition + ":");
+        System.out.println("All cards: " + allCards.size());
+
+        Map<String, Integer> rarityCount = new HashMap<>();
+        for (PaperCard P : foilCards) {
+            // Check if the card belongs to the selected edition
+            if (P.getEdition().equals(edition)) {
+                String rarity = P.getRarity().toString();
+                rarityCount.put(rarity, rarityCount.getOrDefault(rarity, 0) + 1);
+            }
+        }
+
+        for (String rarity : rarityCount.keySet()) {
+            System.out.println("Foil Rarity in " + edition + ": " + rarity + ", Count: " + rarityCount.get(rarity));
+        }
+
+        // Optionally, print the total number of foil cards in the selected edition
+        int totalFoilsInEdition = rarityCount.values().stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Total foil cards in " + edition + ": " + totalFoilsInEdition);
+
+        // Print details of foil cards from the selected edition
+        for (PaperCard P : foilCards) {
+            if (P.getEdition().equals(edition)) {
+                System.out.println("Foil Card in " + edition + ": " + P.getName() + " (" + P.getRarity().toString() + ")");
+            }
+        }
 
         // Pull 1 basic land
         if (!basicLands.isEmpty()) {
@@ -358,18 +361,28 @@ public class BoosterPackScene extends UIScene {
         }
 
         // Pull 1 uncommon or any
-        if (!uncommonCards.isEmpty()) {
-            PaperCard P = null;
-            if (MyRandom.getRandom().nextInt(3) == 0) {
-                // 1 in 3 chance of pulling a rare or mythic rare
-                if (!mythicRareCards.isEmpty()) {
-                    P = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
-                } else if (!rareCards.isEmpty()) {
-                    P = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
-                }
-            } else {
-                P = allCards.get(MyRandom.getRandom().nextInt(allCards.size()));
+        boolean hasFoil = MyRandom.getRandom().nextInt(1) == 0;  // 1 in 3 chance for a foil card
+        PaperCard foilCard = null;
+
+        if (hasFoil && !foilCards.isEmpty()) {
+            // Determine rarity of the foil card
+            int foilRarityRoll = MyRandom.getRandom().nextInt(100);
+            if (foilRarityRoll < 70 && !commonCards.isEmpty()) {
+                foilCard = commonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
+            } else if (foilRarityRoll < 90 && !uncommonCards.isEmpty()) {
+                foilCard = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
+            } else if (foilRarityRoll < 97 && !rareCards.isEmpty()) {
+                foilCard = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
+            } else if (!mythicRareCards.isEmpty()) {
+                foilCard = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
             }
+            // Add the foil card to the pack
+            if (foilCard != null) {
+                Reward foilReward = createReward(foilCard);
+                rewardPack.add(foilReward);
+            }
+        } else if (!hasFoil && !uncommonCards.isEmpty()) {
+            PaperCard P = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
             Reward reward = createReward(P);
             rewardPack.add(reward);
         }

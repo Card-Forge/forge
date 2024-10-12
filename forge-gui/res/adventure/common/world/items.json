@@ -1137,13 +1137,13 @@
   },
   {
     "name": "Booster Book",
-    "usableOnWorldMap": true,
+    "usableOnWorldMap": true ,
     "equipmentSlot": "Ability2",
     "description": "Opens the Magic Booster Book",
     "commandOnUse": "open booster book",
     "iconName": "ColorlessRune",
     "questItem": true,
-    "shardsNeeded": 1,
+    "shardsNeeded": 0,
     "cost": 100
   },
   {
