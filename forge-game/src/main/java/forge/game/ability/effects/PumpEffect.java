@@ -50,14 +50,17 @@ public class PumpEffect extends SpellAbilityEffect {
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenKws = Lists.newArrayList();
 
-        boolean redrawPT = false;
+        boolean redrawPT = sa.hasParam("SwitchPT");
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 hiddenKws.add(kw.substring(7));
-                redrawPT |= kw.contains("CARDNAME's power and toughness are switched");
             } else {
                 kws.add(kw);
             }
+        }
+
+        if (sa.hasParam("SwitchPT")) {
+            gameCard.addSwitchPT(timestamp, 0);
         }
 
         if (a != 0 || d != 0) {
@@ -117,6 +120,7 @@ public class PumpEffect extends SpellAbilityEffect {
                     host.removeGainControlTargets(gameCard);
 
                     gameCard.removePTBoost(timestamp, 0);
+                    gameCard.removeSwitchPT(timestamp, 0);
                     boolean updateText = gameCard.removeCanBlockAny(timestamp);
                     updateText |= gameCard.removeCanBlockAdditional(timestamp);
 
