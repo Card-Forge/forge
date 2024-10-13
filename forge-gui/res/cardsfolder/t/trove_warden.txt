@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.YouOwn+cmcLE3 | TgtPrompt$ Select target permanent card with mana value 3 or less from your graveyard | Origin$ Graveyard | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Permanent.ExiledWithSource | Origin$ Exile | Destination$ Battlefield
-DeckHas:Ability$Graveyard
 SVar:BuffedBy:Land
+DeckHas:Ability$Graveyard
 Oracle:Vigilance\nLandfall — Whenever a land you control enters, exile target permanent card with mana value 3 or less from your graveyard.\nWhen Trove Warden dies, put each permanent card exiled with it onto the battlefield under the control of that card's owner.
