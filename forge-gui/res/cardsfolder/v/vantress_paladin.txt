@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:2/2
 K:Flying
 K:etbCounter:P1P1:1:Adamant$ Blue:Adamant — If at least three blue mana was spent to cast this spell, CARDNAME enters with a +1/+1 counter on it.
-DeckHas:Ability$Counters
 SVar:AIManaPref:U
+DeckHas:Ability$Counters
 Oracle:Flying\nAdamant — If at least three blue mana was spent to cast this spell, Vantress Paladin enters with a +1/+1 counter on it.
