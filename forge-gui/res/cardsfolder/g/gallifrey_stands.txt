@@ -6,6 +6,6 @@ SVar:TrigReturn:DB$ ChangeZoneAll | Defined$ You | ChangeType$ Card.Doctor | Ori
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your upkeep, you may put a Doctor creature card from your hand onto the battlefield. Then if you control thirteen or more Doctors, you win the game.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Card.Doctor | SubAbility$ DBWin
 SVar:DBWin:DB$ WinsGame | Defined$ You | ConditionPresent$ Doctor.YouCtrl | ConditionCompare$ GE13
-DeckNeeds:Type$Doctor
 DeckHas:Ability$Graveyard
+DeckNeeds:Type$Doctor
 Oracle:When Gallifrey Stands enters, return all Doctor cards from your graveyard to your hand.\nAt the beginning of your upkeep, you may put a Doctor creature card from your hand onto the battlefield. Then if you control thirteen or more Doctors, you win the game.
