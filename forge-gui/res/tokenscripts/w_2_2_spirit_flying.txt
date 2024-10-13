@@ -1,7 +1,7 @@
 Name:Spirit Token
 ManaCost:no cost
-Types:Creature Spirit
 Colors:white
+Types:Creature Spirit
 PT:2/2
 K:Flying
 Oracle:Flying

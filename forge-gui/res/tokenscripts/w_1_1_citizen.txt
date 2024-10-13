@@ -1,6 +1,6 @@
 Name:Citizen Token
 ManaCost:no cost
-Types:Creature Citizen
 Colors:white
+Types:Creature Citizen
 PT:1/1
 Oracle:

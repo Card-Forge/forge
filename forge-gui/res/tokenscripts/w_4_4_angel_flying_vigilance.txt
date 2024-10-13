@@ -1,7 +1,7 @@
 Name:Angel Token
 ManaCost:no cost
-Types:Creature Angel
 Colors:white
+Types:Creature Angel
 PT:4/4
 K:Flying
 K:Vigilance
