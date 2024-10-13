@@ -4,7 +4,7 @@ Date=2018-06-08
 Name=Battlebond
 Type=Draft
 BoosterCovers=3
-Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythic"), 1 BasicLand
+Booster=10 Common, 3 Uncommon, 1 fromSheet("BBD RareMythicDistribution"), 1 BasicLand
 ScryfallCode=BBD
 
 [cards]
@@ -267,7 +267,7 @@ ScryfallCode=BBD
 255 M Will Kenrith @Anna Steinbauer
 256 M Rowan Kenrith @Anna Steinbauer
 
-[RareMythic]
+[RareMythicDistribution]
 1 Will Kenrith|BBD|1
 1 Rowan Kenrith|BBD|1
 8 Regna, the Redeemer
