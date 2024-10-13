@@ -18,12 +18,17 @@ import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.util.Aggregates;
 import forge.util.MyRandom;
+import forge.card.CardEdition.CardInSet;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -306,32 +311,39 @@ public class BoosterPackScene extends UIScene {
         int p = rewardPack.size;
         // Separate card pool by rarity and type
         List<PaperCard> allCards = new ArrayList<>(cardPool);
+        List<PaperCard> foilCards = new ArrayList<>();
+        List<PaperCard> basicLands = new ArrayList<>();
+        List<PaperCard> commonCards = new ArrayList<>();
+        List<PaperCard> uncommonCards = new ArrayList<>();
+        List<PaperCard> rareCards = new ArrayList<>();
+        List<PaperCard> mythicRareCards = new ArrayList<>();
 
         // Log the quantities
         System.out.println("Card quantities in " + edition + ":");
         System.out.println("All cards: " + allCards.size());
 
-        Map<String, Integer> rarityCount = new HashMap<>();
-        for (PaperCard P : foilCards) {
-            // Check if the card belongs to the selected edition
-            if (P.getEdition().equals(edition)) {
-                String rarity = P.getRarity().toString();
-                rarityCount.put(rarity, rarityCount.getOrDefault(rarity, 0) + 1);
+        for (PaperCard card : allCards) {
+            switch (card.getRarity()) {
+                case Common:
+                    commonCards.add(card);
+                    break;
+                case Uncommon:
+                    uncommonCards.add(card);
+                    break;
+                case Rare:
+                    rareCards.add(card);
+                    break;
+                case MythicRare:
+                    mythicRareCards.add(card);
+                    break;
+                default:
+                    break;
             }
-        }
-
-        for (String rarity : rarityCount.keySet()) {
-            System.out.println("Foil Rarity in " + edition + ": " + rarity + ", Count: " + rarityCount.get(rarity));
-        }
-
-        // Optionally, print the total number of foil cards in the selected edition
-        int totalFoilsInEdition = rarityCount.values().stream().mapToInt(Integer::intValue).sum();
-        System.out.println("Total foil cards in " + edition + ": " + totalFoilsInEdition);
-
-        // Print details of foil cards from the selected edition
-        for (PaperCard P : foilCards) {
-            if (P.getEdition().equals(edition)) {
-                System.out.println("Foil Card in " + edition + ": " + P.getName() + " (" + P.getRarity().toString() + ")");
+            if (card.isFoil()) {
+                foilCards.add(card);
+            }
+            if (card.isVeryBasicLand()) {
+                basicLands.add(card);
             }
         }
 
@@ -408,8 +420,47 @@ public class BoosterPackScene extends UIScene {
         } else {
             Current.player().takeGold(currentPrice);
         }
-        clearReward();
-        updatePullButtons();
+//        // Below all to be fully generated in later release
+//        // Generate reward packs
+//
+//        System.out.println("Generating reward packs...");
+//        Deck[] rewardPacks;
+//        rewardPacks = getRewardPacks(1);
+//        System.out.println("Reward packs generated: " + rewardPacks.length);
+//
+//        Deck[] cardRewards = new Deck[0];
+//        // Assign a new deck to one of the elements in the array
+//        // Ensure you use a valid index, such as 0, 1, or 2
+//        cardRewards = new Deck[]{rewardPacks[0]};
+//        System.out.println("Card rewards assigned: " + cardRewards.length);
+//
+//        Array<Reward> ret = new Array<>();
+//        System.out.println("Initialized reward array.");
+//
+//        for (Deck pack : cardRewards) {
+//            RewardData data = new RewardData();
+//            data.type = "cardPack";
+//            data.count = 1;
+//            data.cardPack = pack;
+//            System.out.println("Creating reward data for pack: " + pack.getName());
+//            ret.addAll(data.generate(false, true));
+//            System.out.println("Reward data generated and added to the array.");
+//        }
+//        System.out.println("Loading rewards into the RewardScene.");
+//        RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
+//        Forge.switchScene(RewardScene.instance());
+
+        // Clear the current reward and update the UI
+        //clearReward();
+        //updatePullButtons();
+    }
+
+    public Deck[] getRewardPacks(int count) {
+        Deck[] ret = new Deck[count];
+        for (int i = 0; i < count; i++) {
+            ret[i] = AdventureEventController.instance().generateBooster(edition);
+        }
+        return ret;
     }
 
     private Reward createReward(PaperCard P) {
