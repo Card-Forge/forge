@@ -1,7 +1,7 @@
 Name:Aether Searcher
 ManaCost:7
-PT:6/4
 Types:Artifact Creature Construct
+PT:6/4
 Draft:Reveal CARDNAME as you draft it.
 Draft:Reveal the next card you draft and note its name.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearchHand | TriggerDescription$ When CARDNAME enters, you may search your hand and/or library for a card with a name noted as you drafted cards named Aether Searcher. You may cast it without paying its mana cost. If you searched your library this way, shuffle.

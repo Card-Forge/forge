@@ -8,9 +8,9 @@ SVar:Y:Sacrificed$CardPower
 K:Craft:2 B B XMin1 ExileCtrlOrGrave<X/Creature.Other>
 SVar:X:Count$xPaid
 A:AB$ ChangeZone | Cost$ 2 B | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
-DeckHints:Ability$Discard|Mill|Sacrifice
-DeckHas:Ability$Graveyard|Sacrifice|Mill
 AI:RemoveDeck:All
+DeckHas:Ability$Graveyard|Sacrifice|Mill
+DeckHints:Ability$Discard|Mill|Sacrifice
 AlternateMode:DoubleFaced
 Oracle:When Altar of the Wretched enters, you may sacrifice a nontoken creature. If you do, draw X cards, then mill X cards, where X is that creature's power.\nCraft with one or more creatures {2}{B}{B}\n{2}{B}: Return Altar of the Wretched from your graveyard to your hand.
 
