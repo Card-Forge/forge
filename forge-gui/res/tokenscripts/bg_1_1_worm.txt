@@ -1,6 +1,6 @@
 Name:Worm Token
 ManaCost:no cost
-Types:Creature Worm
 Colors:black,green
+Types:Creature Worm
 PT:1/1
 Oracle:
