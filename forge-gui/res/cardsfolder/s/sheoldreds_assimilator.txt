@@ -9,6 +9,6 @@ SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtProm
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | Optional$ True | OptionPrompt$ Would you like to conjure a duplicate of the targeted card into the top five cards of your library ? | DefinedName$ Remembered | Zone$ Library | LibraryPosition$ Z | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:Count$Random.0.4
-DeckHints:Ability$Graveyard
 SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Graveyard
 Oracle:Menace\nWhenever Sheoldred's Assimilator enters or attacks, exile up to one target card from a graveyard. If a card is exiled this way, you may conjure a duplicate of that card into the top five cards of your library at random.
