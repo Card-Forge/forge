@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 1 | AddKeyword$ Flying | AddType$ Demon | Description$ Enchanted creature gets +3/+1, has flying, and is a Demon in addition to its other types.
 S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | RaiseCost$ PayLife<3> Discard<1/Card> | Description$ You may cast CARDNAME from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.
-DeckHas:Ability$Discard|Graveyard
 SVar:DiscardMe:1
+DeckHas:Ability$Discard|Graveyard
 Oracle:Enchant creature\nEnchanted creature gets +3/+1, has flying, and is a Demon in addition to its other types.\nYou may cast Demonic Embrace from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.

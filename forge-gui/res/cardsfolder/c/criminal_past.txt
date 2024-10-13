@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddKeyword$ Menace 
 SVar:PowerGrave:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | This creature gets +X/+0, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
 AI:RemoveDeck:NonCommander
-DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
 Oracle:Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of creature cards in your graveyard." (A creature with menace can't be blocked except by two or more creatures.)
