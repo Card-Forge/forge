@@ -5,10 +5,10 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDiscard:AB$ Draw | Cost$ Discard<1/Card> | NumCards$ 2
 K:Craft:4 R XMin1 ExileCtrlOrGrave<X/Dinosaur.Other>
 SVar:X:Count$xPaid
-DeckHints:Ability$Discard|Mill|Sacrifice
-DeckHas:Ability$Discard|Graveyard
-DeckNeeds:Type$Dinosaur
 AI:RemoveDeck:All
+DeckHas:Ability$Discard|Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+DeckNeeds:Type$Dinosaur
 AlternateMode:DoubleFaced
 Oracle:When Saheeli's Lattice enters, you may discard a card. If you do, draw two cards.\nCraft with one or more Dinosaurs {4}{R} ({4}{R}, Exile this artifact, Exile one or more Dinosaurs you control and/or Dinosaur cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 

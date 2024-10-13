@@ -6,9 +6,9 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ Activated | SpellDescription$ Add {C}{C}. Spend this mana only to activate abilities.
 K:Craft:8 U XMin4 ExileCtrlOrGrave<X/Permanent.Other+nonLand+hasActivatedAbility/nonlands with activated abilities>
 SVar:X:Count$xPaid
+AI:RemoveDeck:All
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard
-AI:RemoveDeck:All
 AlternateMode:DoubleFaced
 Oracle:The Enigma Jewel enters tapped.\n{T}: Add {C}{C}. Spend this mana only to activate abilities.\nCraft with four or more nonlands with activated abilities {8}{U} ({8}{U}, Exile this artifact, Exile the four or more from among other permanents you control and/or cards in your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
