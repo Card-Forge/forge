@@ -6,7 +6,7 @@ T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl | OptionalDecider$ 
 SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.attacking+Other+Legendary+YouCtrl | TgtPrompt$ Select target attacking legendary creature you control other than NICKNAME | NonLegendary$ True | AddTypes$ Artifact & Synth | TokenTapped$ True | TokenAttacking$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When NICKNAME leaves the battlefield, exile all Synth tokens you control.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Synth.YouCtrl+token
-DeckHas:Ability$Token & Type$Synth
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Synth
 DeckHints:Type$Legendary
 Oracle:Whenever you attack, you may create a tapped and attacking token that's a copy of target attacking legendary creature you control other than Shaun, except it's not legendary and it's a Synth artifact creature in addition to its other types.\nWhen Shaun leaves the battlefield, exile all Synth tokens you control.
