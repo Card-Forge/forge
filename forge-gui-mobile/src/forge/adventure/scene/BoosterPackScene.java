@@ -24,8 +24,6 @@ import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.util.MyRandom;
-import forge.deck.CardPool;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
