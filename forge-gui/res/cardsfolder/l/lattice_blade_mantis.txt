@@ -6,6 +6,6 @@ K:etbCounter:OIL:2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME attacks, you may remove an oil counter from it. If you do, untap it and it gets +1/+1 until end of turn.
 SVar:TrigUntap:AB$ Untap | Defined$ Self | Cost$ SubCounter<1/OIL> | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
-DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
 Oracle:Lattice-Blade Mantis enters with two oil counters on it.\nWhenever Lattice-Blade Mantis attacks, you may remove an oil counter from it. If you do, untap it and it gets +1/+1 until end of turn.

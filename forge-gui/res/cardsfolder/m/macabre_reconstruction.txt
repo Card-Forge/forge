@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | CheckSVar$ X | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} less to cast if a creature card was put into your graveyard from anywhere this turn.
 A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select up to two target creature cards from your graveyard | TargetMin$ 0 | TargetMax$ 2 | SpellDescription$ Return up to two target creature cards from your graveyard to your hand.
+SVar:X:Count$ThisTurnEntered_Graveyard_Creature.YouOwn+nonToken
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Sacrifice|Discard|Mill
-SVar:X:Count$ThisTurnEntered_Graveyard_Creature.YouOwn+nonToken
 Oracle:This spell costs {2} less to cast if a creature card was put into your graveyard from anywhere this turn.\nReturn up to two target creature cards from your graveyard to your hand.

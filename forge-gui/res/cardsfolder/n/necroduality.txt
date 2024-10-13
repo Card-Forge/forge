@@ -4,6 +4,6 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Zombie.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever a nontoken Zombie you control enters, create a token that's a copy of that creature.
 SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy
 AI:RemoveDeck:Random
-DeckNeeds:Type$Zombie
 DeckHas:Ability$Token
+DeckNeeds:Type$Zombie
 Oracle:Whenever a nontoken Zombie you control enters, create a token that's a copy of that creature.

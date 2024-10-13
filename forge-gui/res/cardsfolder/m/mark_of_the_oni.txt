@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Demon.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, if you control no Demons, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
 SVar:PlayMain1:TRUE
-AI:RemoveDeck:Random
 SVar:NeedsToPlay:Demon.YouCtrl
+AI:RemoveDeck:Random
 DeckHints:Type$Demon
 Oracle:Enchant creature\nYou control enchanted creature.\nAt the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
