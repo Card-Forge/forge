@@ -18,17 +18,13 @@ import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.RewardData;
-import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.item.PaperCard;
-import forge.model.CardBlock;
 import forge.model.FModel;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.card.CardEdition.CardInSet;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -40,7 +36,6 @@ import java.util.stream.StreamSupport;
 public class BoosterPackScene extends UIScene {
 
     private static BoosterPackScene object;
-
     // Overloaded method without PointOfInterestChanges
     public static BoosterPackScene instance() {
         if (object == null)
@@ -307,161 +302,76 @@ public class BoosterPackScene extends UIScene {
     }
 
     public void pullPack(boolean usingShards) {
-        Array<Reward> rewardPack = new Array<>();
-        int p = rewardPack.size;
-        // Separate card pool by rarity and type
-        List<PaperCard> allCards = new ArrayList<>(cardPool);
-        List<PaperCard> foilCards = new ArrayList<>();
-        List<PaperCard> basicLands = new ArrayList<>();
-        List<PaperCard> commonCards = new ArrayList<>();
-        List<PaperCard> uncommonCards = new ArrayList<>();
-        List<PaperCard> rareCards = new ArrayList<>();
-        List<PaperCard> mythicRareCards = new ArrayList<>();
-
         // Log the quantities
         System.out.println("Card quantities in " + edition + ":");
-        System.out.println("All cards: " + allCards.size());
 
-        for (PaperCard card : allCards) {
-            switch (card.getRarity()) {
-                case Common:
-                    commonCards.add(card);
-                    break;
-                case Uncommon:
-                    uncommonCards.add(card);
-                    break;
-                case Rare:
-                    rareCards.add(card);
-                    break;
-                case MythicRare:
-                    mythicRareCards.add(card);
-                    break;
-                default:
-                    break;
-            }
-            if (card.isFoil()) {
-                foilCards.add(card);
-            }
-            if (card.isVeryBasicLand()) {
-                basicLands.add(card);
-            }
-        }
-
-        // Pull 1 basic land
-        if (!basicLands.isEmpty()) {
-            PaperCard P = basicLands.get(MyRandom.getRandom().nextInt(basicLands.size()));
-            Reward reward = createReward(P);
-            rewardPack.add(reward);
-        } else {
-            PaperCard P = allCards.get(MyRandom.getRandom().nextInt(allCards.size()));
-            Reward reward = createReward(P);
-            rewardPack.add(reward);
-        }
-
-        // Pull 10 commons
-        for (int i = 0; i < 10 && !commonCards.isEmpty(); i++) {
-            PaperCard P = commonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
-            Reward reward = createReward(P);
-            rewardPack.add(reward);
-        }
-
-        // Pull 2 uncommons
-        for (int i = 0; i < 2 && !uncommonCards.isEmpty(); i++) {
-            PaperCard P = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
-            Reward reward = createReward(P);
-            rewardPack.add(reward);
-        }
-
-        // Pull 1 uncommon or any
-        boolean hasFoil = MyRandom.getRandom().nextInt(1) == 0;  // 1 in 3 chance for a foil card
-        PaperCard foilCard = null;
-
-        if (hasFoil && !foilCards.isEmpty()) {
-            // Determine rarity of the foil card
-            int foilRarityRoll = MyRandom.getRandom().nextInt(100);
-            if (foilRarityRoll < 70 && !commonCards.isEmpty()) {
-                foilCard = commonCards.get(MyRandom.getRandom().nextInt(commonCards.size()));
-            } else if (foilRarityRoll < 90 && !uncommonCards.isEmpty()) {
-                foilCard = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
-            } else if (foilRarityRoll < 97 && !rareCards.isEmpty()) {
-                foilCard = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
-            } else if (!mythicRareCards.isEmpty()) {
-                foilCard = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
-            }
-            // Add the foil card to the pack
-            if (foilCard != null) {
-                Reward foilReward = createReward(foilCard);
-                rewardPack.add(foilReward);
-            }
-        } else if (!hasFoil && !uncommonCards.isEmpty()) {
-            PaperCard P = uncommonCards.get(MyRandom.getRandom().nextInt(uncommonCards.size()));
-            Reward reward = createReward(P);
-            rewardPack.add(reward);
-        }
-
-        // Pull 1 rare with a 1/8th chance of being a mythic rare
-        if (!rareCards.isEmpty()) {
-            // 1/8th chance of pulling a mythic rare
-            if (MyRandom.getRandom().nextInt(8) == 0 && !mythicRareCards.isEmpty()) {
-                PaperCard P = mythicRareCards.get(MyRandom.getRandom().nextInt(mythicRareCards.size()));
-                Reward reward = createReward(P);
-                rewardPack.add(reward);
-            } else {
-                PaperCard P = rareCards.get(MyRandom.getRandom().nextInt(rareCards.size()));
-                Reward reward = createReward(P);
-                rewardPack.add(reward);
-            }
-        }
-
-        // Display the rewards using the reward scene
-        showRewardScene(rewardPack);
+         // Display the rewards using the reward scene
+        //showRewardScene(rewardPack);
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
         } else {
             Current.player().takeGold(currentPrice);
         }
-//        // Below all to be fully generated in later release
-//        // Generate reward packs
-//
-//        System.out.println("Generating reward packs...");
-//        Deck[] rewardPacks;
-//        rewardPacks = getRewardPacks(1);
-//        System.out.println("Reward packs generated: " + rewardPacks.length);
-//
-//        Deck[] cardRewards = new Deck[0];
-//        // Assign a new deck to one of the elements in the array
-//        // Ensure you use a valid index, such as 0, 1, or 2
-//        cardRewards = new Deck[]{rewardPacks[0]};
-//        System.out.println("Card rewards assigned: " + cardRewards.length);
-//
-//        Array<Reward> ret = new Array<>();
-//        System.out.println("Initialized reward array.");
-//
-//        for (Deck pack : cardRewards) {
-//            RewardData data = new RewardData();
-//            data.type = "cardPack";
-//            data.count = 1;
-//            data.cardPack = pack;
-//            System.out.println("Creating reward data for pack: " + pack.getName());
-//            ret.addAll(data.generate(false, true));
-//            System.out.println("Reward data generated and added to the array.");
-//        }
-//        System.out.println("Loading rewards into the RewardScene.");
-//        RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
-//        Forge.switchScene(RewardScene.instance());
+        // Below all to be fully generated in later release
+        // Generate reward packs
 
-        // Clear the current reward and update the UI
-        //clearReward();
-        //updatePullButtons();
+        System.out.println("Generating reward packs...");
+        Deck[] rewardPacks;
+        rewardPacks = getRewardPacks(1);
+        System.out.println("Reward packs generated: " + rewardPacks.length);
+
+        Deck[] cardRewards = new Deck[0];
+        // Assign a new deck to one of the elements in the array
+        // Ensure you use a valid index, such as 0, 1, or 2
+        cardRewards = new Deck[]{rewardPacks[0]};
+        System.out.println("Card rewards assigned: " + cardRewards.length);
+
+        Array<Reward> ret = new Array<>();
+        System.out.println("Initialized reward array.");
+
+        for (Deck pack : cardRewards) {
+            RewardData data = new RewardData();
+            data.type = "cardPack";
+            data.count = 1;
+            data.cardPack = pack;
+            System.out.println("Creating reward data for pack: " + pack.getName());
+            ret.addAll(data.generate(false, true));
+            System.out.println("Reward data generated and added to the array.");
+        }
+        System.out.println("Loading rewards into the RewardScene.");
+        RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
+        Forge.switchScene(RewardScene.instance());
+
+        //Clear the current reward and update the UI
+        clearReward();
+        updatePullButtons();
     }
 
     public Deck[] getRewardPacks(int count) {
         Deck[] ret = new Deck[count];
         for (int i = 0; i < count; i++) {
             ret[i] = AdventureEventController.instance().generateBooster(edition);
+            // Sort the cards in the deck by rarity
+            sortCardsByRarity(ret[i]);
         }
         return ret;
     }
+
+    public void sortCardsByRarity(Deck reward) {
+        // Assuming the Deck class has a method to get all cards as a list
+        List<PaperCard> cards = reward.getAllCardsInASinglePool().toFlatList(); // Replace with the actual method to get cards
+
+        // Sort the cards by rarity
+        cards.sort(Comparator.comparing(card -> card.getRarity().ordinal()));
+
+        // Clear the current deck and add sorted cards back
+        reward.getMain().clear(); // Use 'clear()' to clear the deck
+        for (PaperCard card : cards) {
+            reward.getMain().add(card); // Use 'getMain().add()' to add a card to the deck
+        }
+    }
+
+
 
     private Reward createReward(PaperCard P) {
         if (Config.instance().getSettingData().useAllCardVariants) {
