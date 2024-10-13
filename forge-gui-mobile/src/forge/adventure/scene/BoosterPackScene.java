@@ -302,8 +302,8 @@ public class BoosterPackScene extends UIScene {
     }
 
         public void pullPack(boolean usingShards) {
-        // Log the quantities
-        System.out.println("Card quantities in " + edition + ":");
+        Array<Reward> ret = new Array<>();
+        RewardData data = new RewardData();
 
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
@@ -312,99 +312,16 @@ public class BoosterPackScene extends UIScene {
         }
 
         Deck rewardPack = AdventureEventController.instance().generateBooster(edition);
-
-        // Sort all sections of the deck by rarity
-            List<PaperCard> cards = rewardPack.getAllCardsInASinglePool().toFlatList();
-
-            // Log the cards before sorting
-            System.out.println("Cards before sorting:");
-            for (PaperCard card : cards) {
-                System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
-            }
-
-            // Sort the cards by rarity
-            cards.sort(Comparator.comparing(card -> card.getRarity().ordinal()));
-
-            // Log the cards after sorting
-            System.out.println("Cards after sorting:");
-            for (PaperCard card : cards) {
-                System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
-            }
-
-            // Create a new deck and add sorted cards to it
-            Deck sortedDeck = new Deck();
-            for (PaperCard card : cards) {
-                sortedDeck.getMain().add(card);
-            }
-
-        System.out.println("Logging card order and rarity after rewards:");
-        List<PaperCard> rewards = sortedDeck.getAllCardsInASinglePool().toFlatList();
-        for (PaperCard card : rewards) {
-            System.out.println("Card Name: " + card.getName() + ", Rarity: " + card.getRarity());
-        }
-
-        Array<Reward> ret = new Array<>();
-        System.out.println("Initialized reward array.");
-
-        RewardData data = new RewardData();
         data.type = "cardPack";
         data.count = 1;
-        data.cardPack = sortedDeck;
-        System.out.println("Creating reward data for pack: " + sortedDeck.getName());
+        data.cardPack = rewardPack;
         ret.addAll(data.generate(false, true, true));
-        System.out.println("Reward data generated and added to the array.");
-
         RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
         Forge.switchScene(RewardScene.instance());
 
         clearReward();
         updatePullButtons();
     }
-
-    public Deck sortCardsByRarity(Deck reward) {
-        List<PaperCard> cards = reward.getAllCardsInASinglePool().toFlatList();
-
-        // Log the cards before sorting
-        System.out.println("Cards before sorting:");
-        for (PaperCard card : cards) {
-            System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
-        }
-
-        // Sort the cards by rarity
-        cards.sort(Comparator.comparing(card -> card.getRarity().ordinal()));
-
-        // Log the cards after sorting
-        System.out.println("Cards after sorting:");
-        for (PaperCard card : cards) {
-            System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
-        }
-
-        // Create a new deck and add sorted cards to it
-        Deck sortedDeck = new Deck();
-        for (PaperCard card : cards) {
-            sortedDeck.getMain().add(card);
-        }
-
-        return sortedDeck;
-    }
-
-    private Reward createReward(PaperCard P) {
-        if (Config.instance().getSettingData().useAllCardVariants) {
-            if (!edition.isEmpty()) {
-                return new Reward(CardUtil.getCardByNameAndEdition(P.getCardName(), edition));
-            } else {
-                return new Reward(CardUtil.getCardByName(P.getCardName()));
-            }
-        } else {
-            return new Reward(P);
-        }
-    }
-
-    private void showRewardScene(Array<Reward> rewards) {
-        RewardScene.instance().loadRewards(rewards, RewardScene.Type.Loot, null);
-        Forge.switchScene(RewardScene.instance());
-    }
-
 
     private void clearReward() {
         if (rewardActor != null) rewardActor.remove();
