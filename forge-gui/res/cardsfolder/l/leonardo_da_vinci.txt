@@ -1,7 +1,7 @@
 Name:Leonardo da Vinci
 ManaCost:2 U
-PT:3/3
 Types:Legendary Creature Human Artificer
+PT:3/3
 A:AB$ AnimateAll | Cost$ 3 U U | Power$ X | Toughness$ X | ValidCards$ Thopter.YouCtrl | SpellDescription$ Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.
 SVar:X:Count$InYourHand
 A:AB$ Draw | Cost$ 2 U T | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. If the discarded card was an artifact card, exile it from your graveyard. If you do, create a token that's a copy of it, except it's a 0/2 Thopter artifact creature with flying in addition to its other types. | SubAbility$ DBDiscard

@@ -1,12 +1,15 @@
 Name:Fortune Teller
 ManaCost:no cost
 Types:Artifact Attraction
+K:Visit:TrigScry
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
+Oracle:Visit — Scry 1.
+
+# --- VARIANTS ---
+
 Variant:A:Lights:2 3 6
 Variant:B:Lights:2 4 6
 Variant:C:Lights:2 5 6
 Variant:D:Lights:3 4 6
 Variant:E:Lights:3 5 6
 Variant:F:Lights:4 5 6
-K:Visit:TrigScry
-SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
-Oracle:Visit — Scry 1.

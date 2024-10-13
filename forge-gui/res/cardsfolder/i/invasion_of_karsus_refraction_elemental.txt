@@ -10,6 +10,7 @@ Oracle:(As a Siege enters, choose an opponent to protect it. You and others can 
 ALTERNATE
 
 Name:Refraction Elemental
+ManaCost:no cost
 Colors:red
 Types:Creature Elemental
 PT:4/4
