@@ -7,6 +7,6 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Vali
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-DeckNeeds:Type$Enchantment
 DeckHas:Ability$LifeGain
+DeckNeeds:Type$Enchantment
 Oracle:When Lagonna-Band Storyteller enters, you may put target enchantment card from your graveyard on top of your library. If you do, you gain life equal to its mana value.

@@ -9,6 +9,6 @@ A:AB$ Sacrifice | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Amount$ 2 |
 A:AB$ ChooseCard | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Opponent | Choices$ Permanent | ChooseEach$ Artifact & Battle & Creature & Enchantment & Land & Planeswalker | ControlledByPlayer$ Chooser | Mandatory$ True | Reveal$ True | SubAbility$ SacAllOthers | StackDescription$ SpellDescription | SpellDescription$ Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonChosenCard+OppCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-DeckHas:Ability$Token|Sacrifice & Type$Zombie
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token|Sacrifice & Type$Zombie
 Oracle:Whenever a creature you control dies, draw a card.\n[+1]: Create a 2/2 black Zombie creature token.\n[-4]: Each player sacrifices two creatures.\n[-9]: Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
