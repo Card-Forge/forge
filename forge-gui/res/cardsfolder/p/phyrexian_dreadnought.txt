@@ -10,8 +10,8 @@ SVar:SacrificeCreatures:DB$ SacrificeAll | Defined$ Remembered | ConditionCheckS
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TotalPower:Remembered$CardPower
 SVar:X:Count$Valid Creature.YouCtrl
-AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Y GE12
 SVar:Y:Count$SumPower_Creature.YouCtrl+notnamedPhyrexian Dreadnought
+AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
 Oracle:Trample\nWhen Phyrexian Dreadnought enters, sacrifice it unless you sacrifice any number of creatures with total power 12 or greater.

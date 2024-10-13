@@ -9,8 +9,8 @@ SVar:TrigDT:DB$ ImmediateTrigger | Execute$ TrigPump | RememberObjects$ Remember
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
 SVar:X:TriggerRemembered$CardManaCostLKI
-AI:RemoveDeck:All
 SVar:HasAttackEffect:TRUE
-DeckHints:Type$Instant|Sorcery
+AI:RemoveDeck:All
 DeckHas:Ability$Graveyard
+DeckHints:Type$Instant|Sorcery
 Oracle:First strike\nWhenever Ogre Battlecaster attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. When you cast that spell, Ogre Battlecaster gets +X/+0 until end of turn, where X is that spell's mana value.
