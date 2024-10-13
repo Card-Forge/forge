@@ -1,7 +1,7 @@
 Name:Elemental Token
 ManaCost:no cost
-Types:Creature Elemental
 Colors:red
+Types:Creature Elemental
 PT:1/1
 T:Mode$ Taps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever this creature becomes tapped, it deals 1 damage to target player.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Player | NumDmg$ 1

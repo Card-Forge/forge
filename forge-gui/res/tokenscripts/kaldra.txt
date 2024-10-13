@@ -1,5 +1,5 @@
 Name:Kaldra
 ManaCost:no cost
-PT:4/4
 Types:Legendary Creature Avatar
+PT:4/4
 Oracle:

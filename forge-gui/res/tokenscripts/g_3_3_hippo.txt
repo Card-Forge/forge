@@ -1,6 +1,6 @@
 Name:Hippo Token
 ManaCost:no cost
-Types:Creature Hippo
 Colors:green
+Types:Creature Hippo
 PT:3/3
 Oracle:

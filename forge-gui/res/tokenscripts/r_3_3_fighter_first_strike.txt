@@ -1,7 +1,7 @@
 Name:Fighter Token
 ManaCost:no cost
-Types:Creature Fighter
 Colors:red
+Types:Creature Fighter
 PT:3/3
 K:First Strike
 Oracle:First strike

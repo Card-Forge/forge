@@ -1,7 +1,7 @@
 Name:Dinosaur Token
 ManaCost:no cost
-Types:Creature Dinosaur
 Colors:red
+Types:Creature Dinosaur
 PT:1/1
 K:Haste
 Oracle:Haste
