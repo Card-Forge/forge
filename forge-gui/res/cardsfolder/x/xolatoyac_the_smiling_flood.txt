@@ -9,7 +9,7 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ Fountain
 SVar:FountainStatic:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AddType$ Island | Description$ That land is an island in addition to its other types for as long as it has a flood counter on it.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap each permanent you control with a counter on it.
 SVar:TrigUntap:DB$ UntapAll | ValidCards$ Permanent.YouCtrl+HasCounters
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
 DeckHints:Ability$Counters
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever Xolatoyac, the Smiling Flood enters or attacks, put a flood counter on target land. That land is an Island in addition to its other types for as long as it has a flood counter on it.\nAt the beginning of your end step, untap each permanent you control with a counter on it.
