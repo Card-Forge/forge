@@ -1,7 +1,7 @@
 Name:Whale Token
 ManaCost:no cost
-Types:Creature Whale
 Colors:blue
+Types:Creature Whale
 PT:6/6
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 9/9 blue Kraken creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ u_9_9_kraken | TokenOwner$ You | TokenAmount$ 1

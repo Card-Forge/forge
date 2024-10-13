@@ -1,7 +1,7 @@
 Name:Settlement
 ManaCost:no cost
-Types:Enchantment Aura
 Colors:green
+Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ SettlementTap | Description$ Enchanted land has "{T}: Add one mana of any color."
