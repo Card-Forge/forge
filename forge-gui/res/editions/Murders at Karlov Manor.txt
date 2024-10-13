@@ -4,10 +4,32 @@ Date=2024-02-09
 Name=Murders at Karlov Manor
 Type=Expansion
 ScryfallCode=MKM
-Booster=7 Common:fromSheet("MKM cards"), 3 Uncommon:fromSheet("MKM cards"), 1 RareMythic:fromSheet("MKM cards"), 1 BasicLand, 1 Any:fromSheet("MKM cards"), 1 Any:fromSheet("MKM cards")+
-ChanceReplaceCommonWith=.125F fromsheet("MKM karlov surprise")
-Prerelease=6 Boosters, 1 RareMythic+, 1 Any:fromsheet("MKM prerelease promo")+
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,BasicLand,Wildcard,PrereleasePromo
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 BasicLand, 1 Wildcard, 1 Wildcard+
+Prerelease=6 Boosters, 1 RareMythic+, 1 PrereleasePromo+
 BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("MKM cards")
+
+[Common-Guest]
+Base=Common:fromSheet("MKM cards")
+Replace=.125F fromSheet("MKM karlov surprise")
+
+[Uncommon]
+Base=Uncommon:fromSheet("MKM cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("MKM cards")
+
+[BasicLand]
+Base=BasicLand:fromSheet("MKM cards")
+
+[Wildcard]
+Base=Any:fromSheet("MKM cards")
+
+[PrereleasePromo]
+Base=Any:fromsheet("MKM prerelease promo")
 
 [cards]
 1 U Case of the Shattered Pact @Peter Polach
