@@ -206,7 +206,6 @@ public class InventoryScene extends UIScene {
             Deck data = deckLocation.get(selected);
             if (data == null)
                 return;
-            if (openDialog == null) {
             this.openBooster();
         }
     }
