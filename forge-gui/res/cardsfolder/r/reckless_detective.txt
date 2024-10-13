@@ -7,7 +7,7 @@ SVar:TrigChoice:DB$ GenericChoice | Choices$ DBSacToDraw,DBDiscardToDraw
 SVar:DBSacToDraw:DB$ Draw | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ DBPump | SpellDescription$ Sacrifice an artifact.
 SVar:DBDiscardToDraw:DB$ Draw | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | SubAbility$ DBPump | SpellDescription$ Discard a card.
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice|Graveyard|Discard
 DeckHints:Type$Artifact|Clue|Treasure
-SVar:HasAttackEffect:TRUE
 Oracle:Whenever Reckless Detective attacks, you may sacrifice an artifact or discard a card. If you do, draw a card and Reckless Detective gets +2/+0 until end of turn.

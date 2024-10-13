@@ -7,7 +7,7 @@ SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.Other/another creature you contr
 SVar:Y:Sacrificed$CardPower
 A:AB$ ChangeZone | Cost$ XMin1 2 B Sac<X/Artifact> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.powerLEX+YouOwn | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Return target creature card with power X or less from your graveyard to the battlefield. X can't be 0.
 SVar:X:Count$xPaid
+SVar:AIPreference:SacCost$Artifact.cmcLE1
 DeckHas:Ability$Sacrifice|Token|Graveyard & Type$Treasure|Artifact
 DeckHints:Type$Artifact
-SVar:AIPreference:SacCost$Artifact.cmcLE1
 Oracle:When Ruthless Technomancer enters, you may sacrifice another creature you control. If you do, create a number of Treasure tokens equal to that creature's power.\n{2}{B}, Sacrifice X artifacts: Return target creature card with power X or less from your graveyard to the battlefield. X can't be 0.
