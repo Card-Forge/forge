@@ -6,6 +6,6 @@ K:Prowess
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE20 | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.
 SVar:TrigSeek:AB$ Seek | Cost$ Discard<1/Card> | Type$ Instant,Sorcery
 SVar:X:Count$ValidGraveyard,Library,Hand Instant.YouOwn,Sorcery.YouOwn
-DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Discard
+DeckNeeds:Type$Instant|Sorcery
 Oracle:When Frenzied Geistblaster enters, if there are twenty or more instant and/or sorcery cards among cards in your graveyard, hand, and library, you may discard a card. If you do, seek an instant or sorcery card.
