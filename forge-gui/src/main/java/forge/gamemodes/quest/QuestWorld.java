@@ -31,7 +31,9 @@ import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.setrotation.ISetRotation;
 import forge.gamemodes.quest.setrotation.QueueRandomRotation;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.util.FileUtil;
 import forge.util.storage.StorageReaderFile;
 
 /** 
@@ -188,6 +190,17 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 return null;
             }
 
+            //looks into the directory to retrieve all the extra cards
+            if(useDir != null){
+                if(FileUtil.doesFileExist(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt")){
+                    System.out.println("File exists at " + ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt");
+                    for (String extraCardName : FileUtil.readFile(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt")) {
+                        extraCardName = extraCardName.trim();
+                        extraCards.add(extraCardName);
+                    }
+                }
+            }
+
             if (!sets.isEmpty() || !bannedCards.isEmpty() || !extraCards.isEmpty()) {
                 useFormat = new GameFormatQuest(useName, sets, extraCards, bannedCards);
             }
@@ -195,28 +208,28 @@ public class QuestWorld implements Comparable<QuestWorld>{
             if (useName.equalsIgnoreCase(QuestWorld.STANDARDWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.STANDARDWORLDNAME,
                         FModel.getFormats().getStandard().getAllowedSetCodes(),
-                        extraCards,
+                        null,
                         FModel.getFormats().getStandard().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.PIONEERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.PIONEERWORLDNAME,
                         FModel.getFormats().getPioneer().getAllowedSetCodes(),
-                        extraCards,
+                        null,
                         FModel.getFormats().getPioneer().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.MODERNWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.MODERNWORLDNAME,
                         FModel.getFormats().getModern().getAllowedSetCodes(),
-                        extraCards,
+                        null,
                         FModel.getFormats().getModern().getBannedCardNames(),false);
             }
 
             if (useName.equalsIgnoreCase(QuestWorld.RANDOMCOMMANDERWORLDNAME)){
                 useFormat = new GameFormatQuest(QuestWorld.RANDOMCOMMANDERWORLDNAME,
                         FModel.getFormats().getFormat("Commander").getAllowedSetCodes(),
-                        extraCards,
+                        null,
                         FModel.getFormats().getFormat("Commander").getBannedCardNames(),false);
             }
 

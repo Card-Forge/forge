@@ -798,7 +798,7 @@ public final class QuestUtilCards {
         generatePreconsInShop(totalPacks);
         generateTournamentsInShop(totalPacks);
         generateFatPacksInShop(totalPacks);
-        generateBoosterBoxesInShop(totalPacks);
+        //generateBoosterBoxesInShop(totalPacks);
 
         if (questController.getFormat() == null || questController.getFormat().hasSnowLands()) {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
