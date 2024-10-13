@@ -1,6 +1,6 @@
 Name:Plant Token
 ManaCost:no cost
-Types:Creature Plant
 Colors:green
+Types:Creature Plant
 PT:1/1
 Oracle:
