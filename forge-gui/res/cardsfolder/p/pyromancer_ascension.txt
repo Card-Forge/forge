@@ -5,8 +5,8 @@ T:Mode$ SpellCast | ValidCard$ Instant.sharesNameWith YourGraveyard,Sorcery.shar
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE2_QUEST | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerDescription$ Whenever you cast an instant or sorcery spell while CARDNAME has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1 | ConditionDefined$ TriggeredCard
 SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | AILogic$ Always | MayChooseTarget$ True
+SVar:MaxQuestEffect:2
+DeckHas:Ability$Counters
 DeckHints:Keyword$Retrace|Flashback
 DeckNeeds:Type$Instant|Sorcery
-DeckHas:Ability$Counters
-SVar:MaxQuestEffect:2
 Oracle:Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.\nWhenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
