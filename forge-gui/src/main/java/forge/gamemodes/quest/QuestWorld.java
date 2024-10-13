@@ -43,6 +43,8 @@ import forge.util.storage.StorageReaderFile;
 public class QuestWorld implements Comparable<QuestWorld>{
     private final String name;
     private final String dir;
+    private boolean hasDuels = false;
+    private boolean hasChallenges = false;
     private final GameFormatQuest format;
     public static final String STANDARDWORLDNAME = "Random Standard";
     public static final String PIONEERWORLDNAME = "Random Pioneer";
@@ -59,11 +61,13 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @param useDir String, the basedir that contains the duels and challenges for the quest world
      * @param useFormat GameFormatQuest that contains the initial format for the world
      */
-    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat) {
+    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat, final boolean hasDuels, final boolean hasChallenges) {
         name = useName;
         dir = useDir;
         format = useFormat;
         isCustom = false;
+        this.hasDuels = hasDuels;
+        this.hasChallenges = hasChallenges;
     }
 
     /**
@@ -73,11 +77,13 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @param useFormat GameFormatQuest that contains the initial format for the world
      * @param isCustom0 boolean determining whether the world is from the user's custom folder
      */
-    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat, final boolean isCustom0) {
+    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat, final boolean isCustom0, final boolean hasDuels, final boolean hasChallenges) {
         name = useName;
         dir = useDir;
         format = useFormat;
         isCustom = isCustom0;
+        this.hasDuels = hasDuels;
+        this.hasChallenges = hasChallenges;
     }
 
     /**
@@ -93,7 +99,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @return String, the duels directory
      */
     public String getDuelsDir() {
-        return dir == null ? null : dir + "/duels";
+        return !hasDuels || dir == null ? null : dir + "/duels";
     }
 
     /**
@@ -101,7 +107,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
      * @return String, the challenges directory
      */
     public String getChallengesDir() {
-        return dir == null ? null : dir + "/challenges";
+        return !hasChallenges || dir == null ? null : dir + "/challenges";
     }
 
     public GameFormatQuest getFormat() {
@@ -144,6 +150,8 @@ public class QuestWorld implements Comparable<QuestWorld>{
         protected QuestWorld read(String line, int i) {
             String useName = null;
             String useDir = null;
+            boolean hasDuels = false;
+            boolean hasChallenges = false;
             GameFormatQuest useFormat = null;
 
             final List<String> sets = new ArrayList<>();
@@ -192,13 +200,14 @@ public class QuestWorld implements Comparable<QuestWorld>{
 
             //looks into the directory to retrieve all the extra cards
             if(useDir != null){
-                if(FileUtil.doesFileExist(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt")){
-                    System.out.println("File exists at " + ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt");
-                    for (String extraCardName : FileUtil.readFile(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra.txt")) {
+                if(FileUtil.doesFileExist(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra_cards.txt")){
+                    for (String extraCardName : FileUtil.readFile(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\extra_cards.txt")) {
                         extraCardName = extraCardName.trim();
                         extraCards.add(extraCardName);
                     }
                 }
+                hasDuels = FileUtil.isDirectoryWithFiles(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\duels");
+                hasChallenges = FileUtil.isDirectoryWithFiles(ForgeConstants.QUEST_WORLD_DIR + useDir + "\\challenges");
             }
 
             if (!sets.isEmpty() || !bannedCards.isEmpty() || !extraCards.isEmpty()) {
@@ -251,7 +260,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
             // if (useFormat != null) { System.out.println("SETS: " + sets + "\nBANNED: " + bannedCards); }
 
-            return new QuestWorld(useName, useDir, useFormat);
+            return new QuestWorld(useName, useDir, useFormat, hasDuels, hasChallenges);
 
         }
 
