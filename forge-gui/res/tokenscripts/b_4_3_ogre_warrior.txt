@@ -1,6 +1,6 @@
 Name:Ogre Warrior Token
 ManaCost:no cost
-Types:Creature Ogre Warrior
 Colors:black
+Types:Creature Ogre Warrior
 PT:4/3
 Oracle:
