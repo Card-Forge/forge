@@ -7,9 +7,9 @@ SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
 K:Equip:1
 K:Craft:5 XMin1 ExileCtrlOrGrave<X/Creature.Other>
 SVar:X:Count$xPaid
+AI:RemoveDeck:All
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard|Discard
-AI:RemoveDeck:All
 AlternateMode:DoubleFaced
 Oracle:Whenever equipped creature attacks, draw a card, then discard a card.\nEquip {1}\nCraft with one or more creatures {5} ({5}, Exile this artifact, Exile one or more creatures you control and/or creature cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 
