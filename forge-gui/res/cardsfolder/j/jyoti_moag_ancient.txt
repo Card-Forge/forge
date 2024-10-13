@@ -8,6 +8,6 @@ SVar:X:Count$TotalCommanderCastFromCommandZone
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPumpAll | TriggerDescription$ At the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is NICKNAME's power.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Land+YouCtrl | NumAtt$ Y | NumDef$ Y
 SVar:Y:Count$CardPower
-DeckHas:Ability$Token & Type$Dryad
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Token & Type$Dryad
 Oracle:When Jyoti, Moag Ancient enters, create a 1/1 green Forest Dryad land creature token for each time you've cast a commander from the command zone this game.\nAt the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is Jyoti's power.
