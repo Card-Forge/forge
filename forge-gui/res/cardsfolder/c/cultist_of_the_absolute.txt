@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddPower$ 3 | AddTo
 SVar:UpkeepSac:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 SVar:PlayMain1:TRUE
-DeckHas:Ability$Sacrifice
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Sacrifice
 Oracle:Commander creatures you own get +3/+3 and have flying, deathtouch, "Ward—Pay 3 life," and "At the beginning of your upkeep, sacrifice a creature."
