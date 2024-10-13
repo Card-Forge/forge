@@ -25,7 +25,7 @@ This file is tarball, and may need to be extracted twice depending on which prog
 We recommend extracting to a new folder rather than on top of an existing installation.
 **For users who have played Forge before all of your user data is stored separately so you don't have to worry about losing it on upgrade.**
 
-Java 8 or later is required to run Forge. Please make sure is the right version is installed in your enviroment. Check the user guide for more info.
+Java 8 or later is required to run Forge. Please make sure is the right version is installed in your environment. Check the user guide for more info.
 
 For Android users, download the APK file from [Snapshot Build](https://downloads.cardforge.org/dailysnapshots/) to your device. 
 On first run, Forge will download all needed data.
