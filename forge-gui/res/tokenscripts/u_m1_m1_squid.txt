@@ -1,6 +1,6 @@
 Name:Squid Token
 ManaCost:no cost
-Types:Creature Squid
 Colors:blue
+Types:Creature Squid
 PT:-1/-1
 Oracle:

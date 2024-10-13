@@ -1,6 +1,6 @@
 Name:Cleric Token
 ManaCost:no cost
-Types:Enchantment Creature Cleric
 Colors:white
+Types:Enchantment Creature Cleric
 PT:2/1
 Oracle:

@@ -6,6 +6,6 @@ K:Flying
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters, put up to one target card from a graveyard on the bottom of its owner's library.
 SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select up to one target card in a graveyard | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:Flying, haste\nWhen Swiftgear Drake enters, put up to one target card from a graveyard on the bottom of its owner's library.

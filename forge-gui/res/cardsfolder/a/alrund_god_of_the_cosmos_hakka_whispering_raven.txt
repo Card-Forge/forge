@@ -9,8 +9,8 @@ SVar:Z:SVar$X/Plus.Y
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChooseCardType | TriggerDescription$ At the beginning of your end step, choose a card type, then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:TrigChooseCardType:DB$ ChooseType | Defined$ You | Type$ Card | SubAbility$ DBDig
 SVar:DBDig:DB$ Dig | DigNum$ 2 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card.ChosenType | DestinationZone2$ Library | LibraryPosition$ -1
-DeckHints:Keyword$Foretell
 AI:RemoveDeck:All
+DeckHints:Keyword$Foretell
 AlternateMode:Modal
 Oracle:Alrund gets +1/+1 for each card in your hand and each foretold card you own in exile.\nAt the beginning of your end step, choose a card type, then reveal the top two cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
 

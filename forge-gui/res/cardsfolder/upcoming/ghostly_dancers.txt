@@ -1,0 +1,13 @@
+Name:Ghostly Dancers
+ManaCost:3 W W
+Types:Creature Spirit
+PT:2/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoice | TriggerDescription$ When CARDNAME enters, return an enchantment card from your graveyard to your hand or unlock a locked door of a Room you control.
+SVar:TrigChoice:DB$ GenericChoice | Choices$ DBReturn,DBUnlock
+SVar:DBReturn:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Enchantment.YouOwn | Origin$ Graveyard | Destination$ Hand | IsPresent$ Enchantment.YouOwn | PresentZone$ Graveyard | SpellDescription$ Return an enchantment card from your graveyard to your hand
+SVar:DBUnlock:DB$ UnlockDoor | Mode$ Unlock | Choices$ Room.YouCtrl+!FullyUnlocked | IsPresent$ Room.YouCtrl+!FullyUnlocked | SpellDescription$ Unlock a locked door of a Room you control
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 3/1 white Spirit creature token with flying.
+T:Mode$ FullyUnlock | ValidCard$ Card.Room | ValidPlayer$ You | Secondary$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Eerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 3/1 white Spirit creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_3_1_spirit_flying
+Oracle:Flying\nWhen Ghostly Dancers enters, return an enchantment card from your graveyard to your hand or unlock a locked door of a Room you control.\nEerie — Whenever an enchantment you control enters and whenever you fully unlock a Room, create a 3/1 white Spirit creature token with flying.

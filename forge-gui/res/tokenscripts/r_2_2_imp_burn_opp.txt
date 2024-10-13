@@ -1,7 +1,7 @@
 Name:Imp Token
 ManaCost:no cost
-Types:Creature Imp
 Colors:red
+Types:Creature Imp
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ ImpTrigDamage | TriggerDescription$ When this creature dies, it deals 2 damage to each opponent.
 SVar:ImpTrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2

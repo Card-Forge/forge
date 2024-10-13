@@ -9,7 +9,7 @@ SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rw_1_1_soldier_haste | To
 SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumDmg$ X | SpellDescription$ CARDNAME deals damage equal to the number of creature tokens you control to target opponent.
+SVar:X:Count$Valid Creature.token+YouCtrl
 DeckHas:Ability$Token|Sacrifice
 DeckHints:Type$Token
-SVar:X:Count$Valid Creature.token+YouCtrl
 Oracle:Whenever you attack, you may sacrifice another creature. When you do, choose two —\n• Create two 1/1 red and white Soldier creature tokens with haste that are tapped and attacking.\n• You draw a card and you lose 1 life.\n• Caesar, Legion's Emperor deals damage equal to the number of creature tokens you control to target opponent.

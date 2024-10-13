@@ -1,7 +1,7 @@
 Name:Elemental Token
 ManaCost:no cost
-Types:Creature Elemental
 Colors:white
+Types:Creature Elemental
 PT:4/4
 K:Flying
 Oracle:Flying

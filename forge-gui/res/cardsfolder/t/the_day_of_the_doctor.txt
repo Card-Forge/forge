@@ -12,6 +12,6 @@ SVar:DBGenericChoice:DB$ GenericChoice | Choices$ DBExileAll,DBCleanupBis
 SVar:DBExileAll:DB$ ChangeZoneAll | ChangeType$ Creature.nonChosenCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDamage | SpellDescription$ Exile all other creatures. If you do, CARDNAME deals 13 damage to you.
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 13 | SubAbility$ DBCleanupBis
 SVar:DBCleanupBis:DB$ Cleanup | ClearChosenCard$ True | SpellDescription$ Don't exile all other creatures.
-DeckNeeds:Type$Doctor|Legendary
 AI:RemoveDeck:Random
+DeckNeeds:Type$Doctor|Legendary
 Oracle:I, II, III — Exile cards from the top of your library until you exile a legendary card. You may play that card for as long as The Day of the Doctor remains on the battlefield. Put the rest of those exiled cards on the bottom of your library in a random order.\nIV — Choose up to three Doctors. You may exile all other creatures. If you do, The Day of the Doctor deals 13 damage to you.

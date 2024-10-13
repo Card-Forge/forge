@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice a Food. If you do, attacking creatures get +1/+1 and gain trample until end of turn.
 SVar:TrigPumpAll:AB$ PumpAll | Cost$ Sac<1/Food> | ValidCards$ Creature.attacking | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
-DeckHas:Ability$LifeGain|Token|Counters & Type$Food
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain|Token|Counters & Type$Food
 Oracle:When Provisions Merchant enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever Provisions Merchant attacks, you may sacrifice a Food. If you do, attacking creatures get +1/+1 and gain trample until end of turn.

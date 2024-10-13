@@ -8,7 +8,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:Solved:DB$ AlterAttribute | Defined$ Self | Attributes$ Solved
 R:Event$ CreateToken | IsPresent$ Card.Self+IsSolved | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ DBReplace | Description$ Solved – If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Card.YouCtrl | TokenScript$ c_a_clue_draw
-DeckNeeds:Type$Detective
 DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Clue
 DeckHints:Ability$Token
+DeckNeeds:Type$Detective
 Oracle:Whenever a Detective you control enters and whenever a Detective you control is turned face up, put a +1/+1 counter on it.\nTo solve – You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)\nSolved – If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")

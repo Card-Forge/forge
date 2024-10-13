@@ -1,8 +1,6 @@
 Name:Swinging Ship
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:4 6
 K:Visit:TrigEffect
 SVar:TrigEffect:DB$ Effect | Triggers$ STShip | SpellDescription$ Visit — After the first combat phase this turn, there's an additional combat phase. At the beginning of that combat, untap all creatures that attacked this turn.
 SVar:STShip:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | FirstCombat$ True | Execute$ TrigAdditionalCombat | TriggerDescription$ After the first combat phase this turn, there's an additional combat phase. At the beginning of that combat, untap all creatures that attacked this turn.
@@ -10,3 +8,8 @@ SVar:TrigAdditionalCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCom
 SVar:DBUntapAll:DB$ UntapAll | ValidCards$ Creature.attackedThisTurn
 SVar:PlayMain1:TRUE
 Oracle:Visit — After the first combat phase this turn, there's an additional combat phase. At the beginning of that combat, untap all creatures that attacked this turn.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:4 6

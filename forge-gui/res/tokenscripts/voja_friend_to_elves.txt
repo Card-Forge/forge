@@ -1,6 +1,6 @@
 Name:Voja, Friend to Elves
 ManaCost:no cost
-Types:Legendary Creature Wolf
 Colors:white,green
+Types:Legendary Creature Wolf
 PT:3/3
 Oracle:

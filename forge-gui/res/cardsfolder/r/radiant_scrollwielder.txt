@@ -10,6 +10,6 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:ReplaceGraveyard:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$LifeGain
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Instant and sorcery spells you control have lifelink.\nAt the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.

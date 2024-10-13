@@ -1,7 +1,7 @@
 Name:Horse Token
 ManaCost:no cost
-Types:Creature Horse
 Colors:white
+Types:Creature Horse
 PT:2/2
 S:Mode$ Continuous | Affected$ Doctor.YouCtrl | AddKeyword$ Horsemanship | Description$ Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)
 Oracle:Doctors you control have horsemanship. (They can't be blocked except by creatures with horsemanship.)

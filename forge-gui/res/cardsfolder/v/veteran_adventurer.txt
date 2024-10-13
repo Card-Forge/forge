@@ -5,6 +5,6 @@ PT:5/5
 K:Vigilance
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ Cleric & Rogue & Warrior & Wizard | Description$ CARDNAME is also a Cleric, Rogue, Warrior, and Wizard.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature in your party.
-DeckHints:Ability$Party & Type$Cleric|Rogue|Warrior|Wizard
 SVar:X:Count$Party
+DeckHints:Ability$Party & Type$Cleric|Rogue|Warrior|Wizard
 Oracle:Veteran Adventurer is also a Cleric, Rogue, Warrior, and Wizard.\nThis spell costs {1} less to cast for each creature in your party.\nVigilance

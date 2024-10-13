@@ -6,7 +6,7 @@ SVar:DBAnimate:DB$ Animate | Triggers$ SpellCastTrig | Defined$ ChosenCard | Inc
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeTypeDesc$ a multicolored instant or sorcery card from your graveyard | ChangeNum$ 1 | Hidden$ True | StackDescription$ SpellDescription | ChangeType$ Instant.YouCtrl+MultiColor,Sorcery.YouCtrl+MultiColor | SpellDescription$ Then return a multicolored instant or sorcery card from your graveyard to your hand.
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When you cast this spell, draw a card.
 SVar:TrigDraw:DB$ Draw
-DeckNeeds:Type$Instant|Sorcery
+AI:RemoveDeck:Random
 DeckHas:Ability$Graveyard
-RemoveDeck:Random
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Choose an instant or sorcery card in your hand or graveyard. That card perpetually incorporates {U} and gains "When you cast this spell, draw a card." Then return a multicolored instant or sorcery card from your graveyard to your hand.

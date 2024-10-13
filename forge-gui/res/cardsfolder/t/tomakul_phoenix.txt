@@ -9,7 +9,7 @@ SVar:TrigEffect:DB$ Pump | Defined$ TriggeredNewCardLKICopy | PumpZone$ Graveyar
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ At the beginning of combat on your turn, you may pay {X}{R}, where X is CARDNAME's power. If you do, return it from your graveyard to the battlefield.
 SVar:TrigReturn:AB$ ChangeZone | Cost$ X R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:Count$CardPower
-DeckHas:Ability$Graveyard
 SVar:SacMe:1
 SVar:DiscardMe:1
+DeckHas:Ability$Graveyard
 Oracle:Flying, haste\nWhen Tomakul Phoenix dies, it perpetually gets +2/+2.\nAt the beginning of combat on your turn, you may pay {X}{R}, where X is Tomakul Phoenix's power. If you do, return it from your graveyard to the battlefield.

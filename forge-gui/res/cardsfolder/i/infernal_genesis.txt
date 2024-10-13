@@ -6,6 +6,6 @@ SVar:TrigMill:DB$ Mill | Defined$ TriggeredPlayer | NumCards$ 1 | RememberMilled
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_1_1_minion | TokenOwner$ TriggeredPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
-DeckHas:Ability$Token
 AI:RemoveDeck:Random
+DeckHas:Ability$Token
 Oracle:At the beginning of each player's upkeep, that player mills a card. Then they create X 1/1 black Minion creature tokens, where X is the milled card's mana value.

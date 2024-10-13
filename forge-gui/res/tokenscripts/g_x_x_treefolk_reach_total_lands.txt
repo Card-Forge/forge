@@ -1,7 +1,7 @@
 Name:Treefolk Token
 ManaCost:no cost
-Types:Creature Treefolk
 Colors:green
+Types:Creature Treefolk
 PT:*/*
 K:Reach
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ This creature's power and toughness are each equal to the number of lands you control.

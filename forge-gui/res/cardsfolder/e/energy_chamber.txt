@@ -6,6 +6,6 @@ SVar:TrigCharm:DB$ Charm | Choices$ CounterP1P1,CounterCharge | CharmNum$ 1
 SVar:CounterP1P1:DB$ PutCounter | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target artifact creature.
 SVar:CounterCharge:DB$ PutCounter | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on target noncreature artifact.
 AI:RemoveDeck:All
-DeckNeeds:Type$Artifact
 DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
 Oracle:At the beginning of your upkeep, choose one —\n• Put a +1/+1 counter on target artifact creature.\n• Put a charge counter on target noncreature artifact.

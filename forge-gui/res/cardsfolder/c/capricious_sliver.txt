@@ -9,6 +9,6 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
-DeckHints:Type$Sliver
 SVar:BuffedBy:Sliver
+DeckHints:Type$Sliver
 Oracle:Sliver creatures you control have "Whenever this creature deals combat damage to a player, exile the top card of your library. You may play that card this turn."

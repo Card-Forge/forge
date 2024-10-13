@@ -5,7 +5,7 @@ PT:5/4
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, discard a card if you don't control an Ogre.
 SVar:TrigDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | ConditionPresent$ Ogre.YouCtrl | ConditionCompare$ EQ0
-AI:RemoveDeck:Random
 SVar:NeedsToPlay:Ogre.YouCtrl
+AI:RemoveDeck:Random
 DeckHints:Type$Ogre
 Oracle:Trample\nAt the beginning of your upkeep, discard a card if you don't control an Ogre.

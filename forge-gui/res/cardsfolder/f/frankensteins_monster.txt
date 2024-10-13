@@ -13,7 +13,7 @@ SVar:X:Count$xPaid
 SVar:CheckExiled:Count$ValidExile Card.IsRemembered
 SVar:CheckYard:Count$ValidGraveyard Creature.YouOwn+NotDefinedReplacedSimultaneousETB
 SVar:NeedsToPlayVar:CheckYard GE1
-DeckHints:Ability$Mill|Graveyard
-DeckHas:Ability$Graveyard|Counters
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Mill|Graveyard
 Oracle:As Frankenstein's Monster enters, exile X creature cards from your graveyard. If you can't, put Frankenstein's Monster into its owner's graveyard instead of onto the battlefield. For each creature card exiled this way, Frankenstein's Monster enters with a +2/+0, +1/+1, or +0/+2 counter on it.

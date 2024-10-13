@@ -1,6 +1,6 @@
 Name:Employee Token
 ManaCost:no cost
-Types:Creature Employee
 Colors:red
+Types:Creature Employee
 PT:1/1
 Oracle:

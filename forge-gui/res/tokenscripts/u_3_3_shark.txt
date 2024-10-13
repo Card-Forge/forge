@@ -1,6 +1,6 @@
 Name:Shark Token
 ManaCost:no cost
+Colors:blue
 Types:Creature Shark
 PT:3/3
-Colors:blue
 Oracle:

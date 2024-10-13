@@ -7,6 +7,6 @@ SVar:Battlefield:DB$ ChangeZoneAll | ChangeType$ Permanent.IsRemembered | Origin
 SVar:Graveyard:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Permanent.nonLand+RememberedPlayerCtrl
-DeckHints:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHints:Ability$Graveyard
 Oracle:Each player reveals a number of cards from the top of their library equal to the number of nonland permanents they control, puts all permanent cards they revealed this way onto the battlefield, and puts the rest into their graveyard.

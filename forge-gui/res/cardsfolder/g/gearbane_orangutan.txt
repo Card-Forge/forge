@@ -9,7 +9,7 @@ SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select up to one t
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Artifact | RememberSacrificed$ True | SubAbility$ DBPutCounter | SpellDescription$ Sacrifice an artifact. If you do, put two +1/+1 counters on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice|Counters
 DeckHints:Type$Artifact
-AI:RemoveDeck:Random
 Oracle:Reach\nWhen Gearbane Orangutan enters, choose one —\n• Destroy up to one target artifact.\n• Sacrifice an artifact. If you do, put two +1/+1 counters on Gearbane Orangutan.

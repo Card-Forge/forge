@@ -1,6 +1,6 @@
 Name:Snake Token
 ManaCost:no cost
-Types:Creature Snake
 Colors:green
+Types:Creature Snake
 PT:5/4
 Oracle:

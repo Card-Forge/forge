@@ -10,10 +10,10 @@ A:AB$ ChangeZone | Cost$ R | CheckSVar$ X | SVarCompare$ GE3 | Origin$ Battlefie
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
-DeckNeeds:Type$Instant|Sorcery
-DeckHints:Type$Phyrexian
 SVar:BuffedBy:Instant,Sorcery
 DeckHas:Type$Treasure|Artifact
+DeckHints:Type$Phyrexian
+DeckNeeds:Type$Instant|Sorcery
 AlternateMode:DoubleFaced
 Oracle:First strike\nWhenever you cast an instant or sorcery spell, Urabrask deals 1 damage to target opponent. Add {R}.\n{R}: Exile Urabrask, then return it to the battlefield transformed under its owner's control. Activate only as a sorcery and only if you've cast three or more instant and/or sorcery spells this turn.
 

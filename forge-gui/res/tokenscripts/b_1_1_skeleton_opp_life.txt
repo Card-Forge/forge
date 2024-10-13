@@ -1,7 +1,7 @@
 Name:Skeleton Token
 ManaCost:no cost
-Types:Creature Minion
 Colors:black
+Types:Creature Minion
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME dies, each opponent gains 2 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ Player.Opponent | LifeAmount$ 2

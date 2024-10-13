@@ -1,5 +1,5 @@
 Name:Golem Token
 ManaCost:no cost
-PT:4/6
 Types:Artifact Creature Golem
+PT:4/6
 Oracle:

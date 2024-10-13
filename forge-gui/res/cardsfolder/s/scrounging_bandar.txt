@@ -5,7 +5,7 @@ PT:0/0
 K:etbCounter:P1P1:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of your upkeep, you may move any number of +1/+1 counters from CARDNAME onto another target creature.
 SVar:TrigMoveCounter:DB$ MoveCounter | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | Source$ Self | CounterType$ P1P1 | CounterNum$ Any
-DeckNeeds:Ability$Counters
-DeckHas:Ability$Counters
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
 Oracle:Scrounging Bandar enters with two +1/+1 counters on it.\nAt the beginning of your upkeep, you may move any number of +1/+1 counters from Scrounging Bandar onto another target creature.

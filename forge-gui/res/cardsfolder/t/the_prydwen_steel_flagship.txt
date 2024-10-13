@@ -7,6 +7,6 @@ K:Crew:2
 T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken artifact you control enters, create a 2/2 white Human Knight creature token with "This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn."
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_human_knight_artifact_pump | TokenOwner$ You
 DeckHas:Ability$Token
-DeckNeeds:Type$Artifact
 DeckHints:Type$Human|Knight
+DeckNeeds:Type$Artifact
 Oracle:Flying\nWhenever another nontoken artifact you control enters, create a 2/2 white Human Knight creature token with "This creature gets +2/+2 as long as an artifact entered the battlefield under your control this turn."\nCrew 2

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Instant
 K:Reinforce:1:1 G
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+AI:RemoveDeck:All
 DeckHas:Ability$Counters
 DeckNeeds:Type$Creature
-AI:RemoveDeck:All
 Oracle:Target creature gets +3/+3 until end of turn.\nReinforce 1—{1}{G} ({1}{G}, Discard this card: Put a +1/+1 counter on target creature.)

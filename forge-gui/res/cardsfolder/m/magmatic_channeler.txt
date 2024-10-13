@@ -9,6 +9,6 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | Remem
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:BuffedBy:Instant,Sorcery
-DeckHints:Type$Instant|Sorcery
 AI:RemoveDeck:All
+DeckHints:Type$Instant|Sorcery
 Oracle:As long as there are four or more instant and/or sorcery cards in your graveyard, Magmatic Channeler gets +3/+1.\n{T}, Discard a card: Exile the top two cards of your library, then choose one of them. You may play that card this turn.

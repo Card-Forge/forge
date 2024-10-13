@@ -7,6 +7,6 @@ SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMa
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Landfall — Whenever a land you control enters, put a +1/+1 counter on target creature.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$CardPower
-DeckHas:Ability$Counters
 SVar:BuffedBy:Land
+DeckHas:Ability$Counters
 Oracle:At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.\nLandfall — Whenever a land you control enters, put a +1/+1 counter on target creature.

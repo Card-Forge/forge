@@ -4,9 +4,9 @@ Types:Artifact Creature Construct
 PT:0/0
 K:Sunburst
 A:AB$ MultiplyCounter | Cost$ T | Defined$ Self | CounterType$ P1P1 | SpellDescription$ Double the number of +1/+1 counters on CARDNAME.
-DeckHas:Ability$Counters
 SVar:NoZeroToughnessAI:True
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+DeckHas:Ability$Counters
 DeckHints:Ability$Proliferate
 Oracle:Sunburst (This enters with a +1/+1 counter on it for each color of mana spent to cast it.)\n{T}: Double the number of +1/+1 counters on Solarion.
