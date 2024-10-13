@@ -5,7 +5,7 @@ PT:1/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 3/2 colorless Eldrazi Horror creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Delirium | Description$ Delirium — CARDNAME gets +3/+0 as long as there are four or more card types among cards in your graveyard.
-DeckHints:Ability$Graveyard|Discard & Type$Eldrazi|Horror
-DeckHas:Ability$Token|Delirium
 SVar:SacMe:2
+DeckHas:Ability$Token|Delirium
+DeckHints:Ability$Graveyard|Discard & Type$Eldrazi|Horror
 Oracle:When Desperate Sentry dies, create a 3/2 colorless Eldrazi Horror creature token.\nDelirium — Desperate Sentry gets +3/+0 as long as there are four or more card types among cards in your graveyard.

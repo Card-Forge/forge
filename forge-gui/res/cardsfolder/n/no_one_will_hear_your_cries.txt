@@ -2,8 +2,7 @@ Name:No One Will Hear Your Cries
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent chooses a creature they control, then sacrifices the rest.
-SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ ChooseCreature | SubAbility$ DBSacrificeAll
-SVar:ChooseCreature:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature | Mandatory$ True
+SVar:TrigChoose:DB$ ChooseCard | Defined$ Opponent | Choices$ Creature | ControlledByPlayer$ Chooser | ChoiceTitle$ Choose a creature to keep | Mandatory$ True | Reveal$ True | SubAbility$ DBSacrificeAll
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.nonChosenCard+OppCtrl | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:When you set this scheme in motion, each opponent chooses a creature they control, then sacrifices the rest.

@@ -1,12 +1,15 @@
 Name:Balloon Stand
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:3 6
-Variant:C:Lights:4 6
-Variant:D:Lights:5 6
 K:Visit:TrigCharm
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPump
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_balloon_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 red Balloon creature token with flying.
 SVar:DBPump:DB$ Pump | UnlessCost$ Sac<1/Balloon> | UnlessSwitched$ True | UnlessPayer$ You | ValidTgts$ Creature | KW$ Flying | SpellDescription$ Sacrifice a Balloon. If you do, target creature gains flying until end of turn.
 Oracle:Visit — Choose one.\n• Create a 1/1 red Balloon creature token with flying.\n• Sacrifice a Balloon. If you do, target creature gains flying until end of turn.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:3 6
+Variant:C:Lights:4 6
+Variant:D:Lights:5 6

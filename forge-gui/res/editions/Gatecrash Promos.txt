@@ -8,7 +8,7 @@ ScryfallCode=PGTC
 [cards]
 133★ R Skarrg Goliath @Karl Kopinski
 152★ R Consuming Aberration @Volkan Baǵa
-162★ R Fathom Mage @Dan Scott
+162★ R Fathom Mage @Dan Murayama Scott
 163 R Firemane Avenger @Ryan Barger
 165★ R Foundry Champion @James Ryman
 191★ R Rubblehulk @Cliff Childs

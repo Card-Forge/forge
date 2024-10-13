@@ -9,6 +9,6 @@ SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCo
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | ConditionPhases$ Main1,Main2 | ConditionPlayerTurn$ True
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Enchanted creature gets +2/+2 and has haste.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
-DeckHints:Ability$Sacrifice
 SVar:PlayMain1:TRUE
+DeckHints:Ability$Sacrifice
 Oracle:Morbid — This spell costs {3} less to cast if a creature died this turn.\nEnchant creature\nWhen Grim Reaper's Sprint enters, untap each creature you control. If it's your main phase, there is an additional combat phase after this phase.\nEnchanted creature gets +2/+2 and has haste.

@@ -6,6 +6,6 @@ SVar:Draw:Event$ Draw | ValidPlayer$ You | ReplaceWith$ DBDig | CheckSVar$ X | S
 SVar:DBDig:DB$ Dig | DigNum$ 2 | DestinationZone$ Graveyard | NoReveal$ True | LibraryPosition2$ 0 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ Reset
 SVar:X:Count$YouDrewThisTurn
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Graveyard
 Oracle:Commander creatures you own have "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card."

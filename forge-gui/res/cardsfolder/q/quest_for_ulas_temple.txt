@@ -1,14 +1,13 @@
 Name:Quest for Ula's Temple
 ManaCost:U
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for CARDNAME.
-SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | SubAbility$ TrigDig2
-SVar:TrigDig2:DB$ Dig | DigNum$ 1 | ChangeNum$ All | RevealValid$ Creature | ChangeValid$ Creature | Optional$ True | PromptToSkipOptionalAbility$ True | OptionalAbilityPrompt$ Would you like to reveal the creature and put a quest counter on CARDNAME? | DestinationZone$ Library | LibraryPosition$ 0 | LibraryPosition2$ 0 | RememberChanged$ True | AILogic$ AlwaysConfirm | SubAbility$ DBPutCounter
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPeek | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for CARDNAME.
+SVar:TrigPeek:DB$ PeekAndReveal | RevealValid$ Creature | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ QUEST | CounterNum$ 1 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE3_QUEST | PresentCompare$ EQ1 | TriggerDescription$ At the beginning of each end step, if there are three or more quest counters on CARDNAME, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Kraken,Creature.Leviathan,Creature.Octopus,Creature.Serpent | ChangeNum$ 1 | Hidden$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MaxQuestEffect:3
 DeckHas:Ability$Counters
 DeckNeeds:Type$Kraken|Leviathan|Octopus|Serpent
-SVar:MaxQuestEffect:3
 Oracle:At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.\nAt the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.

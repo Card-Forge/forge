@@ -55,7 +55,7 @@ ScryfallCode=M15
 41 U Wall of Essence @Adam Rex
 42 U Warden of the Beyond @Raymond Swanland
 43 C Aeronaut Tinkerer @Willian Murai
-44 R Aetherspouts @Dan Scott
+44 R Aetherspouts @Dan Murayama Scott
 45 C Amphin Pathmage @Mark Winters
 46 R Chasm Skulker @Jack Wang
 47 R Chief Engineer @Steven Belledin
@@ -199,7 +199,7 @@ ScryfallCode=M15
 185 C Naturalize @Tim Hildebrandt
 186 C Netcaster Spider @Yohann Schepacz
 187 M Nissa, Worldwaker @Peter Mohrbacher
-188 U Nissa's Expedition @Dan Scott
+188 U Nissa's Expedition @Dan Murayama Scott
 189 U Overwhelm @Wayne Reynolds
 190 U Paragon of Eternal Wilds @Winona Nelson
 191 R Phytotitan @Marco Nelor

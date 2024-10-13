@@ -96,7 +96,7 @@ ScryfallCode=HOU
 79 C Torment of Venom @Johann Bodin
 80 U Vile Manifestation @Jason Felix
 81 C Without Weakness @Alex Konstad
-82 C Wretched Camel @Dan Scott
+82 C Wretched Camel @Dan Murayama Scott
 83 U Abrade @Jonas De Ro
 84 C Blur of Blades @Anna Steinbauer
 85 U Burning-Fist Minotaur @Matt Stewart
@@ -167,7 +167,7 @@ ScryfallCode=HOU
 150 U Claim // Fame @Jason Rainville
 151 U Struggle // Survive @Eric Deschamps
 152 U Appeal // Authority @Jason Rainville
-153 R Leave // Chance @Dan Scott
+153 R Leave // Chance @Dan Murayama Scott
 154 R Reason // Believe @Daarken
 155 R Grind // Dust @Josh Hass
 156 R Refuse // Cooperate @Yongjae Choi

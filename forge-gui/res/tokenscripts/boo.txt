@@ -1,7 +1,7 @@
 Name:Boo
 ManaCost:no cost
-Types:Legendary Creature Hamster
 Colors:red
+Types:Legendary Creature Hamster
 PT:1/1
 K:Trample
 K:Haste

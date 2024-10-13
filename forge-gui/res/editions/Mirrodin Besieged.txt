@@ -15,158 +15,158 @@ ScryfallCode=MBS
 1 U Accorder Paladin @Kekai Kotaki
 2 C Ardent Recruit @Mike Bierek
 3 C Banishment Decree @James Ryman
-39 R Black Sun's Zenith @Daniel Ljunggren
-98 C Bladed Sentinel @Tomasz Jedruszek
-99 M Blightsteel Colossus @Chris Rahn
-77 C Blightwidow @Daniel Ljunggren
-58 C Blisterstick Shaman @Svetlin Velinov
-20 R Blue Sun's Zenith @Izzy
-100 R Bonehoard @Chippy
-101 U Brass Squire @Ryan Pancoast
-59 C Burn the Impure @Nic Klein
-40 C Caustic Hound @Dave Allsop
 4 U Choking Fumes @Scott Chou
-60 C Concussive Bolt @Johann Bodin
-21 M Consecrated Sphinx @Mark Zug
-144 R Contested War Zone @Scott Chou
-102 C Copper Carapace @Franz Vohwinkel
-103 U Core Prowler @Dave Allsop
-22 U Corrupted Conscience @Jason Chan
-78 R Creeping Corrosion @Ryan Pancoast
-61 C Crush @Matt Stewart
-23 R Cryptoplasm @Eric Deschamps
-104 R Darksteel Plate @Daniel Ljunggren
-105 R Decimator Web @Daniel Ljunggren
-24 R Distant Memories @Karl Kopinski
 5 C Divine Offering @Terese Nielsen
-106 C Dross Ripper @David Rapoza
-79 C Fangren Marauder @James Ryman
-107 C Flayer Husk @Igor Kieryluk
-41 C Flensermite @Dave Allsop
-42 U Flesh-Eater Imp @Johann Bodin
-154 L Forest @Mark Tedin
-155 L Forest @Mark Tedin
 6 C Frantic Salvage @Scott Chou
-25 C Fuel for the Cause @Steven Belledin
-62 R Galvanoth @Kev Walker
-80 C Glissa's Courier @Dave Kendall
-96 M Glissa, the Traitor @Chris Rahn
-63 C Gnathosaur @Jason Chan
-43 U Go for the Throat @David Rapoza
-64 U Goblin Wardriver @Chippy
 7 U Gore Vassal @Matt Cavotta
-81 R Green Sun's Zenith @David Rapoza
-44 U Gruesome Encore @Adrian Smith
-108 C Gust-Skimmer @Dan Scott
-65 R Hellkite Igniter @Jason Chan
 8 M Hero of Bladehold @Austin Hsu
-66 M Hero of Oxid Ridge @Eric Deschamps
-109 C Hexplate Golem @Matt Cavotta
-45 C Horrifying Revelation @Shelly Wan
-110 C Ichor Wellspring @Steven Belledin
-145 R Inkmoth Nexus @Jung Park
-67 U Into the Core @Whit Brachna
-148 L Island @Jung Park
-149 L Island @Jung Park
 9 U Kemba's Legion @Anthony Francisco
-111 R Knowledge Pool @Mike Bierek
-68 C Koth's Courier @Wayne Reynolds
-69 U Kuldotha Flamefiend @Raymond Swanland
-70 C Kuldotha Ringleader @Greg Staples
-82 U Lead the Stampede @Efrem Palacios
 10 U Leonin Relic-Warder @Greg Staples
 11 C Leonin Skyhunter @Jana Schirmer & Johannes Voss
 12 C Loxodon Partisan @Matt Stewart
-112 U Lumengrid Gargoyle @Randis Albion
-113 R Magnetic Mine @David Rapoza
-46 M Massacre Wurm @Jason Chan
 13 C Master's Call @David Rapoza
-83 U Melira's Keepers @Eric Deschamps
-71 U Metallic Mastery @Erica Yang
 14 R Mirran Crusader @Eric Deschamps
-84 C Mirran Mettle @Karl Kopinski
+15 R Phyrexian Rebirth @Scott Chou
+16 C Priests of Norn @Igor Kieryluk
+17 C Tine Shrike @Adrian Smith
+18 R Victory's Herald @rk post
+19 R White Sun's Zenith @Mike Bierek
+20 R Blue Sun's Zenith @Izzy
+21 M Consecrated Sphinx @Mark Zug
+22 U Corrupted Conscience @Jason Chan
+23 R Cryptoplasm @Eric Deschamps
+24 R Distant Memories @Karl Kopinski
+25 C Fuel for the Cause @Steven Belledin
 26 C Mirran Spy @Dave Kendall
-114 R Mirrorworks @John Avon
-27 R Mitotic Manipulation @Dan Scott
-47 C Morbid Plunder @Mike Bierek
-115 U Mortarpod @Eric Deschamps
-152 L Mountain @Tomasz Jedruszek
-153 L Mountain @Tomasz Jedruszek
-116 C Myr Sire @Jaime Jones
-117 R Myr Turbine @Randis Albion
-118 R Myr Welder @Austin Hsu
-48 U Nested Ghoul @Dave Kendall
+27 R Mitotic Manipulation @Dan Murayama Scott
 28 U Neurok Commando @Matt Stewart
-29 C Oculus @Dan Scott
-72 C Ogre Resister @Efrem Palacios
-119 U Peace Strider @Igor Kieryluk
+29 C Oculus @Dan Murayama Scott
+30 C Quicksilver Geyser @Erica Yang
+31 C Serum Raker @Austin Hsu
+32 C Spire Serpent @Johann Bodin
+33 C Steel Sabotage @Daarken
+34 U Treasure Mage @Ryan Pancoast
+35 C Turn the Tide @Jason Felix
+36 U Vedalken Anatomist @Greg Staples
+37 U Vedalken Infuser @Ryan Pancoast
+38 C Vivisection @Anthony Francisco
+39 R Black Sun's Zenith @Daniel Ljunggren
+40 C Caustic Hound @Dave Allsop
+41 C Flensermite @Dave Allsop
+42 U Flesh-Eater Imp @Johann Bodin
+43 U Go for the Throat @David Rapoza
+44 U Gruesome Encore @Adrian Smith
+45 C Horrifying Revelation @Shelly Wan
+46 M Massacre Wurm @Jason Chan
+47 C Morbid Plunder @Mike Bierek
+48 U Nested Ghoul @Dave Kendall
 49 C Phyresis @Izzy
 50 R Phyrexian Crusader @Eric Deschamps
-120 C Phyrexian Digester @Dave Allsop
-85 R Phyrexian Hydra @Mike Bierek
-121 U Phyrexian Juggernaut @Kev Walker
 51 C Phyrexian Rager @Stephan Martiniere
-15 R Phyrexian Rebirth @Scott Chou
-122 R Phyrexian Revoker @Kev Walker
 52 R Phyrexian Vatmother @Stephan Martiniere
-123 U Pierce Strider @Igor Kieryluk
-124 U Piston Sledge @Pete Venters
-86 C Pistus Strike @Jaime Jones
-125 U Plague Myr @Efrem Palacios
-87 U Plaguemaw Beast @Whit Brachna
-146 L Plains @James Paick
-147 L Plains @James Paick
-88 M Praetor's Counsel @Daarken
-16 C Priests of Norn @Igor Kieryluk
-126 R Psychosis Crawler @Stephan Martiniere
-30 C Quicksilver Geyser @Erica Yang
-89 U Quilled Slagwurm @Matt Stewart
-73 C Rally the Forces @Steven Belledin
-127 C Razorfield Rhino @Kekai Kotaki
-74 R Red Sun's Zenith @Svetlin Velinov
-90 C Rot Wolf @Nils Hamm
-128 C Rusted Slasher @Adrian Smith
 53 R Sangromancer @Igor Kieryluk
 54 C Scourge Servant @Daarken
 55 U Septic Rats @Cos Koniotis
-31 C Serum Raker @Austin Hsu
+56 C Spread the Sickness @Jaime Jones
+57 C Virulent Wound @Whit Brachna
+58 C Blisterstick Shaman @Svetlin Velinov
+59 C Burn the Impure @Nic Klein
+60 C Concussive Bolt @Johann Bodin
+61 C Crush @Matt Stewart
+62 R Galvanoth @Kev Walker
+63 C Gnathosaur @Jason Chan
+64 U Goblin Wardriver @Chippy
+65 R Hellkite Igniter @Jason Chan
+66 M Hero of Oxid Ridge @Eric Deschamps
+67 U Into the Core @Whit Brachna
+68 C Koth's Courier @Wayne Reynolds
+69 U Kuldotha Flamefiend @Raymond Swanland
+70 C Kuldotha Ringleader @Greg Staples
+71 U Metallic Mastery @Erica Yang
+72 C Ogre Resister @Efrem Palacios
+73 C Rally the Forces @Steven Belledin
+74 R Red Sun's Zenith @Svetlin Velinov
+75 R Slagstorm @Dan Murayama Scott
+76 U Spiraling Duelist @Karl Kopinski
+77 C Blightwidow @Daniel Ljunggren
+78 R Creeping Corrosion @Ryan Pancoast
+79 C Fangren Marauder @James Ryman
+80 C Glissa's Courier @Dave Kendall
+81 R Green Sun's Zenith @David Rapoza
+82 U Lead the Stampede @Efrem Palacios
+83 U Melira's Keepers @Eric Deschamps
+84 C Mirran Mettle @Karl Kopinski
+85 R Phyrexian Hydra @Mike Bierek
+86 C Pistus Strike @Jaime Jones
+87 U Plaguemaw Beast @Whit Brachna
+88 M Praetor's Counsel @Daarken
+89 U Quilled Slagwurm @Matt Stewart
+90 C Rot Wolf @Nils Hamm
+91 C Tangle Mantis @Chris Rahn
+92 M Thrun, the Last Troll @Jason Chan
+93 C Unnatural Predation @Shelly Wan
+94 U Viridian Corrupter @Matt Cavotta
+95 C Viridian Emissary @Matt Stewart
+96 M Glissa, the Traitor @Chris Rahn
+97 M Tezzeret, Agent of Bolas @Aleksi Briclot
+98 C Bladed Sentinel @Tomasz Jedruszek
+99 M Blightsteel Colossus @Chris Rahn
+100 R Bonehoard @Chippy
+101 U Brass Squire @Ryan Pancoast
+102 C Copper Carapace @Franz Vohwinkel
+103 U Core Prowler @Dave Allsop
+104 R Darksteel Plate @Daniel Ljunggren
+105 R Decimator Web @Daniel Ljunggren
+106 C Dross Ripper @David Rapoza
+107 C Flayer Husk @Igor Kieryluk
+108 C Gust-Skimmer @Dan Murayama Scott
+109 C Hexplate Golem @Matt Cavotta
+110 C Ichor Wellspring @Steven Belledin
+111 R Knowledge Pool @Mike Bierek
+112 U Lumengrid Gargoyle @Randis Albion
+113 R Magnetic Mine @David Rapoza
+114 R Mirrorworks @John Avon
+115 U Mortarpod @Eric Deschamps
+116 C Myr Sire @Jaime Jones
+117 R Myr Turbine @Randis Albion
+118 R Myr Welder @Austin Hsu
+119 U Peace Strider @Igor Kieryluk
+120 C Phyrexian Digester @Dave Allsop
+121 U Phyrexian Juggernaut @Kev Walker
+122 R Phyrexian Revoker @Kev Walker
+123 U Pierce Strider @Igor Kieryluk
+124 U Piston Sledge @Pete Venters
+125 U Plague Myr @Efrem Palacios
+126 R Psychosis Crawler @Stephan Martiniere
+127 C Razorfield Rhino @Kekai Kotaki
+128 C Rusted Slasher @Adrian Smith
 129 R Shimmer Myr @Jana Schirmer & Johannes Voss
 130 C Shriekhorn @Erica Yang
 131 U Signal Pest @Mark Zug
 132 U Silverskin Armor @Terese Nielsen
 133 U Skinwing @Igor Kieryluk
-75 R Slagstorm @Dan Scott
 134 U Sphere of the Suns @Jana Schirmer & Johannes Voss
 135 C Spin Engine @Pete Venters
 136 R Spine of Ish Sah @Daniel Ljunggren
-76 U Spiraling Duelist @Karl Kopinski
-32 C Spire Serpent @Johann Bodin
-56 C Spread the Sickness @Jaime Jones
-33 C Steel Sabotage @Daarken
 137 U Strandwalker @Igor Kieryluk
-150 L Swamp @Lars Grant-West
-151 L Swamp @Lars Grant-West
 138 M Sword of Feast and Famine @Chris Rahn
 139 C Tangle Hulk @Mark Zug
-91 C Tangle Mantis @Chris Rahn
-97 M Tezzeret, Agent of Bolas @Aleksi Briclot
 140 R Thopter Assembly @Volkan Baǵa
-92 M Thrun, the Last Troll @Jason Chan
-17 C Tine Shrike @Adrian Smith
 141 R Titan Forge @Svetlin Velinov
 142 C Training Drone @Matt Cavotta
-34 U Treasure Mage @Ryan Pancoast
-35 C Turn the Tide @Jason Felix
-93 C Unnatural Predation @Shelly Wan
-36 U Vedalken Anatomist @Greg Staples
-37 U Vedalken Infuser @Ryan Pancoast
-18 R Victory's Herald @rk post
 143 U Viridian Claw @Marc Simonetti
-94 U Viridian Corrupter @Matt Cavotta
-95 C Viridian Emissary @Matt Stewart
-57 C Virulent Wound @Whit Brachna
-38 C Vivisection @Anthony Francisco
-19 R White Sun's Zenith @Mike Bierek
+144 R Contested War Zone @Scott Chou
+145 R Inkmoth Nexus @Jung Park
+146 L Plains @James Paick
+147 L Plains @James Paick
+148 L Island @Jung Park
+149 L Island @Jung Park
+150 L Swamp @Lars Grant-West
+151 L Swamp @Lars Grant-West
+152 L Mountain @Tomasz Jedruszek
+153 L Mountain @Tomasz Jedruszek
+154 L Forest @Mark Tedin
+155 L Forest @Mark Tedin
 
 [tokens]
 w_2_2_cat

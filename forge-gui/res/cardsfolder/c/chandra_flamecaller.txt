@@ -9,6 +9,6 @@ SVar:Y:Remembered$Amount/Plus.1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DamageAll | Cost$ SubCounter<X/LOYALTY> | NumDmg$ X | ValidCards$ Creature | Planeswalker$ True | Ultimate$ True | ValidDescription$ each creature. | SpellDescription$ CARDNAME deals X damage to each creature.
 SVar:X:Count$xPaid
-DeckHas:Ability$Token
 SVar:PlayMain1:ALWAYS
+DeckHas:Ability$Token
 Oracle:[+1]: Create two 3/1 red Elemental creature tokens with haste. Exile them at the beginning of the next end step.\n[0]: Discard all the cards in your hand, then draw that many cards plus one.\n[-X]: Chandra, Flamecaller deals X damage to each creature.

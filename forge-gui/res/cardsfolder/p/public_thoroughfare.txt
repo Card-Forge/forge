@@ -6,6 +6,6 @@ SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, sacrifice it unless you tap an untapped artifact or land you control.
 SVar:TrigSac:DB$ Sacrifice | UnlessCost$ tapXType<1/Artifact;Land/artifact or land> | UnlessPayer$ You
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
-DeckHints:Type$Artifact
 SVar:NeedsToPlay:Land.untapped+YouCtrl;Artifact.untapped+YouCtrl
+DeckHints:Type$Artifact
 Oracle:Public Thoroughfare enters tapped.\nWhen Public Thoroughfare enters, sacrifice it unless you tap an untapped artifact or land you control.\n{T}: Add one mana of any color.

@@ -1,6 +1,6 @@
 Name:Varmint Token
 ManaCost:no cost
+Colors:green
 Types:Creature Varmint
 PT:2/1
-Colors:green
 Oracle:

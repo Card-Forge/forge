@@ -1,7 +1,7 @@
 Name:Construct Token
 ManaCost:no cost
-PT:0/0
 Types:Artifact Creature Construct
+PT:0/0
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ This creature gets +1/+1 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 Oracle:This creature gets +1/+1 for each artifact you control.

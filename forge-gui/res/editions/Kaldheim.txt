@@ -66,7 +66,7 @@ ScryfallCode=KHM
 52 R Cyclone Summoner @Andrey Kuzinskiy
 53 C Depart the Realm @Denman Rooke
 54 C Disdainful Stroke @Campbell White
-55 C Draugr Thought-Thief @Dan Scott
+55 C Draugr Thought-Thief @Dan Murayama Scott
 56 U Frost Augur @Cristi Balanescu
 57 C Frostpeak Yeti @Chris Rahn
 58 U Frostpyre Arcanist @Sam Rowan
@@ -82,7 +82,7 @@ ScryfallCode=KHM
 68 C Mistwalker @Steve Prescott
 69 R Mystic Reflection @YW Tang
 70 M Orvar, the All-Form @Chase Stone
-71 C Pilfering Hawk @Dan Scott
+71 C Pilfering Hawk @Dan Murayama Scott
 72 C Ravenform @Anna Steinbauer
 73 R Reflections of Littjara @Aaron Miller
 74 C Run Ashore @Svetlin Velinov
@@ -90,10 +90,10 @@ ScryfallCode=KHM
 76 U Saw It Coming @Randy Vargas
 77 C Strategic Planning @Donato Giancola
 78 C Undersea Invader @Lorenzo Mastroianni
-79 R Blood on the Snow @Martina Fackova
+79 R Blood on the Snow @Martina Fačková
 80 U Bloodsky Berserker @Gabor Szikszai
 81 M Burning-Rune Demon @Andrew Mar
-82 R Crippling Fear @Nestor Ossandon Leal
+82 R Crippling Fear @Néstor Ossandón Leal
 83 C Deathknell Berserker @Zoltan Boros
 84 C Demonic Gifts @Kekai Kotaki
 85 C Dogged Pursuit @Jason Rainville
@@ -117,7 +117,7 @@ ScryfallCode=KHM
 103 U Poison the Cup @Colin Boyer
 104 C Priest of the Haunted Edge @Aaron Miller
 105 C Raise the Draugr @Randy Vargas
-106 U Return Upon the Tide @Martina Fackova
+106 U Return Upon the Tide @Martina Fačková
 107 R Rise of the Dread Marn @Titus Lunter
 108 U Rune of Mortality @Yeong-Hao Han
 109 R Skemfar Avenger @Randy Vargas
@@ -143,7 +143,7 @@ ScryfallCode=KHM
 129 C Demon Bolt @Campbell White
 130 U Doomskar Titan @Johann Bodin
 131 R Dragonkin Berserker @Lie Setiawan
-132 U Dual Strike @Nestor Ossandon Leal
+132 U Dual Strike @Néstor Ossandón Leal
 133 U Dwarven Hammer @Raoul Vitale
 134 C Dwarven Reinforcements @Andrey Kuzinskiy
 135 U Fearless Liberator @Zezhou Chen
@@ -250,7 +250,7 @@ ScryfallCode=KHM
 236 U Colossal Plow @Joe Slucher
 237 R Cosmos Elixir @Volkan Baǵa
 238 C Funeral Longboat @Donato Giancola
-239 C Goldvein Pick @Dan Scott
+239 C Goldvein Pick @Dan Murayama Scott
 240 R Maskwood Nexus @Jason A. Engle
 241 R Pyre of Heroes @Piotr Dura
 242 C Raiders' Karve @Aaron Miller
@@ -258,7 +258,7 @@ ScryfallCode=KHM
 244 U Replicating Ring @Olena Richards
 245 U Runed Crown @Randy Gallegos
 246 C Scorn Effigy @Wayne Reynolds
-247 U Weathered Runestone @Dan Scott
+247 U Weathered Runestone @Dan Murayama Scott
 248 C Alpine Meadow @Piotr Dura
 249 C Arctic Treeline @Alayna Danner
 250 U Axgard Armory @Cliff Childs
@@ -365,9 +365,9 @@ ScryfallCode=KHM
 345 R Icebreaker Kraken @Chris Cold
 346 R Mystic Reflection @YW Tang
 347 R Reflections of Littjara @Aaron Miller
-348 R Blood on the Snow @Martina Fackova
+348 R Blood on the Snow @Martina Fačková
 349 M Burning-Rune Demon @Andrew Mar
-350 R Crippling Fear @Nestor Ossandon Leal
+350 R Crippling Fear @Néstor Ossandón Leal
 351 R Draugr Necromancer @David Rapoza
 352 R Dream Devourer @David Rapoza
 353 M Eradicator Valkyrie @Tyler Jacobson
@@ -436,7 +436,7 @@ ScryfallCode=KHM
 A40 M A-Alrund, God of the Cosmos @Kieran Yanner
 A41 M A-Alrund's Epiphany @Kieran Yanner
 A51 R A-Cosmos Charger @Nils Hamm
-A106 U A-Return Upon the Tide @Martina Fackova
+A106 U A-Return Upon the Tide @Martina Fačková
 A109 R A-Skemfar Avenger @Randy Vargas
 A139 M A-Goldspan Dragon @Andrew Mar
 A165 C A-Elderleaf Mentor @Zoltan Boros
@@ -444,9 +444,9 @@ A166 U A-Elven Bow @Dallas Williams
 A169 R A-Esika's Chariot @Raoul Vitale
 A198 M A-Tyvar Kell @Chris Rallis
 A208 U A-Fall of the Impostor @Eric Deschamps
-A224 U A-Narfi, Betrayer King @Daarken
 A212 U A-Harald, King of Skemfar @Grzegorz Rutkowski
 A213 R A-Harald Unites the Elves @Ryan Pancoast
+A224 U A-Narfi, Betrayer King @Daarken
 A233 U A-Vega, the Watcher @Paul Scott Canavan
 A237 R A-Cosmos Elixir @Volkan Baǵa
 A253 U A-Bretagard Stronghold @Jung Park

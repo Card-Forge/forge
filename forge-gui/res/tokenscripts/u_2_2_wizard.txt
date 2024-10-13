@@ -1,6 +1,6 @@
 Name:Wizard Token
 ManaCost:no cost
-Types:Creature Wizard
 Colors:blue
+Types:Creature Wizard
 PT:2/2
 Oracle:

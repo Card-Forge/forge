@@ -5,6 +5,6 @@ K:Strive:1 W
 A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_human_soldier | TokenOwner$ You | ValidTgts$ Opponent | TargetMin$ 0 | TargetMax$ MaxTargets | TgtPrompt$ Choose any number of target opponents | SpellDescription$ Choose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, where X is the number of creatures those opponents control.
 SVar:MaxTargets:PlayerCountOpponents$Amount
 SVar:X:Count$Valid Creature.TargetedPlayerCtrl
-DeckHas:Ability$Token
 AI:RemoveDeck:All
+DeckHas:Ability$Token
 Oracle:Strive — This spell costs {1}{W} more to cast for each target beyond the first.\nChoose any number of target opponents. Create X 1/1 white Human Soldier creature tokens, where X is the number of creatures those opponents control.

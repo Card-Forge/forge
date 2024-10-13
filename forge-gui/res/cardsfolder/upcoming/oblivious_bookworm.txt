@@ -1,0 +1,16 @@
+Name:Oblivious Bookworm
+ManaCost:G U
+Types:Creature Human Wizard
+PT:2/3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, you may draw a card. If you do, discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn.
+SVar:TrigDraw:DB$ Draw | RememberDrawn$ True | OptionalDecider$ You | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ X | Mode$ TgtChoose | ConditionCheckSVar$ Condition | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ TurnFaceUp | ValidCard$ Permanent.inZoneBattlefield | ValidCause$ SpellAbility.YouCtrl | Execute$ TrigRemember | Static$ True
+SVar:TrigRemember:DB$ Pump | ImprintCards$ TriggeredCard
+T:Mode$ Phase | Phase$ Upkeep | Static$ True | Execute$ DBCleanupStatic
+SVar:DBCleanupStatic:DB$ Cleanup | ClearImprinted$ True
+SVar:Condition:Count$ImprintedSize/Plus.Y
+SVar:X:Count$RememberedSize/LimitMax.1
+SVar:Y:Count$ThisTurnEntered_Battlefield_Permanent.YouCtrl+faceDown
+Oracle:At the beginning of your end step, you may draw a card. If you do, discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn.

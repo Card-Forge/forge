@@ -1,6 +1,6 @@
 Name:Merfolk Wizard Token
 ManaCost:no cost
-Types:Creature Merfolk Wizard
 Colors:blue
+Types:Creature Merfolk Wizard
 PT:1/1
 Oracle:

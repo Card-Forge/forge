@@ -7,8 +7,8 @@ CardLang=ja
 ScryfallCode=PMPS09
 
 [cards]
-1 R Plains @Rob Alexander
-2 R Island @Rob Alexander
-3 R Swamp @Rob Alexander
-4 R Mountain @Rob Alexander
-5 R Forest @Rob Alexander
+1 L Plains @Rob Alexander
+2 L Island @Rob Alexander
+3 L Swamp @Rob Alexander
+4 L Mountain @Rob Alexander
+5 L Forest @Rob Alexander

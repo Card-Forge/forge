@@ -82,7 +82,7 @@ ScryfallCode=2X2
 69 M Bitterblossom @Rebecca Guay
 70 U Blood Artist @LA Draws
 71 C Bloodflow Connoisseur @Slawomir Maniak
-72 U Carrier Thrall @Lius Lasahido
+72 C Carrier Thrall @Lius Lasahido
 73 R Damnation @Kev Walker
 74 C Disfigure @Justin Sweet
 75 C Eyeblight's Ending @Ron Spears
@@ -128,7 +128,7 @@ ScryfallCode=2X2
 115 U Labyrinth Champion @Chase Stone
 116 C Lava Coil @Wesley Burt
 117 U Lightning Bolt @Christopher Moeller
-118 U Living Lightning @Caio Monteiro
+118 C Living Lightning @Caio Monteiro
 119 C Monastery Swiftspear @Steve Argyle
 120 C Pirate's Pillage @Wayne Reynolds
 121 C Purphoros's Emissary @Sam Burley
@@ -239,9 +239,9 @@ ScryfallCode=2X2
 226 U Heroic Reinforcements @Scott Murphy
 227 R Hostage Taker @Wayne Reynolds
 228 R Hydroid Krasis @Jason Felix
-229 R Intet, the Dreamer @Dan Scott
+229 R Intet, the Dreamer @Dan Murayama Scott
 230 C Izzet Charm @Zoltan Boros
-231 R Jeskai Ascendancy @Dan Scott
+231 R Jeskai Ascendancy @Dan Murayama Scott
 232 U Jeskai Charm @Mathias Kollros
 233 R Jodah, Archmage Eternal @Yongjae Choi
 234 R Judith, the Scourge Diva @Wesley Burt
@@ -521,8 +521,8 @@ ScryfallCode=2X2
 504 M Hellkite Overlord @Justin Sweet
 505 R Hostage Taker @Wayne Reynolds
 506 R Hydroid Krasis @Jason Felix
-507 R Intet, the Dreamer @Dan Scott
-508 R Jeskai Ascendancy @Dan Scott
+507 R Intet, the Dreamer @Dan Murayama Scott
+508 R Jeskai Ascendancy @Dan Murayama Scott
 509 R Jodah, Archmage Eternal @Yongjae Choi
 510 R Judith, the Scourge Diva @Wesley Burt
 511 M Kaalia of the Vast @Michael Komarck

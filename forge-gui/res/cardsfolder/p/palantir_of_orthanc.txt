@@ -5,8 +5,8 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ INFLUENCE | CounterNum$ 1 | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBChoice
 SVar:DBChoice:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ CombustDraw,CombustDamage | AILogic$ CombustibleGearhulk
-SVar:CombustDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Controller draws a card
-SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ X | RememberMilled$ True | SubAbility$ DamageOpponent | SpellDescription$ Controller mills X cards, where X is the number of influence counters on CARDNAME, and that player loses life equal to the total mana value of those cards.
+SVar:CombustDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ CARDNAME's controller draws a card.
+SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ X | RememberMilled$ True | SubAbility$ DamageOpponent | SpellDescription$ CARDNAME's controller mills X cards, where X is the number of influence counters on it, and you lose life equal to the total mana value of those cards.
 SVar:DamageOpponent:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.INFLUENCE

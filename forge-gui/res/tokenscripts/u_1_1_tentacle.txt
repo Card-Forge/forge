@@ -1,6 +1,6 @@
 Name:Tentacle Token
 ManaCost:no cost
-Types:Creature Tentacle
 Colors:blue
+Types:Creature Tentacle
 PT:1/1
 Oracle:

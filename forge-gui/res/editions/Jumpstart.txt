@@ -24,7 +24,7 @@ ScryfallCode=JMP
 16 C Nocturnal Feeder @Cristi Balanescu
 17 M Tinybones, Trinket Thief @Jason Rainville
 18 R Witch of the Moors @Caio Monteiro
-19 U Chained Brute @Dan Scott
+19 U Chained Brute @Dan Murayama Scott
 20 M Immolating Gyre @Campbell White
 21 R Lightning Phoenix @Lie Setiawan
 22 C Lightning Visionary @Bryan Sola
@@ -85,7 +85,7 @@ ScryfallCode=JMP
 77 L Forest @Johannes Voss
 78 C Terramorphic Expanse @Andreas Rocha
 79 U Aegis of the Heavens @Anthony Palumbo
-80 C Aerial Assault @Dan Scott
+80 C Aerial Assault @Dan Murayama Scott
 81 U Affa Guard Hound @Ryan Pancoast
 82 R Ajani's Chosen @Wayne Reynolds
 83 U Alabaster Mage @Izzy
@@ -193,7 +193,7 @@ ScryfallCode=JMP
 185 C Thought Scour @David Rapoza
 186 C Towering-Wave Mystic @Jason Rainville
 187 R Vedalken Archmage @Kev Walker
-188 C Vedalken Entrancer @Dan Scott
+188 C Vedalken Entrancer @Dan Murayama Scott
 189 C Voyage's End @Chris Rahn
 190 U Wall of Lost Thoughts @Adam Paquette
 191 U Warden of Evos Isle @Nils Hamm
@@ -308,7 +308,7 @@ ScryfallCode=JMP
 300 C Borderland Marauder @Scott M. Fischer
 301 C Borderland Minotaur @Greg Staples
 302 U Chain Lightning @Christopher Moeller
-303 R Charmbreaker Devils @Dan Scott
+303 R Charmbreaker Devils @Dan Murayama Scott
 304 U Cinder Elemental @Svetlin Velinov
 305 C Collateral Damage @Ryan Barger
 306 U Dance with Devils @Wayne England
@@ -408,8 +408,8 @@ ScryfallCode=JMP
 400 U Ghirapur Guide @Scott Murphy
 401 C Grave Bramble @Anthony Jones
 402 U Hunter's Insight @Terese Nielsen
-403 C Initiate's Companion @Dan Scott
-404 U Inspiring Call @Dan Scott
+403 C Initiate's Companion @Dan Murayama Scott
+404 U Inspiring Call @Dan Murayama Scott
 405 C Ironshell Beetle @Kev Walker
 406 U Irresistible Prey @Jesper Ejsing
 407 U Keeper of Fables @Alex Konstad
@@ -439,7 +439,7 @@ ScryfallCode=JMP
 431 U Somberwald Stag @Lake Hurwitz
 432 R Soul of the Harvest @Eytan Zana
 433 C Sporemound @Svetlin Velinov
-434 C Sylvan Brushstrider @Dan Scott
+434 C Sylvan Brushstrider @Dan Murayama Scott
 435 C Sylvan Ranger @Christopher Moeller
 436 R Thragtusk @Nils Hamm
 437 U Thundering Spineback @Tomasz Jedruszek
@@ -481,7 +481,7 @@ ScryfallCode=JMP
 473 C Marauder's Axe @Mitchell Malloy
 474 U Meteor Golem @Lake Hurwitz
 475 C Myr Sire @Jaime Jones
-476 U Perilous Myr @Jason Felix
+476 C Perilous Myr @Jason Felix
 477 C Pirate's Cutlass @John Stanko
 478 C Prophetic Prism @John Avon
 479 U Rogue's Gloves @Cyril Van Der Haegen
@@ -491,7 +491,7 @@ ScryfallCode=JMP
 483 C Scroll of Avacyn @Cliff Childs
 484 U Scuttlemutt @Jeremy Jarvis
 485 C Signpost Scarecrow @Jung Park
-486 C Skittering Surveyor @Dan Scott
+486 C Skittering Surveyor @Dan Murayama Scott
 487 U Suspicious Bookcase @Anastasia Ovchinnikova
 488 C Terrarion @Titus Lunter
 489 U Unstable Obelisk @William Wu

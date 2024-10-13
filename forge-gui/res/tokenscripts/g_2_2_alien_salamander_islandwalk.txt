@@ -1,7 +1,7 @@
 Name:Alien Salamander Token
 ManaCost:no cost
-Types:Creature Alien Salamander
 Colors:green
+Types:Creature Alien Salamander
 PT:2/2
 K:Landwalk:Island
 Oracle:Islandwalk

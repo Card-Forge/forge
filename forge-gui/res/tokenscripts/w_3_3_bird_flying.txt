@@ -1,7 +1,7 @@
 Name:Bird Token
 ManaCost:no cost
-Types:Creature Bird
 Colors:white
+Types:Creature Bird
 PT:3/3
 K:Flying
 Oracle:Flying

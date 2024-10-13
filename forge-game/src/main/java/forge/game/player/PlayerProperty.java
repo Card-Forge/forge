@@ -24,11 +24,11 @@ public class PlayerProperty {
 
     public static boolean playerHasProperty(Player player, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         Game game = player.getGame();
-        if (property.endsWith("Activator")) {
-            sourceController = spellAbility.getHostCard().getController();
-            property = property.substring(0, property.length() - 9);
-        }
-        if (property.equals("You")) {
+        if (property.equals("Activator")) {
+            if (!player.equals(spellAbility.getHostCard().getController())) {
+                return false;
+            }
+        } else if (property.equals("You")) {
             if (!player.equals(sourceController)) {
                 return false;
             }
@@ -78,7 +78,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("descended")) {
-            if (!(player.getDescended() > 0)) {
+            if (player.getDescended() < 1) {
                 return false;
             }
         } else if (property.equals("committedCrimeThisTurn")) {
@@ -241,10 +241,6 @@ public class PlayerProperty {
             }
         } else if (property.equals("EnchantedBy")) {
             if (!player.isEnchantedBy(source)) {
-                return false;
-            }
-        } else if (property.equals("NotEnchantedBy")) {
-            if (player.isEnchantedBy(source)) {
                 return false;
             }
         } else if (property.equals("EnchantedController")) {

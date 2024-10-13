@@ -48,7 +48,6 @@ import forge.util.Lang;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -832,12 +831,8 @@ public final class GameActionUtil {
             return list;
         }
         CardCollection completeList = new CardCollection();
-        PlayerCollection players = new PlayerCollection(game.getPlayers());
         // CR 613.7m use APNAP
-        int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
-        if (indexAP != -1) {
-            Collections.rotate(players, - indexAP);
-        }
+        PlayerCollection players = game.getPlayersInTurnOrder(game.getPhaseHandler().getPlayerTurn());
         for (Player p : players) {
             CardCollection subList = new CardCollection();
             for (Card c : list) {

@@ -1,6 +1,6 @@
 Name:Horror Token
 ManaCost:no cost
-Types:Creature Horror
 Colors:black
+Types:Creature Horror
 PT:4/4
 Oracle:

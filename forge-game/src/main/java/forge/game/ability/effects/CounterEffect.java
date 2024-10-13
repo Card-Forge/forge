@@ -273,6 +273,7 @@ public class CounterEffect extends SpellAbilityEffect {
             // card is no longer cast
             c.setCastSA(null);
             c.setCastFrom(null);
+            c.forceTurnFaceUp();
             if (tgtSA instanceof SpellPermanent) {
                 c.setController(srcSA.getActivatingPlayer(), 0);
                 movedCard = game.getAction().moveToPlay(c, srcSA.getActivatingPlayer(), srcSA, params);

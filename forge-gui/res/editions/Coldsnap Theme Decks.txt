@@ -13,7 +13,7 @@ ScryfallCode=CST
 20 C Disenchant @Brian Snõddy
 25 U Browse @Phil Foglio
 30b C Lat-Nam's Legacy @Tom Wänerstrand
-34 C Kjeldoran Elite Guard @Melissa A. Benson
+34 U Kjeldoran Elite Guard @Melissa A. Benson
 37 U Storm Elemental @John Matson
 42 U Viscerid Drone @Heather Hudson
 43 U Balduvian Dead @Mike Kimble
@@ -65,9 +65,9 @@ ScryfallCode=CST
 378 L Mountain @Tom Wänerstrand
 379 L Mountain @Tom Wänerstrand
 380 L Mountain @Tom Wänerstrand
-381 L Forest @Pat Morrissey
-382 L Forest @Pat Morrissey
-383 L Forest @Pat Morrissey
+381 L Forest @Pat Lewis
+382 L Forest @Pat Lewis
+383 L Forest @Pat Lewis
 
 [tokens]
 w_0_1_deserter

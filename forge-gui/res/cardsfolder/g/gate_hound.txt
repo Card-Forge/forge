@@ -4,6 +4,6 @@ Types:Creature Dog
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | IsPresent$ Card.Self+enchanted | Description$ Creatures you control have vigilance as long as CARDNAME is enchanted.
 SVar:EnchantMe:Once
-DeckNeeds:Type$Enchantment
 AI:RemoveDeck:Random
+DeckNeeds:Type$Enchantment
 Oracle:Creatures you control have vigilance as long as Gate Hound is enchanted.

@@ -144,9 +144,6 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
             view.updateTargetPlayers(this);
             view.updateText(this);
 
-            // Run BecomesTargetTrigger
-            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.SourceSA, ability);
             Set<GameObject> distinctObjects = Sets.newHashSet();
             for (final GameObject tgt : target) {
                 if (oldTarget != null && oldTarget.contains(tgt)) {
@@ -157,16 +154,22 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
                     continue;
                 }
 
+                Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.SourceSA, ability);
                 if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
                     runParams.put(AbilityKey.FirstTime, null);
                     ((Card) tgt).setBecameTargetThisTurn(true);
+                }
+                if (tgt instanceof Card && !((Card) tgt).isValiant() && cause.getController().equals(((Card) tgt).getController())) {
+                    runParams.put(AbilityKey.Valiant, null);
+                    ((Card) tgt).setValiant(true);
                 }
                 runParams.put(AbilityKey.Target, tgt);
                 getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
             // Only run BecomesTargetOnce when at least one target is changed
             if (!distinctObjects.isEmpty()) {
-                runParams = AbilityKey.newMap();
+                Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.SourceSA, ability);
                 runParams.put(AbilityKey.Targets, distinctObjects);
                 runParams.put(AbilityKey.Cause, cause);

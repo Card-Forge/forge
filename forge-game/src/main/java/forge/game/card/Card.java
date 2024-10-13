@@ -188,7 +188,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
     private boolean foughtThisTurn = false;
-    private boolean becameTargetThisTurn = false;
+    private boolean becameTargetThisTurn, valiant = false;
     private boolean enlistedThisCombat = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -214,6 +214,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean foretoldCostByEffect;
 
     private boolean plotted;
+
+    private Set<CardStateName> unlockedRooms = EnumSet.noneOf(CardStateName.class);
+    private Map<CardStateName, SpellAbility> unlockAbilities = Maps.newEnumMap(CardStateName.class);
 
     private boolean specialized;
 
@@ -444,6 +447,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (state == CardStateName.FaceDown) {
             return getFaceDownState();
         }
+        if (state == CardStateName.EmptyRoom) {
+            return getEmptyRoomState();
+        }
         CardCloneStates clStates = getLastClonedState();
         if (clStates == null) {
             return getOriginalState(state);
@@ -452,7 +458,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasState(final CardStateName state) {
-        if (state == CardStateName.FaceDown) {
+        if (state == CardStateName.FaceDown || state == CardStateName.EmptyRoom) {
             return true;
         }
         CardCloneStates clStates = getLastClonedState();
@@ -465,6 +471,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public CardState getOriginalState(final CardStateName state) {
         if (state == CardStateName.FaceDown) {
             return getFaceDownState();
+        }
+        if (state == CardStateName.EmptyRoom) {
+            return getEmptyRoomState();
         }
         return states.get(state);
     }
@@ -492,7 +501,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean needsTransformAnimation = transform || rollback;
         // faceDown has higher priority over clone states
         // while text change states doesn't apply while the card is faceDown
-        if (state != CardStateName.FaceDown) {
+        if (state != CardStateName.FaceDown && state != CardStateName.EmptyRoom) {
             CardCloneStates cloneStates = getLastClonedState();
             if (cloneStates != null) {
                 if (!cloneStates.containsKey(state)) {
@@ -796,17 +805,22 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return setState(CardStateName.FaceDown, false);
     }
 
+    public boolean canBeTurnedFaceUp() {
+        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        return !getGame().getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams);
+    }
+
+    public void forceTurnFaceUp() {
+        turnFaceUp(false, null);
+    }
+
     public boolean turnFaceUp(SpellAbility cause) {
         return turnFaceUp(true, cause);
     }
     public boolean turnFaceUp(boolean runTriggers, SpellAbility cause) {
-        if (!isFaceDown()) {
+        if (!isFaceDown() || !canBeTurnedFaceUp()) {
             return false;
         }
-
-        // Check replacement effects
-        Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
-        if (game.getReplacementHandler().cantHappenCheck(ReplacementType.TurnFaceUp, repParams)) return false;
 
         CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
         boolean retResult = false;
@@ -842,10 +856,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             triggerHandler.registerActiveTrigger(this, false);
         }
         if (runTriggers) {
-            // Run replacement effects
+            Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
             game.getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             runParams.put(AbilityKey.Cause, cause);
 
@@ -928,6 +941,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
         return alt ? StaticData.instance().getCommonCards().getName(name, true) :  name;
+    }
+
+    public final boolean hasNameOverwrite() {
+        return changedCardNames.values().stream().anyMatch(CardChangedName::isOverwrite);
     }
 
     public final boolean hasNonLegendaryCreatureNames() {
@@ -1041,7 +1058,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isSplitCard() {
-        return getRules() != null && getRules().getSplitType() == CardSplitType.Split;
+        // Normal Split Cards, these need to return true before Split States are added
+        if (getRules() != null && getRules().getSplitType() == CardSplitType.Split) {
+            return true;
+        };
+        // in case or clones or copies
+        return hasState(CardStateName.LeftSplit);
     }
 
     public final boolean isAdventureCard() {
@@ -1966,7 +1988,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public final Integer getChosenNumber() {
         return chosenNumber;
     }
-    
+
     public final void setChosenNumber(final int i) { setChosenNumber(i, false); }
     public final void setChosenNumber(final int i, final boolean secret) {
         chosenNumber = i;
@@ -2482,8 +2504,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     sbLong.append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.equals("Gift")) {
                     sbLong.append(keyword);
-                    if (inst.getHostCard() != null && inst.getHostCard().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
-                        sbLong.append(" ").append(inst.getHostCard().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
+                    Trigger trig = inst.getTriggers().stream().findFirst().orElse(null);
+                    if (trig != null && trig.getCardState().getFirstSpellAbility().hasAdditionalAbility("GiftAbility")) {
+                        sbLong.append(" ").append(trig.getCardState().getFirstSpellAbility().getAdditionalAbility("GiftAbility").getParam("GiftDescription"));
                     }
                     sbLong.append("\r\n");
                 } else if (keyword.startsWith("Starting intensity")) {
@@ -3121,7 +3144,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                 } else if (keyword.startsWith("Entwine") || keyword.startsWith("Madness")
                         || keyword.startsWith("Miracle") || keyword.startsWith("Recover")
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
-                        || keyword.startsWith("Disturb") || keyword.startsWith("Overload") 
+                        || keyword.startsWith("Disturb") || keyword.startsWith("Overload")
                         || keyword.startsWith("Plot")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
@@ -3702,6 +3725,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public void setBecameTargetThisTurn(boolean becameTargetThisTurn0) {
         becameTargetThisTurn = becameTargetThisTurn0;
     }
+    public boolean isValiant() {
+        return valiant;
+    }
+    public void setValiant(boolean v) {
+        valiant = v;
+    }
 
     public boolean hasStartedTheTurnUntapped() {
         return startedTheTurnUntapped;
@@ -4081,13 +4110,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (Iterables.isEmpty(changedCardTypes)) {
             return state.getType();
         }
-        // CR 506.4 attacked planeswalkers leave combat
-        boolean checkCombat = state.getType().isPlaneswalker() && game.getCombat() != null && !game.getCombat().getAttackersOf(this).isEmpty();
-        CardTypeView types = state.getType().getTypeWithChanges(changedCardTypes);
-        if (checkCombat && !types.isPlaneswalker()) {
-            game.getCombat().removeFromCombat(this);
-        }
-        return types;
+        return state.getType().getTypeWithChanges(changedCardTypes);
     }
 
     public final CardTypeView getOriginalType() {
@@ -5570,6 +5593,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     public final boolean isOutlaw()     { return getType().isOutlaw(); }
 
+    public final boolean isRoom()       { return getType().hasSubtype("Room"); }
+
     /** {@inheritDoc} */
     @Override
     public final int compareTo(final Card that) {
@@ -5980,9 +6005,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         boolean shares = getName(true).equals(name);
 
         // Split cards has extra logic to check if it does share a name with
-        if (isSplitCard()) {
-            shares |= name.equals(getState(CardStateName.LeftSplit).getName());
-            shares |= name.equals(getState(CardStateName.RightSplit).getName());
+        if (!shares && !hasNameOverwrite()) {
+            if (isInPlay()) {
+               // split cards in play are only rooms
+               for (String door : getUnlockedRoomNames()) {
+                   shares |= name.equals(door);
+               }
+            } else { // not on the battlefield
+                if (hasState(CardStateName.LeftSplit)) {
+                    shares |= name.equals(getState(CardStateName.LeftSplit).getName());
+                }
+                if (hasState(CardStateName.RightSplit)) {
+                    shares |= name.equals(getState(CardStateName.RightSplit).getName());
+                }
+            }
+            // TODO does it need extra check for stack?
         }
 
         if (!shares && hasNonLegendaryCreatureNames()) {
@@ -6049,6 +6086,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         return getType().sharesCardTypeWith(c1.getType());
+    }
+
+    public final boolean sharesAllCardTypesWith(final Card c1) {
+        if (c1 == null) {
+            return false;
+        }
+        return getType().sharesAllCardTypesWith(c1.getType());
     }
 
     public final boolean sharesControllerWith(final Card c1) {
@@ -6630,7 +6674,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (plotted == true && !isLKI()) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             game.getTriggerHandler().runTrigger(TriggerType.BecomesPlotted, runParams, false);
-        }    
+        }
         return true;
     }
 
@@ -7200,6 +7244,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         setRegeneratedThisTurn(0);
         resetShieldCount();
         setBecameTargetThisTurn(false);
+        setValiant(false);
         setFoughtThisTurn(false);
         turnedFaceUpThisTurn = false;
         clearMustBlockCards();
@@ -7468,6 +7513,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             }
         }
 
+        if (isInPlay() && !isPhasedOut() && player.canCastSorcery()) {
+            if (getCurrentStateName() == CardStateName.RightSplit || getCurrentStateName() == CardStateName.EmptyRoom) {
+                abilities.add(getUnlockAbility(CardStateName.LeftSplit));
+            }
+            if (getCurrentStateName() == CardStateName.LeftSplit || getCurrentStateName() == CardStateName.EmptyRoom) {
+                abilities.add(getUnlockAbility(CardStateName.RightSplit));
+            }
+        }
+
         if (isInPlay() && isFaceDown() && oState.getType().isCreature() && oState.getManaCost() != null && !oState.getManaCost().isNoCost())
         {
             if (isManifested()) {
@@ -7705,12 +7759,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             this.removeChangedCardKeywords(c.getLayerTimestamp(), stAb.getId(), false);
             this.removeChangedCardTraits(c.getLayerTimestamp(), stAb.getId());
         }
-    }
-
-    public void forceTurnFaceUp() {
-        getGame().getTriggerHandler().suppressMode(TriggerType.TurnFaceUp);
-        turnFaceUp(false, null);
-        getGame().getTriggerHandler().clearSuppression(TriggerType.TurnFaceUp);
     }
 
     public final void addGoad(Long timestamp, final Player p) {
@@ -8074,5 +8122,108 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return true;
         }
         return StaticAbilityWitherDamage.isWitherDamage(this);
+    }
+
+    public Set<CardStateName> getUnlockedRooms() {
+        return this.unlockedRooms;
+    }
+    public void setUnlockedRooms(Set<CardStateName> set) {
+        this.unlockedRooms = set;
+    }
+
+    public List<String> getUnlockedRoomNames() {
+        List<String> result = Lists.newArrayList();
+        for (CardStateName stateName : unlockedRooms) {
+            if (this.hasState(stateName)) {
+                result.add(this.getState(stateName).getName());
+            }
+        }
+        return result;
+    }
+
+    public Set<CardStateName> getLockedRooms() {
+        Set<CardStateName> result = Sets.newHashSet(CardStateName.LeftSplit, CardStateName.RightSplit);
+        result.removeAll(this.unlockedRooms);
+        return result;
+    }
+
+    public List<String> getLockedRoomNames() {
+        List<String> result = Lists.newArrayList();
+        for (CardStateName stateName : getLockedRooms()) {
+            if (this.hasState(stateName)) {
+                result.add(this.getState(stateName).getName());
+            }
+        }
+        return result;
+    }
+
+    public boolean unlockRoom(Player p, CardStateName stateName) {
+        if (unlockedRooms.contains(stateName) || (stateName != CardStateName.LeftSplit && stateName != CardStateName.RightSplit)) {
+            return false;
+        }
+        unlockedRooms.add(stateName);
+
+        updateRooms();
+
+        Map<AbilityKey, Object> unlockParams =  AbilityKey.mapFromPlayer(p);
+        unlockParams.put(AbilityKey.Card, this);
+        unlockParams.put(AbilityKey.CardState, getState(stateName));
+        getGame().getTriggerHandler().runTrigger(TriggerType.UnlockDoor, unlockParams, true);
+
+        // fully unlock
+        if (unlockedRooms.size() > 1) {
+            Map<AbilityKey, Object> fullyUnlockParams = AbilityKey.mapFromPlayer(p);
+            fullyUnlockParams.put(AbilityKey.Card, this);
+
+            getGame().getTriggerHandler().runTrigger(TriggerType.FullyUnlock, fullyUnlockParams, true);
+        }
+
+        return true;
+    }
+
+    public boolean lockRoom(Player p, CardStateName stateName) {
+        if (!unlockedRooms.contains(stateName) || (stateName != CardStateName.LeftSplit && stateName != CardStateName.RightSplit)) {
+            return false;
+        }
+        unlockedRooms.remove(stateName);
+
+        updateRooms();
+
+        return true;
+    }
+
+    public void updateRooms() {
+        if (!this.isRoom()) {
+            return;
+        }
+        if (this.isFaceDown()) {
+            return;
+        }
+        if (unlockedRooms.isEmpty()) {
+            this.setState(CardStateName.EmptyRoom, true);
+        } else if (unlockedRooms.size() > 1) {
+            this.setState(CardStateName.Original, true);
+        } else { // we already know the set is only one
+            for (CardStateName name : unlockedRooms) {
+                this.setState(name, true);
+            }
+        }
+        // update trigger after state change
+        getGame().getTriggerHandler().clearActiveTriggers(this, null);
+        getGame().getTriggerHandler().registerActiveTrigger(this, false);
+    }
+
+    public CardState getEmptyRoomState() {
+        if (!states.containsKey(CardStateName.EmptyRoom)) {
+            states.put(CardStateName.EmptyRoom, CardUtil.getEmptyRoomCharacteristic(this));
+        }
+        return states.get(CardStateName.EmptyRoom);
+    }
+
+    public SpellAbility getUnlockAbility(CardStateName state) {
+        if (!unlockAbilities.containsKey(state)) {
+            unlockAbilities.put(state, CardFactoryUtil.abilityUnlockRoom(getState(state)));
+        }
+        return unlockAbilities.get(state);
     }
 }

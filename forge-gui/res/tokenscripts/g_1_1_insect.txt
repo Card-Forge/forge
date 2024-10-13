@@ -1,6 +1,6 @@
 Name:Insect Token
 ManaCost:no cost
-PT:1/1
 Colors:green
 Types:Creature Insect
+PT:1/1
 Oracle:

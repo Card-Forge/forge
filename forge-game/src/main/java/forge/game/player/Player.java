@@ -64,6 +64,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -103,6 +105,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numPowerSurgeLands;
     private int numLibrarySearchedOwn; //The number of times this player has searched his library
     private int numDrawnThisTurn;
+    private int numDrawnLastTurn;
     private int numDrawnThisDrawStep;
     private int numRollsThisTurn;
     private int numExploredThisTurn;
@@ -300,7 +303,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final PlayerCollection getOpponents() {
-        return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
+        return game.getPlayersInTurnOrder(this).filter(PlayerPredicates.isOpponentOf(this));
     }
 
     public final PlayerCollection getRegisteredOpponents() {
@@ -1442,6 +1445,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         return numDrawnThisTurn;
     }
 
+    public final int getNumDrawnLastTurn() {
+        return numDrawnLastTurn;
+    }
+
     public final int numDrawnThisDrawStep() {
         return numDrawnThisDrawStep;
     }
@@ -2254,6 +2261,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setLandsPlayedLastTurn(int num) {
         landsPlayedLastTurn = num;
     }
+    public final void setNumDrawnLastTurn(int num) {
+        numDrawnLastTurn= num;
+    }
 
     public final int getInvestigateNumThisTurn() {
         return investigatedThisTurn;
@@ -2473,6 +2483,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (final PlayerZone pz : zones.values()) {
             pz.resetCardsAddedThisTurn();
         }
+        setNumDrawnLastTurn(getNumDrawnThisTurn());
         resetNumDrawnThisTurn();
         resetNumRollsThisTurn();
         resetNumExploredThisTurn();
@@ -3953,5 +3964,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public Player getDeclaresBlockers() {
         Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
         return e == null ? null : e.getValue();
+    }
+
+    public List<String> getUnlockedDoors() {
+        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+                .filter(Card::isRoom)
+                .map(Card::getUnlockedRoomNames)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

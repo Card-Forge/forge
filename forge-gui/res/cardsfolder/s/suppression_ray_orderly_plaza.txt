@@ -6,8 +6,8 @@ SVar:DBChooseNumber:DB$ ChooseNumber | Max$ Max | ListTitle$ amount of energy to
 SVar:DBStun:DB$ PutCounter | UnlessCost$ PayEnergy<X> | UnlessPayer$ You | UnlessSwitched$ True | Choices$ Creature.IsRemembered | ChoiceAmount$ X | ChoiceTitle$ Choose up to X creatures tapped this way | CounterType$ Stun | StackDescription$ SpellDescription | SpellDescription$ You may pay X {E}, then choose up to X creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 SVar:Max:Count$YourCountersEnergy
 SVar:X:Count$ChosenNumber
-AlternateMode:Modal
 DeckHints:Ability$Energy
+AlternateMode:Modal
 Oracle:Tap all creatures target player controls. You may pay X {E}, then choose up to X creatures tapped this way. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
 
 ALTERNATE

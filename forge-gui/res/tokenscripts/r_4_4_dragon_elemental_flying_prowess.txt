@@ -1,8 +1,8 @@
 Name:Dragon Elemental Token
 ManaCost:no cost
-Types:Creature Dragon Elemental
 Colors:red
+Types:Creature Dragon Elemental
+PT:4/4
 K:Flying
 K:Prowess
-PT:4/4
 Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

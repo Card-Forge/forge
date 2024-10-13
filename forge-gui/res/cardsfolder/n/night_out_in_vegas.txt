@@ -10,6 +10,6 @@ SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ Random | SubAbil
 SVar:DBShuffle:DB$ Shuffle | Defined$ You
 SVar:GoToSleep:DB$ LoseLife | LifeAmount$ 15 | SubAbility$ DBSacSelf | SpellDescription$ Go to Sleep — You lose 15 life. Sacrifice CARDNAME.
 SVar:DBSacSelf:DB$ Sacrifice
-DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Food|Artifact|Performer
 AI:RemoveDeck:All
+DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Food|Artifact|Performer
 Oracle:At the beginning of your upkeep, choose one that hasn't been chosen —\n• Buffet — Create three Food tokens.\n• See a Show — Create two 2/2 white Performer creature tokens.\n• Play Games — Search your library for a card, put that card into your hand, discard a card at random, then shuffle.\n• Go to Sleep — You lose 15 life. Sacrifice Night Out in Vegas.

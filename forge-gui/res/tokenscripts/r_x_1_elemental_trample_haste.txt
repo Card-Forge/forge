@@ -1,8 +1,8 @@
 Name:Elemental Token
 ManaCost:no cost
-Types:Creature Elemental
 Colors:red
+Types:Creature Elemental
 PT:*/1
 K:Trample
 K:Haste
-Oracle:Trample, Haste
+Oracle:Trample, haste

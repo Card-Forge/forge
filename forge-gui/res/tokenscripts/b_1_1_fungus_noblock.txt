@@ -1,7 +1,7 @@
 Name:Fungus Token
 ManaCost:no cost
-Types:Creature Fungus
 Colors:black
+Types:Creature Fungus
 PT:1/1
 S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ This creature can't block.
 Oracle:This creature can't block.

@@ -1,7 +1,7 @@
 Name:Vampire Token
 ManaCost:no cost
-Types:Creature Vampire
 Colors:black,red
+Types:Creature Vampire
 PT:3/1
 K:Trample
 K:Lifelink

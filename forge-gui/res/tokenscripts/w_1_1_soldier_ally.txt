@@ -1,6 +1,6 @@
 Name:Soldier Ally Token
 ManaCost:no cost
-Types:Creature Soldier Ally
 Colors:white
+Types:Creature Soldier Ally
 PT:1/1
 Oracle:

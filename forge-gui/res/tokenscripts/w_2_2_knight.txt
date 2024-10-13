@@ -1,6 +1,6 @@
 Name:Knight Token
 ManaCost:no cost
-Types:Creature Knight
 Colors:white
+Types:Creature Knight
 PT:2/2
 Oracle:

@@ -1,7 +1,7 @@
 Name:Saproling Token
 ManaCost:no cost
-Types:Creature Saproling
 Colors:green
+Types:Creature Saproling
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ TokenX | SetToughness$ TokenX | Description$ This creature's power and toughness are each equal to the number of fade counters on Saproling Burst.
 SVar:TokenX:Remembered$CardCounters.FADE
