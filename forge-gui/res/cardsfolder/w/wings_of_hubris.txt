@@ -7,6 +7,6 @@ SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Descript
 SVar:Sacrifice:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerDescription$ Sacrifice it at the beginning of the next end step.
 SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered
 K:Equip:1
-DeckHas:Ability$Sacrifice
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
 Oracle:Equipped creature has flying.\nSacrifice Wings of Hubris: Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
