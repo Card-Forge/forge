@@ -1,7 +1,7 @@
 Name:Pirate Token
 ManaCost:no cost
-Types:Creature Pirate
 Colors:red
+Types:Creature Pirate
 PT:1/1
 K:Menace
 K:Haste
