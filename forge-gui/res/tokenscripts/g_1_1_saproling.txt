@@ -1,6 +1,6 @@
 Name:Saproling Token
 ManaCost:no cost
-Types:Creature Saproling
 Colors:green
+Types:Creature Saproling
 PT:1/1
 Oracle:

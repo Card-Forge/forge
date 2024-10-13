@@ -1,6 +1,6 @@
 Name:Dog Token
 ManaCost:no cost
-PT:1/1
 Colors:green
 Types:Creature Dog
+PT:1/1
 Oracle:
