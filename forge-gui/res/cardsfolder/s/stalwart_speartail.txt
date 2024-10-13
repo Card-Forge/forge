@@ -7,6 +7,6 @@ SVar:TrigPump:DB$ PumpAll | ValidCards$ Dinosaur.YouCtrl+Other | PumpZone$ Battl
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTrigger | TriggerDescription$ Whenever CARDNAME attacks, you may pay {3}. When you do, CARDNAME deals 1 damage to each creature and each planeswalker.
 SVar:TrigTrigger:AB$ ImmediateTrigger | Cost$ 3 | Execute$ TrigDamage | TriggerDescription$ When you do, CARDNAME deals 1 damage to each creature and each planeswalker.
 SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 1
-DeckNeeds:Type$Dinosaur
 SVar:HasAttackEffect:TRUE
+DeckNeeds:Type$Dinosaur
 Oracle:Enrage — Whenever Stalwart Speartail is dealt damage, other Dinosaurs you control and Dinosaur cards in your hand and library perpetually get +1/+1.\nWhenever Stalwart Speartail attacks, you may pay {3}. When you do, Stalwart Speartail deals 1 damage to each creature and each planeswalker.

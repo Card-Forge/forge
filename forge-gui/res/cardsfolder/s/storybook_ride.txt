@@ -1,8 +1,6 @@
 Name:Storybook Ride
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 5 6
-Variant:B:Lights:3 4 6
 K:Visit:TrigExile
 SVar:TrigExile:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top X cards of your library, where X is the number of Attractions you've visited this turn (including this one). You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them on the bottom of your library in any order.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ EffSModeContinuous | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBDelayTrig
@@ -12,3 +10,8 @@ SVar:TrigChangeAll:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Attraction.VisitedThisTurn
 Oracle:Visit — Exile the top X cards of your library, where X is the number of Attractions you've visited this turn (including this one). You may play those cards this turn. At the beginning of the next end step, if any of those cards remain exiled, put them on the bottom of your library in any order.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 5 6
+Variant:B:Lights:3 4 6

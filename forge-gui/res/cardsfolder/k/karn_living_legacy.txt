@@ -8,7 +8,7 @@ SVar:DBDig:DB$ Dig | DigNum$ Y | ChangeNum$ 1 | RestRandomOrder$ True | UnlessCo
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | AILogic$ Always | Stackable$ False | Name$ Emblem — Karn, Living Legacy | Image$ emblem_karn_living_legacy | Duration$ Permanent | Abilities$ KarnPing | SpellDescription$ You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
 SVar:KarnPing:AB$ DealDamage | Cost$ tapXType<1/Artifact> | ActivationZone$ Command | ValidTgts$ Any | NumDmg$ 1
 SVar:PlayMain1:TRUE
+SVar:Y:Count$ChosenNumber
 DeckHas:Ability$Token & Type$Artifact
 DeckNeeds:Type$Artifact
-SVar:Y:Count$ChosenNumber
 Oracle:[+1]: Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n[-1]: Pay any amount of mana. Look at that many cards from the top of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.\n[-7]: You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."

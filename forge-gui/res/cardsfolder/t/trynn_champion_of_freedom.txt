@@ -5,7 +5,7 @@ PT:3/3
 K:Partner:Silvar, Devourer of the Free:Silvar
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you attacked this turn, create a 1/1 white Human Soldier creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_human_soldier | TokenOwner$ You
-DeckHints:Name$Silvar, Devourer of the Free
-DeckHas:Ability$Token
 SVar:RaidTest:Count$AttackersDeclared
+DeckHas:Ability$Token
+DeckHints:Name$Silvar, Devourer of the Free
 Oracle:Partner with Silvar, Devourer of the Free (When this creature enters, target player may put Silvar into their hand from their library, then shuffle.)\nAt the beginning of your end step, if you attacked this turn, create a 1/1 white Human Soldier creature token.

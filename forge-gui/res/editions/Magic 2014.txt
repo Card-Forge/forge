@@ -173,7 +173,7 @@ ScryfallCode=M14
 159 C Thunder Strike @Wayne Reynolds
 160 U Volcanic Geyser @Clint Cearley
 161 C Wild Guess @Lucas Graciano
-162 R Wild Ricochet @Dan Scott
+162 R Wild Ricochet @Dan Murayama Scott
 163 U Young Pyromancer @Cynthia Sheppard
 164 C Advocate of the Beast @Jesper Ejsing
 165 U Bramblecrush @Drew Baker
@@ -198,7 +198,7 @@ ScryfallCode=M14
 184 U Manaweft Sliver @Trevor Claxton
 185 R Megantic Sliver @Ryan Barger
 186 C Naturalize @Tim Hildebrandt
-187 R Oath of the Ancient Wood @Dan Scott
+187 R Oath of the Ancient Wood @Dan Murayama Scott
 188 C Plummet @Pete Venters
 189 C Predatory Sliver @Mathias Kollros
 190 M Primeval Bounty @Christine Choi

@@ -56,7 +56,7 @@ ScryfallCode=ZNR
 40 U Skyclave Cleric @Johannes Voss
 41 R Squad Commander @Ekaterina Burmak
 42 C Smite the Monstrous @Izzy
-43 C Tazeem Raptor @Dan Scott
+43 C Tazeem Raptor @Dan Murayama Scott
 44 M Tazri, Beacon of Unity @Chris Rahn
 45 C Anticognition @Igor Kieryluk
 46 U Beyeen Veil @YW Tang
@@ -177,7 +177,7 @@ ScryfallCode=ZNR
 161 M Shatterskull Smashing @Adam Paquette
 162 C Sizzling Barrage @Johann Bodin
 163 U Skyclave Geopede @Filip Burburan
-164 C Sneaking Guide @Dan Scott
+164 C Sneaking Guide @Dan Murayama Scott
 165 U Song-Mad Treachery @Zoltan Boros
 166 U Spikefield Hazard @Tomasz Jedruszek
 167 C Spitfire Lagac @Antonio José Manzanedo
@@ -217,7 +217,7 @@ ScryfallCode=ZNR
 201 U Roiling Regrowth @Jonas De Ro
 202 C Scale the Heights @Cristi Balanescu
 203 R Scute Swarm @Alex Konstad
-204 U Skyclave Pick-Axe @Dan Scott
+204 U Skyclave Pick-Axe @Dan Murayama Scott
 205 U Springmantle Cleric @Cristi Balanescu
 206 C Strength of Solidarity @Svetlin Velinov
 207 R Swarm Shambler @Nicholas Gregory

@@ -7,6 +7,6 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X
 A:AB$ GainLife | Cost$ 2 Sac<1/Creature.Other/another creature> | PrecostDesc$ Summary Execution — | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
 SVar:DBDraw:DB$ Draw
 SVar:X:Count$Valid Creature.attacking+Other
-DeckHas:Ability$Sacrifice|LifeGain
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice|LifeGain
 Oracle:Leading from the Front — Whenever Commissar Severina Raine attacks, each opponent loses X life, where X is the number of other attacking creatures.\nSummary Execution — {2}, Sacrifice another creature: You gain 2 life and draw a card.

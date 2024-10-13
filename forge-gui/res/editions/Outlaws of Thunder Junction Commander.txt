@@ -107,7 +107,7 @@ ScryfallCode=OTC
 99 R Haughty Djinn @Mike Jordana
 100 R Midnight Clock @Alexander Forssberg
 101 M Mind's Dilation @Iain McCaig
-102 U Murmuring Mystic @Mark Winters
+102 C Murmuring Mystic @Mark Winters
 103 R Octavia, Living Thesis @Simon Dominic
 104 C Opt @Dan Murayama Scott
 105 C Ponder @Dan Murayama Scott
@@ -174,7 +174,7 @@ ScryfallCode=OTC
 166 M Finale of Promise @Jaime Jones
 167 U Glittering Stockpile @Brock Grossman
 168 R Grenzo, Havoc Raiser @Svetlin Velinov
-169 C Guttersnipe @Andrey Kuzinskiy
+169 U Guttersnipe @Andrey Kuzinskiy
 170 U Humble Defector @Slawomir Maniak
 171 C Impulsive Pilferer @Nicholas Gregory
 172 R Laurine, the Diversion @Andrey Kuzinskiy
@@ -266,7 +266,7 @@ ScryfallCode=OTC
 258 R Idol of Oblivion @Piotr Dura
 259 C Izzet Signet @Raoul Vitale
 260 U Lightning Greaves @Jeremy Jarvis
-261 C Orzhov Signet @Martina Pilcerova
+261 U Orzhov Signet @Martina Pilcerova
 262 R Perennial Behemoth @Wayne Reynolds
 263 U Perpetual Timepiece @Cliff Childs
 264 U Prismatic Lens @Alan Pollack
@@ -293,7 +293,7 @@ ScryfallCode=OTC
 285 C Desert of the Indomitable @James Paick
 286 C Desert of the True @Jung Park
 287 R Desolate Mire @Rockey Chen
-288 C Dimir Aqueduct @John Avon
+288 U Dimir Aqueduct @John Avon
 289 R Dragonskull Summit @Jon Foster
 290 R Drowned Catacomb @Jung Park
 291 U Dunes of the Dead @E. M. Gist

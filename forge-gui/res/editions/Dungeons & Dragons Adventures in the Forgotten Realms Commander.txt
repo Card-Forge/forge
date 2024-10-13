@@ -19,7 +19,7 @@ ScryfallCode=AFC
 11 R Robe of Stars @Olena Richards
 12 R Thorough Investigation @Aaron J. Riley
 13 R Valiant Endeavor @Antonio José Manzanedo
-14 R Arcane Endeavor @Justyna Gil
+14 R Arcane Endeavor @Justyna Dura
 15 R Diviner's Portent @Lie Setiawan
 16 R Minn, Wily Illusionist @Dmitry Burmak
 17 R Netherese Puzzle-Ward @Ralph Horsley
@@ -142,7 +142,7 @@ ScryfallCode=AFC
 134 R Opportunistic Dragon @Chris Rahn
 135 R Outpost Siege @Daarken
 136 C Rile @Igor Kieryluk
-137 R Scourge of Valkas @Lucas Graciano
+137 M Scourge of Valkas @Lucas Graciano
 138 U Shiny Impetus @Svetlin Velinov
 139 R Shivan Hellkite @Kev Walker
 140 R Skyline Despot @Lucas Graciano
@@ -177,7 +177,7 @@ ScryfallCode=AFC
 169 C Return to Nature @Alayna Danner
 170 R Rishkar's Expertise @Magali Villeneuve
 171 R Shamanic Revelation @Cynthia Sheppard
-172 U Utopia Sprawl @Ron Spears
+172 C Utopia Sprawl @Ron Spears
 173 R Verdant Embrace @Stephen Tappin
 174 C Wild Growth @Tony Szczudlo
 175 M Ashen Rider @Chris Rahn
@@ -187,7 +187,7 @@ ScryfallCode=AFC
 179 R Bedevil @Seb McKinnon
 180 U Behemoth Sledge @Steve Prescott
 181 U Bituminous Blast @Raymond Swanland
-182 U Cloudblazer @Dan Scott
+182 U Cloudblazer @Dan Murayama Scott
 183 R Cold-Eyed Selkie @Jaime Jones
 184 U Despark @Slawomir Maniak
 185 R Fleecemane Lion @Slawomir Maniak
@@ -202,7 +202,7 @@ ScryfallCode=AFC
 194 R Theater of Horrors @Daarken
 195 R Utter End @Mark Winters
 196 U Vanish into Memory @Rebekah Lynn
-197 C Arcane Signet @Dan Scott
+197 C Arcane Signet @Dan Murayama Scott
 198 R Argentum Armor @Matt Cavotta
 199 R Basilisk Collar @Howard Lyon
 200 U Burnished Hart @Yeong-Hao Han
@@ -212,7 +212,7 @@ ScryfallCode=AFC
 204 R Dragon's Hoard @Adam Paquette
 205 C Explorer's Scope @Vincent Proce
 206 U Fellwar Stone @John Avon
-207 U Gruul Signet @Efrem Palacios
+207 C Gruul Signet @Efrem Palacios
 208 U Heirloom Blade @Carmen Sinek
 209 R Masterwork of Ingenuity @Ulrich Brunin
 210 U Meteor Golem @Lake Hurwitz
@@ -272,7 +272,7 @@ ScryfallCode=AFC
 264 R Sungrass Prairie @Alayna Danner
 265 R Sunken Hollow @Adam Paquette
 266 U Tainted Peak @Tony Szczudlo
-267 C Terramorphic Expanse @Dan Scott
+267 C Terramorphic Expanse @Dan Murayama Scott
 268 C Thriving Grove @Ravenna Tran
 269 C Thriving Heath @Alayna Danner
 270 C Thriving Isle @Jonas De Ro
@@ -288,7 +288,7 @@ ScryfallCode=AFC
 280 R Robe of Stars @Olena Richards
 281 R Thorough Investigation @Aaron J. Riley
 282 R Valiant Endeavor @Antonio José Manzanedo
-283 R Arcane Endeavor @Justyna Gil
+283 R Arcane Endeavor @Justyna Dura
 284 R Diviner's Portent @Lie Setiawan
 285 R Minn, Wily Illusionist @Dmitry Burmak
 286 R Netherese Puzzle-Ward @Ralph Horsley
@@ -326,7 +326,7 @@ ScryfallCode=AFC
 318 R Hurl Through Hell @Olena Richards
 319 M Karazikar, the Eye Tyrant @Jason A. Engle
 320 M Klauth, Unrivaled Ancient @Andrew Mar
-321 C Klauth's Will @Olivier Bernard
+321 R Klauth's Will @Olivier Bernard
 322 R Midnight Pathlighter @PINDURSKI
 323 M Nihiloor @Chris Rallis
 324 M Prosper, Tome-Bound @Yongjae Choi

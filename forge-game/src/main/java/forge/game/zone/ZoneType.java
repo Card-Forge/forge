@@ -3,7 +3,7 @@ package forge.game.zone;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -30,8 +30,9 @@ public enum ZoneType {
     ExtraHand(true, "lblHandZone"),
     None(true, "lblNoneZone");
 
-    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
-    public static final List<ZoneType> PART_OF_COMMAND_ZONE = Arrays.asList(Command, SchemeDeck, PlanarDeck, AttractionDeck, Junkyard);
+    public static final EnumSet<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = EnumSet.of(Battlefield, Graveyard, Exile, Command, Stack/*, Hand*/);
+    public static final EnumSet<ZoneType> PART_OF_COMMAND_ZONE = EnumSet.of(Command, SchemeDeck, PlanarDeck, AttractionDeck, Junkyard);
+    public static final EnumSet<ZoneType> DECK_ZONES = EnumSet.of(Library, SchemeDeck, PlanarDeck, AttractionDeck);
 
     private final boolean holdsHiddenInfo;
     private final String zoneName;
@@ -77,6 +78,14 @@ public enum ZoneType {
 
     public boolean isPartOfCommandZone() {
         return PART_OF_COMMAND_ZONE.contains(this);
+    }
+
+    /**
+     * Indicates that this zone behaves as a deck - an ordered pile of face down cards
+     * such as the Library or Planar Deck.
+     */
+    public boolean isDeck() {
+        return DECK_ZONES.contains(this);
     }
 
     public String getTranslatedName() {

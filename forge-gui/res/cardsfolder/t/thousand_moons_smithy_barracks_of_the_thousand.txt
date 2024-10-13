@@ -3,12 +3,12 @@ ManaCost:2 W W
 Types:Legendary Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a white Gnome Soldier artifact creature token with "This creature's power and toughness are each equal to the number of artifacts and/or creatures you control."
 SVar:TrigToken:DB$ Token | TokenScript$ w_x_x_a_gnome_soldier_total_artifacts_creatures
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your precombat main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform CARDNAME.
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTransform | TriggerDescription$ At the beginning of your first main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform CARDNAME.
 SVar:TrigTransform:AB$ SetState | Cost$ tapXType<5/Artifact;Creature/artifact or creature> | Defined$ Self | Mode$ Transform
 DeckHas:Ability$Token & Type$Gnome|Soldier
 DeckHints:Type$Artifact
 AlternateMode:DoubleFaced
-Oracle:When Thousand Moons Smithy enters, create a white Gnome Soldier artifact creature token with "This creature's power and toughness are each equal to the number of artifacts and/or creatures you control."\nAt the beginning of your precombat main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
+Oracle:When Thousand Moons Smithy enters, create a white Gnome Soldier artifact creature token with "This creature's power and toughness are each equal to the number of artifacts and/or creatures you control."\nAt the beginning of your first main phase, you may tap five untapped artifacts and/or creatures you control. If you do, transform Thousand Moons Smithy.
 
 ALTERNATE
 

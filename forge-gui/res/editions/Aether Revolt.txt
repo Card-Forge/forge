@@ -25,7 +25,7 @@ ScryfallCode=AER
 10 C Caught in the Brights @Kieran Yanner
 11 R Consulate Crackdown @Jonas De Ro
 12 C Conviction @John Stanko
-13 C Countless Gears Renegade @Dan Scott
+13 C Countless Gears Renegade @Dan Murayama Scott
 14 C Dawnfeather Eagle @Sidharth Chaturvedi
 15 U Deadeye Harpooner @Ryan Pancoast
 16 C Decommission @Josh Hass
@@ -84,7 +84,7 @@ ScryfallCode=AER
 69 C Renegade's Getaway @Ryan Yee
 70 C Resourceful Return @Titus Lunter
 71 R Secret Salvage @Tommy Arnold
-72 U Sly Requisitioner @Dan Scott
+72 U Sly Requisitioner @Dan Murayama Scott
 73 U Vengeful Rebel @Tomasz Jedruszek
 74 R Yahenni, Undying Partisan @Lius Lasahido
 75 R Yahenni's Expertise @Daarken
@@ -148,7 +148,7 @@ ScryfallCode=AER
 133 U Renegade Rallier @Kieran Yanner
 134 U Renegade Wheelsmith @Darek Zabrocki
 135 U Rogue Refiner @Victor Adame Minguez
-136 U Spire Patrol @Dan Scott
+136 U Spire Patrol @Dan Murayama Scott
 137 M Tezzeret the Schemer @Ryan Alexander Lee
 138 U Tezzeret's Touch @Chris Rallis
 139 U Weldfast Engineer @Sara Winters
@@ -197,7 +197,6 @@ ScryfallCode=AER
 182 C Watchful Automaton @Eric Deschamps
 183 C Welder Automaton @Victor Adame Minguez
 184 R Spire of Industry @John Avon
-
 
 [precon product]
 185 M Ajani, Valiant Protector @Anna Steinbauer

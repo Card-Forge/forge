@@ -258,6 +258,10 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
                 if (sa.hasParam("ForEach")) {
                     for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
+                        if (sa.hasParam("OptionalForEach") && !activator.getController().confirmAction(sa, null,
+                                Localizer.getInstance().getMessage("lblCopyPermanentConfirm") + " (" + p + ")", null)) {
+                            continue;
+                        }
                         Card proto = getProtoType(sa, c, controller);
                         proto.addRemembered(p);
                         tokenTable.put(controller, proto, numCopies);

@@ -1,8 +1,11 @@
 Name:Merry-Go-Round
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:5 6
 K:Visit:TrigPump
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.powerLE2+YouCtrl | KW$ Horsemanship | SpellDescription$ Creatures you control with power 2 or less gain horsemanship until end of turn.
 Oracle:Visit — Creatures you control with power 2 or less gain horsemanship until end of turn. (They can't be blocked except by creatures with horsemanship.)
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:5 6

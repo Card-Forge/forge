@@ -66,7 +66,7 @@ ScryfallCode=THB
 52 M Kiora Bests the Sea God @Victor Adame Minguez
 53 U Medomai's Prophecy @Seb McKinnon
 54 C Memory Drain @PINDURSKI
-55 R Nadir Kraken @Dan Scott
+55 R Nadir Kraken @Dan Murayama Scott
 56 C Naiad of Hidden Coves @Kieran Yanner
 57 C Nyxborn Seaguard @Simon Dominic
 58 C Omen of the Sea @Piotr Dura
@@ -195,7 +195,7 @@ ScryfallCode=THB
 181 R Nessian Boar @Zoltan Boros
 182 U Nessian Hornbeetle @Jason Felix
 183 U Nessian Wanderer @Matt Stewart
-184 C Nexus Wardens @Dan Scott
+184 C Nexus Wardens @Dan Murayama Scott
 185 M Nylea, Keen-Eyed @Chris Rahn
 186 C Nylea's Forerunner @Christopher Burdett
 187 C Nylea's Huntmaster @Winona Nelson
@@ -245,7 +245,7 @@ ScryfallCode=THB
 231 C Altar of the Pantheon @Jonas De Ro
 232 C Bronze Sword @Kev Walker
 233 U Entrancing Lyre @Yeong-Hao Han
-234 U Mirror Shield @Dan Scott
+234 U Mirror Shield @Dan Murayama Scott
 235 R Nyx Lotus @Raoul Vitale
 236 R Shadowspear @Yeong-Hao Han
 237 U Soul-Guide Lantern @Cliff Childs
@@ -326,7 +326,7 @@ ScryfallCode=THB
 302 R Shatter the Sky @Bayard Wu
 303 R Taranika, Akroan Veteran @Eric Deschamps
 304 R Ashiok's Erasure @Zezhou Chen
-305 R Nadir Kraken @Dan Scott
+305 R Nadir Kraken @Dan Murayama Scott
 306 R Protean Thaumaturge @Izzy
 307 R Thassa's Intervention @Zack Stella
 308 R Thassa's Oracle @Jesper Ejsing

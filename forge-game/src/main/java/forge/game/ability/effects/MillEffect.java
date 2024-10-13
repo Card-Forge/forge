@@ -18,11 +18,16 @@ import forge.util.TextUtil;
 import java.util.Map;
 
 public class MillEffect extends SpellAbilityEffect {
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
-        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa) : 1;
+
+        if (numCards <= 0) {
+            return;
+        }
 
         if (sa.hasParam("ForgetOtherRemembered")) {
             source.clearRemembered();

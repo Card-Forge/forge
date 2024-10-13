@@ -1,6 +1,6 @@
 Name:Wolf Token
 ManaCost:no cost
-PT:3/2
 Colors:red
 Types:Creature Wolf
+PT:3/2
 Oracle:

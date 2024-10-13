@@ -1,6 +1,6 @@
 Name:Hamster Token
 ManaCost:no cost
-Types:Creature Hamster
 Colors:red
+Types:Creature Hamster
 PT:1/1
 Oracle:

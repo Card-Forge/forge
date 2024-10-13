@@ -239,6 +239,10 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (!validPhases.contains(phaseHandler.getPhase())) {
                 return false;
             }
+            // add support for calculation if needed
+            if (hasParam("PhaseCount") && phaseHandler.getNumMain() + 1 != 2) {
+                return false;
+            }
         }
 
         if (hasParam("PlayerTurn")) {

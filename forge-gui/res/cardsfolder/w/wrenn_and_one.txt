@@ -10,4 +10,4 @@ A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True
 SVar:TrigCradle:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigMana | TriggerDescription$ At the beginning of your precombat main phase, add {G} for each creature you control.
 SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ X | Defined$ You
 SVar:X:Count$Valid Creature.YouCtrl
-Oracle:[+1]: Wrenn and One gains "{T}: Add {G}" until your next turn.\n[−1]: Create a 1/1 green Squirrel creature token.\n[−4]: You get an emblem with "At the beginning of your precombat main phase, add {G} for each creature you control."
+Oracle:[+1]: Wrenn and One gains "{T}: Add {G}" until your next turn.\n[-1]: Create a 1/1 green Squirrel creature token.\n[-4]: You get an emblem with "At the beginning of your precombat main phase, add {G} for each creature you control."

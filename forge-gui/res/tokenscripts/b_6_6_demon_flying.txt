@@ -1,0 +1,7 @@
+Name:Demon Token
+ManaCost:no cost
+Types:Creature Demon
+Colors:black
+PT:6/6
+K:Flying
+Oracle:Flying

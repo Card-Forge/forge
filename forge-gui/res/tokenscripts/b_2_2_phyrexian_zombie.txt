@@ -1,6 +1,6 @@
 Name:Phyrexian Zombie Token
 ManaCost:no cost
-Types:Creature Phyrexian Zombie
 Colors:black
+Types:Creature Phyrexian Zombie
 PT:2/2
 Oracle:

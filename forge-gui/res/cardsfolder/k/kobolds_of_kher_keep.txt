@@ -1,7 +1,7 @@
 Name:Kobolds of Kher Keep
 ManaCost:0
+Colors:red
 Types:Creature Kobold
 PT:0/1
-Colors:red
 DeckHints:Name$Rohgahh of Kher Keep
 Oracle:

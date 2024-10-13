@@ -1,6 +1,6 @@
 Name:Ox Token
 ManaCost:no cost
-Types:Creature Ox
 Colors:white
+Types:Creature Ox
 PT:2/2
 Oracle:

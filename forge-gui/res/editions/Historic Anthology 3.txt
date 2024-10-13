@@ -29,7 +29,7 @@ ScryfallCode=HA3
 21 C Krosan Tusker @Kev Walker
 22 U Roar of the Wurm @Kev Walker
 23 R Mirari's Wake @David Martin
-24 M Akroma's Memorial @Dan Scott
+24 M Akroma's Memorial @Dan Murayama Scott
 25 R Ratchet Bomb @Austin Hsu
 26 U Ancient Ziggurat @John Avon
 27 M Maze's End @Cliff Childs

@@ -5,7 +5,7 @@ PT:2/2
 K:CARDNAME can't block.
 T:Mode$ CommitCrime | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigChange | TriggerDescription$ Whenever you commit a crime, you may pay {B}. If you do, return CARDNAME from your graveyard to the battlefield. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)
 SVar:TrigChange:AB$ ChangeZone | Cost$ B | Origin$ Graveyard | Destination$ Battlefield
-DeckHas:Ability$Graveyard
 SVar:DiscardMe:2
 SVar:SacMe:2
+DeckHas:Ability$Graveyard
 Oracle:Forsaken Miner can't block.\nWhenever you commit a crime, you may pay {B}. If you do, return Forsaken Miner from your graveyard to the battlefield. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)

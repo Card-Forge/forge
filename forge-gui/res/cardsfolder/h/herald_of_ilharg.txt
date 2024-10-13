@@ -7,6 +7,6 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | ConditionCheckSVar$ TriggeredStackInstance$CardManaCostLKI | ConditionSVarCompare$ GE5 | Defined$ Player.Opponent | NumDmg$ X
 SVar:X:Count$CardCounters.ALL
-DeckNeeds:Type$Creature
 DeckHas:Ability$Counters
+DeckNeeds:Type$Creature
 Oracle:Trample\nWhenever you cast a creature spell, put two +1/+1 counters on Herald of Ilharg. If that spell has mana value 5 or greater, Herald of Ilharg deals damage equal to the number of counters on it to each opponent.

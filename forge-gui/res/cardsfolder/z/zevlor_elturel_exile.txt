@@ -6,6 +6,6 @@ K:Haste
 A:AB$ Effect | Cost$ 2 T | Triggers$ SpellCast | SpellDescription$ When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.
 SVar:SpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | IsSingleTarget$ True | TargetsValid$ Opponent,Permanent.OppCtrl+inZoneBattlefield | Execute$ TrigCopy | OneOff$ True | TriggerZones$ Battlefield | TriggerDescription$ When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.
 SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ You | DefinedTarget$ OppNonTriggeredSpellAbilityTargetsOrController
-DeckNeeds:Type$Instant|Sorcery
 AI:RemoveDeck:Random
+DeckNeeds:Type$Instant|Sorcery
 Oracle:Haste\n{2}, {T}: When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.

@@ -301,7 +301,7 @@ Replace=.042F fromSheet("MH3 alternate frame")
 251 M Grist, Voracious Larva @Chris Rahn
 252 U Bloodsoaked Insight @David Álvarez
 253 U Drowner of Truth @Nicholas Gregory
-254 U Glasswing Grace @Craig Elliott
+254 U Glasswing Grace @Craig Elliott & Maxime Minard
 255 U Legion Leadership @Ryan Valle
 256 U Revitalizing Repast @Raoul Vitale
 257 U Rush of Inspiration @Jorge Jacinto

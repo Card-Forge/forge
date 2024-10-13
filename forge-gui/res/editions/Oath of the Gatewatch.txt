@@ -47,7 +47,7 @@ ScryfallCode=OGW
 32 U Relief Captain @Anastasia Ovchinnikova
 33 C Searing Light @Marco Nelor
 34 C Shoulder to Shoulder @Chris Rallis
-35 C Spawnbinder Mage @Dan Scott
+35 C Spawnbinder Mage @Dan Murayama Scott
 36 U Steppe Glider @John Severin Brassell
 37 R Stone Haven Outfitter @Jason Rainville
 38 U Stoneforge Acolyte @Chris Rallis
@@ -91,7 +91,7 @@ ScryfallCode=OGW
 76 U Reaver Drone @Chris Rallis
 77 R Sifter of Skulls @Slawomir Maniak
 78 C Sky Scourer @Winona Nelson
-79 C Slaughter Drone @Dan Scott
+79 C Slaughter Drone @Dan Murayama Scott
 80 C Unnatural Endurance @Mathias Kollros
 81 U Visions of Brutality @Jama Jurabaev
 82 C Witness the End @Igor Kieryluk
@@ -158,7 +158,7 @@ ScryfallCode=OGW
 143 U Seed Guardian @Vincent Proce
 144 R Sylvan Advocate @Volkan Baǵa
 145 C Tajuru Pathwarden @Victor Adame Minguez
-146 C Vines of the Recluse @Dan Scott
+146 C Vines of the Recluse @Dan Murayama Scott
 147 R Zendikar Resurgent @Chris Rallis
 148 U Flayer Drone @Lius Lasahido
 149 U Mindmelter @Jason Felix

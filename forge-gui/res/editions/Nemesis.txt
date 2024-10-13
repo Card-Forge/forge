@@ -13,149 +13,149 @@ Foil=OldStyle
 FoilAlwaysInCommonSlot=False
 
 [cards]
-27 R Aether Barrier @David Martin
-26 C Accumulated Knowledge @Randy Gallegos
-28 C Air Bladder @Donato Giancola
-76 U Ancient Hydra @Scott M. Fischer
 1 U Angelic Favor @Paolo Parente
-101 U Animate Land @Rebecca Guay
-77 U Arc Mage @Terese Nielsen
-51 R Ascendant Evincar @Mark Zug
 2 R Avenger en-Dal @Ron Spencer
-52 U Battlefield Percher @Edward P. Beard, Jr.
-126 U Belbe's Armor @D. Alexander Gregory
-53 C Belbe's Percher @Edward P. Beard, Jr.
-127 R Belbe's Portal @Mark Tedin
-102 C Blastoderm @Eric Peterson
 3 R Blinding Angel @Todd Lockwood
-78 C Bola Warrior @Adam Rex
-54 U Carrion Wall @Tony Szczudlo
 4 U Chieftain en-Dal @Dany Orizio
-29 C Cloudskate @Carl Critchlow
-103 U Coiling Woodworm @David Martin
-128 R Complex Automaton @Dana Knutson
-55 U Dark Triumph @Adam Rex
-30 C Daze @Matthew D. Wilson
-56 R Death Pit Offering @Pete Venters
 5 C Defender en-Vec @Bradley Williams
 6 C Defiant Falcon @Heather Hudson
 7 U Defiant Vanguard @Pete Venters
-57 R Divining Witch @Donato Giancola
-31 U Dominate @Scott Hampton
-79 C Downhill Charge @Greg Hildebrandt & Tim Hildebrandt
-32 U Ensnare @Gao Yan
-129 R Eye of Yawgmoth @DiTerlizzi
 8 C Fanatical Devotion @Massimilano Frezzato
+9 C Lashknife @Hannibal King
+10 C Lawbringer @Matt Cavotta
+11 C Lightbringer @Paolo Parente
+12 R Lin Sivvi, Defiant Hero @rk post
+13 C Netter en-Dal @Matt Cavotta
+14 U Noble Stand @Greg Hildebrandt & Tim Hildebrandt
+15 C Off Balance @Jeff Miracola
+16 R Oracle's Attendants @Dany Orizio
+17 R Parallax Wave @Greg Staples
+18 C Seal of Cleansing @Christopher Moeller
+19 C Silkenfist Fighter @Mark Brill
+20 U Silkenfist Order @Greg Hildebrandt & Tim Hildebrandt
+21 U Sivvi's Ruse @Kev Walker
+22 R Sivvi's Valor @Jeff Miracola
+23 R Spiritual Asylum @Matt Cavotta
+24 C Topple @Daren Bader
+25 U Voice of Truth @rk post
+26 C Accumulated Knowledge @Randy Gallegos
+27 R Aether Barrier @David Martin
+28 C Air Bladder @Donato Giancola
+29 C Cloudskate @Carl Critchlow
+30 C Daze @Matthew D. Wilson
+31 U Dominate @Scott Hampton
+32 U Ensnare @Gao Yan
+33 C Infiltrate @Nelson DeCastro
+34 U Jolting Merfolk @Glen Angus
+35 C Oraxid @Dave Dorman
+36 R Pale Moon @Pete Venters
+37 R Parallax Tide @Carl Critchlow
+38 R Rising Waters @Scott M. Fischer
+39 C Rootwater Commando @Mark Tedin
+40 R Rootwater Thief @Ron Spears
+41 R Seahunter @Heather Hudson
+42 C Seal of Removal @Christopher Moeller
+43 R Sliptide Serpent @Daren Bader
+44 C Sneaky Homunculus @Scott M. Fischer
+45 U Stronghold Biologist @Terese Nielsen
+46 U Stronghold Machinist @Terese Nielsen
+47 U Stronghold Zeppelin @Arnie Swekel
+48 U Submerge @Mark Romanoski
+49 C Trickster Mage @Alan Rabinowitz
+50 C Wandering Eye @Sam Wood
+51 R Ascendant Evincar @Mark Zug
+52 U Battlefield Percher @Edward P. Beard, Jr.
+53 C Belbe's Percher @Edward P. Beard, Jr.
+54 U Carrion Wall @Tony Szczudlo
+55 U Dark Triumph @Adam Rex
+56 R Death Pit Offering @Pete Venters
+57 R Divining Witch @Donato Giancola
+58 U Massacre @Pete Venters
+59 U Mind Slash @Adam Rex
+60 C Mind Swords @Daren Bader
+61 R Murderous Betrayal @Randy Gallegos
+62 C Parallax Dementia @Eric Peterson
+63 R Parallax Nexus @Greg Staples
+64 C Phyrexian Driver @Chippy
+65 U Phyrexian Prowler @Mark Zug
+66 C Plague Witch @Nelson DeCastro
+67 R Rathi Assassin @Dana Knutson
+68 U Rathi Fiend @Mark Tedin
+69 C Rathi Intimidator @Mike Ploog
+70 C Seal of Doom @Christopher Moeller
+71 C Spineless Thug @Matthew D. Wilson
+72 C Spiteful Bully @Chippy
+73 C Stronghold Discipline @Li Tie
+74 C Vicious Hunger @Massimilano Frezzato
+75 R Volrath the Fallen @Kev Walker
+76 U Ancient Hydra @Scott M. Fischer
+77 U Arc Mage @Terese Nielsen
+78 C Bola Warrior @Adam Rex
+79 C Downhill Charge @Greg Hildebrandt & Tim Hildebrandt
 80 C Flame Rift @Ben Thompson
-130 U Flint Golem @Lou Harrison
-131 U Flowstone Armor @Paolo Parente
 81 C Flowstone Crusher @Ben Thompson
 82 R Flowstone Overseer @Andrew Goldhawk
 83 R Flowstone Slide @Chippy
 84 C Flowstone Strike @Mike Ploog
 85 U Flowstone Surge @Scott Hampton
-132 U Flowstone Thopter @Mike Ploog
 86 C Flowstone Wall @Jeff Miracola
-104 C Fog Patch @Rebecca Guay
-105 C Harvest Mage @Dan Frazier
-33 C Infiltrate @Nelson DeCastro
-34 U Jolting Merfolk @Glen Angus
-133 R Kill Switch @Brian Snõddy
-141 R Kor Haven @Darrell Riche
 87 C Laccolith Grunt @Arnie Swekel
 88 C Laccolith Rig @Massimilano Frezzato
 89 R Laccolith Titan @Tony Szczudlo
 90 U Laccolith Warrior @Mark Zug
 91 C Laccolith Whelp @Dave Dorman
-9 C Lashknife @Hannibal King
-10 C Lawbringer @Matt Cavotta
-11 C Lightbringer @Paolo Parente
-12 R Lin Sivvi, Defiant Hero @rk post
 92 R Mana Cache @rk post
-58 U Massacre @Pete Venters
-59 U Mind Slash @Adam Rex
-60 C Mind Swords @Daren Bader
 93 U Mogg Alarm @Dave Dorman
 94 U Mogg Salvage @Paolo Parente
 95 C Mogg Toady @Mike Ploog
 96 R Moggcatcher @Pete Venters
+97 U Rupture @Gao Yan
+98 C Seal of Fire @Christopher Moeller
+99 R Shrieking Mogg @Dan Frazier
+100 R Stronghold Gambit @Greg Hildebrandt & Tim Hildebrandt
+101 U Animate Land @Rebecca Guay
+102 C Blastoderm @Eric Peterson
+103 U Coiling Woodworm @David Martin
+104 C Fog Patch @Rebecca Guay
+105 C Harvest Mage @Dan Frazier
 106 C Mossdog @Matt Cavotta
-61 R Murderous Betrayal @Randy Gallegos
 107 U Nesting Wurm @rk post
-13 C Netter en-Dal @Matt Cavotta
-14 U Noble Stand @Greg Hildebrandt & Tim Hildebrandt
-15 C Off Balance @Jeff Miracola
-16 R Oracle's Attendants @Dany Orizio
-35 C Oraxid @Dave Dorman
 108 R Overlaid Terrain @DiTerlizzi
 109 R Pack Hunt @Sam Wood
-36 R Pale Moon @Pete Venters
-62 C Parallax Dementia @Eric Peterson
-134 R Parallax Inhibitor @Greg Staples
-63 R Parallax Nexus @Greg Staples
-37 R Parallax Tide @Carl Critchlow
-17 R Parallax Wave @Greg Staples
-64 C Phyrexian Driver @Chippy
-65 U Phyrexian Prowler @Mark Zug
-66 C Plague Witch @Nelson DeCastro
-135 R Predator, Flagship @Mark Tedin
-136 U Rackling @D. Alexander Gregory
-142 R Rath's Edge @Ron Spencer
-67 R Rathi Assassin @Dana Knutson
-68 U Rathi Fiend @Mark Tedin
-69 C Rathi Intimidator @Mike Ploog
 110 U Refreshing Rain @Don Hazeltine
-137 U Rejuvenation Chamber @Alan Pollack
 111 C Reverent Silence @Don Hazeltine
 112 R Rhox @Carl Critchlow
-38 R Rising Waters @Scott M. Fischer
-39 C Rootwater Commando @Mark Tedin
-40 R Rootwater Thief @Ron Spears
-97 U Rupture @Gao Yan
-138 U Rusting Golem @Greg Staples
 113 R Saproling Burst @Carl Critchlow
 114 R Saproling Cluster @Matt Cavotta
-41 R Seahunter @Heather Hudson
-18 C Seal of Cleansing @Christopher Moeller
-70 C Seal of Doom @Christopher Moeller
-98 C Seal of Fire @Christopher Moeller
-42 C Seal of Removal @Christopher Moeller
 115 C Seal of Strength @Christopher Moeller
-99 R Shrieking Mogg @Dan Frazier
-19 C Silkenfist Fighter @Mark Brill
-20 U Silkenfist Order @Greg Hildebrandt & Tim Hildebrandt
-21 U Sivvi's Ruse @Kev Walker
-22 R Sivvi's Valor @Jeff Miracola
 116 R Skyshroud Behemoth @Eric Peterson
 117 C Skyshroud Claim @Mark Romanoski
 118 C Skyshroud Cutter @Tony Szczudlo
 119 R Skyshroud Poacher @Ron Spencer
 120 C Skyshroud Ridgeback @Carl Critchlow
 121 C Skyshroud Sentinel @Randy Gallegos
-43 R Sliptide Serpent @Daren Bader
-44 C Sneaky Homunculus @Scott M. Fischer
-71 C Spineless Thug @Matthew D. Wilson
-23 R Spiritual Asylum @Matt Cavotta
-72 C Spiteful Bully @Chippy
 122 U Stampede Driver @Ron Spears
-45 U Stronghold Biologist @Terese Nielsen
-73 C Stronghold Discipline @Li Tie
-100 R Stronghold Gambit @Greg Hildebrandt & Tim Hildebrandt
-46 U Stronghold Machinist @Terese Nielsen
-47 U Stronghold Zeppelin @Arnie Swekel
-48 U Submerge @Mark Romanoski
-139 R Tangle Wire @Glen Angus
-143 U Terrain Generator @Alan Pollack
-24 C Topple @Daren Bader
 123 C Treetop Bracers @Heather Hudson
-49 C Trickster Mage @Alan Rabinowitz
-74 C Vicious Hunger @Massimilano Frezzato
-140 U Viseling @Kev Walker
-25 U Voice of Truth @rk post
-75 R Volrath the Fallen @Kev Walker
-50 C Wandering Eye @Sam Wood
 124 U Wild Mammoth @Bradley Williams
 125 U Woodripper @Alan Pollack
+126 U Belbe's Armor @D. Alexander Gregory
+127 R Belbe's Portal @Mark Tedin
+128 R Complex Automaton @Dana Knutson
+129 R Eye of Yawgmoth @DiTerlizzi
+130 U Flint Golem @Lou Harrison
+131 U Flowstone Armor @Paolo Parente
+132 U Flowstone Thopter @Mike Ploog
+133 R Kill Switch @Brian Snõddy
+134 R Parallax Inhibitor @Greg Staples
+135 R Predator, Flagship @Mark Tedin
+136 U Rackling @D. Alexander Gregory
+137 U Rejuvenation Chamber @Alan Pollack
+138 U Rusting Golem @Greg Staples
+139 R Tangle Wire @Glen Angus
+140 U Viseling @Kev Walker
+141 R Kor Haven @Darrell Riche
+142 R Rath's Edge @Ron Spencer
+143 U Terrain Generator @Alan Pollack
 
 [tokens]
 w_4_4_angel_flying

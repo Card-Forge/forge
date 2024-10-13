@@ -10,6 +10,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_junk_sac_exileplay
 SVar:X:Count$Valid Equipment.Attached,Aura.Attached
 SVar:EnchantMe:Multiple
 SVar:EquipMe:Multiple
-DeckNeeds:Type$Aura|Equipment
 DeckHas:Ability$Token & Type$Artifact|Junk
+DeckNeeds:Type$Aura|Equipment
 Oracle:Trample\nGunner Conscript gets +1/+1 for each Aura and Equipment attached to it.\nWhen Gunner Conscript dies, if it was enchanted, create a Junk token.\nWhen Gunner Conscript dies, if it was equipped, create a Junk token.

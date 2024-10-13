@@ -173,6 +173,13 @@ public abstract class PlayerController {
     public abstract ImmutablePair<CardCollection, CardCollection> arrangeForSurveil(CardCollection topN);
 
     public abstract boolean willPutCardOnTop(Card c);
+
+    /**
+     * Prompts the player to choose the order for cards being moved into a zone.
+     * The cards will be returned in the order that they should be moved, one at a time,
+     * to the given zone and position. Be aware that when moving cards to the top of a
+     * deck, this will be the reverse of the order they will ultimately end up in.
+     */
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
     /** p = target player, validCards - possible discards, min cards to discard */
@@ -236,6 +243,8 @@ public abstract class PlayerController {
     public abstract byte chooseColorAllowColorless(String message, Card c, ColorSet colors);
 
     public abstract ICardFace chooseSingleCardFace(SpellAbility sa, String message, Predicate<ICardFace> cpp, String name);
+    public abstract ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message);
+    public abstract CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params);
     public abstract List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options);
 
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params);

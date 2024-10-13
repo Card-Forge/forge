@@ -32,7 +32,7 @@ A23 U Fact or Fiction @Terese Nielsen
 A24 U Hinder @Wayne Reynolds
 A25 C Looter il-Kor @Mike Dringenberg
 A26 C Man-o'-War @Jon J Muth
-A27 C Merfolk Looter @Ron Spencer
+A27 U Merfolk Looter @Ron Spencer
 A28 C Mulldrifter @Eric Fortune
 A29 U Overwhelming Intellect @Alex Horley-Orlandelli
 A30 U Raven Familiar @Edward P. Beard, Jr.
@@ -54,7 +54,7 @@ A45 U Nezumi Graverobber @Jim Nelson
 A46 R Phyrexian Arena @Pete Venters
 A47 C Reaping the Graves @Ron Spencer
 A48 U Shriekmaw @Steve Prescott
-A49 U Stinkweed Imp @Edward P. Beard, Jr.
+A49 C Stinkweed Imp @Edward P. Beard, Jr.
 A50 C Terror @Ron Spencer
 A51 C Twisted Abomination @Daren Bader
 A52 C Anarchist @Brom
@@ -144,24 +144,24 @@ A135 U Savage Lands @Vance Kovacs
 A136 U Seaside Citadel @Volkan Baǵa
 A137 U Selesnya Sanctuary @John Avon
 A138 U Simic Growth Chamber @John Avon
-A139 C Terramorphic Expanse @Dan Scott
+A139 C Terramorphic Expanse @Dan Murayama Scott
 A140 C Tranquil Thicket @Heather Hudson
 A141 U Treva's Ruins @Jerry Tiritilli
-B34 L Plains @John Avon
-B35 L Plains @Ryan Pancoast
-B36 L Plains @D. J. Cleland-Hura
 A145 L Island @Ku Xueming
 A146 L Island @Ku Xueming
 A147 L Island @Ku Xueming
 A148 L Swamp @Wang Chuxiong
 A149 L Swamp @Wang Chuxiong
 A150 L Swamp @Wang Chuxiong
-B38 L Mountain @Nils Hamm
-B39 L Mountain @Karl Kopinski
-B40 L Mountain @Rob Alexander
 A154 L Forest @Ji Yong
 A155 L Forest @Ji Yong
 A156 L Forest @Ji Yong
+B34 L Plains @John Avon
+B35 L Plains @Ryan Pancoast
+B36 L Plains @D. J. Cleland-Hura
+B38 L Mountain @Nils Hamm
+B39 L Mountain @Karl Kopinski
+B40 L Mountain @Rob Alexander
 
 [tokens]
 w_4_4_angel_flying

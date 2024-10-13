@@ -647,6 +647,12 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
+            if(source == null || !source.hasParam("LibraryPosition")
+                    || AbilityUtils.calculateAmount(source.getHostCard(), source.getParam("LibraryPosition"), source) >= 0) {
+                //Cards going to the top of a deck are returned in reverse order.
+                Collections.reverse(reordered);
+            }
+
             assert(reordered.size() == cards.size());
 
             return reordered;
@@ -1522,6 +1528,24 @@ public class PlayerControllerAi extends PlayerController {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseCardName(player, sa, faces);
+    }
+
+    @Override
+    public ICardFace chooseSingleCardFace(SpellAbility sa, List<ICardFace> faces, String message) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardFace(player, sa, faces);
+    }
+
+    @Override
+    public CardState chooseSingleCardState(SpellAbility sa, List<CardState> states, String message, Map<String, Object> params) {
+        ApiType api = sa.getApi();
+        if (null == api) {
+            throw new InvalidParameterException("SA is not api-based, this is not supported yet");
+        }
+        return SpellApiToAi.Converter.get(api).chooseCardState(player, sa, states, params);
     }
 
     @Override

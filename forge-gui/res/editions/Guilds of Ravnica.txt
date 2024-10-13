@@ -108,8 +108,8 @@ ScryfallCode=GRN
 93 U Book Devourer @Kev Walker
 94 C Command the Storm @Jason Rainville
 95 C Cosmotronic Wave @Titus Lunter
-96 C Direct Current @Dan Scott
-97 U Electrostatic Field @Dan Scott
+96 C Direct Current @Dan Murayama Scott
+97 U Electrostatic Field @Dan Murayama Scott
 98 R Erratic Cyclops @Milivoj Ćeran
 99 R Experimental Frenzy @Simon Dominic
 100 C Fearless Halberdier @Suzanne Helmigh
@@ -234,7 +234,7 @@ ScryfallCode=GRN
 219 C Vernadi Shieldmate @Matt Stewart
 220 C Whisper Agent @Deruchenko Alexander
 221 R Assure // Assemble @Jason A. Engle
-222 R Connive // Concoct @Dan Scott
+222 R Connive // Concoct @Dan Murayama Scott
 223 U Discovery // Dispersal @Mark Behm
 224 R Expansion // Explosion @Deruchenko Alexander
 225 R Find // Finality @Tomasz Jedruszek

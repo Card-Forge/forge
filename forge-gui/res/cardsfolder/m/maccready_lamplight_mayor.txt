@@ -7,6 +7,6 @@ SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Skulk
 T:Mode$ Attacks | ValidCard$ Creature.powerGE4 | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature with power 4 or greater attacks you, its controller loses 2 life and you gain 2 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredAttackerController | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
-DeckHas:Ability$LifeGain
 SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
 Oracle:Whenever a creature you control with power 2 or less attacks, it gains skulk until end of turn. (It can't be blocked by creatures with greater power.)\nWhenever a creature with power 4 or greater attacks you, its controller loses 2 life and you gain 2 life.

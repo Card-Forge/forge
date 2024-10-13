@@ -13,7 +13,7 @@ ScryfallCode=F15
 5 R Abzan Beastmaster @Scott Murphy
 6 R Frost Walker @Peter Mohrbacher
 7 R Path to Exile @Raf Sarmento
-8 R Serum Visions @Dan Scott
+8 R Serum Visions @Dan Murayama Scott
 9 R Orator of Ojutai @David Gaillet
 10 R Ultimate Price @Scott Murphy
 11 R Roast @Zoltan Boros

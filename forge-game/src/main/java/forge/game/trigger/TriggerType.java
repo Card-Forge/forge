@@ -144,6 +144,7 @@ public enum TriggerType {
     TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
     Unattach(TriggerUnattach.class),
+    UnlockDoor(TriggerUnlockDoor.class),
     UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),
     VisitAttraction(TriggerVisitAttraction.class),

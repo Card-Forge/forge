@@ -5,6 +5,6 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters, if an opponent lost life this turn, each opponent loses 2 life and you gain 2 life.
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-DeckHas:Ability$LifeGain
 SVar:X:Count$LifeOppsLostThisTurn
+DeckHas:Ability$LifeGain
 Oracle:When Arrogant Outlaw enters, if an opponent lost life this turn, each opponent loses 2 life and you gain 2 life.

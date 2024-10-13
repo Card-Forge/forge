@@ -15,7 +15,7 @@ ScryfallCode=V16
 7 M Memnarch @Carl Critchlow
 8 M Mind's Desire @Adam Paquette
 9 M Momir Vig, Simic Visionary @Victor Adame Minguez
-10 M Near-Death Experience @Dan Scott
+10 M Near-Death Experience @Dan Murayama Scott
 11 M Obliterate @Kev Walker
 12 M Phyrexian Processor @Dave Kendall
 13 M Tolaria West @Khang Le

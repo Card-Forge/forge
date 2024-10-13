@@ -4,6 +4,6 @@ Types:Legendary Enchantment Shrine
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigSearch | TriggerDescription$ At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle.
 SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Battlefield | ChangeType$ Shrine.YouOwn | Optional$ True
 S:Mode$ Panharmonicon | ValidCard$ Shrine.Other+YouCtrl | IsPresent$ Shrine.YouCtrl | PresentCompare$ GE6 | Description$ If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
-DeckNeeds:Type$Shrine
 AI:RemoveDeck:Random
+DeckNeeds:Type$Shrine
 Oracle:At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle.\nIf an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.

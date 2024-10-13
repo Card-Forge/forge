@@ -12,389 +12,389 @@ ChaosDraftThemes=CORE_SET
 ScryfallCode=10E
 
 [cards]
-249 R Abundance @Rebecca Guay
-63 U Academy Researchers @Stephen Daniele
-347 R Adarkar Wastes @John Avon
-125 C Afflict @Roger Raupp
-250 C Aggressive Urge @Christopher Moeller
-126 U Agonizing Memories @Adam Rex
-64 U Air Elemental @Kev Walker
-65 R Ambassador Laquatus @Jim Murray
-187 C Anaba Bodyguard @Greg Staples
 1 U Ancestor's Chosen @Pete Venters
 2 U Angel of Mercy @Volkan Baǵa
-311 U Angel's Feather @Alan Pollack
 3 C Angelic Blessing @Mark Zug
 4 R Angelic Chorus @Jim Murray
 5 C Angelic Wall @John Avon
-188 U Arcane Teachings @Dan Dos Santos
-66 R Arcanis the Omnipotent @Justin Sweet
-127 R Ascendant Evincar @Mark Zug
-128 C Assassinate @Kev Walker
-67 U Aura Graft @Ray Lago
 6 U Aura of Silence @D. Alexander Gregory
-251 R Avatar of Might @rk post
 7 C Aven Cloudchaser @Justin Sweet
-68 C Aven Fisher @Christopher Moeller
-69 C Aven Windreader @Greg Hildebrandt
 8 U Ballista Squad @Matthew D. Wilson
 9 C Bandage @Rebecca Guay
-348 R Battlefield Forge @Darrell Riche
-189 R Beacon of Destruction @Greg Hildebrandt
 10 R Beacon of Immortality @Rob Alexander
-129 R Beacon of Unrest @Alan Pollack
 11 C Benalish Knight @Zoltan Boros & Gabor Szikszai
-252 R Birds of Paradise @Marcelo Vignali
-253 U Blanchwood Armor @Paolo Parente
-190 U Blaze @Alex Horley-Orlandelli
-191 R Bloodfire Colossus @Greg Staples
-192 C Bloodrock Cyclops @Alex Horley-Orlandelli
-130 U Bog Wraith @Daarken
-193 C Bogardan Firefiend @Terese Nielsen
-70 C Boomerang @Arnie Swekel
-312 U Bottle Gnomes @Ben Thompson
-349 R Brushland @Scott Bailey
-71 C Cancel @Mark Poole
-254 C Canopy Spider @Christopher Rush
-350 R Caves of Koilos @Jim Nelson
-72 R Cephalid Constable @Alan Pollack
-313 R Chimeric Staff @Michael Sutfin
 12 R Cho-Manno, Revolutionary @Steven Belledin
-314 U Chromatic Star @Alex Horley-Orlandelli
-315 R Citanul Flute @Greg Hildebrandt
-255 C Civic Wayfinder @Cyril Van Der Haegen
+13 U Condemn @Daren Bader
+14 C Demystify @Christopher Rush
+15 R Field Marshal @Stephen Tappin
+16 C Ghost Warden @Ittoku
+17 R Glorious Anthem @Kev Walker
+18 U Hail of Arrows @Anthony S. Waters
+19 C Heart of Light @Luca Zontini
+20 U High Ground @rk post
+21 C Holy Day @Volkan Baǵa
+22 C Holy Strength @Terese Nielsen
+23 C Honor Guard @Dan Dos Santos
+24 U Icatian Priest @Stephen Tappin
+25 R Kjeldoran Royal Guard @Carl Critchlow
+26 C Loxodon Mystic @Randy Gallegos
+27 R Loyal Sentry @Michael Sutfin
+28 U Luminesce @Daren Bader
+29 R Mobilization @Carl Critchlow
+30 R Nomad Mythmaker @Darrell Riche
+31 C Pacifism @Robert Bliss
+32 R Paladin en-Vec @Dave Kendall
+33 R Pariah @Jon J Muth
+34 C Reviving Dose @D. Alexander Gregory
+35 R Reya Dawnbringer @Matthew D. Wilson
+36 R Righteousness @Wayne England
+37 U Rule of Law @Scott M. Fischer
+38 C Samite Healer @Anson Maddocks
+39 R Serra Angel @Greg Staples
+40 U Serra's Embrace @Zoltan Boros & Gabor Szikszai
+41 C Skyhunter Patrol @Matt Cavotta
+42 C Skyhunter Prowler @Vance Kovacs
+43 U Skyhunter Skirmisher @Greg Staples
+44 U Soul Warden @Randy Gallegos
+45 U Spirit Link @Kev Walker
+46 U Spirit Weaver @Matthew D. Wilson
+47 U Starlight Invoker @Glen Angus
+48 C Steadfast Guard @Michael Komarck
+49 R Story Circle @Aleksi Briclot
+50 C Suntail Hawk @Heather Hudson
+51 U Tempest of Light @Wayne England
+52 U Treasure Hunter @Adam Rex
+53 R True Believer @Alex Horley-Orlandelli
+54 C Tundra Wolves @Richard Sardinha
+55 C Venerable Monk @D. Alexander Gregory
+56 R Voice of All @rk post
+57 U Wall of Swords @Zoltan Boros & Gabor Szikszai
+58 C Warrior's Honor @D. Alexander Gregory
+59 C Wild Griffin @Matt Cavotta
+60 R Windborn Muse @Adam Rex
+61 R Wrath of God @Kev Walker
+62 C Youthful Knight @Rebecca Guay
+63 U Academy Researchers @Stephen Daniele
+64 U Air Elemental @Kev Walker
+65 R Ambassador Laquatus @Jim Murray
+66 R Arcanis the Omnipotent @Justin Sweet
+67 U Aura Graft @Ray Lago
+68 C Aven Fisher @Christopher Moeller
+69 C Aven Windreader @Greg Hildebrandt
+70 C Boomerang @Arnie Swekel
+71 C Cancel @Mark Poole
+72 R Cephalid Constable @Alan Pollack
 73 R Clone @Kev Walker
 74 C Cloud Elemental @Michael Sutfin
 75 C Cloud Sprite @Mark Zug
-316 R Coat of Arms @Scott M. Fischer
-317 R Colossus of Sardia @Greg Staples
-256 C Commune with Nature @Lars Grant-West
-318 U Composite Golem @Mark Tedin
-13 U Condemn @Daren Bader
-194 U Cone of Flame @Chippy
-131 U Consume Spirit @Matt Thompson
-132 C Contaminated Bond @Thomas M. Baxa
 76 C Counsel of the Soratami @Randy Gallegos
 77 C Crafty Pathmage @Wayne England
-257 C Craw Wurm @Richard Sardinha
-258 U Creeping Mold @Gary Ruddell
-319 R Crucible of Worlds @Ron Spencer
-133 U Cruel Edict @Michael Sutfin
-195 U Cryoclasm @Zoltan Boros & Gabor Szikszai
-134 U Deathmark @Jeremy Jarvis
 78 C Dehydration @Arnie Swekel
 79 U Deluge @Wayne England
-196 C Demolish @Gary Ruddell
-320 U Demon's Horn @Alan Pollack
-14 C Demystify @Christopher Rush
 80 R Denizen of the Deep @Jim Pavelec
-135 U Diabolic Tutor @Greg Staples
 81 U Discombobulate @Alex Horley-Orlandelli
+82 R Dreamborn Muse @Kev Walker
+83 R Evacuation @Franz Vohwinkel
+84 U Flashfreeze @Brian Despain
+85 U Fog Elemental @Jon J Muth
+86 C Fugitive Wizard @Mark Zug
+87 C Horseshoe Crab @Scott Kirschner
+88 R Hurkyl's Recall @Ralph Horsley
+89 C Lumengrid Warden @Francis Tsai
+90 R Mahamoti Djinn @Greg Staples
+91 R March of the Machines @Ben Thompson
+92 C Merfolk Looter @Tristan Elwell
+93 R Mind Bend @Mike Dringenberg
+94 C Peek @Adam Rex
+95 U Persuasion @William O'Connor
+96 U Phantom Warrior @Greg Staples
+97 R Plagiarize @Jeremy Jarvis
+98 U Puppeteer @Kev Walker
+99 U Reminisce @Ralph Horsley
+100 C Remove Soul @Adam Rex
+101 C Robe of Mirrors @Christopher Moeller
+102 C Rootwater Commando @Mark Tedin
+103 R Rootwater Matriarch @Daren Bader
+104 C Sage Owl @Mark Brill
+105 R Scalpelexis @Mark Tedin
+106 C Sea Monster @Brian Despain
+107 C Shimmering Wings @Carl Critchlow
+108 C Sift @Jeremy Jarvis
+109 U Sky Weaver @Christopher Moeller
+110 C Snapping Drake @Dave Dorman
+111 U Spiketail Hatchling @Greg Staples
+112 R Sunken Hope @Volkan Baǵa
+113 U Telepathy @Matthew D. Wilson
+114 U Telling Time @Scott M. Fischer
+115 U Thieving Magpie @Una Fricker
+116 U Tidings @Pete Venters
+117 R Time Stop @Scott M. Fischer
+118 R Time Stretch @Matt Cavotta
+119 R Traumatize @Greg Staples
+120 R Twincast @Christopher Moeller
+121 C Twitch @DiTerlizzi
+122 C Unsummon @Ron Spencer
+123 U Vedalken Mastermind @Darrell Riche
+124 U Wall of Air @John Avon
+125 C Afflict @Roger Raupp
+126 U Agonizing Memories @Adam Rex
+127 R Ascendant Evincar @Mark Zug
+128 C Assassinate @Kev Walker
+129 R Beacon of Unrest @Alan Pollack
+130 U Bog Wraith @Daarken
+131 U Consume Spirit @Matt Thompson
+132 C Contaminated Bond @Thomas M. Baxa
+133 U Cruel Edict @Michael Sutfin
+134 U Deathmark @Jeremy Jarvis
+135 U Diabolic Tutor @Greg Staples
 136 C Distress @Michael Sutfin
 137 R Doomed Necromancer @Volkan Baǵa
-321 R Doubling Cube @Mark Tedin
-197 R Dragon Roost @Jim Pavelec
-322 U Dragon's Claw @Alan Pollack
-82 R Dreamborn Muse @Kev Walker
 138 C Dross Crocodile @Carl Critchlow
 139 U Drudge Skeletons @Jim Nelson
-198 C Duct Crawler @Stephen Daniele
 140 C Dusk Imp @Pete Venters
-199 U Earth Elemental @Anthony S. Waters
-259 U Elven Riders @Darrell Riche
-260 C Elvish Berserker @Paolo Parente
-261 R Elvish Champion @D. Alexander Gregory
-262 R Elvish Piper @Rebecca Guay
-263 U Enormous Baloth @Mark Tedin
 141 C Essence Drain @Jim Nelson
-83 R Evacuation @Franz Vohwinkel
-351 U Faerie Conclave @Stephan Martiniere
 142 C Fear @Adam Rex
-264 U Femeref Archers @Zoltan Boros & Gabor Szikszai
 143 C Festering Goblin @Thomas M. Baxa
-15 R Field Marshal @Stephen Tappin
+144 R Grave Pact @Puddnhead
+145 R Graveborn Muse @Kev Walker
+146 C Gravedigger @Dermot Power
+147 U Hate Weaver @Roger Raupp
+148 R Head Games @Terese Nielsen
+149 U Hidden Horror @Brom
+150 C Highway Robber @Kev Walker
+151 R Hypnotic Specter @Greg Staples
+152 U Knight of Dusk @rk post
+153 C Looming Shade @Kev Walker
+154 R Lord of the Pit @Michael Sutfin
+155 R Lord of the Undead @Brom
+156 C Mass of Ghouls @Lucio Parrillo
+157 U Megrim @Nick Percival
+158 R Midnight Ritual @Jeff Easley
+159 C Mind Rot @Steve Luke
+160 R Mortal Combat @Mike Ploog
+161 R Mortivore @Anthony S. Waters
+162 U Nantuko Husk @Carl Critchlow
+163 U Nekrataal @Christopher Moeller
+164 R Nightmare @Carl Critchlow
+165 U No Rest for the Wicked @Carl Critchlow
+166 R Phage the Untouchable @Ron Spears
+167 C Phyrexian Rager @Mark Tedin
+168 C Plague Beetle @Tom Fleming
+169 R Plague Wind @Alan Pollack
+170 U Rain of Tears @Eric Peterson
+171 C Ravenous Rats @Carl Critchlow
+172 C Recover @Nelson DeCastro
+173 U Relentless Rats @Thomas M. Baxa
+174 R Royal Assassin @Mark Zug
+175 C Scathe Zombies @Kev Walker
+176 R Sengir Vampire @Kev Walker
+177 C Severed Legion @Dany Orizio
+178 R Sleeper Agent @Randy Gallegos
+179 U Soul Feast @Adam Rex
+180 C Spineless Thug @Matthew D. Wilson
+181 U Stronghold Discipline @Daarken
+182 C Terror @Adam Rex
+183 U Thrull Surgeon @rk post
+184 R Underworld Dreams @Carl Critchlow
+185 C Unholy Strength @Terese Nielsen
+186 C Vampire Bats @Chippy
+187 C Anaba Bodyguard @Greg Staples
+188 U Arcane Teachings @Dan Dos Santos
+189 R Beacon of Destruction @Greg Hildebrandt
+190 U Blaze @Alex Horley-Orlandelli
+191 R Bloodfire Colossus @Greg Staples
+192 C Bloodrock Cyclops @Alex Horley-Orlandelli
+193 C Bogardan Firefiend @Terese Nielsen
+194 U Cone of Flame @Chippy
+195 U Cryoclasm @Zoltan Boros & Gabor Szikszai
+196 C Demolish @Gary Ruddell
+197 R Dragon Roost @Jim Pavelec
+198 C Duct Crawler @Stephen Daniele
+199 U Earth Elemental @Anthony S. Waters
 200 C Firebreathing @Aleksi Briclot
 201 C Fists of the Anvil @Pete Venters
 202 U Flamewave Invoker @Dave Dorman
-84 U Flashfreeze @Brian Despain
 203 R Flowstone Slide @Chippy
-85 U Fog Elemental @Jon J Muth
-352 U Forbidding Watchtower @Aleksi Briclot
-380 L Forest @Anthony S. Waters
-381 L Forest @John Avon
-382 L Forest @Rob Alexander
-383 L Forest @Stephan Martiniere
-323 U Fountain of Youth @Dan Scott
-86 C Fugitive Wizard @Mark Zug
-205 U Furnace Whelp @Matt Cavotta
 204 R Furnace of Rath @John Matson
-265 R Gaea's Herald @Jim Murray
-353 U Ghitu Encampment @John Avon
-16 C Ghost Warden @Ittoku
-266 C Giant Growth @Matt Cavotta
-267 C Giant Spider @Randy Gallegos
-17 R Glorious Anthem @Kev Walker
+205 U Furnace Whelp @Matt Cavotta
 206 C Goblin Elite Infantry @Robert Bliss
 207 R Goblin King @Ron Spears
 208 U Goblin Lore @D. Alexander Gregory
 209 C Goblin Piker @DiTerlizzi
 210 C Goblin Sky Raider @Daren Bader
-144 R Grave Pact @Puddnhead
-145 R Graveborn Muse @Kev Walker
-146 C Gravedigger @Dermot Power
-268 C Grizzly Bears @D. J. Cleland-Hura
 211 U Guerrilla Tactics @Dave Dorman
-18 U Hail of Arrows @Anthony S. Waters
-147 U Hate Weaver @Roger Raupp
-148 R Head Games @Terese Nielsen
-19 C Heart of Light @Luca Zontini
-149 U Hidden Horror @Brom
-20 U High Ground @rk post
-150 C Highway Robber @Kev Walker
 212 C Hill Giant @Kev Walker
-21 C Holy Day @Volkan Baǵa
-22 C Holy Strength @Terese Nielsen
-23 C Honor Guard @Dan Dos Santos
-87 C Horseshoe Crab @Scott Kirschner
-325 R Howling Mine @Ralph Horsley
-269 U Hunted Wumpus @Thomas M. Baxa
-88 R Hurkyl's Recall @Ralph Horsley
-270 R Hurricane @John Howe
-151 R Hypnotic Specter @Greg Staples
-24 U Icatian Priest @Stephen Tappin
-326 U Icy Manipulator @Matt Cavotta
 213 C Incinerate @Zoltan Boros & Gabor Szikszai
-368 L Island @Donato Giancola
-369 L Island @John Avon
-370 L Island @Martina Pilcerova
-371 L Island @Stephan Martiniere
-327 R Jayemdae Tome @Donato Giancola
-271 R Joiner Adept @Heather Hudson
-328 U Juggernaut @Arnie Swekel
 214 R Kamahl, Pit Fighter @Kev Walker
-354 R Karplusan Forest @John Avon
-272 U Karplusan Strider @Dan Scott
-273 C Kavu Climber @Rob Alexander
-25 R Kjeldoran Royal Guard @Carl Critchlow
-152 U Knight of Dusk @rk post
-329 U Kraken's Eye @Alan Pollack
 215 C Lava Axe @Brian Snõddy
 216 R Lavaborn Muse @Brian Snõddy
-330 R Legacy Weapon @Terese Nielsen
-331 U Leonin Scimitar @Doug Chaffee
 217 C Lightning Elemental @Kev Walker
+218 R Manabarbs @Jeff Miracola
+219 U Mogg Fanatic @Brom
+220 U Orcish Artillery @Jeff Miracola
+221 C Prodigal Pyromancer @Jeremy Jarvis
+222 U Pyroclasm @John Avon
+223 U Rage Weaver @John Matson
+224 C Raging Goblin @Jeff Miracola
+225 R Relentless Assault @Greg Hildebrandt
+226 C Rock Badger @Heather Hudson
+227 R Scoria Wurm @Steve Firchow
+228 R Seismic Assault @Greg Staples
+229 U Shatterstorm @Paolo Parente
+230 R Shivan Dragon @Donato Giancola
+231 R Shivan Hellkite @Kev Walker
+232 C Shock @Jon Foster
+233 R Shunt @Greg Hildebrandt
+234 R Siege-Gang Commander @Christopher Moeller
+235 C Smash @Paolo Parente
+236 R Soulblast @Jim Nelson
+237 U Spark Elemental @John Avon
+238 C Spitting Earth @Michael Koelsch
+239 R Squee, Goblin Nabob @Greg Staples
+240 C Stun @Terese Nielsen
+241 U Sudden Impact @Wayne Reynolds
+242 U Threaten @Pete Venters
+243 U Thundering Giant @Mark Zug
+244 C Uncontrollable Anger @Kev Walker
+245 C Viashino Runner @Steve White
+246 C Viashino Sandscout @Scott M. Fischer
+247 U Wall of Fire @Dan Dos Santos
+248 R Warp World @Ron Spencer
+249 R Abundance @Rebecca Guay
+250 C Aggressive Urge @Christopher Moeller
+251 R Avatar of Might @rk post
+252 R Birds of Paradise @Marcelo Vignali
+253 U Blanchwood Armor @Paolo Parente
+254 C Canopy Spider @Christopher Rush
+255 C Civic Wayfinder @Cyril Van Der Haegen
+256 C Commune with Nature @Lars Grant-West
+257 C Craw Wurm @Richard Sardinha
+258 U Creeping Mold @Gary Ruddell
+259 U Elven Riders @Darrell Riche
+260 C Elvish Berserker @Paolo Parente
+261 R Elvish Champion @D. Alexander Gregory
+262 R Elvish Piper @Rebecca Guay
+263 U Enormous Baloth @Mark Tedin
+264 U Femeref Archers @Zoltan Boros & Gabor Szikszai
+265 R Gaea's Herald @Jim Murray
+266 C Giant Growth @Matt Cavotta
+267 C Giant Spider @Randy Gallegos
+268 C Grizzly Bears @D. J. Cleland-Hura
+269 U Hunted Wumpus @Thomas M. Baxa
+270 R Hurricane @John Howe
+271 R Joiner Adept @Heather Hudson
+272 U Karplusan Strider @Dan Murayama Scott
+273 C Kavu Climber @Rob Alexander
 274 C Llanowar Elves @Kev Walker
 275 C Llanowar Sentinel @Randy Gallegos
-355 R Llanowar Wastes @Rob Alexander
-153 C Looming Shade @Kev Walker
-154 R Lord of the Pit @Michael Sutfin
-155 R Lord of the Undead @Brom
-26 C Loxodon Mystic @Randy Gallegos
-332 R Loxodon Warhammer @Jeremy Jarvis
-27 R Loyal Sentry @Michael Sutfin
-89 C Lumengrid Warden @Francis Tsai
-28 U Luminesce @Daren Bader
 276 U Lure @D. Alexander Gregory
-90 R Mahamoti Djinn @Greg Staples
-218 R Manabarbs @Jeff Miracola
-333 U Mantis Engine @John Zeleznik
-91 R March of the Machines @Ben Thompson
-156 C Mass of Ghouls @Lucio Parrillo
-157 U Megrim @Nick Percival
-92 C Merfolk Looter @Tristan Elwell
-158 R Midnight Ritual @Jeff Easley
-278 U Might Weaver @Larry Elmore
 277 R Might of Oaks @Jeremy Jarvis
-334 R Millstone @John Avon
-93 R Mind Bend @Mike Dringenberg
-159 C Mind Rot @Steve Luke
-335 U Mind Stone @Adam Rex
+278 U Might Weaver @Larry Elmore
 279 R Mirri, Cat Warrior @Daren Bader
-29 R Mobilization @Carl Critchlow
-219 U Mogg Fanatic @Brom
 280 R Molimo, Maro-Sorcerer @Mark Zug
-160 R Mortal Combat @Mike Ploog
-161 R Mortivore @Anthony S. Waters
-376 L Mountain @John Avon
-377 L Mountain @Glen Angus
-378 L Mountain @John Avon
-379 L Mountain @Stephan Martiniere
-162 U Nantuko Husk @Carl Critchlow
 281 C Natural Spring @Jeffrey R. Busch
 282 C Naturalize @Tim Hildebrandt
-163 U Nekrataal @Christopher Moeller
-164 R Nightmare @Carl Critchlow
-165 U No Rest for the Wicked @Carl Critchlow
-30 R Nomad Mythmaker @Darrell Riche
-220 U Orcish Artillery @Jeff Miracola
-336 U Ornithopter @Dana Knutson
 283 C Overgrowth @Ron Spears
 284 U Overrun @Carl Critchlow
-31 C Pacifism @Robert Bliss
-32 R Paladin en-Vec @Dave Kendall
-33 R Pariah @Jon J Muth
-94 C Peek @Adam Rex
-95 U Persuasion @William O'Connor
-166 R Phage the Untouchable @Ron Spears
-96 U Phantom Warrior @Greg Staples
-167 C Phyrexian Rager @Mark Tedin
-337 U Phyrexian Vault @Hannibal King
 285 C Pincher Beetles @Stephen Daniele
+286 U Primal Rage @Brian Snõddy
+287 R Quirion Dryad @Todd Lockwood
+288 C Rampant Growth @Steven Belledin
+289 U Recollect @Pete Venters
+290 U Regeneration @Jeremy Jarvis
+291 R Rhox @Mark Zug
+292 R Root Maze @Rebecca Guay
+293 C Rootwalla @Roger Raupp
+294 C Rushwood Dryad @Todd Lockwood
+295 R Scion of the Wild @Kev Walker
+296 R Seedborn Muse @Adam Rex
+297 C Skyshroud Ranger @Mark Tedin
+298 C Spined Wurm @Carl Critchlow
+299 C Stalking Tiger @Terese Nielsen
+300 U Stampeding Wildebeests @Randy Gallegos
+301 U Sylvan Basilisk @Steven Belledin
+302 U Sylvan Scrying @Scott M. Fischer
+303 U Tangle Spider @Terese Nielsen
+304 C Treetop Bracers @Heather Hudson
+305 R Troll Ascetic @Puddnhead
+306 R Upwelling @Chippy
+307 R Verdant Force @DiTerlizzi
+308 U Viridian Shaman @Scott M. Fischer
+309 C Wall of Wood @Rebecca Guay
+310 U Yavimaya Enchantress @Terese Nielsen
+311 U Angel's Feather @Alan Pollack
+312 U Bottle Gnomes @Ben Thompson
+313 R Chimeric Staff @Michael Sutfin
+314 U Chromatic Star @Alex Horley-Orlandelli
+315 R Citanul Flute @Greg Hildebrandt
+316 R Coat of Arms @Scott M. Fischer
+317 R Colossus of Sardia @Greg Staples
+318 U Composite Golem @Mark Tedin
+319 R Crucible of Worlds @Ron Spencer
+320 U Demon's Horn @Alan Pollack
+321 R Doubling Cube @Mark Tedin
+322 U Dragon's Claw @Alan Pollack
+323 U Fountain of Youth @Dan Murayama Scott
+324 R The Hive @Ron Spencer
+325 R Howling Mine @Ralph Horsley
+326 U Icy Manipulator @Matt Cavotta
+327 R Jayemdae Tome @Donato Giancola
+328 U Juggernaut @Arnie Swekel
+329 U Kraken's Eye @Alan Pollack
+330 R Legacy Weapon @Terese Nielsen
+331 U Leonin Scimitar @Doug Chaffee
+332 R Loxodon Warhammer @Jeremy Jarvis
+333 U Mantis Engine @John Zeleznik
+334 R Millstone @John Avon
+335 U Mind Stone @Adam Rex
+336 U Ornithopter @Dana Knutson
+337 U Phyrexian Vault @Hannibal King
 338 R Pithing Needle @Pete Venters
-97 R Plagiarize @Jeremy Jarvis
-168 C Plague Beetle @Tom Fleming
-169 R Plague Wind @Alan Pollack
+339 R Platinum Angel @Brom
+340 R Razormane Masticore @Jim Murray
+341 U Rod of Ruin @Mark Zug
+342 R Sculpting Steel @Heather Hudson
+343 U Spellbook @Andrew Goldhawk
+344 U Steel Golem @Donato Giancola
+345 U Whispersilk Cloak @Luca Zontini
+346 U Wurm's Tooth @Alan Pollack
+347 R Adarkar Wastes @John Avon
+348 R Battlefield Forge @Darrell Riche
+349 R Brushland @Scott Bailey
+350 R Caves of Koilos @Jim Nelson
+351 U Faerie Conclave @Stephan Martiniere
+352 U Forbidding Watchtower @Aleksi Briclot
+353 U Ghitu Encampment @John Avon
+354 R Karplusan Forest @John Avon
+355 R Llanowar Wastes @Rob Alexander
+356 U Quicksand @Roger Raupp
+357 R Shivan Reef @Rob Alexander
+358 U Spawning Pool @Nils Hamm
+359 R Sulfurous Springs @Rob Alexander
+360 C Terramorphic Expanse @Dan Murayama Scott
+361 U Treetop Village @Rob Alexander
+362 R Underground River @Andrew Goldhawk
+363 R Yavimaya Coast @Anthony S. Waters
 364 L Plains @Rob Alexander
 365 L Plains @John Avon
 366 L Plains @Greg Staples
 367 L Plains @Richard Wright
-339 R Platinum Angel @Brom
-286 U Primal Rage @Brian Snõddy
-221 C Prodigal Pyromancer @Jeremy Jarvis
-98 U Puppeteer @Kev Walker
-222 U Pyroclasm @John Avon
-356 U Quicksand @Roger Raupp
-287 R Quirion Dryad @Todd Lockwood
-223 U Rage Weaver @John Matson
-224 C Raging Goblin @Jeff Miracola
-170 U Rain of Tears @Eric Peterson
-288 C Rampant Growth @Steven Belledin
-171 C Ravenous Rats @Carl Critchlow
-340 R Razormane Masticore @Jim Murray
-289 U Recollect @Pete Venters
-172 C Recover @Nelson DeCastro
-290 U Regeneration @Jeremy Jarvis
-225 R Relentless Assault @Greg Hildebrandt
-173 U Relentless Rats @Thomas M. Baxa
-99 U Reminisce @Ralph Horsley
-100 C Remove Soul @Adam Rex
-34 C Reviving Dose @D. Alexander Gregory
-35 R Reya Dawnbringer @Matthew D. Wilson
-291 R Rhox @Mark Zug
-36 R Righteousness @Wayne England
-101 C Robe of Mirrors @Christopher Moeller
-226 C Rock Badger @Heather Hudson
-341 U Rod of Ruin @Mark Zug
-292 R Root Maze @Rebecca Guay
-293 C Rootwalla @Roger Raupp
-102 C Rootwater Commando @Mark Tedin
-103 R Rootwater Matriarch @Daren Bader
-174 R Royal Assassin @Mark Zug
-37 U Rule of Law @Scott M. Fischer
-294 C Rushwood Dryad @Todd Lockwood
-104 C Sage Owl @Mark Brill
-38 C Samite Healer @Anson Maddocks
-105 R Scalpelexis @Mark Tedin
-175 C Scathe Zombies @Kev Walker
-295 R Scion of the Wild @Kev Walker
-227 R Scoria Wurm @Steve Firchow
-342 R Sculpting Steel @Heather Hudson
-106 C Sea Monster @Brian Despain
-296 R Seedborn Muse @Adam Rex
-228 R Seismic Assault @Greg Staples
-176 R Sengir Vampire @Kev Walker
-39 R Serra Angel @Greg Staples
-40 U Serra's Embrace @Zoltan Boros & Gabor Szikszai
-177 C Severed Legion @Dany Orizio
-229 U Shatterstorm @Paolo Parente
-107 C Shimmering Wings @Carl Critchlow
-230 R Shivan Dragon @Donato Giancola
-231 R Shivan Hellkite @Kev Walker
-357 R Shivan Reef @Rob Alexander
-232 C Shock @Jon Foster
-233 R Shunt @Greg Hildebrandt
-234 R Siege-Gang Commander @Christopher Moeller
-108 C Sift @Jeremy Jarvis
-109 U Sky Weaver @Christopher Moeller
-41 C Skyhunter Patrol @Matt Cavotta
-42 C Skyhunter Prowler @Vance Kovacs
-43 U Skyhunter Skirmisher @Greg Staples
-297 C Skyshroud Ranger @Mark Tedin
-178 R Sleeper Agent @Randy Gallegos
-235 C Smash @Paolo Parente
-110 C Snapping Drake @Dave Dorman
-179 U Soul Feast @Adam Rex
-44 U Soul Warden @Randy Gallegos
-236 R Soulblast @Jim Nelson
-237 U Spark Elemental @John Avon
-358 U Spawning Pool @Nils Hamm
-343 U Spellbook @Andrew Goldhawk
-111 U Spiketail Hatchling @Greg Staples
-298 C Spined Wurm @Carl Critchlow
-180 C Spineless Thug @Matthew D. Wilson
-45 U Spirit Link @Kev Walker
-46 U Spirit Weaver @Matthew D. Wilson
-238 C Spitting Earth @Michael Koelsch
-239 R Squee, Goblin Nabob @Greg Staples
-299 C Stalking Tiger @Terese Nielsen
-300 U Stampeding Wildebeests @Randy Gallegos
-47 U Starlight Invoker @Glen Angus
-48 C Steadfast Guard @Michael Komarck
-344 U Steel Golem @Donato Giancola
-49 R Story Circle @Aleksi Briclot
-181 U Stronghold Discipline @Daarken
-240 C Stun @Terese Nielsen
-241 U Sudden Impact @Wayne Reynolds
-359 R Sulfurous Springs @Rob Alexander
-112 R Sunken Hope @Volkan Baǵa
-50 C Suntail Hawk @Heather Hudson
+368 L Island @Donato Giancola
+369 L Island @John Avon
+370 L Island @Martina Pilcerova
+371 L Island @Stephan Martiniere
 372 L Swamp @John Avon
 373 L Swamp @Ron Spencer
 374 L Swamp @Jim Nelson
 375 L Swamp @Richard Wright
-301 U Sylvan Basilisk @Steven Belledin
-302 U Sylvan Scrying @Scott M. Fischer
-303 U Tangle Spider @Terese Nielsen
-113 U Telepathy @Matthew D. Wilson
-114 U Telling Time @Scott M. Fischer
-51 U Tempest of Light @Wayne England
-360 C Terramorphic Expanse @Dan Scott
-182 C Terror @Adam Rex
-324 R The Hive @Ron Spencer
-115 U Thieving Magpie @Una Fricker
-242 U Threaten @Pete Venters
-183 U Thrull Surgeon @rk post
-243 U Thundering Giant @Mark Zug
-116 U Tidings @Pete Venters
-117 R Time Stop @Scott M. Fischer
-118 R Time Stretch @Matt Cavotta
-119 R Traumatize @Greg Staples
-52 U Treasure Hunter @Adam Rex
-304 C Treetop Bracers @Heather Hudson
-361 U Treetop Village @Rob Alexander
-305 R Troll Ascetic @Puddnhead
-53 R True Believer @Alex Horley-Orlandelli
-54 C Tundra Wolves @Richard Sardinha
-120 R Twincast @Christopher Moeller
-121 C Twitch @DiTerlizzi
-244 C Uncontrollable Anger @Kev Walker
-362 R Underground River @Andrew Goldhawk
-184 R Underworld Dreams @Carl Critchlow
-185 C Unholy Strength @Terese Nielsen
-122 C Unsummon @Ron Spencer
-306 R Upwelling @Chippy
-186 C Vampire Bats @Chippy
-123 U Vedalken Mastermind @Darrell Riche
-55 C Venerable Monk @D. Alexander Gregory
-307 R Verdant Force @DiTerlizzi
-245 C Viashino Runner @Steve White
-246 C Viashino Sandscout @Scott M. Fischer
-308 U Viridian Shaman @Scott M. Fischer
-56 R Voice of All @rk post
-124 U Wall of Air @John Avon
-247 U Wall of Fire @Dan Dos Santos
-57 U Wall of Swords @Zoltan Boros & Gabor Szikszai
-309 C Wall of Wood @Rebecca Guay
-248 R Warp World @Ron Spencer
-58 C Warrior's Honor @D. Alexander Gregory
-345 U Whispersilk Cloak @Luca Zontini
-59 C Wild Griffin @Matt Cavotta
-60 R Windborn Muse @Adam Rex
-61 R Wrath of God @Kev Walker
-346 U Wurm's Tooth @Alan Pollack
-363 R Yavimaya Coast @Anthony S. Waters
-310 U Yavimaya Enchantress @Terese Nielsen
-62 C Youthful Knight @Rebecca Guay
+376 L Mountain @John Avon
+377 L Mountain @Glen Angus
+378 L Mountain @John Avon
+379 L Mountain @Stephan Martiniere
+380 L Forest @Anthony S. Waters
+381 L Forest @John Avon
+382 L Forest @Rob Alexander
+383 L Forest @Stephan Martiniere
 
 [tokens]
 wasp

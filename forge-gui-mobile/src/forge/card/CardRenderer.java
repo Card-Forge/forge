@@ -37,6 +37,7 @@ import forge.assets.FRotatedImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImageInterface;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
 import forge.card.CardZoom.ActivateHandler;
@@ -93,13 +94,22 @@ public class CardRenderer {
         }
     }
 
+    private static float calcSymbolSize(FSkinProp skinProp) {
+        if (skinProp == null)
+            return 0f;
+        FSkinImageInterface image = FSkin.getImages().get(skinProp);
+        if (image == null)
+            return 0f;
+        return image.getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
+    }
+
     private static final FSkinFont NAME_FONT = FSkinFont.get(16);
     public static final float NAME_BOX_TINT = 0.2f;
     public static final float TEXT_BOX_TINT = 0.1f;
     public static final float PT_BOX_TINT = 0.2f;
     private static final float MANA_COST_PADDING = Utils.scale(3);
     public static final float SET_BOX_MARGIN = Utils.scale(1);
-    public static final float MANA_SYMBOL_SIZE = FSkin.getImages().get(FSkinProp.IMG_MANA_1).getNearestHQWidth(2 * (NAME_FONT.getCapHeight() - MANA_COST_PADDING));
+    public static final float MANA_SYMBOL_SIZE = calcSymbolSize(FSkinProp.IMG_MANA_1);
     private static final float NAME_COST_THRESHOLD = Utils.scale(200);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
@@ -842,19 +852,17 @@ public class CardRenderer {
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4.5f;
-                if (card.isSplitCard() && card.hasAlternateState()) {
-                    if (!card.isFaceDown()) { // no need to draw mana symbols on face down split cards (e.g. manifested)
-                        if (isChoiceList) {
-                            if (card.getRightSplitState().getName().equals(details.getName()))
-                                drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
-                            else
-                                drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
-                        } else {
-                            ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
-                            ManaCost rightManaCost = card.getRightSplitState().getManaCost();
-                            drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
-                            drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
-                        }
+                if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
+                    if (isChoiceList) {
+                        if (card.getRightSplitState().getName().equals(details.getName()))
+                            drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                        else
+                            drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                    } else {
+                        ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
+                        ManaCost rightManaCost = card.getRightSplitState().getManaCost();
+                        drawManaCost(g, leftManaCost, x - padding, y-(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                     }
                 } else {
                     drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);

@@ -1,6 +1,6 @@
 Name:Elemental Token
 ManaCost:no cost
-Types:Creature Elemental
 Colors:black,red
+Types:Creature Elemental
 PT:5/5
 Oracle:

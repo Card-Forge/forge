@@ -10,6 +10,6 @@ SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.All
 SVar:DBTreasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.AllColors | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Text:CARDNAME can be your commander.
-DeckHas:Ability$Token|Counters|Sacrifice|Graveyard & Type$Kavu|Artifact|Treasure
 AI:RemoveDeck:Random
+DeckHas:Ability$Token|Counters|Sacrifice|Graveyard & Type$Kavu|Artifact|Treasure
 Oracle:[+1]: Create a 3/3 Kavu creature token with trample that's all colors.\n[-3]: Choose up to two target creatures. For each of them, put a number of +1/+1 counters on it equal to the number of colors it is.\n[-6]: Return target multicolored card from your graveyard to your hand. If that card was all colors, draw a card and create two Treasure tokens.\nJared Carthalion can be your commander.

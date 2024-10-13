@@ -10,6 +10,6 @@ SVar:DBDraw:DB$ Draw
 A:AB$ ChangeZone | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | SubAbility$ DBCopy | Origin$ Graveyard | RememberChanged$ True | Destination$ Exile | TgtPrompt$ Select target creature or equipment in your graveyard | ValidTgts$ Creature.YouCtrl+cmcLTX,Equipment.YouCtrl+cmcLTX | SpellDescription$ Exile target creature or Equipment card with mana value less than NICKNAME's loyalty from your graveyard. Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | PumpKeywords$ Haste | AtEOT$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Discard|Token
 SVar:X:Count$CardCounters.LOYALTY
+DeckHas:Ability$Discard|Token
 Oracle:Compleated ({R/W/P} can be paid with {R}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Until your next turn, up to one target creature attacks a player each combat if able.\n[+1]: Discard a card, then draw a card.\n[+0]:Exile target creature or Equipment card with mana value less than Nahiri's loyalty from your graveyard. Create a token that's a copy of it. That token gains haste. Exile it at the beginning of the next end step.

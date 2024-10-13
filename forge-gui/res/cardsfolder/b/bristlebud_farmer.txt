@@ -9,7 +9,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$
 SVar:TrigMill:AB$ Mill | Cost$ Sac<1/Food> | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.Permanent+YouOwn+IsRemembered | Optional$ True | SelectPrompt$ You may select a permanent milled this way | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|LifeGain|Sacrifice|Mill & Type$Food
 DeckHints:Type$Food
-SVar:HasAttackEffect:TRUE
 Oracle:Trample\nWhen Bristlebud Farmer enters, create two Food tokens. (They're artifacts with "{2}, {T}, Sacrifice this artifact: You gain 3 life.")\nWhenever Bristlebud Farmer attacks, you may sacrifice a Food. If you do, mill three cards. You may put a permanent card from among them into your hand.

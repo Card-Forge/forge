@@ -1,6 +1,6 @@
 Name:Giant Token
 ManaCost:no cost
-Types:Creature Giant
 Colors:red
+Types:Creature Giant
 PT:4/4
 Oracle:
