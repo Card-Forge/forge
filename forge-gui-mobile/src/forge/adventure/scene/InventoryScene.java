@@ -180,7 +180,7 @@ public class InventoryScene extends UIScene {
         Deck data = (deckLocation.get(selected));
         if (data == null) return;
 
-        done();
+        //done();
         setSelected(null);
         RewardScene.instance().loadRewards(data, RewardScene.Type.Loot, null, data.getTags().contains("noSell"));
         Forge.switchScene(RewardScene.instance());
@@ -207,14 +207,7 @@ public class InventoryScene extends UIScene {
             if (data == null)
                 return;
             if (openDialog == null) {
-                openDialog = createGenericDialog("", null, Forge.getLocalizer().getMessage("lblYes"),
-                        Forge.getLocalizer().getMessage("lblNo"), () -> {
-                            this.openBooster();
-                            removeDialog();
-                        }, this::removeDialog);
-                openDialog.getContentTable().add(Controls.newTextraLabel("Open Booster Pack?"));
-            }
-            showDialog(openDialog);
+            this.openBooster();
         }
     }
 
