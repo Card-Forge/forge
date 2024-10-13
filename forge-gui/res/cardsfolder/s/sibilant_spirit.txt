@@ -3,6 +3,6 @@ ManaCost:5 U
 Types:Creature Spirit
 PT:5/6
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ Opponent | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ TriggeredDefendingPlayer | NumCards$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredDefendingPlayer | NumCards$ 1 | OptionalDecider$ True
 Oracle:Flying\nWhenever Sibilant Spirit attacks, defending player may draw a card.
