@@ -7,6 +7,6 @@ SVar:TrigAnimate:DB$ Animate | ValidTgts$ Creature.Vampire+YouCtrl+attacking+non
 SVar:TrigDie:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigToken
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ wb_4_3_vampire_demon_flying | TokenOwner$ You | TokenTapped$ True
-DeckHas:Type$Vampire
 SVar:PlayMain1:TRUE
+DeckHas:Type$Vampire
 Oracle:Whenever you attack, target attacking Vampire that isn't a Demon becomes a Demon in addition to its other types. It gains "When this creature dies, draw a card and create a tapped 4/3 white and black Vampire Demon creature token with flying."

@@ -5,6 +5,6 @@ PT:3/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 K:Crew:1
-DeckHas:Ability$Token & Type$Treasure
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Treasure
 Oracle:Whenever Careening Mine Cart attacks, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
