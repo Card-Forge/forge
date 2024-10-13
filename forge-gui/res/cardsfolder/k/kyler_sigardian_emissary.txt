@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Human.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Human+Other+YouCtrl | AddPower$ X | AddToughness$ X | Description$ Other Humans you control get +1/+1 for each counter on CARDNAME.
 SVar:X:Count$CardCounters.ALL
-DeckNeeds:Type$Human
 DeckHas:Ability$Counters
+DeckNeeds:Type$Human
 Oracle:Whenever another Human you control enters, put a +1/+1 counter on Kyler, Sigardian Emissary.\nOther Humans you control get +1/+1 for each counter on Kyler, Sigardian Emissary.
