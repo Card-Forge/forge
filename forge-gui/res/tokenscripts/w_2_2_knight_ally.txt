@@ -1,6 +1,6 @@
 Name:Knight Ally Token
 ManaCost:no cost
-Types:Creature Knight Ally
 Colors:white
+Types:Creature Knight Ally
 PT:2/2
 Oracle:
