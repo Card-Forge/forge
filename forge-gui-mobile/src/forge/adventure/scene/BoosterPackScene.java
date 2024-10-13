@@ -25,7 +25,7 @@ import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
-
+import forge.deck.CardPool;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -301,77 +301,92 @@ public class BoosterPackScene extends UIScene {
         editionList.setUserObject(edition);
     }
 
-    public void pullPack(boolean usingShards) {
+        public void pullPack(boolean usingShards) {
         // Log the quantities
         System.out.println("Card quantities in " + edition + ":");
 
-         // Display the rewards using the reward scene
-        //showRewardScene(rewardPack);
         if (usingShards) {
             Current.player().takeShards(currentShardPrice);
         } else {
             Current.player().takeGold(currentPrice);
         }
-        // Below all to be fully generated in later release
-        // Generate reward packs
 
-        System.out.println("Generating reward packs...");
-        Deck[] rewardPacks;
-        rewardPacks = getRewardPacks(1);
-        System.out.println("Reward packs generated: " + rewardPacks.length);
+        Deck rewardPack = AdventureEventController.instance().generateBooster(edition);
 
-        Deck[] cardRewards = new Deck[0];
-        // Assign a new deck to one of the elements in the array
-        // Ensure you use a valid index, such as 0, 1, or 2
-        cardRewards = new Deck[]{rewardPacks[0]};
-        System.out.println("Card rewards assigned: " + cardRewards.length);
+        // Sort all sections of the deck by rarity
+            List<PaperCard> cards = rewardPack.getAllCardsInASinglePool().toFlatList();
+
+            // Log the cards before sorting
+            System.out.println("Cards before sorting:");
+            for (PaperCard card : cards) {
+                System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
+            }
+
+            // Sort the cards by rarity
+            cards.sort(Comparator.comparing(card -> card.getRarity().ordinal()));
+
+            // Log the cards after sorting
+            System.out.println("Cards after sorting:");
+            for (PaperCard card : cards) {
+                System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
+            }
+
+            // Create a new deck and add sorted cards to it
+            Deck sortedDeck = new Deck();
+            for (PaperCard card : cards) {
+                sortedDeck.getMain().add(card);
+            }
+
+        System.out.println("Logging card order and rarity after rewards:");
+        List<PaperCard> rewards = sortedDeck.getAllCardsInASinglePool().toFlatList();
+        for (PaperCard card : rewards) {
+            System.out.println("Card Name: " + card.getName() + ", Rarity: " + card.getRarity());
+        }
 
         Array<Reward> ret = new Array<>();
         System.out.println("Initialized reward array.");
 
-        for (Deck pack : cardRewards) {
-            RewardData data = new RewardData();
-            data.type = "cardPack";
-            data.count = 1;
-            data.cardPack = pack;
-            System.out.println("Creating reward data for pack: " + pack.getName());
-            ret.addAll(data.generate(false, true));
-            System.out.println("Reward data generated and added to the array.");
-        }
-        System.out.println("Loading rewards into the RewardScene.");
+        RewardData data = new RewardData();
+        data.type = "cardPack";
+        data.count = 1;
+        data.cardPack = sortedDeck;
+        System.out.println("Creating reward data for pack: " + sortedDeck.getName());
+        ret.addAll(data.generate(false, true, true));
+        System.out.println("Reward data generated and added to the array.");
+
         RewardScene.instance().loadRewards(ret, RewardScene.Type.Loot, null);
         Forge.switchScene(RewardScene.instance());
 
-        //Clear the current reward and update the UI
         clearReward();
         updatePullButtons();
     }
 
-    public Deck[] getRewardPacks(int count) {
-        Deck[] ret = new Deck[count];
-        for (int i = 0; i < count; i++) {
-            ret[i] = AdventureEventController.instance().generateBooster(edition);
-            // Sort the cards in the deck by rarity
-            sortCardsByRarity(ret[i]);
-        }
-        return ret;
-    }
+    public Deck sortCardsByRarity(Deck reward) {
+        List<PaperCard> cards = reward.getAllCardsInASinglePool().toFlatList();
 
-    public void sortCardsByRarity(Deck reward) {
-        // Assuming the Deck class has a method to get all cards as a list
-        List<PaperCard> cards = reward.getAllCardsInASinglePool().toFlatList(); // Replace with the actual method to get cards
+        // Log the cards before sorting
+        System.out.println("Cards before sorting:");
+        for (PaperCard card : cards) {
+            System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
+        }
 
         // Sort the cards by rarity
         cards.sort(Comparator.comparing(card -> card.getRarity().ordinal()));
 
-        // Clear the current deck and add sorted cards back
-        reward.getMain().clear(); // Use 'clear()' to clear the deck
+        // Log the cards after sorting
+        System.out.println("Cards after sorting:");
         for (PaperCard card : cards) {
-            reward.getMain().add(card); // Use 'getMain().add()' to add a card to the deck
+            System.out.println("Name: " + card.getName() + ", Rarity: " + card.getRarity());
         }
+
+        // Create a new deck and add sorted cards to it
+        Deck sortedDeck = new Deck();
+        for (PaperCard card : cards) {
+            sortedDeck.getMain().add(card);
+        }
+
+        return sortedDeck;
     }
-
-
 
     private Reward createReward(PaperCard P) {
         if (Config.instance().getSettingData().useAllCardVariants) {
