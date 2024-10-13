@@ -4,8 +4,8 @@ Types:Artifact
 K:Sunburst
 A:AB$ Pump | Cost$ T SubCounter<X/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ Target creature gets -X/-X until end of turn.
 SVar:X:Count$xPaid
-AI:RemoveDeck:All
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
+AI:RemoveDeck:All
 DeckHints:Ability$Proliferate
 Oracle:Sunburst (This enters with a charge counter on it for each color of mana spent to cast it.)\n{T}, Remove X charge counters from Infused Arrows: Target creature gets -X/-X until end of turn.
