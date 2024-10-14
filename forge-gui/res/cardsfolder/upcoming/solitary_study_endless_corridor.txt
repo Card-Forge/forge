@@ -1,0 +1,17 @@
+Name:Solitary Study
+ManaCost:1 W
+Types:Enchantment Room
+AlternateMode:Split
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | Description$ Creatures you control get +1/+0.
+Oracle:Creatures you control get +1/+0.
+
+ALTERNATE
+
+Name:Endless Corridor
+ManaCost:1 W
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When you unlock this door, conjure a duplicate of this card into your hand. When you do, target creature you control gains first strike until end of turn.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigFirstStrike | TriggerDescription$ When you do, target creature you control gains first strike until end of turn.
+SVar:TrigFirstStrike:DB$ Pump | ValidTgts$ Creature.YouCtrl | KW$ First Strike | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gains first strike until end of turn.
+Oracle:When you unlock this door, conjure a duplicate of this card into your hand. When you do, target creature you control gains first strike until end of turn.
