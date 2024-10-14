@@ -7,7 +7,6 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>${revision}</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -315,7 +314,7 @@
                                 </goals>
                                 <configuration>
                                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
-                                    <manifestVersionName>${alpha-version}</manifestVersionName>
+                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
                                     <manifestVersionCode>1</manifestVersionCode>
                                 </configuration>
                             </execution>
@@ -338,7 +337,7 @@
                         <executions>
                             <execution>
                                 <id>SignV2</id>
-                                <phase>install</phase>
+                                <phase>verify</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
@@ -527,8 +526,8 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/" />
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/">
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${snapshot-version}/" />
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${snapshot-version}/">
                                             <fileset dir="${project.build.directory}">
                                                 <include name="${project.build.finalName}-signed-aligned.apk" />
                                                 <include name="assets.zip" />
