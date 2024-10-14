@@ -206,25 +206,41 @@ ScryfallCode=POR
 194 U Winter's Grasp @Paolo Parente
 195 R Wood Elves @Rebecca Guay
 196 L Plains @Douglas Shuler
+196s L Plains @Jack Wei
 197 L Plains @Douglas Shuler
+197s L Plains @Jack Wei
 198 L Plains @Douglas Shuler
+198s L Plains @Jack Wei
 199 L Plains @Douglas Shuler
+199s L Plains @Jack Wei
 200 L Island @Eric Peterson
+200s L Island @库雪明
 201 L Island @Eric Peterson
+201s L Island @库雪明
 202 L Island @Eric Peterson
+202s L Island @库雪明
 203 L Island @Eric Peterson
+203s L Island @库雪明
 204 L Swamp @Romas Kukalis
 205 L Swamp @Romas Kukalis
 206 L Swamp @Romas Kukalis
 207 L Swamp @Romas Kukalis
 208 L Mountain @Brian Durfee
+208s L Mountain @康羽
 209 L Mountain @Brian Durfee
+209s L Mountain @康羽
 210 L Mountain @Brian Durfee
+210s L Mountain @康羽
 211 L Mountain @Brian Durfee
+211s L Mountain @康羽
 212 L Forest @John Avon
+212s L Forest @李铁
 213 L Forest @John Avon
+213s L Forest @李铁
 214 L Forest @John Avon
+214s L Forest @李铁
 215 L Forest @John Avon
+215s L Forest @李铁
 
 [alternate art]
 6d C Armored Pegasus @Andrew Robinson
@@ -252,19 +268,3 @@ ScryfallCode=POR
 164s C Elven Cache @张艺娜
 166s C Fruition @Wang Yuqun
 173† C Monstrous Growth @Dan Frazier
-196s L Plains @Jack Wei
-197s L Plains @Jack Wei
-198s L Plains @Jack Wei
-199s L Plains @Jack Wei
-200s L Island @库雪明
-201s L Island @库雪明
-202s L Island @库雪明
-203s L Island @库雪明
-208s L Mountain @康羽
-209s L Mountain @康羽
-210s L Mountain @康羽
-211s L Mountain @康羽
-212s L Forest @李铁
-213s L Forest @李铁
-214s L Forest @李铁
-215s L Forest @李铁
