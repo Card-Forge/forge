@@ -1049,6 +1049,7 @@ public class PhaseHandler implements java.io.Serializable {
                     for (SpellAbility sa : chosenSa) {
                         Card saHost = sa.getHostCard();
                         final Zone originZone = saHost.getZone();
+                        final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
                         if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
                             // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
@@ -1064,7 +1065,6 @@ public class PhaseHandler implements java.io.Serializable {
                         // Need to check if Zone did change
                         if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                            final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
                             triggerList.triggerChangesZoneAll(game, sa);
                         }
