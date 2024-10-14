@@ -13,7 +13,7 @@ ALTERNATE
 Name:Jetsam
 ManaCost:4 UB UB
 Types:Instant
-A:SP$ Mill | Defined$ Opponent | SubAbility$ DBCast | NumCards$ 3 | SubAbility$ DBCast | SpellDescription$ Each opponent mills three cards, then you may cast a spell from each opponent's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard, exile it instead.
+A:SP$ Mill | Defined$ Opponent | NumCards$ 3 | SubAbility$ DBCast | SpellDescription$ Each opponent mills three cards, then you may cast a spell from each opponent's graveyard without paying its mana cost. If a spell cast this way would be put into a graveyard, exile it instead.
 SVar:DBCast:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBPlayAll
 SVar:DBChoose:DB$ ChooseCard | Choices$ Card.RememberedPlayerCtrl+nonLand | ChoiceZone$ Graveyard | Defined$ You | Amount$ 1 | RememberChosen$ True
 SVar:DBPlayAll:DB$ Play | Defined$ Remembered | Amount$ All | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | ReplaceGraveyard$ Exile | AILogic$ ReplaySpell | SubAbility$ DBCleanup
