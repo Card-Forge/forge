@@ -1162,11 +1162,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             fetchList = CardLists.getValidCards(fetchList, "Card.powerLE" + totpower, source.getController(), source, sa);
                         }
                     }
-                    if (totalCardTypes != null) {
-                        if (totCardTypes >= 0) {
-                            fetchList = CardLists.getValidCards(fetchList, "Card.numTypesLE" + totCardTypes, source.getController(), source, sa);
-                        }
-                    }
+
 
                     // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
                     boolean shouldReveal = (i == 0);
@@ -1178,6 +1174,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c = Aggregates.random(fetchList);
                     } else if (defined && !chooseFromDef) {
                         c = Iterables.getFirst(fetchList, null);
+                    } else if (totalCardTypes != null) {
+                      String title = selectPrompt;
+                      title += "\nCard types left: " + Math.max(totCardTypes, 0);
+                      c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !mandatory, decider);
                     } else {
                         String title = selectPrompt;
                         if (changeNum > 1) { //indicate progress if multiple cards being chosen
@@ -1213,6 +1213,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (totalCardTypes != null) {
                         totCardTypes -= Iterables.size(c.getType().getCoreTypes());
                     }
+                }
+
+                if (totalCardTypes != null && totCardTypes > 0) {
+                    chosenCards.clear();
                 }
             }
 
