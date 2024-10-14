@@ -4,6 +4,8 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <android.manifest.versionCodeUpdateFromVersion>true</android.manifest.versionCodeUpdateFromVersion>
+        <android.manifestMerger.versionDigits>2,2,2,4</android.manifestMerger.versionDigits>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
@@ -271,9 +273,6 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
-                                <configuration>
-                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -348,9 +347,6 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
-                                <configuration>
-                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -439,9 +435,6 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
-                                <configuration>
-                                    <manifestVersionCodeUpdateFromVersion>true</manifestVersionCodeUpdateFromVersion>
-                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
