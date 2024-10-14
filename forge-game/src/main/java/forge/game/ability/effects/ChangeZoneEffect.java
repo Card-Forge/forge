@@ -4,7 +4,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.game.*;
@@ -27,7 +26,9 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
@@ -1085,8 +1086,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType::getTranslatedName).toLowerCase()), decider, player);
             final String totalcmc = sa.getParam("WithTotalCMC");
             final String totalpower = sa.getParam("WithTotalPower");
+            final String totalCardTypes = sa.getParam("WithTotalCardTypes");
             int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
             int totpower = AbilityUtils.calculateAmount(source, totalpower, sa);
+            int totCardTypes = AbilityUtils.calculateAmount(source, totalCardTypes, sa);
 
             CardCollection chosenCards = new CardCollection();
             if (changeType.startsWith("EACH")) {
@@ -1159,6 +1162,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             fetchList = CardLists.getValidCards(fetchList, "Card.powerLE" + totpower, source.getController(), source, sa);
                         }
                     }
+                    if (totalCardTypes != null) {
+                        if (totCardTypes >= 0) {
+                            fetchList = CardLists.getValidCards(fetchList, "Card.numTypesLE" + totCardTypes, source.getController(), source, sa);
+                        }
+                    }
 
                     // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
                     boolean shouldReveal = (i == 0);
@@ -1201,6 +1209,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (totalpower != null) {
                         totpower -= c.getCurrentPower();
+                    }
+                    if (totalCardTypes != null) {
+                        totCardTypes -= Iterables.size(c.getType().getCoreTypes());
                     }
                 }
             }
@@ -1537,7 +1548,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("AtRandom")
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
                 && !sa.hasParam("WithTotalCMC")
-                && !sa.hasParam("WithTotalPower");
+                && !sa.hasParam("WithTotalPower")
+                && !sa.hasParam("WithTotalCardTypes");
     }
 
     /**
