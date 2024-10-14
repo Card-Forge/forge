@@ -15,6 +15,6 @@ ManaCost:2 G
 Types:Enchantment Room
 T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTgts$ Player | CombatDamage$ True | Execute$ TrigChoose | TriggerDescription$ Whenever a creature you control deals combat damage to a player, turn that creature face up or put a +1/+1 counter on it.
 SVar:TrigChoose:DB$ GenericChoice | Choices$ DBPutCounter,DBTurnFaceUp
-SVar:DBTurnFaceUp:DB$ SetState | Defined$ TriggeredSourceLKICopy | Mode$ TurnFaceUp | IsPresent$ Card.canBeTurnedFaceUp | PresentDefined$ TriggeredSourceLKICopy | SpellDescription$ Turn target creature face up
-SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target creature.
+SVar:DBTurnFaceUp:DB$ SetState | Defined$ TriggeredSourceLKICopy | Mode$ TurnFaceUp | IsPresent$ Card.canBeTurnedFaceUp+faceDown | PresentDefined$ TriggeredSourceLKICopy | SpellDescription$ Turn it face up
+SVar:DBPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ P1P1 | CounterNum$ 1 | IsPresent$ Card.canReceiveCounters P1P1 | PresentDefined$ TriggeredSourceLKICopy | SpellDescription$ Put a +1/+1 counter on it
 Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhenever a creature you control deals combat damage to a player, turn that creature face up or put a +1/+1 counter on it.
