@@ -1138,6 +1138,7 @@
   {
     "name": "Booster Book",
     "usableOnWorldMap": true ,
+    "usableInPoi": true ,
     "equipmentSlot": "Ability2",
     "description": "Opens the Magic Booster Book",
     "commandOnUse": "open booster book",
