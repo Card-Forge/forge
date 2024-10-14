@@ -903,8 +903,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public int cardSellPrice(PaperCard card) {
-        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - currentLocationChanges.getTownPriceModifier()));
+        // Use default value of 1 if currentLocationChanges is null
+        float townPriceModifier = (currentLocationChanges != null) ? currentLocationChanges.getTownPriceModifier() : 1.0f;
+
+        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - townPriceModifier));
     }
+
 
     public void sellCard(PaperCard card, Integer result) {
         float price = CardUtil.getCardPrice(card) * result;

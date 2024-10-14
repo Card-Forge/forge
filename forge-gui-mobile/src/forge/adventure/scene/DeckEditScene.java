@@ -69,4 +69,8 @@ public class DeckEditScene extends ForgeScene {
     public boolean isNoSell(PaperCard pc) {
         return AdventurePlayer.current().getNoSellCards().contains(pc);
     }
+
+    public int getCardPrice(PaperCard pc) {
+        return AdventurePlayer.current().cardSellPrice(pc);
+    }
 }

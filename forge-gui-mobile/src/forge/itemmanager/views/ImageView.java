@@ -10,6 +10,7 @@ import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
 import forge.ImageKeys;
+import forge.adventure.scene.DeckEditScene;
 import forge.adventure.scene.ShopScene;
 import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
@@ -1060,6 +1061,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
 
                 if (Forge.isMobileAdventureMode) {
+                    if (Forge.getCurrentScene() instanceof DeckEditScene) {
+                        if (cardPrice == null)
+                            cardPrice = ((DeckEditScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
+                        drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y, w, h);
+                    }
                     if (Forge.getCurrentScene() instanceof ShopScene) {
                         if (cardPrice == null)
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);

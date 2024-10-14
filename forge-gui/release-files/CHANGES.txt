@@ -1,6 +1,52 @@
 ## Unreleased
 ### No issue
 
+**remove imports**
+
+
+[77bf16555a36dcf](https://github.com/nwg5817/forge/commit/77bf16555a36dcf) Meta *2024-10-13 21:13:13*
+
+**Remove all sorting from booster**
+
+
+[03943eb22c67ac4](https://github.com/nwg5817/forge/commit/03943eb22c67ac4) Meta *2024-10-13 20:57:07*
+
+**Sort all card rewards**
+
+
+[35d80d0b4abc515](https://github.com/nwg5817/forge/commit/35d80d0b4abc515) Meta *2024-10-13 20:44:46*
+
+**tryin to sort**
+
+
+[ed3223f7de4a6a6](https://github.com/nwg5817/forge/commit/ed3223f7de4a6a6) Meta *2024-10-13 20:02:42*
+
+**Fix**
+
+
+[9d0ecff34ae8fc9](https://github.com/nwg5817/forge/commit/9d0ecff34ae8fc9) Meta *2024-10-13 18:41:25*
+
+**Using Booster Pack to generate Cards**
+
+
+[a81f4db570c44dc](https://github.com/nwg5817/forge/commit/a81f4db570c44dc) Meta *2024-10-13 18:35:05*
+
+**Open Booster QoL**
+
+
+[0d813e9f42a278f](https://github.com/nwg5817/forge/commit/0d813e9f42a278f) Meta *2024-10-13 18:34:22*
+
+**Restrict Universe Beyond**
+
+ * Secret Lairs, Fallout, 40k, LOTR, WHO, Transformers, Jurassic Park, Dungeons and Dragons (might fit thematically), Assassins Creed.
+
+[2de25e7c17153b2](https://github.com/nwg5817/forge/commit/2de25e7c17153b2) Meta *2024-10-13 17:46:29*
+
+**Stopping point**
+
+
+[3a623faef5ba4ef](https://github.com/nwg5817/forge/commit/3a623faef5ba4ef) Meta *2024-10-13 17:44:51*
+
 **Reworking**
 
 
