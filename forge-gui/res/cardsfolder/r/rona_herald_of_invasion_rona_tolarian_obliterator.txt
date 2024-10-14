@@ -21,7 +21,7 @@ Types:Legendary Creature Phyrexian Wizard
 PT:5/5
 K:Trample
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller exiles a card from their hand at random. If it's a land card, you may put it onto the battlefield under your control. Otherwise, you may cast it without paying its mana cost.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | DefinedPlayer$ TriggeredSourceController | Mandatory$ True | ChangeType$ Card | Hidden$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ DBRonaLand
+SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredSourceController | Mandatory$ True | ChangeType$ Card | Hidden$ True | AtRandom$ True | RememberChanged$ True | SubAbility$ DBRonaLand
 SVar:DBRonaLand:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ChangeType$ Land.IsRemembered | Hidden$ True | Optional$ True | GainControl$ True | SubAbility$ DBRonaPlay
 SVar:DBRonaPlay:DB$ Play | ValidZone$ Exile | Controller$ You | Valid$ Card.IsRemembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBRonaCleanup
 SVar:DBRonaCleanup:DB$ Cleanup | ClearRemembered$ True

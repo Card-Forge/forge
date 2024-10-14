@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Creature Human
 PT:2/3
 A:AB$ Animate | Cost$ 1 W CollectEvidence<2> | Types$ Human,Detective | RemoveCreatureTypes$ True | Duration$ Permanent | Power$ 4 | Toughness$ 4 | Keywords$ Vigilance | SpellDescription$ CARDNAME becomes a Human Detective with base power and toughness 4/4 and gains vigilance.
-A:AB$ Animate | Cost$ 2 W CollectEvidence<4> | staticAbilities$ Static | ConditionPresent$ Card.Self+Detective | Types$ Legendary,Creature | Name$ Mileva, the Stalwart | Power$ 5 | Toughness$ 5 | Duration$ Permanent | RemoveCreatureTypes$ True | Duration$ Permanent | SpellDescription$ If CARDNAME is a Detective, it becomes a legendary creature named Mileva, the Stalwart, it has base power and toughness 5/5, and it gains "Other creatures you control have indestructible."
+A:AB$ Animate | Cost$ 2 W CollectEvidence<4> | staticAbilities$ Static | ConditionPresent$ Card.Self+Detective | Types$ Legendary,Creature | Name$ Mileva, the Stalwart | Power$ 5 | Toughness$ 5 | RemoveCreatureTypes$ True | Duration$ Permanent | SpellDescription$ If CARDNAME is a Detective, it becomes a legendary creature named Mileva, the Stalwart, it has base power and toughness 5/5, and it gains "Other creatures you control have indestructible."
 SVar:Static:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other creatures you control have indestructible.
 DeckHints:Ability$Graveyard|Mill|Discard|Dredge
 DeckHas:Type$Detective
