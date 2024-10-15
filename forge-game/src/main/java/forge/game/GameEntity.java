@@ -309,8 +309,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     abstract public void setCounters(final Map<CounterType, Integer> allCounters);
 
+    abstract public boolean canRemoveCounters(final CounterType type);
+
     abstract public boolean canReceiveCounters(final CounterType type);
-    abstract public void subtractCounter(final CounterType counterName, final int n, final Player remover);
+    abstract public int subtractCounter(final CounterType counterName, final int n, final Player remover);
     abstract public void clearCounters();
 
     public boolean canReceiveCounters(final CounterEnumType type) {
@@ -331,8 +333,8 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         addCounter(CounterType.get(counterType), n, source, table);
     }
 
-    public void subtractCounter(final CounterEnumType counterName, final int n, final Player remover) {
-        subtractCounter(CounterType.get(counterName), n, remover);
+    public int subtractCounter(final CounterEnumType counterName, final int n, final Player remover) {
+        return subtractCounter(CounterType.get(counterName), n, remover);
     }
 
     abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params);

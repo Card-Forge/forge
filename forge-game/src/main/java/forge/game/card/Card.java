@@ -1601,6 +1601,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
+    public final boolean canRemoveCounters(final CounterType type) {
+        if (isPhasedOut()) {
+            return false;
+        }
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+        repParams.put(AbilityKey.CounterType, type);
+        repParams.put(AbilityKey.Result, 0);
+        repParams.put(AbilityKey.IsDamage, false);
+        if (game.getReplacementHandler().cantHappenCheck(ReplacementType.RemoveCounter, repParams)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
         // Rules say it is only a SBA, but is it checked there too?
@@ -1736,11 +1751,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     @Override
-    public final void subtractCounter(final CounterType counterName, final int n, final Player remover) {
-        subtractCounter(counterName, n, remover, false);
+    public final int subtractCounter(final CounterType counterName, final int n, final Player remover) {
+        return subtractCounter(counterName, n, remover, false);
     }
 
-    public final void subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
+    public final int subtractCounter(final CounterType counterName, final int n, final Player remover, final boolean isDamage) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - n, 0);
 
@@ -1758,12 +1773,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                     newValue = 0;
                 }
                 break;
+            case Replaced:
+                return 0;
             default:
                 break;
         }
 
         final int delta = oldValue - newValue;
-        if (delta == 0) { return; }
+        if (delta == 0) { return 0; }
 
         int powerBonusBefore = getPowerBonusFromCounters();
         int toughnessBonusBefore = getToughnessBonusFromCounters();
@@ -1800,6 +1817,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         runParams.put(AbilityKey.CounterAmount, delta);
         runParams.put(AbilityKey.NewCounterAmount, newValue);
         getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemovedOnce, runParams, false);
+
+        return delta;
     }
 
     @Override
