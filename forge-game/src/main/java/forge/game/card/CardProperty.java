@@ -848,7 +848,7 @@ public class CardProperty {
             final String restriction = property.split("sharesAllCardTypesWithOther ")[1];
             CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
             list.remove(card);
-            return Iterables.any(list, CardPredicates.sharesAllCardTypesWith(card));
+            return list.anyMatch(CardPredicates.sharesAllCardTypesWith(card));
         } else if (property.startsWith("sharesLandTypeWith")) {
             final String restriction = property.split("sharesLandTypeWith ")[1];
             if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesLandTypeWith(card))) {
