@@ -4,7 +4,7 @@ Types:Enchantment
 K:ETBReplacement:Other:SiegeChoice
 SVar:SiegeChoice:DB$ GenericChoice | Choices$ Brotherhood,Enclave | Defined$ You | SetChosenMode$ True | AILogic$ Brotherhood | ShowChoice$ ExceptSelf | SpellDescription$ As CARDNAME enters, choose Brotherhood or Enclave.
 SVar:Brotherhood:DB$ Pump | SpellDescription$ Brotherhood
-SVar:Enclave:DB$ Pump | SpellDescription$ Enclare
+SVar:Enclave:DB$ Pump | SpellDescription$ Enclave
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeBrotherhood | AddTrigger$ BrotherhoodTrig | Description$ • Brotherhood — At the beginning of your upkeep, each opponent draws a card. You draw a card for each card drawn this way.
 S:Mode$ Continuous | Affected$ Card.Self+ChosenModeEnclave | AddTrigger$ EnclaveTrig | Description$ • Enclave — Whenever a player attacks you with one or more creatures, that player gets twice that many rad counters.
 SVar:BrotherhoodTrig:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ Brotherhood — At the beginning of your upkeep, each opponent draws a card. You draw a card for each card drawn this way.
