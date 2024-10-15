@@ -1133,10 +1133,6 @@ public class CardProperty {
             if (!card.isFirstTurnControlled()) {
                 return false;
             }
-        } else if (property.startsWith("notFirstTurnControlled")) {
-            if (card.isFirstTurnControlled()) {
-                return false;
-            }
         } else if (property.startsWith("startedTheTurnUntapped")) {
             if (!card.hasStartedTheTurnUntapped()) {
                 return false;

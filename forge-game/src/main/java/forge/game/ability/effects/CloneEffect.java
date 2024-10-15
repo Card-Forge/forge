@@ -144,6 +144,7 @@ public class CloneEffect extends SpellAbilityEffect {
 
             final long ts = game.getNextTimestamp();
             tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
+            tgtCard.updateRooms();
 
             // set ETB tapped of clone
             if (sa.hasParam("IntoPlayTapped")) {

@@ -83,7 +83,7 @@ public class InputPayManaOfCostPayment extends InputPayMana {
             msg.append(messagePrefix).append("\n");
         }
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DETAILED_SPELLDESC_IN_PROMPT)) {
-	    if (saPaidFor.isSpell()) {
+            if (saPaidFor.isSpell()) {
                 msg.append(saPaidFor.getStackDescription().replace("(Targeting ERROR)", "")).append("\n\n");
             } else {
                 msg.append(saPaidFor.getHostCard()).append(" - ").append(saPaidFor.toString()).append("\n\n");

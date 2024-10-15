@@ -56,8 +56,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             } else {
                 zone.add(ZoneType.Battlefield);
             }
-            repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
-                    sa.getParam("RepeatCards"), source.getController(), source, sa);
+            repeatCards = CardLists.getValidCards(game.getCardsIn(zone), sa.getParam("RepeatCards"), source.getController(), source, sa);
         }
         else if (sa.hasParam(("RepeatSpellAbilities"))) {
             repeatSas = Lists.newArrayList();
@@ -167,18 +166,13 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RepeatPlayers")) {
-            final FCollection<Player> repeatPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
+            final FCollection<Player> repeatPlayers = getDefinedPlayersOrTargeted(sa, "RepeatPlayers");
             if (sa.hasParam("ClearRememberedBeforeLoop")) {
                 source.clearRemembered();
             }
             boolean optional = sa.hasParam("RepeatOptionalForEachPlayer");
             boolean nextTurn = sa.hasParam("NextTurnForEachPlayer");
-            if (sa.hasParam("StartingWithActivator")) {
-                int aidx = repeatPlayers.indexOf(activator);
-                if (aidx != -1) {
-                    Collections.rotate(repeatPlayers, -aidx);
-                }
-            }
+
             for (final Player p : repeatPlayers) {
                 if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
                     continue;

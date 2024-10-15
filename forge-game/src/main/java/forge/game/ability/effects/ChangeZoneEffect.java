@@ -514,15 +514,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         // CR 401.4
-        if (destination.equals(ZoneType.Library) && !shuffle && tgtCards.size() > 1) {
+        if (destination.isDeck() && !shuffle && tgtCards.size() > 1) {
             if (sa.hasParam("RandomOrder")) {
                 final CardCollection random = new CardCollection(tgtCards);
                 CardLists.shuffle(random);
                 tgtCards = random;
-            } else if (sa.hasParam("Chooser")) {
-                tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
             } else {
-                tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
+                if (sa.hasParam("Chooser"))
+                    tgtCards = chooser.getController().orderMoveToZoneList(tgtCards, destination, sa);
+                else
+                    tgtCards = GameActionUtil.orderCardsByTheirOwners(game, tgtCards, destination, sa);
             }
         }
 
@@ -717,7 +718,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     handleExiledWith(gameCard, sa);
                 }
 
-                movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
+                movedCard = game.getAction().moveTo(destination, gameCard, libraryPosition, sa, moveParams);
 
                 if (destination.equals(ZoneType.Exile) && lastStateBattlefield.contains(gameCard) && hostCard.equals(gameCard)) {
                     // support Parallax Wave returning itself

@@ -71,7 +71,7 @@ public class PhaseHandler implements java.io.Serializable {
     private int nUpkeepsThisTurn = 0;
     private int nUpkeepsThisGame = 0;
     private int nCombatsThisTurn = 0;
-    private int nMain2sThisTurn = 0;
+    private int nMainsThisTurn = 0;
     private int planarDiceSpecialActionThisTurn = 0;
 
     private transient Player playerTurn = null;
@@ -266,23 +266,26 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case MAIN1:
-                    {
-                        if (playerTurn.isArchenemy()) {
-                            playerTurn.setSchemeInMotion(null);
-                        }
-                        GameEntityCounterTable table = new GameEntityCounterTable();
-                        // all Sagas get a Lore counter at the beginning of pre combat
-                        for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
-                            if (c.isSaga()) {
-                                c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
-                            }
-                        }
-                        // roll for attractions if we have any
-                        if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
-                            playerTurn.rollToVisitAttractions();
-                        }
-                        table.replaceCounterEffect(game, null, false);
+                    nMainsThisTurn++;
+
+                    if (playerTurn.isArchenemy()) {
+                        playerTurn.setSchemeInMotion(null);
                     }
+
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    // all Sagas get a Lore counter at the beginning of pre combat
+                    for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
+                        if (c.isSaga()) {
+                            c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
+                        }
+                    }
+                    table.replaceCounterEffect(game, null, false);
+
+                    // roll for attractions if we have any
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
+                        playerTurn.rollToVisitAttractions();
+                    }
+
                     break;
 
                 case COMBAT_BEGIN:
@@ -343,6 +346,7 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case MAIN2:
+                    nMainsThisTurn++;
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                     break;
 
@@ -362,9 +366,9 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
-                        final CardZoneTable table = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+                        final CardZoneTable zoneMovements = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                        AbilityKey.addCardZoneTableParams(moveParams, table);
+                        AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
                         final CardCollection discarded = new CardCollection();
                         List<Card> discardedBefore = Lists.newArrayList(playerTurn.getDiscardedThisTurn());
@@ -374,7 +378,7 @@ public class PhaseHandler implements java.io.Serializable {
                                 discarded.add(moved);
                             }
                         }
-                        table.triggerChangesZoneAll(game, null);
+                        zoneMovements.triggerChangesZoneAll(game, null);
 
                         if (!discarded.isEmpty()) {
                             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
@@ -402,7 +406,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     nUpkeepsThisTurn = 0;
                     nCombatsThisTurn = 0;
-                    nMain2sThisTurn = 0;
+                    nMainsThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
                     // Rule 514.3
@@ -485,10 +489,6 @@ public class PhaseHandler implements java.io.Serializable {
                 if (eventEndCombat != null) {
                     game.fireEvent(eventEndCombat);
                 }
-                break;
-
-            case MAIN2:
-                nMain2sThisTurn++;
                 break;
 
             case CLEANUP:
@@ -975,8 +975,12 @@ public class PhaseHandler implements java.io.Serializable {
         return is(PhaseType.UPKEEP) && nUpkeepsThisGame == 0;
     }
 
+    public final int getNumMain() {
+        return nMainsThisTurn;
+    }
+
     public final boolean beforeFirstPostCombatMainEnd() {
-        return nMain2sThisTurn == 0;
+        return nMainsThisTurn <= (is(PhaseType.MAIN2) ? 2 : 1);
     }
 
     public final boolean skippedDeclareBlockers() {

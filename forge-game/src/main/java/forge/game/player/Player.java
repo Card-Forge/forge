@@ -62,6 +62,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -298,7 +300,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Should keep player relations somewhere in the match structure
      */
     public final PlayerCollection getOpponents() {
-        return game.getPlayers().filter(PlayerPredicates.isOpponentOf(this));
+        return game.getPlayersInTurnOrder(this).filter(PlayerPredicates.isOpponentOf(this));
     }
 
     public final PlayerCollection getRegisteredOpponents() {
@@ -3950,5 +3952,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public Player getDeclaresBlockers() {
         Map.Entry<Long, Player> e = declaresBlockers.lastEntry();
         return e == null ? null : e.getValue();
+    }
+
+    public List<String> getUnlockedDoors() {
+        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+                .filter(Card::isRoom)
+                .map(Card::getUnlockedRoomNames)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }

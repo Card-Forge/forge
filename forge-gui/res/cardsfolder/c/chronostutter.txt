@@ -2,5 +2,5 @@ Name:Chronostutter
 ManaCost:5 U
 Types:Instant
 A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Library | ValidTgts$ Creature | LibraryPosition$ 1 | SpellDescription$ Put target creature into its owner's library second from the top.
-# Library Position is zero indexed. So 1 is second from the top
+# LibraryPosition is zero indexed. So 1 is second from the top
 Oracle:Put target creature into its owner's library second from the top.

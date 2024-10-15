@@ -107,7 +107,7 @@ ScryfallCode=5ED
 93 R Hurkyl's Recall @NéNé Thomas
 94 U Hydroblast @Kaja Foglio
 95 R Juxtapose @Justin Hampton
-96 C Krovikan Sorcerer @Pat Morrissey
+96 C Krovikan Sorcerer @Pat Lewis
 97 C Labyrinth Minotaur @Anson Maddocks
 98 R Leviathan @Mark Tedin
 99 U Lifetap @Mike Dringenberg
@@ -353,7 +353,7 @@ ScryfallCode=5ED
 339 U Wanderlust @Rebecca Guay
 340 C War Mammoth @Jeff A. Menges
 341 U Whirling Dervish @Susan Van Camp
-342 C Wild Growth @Pat Morrissey
+342 C Wild Growth @Pat Lewis
 343 U Winter Blast @Kaja Foglio
 344 U Wolverine Pack @Steve White
 345 R Wyluli Wolf @Susan Van Camp
@@ -441,10 +441,10 @@ ScryfallCode=5ED
 427 C Urza's Mine @Anson Maddocks
 428 C Urza's Power Plant @Mark Tedin
 429 C Urza's Tower @Mark Poole
-430 L Plains @Pat Morrissey
-431 L Plains @Pat Morrissey
-432 L Plains @Pat Morrissey
-433 L Plains @Pat Morrissey
+430 L Plains @Pat Lewis
+431 L Plains @Pat Lewis
+432 L Plains @Pat Lewis
+433 L Plains @Pat Lewis
 434 L Island @J. W. Frost
 435 L Island @J. W. Frost
 436 L Island @J. W. Frost

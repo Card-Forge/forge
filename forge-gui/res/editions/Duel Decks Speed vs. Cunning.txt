@@ -79,7 +79,7 @@ ScryfallCode=DDN
 71 U Arrow Volley Trap @Steve Argyle
 72 C Repeal @Anthony Palumbo
 73 U Mystic Monastery @Florian de Gesincourt
-74 C Terramorphic Expanse @Dan Scott
+74 C Terramorphic Expanse @Dan Murayama Scott
 75 L Island @Rob Alexander
 76 L Island @Rob Alexander
 77 L Island @Andreas Rocha

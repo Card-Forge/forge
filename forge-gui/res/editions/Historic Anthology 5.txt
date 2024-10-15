@@ -17,7 +17,7 @@ ScryfallCode=HA5
 9 U Whirler Rogue @Winona Nelson
 10 M Sheoldred, Whispering One @Jana Schirmer & Johannes Voss
 11 C Vault Skirge @Brad Rigney
-12 U Ancient Grudge @Ryan Yee
+12 C Ancient Grudge @Ryan Yee
 13 R Dragonstorm @Kev Walker
 14 U Trash for Treasure @Lars Grant-West
 15 M Urabrask the Hidden @Brad Rigney

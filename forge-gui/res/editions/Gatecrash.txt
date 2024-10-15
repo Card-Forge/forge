@@ -16,7 +16,7 @@ ScryfallCode=GTC
 2 C Angelic Edict @Trevor Claxton
 3 R Angelic Skirmisher @David Rapoza
 4 C Assault Griffin @Eric Velhagen
-5 C Basilica Guards @Dan Scott
+5 C Basilica Guards @Dan Murayama Scott
 6 R Blind Obedience @Seb McKinnon
 7 U Boros Elite @Willian Murai
 8 C Court Street Denizen @Volkan Baǵa
@@ -151,8 +151,8 @@ ScryfallCode=GTC
 137 U Tower Defense @Seb McKinnon
 138 C Verdant Haven @Daniel Ljunggren
 139 U Wasteland Viper @Lucas Graciano
-140 C Wildwood Rebirth @Dan Scott
-141 R Alms Beast @Dan Scott
+140 C Wildwood Rebirth @Dan Murayama Scott
+141 R Alms Beast @Dan Murayama Scott
 142 R Assemble the Legion @Eric Deschamps
 143 M Aurelia, the Warleader @Slawomir Maniak
 144 M Aurelia's Fury @Tyler Jacobson
@@ -224,7 +224,7 @@ ScryfallCode=GTC
 210 C Zhur-Taa Swine @Yeong-Hao Han
 211 U Arrows of Justice @James Ryman
 212 C Beckon Apparition @Cliff Childs
-213 R Biomass Mutation @Dan Scott
+213 R Biomass Mutation @Dan Murayama Scott
 214 C Bioshift @Scott Chou
 215 R Boros Reckoner @Howard Lyon
 216 U Burning-Tree Emissary @Izzy

@@ -65,11 +65,11 @@ ScryfallCode=KLD
 50 U Glint-Nest Crane @Christopher Moeller
 51 C Hightide Hermit @Jason Kang
 52 R Insidious Will @Anthony Palumbo
-53 U Janjeet Sentry @Dan Scott
+53 U Janjeet Sentry @Dan Murayama Scott
 54 U Long-Finned Skywhale @Cliff Childs
 55 C Malfunction @Izzy
 56 M Metallurgic Summonings @Kieran Yanner
-57 U Minister of Inquiries @Dan Scott
+57 U Minister of Inquiries @Dan Murayama Scott
 58 C Nimble Innovator @Slawomir Maniak
 59 R Padeem, Consul of Innovation @Matt Stewart
 60 R Paradoxical Outcome @Nils Hamm
@@ -81,7 +81,7 @@ ScryfallCode=KLD
 66 C Thriving Turtle @Jeff Simpson
 67 M Torrential Gearhulk @Svetlin Velinov
 68 C Vedalken Blademaster @Lake Hurwitz
-69 C Weldfast Wingsmith @Dan Scott
+69 C Weldfast Wingsmith @Dan Murayama Scott
 70 C Wind Drake @Todd Lockwood
 71 U Aetherborn Marauder @Kieran Yanner
 72 C Ambitious Aetherborn @Josu Hernaiz
@@ -94,7 +94,7 @@ ScryfallCode=KLD
 79 U Embraal Bruiser @Sidharth Chaturvedi
 80 U Essence Extraction @Min Yum
 81 C Fortuitous Find @Tomasz Jedruszek
-82 C Foundry Screecher @Dan Scott
+82 C Foundry Screecher @Dan Murayama Scott
 83 U Fretwork Colony @Christopher Burdett
 84 R Gonti, Lord of Luxury @Daarken
 85 U Harsh Scrutiny @Vincent Proce
@@ -154,7 +154,7 @@ ScryfallCode=KLD
 139 C Wayward Giant @Filip Burburan
 140 C Welding Sparks @Raymond Swanland
 141 C Appetite for the Unnatural @Zoltan Boros
-142 U Arborback Stomper @Dan Scott
+142 U Arborback Stomper @Dan Murayama Scott
 143 R Architect of the Untamed @Sara Winters
 144 U Armorcraft Judge @David Palumbo
 145 C Attune with Aether @Wesley Burt
@@ -188,7 +188,7 @@ ScryfallCode=KLD
 173 C Wild Wanderer @Sidharth Chaturvedi
 174 R Wildest Dreams @Daniel Ljunggren
 175 C Wily Bandar @Yeong-Hao Han
-176 U Cloudblazer @Dan Scott
+176 U Cloudblazer @Dan Murayama Scott
 177 U Contraband Kingpin @Anna Steinbauer
 178 R Depala, Pilot Exemplar @Greg Opalinski
 179 M Dovin Baan @Tyler Jacobson

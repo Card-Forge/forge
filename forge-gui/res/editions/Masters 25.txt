@@ -18,7 +18,7 @@ ScryfallCode=A25
 5 M Armageddon @Chris Rahn
 6 C Auramancer @Rebecca Guay
 7 C Cloudshift @Howard Lyon
-8 C Congregate @Mark Zug
+8 U Congregate @Mark Zug
 9 R Darien, King of Kjeldor @Michael Phillippi
 10 C Dauntless Cathar @Zack Stella
 11 R Decree of Justice @Adam Rex
@@ -80,7 +80,7 @@ ScryfallCode=A25
 67 C Mystic of the Hidden Way @Ryan Alexander Lee
 68 R Pact of Negation @Jason Chan
 69 C Phantasmal Bear @Ryan Yee
-70 R Reef Worm @Dan Scott
+70 R Reef Worm @Dan Murayama Scott
 71 C Retraction Helix @Phill Simmer
 72 C Shoreline Ranger @Magali Villeneuve
 73 C Sift @Pete Venters
@@ -113,7 +113,7 @@ ScryfallCode=A25
 100 C Phyrexian Ghoul @Pete Venters
 101 M Phyrexian Obliterator @Todd Lockwood
 102 R Plague Wind @Alan Pollack
-103 R Ratcatcher @Dan Scott
+103 R Ratcatcher @Dan Murayama Scott
 104 U Ravenous Chupacabra @Daarken
 105 C Relentless Rats @Johann Bodin
 106 C Returned Phalanx @Seb McKinnon
@@ -186,7 +186,7 @@ ScryfallCode=A25
 173 U Invigorate @Mark Zug
 174 U Iwamori of the Open Fist @Paolo Parente
 175 C Kavu Climber @Jonathan Kuo
-176 U Kavu Predator @Dan Scott
+176 U Kavu Predator @Dan Murayama Scott
 177 U Krosan Colossus @Kev Walker
 178 U Krosan Tusker @Kev Walker
 179 R Living Wish @Hideaki Takamura
@@ -197,7 +197,7 @@ ScryfallCode=A25
 184 C Presence of Gond @Brandon Kitkouski
 185 R Protean Hulk @Matt Cavotta
 186 U Rancor @Kev Walker
-187 U Regrowth @Dan Scott
+187 U Regrowth @Dan Murayama Scott
 188 U Stampede Driver @Ron Spears
 189 R Summoner's Pact @Chippy
 190 C Timberpack Wolf @John Avon
@@ -211,8 +211,8 @@ ScryfallCode=A25
 198 U Blightning @Thomas M. Baxa
 199 U Boros Charm @Zoltan Boros
 200 R Brion Stoutarm @Zoltan Boros & Gabor Szikszai
-201 U Cloudblazer @Dan Scott
-202 M Conflux @Karl Kopinski
+201 U Cloudblazer @Dan Murayama Scott
+202 R Conflux @Karl Kopinski
 203 R Eladamri's Call @Kev Walker
 204 M Gisela, Blade of Goldnight @Jason Chan
 205 R Grenzo, Dungeon Warden @Lucas Graciano

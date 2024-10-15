@@ -9,7 +9,7 @@ ScryfallCode=HA7
 1 M Sun Titan @Todd Lockwood
 2 R Giver of Runes @Seb McKinnon
 3 M Frost Titan @Mike Bierek
-4 C Repeal @Dan Scott
+4 C Repeal @Dan Murayama Scott
 5 M Vendilion Clique @Willian Murai
 6 M Grave Titan @Nils Hamm
 7 C Echoing Decay @Greg Staples

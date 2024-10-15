@@ -33,6 +33,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
@@ -261,6 +262,21 @@ public class CardFactory {
                 final CardState original = card.getState(CardStateName.Original);
                 original.addNonManaAbilities(card.getCurrentState().getNonManaAbilities());
                 original.addIntrinsicKeywords(card.getCurrentState().getIntrinsicKeywords()); // Copy 'Fuse' to original side
+                for (Trigger t : card.getCurrentState().getTriggers()) {
+                    if (t.isIntrinsic()) {
+                        original.addTrigger(t.copy(card, false));
+                    }
+                }
+                for (StaticAbility st : card.getCurrentState().getStaticAbilities()) {
+                    if (st.isIntrinsic()) {
+                        original.addStaticAbility(st.copy(card, false));
+                    }
+                }
+                for (ReplacementEffect re : card.getCurrentState().getReplacementEffects()) {
+                    if (re.isIntrinsic()) {
+                        original.addReplacementEffect(re.copy(card, false));
+                    }
+                }
                 original.getSVars().putAll(card.getCurrentState().getSVars()); // Unfortunately need to copy these to (Effect looks for sVars on execute)
             } else if (state != CardStateName.Original) {
                 CardFactoryUtil.setupKeywordedAbilities(card);
@@ -418,7 +434,11 @@ public class CardFactory {
         c.setAttractionLights(face.getAttractionLights());
 
         // SpellPermanent only for Original State
-        if (c.getCurrentStateName() == CardStateName.Original || c.getCurrentStateName() == CardStateName.Modal || c.getCurrentStateName().toString().startsWith("Specialize")) {
+        if (c.getCurrentStateName() == CardStateName.Original ||
+                c.getCurrentStateName() == CardStateName.LeftSplit ||
+                c.getCurrentStateName() == CardStateName.RightSplit ||
+                c.getCurrentStateName() == CardStateName.Modal ||
+                c.getCurrentStateName().toString().startsWith("Specialize")) {
             if (c.isLand()) {
                 SpellAbility sa = new LandAbility(c);
                 sa.setCardState(c.getCurrentState());

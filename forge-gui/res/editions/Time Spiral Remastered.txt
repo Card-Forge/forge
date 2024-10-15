@@ -181,7 +181,7 @@ ScryfallCode=TSR
 171 C Homing Sliver @Trevor Hairsine
 172 R Jaya Ballard, Task Mage @Matt Cavotta
 173 C Keldon Halberdier @Paolo Parente
-174 U Lightning Axe @Dan Scott
+174 U Lightning Axe @Dan Murayama Scott
 175 R Magus of the Moon @Milivoj Ćeran
 176 C Mogg War Marshal @Wayne England
 177 C Needlepeak Spider @Dany Orizio
@@ -189,7 +189,7 @@ ScryfallCode=TSR
 179 R Pact of the Titan @Raymond Swanland
 180 U Prodigal Pyromancer @Jeremy Jarvis
 181 C Reckless Wurm @Greg Staples
-182 R Reiterate @Dan Scott
+182 R Reiterate @Dan Murayama Scott
 183 C Riddle of Lightning @Daren Bader
 184 C Rift Bolt @Michael Sutfin
 185 C Rift Elemental @Ron Spears
@@ -269,7 +269,7 @@ ScryfallCode=TSR
 259 R Radha, Heir to Keld @Jim Murray
 260 R Saffi Eriksdotter @Ryan Pancoast
 261 M Sliver Legion @Ron Spears
-262 M Akroma's Memorial @Dan Scott
+262 M Akroma's Memorial @Dan Murayama Scott
 263 C Chromatic Star @Daniel Ljunggren
 264 U Clockwork Hydra @Daren Bader
 265 R Cloud Key @Trevor Hairsine
@@ -280,19 +280,19 @@ ScryfallCode=TSR
 270 R Lotus Bloom @Mark Zug
 271 U Paradise Plume @Wayne England
 272 C Prismatic Lens @Alan Pollack
-273 C Sliversmith @John Avon
+273 U Sliversmith @John Avon
 274 R Stuffy Doll @Dave Allsop
 275 U Calciform Pools @Darrell Riche
 276 U Dreadship Reef @Lars Grant-West
 277 R Dryad Arbor @Eric Fortune
 278 R Flagstones of Trokair @Rob Alexander
-279 C Fungal Reaches @Martina Pilcerova
+279 U Fungal Reaches @Martina Pilcerova
 280 M Gemstone Caverns @Martina Pilcerova
 281 R Kher Keep @Paolo Parente
 282 U Molten Slagheap @Daren Bader
 283 U Saltcrusted Steppe @Greg Staples
 284 R Swarmyard @Thomas M. Baxa
-285 C Terramorphic Expanse @Dan Scott
+285 C Terramorphic Expanse @Dan Murayama Scott
 286 R Tolaria West @Khang Le
 287 R Urborg, Tomb of Yawgmoth @John Avon
 288 U Urza's Factory @Mark Tedin
@@ -322,11 +322,11 @@ ScryfallCode=TSR
 310 S Master of the Pearl Trident @Ryan Pancoast
 311 S Mulldrifter @Eric Fortune
 312 S Mystic Confluence @Kieran Yanner
-313 S Ninja of the Deep Hours @Dan Scott
+313 S Ninja of the Deep Hours @Dan Murayama Scott
 314 S Paradoxical Outcome @Nils Hamm
-315 S Ponder @Dan Scott
+315 S Ponder @Dan Murayama Scott
 316 S Remand @Mark A. Nelson
-317 S Repeal @Dan Scott
+317 S Repeal @Dan Murayama Scott
 318 S Talrand, Sky Summoner @Svetlin Velinov
 319 S Treasure Cruise @Cynthia Sheppard
 320 S Trinket Mage @Mark A. Nelson
@@ -385,7 +385,7 @@ ScryfallCode=TSR
 373 S Cloudshredder Sliver @Filip Burburan
 374 S Consuming Aberration @Karl Kopinski
 375 S Dovin's Veto @Izzy
-376 S Epic Experiment @Dan Scott
+376 S Epic Experiment @Dan Murayama Scott
 377 S Feather, the Redeemed @Wayne Reynolds
 378 S Grenzo, Dungeon Warden @Lucas Graciano
 379 S Knight of the Reliquary @Michael Komarck

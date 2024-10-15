@@ -627,6 +627,7 @@ public abstract class GameState {
         }
 
         game.getStack().setResolving(false);
+        game.getStack().unfreezeStack();
 
         // Advance to a certain phase, activating all triggered abilities
         if (advPhase != null) {

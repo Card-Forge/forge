@@ -39,7 +39,7 @@ ScryfallCode=AKH
 23 U Protection of the Hekma @Ryan Alexander Lee
 24 R Regal Caracal @Filip Burburan
 25 U Renewed Faith @Wesley Burt
-26 C Rhet-Crop Spearmaster @Dan Scott
+26 C Rhet-Crop Spearmaster @Dan Murayama Scott
 27 C Sacred Cat @Zezhou Chen
 28 U Seraph of the Suns @Winona Nelson
 29 C Sparring Mummy @Ryan Pancoast
@@ -131,7 +131,7 @@ ScryfallCode=AKH
 115 C Wander in Death @Seb McKinnon
 116 C Wasteland Scorpion @Yeong-Hao Han
 117 U Ahn-Crop Crasher @Seb McKinnon
-118 U Battlefield Scavenger @Dan Scott
+118 U Battlefield Scavenger @Dan Murayama Scott
 119 C Blazing Volley @Zezhou Chen
 120 C Bloodlust Inciter @Anthony Palumbo
 121 U Bloodrage Brawler @Lars Grant-West
@@ -157,7 +157,7 @@ ScryfallCode=AKH
 141 C Magma Spray @Svetlin Velinov
 142 C Manticore of the Gauntlet @James Paick
 143 C Minotaur Sureshot @Joseph Meehan
-144 C Nef-Crop Entangler @Dan Scott
+144 C Nef-Crop Entangler @Dan Murayama Scott
 145 C Nimble-Blade Khenra @Tomasz Jedruszek
 146 C Pathmaker Initiate @Josu Hernaiz
 147 C Pursue Glory @Johann Bodin
@@ -187,7 +187,7 @@ ScryfallCode=AKH
 171 C Haze of Pollen @Mark Zug
 172 R Honored Hydra @Todd Lockwood
 173 C Hooded Brawler @Daarken
-174 C Initiate's Companion @Dan Scott
+174 C Initiate's Companion @Dan Murayama Scott
 175 U Manglehorn @Lius Lasahido
 176 C Naga Vitalist @James Ryman
 177 C Oashra Cultivator @Sara Winters
@@ -201,7 +201,7 @@ ScryfallCode=AKH
 185 C Shed Weakness @Christine Choi
 186 U Shefet Monitor @Viktor Titov
 187 U Sixth Sense @Zoltan Boros
-188 C Spidery Grasp @Dan Scott
+188 C Spidery Grasp @Dan Murayama Scott
 189 C Stinging Shot @Scott Murphy
 190 U Synchronized Strike @David Palumbo
 191 U Trial of Strength @Kieran Yanner

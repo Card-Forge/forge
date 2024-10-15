@@ -583,7 +583,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public ApiType getApi() {
         return api;
     }
-
     public void setApi(ApiType apiType) {
         api = apiType;
     }

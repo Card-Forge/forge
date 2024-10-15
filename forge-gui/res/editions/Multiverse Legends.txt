@@ -118,7 +118,7 @@ ScryfallCode=MUL
 110 R Judith, the Scourge Diva @Wesley Burt
 111 U Juri, Master of the Revue @Dmitry Burmak
 112 R Kaheera, the Orphanguard @Ryan Pancoast
-113 R Keruga, the Macrosage @Dan Scott
+113 R Keruga, the Macrosage @Dan Murayama Scott
 114 M Kroxa, Titan of Death's Hunger @Vincent Proce
 115 R Lathiel, the Bounteous Dawn @Lucas Graciano
 116 R Lurrus of the Dream-Den @Slawomir Maniak

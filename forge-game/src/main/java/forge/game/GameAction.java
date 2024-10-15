@@ -190,7 +190,12 @@ public class GameAction {
                     // Make sure the card returns from the battlefield as the original card with two halves
                     resetToOriginal = true;
                 }
-            } else if (!zoneTo.is(ZoneType.Stack)) {
+            } else if (zoneTo.is(ZoneType.Battlefield) && c.isRoom()) {
+                if (c.getCastSA() == null) {
+                    // need to set as empty room
+                    c.updateRooms();
+                }
+            } else if (!zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Battlefield)) {
                 // For regular splits, recreate the original state unless the card is going to stack as one half
                 resetToOriginal = true;
             }
@@ -423,9 +428,6 @@ public class GameAction {
                 cards = (CardCollection) c.getOwner().getController().orderMoveToZoneList(cards, zoneTo.getZoneType(), cause);
             }
             cards.set(cards.indexOf(copied), c);
-            if (zoneTo.is(ZoneType.Library)) {
-                Collections.reverse(cards);
-            }
             mergedCards = cards;
             if (cause != null) {
                 // Replace sa targeting cards
@@ -454,9 +456,8 @@ public class GameAction {
                 }
                 game.getCombat().removeFromCombat(c);
             }
-            if ((zoneFrom.is(ZoneType.Library) || zoneFrom.is(ZoneType.PlanarDeck)
-                    || zoneFrom.is(ZoneType.SchemeDeck) || zoneFrom.is(ZoneType.AttractionDeck))
-                    && zoneFrom == zoneTo && position.equals(zoneFrom.size()) && position != 0) {
+            if (zoneFrom.getZoneType().isDeck() && zoneFrom == zoneTo
+                    && position.equals(zoneFrom.size()) && position != 0) {
                 position--;
             }
             if (mergedCards != null) {
@@ -608,6 +609,9 @@ public class GameAction {
         // CR 603.6b
         if (toBattlefield) {
             zoneTo.saveLKI(copied, lastKnownInfo);
+            if (copied.isRoom() && copied.getCastSA() != null) {
+                copied.unlockRoom(copied.getCastSA().getActivatingPlayer(), copied.getCastSA().getCardStateName());
+            }
         }
 
         // only now that the LKI preserved it

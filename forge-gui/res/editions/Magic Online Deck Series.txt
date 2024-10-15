@@ -29,8 +29,8 @@ B20 C Lava Spike @Mark Tedin
 B21 C Lightning Bolt @Christopher Moeller
 B22 U Magma Jet @Justin Sweet
 B23 U Price of Progress @Richard Kane Ferguson
-B24 C Pyroblast @Kaja Foglio
-B25 C Pyrostatic Pillar @Pete Venters
+B24 U Pyroblast @Kaja Foglio
+B25 U Pyrostatic Pillar @Pete Venters
 B26 C Rift Bolt @Michael Sutfin
 B27 U Aether Vial @Greg Hildebrandt
 B28 C Bonesplitter @Darrell Riche

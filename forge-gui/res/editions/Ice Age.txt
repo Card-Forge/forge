@@ -62,9 +62,9 @@ ScryfallCode=ICE
 50 U Sacred Boon @Mike Raabe
 51 R Seraph @Christopher Rush
 52 C Shield Bearer @Dan Frazier
-53 U Snow Hound @Pat Morrissey
+53 U Snow Hound @Pat Lewis
 54 U Swords to Plowshares @Kaja Foglio
-55 C Warning @Pat Morrissey
+55 C Warning @Pat Lewis
 56 U White Scarab @Phil Foglio
 57 C Arnjlot's Ascent @Drew Tucker
 58 U Balduvian Conjurer @Mark Tedin
@@ -90,7 +90,7 @@ ScryfallCode=ICE
 78 C Illusionary Wall @Mark Poole
 79 R Illusions of Grandeur @Quinton Hoover
 80 C Infuse @Randy Gallegos
-81 C Krovikan Sorcerer @Pat Morrissey
+81 C Krovikan Sorcerer @Pat Lewis
 82 R Magus of the Unseen @Kaja Foglio
 83 R Mesmeric Trance @Dan Frazier
 84 C Mistfolk @Quinton Hoover
@@ -223,7 +223,7 @@ ScryfallCode=ICE
 211 R Orcish Squatters @Richard Kane Ferguson
 212 C Panic @Mike Kimble
 213 C Pyroblast @Kaja Foglio
-214 U Pyroclasm @Pat Morrissey
+214 U Pyroclasm @Pat Lewis
 215 C Sabretooth Tiger @Melissa A. Benson
 216 C Shatter @Bryon Wackwitz
 217 C Stone Rain @Kaja Foglio
@@ -389,10 +389,10 @@ ScryfallCode=ICE
 377 L Mountain @Tom Wänerstrand
 378 L Mountain @Tom Wänerstrand
 379 L Snow-Covered Mountain @Tom Wänerstrand
-380 L Forest @Pat Morrissey
-381 L Forest @Pat Morrissey
-382 L Forest @Pat Morrissey
-383 L Snow-Covered Forest @Pat Morrissey
+380 L Forest @Pat Lewis
+381 L Forest @Pat Lewis
+382 L Forest @Pat Lewis
+383 L Snow-Covered Forest @Pat Lewis
 
 [tokens]
 w_0_1_caribou

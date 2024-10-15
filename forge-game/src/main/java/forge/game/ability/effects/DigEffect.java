@@ -372,7 +372,7 @@ public class DigEffect extends SpellAbilityEffect {
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
 
-                    if (destZone1.equals(ZoneType.Library) || destZone1.equals(ZoneType.PlanarDeck) || destZone1.equals(ZoneType.SchemeDeck)) {
+                    if (destZone1.isDeck()) {
                         c = game.getAction().moveTo(destZone1, c, libraryPosition, sa, AbilityKey.newMap());
                     } else {
                         if (destZone1.equals(ZoneType.Exile) && !c.canExiledBy(sa, true)) {
@@ -445,8 +445,7 @@ public class DigEffect extends SpellAbilityEffect {
                 if (!rest.isEmpty() && (!sa.hasParam("DestZone2Optional") || p.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone",
                                 destZone2.getTranslatedName()), null))) {
-                    if (destZone2 == ZoneType.Library || destZone2 == ZoneType.PlanarDeck
-                            || destZone2 == ZoneType.SchemeDeck || destZone2 == ZoneType.Graveyard) {
+                    if (destZone2.isDeck() || destZone2 == ZoneType.Graveyard) {
                         CardCollection afterOrder = rest;
                         if (sa.hasParam("RestRandomOrder")) {
                             CardLists.shuffle(afterOrder);
@@ -456,10 +455,6 @@ public class DigEffect extends SpellAbilityEffect {
                             } else {
                                 afterOrder = (CardCollection) chooser.getController().orderMoveToZoneList(rest, destZone2, sa);
                             }
-                        }
-                        if (libraryPosition2 != -1) {
-                            // Closest to top
-                            Collections.reverse(afterOrder);
                         }
 
                         for (final Card c : afterOrder) {

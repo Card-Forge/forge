@@ -24,7 +24,7 @@ ScryfallCode=GK1
 15 R Glimpse the Unthinkable @Brandon Kitkouski
 16 M Lazav, Dimir Mastermind @David Rapoza
 17 R Mirko Vosk, Mind Drinker @Chase Stone
-18 U Moroii @Dan Scott
+18 U Moroii @Dan Murayama Scott
 19 R Nightveil Specter @Min Yum
 20 R Szadek, Lord of Secrets @Donato Giancola
 21 U Warped Physique @Karl Kopinski
@@ -44,8 +44,8 @@ ScryfallCode=GK1
 35 R Cerebral Vortex @Jeremy Jarvis
 36 R Djinn Illuminatus @Carl Critchlow
 37 U Electrolyze @Zoltan Boros & Gabor Szikszai
-38 U Gelectrode @Dan Scott
-39 R Hypersonic Dragon @Dan Scott
+38 U Gelectrode @Dan Murayama Scott
+39 R Hypersonic Dragon @Dan Murayama Scott
 40 R Invoke the Firemind @Zoltan Boros & Gabor Szikszai
 41 U Izzet Charm @Zoltan Boros
 42 U Nivix Guildmage @Scott M. Fischer
@@ -60,7 +60,7 @@ ScryfallCode=GK1
 51 U Darkblast @Randy Gallegos
 52 U Slum Reaper @Karl Kopinski
 53 C Stinkweed Imp @Nils Hamm
-54 U Vigor Mortis @Dan Scott
+54 U Vigor Mortis @Dan Murayama Scott
 55 R Deadbridge Goliath @Chase Stone
 56 C Elves of Deep Shadow @Justin Sweet
 57 R Abrupt Decay @Svetlin Velinov
