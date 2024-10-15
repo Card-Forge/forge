@@ -4,6 +4,6 @@ Types:Creature Elf Knight
 PT:3/1
 A:AB$ MustBlock | Cost$ Sac<1/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature blocks CARDNAME this turn if able.
 SVar:AIPreference:SacCost$Card.Food
-DeckHints:Ability$Food
 AI:RemoveDeck:All
+DeckHints:Ability$Food
 Oracle:Sacrifice a Food: Target creature blocks Maraleaf Rider this turn if able.

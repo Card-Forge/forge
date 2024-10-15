@@ -1,0 +1,9 @@
+Name:Abhorrent Oculus
+ManaCost:2 U
+Types:Creature Eye
+PT:5/5
+A:SP$ PermanentCreature | Cost$ 2 U ExileFromGrave<6/Card>
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDread | TriggerDescription$ At the beginning of each opponent's upkeep, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature, and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+Oracle:As an additional cost to cast this spell, exile six cards from your graveyard.\nFlying\nAt the beginning of each opponent's upkeep, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature, and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

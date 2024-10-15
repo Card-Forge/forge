@@ -2,8 +2,11 @@ Name:Sly Spy
 ManaCost:2 B
 Types:Creature Human Spy
 PT:2/2
+Oracle:<Unsupported Variant>
+
+# --- VARIANT F ---
+
 Variant:F:T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRoll | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, roll a six-sided die. That player loses life equal to the result.
 Variant:F:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBLoseLife
 Variant:F:SVar:DBLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ Result
-Oracle:<Unsupported Variant>
 Variant:F:Oracle:Whenever Sly Spy deals combat damage to a player, roll a six-sided die. That player loses life equal to the result.

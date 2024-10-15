@@ -1,0 +1,7 @@
+Name:Fear of the Dark
+ManaCost:4 B
+Types:Enchantment Creature Nightmare
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | IsPresent$ Creature.Glimmer+DefenderCtrl | PresentCompare$ EQ0 | TriggerDescription$ Whenever CARDNAME attacks, if defending player controls no Glimmer creatures, it gains menace and deathtouch until end of turn. (A creature with menace can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Menace & Deathtouch
+Oracle:Whenever Fear of the Dark attacks, if defending player controls no Glimmer creatures, it gains menace and deathtouch until end of turn. (A creature with menace can't be blocked except by two or more creatures.)

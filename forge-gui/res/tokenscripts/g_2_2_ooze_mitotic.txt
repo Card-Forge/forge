@@ -1,7 +1,7 @@
 Name:Ooze Token
 ManaCost:no cost
-Types:Creature Ooze
 Colors:green
+Types:Creature Ooze
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigTokenJunior | TriggerDescription$ When this creature dies, create two 1/1 green Ooze creature tokens.
 SVar:TrigTokenJunior:DB$ Token | TokenScript$ g_1_1_ooze | TokenOwner$ You | TokenAmount$ 2

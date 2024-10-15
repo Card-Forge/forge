@@ -1,6 +1,6 @@
 Name:Kraken Token
 ManaCost:no cost
-Types:Creature Kraken
 Colors:blue
+Types:Creature Kraken
 PT:8/8
 Oracle:

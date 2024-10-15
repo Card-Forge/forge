@@ -13,6 +13,6 @@ SVar:PseudoLifelink:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ Vo
 SVar:VolverTrigGain:DB$ GainLife | Defined$ You | LifeAmount$ VolverX
 SVar:VolverX:TriggerCount$DamageAmount
 AI:RemoveDeck:Random
-DeckNeeds:Color$Green|White
 DeckHas:Ability$Counters
+DeckNeeds:Color$Green|White
 Oracle:Kicker {1}{G} and/or {W} (You may pay an additional {1}{G} and/or {W} as you cast this spell.)\nIf Necravolver was kicked with its {1}{G} kicker, it enters with two +1/+1 counters on it and with trample.\nIf Necravolver was kicked with its {W} kicker, it enters with a +1/+1 counter on it and with "Whenever Necravolver deals damage, you gain that much life."

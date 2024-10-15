@@ -1,0 +1,9 @@
+Name:My Will Is Irresistible
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ DBChoosePerms | TriggerDescription$ When you set this scheme in motion, choose up to three nonland permanents you don't control. Target opponent chooses one of those permanents. You gain control of the rest.
+SVar:DBChoosePerms:DB$ ChooseCard | Choices$ Permanent.nonLand+YouDontCtrl | RememberChosen$ True | MinAmount$ 0 | Amount$ 3 | AILogic$ SacOneEach | SubAbility$ DBOppChooseCard | ChoiceTitle$ Choose up to three nonland permanents you don't control.
+SVar:DBOppChooseCard:DB$ ChooseCard | ValidTgts$ Opponent | ChoiceZone$ Battlefield | DefinedCards$ Remembered | AILogic$ OwnCard | Mandatory$ True | ForgetChosen$ True | Reveal$ True | SubAbility$ DBGainControl | ChoiceTitle$ Choose a nonland permanent.
+SVar:DBGainControl:DB$ GainControl | Defined$ Remembered | NewController$ You | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When you set this scheme in motion, choose up to three nonland permanents you don't control. Target opponent chooses one of those permanents. You gain control of the rest.

@@ -35,10 +35,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class CardProperty {
 
@@ -847,6 +844,11 @@ public class CardProperty {
                         }
                 }
             }
+        } else if (property.startsWith("sharesAllCardTypesWithOther")) {
+            final String restriction = property.split("sharesAllCardTypesWithOther ")[1];
+            CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
+            list.remove(card);
+            return Iterables.any(list, CardPredicates.sharesAllCardTypesWith(card));
         } else if (property.startsWith("sharesLandTypeWith")) {
             final String restriction = property.split("sharesLandTypeWith ")[1];
             if (!AbilityUtils.getDefinedCards(source, restriction, spellAbility).anyMatch(CardPredicates.sharesLandTypeWith(card))) {
@@ -1504,7 +1506,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
                 || property.startsWith("totalPT") || property.startsWith("numColors")
-                || property.startsWith("basePower") || property.startsWith("baseToughness")) {
+                || property.startsWith("basePower") || property.startsWith("baseToughness") || property.startsWith("numTypes")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1530,6 +1532,9 @@ public class CardProperty {
             } else if (property.startsWith("numColors")) {
                 rhs = property.substring(11);
                 y = card.getColor().countColors();
+            } else if (property.startsWith("numTypes")) {
+                rhs = property.substring(10);
+                y = Iterables.size(card.getType().getCoreTypes());
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
@@ -1918,6 +1923,18 @@ public class CardProperty {
             }
         } else if (property.equals("IsGoaded")) {
             if (!card.isGoaded()) {
+                return false;
+            }
+        } else if (property.equals("FullyUnlocked")) {
+            if (card.getUnlockedRooms().size() < 2) {
+                return false;
+            }
+        } else if (property.startsWith("canReceiveCounters")) {
+            if (!card.canReceiveCounters(CounterType.getType(property.split(" ")[1]))) {
+                return false;
+            }
+        } else if (property.equals("canBeTurnedFaceUp")) {
+            if (!card.canBeTurnedFaceUp()) {
                 return false;
             }
         } else if (property.equals("NoAbilities")) {

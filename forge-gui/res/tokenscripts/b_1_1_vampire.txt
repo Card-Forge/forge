@@ -1,6 +1,6 @@
 Name:Vampire Token
 ManaCost:no cost
-Types:Creature Vampire
 Colors:black
+Types:Creature Vampire
 PT:1/1
 Oracle:

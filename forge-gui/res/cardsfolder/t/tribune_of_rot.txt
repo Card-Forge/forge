@@ -7,6 +7,6 @@ SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | RememberMilled$ True | Sub
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ g_1_1_saproling | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Creature
-DeckHas:Ability$Mill|Token & Type$Saproling
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill|Token & Type$Saproling
 Oracle:Whenever Tribune of Rot attacks, mill two cards. For each creature card milled this way, create a 1/1 green Saproling creature token.

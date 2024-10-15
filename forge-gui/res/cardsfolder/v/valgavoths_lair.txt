@@ -1,0 +1,10 @@
+Name:Valgavoth's Lair
+ManaCost:no cost
+Types:Enchantment Land
+K:Hexproof
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters, choose a color.
+A:AB$ Mana | Cost$ T | Produced$ Chosen | SpellDescription$ Add one mana of the chosen color.
+Oracle:Hexproof\nValgavoth's Lair enters tapped. As it enters, choose a color.\n{T}: Add one mana of the chosen color.

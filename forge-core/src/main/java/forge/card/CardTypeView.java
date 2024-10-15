@@ -30,6 +30,7 @@ public interface CardTypeView extends Iterable<String>, Serializable {
     public boolean sharesLandTypeWith(final CardTypeView ctOther);
     public boolean sharesPermanentTypeWith(final CardTypeView ctOther);
     public boolean sharesCardTypeWith(final CardTypeView ctOther);
+    public boolean sharesAllCardTypesWith(final CardTypeView ctOther);
 
     boolean isPermanent();
     boolean isCreature();

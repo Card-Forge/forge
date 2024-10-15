@@ -1,6 +1,0 @@
-Name:Betrayer's Bargain
-ManaCost:1 R
-Types:Instant
-K:AlternateAdditionalCost:Sac<1/Creature;Enchantment/creature or enchantment>:2
-A:SP$ DealDamage | NumDmg$ 5 | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals 5 damage to target creature. If that creature would die this turn, exile it instead.
-Oracle:As an additional cost to cast this spell, sacrifice a creature or enchantment or pay {2}.\nBetrayer's Bargain deals 5 damage to target creature. If that creature would die this turn, exile it instead.

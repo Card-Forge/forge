@@ -4,6 +4,6 @@ Types:Creature Beast Mutant
 PT:0/0
 K:Graft:3
 A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature.counters_GE1_P1P1 | TgtPrompt$ Select target creature with a +1/+1 counter | KW$ Flying | SpellDescription$ Target creature with a +1/+1 counter on it gains flying until end of turn.
-DeckNeeds:Ability$Counters
 DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
 Oracle:Graft 3 (This creature enters with three +1/+1 counters on it. Whenever another creature enters, you may move a +1/+1 counter from this creature onto it.)\n{1}: Target creature with a +1/+1 counter on it gains flying until end of turn.

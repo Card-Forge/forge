@@ -7,6 +7,6 @@ SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect | TokenOwner$ You
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:X:Count$Valid Land.YouCtrl
-DeckHas:Ability$Token
 SVar:BuffedBy:Land
+DeckHas:Ability$Token
 Oracle:Landfall — Whenever a land you control enters, create a 1/1 green Insect creature token. If you control six or more lands, create a token that's a copy of Scute Swarm instead.

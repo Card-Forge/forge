@@ -1,6 +1,6 @@
 Name:Treefolk Token
 ManaCost:no cost
-Types:Creature Treefolk
 Colors:green
+Types:Creature Treefolk
 PT:*/*
 Oracle:

@@ -6,6 +6,6 @@ T:Mode$ ChangesZoneAll | ValidCards$ Creature.YouOwn+nonToken | Origin$ Any | De
 SVar:TrigVenture:DB$ Venture
 T:Mode$ DungeonCompleted | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ DBReturn | TriggerDescription$ Create Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield
-DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
+DeckHas:Ability$Graveyard
 Oracle:Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn. (To venture into the dungeon, enter the first room or advance to the next room.)\nCreate Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.

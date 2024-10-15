@@ -1,6 +1,6 @@
 Name:Kavu Token
 ManaCost:no cost
-Types:Creature Kavu
 Colors:black
+Types:Creature Kavu
 PT:3/3
 Oracle:

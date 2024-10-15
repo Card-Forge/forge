@@ -1,7 +1,7 @@
 Name:Bat Token
 ManaCost:no cost
-Types:Creature Bat
 Colors:black
+Types:Creature Bat
 PT:1/2
 K:Flying
 A:AB$ ChangeZone | Cost$ 1 B Sac<1/CARDNAME> | ChangeType$ Card.namedSengir Nosferatu | ChangeNum$ 1 | Origin$ Exile | Destination$ Battlefield | Hidden$ True | SpellDescription$ Return an exiled card named Sengir Nosferatu to the battlefield under its owner's control.

@@ -10,7 +10,7 @@ SVar:NeedsToPlay:Permanent.YouCtrl+cmcLE2
 T:Mode$ Sacrificed | ValidCard$ Permanent | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a permanent, put a +1/+1 counter on NICKNAME and draw a card.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-AI:RemoveDeck:Random
 SVar:BuffedBy:Permanent.YouCtrl
+AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 Oracle:Flying\nWhenever Korvold, Fae-Cursed King enters or attacks, sacrifice another permanent.\nWhenever you sacrifice a permanent, put a +1/+1 counter on Korvold and draw a card.

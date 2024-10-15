@@ -1,7 +1,7 @@
 Name:Cat Bird Token
 ManaCost:no cost
-Types:Creature Cat Bird
 Colors:white
+Types:Creature Cat Bird
 PT:1/1
 K:Flying
 Oracle:Flying

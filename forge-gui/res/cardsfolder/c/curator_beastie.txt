@@ -1,0 +1,12 @@
+Name:Curator Beastie
+ManaCost:4 G G
+Types:Creature Beast
+PT:6/6
+K:Reach
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Colorless+YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Colorless creatures you control enter with two additional +1/+1 counters on them.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ Whenever CARDNAME enters or attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigDread | TriggerDescription$ Whenever CARDNAME enters or attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+DeckHas:Ability$Counters
+Oracle:Reach\nColorless creatures you control enter with two additional +1/+1 counters on them.\nWhenever Curator Beastie enters or attacks, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

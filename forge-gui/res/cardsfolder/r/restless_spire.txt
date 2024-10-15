@@ -8,6 +8,6 @@ A:AB$ Animate | Cost$ U R | Defined$ Self | Power$ 2 | Toughness$ 1 | staticAbil
 SVar:FirstStrikeStatic:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks, scry 1.
 SVar:TrigScry:DB$ Scry | ScryNum$ 1
-DeckHas:Ability$LifeGain & Type$Elemental & Color$Blue|Red
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain & Type$Elemental & Color$Blue|Red
 Oracle:Restless Spire enters tapped.\n{T}: Add {U} or {R}.\n{U}{R}: Until end of turn, Restless Spire becomes a 2/1 blue and red Elemental creature with "As long as it's your turn, this creature has first strike." It's still a land.\nWhenever Restless Spire attacks, scry 1.

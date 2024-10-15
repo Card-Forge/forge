@@ -1,0 +1,13 @@
+Name:Winter, Misanthropic Guide
+ManaCost:1 B R G
+Types:Legendary Creature Human Warlock
+PT:3/4
+K:Ward:2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your upkeep, each player draws two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ Player | NumCards$ 2
+S:Mode$ Continuous | Condition$ Delirium | Affected$ Opponent | SetMaxHandSize$ Y | Description$ Delirium — As long as there are four or more card types among cards in your graveyard, each opponent's maximum hand size is equal to seven minus the number of those card types.
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+SVar:Y:Number$7/Minus.X
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Ward {2}\nAt the beginning of your upkeep, each player draws two cards.\nDelirium — As long as there are four or more card types among cards in your graveyard, each opponent's maximum hand size is equal to seven minus the number of those card types.

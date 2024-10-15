@@ -990,7 +990,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 cType = getController().chooseCounterType(Lists.newArrayList(cmap.keySet()), sa, prompt, null);
             }
 
-            if (cType == null) {
+            if (cType == null || !c.canRemoveCounters(cType)) {
                 return false;
             }
 
@@ -1306,7 +1306,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     public PaymentDecision visit(final CostUntapType cost) {
         CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"),
                 player, source, ability);
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED);
+        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterType.get(CounterEnumType.STUN)));
         if (!cost.canUntapSource) {
             typeList.remove(source);
         }

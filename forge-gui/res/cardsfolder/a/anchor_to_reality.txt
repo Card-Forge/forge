@@ -7,6 +7,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Compare Y LTZ.2.0
 SVar:Y:Remembered$CardManaCost
 SVar:Z:Sacrificed$CardManaCost
-DeckNeeds:Type$Artifact|Creature|Equipment|Vehicle
 AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact|Creature|Equipment|Vehicle
 Oracle:As an additional cost to cast this spell, sacrifice an artifact or creature.\nSearch your library for an Equipment or Vehicle card, put that card onto the battlefield, then shuffle. If it has mana value less than the sacrificed permanent's mana value, scry 2.

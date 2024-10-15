@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Enchantment Saga
 K:Chapter:3:DBDamageAll,DBImpulseDraw,DBToken
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.OppCtrl,Planeswalker.OppCtrl | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature and planeswalker your opponents control.
-SVar:DBImpulseDraw:AB$ Dig | Cost$ Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | SubAbility$ DBEffect | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ You may discard a card. If you do, exile the top two cards of your library. You may play them until the end of your next turn.
+SVar:DBImpulseDraw:AB$ Dig | Cost$ Discard<1/Card> | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ You may discard a card. If you do, exile the top two cards of your library. You may play them until the end of your next turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play them until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

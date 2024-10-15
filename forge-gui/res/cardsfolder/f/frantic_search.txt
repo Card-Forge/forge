@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards, then discard two cards. Untap up to three lands. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 3
-AI:RemoveDeck:Random
 SVar:FreeSpellAI:True
+AI:RemoveDeck:Random
 DeckHas:Ability$Discard
 Oracle:Draw two cards, then discard two cards. Untap up to three lands.

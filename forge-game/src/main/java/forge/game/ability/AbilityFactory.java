@@ -286,7 +286,15 @@ public final class AbilityFactory {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
-                spellAbility.setAdditionalAbilityList(key, names.stream().map(input -> getSubAbility(state, input, sVarHolder)).collect(Collectors.toList()));
+                spellAbility.setAdditionalAbilityList(key, names.stream().map(input -> {
+                    AbilitySub sub = getSubAbility(state, input, sVarHolder);
+                    if (api == ApiType.GenericChoice) {
+                        // support scripters adding restrictions to filter illegal choices
+                        sub.setRestrictions(new SpellAbilityRestriction());
+                        makeRestrictions(sub);
+                    }
+                    return sub;
+                }).collect(Collectors.toList()));
             }
         }
 

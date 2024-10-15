@@ -1,6 +1,6 @@
 Name:Starfish Token
 ManaCost:no cost
-Types:Creature Starfish
 Colors:blue
+Types:Creature Starfish
 PT:0/1
 Oracle:

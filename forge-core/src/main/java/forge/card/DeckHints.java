@@ -222,7 +222,7 @@ public class DeckHints {
                 return true;
             }
             for (String tok : card.getTokens()) {
-                if (tdb != null && tdb.containsRule(tok) && predicate.test(tdb.getToken(tok).getRules())) {
+                if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).test(tdb.getToken(tok).getRules())) {
                     return true;
                 }
             }

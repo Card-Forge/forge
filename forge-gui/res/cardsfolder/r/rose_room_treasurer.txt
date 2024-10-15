@@ -4,7 +4,7 @@ Types:Creature Ogre Warrior
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigTreasure | TriggerDescription$ Alliance — Whenever another creature you control enters, create a Treasure token if this is the first or second time this ability has resolved this turn. Otherwise, you may pay {X}. When you do, CARDNAME deals X damage to any target.
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBChooseX | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ LE2
-SVar:DBChooseX:DB$ ChooseNumber | ChooseAnyNumber$ True | ListTitle$ amount of mana to pay | SubAbility$ DBStore | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ GT2 | SubAbility$ DBImmediateTrig
+SVar:DBChooseX:DB$ ChooseNumber | ChooseAnyNumber$ True | ListTitle$ amount of mana to pay | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ GT2 | SubAbility$ DBImmediateTrig
 SVar:DBImmediateTrig:DB$ ImmediateTrigger | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ GT2 | Execute$ TrigDamage | RememberSVarAmount$ X | TriggerDescription$ When you do, CARDNAME deals X damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Resolved:Count$ResolvedThisTurn

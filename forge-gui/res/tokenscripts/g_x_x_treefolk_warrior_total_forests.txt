@@ -1,7 +1,7 @@
 Name:Treefolk Warrior Token
 ManaCost:no cost
-Types:Creature Treefolk Warrior
 Colors:green
+Types:Creature Treefolk Warrior
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl

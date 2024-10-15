@@ -1,7 +1,0 @@
-Name:Bear Trap
-ManaCost:1
-Types:Artifact
-K:Flash
-A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ It deals 3 damage to target creature.
-DeckHas:Ability$Sacrifice
-Oracle:Flash\n{3}, {T}, Sacrifice Bear Trap: It deals 3 damage to target creature.

@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Duskmourn: House of Horror #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/09/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Ensure your solution satisfies all possible blocking conditions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Pyroclasm;Screaming Nemesis;Nahiri's Sacrifice
+p0battlefield=Fear of Being Hunted;Diversion Specialist;Chainsaw|Counters:REV=1;Mountain;Mountain;Mountain;Mountain;Mountain
+p1life=8
+p1battlefield=Shadow-Rite Priest;Resurrected Cultist;Grasping Longneck

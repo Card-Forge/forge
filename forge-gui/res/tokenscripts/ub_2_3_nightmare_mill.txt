@@ -1,7 +1,7 @@
 Name:Nightmare Token
 ManaCost:no cost
-Types:Creature Nightmare
 Colors:blue,black
+Types:Creature Nightmare
 PT:2/3
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBExile | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ DBExile | Secondary$ True | TriggerDescription$ Whenever this creature attacks or blocks, each opponent exiles the top two cards of their library.

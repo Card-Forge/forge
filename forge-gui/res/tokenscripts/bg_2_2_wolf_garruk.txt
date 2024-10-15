@@ -1,7 +1,7 @@
 Name:Wolf Token
 ManaCost:no cost
-Types:Creature Wolf
 Colors:black,green
+Types:Creature Wolf
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature dies, put a loyalty counter on each Garruk you control.
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Garruk.YouCtrl | CounterType$ LOYALTY | CounterNum$ 1

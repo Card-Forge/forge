@@ -1,0 +1,13 @@
+Name:Miasma Demon
+ManaCost:4 B B
+Types:Creature Demon
+PT:5/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters, you may discard any number of cards. When you do, up to that many target creatures each get -2/-2 until end of turn.
+SVar:TrigDiscard:DB$ Discard | DiscardValid$ Card | AnyNumber$ True | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberObjects$ Remembered | Execute$ TrigPump | SubAbility$ DBCleanup | TriggerDescription$ When you do, up to that many target creatures each get -2/-2 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to that many target creatures | TargetMin$ 0 | TargetMax$ X | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
+SVar:X:TriggerRemembered$Amount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Discard|Graveyard
+Oracle:Flying\nWhen Miasma Demon enters, you may discard any number of cards. When you do, up to that many target creatures each get -2/-2 until end of turn.

@@ -770,13 +770,29 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         if (ctOther == null) {
             return false;
         }
-
         for (final CoreType type : getCoreTypes()) {
             if (ctOther.hasType(type)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean sharesAllCardTypesWith(final CardTypeView ctOther) {
+        if (ctOther == null) {
+            return false;
+        }
+        for (final CoreType type : getCoreTypes()) {
+            if (!ctOther.hasType(type)) {
+                return false;
+            }
+        }
+        for (final CoreType type : ctOther.getCoreTypes()) {
+            if (!this.hasType(type)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean sharesSubtypeWith(final CardTypeView ctOther) {

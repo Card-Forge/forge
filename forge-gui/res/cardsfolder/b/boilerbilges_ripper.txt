@@ -1,0 +1,8 @@
+Name:Boilerbilges Ripper
+ManaCost:4 R
+Types:Creature Human Assassin
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters, you may sacrifice another creature or enchantment. When you do, CARDNAME deals 2 damage to any target.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Enchantment.Other/another creature or enchantment> | Execute$ TrigDealDamage | TriggerDescription$ When you do, CARDNAME deals 2 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 2
+Oracle:When Boilerbilges Ripper enters, you may sacrifice another creature or enchantment. When you do, Boilerbilges Ripper deals 2 damage to any target.

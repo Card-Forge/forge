@@ -1,0 +1,6 @@
+Name:You Live Only Because I Will It
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRedistribute | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, you may redistribute any number of life totals.
+SVar:TrigRedistribute:DB$ SetLife | PlayerChoices$ Player | ChoiceAmount$ Any | ChoicePrompt$ Choose any number of players | Redistribute$ True
+Oracle:When you set this scheme in motion, you may redistribute any number of life totals.

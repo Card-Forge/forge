@@ -1,0 +1,9 @@
+Name:Veteran Survivor
+Types:Creature Human Survivor
+ManaCost:W
+PT:2/1
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, exile up to one target card from a graveyard.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target card in a graveyard to exile
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Hexproof | CheckSVar$ X | SVarCompare$ GE3 | Description$ As long as there are three or more cards exiled with CARDNAME, it gets +3/+3 and has hexproof. (It can't be the target of spells or abilities your opponents control.)
+SVar:X:ExiledWith$Amount
+Oracle:Survival — At the beginning of your second main phase, if Veteran Survivor is tapped, exile up to one target card from a graveyard.\nAs long as there are three or more cards exiled with Veteran Survivor, it gets +3/+3 and has hexproof. (It can't be the target of spells or abilities your opponents control.)
