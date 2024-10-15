@@ -1,7 +1,7 @@
 Name:Grinning Totem
 ManaCost:4
 Types:Artifact
-A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Opponent | IsCurse$ True | Chooser$ You | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ TotemEffect | SpellDescription$ Search target opponent's library for a card and exile it. Then that player shuffles. | StackDescription$ {p:You} searches {p:Targeted}'s library for a card and exiles it. Then {p:Targeted} shuffles.
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Opponent | Chooser$ You | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | IsCurse$ True | RememberChanged$ True | SubAbility$ TotemEffect | SpellDescription$ Search target opponent's library for a card and exile it. Then that player shuffles. | StackDescription$ {p:You} searches {p:Targeted}'s library for a card and exiles it. Then {p:Targeted} shuffles.
 SVar:TotemEffect:DB$ Effect | StaticAbilities$ STGrinning | Duration$ UntilYourNextUpkeep | RememberObjects$ Remembered | ExileOnMoved$ Exile | SubAbility$ DBDelayedTrigger | SpellDescription$ Until the beginning of your next upkeep, you may play that card.
 SVar:STGrinning:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ Until the beginning of your next upkeep, you may play that card.
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | RememberObjects$ Remembered | Execute$ DBReturn | IsPresent$ Card.IsTriggerRemembered | PresentZone$ Exile | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.

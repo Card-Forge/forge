@@ -221,6 +221,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(aiUndyingList));
                     return true;
                 }
+  
+                // TODO stun counters with canRemoveCounters check
 
                 // remove P1P1 counters from opposing creatures
                 CardCollection oppP1P1List = CardLists.filter(list,
