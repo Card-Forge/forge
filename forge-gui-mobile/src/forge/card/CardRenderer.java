@@ -884,7 +884,7 @@ public class CardRenderer {
             abiCount += 1;
         }
         if (card.isSick()) {
-            Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"));
+            Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
             if (spiral != null) {
                 float newX = card.isTapped() ? cx + cw / 4.5f : cx;
                 float newY = card.isTapped() ? cy + cw / 4.75f : cy;
