@@ -2552,3 +2552,149 @@
 2024-07-08 8217 Pauper League (29 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-08-8217-pauper-league.zip
 2024-07-09 12655647 Pauper Last Chance (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-09-12655647-pauper-last-chance.zip
 2024-07-09 8217 Pauper League (8 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-09-8217-pauper-league.zip
+
+2024-07-10 12655651 Pauper Last Chance (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-10-12655651-pauper-last-chance.zip
+2024-07-10 12655654 Pauper Last Chance (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-10-12655654-pauper-last-chance.zip
+2024-07-10 8217 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-10-8217-pauper-league.zip
+2024-07-11 8217 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-11-8217-pauper-league.zip
+2024-07-12 12658116 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-12-12658116-pauper-challenge-32.zip
+2024-07-12 8217 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-12-8217-pauper-league.zip
+2024-07-13 12658133 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-13-12658133-pauper-challenge-32.zip
+2024-07-13 8217 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-13-8217-pauper-league.zip
+2024-07-14 8217 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-14-8217-pauper-league.zip
+2024-07-15 8217 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-15-8217-pauper-league.zip
+2024-07-16 8217 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-16-8217-pauper-league.zip
+2024-07-17 8217 Pauper League (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-17-8217-pauper-league.zip
+2024-07-18 8217 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-18-8217-pauper-league.zip
+2024-07-19 12661616 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-19-12661616-pauper-challenge-32.zip
+2024-07-19 8217 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-19-8217-pauper-league.zip
+2024-07-20 12661594 Pauper Showcase Qualifier (29 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-20-12661594-pauper-showcase-qualifier.zip
+2024-07-20 12661633 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-20-12661633-pauper-challenge-32.zip
+2024-07-20 8217 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-20-8217-pauper-league.zip
+2024-07-21 12661651 Pauper Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-21-12661651-pauper-challenge-64.zip
+2024-07-21 8217 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-21-8217-pauper-league.zip
+2024-07-22 8217 Pauper League (21 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-22-8217-pauper-league.zip
+2024-07-23 8217 Pauper League (31 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-23-8217-pauper-league.zip
+2024-07-24 8217 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-24-8217-pauper-league.zip
+2024-07-25 8217 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-25-8217-pauper-league.zip
+2024-07-26 12663259 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-26-12663259-pauper-challenge-32.zip
+2024-07-26 8217 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-26-8217-pauper-league.zip
+2024-07-27 12663276 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-27-12663276-pauper-challenge-32.zip
+2024-07-27 8217 Pauper League (21 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-27-8217-pauper-league.zip
+2024-07-28 12663294 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-28-12663294-pauper-challenge-32.zip
+2024-07-28 8217 Pauper League (15 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-28-8217-pauper-league.zip
+2024-07-29 8217 Pauper League (21 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-29-8217-pauper-league.zip
+2024-07-30 8217 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-30-8217-pauper-league.zip
+2024-07-30 8386 Pauper League (3 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-30-8386-pauper-league.zip
+2024-07-31 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-07-31-8386-pauper-league.zip
+2024-08-01 8386 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-01-8386-pauper-league.zip
+2024-08-02 12666547 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-02-12666547-pauper-challenge-32.zip
+2024-08-02 8386 Pauper League (23 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-02-8386-pauper-league.zip
+2024-08-03 12666564 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-03-12666564-pauper-challenge-32.zip
+2024-08-03 8386 Pauper League (15 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-03-8386-pauper-league.zip
+2024-08-04 12666582 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-04-12666582-pauper-challenge-32.zip
+2024-08-04 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-04-8386-pauper-league.zip
+2024-08-05 8386 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-05-8386-pauper-league.zip
+2024-08-06 8386 Pauper League (23 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-06-8386-pauper-league.zip
+2024-08-07 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-07-8386-pauper-league.zip
+2024-08-08 8386 Pauper League (23 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-08-8386-pauper-league.zip
+2024-08-09 12670635 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-09-12670635-pauper-challenge-32.zip
+2024-08-09 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-09-8386-pauper-league.zip
+2024-08-10 12670652 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-10-12670652-pauper-challenge-32.zip
+2024-08-10 8386 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-10-8386-pauper-league.zip
+2024-08-11 12670670 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-11-12670670-pauper-challenge-32.zip
+2024-08-11 8386 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-11-8386-pauper-league.zip
+2024-08-12 8386 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-12-8386-pauper-league.zip
+2024-08-13 8386 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-13-8386-pauper-league.zip
+2024-08-14 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-14-8386-pauper-league.zip
+2024-08-15 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-15-8386-pauper-league.zip
+2024-08-16 12674622 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-16-12674622-pauper-challenge-32.zip
+2024-08-16 8386 Pauper League (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-16-8386-pauper-league.zip
+2024-08-17 12674643 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-17-12674643-pauper-challenge-32.zip
+2024-08-17 8386 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-17-8386-pauper-league.zip
+2024-08-18 12674655 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-18-12674655-pauper-challenge-32.zip
+2024-08-18 8386 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-18-8386-pauper-league.zip
+2024-08-19 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-19-8386-pauper-league.zip
+2024-08-20 8386 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-20-8386-pauper-league.zip
+2024-08-21 8386 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-21-8386-pauper-league.zip
+2024-08-22 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-22-8386-pauper-league.zip
+2024-08-23 12676126 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-23-12676126-pauper-challenge-32.zip
+2024-08-23 8386 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-23-8386-pauper-league.zip
+2024-08-24 12676143 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-24-12676143-pauper-challenge-32.zip
+2024-08-24 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-24-8386-pauper-league.zip
+2024-08-25 12676159 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-25-12676159-pauper-challenge-32.zip
+2024-08-25 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-25-8386-pauper-league.zip
+2024-08-26 8386 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-26-8386-pauper-league.zip
+2024-08-27 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-27-8386-pauper-league.zip
+2024-08-28 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-28-8386-pauper-league.zip
+2024-08-29 8386 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-29-8386-pauper-league.zip
+2024-08-30 12678557 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-30-12678557-pauper-challenge-32.zip
+2024-08-30 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-30-8386-pauper-league.zip
+2024-08-31 12678574 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-31-12678574-pauper-challenge-32.zip
+2024-08-31 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-08-31-8386-pauper-league.zip
+2024-09-01 12678592 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-01-12678592-pauper-challenge-32.zip
+2024-09-01 8386 Pauper League (13 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-01-8386-pauper-league.zip
+2024-09-02 8386 Pauper League (13 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-02-8386-pauper-league.zip
+2024-09-03 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-03-8386-pauper-league.zip
+2024-09-04 8386 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-04-8386-pauper-league.zip
+2024-09-05 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-05-8386-pauper-league.zip
+2024-09-06 12682653 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-06-12682653-pauper-challenge-32.zip
+2024-09-06 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-06-8386-pauper-league.zip
+2024-09-07 12682670 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-07-12682670-pauper-challenge-32.zip
+2024-09-07 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-07-8386-pauper-league.zip
+2024-09-08 12682688 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-08-12682688-pauper-challenge-32.zip
+2024-09-08 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-08-8386-pauper-league.zip
+2024-09-09 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-09-8386-pauper-league.zip
+2024-09-10 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-10-8386-pauper-league.zip
+2024-09-11 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-11-8386-pauper-league.zip
+2024-09-12 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-12-8386-pauper-league.zip
+2024-09-13 12685784 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-13-12685784-pauper-challenge-32.zip
+2024-09-13 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-13-8386-pauper-league.zip
+2024-09-14 12685801 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-14-12685801-pauper-challenge-32.zip
+2024-09-14 8386 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-14-8386-pauper-league.zip
+2024-09-15 12685819 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-15-12685819-pauper-challenge-32.zip
+2024-09-15 8386 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-15-8386-pauper-league.zip
+2024-09-16 8386 Pauper League (22 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-16-8386-pauper-league.zip
+2024-09-17 8386 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-17-8386-pauper-league.zip
+2024-09-18 8386 Pauper League (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-18-8386-pauper-league.zip
+2024-09-19 8386 Pauper League (23 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-19-8386-pauper-league.zip
+2024-09-20 12687874 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-20-12687874-pauper-challenge-32.zip
+2024-09-20 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-20-8386-pauper-league.zip
+2024-09-21 12687891 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-21-12687891-pauper-challenge-32.zip
+2024-09-21 8386 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-21-8386-pauper-league.zip
+2024-09-22 12687910 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-22-12687910-pauper-challenge-32.zip
+2024-09-22 8386 Pauper League (18 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-22-8386-pauper-league.zip
+2024-09-23 8386 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-23-8386-pauper-league.zip
+2024-09-24 8386 Pauper League (12 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-24-8386-pauper-league.zip
+2024-09-24 8548 Pauper League (6 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-24-8548-pauper-league.zip
+2024-09-25 8548 Pauper League (21 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-25-8548-pauper-league.zip
+2024-09-26 8548 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-26-8548-pauper-league.zip
+2024-09-27 12692938 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-27-12692938-pauper-challenge-32.zip
+2024-09-27 8548 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-27-8548-pauper-league.zip
+2024-09-28 12692955 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-28-12692955-pauper-challenge-32.zip
+2024-09-28 8548 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-28-8548-pauper-league.zip
+2024-09-29 12692974 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-29-12692974-pauper-challenge-32.zip
+2024-09-29 8548 Pauper League (17 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-29-8548-pauper-league.zip
+2024-09-30 8548 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-09-30-8548-pauper-league.zip
+2024-10-01 8548 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-01-8548-pauper-league.zip
+2024-10-02 8548 Pauper League (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-02-8548-pauper-league.zip
+2024-10-03 8548 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-03-8548-pauper-league.zip
+2024-10-04 12695982 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-04-12695982-pauper-challenge-32.zip
+2024-10-04 8548 Pauper League (19 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-04-8548-pauper-league.zip
+2024-10-05 12695997 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-05-12695997-pauper-challenge-32.zip
+2024-10-05 8548 Pauper League (14 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-05-8548-pauper-league.zip
+2024-10-06 12696016 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-06-12696016-pauper-challenge-32.zip
+2024-10-06 8548 Pauper League (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-06-8548-pauper-league.zip
+2024-10-07 8548 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-07-8548-pauper-league.zip
+2024-10-08 8548 Pauper League (30 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-08-8548-pauper-league.zip
+2024-10-09 8548 Pauper League (25 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-09-8548-pauper-league.zip
+2024-10-10 8548 Pauper League (24 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-10-8548-pauper-league.zip
+2024-10-11 12698320 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-11-12698320-pauper-challenge-32.zip
+2024-10-11 8548 Pauper League (23 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-11-8548-pauper-league.zip
+2024-10-12 12698288 Pauper Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-12-12698288-pauper-qualifier.zip
+2024-10-12 12698337 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-12-12698337-pauper-challenge-32.zip
+2024-10-12 8548 Pauper League (26 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-12-8548-pauper-league.zip
+2024-10-13 12698356 Pauper Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-13-12698356-pauper-challenge-32.zip
+2024-10-13 8548 Pauper League (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-13-8548-pauper-league.zip
+2024-10-14 8548 Pauper League (27 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-14-8548-pauper-league.zip
+2024-10-15 8548 Pauper League (16 decks) | https://downloads.cardforge.org/decks/archive/pauper/2024-10-15-8548-pauper-league.zip
