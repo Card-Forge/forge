@@ -6,7 +6,6 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>${revision}</alpha-version>
     </properties>
 
     <parent>
@@ -36,7 +35,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-ios-${alpha-version}</finalName>
+        <finalName>forge-ios-${revision}</finalName>
     </build>
 
     <dependencies>

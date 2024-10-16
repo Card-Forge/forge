@@ -11,10 +11,6 @@
     <packaging>jar</packaging>
     <name>Forge LDA</name>
 
-    <properties>
-        <alpha-version>${revision}</alpha-version>
-    </properties>
-
     <build>
         <sourceDirectory>src</sourceDirectory>
         <plugins>
@@ -32,7 +28,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-lda-${alpha-version}</finalName>
+        <finalName>forge-lda-${revision}</finalName>
     </build>
 
     <dependencies>
