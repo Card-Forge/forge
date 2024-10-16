@@ -27,9 +27,9 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 ### 📥 Desktop Installation
 1. **Latest Releases:** Download the latest version [here](https://github.com/Card-Forge/forge/releases/latest).
 2. **Snapshot Build:** For the latest development version, grab the `forge-gui-desktop` tarball from our [Snapshot Build](https://downloads.cardforge.org/dailysnapshots/).
-   - **Tip:** Extract to a new folder to prevent data loss.
+   - **Tip:** Extract to a new folder to prevent version conflicts.
 3. **User Data Management:** Previous players’ data is preserved during upgrades.
-4. **Java Requirement:** Ensure you have **Java 8 or later** installed.
+4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
 
 ### 📱 Android Installation
 - Download the **APK** from the [Snapshot Build](https://downloads.cardforge.org/dailysnapshots/). On the first launch, Forge will automatically download all necessary assets.
@@ -81,9 +81,12 @@ We love community contributions! Interested in helping? Check out our [Contribut
 Forge aims to deliver an immersive and customizable Magic: The Gathering experience for fans around the world. 
 
 ### 📊 Repository Statistics
-- **⭐ Stars:** 969
-- **🍴 Forks:** 559
-- **👥 Contributors:** 149
+
+| Metric         | Count                                                       |
+|----------------|-------------------------------------------------------------|
+| **⭐ Stars:**   | [![GitHub stars](https://img.shields.io/github/stars/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/stargazers) |
+| **🍴 Forks:**   | [![GitHub forks](https://img.shields.io/github/forks/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/network) |
+| **👥 Contributors:** | [![GitHub contributors](https://img.shields.io/github/contributors/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/graphs/contributors) |
 
 ---
 
