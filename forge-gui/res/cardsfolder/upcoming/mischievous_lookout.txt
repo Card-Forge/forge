@@ -4,6 +4,5 @@ Types:Enchantment Creature Rat Glimmer
 PT:2/1
 S:Mode$ Continuous | Affected$ Permanent.nonCreature+nonAura | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may cast a noncreature, non-Aura permanent spell from your graveyard.
 T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.MayPlaySource | TriggerZones$ Battlefield | Execute$ DBAnimate | TriggerDescription$ If you do, it perpetually becomes a 2/1 Rat creature in addition to its other types.
-SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Power$ 2 | Toughness$ 1 | Duration$ Perpetual | Types$ Rat,Creature | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Power$ 2 | Toughness$ 1 | Duration$ Perpetual | Types$ Rat,Creature
 Oracle:Once during each of your turns, you may cast a noncreature, non-Aura permanent spell from your graveyard. If you do, it perpetually becomes a 2/1 Rat creature in addition to its other types.
