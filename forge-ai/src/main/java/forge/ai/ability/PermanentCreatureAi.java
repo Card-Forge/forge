@@ -1,19 +1,11 @@
 package forge.ai.ability;
 
-import forge.game.card.CardCopyService;
-import org.apache.commons.lang3.StringUtils;
-
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.PlayerControllerAi;
+import forge.ai.*;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
+import forge.game.card.CardCopyService;
 import forge.game.card.CardLists;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
@@ -24,6 +16,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * AbilityFactory for Creature Spells.

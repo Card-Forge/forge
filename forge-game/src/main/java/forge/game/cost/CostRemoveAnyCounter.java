@@ -17,11 +17,6 @@
  */
 package forge.game.cost;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.common.base.Optional;
-
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
@@ -31,6 +26,10 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 /**
  * The Class CostRemoveAnyCounter.
@@ -125,7 +124,7 @@ public class CostRemoveAnyCounter extends CostPart {
     @Override
     public boolean payAsDecided(Player ai, PaymentDecision decision, SpellAbility ability, final boolean effect) {
         int removed = 0;
-        for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.absent()).entrySet()) {
+        for (Entry<GameEntity, Map<CounterType, Integer>> e : decision.counterTable.row(Optional.empty()).entrySet()) {
             for (Entry<CounterType, Integer> v : e.getValue().entrySet()) {
                 removed += v.getValue();
                 e.getKey().subtractCounter(v.getKey(), v.getValue(), ai);

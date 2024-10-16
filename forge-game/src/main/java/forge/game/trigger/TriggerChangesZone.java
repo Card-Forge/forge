@@ -20,11 +20,11 @@ package forge.game.trigger;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
+import forge.util.IterableUtil;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
@@ -185,7 +185,8 @@ public class TriggerChangesZone extends Trigger {
             thisTurnCast = CardLists.filterControlledByAsList(thisTurnCast, getHostCard().getController());
 
             // checks which card this spell was the castSA
-            int left = Iterables.indexOf(thisTurnCast, CardPredicates.castSA(Predicates.equalTo(getHostCard().getCastSA())));
+            SpellAbility castSA = getHostCard().getCastSA();
+            int left = IterableUtil.indexOf(thisTurnCast, CardPredicates.castSA(Predicate.isEqual(castSA)));
             int right = Integer.parseInt(compare.substring(2));
             if (!Expressions.compare(left + 1, compare, right)) {
                 return false;

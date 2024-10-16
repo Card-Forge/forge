@@ -19,14 +19,12 @@ package forge.itemmanager;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 
 import forge.Forge;
 import forge.Graphics;
@@ -54,8 +52,7 @@ import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.ItemPool;
-import forge.util.LayoutHelper;
+import forge.util.*;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {
@@ -685,7 +682,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             predicates.add(advancedSearchFilter.buildPredicate(genericType));
         }
 
-        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : Predicates.and(predicates);
+        Predicate<? super T> newFilterPredicate = predicates.size() == 0 ? null : IterableUtil.and(predicates);
         if (filterPredicate == newFilterPredicate) { return false; }
 
         filterPredicate = newFilterPredicate;
@@ -782,8 +779,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
             Iterable<Entry<T, Integer>> items = pool;
             if (useFilter) {
-                Predicate<Entry<T, Integer>> pred = Predicates.compose(filterPredicate, (Function<Entry<T, Integer>, T>) Entry::getKey);
-                items = Iterables.filter(pool, pred);
+                Predicate<Entry<T, Integer>> pred = x -> filterPredicate.test(x.getKey());
+                items = IterableUtil.filter(pool, pred);
             }
             model.addItems(items);
         }

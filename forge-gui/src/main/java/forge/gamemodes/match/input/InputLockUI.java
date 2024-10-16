@@ -1,8 +1,5 @@
 package forge.gamemodes.match.input;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -12,6 +9,9 @@ import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import forge.util.ThreadUtil;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class InputLockUI implements Input {
     private final AtomicInteger iCall = new AtomicInteger();

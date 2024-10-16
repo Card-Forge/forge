@@ -1,10 +1,10 @@
 package forge.gamemodes.limited;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Predicate;
 
 import forge.card.CardEdition;
 import forge.game.GameFormat;
@@ -72,7 +72,7 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
      */
     private final Predicate<CardEdition> themedFilter = new Predicate<CardEdition>() {
         @Override
-        public boolean apply(final CardEdition cardEdition) {
+        public boolean test(final CardEdition cardEdition) {
             String[] themes = cardEdition.getChaosDraftThemes();
             for (String theme : themes) {
                 if (tag.equals(theme)) return true;
@@ -99,17 +99,16 @@ public class ThemedChaosDraft implements Comparable<ThemedChaosDraft> {
             default:
                 format = formats.getStandard();
         }
-        return cardEdition -> DEFAULT_FILTER.apply(cardEdition) && format.isSetLegal(cardEdition.getCode());
+        return cardEdition -> DEFAULT_FILTER.test(cardEdition) && format.isSetLegal(cardEdition.getCode());
     }
 
+    private static final EnumSet<CardEdition.Type> DEFAULT_FILTER_TYPES = EnumSet.of(
+            CardEdition.Type.CORE, CardEdition.Type.EXPANSION, CardEdition.Type.REPRINT);
     /**
      * Default filter that only allows actual sets that were printed as 15-card boosters
      */
     private static final Predicate<CardEdition> DEFAULT_FILTER = cardEdition -> {
-        boolean isExpansion = cardEdition.getType().equals(CardEdition.Type.EXPANSION);
-        boolean isCoreSet = cardEdition.getType().equals(CardEdition.Type.CORE);
-        boolean isReprintSet = cardEdition.getType().equals(CardEdition.Type.REPRINT);
-        if (isExpansion || isCoreSet || isReprintSet) {
+        if (DEFAULT_FILTER_TYPES.contains(cardEdition.getType())) {
             // Only allow sets with 15 cards in booster packs
             if (cardEdition.hasBoosterTemplate()) {
                 final List<Pair<String, Integer>> slots = cardEdition.getBoosterTemplate().getSlots();

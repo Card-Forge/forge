@@ -22,8 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-
-import com.google.common.base.Supplier;
+import java.util.function.Supplier;
 
 import forge.card.CardEdition;
 import forge.deck.CardPool;

@@ -1,9 +1,8 @@
 package forge.itemmanager.filters;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
@@ -26,6 +25,8 @@ import forge.toolbox.FList;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
+
+import java.util.function.Predicate;
 
 
 public class AdvancedSearchFilter<T extends InventoryItem> extends ItemFilter<T> {

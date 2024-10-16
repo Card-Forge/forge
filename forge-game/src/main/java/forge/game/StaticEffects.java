@@ -20,7 +20,6 @@ package forge.game;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.game.card.Card;
@@ -42,7 +41,7 @@ public class StaticEffects {
     public final void clearStaticEffects(final Set<Card> affectedCards) {
         // remove all static effects
         for (final StaticEffect se : staticEffects.values()) {
-            Iterables.addAll(affectedCards, se.remove());
+            se.remove().forEach(affectedCards::add);
         }
         this.staticEffects.clear();
     }

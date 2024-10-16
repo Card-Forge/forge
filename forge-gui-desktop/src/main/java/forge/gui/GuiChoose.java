@@ -7,13 +7,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
+import java.util.function.Function;
 
 import javax.swing.JList;
 import javax.swing.WindowConstants;
 
 import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Function;
 
 import forge.card.CardStateName;
 import forge.card.ICardFace;

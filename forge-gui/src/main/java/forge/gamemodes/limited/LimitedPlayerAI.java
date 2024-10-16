@@ -1,7 +1,5 @@
 package forge.gamemodes.limited;
 
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.deck.CardPool;
@@ -9,7 +7,9 @@ import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.deck.generation.DeckGeneratorBase;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgePreferences;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -264,8 +264,8 @@ public class LimitedPlayerAI extends LimitedPlayer {
         List<PaperCard> deckCards = deck.getOrCreate(DeckSection.Sideboard).toFlatList();
 
         DeckGeneratorBase.MatchColorIdentity hasColor = new DeckGeneratorBase.MatchColorIdentity(colors);
-        Iterable<PaperCard> colorList = Iterables.filter(deckCards,
-                Predicates.not(Predicates.compose(hasColor, PaperCard::getRules)));
+        Iterable<PaperCard> colorList = IterableUtil.filter(deckCards,
+                PaperCardPredicates.fromRules(hasColor).negate());
 
         PaperCard exchangeCard = null;
 

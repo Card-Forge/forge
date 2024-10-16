@@ -18,7 +18,6 @@
 package forge.game.combat;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -70,7 +69,7 @@ public class CombatUtil {
 
         // Relevant battles (protected by the attacking player's opponents)
         final Game game = playerWhoAttacks.getGame();
-        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.BATTLES);
+        final CardCollection battles = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.BATTLES);
         for (Card battle : battles) {
             if (battle.getType().hasSubtype("Siege") && battle.getProtectingPlayer().isOpponentOf(playerWhoAttacks)) {
                 defenders.add(battle);
@@ -110,7 +109,7 @@ public class CombatUtil {
         final Map<Card, GameEntity> attackers = new HashMap<>(combat.getAttackersAndDefenders());
         final Game game = attacker.getGame();
 
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> {
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> {
             if (!canAttack(attacker, defender) || getAttackCost(game, attacker, defender) != null) {
                 return false;
             }
@@ -161,7 +160,7 @@ public class CombatUtil {
      * @see #canAttack(Card, GameEntity)
      */
     public static boolean canAttack(final Card attacker) {
-        return Iterables.any(getAllPossibleDefenders(attacker.getController()), defender -> canAttack(attacker, defender));
+        return getAllPossibleDefenders(attacker.getController()).anyMatch(defender -> canAttack(attacker, defender));
     }
 
     /**

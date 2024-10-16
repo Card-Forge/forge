@@ -22,16 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import javax.swing.KeyStroke;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
-
 import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
@@ -46,6 +43,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemManagerConfig;
@@ -303,7 +301,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
         }
 
         @Override
-        public boolean apply(PaperCard subject) {
+        public boolean test(PaperCard subject) {
             CardRules cr = subject.getRules();
             ManaCost mc = cr.getManaCost();
             return allowedColor.containsAllColorsFrom(cr.getColorIdentity().getColor());
@@ -347,8 +345,7 @@ public final class CEditorQuest extends CDeckEditor<Deck> {
     }
 
     private ItemPool<PaperCard> getCommanderCardPool(){
-        Predicate<PaperCard> commanderPredicate = Predicates.compose(CardRulesPredicates.Presets.CAN_BE_COMMANDER, PaperCard::getRules);
-        return getRemainingCardPool().getFilteredPool(commanderPredicate);
+        return getRemainingCardPool().getFilteredPool(PaperCardPredicates.CAN_BE_COMMANDER);
     }
 
     @Override

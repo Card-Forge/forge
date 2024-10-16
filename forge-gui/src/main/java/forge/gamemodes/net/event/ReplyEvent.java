@@ -1,8 +1,8 @@
 package forge.gamemodes.net.event;
 
-import java.io.Serializable;
-
 import forge.gamemodes.net.server.RemoteClient;
+
+import java.io.Serializable;
 
 public final class ReplyEvent implements NetEvent {
     private static final long serialVersionUID = -2814651319617795386L;

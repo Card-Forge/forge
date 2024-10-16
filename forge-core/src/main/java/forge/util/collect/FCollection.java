@@ -1,25 +1,12 @@
 package forge.util.collect;
 
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
-import java.util.function.Predicate;
-
+import com.google.common.collect.*;
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets;
+import java.io.Serializable;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Collection with unique elements ({@link Set}) that maintains the order in
@@ -549,6 +536,22 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
         }
         return obj;
     }
+
+    @Override
+    public Stream<T> stream() {
+        return list.stream();
+    }
+
+    @Override
+    public boolean anyMatch(Predicate<? super T> test) {
+        return set.stream().anyMatch(test);
+    }
+
+    @Override
+    public boolean allMatch(Predicate<? super T> test) {
+        return set.stream().allMatch(test);
+    }
+
     /**
      * An unmodifiable, empty {@link FCollection}. Overrides all methods with
      * default implementations suitable for an empty collection, to improve
@@ -654,6 +657,11 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
             }
             return a;
         }
+
+        @Override public Stream<T> stream() {return Stream.empty();}
+        @Override public boolean anyMatch(Predicate<? super T> test) {return false;}
+        @Override public boolean allMatch(Predicate<? super T> test) {return true;}
+
         @Override public final String toString() {
             return "[]";
         }

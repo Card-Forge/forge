@@ -1,25 +1,9 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -29,6 +13,11 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class ChooseCardAi extends SpellAbilityAi {
 
@@ -180,8 +169,8 @@ public class ChooseCardAi extends SpellAbilityAi {
             }
             choice = ComputerUtilCard.getBestAI(ownChoices);
         } else if (logic.equals("BestBlocker")) {
-            if (Iterables.any(options, Presets.UNTAPPED)) {
-                options = CardLists.filter(options, Presets.UNTAPPED);
+            if (IterableUtil.any(options, CardPredicates.UNTAPPED)) {
+                options = CardLists.filter(options, CardPredicates.UNTAPPED);
             }
             choice = ComputerUtilCard.getBestCreatureAI(options);
         } else if (logic.equals("Clone")) {
@@ -218,7 +207,7 @@ public class ChooseCardAi extends SpellAbilityAi {
                 choice = ComputerUtilCard.getWorstAI(aiControlled);
             }
         } else if ("LowestCMCCreature".equals(logic)) {
-            CardCollection creats = CardLists.filter(options, Presets.CREATURES);
+            CardCollection creats = CardLists.filter(options, CardPredicates.CREATURES);
             creats = CardLists.filterToughness(creats, 1);
             if (creats.isEmpty()) {
                 choice = ComputerUtilCard.getWorstAI(options);
@@ -270,10 +259,10 @@ public class ChooseCardAi extends SpellAbilityAi {
                 //  – might also be good to do a separate AI for Noble Heritage
             }
         } else if (logic.equals("Phylactery")) {
-            CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+            CardCollection aiArtifacts = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.ARTIFACTS);
             CardCollection indestructibles = CardLists.filter(aiArtifacts, CardPredicates.hasKeyword(Keyword.INDESTRUCTIBLE));
-            CardCollection nonCreatures = CardLists.filter(aiArtifacts, Predicates.not(Presets.CREATURES));
-            CardCollection creatures = CardLists.filter(aiArtifacts, Presets.CREATURES);
+            CardCollection nonCreatures = CardLists.filter(aiArtifacts, CardPredicates.NON_CREATURES);
+            CardCollection creatures = CardLists.filter(aiArtifacts, CardPredicates.CREATURES);
             if (!indestructibles.isEmpty()) {
                 // Choose the worst (smallest) indestructible artifact so that the opponent would have to waste
                 // removal on something unpreferred

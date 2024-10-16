@@ -1,9 +1,7 @@
 package forge.game.player;
 
 import java.util.Comparator;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -37,7 +35,7 @@ public final class PlayerPredicates {
     }
     
     public static Predicate<Player> isNotCardInPlay(final String cardName) {
-        return Predicates.not(isCardInPlay(cardName));
+        return isCardInPlay(cardName).negate();
     }
 
     public static Predicate<Player> hasCounters() {

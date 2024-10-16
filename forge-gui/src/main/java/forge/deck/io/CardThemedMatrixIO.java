@@ -1,18 +1,13 @@
 package forge.deck.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import forge.game.GameFormat;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by maustin on 11/05/2017.
