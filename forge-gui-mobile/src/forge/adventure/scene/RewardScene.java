@@ -97,27 +97,67 @@ public class RewardScene extends UIScene {
         detailButton.layout();
     }
 
-    private void toggleToolTip() {
+    private RewardActor previousActor = null;
+    private Selectable currentSelectable = null;
+    private boolean inZoomMode = false;
 
+    private void toggleToolTip() {
         Selectable selectable = getSelected();
-        if (selectable == null)
-            return;
-        RewardActor actor;
-        if (selectable.actor instanceof BuyButton) {
-            actor = ((BuyButton) selectable.actor).rewardActor;
-        } else if (selectable.actor instanceof RewardActor) {
-            actor = (RewardActor) selectable.actor;
-        } else {
-            return;
-        }
+        if (selectable == null) return;
+    
+        RewardActor actor = getRewardActorFromSelectable(selectable);
+        if (actor == null) return;
+    
         if (actor.toolTipIsVisible()) {
             actor.hideTooltip();
+            previousActor = null;
+            inZoomMode = false;
         } else {
-            if (!actor.isFlipped())
+            if (!actor.isFlipped()) {
                 actor.showTooltip();
+                previousActor = actor;
+                inZoomMode = true;
+            }
         }
-
     }
+    
+    private void checkSelectionChange() {
+        Selectable newSelectable = getSelected();
+    
+        if (newSelectable != currentSelectable) {
+            if (currentSelectable != null) {
+                RewardActor prevActor = getRewardActorFromSelectable(currentSelectable);
+                if (prevActor != null && inZoomMode && prevActor.toolTipIsVisible()) {
+                    prevActor.hideTooltip();
+                }
+            }
+    
+            currentSelectable = newSelectable;
+    
+            if (inZoomMode && currentSelectable != null) {
+                toggleToolTip();
+            }
+        }
+    
+        if (currentSelectable == null && previousActor != null && previousActor.toolTipIsVisible()) {
+            previousActor.hideTooltip();
+            previousActor = null;
+            inZoomMode = false;
+        }
+    }
+
+    private RewardActor getRewardActorFromSelectable(Selectable selectable) {
+        if (selectable == null) return null;
+
+        Actor actor = selectable.actor;
+        if (actor instanceof BuyButton) {
+            return ((BuyButton) actor).rewardActor;
+        } else if (actor instanceof RewardActor) {
+            return (RewardActor) actor;
+        }
+        return null;
+    }
+
 
     boolean doneClicked = false, shown = false;
     float flipCountDown = 1.0f;
@@ -197,6 +237,8 @@ public class RewardScene extends UIScene {
     public void act(float delta) {
         stage.act(delta);
         ImageCache.allowSingleLoad();
+        checkSelectionChange();
+
         if (doneClicked) {
             if (type == Type.Loot || type == Type.QuestReward) {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
@@ -213,6 +255,7 @@ public class RewardScene extends UIScene {
     public void enter() {
         doneButton.setText("[+OK]");
         updateDetailButton();
+        inZoomMode = false;
         super.enter();
     }
 
