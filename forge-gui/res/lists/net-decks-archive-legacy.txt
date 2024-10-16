@@ -3306,3 +3306,180 @@
 2024-07-06 8241 Legacy League (29 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-06-8241-legacy-league.zip
 2024-07-07 12655606 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-07-12655606-legacy-challenge-32.zip
 2024-07-07 8241 Legacy League (7 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-07-8241-legacy-league.zip
+
+2024-07-07 12655534 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-07-12655534-legacy-showcase-challenge.zip
+2024-07-08 12655637 Legacy Last Chance (30 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-08-12655637-legacy-last-chance.zip
+2024-07-08 12655640 Legacy Last Chance (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-08-12655640-legacy-last-chance.zip
+2024-07-08 8241 Legacy League (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-08-8241-legacy-league.zip
+2024-07-09 12655648 Legacy Last Chance (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-09-12655648-legacy-last-chance.zip
+2024-07-09 8241 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-09-8241-legacy-league.zip
+2024-07-10 12655652 Legacy Last Chance (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-10-12655652-legacy-last-chance.zip
+2024-07-10 12655653 Legacy Last Chance (31 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-10-12655653-legacy-last-chance.zip
+2024-07-10 12658090 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-10-12658090-legacy-challenge-32.zip
+2024-07-10 8241 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-10-8241-legacy-league.zip
+2024-07-11 8241 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-11-8241-legacy-league.zip
+2024-07-12 8241 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-12-8241-legacy-league.zip
+2024-07-13 12658127 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-13-12658127-legacy-challenge-32.zip
+2024-07-13 12658135 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-13-12658135-legacy-challenge-32.zip
+2024-07-13 8241 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-13-8241-legacy-league.zip
+2024-07-14 12658143 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-14-12658143-legacy-challenge-32.zip
+2024-07-14 12658149 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-14-12658149-legacy-challenge-64.zip
+2024-07-14 8241 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-14-8241-legacy-league.zip
+2024-07-15 8241 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-15-8241-legacy-league.zip
+2024-07-16 8241 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-16-8241-legacy-league.zip
+2024-07-17 12661178 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-17-12661178-legacy-challenge-32.zip
+2024-07-17 8241 Legacy League (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-17-8241-legacy-league.zip
+2024-07-18 8241 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-18-8241-legacy-league.zip
+2024-07-19 8241 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-19-8241-legacy-league.zip
+2024-07-20 12661627 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-20-12661627-legacy-challenge-32.zip
+2024-07-20 12661635 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-20-12661635-legacy-challenge-32.zip
+2024-07-20 8241 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-20-8241-legacy-league.zip
+2024-07-21 12661595 Legacy Showcase Qualifier (30 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-21-12661595-legacy-showcase-qualifier.zip
+2024-07-21 12661643 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-21-12661643-legacy-challenge-32.zip
+2024-07-21 12661649 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-21-12661649-legacy-challenge-64.zip
+2024-07-21 8241 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-21-8241-legacy-league.zip
+2024-07-22 8241 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-22-8241-legacy-league.zip
+2024-07-23 8241 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-23-8241-legacy-league.zip
+2024-07-24 12663233 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-24-12663233-legacy-challenge-32.zip
+2024-07-24 8241 Legacy League (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-24-8241-legacy-league.zip
+2024-07-25 8241 Legacy League (23 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-25-8241-legacy-league.zip
+2024-07-26 8241 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-26-8241-legacy-league.zip
+2024-07-27 12663270 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-27-12663270-legacy-challenge-32.zip
+2024-07-27 12663278 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-27-12663278-legacy-challenge-32.zip
+2024-07-27 8241 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-27-8241-legacy-league.zip
+2024-07-28 12663286 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-28-12663286-legacy-challenge-32.zip
+2024-07-28 12663292 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-28-12663292-legacy-challenge-64.zip
+2024-07-28 8241 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-28-8241-legacy-league.zip
+2024-07-29 8241 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-29-8241-legacy-league.zip
+2024-07-30 8241 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-30-8241-legacy-league.zip
+2024-07-30 8362 Legacy League (1 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-30-8362-legacy-league.zip
+2024-07-31 12666521 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-31-12666521-legacy-challenge-32.zip
+2024-07-31 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-07-31-8362-legacy-league.zip
+2024-08-01 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-01-8362-legacy-league.zip
+2024-08-02 8362 Legacy League (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-02-8362-legacy-league.zip
+2024-08-03 12666558 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-03-12666558-legacy-challenge-32.zip
+2024-08-03 12666566 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-03-12666566-legacy-challenge-32.zip
+2024-08-03 8362 Legacy League (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-03-8362-legacy-league.zip
+2024-08-04 12666574 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-04-12666574-legacy-challenge-32.zip
+2024-08-04 12666580 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-04-12666580-legacy-challenge-64.zip
+2024-08-04 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-04-8362-legacy-league.zip
+2024-08-05 8362 Legacy League (26 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-05-8362-legacy-league.zip
+2024-08-06 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-06-8362-legacy-league.zip
+2024-08-07 12670609 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-07-12670609-legacy-challenge-32.zip
+2024-08-07 8362 Legacy League (23 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-07-8362-legacy-league.zip
+2024-08-08 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-08-8362-legacy-league.zip
+2024-08-09 8362 Legacy League (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-09-8362-legacy-league.zip
+2024-08-10 12670646 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-10-12670646-legacy-challenge-32.zip
+2024-08-10 12670654 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-10-12670654-legacy-challenge-32.zip
+2024-08-10 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-10-8362-legacy-league.zip
+2024-08-11 12670662 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-11-12670662-legacy-challenge-32.zip
+2024-08-11 8362 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-11-8362-legacy-league.zip
+2024-08-12 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-12-8362-legacy-league.zip
+2024-08-13 8362 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-13-8362-legacy-league.zip
+2024-08-14 12674596 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-14-12674596-legacy-challenge-32.zip
+2024-08-14 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-14-8362-legacy-league.zip
+2024-08-15 8362 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-15-8362-legacy-league.zip
+2024-08-16 8362 Legacy League (13 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-16-8362-legacy-league.zip
+2024-08-17 12674633 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-17-12674633-legacy-challenge-32.zip
+2024-08-17 12674645 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-17-12674645-legacy-challenge-32.zip
+2024-08-17 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-17-8362-legacy-league.zip
+2024-08-18 12674648 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-18-12674648-legacy-challenge-32.zip
+2024-08-18 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-18-8362-legacy-league.zip
+2024-08-19 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-19-8362-legacy-league.zip
+2024-08-20 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-20-8362-legacy-league.zip
+2024-08-21 12676100 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-21-12676100-legacy-challenge-32.zip
+2024-08-21 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-21-8362-legacy-league.zip
+2024-08-22 8362 Legacy League (15 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-22-8362-legacy-league.zip
+2024-08-23 8362 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-23-8362-legacy-league.zip
+2024-08-24 12676137 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-24-12676137-legacy-challenge-32.zip
+2024-08-24 12676145 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-24-12676145-legacy-challenge-32.zip
+2024-08-24 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-24-8362-legacy-league.zip
+2024-08-25 12676096 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-25-12676096-legacy-showcase-challenge.zip
+2024-08-25 12676152 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-25-12676152-legacy-challenge-32.zip
+2024-08-25 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-25-8362-legacy-league.zip
+2024-08-26 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-26-8362-legacy-league.zip
+2024-08-27 8362 Legacy League (23 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-27-8362-legacy-league.zip
+2024-08-28 12678531 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-28-12678531-legacy-challenge-32.zip
+2024-08-28 8362 Legacy League (31 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-28-8362-legacy-league.zip
+2024-08-29 12676137 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-29-12676137-legacy-challenge-32.zip
+2024-08-29 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-29-8362-legacy-league.zip
+2024-08-30 8362 Legacy League (23 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-30-8362-legacy-league.zip
+2024-08-31 12678568 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-31-12678568-legacy-challenge-32.zip
+2024-08-31 12678576 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-31-12678576-legacy-challenge-32.zip
+2024-08-31 8362 Legacy League (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-08-31-8362-legacy-league.zip
+2024-09-01 12678584 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-01-12678584-legacy-challenge-32.zip
+2024-09-01 12678590 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-01-12678590-legacy-challenge-64.zip
+2024-09-01 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-01-8362-legacy-league.zip
+2024-09-02 8362 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-02-8362-legacy-league.zip
+2024-09-03 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-03-8362-legacy-league.zip
+2024-09-04 12682627 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-04-12682627-legacy-challenge-32.zip
+2024-09-04 8362 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-04-8362-legacy-league.zip
+2024-09-05 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-05-8362-legacy-league.zip
+2024-09-06 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-06-8362-legacy-league.zip
+2024-09-07 12682664 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-07-12682664-legacy-challenge-32.zip
+2024-09-07 12682672 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-07-12682672-legacy-challenge-32.zip
+2024-09-07 8362 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-07-8362-legacy-league.zip
+2024-09-08 12682680 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-08-12682680-legacy-challenge-32.zip
+2024-09-08 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-08-8362-legacy-league.zip
+2024-09-09 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-09-8362-legacy-league.zip
+2024-09-10 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-10-8362-legacy-league.zip
+2024-09-11 12685758 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-11-12685758-legacy-challenge-32.zip
+2024-09-11 8362 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-11-8362-legacy-league.zip
+2024-09-12 8362 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-12-8362-legacy-league.zip
+2024-09-13 8362 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-13-8362-legacy-league.zip
+2024-09-14 12685795 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-14-12685795-legacy-challenge-32.zip
+2024-09-14 12685803 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-14-12685803-legacy-challenge-32.zip
+2024-09-14 8362 Legacy League (14 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-14-8362-legacy-league.zip
+2024-09-15 12685811 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-15-12685811-legacy-challenge-32.zip
+2024-09-15 12685817 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-15-12685817-legacy-challenge-64.zip
+2024-09-15 8362 Legacy League (27 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-15-8362-legacy-league.zip
+2024-09-16 8362 Legacy League (22 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-16-8362-legacy-league.zip
+2024-09-17 8362 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-17-8362-legacy-league.zip
+2024-09-18 8362 Legacy League (19 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-18-8362-legacy-league.zip
+2024-09-19 8362 Legacy League (26 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-19-8362-legacy-league.zip
+2024-09-20 8362 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-20-8362-legacy-league.zip
+2024-09-21 12687885 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-21-12687885-legacy-challenge-32.zip
+2024-09-21 12687893 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-21-12687893-legacy-challenge-32.zip
+2024-09-21 8362 Legacy League (29 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-21-8362-legacy-league.zip
+2024-09-22 12687845 Legacy Showcase Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-22-12687845-legacy-showcase-challenge.zip
+2024-09-22 12687902 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-22-12687902-legacy-challenge-32.zip
+2024-09-22 8362 Legacy League (28 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-22-8362-legacy-league.zip
+2024-09-23 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-23-8362-legacy-league.zip
+2024-09-24 8362 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-24-8362-legacy-league.zip
+2024-09-24 8524 Legacy League (6 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-24-8524-legacy-league.zip
+2024-09-25 12692911 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-25-12692911-legacy-challenge-32.zip
+2024-09-25 8524 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-25-8524-legacy-league.zip
+2024-09-26 8524 Legacy League (29 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-26-8524-legacy-league.zip
+2024-09-27 8524 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-27-8524-legacy-league.zip
+2024-09-28 12692949 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-28-12692949-legacy-challenge-32.zip
+2024-09-28 12692957 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-28-12692957-legacy-challenge-32.zip
+2024-09-28 8524 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-28-8524-legacy-league.zip
+2024-09-29 12692966 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-29-12692966-legacy-challenge-32.zip
+2024-09-29 12692972 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-29-12692972-legacy-challenge-64.zip
+2024-09-29 8524 Legacy League (23 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-29-8524-legacy-league.zip
+2024-09-30 8524 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-09-30-8524-legacy-league.zip
+2024-10-01 8524 Legacy League (25 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-01-8524-legacy-league.zip
+2024-10-02 12695975 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-02-12695975-legacy-challenge-32.zip
+2024-10-02 8524 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-02-8524-legacy-league.zip
+2024-10-03 8524 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-03-8524-legacy-league.zip
+2024-10-04 8524 Legacy League (20 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-04-8524-legacy-league.zip
+2024-10-05 12695991 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-05-12695991-legacy-challenge-32.zip
+2024-10-05 12695999 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-05-12695999-legacy-challenge-32.zip
+2024-10-05 8524 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-05-8524-legacy-league.zip
+2024-10-06 12695972 Legacy Super Qualifier (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-06-12695972-legacy-super-qualifier.zip
+2024-10-06 12696008 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-06-12696008-legacy-challenge-32.zip
+2024-10-06 8524 Legacy League (24 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-06-8524-legacy-league.zip
+2024-10-07 8524 Legacy League (26 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-07-8524-legacy-league.zip
+2024-10-08 8524 Legacy League (26 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-08-8524-legacy-league.zip
+2024-10-09 12698293 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-09-12698293-legacy-challenge-32.zip
+2024-10-09 8524 Legacy League (21 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-09-8524-legacy-league.zip
+2024-10-10 8524 Legacy League (16 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-10-8524-legacy-league.zip
+2024-10-11 8524 Legacy League (17 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-11-8524-legacy-league.zip
+2024-10-12 12698331 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-12-12698331-legacy-challenge-32.zip
+2024-10-12 12698339 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-12-12698339-legacy-challenge-32.zip
+2024-10-12 8524 Legacy League (18 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-12-8524-legacy-league.zip
+2024-10-13 12698348 Legacy Challenge 32 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-13-12698348-legacy-challenge-32.zip
+2024-10-13 12698354 Legacy Challenge 64 (32 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-13-12698354-legacy-challenge-64.zip
+2024-10-13 8524 Legacy League (29 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-13-8524-legacy-league.zip
+2024-10-14 8524 Legacy League (27 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-14-8524-legacy-league.zip
+2024-10-15 8524 Legacy League (27 decks) | https://downloads.cardforge.org/decks/archive/legacy/2024-10-15-8524-legacy-league.zip
