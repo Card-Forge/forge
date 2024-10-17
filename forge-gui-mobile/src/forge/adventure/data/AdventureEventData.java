@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -432,8 +433,9 @@ public class AdventureEventData implements Serializable {
     public void generateParticipants(int numberOfOpponents) {
         participants = new AdventureEventParticipant[numberOfOpponents + 1];
 
-        List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
-        data.removeIf(q -> q.nextEnemy != null);
+        //TODO: Switch this to a stream with StreamUtil.random once the guava migration branch is merged.
+        Iterable<EnemyData> validParticipants = Iterables.filter(WorldData.getAllEnemies(), q -> q.nextEnemy == null);
+        List<EnemyData> data = Aggregates.random(validParticipants, numberOfOpponents);
         for (int i = 0; i < numberOfOpponents; i++) {
             participants[i] = new AdventureEventParticipant().generate(data.get(i));
         }
