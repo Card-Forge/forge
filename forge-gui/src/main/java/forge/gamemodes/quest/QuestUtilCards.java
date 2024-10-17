@@ -576,7 +576,7 @@ public final class QuestUtilCards {
      *
      * @param quantity the count
      */
-    private void generateBoostersInShop(final int quantity) {
+    private void generateBoostersInShop(final int quantity, final QuestPreferences questPreferences) {
 
     	questAssets.getShopList().addAllFlat(BoosterUtils.generateRandomBoosterPacks(quantity, questController));
 
@@ -591,7 +591,7 @@ public final class QuestUtilCards {
      *
      * @param quantity the count
      */
-    private void generateSinglesInShop(final int quantity) {
+    private void generateSinglesInShop(final int quantity, final QuestPreferences questPref) {
         // This is the spot we need to change
         SealedTemplate boosterTemplate = getShopBoosterTemplate();
         if (questController.getFormat() == null) {
@@ -603,12 +603,11 @@ public final class QuestUtilCards {
             //faster method for dealing with a lot of additional cards
             List<PaperCard> cards = Lists.newArrayList();
             final List<PaperCard> cardPool = questController.getFormat().getAllCards();
-            System.out.println("QuestUtilCards::generateSinglesInShop::Format " + questController.getFormat().getName() + " [" + cardPool.size() + "]");
 
-            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_COMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
-            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_UNCOMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
-            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_RARE, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
-            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_COMMON, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_UNCOMMON, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_RARE, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_RARE)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, questPref.getPrefInt(QPref.SHOP_SINGLES_RARE)));
 
             questAssets.getShopList().addAllOfTypeFlat(cards);
         }
@@ -782,24 +781,29 @@ public final class QuestUtilCards {
      */
     private void generateCardsInShop() {
 
+        QuestPreferences preferences = questController.getWorld().getCustomPreferences();
+        if(preferences == null){
+            preferences = questPreferences;
+        }
+
         // Preferences
-        final int startPacks = questPreferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
-        final int winsForPack = questPreferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
-        final int maxPacks = questPreferences.getPrefInt(QPref.SHOP_MAX_PACKS);
-        final int minPacks = questPreferences.getPrefInt(QPref.SHOP_MIN_PACKS);
+        final int startPacks = preferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
+        final int winsForPack = preferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
+        final int maxPacks = preferences.getPrefInt(QPref.SHOP_MAX_PACKS);
+        final int minPacks = preferences.getPrefInt(QPref.SHOP_MIN_PACKS);
 
         int level = questController.getAchievements().getLevel();
         final int levelPacks = level > 0 ? startPacks / level : startPacks;
         final int winPacks = questController.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(Math.max(levelPacks + winPacks, minPacks), maxPacks);
 
-        generateSinglesInShop(totalPacks);
+        generateSinglesInShop(totalPacks, preferences);
 
-        generateBoostersInShop(totalPacks);
+        generateBoostersInShop(totalPacks, preferences);
         generatePreconsInShop(totalPacks);
         generateTournamentsInShop(totalPacks);
         generateFatPacksInShop(totalPacks);
-        //generateBoosterBoxesInShop(totalPacks);
+        generateBoosterBoxesInShop(totalPacks);
 
         if (questController.getFormat() == null || questController.getFormat().hasSnowLands()) {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
