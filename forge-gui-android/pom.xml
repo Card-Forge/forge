@@ -52,7 +52,7 @@
                         <configuration>
                             <!-- generate MonthDate code to month.date property -->
                             <name>month.date</name>
-                            <pattern>MMdd</pattern>
+                            <pattern>MM.dd</pattern>
                         </configuration>
                     </execution>
                     <execution>
@@ -67,21 +67,6 @@
                             <value>${revision}</value>
                             <regex>-SNAPSHOT</regex>
                             <replacement>-SNAPSHOT-${month.date}</replacement>
-                            <failIfNoMatch>false</failIfNoMatch>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>regex-property2</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>regex-property</goal>
-                        </goals>
-                        <configuration>
-                            <!-- generate versionCode from revision property to snapshot-versionCode property -->
-                            <name>snapshot-versionCode</name>
-                            <value>${revision}</value>
-                            <regex>[^0-9]</regex>
-                            <replacement></replacement>
                             <failIfNoMatch>false</failIfNoMatch>
                         </configuration>
                     </execution>
@@ -429,9 +414,7 @@
                                     <goal>manifest-merger</goal>
                                 </goals>
                                 <configuration>
-                                    <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                                     <manifestVersionName>${snapshot-version}</manifestVersionName>
-                                    <manifestVersionCode>${snapshot-versionCode}0${month.date}</manifestVersionCode>
                                 </configuration>
                             </execution>
                         </executions>
