@@ -55,4 +55,4 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B -P android-test-build verify -e -T 1C -Dmaven.test.skip=true
+          mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
