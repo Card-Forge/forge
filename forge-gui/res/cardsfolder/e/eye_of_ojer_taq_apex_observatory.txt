@@ -3,9 +3,9 @@ ManaCost:3
 Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Craft:6 ExileCtrlOrGrave<2/Permanent.Other+withSharedCardType/permanent>:two that share a card type:the two
+AI:RemoveDeck:All
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Mill|Graveyard|Token
-AI:RemoveDeck:All
 AlternateMode:DoubleFaced
 Oracle:{T}: Add one mana of any color.\nCraft with two that share a card type {6} ({6}, Exile this artifact, Exile the two from among other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 

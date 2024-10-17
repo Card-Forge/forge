@@ -4,7 +4,7 @@ Types:Creature Spirit
 PT:3/3
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigProtect | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, CARDNAME gains protection from the color of your choice until end of turn.
 SVar:TrigProtect:DB$ Protection | Defined$ Self | Gains$ Choice | Choices$ AnyColor
-AI:RemoveDeck:Random
 SVar:BuffedBy:Arcane,Spirit
+AI:RemoveDeck:Random
 DeckHints:Type$Spirit|Arcane
 Oracle:Whenever you cast a Spirit or Arcane spell, Kami of the Painted Road gains protection from the color of your choice until end of turn.

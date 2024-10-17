@@ -3,6 +3,6 @@ ManaCost:5 G
 Types:Sorcery
 K:Kicker:5
 A:SP$ ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | DestinationAlternative$ Battlefield | DestAltSVar$ MANDATORY Count$TimesKicked | ChangeType$ Doctor | ChangeNum$ 5 | SpellDescription$ Search your library and/or graveyard for up to five Doctor cards, reveal them, and put them into your hand. If you search your library this way, shuffle. If this spell was kicked, put those cards onto the battlefield instead of putting them into your hand.
-DeckNeeds:Type$Doctor
 DeckHas:Ability$Graveyard
+DeckNeeds:Type$Doctor
 Oracle:Kicker {5} (You may pay an additional {5} as you cast this spell.)\nSearch your library and/or graveyard for up to five Doctor cards, reveal them, and put them into your hand. If you search your library this way, shuffle. If this spell was kicked, put those cards onto the battlefield instead of putting them into your hand.

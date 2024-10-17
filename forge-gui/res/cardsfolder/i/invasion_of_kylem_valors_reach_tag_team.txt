@@ -13,6 +13,6 @@ Name:Valor's Reach Tag Team
 ManaCost:no cost
 Colors:red,white
 Types:Sorcery
-A:SP$ Token | TokenAmount$ 1 | TokenScript$ rw_3_2_warrior_symbiotic_attack | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."
+A:SP$ Token | TokenScript$ rw_3_2_warrior_symbiotic_attack | TokenAmount$ 2 | TokenOwner$ You | SpellDescription$ Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."
 DeckHas:Ability$Token & Type$Warrior
 Oracle:Create two 3/2 red and white Warrior creature tokens with "Whenever this creature and at least one other creature token attack, put a +1/+1 counter on this creature."

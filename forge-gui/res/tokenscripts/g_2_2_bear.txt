@@ -1,6 +1,6 @@
 Name:Bear Token
 ManaCost:no cost
-PT:2/2
 Colors:green
 Types:Creature Bear
+PT:2/2
 Oracle:

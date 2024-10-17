@@ -9,6 +9,6 @@ SVar:PlayMain1:TRUE
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Constellation — Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_pegasus_flying | TokenOwner$ You
 DeckHas:Ability$Token
-DeckNeeds:Type$Enchantment
 DeckHints:Type$Pegasus
+DeckNeeds:Type$Enchantment
 Oracle:Flying, lifelink\nPegasus creatures you control have lifelink.\nConstellation — Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying.

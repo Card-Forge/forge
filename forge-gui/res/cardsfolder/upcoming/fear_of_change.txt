@@ -1,0 +1,13 @@
+Name:Fear of Change
+ManaCost:G U
+Types:Enchantment Creature Nightmare
+PT:2/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigChoose | TriggerDescription$ When this creatures enters or dies, exile another creature you control. If you do, conjure a duplicate of a random creature card with mana value X onto the battlefield, where X is 2 plus the exiled creature's mana value.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Graveyard | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When this creatures enters or dies, exile another creature you control. If you do, conjure a duplicate of a random creature card with mana value X onto the battlefield, where X is 2 plus the exiled creature's mana value.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.YouCtrl+Other | ChoiceZone$ Battlefield | ChoiceTitles$ Select another creature you control | Mandatory$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ ChosenCard | RememberChanged$ True | TgtPrompt$ Exile another creature you control. | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBNameCard
+SVar:DBNameCard:DB$ NameCard | AtRandom$ True | ValidCards$ Creature.cmcEQX | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Conjure$ True | AtRandom$ True | Zone$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost/Plus.2
+Oracle:When this creatures enters or dies, exile another creature you control. If you do, conjure a duplicate of a random creature card with mana value X onto the battlefield, where X is 2 plus the exiled creature's mana value.

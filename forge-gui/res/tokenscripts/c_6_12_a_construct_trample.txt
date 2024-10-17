@@ -1,6 +1,6 @@
 Name:Construct Token
 ManaCost:no cost
 Types:Artifact Creature Construct
-K:Trample
 PT:6/12
+K:Trample
 Oracle:Trample

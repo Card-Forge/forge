@@ -5,6 +5,6 @@ A:SP$ Pump | Cost$ CollectEvidence<X> 2 B G | ValidTgts$ Artifact | TargetMin$ 0
 SVar:DBCreature:DB$ Pump | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBEnchantment
 SVar:DBEnchantment:DB$ Pump | SubAbility$ DBDestroyAll | ValidTgts$ Enchantment | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Enchantment
 SVar:DBDestroyAll:DB$ Destroy | Defined$ Targeted
-DeckHints:Ability$Graveyard|Mill|Discard|Dredge
 SVar:X:AllTargeted$SumCMC
+DeckHints:Ability$Graveyard|Mill|Discard|Dredge
 Oracle:As an additional cost to cast this spell, collect evidence X, where X is the total mana value of the permanents this spell targets.\nDestroy up to one target artifact, up to one target creature, up to one target enchantment, and up to one target planeswalker.

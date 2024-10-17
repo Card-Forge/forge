@@ -1,6 +1,6 @@
 Name:Merfolk Token
 ManaCost:no cost
-Types:Creature Merfolk
 Colors:blue
+Types:Creature Merfolk
 PT:1/1
 Oracle:

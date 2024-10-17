@@ -1,0 +1,14 @@
+Name:Winter, Cynical Opportunist
+ManaCost:2 B G
+Types:Legendary Creature Human Warlock
+PT:2/5
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever NICKNAME attacks, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Delirium$ True | TriggerZones$ Battlefield | Execute$ TrigExileDelirium | TriggerDescription$ Delirium — At the beginning of your end step, you may exile any number of cards from your graveyard with four or more card types among them. If you do, put a permanent card from among them onto the battlefield with a finality counter on it.
+SVar:TrigExileDelirium:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.YouOwn | ChangeNum$ X | RememberChanged$ True | Hidden$ True | WithTotalCardTypes$ 4 | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | WithCountersType$ FINALITY | Hidden$ True | ChangeType$ Permanent.YouOwn+IsRemembered | ChangeNum$ 1 | SubAbility$ DBCleanup | Mandatory$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.YouOwn
+AI:RemoveDeck:All
+Oracle:Deathtouch\nWhenever Winter attacks, mill three cards.\nDelirium — At the beginning of your end step, you may exile any number of cards from your graveyard with four or more card types among them. If you do, put a permanent card from among them onto the battlefield with a finality counter on it.

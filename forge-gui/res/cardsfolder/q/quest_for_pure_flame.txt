@@ -8,7 +8,7 @@ SVar:DamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | 
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:PlayMain1:TRUE
+SVar:MaxQuestEffect:4
 AI:RemoveDeck:All
 DeckHas:Ability$Counters
-SVar:MaxQuestEffect:4
 Oracle:Whenever a source you control deals damage to an opponent, you may put a quest counter on Quest for Pure Flame.\nRemove four quest counters from Quest for Pure Flame and sacrifice it: If any source you control would deal damage to a permanent or player this turn, it deals double that damage to that permanent or player instead.

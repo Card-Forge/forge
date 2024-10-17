@@ -3,8 +3,8 @@ ManaCost:X R R
 Types:Sorcery
 A:SP$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental_cat_haste | AtEOT$ Exile | SpellDescription$ Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.
 SVar:X:Count$xPaid
-# X Will get overwritten by Announce
+# X will get overwritten by Announce
 K:Flashback:R R Sac<X/Mountain>
-DeckHas:Ability$Token
 AI:RemoveDeck:All
+DeckHas:Ability$Token
 Oracle:Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step.\nFlashback—{R}{R}, Sacrifice X Mountains. (You may cast this card from your graveyard for its flashback cost. Then exile it.)

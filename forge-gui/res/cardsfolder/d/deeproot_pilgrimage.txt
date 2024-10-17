@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment
 T:Mode$ TapAll | ValidCards$ Merfolk.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more nontoken Merfolk you control become tapped, create a 1/1 blue Merfolk creature token with hexproof.
 SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_merfolk_hexproof
-DeckHas:Ability$Token & Type$Merfolk
 AI:RemoveDeck:Random
+DeckHas:Ability$Token & Type$Merfolk
 DeckNeeds:Type$Merfolk
 Oracle:Whenever one or more nontoken Merfolk you control become tapped, create a 1/1 blue Merfolk creature token with hexproof.

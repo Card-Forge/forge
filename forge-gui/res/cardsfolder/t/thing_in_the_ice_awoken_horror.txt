@@ -7,9 +7,9 @@ K:etbCounter:ICE:4
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, remove an ice counter from CARDNAME. Then if it has no ice counters on it, transform it.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_ICE | Mode$ Transform
+DeckHas:Ability$Counters
 DeckHints:Type$Horror
 DeckNeeds:Type$Instant|Sorcery
-DeckHas:Ability$Counters
 AlternateMode:DoubleFaced
 Oracle:Defender\nThing in the Ice enters with four ice counters on it.\nWhenever you cast an instant or sorcery spell, remove an ice counter from Thing in the Ice. Then if it has no ice counters on it, transform it.
 

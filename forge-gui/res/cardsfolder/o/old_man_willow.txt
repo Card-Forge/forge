@@ -7,7 +7,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediate | TriggerZones$ 
 SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Card.token/another creature or token> | Execute$ TrigDebuff | TriggerDescription$ When you do, target creature an opponent controls gets -2/-2 until end of turn.
 SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -2 | NumDef$ -2 | IsCurse$ True
 SVar:X:Count$Valid Land.YouCtrl
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Sacrifice
 DeckHints:Ability$Token
-SVar:HasAttackEffect:TRUE
 Oracle:Old Man Willow's power and toughness are each equal to the number of lands you control.\nWhenever Old Man Willow attacks, you may sacrifice another creature or a token. When you do, target creature an opponent controls gets -2/-2 until end of turn.

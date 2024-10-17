@@ -1,6 +1,6 @@
 Name:Alien Token
 ManaCost:no cost
-Types:Creature Alien
 Colors:blue
+Types:Creature Alien
 PT:0/0
 Oracle:

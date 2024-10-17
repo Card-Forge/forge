@@ -1,7 +1,7 @@
 Name:Illusion Token
 ManaCost:no cost
-Types:Creature Illusion
 Colors:blue
+Types:Creature Illusion
 PT:2/2
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ DoSac | TriggerDescription$ When CARDNAME becomes the target of a spell, sacrifice it.
 SVar:TokenTgtDies:SVar:Targeting:Dies

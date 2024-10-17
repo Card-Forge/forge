@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:1/1
 A:AB$ PutCounterAll | Cost$ T | ValidCards$ Artifact.Creature+YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtEOTOrBlock | SpellDescription$ Put a +1/+1 counter on each artifact creature you control.
-DeckHas:Ability$Counters
 SVar:UntapMe:True
+DeckHas:Ability$Counters
 Oracle:{T}: Put a +1/+1 counter on each artifact creature you control.

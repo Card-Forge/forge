@@ -4,6 +4,42 @@ Date=2024-09-27
 Name=Duskmourn: House of Horror
 Type=Expansion
 ScryfallCode=DSK
+# Lurking evil treatment for Commons and Uncommons is 1 in 4, but only relevant for 6 total cards so isn't handled
+# https://mtgscribe.com/2024/09/01/play-booster-fact-sheet-duskmourn/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("DSK cards")
+
+[Common-Guest]
+Base=Common:fromSheet("DSK cards")
+Replace=.015625F fromSheet("DSK special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DSK cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DSK cards")
+# Someone needs to do the replace math here
+#Replace=.082F fromSheet("DSK borderless")
+#Replace=.014F fromSheet("DSK showcase")
+
+[AnyLand]
+Base=Land:Common:fromSheet("DSK cards")
+Replace=.10F Land:Common:fromSheet("DSK cards")+
+Replace=.267F Land:fromSheet("DSK cards")
+Replace=.067F Land:fromSheet("DSK cards")+
+Replace=.133F Land:Rare:fromSheet("DSK cards")+
+Replace=.033F Land:Rare:fromSheet("DSK cards")+
+
+[Wildcard]
+Base=Common:fromSheet("DSK cards")
+# I don't know about these numbers, so i'm just copying them from BLB
+Replace=.417F Uncommon:fromSheet("DSK cards")
+Replace=.078F RareMythic:fromSheet("DSK cards")
 
 [cards]
 1 C Acrobatic Cheerleader @Julia Metzger
@@ -437,6 +473,19 @@ ScryfallCode=DSK
 
 [buy a box]
 417 R Twitching Doll @John Tedrick
+
+[special guests]
+1 Collected Company|SPG
+1 Damnation|SPG
+1 Expropriate|SPG
+1 Hallowed Haunting|SPG
+1 Maddening Hex|SPG
+1 Noxious Revival|SPG
+1 Phantasmal Image|SPG
+1 Sacrifice|SPG
+1 Soul Warden|SPG
+1 Unholy Heat|SPG
+
 
 [tokens]
 b_2_2_e_horror

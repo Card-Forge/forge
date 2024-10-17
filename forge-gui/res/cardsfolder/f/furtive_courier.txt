@@ -7,7 +7,7 @@ SVar:SaccedThisTurn:PlayerCountPropertyYou$SacrificedThisTurn Artifact
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw a card, then discard a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:HasAttackEffect:True
 DeckHas:Ability$Sacrifice|Discard
 DeckHints:Type$Artifact|Clue|Map|Treasure|Food
-SVar:HasAttackEffect:True
 Oracle:Furtive Courier can't be blocked as long as you've sacrificed an artifact this turn.\nWhenever Furtive Courier attacks, draw a card, then discard a card.

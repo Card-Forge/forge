@@ -1,7 +1,7 @@
 Name:Cat Soldier Token
 ManaCost:no cost
-Types:Creature Cat Soldier
 Colors:white
+Types:Creature Cat Soldier
 PT:1/1
 K:Vigilance
 Oracle:Vigilance
