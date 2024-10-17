@@ -11,6 +11,7 @@ import forge.item.SealedTemplate;
 import forge.item.generation.BoosterGenerator;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.CardBlock;
+import forge.model.FModel;
 import forge.util.Aggregates;
 
 import java.io.Serializable;
@@ -136,7 +137,8 @@ public class AdventureEventController implements Serializable {
         List<PaperCard> cards = BoosterGenerator.getBoosterPack(StaticData.instance().getBoosters().get(setCode));
         Deck output = new Deck();
         output.getMain().add(cards);
-        output.setName("Booster Pack: " + setCode);
+        String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();
+        output.setName(editionName + " Booster");
         output.setComment(setCode);
         return output;
     }
