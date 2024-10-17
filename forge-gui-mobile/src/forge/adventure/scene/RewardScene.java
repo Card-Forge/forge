@@ -26,6 +26,7 @@ import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
+import java.util.Comparator;
 
 /**
  * Displays the rewards of a fight or a treasure
@@ -318,6 +319,14 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        // Sort the rewards based on the rarity of the card inside the reward/ lets give items rarity
+        newRewards.sort(Comparator.comparing(reward -> {
+            if (reward.getCard() != null && reward.getCard().getRarity() != null) {
+                return reward.getCard().getRarity().ordinal();
+            }
+            // Return a default value or handle the case where rarity is not present
+            return Integer.MAX_VALUE; // Assuming higher values mean less priority in sorting
+        }));
         clearSelectable();
         this.type = type;
         doneClicked = false;

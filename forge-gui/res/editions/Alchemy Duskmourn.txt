@@ -6,4 +6,33 @@ Type=Online
 ScryfallCode=YDSK
 
 [cards]
-0 R Solitary Study // Endless Corridor @Leon Tukker
+1 M Ethrimik, Imagined Fiend @John Tedrick
+2 U Improvising Aerialist @Riccardo Federici
+3 R Mothlight Processionist @A. M. Sartor
+4 R Solitary Study // Endless Corridor @Leon Tukker
+5 U Housemeld @David Auden Nash
+6 M Lurker in the Deep @Jana Heidersdorf
+7 R Fear of Ridicule @Warren Mahy
+8 R Glimmer Hoarder @Irina Nordsol
+9 R Razor Demon @Riccardo Federici
+10 U Replicating Terror @Septian Fajrianto
+11 M Welcome the Darkness @Tiffany Turrill
+12 U Anguished Recollection @Chris Rallis
+13 R Crude Abattoir // Unsavory Kitchen @Marina Ortega Lorente
+14 U Eager Flameguide @Irina Nordsol
+15 R Chittering Illuminator @Aurore Folny
+16 U Harrowing Swarm @John Tedrick
+17 M Verdant Dread @Septian Fajrianto
+18 U Wary Zone Guard @Elizabeth Peiró
+19 R Effie, Fast Learner @Elizabeth Peiró
+20 R Enduring Friendship @Flavio Greco Paglia
+21 U Fear of Change @Maxime Minard
+22 R Gilded Ambusher @David Auden Nash
+23 U Golden Sidekick @Domenico Cava
+24 M Mangled Soulrager @Xabi Gaztelua
+25 R Mischievous Lookout @Steven Russell Black
+26 R Polterheist @Josu Hernaiz
+27 R Unnatural Summons @Jana Heidersdorf
+28 R Valiant Emberkin @Andrea Piparo
+29 U Wingbright Thief @Racrufi
+30 R Soul Shredder @Josu Hernaiz

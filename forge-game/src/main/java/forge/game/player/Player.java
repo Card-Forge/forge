@@ -855,6 +855,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
+    public final boolean canRemoveCounters(final CounterType type) {
+        if (!isInGame()) {
+            return false;
+        }
+        // no RE affecting players currently, skip check for performance
+        return true;
+    }
+
     @Override
     public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
@@ -896,12 +904,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     @Override
-    public void subtractCounter(CounterType counterName, int num, final Player remover) {
+    public int subtractCounter(CounterType counterName, int num, final Player remover) {
         int oldValue = getCounters(counterName);
         int newValue = Math.max(oldValue - num, 0);
 
         final int delta = oldValue - newValue;
-        if (delta == 0) { return; }
+        if (delta == 0) { return 0; }
 
         setCounters(counterName, newValue, null, true);
 
@@ -917,6 +925,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
         */
+        return delta;
     }
 
     public final void clearCounters() {

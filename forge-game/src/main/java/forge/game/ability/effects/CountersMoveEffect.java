@@ -101,8 +101,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         // uses for multi sources -> one defined/target
         // this needs given counter type
         if (sa.hasParam("ValidSource")) {
-            CardCollectionView srcCards = game.getCardsIn(ZoneType.Battlefield);
-            srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), activator, host, sa);
+            CardCollectionView srcCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidSource"), activator, host, sa);
             List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
             if (tgtCards.isEmpty()) {
@@ -147,11 +146,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             Map<CounterType, Integer> countersToAdd = Maps.newHashMap();
 
             for (Card src : srcCards) {
-                // rule 121.5: If the first and second objects are the same object, nothing happens
-                if (src.equals(dest)) {
-                    continue;
-                }
-
                 if ("All".equals(counterName)) {
                     final Map<CounterType, Integer> tgtCounters = Maps.newHashMap(src.getCounters());
                     for (Map.Entry<CounterType, Integer> e : tgtCounters.entrySet()) {
@@ -183,8 +177,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             params.put("CounterType", cType);
             params.put("Source", source);
 
-            CardCollectionView tgtCards = game.getCardsIn(ZoneType.Battlefield);
-            tgtCards = CardLists.getValidCards(tgtCards, sa.getParam("ValidDefined"), activator, host, sa);
+            CardCollectionView tgtCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidDefined"), activator, host, sa);
 
             if (counterNum.equals("Any")) {
                 tgtCards = activator.getController().chooseCardsForEffect(
@@ -201,6 +194,9 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                     continue;
                 }
                 if (!dest.canReceiveCounters(cType)) {
+                    continue;
+                }
+                if (!source.canRemoveCounters(cType)) {
                     continue;
                 }
 
@@ -287,7 +283,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
                         final List<CounterType> typeChoices = Lists.newArrayList();
                         // get types of counters
                         for (CounterType ct : tgtCounters.keySet()) {
-                            if (dest.canReceiveCounters(ct)) {
+                            if (dest.canReceiveCounters(ct) && source.canRemoveCounters(cType)) {
                                 typeChoices.add(ct);
                             }
                         }
@@ -335,6 +331,9 @@ public class CountersMoveEffect extends SpellAbilityEffect {
         }
 
         if (!dest.canReceiveCounters(cType)) {
+            return;
+        }
+        if (!src.canRemoveCounters(cType)) {
             return;
         }
 
