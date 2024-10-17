@@ -5,6 +5,7 @@ Name=Masterpiece Series - Amonkhet
 Type=Collector_Edition
 ScryfallCode=mp2
 
+#Bonus cards for AKH Amonkhet
 [cards]
 1 S Austere Command @Richard Wright
 2 S Aven Mindcensor @Jose Cabrera
@@ -36,6 +37,9 @@ ScryfallCode=mp2
 28 S Rhonas the Indomitable @Jack Wang
 29 S Maelstrom Pulse @Igor Kieryluk
 30 S Vindicate @Igor Kieryluk
+
+#Bonus cards for HOU Hour of Devastation
+[special slot]
 31 S Armageddon @Florian de Gesincourt
 32 S Capsize @Cliff Childs
 33 S Forbid @Richard Wright

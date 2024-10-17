@@ -431,6 +431,8 @@ ScryfallCode=NEO
 403 R Mirror Box @Mid
 404 R Reckoner Bankbuster @Yoshiya
 405 R Surgehacker Mech @Inuchiyo Meimaru
+
+[etched]
 417 R Farewell @Fuzichoco
 418 M The Wandering Emperor @Hisashi Momose
 419 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi

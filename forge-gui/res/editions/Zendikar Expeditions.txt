@@ -5,6 +5,7 @@ Name=Zendikar Expeditions
 Type=Collector_Edition
 ScryfallCode=EXP
 
+#Bonus cards for BFZ Battle for Zendikar
 [cards]
 1 M Prairie Stream @Titus Lunter
 2 M Sunken Hollow @Titus Lunter
@@ -31,6 +32,9 @@ ScryfallCode=EXP
 23 M Verdant Catacombs @Ryan Yee
 24 M Arid Mesa @Ryan Yee
 25 M Misty Rainforest @Ryan Yee
+
+#Bonus cards for OGW Oath of the Gatewatch
+[special slot]
 26 M Mystic Gate @Adam Paquette
 27 M Sunken Ruins @Adam Paquette
 28 M Graven Cairns @Adam Paquette
