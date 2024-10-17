@@ -123,9 +123,21 @@ public class NewGameScene extends MenuScene {
             AdventureModes.Custom.setModes(custom);
         }
         String[] modeNames = new String[modes.size];
-        for (int i = 0; i < modes.size; i++)
+        int constructedIndex = -1;
+
+        for (int i = 0; i < modes.size; i++) {
             modeNames[i] = modes.get(i).getName();
+            if (modes.get(i) == AdventureModes.Constructed) {
+                constructedIndex = i;
+            }
+        }
+
         mode.setTextList(modeNames);
+        mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
+
+        AdventureModes initialMode = modes.get(mode.getCurrentIndex());
+        starterEdition.setVisible(initialMode == AdventureModes.Standard);
+        starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});

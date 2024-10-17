@@ -609,7 +609,7 @@ g_5_3_elemental
 r_1_1_goblin
 rw_4_4_a_golem
 u_0_3_crab
-u_1_1_bird_flying
+w_1_1_bird_flying
 
 [other]
 eternalize_timeless_dragon
