@@ -35,9 +35,13 @@ jobs:
           export MAVEN_HOME=$PWD/apache-maven-3.8.1
           mvn --version
 
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
+
       - name: Set Up Android tools
         run: |
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Install Android maven plugin
         run: |
