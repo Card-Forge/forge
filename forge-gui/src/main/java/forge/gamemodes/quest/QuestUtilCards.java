@@ -603,6 +603,7 @@ public final class QuestUtilCards {
             //faster method for dealing with a lot of additional cards
             List<PaperCard> cards = Lists.newArrayList();
             final List<PaperCard> cardPool = questController.getFormat().getAllCards();
+            System.out.println("QuestUtilCards::generateSinglesInShop::Format " + questController.getFormat().getName() + " [" + cardPool.size() + "]");
 
             cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_COMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
             cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_UNCOMMON, quantity * questPreferences.getPrefInt(QPref.SHOP_SINGLES_COMMON)));

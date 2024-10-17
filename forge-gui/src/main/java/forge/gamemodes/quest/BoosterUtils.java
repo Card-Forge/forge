@@ -116,22 +116,23 @@ public final class BoosterUtils {
 
         final List<PaperCard> cards = new ArrayList<>();
 
-        if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
+        if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS && formatStartingPool.getAdditionalCards().isEmpty()) {
 
             for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), formatStartingPool.editionLegalPredicate)) {
                 cards.addAll(((BoosterPack) inventoryItem).getCards());
             }
-
             return cards;
-
         }
 
         Predicate<PaperCard> filter = Predicates.alwaysTrue();
         if (formatStartingPool != null) {
+            System.out.println("Format != null");
             filter = formatStartingPool.getFilterPrinted();
         }
 
         final List<PaperCard> cardPool = Lists.newArrayList(Iterables.filter(FModel.getMagicDb().getCommonCards().getAllNonPromoCards(), filter));
+
+        System.out.println(cardPool.size() + " cards in the pool");
 
         if (userPrefs != null && userPrefs.grantCompleteSet()) {
             for (PaperCard card : cardPool) {

@@ -19,6 +19,7 @@ package forge.game;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -152,23 +153,24 @@ public class GameFormat implements Comparable<GameFormat> {
             List<String> cardNames = Lists.newArrayList();
             List<PaperCard> cards = Lists.newArrayList();
             for(String card : this.getAdditionalCards()){
-                String[] split = card.split("@");
+                String[] cardSplit = card.split("\\|");
                 PaperCard pCard = null;
-                if(split.length == 2){
-                    pCard = StaticData.instance().getCommonCards().getCard(split[0], split[1]);
+                if(cardSplit.length == 2){
+                    pCard = StaticData.instance().getCommonCards().getCard(cardSplit[0], cardSplit[1]);
                     if(pCard != null){
                         cards.add(pCard);
-                        cardNames.add(split[0]);
+                        cardNames.add(cardSplit[0]);
                     }
                 }else{
-                    pCard = StaticData.instance().getCommonCards().getUniqueByName(split[0]);
+                    pCard = StaticData.instance().getCommonCards().getUniqueByName(cardSplit[0]);
                     if(pCard != null){
                         cards.add(pCard);
                         cardNames.add(pCard.getName());
                     }
                 }
             }
-            additionalPred = IPaperCard.Predicates.names(cardNames);
+
+            additionalPred = IPaperCard.Predicates.cards(cards);
         }
 
         //in case allowed set codes are not empty and there are additional cards, it'll set the predicate to account for both
@@ -258,37 +260,43 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public List<PaperCard> getAllCards() {
-        List<PaperCard> cards = new ArrayList<>();
-        CardDb commonCards = StaticData.instance().getCommonCards();
-        for (String setCode : allowedSetCodes_ro) {
-            CardEdition edition = StaticData.instance().getEditions().get(setCode);
-            if (edition != null) {
-                for (CardInSet card : edition.getAllCardsInSet()) {
-                    if (!bannedCardNames_ro.contains(card.name)) {
-                        PaperCard pc = commonCards.getCard(card.name, setCode, card.collectorNumber);
-                        if (pc != null) {
-                            cards.add(pc);
-                        }
-                    }
-                }
-            }
-        }
+
+        return Lists.newArrayList(Iterables.filter(StaticData.instance().getCommonCards().getAllCards(), getFilterPrinted()));
+
+
+        //List<PaperCard> cards = new ArrayList<>();
+        //CardDb commonCards = StaticData.instance().getCommonCards();
+
+
+        //for (String setCode : allowedSetCodes_ro) {
+        //    CardEdition edition = StaticData.instance().getEditions().get(setCode);
+        //    if (edition != null) {
+        //        for (CardInSet card : edition.getAllCardsInSet()) {
+        //            if (!bannedCardNames_ro.contains(card.name)) {
+        //                PaperCard pc = commonCards.getCard(card.name, setCode, card.collectorNumber);
+        //                if (pc != null) {
+        //                    cards.add(pc);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
         //adds extra cards to the pool
-        for(String extraCard : additionalCardNames_ro){
-            String[] split = extraCard.split("@");
-            if(split.length == 2){
-                PaperCard pc = commonCards.getCard(split[0], split[1]);
-                if(pc != null){
-                    cards.add(pc);
-                }
-            }else{
-                PaperCard pc = commonCards.getCard(extraCard);
-                if(pc != null){
-                    cards.add(pc);
-                }
-            }
-        }
-        return cards;
+        //for(String extraCard : additionalCardNames_ro){
+        //    String[] split = extraCard.split("@");
+        //    if(split.length == 2){
+        //        PaperCard pc = commonCards.getCard(split[0], split[1]);
+        //        if(pc != null){
+        //            cards.add(pc);
+        //        }
+        //    }else{
+        //        PaperCard pc = commonCards.getCard(extraCard);
+        //        if(pc != null){
+        //            cards.add(pc);
+        //        }
+        //    }
+        //}
+        //return cards;
     }
     public List<PaperCard> getAllExtraCards(){
         List<PaperCard> cards = new ArrayList<>();
