@@ -156,7 +156,7 @@ public enum CSubmenuQuestStart implements ICDoc {
                             return;
                         }
                     }
-                    fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banned cards
+                    fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null, null); // chosen sets and no banned cards
                     break;
 
                 case DraftDeck:
@@ -194,7 +194,7 @@ public enum CSubmenuQuestStart implements ICDoc {
                 for(Map.Entry<PaperCard, Integer> entry : dckStartPool.getAllCardsInASinglePool()) {
                     sets.add(entry.getKey().getEdition());
                 }
-                fmtPrizes = new GameFormat(localizer.getMessage("lblFromDeck"), sets, null);
+                fmtPrizes = new GameFormat(localizer.getMessage("lblFromDeck"), sets, null, null);
             }
         }
         else {
@@ -209,7 +209,7 @@ public enum CSubmenuQuestStart implements ICDoc {
                             return;
                         }
                     }
-                    fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banned cards
+                    fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null, null); // chosen sets and no banned cards
                     break;
                 case Sanctioned:
                     fmtPrizes = view.getPrizedRotatingFormat();

@@ -20,7 +20,7 @@ public class CardSetFilter extends CardFormatFilter {
     public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
-        this.formats.add(new GameFormat(null, this.sets, null));
+        this.formats.add(new GameFormat(null, this.sets, null, null));
         this.allowReprints = allowReprints0;
     }
 
@@ -54,7 +54,7 @@ public class CardSetFilter extends CardFormatFilter {
         this.limitedSets.addAll(cardSetFilter.limitedSets);
         this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();
-        this.formats.add(new GameFormat(null, this.sets, null));
+        this.formats.add(new GameFormat(null, this.sets, null, null));
         return true;
     }
 

@@ -662,6 +662,10 @@ public class BoosterGenerator {
         List<Predicate<PaperCard>> conditions = new ArrayList<>();
 
         Iterator<String> itOp = operators.iterator();
+
+        //needed to find additional cards in boosters generated on quest mode
+        List<PaperCard> additionalCards = null;
+
         while (itOp.hasNext()) {
             String operator = itOp.next();
             if (StringUtils.isEmpty(operator)) {
@@ -676,6 +680,7 @@ public class BoosterGenerator {
             boolean invert = operator.charAt(0) == '!';
             if (invert) { operator = operator.substring(1); }
 
+            boolean extra = false;
             Predicate<PaperCard> toAdd = null;
             if (operator.equalsIgnoreCase(BoosterSlots.DUAL_FACED_CARD)) {
                 toAdd = Predicates.compose(
@@ -694,9 +699,16 @@ public class BoosterGenerator {
             } else if (operator.equalsIgnoreCase(BoosterSlots.UNCOMMON)) {      toAdd = IPaperCard.Predicates.Presets.IS_UNCOMMON;
             } else if (operator.equalsIgnoreCase(BoosterSlots.COMMON)) {        toAdd = IPaperCard.Predicates.Presets.IS_COMMON;
             } else if (operator.startsWith("name(")) {
+                //cardname@set
+                additionalCards = new ArrayList<>();
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
-                toAdd = IPaperCard.Predicates.names(Lists.newArrayList(cardNames));
+                for(String card : cardNames){
+                    String[] split = card.split("@");
+                    additionalCards.add(StaticData.instance().getCommonCards().getCard(split[0], split[1]));
+                }
+                itOp.remove();
+                continue;
             } else if (operator.startsWith("color(")) {
                 operator = StringUtils.strip(operator.substring("color(".length() + 1), "()\" ");
                 switch (operator.toLowerCase()) {
@@ -722,7 +734,16 @@ public class BoosterGenerator {
             } else if (operator.startsWith("fromSets(")) {
                 operator = StringUtils.strip(operator.substring("fromSets(".length() + 1), "()\" ");
                 String[] sets = operator.split(",");
-                toAdd = IPaperCard.Predicates.printedInSets(sets);
+                //looks up for if there are additional cards in the format to place them toguether with the set cards
+                if(additionalCards == null){
+                    toAdd = IPaperCard.Predicates.printedInSets(sets);
+                }else{
+                    toAdd = Predicates.or(
+                            IPaperCard.Predicates.printedInSets(sets),
+                            IPaperCard.Predicates.cards(additionalCards)
+                    );
+                    additionalCards = null;
+                }
             } else if (operator.startsWith("fromSheet(") && invert) {
                 String sheetName = StringUtils.strip(operator.substring(9), "()\" ");
                 Iterable<PaperCard> cards = StaticData.instance().getPrintSheets().get(sheetName).toFlatList();
@@ -739,6 +760,10 @@ public class BoosterGenerator {
                 toAdd = Predicates.not(toAdd);
             }
             conditions.add(toAdd);
+        }
+        //if no sets were present, creates the predicate with only the additional cards
+        if(additionalCards != null){
+            conditions.add(IPaperCard.Predicates.cards(additionalCards));
         }
 
         if (conditions.isEmpty()) {
