@@ -12250,7 +12250,7 @@
 	"difficulty": 1,
 	"speed": 30,
 	"scale": 0.5,
-	"life": 35,
+	"life": 55,
 	"rewards": [
 		{
 			"type": "card",
