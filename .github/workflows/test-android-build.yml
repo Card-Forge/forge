@@ -37,9 +37,7 @@ jobs:
 
       - name: Set Up Android tools
         run: |
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools"
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "platforms;android-35"
-          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.2"
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Install Android maven plugin
         run: |
@@ -59,4 +57,4 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.2 -Dmaven.test.skip=true
+          mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
