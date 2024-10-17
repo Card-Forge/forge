@@ -205,6 +205,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>io.github.zumikua</groupId>
+            <artifactId>webploader-android</artifactId>
+            <version>0.1.0</version>
+            <type>aar</type>
+        </dependency>
     </dependencies>
 
     <profiles>
