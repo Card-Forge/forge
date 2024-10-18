@@ -135,12 +135,9 @@
                     <archive>
                         <manifest>
                             <mainClass>forge.app.Main</mainClass>
-                            <!--addDefaultImplementationEntries>true</addDefaultImplementationEntries-->
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Implementation-Title>${project.name}</Implementation-Title>
-                            <Implementation-Version>${project.build.finalName}</Implementation-Version>
-                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                             <SplashScreen-Image>splash/logo.gif</SplashScreen-Image>
                         </manifestEntries>
                     </archive>
