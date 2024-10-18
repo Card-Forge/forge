@@ -1,7 +1,7 @@
 Name:Harpy Token
 ManaCost:no cost
-Types:Creature Harpy
 Colors:black
+Types:Creature Harpy
 PT:1/1
 K:Flying
 Oracle:Flying

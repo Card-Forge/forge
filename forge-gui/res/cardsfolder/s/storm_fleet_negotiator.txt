@@ -9,6 +9,6 @@ SVar:DBToken:DB$ Token | TokenScript$ c_a_map_sac_explore | TokenAmount$ X | Sub
 SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.nonLand
-DeckHas:Ability$Token & Type$Map|Artifact
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Map|Artifact
 Oracle:Flying\nParley — Whenever Storm Fleet Negotiator attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a Map token. Then each player draws a card. (A Map token is an artifact with "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.")

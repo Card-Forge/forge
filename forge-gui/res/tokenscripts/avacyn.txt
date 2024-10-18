@@ -1,8 +1,8 @@
 Name:Avacyn
 ManaCost:no cost
+Colors:white
 Types:Legendary Creature Angel
 PT:8/8
-Colors:white
 K:Flying
 K:Vigilance
 K:Indestructible

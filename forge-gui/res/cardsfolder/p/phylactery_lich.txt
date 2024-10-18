@@ -9,7 +9,7 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ PHYLACTERY | CounterNum$ 1 | Def
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.counters_GE1_PHYLACTERY+YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no permanents with phylactery counters on them, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice
+SVar:NeedsToPlay:Artifact.YouCtrl
 AI:RemoveDeck:Random
 DeckHints:Type$Artifact
-SVar:NeedsToPlay:Artifact.YouCtrl
 Oracle:Indestructible\nAs Phylactery Lich enters, put a phylactery counter on an artifact you control.\nWhen you control no permanents with phylactery counters on them, sacrifice Phylactery Lich.

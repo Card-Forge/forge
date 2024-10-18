@@ -1,8 +1,6 @@
 Name:Tunnel of Love
 ManaCost:no cost
 Types:Artifact Attraction
-Variant:A:Lights:2 6
-Variant:B:Lights:3 6
 K:Visit:TrigChoose
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse | SubAbility$ DBChoose | SpellDescription$ Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners' control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
 SVar:DBChoose:DB$ ChooseCard | Defined$ ChosenPlayer | RememberChosen$ True | Choices$ Creature.ControlledBy ChosenPlayer | Amount$ 1 | SubAbility$ DBChooseYou
@@ -14,3 +12,8 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Ex
 SVar:DBFight:DB$ Fight | Defined$ Remembered | SubAbility$ DBCleanup | SpellDescription$ The chosen creatures fight each other.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 Oracle:Visit — Choose an opponent. They choose a creature they control, then you choose a creature you control. You may exile the chosen creatures. If you do, return them to the battlefield under their owners' control at the beginning of the next end step. Otherwise, the chosen creatures fight each other.
+
+# --- VARIANTS ---
+
+Variant:A:Lights:2 6
+Variant:B:Lights:3 6

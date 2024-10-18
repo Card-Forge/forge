@@ -5,7 +5,7 @@ PT:3/2
 A:AB$ Token | Cost$ T Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | CostDesc$ {T}, Sacrifice CARDNAME and any number of other non-Eldrazi creatures: | TokenAmount$ Y | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.
 SVar:Y:Sacrificed$Valid Creature
 SVar:X:Count$xPaid
-DeckHints:Ability$Token & Type$Eldrazi|Horror
-DeckHas:Ability$Token|Sacrifice
 SVar:AIPreference:SacCost$Creature.token
+DeckHas:Ability$Token|Sacrifice
+DeckHints:Ability$Token & Type$Eldrazi|Horror
 Oracle:{T}, Sacrifice Emrakul's Evangel and any number of other non-Eldrazi creatures: Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way.

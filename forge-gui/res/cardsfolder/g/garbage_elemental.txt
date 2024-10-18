@@ -1,16 +1,22 @@
 Name:Garbage Elemental
 ManaCost:4 R
 Types:Creature Elemental
+Oracle:<Unsupported Variant>
+
+# --- VARIANT C --- 
+
 Variant:C:PT:3/2
 Variant:C:K:Battle cry
 Variant:C:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When CARDNAME enters, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
 Variant:C:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 6 | Amount$ 2 | UseDifferenceBetweenRolls$ True | SubAbility$ DBToken
 Variant:C:SVar:DBToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenAmount$ Result
+Variant:C:Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhen Garbage Elemental enters, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
+
+# --- VARIANT D ---
+
 Variant:D:PT:3/3
 Variant:D:K:Cascade
 Variant:D:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When CARDNAME enters, roll a six-sided die. CARDNAME deals damage equal to the result to target opponent or planeswalker.
 Variant:D:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | SubAbility$ DBDamage
 Variant:D:SVar:DBDamage:DB$ DealDamage | ValidTgts$ Opponent,Planeswalker | TgtPrompt$ Select target opponent or planeswalker | NumDmg$ Result
-Oracle:<Unsupported Variant>
-Variant:C:Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nWhen Garbage Elemental enters, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.
 Variant:D:Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nWhen Garbage Elemental enters, roll a six-sided die. Garbage Elemental deals damage equal to the result to target opponent or planeswalker.

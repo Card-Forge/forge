@@ -7,6 +7,6 @@ SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | Toke
 SVar:DBEffect:DB$ Effect | StaticAbilities$ StaticMayLookAndPlay
 SVar:StaticMayLookAndPlay:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | MayPlay$ True | Description$ You may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.
 K:Crew:3
-DeckHas:Ability$Token & Type$Treasure
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Treasure
 Oracle:Whenever The Belligerent attacks, create a Treasure token. Until end of turn, you may look at the top card of your library any time, and you may play lands and cast spells from the top of your library.\nCrew 3

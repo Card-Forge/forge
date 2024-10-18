@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever your commander enters or attacks, put a page counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Counters
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Counters
 A:AB$ Draw | Cost$ 1 T SubCounter<1/PAGE> | NumCards$ 1 | SpellDescription$ Draw a card.
 Oracle:Tome of Legends enters with a page counter on it.\nWhenever your commander enters or attacks, put a page counter on Tome of Legends.\n{1}, {T}, Remove a page counter from Tome of Legends: Draw a card.

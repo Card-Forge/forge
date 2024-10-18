@@ -155,7 +155,7 @@ public class SetStateAi extends SpellAbilityAi {
             }
 
             // non-permanent facedown can't be turned face up
-            if (!card.getRules().getType().isPermanent()) {
+            if (!card.getRules().getType().isPermanent() || !card.canBeTurnedFaceUp()) {
                 return false;
             }            
         } else {

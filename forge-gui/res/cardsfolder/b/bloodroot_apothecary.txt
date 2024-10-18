@@ -4,7 +4,7 @@ Types:Creature Squirrel Druid
 PT:3/3
 K:Toxic:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ WWen CARDNAME enters, you and target opponent each create a Treasure token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ TargetedAndYou | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | SpellDescription$ You and target opponent each create a Food token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | ValidTgts$ Opponent | TokenOwner$ TargetedAndYou | TokenScript$ c_a_treasure_sac | SpellDescription$ You and target opponent each create a Food token.
 T:Mode$ Sacrificed | ValidCard$ Permanent.token+nonCreature | ValidPlayer$ Opponent | Execute$ TrigPoison | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a noncreature token, that player gets two poison counters.
 SVar:TrigPoison:DB$ Poison | Defined$ TriggeredCardController | Num$ 2
 Oracle:Toxic 2 (Players dealt combat damage by this creature also get two poison counters. A player with ten or more poison counters loses the game.)\nWhen Bloodroot Apothecary enters, you and target opponent each create a Treasure token.\nWhenever an opponent sacrifices a noncreature token, that player gets two poison counters.

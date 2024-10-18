@@ -1,7 +1,7 @@
 Name:Griffin Token
 ManaCost:no cost
-Types:Creature Griffin
 Colors:white
+Types:Creature Griffin
 PT:2/2
 K:Flying
 Oracle:Flying

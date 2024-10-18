@@ -4,10 +4,12 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <android.manifest.versionCodeUpdateFromVersion>true</android.manifest.versionCodeUpdateFromVersion>
+        <android.manifestMerger.versionDigits>2,2,2,4</android.manifestMerger.versionDigits>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.65-SNAPSHOT</alpha-version>
+        <alpha-version>1.6.66-SNAPSHOT</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -20,7 +22,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.65-SNAPSHOT</version>
+        <version>1.6.66-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -228,7 +230,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.1</version>
+                        <version>4.6.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -239,7 +241,6 @@
                                 <buildTools>30.0.3</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
@@ -266,6 +267,14 @@
                                 <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -292,7 +301,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.1</version>
+                        <version>4.6.2</version>
                         <extensions>true</extensions>
                         <configuration>
                             <sign>
@@ -306,7 +315,6 @@
                                 <verbose>false</verbose>
                             </zipalign>
                             <dexForceJumbo>true</dexForceJumbo>
-                            <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
                             <resourceDirectory>${project.basedir}/res</resourceDirectory>
                             <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
@@ -333,6 +341,14 @@
                                 <dexArguments>--min-sdk-version=26</dexArguments>
                             </dex>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
@@ -393,7 +409,7 @@
                                 <version>6.2.2</version>
                             </dependency>
                         </dependencies>
-                        <version>4.6.1</version>
+                        <version>4.6.2</version>
                         <inherited>true</inherited>
                         <configuration>
                             <sign>
@@ -412,6 +428,12 @@
                                 <phase>package</phase>
                                 <goals>
                                     <goal>zipalign</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
                                 </goals>
                             </execution>
                         </executions>

@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment Room
 T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigDig | TriggerDescription$ When you unlock this door, exile the top two cards of your library. You may play them until the end of your next turn.
 SVar:TrigDig:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect 
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | FogetOnMoved$ Exile | RememberObjects$ Remembered | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AlternateMode:Split

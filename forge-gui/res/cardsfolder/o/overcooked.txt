@@ -6,6 +6,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ Celebration | BranchConditionSVarCompare$ GE2 | TrueSubAbility$ DBConjure | FalseSubAbility$ DBFood
 SVar:DBFood:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_food_sac
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Food Fight | Zone$ Battlefield
-DeckHas:Ability$Token & Type$Food
 SVar:Celebration:Count$ThisTurnEntered_Battlefield_Permanent.nonLand+YouCtrl
+DeckHas:Ability$Token & Type$Food
 Oracle:Players can't gain life.\nCelebration — At the beginning of your end step, create a Food token. If two or more nonland permanents entered the battlefield under your control this turn, instead conjure a card named Food Fight onto the battlefield.

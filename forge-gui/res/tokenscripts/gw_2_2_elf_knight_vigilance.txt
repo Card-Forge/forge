@@ -1,7 +1,7 @@
 Name:Elf Knight Token
 ManaCost:no cost
-Types:Creature Elf Knight
 Colors:white,green
+Types:Creature Elf Knight
 PT:2/2
 K:Vigilance
 Oracle:Vigilance

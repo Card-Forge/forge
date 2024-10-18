@@ -8,6 +8,6 @@ SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_astartes_warrior_vigilance | Token
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures you control gain flying until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | KW$ Flying
 K:Crew:2
-DeckHas:Ability$Token & Type$Astartes|Warrior & Keyword$Vigilance
 SVar:HasAttackingEffect:TRUE
+DeckHas:Ability$Token & Type$Astartes|Warrior & Keyword$Vigilance
 Oracle:Flying\nWhen Thunderhawk Gunship enters, create two 2/2 white Astartes Warrior creature tokens with vigilance.\nWhenever Thunderhawk Gunship attacks, attacking creatures you control gain flying until end of turn.\nCrew 2

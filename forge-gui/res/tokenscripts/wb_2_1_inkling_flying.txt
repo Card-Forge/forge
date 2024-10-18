@@ -1,7 +1,7 @@
 Name:Inkling Token
 ManaCost:no cost
-Types:Creature Inkling
 Colors:white,black
+Types:Creature Inkling
 PT:2/1
 K:Flying
 Oracle:Flying

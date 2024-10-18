@@ -1,6 +1,6 @@
 Name:Illusion Token
 ManaCost:no cost
-Types:Creature Illusion
 Colors:blue
+Types:Creature Illusion
 PT:*/*
 Oracle:

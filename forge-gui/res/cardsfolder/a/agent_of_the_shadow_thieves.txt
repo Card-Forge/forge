@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ Attacks
 SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Condition$ NoOpponentHasMoreLifeThanAttacked | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature attacks a player, if no opponent has more life than that player, put a +1/+1 counter on this creature. It gains deathtouch and indestructible until end of turn.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | Defined$ Self | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Deathtouch & Indestructible
-DeckHas:Ability$Counters
 AI:RemoveDeck:NonCommander
+DeckHas:Ability$Counters
 Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, put a +1/+1 counter on this creature. It gains deathtouch and indestructible until end of turn."

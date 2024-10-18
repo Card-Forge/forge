@@ -5,7 +5,7 @@ PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Artifact.!hasManaAbility | TgtPrompt$ Select up to X target artifacts without mana abilities
 SVar:X:Count$Valid Vampire.YouCtrl
-DeckHints:Type$Vampire
-AI:RemoveDeck:Random
 SVar:BuffedBy:Vampire
+AI:RemoveDeck:Random
+DeckHints:Type$Vampire
 Oracle:When Midnight Arsonist enters, destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control.

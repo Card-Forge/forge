@@ -9,6 +9,6 @@ SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 
 SVar:DBReturn:DB$ ChangeZone | Origin$ Stack | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
-DeckNeeds:Type$Artifact
 AI:RemoveDeck:Random
+DeckNeeds:Type$Artifact
 Oracle:Seek a nonland artifact card with mana value X or less and put it onto the battlefield. If a card with mana value less than X is put onto the battlefield this way, this spell perpetually gains "This spell costs {1} more to cast," then return this spell to its owner's hand.

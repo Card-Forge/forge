@@ -7,9 +7,9 @@ K:Trample
 K:Ward:1
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Card.token | TriggerZones$ Battlefield,Exile | Execute$ TrigPump | TriggerDescription$ Whenever you sacrifice a token, NICKNAME perpetually gets +1/+1. This ability also triggers if NICKNAME is in exile.
 SVar:TrigPump:DB$ Pump | PumpZone$ Battlefield,Exile | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual
-AlternateMode:Adventure
 DeckHas:Ability$Discard|Token & Type$Food
 DeckHints:Ability$Token & Type$Treasure|Food|Clue
+AlternateMode:Adventure
 Oracle:Flying, Trample, Ward {1}\nWhenever you sacrifice a token, Albiorix perpetually gets +1/+1. This ability also triggers if Albiorix is in exile.
 
 ALTERNATE

@@ -8,6 +8,6 @@ SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | RememberObjects$ Remembered 
 SVar:TrigChangeAll:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Graveyard | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Type$Eldrazi|Spawn
 SVar:X:Remembered$Amount
+DeckHas:Ability$Token & Type$Eldrazi|Spawn
 Oracle:Exile the top three cards of your library. You may play those cards this turn. \nAt the beginning of the next end step, if any of those cards remain exiled, put them into your graveyard, then create a 0/1 colorless Eldrazi Spawn creature token for each card put into your graveyard this way. Those tokens have "Sacrifice this creature: Add {C}."

@@ -3,6 +3,6 @@ ManaCost:G U
 Types:Creature Merfolk Shaman
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk you control get +1/+1.
-DeckHints:Type$Merfolk
 SVar:BuffedBy:Merfolk
+DeckHints:Type$Merfolk
 Oracle:Other Merfolk you control get +1/+1.

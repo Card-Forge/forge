@@ -1,7 +1,7 @@
 Name:Ooze Token
 ManaCost:no cost
-Types:Creature Ooze
 Colors:green
+Types:Creature Ooze
 PT:0/0
 K:Trample
 Oracle:Trample

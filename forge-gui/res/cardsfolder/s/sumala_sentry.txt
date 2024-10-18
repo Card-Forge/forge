@@ -5,7 +5,7 @@ PT:1/3
 K:Reach
 T:Mode$ TurnFaceUp | ValidCard$ Permanent.YouCtrl | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever a face-down permanent you control is turned face up, put a +1/+1 counter on it and a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopyAndSelf | CounterType$ P1P1
+AI:RemoveDeck:Random
 DeckHas:Ability$Counters
 DeckHints:Keyword$Morph|Megamorph|Disguise
-AI:RemoveDeck:Random
 Oracle:Reach\nWhenever a face-down permanent you control is turned face up, put a +1/+1 counter on it and a +1/+1 counter on Sumala Sentry.

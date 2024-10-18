@@ -9,6 +9,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMonarch:DB$ BecomeMonarch | ValidTgts$ Player | SubAbility$ DBPower
 SVar:DBPower:DB$ DealDamage | ValidTgts$ Any | NumDmg$ Y
 SVar:Y:Count$CardPower
-DeckNeeds:Type$Human
 DeckHas:Ability$Counters
+DeckNeeds:Type$Human
 Oracle:Double strike\nÉomer, King of Rohan enters with a +1/+1 counter on it for each other Human you control.\nWhen Éomer enters, target player becomes the monarch. Éomer deals damage equal to its power to any target.

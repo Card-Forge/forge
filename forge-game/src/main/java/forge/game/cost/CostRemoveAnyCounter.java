@@ -70,10 +70,16 @@ public class CostRemoveAnyCounter extends CostPart {
         int allCounters = 0;
         for (Card c : validCards) {
             if (this.counter != null) {
+                if (!c.canRemoveCounters(this.counter)) {
+                    continue;
+                }
                 allCounters += c.getCounters(this.counter);
             } else {
-                for (Integer value : c.getCounters().values()) {
-                    allCounters += value;
+                for (Map.Entry<CounterType, Integer> entry : c.getCounters().entrySet()) {
+                    if (!c.canRemoveCounters(entry.getKey())) {
+                        continue;
+                    }
+                    allCounters += entry.getValue();
                 }
             }
         }

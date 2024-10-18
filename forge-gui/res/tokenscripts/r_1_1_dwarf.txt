@@ -1,6 +1,6 @@
 Name:Dwarf Token
 ManaCost:no cost
-Types:Creature Dwarf
 Colors:red
+Types:Creature Dwarf
 PT:1/1
 Oracle:

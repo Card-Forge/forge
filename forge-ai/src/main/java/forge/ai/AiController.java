@@ -923,16 +923,16 @@ public class AiController {
         if (checkCurseEffects(sa)) {
             return AiPlayDecision.CurseEffects;
         }
+        // TODO maybe other location for this?
+        if (!sa.isLegalAfterStack()) {
+            return AiPlayDecision.AnotherTime;
+        }
         Card spellHost = card;
         if (sa.isSpell()) {
             spellHost = CardCopyService.getLKICopy(spellHost);
             spellHost.setLKICMC(-1); // to reset the cmc
             spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
             spellHost.setCastFrom(card.getZone());
-        }
-        // TODO maybe other location for this?
-        if (!sa.isLegalAfterStack()) {
-            return AiPlayDecision.AnotherTime;
         }
         if (!sa.checkRestrictions(spellHost, player)) {
             return AiPlayDecision.AnotherTime;
@@ -946,7 +946,7 @@ public class AiController {
             }
         }
         if (sa instanceof Spell) {
-            if (card.isPermanent()) {
+            if (sa.getApi() == ApiType.PermanentCreature || sa.getApi() == ApiType.PermanentNoncreature) {
                 return canPlayFromEffectAI((Spell) sa, false, true);
             }
             if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&

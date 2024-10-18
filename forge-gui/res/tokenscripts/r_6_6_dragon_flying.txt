@@ -1,7 +1,7 @@
 Name:Dragon Token
 ManaCost:no cost
-Types:Creature Dragon
 Colors:red
-K:Flying
+Types:Creature Dragon
 PT:6/6
+K:Flying
 Oracle:Flying

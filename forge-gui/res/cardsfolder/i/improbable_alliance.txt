@@ -5,6 +5,6 @@ T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield 
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_faerie_flying | TokenOwner$ You
 A:AB$ Draw | Cost$ 4 U R | NumCards$ 1 | SpellDescription$ Draw a card, then discard a card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
-DeckHas:Ability$Token
 AI:RemoveDeck:All
+DeckHas:Ability$Token
 Oracle:Whenever you draw your second card each turn, create a 1/1 blue Faerie creature token with flying.\n{4}{U}{R}: Draw a card, then discard a card.

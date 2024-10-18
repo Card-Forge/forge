@@ -1,6 +1,6 @@
 Name:Mowu
 ManaCost:no cost
-Types:Legendary Creature Dog
 Colors:green
+Types:Legendary Creature Dog
 PT:3/3
 Oracle:

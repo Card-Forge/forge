@@ -6,6 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBAttach | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, you may attach target Equipment you control with mana value 2 or 3 to NICKNAME.
 SVar:DBAttach:DB$ Attach | ValidTgts$ Equipment.cmcEQ2+YouCtrl,Equipment.cmcEQ3+YouCtrl | Object$ Targeted | Defined$ Self
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Card.Self | PlayerTurn$ True | Description$ As long as it's your turn, prevent all damage that would be dealt to NICKNAME.
-DeckHints:Type$Equipment
 SVar:HasAttackEffect:TRUE
+DeckHints:Type$Equipment
 Oracle:Whenever Frodo, Determined Hero enters or attacks, you may attach target Equipment you control with mana value 2 or 3 to Frodo.\nAs long as it's your turn, prevent all damage that would be dealt to Frodo.

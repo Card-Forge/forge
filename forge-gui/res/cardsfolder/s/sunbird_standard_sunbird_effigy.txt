@@ -4,9 +4,9 @@ Types:Artifact
 A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
 K:Craft:5 XMin1 ExileCtrlOrGrave<X/Permanent.Other/permanent>
 SVar:X:Count$xPaid
+AI:RemoveDeck:All
 DeckHints:Ability$Discard|Mill|Sacrifice
 DeckHas:Ability$Graveyard
-AI:RemoveDeck:All
 AlternateMode:DoubleFaced
 Oracle:{T}: Add one mana of any color.\nCraft with one or more {5} ({5}, Exile this artifact, Exile one or more other permanents you control and/or cards from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
 

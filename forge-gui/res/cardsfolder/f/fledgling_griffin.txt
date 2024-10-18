@@ -3,6 +3,6 @@ ManaCost:1 W
 Types:Creature Griffin
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Landfall — Whenever a land you control enters, CARDNAME gains flying until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying | Defined$ Self
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Flying
 SVar:BuffedBy:Land
 Oracle:Landfall — Whenever a land you control enters, Fledgling Griffin gains flying until end of turn.

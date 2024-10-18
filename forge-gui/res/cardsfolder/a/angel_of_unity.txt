@@ -9,7 +9,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Party | ValidActivatingPlayer$ You | Execute
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.Party+YouOwn | ChoiceTitle$ Choose a party creature card in your hand | Amount$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ChosenCard | PumpZone$ Hand | NumAtt$ 1 | NumDef$ 1 | Duration$ Perpetual | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-DeckHas:Ability$Party|LifeGain
 SVar:BuffedBy:Cleric,Rogue,Warrior,Wizard
+DeckHas:Ability$Party|LifeGain
 DeckHints:Type$Rogue|Warrior|Wizard
 Oracle:Flying, lifelink\nWhenever Angel of Unity enters or you cast a party spell, choose a party creature card in your hand. It perpetually gets +1/+1. (A party card or spell is a Cleric, Rogue, Warrior, or Wizard.)

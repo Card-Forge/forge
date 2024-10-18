@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | IsPresent$ Card.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Goblin.YouCtrl | Execute$ TrigPutCounter | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Goblin you control enters, you may put a quest counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ QUEST | CounterNum$ 1
 SVar:MaxQuestEffect:5
-DeckNeeds:Type$Goblin
 DeckHas:Ability$Counters
+DeckNeeds:Type$Goblin
 Oracle:Whenever a Goblin you control enters, you may put a quest counter on Quest for the Goblin Lord.\nAs long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
