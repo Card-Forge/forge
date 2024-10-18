@@ -1,0 +1,10 @@
+Name:Rootwise Survivor
+Types:Creature Human Survivor
+ManaCost:3 G G
+PT:3/4
+K:Haste
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, put three +1/+1 counters on up to one target land you control. That land becomes a 0/0 Elemental creature in addition to its other types. It gains haste until your next turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Duration$ Permanent | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Keywords$ Haste | Defined$ Targeted | Duration$ UntilYourNextTurn
+Oracle:Haste\nSurvival — At the beginning of your second main phase, if Rootwise Survivor is tapped, put three +1/+1 counters on up to one target land you control. That land becomes a 0/0 Elemental creature in addition to its other types. It gains haste until your next turn.

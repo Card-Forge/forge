@@ -1,0 +1,10 @@
+Name:Soaring Lightbringer
+ManaCost:4 W
+Types:Enchantment Creature Bird Glimmer
+PT:4/5
+K:Flying
+S:Mode$ Continuous | Affected$ Enchantment.Creature+Other+YouCtrl | AddKeyword$ Flying | Description$ Other enchantment creatures you control have flying.
+T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack a player, create a 1/1 white Glimmer enchantment creature token that's tapped and attacking that player.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_e_glimmer | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ TriggeredAttackedTarget
+SVar:PlayMain1:TRUE
+Oracle:Flying\nOther enchantment creatures you control have flying.\nWhenever you attack a player, create a 1/1 white Glimmer enchantment creature token that's tapped and attacking that player.

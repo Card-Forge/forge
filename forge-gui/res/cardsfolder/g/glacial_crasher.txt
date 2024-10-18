@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:5/5
 K:Trample
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | IsPresent$ Mountain | PresentCompare$ EQ0 | Description$ CARDNAME can't attack unless there is a Mountain on the battlefield.
+SVar:BuffedBy:Mountain
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red
-SVar:BuffedBy:Mountain
 Oracle:Trample (This creature can deal excess combat damage to the player or planeswalker it's attacking.)\nGlacial Crasher can't attack unless there is a Mountain on the battlefield.

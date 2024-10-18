@@ -1,0 +1,10 @@
+Name:Your Nightmares Are Delicious
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent who has more than five cards in hand discards cards equal to the difference. Then if fewer than three cards were discarded this way, you draw three cards.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDiscard | SubAbility$ DBDraw
+SVar:DBDiscard:DB$ Discard | Defined$ Player.IsRemembered | NumCards$ X | Mode$ TgtChoose | RememberDiscarded$ True
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ LT3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:PlayerCountRemembered$CardsInHand/Minus.5
+Oracle:When you set this scheme in motion, each opponent who has more than five cards in hand discards cards equal to the difference. Then if fewer than three cards were discarded this way, you draw three cards.

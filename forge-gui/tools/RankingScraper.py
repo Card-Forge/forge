@@ -1,8 +1,10 @@
+import argparse
 import json
 import requests
-import argparse
 
-def draftsimRankings(edition='KHM', extra=None):
+
+def draftsimRankings(edition='DSK', extra=None):
+	edition = edition.upper()
 	url1 = 'https://draftsim.com/generated/%s/' % (edition)
 	url2 = '%s' % edition
 	url = url1 + url2 + '.js'
@@ -34,7 +36,7 @@ def draftsimRankings(edition='KHM', extra=None):
 
 	txt3 = txt + txt2
 	txt3 = txt3.replace(u'\xa9', '')
-	# print(txt3)
+	print(txt3)
 
 	cardlist = json.loads(txt3)
 

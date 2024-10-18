@@ -1,0 +1,10 @@
+Name:I Call for Slaughter
+ManaCost:no cost
+Types:Scheme
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target." They gain haste until end of turn. If a source you control would deal damage this turn, it deals that much damage plus 1 instead.
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ r_1_1_devil_burn | PumpKeywords$ Haste | PumpDuration$ EOT | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ DamageEvent
+SVar:DamageEvent:Event$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ReplaceWith$ DmgPlusOne | Description$ If a source you control would deal damage this turn, it deals that much damage plus 1 instead.
+SVar:DmgPlusOne:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Plus.1
+Oracle:When you set this scheme in motion, create three 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target." They gain haste until end of turn. If a source you control would deal damage this turn, it deals that much damage plus 1 instead.

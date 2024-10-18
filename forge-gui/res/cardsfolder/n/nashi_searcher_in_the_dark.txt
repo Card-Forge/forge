@@ -1,0 +1,14 @@
+Name:Nashi, Searcher in the Dark
+ManaCost:U B
+Types:Legendary Creature Rat Ninja Wizard
+PT:2/2
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you mill that many cards. You may put any number of legendary and/or enchantment cards from among them into your hand. If you put no cards into your hand this way, put a +1/+1 counter on NICKNAME.
+SVar:TrigMill:DB$ Mill | NumCards$ X | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.Legendary+IsRemembered,Enchantment.IsRemembered | ChangeNum$ X | RememberChanged$ True | ForgetOtherRemembered$ True | SelectPrompt$ You may select any number of legendary and/or enchantment cards. | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Mill
+DeckHints:Type$Legendary|Enchantment
+Oracle:Menace\nWhenever Nashi, Searcher in the Dark deals combat damage to a player, you mill that many cards. You may put any number of legendary and/or enchantment cards from among them into your hand. If you put no cards into your hand this way, put a +1/+1 counter on Nashi.

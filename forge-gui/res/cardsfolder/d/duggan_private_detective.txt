@@ -9,6 +9,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInvestigate | Secondary$ T
 SVar:TrigInvestigate:DB$ Investigate
 A:AB$ DealDamage | Cost$ 1 G T | ValidTgts$ Creature.Other | PrecostDesc$ The Most Important Punch in History — | TgtPrompt$ Select another target creature | GameActivationLimit$ 1 | NumDmg$ Y | SpellDescription$ NICKNAME deals damage equal to twice its power to another target creature. Activate only once.
 SVar:Y:Count$CardPower/Twice
-DeckHas:Ability$Token & Type$Clue|Artifact
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Clue|Artifact
 Oracle:Duggan's power and toughness are each equal to the number of cards in your hand.\nWhenever Duggan enters or attacks, investigate.\nThe Most Important Punch in History — {1}{G}, {T}: Duggan deals damage equal to twice its power to another target creature. Activate only once.

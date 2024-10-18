@@ -10,4 +10,4 @@ SVar:EffSModeContinuous:Mode$ Continuous | EffectZone$ Command | Affected$ Card.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Artifact
-Oracle:Whenever an artifact you control enters, Hedron Detonator deals 1 damage to target opponent.\n{T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn
+Oracle:Whenever an artifact you control enters, Hedron Detonator deals 1 damage to target opponent.\n{T}, Sacrifice two artifacts: Exile the top card of your library. You may play that card this turn.

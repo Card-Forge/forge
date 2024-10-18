@@ -1,0 +1,10 @@
+Name:Hand That Feeds
+ManaCost:1 R
+Types:Creature Mutant
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Delirium$ True | Execute$ TrigPump | NoResolvingCheck$ True | TriggerDescription$ Delirium — Whenever CARDNAME attacks while there are four or more card types among cards in your graveyard, it gets +2/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ Menace
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Graveyard|Discard
+DeckHas:Ability$Delirium
+Oracle:Delirium — Whenever Hand That Feeds attacks while there are four or more card types among cards in your graveyard, it gets +2/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)

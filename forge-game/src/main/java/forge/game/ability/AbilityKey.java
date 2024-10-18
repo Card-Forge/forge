@@ -30,6 +30,7 @@ public enum AbilityKey {
     Blockers("Blockers"),
     CanReveal("CanReveal"),
     Card("Card"),
+    CardState("CardState"),
     Cards("Cards"),
     CardsFiltered("CardsFiltered"),
     CardLKI("CardLKI"),

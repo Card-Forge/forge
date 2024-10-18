@@ -6,7 +6,7 @@ K:Convoke
 K:Lifelink
 K:Madness:2 B
 S:Mode$ Continuous | Affected$ Vampire.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Vampires you control get +1/+1.
-DeckHints:Type$Vampire & Ability$Discard
-DeckHas:Ability$LifeGain
 SVar:PlayMain1:TRUE
+DeckHas:Ability$LifeGain
+DeckHints:Type$Vampire & Ability$Discard
 Oracle:Convoke\nLifelink\nOther Vampires you control get +1/+1.\nMadness {2}{B}

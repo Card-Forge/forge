@@ -10,6 +10,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever CARDNAME attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.
 SVar:TrigInvestigate:AB$ Investigate | Cost$ ExiledMoveToGrave<1/Card.ExiledWithSource/card exiled with CARDNAME>
 K:Crew:2
-DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Investigate|Token & Type$Artifact|Clue
 Oracle:When Foreboding Steamboat enters, each player chooses two nontoken, non-Vehicle creatures they control. Exile them until Foreboding Steamboat leaves the battlefield.\nWhenever Foreboding Steamboat attacks, put a card exiled with it into its owner's graveyard. If you do, investigate.\nCrew 2

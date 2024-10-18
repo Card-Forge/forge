@@ -1,0 +1,8 @@
+Name:Redress Fate
+ManaCost:6 W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | ChangeType$ Artifact.YouOwn,Enchantment.YouOwn | Origin$ Graveyard | Destination$ Battlefield | SpellDescription$ Return all artifact and enchantment cards from your graveyard to the battlefield.
+K:Miracle:3 W
+DeckNeeds:Type$Artifact|Enchantment
+DeckHas:Ability$Graveyard
+Oracle:Return all artifact and enchantment cards from your graveyard to the battlefield.\nMiracle {3}{W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

@@ -1,6 +1,6 @@
 Name:Soldier Token
 ManaCost:no cost
-Types:Enchantment Creature Soldier
 Colors:white
+Types:Enchantment Creature Soldier
 PT:1/1
 Oracle:

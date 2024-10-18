@@ -1,0 +1,7 @@
+Name:Peer Past the Veil
+ManaCost:2 R G
+Types:Instant
+A:SP$ Discard | Mode$ Hand | SubAbility$ DBDraw | SpellDescription$ Discard your hand. Then draw X cards, where X is the number of card types among cards in your graveyard.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+Oracle:Discard your hand. Then draw X cards, where X is the number of card types among cards in your graveyard.

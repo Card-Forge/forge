@@ -63,8 +63,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounterTypes")) {
                 for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtCard.getCounters().entrySet())) {
-                    numberRemoved += e.getValue();
-                    tgtCard.subtractCounter(e.getKey(), e.getValue(), sa.getActivatingPlayer());
+                    numberRemoved += tgtCard.subtractCounter(e.getKey(), e.getValue(), sa.getActivatingPlayer());
                 }
                 //tgtCard.getCounters().clear();
                 continue;
@@ -74,7 +73,7 @@ public class CountersRemoveAllEffect extends SpellAbilityEffect {
             }
 
             if (counterAmount > 0) {
-                tgtCard.subtractCounter(CounterType.getType(type), counterAmount, sa.getActivatingPlayer());
+                numberRemoved += tgtCard.subtractCounter(CounterType.getType(type), counterAmount, sa.getActivatingPlayer());
                 game.updateLastStateForCard(tgtCard);
             }
         }

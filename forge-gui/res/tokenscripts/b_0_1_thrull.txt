@@ -1,6 +1,6 @@
 Name:Thrull Token
 ManaCost:no cost
-Types:Creature Thrull
 Colors:black
+Types:Creature Thrull
 PT:0/1
 Oracle:

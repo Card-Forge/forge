@@ -1,6 +1,6 @@
 Name:Performer Token
 ManaCost:no cost
-Types:Creature Performer
 Colors:white
+Types:Creature Performer
 PT:2/2
 Oracle:

@@ -6,6 +6,6 @@ K:First Strike
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters, put a +1/+1 counter on each other artifact creature you control.
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.Artifact+StrictlyOther+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 K:Modular:2
-DeckHas:Ability$Counters
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters
 Oracle:First strike\nWhen Arcbound Shikari enters, put a +1/+1 counter on each other artifact creature you control.\nModular 2 (This creature enters with two +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)

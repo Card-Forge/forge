@@ -7,6 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Battlefield | AddPower$
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters and whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl,Artifact.Other+YouCtrl | Execute$ TrigCounter | Secondary$ True | TriggerDescription$ When CARDNAME enters and whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on CARDNAME.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
-DeckHas:Ability$Counters
 SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters
 Oracle:Trample\nExuberant Fuseling gets +1/+0 for each oil counter on it.\nWhen Exuberant Fuseling enters and whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on Exuberant Fuseling.

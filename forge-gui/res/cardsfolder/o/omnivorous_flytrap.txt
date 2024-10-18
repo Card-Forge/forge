@@ -1,0 +1,10 @@
+Name:Omnivorous Flytrap
+ManaCost:2 G
+Types:Creature Plant
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | Delirium$ True | TriggerDescription$ Delirium — Whenever CARDNAME enters or attacks, if there are four or more card types among cards in your graveyard, distribute two +1/+1 counters among one or two target creatures. Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures.
+T:Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigPutCounter | Delirium$ True | TriggerDescription$ Delirium — Whenever CARDNAME enters or attacks, if there are four or more card types among cards in your graveyard, distribute two +1/+1 counters among one or two target creatures. Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 1 | TargetMax$ 2 | DividedAsYouChoose$ 2 | SubAbility$ DBMultiplyCounter
+SVar:DBMultiplyCounter:DB$ MultiplyCounter | Defined$ Targeted | CounterType$ P1P1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE6
+SVar:X:Count$ValidGraveyard Card.YouOwn$CardTypes
+Oracle:Delirium — Whenever Omnivorous Flytrap enters or attacks, if there are four or more card types among cards in your graveyard, distribute two +1/+1 counters among one or two target creatures. Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures.

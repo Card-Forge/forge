@@ -1,6 +1,6 @@
 Name:Kor Ally Token
 ManaCost:no cost
-Types:Creature Kor Ally
 Colors:white
+Types:Creature Kor Ally
 PT:1/1
 Oracle:

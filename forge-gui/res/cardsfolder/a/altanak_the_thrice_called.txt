@@ -1,0 +1,9 @@
+Name:Altanak, the Thrice-Called
+ManaCost:5 G G
+Types:Legendary Creature Insect Beast
+PT:9/9
+K:Trample
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ ChangeZone | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target land card in your graveyard | ValidTgts$ Land.YouOwn | Tapped$ True | SpellDescription$ Return target land card from your graveyard to the battlefield tapped.
+Oracle:Trample\nWhenever Altanak, the Thrice-Called becomes the target of a spell or ability an opponent controls, draw a card.\n{1}{G}, Discard Altanak, the Thrice-Called: Return target land card from your graveyard to the battlefield tapped.

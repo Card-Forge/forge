@@ -1,9 +1,0 @@
-Name:Trial of Agony
-ManaCost:R
-Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select two target creatures controlled by the same opponent | TargetMin$ 2 | TargetMax$ 2 | TargetsFromSingleZone$ True | IsCurse$ True | RememberTargets$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Choose two target creatures controlled by the same opponent. That player chooses one of those creatures. CARDNAME deals 5 damage to that creature, and the other can't block this turn.
-SVar:DBChoose:DB$ ChooseCard | Defined$ TargetedController | Mandatory$ True | Choices$ Creature.IsRemembered | ChoiceTitle$ Choose one to take 5 damage | ForgetChosen$ True | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | NumDmg$ 5 | Defined$ ChosenCard | SubAbility$ DBCantBlock
-SVar:DBCantBlock:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME can't block. | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Choose two target creatures controlled by the same opponent. That player chooses one of those creatures. Trial of Agony deals 5 damage to that creature, and the other can't block this turn.

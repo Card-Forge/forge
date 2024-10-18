@@ -5,6 +5,6 @@ PT:1/4
 K:Kicker:1 G
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters, if it was kicked, destroy target land.
 SVar:TrigKicker:DB$ Destroy | ValidTgts$ Land | TgtPrompt$ Select target land
-DeckHints:Color$Green
 SVar:NeedsToPlayKicked:Land.OppCtrl
+DeckHints:Color$Green
 Oracle:Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)\nWhen Benalish Emissary enters, if it was kicked, destroy target land.

@@ -1,0 +1,7 @@
+Name:Defiant Survivor
+Types:Creature Human Survivor
+ManaCost:2 G
+PT:3/2
+T:Mode$ Phase | Phase$ Main | PhaseCount$ 2 | ValidPlayer$ You | PresentDefined$ Self | IsPresent$ Card.tapped | TriggerZones$ Battlefield | Execute$ TrigDread | TriggerDescription$ Survival — At the beginning of your second main phase, if CARDNAME is tapped, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)
+SVar:TrigDread:DB$ ManifestDread
+Oracle:Survival — At the beginning of your second main phase, if Defiant Survivor is tapped, manifest dread. (Look at the top two cards of your library. Put one onto the battlefield face down as a 2/2 creature and the other into your graveyard. Turn it face up any time for its mana cost if it's a creature card.)

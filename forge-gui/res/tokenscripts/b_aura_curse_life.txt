@@ -1,7 +1,7 @@
 Name:Aura Curse Token
 ManaCost:no cost
-Types:Enchantment Aura Curse
 Colors:black
+Types:Enchantment Aura Curse
 K:Enchant player
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigLife | TriggerDescription$ At the beginning of enchanted player's upkeep, that player loses 1 life.
 SVar:TrigLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 1

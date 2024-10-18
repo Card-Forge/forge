@@ -1,0 +1,6 @@
+Name:Valgavoth's Faithful
+ManaCost:B
+Types:Creature Human Cleric
+PT:1/1
+A:AB$ ChangeZone | Cost$ 3 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.
+Oracle:{3}{B}, Sacrifice Valgavoth's Faithful: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.

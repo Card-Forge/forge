@@ -8,18 +8,18 @@ T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | Ch
 SVar:TrigTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | ForgetOtherRemembered$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-AlternateMode:DoubleFaced
 SVar:LifeGained:Count$LifeYouGainedThisTurn
 DeckHints:Ability$LifeGain
 DeckHas:Ability$LifeGain
+AlternateMode:DoubleFaced
 Oracle:Lifelink\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nAt the beginning of each of your postcombat main phases, if you gained 3 or more life this turn, exile Sorin of House Markov, then return him to the battlefield transformed under his owner's control.
 
 ALTERNATE
 
 Name:Sorin, Ravenous Neonate
 ManaCost:no cost
-Types:Legendary Planeswalker Sorin
 Colors:white,black
+Types:Legendary Planeswalker Sorin
 Loyalty:3
 K:Extort
 A:AB$ Token | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ c_a_food_sac | TokenOwner$ You | SpellDescription$ Create a Food token.

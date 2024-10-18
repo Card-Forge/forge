@@ -1,0 +1,8 @@
+Name:Saw
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | Description$ Equipped creature gets +2/+0.
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks, you may sacrifice a permanent other than that creature or CARDNAME. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Sac<1/Permanent.Other+NotDefinedTriggeredAttacker/permanent other than the triggered attacker or CARDNAME>
+K:Equip:2
+Oracle:Equipped creature gets +2/+0.\nWhenever equipped creature attacks, you may sacrifice a permanent other than that creature or Saw. If you do, draw a card.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

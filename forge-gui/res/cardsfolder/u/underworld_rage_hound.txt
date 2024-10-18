@@ -5,6 +5,6 @@ PT:3/1
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 K:Escape:3 R ExileFromGrave<3/Card.Other/other>
 K:etbCounter:P1P1:1:ValidCard$ Card.Self+escaped:CARDNAME escapes with a +1/+1 counter on it.
-DeckHas:Ability$Counters
 SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Counters
 Oracle:Underworld Rage-Hound attacks each combat if able.\nEscape—{3}{R}, Exile three other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)\nUnderworld Rage-Hound escapes with a +1/+1 counter on it.

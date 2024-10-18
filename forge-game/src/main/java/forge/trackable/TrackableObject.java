@@ -47,7 +47,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     @Override
     public final boolean equals(final Object o) {
         if (o == null) { return false; }
-        return o.hashCode() == id && o.getClass().equals(getClass());
+        return o.hashCode() == hashCode() && o.getClass().equals(getClass());
     }
 
     // don't know if this is really needed, but don't know a better way

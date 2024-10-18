@@ -1,0 +1,18 @@
+Name:Moldering Gym
+ManaCost:2 G
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigSearch | TriggerDescription$ When you unlock this door, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
+AlternateMode:Split
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+
+ALTERNATE
+
+Name:Weight Room
+ManaCost:5 G
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ TrigDread | TriggerDescription$ When you unlock this door, manifest dread, then put three +1/+1 counters on that creature.
+SVar:TrigDread:DB$ ManifestDread | Amount$ 1 | RememberManifested$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ RememberedCard | CounterType$ P1P1 | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)\nWhen you unlock this door, manifest dread, then put three +1/+1 counters on that creature.

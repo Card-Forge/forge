@@ -7,6 +7,6 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ LightOfPromise
 SVar:LightOfPromiseTrig:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ LightOfPromisePutCounter | TriggerDescription$ Whenever you gain life, put that many +1/+1 counters on this creature.
 SVar:LightOfPromisePutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ LightOfPromiseAmount
 SVar:LightOfPromiseAmount:TriggerCount$LifeAmount
-DeckNeeds:Ability$LifeGain
 DeckHas:Ability$Counters
+DeckNeeds:Ability$LifeGain
 Oracle:Enchant creature\nEnchanted creature has "Whenever you gain life, put that many +1/+1 counters on this creature."

@@ -1,0 +1,9 @@
+Name:Dark Wings Bring Your Downfall
+ManaCost:no cost
+Types:Ongoing Scheme
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever you attack, create a 5/5 black Demon creature token with flying that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE2 | TriggerZones$ Command | Execute$ TrigAbandon | TriggerDescription$ At the beginning of each end step, if two or more creatures died under your control this turn, abandon this scheme.
+SVar:TrigAbandon:DB$ Abandon
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever you attack, create a 5/5 black Demon creature token with flying that's tapped and attacking.\nAt the beginning of each end step, if two or more creatures died under your control this turn, abandon this scheme.

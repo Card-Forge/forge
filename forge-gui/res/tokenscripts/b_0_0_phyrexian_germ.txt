@@ -1,6 +1,6 @@
 Name:Phyrexian Germ Token
 ManaCost:no cost
-Types:Creature Phyrexian Germ
 Colors:black
+Types:Creature Phyrexian Germ
 PT:0/0
 Oracle:

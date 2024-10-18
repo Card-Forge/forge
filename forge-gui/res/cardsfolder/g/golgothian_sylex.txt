@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 A:AB$ SacrificeAll | Cost$ 1 T | ValidCards$ Permanent.nonToken+setATQ | SpellDescription$ Each nontoken permanent with a name originally printed in the Antiquities expansion is sacrificed by its controller.
 AI:RemoveDeck:All
-AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
 Oracle:{1}, {T}: Each nontoken permanent with a name originally printed in the Antiquities expansion is sacrificed by its controller.

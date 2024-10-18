@@ -1,8 +1,0 @@
-Name:Threats Around Every Corner
-ManaCost:3 G
-Types:Enchantment
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDread | TriggerDescription$ When CARDNAME enters, manifest dread.
-SVar:TrigDread:DB$ ManifestDread
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.faceDown+YouCtrl | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ Whenever a face-down permanent you control enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
-Oracle:When Threats Around Every Corner enters, manifest dread.\nWhenever a face-down permanent you control enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.

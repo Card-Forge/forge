@@ -8,6 +8,6 @@ SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ ChosenCard | Cou
 SVar:DBAnimate:DB$ Animate | Defined$ ChosenCard | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Keywords$ Haste | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
-DeckNeeds:Type$Cave
 DeckHas:Ability$Counters
+DeckNeeds:Type$Cave
 Oracle:Choose three. You may choose the same mode more than once.\n• Search your library for a Cave card, put it onto the battlefield tapped, then shuffle.\n• Put three +1/+1 counters on a Cave you control. It becomes a 0/0 Elemental creature with haste. It's still a land.\n• Destroy target enchantment.

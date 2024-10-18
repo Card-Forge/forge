@@ -4,8 +4,8 @@ Types:Creature Human Rogue
 PT:2/1
 T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ When you sacrifice a Clue, transform CARDNAME.
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
-DeckNeeds:Ability$Investigate
 DeckHas:Ability$Investigate|Token
+DeckNeeds:Ability$Investigate
 AlternateMode:DoubleFaced
 Oracle:When you sacrifice a Clue, transform Daring Sleuth.
 

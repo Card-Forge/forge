@@ -1,0 +1,9 @@
+Name:Grab the Prize
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Draw | Cost$ 1 R Discard<1/Card> | CostDesc$ As an additional cost to cast this spell, discard a card. | NumCards$ 2 | SubAbility$ DBDealDamage | SpellDescription$ Draw two cards. If the discarded card wasn't a land card, CARDNAME deals 2 damage to each opponent.
+SVar:DBDealDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X
+SVar:X:Discarded$Valid Card.nonLand/Times.2
+DeckHas:Ability$Discard
+DeckHints:Keyword$Madness & Ability$Delirium
+Oracle:As an additional cost to cast this spell, discard a card.\nDraw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent.

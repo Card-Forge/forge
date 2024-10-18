@@ -1,6 +1,6 @@
 Name:Ape Token
 ManaCost:no cost
-Types:Creature Ape
 Colors:green
+Types:Creature Ape
 PT:1/1
 Oracle:

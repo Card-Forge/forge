@@ -4,12 +4,48 @@ Date=2024-09-27
 Name=Duskmourn: House of Horror
 Type=Expansion
 ScryfallCode=DSK
+# Lurking evil treatment for Commons and Uncommons is 1 in 4, but only relevant for 6 total cards so isn't handled
+# https://mtgscribe.com/2024/09/01/play-booster-fact-sheet-duskmourn/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("DSK cards")
+
+[Common-Guest]
+Base=Common:fromSheet("DSK cards")
+Replace=.015625F fromSheet("DSK special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("DSK cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("DSK cards")
+# Someone needs to do the replace math here
+#Replace=.082F fromSheet("DSK borderless")
+#Replace=.014F fromSheet("DSK showcase")
+
+[AnyLand]
+Base=Land:Common:fromSheet("DSK cards")
+Replace=.10F Land:Common:fromSheet("DSK cards")+
+Replace=.267F Land:fromSheet("DSK cards")
+Replace=.067F Land:fromSheet("DSK cards")+
+Replace=.133F Land:Rare:fromSheet("DSK cards")+
+Replace=.033F Land:Rare:fromSheet("DSK cards")+
+
+[Wildcard]
+Base=Common:fromSheet("DSK cards")
+# I don't know about these numbers, so i'm just copying them from BLB
+Replace=.417F Uncommon:fromSheet("DSK cards")
+Replace=.078F RareMythic:fromSheet("DSK cards")
 
 [cards]
 1 C Acrobatic Cheerleader @Julia Metzger
 2 C Cult Healer @Diana Franco
-3 R Dazzling Theater @Henry Peters
-4 M Dollmaker's Shop @Chris Cold
+3 R Dazzling Theater // Prop Room @Henry Peters
+4 M Dollmaker's Shop // Porcelain Gallery @Chris Cold
 5 C Emerge from the Cocoon @Marta Nael
 6 R Enduring Innocence @Liiga Smilshkalne
 7 U Ethereal Armor @Tyler Walpole
@@ -20,7 +56,7 @@ ScryfallCode=DSK
 12 C Friendly Ghost @Sean Murray
 13 R Ghostly Dancers @Josh Newton
 14 U Glimmer Seeker @Kev Fang
-15 C Grand Entryway @Carlos Palma Cruchaga
+15 C Grand Entryway // Elegant Rotunda @Carlos Palma Cruchaga
 16 C Hardened Escort @John Stanko
 17 C Jump Scare @John Tedrick
 18 R Leyline of Hope @Sergey Glushakov
@@ -39,7 +75,7 @@ ScryfallCode=DSK
 31 C Shepherding Spirits @Billy Christian
 32 R Split Up @Dominik Mayer
 33 U Splitskin Doll @Diana Franco
-34 U Surgical Suite @Titus Lunter
+34 U Surgical Suite // Hospital Room @Titus Lunter
 35 R Toby, Beastie Befriender @Jehan Choo
 36 C Trapped in the Screen @Michael Phillippi
 37 R Unidentified Hovership @Jana Heidersdorf
@@ -48,8 +84,8 @@ ScryfallCode=DSK
 40 U Veteran Survivor @Kai Carpenter
 41 M The Wandering Rescuer @Anna Pavleeva
 42 M Abhorrent Oculus @Bryan Sola
-43 U Bottomless Pool @Diana Franco
-44 R Central Elevator @Cristi Balanescu
+43 U Bottomless Pool // Locker Room @Diana Franco
+44 R Central Elevator // Promising Stairs @Cristi Balanescu
 45 C Clammy Prowler @John Tedrick
 46 C Creeping Peeper @Maxime Minard
 47 U Cursed Windbreaker @Nino Vecia
@@ -70,9 +106,9 @@ ScryfallCode=DSK
 62 C Glimmerburst @Dan Watson
 63 R Leyline of Transformation @Sergey Glushakov
 64 R Marina Vendrell's Grimoire @Denys Tsiperko
-65 C Meat Locker @Sergey Glushakov
+65 C Meat Locker // Drowned Diner @Sergey Glushakov
 66 R The Mindskinner @Abz J Harding
-67 M Mirror Room @Helge C. Balzer
+67 M Mirror Room // Fractured Realm @Helge C. Balzer
 68 M Overlord of the Floodpits @Abz J Harding
 69 U Paranormal Analyst @James Ryman
 70 C Piranha Fly @Kekai Kotaki
@@ -84,7 +120,7 @@ ScryfallCode=DSK
 76 C Tunnel Surveyor @John Stanko
 77 C Twist Reality @Allen Williams
 78 C Unable to Scream @Fariba Khamseh
-79 C Underwater Tunnel @Titus Lunter
+79 C Underwater Tunnel // Slimy Aquarium @Titus Lunter
 80 U Unnerving Grasp @Jeremy Wilson
 81 U Unwilling Vessel @Josu Hernaiz
 82 C Vanish from Sight @Billy Christian
@@ -96,16 +132,16 @@ ScryfallCode=DSK
 88 C Cracked Skull @Mirko Failoni
 89 U Cynical Loner @Miranda Meeks
 90 U Dashing Bloodsucker @Randy Gallegos
-91 U Defiled Crypt @Martin de Diego Sádaba
+91 U Defiled Crypt // Cadaver Lab @Martin de Diego Sádaba
 92 R Demonic Counsel @Babs Webb
-93 C Derelict Attic @Marc Simonetti
+93 C Derelict Attic // Widow's Walk @Marc Simonetti
 94 R Doomsday Excruciator @Denys Tsiperko
 95 R Enduring Tenacity @Isis
 96 C Fanatic of the Harrowing @Fajareka Setiawan
 97 C Fear of Lost Teeth @Oriana Menendez
 98 C Fear of the Dark @Sam Wolfe Connelly
 99 C Final Vengeance @David Szabo
-100 M Funeral Room @Miklós Ligeti
+100 M Funeral Room // Awakening Hall @Miklós Ligeti
 101 C Give In to Violence @Septian Fajrianto
 102 R Grievous Wound @Martina Fačková
 103 C Innocuous Rat @Maxime Minard
@@ -123,7 +159,7 @@ ScryfallCode=DSK
 115 C Resurrected Cultist @Tyler Walpole
 116 C Spectral Snatcher @Domenico Cava
 117 U Sporogenic Infection @Warren Mahy
-118 R Unholy Annex @Matteo Bassini
+118 R Unholy Annex // Ritual Chamber @Matteo Bassini
 119 R Unstoppable Slasher @Maxime Minard
 120 M Valgavoth, Terror Eater @Antonio José Manzanedo
 121 U Valgavoth's Faithful @Jodie Muir
@@ -134,7 +170,7 @@ ScryfallCode=DSK
 126 U Betrayer's Bargain @Billy Christian
 127 C Boilerbilges Ripper @Kai Carpenter
 128 R Chainsaw @J.P. Targete
-129 M Charred Foyer @Andrew Mar
+129 M Charred Foyer // Warped Space @Andrew Mar
 130 C Clockwork Percussionist @Eric Wilkerson
 131 R Cursed Recording @Kim Sokol
 132 U Diversion Specialist @Tuan Duong Chu
@@ -142,7 +178,7 @@ ScryfallCode=DSK
 134 U Fear of Being Hunted @Maxime Minard
 135 U Fear of Burning Alive @J.P. Targete
 136 R Fear of Missing Out @John Stanko
-137 C Glassworks @Sergey Glushakov
+137 C Glassworks // Shattered Yard @Sergey Glushakov
 138 C Grab the Prize @Halil Ural
 139 C Hand That Feeds @Loïc Canavaggia
 140 C Impossible Inferno @Edgar Sánchez Hidalgo
@@ -152,7 +188,7 @@ ScryfallCode=DSK
 144 C Most Valuable Slayer @Patrik Hell
 145 U Norin, Swift Survivalist @Yigit Koroglu
 146 M Overlord of the Boilerbilges @Helge C. Balzer
-147 U Painter's Studio @Marc Simonetti
+147 U Painter's Studio // Defaced Gallery @Marc Simonetti
 148 U Piggy Bank @Steve Ellis
 149 U Pyroclasm @Néstor Ossandón Leal
 150 C Ragged Playmate @Kaitlyn McCulley
@@ -163,7 +199,7 @@ ScryfallCode=DSK
 155 M The Rollercrusher Ride @Deruchenko Alexander
 156 C Scorching Dragonfire @Marta Nael
 157 M Screaming Nemesis @Liiga Smilshkalne
-158 C Ticket Booth @Marco Gorlei
+158 C Ticket Booth // Tunnel of Hate @Marco Gorlei
 159 U Trial of Agony @Mike Sass
 160 C Turn Inside Out @Loïc Canavaggia
 161 U Untimely Malfunction @Jarel Threat
@@ -186,7 +222,7 @@ ScryfallCode=DSK
 178 C Flesh Burrower @Maxime Minard
 179 C Frantic Strength @Flavio Greco Paglia
 180 C Grasping Longneck @Mathias Kollros
-181 U Greenhouse @John Di Giovanni
+181 U Greenhouse // Rickety Gazebo @John Di Giovanni
 182 M Hauntwoods Shrieker @John Tedrick
 183 R Hedge Shredder @Cristi Balanescu
 184 C Horrid Vigor @Chris Cold
@@ -195,7 +231,7 @@ ScryfallCode=DSK
 187 R Kona, Rescue Beastie @Brian Valeza
 188 R Leyline of Mutation @Sergey Glushakov
 189 C Manifest Dread @Andrey Kuzinskiy
-190 C Moldering Gym @Helge C. Balzer
+190 C Moldering Gym // Weight Room @Helge C. Balzer
 191 C Monstrous Emergence @Loïc Canavaggia
 192 R Omnivorous Flytrap @Antonio José Manzanedo
 193 U Overgrown Zealot @Tyler Walpole
@@ -210,7 +246,7 @@ ScryfallCode=DSK
 202 M Tyvar, the Pummeler @Olivier Bernard
 203 U Under the Skin @Fernando Falcone
 204 R Valgavoth's Onslaught @Lie Setiawan
-205 M Walk-In Closet @Miklós Ligeti
+205 M Walk-In Closet // Forgotten Cellar @Miklós Ligeti
 206 C Wary Watchdog @Olivier Bernard
 207 U Wickerfolk Thresher @WolfSkullJack
 208 U Arabella, Abandoned Doll @J.P. Targete
@@ -232,15 +268,15 @@ ScryfallCode=DSK
 224 M Niko, Light of Hope @Aurore Folny
 225 U Oblivious Bookworm @Josh Newton
 226 R Peer Past the Veil @Tuan Duong Chu
-227 R Restricted Office @Antonio José Manzanedo
+227 R Restricted Office // Lecture Hall @Antonio José Manzanedo
 228 R Rip, Spawn Hunter @Justine Cruz
 229 U Rite of the Moth @A. M. Sartor
-230 R Roaring Furnace @Miklós Ligeti
+230 R Roaring Furnace // Steaming Sauna @Miklós Ligeti
 231 U Sawblade Skinripper @Zezhou Chen
 232 U Shrewd Storyteller @David Palumbo
 233 U Shroudstomper @Campbell White
 234 U Skullsnap Nuisance @Allen Douglas
-235 U Smoky Lounge @Marco Gorlei
+235 U Smoky Lounge // Misty Salon @Marco Gorlei
 236 R The Swarmweaver @Helge C. Balzer
 237 R Undead Sprinter @Nino Vecia
 238 R Victor, Valgavoth's Seneschal @Jeremy Wilson
@@ -294,7 +330,7 @@ ScryfallCode=DSK
 286 L Forest @Josu Hernaiz
 
 [alternate art]
-287 C Grand Entryway @Carlos Palma Cruchaga
+287 C Grand Entryway // Elegant Rotunda @Carlos Palma Cruchaga
 288 U Optimistic Scavenger @Brian Valeza
 289 R Reluctant Role Model @Chris Rallis
 290 R Entity Tracker @Cristi Balanescu
@@ -387,16 +423,16 @@ ScryfallCode=DSK
 331 R Gloomlake Verge @Julian Kok Joon Wen
 332 R Hushwood Verge @Henry Peters
 333 R Thornspire Verge @Pavel Kolomeyets
-334 R Dazzling Theater @Ivan Shavrin
-335 M Dollmaker's Shop @Cacho Rubione
-336 R Central Elevator @Ivan Shavrin
-337 M Mirror Room @Cacho Rubione
-338 M Funeral Room @Alexandre Chaudret
-339 R Unholy Annex @Alexis Ziritt
-340 M Charred Foyer @Oliver Barrett
-341 M Walk-In Closet @Bastien Grivet
-342 R Restricted Office @Scott Buoncristiano
-343 R Roaring Furnace @Toni Infante
+334 R Dazzling Theater // Prop Room @Ivan Shavrin
+335 M Dollmaker's Shop // Porcelain Gallery @Cacho Rubione
+336 R Central Elevator // Promising Stairs @Ivan Shavrin
+337 M Mirror Room // Fractured Realm @Cacho Rubione
+338 M Funeral Room // Awakening Hall @Alexandre Chaudret
+339 R Unholy Annex // Ritual Chamber @Alexis Ziritt
+340 M Charred Foyer // Warped Space @Oliver Barrett
+341 M Walk-In Closet // Forgotten Cellar @Bastien Grivet
+342 R Restricted Office // Lecture Hall @Scott Buoncristiano
+343 R Roaring Furnace // Steaming Sauna @Toni Infante
 344 M Abhorrent Oculus @Igor Krstic
 345 R Silent Hallcreeper @Inkognit
 346 R Doomsday Excruciator @Jarel Threat
@@ -437,6 +473,19 @@ ScryfallCode=DSK
 
 [buy a box]
 417 R Twitching Doll @John Tedrick
+
+[special guests]
+1 Collected Company|SPG
+1 Damnation|SPG
+1 Expropriate|SPG
+1 Hallowed Haunting|SPG
+1 Maddening Hex|SPG
+1 Noxious Revival|SPG
+1 Phantasmal Image|SPG
+1 Sacrifice|SPG
+1 Soul Warden|SPG
+1 Unholy Heat|SPG
+
 
 [tokens]
 b_2_2_e_horror

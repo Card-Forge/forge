@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddStaticAbility$ BuffTokens | Description$ Commander creatures you own have "Creature tokens you control get +2/+2."
 SVar:BuffTokens:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Creature tokens you control get +2/+2.
-DeckNeeds:Ability$Token
 AI:RemoveDeck:NonCommander
+DeckNeeds:Ability$Token
 Oracle:Commander creatures you own have "Creature tokens you control get +2/+2."

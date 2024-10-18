@@ -11,6 +11,6 @@ SVar:TrigDoubleDamage:DB$ DealDamage | NumDmg$ Count$TriggerRememberAmount | Val
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize/Twice
 A:AB$ ChangeZone | Cost$ 1 U | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 2 | SpellDescription$ Put CARDNAME into its owner's library third from the top.
-DeckHas:Ability$Discard
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
 Oracle:Whenever Borborygmos and Fblthp enters or attacks, draw a card, then you may discard any number of land cards. When you discard one or more cards this way, Borborygmos and Fblthp deals twice that much damage to target creature.\n{1}{U}: Put Borborygmos and Fblthp into its owner's library third from the top.

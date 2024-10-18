@@ -1,0 +1,10 @@
+Name:Hedge Shredder
+ManaCost:2 G G
+Types:Artifact Vehicle
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, you may mill two cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | Optional$ True
+T:Mode$ ChangesZoneAll | ValidCards$ Land.YouOwn | Origin$ Library | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigChangeZoneAll | TriggerDescription$ Whenever one or more land cards are put into your graveyard from your library, put them onto the battlefield tapped.
+SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Card.TriggeredCards | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
+K:Crew:1
+Oracle:Whenever Hedge Shredder attacks, you may mill two cards.\nWhenever one or more land cards are put into your graveyard from your library, put them onto the battlefield tapped.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

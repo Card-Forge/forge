@@ -1,15 +1,18 @@
 Name:Drop Tower
 ManaCost:no cost
 Types:Artifact Attraction
+K:Visit:TrigPump
+SVar:TrigPump:DB$ Effect | StaticAbilities$ Pump | ValidTgts$ Creature | Triggers$ ExileSelf | RememberObjects$ Targeted | SpellDescription$ Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
+SVar:Pump:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Flying | Description$ This creature gains flying until end of turn, or until any player rolls a 1.
+SVar:ExileSelf:Mode$ RolledDie | Execute$ TrigRemove | ValidResult$ EQ1 | Static$ True
+SVar:TrigRemove:DB$ ChangeZone | Origin$ Command | Defined$ Self | Destination$ Exiled
+Oracle:Visit — Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
+
+# --- VARIANTS ---
+
 Variant:A:Lights:2 3 6
 Variant:B:Lights:2 4 6
 Variant:C:Lights:2 5 6
 Variant:D:Lights:3 4 6
 Variant:E:Lights:3 5 6
 Variant:F:Lights:4 5 6
-K:Visit:TrigPump
-SVar:TrigPump:DB$ Effect | StaticAbilities$ Pump | ValidTgts$ Creature | Triggers$ ExileSelf | RememberObjects$ Targeted | SpellDescription$ Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.
-SVar:Pump:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Flying | Description$ This creature gains flying until end of turn, or until any player rolls a 1.
-SVar:ExileSelf:Mode$ RolledDie | Execute$ TrigRemove | ValidResult$ EQ1 | Static$ True
-SVar:TrigRemove:DB$ ChangeZone | Origin$ Command | Defined$ Self | Destination$ Exile
-Oracle:Visit — Target creature gains flying until end of turn, or until any player rolls a 1, whichever comes first.

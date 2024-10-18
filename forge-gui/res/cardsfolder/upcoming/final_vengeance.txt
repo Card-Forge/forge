@@ -1,5 +1,0 @@
-Name:Final Vengeance
-ManaCost:B
-Types:Sorcery
-A:SP$ ChangeZone | Cost$ B Sac<1/Creature;Enchantment/creature or enchantment> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-Oracle:As an additional cost to cast this spell, sacrifice a creature or enchantment.\nExile target creature.

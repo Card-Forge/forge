@@ -1,0 +1,13 @@
+Name:Sporogenic Infection
+ManaCost:1 B
+Types:Enchantment Aura
+K:Enchant creature
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters, target player sacrifices a creature other than enchanted creature.
+SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature.!EnchantedBy | SacMessage$ creature other than enchanted creature
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddSVar$ MortalDestroy
+SVar:MortalDestroy:SVar:DestroyWhenDamaged:True
+T:Mode$ DamageDoneOnce | ValidTarget$ Creature.EnchantedBy | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When enchanted creature is dealt damage, destroy it.
+SVar:TrigDestroy:DB$ Destroy | Defined$ TriggeredTargetLKICopy
+SVar:NonStackingAttachEffect:True
+Oracle:Enchant creature\nWhen Sporogenic Infection enters, target player sacrifices a creature other than enchanted creature.\nWhen enchanted creature is dealt damage, destroy it.

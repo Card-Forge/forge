@@ -1,0 +1,7 @@
+Name:Into the Pit
+ManaCost:2 B
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn+nonLand | AffectedZone$ Library | MayPlay$ True | RaiseCost$ Sac<1/Permanent.nonLand/nonland permanent> | Description$ You may cast spells from the top of your library by sacrificing a nonland permanent in addition to paying their other costs.
+SVar:NonStackingEffect:True
+Oracle:You may look at the top card of your library any time.\nYou may cast spells from the top of your library by sacrificing a nonland permanent in addition to paying their other costs.

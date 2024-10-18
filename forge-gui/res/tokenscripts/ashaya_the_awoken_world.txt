@@ -1,6 +1,6 @@
 Name:Ashaya, the Awoken World
 ManaCost:no cost
-Types:Legendary Creature Elemental
 Colors:green
+Types:Legendary Creature Elemental
 PT:4/4
 Oracle:
