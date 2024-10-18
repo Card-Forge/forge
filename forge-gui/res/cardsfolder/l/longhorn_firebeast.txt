@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Elemental Ox Beast
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, any opponent may have it deal 5 damage to them. If a player does, sacrifice CARDNAME.
-SVar:TrigDealDamage::DB$ Sacrifice | UnlessCost$ DamageYou<5> | UnlessPayer$ Opponent | UnlessSwitched$ True
+SVar:TrigDealDamage:DB$ Sacrifice | UnlessCost$ DamageYou<5> | UnlessPayer$ Opponent | UnlessSwitched$ True
 Oracle:When Longhorn Firebeast enters, any opponent may have it deal 5 damage to them. If a player does, sacrifice Longhorn Firebeast.
