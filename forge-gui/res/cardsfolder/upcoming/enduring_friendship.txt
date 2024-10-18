@@ -1,0 +1,11 @@
+Name:Enduring Friendship
+ManaCost:U R
+Types:Enchantment Creature Otter Glimmer
+PT:2/1
+K:Double team
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, creatures you control that are Otters and/or enchantments get +1/+1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Otter+YouCtrl,Creature.Enchantment+YouCtrl | NumAtt$ 1 | NumDef$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+Creature | Execute$ DBReturn | TriggerDescription$ When CARDNAME dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)
+SVar:DBReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield | AnimateSubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Enchantment | RemoveCardTypes$ True | Duration$ Permanent
+Oracle:Double team\nWhenever you cast an instant or sorcery spell, creatures you control that are Otters and/or enchantments get +1/+1 until end of turn. When Enduring Friendship dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)
