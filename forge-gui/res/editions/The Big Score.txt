@@ -36,6 +36,8 @@ ScryfallCode=BIG
 28 M Transmutation Font @Mark Poole
 29 M Fomori Vault @Jonas De Ro
 30 M Tarnation Vista @Alayna Danner
+
+[showcase]
 31 M Collector's Cage @Ben Hill
 32 M Grand Abolisher @David Astruga
 33 M Oltec Matterweaver @Inkognit
@@ -71,6 +73,8 @@ ScryfallCode=BIG
 63 M Lotus Ring @Ben Hill
 64 M Sword of Wealth and Power @Artur Nakhodkin
 65 M Tarnation Vista @Artur Nakhodkin
+
+[extended art]
 66 M Collector's Cage @Bartek Fedyczak
 67 M Grand Abolisher @Aurore Folny
 68 M Oltec Matterweaver @Villarrte
