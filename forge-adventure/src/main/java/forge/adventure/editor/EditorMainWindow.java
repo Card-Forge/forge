@@ -41,9 +41,14 @@ public class EditorMainWindow extends JFrame {
         }
         BorderLayout layout=new BorderLayout();
         JToolBar toolBar = new JToolBar("toolbar");
-        JButton newButton=new JButton("open ParticleEditor");
-        newButton.addActionListener(e -> EventQueue.invokeLater(ParticleEditor::new));
-        toolBar.add(newButton);
+        // refer to removal of Swing Particle Editor: https://github.com/libgdx/libgdx/issues/7285
+        //todo add New Particle Editor here (needs Java 11+): https://github.com/libgdx/gdx-particle-editor
+        //JButton newButton=new JButton("open ParticleEditor");
+        //newButton.addActionListener(e -> EventQueue.invokeLater(ParticleEditor::new));
+        JButton quit = new JButton("Quit");
+        quit.addActionListener(e-> System.exit(0));
+        //toolBar.add(newButton);
+        toolBar.add(quit);
         setLayout(layout);
         toolBar.setFloatable(false);
         add(toolBar, BorderLayout.NORTH);
