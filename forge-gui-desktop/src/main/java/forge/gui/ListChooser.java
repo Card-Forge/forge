@@ -40,6 +40,8 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FOptionPane;
@@ -81,6 +83,7 @@ public class ListChooser<T> {
     // initialized before; listeners may be added to it
     private final FList<T> lstChoices;
     private final FOptionPane optionPane;
+    private final int okShortCut = Integer.parseInt(FModel.getPreferences().getPref(ForgePreferences.FPref.SHORTCUT_PRESS_BUTTON));
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
@@ -128,7 +131,8 @@ public class ListChooser<T> {
 
         this.lstChoices.addKeyListener(new KeyAdapter() {
             @Override public void keyPressed(final KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                int code = e.getKeyCode();
+                if (KeyEvent.VK_ENTER == code || okShortCut == code) {
                     ListChooser.this.commit();
                 }
             }
