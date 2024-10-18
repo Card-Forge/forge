@@ -18,7 +18,7 @@ public class DeckSetFilter extends DeckFormatFilter {
     public DeckSetFilter(ItemManager<? super DeckProxy> itemManager0, Collection<String> sets0, boolean allowReprints0) {
         super(itemManager0);
         this.sets.addAll(sets0);
-        this.formats.add(new GameFormat(null, this.sets, null));
+        this.formats.add(new GameFormat(null, this.sets, null, null));
         this.allowReprints = allowReprints0;
     }
 
@@ -53,7 +53,7 @@ public class DeckSetFilter extends DeckFormatFilter {
         this.limitedSets.addAll(cardSetFilter.limitedSets);
         this.allowReprints = cardSetFilter.allowReprints;
         this.formats.clear();
-        this.formats.add(new GameFormat(null, this.sets, null));
+        this.formats.add(new GameFormat(null, this.sets, null, null));
         return true;
     }
 
@@ -67,7 +67,7 @@ public class DeckSetFilter extends DeckFormatFilter {
             sets.addAll(dialog.getSelectedSets());
             allowReprints = dialog.getWantReprints();
             formats.clear();
-            formats.add(new GameFormat(null, sets, null));
+            formats.add(new GameFormat(null, sets, null, null));
             itemManager.addFilter(itemFilter); // this adds/updates the current filter
         });
     }
