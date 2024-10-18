@@ -6,13 +6,12 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms128m</build.min.memory>
         <build.max.memory>-Xmx2048m</build.max.memory>
-        <alpha-version>1.6.58.001</alpha-version>
     </properties>
 
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.66-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-ios</artifactId>
@@ -25,8 +24,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -36,7 +35,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-ios-${alpha-version}</finalName>
+        <finalName>forge-ios-${revision}</finalName>
     </build>
 
     <dependencies>
@@ -68,7 +67,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-robovm</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
         </dependency>
     </dependencies>
 </project>

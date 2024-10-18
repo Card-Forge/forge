@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.66-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-mobile</artifactId>
@@ -17,8 +17,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -75,12 +75,12 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.raeleus.TenPatch</groupId>
@@ -97,7 +97,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>

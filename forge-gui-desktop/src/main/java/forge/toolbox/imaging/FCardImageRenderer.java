@@ -699,7 +699,8 @@ public class FCardImageRenderer {
             }
         } else {
             fillColorBackground(g, colors, x, y, w, h);
-            SkinIcon icon = FSkin.getIcon(FSkinProp.ICO_LOGO);
+            //Card Art Logo
+            SkinIcon icon = FSkin.getIcon(FSkinProp.ICO_CARDART);
             float artWidth = (float)icon.getSizeForPaint(g).getWidth();
             float artHeight = (float)icon.getSizeForPaint(g).getHeight();
             if (artWidth / artHeight >= (float)w / (float)h) {
