@@ -1,0 +1,543 @@
+[metadata]
+Name=MTGO Vintage Cube 2024-06
+[Main]
+1 Abrade|HOU|1
+1 Adeline, Resplendent Cathar|MID|1
+1 Aether Spellbomb|MB1|1
+1 Agatha's Soul Cauldron|WOE|1
+1 Ajani, Nacatl Pariah|MH3|1
+1 Ancestral Recall|2ED|1
+1 Ancient Tomb|UMA|1
+1 Anger|UMA|1
+1 Animate Dead|EMA|1
+1 Anje's Ravager|C19|1
+1 Arboreal Grazer|WAR|1
+1 Arc Trail|PCA|1
+1 Archon of Cruelty|MH2|1
+1 Arena of Glory|MH3|1
+1 Arid Mesa|MM3|1
+1 Arwen, Mortal Queen|LTR|1
+1 Atraxa, Grand Unifier|ONE|1
+1 Augur of Autumn|MID|1
+1 Avacyn's Pilgrim|MM3|1
+1 Aven Interrupter|OTJ|1
+1 Badlands|3ED|1
+1 Balance|EMA|1
+1 Baleful Mastery|STX|1
+1 Baleful Strix|EMA|1
+1 Barrowgoyf|M3C|1
+1 Basalt Monolith|2XM|1
+1 Basking Rootwalla|UMA|1
+1 Batterskull|2XM|1
+1 Bayou|3ED|1
+1 Bazaar of Baghdad|ARN|1
+1 Benevolent Bodyguard|EMA|1
+1 Birds of Paradise|DMR|1
+1 Bitter Reunion|BRO|1
+1 Bitter Triumph|LCI|1
+1 Black Lotus|2ED|1
+1 Blackcleave Cliffs|ONE|1
+1 Blade Splicer|MM3|1
+1 Blazing Rootwalla|MH2|1
+1 Blightsteel Colossus|2XM|1
+1 Blood Crypt|RNA|1
+1 Bloodbraid Challenger|M3C|1
+1 Bloodghast|IMA|1
+1 Bloodstained Mire|KTK|1
+1 Bloodtithe Harvester|VOW|1
+1 Blooming Marsh|KLD|1
+1 Bolas's Citadel|WAR|1
+1 Bone Shards|MH2|1
+1 Bonecrusher Giant|ELD|1
+1 Bonehoard Dracosaur|LCI|1
+1 Bonny Pall, Clearcutter|OTJ|1
+1 Boseiju, Who Endures|NEO|1
+1 Botanical Sanctum|KLD|1
+1 Brain Freeze|SLD|1
+1 Brainstorm|EMA|1
+1 Brazen Borrower|ELD|1
+1 Breeding Pool|RNA|1
+1 Bring to Light|BFZ|1
+1 Bristly Bill, Spine Sower|OTJ|1
+1 Broadside Bombardiers|LCC|1
+1 Burst Lightning|MM2|1
+1 Cabal Ritual|V16|1
+1 Carnage Interpreter|CLU|1
+1 Cathar Commando|MID|1
+1 Caustic Bronco|OTJ|1
+1 Celestial Colonnade|UMA|1
+1 Chain Lightning|EMA|1
+1 Chandra, Torch of Defiance|KLD|1
+1 Channel|IMA|1
+1 Chart a Course|XLN|1
+1 Chromatic Star|2XM|1
+1 Chrome Host Seedshark|MOM|1
+1 Chrome Mox|EMA|1
+1 City of Traitors|TPR|1
+1 Coalition Relic|A25|1
+1 Collective Brutality|EMN|1
+1 Commercial District|MKM|1
+1 Concealed Courtyard|KLD|1
+1 Concealing Curtains|VOW|1
+1 Consider|MID|1
+1 Containment Priest|UMA|1
+1 Copperline Gorge|ONE|1
+1 Corpse Dance|TPR|1
+1 Council's Judgment|2XM|1
+1 Counterspell|EMA|1
+1 Courser of Kruphix|A25|1
+1 Coveted Jewel|PZ2|1
+1 Crabomination|MH3|1
+1 Creeping Tar Pit|UMA|1
+1 Crop Rotation|2XM|1
+1 Crucible of Worlds|M19|1
+1 Cryptic Coat|MKM|1
+1 Cryptic Command|MM2|1
+1 Currency Converter|NCC|1
+1 Cut Down|DMU|1
+1 Dack Fayden|EMA|1
+1 Damn|MH2|1
+1 Dark Confidant|MM2|1
+1 Dark Depths|UMA|1
+1 Dark Petition|ORI|1
+1 Dark Ritual|A25|1
+1 Darkslick Shores|ONE|1
+1 Dauthi Voidwalker|MH2|1
+1 Daze|EMA|1
+1 Death-Greeter's Champion|MOC|1
+1 Deathrite Shaman|EMA|1
+1 Deep-Cavern Bat|LCI|1
+1 Delayed Blast Fireball|CLB|1
+1 Delighted Halfling|LTR|1
+1 Demonic Tutor|UMA|1
+1 Detective's Phoenix|MH3|1
+1 Dig Through Time|KTK|1
+1 Dismember|MM2|1
+1 Displacer Kitten|CLB|1
+1 Doomsday|A25|1
+1 Dragon's Rage Channeler|MH2|1
+1 Dress Down|MH2|1
+1 Dryad of the Ilysian Grove|THB|1
+1 Duelist of the Mind|OTJ|1
+1 Duress|DTK|1
+1 Eagles of the North|LTR|1
+1 Echo of Eons|MH1|1
+1 Elegant Parlor|MKM|1
+1 Elemental Eruption|OTC|1
+1 Elite Spellbinder|STX|1
+1 Elspeth, Knight-Errant|MPS_GRN|1
+1 Elvish Mystic|TSR|1
+1 Elvish Reclaimer|M20|1
+1 Embereth Shieldbreaker|ELD|1
+1 Emperor of Bones|MH3|1
+1 Emrakul, the Aeons Torn|MM2|1
+1 Endurance|MH2|1
+1 Entomb|EMA|1
+1 Ephemerate|MH1|1
+1 Escape to the Wilds|ELD|1
+1 Esika's Chariot|KHM|1
+1 Esper Sentinel|MH2|1
+1 Etali, Primal Conqueror|MOM|1
+1 Eternal Witness|UMA|1
+1 Eureka|LEG|1
+1 Everflowing Chalice|MM2|1
+1 Evolved Sleeper|DMU|1
+1 Exhume|JMP|1
+1 Expedition Map|MM2|1
+1 Exploration|2XM|1
+1 Expressive Iteration|STX|1
+1 Fable of the Mirror-Breaker|NEO|1
+1 Fabled Passage|ELD|1
+1 Faerie Mastermind|MOM|1
+1 Faithless Looting|EMA|1
+1 Fallen Shinobi|MH1|1
+1 Fanatic of Rhonas|MH3|1
+1 Fastbond|3ED|1
+1 Fatal Push|AER|1
+1 Field of the Dead|M20|1
+1 Fiery Confluence|C15|1
+1 Fiery Islet|MH1|1
+1 Figure of Destiny|2X2|1
+1 Fire Covenant|SLD|1
+1 Fireblast|DMR|1
+1 Firebolt|EMA|1
+1 Flame Slash|CN2|1
+1 Flare of Duplication|MH3|1
+1 Flash|A25|1
+1 Flickerwisp|MM3|1
+1 Flooded Strand|KTK|1
+1 Force of Negation|2X2|1
+1 Force of Will|EMA|1
+1 Forensic Gadgeteer|MKM|1
+1 Forth Eorlingas!|LTC|1
+1 Fractured Identity|PZ2|1
+1 Frantic Search|UMA|1
+1 Fury|MH2|1
+1 Gaea's Cradle|USG|1
+1 Generous Ent|LTR|1
+1 Generous Plunderer|BIG|1
+1 Ghostfire Slice|MH3|1
+1 Gitaxian Probe|NPH|1
+1 Giver of Runes|MH1|1
+1 Glimmer Lens|ONC|1
+1 Goblin Rabblemaster|DDT|1
+1 Godless Shrine|RNA|1
+1 Goldspan Dragon|KHM|1
+1 Golos, Tireless Pilgrim|M20|1
+1 Grave Titan|C14|1
+1 Green Sun's Zenith|EMA|1
+1 Grief|MH2|1
+1 Grim Monolith|ULG|1
+1 Griselbrand|MM3|1
+1 Grist, the Hunger Tide|SLD|1
+1 Gruul Turf|MM2|1
+1 Guardian Scalelord|MOC|1
+1 Gush|JVC|1
+1 Gut, True Soul Zealot|CLB|1
+1 Hallowed Fountain|RNA|1
+1 Harsh Mentor|AKH|1
+1 Harvester of Misery|BIG|1
+1 Haywire Mite|BRO|1
+1 Headliner Scarlett|CLU|1
+1 Hedge Maze|MKM|1
+1 Hero of Bladehold|MOC|1
+1 Hexdrinker|MH1|1
+1 Hogaak, Arisen Necropolis|MH1|1
+1 Horizon Canopy|IMA|1
+1 Huatli, Poet of Unity|LCI|1
+1 Hullbreacher|CMR|1
+1 Hymn to Tourach|EMA|1
+1 Ignoble Hierarch|SLD|1
+1 Imperial Seal|2X2|1
+1 Indatha Triome|IKO|1
+1 Infernal Grasp|MID|1
+1 Inquisition of Kozilek|MM3|1
+1 Inspiring Vantage|KLD|1
+1 Inti, Seneschal of the Sun|LCI|1
+1 Intrepid Adversary|MID|1
+1 Jace, the Mind Sculptor|EMA|1
+1 Jace, Vryn's Prodigy|ORI|1
+1 Jace, Wielder of Mysteries|WAR|1
+1 Jetmir's Garden|SNC|1
+1 Kaito Shizuki|NEO|1
+1 Kaldra Compleat|MH2|1
+1 Kappa Cannoneer|NEC|1
+1 Karakas|EMA|1
+1 Karn, Scion of Urza|DOM|1
+1 Ketria Triome|IKO|1
+1 Kitesail Larcenist|LCI|1
+1 Knight of the Reliquary|IMA|1
+1 Kolaghan's Command|DTK|1
+1 Kroxa, Titan of Death's Hunger|THB|1
+1 Kumano Faces Kakkazan|NEO|1
+1 Laelia, the Blade Reforged|C21|1
+1 Ledger Shredder|SNC|1
+1 Legion Extruder|BIG|1
+1 Leyline Binding|DMU|1
+1 Library of Alexandria|ARN|1
+1 Life // Death|DMR|1
+1 Life from the Loam|UMA|1
+1 Lightning Bolt|MM2|1
+1 Lightning Greaves|2XM|1
+1 Liliana of the Veil|DMU|1
+1 Lingering Souls|MM3|1
+1 Lion Sash|NEO|1
+1 Lion's Eye Diamond|MIR|1
+1 Llanowar Elves|DOM|1
+1 Loran of the Third Path|BRO|1
+1 Lotus Cobra|ZNR|1
+1 Lotus Petal|TPR|1
+1 Luminarch Aspirant|ZNR|1
+1 Lurrus of the Dream-Den|IKO|1
+1 Lush Portico|MKM|1
+1 Lórien Revealed|LTR|1
+1 Magda, Brazen Outlaw|KHM|1
+1 Malcolm, Alluring Scoundrel|LCI|1
+1 Malevolent Rumble|MH3|1
+1 Mana Crypt|EMA|1
+1 Mana Drain|IMA|1
+1 Mana Leak|MM2|1
+1 Mana Tithe|TSR|1
+1 Mana Vault|UMA|1
+1 Manamorphose|2XM|1
+1 Manifold Key|M20|1
+1 Marsh Flats|MM3|1
+1 Master of Death|MH2|1
+1 Memory Jar|ULG|1
+1 Memory Lapse|EMA|1
+1 Meticulous Archive|MKM|1
+1 Mind Stone|IMA|1
+1 Mind Twist|MPS_AKH|1
+1 Mine Collapse|MH2|1
+1 Minsc & Boo, Timeless Heroes|CLB|1
+1 Miscalculation|ULG|1
+1 Mishra's Bauble|IMA|1
+1 Mishra's Research Desk|BRO|1
+1 Mishra's Workshop|ATQ|1
+1 Misty Rainforest|MM3|1
+1 Mother of Runes|EMA|1
+1 Mox Diamond|TPR|1
+1 Mox Emerald|2ED|1
+1 Mox Jet|2ED|1
+1 Mox Opal|MM2|1
+1 Mox Pearl|2ED|1
+1 Mox Ruby|2ED|1
+1 Mox Sapphire|2ED|1
+1 Myr Battlesphere|2XM|1
+1 Mystic Confluence|TSR|1
+1 Mystical Tutor|EMA|1
+1 Nadu, Winged Wisdom|MH3|1
+1 Narset, Parter of Veils|WAR|1
+1 Natural Order|EMA|1
+1 Necromancy|MKC|1
+1 Nethergoyf|MH3|1
+1 Night's Whisper|EMA|1
+1 Nishoba Brawler|DMU|1
+1 Nissa, Who Shakes the World|WAR|1
+1 No More Lies|MKM|1
+1 Noble Hierarch|MM2|1
+1 Nurturing Peatland|MH1|1
+1 Oath of Druids|TPR|1
+1 Obsidian Charmaw|MH2|1
+1 Ocelot Pride|MH3|1
+1 Oko, Thief of Crowns|ELD|1
+1 Oliphaunt|LTR|1
+1 Omnath, Locus of Creation|ZNR|1
+1 Once Upon a Time|ELD|1
+1 Orcish Bowmasters|LTR|1
+1 Orcish Lumberjack|ICE|1
+1 Otawara, Soaring City|NEO|1
+1 Otharri, Suns' Glory|ONC|1
+1 Oust|DDP|1
+1 Outland Liberator|MID|1
+1 Overgrown Tomb|GRN|1
+1 Palace Jailer|TSR|1
+1 Palantír of Orthanc|LTR|1
+1 Paradise Druid|WAR|1
+1 Parallax Wave|NMS|1
+1 Path to Exile|MM3|1
+1 Pentad Prism|2XM|1
+1 Pest Infestation|C21|1
+1 Phantasmal Image|MM3|1
+1 Phelia, Exuberant Shepherd|MH3|1
+1 Phlage, Titan of Fire's Fury|MH3|1
+1 Phyrexian Metamorph|2XM|1
+1 Phyrexian Revoker|2XM|1
+1 Pick Your Poison|MKM|1
+1 Pillage the Bog|OTJ|1
+1 Planar Genesis|MH3|1
+1 Plateau|3ED|1
+1 Polluted Delta|KTK|1
+1 Ponder|TSR|1
+1 Porcelain Legionnaire|NPH|1
+1 Portable Hole|AFR|1
+1 Portal to Phyrexia|BRO|1
+1 Preacher of the Schism|LCI|1
+1 Preordain|C15|1
+1 Primeval Titan|MM2|1
+1 Prismatic Ending|MH2|1
+1 Prismatic Omen|SLD|1
+1 Prismatic Vista|MH1|1
+1 Psychic Frog|MH3|1
+1 Pyrogoyf|M3C|1
+1 Pyrokinesis|EMA|1
+1 Qasali Pridemage|TSR|1
+1 Questing Beast|ELD|1
+1 Raffine's Tower|SNC|1
+1 Ragavan, Nimble Pilferer|MH2|1
+1 Raging Ravine|UMA|1
+1 Rain of Filth|SLD|1
+1 Rampaging Raptor|MOM|1
+1 Ramunap Excavator|HOU|1
+1 Raucous Theater|MKM|1
+1 Raugrin Triome|IKO|1
+1 Razorverge Thicket|ONE|1
+1 Reanimate|UMA|1
+1 Reckless Pyrosurfer|MH3|1
+1 Reclamation Sage|M19|1
+1 Recurring Nightmare|TPR|1
+1 Relic of Progenitus|EMA|1
+1 Relic of Sauron|LTC|1
+1 Remand|MM2|1
+1 Reprieve|LTR|1
+1 Restless Vents|LCI|1
+1 Retrofitter Foundry|PZ2|1
+1 Rite of Flame|SS3|1
+1 Robber of the Rich|ELD|1
+1 Sacred Foundry|GRN|1
+1 Saheeli, Sublime Artificer|WAR|1
+1 Sail into the West|LTC|1
+1 Sakura-Tribe Elder|C15|1
+1 Samwise the Stouthearted|LTR|1
+1 Satyr Wayfinder|UMA|1
+1 Savai Triome|IKO|1
+1 Savannah|3ED|1
+1 Scalding Tarn|MM3|1
+1 Scapeshift|M19|1
+1 Scavenging Ooze|MM3|1
+1 Scrapwork Mutt|BRO|1
+1 Scrubland|3ED|1
+1 Seachrome Coast|ONE|1
+1 Seasoned Pyromancer|2X2|1
+1 Seething Song|C21|1
+1 Selesnya Sanctuary|MM2|1
+1 Selfless Spirit|EMN|1
+1 Sensei's Divining Top|EMA|1
+1 Sentinel of the Nameless City|LCI|1
+1 Serra Paragon|DMU|1
+1 Serum Visions|MM3|1
+1 Sevinne's Reclamation|DMR|1
+1 Shadowgrange Archfiend|VOC|1
+1 Shadowspear|THB|1
+1 Shadowy Backstreet|MKM|1
+1 Shallow Grave|MIR|1
+1 Shelldock Isle|SLD|1
+1 Sheoldred's Edict|ONE|1
+1 Sheoldred, the Apocalypse|DMU|1
+1 Shifting Woodland|MH3|1
+1 Shorikai, Genesis Engine|NEC|1
+1 Show and Tell|CN2|1
+1 Showdown of the Skalds|KHM|1
+1 Silent Clearing|MH1|1
+1 Simic Growth Chamber|MM2|1
+1 Six|MH3|1
+1 Skullclamp|C14|1
+1 Skyclave Apparition|ZNR|1
+1 Smirking Spelljacker|OTC|1
+1 Smuggler's Copter|KLD|1
+1 Snapcaster Mage|MM3|1
+1 Sneak Attack|EMA|1
+1 Snuff Out|GVL|1
+1 Sol Ring|C14|1
+1 Solitude|MH2|1
+1 Soul-Guide Lantern|THB|1
+1 Souls of the Lost|LCI|1
+1 Sowing Mycospawn|MH3|1
+1 Spara's Headquarters|SNC|1
+1 Spell Pierce|XLN|1
+1 Spellseeker|BBD|1
+1 Spirebluff Canal|KLD|1
+1 Springheart Nantuko|MH3|1
+1 Squee, Goblin Nabob|UMA|1
+1 Staff of the Storyteller|ONC|1
+1 Steam Vents|GRN|1
+1 Steel Seraph|BRO|1
+1 Stern Scolding|LTR|1
+1 Stitcher's Supplier|M19|1
+1 Stomping Ground|RNA|1
+1 Stoneforge Mystic|2XM|1
+1 Strip Mine|EXP|1
+1 Subtlety|MH2|1
+1 Sunbaked Canyon|MH1|1
+1 Sunfall|MOM|1
+1 Survival of the Fittest|TPR|1
+1 Sword of the Meek|2XM|1
+1 Swords to Plowshares|EMA|1
+1 Sylvan Caryatid|THS|1
+1 Sylvan Library|EMA|1
+1 Sylvan Safekeeper|C14|1
+1 Taiga|3ED|1
+1 Talisman of Conviction|MH1|1
+1 Talisman of Creativity|MH1|1
+1 Talisman of Curiosity|MH1|1
+1 Talisman of Dominance|E01|1
+1 Talisman of Indulgence|E01|1
+1 Talisman of Progress|SLD|1
+1 Tamiyo, Collector of Tales|WAR|1
+1 Tamiyo, Inquisitive Student|MH3|1
+1 Tarmogoyf|MM2|1
+1 Tear Asunder|DMU|1
+1 Teferi, Hero of Dominaria|DOM|1
+1 Teferi, Time Raveler|WAR|1
+1 Temple Garden|GRN|1
+1 Tendrils of Agony|STA|1
+1 Territorial Kavu|MH2|1
+1 Thalia, Guardian of Thraben|VOW|1
+1 Thassa's Oracle|THB|1
+1 The Mightstone and Weakstone|BRO|1
+1 The One Ring|LTR|1
+1 The Wandering Emperor|NEO|1
+1 Thespian's Stage|UMA|1
+1 Thieving Skydiver|ZNR|1
+1 Third Path Iconoclast|BRO|1
+1 Thopter Foundry|2XM|1
+1 Thought Scour|IMA|1
+1 Thoughtseize|IMA|1
+1 Thraben Inspector|SOI|1
+1 Through the Breach|UMA|1
+1 Thundering Falls|MKM|1
+1 Tidehollow Sculler|TSR|1
+1 Time Spiral|USG|1
+1 Time Walk|2ED|1
+1 Time Warp|TPR|1
+1 Timeless Dragon|MH2|1
+1 Timetwister|2ED|1
+1 Tinker|MB1|1
+1 Tireless Tracker|SOI|1
+1 Tishana's Tidebinder|LCI|1
+1 Titania, Protector of Argoth|C14|1
+1 Tolarian Academy|USG|1
+1 Torsten, Founder of Benalia|DMC|1
+1 Touch the Spirit Realm|NEO|1
+1 Toxic Deluge|EMA|1
+1 Treachery|UDS|1
+1 Treasure Cruise|KTK|1
+1 Tribal Flames|MM2|1
+1 Trinket Mage|TSR|1
+1 Triplicate Titan|C21|1
+1 Troll of Khazad-dûm|LTR|1
+1 Tropical Island|3ED|1
+1 True-Name Nemesis|TSR|1
+1 Trumpeting Carnosaur|LCI|1
+1 Tundra|3ED|1
+1 Ulamog, the Ceaseless Hunger|BFZ|1
+1 Ulamog, the Infinite Gyre|MM2|1
+1 Ulvenwald Oddity|VOW|1
+1 Umezawa's Jitte|V16|1
+1 Undercity Sewers|MKM|1
+1 Underground Mortuary|MKM|1
+1 Underground Sea|3ED|1
+1 Underworld Breach|THB|1
+1 Unearth|A25|1
+1 Unexpectedly Absent|EMA|1
+1 Unholy Heat|MH2|1
+1 Upheaval|MH2|1
+1 Urborg, Tomb of Yawgmoth|UMA|1
+1 Uro, Titan of Nature's Wrath|THB|1
+1 Urza's Saga|MH2|1
+1 Urza, Lord High Artificer|DMR|1
+1 Usher of the Fallen|KHM|1
+1 Valakut, the Molten Pinnacle|ZNE|1
+1 Valki, God of Lies|KHM|1
+1 Vampiric Tutor|EMA|1
+1 Vaultborn Tyrant|BIG|1
+1 Vengevine|UMA|1
+1 Verdant Catacombs|MM3|1
+1 Vindicate|EMA|1
+1 Virtue of Loyalty|WOE|1
+1 Virtue of Persistence|WOE|1
+1 Volcanic Island|3ED|1
+1 Voldaren Epicure|VOW|1
+1 Walking Ballista|AER|1
+1 Wasteland|EMA|1
+1 Waterlogged Grove|MH1|1
+1 Watery Grave|GRN|1
+1 Wheel of Fortune|3ED|1
+1 White Orchid Phantom|MH3|1
+1 Wight of the Reliquary|MH3|1
+1 Winds of Abandon|MH1|1
+1 Windswept Heath|KTK|1
+1 Wishclaw Talisman|ELD|1
+1 Witherbloom Command|STX|1
+1 Wooded Foothills|KTK|1
+1 Woodfall Primus|UMA|1
+1 Worldspine Wurm|SLD|1
+1 Wrath of God|EMA|1
+1 Wrenn and Six|2X2|1
+1 Xander's Lounge|SNC|1
+1 Yavimaya, Cradle of Growth|MH2|1
+1 Yawgmoth's Will|USG|1
+1 Zagoth Triome|IKO|1
+1 Ziatora's Proving Ground|SNC|1
+1 Zirda, the Dawnwaker|IKO|1
+1 Zuran Orb|MH2|1
