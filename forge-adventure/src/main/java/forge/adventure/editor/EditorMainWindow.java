@@ -1,8 +1,5 @@
 package forge.adventure.editor;
 
-
-
-import com.badlogic.gdx.tools.particleeditor.ParticleEditor;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
