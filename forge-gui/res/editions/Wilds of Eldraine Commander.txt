@@ -196,7 +196,7 @@ u_1_1_faerie_flying
 ub_1_1_faerie_rogue_flying
 w_1_1_cat_lifelink
 w_1_1_human_soldier
-w_1_1_pegasus_flying
+w_2_2_pegasus_flying
 w_2_2_cat
 w_2_4_ox
 wb_1_1_spirit_flying
