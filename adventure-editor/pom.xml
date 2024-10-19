@@ -9,7 +9,7 @@
 
     <artifactId>adventure-editor</artifactId>
     <packaging>jar</packaging>
-    <name>Map Editor</name>
+    <name>Adventure Editor</name>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
