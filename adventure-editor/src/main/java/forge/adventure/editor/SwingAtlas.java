@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Array;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class SwingAtlas {
             return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance((int) (imageSize*(sprite.width/(float)sprite.height)),imageSize,SCALE_FAST));
 
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             return null;
         }

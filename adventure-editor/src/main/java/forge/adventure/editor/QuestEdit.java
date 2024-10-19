@@ -2,10 +2,23 @@ package forge.adventure.editor;
 
 import forge.adventure.data.AdventureQuestData;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -285,7 +298,7 @@ public class QuestEdit extends FormPanel {
         }
         setVisible(true);
         updating=true;
-        id.setText(currentData.getID() + "");
+        id.setText(String.valueOf(currentData.getID()));
         name.setText(currentData.name);
         description.setText(currentData.description);
         synopsis.setText(currentData.synopsis);

@@ -3,10 +3,17 @@ package forge.adventure.editor;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.BiomeTerrainData;
 
-import javax.swing.*;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JToolBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 
 /**
@@ -29,11 +36,11 @@ public class TerrainsEditor extends JComponent{
             if(!(value instanceof BiomeTerrainData))
                 return label;
             BiomeTerrainData terrainData=(BiomeTerrainData) value;
-            StringBuilder builder=new StringBuilder();
+            /*StringBuilder builder=new StringBuilder();
             builder.append("Terrain");
             builder.append(" ");
-            builder.append(terrainData.spriteName);
-            label.setText(builder.toString());
+            builder.append(terrainData.spriteName);*/
+            label.setText("Terrain " + terrainData.spriteName);
             return label;
         }
     }

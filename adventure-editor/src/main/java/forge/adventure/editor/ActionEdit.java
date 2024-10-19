@@ -2,7 +2,9 @@ package forge.adventure.editor;
 
 import forge.adventure.data.DialogData;
 
-import javax.swing.*;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -158,9 +160,9 @@ public class ActionEdit extends FormPanel {
         advanceQuestFlag.setText(currentData.advanceQuestFlag);
         advanceCharacterFlag.setText(currentData.advanceCharacterFlag);
 
-        battleWithActorID.setText("" + currentData.battleWithActorID);
-        activateObjectID.setText("" + currentData.battleWithActorID);
-        deleteMapObject.setText("" + currentData.deleteMapObject);
+        battleWithActorID.setText(String.valueOf(currentData.battleWithActorID));
+        activateObjectID.setText(String.valueOf(currentData.battleWithActorID));
+        deleteMapObject.setText(String.valueOf(currentData.deleteMapObject));
         setColorIdentity.setText(currentData.setColorIdentity);
         addLife.getModel().setValue(currentData.addLife);
         addReputation.getModel().setValue(currentData.addMapReputation);
