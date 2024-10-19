@@ -42,7 +42,7 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
 
     private List<ManaCostShard> shards;
     private final int genericCost;
-    private final boolean hasNoCost; // lands cost
+    private boolean hasNoCost = true; // lands cost
     private String stringValue; // precalculated for toString;
 
     private Float compareWeight = null;
@@ -92,8 +92,8 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      */
     public ManaCost(final IParserManaCost parser) {
         final List<ManaCostShard> shardsTemp = Lists.newArrayList();
-        this.hasNoCost = false;
         while (parser.hasNext()) {
+            this.hasNoCost = false;
             final ManaCostShard shard = parser.next();
             if (shard != null && shard != ManaCostShard.GENERIC) {
                 shardsTemp.add(shard);
@@ -281,6 +281,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @return
      */
     public String getShortString() {
+        if (isNoCost()) {
+            return "-1";
+        }
     	StringBuilder sb = new StringBuilder();
         int generic = getGenericCost();
         if (this.isZero()) {
