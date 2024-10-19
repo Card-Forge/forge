@@ -660,8 +660,8 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
-                                            </zipfileset>
-                                            <zipfileset dir="${project.build.directory}/${project.build.finalName}">
+                                            </tarfileset>
+                                            <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
@@ -675,8 +675,8 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
-                                            </zipfileset>
-                                        </zip>
+                                            </tarfileset>
+                                        </tar>
                                     </target>
                                 </configuration>
                                 <goals>
