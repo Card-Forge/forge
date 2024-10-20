@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
@@ -19,7 +20,9 @@ import forge.gamemodes.limited.LimitedPoolType;
 import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.Serializable;
@@ -429,14 +432,11 @@ public class AdventureEventData implements Serializable {
     }
 
     public void generateParticipants(int numberOfOpponents) {
-        participants = new AdventureEventParticipant[numberOfOpponents + 1];
-
-        List<EnemyData> data = Aggregates.random(WorldData.getAllEnemies(), numberOfOpponents);
-        data.removeIf(q -> q.nextEnemy != null);
-        for (int i = 0; i < numberOfOpponents; i++) {
-            participants[i] = new AdventureEventParticipant().generate(data.get(i));
-        }
-
+        participants = StreamUtil.stream(WorldData.getAllEnemies())
+                .filter(q -> q.nextEnemy == null)
+                .collect(StreamUtil.random(numberOfOpponents)).stream()
+                .map(q -> new AdventureEventParticipant().generate(q))
+                .toArray(i -> new AdventureEventParticipant[i + 1]);
         participants[numberOfOpponents] = getHumanPlayer();
     }
 

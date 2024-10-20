@@ -7,10 +7,34 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class StreamUtil {
 
     private StreamUtil(){}
+
+    /**
+     * @return a Stream with the provided iterable as its source.
+     * @deprecated Stream collections with {@link Collection#stream()}.
+     */
+    @Deprecated
+    public static <T> Stream<T> stream(Collection<T> collection) {
+        return collection.stream();
+    }
+
+    /**
+     * @return a Stream with the provided iterable as its source.
+     */
+    public static <T> Stream<T> stream(Iterable<T> iterable) {
+        return StreamSupport.stream(iterable.spliterator(), false);
+    }
+
+    /**
+     * @return a Stream with the provided array as its source.
+     */
+    public static <T> Stream<T> stream(T[] array) {
+        return Arrays.stream(array);
+    }
 
     /**
      * Reduces a stream to a random element of the stream. Used with {@link Stream#collect}.
