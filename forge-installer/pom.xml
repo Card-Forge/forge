@@ -234,12 +234,4 @@
             </plugin>
         </plugins>
     </build>
-    <!--dependencies>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-gui-desktop</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies-->
 </project>
