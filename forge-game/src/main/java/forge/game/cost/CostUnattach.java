@@ -24,8 +24,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.TextUtil;
 
-import java.util.List;
-
 /**
  * The Class CostUnattach.
  */
