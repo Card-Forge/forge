@@ -54,7 +54,7 @@ public class ManaCostParser implements IParserManaCost {
      */
     @Override
     public final boolean hasNext() {
-        return this.nextToken < this.cost.length;
+        return this.nextToken < this.cost.length && !this.cost[this.nextToken].equals("-1");
     }
 
     /*
