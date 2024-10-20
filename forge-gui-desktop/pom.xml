@@ -20,7 +20,61 @@
 
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.5.1</version>
+                <executions>
+                    <execution>
+                        <id>l4j-gui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>${project.build.directory}/forge.exe</outfile>
+                            <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                            <dontWrapJar>true</dontWrapJar>
+                            <errTitle>forge</errTitle>
+                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
+                            <icon>src/main/config/forge.ico</icon>
+                            <classPath>
+                                <mainClass>forge.view.Main</mainClass>
+                                <addDependencies>false</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>17</minVersion>
+                                <requiresJdk>true</requiresJdk>
+                                <maxHeapSize>4096</maxHeapSize>
+                                <opts>
+                                    <opt>${mandatory.java.args}</opt>
+                                </opts>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>
+                                    ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                </fileVersion>
+                                <txtFileVersion>
+                                    ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                </txtFileVersion>
+                                <fileDescription>Forge</fileDescription>
+                                <copyright>Forge</copyright>
+                                <productVersion>
+                                    ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                </productVersion>
+                                <txtProductVersion>
+                                    ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
+                                </txtProductVersion>
+                                <productName>Forge</productName>
+                                <internalName>forge</internalName>
+                                <originalFilename>forge.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -353,106 +407,6 @@
     </dependencies>
 
     <profiles>
-        <profile>
-            <id>windows-linux</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
-                        <artifactId>launch4j-maven-plugin</artifactId>
-                        <version>2.5.1</version>
-                        <executions>
-                            <execution>
-                                <id>l4j-gui</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>launch4j</goal>
-                                </goals>
-                                <configuration>
-                                    <headerType>gui</headerType>
-                                    <outfile>${project.build.directory}/forge.exe</outfile>
-                                    <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
-                                    <dontWrapJar>true</dontWrapJar>
-                                    <errTitle>forge</errTitle>
-                                    <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
-                                    <icon>src/main/config/forge.ico</icon>
-                                    <classPath>
-                                        <mainClass>forge.view.Main</mainClass>
-                                        <addDependencies>false</addDependencies>
-                                        <preCp>anything</preCp>
-                                    </classPath>
-                                    <jre>
-                                        <minVersion>17</minVersion>
-                                        <requiresJdk>true</requiresJdk>
-                                        <maxHeapSize>4096</maxHeapSize>
-                                        <opts>
-                                            <opt>${mandatory.java.args}</opt>
-                                        </opts>
-                                    </jre>
-                                    <versionInfo>
-                                        <fileVersion>
-                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
-                                        </fileVersion>
-                                        <txtFileVersion>
-                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
-                                        </txtFileVersion>
-                                        <fileDescription>Forge</fileDescription>
-                                        <copyright>Forge</copyright>
-                                        <productVersion>
-                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
-                                        </productVersion>
-                                        <txtProductVersion>
-                                            ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.0
-                                        </txtProductVersion>
-                                        <productName>Forge</productName>
-                                        <internalName>forge</internalName>
-                                        <originalFilename>forge.exe</originalFilename>
-                                    </versionInfo>
-                                </configuration>
-                            </execution>
-                            <!--extra-->
-                        </executions>
-                    </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>build-helper-maven-plugin</artifactId>
-                        <version>3.6.0</version>
-                        <executions>
-                            <execution>
-                                <id>released-version</id>
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>released-version</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>parse-version</id>
-                                <goals>
-                                    <goal>parse-version</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>attach-distribution</id>
-                                <phase>post-integration-test</phase>
-                                <goals>
-                                    <goal>attach-artifact</goal>
-                                </goals>
-                                <configuration>
-                                    <artifacts>
-                                        <artifact>
-                                            <file>${basedir}/../forge-installer/target/forge.zip</file>
-                                            <type>zip</type>
-                                        </artifact>
-                                    </artifacts>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <profile>
             <properties>
                 <license.file.name>"LICENSE.txt"</license.file.name>
