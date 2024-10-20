@@ -177,12 +177,18 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                         value = Math.min(value, Integer.parseInt(cause.getParam("MaxFromEffect")) - gm.getKey().getCounters(ec.getKey()));
                     }
                     gm.getKey().addCounterInternal(ec.getKey(), value, e.getKey().orNull(), true, result, runParams);
-                    if (remember && ec.getValue() >= 1) {
+                    if (remember && ec.getValue() > 0) {
                         cause.getHostCard().addRemembered(gm.getKey());
                     }
                 }
             }
         }
+
+        int totalAdded = totalValues();
+        if (totalAdded > 0 && cause != null && cause.hasParam("RememberAmount")) {
+            cause.getHostCard().addRemembered(totalAdded);
+        }
+
         result.triggerCountersPutAll(game);
         return !result.isEmpty();
     }
