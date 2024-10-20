@@ -732,9 +732,6 @@ public final class StaticAbilityContinuous {
                     final List<String> extraKeywords = Lists.newArrayList();
 
                     newKeywords.removeIf(input -> {
-                        if (input.contains("CardManaCost") && affectedCard.getManaCost().isNoCost()) {
-                            return true;
-                        }
                         // replace one Keyword with list of keywords
                         if (input.startsWith("Protection") && input.contains("CardColors")) {
                             for (Byte color : affectedCard.getColor()) {

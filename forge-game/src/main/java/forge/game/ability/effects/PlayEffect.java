@@ -384,9 +384,6 @@ public class PlayEffect extends SpellAbilityEffect {
                     abCost = IterableUtil.find(tgtCard.getNonManaAbilities(), s -> s.isKeyword(Keyword.SUSPEND)).getPayCosts();
                 } else {
                     if (cost.contains("ConvertedManaCost")) {
-                        if (unpayableCost) {
-                            continue;
-                        }
                         final String costcmc = Integer.toString(tgtCard.getCMC());
                         cost = cost.replace("ConvertedManaCost", costcmc);
                     }

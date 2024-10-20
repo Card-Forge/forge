@@ -471,15 +471,6 @@ public class PumpEffect extends SpellAbilityEffect {
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
             if (!affectedKeywords.isEmpty()) {
-                affectedKeywords.removeIf(input -> {
-                    if (input.contains("CardManaCost")) {
-                        if (tgtC.getManaCost().isNoCost()) {
-                            return true;
-                        }
-                    }
-                    return false;
-                });
-
                 affectedKeywords = affectedKeywords.stream().map(input -> {
                     if (input.contains("CardManaCost")) {
                         input = input.replace("CardManaCost", tgtC.getManaCost().getShortString());

@@ -2739,6 +2739,7 @@ public class AbilityUtils {
             for (Card card : cards) {
                 manaCost.add(card.getManaCost().getShortString());
             }
+            manaCost.remove(ManaCost.NO_COST.getShortString());
 
             return doXMath(manaCost.size(), expr, c, ctb);
         }
