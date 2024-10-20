@@ -73,6 +73,7 @@
         <module>forge-lda</module>
         <module>adventure-editor</module>
         <module>forge-gui-android</module>
+        <module>forge-installer</module>
     </modules>
 
     <distributionManagement>
