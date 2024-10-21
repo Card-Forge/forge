@@ -612,6 +612,11 @@ public class Main extends ForgeAndroidApplication {
         }
 
         @Override
+        public String getVersionString() {
+            return versionString;
+        }
+
+        @Override
         public boolean openFile(String filename) {
             try {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {

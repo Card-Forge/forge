@@ -74,6 +74,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public String getVersionString() {
+            return "0.0";
+        }
+
+        @Override
         public boolean openFile(final String filename) {
             return new IOSFiles().local(filename).exists();
         }

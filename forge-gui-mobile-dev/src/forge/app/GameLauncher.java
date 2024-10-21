@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.SharedLibraryLoader;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.assets.AssetsDownloader;
-import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import org.lwjgl.system.Configuration;
 
@@ -18,8 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class GameLauncher {
-    public GameLauncher() {
-        String versionString = BuildInfo.getVersionString();
+    public GameLauncher(final String versionString) {
         // Set this to "true" to make the mobile game port run as a full-screen desktop application
         boolean desktopMode = true;//cmd.hasOption("fullscreen");
         // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
