@@ -30,7 +30,8 @@ public class AssetsDownloader {
     public static void checkForUpdates(final SplashScreen splashScreen) {
         if (Gdx.app.getType() == ApplicationType.Desktop && SHARE_DESKTOP_ASSETS) { return; }
 
-        final boolean isSnapshots = Forge.CURRENT_VERSION.contains("SNAPSHOT");
+        final String versionString = Forge.getDeviceAdapter().getVersionString();
+        final boolean isSnapshots = versionString.contains("SNAPSHOT");
         final String snapsURL = "https://downloads.cardforge.org/dailysnapshots/";
         final String releaseURL = "https://releases.cardforge.org/forge/forge-gui-android/";
         final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "version.txt";
@@ -45,11 +46,11 @@ public class AssetsDownloader {
                 String version = FileUtil.readFileToString(versionUrl);
                 String filename = "forge-android-" + version + "-signed-aligned.apk";
                 String apkURL = isSnapshots ? snapsURL + filename : releaseURL + version + "/" + filename;
-                if (!StringUtils.isEmpty(version) && !Forge.CURRENT_VERSION.equals(version)) {
+                if (!StringUtils.isEmpty(version) && !versionString.equals(version)) {
                     splashScreen.prepareForDialogs();
 
                     message = "A new version of Forge is available (" + version + ").\n" +
-                            "You are currently on an older version (" + Forge.CURRENT_VERSION + ").\n\n" +
+                            "You are currently on an older version (" + versionString + ").\n\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around 12MB.";
@@ -85,7 +86,7 @@ public class AssetsDownloader {
                 return;
             }
         }
-        else if (Forge.CURRENT_VERSION.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
+        else if (versionString.equals(FileUtil.readFileToString(versionFile)) && FSkin.getSkinDir() != null) {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
@@ -143,7 +144,7 @@ public class AssetsDownloader {
 
         //allow deletion on Android 10 or if using app-specific directory
         boolean allowDeletion = Forge.androidVersion < 30 || GuiBase.isUsingAppDirectory();
-        String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + Forge.CURRENT_VERSION + "/" + "assets.zip";
+        String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + versionString + "/" + "assets.zip";
         new GuiDownloadZipService("", "resource files", assetURL,
             ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, splashScreen.getProgressBar(), allowDeletion).downloadAndUnzip();
 
@@ -158,7 +159,7 @@ public class AssetsDownloader {
 
         //save version string to file once assets finish downloading
         //so they don't need to be re-downloaded until you upgrade again
-        FileUtil.writeFile(versionFile, Forge.CURRENT_VERSION);
+        FileUtil.writeFile(versionFile, versionString);
 
         //add restart after assets update
         String msg  = allowDeletion ? "Resource update finished..." : "Forge misses some files for deletion.\nIf you encounter issues, try deleting the Forge/res folder and/or deleting Forge/cache/fonts folder and try to download and update the assets.";

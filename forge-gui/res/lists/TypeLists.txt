@@ -134,6 +134,7 @@ Halfling:Halflings
 Hamster:Hamsters
 Harpy:Harpies
 Hellion:Hellions
+Hero:Heroes
 Hippo:Hippos
 Hippogriff:Hippogriffs
 Homarid:Homarids
