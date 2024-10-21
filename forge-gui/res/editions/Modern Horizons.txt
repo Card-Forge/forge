@@ -5,7 +5,7 @@ Name=Modern Horizons
 Code2=MH1
 Type=Draft
 BoosterCovers=5
-Booster=10 Common:!fromSheet("MH1 Secret Cards"), 3 Uncommon:!fromSheet("MH1 Secret Cards"), 1 RareMythic:!fromSheet("MH1 Secret Cards"), 1 fromSheet("MH1 Lands")
+Booster=10 Common:fromSheet("MH1 cards"), 3 Uncommon:fromSheet("MH1 cards"), 1 RareMythic:fromSheet("MH1 cards"), 1 BasicLand:fromSheet("MH1 cards")
 BoosterBox=24
 ChaosDraftThemes=MASTERS_SET;GRAVEYARD_MATTERS
 ScryfallCode=MH1
@@ -265,6 +265,8 @@ ScryfallCode=MH1
 252 L Snow-Covered Swamp @Titus Lunter
 253 L Snow-Covered Mountain @Titus Lunter
 254 L Snow-Covered Forest @Titus Lunter
+
+[buy a box]
 255 R Flusterstorm @Chris Rallis
 
 [tokens]

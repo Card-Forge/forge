@@ -30,7 +30,7 @@ ScryfallCode=UGL
 18 C Clambassadors @Randy Elliott
 19 C Clam-I-Am @Randy Elliott
 20 C Clam Session @Randy Elliott
-21 C Common Courtesy @Mike Raabe
+21 U Common Courtesy @Mike Raabe
 22 C Denied! @Quinton Hoover
 23 C Double Take @Claymore J. Flapdoodle
 24 C Fowl Play @Mark Poole

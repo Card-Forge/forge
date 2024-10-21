@@ -16,7 +16,6 @@ ScryfallCode=POR
 4 U Ardent Militia @Mike Raabe
 5 R Armageddon @John Avon
 6 C Armored Pegasus @Andrew Robinson
-6d C Armored Pegasus @Andrew Robinson
 7 R Blessed Reversal @Zina Saunders
 8 R Blinding Light @John Coulthart
 9 C Border Guard @Kev Walker
@@ -41,7 +40,6 @@ ScryfallCode=POR
 28 C Spotted Griffin @William Simpson
 29 U Starlight @John Avon
 30 U Starlit Angel @Rebecca Guay
-30s U Starlit Angel @徐晓鸣
 31 C Steadfastness @Kev Walker
 32 R Stern Marshal @D. Alexander Gregory
 33 R Temporary Truce @Mike Raabe
@@ -50,7 +48,6 @@ ScryfallCode=POR
 36 U Vengeance @Andrew Robinson
 37 U Wall of Swords @Douglas Shuler
 38 C Warrior's Charge @Ted Naifeh
-38† C Warrior's Charge @Ted Naifeh
 39 R Wrath of God @Mike Raabe
 40 R Ancestral Memories @Dan Frazier
 41 R Balance of Power @Adam Rex
@@ -59,7 +56,6 @@ ScryfallCode=POR
 44 C Cloak of Feathers @Rebecca Guay
 45 R Cloud Dragon @John Avon
 46 C Cloud Pirates @Phil Foglio
-46d C Cloud Pirates @Phil Foglio
 47 U Cloud Spirit @DiTerlizzi
 48 U Command of Unsummoning @Phil Foglio
 49 C Coral Eel @Una Fricker
@@ -71,7 +67,6 @@ ScryfallCode=POR
 55 U Flux @Ted Naifeh
 56 C Giant Octopus @John Matson
 57 C Horned Turtle @Adrian Smith
-57s C Horned Turtle @Wang Yuqun
 58 U Ingenious Thief @Dan Frazier
 59 U Man-o'-War @Una Fricker
 60 C Merfolk of the Pearl Trident @DiTerlizzi
@@ -81,15 +76,11 @@ ScryfallCode=POR
 64 U Personal Tutor @D. Alexander Gregory
 65 R Phantom Warrior @Dan Frazier
 66 R Prosperity @Phil Foglio
-66s R Prosperity @李有良
 67 C Snapping Drake @Christopher Rush
-67d C Snapping Drake @Christopher Rush
 68 C Sorcerous Sight @Kaja Foglio
 69 C Storm Crow @Una Fricker
-69d C Storm Crow @Una Fricker
 70 C Symbol of Unsummoning @Adam Rex
 71 R Taunt @Phil Foglio
-71s R Taunt @杨钊
 72 U Theft of Dreams @Adam Rex
 73 R Thing from the Deep @Paolo Parente
 74 C Tidal Surge @Douglas Shuler
@@ -99,7 +90,6 @@ ScryfallCode=POR
 78 U Withering Gaze @Scott M. Fischer
 79 U Arrogant Vampire @Zina Saunders
 80 U Assassin's Blade @John Matson
-80s U Assassin's Blade @徐晓鸣
 81 C Bog Imp @Christopher Rush
 82 C Bog Raiders @Steve Luke
 83 U Bog Wraith @Ted Naifeh
@@ -113,11 +103,9 @@ ScryfallCode=POR
 91 R Ebon Dragon @Donato Giancola
 92 R Endless Cockroaches @Ron Spencer
 93 C Feral Shadow @Colin MacNeil
-93d C Feral Shadow @Colin MacNeil
 94 R Final Strike @John Coulthart
 95 U Gravedigger @Scott M. Fischer
 96 C Hand of Death @John Coulthart
-96† C Hand of Death @John Coulthart
 97 C Howling Fury @Mike Dringenberg
 98 R King's Assassin @Zina Saunders
 99 R Mercenary Knight @Adrian Smith
@@ -129,7 +117,6 @@ ScryfallCode=POR
 105 C Python @Alan Rabinowitz
 106 U Rain of Tears @Eric Peterson
 107 C Raise Dead @Charles Gillespie
-107s C Raise Dead @李尤松
 108 R Serpent Assassin @Roger Raupp
 109 C Serpent Warrior @Roger Raupp
 110 C Skeletal Crocodile @Mike Dringenberg
@@ -137,14 +124,10 @@ ScryfallCode=POR
 112 C Soul Shred @Alan Rabinowitz
 113 C Undying Beast @Steve Luke
 114 U Vampiric Feast @D. Alexander Gregory
-114s U Vampiric Feast @王峰
 115 C Vampiric Touch @Zina Saunders
 116 U Virtue's Ruin @Mike Dringenberg
 117 R Wicked Pact @Adam Rex
-117s R Wicked Pact @杨光恒
 118 U Blaze @Gerry Grace
-118† U Blaze @Gerry Grace
-118s U Blaze @David A. Cherry
 119 U Boiling Seas @Tom Wänerstrand
 120 C Burning Cloak @Scott M. Fischer
 121 C Craven Giant @Ron Spencer
@@ -161,7 +144,6 @@ ScryfallCode=POR
 132 C Highland Giant @Ron Spencer
 133 C Hill Giant @Randy Gallegos
 134 U Hulking Cyclops @Paolo Parente
-134s U Hulking Cyclops @Lin Yan
 135 C Hulking Goblin @Pete Venters
 136 R Last Chance @Hannibal King
 137 C Lava Axe @Adrian Smith
@@ -173,7 +155,6 @@ ScryfallCode=POR
 143 R Pyroclasm @John Matson
 144 C Raging Cougar @Terese Nielsen
 145 C Raging Goblin @Pete Venters
-145† C Raging Goblin @Pete Venters
 146 C Raging Minotaur @Scott M. Fischer
 147 U Rain of Salt @Charles Gillespie
 148 C Scorching Spear @Mike Raabe
@@ -187,19 +168,14 @@ ScryfallCode=POR
 156 R Winds of Change @Adam Rex
 157 R Alluring Scent @Ted Naifeh
 158 U Anaconda @Andrew Robinson
-158† U Anaconda @Andrew Robinson
 159 U Bee Sting @Phil Foglio
 160 U Bull Hippo @Roger Raupp
-160d U Bull Hippo @Roger Raupp
 161 R Charging Rhino @Una Fricker
 162 U Deep Wood @Paolo Parente
 163 C Elite Cat Warrior @Eric Peterson
-163† C Elite Cat Warrior @Eric Peterson
 164 C Elven Cache @Rebecca Guay
-164s C Elven Cache @张艺娜
 165 C Elvish Ranger @DiTerlizzi
 166 C Fruition @Steve Luke
-166s C Fruition @Wang Yuqun
 167 C Giant Spider @Randy Gallegos
 168 C Gorilla Warrior @John Matson
 169 C Grizzly Bears @Zina Saunders
@@ -207,7 +183,6 @@ ScryfallCode=POR
 171 C Jungle Lion @Janine Johnston
 172 C Mobilize @Rebecca Guay
 173 C Monstrous Growth @Dan Frazier
-173† C Monstrous Growth @Dan Frazier
 174 U Moon Sprite @Terese Nielsen
 175 R Natural Order @Alan Rabinowitz
 176 U Natural Spring @Janine Johnston
@@ -266,3 +241,30 @@ ScryfallCode=POR
 214s L Forest @李铁
 215 L Forest @John Avon
 215s L Forest @李铁
+
+[alternate art]
+6d C Armored Pegasus @Andrew Robinson
+30s U Starlit Angel @徐晓鸣
+38† C Warrior's Charge @Ted Naifeh
+46d C Cloud Pirates @Phil Foglio
+57s C Horned Turtle @Wang Yuqun
+66s R Prosperity @李有良
+67d C Snapping Drake @Christopher Rush
+69d C Storm Crow @Una Fricker
+71s R Taunt @杨钊
+80s U Assassin's Blade @徐晓鸣
+93d C Feral Shadow @Colin MacNeil
+96† C Hand of Death @John Coulthart
+107s C Raise Dead @李尤松
+114s U Vampiric Feast @王峰
+117s R Wicked Pact @杨光恒
+118† U Blaze @Gerry Grace
+118s U Blaze @David A. Cherry
+134s U Hulking Cyclops @Lin Yan
+145† C Raging Goblin @Pete Venters
+158† U Anaconda @Andrew Robinson
+160d U Bull Hippo @Roger Raupp
+163† C Elite Cat Warrior @Eric Peterson
+164s C Elven Cache @张艺娜
+166s C Fruition @Wang Yuqun
+173† C Monstrous Growth @Dan Frazier

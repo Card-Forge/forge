@@ -9,6 +9,7 @@ Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 FullArtLand, 1 Wil
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 
+#Numbers from https://mtgscribe.com/2024/07/14/play-booster-fact-sheet-bloomburrow/
 [Common]
 Base=Common:fromSheet("BLB cards")
 
@@ -21,9 +22,6 @@ Base=Uncommon:fromSheet("BLB cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("BLB cards")
-# I don't know about these numbers, so i'm just copying them from MH3
-Replace=.021F fromSheet("BLB borderless")
-Replace=.051F fromSheet("BLB showcase")
 
 [FullArtLand]
 Base=Land:fromSheet("BLB full art")
@@ -33,9 +31,7 @@ Replace=.20F Land:fromSheet("BLB full art")+
 Base=Common:fromSheet("BLB cards")
 # I don't know about these numbers, so i'm just copying them from MH3
 Replace=.417F Uncommon:fromSheet("BLB cards")
-Replace=.078F RareMythic:fromSheet("BLB cards")
-Replace=.004F fromSheet("BLB borderless")
-Replace=.042F fromSheet("BLB showcase")
+Replace=.012F RareMythic:fromSheet("BLB cards")
 
 [cards]
 1 C Banishing Light @Zoltan Boros
@@ -319,16 +315,6 @@ Replace=.042F fromSheet("BLB showcase")
 279 L Forest @David Robert Hovey
 280 L Forest @David Robert Hovey
 281 L Forest @David Robert Hovey
-369 L Plains @Piotr Dura
-370 L Plains @Julian Kok Joon Wen
-371 L Island @Alexander Forssberg
-372 L Island @Lorenzo Lanfranconi
-373 L Swamp @Piotr Dura
-374 L Swamp @Thomas Stoop
-375 L Mountain @Samuele Bandini
-376 L Mountain @Adam Paquette
-377 L Forest @Alayna Danner
-378 L Forest @Donato Giancola
 
 [borderless]
 282 M Season of the Burrow @Edgar Sánchez Hidalgo
@@ -424,6 +410,16 @@ Replace=.042F fromSheet("BLB showcase")
 368 R Fountainport @Leon Tukker
 
 [precon product]
+369 L Plains @Piotr Dura
+370 L Plains @Julian Kok Joon Wen
+371 L Island @Alexander Forssberg
+372 L Island @Lorenzo Lanfranconi
+373 L Swamp @Piotr Dura
+374 L Swamp @Thomas Stoop
+375 L Mountain @Samuele Bandini
+376 L Mountain @Adam Paquette
+377 L Forest @Alayna Danner
+378 L Forest @Donato Giancola
 379 M Bria, Riptide Rogue @Borja Pindado
 380 M Byrke, Long Ear of the Law @Manuel Castañón
 387 R Serra Redeemer @Joshua Raphael
@@ -444,8 +440,6 @@ Replace=.042F fromSheet("BLB showcase")
 383 U Fell @A. M. Sartor
 384 U Wear Down @Iris Compiet
 385 U Stormcatch Mentor @Manuel Castañón
-
-[bundle]
 386 R Thundertrap Trainer @Jesper Ejsing
 
 [special guests]

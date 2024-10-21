@@ -5,10 +5,10 @@ Code=BFZ
 Code2=BFZ
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ
+Booster=10 Common:fromSheet("BFZ cards"), 3 Uncommon:fromSheet("BFZ cards"), 1 RareMythic:fromSheet("BFZ cards"), 1 BasicLand BFZ
 FatPack=9
 FatPackExtraSlots=80 BasicLands
-AdditionalSheetForFoils=fromSheet("EXP Lands")
+AdditionalSheetForFoils=fromSheet("EXP cards")
 AdditionalSetUnlockedInQuest=EXP
 ScryfallCode=BFZ
 

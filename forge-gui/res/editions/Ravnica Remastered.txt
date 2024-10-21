@@ -341,7 +341,7 @@ ScryfallCode=RVR
 444 M Domri Rade @Susumu Kuroi
 445 M Ral Zarek @Fukuzo Katsura
 
-[showcase]
+[retro frame]
 302 R Blazing Archon @Zoltan Boros & Gabor Szikszai
 303 R Blind Obedience @Seb McKinnon
 304 U Condemn @Daren Bader

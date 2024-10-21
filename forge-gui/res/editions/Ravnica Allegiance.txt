@@ -5,7 +5,7 @@ Name=Ravnica Allegiance
 Code2=RNA
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("RNA Secret Cards"), 3 Uncommon:!fromSheet("RNA Secret Cards"), 1 RareMythic:!fromSheet("RNA Secret Cards"), 1 fromSheet("RNA Lands")
+Booster=10 Common:fromSheet("RNA cards"):!fromSheet("RNA Lands"), 3 Uncommon:fromSheet("RNA cards"), 1 RareMythic:fromSheet("RNA cards"), 1 fromSheet("RNA Lands")
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 ChaosDraftThemes=RAVNICA
@@ -271,6 +271,8 @@ ScryfallCode=RNA
 257 C Simic Guildgate @Adam Paquette
 258 C Simic Guildgate @Adam Paquette
 259 R Stomping Ground @James Paick
+
+[precon product]
 260 L Plains @Titus Lunter
 261 L Island @Eytan Zana
 262 L Swamp @Adam Paquette
@@ -284,7 +286,16 @@ ScryfallCode=RNA
 270 C Ragefire @Randy Vargas
 271 U Charging War Boar @Izzy
 272 R Domri's Nodorog @Svetlin Velinov
+
+[buy a box]
 273 M The Haunt of Hightower @Lius Lasahido
+
+[Lands]
+Azorius Guildgate|RNA
+Gruul Guildgate|RNA
+Orzhov Guildgate|RNA
+Rakdos Guildgate|RNA
+Simic Guildgate|RNA
 
 [tokens]
 rg_4_4_beast_trample
