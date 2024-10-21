@@ -4,16 +4,12 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.66-SNAPSHOT</version>
+		<version>${revision}</version>
 	</parent>
 
     <artifactId>forge-lda</artifactId>
     <packaging>jar</packaging>
     <name>Forge LDA</name>
-
-    <properties>
-        <alpha-version>1.6.39.001</alpha-version>
-    </properties>
 
     <build>
         <sourceDirectory>src</sourceDirectory>
@@ -21,8 +17,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -32,7 +28,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-lda-${alpha-version}</finalName>
+        <finalName>forge-lda-${revision}</finalName>
     </build>
 
     <dependencies>
@@ -55,11 +51,6 @@
             <groupId>forge</groupId>
             <artifactId>forge-gui</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.8.1</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>

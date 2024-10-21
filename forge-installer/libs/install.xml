@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<izpack:installation version="5.0"
+                     xmlns:izpack="http://izpack.org/schema/installation"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
+    <info>
+        <appname>$project.build.finalName$</appname>
+        <appversion>$month.date$</appversion>
+        <url>https://card-forge.github.io/forge/</url>
+        <authors>
+            <author name="Forge Developers" email=""/>
+        </authors>
+    </info>
+
+    <guiprefs height="600" resizable="no" width="800">
+		<modifier key="langDisplayType" value="native"/>
+		<modifier key="allXGap" value="0"/>
+		<modifier key="allYGap" value="0"/>
+		<modifier key="labelGap" value="2"/>
+		<modifier key="useButtonIcons" value="yes"/>
+		<modifier key="useHeadingPanel" value="yes"/>
+		<modifier key="useHeadingForSummary" value="yes"/>
+		<modifier key="headingLineCount" value="1"/>
+		<modifier key="headingFontSize" value="1.5"/>
+		<modifier key="headingBackgroundColor" value="0x00ffffff"/>
+		<modifier key="headingPanelCounter" value="text"/>
+    </guiprefs>
+
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+
+    <resources>
+	    <res id="packsLang.xml" src="eng.xml"/>
+        <res id="CustomLangPack.xml_eng" src="eng.xml"/>
+		<res id="HTMLInfoPanel.info" src="ReadMeForge.txt"/>
+		<res id="InfoPanel.info" src="ReadMeForge.txt"/>
+		<res id="TargetPanel.dir.windows" src="default-dir.txt"/>
+		<res id="installer.langsel.img" src="ic_launcher.png"/>
+		<res id="Heading.image" src="ic_launcher.png"/>
+		<res id="Installer.image" src="side.png"/>
+    </resources>
+
+    <variables>
+        <variable name="InstallerFrame.logfilePath" value="Default"/>
+    </variables>
+
+    <panels>
+        <panel classname="HTMLInfoPanel" id="welcome"/>
+        <panel classname="TargetPanel" id="install_dir"/>
+        <panel classname="PacksPanel" id="sdk_pack_select"/>
+        <panel classname="InstallPanel" id="install"/>
+        <panel classname="FinishPanel" id="finish"/>
+		
+    </panels>
+
+    <packs>
+		<pack name="forge.zip" required="yes" preselected="yes" hidden="false">
+			<description>An archive that contains updated Forge application.</description>
+			<file src="forge.zip" targetdir="$INSTALL_PATH/" override="true" unpack="true"/>
+		</pack>
+    </packs>
+</izpack:installation>

@@ -6,7 +6,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.66-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-game</artifactId>
@@ -26,13 +26,13 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.4.0</version>
+            <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
-            <version>7.14.0</version>
+            <version>7.15.0</version>
         </dependency>
     </dependencies>
 </project>

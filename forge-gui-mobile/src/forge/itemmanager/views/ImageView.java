@@ -38,6 +38,8 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
+
 public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
@@ -1101,6 +1103,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             TextureRegion tr = ImageCache.croppedBorderImage(dpImg);
                             g.drawImage(tr, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                         }
+                        //draw plastic effect overlay.
+                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                     }
                     //fake labelname shadow
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
@@ -1123,8 +1127,18 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             }
                         }
                     } else {
-                        //generic box
-                        g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                        if (itemManager.getConfig() == ItemManagerConfig.STRING_ONLY) {
+                            //draw generic box for stringOnly config
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
+                        } else {
+                            //draw missing box display if not avail or loading...
+                            g.drawImage(FSkin.getDeckbox().get(0), FSkin.getDeckbox().get(0), x, y, w, h, Color.GREEN, selected);
+                            //temporary fill image
+                            g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                            //draw plastic effect overlay.
+                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+
+                        }
                     }
                     if (deckColor != null) {
                         //deck color identity

@@ -1,0 +1,288 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>forge</artifactId>
+        <groupId>forge</groupId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>forge-installer</artifactId>
+    <packaging>pom</packaging>
+    <name>Forge Installer</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate MonthDate code to month.date property -->
+                            <name>month.date</name>
+                            <pattern>MM.dd</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate versionName from revision property to snapshot-version property  -->
+                            <name>snapshot-version</name>
+                            <value>${revision}</value>
+                            <regex>-SNAPSHOT</regex>
+                            <replacement>-SNAPSHOT-${month.date}</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${project.basedir}/libs</basedir>
+                    <filesToInclude>default-dir.txt, install.xml, eng.xml</filesToInclude>
+                    <outputBasedir>${project.basedir}/target</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}</value>
+                        </replacement>
+                        <replacement>
+                            <token>$month.date$</token>
+                            <value>${month.date}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui-mobile-dev</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>forge</groupId>
+            <artifactId>forge-gui-desktop</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <profiles>
+        <profile>
+            <id>windows-linux</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.izpack</groupId>
+                        <artifactId>izpack-maven-plugin</artifactId>
+                        <version>5.2.3</version>
+                        <executions>
+                            <execution>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>izpack</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- base for relative paths in izpack descriptor -->
+                                    <baseDir>${project.basedir}/target</baseDir>
+                                    <installFile>${project.basedir}/target/install.xml</installFile>
+                                    <outputDirectory>${project.basedir}/target</outputDirectory>
+                                    <finalName>${project.build.finalName}</finalName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.izpack</groupId>
+                                <artifactId>izpack-panel</artifactId>
+                                <version>5.2.3</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.ant</groupId>
+                                <artifactId>ant-nodeps</artifactId>
+                                <version>1.8.1</version>
+                            </dependency>
+                        </dependencies>
+                        <executions>
+                            <execution>
+                                <id>izpack-prepare</id>
+                                <phase>initialize</phase>
+                                <configuration>
+                                    <target>
+                                        <copy todir="${project.basedir}/target">
+                                            <fileset dir="${basedir}" includes="*.png" />
+                                            <fileset dir="${basedir}" includes="*.txt" />
+                                        </copy>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>win-linux-app-bundle</id>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <target>
+                                        <!-- Windows/Linux archive -->
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}" />
+                                        <copy todir="${project.build.directory}/${project.build.finalName}">
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.cmd" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="forge.profile.properties.example" />
+                                            <fileset dir="${basedir}/" includes="sentry.properties" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="LICENSE.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/">
+                                                <include name="res/**" />
+                                                <exclude name="res/cardsfolder/**" />
+                                            </fileset>
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge-gui-desktop-${project.version}-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.exe" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/tools" includes="gdx-particle-editor.jar" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.exe" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.command" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.cmd" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure-mac.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target/classes" includes="build.txt" />
+                                        </copy>
+                                        <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
+                                        <zip destfile="${project.build.directory}/${project.build.finalName}/res/cardsfolder/cardsfolder.zip" basedir="${basedir}/../forge-gui/res/cardsfolder" level="1" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.cmd" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-mac.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.cmd" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.cmd" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.exe" perm="a+rx" />
+                                        <zip destfile="${basedir}/target/forge.zip">
+                                            <zipfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="forge.sh" />
+                                                <include name="forge.command" />
+                                                <include name="forge.cmd" />
+                                                <include name="forge.exe" />
+                                                <include name="forge-adventure.sh" />
+                                                <include name="forge-adventure.command" />
+                                                <include name="forge-adventure.cmd" />
+                                                <include name="forge-adventure.exe" />
+                                                <include name="adventure-editor.sh" />
+                                                <include name="adventure-editor.command" />
+                                                <include name="adventure-editor.cmd" />
+                                                <include name="adventure-editor.exe" />
+                                            </zipfileset>
+                                            <zipfileset dir="${project.build.directory}/${project.build.finalName}">
+                                                <include name="**" />
+                                                <exclude name="forge.sh" />
+                                                <exclude name="forge.command" />
+                                                <exclude name="forge.cmd" />
+                                                <exclude name="forge.exe" />
+                                                <exclude name="forge-adventure.sh" />
+                                                <exclude name="forge-adventure.command" />
+                                                <exclude name="forge-adventure.cmd" />
+                                                <exclude name="forge-adventure.exe" />
+                                                <exclude name="adventure-editor.sh" />
+                                                <exclude name="adventure-editor.command" />
+                                                <exclude name="adventure-editor.cmd" />
+                                                <exclude name="adventure-editor.exe" />
+                                            </zipfileset>
+                                        </zip>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>3.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>released-version</id>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>released-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>parse-version</id>
+                                <goals>
+                                    <goal>parse-version</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>attach-distribution</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>attach-artifact</goal>
+                                </goals>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>${basedir}/target/${project.build.finalName}.jar</file>
+                                            <type>jar</type>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

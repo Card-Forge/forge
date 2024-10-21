@@ -1,10 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <mandatory.java.args>--add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED --add-opens java.desktop/javax.swing.event=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/java.awt.image=ALL-UNNAMED --add-opens java.desktop/java.awt.color=ALL-UNNAMED --add-opens java.desktop/sun.awt.image=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8</mandatory.java.args>
+    </properties>
 
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.66-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -27,6 +32,7 @@
                     <include>**/bg_splash.png</include>
                     <include>**/bg_texture.jpg</include>
                     <include>**/font1.ttf</include>
+                    <include>**/logo.gif</include>
                 </includes>
             </resource>
         </resources>
@@ -34,91 +40,17 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.2</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
-                    <outputBasedir>${project.build.directory}</outputBasedir>
-                    <outputDir>.</outputDir>
-                    <regex>false</regex>
-                    <replacements>
-                        <replacement>
-                            <token>$project.build.finalName$</token>
-                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
-                        </replacement>
-                    </replacements>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
-                <version>1.7.25</version>
+                <version>2.5.1</version>
                 <executions>
                     <execution>
                         <id>l4j-adv</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>launch4j</goal>
-                        </goals>
-                        <configuration>
-                            <headerType>gui</headerType>
-                            <outfile>${project.build.directory}/forge-adventure-java8.exe</outfile>
-                            <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
-                            <dontWrapJar>true</dontWrapJar>
-                            <errTitle>forge</errTitle>
-                            <icon>src/main/config/forge-adventure.ico</icon>
-                            <classPath>
-                                <mainClass>forge.app.Main</mainClass>
-                                <addDependencies>false</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
-                            <jre>
-                                <minVersion>1.8.0</minVersion>
-                                <maxHeapSize>4096</maxHeapSize>
-                                <opts>
-                                    <opt>-Dfile.encoding=UTF-8</opt>
-                                </opts>
-                            </jre>
-                            <versionInfo>
-                                <fileVersion>
-                                    1.0.0.0
-                                </fileVersion>
-                                <txtFileVersion>
-                                    1.0.0.0
-                                </txtFileVersion>
-                                <fileDescription>Forge</fileDescription>
-                                <copyright>Forge</copyright>
-                                <productVersion>
-                                    1.0.0.0
-                                </productVersion>
-                                <txtProductVersion>
-                                    1.0.0.0
-                                </txtProductVersion>
-                                <productName>forge-adventure</productName>
-                                <internalName>forge-adventure</internalName>
-                                <originalFilename>forge-adventure-java8.exe</originalFilename>
-                            </versionInfo>
-                        </configuration>
-                    </execution>
-                    <!--extra-->
-                    <execution>
-                        <id>l4j-adv2</id>
                         <phase>package</phase>
                         <goals>
                             <goal>launch4j</goal>
@@ -129,40 +61,14 @@
                             <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                             <dontWrapJar>true</dontWrapJar>
                             <errTitle>forge</errTitle>
-                            <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+                            <downloadUrl>https://bell-sw.com/pages/downloads/#jdk-17-lts</downloadUrl>
                             <icon>src/main/config/forge-adventure.ico</icon>
-                            <classPath>
-                                <mainClass>forge.app.Main</mainClass>
-                                <addDependencies>false</addDependencies>
-                                <preCp>anything</preCp>
-                            </classPath>
                             <jre>
-                                <minVersion>11.0.1</minVersion>
-                                <jdkPreference>jdkOnly</jdkPreference>
+                                <minVersion>17</minVersion>
+                                <requiresJdk>true</requiresJdk>
                                 <maxHeapSize>4096</maxHeapSize>
                                 <opts>
-                                    <opt>-Dfile.encoding=UTF-8</opt>
-                                    <opt>--add-opens java.base/java.lang=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.math=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.nio=ALL-UNNAMED</opt>
-                                    <opt>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.util=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.lang.reflect=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.text=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/java.awt=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/java.awt.font=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/java.awt.image=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/java.awt.color=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/sun.awt.image=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/javax.swing=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/javax.swing.border=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/javax.swing.event=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/sun.swing=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.desktop/java.beans=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.util.concurrent=ALL-UNNAMED</opt>
-                                    <opt>--add-opens java.base/java.net=ALL-UNNAMED</opt>
-                                    <opt>-Dio.netty.tryReflectionSetAccessible=true</opt>
+                                    <opt>${mandatory.java.args}</opt>
                                 </opts>
                             </jre>
                             <versionInfo>
@@ -190,6 +96,36 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${basedir}/${configSourceDirectory}</basedir>
+                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                        <replacement>
+                            <token>$mandatory.java.args$</token>
+                            <value>${mandatory.java.args}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <attach>false</attach>
@@ -201,6 +137,9 @@
                             <mainClass>forge.app.Main</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
+                        <manifestEntries>
+                            <SplashScreen-Image>splash/logo.gif</SplashScreen-Image>
+                        </manifestEntries>
                     </archive>
                 </configuration>
                 <executions>
@@ -226,25 +165,25 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-lwjgl3</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-platform</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-freetype-platform</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
             <classifier>natives-desktop</classifier>
         </dependency>
         <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
-            <version>1.4</version>
+            <version>1.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx-controllers</groupId>
@@ -260,7 +199,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-box2d-platform</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
             <classifier>natives-desktop</classifier>
         </dependency>
     </dependencies>

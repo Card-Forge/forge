@@ -23,10 +23,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
           server-id: cardforge-repo
@@ -45,7 +45,7 @@ jobs:
         run: |
           export DISPLAY=":1"
           Xvfb :1 -screen 0 800x600x8 &
-          mvn -U -B clean -P windows-linux install -T 1C -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} 
+          mvn -U -B clean -P windows-linux install -T 1C -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
@@ -55,13 +55,13 @@ jobs:
 
       - name: Rename before upload
         run: |
-          mkdir tarball
+          mkdir izpack
           # If this works just gotta figure out how to append datetime
-          mv /home/runner/.m2/repository/forge/forge-gui-desktop/*/*.bz2 tarball/
-          cd tarball
-          out="$(basename -s .tar.bz2 *)"
+          mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
+          cd izpack
+          out="$(basename -s .jar *)"
           d=$(date +%m-%d)
-          mv "${out}.tar.bz2" "${out}-${d}.tar.bz2"
+          mv "${out}.jar" "${out}-${d}.jar"
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -69,10 +69,9 @@ jobs:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: tarball/
+          local-dir: izpack/
           server-dir: downloads/dailysnapshots/
           exclude: |
-            *.jar
             *.pom
             *.repositories
             *.xml
