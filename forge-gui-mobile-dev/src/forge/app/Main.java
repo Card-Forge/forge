@@ -2,6 +2,7 @@ package forge.app;
 
 import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.JVMOptions;
 import forge.util.OperatingSystem;
@@ -63,6 +64,11 @@ public class Main {
         @Override
         public String getDownloadsDir() {
             return System.getProperty("user.home") + "/Downloads/";
+        }
+
+        @Override
+        public String getVersionString() {
+            return BuildInfo.getVersionString();
         }
 
         @Override
