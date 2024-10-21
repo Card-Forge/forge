@@ -54,7 +54,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public String getCurrentVersion() {
-        return Forge.CURRENT_VERSION;
+        return Forge.getDeviceAdapter().getVersionString();
     }
 
     @Override

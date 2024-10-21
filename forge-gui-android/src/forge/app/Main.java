@@ -288,7 +288,7 @@ public class Main extends ForgeAndroidApplication {
     private void loadGame(final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             forgeLogo = findViewById(getResources().getIdentifier("logo_id", "id", getPackageName()));
-            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName(), versionString), config);
+            forgeView = initializeForView(Forge.getApp(getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT, Build.VERSION.RELEASE, getDeviceName()), config);
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 0f, 1f).setDuration(1800), null, new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
