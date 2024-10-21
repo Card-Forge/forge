@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
+    private static final String versionString = BuildInfo.getVersionString();
     public static void main(String[] args) {
         checkJVMArgs(System.getProperty("java.version"));
     }
@@ -40,7 +40,7 @@ public class Main {
         if (!JVMOptions.checkRuntime(arguments)) {
             new DialogWindow("Error", JVMOptions.getStringBuilder().toString());
         } else
-            new GameLauncher();
+            new GameLauncher(versionString);
     }
 
     public static class DesktopAdapter implements IDeviceAdapter {
@@ -68,7 +68,7 @@ public class Main {
 
         @Override
         public String getVersionString() {
-            return BuildInfo.getVersionString();
+            return versionString;
         }
 
         @Override
