@@ -1,7 +1,11 @@
 package forge;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
@@ -50,8 +54,6 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.66-SNAPSHOT";
-
     private static ApplicationListener app = null;
     static Scene currentScene = null;
     static Array<Scene> lastScene = new Array<>();
@@ -88,6 +90,7 @@ public class Forge implements ApplicationListener {
     private static boolean destroyThis = false;
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
+    public static float deltaTime = 0f;
     private static boolean isloadingaMatch = false;
     public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
@@ -122,20 +125,22 @@ public class Forge implements ApplicationListener {
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
-    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
-        app = new Forge();
-        if (GuiBase.getInterface() == null) {
-            clipboard = clipboard0;
-            deviceAdapter = deviceAdapter0;
-            GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
-            GuiBase.setInterface(new GuiMobile(assetDir0));
-            GuiBase.enablePropertyConfig(value);
-            isPortraitMode = androidOrientation;
-            totalDeviceRAM = totalRAM;
-            isTabletDevice = isTablet;
-            androidVersion = AndroidAPI;
+    public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
+        if (app == null) {
+            app = new Forge();
+            if (GuiBase.getInterface() == null) {
+                clipboard = clipboard0;
+                deviceAdapter = deviceAdapter0;
+                GuiBase.setUsingAppDirectory(assetDir0.contains("forge.app")); //obb directory on android uses the package name as entrypoint
+                GuiBase.setInterface(new GuiMobile(assetDir0));
+                GuiBase.enablePropertyConfig(propertyConfig);
+                isPortraitMode = androidOrientation;
+                totalDeviceRAM = totalRAM;
+                isTabletDevice = isTablet;
+                androidVersion = AndroidAPI;
+            }
+            GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         }
-        GuiBase.setDeviceInfo(deviceName, AndroidRelease, AndroidAPI, totalRAM);
         return app;
     }
 
@@ -154,6 +159,7 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
+        getDeviceAdapter().closeSplashScreen();
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
@@ -709,6 +715,7 @@ public class Forge implements ApplicationListener {
                             }
                         }
                     }
+                    deltaTime = 0f;
                 }
             }
         });
@@ -845,6 +852,10 @@ public class Forge implements ApplicationListener {
             ForgeAnimation.advanceAll();
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+            //set delta for rotation
+            deltaTime += Gdx.graphics.getDeltaTime();
+            if (deltaTime > 22.5f)
+                deltaTime = 0f;
 
             FContainer screen = currentScreen;
 

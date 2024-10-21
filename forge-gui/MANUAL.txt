@@ -108,8 +108,8 @@ If you're trying to run Forge for the first time, but it doesn't open up, you ca
 - Current versions of Forge no longer include a launcher script for Mac OS, proceed to step three.
 
 3) Run Forge
-- On Windows, just type "forge.exe", Enter (If you have Java 8 installed, use forge-java8.exe)
-  if you want to run mobile/adventure instead of the desktop interface, type "forge-adventure.exe", Enter (If you have Java 8 installed, use forge-adventure-java8.exe)
+- On Windows, just type "forge.exe", Enter.
+  if you want to run mobile/adventure instead of the desktop interface, type "forge-adventure.exe", Enter.
 - On Linux, just type "forge.sh", Enter (if you want to run mobile/adventure interface use forge-adventure.sh)
 - Launch the Forge application bundle by double clicking on the program named "Forge.app".
 
@@ -125,7 +125,7 @@ if you're running Windows 7, make sure you're running the program as an admin, o
 Java Issues:
 ------------
 
-Forge requires Java 8 as minimum installed and will not run if you have an earlier version of Java. You will need to update to Java 8. (Java 11 is recommended)
+Forge requires Java 17 as minimum installed and will not run if you have an earlier version of Java. You will need to update to Java 17. (Java 21 is recommended)
 
 
 Card Picture Issues:
