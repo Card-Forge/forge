@@ -72,7 +72,6 @@ jobs:
           local-dir: izpack/
           server-dir: downloads/dailysnapshots/
           exclude: |
-            *.jar
             *.pom
             *.repositories
             *.xml
