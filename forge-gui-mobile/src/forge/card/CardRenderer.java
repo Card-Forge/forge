@@ -59,6 +59,8 @@ import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
 
+import static forge.assets.FSkin.getDefaultSkinFile;
+
 public class CardRenderer {
     public enum CardStackPosition {
         Top,
@@ -818,7 +820,7 @@ public class CardRenderer {
             g.setAlphaComposite(0.6f);
         }
         if (onbattlefield && onTop) {
-            drawAbilityIcons(g, card, cx, cy, cw, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
+            drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
         } else if (canShow && !onbattlefield && showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
@@ -873,7 +875,7 @@ public class CardRenderer {
         g.setAlphaComposite(oldAlpha);
     }
 
-    public static void drawAbilityIcons(Graphics g, CardView card, float cx, float cy, float cw, float abiX, float abiY, float abiScale, float abiSpace, boolean showAbilityIcons) {
+    public static void drawAbilityIcons(Graphics g, CardView card, float cx, float cy, float cw, float ch, float abiX, float abiY, float abiScale, float abiSpace, boolean showAbilityIcons) {
         float abiCount = 0;
         //show token indicator as status
         if (card.isToken()) {
@@ -882,9 +884,19 @@ public class CardRenderer {
             abiCount += 1;
         }
         if (card.isSick()) {
-            CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
-            abiY += abiSpace + 1.7f;
-            abiCount += 1;
+            Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
+            if (spiral != null) {
+                float newX = card.isTapped() ? cx + cw / 4.5f : cx;
+                float newY = card.isTapped() ? cy + cw / 4.75f : cy;
+                g.startRotateTransform(newX + cw / 2f, newY + ch / 2, -(Forge.deltaTime * 16f));
+                g.drawImage(spiral, newX, newY, cw, ch);
+                g.endTransform();
+            } else {
+                //old indicator
+                CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
+                abiY += abiSpace + 1.7f;
+                abiCount += 1;
+            }
         }
         if (card.isPhasedOut()) {
             CardFaceSymbols.drawSymbol("phasing", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
