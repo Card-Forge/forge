@@ -186,7 +186,6 @@
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure-mac.sh" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
@@ -198,7 +197,6 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
-                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-mac.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.sh" perm="a+rx" />
