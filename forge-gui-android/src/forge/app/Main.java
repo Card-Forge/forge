@@ -215,7 +215,12 @@ public class Main extends ForgeAndroidApplication {
         TextView text = new TextView(this);
         text.setGravity(Gravity.LEFT);
         text.setTypeface(Typeface.SERIF);
-        String SP = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? "Files & Media" : "Storage Permission";
+        String SP = "Storage Permission";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            SP = "Photos and Videos, Music and Audio Permissions";
+        } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            SP = "Files & Media Permissions";
+        }
 
         String title = "Forge needs " + SP + " to run properly...\n" +
                 "Follow these simple steps:\n\n";
@@ -407,8 +412,14 @@ public class Main extends ForgeAndroidApplication {
         int pid = android.os.Process.myPid();
         int uid = android.os.Process.myUid();
         try {
-            int result = getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid);
-            return result == PackageManager.PERMISSION_GRANTED;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_IMAGES, pid, uid) == PackageManager.PERMISSION_GRANTED)
+                    if (getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_AUDIO, pid, uid) == PackageManager.PERMISSION_GRANTED)
+                        return getBaseContext().checkPermission(android.Manifest.permission.READ_MEDIA_VIDEO, pid, uid) == PackageManager.PERMISSION_GRANTED;
+                return false;
+            } else {
+                return getBaseContext().checkPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, pid, uid) == PackageManager.PERMISSION_GRANTED;
+            }
         } catch (NullPointerException e) {
             return false;
         }
