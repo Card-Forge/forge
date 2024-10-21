@@ -105,7 +105,7 @@ jobs:
               version=$(echo "$apk_file" | grep -oP 'forge-android-\K\d+\.\d+\.\d+-SNAPSHOT' | sed 's/-signed-aligned.apk//')
               echo "APK File: $apk_file"
               echo "Version: $version"
-              mv *.apk "forge-android-$version-$d-signed-aligned.apk"
+              # mv *.apk "forge-android-$version-$d-signed-aligned.apk"
 
               echo "$version-$d" > version.txt
           else
