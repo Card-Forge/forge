@@ -1,23 +1,21 @@
 package forge.gui.card;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import forge.card.CardDb;
+import forge.item.IPaperCard;
+import forge.localinstance.properties.ForgeConstants;
+import forge.model.FModel;
 import forge.util.TextUtil;
+import forge.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import forge.item.IPaperCard;
-import forge.localinstance.properties.ForgeConstants;
-import forge.model.FModel;
-import forge.util.XmlUtil;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 /** 
  * Preferences associated with individual cards

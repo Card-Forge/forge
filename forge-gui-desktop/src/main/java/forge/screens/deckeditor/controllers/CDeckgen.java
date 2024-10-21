@@ -1,12 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
 import forge.Singletons;
 import forge.card.CardDb;
-import forge.card.CardRulesPredicates;
 import forge.card.MagicColor;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -20,12 +15,15 @@ import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VDeckgen;
-import forge.util.Aggregates;
+import forge.util.StreamUtil;
+
+import java.util.List;
 
 
 /**
@@ -70,9 +68,10 @@ public enum CDeckgen implements ICDoc {
 
         final Deck randomDeck = new Deck();
 
-        final Predicate<PaperCard> notBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard::getRules));
-        final Iterable<PaperCard> source = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCards(), notBasicLand);
-        randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
+        List<PaperCard> randomCards = FModel.getMagicDb().getCommonCards().streamUniqueCards()
+                .filter(PaperCardPredicates.NOT_BASIC_LAND)
+                .collect(StreamUtil.random(15 * 5));
+        randomDeck.getMain().addAllFlat(randomCards);
 
         for(final String landName : MagicColor.Constant.BASIC_LANDS) {
             randomDeck.getMain().add(landName, 1);

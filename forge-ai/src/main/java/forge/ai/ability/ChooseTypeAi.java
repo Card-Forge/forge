@@ -1,24 +1,11 @@
 package forge.ai.ability;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.Iterables;
-import forge.ai.AiCardMemory;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
+import forge.ai.*;
 import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,6 +13,11 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ChooseTypeAi extends SpellAbilityAi {
     @Override
@@ -65,7 +57,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
         int avgPower = 0;
         
         // predict the opposition
-        CardCollection oppCreatures = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        CardCollection oppCreatures = CardLists.filter(aiPlayer.getOpponents().getCreaturesInPlay(), CardPredicates.UNTAPPED);
         int maxOppPower = 0;
         int maxOppToughness = 0;
         int oppUsefulCreatures = 0;
@@ -85,7 +77,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
 
         if (maxX > 1) {
             CardCollection cre = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield),
-                    CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED);
+                    CardPredicates.isType(chosenType), CardPredicates.UNTAPPED);
             if (!cre.isEmpty()) {
                 for (Card c: cre) {
                     avgPower += c.getNetPower();

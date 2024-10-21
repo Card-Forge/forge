@@ -17,8 +17,6 @@
  */
 package forge.game;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
@@ -27,10 +25,11 @@ import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
 import forge.deck.CardPool;
 import forge.deck.Deck;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import forge.util.IterableUtil;
 import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderRecursiveFolderWithUserFolder;
 
@@ -40,6 +39,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 
 
 public class GameFormat implements Comparable<GameFormat> {
@@ -138,17 +138,17 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterPrinted = this.buildFilterPrinted();
     }
     protected Predicate<PaperCard> buildFilter(boolean printed) {
-        Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.getBannedCardNames()));
+        Predicate<PaperCard> p = PaperCardPredicates.names(this.getBannedCardNames()).negate();
 
         if (FormatSubType.ARENA.equals(this.getFormatSubType())) {
-            p = Predicates.and(p, Predicates.not(IPaperCard.Predicates.Presets.IS_UNREBALANCED));
+            p = p.and(PaperCardPredicates.IS_UNREBALANCED.negate());
         } else {
-            p = Predicates.and(p, Predicates.not(IPaperCard.Predicates.Presets.IS_REBALANCED));
+            p = p.and(PaperCardPredicates.IS_REBALANCED.negate());
         }
 
         if (!this.getAllowedSetCodes().isEmpty()) {
-            p = Predicates.and(p, printed ?
-                    IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed) :
+            p = p.and(printed ?
+                    PaperCardPredicates.printedInSets(this.getAllowedSetCodes(), printed) :
                     StaticData.instance().getCommonCards().wasPrintedInSets(this.getAllowedSetCodes()));
         }
         if (!this.getAllowedRarities().isEmpty()) {
@@ -156,10 +156,10 @@ public class GameFormat implements Comparable<GameFormat> {
             for (CardRarity cr: this.getAllowedRarities()) {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
-            p = Predicates.and(p, Predicates.or(crp));
+            p = p.and(IterableUtil.or(crp));
         }
         if (!this.getAdditionalCards().isEmpty()) {
-            p = Predicates.or(p, IPaperCard.Predicates.names(this.getAdditionalCards()));
+            p = p.or(PaperCardPredicates.names(this.getAdditionalCards()));
         }
         return p;
     }
@@ -264,7 +264,7 @@ public class GameFormat implements Comparable<GameFormat> {
         {
             final List<PaperCard> erroneousCI = new ArrayList<>();
             for (Entry<PaperCard, Integer> poolEntry : allCards) {
-                if (!getFilterRules().apply(poolEntry.getKey())) {
+                if (!getFilterRules().test(poolEntry.getKey())) {
                     erroneousCI.add(poolEntry.getKey());
                 }
             }
@@ -612,7 +612,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Set<GameFormat> getAllFormatsOfCard(PaperCard card) {
             Set<GameFormat> result = new HashSet<>();
             for (GameFormat gf : naturallyOrdered) {
-                if (gf.getFilterRules().apply(card)) {
+                if (gf.getFilterRules().test(card)) {
                     result.add(gf);
                 }
             }

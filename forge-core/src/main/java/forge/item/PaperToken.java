@@ -1,13 +1,12 @@
 package forge.item;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
+import forge.ImageKeys;
 import forge.card.*;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
-import forge.ImageKeys;
-import forge.util.MyRandom;
+import java.util.ArrayList;
+import java.util.Locale;
 
 public class PaperToken implements InventoryItemFromSet, IPaperCard {
     private static final long serialVersionUID = 1L;

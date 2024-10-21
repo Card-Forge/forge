@@ -1,22 +1,14 @@
 package forge.util;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.util.lang.*;
+import org.apache.commons.lang3.StringUtils;
 
-import forge.util.lang.LangChinese;
-import forge.util.lang.LangEnglish;
-import forge.util.lang.LangGerman;
-import forge.util.lang.LangItalian;
-import forge.util.lang.LangJapanese;
-import forge.util.lang.LangSpanish;
-import forge.util.lang.LangFrench;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.regex.Pattern;
 
 /**
  * Static library containing language-related utility methods.

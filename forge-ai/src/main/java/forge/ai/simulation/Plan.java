@@ -1,14 +1,13 @@
 package forge.ai.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Joiner;
-
 import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.spellability.SpellAbility;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Plan {
     private final List<Decision> decisions;

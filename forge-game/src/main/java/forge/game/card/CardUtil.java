@@ -17,14 +17,9 @@
  */
 package forge.game.card;
 
-import java.util.List;
-import java.util.Set;
-
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import forge.ImageKeys;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -42,6 +37,10 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
+
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public final class CardUtil {
     // disable instantiation
@@ -142,7 +141,9 @@ public final class CardUtil {
     }
 
     public static List<SpellAbility> getThisTurnActivated(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
-        return Lists.newArrayList(Iterables.filter(src.getGame().getStack().getAbilityActivatedThisTurn(), SpellAbilityPredicates.isValid(valid.split(","), controller, src, ctb)));
+        return src.getGame().getStack().getAbilityActivatedThisTurn().stream()
+                .filter(SpellAbilityPredicates.isValid(valid.split(","), controller, src, ctb))
+                .collect(Collectors.toList());
     }
 
     public static List<Card> getCastSinceBeginningOfYourLastTurn(final String valid, final Card src, final CardTraitBase ctb, final Player controller) {

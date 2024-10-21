@@ -6,14 +6,13 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import com.google.common.base.Function;
 
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;

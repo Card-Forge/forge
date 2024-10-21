@@ -2,9 +2,9 @@ package forge.game;
 
 import java.util.EnumSet;
 import java.util.Set;
+import java.util.function.Function;
 
 import com.google.common.base.Enums;
-import com.google.common.base.Function;
 
 import forge.StaticData;
 import forge.deck.CardPool;

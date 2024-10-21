@@ -22,7 +22,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -144,7 +143,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public final CardCollectionView getEnchantedBy() {
         // enchanted means attached by Aura
-        return CardLists.filter(getAttachedCards(), CardPredicates.Presets.AURA);
+        return CardLists.filter(getAttachedCards(), CardPredicates.AURA);
     }
 
     // doesn't include phased out cards
@@ -176,7 +175,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
 
     public final boolean isEnchanted() {
         // enchanted means attached by Aura
-        return Iterables.any(getAttachedCards(), CardPredicates.Presets.AURA);
+        return getAttachedCards().anyMatch(CardPredicates.AURA);
     }
 
     public final boolean hasCardAttachment(Card c) {
@@ -188,7 +187,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final boolean hasCardAttachment(final String cardName) {
-        return Iterables.any(getAttachedCards(), CardPredicates.nameEquals(cardName));
+        return getAttachedCards().anyMatch(CardPredicates.nameEquals(cardName));
     }
     public final boolean isEnchantedBy(final String cardName) {
         // Rule 303.4k  Even if c is no Aura it still counts

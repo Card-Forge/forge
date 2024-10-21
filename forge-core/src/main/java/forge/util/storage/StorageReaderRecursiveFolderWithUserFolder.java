@@ -17,21 +17,13 @@
  */
 package forge.util.storage;
 
+import forge.util.TextUtil;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import com.google.common.base.Function;
-
-import forge.util.TextUtil;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * This class treats every file in the given folder as a source for a named

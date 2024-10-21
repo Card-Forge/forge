@@ -1,8 +1,6 @@
 package forge.ai.ability;
 
 
-import java.util.Map;
-
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.card.Card;
@@ -12,6 +10,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+
+import java.util.Map;
 
 public class RollDiceAi extends SpellAbilityAi {
     @Override

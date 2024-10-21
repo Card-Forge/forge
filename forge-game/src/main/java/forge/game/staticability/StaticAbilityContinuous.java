@@ -45,6 +45,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * The Class StaticAbility_Continuous.
@@ -173,7 +174,7 @@ public final class StaticAbilityContinuous {
                 // update keywords with Chosen parts
                 final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
 
-                Iterables.removeIf(addKeywords, input -> {
+                addKeywords.removeIf(input -> {
                     if (!hostCard.hasChosenColor() && input.contains("ChosenColor")) {
                         return true;
                     }
@@ -232,7 +233,7 @@ public final class StaticAbilityContinuous {
                         CardCollectionView lands = hostCard.getController().getLandsInPlay();
                         final List<String> basic = MagicColor.Constant.BASIC_LANDS;
                         for (String type : basic) {
-                            if (Iterables.any(lands, CardPredicates.isType(type))) {
+                            if (lands.anyMatch(CardPredicates.isType(type))) {
                                 String y = input.replaceAll("YourBasic", type);
                                 newKeywords.add(y);
                             }
@@ -260,7 +261,7 @@ public final class StaticAbilityContinuous {
 
                 addKeywords.addAll(newKeywords);
 
-                addKeywords = Lists.transform(addKeywords, input -> {
+                addKeywords = addKeywords.stream().map(input -> {
                     if (hostCard.hasChosenColor()) {
                         input = input.replaceAll("ChosenColor", StringUtils.capitalize(hostCard.getChosenColor()));
                         input = input.replaceAll("chosenColor", hostCard.getChosenColor().toLowerCase());
@@ -289,7 +290,7 @@ public final class StaticAbilityContinuous {
                         input = input.replace("N", String.valueOf(AbilityUtils.calculateAmount(hostCard, params.get("CalcKeywordN"), stAb)));
                     }
                     return input;
-                });
+                }).collect(Collectors.toList());
 
                 if (params.containsKey("SharedKeywordsZone")) {
                     List<ZoneType> zones = ZoneType.listValueOf(params.get("SharedKeywordsZone"));
@@ -375,7 +376,7 @@ public final class StaticAbilityContinuous {
                 addTypes = Lists.newArrayList(Arrays.asList(params.get("AddType").split(" & ")));
                 List<String> newTypes = Lists.newArrayList();
 
-                Iterables.removeIf(addTypes, input -> {
+                addTypes.removeIf(input -> {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
@@ -400,7 +401,7 @@ public final class StaticAbilityContinuous {
                 });
                 addTypes.addAll(newTypes);
 
-                addTypes = Lists.transform(addTypes, input -> {
+                addTypes = addTypes.stream().map(input -> {
                     if (hostCard.hasChosenType2()) {
                         input = input.replaceAll("ChosenType2", hostCard.getChosenType2());
                     }
@@ -408,13 +409,13 @@ public final class StaticAbilityContinuous {
                         input = input.replaceAll("ChosenType", hostCard.getChosenType());
                     }
                     return input;
-                });
+                }).collect(Collectors.toList());
             }
 
             if (params.containsKey("RemoveType")) {
                 removeTypes = Lists.newArrayList(Arrays.asList(params.get("RemoveType").split(" & ")));
 
-                Iterables.removeIf(removeTypes, input -> {
+                removeTypes.removeIf(input -> {
                     if (input.equals("ChosenType") && !hostCard.hasChosenType()) {
                         return true;
                     }
@@ -730,7 +731,7 @@ public final class StaticAbilityContinuous {
                     newKeywords = Lists.newArrayList(addKeywords);
                     final List<String> extraKeywords = Lists.newArrayList();
 
-                    Iterables.removeIf(newKeywords, input -> {
+                    newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.startsWith("Protection") && input.contains("CardColors")) {
                             for (Byte color : affectedCard.getColor()) {
@@ -743,7 +744,7 @@ public final class StaticAbilityContinuous {
                     });
                     newKeywords.addAll(extraKeywords);
 
-                    newKeywords = Lists.transform(newKeywords, input -> {
+                    newKeywords = newKeywords.stream().map(input -> {
                         int reduced = 0;
                         if (stAb.hasParam("ReduceCost")) {
                            reduced = AbilityUtils.calculateAmount(hostCard, stAb.getParam("ReduceCost"), stAb);
@@ -763,7 +764,7 @@ public final class StaticAbilityContinuous {
                             input = input.replace("ConvertedManaCost", costcmc);
                         }
                         return input;
-                    });
+                    }).collect(Collectors.toList());
                 }
 
                 affectedCard.addChangedCardKeywords(newKeywords, removeKeywords,

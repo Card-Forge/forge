@@ -1,7 +1,6 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-
 import forge.ai.AiPlayDecision;
 import forge.ai.PlayerControllerAi;
 import forge.game.ability.AbilityUtils;

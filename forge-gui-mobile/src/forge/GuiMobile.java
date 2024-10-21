@@ -3,7 +3,6 @@ package forge;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.google.common.base.Function;
 import forge.adventure.stage.MapStage;
 import forge.assets.*;
 import forge.card.CardRenderer;
@@ -32,6 +31,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Function;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
