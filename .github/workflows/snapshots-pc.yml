@@ -60,7 +60,7 @@ jobs:
           mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
           cd izpack
           out="$(basename -s .jar *)"
-          d=$(date +%m-%d)
+          d=$(date +%m.%d)
           mv "${out}.jar" "${out}-${d}.jar"
 
       - name: 📂 Sync files
