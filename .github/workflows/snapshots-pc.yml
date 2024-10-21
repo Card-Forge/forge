@@ -58,10 +58,15 @@ jobs:
           mkdir izpack
           # If this works just gotta figure out how to append datetime
           mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
+          mv /home/runner/.m2/repository/forge/forge-installer/*/*.bz2 izpack/
           cd izpack
-          out="$(basename -s .jar *)"
           d=$(date +%m.%d)
-          mv "${out}.jar" "${out}-${d}.jar"
+          # rename installer
+          outj="$(basename -s .jar *)"
+          mv "${outj}.jar" "${outj}-${d}.jar"
+          # rename archive
+          outb="$(basename -s .tar.bz2 *)"
+          mv "${outb}.tar.bz2" "${outb}-${d}.tar.bz2"
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4

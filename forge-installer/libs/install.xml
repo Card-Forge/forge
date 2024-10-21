@@ -30,6 +30,10 @@
         <langpack iso3="eng"/>
     </locale>
 
+	<listeners>
+        <listener classname="ChmodInstallerListener" stage="install"/>
+    </listeners>
+
     <resources>
 	    <res id="packsLang.xml" src="eng.xml"/>
         <res id="CustomLangPack.xml_eng" src="eng.xml"/>
@@ -55,9 +59,24 @@
     </panels>
 
     <packs>
-		<pack name="forge.zip" required="yes" preselected="yes" hidden="false">
+		<pack name="Forge pack" required="yes" preselected="yes" hidden="false">
 			<description>An archive that contains updated Forge application.</description>
-			<file src="forge.zip" targetdir="$INSTALL_PATH/" override="true" unpack="true"/>
+			<file src="$project.build.finalName$.tar.bz2" targetdir="$INSTALL_PATH/" override="true" unpack="true"/>
+		</pack>
+		<pack name="Script pack" required="yes" preselected="yes">
+			<description>Linux/Unix executables to install with permission if able. Grant permission manually if the installer failed to access permission.</description>
+			<file src="forge.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<file src="forge-adventure.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<file src="adventure-editor.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<executable stage="never" failure ="ignore" keep="true">
+				<fileset targetdir="$INSTALL_PATH/" includes="forge.sh,forge-adventure.sh,adventure-editor.sh" />
+			</executable>
 		</pack>
     </packs>
 </izpack:installation>
