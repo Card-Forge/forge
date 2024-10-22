@@ -277,7 +277,6 @@ ScryfallCode=UST
 
 [tokens]
 storm_crow
-c_2_2_homunculus
 c_4_4_dragon_flying
 w_2_2_cat
 w_0_1_goat
