@@ -63,6 +63,7 @@ public abstract class FScreen extends FContainer {
     }
 
     public void onActivate() {
+        Forge.startContinuousRendering();
     }
 
     public void onSwitchAway(Callback<Boolean> canSwitchCallback) {
