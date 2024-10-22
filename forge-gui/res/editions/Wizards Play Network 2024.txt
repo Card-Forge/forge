@@ -21,3 +21,5 @@ ScryfallCode=PW24
 14 R Costly Plunder @Ben Maier
 15 R Ravenous Squirrel @Dan Murayama Scott
 16 R Heirloom Blade @Carmen Sinek
+17 R Crippling Fear @Néstor Ossandón Leal
+18 R Night's Whisper @John Severin Brassell

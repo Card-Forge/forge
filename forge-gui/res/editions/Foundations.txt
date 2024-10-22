@@ -12,14 +12,23 @@ ScryfallCode=FDN
 66 R Nine-Lives Familiar @Bram Sels
 76 U Vengeful Bloodwitch @Jarel Threat
 116 R Anthem of Champions @Chris Rallis
+134 M Ajani, Caller of the Pride @D. Alexander Gregory
 140 R Day of Judgment @Vincent Proce
 146 U Savannah Lions @Winona Nelson
 161 M Omniscience @Jason Chan
 175 U Hero's Downfall @Chris Rallis
+176 M Liliana, Dreadhorde General @Chris Rallis
 185 U Stromkirk Bloodthief @Caroline Gariba
 227 C Llanowar Elves @Kev Walker
+234 M Vivien Reid @Anna Steinbauer
 273 L Plains @Tingting Yeh
 277 L Swamp @Rebecca Guay
+312 M Omniscience @Dominik Mayer
+321 R Nine-Lives Familiar @Xabi Gaztelua
+344 R Anthem of Champions @Ryan Pancoast
+357 M Ajani, Caller of the Pride @Victor Adame Minguez
+359 M Liliana, Dreadhorde General @Dmitry Burmak
+361 M Vivien Reid @Zara Alfonso
 379 M Omniscience @Dominik Mayer
 385 R Nine-Lives Familiar @Xabi Gaztelua
 405 R Anthem of Champions @Ryan Pancoast
