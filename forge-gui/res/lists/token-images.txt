@@ -2100,7 +2100,6 @@ w_2_1_e_cleric.jpg https://downloads.cardforge.org/images/tokens/w_2_1_e_cleric.
 w_2_1_e_cleric_cmm.jpg https://downloads.cardforge.org/images/tokens/w_2_1_e_cleric_cmm.jpg
 w_2_1_e_cleric_ths.jpg https://downloads.cardforge.org/images/tokens/w_2_1_e_cleric_ths.jpg
 w_2_2 knight_vigilance_afc.jpg https://downloads.cardforge.org/images/tokens/w_2_2_knight_vigilance_afc.jpg
-w_2_2_alien_rhino_who.jpg https://downloads.cardforge.org/images/tokens/w_2_2_alien_rhino_who.jpg
 w_2_2_alien_who.jpg https://downloads.cardforge.org/images/tokens/w_2_2_alien_who.jpg
 w_2_2_astartes_warrior_vigilance_40k.jpg https://downloads.cardforge.org/images/tokens/w_2_2_astartes_warrior_vigilance_40k.jpg
 w_2_2_cat.jpg https://downloads.cardforge.org/images/tokens/w_2_2_cat.jpg
@@ -2291,7 +2290,6 @@ wu_4_4_a_golem_lci.jpg https://downloads.cardforge.org/images/tokens/wu_4_4_a_go
 wu_4_4_elemental_woe.jpg https://downloads.cardforge.org/images/tokens/wu_4_4_elemental_woe.jpg
 wu_4_4_sphinx_flying_vigilance.jpg https://downloads.cardforge.org/images/tokens/wu_4_4_sphinx_flying_vigilance.jpg
 wu_4_4_sphinx_flying_vigilance_rna.jpg https://downloads.cardforge.org/images/tokens/wu_4_4_sphinx_flying_vigilance_rna.jpg
-wubrg_2_2_citizen_war.jpg https://downloads.cardforge.org/images/tokens/wubrg_2_2_citizen_war.jpg
 
 #Copies
 
@@ -2309,7 +2307,7 @@ embalm_labyrinth_guardian_akh.jpg https://downloads.cardforge.org/images/tokens/
 embalm_oketra's_attendant_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_oketra%27s_attendant_akh.jpg
 embalm_sacred_cat_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_sacred_cat_akh.jpg
 embalm_tah-crop_skirmisher_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_tah-crop_skirmisher_akh.jpg
-embalm_temmet,_vizier_of_naktamun_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_temmet,_vizier_of_naktamun_akh.jpg
+embalm_temmet_vizier_of_naktamun_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_temmet,_vizier_of_naktamun_akh.jpg
 embalm_trueheart_duelist_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_trueheart_duelist_akh.jpg
 embalm_unwavering_initiate_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_unwavering_initiate_akh.jpg
 embalm_vizier_of_many_faces_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_vizier_of_many_faces_akh.jpg
