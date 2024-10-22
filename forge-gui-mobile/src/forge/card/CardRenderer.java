@@ -746,10 +746,13 @@ public class CardRenderer {
         if (canShow && ZoneType.Battlefield.equals(card.getZone())) {
             //locked room
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(details.getState())) {
-                if (CardStateName.RightSplit.equals(details.getState())) {
-                    g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
-                } else if (CardStateName.LeftSplit.equals(details.getState())) {
-                    g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
+                switch (details.getState()) {
+                    case EmptyRoom -> {
+                        g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
+                        g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
+                    }
+                    case RightSplit -> g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
+                    case LeftSplit -> g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
                 }
             }
         }
