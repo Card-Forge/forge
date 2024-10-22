@@ -37,6 +37,7 @@ import forge.assets.FRotatedImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
@@ -62,6 +63,7 @@ import forge.toolbox.FList;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class CardRenderer {
+    static boolean drawSpiral = false;
     public enum CardStackPosition {
         Top,
         BehindHorz,
@@ -742,6 +744,16 @@ public class CardRenderer {
             return;
         } //remaining rendering not needed if card is behind another card in a vertical stack
         boolean onTop = (pos == CardStackPosition.Top);
+        if (canShow && ZoneType.Battlefield.equals(card.getZone())) {
+            //locked room
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(details.getState())) {
+                if (CardStateName.RightSplit.equals(details.getState())) {
+                    g.drawImage(FSkinImage.RIGHTLOCK, cx, cy, cw, ch);
+                } else if (CardStateName.LeftSplit.equals(details.getState())) {
+                    g.drawImage(FSkinImage.LEFTLOCK, cx, cy, cw, ch);
+                }
+            }
+        }
 
         if (canShow && showCardIdOverlay(card)) {
             FSkinFont idFont = FSkinFont.forHeight(h * 0.11f);
@@ -818,7 +830,9 @@ public class CardRenderer {
         if (unselectable) {
             g.setAlphaComposite(0.6f);
         }
+        boolean drawIcons = false;
         if (ZoneType.Battlefield.equals(card.getZone()) && onTop) {
+            drawIcons = true;
             drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
         } else if (canShow && !ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
@@ -870,6 +884,16 @@ public class CardRenderer {
                 }
             }
         }
+        //TODO animate rotation inside shader
+        Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
+        if (spiral != null && drawIcons) {
+            drawSpiral = true;
+            float newX = card.isTapped() ? cx + cw / 4.5f : cx;
+            float newY = card.isTapped() ? cy + cw / 4.75f : cy;
+            g.startRotateTransform(newX + cw / 2f, newY + ch / 2, -(Forge.deltaTime * 16f));
+            g.drawImage(spiral, newX, newY, cw, ch);
+            g.endTransform();
+        }
         //reset alpha
         g.setAlphaComposite(oldAlpha);
     }
@@ -883,15 +907,7 @@ public class CardRenderer {
             abiCount += 1;
         }
         if (card.isSick()) {
-            Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
-            if (spiral != null) {
-                float newX = card.isTapped() ? cx + cw / 4.5f : cx;
-                float newY = card.isTapped() ? cy + cw / 4.75f : cy;
-                g.startRotateTransform(newX + cw / 2f, newY + ch / 2, -(Forge.deltaTime * 16f));
-                g.drawImage(spiral, newX, newY, cw, ch);
-                g.endTransform();
-            } else {
-                //old indicator
+            if (!drawSpiral) {
                 CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
                 abiY += abiSpace + 1.7f;
                 abiCount += 1;
