@@ -37,6 +37,7 @@ import forge.assets.FRotatedImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.FSkinImageInterface;
 import forge.assets.FTextureRegionImage;
 import forge.assets.ImageCache;
@@ -742,6 +743,19 @@ public class CardRenderer {
             return;
         } //remaining rendering not needed if card is behind another card in a vertical stack
         boolean onTop = (pos == CardStackPosition.Top);
+        if (canShow && ZoneType.Battlefield.equals(card.getZone())) {
+            //locked room
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(details.getState())) {
+                switch (details.getState()) {
+                    case EmptyRoom -> {
+                        g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
+                        g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
+                    }
+                    case RightSplit -> g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
+                    case LeftSplit -> g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
+                }
+            }
+        }
 
         if (canShow && showCardIdOverlay(card)) {
             FSkinFont idFont = FSkinFont.forHeight(h * 0.11f);
@@ -849,7 +863,7 @@ public class CardRenderer {
                         multiplier = 0.150f;
                         break;
                 }
-                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, x + padding - 1f, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false, true);
+                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, cx + padding - 1f, cy + padding, cw - 2 * padding, ch * 0.4f, true, Align.left, false, true);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4.5f;
@@ -866,7 +880,7 @@ public class CardRenderer {
                         drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                     }
                 } else {
-                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), cx - padding, cy, cw + 2 * padding, ch, manaSymbolSize);
                 }
             }
         }
@@ -885,11 +899,7 @@ public class CardRenderer {
         if (card.isSick()) {
             Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
             if (spiral != null) {
-                float newX = card.isTapped() ? cx + cw / 4.5f : cx;
-                float newY = card.isTapped() ? cy + cw / 4.75f : cy;
-                g.startRotateTransform(newX + cw / 2f, newY + ch / 2, -(Forge.deltaTime * 16f));
-                g.drawImage(spiral, newX, newY, cw, ch);
-                g.endTransform();
+                g.drawRotatedImage(spiral, cx, cy, cw, ch, cx + cw / 2f, cy + ch / 2f, -(Forge.deltaTime * 16f));
             } else {
                 //old indicator
                 CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
