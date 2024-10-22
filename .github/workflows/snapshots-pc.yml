@@ -61,22 +61,16 @@ jobs:
           mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
           cd izpack
           d=$(date +%m.%d)
-          ls
-          # rename files          
-          jar_file=$(find . -maxdepth 1 -type f -name '*.jar' -print -quit)
-          if [ -n "$jar_file" ]; then
+          # rename files
+          for file in *.jar; do
             outj="$(basename -s .jar *)"
             mv "${outj}.jar" "${outj}-${d}.jar"
-          else
-            echo "No .jar files found in the specified folder."
-          fi          
-          bz2_file=$(find . -maxdepth 1 -type f -name '*.bz2' -print -quit)
-          if [ -n "$bz2_file" ]; then
+          done
+          for file in *.bz2; do
             outb="$(basename -s .tar.bz2 *)"
             mv "${outb}.tar.bz2" "${outb}-${d}.tar.bz2"
-          else
-            echo "No .bz2 files found in the specified folder."
-          fi
+          done
+          ls
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
