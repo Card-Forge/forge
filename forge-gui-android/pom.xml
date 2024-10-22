@@ -5,11 +5,10 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <android.manifest.versionCodeUpdateFromVersion>true</android.manifest.versionCodeUpdateFromVersion>
-        <android.manifestMerger.versionDigits>2,2,2,4</android.manifestMerger.versionDigits>
+        <android.manifestMerger.versionDigits>2,2,4,2</android.manifestMerger.versionDigits>
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.66-SNAPSHOT</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -22,7 +21,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.66-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -40,10 +39,44 @@
         <sourceDirectory>src</sourceDirectory>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate MonthDate code to month.date property -->
+                            <name>month.date</name>
+                            <pattern>MM.dd</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate versionName from revision property to snapshot-version property  -->
+                            <name>snapshot-version</name>
+                            <value>${revision}</value>
+                            <regex>-SNAPSHOT</regex>
+                            <replacement>-SNAPSHOT-${month.date}</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -53,13 +86,14 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>forge-android-${alpha-version}</finalName>
+        <!-- append generated snapshot-version property -->
+        <finalName>forge-android-${snapshot-version}</finalName>
     </build>
     <dependencies>
         <dependency>
             <groupId>org.robolectric</groupId>
             <artifactId>android-all</artifactId>
-            <version>8.0.0_r4-robolectric-0</version>
+            <version>15-robolectric-12468137</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -75,24 +109,6 @@
             <version>1.4.5</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/relinker.jar</systemPath>
-        </dependency>
-        <!-- declare a specific dependency to override com.google.android's transitive dependency -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.14</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-codec</groupId>
-                    <artifactId>commons-codec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- declare a specific dependency to override org.apache.httpcomponents's transitive dependency -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.16.0</version>
         </dependency>
         <dependency>
             <groupId>forge</groupId>
@@ -120,22 +136,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>xmlpull</groupId>
-            <artifactId>xmlpull</artifactId>
-            <version>1.1.3.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
-            <version>1.12.1</version>
+            <version>1.13.0</version>
             <scope>system</scope>
             <systemPath>${pom.basedir}/libs/gdx-backend-android.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android</artifactId>
-            <version>7.14.0</version>
+            <version>7.15.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -152,7 +162,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-core</artifactId>
-            <version>7.14.0</version>
+            <version>7.15.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -172,7 +182,7 @@
         <dependency>
             <groupId>io.sentry</groupId>
             <artifactId>sentry-android-ndk</artifactId>
-            <version>7.14.0</version>
+            <version>7.15.0</version>
             <type>aar</type>
             <exclusions>
                 <exclusion>
@@ -197,7 +207,8 @@
             <groupId>com.badlogicgames.gdx-controllers</groupId>
             <artifactId>gdx-controllers-android</artifactId>
             <version>2.2.3</version>
-            <type>aar</type>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/libs/gdx-controllers-android.jar</systemPath>
             <exclusions>
                 <exclusion>
                     <groupId>com.badlogicgames.gdx</groupId>
@@ -225,9 +236,16 @@
                                 <version>2.3.1</version>
                             </dependency>
                             <dependency>
-                                <groupId>net.sf.proguard</groupId>
-                                <artifactId>proguard-base</artifactId>
-                                <version>6.2.2</version>
+                                <groupId>com.sun.xml.bind</groupId>
+                                <artifactId>jaxb-impl</artifactId>
+                                <version>2.3.4</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>sun</groupId>
+                                <artifactId>misc</artifactId>
+                                <version>1</version>
+                                <scope>system</scope>
+                                <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
                         <version>4.6.2</version>
@@ -237,8 +255,8 @@
                                 <debug>true</debug>
                             </sign>
                             <sdk>
-                                <platform>26</platform>
-                                <buildTools>30.0.3</buildTools>
+                                <platform>35</platform>
+                                <buildTools>35.0.0</buildTools>
                             </sdk>
                             <dexForceJumbo>true</dexForceJumbo>
                             <assetsDirectory>${project.basedir}/assets</assetsDirectory>
@@ -249,6 +267,7 @@
                                 <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
                             <release>true</release>
                             <dexCompiler>d8</dexCompiler>
                             <d8>
@@ -287,6 +306,39 @@
             <build>
                 <plugins>
                     <plugin>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.4.1</version>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <executions>
+                            <execution>
+                                <id>SignV2</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${pom.basedir}</workingDirectory>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${pom.basedir}/tools/uber-apk-signer.jar</argument>
+                                <argument>-a</argument>
+                                <argument>${pom.basedir}/target/</argument>
+                                <argument>--ks</argument>
+                                <argument>forge.keystore</argument>
+                                <argument>--ksAlias</argument>
+                                <argument>Forge</argument>
+                                <argument>--ksKeyPass</argument>
+                                <argument>forge72</argument>
+                                <argument>--ksPass</argument>
+                                <argument>forge72</argument>
+                                <argument>--debug</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
                         <groupId>com.simpligility.maven.plugins</groupId>
                         <artifactId>android-maven-plugin</artifactId>
                         <dependencies>
@@ -296,9 +348,16 @@
                                 <version>2.3.1</version>
                             </dependency>
                             <dependency>
-                                <groupId>net.sf.proguard</groupId>
-                                <artifactId>proguard-base</artifactId>
-                                <version>6.2.2</version>
+                                <groupId>com.sun.xml.bind</groupId>
+                                <artifactId>jaxb-impl</artifactId>
+                                <version>2.3.4</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>sun</groupId>
+                                <artifactId>misc</artifactId>
+                                <version>1</version>
+                                <scope>system</scope>
+                                <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
                             </dependency>
                         </dependencies>
                         <version>4.6.2</version>
@@ -308,8 +367,8 @@
                                 <debug>false</debug>
                             </sign>
                             <sdk>
-                                <platform>26</platform>
-                                <buildTools>30.0.3</buildTools>
+                                <platform>35</platform>
+                                <buildTools>35.0.0</buildTools>
                             </sdk>
                             <zipalign>
                                 <verbose>false</verbose>
@@ -323,6 +382,7 @@
                                 <skip>false</skip>
                                 <config>${project.basedir}/proguard.cfg</config>
                             </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
                             <release>true</release>
                             <dexCompiler>d8</dexCompiler>
                             <d8>
@@ -347,101 +407,16 @@
                                 <goals>
                                     <goal>manifest-merger</goal>
                                 </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>android-release-sign</id>
-            <properties>
-                <packaging.type>apk</packaging.type>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-jarsigner-plugin</artifactId>
-                        <version>1.3.2</version>
-                        <executions>
-                            <execution>
-                                <id>signing</id>
-                                <goals>
-                                    <goal>sign</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <inherited>true</inherited>
                                 <configuration>
-                                    <removeExistingSignatures>true</removeExistingSignatures>
-                                    <archiveDirectory />
-                                    <includes>
-                                        <include>${project.build.directory}/${project.build.finalName}.apk</include>
-                                    </includes>
-                                    <keystore>${sign.keystore}</keystore>
-                                    <alias>${sign.alias}</alias>
-                                    <storepass>${sign.storepass}</storepass>
-                                    <keypass>${sign.keypass}</keypass>
-                                    <verbose>true</verbose>
-                                    <arguments>
-                                        <argument>-sigalg</argument>
-                                        <argument>MD5withRSA</argument>
-                                        <argument>-digestalg</argument>
-                                        <argument>SHA1</argument>
-                                    </arguments>
+                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
                                 </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.simpligility.maven.plugins</groupId>
-                        <artifactId>android-maven-plugin</artifactId>
-                        <dependencies>
-                            <dependency>
-                                <groupId>javax.xml.bind</groupId>
-                                <artifactId>jaxb-api</artifactId>
-                                <version>2.3.1</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>net.sf.proguard</groupId>
-                                <artifactId>proguard-base</artifactId>
-                                <version>6.2.2</version>
-                            </dependency>
-                        </dependencies>
-                        <version>4.6.2</version>
-                        <inherited>true</inherited>
-                        <configuration>
-                            <sign>
-                                <debug>false</debug>
-                            </sign>
-                            <zipalign>
-                                <skip>false</skip>
-                                <verbose>true</verbose>
-                                <inputApk>${project.build.directory}/${project.build.finalName}.apk</inputApk>
-                                <outputApk>${project.build.directory}/${project.build.finalName}-signed-aligned.apk</outputApk>
-                            </zipalign>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>android-align</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>zipalign</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>update-manifest</id>
-                                <goals>
-                                    <goal>manifest-merger</goal>
-                                </goals>
                             </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -499,7 +474,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.7</version>
+                        <version>3.0.0</version>
                         <dependencies>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
@@ -509,22 +484,22 @@
                             <dependency>
                                 <groupId>commons-net</groupId>
                                 <artifactId>commons-net</artifactId>
-                                <version>3.3</version>
+                                <version>3.11.1</version>
                             </dependency>
                             <dependency>
                                 <groupId>org.apache.ant</groupId>
                                 <artifactId>ant-commons-net</artifactId>
-                                <version>1.9.4</version>
+                                <version>1.10.15</version>
                             </dependency>
                         </dependencies>
                         <executions>
                             <execution>
                                 <id>android-ftp</id>
-                                <phase>package</phase>
+                                <phase>install</phase>
                                 <configuration>
                                     <target>
-                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/" />
-                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${alpha-version}/">
+                                        <ftp action="mkdir" password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${snapshot-version}/" />
+                                        <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/${snapshot-version}/">
                                             <fileset dir="${project.build.directory}">
                                                 <include name="${project.build.finalName}-signed-aligned.apk" />
                                                 <include name="assets.zip" />
@@ -540,6 +515,117 @@
                                 <goals>
                                     <goal>run</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <!-- test build signed with embedded debug.keystore from uber-signer -->
+            <id>android-test-build</id>
+            <properties>
+                <packaging.type>apk</packaging.type>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.4.1</version>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <executions>
+                            <execution>
+                                <id>SignV2</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <workingDirectory>${pom.basedir}</workingDirectory>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>${pom.basedir}/tools/uber-apk-signer.jar</argument>
+                                <argument>-a</argument>
+                                <argument>${pom.basedir}/target/</argument>
+                                <argument>--debug</argument>
+                            </arguments>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.simpligility.maven.plugins</groupId>
+                        <artifactId>android-maven-plugin</artifactId>
+                        <dependencies>
+                            <dependency>
+                                <groupId>javax.xml.bind</groupId>
+                                <artifactId>jaxb-api</artifactId>
+                                <version>2.3.1</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>com.sun.xml.bind</groupId>
+                                <artifactId>jaxb-impl</artifactId>
+                                <version>2.3.4</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>sun</groupId>
+                                <artifactId>misc</artifactId>
+                                <version>1</version>
+                                <scope>system</scope>
+                                <systemPath>${pom.basedir}/libs/sun-misc.jar</systemPath>
+                            </dependency>
+                        </dependencies>
+                        <version>4.6.2</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <sign>
+                                <debug>false</debug>
+                            </sign>
+                            <sdk>
+                                <platform>35</platform>
+                                <buildTools>35.0.0</buildTools>
+                            </sdk>
+                            <zipalign>
+                                <verbose>false</verbose>
+                            </zipalign>
+                            <dexForceJumbo>true</dexForceJumbo>
+                            <assetsDirectory>${project.basedir}/assets</assetsDirectory>
+                            <resourceDirectory>${project.basedir}/res</resourceDirectory>
+                            <nativeLibrariesDirectory>${project.basedir}/libs</nativeLibrariesDirectory>
+                            <extractDuplicates>true</extractDuplicates>
+                            <proguard>
+                                <skip>false</skip>
+                                <config>${project.basedir}/proguard.cfg</config>
+                            </proguard>
+                            <proguardProguardJarPath>${pom.basedir}/tools/proguard.jar</proguardProguardJarPath>
+                            <release>true</release>
+                            <dexCompiler>d8</dexCompiler>
+                            <d8>
+                                <minApi>26</minApi>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                            </d8>
+                            <dex>
+                                <multi-dex>true</multi-dex>
+                                <jvmArguments>
+                                    <argument>${build.min.memory}</argument>
+                                    <argument>${build.max.memory}</argument>
+                                </jvmArguments>
+                                <dexArguments>--min-sdk-version=26</dexArguments>
+                            </dex>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>update-manifest</id>
+                                <goals>
+                                    <goal>manifest-merger</goal>
+                                </goals>
+                                <configuration>
+                                    <manifestVersionName>${snapshot-version}</manifestVersionName>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

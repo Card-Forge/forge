@@ -12,11 +12,13 @@ public interface IDeviceAdapter {
     boolean isConnectedToWifi();
     boolean isTablet();
     String getDownloadsDir();
+    String getVersionString();
     boolean openFile(String filename);
     void setLandscapeMode(boolean landscapeMode);
     void preventSystemSleep(boolean preventSleep);
     void restart();
     void exit();
+    void closeSplashScreen();
     void convertToJPEG(InputStream input, OutputStream output) throws IOException;
     Pair<Integer, Integer> getRealScreenSize(boolean real);
     ArrayList<String> getGamepads();

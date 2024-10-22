@@ -17,27 +17,18 @@ import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 import com.badlogic.gdx.backends.iosrobovm.IOSFiles;
 
 import forge.Forge;
-import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
-import forge.util.FileUtil;
 
 public class Main extends IOSApplication.Delegate {
 
     @Override
     protected IOSApplication createApplication() {
         final String assetsDir = new IOSFiles().getLocalStoragePath() + "/../../forge.ios.Main.app/";
-        if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
-            FileUtil.ensureDirectoryExists(assetsDir);
-        }
 
         final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
-        ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);//todo get totalRAM && isTabletDevice
-        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, propertyConfig, false, 0, false, 0, "", "");
+        final ApplicationListener app = Forge.getApp(new IOSClipboard(), new IOSAdapter(), assetsDir, false, false, 0, false, 0, "", "");
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }
@@ -83,6 +74,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public String getVersionString() {
+            return "0.0";
+        }
+
+        @Override
         public boolean openFile(final String filename) {
             return new IOSFiles().local(filename).exists();
         }
@@ -110,6 +106,11 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void exit() {
             // Not possible on iOS
+        }
+
+        @Override
+        public void closeSplashScreen() {
+            //only for desktop mobile-dev
         }
 
         @Override

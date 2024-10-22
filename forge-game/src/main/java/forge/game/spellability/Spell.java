@@ -23,7 +23,6 @@ import forge.game.card.CardCopyService;
 import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
-import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -71,6 +70,11 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
+        // CR 118.6 cost is unpayable
+        if (getPayCosts().hasManaCost() && getPayCosts().getCostMana().getMana().isNoCost()) {
+            return false;
+        }
+
         Player activator = this.getActivatingPlayer();
         if (activator == null) {
             activator = card.getController();
@@ -84,9 +88,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
 
-        // Save the original cost and the face down info for a later check since the LKI copy will overwrite them
-        ManaCost origCost = card.getState(card.isFaceDown() ? CardStateName.Original : card.getCurrentStateName()).getManaCost();
-
         // do performanceMode only for cases where the activator is different than controller
         if (!Spell.performanceMode && !card.getController().equals(activator)) {
             // always make a lki copy in this case?
@@ -97,13 +98,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
 
         if (!this.getRestrictions().canPlay(card, this)) {
-            return false;
-        }
-
-        // for uncastables like lotus bloom, check if manaCost is blank (except for morph spells)
-        // but ignore if it comes from PlayEffect
-        if (!isCastFaceDown() && !isCastFromPlayEffect()
-                && isBasicSpell() && origCost.isNoCost()) {
             return false;
         }
 

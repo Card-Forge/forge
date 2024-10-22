@@ -92,15 +92,15 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      */
     public ManaCost(final IParserManaCost parser) {
         final List<ManaCostShard> shardsTemp = Lists.newArrayList();
-        this.hasNoCost = false;
         while (parser.hasNext()) {
             final ManaCostShard shard = parser.next();
             if (shard != null && shard != ManaCostShard.GENERIC) {
                 shardsTemp.add(shard);
             } // null is OK - that was generic mana
         }
-        this.genericCost = parser.getTotalGenericCost(); // collect generic mana
-        // here
+        int generic = parser.getTotalGenericCost(); // collect generic mana here
+        this.hasNoCost = generic == -1;
+        this.genericCost = generic == -1 ? 0 : generic;
         sealClass(shardsTemp);
     }
 
@@ -281,6 +281,9 @@ public final class ManaCost implements Comparable<ManaCost>, Iterable<ManaCostSh
      * @return
      */
     public String getShortString() {
+        if (isNoCost()) {
+            return "-1";
+        }
     	StringBuilder sb = new StringBuilder();
         int generic = getGenericCost();
         if (this.isZero()) {
