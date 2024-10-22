@@ -48,7 +48,7 @@ public class GameLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                desktopMode ? desktopModeAssetsDir : assetsDir, false, false, 0, false, 0, "", "", versionString);
+                desktopMode ? desktopModeAssetsDir : assetsDir, false, false, 0, false, 0, "", "");
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);

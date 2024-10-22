@@ -109,7 +109,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <filesToInclude>forge-adventure.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
@@ -134,10 +134,11 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>forge.app.Main</mainClass>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
                         </manifest>
                         <manifestEntries>
+                            <Add-Opens>java.desktop/java.beans java.desktop/javax.swing.border java.desktop/javax.swing.event java.desktop/sun.swing java.desktop/java.awt.image java.desktop/java.awt.color java.desktop/sun.awt.image java.desktop/javax.swing java.desktop/java.awt java.base/java.util java.base/java.lang java.base/java.lang.reflect java.base/java.text java.desktop/java.awt.font java.base/jdk.internal.misc java.base/sun.nio.ch java.base/java.nio java.base/java.math java.base/java.util.concurrent java.base/java.net</Add-Opens>
+                            <Main-Class>forge.app.Main</Main-Class>
                             <SplashScreen-Image>splash/logo.gif</SplashScreen-Image>
                         </manifestEntries>
                     </archive>

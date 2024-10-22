@@ -157,7 +157,7 @@ public class SplashScreen extends FContainer {
             float w2 = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 2f : Forge.getScreenHeight() / 2f;
             float h2 = 57f / 450f * (w2/2);
 
-            String version = "v. " + Forge.CURRENT_VERSION;
+            String version = "v." + Forge.getDeviceAdapter().getVersionString();
             g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
             progressBar.setBounds((Forge.getScreenWidth() - w2)/2, Forge.getScreenHeight() - h2 * 2f, w2, h2);
             g.draw(progressBar);
@@ -381,7 +381,7 @@ public class SplashScreen extends FContainer {
         progressBar.setBounds(x + padding, y, w - 2 * padding, pbHeight);
         g.draw(progressBar);
 
-        String version = "v. " + Forge.CURRENT_VERSION;
+        String version = "v." + Forge.getDeviceAdapter().getVersionString();
         g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
     }
 }

@@ -186,7 +186,6 @@
                                             <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor-jar-with-dependencies.jar" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure-mac.sh" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.command" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
@@ -198,7 +197,6 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
-                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-mac.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.sh" perm="a+rx" />
@@ -207,8 +205,16 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.exe" perm="a+rx" />
-                                        <zip destfile="${basedir}/target/forge.zip">
-                                            <zipfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
+                                        <copy todir="${basedir}/target">
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh" />
+                                        </copy>
+                                        <chmod file="${basedir}/target/forge.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/forge-adventure.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/adventure-editor.sh" perm="a+rx" />
+                                        <tar destfile="${basedir}/target/${project.build.finalName}.tar.bz2" compression="bzip2">
+                                            <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
                                                 <include name="forge.command" />
                                                 <include name="forge.cmd" />
@@ -221,8 +227,8 @@
                                                 <include name="adventure-editor.command" />
                                                 <include name="adventure-editor.cmd" />
                                                 <include name="adventure-editor.exe" />
-                                            </zipfileset>
-                                            <zipfileset dir="${project.build.directory}/${project.build.finalName}">
+                                            </tarfileset>
+                                            <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
                                                 <exclude name="forge.sh" />
                                                 <exclude name="forge.command" />
@@ -236,8 +242,8 @@
                                                 <exclude name="adventure-editor.command" />
                                                 <exclude name="adventure-editor.cmd" />
                                                 <exclude name="adventure-editor.exe" />
-                                            </zipfileset>
-                                        </zip>
+                                            </tarfileset>
+                                        </tar>
                                     </target>
                                 </configuration>
                                 <goals>
