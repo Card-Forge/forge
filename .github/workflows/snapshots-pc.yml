@@ -59,9 +59,23 @@ jobs:
           # If this works just gotta figure out how to append datetime
           mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
           cd izpack
-          out="$(basename -s .jar *)"
-          d=$(date +%m-%d)
-          mv "${out}.jar" "${out}-${d}.jar"
+          d=$(date +%m.%d)
+          ls
+          # rename files          
+          jar_file=$(find . -maxdepth 1 -type f -name '*.jar' -print -quit)
+          if [ -n "$jar_file" ]; then
+            outj="$(basename -s .jar *)"
+            mv "${outj}.jar" "${outj}-${d}.jar"
+          else
+            echo "No .jar files found in the specified folder."
+          fi          
+          bz2_file=$(find . -maxdepth 1 -type f -name '*.bz2' -print -quit)
+          if [ -n "$bz2_file" ]; then
+            outb="$(basename -s .tar.bz2 *)"
+            mv "${outb}.tar.bz2" "${outb}-${d}.tar.bz2"
+          else
+            echo "No .bz2 files found in the specified folder."
+          fi
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4

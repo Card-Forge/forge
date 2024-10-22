@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
-import forge.util.JVMOptions;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import org.apache.commons.lang3.tuple.Pair;
@@ -17,30 +16,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     private static final String versionString = BuildInfo.getVersionString();
     public static void main(String[] args) {
-        checkJVMArgs(System.getProperty("java.version"));
-    }
-
-    static void checkJVMArgs(String javaVersion) {
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        List<String> arguments = runtimeMxBean.getInputArguments();
-        JVMOptions.getStringBuilder().append("Java Version: ").append(javaVersion).append("\nArguments: \n");
-        for (String a : arguments) {
-            if (a.startsWith("-agent") || a.startsWith("-javaagent"))
-                continue;
-            JVMOptions.getStringBuilder().append(a).append("\n");
-        }
-        if (!JVMOptions.checkRuntime(arguments)) {
-            new DialogWindow("Error", JVMOptions.getStringBuilder().toString());
-        } else
-            new GameLauncher(versionString);
+        new GameLauncher(versionString);
     }
 
     public static class DesktopAdapter implements IDeviceAdapter {

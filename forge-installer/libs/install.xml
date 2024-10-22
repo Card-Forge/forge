@@ -3,16 +3,16 @@
                      xmlns:izpack="http://izpack.org/schema/installation"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                      xsi:schemaLocation="http://izpack.org/schema/installation http://izpack.org/schema/5.0/izpack-installation-5.0.xsd">
-    <info>
-        <appname>$project.build.finalName$</appname>
-        <appversion>$month.date$</appversion>
-        <url>https://card-forge.github.io/forge/</url>
-        <authors>
-            <author name="Forge Developers" email=""/>
-        </authors>
-    </info>
+	<info>
+		<appname>$project.build.finalName$</appname>
+		<appversion>$month.date$</appversion>
+		<url>https://card-forge.github.io/forge/</url>
+		<authors>
+			<author name="Forge Developers" email=""/>
+		</authors>
+	</info>
 
-    <guiprefs height="600" resizable="no" width="800">
+	<guiprefs height="600" resizable="no" width="800">
 		<modifier key="langDisplayType" value="native"/>
 		<modifier key="allXGap" value="0"/>
 		<modifier key="allYGap" value="0"/>
@@ -24,40 +24,59 @@
 		<modifier key="headingFontSize" value="1.5"/>
 		<modifier key="headingBackgroundColor" value="0x00ffffff"/>
 		<modifier key="headingPanelCounter" value="text"/>
-    </guiprefs>
+	</guiprefs>
 
-    <locale>
-        <langpack iso3="eng"/>
-    </locale>
+	<locale>
+		<langpack iso3="eng"/>
+	</locale>
 
-    <resources>
-	    <res id="packsLang.xml" src="eng.xml"/>
-        <res id="CustomLangPack.xml_eng" src="eng.xml"/>
+	<listeners>
+		<listener classname="ChmodInstallerListener" stage="install"/>
+	</listeners>
+
+	<resources>
+		<res id="packsLang.xml" src="eng.xml"/>
+		<res id="CustomLangPack.xml_eng" src="eng.xml"/>
 		<res id="HTMLInfoPanel.info" src="ReadMeForge.txt"/>
 		<res id="InfoPanel.info" src="ReadMeForge.txt"/>
 		<res id="TargetPanel.dir.windows" src="default-dir.txt"/>
 		<res id="installer.langsel.img" src="ic_launcher.png"/>
 		<res id="Heading.image" src="ic_launcher.png"/>
 		<res id="Installer.image" src="side.png"/>
-    </resources>
+	</resources>
 
-    <variables>
-        <variable name="InstallerFrame.logfilePath" value="Default"/>
-    </variables>
+	<variables>
+		<variable name="InstallerFrame.logfilePath" value="Default"/>
+	</variables>
 
-    <panels>
-        <panel classname="HTMLInfoPanel" id="welcome"/>
-        <panel classname="TargetPanel" id="install_dir"/>
-        <panel classname="PacksPanel" id="sdk_pack_select"/>
-        <panel classname="InstallPanel" id="install"/>
-        <panel classname="FinishPanel" id="finish"/>
+	<panels>
+		<panel classname="HTMLInfoPanel" id="welcome"/>
+		<panel classname="TargetPanel" id="install_dir"/>
+		<panel classname="PacksPanel" id="sdk_pack_select"/>
+		<panel classname="InstallPanel" id="install"/>
+		<panel classname="FinishPanel" id="finish"/>
 		
-    </panels>
+	</panels>
 
-    <packs>
-		<pack name="forge.zip" required="yes" preselected="yes" hidden="false">
+	<packs>
+		<pack name="Forge pack" required="yes" preselected="yes" hidden="false">
 			<description>An archive that contains updated Forge application.</description>
-			<file src="forge.zip" targetdir="$INSTALL_PATH/" override="true" unpack="true"/>
+			<file src="$project.build.finalName$.tar.bz2" targetdir="$INSTALL_PATH/" override="true" unpack="true"/>
 		</pack>
-    </packs>
+		<pack name="Script pack" required="yes" preselected="yes">
+			<description>Linux/Unix executables to install with permission if able. Grant permission manually if the installer failed to access permission.</description>
+			<file src="forge.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<file src="forge-adventure.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<file src="adventure-editor.sh" targetdir="$INSTALL_PATH/" override="true">
+				<additionaldata key="permission.file" value="775"/>
+			</file>
+			<executable stage="never" failure="ignore" keep="true">
+				<fileset targetdir="$INSTALL_PATH/" includes="forge.sh,forge-adventure.sh,adventure-editor.sh"/>
+			</executable>
+		</pack>
+	</packs>
 </izpack:installation>

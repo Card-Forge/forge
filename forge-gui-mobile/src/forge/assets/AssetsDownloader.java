@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
+import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
 import org.apache.commons.lang3.StringUtils;
 
@@ -75,6 +76,19 @@ public class AssetsDownloader {
         }
 
         //see if assets need updating
+        if (GuiBase.isAndroid()) {
+            FileHandle resDir = Gdx.files.absolute(ForgeConstants.RES_DIR);
+            FileHandle assetsDir = Gdx.files.absolute(ForgeConstants.ASSETS_DIR);
+            FileHandle advBG = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR).child(ForgeConstants.ADV_TEXTURE_BG_FILE);
+            if (!advBG.exists()) {
+                FileHandle deleteVersion = assetsDir.child("version.txt");
+                if (deleteVersion.exists())
+                    deleteVersion.delete();
+                FileHandle deleteBuild = resDir.child("build.txt");
+                if (deleteBuild.exists())
+                    deleteBuild.delete();
+            }
+        }
         File versionFile = new File(ForgeConstants.ASSETS_DIR + "version.txt");
         if (!versionFile.exists()) {
             try {

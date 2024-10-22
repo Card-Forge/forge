@@ -815,13 +815,12 @@ public class CardRenderer {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
         }
         //Ability Icons
-        boolean onbattlefield = ZoneType.Battlefield.equals(card.getZone());
         if (unselectable) {
             g.setAlphaComposite(0.6f);
         }
-        if (onbattlefield && onTop) {
+        if (ZoneType.Battlefield.equals(card.getZone()) && onTop) {
             drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
-        } else if (canShow && !onbattlefield && showAbilityIcons(card)) {
+        } else if (canShow && !ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
             String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
