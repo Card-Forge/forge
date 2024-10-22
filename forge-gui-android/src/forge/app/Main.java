@@ -506,9 +506,12 @@ public class Main extends ForgeAndroidApplication {
 
         @Override
         public boolean hasContents() {
-            if (cm.getPrimaryClip().getItemCount() > 0) {
+            ClipData clipData = cm.getPrimaryClip();
+            if (clipData == null)
+                return false;
+            if (clipData.getItemCount() > 0) {
                 try {
-                    return cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).length() > 0;
+                    return clipData.getItemAt(0).coerceToText(getContext()).length() > 0;
                 } catch (Exception ex) {
                     return false;
                 }
@@ -518,9 +521,12 @@ public class Main extends ForgeAndroidApplication {
 
         @Override
         public String getContents() {
-            if (cm.getPrimaryClip().getItemCount() > 0) {
+            ClipData clipData = cm.getPrimaryClip();
+            if (clipData == null)
+                return "";
+            if (clipData.getItemCount() > 0) {
                 try {
-                    String text = cm.getPrimaryClip().getItemAt(0).coerceToText(getContext()).toString();
+                    String text = clipData.getItemAt(0).coerceToText(getContext()).toString();
                     return Normalizer.normalize(text, Normalizer.Form.NFD);
                 } catch (Exception ex) {
                     ex.printStackTrace();
