@@ -747,9 +747,9 @@ public class CardRenderer {
             //locked room
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(details.getState())) {
                 if (CardStateName.RightSplit.equals(details.getState())) {
-                    g.drawImage(FSkinImage.RIGHTLOCK, cx, cy, cw, ch);
+                    g.drawImage(FSkinImage.PADLOCK, cx, cy + ch / 2, cw, ch);
                 } else if (CardStateName.LeftSplit.equals(details.getState())) {
-                    g.drawImage(FSkinImage.LEFTLOCK, cx, cy, cw, ch);
+                    g.drawImage(FSkinImage.PADLOCK, cx, cy, cw, ch);
                 }
             }
         }

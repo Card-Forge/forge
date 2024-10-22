@@ -220,8 +220,7 @@ public enum FSkinImage implements FSkinImageInterface {
     UNKNOWN         (FSkinProp.ICO_UNKNOWN),
     LOGO            (FSkinProp.ICO_LOGO),
     CARDART         (FSkinProp.ICO_CARDART),
-    LEFTLOCK        (FSkinProp.ICO_LEFTLOCK),
-    RIGHTLOCK       (FSkinProp.ICO_RIGHTLOCK),
+    PADLOCK         (FSkinProp.ICO_PADLOCK),
 
     FLIPCARD        (FSkinProp.ICO_FLIPCARD),
     HDFLIPCARD      (FSkinProp.ICO_HDFLIPCARD),

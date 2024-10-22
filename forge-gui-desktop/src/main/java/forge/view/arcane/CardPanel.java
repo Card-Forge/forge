@@ -372,9 +372,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardStateView cardStateView = card.getCurrentState();
             if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(cardStateView.getState())) {
                 if (CardStateName.RightSplit.equals(cardStateView.getState())) {
-                    FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_RIGHTLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                    FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset + cardHeight / 2, cardWidth, cardHeight);
                 } else if (CardStateName.LeftSplit.equals(cardStateView.getState())) {
-                    FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_LEFTLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                    FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
                 }
             }
 
