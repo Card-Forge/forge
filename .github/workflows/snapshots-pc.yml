@@ -57,11 +57,7 @@ jobs:
         run: |
           mkdir izpack
           # If this works just gotta figure out how to append datetime
-          ls /home/runner/.m2/repository/forge/forge-gui-desktop/2.0.00-SNAPSHOT
-          ls /home/runner/.m2/repository/forge/forge-installer/2.0.00-SNAPSHOT
           mv /home/runner/.m2/repository/forge/forge-installer/*/*.jar izpack/
-          mv /home/runner/.m2/repository/forge/forge-gui-desktop/*/*.bz2 izpack/
-          # mv /home/runner/.m2/repository/forge/forge-installer/*/*.bz2 izpack/
           cd izpack
           d=$(date +%m.%d)
           ls
