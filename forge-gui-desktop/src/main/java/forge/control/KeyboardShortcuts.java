@@ -113,6 +113,16 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Press OK Button */
+        final Action actPressButton = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                matchUI.getGameController().selectButtonOk();
+            }
+        };
+
         /** Alpha Strike. */
         final Action actAllAttack = new AbstractAction() {
             @Override
@@ -215,6 +225,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_PRESS_BUTTON, localizer.getMessage("lblSHORTCUT_PRESS_BUTTON"), actPressButton, am, im));
         return list;
     } // End initMatchShortcuts()
 
