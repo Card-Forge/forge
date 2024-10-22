@@ -469,17 +469,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private void reIndex() {
         uniqueCardsByName.clear();
         for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
-            PaperCard pc = getFirstWithImage(kv.getValue());
+            PaperCard pc = getFirstNonSpeicalWithImage(kv.getValue());
             uniqueCardsByName.put(kv.getKey(), pc);
         }
     }
 
-    private static PaperCard getFirstWithImage(final Collection<PaperCard> cards) {
+    private static PaperCard getFirstNonSpeicalWithImage(final Collection<PaperCard> cards) {
         //NOTE: this is written this way to avoid checking final card in list
         final Iterator<PaperCard> iterator = cards.iterator();
         PaperCard pc = iterator.next();
         while (iterator.hasNext()) {
-            if (pc.hasImage()) {
+            if (pc.hasImage() && !pc.getRarity().equals(CardRarity.Special)) {
                 return pc;
             }
             pc = iterator.next();
