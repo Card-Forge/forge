@@ -63,7 +63,6 @@ import forge.toolbox.FList;
 import static forge.assets.FSkin.getDefaultSkinFile;
 
 public class CardRenderer {
-    static boolean drawSpiral = false;
     public enum CardStackPosition {
         Top,
         BehindHorz,
@@ -830,9 +829,7 @@ public class CardRenderer {
         if (unselectable) {
             g.setAlphaComposite(0.6f);
         }
-        boolean drawIcons = false;
         if (ZoneType.Battlefield.equals(card.getZone()) && onTop) {
-            drawIcons = true;
             drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, showAbilityIcons(card));
         } else if (canShow && !ZoneType.Battlefield.equals(card.getZone()) && showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
@@ -863,7 +860,7 @@ public class CardRenderer {
                         multiplier = 0.150f;
                         break;
                 }
-                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, x + padding - 1f, y + padding, w - 2 * padding, h * 0.4f, true, Align.left, false, true);
+                g.drawOutlinedText(CardTranslation.getTranslatedName(details.getName()), FSkinFont.forHeight(h * multiplier), Color.WHITE, Color.BLACK, cx + padding - 1f, cy + padding, cw - 2 * padding, ch * 0.4f, true, Align.left, false, true);
             }
             if (showCardManaCostOverlay(card)) {
                 float manaSymbolSize = w / 4.5f;
@@ -880,19 +877,9 @@ public class CardRenderer {
                         drawManaCost(g, rightManaCost, x - padding, y+(manaSymbolSize/1.5f), w + 2 * padding, h, manaSymbolSize);
                     }
                 } else {
-                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                    drawManaCost(g, showAltState ? card.getAlternateState().getManaCost() : card.getCurrentState().getManaCost(), cx - padding, cy, cw + 2 * padding, ch, manaSymbolSize);
                 }
             }
-        }
-        //TODO animate rotation inside shader
-        Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
-        if (spiral != null && drawIcons) {
-            drawSpiral = true;
-            float newX = card.isTapped() ? cx + cw / 4.5f : cx;
-            float newY = card.isTapped() ? cy + cw / 4.75f : cy;
-            g.startRotateTransform(newX + cw / 2f, newY + ch / 2, -(Forge.deltaTime * 16f));
-            g.drawImage(spiral, newX, newY, cw, ch);
-            g.endTransform();
         }
         //reset alpha
         g.setAlphaComposite(oldAlpha);
@@ -907,7 +894,11 @@ public class CardRenderer {
             abiCount += 1;
         }
         if (card.isSick()) {
-            if (!drawSpiral) {
+            Texture spiral = Forge.getAssets().getTexture(getDefaultSkinFile("spiral.png"), false);
+            if (spiral != null) {
+                g.drawRotatedImage(spiral, cx, cy, cw, ch, cx + cw / 2f, cy + ch / 2f, -(Forge.deltaTime * 16f));
+            } else {
+                //old indicator
                 CardFaceSymbols.drawSymbol("summonsick", g, abiX, abiY, cw / 4.7f, cw / 4.7f);
                 abiY += abiSpace + 1.7f;
                 abiCount += 1;
