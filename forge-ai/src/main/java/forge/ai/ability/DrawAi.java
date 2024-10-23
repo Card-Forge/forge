@@ -81,6 +81,13 @@ public class DrawAi extends SpellAbilityAi {
         if (!canLoot(ai, sa)) {
             return false;
         }
+
+        if ("SacToDraw".equals(sa.getParam("AILogic"))) {
+            // Canopy lands
+            return ai.getCardsIn(ZoneType.Hand).isEmpty()
+                    || (sa.getHostCard().isLand() && ai.getLandsInPlay().size() >= 5); // TODO: make this configurable in the AI profile
+        }
+
         return true;
     }
 
