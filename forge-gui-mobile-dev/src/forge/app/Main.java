@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Main {
     private static final String versionString = BuildInfo.getVersionString();
@@ -79,9 +80,11 @@ public class Main {
 
         @Override
         public void closeSplashScreen() {
-            SplashScreen splash = SplashScreen.getSplashScreen();
-            if (splash != null) {
-                splash.close();
+            //could throw exception..
+            try {
+                Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
