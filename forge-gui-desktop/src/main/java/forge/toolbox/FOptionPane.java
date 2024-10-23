@@ -15,9 +15,7 @@ import javax.swing.text.StyleConstants;
 import com.google.common.collect.ImmutableList;
 
 import forge.gui.FThreads;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.Localizer;
 import forge.view.FDialog;
@@ -182,7 +180,6 @@ public class FOptionPane extends FDialog {
         final int gapBottom = comp == null ? gapAboveButtons : padding;
         FLabel centeredLabel = null;
         FTextPane prompt = null;
-        final int okShortCut = Integer.parseInt(FModel.getPreferences().getPref(ForgePreferences.FPref.SHORTCUT_PRESS_BUTTON));
 
         if (icon != null) {
             if (icon.getWidth() < 100) {
@@ -256,21 +253,27 @@ public class FOptionPane extends FDialog {
             btn.addKeyListener(new KeyAdapter() { //hook certain keys to move focus between buttons
                 @Override
                 public void keyPressed(final KeyEvent e) {
-                    int code = e.getKeyCode();
-                    if(okShortCut == code) {
-                        btn.doClick();
-                    }
-                    else if(KeyEvent.VK_LEFT == code && option > 0){
-                        buttons[option - 1].requestFocusInWindow();
-                    }
-                    else if( KeyEvent.VK_RIGHT == code && option < lastOption){
-                        buttons[option + 1].requestFocusInWindow();
-                    }
-                    else if(KeyEvent.VK_HOME == code && option > 0) {
-                        buttons[0].requestFocusInWindow();
-                    }
-                    else if(KeyEvent.VK_END == code && option < lastOption) {
-                        buttons[lastOption].requestFocusInWindow();
+                    switch (e.getKeyCode()) {
+                    case KeyEvent.VK_LEFT:
+                        if (option > 0) {
+                            buttons[option - 1].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (option < lastOption) {
+                            buttons[option + 1].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_HOME:
+                        if (option > 0) {
+                            buttons[0].requestFocusInWindow();
+                        }
+                        break;
+                    case KeyEvent.VK_END:
+                        if (option < lastOption) {
+                            buttons[lastOption].requestFocusInWindow();
+                        }
+                        break;
                     }
                 }
             });
