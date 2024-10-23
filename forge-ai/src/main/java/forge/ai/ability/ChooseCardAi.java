@@ -29,6 +29,7 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 
 public class ChooseCardAi extends SpellAbilityAi {
 
@@ -58,11 +59,27 @@ public class ChooseCardAi extends SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
+
         ZoneType choiceZone = ZoneType.Battlefield;
+        CardCollectionView choices = new CardCollection();
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            String definedChoiceZone = sa.getParam("ChoiceZone");
+            if (definedChoiceZone.contains(",")) {
+                String[] zones = TextUtil.split(definedChoiceZone, ',');
+                CardCollection allChoices = new CardCollection();
+                for (String zone : zones) {
+                    choiceZone = ZoneType.smartValueOf(zone);
+                    allChoices.addAll(game.getCardsIn(choiceZone));
+                }
+                choices = allChoices;
+            } else {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                choices = game.getCardsIn(choiceZone);
+            }
+        } else {
+            choices = game.getCardsIn(choiceZone); // Defaults to ZoneType.Battlefield
         }
-        CardCollectionView choices = game.getCardsIn(choiceZone);
+
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
@@ -129,6 +146,13 @@ public class ChooseCardAi extends SpellAbilityAi {
                 ownChoices = CardLists.filter(choices, CardPredicates.isControlledByAnyOf(ai.getAllies()));
             }
             return !ownChoices.isEmpty();
+        } else if (aiLogic.equals("GoodCreature")) {
+            for (Card choice : choices) {
+                if (choice.isCreature() && ComputerUtilCard.evaluateCreature(choice) >= 250) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
     }
