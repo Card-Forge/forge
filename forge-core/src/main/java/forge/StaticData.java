@@ -1,6 +1,5 @@
 package forge;
 
-import com.google.common.base.Predicate;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
@@ -16,6 +15,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**

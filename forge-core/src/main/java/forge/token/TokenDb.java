@@ -1,6 +1,5 @@
 package forge.token;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import forge.card.CardDb;
 import forge.card.CardEdition;
@@ -8,6 +7,7 @@ import forge.card.CardRules;
 import forge.item.PaperToken;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class TokenDb implements ITokenDatabase {
     // Expected naming convention of scripts

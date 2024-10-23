@@ -1,14 +1,12 @@
 package forge.deck.generation;
 
+import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
+import forge.util.IterableUtil;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-
-import forge.item.IPaperCard;
-import forge.item.PaperCard;
+import java.util.function.Predicate;
 
 public class DeckGenPool implements IDeckGenPool {
     private final Map<String, PaperCard> cards = new HashMap<>();
@@ -39,12 +37,10 @@ public class DeckGenPool implements IDeckGenPool {
 
     @Override
     public PaperCard getCard(String name, String edition) {
-        Predicate<PaperCard> filter = Predicates.and(IPaperCard.Predicates.printedInSet(edition),IPaperCard.Predicates.name(name));
-        Iterable<PaperCard> editionCards=Iterables.filter(cards.values(), filter);
-        if (editionCards.iterator().hasNext()){
-            return editionCards.iterator().next();
-        }
-        return getCard(name);
+        Predicate<PaperCard> filter = PaperCardPredicates.printedInSet(edition).and(PaperCardPredicates.name(name));
+        return cards.values().stream()
+                .filter(filter)
+                .findFirst().orElseGet(() -> getCard(name));
     }
 
     @Override
@@ -68,6 +64,6 @@ public class DeckGenPool implements IDeckGenPool {
 
     @Override
     public Iterable<PaperCard> getAllCards(Predicate<PaperCard> filter) {
-        return Iterables.filter(getAllCards(), filter);
+        return IterableUtil.filter(getAllCards(), filter);
     }
 }

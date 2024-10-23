@@ -1,10 +1,9 @@
 package forge.itemmanager.filters;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.deck.DeckProxy;
 import forge.itemmanager.ItemManager;
+
+import java.util.function.Predicate;
 
 
 public class DeckFormatFilter extends FormatFilter<DeckProxy> {
@@ -22,7 +21,7 @@ public class DeckFormatFilter extends FormatFilter<DeckProxy> {
     @Override
     protected final Predicate<DeckProxy> buildPredicate() {
         if (format == null) {
-            return Predicates.alwaysTrue();
+            return x -> true;
         }
         return input -> format.isDeckLegal(input.getDeck());
     }

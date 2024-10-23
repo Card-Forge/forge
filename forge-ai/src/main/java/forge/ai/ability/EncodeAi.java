@@ -17,9 +17,6 @@
  */
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
@@ -29,6 +26,9 @@ import forge.game.combat.CombatUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>

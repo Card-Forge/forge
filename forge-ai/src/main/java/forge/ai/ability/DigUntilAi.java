@@ -1,8 +1,5 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import forge.ai.AiAttackController;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
@@ -15,6 +12,9 @@ import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Map;
 
 public class DigUntilAi extends SpellAbilityAi {
 
@@ -45,7 +45,7 @@ public class DigUntilAi extends SpellAbilityAi {
                 return false;
             }
             if ("Land.Basic".equals(sa.getParam("Valid"))
-                    && ai.getZone(ZoneType.Hand).contains(CardPredicates.Presets.LANDS_PRODUCING_MANA)) {
+                    && ai.getZone(ZoneType.Hand).contains(CardPredicates.LANDS_PRODUCING_MANA)) {
                 // We already have a mana-producing land in hand, so bail
                 // until opponent's end of turn phase!
                 // But we still want more (and want to fill grave) if nothing better to do then
@@ -128,7 +128,7 @@ public class DigUntilAi extends SpellAbilityAi {
             final String logic = sa.getParam("AILogic");
             if ("OathOfDruids".equals(logic)) {
                 final List<Card> creaturesInLibrary =
-                        CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                        CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
                 final List<Card> creaturesInBattlefield = player.getCreaturesInPlay();
                 // if there are at least 3 creatures in library,
                 // or none in play with one in library, oath

@@ -1,6 +1,5 @@
 package forge.itemmanager;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
@@ -17,12 +16,13 @@ import forge.model.FModel;
 import forge.screens.home.quest.DialogChooseFormats;
 import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
-import forge.util.CollectionSuppliers;
 import forge.util.Localizer;
 
 import javax.swing.*;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /** 
  * ItemManager for cards
@@ -56,7 +56,7 @@ public class CardManager extends ItemManager<PaperCard> {
     @Override
     protected Iterable<Entry<PaperCard, Integer>> getUnique(Iterable<Entry<PaperCard, Integer>> items) {
         ListMultimap<String, Entry<PaperCard, Integer>> entriesByName = Multimaps.newListMultimap(
-                new TreeMap<>(String.CASE_INSENSITIVE_ORDER), CollectionSuppliers.arrayLists());
+                new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
         for (Entry<PaperCard, Integer> item : items) {
             final String cardName = item.getKey().getName();
             entriesByName.put(cardName, item);
@@ -67,7 +67,7 @@ public class CardManager extends ItemManager<PaperCard> {
         for (String cardName : entriesByName.keySet()) {
             List<Entry<PaperCard, Integer>> entries = entriesByName.get(cardName);
 
-            ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), CollectionSuppliers.arrayLists());
+            ListMultimap<CardEdition, Entry<PaperCard, Integer>> entriesByEdition = Multimaps.newListMultimap(new HashMap<>(), Lists::newArrayList);
             for (Entry<PaperCard, Integer> entry : entries) {
                 CardEdition ed = StaticData.instance().getCardEdition(entry.getKey().getEdition());
                 if (ed != null)
@@ -77,7 +77,8 @@ public class CardManager extends ItemManager<PaperCard> {
                 continue;  // skip card
 
             // Try to retain only those editions accepted by the current Card Art Preference Policy
-            List<CardEdition> acceptedEditions = Lists.newArrayList(Iterables.filter(entriesByEdition.keySet(), ed -> StaticData.instance().getCardArtPreference().accept(ed)));
+            Predicate<CardEdition> editionPredicate = ed -> StaticData.instance().getCardArtPreference().accept(ed);
+            List<CardEdition> acceptedEditions = entriesByEdition.keySet().stream().filter(editionPredicate).collect(Collectors.toList());
 
             // If policy too strict, fall back to getting all editions.
             if (acceptedEditions.size() == 0)

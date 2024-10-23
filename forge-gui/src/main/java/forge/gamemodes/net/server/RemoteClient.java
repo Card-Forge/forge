@@ -1,11 +1,11 @@
 package forge.gamemodes.net.server;
 
-import java.util.concurrent.TimeoutException;
-
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
+
+import java.util.concurrent.TimeoutException;
 
 public final class RemoteClient implements IToClient {
 

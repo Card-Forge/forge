@@ -1,29 +1,12 @@
 package forge.ai.ability;
 
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
-
-import forge.ai.AiController;
-import forge.ai.AiProps;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilCost;
-import forge.ai.ComputerUtilMana;
-import forge.ai.PlayerControllerAi;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
+import forge.game.card.*;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -42,6 +25,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -381,7 +367,8 @@ public class TokenAi extends SpellAbilityAi {
 
         // look for card without role from ai
         List<Card> prefListSBA = CardLists.filter(tgts, c ->
-        !Iterables.any(c.getAttachedCards(), att -> att.getController() == ai && att.getType().hasSubtype("Role")));
+                !c.getAttachedCards().anyMatch(att ->
+                        att.getController() == ai && att.getType().hasSubtype("Role")));
 
         List<Card> prefList;
         if (isCurse) {
