@@ -5,7 +5,7 @@ Name=War of the Spark
 Code2=WAR
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 3 Uncommon:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 RareMythic:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("WAR cards"), 3 Uncommon:fromSheet("WAR cards"), 1 RareMythic:fromSheet("WAR cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
 FatPack=10
 FatPackExtraSlots=80 BasicLands
@@ -14,9 +14,7 @@ ScryfallCode=WAR
 
 [cards]
 1 R Karn, the Great Creator @Wisnu Tan
-1★ R Karn, the Great Creator @Naochika Morishita
 2 R Ugin, the Ineffable @Daarken
-2★ R Ugin, the Ineffable @Maekawa Yuichi
 3 U Ugin's Conjurant @Ryan Yee
 4 U Ajani's Pridemate @Sidharth Chaturvedi
 5 C Battlefield Promotion @Scott Murphy
@@ -28,7 +26,6 @@ ScryfallCode=WAR
 11 C Enforcer Griffin @Johan Grenier
 12 M Finale of Glory @Stanton Feng
 13 M Gideon Blackblade @Viktor Titov
-13★ M Gideon Blackblade @Tada
 14 C Gideon's Sacrifice @Chris Rallis
 15 U Gideon's Triumph @Kieran Yanner
 16 M God-Eternal Oketra @Grzegorz Rutkowski
@@ -48,13 +45,11 @@ ScryfallCode=WAR
 30 R Single Combat @Livia Prima
 31 U Sunblade Angel @Johannes Voss
 32 U Teyo, the Shieldmage @Magali Villeneuve
-32★ U Teyo, the Shieldmage @Foo Midori
 33 C Teyo's Lightshield @Igor Kieryluk
 34 R Tomik, Distinguished Advokist @Johannes Voss
 35 C Topple the Statue @Sidharth Chaturvedi
 36 C Trusted Pegasus @Chris Rahn
 37 U The Wanderer @Wesley Burt
-37★ U The Wanderer @Norikatsu Miyoshi
 38 C Wanderer's Strike @Sara Winters
 39 C War Screecher @Dan Murayama Scott
 40 C Ashiok's Skulker @Livia Prima
@@ -72,16 +67,13 @@ ScryfallCode=WAR
 52 U Flux Channeler @Heonhwa Choe
 53 M God-Eternal Kefnet @Lius Lasahido
 54 R Jace, Wielder of Mysteries @Anna Steinbauer
-54★ R Jace, Wielder of Mysteries @Toshiaki Takayama
 55 U Jace's Triumph @Kieran Yanner
 56 U Kasmina, Enigmatic Mentor @Magali Villeneuve
-56★ U Kasmina, Enigmatic Mentor @Mid
 57 C Kasmina's Transmutation @Uriah Voth
 58 C Kiora's Dambreaker @Mathias Kollros
 59 U Lazotep Plating @Yeong-Hao Han
 60 C Naga Eternal @Johann Bodin
 61 U Narset, Parter of Veils @Magali Villeneuve
-61★ U Narset, Parter of Veils @Foo Midori
 62 R Narset's Reversal @Viktor Titov
 63 C No Escape @G-host Lee
 64 C Relentless Advance @Stanton Feng
@@ -104,7 +96,6 @@ ScryfallCode=WAR
 81 C Charity Extractor @Matt Stewart
 82 R Command the Dreadhorde @Daarken
 83 U Davriel, Rogue Shadowmage @Daarken
-83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru
 84 C Davriel's Shadowfugue @Daarken
 85 R Deliver Unto Evil @Seb McKinnon
 86 R Dreadhorde Invasion @Stanton Feng
@@ -119,11 +110,9 @@ ScryfallCode=WAR
 95 C Lazotep Behemoth @Zezhou Chen
 96 C Lazotep Reaver @Craig J Spearing
 97 M Liliana, Dreadhorde General @Chris Rallis
-97★ M Liliana, Dreadhorde General @Yoshitaka Amano
 98 U Liliana's Triumph @Kieran Yanner
 99 R Massacre Girl @Chris Rallis
 100 U Ob Nixilis, the Hate-Twisted @Yongjae Choi
-100★ U Ob Nixilis, the Hate-Twisted @Sansyu
 101 C Ob Nixilis's Cruelty @Igor Kieryluk
 102 U Price of Betrayal @Ryan Yee
 103 C Shriekdiver @Piotr Dura
@@ -143,7 +132,6 @@ ScryfallCode=WAR
 117 C Burning Prophet @Mathias Kollros
 118 C Chainwhip Cyclops @Johann Bodin
 119 R Chandra, Fire Artisan @Yongjae Choi
-119★ R Chandra, Fire Artisan @Ryota-H
 120 C Chandra's Pyrohelix @Aleksi Briclot
 121 U Chandra's Triumph @Kieran Yanner
 122 U Cyclops Electromancer @Jason Felix
@@ -160,7 +148,6 @@ ScryfallCode=WAR
 133 M Ilharg, the Raze-Boar @Filip Burburan
 134 C Invading Manticore @Jehan Choo
 135 U Jaya, Venerated Firemage @Yongjae Choi
-135★ U Jaya, Venerated Firemage @Maekawa Yuichi
 136 C Jaya's Greeting @Victor Adame Minguez
 137 R Krenko, Tin Street Kingpin @Mark Behm
 138 R Mizzium Tank @Wayne Reynolds
@@ -169,16 +156,13 @@ ScryfallCode=WAR
 141 C Raging Kronch @Steve Prescott
 142 C Samut's Sprint @Aleksi Briclot
 143 R Sarkhan the Masterless @Kieran Yanner
-143★ R Sarkhan the Masterless @Lack
 144 C Sarkhan's Catharsis @Zack Stella
 145 C Spellgorger Weird @James Paick
 146 U Tibalt, Rakish Instigator @Chase Stone
-146★ U Tibalt, Rakish Instigator @Clover.K
 147 U Tibalt's Rager @Yongjae Choi
 148 C Turret Ogre @Johann Bodin
 149 C Arboreal Grazer @Jason Rainville
 150 U Arlinn, Voice of the Pack @Ryan Pancoast
-150★ U Arlinn, Voice of the Pack @D-suzuki
 151 C Arlinn's Wolf @Kimonas Theodossiou
 152 R Awakening of Vitu-Ghazi @Jaime Jones
 153 C Band Together @Josh Hass
@@ -193,13 +177,11 @@ ScryfallCode=WAR
 162 C Giant Growth @Dmitry Burmak
 163 M God-Eternal Rhonas @Lius Lasahido
 164 U Jiang Yanggu, Wildcrafter @Anna Steinbauer
-164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka
 165 C Kraul Stinger @Randy Vargas
 166 C Kronch Wrangler @Steve Prescott
 167 U Mowu, Loyal Companion @Kimonas Theodossiou
 168 C New Horizons @Eytan Zana
 169 R Nissa, Who Shakes the World @Chris Rallis
-169★ R Nissa, Who Shakes the World @Hitowa
 170 U Nissa's Triumph @Kieran Yanner
 171 U Paradise Druid @Nils Hamm
 172 R Planewide Celebration @Wisnu Tan
@@ -211,12 +193,10 @@ ScryfallCode=WAR
 178 U Storm the Citadel @Grzegorz Rutkowski
 179 C Thundering Ceratok @Izzy
 180 R Vivien, Champion of the Wilds @Magali Villeneuve
-180★ R Vivien, Champion of the Wilds @Hisashi Momose
 181 R Vivien's Arkbow @Zack Stella
 182 C Vivien's Grizzly @Lius Lasahido
 183 C Wardscale Crocodile @Zezhou Chen
 184 R Ajani, the Greathearted @Victor Adame Minguez
-184★ R Ajani, the Greathearted @Miho Midorikawa
 185 U Angrath's Rampage @Victor Adame Minguez
 186 R Bioessence Hydra @Mathias Kollros
 187 R Casualties of War @Tomasz Jedruszek
@@ -224,7 +204,6 @@ ScryfallCode=WAR
 189 U Deathsprout @Seb McKinnon
 190 U Despark @Slawomir Maniak
 191 R Domri, Anarch of Bolas @Raymond Swanland
-191★ R Domri, Anarch of Bolas @Raita Kazama
 192 U Domri's Ambush @Victor Adame Minguez
 193 U Dovin's Veto @Izzy
 194 R Dreadhorde Butcher @Piotr Dura
@@ -241,50 +220,35 @@ ScryfallCode=WAR
 205 U Merfolk Skydiver @Sara Winters
 206 U Neoform @Bram Sels
 207 M Nicol Bolas, Dragon-God @Raymond Swanland
-207★ M Nicol Bolas, Dragon-God @Kaida Yuji
 208 M Niv-Mizzet Reborn @Raymond Swanland
 209 R Oath of Kaya @Wesley Burt
 210 U Pledge of Unity @Chris Rallis
 211 R Ral, Storm Conduit @Wesley Burt
-211★ R Ral, Storm Conduit @Naochika Morishita
 212 U Ral's Outburst @Joseph Meehan
 213 M Roalesk, Apex Hybrid @Svetlin Velinov
 214 R Role Reversal @Mathias Kollros
 215 U Rubblebelt Rioters @Tomasz Jedruszek
 216 R Solar Blaze @Adam Paquette
 217 R Sorin, Vengeful Bloodlord @Tommy Arnold
-217★ R Sorin, Vengeful Bloodlord @Yukie Tajima
 218 R Soul Diviner @Randy Vargas
 219 R Storrev, Devkarin Lich @Igor Kieryluk
 220 R Tamiyo, Collector of Tales @Chase Stone
-220★ R Tamiyo, Collector of Tales @Fuzichoco
 221 R Teferi, Time Raveler @Chris Rallis
-221★ R Teferi, Time Raveler @Shishizaru
 222 U Tenth District Legionnaire @Victor Adame Minguez
 223 R Time Wipe @Svetlin Velinov
 224 R Tolsimir, Friend to Wolves @Ryan Pancoast
 225 U Tyrant's Scorn @Svetlin Velinov
 226 R Widespread Brutality @Victor Adame Minguez
 227 U Angrath, Captain of Chaos @Slawomir Maniak
-227★ U Angrath, Captain of Chaos @Sansyu
 228 U Ashiok, Dream Render @Cynthia Sheppard
-228★ U Ashiok, Dream Render @Hozan Shinomaru
 229 U Dovin, Hand of Control @Kieran Yanner
-229★ U Dovin, Hand of Control @Nablange
 230 U Huatli, the Sun's Heart @Lius Lasahido
-230★ U Huatli, the Sun's Heart @Mikio Masuda
 231 U Kaya, Bane of the Dead @Magali Villeneuve
-231★ U Kaya, Bane of the Dead @Mid
 232 U Kiora, Behemoth Beckoner @Jaime Jones
-232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
 233 U Nahiri, Storm of Stone @Aleksi Briclot
-233★ U Nahiri, Storm of Stone @Yukie Tajima
 234 U Saheeli, Sublime Artificer @Wesley Burt
-234★ U Saheeli, Sublime Artificer @Hisashi Momose
 235 U Samut, Tyrant Smasher @Aleksi Briclot
-235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
 236 U Vraska, Swarm's Eminence @Anna Steinbauer
-236★ U Vraska, Swarm's Eminence @Ryota Murayama
 237 U Firemind Vessel @Ravenna Tran
 238 U God-Pharaoh's Statue @Igor Kieryluk
 239 C Guild Globe @Daniel Ljunggren
@@ -313,6 +277,46 @@ ScryfallCode=WAR
 262 L Forest @Jonas De Ro
 263 L Forest @Titus Lunter
 264 L Forest @Richard Wright
+
+[promo]
+1★ R Karn, the Great Creator @Naochika Morishita
+2★ R Ugin, the Ineffable @Maekawa Yuichi
+13★ M Gideon Blackblade @Tada
+32★ U Teyo, the Shieldmage @Foo Midori
+37★ U The Wanderer @Norikatsu Miyoshi
+54★ R Jace, Wielder of Mysteries @Toshiaki Takayama
+56★ U Kasmina, Enigmatic Mentor @Mid
+61★ U Narset, Parter of Veils @Foo Midori
+83★ U Davriel, Rogue Shadowmage @Hagiya Kaoru
+97★ M Liliana, Dreadhorde General @Yoshitaka Amano
+100★ U Ob Nixilis, the Hate-Twisted @Sansyu
+119★ R Chandra, Fire Artisan @Ryota-H
+135★ U Jaya, Venerated Firemage @Maekawa Yuichi
+143★ R Sarkhan the Masterless @Lack
+146★ U Tibalt, Rakish Instigator @Clover.K
+150★ U Arlinn, Voice of the Pack @D-suzuki
+164★ U Jiang Yanggu, Wildcrafter @Daisuke Izuka
+169★ R Nissa, Who Shakes the World @Hitowa
+180★ R Vivien, Champion of the Wilds @Hisashi Momose
+184★ R Ajani, the Greathearted @Miho Midorikawa
+191★ R Domri, Anarch of Bolas @Raita Kazama
+207★ M Nicol Bolas, Dragon-God @Kaida Yuji
+211★ R Ral, Storm Conduit @Naochika Morishita
+217★ R Sorin, Vengeful Bloodlord @Yukie Tajima
+220★ R Tamiyo, Collector of Tales @Fuzichoco
+221★ R Teferi, Time Raveler @Shishizaru
+227★ U Angrath, Captain of Chaos @Sansyu
+228★ U Ashiok, Dream Render @Hozan Shinomaru
+229★ U Dovin, Hand of Control @Nablange
+230★ U Huatli, the Sun's Heart @Mikio Masuda
+231★ U Kaya, Bane of the Dead @Mid
+232★ U Kiora, Behemoth Beckoner @Yamamoto Akifumi
+233★ U Nahiri, Storm of Stone @Yukie Tajima
+234★ U Saheeli, Sublime Artificer @Hisashi Momose
+235★ U Samut, Tyrant Smasher @Norikatsu Miyoshi
+236★ U Vraska, Swarm's Eminence @Ryota Murayama
+
+[precon product]
 265 M Gideon, the Oathsworn @Kieran Yanner
 266 C Desperate Lunge @Deruchenko Alexander
 267 R Gideon's Battle Cry @Zoltan Boros
@@ -323,6 +327,8 @@ ScryfallCode=WAR
 272 U Jace's Projection @Darek Zabrocki
 273 R Jace's Ruse @Clint Cearley
 274 C Simic Guildgate @Adam Paquette
+
+[buy a box]
 275 M Tezzeret, Master of the Bridge @Chase Stone
 
 [rebalanced]
@@ -347,3 +353,5 @@ voja_friend_to_elves
 w_0_3_wall_defender
 w_2_2_soldier_vigilance
 w_4_4_angel_flying_vigilance
+
+ 

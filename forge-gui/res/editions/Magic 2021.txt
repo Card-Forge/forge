@@ -302,6 +302,12 @@ ScryfallCode=M21
 282 M Liliana, Waker of the Dead @Magali Villeneuve
 283 M Chandra, Heart of Fire @Jason Rainville
 284 M Garruk, Unleashed @Cristi Balanescu
+314 R Containment Priest @Jesper Ejsing
+315 M Grim Tutor @Antonio José Manzanedo
+316 M Massacre Wurm @Kekai Kotaki
+317 R Cultivate @Billy Christian
+318 R Scavenging Ooze @Sam Rowan
+319 R Solemn Simulacrum @Joseph Meehan
 
 [showcase]
 285 M Ugin, the Spirit Dragon @Raymond Swanland
@@ -333,12 +339,6 @@ ScryfallCode=M21
 311 L Swamp @Jonas De Ro
 312 L Mountain @Jonas De Ro
 313 L Forest @Jonas De Ro
-314 R Containment Priest @Jesper Ejsing
-315 M Grim Tutor @Antonio José Manzanedo
-316 M Massacre Wurm @Kekai Kotaki
-317 R Cultivate @Billy Christian
-318 R Scavenging Ooze @Sam Rowan
-319 R Solemn Simulacrum @Joseph Meehan
 
 [precon product]
 320 M Basri, Devoted Paladin @Jason Rainville

@@ -420,6 +420,8 @@ ScryfallCode=SNC
 403 R Void Rend @Krharts
 404 M Ziatora, the Incinerator @Scott M. Fischer
 405 R Ziatora's Envoy @Olga Tereshenko
+
+[etched]
 441 M Elspeth Resplendent @Krharts
 442 R Giada, Font of Hope @Scott M. Fischer
 443 M Sanctuary Warden @Julie Dillon

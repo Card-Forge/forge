@@ -5,8 +5,8 @@ Name=Hour of Devastation
 Code2=HOU
 Type=Expansion
 BoosterCovers=5
-Booster=10 Common:!fromSheet("HOU Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 BasicLand
-AdditionalSheetForFoils=fromSheet("MPS Hour of Devastation Invocations")
+Booster=10 Common:fromSheet("HOU cards"), 3 Uncommon:fromSheet("HOU cards"), 1 RareMythic:fromSheet("HOU cards"), 1 BasicLand
+AdditionalSheetForFoils=fromSheet("MPS_AKH special slot")
 FatPack=10
 FatPackExtraSlots=80 BasicLands
 AdditionalSetUnlockedInQuest=MPS_AKH
@@ -214,6 +214,8 @@ ScryfallCode=HOU
 197 L Mountain @Kev Walker
 198 L Forest @Titus Lunter
 199 L Forest @Mark Poole
+
+[precon product]
 200 M Nissa, Genesis Mage @Chris Rallis
 201 U Avid Reclaimer @Josu Hernaiz
 202 C Brambleweft Behemoth @Florian de Gesincourt

@@ -298,7 +298,7 @@ ScryfallCode=TSR
 288 U Urza's Factory @Mark Tedin
 289 M Vesuva @Zoltan Boros & Gabor Szikszai
 
-[showcase]
+[retro frame]
 290 S Ajani's Pridemate @Svetlin Velinov
 291 S Banishing Light @Willian Murai
 292 S Containment Priest @John Stanko
@@ -421,7 +421,7 @@ ScryfallCode=TSR
 409 S Ramunap Ruins @Florian de Gesincourt
 410 S Wastes @Raymond Swanland
 
-[promo]
+[buy a box]
 411 R Lotus Bloom @Christopher Rush
 
 [tokens]

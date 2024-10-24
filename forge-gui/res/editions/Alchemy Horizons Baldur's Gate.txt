@@ -55,15 +55,6 @@ ScryfallCode=HBG
 43 U Grave Choice @Will Gist
 44 C Hook Horror @Olivier Bernard
 45 R The Hourglass Coven @Konstantin Porubov
-45a R Hag of Ceaseless Torment @Konstantin Porubov
-45b R Hag of Dark Duress @Konstantin Porubov
-45c R Hag of Death's Legion @Konstantin Porubov
-45d R Hag of Inner Weakness @Konstantin Porubov
-45e R Hag of Mage's Doom @Konstantin Porubov
-45f R Hag of Noxious Nightmares @Konstantin Porubov
-45g R Hag of Scoured Thoughts @Konstantin Porubov
-45h R Hag of Syphoned Breath @Konstantin Porubov
-45i R Hag of Twisted Visions @Konstantin Porubov
 46 U Mind Spike @Matt Forsyth
 47 C Sewer Plague @Piotr Foksowicz
 48 R Stroke of Luck @Forrest Imel
@@ -93,7 +84,7 @@ ScryfallCode=HBG
 72 R Jon Irenicus, the Exile @Igor Grechanyi
 73 U Liara of the Flaming Fist @David Rapoza
 74 U Minthara of the Absolute @Evyn Fong
-75 M Tasha, Unholy Archmage @Martina Fackova
+75 M Tasha, Unholy Archmage @Martina Fačková
 76 R Ulder Ravengard, Marshal @Eric Deschamps
 77 U Gate of the Black Dragon @Sergey Glushakov
 78 U Gate to Manorborn @Andreas Rocha
@@ -211,8 +202,8 @@ ScryfallCode=HBG
 190 U Swashbuckler Extraordinaire @Durion
 191 U Two-Handed Axe @Milivoj Ćeran
 192 C Unexpected Windfall @Alayna Danner
-193 C Valor Singer @Justyna Gil
-194 R Wrathful Red Dragon @Dan Scott
+193 C Valor Singer @Justyna Dura
+194 R Wrathful Red Dragon @Dan Murayama Scott
 195 C You Come to the Gnoll Camp @Billy Christian
 196 C You Find Some Prisoners @Lie Setiawan
 197 C Young Red Dragon @Adam Vehige
@@ -259,7 +250,7 @@ ScryfallCode=HBG
 238 U Korlessa, Scale Singer @Jesper Ejsing
 239 U Krydle of Baldur's Gate @Bryan Sola
 240 U Lozhan, Dragons' Legacy @Rudy Siswanto
-241 R Mazzy, Truesword Paladin @Justyna Gil
+241 R Mazzy, Truesword Paladin @Justyna Dura
 242 R Miirym, Sentinel Wyrm @Kekai Kotaki
 243 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 244 M Nalia de'Arnise @John Stanko
@@ -268,7 +259,7 @@ ScryfallCode=HBG
 247 M Prosper, Tome-Bound @Yongjae Choi
 248 R Raggadragga, Goreguts Boss @Xavier Ribeiro
 249 R Raphael, Fiendish Savior @Livia Prima
-250 U Thrakkus the Butcher @Nestor Ossandon Leal
+250 U Thrakkus the Butcher @Néstor Ossandón Leal
 251 U Trelasarra, Moon Dancer @Kieran Yanner
 252 U Bag of Holding @Evyn Fong
 253 R Basilisk Collar @Craig J Spearing
@@ -337,3 +328,15 @@ A239 U A-Krydle of Baldur's Gate @Bryan Sola
 A243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 A259 C A-Lantern of Revealing @Eytan Zana
 A262 U A-Navigation Orb @Robin Olausson
+
+[conjured]
+45a R Hag of Ceaseless Torment @Konstantin Porubov
+45b R Hag of Dark Duress @Konstantin Porubov
+45c R Hag of Death's Legion @Konstantin Porubov
+45d R Hag of Inner Weakness @Konstantin Porubov
+45e R Hag of Mage's Doom @Konstantin Porubov
+45f R Hag of Noxious Nightmares @Konstantin Porubov
+45g R Hag of Scoured Thoughts @Konstantin Porubov
+45h R Hag of Syphoned Breath @Konstantin Porubov
+45i R Hag of Twisted Visions @Konstantin Porubov
+

@@ -66,7 +66,6 @@ Prerelease=6 Boosters, 1 RareMythic+
 55 C Galedrifter @Daniel Ljunggren
 56 C Geistwave @Olena Richards
 57 R Grafted Identity @Manuel Castañón
-57† R Grafted Identity @Manuel Castañón
 58 C Larder Zombie @E. M. Gist
 59 M Lier, Disciple of the Drowned @Ekaterina Burmak
 60 C Locked in the Cemetery @Tran Nguyen
@@ -288,6 +287,16 @@ Prerelease=6 Boosters, 1 RareMythic+
 276 L Forest @Alayna Danner
 277 L Forest @Dan Mumford
 
+[alternate art]
+57† R Grafted Identity @Manuel Castañón
+
+[precon product]
+380 L Plains @Andreas Rocha
+381 L Island @Andreas Rocha
+382 L Swamp @Kasia 'Kafis' Zielińska
+383 L Mountain @Muhammad Firdaus
+384 L Forest @Andreas Rocha
+
 [borderless]
 278 M Wrenn and Seven @Bram Sels
 279 M Arlinn, the Pack's Hope @Eric Deschamps
@@ -395,11 +404,6 @@ Prerelease=6 Boosters, 1 RareMythic+
 377 R The Celestus @Jonas De Ro
 378 R Pithing Needle @Ovidio Cartagena
 379 M Hostile Hostel @Daniel Ljunggren
-380 L Plains @Andreas Rocha
-381 L Island @Andreas Rocha
-382 L Swamp @Kasia 'Kafis' Zielińska
-383 L Mountain @Muhammad Firdaus
-384 L Forest @Andreas Rocha
 
 [buy a box]
 385 R Champion of the Perished @Daarken
