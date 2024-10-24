@@ -26,6 +26,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
@@ -85,6 +86,7 @@ public enum FControl implements KeyEventDispatcher {
     private boolean altKeyLastDown;
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
+    private String snapsVersion = "";
 
     public enum CloseAction {
         NONE,
@@ -212,6 +214,12 @@ public enum FControl implements KeyEventDispatcher {
 
     /** After view and model have been initialized, control can start.*/
     public void initialize() {
+        //get version string
+        try {
+            URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
+            snapsVersion = FileUtil.readFileToString(url);
+
+        } catch (Exception e) {}
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
@@ -266,6 +274,12 @@ public enum FControl implements KeyEventDispatcher {
         setGlobalKeyboardHandler();
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
+    }
+    public String compareVersion(String currentVersion) {
+        if (currentVersion.isEmpty() || snapsVersion.isEmpty()
+                || !currentVersion.contains("SNAPSHOT") || currentVersion.equalsIgnoreCase(snapsVersion))
+            return "";
+        return "NEW SNAPSHOT AVAILABLE!!!";
     }
 
     private void setGlobalKeyboardHandler() {
