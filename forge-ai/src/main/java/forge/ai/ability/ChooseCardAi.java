@@ -65,15 +65,14 @@ public class ChooseCardAi extends SpellAbilityAi {
         if (sa.hasParam("ChoiceZone")) {
             String definedChoiceZone = sa.getParam("ChoiceZone");
             if (definedChoiceZone.contains(",")) {
-                String[] zones = TextUtil.split(definedChoiceZone, ',');
+                List<ZoneType> zones = ZoneType.listValueOf(definedChoiceZone);
                 CardCollection allChoices = new CardCollection();
-                for (String zone : zones) {
-                    choiceZone = ZoneType.smartValueOf(zone);
-                    allChoices.addAll(game.getCardsIn(choiceZone));
+                for (ZoneType zone : zones) {
+                    allChoices.addAll(game.getCardsIn(zone));
                 }
                 choices = allChoices;
             } else {
-                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                choiceZone = ZoneType.smartValueOf(definedChoiceZone);
                 choices = game.getCardsIn(choiceZone);
             }
         } else {
