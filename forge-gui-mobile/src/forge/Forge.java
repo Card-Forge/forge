@@ -159,7 +159,7 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
-        getDeviceAdapter().closeSplashScreen();
+        FThreads.invokeInEdtLater(() -> getDeviceAdapter().closeSplashScreen());
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
