@@ -50,9 +50,11 @@ public class ChooseCardAi extends SpellAbilityAi {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
 
-        List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
+        List<ZoneType> choiceZone;
         if (sa.hasParam("ChoiceZone")) {
             choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
+        } else {
+            choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         }
         CardCollectionView choices = game.getCardsIn(choiceZone);
 
