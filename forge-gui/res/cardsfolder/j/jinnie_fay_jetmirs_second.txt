@@ -2,10 +2,10 @@ Name:Jinnie Fay, Jetmir's Second
 ManaCost:RG G GW
 Types:Legendary Creature Elf Druid
 PT:3/3
-R:Event$ CreateToken | ActiveZones$ Battlefield | ValidToken$ Card.YouCtrl | ReplaceWith$ GenericChoice | Optional$ True | Description$ If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance.
+R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ GenericChoice | Optional$ True | Description$ If you would create one or more tokens, you may instead create that many 2/2 green Cat creature tokens with haste or that many 3/1 green Dog creature tokens with vigilance.
 SVar:GenericChoice:DB$ GenericChoice | Choices$ Cat,Dog
-SVar:Cat:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Card.YouCtrl | TokenScript$ g_2_2_cat_haste | SpellDescription$ Create that many 2/2 green Cat creature tokens with haste.
-SVar:Dog:DB$ ReplaceToken | Type$ ReplaceToken | ValidCard$ Card.YouCtrl | TokenScript$ g_3_1_dog_vigilance | SpellDescription$ Create that many 3/1 green Dog creature tokens with vigilance.
+SVar:Cat:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ g_2_2_cat_haste | SpellDescription$ Create that many 2/2 green Cat creature tokens with haste.
+SVar:Dog:DB$ ReplaceToken | Type$ ReplaceToken | TokenScript$ g_3_1_dog_vigilance | SpellDescription$ Create that many 3/1 green Dog creature tokens with vigilance.
 AI:RemoveDeck:Random
 DeckHas:Type$Cat|Dog
 DeckNeeds:Ability$Token

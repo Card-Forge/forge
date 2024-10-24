@@ -130,6 +130,10 @@ public class TriggerChangesZone extends Trigger {
             return false;
         }
 
+        if (!matchesValidParam("ValidPutter", runParams.get(AbilityKey.Putter))) {
+            return false;
+        }
+
         if (hasParam("Fizzle")) {
             if (!runParams.containsKey(AbilityKey.Fizzle)) {
                 return false;
@@ -203,7 +207,7 @@ public class TriggerChangesZone extends Trigger {
             sa.setTriggeringObject(AbilityKey.Card, runParams.get(AbilityKey.CardLKI));
             sa.setTriggeringObject(AbilityKey.NewCard, runParams.get(AbilityKey.Card));
         } else {
-            sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.CardLKI);
+            sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.CardLKI, AbilityKey.Putter);
         }
     }
 
