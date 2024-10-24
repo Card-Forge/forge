@@ -228,9 +228,15 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
         WINS_EXPERTAI
     }
 
+
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
         super(ForgeConstants.QUEST_PREFS_FILE, QPref.class);
+    }
+
+    // Creates a new custom quest preference, that way every world can have its own
+    public QuestPreferences(String fileName){
+        super(fileName, QPref.class);
     }
 
     @Override

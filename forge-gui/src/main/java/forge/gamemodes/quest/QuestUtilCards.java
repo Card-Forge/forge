@@ -576,7 +576,7 @@ public final class QuestUtilCards {
      *
      * @param quantity the count
      */
-    private void generateBoostersInShop(final int quantity) {
+    private void generateBoostersInShop(final int quantity, final QuestPreferences questPreferences) {
 
     	questAssets.getShopList().addAllFlat(BoosterUtils.generateRandomBoosterPacks(quantity, questController));
 
@@ -591,7 +591,7 @@ public final class QuestUtilCards {
      *
      * @param quantity the count
      */
-    private void generateSinglesInShop(final int quantity) {
+    private void generateSinglesInShop(final int quantity, final QuestPreferences questPref) {
         // This is the spot we need to change
         SealedTemplate boosterTemplate = getShopBoosterTemplate();
         if (questController.getFormat() == null) {
@@ -600,10 +600,16 @@ public final class QuestUtilCards {
 		    }
 		    return;
 	    } else {
-            for (int i = 0; i < quantity; i++) {
-                // Unopened product based on format of the cards?
-                questAssets.getShopList().addAllOfTypeFlat(new UnOpenedProduct(boosterTemplate, questController.getFormat().getFilterPrinted()).get());
-            }
+            //faster method for dealing with a lot of additional cards
+            List<PaperCard> cards = Lists.newArrayList();
+            final List<PaperCard> cardPool = questController.getFormat().getAllCards();
+
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_COMMON, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_COMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_UNCOMMON, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_UNCOMMON)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_RARE, quantity * questPref.getPrefInt(QPref.SHOP_SINGLES_RARE)));
+            cards.addAll(BoosterUtils.generateShopSingles(cardPool, IPaperCard.Predicates.Presets.IS_MYTHIC_RARE, questPref.getPrefInt(QPref.SHOP_SINGLES_RARE)));
+
+            questAssets.getShopList().addAllOfTypeFlat(cards);
         }
     }
 
@@ -742,16 +748,24 @@ public final class QuestUtilCards {
         } else {
             StringBuilder restrictions    = new StringBuilder();
             List<String>  allowedSetCodes = FModel.getQuest().getFormat().getAllowedSetCodes();
-            if (allowedSetCodes.isEmpty()) {
-                for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
-                    restrictions.append(":!name(\"").append(restrictedCard).append("\")");
-                }
-            } else {
+            List<PaperCard> additionalCards = FModel.getQuest().getFormat().getAllExtraCards();
+            if (!allowedSetCodes.isEmpty()){
                 restrictions.append(":fromSets(\"");
                 for (String set : allowedSetCodes) {
                     restrictions.append(set).append(",");
                 }
                 restrictions.append(")");
+            }
+            //adds additional format cards to the random colored booster
+            if(!additionalCards.isEmpty()){
+                restrictions.append(":name(");
+                for(PaperCard card : additionalCards){
+                    restrictions.append("\"").append(card.getName()).append('@').append(card.getEdition()).append("\",");
+                }
+                restrictions.append(")");
+            }
+            for (String restrictedCard : FModel.getQuest().getFormat().getRestrictedCards()) {
+                restrictions.append(":!name(\"").append(restrictedCard).append("\")");
             }
             return new SealedTemplate("?", ImmutableList.of(
                     Pair.of(BoosterSlots.COMMON + ":color(\"" + color + "\"):!" + BoosterSlots.LAND + restrictions, 11),
@@ -767,20 +781,25 @@ public final class QuestUtilCards {
      */
     private void generateCardsInShop() {
 
+        QuestPreferences preferences = questController.getWorld().getCustomPreferences();
+        if(preferences == null){
+            preferences = questPreferences;
+        }
+
         // Preferences
-        final int startPacks = questPreferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
-        final int winsForPack = questPreferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
-        final int maxPacks = questPreferences.getPrefInt(QPref.SHOP_MAX_PACKS);
-        final int minPacks = questPreferences.getPrefInt(QPref.SHOP_MIN_PACKS);
+        final int startPacks = preferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
+        final int winsForPack = preferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
+        final int maxPacks = preferences.getPrefInt(QPref.SHOP_MAX_PACKS);
+        final int minPacks = preferences.getPrefInt(QPref.SHOP_MIN_PACKS);
 
         int level = questController.getAchievements().getLevel();
         final int levelPacks = level > 0 ? startPacks / level : startPacks;
         final int winPacks = questController.getAchievements().getWin() / winsForPack;
         final int totalPacks = Math.min(Math.max(levelPacks + winPacks, minPacks), maxPacks);
 
-        generateSinglesInShop(totalPacks);
+        generateSinglesInShop(totalPacks, preferences);
 
-        generateBoostersInShop(totalPacks);
+        generateBoostersInShop(totalPacks, preferences);
         generatePreconsInShop(totalPacks);
         generateTournamentsInShop(totalPacks);
         generateFatPacksInShop(totalPacks);
