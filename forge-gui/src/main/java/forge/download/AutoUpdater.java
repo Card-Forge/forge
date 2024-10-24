@@ -10,6 +10,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,15 +59,15 @@ public class AutoUpdater {
         return verifyUpdateable();
     }
 
-    public boolean attemptToUpdate() {
+    public boolean attemptToUpdate(CompletableFuture<String> cf) {
         if (!verifyUpdateable()) {
             return false;
         }
         try {
-            if (downloadUpdate()) {
+            if (downloadUpdate(cf)) {
                 extractAndRestart();
             }
-        } catch(IOException | URISyntaxException e) {
+        } catch(IOException | URISyntaxException | ExecutionException | InterruptedException e) {
             return false;
         }
         return true;
@@ -86,7 +88,7 @@ public class AutoUpdater {
             return false;
         } else if (updateChannel.equals("none")) {
             String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
-            List<String> options = ImmutableList.of("Cancel", "release", "snapshot");
+            List<String> options = ImmutableList.of(localizer.getMessage("lblCancel"), localizer.getMessage("lblRelease"), localizer.getMessage("lblSnapshot"));
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option < 1) {
                 return false;
@@ -95,14 +97,14 @@ public class AutoUpdater {
         }
 
         if (buildVersion.contains("SNAPSHOT")) {
-            if (!updateChannel.equals("snapshot")) {
+            if (!updateChannel.equalsIgnoreCase(localizer.getMessage("lblSnapshot"))) {
                 System.out.println("Snapshot build versions must use snapshot update channel to work");
                 return false;
             }
 
             versionUrlString = SNAPSHOT_VERSION_INDEX + "version.txt";
         } else {
-            if (!updateChannel.equals("release")) {
+            if (!updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
                 System.out.println("Release build versions must use release update channel to work");
                 return false;
             }
@@ -149,16 +151,16 @@ public class AutoUpdater {
     }
 
     private void retrieveVersion() throws MalformedURLException {
-        if (VERSION_FROM_METADATA && updateChannel.equals("release")) {
+        if (VERSION_FROM_METADATA && updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
             extractVersionFromMavenRelease();
         } else {
             URL versionUrl = new URL(versionUrlString);
             version = FileUtil.readFileToString(versionUrl);
         }
-        if (updateChannel.equals("release")) {
+        if (updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
             packageUrl = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
         } else {
-            packageUrl = SNAPSHOT_VERSION_INDEX + "forge-gui-desktop-" + version + ".tar.bz2";
+            packageUrl = SNAPSHOT_VERSION_INDEX + "forge-installer-" + version + ".jar";
         }
     }
 
@@ -174,15 +176,15 @@ public class AutoUpdater {
         }
     }
 
-    private boolean downloadUpdate() throws URISyntaxException, IOException {
+    private boolean downloadUpdate(CompletableFuture<String> cf) throws URISyntaxException, IOException, ExecutionException, InterruptedException {
         // TODO Change the "auto" to be more auto.
         if (isLoading) {
             // We need to preload enough of a Skins to show a dialog and a button if we're in loading
             // splashScreen.prepareForDialogs();
             return downloadFromBrowser();
         }
-
-        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", version, buildVersion);
+        String log = cf.get();
+        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", version, buildVersion) + log;
         final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
         if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
@@ -204,16 +206,16 @@ public class AutoUpdater {
     }
 
     private boolean downloadFromForge() {
-        System.out.println("Downloading update from " + packageUrl + " to tmp/");
+        System.out.println("Downloading update from " + packageUrl + " to Downloads folder");
         WaitCallback<Boolean> callback = new WaitCallback<Boolean>() {
             @Override
             public void run() {
-                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, "tmp/", null, null) {
+                GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, System.getProperty("user.home") + "/Downloads/", null, null) {
                     @Override
                     public void downloadAndUnzip() {
                         packagePath = download(version + "-upgrade.tar.bz2");
                         if (packagePath != null) {
-                            extractAndRestart();
+                            restartAndUpdate(packagePath);
                         }
                     }
                 }, this);
@@ -224,7 +226,29 @@ public class AutoUpdater {
 
         return false;
     }
-
+    private void restartAndUpdate(String packagePath) {
+        if (SOptionPane.showOptionDialog(localizer.getMessage("lblForgeUpdateMessage", packagePath), localizer.getMessage("lblRestart"), null, ImmutableList.of(localizer.getMessage("lblOK")), 0) == 0) {
+            final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+            if (desktop != null) {
+                try {
+                    File installer = new File(packagePath);
+                    if (installer.exists()) {
+                        if (packagePath.endsWith(".jar")) {
+                            installer.setExecutable(true, false);
+                            desktop.open(installer);
+                        } else {
+                            desktop.open(installer.getParentFile());
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println(packagePath);
+            }
+            System.exit(0);
+        }
+    }
     private void extractUpdate() {
         // TODO Something like https://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java
         final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
