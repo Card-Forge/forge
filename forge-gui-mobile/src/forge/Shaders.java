@@ -1986,4 +1986,174 @@ public class Shaders {
                     "  luv.yz = (luv.yz) + (v_color.yz);\n" +
                     "  gl_FragColor = vec4(sRGB(clamp(luv2rgb(luv), 0.0, 1.0)), v_color.a * tgt.a);\n" +
                     "}";
+    // moved shaders from dirs to here
+    public static String warpFrag = "#ifdef GL_ES\n" +
+            "precision mediump float;\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "\n" +
+            "uniform float u_time;\n" +
+            "uniform float u_speed;\n" +
+            "uniform float u_amount;\n" +
+            "uniform vec2 u_viewport;\n" +
+            "uniform vec2 u_position;\n" +
+            "\n" +
+            "float random2d(vec2 n) {\n" +
+            "    return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);\n" +
+            "}\n" +
+            "\n" +
+            "float randomRange (in vec2 seed, in float min, in float max) {\n" +
+            "    return min + random2d(seed) * (max - min);\n" +
+            "}\n" +
+            "\n" +
+            "float insideRange(float v, float bottom, float top) {\n" +
+            "   return step(bottom, v) - step(top, v);\n" +
+            "}\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "    float time = floor(u_time * u_speed * 60.0);\n" +
+            "\n" +
+            "    vec3 outCol = texture2D(u_texture, v_texCoords).rgb;\n" +
+            "\n" +
+            "    float maxOffset = u_amount/2.0;\n" +
+            "    for (float i = 0.0; i < 2.0; i += 1.0) {\n" +
+            "        float sliceY = random2d(vec2(time, 2345.0 + float(i)));\n" +
+            "        float sliceH = random2d(vec2(time, 9035.0 + float(i))) * 0.25;\n" +
+            "        float hOffset = randomRange(vec2(time, 9625.0 + float(i)), -maxOffset, maxOffset);\n" +
+            "        vec2 uvOff = v_texCoords;\n" +
+            "        uvOff.x += hOffset;\n" +
+            "        if (insideRange(v_texCoords.y, sliceY, fract(sliceY+sliceH)) == 1.0){\n" +
+            "            outCol = texture2D(u_texture, uvOff).rgb;\n" +
+            "        }\n" +
+            "    }\n" +
+            "\n" +
+            "    float maxColOffset = u_amount / 6.0;\n" +
+            "    float rnd = random2d(vec2(time , 9545.0));\n" +
+            "    vec2 colOffset = vec2(randomRange(vec2(time , 9545.0), -maxColOffset, maxColOffset),\n" +
+            "                       randomRange(vec2(time , 7205.0), -maxColOffset, maxColOffset));\n" +
+            "    if (rnd < 0.33) {\n" +
+            "        outCol.r = texture2D(u_texture, v_texCoords + colOffset).r;\n" +
+            "    } else if (rnd < 0.66) {\n" +
+            "        outCol.g = texture2D(u_texture, v_texCoords + colOffset).g;\n" +
+            "    } else {\n" +
+            "        outCol.b = texture2D(u_texture, v_texCoords + colOffset).b;\n" +
+            "    }\n" +
+            "\n" +
+            "    gl_FragColor = vec4(outCol, 1.0);\n" +
+            "}";
+    public static String underwaterFrag = "#ifdef GL_ES\n" +
+            "#define PRECISION mediump\n" +
+            "precision PRECISION float;\n" +
+            "precision PRECISION int;\n" +
+            "#else\n" +
+            "#define PRECISION\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_amount;\n" +
+            "uniform float u_speed;\n" +
+            "uniform float u_time;\n" +
+            "uniform float u_bias;\n" +
+            "\n" +
+            "void main () {\n" +
+            "    vec2 uv = v_texCoords;\n" +
+            "\n" +
+            "    uv.y += (cos((uv.y + (u_time * 0.04 * u_speed)) * 45.0) * 0.0019 * u_amount) + (cos((uv.y + (u_time * 0.1 * u_speed)) * 10.0) * 0.002 * u_amount);\n" +
+            "\n" +
+            "    uv.x += (sin((uv.y + (u_time * 0.07 * u_speed)) * 15.0) * 0.0029 * u_amount) + (sin((uv.y + (u_time * 0.1 * u_speed)) * 15.0) * 0.002 * u_amount);\n" +
+            "\n" +
+            "\tvec4 texColor = texture2D(u_texture, uv);\n" +
+            "\n" +
+            "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
+            "}";
+    public static String outlineFrag = "#ifdef GL_ES\n" +
+            "precision mediump float;\n" +
+            "precision mediump int;\n" +
+            "#endif\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform vec2 u_viewportInverse;\n" +
+            "uniform vec3 u_color;\n" +
+            "uniform float u_offset;\n" +
+            "uniform float u_step;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoord;\n" +
+            "\n" +
+            "#define ALPHA_VALUE_BORDER 0.5\n" +
+            "\n" +
+            "void main() {\n" +
+            "   vec2 T = v_texCoord.xy;\n" +
+            "\n" +
+            "   float alpha = 0.0;\n" +
+            "   bool allin = true;\n" +
+            "   for( float ix = -u_offset; ix < u_offset; ix += u_step )\n" +
+            "   {\n" +
+            "      for( float iy = -u_offset; iy < u_offset; iy += u_step )\n" +
+            "       {\n" +
+            "          float newAlpha = texture2D(u_texture, T + vec2(ix, iy) * u_viewportInverse).a;\n" +
+            "          allin = allin && newAlpha > ALPHA_VALUE_BORDER;\n" +
+            "          if (newAlpha > ALPHA_VALUE_BORDER && newAlpha >= alpha)\n" +
+            "          {\n" +
+            "             alpha = newAlpha;\n" +
+            "          }\n" +
+            "      }\n" +
+            "   }\n" +
+            "   if (allin)\n" +
+            "   {\n" +
+            "      alpha = 0.0;\n" +
+            "   }\n" +
+            "\n" +
+            "   gl_FragColor = vec4(u_color,alpha);\n" +
+            "}";
+    public static String outlineVert = "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "attribute vec4 a_position;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "attribute vec4 a_color;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoord;\n" +
+            "\n" +
+            "uniform vec2 u_viewportInverse;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "    v_texCoord = a_texCoord0;\n" +
+            "    v_color = a_color;\n" +
+            "}";
+    public static String grayscaleFrag = "#ifdef GL_ES\n" +
+            "precision mediump float;\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_grayness;\n" +
+            "uniform float u_bias;\n" +
+            "\n" +
+            "void main() {\n" +
+            "  vec4 c = v_color * texture2D(u_texture, v_texCoords);\n" +
+            "  float grey = dot( c.rgb, vec3(0.22, 0.707, 0.071) );\n" +
+            "  vec3 blendedColor = mix(c.rgb, vec3(grey), u_grayness);\n" +
+            "  gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(blendedColor.rgb, c.a), u_bias);\n" +
+            "}";
+    public static String grayscaleVert = "attribute vec4 a_position;\n" +
+            "attribute vec4 a_color;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "\n" +
+            "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    v_color = a_color;\n" +
+            "    v_texCoords = a_texCoord0;\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "}";
 }
