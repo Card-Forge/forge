@@ -61,10 +61,12 @@ public class AtomReader {
     public static class Entry {
         public final String title;
         public final String updated;
+        public final String link;
 
-        private Entry(String title, String updated) {
+        private Entry(String title, String updated, String link) {
             this.title = title;
             this.updated = updated;
+            this.link = link;
         }
     }
 
@@ -72,6 +74,7 @@ public class AtomReader {
         parser.require(XmlPullParser.START_TAG, ns, "entry");
         String title = null;
         String updated = null;
+        String link = null;
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -81,11 +84,13 @@ public class AtomReader {
                 title = readTitle(parser);
             } else if (name.equals("updated")) {
                 updated = readUpdated(parser);
+            } else if (name.equals("link")) {
+                link = readLink(parser);
             } else {
                 skip(parser);
             }
         }
-        return new Entry(title, updated);
+        return new Entry(title, updated, link);
     }
 
     private String readTitle(XmlPullParser parser) throws Exception {
@@ -100,6 +105,21 @@ public class AtomReader {
         String updated = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "updated");
         return updated;
+    }
+
+    private String readLink(XmlPullParser parser) throws Exception {
+        String link = "";
+        parser.require(XmlPullParser.START_TAG, ns, "link");
+        String tag = parser.getName();
+        String relType = parser.getAttributeValue(null, "rel");
+        if (tag.equals("link")) {
+            if (relType.equals("alternate")) {
+                link = parser.getAttributeValue(null, "href");
+                parser.nextTag();
+            }
+        }
+        parser.require(XmlPullParser.END_TAG, ns, "link");
+        return link;
     }
 
     private String readText(XmlPullParser parser) throws Exception {

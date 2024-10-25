@@ -641,8 +641,7 @@ public class Main extends ForgeAndroidApplication {
 
         @Override
         public String getReleaseTag() {
-            //android doesn't have release yet on github...
-            return "";
+            return new GitLogs().getLatestReleaseTag();
         }
 
         @Override

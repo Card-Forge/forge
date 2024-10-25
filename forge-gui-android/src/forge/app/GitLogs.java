@@ -46,4 +46,28 @@ public class GitLogs {
         }
         return message;
     }
+
+    public String getLatestReleaseTag() {
+        String tag = "";
+        try {
+            URL url = new URL("https://github.com/Card-Forge/forge/releases.atom");
+            InputStream inputStream = url.openStream();
+            List<AtomReader.Entry> entries = new AtomReader().parse(inputStream);
+            for (AtomReader.Entry entry : entries) {
+                if (entry.link != null) {
+                    try {
+                        String val = entry.link;
+                        tag = val.substring(val.lastIndexOf("forge"));
+                        break;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tag;
+    }
 }
