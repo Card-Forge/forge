@@ -37,7 +37,7 @@
         <dependency>
             <groupId>com.apptasticsoftware</groupId>
             <artifactId>rssreader</artifactId>
-            <version>3.6.0</version>
+            <version>3.8.2</version>
         </dependency>
     </dependencies>
 
