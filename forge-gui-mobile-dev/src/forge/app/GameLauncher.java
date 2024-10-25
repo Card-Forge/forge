@@ -16,19 +16,7 @@ import java.nio.file.Paths;
 
 public class GameLauncher {
     public GameLauncher(final String versionString) {
-        // Set this to "true" to make the mobile game port run as a full-screen desktop application
-        boolean desktopMode = true;//cmd.hasOption("fullscreen");
-        // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
-        // (uncomment the bottom version and comment the top one to load the res folder from the current folder the .jar is in if you would
-        // like to make the game load from a desktop game folder configuration).
-        //String desktopModeAssetsDir = "../forge-gui/";
-        String desktopModeAssetsDir = "./";
-        if (!Files.exists(Paths.get(desktopModeAssetsDir + "res")))
-            desktopModeAssetsDir = "../forge-gui/";//try IDE run
-
-        String assetsDir = "./";
-        if (!Files.exists(Paths.get(assetsDir + "res")))
-            assetsDir = "../forge-gui/";
+        String assetsDir = Files.exists(Paths.get("./res")) ? "./" : "../forge-gui/";
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";
@@ -39,7 +27,7 @@ public class GameLauncher {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
         ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new Main.DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                desktopMode ? desktopModeAssetsDir : assetsDir, false, false, 0, false, 0, "", "");
+                assetsDir, false, false, 0, false, 0, "", "");
         if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
             config.setAutoIconify(true);
@@ -58,8 +46,7 @@ public class GameLauncher {
             }
         });
 
-        if (desktopMode)
-            config.setHdpiMode(HdpiMode.Logical);
+        config.setHdpiMode(HdpiMode.Logical);
 
         new Lwjgl3Application(start, config);
     }
