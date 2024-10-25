@@ -95,21 +95,21 @@ public class ImageCache {
         cardsLoaded = new HashSet<>(cl);
     }
 
-    private Set<String> getCardsLoaded() {
+    private static Set<String> getCardsLoaded() {
         if (cardsLoaded == null) {
             cardsLoaded = new HashSet<>(400);
         }
         return cardsLoaded;
     }
 
-    private EvictingQueue<String> getQ() {
+    private static EvictingQueue<String> getQ() {
         if (q == null) {
             q = EvictingQueue.create(400);
         }
         return q;
     }
 
-    private Queue<String> getSyncQ() {
+    private static Queue<String> getSyncQ() {
         if (syncQ == null)
             syncQ = Queues.synchronizedQueue(getQ());
         return syncQ;
