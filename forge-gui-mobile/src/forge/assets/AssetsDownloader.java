@@ -42,8 +42,7 @@ public class AssetsDownloader {
                 return;
             }
         }
-        //currently for desktop/mobile-dev release on github
-        final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
+
         final String packageSize = GuiBase.isAndroid() ? "160MB" : "270MB";
         final String apkSize = "12MB";
 
@@ -58,6 +57,8 @@ public class AssetsDownloader {
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
+            //currently for desktop/mobile-dev release on github
+            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
                 String version = FileUtil.readFileToString(versionUrl);
