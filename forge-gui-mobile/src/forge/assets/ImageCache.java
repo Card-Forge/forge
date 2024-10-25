@@ -119,12 +119,14 @@ public class ImageCache {
     public static void disposeTextures() {
         CardRenderer.clearcardArtCache();
         //unload all cardsLoaded
-        for (String fileName : cardsLoaded) {
-            if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
-                Forge.getAssets().manager().unload(fileName);
+        if (cardsLoaded != null) {
+            for (String fileName : cardsLoaded) {
+                if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
+                    Forge.getAssets().manager().unload(fileName);
+                }
             }
+            cardsLoaded.clear();
         }
-        cardsLoaded.clear();
         ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
     }
 
