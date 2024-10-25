@@ -635,13 +635,13 @@ public class Main extends ForgeAndroidApplication {
         }
 
         @Override
-        public String getLatestChanges(Date buildDateOriginal, Date maxDate) {
-            return new GitLogs().getLatest(buildDateOriginal, maxDate);
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate) {
+            return new GitLogs().getLatest(commitsAtom, buildDateOriginal, maxDate);
         }
 
         @Override
-        public String getReleaseTag() {
-            return new GitLogs().getLatestReleaseTag();
+        public String getReleaseTag(String releaseAtom) {
+            return new GitLogs().getLatestReleaseTag(releaseAtom);
         }
 
         @Override

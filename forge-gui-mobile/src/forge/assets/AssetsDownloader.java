@@ -23,6 +23,9 @@ import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_URL_ATOM;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_URL_ATOM;
+
 public class AssetsDownloader {
     private final static ImmutableList<String> downloadIgnoreExit = ImmutableList.of("Download", "Ignore", "Exit");
     private final static ImmutableList<String> downloadExit = ImmutableList.of("Download", "Exit");
@@ -40,7 +43,7 @@ public class AssetsDownloader {
             }
         }
         //currently for desktop/mobile-dev release on github
-        String releaseTag = Forge.getDeviceAdapter().getReleaseTag();
+        final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
         final String packageSize = GuiBase.isAndroid() ? "160MB" : "270MB";
         final String apkSize = "12MB";
 
@@ -100,7 +103,7 @@ public class AssetsDownloader {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
                     if (!GuiBase.isAndroid()) {
-                        message += Forge.getDeviceAdapter().getLatestChanges(null, null);
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
                     }
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
@@ -108,7 +111,7 @@ public class AssetsDownloader {
                             run(runnable);
                     } else if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String installer = new GuiDownloadZipService("", "update", installerURL,
-                            Forge.getDeviceAdapter().getDownloadsDir(), null, Forge.getSplashScreen().getProgressBar()).download(filename);
+                                Forge.getDeviceAdapter().getDownloadsDir(), null, Forge.getSplashScreen().getProgressBar()).download(filename);
                         if (installer != null) {
                             Forge.getDeviceAdapter().openFile(installer);
                             Forge.isMobileAdventureMode = Forge.advStartup;
@@ -129,8 +132,7 @@ public class AssetsDownloader {
                     if (!GuiBase.isAndroid())
                         run(runnable);
                 }
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 if (!GuiBase.isAndroid()) {
                     run(runnable);
@@ -167,8 +169,7 @@ public class AssetsDownloader {
         if (!versionFile.exists()) {
             try {
                 versionFile.file().createNewFile();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 Forge.isMobileAdventureMode = Forge.advStartup;
                 Forge.exitAnimation(false); //can't continue if this fails
@@ -202,7 +203,7 @@ public class AssetsDownloader {
                 SimpleDateFormat simpleDate = TextUtil.getSimpleDate();
                 simpleDate.setTimeZone(TimeZone.getDefault());
                 build += "Installed resources date: " + simpleDate.format(calendar.getTime()) + "\n\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(null, null);
+                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -218,8 +219,7 @@ public class AssetsDownloader {
             message = "Updated resource files cannot be downloaded due to lack of internet connection.\n\n";
             if (canIgnoreDownload) {
                 message += "You can continue without this download, but you may miss out on card fixes or experience other problems.";
-            }
-            else {
+            } else {
                 message += "You cannot start the app since you haven't previously downloaded these files.";
             }
             switch (SOptionPane.showOptionDialog(message, "No Internet Connection", null, ImmutableList.of("Ok"))) {
@@ -238,8 +238,7 @@ public class AssetsDownloader {
                 "This download is around " + packageSize + ", ";
         if (Forge.getDeviceAdapter().isConnectedToWifi()) {
             message += "which shouldn't take long if your wifi connection is good.";
-        }
-        else {
+        } else {
             message += "so it's highly recommended that you connect to wifi first.";
         }
         final List<String> options;
@@ -272,7 +271,7 @@ public class AssetsDownloader {
         boolean allowDeletion = Forge.androidVersion < 30 || GuiBase.isUsingAppDirectory();
         String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + versionString + "/" + "assets.zip";
         new GuiDownloadZipService("", "resource files", assetURL,
-            ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion).downloadAndUnzip();
+                ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion).downloadAndUnzip();
 
         if (allowDeletion)
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed
@@ -300,6 +299,7 @@ public class AssetsDownloader {
         Forge.isMobileAdventureMode = Forge.advStartup;
         Forge.exitAnimation(true);
     }
+
     private static void run(Runnable toRun) {
         if (toRun != null) {
             if (!GuiBase.isAndroid()) {

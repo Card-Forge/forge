@@ -29,6 +29,8 @@ import forge.util.BuildInfo;
 import forge.util.Localizer;
 import forge.util.RSSReader;
 
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_URL_ATOM;
+
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends SkinnedMenuBar {
     protected static final int visibleHeight = 27;
@@ -431,7 +433,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         @Override
         protected void onClick() {
             try {
-                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(null, null)));
+                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, null, null)));
             } catch (Exception e) {
                 e.printStackTrace();
             }

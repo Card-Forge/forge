@@ -14,8 +14,8 @@ public interface IDeviceAdapter {
     boolean isTablet();
     String getDownloadsDir();
     String getVersionString();
-    String getLatestChanges(Date buildDateOriginal, Date maxDate);
-    String getReleaseTag();
+    String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate);
+    String getReleaseTag(String releaseAtom);
     boolean openFile(String filename);
     void setLandscapeMode(boolean landscapeMode);
     void preventSystemSleep(boolean preventSleep);

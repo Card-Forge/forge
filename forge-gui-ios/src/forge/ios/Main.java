@@ -80,12 +80,12 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
-        public String getLatestChanges(Date buildDateOriginal, Date maxDate) {
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate) {
             return "";
         }
 
         @Override
-        public String getReleaseTag() {
+        public String getReleaseTag(String releaseAtom) {
             return "";
         }
 

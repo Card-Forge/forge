@@ -10,10 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 public class GitLogs {
-    public String getLatest(Date buildDateOriginal, Date maxDate) {
+    public String getLatest(String commitsAtom, Date buildDateOriginal, Date maxDate) {
         String message = "";
         try {
-            URL url = new URL("https://github.com/Card-Forge/forge/commits/master.atom");
+            URL url = new URL(commitsAtom);
             InputStream inputStream = url.openStream();
             List<AtomReader.Entry> entries = new AtomReader().parse(inputStream);
             StringBuilder logs = new StringBuilder();
@@ -47,10 +47,10 @@ public class GitLogs {
         return message;
     }
 
-    public String getLatestReleaseTag() {
+    public String getLatestReleaseTag(String releaseAtom) {
         String tag = "";
         try {
-            URL url = new URL("https://github.com/Card-Forge/forge/releases.atom");
+            URL url = new URL(releaseAtom);
             InputStream inputStream = url.openStream();
             List<AtomReader.Entry> entries = new AtomReader().parse(inputStream);
             for (AtomReader.Entry entry : entries) {

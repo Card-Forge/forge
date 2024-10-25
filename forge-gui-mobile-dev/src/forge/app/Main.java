@@ -52,13 +52,13 @@ public class Main {
         }
 
         @Override
-        public String getLatestChanges(Date buildDateOriginal, Date max) {
-            return RSSReader.getCommitLog(buildDateOriginal, max);
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date max) {
+            return RSSReader.getCommitLog(commitsAtom, buildDateOriginal, max);
         }
 
         @Override
-        public String getReleaseTag() {
-            return RSSReader.getLatestReleaseTag();
+        public String getReleaseTag(String releaseAtom) {
+            return RSSReader.getLatestReleaseTag(releaseAtom);
         }
 
         @Override

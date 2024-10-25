@@ -12,12 +12,12 @@ import java.util.Date;
 import java.util.List;
 
 public class RSSReader {
-    public static String getCommitLog(Date buildDateOriginal, Date maxDate) {
+    public static String getCommitLog(String commitsAtom, Date buildDateOriginal, Date maxDate) {
         String message = "";
         SimpleDateFormat simpleDate = TextUtil.getSimpleDate();
         try {
             RssReader reader = new RssReader();
-            URL url = new URL("https://github.com/Card-Forge/forge/commits/master.atom");
+            URL url = new URL(commitsAtom);
             InputStream inputStream = url.openStream();
             List<Item> items = reader.read(inputStream).toList();
             StringBuilder logs = new StringBuilder();
@@ -49,11 +49,11 @@ public class RSSReader {
         }
         return message;
     }
-    public static String getLatestReleaseTag() {
+    public static String getLatestReleaseTag(String releaseAtom) {
         String tag = "";
         try {
             RssReader reader = new RssReader();
-            URL url = new URL("https://github.com/Card-Forge/forge/releases.atom");
+            URL url = new URL(releaseAtom);
             InputStream inputStream = url.openStream();
             List<Item> items = reader.read(inputStream).toList();
             for (Item i : items) {
