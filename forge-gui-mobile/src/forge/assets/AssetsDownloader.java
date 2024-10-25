@@ -90,7 +90,7 @@ public class AssetsDownloader {
                     e.printStackTrace();
                 }*/
 
-                if (!StringUtils.isEmpty(version) && !versionString.equals(version) && !versionString.equalsIgnoreCase("GIT")) {
+                if (!StringUtils.isEmpty(version) && !versionString.equals(version)) {
                     Forge.getSplashScreen().prepareForDialogs();
 
                     message = "A new version of Forge is available (" + version + ").\n" +
@@ -102,7 +102,11 @@ public class AssetsDownloader {
                     if (!GuiBase.isAndroid()) {
                         message += Forge.getDeviceAdapter().getLatestChanges(null, null);
                     }
-                    if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
+                    //failed to grab latest github tag
+                    if (!isSnapshots && releaseTag.isEmpty()) {
+                        if (!GuiBase.isAndroid())
+                            run(runnable);
+                    } else if (SOptionPane.showConfirmDialog(message, "New Version Available", "Update Now", "Update Later", true, true)) {
                         String installer = new GuiDownloadZipService("", "update", installerURL,
                             Forge.getDeviceAdapter().getDownloadsDir(), null, Forge.getSplashScreen().getProgressBar()).download(filename);
                         if (installer != null) {
