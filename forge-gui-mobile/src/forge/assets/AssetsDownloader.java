@@ -31,9 +31,19 @@ public class AssetsDownloader {
     public static void checkForUpdates(boolean exited, Runnable runnable) {
         if (exited)
             return;
+        final String versionString = Forge.getDeviceAdapter().getVersionString();
+        Forge.getSplashScreen().getProgressBar().setDescription("Checking for updates...");
+        if (versionString.contains("GIT")) {
+            if (!GuiBase.isAndroid()) {
+                run(runnable);
+                return;
+            }
+        }
+        //currently for desktop/mobile-dev release on github
+        String releaseTag = Forge.getDeviceAdapter().getReleaseTag();
         final String packageSize = GuiBase.isAndroid() ? "160MB" : "270MB";
         final String apkSize = "12MB";
-        final String versionString = Forge.getDeviceAdapter().getVersionString();
+
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
         final String snapsURL = "https://downloads.cardforge.org/dailysnapshots/";
         final String releaseURL = "https://releases.cardforge.org/forge/forge-gui-android/";
@@ -41,7 +51,6 @@ public class AssetsDownloader {
         FileHandle assetsDir = Gdx.files.absolute(ForgeConstants.ASSETS_DIR);
         FileHandle resDir = Gdx.files.absolute(ForgeConstants.RES_DIR);
         boolean mandatory = false;
-        Forge.getSplashScreen().getProgressBar().setDescription("Checking for updates...");
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
@@ -55,8 +64,9 @@ public class AssetsDownloader {
                     filename = "forge-android-" + version + "-signed-aligned.apk";
                     installerURL = isSnapshots ? snapsURL + filename : releaseURL + version + "/" + filename;
                 } else {
-                    filename = isSnapshots ? "forge-installer-" + version + ".jar" : "forge-gui-desktop-" + version + ".tar.bz2";
-                    String releaseBZ2URL = "https://github.com/Card-Forge/forge/releases/download/forge-" + version + "/";
+                    //current release on github is tar.bz2, update this to jar installer in the future...
+                    filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
+                    String releaseBZ2URL = "https://github.com/Card-Forge/forge/releases/download/" + releaseTag + "/" + filename;
                     String snapsBZ2URL = "https://downloads.cardforge.org/dailysnapshots/";
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }

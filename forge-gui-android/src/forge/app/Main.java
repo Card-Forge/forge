@@ -640,6 +640,12 @@ public class Main extends ForgeAndroidApplication {
         }
 
         @Override
+        public String getReleaseTag() {
+            //android doesn't have release yet on github...
+            return "";
+        }
+
+        @Override
         public boolean openFile(String filename) {
             try {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {

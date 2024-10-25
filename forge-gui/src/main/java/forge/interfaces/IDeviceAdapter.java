@@ -15,6 +15,7 @@ public interface IDeviceAdapter {
     String getDownloadsDir();
     String getVersionString();
     String getLatestChanges(Date buildDateOriginal, Date maxDate);
+    String getReleaseTag();
     boolean openFile(String filename);
     void setLandscapeMode(boolean landscapeMode);
     void preventSystemSleep(boolean preventSleep);

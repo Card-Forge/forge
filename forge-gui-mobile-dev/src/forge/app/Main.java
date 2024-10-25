@@ -57,6 +57,11 @@ public class Main {
         }
 
         @Override
+        public String getReleaseTag() {
+            return RSSReader.getLatestReleaseTag();
+        }
+
+        @Override
         public boolean openFile(String filename) {
             try {
                 File installer = new File(filename);

@@ -85,6 +85,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public String getReleaseTag() {
+            return "";
+        }
+
+        @Override
         public boolean openFile(final String filename) {
             return new IOSFiles().local(filename).exists();
         }

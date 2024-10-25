@@ -49,4 +49,28 @@ public class RSSReader {
         }
         return message;
     }
+    public static String getLatestReleaseTag() {
+        String tag = "";
+        try {
+            RssReader reader = new RssReader();
+            URL url = new URL("https://github.com/Card-Forge/forge/releases.atom");
+            InputStream inputStream = url.openStream();
+            List<Item> items = reader.read(inputStream).toList();
+            for (Item i : items) {
+                if (i.getLink().isPresent()) {
+                    try {
+                        String val = i.getLink().get();
+                        tag = val.substring(val.lastIndexOf("forge"));
+                        break;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tag;
+    }
 }
