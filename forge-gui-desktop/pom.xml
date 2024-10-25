@@ -15,11 +15,47 @@
         <parsedVersion.majorVersion>0</parsedVersion.majorVersion>
         <parsedVersion.minorVersion>0</parsedVersion.minorVersion>
         <parsedVersion.incrementalVersion>0</parsedVersion.incrementalVersion>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
         <mandatory.java.args>--add-opens java.desktop/java.beans=ALL-UNNAMED --add-opens java.desktop/javax.swing.border=ALL-UNNAMED --add-opens java.desktop/javax.swing.event=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/java.awt.image=ALL-UNNAMED --add-opens java.desktop/java.awt.color=ALL-UNNAMED --add-opens java.desktop/sun.awt.image=ALL-UNNAMED --add-opens java.desktop/javax.swing=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.math=ALL-UNNAMED --add-opens java.base/java.util.concurrent=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED -Dio.netty.tryReflectionSetAccessible=true -Dfile.encoding=UTF-8</mandatory.java.args>
     </properties>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate MonthDate code to month.date property -->
+                            <name>month.date</name>
+                            <pattern>MM.dd</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate versionName from revision property to snapshot-version property  -->
+                            <name>snapshot-version</name>
+                            <value>${revision}</value>
+                            <regex>-SNAPSHOT</regex>
+                            <replacement>-SNAPSHOT-${month.date}</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.akathist.maven.plugins.launch4j</groupId>
                 <artifactId>launch4j-maven-plugin</artifactId>
@@ -76,22 +112,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                        <manifestEntries>
-                            <Add-Opens>java.desktop/java.beans java.desktop/javax.swing.border java.desktop/javax.swing.event java.desktop/sun.swing java.desktop/java.awt.image java.desktop/java.awt.color java.desktop/sun.awt.image java.desktop/javax.swing java.desktop/java.awt java.base/java.util java.base/java.lang java.base/java.lang.reflect java.base/java.text java.desktop/java.awt.font java.base/jdk.internal.misc java.base/sun.nio.ch java.base/java.nio java.base/java.math java.base/java.util.concurrent java.base/java.net</Add-Opens>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>replacer</artifactId>
                 <version>1.5.3</version>
@@ -129,10 +149,10 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
                         <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${snapshot-version}</Implementation-Version>
+                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                             <Add-Opens>java.desktop/java.beans java.desktop/javax.swing.border java.desktop/javax.swing.event java.desktop/sun.swing java.desktop/java.awt.image java.desktop/java.awt.color java.desktop/sun.awt.image java.desktop/javax.swing java.desktop/java.awt java.base/java.util java.base/java.lang java.base/java.lang.reflect java.base/java.text java.desktop/java.awt.font java.base/jdk.internal.misc java.base/sun.nio.ch java.base/java.nio java.base/java.math java.base/java.util.concurrent java.base/java.net</Add-Opens>
                             <Main-Class>forge.view.Main</Main-Class>
                         </manifestEntries>
@@ -222,6 +242,12 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>

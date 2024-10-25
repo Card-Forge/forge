@@ -172,10 +172,10 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 		createWakeLock(config.useWakelock);
 		useImmersiveMode(this.useImmersiveMode);
-		if (this.useImmersiveMode) {
+		/*if (this.useImmersiveMode) {
 			AndroidVisibilityListener vlistener = new AndroidVisibilityListener();
 			vlistener.createListener(this);
-		}
+		}*/
 
 		// detect an already connected bluetooth keyboardAvailable
 		if (getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS) input.setKeyboardAvailable(true);
@@ -229,13 +229,13 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 	@Override
 	public void useImmersiveMode (boolean use) {
-		if (!use) return;
+		/*if (!use) return;
 
 		View view = getWindow().getDecorView();
 		int code = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 				| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN
 				| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-		view.setSystemUiVisibility(code);
+		view.setSystemUiVisibility(code);*/
 	}
 
 	@Override

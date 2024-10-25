@@ -71,6 +71,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Main extends ForgeAndroidApplication {
     private AndroidAdapter Gadapter;
@@ -631,6 +632,16 @@ public class Main extends ForgeAndroidApplication {
         @Override
         public String getVersionString() {
             return versionString;
+        }
+
+        @Override
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date maxDate) {
+            return new GitLogs().getLatest(commitsAtom, buildDateOriginal, maxDate);
+        }
+
+        @Override
+        public String getReleaseTag(String releaseAtom) {
+            return new GitLogs().getLatestReleaseTag(releaseAtom);
         }
 
         @Override

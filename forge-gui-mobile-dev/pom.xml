@@ -18,25 +18,41 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>${project.basedir}</directory>
-                <includes>
-                    <include>**/*.vert</include>
-                    <include>**/*.frag</include>
-                    <include>**/title_bg_lq.png</include>
-                    <include>**/title_bg_lq_portrait.png</include>
-                    <include>**/transition.png</include>
-                    <include>**/adv_bg_texture.jpg</include>
-                    <include>**/adv_bg_splash.png</include>
-                    <include>**/bg_splash.png</include>
-                    <include>**/bg_texture.jpg</include>
-                    <include>**/font1.ttf</include>
-                    <include>**/logo.gif</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>timestamp-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate MonthDate code to month.date property -->
+                            <name>month.date</name>
+                            <pattern>MM.dd</pattern>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>regex-property</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>regex-property</goal>
+                        </goals>
+                        <configuration>
+                            <!-- generate versionName from revision property to snapshot-version property  -->
+                            <name>snapshot-version</name>
+                            <value>${revision}</value>
+                            <regex>-SNAPSHOT</regex>
+                            <replacement>-SNAPSHOT-${month.date}</replacement>
+                            <failIfNoMatch>false</failIfNoMatch>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -133,10 +149,10 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
                         <manifestEntries>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${snapshot-version}</Implementation-Version>
+                            <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                             <Add-Opens>java.desktop/java.beans java.desktop/javax.swing.border java.desktop/javax.swing.event java.desktop/sun.swing java.desktop/java.awt.image java.desktop/java.awt.color java.desktop/sun.awt.image java.desktop/javax.swing java.desktop/java.awt java.base/java.util java.base/java.lang java.base/java.lang.reflect java.base/java.text java.desktop/java.awt.font java.base/jdk.internal.misc java.base/sun.nio.ch java.base/java.nio java.base/java.math java.base/java.util.concurrent java.base/java.net</Add-Opens>
                             <Main-Class>forge.app.Main</Main-Class>
                             <SplashScreen-Image>splash/logo.gif</SplashScreen-Image>
@@ -156,6 +172,26 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>${project.basedir}</directory>
+                <includes>
+                    <include>**/title_bg_lq.png</include>
+                    <include>**/title_bg_lq_portrait.png</include>
+                    <include>**/transition.png</include>
+                    <include>**/adv_bg_texture.jpg</include>
+                    <include>**/adv_bg_splash.png</include>
+                    <include>**/bg_splash.png</include>
+                    <include>**/bg_texture.jpg</include>
+                    <include>**/font1.ttf</include>
+                    <include>**/logo.gif</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>filters</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <dependencies>
         <dependency>

@@ -2,10 +2,7 @@ package forge.app;
 
 import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
-import forge.util.BuildInfo;
-import forge.util.FileUtil;
-import forge.util.OperatingSystem;
-import forge.util.RestartUtil;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
@@ -17,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 public class Main {
@@ -54,9 +52,27 @@ public class Main {
         }
 
         @Override
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date max) {
+            return RSSReader.getCommitLog(commitsAtom, buildDateOriginal, max);
+        }
+
+        @Override
+        public String getReleaseTag(String releaseAtom) {
+            return RSSReader.getLatestReleaseTag(releaseAtom);
+        }
+
+        @Override
         public boolean openFile(String filename) {
             try {
-                Desktop.getDesktop().open(new File(filename));
+                File installer = new File(filename);
+                if (installer.exists()) {
+                    if (filename.endsWith(".jar")) {
+                        installer.setExecutable(true, false);
+                        Desktop.getDesktop().open(installer);
+                    } else {
+                        Desktop.getDesktop().open(installer.getParentFile());
+                    }
+                }
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();

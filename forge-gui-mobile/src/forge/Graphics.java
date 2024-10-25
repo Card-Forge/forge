@@ -43,10 +43,10 @@ public class Graphics {
     private int failedClipCount;
     private float alphaComposite = 1;
     private int transformCount = 0;
-    private final ShaderProgram shaderOutline = new ShaderProgram(Gdx.files.internal("shaders").child("outline.vert"), Gdx.files.internal("shaders").child("outline.frag"));
-    private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
-    private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
-    private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+    private final ShaderProgram shaderOutline = new ShaderProgram(Shaders.outlineVert, Shaders.outlineFrag);
+    private final ShaderProgram shaderGrayscale = new ShaderProgram(Shaders.grayscaleVert, Shaders.grayscaleFrag);
+    private final ShaderProgram shaderWarp = new ShaderProgram(Shaders.grayscaleVert, Shaders.warpFrag);
+    private final ShaderProgram shaderUnderwater = new ShaderProgram(Shaders.grayscaleVert, Shaders.underwaterFrag);
     private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
     private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
     private final ShaderProgram shaderRipple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRipple);
