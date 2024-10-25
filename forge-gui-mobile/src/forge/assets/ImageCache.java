@@ -95,6 +95,26 @@ public class ImageCache {
         cardsLoaded = new HashSet<>(cl);
     }
 
+    private Set<String> getCardsLoaded() {
+        if (cardsLoaded == null) {
+            cardsLoaded = new HashSet<>(400);
+        }
+        return cardsLoaded;
+    }
+
+    private EvictingQueue<String> getQ() {
+        if (q == null) {
+            q = EvictingQueue.create(400);
+        }
+        return q;
+    }
+
+    private Queue<String> getSyncQ() {
+        if (syncQ == null)
+            syncQ = Queues.synchronizedQueue(getQ());
+        return syncQ;
+    }
+
     public static Texture getDefaultImage() {
         return Forge.getAssets().getDefaultImage();
     }
@@ -119,14 +139,14 @@ public class ImageCache {
     public static void disposeTextures() {
         CardRenderer.clearcardArtCache();
         //unload all cardsLoaded
-        if (cardsLoaded != null) {
-            for (String fileName : cardsLoaded) {
+        try {
+            for (String fileName : getCardsLoaded()) {
                 if (Forge.getAssets().manager().get(fileName, Texture.class, false) != null) {
                     Forge.getAssets().manager().unload(fileName);
                 }
             }
-            cardsLoaded.clear();
-        }
+        } catch (Exception ignored) {}
+        getCardsLoaded().clear();
         ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
     }
 
@@ -136,8 +156,8 @@ public class ImageCache {
     public static void updateSynqCount(File file, int count) {
         if (file == null)
             return;
-        syncQ.add(file.getPath());
-        cardsLoaded.add(file.getPath());
+        getSyncQ().add(file.getPath());
+        getCardsLoaded().add(file.getPath());
         counter += count;
     }
 
@@ -298,8 +318,8 @@ public class ImageCache {
             return check;
         if (!others) {
             //update first before clearing
-            syncQ.add(file.getPath());
-            cardsLoaded.add(file.getPath());
+            getSyncQ().add(file.getPath());
+            getCardsLoaded().add(file.getPath());
             unloadCardTextures(false);
         }
         String fileName = file.getPath();
@@ -350,8 +370,8 @@ public class ImageCache {
                         Forge.getAssets().manager().unload(asset);
                     }
                 }
-                syncQ.clear();
-                cardsLoaded.clear();
+                getSyncQ().clear();
+                getCardsLoaded().clear();
                 counter = 0;
                 CardRenderer.clearcardArtCache();
             } catch (Exception e) {
@@ -360,19 +380,19 @@ public class ImageCache {
                 return;
             }
         }
-        if (cardsLoaded.size() <= maxCardCapacity)
+        if (getCardsLoaded().size() <= maxCardCapacity)
             return;
         //get latest images from syncQ
-        Set<String> newQ = Sets.newHashSet(syncQ);
+        Set<String> newQ = Sets.newHashSet(getSyncQ());
         //get all images not in newQ (cards to unload)
-        Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
+        Set<String> toUnload = Sets.difference(getCardsLoaded(), newQ);
         //unload from assetmanager to save RAM
         try {
             for (String asset : toUnload) {
                 if (Forge.getAssets().manager().get(asset, Texture.class, false) != null) {
                     Forge.getAssets().manager().unload(asset);
                 }
-                cardsLoaded.remove(asset);
+                getCardsLoaded().remove(asset);
             }
             //clear cachedArt since this is dependant to the loaded texture
             CardRenderer.clearcardArtCache();
