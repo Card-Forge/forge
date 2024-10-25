@@ -206,13 +206,16 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/adventure-editor.exe" perm="a+rx" />
                                         <copy todir="${basedir}/target">
-                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-desktop/target" includes="forge.sh,forge.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh,forge-adventure.command" />
+                                            <fileset dir="${project.build.directory}/../../adventure-editor/target" includes="adventure-editor.sh,adventure-editor.command" />
                                         </copy>
                                         <chmod file="${basedir}/target/forge.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/forge.command" perm="a+rx" />
                                         <chmod file="${basedir}/target/forge-adventure.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${basedir}/target/adventure-editor.sh" perm="a+rx" />
+                                        <chmod file="${basedir}/target/adventure-editor.command" perm="a+rx" />
                                         <tar destfile="${basedir}/target/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />

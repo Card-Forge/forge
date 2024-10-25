@@ -4,7 +4,7 @@ Types:Land
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint — When CARDNAME enters, you may exile a colorless card with mana value 7 or greater from your hand.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card.Colorless+cmcGE7 | ChangeNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C}. If a card is exiled with CARDNAME, add {C}{C} instead.
-A:AB$ ChangeZone | Cost$ T | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand | SpellDescription$ Return the exiled card to its owner's hand.
+A:AB$ ChangeZone | Cost$ T | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand | AILogic$ ReturnCastable | SpellDescription$ Return the exiled card to its owner's hand.
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$ValidExile Card.ExiledWithSource
 Oracle:Imprint — When Ugin's Labyrinth enters, you may exile a colorless card with mana value 7 or greater from your hand.\n{T}: Add {C}. If a card is exiled with Ugin's Labyrinth, add {C}{C} instead.\n{T}: Return the exiled card to its owner's hand.

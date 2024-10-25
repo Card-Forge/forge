@@ -160,6 +160,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return SpecialCardAi.MazesEnd.consider(aiPlayer, sa);
             } else if (aiLogic.equals("Pongify")) {
                 return sa.isTargetNumberValid(); // Pre-targeted in checkAiLogic
+            } else if (aiLogic.equals("ReturnCastable")) {
+                return !sa.getHostCard().getExiledCards().isEmpty()
+                        && ComputerUtilMana.canPayManaCost(sa.getHostCard().getExiledCards().getFirst().getFirstSpellAbility(), aiPlayer, 0, false);
             }
         }
         if (sa.isHidden()) {
