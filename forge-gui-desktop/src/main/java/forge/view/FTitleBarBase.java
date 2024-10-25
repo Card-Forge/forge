@@ -420,7 +420,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         }
     }
     public class UpdaterButton extends TitleBarButton {
-        final int MARQUEE_SPEED_DIV = 25;
+        final int MARQUEE_SPEED_DIV = 15;
         final int REPAINT_WITHIN_MS = 25;
         final String displayText = FControl.instance.compareVersion(BuildInfo.getVersionString());
         private UpdaterButton() {
@@ -431,7 +431,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         @Override
         protected void onClick() {
             try {
-                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(null, null, null)));
+                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(null, null)));
             } catch (Exception e) {
                 e.printStackTrace();
             }

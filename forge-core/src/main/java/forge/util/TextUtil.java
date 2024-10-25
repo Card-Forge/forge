@@ -29,6 +29,7 @@ import forge.item.PaperCard;
  */
 public class TextUtil {
     private static final StringBuilder changes = new StringBuilder();
+    private static SimpleDateFormat simpleDate;
 
     static ImmutableSortedMap<Integer,String> romanMap = ImmutableSortedMap.<Integer,String>naturalOrder()
     .put(1000, "M").put(900, "CM")
@@ -392,6 +393,11 @@ public class TextUtil {
         }
         return out.toString();
     }
+    public static SimpleDateFormat getSimpleDate() {
+        if (simpleDate == null)
+            simpleDate = new SimpleDateFormat("E, MMM dd, yyyy - hh:mm:ss a");
+        return simpleDate;
+    }
     //format changelog
     public static String getFormattedChangelog(File changelog, String defaultLog) {
         if (!changelog.exists())
@@ -400,30 +406,9 @@ public class TextUtil {
             try {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat formatted = new SimpleDateFormat("E, MMM dd, yyyy - hh:mm:ss a");
+                SimpleDateFormat formatted = getSimpleDate();
                 String offset = " GMT " + OffsetDateTime.now().getOffset();
                 List<String> toformat = FileUtil.readAllLines(changelog, false);
-                /*for (String line : toformat) {
-                    if (line.isEmpty() || line.startsWith("#") || line.length() < 4)
-                        continue;
-                    if (line.startsWith("[")) {
-                        String datestring = line.substring(line.lastIndexOf(" *")+1).replace("*", "");
-                        try {
-                            original.setTimeZone(TimeZone.getTimeZone("UTC"));
-                            Date toDate = original.parse(datestring);
-                            calendar.setTime(toDate);
-                            formatted.setTimeZone(TimeZone.getDefault());
-                            changes += "\n(" + formatted.format(calendar.getTime()) + offset + ")\n\n";
-                        } catch (Exception e2) {
-                            changes += "\n(" + datestring + ")\n\n";
-                        }
-                    } else {
-                        if (line.startsWith(" * "))
-                            changes += "\n"+ StringEscapeUtils.unescapeXml(line);
-                        else
-                            changes += StringEscapeUtils.unescapeXml(line);
-                    }
-                }*/
                 boolean skip = false;
                 int count = 0;
                 for (String line : toformat) {

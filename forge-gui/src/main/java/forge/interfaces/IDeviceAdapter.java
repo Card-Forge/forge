@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 
 public interface IDeviceAdapter {
     boolean isConnectedToInternet();
@@ -13,6 +14,7 @@ public interface IDeviceAdapter {
     boolean isTablet();
     String getDownloadsDir();
     String getVersionString();
+    String getLatestChanges(Date buildDateOriginal, Date maxDate);
     boolean openFile(String filename);
     void setLandscapeMode(boolean landscapeMode);
     void preventSystemSleep(boolean preventSleep);

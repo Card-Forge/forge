@@ -12,11 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 public class RSSReader {
-    public static String getCommitLog(Date buildDateOriginal, SimpleDateFormat dateFormat, Date max) {
+    public static String getCommitLog(Date buildDateOriginal, Date maxDate) {
         String message = "";
-        SimpleDateFormat simpleDate = dateFormat;
-        if (simpleDate == null)
-            simpleDate = new SimpleDateFormat("E, MMM dd, yyyy - hh:mm:ss a");
+        SimpleDateFormat simpleDate = TextUtil.getSimpleDate();
         try {
             RssReader reader = new RssReader();
             URL url = new URL("https://github.com/Card-Forge/forge/commits/master.atom");
@@ -36,7 +34,7 @@ public class RSSReader {
                 Date feedDate = Date.from(zonedDateTime.toInstant());
                 if (buildDateOriginal != null && feedDate.before(buildDateOriginal))
                     continue;
-                if (max != null && feedDate.after(max))
+                if (maxDate != null && feedDate.after(maxDate))
                     continue;
                 logs.append(simpleDate.format(feedDate)).append(" | ").append(StringEscapeUtils.unescapeXml(title).replace("\n", "").replace("        ", "")).append("\n\n");
                 if (c >= 15)

@@ -30,7 +30,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final UiCommand cmdLicensing = VSubmenuDownloaders.SINGLETON_INSTANCE::showLicensing;
-    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(null, null, null)));
+    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(null, null)));
 
     private final UiCommand cmdPicDownload = () -> new GuiDownloader(new GuiDownloadPicturesLQ()).show();
     private final UiCommand cmdPicDownloadHQ = () -> new GuiDownloader(new GuiDownloadPicturesHQ()).show();

@@ -88,7 +88,7 @@ public class AutoUpdater {
             return false;
         } else if (updateChannel.equals("none")) {
             String message = localizer.getMessage("lblYouHaventSetUpdateChannel");
-            List<String> options = ImmutableList.of(localizer.getMessage("lblCancel"), localizer.getMessage("lblRelease"), localizer.getMessage("lblSnapshot"));
+            List<String> options = ImmutableList.of(localizer.getMessageorUseDefault("lblCancel", "Cancel"), localizer.getMessageorUseDefault("lblRelease", "Release"), localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"));
             int option = SOptionPane.showOptionDialog(message, localizer.getMessage("lblManualCheck"), null, options, 0);
             if (option < 1) {
                 return false;
@@ -97,14 +97,14 @@ public class AutoUpdater {
         }
 
         if (buildVersion.contains("SNAPSHOT")) {
-            if (!updateChannel.equalsIgnoreCase(localizer.getMessage("lblSnapshot"))) {
+            if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblSnapshot", "Snapshot"))) {
                 System.out.println("Snapshot build versions must use snapshot update channel to work");
                 return false;
             }
 
             versionUrlString = SNAPSHOT_VERSION_INDEX + "version.txt";
         } else {
-            if (!updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
+            if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
                 System.out.println("Release build versions must use release update channel to work");
                 return false;
             }
@@ -151,13 +151,13 @@ public class AutoUpdater {
     }
 
     private void retrieveVersion() throws MalformedURLException {
-        if (VERSION_FROM_METADATA && updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
+        if (VERSION_FROM_METADATA && updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
             extractVersionFromMavenRelease();
         } else {
             URL versionUrl = new URL(versionUrlString);
             version = FileUtil.readFileToString(versionUrl);
         }
-        if (updateChannel.equalsIgnoreCase(localizer.getMessage("lblRelease"))) {
+        if (updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
             packageUrl = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
         } else {
             packageUrl = SNAPSHOT_VERSION_INDEX + "forge-installer-" + version + ".jar";

@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import com.badlogic.gdx.utils.SharedLibraryLoader;
 import forge.Forge;
 import forge.adventure.util.Config;
-import forge.assets.AssetsDownloader;
-import forge.util.FileUtil;
 import org.lwjgl.system.Configuration;
 
 import java.nio.file.Files;
@@ -28,16 +26,9 @@ public class GameLauncher {
         if (!Files.exists(Paths.get(desktopModeAssetsDir + "res")))
             desktopModeAssetsDir = "../forge-gui/";//try IDE run
 
-        // Assets directory used when the game fully emulates smartphone/tablet mode (desktopMode = false), useful when debugging from IDE
-        String assetsDir;
-        if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
-            assetsDir = "testAssets/";
-            FileUtil.ensureDirectoryExists(assetsDir);
-        } else {
-            assetsDir = "./";
-            if (!Files.exists(Paths.get(assetsDir + "res")))
-                assetsDir = "../forge-gui/";
-        }
+        String assetsDir = "./";
+        if (!Files.exists(Paths.get(assetsDir + "res")))
+            assetsDir = "../forge-gui/";
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
         String switchOrientationFile = assetsDir + "switch_orientation.ini";

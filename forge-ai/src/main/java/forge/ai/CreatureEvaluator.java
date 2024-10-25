@@ -26,6 +26,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         return evaluateCreature(c, true, true);
     }
     public int evaluateCreature(final Card c, final boolean considerPT, final boolean considerCMC) {
+        //Card shouldn't be null and AI shouldn't crash since this is just score
+        if (c == null)
+            return 0;
         int value = 80;
         if (!c.isToken()) {
             value += addValue(20, "non-token"); // tokens should be worth less than actual cards

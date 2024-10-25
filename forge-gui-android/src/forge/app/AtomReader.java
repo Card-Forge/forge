@@ -1,0 +1,113 @@
+package forge.app;
+
+import android.util.Xml;
+import org.xmlpull.v1.XmlPullParser;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AtomReader {
+    private static final String ns = null;
+
+    public List<Entry> parse(InputStream in) throws Exception {
+        try {
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(in, "UTF-8");
+            parser.nextTag();
+            return readFeed(parser);
+        } finally {
+            in.close();
+        }
+    }
+
+    private List<Entry> readFeed(XmlPullParser parser) throws Exception {
+        List<Entry> entries = new ArrayList<>();
+
+        parser.require(XmlPullParser.START_TAG, ns, "feed");
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            // Starts by looking for the entry tag.
+            if (name.equals("entry")) {
+                entries.add(readEntry(parser));
+            } else {
+                skip(parser);
+            }
+        }
+        return entries;
+    }
+
+    private void skip(XmlPullParser parser) throws Exception {
+        if (parser.getEventType() != XmlPullParser.START_TAG) {
+            throw new IllegalStateException();
+        }
+        int depth = 1;
+        while (depth != 0) {
+            switch (parser.next()) {
+                case XmlPullParser.END_TAG:
+                    depth--;
+                    break;
+                case XmlPullParser.START_TAG:
+                    depth++;
+                    break;
+            }
+        }
+    }
+
+    public static class Entry {
+        public final String title;
+        public final String updated;
+
+        private Entry(String title, String updated) {
+            this.title = title;
+            this.updated = updated;
+        }
+    }
+
+    private Entry readEntry(XmlPullParser parser) throws Exception {
+        parser.require(XmlPullParser.START_TAG, ns, "entry");
+        String title = null;
+        String updated = null;
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if (name.equals("title")) {
+                title = readTitle(parser);
+            } else if (name.equals("updated")) {
+                updated = readUpdated(parser);
+            } else {
+                skip(parser);
+            }
+        }
+        return new Entry(title, updated);
+    }
+
+    private String readTitle(XmlPullParser parser) throws Exception {
+        parser.require(XmlPullParser.START_TAG, ns, "title");
+        String title = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "title");
+        return title;
+    }
+
+    private String readUpdated(XmlPullParser parser) throws Exception {
+        parser.require(XmlPullParser.START_TAG, ns, "updated");
+        String updated = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "updated");
+        return updated;
+    }
+
+    private String readText(XmlPullParser parser) throws Exception {
+        String result = "";
+        if (parser.next() == XmlPullParser.TEXT) {
+            result = parser.getText();
+            parser.nextTag();
+        }
+        return result;
+    }
+}
