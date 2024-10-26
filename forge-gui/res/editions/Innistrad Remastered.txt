@@ -1,0 +1,14 @@
+[metadata]
+Code=INR
+Date=2025-01-24
+Name=Innistrad Remastered
+Type=Reprint
+ScryfallCode=INR
+
+[cards]
+59 R Deadeye Navigator @Lie Setiawan
+234 M Edgar Markov @Volkan Baǵa
+328 M Edgar Markov @Betty Jiang
+428 M Edgar Markov @Volkan Baǵa
+491 M Edgar Markov @Jack Hughes
+492 R Deadeye Navigator @Lie Setiawan
