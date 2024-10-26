@@ -1,0 +1,10 @@
+[metadata]
+Code=PE24
+Date=2024-10-12
+Name=Eternal Weekend 2024
+Type=Promo
+ScryfallCode=PE24
+
+[cards]
+1 M Tinker @Jason Rainville
+2 R Crop Rotation @Samuele Bandini
