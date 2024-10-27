@@ -44,7 +44,7 @@ import forge.util.TextUtil;
 import forge.util.Utils;
 
 public class FChoiceList<T> extends FList<T> implements ActivateHandler {
-    private String MORPH_KEY = Keyword.MORPH.getReminderText().split("\\. ")[0];
+    private final String MORPH_KEY = Keyword.MORPH.getReminderText().split("\\. ")[0];
     public static FSkinColor getItemColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_ZEBRA);

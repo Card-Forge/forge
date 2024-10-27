@@ -25,7 +25,6 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedMenuBar;
-import forge.util.BuildInfo;
 import forge.util.Localizer;
 import forge.util.RSSReader;
 
@@ -95,7 +94,10 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
-    
+    public void setUpdaterVisibility() {
+        if (btnUpdateShortcut != null)
+            btnUpdateShortcut.updateVisibility();
+    }
     public void updateButtons() {
         boolean fullScreen = owner.isFullScreen();
         btnLockTitleBar.setVisible(fullScreen);
@@ -424,11 +426,11 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
     public class UpdaterButton extends TitleBarButton {
         final int MARQUEE_SPEED_DIV = 15;
         final int REPAINT_WITHIN_MS = 25;
-        final String displayText = FControl.instance.compareVersion(BuildInfo.getVersionString());
-        private UpdaterButton() {
+        final String displayText = FControl.instance.getSnapshotNotification();
+        public UpdaterButton() {
             setToolTipText(Localizer.getInstance().getMessage("btnCheckForUpdates"));
             setPreferredSize(new Dimension(160, 25));
-            setEnabled(!displayText.isEmpty());
+            updateVisibility();
         }
         @Override
         protected void onClick() {
@@ -449,6 +451,9 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawString(displayText, 0, 17);
             repaint(REPAINT_WITHIN_MS);
+        }
+        private void updateVisibility() {
+            setVisible(!isVisible());
         }
     }
 }

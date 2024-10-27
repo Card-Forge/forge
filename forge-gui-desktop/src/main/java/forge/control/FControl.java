@@ -62,6 +62,7 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RestartUtil;
@@ -86,7 +87,8 @@ public enum FControl implements KeyEventDispatcher {
     private boolean altKeyLastDown;
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
-    private String snapsVersion = "";
+    private String snapsVersion = "", currentVersion = "";
+    private boolean isSnapshot;
 
     public enum CloseAction {
         NONE,
@@ -214,18 +216,21 @@ public enum FControl implements KeyEventDispatcher {
 
     /** After view and model have been initialized, control can start.*/
     public void initialize() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        currentVersion = BuildInfo.getVersionString();
+        isSnapshot = currentVersion.contains("SNAPSHOT");
         //get version string
         try {
-            URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
-            snapsVersion = FileUtil.readFileToString(url);
+            if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
+                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
+                snapsVersion = FileUtil.readFileToString(url);
+            }
 
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
-
-        final ForgePreferences prefs = FModel.getPreferences();
 
         //set ExperimentalNetworkOption from preference
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
@@ -275,9 +280,11 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
-    public String compareVersion(String currentVersion) {
-        if (currentVersion.isEmpty() || snapsVersion.isEmpty()
-                || !currentVersion.contains("SNAPSHOT") || currentVersion.equalsIgnoreCase(snapsVersion))
+    public boolean isSnapshot() {
+        return isSnapshot;
+    }
+    public String getSnapshotNotification() {
+        if (!isSnapshot || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
             return "";
         return "NEW SNAPSHOT AVAILABLE!!!";
     }
