@@ -59,6 +59,8 @@ import forge.util.LayoutHelper;
 
 
 public abstract class ItemManager<T extends InventoryItem> extends FContainer implements IItemManager<T>, ActivateHandler {
+    private ItemManager<T> instance;
+    private float itemLeft = 0f, itemWidth = 0f;
     private ItemPool<T> pool;
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
@@ -104,6 +106,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
      * @param wantUnique0 whether this table should display only one item with the same name
      */
     protected ItemManager(final Class<T> genericType0, final boolean wantUnique0) {
+        instance = this;
         genericType = genericType0;
         wantUnique = wantUnique0;
         model = new ItemManagerModel<>(genericType0);
@@ -874,7 +877,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void showMenu(boolean delay) {
+        showMenu(delay, 0f, 0f);
+    }
+    public void showMenu(boolean delay, float left, float width) {
         if (contextMenuBuilder != null && getSelectionCount() > 0) {
+            itemLeft = left; itemWidth = width;
             if (contextMenu == null) {
                 contextMenu = new ContextMenu();
             }
@@ -944,45 +951,55 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             float w = paneSize.getWidth();
             float h = paneSize.getHeight();
 
-            Rectangle bounds = currentView.getSelectionBounds();
+            try {
+                Rectangle bounds = currentView.getSelectionBounds();
 
-            //try displaying right of selection if possible
-            float x = bounds.x + bounds.width;
-            float y = bounds.y;
-            if (x + w > screenWidth) {
-                //try displaying left of selection if possible
-                x = bounds.x - w;
-                if (x < 0) {
-                    //display below selection if no room left or right of selection
-                    x = bounds.x;
-                    if (w < bounds.width) {
-                        //center below item if needed
-                        x += (bounds.width - w) / 2;
+                //try displaying right of selection if possible
+                float x = bounds.x + bounds.width;
+                float y = bounds.y;
+                if (x + w > screenWidth) {
+                    //try displaying left of selection if possible
+                    x = bounds.x - w;
+                    if (x < 0) {
+                        //display below selection if no room left or right of selection
+                        x = bounds.x;
+                        if (w < bounds.width) {
+                            //center below item if needed
+                            x += (bounds.width - w) / 2;
+                        }
+                        if (x + w > screenWidth) {
+                            x = screenWidth - w;
+                        }
+                        y += bounds.height;
                     }
-                    if (x + w > screenWidth) {
-                        x = screenWidth - w;
-                    }
-                    y += bounds.height;
                 }
+                if (y + h > screenHeight) {
+                    if (y == bounds.y) {
+                        //if displaying to left or right, move up if not enough room
+                        y = screenHeight - h;
+                    }
+                    else {
+                        //if displaying below selection and not enough room, display above selection
+                        y -= bounds.height + h;
+                    }
+                    if (y < 0) {
+                        y = 0;
+                        if (h > bounds.y) {
+                            h = bounds.y; //cut off menu if not enough room above or below selection
+                        }
+                    }
+                }
+                if (Forge.isLandscapeMode() && getSelectedItem() instanceof InventoryItem) {
+                    if (instance instanceof SpellShopManager) {
+                        if (instance.currentView == imageView) {
+                            x = instance.itemLeft + instance.itemWidth/2 - this.getWidth()/2;
+                        }
+                    }
+                }
+                setBounds(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+            } catch (Exception ignored) {
+                //FIXME: IndexOutOfBoundsException on Rectangle bounds = currentView.getSelectionBounds();
             }
-            if (y + h > screenHeight) {
-                if (y == bounds.y) {
-                    //if displaying to left or right, move up if not enough room
-                    y = screenHeight - h;
-                }
-                else {
-                    //if displaying below selection and not enough room, display above selection
-                    y -= bounds.height + h;
-                }
-                if (y < 0) {
-                    y = 0;
-                    if (h > bounds.y) {
-                        h = bounds.y; //cut off menu if not enough room above or below selection
-                    }
-                }
-            }
-
-            setBounds(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
         }
     }
 

@@ -62,6 +62,7 @@ import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RestartUtil;
@@ -86,12 +87,20 @@ public enum FControl implements KeyEventDispatcher {
     private boolean altKeyLastDown;
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
-    private String snapsVersion = "";
+    private String snapsVersion = "", currentVersion = "";
+    private boolean isSnapshot;
+    private Localizer localizer;
 
     public enum CloseAction {
         NONE,
         CLOSE_SCREEN,
         EXIT_FORGE
+    }
+
+    public Localizer getLocalizer() {
+        if (localizer == null)
+            localizer = Localizer.getInstance();
+        return localizer;
     }
 
     private boolean hasCurrentMatches() {
@@ -126,16 +135,15 @@ public enum FControl implements KeyEventDispatcher {
      * instantiated separately by each screen's top level view class.
      */
     FControl() {
-        final Localizer localizer = Localizer.getInstance();
         Singletons.getView().getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
                 case NONE: //prompt user for close action if not previously specified
-                    final List<String> options = ImmutableList.of(localizer.getMessage("lblCloseScreen"), localizer.getMessage("lblExitForge"), localizer.getMessage("lblCancel"));
+                    final List<String> options = ImmutableList.of(getLocalizer().getMessage("lblCloseScreen"), getLocalizer().getMessage("lblExitForge"), getLocalizer().getMessage("lblCancel"));
                     final int reply = FOptionPane.showOptionDialog(
-                            localizer.getMessage("txCloseAction1") + "\n\n" + localizer.getMessage("txCloseAction2"),
-                            localizer.getMessage("titCloseAction"),
+                            getLocalizer().getMessage("txCloseAction1") + "\n\n" + getLocalizer().getMessage("txCloseAction2"),
+                            getLocalizer().getMessage("titCloseAction"),
                             FOptionPane.INFORMATION_ICON,
                             options,
                             2);
@@ -178,14 +186,13 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean canExitForge(final boolean forRestart) {
-        final Localizer localizer = Localizer.getInstance();
-        final String action = (forRestart ? localizer.getMessage("lblRestart") : localizer.getMessage("lblExit"));
-        String userPrompt =(forRestart ? localizer.getMessage("lblAreYouSureYouWishRestartForge") : localizer.getMessage("lblAreYouSureYouWishExitForge"));
+        final String action = (forRestart ? getLocalizer().getMessage("lblRestart") : getLocalizer().getMessage("lblExit"));
+        String userPrompt =(forRestart ? getLocalizer().getMessage("lblAreYouSureYouWishRestartForge") : getLocalizer().getMessage("lblAreYouSureYouWishExitForge"));
         final boolean hasCurrentMatches = hasCurrentMatches();
         if (hasCurrentMatches) {
-            userPrompt = localizer.getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
+            userPrompt = getLocalizer().getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
         }
-        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, localizer.getMessage("lblCancel"), !hasCurrentMatches)) { //default Yes if no game active
+        if (!FOptionPane.showConfirmDialog(userPrompt, action + " Forge", action, getLocalizer().getMessage("lblCancel"), !hasCurrentMatches)) { //default Yes if no game active
             return false;
         }
         return CDeckEditorUI.SINGLETON_INSTANCE.canSwitchAway(true);
@@ -214,18 +221,21 @@ public enum FControl implements KeyEventDispatcher {
 
     /** After view and model have been initialized, control can start.*/
     public void initialize() {
+        final ForgePreferences prefs = FModel.getPreferences();
+        currentVersion = BuildInfo.getVersionString();
+        isSnapshot = currentVersion.contains("SNAPSHOT");
         //get version string
         try {
-            URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
-            snapsVersion = FileUtil.readFileToString(url);
+            if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
+                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
+                snapsVersion = FileUtil.readFileToString(url);
+            }
 
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
-
-        final ForgePreferences prefs = FModel.getPreferences();
 
         //set ExperimentalNetworkOption from preference
         boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
@@ -233,8 +243,7 @@ public enum FControl implements KeyEventDispatcher {
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 
-        final Localizer localizer = Localizer.getInstance();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblLoadingQuest"));
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(getLocalizer().getMessage("lblLoadingQuest"));
         // Preload quest data if present
         final File dirQuests = new File(ForgeConstants.QUEST_SAVE_DIR);
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
@@ -272,14 +281,16 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.getLpnDocument().addComponentListener(SResizingUtil.getWindowResizeListener());
 
         setGlobalKeyboardHandler();
-        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(localizer.getMessage("lblOpeningMainWindow"));
+        FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(getLocalizer().getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
-    public String compareVersion(String currentVersion) {
-        if (currentVersion.isEmpty() || snapsVersion.isEmpty()
-                || !currentVersion.contains("SNAPSHOT") || currentVersion.equalsIgnoreCase(snapsVersion))
+    public boolean isSnapshot() {
+        return isSnapshot;
+    }
+    public String getSnapshotNotification() {
+        if (!isSnapshot || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
             return "";
-        return "NEW SNAPSHOT AVAILABLE!!!";
+        return getLocalizer().getMessage("lblNewSnapshotVersion", snapsVersion);
     }
 
     private void setGlobalKeyboardHandler() {
@@ -332,8 +343,7 @@ public enum FControl implements KeyEventDispatcher {
         try {
             SLayoutIO.loadLayout(null);
         } catch (final InvalidLayoutFileException ex) {
-            final Localizer localizer = Localizer.getInstance();
-            SOptionPane.showMessageDialog(String.format(localizer.getMessage("lblerrLoadingLayoutFile"), screen.getTabCaption()), "Warning!");
+            SOptionPane.showMessageDialog(String.format(getLocalizer().getMessage("lblerrLoadingLayoutFile"), screen.getTabCaption()), "Warning!");
             if (screen.deleteLayoutFile()) {
                 SLayoutIO.loadLayout(null); //try again
             }

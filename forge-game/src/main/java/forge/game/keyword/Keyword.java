@@ -328,6 +328,10 @@ public enum Keyword {
         return result;
     }
 
+    public String getReminderText() {
+        return reminderText;
+    }
+
     public boolean isMultipleRedundant() {
         return isMultipleRedundant;
     }

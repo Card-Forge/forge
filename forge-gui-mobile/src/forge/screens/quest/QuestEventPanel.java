@@ -48,7 +48,7 @@ class QuestEventPanel extends FDisplayObject {
 		if (event.getFullTitle().startsWith("Random Opponent")) {
 			image = FSkinImage.UNKNOWN;
 		} else {
-			image = event.hasImage() ? ImageCache.getIcon(e0) : null;
+			image = event.hasImage() ? ImageCache.getInstance().getIcon(e0) : null;
 		}
 
 		container = container0;

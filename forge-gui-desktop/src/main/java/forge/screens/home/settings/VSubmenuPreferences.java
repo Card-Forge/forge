@@ -1,5 +1,6 @@
 package forge.screens.home.settings;
 
+import forge.control.FControl;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
@@ -55,7 +56,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnDeleteWorkshopUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnDeleteWorkshopUI")).build();
     private final FLabel btnUserProfileUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnUserProfileUI")).build();
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
-    private final FLabel btnResetJavaFutureCompatibilityWarnings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnResetJavaFutureCompatibilityWarnings")).build();
     private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
 
@@ -112,6 +112,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
     private final JCheckBox cbUseSentry = new OptionsCheckBox(localizer.getMessage("cbUseSentry"));
+    private final JCheckBox cbCheckSnapshot = new OptionsCheckBox(localizer.getMessage("cbSnapshotUpdate"));
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbAllowCustomCardsDeckConformance = new OptionsCheckBox(localizer.getMessage("lblAllowCustomCardsInDecks"));
@@ -193,7 +194,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbUseSentry, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlUseSentry")), descriptionConstraints);
 
-        pnlPrefs.add(btnResetJavaFutureCompatibilityWarnings, "w 300px!, h 30px!, gap 27px 0 0 20px, span 2 1");
+        if (FControl.instance.isSnapshot()) {
+            pnlPrefs.add(cbCheckSnapshot, titleConstraints);
+            pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSnapshotUpdate")), descriptionConstraints);
+        }
 
         // Gameplay Options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("GamePlay")), sectionConstraints);
@@ -626,6 +630,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
+    public final JCheckBox getCbCheckSnapshot() {
+        return cbCheckSnapshot;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
     public final JCheckBox getCbRemoveSmall() {
         return cbRemoveSmall;
     }
@@ -984,10 +993,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
     public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
-
-    public final FLabel getBtnResetJavaFutureCompatibilityWarnings() {
-        return btnResetJavaFutureCompatibilityWarnings;
-    }
 
     /* (non-Javadoc)
 		 * @see forge.gui.framework.IVDoc#getDocumentID()
