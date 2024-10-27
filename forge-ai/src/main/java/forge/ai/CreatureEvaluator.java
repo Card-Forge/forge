@@ -31,41 +31,23 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         int value = 80;
 
-        // Evaluate card type
         value += evaluateCardType(c);
 
-        // Evaluate power and toughness
         if (considerPT) {
             value += evaluatePowerAndToughness(c);
         }
 
-        // Evaluate mana cost
         if (considerCMC) {
             value += evaluateManaCost(c);
         }
 
-        // Evaluate evasion keywords
         value += evaluateEvasionKeywords(c);
-
-        // Evaluate other good keywords
         value += evaluateGoodKeywords(c);
-
-        // Evaluate defensive keywords
         value += evaluateDefensiveKeywords(c);
-
-        // Evaluate protection keywords
         value += evaluateProtectionKeywords(c);
-
-        // Evaluate spell abilities
         value += evaluateSpellAbilities(c);
-
-        // Evaluate paired and encoded cards
         value += evaluatePairedAndEncoded(c);
-
-        // Evaluate bad keywords
         value -= evaluateBadKeywords(c);
-
-        // Evaluate additional card-specific modifiers
         value += evaluateCardSpecificModifiers(c);
 
         return value;
@@ -84,7 +66,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         int power = c.getNetCombatDamage();
         int toughness = c.getNetToughness();
 
-        // Handle damage prevention
         if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
                 || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
                 || c.hasKeyword("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
@@ -95,7 +76,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         value += addValue(power * 15, "power");
         value += addValue(toughness * 10, "toughness");
 
-        // Handle transforming cards
         if (c.hasKeyword(Keyword.DAYBOUND) && c.isDoubleFaced()) {
             value += addValue(power * 10, "transforming");
         }
@@ -241,15 +221,12 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     private int evaluateSpellAbility(SpellAbility sa) {
-        // Pump abilities
         if (sa.getApi() == ApiType.Pump) {
-            // Pump abilities that grant +X/+X to the card
             if ("+X".equals(sa.getParam("NumAtt"))
                     && "+X".equals(sa.getParam("NumDef"))
                     && !sa.usesTargeting()
                     && (!sa.hasParam("Defined") || "Self".equals(sa.getParam("Defined")))) {
                 if (sa.getPayCosts().hasOnlySpecificCostType(CostPayEnergy.class)) {
-                    // Electrostatic Pummeler, can be expanded for similar cards
                     int initPower = sa.getHostCard().getNetPower();
                     int pumpedPower = initPower;
                     int energy = sa.getHostCard().getController().getCounters(CounterEnumType.ENERGY);
@@ -264,7 +241,6 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             }
         }
 
-        // Default value
         return 10;
     }
 
@@ -295,7 +271,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += subValue(40, "sac-end");
         }
         if (c.hasKeyword("CARDNAME can't attack or block.")) {
-            value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
+            value = addValue(50 + (c.getCMC() * 5), "useless");
         } else if (c.hasKeyword("CARDNAME can't block.")) {
             value += subValue(10, "cant-block");
         } else if (c.isGoaded()) {
@@ -326,7 +302,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         if (c.hasKeyword("CARDNAME doesn't untap during your untap step.")) {
             if (c.isTapped()) {
-                value = addValue(50 + (c.getCMC() * 5), "tapped-useless"); // reset everything - useless
+                value = addValue(50 + (c.getCMC() * 5), "tapped-useless");
             } else {
                 value += subValue(50, "doesnt-untap");
             }
@@ -348,11 +324,11 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword(Keyword.VANISHING)) {
             value += subValue(20 / (Math.max(1, c.getCounters(CounterEnumType.TIME))), "vanishing");
         }
-        // Use scaling because the creature is only available halfway
         if (c.hasKeyword(Keyword.PHASING)) {
             value += subValue(Math.max(20, value / 2), "phasing");
         }
 
+        // TODO no longer a KW
         if (c.hasStartOfKeyword("At the beginning of your upkeep, CARDNAME deals")) {
             value += subValue(20, "upkeep-dmg");
         }
@@ -368,28 +344,10 @@ public class CreatureEvaluator implements Function<Card, Integer> {
     }
 
     protected int addValue(int value, String text) {
-        // Logging for debugging purposes
-        System.out.println("Adding value: " + value + " for " + text);
         return value;
     }
 
     protected int subValue(int value, String text) {
-        return -addValue(-value, text);
-    }
-
-    public void printEvaluationDetails(Card c) {
-        System.out.println("Evaluation Details for Card: " + c.getName());
-        System.out.println("Base Value: 80");
-        System.out.println("Card Type Value: " + evaluateCardType(c));
-        System.out.println("Power and Toughness Value: " + evaluatePowerAndToughness(c));
-        System.out.println("Mana Cost Value: " + evaluateManaCost(c));
-        System.out.println("Evasion Keywords Value: " + evaluateEvasionKeywords(c));
-        System.out.println("Good Keywords Value: " + evaluateGoodKeywords(c));
-        System.out.println("Defensive Keywords Value: " + evaluateDefensiveKeywords(c));
-        System.out.println("Protection Keywords Value: " + evaluateProtectionKeywords(c));
-        System.out.println("Spell Abilities Value: " + evaluateSpellAbilities(c));
-        System.out.println("Paired and Encoded Value: " + evaluatePairedAndEncoded(c));
-        System.out.println("Bad Keywords Value: " + evaluateBadKeywords(c));
-        System.out.println("Card Specific Modifiers Value: " + evaluateCardSpecificModifiers(c));
+        return -addValue(value, text);
     }
 }
