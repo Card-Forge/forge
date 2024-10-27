@@ -424,8 +424,9 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         }
     }
     public class UpdaterButton extends TitleBarButton {
-        final int MARQUEE_SPEED_DIV = 15;
-        final int REPAINT_WITHIN_MS = 25;
+        final int MARQUEE_SPEED_DIV = 50;
+        final int REPAINT_WITHIN_MS = 50;
+        final int wMod = 60;
         final String displayText = FControl.instance.getSnapshotNotification();
         public UpdaterButton() {
             setToolTipText(Localizer.getInstance().getMessage("btnCheckForUpdates"));
@@ -442,7 +443,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         }
         @Override
         public void paintComponent(Graphics g) {
-            g.translate((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % (getWidth() * 2)) - getWidth(), 0);
+            g.translate(-((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % ((getWidth() + wMod) * 2)) - (getWidth() + wMod)), 0);
             super.paintComponent(g);
             int thickness = 2;
             Graphics2D g2d = (Graphics2D) g;
