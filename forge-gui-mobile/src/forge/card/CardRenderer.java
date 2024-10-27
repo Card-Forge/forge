@@ -697,7 +697,6 @@ public class CardRenderer {
             //if card has invalid or no texture due to sudden changes in ImageCache, draw CardImageRenderer instead and wait for it to refresh automatically
             CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !showCardIdOverlay(card));
         }
-        g.setAlphaComposite(oldAlpha);
     }
 
     private static boolean drawGray(CardView c) {

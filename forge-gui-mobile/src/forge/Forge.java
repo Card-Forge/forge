@@ -849,7 +849,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            getFrameRate().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
+            frameRate.update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
             ImageCache.getInstance().allowSingleLoad();
