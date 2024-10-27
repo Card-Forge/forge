@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -147,6 +149,16 @@ public class AutoUpdater {
             return false;
         }
         // If version doesn't match, it's assummably newer.
+        if (buildVersion.contains("SNAPSHOT")) {
+            try {
+                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
+                return snapsTimestamp.after(BuildInfo.getTimestamp());
+            } catch (Exception ignored) {
+                return false;
+            }
+        }
         return true;
     }
 

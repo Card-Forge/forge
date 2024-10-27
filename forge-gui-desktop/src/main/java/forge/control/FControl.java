@@ -27,7 +27,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -88,7 +90,8 @@ public enum FControl implements KeyEventDispatcher {
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
     private String snapsVersion = "", currentVersion = "";
-    private boolean isSnapshot;
+    private Date snapsTimestamp = null;
+    private boolean isSnapshot, hasSnapsUpdate;
     private Localizer localizer;
 
     public enum CloseAction {
@@ -229,6 +232,10 @@ public enum FControl implements KeyEventDispatcher {
             if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
                 URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
                 snapsVersion = FileUtil.readFileToString(url);
+                url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
+                hasSnapsUpdate = BuildInfo.verifyTimestamp(snapsTimestamp);
             }
 
         } catch (Exception ignored) {}
@@ -288,7 +295,7 @@ public enum FControl implements KeyEventDispatcher {
         return isSnapshot;
     }
     public String getSnapshotNotification() {
-        if (!isSnapshot || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
+        if (!isSnapshot || !hasSnapsUpdate || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
             return "";
         return getLocalizer().getMessage("lblNewSnapshotVersion", snapsVersion);
     }

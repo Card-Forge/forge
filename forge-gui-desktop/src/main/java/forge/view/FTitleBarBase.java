@@ -455,6 +455,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         }
         private void updateVisibility() {
             setVisible(!isVisible());
+            setEnabled(isVisible());
         }
     }
 }

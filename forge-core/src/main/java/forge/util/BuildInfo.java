@@ -20,10 +20,17 @@ package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Provides access to information about the current version and build ID.
  */
 public class BuildInfo {
+    private static Date timestamp = null;
     // disable instantiation
     private BuildInfo() { }
 
@@ -46,6 +53,27 @@ public class BuildInfo {
                 StringUtils.containsIgnoreCase(forgeVersion, "snapshot");
     }
 
+    public static Date getTimestamp() {
+        if (timestamp != null)
+            return timestamp;
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String b = Files.readString(
+               Paths.get(BuildInfo.class.getClassLoader().getResource("build.txt").toURI()),
+                   Charset.defaultCharset());
+            timestamp = simpleDateFormat.parse(b);
+        } catch (Exception ignored) {}
+        return timestamp;
+    }
+
+    public static boolean verifyTimestamp(Date updateTimestamp) {
+        if (updateTimestamp == null)
+            return false;
+        if (getTimestamp() == null)
+            return false;
+        System.err.println("Update Timestamp: " + updateTimestamp + "\nBuild Timestamp: " + getTimestamp());
+        return updateTimestamp.after(getTimestamp());
+    }
     public static String getUserAgent() {
         return "Forge/" + getVersionString();
     }
