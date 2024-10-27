@@ -1,0 +1,18 @@
+Name:Crude Abattoir
+ManaCost:R
+Types:Enchantment Room
+T:Mode$ UnlockDoor | ValidPlayer$ You | ValidCard$ Card.Self | ThisDoor$ True | Execute$ DBDealDamage | TriggerDescription$ When you unlock this door, this Room deals 2 damage to target creature.
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 2
+AlternateMode:Split
+Oracle:When you unlock this door, this Room deals 2 damage to target creature.
+
+ALTERNATE
+
+Name:Unsavory Kitchen
+ManaCost:2 R
+Types:Enchantment Room
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Creature | CombatDamage$ False | TriggerZones$ Battlefield | Execute$ TrigChooseCard | TriggerDescription$ Whenever a source you control deals noncombat damage to a creature, choose a creature card in your hand. It perpetually gets +2/+0 and gains haste.
+SVar:TrigChooseCard:DB$ ChooseCard | Choices$ Creature.YouOwn | ChoiceZone$ Hand | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | PumpZone$ Hand | Defined$ ChosenCard | NumAtt$ 2 | KW$ Haste | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Whenever a source you control deals noncombat damage to a creature, choose a creature card in your hand. It perpetually gets +2/+0 and gains haste.
