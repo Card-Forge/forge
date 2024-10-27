@@ -302,7 +302,7 @@ public class Forge implements ApplicationListener {
                 filteredkeys.add(cardname);
         }
         if (!filteredkeys.isEmpty())
-            ImageCache.preloadCache(filteredkeys);
+            ImageCache.getInstance().preloadCache(filteredkeys);
     }
 
     private void preloadBoosterDrafts() {
@@ -759,7 +759,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToClassic() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
             GuiBase.setIsAdventureMode(false);
             setCursor(FSkin.getCursor().get(0), "0");
@@ -773,7 +773,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToAdventure() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             clearCurrentScreen();
             clearTransitionScreen();
             openAdventure();
@@ -842,17 +842,17 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
         } finally {
             if (dispose)
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
         }
     }
 
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.counter, getAssets().manager().getMemoryInMegabytes());
+            getFrameRate().update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
-            ImageCache.allowSingleLoad();
+            ImageCache.getInstance().allowSingleLoad();
             ForgeAnimation.advanceAll();
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.

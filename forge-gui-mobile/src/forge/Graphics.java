@@ -916,7 +916,7 @@ public class Graphics {
         batch.end();
         shaderRoundedRect.bind();
         shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * ImageCache.getInstance().getRadius(image));
         shaderRoundedRect.setUniformf("u_gray", drawGray ? 0.8f : 0f);
         batch.setShader(shaderRoundedRect);
         batch.begin();
@@ -936,7 +936,7 @@ public class Graphics {
         batch.end();
         shaderRoundedRect.bind();
         shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("edge_radius", (float)(image.getHeight() / image.getWidth()) * ImageCache.getInstance().getRadius(image));
         shaderRoundedRect.setUniformf("u_gray", 0f);
         batch.setShader(shaderRoundedRect);
         batch.begin();

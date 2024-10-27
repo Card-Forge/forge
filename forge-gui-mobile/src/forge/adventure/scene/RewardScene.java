@@ -133,7 +133,7 @@ public class RewardScene extends UIScene {
             }
         }
         //save RAM
-        ImageCache.unloadCardTextures(true);
+        ImageCache.getInstance().unloadCardTextures(true);
         Forge.advFreezePlayerControls = false;
         if (this.collectionPool != null) {
             this.collectionPool.clear();
@@ -196,7 +196,7 @@ public class RewardScene extends UIScene {
     @Override
     public void act(float delta) {
         stage.act(delta);
-        ImageCache.allowSingleLoad();
+        ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
             if (type == Type.Loot || type == Type.QuestReward) {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
