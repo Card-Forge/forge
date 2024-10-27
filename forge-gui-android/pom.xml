@@ -508,6 +508,7 @@
                                         <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/">
                                             <fileset dir="${project.build.directory}/classes">
                                                 <include name="version.txt" />
+                                                <include name="build.txt" />
                                             </fileset>
                                         </ftp>
                                     </target>
