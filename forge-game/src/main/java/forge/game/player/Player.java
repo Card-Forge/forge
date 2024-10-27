@@ -78,8 +78,8 @@ import java.util.stream.StreamSupport;
 public class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
-            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.Junkyard,
-            ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+            ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck,
+            ZoneType.Junkyard, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
 
     private final Map<Card, Integer> commanderDamage = Maps.newHashMap();
 
@@ -191,6 +191,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Card monarchEffect;
     private Card initiativeEffect;
     private Card blessingEffect;
+    private Card contraptionSprocketEffect;
 
     private Card radiationEffect;
     private Card keywordEffect;
@@ -202,6 +203,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private NavigableMap<Long, Player> declaresAttackers = Maps.newTreeMap();
     private NavigableMap<Long, Player> declaresBlockers = Maps.newTreeMap();
+
+    private int crankCounter = 3;
 
     private final AchievementTracker achievementTracker = new AchievementTracker();
     private final PlayerView view;
@@ -3070,6 +3073,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!attractionDeck.isEmpty())
             attractionDeck.shuffle();
 
+        // Contraptions
+        PlayerZone contraptionDeck = getZone(ZoneType.ContraptionDeck);
+        for (IPaperCard cp : registeredPlayer.getContraptions()) {
+            Card c = Card.fromPaperCard(cp, this);
+            c.setCollectible(true);
+            contraptionDeck.add(c);
+        }
+        if (!contraptionDeck.isEmpty())
+            contraptionDeck.shuffle();
+
         // Adventure Mode items
         Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
         if (adventureItemCards != null) {
@@ -3947,6 +3960,47 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void rollToVisitAttractions() {
         this.visitAttractions(RollDiceEffect.rollDiceForPlayerToVisitAttractions(this));
+    }
+
+    public int getCrankCounter() {
+        return this.crankCounter;
+    }
+    public void setCrankCounter(int counters) {
+        this.crankCounter = counters;
+        if(this.contraptionSprocketEffect == null)
+            this.createContraptionSprockets();
+        else
+            contraptionSprocketEffect.setCounters(CounterEnumType.CRANK, this.crankCounter);
+    }
+    public void advanceCrankCounter() {
+        this.setCrankCounter((this.crankCounter) % 3 + 1);
+        CardCollection contraptions = CardLists.filter(getCardsIn(ZoneType.Battlefield), CardPredicates.isContraptionOnSprocket(crankCounter));
+        List<Card> chosenContraptions = getController().chooseContraptionsToCrank(contraptions);
+        for(Card c : chosenContraptions) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
+            runParams.put(AbilityKey.Player, this);
+            game.getTriggerHandler().runTrigger(TriggerType.CrankContraption, runParams, false);
+        }
+    }
+    public void createContraptionSprockets() {
+        if (this.contraptionSprocketEffect != null)
+            return;
+
+        contraptionSprocketEffect = new Card(game.nextCardId(), null, game);
+        contraptionSprocketEffect.setOwner(this);
+        contraptionSprocketEffect.setImageKey("t:sprockets");
+        contraptionSprocketEffect.setName("Contraption Sprockets");
+        contraptionSprocketEffect.setGamePieceType(GamePieceType.EFFECT);
+
+        contraptionSprocketEffect.setCounters(CounterEnumType.CRANK, this.crankCounter);
+        List<String> text = Lists.newArrayList("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
+        contraptionSprocketEffect.addHiddenExtrinsicKeywords(game.getNextTimestamp(), 0, text);
+
+        contraptionSprocketEffect.updateStateForView();
+
+        final PlayerZone com = getZone(ZoneType.Command);
+        com.add(contraptionSprocketEffect);
+        this.updateZoneForView(com);
     }
 
     public void addDeclaresAttackers(long ts, Player p) {

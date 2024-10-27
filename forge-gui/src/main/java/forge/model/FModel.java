@@ -101,7 +101,7 @@ public final class FModel {
     private static GameFormat.Collection formats;
     private static ItemPool<PaperCard> uniqueCardsNoAlt, allCardsNoAlt, planechaseCards, archenemyCards,
             brawlCommander, oathbreakerCommander, tinyLeadersCommander, commanderPool,
-            avatarPool, conspiracyPool, dungeonPool, attractionPool;
+            avatarPool, conspiracyPool, dungeonPool, attractionPool, contraptionPool;
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
         //init version to log
@@ -284,6 +284,7 @@ public final class FModel {
         archenemyCards = getArchenemyCards();
         planechaseCards = getPlanechaseCards();
         attractionPool = getAttractionPool();
+        contraptionPool = getContraptionPool();
         if (GuiBase.getInterface().isLibgdxPort()) {
             //preload mobile Itempool
             uniqueCardsNoAlt = getUniqueCardsNoAlt();
@@ -384,6 +385,13 @@ public final class FModel {
             return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(Predicates.compose(CardRulesPredicates.Presets.IS_ATTRACTION, PaperCard::getRules)), PaperCard.class);
         return attractionPool;
     }
+
+    public static ItemPool<PaperCard> getContraptionPool() {
+        if(contraptionPool == null) //TODO: Handle predicate rewrite.
+            return ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(c -> c.getRules().getType().isContraption()), PaperCard.class);
+        return contraptionPool;
+    }
+
     private static boolean keywordsLoaded = false;
 
     /**

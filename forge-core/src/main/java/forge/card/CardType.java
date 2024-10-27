@@ -527,6 +527,10 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return hasSubtype("Attraction");
     }
 
+    public boolean isContraption() {
+        return hasSubtype("Contraption");
+    }
+
     @Override
     public boolean isSaga() {
         return hasSubtype("Saga");
@@ -822,6 +826,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     public GamePieceType getGamePieceType() {
         if(this.isAttraction())
             return GamePieceType.ATTRACTION;
+        if(this.isContraption())
+            return GamePieceType.CONTRAPTION;
         for(CoreType type : coreTypes) {
             GamePieceType r = type.toGamePieceType();
             if(r != GamePieceType.CARD)

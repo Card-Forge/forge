@@ -542,6 +542,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Sector, c.getSector());
     }
 
+    public int getSprocket() {
+        return get(TrackableProperty.Sprocket);
+    }
+    void updateSprocket(Card c) {
+        set(TrackableProperty.Sprocket, c.getSprocket());
+    }
+
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
         set(TrackableProperty.DraftAction, c.getDraftActions());
@@ -621,6 +628,7 @@ public class CardView extends GameEntityView {
         case Library:
         case PlanarDeck:
         case AttractionDeck:
+        case ContraptionDeck:
             //cards in these zones are hidden to all unless they specify otherwise
             break;
         case SchemeDeck:
@@ -1758,6 +1766,9 @@ public class CardView extends GameEntityView {
         }
         public boolean isAttraction() {
             return getType().isAttraction();
+        }
+        public boolean isContraption() {
+            return getType().isContraption();
         }
 
         @Override

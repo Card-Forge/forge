@@ -255,6 +255,12 @@ public class PhaseHandler implements java.io.Serializable {
                     nUpkeepsThisGame++;
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
+
+                    //TODO: Rewrite for predicates update
+                    if (Iterables.any(playerTurn.getCardsIn(ZoneType.Battlefield), Card::isContraption)) {
+                        playerTurn.advanceCrankCounter();
+                    }
+
                     break;
 
                 case DRAW:

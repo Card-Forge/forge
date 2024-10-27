@@ -78,6 +78,7 @@ public enum TrackableProperty {
     ChosenMode(TrackableTypes.StringType),
     ChosenSector(TrackableTypes.StringType),
     Sector(TrackableTypes.StringListType),
+    Sprocket(TrackableTypes.IntegerType),
     DraftAction(TrackableTypes.StringListType),
     ClassLevel(TrackableTypes.IntegerType),
     RingLevel(TrackableTypes.IntegerType),

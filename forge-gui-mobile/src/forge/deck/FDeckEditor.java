@@ -218,13 +218,14 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Constructed:
             case Commander:
                 return new DeckSection[]{
-                        DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy, DeckSection.Attractions
+                        DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
+                        DeckSection.Attractions, DeckSection.Contraptions
                 };
             case Draft:
             case Sealed:
-                return new DeckSection[]{DeckSection.Conspiracy, DeckSection.Attractions};
+                return new DeckSection[]{DeckSection.Conspiracy, DeckSection.Attractions, DeckSection.Contraptions};
         }
-        return new DeckSection[]{DeckSection.Attractions};
+        return new DeckSection[]{DeckSection.Attractions, DeckSection.Contraptions};
     }
 
     private static DeckSectionPage createPageForExtraSection(DeckSection deckSection, EditorType editorType) {
@@ -244,6 +245,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if(editorType.isLimitedType())
                     return new DeckSectionPage(deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR_LIMITED);
                 return new DeckSectionPage(deckSection, ItemManagerConfig.ATTRACTION_DECK_EDITOR);
+            case Contraptions:
+                if(editorType.isLimitedType())
+                    return new DeckSectionPage(deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR_LIMITED);
+                return new DeckSectionPage(deckSection, ItemManagerConfig.CONTRAPTION_DECK_EDITOR);
             default:
                 System.out.printf("Editor (%s) added an unsupported extra deck section - %s%n", deckSection, editorType);
                 return new DeckSectionPage(deckSection);
@@ -261,6 +266,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Avatar: label = "lblAvatar"; break;
             case Conspiracy: label = "lblConspiracies"; break;
             case Attractions: label = "lblAttractions"; break;
+            case Contraptions: label = "lblContraptions"; break;
         }
         String text = Localizer.getInstance().getMessage(label);
         if(text == null)
@@ -623,10 +629,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Conspiracy:
                 return Integer.MAX_VALUE;
             case Attractions:
-                if(isLimitedEditor())
-                    return Integer.MAX_VALUE;
-                else
-                    return 1;
+            case Contraptions:
+                return isLimitedEditor() ? Integer.MAX_VALUE : 1;
             default:
                 return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
         }
@@ -751,6 +755,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.applyAdvancedSearchFilter(new String[]{
                         "CARD_TYPE CONTAINS_ALL Artifact",
                         "CARD_SUB_TYPE CONTAINS_ALL Attraction"
+                }, true);
+                break;
+            case Contraptions:
+                cardManager.applyAdvancedSearchFilter(new String[]{
+                        "CARD_TYPE CONTAINS_ALL Artifact",
+                        "CARD_SUB_TYPE CONTAINS_ALL Contraption"
                 }, true);
                 break;
             default:
@@ -1200,6 +1210,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 case Conspiracy: return from ? "lblfromconspiracydeck" : "lbltoconspiracydeck";
                 case Dungeon: return from ? "lblfromdungeondeck" : "lbltodungeondeck";
                 case Attractions: return from ? "lblfromattractiondeck" : "lbltoattractiondeck";
+                case Contraptions: return from ? "lblfromcontraptiondeck" : "lbltocontraptiondeck";
                 case Avatar: return "lblasavatar";
                 case Commander:
                     if (parentScreen.editorType == EditorType.Oathbreaker) {
@@ -1531,6 +1542,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                             case Schemes: cardPool.addAll(FModel.getArchenemyCards()); break;
                             case Dungeon: cardPool.addAll(FModel.getDungeonPool()); break;
                             case Attractions: cardPool.addAll(FModel.getAttractionPool()); break;
+                            case Contraptions: cardPool.addAll(FModel.getContraptionPool()); break;
                         }
                     }
                     cardManager.setPool(editorType.applyCardFilter(cardPool, additionalFilter), true);
@@ -1711,6 +1723,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 cardManager.setCaption(localizer.getMessage("lblAttractions"));
                 icon = FSkinImage.TICKET;
                 break;
+            case Contraptions:
+                captionPrefix = localizer.getMessage("lblContraptions");
+                cardManager.setCaption(localizer.getMessage("lblContraptions"));
+                icon = FSkinImage.UNKNOWN; //TODO: Definitely needs a better image. Maybe after the 2.0 skin is in place?
+                break;
             }
         }
         protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config, String caption0, FImage icon0) {
@@ -1764,6 +1781,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             case Planes:
             case Schemes:
             case Attractions:
+            case Contraptions:
                 removeCard(card);
                 switch (parentScreen.getEditorType()) {
                 case Draft:
@@ -1930,6 +1948,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 break;
             case Planes:
             case Attractions:
+            case Contraptions:
                 addMoveCardMenuItem(menu, this, parentScreen.getCatalogPage(), new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {

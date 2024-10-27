@@ -542,6 +542,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return choices;
     }
 
+    @Override
+    public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
+        if(contraptions.isEmpty())
+            return contraptions;
+
+        tempShowCards(contraptions);
+        GameEntityViewMap<Card, CardView> gameCacheChoose = GameEntityView.getMap(contraptions);
+        List<CardView> views = getGui().many(localizer.getMessage("lblChosenCards"), localizer.getMessage("lblCranked"), -1,
+                gameCacheChoose.getTrackableKeys(), null);
+        endTempShowCards();
+
+        List<Card> choices = new CardCollection();
+        gameCacheChoose.addToList(views, choices);
+        return choices;
+    }
+
 
     @Override
     public boolean helpPayForAssistSpell(ManaCostBeingPaid cost, SpellAbility sa, int max, int requested) {
@@ -1127,7 +1143,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoSchemeDeck"), localizer.getMessage(topOfDeck ? "lblClosestToTop" : "lblClosestToBottom"), choices, null);
                 break;
             case AttractionDeck:
-                choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoAttractionDeck"), localizer.getMessage(topOfDeck ? "lblClosestToTop" : "lblClosestToBottom"), choices, null);
+            case ContraptionDeck:
+                choices = getGui().order(localizer.getMessage("lblChooseOrderCardsPutIntoExtraDeck"), localizer.getMessage(topOfDeck ? "lblClosestToTop" : "lblClosestToBottom"), choices, null);
             case Stack:
                 choices = getGui().order(localizer.getMessage("lblChooseOrderCopiesCast"), localizer.getMessage("lblPutFirst"), choices, null);
                 break;
@@ -1378,6 +1395,30 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             prompt = Localizer.getInstance().getMessage("lblChooseSectorEffect");
         }
         return getGui().one(prompt, sectors);
+    }
+
+    @Override
+    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+        String cardName = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+        String prompt = Localizer.getInstance().getMessage("lblAssignSprocket", cardName);
+        List<Integer> options = Lists.newArrayList(1, 2, 3); //TODO: List.of after Java 8 is dropped
+        if(forceDifferent)
+            options.remove(assignee.getSprocket());
+        int crankedNextTurn = (player.getCrankCounter() % 3) + 1;
+        getGui().setCard(assignee.getView());
+        List<Integer> choices = getGui().getChoices(prompt, 1, 1, options, null, (sprocket) -> {
+            //Add some info about each sprocket.
+            StringBuilder label = new StringBuilder();
+            label.append(sprocket);
+            int currentCount = CardLists.count(player.getCardsIn(ZoneType.Battlefield), CardPredicates.isContraptionOnSprocket(sprocket));
+            if(currentCount > 0)
+                label.append(' ').append(Localizer.getInstance().getMessage("lblAssignSprocketCurrentCount", currentCount));
+            if(sprocket == crankedNextTurn)
+                label.append(' ').append(Localizer.getInstance().getMessage("lblAssignSprocketNextTurn"));
+            return label.toString();
+        });
+        assert choices.size() == 1;
+        return choices.get(0);
     }
 
     @Override
@@ -2223,7 +2264,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
             final List<Object> labels = new ArrayList<>();
             for (final DeckSection s : new TreeSet<>(removedUnplayableCards.keySet())) {
-                labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
+                labels.add("=== " + s.getLocalizedName() + " ===");
                 labels.addAll(removedUnplayableCards.get(s));
             }
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),

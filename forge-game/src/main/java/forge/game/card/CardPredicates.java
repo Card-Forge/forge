@@ -304,6 +304,10 @@ public final class CardPredicates {
         return c -> c.isAttraction() && c.getAttractionLights().contains(light);
     }
 
+    public static Predicate<Card> isContraptionOnSprocket(int sprocket) {
+        return c -> c.getSprocket() == sprocket && c.isContraption();
+    }
+
     public static class Presets {
 
         /**

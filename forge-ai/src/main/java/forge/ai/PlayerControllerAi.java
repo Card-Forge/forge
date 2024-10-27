@@ -35,6 +35,8 @@ import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -300,6 +302,15 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CardCollectionView chooseCardsForEffect(CardCollectionView sourceList, SpellAbility sa, String title, int min, int max, boolean isOptional, Map<String, Object> params) {
         return brains.chooseCardsForEffect(sourceList, sa, min, max, isOptional, params);
+    }
+
+    @Override
+    public List<Card> chooseContraptionsToCrank(List<Card> contraptions) {
+        return CardLists.filter(contraptions, c -> {
+            //TODO: Rewrite after guava migration
+            Trigger crankTrigger = Iterables.find(c.getTriggers(), t -> t.getMode() == TriggerType.CrankContraption);
+            return confirmTrigger(new WrappedAbility(crankTrigger, crankTrigger.getOverridingAbility(), player));
+        });
     }
 
     @Override
@@ -734,6 +745,14 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return Aggregates.random(sectors);
+    }
+
+    @Override
+    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+        int nextSprocket = (player.getCrankCounter() % 3) + 1;
+        if(forceDifferent && nextSprocket == assignee.getSprocket())
+            return (nextSprocket % 3) + 1;
+        return nextSprocket;
     }
 
     @Override
