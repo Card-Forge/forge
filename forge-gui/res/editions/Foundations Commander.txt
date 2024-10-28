@@ -1,0 +1,8 @@
+[metadata]
+Code=FDC
+Date=2024-11-15
+Name=Foundations Commander
+Type=Commander
+ScryfallCode=FDC
+
+[cards]
