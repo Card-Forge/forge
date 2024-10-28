@@ -24,9 +24,9 @@ import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
 import static forge.localinstance.properties.ForgeConstants.ASSETS_DIR;
 import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
 import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
-import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_URL_ATOM;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
-import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_URL_ATOM;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_ATOM;
 import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
 import static forge.localinstance.properties.ForgeConstants.RES_DIR;
 
@@ -68,7 +68,7 @@ public class AssetsDownloader {
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             //currently for desktop/mobile-dev release on github
-            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
+            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
                 String version = "";
@@ -117,7 +117,7 @@ public class AssetsDownloader {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
                     if (!GuiBase.isAndroid()) {
-                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, null, null);
                     }
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
@@ -210,7 +210,7 @@ public class AssetsDownloader {
                 }
                 mandatory = true;
                 build += "\nInstalled resources date:\n" + target + "\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, buildDate, snapsTimestamp);
+                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildDate, snapsTimestamp);
             } catch (Exception e) {
                 e.printStackTrace();
             }
