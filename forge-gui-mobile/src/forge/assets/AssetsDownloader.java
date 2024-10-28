@@ -51,8 +51,11 @@ public class AssetsDownloader {
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
         final String snapsURL = DAILY_SNAPSHOT_URL;
-        final String releaseURL = RELEASE_URL +  "forge/forge-gui-android/";
-        final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "version.txt";
+        // desktop and mobile-dev share the same package
+        final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
+        final String releaseURL = RELEASE_URL +  guiChannel;
+        // desktop and mobile-dev uses maven-metadata.xml on earlier releases
+        final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "maven-metadata.xml";
         FileHandle assetsDir = Gdx.files.absolute(ASSETS_DIR);
         FileHandle resDir = Gdx.files.absolute(RES_DIR);
         FileHandle buildTxtFileHandle = Gdx.files.classpath("build.txt");
@@ -68,7 +71,11 @@ public class AssetsDownloader {
             final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
-                String version = FileUtil.readFileToString(versionUrl);
+                String version = "";
+                if (GuiBase.isAndroid())
+                    version = FileUtil.readFileToString(versionUrl);
+                else //instead of parsing xml from earlier releases, get the latest github release tag
+                    version = releaseTag.replace("forge-", "");
                 String filename = "";
                 String installerURL = "";
                 if (GuiBase.isAndroid()) {
