@@ -72,6 +72,8 @@ import forge.util.TextUtil;
 import forge.view.FFrame;
 import forge.view.FView;
 
+import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+
 /**
  * <p>
  * FControl.
@@ -244,9 +246,9 @@ public enum FControl implements KeyEventDispatcher {
         //get version string
         try {
             if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
-                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
+                URL url = new URL(DAILY_SNAPSHOT_URL + "version.txt");
                 snapsVersion = FileUtil.readFileToString(url);
-                url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                url = new URL(DAILY_SNAPSHOT_URL + "build.txt");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
                 buildTimeStamp = BuildInfo.getTimestamp();

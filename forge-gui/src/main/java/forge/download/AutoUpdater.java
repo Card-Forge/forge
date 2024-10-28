@@ -34,9 +34,10 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.WaitCallback;
 
+import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
+
 public class AutoUpdater {
-    private final String SNAPSHOT_VERSION_INDEX = "https://downloads.cardforge.org/dailysnapshots/";
-    private final String RELEASE_VERSION_INDEX = "https://releases.cardforge.org/";
     private static final boolean VERSION_FROM_METADATA = true;
     private static final Localizer localizer = Localizer.getInstance();
 
@@ -107,13 +108,13 @@ public class AutoUpdater {
                 return false;
             }
 
-            versionUrlString = SNAPSHOT_VERSION_INDEX + "version.txt";
+            versionUrlString = DAILY_SNAPSHOT_URL + "version.txt";
         } else {
             if (!updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
                 System.out.println("Release build versions must use release update channel to work");
                 return false;
             }
-            versionUrlString = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/version.txt";
+            versionUrlString = RELEASE_URL + "forge/forge-gui-desktop/version.txt";
         }
 
         // Check the internet connection
@@ -139,7 +140,7 @@ public class AutoUpdater {
         try {
             retrieveVersion();
             if (buildVersion.contains("SNAPSHOT")) {
-                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                URL url = new URL(DAILY_SNAPSHOT_URL + "build.txt");
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
                 snapsBuildDate = snapsTimestamp.toString();
@@ -170,14 +171,14 @@ public class AutoUpdater {
             version = FileUtil.readFileToString(versionUrl);
         }
         if (updateChannel.equalsIgnoreCase(localizer.getMessageorUseDefault("lblRelease", "Release"))) {
-            packageUrl = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
+            packageUrl = RELEASE_URL + "forge/forge-gui-desktop/" + version + "/forge-gui-desktop-" + version + ".tar.bz2";
         } else {
-            packageUrl = SNAPSHOT_VERSION_INDEX + "forge-installer-" + version + ".jar";
+            packageUrl = DAILY_SNAPSHOT_URL + "forge-installer-" + version + ".jar";
         }
     }
 
     private void extractVersionFromMavenRelease() throws MalformedURLException {
-        String RELEASE_MAVEN_METADATA = RELEASE_VERSION_INDEX + "forge/forge-gui-desktop/maven-metadata.xml";
+        String RELEASE_MAVEN_METADATA = RELEASE_URL + "forge/forge-gui-desktop/maven-metadata.xml";
         URL metadataUrl = new URL(RELEASE_MAVEN_METADATA);
         String xml = FileUtil.readFileToString(metadataUrl);
 
