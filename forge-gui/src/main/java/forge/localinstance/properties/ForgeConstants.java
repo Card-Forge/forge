@@ -25,8 +25,11 @@ import java.util.Collections;
 import java.util.Map;
 
 public final class ForgeConstants {
-    public static final String GITHUB_RELEASES_URL_ATOM     = "https://github.com/Card-Forge/forge/releases.atom";
-    public static final String GITHUB_COMMITS_URL_ATOM      = "https://github.com/Card-Forge/forge/commits/master.atom";
+    public static final String GITHUB_FORGE_URL             = "https://github.com/Card-Forge/forge/";
+    public static final String GITHUB_RELEASES_URL_ATOM     = GITHUB_FORGE_URL + "releases.atom";
+    public static final String GITHUB_COMMITS_URL_ATOM      = GITHUB_FORGE_URL + "commits/master.atom";
+    public static final String DAILY_SNAPSHOT_URL           = "https://downloads.cardforge.org/dailysnapshots/";
+    public static final String RELEASE_URL                  = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR               = File.separator;
     public static final String ASSETS_DIR                   = GuiBase.getInterface().getAssetsDir();
     public static final String PROFILE_FILE                 = ASSETS_DIR + "forge.profile.properties";
