@@ -97,8 +97,8 @@ public class AssetsDownloader {
                 if (verifyUpdatable) {
                     Forge.getSplashScreen().prepareForDialogs();
 
-                    message = "A new version of Forge is available." + version + "\n" + snapsBuildDate + "\n" +
-                            "You are currently on an older version." + versionString + "\n" + buildDate + "\n" +
+                    message = "A new version of Forge is available. " + version + "\n" + snapsBuildDate + "\n" +
+                            "You are currently on an older version. " + versionString + "\n" + buildDate + "\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
