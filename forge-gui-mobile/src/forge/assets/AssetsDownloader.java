@@ -78,7 +78,7 @@ public class AssetsDownloader {
                     //current release on github is tar.bz2, update this to jar installer in the future...
                     filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
                     String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
-                    String snapsBZ2URL = DAILY_SNAPSHOT_URL;
+                    String snapsBZ2URL = DAILY_SNAPSHOT_URL + filename;
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }
                 String snapsBuildDate = "", buildDate = "";
