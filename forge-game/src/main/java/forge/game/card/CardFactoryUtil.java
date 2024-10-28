@@ -1462,7 +1462,7 @@ public class CardFactoryUtil {
             final String trigStr = "Mode$ Exiled | ValidCard$ Card.Self | Madness$ True | Secondary$ True"
                     + " | TriggerDescription$ Play Madness " + ManaCostParser.parse(manacost) + " - " + card.getName();
 
-            final String playMadnessStr = "DB$ Play | Defined$ Self | PlayCost$ " + manacost +
+            final String playMadnessStr = "DB$ Play | Defined$ Self | ValidSA$ Spell | PlayCost$ " + manacost +
                     " | ConditionDefined$ Self | ConditionPresent$ Card.StrictlySelf+inZoneExile" +
                     " | Optional$ True | RememberPlayed$ True | Madness$ True";
 

@@ -1626,7 +1626,7 @@ public class ComputerUtil {
         for (final Card c : all) {
             // check if card is at least available to be played
             // further improvements might consider if AI has options to steal the spell by making it playable first
-            if (c.getZone().getPlayer() != null && c.getZone().getPlayer() != defender && c.mayPlay(defender).isEmpty()) {
+            if (c.getZone() != null && c.getZone().getPlayer() != null && c.getZone().getPlayer() != defender && c.mayPlay(defender).isEmpty()) {
                 continue;
             }
             for (final SpellAbility sa : c.getSpellAbilities()) {

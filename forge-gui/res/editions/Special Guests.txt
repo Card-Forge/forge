@@ -85,3 +85,5 @@ ScryfallCode=SPG
 71 M Unholy Heat @Josh Hass
 72 M Collected Company @Borja Pindado
 73 M Noxious Revival @Javier Charro
+77 M Embercleave @Wylie Beckert
+82 M Temporal Manipulation @Raita Kazama

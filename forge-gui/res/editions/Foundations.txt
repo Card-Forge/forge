@@ -6,25 +6,134 @@ Type=Core
 ScryfallCode=FDN
 
 [cards]
+2 R Arahbo, the First Fang @Simon Dominic
+7 R Crystal Barricade @Rockey Chen
 12 C Felidar Savior @Ilse Gort
 16 C Helpful Hunter @Xabi Gaztelua
+17 M Herald of Eternal Dawn @Martina Fačková
 21 C Prideful Parent @Leonardo Santanna
+29 U Arcane Epiphany @Andrew Mar
+30 R Archmage of Runes @Kai Carpenter
+44 M Kaito, Cunning Infiltrator @Evyn Fong
+48 C Refute @Ignatius Budi
+58 M Bloodthirsty Conqueror @Dmitry Burmak
+59 C Crypt Feaster @John Di Giovanni
 66 R Nine-Lives Familiar @Bram Sels
+72 R Tinybones, Bauble Burglar @Leonardo Santanna
 76 U Vengeful Bloodwitch @Jarel Threat
+77 R Zul Ashur, Lich Lord @Raluca Marinescu
+81 M Chandra, Flameshaper @Mark Winters
+93 R Searslicer Goblin @Wayne Reynolds
+97 M Twinflame Tyrant @Xabi Gaztelua
+107 R Mossborn Hydra @Monztre
 116 R Anthem of Champions @Chris Rallis
+123 M Niv-Mizzet, Visionary @Dan Murayama Scott
+134 M Ajani, Caller of the Pride @D. Alexander Gregory
+135 U Ajani's Pridemate @Kevin Sidharta
 140 R Day of Judgment @Vincent Proce
 146 U Savannah Lions @Winona Nelson
+147 U Serra Angel @Greg Staples
+157 C Lightshell Duo @Mariah Tekulve
 161 M Omniscience @Jason Chan
+165 C Think Twice @Anthony Francisco
+166 R Time Stop @Scott M. Fischer
 175 U Hero's Downfall @Chris Rallis
+176 M Liliana, Dreadhorde General @Chris Rallis
+180 R Phyrexian Arena @Svetlin Velinov
 185 U Stromkirk Bloodthief @Caroline Gariba
+202 U Hidetsugu's Second Rite @Ben Hill
+206 U Shivan Dragon @Donato Giancola
+219 R Elvish Archdruid @Karl Kopinski
+223 C Giant Growth @Matt Cavotta
+224 M Progenitus @Jaime Jones
 227 C Llanowar Elves @Kev Walker
+234 M Vivien Reid @Anna Steinbauer
+255 U Juggernaut @Kev Walker
+257 R Solemn Simulacrum @Dan Murayama Scott
+272 L Plains @Rebecca Guay
 273 L Plains @Tingting Yeh
+274 L Island @John Avon
+275 L Island @Rebecca Guay
+276 L Swamp @Mike Bierek
 277 L Swamp @Rebecca Guay
+278 L Mountain @Piotr Dura
+279 L Mountain @Rebecca Guay
+280 L Forest @Rebecca Guay
+281 L Forest @Jim Nelson
+282 L Plains @Sam Burley
+283 L Plains @Julian Kok Joon Wen
+284 L Island @Daniel Ljunggren
+285 L Island @Adam Paquette
+286 L Swamp @Steven Belledin
+287 L Swamp @Piotr Dura
+288 L Mountain @Dan Murayama Scott
+289 L Mountain @Salvatorre Zee Yazzie
+290 L Forest @Sam Burley
+291 L Forest @Piotr Dura
+293 U Ajani's Pridemate @Chris Rallis
+294 R Arahbo, the First Fang @Chris Rahn
+296 R Crystal Barricade @Alayna Danner
+299 M Herald of Eternal Dawn @PINDURSKI
+304 R Archmage of Runes @Zoltan Boros
+312 M Omniscience @Dominik Mayer
+313 C Refute @Monztre
+315 C Think Twice @Alix Branwyn
+318 M Bloodthirsty Conqueror @Alexander Mokhov
+321 R Nine-Lives Familiar @Xabi Gaztelua
+322 R Phyrexian Arena @Andrey Kuzinskiy
+324 R Tinybones, Bauble Burglar @Rudy Siswanto
+326 R Zul Ashur, Lich Lord @PINDURSKI
+332 R Searslicer Goblin @Arif Wijaya
+333 M Twinflame Tyrant @Justin Gerard
+337 R Mossborn Hydra @Monztre
+344 R Anthem of Champions @Ryan Pancoast
+350 M Niv-Mizzet, Visionary @Raymond Swanland
+357 M Ajani, Caller of the Pride @Victor Adame Minguez
+358 M Kaito, Cunning Infiltrator @Michal Ivan
+359 M Liliana, Dreadhorde General @Dmitry Burmak
+360 M Chandra, Flameshaper @Lie Setiawan
+361 M Vivien Reid @Zara Alfonso
+363 R Arahbo, the First Fang @Chris Rahn
+365 R Crystal Barricade @Alayna Danner
+368 M Herald of Eternal Dawn @PINDURSKI
+372 R Archmage of Runes @Zoltan Boros
 379 M Omniscience @Dominik Mayer
+383 M Bloodthirsty Conqueror @Alexander Mokhov
 385 R Nine-Lives Familiar @Xabi Gaztelua
+386 R Phyrexian Arena @Andrey Kuzinskiy
+388 R Tinybones, Bauble Burglar @Rudy Siswanto
+389 R Zul Ashur, Lich Lord @PINDURSKI
+394 R Searslicer Goblin @Arif Wijaya
+395 M Twinflame Tyrant @Justin Gerard
+399 R Mossborn Hydra @Monztre
 405 R Anthem of Champions @Ryan Pancoast
+411 M Niv-Mizzet, Visionary @Raymond Swanland
+417 M Ajani, Caller of the Pride @Victor Adame Minguez
+418 M Kaito, Cunning Infiltrator @Michal Ivan
+419 M Liliana, Dreadhorde General @Dmitry Burmak
+420 M Chandra, Flameshaper @Lie Setiawan
+421 M Vivien Reid @Zara Alfonso
+422 M Day of Judgment @Toshiaki Takayama
+423 M Herald of Eternal Dawn @Nijihayashi
+424 M Kaito, Cunning Infiltrator @Ittoku
+425 C Think Twice @HNCL
+426 M Bloodthirsty Conqueror @Raita Kazama
+427 M Twinflame Tyrant @Mikio Masuda
+429 M Llanowar Elves @Hisashi Momose
+431 M Progenitus @Sansyu
+442 R Arahbo, the First Fang @Simon Dominic
+444 R Crystal Barricade @Rockey Chen
+446 M Herald of Eternal Dawn @Martina Fačková
+450 R Archmage of Runes @Kai Carpenter
+460 M Bloodthirsty Conqueror @Dmitry Burmak
 462 R Nine-Lives Familiar @Bram Sels
+463 R Tinybones, Bauble Burglar @Leonardo Santanna
+464 R Zul Ashur, Lich Lord @Raluca Marinescu
+468 R Searslicer Goblin @Wayne Reynolds
+469 M Twinflame Tyrant @Xabi Gaztelua
+471 R Mossborn Hydra @Monztre
 477 R Anthem of Champions @Chris Rallis
+482 M Niv-Mizzet, Visionary @Dan Murayama Scott
 490 C Angelic Edict @Trevor Claxton
 493 U Elspeth's Smite @Livia Prima
 495 U Ingenious Leonin @Eric Deschamps
@@ -43,3 +152,38 @@ ScryfallCode=FDN
 531 C Vampire Neonate @Daarken
 532 C Vampire Spawn @Alex Brock
 564 C Uncharted Haven @Adam Paquette
+571 U Devout Decree @Zoltan Boros
+572 C Disenchant @Richard Kane Ferguson
+590 U Flashfreeze @Brian Despain
+594 U Mystical Teachings @Ron Spears
+599 C Unsummon @Ron Spencer
+601 U Deathmark @Jeremy Jarvis
+602 M Demonic Pact @Manuel Castañón
+606 C Duress @PINDURSKI
+618 R Ball Lightning @Trevor Claxton
+625 R Harmless Offering @Howard Lyon
+628 U Mindsparker @Wayne Reynolds
+640 U Mold Adder @Matt Cavotta
+653 U Cloudblazer @Dan Murayama Scott
+659 R Halana and Alena, Partners @Jason Rainville
+661 R Maelstrom Pulse @John Avon
+671 M Darksteel Colossus @Carl Critchlow
+677 M Pyromancer's Goggles @Kevin Sidharta
+679 U Sorcerous Spyglass @Kieran Yanner
+680 U Soul-Guide Lantern @Iris Compiet
+696 R Temple of Abandon @Adam Paquette
+697 R Temple of Deceit @Jonas De Ro
+698 R Temple of Enlightenment @Piotr Dura
+699 R Temple of Epiphany @Adam Paquette
+700 R Temple of Malady @Titus Lunter
+701 R Temple of Malice @Jonas De Ro
+702 R Temple of Mystery @Piotr Dura
+703 R Temple of Plenty @Chris Ostrowski
+704 R Temple of Silence @Adam Paquette
+705 R Temple of Triumph @Piotr Dura
+707 M Lyra Dawnbringer @Chris Rahn
+710 C Negate @Magali Villeneuve
+718 R Gigantosaurus @Loïc Canavaggia
+725 R Gilded Lotus @Volkan Baǵa
+728 R Phyrexian Arena @Aaron J. Riley
+729 R Solemn Simulacrum @Forrest Imel

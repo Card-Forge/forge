@@ -591,17 +591,13 @@ public class CountersPutEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Game game = card.getGame();
         final Player activator = sa.getActivatingPlayer();
-
-        String amount = sa.getParamOrDefault("CounterNum", "1");
-        boolean rememberAmount = sa.hasParam("RememberAmount");
+        final String amount = sa.getParamOrDefault("CounterNum", "1");
+        final int counterAmount = AbilityUtils.calculateAmount(card, amount, sa);
 
         Player placer = activator;
         if (sa.hasParam("Placer")) {
-            final String pstr = sa.getParam("Placer");
-            placer = AbilityUtils.getDefinedPlayers(card, pstr, sa).get(0);
+            placer = AbilityUtils.getDefinedPlayers(card, sa.getParam("Placer"), sa).get(0);
         }
-
-        int counterAmount = AbilityUtils.calculateAmount(card, amount, sa);
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
@@ -647,12 +643,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         table.replaceCounterEffect(game, sa, true);
-
-        int totalAdded = table.totalValues();
-        if (totalAdded > 0 && rememberAmount) {
-            // TODO use SpellAbility Remember later
-            card.addRemembered(totalAdded);
-        }
 
         if (sa.hasParam("RemovePhase")) {
             for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {

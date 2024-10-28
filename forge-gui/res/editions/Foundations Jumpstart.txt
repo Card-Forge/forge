@@ -1,0 +1,20 @@
+[metadata]
+Code=J25
+Date=2024-11-15
+Name=Foundations Jumpstart
+Type=Draft
+ScryfallCode=J25
+
+[cards]
+4 R Generous Pup @Julia Metzger
+5 C Hinterland Sanctifier @Justine Cruz
+15 R Frontline Heroism @Fajareka Setiawan
+17 C Hearts on Fire @Eelis Kyttanen
+24 R Scythecat Cub @Gabor Szikszai
+32 U Qala, Ajani's Pridemate @Yoshiya
+39 M Taeko, the Patient Avalanche @Gossan
+48 U General Kreat, the Boltbringer @Takeuchi Moto
+54 R Shroofus Sproutsire @Yukihiro Maruo
+58 M Brimaz, King of Oreskos @Moopic
+70 R Vilis, Broker of Blood @Takeuchi Moto
+114 M Dark Confidant @Victor Adame Minguez

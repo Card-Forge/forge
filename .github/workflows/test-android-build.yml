@@ -1,0 +1,60 @@
+name: Test Android build
+
+on:
+  push:
+    paths: [ 'forge-gui-android/**' ]
+  pull_request:
+    paths: [ 'forge-gui-android/**' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+      packages: write
+    strategy:
+      matrix:
+        java: [ '17' ]
+    name: Test with Java ${{ matrix.Java }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Install old maven (3.8.1)
+        run: |
+          curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
+          tar xf apache-maven-3.8.1-bin.tar.gz
+          export PATH=$PWD/apache-maven-3.8.1/bin:$PATH
+          export MAVEN_HOME=$PWD/apache-maven-3.8.1
+          mvn --version
+
+      - name: Set Up Android tools
+        run: |
+          JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
+
+      - name: Install Android maven plugin
+        run: |
+          mkdir  -p ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          cd ~/.m2/repository/com/simpligility/maven/plugins/android-maven-plugin/4.6.2
+          curl -L -o android-maven-plugin-4.6.2.jar https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.jar
+          curl -L -o android-maven-plugin-4.6.2.pom https://github.com/Card-Forge/android-maven-plugin/releases/download/4.6.2/android-maven-plugin-4.6.2.pom
+          #mvn install:install-file -Dfile=android-maven-plugin-4.6.2.jar -DgroupId=com.simpligility.maven.plugins -DartifactId=android-maven-plugin -Dversion=4.6.2 -Dpackaging=jar
+          cd -
+          mvn install -Dmaven.test.skip=true
+          mvn dependency:tree
+
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+
+      - name: Run build in virtual framebuffer
+        run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
+          mvn -U -B -P android-test-build verify -e -T 1C -Dandroid.sdk.path=$ANDROID_SDK_ROOT -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true

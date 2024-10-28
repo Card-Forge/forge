@@ -137,6 +137,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbTimedTargOverlay(), FPref.UI_TIMED_TARGETING_OVERLAY_UPDATES));
         lstControls.add(Pair.of(view.getCbCompactMainMenu(), FPref.UI_COMPACT_MAIN_MENU));
         lstControls.add(Pair.of(view.getCbUseSentry(), FPref.USE_SENTRY));
+        lstControls.add(Pair.of(view.getCbCheckSnapshot(), FPref.CHECK_SNAPSHOT_AT_STARTUP));
         lstControls.add(Pair.of(view.getCbPromptFreeBlocks(), FPref.MATCHPREF_PROMPT_FREE_BLOCKS));
         lstControls.add(Pair.of(view.getCbPauseWhileMinimized(), FPref.UI_PAUSE_WHILE_MINIMIZED));
         lstControls.add(Pair.of(view.getCbWorkshopSyntax(), FPref.DEV_WORKSHOP_SYNTAX));
@@ -192,13 +193,11 @@ public enum CSubmenuPreferences implements ICDoc {
 
         view.getBtnTokenPreviewer().setCommand((UiCommand) CSubmenuPreferences.this::openTokenPreviewer);
 
-        view.getBtnResetJavaFutureCompatibilityWarnings().setCommand((UiCommand) () -> {
-            prefs.setPref(FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, false);
-            prefs.save();
-            FOptionPane.showMessageDialog(localizer.getMessage("CompatibilityWarningsReEnabled"));
-        });
-
         view.getBtnContentDirectoryUI().setCommand((UiCommand) CSubmenuPreferences.this::openContentDirectory);
+        view.getCbCheckSnapshot().addItemListener(e -> {
+            Singletons.getView().getNavigationBar().setUpdaterVisibility();
+            prefs.save();
+        });
 
         initializeGameLogVerbosityComboBox();
         initializeCloseActionComboBox();

@@ -16,6 +16,8 @@ import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 
+import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
+
 public final class HelpMenu {
     private HelpMenu() { }
 
@@ -71,8 +73,8 @@ public final class HelpMenu {
         JMenu mnu = new JMenu(localizer.getMessage("lblGettingStarted"));
         mnu.add(getMenuItem_HowToPlayFile());
         mnu.addSeparator();
-        mnu.add(getMenuItem_UrlLink("Forge Wiki", "https://github.com/Card-Forge/forge/wiki", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
-        mnu.add(getMenuItem_UrlLink("What is Forge?", "https://github.com/Card-Forge/forge/wiki#what-is-forge"));
+        mnu.add(getMenuItem_UrlLink("Forge Wiki", GITHUB_FORGE_URL + "wiki", KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)));
+        mnu.add(getMenuItem_UrlLink("What is Forge?", GITHUB_FORGE_URL + "wiki#what-is-forge"));
         return mnu;
     }
 

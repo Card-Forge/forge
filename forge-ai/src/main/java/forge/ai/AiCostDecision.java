@@ -838,12 +838,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
     @Override
     public PaymentDecision visit(CostUnattach cost) {
-        final Card cardToUnattach = cost.findCardToUnattach(source, player, ability);
-        if (cardToUnattach == null) {
+        final CardCollection cardToUnattach = cost.findCardToUnattach(source, player, ability);
+        if (cardToUnattach.isEmpty()) {
             // We really shouldn't be able to get here if there's nothing to unattach
             return null;
         }
-        return PaymentDecision.card(cardToUnattach);
+        return PaymentDecision.card(cardToUnattach.getFirst());
     }
 
     @Override

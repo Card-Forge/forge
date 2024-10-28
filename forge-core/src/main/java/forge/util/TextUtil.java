@@ -1,16 +1,23 @@
 package forge.util;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TimeZone;
 
 import forge.item.IPaperCard;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import com.google.common.collect.ImmutableSortedMap;
 
@@ -21,6 +28,8 @@ import forge.item.PaperCard;
  *
  */
 public class TextUtil {
+    private static final StringBuilder changes = new StringBuilder();
+    private static SimpleDateFormat simpleDate;
 
     static ImmutableSortedMap<Integer,String> romanMap = ImmutableSortedMap.<Integer,String>naturalOrder()
     .put(1000, "M").put(900, "CM")
@@ -313,8 +322,8 @@ public class TextUtil {
         return sb.toString();
     }
     //Convert to Mana String
-    public static String toManaString(String ManaProduced){
-        if (ManaProduced == "mana"|| ManaProduced.contains("Combo")|| ManaProduced.contains("Any"))
+    public static String toManaString(String ManaProduced) {
+        if ("mana".equals(ManaProduced) || ManaProduced.contains("Combo")|| ManaProduced.contains("Any"))
             return "mana";//fix manamorphose stack description and probably others..
         return "{"+TextUtil.fastReplace(ManaProduced," ","}{")+"}";
     }
@@ -362,5 +371,84 @@ public class TextUtil {
             }
         }
         return str;
+    }
+    /*
+    * Strip non valid XML Characters
+    */
+    public static String stripNonValidXMLCharacters(String in) {
+        StringBuffer out = new StringBuffer();
+        char current;
+
+        if (in == null || ("".equals(in))) {
+            return "";
+        }
+        for (int i = 0; i < in.length(); i++) {
+            current = in.charAt(i);
+            if ((current == 0x9) || (current == 0xA) || (current == 0xD)
+                    || ((current >= 0x20) && (current <= 0xD7FF))
+                    || ((current >= 0xE000) && (current <= 0xFFFD))
+                    || ((current >= 0x10000) && (current <= 0x10FFFF))) {
+                out.append(current);
+            }
+        }
+        return out.toString();
+    }
+    public static SimpleDateFormat getSimpleDate() {
+        if (simpleDate == null)
+            simpleDate = new SimpleDateFormat("E, MMM dd, yyyy - hh:mm:ss a");
+        return simpleDate;
+    }
+    //format changelog
+    public static String getFormattedChangelog(File changelog, String defaultLog) {
+        if (!changelog.exists())
+            return defaultLog;
+        if (changes == null || changes.toString().isEmpty()) {
+            try {
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat formatted = getSimpleDate();
+                String offset = " GMT " + OffsetDateTime.now().getOffset();
+                List<String> toformat = FileUtil.readAllLines(changelog, false);
+                boolean skip = false;
+                int count = 0;
+                for (String line : toformat) {
+                    if (line.isEmpty() || line.startsWith("#") || line.length() < 4)
+                        continue;
+                    if (line.contains("**Merge")) {
+                        skip = true;
+                        continue;
+                    }
+                    if (line.startsWith("[")) {
+                        if (skip) {
+                            skip = false;
+                            continue;
+                        }
+                        count++;
+                        String datestring = line.substring(line.lastIndexOf(" *")+1).replace("*", "");
+                        try {
+                            original.setTimeZone(TimeZone.getTimeZone("UTC"));
+                            Date toDate = original.parse(datestring);
+                            calendar.setTime(toDate);
+                            formatted.setTimeZone(TimeZone.getDefault());
+                            changes.append("\n(").append(formatted.format(calendar.getTime())).append(offset).append(")\n\n");
+                        } catch (Exception e2) {
+                            changes.append("\n(").append(datestring).append(")\n\n");
+                        }
+                        if (count > 20)
+                            break;
+                    } else {
+                        if (skip)
+                            continue;
+                        if (line.startsWith(" * "))
+                            changes.append("\n").append(StringEscapeUtils.unescapeXml(line));
+                        else
+                            changes.append(StringEscapeUtils.unescapeXml(line));
+                    }
+                }
+            } catch (Exception e) {
+                return defaultLog;
+            }
+        }
+        return changes.toString();
     }
 }

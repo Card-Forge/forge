@@ -4,7 +4,7 @@
     <artifactId>forge</artifactId>
     <packaging>pom</packaging>
     <name>Forge Parent</name>
-    <version>1.6.66-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <description>
         Forge lets you play the card game Magic: The Gathering against a computer opponent using all of the rules.
@@ -24,7 +24,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <basedir.parent>./forge-gui</basedir.parent>
         <configSourceDirectory>src/main/config</configSourceDirectory>
-        <maven.compiler.release>8</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- version code - maj.min.rev ie 2.0.00 -->
+        <versionCode>2.0.00</versionCode>
+        <!-- set snapshotName to blank for release -->
+        <snapshotName>-SNAPSHOT</snapshotName>
+        <!-- revision will be the global version string -->
+        <revision>${versionCode}${snapshotName}</revision>
     </properties>
 
     <licenses>
@@ -61,12 +67,13 @@
         <module>forge-ai</module>
         <module>forge-gui</module>
         <module>forge-gui-mobile</module>
-        <module>forge-adventure</module>
         <module>forge-gui-mobile-dev</module>
-        <module>forge-gui-android</module>
-        <module>forge-gui-ios</module>
         <module>forge-gui-desktop</module>
+        <module>forge-gui-ios</module>
         <module>forge-lda</module>
+        <module>adventure-editor</module>
+        <module>forge-gui-android</module>
+        <module>forge-installer</module>
     </modules>
 
     <distributionManagement>
@@ -88,7 +95,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ftp</artifactId>
-                <version>2.6</version>
+                <version>3.5.3</version>
             </extension>
         </extensions>
 
@@ -102,17 +109,18 @@
 
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
+                    <version>3.8.1</version>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>17</source>
+                        <target>17</target>
+                        <release>17</release>
                     </configuration>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.9.1</version>
+                    <version>3.10.1</version>
                     <configuration>
                         <quiet>true</quiet>
                         <failOnError>false</failOnError>
@@ -125,18 +133,30 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.16</version>
+                    <version>3.1.2</version>
+                    <configuration>
+                        <argLine>
+                            --add-opens java.base/java.lang=ALL-UNNAMED
+                            --add-opens java.base/java.time=ALL-UNNAMED
+                            --add-opens java.base/java.text=ALL-UNNAMED
+                            --add-opens java.base/java.util=ALL-UNNAMED
+                            --add-opens java.base/java.util.regex=ALL-UNNAMED
+                            --add-opens java.base/java.util.stream=ALL-UNNAMED
+                            --add-opens java.base/java.lang.reflect=ALL-UNNAMED
+                            --add-opens java.desktop/javax.imageio.spi=ALL-UNNAMED
+                        </argLine>
+                    </configuration>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.1</version>
+                    <version>3.0.0</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.apache.maven.wagon</groupId>
                             <artifactId>wagon-ftp</artifactId>
-                            <version>2.6</version>
+                            <version>3.5.3</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -144,40 +164,40 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.3.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.3</version>
+                    <version>3.9.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
-                    <version>1.7</version>
+                    <version>3.0.0</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>3.3.0</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.1</version>
+                    <version>3.0.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.8</version>
+                    <version>3.1.2</version>
                 </plugin>
 
                 <plugin>
                     <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.0.1</version>
                     <configuration>
                         <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 			<checkModificationExcludes>
@@ -188,33 +208,32 @@
 
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.3.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>3.1.0</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>3.2.1</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-scm-plugin</artifactId>
-                    <version>1.9</version>
+                    <version>1.11.2</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.apache.maven.wagon</groupId>
                     <artifactId>wagon-ftp</artifactId>
-                    <version>2.6</version>
+                    <version>3.5.3</version>
                 </plugin>
-
                 <!--This plugin's configuration is used to store Eclipse m2e settings
                             only. It has no influence on the Maven build itself. -->
                 <plugin>
@@ -228,7 +247,7 @@
                                     <pluginExecutionFilter>
                                         <groupId>org.codehaus.mojo</groupId>
                                         <artifactId>build-helper-maven-plugin</artifactId>
-                                        <versionRange>[3.1,)</versionRange>
+                                        <versionRange>[3.2,)</versionRange>
                                         <goals>
                                             <goal>released-version</goal>
                                             <goal>parse-version</goal>
@@ -272,10 +291,10 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>[3.5.9,)</version>
+                                    <version>[3.8.1,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>[1.8,)</version>
+                                    <version>17</version>
                                 </requireJavaVersion>
                                 <requirePluginVersions />
                             </rules>
@@ -286,7 +305,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.18.2</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>checkstyle-validation</id>
@@ -305,8 +331,32 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-
     </build>
 
     <dependencyManagement>
@@ -314,12 +364,17 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.11</version>
+                <version>1.5.11</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.2.11</version>
+                <version>1.5.11</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>2.0.16</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
