@@ -26,8 +26,8 @@ import java.util.Map;
 
 public final class ForgeConstants {
     public static final String GITHUB_FORGE_URL             = "https://github.com/Card-Forge/forge/";
-    public static final String GITHUB_RELEASES_URL_ATOM     = GITHUB_FORGE_URL + "releases.atom";
-    public static final String GITHUB_COMMITS_URL_ATOM      = GITHUB_FORGE_URL + "commits/master.atom";
+    public static final String GITHUB_RELEASES_ATOM         = GITHUB_FORGE_URL + "releases.atom";
+    public static final String GITHUB_COMMITS_ATOM          = GITHUB_FORGE_URL + "commits/master.atom";
     public static final String DAILY_SNAPSHOT_URL           = "https://downloads.cardforge.org/dailysnapshots/";
     public static final String RELEASE_URL                  = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR               = File.separator;
