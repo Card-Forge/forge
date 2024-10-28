@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,9 +20,10 @@ package forge.util;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,15 +32,17 @@ import java.util.Date;
  */
 public class BuildInfo {
     private static Date timestamp = null;
+
     // disable instantiation
-    private BuildInfo() { }
+    private BuildInfo() {
+    }
 
     /**
      * Get the current version of Forge.
-     * 
+     *
      * @return a String representing the version specifier, or "GIT" if unknown.
      */
-    public static final String getVersionString() {
+    public static String getVersionString() {
         String version = BuildInfo.class.getPackage().getImplementationVersion();
         if (StringUtils.isEmpty(version)) {
             return "GIT";
@@ -58,11 +61,12 @@ public class BuildInfo {
             return timestamp;
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String b = Files.readString(
-               Paths.get(BuildInfo.class.getClassLoader().getResource("build.txt").toURI()),
-                   Charset.defaultCharset());
-            timestamp = simpleDateFormat.parse(b);
-        } catch (Exception ignored) {}
+            InputStream inputStream = BuildInfo.class.getResourceAsStream("/build.txt");
+            String data = readFromInputStream(inputStream);
+            timestamp = simpleDateFormat.parse(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return timestamp;
     }
 
@@ -71,10 +75,22 @@ public class BuildInfo {
             return false;
         if (getTimestamp() == null)
             return false;
-        System.err.println("Update Timestamp: " + updateTimestamp + "\nBuild Timestamp: " + getTimestamp());
+        //System.err.println("Update Timestamp: " + updateTimestamp + "\nBuild Timestamp: " + getTimestamp());
         return updateTimestamp.after(getTimestamp());
     }
+
     public static String getUserAgent() {
         return "Forge/" + getVersionString();
+    }
+
+    private static String readFromInputStream(InputStream inputStream) throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 }

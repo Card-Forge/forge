@@ -295,7 +295,7 @@ public enum FControl implements KeyEventDispatcher {
         return isSnapshot;
     }
     public String getSnapshotNotification() {
-        if (!isSnapshot || !hasSnapsUpdate || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
+        if (!isSnapshot || !hasSnapsUpdate || snapsVersion.isEmpty())
             return "";
         return getLocalizer().getMessage("lblNewSnapshotVersion", snapsVersion);
     }

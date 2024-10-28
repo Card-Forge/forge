@@ -31,6 +31,7 @@ import forge.model.FModel;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
+import forge.util.TextUtil;
 import forge.util.WaitCallback;
 
 public class AutoUpdater {
@@ -48,6 +49,8 @@ public class AutoUpdater {
     private String versionUrlString;
     private String packageUrl;
     private String packagePath;
+    private String buildDate = "";
+    private String snapsBuildDate = "";
 
     public AutoUpdater(boolean loading) {
         // What do I need? Preferences? Splashscreen? UI? Skins?
@@ -135,7 +138,14 @@ public class AutoUpdater {
     private boolean compareBuildWithLatestChannelVersion() {
         try {
             retrieveVersion();
-
+            if (buildVersion.contains("SNAPSHOT")) {
+                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
+                snapsBuildDate = snapsTimestamp.toString();
+                buildDate = BuildInfo.getTimestamp().toString();
+                return BuildInfo.verifyTimestamp(snapsTimestamp);
+            }
             if (StringUtils.isEmpty(version) ) {
                 return false;
             }
@@ -149,16 +159,6 @@ public class AutoUpdater {
             return false;
         }
         // If version doesn't match, it's assummably newer.
-        if (buildVersion.contains("SNAPSHOT")) {
-            try {
-                URL url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
-                return snapsTimestamp.after(BuildInfo.getTimestamp());
-            } catch (Exception ignored) {
-                return false;
-            }
-        }
         return true;
     }
 
@@ -196,7 +196,9 @@ public class AutoUpdater {
             return downloadFromBrowser();
         }
         String log = cf.get();
-        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", version, buildVersion) + log;
+        String v = snapsBuildDate.isEmpty() ? version : version + TextUtil.enclosedParen(snapsBuildDate);
+        String b = buildDate.isEmpty() ? buildVersion : buildVersion + TextUtil.enclosedParen(buildDate);
+        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + log;
         final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
         if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
