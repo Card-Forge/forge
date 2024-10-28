@@ -27,7 +27,9 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -88,7 +90,8 @@ public enum FControl implements KeyEventDispatcher {
     private CloseAction closeAction;
     private final List<HostedMatch> currentMatches = Lists.newArrayList();
     private String snapsVersion = "", currentVersion = "";
-    private boolean isSnapshot;
+    private Date snapsTimestamp = null, buildTimeStamp = null;
+    private boolean isSnapshot, hasSnapsUpdate;
     private Localizer localizer;
 
     public enum CloseAction {
@@ -139,31 +142,33 @@ public enum FControl implements KeyEventDispatcher {
             @Override
             public void windowClosing(final WindowEvent e) {
                 switch (closeAction) {
-                case NONE: //prompt user for close action if not previously specified
-                    final List<String> options = ImmutableList.of(getLocalizer().getMessage("lblCloseScreen"), getLocalizer().getMessage("lblExitForge"), getLocalizer().getMessage("lblCancel"));
-                    final int reply = FOptionPane.showOptionDialog(
-                            getLocalizer().getMessage("txCloseAction1") + "\n\n" + getLocalizer().getMessage("txCloseAction2"),
-                            getLocalizer().getMessage("titCloseAction"),
-                            FOptionPane.INFORMATION_ICON,
-                            options,
-                            2);
-                    switch (reply) {
-                    case 0: //Close Screen
-                        setCloseAction(CloseAction.CLOSE_SCREEN);
-                        windowClosing(e); //call again to apply chosen close action
-                        return;
-                    case 1: //Exit Forge
-                        setCloseAction(CloseAction.EXIT_FORGE);
-                        windowClosing(e); //call again to apply chosen close action
-                        return;
-                    }
-                    break;
-                case CLOSE_SCREEN:
-                    Singletons.getView().getNavigationBar().closeSelectedTab();
-                    break;
-                case EXIT_FORGE:
-                    if (exitForge()) { return; }
-                    break;
+                    case NONE: //prompt user for close action if not previously specified
+                        final List<String> options = ImmutableList.of(getLocalizer().getMessage("lblCloseScreen"), getLocalizer().getMessage("lblExitForge"), getLocalizer().getMessage("lblCancel"));
+                        final int reply = FOptionPane.showOptionDialog(
+                                getLocalizer().getMessage("txCloseAction1") + "\n\n" + getLocalizer().getMessage("txCloseAction2"),
+                                getLocalizer().getMessage("titCloseAction"),
+                                FOptionPane.INFORMATION_ICON,
+                                options,
+                                2);
+                        switch (reply) {
+                            case 0: //Close Screen
+                                setCloseAction(CloseAction.CLOSE_SCREEN);
+                                windowClosing(e); //call again to apply chosen close action
+                                return;
+                            case 1: //Exit Forge
+                                setCloseAction(CloseAction.EXIT_FORGE);
+                                windowClosing(e); //call again to apply chosen close action
+                                return;
+                        }
+                        break;
+                    case CLOSE_SCREEN:
+                        Singletons.getView().getNavigationBar().closeSelectedTab();
+                        break;
+                    case EXIT_FORGE:
+                        if (exitForge()) {
+                            return;
+                        }
+                        break;
                 }
                 //prevent closing Forge if we reached this point
                 Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -171,12 +176,22 @@ public enum FControl implements KeyEventDispatcher {
         });
     }
 
+    public Date getBuildTimeStamp() {
+        return buildTimeStamp;
+    }
+
+    public Date getSnapsTimestamp() {
+        return snapsTimestamp;
+    }
+
     public CloseAction getCloseAction() {
         return closeAction;
     }
 
     public void setCloseAction(final CloseAction closeAction0) {
-        if (closeAction == closeAction0) { return; }
+        if (closeAction == closeAction0) {
+            return;
+        }
         closeAction = closeAction0;
         Singletons.getView().getNavigationBar().updateBtnCloseTooltip();
 
@@ -187,7 +202,7 @@ public enum FControl implements KeyEventDispatcher {
 
     public boolean canExitForge(final boolean forRestart) {
         final String action = (forRestart ? getLocalizer().getMessage("lblRestart") : getLocalizer().getMessage("lblExit"));
-        String userPrompt =(forRestart ? getLocalizer().getMessage("lblAreYouSureYouWishRestartForge") : getLocalizer().getMessage("lblAreYouSureYouWishExitForge"));
+        String userPrompt = (forRestart ? getLocalizer().getMessage("lblAreYouSureYouWishRestartForge") : getLocalizer().getMessage("lblAreYouSureYouWishExitForge"));
         final boolean hasCurrentMatches = hasCurrentMatches();
         if (hasCurrentMatches) {
             userPrompt = getLocalizer().getMessage("lblOneOrMoreGamesActive") + ". " + userPrompt;
@@ -219,7 +234,9 @@ public enum FControl implements KeyEventDispatcher {
         return true;
     }
 
-    /** After view and model have been initialized, control can start.*/
+    /**
+     * After view and model have been initialized, control can start.
+     */
     public void initialize() {
         final ForgePreferences prefs = FModel.getPreferences();
         currentVersion = BuildInfo.getVersionString();
@@ -229,9 +246,15 @@ public enum FControl implements KeyEventDispatcher {
             if (isSnapshot && prefs.getPrefBoolean(FPref.CHECK_SNAPSHOT_AT_STARTUP)) {
                 URL url = new URL("https://downloads.cardforge.org/dailysnapshots/version.txt");
                 snapsVersion = FileUtil.readFileToString(url);
+                url = new URL("https://downloads.cardforge.org/dailysnapshots/build.txt");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                snapsTimestamp = simpleDateFormat.parse(FileUtil.readFileToString(url));
+                buildTimeStamp = BuildInfo.getTimestamp();
+                hasSnapsUpdate = BuildInfo.verifyTimestamp(snapsTimestamp);
             }
 
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
         // Preloads skin components (using progress bar).
         FSkin.loadFull(true);
 
@@ -251,15 +274,16 @@ public enum FControl implements KeyEventDispatcher {
         if (data.exists()) {
             try {
                 FModel.getQuest().load(QuestDataIO.loadData(data));
-            } catch(IOException ex) {
+            } catch (IOException ex) {
                 ex.printStackTrace();
                 System.err.printf("Error loading quest data (%s).. skipping for now..%n", questname);
             }
         }
         // format release notes upon loading
         try {
-            TextUtil.getFormattedChangelog(new File(FileUtil.pathCombine(System.getProperty("user.dir"), ForgeConstants.CHANGES_FILE_NO_RELEASE)),"");
-        } catch (Exception e){}
+            TextUtil.getFormattedChangelog(new File(FileUtil.pathCombine(System.getProperty("user.dir"), ForgeConstants.CHANGES_FILE_NO_RELEASE)), "");
+        } catch (Exception e) {
+        }
         // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout
         final FFrame window = Singletons.getView().getFrame();
         window.addComponentListener(new ComponentAdapter() {
@@ -284,11 +308,13 @@ public enum FControl implements KeyEventDispatcher {
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage(getLocalizer().getMessage("lblOpeningMainWindow"));
         SwingUtilities.invokeLater(() -> Singletons.getView().initialize());
     }
+
     public boolean isSnapshot() {
         return isSnapshot;
     }
+
     public String getSnapshotNotification() {
-        if (!isSnapshot || snapsVersion.isEmpty() || currentVersion.equalsIgnoreCase(snapsVersion))
+        if (!isSnapshot || !hasSnapsUpdate || snapsVersion.isEmpty())
             return "";
         return getLocalizer().getMessage("lblNewSnapshotVersion", snapsVersion);
     }
@@ -315,6 +341,7 @@ public enum FControl implements KeyEventDispatcher {
     public boolean setCurrentScreen(final FScreen screen) {
         return setCurrentScreen(screen, false);
     }
+
     public boolean setCurrentScreen(final FScreen screen, final boolean previousScreenClosed) {
         //TODO: Uncomment the line below if this function stops being used to refresh
         //the current screen in some places (such as Continue and Restart in the match screen)
@@ -363,11 +390,11 @@ public enum FControl implements KeyEventDispatcher {
                         FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_NIGHT), true);
                 }
             } else {
-                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+                FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image) null);
             }
             //SOverlayUtils.showTargetingOverlay();
         } else {
-            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+            FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image) null);
         }
 
         Singletons.getView().getNavigationBar().updateSelectedTab();
@@ -379,12 +406,16 @@ public enum FControl implements KeyEventDispatcher {
     }
 
     public boolean ensureScreenActive(final FScreen screen) {
-        if (currentScreen == screen) { return true; }
+        if (currentScreen == screen) {
+            return true;
+        }
 
         return setCurrentScreen(screen);
     }
 
-    /** Remove all children from a specified layer. */
+    /**
+     * Remove all children from a specified layer.
+     */
     private void clearChildren(final int layer0) {
         final Component[] children = FView.SINGLETON_INSTANCE.getLpnDocument().getComponentsInLayer(layer0);
 
@@ -393,16 +424,24 @@ public enum FControl implements KeyEventDispatcher {
         }
     }
 
-    /** Sizes children of JLayeredPane to fully fit their layers. */
+    /**
+     * Sizes children of JLayeredPane to fully fit their layers.
+     */
     private void sizeChildren() {
         Component[] children = display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
-        if (children.length != 0) { children[0].setSize(display.getSize()); }
+        if (children.length != 0) {
+            children[0].setSize(display.getSize());
+        }
 
         children = display.getComponentsInLayer(FView.TARGETING_LAYER);
-        if (children.length != 0) { children[0].setSize(display.getSize()); }
+        if (children.length != 0) {
+            children[0].setSize(display.getSize());
+        }
 
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
-        if (children.length != 0) { children[0].setSize(display.getSize()); }
+        if (children.length != 0) {
+            children[0].setSize(display.getSize());
+        }
     }
 
     public Dimension getDisplaySize() {
@@ -421,18 +460,15 @@ public enum FControl implements KeyEventDispatcher {
                     forgeMenu.show(true);
                     return true;
                 }
-            }
-            else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
+            } else if (e.getID() == KeyEvent.KEY_PRESSED && e.getModifiersEx() == InputEvent.ALT_DOWN_MASK) {
                 altKeyLastDown = true;
             }
-        }
-        else {
+        } else {
             altKeyLastDown = false;
             if (e.getID() == KeyEvent.KEY_PRESSED) {
                 //give Forge menu the chance to handle the key event
                 return forgeMenu.handleKeyEvent(e);
-            }
-            else if (e.getID() == KeyEvent.KEY_RELEASED) {
+            } else if (e.getID() == KeyEvent.KEY_RELEASED) {
                 if (e.getKeyCode() == KeyEvent.VK_CONTEXT_MENU) {
                     forgeMenu.show();
                 }

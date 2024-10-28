@@ -433,16 +433,21 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             setPreferredSize(new Dimension(160, 25));
             updateVisibility();
         }
+
         @Override
         protected void onClick() {
-            try {
-                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, null, null)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!displayText.isEmpty()) {
+                try {
+                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         @Override
         public void paintComponent(Graphics g) {
+            if (displayText.isEmpty())
+                return;
             g.translate(-((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % ((getWidth() + wMod) * 2)) - (getWidth() + wMod)), 0);
             super.paintComponent(g);
             int thickness = 2;

@@ -2,6 +2,7 @@ package forge.screens.home.settings;
 
 import javax.swing.SwingUtilities;
 
+import forge.control.FControl;
 import forge.download.AutoUpdater;
 import forge.download.GuiDownloader;
 import forge.gui.ImportDialog;
@@ -32,7 +33,7 @@ public enum CSubmenuDownloaders implements ICDoc {
     SINGLETON_INSTANCE;
 
     private final UiCommand cmdLicensing = VSubmenuDownloaders.SINGLETON_INSTANCE::showLicensing;
-    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, null, null)));
+    private final UiCommand cmdCheckForUpdates = () -> new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
 
     private final UiCommand cmdPicDownload = () -> new GuiDownloader(new GuiDownloadPicturesLQ()).show();
     private final UiCommand cmdPicDownloadHQ = () -> new GuiDownloader(new GuiDownloadPicturesHQ()).show();

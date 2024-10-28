@@ -3,14 +3,12 @@ package forge.assets;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
-import forge.util.TextUtil;
+import forge.util.BuildInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -30,7 +28,6 @@ public class AssetsDownloader {
     private final static ImmutableList<String> downloadIgnoreExit = ImmutableList.of("Download", "Ignore", "Exit");
     private final static ImmutableList<String> downloadExit = ImmutableList.of("Download", "Exit");
 
-    //if not sharing desktop assets, check whether assets are up to date
     public static void checkForUpdates(boolean exited, Runnable runnable) {
         if (exited)
             return;
@@ -52,7 +49,11 @@ public class AssetsDownloader {
         final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "version.txt";
         FileHandle assetsDir = Gdx.files.absolute(ForgeConstants.ASSETS_DIR);
         FileHandle resDir = Gdx.files.absolute(ForgeConstants.RES_DIR);
+        FileHandle buildTxtFileHandle = Gdx.files.classpath("build.txt");
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        boolean verifyUpdatable = false;
         boolean mandatory = false;
+        Date snapsTimestamp = null, buildTimeStamp;
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
@@ -74,31 +75,30 @@ public class AssetsDownloader {
                     String snapsBZ2URL = "https://downloads.cardforge.org/dailysnapshots/";
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }
-                //TODO build version
-                /*String buildver = "";
-                SimpleDateFormat DateFor = TextUtil.getSimpleDate();
-                Calendar calendar = Calendar.getInstance();
-                Date buildDateOriginal = null;
-                try {
-                    FileHandle build = Gdx.files.classpath("build.txt");
-                    if (build.exists()) {
-                        SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        original.setTimeZone(TimeZone.getTimeZone("UTC"));
-                        Date buildDate = original.parse(build.readString());
-                        buildDateOriginal = original.parse(build.readString());
-                        calendar.setTime(buildDate);
-                        DateFor.setTimeZone(TimeZone.getDefault());
-                        buildver = "\nForge Build: " + DateFor.format(calendar.getTime());
+                String snapsBuildDate = "", buildDate = "";
+                if (isSnapshots) {
+                    URL url = new URL(snapsURL + "build.txt");
+                    snapsTimestamp = format.parse(FileUtil.readFileToString(url));
+                    snapsBuildDate = snapsTimestamp.toString();
+                    if (!GuiBase.isAndroid()) {
+                        buildDate = BuildInfo.getTimestamp().toString();
+                        verifyUpdatable = BuildInfo.verifyTimestamp(snapsTimestamp);
+                    } else {
+                        if (buildTxtFileHandle.exists()) {
+                            buildTimeStamp = format.parse(buildTxtFileHandle.readString());
+                            buildDate = buildTimeStamp.toString();
+                            verifyUpdatable = snapsTimestamp.after(buildTimeStamp);
+                        }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
+                } else {
+                    verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
+                }
 
-                if (!StringUtils.isEmpty(version) && !versionString.equals(version)) {
+                if (verifyUpdatable) {
                     Forge.getSplashScreen().prepareForDialogs();
 
-                    message = "A new version of Forge is available (" + version + ").\n" +
-                            "You are currently on an older version (" + versionString + ").\n\n" +
+                    message = "A new version of Forge is available. - v." + version + "\n" + snapsBuildDate + "\n" +
+                            "You are currently on an older version. - v." + versionString + "\n" + buildDate + "\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
@@ -130,8 +130,10 @@ public class AssetsDownloader {
                         }
                     }
                 } else {
-                    if (!GuiBase.isAndroid())
+                    if (!GuiBase.isAndroid()) {
                         run(runnable);
+                        return;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -181,30 +183,21 @@ public class AssetsDownloader {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
-        FileHandle f = Gdx.files.classpath("build.txt");
-        FileHandle t = resDir.child("build.txt");
-        if (f.exists() && t.exists()) {
-            String buildString = f.readString();
-            String target = t.readString();
+        FileHandle resBuildDate = resDir.child("build.txt");
+        if (buildTxtFileHandle.exists() && resBuildDate.exists()) {
+            String buildString = buildTxtFileHandle.readString();
+            String target = resBuildDate.readString();
             try {
-                Date buildDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(buildString);
-                Date targetDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(target);
+                Date buildDate = format.parse(buildString);
+                Date targetDate = format.parse(target);
                 // if res folder has same build date then continue loading assets
                 if (buildDate.equals(targetDate) && versionString.equals(FileUtil.readFileToString(versionFile.file()))) {
                     run(runnable);
                     return;
                 }
                 mandatory = true;
-                //format to local date
-                SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                original.setTimeZone(TimeZone.getTimeZone("UTC"));
-                targetDate = original.parse(target);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(targetDate);
-                SimpleDateFormat simpleDate = TextUtil.getSimpleDate();
-                simpleDate.setTimeZone(TimeZone.getDefault());
-                build += "Installed resources date: " + simpleDate.format(calendar.getTime()) + "\n\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
+                build += "\nInstalled resources date:\n" + target + "\n";
+                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, buildDate, snapsTimestamp);
             } catch (Exception e) {
                 e.printStackTrace();
             }
