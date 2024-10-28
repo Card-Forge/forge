@@ -155,7 +155,7 @@ public class AutoUpdater {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            SOptionPane.showOptionDialog(e.getMessage(), localizer.getMessage("lblError"), null, ImmutableList.of("Ok"));
             return false;
         }
         // If version doesn't match, it's assummably newer.
