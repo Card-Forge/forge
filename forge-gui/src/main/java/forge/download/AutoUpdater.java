@@ -195,11 +195,10 @@ public class AutoUpdater {
             // splashScreen.prepareForDialogs();
             return downloadFromBrowser();
         }
-        String log = cf.get();
+        String logs = snapsBuildDate.isEmpty() ? "" : cf.get();
         String v = snapsBuildDate.isEmpty() ? version : version + TextUtil.enclosedParen(snapsBuildDate);
         String b = buildDate.isEmpty() ? buildVersion : buildVersion + TextUtil.enclosedParen(buildDate);
-        String info = snapsBuildDate.isEmpty() ? "" : log;
-        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + info;
+        String message = localizer.getMessage("lblNewVersionForgeAvailableUpdateConfirm", v, b) + logs;
         final List<String> options = ImmutableList.of(localizer.getMessage("lblUpdateNow"), localizer.getMessage("lblUpdateLater"));
         if (SOptionPane.showOptionDialog(message, localizer.getMessage("lblNewVersionAvailable"), null, options, 0) == 0) {
             return downloadFromForge();
