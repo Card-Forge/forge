@@ -97,8 +97,8 @@ public class AssetsDownloader {
                 if (verifyUpdatable) {
                     Forge.getSplashScreen().prepareForDialogs();
 
-                    message = "A new version of Forge is available. " + version + "\n" + snapsBuildDate + "\n" +
-                            "You are currently on an older version. " + versionString + "\n" + buildDate + "\n" +
+                    message = "A new version of Forge is available. - v." + version + "\n" + snapsBuildDate + "\n" +
+                            "You are currently on an older version. - v." + versionString + "\n" + buildDate + "\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
@@ -196,7 +196,7 @@ public class AssetsDownloader {
                     return;
                 }
                 mandatory = true;
-                build += "Installed resources date: " + target + "\n\n";
+                build += "\nInstalled resources date:\n" + target + "\n";
                 log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, buildDate, snapsTimestamp);
             } catch (Exception e) {
                 e.printStackTrace();
