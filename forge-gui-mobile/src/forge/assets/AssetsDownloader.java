@@ -130,8 +130,10 @@ public class AssetsDownloader {
                         }
                     }
                 } else {
-                    if (!GuiBase.isAndroid())
+                    if (!GuiBase.isAndroid()) {
                         run(runnable);
+                        return;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
