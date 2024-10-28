@@ -438,7 +438,7 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         protected void onClick() {
             if (!displayText.isEmpty()) {
                 try {
-                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, null, null)));
+                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
