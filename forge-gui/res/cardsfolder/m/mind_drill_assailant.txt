@@ -2,7 +2,6 @@ Name:Mind Drill Assailant
 ManaCost:2 UB UB
 Types:Creature Rat Warlock
 PT:2/5
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | CheckSVar$ X | SVarCompare$ GE7 | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +3/+0.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME gets +3/+0.
 A:AB$ Surveil | Cost$ 2 UB | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
-SVar:X:Count$InYourYard
 Oracle:Threshold — As long as seven or more cards are in your graveyard, Mind Drill Assailant gets +3/+0.\n{2}{U/B}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
