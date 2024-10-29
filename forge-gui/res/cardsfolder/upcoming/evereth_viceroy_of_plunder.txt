@@ -9,5 +9,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 BR | Execute$ TrigDealDamage | SpellDescription$ When you do, NICKNAME deals damage equal to its power to each opponent.
 SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ Y
 SVar:X:Sacrificed$Valid Treasure
-SVar:Y:TriggeredCard$CardPower
+SVar:Y:Count$CardPower
 Oracle:Flying\nSacrifice another creature or artifact: Put a +1/+1 counter on Evereth, Viceroy of Plunder. If the sacrificed permanent was a Treasure, Evereth gains lifelink until end of turn. Activate only as a sorcery.\nWhen Evereth dies, you may pay {1}{B/R}. When you do, Evereth deals damage equal to its power to each opponent.
