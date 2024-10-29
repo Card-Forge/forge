@@ -426,6 +426,23 @@
                         </dependencies>
                         <executions>
                             <execution>
+                                <id>android-additional-asset</id>
+                                <phase>test</phase>
+                                <configuration>
+                                    <target>
+                                        <delete file="${basedir}/assets/build.txt"/>
+                                        <copy todir="${basedir}/assets">
+                                            <fileset dir="${project.build.directory}/classes">
+                                                <include name="build.txt" />
+                                            </fileset>
+                                        </copy>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                            <execution>
                                 <id>android-release-packaging</id>
                                 <phase>package</phase>
                                 <configuration>

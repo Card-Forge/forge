@@ -58,7 +58,7 @@ public class AssetsDownloader {
         final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "maven-metadata.xml";
         FileHandle assetsDir = Gdx.files.absolute(ASSETS_DIR);
         FileHandle resDir = Gdx.files.absolute(RES_DIR);
-        FileHandle buildTxtFileHandle = Gdx.files.classpath("build.txt");
+        FileHandle buildTxtFileHandle = GuiBase.isAndroid() ? Gdx.files.internal("build.txt") : Gdx.files.classpath("build.txt");
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         boolean verifyUpdatable = false;
         boolean mandatory = false;
@@ -101,6 +101,9 @@ public class AssetsDownloader {
                             buildTimeStamp = format.parse(buildTxtFileHandle.readString());
                             buildDate = buildTimeStamp.toString();
                             verifyUpdatable = snapsTimestamp.after(buildTimeStamp);
+                        } else {
+                            //fallback to old version comparison
+                            verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
                         }
                     }
                 } else {
