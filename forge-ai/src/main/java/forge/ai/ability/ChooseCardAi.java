@@ -1,25 +1,12 @@
 package forge.ai.ability;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-
-import forge.ai.AiAttackController;
-import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
-import forge.ai.ComputerUtilCombat;
-import forge.ai.SpellAbilityAi;
+import com.google.common.collect.Lists;
+import forge.ai.*;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
+import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
-import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -29,6 +16,10 @@ import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class ChooseCardAi extends SpellAbilityAi {
 
@@ -58,11 +49,15 @@ public class ChooseCardAi extends SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
-        ZoneType choiceZone = ZoneType.Battlefield;
+
+        List<ZoneType> choiceZone;
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
+        } else {
+            choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         }
         CardCollectionView choices = game.getCardsIn(choiceZone);
+
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
@@ -129,6 +124,13 @@ public class ChooseCardAi extends SpellAbilityAi {
                 ownChoices = CardLists.filter(choices, CardPredicates.isControlledByAnyOf(ai.getAllies()));
             }
             return !ownChoices.isEmpty();
+        } else if (aiLogic.equals("GoodCreature")) {
+            for (Card choice : choices) {
+                if (choice.isCreature() && ComputerUtilCard.evaluateCreature(choice) >= 250) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
     }

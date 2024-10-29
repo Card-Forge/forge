@@ -436,6 +436,13 @@ public abstract class GameState {
             }
         }
 
+        if (!c.getUnlockedRooms().isEmpty()) {
+            for (CardStateName stateName : c.getUnlockedRooms()) {
+                newText.append("|UnlockedRoom:");
+                newText.append(stateName.name());
+            }
+        }
+
         cardTexts.put(zoneType, newText.toString());
     }
 
@@ -1401,6 +1408,8 @@ public abstract class GameState {
                     c.setGamePieceType(GamePieceType.TOKEN);
                 } else if (info.startsWith("ClassLevel:")) {
                     c.setClassLevel(Integer.parseInt(info.substring(info.indexOf(':') + 1)));
+                } else if (info.startsWith("UnlockedRoom:")) {
+                    c.unlockRoom(c.getController(), CardStateName.smartValueOf(info.substring(info.indexOf(':') + 1)));
                 }
             }
 

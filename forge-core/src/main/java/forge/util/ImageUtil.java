@@ -43,10 +43,20 @@ public class ImageUtil {
         } else //try anyway...
             key = imageKey;
 
-        PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
-        if (cp == null) {
-            cp = StaticData.instance().getVariantCards().getCard(key);
+        CardDb db = StaticData.instance().getCommonCards();
+        PaperCard cp = null;
+        //db shouldn't be null
+        if (db != null) {
+            cp = db.getCard(key);
+            if (cp == null) {
+                db = StaticData.instance().getVariantCards();
+                if (db != null)
+                    cp = db.getCard(key);
+            }
         }
+        if (cp == null)
+            System.err.println("Can't find PaperCard from key: " + key);
+        // return cp regardless if it's null
         return cp;
     }
     public static String transformKey(String imageKey) {

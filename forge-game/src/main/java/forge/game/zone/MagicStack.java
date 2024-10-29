@@ -625,9 +625,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
-        finishResolving(sa, thisHasFizzled);
 
         game.getAction().checkStaticAbilities();
+
+        finishResolving(sa, thisHasFizzled);
+
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)

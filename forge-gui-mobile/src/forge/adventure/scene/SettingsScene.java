@@ -264,8 +264,7 @@ public class SettingsScene extends UIScene {
                     FModel.getPreferences().save();
                     Forge.enableUIMask = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_ENABLE_BORDER_MASKING);
                 }
-                ImageCache.clearGeneratedCards();
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
                 return null;
             });
             addLabel(Forge.getLocalizer().getMessage("lblBorderMaskOption"));

@@ -196,7 +196,11 @@ public class DeckHints {
                 Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules));
                 break;
             case TYPE:
-                Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard::getRules));
+                Predicate<CardRules> typePred = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p);
+                if (CardType.isACreatureType(p)) {
+                    typePred = Predicates.or(CardRulesPredicates.hasKeyword("Changeling"), typePred);
+                }
+                Iterables.addAll(cards, getMatchingItems(cardList, typePred, PaperCard::getRules));
                 break;
             case NONE:
             case ABILITY: // already done above

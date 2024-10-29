@@ -213,7 +213,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
         Deck deck = getDeck();
         if (deck != null) {
             /*preload deck to cache*/
-            ImageCache.preloadCache(deck);
+            ImageCache.getInstance().preloadCache(deck);
             if (isExistingDeck) {
                 Forge.openScreen(new QuestDraftDeckEditor(deck.getName()));
             }

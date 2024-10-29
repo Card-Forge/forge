@@ -477,7 +477,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     @Override
                     public void select() {
                         super.select();
-                        ImageCache.disposeTextures();
+                        ImageCache.getInstance().disposeTextures();
                     }
                 },
                 4);
@@ -580,8 +580,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);
                 Forge.enableUIMask = FModel.getPreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
-                ImageCache.clearGeneratedCards();
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
             }
         }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,
