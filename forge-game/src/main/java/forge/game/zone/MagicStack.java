@@ -607,10 +607,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
+            AbilityUtils.resolve(sa);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
             runParams.put(AbilityKey.SpellAbility, sa);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
-            AbilityUtils.resolve(sa);
         } else {
             sa.resolve();
             // do creatures ETB from here?
