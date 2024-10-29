@@ -9,6 +9,7 @@ import java.util.List;
 import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
+import forge.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -100,7 +101,8 @@ public class AssetsDownloader {
                         if (buildTxtFileHandle.exists()) {
                             buildTimeStamp = format.parse(buildTxtFileHandle.readString());
                             buildDate = buildTimeStamp.toString();
-                            verifyUpdatable = snapsTimestamp.after(buildTimeStamp);
+                            // if morethan 12 hours the difference, then allow to update..
+                            verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 12;
                         } else {
                             //fallback to old version comparison
                             verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
