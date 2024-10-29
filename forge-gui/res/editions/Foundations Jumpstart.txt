@@ -6,15 +6,62 @@ Type=Draft
 ScryfallCode=J25
 
 [cards]
+1 U Dawnwing Marshal @Aldo Domínguez
+2 R Eidolon of Astral Winds @Dan Murayama Scott
+3 C Faithful Pikemaster @Justine Cruz
 4 R Generous Pup @Julia Metzger
 5 C Hinterland Sanctifier @Justine Cruz
+6 U Delightful Discovery @Manuel Castañón
+7 C Gilded Scuttler @Samuel Perin
+8 U Phantasmal Shieldback @Daniel Ljunggren
+9 C Starlight Snare @Borja Pindado
+10 C Revoke Demise @Runa I. Rosenberger
+11 C Scourge of the Undercity @Olivier Bernard
+12 U Wriggling Grub @Caio Monteiro
+13 R Dropkick Bomber @Quintin Gleim
+14 U Firespitter Whelp @Brooklyn Smith
 15 R Frontline Heroism @Fajareka Setiawan
+16 U Goblin Surprise @Kevin Sidharta
 17 C Hearts on Fire @Eelis Kyttanen
+18 R Sandstorm Crasher @Néstor Ossandón Leal
+19 C Scholar of Combustion @Nereida
+20 C Go Forth @Serena Malyon
+21 U Hungry Megasloth @Svetlin Velinov
+22 C Razorgrass Invoker @Jason Rainville
+23 C Saurian Symbiote @Aldo Domínguez
 24 R Scythecat Cub @Gabor Szikszai
+25 C Slimy Piper @Borja Pindado
+26 U Spined Tyrranax @Brent Hollowell
+27 C Woodland Liege @Marta Nael
+28 C Shardless Outlander @Leon Tukker
+29 U Starnheim Memento @Steve Ellis
+30 R Brigone, Soldier of Meletis @Daisuke Tatsuma
+31 U Psemilla, Meletian Poet @KiKi
 32 U Qala, Ajani's Pridemate @Yoshiya
-39 M Taeko, the Patient Avalanche @Gossan
+33 M Thurid, Mare of Destiny @Ishikawa Kenta
+34 U Urdnan, Dromoka Warrior @Yakotakos
+35 U Cynette, Jelly Drover @Daisuke Tatsuma
+36 R Neerdiv, Devious Diver @Yuchi Yuki
+37 R Plagon, Lord of the Beach @GOSSAN
+38 M Pol Jamaar, Illusionist @Kuregure
+39 M Taeko, the Patient Avalanche @GOSSAN
+40 M Aphelia, Viper Whisperer @Fuzichoco
+41 R Evereth, Viceroy of Plunder @Yuichi Murakami
+42 R Fumulus, the Infestation @Takotto
+43 U Nazar, the Velvet Fang @KiKi
+44 U Ozox, the Clattering King @Inuchiyo Meimaru
+45 R Rev, Tithe Extractor @M.Matsumoto
+46 U Anep, Vizier of Hazoret @Moopic
+47 U Cleon, Merry Champion @Mebaru
 48 U General Kreat, the Boltbringer @Takeuchi Moto
+49 R Gornog, the Red Reaper @Ishikawa Kenta
+50 U Ivora, Insatiable Heir @Canata Katana
+51 U Braulios of Pheres Band @Takeuchi Moto
+52 U Dionus, Elvish Archdruid @BODAX
+53 M Hurska Sweet-Tooth @GOSSAN
 54 R Shroofus Sproutsire @Yukihiro Maruo
+55 R Slinza, the Spiked Stampede @Ishikawa Kenta
+56 U Sutina, Speaker of the Tajuru @Canata Katana
 58 M Brimaz, King of Oreskos @Moopic
 70 R Vilis, Broker of Blood @Takeuchi Moto
 114 M Dark Confidant @Victor Adame Minguez
