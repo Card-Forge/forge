@@ -31,10 +31,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import com.badlogic.gdx.*;
-// androidx dependencies disabled so it will not crash Forge app on startup
-//import com.badlogic.gdx.backends.android.keyboardheight.AndroidXKeyboardHeightProvider;
-//import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
-//import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
+import com.badlogic.gdx.backends.android.keyboardheight.AndroidRKeyboardHeightProvider;
+import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
+import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
 import com.badlogic.gdx.utils.*;
 
@@ -57,14 +56,14 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 	protected final Array<Runnable> runnables = new Array<Runnable>();
 	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
 	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
-			LifecycleListener.class);
+		LifecycleListener.class);
 	private final Array<AndroidEventListener> androidEventListeners = new Array<AndroidEventListener>();
 	protected int logLevel = LOG_INFO;
 	protected ApplicationLogger applicationLogger;
 	protected boolean useImmersiveMode = false;
 	private int wasFocusChanged = -1;
 	private boolean isWaitingForAudio = false;
-	//private KeyboardHeightProvider keyboardHeightProvider;
+	private KeyboardHeightProvider keyboardHeightProvider;
 
 	protected boolean renderUnderCutout = false;
 
@@ -122,7 +121,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		config.nativeLoader.load();
 		setApplicationLogger(new AndroidApplicationLogger());
 		graphics = new AndroidGraphics(this, config,
-				config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
+			config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
 		input = createInput(this, this, graphics.view, config);
 		audio = createAudio(this, config);
 		files = createFiles();
@@ -182,18 +181,16 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 		setLayoutInDisplayCutoutMode(this.renderUnderCutout);
 
-		// As per the docs, it might work unreliable < 23 https://developer.android.com/jetpack/androidx/releases/core#1.5.0-alpha02
-		// So, I guess since 23 is pretty rare we can use the old API for the users
-		/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-			keyboardHeightProvider = new AndroidXKeyboardHeightProvider(this);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			keyboardHeightProvider = new AndroidRKeyboardHeightProvider(this);
 		} else {
 			keyboardHeightProvider = new StandardKeyboardHeightProvider(this);
-		}*/
+		}
 	}
 
 	protected FrameLayout.LayoutParams createLayoutParams () {
 		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-				android.view.ViewGroup.LayoutParams.MATCH_PARENT);
+			android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 		layoutParams.gravity = Gravity.CENTER;
 		return layoutParams;
 	}
@@ -263,7 +260,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		graphics.onPauseGLSurfaceView();
 
 		super.onPause();
-		//keyboardHeightProvider.setKeyboardHeightObserver(null);
+		keyboardHeightProvider.setKeyboardHeightObserver(null);
 	}
 
 	@Override
@@ -292,19 +289,19 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 			this.isWaitingForAudio = false;
 		}
 		super.onResume();
-		/*keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
+		keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
 		((AndroidGraphics)getGraphics()).getView().post(new Runnable() {
 			@Override
 			public void run () {
 				keyboardHeightProvider.start();
 			}
-		});*/
+		});
 	}
 
 	@Override
 	protected void onDestroy () {
 		super.onDestroy();
-		//keyboardHeightProvider.close();
+		keyboardHeightProvider.close();
 	}
 
 	@Override
@@ -531,7 +528,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		return new DefaultAndroidFiles(this.getAssets(), this, true);
 	}
 
-	/*public KeyboardHeightProvider getKeyboardHeightProvider () {
+	public KeyboardHeightProvider getKeyboardHeightProvider () {
 		return keyboardHeightProvider;
-	}*/
+	}
 }
