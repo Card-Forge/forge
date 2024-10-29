@@ -23,3 +23,4 @@ ScryfallCode=PW24
 16 R Heirloom Blade @Carmen Sinek
 17 R Crippling Fear @Néstor Ossandón Leal
 18 R Night's Whisper @John Severin Brassell
+19 M Darksteel Colossus @Loïc Canavaggia
