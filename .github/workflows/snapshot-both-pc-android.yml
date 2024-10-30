@@ -34,6 +34,14 @@ jobs:
           server-password: ${{ secrets.FTP_PASSWORD }}
           settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
+        run: command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
+
+      - name: Configure Git User
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions
+
       - name: Install old maven (3.8.1)
         run: |
           curl -o apache-maven-3.8.1-bin.tar.gz https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz
@@ -45,13 +53,7 @@ jobs:
       - name: Set Up Android tools
         run: |
           JAVA_HOME=${JAVA_HOME_17_X64} ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT --install "build-tools;35.0.0" "platform-tools" "platforms;android-35"
-
-      - name: Install virtual framebuffer (if not available) to allow running GUI on a headless server
-        run: |
-          command -v Xvfb >/dev/null 2>&1 || { sudo apt update && sudo apt install -y xvfb; }
-          export DISPLAY=":1"
-          Xvfb :1 -screen 0 800x600x8 &
-        
+     
       - name: Extract Android keystore
         run: |
           ls
@@ -63,11 +65,6 @@ jobs:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
-
-      - name: Configure Git User
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
 
       - name: Install Android maven plugin
         run: |
@@ -82,6 +79,8 @@ jobs:
 
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
+          export DISPLAY=":1"
+          Xvfb :1 -screen 0 800x600x8 &
           export _JAVA_OPTIONS="-Xmx2g"
           d=$(date +%m.%d)
           # build both desktop and android
@@ -110,6 +109,8 @@ jobs:
             mv "${fname}.bz2" "${bname}-${d}.tar.bz2"
           done
           ls
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       #- name: 📂 Sync files
       #  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
