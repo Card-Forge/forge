@@ -1,28 +1,13 @@
 package forge.gamemodes.match;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import forge.ai.AiProfileUtil;
-import forge.gui.control.PlaybackSpeed;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.Subscribe;
-
 import forge.LobbyPlayer;
 import forge.StaticData;
-import forge.game.Game;
-import forge.game.GameRules;
-import forge.game.GameType;
-import forge.game.GameView;
-import forge.game.Match;
+import forge.ai.AiProfileUtil;
+import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
@@ -35,12 +20,9 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
 import forge.gui.control.FControlGamePlayback;
+import forge.gui.control.PlaybackSpeed;
 import forge.gui.control.WatchLocalGame;
-import forge.gui.events.IUiEventVisitor;
-import forge.gui.events.UiEvent;
-import forge.gui.events.UiEventAttackerDeclared;
-import forge.gui.events.UiEventBlockerAssigned;
-import forge.gui.events.UiEventNextGameDecision;
+import forge.gui.events.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgeConstants;
@@ -58,6 +40,10 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.HashMapOfLists;
 import forge.util.maps.MapOfLists;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
+import java.util.Map.Entry;
 
 public class HostedMatch {
     private Match match;
@@ -88,6 +74,7 @@ public class HostedMatch {
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+        gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
         // AI specific sideboarding rules
