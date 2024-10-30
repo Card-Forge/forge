@@ -1,7 +1,7 @@
 Name:Goblin Negotiation
 ManaCost:X R R
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | ExcessSVar$ Excess | ExcessSVarTargeted$ True | SubAbility$ DBToken | SpellDescription$ CARDNAME deals X damage to target creature. Create a number of 1/1 red Goblin creature tokens equal to the amount of excess damage dealt to that creature this way.
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ X | ExcessSVar$ Excess | ExcessSVarCondition$ Card.targetedBy | SubAbility$ DBToken | SpellDescription$ CARDNAME deals X damage to target creature. Create a number of 1/1 red Goblin creature tokens equal to the amount of excess damage dealt to that creature this way.
 SVar:DBToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenAmount$ Excess
 SVar:X:Count$xPaid
 DeckHas:Ability$Token
