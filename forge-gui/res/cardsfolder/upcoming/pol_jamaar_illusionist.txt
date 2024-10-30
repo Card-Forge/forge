@@ -1,0 +1,10 @@
+Name:Pol Jamaar, Illusionist
+ManaCost:4 U U
+Types:Legendary Creature Human Illusion Wizard
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseType | TriggerDescription$ When CARDNAME enters, choose a creature type. Draw a card for each creature you control of that type.
+SVar:TrigChooseType:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBDraw | AILogic$ MostProminentComputerControls
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Creature.ChosenType+YouCtrl
+Oracle:Flying\nWhen Pol Jamaar, Illusionist enters, choose a creature type. Draw a card for each creature you control of that type.
