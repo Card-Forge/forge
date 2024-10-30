@@ -6,8 +6,10 @@ Type=Core
 ScryfallCode=FDN
 
 [cards]
+1 M Sire of Seven Deaths @Luis Lasahido
 2 R Arahbo, the First Fang @Simon Dominic
 4 U Cat Collector @Chris Seaman
+5 R Celestial Armor @Olena Richards
 6 U Claws Out @Warren Mahy
 7 R Crystal Barricade @Rockey Chen
 11 R Exemplar of Light @Ekaterina Burmak
@@ -20,6 +22,7 @@ ScryfallCode=FDN
 27 M Valkyrie's Call @Scott Murphy
 29 U Arcane Epiphany @Andrew Mar
 30 R Archmage of Runes @Kai Carpenter
+33 U Clinquant Skymage @Kevin Sidharta
 37 C Erudite Wizard @Joannis Fiore
 38 U Faebloom Trick @Annie Stegg
 39 U Grappling Kraken @Ben Wootten
@@ -31,44 +34,65 @@ ScryfallCode=FDN
 48 C Refute @Ignatius Budi
 50 U Skyship Buccaneer @Javier Charro
 51 M Sphinx of Forgotten Lore @Dmitry Burmak
+55 U Arbiter of Woe @Jim Pavelec
 56 U Billowing Shriekmass @Brent Hollowell
 58 M Bloodthirsty Conqueror @Dmitry Burmak
 59 C Crypt Feaster @John Di Giovanni
+61 R High-Society Hunter @Daneen Wilkerson
 65 U Midnight Snack @Kai Carpenter
 66 R Nine-Lives Familiar @Bram Sels
+69 U Seeker's Folly @Valera Lutfullina
 72 R Tinybones, Bauble Burglar @Leonardo Santanna
+73 U Tragic Banshee @Camille Alquier
 74 U Vampire Gourmand @Chris Rallis
 76 U Vengeful Bloodwitch @Jarel Threat
 77 R Zul Ashur, Lich Lord @Raluca Marinescu
 78 U Battlesong Berserker @Mirko Failoni
+80 U Bulk Up @Warren Mahy
 81 M Chandra, Flameshaper @Mark Winters
 85 R Electroduplicate @Warren Mahy
 86 U Fiery Annihilation @Warren Mahy
+91 R Kellan, Planar Trailblazer @Zoltan Boros
 93 R Searslicer Goblin @Wayne Reynolds
+94 U Slumbering Cerberus @Kari Christensen
 97 M Twinflame Tyrant @Xabi Gaztelua
 104 U Elvish Regrower @Zoltan Boros
 107 R Mossborn Hydra @Monztre
+108 U Needletooth Pack @Monztre
+115 R Alesha, Who Laughs at Fate @Ekaterina Burmak
 116 R Anthem of Champions @Chris Rallis
 117 R Ashroot Animist @Caio Monteiro
 121 R Koma, World-Eater @Mark Zug
+122 R Kykar, Zephyr Awakener @Dmitry Burmak
 123 M Niv-Mizzet, Visionary @Dan Murayama Scott
+128 U Fishing Pole @Franz Vohwinkel
+129 R Leyline Axe @Edgar Sánchez Hidalgo
 132 R Scrawling Crawler @Miro Petrov
 134 M Ajani, Caller of the Pride @D. Alexander Gregory
 135 U Ajani's Pridemate @Kevin Sidharta
 136 R Angel of Finality @Howard Lyon
 140 R Day of Judgment @Vincent Proce
+141 R Giada, Font of Hope @Kai Carpenter
 146 U Savannah Lions @Winona Nelson
 147 U Serra Angel @Greg Staples
 148 U Stroke of Midnight @Julia Metzger
+151 U Aetherize @Alexandre Honoré
+154 R Extravagant Replication @Pauline Voss
+156 U Imprisoned in the Moon @Ryan Alexander Lee
 157 C Lightshell Duo @Mariah Tekulve
+158 U Micromancer @Ernanda Souza
+160 U An Offer You Can't Refuse @Dallas Williams
 161 M Omniscience @Jason Chan
+163 U Self-Reflection @Henry Peters
 165 C Think Twice @Anthony Francisco
 166 R Time Stop @Scott M. Fischer
 175 U Hero's Downfall @Chris Rallis
 176 M Liliana, Dreadhorde General @Chris Rallis
 179 R Painful Quandary @David Palumbo
 180 R Phyrexian Arena @Svetlin Velinov
+182 U Reassembling Skeleton @Austin Hsu
 185 U Stromkirk Bloodthief @Caroline Gariba
+187 U Zombify @Jason A. Engle
 192 C Burst Lightning @Vance Kovacs
 194 R Etali, Primal Storm @Raymond Swanland
 197 U Firespitter Whelp @Brooklyn Smith
@@ -83,6 +107,7 @@ ScryfallCode=FDN
 223 C Giant Growth @Matt Cavotta
 227 C Llanowar Elves @Kev Walker
 229 U Nessian Hornbeetle @Jason Felix
+230 U Overrun @Carl Critchlow
 232 R Scavenging Ooze @Austin Hsu
 234 M Vivien Reid @Anna Steinbauer
 237 U Balmor, Battlemage Captain @Bram Sels
@@ -90,9 +115,11 @@ ScryfallCode=FDN
 239 U Empyrean Eagle @Jason A. Engle
 243 M Muldrotha, the Gravetide @Jason Rainville
 244 M Progenitus @Jaime Jones
+247 U Tatyova, Benthic Druid @Mathias Kollros
 249 U Adventuring Gear @Howard Lyon
 255 U Juggernaut @Kev Walker
 257 R Solemn Simulacrum @Dan Murayama Scott
+258 U Swiftfoot Boots @Svetlin Velinov
 264 U Rogue's Passage @Christine Choi
 272 L Plains @Rebecca Guay
 273 L Plains @Tingting Yeh
@@ -118,10 +145,14 @@ ScryfallCode=FDN
 294 R Arahbo, the First Fang @Chris Rahn
 296 R Crystal Barricade @Alayna Danner
 297 R Exemplar of Light @Chris Rahn
+298 R Giada, Font of Hope @Scott M. Fischer
 299 M Herald of Eternal Dawn @PINDURSKI
 302 M Valkyrie's Call @Julie Dillon
 304 R Archmage of Runes @Zoltan Boros
+307 R High Fae Trickster @Arif Wijaya
 308 R Homunculus Horde @Filipe Pagliuso
+310 R Lunar Insight @Julie Dillon
+311 U An Offer You Can't Refuse @Aaron J. Riley
 312 M Omniscience @Dominik Mayer
 313 C Refute @Monztre
 314 M Sphinx of Forgotten Lore @Chuck Lukacs
@@ -132,14 +163,20 @@ ScryfallCode=FDN
 324 R Tinybones, Bauble Burglar @Rudy Siswanto
 326 R Zul Ashur, Lich Lord @PINDURSKI
 328 R Electroduplicate @Andrew Mar
+330 R Kellan, Planar Trailblazer @Aaron J. Riley
 332 R Searslicer Goblin @Arif Wijaya
 333 M Twinflame Tyrant @Justin Gerard
 337 R Mossborn Hydra @Monztre
+343 R Alesha, Who Laughs at Fate @Dmitry Burmak
 344 R Anthem of Champions @Ryan Pancoast
 345 R Ashroot Animist @Lie Setiawan
 347 R Koma, World-Eater @Néstor Ossandón Leal
+348 R Kykar, Zephyr Awakener @Zezhou Chen
 350 M Niv-Mizzet, Visionary @Raymond Swanland
+352 R Banner of Kinship @Chris Seaman
+353 R Leyline Axe @Julian Kok Joon Wen
 354 R Scrawling Crawler @Maxime Minard
+355 U Swiftfoot Boots @Gabor Szikszai
 357 M Ajani, Caller of the Pride @Victor Adame Minguez
 358 M Kaito, Cunning Infiltrator @Michal Ivan
 359 M Liliana, Dreadhorde General @Dmitry Burmak
@@ -148,9 +185,11 @@ ScryfallCode=FDN
 363 R Arahbo, the First Fang @Chris Rahn
 365 R Crystal Barricade @Alayna Danner
 366 R Exemplar of Light @Chris Rahn
+367 R Giada, Font of Hope @Scott M. Fischer
 368 M Herald of Eternal Dawn @PINDURSKI
 371 M Valkyrie's Call @Julie Dillon
 372 R Archmage of Runes @Zoltan Boros
+375 R High Fae Trickster @Arif Wijaya
 376 R Homunculus Horde @Filipe Pagliuso
 378 R Lunar Insight @Julie Dillon
 379 M Omniscience @Dominik Mayer
@@ -161,12 +200,17 @@ ScryfallCode=FDN
 388 R Tinybones, Bauble Burglar @Rudy Siswanto
 389 R Zul Ashur, Lich Lord @PINDURSKI
 390 R Electroduplicate @Andrew Mar
+392 R Kellan, Planar Trailblazer @Aaron J. Riley
 394 R Searslicer Goblin @Arif Wijaya
 395 M Twinflame Tyrant @Justin Gerard
 399 R Mossborn Hydra @Monztre
+404 R Alesha, Who Laughs at Fate @Dmitry Burmak
 405 R Anthem of Champions @Ryan Pancoast
 406 R Ashroot Animist @Lie Setiawan
+409 R Kykar, Zephyr Awakener
 411 M Niv-Mizzet, Visionary @Raymond Swanland
+414 R Leyline Axe @Julian Kok Joon Wen
+415 R Scrawling Crawler @Maxime Minard
 417 M Ajani, Caller of the Pride @Victor Adame Minguez
 418 M Kaito, Cunning Infiltrator @Michal Ivan
 419 M Liliana, Dreadhorde General @Dmitry Burmak
@@ -189,6 +233,7 @@ ScryfallCode=FDN
 446 M Herald of Eternal Dawn @Martina Fačková
 449 M Valkyrie's Call @Scott Murphy
 450 R Archmage of Runes @Kai Carpenter
+453 R High Fae Trickster @Justyna Dura
 454 R Homunculus Horde @Adrián Rodríguez Pérez
 456 R Lunar Insight @Dan Murayama Scott
 457 M Sphinx of Forgotten Lore @Dmitry Burmak
@@ -197,12 +242,17 @@ ScryfallCode=FDN
 463 R Tinybones, Bauble Burglar @Leonardo Santanna
 464 R Zul Ashur, Lich Lord @Raluca Marinescu
 465 R Electroduplicate @Warren Mahy
+466 R Kellan, Planar Trailblazer @Zoltan Boros
 468 R Searslicer Goblin @Wayne Reynolds
 469 M Twinflame Tyrant @Xabi Gaztelua
 471 R Mossborn Hydra @Monztre
+476 R Alesha, Who Laughs at Fate @Ekaterina Burmak
 477 R Anthem of Champions @Chris Rallis
 478 R Ashroot Animist @Caio Monteiro
+481 R Kykar, Zephyr Awakener @Dmitry Burmak
 482 M Niv-Mizzet, Visionary @Dan Murayama Scott
+484 R Banner of Kinship @Olena Richards
+485 R Leyline Axe @Edgar Sánchez Hidalgo
 486 R Scrawling Crawler @Miro Petrov
 490 C Angelic Edict @Trevor Claxton
 493 U Elspeth's Smite @Livia Prima
@@ -222,25 +272,137 @@ ScryfallCode=FDN
 531 C Vampire Neonate @Daarken
 532 C Vampire Spawn @Alex Brock
 564 C Uncharted Haven @Adam Paquette
+565 M Angelic Destiny @Jana Schirmer & Johannes Voss
+566 U Archway Angel @Milivoj Ćeran
+567 C Ballyrush Banneret
+568 R Charming Prince
+569 C Crusader of Odric
+570 U Dawnwing Marshal
 571 U Devout Decree @Zoltan Boros
 572 C Disenchant @Richard Kane Ferguson
+573 C Felidar Cub
+574 R Felidar Retreat
+575 R Fumigate
+576 U Knight of Grace
+577 R Linden, the Steadfast Queen
+578 R Mentor of the Meek
+579 R Regal Caracal
+580 U Release the Dogs
+581 U Stasis Snare
+582 U Syr Alin, the Lion's Claw
+583 U Valorous Stance
+584 R Zetalpa, Primal Dawn
+585 R Arcanis the Omnipotent @Justin Sweet
+586 U Chart a Course
+587 R Dictate of Kruphix
+588 C Dive Down
+589 M Finale of Revelation
 590 U Flashfreeze @Brian Despain
+591 U Fog Bank
+592 U Gateway Sneak
+593 R Harbinger of the Tides
 594 U Mystical Teachings @Ron Spears
+595 R River's Rebuke
+596 U Shipwreck Dowser
+597 M Sphinx of the Final Word
+598 R Tempest Djinn
 599 C Unsummon @Ron Spencer
+600 R Voracious Greatshark
 601 U Deathmark @Jeremy Jarvis
 602 M Demonic Pact @Manuel Castañón
+603 R Desecration Demon
+604 R Dread Summons
+605 C Driver of the Dead
 606 C Duress @PINDURSKI
+607 R Kalastria Highborn
+608 U Knight of Malice
+609 R Midnight Reaper
+610 R Myojin of Night's Reach
+611 R Nullpriest of Oblivion
+612 C Pulse Tracker
+613 C Sanguine Indulgence
+614 U Tribute to Hunger
+615 U Vampiric Rites
+616 U Vile Entomber
+617 R Wishclaw Talisman
 618 R Ball Lightning @Trevor Claxton
+619 U Bolt Bend
+620 C Crash Through
+621 U Dragon Mage
+622 M Dragonmaster Outcast
+623 C Ghitu Lavarunner
+624 U Giant Cindermaw
 625 R Harmless Offering @Howard Lyon
+626 U Hoarding Dragon
+627 R Lathliss, Dragon Queen
 628 U Mindsparker @Wayne Reynolds
+629 U Obliterating Bolt
+630 U Ravenous Giant
+631 R Redcap Gutter-Dweller
+632 R Stromkirk Noble
+633 R Taurean Mauler
+634 C Viashino Pyromancer
+635 U Circuitous Route
+636 C Fierce Empath
+637 U Fynn, the Fangbearer
+638 U Gnarlback Rhino
+639 R Heroes' Bane
 640 U Mold Adder @Matt Cavotta
+641 U Ordeal of Nylea
+642 R Predator Ooze
+643 R Primal Might
+644 M Primeval Bounty
+645 R Rampaging Baloths
+646 C Springbloom Druid
+647 R Surrak, the Hunt Caller
+648 U Venom Connoisseur
+649 M Vizier of the Menagerie
+650 R Wildborn Preserver
+651 M Aurelia, the Warleader @Slawomir Maniak
+652 R Ayli, Eternal Pilgrim @Cynthia Sheppard
 653 U Cloudblazer @Dan Murayama Scott
+654 U Deadly Brew
+655 R Drogskol Reaver
+656 U Dryad Militant
+657 U Enigma Drake
+658 U Garna, Bloodfist of Keld
 659 R Halana and Alena, Partners @Jason Rainville
+660 R Immersturm Predator
 661 R Maelstrom Pulse @John Avon
+662 U Mortify
+663 R Ovika, Enigma Goliath
+664 R Prime Speaker Zegana
+665 U Savage Ventmaw
+666 U Teach by Example
+667 U Trygon Predator
+668 R Wilt-Leaf Liege
+669 R Basilisk Collar
+670 R Cultivator's Caravan
 671 M Darksteel Colossus @Carl Critchlow
+672 U Diamond Mare
+673 U Feldon's Cane
+674 U Fireshrieker
+675 U Gate Colossus
+676 R Mazemind Tome
 677 M Pyromancer's Goggles @Kevin Sidharta
+678 M Ramos, Dragon Engine
 679 U Sorcerous Spyglass @Kieran Yanner
 680 U Soul-Guide Lantern @Iris Compiet
+681 R Steel Hellkite
+682 C Three Tree Mascot
+683 C Azorius Guildgate @Drew Baker
+684 C Boros Guildgate
+685 R Crawling Barrens
+686 U Cryptic Caves
+687 U Demolition Field
+688 C Dimir Guildgate
+689 C Golgari Guildgate
+690 C Gruul Guildgate
+691 C Izzet Guildgate
+692 C Orzhov Guildgate
+693 C Rakdos Guildgate
+694 C Selesnya Guildgate
+695 C Simic Guildgate
 696 R Temple of Abandon @Adam Paquette
 697 R Temple of Deceit @Jonas De Ro
 698 R Temple of Enlightenment @Piotr Dura
@@ -251,9 +413,27 @@ ScryfallCode=FDN
 703 R Temple of Plenty @Chris Ostrowski
 704 R Temple of Silence @Adam Paquette
 705 R Temple of Triumph @Piotr Dura
+706 U Angel of Vitality @Johannes Voss
 707 M Lyra Dawnbringer @Chris Rahn
+708 U Make a Stand
+709 U Confiscate
 710 C Negate @Magali Villeneuve
+711 R Rite of Replication
+712 C Feed the Swarm
+713 U Gatekeeper of Malakir
+714 M Massacre Wurm
+715 R Gratuitous Violence
+716 U Guttersnipe
+717 C Impact Tremors
 718 R Gigantosaurus @Loïc Canavaggia
+719 U Imperious Perfect
+720 U Pelakka Wurm
+721 U Boros Charm
+722 U Unflinching Courage
+723 R Adaptive Automaton @Igor Kieryluk
+724 C Expedition Map
 725 R Gilded Lotus @Volkan Baǵa
+726 U Hedron Archive
+727 M Maze's End
 728 R Phyrexian Arena @Aaron J. Riley
 729 R Solemn Simulacrum @Forrest Imel
