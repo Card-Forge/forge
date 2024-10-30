@@ -7,4 +7,4 @@ SVar:TrigSac:DB$ Sacrifice
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME dies, draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController
 SVar:Targeting:Dies
-Oracle:When Phantasmal Shieldback becomes the target of a spell or ability, sacrifice it\nWhen Phantasmal Shieldback dies, draw a card.
+Oracle:When Phantasmal Shieldback becomes the target of a spell or ability, sacrifice it.\nWhen Phantasmal Shieldback dies, draw a card.
