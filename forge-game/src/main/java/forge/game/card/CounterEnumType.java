@@ -49,6 +49,8 @@ public enum CounterEnumType {
 
     AWAKENING("AWAKE", 0, 231, 79),
 
+    BAIT("BAIT", 120, 100, 60),
+
     BLAZE("BLAZE", 255, 124, 82),
 
     BLESSING("BLESS", 251, 0, 94),
