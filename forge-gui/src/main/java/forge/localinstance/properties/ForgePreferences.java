@@ -115,6 +115,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
         UI_MANABURN("false"),
+        LEGACY_ORDER_COMBATANTS("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),

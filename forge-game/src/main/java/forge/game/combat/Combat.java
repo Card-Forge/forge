@@ -50,6 +50,7 @@ import java.util.Map.Entry;
  */
 public class Combat {
     private final Player playerWhoAttacks;
+    private boolean legacyOrderCombatants;
     private AttackConstraints attackConstraints;
     // Defenders, as they are attacked by hostile forces
     private final FCollection<GameEntity> attackableEntries = new FCollection<>();
@@ -58,8 +59,8 @@ public class Combat {
     private final Multimap<GameEntity, AttackingBand> attackedByBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
     private final Multimap<AttackingBand, Card> blockedBands = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
 
-    private Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
-    private Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
+    private final Map<Card, CardCollection> attackersOrderedForDamageAssignment = Maps.newHashMap();
+    private final Map<Card, CardCollection> blockersOrderedForDamageAssignment = Maps.newHashMap();
     private CardCollection lkiCache = new CardCollection();
     private CardDamageMap damageMap = new CardDamageMap();
 
@@ -68,6 +69,7 @@ public class Combat {
 
     public Combat(final Player attacker) {
         playerWhoAttacks = attacker;
+        legacyOrderCombatants = playerWhoAttacks.getGame().getRules().hasOrderCombatants();
         initConstraints();
     }
 
@@ -481,7 +483,7 @@ public class Combat {
 
     /** If there are multiple blockers, the Attacker declares the Assignment Order */
     public void orderBlockersForDamageAssignment(Card attacker, CardCollection blockers) { // this method performs controller's role
-        if (blockers.size() <= 1) {
+        if (blockers.size() <= 1 || !this.legacyOrderCombatants) {
             blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blockers));
             return;
         }
@@ -518,10 +520,13 @@ public class Combat {
         final CardCollection oldBlockers = blockersOrderedForDamageAssignment.get(attacker);
     	if (oldBlockers == null || oldBlockers.isEmpty()) {
    			blockersOrderedForDamageAssignment.put(attacker, new CardCollection(blocker));
-    	} else {
-    		CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
+    	} else if (this.legacyOrderCombatants) {
+            CardCollection orderedBlockers = playerWhoAttacks.getController().orderBlocker(attacker, blocker, oldBlockers);
             blockersOrderedForDamageAssignment.put(attacker, orderedBlockers);
-    	}
+    	} else {
+            oldBlockers.add(blocker);
+            blockersOrderedForDamageAssignment.put(attacker, oldBlockers);
+        }
     }
 
     public void orderAttackersForDamageAssignment() { // this method performs controller's role
@@ -536,7 +541,7 @@ public class Combat {
         // They need a reverse map here: Blocker => List<Attacker>
 
         Player blockerCtrl = blocker.getController();
-        CardCollection orderedAttacker = attackers.size() <= 1 ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
+        CardCollection orderedAttacker = attackers.size() <= 1 || !this.legacyOrderCombatants ? attackers : blockerCtrl.getController().orderAttackers(blocker, attackers);
 
         // Damage Ordering needs to take cards like Melee into account, is that happening?
         attackersOrderedForDamageAssignment.put(blocker, orderedAttacker);
@@ -858,7 +863,7 @@ public class Combat {
                 } // No damage happens if blocked but no blockers left
             } else {
                 Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(attacker, orderedBlockers, attackers,
-                        damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer);
+                        damageDealt, defender, divideCombatDamageAsChoose || getAttackingPlayer() != assigningPlayer || !this.legacyOrderCombatants);
 
                 attackers.remove(attacker);
                 // player wants to assign another first
