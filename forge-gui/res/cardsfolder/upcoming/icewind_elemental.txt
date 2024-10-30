@@ -1,0 +1,9 @@
+Name:Icewind Elemental
+ManaCost:4 U
+Types:Creature Elemental
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+Oracle:Flying\nWhen this creature enters, draw a card, then discard a card.
