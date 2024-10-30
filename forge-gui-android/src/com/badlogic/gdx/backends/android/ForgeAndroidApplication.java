@@ -31,9 +31,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.backends.android.keyboardheight.AndroidRKeyboardHeightProvider;
+/*import com.badlogic.gdx.backends.android.keyboardheight.AndroidRKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
-import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
+import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;*/
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
 import com.badlogic.gdx.utils.*;
 
@@ -63,7 +63,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 	protected boolean useImmersiveMode = false;
 	private int wasFocusChanged = -1;
 	private boolean isWaitingForAudio = false;
-	private KeyboardHeightProvider keyboardHeightProvider;
+	//private KeyboardHeightProvider keyboardHeightProvider;
 
 	protected boolean renderUnderCutout = false;
 
@@ -181,11 +181,11 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 		setLayoutInDisplayCutoutMode(this.renderUnderCutout);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+		/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			keyboardHeightProvider = new AndroidRKeyboardHeightProvider(this);
 		} else {
 			keyboardHeightProvider = new StandardKeyboardHeightProvider(this);
-		}
+		}*/
 	}
 
 	protected FrameLayout.LayoutParams createLayoutParams () {
@@ -260,7 +260,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		graphics.onPauseGLSurfaceView();
 
 		super.onPause();
-		keyboardHeightProvider.setKeyboardHeightObserver(null);
+		//keyboardHeightProvider.setKeyboardHeightObserver(null);
 	}
 
 	@Override
@@ -289,19 +289,19 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 			this.isWaitingForAudio = false;
 		}
 		super.onResume();
-		keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
+		/*keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
 		((AndroidGraphics)getGraphics()).getView().post(new Runnable() {
 			@Override
 			public void run () {
 				keyboardHeightProvider.start();
 			}
-		});
+		});*/
 	}
 
 	@Override
 	protected void onDestroy () {
 		super.onDestroy();
-		keyboardHeightProvider.close();
+		//keyboardHeightProvider.close();
 	}
 
 	@Override
@@ -528,7 +528,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		return new DefaultAndroidFiles(this.getAssets(), this, true);
 	}
 
-	public KeyboardHeightProvider getKeyboardHeightProvider () {
+	/*public KeyboardHeightProvider getKeyboardHeightProvider () {
 		return keyboardHeightProvider;
-	}
+	}*/
 }
