@@ -157,6 +157,10 @@ public enum CounterEnumType {
 
     FEATHER("FTHR", 195, 202, 165),
 
+    FEEDING("FEED", 245, 21, 5),
+
+    FELLOWSHIP("FLWS", 255, 255, 255),
+
     FETCH("FETCH", 180, 235, 52),
 
     FILIBUSTER("FLBTR", 255, 179, 119),
