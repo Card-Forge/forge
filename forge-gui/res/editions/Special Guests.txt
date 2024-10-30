@@ -85,5 +85,13 @@ ScryfallCode=SPG
 71 M Unholy Heat @Josh Hass
 72 M Collected Company @Borja Pindado
 73 M Noxious Revival @Javier Charro
+74 M Condemn
+75 M Sphinx's Tutelage
+76 M Grim Tutor
 77 M Embercleave @Wylie Beckert
+78 M Goblin Bushwhacker
+79 M Bloom Tender
+80 M Paradise Druid
+81 M Akroma's Memorial
 82 M Temporal Manipulation @Raita Kazama
+83 M Fiend Artisan
