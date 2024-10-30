@@ -42,7 +42,7 @@ import com.badlogic.gdx.utils.*;
  * configuration for the GLSurfaceView.
  *
  * @author mzechner */
-public class ForgeAndroidApplication extends Activity implements AndroidApplicationBase {
+public class AndroidApplication extends Activity implements AndroidApplicationBase {
 
 	protected AndroidGraphics graphics;
 	protected AndroidInput input;
@@ -385,7 +385,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		handler.post(new Runnable() {
 			@Override
 			public void run () {
-				ForgeAndroidApplication.this.finish();
+				AndroidApplication.this.finish();
 			}
 		});
 	}
