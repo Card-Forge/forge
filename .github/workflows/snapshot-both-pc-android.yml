@@ -40,7 +40,7 @@ jobs:
       - name: Configure Git User
         run: |
           git config user.email "actions@github.com"
-          git config user.name "GitHub Actions
+          git config user.name "GitHub Actions"
 
       - name: Install old maven (3.8.1)
         run: |
