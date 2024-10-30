@@ -112,15 +112,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
-      #- name: 📂 Sync files
-      #  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      #  with:
-      #    server: ftp.cardforge.org
-      #    username: ${{ secrets.FTP_USERNAME }}
-      #    password: ${{ secrets.FTP_PASSWORD }}
-      #    local-dir: izpack/
-      #    server-dir: downloads/dailysnapshots/
-      #    exclude: |
-      #      *.pom
-      #      *.repositories
-      #      *.xml
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.cardforge.org
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: izpack/
+          server-dir: downloads/dailysnapshots/
+          exclude: |
+            *.pom
+            *.repositories
+            *.xml
