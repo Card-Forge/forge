@@ -51,7 +51,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Version;
-import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.badlogic.gdx.backends.android.ForgeAndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidAudio;
 import com.badlogic.gdx.backends.android.AsynchronousAndroidAudio;
@@ -73,7 +73,7 @@ import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Main extends AndroidApplication {
+public class Main extends ForgeAndroidApplication {
     private AndroidAdapter Gadapter;
     private ArrayList<String> gamepads;
     private AndroidClipboard androidClipboard;
