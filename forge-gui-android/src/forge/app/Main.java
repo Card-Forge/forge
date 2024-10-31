@@ -170,7 +170,7 @@ public class Main extends AndroidApplication {
     }
 
     private void crossfade(View contentView, View previousView) {
-        activeView = contentView;
+         activeView = contentView;
         // Set the content view to 0% opacity but visible, so that it is visible
         // (but fully transparent) during the animation.
         contentView.setAlpha(0f);
@@ -178,25 +178,18 @@ public class Main extends AndroidApplication {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         addContentView(contentView, params);
 
-        // Animate the content view to 100% opacity, and clear any animation
-        // listener set on the view.
-        contentView.animate()
-                .alpha(1f)
-                .setDuration(mShortAnimationDuration)
-                .setListener(null);
-
-        // Animate the loading view to 0% opacity. After the animation ends,
-        // set its visibility to GONE as an optimization step (it won't
-        // participate in layout passes, etc.)
-        previousView.animate()
-                .alpha(0f)
-                .setDuration(mShortAnimationDuration)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        previousView.setVisibility(View.GONE);
-                    }
-                });
+        Animator ac = ObjectAnimator.ofFloat(contentView, "alpha", 0f, 1f).setDuration(mShortAnimationDuration);
+        Animator ap = ObjectAnimator.ofFloat(previousView, "alpha", 1f, 0f).setDuration(mShortAnimationDuration);
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(ac, ap);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                previousView.setVisibility(View.GONE);
+            }
+        });
+        animatorSet.start();
     }
 
     private static boolean isTabletDevice(Context activityContext) {
