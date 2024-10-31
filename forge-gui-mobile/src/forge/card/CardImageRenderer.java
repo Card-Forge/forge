@@ -676,7 +676,7 @@ public class CardImageRenderer {
                     if (cv == null || isFaceDown)
                         cv = card;
                     CardStateView csv = cv.getState(true);
-                    text = cv.getText(csv, needTranslation ? CardTranslation.getTranslationTexts(csv) : null);
+                    text = cv.getText(csv, needTranslation && csv != null ? CardTranslation.getTranslationTexts(csv) : null);
 
                 } else {
                     text = !card.isSplitCard() ?
