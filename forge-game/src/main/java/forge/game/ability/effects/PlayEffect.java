@@ -410,6 +410,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     }
                 }
                 if (!optional) {
+                    // TODO this doesn't work yet for cases where one choice would still be payable, e.g. Lightning Axe
                     tgtSA.getPayCosts().setMandatory(true);
                 }
             }

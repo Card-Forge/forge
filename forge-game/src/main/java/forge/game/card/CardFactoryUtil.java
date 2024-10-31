@@ -1871,10 +1871,10 @@ public class CardFactoryUtil {
             StringBuilder playTrig = new StringBuilder();
 
             playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True");
-            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
+            playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may play it without paying its mana cost if able.  ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
-            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True";
+            String abPlay = "DB$ Play | Defined$ Self | WithoutManaCost$ True | Optional$ True";
             if (card.isPermanent()) {
                 abPlay += "| RememberPlayed$ True";
             }
