@@ -62,30 +62,30 @@ ScryfallCode=J25
 54 R Shroofus Sproutsire @Yukihiro Maruo
 55 R Slinza, the Spiked Stampede @Ishikawa Kenta
 56 U Sutina, Speaker of the Tajuru @Canata Katana
-57 R Adeline, Resplendent Cathar
+57 R Adeline, Resplendent Cathar @Susumu Kuroi
 58 M Brimaz, King of Oreskos @Moopic
-59 U Danitha Capashen, Paragon
-60 R Giada, Font of Hope
-61 R Naban, Dean of Iteration
+59 U Danitha Capashen, Paragon @Kuregure
+60 R Giada, Font of Hope @Hisashi Momose
+61 R Naban, Dean of Iteration @Susumu Kuroi
 62 R Padeem, Consul of Innovation @Moopic
-63 R Sai, Master Thopterist
-64 U Syr Elenora, the Discerning
+63 R Sai, Master Thopterist @Dai-XT
+64 U Syr Elenora, the Discerning @Mai Okuma
 65 R Thryx, the Sudden Storm @Moopic
-66 R Venser, Shaper Savant
-67 R Gorex, the Tombshell
-68 R Isareth the Awakener
-69 R Taborax, Hope's Demise
+66 R Venser, Shaper Savant @BODAX
+67 R Gorex, the Tombshell @Yukihiro Maruo
+68 R Isareth the Awakener @Hisashi Momose
+69 R Taborax, Hope's Demise @Takeuchi Moto
 70 R Vilis, Broker of Blood @Takeuchi Moto
-71 R Vito, Thorn of the Dusk Rose
-72 U Brothers Yamazaki
-73 U Brothers Yamazaki
-74 R Lathliss, Dragon Queen
-75 R Rionya, Fire Dancer
-76 R Zada, Hedron Grinder
-77 R Ghalta, Primal Hunger
-78 M Kodama of the West Tree
-79 U Mowu, Loyal Companion
-80 R Averna, the Chaos Bloom
+71 R Vito, Thorn of the Dusk Rose @Susumu Kuroi
+72 U Brothers Yamazaki @Dai-XT
+73 U Brothers Yamazaki @Dai-XT
+74 R Lathliss, Dragon Queen @M.Matsumoto
+75 R Rionya, Fire Dancer @Taranboman
+76 R Zada, Hedron Grinder @Takotto
+77 R Ghalta, Primal Hunger @Kemonomichi
+78 M Kodama of the West Tree @Dai-XT
+79 U Mowu, Loyal Companion @Ishikawa Kenta
+80 R Averna, the Chaos Bloom @Ryuichi Sakuma
 81 L Plains @Sam Burley
 82 L Plains @Dimitar Marinski
 83 L Plains @Raoul Vitale
@@ -105,7 +105,7 @@ ScryfallCode=J25
 97 C Celestial Unicorn @Alessandra Pisano
 98 U Dauntless Onslaught @Jesper Ejsing
 99 U Mentor of the Meek @Lie Setiawan
-100 U Plate Armor
+100 U Plate Armor @Martina Pilcerova
 101 C Raise the Alarm @Slawomir Maniak
 102 R Speaker of the Heavens @Cristi Balanescu
 103 C Steadfast Unicorn @Leesha Hannigan
@@ -118,7 +118,7 @@ ScryfallCode=J25
 110 U Sudden Insight @Danny Schwartz
 111 C Uncomfortable Chill @Andrew Mar
 112 U Bonecaller Cleric @Néstor Ossandón Leal
-113 C Dark Bargain
+113 C Dark Bargain @Kai Carpenter
 114 M Dark Confidant @Victor Adame Minguez
 115 C Deadly Dispute @Cristi Balanescu
 116 C Eaten Alive @Warren Mahy
@@ -149,7 +149,7 @@ ScryfallCode=J25
 141 C Seize the Spoils @Brian Valeza
 142 U Volley Veteran @Olivier Bernard
 143 R Zealous Conscripts @Billy Christian
-144 U Biogenic Upgrade
+144 U Biogenic Upgrade @Kev Fang
 145 C Elvish Visionary @Quintin Gleim
 146 C Explore @Borja Pindado
 147 R Forgotten Ancient @Andrew Mar
@@ -200,10 +200,10 @@ ScryfallCode=J25
 192 C Dreadful Apathy @Mark Zug
 193 C Elite Skirmisher @Mark Winters
 194 C Expedition Raptor @Johann Bodin
-195 C Faith's Fetters
+195 C Faith's Fetters @Kev Walker
 196 U Favored Hoplite @Winona Nelson
 197 U Favored of Iroas @John Severin Brassell
-198 M Felidar Sovereign
+198 M Felidar Sovereign @Zoltan Boros & Gabor Szikszai
 199 U Fencing Ace @David Rapoza
 200 C Flutterfox @Lucas Graciano
 201 C Gavony Silversmith @Volkan Baǵa
@@ -212,8 +212,8 @@ ScryfallCode=J25
 204 M Godsend @Daniel Ljunggren
 205 C Golden-Tail Disciple @Jesper Ejsing
 206 U Herald of the Sun @Micah Epstein
-207 C Herald of War
-208 U Hexgold Hoverwings
+207 R Herald of War @Eric Deschamps
+208 U Hexgold Hoverwings @Kai Carpenter
 209 C Impeccable Timing @Chris Rallis
 210 C Indomitable Will @Micah Epstein
 211 U Ingenious Leonin @Eric Deschamps
@@ -236,7 +236,7 @@ ScryfallCode=J25
 228 C Moment of Heroism @Christopher Moeller
 229 C Moment of Triumph @Steven Belledin
 230 R Nykthos Paragon @Martina Pilcerova
-231 U Nyx-Fleece Ram
+231 U Nyx-Fleece Ram @Hasani Claxton
 232 M Ojutai Exemplars @Willian Murai
 233 C Outflank @Victor Adame Minguez
 234 C Pacifism @Jesper Ejsing
@@ -257,7 +257,7 @@ ScryfallCode=J25
 249 C Savannah Lions @Winona Nelson
 250 C Search Party Captain @Mike Bierek
 251 U Serra Angel @Greg Staples
-252 U Serra's Embrace
+252 U Serra's Embrace @Zoltan Boros & Gabor Szikszai
 253 U Shield Mare @Lucas Graciano
 254 C Shoulder to Shoulder @Chris Rallis
 255 C Speakeasy Server @Scott Murphy
@@ -275,7 +275,7 @@ ScryfallCode=J25
 267 C Sunmane Pegasus @John Severin Brassell
 268 C Sunspear Shikari @Samuel Perin
 269 C Swift Response @Deruchenko Alexander
-270 C Take Up the Shield
+270 C Take Up the Shield @Manuel Castañón
 271 C Tethmos High Priest @Mark Zug
 272 U Thopter Architect @Michal Ivan
 273 C Triplicate Spirits @Izzy
@@ -289,7 +289,7 @@ ScryfallCode=J25
 281 C Academy Journeymage @Magali Villeneuve
 282 C Aerial Guide @Sidharth Chaturvedi
 283 R Aether Channeler @Caio Monteiro
-284 U Air Elemental
+284 U Air Elemental @Kev Walker
 285 C Archaeomancer @Zoltan Boros
 286 U Augur of Bolas @Alex Konstad
 287 C Aven Reedstalker @Scott Murphy
@@ -299,7 +299,7 @@ ScryfallCode=J25
 291 U Brineborn Cutthroat @Caio Monteiro
 292 C Bury in Books @Zoltan Boros
 293 R Cackling Counterpart @David Rapoza
-294 C Capture Sphere
+294 C Capture Sphere @Mark Behm
 295 C Cartouche of Knowledge @Kieran Yanner
 296 M Cavalier of Gales @Viktor Titov
 297 C Chilling Trap @Johann Bodin
@@ -312,7 +312,7 @@ ScryfallCode=J25
 304 C Deep Analysis @Jesper Ejsing
 305 C Draugr Thought-Thief @Dan Murayama Scott
 306 U Exclusion Mage @Chris Seaman
-307 C Expedition Diviner
+307 C Expedition Diviner @Heonhwa Choe
 308 C Expendable Lackey @Randy Gallegos
 309 U Experimental Aviator @Jesper Ejsing
 310 U Fading Hope @Rovina Cai
@@ -344,7 +344,7 @@ ScryfallCode=J25
 336 C Omen of the Sea @Piotr Dura
 337 U Oneirophage @Martina Pilcerova
 338 U Opportunity @Allen Williams
-339 C Opt
+339 C Opt @Craig J Spearing
 340 C Organ Hoarder @Nicholas Gregory
 341 M Overflowing Insight @Lucas Graciano
 342 C Owl Familiar @Janine Johnston
@@ -364,7 +364,7 @@ ScryfallCode=J25
 357 U Sigiled Starfish @Nils Hamm
 358 C Silent Departure @John Avon
 359 C Sky-Eel School @Daniel Ljunggren
-360 C Slimebind
+360 C Slimebind @Mark Behm
 361 C Smoke Shroud @Micah Epstein
 362 C Soul Read @Drew Tucker
 363 U Spectral Sailor @Cristi Balanescu
@@ -427,7 +427,7 @@ ScryfallCode=J25
 420 C Defenestrate @Darek Zabrocki
 421 C Devouring Swarm @Wayne England
 422 C Dire Fleet Hoarder @Deruchenko Alexander
-423 C Diregraf Scavenger
+423 C Diregraf Scavenger @Manuel Castañón
 424 C Disfigure @Svetlin Velinov
 425 C Doomed Dissenter @Campbell White
 426 R Doomed Necromancer @Volkan Baǵa
@@ -544,7 +544,7 @@ ScryfallCode=J25
 537 U Dragon Whelp @Jokubas Uogintas
 538 U Dragonlord's Servant @Steve Prescott
 539 R Dreadhorde Arcanist @G-host Lee
-540 C Emberhorn Minotaur
+540 C Emberhorn Minotaur @Viktor Titov
 541 C Expedition Champion @Bram Sels
 542 C Falkenrath Celebrants @Anna Steinbauer
 543 R Falkenrath Marauders @James Ryman
@@ -571,14 +571,14 @@ ScryfallCode=J25
 564 U Incorrigible Youths @Winona Nelson
 565 C Infuriate @Caio Monteiro
 566 C Insolent Neonate @Deruchenko Alexander
-567 U Invigorated Rampage
+567 U Invigorated Rampage @Craig J Spearing
 568 C Jaya's Firenado @Jeremy Wilson
 569 R Kargan Intimidator @Kieran Yanner
 570 C Keldon Raider @Chris Seaman
-571 C Kindled Fury
+571 C Kindled Fury @Craig J Spearing
 572 R Krenko, Tin Street Kingpin @Viko Menezes
 573 C Kruin Striker @Christopher Moeller
-574 R Markov Blademaster
+574 R Markov Blademaster @Jana Schirmer
 575 R Markov Enforcer @Wisnu Tan
 576 U Markov Retribution @Uriah Voth
 577 U Markov Warlord @Cynthia Sheppard
@@ -637,7 +637,7 @@ ScryfallCode=J25
 630 C Armored Kincaller @John Tedrick
 631 U Audacity @Rudy Siswanto
 632 C Baloth Gorger @Zezhou Chen
-633 U Baloth Woodcrasher
+633 U Baloth Woodcrasher @Zoltan Boros & Gabor Szikszai
 634 C Band Together @Josh Hass
 635 C Big Play @Nicholas Gregory
 636 C Bite Down @Kitt Lapeña
@@ -649,7 +649,7 @@ ScryfallCode=J25
 642 C Byway Courier @Zoltan Boros
 643 C Canopy Baloth @Filip Burburan
 644 U Cherished Hatchling @Sam Rowan
-645 U Clear Shot
+645 U Clear Shot @Craig J Spearing
 646 C Colossal Dreadmaw @Jesper Ejsing
 647 C Commune with Dinosaurs @Jonathan Kuo
 648 C Deepwood Denizen @Josu Hernaiz
@@ -685,7 +685,7 @@ ScryfallCode=J25
 678 C Jungle Delver @Kieran Yanner
 679 C Kazandu Nectarpot @Simon Dominic
 680 C Kazandu Stomper @Sam Rowan
-681 U Krosan Tusker
+681 U Krosan Tusker @Kev Walker
 682 C Kujar Seedsculptor @Anna Steinbauer
 683 R Leaf-Crowned Visionary @Anna Steinbauer
 684 C Llanowar Visionary @Cristi Balanescu
@@ -700,7 +700,7 @@ ScryfallCode=J25
 693 R Oran-Rief Ooze @Daarken
 694 C Orchard Strider @Raoul Vitale
 695 U Orochi Merge-Keeper @Brent Hollowell
-696 U Overcome
+696 U Overcome @Craig J Spearing
 697 U Overwhelm @Wayne Reynolds
 698 U Paradise Druid @Nils Hamm
 699 C Predator's Strike @Tony Szczudlo
@@ -718,7 +718,7 @@ ScryfallCode=J25
 711 C Servant of the Scale @Winona Nelson
 712 U Skyclave Pick-Axe @Dan Murayama Scott
 713 C Snakeskin Veil @Matt Stewart
-714 C Snapping Gnarlid
+714 C Snapping Gnarlid @Kev Walker
 715 R Somberwald Beastmaster @Marta Nael
 716 C Spore Crawler @Nicholas Gregory
 717 U Spore Swarm @Mathias Kollros
@@ -747,13 +747,13 @@ ScryfallCode=J25
 740 U Wolfrider's Saddle @Raoul Vitale
 741 U Woodland Champion @Randy Vargas
 742 U Bituminous Blast @Raymond Swanland
-743 U Bloodbraid Elf
+743 U Bloodbraid Elf @Raymond Swanland
 744 U Enlisted Wurm @Steve Prescott
 745 U Fusion Elemental @Michael Komarck
 746 C Violent Outburst @Richard Whitters
 747 U Chief of the Foundry @Daniel Ljunggren
 748 C Cliffhaven Kitesail @Caroline Gariba
-749 C Eager Construct
+749 C Eager Construct @Craig J Spearing
 750 U Fireshrieker @Christopher Moeller
 751 C Gingerbrute @Carlos Palma Cruchaga
 752 U Gorgon Flail @Lars Grant-West
@@ -780,7 +780,7 @@ ScryfallCode=J25
 773 C Seat of the Synod @John Avon
 774 U Secluded Steppe @Heather Hudson
 775 C Thriving Bluff @Johannes Voss
-776 C Thriving Grove
+776 C Thriving Grove @Ravenna Tran
 777 C Thriving Heath @Alayna Danner
 778 C Thriving Isle @Jonas De Ro
 779 C Thriving Moor @Titus Lunter
