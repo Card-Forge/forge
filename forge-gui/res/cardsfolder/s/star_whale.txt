@@ -6,4 +6,4 @@ K:Flying
 K:Vigilance
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Ward:2 | Description$ Other creatures you control have ward {2}.
 K:Suspend:6:1 U
-Oracle:Flying, vigilance\nOther creatures you control have ward {2}.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
+Oracle:Flying, vigilance\nOther creatures you control have ward {2}.\nSuspend 6—{1}{U} (Rather than cast this card from your hand, you may pay {1}{U} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)
