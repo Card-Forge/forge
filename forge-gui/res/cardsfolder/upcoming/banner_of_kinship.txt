@@ -1,0 +1,12 @@
+Name:Banner of Kinship
+ManaCost:5
+Types:Artifact
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ ChooseCT | ReplacementResult$ Updated | Description$ As this artifact enters, choose a creature type. This artifact enters with a fellowship counter on it for each creature you control of the chosen type.
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck | SubAbility$ DBCounters
+SVar:DBCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ FELLOWSHIP | CounterNum$ X
+S:Mode$ Continuous | Affected$ Creature.ChosenType+YouCtrl | AddPower$ Y | AddToughness$ Y | Description$ Creatures you control of the chosen type get +1/+1 for each fellowship counter on this artifact.
+SVar:X:Count$Valid Creature.ChosenType+YouCtrl
+SVar:Y:Count$CardCounters.FELLOWSHIP
+SVar:BuffedBy:Creature
+AI:RemoveDeck:Random
+Oracle:As this artifact enters, choose a creature type. This artifact enters with a fellowship counter on it for each creature you control of the chosen type.\nCreatures you control of the chosen type get +1/+1 for each fellowship counter on this artifact.
