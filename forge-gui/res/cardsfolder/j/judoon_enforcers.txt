@@ -5,4 +5,4 @@ PT:8/8
 K:Trample
 S:Mode$ AttackRestrict | MaxAttackers$ 1 | ValidDefender$ You | Description$ No more than one creature can attack you each combat.
 K:Suspend:6:1 R W
-Oracle:Trample\nNo more than one creature can attack you each combat.\nSuspend 6—{1}{R}{W} (Rather than cast this card from your hand, you may pay {1}{R}{W} and exile it with six time counters on it. At the beginning of your upkeep, remove time counter. When the last is removed, cast it without paying its mana cost. It has haste.)
+Oracle:Trample\nNo more than one creature can attack you each combat.\nSuspend 6—{1}{R}{W} (Rather than cast this card from your hand, you may pay {1}{R}{W} and exile it with six time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost. It has haste.)
