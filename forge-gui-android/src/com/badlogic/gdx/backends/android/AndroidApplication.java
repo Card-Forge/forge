@@ -31,18 +31,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import com.badlogic.gdx.*;
-/*import com.badlogic.gdx.backends.android.keyboardheight.AndroidRKeyboardHeightProvider;
+import com.badlogic.gdx.backends.android.keyboardheight.AndroidRKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.keyboardheight.KeyboardHeightProvider;
-import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;*/
+import com.badlogic.gdx.backends.android.keyboardheight.StandardKeyboardHeightProvider;
 import com.badlogic.gdx.backends.android.surfaceview.FillResolutionStrategy;
 import com.badlogic.gdx.utils.*;
 
-/** A modified implementation of the {@link Application} interface for Android - Forge app. Create an {@link Activity} that derives from this class.
+/** An implementation of the {@link Application} interface for Android. Create an {@link Activity} that derives from this class.
  * In the {@link Activity#onCreate(Bundle)} method call the {@link #initialize(ApplicationListener)} method specifying the
  * configuration for the GLSurfaceView.
  *
  * @author mzechner */
-public class ForgeAndroidApplication extends Activity implements AndroidApplicationBase {
+public class AndroidApplication extends Activity implements AndroidApplicationBase {
 
 	protected AndroidGraphics graphics;
 	protected AndroidInput input;
@@ -56,14 +56,14 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 	protected final Array<Runnable> runnables = new Array<Runnable>();
 	protected final Array<Runnable> executedRunnables = new Array<Runnable>();
 	protected final SnapshotArray<LifecycleListener> lifecycleListeners = new SnapshotArray<LifecycleListener>(
-		LifecycleListener.class);
+			LifecycleListener.class);
 	private final Array<AndroidEventListener> androidEventListeners = new Array<AndroidEventListener>();
 	protected int logLevel = LOG_INFO;
 	protected ApplicationLogger applicationLogger;
 	protected boolean useImmersiveMode = false;
 	private int wasFocusChanged = -1;
 	private boolean isWaitingForAudio = false;
-	//private KeyboardHeightProvider keyboardHeightProvider;
+	private KeyboardHeightProvider keyboardHeightProvider;
 
 	protected boolean renderUnderCutout = false;
 
@@ -121,7 +121,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		config.nativeLoader.load();
 		setApplicationLogger(new AndroidApplicationLogger());
 		graphics = new AndroidGraphics(this, config,
-			config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
+				config.resolutionStrategy == null ? new FillResolutionStrategy() : config.resolutionStrategy);
 		input = createInput(this, this, graphics.view, config);
 		audio = createAudio(this, config);
 		files = createFiles();
@@ -171,26 +171,26 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 		createWakeLock(config.useWakelock);
 		useImmersiveMode(this.useImmersiveMode);
-		/*if (this.useImmersiveMode) {
+		if (this.useImmersiveMode) {
 			AndroidVisibilityListener vlistener = new AndroidVisibilityListener();
 			vlistener.createListener(this);
-		}*/
+		}
 
 		// detect an already connected bluetooth keyboardAvailable
 		if (getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS) input.setKeyboardAvailable(true);
 
 		setLayoutInDisplayCutoutMode(this.renderUnderCutout);
 
-		/*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 			keyboardHeightProvider = new AndroidRKeyboardHeightProvider(this);
 		} else {
 			keyboardHeightProvider = new StandardKeyboardHeightProvider(this);
-		}*/
+		}
 	}
 
 	protected FrameLayout.LayoutParams createLayoutParams () {
 		FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-			android.view.ViewGroup.LayoutParams.MATCH_PARENT);
+				android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 		layoutParams.gravity = Gravity.CENTER;
 		return layoutParams;
 	}
@@ -226,13 +226,13 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 
 	@Override
 	public void useImmersiveMode (boolean use) {
-		/*if (!use) return;
+		if (!use) return;
 
 		View view = getWindow().getDecorView();
 		int code = View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
 				| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN
 				| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-		view.setSystemUiVisibility(code);*/
+		view.setSystemUiVisibility(code);
 	}
 
 	@Override
@@ -260,7 +260,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		graphics.onPauseGLSurfaceView();
 
 		super.onPause();
-		//keyboardHeightProvider.setKeyboardHeightObserver(null);
+		keyboardHeightProvider.setKeyboardHeightObserver(null);
 	}
 
 	@Override
@@ -289,19 +289,19 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 			this.isWaitingForAudio = false;
 		}
 		super.onResume();
-		/*keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
+		keyboardHeightProvider.setKeyboardHeightObserver((DefaultAndroidInput)Gdx.input);
 		((AndroidGraphics)getGraphics()).getView().post(new Runnable() {
 			@Override
 			public void run () {
 				keyboardHeightProvider.start();
 			}
-		});*/
+		});
 	}
 
 	@Override
 	protected void onDestroy () {
 		super.onDestroy();
-		//keyboardHeightProvider.close();
+		keyboardHeightProvider.close();
 	}
 
 	@Override
@@ -385,7 +385,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		handler.post(new Runnable() {
 			@Override
 			public void run () {
-				ForgeAndroidApplication.this.finish();
+				AndroidApplication.this.finish();
 			}
 		});
 	}
@@ -528,7 +528,7 @@ public class ForgeAndroidApplication extends Activity implements AndroidApplicat
 		return new DefaultAndroidFiles(this.getAssets(), this, true);
 	}
 
-	/*public KeyboardHeightProvider getKeyboardHeightProvider () {
+	public KeyboardHeightProvider getKeyboardHeightProvider () {
 		return keyboardHeightProvider;
-	}*/
+	}
 }

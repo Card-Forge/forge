@@ -452,7 +452,7 @@
                                             </fileset>
                                         </copy>
                                         <copy todir="${project.build.directory}/res/res">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="build.txt" />
                                             </fileset>
                                         </copy>
@@ -513,7 +513,7 @@
                                             </fileset>
                                         </ftp>
                                         <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="version.txt" />
                                                 <include name="build.txt" />
                                             </fileset>
