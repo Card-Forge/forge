@@ -5,4 +5,5 @@ A:SP$ UntapAll | ValidCards$ Artifact | SpellDescription$ Untap all artifacts.
 K:Affinity:Artifact
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
+DeckHints:Type$Artifact
 Oracle:Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)\nUntap all artifacts.

@@ -9,5 +9,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddTr
 SVar:EndScream:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ BloodExile | Secondary$ True | TriggerDescription$ At the beginning of your end step, exile two cards from your graveyard.
 SVar:BloodExile:DB$ ChangeZone | Hidden$ True | Mandatory$ True | ChangeType$ Card.YouCtrl | ChangeNum$ 2 | DefinedPlayer$ You | Origin$ Graveyard | Destination$ Exile
 AI:RemoveDeck:Random
-DeckHints:Ability$Graveyard
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard|Mill
 Oracle:Flying\nAt the beginning of your upkeep, mill a card.\nThreshold — As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."

@@ -4,4 +4,5 @@ Types:Creature Phyrexian Human Rogue
 PT:1/1
 K:Infect
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+DeckHas:Ability$Counters
 Oracle:Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)\nBlighted Agent can't be blocked.

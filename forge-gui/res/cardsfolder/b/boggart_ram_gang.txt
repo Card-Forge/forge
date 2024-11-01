@@ -4,4 +4,5 @@ Types:Creature Goblin Warrior
 PT:3/3
 K:Haste
 K:Wither
+DeckHas:Ability$Counters
 Oracle:Haste\nWither (This deals damage to creatures in the form of -1/-1 counters.)

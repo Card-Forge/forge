@@ -8,6 +8,7 @@ T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidSource$ You | ValidCard$ Car
 SVar:TrigConvert:DB$ SetState | Mode$ Transform
 DeckHas:Ability$Counters & Keyword$Modular
 DeckHints:Type$Vehicle|Artifact
+DeckNeeds:Type$Artifact
 AlternateMode:DoubleFaced
 Oracle:More Than Meets the Eye {1}{R}{G} (You may cast this card converted for {1}{R}{G}.)\nOther nontoken artifact creatures and Vehicles you control have modular 1. (They enter with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)\nWhenever you put one or more +1/+1 counters on Blaster, convert it.
 
@@ -22,5 +23,4 @@ A:AB$ MoveCounter | Cost$ X T | Source$ Self | ValidTgts$ Artifact.Other | TgtPr
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Haste | SubAbility$ DBConvert | SpellDescription$ That artifact gains haste until end of turn.
 SVar:DBConvert:DB$ SetState | Mode$ Transform | ConditionPresent$ Card.Self+counters_EQ0_P1P1 | SpellDescription$ If NICKNAME has no +1/+1 counters on it, convert it.
 SVar:X:Count$xPaid
-DeckHas:Ability$Counters
 Oracle:Modular 3\n{X}, {T}: Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.
