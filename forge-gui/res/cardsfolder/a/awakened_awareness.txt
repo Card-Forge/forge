@@ -7,6 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigPutCounters:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | SetPower$ 1 | SetToughness$ 1 | Description$ As long as enchanted permanent is a creature, it has base power and toughness 1/1.
-DeckHints:Type$Artifact|Vehicle
 DeckHas:Ability$Counters
+DeckHints:Type$Artifact|Vehicle
 Oracle:Enchant artifact or creature\nWhen Awakened Awareness enters, put X +1/+1 counters on enchanted permanent.\nAs long as enchanted permanent is a creature, it has base power and toughness 1/1.

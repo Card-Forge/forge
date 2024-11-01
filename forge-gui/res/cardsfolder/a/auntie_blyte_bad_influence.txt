@@ -10,4 +10,5 @@ A:AB$ DealDamage | Cost$ 1 R T SubCounter<X/P1P1/NICKNAME> | ValidTgts$ Any | Nu
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
 Oracle:Flying\nWhenever a source you control deals damage to you, put that many +1/+1 counters on Auntie Blyte, Bad Influence.\n{1}{R}, {T}, Remove X +1/+1 counters from Auntie Blyte: It deals X damage to any target.

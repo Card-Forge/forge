@@ -9,4 +9,6 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AshlingNum:Count$ResolvedThisTurn
 SVar:X:Count$RememberedSize
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
 Oracle:{1}{R}: Put a +1/+1 counter on Ashling the Pilgrim. If this is the third time this ability has resolved this turn, remove all +1/+1 counters from Ashling the Pilgrim, and it deals that much damage to each creature and each player.

@@ -6,5 +6,5 @@ SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | IsCurse$ True | Counter
 SVar:DBToken:DB$ Token | TokenAmount$ OddResults | TokenScript$ storm_crow | SpellDescription$ For each odd result, create a 1/2 blue Bird creature token with flying named Storm Crow.
 SVar:X:Count$xPaid
 SVar:Y:SVar$EvenResults/Twice
-DeckHas:Ability$Counters|Token & Type$Bird
+DeckHas:Ability$Counters|Token
 Oracle:Choose target creature. Roll X six-sided dice. For each even result, put two -1/-1 counters on that creature. For each odd result, create a 1/2 blue Bird creature token with flying named Storm Crow.

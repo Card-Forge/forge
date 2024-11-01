@@ -8,4 +8,6 @@ SVar:DBPutCounters:DB$ PutCounter | ETB$ True | Defined$ Self | CounterType$ P1P
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
 Oracle:As Arsenal Thresher enters, you may reveal any number of other artifact cards from your hand. Arsenal Thresher enters with a +1/+1 counter on it for each card revealed this way.

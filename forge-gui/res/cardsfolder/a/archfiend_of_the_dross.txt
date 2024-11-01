@@ -11,4 +11,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
 Oracle:Flying\nArchfiend of the Dross enters with four oil counters on it.\nAt the beginning of your upkeep, remove an oil counter from Archfiend of the Dross. Then if it has no oil counters on it, you lose the game.\nWhenever a creature an opponent controls dies, its controller loses 2 life.
