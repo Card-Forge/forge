@@ -522,7 +522,7 @@ public final class GameActionUtil {
 
                         final Cost cost = new Cost(s, false);
                         newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
-                        newSA.setPayCosts(cost.add(sa.getPayCosts()));
+                        newSA.getPayCosts().add(cost);
                         if (newSA.canPlay()) {
                             abilities.add(newSA);
                         }

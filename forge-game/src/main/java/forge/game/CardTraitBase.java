@@ -550,7 +550,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         if (params.containsKey("ActivateNoLoyaltyAbilitiesCondition")) {
             final Player active = game.getPhaseHandler().getPlayerTurn();
-            return !active.getActivateLoyaltyAbilityThisTurn();
+            return !active.getActivateLoyaltyAbilityThisTurn(this);
         }
 
         if (params.containsKey("ClassLevel")) {

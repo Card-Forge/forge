@@ -546,9 +546,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isActivatedAbility() && sp.isPwAbility()) {
-            sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
-        }
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
         return si;
