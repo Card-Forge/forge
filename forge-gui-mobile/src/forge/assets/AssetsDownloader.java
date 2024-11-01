@@ -72,11 +72,7 @@ public class AssetsDownloader {
             final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
-                String version = "";
-                if (GuiBase.isAndroid())
-                    version = FileUtil.readFileToString(versionUrl);
-                else //instead of parsing xml from earlier releases, get the latest github release tag
-                    version = releaseTag.replace("forge-", "");
+                String version = isSnapshots ? FileUtil.readFileToString(versionUrl) : releaseTag.replace("forge-", "");
                 String filename = "";
                 String installerURL = "";
                 if (GuiBase.isAndroid()) {
@@ -121,7 +117,8 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
-                    message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
+                    if (isSnapshots) // this is for snaps initial info
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
                         if (!GuiBase.isAndroid())
