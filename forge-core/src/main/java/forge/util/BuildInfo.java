@@ -76,8 +76,8 @@ public class BuildInfo {
         if (getTimestamp() == null)
             return false;
         // System.err.println("Update Timestamp: " + updateTimestamp + "\nBuild Timestamp: " + getTimestamp());
-        // if morethan 12 hours the difference, then allow to update.
-        return DateUtil.getElapsedHours(getTimestamp(), updateTimestamp) > 12;
+        // if morethan 23 hours the difference, then allow to update.
+        return DateUtil.getElapsedHours(getTimestamp(), updateTimestamp) > 23;
     }
 
     public static String getUserAgent() {
