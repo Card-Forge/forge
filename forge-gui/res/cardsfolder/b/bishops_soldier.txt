@@ -3,4 +3,5 @@ ManaCost:1 W
 Types:Creature Vampire Soldier
 PT:2/2
 K:Lifelink
+DeckHas:Ability$LifeGain
 Oracle:Lifelink

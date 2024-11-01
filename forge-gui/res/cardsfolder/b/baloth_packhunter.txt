@@ -5,6 +5,6 @@ PT:3/3
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters, put two +1/+1 counters on each other creature you control named Baloth Packhunter.
 SVar:TrigPutCounters:DB$ PutCounterAll | ValidCards$ Creature.StrictlyOther+namedBaloth Packhunter | CounterType$ P1P1 | CounterNum$ 2
-DeckHints:Name$Baloth Packhunter
 DeckHas:Ability$Counters
+DeckHints:Name$Baloth Packhunter
 Oracle:Trample\nWhen Baloth Packhunter enters, put two +1/+1 counters on each other creature you control named Baloth Packhunter.

@@ -4,4 +4,5 @@ Types:Creature Phyrexian Goblin Zombie
 PT:2/1
 K:Haste
 K:Infect
+DeckHas:Ability$Counters
 Oracle:Haste\nInfect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)

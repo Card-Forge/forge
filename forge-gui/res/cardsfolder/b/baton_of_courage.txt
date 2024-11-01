@@ -7,5 +7,6 @@ A:AB$ Pump | Cost$ SubCounter<1/CHARGE> | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:NeedsToPlayVar:Z GE1
 SVar:Z:Count$UniqueManaColorsProduced.ByUntappedSources
 AI:RemoveDeck:Random
-DeckHints:Ability$Proliferate
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters|Proliferate
 Oracle:Flash\nSunburst (This enters with a charge counter on it for each color of mana spent to cast it.)\nRemove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.

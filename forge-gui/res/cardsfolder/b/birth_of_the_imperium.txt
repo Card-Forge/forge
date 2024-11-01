@@ -7,5 +7,5 @@ SVar:X:PlayerCountOpponents$Amount
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SacMessage$ creature | SpellDescription$ Each opponent sacrifices a creature.
 SVar:DBDraw:DB$ Draw | NumCards$ Y | NumCardsDesc$ two cards for each opponent who controls fewer creatures than you | SpellDescription$ Draw two cards for each opponent who controls fewer creatures than you.
 SVar:Y:PlayerCountOpponents$HasPropertyhasFewerCreaturesInPlayThanYou/Times.2
-DeckHas:Ability$Token & Type$Astartes|Warrior
+DeckHas:Ability$Token
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create a 2/2 white Astartes Warrior creature token with vigilance for each opponent you have.\nII — Each opponent sacrifices a creature.\nIII — Draw two cards for each opponent who controls fewer creatures than you.

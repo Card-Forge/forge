@@ -2,7 +2,7 @@ Name:Besotted Knight
 ManaCost:3 W
 Types:Creature Human Knight
 PT:3/3
-DeckHas:Ability$Token & Type$Aura|Enchantment|Role
+DeckHas:Ability$Token
 AlternateMode:Adventure
 Oracle:
 

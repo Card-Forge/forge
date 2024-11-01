@@ -4,4 +4,5 @@ Types:Creature Human Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 4/4 green Bear creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_bear | TokenOwner$ You
+DeckHas:Ability$Token
 Oracle:When Bear's Companion enters, create a 4/4 green Bear creature token.
