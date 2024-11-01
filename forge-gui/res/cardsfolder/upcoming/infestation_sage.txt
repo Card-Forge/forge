@@ -1,0 +1,8 @@
+Name:Infestation Sage
+ManaCost:B
+Types:Creature Elf Warlock
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a 1/1 black and green Insect token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ bg_1_1_insect_flying | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When this creature dies, create a 1/1 black and green Insect token with flying.

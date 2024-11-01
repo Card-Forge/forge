@@ -1,0 +1,7 @@
+Name:Bigfin Bouncer
+ManaCost:3 U
+Types:Creature Shark Pirate
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, return target creature an opponent controls to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Origin$ Battlefield | Destination$ Hand
+Oracle:When this creature enters, return target creature an opponent controls to its owner's hand.
