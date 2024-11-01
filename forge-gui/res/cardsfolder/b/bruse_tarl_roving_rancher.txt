@@ -10,6 +10,6 @@ SVar:DBToken:DB$ Token | TokenScript$ w_2_2_ox | TokenOwner$ You | ConditionDefi
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | SubAbility$ DBCleanup
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHints:Type$Ox
 DeckHas:Ability$Token
+DeckHints:Type$Ox
 Oracle:Oxen you control have double strike.\nWhenever Bruse Tarl, Roving Rancher enters or attacks, exile the top card of your library. If it's a land card, create a 2/2 white Ox creature token. Otherwise, you may cast it until the end of your next turn.

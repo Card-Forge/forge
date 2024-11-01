@@ -9,6 +9,6 @@ SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$
 SVar:DBTreasureTokens:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:X:Count$Party
 SVar:PlayMain1:TRUE
+DeckHas:Ability$Token & Type$Cleric|Rogue|Warrior|Wizard
 DeckHints:Ability$Party & Type$Cleric|Rogue|Warrior|Wizard
-DeckHas:Ability$Token|Sacrifice & Type$Cleric|Rogue|Warrior|Wizard|Treasure|Artifact
 Oracle:Burakos, Party Leader is also a Cleric, Rogue, Warrior, and Wizard.\nWhenever Burakos attacks, defending player loses X life and you create X Treasure tokens, where X is the number of creatures in your party.\nChoose a Background

@@ -8,4 +8,5 @@ SVar:DBCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P1P1 | ValidTgts$ C
 SVar:X:Count$Domain
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
+DeckHints:Type$Plains|Island|Swamp|Mountain|Forest
 Oracle:Trample\nDomain — Whenever Briar Hydra deals combat damage to a player, put X +1/+1 counters on target creature you control, where X is the number of basic land types among lands you control.
