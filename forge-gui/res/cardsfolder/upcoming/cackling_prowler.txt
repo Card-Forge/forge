@@ -1,0 +1,9 @@
+Name:Cackling Prowler
+ManaCost:3 G
+Types:Creature Hyena Rogue
+PT:4/3
+K:Ward:2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Morbid | SVarCompare$ GE1 | Execute$ TrigPutCounter | TriggerDescription$ Morbid — At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on this creature.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+SVar:Morbid:Count$Morbid.1.0
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nMorbid — At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on this creature.
