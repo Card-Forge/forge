@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | AddAb
 SVar:Ping:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 1 | Secondary$ True | SpellDescription$ CARDNAME deals 1 damage to any target.
 SVar:Bolt:AB$ DealDamage | Cost$ T | ValidTgts$ Any | NumDmg$ 3 | Secondary$ True | SpellDescription$ CARDNAME deals 3 damage to any target.
 DeckHas:Ability$Counters
+DeckHints:Ability$Proliferate
 Oracle:Level up {3}{R} ({3}{R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/3\n{T}: Brimstone Mage deals 1 damage to any target.\nLEVEL 3+\n2/4\n{T}: Brimstone Mage deals 3 damage to any target.
