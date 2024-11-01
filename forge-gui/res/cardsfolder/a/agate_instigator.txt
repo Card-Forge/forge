@@ -6,4 +6,5 @@ K:Offspring:1 R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another creature you control enters, this creature deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
 SVar:BuffedBy:Creature
+DeckHas:Ability$Token
 Oracle:Offspring {1}{R} (You may pay an additional {1}{R} as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it.)\nWhenever another creature you control enters, this creature deals 1 damage to each opponent.

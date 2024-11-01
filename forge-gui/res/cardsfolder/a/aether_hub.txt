@@ -5,4 +5,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T PayEnergy<1> | Produced$ Any | SpellDescription$ Add one mana of any color.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:When Aether Hub enters, you get {E} (an energy counter).\n{T}: Add {C}.\n{T}, Pay {E}: Add one mana of any color.

@@ -5,4 +5,6 @@ A:AB$ ChangeZone | Cost$ T | Origin$ Hand | Destination$ Battlefield | ChangeTyp
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1 | AILogic$ ChargeToBestCMC
 SVar:X:Count$CardCounters.CHARGE
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:At the beginning of your upkeep, you may put a charge counter on Aether Vial.\n{T}: You may put a creature card with mana value equal to the number of charge counters on Aether Vial from your hand onto the battlefield.

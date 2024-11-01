@@ -5,4 +5,5 @@ A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | NumCopies$ X | AddTriggers$ 
 SVar:TrigFight:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFightBis | TriggerDescription$ When CARDNAME enters, it fights up to one target creature you don't control.
 SVar:TrigFightBis:DB$ Fight | Defined$ TriggeredCardLKICopy | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose up to one target creature you don't control | TargetMin$ 0 | TargetMax$ 1
 SVar:X:Count$xPaid
+DeckHas:Ability$Token
 Oracle:Create X tokens that are copies of target creature you control, except they have "When this creature enters, it fights up to one target creature you don't control."

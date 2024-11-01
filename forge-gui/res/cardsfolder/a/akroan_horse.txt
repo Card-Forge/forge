@@ -8,4 +8,5 @@ SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Cho
 SVar:DBDonate:DB$ GainControl | Defined$ Self | NewController$ Player.Chosen
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, each opponent creates a 1/1 white Soldier creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ Player.Opponent
+DeckHas:Ability$Token
 Oracle:Defender\nWhen Akroan Horse enters, an opponent gains control of it.\nAt the beginning of your upkeep, each opponent creates a 1/1 white Soldier creature token.

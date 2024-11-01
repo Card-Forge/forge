@@ -5,5 +5,5 @@ A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ 
 SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying | TokenAmount$ X | SubAbility$ DBCleanup | SpellDescription$ Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell's mana value.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedNumber
-DeckHas:Ability$Token & Type$Thopter|Artifact|Creature & Keyword$Flying
+DeckHas:Ability$Token
 Oracle:Counter target spell. Create X 1/1 colorless Thopter artifact creature tokens with flying, where X is that spell's mana value.
