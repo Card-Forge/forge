@@ -5,6 +5,6 @@ K:For Mirrodin
 S:Mode$ ReduceCost | ValidCard$ Equipment.Other | ValidSpell$ Activated.Equip | Activator$ You | Amount$ 1 | Description$ Equip abilities you activate of other Equipment cost {1} less to activate.
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike | Description$ Equipped creature has double strike.
 K:Equip:3 R W
-DeckHas:Ability$Token & Type$Rebel
+DeckHas:Ability$Token
 DeckHints:Type$Equipment
 Oracle:For Mirrodin! (When this Equipment enters, create a 2/2 red Rebel creature token, then attach this to it.)\nEquip abilities you activate of other Equipment cost {1} less to activate.\nEquipped creature has double strike.\nEquip {3}{R}{W}

@@ -7,5 +7,6 @@ K:Toxic:1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, proliferate.
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate|Counters
-DeckHints:Type$Planeswalker & Ability$Counters
+DeckHints:Type$Planeswalker
+DeckNeeds:Ability$Counters
 Oracle:Trample\nToxic 1\nWhenever Bloated Contaminator deals combat damage to a player, proliferate.
