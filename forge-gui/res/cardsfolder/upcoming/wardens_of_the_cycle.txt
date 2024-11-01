@@ -1,0 +1,11 @@
+Name:Wardens of the Cycle
+ManaCost:1 B G G
+Types:Creature Elf Warlock
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ Morbid | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ Morbid — At the beginning of your end step, if a creature died this turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBGainLife,DBDraw | CharmNum$ 1
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | Defined$ You | SpellDescription$ You gain 2 life.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:Morbid:Count$Morbid.1.0
+Oracle:Morbid — At the beginning of your end step, if a creature died this turn, choose one —\n• You gain 2 life.\n• You draw a card and you lose 1 life.
