@@ -4,4 +4,5 @@ Types:Creature Treefolk Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 1/1 green Elf Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
+DeckHas:Ability$Token
 Oracle:When Ambassador Oak enters, create a 1/1 green Elf Warrior creature token.

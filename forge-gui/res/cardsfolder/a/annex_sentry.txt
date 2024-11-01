@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact.OppCtrl+cmcLE3,Creature.OppCtrl+cmcLE3 | TgtPrompt$ Select target artifact or creature an opponent controls with mana value 3 or less | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlay:Creature.OppCtrl+cmcLE3
+DeckHas:Ability$Counters
 Oracle:Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)\nWhen Annex Sentry enters, exile target artifact or creature an opponent controls with mana value 3 or less until Annex Sentry leaves the battlefield.

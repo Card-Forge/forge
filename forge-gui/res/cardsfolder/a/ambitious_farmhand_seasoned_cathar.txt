@@ -7,6 +7,8 @@ SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeTyp
 A:AB$ SetState | Cost$ 1 W W | Defined$ Self | CheckSVar$ X | SVarCompare$ GE3 | Mode$ Transform | PrecostDesc$ Coven — | SpellDescription$ Transform CARDNAME. Activate only if you control three or more creatures with different powers.
 SVar:X:Count$DifferentPower_Creature.YouCtrl
 AlternateMode:DoubleFaced
+DeckHas:Ability$LifeGain
+DeckHints:Type$Plains
 Oracle:When Ambitious Farmhand enters, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.\nCoven — {1}{W}{W}: Transform Ambitious Farmhand. Activate only if you control three or more creatures with different powers.
 
 ALTERNATE

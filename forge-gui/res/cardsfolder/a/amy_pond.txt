@@ -7,5 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigRemove:DB$ RemoveCounter | Choices$ Card.suspended+YouOwn | ChoiceZone$ Exile | CounterType$ TIME | CounterNum$ X
 SVar:X:TriggerCount$DamageAmount
 K:Doctor's companion
+DeckHas:Ability$Counters
 DeckNeeds:Keyword$Suspend
 Oracle:Partner with Rory Williams (When this creature enters, target player may put Rory into their hand from their library, then shuffle.)\nWhenever Amy Pond deals combat damage to a player, choose a suspended card you own and remove that many time counters from it.\nDoctor's companion (You can have two commanders if the other is the Doctor.)

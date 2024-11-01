@@ -9,5 +9,5 @@ SVar:DiesTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyar
 SVar:TrigShuffle:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ TriggeredNewCardLKICopy | RememberChanged$ True | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Investigate|Token|Graveyard & Type$Artifact|Clue
+DeckHas:Ability$Investigate|Sacrifice|Token|Graveyard & Type$Artifact|Clue
 Oracle:Antique Collector can't be blocked by creatures with power 2 or less.\nWhen Antique Collector enters, creatures you control perpetually gain "When this creature dies, you may shuffle it into its owner's library if it's in your graveyard. If you do, investigate."

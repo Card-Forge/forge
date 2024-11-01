@@ -8,7 +8,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Ba
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Discard
+DeckHas:Ability$Discard|Counters
 DeckHints:Ability$Discard
 AlternateMode:Specialize
 Oracle:Haste\nSpecialize {3}\nWhenever Ambergris, Citadel Agent attacks, you may discard your hand and draw two cards.
@@ -82,5 +82,4 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounter | Trigger
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ X
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Counters
 Oracle:Haste\nWhenever Ambergris, Agent of Balance attacks, you may discard your hand and draw two cards. When you do, put X +1/+1 counters on another target creature you control, where X is the number of cards you've discarded this turn.

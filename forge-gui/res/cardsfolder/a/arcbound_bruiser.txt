@@ -4,4 +4,5 @@ Types:Artifact Creature Golem
 PT:0/0
 K:Modular:3
 DeckHas:Ability$Counters
+DeckNeeds:Type$Artifact
 Oracle:Modular 3 (This creature enters with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
