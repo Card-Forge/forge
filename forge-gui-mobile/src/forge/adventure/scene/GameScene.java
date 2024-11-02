@@ -87,7 +87,7 @@ public class GameScene extends HudScene {
         World world = Current.world();
         int currentBiome = World.highestBiome(world.getBiomeMapXY((int) position.x / world.getTileSize(), (int) position.y / world.getTileSize()));
         List<BiomeData> biomeData = world.getData().GetBiomes();
-        return biomeData.size() <= currentBiome? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
+        return biomeData.size() <= currentBiome ? "waste" : biomeData.get(currentBiome).name; //shouldn't be the case but default to waste
     }
 
     public PointOfInterest getMapPOI() {
