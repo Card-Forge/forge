@@ -9,6 +9,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
+import forge.adventure.stage.WorldStage;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.sound.SoundEffectType;
@@ -99,8 +100,15 @@ public class TileMapScene extends HudScene   {
         }
         AdventureQuestController.instance().updateEnteredPOI(rootPoint);
         AdventureQuestController.instance().showQuestDialogs(stage);
+    }
 
-
+    @Override
+    public boolean leave() {
+        // clear player collision on WorldStage and the GameHUD will restore it after the flicker animation.
+        // There's at least there's 2 seconds to get away from problematic collision point and player
+        // can retry a few times to move to different position if the POI is loaded again from WorldStage
+        WorldStage.getInstance().getPlayerSprite().clearCollisionHeight();
+        return super.leave();
     }
 
     public void load(PointOfInterest point) {
