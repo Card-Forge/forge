@@ -253,7 +253,7 @@ public class SaveLoadScene extends UIScene {
                             Current.player().resetQuestFlags();
                             Current.player().setCharacterFlag("newGamePlus", 1);
                             AdventurePlayer.current().addQuest("28");
-                            WorldStage.getInstance().setDirectlyEnterPOI();
+                            WorldStage.getInstance().enterSpawnPOI();
                             SoundSystem.instance.changeBackgroundTrack();
                             Forge.switchScene(GameScene.instance());
                         } else {

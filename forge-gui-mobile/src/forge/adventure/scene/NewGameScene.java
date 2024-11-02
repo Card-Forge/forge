@@ -266,7 +266,7 @@ public class NewGameScene extends MenuScene {
                     editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
-            WorldStage.getInstance().setDirectlyEnterPOI();
+            WorldStage.getInstance().enterSpawnPOI();
             if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
                 AdventurePlayer.current().addQuest("28"); //Temporary link to Shandalar main questline
             }
