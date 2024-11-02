@@ -44,7 +44,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
     private final static Float dieTimer = 20f;//todo config
     private Float globalTimer = 0f;
-    private transient boolean directlyEnterPOI = false;
+    private transient boolean enterSpawnPOI = false;
 
     NavArrowActor navArrow;
     public WorldStage() {
@@ -372,8 +372,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
     }
 
-    public void setDirectlyEnterPOI(){
-        directlyEnterPOI = true; //On a new game, we want to automatically enter any POI the player overlaps with.
+    public void enterSpawnPOI(){
+        enterSpawnPOI = true; //On a new game, we want to automatically enter spawn POI the player overlaps with.
     }
 
     public PointOfInterestMapSprite getMapSprite(PointOfInterest poi) {
@@ -393,8 +393,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public void enter() {
         getPlayerSprite().LoadPos();
         getPlayerSprite().setMovementDirection(Vector2.Zero);
-        if (directlyEnterPOI) {
-            directlyEnterPOI = false;
+        if (enterSpawnPOI) {
+            enterSpawnPOI = false;
+            PointOfInterest poi = Current.world().findPointsOfInterest("Spawn");
+            if (poi != null) { //shouldn't be null
+                WorldStage.getInstance().loadPOI(poi);
+            }
         }
         else {
             for (Actor actor : foregroundSprites.getChildren()) {
