@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.google.common.base.Predicates;
 
+import forge.ai.ComputerUtilCost;
 import forge.ai.ComputerUtilMana;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -48,6 +49,15 @@ public class ScryAi extends SpellAbilityAi {
                     }
                 }
             }
+
+            if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
+                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                if (xPay == 0) {
+                    return false;
+                }
+                sa.getRootAbility().setXManaCostPaid(xPay);
+            }
+
             return mandatory || sa.isTargetNumberValid();
         }
 
@@ -163,6 +173,14 @@ public class ScryAi extends SpellAbilityAi {
                 }
             }
             randomReturn = sa.isTargetNumberValid();
+        }
+
+        if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
+            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            if (xPay == 0) {
+                return false;
+            }
+            sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
         return randomReturn;
