@@ -219,7 +219,11 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"give", "item"}, s -> {
             if (s.length < 1) return "Command needs 1 parameter: Item name.";
-            if (Current.player().addItem(s[0])) return "Added item " + s[0] + ".";
+            if (Current.player().addItem(s[0])) {
+                if (s[0].contains("Key"))
+                    GameHUD.getInstance().updateKeys();
+                return "Added item " + s[0] + ".";
+            }
             return "Cannot find item " + s[0];
         });
         registerCommand(new String[]{"fullHeal"}, s -> {

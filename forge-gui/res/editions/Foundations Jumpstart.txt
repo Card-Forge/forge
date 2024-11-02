@@ -105,7 +105,7 @@ ScryfallCode=J25
 97 C Celestial Unicorn @Alessandra Pisano
 98 U Dauntless Onslaught @Jesper Ejsing
 99 U Mentor of the Meek @Lie Setiawan
-100 U Plate Armor @Martina Pilcerova
+100 U Plate Armor @Greg Manchess
 101 C Raise the Alarm @Slawomir Maniak
 102 R Speaker of the Heavens @Cristi Balanescu
 103 C Steadfast Unicorn @Leesha Hannigan
