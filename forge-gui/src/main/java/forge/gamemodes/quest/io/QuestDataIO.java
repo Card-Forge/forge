@@ -105,6 +105,7 @@ public class QuestDataIO {
         xStream.registerConverter(new DraftTournamentToXml());
         xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
+        xStream.registerConverter(new EnumMapConverter(QuestItemType.class));
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
         xStream.alias("DeckSection", CardPool.class);
