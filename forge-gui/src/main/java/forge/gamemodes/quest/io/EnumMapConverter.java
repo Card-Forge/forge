@@ -44,6 +44,4 @@ public class EnumMapConverter<K extends Enum<K>, V> implements Converter {
     }
     return map;
   }
-
-
 }
