@@ -588,18 +588,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public String spriteName() {
-        return HeroListData.getHero(heroRace, isFemale);
+        return HeroListData.instance().getHero(heroRace, isFemale);
     }
 
     public FileHandle sprite() {
-        return Config.instance().getFile(HeroListData.getHero(heroRace, isFemale));
+        return Config.instance().getFile(HeroListData.instance().getHero(heroRace, isFemale));
     }
 
     public TextureRegion avatar() {
-        return HeroListData.getAvatar(heroRace, isFemale, avatarIndex);
+        return HeroListData.instance().getAvatar(heroRace, isFemale, avatarIndex);
     }
     public String raceName() {
-        return HeroListData.getRaces().get(Current.player().heroRace);
+        return HeroListData.instance().getRaces().get(Current.player().heroRace);
     }
 
     public GameStage getCurrentGameStage() {

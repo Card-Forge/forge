@@ -18,29 +18,29 @@ import forge.adventure.util.Paths;
  */
 public class HeroListData {
     static private HeroListData instance;
-    public HeroData[] heroes;
-    public String avatar;
+    private HeroData[] heroes;
+    private String avatar;
     private TextureAtlas avatarAtlas;
     private final ObjectMap<String, Array<Sprite>> avatarSprites = new ObjectMap<>();
 
-    static private HeroListData read() {
-        Json json = new Json();
-        FileHandle handle = Config.instance().getFile(Paths.HEROES);
-        if (handle.exists()) {
-            instance = json.fromJson(HeroListData.class, handle);
-            instance.avatarAtlas = Config.instance().getAtlas(instance.avatar);
-
-         /*
-            instance.avatarSprites.getTextures().first().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-         */
+    static public HeroListData instance() {
+        if (instance == null) {
+            Json json = new Json();
+            FileHandle handle = Config.instance().getFile(Paths.HEROES);
+            if (handle.exists()) {
+                instance = json.fromJson(HeroListData.class, handle);
+                instance.avatarAtlas = Config.instance().getAtlas(instance.avatar);
+                // leaving here as reference since PixelArt images use Nearest without MipMaps. By default it shouldn't have any filters
+                /*instance.avatarSprites.getTextures().first().setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);*/
+            } else {
+                throw new RuntimeException("Path not found: " + handle.path());
+            }
         }
         return instance;
     }
 
-    static public String getHero(int raceIndex, boolean female) {
-        if (instance == null)
-            instance = read();
-        HeroData data = instance.heroes[raceIndex];
+    public String getHero(int raceIndex, boolean female) {
+        HeroData data =  instance().heroes[raceIndex];
 
         if (female)
             return data.female;
@@ -48,14 +48,12 @@ public class HeroListData {
 
     }
 
-    public static TextureRegion getAvatar(int heroRace, boolean isFemale, int avatarIndex) {
-        if (instance == null)
-            instance = read();
-        HeroData data = instance.heroes[heroRace];
-        Array<Sprite> sprites = instance.avatarSprites.get(isFemale ? data.femaleAvatar : data.maleAvatar);
+    public TextureRegion getAvatar(int heroRace, boolean isFemale, int avatarIndex) {
+        HeroData data = instance().heroes[heroRace];
+        Array<Sprite> sprites = instance().avatarSprites.get(isFemale ? data.femaleAvatar : data.maleAvatar);
         if (sprites == null) {
-            sprites = instance.avatarAtlas.createSprites(isFemale ? data.femaleAvatar : data.maleAvatar);
-            instance.avatarSprites.put(isFemale ? data.femaleAvatar : data.maleAvatar, sprites);
+            sprites = instance().avatarAtlas.createSprites(isFemale ? data.femaleAvatar : data.maleAvatar);
+            instance().avatarSprites.put(isFemale ? data.femaleAvatar : data.maleAvatar, sprites);
         }
         avatarIndex %= sprites.size;
         if (avatarIndex < 0) {
@@ -64,11 +62,9 @@ public class HeroListData {
         return sprites.get(avatarIndex);
     }
 
-    public static Array<String> getRaces() {
-        if (instance == null)
-            instance = read();
+    public Array<String> getRaces() {
         Array<String> ret = new Array<>();
-        for (HeroData hero : instance.heroes) {
+        for (HeroData hero : instance().heroes) {
             ret.add(Forge.getLocalizer().getMessageorUseDefault("lbl"+hero.name, hero.name));
         }
         return ret;

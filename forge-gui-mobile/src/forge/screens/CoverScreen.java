@@ -4,12 +4,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
+import forge.assets.FSkin;
+import forge.assets.FSkinTexture;
 import forge.gui.FThreads;
 
 public class CoverScreen extends TransitionScreen {
     private CoverAnimation coverAnimation;
-    Runnable runnable;
-    TextureRegion textureRegion;
+    private Runnable runnable;
+    private TextureRegion textureRegion;
 
     public CoverScreen(Runnable r, TextureRegion t) {
         runnable = r;
@@ -18,19 +20,22 @@ public class CoverScreen extends TransitionScreen {
     }
 
     private class CoverAnimation extends ForgeAnimation {
-        float DURATION = 0.6f;
+        float DURATION = 0.8f;
         private float progress = 0;
 
         public void drawBackground(Graphics g) {
+            float oldAlpha = g.getfloatAlphaComposite();
             float percentage = progress / DURATION;
             if (percentage < 0) {
                 percentage = 0;
             } else if (percentage > 1) {
                 percentage = 1;
             }
-            if (textureRegion != null) {
-                g.drawPortalFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), Math.min(percentage, 1f), true);
-            }
+            g.setAlphaComposite(percentage);
+            g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.drawImage(FSkin.getLogo(), Forge.getScreenWidth() / 2f - FSkin.getLogo().getWidth() / 2f, Forge.getScreenHeight() / 2f - FSkin.getLogo().getHeight() / 2f, FSkin.getLogo().getWidth(), FSkin.getLogo().getHeight());
+            g.setAlphaComposite(oldAlpha);
+            g.drawPortalFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), Math.min(percentage, 1f), false);
         }
 
         @Override
