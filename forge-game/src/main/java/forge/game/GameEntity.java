@@ -213,9 +213,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         getView().updateAttachedCards(this);
     }
 
-    public final void unAttachAllCards() {
+    public final void unAttachAllCards(Card old) {
         for (Card c : getAttachedCards()) {
-            c.unattachFromEntity(this);
+            c.unattachFromEntity(this, old);
         }
     }
 

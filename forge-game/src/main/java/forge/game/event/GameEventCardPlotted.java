@@ -1,11 +1,16 @@
 package forge.game.event;
 
+import forge.game.card.Card;
 import forge.game.player.Player;
 
-public class GameEventCardForetold extends GameEvent {
+public class GameEventCardPlotted extends GameEvent {
+
+    public final Card card;
+
     public final Player activatingPlayer;
 
-    public GameEventCardForetold(Player player) {
+    public GameEventCardPlotted(Card card, Player player) {
+        this.card = card;
         activatingPlayer = player;
     }
 
@@ -19,6 +24,6 @@ public class GameEventCardForetold extends GameEvent {
      */
     @Override
     public String toString() {
-        return activatingPlayer.getName() + " has foretold a card.";
+        return activatingPlayer.getName() + " has plotted " + (card != null ? card.toString() : "(unknown)");
     }
 }

@@ -3,6 +3,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import forge.Forge;
 import forge.StaticData;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.BiomeData;
@@ -17,7 +18,9 @@ import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.game.GameType;
+import forge.gui.FThreads;
 import forge.item.PaperCard;
+import forge.screens.CoverScreen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -135,8 +138,14 @@ public class ConsoleCommandInterpreter {
             PointOfInterest poi = Current.world().findPointsOfInterest(s[0]);
             if (poi == null)
                 return "PoI " + s[0] + " not found";
-            WorldStage.getInstance().setPosition(poi.getPosition());
-            WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT, 10);
+
+            Forge.advFreezePlayerControls = true;
+            FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
+                Forge.advFreezePlayerControls = false;
+                WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
+                WorldStage.getInstance().loadPOI(poi);
+                Forge.clearTransitionScreen();
+            }, Forge.takeScreenshot())));
             return "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"spawn", "enemy"}, s -> {

@@ -3,5 +3,5 @@ Name:Brawl
 Order:101
 Type:Casual
 Subtype:Commander
-Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK
+Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN
 Additional:Arcane Signet; Command Tower

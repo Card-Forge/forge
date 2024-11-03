@@ -169,7 +169,7 @@ public class NewGameScene extends MenuScene {
             }
         });
         race.addListener(event -> NewGameScene.this.updateAvatar());
-        race.setTextList(HeroListData.getRaces());
+        race.setTextList(HeroListData.instance().getRaces());
         difficulty = ui.findActor("difficulty");
         difficultyHelp = ui.findActor("difficultyHelp");
 
@@ -294,7 +294,7 @@ public class NewGameScene extends MenuScene {
     }
 
     private boolean updateAvatar() {
-        avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
+        avatarImage.setDrawable(new TextureRegionDrawable(HeroListData.instance().getAvatar(race.getCurrentIndex(), gender.getCurrentIndex() != 0, avatarIndex)));
         return false;
     }
 
