@@ -33,6 +33,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.*;
 import forge.game.event.GameEventCardForetold;
+import forge.game.event.GameEventCardPlotted;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -3424,7 +3425,9 @@ public class CardFactoryUtil {
 
                     c.setPlotted(true);
 
-                    // TODO add GameEvent
+                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(), "has plotted", c.toString());
+                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
+                    game.fireEvent(new GameEventCardPlotted(c, getActivatingPlayer()));
                 }
             };
 
