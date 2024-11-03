@@ -366,7 +366,7 @@ public class GameAction {
                             c.setBackSide(false);
                             c.changeToState(CardStateName.Original);
                         }
-                        unattachCardLeavingBattlefield(c);
+                        unattachCardLeavingBattlefield(c, c);
                     }
 
                     if (c.isInZone(ZoneType.Stack) && !zoneTo.is(ZoneType.Graveyard)) {
@@ -560,9 +560,7 @@ public class GameAction {
         if (fromBattlefield) {
             game.addLeftBattlefieldThisTurn(lastKnownInfo);
             // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
-            unattachCardLeavingBattlefield(c);
-            copied.setEntityAttachedTo(null);
-            copied.clearAttachedCards();
+            unattachCardLeavingBattlefield(copied, c);
             c.runLeavesPlayCommands();
         }
         if (fromGraveyard) {
@@ -729,9 +727,9 @@ public class GameAction {
         }
     }
 
-    private static void unattachCardLeavingBattlefield(final Card copied) {
+    private static void unattachCardLeavingBattlefield(final Card copied, final Card old) {
         // remove attachments from creatures
-        copied.unAttachAllCards();
+        copied.unAttachAllCards(old);
 
         // unenchant creature if moving aura
         if (copied.isAttachedToEntity()) {
