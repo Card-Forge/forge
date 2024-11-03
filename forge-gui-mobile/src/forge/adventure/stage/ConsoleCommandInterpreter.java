@@ -144,9 +144,7 @@ public class ConsoleCommandInterpreter {
                 Forge.advFreezePlayerControls = false;
                 WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                 WorldStage.getInstance().loadPOI(poi);
-                WorldSave.getCurrentSave().autoSave();
                 Forge.clearTransitionScreen();
-                //WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT, 10);
             }, Forge.takeScreenshot())));
             return "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
