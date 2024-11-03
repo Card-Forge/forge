@@ -840,6 +840,10 @@ public class GameHUD extends Stage {
         debugMap = b;
     }
 
+    public boolean isDebugMap() {
+        return debugMap;
+    }
+
     public void playerIdle() {
         if (MapStage.getInstance().isInMap()) {
             MapStage.getInstance().startPause(1f);
