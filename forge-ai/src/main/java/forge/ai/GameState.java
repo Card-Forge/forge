@@ -1050,7 +1050,7 @@ public abstract class GameState {
         // Unattach all permanents first
         for (Entry<Card, Integer> entry : cardToAttachId.entrySet()) {
             Card attachedTo = idToCard.get(entry.getValue());
-            attachedTo.unAttachAllCards();
+            attachedTo.unAttachAllCards(attachedTo);
         }
 
         // Attach permanents by ID

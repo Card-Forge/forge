@@ -184,6 +184,7 @@ public class DeckHints {
             case COLOR:
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
+                    // ignoring Devoid here since having the colored mana symbol might be enough
                     Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.Presets.IS_COLORLESS, PaperCard::getRules));
                 } else {
                     Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules));
@@ -228,6 +229,7 @@ public class DeckHints {
                 return true;
             }
             for (String tok : card.getTokens()) {
+                // unfortunately this doesn't include keyworded ones yet
                 if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).apply(tdb.getToken(tok).getRules())) {
                     return true;
                 }
