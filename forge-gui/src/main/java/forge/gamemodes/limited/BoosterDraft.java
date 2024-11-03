@@ -523,18 +523,15 @@ public class BoosterDraft implements IBoosterDraft {
         return !this.isRoundOver() || !this.localPlayer.unopenedPacks.isEmpty();
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @return
-     */
+    // Return false is the pack will be passed
     @Override
     public boolean setChoice(final PaperCard c) {
         final DraftPack thisBooster = this.localPlayer.nextChoice();
 
         if (!thisBooster.contains(c)) {
-            throw new RuntimeException("BoosterDraft : setChoice() error - card not found - " + c
+            System.out.println("BoosterDraft : setChoice() error - card not found - " + c
                     + " - booster pack = " + thisBooster);
+            return false;
         }
 
         recordDraftPick(thisBooster, c);
