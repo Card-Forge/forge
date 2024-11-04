@@ -907,8 +907,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void sellCard(PaperCard card, Integer result) {
-        float price = CardUtil.getCardPrice(card) * result;
-        price *= difficultyData.sellFactor;
+        float price = cardSellPrice(card) * result;
         cards.remove(card, result);
         addGold((int) price);
     }

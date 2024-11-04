@@ -17,12 +17,7 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.card.CardEdition;
 import forge.card.CardZoom;
-import forge.deck.AddBasicLandsDialog;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckFormat;
-import forge.deck.DeckSection;
-import forge.deck.FDeckViewer;
+import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.item.InventoryItem;
@@ -37,11 +32,7 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
-import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.GuiChoose;
+import forge.toolbox.*;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
@@ -568,6 +559,32 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             if (!catalogPage.showNoSellCards || !catalogPage.showAutoSellCards || !catalogPage.showCollectionCards) {
                                 addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAll"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
                             }
+
+                            // Add bulk sell menu option. This will sell all cards in the current filter.
+                            int count = 0;
+                            int value = 0;
+
+                            for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
+                                value += AdventurePlayer.current().cardSellPrice(entry.getKey()) * entry.getValue();
+                                count += entry.getValue();
+                            }
+
+                            final int finalCount = count;
+                            final int finalValue = value;
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> {
+                                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", finalCount, finalValue), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                                    @Override
+                                    public void run(Boolean result) {
+                                        if (result) {
+                                            for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
+                                                AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                            }
+                                            catalogPage.refresh();
+                                            lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
+                                        }
+                                    }
+                                });
+                            }));
                         }
                         ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
                     }
