@@ -4,6 +4,39 @@ Date=2024-11-15
 Name=Foundations
 Type=Core
 ScryfallCode=FDN
+# https://mtgscribe.com/2024/10/28/play-booster-fact-sheet-foundations/
+BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,AnyLand,Wildcard
+Booster=6 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 AnyLand, 1 Wildcard, 1 Wildcard+
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
+
+[Common]
+Base=Common:fromSheet("FDN cards")
+
+[Common-Guest]
+Base=Common:fromSheet("FDN cards")
+Replace=.015625F fromSheet("FDN special guests")
+
+[Uncommon]
+Base=Uncommon:fromSheet("FDN cards")
+
+[RareMythic]
+Base=RareMythic:fromSheet("FDN cards")
+Replace=.077F Rare:fromSheet("FDN borderless")
+Replace=.015F Mythic:fromSheet("FDN borderless")
+
+[AnyLand]
+Base=Land:Common:fromSheet("FDN cards")
+Replace=.25F Land:fromSheet("FDN full art")
+Replace=.25F BasicLand:fromSheet("FDN cards")
+
+[Wildcard]
+Base=Uncommon:fromSheet("FDN cards")
+Replace=.167F Common:fromSheet("FDN cards")
+Replace=.163F Rare:fromSheet("FDN cards")
+Replace=.026F Mythic:fromSheet("FDN cards")
+Replace=.016F Common:fromSheet("FDN borderless")
+Replace=.024F Uncommon:fromSheet("FDN borderless")
 
 [cards]
 1 M Sire of Seven Deaths @Luis Lasahido
@@ -79,16 +112,6 @@ ScryfallCode=FDN
 71 C Stab @Milivoj Ćeran
 72 R Tinybones, Bauble Burglar @Leonardo Santanna
 73 U Tragic Banshee @Camille Alquier
-74 U Vampire Gourmand @Chris Rallis
-75 C Vampire Soulcaller @Aaron J. Riley
-76 U Vengeful Bloodwitch @Jarel Threat
-77 R Zul Ashur, Lich Lord @Raluca Marinescu
-78 U Battlesong Berserker @Mirko Failoni
-79 U Boltwave @Caio Monteiro
-80 U Bulk Up @Warren Mahy
-81 M Chandra, Flameshaper @Mark Winters
-82 C Courageous Goblin @Ben Wootten
-83 C Crackling Cyclops @Kev Walker
 84 U Dragon Trainer @Steve Prescott
 85 R Electroduplicate @Warren Mahy
 86 U Fiery Annihilation @Warren Mahy
@@ -287,6 +310,8 @@ ScryfallCode=FDN
 279 L Mountain @Rebecca Guay
 280 L Forest @Rebecca Guay
 281 L Forest @Jim Nelson
+
+[full art]
 282 L Plains @Sam Burley
 283 L Plains @Julian Kok Joon Wen
 284 L Island @Daniel Ljunggren
@@ -297,6 +322,8 @@ ScryfallCode=FDN
 289 L Mountain @Salvatorre Zee Yazzie
 290 L Forest @Sam Burley
 291 L Forest @Piotr Dura
+
+[borderless]
 292 M Sire of Seven Deaths @Alexander Mokhov
 293 U Ajani's Pridemate @Chris Rallis
 294 R Arahbo, the First Fang @Chris Rahn
@@ -366,6 +393,8 @@ ScryfallCode=FDN
 359 M Liliana, Dreadhorde General @Dmitry Burmak
 360 M Chandra, Flameshaper @Lie Setiawan
 361 M Vivien Reid @Zara Alfonso
+
+[alternate art]
 362 M Sire of Seven Deaths @Alexander Mokhov
 363 R Arahbo, the First Fang @Chris Rahn
 364 R Celestial Armor @Olena Richards
@@ -426,16 +455,6 @@ ScryfallCode=FDN
 419 M Liliana, Dreadhorde General @Dmitry Burmak
 420 M Chandra, Flameshaper @Lie Setiawan
 421 M Vivien Reid @Zara Alfonso
-422 M Day of Judgment @Toshiaki Takayama
-423 M Herald of Eternal Dawn @Nijihayashi
-424 M Kaito, Cunning Infiltrator @Ittoku
-425 M Think Twice @HNCL
-426 M Bloodthirsty Conqueror @Raita Kazama
-427 M Twinflame Tyrant @Mikio Masuda
-428 M Doubling Season @Kawasumi
-429 M Llanowar Elves @Hisashi Momose
-430 M Muldrotha, the Gravetide @KERA
-431 M Progenitus @Sansyu
 432 M Day of Judgment @Toshiaki Takayama
 433 M Herald of Eternal Dawn @Nijihayashi
 434 M Kaito, Cunning Infiltrator @Ittoku
@@ -446,6 +465,20 @@ ScryfallCode=FDN
 439 M Llanowar Elves @Hisashi Momose
 440 M Muldrotha, the Gravetide @KERA
 441 M Progenitus @Sansyu
+
+[showcase]
+422 M Day of Judgment @Toshiaki Takayama
+423 M Herald of Eternal Dawn @Nijihayashi
+424 M Kaito, Cunning Infiltrator @Ittoku
+425 M Think Twice @HNCL
+426 M Bloodthirsty Conqueror @Raita Kazama
+427 M Twinflame Tyrant @Mikio Masuda
+428 M Doubling Season @Kawasumi
+429 M Llanowar Elves @Hisashi Momose
+430 M Muldrotha, the Gravetide @KERA
+431 M Progenitus @Sansyu
+
+[extended art]
 442 R Arahbo, the First Fang @Simon Dominic
 443 R Celestial Armor @Olena Richards
 444 R Crystal Barricade @Rockey Chen
@@ -492,6 +525,8 @@ ScryfallCode=FDN
 485 R Leyline Axe @Edgar Sánchez Hidalgo
 486 R Scrawling Crawler @Miro Petrov
 487 R Soulstone Sanctuary @Daniel Ljunggren
+
+[precon product]
 488 C Adamant Will @Irina Nordsol
 489 R Ancestor Dragon @Shinchuen Chen
 490 C Angelic Edict @Trevor Claxton
@@ -732,9 +767,23 @@ ScryfallCode=FDN
 725 R Gilded Lotus @Volkan Baǵa
 726 U Hedron Archive @Craig J Spearing
 727 M Maze's End @Cliff Childs
+730 C Hinterland Sanctifier @Justine Cruz
+
+[special guests]
+74 U Vampire Gourmand @Chris Rallis
+75 C Vampire Soulcaller @Aaron J. Riley
+76 U Vengeful Bloodwitch @Jarel Threat
+77 R Zul Ashur, Lich Lord @Raluca Marinescu
+78 U Battlesong Berserker @Mirko Failoni
+79 U Boltwave @Caio Monteiro
+80 U Bulk Up @Warren Mahy
+81 M Chandra, Flameshaper @Mark Winters
+82 C Courageous Goblin @Ben Wootten
+83 C Crackling Cyclops @Kev Walker
+
+[promos]
 728 R Phyrexian Arena @Aaron J. Riley
 729 R Solemn Simulacrum @Forrest Imel
-730 C Hinterland Sanctifier @Justine Cruz
 
 [tokens]
 b_1_1_rat
