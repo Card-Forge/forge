@@ -1,35 +1,18 @@
 # ⚔️ Forge: The Magic: The Gathering Rules Engine
 
+Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
+
+[![Test build](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg)](https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml)
+
+---
+
+## ✨ Introduction
+
 **Forge** is a dynamic and open-source **Rules Engine** tailored for **Magic: The Gathering** enthusiasts. Developed by a community of passionate programmers, Forge allows players to explore the rich universe of MTG through a flexible, engaging platform. 
 
 **Note:** Forge operates independently and is not affiliated with Wizards of the Coast.
 
-<table align="center">
-    <thead align="center">
-        <tr border="2px;">
-            <td><b>🌟 Stars</b></td>
-            <td><b>🍴 Forks</b></td>
-            <td><b>🐛 Issues</b></td>
-            <td><b>🔔 Open PRs</b></td>
-            <td><b>🔕 Closed PRs</b></td>
-            <td><b>💬 Discord</b></td>
-            <td><b>🛠️ Test Build</b></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><img alt="Stars" src="https://img.shields.io/github/stars/Card-Forge/forge?style=flat&logo=github"/></td>
-            <td><img alt="Forks" src="https://img.shields.io/github/forks/Card-Forge/forge?style=flat&logo=github"/></td>
-            <td><img alt="Issues" src="https://img.shields.io/github/issues/Card-Forge/forge?style=flat&logo=github"/></td>
-            <td><img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/Card-Forge/forge?style=flat&logo=github"/></td>
-            <td><img alt="Closed Pull Requests" src="https://img.shields.io/github/issues-pr-closed/Card-Forge/forge?style=flat&color=critical&logo=github"/></td>
-            <td><a href="https://discord.gg/HcPJNyD66a"><b>Join Forge</b></a></td>
-            <td><a href="https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml"><img alt="Test Build" src="https://github.com/Card-Forge/forge/actions/workflows/test-build.yaml/badge.svg"/></a></td>
-        </tr>
-    </tbody>
-</table>
-
-<img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="900">
+---
 
 ## 🌟 Key Features
 
@@ -95,7 +78,15 @@ We love community contributions! Interested in helping? Check out our [Contribut
 
 ## ℹ️ About Forge
 
-Forge aims to deliver an immersive and customizable Magic: The Gathering experience for fans around the world.
+Forge aims to deliver an immersive and customizable Magic: The Gathering experience for fans around the world. 
+
+### 📊 Repository Statistics
+
+| Metric         | Count                                                       |
+|----------------|-------------------------------------------------------------|
+| **⭐ Stars:**   | [![GitHub stars](https://img.shields.io/github/stars/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/stargazers) |
+| **🍴 Forks:**   | [![GitHub forks](https://img.shields.io/github/forks/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/network) |
+| **👥 Contributors:** | [![GitHub contributors](https://img.shields.io/github/contributors/Card-Forge/forge?style=flat-square)](https://github.com/Card-Forge/forge/graphs/contributors) |
 
 ---
 
