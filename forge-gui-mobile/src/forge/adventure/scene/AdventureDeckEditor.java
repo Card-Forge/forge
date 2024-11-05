@@ -419,6 +419,42 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         }
     }
 
+    public void showDefault() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = true;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = true;
+        catalogPage.refresh();
+    }
+
+    public void showCollection() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = true;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = false;
+        catalogPage.refresh();
+    }
+
+    public void showAutoSell() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = false;
+        catalogPage.showAutoSellCards = true;
+        catalogPage.showNoSellCards = false;
+        catalogPage.refresh();
+    }
+
+    public void showNoSell() {
+        if (catalogPage == null)
+            return;
+        catalogPage.showCollectionCards = false;
+        catalogPage.showAutoSellCards = false;
+        catalogPage.showNoSellCards = true;
+        catalogPage.refresh();
+    }
+
     private static DeckEditorPage[] getPages(boolean isShop) {
         if (isShop) {
             return new DeckEditorPage[]{
@@ -543,32 +579,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             FMenuItem addBasic = new FMenuItem(Forge.getLocalizer().getMessage("lblAddBasicLands"), FSkinImage.LANDLOGO, e1 -> launchBasicLandDialog());
                             addItem(addBasic);
                         }
-                        if (!isShop && catalogPage != null && !(catalogPage instanceof ContentPreviewPage)) {
-                            if (catalogPage.showNoSellCards) {
-                                FMenuItem hideNoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideNoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleNoSellCards(false));
-                                addItem(hideNoSell);
-                                hideNoSell.setEnabled(catalogPage.showAutoSellCards || catalogPage.showCollectionCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowNoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleNoSellCards(true)));
-                            }
-                            if (catalogPage.showAutoSellCards) {
-                                FMenuItem hideAutoSell = new FMenuItem(Forge.getLocalizer().getMessage("lblHideAutoSell"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleAutoSellCards(false));
-                                addItem(hideAutoSell);
-                                hideAutoSell.setEnabled(catalogPage.showCollectionCards || catalogPage.showNoSellCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAutoSell"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleAutoSellCards(true)));
-                            }
-                            if (catalogPage.showCollectionCards) {
-                                FMenuItem hideCollection = new FMenuItem(Forge.getLocalizer().getMessage("lblHideCollection"), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> catalogPage.toggleCollectionCards(false));
-                                addItem(hideCollection);
-                                hideCollection.setEnabled(catalogPage.showAutoSellCards || catalogPage.showNoSellCards);
-                            } else {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowCollection"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.toggleCollectionCards(true)));
-                            }
-                            if (!catalogPage.showNoSellCards || !catalogPage.showAutoSellCards || !catalogPage.showCollectionCards) {
-                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowAll"), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> catalogPage.showAllCards()));
-                            }
-                        }
                         ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
                     }
                 };
@@ -589,8 +599,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                 availableEditionCodes.add(FModel.getMagicDb().getEditions().get(p.getEdition()));
             }
             defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
-        }
-        else {
+        } else {
             defaultLandSet = FModel.getMagicDb().getEditions().get("JMP");
         }
 
@@ -751,7 +760,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
             ItemColumn.addColOverride(config, colOverrides, ColumnDef.NEW, fnNewCompare, fnNewGet);
             ItemColumn.addColOverride(config, colOverrides, ColumnDef.DECKS, fnDeckCompare, fnDeckGet);
-
             cardManager.setup(config, colOverrides);
         }
 
@@ -990,28 +998,6 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         private boolean initialized, needRefreshWhenShown;
 
         boolean showCollectionCards = true, showAutoSellCards = false, showNoSellCards = true;
-
-        public void showAllCards() {
-            showCollectionCards = true;
-            showAutoSellCards = true;
-            showNoSellCards = true;
-            refresh();
-        }
-
-        public void toggleCollectionCards(boolean show) {
-            showCollectionCards = show;
-            refresh();
-        }
-
-        public void toggleAutoSellCards(boolean show) {
-            showAutoSellCards = show;
-            refresh();
-        }
-
-        public void toggleNoSellCards(boolean show) {
-            showNoSellCards = show;
-            refresh();
-        }
 
         protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
             super(config, caption0, icon0);
