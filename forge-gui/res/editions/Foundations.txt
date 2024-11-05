@@ -39,7 +39,7 @@ Replace=.016F Common:fromSheet("FDN borderless")
 Replace=.024F Uncommon:fromSheet("FDN borderless")
 
 [cards]
-1 M Sire of Seven Deaths @Luis Lasahido
+1 M Sire of Seven Deaths @Lius Lasahido
 2 R Arahbo, the First Fang @Simon Dominic
 3 C Armasaur Guide @Loïc Canavaggia
 4 U Cat Collector @Chris Seaman
@@ -351,6 +351,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 316 R Abyssal Harvester @Aaron J. Riley
 317 R Blasphemous Edict @Dmitry Burmak
 318 M Bloodthirsty Conqueror @Alexander Mokhov
+319 U Hero's Downfall @Zoltan Boros
 320 R High-Society Hunter @Aaron J. Riley
 321 R Nine-Lives Familiar @Xabi Gaztelua
 322 R Phyrexian Arena @Andrey Kuzinskiy
