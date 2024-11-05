@@ -116,9 +116,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         listView = new ItemListView<>(this, model);
         imageView = createImageView(model);
 
-        views.add(listView);
-        views.add(imageView);
-        currentView = listView;
+        if (Forge.isMobileAdventureMode) {
+            // reversed default
+            views.add(imageView);
+            views.add(listView);
+            currentView = imageView;
+        } else {
+            views.add(listView);
+            views.add(imageView);
+            currentView = listView;
+        }
         btnView.setIcon(currentView.getIcon());
 
         //build display

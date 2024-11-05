@@ -56,7 +56,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         Deck contents = new Deck();
 
         protected ContentPreviewPage(Deck cardsToShow) {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             contents = cardsToShow;
         }
 
@@ -142,7 +142,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class StoreCatalogPage extends CatalogPage {
         protected StoreCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             Current.player().onGoldChange(() -> lblGold.setText(String.valueOf(AdventurePlayer.current().getGold())));
         }
 
@@ -177,7 +177,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
 
     private static class CollectionCatalogPage extends CatalogPage {
         protected CollectionCatalogPage() {
-            super(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
         }
 
         @Override
@@ -463,8 +463,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         } else {
             return new DeckEditorPage[]{
                     new CollectionCatalogPage(),
-                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)};
+                    new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
         }
     }
 
@@ -491,8 +491,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
                 default:
                     return new DeckEditorPage[]{
-                            new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
-                            new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
+                            new CatalogPage(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
+                            new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
                             new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
 
             }
