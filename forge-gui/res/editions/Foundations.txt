@@ -112,6 +112,16 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 71 C Stab @Milivoj Ćeran
 72 R Tinybones, Bauble Burglar @Leonardo Santanna
 73 U Tragic Banshee @Camille Alquier
+74 U Vampire Gourmand @Chris Rallis
+75 C Vampire Soulcaller @Aaron J. Riley
+76 U Vengeful Bloodwitch @Jarel Threat
+77 R Zul Ashur, Lich Lord @Raluca Marinescu
+78 U Battlesong Berserker @Mirko Failoni
+79 U Boltwave @Caio Monteiro
+80 U Bulk Up @Warren Mahy
+81 M Chandra, Flameshaper @Mark Winters
+82 C Courageous Goblin @Ben Wootten
+83 C Crackling Cyclops @Kev Walker
 84 U Dragon Trainer @Steve Prescott
 85 R Electroduplicate @Warren Mahy
 86 U Fiery Annihilation @Warren Mahy
@@ -770,21 +780,21 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 727 M Maze's End @Cliff Childs
 730 C Hinterland Sanctifier @Justine Cruz
 
-[special guests]
-74 U Vampire Gourmand @Chris Rallis
-75 C Vampire Soulcaller @Aaron J. Riley
-76 U Vengeful Bloodwitch @Jarel Threat
-77 R Zul Ashur, Lich Lord @Raluca Marinescu
-78 U Battlesong Berserker @Mirko Failoni
-79 U Boltwave @Caio Monteiro
-80 U Bulk Up @Warren Mahy
-81 M Chandra, Flameshaper @Mark Winters
-82 C Courageous Goblin @Ben Wootten
-83 C Crackling Cyclops @Kev Walker
-
-[promos]
+[promo]
 728 R Phyrexian Arena @Aaron J. Riley
 729 R Solemn Simulacrum @Forrest Imel
+
+[special guests]
+1 Akroma's Memorial|SPG
+1 Bloom Tender|SPG
+1 Condemn|SPG
+1 Embercleave|SPG
+1 Fiend Artisan|SPG
+1 Goblin Bushwhacker|SPG
+1 Grim Tutor|SPG
+1 Paradise Druid|SPG
+1 Sphinx's Tutelage|SPG
+1 Temporal Manipulation|SPG
 
 [tokens]
 b_1_1_rat
