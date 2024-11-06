@@ -47,8 +47,9 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         Deck contents = new Deck();
 
         protected ContentPreviewPage(Deck cardsToShow) {
-            super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             contents = cardsToShow;
+            cardManager.setBtnAdvancedSearchOptions(false);
         }
 
         @Override
@@ -170,6 +171,8 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
     private static class CollectionCatalogPage extends CatalogPage {
         protected CollectionCatalogPage() {
             super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
+            cardManager.setBtnAdvancedSearchOptions(true);
+            cardManager.setCatalogDisplay(true);
         }
 
         @Override
@@ -1234,18 +1237,21 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     cardManager.setCaption(Forge.getLocalizer().getMessage("ttMain"));
                     icon = MAIN_DECK_ICON;
                     cardManager.setBtnAdvancedSearchOptions(true);
+                    cardManager.setCatalogDisplay(false);
                     break;
                 case Sideboard:
                     captionPrefix = Forge.getLocalizer().getMessage("lblSide");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblSideboard"));
                     icon = SIDEBOARD_ICON;
                     cardManager.setBtnAdvancedSearchOptions(false);
+                    cardManager.setCatalogDisplay(false);
                     break;
                 case Commander:
                     captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommander"));
                     icon = FSkinImage.COMMANDER;
                     cardManager.setBtnAdvancedSearchOptions(true);
+                    cardManager.setCatalogDisplay(false);
                     break;
             }
         }

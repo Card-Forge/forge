@@ -37,6 +37,7 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.itemmanager.views.ImageView;
@@ -80,6 +81,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private List<ItemColumn> sortCols = new ArrayList<>();
 
     private final TextSearchFilter<? extends T> searchFilter;
+    private CardFormatFilter cardFormatFilter;
 
     private final FLabel btnSearch = new FLabel.ButtonBuilder()
             .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).selectable().build();
@@ -131,7 +133,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         //build display
         add(searchFilter.getWidget());
         add(btnSearch);
-        //fixme - AdvanceSearch for Adventure mode needs GUI update on landscape mode, needs onclose override to close internal EditScreen
+        // FIXME - AdvanceSearch for Adventure mode needs GUI update on landscape mode, needs onclose override to close internal EditScreen
         btnSearch.setEnabled(!Forge.isMobileAdventureMode);
         add(btnView);
         add(btnAdvancedSearchOptions);
@@ -609,6 +611,16 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         btnAdvancedSearchOptions.setEnabled(enable);
     }
 
+    public void setCatalogDisplay(boolean enable) {
+        if (cardFormatFilter == null)
+            return;
+        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
+            if (!enable)
+                ((FComboBox<?>) cardFormatFilter.getMainComponent()).setSelectedIndex(0);
+            cardFormatFilter.getMainComponent().setEnabled(enable);
+        }
+    }
+
     public void scrollSelectionIntoView() {
         currentView.scrollSelectionIntoView();
     }
@@ -630,6 +642,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     public void addFilter(final ItemFilter<? extends T> filter) {
         filters.add(filter);
         add(filter.getWidget());
+        if (filter instanceof CardFormatFilter)
+            cardFormatFilter = (CardFormatFilter) filter;
 
         boolean visible = !hideFilters;
         filter.getWidget().setVisible(visible);
