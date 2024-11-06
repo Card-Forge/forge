@@ -19,7 +19,7 @@ ScryfallCode=J25
 11 C Scourge of the Undercity @Olivier Bernard
 12 U Wriggling Grub @Caio Monteiro
 13 R Dropkick Bomber @Quintin Gleim
-14 U Firespitter Whelp @Brooklyn Smith
+14 U Firespitter Whelp @David Álvarez
 15 R Frontline Heroism @Fajareka Setiawan
 16 U Goblin Surprise @Kevin Sidharta
 17 C Hearts on Fire @Eelis Kyttanen

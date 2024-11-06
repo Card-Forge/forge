@@ -235,7 +235,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 194 R Etali, Primal Storm @Raymond Swanland
 195 C Fanatical Firebrand @Wayne Reynolds
 196 C Firebrand Archer @John Stanko
-197 U Firespitter Whelp @Brooklyn Smith
+197 U Firespitter Whelp @David Álvarez
 198 R Flamewake Phoenix @Min Yum
 199 U Frenzied Goblin @Randy Vargas
 200 C Goblin Surprise @Kevin Sidharta
