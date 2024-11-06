@@ -382,8 +382,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         float fieldHeight = searchFilter.getMainComponent().getHeight();
         float viewButtonWidth = fieldHeight;
         helper.offset(0, ItemFilter.PADDING);
-        // for store and preview deck events layout
-        if (ItemManagerConfig.ADVENTURE_STORE_POOL.equals(config)) {
+        // for Adventure Mode Store, Sideboard and Deck Event previews layout
+        if (ItemManagerConfig.ADVENTURE_STORE_POOL.equals(config) || ItemManagerConfig.ADVENTURE_SIDEBOARD.equals(config)) {
             for (ItemFilter<? extends T> filter : filters()) {
                 if (filter instanceof CardColorFilter) {
                     filter.getWidget().setVisible(true);
