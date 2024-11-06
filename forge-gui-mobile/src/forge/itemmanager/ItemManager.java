@@ -37,6 +37,7 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.gui.FThreads;
 import forge.item.InventoryItem;
 import forge.itemmanager.filters.AdvancedSearchFilter;
+import forge.itemmanager.filters.CardColorFilter;
 import forge.itemmanager.filters.CardFormatFilter;
 import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.TextSearchFilter;
@@ -66,7 +67,22 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected final ItemManagerModel<T> model;
     private Predicate<? super T> filterPredicate = null;
     private AdvancedSearchFilter<? extends T> advancedSearchFilter;
-    private final List<ItemFilter<? extends T>> filters = new ArrayList<>();
+    private List<ItemFilter<? extends T>> _filters;
+
+    private List<ItemFilter<? extends T>> filters() {
+        List<ItemFilter<? extends T>> result = _filters;
+        if (result == null) {
+            synchronized (this) {
+                result = _filters;
+                if (result == null) {
+                    result = new ArrayList<>();
+                    _filters = result;
+                }
+            }
+        }
+        return _filters;
+    }
+
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean showRanking = false;
@@ -78,7 +94,21 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private ItemManagerConfig config;
     private Function<Entry<? extends InventoryItem, Integer>, Object> fnNewGet;
     private boolean viewUpdating, needSecondUpdate;
-    private List<ItemColumn> sortCols = new ArrayList<>();
+    private List<ItemColumn> _sortCols;
+
+    private List<ItemColumn> sortCols() {
+        List<ItemColumn> result = _sortCols;
+        if (result == null) {
+            synchronized (this) {
+                result = _sortCols;
+                if (result == null) {
+                    result = new ArrayList<>();
+                    _sortCols = result;
+                }
+            }
+        }
+        return _sortCols;
+    }
 
     private final TextSearchFilter<? extends T> searchFilter;
     private CardFormatFilter cardFormatFilter;
@@ -220,7 +250,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
         cols.sort(Comparator.comparingInt(arg0 -> arg0.getConfig().getIndex()));
 
-        sortCols.clear();
+        sortCols().clear();
         if (cbxSortOptions != null) {
             cbxSortOptions.setDropDownItemTap(null);
             cbxSortOptions.removeAllItems();
@@ -229,13 +259,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         int modelIndex = 0;
         for (final ItemColumn col : cols) {
             col.setIndex(modelIndex++);
-            if (col.isVisible()) { sortCols.add(col); }
+            if (col.isVisible()) {
+                sortCols().add(col);
+            }
         }
 
-        final ItemColumn[] sortcols = new ItemColumn[sortCols.size()];
+        final ItemColumn[] sortcols = new ItemColumn[sortCols().size()];
 
         // Assemble priority sort.
-        for (ItemColumn col : sortCols) {
+        for (ItemColumn col : sortCols()) {
             if (cbxSortOptions != null) {
                 cbxSortOptions.addItem(col);
             }
@@ -350,16 +382,32 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         float fieldHeight = searchFilter.getMainComponent().getHeight();
         float viewButtonWidth = fieldHeight;
         helper.offset(0, ItemFilter.PADDING);
-        helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * 3); //leave room for search, view, and options buttons
-        helper.include(btnSearch, viewButtonWidth, fieldHeight);
-        helper.include(btnView, viewButtonWidth, fieldHeight);
-        helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
+        // for Adventure Mode Store, Sideboard and Deck Event previews layout
+        if (ItemManagerConfig.ADVENTURE_STORE_POOL.equals(config) || ItemManagerConfig.ADVENTURE_SIDEBOARD.equals(config)) {
+            for (ItemFilter<? extends T> filter : filters()) {
+                if (filter instanceof CardColorFilter) {
+                    filter.getWidget().setVisible(true);
+                    helper.include(filter.getWidget(), (viewButtonWidth + helper.getGapX()) * 7, fieldHeight);
+                    break;
+                }
+            }
+            helper.include(searchFilter.getWidget(), searchFilter.getPreferredWidth(helper.getRemainingLineWidth() - (viewButtonWidth + helper.getGapX()) , fieldHeight), fieldHeight);
+            helper.include(btnView, viewButtonWidth, fieldHeight);
+            helper.newLine();
+            helper.fill(currentView.getScroller());
+            return;
+        } else {
+            helper.fillLine(searchFilter.getWidget(), fieldHeight, (viewButtonWidth + helper.getGapX()) * 3); //leave room for search, view, and options buttons
+            helper.include(btnSearch, viewButtonWidth, fieldHeight);
+            helper.include(btnView, viewButtonWidth, fieldHeight);
+            helper.include(btnAdvancedSearchOptions, viewButtonWidth, fieldHeight);
+        }
         helper.newLine();
         if (advancedSearchFilter != null && advancedSearchFilter.getWidget().isVisible()) {
             helper.fillLine(advancedSearchFilter.getWidget(), fieldHeight);
         }
         if (!hideFilters) {
-            for (ItemFilter<? extends T> filter : filters) {
+            for (ItemFilter<? extends T> filter : filters()) {
                 helper.include(filter.getWidget(), filter.getPreferredWidth(helper.getRemainingLineWidth(), fieldHeight), fieldHeight);
             }
             if (allowSortChange()) {
@@ -640,7 +688,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     protected abstract AdvancedSearchFilter<? extends T> createAdvancedSearchFilter();
 
     public void addFilter(final ItemFilter<? extends T> filter) {
-        filters.add(filter);
+        filters().add(filter);
         add(filter.getWidget());
         if (filter instanceof CardFormatFilter)
             cardFormatFilter = (CardFormatFilter) filter;
@@ -674,10 +722,10 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void restoreDefaultFilters() {
         lockFiltering = true;
-        for (ItemFilter<? extends T> filter : filters) {
+        for (ItemFilter<? extends T> filter : filters()) {
             remove(filter.getWidget());
         }
-        filters.clear();
+        filters().clear();
         addDefaultFilters();
         lockFiltering = false;
         revalidate();
@@ -686,7 +734,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
     public void resetFilters() {
         lockFiltering = true; //prevent updating filtering from this change until all filters reset
-        for (final ItemFilter<? extends T> filter : filters) {
+        for (final ItemFilter<? extends T> filter : filters()) {
             filter.reset();
         }
         searchFilter.reset();
@@ -704,7 +752,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     }
 
     public void removeFilter(ItemFilter<? extends T> filter) {
-        filters.remove(filter);
+        filters().remove(filter);
         remove(filter.getWidget());
         revalidate();
         applyFilters();
@@ -716,7 +764,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         List<Predicate<? super T>> predicates = new ArrayList<>();
-        for (ItemFilter<? extends T> filter : filters) {
+        for (ItemFilter<? extends T> filter : filters()) {
             if (!filter.isEmpty()) {
                 predicates.add(filter.buildPredicate(genericType));
             }
@@ -767,7 +815,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         hideFilters = hideFilters0;
 
         boolean visible = !hideFilters0;
-        for (ItemFilter<? extends T> filter : filters) {
+        for (ItemFilter<? extends T> filter : filters()) {
             filter.getWidget().setVisible(visible);
         }
         if (allowSortChange()) {
@@ -802,7 +850,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             ItemManager.this.add(advancedSearchFilter.getWidget());
         }
         lockFiltering = true;
-        for (final ItemFilter<? extends T> filter : filters) {
+        for (final ItemFilter<? extends T> filter : filters()) {
             filter.reset();
         }
         searchFilter.reset();
@@ -1069,9 +1117,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         if (cbxSortOptions != null) {
             return cbxSortOptions.getWidth();
         }
-        if(filters.isEmpty()){
+        if (filters().isEmpty()) {
             return 0f;
         }
-        return filters.get(filters.size() - 1).getWidget().getWidth();
+        return filters().get(filters().size() - 1).getWidget().getWidth();
     }
 }
