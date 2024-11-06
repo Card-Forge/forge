@@ -115,7 +115,7 @@ public class AdventureEventController implements Serializable {
         }
         e.sourceID = pointID;
         e.eventOrigin = eventOrigin;
-        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes.getTownPriceModifier());
+        e.eventRules = new AdventureEventData.AdventureEventRules(e.format, changes == null ? 1f : changes.getTownPriceModifier());
         e.style = style;
 
         switch (style){

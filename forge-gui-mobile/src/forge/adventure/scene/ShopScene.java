@@ -48,15 +48,16 @@ public class ShopScene extends ForgeScene {
     }
 
     public void doAutosell() {
-        boolean promptToConfirmSale = false; //Todo: config option
+        boolean promptToConfirmSale = false; // TODO: config option
         if (promptToConfirmSale) {
+            float townPriceModifier = changes == null ? 1f : changes.getTownPriceModifier();
             int profit = 0;
             int cards = 0;
             for (PaperCard cardToSell: Current.player().autoSellCards.toFlatList()) {
                 cards++;
                 profit += getCardPrice(cardToSell);
             }
-            if (!confirmAutosell(profit, cards, changes.getTownPriceModifier())) {
+            if (!confirmAutosell(profit, cards, townPriceModifier)) {
                 return;
             }
         }
