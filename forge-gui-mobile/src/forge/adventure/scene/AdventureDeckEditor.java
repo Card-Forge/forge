@@ -221,11 +221,17 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             }
 
             if (sellableCount > 0) {
-                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> Current.player().autoSellCards.add(card));
+                FMenuItem moveToAutosell = new FMenuItem(Forge.getLocalizer().getMessage("lbltoSell", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS, e1 -> {
+                    Current.player().autoSellCards.add(card);
+                    refresh();
+                });
                 moveToAutosell.setEnabled(sellableCount - autoSellCount > 0);
                 menu.addItem(moveToAutosell);
 
-                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> Current.player().autoSellCards.remove(card));
+                FMenuItem moveToCatalog = new FMenuItem(Forge.getLocalizer().getMessage("lbltoInventory", autoSellCount, sellableCount), Forge.hdbuttons ? FSkinImage.HDPLUS : FSkinImage.PLUS, e1 -> {
+                    Current.player().autoSellCards.remove(card);
+                    refresh();
+                });
                 moveToCatalog.setEnabled(autoSellCount > 0);
                 menu.addItem(moveToCatalog);
             }
@@ -587,18 +593,24 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                             final int finalCount = count;
                             final int finalValue = value;
                             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSellCurrentFilters"), FSkinImage.QUEST_COINSTACK, e1 -> {
-                                FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", finalCount, finalValue), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
-                                    @Override
-                                    public void run(Boolean result) {
-                                        if (result) {
-                                            for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
-                                                AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                // aloww selling on catalog page only
+                                if (catalogPage.cardManager.getCatalogSelectedIndex() == 1) {
+                                    FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", finalCount, finalValue), Forge.getLocalizer().getMessage("lblSellCurrentFilters"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                                        @Override
+                                        public void run(Boolean result) {
+                                            if (result) {
+                                                for (Map.Entry<PaperCard, Integer> entry : catalogPage.cardManager.getFilteredItems()) {
+                                                    AdventurePlayer.current().sellCard(entry.getKey(), entry.getValue());
+                                                }
+                                                catalogPage.refresh();
+                                                lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
                                             }
-                                            catalogPage.refresh();
-                                            lblGold.setText(String.valueOf(AdventurePlayer.current().getGold()));
                                         }
-                                    }
-                                });
+                                    });
+                                } else {
+                                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblChoose") + " " +
+                                            Forge.getLocalizer().getMessage("lblShowCollection"));
+                                }
                             }));
                         }
                         ((DeckEditorPage) getSelectedPage()).buildDeckMenu(this);
