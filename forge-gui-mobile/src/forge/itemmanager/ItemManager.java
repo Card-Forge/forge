@@ -669,6 +669,15 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
     }
 
+    public int getCatalogSelectedIndex() {
+        if (cardFormatFilter == null)
+            return 0;
+        if (cardFormatFilter.getMainComponent() instanceof FComboBox<?>) {
+            return((FComboBox<?>) cardFormatFilter.getMainComponent()).getSelectedIndex();
+        }
+        return 0;
+    }
+
     public void scrollSelectionIntoView() {
         currentView.scrollSelectionIntoView();
     }
