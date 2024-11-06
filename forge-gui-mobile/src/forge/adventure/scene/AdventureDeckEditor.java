@@ -135,6 +135,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
         protected StoreCatalogPage() {
             super(ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             Current.player().onGoldChange(() -> lblGold.setText(String.valueOf(AdventurePlayer.current().getGold())));
+            cardManager.setBtnAdvancedSearchOptions(false);
         }
 
         @Override
@@ -455,7 +456,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             return new DeckEditorPage[]{
                     new CollectionCatalogPage(),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
-                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
+                    new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)};
         }
     }
 
@@ -484,7 +485,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     return new DeckEditorPage[]{
                             new CatalogPage(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
                             new DeckSectionPage(DeckSection.Main, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
-                            new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
+                            new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.ADVENTURE_SIDEBOARD)};
 
             }
         } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
@@ -1232,16 +1233,19 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                     captionPrefix = Forge.getLocalizer().getMessage("lblMain");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("ttMain"));
                     icon = MAIN_DECK_ICON;
+                    cardManager.setBtnAdvancedSearchOptions(true);
                     break;
                 case Sideboard:
                     captionPrefix = Forge.getLocalizer().getMessage("lblSide");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblSideboard"));
                     icon = SIDEBOARD_ICON;
+                    cardManager.setBtnAdvancedSearchOptions(false);
                     break;
                 case Commander:
                     captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
                     cardManager.setCaption(Forge.getLocalizer().getMessage("lblCommander"));
                     icon = FSkinImage.COMMANDER;
+                    cardManager.setBtnAdvancedSearchOptions(true);
                     break;
             }
         }
