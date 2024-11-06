@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -7,6 +8,8 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
+import forge.game.replacement.ReplacementResult;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -31,8 +34,10 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(assemblers));
 
-        List<Card> tgtCards = getTargetCards(sa);
-        if(!tgtCards.isEmpty()) {
+        String definedContraption = sa.getParam("DefinedContraption");
+
+        List<Card> tgtCards = definedContraption == null ? null : AbilityUtils.getDefinedCards(host, definedContraption, sa);
+        if(tgtCards != null) {
             sb.append(Lang.joinVerb(tgtCards, sa.hasParam("Reassemble") ? " reassemble" : " assemble")).append(" ");
             sb.append(Lang.joinHomogenous(tgtCards)).append(".");
             return sb.toString();
@@ -51,35 +56,48 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-        Card host = sa.getHostCard();
+        final Card host = sa.getHostCard();
+        final Game game = host.getGame();
+        //TODO: Host seems wrong when replaced; is changed to steamflogger boss.
 
         String defaultAssembler = host.isCreature() ? "Self" : "You";
         String definedAssembler = sa.getParamOrDefault("DefinedAssembler", defaultAssembler);
         List<GameEntity> assemblers = AbilityUtils.getDefinedEntities(host, definedAssembler, sa);
+        //TODO: And ReplacedCause ends up being null.
+
+        if(assemblers.isEmpty())
+            return;
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         final CardZoneTable triggerList = AbilityKey.addCardZoneTableParams(moveParams, sa);
 
         String definedContraption = sa.getParam("DefinedContraption");
-        if(definedContraption != null) { //TODO: This but better.
+        if(definedContraption != null) {
             List<Card> tgtCards = AbilityUtils.getDefinedCards(host, definedContraption, sa);
-            if (!tgtCards.isEmpty()) {
-                //Defined contraptions; (re)assemble them specifically.
-                //This could be its own keyword, but it only shows up on two cards and works similarly.
-                for (Card card : tgtCards) {
-                    if (card.getZone().getZoneType() != ZoneType.Battlefield)
-                        card.getGame().getAction().moveToPlay(card, sa, moveParams);
-                    //if(card.getController().) //TODO: Gain control.
-                    //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
-                    int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
-                    card.setSprocket(sprocket);
-                    if (sa.hasParam("Remember")) {
-                        source.addRemembered(card);
-                    }
-                }
-                triggerList.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
+            //Defined contraptions; (re)assemble them specifically.
+            //This could be its own keyword, but it only shows up on two cards and works similarly.
+            if (tgtCards.isEmpty())
                 return;
+            GameEntity assembler = assemblers.get(0);
+            Player p = assembler instanceof Player ? (Player) assembler
+                    : assembler instanceof Card ? ((Card) assembler).getController()
+                    : null;
+            if (p == null || !p.isInGame()) return;
+
+            for (Card card : tgtCards) {
+                card.setController(p, game.getNextTimestamp());
+                if (card.getZone().getZoneType() != ZoneType.Battlefield)
+                    card.getGame().getAction().moveToPlay(card, sa, moveParams);
+
+                //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
+                int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
+                card.setSprocket(sprocket);
+                if (sa.hasParam("Remember")) {
+                    source.addRemembered(card);
+                }
             }
+            triggerList.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
+            return;
         }
 
         int amount = sa.hasParam("Amount") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
@@ -89,8 +107,15 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
                     : assembler instanceof Card ? ((Card) assembler).getController()
                     : null;
             if (p == null || !p.isInGame()) continue;
+            // Replacement effects
+            Map<AbilityKey, Object> replaceMap = AbilityKey.mapFromAffected(p);
+            replaceMap.put(AbilityKey.Player, p);
+            replaceMap.put(AbilityKey.Cause, assembler);
             final PlayerZone contraptionDeck = p.getZone(ZoneType.ContraptionDeck);
             for (int i = 0; i < amount; i++) {
+                if (game.getReplacementHandler().run(ReplacementType.AssembleContraption, replaceMap) != ReplacementResult.NotReplaced) {
+                    continue;
+                }
                 if(contraptionDeck.isEmpty())
                     continue;
                 Card contraption = contraptionDeck.get(0);

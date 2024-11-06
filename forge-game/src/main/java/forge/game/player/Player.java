@@ -3967,10 +3967,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setCrankCounter(int counters) {
         this.crankCounter = counters;
-        if(this.contraptionSprocketEffect == null)
+        if (this.contraptionSprocketEffect != null) {
+            Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
+            contraptionSprocketEffect.setCounters(counterMap);
+        }
+        else if (Iterables.any(this.getCardsIn(ZoneType.Battlefield), Card::isContraption)) {
+            //TODO: Rewrite above for predicates update
             this.createContraptionSprockets();
-        else
-            contraptionSprocketEffect.setCounters(CounterEnumType.CRANK, this.crankCounter);
+        }
     }
     public void advanceCrankCounter() {
         this.setCrankCounter((this.crankCounter) % 3 + 1);
@@ -3992,7 +3996,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         contraptionSprocketEffect.setName("Contraption Sprockets");
         contraptionSprocketEffect.setGamePieceType(GamePieceType.EFFECT);
 
-        contraptionSprocketEffect.setCounters(CounterEnumType.CRANK, this.crankCounter);
+        //Add "counters" on the effect to represent the current CRANK counter position.
+        //This and some other un-cards could benefit from a distinct system for positional counters or markers,
+        //see for instance Baron von Count or B-I-N-G-O. For now this is sufficient to display the current sprocket
+        //on the counter overlay, and I don't think any existing effect will notice it.
+        Map<CounterType, Integer> counterMap = Map.of(CounterType.get(CounterEnumType.CRANK), this.crankCounter);
+        contraptionSprocketEffect.setCounters(counterMap);
         List<String> text = Lists.newArrayList("At the beginning of your upkeep, if you control a Contraption, move the CRANK! counter to the next sprocket and crank any number of that sprocket's Contraptions.");
         contraptionSprocketEffect.addHiddenExtrinsicKeywords(game.getNextTimestamp(), 0, text);
 

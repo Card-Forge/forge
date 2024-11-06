@@ -18,7 +18,7 @@ public enum ApiType {
     AddOrRemoveCounter (CountersPutOrRemoveEffect.class),
     AddPhase (AddPhaseEffect.class),
     AddTurn (AddTurnEffect.class),
-    AdvanceCrank (AdvanceCrank.class),
+    AdvanceCrank (AdvanceCrankEffect.class),
     AlterAttribute (AlterAttributeEffect.class),
     Amass (AmassEffect.class),
     Animate (AnimateEffect.class),

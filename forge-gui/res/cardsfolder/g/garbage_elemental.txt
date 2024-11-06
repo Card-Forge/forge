@@ -5,6 +5,7 @@ Oracle:<Unsupported Variant>
 
 # --- VARIANT B ---
 
+Variant:B:Types:Creature Elemental Rigger
 Variant:B:PT:3/1
 Variant:B:K:Undying
 Variant:B:T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigAssemble | TriggerDescription$ When CARDNAME enters, it assembles a Contraption.

@@ -15,10 +15,10 @@ public class TriggerCrankContraption extends Trigger {
 
     @Override
     public boolean performTest(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
             return false;
         }
-        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
         }
         return true;
