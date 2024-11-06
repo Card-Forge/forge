@@ -350,8 +350,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 setColorIdentity(temp);
             else
                 colorIdentity = ColorSet.ALL_COLORS;
-        }
-        else
+        } else
             colorIdentity = ColorSet.ALL_COLORS;
 
         gold = data.readInt("gold");
@@ -467,19 +466,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         if (data.containsKey("newCards")) {
             InventoryItem[] items = (InventoryItem[]) data.readObject("newCards");
-            for (InventoryItem item : items){
-                newCards.add((PaperCard)item);
+            for (InventoryItem item : items) {
+                newCards.add((PaperCard) item);
             }
         }
         if (data.containsKey("noSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
-            for (PaperCard item : items){
+            for (PaperCard item : items) {
                 noSellCards.add(item);
             }
         }
         if (data.containsKey("autoSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("autoSellCards");
-            for (PaperCard item : items){
+            for (PaperCard item : items) {
                 autoSellCards.add(item);
             }
         }
@@ -598,6 +597,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public TextureRegion avatar() {
         return HeroListData.instance().getAvatar(heroRace, isFemale, avatarIndex);
     }
+
     public String raceName() {
         return HeroListData.instance().getRaces().get(Current.player().heroRace);
     }
@@ -607,6 +607,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             return MapStage.getInstance();
         return WorldStage.getInstance();
     }
+
     public void addStatusMessage(String iconName, String message, Integer itemCount, float x, float y) {
         String symbol = itemCount == null || itemCount < 0 ? "" : " +";
         String icon = iconName == null ? "" : "[+" + iconName + "]";
@@ -614,12 +615,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         TextraLabel actor = Controls.newTextraLabel("[%95]" + icon + "[WHITE]" + symbol + count + " " + message);
         actor.setPosition(x, y);
         actor.addAction(Actions.sequence(
-            Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
-            Actions.hide(),
-            Actions.removeActor())
+                Actions.parallel(Actions.moveBy(0f, 5f, 3f), Actions.fadeIn(2f)),
+                Actions.hide(),
+                Actions.removeActor())
         );
         getCurrentGameStage().addActor(actor);
     }
+
     public void addCard(PaperCard card) {
         cards.add(card);
         newCards.add(card);
@@ -631,8 +633,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 cards.add(reward.getCard());
                 newCards.add(reward.getCard());
                 if (reward.isAutoSell()) {
-                  autoSellCards.add(reward.getCard());
-                  refreshEditor();
+                    autoSellCards.add(reward.getCard());
+                    refreshEditor();
                 } else if (reward.isNoSell()) {
                     noSellCards.add(reward.getCard());
                     refreshEditor();
@@ -847,9 +849,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         for (String name : equippedItems.values()) {
             ItemData data = ItemData.getItem(name);
             if (data != null
-                && ("Boots".equalsIgnoreCase(data.equipmentSlot)
-                || "Body".equalsIgnoreCase(data.equipmentSlot)
-                || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
+                    && ("Boots".equalsIgnoreCase(data.equipmentSlot)
+                    || "Body".equalsIgnoreCase(data.equipmentSlot)
+                    || "Neck".equalsIgnoreCase(data.equipmentSlot))) {
                 armor.add(data);
             }
         }
@@ -903,7 +905,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public int cardSellPrice(PaperCard card) {
-        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - currentLocationChanges.getTownPriceModifier()));
+        float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
+        return (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor * (2.0f - townPriceModifier));
     }
 
     public void sellCard(PaperCard card, Integer result) {
