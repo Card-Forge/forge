@@ -609,7 +609,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
                                     });
                                 } else {
                                     FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblChoose") + " " +
-                                            Forge.getLocalizer().getMessage("lblShowCollection"));
+                                        Forge.getLocalizer().getMessage("lblSellable"));
                                 }
                             }));
                         }

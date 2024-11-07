@@ -6,6 +6,8 @@ import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Current;
 import forge.item.PaperCard;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
@@ -42,7 +44,7 @@ public class ShopScene extends ForgeScene {
         getScreen();
         screen.refresh();
         super.enter();
-        doAutosell();
+        processAutoSell();
     }
 
     @Override
@@ -50,30 +52,36 @@ public class ShopScene extends ForgeScene {
         return screen == null ? screen = new AdventureDeckEditor(true, null) : screen;
     }
 
-    public void doAutosell() {
-        boolean promptToConfirmSale = true; // TODO: config option
-        if (promptToConfirmSale) {
+    private void processAutoSell() {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.PROMPT_FOR_AUTOSELL)) {
             int profit = 0;
             int cards = 0;
             for (PaperCard cardToSell : Current.player().autoSellCards.toFlatList()) {
                 cards++;
                 profit += getCardPrice(cardToSell);
             }
-            confirmAutosell(profit, cards);
+            if (profit == 0 || cards == 0)
+                return;
+            FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", cards, profit),
+                Forge.getLocalizer().getMessage("lblAutoSellable"), Forge.getLocalizer().getMessage("lblSell"),
+                Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
+                    @Override
+                    public void run(Boolean result) {
+                        if (result) {
+                            doAutosell();
+                        }
+                    }
+                }
+            );
+        } else {
+            doAutosell();
         }
     }
 
-    private void confirmAutosell(int profit, int cards) {
-        FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblSellAllConfirm", cards, profit), Forge.getLocalizer().getMessage("lblAutoSell"), Forge.getLocalizer().getMessage("lblSell"), Forge.getLocalizer().getMessage("lblCancel"), false, new Callback<Boolean>() {
-            @Override
-            public void run(Boolean result) {
-                if (result) {
-                    AdventurePlayer.current().doAutosell();
-                    if (screen != null)
-                        screen.refresh();
-                }
-            }
-        });
+    private void doAutosell() {
+        AdventurePlayer.current().doAutosell();
+        if (screen != null)
+            screen.refresh();
     }
 
     public void loadChanges(PointOfInterestChanges changes) {
