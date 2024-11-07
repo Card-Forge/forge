@@ -1,0 +1,8 @@
+Name:Faithful Pikemaster
+ManaCost:3 W
+Types:Creature Rhino Monk Soldier
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
+Oracle:When Faithful Pikemaster enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)\nAs long as it's your turn, Faithful Pikemaster has first strike.

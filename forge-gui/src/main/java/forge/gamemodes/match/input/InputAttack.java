@@ -247,18 +247,18 @@ public class InputAttack extends InputSyncronizedBase {
     public String getActivateAction(Card card) {
         if (combat.isAttacking(card, currentDefender)) {
             if (potentialBanding) {
-                return "activate band with card";
+                return Localizer.getInstance().getMessage("lblActivateBand");
             }
-            return "remove card from combat";
+            return Localizer.getInstance().getMessage("lblRemoveFromCombat");
         }
         if (card.getController().isOpponentOf(playerAttacks)) {
             if (defenders.contains(card)) {
-                return "declare attackers for card";
+                return Localizer.getInstance().getMessage("lblDeclareAttackersForCard");
             }
             return null;
         }
         if (playerAttacks.getZone(ZoneType.Battlefield).contains(card) && CombatUtil.canAttack(card, currentDefender)) {
-            return "attack with card";
+            return Localizer.getInstance().getMessage("lblAttackWithCard");
         }
         return null;
     }

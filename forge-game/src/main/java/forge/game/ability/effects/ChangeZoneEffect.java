@@ -1002,7 +1002,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                     && !sa.hasParam("DefinedPlayer")) {
-                fetchList = new CardCollection(player.getGame().getCardsIn(origin));
+                fetchList = new CardCollection(game.getCardsIn(origin));
             }
             else {
                 fetchList = new CardCollection(player.getCardsIn(origin));
@@ -1061,7 +1061,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
-                decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
+                game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
             }
             if (searchedLibrary && sa.hasParam("Searched")) {
                 searchedLibrary = false;

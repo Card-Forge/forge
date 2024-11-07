@@ -2,11 +2,7 @@ package forge.app;
 
 import com.badlogic.gdx.Gdx;
 import forge.interfaces.IDeviceAdapter;
-import forge.util.BuildInfo;
-import forge.util.FileUtil;
-import forge.util.JVMOptions;
-import forge.util.OperatingSystem;
-import forge.util.RestartUtil;
+import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
@@ -17,30 +13,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
+import java.util.Optional;
 
 public class Main {
     private static final String versionString = BuildInfo.getVersionString();
     public static void main(String[] args) {
-        checkJVMArgs(System.getProperty("java.version"));
-    }
-
-    static void checkJVMArgs(String javaVersion) {
-        RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
-        List<String> arguments = runtimeMxBean.getInputArguments();
-        JVMOptions.getStringBuilder().append("Java Version: ").append(javaVersion).append("\nArguments: \n");
-        for (String a : arguments) {
-            if (a.startsWith("-agent") || a.startsWith("-javaagent"))
-                continue;
-            JVMOptions.getStringBuilder().append(a).append("\n");
-        }
-        if (!JVMOptions.checkRuntime(arguments)) {
-            new DialogWindow("Error", JVMOptions.getStringBuilder().toString());
-        } else
-            new GameLauncher(versionString);
+        new GameLauncher(versionString);
     }
 
     public static class DesktopAdapter implements IDeviceAdapter {
@@ -72,9 +52,27 @@ public class Main {
         }
 
         @Override
+        public String getLatestChanges(String commitsAtom, Date buildDateOriginal, Date max) {
+            return RSSReader.getCommitLog(commitsAtom, buildDateOriginal, max);
+        }
+
+        @Override
+        public String getReleaseTag(String releaseAtom) {
+            return RSSReader.getLatestReleaseTag(releaseAtom);
+        }
+
+        @Override
         public boolean openFile(String filename) {
             try {
-                Desktop.getDesktop().open(new File(filename));
+                File installer = new File(filename);
+                if (installer.exists()) {
+                    if (filename.endsWith(".jar")) {
+                        installer.setExecutable(true, false);
+                        Desktop.getDesktop().open(installer);
+                    } else {
+                        Desktop.getDesktop().open(installer.getParentFile());
+                    }
+                }
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -98,9 +96,11 @@ public class Main {
 
         @Override
         public void closeSplashScreen() {
-            SplashScreen splash = SplashScreen.getSplashScreen();
-            if (splash != null) {
-                splash.close();
+            //could throw exception..
+            try {
+                Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

@@ -19,16 +19,23 @@ public class ColorMap
     }
 
     public ColorMap(FileHandle file) {
-        Pixmap pdata=new Pixmap(file);
-        width=pdata.getWidth();
-        height=pdata.getHeight();
-        data=new Color[width*height];
-        for(int y=0;y<height;y++)
-            for(int x=0;x<width;x++)
-            {
-                data[x+y*width]=new Color(pdata.getPixel(x,y));
-            }
-        pdata.dispose();
+        if (file.exists()) {
+            Pixmap pdata=new Pixmap(file);
+            width=pdata.getWidth();
+            height=pdata.getHeight();
+            data=new Color[width*height];
+            for(int y=0;y<height;y++)
+                for(int x=0;x<width;x++)
+                {
+                    data[x+y*width]=new Color(pdata.getPixel(x,y));
+                }
+            pdata.dispose();
+        } else {
+            width = 0;
+            height = 0;
+            data = new Color[0];
+            System.err.println("Cannot find file for ColorMap: " + file.path());
+        }
     }
 
     public int getWidth() {

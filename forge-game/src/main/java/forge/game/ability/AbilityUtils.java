@@ -1705,7 +1705,7 @@ public class AbilityUtils {
                 // Count$Kicked.<numHB>.<numNotHB>
                 if (sq[0].startsWith("Kicked")) {
                     boolean kicked = sa.isKicked() || (!isUnlinkedFromCastSA(ctb, c) && c.getKickerMagnitude() > 0);
-                    return doXMath(Integer.parseInt(kicked ? sq[1] : sq[2]), expr, c, ctb);
+                    return doXMath(calculateAmount(c, sq[kicked ? 1 : 2], ctb), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("Bargain")) {

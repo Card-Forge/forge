@@ -134,16 +134,14 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 continue;
             }
 
-            if (cause != null && cause.hasParam("ExcessSVar")) {
-                if ((!cause.hasParam("ExcessSVarCondition") || damaged.getKey().isValid(cause.getParam("ExcessSVarCondition"), cause.getActivatingPlayer(), cause.getHostCard(), cause))
-                        && (!cause.hasParam("ExcessSVarTargeted") || damaged.getKey().equals(cause.getTargetCard()))) {
-                    storedExcess += excess;
-                }
+            if (cause != null && cause.hasParam("ExcessSVar")
+                    && (!cause.hasParam("ExcessSVarCondition") || damaged.getKey().isValid(cause.getParam("ExcessSVarCondition"), cause.getActivatingPlayer(), cause.getHostCard(), cause))) {
+                storedExcess += excess;
             }
 
             damaged.getKey().setHasBeenDealtExcessDamageThisTurn(true);
             damaged.getKey().logExcessDamage(excess);
-            // Run triggers
+
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.DamageTarget, damaged.getKey());
             runParams.put(AbilityKey.DamageAmount, excess);
@@ -158,7 +156,6 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         }
 
         if (!damagedList.isEmpty()) {
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.DamageTargets, damagedList);
             runParams.put(AbilityKey.IsCombatDamage, isCombat);

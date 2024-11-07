@@ -6,6 +6,7 @@ import java.util.Set;
 public class GameRules {
     private final GameType gameType;
     private boolean manaBurn;
+    private boolean orderCombatants;
     private int poisonCountersToLose = 10; // is commonly 10, but turns into 15 for 2HG
     private int gamesPerMatch = 3;
     private int gamesToWinMatch = 2;
@@ -35,6 +36,14 @@ public class GameRules {
 
     public void setManaBurn(final boolean manaBurn) {
         this.manaBurn = manaBurn;
+    }
+
+    public boolean hasOrderCombatants() {
+        return orderCombatants;
+    }
+
+    public void setOrderCombatants(final boolean ordered) {
+        this.orderCombatants = ordered;
     }
 
     public int getPoisonCountersToLose() {

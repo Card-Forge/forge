@@ -79,7 +79,8 @@ public class WorldSave   {
 
                 } catch (Exception e) {
                     System.err.println("Generating New World");
-                    currentSave.world.generateNew(0);
+                    if (!currentSave.world.generateNew(0))
+                        return false;
                 }
 
                 currentSave.onLoadList.emit();

@@ -1,10 +1,11 @@
 Name:Temporary Truce
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Draw | Defined$ Player | Upto$ True | NumCards$ 2 | SubAbility$ DBRepeat | AILogic$ GainLife | SpellDescription$ Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainLife | StackDescription$ For each card less than two a player draws this way, that player gains 2 life.
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ AFNotDrawnNum | Defined$ Player.IsRemembered
-SVar:Y:SVar$AFNotDrawnNum/NMinus.2
+A:SP$ Draw | Defined$ Player | Upto$ True | NumCards$ 2 | RememberDrawn$ AllReplaced | SubAbility$ DBRepeat | AILogic$ GainLife | SpellDescription$ Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainLife | SubAbility$ DBCleanup | StackDescription$ For each card less than two a player draws this way, that player gains 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | Defined$ Player.IsRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$Valid Card.RememberedPlayerOwn/NMinus.2
 SVar:X:SVar$Y/Twice
 AI:RemoveDeck:All
 Oracle:Each player may draw up to two cards. For each card less than two a player draws this way, that player gains 2 life.

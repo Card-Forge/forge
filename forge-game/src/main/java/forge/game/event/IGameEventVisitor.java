@@ -33,7 +33,7 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventManaBurn event);
     T visit(GameEventMulligan event);
     T visit(GameEventPlayerControl event);
-    T visit(GameEventPlayerDamaged gameEventPlayerDamaged);
+    T visit(GameEventPlayerDamaged event);
     T visit(GameEventPlayerCounters event);
     T visit(GameEventPlayerPoisoned event);
     T visit(GameEventPlayerRadiation event);
@@ -45,19 +45,20 @@ public interface IGameEventVisitor<T> {
     T visit(GameEventTokenStateUpdate event);
     T visit(GameEventScry event);
     T visit(GameEventShuffle event);
-    T visit(GameEventSpellAbilityCast gameEventSpellAbilityCast);
+    T visit(GameEventSpellAbilityCast event);
     T visit(GameEventSpellResolved event);
     T visit(GameEventSpellRemovedFromStack event);
     T visit(GameEventSubgameStart event);
     T visit(GameEventSubgameEnd event);
     T visit(GameEventSurveil event);
     T visit(GameEventTokenCreated event);
-    T visit(GameEventTurnBegan gameEventTurnBegan);
+    T visit(GameEventTurnBegan event);
     T visit(GameEventTurnEnded event);
     T visit(GameEventTurnPhase event);
     T visit(GameEventZone event);
-    T visit(GameEventCardForetold gameEventCardForetold);
-    T visit(GameEventDayTimeChanged gameEventDayTimeChanged);
+    T visit(GameEventCardForetold event);
+    T visit(GameEventCardPlotted event);
+    T visit(GameEventDayTimeChanged event);
 
     // This is base class for all visitors.
     class Base<T> implements IGameEventVisitor<T>{
@@ -112,11 +113,8 @@ public interface IGameEventVisitor<T> {
         public T visit(GameEventTurnPhase event) { return null; }
         public T visit(GameEventPlayerDamaged event) { return null; }
         public T visit(GameEventZone event) { return null; }
-        public T visit(GameEventCardForetold gameEventCardForetold) {
-            return null;
-        }
-        public T visit(GameEventDayTimeChanged gameEventDayTimeChanged) {
-            return null;
-        }
+        public T visit(GameEventCardForetold event) { return null; }
+        public T visit(GameEventCardPlotted event) { return null; }
+        public T visit(GameEventDayTimeChanged event) { return null; }
     }
 }

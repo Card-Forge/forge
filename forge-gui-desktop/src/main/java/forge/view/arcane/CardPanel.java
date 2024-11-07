@@ -48,6 +48,7 @@ import javax.swing.SwingUtilities;
 import forge.CachedCardImage;
 import forge.StaticData;
 import forge.card.CardEdition;
+import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
 import forge.game.card.CardView;
@@ -62,9 +63,11 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.CardFaceSymbols;
+import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedPanel;
 import forge.toolbox.IDisposable;
 import forge.util.CardTranslation;
@@ -365,6 +368,22 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
 
         final boolean canShow = matchUI.mayView(card);
+        if (canShow && ZoneType.Battlefield.equals(card.getZone())) {
+            CardStateView cardStateView = card.getCurrentState();
+            if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && !CardStateName.Original.equals(cardStateView.getState())) {
+                switch (cardStateView.getState()) {
+                    case EmptyRoom -> {
+                        FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset + cardHeight / 2, cardWidth, cardHeight);
+                        FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                    }
+                    case RightSplit ->
+                            FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset + cardHeight / 2, cardWidth, cardHeight);
+                    case LeftSplit ->
+                            FSkin.drawImage(g, FSkin.getIcon(FSkinProp.ICO_PADLOCK), cardXOffset, cardYOffset, cardWidth, cardHeight);
+                }
+            }
+
+        }
         displayIconOverlay(g, canShow);
         if (canShow) {
             drawFoilEffect(g, card, cardXOffset, cardYOffset,

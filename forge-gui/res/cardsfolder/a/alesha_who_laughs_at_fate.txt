@@ -1,0 +1,12 @@
+Name:Alesha, Who Laughs at Fate
+ManaCost:1 B R
+Types:Legendary Creature Human Warrior
+PT:2/2
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever NICKNAME attacks, put a +1/+1 counter on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigChangeZone | TriggerDescription$ Raid — At the beginning of your end step, if you attacked this turn, return target creature card with mana value less than or equal to NICKNAME's power from your graveyard to the battlefield.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+cmcLEX | TgtPrompt$ Select target creature card with mana value less than or equal to Alesha's power
+SVar:RaidTest:Count$AttackersDeclared
+SVar:X:Count$CardPower
+Oracle:First strike\nWhenever Alesha attacks, put a +1/+1 counter on it.\nRaid — At the beginning of your end step, if you attacked this turn, return target creature card with mana value less than or equal to Alesha's power from your graveyard to the battlefield.

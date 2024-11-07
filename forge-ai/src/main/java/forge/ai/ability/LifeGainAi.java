@@ -42,6 +42,9 @@ public class LifeGainAi extends SpellAbilityAi {
 
         if (!lifeCritical) {
             // return super.willPayCosts(ai, sa, cost, source);
+            if ("CriticalOnly".equals(sa.getParam("AILogic"))) {
+                return false;
+            }
             if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa, false)) {
                 return false;
             }

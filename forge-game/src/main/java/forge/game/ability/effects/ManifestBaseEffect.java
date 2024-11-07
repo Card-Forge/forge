@@ -31,7 +31,6 @@ public abstract class ManifestBaseEffect extends SpellAbilityEffect {
     }
 
     protected void manifestLoop(SpellAbility sa, Player p, final int amount) {
-
         final Card source = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = source.getGame();
