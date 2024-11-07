@@ -54,13 +54,14 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final int artIndex;
     private final boolean foil;
     private Boolean hasImage;
+    private final boolean noSell;
     private String sortableName;
     private final String functionalVariant;
 
     // Calculated fields are below:
     private transient CardRarity rarity; // rarity is given in ctor when set is assigned
     // Reference to a new instance of Self, but foiled!
-    private transient PaperCard foiledVersion;
+    private transient PaperCard foiledVersion, noSellVersion;
 
     @Override
     public String getName() {
@@ -137,6 +138,24 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 this.artIndex, false, String.valueOf(collectorNumber), this.artist, this.functionalVariant);
         return unFoiledVersion;
     }
+    public PaperCard getNoSellVersion() {
+        if (this.noSell)
+            return this;
+
+        if (this.noSellVersion == null) {
+            this.noSellVersion = new PaperCard(this.rules, this.edition, this.rarity,
+                    this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, true);
+        }
+        return this.noSellVersion;
+    }
+    public PaperCard getSellable() {
+        if (!this.noSell)
+            return this;
+
+        PaperCard sellable = new PaperCard(this.rules, this.edition, this.rarity,
+                this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, false);
+        return sellable;
+    }
 
     @Override
     public String getItemType() {
@@ -144,6 +163,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return localizer.getMessage("lblCard");
     }
 
+    public boolean isNoSell() {
+        return noSell;
+    }
     public boolean hasImage() {
         return hasImage(false);
     }
@@ -162,6 +184,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
                      final int artIndex0, final boolean foil0, final String collectorNumber0,
                      final String artist0, final String functionalVariant) {
+        this(rules0, edition0, rarity0, artIndex0, foil0, collectorNumber0, artist0, functionalVariant, false);
+    }
+
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
+                     final int artIndex0, final boolean foil0, final String collectorNumber0,
+                     final String artist0, final String functionalVariant, final boolean noSell0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -177,6 +205,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         // This is a good tradeoff
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
+        noSell = noSell0;
     }
 
     public static PaperCard FAKE_CARD = new PaperCard(CardRules.getUnsupportedCardNamed("Fake Card"), "Fake Edition", CardRarity.Common);

@@ -473,7 +473,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if (data.containsKey("noSellCards")) {
             PaperCard[] items = (PaperCard[]) data.readObject("noSellCards");
             for (PaperCard item : items) {
-                noSellCards.add(item);
+                if (item != null)
+                    noSellCards.add(item.getNoSellVersion());
             }
         }
         if (data.containsKey("autoSellCards")) {
@@ -636,7 +637,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     autoSellCards.add(reward.getCard());
                     refreshEditor();
                 } else if (reward.isNoSell()) {
-                    noSellCards.add(reward.getCard());
+                    noSellCards.add(reward.getCard().getNoSellVersion());
                     refreshEditor();
                 }
                 break;
