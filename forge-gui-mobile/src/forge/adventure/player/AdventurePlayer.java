@@ -637,8 +637,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     autoSellCards.add(reward.getCard());
                     refreshEditor();
                 } else if (reward.isNoSell()) {
-                    noSellCards.add(reward.getCard().getNoSellVersion());
-                    refreshEditor();
+                    if (reward.getCard() != null) {
+                        noSellCards.add(reward.getCard().getNoSellVersion());
+                        refreshEditor();
+                    }
                 }
                 break;
             case Gold:
