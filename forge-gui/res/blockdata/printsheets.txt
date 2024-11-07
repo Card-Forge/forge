@@ -6538,7 +6538,7 @@ Gandalf the White|LTR
 1 Thriving Heath|J25
 7 Plains|J25
 
-[J25 Healers ]
+[J25 Healers 1]
 
 1 Speaker of the Heavens|J25
 1 Hinterland Sanctifier|J25
