@@ -84,6 +84,7 @@
             <resource>
                 <directory>filters</directory>
                 <filtering>true</filtering>
+                <targetPath>assets</targetPath>
             </resource>
         </resources>
         <!-- append generated snapshot-version property -->
@@ -215,6 +216,12 @@
                     <artifactId>gdx-backend-android</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>26.0.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -445,7 +452,7 @@
                                             </fileset>
                                         </copy>
                                         <copy todir="${project.build.directory}/res/res">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="build.txt" />
                                             </fileset>
                                         </copy>
@@ -506,8 +513,9 @@
                                             </fileset>
                                         </ftp>
                                         <ftp password="${cardforge.pass}" server="${cardforge.server}" userid="${cardforge.user}" passive="true" remotedir="maven/releases/forge/forge-gui-android/">
-                                            <fileset dir="${project.build.directory}/classes">
+                                            <fileset dir="${project.build.directory}/classes/assets">
                                                 <include name="version.txt" />
+                                                <include name="build.txt" />
                                             </fileset>
                                         </ftp>
                                     </target>

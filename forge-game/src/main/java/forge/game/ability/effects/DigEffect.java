@@ -367,7 +367,6 @@ public class DigEffect extends SpellAbilityEffect {
                     }
                 }
 
-
                 for (Card c : movedCards) {
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);

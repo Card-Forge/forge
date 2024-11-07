@@ -1,7 +1,7 @@
 Name:Hell to Pay
 ManaCost:X R
 Types:Sorcery
-A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | ExcessSVar$ Excess | ExcessSVarTargeted$ True | SubAbility$ DBToken | SpellDescription$ CARDNAME deals X damage to target creature.
+A:SP$ DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | ExcessSVar$ Excess | ExcessSVarCondition$ Card.targetedBy | SubAbility$ DBToken | SpellDescription$ CARDNAME deals X damage to target creature.
 SVar:X:Count$xPaid
 SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ Excess | TokenTapped$ True | SpellDescription$ Create a number of tapped Treasure tokens equal to the amount of excess damage dealt to that creature this way.
 DeckHas:Type$Treasure|Artifact & Ability$Token|Sacrifice

@@ -159,7 +159,6 @@ public class Forge implements ApplicationListener {
     public void create() {
         //install our error handler
         ExceptionHandler.registerErrorHandling();
-        FThreads.invokeInEdtLater(() -> getDeviceAdapter().closeSplashScreen());
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
@@ -258,6 +257,8 @@ public class Forge implements ApplicationListener {
                     /*  call preloadExtendedArt here, if we put it above we will  *
                      *  get error: No OpenGL context found in the current thread. */
                     preloadExtendedArt();
+                    // should be after create method but try to close this at a later time.
+                    getDeviceAdapter().closeSplashScreen();
                 });
             };
             //see if app or assets need updating
@@ -302,7 +303,7 @@ public class Forge implements ApplicationListener {
                 filteredkeys.add(cardname);
         }
         if (!filteredkeys.isEmpty())
-            ImageCache.preloadCache(filteredkeys);
+            ImageCache.getInstance().preloadCache(filteredkeys);
     }
 
     private void preloadBoosterDrafts() {
@@ -759,7 +760,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToClassic() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             isMobileAdventureMode = false;
             GuiBase.setIsAdventureMode(false);
             setCursor(FSkin.getCursor().get(0), "0");
@@ -773,7 +774,7 @@ public class Forge implements ApplicationListener {
 
     public static void switchToAdventure() {
         setTransitionScreen(new TransitionScreen(() -> {
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
             clearCurrentScreen();
             clearTransitionScreen();
             openAdventure();
@@ -842,17 +843,17 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
         } finally {
             if (dispose)
-                ImageCache.disposeTextures();
+                ImageCache.getInstance().disposeTextures();
         }
     }
 
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update(ImageCache.counter, getAssets().manager().getMemoryInMegabytes());
+            frameRate.update(ImageCache.getInstance().counter, getAssets().manager().getMemoryInMegabytes());
 
         try {
-            ImageCache.allowSingleLoad();
+            ImageCache.getInstance().allowSingleLoad();
             ForgeAnimation.advanceAll();
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
@@ -1092,7 +1093,7 @@ public class Forge implements ApplicationListener {
         System.out.println(message);
     }
 
-    public static void startKeyInput(KeyInputAdapter adapter, boolean numeric) {
+    public static void startKeyInput(KeyInputAdapter adapter) {
         if (keyInputAdapter == adapter) {
             return;
         }
@@ -1100,7 +1101,9 @@ public class Forge implements ApplicationListener {
             keyInputAdapter.onInputEnd(); //make sure previous adapter is ended
         }
         keyInputAdapter = adapter;
-        Gdx.input.setOnscreenKeyboardVisible(true, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
+    }
+    public static void setOnScreenKeyboard(boolean val, boolean numeric) {
+        Gdx.input.setOnscreenKeyboardVisible(val, numeric ? Input.OnscreenKeyboardType.NumberPad : Input.OnscreenKeyboardType.Default);
     }
 
     public static boolean endKeyInput() {

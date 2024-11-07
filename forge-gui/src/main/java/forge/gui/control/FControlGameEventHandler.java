@@ -433,6 +433,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     }
 
     @Override
+    public Void visit(final GameEventCardPlotted event) {
+        showExileUpdate = true;
+        activatingPlayer = event.activatingPlayer.getView();
+        playersWithValidTargets.put(activatingPlayer, null);
+        return processEvent();
+    }
+
+    @Override
     public Void visit(final GameEventPlayerStatsChanged event) {
         final CardCollection cards = new CardCollection();
         for (final Player p : event.players) {

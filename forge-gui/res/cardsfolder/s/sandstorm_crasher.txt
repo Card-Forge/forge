@@ -1,0 +1,8 @@
+Name:Sandstorm Crasher
+ManaCost:3 R
+Types:Creature Minotaur Berserker Wizard
+PT:3/4
+K:Trample
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigCopy | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, create a tapped and attacking token that's a copy of target creature you control. Sacrifice the token at the beginning of the next end step. (An exerted creature won't untap during your next untap step.)
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumCopies$ 1 | AtEOT$ Sacrifice | TokenTapped$ True | TokenAttacking$ True | SpellDescription$ When you do, create a tapped and attacking token that's a copy of target creature you control. Sacrifice the token at the beginning of the next end step.
+Oracle:Trample\nYou may exert Sandstorm Crasher as it attacks. When you do, create a tapped and attacking token that's a copy of target creature you control. Sacrifice the token at the beginning of the next end step. (An exerted creature won't untap during your next untap step.)

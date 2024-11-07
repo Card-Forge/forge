@@ -902,7 +902,9 @@ public class Game {
                     // return stolen spells
                     if (c.isInZone(ZoneType.Stack)) {
                         SpellAbilityStackInstance si = getStack().getInstanceMatchingSpellAbilityID(c.getCastSA());
-                        si.setActivatingPlayer(c.getController());
+                        if (si != null) {
+                            si.setActivatingPlayer(c.getController());
+                        }
                     }
                     if (c.getController().equals(p) && !(c.isPlane() || c.isPhenomenon())) {
                         getAction().exile(c, null, null);

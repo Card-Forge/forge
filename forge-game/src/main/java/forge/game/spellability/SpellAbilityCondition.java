@@ -457,6 +457,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 return false;
             }
         }
+
         if (this.getTargetValidTargeting() != null) {
             final TargetChoices matchTgt = sa.getTargets();
             if (matchTgt == null || matchTgt.getFirstTargetedSpell() == null

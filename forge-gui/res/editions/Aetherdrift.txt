@@ -1,0 +1,11 @@
+[metadata]
+Code=DFT
+Date=2025-02-14
+Name=Aetherdrift
+Type=Expansion
+ScryfallCode=DFT
+
+[cards]
+120 R Daretti, Rocketeer Engineer @Borja Pindado
+160 U Earthrumbler @Jean Pierre Targete
+191 M Brightglass Gearhulk @José Parodi

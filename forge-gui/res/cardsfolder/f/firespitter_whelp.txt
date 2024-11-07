@@ -1,0 +1,9 @@
+Name:Firespitter Whelp
+ManaCost:2 R
+Types:Creature Dragon
+PT:2/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature,Dragon | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a noncreature or Dragon spell, this creature deals 1 damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
+DeckHints:Type$Dragon
+Oracle:Flying\nWhenever you cast a noncreature or Dragon spell, this creature deals 1 damage to each opponent.

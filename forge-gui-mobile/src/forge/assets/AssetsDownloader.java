@@ -3,14 +3,13 @@ package forge.assets;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
-import forge.util.TextUtil;
+import forge.util.BuildInfo;
+import forge.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -20,17 +19,22 @@ import forge.Forge;
 import forge.gui.FThreads;
 import forge.gui.download.GuiDownloadZipService;
 import forge.gui.util.SOptionPane;
-import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 
-import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_URL_ATOM;
-import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_URL_ATOM;
+import static forge.localinstance.properties.ForgeConstants.ADV_TEXTURE_BG_FILE;
+import static forge.localinstance.properties.ForgeConstants.ASSETS_DIR;
+import static forge.localinstance.properties.ForgeConstants.DAILY_SNAPSHOT_URL;
+import static forge.localinstance.properties.ForgeConstants.DEFAULT_SKINS_DIR;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_RELEASES_ATOM;
+import static forge.localinstance.properties.ForgeConstants.RELEASE_URL;
+import static forge.localinstance.properties.ForgeConstants.RES_DIR;
 
 public class AssetsDownloader {
     private final static ImmutableList<String> downloadIgnoreExit = ImmutableList.of("Download", "Ignore", "Exit");
     private final static ImmutableList<String> downloadExit = ImmutableList.of("Download", "Exit");
 
-    //if not sharing desktop assets, check whether assets are up to date
     public static void checkForUpdates(boolean exited, Runnable runnable) {
         if (exited)
             return;
@@ -47,21 +51,28 @@ public class AssetsDownloader {
         final String apkSize = "12MB";
 
         final boolean isSnapshots = versionString.contains("SNAPSHOT");
-        final String snapsURL = "https://downloads.cardforge.org/dailysnapshots/";
-        final String releaseURL = "https://releases.cardforge.org/forge/forge-gui-android/";
-        final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "version.txt";
-        FileHandle assetsDir = Gdx.files.absolute(ForgeConstants.ASSETS_DIR);
-        FileHandle resDir = Gdx.files.absolute(ForgeConstants.RES_DIR);
+        final String snapsURL = DAILY_SNAPSHOT_URL;
+        // desktop and mobile-dev share the same package
+        final String guiChannel = GuiBase.isAndroid() ? "forge/forge-gui-android/" : "forge/forge-gui-desktop/";
+        final String releaseURL = RELEASE_URL +  guiChannel;
+        // desktop and mobile-dev uses maven-metadata.xml on earlier releases
+        final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "maven-metadata.xml";
+        FileHandle assetsDir = Gdx.files.absolute(ASSETS_DIR);
+        FileHandle resDir = Gdx.files.absolute(RES_DIR);
+        FileHandle buildTxtFileHandle = GuiBase.isAndroid() ? Gdx.files.internal("build.txt") : Gdx.files.classpath("build.txt");
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        boolean verifyUpdatable = false;
         boolean mandatory = false;
+        Date snapsTimestamp = null, buildTimeStamp = null;
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
         if (connectedToInternet) {
             //currently for desktop/mobile-dev release on github
-            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_URL_ATOM);
+            final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
-                String version = FileUtil.readFileToString(versionUrl);
+                String version = isSnapshots ? FileUtil.readFileToString(versionUrl) : releaseTag.replace("forge-", "");
                 String filename = "";
                 String installerURL = "";
                 if (GuiBase.isAndroid()) {
@@ -70,42 +81,44 @@ public class AssetsDownloader {
                 } else {
                     //current release on github is tar.bz2, update this to jar installer in the future...
                     filename = isSnapshots ? "forge-installer-" + version + ".jar" : releaseTag.replace("forge-", "forge-gui-desktop-") + ".tar.bz2";
-                    String releaseBZ2URL = "https://github.com/Card-Forge/forge/releases/download/" + releaseTag + "/" + filename;
-                    String snapsBZ2URL = "https://downloads.cardforge.org/dailysnapshots/";
+                    String releaseBZ2URL = GITHUB_FORGE_URL + "releases/download/" + releaseTag + "/" + filename;
+                    String snapsBZ2URL = DAILY_SNAPSHOT_URL + filename;
                     installerURL = isSnapshots ? snapsBZ2URL : releaseBZ2URL;
                 }
-                //TODO build version
-                /*String buildver = "";
-                SimpleDateFormat DateFor = TextUtil.getSimpleDate();
-                Calendar calendar = Calendar.getInstance();
-                Date buildDateOriginal = null;
-                try {
-                    FileHandle build = Gdx.files.classpath("build.txt");
-                    if (build.exists()) {
-                        SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        original.setTimeZone(TimeZone.getTimeZone("UTC"));
-                        Date buildDate = original.parse(build.readString());
-                        buildDateOriginal = original.parse(build.readString());
-                        calendar.setTime(buildDate);
-                        DateFor.setTimeZone(TimeZone.getDefault());
-                        buildver = "\nForge Build: " + DateFor.format(calendar.getTime());
+                String snapsBuildDate = "", buildDate = "";
+                if (isSnapshots) {
+                    URL url = new URL(snapsURL + "build.txt");
+                    snapsTimestamp = format.parse(FileUtil.readFileToString(url));
+                    snapsBuildDate = snapsTimestamp.toString();
+                    if (!GuiBase.isAndroid()) {
+                        buildDate = BuildInfo.getTimestamp().toString();
+                        verifyUpdatable = BuildInfo.verifyTimestamp(snapsTimestamp);
+                    } else {
+                        if (buildTxtFileHandle.exists()) {
+                            buildTimeStamp = format.parse(buildTxtFileHandle.readString());
+                            buildDate = buildTimeStamp.toString();
+                            // if morethan 23 hours the difference, then allow to update..
+                            verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 23;
+                        } else {
+                            //fallback to old version comparison
+                            verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
+                        }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
+                } else {
+                    verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
+                }
 
-                if (!StringUtils.isEmpty(version) && !versionString.equals(version)) {
+                if (verifyUpdatable) {
                     Forge.getSplashScreen().prepareForDialogs();
 
-                    message = "A new version of Forge is available (" + version + ").\n" +
-                            "You are currently on an older version (" + versionString + ").\n\n" +
+                    message = "A new version of Forge is available.\n(v." + version + " | " + snapsBuildDate + ")\n" +
+                            "You are currently on an older version.\n(v." + versionString + " | " + buildDate + ")\n" +
                             "Would you like to update to the new version now?";
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
-                    if (!GuiBase.isAndroid()) {
-                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
-                    }
+                    if (isSnapshots) // this is for snaps initial info
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
                         if (!GuiBase.isAndroid())
@@ -130,8 +143,10 @@ public class AssetsDownloader {
                         }
                     }
                 } else {
-                    if (!GuiBase.isAndroid())
+                    if (!GuiBase.isAndroid()) {
                         run(runnable);
+                        return;
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -153,10 +168,9 @@ public class AssetsDownloader {
         }
         // Android assets fallback
         String build = "";
-        String log = "";
 
         //see if assets need updating
-        FileHandle advBG = Gdx.files.absolute(ForgeConstants.DEFAULT_SKINS_DIR).child(ForgeConstants.ADV_TEXTURE_BG_FILE);
+        FileHandle advBG = Gdx.files.absolute(DEFAULT_SKINS_DIR).child(ADV_TEXTURE_BG_FILE);
         if (!advBG.exists()) {
             FileHandle deleteVersion = assetsDir.child("version.txt");
             if (deleteVersion.exists())
@@ -181,30 +195,20 @@ public class AssetsDownloader {
             return; //if version matches what had been previously saved and FSkin isn't requesting assets download, no need to download assets
         }
 
-        FileHandle f = Gdx.files.classpath("build.txt");
-        FileHandle t = resDir.child("build.txt");
-        if (f.exists() && t.exists()) {
-            String buildString = f.readString();
-            String target = t.readString();
+        FileHandle resBuildDate = resDir.child("build.txt");
+        if (buildTxtFileHandle.exists() && resBuildDate.exists()) {
+            String buildString = buildTxtFileHandle.readString();
+            String target = resBuildDate.readString();
             try {
-                Date buildDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(buildString);
-                Date targetDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(target);
+                Date buildDate = format.parse(buildString);
+                Date targetDate = format.parse(target);
                 // if res folder has same build date then continue loading assets
                 if (buildDate.equals(targetDate) && versionString.equals(FileUtil.readFileToString(versionFile.file()))) {
                     run(runnable);
                     return;
                 }
                 mandatory = true;
-                //format to local date
-                SimpleDateFormat original = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                original.setTimeZone(TimeZone.getTimeZone("UTC"));
-                targetDate = original.parse(target);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(targetDate);
-                SimpleDateFormat simpleDate = TextUtil.getSimpleDate();
-                simpleDate.setTimeZone(TimeZone.getDefault());
-                build += "Installed resources date: " + simpleDate.format(calendar.getTime()) + "\n\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_URL_ATOM, null, null);
+                build += "\nInstalled resources date: " + target + "\n";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -252,7 +256,7 @@ public class AssetsDownloader {
             options = downloadExit;
         }
 
-        switch (SOptionPane.showOptionDialog(message + build + log, "", null, options)) {
+        switch (SOptionPane.showOptionDialog(message + build, "", null, options)) {
             case 1:
                 if (!canIgnoreDownload) {
                     Forge.isMobileAdventureMode = Forge.advStartup;
@@ -272,7 +276,7 @@ public class AssetsDownloader {
         boolean allowDeletion = Forge.androidVersion < 30 || GuiBase.isUsingAppDirectory();
         String assetURL = isSnapshots ? snapsURL + "assets.zip" : releaseURL + versionString + "/" + "assets.zip";
         new GuiDownloadZipService("", "resource files", assetURL,
-                ForgeConstants.ASSETS_DIR, ForgeConstants.RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion).downloadAndUnzip();
+                ASSETS_DIR, RES_DIR, Forge.getSplashScreen().getProgressBar(), allowDeletion).downloadAndUnzip();
 
         if (allowDeletion)
             FSkinFont.deleteCachedFiles(); //delete cached font files in case any skin's .ttf file changed

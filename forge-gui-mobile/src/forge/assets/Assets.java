@@ -45,13 +45,12 @@ public class Assets implements Disposable {
     private HashMap<Integer, TextureRegion> deckbox;
     private HashMap<Integer, TextureRegion> cursor;
     private ObjectMap<Integer, BitmapFont> counterFonts;
-    private ObjectMap<String, Texture> generatedCards;
     private ObjectMap<String, Texture> fallback_skins;
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
     private ObjectMap<String, Font> textrafonts;
-    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
+    private int cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0;
 
     public Assets() {
         String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
@@ -80,11 +79,6 @@ public class Assets implements Disposable {
                 for (BitmapFont bitmapFont : counterFonts.values())
                     bitmapFont.dispose();
                 counterFonts.clear();
-            }
-            if (generatedCards != null) {
-                for (Texture texture : generatedCards.values())
-                    texture.dispose();
-                generatedCards.clear();
             }
             if (fallback_skins != null) {
                 for (Texture texture : fallback_skins.values())
@@ -205,12 +199,6 @@ public class Assets implements Disposable {
         if (counterFonts == null)
             counterFonts = new ObjectMap<>();
         return counterFonts;
-    }
-
-    public ObjectMap<String, Texture> generatedCards() {
-        if (generatedCards == null)
-            generatedCards = new ObjectMap<>();
-        return generatedCards;
     }
 
     public ObjectMap<String, Texture> fallback_skins() {
@@ -445,7 +433,7 @@ public class Assets implements Disposable {
             memoryPerFile.put(fileName, calcTextureDataSize(textureSize, textureData.getFormat()));
 
             return memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
-                    + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
+                + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
         }
 
         @SuppressWarnings("unchecked")
@@ -454,12 +442,6 @@ public class Assets implements Disposable {
                 return 0;
             if (objectMap == null || objectMap.isEmpty())
                 return 0;
-            if (objectMap == generatedCards) {
-                if (cGen == objectMap.size)
-                    return cGenVal;
-                else
-                    cGen = objectMap.size;
-            }
             if (objectMap == tmxMap) {
                 if (cTM == objectMap.size)
                     return cTMVal;
@@ -480,8 +462,6 @@ public class Assets implements Disposable {
                     textureSize = textureSize + (textureSize / 3);
                 sum += calcTextureDataSize(textureSize, textureData.getFormat());
             }
-            if (objectMap == generatedCards)
-                cGenVal = sum;
             if (objectMap == tmxMap)
                 cTMVal = sum;
             if (objectMap == fallback_skins)

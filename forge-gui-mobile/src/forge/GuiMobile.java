@@ -35,8 +35,8 @@ import java.util.List;
 
 public class GuiMobile implements IGuiBase {
     private final String assetsDir;
-    private ImageFetcher imageFetcher = new LibGDXImageFetcher();
-    private List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    private final ImageFetcher imageFetcher = new LibGDXImageFetcher();
+    private final List<Integer> integerChoices = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     public GuiMobile(final String assetsDir0) {
         assetsDir = assetsDir0;
@@ -44,7 +44,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public boolean isRunningOnDesktop() {
-        return Gdx.app==null ? true : Gdx.app.getType() == ApplicationType.Desktop;
+        return Gdx.app == null || Gdx.app.getType() == ApplicationType.Desktop;
     }
 
     @Override
@@ -136,11 +136,11 @@ public class GuiMobile implements IGuiBase {
                 if (FileUtil.doesFileExist(overlayFilename)) {
                     try {
                         final Texture overlay = Forge.getAssets().getTexture(Gdx.files.absolute(overlayFilename));
-                        g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2, (background.getHeight() - overlay.getHeight()) / 2, overlay.getWidth(), overlay.getHeight());
-                    } catch (final Exception e) {
+                        g.drawImage(overlay, (background.getWidth() - overlay.getWidth()) / 2f, (background.getHeight() - overlay.getHeight()) / 2f, overlay.getWidth(), overlay.getHeight());
+                    } catch (Exception ignored) {
                     }
                 } else if (paperCard != null) {
-                    Texture cardImage = ImageCache.getImage(paperCard.getCardImageKey(), false);
+                    Texture cardImage = ImageCache.getInstance().getImage(paperCard.getCardImageKey(), false);
                     if (cardImage != null)
                         g.drawCardRoundRect(cardImage, null, (background.getWidth() - cardImageWidth) / 2, (background.getHeight() - cardImageHeight) / 3.8f, cardImageWidth, cardImageHeight, false, false);
                 }
@@ -306,7 +306,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void clearImageCache() {
-        ImageCache.clear();
+        ImageCache.getInstance().clear();
         ImageKeys.clearMissingCards();
     }
 

@@ -25,11 +25,10 @@ import forge.toolbox.FSkin.Colors;
 import forge.toolbox.FSkin.SkinColor;
 import forge.toolbox.FSkin.SkinnedLabel;
 import forge.toolbox.FSkin.SkinnedMenuBar;
-import forge.util.BuildInfo;
 import forge.util.Localizer;
 import forge.util.RSSReader;
 
-import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_URL_ATOM;
+import static forge.localinstance.properties.ForgeConstants.GITHUB_COMMITS_ATOM;
 
 @SuppressWarnings("serial")
 public abstract class FTitleBarBase extends SkinnedMenuBar {
@@ -95,7 +94,10 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
 
     public abstract void setTitle(String title);
     public abstract void setIconImage(Image image);
-    
+    public void setUpdaterVisibility() {
+        if (btnUpdateShortcut != null)
+            btnUpdateShortcut.updateVisibility();
+    }
     public void updateButtons() {
         boolean fullScreen = owner.isFullScreen();
         btnLockTitleBar.setVisible(fullScreen);
@@ -422,25 +424,31 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
         }
     }
     public class UpdaterButton extends TitleBarButton {
-        final int MARQUEE_SPEED_DIV = 15;
-        final int REPAINT_WITHIN_MS = 25;
-        final String displayText = FControl.instance.compareVersion(BuildInfo.getVersionString());
-        private UpdaterButton() {
+        final int MARQUEE_SPEED_DIV = 50;
+        final int REPAINT_WITHIN_MS = 50;
+        final int wMod = 60;
+        final String displayText = FControl.instance.getSnapshotNotification();
+        public UpdaterButton() {
             setToolTipText(Localizer.getInstance().getMessage("btnCheckForUpdates"));
             setPreferredSize(new Dimension(160, 25));
-            setEnabled(!displayText.isEmpty());
+            updateVisibility();
         }
+
         @Override
         protected void onClick() {
-            try {
-                new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_URL_ATOM, null, null)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!displayText.isEmpty()) {
+                try {
+                    new AutoUpdater(false).attemptToUpdate(CompletableFuture.supplyAsync(() -> RSSReader.getCommitLog(GITHUB_COMMITS_ATOM, FControl.instance.getBuildTimeStamp(), FControl.instance.getSnapsTimestamp())));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         @Override
         public void paintComponent(Graphics g) {
-            g.translate((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % (getWidth() * 2)) - getWidth(), 0);
+            if (displayText.isEmpty())
+                return;
+            g.translate(-((int)((System.currentTimeMillis() / MARQUEE_SPEED_DIV) % ((getWidth() + wMod) * 2)) - (getWidth() + wMod)), 0);
             super.paintComponent(g);
             int thickness = 2;
             Graphics2D g2d = (Graphics2D) g;
@@ -449,6 +457,9 @@ public abstract class FTitleBarBase extends SkinnedMenuBar {
             g2d.setStroke(new BasicStroke(thickness));
             g2d.drawString(displayText, 0, 17);
             repaint(REPAINT_WITHIN_MS);
+        }
+        private void updateVisibility() {
+            setVisible(!isVisible());
         }
     }
 }

@@ -1,0 +1,6 @@
+Name:Ninja Token
+ManaCost:no cost
+Colors:blue
+Types:Creature Ninja
+PT:2/1
+Oracle:

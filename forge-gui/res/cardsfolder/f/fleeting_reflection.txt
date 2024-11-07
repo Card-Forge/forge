@@ -2,6 +2,6 @@ Name:Fleeting Reflection
 ManaCost:1 U
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Hexproof | SubAbility$ DBUntap | SpellDescription$ Target creature you control gains hexproof until end of turn.
-SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBClone | SpellDescription$ Untap that creature.
+SVar:DBUntap:DB$ Untap | Defined$ ParentTarget | SubAbility$ DBClone | SpellDescription$ Untap that creature.
 SVar:DBClone:DB$ Clone | CloneTarget$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature to copy | TargetMin$ 0 | TargetMax$ 1 | TargetUnique$ True | Duration$ UntilEndOfTurn | SpellDescription$ Until end of turn, it becomes a copy of up to one other target creature.
 Oracle:Target creature you control gains hexproof until end of turn. Untap that creature. Until end of turn, it becomes a copy of up to one other target creature.

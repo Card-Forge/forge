@@ -58,6 +58,8 @@ jobs:
           mkdir izpack
           # move bz2 and jar from work dir to izpack dir
           mv /home/runner/work/forge/forge/forge-installer/*/*.{bz2,jar} izpack/
+          # move desktop build.txt to izpack
+          mv /home/runner/work/forge/forge/forge-gui-desktop/target/classes/build.txt izpack/
           cd izpack
           d=$(date +%m.%d)
           # rename files and append date

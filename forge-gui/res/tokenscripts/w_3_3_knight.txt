@@ -1,0 +1,6 @@
+Name:Knight Token
+ManaCost:no cost
+Colors:white
+Types:Creature Knight
+PT:3/3
+Oracle:

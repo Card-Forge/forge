@@ -1,0 +1,11 @@
+[metadata]
+Code=FDC
+Date=2024-11-15
+Name=Foundations Commander
+Type=Commander
+ScryfallCode=FDC
+
+[cards]
+1 U Arcane Signet @Dan Murayama Scott
+2 U Sol Ring @Mike Bierek
+3 C Command Tower @Ryan Yee

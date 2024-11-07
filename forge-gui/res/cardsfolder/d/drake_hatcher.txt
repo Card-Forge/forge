@@ -1,0 +1,12 @@
+Name:Drake Hatcher
+ManaCost:1 U
+Types:Creature Human Wizard
+PT:1/3
+K:Vigilance
+K:Prowess
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever this creature deals combat damage to a player, put that many incubation counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ INCUBATION | CounterNum$ X
+A:AB$ Token | Cost$ SubCounter<3/INCUBATION> | TokenScript$ u_2_2_drake_flying | SpellDescription$ Create a 2/2 blue Drake creature token with flying.
+SVar:X:TriggerCount$DamageAmount
+DeckHas:Ability$Counters|Token
+Oracle:Vigilance, prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nWhenever this creature deals combat damage to a player, put that many incubation counters on it.\nRemove three incubation counters from this creature: Create a 2/2 blue Drake creature token with flying.

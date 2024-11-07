@@ -47,7 +47,10 @@ public enum GroupDef {
                     return getSetGroup(((PaperCard) item).getEdition());
                 }
                 else if (item instanceof DeckProxy) {
-                    return getSetGroup(((DeckProxy) item).getEdition().getCode());
+                    CardEdition ed = ((DeckProxy) item).getEdition();
+                    if (ed == null)
+                        return -1;
+                    return getSetGroup(ed.getCode());
                 }
                 return -1;
             }),

@@ -1,0 +1,286 @@
+//Rank|Name|Rarity|Set
+#1|Kaito, Cunning Infiltrator|M|FDN
+#2|Twinflame Tyrant|M|FDN
+#3|Liliana, Dreadhorde General|M|FDN
+#4|Blasphemous Edict|R|FDN
+#5|Embercleave|M|FDN
+#6|Sire of Seven Deaths|M|FDN
+#7|Arahbo, the First Fang|R|FDN
+#8|Herald of Eternal Dawn|M|FDN
+#9|Chandra, Flameshaper|M|FDN
+#10|Koma, World-Eater|R|FDN
+#11|Day of Judgment|R|FDN
+#12|Consuming Aberration|R|FDN
+#13|Curator of Destinies|R|FDN
+#14|Krenko, Mob Boss|R|FDN
+#15|Akroma's Memorial|M|FDN
+#16|Kellan, Planar Trailblazer|R|FDN
+#17|Muldrotha, the Gravetide|M|FDN
+#18|Celestial Armor|R|FDN
+#19|Valkyrie's Call|M|FDN
+#20|Archmage of Runes|R|FDN
+#21|Sphinx of Forgotten Lore|M|FDN
+#22|Bloodthirsty Conqueror|M|FDN
+#23|Ashroot Animist|R|FDN
+#24|Kykar, Zephyr Awakener|R|FDN
+#25|Niv-Mizzet, Visionary|M|FDN
+#26|Etali, Primal Storm|R|FDN
+#27|Scavenging Ooze|R|FDN
+#28|Zimone, Paradox Sculptor|M|FDN
+#29|Quilled Greatwurm|M|FDN
+#30|Rite of the Dragoncaller|M|FDN
+#31|Temporal Manipulation|M|FDN
+#32|Searslicer Goblin|R|FDN
+#33|Mossborn Hydra|R|FDN
+#34|Alesha, Who Laughs at Fate|R|FDN
+#35|Leyline Axe|R|FDN
+#36|Ajani's Pridemate|U|FDN
+#37|Slagstorm|R|FDN
+#38|Vivien Reid|M|FDN
+#39|Sylvan Scavenging|R|FDN
+#40|Exsanguinate|U|FDN
+#41|Spinner of Souls|R|FDN
+#42|Exemplar of Light|R|FDN
+#43|High-Society Hunter|R|FDN
+#44|Ajani, Caller of the Pride|M|FDN
+#45|Balmor, Battlemage Captain|U|FDN
+#46|Tatyova, Benthic Druid|U|FDN
+#47|Kiora, the Rising Tide|R|FDN
+#48|Skyknight Squire|R|FDN
+#49|Elenda, Saint of Dusk|R|FDN
+#50|Lathril, Blade of the Elves|R|FDN
+#51|Faebloom Trick|U|FDN
+#52|Vengeful Bloodwitch|U|FDN
+#53|Elvish Regrower|U|FDN
+#54|Needletooth Pack|U|FDN
+#55|Aetherize|U|FDN
+#56|Mischievous Mystic|U|FDN
+#57|Strongbox Raider|U|FDN
+#58|Felling Blow|U|FDN
+#59|Cat Collector|U|FDN
+#60|Sun-Blessed Healer|U|FDN
+#61|High Fae Trickster|R|FDN
+#62|Homunculus Horde|R|FDN
+#63|Tinybones, Bauble Burglar|R|FDN
+#64|Zul Ashur, Lich Lord|R|FDN
+#65|Anthem of Champions|R|FDN
+#66|Extravagant Replication|R|FDN
+#67|Firespitter Whelp|U|FDN
+#68|Heartfire Immolator|U|FDN
+#69|Elvish Archdruid|R|FDN
+#70|Nessian Hornbeetle|U|FDN
+#71|Empyrean Eagle|U|FDN
+#72|Solemn Simulacrum|R|FDN
+#73|Preposterous Proportions|R|FDN
+#74|Fiendish Panda|U|FDN
+#75|Banner of Kinship|R|FDN
+#76|Soulstone Sanctuary|R|FDN
+#77|Dwynen, Gilt-Leaf Daen|U|FDN
+#78|Heroic Reinforcements|U|FDN
+#79|Swiftblade Vindicator|R|FDN
+#80|Flamewake Phoenix|R|FDN
+#81|Rune-Scarred Demon|R|FDN
+#82|Abyssal Harvester|R|FDN
+#83|Loot, Exuberant Explorer|R|FDN
+#84|Perforating Artist|U|FDN
+#85|Wardens of the Cycle|U|FDN
+#86|Rise of the Dark Realms|M|FDN
+#87|Drakuseth, Maw of Flames|R|FDN
+#88|Good-Fortune Unicorn|U|FDN
+#89|Vampire Nighthawk|U|FDN
+#90|Goblin Bushwhacker|M|FDN
+#91|Guarded Heir|U|FDN
+#92|Giada, Font of Hope|R|FDN
+#93|Micromancer|U|FDN
+#94|Llanowar Elves|C|FDN
+#95|Abrade|U|FDN
+#96|Bigfin Bouncer|C|FDN
+#97|Elfsworn Giant|C|FDN
+#98|Affectionate Indrik|U|FDN
+#99|Dwynen's Elite|C|FDN
+#100|Heraldic Banner|U|FDN
+#101|Helpful Hunter|C|FDN
+#102|Skyship Buccaneer|U|FDN
+#103|Tragic Banshee|U|FDN
+#104|Fiery Annihilation|U|FDN
+#105|Think Twice|C|FDN
+#106|Hero's Downfall|U|FDN
+#107|Burst Lightning|C|FDN
+#108|Overrun|U|FDN
+#109|Drake Hatcher|R|FDN
+#110|Spectral Sailor|U|FDN
+#111|Tolarian Terror|C|FDN
+#112|Meteor Golem|U|FDN
+#113|Dragon Trainer|U|FDN
+#114|Dauntless Veteran|U|FDN
+#115|Quakestrider Ceratops|U|FDN
+#116|Snakeskin Veil|C|FDN
+#117|Infernal Vessel|U|FDN
+#118|Banishing Light|C|FDN
+#119|Bite Down|C|FDN
+#120|Bloom Tender|M|FDN
+#121|Fiend Artisan|M|FDN
+#122|Crystal Barricade|R|FDN
+#123|Prideful Parent|C|FDN
+#124|Arbiter of Woe|U|FDN
+#125|Midnight Snack|U|FDN
+#126|Vampire Gourmand|U|FDN
+#127|Slumbering Cerberus|U|FDN
+#128|Angel of Finality|U|FDN
+#129|Imprisoned in the Moon|U|FDN
+#130|Blanchwood Armor|U|FDN
+#131|Divine Resilience|U|FDN
+#132|Youthful Valkyrie|U|FDN
+#133|Genesis Wave|R|FDN
+#134|Mild-Mannered Librarian|U|FDN
+#135|Wildwood Scourge|U|FDN
+#136|Revenge of the Rats|U|FDN
+#137|Dreadwing Scavenger|U|FDN
+#138|Cathar Commando|C|FDN
+#139|Resolute Reinforcements|U|FDN
+#140|Garruk's Uprising|U|FDN
+#141|Ruby, Daring Tracker|U|FDN
+#142|Stab|C|FDN
+#143|Soul-Shackled Zombie|C|FDN
+#144|Healer's Hawk|C|FDN
+#145|Witness Protection|C|FDN
+#146|Condemn|M|FDN
+#147|Paradise Druid|M|FDN
+#148|Claws Out|U|FDN
+#149|Arcane Epiphany|U|FDN
+#150|Nine-Lives Familiar|R|FDN
+#151|Battlesong Berserker|U|FDN
+#152|Electroduplicate|R|FDN
+#153|Scrawling Crawler|R|FDN
+#154|Savannah Lions|U|FDN
+#155|Serra Angel|U|FDN
+#156|Phyrexian Arena|R|FDN
+#157|Swiftfoot Boots|U|FDN
+#158|Joust Through|U|FDN
+#159|Brineborn Cutthroat|U|FDN
+#160|Hare Apparent|C|FDN
+#161|Eager Trufflesnout|U|FDN
+#162|Mischievous Pup|U|FDN
+#163|Diregraf Ghoul|U|FDN
+#164|Inspiring Call|U|FDN
+#165|Courageous Goblin|C|FDN
+#166|Brazen Scourge|U|FDN
+#167|Bake into a Pie|C|FDN
+#168|Elementalist Adept|C|FDN
+#169|Dazzling Angel|C|FDN
+#170|Inspiring Paladin|C|FDN
+#171|Bushwack|C|FDN
+#172|Grappling Kraken|U|FDN
+#173|Refute|C|FDN
+#174|Bulk Up|U|FDN
+#175|Zombify|U|FDN
+#176|Shivan Dragon|U|FDN
+#177|Adventuring Gear|U|FDN
+#178|Twinblade Blessing|U|FDN
+#179|Cephalid Inkmage|U|FDN
+#180|Goblin Negotiation|U|FDN
+#181|Boltwave|U|FDN
+#182|Beast-Kin Ranger|C|FDN
+#183|Reclamation Sage|U|FDN
+#184|Goldvein Pick|C|FDN
+#185|Apothecary Stomper|C|FDN
+#186|Goblin Surprise|C|FDN
+#187|Uncharted Voyage|C|FDN
+#188|Squad Rallier|C|FDN
+#189|Felidar Savior|C|FDN
+#190|Inspiration from Beyond|U|FDN
+#191|Lunar Insight|R|FDN
+#192|Crypt Feaster|C|FDN
+#193|Lightshell Duo|C|FDN
+#194|Stromkirk Bloodthief|U|FDN
+#195|Giant Growth|C|FDN
+#196|Hungry Ghoul|C|FDN
+#197|Burnished Hart|U|FDN
+#198|Bloodfell Caves|C|FDN
+#199|Blossoming Sands|C|FDN
+#200|Dismal Backwater|C|FDN
+#201|Evolving Wilds|C|FDN
+#202|Jungle Hollow|C|FDN
+#203|Rugged Highlands|C|FDN
+#204|Scoured Barrens|C|FDN
+#205|Secluded Courtyard|U|FDN
+#206|Swiftwater Cliffs|C|FDN
+#207|Thornwood Falls|C|FDN
+#208|Tranquil Cove|C|FDN
+#209|Wind-Scarred Crag|C|FDN
+#210|Wary Thespian|C|FDN
+#211|Treetop Snarespinner|C|FDN
+#212|Gnarlid Colony|C|FDN
+#213|Cackling Prowler|C|FDN
+#214|Ambush Wolf|C|FDN
+#215|Firebrand Archer|C|FDN
+#216|Axgard Cavalry|C|FDN
+#217|Macabre Waltz|C|FDN
+#218|Burglar Rat|C|FDN
+#219|Fleeting Flight|C|FDN
+#220|Luminous Rebuke|C|FDN
+#221|Make Your Move|C|FDN
+#222|Vanguard Seraph|C|FDN
+#223|Infestation Sage|C|FDN
+#224|Marauding Blight-Priest|C|FDN
+#225|Clinquant Skymage|U|FDN
+#226|Erudite Wizard|C|FDN
+#227|Billowing Shriekmass|U|FDN
+#228|Seeker's Folly|U|FDN
+#229|Self-Reflection|U|FDN
+#230|Reassembling Skeleton|U|FDN
+#231|Seismic Rupture|U|FDN
+#232|Juggernaut|U|FDN
+#233|Rogue's Passage|U|FDN
+#234|Essence Scatter|U|FDN
+#235|Ravenous Amulet|U|FDN
+#236|Eaten Alive|C|FDN
+#237|Quick-Draw Katana|C|FDN
+#238|Campus Guide|C|FDN
+#239|Grow from the Ashes|C|FDN
+#240|Sure Strike|C|FDN
+#241|Sower of Chaos|C|FDN
+#242|Involuntary Employment|C|FDN
+#243|Gorehorn Raider|C|FDN
+#244|Goblin Boarders|C|FDN
+#245|Frenzied Goblin|U|FDN
+#246|Vampire Soulcaller|C|FDN
+#247|Sanguine Syphoner|C|FDN
+#248|Fake Your Own Death|C|FDN
+#249|Run Away Together|C|FDN
+#250|Strix Lookout|C|FDN
+#251|Armasaur Guide|C|FDN
+#252|Fanatical Firebrand|C|FDN
+#253|Thrill of Possibility|C|FDN
+#254|Mocking Sprite|C|FDN
+#255|Fleeting Distraction|C|FDN
+#256|Rune-Sealed Wall|U|FDN
+#257|Gleaming Barrier|C|FDN
+#258|Incinerating Blast|C|FDN
+#259|Gutless Plunderer|C|FDN
+#260|Crackling Cyclops|C|FDN
+#261|Broken Wings|C|FDN
+#262|Spitfire Lagac|C|FDN
+#263|Stroke of Midnight|U|FDN
+#264|Omniscience|M|FDN
+#265|Time Stop|R|FDN
+#266|Painful Quandary|R|FDN
+#267|Doubling Season|M|FDN
+#268|Progenitus|M|FDN
+#269|Ghalta, Primal Hunger|R|FDN
+#270|Raise the Past|R|FDN
+#271|Authority of the Consuls|R|FDN
+#272|Pilfer|C|FDN
+#273|Aegis Turtle|C|FDN
+#274|Grim Tutor|M|FDN
+#275|Sphinx's Tutelage|M|FDN
+#276|An Offer You Can't Refuse|U|FDN
+#277|Hidetsugu's Second Rite|U|FDN
+#278|Fishing Pole|U|FDN
+#279|Brass's Bounty|R|FDN
+#280|Thousand-Year Storm|R|FDN
+#281|Plains|C|FDN
+#282|Island|C|FDN
+#283|Swamp|C|FDN
+#284|Mountain|C|FDN
+#285|Forest|C|FDN

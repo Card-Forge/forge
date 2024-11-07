@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -26,6 +27,7 @@ import forge.item.PaperCard;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.ItemPool;
+
 import java.util.Comparator;
 
 /**
@@ -35,6 +37,8 @@ public class RewardScene extends UIScene {
     private TextraButton doneButton, detailButton, restockButton;
     private TextraLabel playerGold, playerShards;
     private TypingLabel headerLabel;
+    private Vector2 headerLabelOrigPos;
+    private boolean autoSell;
 
     private ShopActor shopActor;
     private static RewardScene object;
@@ -71,6 +75,7 @@ public class RewardScene extends UIScene {
         playerGold = Controls.newAccountingLabel(ui.findActor("playerGold"), false);
         playerShards = Controls.newAccountingLabel(ui.findActor("playerShards"), true);
         headerLabel = ui.findActor("shopName");
+        headerLabelOrigPos = new Vector2(headerLabel.getX(), headerLabel.getY());
         ui.onButtonPress("done", this::done);
         ui.onButtonPress("detail", this::toggleToolTip);
         ui.onButtonPress("restock", this::restockShop);
@@ -133,7 +138,7 @@ public class RewardScene extends UIScene {
             }
         }
         //save RAM
-        ImageCache.unloadCardTextures(true);
+        ImageCache.getInstance().unloadCardTextures(true);
         Forge.advFreezePlayerControls = false;
         if (this.collectionPool != null) {
             this.collectionPool.clear();
@@ -196,7 +201,7 @@ public class RewardScene extends UIScene {
     @Override
     public void act(float delta) {
         stage.act(delta);
-        ImageCache.allowSingleLoad();
+        ImageCache.getInstance().allowSingleLoad();
         if (doneClicked) {
             if (type == Type.Loot || type == Type.QuestReward) {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
@@ -211,6 +216,7 @@ public class RewardScene extends UIScene {
 
     @Override
     public void enter() {
+        autoSell = false;
         doneButton.setText("[+OK]");
         updateDetailButton();
         super.enter();
@@ -319,6 +325,7 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        headerLabel.clearListeners();
         // Sort the rewards based on the rarity of the card inside the reward/ lets give items rarity
         newRewards.sort(Comparator.comparing(reward -> {
             if (reward.getCard() != null && reward.getCard().getRarity() != null) {
@@ -346,6 +353,23 @@ public class RewardScene extends UIScene {
         generated.clear();
 
         Actor card = ui.findActor("cards");
+        //reset pos
+        headerLabel.setPosition(headerLabelOrigPos.x, headerLabelOrigPos.y);
+        headerLabel.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (type == Type.Loot) {
+                    autoSell = !autoSell;
+                    String cb = autoSell ? "\u2611 " : "\u2610 ";
+                    headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
+                    for (Actor A : new Array.ArrayIterator<>(generated)) {
+                        if (A instanceof RewardActor) {
+                            ((RewardActor) A).setAutoSell(autoSell);
+                        }
+                    }
+                }
+            }
+        });
         if (type == Type.Shop) {
             String shopName = shopActor.getDescription();
             if (shopName != null && !shopName.isEmpty()) {
@@ -398,9 +422,16 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
-            case Loot:
                 headerLabel.setVisible(false);
                 headerLabel.setText("");
+                restockButton.setVisible(false);
+                doneButton.setText("[+OK]");
+                break;
+            case Loot:
+                headerLabel.skipToTheEnd();
+                headerLabel.setPosition(restockButton.getX(), restockButton.getY());
+                headerLabel.setVisible(true);
+                headerLabel.setText("[%?SHINY][;]\u2610 " + Forge.getLocalizer().getMessage("lblAll"));
                 restockButton.setVisible(false);
                 doneButton.setText("[+OK]");
                 break;
@@ -408,7 +439,7 @@ public class RewardScene extends UIScene {
                 restockButton.setVisible(false);
                 doneButton.setText("[+OK]");
                 headerLabel.setVisible(remainingSelections > 0);
-                headerLabel.setText("Select " + remainingSelections + " rewards");
+                headerLabel.setText(Forge.getLocalizer().getMessage("lblSelectRewards", remainingSelections));
                 doneButton.setDisabled(remainingSelections > 0);
         }
         for (int h = 1; h < targetHeight; h++) {
@@ -500,7 +531,7 @@ public class RewardScene extends UIScene {
                     stage.addActor(buyCardButton);
                     addToSelectable(buyCardButton);
                 }
-            } else if (type == Type.RewardChoice){
+            } else if (type == Type.RewardChoice) {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
                 ChooseRewardButton chooseRewardButton = new ChooseRewardButton(i, actor, reward, doneButton);
@@ -630,7 +661,6 @@ public class RewardScene extends UIScene {
             else if (Reward.Type.Item.equals(reward.getType()))
                 setText("Pick Reward" + "\n" + Forge.getLocalizer().getMessage("lblOwned") + ": " + AdventurePlayer.current().countItem(reward.getItem().name));
         }
-
 
 
         public ChooseRewardButton(int i, RewardActor actor, Reward reward, TextraButton style) {
