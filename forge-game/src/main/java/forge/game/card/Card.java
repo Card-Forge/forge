@@ -4077,6 +4077,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final void unattachFromEntity(final GameEntity entity) {
+        unattachFromEntity(entity, entity);
+    }
+    public final void unattachFromEntity(final GameEntity entity, GameEntity old) {
         if (entityAttachedTo == null || !entityAttachedTo.equals(entity)) {
             return;
         }
@@ -4093,11 +4096,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
         getGame().fireEvent(new GameEventCardAttachment(this, entity, null));
 
-        // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.Attach, this);
-        runParams.put(AbilityKey.Object, entity);
+        runParams.put(AbilityKey.Object, old);
         getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
+
         runUnattachCommands();
     }
 

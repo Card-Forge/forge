@@ -39,7 +39,8 @@ public final class Main {
             options.setEnvironment(System.getProperty("os.name"));
             options.setTag("Java Version", System.getProperty("java.version"));
             options.setShutdownTimeoutMillis(5000);
-            if (options.getDsn() == null)
+            // these belong to sentry.properties, but somehow some OS/Zip tool discards it?
+            if (options.getDsn() == null || options.getDsn().isEmpty())
                 options.setDsn("https://87bc8d329e49441895502737c069067b@sentry.cardforge.org//3");
         }, true);
 

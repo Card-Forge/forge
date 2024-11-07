@@ -1,0 +1,12 @@
+[metadata]
+Code=PLTC
+Date=2024-10-16
+Name=Tales of Middle-earth Deluxe Commander Kit
+Type=Promo
+ScryfallCode=PLTC
+
+[cards]
+1 R Frodo, Determined Hero @Magali Villeneuve
+2 R Gandalf, White Rider @Ekaterina Burmak
+3 R Gollum, Scheming Guide @Dmitry Burmak
+4 R The Balrog, Flame of Udûn @John Tedrick

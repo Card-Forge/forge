@@ -588,8 +588,6 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'C':
                     if ("Colors".equals(key)) {
-                        // This is forge.card.CardColor not forge.CardColor.
-                        // Why do we have two classes with the same name?
                         ColorSet newCol = ColorSet.fromNames(value.split(","));
                         face.setColor(newCol);
                     }

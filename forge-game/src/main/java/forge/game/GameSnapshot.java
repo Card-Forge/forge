@@ -168,7 +168,6 @@ public class GameSnapshot {
         newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
         newPlayer.setLifeStartedThisTurnWith(origPlayer.getLifeStartedThisTurnWith());
         newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
-        newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
         newPlayer.setLandsPlayedThisTurn(origPlayer.getLandsPlayedThisTurn());
         newPlayer.setCounters(Maps.newHashMap(origPlayer.getCounters()));
         newPlayer.setBlessing(origPlayer.hasBlessing());

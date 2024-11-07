@@ -228,7 +228,7 @@ public class AutoUpdater {
                 GuiBase.getInterface().download(new GuiDownloadZipService("Auto Updater", localizer.getMessage("lblNewVersionDownloading"), packageUrl, System.getProperty("user.home") + "/Downloads/", null, null) {
                     @Override
                     public void downloadAndUnzip() {
-                        packagePath = download(version + "-upgrade.tar.bz2");
+                        packagePath = download(version + "-upgrade.jar");
                         if (packagePath != null) {
                             restartAndUpdate(packagePath);
                         }

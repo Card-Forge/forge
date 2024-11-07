@@ -178,6 +178,30 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Gdx.graphics.requestRendering();
     }
 
+    public void setAutoSell(boolean sell) {
+        if (!isLoot)
+            return;
+        if (autoSell == null)
+            return;
+        if (reward == null)
+            return;
+        if (!Reward.Type.Card.equals(reward.type))
+            return;
+        if (reward.isNoSell)
+            return;
+        if (flipProcess < 1)
+            return;
+        if ((!reward.isAutoSell && sell) || (reward.isAutoSell && !sell)) {
+            updateAutoSell();
+        }
+    }
+
+    private void updateAutoSell() {
+        reward.setAutoSell(!reward.isAutoSell());
+        String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
+        autoSell.setText(c + "\uFF04");
+    }
+
     public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
         this.flipOnClick = flippable;
         this.reward = reward;
@@ -192,12 +216,10 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (!reward.isNoSell) {
                     autoSell = Controls.newTextButton("[%85][GRAY]\uFF04");
                     float scale = autoSell.getWidth();
-                    autoSell.setSize(scale, scale*1.2f);
+                    autoSell.setSize(scale, scale * 1.2f);
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
-                            reward.setAutoSell(!reward.isAutoSell());
-                            String c = reward.isAutoSell() ? "[%85][GREEN]" : "[%85][GRAY]";
-                            autoSell.setText(c+"\uFF04");
+                            updateAutoSell();
                         }
                     });
                 }
@@ -826,7 +848,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 display = reward.type.toString();
                 break;
             case Item:
-                display =  reward.getItem() != null ? reward.getItem().name : "";
+                display = reward.getItem() != null ? reward.getItem().name : "";
                 break;
             case CardPack:
                 display = reward.getDeck() != null ? "Card Pack (" + reward.getDeck().getComment() + ")" : "";

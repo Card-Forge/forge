@@ -546,9 +546,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         GameActionUtil.checkStaticAfterPaying(sp.getHostCard());
 
-        if (sp.isActivatedAbility() && sp.isPwAbility()) {
-            sp.getActivatingPlayer().setActivateLoyaltyAbilityThisTurn(true);
-        }
         game.updateStackForView();
         game.fireEvent(new GameEventSpellAbilityCast(sp, si, stackIndex));
         return si;
@@ -607,10 +604,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         } else if (sa.getApi() != null) {
             AbilityUtils.handleRemembering(sa);
+            AbilityUtils.resolve(sa);
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
             runParams.put(AbilityKey.SpellAbility, sa);
             game.getTriggerHandler().runTrigger(TriggerType.AbilityResolves, runParams, false);
-            AbilityUtils.resolve(sa);
         } else {
             sa.resolve();
             // do creatures ETB from here?
@@ -625,9 +622,11 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
-        finishResolving(sa, thisHasFizzled);
 
         game.getAction().checkStaticAbilities();
+
+        finishResolving(sa, thisHasFizzled);
+
         game.copyLastState();
         if (isEmpty() && !hasSimultaneousStackEntries()) {
             // assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object)

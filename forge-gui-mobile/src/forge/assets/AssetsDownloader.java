@@ -9,6 +9,7 @@ import java.util.List;
 import com.badlogic.gdx.files.FileHandle;
 import forge.gui.GuiBase;
 import forge.util.BuildInfo;
+import forge.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Gdx;
@@ -58,11 +59,11 @@ public class AssetsDownloader {
         final String versionText = isSnapshots ? snapsURL + "version.txt" : releaseURL + "maven-metadata.xml";
         FileHandle assetsDir = Gdx.files.absolute(ASSETS_DIR);
         FileHandle resDir = Gdx.files.absolute(RES_DIR);
-        FileHandle buildTxtFileHandle = Gdx.files.classpath("build.txt");
+        FileHandle buildTxtFileHandle = GuiBase.isAndroid() ? Gdx.files.internal("build.txt") : Gdx.files.classpath("build.txt");
         final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         boolean verifyUpdatable = false;
         boolean mandatory = false;
-        Date snapsTimestamp = null, buildTimeStamp;
+        Date snapsTimestamp = null, buildTimeStamp = null;
 
         String message;
         boolean connectedToInternet = Forge.getDeviceAdapter().isConnectedToInternet();
@@ -71,11 +72,7 @@ public class AssetsDownloader {
             final String releaseTag = Forge.getDeviceAdapter().getReleaseTag(GITHUB_RELEASES_ATOM);
             try {
                 URL versionUrl = new URL(versionText);
-                String version = "";
-                if (GuiBase.isAndroid())
-                    version = FileUtil.readFileToString(versionUrl);
-                else //instead of parsing xml from earlier releases, get the latest github release tag
-                    version = releaseTag.replace("forge-", "");
+                String version = isSnapshots ? FileUtil.readFileToString(versionUrl) : releaseTag.replace("forge-", "");
                 String filename = "";
                 String installerURL = "";
                 if (GuiBase.isAndroid()) {
@@ -100,7 +97,11 @@ public class AssetsDownloader {
                         if (buildTxtFileHandle.exists()) {
                             buildTimeStamp = format.parse(buildTxtFileHandle.readString());
                             buildDate = buildTimeStamp.toString();
-                            verifyUpdatable = snapsTimestamp.after(buildTimeStamp);
+                            // if morethan 23 hours the difference, then allow to update..
+                            verifyUpdatable = DateUtil.getElapsedHours(buildTimeStamp, snapsTimestamp) > 23;
+                        } else {
+                            //fallback to old version comparison
+                            verifyUpdatable = !StringUtils.isEmpty(version) && !versionString.equals(version);
                         }
                     }
                 } else {
@@ -116,9 +117,8 @@ public class AssetsDownloader {
                     if (!Forge.getDeviceAdapter().isConnectedToWifi()) {
                         message += " If so, you may want to connect to wifi first. The download is around " + (GuiBase.isAndroid() ? apkSize : packageSize) + ".";
                     }
-                    if (!GuiBase.isAndroid()) {
-                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, null, null);
-                    }
+                    if (isSnapshots) // this is for snaps initial info
+                        message += Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildTimeStamp, snapsTimestamp);
                     //failed to grab latest github tag
                     if (!isSnapshots && releaseTag.isEmpty()) {
                         if (!GuiBase.isAndroid())
@@ -168,7 +168,6 @@ public class AssetsDownloader {
         }
         // Android assets fallback
         String build = "";
-        String log = "";
 
         //see if assets need updating
         FileHandle advBG = Gdx.files.absolute(DEFAULT_SKINS_DIR).child(ADV_TEXTURE_BG_FILE);
@@ -209,8 +208,7 @@ public class AssetsDownloader {
                     return;
                 }
                 mandatory = true;
-                build += "\nInstalled resources date:\n" + target + "\n";
-                log = Forge.getDeviceAdapter().getLatestChanges(GITHUB_COMMITS_ATOM, buildDate, snapsTimestamp);
+                build += "\nInstalled resources date: " + target + "\n";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -258,7 +256,7 @@ public class AssetsDownloader {
             options = downloadExit;
         }
 
-        switch (SOptionPane.showOptionDialog(message + build + log, "", null, options)) {
+        switch (SOptionPane.showOptionDialog(message + build, "", null, options)) {
             case 1:
                 if (!canIgnoreDownload) {
                     Forge.isMobileAdventureMode = Forge.advStartup;

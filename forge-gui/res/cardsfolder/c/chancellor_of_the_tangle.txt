@@ -5,8 +5,8 @@ PT:6/7
 K:MayEffectFromOpeningHand:ManaOnMain
 K:Vigilance
 K:Reach
-SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ ManaOnMain | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G}.
+SVar:RevealCard:DB$ Reveal | RevealDefined$ Self | SubAbility$ ManaOnMain | SpellDescription$ You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.
 SVar:ManaOnMain:DB$ Effect | Triggers$ TrigMana | Duration$ Permanent
 SVar:TrigMana:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | OneOff$ True | Execute$ EffMana | TriggerDescription$ At the beginning of your first main phase, add G.
 SVar:EffMana:DB$ Mana | Produced$ G
-Oracle:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase, add {G}.\nVigilance, reach
+Oracle:You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.\nVigilance, reach

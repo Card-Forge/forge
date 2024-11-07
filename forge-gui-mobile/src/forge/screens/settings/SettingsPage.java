@@ -214,6 +214,11 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbManaBurn"),
                 Forge.getLocalizer().getMessage("nlManaBurn")),
                 1);
+        lstSettings.addItem(new BooleanSetting(FPref.LEGACY_ORDER_COMBATANTS,
+                        Forge.getLocalizer().getMessage("cbOrderCombatants"),
+                        Forge.getLocalizer().getMessage("nlOrderCombatants")),
+                1);
+
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANA_LOST_PROMPT,
                 Forge.getLocalizer().getMessage("cbManaLostPrompt"),
                 Forge.getLocalizer().getMessage("nlManaLostPrompt")),

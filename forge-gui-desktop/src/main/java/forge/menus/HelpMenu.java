@@ -145,6 +145,8 @@ public final class HelpMenu {
      * @see http://stackoverflow.com/questions/6273221/open-a-text-file-in-the-default-text-editor-via-java
      */
     private static void openFile(File file) throws IOException {
+        if (file == null)
+            return;
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
             String cmd = "rundll32 url.dll,FileProtocolHandler " + file.getCanonicalPath();
             Runtime.getRuntime().exec(cmd);

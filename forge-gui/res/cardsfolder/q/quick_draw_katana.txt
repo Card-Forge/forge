@@ -1,0 +1,6 @@
+Name:Quick-Draw Katana
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ During your turn, equipped creature gets +2/+0 and has first strike. (It deals combat damage before creatures without first strike.)
+K:Equip:2
+Oracle:During your turn, equipped creature gets +2/+0 and has first strike. (It deals combat damage before creatures without first strike.)\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

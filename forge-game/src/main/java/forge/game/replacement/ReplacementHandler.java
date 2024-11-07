@@ -694,8 +694,7 @@ public class ReplacementHandler {
 
                 // Determine if need to divide shield among affected entity and
                 // determine if the prevent next N damage shield is large enough to replace all damage
-                Map<String, String> mapParams = chosenRE.getMapParams();
-                if ((mapParams.containsKey("PreventionEffect") && mapParams.get("PreventionEffect").equals("NextN"))
+                if ((chosenRE.hasParam("PreventionEffect") && chosenRE.getParam("PreventionEffect").equals("NextN"))
                         || apiType == ApiType.ReplaceSplitDamage) {
                     if (apiType == ApiType.ReplaceDamage) {
                         shieldAmount = AbilityUtils.calculateAmount(effectSA.getHostCard(), effectSA.getParamOrDefault("Amount", "1"), effectSA);
