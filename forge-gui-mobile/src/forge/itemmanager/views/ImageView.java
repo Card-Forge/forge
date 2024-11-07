@@ -1126,13 +1126,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if (cardPrice == null)
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
-                    } /*else if (Forge.getCurrentScene() instanceof DeckEditScene) {
-                        if (((DeckEditScene) Forge.getCurrentScene()).isAutoSell((PaperCard) item)) {
-                            drawCardLabel(g, Forge.getLocalizer().getMessage("lblAutoSell"), Color.GREEN, x, y, w, h);
-                        } else if (((DeckEditScene) Forge.getCurrentScene()).isNoSell((PaperCard) item)) {
+                    } else {
+                        if (((PaperCard) item).isNoSell()) {
                             drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
-                    }*///TODO FIX Distinction
+                    }
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

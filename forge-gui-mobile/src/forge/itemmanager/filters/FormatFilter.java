@@ -52,10 +52,10 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         cbxFormats.setVisible(!Forge.isMobileAdventureMode);
 
         catalogDisplay.setFont(FSkinFont.get(12));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblDefaultCollection"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblShowCollection"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblShowAutoSell"));
-        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblShowNoSell"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblCollection"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblSellable"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblAutoSellable"));
+        catalogDisplay.addItem(Forge.getLocalizer().getMessage("lblNonSellable"));
         catalogDisplay.setEnabled(Forge.isMobileAdventureMode);
         catalogDisplay.setVisible(Forge.isMobileAdventureMode);
 
