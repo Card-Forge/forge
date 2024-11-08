@@ -549,7 +549,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(contraptions);
         GameEntityViewMap<Card, CardView> gameCacheChoose = GameEntityView.getMap(contraptions);
-        List<CardView> views = getGui().many(localizer.getMessage("lblChosenCards"), localizer.getMessage("lblCranked"), -1,
+        List<CardView> views = getGui().many(localizer.getMessage("lblChooseCrank"), localizer.getMessage("lblCranked"), -1,
                 gameCacheChoose.getTrackableKeys(), null);
         endTempShowCards();
 

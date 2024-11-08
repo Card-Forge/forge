@@ -1,4 +1,4 @@
-Name:Finders Keepers
+Name:Finders, Keepers
 ManaCost:5 B
 Types:Instant
 A:SP$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBAssemble | SpellDescription$ Destroy target creature, then assemble a Contraption.

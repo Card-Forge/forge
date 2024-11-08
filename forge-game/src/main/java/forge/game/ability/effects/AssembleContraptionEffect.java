@@ -58,12 +58,10 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
-        //TODO: Host seems wrong when replaced; is changed to steamflogger boss.
 
         String defaultAssembler = host.isCreature() ? "Self" : "You";
         String definedAssembler = sa.getParamOrDefault("DefinedAssembler", defaultAssembler);
         List<GameEntity> assemblers = AbilityUtils.getDefinedEntities(host, definedAssembler, sa);
-        //TODO: And ReplacedCause ends up being null.
 
         if(assemblers.isEmpty())
             return;
