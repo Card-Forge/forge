@@ -226,8 +226,6 @@ public class CountersPutAi extends CountersAi {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
         } else if ("PayEnergy".equals(logic)) {
             return true;
-        } else if ("NonPhyrexian".equals(logic)) {
-            return !sa.getHostCard().getType().hasSubtype("Phyrexian");
         } else if ("PayEnergyConservatively".equals(logic)) {
             boolean onlyInCombat = ai.getController().isAI()
                     && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
@@ -627,6 +625,11 @@ public class CountersPutAi extends CountersAi {
                 if (!hasSacCost && !(ph.getNextTurn() == ai && ph.is(PhaseType.END_OF_TURN) && abCost.isReusuableResource())) {
                     return false; // only if next turn and cost is reusable
                 }
+            }
+
+            // Useless since the card already has the keyword (or for another reason)
+            if (ComputerUtil.isUselessCounter(CounterType.get(type), cards.get(0))) {
+                return false;
             }
         }
 
