@@ -226,6 +226,8 @@ public class CountersPutAi extends CountersAi {
             return SpecialAiLogic.doAristocratWithCountersLogic(ai, sa);
         } else if ("PayEnergy".equals(logic)) {
             return true;
+        } else if ("NonPhyrexian".equals(logic)) {
+            return !sa.getHostCard().getType().hasSubtype("Phyrexian");
         } else if ("PayEnergyConservatively".equals(logic)) {
             boolean onlyInCombat = ai.getController().isAI()
                     && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.CONSERVATIVE_ENERGY_PAYMENT_ONLY_IN_COMBAT);
