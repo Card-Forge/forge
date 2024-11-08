@@ -130,7 +130,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
     public String getActivateAction(Card card) {
         for (SpellAbility sa : getAllManaAbilities(card)) {
             if (sa.canPlay()) {
-                return "pay mana with card";
+                return Localizer.getInstance().getMessage("lblPayManaWithCard");
             }
         }
         return null;

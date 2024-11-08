@@ -105,6 +105,8 @@ public abstract class ImageFetcher {
             setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
             return;
         }
+        if (imageKey.equalsIgnoreCase("t:null"))
+            return;
 
         boolean useArtCrop = "Crop".equals(FModel.getPreferences().getPref(ForgePreferences.FPref.UI_CARD_ART_FORMAT));
         final String prefix = imageKey.substring(0, 2);
@@ -195,14 +197,10 @@ public abstract class ImageFetcher {
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
-                                StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                                set.append(ImageUtil.getDownloadUrl(pc, face));
-                                downloadUrls.add(set.toString());
+                                downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
                             }
                         } else {// original from set
-                            StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                            set.append(ImageUtil.getDownloadUrl(pc, face));
-                            downloadUrls.add(set.toString());
+                            downloadUrls.add(ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(pc, face));
                         }
                     }
                 }
@@ -228,6 +226,8 @@ public abstract class ImageFetcher {
                     CardEdition E = StaticData.instance().getEditions().get(tempdata[1]);
                     if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET) return; //Custom set token, skip fetching.
                 }
+                if (filename.equalsIgnoreCase("null.jpg"))
+                    return;
                 System.err.println("No specified file for '" + filename + "'.. Attempting to download from default Url");
                 tokenUrl = String.format("%s%s", ForgeConstants.URL_TOKEN_DOWNLOAD, filename);
             }

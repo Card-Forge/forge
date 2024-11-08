@@ -441,23 +441,30 @@ public class VPlayerPanel extends FContainer {
     @Override
     public void drawBackground(Graphics g) {
         float y;
-        if (selectedTab != null) { //draw background and border for selected zone if needed
-            VDisplayArea selectedDisplayArea = selectedTab.displayArea;
-            float x = selectedDisplayArea.getLeft();
-            float w = selectedDisplayArea.getWidth();
-            g.fillRect(getDisplayAreaBackColor(), x, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
+        VPlayerPanel.InfoTab infoTab = selectedTab;
+        if (infoTab != null) { //draw background and border for selected zone if needed
+            VDisplayArea selectedDisplayArea = infoTab.displayArea;
+            float x = selectedDisplayArea == null ? 0 : selectedDisplayArea.getLeft();
+            float w = selectedDisplayArea == null ? 0 : selectedDisplayArea.getWidth();
+            float top = selectedDisplayArea == null ? 0 : selectedDisplayArea.getTop();
+            float h = selectedDisplayArea == null ? 0 : selectedDisplayArea.getHeight();
+            float bottom = selectedDisplayArea == null ? 0 : selectedDisplayArea.getBottom();
+            g.fillRect(getDisplayAreaBackColor(), x, top, w, h);
 
             if (Forge.isLandscapeMode()) {
-                g.drawLine(1, MatchScreen.getBorderColor(), x, selectedDisplayArea.getTop(), x, selectedDisplayArea.getBottom());
+                g.drawLine(1, MatchScreen.getBorderColor(), x, top, x, bottom);
             }
             else {
-                y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
+                y = isFlipped() ? top + 1 : bottom;
+                //don't know why infotab gets null here, either way don't crash the gui..
+                float left = infoTab == null ? 0 : infoTab.getLeft();
+                float right = infoTab == null ? 0 : infoTab.getRight();
                 //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.getBorderColor(), x, y, selectedTab.getLeft(), y);
-                g.drawLine(1, MatchScreen.getBorderColor(), selectedTab.getRight(), y, w, y);
+                g.drawLine(1, MatchScreen.getBorderColor(), x, y, left, y);
+                g.drawLine(1, MatchScreen.getBorderColor(), right, y, w, y);
             }
         }
-        if (commandZone.isVisible()) { //draw border for command zone if needed
+        if (commandZone != null && commandZone.isVisible()) { //draw border for command zone if needed
             float x = commandZone.getLeft();
             y = commandZone.getTop();
             g.drawLine(1, MatchScreen.getBorderColor(), x, y, x, y + commandZone.getHeight());
@@ -642,6 +649,7 @@ public class VPlayerPanel extends FContainer {
             if (Forge.altZoneTabs) {
                 //draw extra
                 if (isAltZoneDisplay(this)) {
+                    g.fillRect(FSkinColor.get(Forge.isMobileAdventureMode ? Colors.ADV_CLR_THEME2 : Colors.CLR_THEME2), 0, 0, getWidth(), getHeight());
                     if (selectedTab == this) {
                         if (drawOverlay)
                             g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);

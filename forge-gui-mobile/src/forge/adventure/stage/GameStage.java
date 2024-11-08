@@ -53,7 +53,7 @@ import forge.deck.DeckProxy;
 import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.screens.TransitionScreen;
+import forge.screens.CoverScreen;
 import forge.util.MyRandom;
 
 import java.util.HashMap;
@@ -468,13 +468,18 @@ public abstract class GameStage extends Stage {
 
         }
         if (keycode == Input.Keys.F2) {
-            TileMapScene S = TileMapScene.instance();
-            PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
-            if( P != null)
-            {
-                PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
-                S.load(PoI);
-                Forge.switchScene(S);
+            // prevent going to Debug Zone by accident if Debug Map isn't enabled..
+            if (GameHUD.getInstance().isDebugMap()) {
+                TileMapScene S = TileMapScene.instance();
+                PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
+                if( P != null)
+                {
+                    PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+                    S.load(PoI);
+                    Forge.switchScene(S);
+                }
+            } else {
+                System.out.println("Enable Debug Map for Debug Zone.");
             }
         }
         if (keycode == Input.Keys.F11) {
@@ -662,13 +667,13 @@ public abstract class GameStage extends Stage {
                 @Override
                 public void run() {
                     showImageDialog(Current.generateDefeatMessage(), getDefeatBadge(),
-                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new TransitionScreen(() -> {
+                            () -> FThreads.invokeInEdtNowOrLater(() -> Forge.setTransitionScreen(new CoverScreen(() -> {
                                 Forge.advFreezePlayerControls = false;
                                 WorldStage.getInstance().setPosition(new Vector2(poi.getPosition().x - 16f, poi.getPosition().y + 16f));
                                 WorldStage.getInstance().loadPOI(poi);
                                 WorldSave.getCurrentSave().autoSave();
                                 Forge.clearTransitionScreen();
-                            }, Forge.takeScreenshot(), ""))));
+                            }, Forge.takeScreenshot()))));
                 }
             }, 1f);
         }//Spawn shouldn't be null

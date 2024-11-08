@@ -253,7 +253,6 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.COMBAT, sb.toString());
     }
 
-
     @Override
     public GameLogEntry visit(final GameEventBlockersDeclared ev) {
         final StringBuilder sb = new StringBuilder();
@@ -311,4 +310,4 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             log.add(le);
         }
     }
-} // end class GameLog
+}

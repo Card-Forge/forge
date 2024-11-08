@@ -3,5 +3,5 @@ ManaCost:3
 Types:Artifact Creature Toy
 PT:2/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have it get +4/+0 until end of turn. If you do, sacrifice it at the beginning of the next end step.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 4 | NumDef$ 1 | AtEOT$ Sacrifice
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 4 | AtEOT$ Sacrifice
 Oracle:Whenever Attack-in-the-box attacks, you may have it get +4/+0 until end of turn. If you do, sacrifice it at the beginning of the next end step.

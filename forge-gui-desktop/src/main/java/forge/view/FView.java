@@ -2,14 +2,10 @@ package forge.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
@@ -21,15 +17,10 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,7 +29,6 @@ import com.google.common.collect.Lists;
 import forge.Singletons;
 import forge.gui.ImportDialog;
 import forge.gui.SOverlayUtils;
-import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
@@ -47,9 +37,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.framework.SLayoutIO;
 import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.screens.bazaar.VBazaarUI;
 import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.VHomeUI;
@@ -59,7 +47,6 @@ import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FAbsolutePositioner;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FPanel;
 import forge.toolbox.FProgressBar;
@@ -67,7 +54,6 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLayeredPane;
 import forge.util.BuildInfo;
-import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
 
 public enum FView {
@@ -248,113 +234,6 @@ public enum FView {
                     SwingUtilities.invokeLater(btnOk::requestFocusInWindow);
                 }).show();
 			}
-		}
-
-		RuntimeVersion javaVersion = RuntimeVersion.of(System.getProperty("java.version"));
-
-		if (javaVersion.getMajor() < 9 && javaVersion.getMinor() < 8 && !FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING)) {
-
-			JPanel updateWarningOverlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-			updateWarningOverlay.setLayout(new GridBagLayout());
-
-			FPanel updateWarningContentPanel = new FPanel(new MigLayout("insets 20, wrap 3"));
-
-			JTextPane textPane = new JTextPane();
-			StyledDocument text = textPane.getStyledDocument();
-
-			Style normalStyle = text.addStyle("normal", null);
-			Style boldStyle = text.addStyle("bold", null);
-
-			StyleConstants.setBold(normalStyle, false);
-			StyleConstants.setBold(boldStyle, true);
-
-			try {
-				text.insertString(text.getLength(), "The next version of Forge will require ", normalStyle);
-				text.insertString(text.getLength(), "Java 1.8", boldStyle);
-				text.insertString(text.getLength(), " and will ", normalStyle);
-				text.insertString(text.getLength(), "no longer run", boldStyle);
-				text.insertString(text.getLength(), " on Java 1.7. You appear to be running Forge with version ", normalStyle);
-				text.insertString(text.getLength(), javaVersion.toString(), boldStyle);
-				text.insertString(text.getLength(), ".\n\nPlease upgrade to the latest version of Java if you plan to update Forge in the future.", normalStyle);
-			} catch (BadLocationException e) {
-				e.printStackTrace();
-			}
-
-			textPane.setEditable(false);
-			textPane.setOpaque(false);
-			textPane.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
-			textPane.setBorder(null);
-			textPane.setFont(FSkin.getRelativeFont(14).getBaseFont());
-
-			final FLabel btnRemindMeLater = new FLabel.Builder().text("Remind Me Later").hoverable().opaque().build();
-			final FLabel btnDoNotRemindMe = new FLabel.Builder().text("Don't Remind Me Again").hoverable().opaque().build();
-			final FLabel btnDownloadLatestJava = new FLabel.Builder().text("Download Latest Java").hoverable().opaque().build();
-
-			String buttonConstraints = "w 200px!, h 30px!";
-			updateWarningContentPanel.add(textPane, "w 600px!, h 100px!, span 3 1");
-			updateWarningContentPanel.add(btnRemindMeLater, buttonConstraints);
-			updateWarningContentPanel.add(btnDoNotRemindMe, buttonConstraints + ", gap 10px 10px 0 0");
-
-			final Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
-			if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
-				updateWarningContentPanel.add(btnDownloadLatestJava, buttonConstraints);
-			}
-
-			GridBagConstraints constraints = new GridBagConstraints();
-			constraints.weightx = constraints.weighty = 1;
-
-			updateWarningOverlay.add(updateWarningContentPanel, constraints);
-
-			btnRemindMeLater.setCommand(new UiCommand() {
-				/**
-			     * 
-			     */
-			    private static final long serialVersionUID = 1L;
-
-				@Override
-				public void run() {
-					SOverlayUtils.hideOverlay();
-				}
-			});
-
-			btnDoNotRemindMe.setCommand(new UiCommand() {
-				/**
-			     * 
-			     */
-			    private static final long serialVersionUID = 1L;
-
-				@Override
-				public void run() {
-					if (FOptionPane.showConfirmDialog("Are you sure? You can re-enable this warning in Forge's general preferences.")) {
-						FModel.getPreferences().setPref(ForgePreferences.FPref.DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING, true);
-						FModel.getPreferences().save();
-						SOverlayUtils.hideOverlay();
-					}
-				}
-			});
-
-			btnDownloadLatestJava.setCommand(new UiCommand() {
-				/**
-			     * 
-			     */
-			    private static final long serialVersionUID = 1L;
-
-				@Override
-				public void run() {
-					try {
-						assert desktop != null;
-						desktop.browse(new URI("http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html"));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-
-			SwingUtilities.invokeLater(() -> {
-                SOverlayUtils.showOverlay();
-                SwingUtilities.invokeLater(btnRemindMeLater::requestFocusInWindow);
-            });
-
 		}
 
 		//start background music

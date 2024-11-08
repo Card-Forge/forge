@@ -56,7 +56,7 @@ public class DrawEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getHostCard();
-
+        final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         final boolean upto = sa.hasParam("Upto");
         final boolean optional = sa.hasParam("OptionalDecider") || upto;
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -70,19 +70,16 @@ public class DrawEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
-            numCards *= Collections.frequency(tgts, p);
+            int actualNum = numCards * Collections.frequency(tgts, p);
 
             // it is optional, not upto and player can't choose to draw that many cards
-            if (optional && !upto && !p.canDrawAmount(numCards)) {
+            if (optional && !upto && !p.canDrawAmount(actualNum)) {
                 continue;
             }
 
-            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")), null)) {
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(actualNum, " card")), null)) {
                 continue;
             }
-
-            int actualNum = numCards;
 
             if (upto) { // if it is upto, player can only choose how many cards they can draw
                 actualNum = StaticAbilityCantDraw.canDrawAmount(p, actualNum);
@@ -101,7 +98,6 @@ public class DrawEffect extends SpellAbilityEffect {
             if (sa.hasParam("RememberDrawn")) {
                 source.addRemembered(drawn);
             }
-            sa.setSVar("AFNotDrawnNum_" + p.getId(), "Number$" + drawn.size());
         }
     }
 }

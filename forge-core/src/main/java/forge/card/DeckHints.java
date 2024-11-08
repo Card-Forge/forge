@@ -180,6 +180,7 @@ public class DeckHints {
             case COLOR:
                 ColorSet cc = ColorSet.fromNames(p);
                 if (cc.isColorless()) {
+                    // ignoring Devoid here since having the colored mana symbol might be enough
                     getMatchingItems(cardList, CardRulesPredicates.IS_COLORLESS, PaperCard::getRules).forEach(cards::add);
                 } else {
                     getMatchingItems(cardList, CardRulesPredicates.isColor(cc.getColor()), PaperCard::getRules).forEach(cards::add);
@@ -192,7 +193,11 @@ public class DeckHints {
                 getMatchingItems(cardList, CardRulesPredicates.name(StringOp.EQUALS, p), PaperCard::getRules).forEach(cards::add);
                 break;
             case TYPE:
-                getMatchingItems(cardList, CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p), PaperCard::getRules).forEach(cards::add);
+                Predicate<CardRules> typePred = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, p);
+                if (CardType.isACreatureType(p)) {
+                    typePred = typePred.or(CardRulesPredicates.hasKeyword("Changeling"));
+                }
+                getMatchingItems(cardList, typePred, PaperCard::getRules).forEach(cards::add);
                 break;
             case NONE:
             case ABILITY: // already done above
@@ -222,6 +227,7 @@ public class DeckHints {
                 return true;
             }
             for (String tok : card.getTokens()) {
+                // unfortunately this doesn't include keyworded ones yet
                 if (tdb != null && tdb.containsRule(tok) && rulesWithTokens(predicate).test(tdb.getToken(tok).getRules())) {
                     return true;
                 }

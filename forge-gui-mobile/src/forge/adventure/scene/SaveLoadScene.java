@@ -244,18 +244,21 @@ public class SaveLoadScene extends UIScene {
                         loaded = false;
                         if (WorldSave.load(currentSlot)) {
                             WorldSave.getCurrentSave().clearChanges();
-                            WorldSave.getCurrentSave().getWorld().generateNew(0);
-                            if (difficulty != null)
-                                Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
-                            Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
-                            Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
-                            Current.player().getQuests().clear();
-                            Current.player().resetQuestFlags();
-                            Current.player().setCharacterFlag("newGamePlus", 1);
-                            AdventurePlayer.current().addQuest("28");
-                            WorldStage.getInstance().setDirectlyEnterPOI();
-                            SoundSystem.instance.changeBackgroundTrack();
-                            Forge.switchScene(GameScene.instance());
+                            if (WorldSave.getCurrentSave().getWorld().generateNew(0)) {
+                                if (difficulty != null)
+                                    Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
+                                Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                                Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                                Current.player().getQuests().clear();
+                                Current.player().resetQuestFlags();
+                                Current.player().setCharacterFlag("newGamePlus", 1);
+                                AdventurePlayer.current().addQuest("28");
+                                WorldStage.getInstance().enterSpawnPOI();
+                                SoundSystem.instance.changeBackgroundTrack();
+                                Forge.switchScene(GameScene.instance());
+                            } else {
+                                Forge.clearTransitionScreen();
+                            }
                         } else {
                             Forge.clearTransitionScreen();
                         }

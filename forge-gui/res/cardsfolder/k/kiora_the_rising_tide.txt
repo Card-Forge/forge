@@ -1,0 +1,11 @@
+Name:Kiora, the Rising Tide
+ManaCost:2 U
+Types:Legendary Creature Merfolk Noble
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw two cards, then discard two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Threshold$ True | OptionalDecider$ You | TriggerDescription$ Threshold — Whenever NICKNAME attacks, if there are seven or more cards in your graveyard, you may create Scion of the Deep, a legendary 8/8 blue Octopus creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ scion_of_the_deep | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Kiora enters, draw two cards, then discard two cards.\nThreshold — Whenever Kiora attacks, if there are seven or more cards in your graveyard, you may create Scion of the Deep, a legendary 8/8 blue Octopus creature token.

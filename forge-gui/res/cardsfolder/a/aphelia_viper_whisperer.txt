@@ -1,0 +1,13 @@
+Name:Aphelia, Viper Whisperer
+ManaCost:1 B
+Types:Legendary Creature Gorgon Assassin
+PT:1/3
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, you may pay {1}{B/G}. If you do, create a 1/1 black Snake creature token with deathtouch.
+SVar:TrigToken:AB$ Token | Cost$ 1 BG | TokenAmount$ 1 | TokenScript$ b_1_1_snake_deathtouch | TokenOwner$ You
+A:AB$ Effect | Cost$ 4 B | Triggers$ TrigDamage | SpellDescription$ Until end of turn, whenever one or more Gorgons and/or Snakes you control deal combat damage to a player, that player loses half their life, rounded up.
+SVar:TrigDamage:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.Gorgon+YouCtrl,Creature.Snake+YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever one or more Gorgons and/or Snakes you control deal combat damage to a player, that player loses half their life, rounded up.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X
+SVar:X:TriggeredTarget$LifeTotal/HalfUp
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Aphelia attacks, you may pay {1}{B/G}. If you do, create a 1/1 black Snake creature token with deathtouch.\n{4}{B}: Until end of turn, whenever one or more Gorgons and/or Snakes you control deal combat damage to a player, that player loses half their life, rounded up.

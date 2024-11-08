@@ -1,0 +1,7 @@
+Name:Dragon Trainer
+ManaCost:3 R R
+Types:Creature Human
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 4/4 red Dragon creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_4_4_dragon_flying | TokenOwner$ You
+Oracle:When this creature enters, create a 4/4 red Dragon creature token with flying.

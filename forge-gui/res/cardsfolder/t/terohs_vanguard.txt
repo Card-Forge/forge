@@ -3,6 +3,7 @@ ManaCost:3 W
 Types:Creature Human Nomad
 PT:2/3
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | Threshold$ True | TriggerDescription$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, creatures you control gain protection from black until end of turn."
+S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigETB | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, creatures you control gain protection from black until end of turn."
+SVar:TrigETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, creatures you control gain protection from black until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Protection from black
 Oracle:Flash\nThreshold — As long as seven or more cards are in your graveyard, Teroh's Vanguard has "When Teroh's Vanguard enters, creatures you control gain protection from black until end of turn."

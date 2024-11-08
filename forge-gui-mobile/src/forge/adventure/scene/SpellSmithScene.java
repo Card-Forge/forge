@@ -16,6 +16,8 @@ import forge.adventure.data.RewardData;
 import forge.adventure.util.*;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
+import forge.card.CardEdition.CardInSet;
+import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.MyRandom;
@@ -349,10 +351,16 @@ public class SpellSmithScene extends UIScene {
             if (input == null) return false;
             final CardEdition cardEdition = FModel.getMagicDb().getEditions().get(edition);
 
-            if (cardEdition != null && cardEdition.getCardInSet(input.getName()).size() == 0) return false;
+            // Use the rarity of the card from the filtered set.
+            CardRarity inputRarity = input.getRarity();
+            if (cardEdition != null)  {
+                List<CardInSet> cardsInSet = cardEdition.getCardInSet(input.getName());
+            	if (cardsInSet.size() == 0) return false;
+            	inputRarity = cardsInSet.get(0).rarity;
+            }
+            if (!rarity.isEmpty()) if (!inputRarity.toString().equals(rarity)) return false;
             if (colorFilter.size() > 0)
                 if (input.getRules().getColor() != ColorSet.fromNames(colorFilter)) return false;
-            if (!rarity.isEmpty()) if (!input.getRarity().toString().equals(rarity)) return false;
             if (cost_low > -1) {
                 if (!(input.getRules().getManaCost().getCMC() >= cost_low && input.getRules().getManaCost().getCMC() <= cost_high))
                     return false;

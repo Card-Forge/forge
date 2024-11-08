@@ -65,7 +65,7 @@ public class ConquestCommandersScreen extends FScreen {
             final ConquestCommander commander = lstCommanders.getSelectedItem();
             if (commander != null) {
                 /*preload deck to cache*/
-                ImageCache.preloadCache(commander.getDeck());
+                ImageCache.getInstance().preloadCache(commander.getDeck());
                 preventRefreshOnActivate = true; //refresh not needed since deck changes won't affect commander display
                 Forge.openScreen(new ConquestDeckEditor(commander));
             }

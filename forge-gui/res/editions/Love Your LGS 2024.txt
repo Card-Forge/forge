@@ -7,3 +7,6 @@ ScryfallCode=PLG24
 
 [cards]
 1 R Sakura-Tribe Elder @Victor Adame Minguez
+1J R Lay Down Arms @Liiga Smilshkalne
+2J R Sleight of Hand @Scott Murphy
+3J U Cut Down @Dominik Mayer

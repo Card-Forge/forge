@@ -1,5 +1,5 @@
 avatar.png
-size: 160,320
+size: 160,368
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none       
@@ -663,3 +663,18 @@ Leonin_f
 Leonin_f
   size: 16, 16        
   xy: 144, 336
+Dragon_r
+  xy: 48, 352
+  size: 16, 16       
+Dragon_w
+  xy: 0, 352
+  size: 16, 16        
+Dragon_g
+  xy: 64, 352
+  size: 16, 16    
+Dragon_b
+  xy: 32, 352
+  size: 16, 16            
+Dragon_u
+  xy: 16, 352
+  size: 16, 16       

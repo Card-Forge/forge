@@ -778,9 +778,9 @@ public class StaticData {
             HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             for (CardEdition.CardInSet c : e.getAllCardsInSet()) {
                 if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
+                    cardCount.put(c.name, Pair.of(c.collectorNumber != null && c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
                 } else {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
+                    cardCount.put(c.name, Pair.of(c.collectorNumber != null && c.collectorNumber.startsWith("F"), 1));
                 }
             }
 

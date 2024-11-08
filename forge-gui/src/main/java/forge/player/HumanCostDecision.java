@@ -1139,16 +1139,18 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         String type = cost.getType();
 
         if (cost.payCostFromSource()) {
-            if (source.getController() == ability.getActivatingPlayer() && source.canBeSacrificedBy(ability, isEffect())) {
-                return mandatory || confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName()))) ? PaymentDecision.card(source) : null;
+            if (source.getController() == ability.getActivatingPlayer() && source.canBeSacrificedBy(ability, isEffect()) &&
+                    (mandatory || confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(source.getName()))))) {
+                return PaymentDecision.card(source);
             }
             return null;
         }
 
         if (type.equals("OriginalHost")) {
             Card host = ability.getOriginalHost();
-            if (host.getController() == ability.getActivatingPlayer() && host.canBeSacrificedBy(ability, isEffect())) {
-                return confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName()))) ? PaymentDecision.card(host) : null;
+            if (host.getController() == ability.getActivatingPlayer() && host.canBeSacrificedBy(ability, isEffect()) &&
+                    confirmAction(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName())))) {
+                return PaymentDecision.card(host);
             }
             return null;
         }
@@ -1216,6 +1218,14 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         String type = cost.getType();
         final String amount = cost.getAmount();
 
+        if (type.equals("OriginalHost")) {
+            Card host = ability.getOriginalHost();
+            if (host.canTap()) {
+                return PaymentDecision.card(host);
+            }
+            return null;
+        }
+
         boolean sameType = false;
         if (type.contains(".sharesCreatureTypeWith")) {
             sameType = true;
@@ -1230,8 +1240,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             type = TextUtil.fastReplace(type, TextUtil.concatNoSpace("+withTotalPowerGE", totalP), "");
         }
 
-        CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player,
-                source, ability);
+        CardCollection typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"), player, source, ability);
         typeList = CardLists.filter(typeList, ability.isCrew() ? CardPredicates.CAN_CREW : CardPredicates.CAN_TAP);
 
         Integer c = null;

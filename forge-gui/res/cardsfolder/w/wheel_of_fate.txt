@@ -7,4 +7,4 @@ A:SP$ Discard | Mode$ Hand | Defined$ Player | SubAbility$ DBDraw | SpellDescrip
 SVar:DBDraw:DB$ Draw | Defined$ Player | NumCards$ 7
 SVar:NeedsToPlayVar:Y LE3
 SVar:Y:Count$InYourHand
-Oracle:Suspend 4—{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)\nEach player discards their hand, then draws seven cards.
+Oracle:Suspend 4—{1}{R} (Rather than cast this card from your hand, pay {1}{R} and exile it with four time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, you may cast it without paying its mana cost.)\nEach player discards their hand, then draws seven cards.

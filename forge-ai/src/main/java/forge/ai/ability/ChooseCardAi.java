@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import forge.ai.*;
+import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.card.*;
 import forge.game.combat.Combat;
@@ -47,11 +48,15 @@ public class ChooseCardAi extends SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         final Card host = sa.getHostCard();
         final Game game = ai.getGame();
-        ZoneType choiceZone = ZoneType.Battlefield;
+
+        List<ZoneType> choiceZone;
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
+        } else {
+            choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         }
         CardCollectionView choices = game.getCardsIn(choiceZone);
+
         if (sa.hasParam("Choices")) {
             choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host, sa);
         }
@@ -118,6 +123,13 @@ public class ChooseCardAi extends SpellAbilityAi {
                 ownChoices = CardLists.filter(choices, CardPredicates.isControlledByAnyOf(ai.getAllies()));
             }
             return !ownChoices.isEmpty();
+        } else if (aiLogic.equals("GoodCreature")) {
+            for (Card choice : choices) {
+                if (choice.isCreature() && ComputerUtilCard.evaluateCreature(choice) >= 250) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
     }

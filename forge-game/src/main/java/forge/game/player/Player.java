@@ -152,7 +152,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private boolean beenDealtCombatDamageSinceLastTurn = false;
 
-    private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
 
@@ -1884,11 +1883,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         beenDealtCombatDamageSinceLastTurn = b;
     }
 
-    public final boolean getActivateLoyaltyAbilityThisTurn() {
-        return activateLoyaltyAbilityThisTurn;
-    }
-    public final void setActivateLoyaltyAbilityThisTurn(final boolean b) {
-        activateLoyaltyAbilityThisTurn = b;
+    public final boolean getActivateLoyaltyAbilityThisTurn(CardTraitBase ctb) {
+        return !CardUtil.getThisTurnActivated("Activated.Loyalty+Planeswalker+YouCtrl", ctb.getHostCard(), ctb, this).isEmpty();
     }
 
     public final List<Card> getCreaturesAttackedThisTurn() {
@@ -2496,7 +2492,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
-        setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
         resetLandsPlayedThisTurn();

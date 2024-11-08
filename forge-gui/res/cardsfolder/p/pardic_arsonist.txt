@@ -2,6 +2,7 @@ Name:Pardic Arsonist
 ManaCost:2 R R
 Types:Creature Human Barbarian
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | Threshold$ True | TriggerDescription$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, it deals 3 damage to any target."
+S:Mode$ Continuous | Affected$ Card.Self | AddTrigger$ TrigETB | Condition$ Threshold | Description$ Threshold — As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters, it deals 3 damage to any target."
+SVar:TrigETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters, it deals 3 damage to any target.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ 3
 Oracle:Threshold — As long as seven or more cards are in your graveyard, Pardic Arsonist has "When Pardic Arsonist enters, it deals 3 damage to any target."

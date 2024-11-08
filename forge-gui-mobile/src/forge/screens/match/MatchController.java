@@ -543,7 +543,7 @@ public class MatchController extends AbstractGuiGame {
         super.afterGameEnd();
         Forge.back(true);
         if (Forge.disposeTextures)
-            ImageCache.disposeTextures();
+            ImageCache.getInstance().disposeTextures();
         //view = null;
     }
 
@@ -721,7 +721,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
-        Forge.getAssets().avatarImages().put(player.getName(), ImageCache.getIcon(ihi));
+        Forge.getAssets().avatarImages().put(player.getName(), ImageCache.getInstance().getIcon(ihi));
     }
 
     @Override

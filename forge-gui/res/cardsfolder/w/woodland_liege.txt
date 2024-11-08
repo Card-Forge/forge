@@ -1,0 +1,8 @@
+Name:Woodland Liege
+ManaCost:2 G
+Types:Creature Elf Druid Noble
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Beast.YouCtrl | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Beast you control enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:BuffedBy:Beast
+Oracle:Whenever a Beast you control enters, draw a card.

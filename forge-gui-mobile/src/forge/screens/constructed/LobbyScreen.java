@@ -672,7 +672,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (Forge.gameInProgress) {
                     /*preload deck to cache*/
                     if(slot.getType() == LobbySlotType.LOCAL)
-                        ImageCache.preloadCache(decks[i]);
+                        ImageCache.getInstance().preloadCache(decks[i]);
                 }
                 Gdx.graphics.requestRendering();
             }

@@ -169,6 +169,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Modal);
     }
 
+    public boolean isRoom() {
+        return get(TrackableProperty.Room);
+    }
+
     /*
     public boolean isTransformed() {
         return getCurrentState().getState() == CardStateName.Transformed;
@@ -977,6 +981,7 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Adventure, c.isAdventureCard());
         set(TrackableProperty.DoubleFaced, c.isDoubleFaced());
         set(TrackableProperty.Modal, c.isModal());
+        set(TrackableProperty.Room, c.isRoom());
 
         //backside
         if (c.getAlternateState() != null)

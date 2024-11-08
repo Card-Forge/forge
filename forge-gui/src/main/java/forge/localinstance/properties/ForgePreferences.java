@@ -115,6 +115,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
         UI_MANABURN("false"),
+        LEGACY_ORDER_COMBATANTS("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
@@ -182,12 +183,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
         UI_LANGUAGE("en-US"),
 
-        /** This is used to disable the future version compatibility warning dialog for Java 8. */
-        //TODO This should be removed after the update that requires Java 8.
-        DISABLE_DISPLAY_JAVA_8_UPDATE_WARNING("false"),
-
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
+        CHECK_SNAPSHOT_AT_STARTUP("true"),
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
         MATCHPREF_PROMPT_FREE_BLOCKS("false"),
@@ -250,6 +248,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         PHASE_HUMAN_MAIN2 ("true"),
         PHASE_HUMAN_EOT ("false"),
         PHASE_HUMAN_CLEANUP ("false"),
+        PROMPT_FOR_AUTOSELL ("true"),
 
         ZONE_LOC_HUMAN_HAND(""),
         ZONE_LOC_HUMAN_LIBRARY(""),
