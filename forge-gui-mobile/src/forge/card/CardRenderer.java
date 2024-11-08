@@ -869,10 +869,7 @@ public class CardRenderer {
                 float manaSymbolSize = w / 4.5f;
                 if (card.isSplitCard() && card.hasAlternateState() && !card.isFaceDown() && card.getZone() != ZoneType.Stack && card.getZone() != ZoneType.Battlefield) {
                     if (isChoiceList) {
-                        if (card.getRightSplitState().getName().equals(details.getName()))
-                            drawManaCost(g, card.getRightSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
-                        else
-                            drawManaCost(g, card.getLeftSplitState().getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
+                        drawManaCost(g, details.getManaCost(), x - padding, y, w + 2 * padding, h, manaSymbolSize);
                     } else {
                         ManaCost leftManaCost = card.getLeftSplitState().getManaCost();
                         ManaCost rightManaCost = card.getRightSplitState().getManaCost();
