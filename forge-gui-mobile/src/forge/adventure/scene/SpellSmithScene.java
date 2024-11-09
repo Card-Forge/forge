@@ -20,13 +20,15 @@ import forge.card.CardEdition.CardInSet;
 import forge.card.CardRarity;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.util.IterableUtil;
 import forge.util.MyRandom;
+import forge.util.StreamUtil;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 
 public class SpellSmithScene extends UIScene {
@@ -162,14 +164,14 @@ public class SpellSmithScene extends UIScene {
                 if (input.getDate().after(Date.from(now.minus(1, ChronoUnit.DAYS))))
                     return false;
             }
-            List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
-                    .filter(input2 -> input2.getEdition().equals(input.getCode())).toList();
-            if (it.size() == 0)
+            String code = input.getCode();
+            Predicate<PaperCard> test = i -> i.getEdition().equals(code);
+            if (!IterableUtil.any(RewardData.getAllCards(), test))
                 return false;
             ConfigData configData = Config.instance().getConfigData();
             if (configData.allowedEditions != null)
-                return Arrays.asList(configData.allowedEditions).contains(input.getCode());
-            return (!Arrays.asList(configData.restrictedEditions).contains(input.getCode()));
+                return Arrays.asList(configData.allowedEditions).contains(code);
+            return (!Arrays.asList(configData.restrictedEditions).contains(code));
         }).sorted(Comparator.comparing(CardEdition::getName)).collect(Collectors.toList());
     }
 
@@ -346,7 +348,7 @@ public class SpellSmithScene extends UIScene {
                     if (B.getValue().getColor().equals(Color.RED)) colorFilter.add("White");
                     break;
             }
-        P = StreamSupport.stream(P.spliterator(), false).filter(input -> {
+        P = StreamUtil.stream(P).filter(input -> {
             //L|Basic Land, C|Common, U|Uncommon, R|Rare, M|Mythic Rare, S|Special, N|None
             if (input == null) return false;
             final CardEdition cardEdition = FModel.getMagicDb().getEditions().get(edition);
@@ -392,7 +394,7 @@ public class SpellSmithScene extends UIScene {
         }
         if (cost_low > -1) totalCost *= 2.5f; //And CMC cost multiplier.
 
-        cardPool = StreamSupport.stream(P.spliterator(), false).collect(Collectors.toList());
+        cardPool = StreamUtil.stream(P).collect(Collectors.toList());
         poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int

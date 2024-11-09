@@ -63,7 +63,6 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * <p>
@@ -3968,7 +3967,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public List<String> getUnlockedDoors() {
-        return StreamSupport.stream(getCardsIn(ZoneType.Battlefield).spliterator(), false)
+        return StreamUtil.stream(getCardsIn(ZoneType.Battlefield))
                 .filter(Card::isRoom)
                 .map(Card::getUnlockedRoomNames)
                 .flatMap(Collection::stream)
