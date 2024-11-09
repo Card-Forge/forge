@@ -1,8 +1,8 @@
 package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
-import forge.ai.*;
 import com.google.common.collect.Lists;
+import forge.ai.*;
 import forge.game.Game;
 import forge.game.card.*;
 import forge.game.combat.Combat;

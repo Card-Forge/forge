@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 
 public class ComputerUtilCost {
@@ -921,8 +922,8 @@ public class ComputerUtilCost {
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
         if (source.usesTargeting()) {
-            final CardCollection targets = new CardCollection(source.getTargets().getTargetCards());
-            choices = IterableUtil.filter(choices, CardPredicates.isController(ai).and(targets::contains).negate());
+            final CardCollectionView targets = source.getTargets().getTargetCards();
+            choices = IterableUtil.filter(choices, Predicate.not(CardPredicates.isController(ai).and(targets::contains)));
         }
         return new CardCollection(choices);
     }

@@ -2438,7 +2438,7 @@ public class ComputerUtil {
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
             List<Card> choices = validCards.stream()
-                    .filter(((Predicate<Card>) goodChoices::contains).negate())
+                    .filter(Predicate.not(goodChoices::contains))
                     .collect(StreamUtil.random(minDiff));
             goodChoices.addAll(choices);
             return goodChoices;

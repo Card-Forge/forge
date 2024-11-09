@@ -147,7 +147,7 @@ public final class FServerManager {
         broadcastExcept(event, Collections.singleton(notTo));
     }
     public void broadcastExcept(final NetEvent event, final Collection<RemoteClient> notTo) {
-        Predicate<RemoteClient> filter = ((Predicate<RemoteClient>) notTo::contains).negate();
+        Predicate<RemoteClient> filter = Predicate.not(notTo::contains);
         broadcastTo(event, IterableUtil.filter(clients.values(), filter));
     }
     private void broadcastTo(final NetEvent event, final Iterable<RemoteClient> to) {

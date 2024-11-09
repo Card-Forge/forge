@@ -24,6 +24,7 @@ import forge.util.Aggregates;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class ChooseSourceAi extends SpellAbilityAi {
 
@@ -133,8 +134,9 @@ public class ChooseSourceAi extends SpellAbilityAi {
             }
             // No optimal creature was found above, so try to broaden the choice.
             if (!Iterables.isEmpty(options)) {
-                List<Card> oppCreatures = CardLists.filter(options,
-                        CardPredicates.CREATURES.and(CardPredicates.isOwner(aiChoser).negate()));
+                List<Card> oppCreatures = CardLists.filter(options, Predicate.not(
+                        CardPredicates.CREATURES.and(CardPredicates.isOwner(aiChoser))
+                ));
                 List<Card> aiNonCreatures = CardLists.filter(options,
                         CardPredicates.NON_CREATURES
                                 .and(CardPredicates.PERMANENTS)

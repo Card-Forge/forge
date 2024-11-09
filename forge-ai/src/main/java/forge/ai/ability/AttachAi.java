@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class AttachAi extends SpellAbilityAi {
 
@@ -1132,9 +1133,10 @@ public class AttachAi extends SpellAbilityAi {
 
         //some auras/equipments aren't useful in multiples
         if (attachSource.hasSVar("NonStackingAttachEffect")) {
-            prefList = CardLists.filter(prefList, CardPredicates.isEquippedBy(attachSource.getName())
-                    .or(CardPredicates.isEnchantedBy(attachSource.getName())).negate()
-            );
+            prefList = CardLists.filter(prefList, Predicate.not(
+                    CardPredicates.isEquippedBy(attachSource.getName())
+                            .or(CardPredicates.isEnchantedBy(attachSource.getName()))
+            ));
         }
 
         // Don't pump cards that will die.

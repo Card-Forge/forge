@@ -22,7 +22,7 @@ public enum AttackRestrictionType {
             case NEED_BLACK_OR_GREEN:
                 return CardPredicates.isColor((byte) (MagicColor.BLACK | MagicColor.GREEN))
                         // may explicitly not be black/green itself
-                        .and(((Predicate<Card>) attacker::equals).negate());
+                        .and(Predicate.not(attacker::equals));
             case NOT_ALONE:
                 return x -> true;
             default:
