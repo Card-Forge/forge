@@ -86,6 +86,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
     private boolean hideFilters = false;
     private boolean wantUnique = false;
     private boolean showRanking = false;
+    private boolean showNFSWatermark = false;
     private boolean multiSelectMode = false;
     private FEventHandler selectionChangedHandler, itemActivateHandler;
     private ContextMenuBuilder<T> contextMenuBuilder;
@@ -913,12 +914,20 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         return showRanking;
     }
 
+    public boolean showNFSWatermark() {
+        return showNFSWatermark;
+    }
+
     public void setWantUnique(boolean unique) {
         wantUnique = unique;
     }
 
     public void setShowRanking(boolean showRanking0) {
         showRanking = showRanking0;
+    }
+
+    public void setShowNFSWatermark(boolean val) {
+        showNFSWatermark = val;
     }
 
     public void setSelectionSupport(int minSelections0, int maxSelections0) {

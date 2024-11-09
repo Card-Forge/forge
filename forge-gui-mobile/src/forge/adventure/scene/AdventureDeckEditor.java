@@ -173,6 +173,7 @@ public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
             super(ItemManagerConfig.ADVENTURE_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
             cardManager.setBtnAdvancedSearchOptions(true);
             cardManager.setCatalogDisplay(true);
+            cardManager.setShowNFSWatermark(true);
         }
 
         @Override
