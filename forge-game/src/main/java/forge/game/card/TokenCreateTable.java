@@ -48,7 +48,7 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 
         if (validOwner != null) {
             Predicate<GameObject> restriction = GameObjectPredicates.restriction(validOwner.split(","), host.getController(), host, ctb);
-            filteredPlayer = rowKeySet().stream().filter(restriction).collect(Collectors.toList());
+            filteredPlayer = rowKeySet().stream().filter(restriction).toList();
             if (filteredPlayer.isEmpty()) {
                 return 0;
             }

@@ -147,7 +147,7 @@ public final class CardRelationMatrixGenerator {
         }
 
         //filter to just legal commanders
-        List<PaperCard> legends = cardList.stream().filter(format.isLegalCommanderPredicate()).collect(Collectors.toList());
+        List<PaperCard> legends = cardList.stream().filter(format.isLegalCommanderPredicate()).toList();
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){

@@ -166,7 +166,7 @@ public class AdventureQuestStage implements Serializable {
             return worldMapOK;
         }
         if (targetPOI == null) {
-            List<String> enteredTags = Arrays.stream(locationToCheck.getData().questTags).collect(Collectors.toList());
+            List<String> enteredTags = Arrays.stream(locationToCheck.getData().questTags).toList();
             for (String tag : POITags) {
                 if (!enteredTags.contains(tag)) {
                     return false;

@@ -283,7 +283,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (cr.hasFunctionalVariants()) {
             cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.functionalVariantName)
                     || cr.getSupportedFunctionalVariants().contains(c.functionalVariantName)
-            ).collect(Collectors.toList());
+            ).toList();
         }
         if (cardsInSet.isEmpty())
             return false;

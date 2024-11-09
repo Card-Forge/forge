@@ -51,7 +51,7 @@ public class QuestController {
             toReturn.addElement(enemyTags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
 
         toReturn.clear();
 
@@ -69,7 +69,7 @@ public class QuestController {
             toReturn.addElement(POITags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
 
         toReturn.clear();
 
@@ -89,7 +89,7 @@ public class QuestController {
             toReturn.addElement(questSourceTags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
 
         toReturn.clear();
 

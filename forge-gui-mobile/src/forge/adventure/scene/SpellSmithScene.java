@@ -163,7 +163,7 @@ public class SpellSmithScene extends UIScene {
                     return false;
             }
             List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
-                    .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
+                    .filter(input2 -> input2.getEdition().equals(input.getCode())).toList();
             if (it.size() == 0)
                 return false;
             ConfigData configData = Config.instance().getConfigData();

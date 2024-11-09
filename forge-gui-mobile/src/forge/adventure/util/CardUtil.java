@@ -820,7 +820,7 @@ public class CardUtil {
                 ? FModel.getMagicDb().getCommonCards().getAllCards(cardName)
                 : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
         List<PaperCard> validCards = cardPool.stream()
-                .filter(input -> input.getEdition().equals(edition)).collect(Collectors.toList());
+                .filter(input -> input.getEdition().equals(edition)).toList();
 
         if (validCards.isEmpty()) {
             System.err.println("Unexpected behavior: tried to call getCardByNameAndEdition for card " + cardName + " from the edition " + edition + ", but didn't find it in the DB. A random existing instance will be returned.");

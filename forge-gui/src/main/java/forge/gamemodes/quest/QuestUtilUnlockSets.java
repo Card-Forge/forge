@@ -140,12 +140,12 @@ public class QuestUtilUnlockSets {
         // Sort current sets by date
         List<CardEdition> allowedSets = qData.getFormat().getAllowedSetCodes().stream()
                 .map(editions::get)
-                .sorted().collect(Collectors.toList());
+                .sorted().toList();
         
         // Sort unlockable sets by date
         List<CardEdition> excludedSets = qData.getFormat().getLockedSets().stream()
                 .map(editions::get)
-                .sorted().collect(Collectors.toList());
+                .sorted().toList();
         
         // get a number of sets between an excluded and any included set
         List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<>();

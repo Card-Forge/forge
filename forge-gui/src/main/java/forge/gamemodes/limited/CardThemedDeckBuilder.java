@@ -397,7 +397,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(secondKeyCard!=null && !secondKeyCard.getRules().getMainPart().getType().isLand()) {
             final List<PaperCard> keyCardList = aiPlayables.stream()
                     .filter(PaperCardPredicates.name(secondKeyCard.getName()))
-                    .collect(Collectors.toList());
+                    .toList();
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
@@ -418,7 +418,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         if(secondKeyCard!=null && secondKeyCard.getRules().getMainPart().getType().isLand()) {
             final List<PaperCard> keyCardList = aiPlayables.stream()
                     .filter(PaperCardPredicates.name(secondKeyCard.getName()))
-                    .collect(Collectors.toList());
+                    .toList();
             deckList.addAll(keyCardList);
             aiPlayables.removeAll(keyCardList);
             rankedColorList.removeAll(keyCardList);
@@ -443,7 +443,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
      * If evolving wilds is in the deck and there are fewer than 4 spaces for basic lands - remove evolving wilds
      */
     protected void checkEvolvingWilds(){
-        List<PaperCard> evolvingWilds = deckList.stream().filter(PaperCardPredicates.name("Evolving Wilds")).collect(Collectors.toList());
+        List<PaperCard> evolvingWilds = deckList.stream().filter(PaperCardPredicates.name("Evolving Wilds")).toList();
         if((evolvingWilds.size()>0 && landsNeeded<4 ) || colors.countColors()<2){
             deckList.removeAll(evolvingWilds);
             landsNeeded=landsNeeded+evolvingWilds.size();
