@@ -12,7 +12,6 @@ import forge.util.Aggregates;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static forge.adventure.util.AdventureQuestController.ObjectiveTypes.*;
 import static forge.adventure.util.AdventureQuestController.QuestStatus.*;

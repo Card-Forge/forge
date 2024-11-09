@@ -12,7 +12,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 

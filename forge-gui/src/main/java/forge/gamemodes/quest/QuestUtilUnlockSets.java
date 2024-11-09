@@ -33,7 +33,6 @@ import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
