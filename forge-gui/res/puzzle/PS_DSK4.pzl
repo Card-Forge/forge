@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Duskmourn: House of Horror #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2024/10/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies all possible blocking decisions. Assume any cards you could access from your library are irrelevant to the puzzle.
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Enduring Tenacity;Dissection Tools;Winter's Intervention;White Sun's Twilight;Final Vengeance
+p0battlefield=Elas il-Kor, Sadistic Pilgrim;Essence Channeler;Leyline of Hope;Caves of Koilos;Caves of Koilos;Caves of Koilos;Plains;Plains;Plains;Plains;T:w_1_1_e_glimmer;T:w_1_1_e_glimmer;T:w_1_1_e_glimmer
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1life=15
+p1battlefield=Leyline of the Void;Three Tree Mascot;Three Tree Mascot;Three Tree Mascot;Overlord of the Balemurk
