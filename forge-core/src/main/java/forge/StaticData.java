@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 
 /**
@@ -868,10 +869,10 @@ public class StaticData {
             CompletableFuture.allOf(futuresArray).join();
             futures.clear();
         }
-        List<String> NIF = new ArrayList<>(NIF_Q).stream().sorted().toList();
-        List<String> CNI = new ArrayList<>(CNI_Q).stream().sorted().toList();
-        List<String> TOK = new ArrayList<>(TOKEN_Q).stream().sorted().toList();
-        List<String> sorted_editions = EDITION_Q.stream().distinct().sorted().toList();
+        List<String> NIF = new ArrayList<>(NIF_Q).stream().sorted().collect(Collectors.toList());
+        List<String> CNI = new ArrayList<>(CNI_Q).stream().sorted().collect(Collectors.toList());
+        List<String> TOK = new ArrayList<>(TOKEN_Q).stream().sorted().collect(Collectors.toList());
+        List<String> sorted_editions = EDITION_Q.stream().distinct().sorted().collect(Collectors.toList());
         for (String edition : sorted_editions) {
             String[] arr =  edition.split("_");
             String code = arr[0];
