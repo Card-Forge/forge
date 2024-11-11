@@ -322,6 +322,8 @@ public final class ImageKeys {
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
     public static boolean hasSetLookup(String filename) {
+        if (filename == null)
+            return false;
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             return StaticData.instance().getSetLookup().keySet().stream().anyMatch(filename::startsWith);
         }
