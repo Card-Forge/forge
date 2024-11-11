@@ -869,6 +869,7 @@ public class StaticData {
             CompletableFuture.allOf(futuresArray).join();
             futures.clear();
         }
+        // stream().toList() causes crash on Android, use Collectors.toList()
         List<String> NIF = new ArrayList<>(NIF_Q).stream().sorted().collect(Collectors.toList());
         List<String> CNI = new ArrayList<>(CNI_Q).stream().sorted().collect(Collectors.toList());
         List<String> TOK = new ArrayList<>(TOKEN_Q).stream().sorted().collect(Collectors.toList());
