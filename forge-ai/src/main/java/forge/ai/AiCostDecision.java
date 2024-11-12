@@ -454,9 +454,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
             });
             exclude.addAll(toExclude);
         }
-        if (AiCardMemory.getMemorySet(player, AiCardMemory.MemorySet.PAYS_TAP_COST) != null) {
-            exclude.addAll(AiCardMemory.getMemorySet(player, AiCardMemory.MemorySet.PAYS_TAP_COST));
-        }
 
         String totalP = "";
         CardCollectionView totap;
@@ -474,9 +471,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
         tapped.addAll(totap);
-        for (Card choice : totap) {
-            AiCardMemory.rememberCard(player, choice, AiCardMemory.MemorySet.PAYS_TAP_COST);
-        }
         return PaymentDecision.card(totap);
     }
 
