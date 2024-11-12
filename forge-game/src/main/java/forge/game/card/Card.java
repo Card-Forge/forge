@@ -293,6 +293,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String chosenType2 = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
+    private List<String> chosenColorSpire;
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
@@ -2118,7 +2119,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
-
+    public final Iterable<String> getChosenColorSpire() {
+        if (chosenColorSpire == null) {
+            return Lists.newArrayList();
+        }
+        return chosenColorSpire;
+    }
+    public final void setChosenColorSpire(final List<String> s) {
+        chosenColorSpire = s;
+        view.updateChosenColorSpire(this);
+    }
+    public boolean hasChosenColorSpire() {
+        return chosenColorSpire != null && !chosenColorSpire.isEmpty();
+    }
     public final Card getChosenCard() {
         return getChosenCards().getFirst();
     }

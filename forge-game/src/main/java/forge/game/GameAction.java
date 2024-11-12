@@ -572,6 +572,10 @@ public class GameAction {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
         }
 
+        if (c.hasChosenColorSpire()) {
+            copied.setChosenColorSpire(ImmutableList.copyOf(c.getChosenColorSpire()));
+        }
+
         // update state for view
         copied.updateStateForView();
 
@@ -2223,14 +2227,14 @@ public class GameAction {
                 c.setChosenNumber(chosen);
             }
             for (Card c : spires) {
-                if (!c.hasChosenColor()) {
+                if (!c.hasChosenColorSpire()) {
                     List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
                     String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
                             Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                     SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                     sa.putParam("AILogic", "MostProminentInComputerDeck");
                     List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
-                    c.setChosenColors(chosenColors);
+                    c.setChosenColorSpire(chosenColors);
                 }
             }
             takesAction = game.getNextPlayerAfter(takesAction);
