@@ -67,7 +67,7 @@ public enum TrackableProperty {
     ChosenType2(TrackableTypes.StringType),
     NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
-    ChosenColorSpire(TrackableTypes.StringListType),
+    ChosenColorID(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenNumber(TrackableTypes.StringType),
     StoredRolls(TrackableTypes.StringListType),

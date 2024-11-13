@@ -69,8 +69,6 @@ public class CDetailPicture {
                     c.getCurrentState().setFoilIndexOverride(1);
                 }
             }
-            if (paperCard.getSpireColors() != null && c.getChosenColorSpire() == null)
-                c.updateChosenColorSpire(paperCard.getSpireColors());
             showCard(c, isDisplayAlt);
         } else {
             currentView = null;

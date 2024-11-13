@@ -573,7 +573,7 @@ public class GameAction {
         }
 
         if (c.hasChosenColorSpire()) {
-            copied.setChosenColorSpire(ImmutableList.copyOf(c.getChosenColorSpire()));
+            copied.setChosenColorID(ImmutableList.copyOf(c.getChosenColorID()));
         }
 
         // update state for view
@@ -2237,11 +2237,7 @@ public class GameAction {
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
                         List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
-                        c.setChosenColorSpire(chosenColors);
-                    } else {
-                        if (c.getPaperCard().getSpireColors() != null) {
-                            c.setChosenColorSpire(c.getPaperCard().getSpireColors());
-                        }
+                        c.setChosenColorID(chosenColors);
                     }
                 }
             }

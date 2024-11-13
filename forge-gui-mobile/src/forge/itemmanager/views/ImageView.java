@@ -1030,7 +1030,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
-        private StringBuffer spireColor = new StringBuffer();
+        private StringBuffer colorID = new StringBuffer();
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1060,15 +1060,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (((PaperCard) item).getSpireColors() != null) {
                     for (String s : ((PaperCard) item).getSpireColors()) {
                         if ("white".equalsIgnoreCase(s))
-                            spireColor.append("{W}");
+                            colorID.append("{W}");
                         if ("green".equalsIgnoreCase(s))
-                            spireColor.append("{G}");
+                            colorID.append("{G}");
                         if ("red".equalsIgnoreCase(s))
-                            spireColor.append("{R}");
+                            colorID.append("{R}");
                         if ("blue".equalsIgnoreCase(s))
-                            spireColor.append("{U}");
+                            colorID.append("{U}");
                         if ("black".equalsIgnoreCase(s))
-                            spireColor.append("{B}");
+                            colorID.append("{B}");
                     }
                 }
             }
@@ -1153,8 +1153,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
                 // spire colors
-                if (!spireColor.isEmpty()) {
-                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
+                if (!colorID.isEmpty()) {
+                    textRenderer.drawText(g, colorID.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

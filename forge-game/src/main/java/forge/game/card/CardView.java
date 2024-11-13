@@ -433,14 +433,11 @@ public class CardView extends GameEntityView {
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
-    public List<String> getChosenColorSpire() {
-        return get(TrackableProperty.ChosenColorSpire);
+    public List<String> getChosenColorID() {
+        return get(TrackableProperty.ChosenColorID);
     }
-    public void updateChosenColorSpire(List<String> chosen) {
-        set(TrackableProperty.ChosenColorSpire, chosen);
-    }
-    void updateChosenColorSpire(Card c) {
-        set(TrackableProperty.ChosenColorSpire, c.getChosenColorSpire());
+    void updateChosenColorID(Card c) {
+        set(TrackableProperty.ChosenColorID, c.getChosenColorID());
     }
     public FCollectionView<CardView> getMergedCardsCollection() {
         return get(TrackableProperty.MergedCardsCollection);

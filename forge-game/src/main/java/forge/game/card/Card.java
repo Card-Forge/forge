@@ -293,7 +293,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String chosenType2 = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
-    private List<String> chosenColorSpire;
+    private List<String> chosenColorID;
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
@@ -400,6 +400,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateSickness(this);
         view.updateClassLevel(this);
         view.updateDraftAction(this);
+        if (paperCard != null)
+            setChosenColorID(paperCard.getSpireColors());
     }
 
     public boolean changeToState(final CardStateName state) {
@@ -2119,18 +2121,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
-    public final List<String> getChosenColorSpire() {
-        if (chosenColorSpire == null) {
+    public final List<String> getChosenColorID() {
+        if (chosenColorID == null) {
             return Lists.newArrayList();
         }
-        return chosenColorSpire;
+        return chosenColorID;
     }
-    public final void setChosenColorSpire(final List<String> s) {
-        chosenColorSpire = s;
-        view.updateChosenColorSpire(this);
+    public final void setChosenColorID(final List<String> s) {
+        chosenColorID = s;
+        view.updateChosenColorID(this);
     }
     public boolean hasChosenColorSpire() {
-        return chosenColorSpire != null && !chosenColorSpire.isEmpty();
+        return chosenColorID != null && !chosenColorID.isEmpty();
     }
     public final Card getChosenCard() {
         return getChosenCards().getFirst();

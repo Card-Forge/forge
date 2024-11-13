@@ -488,12 +488,12 @@ public class CardDetailUtil {
         }
 
         // chosen spire
-        if (card.getChosenColorSpire() != null && !card.getChosenColorSpire().isEmpty()) {
+        if (card.getChosenColorID() != null && !card.getChosenColorID().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
             area.append("(").append(Localizer.getInstance().getMessage("lblSelected")).append(": ");
-            area.append(Lang.joinHomogenous(card.getChosenColorSpire().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
+            area.append(Lang.joinHomogenous(card.getChosenColorID().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
             area.append(")");
         }
 
