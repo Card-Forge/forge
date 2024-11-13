@@ -1154,7 +1154,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 // spire colors
                 if (!spireColor.isEmpty()) {
-                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y, w, h, y, h, false, Align.center, true);
+                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

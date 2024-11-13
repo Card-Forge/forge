@@ -30,6 +30,7 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
 
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -65,6 +66,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.view.FView;
 
@@ -575,6 +577,24 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
                     InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
                     InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        }
+        public void addSetColorSpire() {
+            String label = localizer.getMessage("lblColorIdentity");
+            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
+            PaperCard existingCard = cardManager.getSelectedItem();
+            if (!"Cryptic Spires".equalsIgnoreCase(existingCard.getCardName()))
+                return;
+
+            GuiUtils.addMenuItem(menu, label, null, () -> {
+                List<String> colors = GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, MagicColor.Constant.ONLY_COLORS);
+                // make a foiled version based on the original
+                PaperCard updated = existingCard.getSpireVersion(colors);
+                // remove *quantity* instances of existing card
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
+                // add *quantity* into the deck and set them as selected
+                cardManager.addItem(updated, 1);
+                cardManager.setSelectedItem(updated);
+            }, true, true);
         }
     }
 }
