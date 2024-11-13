@@ -56,7 +56,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final boolean foil;
     private Boolean hasImage;
     private final boolean noSell;
-    private List<String> spireColors;
+    private List<String> colorID;
     private String sortableName;
     private final String functionalVariant;
 
@@ -88,8 +88,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     }
 
     @Override
-    public List<String> getSpireColors() {
-        return spireColors;
+    public List<String> getColorID() {
+        return colorID;
     }
 
     @Override
@@ -222,7 +222,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
         noSell = noSell0;
-        spireColors = spires;
+        colorID = spires;
     }
 
     public static PaperCard FAKE_CARD = new PaperCard(CardRules.getUnsupportedCardNamed("Fake Card"), "Fake Edition", CardRarity.Common);
@@ -261,7 +261,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public int hashCode() {
         final int code = (name.hashCode() * 11) + (edition.hashCode() * 59) +
                 (artIndex * 2) + (getCollectorNumber().hashCode() * 383);
-        final int id = spireColors == null ? 0 : spireColors.hashCode();
+        final int id = colorID == null ? 0 : colorID.hashCode();
         if (foil) {
             return code + id + 1;
         }

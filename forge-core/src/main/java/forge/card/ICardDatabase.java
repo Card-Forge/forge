@@ -50,6 +50,7 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     // [NEW Methods] Including the card CollectorNumber as criterion for DB lookup
     PaperCard getCard(String cardName, String edition, String collectorNumber);
     PaperCard getCard(String cardName, String edition, int artIndex, String collectorNumber);
+    PaperCard getCard(String cardName, String edition, int artIndex, List<String> colorID);
 
     // 2. Card Lookup from a single Expansion Set
     PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil);  // NOT yet used, included for API symmetry

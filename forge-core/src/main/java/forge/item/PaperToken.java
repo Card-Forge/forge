@@ -154,7 +154,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
-    public List<String> getSpireColors() {
+    public List<String> getColorID() {
         return null;
     }
 

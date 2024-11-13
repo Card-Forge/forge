@@ -401,7 +401,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateClassLevel(this);
         view.updateDraftAction(this);
         if (paperCard != null)
-            setChosenColorID(paperCard.getSpireColors());
+            setChosenColorID(paperCard.getColorID());
     }
 
     public boolean changeToState(final CardStateName state) {

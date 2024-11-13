@@ -1057,8 +1057,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
                 }
-                if (((PaperCard) item).getSpireColors() != null) {
-                    for (String s : ((PaperCard) item).getSpireColors()) {
+                if (((PaperCard) item).getColorID() != null) {
+                    for (String s : ((PaperCard) item).getColorID()) {
                         if ("white".equalsIgnoreCase(s))
                             colorID.append("{W}");
                         if ("green".equalsIgnoreCase(s))

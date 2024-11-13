@@ -1846,7 +1846,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                         //sort options so current option is on top and selected by default
                         List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
                                 addCard(card.getSpireVersion(result));
@@ -1898,7 +1898,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                         //sort options so current option is on top and selected by default
                         List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
+                        GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
                                 addCard(card.getSpireVersion(result));
