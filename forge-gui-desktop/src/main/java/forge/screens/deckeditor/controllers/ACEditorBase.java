@@ -587,7 +587,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
             GuiUtils.addMenuItem(menu, label, null, () -> {
                 List<String> colors = GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, MagicColor.Constant.ONLY_COLORS);
-                // make a foiled version based on the original
+                // make an updated version
                 PaperCard updated = existingCard.getSpireVersion(colors);
                 // remove *quantity* instances of existing card
                 CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
