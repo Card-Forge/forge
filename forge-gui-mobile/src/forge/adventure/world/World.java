@@ -27,6 +27,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Class that will create the world from the configuration
@@ -325,7 +326,7 @@ public class World implements Disposable, SaveFileContent {
 
             final int[] biomeIndex = {-1};
             currentTime[0] = measureGenerationTime("loading data", currentTime[0]);
-            HashMap<BiomeStructureData, BiomeStructure> structureDataMap = new HashMap<>();
+            Map<BiomeStructureData, BiomeStructure> structureDataMap = new ConcurrentHashMap<>();
 
 //////////////////
 ///////// calculation structure position with wavefunctioncollapse
