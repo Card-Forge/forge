@@ -1,5 +1,5 @@
 Name:Lunar Insight
-ManaCost:4 U U
+ManaCost:2 U
 Types:Instant
 A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each different mana value among nonland permanents you control.
 SVar:X:Count$Valid Card.YouCtrl+nonLand$DifferentCMC
