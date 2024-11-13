@@ -44,6 +44,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
+    private TextRenderer textRenderer = new TextRenderer(true);
 
     private static FSkinColor getGroupHeaderForeColor() {
         if (Forge.isMobileAdventureMode)
@@ -1030,7 +1031,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
         private StringBuffer spireColor = new StringBuffer();
-        private TextRenderer textRenderer;
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1070,7 +1070,6 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         if ("black".equalsIgnoreCase(s))
                             spireColor.append("{B}");
                     }
-                    textRenderer = new TextRenderer(true);
                 }
             }
         }
@@ -1155,8 +1154,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 // spire colors
                 if (!spireColor.isEmpty()) {
-                    drawCardLabel(g,"", Color.GRAY, x, y, w, h);
-                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 7), Color.WHITE, x, y, w, h, y, h, false, Align.center, true);
+                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
