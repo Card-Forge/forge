@@ -29,6 +29,8 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -56,7 +58,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final boolean foil;
     private Boolean hasImage;
     private final boolean noSell;
-    private List<String> colorID;
+    private Set<String> colorID;
     private String sortableName;
     private final String functionalVariant;
 
@@ -88,7 +90,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     }
 
     @Override
-    public List<String> getColorID() {
+    public Set<String> getColorID() {
         return colorID;
     }
 
@@ -163,7 +165,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, false);
         return sellable;
     }
-    public PaperCard getSpireVersion(List<String> colors) {
+    public PaperCard getSpireVersion(Set<String> colors) {
         return new PaperCard(this.rules, this.edition, this.rarity,
                 this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, false, colors);
     }
@@ -205,7 +207,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
                      final int artIndex0, final boolean foil0, final String collectorNumber0,
-                     final String artist0, final String functionalVariant, final boolean noSell0, final List<String> spires) {
+                     final String artist0, final String functionalVariant, final boolean noSell0, final Set<String> colorID0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -222,7 +224,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
         noSell = noSell0;
-        colorID = spires;
+        colorID = colorID0;
     }
 
     public static PaperCard FAKE_CARD = new PaperCard(CardRules.getUnsupportedCardNamed("Fake Card"), "Fake Edition", CardRarity.Common);
@@ -249,6 +251,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         }
         if (!getCollectorNumber().equals(other.getCollectorNumber()))
             return false;
+        // colorID can be NULL
+        if (getColorID() != other.getColorID())
+            return false;
         return (other.foil == foil) && (other.artIndex == artIndex);
     }
 
@@ -261,7 +266,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public int hashCode() {
         final int code = (name.hashCode() * 11) + (edition.hashCode() * 59) +
                 (artIndex * 2) + (getCollectorNumber().hashCode() * 383);
-        final int id = colorID == null ? 0 : colorID.hashCode();
+        final int id = Optional.ofNullable(colorID).map(Set::hashCode).orElse(0);
         if (foil) {
             return code + id + 1;
         }

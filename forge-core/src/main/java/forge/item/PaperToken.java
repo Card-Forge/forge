@@ -3,6 +3,7 @@ package forge.item;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import forge.card.*;
 import org.apache.commons.lang3.StringUtils;
@@ -154,7 +155,7 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     }
 
     @Override
-    public List<String> getColorID() {
+    public Set<String> getColorID() {
         return null;
     }
 

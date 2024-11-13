@@ -573,7 +573,7 @@ public class GameAction {
         }
 
         if (c.hasChosenColorSpire()) {
-            copied.setChosenColorID(ImmutableList.copyOf(c.getChosenColorID()));
+            copied.setChosenColorID(ImmutableSet.copyOf(c.getChosenColorID()));
         }
 
         // update state for view
@@ -2236,7 +2236,7 @@ public class GameAction {
                                 Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
                         SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
                         sa.putParam("AILogic", "MostProminentInComputerDeck");
-                        List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
+                        Set<String> chosenColors = new HashSet<>(takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices));
                         c.setChosenColorID(chosenColors);
                     }
                 }

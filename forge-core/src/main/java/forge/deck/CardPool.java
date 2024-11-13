@@ -72,7 +72,7 @@ public class CardPool extends ItemPool<PaperCard> {
     public void add(String cardName, String setCode, int artIndex, final int amount) {
         this.add(cardName, setCode, artIndex, amount, false, null);
     }
-    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, List<String> colorID) {
+    public void add(String cardName, String setCode, int artIndex, final int amount, boolean addAny, Set<String> colorID) {
         Map<String, CardDb> dbs = StaticData.instance().getAvailableDatabases();
         PaperCard paperCard = null;
         String selectedDbName = "";

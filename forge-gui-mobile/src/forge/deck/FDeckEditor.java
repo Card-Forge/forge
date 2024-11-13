@@ -1845,11 +1845,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if ("Cryptic Spires".equalsIgnoreCase(card.getCardName())) {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                         //sort options so current option is on top and selected by default
-                        List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
                         GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
-                                addCard(card.getSpireVersion(result));
+                                addCard(card.getSpireVersion(new HashSet<>(result)));
                                 removeCard(card);
                             }
                         });
@@ -1897,11 +1897,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 if ("Cryptic Spires".equalsIgnoreCase(card.getCardName())) {
                     menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                         //sort options so current option is on top and selected by default
-                        List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+                        Set<String> colorChoices = new HashSet<>(MagicColor.Constant.ONLY_COLORS);
                         GuiChoose.getChoices(Forge.getLocalizer().getMessage("lblChooseAColor", Lang.getNumeral(2)), 2, 2, colorChoices, new Callback<>() {
                             @Override
                             public void run(List<String> result) {
-                                addCard(card.getSpireVersion(result));
+                                addCard(card.getSpireVersion(new HashSet<>(result)));
                                 removeCard(card);
                             }
                         });

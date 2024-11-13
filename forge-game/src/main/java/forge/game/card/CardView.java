@@ -433,7 +433,7 @@ public class CardView extends GameEntityView {
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
     }
-    public List<String> getChosenColorID() {
+    public Set<String> getChosenColorID() {
         return get(TrackableProperty.ChosenColorID);
     }
     void updateChosenColorID(Card c) {

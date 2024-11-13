@@ -20,8 +20,11 @@ package forge.screens.deckeditor.controllers;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
@@ -586,7 +589,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                 return;
 
             GuiUtils.addMenuItem(menu, label, null, () -> {
-                List<String> colors = GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, MagicColor.Constant.ONLY_COLORS);
+                Set<String> colors = new HashSet<>(GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(2)), 2, 2, MagicColor.Constant.ONLY_COLORS));
                 // make an updated version
                 PaperCard updated = existingCard.getSpireVersion(colors);
                 // remove *quantity* instances of existing card
