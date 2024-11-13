@@ -2119,7 +2119,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
-    public final Iterable<String> getChosenColorSpire() {
+    public final List<String> getChosenColorSpire() {
         if (chosenColorSpire == null) {
             return Lists.newArrayList();
         }
