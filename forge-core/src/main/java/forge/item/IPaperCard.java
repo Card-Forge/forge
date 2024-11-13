@@ -234,6 +234,7 @@ public interface IPaperCard extends InventoryItem, Serializable {
     String getEdition();
     String getCollectorNumber();
     String getFunctionalVariant();
+    List<String> getSpireColors();
     int getArtIndex();
     boolean isFoil();
     boolean isToken();

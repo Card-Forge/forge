@@ -1,6 +1,7 @@
 package forge.item;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import forge.card.*;
@@ -150,6 +151,11 @@ public class PaperToken implements InventoryItemFromSet, IPaperCard {
     public String getFunctionalVariant() {
         //Tokens aren't differentiated by name, so they don't really need support for this.
         return IPaperCard.NO_FUNCTIONAL_VARIANT;
+    }
+
+    @Override
+    public List<String> getSpireColors() {
+        return null;
     }
 
     @Override

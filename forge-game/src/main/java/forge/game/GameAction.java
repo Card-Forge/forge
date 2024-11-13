@@ -2230,13 +2230,19 @@ public class GameAction {
                 // TODO: only do this for the AI, for the player part, get the encoded color from the deck file and pass
                 //  it to either player or the papercard object so it feels like rule based for the player side..
                 if (!c.hasChosenColorSpire()) {
-                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
-                    String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
-                            Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
-                    SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
-                    sa.putParam("AILogic", "MostProminentInComputerDeck");
-                    List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
-                    c.setChosenColorSpire(chosenColors);
+                    if (takesAction.isAI()) {
+                        List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+                        String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
+                                Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
+                        SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
+                        sa.putParam("AILogic", "MostProminentInComputerDeck");
+                        List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
+                        c.setChosenColorSpire(chosenColors);
+                    } else {
+                        if (c.getPaperCard().getSpireColors() != null) {
+                            c.setChosenColorSpire(c.getPaperCard().getSpireColors());
+                        }
+                    }
                 }
             }
             takesAction = game.getNextPlayerAfter(takesAction);

@@ -1029,6 +1029,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
+        private StringBuffer spireColor = new StringBuffer();
+        private TextRenderer textRenderer;
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1054,6 +1056,21 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     } else if (draftRank >= 25) {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
                     }
+                }
+                if (((PaperCard) item).getSpireColors() != null) {
+                    for (String s : ((PaperCard) item).getSpireColors()) {
+                        if ("white".equalsIgnoreCase(s))
+                            spireColor.append("{W}");
+                        if ("green".equalsIgnoreCase(s))
+                            spireColor.append("{G}");
+                        if ("red".equalsIgnoreCase(s))
+                            spireColor.append("{R}");
+                        if ("blue".equalsIgnoreCase(s))
+                            spireColor.append("{U}");
+                        if ("black".equalsIgnoreCase(s))
+                            spireColor.append("{B}");
+                    }
+                    textRenderer = new TextRenderer(true);
                 }
             }
         }
@@ -1135,6 +1152,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
                     }
+                }
+                // spire colors
+                if (!spireColor.isEmpty()) {
+                    drawCardLabel(g,"", Color.GRAY, x, y, w, h);
+                    textRenderer.drawText(g, spireColor.toString(), FSkinFont.forHeight(w / 7), Color.WHITE, x, y, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
