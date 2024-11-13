@@ -1,7 +1,7 @@
 Name:Fountainport Charmer
-ManaCost:2 G
+ManaCost:1 G
 Types:Creature Frog Bard
-PT:3/3
+PT:2/3
 K:Offspring:1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When CARDNAME enters, creature cards in your hand perpetually gain "This spell costs {1} less to cast."
 SVar:TrigAnimate:DB$ AnimateAll | ValidCards$ Creature.YouOwn | Zone$ Hand | staticAbilities$ ReduceCost | Duration$ Perpetual
