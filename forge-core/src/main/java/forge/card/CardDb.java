@@ -28,7 +28,6 @@ import forge.deck.generation.IDeckGenPool;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
-import forge.util.CollectionUtil;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.lang.LangEnglish;
@@ -892,7 +891,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         if (acceptedEditions.size() > 1) {
             Collections.sort(acceptedEditions);  // CardEdition correctly sort by (release) date
             if (artPref.latestFirst)
-                CollectionUtil.reverse(acceptedEditions);  // newest editions first
+                Collections.reverse(acceptedEditions);  // newest editions first
         }
 
         final Iterator<CardEdition> editionIterator = acceptedEditions.iterator();
