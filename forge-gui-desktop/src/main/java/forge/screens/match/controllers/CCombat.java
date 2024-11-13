@@ -86,10 +86,7 @@ public class CCombat implements ICDoc {
             else
                 display.append(Lang.getInstance().getPossesive(controller.getName())).append(" ");
         }
-        if (controller == null)
-            display.append(" is attacked by:\n");
-        else
-            display.append(defender).append(" is attacked by:\n");
+        display.append(defender).append(" is attacked by:\n");
 
         // Associate Bands, Attackers Blockers
         boolean previousBand = false;

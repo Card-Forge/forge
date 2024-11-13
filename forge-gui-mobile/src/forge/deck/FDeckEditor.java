@@ -284,18 +284,21 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
     private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
-        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck,null);
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck, null);
     }
-    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck,FEventHandler backButton) {
-        this(editorType0, editDeckName, "", null, showMainDeck,backButton);
+    public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck, FEventHandler backButton) {
+        this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck, backButton);
+    }
+    public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck, FEventHandler backButton) {
+        this(editorType0, editDeckName, "", null, showMainDeck, backButton);
     }
     public FDeckEditor(EditorType editorType0, String editDeckName, boolean showMainDeck) {
-        this(editorType0, editDeckName, "", null, showMainDeck,null);
+        this(editorType0, editDeckName, "", null, showMainDeck, null);
     }
     public FDeckEditor(EditorType editorType0, Deck newDeck, boolean showMainDeck) {
-        this(editorType0, "", "", newDeck, showMainDeck,null);
+        this(editorType0, "", "", newDeck, showMainDeck, null);
     }
-    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck,FEventHandler backButton) {
+    private FDeckEditor(EditorType editorType0, String editDeckName, String editDeckPath, Deck newDeck, boolean showMainDeck, FEventHandler backButton) {
         super(backButton, getPages(editorType0));
 
         editorType = editorType0;

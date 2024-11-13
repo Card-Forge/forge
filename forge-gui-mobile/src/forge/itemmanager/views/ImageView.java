@@ -1127,8 +1127,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             cardPrice = ((ShopScene) Forge.getCurrentScene()).getCardPrice((PaperCard) item);
                         drawCardLabel(g, "$" + cardPrice, Color.GOLD, x, y ,w ,h);
                     } else {
-                        if (((PaperCard) item).isNoSell()) {
-                            drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
+                        if (((PaperCard) item).isNoSell() && itemManager.showNFSWatermark()) {
+                            Texture nfs = Forge.getAssets().getTexture(getDefaultSkinFile("nfs.png"), false);
+                            if (nfs != null)
+                                g.drawImage(nfs, x, y, w, h);
+                            else
+                                drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
                     }
                 }
@@ -1164,7 +1168,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             //g.drawImage(tr, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                         }
                         //draw plastic effect overlay.
-                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                        g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png"), false), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                     }
                     //fake labelname shadow
                     g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
@@ -1192,7 +1196,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             //temporary fill image
                             g.fillRect(Color.BLACK, x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
                             //draw plastic effect overlay.
-                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png")), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
+                            g.drawImage(Forge.getAssets().getTexture(getDefaultSkinFile("cover.png"), false), x + (w - w * scale) / 2, y + (h - h * scale) / 1.5f, w * scale, h * scale);
 
                         }
                     }
