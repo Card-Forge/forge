@@ -18,6 +18,7 @@ import forge.util.Aggregates;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static forge.adventure.util.AdventureQuestController.QuestStatus.*;
 
@@ -39,7 +40,7 @@ public class AdventureQuestController implements Serializable {
                         continue;
                     }
                     for (EnemyData enemy : WorldData.getAllEnemies()) {
-                        List<String> candidateTags = Arrays.stream(enemy.questTags).toList();
+                        List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
                         boolean match = true;
                         for (String targetTag : c.enemyTags) {
                             if (!candidateTags.contains(targetTag)) {
@@ -72,7 +73,7 @@ public class AdventureQuestController implements Serializable {
                     List<String> toBoost = new ArrayList<>();
                     if (c.mixedEnemies){
                         for (EnemyData enemy : localSpawns){
-                            List<String> candidateTags = Arrays.stream(enemy.questTags).toList();
+                            List<String> candidateTags = Arrays.stream(enemy.questTags).collect(Collectors.toList());
                             boolean match = true;
                             for (String targetTag : c.enemyTags) {
                                 if (!candidateTags.contains(targetTag)) {

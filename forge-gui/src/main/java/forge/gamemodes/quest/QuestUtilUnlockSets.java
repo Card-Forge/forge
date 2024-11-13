@@ -33,6 +33,7 @@ import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -139,12 +140,12 @@ public class QuestUtilUnlockSets {
         // Sort current sets by date
         List<CardEdition> allowedSets = qData.getFormat().getAllowedSetCodes().stream()
                 .map(editions::get)
-                .sorted().toList();
+                .sorted().collect(Collectors.toList());
         
         // Sort unlockable sets by date
         List<CardEdition> excludedSets = qData.getFormat().getLockedSets().stream()
                 .map(editions::get)
-                .sorted().toList();
+                .sorted().collect(Collectors.toList());
         
         // get a number of sets between an excluded and any included set
         List<ImmutablePair<CardEdition, Long>> excludedWithDistances = new ArrayList<>();

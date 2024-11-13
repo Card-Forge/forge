@@ -13,6 +13,7 @@ import forge.adventure.util.Paths;
 import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuestController {
 
@@ -50,7 +51,7 @@ public class QuestController {
             toReturn.addElement(enemyTags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
 
         toReturn.clear();
 
@@ -68,7 +69,7 @@ public class QuestController {
             toReturn.addElement(POITags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
 
         toReturn.clear();
 
@@ -88,7 +89,7 @@ public class QuestController {
             toReturn.addElement(questSourceTags.get(i));
         }
 
-        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().toList();
+        List<Object> sortedObjects = Arrays.stream(toReturn.toArray()).sorted().collect(Collectors.toList());
 
         toReturn.clear();
 

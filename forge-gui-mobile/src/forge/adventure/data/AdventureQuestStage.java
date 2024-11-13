@@ -12,6 +12,7 @@ import forge.util.Aggregates;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static forge.adventure.util.AdventureQuestController.ObjectiveTypes.*;
 import static forge.adventure.util.AdventureQuestController.QuestStatus.*;
@@ -165,7 +166,7 @@ public class AdventureQuestStage implements Serializable {
             return worldMapOK;
         }
         if (targetPOI == null) {
-            List<String> enteredTags = Arrays.stream(locationToCheck.getData().questTags).toList();
+            List<String> enteredTags = Arrays.stream(locationToCheck.getData().questTags).collect(Collectors.toList());
             for (String tag : POITags) {
                 if (!enteredTags.contains(tag)) {
                     return false;

@@ -1885,7 +1885,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleReplacers.size() == 1) {
             return first;
         }
-        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).toList();
+        final List<String> res = possibleReplacers.stream().map(ReplacementEffect::toString).collect(Collectors.toList());
         final String firstStr = res.get(0);
         final String prompt = localizer.getMessage("lblChooseFirstApplyReplacementEffect");
         for (int i = 1; i < res.size(); i++) {
@@ -1907,7 +1907,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (possibleStatics.size() == 1 || !fullControl) {
             return first;
         }
-        final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).toList();
+        final List<String> sts = possibleStatics.stream().map(StaticAbility::toString).collect(Collectors.toList());
         final String firstStr = sts.get(0);
         for (int i = 1; i < sts.size(); i++) {
             // prompt user if there are multiple different options

@@ -447,7 +447,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
             if (Current.latestDeck() != null) {
                 List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
                         .filter(paperCard -> !paperCard.isVeryBasicLand() && !paperCard.getName().startsWith("Mox"))
-                        .toList();
+                        .collect(Collectors.toList());
                 //random uncommons from deck
                 List<PaperCard> uncommonCards = paperCardList.stream()
                         .filter(paperCard -> CardRarity.Uncommon.equals(paperCard.getRarity()) || CardRarity.Special.equals(paperCard.getRarity()))

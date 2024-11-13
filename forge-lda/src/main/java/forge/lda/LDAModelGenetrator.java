@@ -304,7 +304,7 @@ public final class LDAModelGenetrator {
         //filter to just legal commanders
         List<PaperCard> legends = cardList.stream()
                 .filter(PaperCardPredicates.fromRules(DeckFormat.Commander::isLegalCommander))
-                .toList();
+                .collect(Collectors.toList());
 
         //generate lookups for legends to link commander names to matrix rows
         for (int i=0; i<legends.size(); ++i){

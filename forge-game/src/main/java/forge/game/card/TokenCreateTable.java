@@ -12,6 +12,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 
@@ -47,7 +48,7 @@ public class TokenCreateTable extends ForwardingTable<Player, Card, Integer> {
 
         if (validOwner != null) {
             Predicate<GameObject> restriction = GameObjectPredicates.restriction(validOwner.split(","), host.getController(), host, ctb);
-            filteredPlayer = rowKeySet().stream().filter(restriction).toList();
+            filteredPlayer = rowKeySet().stream().filter(restriction).collect(Collectors.toList());
             if (filteredPlayer.isEmpty()) {
                 return 0;
             }
