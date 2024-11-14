@@ -3101,8 +3101,6 @@ public class CardFactoryUtil {
                         // because it doesn't work other wise
                         c.setForetoldCostByEffect(true);
                     }
-                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(), "has foretold.");
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     game.fireEvent(new GameEventCardForetold(getActivatingPlayer()));
                 }
             };
@@ -3425,8 +3423,6 @@ public class CardFactoryUtil {
 
                     c.setPlotted(true);
 
-                    String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(), "has plotted", c.toString());
-                    game.getGameLog().add(GameLogEntryType.STACK_RESOLVE, sb);
                     game.fireEvent(new GameEventCardPlotted(c, getActivatingPlayer()));
                 }
             };

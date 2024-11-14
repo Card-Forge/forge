@@ -306,6 +306,17 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
+    @Override
+    public GameLogEntry visit(GameEventCardForetold ev) {
+        String sb = TextUtil.concatWithSpace(ev.activatingPlayer.toString(), "has foretold.");
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, sb);
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventCardPlotted ev) {
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+    }
+
     @Subscribe
     public void recieve(GameEvent ev) {
         GameLogEntry le = ev.visit(this);
