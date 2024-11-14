@@ -697,7 +697,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         while (!candidate.hasImage() && candidatesIterator.hasNext())
             candidate = candidatesIterator.next();
         candidate = candidate.hasImage() ? candidate : firstCandidate;
-        return isFoil ? candidate.getFoiled().getSpireVersion(colorID) : candidate.getSpireVersion(colorID);
+        return isFoil ? candidate.getFoiled().getColorIDVersion(colorID) : candidate.getColorIDVersion(colorID);
     }
 
     /*
@@ -904,7 +904,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
         candidate = candidate.hasImage() ? candidate : firstCandidate;
         //If any, we're sure that at least one candidate is always returned despite it having any image
-        return cr.isFoil ? candidate.getFoiled().getSpireVersion(colorID) : candidate.getSpireVersion(colorID);
+        return cr.isFoil ? candidate.getFoiled().getColorIDVersion(colorID) : candidate.getColorIDVersion(colorID);
     }
 
     @Override
