@@ -1667,7 +1667,7 @@ public class AiController {
         }
         //timeout 5 seconds? even the AI don't acquire all, there should be SA to cast if valid
         CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-        CompletableFuture.allOf(futuresArray).completeOnTimeout(null, 5, TimeUnit.SECONDS).join();
+        CompletableFuture.allOf(futuresArray).completeOnTimeout(null, player.getTimeout(), TimeUnit.SECONDS).join();
         futures.clear();
 
         if (!spells.isEmpty()) {

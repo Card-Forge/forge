@@ -967,7 +967,7 @@ public class AiAttackController {
                 }));
             }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
-            CompletableFuture.allOf(futuresArray).completeOnTimeout(null, 5, TimeUnit.SECONDS).join();
+            CompletableFuture.allOf(futuresArray).completeOnTimeout(null, ai.getTimeout(), TimeUnit.SECONDS).join();
             futures.clear();
             if (attackersLeft.isEmpty()) {
                 return aiAggression;
