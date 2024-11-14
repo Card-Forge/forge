@@ -1,7 +1,7 @@
 Name:Talion's Throneguard
 ManaCost:2 U U
 Types:Creature Faerie Wizard
-PT:2/1
+PT:4/2
 K:Flash
 K:Bargain
 K:Flying

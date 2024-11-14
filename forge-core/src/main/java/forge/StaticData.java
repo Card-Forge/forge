@@ -18,7 +18,6 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 
@@ -777,8 +776,6 @@ public class StaticData {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
 
-            AtomicInteger artIndex = new AtomicInteger(1);
-
             Map<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
             List<CompletableFuture<Integer>> futures = new ArrayList<>();
             for (CardEdition.CardInSet c : e.getAllCardsInSet()) {
@@ -839,35 +836,32 @@ public class StaticData {
                     return 0;
                 }));
             }
-
-            // TODO: Audit token images here...
-            for(Map.Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
-                futures.add(CompletableFuture.supplyAsync(()-> {
-                    String name = tokenEntry.getKey();
-                    artIndex.set(tokenEntry.getValue());
-                    try {
-                        PaperToken token = getAllTokens().getToken(name, e.getCode());
-                        if (token == null) {
-                            return 0;
-                        }
-
-                        for(int i = 0; i < artIndex.get(); i++) {
-                            String imgKey = token.getImageKey(i);
-                            File file = ImageKeys.getImageFile(imgKey);
-                            if (file == null) {
-                                EDITION_Q.add(e.getCode() + "_" + e.getName());
-                                TOKEN_Q.add(e.getCode() + "_" + token.getImageFilename(i + 1) + "\n");
-                            }
-                        }
-                    } catch(Exception ex) {
-                        System.out.println("No Token found: " + name + " in " + e.getName());
-                    }
-                    return 0;
-                }));
-            }
             CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
             CompletableFuture.allOf(futuresArray).join();
             futures.clear();
+
+            // TODO: Audit token images here...
+            for(Map.Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+                final String name = tokenEntry.getKey();
+                final int artIndex = tokenEntry.getValue();
+                try {
+                    PaperToken token = getAllTokens().getToken(name, e.getCode());
+                    if (token == null) {
+                        continue;
+                    }
+
+                    for(int i = 0; i < artIndex; i++) {
+                        String imgKey = token.getImageKey(i);
+                        File file = ImageKeys.getImageFile(imgKey);
+                        if (file == null) {
+                            EDITION_Q.add(e.getCode() + "_" + e.getName());
+                            TOKEN_Q.add(e.getCode() + "_" + token.getImageFilename(i + 1) + "\n");
+                        }
+                    }
+                } catch(Exception ex) {
+                    System.out.println("No Token found: " + name + " in " + e.getName());
+                }
+            }
         }
         // stream().toList() causes crash on Android, use Collectors.toList()
         List<String> NIF = new ArrayList<>(NIF_Q).stream().sorted().collect(Collectors.toList());
