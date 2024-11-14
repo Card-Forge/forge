@@ -29,6 +29,7 @@ import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -450,7 +451,7 @@ public class ComputerUtilCost {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa, final CardCollection alreadyTapped) {
+    public static boolean checkTapTypeCost(final Player ai, final Cost cost, final Card source, final SpellAbility sa, final Collection<Card> alreadyTapped) {
         if (cost == null) {
             return true;
         }
@@ -487,8 +488,8 @@ public class ComputerUtilCost {
                     c = AbilityUtils.calculateAmount(source, part.getAmount(), sa);
                 }
                 CardCollection exclude = new CardCollection();
-                if (AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST) != null) {
-                    exclude.addAll(AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST));
+                if (alreadyTapped != null) {
+                    exclude.addAll(alreadyTapped);
                 }
                 // trying to produce mana that includes tapping source that will already be tapped
                 if (exclude.contains(source) && cost.hasTapCost()) {
@@ -500,12 +501,12 @@ public class ComputerUtilCost {
                 }
                 CardCollection tapChoices = ComputerUtil.chooseTapType(ai, type, source, cost.hasTapCost(), c, exclude, sa);
                 if (tapChoices != null) {
-                    for (Card choice : tapChoices) {
-                        AiCardMemory.rememberCard(ai, choice, MemorySet.PAYS_TAP_COST);
-                    }
-                    // if manasource gets tapped to produce it also can't help paying another
-                    if (cost.hasTapCost()) {
-                        AiCardMemory.rememberCard(ai, source, MemorySet.PAYS_TAP_COST);
+                    if (alreadyTapped != null) {
+                        alreadyTapped.addAll(tapChoices);
+                        // if manasource gets tapped to produce it also can't help paying another
+                        if (cost.hasTapCost()) {
+                            alreadyTapped.add(source);
+                        }
                     }
                     return true;
                 }
@@ -595,33 +596,6 @@ public class ComputerUtilCost {
                         if (wardCost.hasManaCost()) {
                             extraManaNeeded += wardCost.getTotalMana().getCMC();
                         }
-                    }
-                }
-            }
-        }
-
-        // TODO: Alternate costs which involve both paying mana and tapping a card, e.g. Zahid, Djinn of the Lamp
-        // Current AI decides on each part separately, thus making it possible for the AI to cheat by
-        // tapping a mana source for mana and for the tap cost at the same time. Until this is improved, AI
-        // will not consider mana sources valid for paying the tap cost to avoid this exact situation.
-        if ("DontPayTapCostWithManaSources".equals(sa.getHostCard().getSVar("AIPaymentPreference"))) {
-            for (final CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostTapType) {
-                    CardCollectionView nonManaSources =
-                            CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
-                                    sa.getActivatingPlayer(), sa.getHostCard(), sa);
-                    nonManaSources = CardLists.filter(nonManaSources, card -> {
-                        boolean hasManaSa = false;
-                        for (final SpellAbility sa1 : card.getSpellAbilities()) {
-                            if (sa1.isManaAbility() && sa1.getPayCosts().hasTapCost()) {
-                                hasManaSa = true;
-                                break;
-                            }
-                        }
-                        return !hasManaSa;
-                    });
-                    if (nonManaSources.size() < part.convertAmount()) {
-                        return false;
                     }
                 }
             }

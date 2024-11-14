@@ -2,6 +2,8 @@ package forge.ai;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Lists;
+
+import forge.ai.AiCardMemory.MemorySet;
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -32,6 +34,10 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         discarded = new CardCollection();
         tapped = new CardCollection();
+        Set<Card> tappedForMana = AiCardMemory.getMemorySet(ai0, MemorySet.PAYS_TAP_COST);
+        if (tappedForMana != null) {
+            tapped.addAll(tappedForMana);
+        }
     }
 
     @Override
@@ -438,21 +444,6 @@ public class AiCostDecision extends CostDecisionMakerBase {
 
         if (type.contains("sharesCreatureTypeWith")) {
             return null;
-        }
-
-        if ("DontPayTapCostWithManaSources".equals(source.getSVar("AIPaymentPreference"))) {
-            CardCollectionView toExclude =
-                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.split(";"),
-                            ability.getActivatingPlayer(), ability.getHostCard(), ability);
-            toExclude = CardLists.filter(toExclude, card -> {
-                for (final SpellAbility sa : card.getSpellAbilities()) {
-                    if (sa.isManaAbility() && sa.getPayCosts().hasTapCost()) {
-                        return true;
-                    }
-                }
-                return false;
-            });
-            exclude.addAll(toExclude);
         }
 
         String totalP = "";

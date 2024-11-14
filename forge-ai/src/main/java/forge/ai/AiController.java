@@ -22,6 +22,8 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+
+import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
@@ -842,6 +844,12 @@ public class AiController {
         if (xCost && !ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             // for dependent costs with X, e.g. Repeal, which require a valid target to be specified before a decision can be made
             // on whether the cost can be paid, this can only be checked late after canPlaySa has been run (or the AI will misplay)
+            return AiPlayDecision.CantAfford;
+        }
+
+        // tapping cards for mana, check if enough left (pass memory indirectly because we don't want to include those)
+        if (!AiCardMemory.isMemorySetEmpty(player, MemorySet.PAYS_TAP_COST)
+                && !ComputerUtilCost.checkTapTypeCost(player, sa.getPayCosts(), host, sa, new CardCollection(AiCardMemory.getMemorySet(player, MemorySet.PAYS_TAP_COST)))) {
             return AiPlayDecision.CantAfford;
         }
 
