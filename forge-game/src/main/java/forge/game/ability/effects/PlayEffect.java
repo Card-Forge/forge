@@ -191,15 +191,16 @@ public class PlayEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ValidSA")) {
             final String valid[] = sa.getParam("ValidSA").split(",");
-            Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                Card c = it.next();
+            final List<Card> invalid = new ArrayList<>();
+            for (Card c : tgtCards) {
                 if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , source, sa))) {
-                    // it.remove will only remove item from the list part of CardCollection
-                    tgtCards.asSet().remove(c);
-                    it.remove();
+                    invalid.add(c);
                 }
             }
+            // it.remove will only remove item from the list part of CardCollection
+            if (!invalid.isEmpty()) // why don't we just remove all?
+                invalid.forEach(tgtCards.asSet()::remove);
+
             if (tgtCards.isEmpty()) {
                 return;
             }

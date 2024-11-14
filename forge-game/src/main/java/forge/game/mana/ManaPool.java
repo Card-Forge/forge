@@ -23,11 +23,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -53,14 +53,15 @@ import forge.game.staticability.StaticAbilityUnspentMana;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private ListMultimap<Byte, Mana> _floatingMana;
-    private ListMultimap<Byte, Mana> floatingMana() {
-        ListMultimap<Byte, Mana> result = _floatingMana;
+    private Multimap<Byte, Mana> _floatingMana;
+    private Multimap<Byte, Mana> floatingMana() {
+        Multimap<Byte, Mana> result = _floatingMana;
         if (result == null) {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
-                    result = Multimaps.synchronizedListMultimap(ArrayListMultimap.create());
+                    // TODO: can this be replaced with something concurrent
+                    result = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
                     _floatingMana = result;
                 }
             }
