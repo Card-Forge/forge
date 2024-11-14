@@ -1,0 +1,11 @@
+Name:A-Heartfire Hero
+ManaCost:R
+Types:Creature Mouse Soldier
+PT:0/1
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.YouCtrl | TriggerZones$ Battlefield | Valiant$ True | Execute$ TrigCounter | TriggerDescription$ Valiant — Whenever CARDNAME becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageDies | TriggerDescription$ When CARDNAME dies, it deals damage equal to its power to each opponent.
+SVar:TrigDamageDies:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters
+Oracle:Valiant — Whenever Heartfire Hero becomes the target of a spell or ability you control for the first time each turn, put a +1/+1 counter on it.\nWhen Heartfire Hero dies, it deals damage equal to its power to each opponent.
