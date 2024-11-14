@@ -1,7 +1,6 @@
 package forge.screens.deckeditor.controllers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +13,7 @@ import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VProbabilities;
+import forge.util.CollectionUtil;
 import forge.util.ItemPool;
 import forge.util.MyRandom;
 
@@ -63,7 +63,7 @@ public enum CProbabilities implements ICDoc {
         final List<String> cardProbabilities = new ArrayList<>();
 
         final List<PaperCard> shuffled = deck.toFlatList();
-        Collections.shuffle(shuffled, MyRandom.getRandom());
+        CollectionUtil.shuffle(shuffled, MyRandom.getRandom());
 
         // Log totals of each card for decrementing
         final Map<PaperCard, Integer> cardTotals = new HashMap<>();

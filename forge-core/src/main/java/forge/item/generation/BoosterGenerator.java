@@ -28,6 +28,7 @@ import forge.card.CardEdition.FoilType;
 import forge.item.*;
 import forge.item.IPaperCard.Predicates.Presets;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -58,7 +59,7 @@ public class BoosterGenerator {
     }
 
     private static PaperCard generateFoilCard(List<PaperCard> cardList) {
-        Collections.shuffle(cardList, MyRandom.getRandom());
+        CollectionUtil.shuffle(cardList, MyRandom.getRandom());
         PaperCard randomCard = cardList.get(0);
         return randomCard.getFoiled();
     }

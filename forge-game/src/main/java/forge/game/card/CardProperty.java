@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.CollectionUtil;
 import forge.util.Expressions;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -623,13 +624,13 @@ public class CardProperty {
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
             CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
-            Collections.reverse(cards);
+            CollectionUtil.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
             final CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Graveyard));
-            Collections.reverse(cards);
+            CollectionUtil.reverse(cards);
             if (property.substring(12).matches("[0-9][0-9]?")) {
                 int n = Integer.parseInt(property.substring(12));
                 int num = Math.min(n, cards.size());
@@ -665,7 +666,7 @@ public class CardProperty {
             if (property.startsWith("BottomLibrary_")) {
                 cards = CardLists.getValidCards(cards, property.substring(14), sourceController, source, spellAbility);
             }
-            Collections.reverse(cards);
+            CollectionUtil.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }

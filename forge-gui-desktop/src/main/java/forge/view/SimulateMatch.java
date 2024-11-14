@@ -2,7 +2,6 @@ package forge.view;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import forge.util.CollectionUtil;
 import org.apache.commons.lang3.time.StopWatch;
 
 import forge.LobbyPlayer;
@@ -201,7 +201,7 @@ public class SimulateMatch {
         } else {
             log = g1.getGameLog().getLogEntries(GameLogEntryType.MATCH_RESULTS);
         }
-        Collections.reverse(log);
+        CollectionUtil.reverse(log);
         for (GameLogEntry l : log) {
             System.out.println(l);
         }

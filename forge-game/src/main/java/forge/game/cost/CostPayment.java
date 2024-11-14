@@ -229,8 +229,8 @@ public class CostPayment extends ManaConversionMatrix {
      * @return a {@link forge.game.mana.Mana} object.
      */
     public static Mana getMana(final Player player, final ManaCostShard shard, final SpellAbility saBeingPaidFor,
-            final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) {
-        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(player.getManaPool(), shard,
+            final byte colorsPaid, Map<String, Integer> xManaCostPaidByColor) { // player.getManaPool() is not threadsafe if this is called somwewhere concurrently
+        final List<Pair<Mana, Integer>> weightedOptions = selectManaToPayFor(new ManaPool(player), shard,
             saBeingPaidFor, colorsPaid, xManaCostPaidByColor);
 
         // Exclude border case

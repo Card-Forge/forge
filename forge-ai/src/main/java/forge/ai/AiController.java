@@ -61,6 +61,7 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.ComparatorUtil;
 import forge.util.Expressions;
 import forge.util.MyRandom;
@@ -68,6 +69,9 @@ import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -88,6 +92,7 @@ public class AiController {
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
     private boolean useLivingEnd;
+    private List<SpellAbility> skipped;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -397,10 +402,27 @@ public class AiController {
     private static List<SpellAbility> getPlayableCounters(final CardCollection l) {
         final List<SpellAbility> spellAbility = Lists.newArrayList();
         for (final Card c : l) {
-            for (final SpellAbility sa : c.getNonManaAbilities()) {
-                // Check if this AF is a Counterspell
-                if (sa.getApi() == ApiType.Counter) {
-                    spellAbility.add(sa);
+            if (c.isForetold() && c.getAlternateState() != null) {
+                try {
+                    for (final SpellAbility sa : c.getAlternateState().getNonManaAbilities()) {
+                        // Check if this AF is a Counterspell
+                        if (sa.getApi() == ApiType.Counter) {
+                            spellAbility.add(sa);
+                        } else {
+                            if (sa.getApi() != null && sa.getApi().toString().contains("Foretell") && c.getAlternateState().getName().equalsIgnoreCase("Saw It Coming"))
+                                spellAbility.add(sa);
+                        }
+                    }
+                } catch (Exception e) {
+                    // facedown and alternatestate counters should be accessible
+                    e.printStackTrace();
+                }
+            } else {
+                for (final SpellAbility sa : c.getNonManaAbilities()) {
+                    // Check if this AF is a Counterspell
+                    if (sa.getApi() == ApiType.Counter) {
+                        spellAbility.add(sa);
+                    }
                 }
             }
         }
@@ -1323,9 +1345,7 @@ public class AiController {
 
         for (final Card element : combat.getAttackers()) {
             // tapping of attackers happens after Propaganda is paid for
-            final StringBuilder sb = new StringBuilder();
-            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
-            Log.debug(sb.toString());
+            Log.debug("Computer just assigned " + element.getName() + " as an attacker.");
         }
     }
 
@@ -1369,7 +1389,7 @@ public class AiController {
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
-                if ((!player.canLoseLife() || player.cantLoseForZeroOrLessLife() || ComputerUtil.getDamageFromETB(player, land) < player.getLife())
+                if (land != null && (!player.canLoseLife() || player.cantLoseForZeroOrLessLife() || ComputerUtil.getDamageFromETB(player, land) < player.getLife())
                         && (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land))) {
                     final List<SpellAbility> abilities = land.getAllPossibleAbilities(player, true);
                     // skip non Land Abilities
@@ -1502,6 +1522,13 @@ public class AiController {
     }
 
     private SpellAbility getSpellAbilityToPlay() {
+        if (skipped != null) {
+            //FIXME: this is for failed SA to skip temporarily, don't know why AI computation for mana fails, maybe due to auto mana compute?
+            for (SpellAbility sa : skipped) {
+                //System.out.println("Unskip: " + sa.toString() + " (" +  sa.getHostCard().getName() + ").");
+                sa.setSkip(false);
+            }
+        }
         CardCollection cards = ComputerUtilAbility.getAvailableCards(game, player);
         cards = ComputerUtilCard.dedupeCards(cards);
         List<SpellAbility> saList = Lists.newArrayList();
@@ -1547,8 +1574,12 @@ public class AiController {
 
         Iterables.removeIf(saList, spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
             // TODO allow when experimental profile?
-            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
+            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()))  || !spellAbility.canCastTiming(player);
         });
+        //removed skipped SA
+        skipped = Lists.newArrayList(Iterables.filter(saList, SpellAbility::isSkip));
+        if (!skipped.isEmpty())
+            saList.removeAll(skipped);
         //update LivingEndPlayer
         useLivingEnd = Iterables.any(player.getZone(ZoneType.Library), CardPredicates.nameEquals("Living End"));
 
@@ -1565,79 +1596,94 @@ public class AiController {
         if (all == null || all.isEmpty())
             return null;
 
-        try {
-            all.sort(ComputerUtilAbility.saEvaluator); // put best spells first
-            ComputerUtilAbility.sortCreatureSpells(all);
-        } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, all);
-            Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
-        }
         //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
         boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
+        List<CompletableFuture<Integer>> futures = new ArrayList<>();
+        Queue<SpellAbility> spells = new ConcurrentLinkedQueue<>();
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
-            // Don't add Counterspells to the "normal" playcard lookups
-            if (skipCounter && sa.getApi() == ApiType.Counter) {
-                continue;
-            }
-
-            if (sa.getHostCard().hasKeyword(Keyword.STORM)
-                    && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
-                    && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
-                if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
-                    // skip evaluating Storm unless we reached the minimum Storm count
-                    continue;
+            futures.add(CompletableFuture.supplyAsync(()-> {
+                // Don't add Counterspells to the "normal" playcard lookups
+                if (skipCounter && sa.getApi() == ApiType.Counter) {
+                    return 0;
                 }
-            }
-            // living end AI decks
-            // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
-            AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
-            if (useLivingEnd) {
-                if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
-                    if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
-                        if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
-                                && !player.cantLoseForZeroOrLessLife()
-                                && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
-                            aiPlayDecision = AiPlayDecision.CantAfford;
+
+                if (sa.getHostCard().hasKeyword(Keyword.STORM)
+                        && sa.getApi() != ApiType.Counter // AI would suck at trying to deliberately proc a Storm counterspell
+                        && player.getZone(ZoneType.Hand).contains(Predicates.not(Predicates.or(CardPredicates.Presets.LANDS, CardPredicates.hasKeyword("Storm"))))) {
+                    if (game.getView().getStormCount() < this.getIntProperty(AiProps.MIN_COUNT_FOR_STORM_SPELLS)) {
+                        // skip evaluating Storm unless we reached the minimum Storm count
+                        return 0;
+                    }
+                }
+                // living end AI decks
+                // TODO: generalize the implementation so that superfluous logic-specific checks for life, library size, etc. aren't needed
+                AiPlayDecision aiPlayDecision = AiPlayDecision.CantPlaySa;
+                if (useLivingEnd) {
+                    if (sa.isCycling() && sa.canCastTiming(player) && player.getCardsIn(ZoneType.Library).size() >= 10) {
+                        if (ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
+                            if (sa.getPayCosts() != null && sa.getPayCosts().hasSpecificCostType(CostPayLife.class)
+                                    && !player.cantLoseForZeroOrLessLife()
+                                    && player.getLife() <= sa.getPayCosts().getCostPartByType(CostPayLife.class).getAbilityAmount(sa) * 2) {
+                                aiPlayDecision = AiPlayDecision.CantAfford;
+                            } else {
+                                aiPlayDecision = AiPlayDecision.WillPlay;
+                            }
+                        }
+                    } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
+                        if (isLifeInDanger) { //needs more tune up for certain conditions
+                            aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
+                        } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
+                            if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
+                                return 0;
+                            else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
+                                aiPlayDecision = AiPlayDecision.WillPlay;// needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
                         } else {
-                            aiPlayDecision = AiPlayDecision.WillPlay;
+                            return 0;
                         }
                     }
-                } else if (sa.getHostCard().hasKeyword(Keyword.CASCADE)) {
-                    if (isLifeInDanger) { //needs more tune up for certain conditions
-                        aiPlayDecision = player.getCreaturesInPlay().size() >= 4 ? AiPlayDecision.CantPlaySa : AiPlayDecision.WillPlay;
-                    } else if (CardLists.filter(player.getZone(ZoneType.Graveyard).getCards(), CardPredicates.Presets.CREATURES).size() > 4) {
-                        if (player.getCreaturesInPlay().size() >= 4) // it's good minimum
-                            continue;
-                        else if (!sa.getHostCard().isPermanent() && sa.canCastTiming(player) && ComputerUtilCost.canPayCost(sa, player, sa.isTrigger()))
-                            aiPlayDecision = AiPlayDecision.WillPlay;// needs tuneup for bad matchups like reanimator and other things to check on opponent graveyard
-                    } else {
-                        continue;
-                    }
                 }
-            }
 
-            sa.setActivatingPlayer(player, true);
-            SpellAbility root = sa.getRootAbility();
+                sa.setActivatingPlayer(player, true);
+                SpellAbility root = sa.getRootAbility();
 
-            if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
-                sa.setLastStateBattlefield(game.getLastStateBattlefield());
-                sa.setLastStateGraveyard(game.getLastStateGraveyard());
-            }
-            //override decision for living end player
-            AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
+                if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
+                    sa.setLastStateBattlefield(game.getLastStateBattlefield());
+                    sa.setLastStateGraveyard(game.getLastStateGraveyard());
+                }
+                //override decision for living end player
+                AiPlayDecision opinion = useLivingEnd && AiPlayDecision.WillPlay.equals(aiPlayDecision) ? aiPlayDecision : canPlayAndPayFor(sa);
 
-            // reset LastStateBattlefield
-            sa.clearLastState();
-            // PhaseHandler ph = game.getPhaseHandler();
-            // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
+                // reset LastStateBattlefield
+                sa.clearLastState();
+                // PhaseHandler ph = game.getPhaseHandler();
+                // System.out.printf("Ai thinks '%s' of %s -> %s @ %s %s >>> \n", opinion, sa.getHostCard(), sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
 
-            if (opinion != AiPlayDecision.WillPlay)
-                continue;
+                if (opinion != AiPlayDecision.WillPlay)
+                    return 0;
 
-            return sa;
+                spells.add(sa);
+                return 0;
+            }));
         }
+        //timeout 5 seconds? even the AI don't acquire all, there should be SA to cast if valid
+        CompletableFuture<?>[] futuresArray = futures.toArray(new CompletableFuture<?>[0]);
+        CompletableFuture.allOf(futuresArray).completeOnTimeout(null, 5, TimeUnit.SECONDS).join();
+        futures.clear();
 
+        if (!spells.isEmpty()) {
+            List<SpellAbility> spellAbilities = new ArrayList<>(spells);
+            if (spellAbilities.size() == 1)
+                return spellAbilities.get(0);
+            try {
+                spellAbilities.sort(ComputerUtilAbility.saEvaluator); // put best spells first
+                ComputerUtilAbility.sortCreatureSpells(spellAbilities);
+            } catch (IllegalArgumentException ex) {
+                System.err.println(ex.getMessage());
+                String assertex = ComparatorUtil.verifyTransitivity(ComputerUtilAbility.saEvaluator, spellAbilities);
+                Sentry.captureMessage(ex.getMessage() + "\nAssertionError [verifyTransitivity]: " + assertex);
+            }
+            return spellAbilities.get(0);
+        }
         return null;
     }
 
@@ -2205,7 +2251,7 @@ public class AiController {
         result.addAll(activePlayerSAs);
 
         //need to reverse because of magic stack
-        Collections.reverse(result);
+        CollectionUtil.reverse(result);
         return result;
     }
 

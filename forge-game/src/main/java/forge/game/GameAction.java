@@ -2041,7 +2041,7 @@ public class GameAction {
 
         //shuffle
         List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
-        Collections.shuffle(shuffledCards);
+        CollectionUtil.shuffle(shuffledCards);
 
         //check a second hand
         List<Card> hand2 = shuffledCards.subList(0,p1.getMaxHandSize());
@@ -2171,7 +2171,7 @@ public class GameAction {
 
         if (!powerPlayers.isEmpty()) {
             List<Player> players = Lists.newArrayList(powerPlayers);
-            Collections.shuffle(players, MyRandom.getRandom());
+            CollectionUtil.shuffle(players, MyRandom.getRandom());
             return players.get(0);
         }
 
@@ -2409,7 +2409,7 @@ public class GameAction {
             int numLookedAt = 0;
             if (toTop != null) {
                 numLookedAt += toTop.size();
-                Collections.reverse(toTop); // reverse to get the correct order
+                CollectionUtil.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {
                     moveToLibrary(c, cause, null);
                 }

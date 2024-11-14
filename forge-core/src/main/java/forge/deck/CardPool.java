@@ -27,6 +27,7 @@ import forge.card.CardEdition;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.CollectionSuppliers;
+import forge.util.CollectionUtil;
 import forge.util.ItemPool;
 import forge.util.ItemPoolSorter;
 import forge.util.MyRandom;
@@ -349,7 +350,7 @@ public class CardPool extends ItemPool<PaperCard> {
         pivotCandidates.sort(CardEdition::compareTo);
         boolean searchPolicyAndPoolAreCompliant = isLatestCardArtPreference == this.isModern();
         if (!searchPolicyAndPoolAreCompliant)
-            Collections.reverse(pivotCandidates);  // reverse to have latest-first.
+            CollectionUtil.reverse(pivotCandidates);  // reverse to have latest-first.
         return pivotCandidates.get(0);
     }
 

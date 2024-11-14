@@ -20,10 +20,10 @@ package forge.gamemodes.quest;
 import static forge.gamemodes.quest.QuestUtilCards.isLegalInQuestFormat;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import forge.util.CollectionUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
@@ -236,7 +236,7 @@ public final class BoosterUtils {
                     preferredColors.clear();
                     int numberOfColors = COLOR_COUNT_PROBABILITIES[(int) (MyRandom.getRandom().nextDouble() * COLOR_COUNT_PROBABILITIES.length)];
                     if (numberOfColors < 6) {
-                        Collections.shuffle(possibleColors);
+                        CollectionUtil.shuffle(possibleColors);
                         for (int i = 0; i < numberOfColors; i++) {
                             preferredColors.add(possibleColors.get(i));
                         }
@@ -391,7 +391,7 @@ public final class BoosterUtils {
 
         final int size = allowedColors == null ? 0 : allowedColors.size();
         if (allowedColors != null) {
-            Collections.shuffle(allowedColors);
+            CollectionUtil.shuffle(allowedColors);
         }
 
         int cntMade = 0, iAttempt = 0;

@@ -36,6 +36,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.CardBlock;
 import forge.model.FModel;
+import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.ItemPool;
 import forge.util.Localizer;
@@ -474,7 +475,7 @@ public class BoosterDraft implements IBoosterDraft {
                         // Maybe the AI could have more knowledge about the other players.
                         // Like don't pass to players that have revealed certain cards or colors
                         // But random is probably fine for now
-                        Collections.shuffle(dredgers);
+                        CollectionUtil.shuffle(dredgers);
                         passToPlayer = dredgers.get(0);
                     } else {
                         // Human player, so we need to ask them
@@ -556,7 +557,7 @@ public class BoosterDraft implements IBoosterDraft {
             }
         }
 
-        Collections.shuffle(brokers);
+        CollectionUtil.shuffle(brokers);
         for(LimitedPlayer pl : brokers) {
             pl.activateBrokers(this.players);
         }

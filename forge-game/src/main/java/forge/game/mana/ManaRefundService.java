@@ -6,8 +6,8 @@ import forge.game.event.GameEventZone;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CollectionUtil;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ManaRefundService {
@@ -39,7 +39,7 @@ public class ManaRefundService {
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
 
         // start with the most recent
-        Collections.reverse(payingAbilities);
+        CollectionUtil.reverse(payingAbilities);
 
         for (final SpellAbility am : payingAbilities) {
             // What if am is owned by a different player?

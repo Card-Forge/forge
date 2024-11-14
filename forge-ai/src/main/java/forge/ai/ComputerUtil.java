@@ -68,6 +68,7 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
@@ -87,6 +88,8 @@ public class ComputerUtil {
     }
     public static boolean handlePlayingSpellAbility(final Player ai, SpellAbility sa, final Game game, Runnable chooseTargets) {
         final Card source = sa.getHostCard();
+        final Card host = sa.getHostCard();
+        final Zone hz = host.isCopiedSpell() ? null : host.getZone();
         source.setSplitStateToPlayAbility(sa);
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -144,8 +147,15 @@ public class ComputerUtil {
                 return true;
             }
         }
-        //Should not arrive here
-        System.out.println("AI failed to play " + sa.getHostCard());
+        // FIXME: Should not arrive here, though the card seems to be stucked on stack zone and invalidated and nowhere to be found, try to put back to original zone and maybe try to cast again if possible at later time?
+        System.out.println("[" + sa.getActivatingPlayer() + "] AI failed to play " + sa.getHostCard() + " [" + sa.getHostCard().getZone() + "]");
+        sa.setSkip(true);
+        if (host != null && hz != null) {
+            Card c = game.getAction().moveTo(hz.getZoneType(), host, null, null);
+            for (SpellAbility csa : c.getSpellAbilities()) {
+                csa.setSkip(true);
+            }
+        }
         return false;
     }
 
@@ -673,7 +683,7 @@ public class ComputerUtil {
 
         // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
         CardLists.sortByCmcDesc(typeList);
-        Collections.reverse(typeList);
+        CollectionUtil.reverse(typeList);
 
 
         // TODO AI needs some improvements here
@@ -727,7 +737,7 @@ public class ComputerUtil {
 
             // FIXME: This is suboptimal, maybe implement a single comparator that'll take care of all of this?
             CardLists.sortByCmcDesc(typeList);
-            Collections.reverse(typeList);
+            CollectionUtil.reverse(typeList);
             typeList.sort((a, b) -> {
                 if (!a.isInPlay() && b.isInPlay()) return -1;
                 else if (!b.isInPlay() && a.isInPlay()) return 1;
@@ -757,7 +767,7 @@ public class ComputerUtil {
         final CardCollection list = new CardCollection();
 
         if (zone != ZoneType.Hand) {
-            Collections.reverse(typeList);
+            CollectionUtil.reverse(typeList);
         }
 
         for (int i = 0; i < amount; i++) {
@@ -807,7 +817,7 @@ public class ComputerUtil {
             typeList.remove(activate);
         }
         ComputerUtilCard.sortByEvaluateCreature(typeList);
-        Collections.reverse(typeList);
+        CollectionUtil.reverse(typeList);
 
         final CardCollection tapList = new CardCollection();
 
@@ -1759,7 +1769,7 @@ public class ComputerUtil {
 
         // align threatened with resolve order
         // matters if stack contains multiple activations (e.g. Temur Sabertooth)
-        Collections.reverse(objects);
+        CollectionUtil.reverse(objects);
         return objects;
     }
 

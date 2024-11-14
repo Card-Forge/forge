@@ -17,12 +17,6 @@
  */
 package forge.gamemodes.quest;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -36,6 +30,7 @@ import forge.item.PaperCard;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
+import forge.util.CollectionUtil;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -176,7 +171,7 @@ public class QuestUtilUnlockSets {
             options.add(set.left);
             // System.out.println("Padded with: " + fillers.get(i).getName());
         }
-        Collections.reverse(options);
+        CollectionUtil.reverse(options);
 
         if (FModel.getQuestPreferences().getPrefInt(QPref.UNLIMITED_UNLOCKING) == 0) {
             return options.subList(0, Math.min(options.size(), Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50))));

@@ -1,7 +1,6 @@
 package forge.gamemodes.limited;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -12,6 +11,7 @@ import com.google.common.collect.Iterables;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.item.PaperCard;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 
 public class WinstonDraft extends BoosterDraft {
@@ -47,7 +47,7 @@ public class WinstonDraft extends BoosterDraft {
                 }
             }
         }
-        Collections.shuffle(this.deck, MyRandom.getRandom());
+        CollectionUtil.shuffle(this.deck, MyRandom.getRandom());
 
         // Create three Winston piles, adding the top card from the Winston deck to start each pile
         this.piles = new ArrayList<>();

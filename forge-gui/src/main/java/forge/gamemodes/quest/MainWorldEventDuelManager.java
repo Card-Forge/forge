@@ -3,7 +3,6 @@ package forge.gamemodes.quest;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import forge.gamemodes.quest.data.QuestPreferences;
@@ -12,6 +11,7 @@ import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.MainWorldDuelReader;
 import forge.model.FModel;
 import forge.util.CollectionSuppliers;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.maps.EnumMapOfLists;
 import forge.util.maps.MapOfLists;
@@ -259,7 +259,7 @@ public class MainWorldEventDuelManager implements QuestEventDuelManagerInterface
     public void randomizeOpponents() {
         for (QuestEventDifficulty qd : sortedDuels.keySet()) {
             List<QuestEventDuel> list = (List<QuestEventDuel>) sortedDuels.get(qd);
-            Collections.shuffle(list, MyRandom.getRandom());
+            CollectionUtil.shuffle(list, MyRandom.getRandom());
         }
     }
     

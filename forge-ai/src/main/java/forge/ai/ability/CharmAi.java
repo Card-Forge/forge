@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.CollectionUtil;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 
@@ -52,7 +52,7 @@ public class CharmAi extends SpellAbilityAi {
         } else {
             // only randomize if not all possible together
             if (num < choices.size()) {
-                Collections.shuffle(choices);
+                CollectionUtil.shuffle(choices);
             }
 
             /*
@@ -101,7 +101,7 @@ public class CharmAi extends SpellAbilityAi {
         // Pawprint
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
-            Collections.reverse(choices); // try to pay for the more expensive subs first
+            CollectionUtil.reverse(choices); // try to pay for the more expensive subs first
         }
         int pawprintAmount = 0;
 

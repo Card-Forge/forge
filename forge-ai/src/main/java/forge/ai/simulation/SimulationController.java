@@ -1,7 +1,6 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import forge.ai.simulation.GameStateEvaluator.Score;
@@ -9,6 +8,7 @@ import forge.game.GameObject;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.CollectionUtil;
 
 public class SimulationController {
     private static boolean DEBUG = false;
@@ -106,7 +106,7 @@ public class SimulationController {
             sequence.add(current);
             current = current.prevDecision;
         }
-        Collections.reverse(sequence);
+        CollectionUtil.reverse(sequence);
         // Merge targets & choices into their parents.
         int writeIndex = 0;
         for (int i = 0; i < sequence.size(); i++) {

@@ -42,6 +42,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.ISkinImage;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.CollectionUtil;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.XmlReader;
@@ -589,7 +590,7 @@ public final class ConquestData {
                         path.add(current.loc);
                         current = current.came_from;
                     }
-                    Collections.reverse(path); //reverse path so it begins with start location
+                    CollectionUtil.reverse(path); //reverse path so it begins with start location
                     return path;
                 }
 

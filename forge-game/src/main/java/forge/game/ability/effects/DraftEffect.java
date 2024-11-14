@@ -11,6 +11,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CollectionUtil;
 import forge.util.Localizer;
 
 import java.util.*;
@@ -51,7 +52,7 @@ import java.util.*;
          CardCollection drafted = new CardCollection();
 
          for (int i = 0; i < numToDraft; i++) {
-             Collections.shuffle(spellbook);
+             CollectionUtil.shuffle(spellbook);
              List<Card> draftOptions = new ArrayList<>();
              for (String name : spellbook.subList(0, 3)) {
                  // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)

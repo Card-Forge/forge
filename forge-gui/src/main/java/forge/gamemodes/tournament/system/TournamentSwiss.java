@@ -1,13 +1,13 @@
 package forge.gamemodes.tournament.system;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import forge.util.CollectionUtil;
 
 @SuppressWarnings("serial")
 public class TournamentSwiss extends AbstractTournament {
@@ -40,7 +40,7 @@ public class TournamentSwiss extends AbstractTournament {
         activeRound++;
 
         // Randomize players, then sort by scores
-        Collections.shuffle(allPlayers);
+        CollectionUtil.shuffle(allPlayers);
         sortAllPlayers("swiss");
 
         if (allPlayers.size() % 2 == 1) {
