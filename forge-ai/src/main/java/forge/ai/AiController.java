@@ -847,9 +847,10 @@ public class AiController {
             return AiPlayDecision.CantAfford;
         }
 
-        // tapping cards for mana, check if enough left (pass memory indirectly because we don't want to include those)
-        if (!AiCardMemory.isMemorySetEmpty(player, MemorySet.PAYS_TAP_COST)
-                && !ComputerUtilCost.checkTapTypeCost(player, sa.getPayCosts(), host, sa, new CardCollection(AiCardMemory.getMemorySet(player, MemorySet.PAYS_TAP_COST)))) {
+        // check if enough left (pass memory indirectly because we don't want to include those)
+        Set<Card> tappedForMana = AiCardMemory.getMemorySet(player, MemorySet.PAYS_TAP_COST);
+        if (tappedForMana != null && tappedForMana.isEmpty() &&
+                !ComputerUtilCost.checkTapTypeCost(player, sa.getPayCosts(), host, sa, new CardCollection(tappedForMana))) {
             return AiPlayDecision.CantAfford;
         }
 

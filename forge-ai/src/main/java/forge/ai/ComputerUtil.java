@@ -782,6 +782,7 @@ public class ComputerUtil {
         }
 
         CardLists.sortByPowerAsc(typeList);
+        // TODO prefer noncreatures without tap abilities
 
         final CardCollection tapList = new CardCollection();
 
