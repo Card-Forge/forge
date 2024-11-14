@@ -105,6 +105,6 @@ jobs:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: forge-gui-android/target/upload/
+          local-dir: upload/
           server-dir: downloads/dailysnapshots/
           state-name: .ftp-deploy-android-sync-state.json
