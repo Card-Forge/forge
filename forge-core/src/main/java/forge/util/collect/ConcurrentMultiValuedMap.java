@@ -6,9 +6,14 @@ import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.collections4.multiset.HashMultiSet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.BiConsumer;
 
 public class ConcurrentMultiValuedMap<K,V> implements MultiValuedMap<K,V> {
@@ -58,7 +63,7 @@ public class ConcurrentMultiValuedMap<K,V> implements MultiValuedMap<K,V> {
     }
 
     private Collection<V> safeGet(K key) {
-        return storage.computeIfAbsent(key, value -> new CopyOnWriteArrayList<>());
+        return storage.computeIfAbsent(key, value -> new ConcurrentLinkedQueue<>());
     }
 
     @Override
