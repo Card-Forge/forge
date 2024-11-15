@@ -93,6 +93,7 @@ jobs:
           mkdir upload
           mv /home/runner/work/forge/forge/forge-gui-android/target/*-signed-aligned.apk upload/
           mv /home/runner/work/forge/forge/forge-gui-android/target/assets.zip upload/
+          mv /home/runner/work/forge/forge/forge-gui-android/target/classes/assets/version.txt upload/
           cd upload
           ls
         env:
