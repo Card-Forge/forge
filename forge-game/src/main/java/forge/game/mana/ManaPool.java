@@ -23,8 +23,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -39,7 +42,6 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
-import forge.util.collect.ConcurrentMultiValuedMap;
 
 /**
  * <p>
@@ -51,14 +53,14 @@ import forge.util.collect.ConcurrentMultiValuedMap;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private ConcurrentMultiValuedMap<Byte, Mana> _floatingMana;
-    private ConcurrentMultiValuedMap<Byte, Mana> floatingMana() {
-        ConcurrentMultiValuedMap<Byte, Mana> result = _floatingMana;
+    private Multimap<Byte, Mana> _floatingMana;
+    private Multimap<Byte, Mana> floatingMana() {
+        Multimap<Byte, Mana> result = _floatingMana;
         if (result == null) {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
-                    result = new ConcurrentMultiValuedMap<>();
+                    result = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
                     _floatingMana = result;
                 }
             }
@@ -200,7 +202,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return removeMana(mana, true);
     }
     public boolean removeMana(final Mana mana, boolean updateView) {
-        boolean result = floatingMana().removeMapping(mana.getColor(), mana);
+        boolean result = floatingMana().remove(mana.getColor(), mana);
         if (result && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
