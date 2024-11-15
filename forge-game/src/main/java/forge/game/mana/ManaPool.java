@@ -42,6 +42,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
+import forge.util.collect.ConcurrentMultiMap;
 
 /**
  * <p>
@@ -53,14 +54,14 @@ import forge.game.staticability.StaticAbilityUnspentMana;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private Multimap<Byte, Mana> _floatingMana;
-    private Multimap<Byte, Mana> floatingMana() {
-        Multimap<Byte, Mana> result = _floatingMana;
+    private ConcurrentMultiMap<Byte, Mana> _floatingMana;
+    private ConcurrentMultiMap<Byte, Mana> floatingMana() {
+        ConcurrentMultiMap<Byte, Mana> result = _floatingMana;
         if (result == null) {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
-                    result = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
+                    result = new ConcurrentMultiMap<>();
                     _floatingMana = result;
                 }
             }
