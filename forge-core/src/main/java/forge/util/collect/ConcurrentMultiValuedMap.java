@@ -8,7 +8,7 @@ import org.apache.commons.collections4.multiset.HashMultiSet;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiConsumer;
 
 public class ConcurrentMultiValuedMap<K,V> implements MultiValuedMap<K,V> {
@@ -58,7 +58,7 @@ public class ConcurrentMultiValuedMap<K,V> implements MultiValuedMap<K,V> {
     }
 
     private Collection<V> safeGet(K key) {
-        return storage.computeIfAbsent(key, value -> new CopyOnWriteArraySet<>());
+        return storage.computeIfAbsent(key, value -> new CopyOnWriteArrayList<>());
     }
 
     @Override
