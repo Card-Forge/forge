@@ -2456,7 +2456,7 @@ public class GameAction {
                     game.getAction().reveal(milledPlayer, destination, p, false, message, addSuffix);
                 }
                 game.getGameLog().add(GameLogEntryType.ZONE_CHANGE, p + " milled " +
-                        Lang.joinHomogenous(milled) + toZoneStr + ".");
+                        Lang.joinHomogenous(milledPlayer) + toZoneStr + ".");
             }
         }
 

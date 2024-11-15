@@ -3,7 +3,6 @@ ManaCost:4 W W W
 Types:Legendary Creature Angel
 PT:7/7
 S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ W tapXType<4/Creature.withFlying> | Description$ You may pay {W} and tap four untapped creatures you control with flying rather than pay this spell's mana cost.
-SVar:AIPaymentPreference:DontPayTapCostWithManaSources
 K:Flying
 K:Lifelink
 S:Mode$ Continuous | Affected$ Creature.withFlying+Other+YouCtrl | AddKeyword$ Indestructible | Description$ Other creatures you control with flying have indestructible.

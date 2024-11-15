@@ -3,7 +3,7 @@ ManaCost:2 W B
 Types:Legendary Creature Spirit Noble
 PT:3/3
 K:Flying
-T:Mode$ BecomesTarget | ValidTarget$ Card.Self,Spirit.YouCtrl+Other | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigPhaseOut | TriggerDescription$ Whenever CARDNAME or another Spirit you control becomes the target of a spell, it phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self,Spirit.YouCtrl+Other+inZoneBattlefield | ValidSource$ Spell | TriggerZones$ Battlefield | Execute$ TrigPhaseOut | TriggerDescription$ Whenever CARDNAME or another Spirit you control becomes the target of a spell, it phases out. (Treat it and anything attached to it as though they don't exist until your next turn.)
 SVar:TrigPhaseOut:DB$ Phases | Defined$ TriggeredTargetLKICopy
 T:Mode$ PhaseIn | ValidCard$ Card.Self,Spirit.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another Spirit you control phases in, create a tapped 1/1 white Spirit creature token with flying.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | TokenTapped$ True

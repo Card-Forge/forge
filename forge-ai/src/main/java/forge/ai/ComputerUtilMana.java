@@ -269,6 +269,7 @@ public class ComputerUtilMana {
         }
 
         for (final SpellAbility ma : saList) {
+            // this rarely seems like a good idea
             if (ma.getHostCard() == saHost) {
                 continue;
             }
@@ -277,7 +278,7 @@ public class ComputerUtilMana {
                 continue;
             }
 
-            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, new CardCollection())) {
+            if (!ComputerUtilCost.checkTapTypeCost(ai, ma.getPayCosts(), ma.getHostCard(), sa, AiCardMemory.getMemorySet(ai, MemorySet.PAYS_TAP_COST))) {
                 continue;
             }
 
