@@ -1574,7 +1574,7 @@ public class AiController {
 
         Iterables.removeIf(saList, spellAbility -> { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
             // TODO allow when experimental profile?
-            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()))  || !spellAbility.canCastTiming(player);
+            return spellAbility.isLandAbility() || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
         });
         //removed skipped SA
         skipped = Lists.newArrayList(Iterables.filter(saList, SpellAbility::isSkip));
