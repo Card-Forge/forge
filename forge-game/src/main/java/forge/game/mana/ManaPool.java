@@ -58,7 +58,6 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
-                    // TODO: can this be replaced with something concurrent
                     result = new ConcurrentMultiValuedMap<>();
                     _floatingMana = result;
                 }
