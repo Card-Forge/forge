@@ -18,8 +18,8 @@
 
 package forge.ai;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -79,21 +79,21 @@ public class AiCardMemory {
     private final Set<Card> memRevealedCards;
 
     public AiCardMemory() {
-        this.memMandatoryAttackers = new HashSet<>();
-        this.memHeldManaSources = new HashSet<>();
-        this.memHeldManaSourcesForCombat = new HashSet<>();
-        this.memHeldManaSourcesForEnemyCombat = new HashSet<>();
-        this.memAttachedThisTurn = new HashSet<>();
-        this.memAnimatedThisTurn = new HashSet<>();
-        this.memBouncedThisTurn = new HashSet<>();
-        this.memActivatedThisTurn = new HashSet<>();
-        this.memTrickAttackers = new HashSet<>();
-        this.memChosenFogEffect = new HashSet<>();
-        this.memMarkedToAvoidReentry = new HashSet<>();
-        this.memHeldManaSourcesForNextSpell = new HashSet<>();
-        this.memPaysTapCost = new HashSet<>();
-        this.memPaysSacCost = new HashSet<>();
-        this.memRevealedCards = new HashSet<>();
+        this.memMandatoryAttackers = ConcurrentHashMap.newKeySet();
+        this.memHeldManaSources = ConcurrentHashMap.newKeySet();
+        this.memHeldManaSourcesForCombat = ConcurrentHashMap.newKeySet();
+        this.memHeldManaSourcesForEnemyCombat = ConcurrentHashMap.newKeySet();
+        this.memAttachedThisTurn = ConcurrentHashMap.newKeySet();
+        this.memAnimatedThisTurn = ConcurrentHashMap.newKeySet();
+        this.memBouncedThisTurn = ConcurrentHashMap.newKeySet();
+        this.memActivatedThisTurn = ConcurrentHashMap.newKeySet();
+        this.memTrickAttackers = ConcurrentHashMap.newKeySet();
+        this.memChosenFogEffect = ConcurrentHashMap.newKeySet();
+        this.memMarkedToAvoidReentry = ConcurrentHashMap.newKeySet();
+        this.memHeldManaSourcesForNextSpell = ConcurrentHashMap.newKeySet();
+        this.memPaysTapCost = ConcurrentHashMap.newKeySet();
+        this.memPaysSacCost = ConcurrentHashMap.newKeySet();
+        this.memRevealedCards = ConcurrentHashMap.newKeySet();
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
