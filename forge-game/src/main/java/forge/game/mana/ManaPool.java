@@ -23,11 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
@@ -42,6 +39,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityUnspentMana;
+import forge.util.collect.ConcurrentMultiValuedMap;
 
 /**
  * <p>
@@ -53,15 +51,15 @@ import forge.game.staticability.StaticAbilityUnspentMana;
  */
 public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
     private final Player owner;
-    private Multimap<Byte, Mana> _floatingMana;
-    private Multimap<Byte, Mana> floatingMana() {
-        Multimap<Byte, Mana> result = _floatingMana;
+    private ConcurrentMultiValuedMap<Byte, Mana> _floatingMana;
+    private ConcurrentMultiValuedMap<Byte, Mana> floatingMana() {
+        ConcurrentMultiValuedMap<Byte, Mana> result = _floatingMana;
         if (result == null) {
             synchronized (this) {
                 result = _floatingMana;
                 if (result == null) {
                     // TODO: can this be replaced with something concurrent
-                    result = Multimaps.synchronizedMultimap(ArrayListMultimap.create());
+                    result = new ConcurrentMultiValuedMap<>();
                     _floatingMana = result;
                 }
             }
@@ -203,7 +201,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         return removeMana(mana, true);
     }
     public boolean removeMana(final Mana mana, boolean updateView) {
-        boolean result = floatingMana().remove(mana.getColor(), mana);
+        boolean result = floatingMana().removeMapping(mana.getColor(), mana);
         if (result && updateView) {
             owner.updateManaForView();
             owner.getGame().fireEvent(new GameEventManaPool(owner, EventValueChangeType.Removed, mana));
@@ -234,6 +232,8 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         Mana manaFound = null;
         Collection<Mana> cm = floatingMana().get(colorCode);
 
+        if (cm == null)
+            return false;
         for (final Mana mana : cm) {
             if (mana.getManaAbility() != null && !mana.getManaAbility().meetsManaRestrictions(saPaidFor)) {
                 continue;
@@ -373,10 +373,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
 
     @Override
     public Iterator<Mana> iterator() {
-        // use synchronizedListMultimap
-        synchronized (floatingMana()) {
-            return floatingMana().values().iterator();
-        }
+        return floatingMana().values().iterator();
     }
 
 }
