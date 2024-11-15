@@ -1652,6 +1652,11 @@ public class AiController {
                     }
                 }
 
+                // dumb check needed? don't really know why the AI tapped the land for nothing at EOT of his opponent.
+                // without this, you can see the weird tapping of single land -> mana ability. with this, it doesn't confuse human player
+                if (sa.isManaAbility() && game.getPhaseHandler() != null && game.getPhaseHandler().is(PhaseType.END_OF_TURN) && !game.getPhaseHandler().isPlayerTurn(player))
+                    return 0;
+
                 sa.setActivatingPlayer(player, true);
                 SpellAbility root = sa.getRootAbility();
 
