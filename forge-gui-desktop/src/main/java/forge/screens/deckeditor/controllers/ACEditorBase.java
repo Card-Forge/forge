@@ -585,19 +585,18 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
             PaperCard existingCard = cardManager.getSelectedItem();
             int val;
-            if ((val = existingCard.getRules().getSetColorID()) > 0)
-                return;
-
-            GuiUtils.addMenuItem(menu, label, null, () -> {
-                Set<String> colors = new HashSet<>(GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(val)), val, val, MagicColor.Constant.ONLY_COLORS));
-                // make an updated version
-                PaperCard updated = existingCard.getColorIDVersion(colors);
-                // remove *quantity* instances of existing card
-                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
-                // add *quantity* into the deck and set them as selected
-                cardManager.addItem(updated, 1);
-                cardManager.setSelectedItem(updated);
-            }, true, true);
+            if ((val = existingCard.getRules().getSetColorID()) > 0) {
+                GuiUtils.addMenuItem(menu, label, null, () -> {
+                    Set<String> colors = new HashSet<>(GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(val)), val, val, MagicColor.Constant.ONLY_COLORS));
+                    // make an updated version
+                    PaperCard updated = existingCard.getColorIDVersion(colors);
+                    // remove *quantity* instances of existing card
+                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
+                    // add *quantity* into the deck and set them as selected
+                    cardManager.addItem(updated, 1);
+                    cardManager.setSelectedItem(updated);
+                }, true, true);
+            }
         }
     }
 }
