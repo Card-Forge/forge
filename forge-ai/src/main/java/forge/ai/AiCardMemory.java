@@ -18,9 +18,11 @@
 
 package forge.ai;
 
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forge.game.card.Card;
 import forge.game.player.Player;
 
@@ -62,75 +64,26 @@ public class AiCardMemory {
         REVEALED_CARDS // These cards were recently revealed to the AI by a call to PlayerControllerAi.reveal
     }
 
-    private final Set<Card> memMandatoryAttackers;
-    private final Set<Card> memTrickAttackers;
-    private final Set<Card> memHeldManaSources;
-    private final Set<Card> memHeldManaSourcesForCombat;
-    private final Set<Card> memHeldManaSourcesForEnemyCombat;
-    private final Set<Card> memHeldManaSourcesForNextSpell;
-    private final Set<Card> memAttachedThisTurn;
-    private final Set<Card> memAnimatedThisTurn;
-    private final Set<Card> memBouncedThisTurn;
-    private final Set<Card> memActivatedThisTurn;
-    private final Set<Card> memChosenFogEffect;
-    private final Set<Card> memMarkedToAvoidReentry;
-    private final Set<Card> memPaysTapCost;
-    private final Set<Card> memPaysSacCost;
-    private final Set<Card> memRevealedCards;
+    private Map<MemorySet, Set<Card>> _memoryMap;
+    private Map<MemorySet, Set<Card>> memoryMap() {
+        Map<MemorySet, Set<Card>> result = _memoryMap;
+        if (result == null) {
+            synchronized (this) {
+                result = _memoryMap;
+                if (result == null) {
+                    result = Maps.newConcurrentMap();
+                    _memoryMap = result;
+                }
+            }
+        }
+        return _memoryMap;
+    }
 
     public AiCardMemory() {
-        this.memMandatoryAttackers = ConcurrentHashMap.newKeySet();
-        this.memHeldManaSources = ConcurrentHashMap.newKeySet();
-        this.memHeldManaSourcesForCombat = ConcurrentHashMap.newKeySet();
-        this.memHeldManaSourcesForEnemyCombat = ConcurrentHashMap.newKeySet();
-        this.memAttachedThisTurn = ConcurrentHashMap.newKeySet();
-        this.memAnimatedThisTurn = ConcurrentHashMap.newKeySet();
-        this.memBouncedThisTurn = ConcurrentHashMap.newKeySet();
-        this.memActivatedThisTurn = ConcurrentHashMap.newKeySet();
-        this.memTrickAttackers = ConcurrentHashMap.newKeySet();
-        this.memChosenFogEffect = ConcurrentHashMap.newKeySet();
-        this.memMarkedToAvoidReentry = ConcurrentHashMap.newKeySet();
-        this.memHeldManaSourcesForNextSpell = ConcurrentHashMap.newKeySet();
-        this.memPaysTapCost = ConcurrentHashMap.newKeySet();
-        this.memPaysSacCost = ConcurrentHashMap.newKeySet();
-        this.memRevealedCards = ConcurrentHashMap.newKeySet();
     }
 
     private Set<Card> getMemorySet(MemorySet set) {
-        switch (set) {
-            case MANDATORY_ATTACKERS:
-                return memMandatoryAttackers;
-            case TRICK_ATTACKERS:
-                return memTrickAttackers;
-            case HELD_MANA_SOURCES_FOR_MAIN2:
-                return memHeldManaSources;
-            case HELD_MANA_SOURCES_FOR_DECLBLK:
-                return memHeldManaSourcesForCombat;
-            case HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK:
-                return memHeldManaSourcesForEnemyCombat;
-            case HELD_MANA_SOURCES_FOR_NEXT_SPELL:
-                return memHeldManaSourcesForNextSpell;
-            case ATTACHED_THIS_TURN:
-                return memAttachedThisTurn;
-            case ANIMATED_THIS_TURN:
-                return memAnimatedThisTurn;
-            case BOUNCED_THIS_TURN:
-                return memBouncedThisTurn;
-            case ACTIVATED_THIS_TURN:
-                return memActivatedThisTurn;
-            case CHOSEN_FOG_EFFECT:
-                return memChosenFogEffect;
-            case MARKED_TO_AVOID_REENTRY:
-                return memMarkedToAvoidReentry;
-            case PAYS_TAP_COST:
-                return memPaysTapCost;
-            case PAYS_SAC_COST:
-                return memPaysSacCost;
-            case REVEALED_CARDS:
-                return memRevealedCards;
-            default:
-                return null;
-        }
+        return memoryMap().computeIfAbsent(set, value -> Sets.newConcurrentHashSet());
     }
 
     /**
@@ -145,10 +98,7 @@ public class AiCardMemory {
         if (c == null) {
             return false;
         }
-
-        Set<Card> memorySet = getMemorySet(set);
-
-        return memorySet != null && memorySet.contains(c);
+        return getMemorySet(set).contains(c);
     }
 
     /**
@@ -160,16 +110,11 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set) {
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            for (Card c : memorySet) {
-                if (c.getName().equals(cardName)) {
-                    return true;
-                }
+        for (Card c : getMemorySet(set)) {
+            if (c.getName().equals(cardName)) {
+                return true;
             }
         }
-
         return false;
     }
 
@@ -184,16 +129,11 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set, Player owner) {
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            for (Card c : memorySet) {
-                if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
-                    return true;
-                }
+        for (Card c : getMemorySet(set)) {
+            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                return true;
             }
         }
-
         return false;
     }
 
@@ -207,14 +147,7 @@ public class AiCardMemory {
     public boolean rememberCard(Card c, MemorySet set) {
         if (c == null)
             return false;
-
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            memorySet.add(c);
-        }
-
-        return true;
+        return getMemorySet(set).add(c);
     }
 
     /**
@@ -231,14 +164,7 @@ public class AiCardMemory {
         if (!isRememberedCard(c, set)) {
             return false;
         }
-
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            memorySet.remove(c);
-        }
-
-        return true;
+        return getMemorySet(set).remove(c);
     }
 
     /**
@@ -249,16 +175,11 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name was previously remembered in the given memory set and was successfully forgotten
      */
     public boolean forgetAnyCardWithName(String cardName, MemorySet set) {
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            for (Card c : memorySet) {
-                if (c.getName().equals(cardName)) {
-                    return forgetCard(c, set);
-                }
+        for (Card c : getMemorySet(set)) {
+            if (c.getName().equals(cardName)) {
+                return forgetCard(c, set);
             }
         }
-        
         return false;
     }
 
@@ -271,16 +192,11 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name was previously remembered in the given memory set and was successfully forgotten
      */
     public boolean forgetAnyCardWithName(String cardName, MemorySet set, Player owner) {
-        Set<Card> memorySet = getMemorySet(set);
-
-        if (memorySet != null) {
-            for (Card c : memorySet) {
-                if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
-                    return forgetCard(c, set);
-                }
+        for (Card c : getMemorySet(set)) {
+            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
+                return forgetCard(c, set);
             }
         }
-
         return false;
     }
 
