@@ -197,9 +197,8 @@ public class PlayEffect extends SpellAbilityEffect {
                     invalid.add(c);
                 }
             }
-            // it.remove will only remove item from the list part of CardCollection
-            if (!invalid.isEmpty()) // why don't we just remove all?
-                invalid.forEach(tgtCards.asSet()::remove);
+            if (!invalid.isEmpty())
+                tgtCards.removeAll(invalid);
 
             if (tgtCards.isEmpty()) {
                 return;
@@ -242,7 +241,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
                 // it.remove will only remove item from the list part of CardCollection
                 if (!invalid.isEmpty())
-                    invalid.forEach(tgtCards.asSet()::remove);
+                    tgtCards.removeAll(invalid);
                 if (tgtCards.isEmpty())
                     break;
                 params.put("CMCLimit", totalCMCLimit);
