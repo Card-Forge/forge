@@ -62,20 +62,23 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
                 continue;
             }
 
-            if (!(existingSets.contains(setCode3) || existingSets.contains(setCode2))) {
-                // If set doesn't exist on server, don't try to download cards for it
-                if (!missingSets.contains(setCode3)) {
-                    missingSets.add(setCode3);
-                    System.out.println(setCode3 + " not found on server. Ignoring downloads for this set.");
-                }
+//            if (!(existingSets.contains(setCode3) || existingSets.contains(setCode2))) {
+//                // If set doesn't exist on server, don't try to download cards for it
+//                if (!missingSets.contains(setCode3)) {
+//                    missingSets.add(setCode3);
+//                    System.out.println(setCode3 + " not found on server. Ignoring downloads for this set.");
+//                }
+//
+//                continue;
+//            }
 
-                continue;
-            }
-
-            addDLObject(ImageUtil.getDownloadUrl(c, ""), ImageUtil.getImageKey(c, "", true), downloads);
+            final String setCode = setCode3.toLowerCase();
+            addDLObject(ImageUtil.getScryfallDownloadUrl(c, "", setCode, "", false), ImageUtil.getImageKey(c, "", true), downloads, true);
+//            addDLObject(ImageUtil.getDownloadUrl(c, ""), ImageUtil.getImageKey(c, "", true), downloads);
 
             if (c.hasBackFace()) {
-                addDLObject(ImageUtil.getDownloadUrl(c, "back"), ImageUtil.getImageKey(c, "back", true), downloads);
+//                addDLObject(ImageUtil.getDownloadUrl(c, "back"), ImageUtil.getImageKey(c, "back", true), downloads);
+                addDLObject(ImageUtil.getScryfallDownloadUrl(c, "back", setCode, "", false), ImageUtil.getImageKey(c, "back", true), downloads, true);
             }
         }
 
@@ -87,7 +90,7 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
         return downloads;
     }
 
-    private static void addDLObject(final String urlPath, final String filename, final Map<String, String> downloads) {
+    private static void addDLObject(final String urlPath, final String filename, final Map<String, String> downloads, final boolean scryfall) {
         final File destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
         String modifier = !filename.contains(".full") ? ".fullborder" : "";
         final File fullborder = new File(ForgeConstants.CACHE_CARD_PICS_DIR, TextUtil.fastReplace(filename, ".full", ".fullborder") + modifier + ".jpg");
@@ -96,7 +99,8 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloadService {
             return; //don't add on download if you have an existing fullborder image in this set...
 
         if (!destFile.exists()) {
-            downloads.put(destFile.getAbsolutePath(), ForgeConstants.URL_PIC_DOWNLOAD + urlPath);
+            String url = scryfall ? ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + urlPath : ForgeConstants.URL_PIC_DOWNLOAD + urlPath;
+            downloads.put(destFile.getAbsolutePath(), url);
         }
     }
 }
