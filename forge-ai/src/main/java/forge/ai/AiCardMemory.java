@@ -110,12 +110,7 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set) {
-        for (Card c : getMemorySet(set)) {
-            if (c.getName().equals(cardName)) {
-                return true;
-            }
-        }
-        return false;
+        return getMemorySet(set).stream().anyMatch(c -> c.getName().equals(cardName));
     }
 
     /**
@@ -129,12 +124,7 @@ public class AiCardMemory {
      * @return true, if at least one card with the given name is remembered in the given memory set
      */
     public boolean isRememberedCardByName(String cardName, MemorySet set, Player owner) {
-        for (Card c : getMemorySet(set)) {
-            if (c.getName().equals(cardName) && c.getOwner().equals(owner)) {
-                return true;
-            }
-        }
-        return false;
+        return getMemorySet(set).stream().anyMatch(c -> c.getName().equals(cardName) && c.getOwner().equals(owner));
     }
 
     /**
