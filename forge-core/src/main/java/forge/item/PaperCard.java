@@ -28,6 +28,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -55,6 +57,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     private final boolean foil;
     private Boolean hasImage;
     private final boolean noSell;
+    private Set<String> colorID;
     private String sortableName;
     private final String functionalVariant;
 
@@ -83,6 +86,11 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public String getFunctionalVariant() {
         return functionalVariant;
+    }
+
+    @Override
+    public Set<String> getColorID() {
+        return colorID;
     }
 
     @Override
@@ -156,7 +164,16 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, false);
         return sellable;
     }
-
+    public PaperCard getColorIDVersion(Set<String> colors) {
+        if (colors == null && this.colorID == null)
+            return this;
+        if (this.colorID != null && this.colorID.equals(colors))
+            return this;
+        if (colors != null && colors.equals(this.colorID))
+            return this;
+        return new PaperCard(this.rules, this.edition, this.rarity,
+                this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, this.noSell, colors);
+    }
     @Override
     public String getItemType() {
         final Localizer localizer = Localizer.getInstance();
@@ -190,6 +207,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
                      final int artIndex0, final boolean foil0, final String collectorNumber0,
                      final String artist0, final String functionalVariant, final boolean noSell0) {
+        this(rules0, edition0, rarity0, artIndex0, foil0, collectorNumber0, artist0, functionalVariant, noSell0, null);
+    }
+
+    public PaperCard(final CardRules rules0, final String edition0, final CardRarity rarity0,
+                     final int artIndex0, final boolean foil0, final String collectorNumber0,
+                     final String artist0, final String functionalVariant, final boolean noSell0, final Set<String> colorID0) {
         if (rules0 == null || edition0 == null || rarity0 == null) {
             throw new IllegalArgumentException("Cannot create card without rules, edition or rarity");
         }
@@ -206,6 +229,7 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         sortableName = TextUtil.toSortableName(CardTranslation.getTranslatedName(rules0.getName()));
         this.functionalVariant = functionalVariant != null ? functionalVariant : IPaperCard.NO_FUNCTIONAL_VARIANT;
         noSell = noSell0;
+        colorID = colorID0;
     }
 
     public static PaperCard FAKE_CARD = new PaperCard(CardRules.getUnsupportedCardNamed("Fake Card"), "Fake Edition", CardRarity.Common);
@@ -232,6 +256,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         }
         if (!getCollectorNumber().equals(other.getCollectorNumber()))
             return false;
+        // colorID can be NULL
+        if (getColorID() != other.getColorID())
+            return false;
         return (other.foil == foil) && (other.artIndex == artIndex);
     }
 
@@ -244,10 +271,11 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     public int hashCode() {
         final int code = (name.hashCode() * 11) + (edition.hashCode() * 59) +
                 (artIndex * 2) + (getCollectorNumber().hashCode() * 383);
+        final int id = Optional.ofNullable(colorID).map(Set::hashCode).orElse(0);
         if (foil) {
-            return code + 1;
+            return code + id + 1;
         }
-        return code;
+        return code + id;
     }
 
     // FIXME: Check

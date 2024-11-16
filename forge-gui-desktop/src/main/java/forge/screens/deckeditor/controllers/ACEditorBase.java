@@ -20,8 +20,10 @@ package forge.screens.deckeditor.controllers;
 import java.awt.Toolkit;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
@@ -30,6 +32,7 @@ import javax.swing.SwingUtilities;
 
 import com.google.common.collect.Iterables;
 
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -65,6 +68,7 @@ import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Aggregates;
 import forge.util.ItemPool;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.view.FView;
 
@@ -575,6 +579,24 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
                     //getMenuShortcutKeyMask() instead of CTRL_DOWN_MASK since on OSX, ctrl-shift-space brings up the window manager
                     InputEvent.SHIFT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask(),
                     InputEvent.ALT_DOWN_MASK | Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+        }
+        public void addSetColorID() {
+            String label = localizer.getMessage("lblColorIdentity");
+            CardManager cardManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckManager();
+            PaperCard existingCard = cardManager.getSelectedItem();
+            int val;
+            if ((val = existingCard.getRules().getSetColorID()) > 0) {
+                GuiUtils.addMenuItem(menu, label, null, () -> {
+                    Set<String> colors = new HashSet<>(GuiChoose.getChoices(localizer.getMessage("lblChooseNColors", Lang.getNumeral(val)), val, val, MagicColor.Constant.ONLY_COLORS));
+                    // make an updated version
+                    PaperCard updated = existingCard.getColorIDVersion(colors);
+                    // remove *quantity* instances of existing card
+                    CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false, 1);
+                    // add *quantity* into the deck and set them as selected
+                    cardManager.addItem(updated, 1);
+                    cardManager.setSelectedItem(updated);
+                }, true, true);
+            }
         }
     }
 }
