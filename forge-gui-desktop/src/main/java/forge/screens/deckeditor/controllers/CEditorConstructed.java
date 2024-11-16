@@ -375,6 +375,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
+        cmb.addSetColorID();
     }
 
     /* (non-Javadoc)

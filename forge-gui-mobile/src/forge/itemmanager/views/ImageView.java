@@ -44,6 +44,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
+    private TextRenderer textRenderer = new TextRenderer(true);
 
     private static FSkinColor getGroupHeaderForeColor() {
         if (Forge.isMobileAdventureMode)
@@ -1029,6 +1030,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private boolean selected, deckSelectMode, showRanking;
         private final float IMAGE_SIZE = CardRenderer.MANA_SYMBOL_SIZE;
         private DeckProxy deckProxy = null;
+        private StringBuffer colorID = new StringBuffer();
         private FImageComplex deckCover = null;
         private Texture dpImg = null;
         //private TextureRegion tr;
@@ -1053,6 +1055,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         draftRankImage = FSkinImage.DRAFTRANK_B;
                     } else if (draftRank >= 25) {
                         draftRankImage = FSkinImage.DRAFTRANK_C;
+                    }
+                }
+                if (((PaperCard) item).getColorID() != null) {
+                    for (String s : ((PaperCard) item).getColorID()) {
+                        if ("white".equalsIgnoreCase(s))
+                            colorID.append("{W}");
+                        if ("green".equalsIgnoreCase(s))
+                            colorID.append("{G}");
+                        if ("red".equalsIgnoreCase(s))
+                            colorID.append("{R}");
+                        if ("blue".equalsIgnoreCase(s))
+                            colorID.append("{U}");
+                        if ("black".equalsIgnoreCase(s))
+                            colorID.append("{B}");
                     }
                 }
             }
@@ -1135,6 +1151,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 drawCardLabel(g, Forge.getLocalizer().getMessage("lblNoSell"), Color.RED, x, y, w, h);
                         }
                     }
+                }
+                // spire colors
+                if (!colorID.isEmpty()) {
+                    textRenderer.drawText(g, colorID.toString(), FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);

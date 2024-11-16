@@ -293,6 +293,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private String chosenType2 = "";
     private List<String> notedTypes = new ArrayList<>();
     private List<String> chosenColors;
+    private Set<String> chosenColorID;
     private List<String> chosenName = new ArrayList<>();
     private Integer chosenNumber;
     private Player chosenPlayer;
@@ -399,6 +400,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         view.updateSickness(this);
         view.updateClassLevel(this);
         view.updateDraftAction(this);
+        if (paperCard != null)
+            setChosenColorID(paperCard.getColorID());
     }
 
     public boolean changeToState(final CardStateName state) {
@@ -2118,7 +2121,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     public boolean hasChosenColor(String s) {
         return chosenColors != null && chosenColors.contains(s);
     }
-
+    public final Set<String> getChosenColorID() {
+        if (chosenColorID == null) {
+            return Sets.newHashSet();
+        }
+        return chosenColorID;
+    }
+    public final void setChosenColorID(final Set<String> s) {
+        chosenColorID = s;
+        view.updateChosenColorID(this);
+    }
+    public boolean hasChosenColorSpire() {
+        return chosenColorID != null && !chosenColorID.isEmpty();
+    }
     public final Card getChosenCard() {
         return getChosenCards().getFirst();
     }
