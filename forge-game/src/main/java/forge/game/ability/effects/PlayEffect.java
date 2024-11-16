@@ -233,16 +233,16 @@ public class PlayEffect extends SpellAbilityEffect {
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
-                Iterator<Card> it = tgtCards.iterator();
                 final String [] valid = {"Spell.cmcLE" + totalCMCLimit};
-                while (it.hasNext()) {
-                    Card c = it.next();
+                List<Card> invalid = new ArrayList<>();
+                for (Card c : tgtCards) {
                     if (!Iterables.any(AbilityUtils.getBasicSpellsFromPlayEffect(c, controller), SpellAbilityPredicates.isValid(valid, controller , c, sa))) {
-                        // it.remove will only remove item from the list part of CardCollection
-                        tgtCards.asSet().remove(c);
-                        it.remove();
+                        invalid.add(c);
                     }
                 }
+                // it.remove will only remove item from the list part of CardCollection
+                if (!invalid.isEmpty())
+                    invalid.forEach(tgtCards.asSet()::remove);
                 if (tgtCards.isEmpty())
                     break;
                 params.put("CMCLimit", totalCMCLimit);
