@@ -4178,12 +4178,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return ImmutableList.of();
         }
         Iterable<CardChangedType> byText = changedTypeByText == null ? ImmutableList.of() : ImmutableList.of(this.changedTypeByText);
-        return Iterables.unmodifiableIterable(Iterables.concat(
+        return ImmutableList.copyOf(Iterables.concat(
                 changedCardTypesByText.values(), // Layer 3
                 byText, // Layer 3 by Word Changes,
                 changedCardTypesCharacterDefining.values(), // Layer 4
                 changedCardTypes.values() // Layer 6
-                ));
+            ));
     }
 
     public Table<Long, Long, CardChangedType> getChangedCardTypesTable() {
