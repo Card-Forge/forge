@@ -165,6 +165,12 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         return sellable;
     }
     public PaperCard getColorIDVersion(Set<String> colors) {
+        if (colors == null && this.colorID == null)
+            return this;
+        if (this.colorID != null && this.colorID.equals(colors))
+            return this;
+        if (colors != null && colors.equals(this.colorID))
+            return this;
         return new PaperCard(this.rules, this.edition, this.rarity,
                 this.artIndex, this.foil, String.valueOf(collectorNumber), this.artist, this.functionalVariant, this.noSell, colors);
     }
