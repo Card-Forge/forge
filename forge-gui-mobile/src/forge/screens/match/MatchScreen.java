@@ -466,22 +466,35 @@ public class MatchScreen extends FScreen {
         final GameView game = MatchController.instance.getGameView();
         try {
             for (PlayerView p : game.getPlayers()) {
-                if (p != null && playerPanelsList.contains(getPlayerPanel(p))) {
+                if (p == null)
+                    continue;
+                VPlayerPanel playerPanel = getPlayerPanel(p);
+                if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
                     if (p.getBattlefield() != null) {
                         for (CardView c : p.getBattlefield()) {
-                            endpoints.put(c.getId(), CardAreaPanel.get(c).getTargetingArrowOrigin());
+                            CardAreaPanel panel = CardAreaPanel.get(c);
+                            Vector2 origin = panel.getTargetingArrowOrigin();
+                            //outside left bounds
+                            if (origin.x < playerPanel.getField().getLeft())
+                                continue;
+                            //outside right bounds
+                            if (origin.x > playerPanel.getField().getRight())
+                                continue;
+                            endpoints.put(c.getId(), origin);
                             cardsonBattlefield.add(c);
                         }
                     }
                 }
             }
+            if (endpoints.isEmpty())
+                return;
             //draw arrows for combat
             final CombatView combat = game.getCombat();
             for (CardView c : cardsonBattlefield) {
                 TargetingOverlay.assembleArrows(g, c, endpoints, combat, playerViewSet);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
