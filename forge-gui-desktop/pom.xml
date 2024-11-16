@@ -54,6 +54,19 @@
                             <failIfNoMatch>false</failIfNoMatch>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>released-version</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>released-version</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
@@ -166,26 +179,6 @@
                         <!-- bind to the packaging phase -->
                         <goals>
                             <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.6.0</version>
-                <executions>
-                    <execution>
-                        <id>released-version</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>released-version</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
                         </goals>
                     </execution>
                 </executions>

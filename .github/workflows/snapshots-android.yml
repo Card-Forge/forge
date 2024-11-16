@@ -8,11 +8,11 @@ on:
           description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
           required: false
           default: false
-        upload_package:
-          type: boolean
-          description: 'Upload the completed Android package'
-          required: false
-          default: true
+        #upload_package:
+        #  type: boolean
+        #  description: 'Upload the completed Android package'
+        #  required: false
+        #  default: true
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '00 19 * * *'
@@ -89,41 +89,23 @@ jobs:
       - name: Build/Install/Publish to GitHub Packages Apache Maven
         run: |
           export _JAVA_OPTIONS="-Xmx2g"
-          d=$(date +%m.%d)
-          # Replace date in forge-gui-mobile/src/forge/Forge.java
-          # sed -i -e "s/-SNAPSHOT/-SNAPSHOT-${d}/g" forge-gui-mobile/src/forge/Forge.java
           mvn -U -B -P android-release-build install -e -Dcardforge-repo.username=${{ secrets.FTP_USERNAME }} -Dcardforge-repo.password=${{ secrets.FTP_PASSWORD }} -Dandroid.sdk.path=/usr/local/lib/android/sdk -Dandroid.buildToolsVersion=35.0.0 -Dmaven.test.skip=true
-          mkdir -p  forge-gui-android/target/upload
-          mv forge-gui-android/target/*-signed-aligned.apk forge-gui-android/target/upload/
-          mv forge-gui-android/target/assets.zip forge-gui-android/target/upload/
-          cd forge-gui-android/target/upload/
-          # Get the first APK file in the folder
+          mkdir upload
+          mv /home/runner/work/forge/forge/forge-gui-android/target/*-signed-aligned.apk upload/
+          mv /home/runner/work/forge/forge/forge-gui-android/target/assets.zip upload/
+          mv /home/runner/work/forge/forge/forge-gui-android/target/classes/assets/version.txt upload/
+          cd upload
           ls
-          apk_file=$(find . -maxdepth 1 -type f -name '*.apk' -print -quit)
-          
-          if [ -n "$apk_file" ]; then
-              version=$(echo "$apk_file" | grep -oP 'forge-android-\K\d+\.\d+\.\d+-SNAPSHOT' | sed 's/-signed-aligned.apk//')
-              echo "APK File: $apk_file"
-              echo "Version: $version"
-              # mv *.apk "forge-android-$version-$d-signed-aligned.apk"
-
-              echo "$version-$d" > version.txt
-          else
-              echo "No .apk files found in the specified folder."
-          fi
-
-          cd -
-        
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        if: ${{ inputs.upload_package }}
+        #if: ${{ inputs.upload_package }}
         with:
           server: ftp.cardforge.org
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: forge-gui-android/target/upload/
+          local-dir: upload/
           server-dir: downloads/dailysnapshots/
           state-name: .ftp-deploy-android-sync-state.json
