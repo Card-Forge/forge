@@ -4153,14 +4153,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final CardTypeView getType() {
-        return getType(currentState);
-    }
-    public final CardTypeView getType(CardState state) {
-        final Iterable<CardChangedType> changedCardTypes = getChangedCardTypes();
-        if (Iterables.isEmpty(changedCardTypes)) {
-            return state.getType();
-        }
-        return state.getType().getTypeWithChanges(changedCardTypes);
+        return currentState.getTypeWithChanges();
     }
 
     public final CardTypeView getOriginalType() {
