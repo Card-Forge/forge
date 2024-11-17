@@ -432,8 +432,7 @@ public class Main extends AndroidApplication {
         config.useCompass = false;
         config.useGyroscope = false;
         config.useRotationVectorSensor = false;
-        // try to use immersive mode on android 13 and above
-        config.useImmersiveMode = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
+        config.useImmersiveMode = false;
         config.nativeLoader = () -> ReLinker.loadLibrary(getContext(), "gdx");
 
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
