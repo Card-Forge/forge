@@ -1187,7 +1187,7 @@ public class GameAction {
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
             for (Player p : game.getPlayers()) {
-                for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
+                for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
                     if (!c.getController().equals(p)) {
                         controllerChangeZoneCorrection(c);
                         affectedCards.add(c);
@@ -1269,7 +1269,7 @@ public class GameAction {
                     if (zt == ZoneType.Battlefield) {
                         continue;
                     }
-                    for (final Card c : p.getCardsIn(zt).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(zt)) {
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
@@ -1381,10 +1381,10 @@ public class GameAction {
                 if ((game.getRules().hasAppliedVariant(GameType.Commander)
                         || game.getRules().hasAppliedVariant(GameType.Brawl)
                         || game.getRules().hasAppliedVariant(GameType.Planeswalker)) && !checkAgain) {
-                    for (final Card c : p.getCardsIn(ZoneType.Graveyard).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(ZoneType.Graveyard)) {
                         checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
-                    for (final Card c : p.getCardsIn(ZoneType.Exile).threadSafeIterable()) {
+                    for (final Card c : p.getCardsIn(ZoneType.Exile)) {
                         checkAgain |= stateBasedAction_Commander(c, mapParams);
                     }
                 }
@@ -1590,7 +1590,7 @@ public class GameAction {
 
         CardCollection toAssign = new CardCollection();
 
-        for (final Card c : p.getCreaturesInPlay().threadSafeIterable()) {
+        for (final Card c : p.getCreaturesInPlay()) {
             if (!c.hasSector()) {
                 toAssign.add(c);
                 if (!checkAgain) {
@@ -2040,11 +2040,11 @@ public class GameAction {
 
     private void drawStartingHand(Player p1) {
         //check initial hand
-        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> lib1 = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards());
         List<Card> hand1 = lib1.subList(0,p1.getMaxHandSize());
 
         //shuffle
-        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards().threadSafeIterable());
+        List<Card> shuffledCards = Lists.newArrayList(p1.getZone(ZoneType.Library).getCards());
         CollectionUtil.shuffle(shuffledCards);
 
         //check a second hand
