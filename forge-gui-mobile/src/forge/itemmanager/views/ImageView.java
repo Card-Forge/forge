@@ -1143,7 +1143,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                     }
                 }
                 // spire colors
-                if (!colorID.isEmpty()) {
+                if (colorID != null && !colorID.isEmpty()) {
                     textRenderer.drawText(g, colorID, FSkinFont.forHeight(w / 5), Color.WHITE, x, y + h / 4, w, h, y, h, false, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
