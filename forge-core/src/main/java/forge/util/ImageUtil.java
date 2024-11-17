@@ -193,8 +193,8 @@ public class ImageUtil {
         if (cp.getRules().getOtherPart() != null) {
             faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         }
-        return String.format("%s/%s%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
-                !langCode.isEmpty() ? "/" + langCode : "", versionParam, faceParam);
+        return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
+                langCode, versionParam, faceParam);
     }
 
     public static String toMWSFilename(String in) {
