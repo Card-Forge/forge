@@ -38,7 +38,7 @@ public enum VDuelCommanderDecks implements IVDoc<CDuelCommanderDecks> {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.EDITOR_TINY_LEADERS;
+        return EDocID.EDITOR_DUEL_COMMANDER;
     }
 
     /* (non-Javadoc)
