@@ -989,15 +989,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         currentState.getView().updateName(currentState);
     }
 
-    public Table<Long, Long, CardChangedName> getChangedCardNames() {
-        return changedCardNames;
-    }
-
-    public void setChangedCardNames(Table<Long, Long, CardChangedName> changedCardNames) {
-        this.changedCardNames.clear();
-        this.changedCardNames.putAll(changedCardNames);
-    }
-
     public void setGamePieceType(GamePieceType gamePieceType) {
         this.gamePieceType = gamePieceType;
         this.view.updateGamePieceType(this);
@@ -4179,13 +4170,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             ));
     }
 
-    public Table<Long, Long, CardChangedType> getChangedCardTypesTable() {
-        return Tables.unmodifiableTable(changedCardTypes);
-    }
-    public Table<Long, Long, CardChangedType> getChangedCardTypesCharacterDefiningTable() {
-        return Tables.unmodifiableTable(changedCardTypesCharacterDefining);
-    }
-
     public boolean clearChangedCardTypes() {
         boolean changed = false;
 
@@ -4243,12 +4227,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return changedCardKeywords;
     }
 
-    public Table<Long, Long, CardColor> getChangedCardColorsTable() {
-        return changedCardColors;
-    }
-    public Table<Long, Long, CardColor> getChangedCardColorsCharacterDefiningTable() {
-        return changedCardColorsCharacterDefining;
-    }
     public Iterable<CardColor> getChangedCardColors() {
         return Iterables.concat(changedCardColorsByText.values(), changedCardColorsCharacterDefining.values(), changedCardColors.values());
     }
@@ -7770,29 +7748,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public void setChangedCardTypes(Table<Long, Long, CardChangedType> changedCardTypes) {
-        this.changedCardTypes.clear();
-        this.changedCardTypes.putAll(changedCardTypes);
-    }
-    public void setChangedCardTypesCharacterDefining(Table<Long, Long, CardChangedType> changedCardTypes) {
-        this.changedCardTypesCharacterDefining.clear();
-        this.changedCardTypesCharacterDefining.putAll(changedCardTypes);
-    }
-
     public void setChangedCardKeywords(Table<Long, Long, KeywordsChange> changedCardKeywords) {
         this.changedCardKeywords.clear();
         for (Table.Cell<Long, Long, KeywordsChange> entry : changedCardKeywords.cellSet()) {
             this.changedCardKeywords.put(entry.getRowKey(), entry.getColumnKey(), entry.getValue().copy(this, true));
         }
-    }
-
-    public void setChangedCardColors(Table<Long, Long, CardColor> changedCardColors) {
-        this.changedCardColors.clear();
-        this.changedCardColors.putAll(changedCardColors);
-    }
-    public void setChangedCardColorsCharacterDefining(Table<Long, Long, CardColor> changedCardColors) {
-        this.changedCardColorsCharacterDefining.clear();
-        this.changedCardColorsCharacterDefining.putAll(changedCardColors);
     }
 
     public void cleanupCopiedChangesFrom(Card c) {
@@ -8268,5 +8228,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             unlockAbilities.put(state, CardFactoryUtil.abilityUnlockRoom(getState(state)));
         }
         return unlockAbilities.get(state);
+    }
+
+    public void copyFrom(Card in) {
+        // clean is not needed?
+        this.changedCardColors.putAll(in.changedCardColors);
+        this.changedCardColorsCharacterDefining.putAll(in.changedCardColorsCharacterDefining);
+
+        setChangedCardKeywords(in.getChangedCardKeywords());
+
+        this.changedCardTypes.putAll(in.changedCardTypes);
+        this.changedCardTypesCharacterDefining.putAll(in.changedCardTypesCharacterDefining);
+
+        this.changedCardNames.putAll(in.changedCardNames);
+        setChangedCardTraits(in.getChangedCardTraits());
+
     }
 }
