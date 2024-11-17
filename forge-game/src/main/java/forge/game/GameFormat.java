@@ -357,6 +357,7 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Extended.txt");
             coreFormats.add("Brawl.txt");
             coreFormats.add("Oathbreaker.txt");
+            coreFormats.add("DuelCommander.txt");
             coreFormats.add("Premodern.txt");
             coreFormats.add("Pauper.txt");
             coreFormats.add("PreDH.txt");

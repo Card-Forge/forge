@@ -282,6 +282,7 @@ public final class CardRules implements ICardCharacteristics {
         if (mainPart.getOracleText().contains("can be your commander") || canBeBackground()) {
             return true;
         }
+
         CardType type = mainPart.getType();
         boolean creature = type.isCreature();
         for (String staticAbility : mainPart.getStaticAbilities()) { // Check for Grist

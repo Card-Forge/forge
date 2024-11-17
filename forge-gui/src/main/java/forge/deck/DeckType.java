@@ -12,6 +12,7 @@ public enum DeckType {
     OATHBREAKER_DECK("lblOathbreakerDecks"),
     TINY_LEADERS_DECK("lblTinyLeadersDecks"),
     BRAWL_DECK("lblBrawlDecks"),
+    DUEL_COMMANDER_DECK("lblDuelCommanderDecks"),
     SCHEME_DECK("lblSchemeDecks"),
     PLANAR_DECK("lblPlanarDecks"),
     DRAFT_DECK("lblDraftDecks"),

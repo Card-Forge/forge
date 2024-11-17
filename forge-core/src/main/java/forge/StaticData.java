@@ -43,6 +43,7 @@ public class StaticData {
     private Predicate<PaperCard> modernPredicate;
     private Predicate<PaperCard> commanderPredicate;
     private Predicate<PaperCard> oathbreakerPredicate;
+    private Predicate<PaperCard> duelCommanderPredicate;
 
     private boolean filteredHandsEnabled = false;
 
@@ -429,6 +430,8 @@ public class StaticData {
 
     public void setBrawlPredicate(Predicate<PaperCard> brawlPredicate) { this.brawlPredicate = brawlPredicate; }
 
+    public void setDuelCommanderPredicate(Predicate<PaperCard> duelCommanderPredicate) { this.duelCommanderPredicate = duelCommanderPredicate; }
+
     public Predicate<PaperCard> getStandardPredicate() { return standardPredicate; }
 
     public Predicate<PaperCard> getPioneerPredicate() { return pioneerPredicate; }
@@ -440,6 +443,8 @@ public class StaticData {
     public Predicate<PaperCard> getOathbreakerPredicate() { return oathbreakerPredicate; }
 
     public Predicate<PaperCard> getBrawlPredicate() { return brawlPredicate; }
+
+    public Predicate<PaperCard> getDuelCommanderPredicate() { return duelCommanderPredicate; }
 
     /**
      * Get an alternative card print for the given card wrt. the input setReleaseDate.

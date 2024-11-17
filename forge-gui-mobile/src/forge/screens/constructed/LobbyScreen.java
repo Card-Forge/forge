@@ -147,6 +147,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Oathbreaker);
         cbVariants.addItem(GameType.TinyLeaders);
         cbVariants.addItem(GameType.Brawl);
+        cbVariants.addItem(GameType.DuelCommander);
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
@@ -183,14 +184,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updatePlayersFromPrefs();
 
         FThreads.invokeInBackgroundThread(() -> {
-            playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-            playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
+            playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, FPref.DUEL_COMMANDER_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+            playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, FPref.DUEL_COMMANDER_P2_DECK_STATE, DeckType.COLOR_DECK);
             try {
                 if (getNumPlayers() > 2) {
-                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, FPref.DUEL_COMMANDER_P3_DECK_STATE, DeckType.COLOR_DECK);
                 }
                 if (getNumPlayers() > 3) {
-                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, FPref.DUEL_COMMANDER_P4_DECK_STATE, DeckType.COLOR_DECK);
                 }
             } catch (Exception e) {}
             /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -455,6 +456,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             lstVariants.addItem(new Variant(GameType.Oathbreaker));
             lstVariants.addItem(new Variant(GameType.TinyLeaders));
             lstVariants.addItem(new Variant(GameType.Brawl));
+            lstVariants.addItem(new Variant(GameType.DuelCommander));
             lstVariants.addItem(new Variant(GameType.Planechase));
             lstVariants.addItem(new Variant(GameType.Archenemy));
             lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
@@ -586,6 +588,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             default:
                 break;
         }
+        final FDeckChooser duelCommanderDeckChooser = playerPanels.get(slot).getDuelCommanderDeckChooser();
+        selectedDeckType = duelCommanderDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case RANDOM_CARDGEN_COMMANDER_DECK:
+            case RANDOM_COMMANDER_DECK:
+                duelCommanderDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -614,9 +626,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     if (i == 2) {
-                        panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                        panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, FPref.DUEL_COMMANDER_P3_DECK_STATE, DeckType.COLOR_DECK);
                     } else if (i == 3) {
-                        panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                        panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, FPref.DUEL_COMMANDER_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
                     playerPanels.add(panel);
                     playersScroll.add(panel);
@@ -725,7 +737,16 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 deckName =  Forge.getLocalizer().getMessage("lblBrawlDeck") + ": "
                         + playerPanel.getBrawlDeckChooser().getDeck().getName();
             }
-        }else {
+        }
+        else if (hasVariant(GameType.DuelCommander)) {
+            deck = playerPanel.getDuelCommanderDeck();
+            if (deck != null) {
+                playerPanel.getDuelCommanderDeckChooser().saveState();
+                deckName =  Forge.getLocalizer().getMessage("lblDuelCommanderDeck") + ": "
+                        + playerPanel.getDuelCommanderDeckChooser().getDeck().getName();
+            }
+        }
+        else {
             deck = playerPanel.getDeck();
             if (deck != null) {
                 playerPanel.getDeckChooser().saveState();

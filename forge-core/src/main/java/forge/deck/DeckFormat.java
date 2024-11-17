@@ -105,6 +105,49 @@ public enum DeckFormat {
             cmcLevels.add(ImmutablePair.of(new FilterCMC(3, 3), 3));
         }
     },
+    DuelCommander      ( Range.is(99),                         Range.is(0), 1, null,
+            card -> StaticData.instance().getCommanderPredicate().apply(card)
+    ) {
+        private final Set<String> bannedCommanders = ImmutableSet.of(
+                "Ajani, Nacatl Pariah",
+                "Akiri, Line-Slinger",
+                "Arahbo, Roar of the World",
+                "Asmoranomardicadaistinaculdacar",
+                "Baral, Chief of Compliance",
+                "Breya, Etherium Shaper",
+                "Derevi, Empyrial Tactician",
+                "Dihada, Binder of Wills",
+                "Edgar Markov",
+                "Edric, Spymaster of Trest",
+                "Emry, Lurker of the Loch",
+                "Eris, Roar of the Storm",
+                "Esior, Wardwing Familiar",
+                "Geist of Saint Traft",
+                "Inalla, Archmage Ritualist",
+                "Krark, the Thumbless",
+                "Minsc & Boo, Timeless Heroes",
+                "Nadu, Winged Wisdom",
+                "Najeela, the Blade-Blossom",
+                "Old Stickfingers",
+                "Oloro, Ageless Ascetic",
+                "Omnath, Locus of Creation",
+                "Prime Speaker Vannifar",
+                "Raffine, Scheming Seer",
+                "Rofellos, Llanowar Emissary",
+                "Shorikai, Genesis Engine",
+                "Tamiyo, Inquisitive Student",
+                "Tasigur, the Golden Fang",
+                "Urza, Lord High Artificer",
+                "Vial Smasher the Fierce",
+                "Winota, Joiner of Forces",
+                "Yuriko, the Tiger's Shadow",
+                "Zurgo Bellstriker");
+
+        @Override
+        public boolean isLegalCommander(CardRules rules) {
+            return super.isLegalCommander(rules) && !bannedCommanders.contains(rules.getName());
+        }
+    },
     PlanarConquest ( Range.between(40, Integer.MAX_VALUE), Range.is(0), 1),
     Adventure      ( Range.between(40, Integer.MAX_VALUE), Range.between(0, 15), 4),
     Vanguard       ( Range.between(60, Integer.MAX_VALUE), Range.is(0), 4),
@@ -145,7 +188,7 @@ public enum DeckFormat {
     }
 
     public boolean hasCommander() {
-        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl;
+        return this == Commander || this == Oathbreaker || this == TinyLeaders || this == Brawl || this == DuelCommander;
     }
 
     public boolean hasSignatureSpell() {

@@ -116,7 +116,8 @@ public class GameRules {
         return appliedVariants.contains(GameType.Commander)
                 || appliedVariants.contains(GameType.Oathbreaker)
                 || appliedVariants.contains(GameType.TinyLeaders)
-                || appliedVariants.contains(GameType.Brawl);
+                || appliedVariants.contains(GameType.Brawl)
+                || appliedVariants.contains(GameType.DuelCommander);
     }
 
     public boolean useGrayText() {

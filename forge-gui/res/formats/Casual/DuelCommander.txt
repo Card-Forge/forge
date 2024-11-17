@@ -1,0 +1,6 @@
+[format]
+Name:Duel Commander
+Type:Casual
+Subtype:Commander
+Order:143
+Banned:Ancestral Recall; Ancient Tomb; Back to Basics; Bazaar of Baghdad; Black Lotus; Capture of Jingzhou; Cavern of Souls; Channel; Chrome Mox; Comet, Stellar Pup; Deadly Rollick; Deflecting Swat; Dig Through Time; Emrakul, the Aeons Torn; Entomb; Fastbond; Field of the Dead; Fierce Guardianship; Flawless Maneuver; Food Chain; Gaea’s Cradle; Genesis Storm; Gifts Ungiven; Grim Monolith; Hermit Druid; Hogaak, Arisen Necropolis; Humility; Imperial Seal; Jeweled Lotus; Karakas; Library of Alexandria; Lion's Eye Diamond; Lotus Petal; Loyal Retainers; Lutri, The Spellchaser; Maddening Hex; Mana Crypt; Mana Drain; Mana Vault; Mishra’s Workshop; Mox Amber; Mox Diamond; Mox Emerald; Mox Jet; Mox Opal; Mox Pearl; Mox Ruby; Mox Sapphire; Mystical Tutor; Natural Order; Necrotic Ooze; Oath of Druids; Price of Progress; Protean Hulk; Ragavan, Nimble Pilferer; Rain of Filth; Scapeshift; Sensei’s Divining Top; Serra's Sanctum; Sol Ring; Strip Mine; Temporal Manipulation; Thassa’s Oracle; The One Ring; The Tabernacle at Pendrell Vale; Timetwister; Time Vault; Time Walk; Time Warp; Tinker; Tolarian Academy; Trazyn The Infinite; Treasure Cruise; Uro, Titan of Nature's Wrath; Vampiric Tutor; Wasteland

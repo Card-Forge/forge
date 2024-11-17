@@ -66,7 +66,16 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P5_DECK_STATE(""),
         BRAWL_P6_DECK_STATE(""),
         BRAWL_P7_DECK_STATE(""),
+
         BRAWL_P8_DECK_STATE(""),
+        DUEL_COMMANDER_P1_DECK_STATE(""),
+        DUEL_COMMANDER_P2_DECK_STATE(""),
+        DUEL_COMMANDER_P3_DECK_STATE(""),
+        DUEL_COMMANDER_P4_DECK_STATE(""),
+        DUEL_COMMANDER_P5_DECK_STATE(""),
+        DUEL_COMMANDER_P6_DECK_STATE(""),
+        DUEL_COMMANDER_P7_DECK_STATE(""),
+        DUEL_COMMANDER_P8_DECK_STATE(""),
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
         UI_APPLIED_VARIANTS(""),
@@ -323,6 +332,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P3_DECK_STATE, BRAWL_P4_DECK_STATE,
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
+
+        public static FPref[] DUEL_COMMANDER_DECK_STATES = {
+                DUEL_COMMANDER_P1_DECK_STATE, DUEL_COMMANDER_P2_DECK_STATE,
+                DUEL_COMMANDER_P3_DECK_STATE, DUEL_COMMANDER_P4_DECK_STATE,
+                DUEL_COMMANDER_P5_DECK_STATE, DUEL_COMMANDER_P6_DECK_STATE,
+                DUEL_COMMANDER_P7_DECK_STATE, DUEL_COMMANDER_P8_DECK_STATE };
 
     }
 
