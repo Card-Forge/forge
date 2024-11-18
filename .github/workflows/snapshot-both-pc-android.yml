@@ -117,6 +117,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: izpack/
           server-dir: downloads/dailysnapshots/
+          state-name: .ftp-deploy-both-sync-state.json
           exclude: |
             *.pom
             *.repositories
