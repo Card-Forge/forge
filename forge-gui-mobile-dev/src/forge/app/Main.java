@@ -96,6 +96,9 @@ public class Main {
 
         @Override
         public void closeSplashScreen() {
+            // FIXME: on Linux system it can't close splashscreen image or crash with SIGSEGV? How come it works on other OS?
+            if (OperatingSystem.isUnix() || OperatingSystem.isSolaris())
+                return;
             //could throw exception..
             try {
                 Optional.ofNullable(SplashScreen.getSplashScreen()).ifPresent(SplashScreen::close);
